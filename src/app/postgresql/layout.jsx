@@ -19,7 +19,6 @@ const NeonPostgresLayout = async ({ children }) => {
       customType={customType}
       headerClassName="lg:border-none"
       burgerWithoutBorder
-      showSearchInput
       isDocPage
       isPostgresPage
       isHeaderSticky

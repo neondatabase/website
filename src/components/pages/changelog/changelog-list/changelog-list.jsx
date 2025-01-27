@@ -9,7 +9,7 @@ import getFormattedDate from 'utils/get-formatted-date';
 
 const ChangelogList = ({ className, items }) => (
   <div className={clsx('sm:space-y-7', className)}>
-    <LoadMorePosts className="mt-14" defaultCountPosts={10} countToAdd={10} isChangelog>
+    <LoadMorePosts defaultCountPosts={10} countToAdd={10} isChangelog>
       {items.map(({ slug, date, content }, index) => {
         const changelogPath = generateChangelogPath(slug);
         const dateLabel = getFormattedDate(date);

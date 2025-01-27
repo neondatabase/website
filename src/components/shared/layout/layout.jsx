@@ -17,11 +17,9 @@ const Layout = ({
   isHeaderSticky = false,
   isHeaderStickyOverlay = false,
   hasThemesSupport = false,
-  showSearchInput = false,
   isDocPage = false,
   isPostgresPage = false,
   isAiChatPage = false,
-  searchIndexName = null,
   customType = null,
   isClient = false,
 }) => (
@@ -36,12 +34,10 @@ const Layout = ({
         isSticky={isHeaderSticky}
         isStickyOverlay={isHeaderStickyOverlay}
         hasThemesSupport={hasThemesSupport}
-        showSearchInput={showSearchInput}
         isDocPage={isDocPage}
         isPostgresPage={isPostgresPage}
         isAiChatPage={isAiChatPage}
         withBorder={headerWithBorder}
-        searchIndexName={searchIndexName}
         customType={customType}
         isClient={isClient}
       />
@@ -66,12 +62,10 @@ Layout.propTypes = {
   isHeaderSticky: PropTypes.bool,
   isHeaderStickyOverlay: PropTypes.bool,
   headerWithBorder: PropTypes.bool,
-  showSearchInput: PropTypes.bool,
   isDocPage: PropTypes.bool,
   isPostgresPage: PropTypes.bool,
   isAiChatPage: PropTypes.bool,
   hasThemesSupport: PropTypes.bool,
-  searchIndexName: PropTypes.string,
   customType: PropTypes.shape({
     title: PropTypes.string,
     link: PropTypes.string,

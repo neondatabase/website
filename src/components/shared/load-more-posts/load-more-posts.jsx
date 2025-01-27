@@ -25,13 +25,7 @@ ChangelogWrapper.propTypes = {
   countPosts: PropTypes.number.isRequired,
 };
 
-const LoadMorePosts = ({
-  className,
-  children,
-  defaultCountPosts,
-  countToAdd,
-  isChangelog = false,
-}) => {
+const LoadMorePosts = ({ children, defaultCountPosts, countToAdd, isChangelog = false }) => {
   const [countPosts, setCountPosts] = useState(defaultCountPosts);
 
   return (
@@ -42,7 +36,7 @@ const LoadMorePosts = ({
         children.slice(0, countPosts)
       )}
       {countPosts < children.length && (
-        <div className={clsx('col-span-full text-center', className)}>
+        <div className="col-span-full mt-16 text-center">
           <Button
             className="h-[38px] gap-3 !px-5 text-[15px] font-medium"
             theme="gray-10"
@@ -59,7 +53,6 @@ const LoadMorePosts = ({
 };
 
 LoadMorePosts.propTypes = {
-  className: PropTypes.string,
   children: PropTypes.node.isRequired,
   defaultCountPosts: PropTypes.number.isRequired,
   countToAdd: PropTypes.number.isRequired,

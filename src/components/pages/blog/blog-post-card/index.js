@@ -1,4 +1,3 @@
-import BlogPostCard, { BlogPostCardPropTypes } from './blog-post-card';
+import BlogPostCard from './blog-post-card';
 
 export default BlogPostCard;
-export { BlogPostCardPropTypes };

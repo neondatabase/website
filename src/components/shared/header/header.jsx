@@ -199,12 +199,10 @@ const Header = ({
   theme = null,
   isSticky = false,
   isStickyOverlay = false,
-  showSearchInput = false,
   isDocPage = false,
   isPostgresPage = false,
   isAiChatPage = false,
   withBorder = false,
-  searchIndexName = null,
   customType = null,
   isClient = false,
 }) => {
@@ -269,12 +267,7 @@ const Header = ({
           </Container>
         )}
       </HeaderWrapper>
-      <MobileMenu
-        isDarkTheme={isDarkTheme}
-        showSearchInput={showSearchInput}
-        isDocPage={isDocPage}
-        searchIndexName={searchIndexName}
-      />
+      <MobileMenu isDarkTheme={isDarkTheme} isDocPage={isDocPage} />
     </>
   );
 };
@@ -284,12 +277,10 @@ Header.propTypes = {
   theme: PropTypes.oneOf(['light', 'dark']),
   isSticky: PropTypes.bool,
   isStickyOverlay: PropTypes.bool,
-  showSearchInput: PropTypes.bool,
   isDocPage: PropTypes.bool,
   isPostgresPage: PropTypes.bool,
   isAiChatPage: PropTypes.bool,
   withBorder: PropTypes.bool,
-  searchIndexName: PropTypes.string,
   customType: PropTypes.shape({
     title: PropTypes.string,
     link: PropTypes.string,

@@ -19,7 +19,7 @@ const BlogPage = async () => {
     <>
       <h2 className="sr-only">Blog</h2>
       <div className="grid grid-cols-2 gap-x-6 xl:gap-x-5 md:grid-cols-1">
-        <LoadMorePosts className="mt-16" defaultCountPosts={8} countToAdd={8}>
+        <LoadMorePosts defaultCountPosts={8} countToAdd={8}>
           {posts.map((post, index) => {
             const isFeatured = index < 2;
 
