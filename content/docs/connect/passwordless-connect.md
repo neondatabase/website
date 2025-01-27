@@ -2,7 +2,7 @@
 title: Passwordless auth
 subtitle: Learn how to connect to Neon without a password
 enableTableOfContents: true
-updatedOn: '2024-07-25T12:53:42.418Z'
+updatedOn: '2025-01-27T10:55:00.126Z'
 ---
 
 Neon's `psql` passwordless auth feature helps you quickly authenticate a connection to Neon without providing a password.
