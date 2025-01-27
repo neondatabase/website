@@ -1,7 +1,7 @@
 ---
 title: Migrate with AWS Database Migration Service (DMS)
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.066Z'
+updatedOn: '2025-01-27T15:25:05.410Z'
 ---
 
 This guide outlines the steps for using the AWS Database Migration Service (DMS) to migrate data to Neon from another hosted database server. AWS DMS supports a variety of database migration sources including PostgreSQL, MySQL, Oracle, and Microsoft SQL Server. For a complete list of data migration sources supported by AWS DMS, see [Source endpoints for data migration](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Introduction.Sources.html#CHAP_Introduction.Sources.DataMigration).

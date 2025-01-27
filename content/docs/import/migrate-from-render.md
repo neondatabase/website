@@ -5,7 +5,7 @@ subtitle: Learn how to migrate your database from Render to Neon Postgres using 
 redirectFrom:
   - /docs/import/import-from-render
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.068Z'
+updatedOn: '2025-01-27T15:25:05.412Z'
 ---
 
 This guide describes how to migrate a database from Render to Neon Postgres.

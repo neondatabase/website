@@ -4,7 +4,7 @@ subtitle: Learn how to replicate data from a local Postgres instance or another 
   provider to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-09-17T15:08:05.546Z'
+updatedOn: '2025-01-27T15:25:05.408Z'
 ---
 
 <LRBeta/>
