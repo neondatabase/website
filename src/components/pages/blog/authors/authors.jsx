@@ -14,7 +14,7 @@ const Authors = ({ authors, isPriority = false, className }) => {
               className={clsx(
                 'shrink-0 rounded-full',
                 index > 0 && '-ml-4',
-                isMultipleAuthors && 'outline-gray-98 outline outline-1'
+                isMultipleAuthors && 'outline outline-1 outline-black-pure'
               )}
               src={photo}
               alt={name}

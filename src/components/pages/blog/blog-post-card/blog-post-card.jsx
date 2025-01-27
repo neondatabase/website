@@ -130,8 +130,8 @@ const BlogPostCard = ({
           {/* title */}
           <h1
             className={clsx(
-              'font-title font-medium leading-snug tracking-tighter transition-colors duration-200 group-hover:text-green-45 md:text-lg',
-              fullSize ? 'line-clamp-2 text-2xl lg:text-xl' : 'line-clamp-3 text-xl'
+              'font-medium leading-snug tracking-tighter transition-colors duration-200 group-hover:text-green-45 md:text-lg',
+              fullSize ? 'text-2xl lg:text-xl' : 'text-xl'
             )}
           >
             {title}

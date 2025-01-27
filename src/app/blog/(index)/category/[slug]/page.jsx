@@ -21,18 +21,19 @@ const BlogCategoryPage = async ({ params: { slug } }) => {
       <div className="grid grid-cols-2 gap-x-6 md:grid-cols-1">
         <LoadMorePosts className="mt-16" defaultCountPosts={8} countToAdd={8}>
           {posts.map((post, index) => {
-            const isFeatured = index < 2 && slug !== 'guides' && slug !== 'changelog';
+            const isFeatured = index < 2 && post.pageBlogPost;
 
             return (
               <BlogPostCard
                 className={clsx(
+                  'py-8 first:pt-0 last:pb-0 md:py-6',
                   isFeatured
-                    ? 'pb-11 md:pb-8'
+                    ? 'pt-0 md:pt-0'
                     : 'col-span-full border-t border-gray-new-15 py-8 first:border-0 first:border-t-0 first:pt-0 last:pb-0'
                 )}
                 key={post.slug}
+                categories={{ nodes: [category] }}
                 fullSize={!isFeatured}
-                category={category}
                 isPriority={index < 5}
                 imageWidth={isFeatured ? 372 : 336}
                 imageHeight={isFeatured ? 212 : 189}
