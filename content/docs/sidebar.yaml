@@ -341,6 +341,11 @@
               slug: manage/operations
             - title: External tools
               slug: introduction/monitor-external-tools
+        - section: Team Tools
+          items:
+            - title: Slack App
+              slug: manage/slack-app
+              tag: beta
         - section: Security
           items:
             - title: Overview
