@@ -68,9 +68,10 @@ const fetchWpPostsByCategorySlug = async (slug, after) => {
         where: { categoryName: $categoryName, orderby: { field: DATE, order: DESC } }
       ) {
         nodes {
-          title(format: RENDERED)
           slug
           date
+          title(format: RENDERED)
+          content(format: RENDERED)
           pageBlogPost {
             largeCover {
               altText
@@ -153,8 +154,8 @@ const fetchAllWpPosts = async (after) => {
           }
           modifiedGmt
           slug
-          title(format: RENDERED)
           date
+          title(format: RENDERED)
           content(format: RENDERED)
           pageBlogPost {
             isFeatured
