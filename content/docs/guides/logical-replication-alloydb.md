@@ -24,6 +24,8 @@ This guide describes how to replicate data from AlloyDB Postgres to Neon using n
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
 - Review our [logical replication tips](/docs/guides/logical-replication-tips), based on real-world customer data migration experiences.
 
+<Steps>
+
 ## Prepare your AlloyDB source database
 
 This section describes how to prepare your source AlloyDB Postgres instance (the publisher) for replicating data to Neon.
@@ -260,3 +262,5 @@ SELECT subname, received_lsn, latest_end_lsn, last_msg_receipt_time FROM pg_cata
 After the replication operation is complete, you can switch your application over to the destination database by swapping out your AlloyDB source database connection details for your Neon destination database connection details.
 
 You can find your Neon connection details on the **Connection Details** widget in the Neon Console. For details, see [Connect from any application](/docs/connect/connect-from-any-app).
+
+</Steps>

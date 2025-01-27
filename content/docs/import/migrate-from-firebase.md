@@ -28,6 +28,8 @@ We'll use a custom Python script to export data from Firestore to a local file, 
   pip install firebase-admin "psycopg[binary,pool]"
   ```
 
+<Steps>
+
 ## Retrieve Firebase credentials
 
 This section describes how to fetch the credentials to connect to your Firebase Firestore database.
@@ -306,6 +308,8 @@ After running both the Firestore export and the Neon import scripts, you should 
    ```
 
    Compare the results with those from your Firestore database to ensure data integrity. Note that using the `parent_id` field, we can navigate through the hierarchical structure of the original data.
+
+</Steps>
 
 ## Other migration options
 

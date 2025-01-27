@@ -36,6 +36,8 @@ These are some common Neon-to-Neon replication scenarios. There may be others. Y
 
 For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
 
+<Steps>
+
 ## Prepare your source Neon database
 
 This section describes how to prepare your source Neon database (the publisher) for replicating data to your destination Neon database (the subscriber).
@@ -163,3 +165,5 @@ SELECT subname, received_lsn, latest_end_lsn, last_msg_receipt_time FROM pg_cata
 After the replication operation is complete, you can switch your application over to the destination database by swapping out your source database connection details for your destination database connection details.
 
 You can find the connection details for a Neon database on the **Connection Details** widget in the Neon Console. For details, see [Connect from any application](/docs/connect/connect-from-any-app).
+
+</Steps>
