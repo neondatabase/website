@@ -7,7 +7,7 @@ updatedOn: '2025-01-10T00:37:35.161Z'
 
 <EarlyAccess />
 
-Schema-only branches let you create branches that copy only the database schema from a parent branch—without copying any data. This feature is useful when working with datasets containing sensitive data. By working with schema-only branches, you can replicate your database structure without exposing confidential information, giving your team a safe, compliant way to build and test.
+Neon's "schema-only branches" feature lets you create database branches that copy only the database schema from a specified branch—without copying any data. This feature is useful when working with datasets containing sensitive information. By working with schema-only branches, you can replicate your database structure without exposing confidential data, giving your team a safe, compliant way to build and test.
 
 ## Creating schema-only branches
 
@@ -15,7 +15,7 @@ Schema-only branches let you create branches that copy only the database schema 
 Schema-only branching is currently supported in the Neon Console only. CLI and API support are planned for a future release.
 </Admonition>
 
-You can create schema only branches in the Neon Console, in the same way you create any Neon branch.
+You can create schema only branches in the Neon Console, in much the same way you create any Neon branch.
 
 1. In the Neon Console, select your project.
 2. Select **Branches**.
@@ -28,40 +28,42 @@ You can create schema only branches in the Neon Console, in the same way you cre
 
 ## Schema-only branching example
 
-To try out schema-only branches, you can create a table with some fake Personally Identifiable Information (PII):
+1. To try out schema-only branches, you can start by creating  an `employees` table on your Neon project's `main` branch, and adding some dummy Personally Identifiable Information (PII). You can do this from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client by copying and pasting the following statements:
 
-1. In the Neon SQL Editor, create an `employees` table on your Neon project's `main` branch, and add some Personally Identifiable Information (PII):
+    ```sql
+    CREATE TABLE employees (
+        employee_id SERIAL PRIMARY KEY,
+        first_name VARCHAR(50),
+        last_name VARCHAR(50),
+        email VARCHAR(100),
+        phone_number VARCHAR(15),
+        job_title VARCHAR(50),
+        salary NUMERIC(10, 2),
+        hire_date DATE
+    );
 
-```sql
-CREATE TABLE employees (
-    employee_id SERIAL PRIMARY KEY,
-    first_name VARCHAR(50),
-    last_name VARCHAR(50),
-    email VARCHAR(100),
-    phone_number VARCHAR(15),
-    job_title VARCHAR(50),
-    salary NUMERIC(10, 2),
-    hire_date DATE
-);
+    INSERT INTO employees (first_name, last_name, email, phone_number, job_title, salary, hire_date) VALUES
+    ('John', 'Doe', 'john.doe@example.com', '123-456-7890', 'Software Engineer', 95000.00, '2020-01-15'),
+    ('Jane', 'Smith', 'jane.smith@example.com', '987-654-3210', 'Product Manager', 110000.00, '2019-03-22'),
+    ('Alice', 'Johnson', 'alice.johnson@example.com', '555-123-4567', 'HR Specialist', 65000.00, '2021-06-10'),
+    ('Bob', 'Brown', 'bob.brown@example.com', '555-987-6543', 'Data Analyst', 78000.00, '2018-09-05'),
+    ('Charlie', 'Davis', 'charlie.davis@example.com', '444-555-6666', 'Marketing Manager', 95000.00, '2017-11-14'),
+    ('Diana', 'Miller', 'diana.miller@example.com', '333-444-5555', 'Sales Representative', 72000.00, '2022-04-18'),
+    ('Edward', 'Wilson', 'edward.wilson@example.com', '222-333-4444', 'DevOps Engineer', 98000.00, '2020-12-03'),
+    ('Fiona', 'Clark', 'fiona.clark@example.com', '111-222-3333', 'UI/UX Designer', 85000.00, '2016-08-29'),
+    ('George', 'Harris', 'george.harris@example.com', '999-888-7777', 'Financial Analyst', 90000.00, '2021-01-11'),
+    ('Hannah', 'Martin', 'hannah.martin@example.com', '888-777-6666', 'Backend Developer', 92000.00, '2019-07-23');
+    ```
 
-INSERT INTO employees (first_name, last_name, email, phone_number, job_title, salary, hire_date) VALUES
-('John', 'Doe', 'john.doe@example.com', '123-456-7890', 'Software Engineer', 95000.00, '2020-01-15'),
-('Jane', 'Smith', 'jane.smith@example.com', '987-654-3210', 'Product Manager', 110000.00, '2019-03-22'),
-('Alice', 'Johnson', 'alice.johnson@example.com', '555-123-4567', 'HR Specialist', 65000.00, '2021-06-10'),
-('Bob', 'Brown', 'bob.brown@example.com', '555-987-6543', 'Data Analyst', 78000.00, '2018-09-05'),
-('Charlie', 'Davis', 'charlie.davis@example.com', '444-555-6666', 'Marketing Manager', 95000.00, '2017-11-14'),
-('Diana', 'Miller', 'diana.miller@example.com', '333-444-5555', 'Sales Representative', 72000.00, '2022-04-18'),
-('Edward', 'Wilson', 'edward.wilson@example.com', '222-333-4444', 'DevOps Engineer', 98000.00, '2020-12-03'),
-('Fiona', 'Clark', 'fiona.clark@example.com', '111-222-3333', 'UI/UX Designer', 85000.00, '2016-08-29'),
-('George', 'Harris', 'george.harris@example.com', '999-888-7777', 'Financial Analyst', 90000.00, '2021-01-11'),
-('Hannah', 'Martin', 'hannah.martin@example.com', '888-777-6666', 'Backend Developer', 92000.00, '2019-07-23');
-```
+2. Take a look at your the `employees` table on the `main` branch. Navigate to the **Tables** page in the Neon Console, and select your `main` branch from the bread-crumb menu at the top of the window. Your `employees` table should have both schema and data, as shown here:
 
-2. Create a schema-only branch following the branch creation instructions above — call the branch `employees_schema_only`.
+    ![main branch with schema and data](/docs/guides/schema-data-branch.png)
 
-3. Navigate to the **Tables** page in the Neon Console, and view the data in the `main` branch, which contains both schema and data.
+3. Create a schema-only branch following the schema-only branch creation instructions above. See [Creating schema-only branches](#creating-schema-only-branches). In this example, we've named the branch `employees_schema_only`. 
 
 4. Next, on the **Tables** page again, select your newly created schema-only branch (`employees_schema_only`) from the bread-crumb menu at the top of the window. You can see that the schema-only branch contains the schema, but no data. The same would be true for any user-created table in the database.
+
+    ![schema-only branch with only the schema](/docs/guides/schema-only-branch.png)
 
 ## Connect to a schema-only branch
 
