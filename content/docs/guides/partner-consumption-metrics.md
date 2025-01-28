@@ -11,9 +11,9 @@ Using the Neon API, you can query a range of account and project metrics to help
 
 Here are the different ways to retrieve these metrics, depending on how you want them aggregated or broken down:
 
-| Endpoint                                                                                                 | Description                                                                                                              | Plan availability            |
-| -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ---------------------------- |
-| [Get account consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount) | Aggregates all metrics from all projects in an account into a single cumulative number for each metric                   | Scale, Business, and Enterprise plans only |
+| Endpoint                                                                                                         | Description                                                                                                              | Plan availability                          |
+| ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------ |
+| [Get account consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)          | Aggregates all metrics from all projects in an account into a single cumulative number for each metric                   | Scale, Business, and Enterprise plans only |
 | [Get consumption metrics for each project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) | Provides detailed metrics for each project in an account at a specified granularity level (e.g., hourly, daily, monthly) | Scale, Business, and Enterprise plans only |
 
 ## Get account-level aggregated metrics
@@ -239,7 +239,7 @@ Neon's consumption data is updated approximately every 15 minutes, so a minimum 
 
 ### What is the the rate limit for Neon's consumption APIs?
 
-Neon's consumption APIs, [Get account consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount) and [Get consumption metrics for each project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject), have a rate limit of 2 requests per second, per account. 
+Neon's consumption APIs, [Get account consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount) and [Get consumption metrics for each project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject), have a rate limit of 2 requests per second, per account.
 
 ### How often should consumption data be polled to report usage to customers?
 
