@@ -7,28 +7,62 @@ updatedOn: '2025-01-10T00:37:35.161Z'
 
 <EarlyAccess />
 
-Neon's "schema-only branches" feature lets you create database branches that copy only the database schema from a specified branch—without copying any data. This feature is useful when working with datasets containing sensitive information. By working with schema-only branches, you can replicate your database structure without exposing confidential data, giving your team a safe, compliant way to build and test.
+The schema-only branches feature lets you create database branches that copy only the database schema from a specified source branch — without copying any data. This feature is useful when working with databases containing sensitive information. With schema-only branches, you can replicate your database structure without exposing confidential data, giving your team a safe, compliant way to build and test.
 
 ## Creating schema-only branches
 
-<Admonition type="note">
-Schema-only branching is currently supported in the Neon Console only. CLI and API support are planned for a future release.
-</Admonition>
+You can create schema only branches in the Neon Console or using the Neon API, in much the same way you create any Neon branch.
 
-You can create schema only branches in the Neon Console, in much the same way you create any Neon branch.
+<Tabs labels={["Neon Console", "API"]}>
 
-1. In the Neon Console, select your project.
+<TabItem>
+To create a schema-only branch from the Neon Console:
+
+1. In the console, select your project.
 2. Select **Branches**.
 3. Click **Create branch** to open the branch creation dialog.
    ![Create branch dialog](/docs/manage/create_branch.png)
 4. For **Type**, select **Schema-only**.
 4. Enter a name for the branch.
-5. In the **From Branch** field, select the source branch. The schema from this branch will be copied to your new branch. 
+5. In the **From Branch** field, select the source branch. The schema from this source branch will be copied to your new schema-only branch. 
 6. Click **Create new branch**.
+</TabItem>
+
+<TabItem>
+To create a schema-only branch from the Neon Console, use the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) endpoint with the `init_source` option set to `schema`, as shown below. Required values include:
+- Your Neon `project_id`
+- The `parent_id`, which is the branch ID of the branch containing the schema you want to copy
+
+```bash
+curl --request POST \
+     --url https://console.neon.tech/api/v2/projects/wispy-salad-58347608/branches \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '
+{
+  "branch": {
+    "parent_id": "br-super-mode-w371g4od",
+    "name": "my_schema_only_branch",
+    "init_source": "schema"
+  }
+}
+'
+```
+</TabItem>
+
+</Tabs>
+
+
+
+
+
 
 ## Schema-only branching example
 
-1. To try out schema-only branches, you can start by creating  an `employees` table on your Neon project's `main` branch, and adding some dummy Personally Identifiable Information (PII). You can do this from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client by copying and pasting the following statements:
+To try out schema-only branches:
+
+1. Start by creating  an `employees` table on your Neon project's `main` branch and adding some dummy data. You can do this from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client by copying and pasting the following statements:
 
     ```sql
     CREATE TABLE employees (
@@ -55,13 +89,13 @@ You can create schema only branches in the Neon Console, in much the same way yo
     ('Hannah', 'Martin', 'hannah.martin@example.com', '888-777-6666', 'Backend Developer', 92000.00, '2019-07-23');
     ```
 
-2. Take a look at your the `employees` table on the `main` branch. Navigate to the **Tables** page in the Neon Console, and select your `main` branch from the bread-crumb menu at the top of the window. Your `employees` table should have both schema and data, as shown here:
+2. Navigate to the **Tables** page in the Neon Console, and select your `main` branch from the bread-crumb menu at the top of the window. Your `employees` table should have both schema and data, as shown here:
 
     ![main branch with schema and data](/docs/guides/schema-data-branch.png)
 
 3. Create a schema-only branch following the schema-only branch creation instructions above. See [Creating schema-only branches](#creating-schema-only-branches). In this example, we've named the branch `employees_schema_only`. 
 
-4. Next, on the **Tables** page again, select your newly created schema-only branch (`employees_schema_only`) from the bread-crumb menu at the top of the window. You can see that the schema-only branch contains the schema, but no data. The same would be true for any user-created table in the database.
+4. On the **Tables** page, select your newly created `employees_schema_only` branch from the bread-crumb menu at the top of the window. You can see that the schema-only branch contains the schema, but no data. The same would be true for any table in any database on this branch.
 
     ![schema-only branch with only the schema](/docs/guides/schema-only-branch.png)
 
