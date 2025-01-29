@@ -1,6 +1,10 @@
+import { CHANGELOG_BASE_PATH } from './docs';
+import { GUIDES_BASE_PATH } from './guides';
+
 const BLOG_BASE_PATH = '/blog/';
 const BLOG_CATEGORY_BASE_PATH = `${BLOG_BASE_PATH}category/`;
 const BLOG_POSTS_PER_PAGE = 500;
+
 const CATEGORY_COLORS = {
   company: 'text-green-45',
   engineering: 'text-purple-70',
@@ -22,8 +26,8 @@ const CATEGORY_BG_COLORS = {
 };
 
 const EXTRA_CATEGORIES = [
-  { name: 'Guides', slug: 'guides', postSlug: 'guides' },
-  { name: 'Changelog', slug: 'changelog', postSlug: 'docs/changelog' },
+  { name: 'Guides', slug: 'guides', basePath: GUIDES_BASE_PATH },
+  { name: 'Changelog', slug: 'changelog', basePath: CHANGELOG_BASE_PATH },
 ];
 
 export {

@@ -341,6 +341,11 @@
               slug: manage/operations
             - title: External tools
               slug: introduction/monitor-external-tools
+        - section: Team Tools
+          items:
+            - title: Slack App
+              slug: manage/slack-app
+              tag: beta
         - section: Security
           items:
             - title: Overview
@@ -521,6 +526,12 @@
               slug: guides/neon-authorize-google-identity
             - title: PropelAuth
               slug: guides/neon-authorize-propelauth
+            - title: SuperTokens
+              slug: guides/neon-authorize-supertokens
+            - title: WorkOS
+              slug: guides/neon-authorize-workos
+            - title: Custom JWT
+              slug: guides/neon-authorize-custom-jwt
     - title: Integrations
       icon: integrations
       slug: guides/integrations
@@ -830,6 +841,9 @@
           items:
             - title: Supported extensions
               slug: extensions/pg-extensions
+            - title: dblink
+              slug: extensions/dblink
+              tag: new
             - title: citext
               slug: extensions/citext
             - title: hstore
@@ -842,6 +856,9 @@
               slug: extensions/pgvector
             - title: pgrag
               slug: extensions/pgrag
+            - title: pg_cron
+              slug: extensions/pg_cron
+              tag: new
             - title: pg_mooncake
               slug: extensions/pg_mooncake
               tag: new
@@ -851,6 +868,9 @@
               slug: extensions/pg_prewarm
             - title: pg_stat_statements
               slug: extensions/pg_stat_statements
+            - title: pg_repack
+              slug: extensions/pg_repack
+              tag: new
             - title: pg_tiktoken
               slug: extensions/pg_tiktoken
             - title: pg_trgm
@@ -859,13 +879,13 @@
               slug: extensions/postgis
             - title: postgis-related
               slug: extensions/postgis-related-extensions
+            - title: postgres_fdw
+              slug: extensions/postgres_fdw
+              tag: new
             - title: timescaledb
               slug: extensions/timescaledb
             - title: wal2json
               slug: extensions/wal2json
-            - title: pg_cron
-              slug: extensions/pg_cron
-              tag: new
         - title: Functions
           slug: functions/introduction
           items:

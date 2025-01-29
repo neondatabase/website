@@ -2,7 +2,7 @@
 title: Neon CLI — Install and connect
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-12-20T19:12:43.516Z'
+updatedOn: '2025-01-22T18:43:21.520Z'
 ---
 
 This section describes how to install the Neon CLI and connect via web authentication or API key.
@@ -224,6 +224,10 @@ neonctl auth
 ```
 
 The [neonctl auth](/docs/reference/cli-auth) command launches a browser window where you can authorize the Neon CLI to access your Neon account. If you have not authenticated previously, running a Neon CLI command automatically launches the web authentication process unless you have specified an API key.
+
+<Admonition type="note">
+If you use Neon through the [Native Integration on Vercel](/docs/guides/vercel-native-integration), you must authenticate connections from the CLI client using a Neon API key (see below). The `neon auth` command requires an account registered through Neon rather than Vercel.
+</Admonition>
 
 ### API key
 

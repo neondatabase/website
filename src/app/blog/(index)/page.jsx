@@ -19,15 +19,16 @@ const BlogPage = async () => {
     <>
       <h2 className="sr-only">Blog</h2>
       <div className="grid grid-cols-2 gap-x-6 xl:gap-x-5 md:grid-cols-1">
-        <LoadMorePosts className="mt-16" defaultCountPosts={8} countToAdd={8}>
+        <LoadMorePosts className="mt-8 md:mt-6" defaultCountPosts={8} countToAdd={8}>
           {posts.map((post, index) => {
-            const isFeatured = index < 2;
+            const isFeatured = index < 2 && post.pageBlogPost;
 
             return (
               <BlogPostCard
                 className={clsx(
+                  'py-8 first:pt-0 last:pb-0 md:py-6',
                   isFeatured
-                    ? 'pb-11 md:pb-8'
+                    ? 'pt-0 md:pt-0'
                     : 'col-span-full border-t border-gray-new-15 py-8 first:border-0 first:border-t-0 first:pt-0 last:pb-0'
                 )}
                 key={post.slug}

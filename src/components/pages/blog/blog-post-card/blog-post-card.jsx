@@ -36,18 +36,19 @@ const BlogPostCard = ({
 
   const formattedDate = getFormattedDate(date);
 
-  const link = (() => {
-    if (category) {
-      const extraCategory = EXTRA_CATEGORIES.find((cat) => cat.slug === category);
-      if (extraCategory) return `/${extraCategory.postSlug}/${slug}`;
-    }
+  const extraCategory = category && EXTRA_CATEGORIES.find((cat) => cat.slug === category);
 
+  const link = (() => {
+    if (extraCategory) return `${extraCategory.basePath}${slug}`;
     return `${LINKS.blog}/${slug}`;
   })();
 
   const cat = (() => {
-    if (category) {
-      return EXTRA_CATEGORIES.find((cat) => cat.slug === category);
+    if (extraCategory) {
+      return {
+        slug: `${BLOG_CATEGORY_BASE_PATH}${extraCategory.slug}`,
+        name: extraCategory.name,
+      };
     }
 
     if (categories) {
@@ -107,7 +108,10 @@ const BlogPostCard = ({
           {/* category */}
           {cat && (
             <Link
-              className={clsx('font-medium', CATEGORY_COLORS[cat.slug] || 'text-green-45')}
+              className={clsx(
+                'font-med<a class="font-medium text-green-45" href="/blog/category/company">Company</a>ium',
+                CATEGORY_COLORS[cat.slug] || 'text-green-45'
+              )}
               to={cat.slug}
             >
               {cat.name}
@@ -130,8 +134,8 @@ const BlogPostCard = ({
           {/* title */}
           <h1
             className={clsx(
-              'font-title font-medium leading-snug tracking-tighter transition-colors duration-200 group-hover:text-green-45 md:text-lg',
-              fullSize ? 'line-clamp-2 text-2xl lg:text-xl' : 'line-clamp-3 text-xl'
+              'font-medium leading-snug tracking-tighter transition-colors duration-200 group-hover:text-green-45 md:text-lg',
+              fullSize ? 'text-2xl lg:text-xl' : 'text-xl'
             )}
           >
             {title}
