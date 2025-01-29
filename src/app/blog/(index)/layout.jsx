@@ -16,7 +16,7 @@ const BlogPageLayout = async ({ children }) => {
           <h1 className="font-title text-[68px] font-medium leading-none tracking-extra-tight xl:text-[56px] lg:text-5xl md:text-4xl">
             What&apos;s new?
           </h1>
-          <p className="mt-3 text-xl tracking-extra-tight text-gray-new-80">
+          <p className="mt-3 text-xl tracking-extra-tight text-gray-new-80 lg:text-lg md:text-base">
             Discover our newest features, product updates, and technical improvements.
           </p>
         </div>

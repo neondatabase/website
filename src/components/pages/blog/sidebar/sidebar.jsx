@@ -18,7 +18,7 @@ const Sidebar = ({ categories }) => {
     <aside className="relative flex w-[192px] shrink-0 flex-col gap-y-10 lg:mb-10 lg:min-h-fit lg:w-full lg:pb-0 md:mb-8">
       <div className="flex-1">
         <nav className="sticky top-24 flex flex-col gap-5 lg:max-w-5xl lg:flex-row-reverse lg:items-end lg:justify-between lg:gap-6 md:block">
-          <div className="flex gap-1.5 md:w-full">
+          <div className="flex gap-1.5 overflow-hidden md:w-full">
             <SearchInput className="w-full lg:w-[192px] md:w-full" isBlog />
             <RssButton basePath={BLOG_BASE_PATH} title="Blog" />
           </div>

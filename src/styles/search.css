@@ -2,7 +2,7 @@
   &-input {
     @apply flex h-8 w-full max-w-full shrink-0 grow items-center rounded p-[6px] pl-9 text-left leading-none outline-none;
     @apply border border-gray-new-90 bg-white bg-[url('/images/search-light.svg')] bg-[left_0.625rem_center] bg-no-repeat;
-    @apply transition-colors duration-200 hover:cursor-pointer hover:border-gray-new-70 hover:shadow-none;
+    @apply transition-colors duration-200 hover:cursor-pointer hover:border-gray-new-70 hover:shadow-none focus:min-w-48;
     @apply dark:border-gray-new-20 dark:bg-black-new dark:bg-[url('/images/search-dark.svg')] dark:text-gray-new-50 dark:hover:border-gray-new-30;
   }
 
