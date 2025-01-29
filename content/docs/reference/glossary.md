@@ -461,11 +461,12 @@ Selling the Neon service as part of another service offering. Neon's Platform Pa
 
 ## root branch
 
-A branch with no parent. Each Neon project starts with a root branch named `main`, which cannot be deleted and is set as the [default branch](#default-branch) for the project.  
+A branch with no parent. Each Neon project starts with a root branch named `main`, which cannot be deleted and is set as the [default branch](#default-branch) for the project.
 
-Neon also supports two other types of root branches that have no parent but _can_ be deleted:  
-- [Backup branches](#backup-branch), created by point-in-time restore operations on other root branches.  
-- [Schema-only branches](#schema-only-branch).  
+Neon also supports two other types of root branches that have no parent but _can_ be deleted:
+
+- [Backup branches](#backup-branch), created by point-in-time restore operations on other root branches.
+- [Schema-only branches](#schema-only-branch).
 
 The number of root branches allowed in a project depends on your Neon plan.
 
@@ -481,7 +482,7 @@ A paid plan offered by Neon that provides full platform and support access. It's
 
 A branch that replicates only the database schema from a source branch, without copying any of the actual data. This feature is particularly valuable when working with sensitive information. Rather than creating branches that include confidential data, you can duplicate just the database structure and then populate it with your own data.
 
-Schema-only branches are [root branches](#root-branch), meaning they have no parent. As a root branch, each schema-only branch starts an independent line of data in a Neon project.  
+Schema-only branches are [root branches](#root-branch), meaning they have no parent. As a root branch, each schema-only branch starts an independent line of data in a Neon project.
 
 See [Schema-only branches](/docs/guides/branching-schema-only).
 
