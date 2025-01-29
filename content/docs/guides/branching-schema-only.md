@@ -142,8 +142,8 @@ There are certain allowances associated with schema-only branches:
 - There is a storage allowance for schema-only branches. The storage allowances do not apply when restoring data to a schema-only branch from another branch.
 
 | Plan     | Root branch allowance per project | Storage allowance per schema-only branch |
-| :------- | :-------------------------------- | :----------------------------------------- |
-| Free     | 3                                 | 0.5 GB                                     |
-| Launch   | 5                                 | 3 GB                                       |
-| Scale    | 10                                | 5 GB                                       |
-| Business | 25                                | 20 GB                                      |
+| :------- | :-------------------------------- | :--------------------------------------- |
+| Free     | 3                                 | 0.5 GB                                   |
+| Launch   | 5                                 | 3 GB                                     |
+| Scale    | 10                                | 5 GB                                     |
+| Business | 25                                | 20 GB                                    |
