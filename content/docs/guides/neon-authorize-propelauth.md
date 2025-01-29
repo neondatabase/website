@@ -3,7 +3,7 @@ title: Secure your data with PropelAuth and Neon Authorize
 subtitle: Implement Row-level Security policies in Postgres using PropelAuth and Neon
   Authorize
 enableTableOfContents: true
-updatedOn: '2024-12-30T20:44:31.647Z'
+updatedOn: '2025-01-29T23:50:53.960Z'
 ---
 
 <InfoBlock>

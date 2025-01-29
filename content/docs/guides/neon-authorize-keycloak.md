@@ -3,7 +3,7 @@ title: Secure your data with Keycloak and Neon Authorize
 subtitle: Implement Row-level Security policies in Postgres using Keycloak and Neon
   Authorize
 enableTableOfContents: true
-updatedOn: '2024-12-10T19:01:34.075Z'
+updatedOn: '2025-01-29T23:50:53.959Z'
 ---
 
 <InfoBlock>

@@ -3,7 +3,7 @@ title: Secure your data with Clerk and Neon Authorize
 subtitle: Implement Row-level Security policies in Postgres using Clerk and Neon
   Authorize
 enableTableOfContents: true
-updatedOn: '2024-12-10T19:01:34.074Z'
+updatedOn: '2025-01-29T23:50:53.957Z'
 ---
 
 <InfoBlock>

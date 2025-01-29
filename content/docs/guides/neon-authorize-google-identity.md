@@ -1,8 +1,9 @@
 ---
 title: Secure your data with Google Identity and Neon Authorize
-subtitle: Implement Row-level Security policies in Postgres using Google Identity and Neon Authorize
+subtitle: Implement Row-level Security policies in Postgres using Google Identity and
+  Neon Authorize
 enableTableOfContents: true
-updatedOn: '2024-12-09T10:00:00.000Z'
+updatedOn: '2025-01-29T23:50:53.958Z'
 ---
 
 <InfoBlock>

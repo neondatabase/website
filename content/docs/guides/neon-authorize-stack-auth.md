@@ -3,7 +3,7 @@ title: Secure your data with Stack Auth and Neon Authorize
 subtitle: Implement Row-level Security policies in Postgres using Stack Auth and Neon
   Authorize
 enableTableOfContents: true
-updatedOn: '2024-12-10T19:01:34.076Z'
+updatedOn: '2025-01-29T23:50:53.960Z'
 ---
 
 <InfoBlock>

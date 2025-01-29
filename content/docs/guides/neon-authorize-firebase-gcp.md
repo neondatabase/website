@@ -3,7 +3,7 @@ title: Secure Your Data with Neon Authorize and Firebase or GCP Identity Platfor
 subtitle: Implement Row-Level Security in Postgres using Firebase or GCP Identity
   Platform
 enableTableOfContents: true
-updatedOn: '2024-12-12T15:31:10.128Z'
+updatedOn: '2025-01-29T23:50:53.958Z'
 ---
 
 <InfoBlock>
