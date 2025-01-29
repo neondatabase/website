@@ -239,7 +239,7 @@ Neon's consumption data is updated approximately every 15 minutes, so a minimum 
 
 ### What is the the rate limit for Neon's consumption APIs?
 
-Neon's consumption APIs, [Get account consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount) and [Get consumption metrics for each project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject), have a rate limit of 2 requests per second, per account.
+Neon's consumption APIs, [Get account consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount) and [Get consumption metrics for each project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject), are rate-limited to about 30 requests per minute per account. Both APIs share the same rate limiter, so requests to either endpoint count toward the limit.
 
 ### How often should consumption data be polled to report usage to customers?
 
