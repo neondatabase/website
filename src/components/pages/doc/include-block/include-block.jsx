@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 // eslint-disable-next-line import/no-cycle
 import Content from 'components/shared/content';
-import { DOCS_DIR_PATH } from 'constants/docs';
+import { DOCS_DIR_PATH } from 'constants/content';
 import { getPostBySlug } from 'utils/api-docs';
 
 const IncludeBlock = ({ url }) => {

@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 
 import Post from 'components/pages/doc/post';
 import VERCEL_URL from 'constants/base';
-import { DOCS_DIR_PATH } from 'constants/docs';
+import { DOCS_DIR_PATH } from 'constants/content';
 import LINKS from 'constants/links';
 import {
   getAllPosts,
