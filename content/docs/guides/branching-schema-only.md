@@ -7,7 +7,7 @@ updatedOn: '2025-01-10T00:37:35.161Z'
 
 <EarlyAccess />
 
-Neon supports creating branches that copy only the database schema from a specified source branch — without copying any data. This feature is useful when working with databases containing sensitive data. With schema-only branches, you can replicate your database structure without exposing confidential information, giving your team a safe, compliant way to build and test with Neon branches.
+Neon supports creating branches that copy only the database schema from a specified source branch — without copying any data. This type of branch is useful when working with databases containing sensitive data. With schema-only branches, you can replicate your database structure without exposing confidential information, giving your team a safe, compliant way to build and test with Neon branches.
 
 ## Creating schema-only branches
 
@@ -21,7 +21,6 @@ To create a schema-only branch from the Neon Console:
 1. In the console, select your project.
 2. Select **Branches**.
 3. Click **Create branch** to open the branch creation dialog.
-   ![Create branch dialog](/docs/manage/create_branch.png)
 4. For **Type**, select **Schema-only**.
 4. Enter a name for the branch.
 5. In the **From Branch** field, select the source branch. The schema from the source branch will be copied to your new schema-only branch. 
@@ -91,6 +90,8 @@ To try out schema-only branches:
 
 3. Create a schema-only branch following the instructions above. See [Creating schema-only branches](#creating-schema-only-branches). In this example, we've named the branch `employees_schema_only`.
 
+    ![schema-only branch creation](/docs/guides/create_schema_only_branch.png)
+
 4. On the **Tables** page, select your newly created `employees_schema_only` branch from the bread-crumb menu at the top of the console. You can see that the schema-only branch contains the schema, but no data. The same will be true for any table in any database on the schema-only branch — only the schema will be present.
 
     ![schema-only branch with only the schema](/docs/guides/schema-only-branch.png)
@@ -110,7 +111,7 @@ Connecting to a schema-only branch works the same way as connecting to any Neon 
 
 ## What's different about schema-only branches?
 
-Unlike other branches, a schema-only branches do not have a parent branch, as you can see below. Both the `main` branch of the project and the schema-only branch have no parent, indicated by the dash in the **Parent** column (`-`) on the **Branches** page in your Neon project.
+Unlike other branches, schema-only branches do not have a parent branch, as you can see below. Both the `main` branch of the project and the schema-only branch have no parent, indicated by the dash in the **Parent** column (`-`) on the **Branches** page in your Neon project.
 
 ![schema-only branch](/docs/guides/schema_only_no_parent.png)
 
@@ -118,7 +119,7 @@ Schema-only branches are independent [root branches](/docs/reference/glossary#ro
 
 ### Key points about schema-only branches
 
-- **No parent branch**: Schema-only branches are [root branches](/docs/reference/glossary#root-branch). They do not have a parent branch. 
+- **No parent branch**: Schema-only branches are root branches. They do not have a parent branch. 
 - **No shared history**: Data added to a schema-only branch is independent and adds to your storage. There is no shared history with a parent.
 - **Reset from parent is not supported**: With no parent branch, [reset from parent](/docs/manage/branches#reset-a-branch-from-parent) operations are not supported.
 - **Restore is supported, but...** performing a [restore](/docs/guides/branch-restore) operation on a schema-only branch copies both schema and data from the source branch. Your branch will no longer be "schema-only".
@@ -128,13 +129,13 @@ Schema-only branches are independent [root branches](/docs/reference/glossary#ro
 
 There are certain allowances associated with schema-only branches:
 
-- A schema-only branch is a [root branch](/docs/reference/glossary#root-branch), and there is only a certain number of root branches permitted per Neon project, depending on your Neon plan. The `main` root branch created with each Neon project counts toward this allowance, as do certain backup branches created by restore operations.
-- There is a storage allowance for schema-only branches, which does not apply to the `main` root branch. The storage allowances also do not apply when restoring data to a schema-only branch from another branch — this ensures full restore capability.
+- A schema-only branch is a [root branch](/docs/reference/glossary#root-branch), and there is only a certain number of root branches permitted per Neon project, depending on your Neon plan. The `main` root branch created with each Neon project counts toward this allowance, as do certain [backup branches](/docs/reference/glossary#backup-branch) created by restore operations.
+- There is a storage allowance for schema-only branches. These storage allowances do not apply when restoring data to a schema-only branch from another branch.
 
   | Plan       | Root branch allowance per project        | Storage allowance per schema-only branches        |
   |:-----------|:-----------------------------------------|:--------------------------------------------------|
-  | Free       | 3 (2 new roots in addition to `main`)      | 0.5 GB                                          |
-  | Launch     | 5 (4 new roots in addition to `main`)      | 3 GB                                            |
-  | Scale      | 10 (9 new roots in addition to `main`)     | 5 GB                                            |
-  | Business   | 25 (24 new roots in addition to `main`)    | 20 GB                                           |
+  | Free       | 3 (including your `main` root branch)    | 0.5 GB                                            |
+  | Launch     | 5 (including your `main` root branch)    | 3 GB                                              |
+  | Scale      | 10 (including your `main` root branch)   | 5 GB                                              |
+  | Business   | 25 (including your `main` root branch)   | 20 GB                                             |
 
