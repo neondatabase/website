@@ -20,9 +20,9 @@ const Sidebar = ({ categories }) => {
     <aside className="relative flex w-[192px] shrink-0 flex-col gap-y-10 lg:mb-10 lg:min-h-fit lg:w-full lg:pb-0 md:mb-8">
       <div className="flex-1">
         <nav className="no-scrollbars sticky top-24  lg:-mx-8 lg:flex lg:max-w-5xl lg:items-end lg:justify-between lg:overflow-auto lg:px-8 md:-mx-4 md:px-4">
-          <div className="flex gap-1.5">
+          <div className="flex gap-1.5 lg:hidden">
             <AlgoliaSearch
-              className="w-full lg:hidden"
+              className="w-full"
               indexName={process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME}
               isBlog
             />
