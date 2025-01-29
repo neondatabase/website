@@ -19,6 +19,8 @@ Learn about branching and how you can apply it in your development workflows.
 
 <a href="/docs/guides/branch-archiving" description="Learn how Neon automatically archives inactive branches to cost-effective storage" icon="split-branch">Branch archiving</a>
 
+<a href="/docs/guides/branching-schema-only" description="Learn how you can protect sensitive data with schema-only branches" icon="split-branch">Schema-only branches</a>
+
 </DetailIconCards>
 
 ## Automate branching
