@@ -16,6 +16,7 @@ You can create schema-only branches in the Neon Console or using the Neon API, i
 <Tabs labels={["Neon Console", "API"]}>
 
 <TabItem>
+
 To create a schema-only branch from the Neon Console:
 
 1. In the console, select your project.
@@ -25,7 +26,8 @@ To create a schema-only branch from the Neon Console:
 5. Enter a name for the branch.
 6. In the **From Branch** field, select the source branch. The schema from the source branch will be copied to your new schema-only branch.
 7. Click **Create new branch**.
-   </TabItem>
+
+</TabItem>
 
 <TabItem>
 
