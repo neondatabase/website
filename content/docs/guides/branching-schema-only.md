@@ -22,10 +22,10 @@ To create a schema-only branch from the Neon Console:
 1. In the console, select your project.
 2. Select **Branches**.
 3. Click **Create branch** to open the branch creation dialog.
-4. For **Type**, select **Schema-only**.
-5. Enter a name for the branch.
+5. Under **Include**, Select the **Schema-only** option.
+4. Provide a name for the branch.
 6. In the **From Branch** field, select the source branch. The schema from the source branch will be copied to your new schema-only branch.
-7. Click **Create new branch**.
+7. Click **Create branch**.
 
 </TabItem>
 
