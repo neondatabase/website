@@ -24,273 +24,245 @@ import caseStudiesDarkIcon from 'icons/header/case-studies-dark.svg';
 import caseStudiesIcon from 'icons/header/case-studies.svg';
 import caseVariableDarkIcon from 'icons/header/case-variable-dark.svg';
 import caseVariableIcon from 'icons/header/case-variable.svg';
-// import caseVelocityDarkIcon from 'icons/header/case-velocity-dark.svg';
-// import caseVelocityIcon from 'icons/header/case-velocity.svg';
-import changelogDarkIcon from 'icons/header/changelog-dark.svg';
-import changelogIcon from 'icons/header/changelog.svg';
 import connectionPoolerDarkIcon from 'icons/header/connection-pooler-dark.svg';
 import connectionPoolerIcon from 'icons/header/connection-pooler.svg';
 import consoleDarkIcon from 'icons/header/console-dark.svg';
 import consoleIcon from 'icons/header/console.svg';
-import demosDarkIcon from 'icons/header/demos-dark.svg';
-import demosIcon from 'icons/header/demos.svg';
-import discordDarkIcon from 'icons/header/discord-dark.svg';
-import discordIcon from 'icons/header/discord.svg';
-// import enterpriseDarkIcon from 'icons/header/enterprise-dark.svg';
-// import enterpriseIcon from 'icons/header/enterprise.svg';
+import enterpriseDarkIcon from 'icons/header/enterprise-dark.svg';
+import enterpriseIcon from 'icons/header/enterprise.svg';
 import partnersDarkIcon from 'icons/header/partners-dark.svg';
 import partnersIcon from 'icons/header/partners.svg';
 import scaleToZeroDarkIcon from 'icons/header/scale-to-zero-dark.svg';
 import scaleToZeroIcon from 'icons/header/scale-to-zero.svg';
-import serverlessDarkIcon from 'icons/header/serverless-dark.svg';
-import serverlessIcon from 'icons/header/serverless.svg';
 
 import LINKS from './links';
 
 export default {
   header: [
     {
-      text: 'Features',
-      items: [
+      text: 'Product',
+      sections: [
         {
-          icon: {
-            light: serverlessIcon,
-            dark: serverlessDarkIcon,
-          },
-          text: 'Serverless',
-          description: 'Built for the cloud',
+          title: 'Database',
+          theme: 'cards',
+          items: [
+            {
+              icon: {
+                light: autoscalingIcon,
+                dark: autoscalingDarkIcon,
+              },
+              text: 'Autoscaling',
+              description: 'Automatic instance sizing',
+              to: LINKS.autoscaling,
+            },
+            {
+              icon: {
+                light: connectionPoolerIcon,
+                dark: connectionPoolerDarkIcon,
+              },
+              text: 'Connection pooler',
+              description: 'Thousands of connections',
+              to: LINKS.connectionPooling,
+            },
+            {
+              icon: {
+                light: aiIcon,
+                dark: aiDarkIcon,
+              },
+              text: 'AI',
+              description: 'Powered by pgvector',
+              to: LINKS.ai,
+            },
+          ],
+        },
+        {
+          title: 'What is Neon?',
+          description: 'Serverless explainer updated',
+          theme: 'banner',
           to: LINKS.serverless,
         },
         {
-          icon: {
-            light: autoscalingIcon,
-            dark: autoscalingDarkIcon,
-          },
-          text: 'Autoscaling',
-          description: 'Automatic instance sizing',
-          to: LINKS.autoscaling,
+          title: 'Workflow',
+          theme: 'cards',
+          items: [
+            {
+              icon: {
+                light: branchingIcon,
+                dark: branchingDarkIcon,
+              },
+              text: 'Dev environments',
+              description: 'Copy schema + data',
+              to: LINKS.flow,
+            },
+            {
+              icon: {
+                light: scaleToZeroIcon,
+                dark: scaleToZeroDarkIcon,
+              },
+              text: 'Scale-to-zero',
+              description: 'Lower costs for dev/test',
+              to: LINKS.scaleToZero,
+            },
+          ],
         },
         {
-          icon: {
-            light: branchingIcon,
-            dark: branchingDarkIcon,
-          },
-          text: 'Branching',
-          description: 'Copy schema + data',
-          to: LINKS.flow,
-        },
-        {
-          icon: {
-            light: scaleToZeroIcon,
-            dark: scaleToZeroDarkIcon,
-          },
-          text: 'Scale-to-zero',
-          description: 'Lower costs for dev/test',
-          to: LINKS.scaleToZero,
-        },
-        {
-          icon: {
-            light: apiIcon,
-            dark: apiDarkIcon,
-          },
-          text: 'API',
-          description: 'Less management work',
-          to: LINKS.api,
-        },
-        {
-          icon: {
-            light: connectionPoolerIcon,
-            dark: connectionPoolerDarkIcon,
-          },
-          text: 'Connection pooler',
-          description: ' Thousands of connections',
-          to: LINKS.connectionPooling,
-        },
-        {
-          icon: {
-            light: consoleIcon,
-            dark: consoleDarkIcon,
-          },
-          text: 'Authorize',
-          description: 'Row-level security',
-          to: LINKS.authorize,
-        },
-        {
-          icon: {
-            light: aiIcon,
-            dark: aiDarkIcon,
-          },
-          text: 'AI',
-          description: 'Powered by pgvector',
-          to: LINKS.ai,
+          title: 'Backend',
+          theme: 'cards',
+          items: [
+            {
+              icon: {
+                light: consoleIcon,
+                dark: consoleDarkIcon,
+              },
+              text: 'Authorize',
+              description: 'Row-level security',
+              to: LINKS.authorize,
+            },
+            {
+              icon: {
+                light: apiIcon,
+                dark: apiDarkIcon,
+              },
+              text: 'API',
+              description: 'Less management work',
+              to: LINKS.api,
+            },
+          ],
         },
       ],
     },
     {
-      text: 'Pricing',
-      to: LINKS.pricing,
+      text: 'Solutions',
+      section: [
+        {
+          title: 'Use cases',
+          theme: 'list',
+          items: [
+            {
+              icon: {
+                light: caseSaasIcon,
+                dark: caseSaasDarkIcon,
+              },
+              text: 'SaaS Apps',
+              to: `${LINKS.useCases}/postgres-for-saas`,
+            },
+            {
+              icon: {
+                light: caseVariableIcon,
+                dark: caseVariableDarkIcon,
+              },
+              text: 'Variable Traffic',
+              to: LINKS.variableLoad,
+            },
+            {
+              icon: {
+                light: caseDatabaseIcon,
+                dark: caseDatabaseDarkIcon,
+              },
+              text: 'Database per Tenant',
+              to: `${LINKS.useCases}/database-per-tenant`,
+            },
+            {
+              icon: {
+                light: caseDevIcon,
+                dark: caseDevDarkIcon,
+              },
+              text: 'Dev/Test',
+              to: `${LINKS.useCases}/dev-test`,
+            },
+            {
+              icon: {
+                light: aiAgentsIcon,
+                dark: aiAgentsDarkIcon,
+              },
+              text: 'Agents',
+              to: `${LINKS.useCases}/ai-agents`,
+            },
+          ],
+        },
+        {
+          title: 'For teams',
+          theme: 'cards',
+          items: [
+            {
+              icon: {
+                light: enterpriseIcon,
+                dark: enterpriseDarkIcon,
+              },
+              text: 'Enterprise',
+              description: 'Scale & grow',
+              to: LINKS.enterprise,
+            },
+            {
+              icon: {
+                light: partnersIcon,
+                dark: partnersDarkIcon,
+              },
+              text: 'Partners',
+              description: 'Add Neon to your platform',
+              to: LINKS.partners,
+            },
+            {
+              icon: {
+                light: caseStudiesIcon,
+                dark: caseStudiesDarkIcon,
+              },
+              text: 'Case studies',
+              description: 'Explore customer stories',
+              to: LINKS.caseStudies,
+            },
+          ],
+        },
+      ],
     },
     {
       text: 'Docs',
       to: LINKS.docs,
     },
     {
-      text: 'Use cases',
-      items: [
-        {
-          icon: {
-            light: caseSaasIcon,
-            dark: caseSaasDarkIcon,
-          },
-          text: 'SaaS Apps',
-          description: 'Build faster with Neon',
-          to: `${LINKS.useCases}/postgres-for-saas`,
-        },
-        {
-          icon: {
-            light: caseVariableIcon,
-            dark: caseVariableDarkIcon,
-          },
-          text: 'Variable Traffic',
-          description: 'Scale up/down automatically',
-          to: LINKS.variableLoad,
-        },
-        // {
-        //   icon: {
-        //     light: caseDevIcon,
-        //     dark: caseDevDarkIcon,
-        //   },
-        //   text: 'Dev/Stage/Test',
-        //   description: 'Build and test on Neon',
-        //   to: `${LINKS.useCases}/dev-stage-test`,
-        // },
-        {
-          icon: {
-            light: caseDatabaseIcon,
-            dark: caseDatabaseDarkIcon,
-          },
-          text: 'Database per Tenant',
-          description: 'Grow to thousands of tenants',
-          to: `${LINKS.useCases}/database-per-tenant`,
-        },
-        {
-          icon: {
-            light: caseDevIcon,
-            dark: caseDevDarkIcon,
-          },
-          text: 'Dev/Test',
-          description: 'For ephemeral environments',
-          to: `${LINKS.useCases}/dev-test`,
-        },
-        {
-          icon: {
-            light: aiAgentsIcon,
-            dark: aiAgentsDarkIcon,
-          },
-          text: 'Agents',
-          description: 'A database backend for agents',
-          to: `${LINKS.useCases}/ai-agents`,
-        },
-        // {
-        //   icon: {
-        //     light: caseVelocityIcon,
-        //     dark: caseVelocityDarkIcon,
-        //   },
-        //   text: 'Development Velocity',
-        //   description: 'Ship faster than ever',
-        //   to: `${LINKS.useCases}/development-velocity`,
-        // },
-      ],
-    },
-    {
-      text: 'Resources',
-      items: [
-        {
-          icon: {
-            light: blogIcon,
-            dark: blogDarkIcon,
-          },
-          text: 'Blog',
-          description: 'Learn from the experts',
-          to: LINKS.blog,
-        },
-        {
-          icon: {
-            light: changelogIcon,
-            dark: changelogDarkIcon,
-          },
-          text: 'Changelog',
-          description: 'Explore product updates',
-          to: LINKS.changelog,
-        },
-        {
-          icon: {
-            light: demosIcon,
-            dark: demosDarkIcon,
-          },
-          text: 'Demos',
-          description: 'Try interactive demos',
-          to: LINKS.demos,
-        },
-        {
-          icon: {
-            light: discordIcon,
-            dark: discordDarkIcon,
-          },
-          text: 'Discord',
-          description: 'Join the community',
-          to: LINKS.discord,
-        },
-      ],
+      text: 'Pricing',
+      to: LINKS.pricing,
     },
     {
       text: 'Company',
-      items: [
+      sections: [
         {
-          icon: {
-            light: aboutUsIcon,
-            dark: aboutUsDarkIcon,
-          },
-          text: 'About us',
-          description: 'Meet the team',
-          to: LINKS.aboutUs,
+          theme: 'list',
+          items: [
+            {
+              icon: {
+                light: blogIcon,
+                dark: blogDarkIcon,
+              },
+              text: 'Blog',
+              to: LINKS.blog,
+            },
+            {
+              icon: {
+                light: aboutUsIcon,
+                dark: aboutUsDarkIcon,
+              },
+              text: 'About us',
+              to: LINKS.aboutUs,
+            },
+            {
+              icon: {
+                light: careersIcon,
+                dark: careersDarkIcon,
+              },
+              text: 'Careers',
+              to: LINKS.careers,
+            },
+            {
+              icon: {
+                light: careersIcon,
+                dark: careersDarkIcon,
+              },
+              text: 'Contact',
+              to: LINKS.contactSales,
+            },
+          ],
         },
-        {
-          icon: {
-            light: careersIcon,
-            dark: careersDarkIcon,
-          },
-          text: 'Careers',
-          description: 'Join Neon',
-          to: LINKS.careers,
-        },
-        {
-          icon: {
-            light: partnersIcon,
-            dark: partnersDarkIcon,
-          },
-          text: 'Partners',
-          description: 'Add Neon to your platform',
-          to: LINKS.partners,
-        },
-        {
-          icon: {
-            light: caseStudiesIcon,
-            dark: caseStudiesDarkIcon,
-          },
-          text: 'Case studies',
-          description: 'Explore customer stories',
-          to: LINKS.caseStudies,
-        },
-        // {
-        //   icon: {
-        //     light: enterpriseIcon,
-        //     dark: enterpriseDarkIcon,
-        //   },
-        //   text: 'Enterprise',
-        //   description: 'Scale & grow',
-        //   to: LINKS.enterprise,
-        // },
       ],
     },
   ],
