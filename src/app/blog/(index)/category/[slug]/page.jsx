@@ -18,7 +18,7 @@ const BlogCategoryPage = async ({ params: { slug } }) => {
     <>
       <h2 className="sr-only">{category.name} Blog</h2>
       <div className="grid grid-cols-2 gap-x-6 md:grid-cols-1">
-        <LoadMorePosts className="mt-16" defaultCountPosts={8} countToAdd={8}>
+        <LoadMorePosts className="mt-8 md:mt-6" defaultCountPosts={8} countToAdd={8}>
           {posts.map((post, index) => (
             <BlogGridItem index={index} category={category} post={post} />
           ))}
