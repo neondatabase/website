@@ -5,21 +5,13 @@ isDraft: false
 updatedOn: '2024-12-13T21:17:10.768Z'
 ---
 
-To keep your Neon computes and Postgres instances up to date with the latest patches and Neon features, Neon automatically applies scheduled updates to your project's computes. On all Neon plans, we notify you by email ahead of scheduled updates so that you can plan for them if necessary. On Neon's paid plans, you will be able to schedule an update window — a specific day and time for updates.
-
-To apply an update, Neon must briefly restart your computes, which typically takes just a few seconds thanks to Neon's serverless architecture. 
-
-<Admonition type="info">
-Most Postgres connection drivers include built-in retry mechanisms that automatically handle short-lived connection interruptions. This means that for most applications, a brief restart should result in minimal disruption, as the driver will transparently reconnect.
-
-However, if your application has strict availability requirements, you may want to ensure that your connection settings are configured to allow retries. Check your driver's documentation for options like connection timeouts, retry intervals, and connection pooling strategies.
+<Admonition type="note">
+This feature is currently available for Free Plan accounts only. It will be available on Neon paid plan accounts soon.
 </Admonition>
 
-- Updates are scheduled so you’ll know when they’re coming, and so that you won't fall behind on important maintenance.
-- Updates require a compute restart, but restarts are quick and automatic — taking just a few seconds.
+To keep your Neon computes and Postgres instances up to date with the latest patches and Neon features, Neon automatically applies scheduled updates to your project's computes. We notify you of scheduled updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can schedule an update window — a specific day and hour for updates.
 
-You’ll be able to track scheduled updates in your project settings.
-Free Plan accounts will have updates scheduled in advance for a specific day and time, while Paid Plan accounts will be able to choose a preferred update window.
+To apply an update, Neon must briefly restart your project's computes. The entire process takes just a few seconds, minimizing any potential disruption.
 
 ## What updates are included?
 
@@ -35,36 +27,88 @@ Scheduled updates are typically applied weekly but may occur more or less freque
 
 Neon applies updates to computes based on the following rules:
 
-- Active computes receive updates.
-- Computes that have been active within the last 30 days receive updates.
-- Computes that haven’t been active in the past 30 days are not updated.
+- Computes that are currently active receive updates.
+- Computes that have been consistently active for 30 days or more receive updates.
 - Computes in a transition state (e.g., shutting down or restarting) at the time of an update are not updated.
 
-If a compute is excluded from an update, Neon will apply the missed update and any new updates at the next scheduled update once the compute meets the update criteria listed above.
+If a compute is excluded from an update, Neon will apply the missed update with the next scheduled update, assuming the compute meets the update criteria mentioned above.
 
-## Scheduled updates on the Free Plan
+<Admonition type="note" title="Regular updates keep your database healthy">
+Neon schedules updates in advance so you know when to expect them and stay up to date with important changes. Without scheduled updates, always-active computes or those with scale to zero disabled may miss critical maintenance.
+</Admonition>
 
-On the **Free Plan**, updates are scheduled and applied automatically by Neon. You'll receive an email ahead of a planned update, letting you know when it's coming. You can also check your project's settings for upcoming scheduled updates.
+## Updates on the Free Plan
+
+On the **Free Plan**, updates are scheduled and applied automatically by Neon. You can check your project's settings for upcoming scheduled updates. We'll post a notice there at least **1 day** ahead of a planned update, letting you know when it's coming.
+
+To view scheduled updates:
 
 1. Go to the Neon project dashboard.
 2. Select **Settings** > **Updates**.
 
-![Free plan updates UI](/docs/manage/free_plan_updates.png)
+    ![Free plan updates UI](/docs/manage/free_plan_updates.png)
 
-Once a planned update notification is sent via email and posted **Settings** > **Updates**, a subsequent compute restart will apply the available update immediately. You won't have to wait for the scheduled time. For example, Neon computes scale to zero after 5 minutes by default. When you're compute is activated again, that's a restart, and available updates will be applied at that time.
+## Updates on paid plans
 
-## Schedule updates on Paid Plans
+<Admonition type="note" title="coming soon">
+This feature is currently available for Free Plan accounts only. It will be available on Neon paid plan accounts soon.
+</Admonition>
 
-On Neon's paid plans, you can set a preferred update time window, specifying the day of the week and hour. Updates will be applied within this window. This allows you to plan for the compute restart required to apply an update.
+On Neon's paid plans, you can set a preferred update window by specifying the day and hour. Updates will be applied within this window, letting you plan for the required compute restart.
 
-You can manage the update schedule in your Neon project's settings:
+You can specify an update window in your Neon project's settings or using the Neon API.
+
+<Tabs labels={["Neon Console", "API"]}>
+
+<TabItem>
+In the Neon Console:
 
 1. Go to the Neon project dashboard.
 2. Select **Settings** > **Updates**.
 3. Choose a day of the week and an hour. Updates will occur within this time window and take only a few seconds.
 
-![Paid plan updates UI](/docs/manage/free_plan_updates.png)
+    ![Paid plan updates UI](/docs/manage/paid_plan_updates.png)
 
-As with the Free Plan, once a planned update notification is sent via email and posted **Settings** > **Updates**, a subsequent compute restart will apply the available update immediately. You won't have to wait for the scheduled time. For example, if your compute scales to zero, available updates will be applied the next time your compute starts.
+You can check your project's settings for upcoming scheduled updates. We'll post a notice there at least **7 days** ahead of a planned update, letting you know when it's coming.
+
+</TabItem>
+
+<TabItem>
+On Neon paid plan accounts, the [Create project](https://api-docs.neon.tech/reference/createproject) and [Update project](https://api-docs.neon.tech/reference/updateproject) APIs allow defining a window for updates using the `maintenance_window` object, as shown in the `Update project` example below. 
+
+- The `weekdays` parameter is an integer (e.g., `7` for Sunday).
+- The `start_time` and `end_time` values are in UTC (`HH:MM` format) and must be at least one hour apart. Shorter intervals are not supported.
+
+```bash
+curl --request PATCH \
+     --url https://console.neon.tech/api/v2/projects/fragrant-mode-99795914 \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API' \
+     --header 'content-type: application/json' \
+     --data '
+{
+  "project": {
+    "settings": {
+      "maintenance_window": {
+        "weekdays": [
+          7
+        ],
+        "start_time": "01:00",
+        "end_time": "02:00"
+      }
+    }
+  }
+}
+'
+```
+</TabItem>
+
+</Tabs>
+
+## Handling connection disruptions
+
+Most Postgres connection drivers include built-in retry mechanisms that automatically handle short-lived connection interruptions. This means that for most applications, a brief restart should result in minimal disruption, as the driver will transparently reconnect.
+
+However, if your application has strict availability requirements, you may want to ensure that your connection settings are configured to allow for retries. Check your driver's documentation for options like connection timeouts, retry intervals, and connection pooling strategies. You retry configuration should account for the few seconds it takes to apply updates to your Neon compute. 
 
 <NeedHelp/>
