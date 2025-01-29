@@ -22,7 +22,7 @@ The version of `timescaledb` available on Neon depends on the version of Postgre
 - Postgres 14 - `timescaledb` 2.10.1
 - Postgres 15 - `timescaledb` 2.10.1
 - Postgres 16 - `timescaledb` 2.13.0
-- Postgres 17 - _not yet available_
+- Postgres 17 - `timescaledb` 2.17.1
 
 _Only [Apache-2](https://docs.timescale.com/about/latest/timescaledb-editions/) licensed features are supported. Compression is not supported._
 
