@@ -1,4 +1,28 @@
 import closeIcon from 'icons/close.svg';
+import sendGtagEvent from 'utils/send-gtag-event';
+
+// All available events are listed here:
+// https://docs.inkeep.com/customization-guides/use-your-own-analytics#available-events
+const EVENTS_TO_TRACK = [
+  {
+    name: 'search_query_submitted',
+    prop: 'query',
+  },
+  {
+    name: 'chat_message_submitted',
+    prop: 'content',
+  },
+];
+
+const analyticsCallback = (event) => {
+  const { eventName, properties } = event;
+  const eventToTrack = EVENTS_TO_TRACK.find((e) => e.name === eventName);
+  if (eventToTrack) {
+    sendGtagEvent(eventName, {
+      [eventToTrack.prop]: properties[eventToTrack.prop],
+    });
+  }
+};
 
 const baseSettings = {
   apiKey: process.env.INKEEP_INTEGRATION_API_KEY,
@@ -50,6 +74,7 @@ const baseSettings = {
       searchTabLabel: 'Changelog',
     },
   ],
+  logEventCallback: analyticsCallback,
 };
 
 const searchSettings = {
