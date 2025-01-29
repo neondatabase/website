@@ -105,7 +105,7 @@ You can get your connection string from the [Neon Console](/docs/connect/connect
 For example, to get a pooled connection string via CLI:
 
 ```bash shouldWrap
-neonctl connection-string --pooled true [branch_name]
+neon connection-string --pooled true [branch_name]
 
 postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
@@ -115,7 +115,7 @@ Notice the `-pooler` in the connection string — that's what differentiates a d
 Here's an example of getting a direct connection string from the Neon CLI:
 
 ```bash shouldWrap
-neonctl connection-string [branch_name]
+neon connection-string [branch_name]
 
 postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
