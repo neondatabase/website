@@ -5,6 +5,7 @@ import { useTheme } from 'next-themes';
 import { PropTypes } from 'prop-types';
 
 import { aiChatSettings, baseSettings } from 'lib/inkeep-settings';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 const Skeleton = () => (
   <div className="w-full flex-col justify-center overflow-hidden">
@@ -59,6 +60,12 @@ const InkeepEmbedded = ({ isDarkTheme = false }) => {
             'grayDark.900': '#000',
           },
         },
+      },
+      logEventCallback: (event) => {
+        const { eventName, properties } = event;
+        if (eventName === 'chat_message_submitted') {
+          sendGtagEvent(eventName, { text: properties.content });
+        }
       },
     },
     aiChatSettings: {

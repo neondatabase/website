@@ -10,6 +10,7 @@ import { useCallback, useEffect, useState } from 'react';
 import InkeepSearch from 'components/shared/inkeep-search';
 import LINKS from 'constants/links';
 import { baseSettings } from 'lib/inkeep-settings';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 const InkeepCustomTrigger = dynamic(
   () => import('@inkeep/uikit').then((mod) => mod.InkeepCustomTrigger),
@@ -73,6 +74,12 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType =
         stylesheetUrls: ['/inkeep/css/base.css', '/inkeep/css/modal.css'],
       },
       optOutFunctionalCookies: true,
+      logEventCallback: (event) => {
+        const { eventName, properties } = event;
+        if (eventName === 'search_query_submitted') {
+          sendGtagEvent(eventName, { text: properties.query });
+        }
+      },
     },
     modalSettings: {
       defaultView: 'SEARCH',
