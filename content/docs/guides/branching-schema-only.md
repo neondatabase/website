@@ -34,6 +34,7 @@ The API is in Beta and subject to change.
 </Admonition>
 
 To create a schema-only branch using the Neon API, use the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) endpoint with the `init_source` option set to `schema-only`, as shown below. Required values include:
+
 - Your Neon `project_id`
 - The `parent_id`, which is the branch ID of the branch containing the schema you want to copy
 
@@ -134,13 +135,13 @@ Schema-only branches are independent [root branches](/docs/reference/glossary#ro
 
 There are certain allowances associated with schema-only branches:
 
-- A schema-only branch is a [root branch](/docs/reference/glossary#root-branch), and there is only a certain number of root branches permitted per Neon project, depending on your Neon plan. 
+- A schema-only branch is a [root branch](/docs/reference/glossary#root-branch), and there is only a certain number of root branches permitted per Neon project, depending on your Neon plan.
 - The `main` root branch created with each Neon project counts toward the _root branch allowance per project_, as do certain [backup branches](/docs/reference/glossary#backup-branch) created by restore operations.
 - There is a storage allowance for schema-only branches. The storage allowances do not apply when restoring data to a schema-only branch from another branch.
 
-| Plan      | Root branch allowance per project | Storage allowance per schema-only branches |
-|:----------|:---------------------------------|:-----------------------------------------|
-| Free      | 3                                | 0.5 GB                                   |
-| Launch    | 5                                | 3 GB                                     |
-| Scale     | 10                               | 5 GB                                     |
-| Business  | 25                               | 20 GB                                    |
+| Plan     | Root branch allowance per project | Storage allowance per schema-only branches |
+| :------- | :-------------------------------- | :----------------------------------------- |
+| Free     | 3                                 | 0.5 GB                                     |
+| Launch   | 5                                 | 3 GB                                       |
+| Scale    | 10                                | 5 GB                                       |
+| Business | 25                                | 20 GB                                      |
