@@ -18,8 +18,7 @@ const Layout = ({
   isHeaderStickyOverlay = false,
   hasThemesSupport = false,
   isDocPage = false,
-  isPostgresPage = false,
-  isAiChatPage = false,
+  docPageType = null,
   customType = null,
   isClient = false,
 }) => (
@@ -35,8 +34,7 @@ const Layout = ({
         isStickyOverlay={isHeaderStickyOverlay}
         hasThemesSupport={hasThemesSupport}
         isDocPage={isDocPage}
-        isPostgresPage={isPostgresPage}
-        isAiChatPage={isAiChatPage}
+        docPageType={docPageType}
         withBorder={headerWithBorder}
         customType={customType}
         isClient={isClient}
@@ -63,8 +61,7 @@ Layout.propTypes = {
   isHeaderStickyOverlay: PropTypes.bool,
   headerWithBorder: PropTypes.bool,
   isDocPage: PropTypes.bool,
-  isPostgresPage: PropTypes.bool,
-  isAiChatPage: PropTypes.bool,
+  docPageType: PropTypes.string,
   hasThemesSupport: PropTypes.bool,
   customType: PropTypes.shape({
     title: PropTypes.string,

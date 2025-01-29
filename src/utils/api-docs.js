@@ -4,7 +4,7 @@ const { glob } = require('glob');
 const matter = require('gray-matter');
 const jsYaml = require('js-yaml');
 
-const { DOCS_DIR_PATH, CHANGELOG_DIR_PATH } = require('../constants/docs');
+const { DOCS_DIR_PATH, CHANGELOG_DIR_PATH } = require('../constants/content');
 
 const getExcerpt = require('./get-excerpt');
 

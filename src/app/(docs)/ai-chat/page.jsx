@@ -17,9 +17,9 @@ const AiChatPage = async () => {
   return (
     <Layout
       headerClassName="lg:border-none"
+      docPageType="aiChat"
       burgerWithoutBorder
       isDocPage
-      isAiChatPage
       isHeaderSticky
       headerWithBorder
       hasThemesSupport

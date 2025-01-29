@@ -165,13 +165,13 @@ const mobileMenuItems = [
   },
 ];
 
-const MobileMenu = ({ isDarkTheme, isDocPage = false }) => {
+const MobileMenu = ({ isDarkTheme, isDocPage = false, docPageType = null }) => {
   const { isMobileMenuOpen, toggleMobileMenu } = useMobileMenu();
 
   return (
     <>
       <div className="absolute right-8 top-5 z-40 hidden gap-x-3 lg:flex lg:gap-x-4 md:right-4">
-        {isDocPage && <InkeepTrigger className="mobile-search" isDarkTheme={isDarkTheme} />}
+        {isDocPage && <InkeepTrigger className="mobile-search" docPageType={docPageType} />}
         <Burger
           className={clsx(
             'relative flex',
@@ -238,6 +238,7 @@ const MobileMenu = ({ isDarkTheme, isDocPage = false }) => {
 MobileMenu.propTypes = {
   isDarkTheme: PropTypes.bool,
   isDocPage: PropTypes.bool,
+  docPageType: PropTypes.string,
 };
 
 export default MobileMenu;

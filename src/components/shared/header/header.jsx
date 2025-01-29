@@ -200,8 +200,7 @@ const Header = ({
   isSticky = false,
   isStickyOverlay = false,
   isDocPage = false,
-  isPostgresPage = false,
-  isAiChatPage = false,
+  docPageType = null,
   withBorder = false,
   customType = null,
   isClient = false,
@@ -240,9 +239,9 @@ const Header = ({
                   {customType?.title || 'Docs'}
                 </Link>
               </div>
-              {!isPostgresPage && (
+              {docPageType !== 'postgres' && (
                 <div className="col-span-7 col-start-2 -ml-6 flex max-w-[832px] gap-3.5 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 xl:max-w-none md:hidden">
-                  <ModeToggler isAiChatPage={isAiChatPage} />
+                  <ModeToggler isAiChatPage={docPageType === 'aiChat'} />
                 </div>
               )}
               <div className="col-span-2 col-start-10 -ml-12 h-full max-w-64 3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6 xl:ml-0 lg:hidden">
@@ -278,8 +277,7 @@ Header.propTypes = {
   isSticky: PropTypes.bool,
   isStickyOverlay: PropTypes.bool,
   isDocPage: PropTypes.bool,
-  isPostgresPage: PropTypes.bool,
-  isAiChatPage: PropTypes.bool,
+  docPageType: PropTypes.string,
   withBorder: PropTypes.bool,
   customType: PropTypes.shape({
     title: PropTypes.string,

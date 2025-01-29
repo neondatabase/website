@@ -56,10 +56,8 @@ const DEFAULT_DATA = {
     'pg_anon',
     'pg_bigm',
     'pg_buffercache',
-    'pg_cron',
     'pg_freespacemap',
     'pg_proctab',
-    'pg_repack',
     'pg_similarity',
     'pgSphere',
     'pg_surgery',
@@ -232,7 +230,7 @@ const ExtensionRequest = ({
                   if (!isRecognized && email) {
                     window.zaraz.track('identify', { email });
                   }
-                  window.zaraz.track('Extension Requested', {"extension_name": selected});
+                  window.zaraz.track('Extension Requested', { extension_name: selected });
                 }
                 setRequestComplete(true);
               }

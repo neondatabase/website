@@ -186,8 +186,7 @@
         { "title": "Priority Support" },
         { "title": "Private Link" },
         {
-          "title": "Migration assistance",
-          "info": "With 0 migration fees—we will waive them"
+          "title": "Migration assistance"
         },
         { "title": "PITR (30 days)" }
       ]

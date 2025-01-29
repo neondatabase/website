@@ -36,18 +36,19 @@ const BlogPostCard = ({
 
   const formattedDate = getFormattedDate(date);
 
-  const link = (() => {
-    if (category) {
-      const extraCategory = EXTRA_CATEGORIES.find((cat) => cat.slug === category);
-      if (extraCategory) return `/${extraCategory.postSlug}/${slug}`;
-    }
+  const extraCategory = category && EXTRA_CATEGORIES.find((cat) => cat.slug === category);
 
+  const link = (() => {
+    if (extraCategory) return `${extraCategory.basePath}${slug}`;
     return `${LINKS.blog}/${slug}`;
   })();
 
   const cat = (() => {
-    if (category) {
-      return EXTRA_CATEGORIES.find((cat) => cat.slug === category);
+    if (extraCategory) {
+      return {
+        slug: `${BLOG_CATEGORY_BASE_PATH}${extraCategory.slug}`,
+        name: extraCategory.name,
+      };
     }
 
     if (categories) {
@@ -65,7 +66,9 @@ const BlogPostCard = ({
     <article
       className={clsx(
         'blog-post-card flex',
-        fullSize ? 'flex-row-reverse gap-6 xl:gap-5 md:flex-col-reverse' : 'flex-col gap-4',
+        fullSize
+          ? 'flex-row-reverse items-start gap-6 xl:gap-5 md:flex-col-reverse'
+          : 'flex-col gap-4',
         className
       )}
     >
@@ -107,7 +110,10 @@ const BlogPostCard = ({
           {/* category */}
           {cat && (
             <Link
-              className={clsx('font-medium', CATEGORY_COLORS[cat.slug] || 'text-green-45')}
+              className={clsx(
+                'font-med<a class="font-medium text-green-45" href="/blog/category/company">Company</a>ium',
+                CATEGORY_COLORS[cat.slug] || 'text-green-45'
+              )}
               to={cat.slug}
             >
               {cat.name}
