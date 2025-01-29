@@ -46,7 +46,7 @@ To view scheduled updates:
 1. Go to the Neon project dashboard.
 2. Select **Settings** > **Updates**.
 
-    ![Free plan updates UI](/docs/manage/free_plan_updates.png)
+   ![Free plan updates UI](/docs/manage/free_plan_updates.png)
 
 ## Updates on paid plans
 
@@ -67,14 +67,14 @@ In the Neon Console:
 2. Select **Settings** > **Updates**.
 3. Choose a day of the week and an hour. Updates will occur within this time window and take only a few seconds.
 
-    ![Paid plan updates UI](/docs/manage/paid_plan_updates.png)
+   ![Paid plan updates UI](/docs/manage/paid_plan_updates.png)
 
 You can check your project's settings for upcoming scheduled updates. We'll post a notice there at least **7 days** ahead of a planned update, letting you know when it's coming.
 
 </TabItem>
 
 <TabItem>
-On Neon paid plan accounts, the [Create project](https://api-docs.neon.tech/reference/createproject) and [Update project](https://api-docs.neon.tech/reference/updateproject) APIs allow defining a window for updates using the `maintenance_window` object, as shown in the `Update project` example below. 
+On Neon paid plan accounts, the [Create project](https://api-docs.neon.tech/reference/createproject) and [Update project](https://api-docs.neon.tech/reference/updateproject) APIs allow defining a window for updates using the `maintenance_window` object, as shown in the `Update project` example below.
 
 - The `weekdays` parameter is an integer (e.g., `7` for Sunday).
 - The `start_time` and `end_time` values are in UTC (`HH:MM` format) and must be at least one hour apart. Shorter intervals are not supported.
@@ -101,6 +101,7 @@ curl --request PATCH \
 }
 '
 ```
+
 </TabItem>
 
 </Tabs>
@@ -109,6 +110,6 @@ curl --request PATCH \
 
 Most Postgres connection drivers include built-in retry mechanisms that automatically handle short-lived connection interruptions. This means that for most applications, a brief restart should result in minimal disruption, as the driver will transparently reconnect.
 
-However, if your application has strict availability requirements, you may want to ensure that your connection settings are configured to allow for retries. Check your driver's documentation for options like connection timeouts, retry intervals, and connection pooling strategies. You retry configuration should account for the few seconds it takes to apply updates to your Neon compute. 
+However, if your application has strict availability requirements, you may want to ensure that your connection settings are configured to allow for retries. Check your driver's documentation for options like connection timeouts, retry intervals, and connection pooling strategies. You retry configuration should account for the few seconds it takes to apply updates to your Neon compute.
 
 <NeedHelp/>
