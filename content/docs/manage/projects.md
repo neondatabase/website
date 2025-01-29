@@ -115,7 +115,7 @@ To keep your Neon computes and Postgres instances up to date, Neon automatically
 
 On the Free Plan, updates are automatically scheduled. On paid plans, you can set a preferred day and time for updates. Restarts occur within your selected time window and take only a few seconds.
 
-To set your update schedule or view currently scheduled updates: 
+To set your update schedule or view currently scheduled updates:
 
 1. Go to **Settings** > **Updates**.
 1. Choose a day of the week and an hour. Updates will occur within this time window and take only a few seconds.
