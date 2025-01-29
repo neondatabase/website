@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/connectivity-issues
   - /docs/connect/connectivity-issues
-updatedOn: '2024-12-13T20:52:57.577Z'
+updatedOn: '2025-01-20T21:19:45.974Z'
 ---
 
 This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered include:
@@ -22,6 +22,7 @@ This topic describes how to resolve connection errors you may encounter when usi
 - [Relation not found](#relation-not-found)
 - [query_wait_timeout SSL connection has been closed unexpectedly](#querywaittimeout-ssl-connection-has-been-closed-unexpectedly)
 - [The request could not be authorized due to an internal error](#the-request-could-not-be-authorized-due-to-an-internal-error)
+- [Terminating connection due to idle-in-transaction timeout](#terminating-connection-due-to-idle-in-transaction-timeout)
 
 <Admonition type="info">
 Connection problems are sometimes related to a system issue. To check for system issues, please refer to the [Neon status page](https://neonstatus.com/).  
@@ -232,5 +233,19 @@ Alternatively, Neon can increase the `query_wait_timeout` value for you, but thi
 ## The request could not be authorized due to an internal error
 
 This error page in the Neon Console is most often the result of attempting to access a Neon project in one browser window after you've have logged in under a different Neon user account from another browser window. The error occurs because the currently logged in Neon user account does not have access to the Neon project. To avoid this issue, ensure that you're logged in with a Neon user account that has access to the Neon project you're trying to access.
+
+## Terminating connection due to idle-in-transaction timeout
+
+This error occurs when a session remains idle within an open transaction for longer than the specified timeout period. By default, the `idle_in_transaction_session_timeout` setting is set to `5min` (300,000 milliseconds). This timeout helps prevent idle sessions from holding locks or contributing to table bloat.
+
+If you encounter this error, you can adjust the `idle_in_transaction_session_timeout` setting to a higher value or disable it entirely by setting it to `0`. Below are ways to change this setting:
+
+1. Change at the session level: `SET idle_in_transaction_session_timeout = 0;`
+
+2. Change at the database level: `ALTER DATABASE <dbname> SET idle_in_transaction_session_timeout = 0;` (replace `<dbname>` with the name of your database)
+
+3. Change at the role level: `ALTER ROLE <role> SET idle_in_transaction_session_timeout = 0;` (replace `<role>` with the name of the user role)
+
+Be aware that leaving transactions idle for extended periods can prevent vacuuming and increase the number of open connections. Please use caution and consider only changing the value temporarily, as needed.
 
 <NeedHelp/>
