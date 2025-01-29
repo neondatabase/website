@@ -141,7 +141,7 @@ There are certain allowances associated with schema-only branches:
 - The `main` root branch created with each Neon project counts toward the _root branch allowance per project_, as do certain [backup branches](/docs/reference/glossary#backup-branch) created by restore operations.
 - There is a storage allowance for schema-only branches. The storage allowances do not apply when restoring data to a schema-only branch from another branch.
 
-| Plan     | Root branch allowance per project | Storage allowance per schema-only branches |
+| Plan     | Root branch allowance per project | Storage allowance per schema-only branch |
 | :------- | :-------------------------------- | :----------------------------------------- |
 | Free     | 3                                 | 0.5 GB                                     |
 | Launch   | 5                                 | 3 GB                                       |
