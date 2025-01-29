@@ -170,7 +170,7 @@ const Sidebar = ({ isDarkTheme, isClient }) => (
   <div className="flex items-center gap-x-6 lg:hidden">
     {!isClient && <GithubStars isDarkTheme={isDarkTheme} />}
     <Link
-      className="text-[13px] leading-none tracking-extra-tight lg:hidden"
+      className="whitespace-nowrap text-[13px] leading-none tracking-extra-tight lg:hidden"
       to={LINKS.login}
       theme={isDarkTheme ? 'white' : 'black'}
     >
@@ -178,7 +178,7 @@ const Sidebar = ({ isDarkTheme, isClient }) => (
     </Link>
 
     <Button
-      className="h-8 px-6 text-[13px] font-semibold leading-none tracking-extra-tight transition-colors duration-200 lg:hidden"
+      className="h-8 whitespace-nowrap px-6 text-[13px] font-semibold leading-none tracking-extra-tight transition-colors duration-200 lg:hidden"
       to={LINKS.signup}
       theme="primary"
       tag_name="Header"

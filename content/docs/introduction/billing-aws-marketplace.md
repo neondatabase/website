@@ -2,7 +2,7 @@
 title: AWS Marketplace
 enableTableOfContents: true
 subtitle: Pay for Neon via your AWS Billing account
-updatedOn: '2024-12-13T15:21:21.699Z'
+updatedOn: '2025-01-29T20:47:39.837Z'
 ---
 
 Neon offers a convenient way to manage your subscription and billing through the [AWS Marketplace](https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa). This option can help you consolidate your cloud expenses: it allows you to manage your Neon subscription alongside other AWS services, simplifying procurement by leveraging existing AWS agreements and processes.
@@ -37,7 +37,6 @@ Converting billing for a Neon Organization account from Neon to AWS requires the
 
    - Your AWS Account ID.
    - The Agreement ID for the new subscription.
-   - The AWS Entitlement ID
    - Your organization’s name and ID. For example:
      - **Organization Name**: `my_org_name`
      - **Organization ID**: `org-empty-sea-12345678`
