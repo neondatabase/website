@@ -7,11 +7,11 @@ updatedOn: '2025-01-10T00:37:35.161Z'
 
 <EarlyAccess />
 
-Neon supports creating branches that copy only the database schema from a specified source branch — without copying any data. This type of branch is useful when working with databases containing sensitive data. With schema-only branches, you can replicate your database structure without exposing confidential information, giving your team a safe, compliant way to build and test with Neon branches.
+Neon allows you to create branches that replicate only the database schema from a source branch, without copying any of the actual data. This feature is particularly valuable when working with sensitive information. Rather than creating branches that include confidential data, you can duplicate just the database structure and then populate it with your own data. This provides your team with a secure and compliant environment for development and testing using Neon branches.
 
 ## Creating schema-only branches
 
-You can create schema only branches in the Neon Console or using the Neon API, in much the same way you create any Neon branch.
+You can create schema-only branches in the Neon Console or using the Neon API, in much the same way you create any Neon branch.
 
 <Tabs labels={["Neon Console", "API"]}>
 
@@ -28,7 +28,12 @@ To create a schema-only branch from the Neon Console:
 </TabItem>
 
 <TabItem>
-To create a schema-only branch using the Neon API, use the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) endpoint with the `init_source` option set to `schema`, as shown below. Required values include:
+
+<Admonition type="note">
+The API is in Beta and subject to change.
+</Admonition>
+
+To create a schema-only branch using the Neon API, use the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) endpoint with the `init_source` option set to `schema-only`, as shown below. Required values include:
 - Your Neon `project_id`
 - The `parent_id`, which is the branch ID of the branch containing the schema you want to copy
 
@@ -43,7 +48,7 @@ curl --request POST \
   "branch": {
     "parent_id": "br-super-mode-w371g4od",
     "name": "my_schema_only_branch",
-    "init_source": "schema"
+    "init_source": "schema-only"
   }
 }
 '
@@ -122,20 +127,20 @@ Schema-only branches are independent [root branches](/docs/reference/glossary#ro
 - **No parent branch**: Schema-only branches are root branches. They do not have a parent branch. 
 - **No shared history**: Data added to a schema-only branch is independent and adds to your storage. There is no shared history with a parent.
 - **Reset from parent is not supported**: With no parent branch, [reset from parent](/docs/manage/branches#reset-a-branch-from-parent) operations are not supported.
-- **Restore is supported, but...** performing a [restore](/docs/guides/branch-restore) operation on a schema-only branch copies both schema and data from the source branch. Your branch will no longer be "schema-only".
+- **Restore is supported, but...** performing a [restore](/docs/guides/branch-restore) operation on a schema-only branch copies both schema and data from the source branch.
 - **Branch protection is supported**: Like any other branch, you can enable [branch protection](/docs/guides/protected-branches) for schema-only branches.
 
 ## Schema-only branch allowances
 
 There are certain allowances associated with schema-only branches:
 
-- A schema-only branch is a [root branch](/docs/reference/glossary#root-branch), and there is only a certain number of root branches permitted per Neon project, depending on your Neon plan. The `main` root branch created with each Neon project counts toward this allowance, as do certain [backup branches](/docs/reference/glossary#backup-branch) created by restore operations.
-- There is a storage allowance for schema-only branches. These storage allowances do not apply when restoring data to a schema-only branch from another branch.
+- A schema-only branch is a [root branch](/docs/reference/glossary#root-branch), and there is only a certain number of root branches permitted per Neon project, depending on your Neon plan. 
+- The `main` root branch created with each Neon project counts toward the _root branch allowance per project_, as do certain [backup branches](/docs/reference/glossary#backup-branch) created by restore operations.
+- There is a storage allowance for schema-only branches. The storage allowances do not apply when restoring data to a schema-only branch from another branch.
 
-  | Plan       | Root branch allowance per project        | Storage allowance per schema-only branches        |
-  |:-----------|:-----------------------------------------|:--------------------------------------------------|
-  | Free       | 3 (including your `main` root branch)    | 0.5 GB                                            |
-  | Launch     | 5 (including your `main` root branch)    | 3 GB                                              |
-  | Scale      | 10 (including your `main` root branch)   | 5 GB                                              |
-  | Business   | 25 (including your `main` root branch)   | 20 GB                                             |
-
+| Plan      | Root branch allowance per project | Storage allowance per schema-only branches |
+|:----------|:---------------------------------|:-----------------------------------------|
+| Free      | 3                                | 0.5 GB                                   |
+| Launch    | 5                                | 3 GB                                     |
+| Scale     | 10                               | 5 GB                                     |
+| Business  | 25                               | 20 GB                                    |

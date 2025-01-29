@@ -479,7 +479,7 @@ A paid plan offered by Neon that provides full platform and support access. It's
 
 ## schema-only branch
 
-A branch created with only the database schema from a specified source branch — without copying any data. This type of branch is useful for working with databases that contain sensitive data.  
+A branch that replicates only the database schema from a source branch, without copying any of the actual data. This feature is particularly valuable when working with sensitive information. Rather than creating branches that include confidential data, you can duplicate just the database structure and then populate it with your own data.
 
 Schema-only branches are [root branches](#root-branch), meaning they have no parent. As a root branch, each schema-only branch starts an independent line of data in a Neon project.  
 
