@@ -16,7 +16,8 @@ The AI landscape is poised for its next "ChatGPT moment" - not with smarter chat
 
 ## The Database challenge
 
-For these agents to thrive, they need infrastructure that matches their dynamic nature. This is where tools like Neon's database toolkit come in. The `@neondatabase/toolkit` simplifies data management for AI agents. It provides a seamless way to create, manage, and interact with Postgres databases, enabling agents to store, retrieve, and analyze data with ease.
+For these agents to thrive, they need infrastructure that matches their dynamic nature. This is where tools like Neon's database toolkit come in. The `@neondatabase/toolkit` simplifies data management for AI agents, providing them with an efficient way to create, manage, and interact with Postgres databases.
+.
 
 As agents evolve from simple helpers to full digital coworkers, their success hinges on infrastructure that's as agile as their programming. Tools like Neon's toolkit aren't just supporting this revolution - they're building the foundation for AI's next evolutionary leap.
 
