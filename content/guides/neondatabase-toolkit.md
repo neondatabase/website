@@ -34,7 +34,7 @@ Neon's serverless Postgres databases are built to be the ideal partner for AI ag
 | Scales easily        | Neon's serverless design automatically adjusts to your agent's needs, whether it's a quiet period or a busy time. You only pay for what you actually use, which saves money. |
 | Full Postgres power  | Your agents get all the reliability and features of Postgres, a database trusted by developers everywhere.                                                                   |
 | Micro Workloads      | Neon's cost-effective design is perfect for agents that only need a database for specific tasks. You don't have to pay for database resources when they aren't being used.   |
-| Cost-optimized       | Ideal for AI agents with varying workloads. You only pay for what you use, which is great for agents that have quiet periods or only need a database for specific tasks.     |
+| Cost-optimized       | Ideal for AI agents with varying workloads, which is great for agents that have quiet periods or only need a database for specific tasks.     |
 
 The `@neondatabase/toolkit` takes all the best things about Neon and puts them into an easy-to-use software kit (SDK). This toolkit is specifically designed to make database interaction super easy for AI agents.
 
