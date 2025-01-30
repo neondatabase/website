@@ -23,13 +23,25 @@ This topic describes how to enable the `pgvector` extension in Neon and how to c
 
 ## Enable the pgvector extension
 
-You can enable the `pgvector` extension by running the following `CREATE EXTENSION` statement in the **Neon SQL Editor** or from a client such as `psql` that is connected to Neon.
+You can enable the `pgvector` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor]((/docs/get-started-with-neon/query-with-neon-sql-editor)) or from a client such as [psql]((/docs/connect/query-with-psql-editor)) that is connected to Neon.
 
 ```sql
 CREATE EXTENSION vector;
 ```
 
-For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
+## Use a previous version of pgvector
+
+Neon allows you to install the previous version of `pgvector`, which is one version behind the latest supported version.
+
+For example, if Neon’s latest supported `pgvector` version is 0.8.0, you can install the prior version, 0.7.4, by specifying the version number:
+
+```sql
+CREATE EXTENSION vector VERSION '0.7.4';
+```
+
+To check the latest supported `pgvector` version on Neon, visit our [Postgres extension page](/docs/extensions/extensions-intro). You can install one version back from that version.
+
+For a full version history, see the [pgvector changelog](https://github.com/pgvector/pgvector/blob/master/CHANGELOG.md). Note that `pgvector` versions are not always sequential — for example, version 0.7.4 was followed by 0.8.0.
 
 ## Create a table to store vectors
 
