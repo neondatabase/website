@@ -19,7 +19,7 @@ const BlogPage = async () => {
       <h2 className="sr-only">Blog</h2>
       <ScrollLoader className="grid grid-cols-2 gap-x-6 xl:gap-x-5 md:grid-cols-1" itemsCount={8}>
         {posts.map((post, index) => (
-          <BlogGridItem index={index} post={post} />
+          <BlogGridItem key={post.slug} index={index} post={post} />
         ))}
       </ScrollLoader>
     </>
