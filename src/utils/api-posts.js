@@ -201,12 +201,16 @@ const getAllWpPosts = cache(async () => {
   let afterCursor = null;
 
   while (true) {
-    // eslint-disable-next-line no-await-in-loop
-    const { nodes: posts, pageInfo } = await fetchAllWpPosts(afterCursor);
+    try {
+      const { nodes: posts, pageInfo } = await fetchAllWpPosts(afterCursor);
 
-    allPosts = allPosts.concat(posts);
-    if (!pageInfo.hasNextPage) break;
-    afterCursor = pageInfo.endCursor;
+      allPosts = allPosts.concat(posts);
+      if (!pageInfo.hasNextPage) break;
+      afterCursor = pageInfo.endCursor;
+    } catch (error) {
+      console.error('Error fetching posts:', error);
+      break;
+    }
   }
 
   return allPosts;
