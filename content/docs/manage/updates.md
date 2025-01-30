@@ -2,12 +2,11 @@
 title: Manage updates
 enableTableOfContents: true
 isDraft: false
+tag: new
 updatedOn: '2024-12-13T21:17:10.768Z'
 ---
 
-<Admonition type="note">
-This feature is currently available for Free Plan accounts only. It will be available on Neon paid plan accounts soon.
-</Admonition>
+<FeatureBeta />
 
 To keep your Neon computes and Postgres instances up to date with the latest patches and Neon features, Neon automatically applies scheduled updates to your project's computes. We notify you of scheduled updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can schedule an update window — a specific day and hour for updates.
 
@@ -58,10 +57,6 @@ To view scheduled updates:
    ![Free plan updates UI](/docs/manage/free_plan_updates.png)
 
 ## Updates on paid plans
-
-<Admonition type="note" title="coming soon">
-This feature is currently available only on Free Plan accounts. It will be available on Neon paid plans soon.
-</Admonition>
 
 On Neon's paid plans, you can set a preferred update window by specifying the day and hour. Updates will be applied within this window, letting you plan for the required compute restart.
 

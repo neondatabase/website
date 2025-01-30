@@ -359,6 +359,7 @@
           items:
             - title: Updates
               slug: manage/updates
+              tag: new
     - title: Use cases
       slug: use-cases/use-cases-overview
       icon: docs
