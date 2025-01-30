@@ -66,9 +66,7 @@ const BlogPostCard = ({
     <article
       className={clsx(
         'blog-post-card flex',
-        fullSize
-          ? 'flex-row-reverse items-start gap-6 xl:gap-5 md:flex-col-reverse'
-          : 'flex-col gap-4',
+        fullSize ? 'flex-row-reverse items-start gap-6 xl:gap-5 md:flex-col' : 'flex-col gap-4',
         className
       )}
     >

@@ -20,7 +20,7 @@ const BlogPage = async () => {
       <div className="grid grid-cols-2 gap-x-6 xl:gap-x-5 md:grid-cols-1">
         <LoadMorePosts className="mt-8 md:mt-6" defaultCountPosts={8} countToAdd={8}>
           {posts.map((post, index) => (
-            <BlogGridItem index={index} post={post} />
+            <BlogGridItem key={post.slug} index={index} post={post} />
           ))}
         </LoadMorePosts>
       </div>

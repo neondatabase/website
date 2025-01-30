@@ -15,12 +15,11 @@ const BlogGridItem = ({ className, post, category, index }) => {
           : 'col-span-full border-t border-gray-new-15 py-8 first:border-0 first:border-t-0 first:pt-0 last:pb-0',
         className
       )}
-      key={post.slug}
       categories={{ nodes: [category] }}
       fullSize={!isFeatured}
       isPriority={index < 5}
       imageWidth={isFeatured ? 372 : 336}
-      imageHeight={isFeatured ? 212 : 189}
+      imageHeight={isFeatured ? 209 : 189}
       withAuthorPhoto
       {...post}
     />
@@ -31,7 +30,6 @@ BlogGridItem.propTypes = {
   className: PropTypes.string,
   post: PropTypes.shape({
     pageBlogPost: PropTypes.any,
-    slug: PropTypes.string.isRequired,
   }),
   category: PropTypes.string,
   index: PropTypes.number,
