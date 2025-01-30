@@ -130,7 +130,7 @@ runAgentWorkflow().catch(console.error);
 
 `@neondatabase/toolkit` takes away the complexity of databases, letting you concentrate on building smarter and more powerful AI agents. It’s the fastest way to connect your agents to data, helping them learn, think, and perform using the power of serverless Postgres.
 
-For more advanced uses, remember that the toolkit gives you access to the complete Neon API through `toolkit.apiClient`. This allows for more detailed customization and integration.
+For more advanced uses, remember that the toolkit gives you access to the complete [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) through `toolkit.apiClient`. This allows for more detailed customization and integration.
 
 ## Resources
 
