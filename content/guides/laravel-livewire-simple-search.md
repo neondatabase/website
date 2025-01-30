@@ -439,4 +439,4 @@ By combining the power of Laravel, the simplicity of Livewire, and the performan
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [Neon Documentation](/docs)
 
-Remember to always refer to the official documentation for the most up-to-date information and best practices.
+<NeedHelp />

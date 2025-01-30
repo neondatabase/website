@@ -2,7 +2,7 @@
 title: Branching with the Neon CLI
 subtitle: Learn how to create and delete branches with the Neon CLI
 enableTableOfContents: true
-updatedOn: '2024-10-07T13:55:51.298Z'
+updatedOn: '2024-11-30T11:53:56.058Z'
 ---
 
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon CLI. For other branch-related CLI commands, refer to [Neon CLI commands — branches](/docs/reference/cli-branches). This guide also describes how to use the `--api-key` option to authenticate CLI branching commands from the command line.
@@ -47,7 +47,7 @@ connection_uris
 ```
 
 <Admonition type="tip">
-The Neon CLI provides a `neon connection-string` command you can use to extract a connection uri programmatically. See [Neon CLI commands — connection-string](https://neon.tech/docs/reference/cli-connection-string).
+The Neon CLI provides a `neon connection-string` command you can use to extract a connection uri programmatically. See [Neon CLI commands — connection-string](/docs/reference/cli-connection-string).
 </Admonition>
 
 ## Create a branch from a non-default parent
@@ -80,7 +80,7 @@ connection_uris
 
 ## List branches with the CLI
 
-The following Neon CLI command lists all branches in your Neon project, as well as any branches shared with you. If your Neon account has more than one project, you will be required to specify a project ID using the `--project-id` option. To view the CLI documentation for this method, refer to the [Neon CLI reference](https://neon.tech/docs/reference/cli-branches#list).
+The following Neon CLI command lists all branches in your Neon project, as well as any branches shared with you. If your Neon account has more than one project, you will be required to specify a project ID using the `--project-id` option. To view the CLI documentation for this method, refer to the [Neon CLI reference](/docs/reference/cli-branches#list).
 
 ```bash
 neon projects list
@@ -104,7 +104,7 @@ Shared with you
 
 ## Delete a branch with the CLI
 
-The following Neon CLI command deletes the specified branch. If your Neon account has more than one project, you will be required to specify a project ID using the `--project-id` option. To view the CLI documentation for this command, refer to the [Neon CLI reference](https://neon.tech/docs/reference/cli-branches#delete). You can delete a branch by its ID or name.
+The following Neon CLI command deletes the specified branch. If your Neon account has more than one project, you will be required to specify a project ID using the `--project-id` option. To view the CLI documentation for this command, refer to the [Neon CLI reference](/docs/reference/cli-branches#delete). You can delete a branch by its ID or name.
 
 ```bash
 neon branches delete br-rough-sky-158193

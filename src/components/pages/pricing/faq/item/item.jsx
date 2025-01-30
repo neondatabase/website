@@ -45,7 +45,7 @@ const Item = ({
   };
 
   return (
-    <li className="border-b border-gray-new-20 py-3.5" id={id}>
+    <li className="overflow-hidden border-b border-gray-new-20 py-3.5" id={id}>
       <button
         className="relative flex w-full items-start gap-4 text-left after:absolute after:-inset-y-3.5 after:left-0 after:w-full"
         type="button"

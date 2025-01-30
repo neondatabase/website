@@ -4,10 +4,12 @@ subtitle: Find detailed instructions for connecting to Neon from various languag
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/guides-intro
-updatedOn: '2024-08-15T17:23:10.555Z'
+updatedOn: '2024-11-03T11:19:09.438Z'
 ---
 
 <TechnologyNavigation open>
+
+<a href="/docs/guides/dotnet-npgsql" title=".NET" description="Connect a .NET (C#) application to Neon" icon="dotnet"></a>
 
 <a href="/docs/guides/elixir-ecto" title="Elixir" description="Connect from Elixir with Ecto to Neon" icon="elixir"></a>
 

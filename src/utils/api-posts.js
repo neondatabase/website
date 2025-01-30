@@ -606,7 +606,6 @@ const getWpPostBySlug = cache(async (slug) => {
 
 // Query that executes when user requests a preview on a CMS,
 // the difference from a standard post query is that it uses Admin token to access unpublished posts and revisions of published posts
-
 const getWpPreviewPostData = async (id, status) => {
   const {
     refreshJwtAuthToken: { authToken },
@@ -828,11 +827,13 @@ const getWpPreviewPost = async (id) => {
   return graphQLClientAdmin(authToken).request(findPreviewPostQuery, { id });
 };
 
-const getAllWpCaseStudiesPosts = async () => {
+const getAllWpCaseStudiesPosts = cache(async () => {
   const caseStudiesQuery = gql`
     query CaseStudies {
-      caseStudies(where: { orderby: { field: DATE, order: ASC } }, first: 24) {
+      caseStudies(where: { orderby: { field: DATE, order: ASC } }, first: 100) {
         nodes {
+          id
+          title(format: RENDERED)
           caseStudyPost {
             isFeatured
             logo {
@@ -842,14 +843,6 @@ const getAllWpCaseStudiesPosts = async () => {
                 height
               }
             }
-            image {
-              mediaItemUrl
-              mediaDetails {
-                width
-                height
-              }
-            }
-            description
             quote
             author {
               name
@@ -863,7 +856,12 @@ const getAllWpCaseStudiesPosts = async () => {
               }
             }
           }
-          title(format: RENDERED)
+          caseStudiesCategories {
+            nodes {
+              slug
+              name
+            }
+          }
         }
       }
     }
@@ -871,12 +869,41 @@ const getAllWpCaseStudiesPosts = async () => {
   const data = await fetchGraphQL(graphQLClient).request(caseStudiesQuery);
 
   return data?.caseStudies?.nodes;
-};
+});
+
+const getAllWpCaseStudiesCategories = cache(async () => {
+  const categoriesQuery = gql`
+    query CaseStudiesCategories {
+      caseStudiesCategories {
+        nodes {
+          slug
+          name
+          caseStudyCategory {
+            featuredCaseStudy {
+              ... on CaseStudy {
+                id
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+  const data = await fetchGraphQL(graphQLClient).request(categoriesQuery);
+  const categories = data?.caseStudiesCategories?.nodes;
+  const updatedCategories = categories.map((category) => ({
+    ...category,
+    featuredCaseStudy: category.caseStudyCategory?.featuredCaseStudy?.id || null,
+  }));
+
+  return [{ name: 'All', slug: 'all' }, ...updatedCategories];
+});
 
 export {
   fetchAllWpPosts,
   getAllWpBlogCategories,
   getAllWpCaseStudiesPosts,
+  getAllWpCaseStudiesCategories,
   getAllWpPosts,
   getWpBlogPage,
   getWpPostBySlug,

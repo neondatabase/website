@@ -25,7 +25,7 @@ const Post = ({
 
     <div className="col-span-6 col-start-4 -mx-[26px] flex flex-col xl:col-span-8 xl:col-start-1 xl:mx-0">
       <article>
-        <h1 className="font-title text-[36px] font-medium leading-tight tracking-tighter xl:text-3xl">
+        <h1 className="post-title font-title text-[36px] font-medium leading-tight tracking-tighter xl:text-3xl">
           {title}
         </h1>
         {subtitle && (
@@ -34,7 +34,7 @@ const Post = ({
           </p>
         )}
         {author && <Author data={author} className="mt-5 hidden lg:block" />}
-        <Content className="mt-5" content={content} />
+        <Content className="post-content mt-5" content={content} />
       </article>
 
       <NavigationLinks
@@ -46,7 +46,7 @@ const Post = ({
     </div>
 
     <div className="col-start-11 col-end-13 -ml-11 h-full max-w-[256px] xl:col-start-10 lg:hidden">
-      <nav className="no-scrollbars sticky bottom-10 top-[104px] max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden">
+      <div className="sticky top-[148px] flex max-h-[calc(100vh-150px)] flex-col pb-5">
         {enableTableOfContents && <TableOfContents items={tableOfContents} />}
         <div
           className={clsx(
@@ -61,7 +61,7 @@ const Post = ({
             <Author data={author} />
           </div>
         )}
-      </nav>
+      </div>
     </div>
   </>
 );

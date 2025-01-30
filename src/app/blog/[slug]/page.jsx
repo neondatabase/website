@@ -65,7 +65,7 @@ const BlogPage = async ({ params }) => {
       <div className="safe-paddings">
         <article className="dark mx-auto grid max-w-[1472px] grid-cols-12 gap-x-10 pb-40 pt-16 2xl:px-10 xl:gap-x-6 xl:pb-32 xl:pt-12 lg:max-w-none lg:px-8 lg:pb-28 lg:pt-10 md:gap-x-0 md:px-4 md:pb-20 md:pt-8">
           <Hero
-            className="post-title col-start-4 col-end-10 xl:col-start-1 xl:col-end-9 lg:col-span-full"
+            className="col-start-4 col-end-10 xl:col-start-1 xl:col-end-9 lg:col-span-full"
             title={title}
             date={formattedDate}
             category={categories.nodes[0]}
@@ -73,7 +73,7 @@ const BlogPage = async ({ params }) => {
           />
 
           <Content
-            className="col-start-4 col-end-10 row-start-2 mt-10 xl:col-start-1 xl:col-end-9 lg:col-span-full lg:row-start-3"
+            className="post-content col-start-4 col-end-10 row-start-2 mt-10 xl:col-start-1 xl:col-end-9 lg:col-span-full lg:row-start-3"
             html={contentWithLazyBlocks}
           />
           <Aside

@@ -2,7 +2,7 @@
 title: Upgrading your Postgres version
 subtitle: Learn how upgrade to a new major Postgres version in Neon
 enableTableOfContents: true
-updatedOn: '2024-10-07T18:18:31.791Z'
+updatedOn: '2024-12-12T15:31:10.133Z'
 ---
 
 This topic describes how to upgrade your Neon project from one **major** Postgres version to a newer one.
@@ -13,7 +13,7 @@ Neon manages **minor** Postgres version upgrades for you, as per the [Neon Postg
 
 Each Neon project is tied to a specific Postgres major version, which you selected when creating your Neon project.
 
-You can check your Neon project's Postgres version in the **Project settings** widget on **Project Dashboard** or by running the following query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client connection to your database:
+You can check your Neon project's Postgres version in the **Settings** widget on **Project Dashboard** or by running the following query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client connection to your database:
 
 ```sql
 SELECT version();
@@ -34,13 +34,21 @@ At this time, you may also also want to apply any specific configurations to you
 
 - [Compute size](/docs/manage/endpoints#edit-a-compute)
 - [Autoscaling](/docs/guides/autoscaling-guide)
-- [Autosuspend](/docs/guides/auto-suspend-guide)
+- [Scale to Zero](/docs/guides/scale-to-zero-guide)
 - [Protected branches](/docs/guides/protected-branches)
 - [IP Allow](/docs/introduction/ip-allow)
 
 Alternatively, you can apply these configurations after migrating your data.
 
-### 2. Migrate your data using one of the following methods
+### 2. Upgrade your `psql` client (if applicable)
+
+While it’s not strictly necessary to keep your `psql` client version in sync with your Postgres database version, it’s generally recommended. Upgrading your `psql` client to the corresponding version of Postgres helps ensure you can use the latest features and avoid any potential incompatibility issues.
+
+<Admonition type="note" title="Postgres 17 Compatibility">
+When upgrading to **Postgres 17**, you may encounter issues with certain commands, such as `\l` (list databases), if you try to connect to your database with an older `psql` client (e.g., version 15 or 16). Upgrade your `psql` client to avoid this issue.
+</Admonition>
+
+### 3. Migrate your data using one of the following methods
 
 **Dump and Restore**
 
@@ -64,7 +72,7 @@ The logical replication method can be used to achieve a near-zero downtime migra
 - If you choose a dump and restore method, it is recommended that you use `pg_dump` and `pg_store` programs from the newer version of Postgres, to take advantage of any enhancements introduced in the newer version. Current releases of the these programs can read data from all previous Postgres versions supported by Neon.
 </Admonition>
 
-### 3. Switch over your applications
+### 4. Switch over your applications
 
 After the migration is complete and you have verified that your new database is working as expected, you can switch your application over to the database in your new Neon project by swapping out your current database connection details for your new database connection details.
 

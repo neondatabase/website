@@ -4,9 +4,8 @@ import { notFound } from 'next/navigation';
 import Post from 'components/pages/guides/post';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
-import { VERCEL_URL, MAX_TITLE_LENGTH } from 'constants/guides';
+import { VERCEL_URL } from 'constants/guides';
 import LINKS from 'constants/links';
-import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
 import { GUIDES_DIR_PATH, getAllPosts, getNavigationLinks, getPostBySlug } from 'utils/api-guides';
 import getMetadata from 'utils/get-metadata';
 import getTableOfContents from 'utils/get-table-of-contents';
@@ -22,21 +21,24 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { slug } = params;
   const post = getPostBySlug(slug, GUIDES_DIR_PATH);
+
   if (!post) return notFound();
+
   const {
     data: { title, subtitle },
+    author,
   } = post;
+
   const encodedTitle = Buffer.from(title).toString('base64');
+
   return getMetadata({
     title: `${title} - Neon Guides`,
     description: subtitle,
-    imagePath:
-      title.length < MAX_TITLE_LENGTH
-        ? `${VERCEL_URL}/guides/og?title=${encodedTitle}`
-        : DEFAULT_IMAGE_PATH,
+    imagePath: `${VERCEL_URL}/guides/og?title=${encodedTitle}`,
     pathname: `${LINKS.guides}/${slug}`,
     rssPathname: null,
     type: 'article',
+    authors: [author.name],
   });
 }
 

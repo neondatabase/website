@@ -19,21 +19,6 @@
       @apply overflow-x-auto;
     }
   }
-  .postgres-heading {
-    > a {
-      @apply border-b-0 text-green-45 opacity-0 transition-opacity duration-200 ease-in-out;
-    }
-
-    &:hover > a {
-      @apply opacity-100;
-    }
-  }
-
-  .postgres-paragraph {
-    > a {
-      @apply border-b-0 text-secondary-8 dark:text-green-45;
-    }
-  }
 
   .table-wrapper {
     @apply md:-mx-4 md:overflow-x-auto md:px-4;
@@ -83,6 +68,16 @@
     @apply prose-headings:font-sans prose-headings:font-semibold prose-headings:leading-tight prose-headings:text-black-new prose-p:my-3 prose-p:leading-normal dark:prose-headings:text-white;
     @apply prose-a:border-b prose-a:border-transparent prose-a:font-normal prose-a:text-secondary-8 prose-a:no-underline prose-a:transition-[border-color] prose-a:duration-200 prose-a:ease-in-out hover:prose-a:border-secondary-8 dark:prose-a:text-primary-1 dark:hover:prose-a:border-primary-1 prose-a:sm:break-words;
     @apply prose-pre:px-0;
+
+    > * {
+      &:first-child {
+        @apply mt-0;
+      }
+
+      &:last-child {
+        @apply mb-0;
+      }
+    }
 
     h2 {
       @apply mb-3 mt-10;
@@ -135,6 +130,17 @@
       }
     }
 
+    hr {
+      @apply my-8;
+    }
+
+    h2,
+    h3 {
+      & + hr {
+        @apply mt-0;
+      }
+    }
+
     .table-wrapper {
       @apply md:-mx-4 md:overflow-x-auto md:px-4;
     }
@@ -181,7 +187,7 @@
       > code {
         text-shadow: unset;
 
-        @apply !font-mono text-sm !text-black-new dark:!text-white dark:![text-shadow:unset] md:min-w-[686px];
+        @apply !font-mono text-sm !text-black-new dark:!text-white dark:![text-shadow:unset];
       }
     }
 
@@ -220,6 +226,10 @@
           @apply hidden;
         }
       }
+    }
+
+    details summary {
+      @apply cursor-pointer;
     }
   }
 

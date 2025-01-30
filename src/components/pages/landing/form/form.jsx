@@ -23,6 +23,7 @@ import FormFooter from './form-footer';
 import SubmitButton from './submit-button';
 
 const Form = ({
+  title,
   simpleField,
   fieldGroups,
   submitText,
@@ -190,6 +191,11 @@ const Form = ({
             )}
           >
             <div className="space-y-6">
+              {title && (
+                <h2 className="text-title text-center text-[32px] font-medium leading-tight tracking-tight sm:text-2xl">
+                  {title}
+                </h2>
+              )}
               {fieldGroups &&
                 fieldGroups.map((fieldGroup, index) => (
                   <fieldset
@@ -274,6 +280,7 @@ const fieldPropTypes = {
 };
 
 Form.propTypes = {
+  title: PropTypes.string,
   simpleField: PropTypes.shape(fieldPropTypes),
   fieldGroups: PropTypes.arrayOf({
     fieldGroup: PropTypes.shape({

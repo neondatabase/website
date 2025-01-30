@@ -26,6 +26,7 @@ import Data from './images/data.inline.svg';
 import Database from './images/database.inline.svg';
 import Discord from './images/discord.inline.svg';
 import Download from './images/download.inline.svg';
+import Drizzle from './images/drizzle.inline.svg';
 import Enable from './images/enable.inline.svg';
 import Filter from './images/filter.inline.svg';
 import FindReplace from './images/find-replace.inline.svg';
@@ -102,6 +103,7 @@ const icons = {
   database: Database,
   discord: Discord,
   download: Download,
+  drizzle: Drizzle,
   enable: Enable,
   filter: Filter,
   'find-replace': FindReplace,
@@ -162,9 +164,9 @@ const DetailIconCards = ({ children = null, withNumbers = false }) => {
   const ListComponent = withNumbers ? 'ol' : 'ul';
 
   return (
-    <ListComponent className="not-prose !my-10 grid auto-rows-fr grid-cols-2 gap-5 !p-0 sm:grid-cols-1">
+    <ListComponent className="not-prose !my-10 grid grid-cols-2 gap-5 !p-0 sm:grid-cols-1">
       {React.Children.map(children, (child, index) => {
-        const { children, href, description, icon } = child.props ?? {};
+        const { children, href, description, icon, target } = child.props ?? {};
         const Icon = icons[icon];
 
         return (
@@ -178,6 +180,7 @@ const DetailIconCards = ({ children = null, withNumbers = false }) => {
                 'dark:border-gray-new-20 dark:before:bg-[linear-gradient(275.74deg,rgba(36,38,40,0.8),rgba(36,38,40,0))] dark:hover:border-gray-new-30 sm:p-3'
               )}
               to={href}
+              {...(target && { target })}
             >
               <div
                 className={clsx(

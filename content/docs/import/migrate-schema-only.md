@@ -4,12 +4,14 @@ subtitle: Perform a schema-only migration with pg_dump and pg_restore
 redirectFrom:
   - /docs/import/import-schema-only
 enableTableOfContents: true
-updatedOn: '2024-09-30T11:41:25.025Z'
+updatedOn: '2025-01-27T15:25:05.414Z'
 ---
 
 This topic shows how to perform a schema-only migration using the `pg_dump` and `pg_restore` Postgres utilities.
 
 A schema-only migration may be necessary in certain scenarios. For example, when replicating data between two Postgres instances, the tables defined in your publication on the source database must also exist in the destination database, and they must have the same table names and columns. A schema dump and reload in this case may be faster than trying to manually create the required schema on the destination database.
+
+<Steps>
 
 ## Dump the schema
 
@@ -22,7 +24,7 @@ pg_dump --schema-only \
 	> schema_dump.sql
 ```
 
-- With the the `--schema-only` option, only object definitions are dumped. Data is excluded.
+- With the `--schema-only` option, only object definitions are dumped. Data is excluded.
 - The `--no-privileges` option prevents dumping privileges. Neon may not support the privileges you've defined elsewhere, or if dumping a schema from Neon, there maybe Neon-specific privileges that cannot be restored to another database.
 
 <Admonition type="tip">
@@ -73,3 +75,5 @@ After you've loaded the schema, you can view the result with this `psql` command
 ```sql
 \dt
 ```
+
+</Steps>

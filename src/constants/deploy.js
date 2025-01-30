@@ -4,19 +4,21 @@ import emSharnoff from 'images/agenda/em-sharnoff.png';
 import georgeMacKerron from 'images/agenda/george-mackerron.png';
 import heikkiLinnakangas from 'images/agenda/heikki-linnakangas.png';
 import mahmoudAbdelwahab from 'images/agenda/mahmoud-abdelwahab.png';
+import pranavAurora from 'images/agenda/pranav-aurora.jpeg';
+import nikitaShamgunov from 'images/pages/about/leadership/nikita-shamgunov.jpg';
 
 const DEPLOY_AGENDA = [
   {
-    event: 'Learn about the latest new features and improvements we released',
+    event: 'Keynote - Learn about the latest new features and improvements we released',
     company: 'Neon',
     time: '10:05 AM',
-    speaker: { name: 'Keynote' },
+    speaker: { name: 'Nikita Shamgunov', role: 'CEO', avatar: nikitaShamgunov },
     timestamp: '300',
   },
   {
-    event: 'New Feature Demo',
+    event: 'Demo #1 - New Feature',
     company: 'Neon',
-    time: '11:45 AM', // Example time, adjust as needed
+    time: '10:19 AM',
     speaker: {
       name: 'David Gomes',
       role: 'Lead Engineer',
@@ -25,12 +27,12 @@ const DEPLOY_AGENDA = [
       xUrl: 'https://x.com/davidrfgomes',
       linkedinUrl: 'https://www.linkedin.com/in/davidrfgomes/',
     },
-    timestamp: '6300', // Example timestamp, adjust as needed
+    timestamp: '1140',
   },
   {
-    event: 'New Postgres Extension',
+    event: 'Demo #2 - New Postgres Extension',
     company: 'Neon',
-    time: '12:00 PM', // Example time, adjust as needed
+    time: '10:28 AM',
     speaker: {
       name: 'George MacKerron',
       role: 'Software Engineer',
@@ -39,12 +41,25 @@ const DEPLOY_AGENDA = [
       xUrl: 'https://x.com/jawj',
       linkedinUrl: 'https://www.linkedin.com/in/georgemackerron/',
     },
-    timestamp: '7200', // Example timestamp, adjust as needed
+    timestamp: '1680',
+  },
+  {
+    event: 'Demo #3 - New Postgres Extension',
+    company: 'Mooncake Labs',
+    time: '10:39 AM',
+    speaker: {
+      name: 'Pranav Aurora',
+      role: 'Co-Founder of Mooncake Labs',
+      avatar: pranavAurora,
+      bio: 'Co-Founder of Mooncake Labs',
+      linkedinUrl: 'https://www.linkedin.com/in/pranav-aurora/',
+    },
+    timestamp: '2340',
   },
   {
     event: "What's new in Neon? Feature recap since GA",
     company: 'Neon',
-    time: '12:15 PM', // Example time, adjust as needed
+    time: '10:44 AM',
     speaker: {
       name: 'Anna Stepanyan',
       role: 'Head of Product',
@@ -52,12 +67,12 @@ const DEPLOY_AGENDA = [
       bio: 'Head of Product',
       linkedinUrl: 'https://www.linkedin.com/feed/',
     },
-    timestamp: '8100', // Example timestamp, adjust as needed
+    timestamp: '2640',
   },
   {
     event: 'Performance improvements in Postgres 17',
     company: 'Neon',
-    time: '12:45 PM', // Example time, adjust as needed
+    time: '10:47 AM',
     speaker: {
       name: 'Heikki Linnakangas',
       role: 'Co-Founder & Postgres Hacker',
@@ -65,12 +80,12 @@ const DEPLOY_AGENDA = [
       bio: 'Co-Founder & Postgres Hacker',
       linkedinUrl: 'https://www.linkedin.com/in/heikki-linnakangas-6b58bb203/',
     },
-    timestamp: '9900', // Example timestamp, adjust as needed
+    timestamp: '2820',
   },
   {
     event: "How Neon's Autoscaling works",
     company: 'Neon',
-    time: '12:30 PM', // Example time, adjust as needed
+    time: '10:50 AM',
     speaker: {
       name: 'Em Sharnoff',
       role: 'Software Engineer',
@@ -78,14 +93,13 @@ const DEPLOY_AGENDA = [
       bio: 'Software Engineer',
       linkedinUrl: 'https://www.linkedin.com/in/em-sharnoff/',
     },
-    timestamp: '9000', // Example timestamp, adjust as needed
+    timestamp: '3000',
   },
-
   {
-    event: 'Postgres for Agents: databases for the next generation of apps',
+    event: 'Postgres for AI agents and GitHub Copilot',
     description: 'Learn why Postgres on Neon is a perfect match for AI coding agents.',
     company: 'Neon',
-    time: '10:20 AM',
+    time: '10:54 AM',
     speaker: {
       name: 'Mahmoud Abdelwahab',
       role: 'Developer Advocate',
@@ -94,7 +108,7 @@ const DEPLOY_AGENDA = [
       githubUrl: 'https://github.com/m-abdlwahab',
       linkedinUrl: 'https://www.linkedin.com/in/thisismahmoud/',
     },
-    timestamp: '1200',
+    timestamp: '3240',
   },
 ];
 

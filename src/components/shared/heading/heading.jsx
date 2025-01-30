@@ -20,7 +20,7 @@ const styles = {
 };
 
 const HeadingBadge = ({ text }) => (
-  <span className="nowrap mb-2 inline-block rounded-full bg-pricing-primary-4 px-[14px] py-[7px] text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-primary-1 lg:text-[10px]">
+  <span className="nowrap mb-2 inline-block rounded-full bg-[rgba(19,236,182,0.1)] px-[14px] py-[7px] text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-primary-1 lg:text-[10px]">
     {text}
   </span>
 );

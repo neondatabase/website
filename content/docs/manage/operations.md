@@ -2,7 +2,7 @@
 title: System operations
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-09T20:21:45.351Z'
+updatedOn: '2024-11-30T11:53:56.075Z'
 ---
 
 An operation is an action performed by the Neon Control Plane on a Neon object or resource. Operations are typically initiated by user actions, such as creating a branch or deleting a database. Other operations may be initiated by the Neon Control Plane, such as suspending a [compute](/docs/reference/glossary#compute) after a period of inactivity or checking its availability. You can monitor operations to keep an eye on the overall health of your Neon project or to check the status of specific operations. When working with the Neon API, you can poll the status of operations to ensure that an API request is completed before issuing the next API request. For more information, see [Poll operation status](#poll-operation-status).
@@ -18,12 +18,14 @@ An operation is an action performed by the Neon Control Plane on a Neon object o
 | `Start compute`        | Starts a compute when there is an event or action that requires compute resources. For example, connecting to a suspended compute initiates this operation.                                                                                                                                                                      |
 | `Suspend compute`      | Suspends a compute after a period of inactivity. For information about how Neon manages compute resources, see [Compute lifecycle](/docs/introduction/compute-lifecycle/).                                                                                                                                                       |
 | `Tenant attach`        | Attaches a Neon project to storage.                                                                                                                                                                                                                                                                                              |
-| `Tenant detach`        | Detaches a Neon project from storage after the project as been idle for 30 days.                                                                                                                                                                                                                                                 |
+| `Tenant detach`        | Detaches a Neon project from storage after the project as been idle for an extended period.                                                                                                                                                                                                                                      |
 | `Tenant reattach`      | Reattaches a detached Neon project to storage when a detached project receives a request.                                                                                                                                                                                                                                        |
+| `Timeline archive`     | The time when a branch archive operation was initiated.                                                                                                                                                                                                                                                                          |
+| `Timeline unarchive`   | The time when the branch unarchive operation was initiated.                                                                                                                                                                                                                                                                      |
 
 ## View operations
 
-You can view system operations via the Neon Console, [Neon CLI](https://neon.tech/docs/reference/neon-cli), or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+You can view system operations via the Neon Console, [Neon CLI](/docs/reference/neon-cli), or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 <Tabs labels={["Neon Console", "CLI", "API"]}>
 

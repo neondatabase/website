@@ -24,7 +24,7 @@ const Hero = ({ title, description, date, category, className = null }) => (
         {date}
       </time>
     </div>
-    <h1 className="mt-3 font-title text-5xl font-medium leading-dense tracking-tighter xl:text-[44px] md:text-4xl sm:text-[32px] sm:tracking-[0.02em] xs:text-3xl">
+    <h1 className="post-title mt-3 font-title text-5xl font-medium leading-dense tracking-tighter xl:text-[44px] md:text-4xl sm:text-[32px] sm:tracking-[0.02em] xs:text-3xl">
       {title}
     </h1>
     <p className="mt-3 text-2xl leading-snug text-gray-new-90 xl:text-xl md:text-lg">

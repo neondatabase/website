@@ -9,6 +9,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import Link from 'components/shared/link';
 import ChevronRight from 'icons/chevron-right.inline.svg';
 
+import 'swiper/css';
+
 const Button = ({ prev = false, disabled, handleClick }) => (
   <button
     className={clsx(

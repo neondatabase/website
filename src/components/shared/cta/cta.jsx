@@ -11,6 +11,7 @@ const Cta = ({
   titleClassName,
   className = 'pb-[307px] pt-[445px] xl:py-[230px] lg:pb-[156px] lg:pt-[179px] sm:pb-[110px] sm:pt-[116px]',
   description = null,
+  descriptionClassName,
   buttonText = 'Get Started',
   buttonUrl = LINKS.signup,
   buttonClassName = 'mt-[38px] h-11 px-7 min-w-[144px] text-[15px] xl:mt-8 lg:mt-7 sm:mt-5 sm:h-10',
@@ -39,7 +40,12 @@ const Cta = ({
           dangerouslySetInnerHTML={{ __html: title }}
         />
         {description && (
-          <p className="mt-3.5 text-center text-lg tracking-extra-tight text-gray-new-70 xl:mt-3 xl:max-w-[414px] lg:max-w-[338px] lg:text-base md:mt-2 md:max-w-[289px] md:text-sm">
+          <p
+            className={clsx(
+              'mt-3.5 max-w-[704px] text-center text-lg tracking-extra-tight text-gray-new-70 xl:mt-3 xl:max-w-[414px] lg:max-w-[338px] lg:text-base md:mt-2 md:max-w-[289px] md:text-sm',
+              descriptionClassName
+            )}
+          >
             {description}
           </p>
         )}
@@ -68,6 +74,7 @@ Cta.propTypes = {
   buttonText: PropTypes.string,
   buttonUrl: PropTypes.string,
   description: PropTypes.string,
+  descriptionClassName: PropTypes.string,
   buttonClassName: PropTypes.string,
 };
 

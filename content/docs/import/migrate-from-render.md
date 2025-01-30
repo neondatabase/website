@@ -5,7 +5,7 @@ subtitle: Learn how to migrate your database from Render to Neon Postgres using 
 redirectFrom:
   - /docs/import/import-from-render
 enableTableOfContents: true
-updatedOn: '2024-10-12T11:16:13.590Z'
+updatedOn: '2025-01-27T15:25:05.412Z'
 ---
 
 This guide describes how to migrate a database from Render to Neon Postgres.
@@ -26,11 +26,13 @@ We use the `pg_dump` and `pg_restore` utilities, which are part of the Postgres 
 
 - Review our guide on [Migrating data from Postgres](/docs/import/migrate-from-postgres) for more comprehensive information on using `pg_dump` and `pg_restore`.
 
+<Steps>
+
 ## Prepare your Render database
 
 This section describes how to prepare your Render database for exporting data.
 
-To illustrate the migration workflow, we use the [LEGO Database](https://neon.tech/docs/import/import-sample-data#lego-database). This database contains information about LEGO sets, parts, and themes. We load the LEGO database into Render using the [psql](/docs/connect/query-with-psql-editor) command-line tool.
+To illustrate the migration workflow, we use the [LEGO Database](/docs/import/import-sample-data#lego-database). This database contains information about LEGO sets, parts, and themes. We load the LEGO database into Render using the [psql](/docs/connect/query-with-psql-editor) command-line tool.
 
 ### Retrieve Render connection details
 
@@ -161,6 +163,8 @@ After the restore process completes, you should verify that your data has been s
 
 After successfully migrating and verifying your data on Neon, you can update your application's connection strings to point to your new Neon database. We recommend that you keep your Render database dump file (`render_dump.bak`) as a backup until you've verified that the migration was successful.
 
+</Steps>
+
 ## Other migration options
 
 While this guide focuses on using `pg_dump` and `pg_restore`, there are other migration options available:
@@ -179,6 +183,6 @@ For more information on the Postgres utilities used in this guide, refer to the 
 
 - [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html)
 - [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html)
-- [Migrating data to Neon](https://neon.tech/docs/import/migrate-from-postgres)
+- [Migrating data to Neon](/docs/import/migrate-from-postgres)
 
 <NeedHelp/>

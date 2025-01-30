@@ -114,7 +114,7 @@ Neon cloud service is available for free during the [Limited and the Technical P
 
 Technical Preview Free Plan users can only create three Projects in Neon. Projects created under Technical Preview Free Plan are subject to additional limits:
 
-- Data size in the Project is limited to 10GiB;
+- Data size in the Project is limited to 10 GB;
 - PITR time window is limited to 7 days of _reasonable usage_;
 - Compute node can use up to 1vCPU/256 MB.
 

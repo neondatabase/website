@@ -3,7 +3,7 @@ title: Serverless
 subtitle: Postgres with instant provisioning, no server management, and pay-per-usage
   billing
 enableTableOfContents: true
-updatedOn: '2024-09-28T10:31:46.951Z'
+updatedOn: '2024-11-30T11:53:56.073Z'
 ---
 
 Neon takes the world's most loved database &#8212; Postgres &#8212; and delivers it as a serverless platform, enabling teams to ship reliable and scalable applications faster.
@@ -14,7 +14,7 @@ This serverless character also makes Neon databases highly agile and well-suited
 
 ![Multi-tenant storage](/docs/introduction/multi_tenant_storage.png)
 
-Read our [Architecture](https://neon.tech/docs/introduction/architecture-overview) section for more information on how Neon is built.
+Read our [Architecture](/docs/introduction/architecture-overview) section for more information on how Neon is built.
 
 ## What “serverless” means to us
 
@@ -24,7 +24,7 @@ To us, serverless means:
 
 - **Instant provisioning**: Neon allows you to spin up Postgres databases in seconds, eliminating the long setup times traditionally associated with database provisioning.
 - **No server management**: You don’t have to deal with the complexities of provisioning, maintaining, and administering servers. Neon handles it all, so you can focus on your application.
-- **Autoscaling**: Compute resources automatically scale up or down based on real-time demand, ensuring optimal performance without manual intervention.
+- **Autoscaling**: Compute resources automatically scale up or down based on real-time demand, ensuring optimal performance without manual intervention. No restarts are required.
 - **Usage-based pricing**: Your costs are directly tied to the resources your workload consumes—both compute and storage. There's no need to over-provision or pay for idle capacity.
 - **Built-in availability and fault tolerance**: We’ve designed our architecture for high availability and resilience, ensuring your data is safe and your applications are always accessible.
 - **Focus on business logic**: With the heavy lifting of infrastructure management handled by Neon, you can dedicate your time and effort to writing code and delivering value to your users.
@@ -40,7 +40,7 @@ _That you’ll get unpredictable costs due to traffic spikes_. We provide transp
 ## Learn more
 
 - [Autoscaling](/docs/introduction/autoscaling)
-- [Autosuspend](/docs/introduction/auto-suspend)
+- [Scale to Zero](/docs/introduction/scale-to-zero)
 - [Plans and billing](/docs/introduction/about-billing)
 - [Database-per-tenant use cases](https://neon.tech/use-cases/database-per-tenant)
 - [Variable workload use cases](https://neon.tech/variable-load)

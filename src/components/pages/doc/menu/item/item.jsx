@@ -3,7 +3,6 @@ import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
-import ArrowExternalIcon from 'icons/docs/arrow-external.inline.svg';
 
 import Tag from '../../tag';
 import Icon from '../icon';
@@ -19,13 +18,15 @@ const Item = ({
   activeMenuList,
   setActiveMenuList,
   closeMobileMenu = null,
+  root,
   children,
 }) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
 
-  const externalSlug = slug && slug.startsWith('http') ? slug : null;
-  const docSlug = `${basePath}${slug}/`;
+  const externalSlug = slug?.startsWith('http') ? slug : null;
+  const websiteSlug = slug?.startsWith('/') && `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${slug}`;
+  const docSlug = root ? slug : `${basePath}${slug}/`;
 
   const LinkTag = slug ? Link : 'button';
 
@@ -46,8 +47,9 @@ const Item = ({
             : 'font-normal text-gray-new-40 hover:text-black-new dark:text-gray-new-80 dark:hover:text-white'
         )}
         type={slug ? undefined : 'button'}
-        to={slug ? externalSlug || docSlug : undefined}
-        target={externalSlug ? '_blank' : '_self'}
+        to={slug ? externalSlug || websiteSlug || docSlug : undefined}
+        target={externalSlug || websiteSlug ? '_blank' : '_self'}
+        icon={externalSlug && 'external'}
         onClick={handleClick}
       >
         {ariaLabel && <span className="sr-only">{ariaLabel}</span>}
@@ -58,7 +60,6 @@ const Item = ({
           dangerouslySetInnerHTML={{ __html: title }}
         />
         {tag && <Tag className="ml-2 mt-0.5" label={tag} size="sm" />}
-        {externalSlug && <ArrowExternalIcon className="text-gray-new-90 dark:text-gray-new-15" />}
       </LinkTag>
       {children}
     </li>
@@ -89,6 +90,7 @@ Item.propTypes = {
   ).isRequired,
   setActiveMenuList: PropTypes.func.isRequired,
   closeMobileMenu: PropTypes.func,
+  root: PropTypes.bool,
   children: PropTypes.node,
 };
 

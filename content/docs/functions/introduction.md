@@ -3,7 +3,7 @@ title: Postgres functions
 enableTableOfContents: false
 redirectFrom:
   - /docs/postgres/functions-intro
-updatedOn: '2024-06-30T18:09:08.268Z'
+updatedOn: '2024-12-06T20:43:48.683Z'
 ---
 
 Get started with commonly-used Postgres functions with Neon's function guides. For other functions that Postgres supports, visit the official Postgres [Functions and Operators](https://www.postgresql.org/docs/current/functions.html) documentation.
@@ -54,6 +54,8 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 
 <a href="/docs/functions/array_to_json" description="Convert an SQL array to a JSON array" icon="app-store">array_to_json()</a>
 
+<a href="/docs/functions/json" description="Transform JSON data into relational views" icon="app-store">json()</a>
+
 <a href="/docs/functions/json_agg" description="Aggregate values into a JSON array" icon="app-store">json_agg()</a>
 
 <a href="/docs/functions/json_array_elements" description="Expand a JSON array into a set of rows" icon="app-store">json_array_elements()</a>
@@ -64,25 +66,37 @@ Get started with commonly-used Postgres functions with Neon's function guides. F
 
 <a href="/docs/functions/json_each" description="Expand JSON into a record per key-value pair" icon="app-store">json_each()</a>
 
-<a href="/docs/functions/jsonb_each" description="Expand JSONB into a record per key-value pair" icon="app-store">jsonb_each()</a>
+<a href="/docs/functions/json_exists" description="Check for Values in JSON Data Using SQL/JSON Path Expressions" icon="app-store">json_exists()</a>
 
 <a href="/docs/functions/json_extract_path" description="Extract a JSON sub-object at the specified path" icon="app-store">json_extract_path()</a>
 
-<a href="/docs/functions/jsonb_extract_path" description="Extract a JSONB sub-object at the specified path" icon="app-store">jsonb_extract_path()</a>
-
 <a href="/docs/functions/json_extract_path_text" description="Extract a JSON sub-object at the specified path as text" icon="app-store">json_extract_path_text()</a>
-
-<a href="/docs/functions/jsonb_extract_path_text" description="Extract a JSONB sub-object at the specified path as text" icon="app-store">jsonb_extract_path_text()</a>
 
 <a href="/docs/functions/json_object" description="Create a JSON object from key-value pairs" icon="app-store">json_object()</a>
 
-<a href="/docs/functions/jsonb_object" description="Create a JSONB object from key-value pairs" icon="app-store">jsonb_object()</a>
-
 <a href="/docs/functions/json_populate_record" description="Cast a JSON object to a record" icon="app-store">json_populate_record()</a>
 
-<a href="/docs/functions/jsonb_populate_record" description="Cast a JSONB object to a record" icon="app-store">jsonb_populate_record()</a>
+<a href="/docs/functions/json_query" description="Extract and Transform JSON Values with SQL/JSON Path Expressions" icon="app-store">json_query()</a>
+
+<a href="/docs/functions/json_scalar" description="Convert Text and Binary Data to JSON Values" icon="app-store">json_scalar()</a>
+
+<a href="/docs/functions/json_serialize" description="Convert JSON Values to Text or Binary Format" icon="app-store">json_serialize()</a>
+
+<a href="/docs/functions/json_table" description="Transform JSON data into relational views" icon="app-store">json_table()</a>
 
 <a href="/docs/functions/json_to_record" description="Convert a JSON object to a record" icon="app-store">json_to_record()</a>
+
+<a href="/docs/functions/json_value" description="Extract and Convert JSON Scalar Values" icon="app-store">json_value()</a>
+
+<a href="/docs/functions/jsonb_each" description="Expand JSONB into a record per key-value pair" icon="app-store">jsonb_each()</a>
+
+<a href="/docs/functions/jsonb_extract_path" description="Extract a JSONB sub-object at the specified path" icon="app-store">jsonb_extract_path()</a>
+
+<a href="/docs/functions/jsonb_extract_path_text" description="Extract a JSONB sub-object at the specified path as text" icon="app-store">jsonb_extract_path_text()</a>
+
+<a href="/docs/functions/jsonb_object" description="Create a JSONB object from key-value pairs" icon="app-store">jsonb_object()</a>
+
+<a href="/docs/functions/jsonb_populate_record" description="Cast a JSONB object to a record" icon="app-store">jsonb_populate_record()</a>
 
 <a href="/docs/functions/jsonb_to_record" description="Convert a JSONB object to a record" icon="app-store">jsonb_to_record()</a>
 

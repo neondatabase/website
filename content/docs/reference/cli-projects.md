@@ -2,7 +2,7 @@
 title: Neon CLI commands — projects
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-10-07T18:18:31.791Z'
+updatedOn: '2025-01-13T13:18:32.342Z'
 ---
 
 ## Before you begin
@@ -115,6 +115,10 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--set-context`  | Set the current context to the new project.                                                                                                                                                                       | boolean |          |
 | `--cu`           | The compute size for the default branch's primary compute. Could be a fixed size (e.g., "2") or a range delimited by a dash (e.g., "0.5-3").                                                                      | string  |          |
 
+<Admonition type="note">
+Neon projects created using the CLI use the default Postgres version, which is Postgres 17. To create a project with a different Postgres version, you can use the [Neon Console](https://neon.tech/docs/manage/projects#create-a-project) or [Neon API](https://api-docs.neon.tech/reference/createproject). 
+</Admonition>
+
 #### Examples
 
 - Create a project with a user-defined name in a specific region:
@@ -135,7 +139,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
   ```
 
     <Admonition type="tip">
-    The Neon CLI provides a `neon connection-string` command you can use to extract a connection uri programmatically. See [Neon CLI commands — connection-string](https://neon.tech/docs/reference/cli-connection-string).
+    The Neon CLI provides a `neon connection-string` command you can use to extract a connection uri programmatically. See [Neon CLI commands — connection-string](/docs/reference/cli-connection-string).
     </Admonition>
 
 - Create a project with the `--output` format of the command set to `json`. This output format returns all of the project response data, whereas the default `table` output format (shown in the preceding example) is limited in the information it can display.
@@ -165,7 +169,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
         "autoscaling_limit_max_cu": 1,
         "suspend_timeout_seconds": 0
         },
-        "pg_version": 15,
+        "pg_version": 17,
         "proxy_host": "us-east-2.aws.neon.tech",
         "branch_logical_size_limit": 204800,
         "branch_logical_size_limit_bytes": 214748364800,
@@ -228,7 +232,7 @@ This subcommand allows you to update a Neon project.
 neon projects update <id> [options]
 ```
 
-The `id` is the project ID, which you can obtain by listing your projects or from the **Project settings** page in the Neon Console.
+The `id` is the project ID, which you can obtain by listing your projects or from the **Settings** page in the Neon Console.
 
 #### Options
 
@@ -260,7 +264,7 @@ This subcommand allows you to delete a Neon project.
 neon projects delete <id> [options]
 ```
 
-The `id` is the project ID, which you can obtain by listing your projects or from the **Project settings** page in the Neon Console.
+The `id` is the project ID, which you can obtain by listing your projects or from the **Settings** page in the Neon Console.
 
 #### Options
 
@@ -289,7 +293,7 @@ This subcommand allows you to retrieve details about a Neon project.
 neon projects get <id> [options]
 ```
 
-The `id` is the project ID, which you can obtain by listing your projects or from the **Project settings** page in the Neon Console.
+The `id` is the project ID, which you can obtain by listing your projects or from the **Settings** page in the Neon Console.
 
 #### Options
 

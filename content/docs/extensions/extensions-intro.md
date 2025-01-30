@@ -1,7 +1,7 @@
 ---
 title: Postgres extensions
 enableTableOfContents: true
-updatedOn: '2024-09-30T21:23:25.537Z'
+updatedOn: '2025-01-24T20:21:15.304Z'
 ---
 
 Explore supported Postgres extensions by category. Also see:
@@ -9,13 +9,16 @@ Explore supported Postgres extensions by category. Also see:
 - [List view of supported extensions and versions](/docs/extensions/pg-extensions)
 - [Install an extension](/docs/extensions/pg-extensions#install-an-extension)
 - [Update an extension](/docs/extensions/pg-extensions#update-an-extension-version)
-- [Request extension support](/docs/extensions/pg-extensions#request-extension-support)
+
+Do you need an extension we don’t support yet? [Let us know](/docs/extensions/pg-extensions#request-extension-support).
 
 ## AI / Machine Learning
 
 <DetailIconCards>
 
-<a href="/docs/extensions/pg_tiktoken" description="Tokenize data in Postgres using the OpenAI tiktoken library" icon="app-store" icon="sparkle">pg_tiktoken</a>
+<a href="/docs/extensions/pg_tiktoken" description="Tokenize data in Postgres using the OpenAI tiktoken library" icon="sparkle">pg_tiktoken</a>
+
+<a href="/docs/extensions/pgrag" description="Create end-to-end Retrieval-Augmented Generation (RAG) pipelines" icon="sparkle">pgrag</a>
 
 <a href="/docs/extensions/pgvector" description="Store vector embeddings and perform vector similarity search in Postgres" icon="sparkle">pgvector</a>
 
@@ -24,6 +27,8 @@ Explore supported Postgres extensions by category. Also see:
 ## Analytics
 
 <DetailIconCards>
+
+<a href="/docs/extensions/pg_mooncake" description="Adds columnstore tables and DuckDB execution for fast analytics in Postgres." icon="a-chart">pg_mooncake</a>
 
 <a href="https://github.com/citusdata/postgresql-hll" description="Implements a HyperLogLog data structure as a native data type for efficient and tunable distinct value counting" icon="a-chart">hll</a>
 
@@ -155,6 +160,8 @@ Explore supported Postgres extensions by category. Also see:
 
 <a href="/docs/extensions/pg_prewarm" description="Allows manual preloading of relation data into the Postgres buffer cache, reducing access times for frequently queried tables" icon="table">pg_prewarm</a>
 
+<a href="/docs/extensions/pg_repack" description="Lets you remove bloat from tables and indexes, and optionally restore the physical order of clustered indexes" icon="table">pg_repack</a>
+
 <a href="https://github.com/ChenHuajun/pg_roaringbitmap" description="Implements Roaring Bitmaps in Postgres for efficient storage and manipulation of bit sets" icon="table">pg_roaringbitmap</a>
 
 <a href="https://github.com/postgrespro/rum" description="Provides an access method to work with a RUM index, designed to speed up full-text searches" icon="table">rum</a>
@@ -247,6 +254,8 @@ Explore supported Postgres extensions by category. Also see:
 
 <DetailIconCards>
 
+<a href="/docs/guides/neon-authorize#how-the-pgsessionjwt-extension-works" description="Enables RLS policies to verify user identity directly within SQL queries" icon="check">pg_session_jwt</a>
+
 <a href="https://www.postgresql.org/docs/16/pgcrypto.html" description="Offers cryptographic functions, allowing for encryption and hashing of data within Postgres" icon="check">pgcrypto</a>
 
 <a href="https://github.com/michelp/pgjwt" description="Implements JSON Web Tokens (JWT) in Postgres, allowing for secure token creation and verification" icon="check">pgjwt</a>
@@ -267,8 +276,20 @@ Explore supported Postgres extensions by category. Also see:
 
 <a href="/docs/extensions/neon-utils" description="Provides a function for monitoring how Neon's Autoscaling feature allocates vCPU in response to workload" icon="wrench">neon_utils</a>
 
+<a href="/docs/extensions/pg_cron" description="Lets you schedule and manage periodic jobs directly in your Postgres database" icon="wrench">pg_cron</a>
+
 <a href="https://pgtap.org/documentation.html" description="A unit testing framework for Postgres, enabling sophisticated testing of database queries and functions" icon="wrench">pgtap</a>
 
 <a href="https://www.postgresql.org/docs/current/contrib-spi.html" description="Provides functions for maintaining foreign key constraints" icon="wrench">refint</a>
+
+</DetailIconCards>
+
+## Remote data access
+
+<DetailIconCards>
+
+<a href="/docs/extensions/dblink" description="Provides functions for accessing and manipulating data in remote databases from within Postgres" icon="queries">dblink</a>
+
+<a href="/docs/extensions/postgres_fdw" description="Access data in remote Postgres databases as local tables" icon="queries">postgres_fdw</a>
 
 </DetailIconCards>

@@ -3,7 +3,7 @@ title: Protected branches
 subtitle: Learn how to use Neon's protected branches feature to secure your critical
   data
 enableTableOfContents: true
-updatedOn: '2024-10-16T12:24:24.100Z'
+updatedOn: '2024-12-12T15:31:10.128Z'
 ---
 
 Neon's protected branches feature implements a series of protections:
@@ -13,13 +13,14 @@ Neon's protected branches feature implements a series of protections:
 - Projects with protected branches cannot be deleted.
 - Computes associated with a protected branch cannot be deleted.
 - New passwords are automatically generated for Postgres roles on branches created from protected branches. [See below](#new-passwords-generated-for-postgres-roles-on-child-branches).
-- With additional configuration steps, you can apply IP Allow restrictions to protected branches only. The [IP Allow](/docs/introduction/ip-allow) feature is available on the Neon [Business](/docs/introduction/plans#business) plan. See [below](#how-to-apply-ip-restrictions-to-protected-branches).
+- With additional configuration steps, you can apply IP Allow restrictions to protected branches only. The [IP Allow](/docs/introduction/ip-allow) feature is available on the Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans. See [below](#how-to-apply-ip-restrictions-to-protected-branches).
+- Protected branches are not [archived](/docs/guides/branch-archiving) due to inactivity.
 
 The protected branches feature is available on all Neon paid plans.
 
 ## Set a branch as protected
 
-This example sets a single branch as protected, but you can have up to 5 protected branches.
+This example sets a single branch as protected, but you can have up to 2 protected branches on the Launch plan and 5 on the Scale plan.
 
 To set a branch as protected:
 
@@ -79,9 +80,8 @@ To configure an allowlist:
 
 1. Select a project in the Neon Console.
 2. On the Project Dashboard, select **Settings**.
-3. Select **IP Allow**.
-   ![IP Allow configuration](/docs/manage/ip_allow.png)
-4. Specify the IP addresses you want to permit. Separate multiple entries with commas.
+3. Select **Network Security**.
+4. Under **IP Allow**, specify the IP addresses you want to permit. Separate multiple entries with commas.
 5. Click **Save changes**.
 
 </TabItem>

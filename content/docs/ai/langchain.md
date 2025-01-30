@@ -2,7 +2,7 @@
 title: LangChain
 subtitle: Build AI applications faster with LangChain and Postgres
 enableTableOfContents: true
-updatedOn: '2024-07-15T14:10:09.616Z'
+updatedOn: '2024-12-11T08:48:36.316Z'
 ---
 
 LangChain is a popular framework for working with AI, Vectors, and embeddings. LangChain supports using Neon as a vector store, using the `pgvector` extension.
@@ -104,7 +104,7 @@ Hackable, fully-featured, pre-built [starter apps](https://github.com/neondataba
 
 <DetailIconCards>
 
-<a href="https://github.com/neondatabase/examples/tree/main/ai/langchain/chatbot-nextjs" description="A Netx.js AI chatbot starter app built with OpenAI and LangChain" icon="github">AI chatbot (OpenAI + LangChain)</a>
+<a href="https://github.com/neondatabase/examples/tree/main/ai/langchain/chatbot-nextjs" description="A Next.js AI chatbot starter app built with OpenAI and LangChain" icon="github">AI chatbot (OpenAI + LangChain)</a>
 
 <a href="https://github.com/neondatabase/examples/tree/main/ai/langchain/rag-nextjs" description="A Next.js RAG chatbot starter app built with OpenAI and LangChain" icon="github">RAG chatbot (OpenAI + LangChain)</a>
 

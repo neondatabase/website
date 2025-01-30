@@ -2,7 +2,7 @@
 title: LlamaIndex
 subtitle: Build AI applications faster with LlamaIndex and Postgres
 enableTableOfContents: true
-updatedOn: '2024-07-15T14:10:09.616Z'
+updatedOn: '2024-12-11T08:48:36.317Z'
 ---
 
 LlamaIndex is a popular framework for working with AI, Vectors, and embeddings. LlamaIndex supports using Neon as a vector store, using the `pgvector` extension.
@@ -89,7 +89,7 @@ Hackable, fully-featured, pre-built [starter apps](https://github.com/neondataba
 
 <DetailIconCards>
 
-<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/chatbot-nextjs" description="A Netx.js AI chatbot starter app built with OpenAI and LlamaIndex" icon="github">AI chatbot (OpenAI + LllamIndex)</a>
+<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/chatbot-nextjs" description="A Next.js AI chatbot starter app built with OpenAI and LlamaIndex" icon="github">AI chatbot (OpenAI + LllamIndex)</a>
 
 <a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/rag-nextjs" description="A Next.js RAG chatbot starter app built with OpenAI and LlamaIndex" icon="github">RAG chatbot (OpenAI + LlamaIndex)</a>
 

@@ -29,6 +29,7 @@ const Field = forwardRef(
       value,
       label,
       labelClassName,
+      textareaClassName,
       type = 'text',
       children = null,
       tag: Tag = 'input',
@@ -58,9 +59,12 @@ const Field = forwardRef(
           className={clsx(
             baseStyles,
             themes[theme],
-            Tag === FIELD_TAGS.TEXTAREA && 'min-h-[112px] py-3.5',
-            Tag === FIELD_TAGS.SELECT &&
-              'cursor-pointer truncate bg-[url(/images/chevron-down.svg)] bg-[length:12px] bg-[center_right_1rem] bg-no-repeat pr-8',
+            {
+              'block min-h-[112px] py-3.5': Tag === FIELD_TAGS.TEXTAREA,
+              'cursor-pointer truncate bg-[url(/images/chevron-down.svg)] bg-[length:12px] bg-[center_right_1rem] bg-no-repeat pr-8':
+                Tag === FIELD_TAGS.SELECT,
+            },
+            Tag === FIELD_TAGS.TEXTAREA && textareaClassName,
             error ? '!border-secondary-1' : 'focus:border-primary-1',
             isDisabled && '!cursor-default',
             inputClassName
@@ -80,8 +84,8 @@ const Field = forwardRef(
       {error && (
         <p
           className={clsx(
-            'absolute right-0 z-10 max-w-[350px] text-sm leading-none text-secondary-1 [&_a:hover]:no-underline [&_a]:underline [&_a]:underline-offset-2',
-            Tag === FIELD_TAGS.TEXTAREA ? 'top-full' : 'top-[calc(100%+0.5rem)]',
+            'error-message absolute right-0 top-[calc(100%+4px)] z-10 max-w-[350px] text-sm leading-none text-secondary-1',
+            '[&_a:hover]:no-underline [&_a]:underline [&_a]:underline-offset-2',
             errorClassName
           )}
           data-test="error-field-message"
@@ -99,6 +103,7 @@ Field.propTypes = {
   value: PropTypes.string,
   label: PropTypes.string.isRequired,
   labelClassName: PropTypes.string,
+  textareaClassName: PropTypes.string,
   type: PropTypes.string,
   tag: PropTypes.oneOf(Object.values(FIELD_TAGS)),
   inputClassName: PropTypes.string,

@@ -57,7 +57,7 @@ Using a serverless Postgres database lets you scale compute resources down to ze
 
 To get started, go to the [Neon Console](https://console.neon.tech/app/projects) and create a project.
 
-You will then be presented with a dialog that provides a connection string of your database. Click on the **Pooled connection** option and the connection string automatically updates.
+You will then be presented with a dialog that provides a connection string of your database. You can enable the **Connection pooling** toggle for a pooled connection string.
 
 ![](/guides/images/chatbot-astro-postgres-llamaindex/c200c4ed-f62d-469c-9690-c572c482c536.png)
 
@@ -74,7 +74,7 @@ postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmo
 - `dbname` is the name of the database. `neondb` is the default database created with a Neon project if you do not define your own database.
 - `?sslmode=require` an optional query parameter that enforces [SSL](https://www.cloudflare.com/en-gb/learning/ssl/what-is-ssl/) mode for better security when connecting to the Postgres instance.
 
-Save the connection string somewhere safe. It will be used to set the the **POSTGRES_URL** variable later.
+Save the connection string somewhere safe. It will be used to set the **POSTGRES_URL** variable later.
 
 ## Create a new Astro application
 

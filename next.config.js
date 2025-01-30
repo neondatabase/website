@@ -20,6 +20,24 @@ const defaultConfig = {
   async headers() {
     return [
       {
+        source: '/',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'max-age=0, s-maxage=31536000',
+          },
+        ],
+      },
+      {
+        source: '/home',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'max-age=0, s-maxage=31536000',
+          },
+        ],
+      },
+      {
         source: '/fonts/:slug*',
         headers: [
           {
@@ -58,6 +76,15 @@ const defaultConfig = {
       },
       {
         source: '/docs/:all*(svg|jpg|png)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=0, must-revalidate',
+          },
+        ],
+      },
+      {
+        source: '/images/technology-logos/:all*',
         headers: [
           {
             key: 'Cache-Control',
@@ -113,6 +140,11 @@ const defaultConfig = {
     }, []);
 
     return [
+      {
+        source: '/postgresql',
+        destination: '/postgresql/tutorial',
+        permanent: true,
+      },
       {
         source: '/blog/the-non-obviousness-of-postgres-roles',
         destination: '/blog/postgres-roles',
@@ -224,6 +256,21 @@ const defaultConfig = {
         source: '/ai',
         destination: '/docs/ai/ai-intro',
         permanent: true,
+      },
+      {
+        source: '/deploy',
+        destination: '/stage',
+        permanent: true,
+      },
+      {
+        source: '/generate-ticket',
+        destination: '/stage',
+        permanent: true,
+      },
+      {
+        source: '/changelog',
+        destination: '/docs/changelog',
+        permanent: false,
       },
       ...docsRedirects,
       ...changelogRedirects,

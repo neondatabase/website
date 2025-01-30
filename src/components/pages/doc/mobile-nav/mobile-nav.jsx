@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 
 import { getActiveItems } from 'components/pages/doc/sidebar/sidebar';
-import InkeepTrigger from 'components/shared/inkeep-trigger';
 import { HOME_MENU_ITEM } from 'constants/docs';
 import useBodyLockScroll from 'hooks/use-body-lock-scroll';
 import useClickOutside from 'hooks/use-click-outside';
@@ -40,7 +39,7 @@ const variants = {
   },
 };
 
-const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
+const MobileNav = ({ className = null, sidebar, slug, basePath, customName, customType }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const [wrapperHeight, setWrapperHeight] = useState(null);
@@ -134,7 +133,7 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
         ref={buttonRef}
         onClick={toggleMenu}
       >
-        <span className="text-ellipsis">Documentation menu</span>
+        <span className="text-ellipsis">{customName || 'Documentation'} menu</span>
         <ChevronRight
           className={clsx(
             'absolute right-[37px] top-1/2 -translate-y-1/2 rotate-90 transition-transform duration-200 md:right-5',
@@ -146,14 +145,13 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
       <LazyMotion features={domAnimation}>
         <m.div
           className={clsx(
-            'absolute inset-x-0 top-[calc(100%+1px)] z-20 overflow-x-hidden overflow-y-scroll bg-white dark:bg-gray-new-8'
+            'absolute inset-x-0 top-[calc(100%+1px)] z-20 max-h-[calc(100dvh-142px)] overflow-x-hidden overflow-y-scroll bg-white dark:bg-gray-new-8'
           )}
           initial="from"
           animate={controls}
           variants={variants}
           style={{ height: wrapperHeight }}
         >
-          <InkeepTrigger className="lg:hidden" topOffset={wrapperHeight || menuHeight} />
           <div className="relative w-full overflow-hidden" style={{ height: menuHeight }}>
             <Menu
               depth={0}
@@ -166,6 +164,7 @@ const MobileNav = ({ className = null, sidebar, slug, basePath }) => {
               menuWrapperRef={wrapperRef}
               activeMenuList={activeMenuList}
               setActiveMenuList={setActiveMenuList}
+              customType={customType}
             />
           </div>
         </m.div>
@@ -179,6 +178,11 @@ MobileNav.propTypes = {
   sidebar: PropTypes.arrayOf(PropTypes.shape()),
   slug: PropTypes.string.isRequired,
   basePath: PropTypes.string.isRequired,
+  customName: PropTypes.string,
+  customType: PropTypes.shape({
+    title: PropTypes.string,
+    link: PropTypes.string,
+  }),
 };
 
 export default MobileNav;

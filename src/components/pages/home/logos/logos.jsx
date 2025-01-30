@@ -1,18 +1,18 @@
 import clsx from 'clsx';
 
 import Container from 'components/shared/container';
-import akqaIcon from 'icons/home/logos/akqa.svg';
 import bcgIcon from 'icons/home/logos/bcg.svg';
-import outfront7Icon from 'icons/home/logos/outfront7.svg';
+import outfrontIcon from 'icons/home/logos/outfront7.svg';
+import replitIcon from 'icons/home/logos/replit.svg';
 import retoolIcon from 'icons/home/logos/retool.svg';
-import vercelIcon from 'icons/home/logos/vercel.svg';
+import v0Icon from 'icons/home/logos/v0.svg';
 import zimmerBiometIcon from 'icons/home/logos/zimmer-biomet.svg';
 
 const logos = [
   {
-    logo: vercelIcon,
-    alt: 'Vercel',
-    width: 100,
+    logo: v0Icon,
+    alt: 'Vercel V0',
+    width: 40,
   },
   {
     logo: zimmerBiometIcon,
@@ -30,14 +30,14 @@ const logos = [
     width: 101,
   },
   {
-    logo: outfront7Icon,
-    alt: 'outfront7',
+    logo: outfrontIcon,
+    alt: 'Outfront Media',
     width: 123,
   },
   {
-    logo: akqaIcon,
-    alt: 'akqa',
-    width: 58,
+    logo: replitIcon,
+    alt: 'Replit',
+    width: 116,
   },
 ];
 

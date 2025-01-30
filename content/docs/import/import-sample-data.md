@@ -2,7 +2,7 @@
 title: Postgres sample data
 subtitle: 'Import sample data for learning, testing, and exploring Neon'
 enableTableOfContents: true
-updatedOn: '2024-09-25T16:51:08.903Z'
+updatedOn: '2024-10-26T08:44:49.114Z'
 ---
 
 This guide describes how to download and install sample data for use with Neon.
@@ -69,7 +69,7 @@ A table containing data about the periodic table of elements.
    psql postgresql://[user]:[password]@[neon_hostname]/periodic_table
    ```
 
-5. Look up the the element with the Atomic Number 10:
+5. Look up the element with the Atomic Number 10:
 
    ```sql
    SELECT * FROM periodic_table WHERE "AtomicNumber" = 10;
