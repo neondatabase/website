@@ -76,10 +76,12 @@ export default {
           ],
         },
         {
-          title: 'What is Neon?',
-          description: 'Serverless explainer updated',
-          theme: 'banner',
-          to: LINKS.serverless,
+          banner: {
+            title: 'What is Neon?',
+            description: 'Serverless explainer updated',
+            theme: 'banner',
+            to: LINKS.serverless,
+          },
         },
         {
           title: 'Workflow',

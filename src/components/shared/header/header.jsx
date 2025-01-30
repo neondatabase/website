@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import Image from 'next/image';
 import PropTypes from 'prop-types';
 import { Suspense } from 'react';
 
@@ -16,6 +17,7 @@ import ArrowIcon from 'icons/header/arrow-right.inline.svg';
 import { getGithubStars } from 'utils/get-github-data';
 
 import HeaderWrapper from './header-wrapper';
+import menuBanner from './images/menu-banner.jpg';
 
 const themePropTypes = {
   isDarkTheme: PropTypes.bool,
@@ -24,11 +26,11 @@ const themePropTypes = {
 const Navigation = ({ isDarkTheme }) => (
   <nav>
     <ul className="flex gap-x-10 xl:gap-x-8 lg:hidden [@media(max-width:1070px)]:gap-x-6">
-      {MENUS.header.map(({ to, text, items }, index) => {
+      {MENUS.header.map(({ to, text, sections }, index) => {
         const Tag = to ? Link : 'button';
         return (
           <li
-            className={clsx('relative [perspective:2000px]', items?.length > 0 && 'group')}
+            className={clsx('relative [perspective:2000px]', sections?.length > 0 && 'group')}
             key={index}
           >
             <Tag
@@ -40,7 +42,7 @@ const Navigation = ({ isDarkTheme }) => (
               theme={isDarkTheme && to ? 'white' : 'black'}
             >
               {text}
-              {items?.length > 0 && (
+              {sections?.length > 0 && (
                 <ChevronIcon
                   className={clsx(
                     '-mb-px w-2.5 opacity-60 dark:text-white [&_path]:stroke-2',
@@ -49,10 +51,10 @@ const Navigation = ({ isDarkTheme }) => (
                 />
               )}
             </Tag>
-            {items?.length > 0 && (
+            {sections?.length > 0 && (
               <div
                 className={clsx(
-                  'absolute -left-5 top-full w-[300px] pt-5',
+                  'absolute -left-5 top-full pt-5',
                   'pointer-events-none opacity-0',
                   'origin-top-left transition-[opacity,transform] duration-200 [transform:rotateX(-12deg)_scale(0.9)]',
                   'group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-hover:[transform:none]'
@@ -60,89 +62,125 @@ const Navigation = ({ isDarkTheme }) => (
               >
                 <ul
                   className={clsx(
-                    'relative flex min-w-[248px] flex-col gap-y-0.5 rounded-[14px] border p-2.5 dark:border-[#16181D] dark:bg-[#0B0C0F] dark:shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]',
+                    'relative flex flex-wrap items-start gap-x-10 gap-y-9 rounded-[14px] border px-7 py-6 dark:border-[#16181D] dark:bg-[#0B0C0F] dark:shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]',
+                    sections?.length > 1 && 'w-[560px]',
                     isDarkTheme
                       ? 'border-[#16181D] bg-[#0B0C0F] shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]'
                       : 'border-gray-new-94 bg-white shadow-[0px_14px_20px_0px_rgba(0,0,0,.1)]'
                   )}
                 >
-                  {items.map(({ icon, text, description, to }, index) => (
-                    <li key={index}>
-                      <Link
-                        className={clsx(
-                          'group/link relative flex items-center overflow-hidden whitespace-nowrap rounded-[14px] p-2 dark:text-white',
-                          'before:absolute before:inset-0 before:z-10 before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100 dark:before:bg-[#16181D]',
-                          isDarkTheme
-                            ? 'text-white before:bg-[#16181D]'
-                            : 'text-black-new before:bg-[#f5f5f5]'
-                        )}
-                        to={to}
-                      >
-                        <div
-                          className={clsx(
-                            'relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border dark:border-[#2E3038] dark:bg-[#16181D]',
-                            isDarkTheme
-                              ? 'border-[#2E3038] bg-[#16181D]'
-                              : 'border-gray-new-90 bg-[#F5F5F5]'
-                          )}
-                        >
-                          {isDarkTheme ? (
-                            <img
-                              className="h-5 w-5"
-                              src={icon.dark}
-                              width={20}
-                              height={20}
-                              loading="lazy"
+                  {sections.map(({ title, items, banner }, index) => {
+                    if (banner) {
+                      const { title, description, to } = banner;
+
+                      return (
+                        <li className="flex-1" key={index}>
+                          <Link className="relative" to={to}>
+                            <Image
+                              className="size-full"
+                              src={menuBanner}
+                              width={232}
+                              height={145}
                               alt=""
-                              aria-hidden
                             />
-                          ) : (
-                            <>
-                              <img
-                                className="h-5 w-5 dark:hidden"
-                                src={icon.light}
-                                width={20}
-                                height={20}
-                                loading="lazy"
-                                alt=""
-                                aria-hidden
-                              />
-                              <img
-                                className="hidden h-5 w-5 dark:block"
-                                src={icon.dark}
-                                width={20}
-                                height={20}
-                                loading="lazy"
-                                alt=""
-                                aria-hidden
-                              />
-                            </>
-                          )}
-                        </div>
-                        <span className="relative z-10 ml-2.5">
-                          <span className="block text-sm leading-dense tracking-[-0.01em] transition-colors duration-200">
-                            {text}
-                          </span>
-                          <span
-                            className={clsx(
-                              'mt-0.5 block text-[13px] font-light leading-dense tracking-[-0.02em]',
-                              isDarkTheme
-                                ? 'text-gray-new-50'
-                                : 'text-gray-new-40 dark:text-gray-new-50'
-                            )}
-                          >
-                            {description}
-                          </span>
-                        </span>
-                        <ArrowIcon
-                          className={clsx(
-                            'relative z-10 ml-auto mr-1.5 h-2.5 w-1.5 -translate-x-1 opacity-0 transition-[opacity,transform] duration-300 group-hover/link:translate-x-0 group-hover/link:opacity-100 dark:text-gray-new-70',
-                            isDarkTheme ? 'text-gray-new-70' : 'text-gray-new-40'
-                          )}
-                        />
-                      </Link>
-                    </li>
-                  ))}
+                            <div className="absolute bottom-3.5 left-4 z-10">
+                              <h3 className="text-sm text-white">{title}</h3>
+                              <p className="mt-1.5 text-xs font-light text-gray-new-50">
+                                {description}
+                              </p>
+                            </div>
+                          </Link>
+                        </li>
+                      );
+                    }
+
+                    return (
+                      <li className={clsx(sections?.length > 1 && 'flex-1')} key={index}>
+                        <h3 className="mb-5 text-[11px] font-medium uppercase text-gray-new-40 dark:text-gray-new-50">
+                          {title}
+                        </h3>
+                        <ul className="">
+                          {items.map(({ icon, text, description, to }, index) => (
+                            <li key={index}>
+                              <Link
+                                className={clsx(
+                                  'group/link relative flex items-center overflow-hidden whitespace-nowrap rounded-[14px] p-2 dark:text-white',
+                                  'before:absolute before:inset-0 before:z-10 before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100 dark:before:bg-[#16181D]',
+                                  isDarkTheme
+                                    ? 'text-white before:bg-[#16181D]'
+                                    : 'text-black-new before:bg-[#f5f5f5]'
+                                )}
+                                to={to}
+                              >
+                                <div
+                                  className={clsx(
+                                    'relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border dark:border-[#2E3038] dark:bg-[#16181D]',
+                                    isDarkTheme
+                                      ? 'border-[#2E3038] bg-[#16181D]'
+                                      : 'border-gray-new-90 bg-[#F5F5F5]'
+                                  )}
+                                >
+                                  {isDarkTheme ? (
+                                    <img
+                                      className="h-5 w-5"
+                                      src={icon.dark}
+                                      width={20}
+                                      height={20}
+                                      loading="lazy"
+                                      alt=""
+                                      aria-hidden
+                                    />
+                                  ) : (
+                                    <>
+                                      <img
+                                        className="h-5 w-5 dark:hidden"
+                                        src={icon.light}
+                                        width={20}
+                                        height={20}
+                                        loading="lazy"
+                                        alt=""
+                                        aria-hidden
+                                      />
+                                      <img
+                                        className="hidden h-5 w-5 dark:block"
+                                        src={icon.dark}
+                                        width={20}
+                                        height={20}
+                                        loading="lazy"
+                                        alt=""
+                                        aria-hidden
+                                      />
+                                    </>
+                                  )}
+                                </div>
+                                <span className="relative z-10 ml-2.5">
+                                  <span className="block text-sm leading-dense tracking-[-0.01em] transition-colors duration-200">
+                                    {text}
+                                  </span>
+                                  <span
+                                    className={clsx(
+                                      'mt-0.5 block text-[13px] font-light leading-dense tracking-[-0.02em]',
+                                      isDarkTheme
+                                        ? 'text-gray-new-50'
+                                        : 'text-gray-new-40 dark:text-gray-new-50'
+                                    )}
+                                  >
+                                    {description}
+                                  </span>
+                                </span>
+                                <ArrowIcon
+                                  className={clsx(
+                                    'relative z-10 ml-auto mr-1.5 h-2.5 w-1.5 -translate-x-1 opacity-0 transition-[opacity,transform] duration-300 group-hover/link:translate-x-0 group-hover/link:opacity-100 dark:text-gray-new-70',
+                                    isDarkTheme ? 'text-gray-new-70' : 'text-gray-new-40'
+                                  )}
+                                />
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             )}
