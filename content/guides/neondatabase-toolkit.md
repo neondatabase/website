@@ -137,5 +137,7 @@ For more advanced uses, remember that the toolkit gives you access to the comple
 - [@neondatabase/toolkit on npm](https://www.npmjs.com/package/@neondatabase/toolkit)
 - [@neon/toolkit on JSR](https://jsr.io/@neon/toolkit)
 - [Neon Documentation](https://neon.tech/docs/introduction)
+- [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api)
+- [Neon API keys](/docs/manage/api-keys#creating-api-keys)
 
 <NeedHelp/>
