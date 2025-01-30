@@ -1,7 +1,6 @@
-import clsx from 'clsx';
 import { notFound } from 'next/navigation';
 
-import BlogPostCard from 'components/pages/blog/blog-post-card';
+import BlogGridItem from 'components/pages/blog/blog-grid-item';
 import ScrollLoader from 'components/shared/scroll-loader';
 import { BLOG_BASE_PATH } from 'constants/blog';
 import SEO_DATA from 'constants/seo-data';
@@ -19,27 +18,9 @@ const BlogPage = async () => {
     <>
       <h2 className="sr-only">Blog</h2>
       <ScrollLoader className="grid grid-cols-2 gap-x-6 xl:gap-x-5 md:grid-cols-1" itemsCount={8}>
-        {posts.map((post, index) => {
-          const isFeatured = index < 2 && post.pageBlogPost;
-
-          return (
-            <BlogPostCard
-              className={clsx(
-                'py-8 first:pt-0 last:pb-0 md:py-6',
-                isFeatured
-                  ? 'pt-0 md:pt-0'
-                  : 'col-span-full border-t border-gray-new-15 py-8 first:border-0 first:border-t-0 first:pt-0 last:pb-0'
-              )}
-              key={post.slug}
-              fullSize={!isFeatured}
-              isPriority={index < 5}
-              imageWidth={isFeatured ? 372 : 336}
-              imageHeight={isFeatured ? 212 : 189}
-              withAuthorPhoto
-              {...post}
-            />
-          );
-        })}
+        {posts.map((post, index) => (
+          <BlogGridItem index={index} post={post} />
+        ))}
       </ScrollLoader>
     </>
   );
