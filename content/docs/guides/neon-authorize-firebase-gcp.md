@@ -3,7 +3,7 @@ title: Secure Your Data with Neon Authorize and Firebase or GCP Identity Platfor
 subtitle: Implement Row-Level Security in Postgres using Firebase or GCP Identity
   Platform
 enableTableOfContents: true
-updatedOn: '2024-12-12T15:31:10.128Z'
+updatedOn: '2025-01-29T23:50:53.958Z'
 ---
 
 <InfoBlock>
@@ -138,8 +138,8 @@ To learn more about the driver, see [Neon Serverless Driver](/docs/serverless/se
 Here is an example of setting up administrative and authenticated database connections in your `.env` file. Copy the connection strings for both the `neondb_owner` and `authenticated` roles. You can find them from **Connection Details** in the Neon Console, or using the Neon CLI:
 
 ```bash
-neonctl connection-string --role-name neondb_owner
-neonctl connection-string --role-name authenticated
+neon connection-string --role-name neondb_owner
+neon connection-string --role-name authenticated
 ```
 
 Add these to your `.env` file.
