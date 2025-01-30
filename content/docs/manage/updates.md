@@ -78,10 +78,10 @@ You can check your project's settings for upcoming scheduled updates. We'll post
 </TabItem>
 
 <TabItem>
-On Neon paid plan accounts, the [Create project](https://api-docs.neon.tech/reference/createproject) and [Update project](https://api-docs.neon.tech/reference/updateproject) APIs allow defining a window for updates using the `maintenance_window` object, as shown in the `Update project` example below.
+On Neon paid plans, the [Create project](https://api-docs.neon.tech/reference/createproject) and [Update project](https://api-docs.neon.tech/reference/updateproject) APIs let you define an update window using the `maintenance_window` object, as shown in the `Update project` example below.
 
-- The `weekdays` parameter is an integer (e.g., `7` for Sunday).
-- The `start_time` and `end_time` values are in UTC (`HH:MM` format) and must be at least one hour apart. Shorter intervals are not supported.
+- The `weekdays` parameter accepts an integer (`1` for Monday, `7` for Sunday) or an array of integers to specify multiple weekdays.
+- The `start_time` and `end_time` values must be in UTC (`HH:MM` format) and at least one hour apart. Shorter intervals are not supported. Both times must fall on the same day. For example, (`22:00`, `23:00`) and (`23:00–00:00`) are valid settings, but (`22:00`, `03:00`) is not, as it would span multiple days.
 
 ```bash
 curl --request PATCH \
