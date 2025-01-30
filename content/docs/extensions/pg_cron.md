@@ -18,10 +18,9 @@ Please note that `pg_cron` jobs will only run when your compute is active. We th
 
 ## Enable the `pg_cron` extension
 
-To install `pg_cron`, you must first enable it by setting the `cron.database_name` parameter to the name of the database where you want to install `pg_cron`. This requires running an API command using either the [Update project API](https://api-docs.neon.tech/reference/updateproject) or the [Update compute endpoint API](https://api-docs.neon.tech/reference/updateprojectendpoint). 
+To install `pg_cron`, you must first enable it by setting the `cron.database_name` parameter to the name of the database where you want to install `pg_cron`. This requires running an API command using either the [Update project API](https://api-docs.neon.tech/reference/updateproject) or the [Update compute endpoint API](https://api-docs.neon.tech/reference/updateprojectendpoint).
 
 The `cron.database_name` parameter is passed to your Postgres instance through the endpoint settings object. The following `Update project` API example shows where to specify your Neon `project_id`, [Neon API key](/docs/manage/api-keys), and database name.
-
 
 ```bash
 curl --request PATCH \
