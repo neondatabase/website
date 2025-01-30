@@ -4,7 +4,7 @@ subtitle: Enable Postgres as a vector store with the pgvector extension
 enableTableOfContents: true
 redirectFrom:
   - /docs/extensions/pg_embedding
-updatedOn: '2024-12-11T21:23:33.085Z'
+updatedOn: '2025-01-30T21:03:38.101Z'
 ---
 
 The `pgvector` extension enables you to store vector embeddings and perform vector similarity search in Postgres. It is particularly useful for applications involving natural language processing, such as those built on top of OpenAI's GPT models.
