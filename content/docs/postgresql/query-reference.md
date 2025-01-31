@@ -866,7 +866,7 @@ Get the maximum number of connections for your Postgres instance.
 SHOW max_connections;
 ```
 
-The `max_connections` setting is configured by Neon according to your compute size. See [Connection limits without connection pooling](/docs/connect/connection-pooling#connection-limits-without-connection-pooling).
+The `max_connections` setting is configured by Neon according to your compute size configuration. See [Connection limits without connection pooling](/docs/connect/connection-pooling#connection-limits-without-connection-pooling).
 
 <Admonition type="tip">
 You can use [connection pooling](/docs/connect/connection-pooling#connection-pooling) to increase your concurrent connection limit.

@@ -139,9 +139,9 @@ The size of your compute determines the amount of frequently accessed data you c
 
 In Postgres, the `shared_buffers` setting defines the amount of data that can be held in memory. In Neon, the `shared_buffers` parameter [scales with compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size) and Neon also uses a Local File Cache (LFC) to extend the amount of memory available for caching data. The LFC can use up to 80% of your compute's RAM.
 
-The Postgres `max_connections` setting defines your compute's maximum simultaneous connection limit and is set according to your compute size. Larger computes support higher maximum connection limits.
+The Postgres `max_connections` setting defines your compute's maximum simultaneous connection limit and is set according to your compute size configuration.
 
-The following table outlines the vCPU, RAM, LFC size (80% of RAM), and the `max_connections` limit for each compute size that Neon supports.
+The following table outlines the vCPU, RAM, LFC size (80% of RAM), and the `max_connections` limit for each compute size that Neon supports. To understand how `max_connections` is determined for an autoscaling configuration, see [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
 
 <Admonition type="note">
 Compute size support differs by [Neon plan](https://neon.tech/docs/introduction/plans). Autoscaling is supported up to 16 CU. Neon supports fixed compute sizes (no autoscaling) for computes sizes larger than 16 CU.
@@ -190,7 +190,7 @@ Compute size support differs by [Neon plan](https://neon.tech/docs/introduction/
 
 When selecting a compute size, ideally, you want to keep as much of your dataset in memory as possible. This improves performance by reducing the amount of reads from storage. If your dataset is not too large, select a compute size that will hold the entire dataset in memory. For larger datasets that cannot be fully held in memory, select a compute size that can hold your [working set](/docs/reference/glossary#working-set). Selecting a compute size for a working set involves advanced steps, which are outlined below. See [Sizing your compute based on the working set](#sizing-your-compute-based-on-the-working-set).
 
-Regarding connection limits, you'll want a compute size that can support your anticipated maximum number of concurrent connections. If you are using **Autoscaling**, it is important to remember that your `max_connections` setting is based on the **maximum compute size** in your autoscaling configuration, so it scales as you increase maximum compute size. To avoid the `max_connections` constraint, you can use a pooled connection with your application, which supports up to 10,000 concurrent user connections. See [Connection pooling](/docs/connect/connection-pooling).
+Regarding connection limits, you'll want a compute size that can support your anticipated maximum number of concurrent connections. If you are using **Autoscaling**, it is important to remember that your `max_connections` setting is based on both your minimum and the maximum compute size. See [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size) for details. To avoid any `max_connections` constraints, you can use a pooled connection with your application, which supports up to 10,000 concurrent user connections. See [Connection pooling](/docs/connect/connection-pooling).
 
 #### Sizing your compute based on the working set
 
@@ -209,7 +209,7 @@ Autoscaling is most effective when your data (either your full dataset or your w
 
 Consider this scenario: If your data size is approximately 6 GB, starting with a compute size of .25 CU can lead to suboptimal performance because your data cannot be adequately cached. While your compute _will_ scale up from .25 CU on demand, you may experience poor query performance until your compute scales up and fully caches your working set. You can avoid this issue if your minimum compute size can hold your working set in memory.
 
-As mentioned above, your `max_connections` setting is based on the maximum compute size in your autoscaling configuration. To avoid the `max_connections` constraint, you can use a pooled connection for your application. See [Connection pooling](/docs/connect/connection-pooling).
+As mentioned above, your `max_connections` setting is based on both your minimum and maximum compute size configuration. To avoid any `max_connections` constraints, you can use a pooled connection for your application. See [Connection pooling](/docs/connect/connection-pooling).
 
 ### Scale to zero configuration
 
