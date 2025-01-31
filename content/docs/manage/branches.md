@@ -26,22 +26,22 @@ To create a branch:
 2. Select **Branches**.
 3. Click **Create branch** to open the branch creation dialog.
    ![Create branch dialog](/docs/manage/create_branch.png)
-4. Select the **Data and schema** option (the default) to create a branch with both schema and data. If you're interested in schema-only branches, see [Schema-only branches](/docs/guides/branching-schema-only). 
-4. Enter a name for the branch.
-5. Select a parent branch — the branch you want to branch from.
-6. Select an **Include data up to** option to specify the data to be included in your branch.
+4. Select the **Data and schema** option (the default) to create a branch with both schema and data. If you're interested in schema-only branches, see [Schema-only branches](/docs/guides/branching-schema-only).
+5. Enter a name for the branch.
+6. Select a parent branch — the branch you want to branch from.
+7. Select an **Include data up to** option to specify the data to be included in your branch.
 
-    <Admonition type="note">
-    The **Specific date and time** and the **Specific Log Sequence Number Data** options do not include data changes that occurred after the specified date and time or LSN. You can only specify a date and time or LSN value that falls within your [history retention window](/docs/manage/projects#configure-history-retention).
-    </Admonition>
+<Admonition type="note">
+The **Specific date and time** and the **Specific Log Sequence Number Data** options do not include data changes that occurred after the specified date and time or LSN. You can only specify a date and time or LSN value that falls within your [history retention window](/docs/manage/projects#configure-history-retention).
+</Admonition>
 
-7. Click **Create new branch**.
+8. Click **Create new branch**.
 
-    You are presented with the connection details for your new branch and directed to the **Branch** overview page where you are shown the details for your new branch.
+   You are presented with the connection details for your new branch and directed to the **Branch** overview page where you are shown the details for your new branch.
 
-    <Admonition type="note" title="Postgres role passwords on branches">
-    When creating a new branch, the branch will have the same Postgres roles and passwords as the parent branch. If you want your branch created with new role passwords, you can enable [branch protection](/docs/guides/protected-branches).
-    </Admonition>
+   <Admonition type="note" title="Postgres role passwords on branches">
+   When creating a new branch, the branch will have the same Postgres roles and passwords as the parent branch. If you want your branch created with new role passwords, you can enable [branch protection](/docs/guides/protected-branches).
+   </Admonition>
 
 ## View branches
 
@@ -79,12 +79,12 @@ To view the branches in a Neon project:
    - **Last data reset**: The last time the branch was reset from the parent branch (only applicable to child branches). For information about the **Reset from parent** option, see [Reset from parent](/docs/guides/reset-from-parent).
    - **Compare to parent**: For information about the **Open schema diff** option, see [Schema diff](/docs/guides/schema-diff).
 
-    The branch details page also includes details about the **Computes**, **Roles & Databases**, and **Child branches** that belong to the branch. All of these objects are associated with a particular branch. For information about these objects, see:
+   The branch details page also includes details about the **Computes**, **Roles & Databases**, and **Child branches** that belong to the branch. All of these objects are associated with a particular branch. For information about these objects, see:
 
-    - [Manage computes](/docs/manage/endpoints#view-a-compute).
-    - [Manage roles](/docs/manage/roles)
-    - [Manage databases](/docs/manage/databases)
-    - [View branches](#view-branches)
+   - [Manage computes](/docs/manage/endpoints#view-a-compute).
+   - [Manage roles](/docs/manage/roles)
+   - [Manage databases](/docs/manage/databases)
+   - [View branches](#view-branches)
 
 ## Branch archiving
 
@@ -140,15 +140,15 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
 3. Copy the connection string. A connection string includes your role name, the compute hostname, and database name.
 4. Connect with `psql` as shown below.
 
-    ```bash shouldWrap
-    psql postgresql://[user]:[password]@[neon_hostname]/[dbname]
-    ```
+   ```bash shouldWrap
+   psql postgresql://[user]:[password]@[neon_hostname]/[dbname]
+   ```
 
-    <Admonition type="tip">
-    A compute hostname starts with an `ep-` prefix. You can also find a compute hostname on the **Branches** page in the Neon Console. See [View branches](#view-branches).
-    </Admonition>
+   <Admonition type="tip">
+   A compute hostname starts with an `ep-` prefix. You can also find a compute hostname on the **Branches** page in the Neon Console. See [View branches](#view-branches).
+   </Admonition>
 
-    If you want to connect from an application, the **Connection Details** widget on the project **Dashboard** and the [Frameworks](/docs/get-started-with-neon/frameworks) and [Languages](/docs/get-started-with-neon/languages) sections in the documentation provide various connection examples.
+   If you want to connect from an application, the **Connection Details** widget on the project **Dashboard** and the [Frameworks](/docs/get-started-with-neon/frameworks) and [Languages](/docs/get-started-with-neon/languages) sections in the documentation provide various connection examples.
 
 ## Reset a branch from parent
 
@@ -197,7 +197,7 @@ Neon has different branch types with different characteristics.
 
 ### Root branch
 
-A root branch is a branch without a parent branch. Each Neon project starts with a root branch named `main`, which cannot be deleted and is set as the [default branch](#default-branch) for the project. 
+A root branch is a branch without a parent branch. Each Neon project starts with a root branch named `main`, which cannot be deleted and is set as the [default branch](#default-branch) for the project.
 
 Neon also supports two other types of root branches that have no parent but _can_ be deleted:
 
@@ -206,12 +206,12 @@ Neon also supports two other types of root branches that have no parent but _can
 
 The number of root branches allowed in a project depends on your Neon plan.
 
-| Plan     | Root branch allowance per project | 
+| Plan     | Root branch allowance per project |
 | :------- | :-------------------------------- |
-| Free     | 3                                 | 
-| Launch   | 5                                 | 
-| Scale    | 10                                | 
-| Business | 25                                | 
+| Free     | 3                                 |
+| Launch   | 5                                 |
+| Scale    | 10                                |
+| Business | 25                                |
 
 ### Default branch
 
@@ -251,7 +251,6 @@ See [Schema-only branches](/docs/guides/branching-schema-only).
 ### Backup branch
 
 A branch created by a [point-in-time restore](#point-in-time-restore) operation. When you restore a branch from a particular point in time, the current branch is saved as a backup branch. Performing a restore operation on a root branch, creates a backup branch without a parent branch (a root branch). See [Branch restore](/docs/guides/branch-restore).
-
 
 ## Branching with the Neon CLI
 
