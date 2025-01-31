@@ -147,3 +147,7 @@ There are certain allowances associated with schema-only branches:
 | Launch   | 5                                 | 3 GB                                     |
 | Scale    | 10                                | 5 GB                                     |
 | Business | 25                                | 20 GB                                    |
+
+## Limitations
+
+Schema-only branches are not supported with experimental extensions that require enabling the `neon.allow_unstable_extensions` setting, such as the `pg_mooncake` extension. You can expect this limitation to be lifted in a future release.
