@@ -78,13 +78,13 @@ Of the parameter settings listed above, the `max_connections`, `maintenance_work
     max_connections = max(100, min(4000, 450.5 * compute_size))
     ``` 
 
-    For example, if you have a fixed compute size of 4 CU, that size would be both your `max_compute_size` and `min_compute_size`. Inputting that value into the formula gives you a `max_connections` setting of 1802. For an autoscaling configuration with a `min_compute_size` of 0.25 CU and a `max_compute_size` of 2 CU, the `max_connections` setting would be 901.
+    For example, if you have a fixed compute size of 4 CU, that size is be both your `max_compute_size` and `min_compute_size`. Inputting that value into the formula gives you a `max_connections` setting of 1802. For an autoscaling configuration with a `min_compute_size` of 0.25 CU and a `max_compute_size` of 2 CU, the `max_connections` setting would be 901.
 
     <Admonition type="note">
-    It's important to note that `max_connections` does not scale dynamically in an autoscaling configuration. It’s a static setting determined by your minimum and maximum compute size. If autoscaling is disabled, your fixed compute size (e.g., 4 CU) serves as both the minimum and maximum. 
+    It's important to note that `max_connections` does not scale dynamically in an autoscaling configuration. It’s a static setting determined by your minimum and maximum compute size.
     </Admonition>
 
-    You can also check your `max_connections` setting in the Neon Console. Go to **Branches**, select your branch, then go to the **Compute** tab and select **Edit**. Your `max_connections` setting is the "direct connections" value. You can adjust your compute configuration to see different values.
+    You can also check your `max_connections` setting in the Neon Console. Go to **Branches**, select your branch, then go to the **Compute** tab and select **Edit**. Your `max_connections` setting is the "direct connections" value. You can adjust the compute configuration to see how it impacts the number of direct connections.
 
     ![max_connections calculator](/docs/reference/max_connection_calculator.png)
 
@@ -104,10 +104,6 @@ Of the parameter settings listed above, the `max_connections`, `maintenance_work
     backends = 1 + max_connections + max_worker_processes
     shared_buffers_mb = max(128, (1023 + backends * 256) / 1024)
     ```
-
-<Admonition type="note">
-
-</Admonition>
 
 ### Configuring Postgres parameters for a session, database, or role
 

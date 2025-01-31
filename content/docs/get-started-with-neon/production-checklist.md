@@ -71,7 +71,7 @@ For a busy production system that is always active, this setting may not matter 
 
 ## Use a pooled connection
 
-The Postgres `max_connections` setting defines your basic maximum simultaneous connection limit and is set according to your compute size. Larger computes support higher `max_connections` settings. However, Neon supports connection pooling with [PgBouncer](https://www.pgbouncer.org/), which increases your connection limit up to 10,000 simultaneous connections. Enabling connection pooling simply requires using a pooled connection string instead of a standard non-pooled connection string. A pooled connection string includes `-pooler` in the Neon hostname, as shown in this example:
+The Postgres `max_connections` setting defines your basic maximum simultaneous connection limit and is set according to your compute size configuration. However, Neon supports connection pooling with [PgBouncer](https://www.pgbouncer.org/), which increases your connection limit up to 10,000 simultaneous connections. Enabling connection pooling simply requires using a pooled connection string instead of a standard non-pooled connection string. A pooled connection string includes `-pooler` in the Neon hostname, as shown in this example:
 
 ```bash
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require

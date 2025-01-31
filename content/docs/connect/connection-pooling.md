@@ -27,7 +27,7 @@ The `-pooler` option routes the connection to a connection pooling port at the N
 
 ## Connection limits without connection pooling
 
-Each Postgres connection creates a new process in the operating system, which consumes resources. Postgres limits the number of open connections for this reason. The Postgres connection limit is defined by the Postgres `max_connections` parameter. In Neon, `max_connections` is set according to your compute size &#8212; and if you are using Neon's Autoscaling feature, it is set according to your **maximum** compute size.
+Each Postgres connection creates a new process in the operating system, which consumes resources. Postgres limits the number of open connections for this reason. The Postgres connection limit is defined by the Postgres `max_connections` parameter. In Neon, `max_connections` is set according to your compute size. However, if you are using Neon's Autoscaling feature, `max_connections` is determined by both your minimum and maximum compute size — you can find the formula here: [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
 
 | Compute size | vCPU | RAM    | max_connections |
 | :----------- | :--- | :----- | :-------------- |
@@ -70,7 +70,7 @@ Each Postgres connection creates a new process in the operating system, which co
 | 54           | 54   | 216 GB | 4000            |
 | 56           | 56   | 224 GB | 4000            |
 
-The formula used to calculate `max_connections` for Neon computes is `RAM in bytes / 9531392 bytes`. For a Neon Free Plan compute, which has 1 GB of RAM, this works out to approximately 112 connections. Larger computes offered with paid plans have more RAM and therefore support a larger number of connections. For example, a compute with 12 GB of RAM supports up to 1351 connections. You can check the `max_connections` limit for your compute by running the following query from the Neon SQL Editor or a client connected to Neon:
+You can check the `max_connections` limit for your compute by running the following query from the Neon SQL Editor or a client connected to Neon:
 
 ```sql
 SHOW max_connections;
@@ -101,7 +101,7 @@ Similarly, even if role `alex` has 64 concurrently active transactions through t
 For further information, see [PgBouncer](#pgbouncer).
 
 <Admonition type="important">
-You will not be able to get interactive results from all 10,000 connections at the same time. Connections to the pooler endpoint still consume  connections on the main Postgres endpoint: PgBouncer forwards operations from a role's connections through its own pool of connections to Postgres, and adaptively adds more connections to Postgres as needed by other concurrently active role connections. The 10,000 connection limit is therefore most useful for "serverless" applications and application-side connection pools that have many open connections but infrequent and short [transactions](/docs/postgresql/query-reference#transactions).
+You will not be able to get interactive results from all 10,000 connections at the same time. Connections to the pooler endpoint still consume connections on the main Postgres endpoint: PgBouncer forwards operations from a role's connections through its own pool of connections to Postgres, and adaptively adds more connections to Postgres as needed by other concurrently active role connections. The 10,000 connection limit is therefore most useful for "serverless" applications and application-side connection pools that have many open connections but infrequent and short [transactions](/docs/postgresql/query-reference#transactions).
 </Admonition>
 
 ## PgBouncer
