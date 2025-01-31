@@ -11,7 +11,7 @@ Neon supports creating schema-only branches, letting you create branches that re
 
 ## Creating schema-only branches
 
-You can create schema-only branches in the Neon Console or using the Neon API, in much the same way you create any Neon branch.
+You can create schema-only branches in the Neon Console or using the Neon API, in much the same way you create any Neon branch. Support for the Neon CLI will come in a future release.
 
 <Tabs labels={["Neon Console", "API"]}>
 
