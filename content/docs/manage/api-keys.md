@@ -120,6 +120,16 @@ Project-scoped API keys have [member-level access](/docs/manage/organizations#us
 - Cannot perform organization-related actions or create new projects
 - Will stop working if the project is transferred out of the organization
 
+<Tabs labels={["Console", "API"]}>
+
+<TabItem>
+In your organization's **Settings** > **API keys**, click **Create new** and select **Project-scoped** to create a key for your chosen project.
+
+![Project-scoped API keys from the Console](/docs/manage/project_scoped_select.png)
+
+</TabItem>
+
+<TabItem>
 Any organization member can create an API key for any organization-owned project using the following command:
 
 ```bash shouldWrap
@@ -148,6 +158,10 @@ curl --request POST \
   "project_id": "project-id-123"
 }
 ```
+
+</TabItem>
+
+</Tabs>
 
 ## Make an API call
 
