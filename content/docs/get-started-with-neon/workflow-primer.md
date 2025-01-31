@@ -62,7 +62,7 @@ For more information, see:
 
 ### GitHub Actions
 
-If you're using GitHub Actions for your CI workflows, Neon provides GitHub Actions for [creating](/docs/guides/branching-github-actions#create-branch-action),  [deleting](/docs/guides/branching-github-actions#delete-branch-action), and [resetting](/docs/guides/branching-github-actions#reset-from-parent-action) branches — and there's also a [schema diff action](/docs/guides/branching-github-actions#schema-diff-action).
+If you're using GitHub Actions for your CI workflows, Neon provides GitHub Actions for [creating](/docs/guides/branching-github-actions#create-branch-action), [deleting](/docs/guides/branching-github-actions#delete-branch-action), and [resetting](/docs/guides/branching-github-actions#reset-from-parent-action) branches — and there's also a [schema diff action](/docs/guides/branching-github-actions#schema-diff-action).
 
 <Tabs labels={["Create branch", "Delete branch"]}>
 
