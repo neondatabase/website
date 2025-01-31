@@ -233,6 +233,8 @@
               slug: guides/branching-github-actions
             - title: Branching — Testing queries
               slug: guides/branching-test-queries
+            - title: Schema-only branches
+              slug: guides/branching-schema-only
         - title: Logical replication
           slug: guides/logical-replication-guide
           items:
