@@ -65,6 +65,10 @@ The following columns are included in the `neon_identity.users_sync` table:
 
 Updates to user profiles in the auth provider are automatically synchronized.
 
+<Admonition type="note">
+Do not try to change the `neon_identity.users_sync` table name. It's needed for the synchronization process to work correctly.
+</Admonition>
+
 ## Before and after Neon Identity
 
 Let's take a look at how Neon Identiy can help simplify the code in a typical todos application:
