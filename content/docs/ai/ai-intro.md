@@ -24,7 +24,7 @@ Neon supports Postgres for AI agents with the following tools and interfaces:
 
 <a href="https://github.com/AgentOps-AI/AgentStack/blob/main/agentstack/templates/crewai/tools/neon_tool.py" description="A Neon tool for AgentStack that allows agents to create ephemeral or long-lived Postgres instances for structured data storage" icon="github">Neon tool for AgentStack</a>
 
-<a href="https://composio.dev/tools?search=neon" description="A full integration between LLMs and AI agents and Neon's API" icon="openai">Neon tool for Composio</a>
+<a href="/guides/composio-crewai-neon" description="A full integration between LLMs and AI agents and Neon's API" icon="code">Neon tool for Composio</a>
 
 </DetailIconCards>
 
