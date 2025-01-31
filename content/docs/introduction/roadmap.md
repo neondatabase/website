@@ -21,7 +21,6 @@ Here's a snapshot of what we're working on now:
 - **More regions**: London 🇬🇧 and São Paulo 🇧🇷 are locked in for Q1 2025. Brazilian developers: we’d love to sponsor meetups and connect! Share your thoughts via the [Feedback form](https://console.neon.tech/app/projects?modal=feedback) in the Neon Console or our [Discord feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042). If you'd like support in other regions, please [submit a request](/docs/introduction/regions#request-a-region).
 - **Improved migration assistance**: The [Neon Migration Assistant](/docs/import/migration-assistant) was introduced in Q4 2024. More improvements are coming in 2025 to make data import easier and faster.
 - **Support for the [pg_search](https://github.com/paradedb/paradedb/tree/dev/pg_search) extension**: This extension enables full text search over heap tables.
-- **Foreign Data Wrapper (FDW) support**: We recently added support for [dblink](/docs/extensions/dblink). Support for [postgres_fdw](/docs/extensions/postgres_fdw) is coming soon.
 - **Scheduled updates**: We will be introducing scheduled updates for Postgres, security patches, and Neon feature enhancements. [Learn more](/docs/changelog/2025-01-24#scheduled-updates-coming-soon).
 - **Scheduled backups**: Regular backups with point-in-time recovery.
 - **Vercel preview deployment support**: We're adding support for preview deployments to our [Native Vercel Integration](/docs/guides/vercel-native-integration).
@@ -48,7 +47,7 @@ And here's a quick list of what we'll be taking on in the near future:
 
 ## What we've shipped recently 🚢
 
-- Support for the [dblink](https://neon.tech/docs/extensions/dblink) and [pg_repack](/docs/extensions/pg_repack) Postgres extensions.
+- Support for the [postgres_fdw](/docs/extensions/postgres_fdw), [dblink](https://neon.tech/docs/extensions/dblink) and [pg_repack](/docs/extensions/pg_repack) Postgres extensions.
 - **"Instagres": No signup, instant Postgres**: An app that lets you generate a Postgres database URL almost instantly — no sign up required. Give it a try at [https://www.instagres.com/](https://www.instagres.com/) or by running `npx instagres` in your terminal. See how fast Neon can spin up a Postgres database (AI agents loves this, btw).
 - **Neon Chat for Visual Studio Code**: This AI-powered assistant lets you chat with the latest Neon documentation without leaving your IDE
 - **A GitHub Copilot extension**: This extension provides chat-based access to the latest Neon documentation with repository context, making it easier to configure Neon for your project. You can find it here: [Neon Database Copilot Extension](https://github.com/marketplace/neon-database)

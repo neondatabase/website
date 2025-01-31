@@ -123,9 +123,9 @@ Project-scoped API keys have [member-level access](/docs/manage/organizations#us
 <Tabs labels={["Console", "API"]}>
 
 <TabItem>
-In your organization's **Settings** > **API keys**, click **Create new**. Select **Project-scoped** and choose the project you want to create a key for. Give your key a descriptive name like `company-blog-prod-db` to indicate its purpose and scope.
+In your organization's **Settings** > **API keys**, click **Create new** and select **Project-scoped** to create a key for your chosen project.
 
-![Project-scoped API keys from the Console](/docs/manage/project-scoped-from-console.png)
+![Project-scoped API keys from the Console](/docs/manage/project_scoped_select.png)
 
 </TabItem>
 
