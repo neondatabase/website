@@ -4,7 +4,7 @@ subtitle: Automatically sync user profiles from your auth provider directly to y
   database
 enableTableOfContents: true
 tag: beta
-updatedOn: '2024-12-31T18:05:26.275Z'
+updatedOn: '2025-01-31T21:21:32.228Z'
 ---
 
 <ComingSoon />
