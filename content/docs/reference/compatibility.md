@@ -69,48 +69,44 @@ Because Neon is a managed Postgres service, Postgres parameters are not user-con
 ### Parameter settings that differ by compute size
 
 Of the parameter settings listed above, the `max_connections`, `maintenance_work_mem`,
-`shared_buffers`, and `max_worker_processes` differ by compute size, which is defined in [Compute Units (CU)](/docs/reference/glossary#compute-unit-cu).
-The following table shows values for each compute size. If autoscaling is turned on, the following
-numbers are valid for maximum CU size.
+`shared_buffers`, and `max_worker_processes` differ by your compute size—defined in [Compute Units (CU)](/docs/reference/glossary#compute-unit-cu)—or by your autoscaling configuration, which has a minimum and maximum compute size. To understand how values are set, see the formulas below.
 
-| Max. Compute Size | `max_connections` | `maintenance_work_mem` | `max_worker_processes` | `shared_buffers` |
-| :---------------- | :---------------- | :--------------------- | :--------------------- | :--------------- |
-| 0.25              | 112               | 64 MB                  | 12                     | 128 MB           |
-| 0.50              | 225               | 64 MB                  | 13                     | 128 MB           |
-| 1                 | 450               | 67 MB                  | 14                     | 128 MB           |
-| 2                 | 901               | 134 MB                 | 16                     | 230 MB           |
-| 3                 | 1351              | 201 MB                 | 18                     | 343 MB           |
-| 4                 | 1802              | 268 MB                 | 20                     | 456 MB           |
-| 5                 | 2253              | 335 MB                 | 22                     | 569 MB           |
-| 6                 | 2703              | 402 MB                 | 24                     | 682 MB           |
-| 7                 | 3154              | 470 MB                 | 26                     | 796 MB           |
-| 8                 | 3604              | 537 MB                 | 28                     | 909 MB           |
-| 9                 | 4000              | 604 MB                 | 30                     | 1008 MB          |
-| 10                | 4000              | 671 MB                 | 32                     | 1009 MB          |
-| 16                | 4000              | 671 MB                 | 44                     | 1012 MB          |
+- The formula for `max_connections` is:
 
-The formula for `max_connections` is
+    ```go
+    compute_size = min(max_compute_size, 8 * min_compute_size)
+    max_connections = max(100, min(4000, 450.5 * compute_size))
+    ``` 
 
-```go
-compute_size = min(max_compute_size, 8 * min_compute_size)
-max_connections = max(100, min(4000, 450.5 * compute_size))
-```
+    For example, if you have a fixed compute size of 4 CU, that size would be both your `max_compute_size` and `min_compute_size`. Inputting that value into the formula gives you a `max_connections` setting of 1802. For an autoscaling configuration with a `min_compute_size` of 0.25 CU and a `max_compute_size` of 2 CU, the `max_connections` setting would be 901.
 
-The formula for `max_worker_processes` is
+    <Admonition type="note">
+    It's important to note that `max_connections` does not scale dynamically in an autoscaling configuration. It’s a static setting determined by your minimum and maximum compute size. If autoscaling is disabled, your fixed compute size (e.g., 4 CU) serves as both the minimum and maximum. 
+    </Admonition>
 
-```go
-max_worker_processes := 12 + floor(2 * max_compute_size)
-```
+    You can also check your `max_connections` setting in the Neon Console. Go to **Branches**, select your branch, then go to the **Compute** tab and select **Edit**. Your `max_connections` setting is the "direct connections" value. You can adjust your compute configuration to see different values.
 
-The formula for `shared_buffers` is
+    ![max_connections calculator](/docs/reference/max_connection_calculator.png)
 
-```go
-backends = 1 + max_connections + max_worker_processes
-shared_buffers_mb = max(128, (1023 + backends * 256) / 1024)
-```
+    _You can use connection pooling in Neon to increase the number of supported connections. For more information, see [Connection pooling](/docs/connect/connection-pooling)._
+
+- The formula for `max_worker_processes` is:
+
+    ```go
+    max_worker_processes := 12 + floor(2 * max_compute_size)
+    ```
+
+    For example, if your `max_compute_size` is 4 CU, your `max_worker_processes` setting would be 20. 
+
+- The formula for `shared_buffers` is:
+
+    ```go
+    backends = 1 + max_connections + max_worker_processes
+    shared_buffers_mb = max(128, (1023 + backends * 256) / 1024)
+    ```
 
 <Admonition type="note">
-You can use connection pooling in Neon to increase the number of supported connections. For more information, see [Connection pooling](/docs/connect/connection-pooling).
+
 </Admonition>
 
 ### Configuring Postgres parameters for a session, database, or role
