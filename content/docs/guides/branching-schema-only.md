@@ -7,7 +7,7 @@ updatedOn: '2025-01-10T00:37:35.161Z'
 
 <EarlyAccess />
 
-Neon allows you to create branches that replicate only the database schema from a source branch, without copying any of the actual data. This feature is particularly valuable when working with sensitive information. Rather than creating branches that include confidential data, you can duplicate just the database structure and then populate it with your own data. This provides your team with a secure and compliant environment for development and testing using Neon branches.
+Neon supports creating schema-only branches, letting you create branches that replicate only the database schema from a source branch — without copying any of the actual data. This feature is ideal for working with confidential information. Instead of duplicating this sensitive data, you can now create a branch with just the database structure and populate it with randomized or anonymized data instead. This provides your team with a secure and compliant environment for developing and testing using Neon branches.
 
 ## Creating schema-only branches
 
