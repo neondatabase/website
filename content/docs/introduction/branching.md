@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/branches
   - /docs/conceptual-guides/branching
-updatedOn: '2024-12-04T13:30:28.566Z'
+updatedOn: '2025-01-31T16:41:54.394Z'
 ---
 
 With Neon, you can quickly and cost-effectively branch your data for development, testing, and various other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines.
@@ -14,11 +14,15 @@ With Neon, you can quickly and cost-effectively branch your data for development
 
 A branch is a copy-on-write clone of your data. You can create a branch from a current or past state. For example, you can create a branch that includes all data up to the current time or an earlier time.
 
-A branch is isolated from its originating data, so you are free to play around with it, modify it, or delete it when it's no longer needed. Changes to a branch are independent. A branch and its parent can share the same history (within the defined [point-in-time restore](/docs/reference/glossary#point-in-time-restore) window) but diverge at the point of branch creation. Writes to a branch are saved as a delta.
+<Admonition type="tip" title="working with sensitive data?">
+Neon also supports schema-only branching. [Learn more](/docs/guides/branching-schema-only).
+</Admonition>
 
-Creating a branch does not increase load on the parent branch or affect it in any way, which means you can create a branch without impacting the performance of your production system.
+A branch is isolated from its originating data, so you are free to play around with it, modify it, or delete it when it's no longer needed. Changes to a branch are independent. A branch and its parent can share the same data but diverge at the point of branch creation. Writes to a branch are saved as a delta.
 
-Each Neon project is created with a root branch called `main`. The first branch that you create is branched from the project's root branch. Subsequent branches can be branched from the root branch or from a previously created branch.
+Creating a branch does not increase load on the parent branch or affect it in any way, which means you can create a branch without impacting the performance of your production database.
+
+Each Neon project is created with a [root branch](/docs/reference/glossary#root-branch) called `main`. The first branch that you create is branched from the project's root branch. Subsequent branches can be branched from the root branch or from a previously created branch.
 
 ## Branching workflows
 
@@ -30,13 +34,13 @@ You can create a branch of your production database that developers are free to 
 
 ![development environment branch](/docs/introduction/branching_dev_env.png)
 
-The following video shows how to create a branch in the Neon Console. For step-by-step instructions, see [Create a branch](/docs/manage/branches#create-a-branch).
+The following video demonstrates creating a branch in the Neon Console. For step-by-step instructions, see [Create a branch](/docs/manage/branches#create-a-branch).
 
 <video autoPlay playsInline muted loop width="800" height="600">
   <source type="video/mp4" src="/docs/introduction/create_branch.mp4"/>
 </video>
 
-You can integrate branching into your development workflows and toolchains using the Neon CLI, API, or GitHub Actions. If you use Vercel, you can use the Neon Postgres Previews Integration to create a branch for each preview deployment.
+You can integrate branching into your development workflows and toolchains using the Neon CLI, API, or GitHub Actions. If you use Vercel, you can use the Neon [Postgres Previews Integration](/docs/guides/vercel-previews-integration) to create a branch for each preview deployment.
 
 Refer to the following guides for instructions:
 

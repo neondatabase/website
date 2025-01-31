@@ -4,10 +4,10 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started-with-neon/get-started-branching
-updatedOn: '2024-12-13T21:17:10.765Z'
+updatedOn: '2025-01-31T16:41:54.395Z'
 ---
 
-Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `main`, which is also designated as your [default branch](#default-branch). You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Plan limits define the number of branches you can create in a project and the amount of data you can store in a branch.
+Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `main`, which is also designated as your [default branch](#default-branch). You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](/docs/introduction/plans) define the number of branches you can create.
 
 A child branch is a copy-on-write clone of the parent branch. You can modify the data in a branch without affecting the data in the parent branch.
 For more information about branches and how you can use them in your development workflows, see [Branching](/docs/introduction/branching).
@@ -15,35 +15,8 @@ For more information about branches and how you can use them in your development
 You can create and manage branches using the Neon Console, [Neon CLI](/docs/reference/neon-cli), or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 <Admonition type="important">
-When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, preventing disk space from being reallocated. Neon retains a data history by default. You can configure the retention period. See [Point-in-time restore](/docs/introduction/point-in-time-restore). To keep data storage to a minimum, remove branches before they age out of the history retention window.
+When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, which will add to your storage usage as they age out of your project's [history retention window](/docs/introduction/point-in-time-restore#history-retention).
 </Admonition>
-
-## Default branch
-
-Each Neon project has a default branch. In the Neon Console, your default branch is identified by a `DEFAULT` tag. You can designate any branch as the default branch for your project.
-
-The default branch has a larger compute hour allowance that non-default branches on the Free Plan. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available.
-
-## Non-default branch
-
-Any branch not designated as the default branch is considered a non-default branch. You can rename or delete non-default branches.
-
-- For Neon Free Plan users, computes associated with **non-default branches** are suspended if you exceed the Neon Free Plan 5 hours per month for **non-default branches**.
-- For users on paid plans, default limits prevent more than 20 concurrently active computes. Beyond that limit, a compute associated with a non-default branch remains suspended.
-
-## Protected branch
-
-Neon's protected branches feature implements a series of protections:
-
-- Protected branches cannot be deleted.
-- Protected branches cannot be [reset](/docs/manage/branches#reset-a-branch-from-parent).
-- Projects with protected branches cannot be deleted.
-- Computes associated with a protected branch cannot be deleted.
-- New passwords are automatically generated for Postgres roles on branches created from protected branches. [See below](#new-passwords-generated-for-postgres-roles-on-child-branches).
-- With additional configuration steps, you can apply IP Allow restrictions to protected branches only. The [IP Allow](/docs/introduction/ip-allow) feature is available on the Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans. See [below](#how-to-apply-ip-restrictions-to-protected-branches).
-- Protected branches are not [archived](/docs/guides/branch-archiving) due to inactivity.
-
-Typically, a protected status is given to a branch or branches that hold production data or sensitive data. The protected branch feature is only supported on Neon's paid plans. See [Set a branch as protected](#set-a-branch-as-protected).
 
 ## Create a branch
 
@@ -53,21 +26,22 @@ To create a branch:
 2. Select **Branches**.
 3. Click **Create branch** to open the branch creation dialog.
    ![Create branch dialog](/docs/manage/create_branch.png)
-4. Enter a name for the branch.
-5. Select a parent branch. You can branch from your Neon project's [default branch](#default-branch) or a [non-default branch](#non-default-branch).
-6. Select an **Include data up to** option to specify the data to be included in your branch.
+4. Select the **Data and schema** option (the default) to create a branch with both schema and data. If you're interested in schema-only branches, see [Schema-only branches](/docs/guides/branching-schema-only).
+5. Enter a name for the branch.
+6. Select a parent branch — the branch you want to branch from.
+7. Select an **Include data up to** option to specify the data to be included in your branch.
 
 <Admonition type="note">
-The **Specific date and time** and the **Specific Log Sequence Number Data** options do not include data changes that occurred after the specified date and time or LSN, which means the branch contains data as it existed previously, allowing for point-in-time restore. You can only specify a date and time or LSN value that falls within your history retention window. See [Configure history retention](/docs/manage/projects#configure-history-retention).
+The **Specific date and time** and the **Specific Log Sequence Number Data** options do not include data changes that occurred after the specified date and time or LSN. You can only specify a date and time or LSN value that falls within your [history retention window](/docs/manage/projects#configure-history-retention).
 </Admonition>
 
-7. Click **Create new branch** to create your branch.
+8. Click **Create new branch**.
 
-You are directed to the **Branch** overview page where you are shown the details for your new branch.
+   You are presented with the connection details for your new branch and directed to the **Branch** overview page where you are shown the details for your new branch.
 
-<Admonition type="note" title="Postgres role passwords on branches">
-When creating a new branch, the branch will have the same Postgres role passwords as the parent branch. If you want your branch created with new Postgres role passwords, you can enable [branch protection](/docs/guides/protected-branches).
-</Admonition>
+   <Admonition type="note" title="Postgres role passwords on branches">
+   When creating a new branch, the branch will have the same Postgres roles and passwords as the parent branch. If you want your branch created with new role passwords, you can enable [branch protection](/docs/guides/protected-branches).
+   </Admonition>
 
 ## View branches
 
@@ -85,30 +59,32 @@ To view the branches in a Neon project:
    - **Compute hours**: Number of hours the branch's compute was active so far in the current billing period.
    - **Primary compute**: Shows the current compute size and status for the branch's compute.
    - **Data size**: Indicates the logical data size of each branch, helping you monitor your plan's storage limit. Data size does not include history.
+   - **Created by**: The account or integration that created the branch.
    - **Last active**: Shows when the branch's compute was last active.
 
 1. Select a branch from the table to view details about the branch.
 
    ![View branch details](/docs/manage/branch_details.png)
 
-   Branch details shown on the branch page include:
+   Branch details shown on the branch page may include:
 
-   - **Archive status**: When the branch was archived. For more, see [Branch archiving](/docs/guides/branch-archiving).
+   - **Archive status**: This only appears if the branch branch was archived. For more, see [Branch archiving](/docs/guides/branch-archiving).
    - **ID**: The branch ID. Branch IDs have a `br-` prefix.
-   - **Created**: The date and time the branch was created.
-   - **Compute hours**: The compute hours used by the branch in the current billing period.
+   - **Created on**: The date and time the branch was created.
+   - **Default compute hours**: The compute hours used by the default branch in the current billing period.
+   - **Non-default compute hours**: The compute hours used by the non-default branch in the current billing period.
    - **Data size**: The logical data size of the branch. Data size does not include history.
    - **Parent branch**: The branch from which this branch was created (only applicable to child branches).
    - **Branching point**: The point in time, in terms of data, from which the branch was created (only applicable to child branches).
    - **Last data reset**: The last time the branch was reset from the parent branch (only applicable to child branches). For information about the **Reset from parent** option, see [Reset from parent](/docs/guides/reset-from-parent).
    - **Compare to parent**: For information about the **Open schema diff** option, see [Schema diff](/docs/guides/schema-diff).
 
-The branch details page also includes details about the **Computes**, **Roles & Databases**, and **Child branches** that belong to the branch. In Neon, all of these objects are associated with a particular branch. For information about these objects, see:
+   The branch details page also includes details about the **Computes**, **Roles & Databases**, and **Child branches** that belong to the branch. All of these objects are associated with a particular branch. For information about these objects, see:
 
-- [Manage computes](/docs/manage/endpoints#view-a-compute).
-- [Manage roles](/docs/manage/roles)
-- [Manage databases](/docs/manage/databases)
-- [View branches](#view-branches)
+   - [Manage computes](/docs/manage/endpoints#view-a-compute).
+   - [Manage roles](/docs/manage/roles)
+   - [Manage databases](/docs/manage/databases)
+   - [View branches](#view-branches)
 
 ## Branch archiving
 
@@ -164,21 +140,21 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
 3. Copy the connection string. A connection string includes your role name, the compute hostname, and database name.
 4. Connect with `psql` as shown below.
 
-```bash shouldWrap
-psql postgresql://[user]:[password]@[neon_hostname]/[dbname]
-```
+   ```bash shouldWrap
+   psql postgresql://[user]:[password]@[neon_hostname]/[dbname]
+   ```
 
-<Admonition type="tip">
-A compute hostname starts with an `ep-` prefix. You can also find a compute hostname on the **Branches** page in the Neon Console. See [View branches](#view-branches).
-</Admonition>
+   <Admonition type="tip">
+   A compute hostname starts with an `ep-` prefix. You can also find a compute hostname on the **Branches** page in the Neon Console. See [View branches](#view-branches).
+   </Admonition>
 
-If you want to connect from an application, the **Connection Details** widget on the project **Dashboard** and the [Frameworks](/docs/get-started-with-neon/frameworks) and [Languages](/docs/get-started-with-neon/languages) sections in the documentation provide various connection examples.
+   If you want to connect from an application, the **Connection Details** widget on the project **Dashboard** and the [Frameworks](/docs/get-started-with-neon/frameworks) and [Languages](/docs/get-started-with-neon/languages) sections in the documentation provide various connection examples.
 
 ## Reset a branch from parent
 
-Use Neon's **Reset from parent** feature to instantly update a branch with the latest schema and data from its parent. This feature can be an integral part of your CI/CD automation.
+You can use Neon's **Reset from parent** feature to instantly update a branch with the latest schema and data from its parent. This feature can be an integral part of your CI/CD automation.
 
-You can use the Neon Console, CLI, or API. For more details, see [Reset from parent](/docs/guides/reset-from-parent).
+You can use the Neon Console, CLI, or API. For details, see [Reset from parent](/docs/guides/reset-from-parent).
 
 ## Restore a branch to its own or another branch's history
 
@@ -211,7 +187,70 @@ SELECT pg_size_pretty(sum(pg_database_size(datname)))
 FROM pg_database;
 ```
 
-Data size does not include [history](/docs/reference/glossary#history).
+The query value may differ slightly from the **Data size** reported in the Neon Console.
+
+Data size is your logical data size. It does not include the [history](/docs/reference/glossary#history) that Neon retains to support features like point-in-time restore.
+
+## Branch types
+
+Neon has different branch types with different characteristics.
+
+### Root branch
+
+A root branch is a branch without a parent branch. Each Neon project starts with a root branch named `main`, which cannot be deleted and is set as the [default branch](#default-branch) for the project.
+
+Neon also supports two other types of root branches that have no parent but _can_ be deleted:
+
+- [Backup branches](#backup-branch), created by point-in-time restore operations on other root branches.
+- [Schema-only branches](#schema-only-branch).
+
+The number of root branches allowed in a project depends on your Neon plan.
+
+| Plan     | Root branch allowance per project |
+| :------- | :-------------------------------- |
+| Free     | 3                                 |
+| Launch   | 5                                 |
+| Scale    | 10                                |
+| Business | 25                                |
+
+### Default branch
+
+Each Neon project has a default branch. In the Neon Console, your default branch is identified by a `DEFAULT` tag. You can designate any branch as the default branch for your project.
+
+The default branch has a larger compute hour allowance that non-default branches on the Free Plan. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available.
+
+### Non-default branch
+
+Any branch not designated as the default branch is considered a non-default branch. You can rename or delete non-default branches.
+
+- For Neon Free Plan users, computes associated with **non-default branches** are suspended if you exceed the Neon Free Plan 5 hours per month for **non-default branches**.
+- For users on paid plans, default limits prevent more than 20 concurrently active computes. Beyond that limit, a compute associated with a non-default branch remains suspended.
+
+### Protected branch
+
+Neon's protected branches feature implements a series of protections:
+
+- Protected branches cannot be deleted.
+- Protected branches cannot be [reset](/docs/manage/branches#reset-a-branch-from-parent).
+- Projects with protected branches cannot be deleted.
+- Computes associated with a protected branch cannot be deleted.
+- New passwords are automatically generated for Postgres roles on branches created from protected branches. [See below](#new-passwords-generated-for-postgres-roles-on-child-branches).
+- With additional configuration steps, you can apply IP Allow restrictions to protected branches only. The [IP Allow](/docs/introduction/ip-allow) feature is available on the Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans. See [below](#how-to-apply-ip-restrictions-to-protected-branches).
+- Protected branches are not [archived](/docs/guides/branch-archiving) due to inactivity.
+
+Typically, a protected status is given to a branch or branches that hold production data or sensitive data. The protected branch feature is only supported on Neon's paid plans. See [Set a branch as protected](#set-a-branch-as-protected).
+
+### Schema-only branch
+
+A branch that replicates only the database schema from a source branch, without copying any of the actual data. This feature is particularly valuable when working with sensitive information. Rather than creating branches that include confidential data, you can duplicate just the database structure and then populate it with your own data.
+
+Schema-only branches are [root branches](#root-branch), meaning they have no parent. As a root branch, each schema-only branch starts an independent line of data in a Neon project.
+
+See [Schema-only branches](/docs/guides/branching-schema-only).
+
+### Backup branch
+
+A branch created by a [point-in-time restore](#point-in-time-restore) operation. When you restore a branch from a particular point in time, the current branch is saved as a backup branch. Performing a restore operation on a root branch, creates a backup branch without a parent branch (a root branch). See [Branch restore](/docs/guides/branch-restore).
 
 ## Branching with the Neon CLI
 
