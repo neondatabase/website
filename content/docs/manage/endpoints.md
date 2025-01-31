@@ -139,7 +139,7 @@ The size of your compute determines the amount of frequently accessed data you c
 
 In Postgres, the `shared_buffers` setting defines the amount of data that can be held in memory. In Neon, the `shared_buffers` parameter [scales with compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size) and Neon also uses a Local File Cache (LFC) to extend the amount of memory available for caching data. The LFC can use up to 80% of your compute's RAM.
 
-The Postgres `max_connections` setting defines your compute's maximum simultaneous connection limit and is set according to your compute size configuration. 
+The Postgres `max_connections` setting defines your compute's maximum simultaneous connection limit and is set according to your compute size configuration.
 
 The following table outlines the vCPU, RAM, LFC size (80% of RAM), and the `max_connections` limit for each compute size that Neon supports. To understand how `max_connections` is determined for an autoscaling configuration, see [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
 

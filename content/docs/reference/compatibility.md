@@ -73,10 +73,10 @@ Of the parameter settings listed above, the `max_connections`, `maintenance_work
 
 - The formula for `max_connections` is:
 
-    ```go
-    compute_size = min(max_compute_size, 8 * min_compute_size)
-    max_connections = max(100, min(4000, 450.5 * compute_size))
-    ``` 
+  ```go
+  compute_size = min(max_compute_size, 8 * min_compute_size)
+  max_connections = max(100, min(4000, 450.5 * compute_size))
+  ```
 
     For example, if you have a fixed compute size of 4 CU, that size is be both your `max_compute_size` and `min_compute_size`. Inputting that value into the formula gives you a `max_connections` setting of 1802. For an autoscaling configuration with a `min_compute_size` of 0.25 CU and a `max_compute_size` of 2 CU, the `max_connections` setting would be 901.
 
@@ -86,24 +86,24 @@ Of the parameter settings listed above, the `max_connections`, `maintenance_work
 
     You can also check your `max_connections` setting in the Neon Console. Go to **Branches**, select your branch, then go to the **Compute** tab and select **Edit**. Your `max_connections` setting is the "direct connections" value. You can adjust the compute configuration to see how it impacts the number of direct connections.
 
-    ![max_connections calculator](/docs/reference/max_connection_calculator.png)
+  ![max_connections calculator](/docs/reference/max_connection_calculator.png)
 
-    _You can use connection pooling in Neon to increase the number of supported connections. For more information, see [Connection pooling](/docs/connect/connection-pooling)._
+  _You can use connection pooling in Neon to increase the number of supported connections. For more information, see [Connection pooling](/docs/connect/connection-pooling)._
 
 - The formula for `max_worker_processes` is:
 
-    ```go
-    max_worker_processes := 12 + floor(2 * max_compute_size)
-    ```
+  ```go
+  max_worker_processes := 12 + floor(2 * max_compute_size)
+  ```
 
-    For example, if your `max_compute_size` is 4 CU, your `max_worker_processes` setting would be 20. 
+  For example, if your `max_compute_size` is 4 CU, your `max_worker_processes` setting would be 20.
 
 - The formula for `shared_buffers` is:
 
-    ```go
-    backends = 1 + max_connections + max_worker_processes
-    shared_buffers_mb = max(128, (1023 + backends * 256) / 1024)
-    ```
+  ```go
+  backends = 1 + max_connections + max_worker_processes
+  shared_buffers_mb = max(128, (1023 + backends * 256) / 1024)
+  ```
 
 ### Configuring Postgres parameters for a session, database, or role
 
