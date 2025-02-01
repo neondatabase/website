@@ -364,7 +364,7 @@ You can find detailed information about each action, including its required para
 
 **To utilize actions that require parameters, you simply need to include these parameters within the `description` of the task you assign to your CrewAI agent.** The agent will intelligently extract these parameters from the task description when it uses the Composio tool.
 
-For instance, let's consider the `NEON_GET_PROJECT_CONNECTION_URI` action. 
+For instance, let's consider the `NEON_GET_PROJECT_CONNECTION_URI` action.
 
 ![Composio Neon Get Connection URI Action](/docs/guides/composio-neon-get-connection-uri-action.png)
 
