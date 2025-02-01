@@ -7,7 +7,7 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/setting-up-a-project
-updatedOn: '2024-10-22T15:41:04.370Z'
+updatedOn: '2025-01-31T16:41:54.388Z'
 ---
 
 <InfoBlock>
@@ -18,7 +18,7 @@ updatedOn: '2024-10-22T15:41:04.370Z'
 </DocsList>
 
 <DocsList title="Related topics" theme="docs">
-<a href="https://neon.tech/docs/introduction/branching">About branching</a>
+<a href="/docs/introduction/branching">About branching</a>
 <a href="/docs/get-started-with-neon/workflow-primer">Branching workflows</a>
 <a href="/docs/get-started-with-neon/connect-neon">Connect Neon to your stack</a>
 </DocsList>
@@ -32,10 +32,15 @@ Each [branch](/docs/introduction/branching) is a fully-isolated copy of its pare
 
 After signing up, you'll start with a `main` branch and the empty database `neondb` created during onboarding. You'll add data to the `main` branch's database and then create a new development branch off of `main`.
 
-## Step 1 - Sign up
+<Steps>
+
+## Sign up
 
 <div className="flex gap-5 sm:flex-col">
   <div style={{ flex: '0 0 60%' }}>
+
+    If you're already signed up or coming to Neon from **Azure**, you can skip ahead to [Step 2](/docs/get-started-with-neon/signing-up#step-2-onboarding-in-the-neon-console).
+
     If you haven't signed up yet, you can sign up for free here:
 
     [https://console.neon.tech/signup](https://console.neon.tech/signup)
@@ -52,7 +57,7 @@ After signing up, you'll start with a `main` branch and the empty database `neon
   </div>
 </div>
 
-## Step 2 - Onboarding in the Neon Console
+## Onboarding in the Neon Console
 
 After you sign up, you are guided through some onboarding steps that ask you to create a **Project**. After that, you are presented with the project **Quickstart**.
 
@@ -81,7 +86,7 @@ The steps should be self-explanatory, but it's important to understand a few key
 
 At this point, if you want to just get started connecting Neon to your toolchain, go to [Day 2 - Connecting Neon to your tools](/docs/get-started-with-neon/connect-neon). Or if you want a more detailed walkthrough of some of our key console and branching features, let's keep going.
 
-## Step 3 - Add sample data
+## Add sample data
 
 Let's get familiar with the **SQL Editor**, where you can run queries against your databases directly from the Neon Console, as well as access more advanced features like [Time Travel](/docs/guides/time-travel-assist) and [Explain and Analyze](/docs/get-started-with-neon/query-with-neon-sql-editor#explain-and-analyze).
 
@@ -103,7 +108,7 @@ INSERT INTO playing_with_neon(name, value)
 
 Your default branch `main` now has a table with some data.
 
-## Step 4 - View and modify data in the console
+## View and modify data in the console
 
 Now that you have some data to play with, let's take a look at it on the **Tables** page in the Neon Console. The **Tables** page, powered by [Drizzle Studio](https://orm.drizzle.team/drizzle-studio/overview), provides a visual interface for exploring and modifying data directly from the console. The integration with Drizzle Studio provides the ability to add, update, and delete records, filter data, add or remove columns, drop or truncate tables, and export data in `.json` and `.csv` formats.
 
@@ -111,7 +116,7 @@ Now that you have some data to play with, let's take a look at it on the **Table
 
 For a detailed guide on how to interact with your data using the **Tables** page, visit [Managing your data with interactive tables](/docs/guides/tables).
 
-## Step 5 - Create a dedicated development branch
+## Create a dedicated development branch
 
 In this step, you'll create a dedicated development branch using the Neon CLI. This branch will be an exact, isolated copy of `main`.
 
@@ -137,7 +142,7 @@ You can create and manage branches from the Neon Console, but here we'll use the
 
 1. **Authenticate with Neon**
 
-   Launches a browser window where you can authorize the Neon CLI to access your Neon account.
+   The `neon auth` command launches a browser window where you can authorize the Neon CLI to access your Neon account.
 
    ```bash
    neon auth
@@ -159,11 +164,11 @@ You can create and manage branches from the Neon Console, but here we'll use the
 
 There are other branch creation options available when using the CLI. See [Create a branch with the CLI](/docs/guides/branching-neon-cli#create-a-branch-with-the-cli) for more.
 
-## Step 6 - Make some sample schema changes
+## Make some sample schema changes
 
 With your development branch created, you can now make schema changes safely in your own environment. Since the `playing_with_neon` table is already available in the `dev/developer_name` branch, we'll modify its schema and add new data so that it deviates from `main`.
 
-You can use the **SQL Editor** for this, but let's demonstrate how to connect and modify your database from the terminal using `psql`. If you don't have `psql` installed already, follow these steps to get set up:
+You can use the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) for this, but let's demonstrate how to connect and modify your database from the terminal using `psql`. If you don't have `psql` installed already, follow these steps to get set up:
 
 <Tabs labels={["Mac", "Linux", "Windows"]}>
 
@@ -253,7 +258,7 @@ With `psql` available, let's work from the terminal to connect to your `dev/deve
    (11 rows)
    ```
 
-## Step 7 - Check your changes with Schema Diff
+## Check your changes with Schema Diff
 
 After making the schema changes to your development branch, you can use the [Schema Diff](/docs/guides/schema-diff) feature to compare your branch against its parent branch. Schema Diff is a GitHub-style code-comparison tool used to visualize differences between different branch's databases.
 
@@ -268,9 +273,9 @@ From the **Branches** page in the Neon Console:
 
 ### Schema Migrations
 
-A more typical scenario for Schema Diff is when preparing for schema migrations. While Neon does not provide built-in schema migration tools, you can use ORMs like [Prisma](https://www.prisma.io/) or [Drizzle](https://drizzle.team/) to handle schema migrations efficiently. Read more about using Neon in your development workflow in [Connect Neon to your stack](/docs/get-started-with-neon/connect-neon).
+A more typical scenario for Schema Diff is when preparing for schema migrations. While Neon does not provide built-in schema migration tools, you can use ORMs like [Drizzle](https://drizzle.team/) or [Prisma](https://www.prisma.io/) to handle schema migrations efficiently. Read more about using Neon in your development workflow in [Connect Neon to your stack](/docs/get-started-with-neon/connect-neon).
 
-## Step 8 - Reset your dev branch to main
+## Reset your dev branch to main
 
 After experimenting with changes in your development branch, let's now reset the branch to `main`, its parent branch.
 
@@ -307,6 +312,12 @@ Depending on your development workflow, you can use branch reset:
 
   With the Neon CLI, you can include branch reset as an enforced part of your CI/CD automation, automatically resetting a branch when a feature is closed or started.
 
+</Steps>
+
 Make sure that your development team is always working from the latest schema and data by including branch reset in your workflow. To read more about using branching in your workflows, see [Day 3 - Branching workfows](/docs/get-started-with-neon/workflow-primer).
+
+<Admonition type="tip" title="working with sensitive data?">
+Neon also supports schema-only branching. [Learn more](/docs/guides/branching-schema-only).
+</Admonition>
 
 <NeedHelp/>

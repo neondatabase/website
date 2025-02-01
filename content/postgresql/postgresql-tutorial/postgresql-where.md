@@ -39,7 +39,7 @@ The `WHERE` clause uses the `condition` to filter the rows returned from the `SE
 
 The `condition` is a boolean expression that evaluates to true, false, or unknown.
 
-The query returns only rows that satisfy the `condition` in the `WHERE` clause. In other words, the query will include only rows that cause the `condition` evaluates to true in the result set.
+The query returns only rows that satisfy the `condition` in the `WHERE` clause. In other words, the query will include only rows that cause the `condition` to evaluate to true in the result set.
 
 PostgreSQL evaluates the `WHERE` clause after the `FROM` clause but before the `SELECT` and `ORDER BY` clause:
 
@@ -75,7 +75,7 @@ We will use the `customer` table from the [sample database](../postgresql-getti
 
 ### 1\)  Using WHERE clause with the equal (\=) operator example
 
-The following statement uses the `WHERE` clause to find customers with the first name is `Jamie`:
+The following statement uses the `WHERE` clause to find customers whose first name is `Jamie`:
 
 ```sql
 SELECT
@@ -243,7 +243,7 @@ first_name | name_length
 ...
 ```
 
-In this example, we use the [`LENGTH()`](../postgresql-string-functions/postgresql-length-function) function gets the number of characters of an input string.
+In this example, we use the [`LENGTH()`](../postgresql-string-functions/postgresql-length-function) function to get the number of characters of an input string.
 
 ### 7\) Using the WHERE clause with the not equal operator (\<\>) example
 

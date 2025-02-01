@@ -6,7 +6,7 @@ const Calculator = () => (
   <section className="calculator safe-paddings mt-36 lg:mt-20 md:mt-12">
     <Container className="flex flex-col items-center justify-center" size="xxs">
       <GradientLabel>Calculator</GradientLabel>
-      <h2 className="mt-4 text-center text-[48px] font-medium leading-none tracking-extra-tight lg:text-4xl sm:text-[36px]">
+      <h2 className="mt-4 text-center font-title text-[48px] font-medium leading-none tracking-extra-tight lg:text-4xl sm:text-[36px]">
         Platform Builder
       </h2>
       <UseCaseCalculator />

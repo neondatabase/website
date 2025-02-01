@@ -3,12 +3,8 @@ title: Branch archiving
 subtitle: Learn how Neon automatically archives inactive branches to cost-effective
   storage
 enableTableOfContents: true
-updatedOn: '2024-11-20T11:29:39.736Z'
+updatedOn: '2024-12-03T11:41:28.735Z'
 ---
-
-<Admonition type="note" title="Only enabled on the Free Plan">
-Automatic archiving of inactive branches is only enabled on the Free Plan. Branch archiving will be introduced on paid plans at a later date.
-</Admonition>
 
 <InfoBlock>
 <DocsList title="What you will learn:">
@@ -30,20 +26,23 @@ To minimize storage costs, Neon automatically archives branches that are:
 - Older than **14 days**.
 - Have not been accessed for the past **24 hours**
 
-Both conditions must be true for a branch to be archived. Additionally, these conditions apply:
+Both conditions must be true for a branch to be archived.
+
+Additionally, these conditions apply:
 
 - A branch cannot be archived if it has an unarchived child branch.
 - A child branch must be archived before a parent branch can be archived.
+- [Protected branches](/docs/guides/protected-branches) are not archived.
 
 <Admonition type="note">
-If your Neon project was inactive for more than a week before the introduction of branch archiving on November 11, 2024, the thresholds mentioned above are not tracked until the next time you access branches in your project.
+If your Neon project was inactive for more than a week before the introduction of branch archiving on November 11, 2024, the thresholds mentioned above do not come into effect until the next time you access branches in your project.
 </Admonition>
 
 ## Unarchiving a branch
 
 **No action is required to unarchive a branch. It happens automatically.**
 
-Connecting to an archived branch, querying it, or performing some other action that accesses it will trigger the unarchive process. Connection times and query times may be slower while a branch is in the process of being unarchived.
+Connecting to an archived branch, querying it, or performing some other action that accesses it will trigger the unarchive process. Branches with large amounts of data may experience slightly slower connection and query times while a branch is being unarchived.
 
 <Admonition type="note">
 When a branch is unarchived, its parent branches, all the way up to the root branch, are also unarchived.
@@ -64,11 +63,11 @@ The following actions will automatically unarchive a branch, transferring the br
 
 ## Identifying archived branches
 
-Archived branches can be easily identified in the Neon Console. On the **Branches** page, archived branches are identified by an archive icon, as shown below:
+Archived branches can be identified by an archive icon on the **Branches** page in the Neon Console:
 
 ![the archive icon shown on a branch in the branches list page](/docs/guides/archived_branch_icon.png)
 
-If you select an archived branch on the **Branches** page to view its details, you can find out when the branch was archived:
+If you select an archived branch on the **Branches** page to view its details, you can see when the branch was archived:
 
 ![the archive status shown on a branch in the branch detail page](/docs/guides/archived_branch_details.png)
 
@@ -78,9 +77,13 @@ Archive and unarchive operations can also be monitored in the Neon Console or us
 
 For Neon projects created in AWS regions, inactive branches are archived in Amazon S3 storage. For Neon projects created in Azure regions, branches are archived in Azure Blob storage. For more information about how archive storage works in Neon, refer to [Archive storage](/docs/introduction/architecture-overview#archive-storage) in our architecture documentation.
 
-## Is automatic branch archiving configurable?
+## Is branch archiving configurable?
 
-Branch archiving is not configurable. Archiving and unarchiving happen automatically, as described above.
+Branch archiving thresholds are not configurable. Archiving and unarchiving happen automatically according to the thresholds and conditions described above.
+
+## Disabling branch archiving
+
+You cannot fully disable branch archiving, but you can prevent a branch from being archived by defining it as a **protected branch**. For instructions, see [Set a branch as protected](/docs/manage/branches#set-a-branch-as-protected). Protected branches are supported on Neon paid plans.
 
 ## Monitoring branch archiving
 
@@ -91,7 +94,7 @@ You can monitor branch archive and unarchive operations from the **System operat
 
 For related information, see [System operations](/docs/manage/operations).
 
-You can also monitor branch states using the Neon CLI or Neon API.
+You can also monitor branch archiving using the Neon CLI or Neon API.
 
 <Tabs labels={["CLI", "API"]}>
 
@@ -131,7 +134,7 @@ The response includes a `current_state`, a `state_changed_at` timestamp for when
 
 This example shows a branch that is currently `archived`. The `state_changed_at` shows a timestamp indicating when the state last changed.
 
-```json {6}
+```json {9,10}
 {
   "branch": {
     "id": "br-broad-smoke-w2sqcu0i",

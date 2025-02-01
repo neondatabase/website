@@ -33,4 +33,4 @@ const AllThingsOpenPage = () => (
 
 export default AllThingsOpenPage;
 
-export const revalidate = 60;
+export const revalidate = false;

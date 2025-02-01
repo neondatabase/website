@@ -147,9 +147,9 @@ After creating the database, make sure to copy the connection details (such as *
 
 4.  **Install the Postgres client**
 
-    In the terminal of your Azure Functions project, install either **neon** postgres driver or the **pg** package, which will be used to connect to Postgres:
+    In the terminal of your Azure Functions project, install either [Neon serverless driver](/docs/serverless/serverless-driver) or the `node-postgres` (`pg`) package, which will be used to connect to Postgres:
 
-    <CodeTabs labels={["neon", "pg"]}>
+    <CodeTabs labels={["Neon serverless driver", "node-postgres"]}>
 
     ```bash
     npm install @neondatabase/serverless
@@ -217,23 +217,6 @@ After creating the database, make sure to copy the connection details (such as *
     }
     ```
 
-    For clarity, you can break this connection string down like this:
-
-    ```JSON
-    {
-      "IsEncrypted": false,
-      "Values": {
-        "AzureWebJobsStorage": "",
-        "FUNCTIONS_WORKER_RUNTIME": "node",
-        "DB_USER": "neondb_owner",
-        "DB_HOST": "ep-quiet-leaf-a85k5wbg.eastus2.azure.neon.tech",
-        "DB_NAME": "neondb",
-        "DB_PASSWORD": "your_db_password",
-        "DB_PORT": "5432"
-      }
-    }
-    ```
-
     Install the `dotenv` package by opening the terminal in your Azure Functions project. This package will allow you to load environment variables from the `.env` file:
 
     ```bash
@@ -248,7 +231,7 @@ After creating the database, make sure to copy the connection details (such as *
 
     **Example code for `client.js`**
 
-    <CodeTabs labels={["neon", "pg"]}>
+    <CodeTabs labels={["Neon serverless driver", "node-postgres"]}>
 
     ```javascript
     import { neon } from '@neondatabase/serverless';
@@ -315,7 +298,7 @@ After creating the database, make sure to copy the connection details (such as *
 
     **Example code for `hotel.js`**
 
-    <CodeTabs labels={["neon", "pg"]}>
+    <CodeTabs labels={["Neon serverless driver", "node-postgres"]}>
 
     ```javascript
     import { neon } from '@neondatabase/serverless';
@@ -363,7 +346,7 @@ After creating the database, make sure to copy the connection details (such as *
 
     **Example code for `reservation.js`**
 
-    <CodeTabs labels={["neon", "pg"]}>
+    <CodeTabs labels={["Neon serverless driver", "node-postgres"]}>
 
     ```javascript
     import { neon } from '@neondatabase/serverless';

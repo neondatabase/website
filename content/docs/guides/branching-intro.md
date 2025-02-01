@@ -2,7 +2,7 @@
 title: Get started with branching
 subtitle: Everything you need to get started with Neon's branching feature
 enableTableOfContents: true
-updatedOn: '2024-11-14T13:15:10.565Z'
+updatedOn: '2025-01-31T16:41:54.392Z'
 ---
 
 Find detailed information and instructions about Neon's branching feature and how you can integrate branching with your development workflows.
@@ -18,6 +18,8 @@ Learn about branching and how you can apply it in your development workflows.
 <a href="https://neon.tech/blog/database-branching-for-postgres-with-neon" description="Blog: Read about how Neon's branching feature works and what it means for your workflows" icon="split-branch">Database branching for Postgres</a>
 
 <a href="/docs/guides/branch-archiving" description="Learn how Neon automatically archives inactive branches to cost-effective storage" icon="split-branch">Branch archiving</a>
+
+<a href="/docs/guides/branching-schema-only" description="Learn how you can protect sensitive data with schema-only branches" icon="split-branch">Schema-only branches</a>
 
 </DetailIconCards>
 
@@ -43,7 +45,7 @@ Create a branch for each preview deployment with the Neon Postgres Previews Inte
 
 <DetailIconCards>
 
-<a href="https://neon.tech/docs/guides/vercel-previews-integration" description="Connect your Vercel project and create a branch for each preview deployment" icon="vercel">The Neon Postgres Previews Integration</a>
+<a href="/docs/guides/vercel-previews-integration" description="Connect your Vercel project and create a branch for each preview deployment" icon="vercel">The Neon Postgres Previews Integration</a>
 
 <a href="https://neon.tech/blog/neon-vercel-integration" description="Blog: Read about full-stack preview deployments using the Neon Vercel Integration" icon="vercel">Preview deployments with Vercel</a>
 
@@ -75,16 +77,6 @@ Recover lost data or track down issues by restoring a branch to its history, or 
 
 </DetailIconCards>
 
-## Branching guides
-
-Learn how to promote a branch to become your default branch.
-
-<DetailIconCards>
-
-<a href="/docs/guides/branch-promote" description="Promote a branch to the default branch of your Neon project using the Neon API" icon="trend-up">Promote a branch</a>
-
-</DetailIconCards>
-
 ## Example applications
 
 Explore example applications that use Neon's branching feature.
@@ -93,5 +85,4 @@ Explore example applications that use Neon's branching feature.
 <a href="https://github.com/kelvich/branching_demo_bisect" description="Use Neon branching, the Neon API, and a bisect script to recover lost data" icon="hourglass">Time Travel Demo</a>
 <a href="https://github.com/neondatabase/neon_twitter" description="Use GitHub Actions to create and delete a branch with each pull request" icon="x">Neon Twitter app</a>
 <a href="https://github.com/neondatabase/preview-branches-with-vercel" description="An application demonstrating using GitHub Actions with preview deployments in Vercel" icon="calendar-day">Preview branches app</a>
-<a href="https://github.com/tinkertim/neon_branching_demo" description="Learn how to build a Discord bot while leveraging Neon branching" icon="discord">Neon Discord Bot</a>
 </DetailIconCards>

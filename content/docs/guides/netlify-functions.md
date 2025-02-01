@@ -2,12 +2,12 @@
 title: Use Neon with Netlify Functions
 subtitle: Connect a Neon Postgres database to your Netlify Functions application
 enableTableOfContents: true
-updatedOn: '2024-10-22T15:41:04.375Z'
+updatedOn: '2024-11-30T11:53:56.062Z'
 ---
 
 [Netlify Functions](https://www.netlify.com/products/functions/) provide a serverless execution environment for building and deploying backend functionality without managing server infrastructure. It's integrated with Netlify's ecosystem, making it ideal for augmenting web applications with server-side logic, API integrations, and data processing tasks in a scalable way.
 
-This guide will show you how to connect to a Neon Postgres database from your Netlify Functions project. We'll use the [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver) to connect to the database and make queries.
+This guide will show you how to connect to a Neon Postgres database from your Netlify Functions project. We'll use the [Neon serverless driver](/docs/serverless/serverless-driver) to connect to the database and make queries.
 
 ## Prerequisites
 
@@ -218,7 +218,7 @@ The CLI will build and deploy your site and functions to Netlify. After deployme
 
 For cleanup, delete your Netlify site and functions via the Netlify dashboard or CLI. Consult the [Netlify documentation](https://docs.netlify.com/) for detailed instructions.
 
-To remove your Neon project, follow the deletion steps in Neon's documentation under [Manage Projects](https://neon.tech/docs/manage/projects#delete-a-project).
+To remove your Neon project, follow the deletion steps in Neon's documentation under [Manage Projects](/docs/manage/projects#delete-a-project).
 
 ## Source code
 

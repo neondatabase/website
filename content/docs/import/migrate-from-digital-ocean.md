@@ -5,7 +5,7 @@ subtitle: Learn how to migrate your Postgres database from Digital Ocean to Neon
 redirectFrom:
   - /docs/import/import-from-digital-ocean
 enableTableOfContents: true
-updatedOn: '2024-10-12T11:16:13.589Z'
+updatedOn: '2025-01-27T15:25:05.411Z'
 ---
 
 This guide describes how to migrate a Postgres database from Digital Ocean to Neon using the `pg_dump` and `pg_restore` utilities, which are part of the Postgres client toolset. `pg_dump` works by dumping both the schema and data in a custom format that is compressed and suitable for input into `pg_restore` to rebuild the database.
@@ -21,11 +21,13 @@ This guide describes how to migrate a Postgres database from Digital Ocean to Ne
 
 - Review our guide on [Importing data from Postgres](/docs/import/migrate-from-postgres) for more comprehensive information on using `pg_dump` and `pg_restore`.
 
+<Steps>
+
 ## Prepare your Digital Ocean database
 
 This section describes how to prepare your Digital Ocean database for exporting data.
 
-To illustrate the migration workflow, we populate the Digital Ocean database with the [LEGO dataset](https://neon.tech/docs/import/import-sample-data#lego-database). This database contains information about LEGO sets, parts, and themes.
+To illustrate the migration workflow, we populate the Digital Ocean database with the [LEGO dataset](/docs/import/import-sample-data#lego-database). This database contains information about LEGO sets, parts, and themes.
 
 ### Retrieve Digital Ocean connection details
 
@@ -157,6 +159,8 @@ After the restore process completes, you should verify that your data has been s
 
 After successfully migrating and verifying your data on Neon, you can update your application's connection strings to point to your new Neon database. We recommend that you keep your Digital Ocean database dump file (`digitalocean_dump.bak`) as a backup until you've verified that the migration was successful.
 
+</Steps>
+
 ## Other migration options
 
 While this guide focuses on using `pg_dump` and `pg_restore`, there are other migration options available:
@@ -175,6 +179,6 @@ For more information on the Postgres utilities used in this guide, refer to the 
 
 - [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html)
 - [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html)
-- [Migrating data to Neon](https://neon.tech/docs/import/migrate-from-postgres)
+- [Migrating data to Neon](/docs/import/migrate-from-postgres)
 
 <NeedHelp/>

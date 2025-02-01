@@ -51,7 +51,7 @@ The `WHERE` clause in the query contains an expression:
 first_name LIKE 'Jen%'
 ```
 
-The expression consists of the `first_name`, the `LIKE` operator and a literal string that contains a percent sign `(%`). The string `'Jen%'` is called a pattern.
+The expression consists of the `first_name`, the `LIKE` operator and a literal string that contains a percent sign (`%`). The string `'Jen%'` is called a pattern.
 
 The query returns rows whose values in the `first_name` column begin with `Jen` and are followed by any sequence of characters. This technique is called pattern matching.
 
@@ -59,7 +59,7 @@ You construct a pattern by combining literal values with wildcard characters and
 
 PostgreSQL offers two wildcards:
 
-- Percent sign ( `%`) matches any sequence of zero or more characters.
+- Percent sign (`%`) matches any sequence of zero or more characters.
 - Underscore sign (`_`)  matches any single character.
 
 Here’s the basic syntax of the `LIKE` operator:
@@ -151,7 +151,7 @@ first_name  |  last_name
 
 ### 3\) Using the LIKE operator a pattern that contains both wildcards
 
-The following example uses the `LIKE` operator with a pattern that contains both the percent ( `%`) and underscore (`_`) wildcards:
+The following example uses the `LIKE` operator with a pattern that contains both the percent (`%`) and underscore (`_`) wildcards:
 
 ```
 SELECT

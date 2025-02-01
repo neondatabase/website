@@ -33,4 +33,4 @@ const YoutubePage = () => (
 
 export default YoutubePage;
 
-export const revalidate = 60;
+export const revalidate = false;

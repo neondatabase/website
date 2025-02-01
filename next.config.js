@@ -20,6 +20,24 @@ const defaultConfig = {
   async headers() {
     return [
       {
+        source: '/',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'max-age=0, s-maxage=31536000',
+          },
+        ],
+      },
+      {
+        source: '/home',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'max-age=0, s-maxage=31536000',
+          },
+        ],
+      },
+      {
         source: '/fonts/:slug*',
         headers: [
           {
@@ -58,6 +76,15 @@ const defaultConfig = {
       },
       {
         source: '/docs/:all*(svg|jpg|png)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=0, must-revalidate',
+          },
+        ],
+      },
+      {
+        source: '/images/technology-logos/:all*',
         headers: [
           {
             key: 'Cache-Control',
@@ -239,6 +266,11 @@ const defaultConfig = {
         source: '/generate-ticket',
         destination: '/stage',
         permanent: true,
+      },
+      {
+        source: '/changelog',
+        destination: '/docs/changelog',
+        permanent: false,
       },
       ...docsRedirects,
       ...changelogRedirects,

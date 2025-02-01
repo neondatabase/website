@@ -5,6 +5,7 @@ import Container from 'components/shared/container/container';
 
 import AdobeLogo from './images/adobe.inline.svg';
 import AKQALogo from './images/akqa.inline.svg';
+import AlbertsonsLogo from './images/albertsons.inline.svg';
 import BCGLogo from './images/bcg.inline.svg';
 import BranchLogo from './images/branch.inline.svg';
 import BunnyshellLogo from './images/bunnyshell.inline.svg';
@@ -17,8 +18,7 @@ import GenomicsLogo from './images/genomics.inline.svg';
 import HasuraLogo from './images/hasura.inline.svg';
 import IllaLogo from './images/illa.inline.svg';
 import MasterSchoolLogo from './images/masterschool.inline.svg';
-import MistralLogo from './images/mistral.inline.svg';
-import NerdwalletLogo from './images/nerdwallet.inline.svg';
+// import NerdwalletLogo from './images/nerdwallet.inline.svg';
 import OctolisLogo from './images/octolis.inline.svg';
 import OpenAILogo from './images/openai.inline.svg';
 import OpusLogo from './images/opus.inline.svg';
@@ -59,9 +59,9 @@ const allLogos = {
   encore: EncoreLogo,
   retool: RetoolLogo,
   openai: OpenAILogo,
-  mistral: MistralLogo,
+  albertsons: AlbertsonsLogo,
   adobe: AdobeLogo,
-  nerdwallet: NerdwalletLogo,
+  // nerdwallet: NerdwalletLogo,
   wordware: WordwareLogo,
   akqa: AKQALogo,
   bcg: BCGLogo,

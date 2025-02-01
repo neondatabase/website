@@ -140,21 +140,6 @@ Output:
 (1 row)
 ```
 
-The following example uses the `OR` operator to combine `false` with `false`, which returns `false`:
-
-```sql
-SELECT false OR false AS result;
-```
-
-Output:
-
-```text
- result
---------
- f
-(1 row)
-```
-
 The following example uses the `OR` operator to combine `null` with `null`, which returns `null`:
 
 ```sql

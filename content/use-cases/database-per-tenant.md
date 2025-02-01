@@ -6,7 +6,20 @@ updatedOn: '2024-08-23T09:00:00.000Z'
 image: '/images/social-previews/use-cases/db-per-tenant.jpg'
 ---
 
-<UseCaseContext />
+<Video
+sources={[
+{
+src: "/videos/pages/doc/db-per-user.mp4",
+type: "video/mp4",
+},
+{
+src: "/videos/pages/doc/db-per-user.webm",
+type: "video/webm",
+}
+]}
+width={768}
+height={432}
+/>
 
 <Admonition type="note" title="TL;DR">
 Companies are managing fleets of thousands of Neon databases with very small teams and budgets. This is why:
@@ -15,7 +28,7 @@ Companies are managing fleets of thousands of Neon databases with very small tea
 2. **Instant provisioning**: Databases are ready in under a second.
 3. **Autoscaling w/ scale-to-zero**: Neon databases pause automatically to eliminate fixed costs, and CPU/memory scale up and down automatically per-customer.
 
-In Neon, **1 tenant = 1 project**. Our $69 /month pricing plan includes 1,000 projects — [sign up](https://console.neon.tech/signup) or [reach out to us](/contact-sales) for 1:1 guidance.
+In Neon, **1 tenant = 1 project**. Our $69 /month pricing plan includes 1,000 projects — [sign up](https://console.neon.tech/signup) and [follow this guide](https://neon.tech/docs/use-cases/database-per-user) to get started.
 </Admonition>
 
 <Testimonial
@@ -50,6 +63,8 @@ author={{
 
 Neon is Postgres with serverless architecture. With rapid provisioning, scale-to-zero, and robust API support, you can scale database-per-user architectures without management overhead or big budgets. Just create **one project per customer** via the Neon API.
 
+![Database-per-user](/use-cases/database-per-user.jpg)
+
 ### One project per customer
 
 A Neon project is the logical equivalent of an "instance" but without the management heaviness:
@@ -65,6 +80,10 @@ Management is simplified vs other Postgres services because,
 - New projects are ready in milliseconds, and you can manage everything programmatically via the API.
 - You only pay for the projects that are active thanks to scale-to-zero.
 
+<Admonition type="note" title="Tip">
+You can also migrate schemas across thousands of projects [automatically.](https://neon.tech/blog/migrating-schemas)
+</Admonition>
+
 ### A dedicated project for dev/test
 
 To take advantage of [database branching workflows for dev/test](https://neon.tech/use-cases/dev-test) whithin a project-per-tenant design, create a **separate Neon project as your single non-prod environment**. The methodology:
@@ -72,6 +91,12 @@ To take advantage of [database branching workflows for dev/test](https://neon.te
 - Load your testing data to the main branch. This main branch acts as the primary source for all dev/test environments (they can be hundreds).
 - To instantly create ephemeral environments, derive child branches from the main branch. These branches are fully isolated resource-wise and already include an up-to-date copy of the testing dataset. They can then be synced with the main branch with just one click.
 - Once the work is complete, ephemeral dev/test environments (child branches) can be deleted automatically via your CI/CD.
+
+![A dedicated project for dev/test](/use-cases/dev-test.jpg)
+
+<Admonition type="note" title="Tip">
+Check the [Database Per User Guide](https://neon.tech/use-cases/database-per-tenant) in our documentation for step by step instructions on how to set this up. 
+</Admonition>
 
 ## Neon for B2B SaaS: Data isolation with easy scalability
 
@@ -91,8 +116,4 @@ author={{
 }}
 />
 
-<div align="center">
-[Estimate your costs: Compare vs RDS →](https://neon.tech/cost-fleets)
-</div>
-
-<CTA title="Have questions?" buttonText="Reach out to us" buttonUrl="/contact-sales" />
+<CTA title="Next Steps" description="Sign up here to get the Free Plan plus $100 credit. Or&nbsp;<a href='/contact-sales'>talk to our team</a> if you have any questions." buttonText="Get the Free Plan + $100 Credit" buttonUrl="https://fyi.neon.tech/credits" />

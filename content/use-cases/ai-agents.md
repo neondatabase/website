@@ -28,7 +28,7 @@ If you’re a dev writing code, a five-minute deploy isn’t a big deal. But AI 
 
 Imagine spinning up a new RDS instance every few seconds—you’d blow your budget on the first invoice. In most managed databases, managing thousands of isolated instances is unthinkable, and even more so without breaking the bank.
 
-Neon’s serverless architecture solves this. In Neon, databases [automatically scale to zero](/docs/introduction/auto-suspend) when idle and wake up instantly. You don’t pay for a database unless it’s being used or has data on it.
+Neon’s serverless architecture solves this. In Neon, databases [automatically scale to zero](/docs/introduction/scale-to-zero) when idle and wake up instantly. You don’t pay for a database unless it’s being used or has data on it.
 
 Some databases created by agents might only be used for a few minutes; if you’re the company behind the agent, you’ll quickly have a large database fleet full of inactive databases.
 

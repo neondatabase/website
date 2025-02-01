@@ -1,6 +1,6 @@
 ---
 title: Local Development with Neon
-subtitle: Learn how to efficiently develop applications locally with Neon
+subtitle: Learn how to develop applications locally with Neon
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-11-05T00:00:00.000Z'
@@ -10,12 +10,12 @@ updatedOn: '2024-11-05T00:00:00.000Z'
 Setting up your development environment should be simple and fast. With Neon's modern approach to PostgreSQL, you get exactly that. Here's how to create the perfect setup for your applications.
 
 <Admonition type="note">
-The setups described in this guide use the **Neon serverless driver** for connecting to a Postgres database hosted locally or on Neon. To learn more, see [The Neon Serverless driver](https://neon.tech/docs/serverless/serverless-driver).
+The setups described in this guide use the **Neon serverless driver** for connecting to a Postgres database hosted locally or on Neon over HTTP or WebSockets. To learn more, see [The Neon Serverless driver](https://neon.tech/docs/serverless/serverless-driver).
 </Admonition>
 
 ## Two ways to develop
 
-When working with Neon, you can choose between:
+When setting up a development environment with Neon, there are a couple of different approaches you can take:
 
 1. **Database branching**
 2. **Local PostgreSQL**
@@ -29,12 +29,12 @@ Imagine creating a complete copy of your database as easily as creating a Git br
 ### Why use it?
 
 - **Fast setup**: Create new environments in ~1 second
-- **Zero cnfiguration**: No local PostgreSQL installation required
+- **Zero configuration**: No local PostgreSQL installation required
 - **True isolation**: Test changes without fear of breaking production
 - **Cost-efficient**: Pay only for unique data and actual compute usage
 - **Team-friendly**: Share database branches as easily as sharing Git branches
 - **Autoscaling**: Resources scale to zero when you're not coding
-- **Data reset**: Fresh start? Reset your branch to match production in seconds
+- **Data reset**: Need a fresh start or a do-over? Reset your branch to match production in seconds
 
 ### Quickstart
 
@@ -68,7 +68,11 @@ Imagine creating a complete copy of your database as easily as creating a Git br
 
 5. **Install dependencies**
 
-   Dependencies includes [Neon's serverless driver](https://neon.tech/docs/serverless/serverless-driver) and a WebSockets library.
+   Dependencies include [Neon's serverless driver](https://neon.tech/docs/serverless/serverless-driver) and a WebSockets library.
+
+   <Admonition type="note">
+   The Neon serverless driver supports connections over HTTP and WebSockets, depending on your requirements. This setup assumes that you could be using either. For the differences, refer to the [Neon's serverless driver docs](https://neon.tech/docs/serverless/serverless-driver).
+   </Admonition>
 
    <CodeTabs labels={["npm", "yarn", "pnpm"]}>
 
@@ -99,6 +103,10 @@ Imagine creating a complete copy of your database as easily as creating a Git br
    export const sql = neon(process.env.DATABASE_URL);
    ```
 
+    <Admonition type="note">
+      If you're using Drizzle or Prisma, replace your database connection string in your environment variables with your development branch's connection string.
+    </Admonition>
+
 ### Tips and tricks
 
 - **Stay organized**: Use prefixes like `dev/feature-auth` or `dev/alice`
@@ -113,16 +121,84 @@ Imagine creating a complete copy of your database as easily as creating a Git br
 
 ## Local PostgreSQL
 
-Sometimes you need to work offline or want full control over your database. Here's how to set up a local instance that works perfectly with Neon.
+Sometimes you need to work offline or want full control over your database. Here's how to set up a local PostgreSQL instance that works perfectly with the Neon. This method uses:
 
-### Why use it?
+- The [Neon Serverless driver](https://neon.tech/docs/serverless/serverless-driver) to connect to your local database (same as the database branching setup described above)
+- A Docker compose file that installs a local instance of PostgreSQL 17 and the Neon Proxy. The Neon Proxy lets you to connect to your local PostgreSQL database using the Neon serverless driver.
+
+<Admonition type="note" title="kudos">
+The Neon Proxy setup uses the [local-neon-http-proxy](https://github.com/TimoWilhelm/local-neon-http-proxy) Dockerfile, developed by [TimoWilhelm](https://github.com/TimoWilhelm).
+</Admonition>
+
+### Why use this method?
 
 - **Full control**: Your own PostgreSQL instance
 - **Offline work**: Code without internet dependency
 - **Fast queries**: Zero network latency
 - **Free development**: Use your local resources
 
-### Setup steps
+### Docker Compose setup
+
+Create a `docker-compose.yml` file with the following content:
+
+```yaml
+services:
+  postgres:
+    image: postgres:17
+    command: '-d 1'
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=main
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  neon-proxy:
+    image: ghcr.io/timowilhelm/local-neon-http-proxy:main
+    environment:
+      - PG_CONNECTION_STRING=postgres://postgres:postgres@postgres:5432/main
+    ports:
+      - '4444:4444'
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  db_data:
+```
+
+Run the following command to start local PostgreSQL and the Neon Proxy, which helps you connect to your local database:
+
+```bash
+docker-compose up -d
+```
+
+<Admonition type="tip" title="Working offline?">
+The [local-neon-http-proxy](https://github.com/TimoWilhelm/local-neon-http-proxy) Dockerfile setup uses [*.localtest.me](https://readme.localtest.me/) to enable testing with local URLs without adding entires to your host file. The `localtest.me` domain and all wildcard subdomains point to `127.0.0.1`.
+
+However, this solution requires an internet connection. To work offline, you'll need to add an entry to your system's hosts file to map `db.localtest.me` to localhost:
+
+```bash
+127.0.0.1 db.localtest.me
+```
+
+For instructions on editing your hosts file on different operating systems, see [this guide](https://www.hostinger.in/tutorials/how-to-edit-hosts-file).
+
+[dnsmask](https://help.ubuntu.com/community/Dnsmasq) is another option [suggested by a Neon user](https://github.com/neondatabase/website/issues/2690) for resolving domain names when there is no internet connection.
+</Admonition>
+
+### Connect your app
+
+<Tabs labels={["Using neondatabase/serverless", "Using drizzle", "Using prisma"]}>
+
+<TabItem>
 
 1. Install Dependencies
 
@@ -142,42 +218,7 @@ Sometimes you need to work offline or want full control over your database. Here
 
    </CodeTabs>
 
-2. **Set up via Docker Compose**
-
-   ```yaml
-   services:
-     postgres:
-       image: postgres:17
-       command: '-d 1'
-       volumes:
-         - db_data:/var/lib/postgresql/data
-       ports:
-         - '5432:5432'
-       environment:
-         - POSTGRES_USER=postgres
-         - POSTGRES_PASSWORD=postgres
-         - POSTGRES_DB=main
-       healthcheck:
-         test: ['CMD-SHELL', 'pg_isready -U postgres']
-         interval: 10s
-         timeout: 5s
-         retries: 5
-
-     neon-proxy:
-       image: ghcr.io/timowilhelm/local-neon-http-proxy:main
-       environment:
-         - PG_CONNECTION_STRING=postgres://postgres:postgres@postgres:5432/main
-       ports:
-         - '4444:4444'
-       depends_on:
-         postgres:
-           condition: service_healthy
-
-   volumes:
-     db_data:
-   ```
-
-3. **Configure the connection**
+2. **Configure the connection**
 
    ```typescript
    import { neon, neonConfig, Pool } from '@neondatabase/serverless';
@@ -194,15 +235,194 @@ Sometimes you need to work offline or want full control over your database. Here
      };
      const connectionStringUrl = new URL(connectionString);
      neonConfig.useSecureWebSocket = connectionStringUrl.hostname !== 'db.localtest.me';
-     neonConfig.wsProxy = (host) => (host === 'db.localtest.me' ? `${host}:4444/v1` : undefined);
-     neonConfig.webSocketConstructor = ws;
+     neonConfig.wsProxy = (host) => (host === 'db.localtest.me' ? `${host}:4444/v2` : `${host}/v2`);
    }
+   neonConfig.webSocketConstructor = ws;
 
-   export const pool = new Pool({ connectionString });
+   // Neon supports both HTTP and WebSocket clients. Choose the one that fits your needs:
+
+   // HTTP Client (sql)
+   // - Best for serverless functions and Lambda environments
+   // - Ideal for stateless operations and quick queries
+   // - Lower overhead for single queries
+   // - Better for applications with sporadic database access
    export const sql = neon(connectionString);
+
+   // WebSocket Client (pool)
+   // - Best for long-running applications (like servers)
+   // - Maintains a persistent connection
+   // - More efficient for multiple sequential queries
+   // - Better for high-frequency database operations
+   export const pool = new Pool({ connectionString });
    ```
 
-## Choosing your development approach
+</TabItem>
+<TabItem>
+
+1. Install Dependencies
+
+   <CodeTabs labels={["npm", "yarn", "pnpm"]}>
+
+   ```bash
+   npm install drizzle-orm @neondatabase/serverless ws
+   ```
+
+   ```bash
+   yarn add drizzle-orm @neondatabase/serverless ws
+   ```
+
+   ```bash
+   pnpm add drizzle-orm @neondatabase/serverless ws
+   ```
+
+   </CodeTabs>
+
+2. **Configure the connection**
+
+   ```typescript
+   import { neon, neonConfig, Pool } from '@neondatabase/serverless';
+   import { drizzle as drizzleWs } from 'drizzle-orm/neon-serverless';
+   import { drizzle as drizzleHttp } from 'drizzle-orm/neon-http';
+   import ws from 'ws';
+
+   let connectionString = process.env.DATABASE_URL;
+
+   // Configuring Neon for local development
+   if (process.env.NODE_ENV === 'development') {
+     connectionString = 'postgres://postgres:postgres@db.localtest.me:5432/main';
+     neonConfig.fetchEndpoint = (host) => {
+       const [protocol, port] = host === 'db.localtest.me' ? ['http', 4444] : ['https', 443];
+       return `${protocol}://${host}:${port}/sql`;
+     };
+     const connectionStringUrl = new URL(connectionString);
+     neonConfig.useSecureWebSocket = connectionStringUrl.hostname !== 'db.localtest.me';
+     neonConfig.wsProxy = (host) => (host === 'db.localtest.me' ? `${host}:4444/v2` : `${host}/v2`);
+   }
+   neonConfig.webSocketConstructor = ws;
+
+   const sql = neon(connectionString);
+   const pool = new Pool({ connectionString });
+
+   // Drizzle supports both HTTP and WebSocket clients. Choose the one that fits your needs:
+
+   // HTTP Client:
+   // - Best for serverless functions and Lambda environments
+   // - Ideal for stateless operations and quick queries
+   // - Lower overhead for single queries
+   // - Better for applications with sporadic database access
+   export const drizzleClientHttp = drizzleHttp({ client: sql });
+
+   // WebSocket Client:
+   // - Best for long-running applications (like servers)
+   // - Maintains a persistent connection
+   // - More efficient for multiple sequential queries
+   // - Better for high-frequency database operations
+   export const drizzleClientWs = drizzleWs({ client: pool });
+   ```
+
+3. **Migration setup**
+
+   To ensure your Drizzle migrations run smoothly and without errors in your development environment, you can install the `postgres` package as a development dependency.
+
+   <CodeTabs labels={["npm", "yarn", "pnpm"]}>
+
+   ```bash
+   npm i -D postgres
+   ```
+
+   ```bash
+   yarn add -D postgres
+   ```
+
+   ```bash
+   pnpm add -D postgres
+   ```
+
+   </CodeTabs>
+
+</TabItem>
+
+<TabItem>
+
+Note that Driver Adapters are still in preview for Prisma. Please refer to the [Prisma documentation](https://www.prisma.io/docs/orm/overview/databases/neon) for the latest information.
+
+1. Install Dependencies
+
+   <CodeTabs labels={["npm", "yarn", "pnpm"]}>
+
+   ```bash
+   npm install @prisma/client @prisma/adapter-neon @neondatabase/serverless ws
+   ```
+
+   ```bash
+   yarn add @prisma/client @prisma/adapter-neon @neondatabase/serverless ws
+   ```
+
+   ```bash
+   pnpm add @prisma/client @prisma/adapter-neon @neondatabase/serverless ws
+   ```
+
+   </CodeTabs>
+
+2. **Enable the Preview Flag**
+
+   To use the Neon serverless driver with Prisma, enable the preview flag in your `schema.prisma` file.
+
+   ```prisma
+     generator client {
+       provider        = "prisma-client-js"
+       previewFeatures = ["driverAdapters"]
+     }
+   ```
+
+3. **Configure the connection**
+
+   ```typescript
+   import { neon, neonConfig, Pool } from '@neondatabase/serverless';
+   import { PrismaNeon, PrismaNeonHTTP } from '@prisma/adapter-neon';
+   import { PrismaClient } from '@prisma/client';
+   import ws from 'ws';
+
+   let connectionString = process.env.DATABASE_URL;
+
+   // Configuring Neon for local development
+   if (process.env.NODE_ENV === 'development') {
+     connectionString = 'postgres://postgres:postgres@db.localtest.me:5432/main';
+     neonConfig.fetchEndpoint = (host) => {
+       const [protocol, port] = host === 'db.localtest.me' ? ['http', 4444] : ['https', 443];
+       return `${protocol}://${host}:${port}/sql`;
+     };
+     const connectionStringUrl = new URL(connectionString);
+     neonConfig.useSecureWebSocket = connectionStringUrl.hostname !== 'db.localtest.me';
+     neonConfig.wsProxy = (host) => (host === 'db.localtest.me' ? `${host}:4444/v2` : `${host}/v2`);
+   }
+   neonConfig.webSocketConstructor = ws;
+
+   const sql = neon(connectionString);
+   const pool = new Pool({ connectionString });
+
+   // Prisma supports both HTTP and WebSocket clients. Choose the one that fits your needs:
+
+   // HTTP Client:
+   // - Ideal for stateless operations and quick queries
+   // - Lower overhead for single queries
+   const adapterHttp = new PrismaNeonHTTP(sql);
+   export const prismaClientHttp = new PrismaClient({ adapter: adapterHttp });
+
+   // WebSocket Client:
+   // - Best for long-running applications (like servers)
+   // - Maintains a persistent connection
+   // - More efficient for multiple sequential queries
+   // - Better for high-frequency database operations
+   const adapterWs = new PrismaNeon(pool);
+   export const prismaClientWs = new PrismaClient({ adapter: adapterWs });
+   ```
+
+</TabItem>
+
+</Tabs>
+
+## Which development approach should you use?
 
 Before choosing between cloud-hosted or local development, it's important to understand the benefits of each approach.
 
@@ -211,7 +431,7 @@ Cloud-hosted branches offer several compelling advantages:
 ### Cost-efficient development
 
 - **Minimal storage costs**: Branches are extremely cost-effective as you only pay for unique data changes
-- **Smart compute usage**: Development happens on small, autosuspending computes (0.25 vCPU)
+- **Smart compute usage**: Development happens on small computes (0.25 vCPU) that scale to zero by default
 - **Free Plan benefits**: Even the Free Plan includes 5 compute hours on dev branches
   - This translates to 20 hours of development time on a 0.25 vCPU compute
   - One compute hour at 1 vCPU equals four hours at 0.25 vCPU
@@ -266,7 +486,7 @@ Cloud-hosted branches offer several compelling advantages:
 
 ### Resource tips
 
-- Use auto-suspend for development branches
+- Use scale to zero for development branches
 - Clean up unused branches
 - Reset branches to match production when needed
 

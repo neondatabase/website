@@ -6,7 +6,7 @@ import getMetadata from 'utils/get-metadata';
 export const metadata = getMetadata(SEO_DATA.contactSales);
 
 const ContactSales = () => (
-  <Layout>
+  <Layout headerClassName="!absolute !bg-transparent">
     <Hero />
   </Layout>
 );

@@ -1,12 +1,10 @@
 ---
 title: Manage Organizations using the Neon CLI
 enableTableOfContents: true
-updatedOn: '2024-09-19T14:13:04.118Z'
+updatedOn: '2025-01-29T23:50:53.962Z'
 ---
 
-<FeatureBeta/>
-
-Neon's CLI (`neonctl`) provides an expanding set of commands to manage your organizations.
+Neon's CLI provides an expanding set of commands to manage your organizations.
 
 ## Authorization
 
@@ -18,7 +16,7 @@ See [Auth - CLI](/docs/reference/cli-auth) to learn more.
 
 ## List Organizations
 
-The `neonctl orgs list` command outputs a list of all organizations that the CLI user currently belongs to. This command is useful for quickly identifying the `org_id` associated with each organization, which can be used in other CLI operations.
+The `neon orgs list` command outputs a list of all organizations that the CLI user currently belongs to. This command is useful for quickly identifying the `org_id` associated with each organization, which can be used in other CLI operations.
 
 Example:
 

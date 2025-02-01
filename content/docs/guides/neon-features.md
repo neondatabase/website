@@ -2,7 +2,7 @@
 title: Neon feature guides
 subtitle: Explore Neon's capabilities with our feature guides
 enableTableOfContents: false
-updatedOn: '2024-10-26T08:44:49.113Z'
+updatedOn: '2025-01-10T00:37:35.166Z'
 ---
 
 ### Autoscaling
@@ -17,15 +17,15 @@ Automatically scale compute resources up and down based on demand.
 
 </DetailIconCards>
 
-### Autosuspend
+### Scale to zero
 
-Control when Neon compute resources scale to zero.
+Enable or disable scale to zero for your Neon computes.
 
 <DetailIconCards>
 
-<a href="/docs/introduction/auto-suspend" description="Discover how Neon can reduce your compute to zero when not in use" icon="hourglass">Learn about Autosuspend</a>
+<a href="/docs/introduction/scale-to-zero" description="Discover how Neon can reduce your compute to zero when not in use" icon="hourglass">Learn about scale to zero</a>
 
-<a href="/docs/guides/autoscaling-guide" description="Configure autosuspend to control when your compute scales to zero" icon="setup">Configure Autosuspend</a>
+<a href="/docs/guides/scale-to-zero-guide" description="Enable or disable scale to zero to control if your compute suspends due to inactivity" icon="setup">Configure scale to zero</a>
 
 </DetailIconCards>
 
@@ -48,8 +48,6 @@ Branch data the same way you branch your code.
 <a href="/docs/guides/branching-github-actions" description="Automate branching with GitHub Actions" icon="split-branch">Branching with GitHub Actions</a>
 
 <a href="/docs/guides/branch-refresh" description="Refresh a development branch with the Neon API" icon="split-branch">Refresh a branch</a>
-
-<a href="/docs/guides/branch-promote" description="Promote a branch to default with the Neon API" icon="split-branch">Promote a branch to default</a>
 
 </DetailIconCards>
 
@@ -140,5 +138,15 @@ Protect your production or sensitive data.
 <DetailIconCards>
 
 <a href="/docs/guides/protected-branches" description="Learn how to use Neon's protected branches feature to secure access to critical data" icon="respond-arrow">Configure protected branches</a>
+
+</DetailIconCards>
+
+### Private Networking
+
+Secure your database connections with private access.
+
+<DetailIconCards>
+
+<a href="/docs/guides/neon-private-networking" description="Learn how to connect your application to a Neon database via AWS PrivateLink, bypassing the open internet" icon="respond-arrow">Private Networking</a>
 
 </DetailIconCards>

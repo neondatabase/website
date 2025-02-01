@@ -2,7 +2,7 @@
 title: Scale your application with Read Replicas
 subtitle: Scale your app with read replicas using built-in framework support
 enableTableOfContents: true
-updatedOn: '2024-10-23T14:34:44.516Z'
+updatedOn: '2024-11-30T11:53:56.064Z'
 ---
 
 In Neon, a read replica is an independent read-only compute that performs read operations on the same data as your primary read-write compute, which means adding a read replica to a Neon project requires no additional storage.
@@ -48,7 +48,7 @@ All read operations, such as `findMany`, are executed against the read replica i
 
 For more, including configuring multiple read replicas, refer to [Read Replicas](https://www.prisma.io/docs/orm/prisma-client/setup-and-configuration/read-replicas) in the Prisma documentation.
 
-**Example**: For a full example, see [Use Read Replicas with Prisma](https://neon.tech/docs/guides/read-replica-prisma).
+**Example**: For a full example, see [Use Read Replicas with Prisma](/docs/guides/read-replica-prisma).
 
 ## Drizzle ORM
 

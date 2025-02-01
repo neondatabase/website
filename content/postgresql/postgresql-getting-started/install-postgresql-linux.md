@@ -16,6 +16,8 @@ nextLink:
 
 **Summary**: in this tutorial, you will learn how to download and install PostgreSQL on Linux.
 
+<CTA title="Run PostgreSQL in the Cloud, Free" description="As an alternative to installing Postgres locally, you can get cloud Postgres in seconds on Neon with a generous free plan. No Credit Card Required." buttonText="Get Cloud Postgres" buttonUrl="/signup?ref=pgt-install-cta" />
+
 Most Linux platforms such as Debian, Red Hat / CentOS, SUSE, and Ubuntu have PostgreSQL integrated with their package management.
 
 It is recommended that you install PostgreSQL this way since it ensures a proper integration with the operating system including automatic patching and other update management functionality.
@@ -159,19 +161,19 @@ Fifth, quit the `psql` by using the `\q` command:
 \q
 ```
 
-Seventh, use the [pg_restore tool to restore](../postgresql-administration/postgresql-restore-database) the `dvdrental` database:
+Sixth, use the [pg_restore tool to restore](../postgresql-administration/postgresql-restore-database) the `dvdrental` database:
 
 ```shell
 pg_restore -U postgres --dbname=dvdrental --verbose dvdrental.tar
 ```
 
-Eighth, access the PostgreSQL database server again using `psql`:
+Seventh, access the PostgreSQL database server again using `psql`:
 
 ```shell
 psql
 ```
 
-Ninth, switch to the `dvdental` database:
+Eighth, switch to the `dvdental` database:
 
 ```shell
 \c dvdrental

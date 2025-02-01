@@ -9,19 +9,17 @@ const JobsList = () => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    fetch(`https://boards-api.greenhouse.io/v1/boards/neondatabase/jobs?content=true`)
+    fetch(`https://api.ashbyhq.com/posting-api/job-board/neon.tech`)
       .then((response) => response.json())
       .then(({ jobs }) => {
         const jobsByDepartmentAsObject = {};
 
-        jobs.forEach(({ title, location, departments, absolute_url: absoluteUrl }) => {
-          departments.forEach(({ name }) => {
-            if (!jobsByDepartmentAsObject[name]) jobsByDepartmentAsObject[name] = [];
-            jobsByDepartmentAsObject[name].push({
-              name: title,
-              location: location.name,
-              url: absoluteUrl,
-            });
+        jobs.forEach(({ title, location, department, jobUrl }) => {
+          if (!jobsByDepartmentAsObject[department]) jobsByDepartmentAsObject[department] = [];
+          jobsByDepartmentAsObject[department].push({
+            name: title,
+            location,
+            url: jobUrl,
           });
         });
 
@@ -36,7 +34,7 @@ const JobsList = () => {
   }, []);
 
   return (
-    <section className="safe-paddings pt-64 3xl:pt-60 2xl:pt-52 xl:pt-48 lg:pt-40 md:pt-32">
+    <section className="safe-paddings pt-24 lg:pt-16 md:pt-12">
       <Container size="xs">
         <h2 className="t-5xl font-title font-medium leading-tight">Job Openings</h2>
         <ul className="mb-16 mt-14 space-y-16 lg:mb-12 lg:mt-10 lg:space-y-12 md:mb-8 md:mt-6 md:space-y-8">

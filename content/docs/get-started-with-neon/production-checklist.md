@@ -2,7 +2,7 @@
 title: Getting ready for production
 subtitle: Explore the features that will help you prepare for production with Neon
 enableTableOfContents: true
-updatedOn: '2024-11-22T10:01:08.289Z'
+updatedOn: '2025-01-31T21:06:22.111Z'
 ---
 
 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -11,7 +11,7 @@ updatedOn: '2024-11-22T10:01:08.289Z'
     <p>
       <a href="#select-the-right-compute-size">Select the right compute size</a><br />
       <a href="#configure-autoscaling">Configure Autoscaling</a><br />
-      <a href="#configure-autosuspend">Configure Autosuspend</a><br />
+      <a href="#configure-scale-to-zero">Configure Scale to Zero</a><br />
       <a href="#use-a-pooled-connection">Use a pooled connection</a>
     </p>
   </div>
@@ -38,12 +38,12 @@ updatedOn: '2024-11-22T10:01:08.289Z'
 
 In a development environment, your application may function perfectly with a small compute size, but before your application goes live, make sure that your database has enough vCPU and memory to handle the expected load.
 
-In Neon, your compute size determines the amount of vCPU and memory your database has to work with. Neon supports computes up to 10 Compute Units (CUs) in size. Larger computes provide more memory. The compute sizes that are available to you depend on your [Neon plan](/docs/introduction/plans):
+In Neon, your compute size determines the amount of vCPU and memory your database has to work with. Neon supports computes up to 56 Compute Units (CUs) in size. Larger computes provide more memory. The compute sizes that are available to you depend on your [Neon plan](/docs/introduction/plans):
 
 - **Free Plan**: Starting at a fixed 0.25 CU (0.25 vCPU, 1 GB RAM), up to 2 CU (2 vCPU, 8 GRM RAM) with autoscaling enabled
 - **Launch**: Up to 4 CUs (4 vCPU, 16 GB RAM)
 - **Scale**: Up to 8 CUs (8 vCPU, 32 GB RAM)
-- **Business**: Up to 10 CUs (10 vCPU, 40 GB RAM)
+- **Business**: Up to 56 CUs (56 vCPU, 64 GB RAM)
 - **Enterprise**: Larger sizes
 
 You should start with a compute size that can hold your data or at least your most frequently accessed data (your [working set](/docs/reference/glossary#working-set)) in memory. If you are using Neon's _Autoscaling_ feature, we recommend the same for your **minimum compute size** setting (see [Configure Autoscaling](#configure-autoscaling)).
@@ -63,23 +63,21 @@ To get started with Autoscaling, read:
 - [Enable Autoscaling in Neon](/docs/guides/autoscaling-guide)
 - [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute), including the [Autoscaling considerations](/docs/manage/endpoints#autoscaling-considerations) section.
 
-## Configure Autosuspend
+## Configure Scale to zero
 
-Neon's Autosuspend feature automatically transitions a compute into an `Idle` state after a period of inactivity, also known as "scale-to-zero". By default, suspension occurs after 5 minutes of inactivity, but this delay can be adjusted on Neon's paid plans.
+Neon's Scale to zero feature automatically transitions a compute into an idle state after a period of inactivity. Suspension occurs after 5 minutes of inactivity, but this can be disabled on Neon's paid plans.
 
-![Autosuspend control](/docs/get-started-with-neon/autosuspend_control.png)
-
-For a busy production system that is always active, this setting may not matter much, as your compute will not remain idle long enough for autosuspension to occur. But if your application has any idle periods or inconsistent usage patterns, a proper setting can help minimize cost or optimize responsiveness. To learn more about configuring Autosuspend, [Configuring Autosuspend for Neon computes](/docs/guides/auto-suspend-guide).
+For a busy production system that is always active, this setting may not matter much, as your compute will not remain idle long enough for scale to zero to occur. To learn more about configuring Scale to zero, [Configuring Scale to Zero for Neon computes](/docs/guides/scale-to-zero-guide).
 
 ## Use a pooled connection
 
-The Postgres `max_connections` setting defines your basic maximum simultaneous connection limit and is set according to your compute size. Larger computes support higher `max_connections` settings. However, Neon supports connection pooling with [PgBouncer](https://www.pgbouncer.org/), which increases your connection limit up to 10,000 simultaneous connections. Enabling connection pooling simply requires using a pooled connection string instead of a standard non-pooled connection string. A pooled connection string includes `-pooler` in the Neon hostname, as shown in this example:
+The Postgres `max_connections` setting defines your basic maximum simultaneous connection limit and is set according to your compute size configuration. However, Neon supports connection pooling with [PgBouncer](https://www.pgbouncer.org/), which increases your connection limit up to 10,000 simultaneous connections. Enabling connection pooling simply requires using a pooled connection string instead of a standard non-pooled connection string. A pooled connection string includes `-pooler` in the Neon hostname, as shown in this example:
 
 ```bash
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
-The `-pooler` flag directs connections to a connection pooling port at the Neon proxy. Unless you have a specific reason to avoid connection pooling, we recommend using it in production. You can copy a pooled connection string for your database from the **Connection Details** widget on your project's **Dashboard** in the Neon Console. Select the **Pooled connection** option. For more information, see [Connection pooling](/docs/connect/connection-pooling).
+The `-pooler` flag directs connections to a connection pooling port at the Neon proxy. Unless you have a specific reason to avoid connection pooling, we recommend using it in production. You can copy a pooled connection string for your database from the **Connection Details** widget on your project's **Dashboard** in the Neon Console. Enable the **Connection pooling** toggle. For more information, see [Connection pooling](/docs/connect/connection-pooling).
 
 ## Configure your history retention period
 
@@ -95,7 +93,7 @@ For more, see [Branch reset and restore](/docs/introduction/point-in-time-restor
 
 ## Configure IP Allow
 
-Neon's IP Allow feature, available with the Neon [Scale](https://neon.tech/docs/introduction/plans#scale) and [Business](https://neon.tech/docs/introduction/plans#business) plans, ensures that only trusted IP addresses can connect to your database, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation).
+Neon's IP Allow feature, available with the Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans, ensures that only trusted IP addresses can connect to your database, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation).
 
 ![IP allow setting settings](/docs/get-started-with-neon/ip_allow_settings.png)
 

@@ -2,10 +2,8 @@
 title: Organizations
 subtitle: Invite Members to your Organization and collaborate on projects
 enableTableOfContents: true
-updatedOn: '2024-11-08T16:53:31.641Z'
+updatedOn: '2025-01-10T18:30:20.395Z'
 ---
-
-<FeatureBeta/>
 
 Build your team in Neon with Organizations. Manage all of your team's projects under a single account — with billing, role management, and project collaboration capabilities in one accessible location.
 
@@ -55,7 +53,7 @@ If you're on the Free Plan, you'll need to choose a paid plan for your organizat
     You'll be prompted to select a plan and enter billing details. After confirming, you'll be directed to your organization's billing page, where you can invite [members](/docs/manage/orgs-manage#invite-members) and [transfer projects](/docs/manage/orgs-project-transfer).
   </div>
   <div style={{ flex: '0 0 55%', marginTop: '-20px' }}>
-  ![convert personal account to an organization](/docs/manage/orgs_create_with_transfer.png)
+  ![convert personal account to an organization](/docs/manage/orgs_create_with_billing.png)
   </div>
 </div>
 
@@ -79,7 +77,7 @@ Converting your personal account transfers all of your projects and billing to t
 After conversion, you can:
 
 - [Invite](/docs/manage/orgs-manage#invite-members) team members to collaborate on transferred projects
-- Promote [collaborators](/docs/manage/orgs-manage#manage-collaborators) to full members or leave them on specific projects
+- Promote collaborators to organization members (their project-specific collaborator permissions will be replaced with full organization access)
 - Delegate billing to another team member by setting their [permissions](/docs/manage/orgs-manage#set-permissions) to **Admin**
 
 #### Create a new organization
@@ -98,10 +96,9 @@ Project transfers to an organization are one-way. You cannot move organization p
 
 ## Limitations
 
-As we continue to refine our organization features during this Beta phase, please remember that these features are only available under paid account plans. Here are some temporary limitations you should be aware of:
+As we continue to refine our organization features, here are some temporary limitations you should be aware of:
 
 - **Branch management** — All users are currently able to manage [protected branches](/docs/guides/protected-branches), regardless of their role or permission level. Granular permissions for this feature are not yet implemented.
-- **Project transfer restrictions** — Currently, you cannot transfer projects using either the Vercel, Outerbase, or the GitHub integrations.
 - **Permissions and roles** — The current permissions system may not meet all needs for granular control. Users are encouraged to share their feedback and requirements for more detailed permissions settings.
 
 ## Feedback

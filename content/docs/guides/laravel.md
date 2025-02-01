@@ -2,7 +2,7 @@
 title: Connect from Laravel to Neon
 subtitle: Set up a Neon project in seconds and connect from a Laravel application
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.654Z'
+updatedOn: '2024-11-30T11:53:56.061Z'
 ---
 
 Laravel is a web application framework with expressive, elegant syntax. Connecting to Neon from Laravel is the same as connecting to a standalone Postgres installation from Laravel. Only the connection details differ.
@@ -45,7 +45,7 @@ ERROR: The endpoint ID is not specified. Either upgrade the Postgres client libr
 
 If you run into this error, please see the following documentation for an explanation of the issue and workarounds: [The endpoint ID is not specified](/docs/connect/connection-errors#the-endpoint-id-is-not-specified).
 
-- If using a connection string to connect to your database, try [Workaround A. Pass the endpoint ID as an option](https://neon.tech/docs/connect/connection-errors#a-pass-the-endpoint-id-as-an-option). For example:
+- If using a connection string to connect to your database, try [Workaround A. Pass the endpoint ID as an option](/docs/connect/connection-errors#a-pass-the-endpoint-id-as-an-option). For example:
 
   ```text
   postgresql://[user]:[password]@[neon_hostname]/[dbname]?options=endpoint%3D[endpoint-id]

@@ -4,7 +4,7 @@ subtitle: Add Neon Postgres storage to your Vercel project as a first-party nati
   integration
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-11-20T21:33:15.906Z'
+updatedOn: '2025-01-24T19:03:09.230Z'
 ---
 
 <InfoBlock>
@@ -16,7 +16,7 @@ updatedOn: '2024-11-20T21:33:15.906Z'
 
 <DocsList title="Related topics" theme="docs">
 <a href="/docs/guides/vercel-previews-integration">Neon Postgres Previews Integration</a>
-<a href="https://neon.tech/docs/introduction/plans">Neon plans</a>
+<a href="/docs/introduction/plans">Neon plans</a>
 </DocsList>
 </InfoBlock>
 
@@ -28,7 +28,7 @@ The [Vercel Marketplace](https://vercel.com/marketplace) allows you to add Neon 
 
 - Installing the integration creates a Neon account for you if you do not have one already.
 - Billing for Neon Postgres is managed in Vercel, not Neon.
-- You get access to the same features and [Neon pricing plans](https://neon.tech/docs/introduction/plans) as users who register with Neon directly, including access to your database from the Neon Console.
+- You get access to the same features and [Neon pricing plans](/docs/introduction/plans) as users who register with Neon directly, including access to your database from the Neon Console.
 
 <Admonition type="note">
 The **Neon Postgres Native Integration** is intended for Vercel users who want to add Neon Postgres to their Vercel project as a first-party native integration.
@@ -48,17 +48,17 @@ To install the **Neon Postgres Native Integration** from the Vercel Marketplace:
    ![Select the native integration option](/docs/guides/vercel_select_native.png)
 
 5. On the **Create New Neon Account** modal, accept the terms and conditions, and click **Create New Neon Account**.
-6. On the **Create Database** modal, select a region, specify your compute size and autosuspend settings, and choose a plan. To enable autoscaling, specify a compute size range (e.g., 0.25—2 VCPU).
+6. On the **Create Database** modal, select a region, specify your compute size and scale to zero settings, and choose a plan. To enable autoscaling, specify a compute size range (e.g., 0.25—2 VCPU).
 
    <Admonition type="note">
      **The settings you choose must be supported by the plan you select**. The supported settings by plan are:
 
-   | Plan     | Compute Size    | Suspend after ([Autosuspend](https://neon.tech/docs/introduction/auto-suspend)) |
-   | :------- | :-------------- | :------------------------------------------------------------------------------ |
-   | Free     | 0.25 - 2 vCPUs  | 5 minutes (Default)                                                             |
-   | Launch   | 0.25 - 4 vCPUs  | 5 minutes or more (Default, Never, Custom)                                      |
-   | Scale    | 0.25 - 8 vCPUs  | 1 minute or more (Default, Never, Custom)                                       |
-   | Business | 0.25 - 10 vCPUs | 1 minute or more (Default, Never, Custom)                                       |
+   | Plan     | Compute Size    | [Scale to Zero](/docs/introduction/scale-to-zero) After |
+   | :------- | :-------------- | :------------------------------------------------------ |
+   | Free     | 0.25 - 2 vCPUs  | 5 minutes (Default)                                     |
+   | Launch   | 0.25 - 4 vCPUs  | 5 minutes or more (Default, Never, Custom)              |
+   | Scale    | 0.25 - 8 vCPUs  | 1 minute or more (Default, Never, Custom)               |
+   | Business | 0.25 - 56 vCPUs | 1 minute or more (Default, Never, Custom)               |
 
    For an overview of what comes with each Neon Plan, please refer to the Neon [Pricing](https://neon.tech/pricing) page.
    </Admonition>
@@ -104,12 +104,12 @@ As a user of the Neon Postgres Native Integration, you have access to all Neon f
 
   - [Organization](/docs/manage/organizations) members are managed in Vercel, not manually added through the Neon Dashboard.
   - [Organization deletion](/docs/manage/orgs-manage#delete-an-organization) is not supported for Neon organizations created by the native integration. You can only delete this organization by deleting the associated Database in Vercel.
-  - [Project transfer](https://neon.tech/docs/manage/orgs-project-transfer) is not supported for a Neon organization created by the native integration.
-  - [Project collaborators](https://neon.tech/docs/guides/project-collaboration-guide) are also managed as Members in Vercel.
+  - [Project transfer](/docs/manage/orgs-project-transfer) is not supported to or from a Neon organization created by the native integration.
+  - [Project collaborators](/docs/guides/project-collaboration-guide) are also managed as Members in Vercel.
 
 - **Compute Settings**:
 
-  - Compute settings like size, autoscaling, and autosuspend are managed in Vercel. See [Changing your Database configuration](#changing-your-database-configuration).
+  - Compute settings like size, autoscaling, and scale to zero are managed in Vercel. See [Changing your Database configuration](#changing-your-database-configuration).
 
 - **Project Naming**:
 
@@ -124,7 +124,7 @@ Configuration changes you can make include:
 
 - Changing the **Database Name** (Project name in Neon)
 - Changing the **Compute size**
-- Changing **Suspend after period of inactivity** setting (Autosuspend)
+- Changing the scale to zero setting
 - Changing your **Installation Level Plan** (your Neon plan)
 
 To change your configuration:
@@ -143,7 +143,7 @@ To create another Database / Neon Project:
 1. On the Vercel Dashboard, navigate to your **Integrations** tab.
 2. Locate the **Neon Postgres** integration, and click **Manage**.
 3. Find the **More Products** card, and click **Install**.
-4. Make your selections for region, compute size settings, and plan on the **Create Database** modal, and click **Continue**.
+4. Make your selections for the region, scale to zero suspend time, and plan on the **Create Database** modal, and click **Continue**. For more about scale to zero, see [Scale to zero](/docs/introduction/scale-to-zero). Only the **Default** suspend setting is supported on the Free Plan.
 
    <Admonition type="note">
    Remember, if you're adding another "Database", you're' already on a Neon Plan, which will be identified on the modal by a **Current** tag. Select a different plan will change your Neon Plan for all of your "Databases". So, don't select a different plan unless you actually want to change your plan for all of your "Databases".
@@ -228,6 +228,7 @@ POSTGRES_PRISMA_URL
 
 ## Limitations
 
-When using the Neon Postgres Native Integration, installing the [Neon Postgres Previews Integration](/docs/guides/vercel-previews-integration) on the same Vercel Project is not supported.
+- When using the Neon Postgres Native Integration, installing the [Neon Postgres Previews Integration](/docs/guides/vercel-previews-integration) on the same Vercel Project is not supported.
+- To use the Neon CLI with the Neon Postgres Native Integration, you must authenticate connections from the CLI client using a Neon API key. Please see [Neon CLI — API keys](/docs/reference/cli-install#api-key). The `neon auth` command requires an account registered through Neon rather than Vercel.
 
 <NeedHelp/>

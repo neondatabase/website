@@ -33,7 +33,7 @@ WHERE
   columnA operator (
     SELECT
       columnB
-    from
+    FROM
       table2
     WHERE
       condition
@@ -45,7 +45,7 @@ In this syntax, the subquery is enclosed within parentheses and is executed firs
 ```sql
 SELECT
   columnB
-from
+FROM
   table2
 WHERE
   condition
@@ -64,9 +64,9 @@ First, retrieve the country id of the `United States` from the `country` table:
 ```sql
 SELECT
   country_id
-from
+FROM
   country
-where
+WHERE
   country = 'United States';
 ```
 

@@ -3,17 +3,17 @@ title: Database branching workflow primer
 subtitle: An introduction to integrating Postgres branching into your development
   workflow
 enableTableOfContents: true
-updatedOn: '2024-10-31T12:08:18.152Z'
+updatedOn: '2025-01-31T16:41:54.391Z'
 ---
 
-With Neon, you can work with your data just like you work with your code. The key is Neon's database [branching](/docs/guides/branching-intro) feature, which lets you instantly create branches of your data that you can include in your workflow, as many branches as you need.
+With Neon, you can work with your data just like you work with your code. The key is Neon's database [branching](/docs/guides/branching-intro) feature, which lets you instantly create branches of your data that you can include in your workflow — as many branches as you need.
 
 Neon branches are:
 
 - **Isolated**: changes made to a branch don't affect its parent.
 - **Fast to create**: creating a branch takes ~1 second, regardless of the size of your database.
 - **Cost-effective**: you're only billed for unique data across all branches, and they scale to zero when not in use (you can configure this behavior for every branch).
-- **Ready to use**: branches will have the parent branch's schema and all its data (you can also include data up to a certain point in time).
+- **Ready to use**: branches will have the parent branch's schema and all its data (you can also include data up to a certain point in time). If you're working with sensitive data, Neon also supports a [schema-only branching](/docs/guides/branching-schema-only) option.
 
 Every Neon branch has a unique Postgres connection string, so they're completely isolated from one another.
 
@@ -35,7 +35,7 @@ You can use either the Neon CLI or GitHub actions to incorporate branching into 
 
 ### Neon CLI
 
-Using the [Neon CLI](https://neon.tech/docs/reference/neon-cli), you can create branches without leaving your editor or automate branch creation in your CI/CD pipeline.
+Using the [Neon CLI](/docs/reference/neon-cli), you can create branches without leaving your editor or automate branch creation in your CI/CD pipeline.
 
 And here are the key CLI actions you can use:
 
@@ -62,7 +62,7 @@ For more information, see:
 
 ### GitHub Actions
 
-If you're using GitHub Actions for your CI workflows, Neon provides GitHub Actions for [creating](/docs/guides/branching-github-actions#create-branch-action) and [deleting](/docs/guides/branching-github-actions#delete-branch-action) branches.
+If you're using GitHub Actions for your CI workflows, Neon provides GitHub Actions for [creating](/docs/guides/branching-github-actions#create-branch-action), [deleting](/docs/guides/branching-github-actions#delete-branch-action), and [resetting](/docs/guides/branching-github-actions#reset-from-parent-action) branches — and there's also a [schema diff action](/docs/guides/branching-github-actions#schema-diff-action).
 
 <Tabs labels={["Create branch", "Delete branch"]}>
 
@@ -75,7 +75,7 @@ name: Create Neon Branch with GitHub Actions Demo
 run-name: Create a Neon Branch 🚀
 jobs:
   Create-Neon-Branch:
-    uses: neondatabase/create-branch-action@v4
+    uses: neondatabase/create-branch-action@v5
     with:
       project_id: rapid-haze-373089
       parent_id: br-long-forest-224191
@@ -115,9 +115,13 @@ You can find these GitHub Actions here:
 
 <DetailIconCards>
 
-<a href="https://github.com/neondatabase/create-branch-action" description="Create Neon Branch with GitHub Actions Demo" icon="github">Create branch Action</a>
+<a href="https://github.com/neondatabase/create-branch-action" description="Create Neon Branch GitHub Action" icon="github">Create branch Action</a>
 
-<a href="https://github.com/neondatabase/delete-branch-action" description="Delete Neon Branch with GitHub Actions Demo" icon="github">Delete branch Action</a>
+<a href="https://github.com/neondatabase/delete-branch-action" description="Delete Neon Branch GitHub Action" icon="github">Delete Branch Action</a>
+
+<a href="https://github.com/neondatabase/reset-branch-action" description="Reset Neon Branch GitHub Action" icon="github">Reset Branch Action</a>
+
+<a href="https://github.com/neondatabase/schema-diff-action" description="Neon Schema Diff GitHub Action" icon="github">Schema Diff Action</a>
 
 </DetailIconCards>
 
@@ -129,7 +133,7 @@ Here's how you can integrate Neon branching into your workflow:
 
 ### Development
 
-You can create a Neon branch for every developer on your team. This ensures that every developer has an isolated environment that includes schemas and data. These branches are meant to be long-lived, so each developer can tailor their branch based on their needs. With Neon's [branch reset capability](https://neon.tech/docs/manage/branches#reset-a-branch-from-parent), developers can refresh their branch with the latest schemas and data anytime they need.
+You can create a Neon branch for every developer on your team. This ensures that every developer has an isolated environment that includes schemas and data. These branches are meant to be long-lived, so each developer can tailor their branch based on their needs. With Neon's [branch reset capability](/docs/manage/branches#reset-a-branch-from-parent), developers can refresh their branch with the latest schemas and data anytime they need.
 
 <Admonition type="tip">
 To easily identify branches dedicated to development, we recommend prefixing the branch name with `dev/<developer-name>` or `dev/<feature-name>` if multiple developers collaborate on the same development branch.

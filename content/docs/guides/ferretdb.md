@@ -3,7 +3,7 @@ title: Use FerretDB with Neon
 subtitle: Add MongoDB compatibility to your Neon database with FerretDB
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-07T21:36:52.652Z'
+updatedOn: '2024-11-30T11:53:56.060Z'
 ---
 
 FerretDB is an open source document database that adds MongoDB compatibility to other databases, including Postgres. By using FerretDB, developers can access familiar MongoDB features and tools using the same syntax and commands for many of their use cases.
@@ -221,7 +221,7 @@ To view your current documents, go to the Neon **Dashboard** and select **Tables
 
 ![FerretDB table showing player data](/docs/guides/ferretdb_table.png)
 
-To query the data for a specific player via SQL, you can do so via the [Neon SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor):
+To query the data for a specific player via SQL, you can do so via the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor):
 
 ```sql
 SELECT _jsonb
@@ -245,7 +245,7 @@ To get started with FerretDB, check out the [FerretDB Get Started](https://docs.
 - [FerretDB on GitHub](https://github.com/FerretDB/FerretDB)
 - [FerretDB supported commands](https://docs.ferretdb.io/reference/supported-commands/)
 - [Postgres JSON Functions and Operators](https://www.postgresql.org/docs/current/functions-json.html)
-- [Neon SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor)
+- [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor)
 - [Connect with psql](/docs/connect/query-with-psql-editor)
 - [Understanding FerretDB](https://docs.ferretdb.io/understanding-ferretdb/)
 - [FerretDB Get Started](https://docs.ferretdb.io/quickstart-guide/)

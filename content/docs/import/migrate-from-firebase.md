@@ -5,7 +5,7 @@ subtitle: Learn how to migrate your data from Firebase Firestore to Neon Postgre
 redirectFrom:
   - /docs/import/import-from-firebase
 enableTableOfContents: true
-updatedOn: '2024-10-12T11:16:13.589Z'
+updatedOn: '2025-01-27T15:25:05.411Z'
 ---
 
 This guide describes how to migrate data from Firebase Firestore to Neon Postgres.
@@ -27,6 +27,8 @@ We'll use a custom Python script to export data from Firestore to a local file, 
   ```bash
   pip install firebase-admin "psycopg[binary,pool]"
   ```
+
+<Steps>
 
 ## Retrieve Firebase credentials
 
@@ -307,6 +309,8 @@ After running both the Firestore export and the Neon import scripts, you should 
 
    Compare the results with those from your Firestore database to ensure data integrity. Note that using the `parent_id` field, we can navigate through the hierarchical structure of the original data.
 
+</Steps>
+
 ## Other migration options
 
 While this guide focuses on using a custom Python script, there are other migration options available:
@@ -328,7 +332,7 @@ While this guide focuses on using a custom Python script, there are other migrat
 
 For more information on the tools and libraries used in this guide, refer to the following documentation:
 
-- [Migrating data to Neon](https://neon.tech/docs/import/migrate-intro)
+- [Migrating data to Neon](/docs/import/migrate-intro)
 - [Firebase Admin SDK](https://firebase.google.com/docs/admin/setup)
 - [Cloud Firestore API](https://cloud.google.com/python/docs/reference/firestore/latest/index.html)
 - [psycopg](https://www.psycopg.org/docs/)
