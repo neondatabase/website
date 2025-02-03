@@ -47,7 +47,7 @@ docker pull ankane/pghero
 
 Grab your Neon database connection string from the **Connection Details** widget in the Neon Dashboard.
 
-![Connection details widget](/docs/connect/connection_details.png)
+![Connection details modal](/docs/connect/connection_details.png)
 
 Finally, run this command, replacing `$NEON_DB` with your Neon database connection string.
 

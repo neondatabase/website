@@ -54,9 +54,9 @@ Ensure psql is included in the installation.
 
 The easiest way to connect to Neon using `psql` is with a connection string.
 
-You can obtain a connection string from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you.
+You can obtain a connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you.
 
-![Connection details widget](/docs/connect/connection_details.png)
+![Connection details modal](/docs/connect/connection_details.png)
 
 From your terminal or command prompt, run the `psql` client with the connection string copied from the Neon **Dashboard**.
 
@@ -70,7 +70,7 @@ Neon requires that all connections use SSL/TLS encryption, but you can increase 
 
 ### Where do I obtain a password?
 
-You can obtain a Neon connection string with your password from the Neon **Dashboard**, under **Connection Details**.
+You can obtain a Neon connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
 
 ### What port does Neon use?
 

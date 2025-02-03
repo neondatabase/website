@@ -66,7 +66,7 @@ The following instructions demonstrate how you can use the `num_cpus()` function
    SELECT txid_current();
    ```
 
-3. To avoid errors when running `pgbench`, initialize your database with the tables used by `pgbench`. This can be done using the `pgbench -i` command, specifying the connection string for your Neon database. You can obtain a connection string from the **Connection Details** widget on the Neon **Dashboard**.
+3. To avoid errors when running `pgbench`, initialize your database with the tables used by `pgbench`. This can be done using the `pgbench -i` command, specifying the connection string for your Neon database. You can obtain a connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
 
    ```bash shouldWrap
    pgbench -i postgresql://[user]:[password]@[neon_hostname]/[dbname]

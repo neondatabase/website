@@ -99,9 +99,9 @@ Let's break down the key components:
 These options specify how `pg_repack` connects to your database. You can often omit the `DBNAME` from the main command if you provide these connection options.
 
 - **`-d DBNAME`, `--dbname=DBNAME`**: Specifies the database name to connect to.
-- **`-h HOSTNAME`, `--host=HOSTNAME`**: Specifies the hostname of your Neon endpoint. You can find this in your Neon **Connection Details**.
+- **`-h HOSTNAME`, `--host=HOSTNAME`**: Specifies the hostname of your Neon endpoint. You can find this by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
 - **`-p PORT`, `--port=PORT`**: Specifies the port. For Neon, this is always `5432`.
-- **`-U USERNAME`, `--username=USERNAME`**: Specifies your Neon username. You can find this in your Neon **Connection Details**.
+- **`-U USERNAME`, `--username=USERNAME`**: Specifies your Neon username. You can find this by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
 - **`-W`, `--password`**: Forces `pg_repack` to prompt for your password.
 
 ### Generic options
@@ -176,7 +176,7 @@ Let's walk through a practical example of using `pg_repack` to reorganize a tabl
 
 ### Connect to your Neon Database
 
-Ensure you are connected to your Neon database using [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor). You can find your connection details in the **Connection Details** widget on the **Neon Console**
+Ensure you are connected to your Neon database using [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor). You can find your connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
 
 ### Create a sample table with bloat (Optional)
 

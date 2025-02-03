@@ -25,22 +25,22 @@ To follow along with this guide, you will need:
 
 ### Retrieve your Neon database connection string
 
-On the Neon project dashboard, navigate to the **Connection Details** section in your project dashboard to find your database connection URI. It should be in the format below:
+Find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. It should appear similar to the following:
 
-```
+```bash
 postgresql://username:password@hostname/dbname?sslmode=require
 ```
 
 The Postgres client library we use in this guide requires the connection string to be in the following format:
 
-```
+```bash
 Host=hostname;Port=5432;Database=dbname;Username=username;Password=password;SSLMode=Require
 ```
 
 Construct the connection string in this format using the correct values for your Neon connection URI. Keep it handy for later use.
 
 <Admonition type="note">
-Neon supports both direct and pooled database connection strings, which can be copied from the **Connection Details** widget on your Neon Project Dashboard. A pooled connection string connects your application to the database via a PgBouncer connection pool, allowing for a higher number of concurrent connections. However, using a pooled connection string for migrations can be prone to errors. For this reason, we recommend using a direct (non-pooled) connection when performing migrations. For more information about direct and pooled connections, see [Connection pooling](/docs/connect/connection-pooling).
+Neon supports both direct and pooled database connection strings, which you can find by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. A pooled connection string connects your application to the database via a PgBouncer connection pool, allowing for a higher number of concurrent connections. However, using a pooled connection string for migrations can be prone to errors. For this reason, we recommend using a direct (non-pooled) connection when performing migrations. For more information about direct and pooled connections, see [Connection pooling](/docs/connect/connection-pooling).
 </Admonition>
 
 ## Setting up the Entity Framework project

@@ -109,8 +109,8 @@ To try out schema-only branches:
 Connecting to a schema-only branch works the same way as connecting to any Neon branch. You'll connect via a compute associated with the branch. Follow these steps to connect using `psql` and a connection string obtained from the Neon Console.
 
 1. In the Neon Console, select a project.
-2. On the project **Dashboard**, under **Connection Details**, select your schema-only branch, the database, and the role you want to connect with.
-   ![Connection details widget](/docs/guides/schema_only_branch_connect.png)
+2. From the project **Dashboard**, click **Connect**, and select your schema-only branch, the database, and the role you want to connect with.
+   ![Connection details modal](/docs/guides/schema_only_branch_connect.png)
 3. Copy the connection string. A connection string includes your role name, the compute hostname, and the database name.
 
    ```bash shouldWrap

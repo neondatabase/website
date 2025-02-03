@@ -23,7 +23,7 @@ To follow the instructions in this guide, you will need:
 
 ## Retrieve your Neon database connection string
 
-Retrieve your database connection string from the **Connection Details** widget in the Neon Console.
+Find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
 
 Your connection string should look something like this:
 

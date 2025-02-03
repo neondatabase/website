@@ -21,7 +21,7 @@ For other Vercel integration options, refer to the [Neon and Vercel integration 
 
 You can these details from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you.
 
-![Connection details widget](/docs/connect/connection_details.png)
+![Connection details modal](/docs/connect/connection_details.png)
 
 The connection string includes the role name, hostname, and database name. For example:
 

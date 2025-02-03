@@ -16,7 +16,7 @@ TypeORM is an open-source ORM that lets you to manage and interact with your dat
 To establish a basic connection from TypeORM to Neon, perform the following steps:
 
 1. Retrieve your Neon connection string. In the **Connection Details** widget on the Neon **Dashboard**, select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
-   ![Connection details widget](/docs/connect/connection_details.png)
+   ![Connection details modal](/docs/connect/connection_details.png)
    The connection string includes the user name, password, hostname, and database name.
 
 2. Update the TypeORM's DataSource initialization in your application to the following:

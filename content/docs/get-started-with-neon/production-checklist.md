@@ -77,7 +77,7 @@ The Postgres `max_connections` setting defines your basic maximum simultaneous c
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
-The `-pooler` flag directs connections to a connection pooling port at the Neon proxy. Unless you have a specific reason to avoid connection pooling, we recommend using it in production. You can copy a pooled connection string for your database from the **Connection Details** widget on your project's **Dashboard** in the Neon Console. Enable the **Connection pooling** toggle. For more information, see [Connection pooling](/docs/connect/connection-pooling).
+The `-pooler` flag directs connections to a connection pooling port at the Neon proxy. Unless you have a specific reason to avoid connection pooling, we recommend using it in production. You can find a pooled connection string for your database by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. The **Connection pooling** toggle should be enabled by default. For more information, see [Connection pooling](/docs/connect/connection-pooling).
 
 ## Configure your history retention period
 
