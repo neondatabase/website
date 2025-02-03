@@ -2,7 +2,7 @@
 title: Dev/Test Environments on Neon
 subtitle: Speed up time-to-launch by running your non-prod workflows on Neon
 enableTableOfContents: true
-updatedOn: '2024-12-12T19:49:26.798Z'
+updatedOn: '2025-02-03T16:55:54.792Z'
 ---
 
 What sets Neon apart from other Postgres providers, beyond its true serverless nature, is its exceptional developer experience. Teams often experience a boost in developer velocity when switching to Neon. In Neon, it takes less time to create and synchronize environments, run tests, and tedious database tasks are suddenly automated—all of which accelerate software lifecycles.
