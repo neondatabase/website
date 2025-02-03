@@ -3,6 +3,7 @@
 import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
@@ -14,6 +15,8 @@ import LINKS from 'constants/links';
 import MENUS from 'constants/menus';
 import useMobileMenu from 'hooks/use-mobile-menu';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
+
+import menuBanner from './images/menu-banner.png';
 
 const AlgoliaSearch = dynamic(() => import('components/shared/algolia-search'), {
   ssr: false,
@@ -49,12 +52,13 @@ const getItemTitleStyles = (isDarkTheme, isMenuItemOpen) => {
   if (!isMenuItemOpen && !isDarkTheme) return 'text-gray-new-20 dark:text-gray-new-80';
 };
 
-const MobileMenuItem = ({ text, to, items, isDarkTheme }) => {
+const MobileMenuItem = ({ text, to, sections, isDarkTheme }) => {
   const [isMenuItemOpen, setIsMenuItemOpen] = useState();
-  const Tag = items ? 'button' : Link;
+  const Tag = sections ? 'button' : Link;
+  const hasSubmenu = sections?.length > 0;
 
   const handleMenuItemClick = () => {
-    if (items) {
+    if (sections) {
       setIsMenuItemOpen(!isMenuItemOpen);
     }
   };
@@ -76,7 +80,7 @@ const MobileMenuItem = ({ text, to, items, isDarkTheme }) => {
         onClick={handleMenuItemClick}
       >
         <span>{text}</span>
-        {items && (
+        {sections && (
           <ChevronIcon
             className={clsx(
               'ml-auto inline-block h-2.5 w-2.5 transition-transform duration-200 dark:text-white [&_path]:stroke-2',
@@ -86,7 +90,7 @@ const MobileMenuItem = ({ text, to, items, isDarkTheme }) => {
           />
         )}
       </Tag>
-      {items?.length > 0 && (
+      {hasSubmenu && (
         <AnimatePresence>
           {isMenuItemOpen && (
             <m.ul
@@ -95,52 +99,89 @@ const MobileMenuItem = ({ text, to, items, isDarkTheme }) => {
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: ANIMATION_DURATION }}
               className={clsx(
-                'flex flex-col gap-y-0.5 border-t py-2 dark:border-gray-new-10',
+                'flex flex-col gap-y-5 border-t py-4 dark:border-gray-new-10',
                 isDarkTheme ? 'border-gray-new-10' : 'border-gray-new-94'
               )}
             >
-              {items.map(({ icon, text, description, to }, index) => (
-                <li className="group flex" key={index}>
-                  <Link className="flex w-full gap-x-3 py-2 leading-none" to={to}>
-                    <img
-                      className="h-[17px] w-[17px] shrink dark:hidden"
-                      src={icon.light}
-                      width={17}
-                      height={17}
-                      loading="lazy"
-                      alt=""
-                      aria-hidden
-                    />
-                    <img
-                      className="hidden h-[17px] w-[17px] shrink dark:block"
-                      src={icon.dark}
-                      width={17}
-                      height={17}
-                      loading="lazy"
-                      alt=""
-                      aria-hidden
-                    />
-                    <span className="flex flex-col gap-y-1">
-                      <span
-                        className={clsx(
-                          'text-[15px] leading-dense tracking-[-0.01em] dark:text-white',
-                          isDarkTheme ? 'text-white' : 'text-black-new'
-                        )}
+              {sections.map(({ title, items, banner }, index) => {
+                if (banner) {
+                  const { title, description, to } = banner;
+
+                  return (
+                    <li className="-order-1" key={index}>
+                      <Link
+                        className="relative block w-fit overflow-hidden rounded-lg xs:w-full"
+                        to={to}
                       >
-                        {text}
-                      </span>
-                      <span
-                        className={clsx(
-                          'text-[13px] font-light leading-dense tracking-extra-tight dark:text-gray-new-50',
-                          isDarkTheme ? 'text-gray-new-50' : 'text-gray-new-40'
-                        )}
-                      >
-                        {description}
-                      </span>
-                    </span>
-                  </Link>
-                </li>
-              ))}
+                        <Image
+                          className="xs:h-20 xs:w-full xs:object-cover"
+                          src={menuBanner}
+                          width={252}
+                          height={80}
+                          alt=""
+                        />
+                        <div className="absolute inset-0 z-10 flex flex-col justify-center p-3">
+                          <h3 className="text-sm text-white">{title}</h3>
+                          <p className="mt-1.5 text-xs font-light text-gray-new-50">
+                            {description}
+                          </p>
+                        </div>
+                      </Link>
+                    </li>
+                  );
+                }
+
+                return (
+                  <li className="w-full" key={index}>
+                    {title && (
+                      <h3 className="mb-4 text-[11px] font-medium uppercase leading-none text-gray-new-40 dark:text-gray-new-50">
+                        {title}
+                      </h3>
+                    )}
+                    <ul className="flex flex-col gap-4">
+                      {items.map(({ icon: Icon, title, description, to }, index) => (
+                        <li key={index}>
+                          <Link className="relative flex gap-2 whitespace-nowrap" to={to}>
+                            {Icon && (
+                              <Icon
+                                className={clsx(
+                                  'size-4 shrink-0',
+                                  isDarkTheme
+                                    ? 'text-gray-new-80'
+                                    : 'text-gray-new-30 dark:text-gray-new-80'
+                                )}
+                              />
+                            )}
+                            <div className="relative z-10">
+                              <span
+                                className={clsx(
+                                  'block text-sm tracking-[-0.01em] transition-colors duration-200',
+                                  description ? 'leading-none' : 'leading-dense',
+                                  isDarkTheme ? 'text-white' : 'text-black-new dark:text-white'
+                                )}
+                              >
+                                {title}
+                              </span>
+                              {description && (
+                                <span
+                                  className={clsx(
+                                    'mt-1.5 block text-xs font-light leading-none tracking-extra-tight',
+                                    isDarkTheme
+                                      ? 'text-gray-new-50'
+                                      : 'text-gray-new-40 dark:text-gray-new-50'
+                                  )}
+                                >
+                                  {description}
+                                </span>
+                              )}
+                            </div>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                );
+              })}
             </m.ul>
           )}
         </AnimatePresence>
@@ -153,11 +194,21 @@ MobileMenuItem.propTypes = {
   text: PropTypes.string.isRequired,
   to: PropTypes.string,
   isDarkTheme: PropTypes.bool,
-  items: PropTypes.arrayOf(
+  sections: PropTypes.arrayOf(
     PropTypes.shape({
-      text: PropTypes.string,
-      description: PropTypes.string,
-      to: PropTypes.string,
+      title: PropTypes.string,
+      theme: PropTypes.string,
+      items: PropTypes.arrayOf(
+        PropTypes.shape({
+          icon: PropTypes.shape({
+            light: PropTypes.string,
+            dark: PropTypes.string,
+          }),
+          text: PropTypes.string,
+          description: PropTypes.string,
+          to: PropTypes.string,
+        })
+      ),
     })
   ),
 };

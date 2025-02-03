@@ -1,39 +1,32 @@
-import aboutUsDarkIcon from 'icons/header/about-us-dark.svg';
-import aboutUsIcon from 'icons/header/about-us.svg';
-import aiAgentsDarkIcon from 'icons/header/ai-agents-dark.svg';
-import aiAgentsIcon from 'icons/header/ai-agents.svg';
-import aiDarkIcon from 'icons/header/ai-dark.svg';
-import aiIcon from 'icons/header/ai.svg';
-import apiDarkIcon from 'icons/header/api-dark.svg';
-import apiIcon from 'icons/header/api.svg';
-import autoscalingDarkIcon from 'icons/header/autoscaling-dark.svg';
-import autoscalingIcon from 'icons/header/autoscaling.svg';
-import blogDarkIcon from 'icons/header/blog-dark.svg';
-import blogIcon from 'icons/header/blog.svg';
-import branchingDarkIcon from 'icons/header/branching-dark.svg';
-import branchingIcon from 'icons/header/branching.svg';
-import careersDarkIcon from 'icons/header/careers-dark.svg';
-import careersIcon from 'icons/header/careers.svg';
-import caseDatabaseDarkIcon from 'icons/header/case-database-dark.svg';
-import caseDatabaseIcon from 'icons/header/case-database.svg';
-import caseDevDarkIcon from 'icons/header/case-dev-dark.svg';
-import caseDevIcon from 'icons/header/case-dev.svg';
-import caseSaasDarkIcon from 'icons/header/case-saas-dark.svg';
-import caseSaasIcon from 'icons/header/case-saas.svg';
-import caseStudiesDarkIcon from 'icons/header/case-studies-dark.svg';
-import caseStudiesIcon from 'icons/header/case-studies.svg';
-import caseVariableDarkIcon from 'icons/header/case-variable-dark.svg';
-import caseVariableIcon from 'icons/header/case-variable.svg';
-import connectionPoolerDarkIcon from 'icons/header/connection-pooler-dark.svg';
-import connectionPoolerIcon from 'icons/header/connection-pooler.svg';
-import consoleDarkIcon from 'icons/header/console-dark.svg';
-import consoleIcon from 'icons/header/console.svg';
-import enterpriseDarkIcon from 'icons/header/enterprise-dark.svg';
-import enterpriseIcon from 'icons/header/enterprise.svg';
-import partnersDarkIcon from 'icons/header/partners-dark.svg';
-import partnersIcon from 'icons/header/partners.svg';
-import scaleToZeroDarkIcon from 'icons/header/scale-to-zero-dark.svg';
-import scaleToZeroIcon from 'icons/header/scale-to-zero.svg';
+import AiAgentsIcon from 'icons/header/ai-agent.inline.svg';
+import AiGradientIcon from 'icons/header/ai-gradient.inline.svg';
+import AiIcon from 'icons/header/ai.inline.svg';
+import ApiGradientIcon from 'icons/header/api-gradient.inline.svg';
+import ApiIcon from 'icons/header/api.inline.svg';
+import AutoscalingGradientIcon from 'icons/header/autoscaling-gradient.inline.svg';
+import AutoscalingIcon from 'icons/header/autoscaling.inline.svg';
+import BlogIcon from 'icons/header/blog.inline.svg';
+import BuildingGradientIcon from 'icons/header/building-gradient.inline.svg';
+import BuildingIcon from 'icons/header/building.inline.svg';
+import CareerIcon from 'icons/header/career.inline.svg';
+import ChatIcon from 'icons/header/chat.inline.svg';
+import ConnectionGradientIcon from 'icons/header/connection-gradient.inline.svg';
+import ConnectionIcon from 'icons/header/connection.inline.svg';
+import DatabaseIcon from 'icons/header/database.inline.svg';
+import FlowGradientIcon from 'icons/header/flow-gradient.inline.svg';
+import FlowIcon from 'icons/header/flow.inline.svg';
+import FolderGradientIcon from 'icons/header/folder-gradient.inline.svg';
+import FolderIcon from 'icons/header/folder.inline.svg';
+import GearIcon from 'icons/header/gear.inline.svg';
+import MigrationGradientIcon from 'icons/header/migration-gradient.inline.svg';
+import MigrationIcon from 'icons/header/migration.inline.svg';
+import PeopleIcon from 'icons/header/people.inline.svg';
+import PrivacyGradientIcon from 'icons/header/privacy-gradient.inline.svg';
+import PrivacyIcon from 'icons/header/privacy.inline.svg';
+import SaasIcon from 'icons/header/saas.inline.svg';
+import StarGradientIcon from 'icons/header/star-gradient.inline.svg';
+import StarIcon from 'icons/header/star.inline.svg';
+import VariableIcon from 'icons/header/variable.inline.svg';
 
 import LINKS from './links';
 
@@ -44,176 +37,139 @@ export default {
       sections: [
         {
           title: 'Database',
-          theme: 'cards',
           items: [
             {
-              icon: {
-                light: autoscalingIcon,
-                dark: autoscalingDarkIcon,
-              },
-              text: 'Autoscaling',
+              icon: AutoscalingIcon,
+              iconGradient: AutoscalingGradientIcon,
+              title: 'Autoscaling',
               description: 'Automatic instance sizing',
               to: LINKS.autoscaling,
             },
             {
-              icon: {
-                light: connectionPoolerIcon,
-                dark: connectionPoolerDarkIcon,
-              },
-              text: 'Connection pooler',
+              icon: ConnectionIcon,
+              iconGradient: ConnectionGradientIcon,
+              title: 'Connection pooler',
               description: 'Thousands of connections',
               to: LINKS.connectionPooling,
             },
             {
-              icon: {
-                light: aiIcon,
-                dark: aiDarkIcon,
-              },
-              text: 'AI',
+              icon: AiIcon,
+              iconGradient: AiGradientIcon,
+              title: 'AI',
               description: 'Powered by pgvector',
               to: LINKS.ai,
             },
           ],
+          isExtended: true,
         },
         {
           banner: {
             title: 'What is Neon?',
             description: 'Serverless explainer updated',
-            theme: 'banner',
             to: LINKS.serverless,
           },
         },
         {
           title: 'Workflow',
-          theme: 'cards',
           items: [
             {
-              icon: {
-                light: branchingIcon,
-                dark: branchingDarkIcon,
-              },
-              text: 'Dev environments',
+              icon: FlowIcon,
+              iconGradient: FlowGradientIcon,
+              title: 'Dev environments',
               description: 'Copy schema + data',
               to: LINKS.flow,
             },
             {
-              icon: {
-                light: scaleToZeroIcon,
-                dark: scaleToZeroDarkIcon,
-              },
-              text: 'Scale-to-zero',
-              description: 'Lower costs for dev/test',
-              to: LINKS.scaleToZero,
+              icon: MigrationIcon,
+              iconGradient: MigrationGradientIcon,
+              title: 'Migration tool',
+              description: 'Thousands of connections',
+              to: LINKS.migration,
             },
           ],
+          isExtended: true,
         },
         {
           title: 'Backend',
-          theme: 'cards',
           items: [
             {
-              icon: {
-                light: consoleIcon,
-                dark: consoleDarkIcon,
-              },
-              text: 'Authorize',
-              description: 'Row-level security',
+              icon: PrivacyIcon,
+              iconGradient: PrivacyGradientIcon,
+              title: 'Authorize',
+              description: 'UI for data management',
               to: LINKS.authorize,
             },
             {
-              icon: {
-                light: apiIcon,
-                dark: apiDarkIcon,
-              },
-              text: 'API',
-              description: 'Less management work',
+              icon: ApiIcon,
+              iconGradient: ApiGradientIcon,
+              title: 'Identity',
+              description: 'Thousands of connections',
               to: LINKS.api,
             },
           ],
+          isExtended: true,
         },
       ],
     },
     {
       text: 'Solutions',
-      section: [
+      sections: [
         {
           title: 'Use cases',
-          theme: 'list',
           items: [
             {
-              icon: {
-                light: caseSaasIcon,
-                dark: caseSaasDarkIcon,
-              },
-              text: 'SaaS Apps',
+              icon: SaasIcon,
+              title: 'SaaS Apps',
               to: `${LINKS.useCases}/postgres-for-saas`,
             },
             {
-              icon: {
-                light: caseVariableIcon,
-                dark: caseVariableDarkIcon,
-              },
-              text: 'Variable Traffic',
+              icon: VariableIcon,
+              title: 'Variable Traffic',
               to: LINKS.variableLoad,
             },
             {
-              icon: {
-                light: caseDatabaseIcon,
-                dark: caseDatabaseDarkIcon,
-              },
-              text: 'Database per Tenant',
+              icon: DatabaseIcon,
+              title: 'Database per Tenant',
               to: `${LINKS.useCases}/database-per-tenant`,
             },
             {
-              icon: {
-                light: caseDevIcon,
-                dark: caseDevDarkIcon,
-              },
-              text: 'Dev/Test',
+              icon: GearIcon,
+              title: 'Dev/Test',
               to: `${LINKS.useCases}/dev-test`,
             },
             {
-              icon: {
-                light: aiAgentsIcon,
-                dark: aiAgentsDarkIcon,
-              },
-              text: 'Agents',
+              icon: AiAgentsIcon,
+              title: 'Agents',
               to: `${LINKS.useCases}/ai-agents`,
             },
           ],
         },
         {
           title: 'For teams',
-          theme: 'cards',
           items: [
             {
-              icon: {
-                light: enterpriseIcon,
-                dark: enterpriseDarkIcon,
-              },
-              text: 'Enterprise',
+              icon: BuildingIcon,
+              iconGradient: BuildingGradientIcon,
+              title: 'Enterprise',
               description: 'Scale & grow',
               to: LINKS.enterprise,
             },
             {
-              icon: {
-                light: partnersIcon,
-                dark: partnersDarkIcon,
-              },
-              text: 'Partners',
+              icon: StarIcon,
+              iconGradient: StarGradientIcon,
+              title: 'Partners',
               description: 'Add Neon to your platform',
               to: LINKS.partners,
             },
             {
-              icon: {
-                light: caseStudiesIcon,
-                dark: caseStudiesDarkIcon,
-              },
-              text: 'Case studies',
+              icon: FolderIcon,
+              iconGradient: FolderGradientIcon,
+              title: 'Case studies',
               description: 'Explore customer stories',
               to: LINKS.caseStudies,
             },
           ],
+          isExtended: true,
         },
       ],
     },
@@ -229,38 +185,25 @@ export default {
       text: 'Company',
       sections: [
         {
-          theme: 'list',
           items: [
             {
-              icon: {
-                light: blogIcon,
-                dark: blogDarkIcon,
-              },
-              text: 'Blog',
+              icon: BlogIcon,
+              title: 'Blog',
               to: LINKS.blog,
             },
             {
-              icon: {
-                light: aboutUsIcon,
-                dark: aboutUsDarkIcon,
-              },
-              text: 'About us',
+              icon: PeopleIcon,
+              title: 'About us',
               to: LINKS.aboutUs,
             },
             {
-              icon: {
-                light: careersIcon,
-                dark: careersDarkIcon,
-              },
-              text: 'Careers',
+              icon: CareerIcon,
+              title: 'Careers',
               to: LINKS.careers,
             },
             {
-              icon: {
-                light: careersIcon,
-                dark: careersDarkIcon,
-              },
-              text: 'Contact',
+              icon: ChatIcon,
+              title: 'Contact',
               to: LINKS.contactSales,
             },
           ],

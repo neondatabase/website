@@ -41,7 +41,7 @@ export default {
   cliReference: '/docs/reference/neon-cli',
   connectionPooling: '/docs/connect/connection-pooling',
   docsBranching: '/docs/introduction/branching',
-  scaleToZero: '/docs/guides/scale-to-zero-guide',
+  migration: '/docs/import/migrate-intro',
   security: '/docs/security/security-overview',
   serverless: '/docs/introduction/serverless',
   support: '/docs/introduction/support',
