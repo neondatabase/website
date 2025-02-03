@@ -2,7 +2,7 @@
 title: Connect from Phoenix to Neon
 subtitle: Set up a Neon project in seconds and connect from Phoenix
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.660Z'
+updatedOn: '2025-02-03T20:41:57.332Z'
 ---
 
 This guide describes how to connect Neon in a [Phoenix](https://www.phoenixframework.org) application. [Ecto](https://hexdocs.pm/ecto/3.11.2/Ecto.html) provides an API and abstractions for interacting databases, enabling Elixir developers to query any database using similar constructs.

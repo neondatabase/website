@@ -2,7 +2,7 @@
 title: Get started with Liquibase and Neon
 subtitle: Learn how to manage schema changes in Neon with Liquibase
 enableTableOfContents: true
-updatedOn: '2024-10-26T08:44:49.109Z'
+updatedOn: '2025-02-03T20:41:57.317Z'
 ---
 
 Liquibase is an open-source library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).

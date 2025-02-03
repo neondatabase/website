@@ -4,7 +4,7 @@ subtitle: Learn how to replicate data from Aurora PostgreSQL to Neon
 enableTableOfContents: true
 isDraft: false
 tag: new
-updatedOn: '2025-01-27T15:25:05.406Z'
+updatedOn: '2025-02-03T20:41:57.318Z'
 ---
 
 <LRBeta/>

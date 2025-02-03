@@ -5,7 +5,7 @@ subtitle: Learn how to migrate your data from Firebase Firestore to Neon Postgre
 redirectFrom:
   - /docs/import/import-from-firebase
 enableTableOfContents: true
-updatedOn: '2025-01-27T15:25:05.411Z'
+updatedOn: '2025-02-03T20:41:57.341Z'
 ---
 
 This guide describes how to migrate data from Firebase Firestore to Neon Postgres.

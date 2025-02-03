@@ -4,7 +4,7 @@ subtitle: Learn how to create an automatic audit trail for your Postgres databas
   Bemi
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-11-30T11:53:56.057Z'
+updatedOn: '2025-02-03T20:41:57.308Z'
 ---
 
 [Bemi](https://bemi.io/) is an open-source solution that plugs into Postgres and ORMs such as Prisma, TypeORM, SQLAlchemy, and Ruby on Rails to track database changes automatically. It unlocks robust context-aware audit trails and time travel querying inside your application.

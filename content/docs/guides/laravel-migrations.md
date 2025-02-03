@@ -2,7 +2,7 @@
 title: Schema migration with Neon Postgres and Laravel
 subtitle: Set up Neon Postgres and run migrations for your Laravel project
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.061Z'
+updatedOn: '2025-02-03T20:41:57.316Z'
 ---
 
 [Laravel](https://laravel.com/) is a popular PHP web application framework that provides an expressive and elegant syntax for building web applications. It includes an ORM (Object-Relational Mapping) called Eloquent, which allows you to interact with databases using a fluent API. Laravel also provides a powerful migration system to manage database schema changes over time.

@@ -3,7 +3,7 @@ title: Replicate data with Fivetran
 subtitle: Learn how to replicate data from Neon with Fivetran
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-23T17:19:28.788Z'
+updatedOn: '2025-02-03T20:41:57.320Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.

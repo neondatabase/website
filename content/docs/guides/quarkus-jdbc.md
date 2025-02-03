@@ -2,7 +2,7 @@
 title: Connect Quarkus (JDBC) to Neon
 subtitle: Learn how to connect to Neon from Quarkus using JDBC
 enableTableOfContents: true
-updatedOn: '2024-02-08T15:20:54.288Z'
+updatedOn: '2025-02-03T20:41:57.333Z'
 ---
 
 [Quarkus](https://quarkus.io/) is a Java framework optimized for cloud environments. This guide shows how to connect to Neon from a Quarkus project using the PostgreSQL JDBC driver.

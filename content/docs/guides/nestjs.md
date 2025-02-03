@@ -2,7 +2,7 @@
 title: Connect a NestJS application to Neon
 subtitle: Set up a Neon project in seconds and connect from a NestJS application
 enableTableOfContents: true
-updatedOn: '2024-09-08T12:44:00.903Z'
+updatedOn: '2025-02-03T20:41:57.330Z'
 ---
 
 NestJS is a framework for building efficient, scalable Node.js server-side applications<sup><a target="_blank" href="https://docs.nestjs.com/">1</a></sup>. This guide explains how to connect NestJS with Neon using a secure server-side request.

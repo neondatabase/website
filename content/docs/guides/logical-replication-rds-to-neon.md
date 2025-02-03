@@ -3,7 +3,7 @@ title: Replicate data from Amazon RDS Postgres
 subtitle: Learn how to replicate data from Amazon RDS Postgres to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-01-27T15:25:05.409Z'
+updatedOn: '2025-02-03T20:41:57.324Z'
 ---
 
 <LRBeta/>

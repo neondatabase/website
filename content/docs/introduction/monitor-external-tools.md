@@ -3,7 +3,7 @@ title: Monitoring Neon with external tools
 subtitle: Monitor your Neon Postgres database with external tools such as PgAdmin or
   PgHero
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.070Z'
+updatedOn: '2025-02-03T20:41:57.343Z'
 ---
 
 There are external tools that you can use to monitor your Neon Postgres database, such as [PgHero](#pghero) and [pgAdmin](#pgadmin). Setup instructions for those tools are provided below.

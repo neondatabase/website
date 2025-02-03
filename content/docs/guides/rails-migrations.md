@@ -2,7 +2,7 @@
 title: Schema migration with Neon Postgres and Ruby on Rails
 subtitle: Set up Neon Postgres and run migrations for your Rails project
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.063Z'
+updatedOn: '2025-02-03T20:41:57.333Z'
 ---
 
 [Ruby on Rails](https://rubyonrails.org/) is a popular web application framework for Ruby developers. It provides an ORM (Object-Relational Mapping) layer called `Active Record`, that simplifies database interactions and schema management. Rails also includes a powerful migration system that allows you to define and manage database schema changes over time.

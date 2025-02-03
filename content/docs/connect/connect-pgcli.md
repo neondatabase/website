@@ -3,7 +3,7 @@ title: Connect with pgcli
 subtitle: Learn how to connect to Neon using the interactive pgcli client
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-07T21:36:52.639Z'
+updatedOn: '2025-02-03T20:41:57.299Z'
 ---
 
 The `pgcli` client is an interactive command-line interface for Postgres that offers several advantages over the traditional `psql` client, including syntax highlighting, autocompletion, multi-line editing, and query history.

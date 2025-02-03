@@ -3,7 +3,7 @@ title: Secure your data with SuperTokens and Neon Authorize
 subtitle: Implement Row-level Security policies in Postgres using SuperTokens and Neon
   Authorize
 enableTableOfContents: true
-updatedOn: '2025-01-29T23:50:53.962Z'
+updatedOn: '2025-02-03T20:41:57.330Z'
 ---
 
 <InfoBlock>

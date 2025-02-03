@@ -3,7 +3,7 @@ title: Replicate data with Inngest
 subtitle: Learn how to replicate data from Neon with Inngest
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-12-26T17:57:49.405Z'
+updatedOn: '2025-02-03T20:41:57.321Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.

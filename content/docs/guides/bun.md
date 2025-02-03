@@ -2,7 +2,7 @@
 title: Connect a Bun application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Bun application
 enableTableOfContents: true
-updatedOn: '2025-01-25T22:10:34.143Z'
+updatedOn: '2025-02-03T20:41:57.309Z'
 ---
 
 This guide describes how to create a Neon project and connect to it from a Bun application. Examples are provided for using [Bun's built-in SQL client](https://bun.sh/docs/api/sql) and the [@neondatabase/serverless](/docs/serverless/serverless-driver) driver. Use the client you prefer.

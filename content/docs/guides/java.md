@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/java
   - /docs/integrations/java
-updatedOn: '2024-06-14T07:55:54.393Z'
+updatedOn: '2025-02-03T20:41:57.315Z'
 ---
 
 This guide describes how to create a Neon project and connect to it with Java Database Connectivity (JDBC) or from a Spring Data project that uses JDBC.
