@@ -136,7 +136,7 @@ For information about configuring allowed IPs in Neon, see [Configure IP Allow](
 
 1. In the Decodable web UI, select **Connections** from the left navigation bar and click **New Connection**.
 2. In the connector catalog, choose **Postgres CDC** and click **Connect**.
-3. Enter the connection details for your Neon database. You can get these details from your Neon connection string, which you'll find in the **Connection Details** widget on the **Dashboard** of your Neon project.
+3. Enter the connection details for your Neon database. You can find your Neon database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
    Your connection string will look like this:
 
    ```bash shouldWrap

@@ -76,6 +76,6 @@ The logical replication method can be used to achieve a near-zero downtime migra
 
 After the migration is complete and you have verified that your new database is working as expected, you can switch your application over to the database in your new Neon project by swapping out your current database connection details for your new database connection details.
 
-You can find the connection details for your new Neon database on the **Connection Details** widget in the Neon Console. For details, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. This opens the **Connect to your database** modal. See [Connect from any application](/docs/connect/connect-from-any-app).
 
 <NeedHelp/>

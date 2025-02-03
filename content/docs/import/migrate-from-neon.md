@@ -36,7 +36,7 @@ To import your data from another Neon project:
 
 3. Retrieve the connection strings for the new and existing Neon databases.
 
-   You can obtain the connection strings from the Neon **Dashboard**, under **Connection Details**. Connections strings have this format:
+   You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. Connections strings have this format:
 
    ```bash shouldWrap
    postgresql://[user]:[password]@[neon_hostname]/[dbname]

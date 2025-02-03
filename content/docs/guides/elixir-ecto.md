@@ -32,7 +32,7 @@ To create the database:
 1. Enter a database name (`friends`), and select a database owner.
 1. Click **Create**.
 
-You can obtain the connection string for the database from the **Connection Details** widget on the Neon **Dashboard**. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you. Your connection string should look something like this:
+Find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you. Your connection string should look something like this:
 
 ```bash shouldWrap
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/friends

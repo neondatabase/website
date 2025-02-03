@@ -65,7 +65,7 @@ The project is created with a ready-to-use `neondb` database, which you will con
 
 Add a `.env` file to your project's root directory and add your Neon connection string to it.
 
-You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 Your connection string will look something like this:
 

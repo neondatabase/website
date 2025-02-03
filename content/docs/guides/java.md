@@ -37,7 +37,7 @@ For a JDBC connection URL, replace the variables in the following URL string wit
 jdbc:postgresql://[neon_hostname]/[dbname]?user=[user]&password=[password]&sslmode=require
 ```
 
-You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Connect from Spring Data
 

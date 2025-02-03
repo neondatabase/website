@@ -16,9 +16,9 @@ To perform the steps in this guide, you require a Neon database for storing vect
 
 ## Retrieve your database connection string
 
-In the **Connection Details** widget on the Neon **Dashboard**, select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
+Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal, and select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
 
-![Connection details widget](/docs/connect/connection_details.png)
+![Connection modal](/docs/connect/connection_details.png)
 
 ## Create a notebook
 

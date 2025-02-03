@@ -49,7 +49,7 @@ The following instructions assume you are connecting with a Postgres role create
 
 To connect your database to Bemi:
 
-1. In Neon, retrieve your database connection string from the **Connection Details** widget on the **Project Dashboard**, which will look similar to this:
+1. In Neon, retrieve your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. It will look similar to this:
 
    ```sql shouldWrap
    postgresql://neondb_owner:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require
@@ -111,7 +111,7 @@ CALL _bemi_set_replica_identity();
 ```
 
 <Admonition type="note">
-After creating a read-only role, you can find the connection details for this role in the **Connection Details** widget in the Neon console. Use this role when connecting your Neon database to Bemi, as described [above](#connect-your-neon-database-to-bemi).
+After creating a read-only role, you can find the connection details for this role by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Use this role when connecting your Neon database to Bemi, as described [above](#connect-your-neon-database-to-bemi).
 </Admonition>
 
 ## Allow inbound traffic

@@ -43,7 +43,7 @@ The prerequisites for this guide include the following:
 
 ## Retrieve your Neon database connection string
 
-From the Neon **Dashboard**, retrieve the connection string for your `ferretdb` database from the **Connection Details** widget.
+Find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
 
 Your database connection string will look something like this:
 

@@ -55,7 +55,7 @@ source ~/.zshrc
 
 ## Retrieve your Neon database connection string
 
-From the Neon **Dashboard**, retrieve your password and a Java connection string from the **Connection Details** widget.
+Find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select the **Java** option from the **Connection string** drop-down menu.
 
 Your Java connection string should look something like this:
 

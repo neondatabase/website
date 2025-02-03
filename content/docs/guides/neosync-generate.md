@@ -59,7 +59,7 @@ Next, we'll create the table for your data.
 
 ### Copy the connection string for your database
 
-Navigate to the **Dashboard** in Neon and copy the connection string for the destination database from the **Connection Details** widget.
+Navigate to the **Project Dashboard** in Neon, click **Connect**, and copy the connection string for the destination database from the **Connect to your database** modal.
 
 <Admonition type="note">
 Make sure you select the correct database (`neosync`) from the **Database** drop-down menu.
