@@ -57,62 +57,66 @@ Most teams running dev/test workloads on Neon while keeping production on anothe
 
 A Neon Twin is a synchronized copy of your production or staging database within your main_dev branch, which will serve as the source for your development and testing environments. One of the methods to build a Neon Twin is automating nightly data synchronization using `pg_dump`, `pg_restore`, and GitHub Actions. [Detailed instructions can be found in this blog post series](https://neon.tech/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon).
 
-- **Set up the initial data import.** Use `pg_dump` to create a dump of your production or staging database.
+- **Create the GitHub Actions Workflow.**
 
-  ```sql shouldWrap
-  pg_dump -Fc -v -d postgresql://[user]:[password]@[source_host]/[database] -f source_dump.bak
-  ```
+Create a new directory at the root of your project named `.github`. Within this directory create another directory named `workflows`. Within this directory create a new file named `create-neon-twin.yml`. E.g
 
-- **Import data into Neon.** Use `pg_restore` to load the dump into your Neon main_dev branch:
+```
+.github
+  |-- workflows
+      |-- create-neon-twin.yml
+```
 
-  ```sql shouldWrap
-  pg_restore -v -d postgresql://[user]:[password]@[neon_host]/[database] source_dump.bak
-  ```
+Add the following code to `create-neon-twin.yml`.
 
-- **Automate nightly synchronization with GitHub Actions**.
+```yml
+name: Create Neon Twin
 
-  - **Prerequisites**:
-    - Ensure you have a GitHub repository to host the workflow.
-    - Store your database credentials securely using GitHub Secrets.
-  - **Steps**:
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs at midnight ET (us-east-1)
+  workflow_dispatch:
 
-    1. In your GitHub repository, navigate to .github/workflows/ and create a file named neon_twin_sync.yml.
-    2. Insert the following content into `neon_twin_sync.yml`:
+env:
+  PROD_DATABASE_URL: ${{ secrets.PROD_DATABASE_URL }} # Production or primary database
+  DEV_DATABASE_URL: ${{ secrets.DEV_DATABASE_URL }} # Development database
+  PG_VERSION: '17'
 
-       ```yaml
-       name: Neon Twin Sync
+jobs:
+  dump-and-restore:
+    runs-on: ubuntu-latest
 
-       on:
-         schedule:
-           - cron: '0 0 * * *' # Runs daily at midnight
+    steps:
+      - name: Install PostgreSQL
+        run: |
+          sudo apt update
+          yes '' | sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
+          sudo apt install -y postgresql-${{ env.PG_VERSION }}
 
-       jobs:
-         sync:
-           runs-on: ubuntu-latest
-           steps:
-             - name: Checkout repository
-               uses: actions/checkout@v3
+      - name: Dump from Prod and Restore to Neon
+        run: |
+          /usr/lib/postgresql/${{ env.PG_VERSION }}/bin/pg_dump "${{ env.PROD_DATABASE_URL }}" -Fc -f "${{ github.workspace }}/prod-dump-file.dump"
+          /usr/lib/postgresql/${{ env.PG_VERSION }}/bin/pg_restore -d "${{ env.DEV_DATABASE_URL }}" --clean --no-owner --no-acl --if-exists "${{ github.workspace }}/prod-dump-file.dump"
+```
 
-             - name: Set up PostgreSQL
-               uses: postgres-actions/setup-postgresql@v2
-               with:
-                 postgresql-version: '17'
+- **Add Environment variables to GitHub**
 
-             - name: Dump source database
-               run: |
-                 pg_dump -Fc -v -d ${{ secrets.SOURCE_DB_URL }} -f source_dump.bak
+The GitHub Action references two environment variables which need to be stored as secrets in your GitHub repository. Navigate to **Settings** > **Secrets and variables** > **Actions** and add the following as repository variables.
 
-             - name: Restore to Neon
-               run: |
-                 pg_restore -v -d ${{ secrets.NEON_DB_URL }} source_dump.bak
-       ```
+- `PROD_DATABASE_URL`. This is the PostgreSQL connection string for your production database.
+- `DEV_DATABASE_URL`. This is the PostgreSQL connection string for your Neon development database, or Twin.
 
-    3. In your GitHub repository, navigate to Settings > Secrets and variables > Actions.
-    4. Add the following secrets:
-       - `SOURCE_DB_URL`: Connection string for your source database.
-       - `NEON_DB_UR`L: Connection string for your Neon main_dev branch.
-    5. Commit the `neon_twin_sync.yml` file to your repository.
-       GitHub Actions will execute this workflow nightly, synchronizing your Neon Twin with the source database.
+- **Workflow configuration**
+
+There are a number of configuration options you might want to change.
+
+- `cron:` The [POSIX cron syntax](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/crontab.html#tag_20_25_07) determines when the Action will run. You can modify the time and how regular the dump/restore occur by changing the numbers.
+
+- `workflow_dispatch:` This will allow you to trigger the workflow manually from within the GitHub UI. It can be removed if not required.
+
+- `PG_VERSION:` This is the version of PostgreSQL to install in the Action environment. You should install a version that is compatible with both your Production and Development database.
+
+Once ths workflow has been committed to your repository, it will continue to run on the schedule defined by the cron syntax.
 
 ### Using AWS DMS
 
