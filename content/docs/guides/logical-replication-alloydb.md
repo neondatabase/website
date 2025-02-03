@@ -190,7 +190,7 @@ To comment out a single line, you can use `--` at the beginning of the line.
 After making any necessary modifications to the dump file, load the dumped schema using `pg_restore`.
 
 <Admonition type="tip">
-When you're restoring on Neon, you can input your Neon connection string in place of `postgresql://role:password@hostname:5432/dbname`. You can find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
+When you're restoring on Neon, you can input your Neon connection string in place of `postgresql://role:password@hostname:5432/dbname`. You can find your database connection string by clicking the **Connect** button on your **Project Dashboard**.
 </Admonition>
 
 ```sql

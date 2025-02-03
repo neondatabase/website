@@ -33,7 +33,7 @@ DB_USERNAME=[user]
 DB_PASSWORD=[password]
 ```
 
-You can find your database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find your database connection details by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Connection issues
 

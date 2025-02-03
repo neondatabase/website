@@ -198,7 +198,7 @@ Create the Lambda function using the [Serverless Framework](https://www.serverle
    Environment variables can also be added to a `.env` file and loaded automatically with the help of the [dotenv](https://www.npmjs.com/package/dotenv) package. For more information, see [Resolution of environment variables](https://www.serverless.com/framework/docs/environment-variables).
    </Admonition>
 
-   You can find your database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Add the `DATABASE_URL` under `environment`, and add `sslmode=require` to the end of the connection string to enable SSL. The `sslmode=require` option tells Postgres to use SSL encryption and verify the server's certificate.
+   You can find your database connection details by clicking the **Connect** button on your **Project Dashboard**. Add the `DATABASE_URL` under `environment`, and add `sslmode=require` to the end of the connection string to enable SSL. The `sslmode=require` option tells Postgres to use SSL encryption and verify the server's certificate.
 
    ```yaml shouldWrap
    provider:

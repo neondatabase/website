@@ -164,7 +164,7 @@ The Airbyte UI currently allows selecting any table for Change Data Capture (CDC
 ## Create a Postgres source in Airbyte
 
 1. From your Airbyte Cloud account, select **Sources** from the left navigation bar, search for **Postgres**, and then create a new Postgres source.
-2. Enter the connection details for your Neon database. You can find your database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
+2. Enter the connection details for your Neon database. You can find your database connection details by clicking the **Connect** button on your **Project Dashboard**.
    For example, given a connection string like this:
 
    ```bash shouldWrap

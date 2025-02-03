@@ -148,7 +148,7 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
    A compute hostname starts with an `ep-` prefix. You can also find a compute hostname on the **Branches** page in the Neon Console. See [View branches](#view-branches).
    </Admonition>
 
-   If you want to connect from an application, the **Connect to your database modal** modal accessed by clicking **Connect** on the project **Dashboard** and the [Frameworks](/docs/get-started-with-neon/frameworks) and [Languages](/docs/get-started-with-neon/languages) sections in the documentation provide various connection examples.
+   If you want to connect from an application, the **Connect to your database modal**, accessed by clicking **Connect** on the project **Dashboard**, and the [Frameworks](/docs/get-started-with-neon/frameworks) and [Languages](/docs/get-started-with-neon/languages) sections in the documentation provide various connection examples.
 
 ## Reset a branch from parent
 

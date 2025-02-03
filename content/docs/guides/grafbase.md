@@ -86,7 +86,7 @@ npm install @neondatabase/serverless
 
 ## Retrieve your Neon connection string
 
-A database connection string is required to forward queries to your Neon database. You can find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
+A database connection string is required to forward queries to your Neon database. You can find your database connection string by clicking the **Connect** button on your **Project Dashboard**.
 
 1. Navigate to the Neon **Project Dashboard**.
 2. Click **Connect** and copy the connection string for your database. The connection string should appear similar to the following:
