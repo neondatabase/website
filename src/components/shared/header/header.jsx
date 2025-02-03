@@ -7,6 +7,7 @@ import ModeToggler from 'components/pages/doc/mode-toggler';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import GithubStarCounter from 'components/shared/github-star-counter';
+import GradientBorder from 'components/shared/gradient-border';
 import Link from 'components/shared/link';
 import Logo from 'components/shared/logo';
 import MobileMenu from 'components/shared/mobile-menu';
@@ -16,7 +17,7 @@ import ChevronIcon from 'icons/chevron-down.inline.svg';
 import { getGithubStars } from 'utils/get-github-data';
 
 import HeaderWrapper from './header-wrapper';
-import menuBanner from './images/menu-banner.png';
+import menuBanner from './images/menu-banner.jpg';
 
 const themePropTypes = {
   isDarkTheme: PropTypes.bool,
@@ -62,9 +63,10 @@ const Navigation = ({ isDarkTheme }) => (
               >
                 <ul
                   className={clsx(
-                    'relative rounded-[14px] border p-6',
-                    gridSubmenu &&
-                      'grid w-max grid-cols-[repeat(2,minmax(0,auto));] gap-x-14 gap-y-9 px-7',
+                    'relative rounded-[14px] border',
+                    gridSubmenu
+                      ? 'grid w-max grid-cols-[repeat(2,minmax(0,auto));] gap-x-14 gap-y-9 px-7 py-6'
+                      : 'p-4',
                     isDarkTheme
                       ? 'border-[#16181D] bg-[#0B0C0F] shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]'
                       : 'border-gray-new-94 bg-white shadow-[0px_14px_20px_0px_rgba(0,0,0,.1)] dark:border-[#16181D] dark:bg-[#0B0C0F] dark:shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]'
@@ -77,7 +79,13 @@ const Navigation = ({ isDarkTheme }) => (
                       return (
                         <li className="lg:-order-1" key={index}>
                           <Link className="group/banner relative rounded-lg" to={to}>
-                            <Image src={menuBanner} width={232} height={145} alt="" />
+                            <Image
+                              className="rounded-lg"
+                              src={menuBanner}
+                              width={232}
+                              height={145}
+                              alt=""
+                            />
                             <div className="absolute inset-x-4 bottom-3.5 z-10">
                               <h3 className="text-sm leading-none text-white">{title}</h3>
                               <p
@@ -89,6 +97,7 @@ const Navigation = ({ isDarkTheme }) => (
                                 {description}
                               </p>
                             </div>
+                            <GradientBorder className="border-image-header-menu-banner" />
                           </Link>
                         </li>
                       );
@@ -107,13 +116,16 @@ const Navigation = ({ isDarkTheme }) => (
                             {title}
                           </h3>
                         )}
-                        <ul className={clsx('flex flex-col', isExtended ? 'gap-5' : 'gap-4')}>
+                        <ul className="flex flex-col gap-5">
                           {items.map(
-                            (
-                              { icon: Icon, iconGradient: IconGradient, title, description, to },
-                              index
-                            ) => (
-                              <li key={index}>
+                            ({
+                              icon: Icon,
+                              iconGradient: IconGradient,
+                              title,
+                              description,
+                              to,
+                            }) => (
+                              <li key={title}>
                                 <Link
                                   className={clsx(
                                     'relative flex items-center whitespace-nowrap',

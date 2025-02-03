@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 import Button from 'components/shared/button';
+import GradientBorder from 'components/shared/gradient-border';
 import Burger from 'components/shared/header/burger';
 import InkeepTrigger from 'components/shared/inkeep-trigger';
 import Link from 'components/shared/link';
@@ -16,7 +17,8 @@ import MENUS from 'constants/menus';
 import useMobileMenu from 'hooks/use-mobile-menu';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 
-import menuBanner from './images/menu-banner.png';
+import menuBannerMob from './images/menu-banner-mob.jpg';
+import menuBanner from './images/menu-banner.jpg';
 
 const AlgoliaSearch = dynamic(() => import('components/shared/algolia-search'), {
   ssr: false,
@@ -109,14 +111,18 @@ const MobileMenuItem = ({ text, to, sections, isDarkTheme }) => {
 
                   return (
                     <li className="-order-1" key={index}>
-                      <Link
-                        className="relative block w-fit overflow-hidden rounded-lg xs:w-full"
-                        to={to}
-                      >
+                      <Link className="relative block w-fit rounded-lg xs:w-full" to={to}>
                         <Image
-                          className="xs:h-20 xs:w-full xs:object-cover"
+                          className="rounded-lg xs:hidden"
                           src={menuBanner}
                           width={252}
+                          height={80}
+                          alt=""
+                        />
+                        <Image
+                          className="hidden w-full rounded-lg object-cover xs:block"
+                          src={menuBannerMob}
+                          width={320}
                           height={80}
                           alt=""
                         />
@@ -126,6 +132,7 @@ const MobileMenuItem = ({ text, to, sections, isDarkTheme }) => {
                             {description}
                           </p>
                         </div>
+                        <GradientBorder className="border-image-header-menu-banner-mob" />
                       </Link>
                     </li>
                   );
@@ -139,8 +146,8 @@ const MobileMenuItem = ({ text, to, sections, isDarkTheme }) => {
                       </h3>
                     )}
                     <ul className="flex flex-col gap-4">
-                      {items.map(({ icon: Icon, title, description, to }, index) => (
-                        <li key={index}>
+                      {items.map(({ icon: Icon, title, description, to }) => (
+                        <li key={title}>
                           <Link className="relative flex gap-2 whitespace-nowrap" to={to}>
                             {Icon && (
                               <Icon
