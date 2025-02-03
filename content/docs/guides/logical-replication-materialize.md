@@ -164,7 +164,7 @@ Now that you’ve configured your database network and created an ingestion clus
    CREATE SECRET pgpass AS '<PASSWORD>';
    ```
 
-   You can access the password for your Neon Postgres role from the  to open **Connect to your database** modal — click the **Connect** button on your **Project Dashboard** to open the modal.
+   You can access the password for your Neon Postgres role from the to open **Connect to your database** modal — click the **Connect** button on your **Project Dashboard** to open the modal.
 
 2. Use the [CREATE CONNECTION](https://materialize.com/docs/sql/create-connection/) command to create a connection object with access and authentication details for Materialize to use:
 
