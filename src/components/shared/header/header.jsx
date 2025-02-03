@@ -116,7 +116,7 @@ const Navigation = ({ isDarkTheme }) => (
                             {title}
                           </h3>
                         )}
-                        <ul className="flex flex-col gap-5">
+                        <ul className={clsx('flex flex-col', isExtended ? 'gap-5' : 'gap-[18px]')}>
                           {items.map(
                             ({
                               icon: Icon,
@@ -128,11 +128,11 @@ const Navigation = ({ isDarkTheme }) => (
                               <li key={title}>
                                 <Link
                                   className={clsx(
-                                    'relative flex items-center whitespace-nowrap',
+                                    'relative flex items-center',
                                     isExtended
-                                      ? 'gap-3 before:-inset-2.5 before:rounded-[14px]'
-                                      : 'gap-2.5 before:-inset-1.5 before:rounded-lg',
-                                    'before:absolute before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100',
+                                      ? 'gap-3 before:rounded-[14px]'
+                                      : 'gap-2.5 before:rounded-[10px]',
+                                    'before:absolute before:-inset-2.5 before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100',
                                     isDarkTheme
                                       ? 'before:bg-[#16181D]'
                                       : 'before:bg-[#f5f5f5] dark:before:bg-[#16181D]'

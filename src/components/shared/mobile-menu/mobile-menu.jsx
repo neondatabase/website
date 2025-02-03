@@ -148,11 +148,17 @@ const MobileMenuItem = ({ text, to, sections, isDarkTheme }) => {
                     <ul className="flex flex-col gap-4">
                       {items.map(({ icon: Icon, title, description, to }) => (
                         <li key={title}>
-                          <Link className="relative flex gap-2 whitespace-nowrap" to={to}>
+                          <Link
+                            className={clsx(
+                              'relative flex gap-2',
+                              'before:absolute before:-inset-2 before:rounded-lg before:opacity-0'
+                            )}
+                            to={to}
+                          >
                             {Icon && (
                               <Icon
                                 className={clsx(
-                                  'size-4 shrink-0',
+                                  'relative z-10 size-4 shrink-0',
                                   isDarkTheme
                                     ? 'text-gray-new-80'
                                     : 'text-gray-new-30 dark:text-gray-new-80'
