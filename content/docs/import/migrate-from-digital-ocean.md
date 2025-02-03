@@ -100,8 +100,8 @@ For more information, see [Create a database](/docs/manage/databases#create-a-da
 
 ### Retrieve Neon connection details
 
-1. In the Neon Console, go to your project dashboard.
-2. Find the **Connection Details** widget.
+1. In the Neon Console, go to your **Project Dashboard**.
+2. Click **Connect** to open the **Connect to your database** modal.
 3. Copy the connection string. It will look similar to this:
 
    ```

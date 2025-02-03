@@ -73,9 +73,9 @@ The Inngest Integration requires Postgres admin credentials to complete its setu
 
 ![Neon authorization step inside the Inngest integrations page](/docs/guides/inngest-integration-neon-authorize-step.png)
 
-You can find your admin Postgres credentials in your Neon project dashboard’s **Connection Details** section:
+You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**.
 
-![Connection details section on the Neon console dashboard](/docs/guides/neon-console-connection-details.png)
+![Connection modal](/docs/connect/connection-details.png)
 
 ## Triggering Serverless functions from database changes
 

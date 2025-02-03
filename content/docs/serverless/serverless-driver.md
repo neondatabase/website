@@ -28,7 +28,7 @@ The Neon serverless driver is also available as a [JavaScript Registry (JSR)](ht
 
 ## Configure your Neon database connection
 
-You can obtain a connection string for your database from the **Connection Details** widget on the Neon **Dashboard**. Your Neon connection string will look something like this:
+You can obtain a connection string for your database by clicking the **Connect** button on your **Project Dashboard**. Your Neon connection string will look something like this:
 
 ```shell
 DATABASE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]

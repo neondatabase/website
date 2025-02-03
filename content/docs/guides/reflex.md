@@ -115,7 +115,7 @@ To configure the connection settings:
    )
    ```
 
-   Replace `<connection-string-from-neon>` with your Neon connection string. You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+   Replace `<connection-string-from-neon>` with your Neon connection string. You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
    <Admonition type="note">
 

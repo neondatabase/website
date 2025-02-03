@@ -45,7 +45,7 @@ docker pull ankane/pghero
 
 ### How to connect to your database from PgHero
 
-Grab your Neon database connection string from the **Connection Details** widget in the Neon Dashboard.
+Find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**.
 
 ![Connection details modal](/docs/connect/connection_details.png)
 
@@ -82,7 +82,7 @@ Pre-compiled and configured installation packages for pgAdmin 4 are available fo
 
 ### How to connect to your database from pgAdmin
 
-Grab your Neon database connection string from the **Connection Details** widget in the Neon Dashboard, as described [above](#how-to-connect-to-your-database-from-pghero).
+Find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**, as described [above](#how-to-connect-to-your-database-from-pghero).
 
 Enter your connection details as shown [here](/docs/connect/connect-postgres-gui#connect-to-the-database).
 

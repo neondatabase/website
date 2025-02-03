@@ -138,7 +138,7 @@ You need to allow inbound traffic from Neon Postgres servers so it can connect t
 
 This section describes how to prepare your destination Neon PostgreSQL database (the subscriber) to receive replicated data.
 
-You can find the connection details for the Neon database on the **Connection Details** widget in the Neon Console. For details, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. See [Connect from any application](/docs/connect/connect-from-any-app).
 
 ### Create the Neon database
 

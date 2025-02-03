@@ -102,7 +102,7 @@ For demonstration purposes, create a `blog` database in Neon with two tables, `p
 
 ## Retrieve your Neon database connection string
 
-From the Neon **Dashboard**, retrieve your password and a Java connection string from the **Connection Details** widget. Use the selection drop-down menu.
+Find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Use the selection drop-down menu.
 
 Your Java connection string should look something like the one shown below.
 
