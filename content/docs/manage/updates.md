@@ -6,11 +6,13 @@ tag: new
 updatedOn: '2024-12-13T21:17:10.768Z'
 ---
 
-<FeatureBeta />
+<Admonition type="note" title="coming soon">
+This feature is not released yet, but you can expect to see it soon. Please keep an eye out for announcements about scheduled updates in the [Neon changelog](https://neon.tech/docs/changelog).
+</Admonition>
 
 To keep your Neon computes and Postgres instances up to date with the latest patches and Neon features, Neon automatically applies scheduled updates to your project's computes. We notify you of scheduled updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can schedule an update window — a specific day and hour for updates.
 
-To apply an update, Neon must briefly restart your project's computes. The entire process takes just a few seconds, minimizing any potential disruption.
+Neon must briefly restart a compute to apply an update. The entire process takes just a few seconds, minimizing any potential disruption.
 
 ## What updates are included?
 
@@ -27,23 +29,15 @@ Scheduled updates are typically applied weekly but may occur more or less freque
 Neon applies updates to computes based on the following rules:
 
 - Computes that are currently active receive updates.
-- Computes that have been consistently active for 30 days or more receive updates.
+- Computes that have been active for 30 days or more receive updates.
 - Computes that are restarted receive available updates immediately.
 - Computes in a transition state (e.g., shutting down or restarting) at the time of an update are not updated.
 
 If a compute is excluded from an update, Neon will apply the missed update with the next scheduled update, assuming the compute meets the update criteria mentioned above.
 
 <Admonition type="note" title="Regular updates keep your database healthy">
-Neon schedules updates in advance so you know when to expect them and stay up to date with important changes. Without scheduled updates, always-active computes or those with scale to zero disabled may miss critical maintenance.
+Neon schedules updates in advance so you know when to expect them. Updates keep you computes and Postgres instances current with important changes. Without scheduled updates, always-active computes or those with scale to zero disabled may miss critical patches.
 </Admonition>
-
-## Applying updates ahead of schedule
-
-Computes receive available updates immediately upon restart. For example, if Neon notifies you about an upcoming update, you can apply it right away by restarting the compute. However, the notification won't be cleared in this case. When the scheduled update time arrives, no further action will be taken since the compute is already updated.
-
-If a compute regularly scales to zero, it will receive updates when it starts up again. In such cases, you may not need to pay much attention to update notifications, as updates will be applied naturally through your compute's stop/start cycles.
-
-For compute restart instructions, see [Restart a compute](/docs/manage/endpoints#restart-a-compute).
 
 ## Updates on the Free Plan
 
@@ -55,6 +49,8 @@ To view scheduled updates:
 2. Select **Settings** > **Updates**.
 
    ![Free plan updates UI](/docs/manage/free_plan_updates.png)
+
+If you want to apply an update ahead of the scheduled date, see [Applying updates ahead of schedule](#applying-updates-ahead-of-schedule).
 
 ## Updates on paid plans
 
@@ -109,6 +105,14 @@ curl --request PATCH \
 </TabItem>
 
 </Tabs>
+
+## Applying updates ahead of schedule
+
+Computes receive available updates immediately upon restart. For example, if Neon notifies you about an upcoming update, you can apply it right away by restarting the compute. However, the notification won't be cleared in this case. When the scheduled update time arrives, no further action will be taken since the compute is already updated.
+
+If a compute regularly scales to zero, it will receive updates when it starts up again. In such cases, you may not need to pay much attention to update notifications, as updates will be applied naturally through your compute's stop/start cycles.
+
+For compute restart instructions, see [Restart a compute](/docs/manage/endpoints#restart-a-compute).
 
 ## Handling connection disruptions
 
