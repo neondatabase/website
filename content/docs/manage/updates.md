@@ -3,7 +3,7 @@ title: Manage updates
 enableTableOfContents: true
 isDraft: false
 tag: new
-updatedOn: '2025-02-04T16:35:21.906Z'
+updatedOn: '2025-02-04T17:23:55.930Z'
 ---
 
 <Admonition type="note" title="updates coming soon">
