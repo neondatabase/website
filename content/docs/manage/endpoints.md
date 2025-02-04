@@ -231,7 +231,6 @@ Please be aware that restarting a compute interrupts any connections currently u
 
 You can restart a compute using one of the following methods:
 
-- Stop activity on your compute (stop running queries) and wait for your compute to suspend due to inactivity. By default, Neon suspends a compute after 5 minutes of inactivity. You can watch the status of your compute on the **Branches** page in the Neon Console. Select your branch and monitor your compute's **Status** field. Wait for it to report an `Idle` status. The compute will restart the next time it's accessed, and the status will change to `Active`.
 - Issue a [Restart endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) call using the Neon API. You can do this directly from the Neon API Reference using the **Try It!** feature or via the command line with a cURL command similar to the one shown below. You'll need your [project ID](/docs/reference/glossary#project-id), compute [endpoint ID](/docs/reference/glossary#endpoint-id), and an [API key](/docs/manage/api-keys#create-an-api-key).
   ```bash
   curl --request POST \
@@ -239,7 +238,7 @@ You can restart a compute using one of the following methods:
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY'
   ```
-- Users on paid plans can temporarily set a compute's scale to zero setting to a low value to initiate a suspension (the default setting is 5 minutes). See [Scale to zero configuration](/docs/manage/endpoints#scale-to-zero-configuration) for instructions. After doing so, check the **Operations** page in the Neon Console. Look for `suspend_compute` action. Any activity on the compute will restart it, such as running a query. Watch for a `start_compute` action on the **Operations** page.
+- Stop activity on your compute (stop running queries) and wait for your compute to suspend due to inactivity. By default, Neon suspends a compute after 5 minutes of inactivity. You can watch the status of your compute on the **Branches** page in the Neon Console. Select your branch and monitor your compute's **Status** field. Wait for it to report an `Idle` status. The compute will restart the next time it's accessed, and the status will change to `Active`.
 
 ## Delete a compute
 
