@@ -6,8 +6,8 @@ tag: new
 updatedOn: '2025-02-04T16:35:21.906Z'
 ---
 
-<Admonition type="note" title="coming soon">
-This feature is not released yet, but you can expect to see it soon. Please keep an eye out for announcements about scheduled updates in the [Neon changelog](https://neon.tech/docs/changelog).
+<Admonition type="note" title="updates coming soon">
+Free Plan accounts can expect to start seeing update notices in early February, at least 24 hours before any scheduled update. Update notices for Neon's paid plans will start rolling out in the second week of February, with at least 7 days' notice before a planned update. For the latest information about updates, you can also follow announcements in the [Neon Changelog](https://neon.tech/docs/changelog), published every Friday.
 </Admonition>
 
 To keep your Neon computes and Postgres instances up to date with the latest patches and Neon features, Neon automatically applies scheduled updates to your project's computes. We notify you of scheduled updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can schedule an update window — a specific day and hour for updates.
