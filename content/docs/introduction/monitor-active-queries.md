@@ -20,5 +20,5 @@ The **Active Queries** view is powered by the `pg_stat_activity` Postgres system
 For details on `pg_stat_activity`, see [pg_stat_activity](https://www.postgresql.org/docs/current/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW) in the PostgreSQL documentation.
 
 <Admonition type="note" title="active queries retention">
-In Neon, the `pg_stat_activity` system view only holds data on currently running queries. Once a query completes, it no longer appears in the **Active Queries** view. If your Neon compute scales down to zero due to inactivity, there will be no active queries until a new connection is established and a query is run. For more details about the lifecycle of a Neon compute, see [Compute lifecycle](/docs/conceptual-guides/compute-lifecycle/). For information about configuring Neon's scale to zero behavior, see [Scale to Zero](/docs/introduction/scale-to-zero).
+In Neon, the `pg_stat_activity` system view only holds data on currently running queries. Once a query completes, it no longer appears in the **Active Queries** view. If your Neon compute scales down to zero due to inactivity, there will be no active queries until a new connection is established and a query is run.
 </Admonition>
