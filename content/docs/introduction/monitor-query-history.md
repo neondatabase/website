@@ -15,7 +15,7 @@ The query history view shows previously run queries for the selected **Branch**,
 
 ![Neon query history tab](/docs/introduction/query_history.png)
 
-The **Query History** view is powered by the `pg_stat_statements` Postgres extension, which is installed in your Neon project by default. To run custom queries against the data collected by the `pg_stat_statements`, including your query history, you can use the [Neon SQL Editor]((/docs/get-started-with-neon/query-with-neon-sql-editor)) or any SQL client, such as [psql](/docs/connect/query-with-psql-editor).
+The **Query History** view is powered by the `pg_stat_statements` Postgres extension, which is installed in your Neon project by default. To run custom queries against the data collected by the `pg_stat_statements`, including your query history, you can use the [Neon SQL Editor](<(/docs/get-started-with-neon/query-with-neon-sql-editor)>) or any SQL client, such as [psql](/docs/connect/query-with-psql-editor).
 
 For details on `pg_stat_statements`, including the data it collects and additional queries you can run, refer to our [pg_stat_statements](/docs/extensions/pg_stat_statements) extension guide.
 
