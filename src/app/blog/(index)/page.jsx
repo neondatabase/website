@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 
 import BlogGridItem from 'components/pages/blog/blog-grid-item';
-import LoadMorePosts from 'components/shared/load-more-posts/load-more-posts';
+import LoadMorePosts from 'components/shared/load-more-posts';
 import { BLOG_BASE_PATH } from 'constants/blog';
 import SEO_DATA from 'constants/seo-data';
 import { getAllPosts } from 'utils/api-posts';
