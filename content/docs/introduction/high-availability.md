@@ -47,11 +47,11 @@ In this architecture:
 
 #### Recap of storage recovery times
 
-| Component | Failure impact | Recovery mechanism | Recovery time |
-|-----------|----------------|-------------------|---------------|
-| Safekeeper | WAL writes continue to other Safekeepers | Automatic redistribution across AZs | Seconds |
-| Pageserver | Read requests automaticallyroute to secondary | Automatic failover to secondary | Seconds |
-| Object storage | No impact - 99.999999999% durability | Multi-AZ redundancy built-in | Immediate |
+| Component      | Failure impact                                | Recovery mechanism                  | Recovery time |
+| -------------- | --------------------------------------------- | ----------------------------------- | ------------- |
+| Safekeeper     | WAL writes continue to other Safekeepers      | Automatic redistribution across AZs | Seconds       |
+| Pageserver     | Read requests automaticallyroute to secondary | Automatic failover to secondary     | Seconds       |
+| Object storage | No impact - 99.999999999% durability          | Multi-AZ redundancy built-in        | Immediate     |
 
 ## Compute resiliency
 
@@ -83,12 +83,12 @@ Node failures can affect multiple customers simultaneously when a Kubernetes nod
 
 #### Recap of compute recovery times
 
-| Failure type | Impact | Recovery mechanism | Recovery time |
-|--------------|---------|-------------------|---------------|
-| Postgres crash | Brief interruption | Automatic restart | Seconds |
-| VM failure | Brief interruption | VM recreation and endpoint reattachment | Seconds |
-| Degraded endpoint | Possible intermittent connectivity | Automatic detection and reattachment | Up to 5 minutes |
-| Node failure | Compute unavailable | Rescheduling to healthy nodes | ~2 minutes |
+| Failure type      | Impact                             | Recovery mechanism                      | Recovery time   |
+| ----------------- | ---------------------------------- | --------------------------------------- | --------------- |
+| Postgres crash    | Brief interruption                 | Automatic restart                       | Seconds         |
+| VM failure        | Brief interruption                 | VM recreation and endpoint reattachment | Seconds         |
+| Degraded endpoint | Possible intermittent connectivity | Automatic detection and reattachment    | Up to 5 minutes |
+| Node failure      | Compute unavailable                | Rescheduling to healthy nodes           | ~2 minutes      |
 
 ### Impact on session data after a failure?
 
