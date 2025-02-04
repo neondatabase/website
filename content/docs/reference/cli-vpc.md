@@ -27,22 +27,22 @@ The `vpc endpoint` subcommand lets you to list, assign, remove, and get the stat
 
 ### Usage
 
-| Subcommand               | Description                                                                                                                                                                |
-| :----------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [list](#list)            | List configured VPC endpoints for the Neon organization.                                                                                                                   |
+| Subcommand               | Description                                                                                                                           |
+| :----------------------- | :------------------------------------------------------------------------------------------------------------------------------------ |
+| [list](#list)            | List configured VPC endpoints for the Neon organization.                                                                              |
 | [assign](#assign) `<id>` | Add or update a VPC endpoint in the Neon organization. The ID is the VPC endpoint ID. Aliases for this command are `add` and `update` |
-| [remove](#remove) `<id>` | Remove a VPC endpoint from the Neon organization. The ID is the VPC endpoint ID.                                                                                           |
-| [status](#status) `<id>` | Get the status of a VPC endpoint for the Neon organization. The ID is the VPC endpoint ID.                                                                                 |
+| [remove](#remove) `<id>` | Remove a VPC endpoint from the Neon organization. The ID is the VPC endpoint ID.                                                      |
+| [status](#status) `<id>` | Get the status of a VPC endpoint for the Neon organization. The ID is the VPC endpoint ID.                                            |
 
 ### Options
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `vpc endpoint` subcommand supports these options:
 
-| Option           | Description                                                                                                                                                        | Type   | Required                                                                                                                         |
-| :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----- | :------------------------------------------------------------------------------------------------------------------------------- |
-| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                                                                      | string |                                                                                                                                  |
+| Option           | Description                                                                                                                                                        | Type   | Required                                                                                                                          |
+| :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----- | :-------------------------------------------------------------------------------------------------------------------------------- |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                                                                      | string |                                                                                                                                   |
 | `--org-id`       | Organization ID                                                                                                                                                    | string | Only if the user has more than one organization. If not specified, and the user has only one organization, that `org_id` is used. |
-| `--region-id`    | The region ID. Possible values: `aws-us-west-2`, `aws-ap-southeast-1`, `aws-ap-southeast-2`, `aws-eu-central-1`, `aws-us-east-2`, `aws-us-east-1`, `azure-eastus2` | string | yes                                                                                                                              |
+| `--region-id`    | The region ID. Possible values: `aws-us-west-2`, `aws-ap-southeast-1`, `aws-ap-southeast-2`, `aws-eu-central-1`, `aws-us-east-2`, `aws-us-east-1`, `azure-eastus2` | string | yes                                                                                                                               |
 
 ### Examples
 
