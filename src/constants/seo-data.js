@@ -9,12 +9,10 @@ export default {
       'The database you love, on a serverless platform designed to help you build reliable and scalable applications faster.',
     pathname: '',
   },
-  ai: {
-    title: 'Powering next gen AI apps with Postgres — Neon',
-    description:
-      'Scale your transformative LLM applications to millions of users with vector indexes and similarity search in Neon.',
-    imagePath: '/images/social-previews/ai.jpg',
-    pathname: LINKS.ai,
+  aiChat: {
+    title: 'Neon AI Chat',
+    description: 'AI assistant trained on documentation, help articles, and other content',
+    pathname: LINKS.aiChat,
   },
   awsIsrael: {
     title: 'AWS Launches in Israel — Neon',

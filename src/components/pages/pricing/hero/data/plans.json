@@ -32,7 +32,7 @@
       }
     ],
     "otherFeatures": {
-      "features": [{ "title": "Read replicas" }, { "title": "90+ Postgres extensions" }]
+      "features": [{ "title": "Read replicas" }, { "title": "Built-in high availability" }]
     },
     "button": {
       "url": "https://console.neon.tech/signup",
@@ -186,8 +186,7 @@
         { "title": "Priority Support" },
         { "title": "Private Link" },
         {
-          "title": "Migration assistance",
-          "info": "With 0 migration fees—we will waive them"
+          "title": "Migration assistance"
         },
         { "title": "PITR (30 days)" }
       ]

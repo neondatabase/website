@@ -2,7 +2,7 @@
 title: Neon CLI — Install and connect
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.077Z'
+updatedOn: '2025-01-29T23:50:53.963Z'
 ---
 
 This section describes how to install the Neon CLI and connect via web authentication or API key.
@@ -42,7 +42,7 @@ curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonct
 Run the CLI from the download directory:
 
 ```bash
-neonctl <command> [options]
+neon <command> [options]
 ```
 
 </TabItem>
@@ -112,7 +112,7 @@ ARM64:
 Run the CLI from the download directory:
 
 ```bash
-neonctl <command> [options]
+neon <command> [options]
 ```
 
 </TabItem>
@@ -164,7 +164,48 @@ brew upgrade neonctl
 
 <TabItem>
 
-To upgrade a [binary](https://github.com/neondatabase/neonctl/releases) version, download the latest binary as described in the install instructions above, and replace your old binary with the new one.
+To upgrade a [binary](https://github.com/neondatabase/neonctl/releases) version, download the `latest` binary as described in the install instructions above, and replace your old binary with the new one.
+
+</TabItem>
+
+</Tabs>
+
+If you're using the Neon CLI in CI/CD tools like GitHub Actions, you can safely pin the Neon CLI to `latest`, as we prioritize stability for CI/CD processes.
+
+<Tabs labels={["npm", "Homebrew", "Binary"]}>
+
+<TabItem>
+
+In your GitHub Actions workflow, you can use the `latest` tag with `npm`:
+
+```yaml
+- name: Install Neon CLI
+  run: npm install -g neonctl@latest
+```
+
+</TabItem>
+
+<TabItem>
+
+Homebrew automatically fetches the latest version when running the `install` or `upgrade` command. You can include the following in your workflow:
+
+```yaml
+- name: Install Neon CLI
+  run: brew install neonctl || brew upgrade neonctl
+```
+
+</TabItem>
+
+<TabItem>
+
+If you're downloading a binary, reference the latest release from the [Releases page](https://github.com/neondatabase/neonctl/releases). For example, you can use `curl` or `wget` in your workflow:
+
+```yaml
+- name: Install Neon CLI
+  run: |
+    curl -L https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux-amd64 -o /usr/local/bin/neon
+    chmod +x /usr/local/bin/neon
+```
 
 </TabItem>
 
@@ -179,10 +220,14 @@ The Neon CLI supports connecting via web authentication or API key.
 Run the following command to connect to Neon via web authentication:
 
 ```bash
-neonctl auth
+neon auth
 ```
 
-The [neonctl auth](/docs/reference/cli-auth) command launches a browser window where you can authorize the Neon CLI to access your Neon account. If you have not authenticated previously, running a Neon CLI command automatically launches the web authentication process unless you have specified an API key.
+The [neon auth](/docs/reference/cli-auth) command launches a browser window where you can authorize the Neon CLI to access your Neon account. If you have not authenticated previously, running a Neon CLI command automatically launches the web authentication process unless you have specified an API key.
+
+<Admonition type="note">
+If you use Neon through the [Native Integration on Vercel](/docs/guides/vercel-native-integration), you must authenticate connections from the CLI client using a Neon API key (see below). The `neon auth` command requires an account registered through Neon rather than Vercel.
+</Admonition>
 
 ### API key
 

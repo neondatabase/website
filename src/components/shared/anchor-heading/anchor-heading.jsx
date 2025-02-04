@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import PropTypes from 'prop-types';
 import slugify from 'slugify';
 
 import HashIcon from './images/hash.inline.svg';
@@ -14,22 +13,20 @@ const extractText = (children) => {
   }
 
   if (Array.isArray(children)) {
-    const text = children.reduce((acc, child) => {
+    return children.reduce((acc, child) => {
       if (typeof child === 'string') {
         return acc + child;
       }
       return acc + extractText(child.props.children);
     }, '');
-    return text;
   }
 
   return '';
 };
 
-const AnchorHeading =
-  (Tag) =>
+const AnchorHeading = (Tag) => {
   // eslint-disable-next-line react/prop-types
-  ({ children, className = null }) => {
+  const Component = ({ children, className = null }) => {
     const id = slugify(extractText(children), {
       lower: true,
       strict: true,
@@ -40,7 +37,7 @@ const AnchorHeading =
       <Tag
         id={id}
         className={clsx(
-          'group relative w-fit scroll-mt-20 font-title font-medium tracking-tighter lg:scroll-mt-5',
+          'group relative w-fit scroll-mt-20 font-semibold tracking-extra-tight lg:scroll-mt-5',
           className
         )}
       >
@@ -59,9 +56,10 @@ const AnchorHeading =
     );
   };
 
-AnchorHeading.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string,
+  // Assign a displayName for parsing headings
+  Component.displayName = Tag;
+
+  return Component;
 };
 
 export default AnchorHeading;

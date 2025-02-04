@@ -4,7 +4,7 @@ subtitle: Use logical replication to migrate data to a different Neon project, a
   Postgres version, or region
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-10-14T09:37:02.880Z'
+updatedOn: '2025-02-03T20:41:57.322Z'
 ---
 
 <LRBeta/>
@@ -35,6 +35,8 @@ These are some common Neon-to-Neon replication scenarios. There may be others. Y
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
 
 For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
+
+<Steps>
 
 ## Prepare your source Neon database
 
@@ -162,4 +164,6 @@ SELECT subname, received_lsn, latest_end_lsn, last_msg_receipt_time FROM pg_cata
 
 After the replication operation is complete, you can switch your application over to the destination database by swapping out your source database connection details for your destination database connection details.
 
-You can find the connection details for a Neon database on the **Connection Details** widget in the Neon Console. For details, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find your Neon database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. See [Connect from any application](/docs/connect/connect-from-any-app).
+
+</Steps>

@@ -2,7 +2,7 @@
 title: Manage computes
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-12-13T21:17:10.766Z'
+updatedOn: '2025-02-04T16:35:21.902Z'
 ---
 
 A primary read-write compute is created for your project's [default branch](/docs/reference/glossary#default-branch).
@@ -137,60 +137,60 @@ The `neon_utils` extension provides a `num_cpus()` function you can use to monit
 
 The size of your compute determines the amount of frequently accessed data you can cache in memory and the maximum number of simultaneous connections you can support. As a result, if your compute size is too small, this can lead to suboptimal query performance and connection limit issues.
 
-In Postgres, the `shared_buffers` setting defines the amount of data that can be held in memory. In Neon, the `shared_buffers` parameter is always set to 128 MB, but Neon uses a Local File Cache (LFC) to extend the amount of memory available for caching data. The LFC can use up to 80% of your compute's RAM.
+In Postgres, the `shared_buffers` setting defines the amount of data that can be held in memory. In Neon, the `shared_buffers` parameter [scales with compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size) and Neon also uses a Local File Cache (LFC) to extend the amount of memory available for caching data. The LFC can use up to 80% of your compute's RAM.
 
-The Postgres `max_connections` setting defines your compute's maximum simultaneous connection limit and is set according to your compute size. Larger computes support higher maximum connection limits.
+The Postgres `max_connections` setting defines your compute's maximum simultaneous connection limit and is set according to your compute size configuration.
 
-The following table outlines the vCPU, RAM, LFC size (80% of RAM), and the `max_connections` limit for each compute size that Neon supports.
+The following table outlines the vCPU, RAM, LFC size (80% of RAM), and the `max_connections` limit for each compute size that Neon supports. To understand how `max_connections` is determined for an autoscaling configuration, see [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
 
 <Admonition type="note">
 Compute size support differs by [Neon plan](https://neon.tech/docs/introduction/plans). Autoscaling is supported up to 16 CU. Neon supports fixed compute sizes (no autoscaling) for computes sizes larger than 16 CU.
 </Admonition>
 
-| Min. Compute Size (CU) | vCPU | RAM    | LFC size | max_connections |
-| ---------------------- | ---- | ------ | -------- | --------------- |
-| 0.25                   | 0.25 | 1 GB   | 0.8 GB   | 112             |
-| 0.50                   | 0.50 | 2 GB   | 1.6 GB   | 225             |
-| 1                      | 1    | 4 GB   | 3.2 GB   | 450             |
-| 2                      | 2    | 8 GB   | 6.4 GB   | 901             |
-| 3                      | 3    | 12 GB  | 9.6 GB   | 1351            |
-| 4                      | 4    | 16 GB  | 12.8 GB  | 1802            |
-| 5                      | 5    | 20 GB  | 16 GB    | 2253            |
-| 6                      | 6    | 24 GB  | 19.2 GB  | 2703            |
-| 7                      | 7    | 28 GB  | 22.4 GB  | 3154            |
-| 8                      | 8    | 32 GB  | 25.6 GB  | 3604            |
-| 9                      | 9    | 36 GB  | 28.8 GB  | 4000            |
-| 10                     | 10   | 40 GB  | 32 GB    | 4000            |
-| 11                     | 11   | 44 GB  | 35.2 GB  | 4000            |
-| 12                     | 12   | 48 GB  | 38.4 GB  | 4000            |
-| 13                     | 13   | 52 GB  | 41.6 GB  | 4000            |
-| 14                     | 14   | 56 GB  | 44.8 GB  | 4000            |
-| 15                     | 15   | 60 GB  | 48 GB    | 4000            |
-| 16                     | 16   | 64 GB  | 51.2 GB  | 4000            |
-| 18                     | 18   | 72 GB  | 57.6 GB  | 4000            |
-| 20                     | 20   | 80 GB  | 64 GB    | 4000            |
-| 22                     | 22   | 88 GB  | 70.4 GB  | 4000            |
-| 24                     | 24   | 96 GB  | 76.8 GB  | 4000            |
-| 26                     | 26   | 104 GB | 83.2 GB  | 4000            |
-| 28                     | 28   | 112 GB | 89.6 GB  | 4000            |
-| 30                     | 30   | 120 GB | 96 GB    | 4000            |
-| 32                     | 32   | 128 GB | 102.4 GB | 4000            |
-| 34                     | 34   | 136 GB | 108.8 GB | 4000            |
-| 36                     | 36   | 144 GB | 115.2 GB | 4000            |
-| 38                     | 38   | 152 GB | 121.6 GB | 4000            |
-| 40                     | 40   | 160 GB | 128 GB   | 4000            |
-| 42                     | 42   | 168 GB | 134.4 GB | 4000            |
-| 44                     | 44   | 176 GB | 140.8 GB | 4000            |
-| 46                     | 46   | 184 GB | 147.2 GB | 4000            |
-| 48                     | 48   | 192 GB | 153.6 GB | 4000            |
-| 50                     | 50   | 200 GB | 160 GB   | 4000            |
-| 52                     | 52   | 208 GB | 166.4 GB | 4000            |
-| 54                     | 54   | 216 GB | 172.8 GB | 4000            |
-| 56                     | 56   | 224 GB | 179.2 GB | 4000            |
+| Compute Size (CU) | vCPU | RAM    | LFC size | max_connections |
+| ----------------- | ---- | ------ | -------- | --------------- |
+| 0.25              | 0.25 | 1 GB   | 0.8 GB   | 112             |
+| 0.50              | 0.50 | 2 GB   | 1.6 GB   | 225             |
+| 1                 | 1    | 4 GB   | 3.2 GB   | 450             |
+| 2                 | 2    | 8 GB   | 6.4 GB   | 901             |
+| 3                 | 3    | 12 GB  | 9.6 GB   | 1351            |
+| 4                 | 4    | 16 GB  | 12.8 GB  | 1802            |
+| 5                 | 5    | 20 GB  | 16 GB    | 2253            |
+| 6                 | 6    | 24 GB  | 19.2 GB  | 2703            |
+| 7                 | 7    | 28 GB  | 22.4 GB  | 3154            |
+| 8                 | 8    | 32 GB  | 25.6 GB  | 3604            |
+| 9                 | 9    | 36 GB  | 28.8 GB  | 4000            |
+| 10                | 10   | 40 GB  | 32 GB    | 4000            |
+| 11                | 11   | 44 GB  | 35.2 GB  | 4000            |
+| 12                | 12   | 48 GB  | 38.4 GB  | 4000            |
+| 13                | 13   | 52 GB  | 41.6 GB  | 4000            |
+| 14                | 14   | 56 GB  | 44.8 GB  | 4000            |
+| 15                | 15   | 60 GB  | 48 GB    | 4000            |
+| 16                | 16   | 64 GB  | 51.2 GB  | 4000            |
+| 18                | 18   | 72 GB  | 57.6 GB  | 4000            |
+| 20                | 20   | 80 GB  | 64 GB    | 4000            |
+| 22                | 22   | 88 GB  | 70.4 GB  | 4000            |
+| 24                | 24   | 96 GB  | 76.8 GB  | 4000            |
+| 26                | 26   | 104 GB | 83.2 GB  | 4000            |
+| 28                | 28   | 112 GB | 89.6 GB  | 4000            |
+| 30                | 30   | 120 GB | 96 GB    | 4000            |
+| 32                | 32   | 128 GB | 102.4 GB | 4000            |
+| 34                | 34   | 136 GB | 108.8 GB | 4000            |
+| 36                | 36   | 144 GB | 115.2 GB | 4000            |
+| 38                | 38   | 152 GB | 121.6 GB | 4000            |
+| 40                | 40   | 160 GB | 128 GB   | 4000            |
+| 42                | 42   | 168 GB | 134.4 GB | 4000            |
+| 44                | 44   | 176 GB | 140.8 GB | 4000            |
+| 46                | 46   | 184 GB | 147.2 GB | 4000            |
+| 48                | 48   | 192 GB | 153.6 GB | 4000            |
+| 50                | 50   | 200 GB | 160 GB   | 4000            |
+| 52                | 52   | 208 GB | 166.4 GB | 4000            |
+| 54                | 54   | 216 GB | 172.8 GB | 4000            |
+| 56                | 56   | 224 GB | 179.2 GB | 4000            |
 
 When selecting a compute size, ideally, you want to keep as much of your dataset in memory as possible. This improves performance by reducing the amount of reads from storage. If your dataset is not too large, select a compute size that will hold the entire dataset in memory. For larger datasets that cannot be fully held in memory, select a compute size that can hold your [working set](/docs/reference/glossary#working-set). Selecting a compute size for a working set involves advanced steps, which are outlined below. See [Sizing your compute based on the working set](#sizing-your-compute-based-on-the-working-set).
 
-Regarding connection limits, you'll want a compute size that can support your anticipated maximum number of concurrent connections. If you are using **Autoscaling**, it is important to remember that your `max_connections` setting is based on the **minimum compute size** in your autoscaling configuration. The `max_connections` setting does not scale with your compute. To avoid the `max_connections` constraint, you can use a pooled connection with your application, which supports up to 10,000 concurrent user connections. See [Connection pooling](/docs/connect/connection-pooling).
+Regarding connection limits, you'll want a compute size that can support your anticipated maximum number of concurrent connections. If you are using **Autoscaling**, it is important to remember that your `max_connections` setting is based on both your minimum and the maximum compute size. See [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size) for details. To avoid any `max_connections` constraints, you can use a pooled connection with your application, which supports up to 10,000 concurrent user connections. See [Connection pooling](/docs/connect/connection-pooling).
 
 #### Sizing your compute based on the working set
 
@@ -209,7 +209,7 @@ Autoscaling is most effective when your data (either your full dataset or your w
 
 Consider this scenario: If your data size is approximately 6 GB, starting with a compute size of .25 CU can lead to suboptimal performance because your data cannot be adequately cached. While your compute _will_ scale up from .25 CU on demand, you may experience poor query performance until your compute scales up and fully caches your working set. You can avoid this issue if your minimum compute size can hold your working set in memory.
 
-As mentioned above, your `max_connections` setting is based on the minimum compute size in your autoscaling configuration and does not scale along with your compute. To avoid this `max_connections` constraint, you can use a pooled connection for your application. See [Connection pooling](/docs/connect/connection-pooling).
+As mentioned above, your `max_connections` setting is based on both your minimum and maximum compute size configuration. To avoid any `max_connections` constraints, you can use a pooled connection for your application. See [Connection pooling](/docs/connect/connection-pooling).
 
 ### Scale to zero configuration
 
@@ -231,7 +231,6 @@ Please be aware that restarting a compute interrupts any connections currently u
 
 You can restart a compute using one of the following methods:
 
-- Stop activity on your compute (stop running queries) and wait for your compute to suspend due to inactivity. By default, Neon suspends a compute after 5 minutes of inactivity. You can watch the status of your compute on the **Branches** page in the Neon Console. Select your branch and monitor your compute's **Status** field. Wait for it to report an `Idle` status. The compute will restart the next time it's accessed, and the status will change to `Active`.
 - Issue a [Restart endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) call using the Neon API. You can do this directly from the Neon API Reference using the **Try It!** feature or via the command line with a cURL command similar to the one shown below. You'll need your [project ID](/docs/reference/glossary#project-id), compute [endpoint ID](/docs/reference/glossary#endpoint-id), and an [API key](/docs/manage/api-keys#create-an-api-key).
   ```bash
   curl --request POST \
@@ -239,7 +238,7 @@ You can restart a compute using one of the following methods:
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY'
   ```
-- Users on paid plans can temporarily set a compute's scale to zero setting to a low value to initiate a suspension (the default setting is 5 minutes). See [Scale to zero configuration](/docs/manage/endpoints#scale-to-zero-configuration) for instructions. After doing so, check the **Operations** page in the Neon Console. Look for `suspend_compute` action. Any activity on the compute will restart it, such as running a query. Watch for a `start_compute` action on the **Operations** page.
+- Stop activity on your compute (stop running queries) and wait for your compute to suspend due to inactivity. By default, Neon suspends a compute after 5 minutes of inactivity. You can watch the status of your compute on the **Branches** page in the Neon Console. Select your branch and monitor your compute's **Status** field. Wait for it to report an `Idle` status. The compute will restart the next time it's accessed, and the status will change to `Active`.
 
 ## Delete a compute
 
@@ -551,7 +550,7 @@ You may encounter an error similar to the following when your compute's local di
 ERROR: could not write to file "base/pgsql_tmp/pgsql_tmp1234.56.fileset/o12of34.p1.0": No space left on device (SQLSTATE 53100)
 ```
 
-Neon computes allocate approximately 20 GB of local disk space for temporary files used by Postgres. Data-intensive operations can sometimes consume all of this space, resulting in `No space left on device` errors.
+Neon computes allocate 20 GiB of local disk space or 15 GiB x the maximum compute size (whichever is highest) for temporary files used by Postgres. Data-intensive operations can sometimes consume all of this space, resulting in `No space left on device` errors.
 
 To resolve this issue, you can try the following strategies:
 

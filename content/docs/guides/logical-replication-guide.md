@@ -6,7 +6,7 @@ isDraft: false
 redirectFrom:
   - /docs/introduction/logical-replication
   - /docs/guides/logical-replication-clickhouse
-updatedOn: '2024-10-02T13:57:11.420Z'
+updatedOn: '2024-12-26T17:57:49.404Z'
 ---
 
 <LRBeta/>
@@ -70,6 +70,8 @@ To get started, jump into one of our step-by-step logical replication guides.
 <a href="/docs/guides/sequin" title="Sequin" description="Stream data from platforms like Stripe, Linear, and GitHub to Neon" icon="sequin"></a>
 
 <a href="/docs/guides/logical-replication-airbyte-snowflake" title="Snowflake" description="Replicate data from Neon to Snowflake with Airbyte" icon="snowflake"></a>
+
+<a href="/docs/guides/logical-replication-inngest" title="Inngest" description="Replicate data from Neon to Inngest" icon="inngest"></a>
 
 </TechnologyNavigation>
 

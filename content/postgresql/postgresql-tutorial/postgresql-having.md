@@ -10,8 +10,8 @@ previousLink:
   title: 'PostgreSQL GROUP BY'
   slug: 'postgresql-tutorial/postgresql-group-by'
 nextLink:
-  title: 'PostgreSQL UNION'
-  slug: 'postgresql-tutorial/postgresql-union'
+  title: 'PostgreSQL GROUPING SETS'
+  slug: 'postgresql-tutorial/postgresql-grouping-sets'
 ---
 
 **Summary**: in this tutorial, you will learn how to use the **PostgreSQL HAVING** clause to specify a search condition for a group or an aggregate.

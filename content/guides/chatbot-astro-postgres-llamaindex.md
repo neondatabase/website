@@ -57,7 +57,7 @@ Using a serverless Postgres database lets you scale compute resources down to ze
 
 To get started, go to the [Neon Console](https://console.neon.tech/app/projects) and create a project.
 
-You will then be presented with a dialog that provides a connection string of your database. Click on the **Pooled connection** option and the connection string automatically updates.
+You will then be presented with a dialog that provides a connection string of your database. You can enable the **Connection pooling** toggle for a pooled connection string.
 
 ![](/guides/images/chatbot-astro-postgres-llamaindex/c200c4ed-f62d-469c-9690-c572c482c536.png)
 

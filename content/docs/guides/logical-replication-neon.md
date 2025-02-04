@@ -3,7 +3,7 @@ title: Logical replication in Neon
 subtitle: Information about logical replication specific to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-12-13T20:52:57.583Z'
+updatedOn: '2025-02-03T20:41:57.323Z'
 ---
 
 <LRBeta/>
@@ -39,6 +39,8 @@ This notice applies when replicating data to Neon:
   Even with this workaround, the replication gap issue can still occur if the parent branch is suspended before the duplicate subscription on a child branch is disabled. Therefore, we encourage you to take this action promptly on newly created, restored, or reset child branches.
 
   This issue will be addressed in an upcoming release.
+
+- Before dropping a database in response to a user issued `DROP DATABASE` command or operation, Neon will drop any logical replication subscriptions defined in the database.
 
 ## Logical replication and scale to zero
 
@@ -149,7 +151,7 @@ CREATE PUBLICATION my_publication FOR ALL TABLES;
 SELECT pg_create_logical_replication_slot('my_replication_slot', 'pgoutput');
 ```
 
-Then, on the subscriber database, you would create a subscription that references the replication slot with the `create_slot` option set to `false` and `slot_name` set to the name of the slot you created. The `connection_string` should be the connection string for the Postgres role used to connect to the publisher database. This role must have the `REPLICATION` privilege. Any Postgres role create created via the Neon Console, CLI, or API is a member of the `neon_superuser` role, which has the `REPLICATION` privilege by default. You can copy the connection string from the **Connection Details** widget on your Neon Project Dashboard. Be sure to select the correct role and database before copying the connection string.
+Then, on the subscriber database, you would create a subscription that references the replication slot with the `create_slot` option set to `false` and `slot_name` set to the name of the slot you created. The `connection_string` should be the connection string for the Postgres role used to connect to the publisher database. This role must have the `REPLICATION` privilege. Any Postgres role create created via the Neon Console, CLI, or API is a member of the `neon_superuser` role, which has the `REPLICATION` privilege by default. You can find your Neon database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. See [Connect from any application](/docs/connect/connect-from-any-app). Be sure to select the correct role and database before copying the connection string.
 
 ```sql
 CREATE SUBSCRIPTION my_subscription

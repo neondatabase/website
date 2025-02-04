@@ -3,7 +3,7 @@ title: Monitoring Neon with external tools
 subtitle: Monitor your Neon Postgres database with external tools such as PgAdmin or
   PgHero
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.070Z'
+updatedOn: '2025-02-03T20:41:57.343Z'
 ---
 
 There are external tools that you can use to monitor your Neon Postgres database, such as [PgHero](#pghero) and [pgAdmin](#pgadmin). Setup instructions for those tools are provided below.
@@ -45,9 +45,9 @@ docker pull ankane/pghero
 
 ### How to connect to your database from PgHero
 
-Grab your Neon database connection string from the **Connection Details** widget in the Neon Dashboard.
+Find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**.
 
-![Connection details widget](/docs/connect/connection_details.png)
+![Connection details modal](/docs/connect/connection_details.png)
 
 Finally, run this command, replacing `$NEON_DB` with your Neon database connection string.
 
@@ -82,7 +82,7 @@ Pre-compiled and configured installation packages for pgAdmin 4 are available fo
 
 ### How to connect to your database from pgAdmin
 
-Grab your Neon database connection string from the **Connection Details** widget in the Neon Dashboard, as described [above](#how-to-connect-to-your-database-from-pghero).
+Find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**, as described [above](#how-to-connect-to-your-database-from-pghero).
 
 Enter your connection details as shown [here](/docs/connect/connect-postgres-gui#connect-to-the-database).
 

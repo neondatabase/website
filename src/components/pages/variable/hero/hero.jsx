@@ -8,20 +8,21 @@ const Hero = () => (
       Scale With Traffic
     </h1>
     <p className="mt-4 text-2xl leading-snug tracking-extra-tight text-gray-new-80 xl:text-xl md:mt-3 md:text-lg">
-        Neon scales CPU and memory automatically to match your app
+      Neon scales CPU and memory automatically to match your app
     </p>
     <div className="prose-doc">
       <Admonition type="note" title="TL;DR">
-        <p>
-         If your app has variable traffic, here's how Neon can save you time and money: 
-        </p>
+        <p>If your app has variable traffic, here's how Neon can save you time and money:</p>
         <ul>
-          <li>Databases autoscale. CPU and memory scale up and down automatically. When you see traffic spikes, your database provisions more compute automatically; when traffic dies, it scales down.</li>
+          <li>
+            Databases autoscale. CPU and memory scale up and down automatically. When you see
+            traffic spikes, your database provisions more compute automatically; when traffic dies,
+            it scales down.
+          </li>
           <li>You pay only for the compute you use. No downtime, no manual work.</li>
         </ul>
         <p>
-          We have a Free Plan -{' '}
-          <a href={LINKS.signup}>Get started here</a>
+          We have a Free Plan - <a href={LINKS.signup}>Get started here</a>
         </p>
       </Admonition>
     </div>

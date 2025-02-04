@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/connectivity-issues
   - /docs/connect/connectivity-issues
-updatedOn: '2024-12-13T20:52:57.577Z'
+updatedOn: '2025-02-03T20:41:57.300Z'
 ---
 
 This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered include:
@@ -20,8 +20,10 @@ This topic describes how to resolve connection errors you may encounter when usi
 - [You have exceeded the limit of concurrently active endpoints](#you-have-exceeded-the-limit-of-concurrently-active-endpoints)
 - [Remaining connection slots are reserved for roles with the SUPERUSER attribute](#remaining-connection-slots-are-reserved-for-roles-with-the-superuser-attribute)
 - [Relation not found](#relation-not-found)
+- [Postgrex: DBConnection ConnectionError ssl send: closed](#postgrex-dbconnection-connectionerror-ssl-send-closed)
 - [query_wait_timeout SSL connection has been closed unexpectedly](#querywaittimeout-ssl-connection-has-been-closed-unexpectedly)
 - [The request could not be authorized due to an internal error](#the-request-could-not-be-authorized-due-to-an-internal-error)
+- [Terminating connection due to idle-in-transaction timeout](#terminating-connection-due-to-idle-in-transaction-timeout)
 
 <Admonition type="info">
 Connection problems are sometimes related to a system issue. To check for system issues, please refer to the [Neon status page](https://neonstatus.com/).  
@@ -125,7 +127,7 @@ The following error is often the result of an incorrectly defined connection inf
 ERROR:  password authentication failed for user '<user_name>' connection to server at "ep-billowing-fun-123456.us-west-2.aws.neon.tech" (12.345.67.89), port 5432 failed: ERROR:  connection is insecure (try using `sslmode=require`)
 ```
 
-Check your connection to see if it is defined correctly. Your Neon connection string can be obtained from the **Connection Details** widget on the Neon **Dashboard**. It appears similar to this:
+Check your connection to see if it is defined correctly. Your Neon connection string can be obtained by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. It appears similar to this:
 
 ```text shouldWrap
 postgresql://[user]:[password]@[neon_hostname]/[dbname]
@@ -221,6 +223,20 @@ If you are already using connection pooling, you may need to reach out to Neon S
 
 This error is often encountered when attempting to set the Postgres `search_path` session variable using a `SET search_path` statement over a pooled connection. For more information and workarounds, please see [Connection pooling in transaction mode](/docs/connect/connection-pooling#connection-pooling-in-transaction-mode).
 
+## Postgrex: DBConnection ConnectionError ssl send: closed
+
+Postgrex has an `:idle_interval` connection parameter that defines an interval for pinging connections after a period of inactivity. The default setting is `1000ms`. If you rely on Neon's [autosuspend](https://neon.tech/docs/introduction/auto-suspend) feature to scale your compute to zero when your database is not active, this setting will prevent that and you may encounter a `(DBConnection.ConnectionError) ssl send: closed (ecto_sql 3.12.0)` error as a result. As a workaround, you can set the interval to a higher value to allow your Neon compute to suspend. For example:
+
+```elixir
+config :app_name, AppName.Repo
+  # normal connection options
+  ...
+  idle_interval:
+:timer.hours(24)
+```
+
+For additional details, refer to this discussion on our Discord server: [Compute not suspended due to Postgrex idle_interval setting](https://discord.com/channels/1176467419317940276/1295401751574351923/1295419826319265903)
+
 ## query_wait_timeout SSL connection has been closed unexpectedly
 
 The `query_wait_timeout` setting is a PgBouncer configuration option that determines the maximum time a query can wait in the queue before being executed. Neon’s default value for this setting is **120 seconds**. If a query exceeds this timeout while in the queue, it will not be executed. For more details about this setting, refer to [Neon PgBouncer configuration settings](/docs/connect/connection-pooling#neon-pgbouncer-configuration-settings).
@@ -232,5 +248,19 @@ Alternatively, Neon can increase the `query_wait_timeout` value for you, but thi
 ## The request could not be authorized due to an internal error
 
 This error page in the Neon Console is most often the result of attempting to access a Neon project in one browser window after you've have logged in under a different Neon user account from another browser window. The error occurs because the currently logged in Neon user account does not have access to the Neon project. To avoid this issue, ensure that you're logged in with a Neon user account that has access to the Neon project you're trying to access.
+
+## Terminating connection due to idle-in-transaction timeout
+
+This error occurs when a session remains idle within an open transaction for longer than the specified timeout period. By default, the `idle_in_transaction_session_timeout` setting is set to `5min` (300,000 milliseconds). This timeout helps prevent idle sessions from holding locks or contributing to table bloat.
+
+If you encounter this error, you can adjust the `idle_in_transaction_session_timeout` setting to a higher value or disable it entirely by setting it to `0`. Below are ways to change this setting:
+
+1. Change at the session level: `SET idle_in_transaction_session_timeout = 0;`
+
+2. Change at the database level: `ALTER DATABASE <dbname> SET idle_in_transaction_session_timeout = 0;` (replace `<dbname>` with the name of your database)
+
+3. Change at the role level: `ALTER ROLE <role> SET idle_in_transaction_session_timeout = 0;` (replace `<role>` with the name of the user role)
+
+Be aware that leaving transactions idle for extended periods can prevent vacuuming and increase the number of open connections. Please use caution and consider only changing the value temporarily, as needed.
 
 <NeedHelp/>

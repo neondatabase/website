@@ -33,10 +33,8 @@ const DocCta = ({
     <div>
       <h2
         className={clsx(
-          '!my-0',
-          isIntro
-            ? 'text-xl font-semibold leading-tight tracking-extra-tight'
-            : 'font-title text-2xl font-medium leading-dense'
+          '!my-0 font-semibold tracking-extra-tight',
+          isIntro ? 'text-xl leading-tight' : 'text-2xl leading-dense'
         )}
       >
         {title}

@@ -44,7 +44,7 @@ The equivalent of the `NATURAL JOIN` clause will be like this:
 SELECT select_list
 FROM table1
 [INNER, LEFT, RIGHT] JOIN table2
-   ON table1.column_name = table2.column;
+   ON table1.column_name = table2.column_name;
 ```
 
 ### Inner Join

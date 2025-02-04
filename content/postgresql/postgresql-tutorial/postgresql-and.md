@@ -145,7 +145,7 @@ Output:
 The following example uses the `AND` operator to combine null with null, which returns null:
 
 ```sql
-SELECT null and null AS result;
+SELECT null AND null AS result;
 ```
 
 Output:

@@ -233,8 +233,8 @@
               slug: guides/branching-github-actions
             - title: Branching — Testing queries
               slug: guides/branching-test-queries
-            - title: Promote a branch with the Neon API
-              slug: guides/branch-promote
+            - title: Schema-only branches
+              slug: guides/branching-schema-only
         - title: Logical replication
           slug: guides/logical-replication-guide
           items:
@@ -343,6 +343,11 @@
               slug: manage/operations
             - title: External tools
               slug: introduction/monitor-external-tools
+        - section: Team Tools
+          items:
+            - title: Slack App
+              slug: manage/slack-app
+              tag: beta
         - section: Security
           items:
             - title: Overview
@@ -357,6 +362,11 @@
           items:
             - title: Backups
               slug: manage/backups
+        - section: Updates
+          items:
+            - title: Updates
+              slug: manage/updates
+              tag: new
     - title: Use cases
       slug: use-cases/use-cases-overview
       icon: docs
@@ -479,6 +489,10 @@
           slug: guides/ruby-on-rails
         - title: SQLAlchemy
           slug: guides/sqlalchemy
+    - title: Neon Identity
+      slug: guides/neon-identity
+      icon: partner-guide
+      tag: beta
     - title: Neon Authorize
       slug: guides/neon-authorize
       icon: auth
@@ -517,6 +531,14 @@
               slug: guides/neon-authorize-firebase-gcp
             - title: Google Identity
               slug: guides/neon-authorize-google-identity
+            - title: PropelAuth
+              slug: guides/neon-authorize-propelauth
+            - title: SuperTokens
+              slug: guides/neon-authorize-supertokens
+            - title: WorkOS
+              slug: guides/neon-authorize-workos
+            - title: Custom JWT
+              slug: guides/neon-authorize-custom-jwt
     - title: Integrations
       icon: integrations
       slug: guides/integrations
@@ -635,6 +657,8 @@
               slug: guides/sequin
             - title: Snowflake
               slug: guides/logical-replication-airbyte-snowflake
+            - title: Inngest
+              slug: guides/logical-replication-inngest
         - section: Replicate to Neon
           items:
             - title: AlloyDB
@@ -784,7 +808,7 @@
       tag: community
       icon: management
     - title: Find your template
-      slug: https://neon.tech/templates
+      slug: /templates
       icon: languages
     - title: Examples repo
       slug: https://github.com/neondatabase/examples
@@ -792,7 +816,7 @@
 - section: Postgres
   items:
     - title: PostgreSQL Tutorial
-      slug: https://neon.tech/postgresql/tutorial
+      slug: /postgresql/tutorial
       icon: get-started
     - title: Neon Postgres guides
       slug: postgresql/introduction
@@ -826,6 +850,9 @@
           items:
             - title: Supported extensions
               slug: extensions/pg-extensions
+            - title: dblink
+              slug: extensions/dblink
+              tag: new
             - title: citext
               slug: extensions/citext
             - title: hstore
@@ -838,12 +865,21 @@
               slug: extensions/pgvector
             - title: pgrag
               slug: extensions/pgrag
+            - title: pg_cron
+              slug: extensions/pg_cron
+              tag: new
+            - title: pg_mooncake
+              slug: extensions/pg_mooncake
+              tag: new
             - title: pg_partman
               slug: extensions/pg_partman
             - title: pg_prewarm
               slug: extensions/pg_prewarm
             - title: pg_stat_statements
               slug: extensions/pg_stat_statements
+            - title: pg_repack
+              slug: extensions/pg_repack
+              tag: new
             - title: pg_tiktoken
               slug: extensions/pg_tiktoken
             - title: pg_trgm
@@ -852,6 +888,9 @@
               slug: extensions/postgis
             - title: postgis-related
               slug: extensions/postgis-related-extensions
+            - title: postgres_fdw
+              slug: extensions/postgres_fdw
+              tag: new
             - title: timescaledb
               slug: extensions/timescaledb
             - title: wal2json

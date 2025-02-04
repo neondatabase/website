@@ -5,7 +5,7 @@ subtitle: Learn how to migrate data to Neon Postgres from different database pro
 redirectFrom:
   - /docs/import/import-intro
 enableTableOfContents: true
-updatedOn: '2024-12-03T14:38:16.504Z'
+updatedOn: '2024-12-31T18:05:26.276Z'
 ---
 
 Find instructions for migrating data from Postgres, CSV, other Neon projects, and other database providers. For near-zero downtime data migrations from other Postgres providers, consider using logical replication. Additionally, if you're new to Neon and want to try it out, our sample data guide provides datasets for exploration and testing.
@@ -17,6 +17,8 @@ If you're planning to migrate a production workload to Neon, let us know&#8212;w
 ## Data migration guides
 
 <DetailIconCards>
+
+<a href="/docs/import/migration-assistant" description="Move your existing database to Neon using our guided migration tool" icon="neon">Neon Migration Assistant</a>
 
 <a href="/docs/import/migrate-from-postgres" description="Migrate data from another Postgres database using pg_dump and pg_restore" icon="postgres">Migrate with pg_dump and pg_restore</a>
 
@@ -34,7 +36,7 @@ If you're planning to migrate a production workload to Neon, let us know&#8212;w
 
 <a href="/docs/import/migrate-from-azure-postgres" description="Migrate from an Azure Database for PostgreSQL to Neon Postgres" icon="import">Migrate from Azure</a>
 
-<a href="/docs/import/migrate-from-digital-ocean" description="Migrate data from Digital Ocean Postgres to Neon Postgres with pg_dump and pg_restore" icon="aws">Migrate from Digital Ocean</a>
+<a href="/docs/import/migrate-from-digital-ocean" description="Migrate data from Digital Ocean Postgres to Neon Postgres with pg_dump and pg_restore" icon="import">Migrate from Digital Ocean</a>
 
 <a href="/docs/import/import-sample-data" description="Import one of several sample datasets for exploration and testing" icon="download">Import sample data</a>
 

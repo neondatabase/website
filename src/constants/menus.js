@@ -142,7 +142,7 @@ export default {
             light: caseSaasIcon,
             dark: caseSaasDarkIcon,
           },
-          text: 'Postgres for SaaS',
+          text: 'SaaS Apps',
           description: 'Build faster with Neon',
           to: `${LINKS.useCases}/postgres-for-saas`,
         },
@@ -170,7 +170,7 @@ export default {
             dark: caseDatabaseDarkIcon,
           },
           text: 'Database per Tenant',
-          description: 'Create one project per user',
+          description: 'Grow to thousands of tenants',
           to: `${LINKS.useCases}/database-per-tenant`,
         },
         {
@@ -179,7 +179,7 @@ export default {
             dark: caseDevDarkIcon,
           },
           text: 'Dev/Test',
-          description: 'For non-prod environments',
+          description: 'For ephemeral environments',
           to: `${LINKS.useCases}/dev-test`,
         },
         {
@@ -187,8 +187,8 @@ export default {
             light: aiAgentsIcon,
             dark: aiAgentsDarkIcon,
           },
-          text: 'AI Agents',
-          description: 'A backend for agents',
+          text: 'Agents',
+          description: 'A database backend for agents',
           to: `${LINKS.useCases}/ai-agents`,
         },
         // {

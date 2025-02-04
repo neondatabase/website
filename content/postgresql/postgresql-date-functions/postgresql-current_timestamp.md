@@ -36,9 +36,9 @@ The `CURRENT_TIMESTAMP()` function returns a [`TIMESTAMP WITH TIME ZONE`](../pos
 
 ## PostgreSQL CURRENT_TIMESTAMP function examples
 
-Let’s explore some examples of using the `CURRENT_TIMESTSAMP` function.
+Let’s explore some examples of using the `CURRENT_TIMESTAMP` function.
 
-### 1\) Basic CURRENT_TIMESTSAMP function example
+### 1\) Basic CURRENT_TIMESTAMP function example
 
 The following example shows how to use the `CURRENT_TIMESTAMP()` function to get the current date and time:
 
@@ -59,7 +59,7 @@ Internally, the `CURRENT_TIMESTAMP()` is implemented with the [`NOW()`](postgre
 
 Like the `NOW()` function, the `CURRENT_TIMESTAMP()` function can be used as the default value of a timestamp column.
 
-### 2\) Using the PostgreSQL CURRENT_TIMESTSAMP function as the default value of a column
+### 2\) Using the PostgreSQL CURRENT_TIMESTAMP function as the default value of a column
 
 First, [create a table](../postgresql-tutorial/postgresql-create-table) called `note`:
 

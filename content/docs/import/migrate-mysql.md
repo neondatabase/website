@@ -2,14 +2,14 @@
 title: Migrate from MySQL to Neon Postgres
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-07T21:36:52.670Z'
+updatedOn: '2025-02-03T20:41:57.343Z'
 ---
 
 This topic describes how to migrate your MySQL database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).
 
 The `pgloader` utility transforms data to a Postgres-compatible format as it is read from your MySQL database. It uses the `COPY` Postgres protocol to stream the data into your Postgres database.
 
-## Before you begin
+## Prerequisites
 
 Before you begin, make sure that you have the following:
 
@@ -18,6 +18,8 @@ Before you begin, make sure that you have the following:
 - Neon's Free Plan supports 500 MiB of data. If your data size is more than 500 MiB, you'll need to upgrade to one of Neon's paid plans. See [Neon plans](/docs/introduction/plans) for more information.
 
 Also, a close review of the [Pgloader MySQL to Postgres Guide](https://pgloader.readthedocs.io/en/latest/ref/mysql.html) guide is recommended before you start. This guide will provide you with a good understanding of `pgloader` capabilities and how to configure your `pgloader` configuration file, if necessary.
+
+<Steps>
 
 ## Retrieve Your MySQL database credentials
 
@@ -34,7 +36,7 @@ Keep your MySQL database connection details handy for later use.
 
 ## Retrieve your Neon database connection string
 
-Log in to the Neon Console and navigate to the **Connection Details** section on the **Dashboard** to find your Postgres database connection string. It should look similar to this:
+Log in to the Neon Console. Find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
 
 ```bash shouldWrap
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
@@ -108,6 +110,8 @@ COPY Threads Completion          0          4                     0.905s
 -----------------------  ---------  ---------  ---------  --------------
       Total import time          ✓          1     0.0 kB          4.064s
 ```
+
+</Steps>
 
 ## SSL verify error
 

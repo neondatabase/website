@@ -14,9 +14,11 @@ import DocsList from 'components/pages/doc/docs-list';
 import IncludeBlock from 'components/pages/doc/include-block';
 import InfoBlock from 'components/pages/doc/info-block';
 import LinkPreview from 'components/pages/doc/link-preview';
+import Steps from 'components/pages/doc/steps';
 import Tabs from 'components/pages/doc/tabs';
 import TabItem from 'components/pages/doc/tabs/tab-item';
 import TechnologyNavigation from 'components/pages/doc/technology-navigation';
+import Video from 'components/pages/doc/video';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
 import SubscriptionForm from 'components/pages/use-case/subscription-form';
 import Testimonial from 'components/pages/use-case/testimonial';
@@ -28,35 +30,33 @@ import AnchorHeading from 'components/shared/anchor-heading';
 import CodeBlock from 'components/shared/code-block';
 import ComputeCalculator from 'components/shared/compute-calculator';
 import CtaBlock from 'components/shared/cta-block';
+import DocCta from 'components/shared/doc-cta';
+import ExtensionRequest from 'components/shared/extension-request';
+import ImageZoom from 'components/shared/image-zoom';
+import InkeepEmbedded from 'components/shared/inkeep-embedded';
 import Link from 'components/shared/link';
+import RegionRequest from 'components/shared/region-request';
 import getCodeProps from 'lib/rehype-code-props';
 import getGlossaryItem from 'utils/get-glossary-item';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
-import DocCta from '../doc-cta';
-import ImageZoom from '../image-zoom';
-import RegionRequest from '../region-request';
 
 const sharedComponents = Object.keys(sharedMdxComponents).reduce((acc, key) => {
-  acc[key] = () => IncludeBlock({ url: sharedMdxComponents[key] });
+  acc[key] = (props) => IncludeBlock({ url: sharedMdxComponents[key], ...props });
   return acc;
 }, {});
 
-const getHeadingComponent = (heading, withoutAnchorHeading, isPostgres) => {
+const getHeadingComponent = (heading, withoutAnchorHeading) => {
   if (withoutAnchorHeading) {
     return heading;
   }
-  if (isPostgres) {
-    return AnchorHeading(heading);
-  }
-
   return AnchorHeading(heading);
 };
 
 const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCase) => ({
-  h2: getHeadingComponent('h2', withoutAnchorHeading, isPostgres),
-  h3: getHeadingComponent('h3', withoutAnchorHeading, isPostgres),
-  h4: getHeadingComponent('h4', withoutAnchorHeading, isPostgres),
+  h2: getHeadingComponent('h2', withoutAnchorHeading),
+  h3: getHeadingComponent('h3', withoutAnchorHeading),
+  h4: getHeadingComponent('h4', withoutAnchorHeading),
   table: (props) => (
     <div className="table-wrapper">
       <table {...props} />
@@ -168,6 +168,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   LinkPreview,
   DocsList,
   RegionRequest,
+  ExtensionRequest,
   CTA: isUseCase ? CtaBlock : DocCta,
   Testimonial,
   TestimonialsWrapper,
@@ -175,6 +176,9 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   UseCaseContext,
   ComputeCalculator,
   SubscriptionForm,
+  InkeepEmbedded,
+  Video,
+  Steps,
   ...sharedComponents,
 });
 

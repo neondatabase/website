@@ -25,23 +25,23 @@ const jsonLd = {
 };
 
 const Homepage = () => (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <Hero />
-      <Logos />
-      <InstantProvisioning />
-      <Lightning />
-      <Bento />
-      <AiIndex />
-      <Multitenancy />
-      <Industry />
-      <Trusted />
-      <Cta />
-    </>
-  );
+  <>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+    <Hero />
+    <Logos />
+    <InstantProvisioning />
+    <Lightning />
+    <Bento />
+    <AiIndex />
+    <Multitenancy />
+    <Industry />
+    <Trusted />
+    <Cta />
+  </>
+);
 
 export default Homepage;
 

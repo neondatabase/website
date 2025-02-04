@@ -130,16 +130,16 @@ module.exports = {
         wider: '0.04em',
       },
       boxShadow: {
-        tooltip: '0px 2px 20px rgba(0, 0, 0, 0.3)',
         social: 'inset 0px -2px 10px rgba(255, 255, 255, 0.15)',
         contact: '0px 4px 10px 0px rgba(0, 0, 0, .5), 0px 4px 30px 0px rgba(0, 0, 0, .5)',
       },
       backgroundImage: ({ theme }) => ({
-        'button-overlay': 'linear-gradient(0deg, rgba(12,13,13,0) 0%, rgba(12,13,13,1) 100%);',
-        'community-light':
-          'radial-gradient(100% 2244.95% at 100% 100%, rgba(217, 238, 242, 0.5) 0%, rgba(217, 238, 242, 0.1) 70.08%);',
-        'community-dark':
-          'radial-gradient(100% 2244.95% at 100% 100%, #262626 0%, rgba(38, 38, 38, 0.1) 63.96%);',
+        'header-docs-button-border':
+          'radial-gradient(78.71% 83.93% at 50% 3.57%, rgba(255, 255, 255, 0.78), transparent),' +
+          'linear-gradient(0deg, #BCBEC2, #BCBEC2)',
+        'header-docs-button-border-dark':
+          'radial-gradient(54.19% 83.93% at 50% 3.57%, rgba(255, 255, 255, 0.55), transparent),' +
+          'linear-gradient(0deg, #303236, #303236)',
         'subscribe-sm':
           'linear-gradient(160deg, rgba(173, 224, 235, 0) 23%, rgba(173, 224, 235, 0.45) 50%, rgba(173, 224, 235, 0) 77%);',
         'pricing-table-featured-column':
@@ -314,6 +314,14 @@ module.exports = {
             opacity: 0,
           },
         },
+        slideIn: {
+          '0%': {
+            width: 0,
+          },
+          '100%': {
+            width: '100%',
+          },
+        },
         dialogShow: {
           '0%': {
             opacity: 0,
@@ -347,6 +355,7 @@ module.exports = {
         'text-blink': 'text-blink 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
         'fade-in-overlay': 'fadeInOverlay 0.2s',
         'fade-out-overlay': 'fadeOutOverlay 0.2s',
+        'slide-in': 'slideIn 5s cubic-bezier(0.4, 0, 0.6, 1) forwards',
         'dialog-show': 'dialogShow 0.3s cubic-bezier(.16,1,.3,1)',
         'dialog-hide': 'dialogHide 0.3s cubic-bezier(.16,1,.3,1)',
         'logo-move': 'logoMove 1s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate',

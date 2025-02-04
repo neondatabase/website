@@ -2,7 +2,7 @@
 title: Connect from TypeORM to Neon
 subtitle: Learn how to connect to Neon from TypeORM
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.667Z'
+updatedOn: '2025-02-03T20:41:57.339Z'
 ---
 
 TypeORM is an open-source ORM that lets you to manage and interact with your database. This guide covers the following topics:
@@ -15,8 +15,8 @@ TypeORM is an open-source ORM that lets you to manage and interact with your dat
 
 To establish a basic connection from TypeORM to Neon, perform the following steps:
 
-1. Retrieve your Neon connection string. In the **Connection Details** widget on the Neon **Dashboard**, select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
-   ![Connection details widget](/docs/connect/connection_details.png)
+1. Retrieve your Neon connection string. You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
+   ![Connection details modal](/docs/connect/connection_details.png)
    The connection string includes the user name, password, hostname, and database name.
 
 2. Update the TypeORM's DataSource initialization in your application to the following:
@@ -55,7 +55,7 @@ Serverless functions can require a large number of database connections as deman
 DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require"
 ```
 
-A pooled Neon connection string adds `-pooler` to the endpoint ID, which tells Neon to use a pooled connection. You can add `-pooler` to your connection string manually or copy a pooled connection string from the **Connection Details** widget on the Neon **Dashboard**. Use the **Pooled connection** checkbox to add the `-pooler` suffix.
+A pooled Neon connection string adds `-pooler` to the endpoint ID, which tells Neon to use a pooled connection. You can add `-pooler` to your connection string manually or copy a pooled connection string from the **Connect to your database** modal, which you can access by clicking **Connect** on your **Project Dashboard**. Enable the **Connection pooling** toggle to add the `-pooler` suffix.
 
 ## Connection timeouts
 

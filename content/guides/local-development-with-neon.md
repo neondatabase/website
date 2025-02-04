@@ -180,6 +180,20 @@ Run the following command to start local PostgreSQL and the Neon Proxy, which he
 docker-compose up -d
 ```
 
+<Admonition type="tip" title="Working offline?">
+The [local-neon-http-proxy](https://github.com/TimoWilhelm/local-neon-http-proxy) Dockerfile setup uses [*.localtest.me](https://readme.localtest.me/) to enable testing with local URLs without adding entires to your host file. The `localtest.me` domain and all wildcard subdomains point to `127.0.0.1`.
+
+However, this solution requires an internet connection. To work offline, you'll need to add an entry to your system's hosts file to map `db.localtest.me` to localhost:
+
+```bash
+127.0.0.1 db.localtest.me
+```
+
+For instructions on editing your hosts file on different operating systems, see [this guide](https://www.hostinger.in/tutorials/how-to-edit-hosts-file).
+
+[dnsmask](https://help.ubuntu.com/community/Dnsmasq) is another option [suggested by a Neon user](https://github.com/neondatabase/website/issues/2690) for resolving domain names when there is no internet connection.
+</Admonition>
+
 ### Connect your app
 
 <Tabs labels={["Using neondatabase/serverless", "Using drizzle", "Using prisma"]}>

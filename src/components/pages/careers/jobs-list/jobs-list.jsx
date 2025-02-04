@@ -9,19 +9,17 @@ const JobsList = () => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    fetch(`https://boards-api.greenhouse.io/v1/boards/neondatabase/jobs?content=true`)
+    fetch(`https://api.ashbyhq.com/posting-api/job-board/neon.tech`)
       .then((response) => response.json())
       .then(({ jobs }) => {
         const jobsByDepartmentAsObject = {};
 
-        jobs.forEach(({ title, location, departments, absolute_url: absoluteUrl }) => {
-          departments.forEach(({ name }) => {
-            if (!jobsByDepartmentAsObject[name]) jobsByDepartmentAsObject[name] = [];
-            jobsByDepartmentAsObject[name].push({
-              name: title,
-              location: location.name,
-              url: absoluteUrl,
-            });
+        jobs.forEach(({ title, location, department, jobUrl }) => {
+          if (!jobsByDepartmentAsObject[department]) jobsByDepartmentAsObject[department] = [];
+          jobsByDepartmentAsObject[department].push({
+            name: title,
+            location,
+            url: jobUrl,
           });
         });
 

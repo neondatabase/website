@@ -4,25 +4,25 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/conceptual-guides/regions
-updatedOn: '2024-12-12T15:31:10.131Z'
+updatedOn: '2024-12-30T21:13:29.488Z'
 ---
 
 Neon offers project deployment in multiple AWS and Azure regions. To minimize latency between your Neon database and application, we recommend choosing the region closest to your application server.
 
 ## AWS regions
 
-- AWS US East (N. Virginia) &mdash; `aws-us-east-1`
-- AWS US East (Ohio) &mdash; `aws-us-east-2`
-- AWS US West (Oregon) &mdash; `aws-us-west-2`
-- AWS Europe (Frankfurt) &mdash; `aws-eu-central-1`
-- AWS Asia Pacific (Singapore) &mdash; `aws-ap-southeast-1`
-- AWS Asia Pacific (Sydney) &mdash; `aws-ap-southeast-2`
+- 🇺🇸 AWS US East (N. Virginia) &mdash; `aws-us-east-1`
+- 🇺🇸 AWS US East (Ohio) &mdash; `aws-us-east-2`
+- 🇺🇸 AWS US West (Oregon) &mdash; `aws-us-west-2`
+- 🇩🇪 AWS Europe (Frankfurt) &mdash; `aws-eu-central-1`
+- 🇸🇬 AWS Asia Pacific (Singapore) &mdash; `aws-ap-southeast-1`
+- 🇦🇺 AWS Asia Pacific (Sydney) &mdash; `aws-ap-southeast-2`
 
 ## Azure regions
 
-- Azure East US 2 region (Virginia) &mdash; `azure-eastus2`
-- Azure Germany West Central region (Frankfurt) &mdash; `azure-gwc`
-- Azure West US 3 region (Arizona) &mdash; `azure-westus3`
+- 🇺🇸 Azure East US 2 region (Virginia) &mdash; `azure-eastus2`
+- 🇺🇸 Azure West US 3 region (Arizona) &mdash; `azure-westus3`
+- 🇩🇪 Azure Germany West Central region (Frankfurt) &mdash; `azure-gwc`
 
 <Admonition type="note" title="Deployment options on azure">
 For information about Neon deployment options on Azure, see [Neon on Azure](/docs/manage/azure).

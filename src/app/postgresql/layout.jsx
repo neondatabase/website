@@ -18,7 +18,7 @@ const NeonPostgresLayout = async ({ children }) => {
     <Layout
       customType={customType}
       headerClassName="lg:border-none"
-      isPostgresPage
+      docPageType="postgres"
       burgerWithoutBorder
       showSearchInput
       isDocPage
@@ -26,10 +26,7 @@ const NeonPostgresLayout = async ({ children }) => {
       headerWithBorder
       hasThemesSupport
     >
-      <div
-        data-oh="hai"
-        className="safe-paddings flex flex-1 dark:bg-black-pure dark:text-white lg:block"
-      >
+      <div className="safe-paddings flex flex-1 dark:bg-black-pure dark:text-white lg:block">
         <MobileNav
           className="hidden lg:block"
           sidebar={sidebar}
@@ -45,16 +42,14 @@ const NeonPostgresLayout = async ({ children }) => {
           slug="index"
           basePath={POSTGRESQL_BASE_PATH}
           customType={customType}
+          docPageType="postgres"
         />
-
-        <div className="-ml-[350px] w-full 3xl:ml-0">
-          <Container
-            className="grid w-full flex-1 grid-cols-12 gap-x-8 pb-20 pt-9 xl:block lg:pt-4"
-            size="1408"
-          >
-            {children}
-          </Container>
-        </div>
+        <Container
+          className="grid w-full flex-1 grid-cols-12 gap-x-8 pb-20 pt-9 xl:block lg:pt-7"
+          size="1408"
+        >
+          {children}
+        </Container>
       </div>
     </Layout>
   );

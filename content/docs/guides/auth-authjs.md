@@ -3,8 +3,12 @@ title: Authenticate Neon Postgres application users with Auth.js
 subtitle: Learn how to add passwordless authentication to your Neon Postgres database
   application using Auth.js and Resend
 enableTableOfContents: true
-updatedOn: '2024-10-12T11:16:13.581Z'
+updatedOn: '2025-02-03T20:41:57.306Z'
 ---
+
+<Admonition type="tip" title="Did you know?">
+We recently introduced an Auth.js adapter for Neon, making it easier to store user and session data in Neon. For installation and setup instructions, see [Neon Adapter](https://authjs.dev/getting-started/adapters/neon).
+</Admonition>
 
 [Auth.js](https://authjs.dev/) (formerly NextAuth.js) is a popular authentication solution that supports a wide range of authentication methods, including social logins (e.g., Google, Facebook), traditional email/password, and passwordless options like magic links. For simple authentication flows, such as social logins, Auth.js can operate using only in-memory session storage (in a browser cookie). However, if you want to implement custom login flows, or persist the signed-in users' information in your database, you need to specify a database backend.
 
@@ -60,7 +64,7 @@ touch .env
 
 ### Retrieve your Neon database connection string
 
-Navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
+You can find your database connection string by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
 
 ```bash shouldWrap
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require

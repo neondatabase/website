@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/security/security
   - /docs/security
-updatedOn: '2024-12-04T13:30:28.568Z'
+updatedOn: '2025-01-04T12:41:02.143Z'
 ---
 
 At Neon, security is our highest priority. We are committed to implementing best practices and earning the trust of our users. A key aspect of earning this trust is by ensuring that every touchpoint in our system, from connections, to data storage, to our internal processes, adheres to the highest security standards.
@@ -37,7 +37,7 @@ You can designate any branch as a "protected branch", which implements a series 
 - Protected branches cannot be [reset](/docs/manage/branches#reset-a-branch-from-parent).
 - Projects with protected branches cannot be deleted.
 - Computes associated with a protected branch cannot be deleted.
-- New passwords are automatically generated for Postgres roles on branches created from protected branches. [See below](#new-passwords-generated-for-postgres-roles-on-child-branches).
+- New passwords are automatically generated for Postgres roles on branches created from protected branches.
 - With additional configuration steps, you can apply IP Allow restrictions to protected branches only. The [IP Allow](/docs/introduction/ip-allow) feature is available on the Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans. See [below](#how-to-apply-ip-restrictions-to-protected-branches).
 - Protected branches are not [archived](/docs/guides/branch-archiving) due to inactivity.
 
@@ -105,7 +105,7 @@ To learn more about how we protect your data and uphold the highest standards of
 
 Neon adheres to the [securitytxt.org](https://securitytxt.org/) standard for transparent and efficient security reporting. For details on how to report potential vulnerabilities, please visit our [Security reporting](/docs/security/security-reporting) page or refer to our [security.txt](https://neon.tech/security.txt) file.
 
-Neon also has a [private bug bounty program with Hackerone](/docs/security/security-reporting#neons-private-bug-bounty-program-with-hackerone).
+Neon also has a [private bug bounty program with Hackerone](/docs/security/security-reporting#bug-bounty-program-with-hackerone).
 
 ## Questions about our security measures?
 
