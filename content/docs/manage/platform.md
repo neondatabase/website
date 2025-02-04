@@ -60,7 +60,11 @@ Monitor your Neon projects to track system health and performance.
 
 <a href="/docs/introduction/monitoring-page" description="Dashboard graphs for monitoring system and database metrics" icon="gui">Monitoring dashboard</a>
 
-<a href="/docs/manage/operations" description="Track actions taken by the control plane on project resrouces" icon="chart-bar">System operations</a>
+<a href="/docs/introduction/monitor-active-queries" description="View and analyze running queries in your database" icon="import">Active Queries</a>
+
+<a href="/docs/introduction/monitor-query-history" description="View and analyze query history for your Neon database" icon="research">Query History</a>
+
+<a href="/docs/manage/operations" description="Track actions taken by the control plane on project resources" icon="chart-bar">System operations</a>
 
 <a href="/docs/introduction/monitor-external-tools" description="Monitor your database with PgAdmin or PgHero" icon="import">External tools</a>
 
