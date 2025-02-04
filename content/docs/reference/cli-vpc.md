@@ -17,7 +17,7 @@ You can use the `vpc` CLI command to manage [Private Networking](/docs/guides/ne
 The `vpc` command includes subcommands for both organization-level and project-level VPC management:
 
 | Subcommand                            | Description                                            |
-| ------------------------------------- | ------------------------------------------------------ |
+| :------------------------------------ | :----------------------------------------------------- |
 | [endpoint](#the-vpc-endpoint-command) | Manage VPC endpoints                                   |
 | [project](#the-vpc-project-command)   | Manage project-level VPC endpoint restrictions         |
 
@@ -30,19 +30,19 @@ The `vpc endpoint` command enables management of VPC endpoints for [Neon Private
 The `vpc endpoint` subcommand allows you to list, assign, remove, and get the status of VPC endpoints for a Neon organization.
 
 | Subcommand        | Description                                                               |
-| ----------------- | ------------------------------------------------------------------------- |
+| :---------------- | :------------------------------------------------------------------------ |
 | [list](#list)     | List configured VPC endpoints for the Neon organization.                  |
-| [assign](#assign) `<id>` | Add or update a VPC endpoint in the Neon organization. The ID is the VPC endpoint ID. Azure regions are not yet supported. Aliases for this command are `add` and `update` |
-| [remove](#remove) `<id>` | Remove a VPC endpoint from the Neon organization. The ID is the VPC endpoint ID.             |
-| [status](#status) `<id>` | Get the status of a VPC endpoint for the Neon organization. The ID is the VPC endpoint ID.       |
+| [assign `<id>`](#assign) | Add or update a VPC endpoint in the Neon organization. The ID is the VPC endpoint ID. Azure regions are not yet supported. Aliases for this command are `add` and `update` |
+| [remove `<id>`](#remove) | Remove a VPC endpoint from the Neon organization. The ID is the VPC endpoint ID. |
+| [status `<id>`](#status) | Get the status of a VPC endpoint for the Neon organization. The ID is the VPC endpoint ID. |
 
 ### Options
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `vpc endpoint` subcommand supports these options:
 
 | Option        | Description                                                                                                                                                        | Type   |                                                             Required                                                             |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------ | :------------------------------------------------------------------------------------------------------------------------------: |
-| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                            | string |          |
+| :------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----- | :------------------------------------------------------------------------------------------------------------------------------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                                                                   | string |                                                                                                                                  |
 | `--org-id`    | Organization ID                                                                                                                                                    | string | Only if the user has more than on organization. If not specified, and the user has only one organization, that `org_id` is used. |
 | `--region-id` | The region ID. Possible values: `aws-us-west-2`, `aws-ap-southeast-1`, `aws-ap-southeast-2`, `aws-eu-central-1`, `aws-us-east-2`, `aws-us-east-1`, `azure-eastus2` | string |                                                               yes                                                                |
 
@@ -90,26 +90,28 @@ The `vpc project` subcommand allows you to manage project-level VPC endpoint res
 
 The `vpc project` command enables you to list, configure, update, or remove VPC endpoint restrictions for specific Neon projects.
 
-| Subcommand            | Description                                                                     |
-| --------------------- | ------------------------------------------------------------------------------- |
-| [list](#list)         | List all VPC endpoint restrictions for a specific project.                      |
-| [restrict](#restrict) `<id>` | Configure or update a VPC endpoint restriction for a project. The ID is the VPC endpoint ID. [Alias: `update`] |
-| [remove](#remove) `<id>`     | Remove a VPC endpoint restriction from a project. The ID is the VPC endpoint ID.                              |
+| Subcommand             | Description                                                                                      |
+|:-----------------------|:-------------------------------------------------------------------------------------------------|
+| [`list`](#list)        | List all VPC endpoint restrictions for a specific project.                                      |
+| [`restrict <id>`](#restrict) | Configure or update a VPC endpoint restriction for a project. The ID is the VPC endpoint ID. <br> **Alias:** `update` |
+| [`remove <id>`](#remove)   | Remove a VPC endpoint restriction from a project. The ID is the VPC endpoint ID.            |
+
 
 ### Options
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `vpc project` subcommand supports these options:
 
-| Option         | Description     | Type   | Required |
-| -------------- | --------------- | ------ | :------: |
+| Option          | Description                                                                                         | Type   | Required |
+|:---------------|:----------------------------------------------------------------------------------------------------|:------|:---------|
 | `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string |          |
-| `--project-id` | The Project ID. | string |   yes    |
+| `--project-id`  | The Project ID.                                                                                    | string | yes      |
+
 
 ### Examples
 
 - **List project-level VPC endpoint restrictions**
 
-  List of all VPC endpoint restrictions for the specified Neon project.
+  List all VPC endpoint restrictions for the specified Neon project.
 
   ```bash
   neonctl vpc project list --project-id orange-credit-12345678
