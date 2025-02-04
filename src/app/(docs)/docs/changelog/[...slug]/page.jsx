@@ -106,10 +106,11 @@ const ChangelogPost = async ({ currentSlug }) => {
           </h2>
           <Content className="mt-8 w-full max-w-full prose-h3:text-xl" content={content} />
           <Link
-            className="mt-10 font-semibold lg:mt-8"
+            className="mt-10 lg:mt-8"
             to={CHANGELOG_BASE_PATH}
             size="sm"
-            theme="black-primary-1"
+            theme="green"
+            withArrow
           >
             Back to all changelog posts
           </Link>
