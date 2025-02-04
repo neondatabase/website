@@ -49,11 +49,11 @@ In this architecture:
 
 Here's a summary of how different storage components handle and recover from failures:
 
-| Component | Failure impact | Recovery mechanism | Recovery time |
-|-----------|----------------|-------------------|---------------|
-| Safekeeper | WAL writes continue to other Safekeepers | Automatic redistribution across AZs | Seconds |
-| Pageserver | Read requests automatically route to secondary | Automatic failover to secondary | Seconds |
-| Object storage | No impact - 99.999999999% durability | Multi-AZ redundancy built-in | Immediate |
+| Component      | Failure impact                                 | Recovery mechanism                  | Recovery time |
+| -------------- | ---------------------------------------------- | ----------------------------------- | ------------- |
+| Safekeeper     | WAL writes continue to other Safekeepers       | Automatic redistribution across AZs | Seconds       |
+| Pageserver     | Read requests automatically route to secondary | Automatic failover to secondary     | Seconds       |
+| Object storage | No impact - 99.999999999% durability           | Multi-AZ redundancy built-in        | Immediate     |
 
 ## Compute resiliency
 
@@ -93,13 +93,13 @@ Multi-AZ support varies by region. **REGIONS LIST TBD**
 
 Here's a summary of how different types of compute failures are handled and their expected recovery times:
 
-| Failure type | Impact | Recovery mechanism | Recovery time |
-|--------------|---------|-------------------|---------------|
-| Postgres crash | Brief interruption | Automatic restart | Seconds |
-| VM failure | Brief interruption | VM recreation and endpoint reattachment | Seconds |
-| Degraded endpoint | Intermittent connectivity | Automatic detection and reattachment | Up to 5 minutes |
-| Node failure | Compute unavailable | Rescheduling to healthy nodes | ~2 minutes |
-| Availability Zone failure | Compute unavailable in affected AZ | Rescheduling to healthy AZs | 1-10 minutes |
+| Failure type              | Impact                             | Recovery mechanism                      | Recovery time   |
+| ------------------------- | ---------------------------------- | --------------------------------------- | --------------- |
+| Postgres crash            | Brief interruption                 | Automatic restart                       | Seconds         |
+| VM failure                | Brief interruption                 | VM recreation and endpoint reattachment | Seconds         |
+| Degraded endpoint         | Intermittent connectivity          | Automatic detection and reattachment    | Up to 5 minutes |
+| Node failure              | Compute unavailable                | Rescheduling to healthy nodes           | ~2 minutes      |
+| Availability Zone failure | Compute unavailable in affected AZ | Rescheduling to healthy AZs             | 1-10 minutes    |
 
 ### Impact on session data after a failure?
 
