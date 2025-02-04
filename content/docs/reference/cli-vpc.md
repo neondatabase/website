@@ -14,7 +14,7 @@ updatedOn: '2024-10-07T13:55:51.300Z'
 
 You can use the `vpc` CLI command to manage [Private Networking](/docs/guides/neon-private-networking) configurations in Neon.
 
-The `vpc` command includes subcommands for both organization-level and project-level VPC management:
+The `vpc` command includes subcommands for managing VPC endpoints and project-level VPC endpoint restrictions.
 
 | Subcommand                            | Description                                    |
 | :------------------------------------ | :--------------------------------------------- |
@@ -23,11 +23,9 @@ The `vpc` command includes subcommands for both organization-level and project-l
 
 ## The `vpc endpoint` subcommand
 
-The `vpc endpoint` command enables management of VPC endpoints for [Neon Private Networking](https://neon.tech/docs/guides/neon-private-networking) configurations.
+The `vpc endpoint` subcommand allows you to list, assign, remove, and get the status of VPC endpoints for a Neon organization.
 
 ### Usage
-
-The `vpc endpoint` subcommand allows you to list, assign, remove, and get the status of VPC endpoints for a Neon organization.
 
 | Subcommand               | Description                                                                                                                                                                |
 | :----------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -84,11 +82,9 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 ## The `vpc project` subcommand
 
-The `vpc project` subcommand allows you to manage project-level VPC endpoint restrictions in your Neon organization.
+The `vpc project` command enables you to list, configure, or remove VPC endpoint restrictions for specific Neon projects.
 
 ### Usage
-
-The `vpc project` command enables you to list, configure, update, or remove VPC endpoint restrictions for specific Neon projects.
 
 | Subcommand                   | Description                                                                                                    |
 | :--------------------------- | :------------------------------------------------------------------------------------------------------------- |
@@ -118,7 +114,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 - **Restrict connections to a specific VPC**
 
-  Configure or update a VPC endpoint restriction for a Neon project. The specified Neon project will not accept client connections from the VPC corresponding to the specified VPC endpoint ID.
+  Configure or update a VPC endpoint restriction for a Neon project. The specified Neon project will not accept client connections from the VPC of specified VPC endpoint ID.
 
   ```bash
   neonctl vpc project restrict vpc-12345678 --project-id orange-credit-12345678
@@ -126,7 +122,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 - **Remove a VPC endpoint restriction**
 
-  Remove a VPC endpoint restriction from a specific Neon project. This will allow client connection from the from the VPC corresponding to the specified VPC endpoint ID to the specified Neon project.
+  Remove a VPC endpoint restriction from a specific Neon project. This allows clients to connect from the VPC of the VPC endpoint ID to the specified Neon project.
 
   ```bash
   neonctl vpc project remove vpc-12345678 --project-id orange-credit-12345678
