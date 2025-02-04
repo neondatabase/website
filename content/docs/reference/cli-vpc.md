@@ -38,11 +38,11 @@ The `vpc endpoint` subcommand allows you to list, assign, remove, and get the st
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `vpc endpoint` subcommand supports these options:
 
-| Option           | Description                                                                                                                                                        | Type   |                                                             Required                                                             |
+| Option           | Description                                                                                                                                                        | Type   | Required                                                                                                                         |
 | :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----- | :------------------------------------------------------------------------------------------------------------------------------- |
 | `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                                                                      | string |                                                                                                                                  |
 | `--org-id`       | Organization ID                                                                                                                                                    | string | Only if the user has more than on organization. If not specified, and the user has only one organization, that `org_id` is used. |
-| `--region-id`    | The region ID. Possible values: `aws-us-west-2`, `aws-ap-southeast-1`, `aws-ap-southeast-2`, `aws-eu-central-1`, `aws-us-east-2`, `aws-us-east-1`, `azure-eastus2` | string |                                                               yes                                                                |
+| `--region-id`    | The region ID. Possible values: `aws-us-west-2`, `aws-ap-southeast-1`, `aws-ap-southeast-2`, `aws-eu-central-1`, `aws-us-east-2`, `aws-us-east-1`, `azure-eastus2` | string | yes                                                                                                                              |
 
 ### Examples
 
@@ -99,7 +99,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | Option           | Description                                                                                   | Type   | Required |
 | :--------------- | :-------------------------------------------------------------------------------------------- | :----- | :------- |
 | `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string |          |
-| `--project-id`   | The Project ID.                                                                               | string |   yes    |
+| `--project-id`   | The Project ID.                                                                               | string | yes      |
 
 ### Examples
 
