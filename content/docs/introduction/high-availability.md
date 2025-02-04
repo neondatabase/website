@@ -5,27 +5,27 @@ enableTableOfContents: true
 updatedOn: '2024-10-08T17:24:35.409Z'
 ---
 
-At Neon, our serverless architecture is resilient by default, with the separation of storage from compute giving us flexibility in designing High Availability (HA) solutions for each layer.
+At Neon, our serverless architecture takes a different approach to high availability. Instead of maintaining idle standby replicas, we achieve multi-AZ resilience through our separation of storage and compute.
 
 ![Neon architecture diagram](/docs/introduction/neon_architecture_4.jpg)
 
-Based on this separation, we can break HA into two main parts:
+Based on this separation, we can break our approach into two main parts:
 
 - **Storage redundancy** &#8212; _Protecting both your long-term and active data_
 
   On the storage side, all data is backed by cloud object storage for long-term safety, while Pageserver and Safekeeper services are distributed across [Availability Zones](https://en.wikipedia.org/wiki/Availability_zone) to provide redundancy for the cached data used by compute.
 
-- **Compute resiliency** &#8212; _Keeping your application continuously connected_
+- **Compute resiliency** &#8212; _Keeping your application running_
 
-  Our architecture scales to handle traffic spikes and automatically restarts your compute if Postgres crashes or your compute becomes unavailable.
+  Our architecture scales to handle traffic spikes and restarts or reschedules compute instances when issues occur, with recovery times typically ranging from a few seconds to a few minutes. While this means your application needs to handle brief disconnections, it eliminates the cost of maintaining idle standby instances.
 
 ## Storage redundancy
 
-By distributing storage components across multiple Availability Zones (AZs), Neon ensures both data durability and operational continuity.
+By distributing storage components across multiple Availability Zones (AZs), Neon ensures both data durability and continuous data access.
 
 ### General storage architecture
 
-This diagram shows a simplified view of how failures of Safekeeper or Pageserver services are recovered across Availability Zones:
+This diagram shows how Neon handles Safekeeper or Pageserver service recovery across Availability Zones:
 
 ![HA storage failover](/docs/introduction/HA-storage-failover.png)
 
@@ -43,15 +43,23 @@ In this architecture:
 
 - **Object storage**
 
-  The primary, long-term copy of your data resides in **cloud object storage**, with **99.999999999%** durability, ensuring protection against permanent data loss in the event of Pageserver or Safekeeper failure.
+  Your data's primary, long-term storage is in **cloud object storage**, with **99.999999999%** durability, protecting against data loss regardless of Pageserver or Safekeeper status.
+
+#### Recap of storage recovery times
+
+| Component | Failure impact | Recovery mechanism | Recovery time |
+|-----------|----------------|-------------------|---------------|
+| Safekeeper | WAL writes continue to other Safekeepers | Automatic redistribution across AZs | Seconds |
+| Pageserver | Read requests automaticallyroute to secondary | Automatic failover to secondary | Seconds |
+| Object storage | No impact - 99.999999999% durability | Multi-AZ redundancy built-in | Immediate |
 
 ## Compute resiliency
 
-While the compute layer doesn’t provide traditional high availability, it’s built for resiliency and quick recovery from failures. A Neon compute is stateless, meaning failures do not affect your data. In the most common compute failures, _your connection remains stable_. However, as with any stateless service, your application should be configured to reconnect automatically. Downtime usually lasts seconds, and your connection string stays the same.
+The compute layer does not yet support traditional high availability, but is built for resiliency and quick recovery from failures. A Neon compute is stateless, meaning failures do not affect your data. In the most common compute failures, _your connection string stays the same and new connections are automatically routed to the recovered instance_. However, as with any stateless service, your application should be configured to reconnect automatically. Downtime usually lasts seconds.
 
 ### Compute endpoints as metadata
 
-Think of your compute endpoint as metadata — with your connection string being the core element. The endpoint isn't permanently tied to any specific resource but can be reassigned as needed. When you first connect to your database, Neon assigns a pre-created VM from a pool and attaches your compute endpoint to this VM.
+Your compute endpoint exists essentially as metadata — with your connection string being the core element. This design means endpoints can be instantly reassigned to new compute resources without changing your application's configuration. When you first connect, Neon assigns your endpoint to an available VM from our ready-to-use pool, eliminating traditional provisioning delays.
 
 #### Postgres failure
 
@@ -64,6 +72,23 @@ Postgres runs inside the VM. If Postgres crashes, an internal Neon process detec
 In rarer cases, the VM itself may fail due to issues like a kernel panic or the host's termination. When this happens, Neon recreates the VM and reattaches your compute endpoint. This process may take a little longer than restarting Postgres, but it still typically resolves in seconds.
 
 ![VM restarting after failure](/docs/introduction/vm_fails.png)
+
+#### Degraded endpoints
+
+If a compute endpoint is in a degraded state (repeatedly crashing and restarting rather than failing outright), we will detect and reattach it automatically, typically within 5 minutes. During this time, your application may experience intermittent connectivity.
+
+#### Node failures
+
+Node failures can affect multiple customers simultaneously when a Kubernetes node becomes unavailable. The control plane will reschedule compute instances to other healthy nodes, a process that typically takes a few minutes. While your data remains safe during this process, compute availability will be impacted until rescheduling is complete.
+
+#### Recap of compute recovery times
+
+| Failure type | Impact | Recovery mechanism | Recovery time |
+|--------------|---------|-------------------|---------------|
+| Postgres crash | Brief interruption | Automatic restart | Seconds |
+| VM failure | Brief interruption | VM recreation and endpoint reattachment | Seconds |
+| Degraded endpoint | Possible intermittent connectivity | Automatic detection and reattachment | Up to 5 minutes |
+| Node failure | Compute unavailable | Rescheduling to healthy nodes | ~2 minutes |
 
 ### Impact on session data after a failure?
 
