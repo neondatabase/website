@@ -38,7 +38,7 @@ The support channels you can access differ according to your [Support Plan](#sup
 | [Named Support Engineer](#named-support-engineer)                             |     -     |    -     |    -     |    \*\*    |
 
 <div style={{margin: '-30px 0 30px 0'}}>
-<small><sup>*</sup>Video chats may be scheduled on a case-by-case basis. See [Video chat](#video-chat).</small>
+<small><sup>*</sup>Video chats may be scheduled on a case-by-case basis. See [Video chat](#video-chat).</small><br/>
 <small><sup>**</sup>Named Support Engineers are available as a paid addon. See [Named Support Engineer](#named-support-engineer).</small>
 </div>
 
