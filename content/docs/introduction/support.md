@@ -32,7 +32,7 @@ The support channels you can access differ according to your [Support Plan](#sup
 | [Neon AI Chat Assistance](#neon-ai-chat-assistance) (not an official channel) |  &check;  | &check;  | &check;  |  &check;   |
 | [Support tickets](#support-tickets)                                           |     -     | &check;  | &check;  |  &check;   |
 | [Prioritized support tickets](#prioritized-support-tickets)                   |     -     |    -     | &check;  |  &check;   |
-| [Video chat](#video-chat)                                                     |     -     |    -     |    \*    |     \*     |
+| [Video chat](#video-chat)                                                     |     -     |    -     |    -     |     \*     |
 | [SLAs](#slas)                                                                 |     -     |    -     | &check;  |  &check;   |
 
 <div style={{margin: '-30px 0 30px 0'}}>
