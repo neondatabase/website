@@ -77,7 +77,7 @@ To configure Neon Private Networking, perform the following steps:
     neon vpc endpoint assign vpce-1234567890abcdef0 --org-id org-bold-bonus-12345678 --region-id aws-us-east-2
     ```
 
-    You can find your Neon organization ID in the Neon Console, in your Neon organization settings, or you can run this Neon CLI command: `neon orgs list`. 
+    You can find your Neon organization ID in the Neon Console, in your Neon organization settings, or you can run this Neon CLI command: `neon orgs list`.
 
 ## Enable Private DNS
 
