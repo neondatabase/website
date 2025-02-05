@@ -150,16 +150,25 @@ curl --request POST \
 
 You can use the Neon CLI `vpc` command to manage Private Networking configurations in Neon.
 
-The `vpc` command includes `endpoint` and `project` subcommands for managing VPC endpoints and project-level VPC endpoint restrictions.
+The `vpc` command includes `endpoint` and `project` subcommands for managing VPC endpoints and project-level VPC endpoint restrictions:
 
-- The `vpc endpoint` subcommand lets you to list, assign, remove, and get the status of VPC endpoints for a Neon organization.
-- The `vpc project` subcommand lets you list, configure, or remove VPC endpoint restrictions for specific Neon projects.
+- **`vpc endpoint`** – List, assign, remove, and retrieve the status of VPC endpoints for a Neon organization.
+- **`vpc project`** – List, configure, or remove VPC endpoint restrictions for specific Neon projects.
 
-For more information about these commands and examples, see [Neon CLI commands — vpc](/docs/reference/cli-vpc).
+For more details and examples, see [Neon CLI commands — vpc](/docs/reference/cli-vpc).
 
 ## Managing Private Networking using the Neon API
 
-The Neon API supports the following endpoints for managing Private Networking restrictions in Neon:
+The Neon API provides endpoints for managing VPC endpoints and project-level VPC endpoint restrictions:
+
+### APIs for managing VPC endpoints
+
+- [List VPC endpoints](https://api-docs.neon.tech/reference/listorganizationvpcendpoints)
+- [Assign or update a VPC endpoint](https://api-docs.neon.tech/reference/assignorganizationvpcendpoint)
+- [Retrieve VPC endpoint configuration details](https://api-docs.neon.tech/reference/getorganizationvpcendpointdetails)
+- [Delete a VPC endpoint](https://api-docs.neon.tech/reference/deleteorganizationvpcendpoint)
+
+### APIs for managing VPC endpoint restrictions
 
 - [Get VPC endpoint restrictions](https://api-docs.neon.tech/reference/listprojectvpcendpoints)
 - [Assign or update a VPC endpoint restriction](https://api-docs.neon.tech/reference/assignprojectvpcendpoint)
