@@ -114,7 +114,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 - **Restrict connections to a specific VPC**
 
-  Configure or update a VPC endpoint restriction for a Neon project. The specified Neon project will not accept client connections from the VPC of specified VPC endpoint ID.
+  Configure or update a VPC endpoint restriction for a Neon project. When a VPC endpoint ID is assigned as a restriction, only connections from this specific VPC are accepted.
 
   ```bash
   neon vpc project restrict vpc-12345678 --project-id orange-credit-12345678
@@ -122,7 +122,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 - **Remove a VPC endpoint restriction**
 
-  Remove a VPC endpoint restriction from a specific Neon project. This allows clients to connect from the VPC of the VPC endpoint ID to the specified Neon project.
+  Remove a VPC endpoint restriction from a specific Neon project.
 
   ```bash
   neon vpc project remove vpc-12345678 --project-id orange-credit-12345678
