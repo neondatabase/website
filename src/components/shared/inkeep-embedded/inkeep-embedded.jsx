@@ -64,7 +64,7 @@ const InkeepEmbedded = ({ isDarkTheme = false }) => {
       logEventCallback: (event) => {
         const { eventName, properties } = event;
         if (eventName === 'chat_message_submitted') {
-          sendGtagEvent(eventName, { text: properties.content });
+          sendGtagEvent('AI Chat Message Submitted', { text: properties.content });
         }
       },
     },

@@ -77,7 +77,7 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType =
       logEventCallback: (event) => {
         const { eventName, properties } = event;
         if (eventName === 'search_query_submitted') {
-          sendGtagEvent(eventName, { text: properties.query });
+          sendGtagEvent('Search Query Submitted', { text: properties.query });
         }
       },
     },
