@@ -3,7 +3,7 @@ title: Monitor query history
 subtitle: View and analyze query history for your Neon database
 enableTableOfContents: true
 tag: new
-updatedOn: '2025-02-03T20:41:57.343Z'
+updatedOn: '2025-02-05T21:06:28.071Z'
 ---
 
 <EarlyAccess />

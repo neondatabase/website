@@ -3,7 +3,7 @@ title: Platform overview
 enableTableOfContents: true
 subtitle: Find information about managing all aspects of your database using the Neon
   platform
-updatedOn: '2024-11-01T10:14:56.350Z'
+updatedOn: '2025-02-05T21:06:28.072Z'
 ---
 
 ## Access control
