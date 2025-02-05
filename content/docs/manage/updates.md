@@ -121,13 +121,18 @@ curl --request GET \
 In the response, locate the `maintenance_window` field. It specifies the selected weekday and hour for updates. For Free Plan accounts, the update window is set by Neon. Paid plan accounts can [choose a preferred update window](#updates-on-paid-plans). The `weekdays` value is a number from 1 to 7, representing the day of the week.
 
 ```json
+{
+...
+  "settings": {
       "maintenance_window": {
-        "weekdays": [
-          5
-        ],
-        "start_time": "07:00",
-        "end_time": "08:00"
-      }
+         "weekdays": [5],
+         "start_time": "07:00",
+         "end_time": "08:00"
+      },
+   }
+  "maintenance_scheduled_for": "2025-02-07T07:00"
+...
+}
 ```
 
 If there's a planned update, you'll also find a `maintenance_scheduled_for` field in the response body. This value matches the `start_time` in your `maintenance_window` but is formatted as a timestamp. If the `maintenance_scheduled_for` field in not present in the response, this means there is no planned update at this time.
