@@ -70,7 +70,7 @@ const TopBar = ({ isDarkTheme }) => (
         isDarkTheme ? 'text-gray-new-90' : 'text-gray-new-15'
       )}
     >
-      In Neon, you can recover a 100 TB database in 1 second. No more fear of breaking production 
+      In Neon, you can recover a 100 TB database in 1 second. No more fear of breaking production
     </span>
     <ChevronIcon
       className={clsx(
