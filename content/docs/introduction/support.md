@@ -33,10 +33,13 @@ The support channels you can access differ according to your [Support Plan](#sup
 | [Support tickets](#support-tickets)                                           |     -     | &check;  | &check;  |  &check;   |
 | [Prioritized support tickets](#prioritized-support-tickets)                   |     -     |    -     | &check;  |  &check;   |
 | [Video chat](#video-chat)                                                     |     -     |    -     |    -     |     \*     |
+| [Slack channel](#slack-channel)                                               |     -     |    -     |    -     |     \*     |
 | [SLAs](#slas)                                                                 |     -     |    -     | &check;  |  &check;   |
+| [Named Support Engineer](#named-support-engineer)                             |     -     |    -     |    -     |    \*\*    |
 
 <div style={{margin: '-30px 0 30px 0'}}>
 <small><sup>*</sup>Video chats may be scheduled on a case-by-case basis. See [Video chat](#video-chat).</small>
+<small><sup>**</sup>Named Support Engineers are available as a paid addon. See [Named Support Engineer](#named-support-engineer).</small>
 </div>
 
 ### Neon Discord Server
@@ -87,9 +90,17 @@ Support tickets opened by Priority and Enterprise support plan customers are giv
 
 Video chat is available to Priority and Enterprise support plan customers and may be scheduled on a case-by-case basis through the [support ticket](#support-tickets) process.
 
+### Slack channel
+
+[Slack connect](https://slack.com/intl/en-ie/connect) channels are available to Enterprise support plan customers. You can request one from our [sales team](/contact-sales).
+
 ### SLAs
 
 Support Level Agreements (SLAs) are available to Business and Enterprise support plan customers. For Business plan, see [Business Plan SLA](https://neon.tech/neon-business-sla). If you are interested in exploring an Enterprise-level SLA, [get in touch with our sales team](/contact-sales).
+
+### Named Support Engineer
+
+Named Support Engineers are available to Business and Enterprise customers. If you are interested in exploring this option, [get in touch with our sales team](/contact-sales).
 
 ## General support policy
 
