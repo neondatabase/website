@@ -10,7 +10,7 @@ updatedOn: '2025-02-04T17:23:55.930Z'
 Free Plan accounts can expect to start seeing update notices in early February, at least 24 hours before any scheduled update. Update notices for Neon's paid plans will start rolling out in the second week of February, with at least 7 days' notice before a planned update. For the latest information about updates, you can also follow announcements in the [Neon Changelog](https://neon.tech/docs/changelog), published every Friday.
 </Admonition>
 
-To keep your Neon computes and Postgres instances up to date with the latest patches and Neon features, Neon automatically applies scheduled updates to your project's computes. We notify you of scheduled updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can schedule an update window — a specific day and hour for updates.
+To keep your Neon computes and Postgres instances up to date with the latest patches and Neon features, Neon applies scheduled updates to your project's computes. We notify you of scheduled updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can schedule an update window — a specific day and hour for updates.
 
 Neon must briefly restart a compute to apply an update. The entire process takes just a few seconds, minimizing any potential disruption.
 
@@ -28,7 +28,6 @@ Scheduled updates are typically applied weekly but may occur more or less freque
 
 Neon applies updates to computes based on the following rules:
 
-- Computes that are currently active receive updates.
 - Computes that have been active for 30 days or more receive updates.
 - Computes that are restarted receive available updates immediately.
 - Computes in a transition state (e.g., shutting down or restarting) at the time of an update are not updated.
@@ -41,7 +40,7 @@ Neon schedules updates in advance so you know when to expect them. Updates keep 
 
 ## Updates on the Free Plan
 
-On the **Free Plan**, updates are scheduled and applied automatically by Neon. You can check your project's settings for upcoming scheduled updates. We'll post a notice there at least **1 day** ahead of a planned update, letting you know when it's coming.
+On the **Free Plan**, updates are scheduled and applied automatically. You can check your project's settings for scheduled updates. We'll post a notice there at least **1 day** ahead of a planned update, letting you know when it's coming.
 
 To view scheduled updates:
 
@@ -105,6 +104,33 @@ curl --request PATCH \
 </TabItem>
 
 </Tabs>
+
+## Check for updates using the Neon API
+
+You can check for scheduled updates using the [Get project details](https://api-docs.neon.tech/reference/getproject) endpoint.
+
+To retrieve your project details, send the following request, replacing `<your_project_id>` with your Neon project ID:
+
+```bash
+curl --request GET \
+     --url https://console.neon.tech/api/v2/projects/<your_project_id> \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY'
+```
+
+In the response, locate the `maintenance_window` field. It specifies the selected weekday and hour for updates. For Free Plan accounts, the window is set by Neon. Paid plan accounts can [choose a preferred window](#updates-on-paid-plans). The `weekdays` value is a number from 1 to 7, representing the day of the week. If an update requires a compute restart, it will occur within this window.
+
+```json
+      "maintenance_window": {
+        "weekdays": [
+          5
+        ],
+        "start_time": "07:00",
+        "end_time": "08:00"
+      }
+```
+
+If an update is scheduled, you'll also find a `maintenance_scheduled_for` field in the response body. This value matches the `start_time` in your `maintenance_window` but is formatted as a timestamp. If the `maintenance_scheduled_for` field in not present in the response, this means that there is currently no scheduled update.
 
 ## Applying updates ahead of schedule
 
