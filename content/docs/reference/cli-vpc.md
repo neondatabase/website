@@ -59,7 +59,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
   Add or update a VPC endpoint for a specific Neon organization and region.
 
   ```bash
-  neon vpc endpoint assign vpc-12345678 --org-id org-bold-bonus-12345678 --region-id aws-us-east-1
+  neon vpc endpoint assign vpce-1234567890abcdef0 --org-id org-bold-bonus-12345678 --region-id aws-us-east-1
   ```
 
   After assigning a VPC endpoint to a Neon organization, client connections will be accepted from the corresponding VPC for all projects in the Neon organization, unless restricted. Aliases for this command are `add` and `update`.
@@ -69,7 +69,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
   Delete an existing VPC endpoint from a specific Neon organization.
 
   ```bash
-  neon vpc endpoint remove vpc-12345678 --org-id org-bold-bonus-12345678
+  neon vpc endpoint remove vpce-1234567890abcdef0 --org-id org-bold-bonus-12345678
   ```
 
 - **Get the status of a VPC endpoint**
@@ -77,12 +77,12 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
   Check the status of a specific VPC endpoint in a Neon organization.
 
   ```bash
-  neon vpc endpoint status vpc-12345678 --org-id org-bold-bonus-12345678
+  neon vpc endpoint status vpce-1234567890abcdef0 --org-id org-bold-bonus-12345678
   ```
 
 ## The `vpc project` subcommand
 
-The `vpc project` command lets you list, configure, or remove VPC endpoint restrictions for specific Neon projects.
+The `vpc project` command lets you list, configure, or remove VPC endpoint restrictions to prevent access to specific projects in your Neon organization.
 
 ### Usage
 
@@ -117,7 +117,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
   Configure or update a VPC endpoint restriction for a Neon project. When a VPC endpoint ID is assigned as a restriction, only connections from this specific VPC are accepted.
 
   ```bash
-  neon vpc project restrict vpc-12345678 --project-id orange-credit-12345678
+  neon vpc project restrict vpce-1234567890abcdef0 --project-id orange-credit-12345678
   ```
 
 - **Remove a VPC endpoint restriction**
@@ -125,7 +125,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
   Remove a VPC endpoint restriction from a specific Neon project.
 
   ```bash
-  neon vpc project remove vpc-12345678 --project-id orange-credit-12345678
+  neon vpc project remove vpce-1234567890abcdef0 --project-id orange-credit-12345678
   ```
 
 <NeedHelp/>
