@@ -157,7 +157,7 @@ The Neon API supports the following endpoints for managing Private Networking co
 
 - [Get VPC endpoint restrictions](https://api-docs.neon.tech/reference/listprojectvpcendpoints)
 - [Assign or update a VPC endpoint restriction](https://api-docs.neon.tech/reference/assignprojectvpcendpoint)
-- [Delete a VPC endpoint](https://api-docs.neon.tech/reference/deleteprojectvpcendpoint)
+- [Delete a VPC endpoint restriction](https://api-docs.neon.tech/reference/deleteprojectvpcendpoint)
 
 ## Limits
 
