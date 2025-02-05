@@ -10,8 +10,6 @@ import sendGtagEvent from 'utils/send-gtag-event';
 
 import patternImage from './images/pattern.svg';
 
-// TODO: If you want to change the background color of the topbar, please update the themeColor in function getMetadata (src/utils/get-metadata.js) as well
-// It is recommended to set background color for tab bar in safari browser https://github.com/neondatabase/website/assets/48465000/d79fba3a-ac4a-4e81-be64-b2cf371d57bc
 const TopBar = ({ isDarkTheme }) => (
   <Link
     className={clsx(
@@ -23,6 +21,14 @@ const TopBar = ({ isDarkTheme }) => (
       sendGtagEvent('click_announcement_banner');
     }}
   >
+    <span
+      className={clsx(
+        'relative z-50 truncate py-1 text-sm font-medium tracking-extra-tight dark:text-gray-new-90 sm:text-[13px]',
+        isDarkTheme ? 'text-gray-new-90' : 'text-gray-new-15'
+      )}
+    >
+      In Neon, you can recover a 100 TB database in 1 second. No more fear of breaking production
+    </span>
     <span
       className={clsx(
         'absolute left-1/2 -z-20 h-[106px] w-[29px] origin-center -translate-y-1/2 rotate-[226deg] rounded-[100%] mix-blend-plus-lighter blur-lg dark:opacity-100 sm:left-[30%]',
@@ -64,14 +70,6 @@ const TopBar = ({ isDarkTheme }) => (
       )}
       aria-hidden
     />
-    <span
-      className={clsx(
-        'relative z-50 truncate py-1 text-sm font-medium tracking-extra-tight dark:text-gray-new-90 sm:text-[13px]',
-        isDarkTheme ? 'text-gray-new-90' : 'text-gray-new-15'
-      )}
-    >
-      In Neon, you can recover a 100 TB database in 1 second. No more fear of breaking production
-    </span>
     <ChevronIcon
       className={clsx(
         'relative z-50 w-[9px] shrink-0 origin-center -rotate-90 opacity-60 dark:text-white',
