@@ -12,12 +12,12 @@ With the [pgvector](https://github.com/pgvector/pgvector) extension, you can sto
 
 ## Steps
 
-* Install and enable pgvector
-* Create a table with a vector column
-* Insert and retrieve vector data
-* Perform nearest neighbor searches
-* Index using HNSW indexes
-* Insert and retrieve embeddings
+- Install and enable pgvector
+- Create a table with a vector column
+- Insert and retrieve vector data
+- Perform nearest neighbor searches
+- Index using HNSW indexes
+- Insert and retrieve embeddings
 
 ## Install and enable pgvector
 
@@ -33,7 +33,6 @@ CREATE EXTENSION IF NOT EXISTS vector;
 
 To store vector embeddings, create a table with a vector column.
 You must specify the size (also known as _dimensionality_) of the vectors when defining the column.
-
 
 ```sql
 CREATE TABLE embeddings (
