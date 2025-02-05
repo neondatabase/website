@@ -105,7 +105,7 @@ curl --request PATCH \
 
 </Tabs>
 
-## Check for scheduled updates using the Neon API
+## Check for updates using the Neon API
 
 You can check for scheduled updates using the [Get project details](https://api-docs.neon.tech/reference/getproject) endpoint.
 
@@ -118,7 +118,7 @@ curl --request GET \
      --header 'authorization: Bearer $NEON_API_KEY'
 ```
 
-In the response, check the maintenance_window field. It specifies the selected weekday and hour for updates. The weekdays values range from 1 to 7, representing each day of the week. If an update requires a compute restart, it will occur within this window.
+In the response, locate the `maintenance_window` field. It specifies the selected weekday and hour for updates. For Free Plan accounts, the window is set by Neon. Paid plan accounts can [choose a preferred window](#updates-on-paid-plans). The `weekdays` value is a number from 1 to 7, representing the day of the week. If an update requires a compute restart, it will occur within this window.
 
 ```json
       "maintenance_window": {
@@ -130,7 +130,7 @@ In the response, check the maintenance_window field. It specifies the selected w
       }
 ```
 
-If an update is scheduled, you'll also find a `maintenance_scheduled_for` field in the response body. This value matches the `start_time` in your `maintenance_window` but is formatted as a timestamp.
+If an update is scheduled, you'll also find a `maintenance_scheduled_for` field in the response body. This value matches the `start_time` in your `maintenance_window` but is formatted as a timestamp. If the `maintenance_scheduled_for` field in not present in the response, this means that there is currently no scheduled update.
 
 ## Applying updates ahead of schedule
 
