@@ -121,6 +121,8 @@ To configure Neon Private Networking, perform the following steps:
 
 You can restrict clients from an AWS VPC from connecting to particular projects in a Neon organization using the Neon CLI or API.
 
+**Neon CLI**
+
 Using the Neon CLI, you can specify a command similar to the following to restrict project access:
 
 ```bash
@@ -129,7 +131,9 @@ neon vpc project restrict vpce-1234567890abcdef0 --project-id orange-credit-1234
 
 Specify the VPC endpoint ID associated with the AWS VPC, and your Neon project ID. You can find you project ID under your project's settings in the Neon Console, or by running this Neon CLI command: `neon projects list`
 
-The Neon API supports the same using the [Assign or update a VPC endpoint restriction](https://api-docs.neon.tech/reference/assignprojectvpcendpoint) endpoint:
+**Neon API**
+
+The Neon API supports managing project restrictions using the [Assign or update a VPC endpoint restriction](https://api-docs.neon.tech/reference/assignprojectvpcendpoint) endpoint:
 
 ```bash
 curl --request POST \
