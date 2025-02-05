@@ -35,11 +35,11 @@ The support channels you can access differ according to your [Support Plan](#sup
 | [Video chat](#video-chat)                                                     |     -     |    -     |    -     |     \*     |
 | [Slack channel](#slack-channel)                                               |     -     |    -     |    -     |     \*     |
 | [SLAs](#slas)                                                                 |     -     |    -     | &check;  |  &check;   |
-| [Named Support Engineer](#named-support-engineer)                             |     -     |    -     |    -     |    \*\*    |
+| [Dedicated Support Engineer](#dedicated-support-engineer)                     |     -     |    -     |    -     |    \*\*    |
 
 <div style={{margin: '-30px 0 30px 0'}}>
 <small><sup>*</sup>Video chats may be scheduled on a case-by-case basis. See [Video chat](#video-chat).</small><br/>
-<small><sup>**</sup>Named Support Engineers are available as a paid addon. See [Named Support Engineer](#named-support-engineer).</small>
+<small><sup>**</sup>Dedicated Support Engineers are available as a paid addon. See [Dedicated Support Engineer](#dedicated-support-engineer).</small>
 </div>
 
 ### Neon Discord Server
@@ -98,9 +98,9 @@ Video chat is available to Priority and Enterprise support plan customers and ma
 
 Support Level Agreements (SLAs) are available to Business and Enterprise support plan customers. For Business plan, see [Business Plan SLA](https://neon.tech/neon-business-sla). If you are interested in exploring an Enterprise-level SLA, [get in touch with our sales team](/contact-sales).
 
-### Named Support Engineer
+### Dedicated Support Engineer
 
-Named Support Engineers are available to Business and Enterprise customers. If you are interested in exploring this option, [get in touch with our sales team](/contact-sales).
+The Dedicated Support Engineer option is available to Business and Enterprise customers. A dedicated engineer can develop in-depth knowledge of your systems, leading to more efficient issue resolution. To learn more, [contact our sales team](/contact-sales).
 
 ## General support policy
 
