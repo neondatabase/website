@@ -117,7 +117,7 @@ To add build commands to your Vercel project previews:
 4. Enable the **Override** option and enter your build commands, including your schema migration command. For example, if you're using Prisma, you might enter the following commands to apply database migrations, generate the Prisma Client, and run your build:
 
     ```text
-    npx prisma migrate deploy && npx prosma generate && next build
+    npx prisma migrate deploy && npx prisma generate && next build
     ```
 
     As shown below:
