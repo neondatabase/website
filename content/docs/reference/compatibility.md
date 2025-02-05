@@ -97,6 +97,8 @@ Of the parameter settings listed above, the `max_connections`, `maintenance_work
     SET maintenance_work_mem='10 GB';
     ```
 
+    However, your `maintenance_work_mem` setting should not exceed 50 to 60 percent of your compute's available RAM.
+
     | Compute Units (CU) | vCPU | RAM    | maintenance_work_mem |
     | :----------------- | :--- | :----- | :------------------- |
     | 0.25               | 0.25 | 1 GB   | 64 MB                |
