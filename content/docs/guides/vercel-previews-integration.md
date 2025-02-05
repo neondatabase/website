@@ -163,7 +163,7 @@ After you add the integration to a Vercel project, Neon creates a database branc
 
 ## Applying schema changes to database branches
 
-If you're managing your database schema in code using a tool like Prisma Migrate or Drizzle ORM, you can add  build commands including a schema migration command to your Vercel deployment configuration to apply schema changes to your database branch. This way, you can deploy application and database changes together in your preview.
+If you're managing your database schema in code using a tool like Prisma Migrate or Drizzle ORM, you can add build commands including a schema migration command to your Vercel deployment configuration to apply schema changes to your database branch. This way, you can deploy application and database changes together in your preview.
 
 To add build commands to your Vercel project previews:
 
