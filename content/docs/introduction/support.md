@@ -128,12 +128,12 @@ The table below outlines Neon’s guidelines for the various support tiers of ou
 
 These times relate to the time it takes Neon to respond to the Customer’s initial request. This guideline only applies when submitting a support ticket through the Neon Console.
 
-|    Severity Level     | Enterprise Standard                       | Enterprise Gold                          |
-| :-------------------: | ----------------------------------------- | ---------------------------------------- |
-| Severity 1 (Critical) | \< 2 hours (during Normal Business Hours) | \< 1 hour                                |
-|   Severity 2 (High)   | \< 2 days (during Normal Business Hours)  | \< 1 day                                 |
-|  Severity 3 (Normal)  | \< 3 days (during Normal Business Hours)  | \< 3 days (during Normal Business Hours) |
-|   Severity 4 (Low)    | \< 3 days (during Normal Business Hours)  | \< 3 days (during Normal Business Hours) |
+|    Severity Level     | Enterprise Standard                       | Enterprise Gold                          | Enterprise Black                         |
+| :-------------------: | ----------------------------------------- | ---------------------------------------- | ---------------------------------------- |
+| Severity 1 (Critical) | \< 2 hours (during Normal Business Hours) | \< 1 hour                                | \< 1 hour                                |
+|   Severity 2 (High)   | \< 2 days (during Normal Business Hours)  | \< 1 day                                 | \< 4 hours                               |
+|  Severity 3 (Normal)  | \< 3 days (during Normal Business Hours)  | \< 3 days (during Normal Business Hours) | \< 3 days (during Normal Business Hours) |
+|   Severity 4 (Low)    | \< 3 days (during Normal Business Hours)  | \< 3 days (during Normal Business Hours) | \< 3 days (during Normal Business Hours) |
 
 ### Severity levels
 
