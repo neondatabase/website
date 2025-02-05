@@ -53,7 +53,7 @@ To configure Neon Private Networking, perform the following steps:
 
         ![VPC Create endpoint](/docs/guides/pl_vpc_service_name_verified.png)
 
-        If not successful, ensure that your service name matches the region where you're creating the VPC endpoint.  
+        If not successful, ensure that your service name matches the region where you're creating the VPC endpoint.
 
     1. Select the VPC where your application is deployed.
     1. Add the availability zones and associated subnets you want to support.
