@@ -82,7 +82,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 ## The `vpc project` subcommand
 
-The `vpc project` command lets you list, configure, or remove VPC endpoint restrictions to prevent access to specific projects in your Neon organization.
+The `vpc project` subcommand lets you list, configure, or remove VPC endpoint restrictions to prevent access to specific projects in your Neon organization.
 
 ### Usage
 

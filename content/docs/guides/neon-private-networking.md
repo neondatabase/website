@@ -53,6 +53,8 @@ To configure Neon Private Networking, perform the following steps:
 
         ![VPC Create endpoint](/docs/guides/pl_vpc_service_name_verified.png)
 
+        If not successful, ensure that your service name matches the region where you're creating the VPC endpoint.  
+
     1. Select the VPC where your application is deployed.
     1. Add the availability zones and associated subnets you want to support.
     1. Click **Create endpoint** to complete the setup of the endpoint service.
@@ -81,7 +83,7 @@ To configure Neon Private Networking, perform the following steps:
 
 ## Enable Private DNS
 
-    After adding you VPC endpoint ID to your Neon organization, enable private DNS lookup for the endpoint in AWS.
+    After adding you VPC endpoint ID to your Neon organization, enable private DNS lookup for the VPC endpoint in AWS.
 
     1. In AWS, select the VPC endpoint you created.
     1. Choose **Modify private DNS name**.
@@ -106,7 +108,7 @@ To configure Neon Private Networking, perform the following steps:
     Enter **0.0.0.0** in the allowlist to block all connections over the public internet, and click **Save changes**.
 
     <Admonition type="note">
-     The Private Networking connection is not affected by this IP Allow configuration.
+     Your Private Networking connection will not be affected by this IP Allow configuration.
     </Admonition>
 
     ![Neon IP Allow configuration](/docs/guides/pl_neon_ip_allow.png)
@@ -151,13 +153,13 @@ You can use the Neon CLI `vpc` command to manage Private Networking configuratio
 The `vpc` command includes `endpoint` and `project` subcommands for managing VPC endpoints and project-level VPC endpoint restrictions.
 
 - The `vpc endpoint` subcommand lets you to list, assign, remove, and get the status of VPC endpoints for a Neon organization.
-- The `vpc project` command lets you list, configure, or remove VPC endpoint restrictions for specific Neon projects.
+- The `vpc project` subcommand lets you list, configure, or remove VPC endpoint restrictions for specific Neon projects.
 
 For more information about these commands and examples, see [Neon CLI commands — vpc](/docs/reference/cli-vpc).
 
 ## Managing Private Networking using the Neon API
 
-The Neon API supports the following endpoints for managing Private Networking configurations in Neon:
+The Neon API supports the following endpoints for managing Private Networking restrictions in Neon:
 
 - [Get VPC endpoint restrictions](https://api-docs.neon.tech/reference/listprojectvpcendpoints)
 - [Assign or update a VPC endpoint restriction](https://api-docs.neon.tech/reference/assignprojectvpcendpoint)
