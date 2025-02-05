@@ -10,7 +10,7 @@ import sendGtagEvent from 'utils/send-gtag-event';
 
 import patternImage from './images/pattern.svg';
 
-const TopBar = ({ isDarkTheme }) => (
+const Topbar = ({ isDarkTheme }) => (
   <Link
     className={clsx(
       'safe-paddings relative z-50 flex h-9 w-full items-center justify-center gap-x-2.5 overflow-hidden px-4 py-2.5 leading-none transition-colors duration-200 dark:bg-[#0B0C0F] dark:hover:bg-gray-new-8',
@@ -79,8 +79,8 @@ const TopBar = ({ isDarkTheme }) => (
   </Link>
 );
 
-TopBar.propTypes = {
+Topbar.propTypes = {
   isDarkTheme: PropTypes.bool,
 };
 
-export default TopBar;
+export default Topbar;
