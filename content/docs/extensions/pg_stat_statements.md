@@ -21,12 +21,7 @@ This guide covers:
 
 ### Version availability
 
-The version of `pg_stat_statements` available on Neon depends on the version of Postgres you select for your Neon project.
-
-- Postgres 14 - `pg_stat_statements` 1.9
-- Postgres 15 - `pg_stat_statements` 1.10
-- Postgres 16 - `pg_stat_statements` 1.10
-- Postgres 17 - `pg_stat_statements` 1.11
+The version of `pg_stat_statements` available on Neon depends on the version of Postgres you select for your Neon project. For supported extension versions, see [Supported Postgres extensions](/docs/extensions/pg-extensions).
 
 ### Data persistence
 
@@ -34,7 +29,7 @@ In Neon, statistics collected by the `pg_stat_statements` extension are not reta
 
 ## Enable the `pg_stat_statements` extension
 
-You can enable the extension by running the following `CREATE EXTENSION` statement in the Neon **SQL Editor** or from a client such as `psql` that is connected to Neon.
+The extension is installed by running the following `CREATE EXTENSION` statement in the Neon **SQL Editor** or from a client such as `psql` that is connected to Neon.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
