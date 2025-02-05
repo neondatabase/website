@@ -2,7 +2,7 @@
 title: Neon CLI commands — vpc
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-10-07T13:55:51.300Z'
+updatedOn: '2025-02-05T00:04:30.545Z'
 ---
 
 ## Before you begin

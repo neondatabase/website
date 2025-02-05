@@ -2,7 +2,7 @@
 title: Neon Authorize tutorial
 subtitle: Learn how Row-level Security (RLS) protects user data
 enableTableOfContents: true
-updatedOn: '2024-12-18T08:02:08.142Z'
+updatedOn: '2025-02-05T00:04:30.542Z'
 ---
 
 <InfoBlock>
