@@ -5,6 +5,8 @@ enableTableOfContents: true
 updatedOn: '2025-02-03T20:41:57.343Z'
 ---
 
+<EarlyAccess />
+
 You can monitor active queries for your Neon project from the **Monitoring** page in the Neon Console.
 
 1. In the Neon Console, select a project.
