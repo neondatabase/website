@@ -343,8 +343,10 @@
               slug: manage/operations
             - title: Active queries
               slug: introduction/monitor-active-queries
+              tag: new
             - title: Query history
               slug: introduction/monitor-query-history
+              tag: new
             - title: External tools
               slug: introduction/monitor-external-tools
         - section: Team Tools

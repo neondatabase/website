@@ -2,6 +2,7 @@
 title: Monitor active queries
 subtitle: View and analyze running queries in your database
 enableTableOfContents: true
+tag: new
 updatedOn: '2025-02-03T20:41:57.343Z'
 ---
 
