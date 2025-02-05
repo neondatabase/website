@@ -18,10 +18,12 @@ The query history view shows the top 100 previously run queries for the selected
 
 ![Neon query history tab](/docs/introduction/query_history.png)
 
-The **Query History** view is powered by the `pg_stat_statements` Postgres extension. To run custom queries against the data collected by the `pg_stat_statements`, including your query history, you can use the [Neon SQL Editor](<(/docs/get-started-with-neon/query-with-neon-sql-editor)>) or any SQL client, such as [psql](/docs/connect/query-with-psql-editor).
-
-For details on `pg_stat_statements`, including the data it collects and additional queries you can run, refer to our [pg_stat_statements](/docs/extensions/pg_stat_statements) extension guide.
+The **Query History** view is powered by the `pg_stat_statements` Postgres extension, installed on a system managed database in your Postgres instance.
 
 <Admonition type="note" title="query history retention">
 In Neon, data collected by the `pg_stat_statements` extension is not retained when your Neon compute (where Postgres runs) is suspended or restarted. For example, if your compute scales down to zero due to inactivity, your query history is lost. New data will be gathered once your compute restarts.
 </Admonition>
+
+## Running your own queries
+
+To run your own queries on `pg_stat_statements` data, you can install the `pg_stat_statements` extension to your database and run your queries from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client, such as [psql](/docs/connect/query-with-psql-editor). For details on `pg_stat_statements`, including how to install it, what data it collects, and queries you can run, refer to our [pg_stat_statements](/docs/extensions/pg_stat_statements) extension guide.
