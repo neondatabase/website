@@ -67,19 +67,40 @@ To configure Neon Private Networking, perform the following steps:
 
 ## Add your VPC Endpoint ID to your Neon organization
 
-    Assign your **VPC Endpoint ID** to your Neon organization using the Neon CLI.
+    Assign your **VPC Endpoint ID** to your Neon organization. You can do this using the Neon CLI or API.
 
-    <Admonition type="note">
+        <Admonition type="note">
      Please note that you must assign the **VPC Endpoint ID**, not the VPC ID.
-    </Admonition>
+    </Admonition> 
 
+    <Tabs labels={["CLI", "API"]}>    
+    
+    <TabItem>
+    
     In the following example, the VCP endpoint ID is assigned to a Neon organization in the specified AWS region.
 
     ```bash
     neon vpc endpoint assign vpce-1234567890abcdef0 --org-id org-bold-bonus-12345678 --region-id aws-us-east-2
     ```
 
-    You can find your Neon organization ID in the Neon Console, in your Neon organization settings, or you can run this Neon CLI command: `neon orgs list`.
+    You can find your Neon organization ID in your Neon organization settings, or you can run this Neon CLI command: `neon orgs list`.
+
+    </TabItem>
+    
+    <TabItem>
+
+    You can use the [Assign or update a VPC endpoint](https://api-docs.neon.tech/reference/assignorganizationvpcendpoint) API to assign a VCP endpoint ID to a Neon organization. You will need to provide your Neon organization ID, region ID, VPC endpoint ID, Neon project ID, and a [Neon API key](https://neon.tech/docs/manage/api-keys). 
+    
+    ```bash
+    curl --request POST \
+     --url https://console.neon.tech/api/v2/organizations/org-bold-bonus-12345678/vpc/region/aws-us-east-2/vpc_endpoints/vpce-1234567890abcdef0 \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json'
+    ```
+    </TabItem>
+    
+    </Tabs>
 
 ## Enable Private DNS
 
@@ -96,6 +117,18 @@ To configure Neon Private Networking, perform the following steps:
     Your Neon database connection string does not change when using Private Networking.
 
     To verify that your connection is working correctly, you can perform a DNS lookup on your Neon endpoint hostname from within your AWS VPC. It should resolve to the private IP address of the VPC endpoint.
+
+    For example, if your Neon database connection string is:
+
+    ```bash
+    postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+    ```
+
+    You can run the following command from an EC2 instance inside your AWS VPC:
+    
+    ```bash
+    nslookup ep-cool-darkness-123456.us-east-2.aws.neon.tech
+    ```
 
 ## Restrict public internet access
 
@@ -123,19 +156,23 @@ To configure Neon Private Networking, perform the following steps:
 
 You can restrict clients from an AWS VPC from connecting to particular projects in a Neon organization using the Neon CLI or API.
 
-**Neon CLI**
+<Tabs labels={["CLI", "API"]}>
 
-Using the Neon CLI, you can specify a command similar to the following to restrict project access:
+<TabItem>
+
+You can specify a CLI command similar to the following to restrict project access:
 
 ```bash
 neon vpc project restrict vpce-1234567890abcdef0 --project-id orange-credit-12345678
 ```
 
-Specify the VPC endpoint ID associated with the AWS VPC, and your Neon project ID. You can find you project ID under your project's settings in the Neon Console, or by running this Neon CLI command: `neon projects list`
+You will ne to provide the VPC endpoint ID that you want to restrict and your Neon project ID. You can find you Neon project ID under your project's settings in the Neon Console, or by running this Neon CLI command: `neon projects list`
 
-**Neon API**
+</TabItem>
 
-The Neon API supports managing project restrictions using the [Assign or update a VPC endpoint restriction](https://api-docs.neon.tech/reference/assignprojectvpcendpoint) endpoint:
+<TabItem>
+
+The Neon API supports managing project restrictions using the [Assign or update a VPC endpoint restriction](https://api-docs.neon.tech/reference/assignprojectvpcendpoint) endpoint. You will need to provide your VPC endpoint ID, Neon project ID, and a [Neon API key](https://neon.tech/docs/manage/api-keys).
 
 ```bash
 curl --request POST \
@@ -145,6 +182,17 @@ curl --request POST \
      --header 'content-type: application/json' \
      --data '{"label":"my_vpc"}'
 ```
+
+</TabItem>
+
+</Tabs>
+
+
+
+
+
+
+
 
 ## Managing Private Networking using the Neon CLI
 
