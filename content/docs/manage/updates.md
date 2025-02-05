@@ -107,9 +107,9 @@ curl --request PATCH \
 
 ## Check for updates using the Neon API
 
-You can check for scheduled updates using the [Get project details](https://api-docs.neon.tech/reference/getproject) endpoint.
+You can retrive your update window and check for scheduled updates using the [Get project details](https://api-docs.neon.tech/reference/getproject) endpoint.
 
-To retrieve your project details, send the following request, replacing `<your_project_id>` with your Neon project ID:
+To get your project details, send the following request, replacing `<your_project_id>` with your Neon project ID, and `$NEON_API_KEY` with your [Neon API key](/docs/manage/api-keys):
 
 ```bash
 curl --request GET \
@@ -118,7 +118,7 @@ curl --request GET \
      --header 'authorization: Bearer $NEON_API_KEY'
 ```
 
-In the response, locate the `maintenance_window` field. It specifies the selected weekday and hour for updates. For Free Plan accounts, the window is set by Neon. Paid plan accounts can [choose a preferred window](#updates-on-paid-plans). The `weekdays` value is a number from 1 to 7, representing the day of the week. If an update requires a compute restart, it will occur within this window.
+In the response, locate the `maintenance_window` field. It specifies the selected weekday and hour for updates. For Free Plan accounts, the update window is set by Neon. Paid plan accounts can [choose a preferred update window](#updates-on-paid-plans). The `weekdays` value is a number from 1 to 7, representing the day of the week.
 
 ```json
       "maintenance_window": {
@@ -130,7 +130,7 @@ In the response, locate the `maintenance_window` field. It specifies the selecte
       }
 ```
 
-If an update is scheduled, you'll also find a `maintenance_scheduled_for` field in the response body. This value matches the `start_time` in your `maintenance_window` but is formatted as a timestamp. If the `maintenance_scheduled_for` field in not present in the response, this means that there is currently no scheduled update.
+If there's a planned update, you'll also find a `maintenance_scheduled_for` field in the response body. This value matches the `start_time` in your `maintenance_window` but is formatted as a timestamp. If the `maintenance_scheduled_for` field in not present in the response, this means there is no planned update at this time.
 
 ## Applying updates ahead of schedule
 
