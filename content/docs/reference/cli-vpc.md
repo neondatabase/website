@@ -27,12 +27,12 @@ The `vpc endpoint` subcommand lets you to list, assign, remove, and get the stat
 
 ### Usage
 
-| Subcommand               | Description                                                                                                                           |
-| :----------------------- | :------------------------------------------------------------------------------------------------------------------------------------ |
-| `list`                   | List configured VPC endpoints for the Neon organization.                                                                              |
-| `assign <id>`            | Add or update a VPC endpoint in the Neon organization. The ID is the VPC endpoint ID. Aliases for this command are `add` and `update` |
-| `remove <id>`            | Remove a VPC endpoint from the Neon organization. The ID is the VPC endpoint ID.                                                      |
-| `status <id>`            | Get the status of a VPC endpoint for the Neon organization. The ID is the VPC endpoint ID.                                            |
+| Subcommand    | Description                                                                                                                           |
+| :------------ | :------------------------------------------------------------------------------------------------------------------------------------ |
+| `list`        | List configured VPC endpoints for the Neon organization.                                                                              |
+| `assign <id>` | Add or update a VPC endpoint in the Neon organization. The ID is the VPC endpoint ID. Aliases for this command are `add` and `update` |
+| `remove <id>` | Remove a VPC endpoint from the Neon organization. The ID is the VPC endpoint ID.                                                      |
+| `status <id>` | Get the status of a VPC endpoint for the Neon organization. The ID is the VPC endpoint ID.                                            |
 
 ### Options
 
@@ -86,11 +86,11 @@ The `vpc project` command lets you list, configure, or remove VPC endpoint restr
 
 ### Usage
 
-| Subcommand                   | Description                                                                                                    |
-| :--------------------------- | :------------------------------------------------------------------------------------------------------------- |
-| `list`                       | List all VPC endpoint restrictions for a specific project.                                                     |
-| `restrict <id>`              | Configure or update a VPC endpoint restriction for a project. The ID is the VPC endpoint ID. [Alias: `update`] |
-| `remove <id>`                | Remove a VPC endpoint restriction from a project. The ID is the VPC endpoint ID.                               |
+| Subcommand      | Description                                                                                                    |
+| :-------------- | :------------------------------------------------------------------------------------------------------------- |
+| `list`          | List all VPC endpoint restrictions for a specific project.                                                     |
+| `restrict <id>` | Configure or update a VPC endpoint restriction for a project. The ID is the VPC endpoint ID. [Alias: `update`] |
+| `remove <id>`   | Remove a VPC endpoint restriction from a project. The ID is the VPC endpoint ID.                               |
 
 ### Options
 
