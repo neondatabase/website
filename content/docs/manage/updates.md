@@ -106,6 +106,33 @@ curl --request PATCH \
 
 </Tabs>
 
+## Check for scheduled updates using the Neon API
+
+You can check for a scheduled update using the [Get project details](https://api-docs.neon.tech/reference/getproject) endpoint.
+
+To retrieve your project details, send the following request, replacing `<your_project_id>` with your Neon project ID:
+
+```bash
+curl --request GET \
+     --url https://console.neon.tech/api/v2/projects/<your_project_id> \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY'
+```
+
+In the response, check the maintenance_window field. It specifies the selected weekday and hour for updates. The weekdays values range from 1 to 7, representing each day of the week. If an update requires a compute restart, it will occur within this window.
+
+```json
+      "maintenance_window": {
+        "weekdays": [
+          5
+        ],
+        "start_time": "07:00",
+        "end_time": "08:00"
+      }
+```
+
+If an update is scheduled, you'll also find a `maintenance_scheduled_for` field in the response body. This value matches the `start_time` in your `maintenance_window` but is formatted as a timestamp.
+
 ## Applying updates ahead of schedule
 
 Computes receive available updates immediately upon restart. For example, if Neon notifies you about an upcoming update, you can apply it right away by restarting the compute. However, the notification won't be cleared in this case. When the scheduled update time arrives, no further action will be taken since the compute is already updated.
