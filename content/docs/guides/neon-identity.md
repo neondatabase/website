@@ -140,7 +140,7 @@ Here's an example of Neon Auth with Stack Auth. As we add more providers and fea
 
 Since the `neon_identity.users_sync` table is updated asynchronously, there may be a brief delay (usually at most a few seconds) before a user's data appears in the `users_sync` table. You may need to implement retry logic or error handling in your application for database operations that reference new users.
 
-If you do use foreign keys, make sure to specify an `ON DELETE` behavior that matches your needs: we recommend `CASCADE` for personal data like todos or user preferences, and `SET NULL` for content like blog posts or comments.
+If you do use foreign keys, make sure to specify an `ON DELETE` behavior that matches your needs: for example, `CASCADE` for personal data like todos or user preferences, and `SET NULL` for content like blog posts or comments that should persist after user deletion.
 
 ```sql
 -- For personal data that should be removed with the user (e.g., todos)
