@@ -71,7 +71,6 @@ Because Neon is a managed Postgres service, Postgres parameters are not user-con
 Of the parameter settings listed above, the `max_connections`, `maintenance_work_mem`,
 `shared_buffers`, and `max_worker_processes` differ by your compute size—defined in [Compute Units (CU)](/docs/reference/glossary#compute-unit-cu)—or by your autoscaling configuration, which has a minimum and maximum compute size. To understand how values are set, see the formulas below.
 
-
 - The formula for `max_connections` is:
 
   ```go
