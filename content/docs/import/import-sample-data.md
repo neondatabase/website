@@ -462,7 +462,7 @@ An OpenAI example dataset containing pre-computed vector embeddings for 25000 Wi
    ```
 
 <Admonition type="note">
-If you encounter a memory error related to the `maintenance_work_mem` setting, refer to [Indexing vectors](/docs/extensions/pgvector#indexing-vectors) for how to increase this setting.
+If you encounter a memory error related to the `maintenance_work_mem` setting, refer to [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size) for how to increase this setting.
 </Admonition>
 
 - Source: [OpenAI](https://github.com/openai/openai-cookbook/tree/main/examples/vector_databases)
