@@ -11,11 +11,11 @@ You can monitor query history for your Neon project from the **Monitoring** page
 2. Go to **Monitoring**.
 3. Select the **Query History** tab.
 
-The query history view shows previously run queries for the selected **Branch**, **Compute**, and **Database**. Queries can be sorted by **Frequency** or **Average time**. Use the **Refresh** button to load the latest queries.
+The query history view shows the top 100 previously run queries for the selected **Branch**, **Compute**, and **Database**. Queries can be sorted by **Frequency** or **Average time**. Use the **Refresh** button to load the latest queries.
 
 ![Neon query history tab](/docs/introduction/query_history.png)
 
-The **Query History** view is powered by the `pg_stat_statements` Postgres extension, which is installed in your Neon project by default. To run custom queries against the data collected by the `pg_stat_statements`, including your query history, you can use the [Neon SQL Editor](<(/docs/get-started-with-neon/query-with-neon-sql-editor)>) or any SQL client, such as [psql](/docs/connect/query-with-psql-editor).
+The **Query History** view is powered by the `pg_stat_statements` Postgres extension. To run custom queries against the data collected by the `pg_stat_statements`, including your query history, you can use the [Neon SQL Editor](<(/docs/get-started-with-neon/query-with-neon-sql-editor)>) or any SQL client, such as [psql](/docs/connect/query-with-psql-editor).
 
 For details on `pg_stat_statements`, including the data it collects and additional queries you can run, refer to our [pg_stat_statements](/docs/extensions/pg_stat_statements) extension guide.
 

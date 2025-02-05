@@ -29,15 +29,13 @@ In Neon, statistics collected by the `pg_stat_statements` extension are not reta
 
 ## Enable the `pg_stat_statements` extension
 
-<Admonition type="note" title="This extension is installed by default in Neon">
-The `pg_stat_statements` extension is installed by default in Neon. There's no need for you to enable it. The statement below is provided for reference. The extension is used by the **Query History** tab on the **Monitoring** page in the Neon Console. See [Monitoring query history](/docs/introduction/monitor-query-history).
-</Admonition>
-
-The extension is installed by running the following `CREATE EXTENSION` statement:
+The extension is installed by running the following `CREATE EXTENSION` statement in the Neon **SQL Editor** or from a client such as `psql` that is connected to Neon.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 ```
+
+For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
 
 ## Usage examples
 

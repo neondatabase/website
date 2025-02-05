@@ -11,7 +11,7 @@ You can monitor active queries for your Neon project from the **Monitoring** pag
 2. Go to **Monitoring**.
 3. Select the **Active Queries** tab.
 
-The **Active Queries** view displays currently running queries for the selected **Branch**, **Compute**, and **Database**. Use the **Refresh** button to update the list with the latest active queries.
+The **Active Queries** view displays up to 100 currently running queries for the selected **Branch**, **Compute**, and **Database**. Use the **Refresh** button to update the list with the latest active queries.
 
 ![Neon active queries tab](/docs/introduction/active_queries.png)
 
