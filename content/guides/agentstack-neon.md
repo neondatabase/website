@@ -370,7 +370,7 @@ This guide serves as your starting point to explore the vast potential of AgentS
 You can find the source code for the application described in this guide on GitHub.
 
 <DetailIconCards>
-    <a href="https://github.com/dhanushreddy291/neon-agenstack-example" description="AgentStack + Neon Example" icon="github">Building AI Agents with AgentStack and Neon</a>
+    <a href="https://github.com/neondatabase-labs/neon-agenstack-example" description="AgentStack + Neon Example" icon="github">Building AI Agents with AgentStack and Neon</a>
 </DetailIconCards>
 
 ## Resources
