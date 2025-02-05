@@ -412,31 +412,31 @@ Like other index types, it’s faster to create an index after loading your init
 
 - `maintenance_work_mem`
 
-    In Postgres, the `maintenance_work_mem` setting determines the maximum memory allocation for tasks such as `CREATE INDEX`. The default `maintenance_work_mem` value in Neon is set according to your Neon [compute size](/docs/manage/endpoints#how-to-size-your-compute).
+  In Postgres, the `maintenance_work_mem` setting determines the maximum memory allocation for tasks such as `CREATE INDEX`. The default `maintenance_work_mem` value in Neon is set according to your Neon [compute size](/docs/manage/endpoints#how-to-size-your-compute).
 
-    To optimize `pgvector` index build time, you can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
+  To optimize `pgvector` index build time, you can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
 
-    ```sql
-    SET maintenance_work_mem='10 GB';
-    ```
+  ```sql
+  SET maintenance_work_mem='10 GB';
+  ```
 
-    The recommended setting is your working set size (the size of your tuples for vector index creation). However, your `maintenance_work_mem` setting should not exceed 50 to 60 percent of your compute's available RAM (see the table above). For example, the `maintenance_work_mem='10 GB'` setting shown above has been successfully tested on a 7 CU compute, which has 28 GB of RAM, as 10 GB is less than 50% of the RAM available for that compute size.
+  The recommended setting is your working set size (the size of your tuples for vector index creation). However, your `maintenance_work_mem` setting should not exceed 50 to 60 percent of your compute's available RAM (see the table above). For example, the `maintenance_work_mem='10 GB'` setting shown above has been successfully tested on a 7 CU compute, which has 28 GB of RAM, as 10 GB is less than 50% of the RAM available for that compute size.
 
 - `max_parallel_maintenance_workers`
 
-    You can also speed up index creation by increasing the number of parallel workers. The default is `2`.
+  You can also speed up index creation by increasing the number of parallel workers. The default is `2`.
 
-    The `max_parallel_maintenance_workers` sets the maximum number of parallel workers that can be started by a single utility command such as `CREATE INDEX`. By default, the `max_parallel_maintenance_workers` setting is `2`. For efficient parallel index creation, you can increase this setting. Parallel workers are taken from the pool of processes established by `max_worker_processes` (`10`), limited by `max_parallel_workers` (`8`).
+  The `max_parallel_maintenance_workers` sets the maximum number of parallel workers that can be started by a single utility command such as `CREATE INDEX`. By default, the `max_parallel_maintenance_workers` setting is `2`. For efficient parallel index creation, you can increase this setting. Parallel workers are taken from the pool of processes established by `max_worker_processes` (`10`), limited by `max_parallel_workers` (`8`).
 
-    You can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
+  You can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
 
-    ```sql
-    SET max_parallel_maintenance_workers = 7
-    ```
+  ```sql
+  SET max_parallel_maintenance_workers = 7
+  ```
 
-    For example, if you have a 7 CU compute size, you could set `max_parallel_maintenance_workers` to 7, before index creation, to make use of all of the vCPUs available.
+  For example, if you have a 7 CU compute size, you could set `max_parallel_maintenance_workers` to 7, before index creation, to make use of all of the vCPUs available.
 
-    For a large number of workers, you may also need to increase the Postgres `max_parallel_workers`, which is `8` by default.
+  For a large number of workers, you may also need to increase the Postgres `max_parallel_workers`, which is `8` by default.
 
 #### Check indexing progress
 
