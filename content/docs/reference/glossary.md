@@ -225,7 +225,9 @@ See [Neon Free Plan](#neon-free-plan).
 
 ## GB-month
 
-The unit of measurement for Neon's storage billing that represents storing 1 gigabyte (GB) of data for one month. Storage usage is calculated daily and prorated based on the number of days in the billing period. If storage usage changes over time, the total GB-month consumption reflects the sum of daily usage across the month. For example, storing 10 GB for an entire month counts as 10 GB-months, while storing 10 GB for only half of a 30-day month results in 5 GB-months.
+Neon bills storage in GB-months, a unit representing the storage of 1 gigabyte (GB) of data for one month. Storage usage is measured every 15 minutes and prorated over the billing period. If usage fluctuates, the total GB-month consumption reflects the sum of all measured usage across the month. 
+
+For example, storing 10 GB for a full month counts as 10 GB-months, while storing 10 GB for half of a 30-day month results in 5 GB-months. Note that GB-months use gigabytes (GB, 1000 MB) rather than gibibytes (GiB, 1024 MiB).
 
 ## History
 
