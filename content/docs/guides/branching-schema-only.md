@@ -2,7 +2,7 @@
 title: Schema-only branches
 subtitle: Protect sensitive data with schema-only branches
 enableTableOfContents: true
-updatedOn: '2025-02-04T17:36:05.676Z'
+updatedOn: '2025-02-06T10:48:21.742Z'
 ---
 
 <EarlyAccess />
