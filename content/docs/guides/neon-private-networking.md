@@ -71,12 +71,12 @@ To configure Neon Private Networking, perform the following steps:
 
         <Admonition type="note">
      Please note that you must assign the **VPC Endpoint ID**, not the VPC ID.
-    </Admonition> 
+    </Admonition>
 
-    <Tabs labels={["CLI", "API"]}>    
-    
+    <Tabs labels={["CLI", "API"]}>
+
     <TabItem>
-    
+
     In the following example, the VCP endpoint ID is assigned to a Neon organization in the specified AWS region.
 
     ```bash
@@ -86,11 +86,11 @@ To configure Neon Private Networking, perform the following steps:
     You can find your Neon organization ID in your Neon organization settings, or you can run this Neon CLI command: `neon orgs list`.
 
     </TabItem>
-    
+
     <TabItem>
 
-    You can use the [Assign or update a VPC endpoint](https://api-docs.neon.tech/reference/assignorganizationvpcendpoint) API to assign a VCP endpoint ID to a Neon organization. You will need to provide your Neon organization ID, region ID, VPC endpoint ID, Neon project ID, and a [Neon API key](https://neon.tech/docs/manage/api-keys). 
-    
+    You can use the [Assign or update a VPC endpoint](https://api-docs.neon.tech/reference/assignorganizationvpcendpoint) API to assign a VCP endpoint ID to a Neon organization. You will need to provide your Neon organization ID, region ID, VPC endpoint ID, Neon project ID, and a [Neon API key](https://neon.tech/docs/manage/api-keys).
+
     ```bash
     curl --request POST \
      --url https://console.neon.tech/api/v2/organizations/org-bold-bonus-12345678/vpc/region/aws-us-east-2/vpc_endpoints/vpce-1234567890abcdef0 \
@@ -99,7 +99,7 @@ To configure Neon Private Networking, perform the following steps:
      --header 'content-type: application/json'
     ```
     </TabItem>
-    
+
     </Tabs>
 
 ## Enable Private DNS
@@ -125,7 +125,7 @@ To configure Neon Private Networking, perform the following steps:
     ```
 
     You can run the following command from an EC2 instance inside your AWS VPC:
-    
+
     ```bash
     nslookup ep-cool-darkness-123456.us-east-2.aws.neon.tech
     ```
