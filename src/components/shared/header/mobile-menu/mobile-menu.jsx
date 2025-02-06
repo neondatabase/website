@@ -44,12 +44,13 @@ const variants = {
   },
 };
 
-const getItemTitleStyles = (isDarkTheme, isMenuItemOpen) => {
-  if (isMenuItemOpen && isDarkTheme) return 'text-white';
-  if (!isMenuItemOpen && isDarkTheme) return 'text-gray-new-80';
-  if (isMenuItemOpen && !isDarkTheme) return 'text-black-new dark:text-white';
-  if (!isMenuItemOpen && !isDarkTheme) return 'text-gray-new-20 dark:text-gray-new-80';
-};
+const getItemTitleStyles = (isDarkTheme, isMenuItemOpen) =>
+  clsx({
+    'text-white': isMenuItemOpen && isDarkTheme,
+    'text-gray-new-80': !isMenuItemOpen && isDarkTheme,
+    'text-black-new dark:text-white': isMenuItemOpen && !isDarkTheme,
+    'text-gray-new-20 dark:text-gray-new-80': !isMenuItemOpen && !isDarkTheme,
+  });
 
 const MobileMenuItem = ({ text, to, sections, isDarkTheme }) => {
   const [isMenuItemOpen, setIsMenuItemOpen] = useState();
