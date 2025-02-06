@@ -30,7 +30,7 @@ const AboutUsPage = async () => {
       label: 'Contributors',
     },
     {
-      number: '3000',
+      number: '18k',
       hasPlus: true,
       label: 'Databases created daily',
     },
