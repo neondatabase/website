@@ -3,6 +3,8 @@ title: About Neon Auth
 subtitle: Automatically sync user profiles from your auth provider directly to your
   database
 enableTableOfContents: true
+redirectFrom:
+  - /docs/guides/neon-identity
 tag: beta
 updatedOn: '2025-01-31T21:21:32.228Z'
 ---
@@ -25,7 +27,7 @@ Neon Auth solves this by integrating your auth provider with your Postgres datab
 
 ## How Neon Auth works
 
-When you set up Neon Auth, we create a `neon_identity` schema in your database. As users authenticate and manage their profiles in your auth provider, their data is automatically synchronized to your database.
+When you set up Neon Auth, we create a `neon_auth` schema in your database. As users authenticate and manage their profiles in your auth provider, their data is automatically synchronized to your database.
 
 Here is the basic flow:
 
@@ -41,10 +43,10 @@ Here is the basic flow:
 
 3. **The data is immediately available in your database**
 
-   The synchronized data is available in the `neon_identity.users_sync` table shortly after the auth provider processes changes. Here's an example query to inspect the synchronized data:
+   The synchronized data is available in the `neon_auth.users_sync` table shortly after the auth provider processes changes. Here's an example query to inspect the synchronized data:
 
    ```sql
-   SELECT * FROM neon_identity.users_sync;
+   SELECT * FROM neon_auth.users_sync;
    ```
 
    | id          | name       | email             | created_at    | raw_json                      |
@@ -54,7 +56,7 @@ Here is the basic flow:
 
 ### Table structure
 
-The following columns are included in the `neon_identity.users_sync` table:
+The following columns are included in the `neon_auth.users_sync` table:
 
 - `raw_json`: Complete user profile as JSON
 - `id`: The unique ID of the user
@@ -66,12 +68,12 @@ The following columns are included in the `neon_identity.users_sync` table:
 Updates to user profiles in the auth provider are automatically synchronized.
 
 <Admonition type="note">
-Do not try to change the `neon_identity.users_sync` table name. It's needed for the synchronization process to work correctly.
+Do not try to change the `neon_auth.users_sync` table name. It's needed for the synchronization process to work correctly.
 </Admonition>
 
 ## Before and after Neon Auth
 
-Let's take a look at how Neon Identiy can help simplify the code in a typical todos application:
+Let's take a look at how Neon Auth can help simplify the code in a typical todos application:
 
 ### Before Neon Auth
 
@@ -112,7 +114,7 @@ jobs.on('user.updated', async (event) => {
 
 ### After Neon Auth
 
-With Neon Auth, much of this complexity is eliminated. Since user data is automatically synced to `neon_identity.users_sync`, you can just create the todo:
+With Neon Auth, much of this complexity is eliminated. Since user data is automatically synced to `neon_auth.users_sync`, you can just create the todo:
 
 ```typescript
 async function createTodo(userId: string, task: string) {
@@ -126,28 +128,28 @@ async function createTodo(userId: string, task: string) {
 
 ## Getting started
 
-1. From the Neon Console, navigate to the **Identity** tab. Choose your provider and click **Connect**. Currently, only Stack Auth is available for Early Access users.
+1. From the Neon Console, navigate to the **Auth** tab. Choose your provider and click **Connect**. Currently, only Stack Auth is available for Early Access users.
 1. You'll be asked to authenticate and select the project you want to integrate with.
 1. Once connected, you'll see the integration view. This shows your synced users, connection status, and quick links to your provider's documentation and console to help configure your application (e.g. SSO or API keys)
 
 Here's an example of Neon Auth with Stack Auth. As we add more providers and features, this interface will continue to evolve.
 
-![identity with stackauth deployed](/docs/guides/identity_stackauth.png)
+![Neon Auth with stackauth deployed](/docs/guides/identity_stackauth.png)
 
 ## Best practices
 
 ### Foreign keys and the users_sync table
 
-Since the `neon_identity.users_sync` table is updated asynchronously, there may be a brief delay (usually at most a few seconds) before a user's data appears in the `users_sync` table. You may need to implement retry logic or error handling in your application for database operations that reference new users.
+Since the `neon_auth.users_sync` table is updated asynchronously, there may be a brief delay (usually less than 1 second) before a user's data appears in the table. This means foreign key constraints could temporarily fail for new users. Consider this possible delay when deciding whether to use foreign keys in your schema.
 
-If you do use foreign keys, make sure to specify an `ON DELETE` behavior that matches your needs: for example, `CASCADE` for personal data like todos or user preferences, and `SET NULL` for content like blog posts or comments that should persist after user deletion.
+If you do choose to use foreign keys, make sure to specify an `ON DELETE` behavior that matches your needs: for example, `CASCADE` for personal data like todos or user preferences, and `SET NULL` for content like blog posts or comments that should persist after user deletion.
 
 ```sql
 -- For personal data that should be removed with the user (e.g., todos)
 CREATE TABLE todos (
     id SERIAL PRIMARY KEY,
     task TEXT NOT NULL,
-    user_id UUID NOT NULL REFERENCES neon_identity.users_sync(id) ON DELETE CASCADE,
+    user_id UUID NOT NULL REFERENCES neon_auth.users_sync(id) ON DELETE CASCADE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -156,9 +158,23 @@ CREATE TABLE posts (
     id SERIAL PRIMARY KEY,
     title TEXT NOT NULL,
     content TEXT NOT NULL,
-    author_id UUID REFERENCES neon_identity.users_sync(id) ON DELETE SET NULL,
+    author_id UUID REFERENCES neon_auth.users_sync(id) ON DELETE SET NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
 
-Read more about foreign keys in [PostgreSQL](https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-FK).
+### Querying user data
+
+When querying data that relates to users:
+
+- Use LEFT JOINs instead of INNER JOINs with the `users_sync` table in case of any sync delays. This ensures that all records from the main table (.e.g. posts) are returned even if there's no matching user in the `users_sync` table yet.
+- Filter out deleted users since the table uses soft deletes (users are marked with a `deleted_at` timestamp when deleted).
+
+Here's an example of how to handle both in your queries:
+
+```sql
+SELECT posts.*, neon_auth.users_sync.name as author_name
+FROM posts
+LEFT JOIN neon_auth.users_sync ON posts.author_id = neon_auth.users_sync.id
+WHERE neon_auth.users_sync.deleted_at IS NULL;
+```
