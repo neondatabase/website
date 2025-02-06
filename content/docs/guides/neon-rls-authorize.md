@@ -4,7 +4,7 @@ subtitle: Secure your application at the database level using Postgres's Row-Lev
 enableTableOfContents: true
 updatedOn: '2025-01-21T01:48:50.914Z'
 redirectFrom:
-  - /docs/guides/neon-rls-authorize
+  - /docs/guides/neon-authorize
 ---
 
 <InfoBlock>
