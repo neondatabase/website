@@ -126,7 +126,7 @@ The Scale plan includes the following usage allowances:
 | Usage type          | Plan allowance                                                   |
 | :------------------ | :--------------------------------------------------------------- |
 | **Projects**        | 1000 Neon projects                                               |
-| **Branches**        | 5000 per project                                                  |
+| **Branches**        | 5000 per project                                                 |
 | **Databases**       | 500 per branch                                                   |
 | **Storage**         | 50 GB-month                                                      |
 | **Archive Storage** | 250 GB-month                                                     |
@@ -167,7 +167,7 @@ The Business plan includes the following usage allowances:
 | Usage type          | Plan allowance                                                    |
 | ------------------- | ----------------------------------------------------------------- |
 | **Projects**        | 5000 Neon projects                                                |
-| **Branches**        | 5000 per project                                                   |
+| **Branches**        | 5000 per project                                                  |
 | **Databases**       | 500 per branch                                                    |
 | **Storage**         | 500 GB-month                                                      |
 | **Archive Storage** | 2500 GB-month                                                     |
