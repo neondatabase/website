@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started-with-neon/get-started-branching
-updatedOn: '2025-01-31T16:41:54.395Z'
+updatedOn: '2025-02-03T20:41:57.343Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `main`, which is also designated as your [default branch](#default-branch). You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](/docs/introduction/plans) define the number of branches you can create.
@@ -135,8 +135,8 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
 </Admonition>
 
 1. In the Neon Console, select a project.
-2. On the project **Dashboard**, under **Connection Details**, select the branch, the database, and the role you want to connect with.
-   ![Connection details widget](/docs/connect/connection_details.png)
+2. Find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. Select the branch, the database, and the role you want to connect with.
+   ![Connection details modal](/docs/connect/connection_details.png)
 3. Copy the connection string. A connection string includes your role name, the compute hostname, and database name.
 4. Connect with `psql` as shown below.
 
@@ -148,7 +148,7 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
    A compute hostname starts with an `ep-` prefix. You can also find a compute hostname on the **Branches** page in the Neon Console. See [View branches](#view-branches).
    </Admonition>
 
-   If you want to connect from an application, the **Connection Details** widget on the project **Dashboard** and the [Frameworks](/docs/get-started-with-neon/frameworks) and [Languages](/docs/get-started-with-neon/languages) sections in the documentation provide various connection examples.
+   If you want to connect from an application, the **Connect to your database modal**, accessed by clicking **Connect** on the project **Dashboard**, and the [Frameworks](/docs/get-started-with-neon/frameworks) and [Languages](/docs/get-started-with-neon/languages) sections in the documentation provide various connection examples.
 
 ## Reset a branch from parent
 

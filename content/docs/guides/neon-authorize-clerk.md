@@ -3,7 +3,7 @@ title: Secure your data with Clerk and Neon Authorize
 subtitle: Implement Row-level Security policies in Postgres using Clerk and Neon
   Authorize
 enableTableOfContents: true
-updatedOn: '2025-01-29T23:50:53.957Z'
+updatedOn: '2025-02-03T20:41:57.326Z'
 ---
 
 <InfoBlock>
@@ -120,7 +120,7 @@ To learn more about the driver, see [Neon Serverless Driver](/docs/serverless/se
 
 ### 6. Set up environment variables
 
-Here is an example of setting up administrative and authenticated database connections in your `.env` file. Copy the connection strings for both the `neondb_owner` and `authenticated` roles. You can find them from **Connection Details** in the Neon Console, or using the Neon CLI:
+Here is an example of setting up administrative and authenticated database connections in your `.env` file. Copy the connection strings for both the `neondb_owner` and `authenticated` roles. You can find them by clicking **Connect** on the Neon **Project Dashboard**, or using the Neon CLI:
 
 ```bash shouldWrap
 neon connection-string --role-name neondb_owner

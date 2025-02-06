@@ -2,7 +2,7 @@
 title: Build a Python App with Reflex and Neon
 subtitle: Learn how to build a Python Full Stack application with Reflex and Neon
 enableTableOfContents: true
-updatedOn: '2024-09-08T12:44:00.904Z'
+updatedOn: '2025-02-03T20:41:57.335Z'
 ---
 
 [Reflex](https://reflex.dev/) is a Python web framework that allows you to build full-stack applications with Python.
@@ -115,7 +115,7 @@ To configure the connection settings:
    )
    ```
 
-   Replace `<connection-string-from-neon>` with your Neon connection string. You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+   Replace `<connection-string-from-neon>` with your Neon connection string. You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
    <Admonition type="note">
 

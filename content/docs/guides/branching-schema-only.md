@@ -2,7 +2,7 @@
 title: Schema-only branches
 subtitle: Protect sensitive data with schema-only branches
 enableTableOfContents: true
-updatedOn: '2025-01-31T16:41:54.393Z'
+updatedOn: '2025-02-06T10:48:21.742Z'
 ---
 
 <EarlyAccess />
@@ -109,8 +109,8 @@ To try out schema-only branches:
 Connecting to a schema-only branch works the same way as connecting to any Neon branch. You'll connect via a compute associated with the branch. Follow these steps to connect using `psql` and a connection string obtained from the Neon Console.
 
 1. In the Neon Console, select a project.
-2. On the project **Dashboard**, under **Connection Details**, select your schema-only branch, the database, and the role you want to connect with.
-   ![Connection details widget](/docs/guides/schema_only_branch_connect.png)
+2. From the project **Dashboard**, click **Connect**, and select your schema-only branch, the database, and the role you want to connect with.
+   ![Connection details modal](/docs/guides/schema_only_branch_connect.png)
 3. Copy the connection string. A connection string includes your role name, the compute hostname, and the database name.
 
    ```bash shouldWrap
@@ -137,17 +137,13 @@ Schema-only branches are independent [root branches](/docs/reference/glossary#ro
 
 There are certain allowances associated with schema-only branches:
 
-- A schema-only branch is a [root branch](/docs/reference/glossary#root-branch), and there is only a certain number of root branches permitted per Neon project, depending on your Neon plan.
+- A schema-only branch is a [root branch](/docs/reference/glossary#root-branch), and only a certain number of root branches are permitted per Neon project, depending on your Neon plan.
 - The `main` root branch created with each Neon project counts toward the _root branch allowance per project_, as do certain [backup branches](/docs/reference/glossary#backup-branch) created by restore operations.
-- There is a storage allowance for schema-only branches. The storage allowances do not apply when restoring data to a schema-only branch from another branch.
+- On the Free plan, all branches share a total storage limit of 0.5 GB. Schema-only branches count toward this limit like any other branch. On paid plans, storage limits are higher, but each schema-only branch has a maximum storage allowance, as outlined in the following table.
 
-| Plan     | Root branch allowance per project | Storage allowance per schema-only branch |
-| :------- | :-------------------------------- | :--------------------------------------- |
-| Free     | 3                                 | 0.5 GB                                   |
-| Launch   | 5                                 | 3 GB                                     |
-| Scale    | 10                                | 5 GB                                     |
-| Business | 25                                | 20 GB                                    |
-
-## Limitations
-
-Schema-only branches are not supported with experimental extensions that require enabling the `neon.allow_unstable_extensions` setting, such as the `pg_mooncake` extension. You can expect this limitation to be lifted in a future release.
+| Plan     | Root branch allowance per project | Maximum storage allowance per schema-only branch |
+| :------- | :-------------------------------- | :----------------------------------------------- |
+| Free     | 3                                 | 0.5 GB                                           |
+| Launch   | 5                                 | 3 GB                                             |
+| Scale    | 10                                | 5 GB                                             |
+| Business | 25                                | 20 GB                                            |

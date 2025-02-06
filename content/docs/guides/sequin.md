@@ -3,7 +3,7 @@ title: Stream changes from your Neon database to anywhere
 subtitle: Learn how to capture and stream changes and rows from your database to
   anywhere with Sequin
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.064Z'
+updatedOn: '2025-02-03T20:41:57.337Z'
 ---
 
 Neon's Logical Replication features makes it possible to detect every change in your database. It can be used to power read-replicas and backups, but can also be used to add streaming characteristics to Neon.
@@ -48,7 +48,7 @@ logical
 
 After enabling logical replication on Neon, you'll now connect your Neon database to Sequin. Follow these steps:
 
-1. In Neon, copy your database connection string from the **Connection Details** section on the **Project Dashboard**, which will look similar to this:
+1. In Neon, copy your database connection string. You can find the it by clicking the **Connect** button on your **Project Dashboard**. It will look similar to this:
 
    ```sql shouldWrap
    postgresql://neondb_owner:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require

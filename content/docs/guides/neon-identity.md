@@ -4,7 +4,7 @@ subtitle: Automatically sync user profiles from your auth provider directly to y
   database
 enableTableOfContents: true
 tag: beta
-updatedOn: '2024-12-31T18:05:26.275Z'
+updatedOn: '2025-01-31T21:21:32.228Z'
 ---
 
 <ComingSoon />
@@ -64,6 +64,10 @@ The following columns are included in the `neon_identity.users_sync` table:
 - `deleted_at`: When the user was deleted, if applicable (nullable)
 
 Updates to user profiles in the auth provider are automatically synchronized.
+
+<Admonition type="note">
+Do not try to change the `neon_identity.users_sync` table name. It's needed for the synchronization process to work correctly.
+</Admonition>
 
 ## Before and after Neon Identity
 
