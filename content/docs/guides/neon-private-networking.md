@@ -69,7 +69,7 @@ To configure Neon Private Networking, perform the following steps:
 
     Assign your **VPC Endpoint ID** to your Neon organization. You can do this using the Neon CLI or API.
 
-        <Admonition type="note">
+    <Admonition type="note">
      Please note that you must assign the **VPC Endpoint ID**, not the VPC ID.
     </Admonition>
 
