@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import Image from 'next/image';
 import PropTypes from 'prop-types';
 import { Suspense } from 'react';
 
@@ -7,9 +6,9 @@ import ModeToggler from 'components/pages/doc/mode-toggler';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import GithubStarCounter from 'components/shared/github-star-counter';
-import GradientBorder from 'components/shared/gradient-border';
 import Link from 'components/shared/link';
 import Logo from 'components/shared/logo';
+import MenuBanner from 'components/shared/menu-banner';
 import MobileMenu from 'components/shared/mobile-menu';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
@@ -17,7 +16,6 @@ import ChevronIcon from 'icons/chevron-down.inline.svg';
 import { getGithubStars } from 'utils/get-github-data';
 
 import HeaderWrapper from './header-wrapper';
-import menuBanner from './images/menu-banner.jpg';
 
 const themePropTypes = {
   isDarkTheme: PropTypes.bool,
@@ -55,7 +53,7 @@ const Navigation = ({ isDarkTheme }) => (
             {hasSubmenu && (
               <div
                 className={clsx(
-                  'absolute -left-5 top-full pt-5',
+                  'absolute -left-7 top-full pt-5',
                   'pointer-events-none opacity-0',
                   'origin-top-left transition-[opacity,transform] duration-200 [transform:rotateX(-12deg)_scale(0.9)]',
                   'group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-hover:[transform:none]'
@@ -74,33 +72,7 @@ const Navigation = ({ isDarkTheme }) => (
                 >
                   {sections.map(({ title, items, banner, isExtended }, index) => {
                     if (banner) {
-                      const { title, description, to } = banner;
-
-                      return (
-                        <li className="lg:-order-1" key={index}>
-                          <Link className="group/banner relative rounded-lg" to={to}>
-                            <Image
-                              className="rounded-lg"
-                              src={menuBanner}
-                              width={232}
-                              height={145}
-                              alt=""
-                            />
-                            <div className="absolute inset-x-4 bottom-3.5 z-10">
-                              <h3 className="text-sm leading-none text-white">{title}</h3>
-                              <p
-                                className={clsx(
-                                  'mt-1.5 text-xs font-light leading-none text-gray-new-50',
-                                  'transition-colors duration-200 group-hover/banner:text-white'
-                                )}
-                              >
-                                {description}
-                              </p>
-                            </div>
-                            <GradientBorder className="border-image-header-menu-banner" />
-                          </Link>
-                        </li>
-                      );
+                      return <MenuBanner {...banner} />;
                     }
 
                     return (
@@ -173,7 +145,7 @@ const Navigation = ({ isDarkTheme }) => (
                                   <div className="relative z-10">
                                     <span
                                       className={clsx(
-                                        'block text-sm leading-none tracking-[-0.01em] transition-colors duration-200',
+                                        'block text-sm leading-none tracking-snug transition-colors duration-200',
                                         isDarkTheme
                                           ? 'text-white'
                                           : 'text-black-new dark:text-white'

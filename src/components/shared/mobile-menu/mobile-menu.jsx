@@ -3,22 +3,18 @@
 import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import dynamic from 'next/dynamic';
-import Image from 'next/image';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 import Button from 'components/shared/button';
-import GradientBorder from 'components/shared/gradient-border';
 import Burger from 'components/shared/header/burger';
 import InkeepTrigger from 'components/shared/inkeep-trigger';
 import Link from 'components/shared/link';
+import MenuBanner from 'components/shared/menu-banner';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus';
 import useMobileMenu from 'hooks/use-mobile-menu';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
-
-import menuBannerMob from './images/menu-banner-mob.jpg';
-import menuBanner from './images/menu-banner.jpg';
 
 const AlgoliaSearch = dynamic(() => import('components/shared/algolia-search'), {
   ssr: false,
@@ -76,7 +72,7 @@ const MobileMenuItem = ({ text, to, sections, isDarkTheme }) => {
         className={clsx(
           isMenuItemOpen && 'font-medium',
           getItemTitleStyles(isDarkTheme, isMenuItemOpen),
-          'relative flex w-full items-center py-4 leading-none tracking-[-0.01em] transition-colors duration-200'
+          'relative flex w-full items-center py-4 leading-none tracking-snug transition-colors duration-200'
         )}
         to={to}
         onClick={handleMenuItemClick}
@@ -107,35 +103,7 @@ const MobileMenuItem = ({ text, to, sections, isDarkTheme }) => {
             >
               {sections.map(({ title, items, banner }, index) => {
                 if (banner) {
-                  const { title, description, to } = banner;
-
-                  return (
-                    <li className="-order-1" key={index}>
-                      <Link className="relative block w-fit rounded-lg xs:w-full" to={to}>
-                        <Image
-                          className="rounded-lg xs:hidden"
-                          src={menuBanner}
-                          width={252}
-                          height={80}
-                          alt=""
-                        />
-                        <Image
-                          className="hidden w-full rounded-lg object-cover xs:block"
-                          src={menuBannerMob}
-                          width={320}
-                          height={80}
-                          alt=""
-                        />
-                        <div className="absolute inset-0 z-10 flex flex-col justify-center p-3">
-                          <h3 className="text-sm text-white">{title}</h3>
-                          <p className="mt-1.5 text-xs font-light text-gray-new-50">
-                            {description}
-                          </p>
-                        </div>
-                        <GradientBorder className="border-image-header-menu-banner-mob" />
-                      </Link>
-                    </li>
-                  );
+                  return <MenuBanner {...banner} />;
                 }
 
                 return (
@@ -168,7 +136,7 @@ const MobileMenuItem = ({ text, to, sections, isDarkTheme }) => {
                             <div className="relative z-10">
                               <span
                                 className={clsx(
-                                  'block text-sm tracking-[-0.01em] transition-colors duration-200',
+                                  'block text-sm tracking-snug transition-colors duration-200',
                                   description ? 'leading-none' : 'leading-dense',
                                   isDarkTheme ? 'text-white' : 'text-black-new dark:text-white'
                                 )}
@@ -280,7 +248,7 @@ const MobileMenu = ({
               exit="from"
               variants={variants}
             >
-              <div className="relative h-full pb-[108px] pt-[97px] sm:pb-[158px]">
+              <div className="relative h-full pb-[108px] pt-[102px] sm:pb-[158px]">
                 <ul className="no-scrollbars flex h-full flex-col overflow-y-auto px-8 md:px-5">
                   {mobileMenuItems.map((item, index) => (
                     <MobileMenuItem key={index} {...item} isDarkTheme={isDarkTheme} />
