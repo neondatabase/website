@@ -142,8 +142,8 @@ There are certain allowances associated with schema-only branches:
 - On the Free plan, all branches share a total storage limit of 0.5 GB. Schema-only branches count toward this limit like any other branch. On paid plans, storage limits are higher, but each schema-only branch has a maximum storage allowance, as outlined in the following table.
 
 | Plan     | Root branch allowance per project | Maximum storage allowance per schema-only branch |
-| :------- | :-------------------------------- | :--------------------------------------- |
-| Free     | 3                                 | 0.5 GB                                   |
-| Launch   | 5                                 | 3 GB                                     |
-| Scale    | 10                                | 5 GB                                     |
-| Business | 25                                | 20 GB                                    |
+| :------- | :-------------------------------- | :----------------------------------------------- |
+| Free     | 3                                 | 0.5 GB                                           |
+| Launch   | 5                                 | 3 GB                                             |
+| Scale    | 10                                | 5 GB                                             |
+| Business | 25                                | 20 GB                                            |
