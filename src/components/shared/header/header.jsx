@@ -72,7 +72,7 @@ const Navigation = ({ isDarkTheme }) => (
                 >
                   {sections.map(({ title, items, banner, isExtended }, index) => {
                     if (banner) {
-                      return <MenuBanner {...banner} />;
+                      return <MenuBanner {...banner} key={index} />;
                     }
 
                     return (

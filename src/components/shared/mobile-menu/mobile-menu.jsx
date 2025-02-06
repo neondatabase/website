@@ -103,7 +103,7 @@ const MobileMenuItem = ({ text, to, sections, isDarkTheme }) => {
             >
               {sections.map(({ title, items, banner }, index) => {
                 if (banner) {
-                  return <MenuBanner {...banner} />;
+                  return <MenuBanner {...banner} key={index} />;
                 }
 
                 return (
