@@ -9,7 +9,7 @@ redirectFrom:
 
 <InfoBlock>
 <DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize">Clerk + Neon RLS Authorize</a>
+  <a href="https://github.com/neondatabase-labs/clerk-nextjs-neon-rls-authorize">Clerk + Neon RLS Authorize</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
@@ -28,15 +28,15 @@ This `todos` app is built with Next.js and Drizzle ORM, using Clerk for user aut
 
 To get started, you'll need:
 
-- **Neon account**: Sign up at [Neon](https://neon.tech) and create your first project in **AWS** (note: [Azure](/docs/guides/neon-authorize#current-limitations) regions are not currently supported).
+- **Neon account**: Sign up at [Neon](https://neon.tech) and create your first project in **AWS** (note: [Azure](/docs/guides/neon-rls-authorize#current-limitations) regions are not currently supported).
 - **Clerk account**: Sign up for a [Clerk](https://clerk.com/) account and application. Clerk provides a free plan to get you started.
-- **Neon RLS Authorize + Clerk example application**: Clone the sample [Clerk + Neon RLS Authorize repository](https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize):
+- **Neon RLS Authorize + Clerk example application**: Clone the sample [Clerk + Neon RLS Authorize repository](https://github.com/neondatabase-labs/clerk-nextjs-neon-rls-authorize):
 
   ```bash
-  git clone https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize.git
+  git clone https://github.com/neondatabase-labs/clerk-nextjs-neon-rls-authorize.git
   ```
 
-  Follow the instructions in the readme to set up Clerk, configure environment variables, and start the application. You can also find more info in our [Clerk and Neon RLS Authorize Quickstart](/docs/guides/neon-authorize-clerk).
+  Follow the instructions in the readme to set up Clerk, configure environment variables, and start the application. You can also find more info in our [Clerk and Neon RLS Authorize Quickstart](/docs/guides/neon-rls-authorize-clerk).
 
 ## Step 1 — Create test users
 

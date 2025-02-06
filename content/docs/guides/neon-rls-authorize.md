@@ -4,7 +4,7 @@ subtitle: Secure your application at the database level using Postgres's Row-Lev
 enableTableOfContents: true
 updatedOn: '2025-01-21T01:48:50.914Z'
 redirectFrom:
-  - /docs/guides/neon-authorize
+  - /docs/guides/neon-rls-authorize
 ---
 
 <InfoBlock>
@@ -15,9 +15,9 @@ redirectFrom:
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
-  <a href="/docs/guides/neon-authorize-tutorial">Neon RLS Authorize Tutorial</a>
+  <a href="/docs/guides/neon-rls-authorize-tutorial">Neon RLS Authorize Tutorial</a>
   <a href="/postgresql/postgresql-administration/postgresql-row-level-security">Postgres Row-Level Security tutorial</a>
-  <a href="/docs/guides/neon-authorize-drizzle">Simplify RLS with Drizzle</a>
+  <a href="/docs/guides/neon-rls-authorize-drizzle">Simplify RLS with Drizzle</a>
 </DocsList>
 
 </InfoBlock>
@@ -228,15 +228,15 @@ The configuration of the expected audience can be done via the Neon RLS Authoriz
 You can use these sample ToDo applications to get started using Neon RLS Authorize with popular authentication providers.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase-labs/clerk-nextjs-frontend-neon-authorize" description="A Todo List built with Clerk, Next.js, and Neon RLS Authorize (SQL from the Frontend)" icon="github">Clerk (Frontend) + Neon RLS Authorize</a>
-<a href="https://github.com/neondatabase-labs/stack-nextjs-neon-authorize" description="A Todo List built with Stack Auth, Next.js, and Neon RLS Authorize (SQL from the Backend)" icon="github">Stack Auth + Neon RLS Authorize</a>
-<a href="https://github.com/neondatabase-labs/auth0-nextjs-neon-authorize" description="A Todo List built with Auth0, Next.js, and Neon RLS Authorize (SQL from the Backend)" icon="github">Auth0 + Neon RLS Authorize</a>
-<a href="https://github.com/neondatabase-labs/stytch-nextjs-neon-authorize" description="A Todo List built with Stytch, Next.js, and Neon RLS Authorize (SQL from the Backend)" icon="github">Stytch + Neon RLS Authorize</a>
-<a href="https://github.com/neondatabase-labs/azure-ad-b2c-nextjs-neon-authorize" description="A Todo List built with Azure AD B2C, Next.js, and Neon RLS Authorize (SQL from the Backend)" icon="github">Azure AD B2C + Neon RLS Authorize</a>
-<a href="https://github.com/neondatabase-labs/descope-react-frontend-neon-authorize" description="A Todo list built with Descope, Next.js, and Neon RLS Authorize (SQL from the frontend)" icon="github">Descope + Neon RLS Authorize</a>
-<a href="https://github.com/neondatabase-labs/propelauth-nextjs-neon-authorize" description="A Todo list built with PropelAuth, Next.js, and Neon RLS Authorize (SQL from Frontend and Backend)" icon="github">PropelAuth + Neon RLS Authorize</a>
-<a href="https://github.com/neondatabase-labs/supertokens-nestjs-solidjs-drizzle-neon-authorize" description="A Demo app built with SuperTokens, Nest.js, Solid.js, Drizzle, and Neon RLS Authorize (SQL from the Backend)" icon="github">SuperTokens + Neon RLS Authorize</a>
-<a href="https://github.com/neondatabase-labs/workos-drizzle-sveltekit-neon-authorize" description="A Demo Post App built with WorkOS, SvelteKit, Neon RLS Authorize (SQL from the Backend)" icon="github">WorkOS + Neon RLS Authorize</a>
+<a href="https://github.com/neondatabase-labs/clerk-nextjs-frontend-neon-rls-authorize" description="A Todo List built with Clerk, Next.js, and Neon RLS Authorize (SQL from the Frontend)" icon="github">Clerk (Frontend) + Neon RLS Authorize</a>
+<a href="https://github.com/neondatabase-labs/stack-nextjs-neon-rls-authorize" description="A Todo List built with Stack Auth, Next.js, and Neon RLS Authorize (SQL from the Backend)" icon="github">Stack Auth + Neon RLS Authorize</a>
+<a href="https://github.com/neondatabase-labs/auth0-nextjs-neon-rls-authorize" description="A Todo List built with Auth0, Next.js, and Neon RLS Authorize (SQL from the Backend)" icon="github">Auth0 + Neon RLS Authorize</a>
+<a href="https://github.com/neondatabase-labs/stytch-nextjs-neon-rls-authorize" description="A Todo List built with Stytch, Next.js, and Neon RLS Authorize (SQL from the Backend)" icon="github">Stytch + Neon RLS Authorize</a>
+<a href="https://github.com/neondatabase-labs/azure-ad-b2c-nextjs-neon-rls-authorize" description="A Todo List built with Azure AD B2C, Next.js, and Neon RLS Authorize (SQL from the Backend)" icon="github">Azure AD B2C + Neon RLS Authorize</a>
+<a href="https://github.com/neondatabase-labs/descope-react-frontend-neon-rls-authorize" description="A Todo list built with Descope, Next.js, and Neon RLS Authorize (SQL from the frontend)" icon="github">Descope + Neon RLS Authorize</a>
+<a href="https://github.com/neondatabase-labs/propelauth-nextjs-neon-rls-authorize" description="A Todo list built with PropelAuth, Next.js, and Neon RLS Authorize (SQL from Frontend and Backend)" icon="github">PropelAuth + Neon RLS Authorize</a>
+<a href="https://github.com/neondatabase-labs/supertokens-nestjs-solidjs-drizzle-neon-rls-authorize" description="A Demo app built with SuperTokens, Nest.js, Solid.js, Drizzle, and Neon RLS Authorize (SQL from the Backend)" icon="github">SuperTokens + Neon RLS Authorize</a>
+<a href="https://github.com/neondatabase-labs/workos-drizzle-sveltekit-neon-rls-authorize" description="A Demo Post App built with WorkOS, SvelteKit, Neon RLS Authorize (SQL from the Backend)" icon="github">WorkOS + Neon RLS Authorize</a>
 <a href="https://github.com/neondatabase-labs/authorize-demo-custom-jwt" description="A demo of Neon RLS Authorize with custom generated JWTs" icon="github">Neon RLS Authorize with custom JWTs</a>
 </DetailIconCards>
 
