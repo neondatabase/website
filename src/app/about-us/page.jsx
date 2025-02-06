@@ -21,12 +21,12 @@ const AboutUsPage = async () => {
 
   const statistics = [
     {
-      number: !gitHubStars ? 13 : Math.floor(gitHubStars / 1000),
+      number: !gitHubStars ? 16 : Math.floor(gitHubStars / 1000),
       isThousands: true,
       label: 'Stars on GitHub',
     },
     {
-      number: !gitHubContributors ? 111 : gitHubContributors,
+      number: !gitHubContributors ? 130 : gitHubContributors,
       label: 'Contributors',
     },
     {
