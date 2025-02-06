@@ -44,14 +44,6 @@ const variants = {
   },
 };
 
-const getItemTitleStyles = (isDarkTheme, isMenuItemOpen) =>
-  clsx({
-    'text-white': isMenuItemOpen && isDarkTheme,
-    'text-gray-new-80': !isMenuItemOpen && isDarkTheme,
-    'text-black-new dark:text-white': isMenuItemOpen && !isDarkTheme,
-    'text-gray-new-20 dark:text-gray-new-80': !isMenuItemOpen && !isDarkTheme,
-  });
-
 const MobileMenuItem = ({ text, to, sections, isDarkTheme }) => {
   const [isMenuItemOpen, setIsMenuItemOpen] = useState();
   const Tag = sections ? 'button' : Link;
@@ -72,9 +64,14 @@ const MobileMenuItem = ({ text, to, sections, isDarkTheme }) => {
     >
       <Tag
         className={clsx(
+          'relative flex w-full items-center py-4 leading-none tracking-snug transition-colors duration-200',
           isMenuItemOpen && 'font-medium',
-          getItemTitleStyles(isDarkTheme, isMenuItemOpen),
-          'relative flex w-full items-center py-4 leading-none tracking-snug transition-colors duration-200'
+          {
+            'text-white': isMenuItemOpen && isDarkTheme,
+            'text-gray-new-80': !isMenuItemOpen && isDarkTheme,
+            'text-black-new dark:text-white': isMenuItemOpen && !isDarkTheme,
+            'text-gray-new-20 dark:text-gray-new-80': !isMenuItemOpen && !isDarkTheme,
+          }
         )}
         to={to}
         onClick={handleMenuItemClick}
