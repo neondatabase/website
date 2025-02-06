@@ -1,22 +1,24 @@
 ---
-title: Neon Authorize tutorial
+title: Neon RLS Authorize tutorial
 subtitle: Learn how Row-level Security (RLS) protects user data
 enableTableOfContents: true
 updatedOn: '2025-02-05T00:04:30.542Z'
+redirectFrom:
+  - /docs/guides/neon-authorize-tutorial
 ---
 
 <InfoBlock>
 <DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize">Clerk + Neon Authorize</a>
+  <a href="https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize">Clerk + Neon RLS Authorize</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
-  <a href="/docs/guides/neon-authorize">About Neon Authorize</a>
+  <a href="/docs/guides/neon-rls-authorize">About Neon RLS Authorize</a>
   <a href="https://orm.drizzle.team/docs/rls">Row-Level security in Drizzle</a>
 </DocsList>
 </InfoBlock>
 
-In this tutorial, you’ll set up a sample `todos` application to learn how Postgres Row-Level Security (RLS) policies can protect user data, adding an extra layer of security beyond application logic.
+In this tutorial, you'll set up a sample `todos` application to learn how Postgres Row-Level Security (RLS) policies can protect user data, adding an extra layer of security beyond application logic.
 
 ## About the sample application
 
@@ -24,17 +26,17 @@ This `todos` app is built with Next.js and Drizzle ORM, using Clerk for user aut
 
 ## Prerequisites
 
-To get started, you’ll need:
+To get started, you'll need:
 
 - **Neon account**: Sign up at [Neon](https://neon.tech) and create your first project in **AWS** (note: [Azure](/docs/guides/neon-authorize#current-limitations) regions are not currently supported).
 - **Clerk account**: Sign up for a [Clerk](https://clerk.com/) account and application. Clerk provides a free plan to get you started.
-- **Neon Authorize + Clerk example application**: Clone the sample [Clerk + Neon Authorize repository](https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize):
+- **Neon RLS Authorize + Clerk example application**: Clone the sample [Clerk + Neon RLS Authorize repository](https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize):
 
   ```bash
   git clone https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize.git
   ```
 
-  Follow the instructions in the readme to set up Clerk, configure environment variables, and start the application. You can also find more info in our [Clerk and Neon Authorize Quickstart](/docs/guides/neon-authorize-clerk).
+  Follow the instructions in the readme to set up Clerk, configure environment variables, and start the application. You can also find more info in our [Clerk and Neon RLS Authorize Quickstart](/docs/guides/neon-authorize-clerk).
 
 ## Step 1 — Create test users
 
@@ -54,7 +56,7 @@ Side by side, here's the empty state for both users:
 
 ![empty state two users in clerk demo](/docs/guides/authorize_tutorial_empty_state.png)
 
-When each user creates a todo, it’s securely linked to their `userId` in the database schema. Here’s the structure of the `todos` table:
+When each user creates a todo, it's securely linked to their `userId` in the database schema. Here's the structure of the `todos` table:
 
 ```typescript
 {
@@ -293,3 +295,5 @@ Here is the output, showing columns `policyname, cmd, qual, with_check` only:
  view todos   | SELECT | ( SELECT (auth.user_id() = todos.user_id)) |
 (4 rows)
 ```
+
+To get an understanding of `auth.user_id()` and the role it plays in these policies, see this [explanation](/docs/guides/neon-rls-authorize#how-neon-rls-authorize-gets-authuserid-from-the-jwt).

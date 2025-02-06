@@ -1,9 +1,11 @@
 ---
-title: Secure Your Data with Neon Authorize and Firebase or GCP Identity Platform
-subtitle: Implement Row-Level Security in Postgres using Firebase or GCP Identity
-  Platform
+title: Secure your data with Firebase and Neon RLS Authorize
+subtitle: Implement Row-level Security policies in Postgres using Firebase and Neon RLS Authorize
 enableTableOfContents: true
 updatedOn: '2025-02-03T20:41:57.327Z'
+redirectFrom:
+  - /docs/guides/neon-authorize-firebase-gcp
+  - /docs/guides/neon-authorize-google-identity
 ---
 
 <InfoBlock>
@@ -14,23 +16,23 @@ updatedOn: '2025-02-03T20:41:57.327Z'
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
-  <a href="/docs/guides/neon-authorize-tutorial">Neon Authorize Tutorial</a>
+  <a href="/docs/guides/neon-rls-authorize-tutorial">Neon RLS Authorize Tutorial</a>
   <a href="https://firebase.google.com/docs/auth">Firebase Authentication documentation</a>
   <a href="https://cloud.google.com/identity-platform/docs/sign-in-user-email">GCP Identity Platform Quickstart</a>
 </DocsList>
 </InfoBlock>
 
-Use Firebase or Google Cloud Identity Platform with Neon Authorize to add secure, database-level authorization to your application.
+Use Firebase or Google Cloud Identity Platform with Neon RLS Authorize to add secure, database-level authorization to your application.
 
-This guide assumes you already have an application using Firebase or GCP Identity Platform for user authentication. It shows you how to integrate with Neon Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
+This guide assumes you already have an application using Firebase or GCP Identity Platform for user authentication. It shows you how to integrate with Neon RLS Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 
 ## How it works
 
 Firebase and Google Cloud Identity Platform share the same underlying authentication infrastructure, but focus on different use cases: Firebase for mobile and web application developers, and GCP Identity Platform for enterprise-level identity management (leveraging Firebase in its implementation).
 
-Both services generate JSON Web Tokens (JWTs) for user authentication, which are passed to Neon Authorize. Unlike some other authentication providers that issue a dedicated JWKS URL per project, Firebase and GCP Identity Platform use a common JWKS URL and rely on the Project ID in the JWT's Audience claim to identify specific projects.
+Both services generate JSON Web Tokens (JWTs) for user authentication, which are passed to Neon RLS Authorize. Unlike some other authentication providers that issue a dedicated JWKS URL per project, Firebase and GCP Identity Platform use a common JWKS URL and rely on the Project ID in the JWT's Audience claim to identify specific projects.
 
-When you make a database request, Neon Authorize validates these JWTs and uses the embedded user identity metadata to enforce [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) (RLS) policies in Postgres, securing database queries based on user identity. This flow is enabled by the [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt) extension.
+When you make a database request, Neon RLS Authorize validates these JWTs and uses the embedded user identity metadata to enforce [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) (RLS) policies in Postgres, securing database queries based on user identity. This flow is enabled by the [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt) extension.
 
 ## Prerequisites
 
@@ -41,7 +43,7 @@ To follow along with this guide, you will need:
   - [Set up Firebase Authentication](https://firebase.google.com/docs/auth)
   - [Set up Identity Platform](https://cloud.google.com/identity-platform/docs/sign-in-user-email)
 
-## Integrate Firebase/GCP Identity Platform with Neon Authorize
+## Integrate Firebase/GCP Identity Platform with Neon RLS Authorize
 
 In this first set of steps, we'll integrate Firebase/GCP Identity Platform as an authorization provider in Neon. When these steps are complete, your authentication service (whether Firebase or GCP Identity Platform) will start passing JWTs to your Neon database, which you can then use to create policies.
 
@@ -70,17 +72,17 @@ You'll need two pieces of information:
 
 ### 2. Add Firebase/GCP Identity Platform as an authorization provider in the Neon Console
 
-Once you have the JWKS URL, go to the **Neon Console** and add the authentication provider under the **Authorize** page. Paste your copied URL and click **Set Up**.
+Once you have the JWKS URL, go to the **Neon Console**, navigate to **Settings** > **RLS Authorize**, and add Firebase/GCP Identity Platform as an authentication provider. Paste your copied URL and Firebase/GCP Identity Platform will be automatically recognized and selected.
 
 <div style={{ display: 'flex', justifyContent: 'center'}}>
   <img src="/docs/guides/firebase_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
 </div>
 
-At this point, you can use the **Get Started** setup steps from the Authorize page in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
+At this point, you can use the **Get Started** setup steps from RLS Authorize in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
 
 ### 3. Install the pg_session_jwt extension in your database
 
-Neon Authorize uses the [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt) extension to handle authenticated sessions through JSON Web Tokens (JWTs). This extension allows secure transmission of authentication data from your application to Postgres, where you can enforce Row-Level Security (RLS) policies based on the user's identity.
+Neon RLS Authorize uses the [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt) extension to handle authenticated sessions through JSON Web Tokens (JWTs). This extension allows secure transmission of authentication data from your application to Postgres, where you can enforce Row-Level Security (RLS) policies based on the user's identity.
 
 To install the extension in the `neondb` database, run:
 
@@ -123,7 +125,7 @@ GRANT USAGE ON SCHEMA public TO anonymous;
 
 ### 5. Install the Neon Serverless Driver
 
-Neon’s Serverless Driver manages the connection between your application and the Neon Postgres database. For Neon Authorize, you must use HTTP. While it is technically possible to access the HTTP API without using our driver, we recommend using the driver for best performance. The driver also supports WebSockets and TCP connections, so make sure you use the HTTP method when working with Neon Authorize.
+Neon’s Serverless Driver manages the connection between your application and the Neon Postgres database. For Neon RLS Authorize, you must use HTTP. While it is technically possible to access the HTTP API without using our driver, we recommend using the driver for best performance. The driver also supports WebSockets and TCP connections, so make sure you use the HTTP method when working with Neon RLS Authorize.
 
 Install it using the following command:
 
@@ -156,7 +158,7 @@ The `DATABASE_URL` is intended for admin tasks and can run any query while the `
 
 ## Add RLS policies
 
-Now that you’ve integrated Descope with Neon Authorize, you can securely pass JWTs to your Neon database. Let's start looking at how to add RLS policies to your schema and how you can execute authenticated queries from your application.
+Now that you’ve integrated Firebase with Neon RLS Authorize, you can securely pass JWTs to your Neon database. Let's start looking at how to add RLS policies to your schema and how you can execute authenticated queries from your application.
 
 ### 1. Add Row-Level Security policies
 

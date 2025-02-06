@@ -1,38 +1,39 @@
 ---
-title: Secure your data with Azure Active Directory and Neon Authorize
-subtitle: Implement Row-level Security policies in Postgres using Azure Active Directory
-  and Neon Authorize
+title: Secure your data with Azure Active Directory and Neon RLS Authorize
+subtitle: Implement Row-level Security policies in Postgres using Azure Active Directory and Neon RLS Authorize
 enableTableOfContents: true
 updatedOn: '2025-02-03T20:41:57.325Z'
+redirectFrom:
+  - /docs/guides/neon-authorize-azure-ad
 ---
 
 <InfoBlock>
 <DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/azure-ad-b2c-nextjs-neon-authorize">Azure Active Directory + Neon Authorize</a>
+  <a href="https://github.com/neondatabase-labs/azure-ad-b2c-nextjs-neon-rls-authorize">Azure Active Directory + Neon RLS Authorize</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
-  <a href="/docs/guides/neon-authorize-tutorial">Neon Authorize Tutorial</a>
-  <a href="/docs/guides/neon-authorize-drizzle">Simplify RLS with Drizzle</a>
+  <a href="/docs/guides/neon-rls-authorize-tutorial">Neon RLS Authorize Tutorial</a>
+  <a href="/docs/guides/neon-rls-authorize-drizzle">Simplify RLS with Drizzle</a>
 </DocsList>
 </InfoBlock>
 
-Use Azure Active Directory with Neon Authorize to add secure, database-level authorization to your application. This guide assumes you already have an application using Azure Active Directory for user authentication. It shows you how to integrate Azure Active Directory with Neon Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
+Use Azure Active Directory with Neon RLS Authorize to add secure, database-level authorization to your application. This guide assumes you already have an application using Azure Active Directory for user authentication. It shows you how to integrate Azure Active Directory with Neon RLS Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 
 ## How it works
 
-Azure Active Directory handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon Authorize. Neon Authorize validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
+Azure Active Directory handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon RLS Authorize. Neon RLS Authorize validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
 
 ## Prerequisites
 
 To follow along with this guide, you will need:
 
 - A Neon account. Sign up at [Neon](https://neon.tech) if you don't have one.
-- A [Azure Active Directory](https://aws.amazon.com/pm/cognito/) account with an existing application (e.g., a **todos** app) that uses Azure Active Directory for user authentication. If you don't have an app, check our [demo](https://github.com/neondatabase-labs/stytch-nextjs-neon-authorize) for similar schema and policies in action.
+- A [Azure Active Directory](https://aws.amazon.com/pm/cognito/) account with an existing application (e.g., a **todos** app) that uses Azure Active Directory for user authentication. If you don't have an app, check our [demo](https://github.com/neondatabase-labs/stytch-nextjs-neon-rls) for similar schema and policies in action.
 
-## Integrate Azure Active Directory with Neon Authorize
+## Integrate Azure Active Directory with Neon RLS Authorize
 
-In this first set of steps, we’ll integrate Azure Active Directory as an authorization provider in Neon. When these steps are complete, Azure Active Directory will start passing JWTs to your Neon database, which you can then use to create policies.
+In this first set of steps, we'll integrate Azure Active Directory as an authorization provider in Neon. When these steps are complete, Azure Active Directory will start passing JWTs to your Neon database, which you can then use to create policies.
 
 ### 1. Get your Azure Active Directory JWKS URL
 
@@ -52,17 +53,17 @@ https://login.microsoftonline.com/12345678-1234-1234-1234-1234567890ab/discovery
 
 ### 2. Add Azure Active Directory as an authorization provider in the Neon Console
 
-Once you have the JWKS URL, go to the **Neon Console** and add Azure Active Directory as an authentication provider under the **Authorize** page. Paste your copied URL and Azure Active Directory will be automatically recognized and selected.
+Once you have the JWKS URL, go to the **Neon Console**, navigate to **Settings** > **RLS Authorize**, and add Azure Active Directory as an authentication provider. Paste your copied URL and Azure Active Directory will be automatically recognized and selected.
 
 <div style={{ display: 'flex', justifyContent: 'center'}}>
   <img src="/docs/guides/azure_ad_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
 </div>
 
-At this point, you can use the **Get Started** setup steps from the Authorize page in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
+At this point, you can use the **Get Started** setup steps from RLS Authorize in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
 
 ### 3. Install the pg_session_jwt extension in your database
 
-Neon Authorize uses the [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt) extension to handle authenticated sessions through JSON Web Tokens (JWTs). This extension allows secure transmission of authentication data from your application to Postgres, where you can enforce Row-Level Security (RLS) policies based on the user's identity.
+Neon RLS Authorize uses the [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt) extension to handle authenticated sessions through JSON Web Tokens (JWTs). This extension allows secure transmission of authentication data from your application to Postgres, where you can enforce Row-Level Security (RLS) policies based on the user's identity.
 
 To install the extension in the `neondb` database, run:
 
@@ -105,7 +106,7 @@ GRANT USAGE ON SCHEMA public TO anonymous;
 
 ### 5. Install the Neon Serverless Driver
 
-Neon’s Serverless Driver manages the connection between your application and the Neon Postgres database. For Neon Authorize, you must use HTTP. While it is technically possible to access the HTTP API without using our driver, we recommend using the driver for best performance. The driver also supports WebSockets and TCP connections, so make sure you use the HTTP method when working with Neon Authorize.
+Neon's Serverless Driver manages the connection between your application and the Neon Postgres database. For Neon RLS Authorize, you must use HTTP. While it is technically possible to access the HTTP API without using our driver, we recommend using the driver for best performance. The driver also supports WebSockets and TCP connections, so make sure you use the HTTP method when working with Neon RLS Authorize.
 
 Install it using the following command:
 
@@ -138,7 +139,7 @@ The `DATABASE_URL` is intended for admin tasks and can run any query while the `
 
 ## Add RLS policies
 
-Now that you’ve integrated Azure Active Directory with Neon Authorize, you can securely pass JWTs to your Neon database. Let's start looking at how to add RLS policies to your schema and how you can execute authenticated queries from your application.
+Now that you've integrated Azure Active Directory with Neon RLS Authorize, you can securely pass JWTs to your Neon database. Let's start looking at how to add RLS policies to your schema and how you can execute authenticated queries from your application.
 
 ### 1. Add Row-Level Security policies
 
