@@ -9,7 +9,7 @@ updatedOn: '2025-02-04T00:00:00.000Z'
 
 As the world of AI agents rapidly evolves, the challenge lies in building and deploying them quickly and efficiently. Imagine creating intelligent agents that can not only perform complex tasks but also seamlessly interact with your data infrastructure, all without getting bogged down in complex code.
 
-This guide introduces [**AgentStack**](https://docs.agentstack.sh/introduction), a rapid development framework for AI agents, and **Neon**, the serverless Postgres database, to streamline the creation of powerful, data-driven AI agents. We'll show you how to build a **Web scraper AI Agent** in minutes, using AgentStack's intuitive CLI and tool integrations.
+This guide introduces [**AgentStack**](https://docs.agentstack.sh/introduction), a rapid development framework for AI agents, and **Neon**, the serverless Postgres database, to streamline the creation of powerful, data-driven AI agents. We will show you how to build a **Web Scraper AI Agent** in minutes, using AgentStack's intuitive CLI and tool integrations.
 
 Forget tedious setup and manual coding! With AgentStack and Neon, you can generate complete agent workflows, create new agents and tasks with simple commands, and effortlessly integrate them with your data layer. Let's dive in and see how you can build intelligent agents faster than ever before.
 
@@ -18,27 +18,27 @@ Forget tedious setup and manual coding! With AgentStack and Neon, you can genera
 This example will show you how to:
 
 - Set up an **AgentStack** project to create an AI Agent.
-- Utilize **AgentStack CLI** to generate agents and tasks.
+- Utilize the **AgentStack CLI** to generate agents and tasks.
 - Equip your agents with **tools** like **Neon** and **Firecrawl** for data storage and web scraping.
 - Run your agent crew to scrape the [neon.tech/guides](/guides) page, extract blog post metadata (titles, authors, dates) from it, and store it in a Neon Postgres database.
 - Use **AgentOps** for observability of your agent's execution.
 
 ## Prerequisites
 
-Before you start building your Web scraper Agent, ensure you have the following prerequisites in place:
+Before you start building your Web Scraper Agent, ensure you have the following prerequisites in place:
 
 - **Python 3.10 or higher:** Download from [python.org](https://www.python.org/downloads/).
 - **uv package installer (or Poetry):** Recommended for faster dependency installation. Install `uv` as described here: [astral-sh/uv](https://github.com/astral-sh/uv?tab=readme-ov-file#installation). Alternatively, use `poetry`.
 - **AgentStack CLI:** Install the AgentStack Command Line Interface (CLI). Follow the [Getting started with AgentStack](https://docs.agentstack.sh/installation) guide.
-- **Accounts and API Keys:** You'll need accounts and API keys for these services:
-  - **OpenAI API key**: We'll use OpenAI's `gpt-4o-mini` model to power AI agents. Get an OpenAI API key at [platform.openai.com](https://platform.openai.com).
-  - **Neon account**: Sign up for a free Neon account at [neon.tech](https://console.neon.tech/signup). You'll need a Neon API key to connect to your Neon database.
-  - **Firecrawl account**: Sign up for a Firecrawl account at [firecrawl.dev](https://firecrawl.dev). You'll need a Firecrawl API key to use the web scraping tool.
-  - **AgentOps account**: Sign up for an AgentOps account at [agentops.ai](https://agentops.ai) to leverage agent observability features. You'll need an AgentOps API key.
+- **Accounts and API Keys:** You will need accounts and API keys for these services:
+  - **OpenAI API key**: We will use OpenAI's `gpt-4o-mini` model to power AI agents. Get an OpenAI API key at [platform.openai.com](https://platform.openai.com).
+  - **Neon account**: Sign up for a free Neon account at [neon.tech](https://console.neon.tech/signup). You will need a Neon API key to connect to your Neon database.
+  - **Firecrawl account**: Sign up for a Firecrawl account at [firecrawl.dev](https://firecrawl.dev). You will need a Firecrawl API key to use the web scraping tool.
+  - **AgentOps account**: Sign up for an AgentOps account at [agentops.ai](https://agentops.ai) to leverage agent observability features. You will need an AgentOps API key.
 
-## Building the Web scraper agent
+## Building the Web Scraper Agent
 
-Let's now build the Web scraper AI agent using AgentStack, Neon, and Firecrawl. We'll walk through each step, from initializing the project to running the agent crew.
+Let's now build the Web Scraper AI agent using AgentStack, Neon, and Firecrawl. We will walk through each step, from initializing the project to running the agent crew.
 
 ### Project setup with AgentStack CLI
 
@@ -81,7 +81,7 @@ web_scraper/
 
 ### Generating agents with AgentStack CLI
 
-We will create 3 agents for our Web scraper crew:
+We will create 3 agents for our Web Scraper crew:
 
 - **`web_scraper`:** Responsible for web scraping and markdown extraction.
 - **`data_extractor`:** Specialized in extracting structured data from web content.
@@ -95,7 +95,7 @@ Now, let's generate the agents using the AgentStack CLI.
    agentstack generate agent web_scraper
    ```
 
-   When creating the first agent, agentstack will ask you to choose a default Large Language Model (LLM). We recommend `openai/gpt-4o-mini` for this guide, as it offers a good balance between performance and cost. You'll need to enter this model name manually, as it's not included in the default list.
+   When creating the first agent, `agentstack` will ask you to choose a default Large Language Model (LLM). We recommend `openai/gpt-4o-mini` for this guide, as it offers a good balance between performance and cost. You will need to enter this model name manually, as it's not included in the default list.
 
    ![AgentStack LLM Model](/docs/guides/agentstack-llm-model.png)
 
@@ -150,9 +150,9 @@ AgentStack uses YAML configuration files to define the roles, goals, and backsto
 
 Now that we have our agents defined, we need to create tasks for them. Tasks define the specific actions each agent will perform within the agent crew's workflow.
 
-For this example the task for AI agent is simple, get the list of blog post titles, author names, and publication dates from our [guides page](/guides) and store it in a Postgres database.
+For this example the task for the AI agent is simple: get the list of blog post titles, author names, and publication dates from our [guides page](/guides) and store it in a Postgres database.
 
-We will need three tasks for our Web scraper crew:
+We will need three tasks for our Web Scraper crew:
 
 1. **Generate `scrape_site` task:**
 
@@ -204,7 +204,7 @@ Similar to agents, tasks are also configured via YAML, defining the description 
 
 ### Adding Firecrawl and Neon tools to the Crew
 
-To enable web scraping and data storage capabilities, we'll integrate **Firecrawl** and **Neon** tools into our agent crew. We'll use Firecrawl for web scraping the `neon.tech/guides` page and Neon for storing the extracted data in a Postgres database.
+To enable web scraping and data storage capabilities, we will integrate **Firecrawl** and **Neon** tools into our agent crew. We will use Firecrawl for web scraping the `neon.tech/guides` page and Neon for storing the extracted data in a Postgres database.
 
 - Add **Firecrawl** tool using the following command:
 
@@ -218,9 +218,33 @@ To enable web scraping and data storage capabilities, we'll integrate **Firecraw
   agentstack tools add neon
   ```
 
-`agentstack tools add` command simplifies the integration of tools by automatically updating your project configuration and `crew.py` file to include the necessary tool classes.
+The `agentstack tools add` command simplifies the integration of tools by automatically updating your project configuration and `crew.py` file to include the necessary tool classes.
 
-We can improve the efficiency of our agents by specifying their tool usage in crew.py. Since the `web_scraper` agent only needs firecrawl, the content_storer agent only neon, and the data_extractor agent needs no tool, assigning these tools directly in the configuration will reduce agent context memory and enable more focused task execution, mirroring human specialization.
+#### Understanding Neon Tool actions
+
+AgentStack's Neon tool integration equips the agents with a suite of pre-built actions to interact with Neon serverless Postgres databases. These actions are automatically available to any agent you equip with the Neon tool, like the `content_storer` agent in our example. The Neon tool provides the following actions:
+
+- **`create_database`**: This action allows our agent to create a new Neon project and database on demand. It returns a connection URI, which is essential for subsequent database interactions. By default, it creates a database named `neondb` with the role `neondb_owner`. This is particularly useful for agents that need to manage their own isolated databases or when the database needs to be created as part of the agent workflow.
+
+- **`execute_sql_ddl`**: Agents use this action to execute Data Definition Language (DDL) commands. DDL commands are used to define the database schema, such as creating, altering, or dropping tables. For instance, the `content_storer` agent uses this action to create the `posts` table in the Neon database.
+
+- **`run_sql_query`**: This action enables agents to run Data Manipulation Language (DML) queries like `SELECT`, `INSERT`, `UPDATE`, and `DELETE`. In the example, the `content_storer` agent uses this action to insert the scraped blog post metadata into the `posts` table and to formulate and test a `SELECT` query to retrieve the data. The results from these queries are returned to the agent as formatted strings, allowing the agent to process and reason about the data.
+
+These actions empower our agents to fully manage and utilize Neon databases within their workflows, from database creation and schema definition to data manipulation and retrieval, all without requiring manual coding of database interactions.
+
+#### Understanding Firecrawl Tool actions
+
+AgentStack's Firecrawl tool integration provides the agents with a set of actions to perform web scraping tasks. These actions are readily available to any agent equipped with the Firecrawl tool, like the `web_scraper` agent in our example. The Firecrawl tool offers the following actions:
+
+- **`web_scrape`**: This action allows our agent to scrape the content of a single webpage and retrieve it in markdown format. It's designed for efficiently extracting content from individual URLs when we need the content of a specific page. The agent provides a URL, and Firecrawl returns the webpage's content as markdown text.
+
+- **`web_crawl`**: For more extensive data gathering, the `web_crawl` action enables our agent to initiate a web crawl starting from a given URL. This action not only scrapes the initial URL but also explores and scrapes content from linked pages that are children of the starting URL. It's important to note that the crawl is limited to sublinks of the provided URL, preventing it from venturing to entirely separate sections of a website or different domains. This action is asynchronous and returns a `crawl_id`.
+
+- **`retrieve_web_crawl`**: Since `web_crawl` is an asynchronous operation, we use the `retrieve_web_crawl` action to get the results of a crawl that was initiated previously using the `web_crawl` action. This action requires the `crawl_id` that was returned by the initial `web_crawl` action. It checks the status of the crawl and returns the scraped content once the crawl is complete. Agents can use this action in a loop or after a delay to check for and retrieve crawl results, allowing for more complex workflows where web crawling is part of a longer process.
+
+These actions equip our agents with powerful web scraping capabilities, ranging from simple single-page content extraction to comprehensive crawling of website sections, enabling them to gather web data effectively as part of their tasks.
+
+We can improve the efficiency of our agents by specifying their tool usage in crew.py. Since the `web_scraper` agent only needs firecrawl, the `content_storer` agent only needs neon, and the data_extractor agent needs no tool, assigning these tools directly in the configuration will reduce agent context memory and enable more focused task execution, mirroring human specialization.
 
 Your `src/crew.py` file should now look like this, with the tools integrated into the respective agents:
 
@@ -299,9 +323,9 @@ FIRECRAWL_API_KEY=YOUR_FIRECRAWL_API_KEY
 AGENTOPS_API_KEY=YOUR_AGENTOPS_API_KEY
 ```
 
-### Running the Web scraper agent
+### Running the Web Scraper agent
 
-Now that we've set up our agents, tasks, and tools, let's run the agent crew to scrape the `neon.tech/guides` page, extract blog post metadata, and store it in a Neon Postgres database.
+Now that we have set up our agents, tasks, and tools, let's run the agent crew to scrape the `neon.tech/guides` page, extract blog post metadata, and store it in a Neon Postgres database.
 
 ```bash
 agentstack run
@@ -328,8 +352,8 @@ After the agent run completes, check your terminal for the output. It should dis
 You can verify that the data has been stored in your Neon database by:
 
 - Logging into your Neon account at [console.neon.tech](https://console.neon.tech).
-- Navigate to your project and database.
-- Click on the `Tables` tab to view the `posts` table created by the agent.
+- Navigating to your project and database.
+- Clicking on the `Tables` tab to view the `posts` table created by the agent.
 
 ![Neon SQL Editor](/docs/guides/agentstack-neon-database-data.png)
 
@@ -351,13 +375,13 @@ By using AgentOps, you move beyond simply building agents and gain powerful insi
 With a total run cost of only $0.01 in OpenAI credits (as seen in the AgentOps dashboard), this AI agent demonstrates exceptional cost-effectiveness. This was achieved entirely without code, eliminating the need for scraping, SQL queries, and other complex programming, paving the way for widespread application across various domains.
 </Admonition>
 
-**Congratulations!** You've successfully built and run a Web scraper agent using AgentStack, Neon, and Firecrawl, demonstrating how to automate web data extraction and storage into a serverless Postgres database with minimal effort!
+**Congratulations!** You have successfully built and run a Web Scraper agent using AgentStack, Neon, and Firecrawl, demonstrating how to automate web data extraction and storage into a serverless Postgres database with minimal effort!
 
 ## Summary
 
-In this guide, we've demonstrated how to rapidly build an AI agent application using **AgentStack** and **Neon**. We've showcased how AgentStack simplifies the creation of intelligent agents and seamlessly integrates them with powerful tools, using Neon for robust data management as an example. AgentStack's intuitive CLI and pre-built tool integrations empower you to quickly scaffold agent projects and extend their functionalities without writing extensive code.
+In this guide, we have demonstrated how to rapidly build an AI agent application using **AgentStack** and **Neon**. We have showcased how AgentStack simplifies the creation of intelligent agents and seamlessly integrates them with powerful tools, using Neon for robust data management as an example. AgentStack's intuitive CLI and pre-built tool integrations empower you to quickly scaffold agent projects and extend their functionalities without writing extensive code.
 
-By leveraging AgentStack, you can effortlessly create agent crews, define tasks, and equip your agents with a wide array of tools for various purposes beyond just web scraping. This example with Firecrawl and Neon illustrates just one facet of what's possible. AgentStack’s ecosystem includes tools for knowledge retrieval (like Perplexity), integrations with other platforms (like Composio and Stripe), and much more, enabling you to build diverse and sophisticated AI-driven applications tailored to your specific needs.
+By leveraging AgentStack, you can effortlessly create agent crews, define tasks, and equip your agents with a wide array of tools for various purposes beyond just web scraping. This example with Firecrawl and Neon illustrates just one facet of what is possible. AgentStack’s ecosystem includes tools for knowledge retrieval (like Perplexity), integrations with other platforms (like Composio and Stripe), and much more, enabling you to build diverse and sophisticated AI-driven applications tailored to your specific needs.
 
 This guide serves as your starting point to explore the vast potential of AgentStack and Neon for building intelligent systems. It provides a solid foundation for you to continue exploring the exciting world of AI agents and their integration with modern data infrastructure.
 
