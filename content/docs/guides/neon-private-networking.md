@@ -187,13 +187,6 @@ curl --request POST \
 
 </Tabs>
 
-
-
-
-
-
-
-
 ## Managing Private Networking using the Neon CLI
 
 You can use the Neon CLI `vpc` command to manage Private Networking configurations in Neon.
