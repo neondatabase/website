@@ -140,7 +140,7 @@ Here's an example of Neon Auth with Stack Auth. As we add more providers and fea
 
 ### Foreign keys and the users_sync table
 
-Since the `neon_auth.users_sync` table is updated asynchronously, there may be a brief delay (usually less than 1 second) before a user's data appears in the table. This means foreign key constraints could temporarily fail for new users. Consider this possible delay when deciding whether to use foreign keys in your schema.
+Since the `neon_auth.users_sync` table is updated asynchronously, there may be a brief delay (usually less than 1 second) before a user's data appears in the table. Consider this possible delay when deciding whether to use foreign keys in your schema.
 
 If you do choose to use foreign keys, make sure to specify an `ON DELETE` behavior that matches your needs: for example, `CASCADE` for personal data like todos or user preferences, and `SET NULL` for content like blog posts or comments that should persist after user deletion.
 
