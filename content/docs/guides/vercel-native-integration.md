@@ -4,7 +4,7 @@ subtitle: Add Neon Postgres storage to your Vercel project as a first-party nati
   integration
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-01-24T19:03:09.230Z'
+updatedOn: '2025-02-01T11:52:41.013Z'
 ---
 
 <InfoBlock>
@@ -34,7 +34,7 @@ The [Vercel Marketplace](https://vercel.com/marketplace) allows you to add Neon 
 The **Neon Postgres Native Integration** is intended for Vercel users who want to add Neon Postgres to their Vercel project as a first-party native integration.
 - You cannot install this integration if you currently have Vercel Postgres installed. Please see [Transitioning from Vercel Postgres](/docs/guides/vercel-overview#transitioning-from-vercel-postgres) for details about when Vercel will transition Vercel Postgres users to Neon.
 - If you are an existing Neon user, installing the integration will add a new Neon organization named **Vercel: `<vercel_team_name>`** to your existing Neon account, assuming your Neon and Vercel accounts use the same email address.
-- If you are an existing Neon user and want create a database branch for each preview deployment in Vercel, use the [Neon Postgres Previews Integration](/docs/guides/vercel-previews-integration) instead. The native integration does not support automatic database branches for Vercel preview deployments.
+- If you are an existing Neon user and want create a database branch for each preview deployment in Vercel, use the [Neon Postgres Previews Integration](/docs/guides/vercel-previews-integration) instead. The native integration does not yet support automatic database branches for Vercel preview deployments.
 </Admonition>
 
 ## How to install
@@ -48,18 +48,9 @@ To install the **Neon Postgres Native Integration** from the Vercel Marketplace:
    ![Select the native integration option](/docs/guides/vercel_select_native.png)
 
 5. On the **Create New Neon Account** modal, accept the terms and conditions, and click **Create New Neon Account**.
-6. On the **Create Database** modal, select a region, specify your compute size and scale to zero settings, and choose a plan. To enable autoscaling, specify a compute size range (e.g., 0.25—2 VCPU).
+6. On the **Create Database** modal, select a region, choose a Neon plan, and click **Continue**.
 
    <Admonition type="note">
-     **The settings you choose must be supported by the plan you select**. The supported settings by plan are:
-
-   | Plan     | Compute Size    | [Scale to Zero](/docs/introduction/scale-to-zero) After |
-   | :------- | :-------------- | :------------------------------------------------------ |
-   | Free     | 0.25 - 2 vCPUs  | 5 minutes (Default)                                     |
-   | Launch   | 0.25 - 4 vCPUs  | 5 minutes or more (Default, Never, Custom)              |
-   | Scale    | 0.25 - 8 vCPUs  | 1 minute or more (Default, Never, Custom)               |
-   | Business | 0.25 - 56 vCPUs | 1 minute or more (Default, Never, Custom)               |
-
    For an overview of what comes with each Neon Plan, please refer to the Neon [Pricing](https://neon.tech/pricing) page.
    </Admonition>
 
@@ -77,18 +68,18 @@ To install the **Neon Postgres Native Integration** from the Vercel Marketplace:
    - Period Total (billing)
    - Your database connection string
 
-   From the sidebar, you can view your **Neon Projects**, **Settings**, **Getting Started**, and **Usage**. There's also a link to **Neon Support**.
+   From the sidebar, you can view your **Projects** (Vercel projects connected to the database), **Settings**, **Getting Started**, and **Usage**. There are also links to various resources including, including **Neon Support**.
 
 ## Open your Database / Neon Project in the Neon Console
 
 To open your Database / Neon Project in the Neon Console:
 
 1. From the **Storage** tab in the Vercel Dashboard, select your Database.
-2. On your Database page, select **Open in Neon Postgres**.
-3. In the Neon Console, you are directed the projects page for your Organization. It will be named **Vercel: `<organization_name>`**. If you're a new Neon user, you will have a single Neon Project, and your Organization name in Neon will be the name of your Vercel account. For example, if your Vercel account name is **Alex's projects**, your Neon Organization name will be **Vercel: Alex's projects**.
+2. On your Database page, select **Open in Neon**.
+3. In the Neon Console, you are directed the your project Dashboard. Your project exists within an "Organization" in Neon, which will be named **Vercel: `<organization_name>`**. If you're a new Neon user, you will have a single Neon Project, and your Organization name in Neon will be the name of your Vercel account. For example, if your Vercel account name is **Alex's projects**, your Neon Organization name will be **Vercel: Alex's projects**.
 
 <Admonition type="note">
-All Neon Plans, including the Free Plan, support multiple Neon Projects (a.k.a "Databases" in Vercel). Creating additional projects is performed from the Vercel Dashboard. See [Adding more Databases](#adding-more-databases) for instructions.
+All Neon Plans, including the Free Plan, support multiple Neon Projects (a.k.a "Databases" in Vercel). Creating additional "Databases/Projects" is performed from the Vercel Dashboard. See [Adding more Databases](#adding-more-databases) for instructions.
 </Admonition>
 
 ### Actions supported only from the Vercel Dashboard

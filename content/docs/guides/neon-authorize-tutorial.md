@@ -2,7 +2,7 @@
 title: Neon Authorize tutorial
 subtitle: Learn how Row-level Security (RLS) protects user data
 enableTableOfContents: true
-updatedOn: '2024-12-18T08:02:08.142Z'
+updatedOn: '2025-02-05T00:04:30.542Z'
 ---
 
 <InfoBlock>
@@ -111,7 +111,7 @@ Even though isolation is backed by our RLS policies, we include it here for perf
 
 In the application's `schema.ts` file, you can find the RLS policies written in Drizzle that provide access control at the database level. Here is a look at one of those policies:
 
-```typescript shoulWrap
+```typescript shouldWrap
 pgPolicy('view todos', {
   for: 'select',
   to: 'authenticated',

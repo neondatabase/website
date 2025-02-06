@@ -5,7 +5,7 @@ isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 redirectFrom:
   - /docs/get-started-with-neon/projects
-updatedOn: '2025-01-21T23:16:06.731Z'
+updatedOn: '2025-02-04T16:35:21.905Z'
 ---
 
 With Neon, everything starts with the project. It is the top-level object in the [Neon object hierarchy](/docs/manage/overview). A project can hold as many branches, databases, and roles as your application or workflow needs. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and resource limits within those projects.
@@ -59,6 +59,7 @@ The **Settings** page includes these sub-pages:
 - **General** — Change the name of your project or copy the project ID.
 - **Compute** — Set the scale to zero and sizing defaults for any new computes you create when branching.
 - **Storage** — Choose how long Neon maintains a history of changes for all branches.
+- **Updates** — Schedule a time for Postgres and Neon updates
 - **Collaborators** — Let other users access your project's databases.
 - **Network Security** — Configure Neon's IP and Private Networking features for secure access.
 - **Logical Replication** — Enable logical replication to replicate data from your Neon project to external data services and platforms.
@@ -107,6 +108,19 @@ For more information about available plan limits, see [Neon plans](/docs/introdu
 <Admonition type="note">
 The Storage page also outlines Neon **Archive storage**** policy, if applicable to your Neon plan. For more information on this topic, see [Branch archiving](/docs/guides/branch-archiving).
 </Admonition>
+
+### Schedule updates for your project
+
+To keep your Neon computes and Postgres instances up to date, Neon automatically applies scheduled updates that include Postgres minor version upgrades, security patches, and new features. Updates are applied to the computes within your project. They require a quick compute restart, take only a few seconds, and typically occur weekly.
+
+On the Free Plan, updates are automatically scheduled. On paid plans, you can set a preferred day and time for updates. Restarts occur within your selected time window and take only a few seconds.
+
+To set your update schedule or view currently scheduled updates:
+
+1. Go to **Settings** > **Updates**.
+1. Choose a day of the week and an hour. Updates will occur within this time window and take only a few seconds.
+
+For more information, see [Updates](/docs/manage/updates).
 
 ### Invite collaborators to a project
 

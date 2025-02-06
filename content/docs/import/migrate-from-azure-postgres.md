@@ -5,7 +5,7 @@ subtitle: Learn how to migrate your database from Azure PostgreSQL to Neon using
 redirectFrom:
   - /docs/import/import-from-azure-postgres
 enableTableOfContents: true
-updatedOn: '2025-01-27T15:25:05.410Z'
+updatedOn: '2025-02-03T20:41:57.340Z'
 ---
 
 <LRBeta/>
@@ -138,7 +138,7 @@ You need to allow inbound traffic from Neon Postgres servers so it can connect t
 
 This section describes how to prepare your destination Neon PostgreSQL database (the subscriber) to receive replicated data.
 
-You can find the connection details for the Neon database on the **Connection Details** widget in the Neon Console. For details, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. See [Connect from any application](/docs/connect/connect-from-any-app).
 
 ### Create the Neon database
 

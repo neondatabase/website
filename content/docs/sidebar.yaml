@@ -233,6 +233,8 @@
               slug: guides/branching-github-actions
             - title: Branching — Testing queries
               slug: guides/branching-test-queries
+            - title: Schema-only branches
+              slug: guides/branching-schema-only
         - title: Logical replication
           slug: guides/logical-replication-guide
           items:
@@ -339,6 +341,12 @@
               slug: introduction/monitoring-page
             - title: System operations
               slug: manage/operations
+            - title: Active queries
+              slug: introduction/monitor-active-queries
+              tag: new
+            - title: Query history
+              slug: introduction/monitor-query-history
+              tag: new
             - title: External tools
               slug: introduction/monitor-external-tools
         - section: Team Tools
@@ -360,6 +368,11 @@
           items:
             - title: Backups
               slug: manage/backups
+        - section: Updates
+          items:
+            - title: Updates
+              slug: manage/updates
+              tag: new
     - title: Use cases
       slug: use-cases/use-cases-overview
       icon: docs
@@ -758,6 +771,8 @@
           slug: reference/cli-projects
         - title: ip-allow
           slug: reference/cli-ip-allow
+        - title: vpc
+          slug: reference/cli-vpc
         - title: branches
           slug: reference/cli-branches
         - title: databases

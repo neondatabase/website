@@ -2,7 +2,7 @@
 title: Getting ready for production
 subtitle: Explore the features that will help you prepare for production with Neon
 enableTableOfContents: true
-updatedOn: '2024-12-13T20:52:57.581Z'
+updatedOn: '2025-02-03T20:41:57.304Z'
 ---
 
 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -71,13 +71,13 @@ For a busy production system that is always active, this setting may not matter 
 
 ## Use a pooled connection
 
-The Postgres `max_connections` setting defines your basic maximum simultaneous connection limit and is set according to your compute size. Larger computes support higher `max_connections` settings. However, Neon supports connection pooling with [PgBouncer](https://www.pgbouncer.org/), which increases your connection limit up to 10,000 simultaneous connections. Enabling connection pooling simply requires using a pooled connection string instead of a standard non-pooled connection string. A pooled connection string includes `-pooler` in the Neon hostname, as shown in this example:
+The Postgres `max_connections` setting defines your basic maximum simultaneous connection limit and is set according to your compute size configuration. However, Neon supports connection pooling with [PgBouncer](https://www.pgbouncer.org/), which increases your connection limit up to 10,000 simultaneous connections. Enabling connection pooling simply requires using a pooled connection string instead of a standard non-pooled connection string. A pooled connection string includes `-pooler` in the Neon hostname, as shown in this example:
 
 ```bash
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
-The `-pooler` flag directs connections to a connection pooling port at the Neon proxy. Unless you have a specific reason to avoid connection pooling, we recommend using it in production. You can copy a pooled connection string for your database from the **Connection Details** widget on your project's **Dashboard** in the Neon Console. Enable the **Connection pooling** toggle. For more information, see [Connection pooling](/docs/connect/connection-pooling).
+The `-pooler` flag directs connections to a connection pooling port at the Neon proxy. Unless you have a specific reason to avoid connection pooling, we recommend using it in production. You can find a pooled connection string for your database by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. The **Connection pooling** toggle should be enabled by default. For more information, see [Connection pooling](/docs/connect/connection-pooling).
 
 ## Configure your history retention period
 

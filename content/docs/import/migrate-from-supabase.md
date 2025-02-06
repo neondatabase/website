@@ -5,7 +5,7 @@ subtitle: Learn how to migrate your database from Supabase to Neon Postgres usin
 redirectFrom:
   - /docs/import/import-from-supabase
 enableTableOfContents: true
-updatedOn: '2025-01-27T15:25:05.413Z'
+updatedOn: '2025-02-03T20:41:57.342Z'
 ---
 
 This guide describes how to migrate a database from Supabase to Neon Postgres.
@@ -111,7 +111,7 @@ For more information, see [Create a database](/docs/manage/databases#create-a-da
 ### Retrieve Neon connection details
 
 1. In the Neon Console, go to your project dashboard.
-2. Find the **Connection Details** widget.
+2. Select **Connect** to open the **Connect to your database** modal.
 3. Copy the connection string. It will look similar to this:
 
    ```

@@ -63,7 +63,7 @@ PostgreSQL supports the most popular programming languages:
 - Python
 - Java
 - C\#
-- C/C\+
+- C/C\+\+
 - Ruby
 - JavaScript (Node.js)
 - Perl

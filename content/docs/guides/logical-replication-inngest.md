@@ -3,7 +3,7 @@ title: Replicate data with Inngest
 subtitle: Learn how to replicate data from Neon with Inngest
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-12-26T17:57:49.405Z'
+updatedOn: '2025-02-03T20:41:57.321Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -38,9 +38,7 @@ The Inngest Integration requires Postgres admin credentials to complete its setu
 
 ![Neon authorization step inside the Inngest integrations page](/docs/guides/inngest-integration-neon-authorize-step.png)
 
-You can find your admin Postgres credentials in your Neon project dashboard’s **Connection Details** section:
-
-![Connection details section on the Neon console dashboard](/docs/guides/neon-console-connection-details.png)
+You can find your admin Neon database connection credentials by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For details, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Example: Replicating data to Amplitude
 
