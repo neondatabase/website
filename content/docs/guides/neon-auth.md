@@ -167,7 +167,7 @@ CREATE TABLE posts (
 
 When querying data that relates to users:
 
-- Use LEFT JOINs instead of INNER JOINs with the `users_sync` table in case of any sync delays. This ensures that all records from the main table (.e.g. posts) are returned even if there's no matching user in the `users_sync` table yet.
+- Use LEFT JOINs instead of INNER JOINs with the `users_sync` table in case of any sync delays. This ensures that all records from the main table (e.g., posts) are returned even if there's no matching user in the `users_sync` table yet.
 - Filter out deleted users since the table uses soft deletes (users are marked with a `deleted_at` timestamp when deleted).
 
 Here's an example of how to handle both in your queries:
