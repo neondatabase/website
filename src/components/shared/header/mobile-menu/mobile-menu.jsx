@@ -7,14 +7,15 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 import Button from 'components/shared/button';
-import Burger from 'components/shared/header/burger';
 import InkeepTrigger from 'components/shared/inkeep-trigger';
 import Link from 'components/shared/link';
-import MenuBanner from 'components/shared/menu-banner';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus';
 import useMobileMenu from 'hooks/use-mobile-menu';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
+
+import Burger from '../burger';
+import MenuBanner from '../menu-banner';
 
 const AlgoliaSearch = dynamic(() => import('components/shared/algolia-search'), {
   ssr: false,
