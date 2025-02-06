@@ -137,9 +137,9 @@ Schema-only branches are independent [root branches](/docs/reference/glossary#ro
 
 There are certain allowances associated with schema-only branches:
 
-- A schema-only branch is a [root branch](/docs/reference/glossary#root-branch), and there is only a certain number of root branches permitted per Neon project, depending on your Neon plan.
+- A schema-only branch is a [root branch](/docs/reference/glossary#root-branch), and only a certain number of root branches are permitted per Neon project, depending on your Neon plan.
 - The `main` root branch created with each Neon project counts toward the _root branch allowance per project_, as do certain [backup branches](/docs/reference/glossary#backup-branch) created by restore operations.
-- There is a storage allowance for schema-only branches. The storage allowances do not apply when restoring data to a schema-only branch from another branch.
+- On the Free plan, all branches share a total storage limit of 0.5 GB. Schema-only branches count toward this limit like any other branch. On paid plans, storage limits are higher, but each schema-only branch has a maximum storage allowance, as outlined in the following table.
 
 | Plan     | Root branch allowance per project | Storage allowance per schema-only branch |
 | :------- | :-------------------------------- | :--------------------------------------- |
