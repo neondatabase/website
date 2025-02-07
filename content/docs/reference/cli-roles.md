@@ -95,6 +95,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--project-id`   | Project ID                                                                                    | string | Only if your Neon account has more than one project |
 | `--branch`       | Branch ID or name                                                                             | string |                                                     |
 | `--name`         | The role name. Cannot exceed 63 bytes in length.                                              | string |                       &check;                       |
+| `--no-login`     | Create a passwordless role that cannot login                                                  | boolean|                                                     |
 
 If a branch ID or name is not provided, the command creates a role in the default branch of the project.
 

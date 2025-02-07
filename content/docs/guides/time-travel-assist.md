@@ -26,7 +26,7 @@ However, you can see the history of operations related to the creation and delet
 
 ### How long do ephemeral endpoints remain active
 
-The ephemeral endpoints are created according to your configured [default compute size](/docs/manage/projects#reset-the-default-compute-size). An ephemeral compute remains active for as long as you keep running queries against it. After 30 seconds of inactivity, the timeline is deleted and the endpoint is removed.
+The ephemeral endpoints are created with a .50 CU compute size, which has 0.50 vCPU size with 2 GB of RAM. An ephemeral compute remains active for as long as you keep running queries against it. After 30 seconds of inactivity, the timeline is deleted and the endpoint is removed.
 
 ### History retention
 
@@ -183,5 +183,5 @@ The ephemeral endpoints used to run your Time Travel queries do contribute to yo
 
 A couple of details to note:
 
-- The endpoints are shortlived. They are suspended 10 seconds after you stop querying.
-- Since these endpoints are created according to your default compute size (which applies to all new branch computes you create), you may want to reduce this default if you're performing a lot of time-travel queries for troubleshooting.
+- The endpoints are shortlived. They are suspended 30 seconds after you stop querying.
+- Ephemeral endpoints are created with a .50 CU compute size, which has 0.50 vCPU size with 2 GB of RAM. This is Neon's second smallest compute size. For more about compute sizes in Neon, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute). For more about compute usage and billing, see [Usage metrics — Compute](/docs/introduction/usage-metrics#compute).
