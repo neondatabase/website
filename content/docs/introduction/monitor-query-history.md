@@ -14,7 +14,7 @@ You can monitor query history for your Neon project from the **Monitoring** page
 2. Go to **Monitoring**.
 3. Select the **Query History** tab.
 
-The query history view shows the top 100 previously run queries for the selected **Branch**, **Compute**, and **Database**. Queries can be sorted by **Frequency** or **Average time**. Use the **Refresh** button to load the latest queries.
+The **Query History** view shows the top 100 previously run queries for the selected **Branch**, **Compute**, and **Database**. Queries can be sorted by **Frequency** or **Average time**. Use the **Refresh** button to load the latest queries.
 
 ![Neon query history tab](/docs/introduction/query_history.png)
 

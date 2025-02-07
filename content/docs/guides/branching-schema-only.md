@@ -13,7 +13,7 @@ Neon supports creating schema-only branches, letting you create branches that re
 
 You can create schema-only branches in the Neon Console or using the Neon API, in much the same way you create any Neon branch. Support for the Neon CLI will come in a future release.
 
-<Tabs labels={["Neon Console", "API"]}>
+<Tabs labels={["Neon Console", "CLI", "API"]}>
 
 <TabItem>
 
@@ -26,6 +26,18 @@ To create a schema-only branch from the Neon Console:
 5. Provide a name for the branch.
 6. In the **From Branch** field, select the source branch. The schema from the source branch will be copied to your new schema-only branch.
 7. Click **Create branch**.
+
+</TabItem>
+
+<TabItem>
+
+To create a schema-only branch using the Neon CLI:
+
+```bash
+neon branch create --schema-only
+```
+
+If you have more than one project, you'll need to specify the `--project-id` option. See [Neon CLI - branch create](/docs/reference/cli-branches#create).
 
 </TabItem>
 
@@ -147,3 +159,5 @@ There are certain allowances associated with schema-only branches:
 | Launch   | 5                                 | 3 GB                                             |
 | Scale    | 10                                | 5 GB                                             |
 | Business | 25                                | 20 GB                                            |
+
+Once you use up your root branch allowance, you will not be able to create additional schema-only branches. You will be required to remove existing root branches first.
