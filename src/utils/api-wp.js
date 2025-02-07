@@ -226,7 +226,7 @@ const getAllPosts = async () => {
   // Separate first two featured posts
   const [featuredWpPosts, restWpPosts] = wpPosts.reduce(
     ([featured, rest], post) => {
-      if (post.pageBlogPost.isFeatured && featured.length < 2) {
+      if (post.pageBlogPost?.isFeatured && featured.length < 2) {
         featured.push(post);
       } else {
         rest.push(post);
