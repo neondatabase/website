@@ -299,6 +299,10 @@ To view permissions, manage which Vercel projects your integration has access to
    Removing the Neon Postgres Previews Integration removes the Vercel environment variables set by the integration. It does not remove Neon branches created by the integration. To remove Neon branches, see [Delete a branch](/docs/manage/branches#delete-a-branch).
    </Admonition>
 
+## Custom environment support
+
+The integration supports deployments to [Vercel custom environments](https://vercel.com/docs/deployments/custom-environments). However, [automated branch deletion](#automatic-deletion) does not remove environment variables created by the Neon integration in custom environments. These variables must be deleted manually in the Vercel dashboard.
+
 ## Troubleshoot connection issues
 
 This section describes commonly encountered connection issues for the Neon Postgres Previews Integration.

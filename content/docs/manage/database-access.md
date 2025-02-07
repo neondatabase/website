@@ -50,13 +50,17 @@ To create a read-only role:
 
 1. Connect to your database from an SQL client such as [psql](/docs/connect/query-with-psql-editor), [pgAdmin](https://www.pgadmin.org/), or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). If you need help connecting, see [Connect from any client](/docs/connect/connect-from-any-app).
 
-2. Create a `readonly` role using the following statement. A password is required.
+2. Create a `readonly` role using the following statement.
 
    ```sql
    CREATE ROLE readonly PASSWORD '<password>';
    ```
 
    The password should have at least 12 characters with a mix of lowercase, uppercase, number, and symbol characters. For detailed password guidelines, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
+
+   <Admonition type="note">
+   Neon also supports the `NOLOGIN` option: `CREATE ROLE role_name NOLOGIN;` This allows you to define roles that cannot authenticate but can be granted privileges.
+   </Admonition>
 
 3. Grant the `readonly` role read-only privileges on the schema. Replace `<database>` and `<schema>` with actual database and schema names, respectively.
 
@@ -126,7 +130,7 @@ To create a read-write role:
 
 1. Connect to your database from an SQL client such as [psql](/docs/connect/query-with-psql-editor), [pgAdmin](https://www.pgadmin.org/), or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). If you need help connecting, see [Connect from any client](/docs/connect/connect-from-any-app).
 
-2. Create a `readwrite` role using the following statement. A password is required.
+2. Create a `readwrite` role using the following statement.
 
    ```sql
    CREATE ROLE readwrite PASSWORD '<password>';

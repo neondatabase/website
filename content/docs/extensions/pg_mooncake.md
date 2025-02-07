@@ -29,15 +29,6 @@ In addition, you can:
 - Read existing Iceberg and Delta Lake tables
 - Write Delta Lake tables from Postgres tables
 
-**Version availability:**
-
-`pg_mooncake` is supported on the following versions of Postgres.
-
-- Postgres 14 - `pg_mooncake` 0.1.0
-- Postgres 15 - `pg_mooncake` 0.1.0
-- Postgres 16 - `pg_mooncake` 0.1.0
-- Postgres 17 -`pg_mooncake` 0.1.0
-
 <Admonition type="note">
 `pg_mooncake` is an open-source extension for Postgres that can be installed on any Neon Project using the instructions below.
 </Admonition>
