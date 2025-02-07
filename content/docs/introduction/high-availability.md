@@ -93,13 +93,13 @@ Multi-AZ support varies by region. **REGIONS LIST TBD**
 
 Here's a summary of how different types of compute failures are handled and their expected recovery times:
 
-| Failure type | Impact | Recovery mechanism | Recovery time |
-|--------------|---------|-------------------|---------------|
-| Postgres crash | Brief interruption | Automatic restart | Seconds |
-| VM failure | Brief interruption | VM recreation and endpoint reattachment | Seconds |
-| Unresponsive endpoint | Intermittent connectivity | Automatic recovery initiation | 5 minutes |
-| Node failure | Compute unavailable | Rescheduling to healthy nodes | ~2 minutes |
-| Availability Zone failure | Compute unavailable in affected AZ | Rescheduling to healthy AZs | 1-10 minutes |
+| Failure type              | Impact                             | Recovery mechanism                      | Recovery time |
+| ------------------------- | ---------------------------------- | --------------------------------------- | ------------- |
+| Postgres crash            | Brief interruption                 | Automatic restart                       | Seconds       |
+| VM failure                | Brief interruption                 | VM recreation and endpoint reattachment | Seconds       |
+| Unresponsive endpoint     | Intermittent connectivity          | Automatic recovery initiation           | 5 minutes     |
+| Node failure              | Compute unavailable                | Rescheduling to healthy nodes           | ~2 minutes    |
+| Availability Zone failure | Compute unavailable in affected AZ | Rescheduling to healthy AZs             | 1-10 minutes  |
 
 ### Impact on session data after failover?
 
