@@ -364,7 +364,7 @@ CREATE ROLE <name> WITH LOGIN PASSWORD 'password';
 ```
 
 - `WITH LOGIN` means that the role will have a login privilege, required for the role to log in to your Neon Postgres instance. If the role is used only for privilege management, the `WITH LOGIN` privilege is unnecessary.
-- A password is required and must have a minimum entropy of 60 bits.
+- A password must have a minimum entropy of 60 bits.
 
     <Admonition type="info">  
     To create a password with 60 bits of entropy, you can follow these password composition guidelines:
@@ -385,9 +385,26 @@ CREATE ROLE <name> WITH LOGIN PASSWORD 'password';
   Passwords must be supplied in plain text but are encrypted when stored. Hashed passwords are not supported.
 
   The guidelines should help you create a password with approximately 60 bits of entropy. However, depending on the exact characters used, the actual entropy might vary slightly. Always aim for a longer and more complex password if you're uncertain. It's also recommended to use a trusted password manager to create and store your complex passwords safely.
+
+  Neon also supports the `NOLOGIN` option: `CREATE ROLE role_name NOLOGIN;` This allows you to define roles that cannot authenticate but can be granted privileges.
   </Admonition>
 
 For role creation and access management examples, refer to the [Manage database access](/docs/manage/database-access) guide.
+
+## Creating NOLOGIN roles
+
+Neon supports creating Postgres roles with the `NOLOGIN` attribute. This allows you to define roles that cannot authenticate but can be granted privileges.
+
+  ```sql
+  CREATE ROLE my_role NOLOGIN;
+  ```
+
+  Roles with `NOLOGIN` are commonly used for permission management.
+
+  The Neon API and CLI also support creating `NOLOGIN` roles:
+
+  - The Neon API [Create role](https://api-docs.neon.tech/reference/createprojectbranchrole) endpoint supports a `no_login` attribute.
+  - The Neon CLI [`neon roles create`](/docs/reference/cli-roles#create) command supports a `--no-login` option.
 
 ## Protected role names
 

@@ -76,6 +76,12 @@ Neon requires that all connections use SSL/TLS encryption, but you can increase 
 
 It's included in your Neon connection string. Click the **Connection** button on your **Project Dashboard** to open the **Connect to your database** modal.
 
+## Save your connection details to 1Password
+
+If have a [1Password](https://1password.com/) browser extension, you can save your database connection details to 1Password directly from the Neon Console. In your **Project Dashboard**, click **Connect**, then click **Save in 1Password**.
+
+![1Password button on connection modal](/docs/connect/1_password_button.png)
+
 ## What port does Neon use?
 
 Neon uses the default Postgres port, `5432`.
