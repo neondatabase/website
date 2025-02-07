@@ -55,9 +55,9 @@ Here's a summary of how different storage components handle and recover from fai
 | Pageserver     | Read requests automatically route to secondary | Automatic failover to secondary     | Seconds       |
 | Object storage | No impact - 99.999999999% durability           | Multi-AZ redundancy built-in        | Immediate     |
 
-## Compute resiliency
+## Compute failover
 
-The compute layer does not yet support traditional high availability, but is built for resiliency and quick recovery from failures. A Neon compute is stateless, meaning failures do not affect your data. In the most common compute failures, _your connection string stays the same and new connections are automatically routed to the recovered instance_. However, as with any stateless service, your application should be configured to reconnect automatically. Downtime usually lasts seconds.
+Our serverless architecture manages compute failures through rapid recovery and automatic traffic redirection, without the need to maintain idle standby replicas. Because compute instances are stateless, failures don't affect your data, and your connection string remains stable. The system typically resolves issues within seconds to minutes, depending on the type of failure. However, your application should be configured to handle brief disconnections and reconnect automatically.
 
 ### Compute endpoints as metadata
 
@@ -75,33 +75,33 @@ In rarer cases, the VM itself may fail due to issues like a kernel panic or the 
 
 ![VM restarting after failure](/docs/introduction/vm_fails.png)
 
-#### Degraded endpoints
+#### Unresponsive endpoints
 
-If a compute endpoint is in a degraded state (repeatedly crashing and restarting rather than failing outright), we will detect and reattach it automatically, typically within 5 minutes. During this time, your application may experience intermittent connectivity.
+If a compute endpoint becomes unhealthy or unresponsive, we will automatically detect and reattach it to a new compute after 5 minutes. Your application may experience connectivity issues until the endpoint is restored.
 
 #### Node failures
 
-Node failures can affect multiple customers simultaneously when a Kubernetes node becomes unavailable. The control plane will reschedule compute instances to other healthy nodes, a process that typically takes a few minutes. While your data remains safe during this process, compute availability will be impacted until rescheduling is complete.
+Kubernetes nodes are the underlying infrastructure hosting multiple compute instances. When a node becomes unavailable, Neon automatically reschedules compute instances to other healthy nodes, a process that typically takes about 2 minutes. While your data remains safe during this process, compute availability will be impacted until rescheduling is complete.
 
 #### Availability Zone failures
 
-When an Availability Zone becomes unavailable, compute instances in that AZ will be automatically rescheduled to healthy AZs. Recovery time typically takes 1-10 minutes, depending on node availability in the destination AZs. Your connection string remains the same, and new connections will be routed to the recovered instance.
+Availability Zones are physically separate data centers within a cloud region. When an AZ becomes unavailable, compute instances in that AZ will be automatically rescheduled to healthy AZs. Recovery time typically takes 1-10 minutes, depending on node availability in the destination AZs. Your connection string remains the same, and new connections will be routed to the recovered instance.
 
 Multi-AZ support varies by region. **REGIONS LIST TBD**
 
-#### Recap of compute recovery times
+#### Recap of failover times
 
 Here's a summary of how different types of compute failures are handled and their expected recovery times:
 
-| Failure type              | Impact                             | Recovery mechanism                      | Recovery time   |
-| ------------------------- | ---------------------------------- | --------------------------------------- | --------------- |
-| Postgres crash            | Brief interruption                 | Automatic restart                       | Seconds         |
-| VM failure                | Brief interruption                 | VM recreation and endpoint reattachment | Seconds         |
-| Degraded endpoint         | Intermittent connectivity          | Automatic detection and reattachment    | Up to 5 minutes |
-| Node failure              | Compute unavailable                | Rescheduling to healthy nodes           | ~2 minutes      |
-| Availability Zone failure | Compute unavailable in affected AZ | Rescheduling to healthy AZs             | 1-10 minutes    |
+| Failure type | Impact | Recovery mechanism | Recovery time |
+|--------------|---------|-------------------|---------------|
+| Postgres crash | Brief interruption | Automatic restart | Seconds |
+| VM failure | Brief interruption | VM recreation and endpoint reattachment | Seconds |
+| Unresponsive endpoint | Intermittent connectivity | Automatic recovery initiation | 5 minutes |
+| Node failure | Compute unavailable | Rescheduling to healthy nodes | ~2 minutes |
+| Availability Zone failure | Compute unavailable in affected AZ | Rescheduling to healthy AZs | 1-10 minutes |
 
-### Impact on session data after a failure?
+### Impact on session data after failover?
 
 While your application should handle reconnections automatically, session-specific data like temporary tables, prepared statements, and the Local File Cache ([LFC](/docs/reference/glossary#local-file-cache)), which stores frequently accessed data, will not persist across a failover. As a result, queries may initially run more slowly until the Postgres memory buffers and cache are rebuilt.
 
