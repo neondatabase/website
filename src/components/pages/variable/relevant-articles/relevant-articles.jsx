@@ -1,6 +1,6 @@
 import Container from 'components/shared/container';
 import evolutionOfPostgres from 'images/pages/variable-load/relevant-articles/evolution-of-postgres.jpg';
-import { getWpPostBySlug } from 'utils/api-posts';
+import { getWpPostBySlug } from 'utils/api-wp';
 import getFormattedDate from 'utils/get-formatted-date';
 
 import Slider from './slider';

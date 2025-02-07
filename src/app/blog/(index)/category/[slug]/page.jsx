@@ -4,7 +4,7 @@ import BlogGridItem from 'components/pages/blog/blog-grid-item';
 import LoadMorePosts from 'components/shared/load-more-posts';
 import { BLOG_CATEGORY_BASE_PATH } from 'constants/blog';
 import { getBlogCategoryDescription } from 'constants/seo-data';
-import { getAllCategories, getCategoryBySlug, getPostsByCategorySlug } from 'utils/api-posts';
+import { getAllCategories, getCategoryBySlug, getPostsByCategorySlug } from 'utils/api-wp';
 import getMetadata from 'utils/get-metadata';
 
 // eslint-disable-next-line react/prop-types

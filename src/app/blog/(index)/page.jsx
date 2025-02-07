@@ -4,7 +4,7 @@ import BlogGridItem from 'components/pages/blog/blog-grid-item';
 import LoadMorePosts from 'components/shared/load-more-posts';
 import { BLOG_BASE_PATH } from 'constants/blog';
 import SEO_DATA from 'constants/seo-data';
-import { getAllPosts } from 'utils/api-posts';
+import { getAllPosts } from 'utils/api-wp';
 import getMetadata from 'utils/get-metadata';
 
 export const metadata = getMetadata({ ...SEO_DATA.blog, rssPathname: `${BLOG_BASE_PATH}rss.xml` });
