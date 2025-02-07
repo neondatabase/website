@@ -1077,10 +1077,13 @@
       icon: partner-guide # TODO change icon
       tag: new
       items:
-        - title: Full Twin (GitHub Actions)
-          slug: guides/neon-twin-full-github-actions
-        - title: Partial Twin (GitHub Actions)
-          slug: guides/neon-twin-partial-github-actions
+        - section: GitHub Actions
+          items:
+          - title: Full Twin
+            slug: guides/neon-twin-full-github-actions
+          - title: Partial Twin
+            slug: guides/neon-twin-partial-github-actions
+
 - section: noname
   items:
     - title: Community
