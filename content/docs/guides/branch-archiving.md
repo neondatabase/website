@@ -34,7 +34,6 @@ However, a branch **cannot** be archived if it:
 - Has **computes running**.
 - Is **in transition** (e.g., currently being created or unarchived).
 - Is a **protected branch** ([learn more](/docs/guides/protected-branches)).
-- Was created **less than 10 minutes ago** and has undergone a state change **within the last 5 minutes** (to prevent rapid archive/unarchive cycles).
 
 <Admonition type="note">
 If your Neon project was inactive for more than a week before the introduction of branch archiving on November 11, 2024, the thresholds mentioned above do not come into effect until the next time you access branches in your project.
