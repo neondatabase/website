@@ -2,7 +2,7 @@
 title: Connect from any application
 subtitle: Learn how to connect to Neon from any application
 enableTableOfContents: true
-updatedOn: '2025-02-03T20:41:57.299Z'
+updatedOn: '2025-02-07T19:29:48.910Z'
 ---
 
 <InfoBlock>
