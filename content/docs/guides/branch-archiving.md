@@ -28,12 +28,12 @@ To minimize storage costs, Neon automatically archives branches that are:
 
 Both conditions must be true for a branch to be archived.
 
-Additionally, these conditions apply:
-
-- A branch cannot be archived if it has an unarchived child branch.
-- A child branch must be archived before a parent branch can be archived.
-- [Protected branches](/docs/guides/protected-branches) are not archived.
-- On paid Neon plans, there is a limit of 100 unarchived branches per Neon project at any one time. If a project reaches the limit of 100 unarchived branches, Neon archives branches more aggressively, without waiting for the 14-day or 24-hour criteria outlined above. Also, please note that when a branch is unarchived, its ancestors are also unarchived. See [Unarchiving a branch](#unarchiving-a-branch).
+However, a branch **cannot** be archived if it:
+  - Has an **unarchived child branch**.
+  - Has **computes running**.
+  - Is **in transition** (e.g., currently being created or unarchived).
+  - Is a **protected branch** ([learn more](/docs/guides/protected-branches)).
+  - Was created **less than 10 minutes ago** and has undergone a state change **within the last 5 minutes** (to prevent rapid archive/unarchive cycles).
 
 <Admonition type="note">
 If your Neon project was inactive for more than a week before the introduction of branch archiving on November 11, 2024, the thresholds mentioned above do not come into effect until the next time you access branches in your project.
@@ -45,8 +45,10 @@ If your Neon project was inactive for more than a week before the introduction o
 
 Connecting to an archived branch, querying it, or performing some other action that accesses it will trigger the unarchive process. Branches with large amounts of data may experience slightly slower connection and query times while a branch is being unarchived.
 
+For projects on paid Neon plans, there is a limit of **100 unarchived branches per project**. If a project reaches this limit, Neon archives branches **without waiting** for the 14-day or 24-hour archiving criteria described above.
+
 <Admonition type="note">
-When a branch is unarchived, its parent branches, all the way up to the root branch, are also unarchived. If you use branches extensively, please keep this in mind and be aware that there is a limit of 100 unarchived branches per Neon project at any one time, as described in the preceding section.
+When a branch is unarchived, its parent branches, all the way up to the root branch, are also unarchived.
 </Admonition>
 
 The following actions will automatically unarchive a branch, transferring the branch's data back to regular Neon storage:
