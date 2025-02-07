@@ -126,7 +126,7 @@ In the declaration section, we declare a [variable](plpgsql-variables) `film_cou
 film_count integer = 0;
 ```
 
-Inside the body section, we use a [`select into`](https://neon.tech/postgresql/plpgsql-select-into/) statement with the [`count()`](../postgresql-aggregate-functions/postgresql-count-function) function to retrieve the number of films from the `film` table and assign it to the `film_count` variable:
+Inside the body section, we use a [`select into`](https://neon.tech/postgresql/postgresql-plpgsql/pl-pgsql-select-into/) statement with the [`count()`](../postgresql-aggregate-functions/postgresql-count-function) function to retrieve the number of films from the `film` table and assign it to the `film_count` variable:
 
 ```sql
 select count(*)
