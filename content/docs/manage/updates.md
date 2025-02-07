@@ -145,6 +145,6 @@ For compute restart instructions, see [Restart a compute](/docs/manage/endpoints
 
 Most Postgres connection drivers include built-in retry mechanisms that automatically handle short-lived connection interruptions. This means that for most applications, a brief restart should result in minimal disruption, as the driver will transparently reconnect.
 
-However, if your application has strict availability requirements, you may want to ensure that your connection settings are configured to allow for retries. Check your driver's documentation for options like connection timeouts, retry intervals, and connection pooling strategies. You retry configuration should account for the few seconds it takes to apply updates to your Neon compute.
+However, if your application has strict availability requirements, you may want to ensure that your connection settings are configured to allow for retries. Check your driver's documentation for options like connection timeouts, retry intervals, and connection pooling strategies. Your retry configuration should account for the few seconds it takes to apply updates to your Neon compute.
 
 <NeedHelp/>
