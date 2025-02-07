@@ -46,7 +46,7 @@ If your Neon project was inactive for more than a week before the introduction o
 Connecting to an archived branch, querying it, or performing some other action that accesses it will trigger the unarchive process. Branches with large amounts of data may experience slightly slower connection and query times while a branch is being unarchived.
 
 <Admonition type="note">
-When a branch is unarchived, its parent branches, all the way up to the root branch, are also unarchived. If you use branches extensively, please keep this in mind and be aware that there is a limit of 100 unarchived branches per Neon project at any one time. Exceeding this threshold causes Neon to archive branches more aggressively, as described in the preceding section.
+When a branch is unarchived, its parent branches, all the way up to the root branch, are also unarchived. If you use branches extensively, please keep this in mind and be aware that there is a limit of 100 unarchived branches per Neon project at any one time, as described in the preceding section.
 </Admonition>
 
 The following actions will automatically unarchive a branch, transferring the branch's data back to regular Neon storage:
