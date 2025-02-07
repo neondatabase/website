@@ -57,7 +57,7 @@ Here's a summary of how different storage components handle and recover from fai
 
 ## Compute resiliency
 
-The compute layer does not yet support traditional high availability, but is built for resiliency and quick recovery from failures. A Neon compute is stateless, meaning failures do not affect your data. In the most common compute failures, _your connection string stays the same and new connections are automatically routed to the recovered instance_. However, as with any stateless service, your application should be configured to reconnect automatically. Downtime usually lasts seconds.
+The compute layer is built for resiliency and quick recovery from failures. A Neon compute is stateless, meaning failures do not affect your data. In the most common compute failures, _your connection string stays the same and new connections are automatically routed to a newly instantiated compute instance_. However, as with any stateless service, your application should be configured to reconnect automatically. Downtime usually lasts seconds.
 
 ### Compute endpoints as metadata
 
