@@ -136,7 +136,7 @@ To create a read-write role:
    CREATE ROLE readwrite PASSWORD '<password>';
    ```
 
-   The password should have at least 12 characters with a mix of lowercase, uppercase, number, and symbol characters. For detailed password guidelines, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql). 
+   The password should have at least 12 characters with a mix of lowercase, uppercase, number, and symbol characters. For detailed password guidelines, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
 
 3. Grant the `readwrite` role read-write privileges on the schema. Replace `<database>` and `<schema>` with actual database and schema names, respectively.
 

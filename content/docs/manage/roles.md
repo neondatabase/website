@@ -395,16 +395,16 @@ For role creation and access management examples, refer to the [Manage database 
 
 Neon supports creating Postgres roles with the `NOLOGIN` attribute. This allows you to define roles that cannot authenticate but can be granted privileges.
 
-  ```sql
-  CREATE ROLE my_role NOLOGIN;
-  ```
+```sql
+CREATE ROLE my_role NOLOGIN;
+```
 
-  Roles with `NOLOGIN` are commonly used for permission management.
+Roles with `NOLOGIN` are commonly used for permission management.
 
-  The Neon API and CLI also support creating `NOLOGIN` roles:
+The Neon API and CLI also support creating `NOLOGIN` roles:
 
-  - The Neon API [Create role](https://api-docs.neon.tech/reference/createprojectbranchrole) endpoint supports a `no_login` attribute.
-  - The Neon CLI [`neon roles create`](/docs/reference/cli-roles#create) command supports a `--no-login` option.
+- The Neon API [Create role](https://api-docs.neon.tech/reference/createprojectbranchrole) endpoint supports a `no_login` attribute.
+- The Neon CLI [`neon roles create`](/docs/reference/cli-roles#create) command supports a `--no-login` option.
 
 ## Protected role names
 
