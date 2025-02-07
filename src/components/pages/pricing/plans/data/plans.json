@@ -94,8 +94,7 @@
     {
       "rows": "2",
       "feature": {
-        "title": "Branches",
-        "info": "Schema and data"
+        "title": "Branches"
       },
       "free": "10 <span>per project</span>",
       "launch": "5,000 <span>per project</span>",
