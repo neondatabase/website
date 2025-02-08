@@ -46,6 +46,7 @@ const styles = {
       'border bg-transparent border-gray-new-15 text-white hover:border-gray-new-30',
     'with-icon':
       'pl-[4.1rem] xl:pl-[4.25rem] lg:pl-[4.25rem] bg-green-45 text-black hover:bg-[#00e5bf]',
+    ghost: 'bg-transparent text-white hover:bg-gray-new-20',
   },
 };
 

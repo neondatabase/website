@@ -38,6 +38,7 @@ import Link from 'components/shared/link';
 import RegionRequest from 'components/shared/region-request';
 import getCodeProps from 'lib/rehype-code-props';
 import getGlossaryItem from 'utils/get-glossary-item';
+import { SqlEditor } from 'components/pages/doc/inline-sql-editor/inline-sql-editor';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
 
@@ -179,6 +180,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   InkeepEmbedded,
   Video,
   Steps,
+  SqlEditor,
   ...sharedComponents,
 });
 
