@@ -51,6 +51,8 @@ The entire Neon storage framework is developed in Rust for maximum performance a
 
 Neon's Logical Replication feature enables replicating data from your Neon database to external destinations, allowing for Change Data Capture (CDC) and real-time analytics. Stream your data to data warehouses, analytical database services, messaging platforms, event-streaming platforms, external Postgres databases, and more. To learn more, see [Get started with logical replication](/docs/guides/logical-replication-guide).
 
+You can also replicate data to Neon from other Postgres platforms and instances. See our [logical replication migration guides](/docs/guides/logical-replication-guide#replicate-data-to-neon) to get started.
+
 ## Scale with read replicas
 
 **Add read replicas to achieve instant scale.**
