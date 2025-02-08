@@ -122,25 +122,25 @@ Neon supports the [pgvector](/docs/extensions/pgvector) Postgres extension for s
 
 - **GitHub Actions**
 
-    Neon provides the GitHub Actions for working with database branches, which you can add to your CI workflows. To learn more, see [Automate branching with GitHub Actions](/docs/guides/branching-github-actions).
+  Neon provides the GitHub Actions for working with database branches, which you can add to your CI workflows. To learn more, see [Automate branching with GitHub Actions](/docs/guides/branching-github-actions).
 
-    ```yaml
-    name: Create Neon Branch with GitHub Actions Demo
-    run-name: Create a Neon Branch 🚀
-    jobs:
-      Create-Neon-Branch:
-        uses: neondatabase/create-branch-action@v5
-        with:
-          project_id: rapid-haze-373089
-          # optional (defaults to your project's default branch)
-          parent: dev
-          # optional (defaults to neondb)
-          database: my-database
-          branch_name: from_action_reusable
-          username: db_user_for_url
-          api_key: ${{ secrets.NEON_API_KEY }}
-        id: create-branch
-      - run: echo db_url ${{ steps.create-branch.outputs.db_url }}
-      - run: echo host ${{ steps.create-branch.outputs.host }}
-      - run: echo branch_id ${{ steps.create-branch.outputs.branch_id }}
-    ```
+  ```yaml
+  name: Create Neon Branch with GitHub Actions Demo
+  run-name: Create a Neon Branch 🚀
+  jobs:
+    Create-Neon-Branch:
+      uses: neondatabase/create-branch-action@v5
+      with:
+        project_id: rapid-haze-373089
+        # optional (defaults to your project's default branch)
+        parent: dev
+        # optional (defaults to neondb)
+        database: my-database
+        branch_name: from_action_reusable
+        username: db_user_for_url
+        api_key: ${{ secrets.NEON_API_KEY }}
+      id: create-branch
+    - run: echo db_url ${{ steps.create-branch.outputs.db_url }}
+    - run: echo host ${{ steps.create-branch.outputs.host }}
+    - run: echo branch_id ${{ steps.create-branch.outputs.branch_id }}
+  ```
