@@ -1,19 +1,32 @@
-import { cookies } from 'next/headers';
-import { neon } from '@neondatabase/serverless';
-import { NextResponse } from 'next/server';
 import { createApiClient } from '@neondatabase/api-client';
-
-export const neonApiClient = createApiClient({
-  apiKey: process.env.NEON_API_KEY,
-});
-
+import { neon } from '@neondatabase/serverless';
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
-import { findClosestRegion, regions } from './regions';
+import { cookies } from 'next/headers';
+import { NextResponse } from 'next/server';
+
+import { findClosestRegion } from './regions';
+
+const RATE_LIMIT_REQUESTS = 10;
+const RATE_LIMIT_WINDOW = '10 s';
+const DATABASE_QUOTA_BYTES = 250000000; // 250MB
+const PG_VERSION = 17;
+const MIN_COMPUTE_UNITS = 0.25;
+const MAX_COMPUTE_UNITS = 0.25;
+const SUSPEND_TIMEOUT_SECONDS = 120; // 2 minutes
+const PROJECT_COOKIE_MAX_AGE_SECONDS = 3600; // 1 hour
+const PROJECT_COOKIE_NAME = 'neon-project';
+
+const neonApiClient = createApiClient({
+  apiKey: process.env.DEPLOY_POSTGRES_NEON_API_KEY,
+});
 
 const ratelimit = new Ratelimit({
-  redis: Redis.fromEnv(),
-  limiter: Ratelimit.slidingWindow(10, '10 s'),
+  redis: new Redis({
+    url: process.env.DEPLOY_POSTGRES_UPSTASH_REDIS_REST_URL,
+    token: process.env.DEPLOY_POSTGRES_UPSTASH_REDIS_REST_TOKEN,
+  }),
+  limiter: Ratelimit.slidingWindow(RATE_LIMIT_REQUESTS, RATE_LIMIT_WINDOW),
   analytics: true,
 });
 
@@ -40,7 +53,7 @@ export async function POST(request) {
   const responseStartTime = Date.now();
 
   const cookieStore = await cookies();
-  const projectDataCookie = cookieStore.get('neon-project');
+  const projectDataCookie = cookieStore.get(PROJECT_COOKIE_NAME);
 
   if (projectDataCookie) {
     const parsedProjectData = JSON.parse(projectDataCookie.value);
@@ -65,14 +78,14 @@ export async function POST(request) {
       }),
       settings: {
         quota: {
-          logical_size_bytes: 250000000, // 250MB
+          logical_size_bytes: DATABASE_QUOTA_BYTES,
         },
       },
-      pg_version: 16,
+      pg_version: PG_VERSION,
       default_endpoint_settings: {
-        autoscaling_limit_min_cu: 0.25,
-        autoscaling_limit_max_cu: 0.25,
-        suspend_timeout_seconds: 120, // 2 minutes
+        autoscaling_limit_min_cu: MIN_COMPUTE_UNITS,
+        autoscaling_limit_max_cu: MAX_COMPUTE_UNITS,
+        suspend_timeout_seconds: SUSPEND_TIMEOUT_SECONDS,
       },
     },
   });
@@ -92,21 +105,9 @@ export async function POST(request) {
   }
 
   const timeToProvision = Date.now() - start;
-  /*
-  // Run this query to set up the database
-    CREATE TABLE projects (
-        id SERIAL PRIMARY KEY,
-        project_id VARCHAR(256) NOT NULL UNIQUE,
-        region VARCHAR(256) NOT NULL,
-        created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
-        is_deleted BOOLEAN DEFAULT FALSE
-    );
 
-    CREATE INDEX project_id_idx ON projects (project_id);
-  */
   try {
-    const sql = neon(process.env.DATABASE_URL);
+    const sql = neon(process.env.DEPLOY_POSTGRES_DATABASE_URL);
     await sql`
       INSERT INTO projects (project_id, region)
       VALUES (${data?.project.id}, ${data?.project.region_id})
@@ -144,11 +145,11 @@ export async function POST(request) {
   );
 
   // Set client-side cookie through response headers
-  response.cookies.set('neon-project', JSON.stringify(newProjectData), {
+  response.cookies.set(PROJECT_COOKIE_NAME, JSON.stringify(newProjectData), {
     httpOnly: false, // Allow JavaScript access
     secure: true,
     sameSite: 'none',
-    maxAge: 300, // 5 minutes
+    maxAge: PROJECT_COOKIE_MAX_AGE_SECONDS, // 5 minutes
   });
 
   return response;
