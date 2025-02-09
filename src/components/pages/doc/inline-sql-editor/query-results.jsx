@@ -1,5 +1,3 @@
-import useMeasure from 'react-use-measure';
-import * as React from 'react';
 import * as Tabs from '@radix-ui/react-tabs';
 import {
   useReactTable,
@@ -7,6 +5,8 @@ import {
   getPaginationRowModel,
   flexRender,
 } from '@tanstack/react-table';
+import PropTypes from 'prop-types';
+import * as React from 'react';
 
 export const QueryResults = ({ queryResults }) => {
   if (!queryResults?.length) {
@@ -27,7 +27,7 @@ export const QueryResults = ({ queryResults }) => {
         ))}
       </Tabs.List>
 
-      {queryResults.map(({ success, error, queryTime, result }, i) => (
+      {queryResults.map(({ success, error, result }, i) => (
         <Tabs.Content
           key={i.toString()}
           value={i.toString()}
@@ -36,7 +36,6 @@ export const QueryResults = ({ queryResults }) => {
           <StatusIndicator
             success={success}
             message={success ? 'Query ran successfully' : error.message}
-            queryTime={queryTime}
           />
 
           {success && <ResultTable result={result} />}
@@ -44,6 +43,27 @@ export const QueryResults = ({ queryResults }) => {
       ))}
     </Tabs.Root>
   );
+};
+
+QueryResults.propTypes = {
+  queryResults: PropTypes.arrayOf(
+    PropTypes.shape({
+      success: PropTypes.bool.isRequired,
+      error: PropTypes.shape({
+        message: PropTypes.string.isRequired,
+      }),
+      result: PropTypes.shape({
+        command: PropTypes.string,
+        fields: PropTypes.arrayOf(
+          PropTypes.shape({
+            name: PropTypes.string.isRequired,
+          })
+        ),
+        rows: PropTypes.array.isRequired,
+        rowCount: PropTypes.number.isRequired,
+      }),
+    })
+  ),
 };
 
 const TablePagination = ({ table, rowCount }) => (
@@ -55,9 +75,9 @@ const TablePagination = ({ table, rowCount }) => (
       <button
         type="button"
         disabled={!table.getCanPreviousPage()}
-        onClick={() => table.previousPage()}
         className="p-1 text-white/70 hover:text-white disabled:opacity-30 disabled:hover:text-white/70"
         aria-label="Previous page"
+        onClick={() => table.previousPage()}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -79,9 +99,9 @@ const TablePagination = ({ table, rowCount }) => (
       <button
         type="button"
         disabled={!table.getCanNextPage()}
-        onClick={() => table.nextPage()}
         className="p-1 text-white/70 hover:text-white disabled:opacity-30 disabled:hover:text-white/70"
         aria-label="Next page"
+        onClick={() => table.nextPage()}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -100,6 +120,18 @@ const TablePagination = ({ table, rowCount }) => (
     </div>
   </div>
 );
+
+TablePagination.propTypes = {
+  table: PropTypes.shape({
+    getCanPreviousPage: PropTypes.func.isRequired,
+    getCanNextPage: PropTypes.func.isRequired,
+    previousPage: PropTypes.func.isRequired,
+    nextPage: PropTypes.func.isRequired,
+    getState: PropTypes.func.isRequired,
+    getPageCount: PropTypes.func.isRequired,
+  }).isRequired,
+  rowCount: PropTypes.number.isRequired,
+};
 
 const ResultTable = ({ result }) => {
   const columns =
@@ -182,7 +214,19 @@ const ResultTable = ({ result }) => {
   );
 };
 
-const StatusIndicator = ({ success, message, queryTime }) => (
+ResultTable.propTypes = {
+  result: PropTypes.shape({
+    fields: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+      })
+    ),
+    rows: PropTypes.array.isRequired,
+    rowCount: PropTypes.number.isRequired,
+  }),
+};
+
+const StatusIndicator = ({ success, message }) => (
   <div className="flex w-full items-center space-x-2">
     {success ? (
       <svg
@@ -225,3 +269,8 @@ const StatusIndicator = ({ success, message, queryTime }) => (
     <p className="text-sm">{message}</p>
   </div>
 );
+
+StatusIndicator.propTypes = {
+  success: PropTypes.bool.isRequired,
+  message: PropTypes.string.isRequired,
+};
