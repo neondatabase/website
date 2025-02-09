@@ -1,6 +1,4 @@
 import AiAgentsIcon from 'icons/header/ai-agent.inline.svg';
-import AiGradientIcon from 'icons/header/ai-gradient.inline.svg';
-import AiIcon from 'icons/header/ai.inline.svg';
 import ApiGradientIcon from 'icons/header/api-gradient.inline.svg';
 import ApiIcon from 'icons/header/api.inline.svg';
 import AutoscalingGradientIcon from 'icons/header/autoscaling-gradient.inline.svg';
@@ -12,6 +10,7 @@ import CareerIcon from 'icons/header/career.inline.svg';
 import ChatIcon from 'icons/header/chat.inline.svg';
 import ConnectionGradientIcon from 'icons/header/connection-gradient.inline.svg';
 import ConnectionIcon from 'icons/header/connection.inline.svg';
+import DatabaseGradientIcon from 'icons/header/database-gradient.inline.svg';
 import DatabaseIcon from 'icons/header/database.inline.svg';
 import FlowGradientIcon from 'icons/header/flow-gradient.inline.svg';
 import FlowIcon from 'icons/header/flow.inline.svg';
@@ -53,10 +52,10 @@ export default {
               to: LINKS.connectionPooling,
             },
             {
-              icon: AiIcon,
-              iconGradient: AiGradientIcon,
-              title: 'AI',
-              description: 'Powered by pgvector',
+              icon: DatabaseIcon,
+              iconGradient: DatabaseGradientIcon,
+              title: 'Instant PITR',
+              description: 'Copy-on-write storage',
               to: LINKS.ai,
             },
           ],
@@ -65,8 +64,8 @@ export default {
         {
           banner: {
             title: 'What is Neon?',
-            description: 'Serverless explainer updated',
-            to: LINKS.serverless,
+            description: 'Serverless Postgres',
+            to: LINKS.whyNeon,
           },
         },
         {
@@ -75,15 +74,15 @@ export default {
             {
               icon: FlowIcon,
               iconGradient: FlowGradientIcon,
-              title: 'Dev environments',
-              description: 'Copy schema + data',
+              title: 'Branching',
+              description: 'For ephemeral environments',
               to: LINKS.flow,
             },
             {
               icon: MigrationIcon,
               iconGradient: MigrationGradientIcon,
               title: 'Migration tool',
-              description: 'Thousands of connections',
+              description: 'Move data to Neon',
               to: LINKS.migration,
             },
           ],
@@ -96,14 +95,14 @@ export default {
               icon: PrivacyIcon,
               iconGradient: PrivacyGradientIcon,
               title: 'Authorize',
-              description: 'UI for data management',
+              description: 'RLS made simple',
               to: LINKS.authorize,
             },
             {
               icon: ApiIcon,
               iconGradient: ApiGradientIcon,
               title: 'Identity',
-              description: 'Thousands of connections',
+              description: 'Authenticate your users',
               to: LINKS.api,
             },
           ],
@@ -124,8 +123,8 @@ export default {
             },
             {
               icon: VariableIcon,
-              title: 'Variable Traffic',
-              to: LINKS.variableLoad,
+              title: 'Serverless Apps',
+              to: LINKS.variableTraffic,
             },
             {
               icon: DatabaseIcon,

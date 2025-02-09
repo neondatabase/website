@@ -41,10 +41,12 @@ export default {
   cliReference: '/docs/reference/neon-cli',
   connectionPooling: '/docs/connect/connection-pooling',
   docsBranching: '/docs/introduction/branching',
-  migration: '/docs/import/migrate-intro',
+  migration: '/docs/import/migration-assistant',
   security: '/docs/security/security-overview',
   serverless: '/docs/introduction/serverless',
   support: '/docs/introduction/support',
+  variableTraffic: '/docs/use-cases/variable-traffic',
+  whyNeon: '/docs/get-started-with-neon/why-neon',
   // Legal
   dpa: '/dpa',
   terms: '/terms-of-service',
