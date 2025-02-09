@@ -1,13 +1,17 @@
-import * as React from 'react';
+import { sql } from '@codemirror/lang-sql';
 import * as Dialog from '@radix-ui/react-dialog';
 import Editor, { EditorView } from '@uiw/react-codemirror';
-import { sql } from '@codemirror/lang-sql';
+import PropTypes from 'prop-types';
+import * as React from 'react';
+
 import Button from 'components/shared/button';
-import CloseIcon from './images/close.inline.svg';
-import SettingsIcon from './images/settings.inline.svg';
+import Tooltip from 'components/shared/tooltip';
 import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
-import CopyIcon from './images/copy.inline.svg';
+
 import CheckIcon from './images/check.inline.svg';
+import CloseIcon from './images/close.inline.svg';
+import CopyIcon from './images/copy.inline.svg';
+import SettingsIcon from './images/settings.inline.svg';
 
 export const SetupQueryDialog = ({ setupQuery, onSetupQueryChange }) => {
   const { isCopied, handleCopy } = useCopyToClipboard(3000);
@@ -15,10 +19,16 @@ export const SetupQueryDialog = ({ setupQuery, onSetupQueryChange }) => {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <Button theme="ghost" size="xxs" className="!p-2">
+        <Button theme="ghost" size="xxs" className="!p-2" data-tooltip-id="setup-query-tooltip">
           <SettingsIcon className="h-4 w-4" />
         </Button>
       </Dialog.Trigger>
+      <Tooltip
+        id="setup-query-tooltip"
+        content="Configure initial setup query"
+        place="top"
+        arrowColor="inherit"
+      />
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-[150] bg-[rgba(12,13,13,0.2)] data-[state=closed]:animate-fade-out-overlay data-[state=open]:animate-fade-in-overlay dark:bg-black/80" />
         <Dialog.Content className="fixed left-1/2 top-1/2 z-[150] mx-auto max-h-[85vh] w-full max-w-[756px] -translate-x-1/2 -translate-y-1/2 lg:h-full lg:max-h-full lg:max-w-full">
@@ -49,7 +59,6 @@ export const SetupQueryDialog = ({ setupQuery, onSetupQueryChange }) => {
                     highlightActiveLine: false,
                   }}
                   extensions={[sql({ upperCaseKeywords: true }), EditorView.lineWrapping]}
-                  onChange={onSetupQueryChange}
                   minHeight="auto"
                   style={{
                     fontFamily:
@@ -60,6 +69,7 @@ export const SetupQueryDialog = ({ setupQuery, onSetupQueryChange }) => {
                     minHeight: '200px',
                     padding: '8px 10px',
                   }}
+                  onChange={onSetupQueryChange}
                 />
 
                 <button
@@ -67,8 +77,8 @@ export const SetupQueryDialog = ({ setupQuery, onSetupQueryChange }) => {
                   size="xxs"
                   className="invisible absolute right-2 top-2 rounded border border-gray-7 bg-gray-9 p-1.5 text-gray-new-80 opacity-0 transition-[background-color,opacity,visibility] duration-200 hover:bg-white group-hover:visible group-hover:opacity-100 dark:border-gray-3 dark:bg-gray-new-10 dark:text-gray-8 dark:hover:bg-gray-new-8 lg:visible lg:opacity-100"
                   type="button"
-                  onClick={() => handleCopy(setupQuery)}
                   disabled={isCopied}
+                  onClick={() => handleCopy(setupQuery)}
                 >
                   {isCopied ? <CheckIcon className="h-4 w-4" /> : <CopyIcon className="h-4 w-4" />}
                 </button>
@@ -86,4 +96,9 @@ export const SetupQueryDialog = ({ setupQuery, onSetupQueryChange }) => {
       </Dialog.Portal>
     </Dialog.Root>
   );
+};
+
+SetupQueryDialog.propTypes = {
+  setupQuery: PropTypes.string.isRequired,
+  onSetupQueryChange: PropTypes.func.isRequired,
 };
