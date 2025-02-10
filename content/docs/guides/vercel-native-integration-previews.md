@@ -6,6 +6,10 @@ isDraft: false
 updatedOn: '2024-12-11T21:23:33.087Z'
 ---
 
+<Admonition type="comingSoon" title="Feature coming soon">
+This feature is currently awaiting release. It will be opened to all Vercel Native Integration users soon.
+</Admonition>
+
 <InfoBlock>
 <DocsList title="What you will learn:">
 <p>How to create a database branch for each preview deployment</p>
