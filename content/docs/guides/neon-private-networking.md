@@ -77,9 +77,9 @@ To configure Neon Private Networking, perform the following steps:
 
     <TabItem>
 
-    In the following example, the VCP endpoint ID is assigned to a Neon organization in the specified AWS region.
+    In the following example, the VCP endpoint ID is assigned to a Neon organization in the specified AWS region using the [neon vpc endpoint](/docs/reference/cli-vpc#the-vpc-endpoint-subcommand) command.
 
-    ```bash
+    ```bash shouldWrap
     neon vpc endpoint assign vpce-1234567890abcdef0 --org-id org-bold-bonus-12345678 --region-id aws-us-east-2
     ```
 
@@ -134,21 +134,60 @@ To configure Neon Private Networking, perform the following steps:
 
     At this point, it's still possible to connect to your Neon database over the public internet using the original Neon database connection string.
 
-    To restrict public internet access via this connection string, use Neon's [IP Allow](/docs/introduction/ip-allow) feature in the Neon Console. For IP Allow configuration instructions, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
+    You can restrict public internet access via this connection string via the Neon Console, CLI, or API.
+    
+    <Tabs labels={["Neon Console", "CLI", "API"]}>
+    
+    <TabItem>
 
-    You can access your **IP Allow** configuration from your Neon's project's **Settings** page.
+    To block access via the Neon Console, you can use Neon's [IP Allow](/docs/introduction/ip-allow) feature.
 
-    Enter **0.0.0.0** in the allowlist to block all connections over the public internet, and click **Save changes**.
+    You can access your **IP Allow** configuration for your Neon project on the ****Network security** page in your project's **Settings**.
 
-    <Admonition type="note">
-     Your Private Networking connection will not be affected by this IP Allow configuration.
-    </Admonition>
+    Enter **0.0.0.0** in the ***Allowed IP addresses and ranges***** to block all connections over the public internet, and click **Save changes**.
 
     ![Neon IP Allow configuration](/docs/guides/pl_neon_ip_allow.png)
 
-    <Admonition type="note">
-     Using the IP allowlist feature for blocking access from the public internet is only for the Private Preview. In the final version of this feature, there will be a dedicated option in the Neon Console for this purpose.
-    </Admonition>
+    </TabItem>
+    
+    <TabItem>
+        
+    To block access via the Neon CLI, use the [neon projects update](/docs/reference/cli-projects#update) command with the `--block-public-connections` option.
+
+    ```bash
+    neon projects update ---block-public-connections
+    ```
+
+    If you've got more than one Neon project, specify the `--project-id` option with your Neon project ID. You can find you Neon project ID under your project's settings in the Neon Console, or by running this Neon CLI command: `neon projects list`
+
+    </TabItem>
+    
+    <TabItem>
+
+    To block access via the Neon API, use the [Update project](https://api-docs.neon.tech/reference/updateproject) endpoint with the `block_public_connections` settings object attribute.
+    
+    ```bash
+    curl --request PATCH \
+     --url https://console.neon.tech/api/v2/projects/young-sun-41825641 \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '
+    {
+    "project": {
+        "settings": {
+        "block_public_connections": true
+        }
+    }
+    }
+    '
+    ```
+
+    </TabItem>
+    
+    </Tabs>
+
+    
 
 </Steps>
 
@@ -166,7 +205,7 @@ You can specify a CLI command similar to the following to restrict project acces
 neon vpc project restrict vpce-1234567890abcdef0 --project-id orange-credit-12345678
 ```
 
-You will ne to provide the VPC endpoint ID that you want to restrict and your Neon project ID. You can find you Neon project ID under your project's settings in the Neon Console, or by running this Neon CLI command: `neon projects list`
+You will need to provide the VPC endpoint ID that you want to restrict and your Neon project ID. You can find you Neon project ID under your project's settings in the Neon Console, or by running this Neon CLI command: `neon projects list`
 
 </TabItem>
 
