@@ -195,11 +195,11 @@ Now that you’ve configured your database network and created an ingestion clus
    CREATE SOURCE mz_source
    IN CLUSTER ingest_postgres
    FROM POSTGRES CONNECTION pg_connection (PUBLICATION 'mz_source')
-   FOR ALL TABLES;
+   FOR TABLES <table1>, <table2>;
    ```
 
    <Admonition type="tip" title="Tips">
-   - To ingest data from specific schemas or tables in your publication, you can use `FOR SCHEMAS (<schema1>,<schema2>)` or `FOR TABLES (<table1>, <table2>)` instead of `FOR ALL TABLES`.
+   - To ingest data from specific schemas, you can use `FOR SCHEMAS (<schema1>,<schema2>)`.
    - After creating a source, you can incorporate upstream schema changes for specific replicated tables using the `ALTER SOURCE...{ADD | DROP} SUBSOURCE` syntax.
    </Admonition>
 

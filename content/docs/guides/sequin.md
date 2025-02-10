@@ -66,17 +66,9 @@ After enabling logical replication on Neon, you'll now connect your Neon databas
 
 4. Create a publication to indicate which tables will publish changes to the replication slot. Run the following SQL command:
 
-   ```sql
-   CREATE PUBLICATION sequin_pub FOR ALL TABLES;
-   ```
-
-   This will publish changes from all tables. If you want to publish changes from specific tables only, you can use:
-
-   ```sql
+    ```sql
    CREATE PUBLICATION sequin_pub FOR TABLE table1, table2, table3;
    ```
-
-   Defining specific tables lets you add or remove tables from the publication later, which you cannot do if you've created a publication with `FOR ALL TABLES`.
 
 5. Back in the Sequin Console, enter the name of the replication slot (`sequin_slot`) and publication (`sequin_pub`) you just created. Then, name your database (e.g. `neondb`) and click **Create Database**.
 

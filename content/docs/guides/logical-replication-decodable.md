@@ -121,7 +121,6 @@ CREATE PUBLICATION dbz_publication FOR TABLE <tbl1, tbl2, tbl3>;
 ```
 
 Refer to the [Postgres docs](https://www.postgresql.org/docs/current/sql-alterpublication.html) if you need to add or remove tables from your publication.
-Alternatively, you also can create a publication `FOR ALL TABLES`.
 
 Upon start-up, the Decodable connector for Postgres will automatically create the [replication slot](https://www.postgresql.org/docs/current/logicaldecoding-explanation.html#LOGICALDECODING-REPLICATION-SLOTS) required for ingesting data change events from Postgres.
 The slot's name will be prefixed with `decodable_`, followed by a unique identifier.
