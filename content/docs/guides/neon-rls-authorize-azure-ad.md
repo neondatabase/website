@@ -1,68 +1,69 @@
 ---
-title: Secure your data with Stack Auth and Neon Authorize
-subtitle: Implement Row-level Security policies in Postgres using Stack Auth and Neon
-  Authorize
+title: Secure your data with Azure Active Directory and Neon RLS Authorize
+subtitle: Implement Row-level Security policies in Postgres using Azure Active Directory and Neon RLS Authorize
 enableTableOfContents: true
-updatedOn: '2025-02-03T20:41:57.329Z'
+updatedOn: '2025-02-03T20:41:57.325Z'
+redirectFrom:
+  - /docs/guides/neon-authorize-azure-ad
 ---
 
 <InfoBlock>
 <DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/stack-nextjs-neon-authorize">Stack Auth + Neon Authorize</a>
+  <a href="https://github.com/neondatabase-labs/azure-ad-b2c-nextjs-neon-rls-authorize">Azure Active Directory + Neon RLS Authorize</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
-  <a href="/docs/guides/neon-authorize-tutorial">Neon Authorize Tutorial</a>
-   <a href="/docs/guides/neon-authorize-drizzle">Simplify RLS with Drizzle</a>
+  <a href="/docs/guides/neon-rls-authorize-tutorial">Neon RLS Authorize Tutorial</a>
+  <a href="/docs/guides/neon-rls-authorize-drizzle">Simplify RLS with Drizzle</a>
 </DocsList>
 </InfoBlock>
 
-Use Stack Auth with Neon Authorize to add secure, database-level authorization to your application. This guide assumes you already have an application using Stack Auth for user authentication. It shows you how to integrate Stack Auth with Neon Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
+Use Azure Active Directory with Neon RLS Authorize to add secure, database-level authorization to your application. This guide assumes you already have an application using Azure Active Directory for user authentication. It shows you how to integrate Azure Active Directory with Neon RLS Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 
 ## How it works
 
-Stack Auth handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon Authorize. Neon Authorize validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
+Azure Active Directory handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon RLS Authorize. Neon RLS Authorize validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
 
 ## Prerequisites
 
 To follow along with this guide, you will need:
 
 - A Neon account. Sign up at [Neon](https://neon.tech) if you don't have one.
-- A [Stack Auth](https://stack-auth.com/) account with an existing application (e.g., a **todos** app) that uses Stack Auth for user authentication. If you don't have an app, check our [demo](https://github.com/neondatabase-labs/stack-nextjs-neon-authorize) for similar schema and policies in action.
+- A [Azure Active Directory](https://aws.amazon.com/pm/cognito/) account with an existing application (e.g., a **todos** app) that uses Azure Active Directory for user authentication. If you don't have an app, check our [demo](https://github.com/neondatabase-labs/stytch-nextjs-neon-rls) for similar schema and policies in action.
 
-## Integrate Stack Auth with Neon Authorize
+## Integrate Azure Active Directory with Neon RLS Authorize
 
-In this first set of steps, we’ll integrate Stack Auth as an authorization provider in Neon. When these steps are complete, Stack Auth will start passing JWTs to your Neon database, which you can then use to create policies.
+In this first set of steps, we'll integrate Azure Active Directory as an authorization provider in Neon. When these steps are complete, Azure Active Directory will start passing JWTs to your Neon database, which you can then use to create policies.
 
-### 1. Get your Stack Auth JWKS URL
+### 1. Get your Azure Active Directory JWKS URL
 
-When integrating Stack Auth with Neon, you'll need to provide the JWKS (JSON Web Key Set) URL. This allows your database to validate the JWT tokens and extract the user_id for use in RLS policies.
+When integrating Azure Active Directory with Neon, you'll need to provide the JWKS (JSON Web Key Set) URL. This allows your database to validate the JWT tokens and extract the user_id for use in RLS policies.
 
-The Stack Auth JWKS URL follows this format:
+The Azure Active Directory JWKS URL follows this format:
 
-```plaintext shouldWrap
-https://api.stack-auth.com/api/v1/projects/{YOUR_PROJECT_ID}/.well-known/jwks.json
+```
+https://login.microsoftonline.com/{YOUR_TENANT_ID}/discovery/v2.0/keys
 ```
 
-Replace `{YOUR_PROJECT_ID}` with your actual Stack Auth project ID. For example, if your project ID is `my-awesome-project`, your JWKS URL would be:
+Replace `{YOUR_TENANT_ID}` with your Azure Active Directory tenant ID. For example, if your tenant ID is `12345678-1234-1234-1234-1234567890ab`, the JWKS URL will be:
 
-```plaintext shouldWrap
-https://api.stack-auth.com/api/v1/projects/my-awesome-project/.well-known/jwks.json
+```
+https://login.microsoftonline.com/12345678-1234-1234-1234-1234567890ab/discovery/v2.0/keys
 ```
 
-### 2. Add Stack Auth as an authorization provider in the Neon Console
+### 2. Add Azure Active Directory as an authorization provider in the Neon Console
 
-Once you have the JWKS URL, go to the **Neon Console** and add Stack Auth as an authentication provider under the **Authorize** page. Paste your copied URL and Stack Auth will be automatically recognized and selected.
+Once you have the JWKS URL, go to the **Neon Console**, navigate to **Settings** > **RLS Authorize**, and add Azure Active Directory as an authentication provider. Paste your copied URL and Azure Active Directory will be automatically recognized and selected.
 
 <div style={{ display: 'flex', justifyContent: 'center'}}>
-  <img src="/docs/guides/stack_auth_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
+  <img src="/docs/guides/azure_ad_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
 </div>
 
-At this point, you can use the **Get Started** setup steps from the Authorize page in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
+At this point, you can use the **Get Started** setup steps from RLS Authorize in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
 
 ### 3. Install the pg_session_jwt extension in your database
 
-Neon Authorize uses the [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt) extension to handle authenticated sessions through JSON Web Tokens (JWTs). This extension allows secure transmission of authentication data from your application to Postgres, where you can enforce Row-Level Security (RLS) policies based on the user's identity.
+Neon RLS Authorize uses the [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt) extension to handle authenticated sessions through JSON Web Tokens (JWTs). This extension allows secure transmission of authentication data from your application to Postgres, where you can enforce Row-Level Security (RLS) policies based on the user's identity.
 
 To install the extension in the `neondb` database, run:
 
@@ -105,7 +106,7 @@ GRANT USAGE ON SCHEMA public TO anonymous;
 
 ### 5. Install the Neon Serverless Driver
 
-Neon’s Serverless Driver manages the connection between your application and the Neon Postgres database. For Neon Authorize, you must use HTTP. While it is technically possible to access the HTTP API without using our driver, we recommend using the driver for best performance. The driver also supports WebSockets and TCP connections, so make sure you use the HTTP method when working with Neon Authorize.
+Neon's Serverless Driver manages the connection between your application and the Neon Postgres database. For Neon RLS Authorize, you must use HTTP. While it is technically possible to access the HTTP API without using our driver, we recommend using the driver for best performance. The driver also supports WebSockets and TCP connections, so make sure you use the HTTP method when working with Neon RLS Authorize.
 
 Install it using the following command:
 
@@ -138,7 +139,7 @@ The `DATABASE_URL` is intended for admin tasks and can run any query while the `
 
 ## Add RLS policies
 
-Now that you’ve integrated Stack Auth with Neon Authorize, you can securely pass JWTs to your Neon database. Let's start looking at how to add RLS policies to your schema and how you can execute authenticated queries from your application.
+Now that you've integrated Azure Active Directory with Neon RLS Authorize, you can securely pass JWTs to your Neon database. Let's start looking at how to add RLS policies to your schema and how you can execute authenticated queries from your application.
 
 ### 1. Add Row-Level Security policies
 
@@ -189,7 +190,7 @@ CREATE TABLE todos (
   user_id text not null default (auth.user_id()),
   task text check (char_length(task) > 0),
   is_complete boolean default false,
-  inserted_at timestamp not null default now()
+  inserted_at timestamptz not null default now()
 );
 
 -- 1st enable row level security for your table
@@ -221,9 +222,9 @@ The `crudPolicy` function simplifies policy creation by generating all necessary
 
 ### 2. Run your first authorized query
 
-With RLS policies in place, you can now query the database using JWTs from Stack Auth, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from both the backend and the frontend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
+With RLS policies in place, you can now query the database using JWTs from Azure Active Directory, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from both the backend and the frontend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
 
-<Tabs labels={["server-component.tsx","client-component.tsx",".env"]}>
+<Tabs labels={["server-component.tsx", "client-component.tsx",".env"]}>
 
 <TabItem>
 
@@ -231,24 +232,28 @@ With RLS policies in place, you can now query the database using JWTs from Stack
 'use server';
 
 import { neon } from '@neondatabase/serverless';
-import { stackServerApp } from "@/stack";
+import { getUserInfo } from '@/lib/auth'
 
-export async function TodoList() {
-  const user = await stackServerApp.getUser();
+export default async function TodoList() {
+  const userInfo = await getUserInfo(); // [!code highlight]
+  if (!userInfo) {
+    throw new Error('No user info available');
+  }
+
   const sql = neon(process.env.DATABASE_AUTHENTICATED_URL!, {
     authToken: async () => {
-      const authToken = (await user?.getAuthJson())?.accessToken; // [!code highlight]
-      if (!authToken) {
-        throw new Error('No token');
+      const jwt = userInfo.token; // [!code highlight]
+      if (!jwt) {
+        throw new Error('No JWT token available');
       }
-      return authToken;
+      return jwt;
     },
   });
 
   // WHERE filter is optional because of RLS.
   // But we send it anyway for performance reasons.
   const todos = await
-    sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
+    sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
 
   return (
     <ul>
@@ -269,7 +274,7 @@ export async function TodoList() {
 
 import type { Todo } from '@/app/schema';
 import { neon } from '@neondatabase/serverless';
-import { useUser } from '@stackframe/stack';
+import { useMsal } from "@azure/msal-react";
 import { useEffect, useState } from 'react';
 
 const getDb = (token: string) =>
@@ -277,30 +282,35 @@ const getDb = (token: string) =>
     authToken: token, // [!code highlight]
   });
 
-export function TodoList() {
-  const user = useUser();
+export default function TodoList() {
   const [todos, setTodos] = useState<Array<Todo>>();
+  const { instance } = useMsal();
 
   useEffect(() => {
-    async function loadTodos() {
-      const authToken = (await user?.getAuthJson())?.accessToken; // [!code highlight]
+    async function fetchTodos() {
+      const activeAccount = instance.getActiveAccount();
 
-      if (!authToken) {
+      if (
+        !activeAccount ||
+        !activeAccount.idToken ||
+        !activeAccount.idTokenClaims?.sub
+      ) {
         return;
       }
 
+      const authToken = activeAccount.idToken; // [!code highlight]
       const sql = getDb(authToken);
 
       // WHERE filter is optional because of RLS.
       // But we send it anyway for performance reasons.
       const todosResponse = await
-        sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
+        sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
 
       setTodos(todosResponse as Array<Todo>);
     }
 
-    loadTodos();
-  }, [user]);
+    fetchTodos();
+  }, []);
 
   return (
     <ul>

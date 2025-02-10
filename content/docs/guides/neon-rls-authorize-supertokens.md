@@ -1,72 +1,73 @@
 ---
-title: Secure your data with PropelAuth and Neon Authorize
-subtitle: Implement Row-level Security policies in Postgres using PropelAuth and Neon
-  Authorize
+title: Secure your data with SuperTokens and Neon RLS Authorize
+subtitle: Implement Row-level Security policies in Postgres using SuperTokens and Neon RLS Authorize
 enableTableOfContents: true
-updatedOn: '2025-02-03T20:41:57.328Z'
+updatedOn: '2025-02-03T20:41:57.330Z'
+redirectFrom:
+  - /docs/guides/neon-authorize-supertokens
 ---
 
 <InfoBlock>
 <DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/propelauth-nextjs-neon-authorize">PropelAuth + Neon Authorize</a>
+  <a href="https://github.com/neondatabase-labs/supertokens-nestjs-solidjs-drizzle-neon-rls-authorize">SuperTokens + Neon RLS Authorize</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
-  <a href="/docs/guides/neon-authorize-tutorial">Neon Authorize Tutorial</a>
-  <a href="/docs/guides/neon-authorize-drizzle">Simplify RLS with Drizzle</a>
+  <a href="/docs/guides/neon-rls-authorize-tutorial">Neon RLS Authorize Tutorial</a>
+  <a href="/docs/guides/neon-rls-authorize-drizzle">Simplify RLS with Drizzle</a>
 </DocsList>
 </InfoBlock>
 
-Use PropelAuth with Neon Authorize to add secure, database-level authorization to your application. This guide assumes you already have an application using PropelAuth for user authentication. It shows you how to integrate PropelAuth with Neon Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
+Use SuperTokens with Neon RLS Authorize to add secure, database-level authorization to your application. This guide assumes you already have an application using SuperTokens for user authentication. It shows you how to integrate SuperTokens with Neon RLS Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 
 ## How it works
 
-PropelAuth handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon Authorize. Neon Authorize validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
+SuperTokens handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon RLS Authorize. Neon RLS Authorize validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
 
 ## Prerequisites
 
 To follow along with this guide, you will need:
 
 - A Neon account. Sign up at [Neon](https://neon.tech) if you don't have one.
-- A [PropelAuth](https://www.propelauth.com/) project with an existing application (e.g., a **todos** app) that uses PropelAuth for user authentication. If you don't have an app, check our [demo](https://github.com/neondatabase-labs/propelauth-nextjs-neon-authorize) for similar schema and policies in action.
+- A [SuperTokens](https://www.supertokens.com) service either managed/self-hosted with an existing application (e.g., a todos app) that uses SuperTokens for user authentication.
 
-## Integrate PropelAuth with Neon Authorize
+## Integrate SuperTokens with Neon RLS Authorize
 
-In this first set of steps, we’ll integrate PropelAuth as an authorization provider in Neon. When these steps are complete, PropelAuth will start passing JWTs to your Neon database, which you can then use to create policies.
+In this first set of steps, we'll integrate SuperTokens as an authorization provider in Neon. When these steps are complete, SuperTokens will start passing JWTs to your Neon database, which you can then use to create policies.
 
-### 1. Get your PropelAuth JWKS URL
+### 1. Get your SuperTokens JWKS URL
 
-When integrating PropelAuth with Neon, you'll need to provide the JWKS (JSON Web Key Set) URL. This allows your database to validate the JWT tokens and extract the user_id for use in RLS policies.
+When integrating SuperTokens with Neon, you'll need to provide the JWKS (JSON Web Key Set) URL. This allows your database to validate the JWT tokens and extract the user_id for use in RLS policies.
 
-The PropelAuth JWKS URL follows this format:
-
-```
-https://{YOUR_PROPEL_AUTH_URL}/.well-known/jwks.json
-```
-
-You can locate your PropelAuth Auth URL by navigating to the **Backend Integration** section in your PropelAuth project settings
-
-![PropelAuth Auth URL](/docs/guides/propelauth_backend_integration_page.png)
-
-Replace `{YOUR_PROPEL_AUTH_URL}` with your PropelAuth URL. For example, if your PropelAuth URL is `https://3211758.propelauthtest.com`, your JWKS URL would be:
+The SuperTokens JWKS URL follows this format:
 
 ```
-https://3211758.propelauthtest.com/.well-known/jwks.json
+{YOUR_SUPER_TOKENS_CORE_CONNECTION_URI}/.well-known/jwks.json
 ```
 
-### 2. Add PropelAuth as an authorization provider in the Neon Console
+You can locate your SuperTokens Core connection URI in the SuperTokens Dashboard under **Core Management**.
 
-Once you have the JWKS URL, go to the **Neon Console** and add PropelAuth as an authentication provider under the **Authorize** page. Paste your copied URL into the **Json Web Key Set (JWKS) URL** field.
+![SuperTokens Dashboard](/docs/guides/supertokens_dashboard.png)
+
+Replace `{YOUR_SUPER_TOKENS_CORE_CONNECTION_URI}` with your actual connection URI. For example, if your connection URI is `https://try.supertokens.io`, your JWKS URL would be:
+
+```bash
+https://try.supertokens.io/.well-known/jwks.json
+```
+
+### 2. Add SuperTokens as an authorization provider in the Neon Console
+
+Once you have the JWKS URL, go to the **Neon Console**, navigate to **Settings** > **RLS Authorize**, and add SuperTokens as an authentication provider. Paste your copied URL and SuperTokens will be automatically recognized and selected.
 
 <div style={{ display: 'flex', justifyContent: 'center'}}>
-  <img src="/docs/guides/propelauth_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
+  <img src="/docs/guides/supertokens_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
 </div>
 
-At this point, you can use the **Get Started** setup steps from the Authorize page in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
+At this point, you can use the **Get Started** setup steps from RLS Authorize in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
 
 ### 3. Install the pg_session_jwt extension in your database
 
-Neon Authorize uses the [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt) extension to handle authenticated sessions through JSON Web Tokens (JWTs). This extension allows secure transmission of authentication data from your application to Postgres, where you can enforce Row-Level Security (RLS) policies based on the user's identity.
+Neon RLS Authorize uses the [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt) extension to handle authenticated sessions through JSON Web Tokens (JWTs). This extension allows secure transmission of authentication data from your application to Postgres, where you can enforce Row-Level Security (RLS) policies based on the user's identity.
 
 To install the extension in the `neondb` database, run:
 
@@ -109,7 +110,7 @@ GRANT USAGE ON SCHEMA public TO anonymous;
 
 ### 5. Install the Neon Serverless Driver
 
-Neon’s Serverless Driver manages the connection between your application and the Neon Postgres database. For Neon Authorize, you must use HTTP. While it is technically possible to access the HTTP API without using our driver, we recommend using the driver for best performance. The driver also supports WebSockets and TCP connections, so make sure you use the HTTP method when working with Neon Authorize.
+Neon's Serverless Driver manages the connection between your application and the Neon Postgres database. For Neon RLS Authorize, you must use HTTP. While it is technically possible to access the HTTP API without using our driver, we recommend using the driver for best performance. The driver also supports WebSockets and TCP connections, so make sure you use the HTTP method when working with Neon RLS Authorize.
 
 Install it using the following command:
 
@@ -142,7 +143,7 @@ The `DATABASE_URL` is intended for admin tasks and can run any query while the `
 
 ## Add RLS policies
 
-Now that you’ve integrated PropelAuth with Neon Authorize, you can securely pass JWTs to your Neon database. Let's start looking at how to add RLS policies to your schema and how you can execute authenticated queries from your application.
+Now that you've integrated SuperTokens with Neon RLS Authorize, you can securely pass JWTs to your Neon database. Let's start looking at how to add RLS policies to your schema and how you can execute authenticated queries from your application.
 
 ### 1. Add Row-Level Security policies
 
@@ -225,9 +226,9 @@ The `crudPolicy` function simplifies policy creation by generating all necessary
 
 ### 2. Run your first authorized query
 
-With RLS policies in place, you can now query the database using JWTs from PropelAuth, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from both the backend and the frontend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
+With RLS policies in place, you can now query the database using JWTs from SuperTokens, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from the backend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
 
-<Tabs labels={["server-component.tsx","client-component.tsx",".env"]}>
+<Tabs labels={["server-component.tsx", "client-component.tsx" ,".env"]}>
 
 <TabItem>
 
@@ -235,29 +236,25 @@ With RLS policies in place, you can now query the database using JWTs from Prope
 'use server';
 
 import { neon } from '@neondatabase/serverless';
-import { getUser, getAccessTokenAsync } from "@propelauth/nextjs/server/app-router";
+import { cookies } from "next/headers";
 
 export default async function TodoList() {
-    const user = await getUser();
-    if (!user) {
-        throw new Error('No user');
-    }
-
-    const jwt = await getAccessTokenAsync(); // [!code highlight]
-
+    const parsed_cookies = await cookies();
+    const accessToken = parsed_cookies.get("sAccessToken")?.value; // [!code highlight]
     const sql = neon(process.env.DATABASE_AUTHENTICATED_URL!, {
         authToken: async () => {
-            if (!jwt) {
-                throw new Error('No JWT token available');
+            const token = accessToken;
+            if (!token) {
+                throw new Error('No token found');
             }
-            return jwt; // [!code highlight]
+            return token; // [!code highlight]
         },
     });
 
     // WHERE filter is optional because of RLS.
     // But we send it anyway for performance reasons.
     const todos = await
-        sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
+      sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
 
     return (
         <ul>
@@ -278,7 +275,7 @@ export default async function TodoList() {
 
 import type { Todo } from '@/app/schema';
 import { neon } from '@neondatabase/serverless';
-import { useUser } from "@propelauth/nextjs/client";
+import Session from 'supertokens-web-js/recipe/session';
 import { useEffect, useState } from 'react';
 
 const getDb = (token: string) =>
@@ -287,12 +284,14 @@ const getDb = (token: string) =>
     });
 
 export default function TodoList() {
-    const { accessToken } = useUser();  // [!code highlight]
     const [todos, setTodos] = useState<Array<Todo>>();
+    const session = Session;
 
     useEffect(() => {
         async function loadTodos() {
+            const accessToken = await session.getAccessToken(); // [!code highlight]
             if (!accessToken) {
+                console.error('No access token available');
                 return;
             }
 
@@ -301,13 +300,13 @@ export default function TodoList() {
             // WHERE filter is optional because of RLS.
             // But we send it anyway for performance reasons.
             const todosResponse = await
-                sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
+              sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
 
             setTodos(todosResponse as Array<Todo>);
         }
 
         loadTodos();
-    }, [accessToken]);
+    }, [session]);
 
     return (
         <ul>

@@ -1,11 +1,13 @@
 ---
-title: Neon Authorize Troubleshooting
-subtitle: Common issues and solutions when using Neon Authorize
+title: Troubleshooting Neon RLS Authorize
+subtitle: Common issues and solutions when using Neon RLS Authorize
 enableTableOfContents: true
 updatedOn: '2024-10-30T14:14:05.674Z'
+redirectFrom:
+  - /docs/guides/neon-authorize-troubleshooting
 ---
 
-This page covers common errors you might encounter when implementing Row-Level Security (RLS) policies with Neon Authorize and your authentication provider.
+This page covers common errors you might encounter when implementing Row-Level Security (RLS) policies with Neon RLS Authorize and your authentication provider.
 
 Errors:
 
@@ -27,7 +29,7 @@ This issue typically occurs when:
 
 1. **JWKS URL not configured or incorrect**
 
-   You did not add the JWKS URL in the Authorize UI, or the configured JWKS URL is not returning the key associated with the `kid` field in your JWT.
+   You did not add the JWKS URL in the RLS Authorize settings, or the configured JWKS URL is not returning the key associated with the `kid` field in your JWT.
 
 2. **JWT and JWKS mismatch**
 
@@ -35,7 +37,7 @@ This issue typically occurs when:
 
 3. **Unsupported role name**
 
-   The Postgres username used in your connection string is not a role registered for Neon Authorize. Currently, only the roles `anonymous` and `authenticated` are supported. Make sure that the role name in your connection string matches one of these supported roles.
+   The Postgres username used in your connection string is not a role registered for Neon RLS Authorize. Currently, only the roles `anonymous` and `authenticated` are supported. Make sure that the role name in your connection string matches one of these supported roles.
 
 **Solution:**
 
@@ -88,7 +90,7 @@ TO anonymous;
 ```
 
 <Admonition type="note">
-Neon Authorize prompts you to run these commands when you first set up your authentication provider on the Neon Authorize drawer in the Neon Console. If you're using a different database, you will have to run these commands manually.
+Neon RLS Authorize prompts you to run these commands when you first set up your authentication provider on the Neon RLS Authorize drawer in the Neon Console. If you're using a different database, you will have to run these commands manually.
 </Admonition>
 
 ---
@@ -99,7 +101,7 @@ Neon Authorize prompts you to run these commands when you first set up your auth
 invalid RSA signing algorithm
 ```
 
-Neon Authorize only supports JWTs signed with the `ES256` and `RS256` algorithms. If the Neon Proxy receives a JWT signed with any other algorithm, it will produce an error.
+Neon RLS Authorize only supports JWTs signed with the `ES256` and `RS256` algorithms. If the Neon Proxy receives a JWT signed with any other algorithm, it will produce an error.
 
 **Solution:**
 
