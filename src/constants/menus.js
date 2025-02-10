@@ -178,8 +178,8 @@ export default {
             light: caseDevIcon,
             dark: caseDevDarkIcon,
           },
-          text: 'Dev/Test',
-          description: 'For ephemeral environments',
+          text: 'Neon for Dev/Test',
+          description: 'Sandbox non-prod workloads',
           to: `${LINKS.useCases}/dev-test`,
         },
         {

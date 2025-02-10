@@ -178,3 +178,9 @@ In your repository, go to **Settings** > **Secrets and variables** > **Actions**
 To manually trigger your workflow go to **Actions** > **Create Neon Twin** then click **Run workflow**. From the dropdown, click the **Run workflow** button.
 
 ![github actions run workflow](/docs/guides/twin_diagram_test_workflow.png)
+
+## Further Reading
+
+- [TODO: Automate Partial Data Dumps with PostgreSQL and GitHub Actions](https://neon.tech/blog/)
+- [Building Slack notifications to monitor pg_dump and restore workflows](https://neon.tech/blog/building-slack-notifications-to-monitor-pg_dump-and-restore-workflows)
+- [Neon Twin: How to deploy a change tested in Neon to prod in RDS](https://neon.tech/blog/neon-twin-deploy-workflow)

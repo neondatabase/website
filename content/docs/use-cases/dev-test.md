@@ -1,6 +1,6 @@
 ---
 title: Neon for Development and Testing
-subtitle: Boost developer productivity by running non-production workloads on Neon
+subtitle: Boost developer productivity with Neon—a flexible development sandbox for running non-production workloads.
 enableTableOfContents: true
 updatedOn: '2025-02-03T16:55:54.792Z'
 ---
@@ -23,7 +23,7 @@ Together, these features create a fast, flexible, and developer-friendly databas
 
 ## Move non-production to Neon
 
-Not every team is ready for a full database migration. However, even if teams aren’t ready to migrate their production databases, they can still improve efficiency by moving their non-production environments to Neon.
+Not every team is ready for a full database migration. However, even if teams aren’t ready to migrate their production databases, they can still improve efficiency by moving their non-production workloads to Neon using a [Neon Twin](/docs/guides/neon-twin-intro).
 
 ## Workflows
 

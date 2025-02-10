@@ -1,6 +1,6 @@
 ---
-title: 'Optimize Dev/Test'
-subtitle: Use Neon for your ephemeral environments
+title: Neon for Development and Testing
+subtitle: Boost developer productivity with Neon—a flexible development sandbox for running non-production workloads.
 enableTableOfContents: true
 updatedOn: '2024-08-23T09:00:00.000Z'
 image: '/images/social-previews/use-cases/dev-test.jpg'

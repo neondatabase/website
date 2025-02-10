@@ -377,6 +377,7 @@
       slug: use-cases/use-cases-overview
       icon: docs
       items:
+
         - title: SaaS apps
           slug: use-cases/saas-apps
         - title: Variable traffic
@@ -389,6 +390,7 @@
           slug: use-cases/platforms
         - title: Dev/Test
           slug: use-cases/dev-test
+
     - title: Regions
       slug: introduction/regions
       icon: regions
