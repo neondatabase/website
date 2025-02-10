@@ -250,9 +250,7 @@ You can restart a compute using one of the following methods:
 
 ## Delete a compute
 
-Deleting a compute is a permanent action.
-
-To delete a compute :
+To delete a compute:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
