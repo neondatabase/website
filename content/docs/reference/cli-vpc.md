@@ -2,7 +2,7 @@
 title: Neon CLI commands — vpc
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2025-02-05T00:04:30.545Z'
+updatedOn: '2025-02-05T17:44:21.066Z'
 ---
 
 ## Before you begin
@@ -27,12 +27,12 @@ The `vpc endpoint` subcommand lets you to list, assign, remove, and get the stat
 
 ### Usage
 
-| Subcommand               | Description                                                                                                                           |
-| :----------------------- | :------------------------------------------------------------------------------------------------------------------------------------ |
-| [list](#list)            | List configured VPC endpoints for the Neon organization.                                                                              |
-| [assign](#assign) `<id>` | Add or update a VPC endpoint in the Neon organization. The ID is the VPC endpoint ID. Aliases for this command are `add` and `update` |
-| [remove](#remove) `<id>` | Remove a VPC endpoint from the Neon organization. The ID is the VPC endpoint ID.                                                      |
-| [status](#status) `<id>` | Get the status of a VPC endpoint for the Neon organization. The ID is the VPC endpoint ID.                                            |
+| Subcommand    | Description                                                                                                                           |
+| :------------ | :------------------------------------------------------------------------------------------------------------------------------------ |
+| `list`        | List configured VPC endpoints for the Neon organization.                                                                              |
+| `assign <id>` | Add or update a VPC endpoint in the Neon organization. The ID is the VPC endpoint ID. Aliases for this command are `add` and `update` |
+| `remove <id>` | Remove a VPC endpoint from the Neon organization. The ID is the VPC endpoint ID.                                                      |
+| `status <id>` | Get the status of a VPC endpoint for the Neon organization. The ID is the VPC endpoint ID.                                            |
 
 ### Options
 
@@ -86,11 +86,11 @@ The `vpc project` subcommand lets you list, configure, or remove VPC endpoint re
 
 ### Usage
 
-| Subcommand                   | Description                                                                                                    |
-| :--------------------------- | :------------------------------------------------------------------------------------------------------------- |
-| [list](#list)                | List all VPC endpoint restrictions for a specific project.                                                     |
-| [restrict](#restrict) `<id>` | Configure or update a VPC endpoint restriction for a project. The ID is the VPC endpoint ID. [Alias: `update`] |
-| [remove](#remove) `<id>`     | Remove a VPC endpoint restriction from a project. The ID is the VPC endpoint ID.                               |
+| Subcommand      | Description                                                                                                    |
+| :-------------- | :------------------------------------------------------------------------------------------------------------- |
+| `list`          | List all VPC endpoint restrictions for a specific project.                                                     |
+| `restrict <id>` | Configure or update a VPC endpoint restriction for a project. The ID is the VPC endpoint ID. [Alias: `update`] |
+| `remove <id>`   | Remove a VPC endpoint restriction from a project. The ID is the VPC endpoint ID.                               |
 
 ### Options
 
@@ -109,7 +109,6 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
   ```bash
   neon vpc project list --project-id orange-credit-12345678
-
   ```
 
 - **Restrict connections to a specific VPC**

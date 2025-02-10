@@ -1,7 +1,7 @@
 ---
 title: Support
 enableTableOfContents: true
-updatedOn: '2025-01-26T14:13:30.506Z'
+updatedOn: '2025-02-05T21:35:45.795Z'
 ---
 
 This page outlines Neon's support plans, available channels, and policies. To learn how to access support, please refer to the [Support channels](#support-channels) section. Identify the channels available to you based on your plan and follow the links to navigate to the relevant information.
@@ -32,11 +32,14 @@ The support channels you can access differ according to your [Support Plan](#sup
 | [Neon AI Chat Assistance](#neon-ai-chat-assistance) (not an official channel) |  &check;  | &check;  | &check;  |  &check;   |
 | [Support tickets](#support-tickets)                                           |     -     | &check;  | &check;  |  &check;   |
 | [Prioritized support tickets](#prioritized-support-tickets)                   |     -     |    -     | &check;  |  &check;   |
-| [Video chat](#video-chat)                                                     |     -     |    -     |    \*    |     \*     |
+| [Video chat](#video-chat)                                                     |     -     |    -     |    -     |     \*     |
+| [Slack channel](#slack-channel)                                               |     -     |    -     |    -     |     \*     |
 | [SLAs](#slas)                                                                 |     -     |    -     | &check;  |  &check;   |
+| [Dedicated Support Engineer](#dedicated-support-engineer)                     |     -     |    -     |    -     |    \*\*    |
 
 <div style={{margin: '-30px 0 30px 0'}}>
-<small><sup>*</sup>Video chats may be scheduled on a case-by-case basis. See [Video chat](#video-chat).</small>
+<small><sup>*</sup>Video chats may be scheduled on a case-by-case basis. See [Video chat](#video-chat).</small><br/>
+<small><sup>**</sup>Dedicated Support Engineers are available as a paid addon. See [Dedicated Support Engineer](#dedicated-support-engineer).</small>
 </div>
 
 ### Neon Discord Server
@@ -87,9 +90,17 @@ Support tickets opened by Priority and Enterprise support plan customers are giv
 
 Video chat is available to Priority and Enterprise support plan customers and may be scheduled on a case-by-case basis through the [support ticket](#support-tickets) process.
 
+### Slack channel
+
+[Slack connect](https://slack.com/intl/en-ie/connect) channels are available to Enterprise support plan customers. You can request one from our [sales team](/contact-sales).
+
 ### SLAs
 
 Support Level Agreements (SLAs) are available to Business and Enterprise support plan customers. For Business plan, see [Business Plan SLA](https://neon.tech/neon-business-sla). If you are interested in exploring an Enterprise-level SLA, [get in touch with our sales team](/contact-sales).
+
+### Dedicated Support Engineer
+
+The Dedicated Support Engineer option is available to Business and Enterprise customers. A dedicated engineer can develop in-depth knowledge of your systems, leading to more efficient issue resolution. To learn more, [contact our sales team](/contact-sales).
 
 ## General support policy
 
@@ -117,12 +128,12 @@ The table below outlines Neon’s guidelines for the various support tiers of ou
 
 These times relate to the time it takes Neon to respond to the Customer’s initial request. This guideline only applies when submitting a support ticket through the Neon Console.
 
-|    Severity Level     | Enterprise Standard                       | Enterprise Gold                          |
-| :-------------------: | ----------------------------------------- | ---------------------------------------- |
-| Severity 1 (Critical) | \< 2 hours (during Normal Business Hours) | \< 1 hour                                |
-|   Severity 2 (High)   | \< 2 days (during Normal Business Hours)  | \< 1 day                                 |
-|  Severity 3 (Normal)  | \< 3 days (during Normal Business Hours)  | \< 3 days (during Normal Business Hours) |
-|   Severity 4 (Low)    | \< 3 days (during Normal Business Hours)  | \< 3 days (during Normal Business Hours) |
+|    Severity Level     | Enterprise Standard                       | Enterprise Gold                          | Enterprise Platinum                      |
+| :-------------------: | ----------------------------------------- | ---------------------------------------- | ---------------------------------------- |
+| Severity 1 (Critical) | \< 2 hours (during Normal Business Hours) | \< 1 hour                                | \< 1 hour                                |
+|   Severity 2 (High)   | \< 2 days (during Normal Business Hours)  | \< 1 day                                 | \< 4 hours                               |
+|  Severity 3 (Normal)  | \< 3 days (during Normal Business Hours)  | \< 3 days (during Normal Business Hours) | \< 3 days (during Normal Business Hours) |
+|   Severity 4 (Low)    | \< 3 days (during Normal Business Hours)  | \< 3 days (during Normal Business Hours) | \< 3 days (during Normal Business Hours) |
 
 ### Severity levels
 

@@ -9,7 +9,7 @@ const getGithubStars = async () => {
     }
     return json.stargazers_count;
   }
-  return 9000;
+  return 16000;
 };
 
 const getGithubContributors = async () => {

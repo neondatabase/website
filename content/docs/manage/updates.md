@@ -3,7 +3,7 @@ title: Manage updates
 enableTableOfContents: true
 isDraft: false
 tag: new
-updatedOn: '2025-02-05T16:51:25.598Z'
+updatedOn: '2025-02-10T14:29:38.088Z'
 ---
 
 <Admonition type="note" title="updates coming soon">
@@ -31,6 +31,7 @@ Neon applies updates to computes based on the following rules:
 - Computes that have been active for 30 days or more receive updates.
 - Computes that are restarted receive available updates immediately.
 - Computes in a transition state (e.g., shutting down or restarting) at the time of an update are not updated.
+- Computes larger than 8 CU are not updated.
 
 If a compute is excluded from an update, Neon will apply the missed update with the next scheduled update, assuming the compute meets the update criteria mentioned above.
 
@@ -144,6 +145,6 @@ For compute restart instructions, see [Restart a compute](/docs/manage/endpoints
 
 Most Postgres connection drivers include built-in retry mechanisms that automatically handle short-lived connection interruptions. This means that for most applications, a brief restart should result in minimal disruption, as the driver will transparently reconnect.
 
-However, if your application has strict availability requirements, you may want to ensure that your connection settings are configured to allow for retries. Check your driver's documentation for options like connection timeouts, retry intervals, and connection pooling strategies. You retry configuration should account for the few seconds it takes to apply updates to your Neon compute.
+However, if your application has strict availability requirements, you may want to ensure that your connection settings are configured to allow for retries. Check your driver's documentation for options like connection timeouts, retry intervals, and connection pooling strategies. Your retry configuration should account for the few seconds it takes to apply updates to your Neon compute. For related information, see [Build connection timeout handling into your application](/docs/connect/connection-latency#build-connection-timeout-handling-into-your-application).
 
 <NeedHelp/>
