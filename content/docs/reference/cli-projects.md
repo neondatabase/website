@@ -241,6 +241,9 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | Option           | Description                                                                                   | Type   | Required |
 | ---------------- | --------------------------------------------------------------------------------------------- | ------ | :------: |
 | `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string |          |
+| `--block-vpc-connections` | When set, connections using VPC endpoints are disallowed. Use `--block-vpc-connections=false` to set the value to false. | boolean |         |
+| `--block-public-connections` | When set, connections from the public internet are disallowed. Use `--block-public-connections=false` to set the value to false. | boolean |         |
+| `--cu`           | The compute size for the default branch's primary compute. Could be a fixed size (e.g., "2") or a range delimited by a dash (e.g., "0.5-3").  | string  |          |
 | `--name`         | The project name. The value cannot be empty.                                                  | string | &check;  |
 
 #### Examples
