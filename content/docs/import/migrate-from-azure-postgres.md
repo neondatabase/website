@@ -92,18 +92,18 @@ $do$;
 
 ### Create a publication on the source database
 
-Publications are a fundamental part of logical replication in Postgres. They define what will be replicated.
+Publications are a fundamental part of logical replication in Postgres. They define what will be replicated. The following commands examples create publication named `azure_publication` with one or more tables.
 
 To create a publication for a specific table:
 
 ```sql shouldWrap
-CREATE PUBLICATION my_publication FOR TABLE playing_with_neon;
+CREATE PUBLICATION azure_publication FOR <tbl_name>;
 ```
 
 To create a publication for multiple tables, provide a comma-separated list of tables:
 
 ```sql shouldWrap
-CREATE PUBLICATION my_publication FOR TABLE users, departments;
+CREATE PUBLICATION azure_publication FOR TABLE <tbl_name1>, <tbl_name2>;
 ```
 
 For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
