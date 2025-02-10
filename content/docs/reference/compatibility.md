@@ -90,13 +90,19 @@ Of the parameter settings listed above, the `max_connections`, `maintenance_work
 
   _You can use connection pooling in Neon to increase the number of supported connections. For more information, see [Connection pooling](/docs/connect/connection-pooling)._
 
-- The `maintenance_work_mem` value is set according to your minimum compute size, but you can configure the setting for the current session; for example:
+- The `maintenance_work_mem` value is set according to your minimum compute size RAM. The formula is:
+
+  ```go
+  maintenance_work_mem = max(min_compute_size RAM in bytes * 1024/63,963,136, 65,536)
+  ```
+
+  However, you can increase the setting for the current session; for example:
 
   ```sql
   SET maintenance_work_mem='10 GB';
   ```
 
-  However, your `maintenance_work_mem` setting should not exceed 50 to 60 percent of your compute's available RAM.
+  If you do increase `maintenance_work_mem`, your setting should not exceed 60 percent of your compute's available RAM.
 
   | Compute Units (CU) | vCPU | RAM    | maintenance_work_mem |
   | :----------------- | :--- | :----- | :------------------- |
