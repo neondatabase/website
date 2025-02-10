@@ -25,6 +25,8 @@ Together, these features create a fast, flexible, and developer-friendly databas
 
 Not every team is ready for a full database migration. However, even if teams aren’t ready to migrate their production databases, they can still improve efficiency by moving their non-production workloads to Neon using a [Neon Twin](/docs/guides/neon-twin-intro).
 
+<CTA title="Create a Neon Twin" description="A Neon Twin is a full or partial clone of your production or staging database, providing developers and teams with isolated, sandboxed environments that closely mirror production. <br><br>Learn how to create a Twin <a href='/docs/guides/neon-twin-intro'>here</a>." isIntro />
+
 ## Workflows
 
 Most teams running dev/test workloads on Neon while keeping production on another Postgres platform implement a workflow similar to this:
@@ -44,6 +46,10 @@ Most teams running dev/test workloads on Neon while keeping production on anothe
 4. **Migrate changes**
    Migrate changes developed and tested on a Twin back to your production or staging database using your existing workflows.
 
-Learn how Neon Twin workflows can optimize your development process. Check out the full documentation [here](/docs/guides/neon-twin-intro).
+## Further Reading
 
-<CTA title="Let's Connect" description="We’re happy to give you a hand with any technical questions about how to set this up. We can also discuss pricing options, annual contracts, and migration assistance." buttonText="Contact us" buttonUrl="/contact-sales" />
+- [Neon Twin: Move Dev/Test/Staging to Neon, Keep Production on RDS](https://neon.tech/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon)
+- [Building Slack notifications to monitor pg_dump and restore workflows](https://neon.tech/blog/building-slack-notifications-to-monitor-pg_dump-and-restore-workflows)
+- [Neon Twin: How to deploy a change tested in Neon to prod in RDS](https://neon.tech/blog/neon-twin-deploy-workflow)
+
+<CTA title="Let's Connect" description="We’re happy to give you a hand with any technical questions about how to set this workflow up. We can also discuss pricing options, annual contracts, and provide migration assistance." buttonText="Contact us" buttonUrl="/contact-sales" />
