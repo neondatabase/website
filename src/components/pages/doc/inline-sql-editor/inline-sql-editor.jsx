@@ -38,7 +38,7 @@ const SqlEditor = ({ defaultQuery, setupQuery: defaultSetupQuery }) => {
   );
   const [hasRunSetupQuery, setHasRunSetupQuery] = useState(false);
   const [queryResults, setQueryResults] = useState([]);
-  const [toastOpen, setToastOpen] = useState(true);
+  const [toastOpen, setToastOpen] = useState(false);
   const { isCopied, handleCopy } = useCopyToClipboard(3000);
 
   const connectMutation = useMutation({
@@ -145,7 +145,6 @@ const SqlEditor = ({ defaultQuery, setupQuery: defaultSetupQuery }) => {
       <form onSubmit={handleQuery}>
         <div className="not-prose relative m-6 mx-auto w-full">
           <div className="group flex items-center justify-between gap-2 rounded-t-lg border-b border-gray-new-90 bg-gray-new-98 px-4 py-1.5 dark:border-gray-new-20 dark:bg-gray-new-10">
-            <div />
             <div className="ml-auto flex items-center gap-2">
               {defaultSetupQuery && (
                 <SetupQueryDialog
@@ -188,7 +187,6 @@ const SqlEditor = ({ defaultQuery, setupQuery: defaultSetupQuery }) => {
                   'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
                 lineHeight: '2',
                 height: '100%',
-                minHeight: '80px',
                 padding: '8px 10px',
                 borderRadius: queryResults?.length > 0 ? '0' : '0 0 8px 8px',
               }}
@@ -300,13 +298,7 @@ SqlEditor.defaultProps = {
   setupQuery: null,
 };
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: false,
-    },
-  },
-});
+const queryClient = new QueryClient();
 
 const SqlEditorWithProvider = (props) => (
   <QueryClientProvider client={queryClient}>

@@ -15,12 +15,12 @@ export const QueryResults = ({ queryResults }) => {
 
   return (
     <Tabs.Root defaultValue="0" className="flex w-full flex-col">
-      <Tabs.List className="group flex w-full items-center gap-5 border-b border-gray-new-20 bg-gray-new-98 px-4 dark:bg-gray-new-10">
+      <Tabs.List className="group flex w-full items-center gap-5 border-b border-gray-new-90 bg-gray-new-98 px-4 dark:border-gray-new-20 dark:bg-gray-new-10">
         {queryResults.map(({ result }, i) => (
           <Tabs.Trigger
             key={i.toString()}
             value={i.toString()}
-            className="border-b border-b-transparent py-2 text-sm text-gray-new-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-new-70 data-[state=active]:border-b-gray-new-60 data-[state=active]:text-gray-new-90 [&:not(:focus-visible)]:focus:outline-none"
+            className="relative border-b border-b-transparent py-2 text-sm text-gray-new-30 after:absolute after:bottom-[-1px] after:left-0 after:right-0 after:h-[1px] after:bg-transparent hover:text-gray-new-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-new-70 data-[state=active]:text-gray-new-30 data-[state=active]:after:bg-gray-new-30 dark:text-gray-new-60 dark:hover:text-gray-new-50 dark:data-[state=active]:text-gray-new-90 dark:data-[state=active]:after:bg-gray-new-60 [&:not(:focus-visible)]:focus:outline-none"
           >
             {i}: {result?.command || 'Error'}
           </Tabs.Trigger>
@@ -68,14 +68,14 @@ QueryResults.propTypes = {
 
 const TablePagination = ({ table, rowCount }) => (
   <div className="flex items-center gap-4 py-1.5">
-    <p className="text-xs text-white/70">
+    <p className="text-xs text-gray-new-30 dark:text-white/70">
       {rowCount} {rowCount === 1 ? 'row' : 'rows'}
     </p>
     <div className="flex items-center gap-2">
       <button
         type="button"
         disabled={!table.getCanPreviousPage()}
-        className="p-1 text-white/70 hover:text-white disabled:opacity-30 disabled:hover:text-white/70"
+        className="p-1 text-gray-new-30 hover:text-gray-new-90 disabled:opacity-30 disabled:hover:text-gray-new-30 dark:text-white/70 dark:hover:text-white dark:disabled:hover:text-white/70"
         aria-label="Previous page"
         onClick={() => table.previousPage()}
       >
@@ -93,13 +93,13 @@ const TablePagination = ({ table, rowCount }) => (
           <path d="m15 18-6-6 6-6" />
         </svg>
       </button>
-      <span className="text-xs text-white/70">
+      <span className="text-xs text-gray-new-30 dark:text-white/70">
         Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
       </span>
       <button
         type="button"
         disabled={!table.getCanNextPage()}
-        className="p-1 text-white/70 hover:text-white disabled:opacity-30 disabled:hover:text-white/70"
+        className="p-1 text-gray-new-30 hover:text-gray-new-90 disabled:opacity-30 disabled:hover:text-gray-new-30 dark:text-white/70 dark:hover:text-white dark:disabled:hover:text-white/70"
         aria-label="Next page"
         onClick={() => table.nextPage()}
       >
@@ -155,7 +155,11 @@ const ResultTable = ({ result }) => {
   });
 
   if (!result?.rows.length) {
-    return <p className="text-sm">Query completed with no result</p>;
+    return (
+      <p className="text-sm text-gray-new-30 dark:text-gray-new-90">
+        Query completed with no result
+      </p>
+    );
   }
 
   return (
@@ -163,16 +167,16 @@ const ResultTable = ({ result }) => {
       {table.getRowModel().rows?.length > 0 && (
         <TablePagination table={table} rowCount={result.rowCount} />
       )}
-      <div className="w-full rounded-lg border !border-gray-new-15">
+      <div className="w-full rounded-lg border border-gray-new-90 dark:border-gray-new-20">
         <div className="w-full overflow-x-auto">
           <table className="!mb-1 !mt-1 min-w-full border-collapse text-sm">
             <thead>
               {table.getHeaderGroups().map((headerGroup) => (
-                <tr key={headerGroup.id} className="border-b !border-gray-new-15">
+                <tr key={headerGroup.id} className="border-0">
                   {headerGroup.headers.map((header) => (
                     <th
                       key={header.id}
-                      className="whitespace-nowrap border-r border-gray-new-15 px-4 py-2 text-left font-medium text-gray-new-60 first:pl-4 last:border-r-0 last:pr-4"
+                      className="whitespace-nowrap border-b border-r border-gray-new-90 px-4 py-2 text-left font-medium text-gray-new-30 first:pl-4 last:border-r-0 last:pr-4 dark:border-gray-new-20 dark:text-gray-new-90"
                       style={{
                         width:
                           header.column.columnDef.size === Number.MAX_SAFE_INTEGER
@@ -188,17 +192,17 @@ const ResultTable = ({ result }) => {
                 </tr>
               ))}
             </thead>
-            <tbody className="!not-prose divide-y divide-gray-new-15">
+            <tbody className="!not-prose">
               {table.getRowModel().rows?.length > 0
                 ? table.getRowModel().rows.map((row) => (
                     <tr
                       key={row.id}
-                      className="!border-gray-new-15 transition-colors hover:bg-gray-new-15"
+                      className="border-b border-gray-new-90 transition-colors last:border-b-0 hover:bg-gray-new-94 dark:border-gray-new-20 dark:hover:bg-gray-new-15"
                     >
                       {row.getVisibleCells().map((cell) => (
                         <td
                           key={cell.id}
-                          className="whitespace-nowrap border-r border-gray-new-15 px-4 py-2 text-gray-new-90 first:pl-4 last:border-r-0 last:pr-4 last:dark:border-gray-new-15"
+                          className="whitespace-nowrap border-r border-gray-new-90 px-4 py-2 text-gray-new-30 first:pl-4 last:border-r-0 last:pr-4 dark:border-gray-new-20 dark:text-gray-new-90"
                         >
                           {flexRender(cell.column.columnDef.cell, cell.getContext())}
                         </td>
