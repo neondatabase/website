@@ -103,7 +103,7 @@ CREATE PUBLICATION azure_publication FOR <tbl_name>;
 To create a publication for multiple tables, provide a comma-separated list of tables:
 
 ```sql shouldWrap
-CREATE PUBLICATION azure_publication FOR TABLE <tbl_name1>, <tbl_name2>;
+CREATE PUBLICATION azure_publication FOR TABLE <tbl1, tbl2, tbl3>;
 ```
 
 <Admonition type="note">
