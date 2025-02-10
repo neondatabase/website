@@ -248,16 +248,24 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 #### Examples
 
-Update the project name:
+- Update the project name:
 
-```bash
-neon projects update muddy-wood-859533 --name dev_project_1
-┌───────────────────┬───────────────┬───────────────┬──────────────────────┐
-│ Id                │ Name          │ Region Id     │ Created At           │
-├───────────────────┼───────────────┼───────────────┼──────────────────────┤
-│ muddy-wood-859533 │ dev_project_1 │ aws-us-west-2 │ 2023-07-09T17:04:29Z │
-└───────────────────┴───────────────┴───────────────┴──────────────────────┘
-```
+    ```bash
+    neon projects update muddy-wood-859533 --name dev_project_1
+    ┌───────────────────┬───────────────┬───────────────┬──────────────────────┐
+    │ Id                │ Name          │ Region Id     │ Created At           │
+    ├───────────────────┼───────────────┼───────────────┼──────────────────────┤
+    │ muddy-wood-859533 │ dev_project_1 │ aws-us-west-2 │ 2023-07-09T17:04:29Z │
+    └───────────────────┴───────────────┴───────────────┴──────────────────────┘
+    ```
+
+- Block connections from the public internet:
+
+    This option is used with Neon's Private Networking feature to block access from the public internet. See [Private Networking — Restrict public internet access](/docs/guides/neon-private-networking#restrict-public-internet-access). 
+
+    ```bash
+    neon projects update muddy-wood-859533 --block-public-connections
+    ```
 
 ### delete
 
