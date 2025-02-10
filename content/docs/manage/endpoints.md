@@ -223,7 +223,14 @@ If you disable scale to zero or your compute is never idle long enough to be aut
 
 ## Restart a compute
 
-It is sometimes necessary to restart a compute. For example, if you upgrade to a paid plan account, you may want to restart your compute to immediately apply your upgraded limits, or maybe you've disabled autosuspesion and want to restart your compute to pick up the latest compute-related updates, which Neon typically releases weekly.
+It is sometimes necessary to restart a compute. Reasons for restarting a compute might include:
+
+- Applying upgraded limits after upgrading to a paid plan
+- Picking up the latest compute-related updates, which Neon typically releases weekly
+- Picking up a new Postgres extension or extension version released by Neon
+- Resolving performance issues or unexpected behavior
+
+Restarting ensures your compute is running with the latest configurations and improvements.
 
 <Admonition type="important">
 Please be aware that restarting a compute interrupts any connections currently using the compute. To avoid prolonged interruptions resulting from compute restarts, we recommend configuring your clients and applications to reconnect automatically in case of a dropped connection.
@@ -239,6 +246,7 @@ You can restart a compute using one of the following methods:
      --header 'authorization: Bearer $NEON_API_KEY'
   ```
 - Stop activity on your compute (stop running queries) and wait for your compute to suspend due to inactivity. By default, Neon suspends a compute after 5 minutes of inactivity. You can watch the status of your compute on the **Branches** page in the Neon Console. Select your branch and monitor your compute's **Status** field. Wait for it to report an `Idle` status. The compute will restart the next time it's accessed, and the status will change to `Active`.
+- Temporarily resizing your compute or changing your autoscaling minimum or maximum compute size setting restarts the compute. For instructions, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
 
 ## Delete a compute
 
