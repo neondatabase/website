@@ -7,8 +7,8 @@ redirectFrom:
 updatedOn: '2025-01-20T19:57:47.361Z'
 ---
 
-<Admonition type="comingSoon" title="Private Networking availability and billing">
-Private Networking is currently available to Scale and Business plan users at no additional cost. However, this feature may become a billed offering in the future. We'll notify you in advance of any billing changes.
+<Admonition type="comingSoon" title="Private Networking availability">
+Private Networking is available to Business and Enterprise accounts.
 </Admonition>
 
 The **Neon Private Networking** feature enables secure connections to your Neon databases via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html), bypassing the open internet for enhanced security.
