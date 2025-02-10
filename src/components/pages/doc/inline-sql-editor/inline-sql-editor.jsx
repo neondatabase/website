@@ -68,6 +68,12 @@ const SqlEditor = ({ defaultQuery, setupQuery: defaultSetupQuery }) => {
     },
     onSuccess: (data) => {
       if (data.isNewDeployment) {
+        // Track new database deployments
+        if (typeof window !== 'undefined' && window.zaraz) {
+          window.zaraz.track('Database Deployed', {
+            text: 'New database instance created',
+          });
+        }
         setToastOpen(true);
       }
     },
@@ -90,7 +96,7 @@ const SqlEditor = ({ defaultQuery, setupQuery: defaultSetupQuery }) => {
       // Track analytics
       if (typeof window !== 'undefined' && window.zaraz) {
         window.zaraz.track('Queries ran', {
-          text: 'Postgres Sandbox run query',
+          text: 'Inline SQL Editor run query',
           queryCount: queries.length,
         });
       }
@@ -214,7 +220,7 @@ const SqlEditor = ({ defaultQuery, setupQuery: defaultSetupQuery }) => {
 
       <Toast.Root
         open={toastOpen}
-        duration={8000}
+        duration={Number.POSITIVE_INFINITY}
         className="data-[state=open]:animate-slideIn data-[state=closed]:animate-hide space-y-3 rounded-lg border border-gray-new-94 bg-white !p-4 text-gray-new-30 shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] data-[swipe=cancel]:translate-x-0 data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=cancel]:transition-[transform_200ms_ease-out] dark:border-[#16181D] dark:bg-[#0B0C0F] dark:text-gray-new-70 dark:shadow-[0px_14px_20px_0px_rgba(0,0,0,0.50)] "
         onOpenChange={setToastOpen}
       >
