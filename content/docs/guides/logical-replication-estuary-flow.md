@@ -3,7 +3,7 @@ title: Replicate Data with Estuary Flow
 subtitle: Learn how to replicate data from Neon with Estuary Flow
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-12-12T15:31:10.127Z'
+updatedOn: '2025-02-03T20:41:57.320Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -125,7 +125,7 @@ For information about configuring allowed IPs in Neon, see [Configure IP Allow](
 
 1. In the Estuary Flow web UI, select **Sources** from the left navigation bar and click **New Capture**.
 2. In the connector catalog, choose **Neon PostgreSQL** and click **Connect**.
-3. Enter the connection details for your Neon database. You can get these details from your Neon connection string, which you'll find in the **Connection Details** widget on the **Dashboard** of your Neon project. Your connection string will look like this:
+3. Enter the connection details for your Neon database. You can find your Neon database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Your connection string will look like this:
 
    ```bash shouldWrap
    postgres://cdc_role:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require

@@ -3,7 +3,7 @@ title: Neon for SaaS apps
 subtitle: Build SaaS apps faster on Neon with autoscaling, database branching, and the
   serverless operating model
 enableTableOfContents: true
-updatedOn: '2024-12-12T20:55:53.201Z'
+updatedOn: '2025-01-22T08:45:40.806Z'
 ---
 
 Teams are accelerating development workflows and reducing operational overhead with Neon’s database branching, autoscaling, and serverless operating model. Learn how you can do the same.
@@ -29,7 +29,7 @@ Neon's Serverless Operating Model
 
 ### Database branching
 
-![Database Branching](/use-cases/branching.jpg?branching)
+![Database Branching](/docs/use-cases/branching.jpg)
 
 A branch in Neon is a copy-on-write clone of your database, including both schema and data. Branches function like Git branches, enabling development, testing, and preview environments.
 
@@ -56,7 +56,7 @@ Enhance testing and CI/CD
 
 ### Autoscaling
 
-![Neon Autoscaling](/use-cases/autoscaling.jpg)
+![Neon Autoscaling](/docs/use-cases/autoscaling.jpg)
 
 Neon's autoscaling dynamically adjusts compute resources based on current load, removing the need for manual intervention.
 

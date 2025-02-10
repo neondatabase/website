@@ -4,7 +4,7 @@ subtitle: Learn how connection pooling works in Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/connection-pooling
-updatedOn: '2025-01-09T10:35:15.969Z'
+updatedOn: '2025-02-03T20:41:57.301Z'
 ---
 
 Neon uses [PgBouncer](https://www.pgbouncer.org/) to support connection pooling, enabling up to 10,000 concurrent connections. PgBouncer is a lightweight connection pooler for Postgres.
@@ -17,9 +17,9 @@ To use connection pooling with Neon, use a pooled connection string instead of a
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
-The **Connection Details** widget on the Neon **Dashboard** provides **Pooled connection** checkbox that adds the `-pooler` option to a connection string for you. You can copy a pooled connection string from the **Dashboard** or manually add the `-pooler` option to the endpoint ID in an existing connection string.
+The **Connect to your database modal**, which you can access by clicking the **Connect** button on your **Project Dashboard**, provides **Connection pooling** toggle that adds the `-pooler` option to a connection string for you. You can copy a pooled connection string from the **Dashboard** or manually add the `-pooler` option to the endpoint ID in an existing connection string.
 
-![Connection Details pooled connection string](/docs/connect/connection_details_pooled.png)
+![Connection Details pooled connection string](/docs/connect/connection_details.png)
 
 <Admonition type="info">
 The `-pooler` option routes the connection to a connection pooling port at the Neon Proxy.
@@ -27,50 +27,50 @@ The `-pooler` option routes the connection to a connection pooling port at the N
 
 ## Connection limits without connection pooling
 
-Each Postgres connection creates a new process in the operating system, which consumes resources. Postgres limits the number of open connections for this reason. The Postgres connection limit is defined by the Postgres `max_connections` parameter. In Neon, `max_connections` is set according to your compute size &#8212; and if you are using Neon's Autoscaling feature, it is set according to your **maximum** compute size.
+Each Postgres connection creates a new process in the operating system, which consumes resources. Postgres limits the number of open connections for this reason. The Postgres connection limit is defined by the Postgres `max_connections` parameter. In Neon, `max_connections` is set according to your compute size. However, if you are using Neon's Autoscaling feature, `max_connections` is determined by both your minimum and maximum compute size — you can find the formula here: [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
 
-| Max. Compute Size (CU) | vCPU | RAM    | max_connections |
-| :--------------------- | :--- | :----- | :-------------- |
-| 0.25                   | 0.25 | 1 GB   | 112             |
-| 0.50                   | 0.50 | 2 GB   | 225             |
-| 1                      | 1    | 4 GB   | 450             |
-| 2                      | 2    | 8 GB   | 901             |
-| 3                      | 3    | 12 GB  | 1351            |
-| 4                      | 4    | 16 GB  | 1802            |
-| 5                      | 5    | 20 GB  | 2253            |
-| 6                      | 6    | 24 GB  | 2703            |
-| 7                      | 7    | 28 GB  | 3154            |
-| 8                      | 8    | 32 GB  | 3604            |
-| 9                      | 9    | 36 GB  | 4000            |
-| 10                     | 10   | 40 GB  | 4000            |
-| 11                     | 11   | 44 GB  | 4000            |
-| 12                     | 12   | 48 GB  | 4000            |
-| 13                     | 13   | 52 GB  | 4000            |
-| 14                     | 14   | 56 GB  | 4000            |
-| 15                     | 15   | 60 GB  | 4000            |
-| 16                     | 16   | 64 GB  | 4000            |
-| 18                     | 18   | 72 GB  | 4000            |
-| 20                     | 20   | 80 GB  | 4000            |
-| 22                     | 22   | 88 GB  | 4000            |
-| 24                     | 24   | 96 GB  | 4000            |
-| 26                     | 26   | 104 GB | 4000            |
-| 28                     | 28   | 112 GB | 4000            |
-| 30                     | 30   | 120 GB | 4000            |
-| 32                     | 32   | 128 GB | 4000            |
-| 34                     | 34   | 136 GB | 4000            |
-| 36                     | 36   | 144 GB | 4000            |
-| 38                     | 38   | 152 GB | 4000            |
-| 40                     | 40   | 160 GB | 4000            |
-| 42                     | 42   | 168 GB | 4000            |
-| 44                     | 44   | 176 GB | 4000            |
-| 46                     | 46   | 184 GB | 4000            |
-| 48                     | 48   | 192 GB | 4000            |
-| 50                     | 50   | 200 GB | 4000            |
-| 52                     | 52   | 208 GB | 4000            |
-| 54                     | 54   | 216 GB | 4000            |
-| 56                     | 56   | 224 GB | 4000            |
+| Compute size | vCPU | RAM    | max_connections |
+| :----------- | :--- | :----- | :-------------- |
+| 0.25         | 0.25 | 1 GB   | 112             |
+| 0.50         | 0.50 | 2 GB   | 225             |
+| 1            | 1    | 4 GB   | 450             |
+| 2            | 2    | 8 GB   | 901             |
+| 3            | 3    | 12 GB  | 1351            |
+| 4            | 4    | 16 GB  | 1802            |
+| 5            | 5    | 20 GB  | 2253            |
+| 6            | 6    | 24 GB  | 2703            |
+| 7            | 7    | 28 GB  | 3154            |
+| 8            | 8    | 32 GB  | 3604            |
+| 9            | 9    | 36 GB  | 4000            |
+| 10           | 10   | 40 GB  | 4000            |
+| 11           | 11   | 44 GB  | 4000            |
+| 12           | 12   | 48 GB  | 4000            |
+| 13           | 13   | 52 GB  | 4000            |
+| 14           | 14   | 56 GB  | 4000            |
+| 15           | 15   | 60 GB  | 4000            |
+| 16           | 16   | 64 GB  | 4000            |
+| 18           | 18   | 72 GB  | 4000            |
+| 20           | 20   | 80 GB  | 4000            |
+| 22           | 22   | 88 GB  | 4000            |
+| 24           | 24   | 96 GB  | 4000            |
+| 26           | 26   | 104 GB | 4000            |
+| 28           | 28   | 112 GB | 4000            |
+| 30           | 30   | 120 GB | 4000            |
+| 32           | 32   | 128 GB | 4000            |
+| 34           | 34   | 136 GB | 4000            |
+| 36           | 36   | 144 GB | 4000            |
+| 38           | 38   | 152 GB | 4000            |
+| 40           | 40   | 160 GB | 4000            |
+| 42           | 42   | 168 GB | 4000            |
+| 44           | 44   | 176 GB | 4000            |
+| 46           | 46   | 184 GB | 4000            |
+| 48           | 48   | 192 GB | 4000            |
+| 50           | 50   | 200 GB | 4000            |
+| 52           | 52   | 208 GB | 4000            |
+| 54           | 54   | 216 GB | 4000            |
+| 56           | 56   | 224 GB | 4000            |
 
-The formula used to calculate `max_connections` for Neon computes is `RAM in bytes / 9531392 bytes`. For a Neon Free Plan compute, which has 1 GB of RAM, this works out to approximately 112 connections. Larger computes offered with paid plans have more RAM and therefore support a larger number of connections. For example, a compute with 12 GB of RAM supports up to 1351 connections. You can check the `max_connections` limit for your compute by running the following query from the Neon SQL Editor or a client connected to Neon:
+You can check the `max_connections` limit for your compute by running the following query from the Neon SQL Editor or a client connected to Neon:
 
 ```sql
 SHOW max_connections;
@@ -101,7 +101,7 @@ Similarly, even if role `alex` has 64 concurrently active transactions through t
 For further information, see [PgBouncer](#pgbouncer).
 
 <Admonition type="important">
-You will not be able to get interactive results from all 10,000 connections at the same time. Connections to the pooler endpoint still consume  connections on the main Postgres endpoint: PgBouncer forwards operations from a role's connections through its own pool of connections to Postgres, and adaptively adds more connections to Postgres as needed by other concurrently active role connections. The 10,000 connection limit is therefore most useful for "serverless" applications and application-side connection pools that have many open connections but infrequent and short [transactions](/docs/postgresql/query-reference#transactions).
+You will not be able to get interactive results from all 10,000 connections at the same time. Connections to the pooler endpoint still consume connections on the main Postgres endpoint: PgBouncer forwards operations from a role's connections through its own pool of connections to Postgres, and adaptively adds more connections to Postgres as needed by other concurrently active role connections. The 10,000 connection limit is therefore most useful for "serverless" applications and application-side connection pools that have many open connections but infrequent and short [transactions](/docs/postgresql/query-reference#transactions).
 </Admonition>
 
 ## PgBouncer

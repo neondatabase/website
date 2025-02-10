@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 import Button from 'components/pages/deploy/button';
 import DynamicTicket from 'components/pages/deploy/dynamic-ticket';
-import GithubIcon from 'components/shared/header/images/header-github.inline.svg';
+import GithubIcon from 'icons/github.inline.svg';
 
 const appearAndExitAnimationVariants = {
   initial: { opacity: 0 },

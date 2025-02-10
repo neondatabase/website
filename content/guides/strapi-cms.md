@@ -34,7 +34,7 @@ Using a serverless Postgres database powered by Neon lets you scale compute reso
 
 To get started, go to the [Neon console](https://console.neon.tech/app/projects) and create a project.
 
-You will then be presented with a dialog that provides a connection string of your database. Click on **Pooled connection** option and the connection string automatically updates to a pooled connection string.
+You will then be presented with a dialog that provides a connection string of your database. Enable the **Connection pooling** toggle for a pooled connection string.
 
 ![Neon Connection Details](/guides/images/strapi-cms/20b94d5f-aff4-4594-b60b-3a65d4fc884c.png)
 

@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/go
   - /docs/integrations/go
-updatedOn: '2024-08-07T21:36:52.652Z'
+updatedOn: '2025-02-03T20:41:57.314Z'
 ---
 
 To connect to Neon from a Go application:
@@ -60,6 +60,6 @@ func main() {
 }
 ```
 
-You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find your database connection details by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 <NeedHelp/>

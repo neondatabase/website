@@ -4,7 +4,7 @@ subtitle: Learn how to build and deploy serverless GraphQL backends with Grafbas
   Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-07T21:36:52.652Z'
+updatedOn: '2025-02-03T20:41:57.314Z'
 ---
 
 _This guide was contributed by Josep Vidal from Grafbase_
@@ -86,10 +86,10 @@ npm install @neondatabase/serverless
 
 ## Retrieve your Neon connection string
 
-A database connection string is required to forward queries to your Neon database. To retrieve the connection string for your database:
+A database connection string is required to forward queries to your Neon database. You can find your database connection string by clicking the **Connect** button on your **Project Dashboard**.
 
-1. Navigate to the Neon **Dashboard**.
-2. Copy the connection string for your database from the **Connection Details** widget. The connection string should appear similar to the following:
+1. Navigate to the Neon **Project Dashboard**.
+2. Click **Connect** and copy the connection string for your database. The connection string should appear similar to the following:
 
    ```text shouldWrap
    postgresql://[user]:[password]@[neon_hostname]/[dbname]

@@ -2,7 +2,7 @@
 title: Get started with Liquibase and Neon
 subtitle: Learn how to manage schema changes in Neon with Liquibase
 enableTableOfContents: true
-updatedOn: '2024-10-26T08:44:49.109Z'
+updatedOn: '2025-02-03T20:41:57.317Z'
 ---
 
 Liquibase is an open-source library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
@@ -102,7 +102,7 @@ For demonstration purposes, create a `blog` database in Neon with two tables, `p
 
 ## Retrieve your Neon database connection string
 
-From the Neon **Dashboard**, retrieve your password and a Java connection string from the **Connection Details** widget. Use the selection drop-down menu.
+Find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Use the selection drop-down menu.
 
 Your Java connection string should look something like the one shown below.
 

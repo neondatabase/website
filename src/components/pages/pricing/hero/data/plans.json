@@ -54,7 +54,7 @@
       {
         "icon": "projects",
         "title": "100 projects",
-        "info": "500 branches per project"
+        "info": "5,000 branches per project"
       },
       {
         "icon": "storage",
@@ -186,8 +186,7 @@
         { "title": "Priority Support" },
         { "title": "Private Link" },
         {
-          "title": "Migration assistance",
-          "info": "With 0 migration fees—we will waive them"
+          "title": "Migration assistance"
         },
         { "title": "PITR (30 days)" }
       ]

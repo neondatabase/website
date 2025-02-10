@@ -163,4 +163,4 @@ Pay via AWS/Azure Marketplace
 
 </DefinitionList>
 
-<CTA title="Next Steps" description="Sign up here to get the Free Plan plus $100 credit.<br/> Or <a href='/contact-sales'>talk to our team</a> if you have any questions." buttonText="Get the Free Plan + $100 Credit" buttonUrl="https://fyi.neon.tech/credits" />
+<CTA title="Next Steps" description="Sign up here to get the Free Plan plus $100 credit. Or&nbsp;<a href='/contact-sales'>talk to our team</a> if you have any questions." buttonText="Get the Free Plan + $100 Credit" buttonUrl="https://fyi.neon.tech/credits" />
