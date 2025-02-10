@@ -135,9 +135,9 @@ To configure Neon Private Networking, perform the following steps:
     At this point, it's still possible to connect to your Neon database over the public internet using the original Neon database connection string.
 
     You can restrict public internet access via this connection string via the Neon Console, CLI, or API.
-    
+
     <Tabs labels={["Neon Console", "CLI", "API"]}>
-    
+
     <TabItem>
 
     To block access via the Neon Console, you can use Neon's [IP Allow](/docs/introduction/ip-allow) feature.
@@ -149,9 +149,9 @@ To configure Neon Private Networking, perform the following steps:
     ![Neon IP Allow configuration](/docs/guides/pl_neon_ip_allow.png)
 
     </TabItem>
-    
+
     <TabItem>
-        
+
     To block access via the Neon CLI, use the [neon projects update](/docs/reference/cli-projects#update) command with the `--block-public-connections` option.
 
     ```bash
@@ -161,11 +161,11 @@ To configure Neon Private Networking, perform the following steps:
     If you've got more than one Neon project, specify the `--project-id` option with your Neon project ID. You can find you Neon project ID under your project's settings in the Neon Console, or by running this Neon CLI command: `neon projects list`
 
     </TabItem>
-    
+
     <TabItem>
 
     To block access via the Neon API, use the [Update project](https://api-docs.neon.tech/reference/updateproject) endpoint with the `block_public_connections` settings object attribute.
-    
+
     ```bash
     curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/young-sun-41825641 \
@@ -184,10 +184,8 @@ To configure Neon Private Networking, perform the following steps:
     ```
 
     </TabItem>
-    
-    </Tabs>
 
-    
+    </Tabs>
 
 </Steps>
 
