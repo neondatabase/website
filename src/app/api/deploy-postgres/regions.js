@@ -51,8 +51,4 @@ export const regions = {
     name: 'Asia Pacific (Sydney)',
     coords: { lat: -33.8688, lon: 151.2093 },
   },
-  'azure-eastus2': {
-    name: 'Azure US East 2',
-    coords: { lat: 39.9612, lon: -82.9988 },
-  },
 };
