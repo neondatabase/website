@@ -138,7 +138,7 @@ Perform the following steps for each table you want to replicate data from:
 2. Create the Postgres publication. Include all tables you want to replicate as part of the publication:
 
    ```sql
-   CREATE PUBLICATION airbyte_publication FOR TABLE <table_name, table_name, table_name>;
+   CREATE PUBLICATION airbyte_publication FOR TABLE <tbl1, tbl2, tbl3>;
    ```
 
    The publication name is customizable. Refer to the [Postgres docs](https://www.postgresql.org/docs/current/logical-replication-publication.html) if you need to add or remove tables from your publication.

@@ -97,7 +97,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public TO [username];
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO [username];
 
 -- Create "bemi" PUBLICATION to enable logical replication
-CREATE PUBLICATION bemi FOR TABLE <table_name, table_name, table_name>;
+CREATE PUBLICATION bemi FOR TABLE <tbl1, tbl2, tbl3>;
 
 -- Create a procedure to set REPLICA IDENTITY FULL for tables to track the "before" state on DB row changes
 CREATE OR REPLACE PROCEDURE _bemi_set_replica_identity() AS $$ DECLARE current_tablename TEXT;

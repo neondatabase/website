@@ -58,7 +58,7 @@ After logical replication is enabled in Neon, the next step is to create a publi
    For specific tables:
 
    ```sql
-   CREATE PUBLICATION mz_source FOR TABLE <table1>, <table2>;
+   CREATE PUBLICATION mz_source FOR TABLE <tbl1, tbl2, tbl3>;
    ```
 
    The `mz_source` publication will contain the set of change events generated from the specified tables and will later be used to ingest the replication stream.

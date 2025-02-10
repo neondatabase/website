@@ -117,7 +117,7 @@ ALTER TABLE <tbl1> REPLICA IDENTITY FULL;
 Next, create a [publication](https://www.postgresql.org/docs/current/sql-createpublication.html) with the name `dbz_publication`. Include all the tables you would like to ingest into Decodable.
 
 ```sql
-CREATE PUBLICATION dbz_publication FOR TABLE <tbl1, tbl2, tbl3>;
+CREATE PUBLICATION dbz_publication FOR TABLE <tbl1, tbl2, tbl3>>;
 ```
 
 Refer to the [Postgres docs](https://www.postgresql.org/docs/current/sql-alterpublication.html) if you need to add or remove tables from your publication.
