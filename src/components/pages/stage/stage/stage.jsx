@@ -57,7 +57,7 @@ const Stage = () => {
               <li key={index}>
                 <div className="flex items-center">
                   <time
-                    className="text-sm font-light leading-none tracking-[0.04em] text-gray-5"
+                    className="text-sm font-light leading-none -tracking-tighter text-gray-5"
                     dateTime={`2023-03-29T${time.slice(0, 5)}`}
                   >
                     {time}

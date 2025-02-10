@@ -1,3 +1,4 @@
+import About from 'components/pages/home/about';
 import AiIndex from 'components/pages/home/ai-index';
 import Bento from 'components/pages/home/bento';
 import Hero from 'components/pages/home/hero';
@@ -19,6 +20,7 @@ export const metadata = getMetadata({
 const StackOverflowPage = () => (
   <>
     <Hero />
+    <About />
     <Logos />
     <InstantProvisioning />
     <Lightning />

@@ -1,3 +1,4 @@
+import About from 'components/pages/home/about';
 import AiIndex from 'components/pages/home/ai-index';
 import Bento from 'components/pages/home/bento';
 import Hero from 'components/pages/home/hero/hero';
@@ -31,6 +32,7 @@ const Homepage = () => (
       dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
     />
     <Hero />
+    <About />
     <Logos />
     <InstantProvisioning />
     <Lightning />
