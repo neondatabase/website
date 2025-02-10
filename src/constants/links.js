@@ -36,6 +36,7 @@ export default {
   auth: '/docs/guides/neon-auth',
   autoscaling: '/docs/introduction/autoscaling',
   billing: '/docs/introduction/about-billing',
+  branchRestore: '/docs/guides/branch-restore',
   changelog: '/docs/changelog',
   cliInstall: '/docs/reference/cli-install',
   cliReference: '/docs/reference/neon-cli',

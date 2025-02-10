@@ -56,7 +56,7 @@ export default {
               iconGradient: DatabaseGradientIcon,
               title: 'Instant PITR',
               description: 'Copy-on-write storage',
-              to: LINKS.ai,
+              to: LINKS.branchRestore,
             },
           ],
           isExtended: true,
@@ -123,7 +123,7 @@ export default {
             },
             {
               icon: VariableIcon,
-              title: 'Serverless Apps',
+              title: 'Variable traffic',
               to: LINKS.variableTraffic,
             },
             {
