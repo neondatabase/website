@@ -106,6 +106,10 @@ To create a publication for multiple tables, provide a comma-separated list of t
 CREATE PUBLICATION azure_publication FOR TABLE <tbl_name1>, <tbl_name2>;
 ```
 
+<Admonition type="note">
+Defining specific tables lets you add or remove tables from the publication later, which you cannot do when creating publications with `FOR ALL TABLES`.
+</Admonition>
+
 For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
 
 ### Allow inbound traffic from Neon
