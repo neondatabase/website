@@ -66,7 +66,7 @@ After enabling logical replication on Neon, you'll now connect your Neon databas
 
 4. Create a publication to indicate which tables will publish changes to the replication slot. Run the following SQL command:
 
-    ```sql
+   ```sql
    CREATE PUBLICATION sequin_pub FOR TABLE table1, table2, table3;
    ```
 
