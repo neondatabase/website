@@ -31,8 +31,8 @@ export const SetupQueryDialog = ({ setupQuery, onSetupQueryChange }) => {
       />
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-[150] bg-[rgba(12,13,13,0.2)] data-[state=closed]:animate-fade-out-overlay data-[state=open]:animate-fade-in-overlay dark:bg-black/80" />
-        <Dialog.Content className="fixed left-1/2 top-1/2 z-[150] mx-auto max-h-[85vh] w-full max-w-[756px] -translate-x-1/2 -translate-y-1/2 lg:h-full lg:max-h-full lg:max-w-full">
-          <div className="relative flex h-full max-h-[85vh] flex-col rounded-[10px] border border-gray-new-20 bg-gray-new-8 pt-4 text-white shadow-[4px_4px_10px_rgba(0,0,0,0.5)] data-[state=closed]:animate-dialog-hide data-[state=open]:animate-dialog-show lg:h-full lg:max-h-screen lg:rounded-none">
+        <Dialog.Content className="fixed left-1/2 top-1/2 z-[150] mx-auto max-h-[85vh] w-[calc(100%-32px)] max-w-[756px] -translate-x-1/2 -translate-y-1/2">
+          <div className="relative flex h-full max-h-[85vh] flex-col rounded-[10px] border border-gray-new-90 bg-white pt-4 text-black shadow-[4px_4px_10px_rgba(0,0,0,0.06)] data-[state=closed]:animate-dialog-hide data-[state=open]:animate-dialog-show dark:border-gray-new-20 dark:bg-gray-new-8 dark:text-white dark:shadow-[4px_4px_10px_rgba(0,0,0,0.2)]">
             <div className="mb-4 flex items-center justify-between px-6">
               <Dialog.Title className="text-lg font-medium">Setup Query</Dialog.Title>
               <Dialog.Close asChild>
@@ -45,10 +45,10 @@ export const SetupQueryDialog = ({ setupQuery, onSetupQueryChange }) => {
                 </button>
               </Dialog.Close>
             </div>
-            <div className="bg-gray-new-10">
+            <div className="flex-1 bg-gray-new-94 dark:bg-gray-new-10">
               <div className="group relative">
                 <Editor
-                  className="[&>div]:!bg-gray-new-98 [&>div]:dark:!bg-gray-new-10 [&_.cm-focused]:outline-none"
+                  className="bg-gray-new-98 dark:bg-gray-new-10 [&>div]:!bg-gray-new-98 [&>div]:dark:!bg-gray-new-10 [&_.cm-focused]:outline-none"
                   value={setupQuery}
                   theme="dark"
                   basicSetup={{
@@ -75,7 +75,7 @@ export const SetupQueryDialog = ({ setupQuery, onSetupQueryChange }) => {
                 <button
                   theme="ghost"
                   size="xxs"
-                  className="invisible absolute right-2 top-2 rounded border border-gray-7 bg-gray-9 p-1.5 text-gray-new-80 opacity-0 transition-[background-color,opacity,visibility] duration-200 hover:bg-white group-hover:visible group-hover:opacity-100 dark:border-gray-3 dark:bg-gray-new-10 dark:text-gray-8 dark:hover:bg-gray-new-8 lg:visible lg:opacity-100"
+                  className="absolute right-2 top-2 rounded border border-gray-new-90 bg-white p-1.5 text-gray-new-80 opacity-0 transition-[background-color,opacity,visibility] duration-200 hover:bg-gray-new-94 group-hover:visible group-hover:opacity-100 dark:border-gray-new-20 dark:bg-gray-new-10 dark:text-gray-new-80 dark:hover:bg-gray-new-15"
                   type="button"
                   disabled={isCopied}
                   onClick={() => handleCopy(setupQuery)}
@@ -84,7 +84,7 @@ export const SetupQueryDialog = ({ setupQuery, onSetupQueryChange }) => {
                 </button>
               </div>
             </div>
-            <div className="flex justify-end px-6 py-4">
+            <div className="flex justify-end rounded-b-lg bg-white px-6 py-4 dark:bg-gray-new-8">
               <Dialog.Close asChild>
                 <Button theme="gray-15" size="xxs" className="!px-4 !py-2">
                   Save

@@ -49,6 +49,7 @@
     "@segment/analytics-next": "^1.67.0",
     "@splinetool/react-spline": "^2.2.6",
     "@tailwindcss/typography": "github:tailwindcss/typography",
+    "@tanstack/react-query": "^5.66.0",
     "@tanstack/react-table": "^8.20.6",
     "@uiw/react-codemirror": "^4.23.8",
     "@upstash/ratelimit": "^2.0.5",
@@ -98,7 +99,6 @@
     "rss": "^1.2.2",
     "slugify": "^1.6.6",
     "swiper": "^11.1.5",
-    "swr": "^2.3.2",
     "tailwindcss-safe-area": "^0.5.1",
     "unist-util-visit": "^5.0.0",
     "yup": "^1.4.0"

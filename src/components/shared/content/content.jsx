@@ -13,7 +13,7 @@ import DetailIconCards from 'components/pages/doc/detail-icon-cards';
 import DocsList from 'components/pages/doc/docs-list';
 import IncludeBlock from 'components/pages/doc/include-block';
 import InfoBlock from 'components/pages/doc/info-block';
-import { SqlEditor } from 'components/pages/doc/inline-sql-editor/inline-sql-editor';
+import SqlEditor from 'components/pages/doc/inline-sql-editor';
 import LinkPreview from 'components/pages/doc/link-preview';
 import Steps from 'components/pages/doc/steps';
 import Tabs from 'components/pages/doc/tabs';
