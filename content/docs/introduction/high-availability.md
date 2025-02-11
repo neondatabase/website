@@ -85,9 +85,9 @@ Kubernetes nodes are the underlying infrastructure hosting multiple compute inst
 
 #### Availability Zone failures
 
-Availability Zones are physically separate data centers within a cloud region. When an AZ becomes unavailable, compute instances in that AZ will be automatically rescheduled to healthy AZs. Recovery time typically takes 1-10 minutes, depending on node availability in the destination AZs. Your connection string remains the same, and new connections will be routed to the recovered instance.
+Availability Zones are physically separate data centers within a cloud region. When an AZ becomes unavailable, compute instances in that AZ will be automatically rescheduled to healthy AZs. Recovery time typically takes 1-10 minutes, depending on node availability in the destination AZs. Your connection string remains stable, and new connections will be routed to the recovered instance.
 
-Multi-AZ support varies by region. **REGIONS LIST TBD**
+Multi-AZ support is available in all regions for recovery purposes. While compute instances run in a single AZ, they can be automatically rescheduled to other AZs if needed.
 
 #### Recap of failover times
 
