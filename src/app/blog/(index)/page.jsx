@@ -1,11 +1,11 @@
-import clsx from 'clsx';
 import { notFound } from 'next/navigation';
 
-import BlogPostCard from 'components/pages/blog/blog-post-card';
-import LoadMorePosts from 'components/shared/load-more-posts/load-more-posts';
+import BlogGridItem from 'components/pages/blog/blog-grid-item';
+import BlogHeader from 'components/pages/blog/blog-header';
+import LoadMorePosts from 'components/shared/load-more-posts';
 import { BLOG_BASE_PATH } from 'constants/blog';
 import SEO_DATA from 'constants/seo-data';
-import { getAllPosts } from 'utils/api-posts';
+import { getAllPosts } from 'utils/api-wp';
 import getMetadata from 'utils/get-metadata';
 
 export const metadata = getMetadata({ ...SEO_DATA.blog, rssPathname: `${BLOG_BASE_PATH}rss.xml` });
@@ -17,30 +17,16 @@ const BlogPage = async () => {
 
   return (
     <>
-      <h2 className="sr-only">Blog</h2>
+      <BlogHeader
+        className="lg:-top-[68px] md:-top-[60px]"
+        title="Blog"
+        basePath={BLOG_BASE_PATH}
+      />
       <div className="grid grid-cols-2 gap-x-6 xl:gap-x-5 md:grid-cols-1">
         <LoadMorePosts className="mt-8 md:mt-6" defaultCountPosts={8} countToAdd={8}>
-          {posts.map((post, index) => {
-            const isFeatured = index < 2 && post.pageBlogPost;
-
-            return (
-              <BlogPostCard
-                className={clsx(
-                  'py-8 first:pt-0 last:pb-0 md:py-6',
-                  isFeatured
-                    ? 'pt-0 md:pt-0'
-                    : 'col-span-full border-t border-gray-new-15 py-8 first:border-0 first:border-t-0 first:pt-0 last:pb-0'
-                )}
-                key={post.slug}
-                fullSize={!isFeatured}
-                isPriority={index < 5}
-                imageWidth={isFeatured ? 372 : 336}
-                imageHeight={isFeatured ? 212 : 189}
-                withAuthorPhoto
-                {...post}
-              />
-            );
-          })}
+          {posts.map((post, index) => (
+            <BlogGridItem key={post.slug} index={index} post={post} />
+          ))}
         </LoadMorePosts>
       </div>
     </>

@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import he from 'he';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
@@ -32,7 +33,8 @@ const BlogPostCard = ({
     name: title,
     photo: postAuthor?.image?.mediaItemUrl,
   }));
-  const excerpt = subtitle || (content && getExcerpt(content, 280));
+
+  const excerpt = subtitle || (content && getExcerpt(he.decode(content), 280));
 
   const formattedDate = getFormattedDate(date);
 
@@ -66,7 +68,7 @@ const BlogPostCard = ({
     <article
       className={clsx(
         'blog-post-card flex',
-        fullSize ? 'flex-row-reverse gap-6 xl:gap-5 md:flex-col-reverse' : 'flex-col gap-4',
+        fullSize ? 'flex-row-reverse items-start gap-6 xl:gap-5 md:flex-col' : 'flex-col gap-4',
         className
       )}
     >

@@ -201,12 +201,16 @@ const getAllWpPosts = cache(async () => {
   let afterCursor = null;
 
   while (true) {
-    // eslint-disable-next-line no-await-in-loop
-    const { nodes: posts, pageInfo } = await fetchAllWpPosts(afterCursor);
+    try {
+      const { nodes: posts, pageInfo } = await fetchAllWpPosts(afterCursor);
 
-    allPosts = allPosts.concat(posts);
-    if (!pageInfo.hasNextPage) break;
-    afterCursor = pageInfo.endCursor;
+      allPosts = allPosts.concat(posts);
+      if (!pageInfo.hasNextPage) break;
+      afterCursor = pageInfo.endCursor;
+    } catch (error) {
+      console.error('Error fetching posts:', error);
+      break;
+    }
   }
 
   return allPosts;
@@ -218,49 +222,26 @@ const getAllPosts = async () => {
     getAllGuides(),
     getAllChangelogs(),
   ]);
-  const allPosts = [...wpPosts, ...guides, ...changelogs];
 
-  // Separate featured wp posts, guides and changelogs and all other
-  const categories = {
-    wpPosts: [],
-    guides: [],
-    changelogs: [],
-    others: [],
-  };
-
-  // Find 2 most recent featured posts for each category
-  allPosts.forEach((item) => {
-    const { pageBlogPost, category, isFeatured } = item;
-    const isWpPost = !!pageBlogPost;
-    const isGuide = category === 'guides';
-    const isChangelog = category === 'changelog';
-    const featured = isWpPost ? pageBlogPost.isFeatured : isFeatured;
-
-    if (featured) {
-      if (isWpPost && categories.wpPosts.length < 2) {
-        categories.wpPosts.push(item);
-      } else if (isGuide && categories.guides.length < 2) {
-        categories.guides.push(item);
-      } else if (isChangelog && categories.changelogs.length < 2) {
-        categories.changelogs.push(item);
+  // Separate first two featured posts
+  const [featuredWpPosts, restWpPosts] = wpPosts.reduce(
+    ([featured, rest], post) => {
+      if (post.pageBlogPost?.isFeatured && featured.length < 2) {
+        featured.push(post);
       } else {
-        categories.others.push(item);
+        rest.push(post);
       }
-    } else {
-      categories.others.push(item);
-    }
-  });
+      return [featured, rest];
+    },
+    [[], []]
+  );
 
   // Sort the rest posts by date, newest first
-  categories.others.sort((a, b) => new Date(b.date) - new Date(a.date));
+  const restPosts = [...restWpPosts, ...guides, ...changelogs];
+  restPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
   // Combine the results
-  return [
-    ...categories.wpPosts,
-    ...categories.guides,
-    ...categories.changelogs,
-    ...categories.others,
-  ];
+  return [...featuredWpPosts, ...restPosts];
 };
 
 const getWpPostBySlug = cache(async (slug) => {

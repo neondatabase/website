@@ -5,7 +5,6 @@ author: vkarpov15
 enableTableOfContents: true
 createdAt: '2025-01-10T17:48:36.612Z'
 updatedOn: '2025-01-10T17:48:36.612Z'
-isFeatured: true
 ---
 
 The `SKIP LOCKED` clause allows concurrent transactions to skip rows currently locked by other transactions.

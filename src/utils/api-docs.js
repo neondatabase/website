@@ -75,7 +75,7 @@ const getAllChangelogs = async () => {
     .map((slug) => {
       if (!getPostBySlug(slug, CHANGELOG_DIR_PATH)) return;
       const {
-        data: { title, isDraft, isFeatured, redirectFrom },
+        data: { title, isDraft, redirectFrom },
         content,
       } = getPostBySlug(slug, CHANGELOG_DIR_PATH);
       const slugWithoutFirstSlash = slug.slice(1);
@@ -89,7 +89,6 @@ const getAllChangelogs = async () => {
         date,
         content,
         isDraft,
-        isFeatured,
         redirectFrom,
       };
     })

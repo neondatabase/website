@@ -63,7 +63,7 @@ const getAllGuides = async () => {
 
       const slugWithoutFirstSlash = slug.slice(1);
       const {
-        data: { title, subtitle, createdAt, updatedOn, isDraft, isFeatured, redirectFrom },
+        data: { title, subtitle, createdAt, updatedOn, isDraft, redirectFrom },
         content,
         author,
       } = data;
@@ -80,7 +80,6 @@ const getAllGuides = async () => {
         date: createdAt,
         content,
         isDraft,
-        isFeatured,
         redirectFrom,
       };
     })
