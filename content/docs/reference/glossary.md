@@ -317,7 +317,7 @@ The user account that registers and authenticates with Neon using an email, GitH
 
 ## Neon Org
 
-A shorthand for _Organization_ in Neon. See [Organization](#organization) for details.
+A named organization entity in Neon that groups multiple Neon users under a shared account. See [Organization](#organization) for details.
 
 ## NeonVM
 
