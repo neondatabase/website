@@ -30,9 +30,9 @@ const ITEMS = [
     video: {
       icon: scalingIcon,
       title: 'Scaling',
-      mp4: '/videos/pages/home/hero/scaling.mp4?updated=20240514120633',
-      m3u8: '/videos/pages/home/hero/scaling.m3u8?updated=20240514120633',
-      bgImage: '/videos/pages/home/hero/scaling.jpg',
+      mp4: '/videos/pages/home/about/scaling.mp4?updated=20240514120633',
+      m3u8: '/videos/pages/home/about/scaling.m3u8?updated=20240514120633',
+      bgImage: '/videos/pages/home/about/scaling.jpg',
     },
     title: 'Scaling',
     description:
@@ -44,9 +44,9 @@ const ITEMS = [
     video: {
       icon: branchingIcon,
       title: 'Branching',
-      mp4: '/videos/pages/home/hero/branching.mp4?updated=20240508184252',
-      m3u8: '/videos/pages/home/hero/branching.m3u8?updated=20240508184252',
-      bgImage: '/videos/pages/home/hero/branching.jpg',
+      mp4: '/videos/pages/home/about/branching.mp4?updated=20240508184252',
+      m3u8: '/videos/pages/home/about/branching.m3u8?updated=20240508184252',
+      bgImage: '/videos/pages/home/about/branching.jpg',
     },
     title: 'Branching',
     description:

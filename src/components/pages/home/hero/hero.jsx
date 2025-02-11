@@ -2,9 +2,8 @@ import Image from 'next/image';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
+import PauseableVideo from 'components/shared/pauseable-video';
 import bg from 'images/pages/home/hero/bg.jpg';
-import border from 'images/pages/home/hero/border.png';
-import createXYZ from 'images/pages/home/hero/create.xyz.jpg';
 
 const Hero = () => (
   <section className="hero safe-paddings relative pt-36 xl:pt-[120px] lg:pt-24">
@@ -37,25 +36,34 @@ const Hero = () => (
         </Button>
       </div>
 
-      <div className="relative mx-auto mt-[84px] aspect-[844/489] w-[844px] xl:mt-16 xl:w-full xl:max-w-3xl lg:mt-11 lg:max-w-xl md:mt-10">
-        <Image
-          className="absolute inset-1.5 z-20 rounded-[14px] xl:inset-[5px] xl:w-[calc(100%-10px)] xl:rounded-[13px] lg:inset-1 lg:w-[calc(100%-8px)] lg:rounded-[10px] sm:inset-0.5 sm:w-[calc(100%-4px)] sm:rounded-md"
-          src={createXYZ}
-          width={832}
-          height={477}
-          quality={100}
-          alt=""
-          priority
-        />
-        <Image
-          className="pointer-events-none absolute -inset-px z-10 max-w-[calc(100%+2px)] rounded-[18px] shadow-[0_0_40px_0_rgba(0,0,0,0.5)] xl:rounded-2xl lg:rounded-xl sm:rounded-md"
-          src={border}
-          width={848}
-          height={493}
-          quality={100}
-          alt=""
-          priority
-        />
+      <div className="relative mx-auto mt-[90px] w-fit xl:mt-16 lg:mt-11 md:mt-10">
+        <div className="relative z-20 rounded-[14px] shadow-[0_0_8px_0_rgba(0,0,0,0.25)] xl:rounded-[13px] lg:rounded-[10px] sm:rounded-md">
+          {/* 
+            Video optimization parameters:
+            -mp4: -pix_fmt yuv420p -vf scale=1664:-2 -movflags faststart -vcodec libx264 -crf 20
+            -webm: -c:v libvpx-vp9 -crf 20 -vf scale=1664:-2 -deadline best -an
+          */}
+          <PauseableVideo
+            className="z-10 rounded-[inherit]"
+            videoClassName="xl:w-full xl:max-w-3xl lg:max-w-xl"
+            width={832}
+            height={468}
+            poster="/videos/pages/home/hero/create.jpg"
+          >
+            <source src="/videos/pages/home/hero/create.mp4" type="video/mp4" />
+            <source src="/videos/pages/home/create.webm" type="video/webm" />
+          </PauseableVideo>
+          <div className="absolute -inset-px rounded-[inherit] bg-white/50 mix-blend-overlay" />
+        </div>
+        {/* border */}
+        <div
+          className="pointer-events-none absolute -inset-1.5 z-10 rounded-[18px] bg-[#C4DAFB]/5 shadow-[0_0_40px_0_rgba(0,0,0,0.5)] xl:rounded-2xl lg:rounded-xl sm:rounded-md"
+          aria-hidden
+        >
+          <span className="absolute inset-0 rounded-[inherit] border border-white/5 mix-blend-overlay" />
+          <span className="absolute inset-0 rounded-[inherit] bg-home-hero-video-border" />
+        </div>
+        {/* highlight */}
         <div className="pointer-events-none absolute inset-0" aria-hidden>
           <div className="absolute -left-[9%] -top-[17%] aspect-square w-1/3 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,#174F4F_20%,transparent)] opacity-50" />
           <div className="absolute -left-[28%] -top-1/2 aspect-square w-4/5 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,#1E3A3E_20%,transparent)] opacity-50" />
