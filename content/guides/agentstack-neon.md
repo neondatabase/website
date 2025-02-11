@@ -370,7 +370,7 @@ AgentStack integrates with [**AgentOps**](https://www.agentops.ai) by default to
 
 To use AgentOps, make sure you have your `AGENTOPS_API_KEY` configured in your `.env` file (as covered in the [Prerequisites](#prerequisites)). AgentOps automatically starts tracking your agent executions when you run `agentstack run` because of the `agentops.init()` call in `src/main.py`.
 
-By using AgentOps, you move beyond simply building agents and gain powerful insights into their behavior and performance, allowing for continuous improvement and optimization.
+Use AgentOps to gain insights into your agents' behavior and performance, allowing for continuous improvement and optimization.
 
 With a total run cost of only $0.01 in OpenAI credits (as seen in the AgentOps dashboard), this AI agent demonstrates exceptional cost-effectiveness. This was achieved entirely without code, eliminating the need for scraping, SQL queries, and other complex programming, paving the way for widespread application across various domains.
 </Admonition>
