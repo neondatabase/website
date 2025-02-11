@@ -48,7 +48,7 @@ const Create = () => (
             className="z-10 rounded-[inherit]"
             videoClassName="xl:w-full xl:max-w-3xl lg:max-w-xl"
             width={832}
-            height={468}
+            height={332}
             poster="/videos/pages/home/create/create.jpg"
           >
             <source src="/videos/pages/home/create/create.mp4" type="video/mp4" />
