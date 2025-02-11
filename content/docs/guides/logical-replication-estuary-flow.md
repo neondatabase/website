@@ -111,7 +111,7 @@ Create a [publication](https://www.postgresql.org/docs/current/sql-createpublica
 CREATE PUBLICATION estuary_publication FOR TABLE <tbl1, tbl2, tbl3>;
 ```
 
-Refer to the [Postgres docs](https://www.postgresql.org/docs/current/sql-alterpublication.html) if you need to add or remove tables from your publication. Alternatively, you also can create a publication `FOR ALL TABLES`.
+Refer to the [Postgres docs](https://www.postgresql.org/docs/current/sql-alterpublication.html) if you need to add or remove tables from your publication.
 
 Upon startup, the Estuary Flow connector for Postgres will automatically create the [replication slot](https://www.postgresql.org/docs/current/logicaldecoding-explanation.html#LOGICALDECODING-REPLICATION-SLOTS) required for ingesting data change events from Postgres. The slot's name will be prefixed with `estuary_`, followed by a unique identifier.
 

@@ -104,16 +104,7 @@ You need to allow inbound connections to your Aurora Postgres instance from Neon
 
 Publications are a fundamental part of logical replication in Postgres. They define what will be replicated.
 
-To create a publication for all tables in your source database, run the following query. You can use a publication name of your choice.
-
-```sql
-CREATE PUBLICATION my_publication FOR ALL TABLES;
-```
-
-<Admonition type="important">
-Avoid defining publications with `FOR ALL TABLES` if you want the flexibility to add or drop tables from the publication later. It is not possible to modify a publication defined with `FOR ALL TABLES` to include or exclude specific tables. For details, see [Logical replication tips](/docs/guides/logical-replication-tips).
-
-To create a publication for a specific table, you can use the following syntax:
+To create a publication for a specific table:
 
 ```sql shouldWrap
 CREATE PUBLICATION my_publication FOR TABLE playing_with_neon;
@@ -125,8 +116,11 @@ To create a publication for multiple tables, provide a comma-separated list of t
 CREATE PUBLICATION my_publication FOR TABLE users, departments;
 ```
 
-For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
+<Admonition type="note">
+Defining specific tables lets you add or remove tables from the publication later, which you cannot do when creating publications with `FOR ALL TABLES`.
 </Admonition>
+
+For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
 
 ## Prepare your destination database
 
