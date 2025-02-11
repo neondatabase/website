@@ -61,7 +61,7 @@ jobs:
           $POSTGRES/pg_restore --clean --no-owner --no-acl --if-exists -d "${{ env.DEV_DATABASE_URL }}" "${{ github.workspace }}/dump-file.bak"
 ```
 
-## Action explained
+## GitHub Action explained
 
 Below is an explanation of each part of the GitHub Action.
 
@@ -104,7 +104,7 @@ The table below provides an explanation of each flag used by `pg_restore`.
 | --if-exists | Ensures that `DROP` commands (used with `--clean`) only execute if the object exists, preventing errors.       |
 | -d          | Specifies the target database to restore into.                                                                 |
 
-## Repository secrets
+## Setting repository secrets
 
 Before running the Action, ensure that both `PROD_DATABASE_URL` and `DEV_DATABASE_URL` are added to your GitHub repository secrets.
 
@@ -112,17 +112,55 @@ In your repository, go to **Settings** > **Secrets and variables** > **Actions**
 
 ![github repository secrects](/docs/guides/twin_diagram_github_secrets.png)
 
-## Test the workflow
+## Testing the workflow
 
 To manually trigger your workflow go to **Actions** > **Create Neon Twin** then click **Run workflow**. From the dropdown, click the **Run workflow** button.
 
 ![github actions run workflow](/docs/guides/twin_diagram_test_workflow.png)
 
+## Syncing with migration changes
+
+The GitHub Action runs on a recurring schedule, but you may also want it to trigger when migration changes are applied and a Pull Request is merged. To enable this, update the Action with the following code:
+
+### Handling Pull Request Events
+
+Add a `pull_request` event and configure it to listen for merges into the main `branch`.
+
+```diff
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs at midnight ET (us-east-1)
+  pull_request: // [!code ++]
+    types: [closed] // [!code ++]
+    branches: // [!code ++]
+      - main // [!code ++]
+  workflow_dispatch:
+
+```
+
+### Add Concurrency and Conditions
+
+To prevent conflicts between scheduled runs and runs triggered by a Pull Request, set `cancel-in-progress` to `true` under `concurrency`. Additionally, add an `if` statement to ensure the job only executes when specific conditions are met.
+
+```diff
+
+jobs:
+  dump-and-restore:
+    runs-on: ubuntu-latest
+    concurrency: // [!code ++]
+      group: 'dump-and-restore' // [!code ++]
+      cancel-in-progress: true // [!code ++]
+    if: | // [!code ++]
+      github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true) // [!code ++]
+
+```
+
 ## Limitations
 
 Be aware of [usage limits](https://docs.github.com/en/actions/administering-github-actions/usage-limits-billing-and-administration#usage-limits): Each GitHub Action job can run for up to 6 hours. If a job exceeds this limit, it will be terminated and fail to complete. If your dump/restore process takes longer, consider using [self-hosted runners](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners#about-self-hosted-runners).
 
-## Further Reading
+## Further reading
 
 - [Neon Twin: Move Dev/Test/Staging to Neon, Keep Production on RDS](https://neon.tech/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon)
 - [Neon Twin: How to deploy a change tested in Neon to prod in RDS](https://neon.tech/blog/neon-twin-deploy-workflow)
