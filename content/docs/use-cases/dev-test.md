@@ -1,8 +1,9 @@
 ---
 title: Neon for Development and Testing
-subtitle: Boost developer productivity with Neon—a flexible development sandbox for running non-production workloads.
+subtitle: Boost developer productivity with Neon—a flexible development sandbox for
+  running non-production workloads.
 enableTableOfContents: true
-updatedOn: '2025-02-03T16:55:54.792Z'
+updatedOn: '2025-02-11T18:04:21.936Z'
 ---
 
 What sets Neon apart from other Postgres providers, beyond its true serverless nature, is its focus on delivering an exceptional developer experience.
