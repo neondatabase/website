@@ -5,7 +5,7 @@ subtitle: Learn how to migrate your database from Supabase to Neon Postgres usin
 redirectFrom:
   - /docs/import/import-from-supabase
 enableTableOfContents: true
-updatedOn: '2025-02-03T20:41:57.342Z'
+updatedOn: '2025-02-11T15:10:57.064Z'
 ---
 
 This guide describes how to migrate a database from Supabase to Neon Postgres.
