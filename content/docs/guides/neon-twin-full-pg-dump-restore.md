@@ -1,6 +1,6 @@
 ---
 title: Full Twin
-subtitle: Create a full Twin of your production database using GitHub Actions
+subtitle: Create a full Twin of your production database
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2025-02-06T19:39:12.345Z'

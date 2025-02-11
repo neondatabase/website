@@ -1078,12 +1078,12 @@
       icon: partner-guide # TODO change icon
       tag: new
       items:
-        - section: GitHub Actions
+        - section: pg_dump / pg_restore
           items:
             - title: Full Twin
-              slug: guides/neon-twin-full-github-actions
+              slug: guides/neon-twin-full-pg-dump-restore
             - title: Partial Twin
-              slug: guides/neon-twin-partial-github-actions
+              slug: guides/neon-twin-partial-pg-dump-restore
 
 - section: noname
   items:
