@@ -7,24 +7,24 @@ import PauseableVideo from 'components/shared/pauseable-video';
 import bg from 'images/pages/home/hero/bg.jpg';
 
 const Create = () => (
-  <section className="hero safe-paddings relative pt-36 xl:pt-[120px] lg:pt-24">
+  <section className="hero safe-paddings relative pt-36 xl:pt-[120px] lg:pt-[104px] md:pt-24">
     <Container className="relative z-10 xl:px-8" size="1100">
-      <div className="mx-auto max-w-[640px] text-center xl:max-w-xl lg:max-w-lg sm:max-w-xs">
-        <span className="mx-auto mb-3.5 text-sm font-medium uppercase leading-snug tracking-tighter text-[#66FFDB]/80 lg:mb-3 lg:mt-2.5 lg:text-balance lg:text-base sm:text-xs">
+      <div className="mx-auto max-w-[640px] text-center xl:max-w-xl lg:max-w-lg xs:max-w-xs">
+        <span className="mx-auto mb-3.5 block text-sm font-medium uppercase leading-none text-[#66FFDB]/80 lg:mb-3 md:text-xs">
           Customer Spotlight
         </span>
-        <h1 className="font-title text-[72px] font-medium leading-none -tracking-[0.03em] text-white xl:text-[64px] lg:text-[48px] md:text-[40px] sm:text-[32px]">
+        <h1 className="font-title text-[72px] font-medium leading-[0.94] tracking-extra-tight text-white xl:text-[64px] xl:-tracking-[0.03em] lg:text-[56px] md:text-[40px] sm:text-[32px]">
           <span className="bg-gradient-to-b from-white from-30% to-[#99FFE7] bg-clip-text text-transparent">
             Create.xyz
           </span>{' '}
           ships faster with Postgres
         </h1>
-        <p className="mt-2.5 text-lg font-light leading-snug tracking-tighter text-gray-new-80 lg:mt-2.5 lg:text-balance lg:text-base">
+        <p className="mt-3 text-lg font-light leading-snug tracking-tighter text-gray-new-80 lg:mt-2 lg:text-base md:text-balance">
           Text to app platform Create.xyz uses the latest Al models to turn your prompts
           into&nbsp;deployable apps, Neon database included!
         </p>
         <Button
-          className="pointer-events-auto relative mt-7 font-semibold xl:mt-6"
+          className="pointer-events-auto relative mt-8 px-[46px] font-semibold xl:mt-6 lg:px-9"
           theme="primary"
           size="md-new"
           to="https://create.xyz"
@@ -49,10 +49,10 @@ const Create = () => (
             videoClassName="xl:w-full xl:max-w-3xl lg:max-w-xl"
             width={832}
             height={468}
-            poster="/videos/pages/home/hero/create.jpg"
+            poster="/videos/pages/home/create/create.jpg"
           >
-            <source src="/videos/pages/home/hero/create.mp4" type="video/mp4" />
-            <source src="/videos/pages/home/create.webm" type="video/webm" />
+            <source src="/videos/pages/home/create/create.mp4" type="video/mp4" />
+            <source src="/videos/pages/home/create/create.webm" type="video/webm" />
           </PauseableVideo>
           <GradientBorder className="-inset-px border-image-home-hero-video-border" />
         </div>

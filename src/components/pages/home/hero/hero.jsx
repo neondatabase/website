@@ -105,10 +105,10 @@ const Hero = () => {
     <section className="hero safe-paddings relative pt-[168px] xl:pt-[152px] lg:pt-32 md:pt-[88px]">
       <Container className="xl:px-8" size="1100">
         <div className="mx-auto max-w-[640px] text-center xl:max-w-xl lg:max-w-lg sm:max-w-xs">
-          <h1 className="font-title text-[72px] font-medium leading-none -tracking-[0.03em] text-white xl:text-[64px] lg:text-[48px] md:text-[40px] sm:text-[32px]">
+          <h1 className="font-title text-[72px] font-medium leading-none -tracking-[0.03em] text-white xl:text-[64px] lg:text-[56px] md:text-[40px] sm:text-[32px]">
             About Neon
           </h1>
-          <p className="mt-2.5 text-lg font-light leading-snug tracking-tighter text-gray-new-80 lg:mt-2.5 lg:text-balance lg:text-base">
+          <p className="mt-2.5 text-lg font-light leading-snug tracking-tighter text-gray-new-80 lg:mt-2.5 lg:text-base">
             Neon is the Postgres database you love, on a serverless platform designed
             to&nbsp;help&nbsp;you build reliable and scalable applications faster.
           </p>
