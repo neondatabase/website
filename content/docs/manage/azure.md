@@ -118,9 +118,11 @@ For Azure `region_id` values, see [Regions](/docs/introduction/regions).
 
 For supported Azure regions, refer to our [Regions](/docs/introduction/regions) page. For the Public Preview, Neon supports a limited number of Azure regions. To request support for other Azure regions, see [Request a region](/docs/introduction/regions#request-a-region).
 
-## Examples
+## Azure examples
 
 <TechnologyNavigation open>
+
+<a href="https://neon.tech/guides/neon-azure-integration" title="Get started with Neon on Azure" description="Deploy Neon's serverless Postgres via the Azure Marketplace" icon="azure"></a>
 
 <a href="https://neon.tech/blog/multitenant-private-ai-chat-with-neon-on-azure" title="Multitenant private RAG with Neon on Azure" description="Tenant AI Chat Solution Accelerator uses Neon Serverless Postgres on Azure." icon="azure"></a>
 
