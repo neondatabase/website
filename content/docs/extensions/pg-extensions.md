@@ -8,7 +8,7 @@ updatedOn: '2025-02-07T19:29:48.913Z'
 
 Neon supports the Postgres extensions shown in the following table. The supported version of the extension sometimes differs by Postgres version. A dash (`-`) indicates that an extension is not yet supported.
 
-Do you need an extension we don’t support yet? [Let us know](#request-extension-support).
+**Need an extension we don't have?** 📩 [Request an extension](/docs/extensions/pg-extensions#request-extension-support)
 
 <a id="default-extensions/"></a>
 
