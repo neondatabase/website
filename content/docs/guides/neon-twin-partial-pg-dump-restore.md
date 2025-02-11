@@ -179,6 +179,10 @@ To manually trigger your workflow go to **Actions** > **Create Neon Twin** then 
 
 ![github actions run workflow](/docs/guides/twin_diagram_test_workflow.png)
 
+## Limitations
+
+Be aware of [usage limits](https://docs.github.com/en/actions/administering-github-actions/usage-limits-billing-and-administration#usage-limits): Each GitHub Action job can run for up to 6 hours. If a job exceeds this limit, it will be terminated and fail to complete. If your dump/restore process takes longer, consider using [self-hosted runners](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners#about-self-hosted-runners).
+
 ## Further Reading
 
 - [Automate Partial Data Dumps with PostgreSQL and GitHub Actions](https://neon.tech/blog/automate-partial-data-dumps-with-postgresql-and-github-actions)
