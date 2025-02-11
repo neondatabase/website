@@ -97,9 +97,19 @@
         "title": "Branches"
       },
       "free": "10 <span>per project</span>",
-      "launch": "500 <span>per project</span>",
-      "scale": "500 <span>per project</span>",
-      "business": "500 <span>per project</span>"
+      "launch": "5,000 <span>per project</span>",
+      "scale": "5,000 <span>per project</span>",
+      "business": "5,000 <span>per project</span>"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Schema-only branches"
+      },
+      "free": "3 <span>per project</span>",
+      "launch": "5 <span>per project</span>",
+      "scale": "10 <span>per project</span>",
+      "business": "25 <span>per project</span>"
     },
     {
       "rows": "1",
