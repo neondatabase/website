@@ -73,7 +73,7 @@ Logical replication requires a direct connection string, not a pooled connection
 
 2. **Get the Direct Connection String**: After enabling the IPv4 add-on, copy the direct connection string from the **Connect** button in the Navigation bar of your Supabase dashboard. This connection string is required to create a subscription in Neon.
 
-![Supabase Direct Connection String](/docs/guides/supabase_direct_connection_string.png)
+   ![Supabase Direct Connection String](/docs/guides/supabase_direct_connection_string.png)
 
     <Admonition type="warning">
     Avoid using pooled connection strings (Transaction and session poolers) for logical replication. Use the direct connection string obtained after enabling the IPv4 add-on.
@@ -81,7 +81,7 @@ Logical replication requires a direct connection string, not a pooled connection
 
 ### Create a publication on the source database
 
-Publications are a fundamental part of logical replication in Postgres. They define what will be replicated. You can run the following SQL statements in your Supabase SQL Editor or using `psql` to create a publication for the tables you want to replicate.
+Publications are a fundamental part of logical replication in Postgres. They define what will be replicated. You can run the following SQL statements in your Supabase SQL Editor or using [psql](/docs/connect/query-with-psql-editor) to create a publication for the tables you want to replicate.
 
 - To create a publication for a specific table, use the `CREATE PUBLICATION` statement. For example, to create a publication for the `playing_with_neon` table:
 
@@ -197,10 +197,10 @@ You can find your Neon database connection details by clicking the **Connect** b
 
 For more information about logical replication and Postgres client utilities, refer to the following topics in the Postgres and Neon documentation:
 
-- [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html)
-- [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html)
-- [psql](https://www.postgresql.org/docs/current/app-psql.html)
 - [Postgres - Logical replication](https://www.postgresql.org/docs/current/logical-replication.html)
 - [Neon logical replication guide](/docs/guides/logical-replication-guide)
+- [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html)
+- [psql](https://www.postgresql.org/docs/current/app-psql.html)
+- [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html)
 
 <NeedHelp/>

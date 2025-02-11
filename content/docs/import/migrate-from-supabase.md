@@ -12,6 +12,10 @@ This guide describes how to migrate a database from Supabase to Neon Postgres.
 
 We use the `pg_dump` and `pg_restore` utilities, which are part of the Postgres client toolset. `pg_dump` works by dumping both the schema and data in a custom format that is compressed and suitable for input into `pg_restore` to rebuild the database.
 
+<Admonition type="note">
+You can also replicate data from Supabase for a near-zero downtime migration. See [Replicate data from Supabase](/docs/guides/logical-replication-supabase-to-neon).
+</Admonition>
+
 ## Prerequisites
 
 - A Supabase project containing the data you want to migrate.
