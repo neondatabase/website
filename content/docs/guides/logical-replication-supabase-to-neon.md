@@ -9,22 +9,21 @@ tag: new
 
 <LRBeta/>
 
-This guide describes how to replicate data from Supabase to Neon using native Postgres logical replication. The steps in this guide follow those described in [Replicate to another Postgres database using Logical Replication](https://supabase.com/docs/guides/database/postgres/setup-replication-external), in the *Supabase documentation*.
+This guide describes how to replicate data from Supabase to Neon using native Postgres logical replication. The steps in this guide follow those described in [Replicate to another Postgres database using Logical Replication](https://supabase.com/docs/guides/database/postgres/setup-replication-external), in the _Supabase documentation_.
 
 ## Prerequisites
 
 - A Supabase project with a Postgres database containing the data you want to replicate. If you're just testing this out and need some data to play with, you can use the following statements in your Supabase SQL Editor to create a table with sample data:
 
-   ```sql shouldWrap
-   CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
-   INSERT INTO playing_with_neon(name, value)
-   SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i);
-   ```
+  ```sql shouldWrap
+  CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
+  INSERT INTO playing_with_neon(name, value)
+  SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i);
+  ```
 
 - A Neon project with a Postgres database to receive the replicated data. For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
 - Review our [logical replication tips](/docs/guides/logical-replication-tips), based on real-world customer data migration experiences.
-
 
 <Steps>
 
@@ -57,11 +56,11 @@ You need to allow inbound connections to your Supabase Postgres database from th
 
 1. **Obtain Neon NAT Gateway IP Addresses**: See [NAT Gateway IP addresses](/docs/introduction/regions#nat-gateway-ip-addresses) for the IP addresses for your Neon project's region. You will need to allow connections from these IP addresses in your Supabase project.
 2. **Configure Network Restrictions in Supabase**:
-    - Go to your Supabase project dashboard.
-    - Navigate to **Project Settings** > **Database** > **Network restrictions**.
-    - Ensure you have **Owner** or **Admin** permissions for the Supabase project to configure network restrictions.
-    - Add inbound rules to allow connections from the Neon NAT Gateway IP addresses you obtained in the previous step. Add each IP address individually.
-    ![Supabase Network Restrictions](/docs/guides/supabase_network_restrictions.png)
+   - Go to your Supabase project dashboard.
+   - Navigate to **Project Settings** > **Database** > **Network restrictions**.
+   - Ensure you have **Owner** or **Admin** permissions for the Supabase project to configure network restrictions.
+   - Add inbound rules to allow connections from the Neon NAT Gateway IP addresses you obtained in the previous step. Add each IP address individually.
+     ![Supabase Network Restrictions](/docs/guides/supabase_network_restrictions.png)
 
 ### Obtain a direct connection string
 
@@ -69,7 +68,7 @@ Logical replication requires a direct connection string, not a pooled connection
 
 1. **Enable IPv4 Add-on**: In your Supabase project dashboard, navigate to **Project Settings** > **Add-ons**. Enable the **IPv4** add-on. This add-on is required to obtain a direct IPv4 connection string. Note that this add-on might incur extra costs.
 
-    ![Supabase IPv4 Add-on](/docs/guides/supabase_ipv4_addon_image.png)
+   ![Supabase IPv4 Add-on](/docs/guides/supabase_ipv4_addon_image.png)
 
 2. **Get the Direct Connection String**: After enabling the IPv4 add-on, copy the direct connection string from the **Connect** button in the Navigation bar of your Supabase dashboard. This connection string is required to create a subscription in Neon.
 
@@ -85,15 +84,15 @@ Publications are a fundamental part of logical replication in Postgres. They def
 
 - To create a publication for a specific table, use the `CREATE PUBLICATION` statement. For example, to create a publication for the `playing_with_neon` table:
 
-   ```sql shouldWrap
-   CREATE PUBLICATION my_publication FOR TABLE playing_with_neon;
-   ```
+  ```sql shouldWrap
+  CREATE PUBLICATION my_publication FOR TABLE playing_with_neon;
+  ```
 
 - To create a publication for multiple tables, provide a comma-separated list of tables:
 
-   ```sql shouldWrap
-   CREATE PUBLICATION my_publication FOR TABLE users, departments;
-   ```
+  ```sql shouldWrap
+  CREATE PUBLICATION my_publication FOR TABLE users, departments;
+  ```
 
 <Admonition type="note">
 Defining specific tables lets you add or remove tables from the publication later, which you cannot do when creating publications with `FOR ALL TABLES`.
@@ -128,19 +127,21 @@ After creating a publication on the source database, you need to create a subscr
    CONNECTION 'postgresql://<supabase_connection_string>'
    PUBLICATION my_publication;
    ```
+
    Replace the following placeholders in the statement:
+
    - `my_subscription`: A name you chose for the subscription.
-   - `postgresql://<supabase_connection_string>`:  The **direct connection string** for your Supabase database, obtained with the IPv4 add-on enabled.
+   - `postgresql://<supabase_connection_string>`: The **direct connection string** for your Supabase database, obtained with the IPv4 add-on enabled.
    - `my_publication`: The name of the publication you created on the Supabase database.
 
-4. Verify that the subscription was created in Neon by running the following query:
+3. Verify that the subscription was created in Neon by running the following query:
 
    ```sql
    SELECT * FROM pg_stat_subscription;
 
-   subid   | subname         | worker_type | pid  | leader_pid | relid | received_lsn |     last_msg_send_time        |   last_msg_receipt_time      | latest_end_lsn |      latest_end_time          
+   subid   | subname         | worker_type | pid  | leader_pid | relid | received_lsn |     last_msg_send_time        |   last_msg_receipt_time      | latest_end_lsn |      latest_end_time
    --------|-----------------|-------------|------|------------|-------|--------------|-------------------------------|------------------------------|----------------|-------------------------------
-   216502  | my_subscription |    apply    | 1069 |            |       | 0/75B1000    | 2025-02-11 10:00:04.142994+00 | 2025-02-11 10:00:04.14277+00 |   0/75B1000    | 2025-02-11 10:00:04.142994+00 
+   216502  | my_subscription |    apply    | 1069 |            |       | 0/75B1000    | 2025-02-11 10:00:04.142994+00 | 2025-02-11 10:00:04.14277+00 |   0/75B1000    | 2025-02-11 10:00:04.142994+00
    ```
 
    The subscription (`my_subscription`) should be listed, confirming that your subscription was created successfully.
@@ -148,7 +149,6 @@ After creating a publication on the source database, you need to create a subscr
 <Admonition type="note">
 **Replication Slots Limits**: Supabase has limits on `max_replication_slots` and `max_wal_senders` which vary based on your Supabase instance size/plan. If you encounter issues, you might need to upgrade your Supabase instance to perform logical replication, especially for larger datasets or multiple replication slots. Check [Supabase documentation](https://supabase.com/docs/guides/platform/compute-and-disk#limits-and-constraints) for the limits on your instance size.
 </Admonition>
-
 
 ## Test the replication
 
