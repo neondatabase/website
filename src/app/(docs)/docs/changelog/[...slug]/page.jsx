@@ -27,21 +27,19 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { slug } = params;
 
-  let label = '';
-  let description = '';
-  let socialPreviewTitle = '';
+  let label = 'Changelog';
+  let description = 'The latest product updates from Neon';
+  let socialPreviewTitle = 'Changelog';
   const currentSlug = slug.join('/');
   const isChangelogPage = CHANGELOG_SLUG_REGEX.test(currentSlug);
-  label = 'Changelog';
-  description = `The latest product updates from Neon`;
 
   if (isChangelogPage) {
     if (!getPostBySlug(currentSlug, CHANGELOG_DIR_PATH)) return notFound();
     const date = getFormattedDate(currentSlug);
-    const { content } = getPostBySlug(currentSlug, CHANGELOG_DIR_PATH);
+    const { data, content } = getPostBySlug(currentSlug, CHANGELOG_DIR_PATH);
     label = `Changelog ${date}`;
     socialPreviewTitle = `Changelog - ${date}`;
-    description = getExcerpt(content, 160);
+    description = data.title || getExcerpt(content, 160);
   }
 
   const encodedLabel = Buffer.from(socialPreviewTitle ?? label).toString('base64');
@@ -106,10 +104,11 @@ const ChangelogPost = async ({ currentSlug }) => {
           </h2>
           <Content className="mt-8 w-full max-w-full prose-h3:text-xl" content={content} />
           <Link
-            className="mt-10 font-semibold lg:mt-8"
+            className="mt-10 lg:mt-8"
             to={CHANGELOG_BASE_PATH}
             size="sm"
-            theme="black-primary-1"
+            theme="green"
+            withArrow
           >
             Back to all changelog posts
           </Link>

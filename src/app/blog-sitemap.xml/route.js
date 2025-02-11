@@ -1,4 +1,4 @@
-import { getAllWpBlogCategories, getAllWpPosts } from 'utils/api-posts';
+import { getAllWpBlogCategories, getAllWpPosts } from 'utils/api-wp';
 
 export async function GET() {
   const headers = new Headers();

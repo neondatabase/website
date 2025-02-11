@@ -1,10 +1,11 @@
 import { notFound } from 'next/navigation';
 
 import BlogGridItem from 'components/pages/blog/blog-grid-item';
+import BlogHeader from 'components/pages/blog/blog-header';
 import ScrollLoader from 'components/shared/scroll-loader';
-import { BLOG_CATEGORY_BASE_PATH } from 'constants/blog';
+import { BLOG_BASE_PATH, BLOG_CATEGORY_BASE_PATH } from 'constants/blog';
 import { getBlogCategoryDescription } from 'constants/seo-data';
-import { getAllCategories, getCategoryBySlug, getPostsByCategorySlug } from 'utils/api-posts';
+import { getAllCategories, getCategoryBySlug, getPostsByCategorySlug } from 'utils/api-wp';
 import getMetadata from 'utils/get-metadata';
 
 // eslint-disable-next-line react/prop-types
@@ -16,7 +17,9 @@ const BlogCategoryPage = async ({ params: { slug } }) => {
 
   return (
     <>
-      <h2 className="sr-only">{category.name} Blog</h2>
+      <BlogHeader title="Blog" basePath={BLOG_BASE_PATH}>
+        <h2 className="sr-only">– {category.name}</h2>
+      </BlogHeader>
       <ScrollLoader itemsCount={8} className="grid grid-cols-2 gap-x-6 xl:gap-x-5 md:grid-cols-1">
         {posts.map((post, index) => (
           <BlogGridItem key={post.slug} index={index} category={category} post={post} />
