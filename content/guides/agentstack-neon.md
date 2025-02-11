@@ -9,7 +9,7 @@ updatedOn: '2025-02-04T00:00:00.000Z'
 
 The rapid evolution of AI agents has created a key challenge: how to build and deploy agents quickly and efficiently. Imagine creating intelligent agents that can not only perform complex tasks but also interact easily with your data infrastructure, without adding unnecessary complexity to the code.
 
-This guide introduces [**AgentStack**](https://docs.agentstack.sh/introduction), a rapid development framework for AI agents, and **Neon**, the serverless Postgres database, to streamline the creation of powerful, data-driven AI agents. We will show you how to build a **Web Scraper AI Agent** in minutes, using AgentStack's intuitive CLI and tool integrations.
+This guide introduces [**AgentStack**](https://docs.agentstack.sh/introduction), a rapid development framework, and Neon, the serverless Postgres database, and shows how they can be used together to build powerful AI agents with database integration. We'll walk through building a **Web Scraper AI Agent** using AgentStack's CLI and tool integrations.
 
 With AgentStack and Neon, you can generate complete agent workflows, create new agents and tasks with simple commands, and integrate them directly with your data layer. Let's get started.
 
@@ -19,7 +19,7 @@ This example will show you how to:
 
 - Set up an **AgentStack** project.
 - Use the **AgentStack CLI** to generate agents and tasks.
-- Equip your agents with **tools** like **Neon** and **Firecrawl** for data storage and web scraping.
+- Equip your agents with **tools** like **Neon** for data storage and **Firecrawl** for web scraping.
 - Run your agent crew to scrape the [neon.tech/guides](/guides) page, extract blog post metadata (titles, authors, dates) from it, and store it in a Neon Postgres database.
 - Use **AgentOps** for observability of your agent's execution.
 
@@ -36,9 +36,9 @@ Before you start building your Web Scraper Agent, ensure you have the following 
   - **Firecrawl account**: Sign up for a Firecrawl account at [firecrawl.dev](https://firecrawl.dev). You will need a Firecrawl API key to use the web scraping tool.
   - **AgentOps account**: Sign up for an AgentOps account at [agentops.ai](https://agentops.ai) to leverage agent observability features. You will need an AgentOps API key.
 
-## Building the Web Scraper Agent
+## Building the Web Scraper agent
 
-Let's now build the Web Scraper AI agent using AgentStack, Neon, and Firecrawl. We will walk through each step, from initializing the project to running the agent crew.
+Let's start building our agent using AgentStack, Neon, and Firecrawl. We'll walk through each step, from initializing the project to running the agent crew.
 
 ### Project setup with AgentStack CLI
 
@@ -372,24 +372,17 @@ To use AgentOps, make sure you have your `AGENTOPS_API_KEY` configured in your `
 
 Use AgentOps to gain insights into your agents' behavior and performance, allowing for continuous improvement and optimization.
 
-With a total run cost of only $0.01 in OpenAI credits (as seen in the AgentOps dashboard), this AI agent demonstrates exceptional cost-effectiveness. This was achieved entirely without code, eliminating the need for scraping, SQL queries, and other complex programming, paving the way for widespread application across various domains.
+
+With a total run cost of only $0.01 in OpenAI credits (as seen in the AgentOps dashboard), this AI agent runs efficiently while requiring no custom code. It avoids complex programming for tasks like web-scraping and SQL queries, making it widely applicable.
 </Admonition>
 
 **Congratulations!** You have successfully built and run a Web Scraper agent using AgentStack, Neon, and Firecrawl, demonstrating how to automate web data extraction and storage into a serverless Postgres database with minimal effort!
 
-## Summary
+## Next Steps  
 
-In this guide, we have demonstrated how to rapidly build an AI agent application using **AgentStack** and **Neon**. We have showcased how AgentStack simplifies the creation of intelligent agents and seamlessly integrates them with powerful tools, using Neon for robust data management as an example. AgentStack's intuitive CLI and pre-built tool integrations empower you to quickly scaffold agent projects and extend their functionalities without writing extensive code.
-
-By leveraging AgentStack, you can effortlessly create agent crews, define tasks, and equip your agents with a wide array of tools for various purposes beyond just web scraping. This example with Firecrawl and Neon illustrates just one facet of what is possible. AgentStack’s ecosystem includes tools for knowledge retrieval (like Perplexity), integrations with other platforms (like Composio and Stripe), and much more, enabling you to build diverse and sophisticated AI-driven applications tailored to your specific needs.
-
-This guide serves as your starting point to explore the vast potential of AgentStack and Neon for building intelligent systems. It provides a solid foundation for you to continue exploring the exciting world of AI agents and their integration with modern data infrastructure.
-
-## Next Steps
-
-- **Discover new tools:** AgentStack offers a rich ecosystem of [tools](https://docs.agentstack.sh/tools/community) for various functionalities. Explore tools like Perplexity for knowledge retrieval, Composio for platform integrations, Stripe for payment processing, and many others to understand the breadth of possibilities within AgentStack.
-- **Expand agent capabilities:** Experiment with adding more agents and tasks to create more complex and sophisticated workflows. Leverage the AgentStack CLI to easily generate and customize these components, building increasingly intelligent and autonomous systems.
-- **Dive Deeper into Observability:** Explore AgentOps in more detail to monitor, benchmark, and optimize your agent's performance and costs. Gain valuable insights into your agent's execution and refine your applications for efficiency and effectiveness.
+- **Explore more tools:** Browse AgentStack's [community tools](https://docs.agentstack.sh/tools/community), including Perplexity (knowledge retrieval), Composio (platform connections), and Stripe (payments).  
+- **Expand your crew:** Add more agents and tasks to handle complex workflows.  
+- **Monitor performance:** Use [AgentOps](https://docs.agentops.ai/) to track and optimize execution and costs.  
 
 You can find the source code for the application described in this guide on GitHub.
 
@@ -402,7 +395,9 @@ You can find the source code for the application described in this guide on GitH
 - [AgentStack Documentation](https://docs.agentstack.sh/introduction)
 - [AgentOps Documentation](https://docs.agentops.ai/)
 - [Firecrawl Documentation](https://docs.firecrawl.dev/introduction)
+- [Firecrawl AgentStack Tool](https://docs.agentstack.sh/tools/tool/firecrawl)
 - [CrewAI Documentation](https://docs.crewai.com/introduction)
+- [Neon AgentStack Tool](https://docs.agentstack.sh/tools/tool/neon)
 - [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api)
 - [Neon API keys](/docs/manage/api-keys#creating-api-keys)
 
