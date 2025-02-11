@@ -2,7 +2,7 @@
 title: Schema-only branches
 subtitle: Protect sensitive data with schema-only branches
 enableTableOfContents: true
-updatedOn: '2025-02-04T17:36:05.676Z'
+updatedOn: '2025-02-07T17:55:42.638Z'
 ---
 
 <EarlyAccess />
@@ -13,7 +13,7 @@ Neon supports creating schema-only branches, letting you create branches that re
 
 You can create schema-only branches in the Neon Console or using the Neon API, in much the same way you create any Neon branch. Support for the Neon CLI will come in a future release.
 
-<Tabs labels={["Neon Console", "API"]}>
+<Tabs labels={["Neon Console", "CLI", "API"]}>
 
 <TabItem>
 
@@ -26,6 +26,18 @@ To create a schema-only branch from the Neon Console:
 5. Provide a name for the branch.
 6. In the **From Branch** field, select the source branch. The schema from the source branch will be copied to your new schema-only branch.
 7. Click **Create branch**.
+
+</TabItem>
+
+<TabItem>
+
+To create a schema-only branch using the Neon CLI:
+
+```bash
+neon branch create --schema-only
+```
+
+If you have more than one project, you'll need to specify the `--project-id` option. See [Neon CLI - branch create](/docs/reference/cli-branches#create).
 
 </TabItem>
 
@@ -137,13 +149,15 @@ Schema-only branches are independent [root branches](/docs/reference/glossary#ro
 
 There are certain allowances associated with schema-only branches:
 
-- A schema-only branch is a [root branch](/docs/reference/glossary#root-branch), and there is only a certain number of root branches permitted per Neon project, depending on your Neon plan.
+- A schema-only branch is a [root branch](/docs/reference/glossary#root-branch), and only a certain number of root branches are permitted per Neon project, depending on your Neon plan.
 - The `main` root branch created with each Neon project counts toward the _root branch allowance per project_, as do certain [backup branches](/docs/reference/glossary#backup-branch) created by restore operations.
-- There is a storage allowance for schema-only branches. The storage allowances do not apply when restoring data to a schema-only branch from another branch.
+- On the Free plan, all branches share a total storage limit of 0.5 GB. Schema-only branches count toward this limit like any other branch. On paid plans, storage limits are higher, but each schema-only branch has a maximum storage allowance, as outlined in the following table.
 
-| Plan     | Root branch allowance per project | Storage allowance per schema-only branch |
-| :------- | :-------------------------------- | :--------------------------------------- |
-| Free     | 3                                 | 0.5 GB                                   |
-| Launch   | 5                                 | 3 GB                                     |
-| Scale    | 10                                | 5 GB                                     |
-| Business | 25                                | 20 GB                                    |
+| Plan     | Root branch allowance per project | Maximum storage allowance per schema-only branch |
+| :------- | :-------------------------------- | :----------------------------------------------- |
+| Free     | 3                                 | 0.5 GB                                           |
+| Launch   | 5                                 | 3 GB                                             |
+| Scale    | 10                                | 5 GB                                             |
+| Business | 25                                | 20 GB                                            |
+
+Once you use up your root branch allowance, you will not be able to create additional schema-only branches. You will be required to remove existing root branches first.
