@@ -359,7 +359,7 @@ You can verify that the data has been stored in your Neon database by:
 
 <Admonition type="info" title="AgentOps: Gain Observability into your AI Agents">
 
-AgentStack seamlessly integrates with [**AgentOps**](https://www.agentops.ai) by default to provide crucial observability for your AI agent development. AgentOps, from the same team behind AgentStack, allows you to:
+AgentStack integrates with [**AgentOps**](https://www.agentops.ai) by default to provide full observability for your AI agent development. Built by the same team behind AgentStack, AgentOps allows you to:
 
 - **Visualize agent execution:** See step-by-step execution graphs of your agents, making it easy to understand workflows and debug issues.
 - **Track LLM costs:** Monitor your spending on LLM providers to manage costs effectively.
