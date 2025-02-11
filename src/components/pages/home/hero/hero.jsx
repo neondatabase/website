@@ -1,32 +1,23 @@
-'use client';
-
 import Image from 'next/image';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
-import LINKS from 'constants/links';
 import bg from 'images/pages/home/hero/bg.jpg';
+import border from 'images/pages/home/hero/border.png';
+import createXYZ from 'images/pages/home/hero/create.xyz.jpg';
 
 const Hero = () => (
-  <section className="hero safe-paddings relative pt-[136px] xl:pt-[120px] lg:pt-24">
-    <Image
-      className="pointer-events-none absolute left-1/2 top-0 min-w-[1760px] -translate-x-1/2 xl:min-w-[1588px] lg:top-[-22px] lg:min-w-[1420px] md:top-[46px] md:min-w-[1058px]"
-      src={bg}
-      sizes="(max-width: 639px) 1058px"
-      width={1760}
-      height={980}
-      quality={100}
-      alt=""
-      priority
-    />
-
-    <Container className="xl:px-8" size="1100">
+  <section className="hero safe-paddings relative pt-36 xl:pt-[120px] lg:pt-24">
+    <Container className="relative z-10 xl:px-8" size="1100">
       <div className="mx-auto max-w-[640px] text-center xl:max-w-xl lg:max-w-lg sm:max-w-xs">
-        <span className="mx-auto mb-3.5 text-sm font-light uppercase leading-snug tracking-tighter text-[#66FFDB]/80 lg:mt-2.5 lg:text-balance lg:text-base">
+        <span className="mx-auto mb-3.5 text-sm font-medium uppercase leading-snug tracking-tighter text-[#66FFDB]/80 lg:mb-3 lg:mt-2.5 lg:text-balance lg:text-base sm:text-xs">
           Customer Spotlight
         </span>
         <h1 className="font-title text-[72px] font-medium leading-none -tracking-[0.03em] text-white xl:text-[64px] lg:text-[48px] md:text-[40px] sm:text-[32px]">
-          Create.xyz ships faster with Postgres
+          <span className="bg-gradient-to-b from-white from-30% to-[#99FFE7] bg-clip-text text-transparent">
+            Create.xyz
+          </span>{' '}
+          ships faster with Postgres
         </h1>
         <p className="mt-2.5 text-lg font-light leading-snug tracking-tighter text-gray-new-80 lg:mt-2.5 lg:text-balance lg:text-base">
           Text to app platform Create.xyz uses the latest Al models to turn your prompts
@@ -36,8 +27,9 @@ const Hero = () => (
           className="pointer-events-auto relative mt-7 font-semibold xl:mt-6"
           theme="primary"
           size="md-new"
-          to={LINKS.signup}
+          to="https://create.xyz"
           target="_blank"
+          rel="noopener noreferrer"
           tag_name="Hero"
           analyticsEvent="home_hero_get_started_clicked"
         >
@@ -45,8 +37,43 @@ const Hero = () => (
         </Button>
       </div>
 
-      <div className="mt-[84px]" />
+      <div className="relative mx-auto mt-[84px] aspect-[844/489] w-[844px] xl:mt-16 xl:w-full xl:max-w-3xl lg:mt-11 lg:max-w-xl md:mt-10">
+        <Image
+          className="absolute inset-1.5 z-20 rounded-[14px] xl:inset-[5px] xl:w-[calc(100%-10px)] xl:rounded-[13px] lg:inset-1 lg:w-[calc(100%-8px)] lg:rounded-[10px] sm:inset-0.5 sm:w-[calc(100%-4px)] sm:rounded-md"
+          src={createXYZ}
+          width={832}
+          height={477}
+          quality={100}
+          alt=""
+          priority
+        />
+        <Image
+          className="pointer-events-none absolute -inset-px z-10 max-w-[calc(100%+2px)] rounded-[18px] shadow-[0_0_40px_0_rgba(0,0,0,0.5)] xl:rounded-2xl lg:rounded-xl sm:rounded-md"
+          src={border}
+          width={848}
+          height={493}
+          quality={100}
+          alt=""
+          priority
+        />
+        <div className="pointer-events-none absolute inset-0" aria-hidden>
+          <div className="absolute -left-[9%] -top-[17%] aspect-square w-1/3 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,#174F4F_20%,transparent)] opacity-50" />
+          <div className="absolute -left-[28%] -top-1/2 aspect-square w-4/5 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,#1E3A3E_20%,transparent)] opacity-50" />
+          <div className="absolute -bottom-1/2 -right-[28%] aspect-square w-4/5 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,#1E2E3E_20%,transparent)] opacity-50" />
+        </div>
+      </div>
     </Container>
+
+    <Image
+      className="pointer-events-none absolute left-1/2 top-0 max-w-none -translate-x-1/2 xl:top-8 xl:w-[1588px] lg:top-6 lg:w-[1420px] md:top-[76px] md:w-[1058px]"
+      src={bg}
+      sizes="(max-width: 767px) 1058px"
+      width={1920}
+      height={1210}
+      quality={100}
+      alt=""
+      priority
+    />
   </section>
 );
 

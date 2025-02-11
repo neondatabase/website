@@ -102,7 +102,7 @@ const Hero = () => {
   );
 
   return (
-    <section className="hero safe-paddings relative pt-[136px] xl:pt-[120px] lg:pt-24">
+    <section className="hero safe-paddings relative pt-[168px] xl:pt-[152px] lg:pt-32 md:pt-[88px]">
       <Container className="xl:px-8" size="1100">
         <div className="mx-auto max-w-[640px] text-center xl:max-w-xl lg:max-w-lg sm:max-w-xs">
           <h1 className="font-title text-[72px] font-medium leading-none -tracking-[0.03em] text-white xl:text-[64px] lg:text-[48px] md:text-[40px] sm:text-[32px]">
