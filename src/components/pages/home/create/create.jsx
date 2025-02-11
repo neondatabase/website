@@ -51,7 +51,7 @@ const Create = () => (
             height={332}
             poster="/videos/pages/home/create/create.jpg"
           >
-            <source src="/videos/pages/home/create/create.mp4" type="video/mp4" />
+            <source src="/videos/pages/home/create/create.mp4?1" type="video/mp4" />
             <source src="/videos/pages/home/create/create.webm" type="video/webm" />
           </PauseableVideo>
           <GradientBorder className="-inset-px border-image-home-hero-video-border" />
