@@ -1,6 +1,6 @@
-import About from 'components/pages/home/about';
 import AiIndex from 'components/pages/home/ai-index';
 import Bento from 'components/pages/home/bento';
+import Create from 'components/pages/home/create/create';
 import Hero from 'components/pages/home/hero';
 import Industry from 'components/pages/home/industry';
 import InstantProvisioning from 'components/pages/home/instant-provisioning';
@@ -19,8 +19,8 @@ export const metadata = getMetadata({
 
 const FireshipPage = () => (
   <>
+    <Create />
     <Hero />
-    <About />
     <Logos />
     <InstantProvisioning />
     <Lightning />
