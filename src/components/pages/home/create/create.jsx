@@ -9,15 +9,15 @@ import bg from 'images/pages/home/hero/bg.jpg';
 const Create = () => (
   <section className="hero safe-paddings relative pt-36 xl:pt-[120px] lg:pt-[104px] md:pt-24">
     <Container className="relative z-10 xl:px-8" size="1100">
-      <div className="mx-auto max-w-[640px] text-center xl:max-w-xl lg:max-w-lg xs:max-w-xs">
+      <div className="mx-auto max-w-[640px] text-center xl:max-w-xl lg:max-w-lg sm:max-w-xs">
         <span className="mx-auto mb-3.5 block text-sm font-medium uppercase leading-none text-[#66FFDB]/80 lg:mb-3 md:text-xs">
           Customer Spotlight
         </span>
-        <h1 className="font-title text-[72px] font-medium leading-[0.94] tracking-extra-tight text-white xl:text-[64px] xl:-tracking-[0.03em] lg:text-[56px] md:text-[40px] sm:text-[32px]">
+        <h1 className="font-title text-[72px] font-medium leading-[0.94] tracking-extra-tight text-white xl:text-[64px] xl:-tracking-[0.03em] lg:text-[56px] sm:text-[32px]">
           <span className="bg-gradient-to-b from-white from-30% to-[#99FFE7] bg-clip-text text-transparent">
             Create.xyz
           </span>{' '}
-          ships faster with Postgres
+          ships faster&nbsp;with&nbsp;Postgres
         </h1>
         <p className="mt-3 text-lg font-light leading-snug tracking-tighter text-gray-new-80 lg:mt-2 lg:text-base md:text-balance">
           Text to app platform Create.xyz uses the latest Al models to turn your prompts
