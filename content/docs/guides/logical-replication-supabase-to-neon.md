@@ -3,7 +3,7 @@ title: Replicate data from Supabase
 subtitle: Learn how to replicate data from Supabase to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-11T15:10:57.063Z'
+updatedOn: '2025-02-11T15:15:07.281Z'
 tag: new
 ---
 
