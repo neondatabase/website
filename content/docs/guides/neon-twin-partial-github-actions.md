@@ -181,6 +181,5 @@ To manually trigger your workflow go to **Actions** > **Create Neon Twin** then 
 
 ## Further Reading
 
-- [TODO: Automate Partial Data Dumps with PostgreSQL and GitHub Actions](https://neon.tech/blog/)
-- [Building Slack notifications to monitor pg_dump and restore workflows](https://neon.tech/blog/building-slack-notifications-to-monitor-pg_dump-and-restore-workflows)
+- [Automate Partial Data Dumps with PostgreSQL and GitHub Actions](https://neon.tech/blog/automate-partial-data-dumps-with-postgresql-and-github-actions)
 - [Neon Twin: How to deploy a change tested in Neon to prod in RDS](https://neon.tech/blog/neon-twin-deploy-workflow)

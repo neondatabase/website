@@ -377,7 +377,6 @@
       slug: use-cases/use-cases-overview
       icon: docs
       items:
-
         - title: SaaS apps
           slug: use-cases/saas-apps
         - title: Variable traffic
@@ -1081,10 +1080,10 @@
       items:
         - section: GitHub Actions
           items:
-          - title: Full Twin
-            slug: guides/neon-twin-full-github-actions
-          - title: Partial Twin
-            slug: guides/neon-twin-partial-github-actions
+            - title: Full Twin
+              slug: guides/neon-twin-full-github-actions
+            - title: Partial Twin
+              slug: guides/neon-twin-partial-github-actions
 
 - section: noname
   items:
