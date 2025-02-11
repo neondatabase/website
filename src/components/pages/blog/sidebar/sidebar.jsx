@@ -2,9 +2,7 @@ import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
 
 import BlogNavLink from 'components/pages/blog/blog-nav-link';
-import RssButton from 'components/shared/rss-button';
 import Socials from 'components/shared/socials/index';
-import { BLOG_BASE_PATH } from 'constants/blog';
 
 const AlgoliaSearch = dynamic(() => import('components/shared/algolia-search'));
 
@@ -26,7 +24,6 @@ const Sidebar = ({ categories }) => {
               indexName={process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME}
               isBlog
             />
-            <RssButton basePath={BLOG_BASE_PATH} title="Blog" />
           </div>
           <ul className="mt-5 flex flex-col gap-y-2.5 lg:mt-0 lg:flex-row lg:gap-x-5 lg:after:shrink-0 lg:after:grow-0 lg:after:basis-px lg:after:content-['']">
             {allCategories.map(({ name, slug }, index) => (
