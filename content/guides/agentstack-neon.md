@@ -17,7 +17,7 @@ With AgentStack and Neon, you can generate complete agent workflows, create new 
 
 This example will show you how to:
 
-- Set up an **AgentStack** project to create an AI Agent.
+- Set up an **AgentStack** project.
 - Use the **AgentStack CLI** to generate agents and tasks.
 - Equip your agents with **tools** like **Neon** and **Firecrawl** for data storage and web scraping.
 - Run your agent crew to scrape the [neon.tech/guides](/guides) page, extract blog post metadata (titles, authors, dates) from it, and store it in a Neon Postgres database.
