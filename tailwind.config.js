@@ -134,9 +134,13 @@ module.exports = {
         contact: '0px 4px 10px 0px rgba(0, 0, 0, .5), 0px 4px 30px 0px rgba(0, 0, 0, .5)',
       },
       backgroundImage: ({ theme }) => ({
-        'home-hero-video-border':
+        'home-hero-video-bg':
           'radial-gradient(16.57% 34.37% at 15.61% 0%, rgba(255, 255, 255, 0.40) 0%, rgba(227, 227, 238, 0.00) 100%),' +
           'radial-gradient(29.57% 39.14% at 1.91% 0.86%, rgba(112, 234, 250, 0.30) 0%, rgba(112, 234, 250, 0.00) 100%)',
+        'home-hero-video-border':
+          'radial-gradient(16.57% 34.37% at 15.61% 0%, rgba(255, 255, 255, 0.40) 0%, rgba(227, 227, 238, 0.00) 100%),' +
+          'radial-gradient(29.57% 39.14% at 1.91% 0.86%, rgba(112, 234, 250, 0.30) 0%, rgba(112, 234, 250, 0.00) 100%),' +
+          'linear-gradient(-45deg, #222D39, #111417, #111417 80%, #519BA6)',
         'header-docs-button-border':
           'radial-gradient(78.71% 83.93% at 50% 3.57%, rgba(255, 255, 255, 0.78), transparent),' +
           'linear-gradient(0deg, #BCBEC2, #BCBEC2)',

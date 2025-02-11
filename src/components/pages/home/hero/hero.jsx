@@ -2,6 +2,7 @@ import Image from 'next/image';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
+import GradientBorder from 'components/shared/gradient-border';
 import PauseableVideo from 'components/shared/pauseable-video';
 import bg from 'images/pages/home/hero/bg.jpg';
 
@@ -53,15 +54,15 @@ const Hero = () => (
             <source src="/videos/pages/home/hero/create.mp4" type="video/mp4" />
             <source src="/videos/pages/home/create.webm" type="video/webm" />
           </PauseableVideo>
-          <div className="absolute -inset-px rounded-[inherit] bg-white/50 mix-blend-overlay" />
+          <GradientBorder className="-inset-px border-image-home-hero-video-border" />
         </div>
         {/* border */}
         <div
           className="pointer-events-none absolute -inset-1.5 z-10 rounded-[18px] bg-[#C4DAFB]/5 shadow-[0_0_40px_0_rgba(0,0,0,0.5)] xl:rounded-2xl lg:rounded-xl sm:rounded-md"
           aria-hidden
         >
-          <span className="absolute inset-0 rounded-[inherit] border border-white/5 mix-blend-overlay" />
-          <span className="absolute inset-0 rounded-[inherit] bg-home-hero-video-border" />
+          <GradientBorder className="border-image-home-hero-video-border" />
+          <span className="absolute inset-0 rounded-[inherit] bg-home-hero-video-bg" />
         </div>
         {/* highlight */}
         <div className="pointer-events-none absolute inset-0" aria-hidden>
