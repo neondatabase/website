@@ -163,6 +163,8 @@
               slug: guides/logical-replication-postgres-to-neon
             - title: Replicate from RDS
               slug: guides/logical-replication-rds-to-neon
+            - title: Replicate from Supabase
+              slug: guides/logical-replication-supabase-to-neon
         - section: Data migration services
           items:
             - title: AWS Data Migration Service (DMS)
