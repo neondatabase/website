@@ -17,6 +17,6 @@ updatedOn: '2024-12-12T19:49:26.799Z'
 
 <a href="/docs/use-cases/platforms" description="Enable your users to create their own isolated Postgres databases" icon="filter">Platforms</a>
 
-<a href="/docs/use-cases/dev-test" description="Migrate your non-prod environments to Neon to ship faster with with lower costs" icon="import">Neon for Dev/Test</a>
+<a href="/docs/use-cases/dev-test" description="Boost developer productivity with Neon—a flexible development sandbox for running non-production workloads" icon="import">Dev/Test</a>
 
 </DetailIconCards>
