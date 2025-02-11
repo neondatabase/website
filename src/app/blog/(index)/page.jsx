@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 
 import BlogGridItem from 'components/pages/blog/blog-grid-item';
+import BlogHeader from 'components/pages/blog/blog-header';
 import LoadMorePosts from 'components/shared/load-more-posts';
 import { BLOG_BASE_PATH } from 'constants/blog';
 import SEO_DATA from 'constants/seo-data';
@@ -16,7 +17,11 @@ const BlogPage = async () => {
 
   return (
     <>
-      <h2 className="sr-only">Blog</h2>
+      <BlogHeader
+        className="lg:-top-[68px] md:-top-[60px]"
+        title="Blog"
+        basePath={BLOG_BASE_PATH}
+      />
       <div className="grid grid-cols-2 gap-x-6 xl:gap-x-5 md:grid-cols-1">
         <LoadMorePosts className="mt-8 md:mt-6" defaultCountPosts={8} countToAdd={8}>
           {posts.map((post, index) => (

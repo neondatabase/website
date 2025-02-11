@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
 
@@ -6,7 +7,7 @@ import Socials from 'components/shared/socials/index';
 
 const AlgoliaSearch = dynamic(() => import('components/shared/algolia-search'));
 
-const Sidebar = ({ categories }) => {
+const Sidebar = ({ className, categories }) => {
   const allCategories = [
     {
       name: 'All posts',
@@ -15,7 +16,7 @@ const Sidebar = ({ categories }) => {
     ...categories,
   ];
   return (
-    <aside className="relative flex w-[192px] shrink-0 flex-col gap-y-10 lg:mb-10 lg:min-h-fit lg:w-full lg:pb-0 md:mb-8">
+    <aside className={clsx('relative flex flex-col gap-y-10', className)}>
       <div className="flex-1">
         <nav className="no-scrollbars sticky top-24  lg:-mx-8 lg:flex lg:max-w-5xl lg:items-end lg:justify-between lg:overflow-auto lg:px-8 md:-mx-4 md:px-4">
           <div className="flex gap-1.5 lg:hidden">
@@ -44,6 +45,7 @@ const Sidebar = ({ categories }) => {
 export default Sidebar;
 
 Sidebar.propTypes = {
+  className: PropTypes.string,
   categories: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,

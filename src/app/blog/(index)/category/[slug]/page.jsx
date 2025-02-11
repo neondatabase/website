@@ -1,8 +1,9 @@
 import { notFound } from 'next/navigation';
 
 import BlogGridItem from 'components/pages/blog/blog-grid-item';
+import BlogHeader from 'components/pages/blog/blog-header';
 import LoadMorePosts from 'components/shared/load-more-posts';
-import { BLOG_CATEGORY_BASE_PATH } from 'constants/blog';
+import { BLOG_BASE_PATH, BLOG_CATEGORY_BASE_PATH } from 'constants/blog';
 import { getBlogCategoryDescription } from 'constants/seo-data';
 import { getAllCategories, getCategoryBySlug, getPostsByCategorySlug } from 'utils/api-wp';
 import getMetadata from 'utils/get-metadata';
@@ -16,7 +17,9 @@ const BlogCategoryPage = async ({ params: { slug } }) => {
 
   return (
     <>
-      <h2 className="sr-only">{category.name} Blog</h2>
+      <BlogHeader title="Blog" basePath={BLOG_BASE_PATH}>
+        <h2 className="sr-only">– {category.name}</h2>
+      </BlogHeader>
       <div className="grid grid-cols-2 gap-x-6 md:grid-cols-1">
         <LoadMorePosts className="mt-8 md:mt-6" defaultCountPosts={8} countToAdd={8}>
           {posts.map((post, index) => (
