@@ -49,6 +49,7 @@ Some operations require a personal API key from an organization admin and cannot
 | [Remove member from the organization](#remove-member-from-the-organization)               | ✅               | ❌                   |
 | [Get organization invitation details](#get-organization-invitation-details)               | ✅               | ✅                   |
 | [Create organization invitations](#create-organization-invitations)                       | ✅               | ❌                   |
+| [Transfer projects between organizations](#transfer-projects-between-organizations)        | ✅               | ❌                   |
 
 ## Finding your org_id
 
@@ -314,3 +315,14 @@ curl --request POST \
 ```
 
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/createorganizationinvitations)
+
+## Transfer projects between organizations
+
+The API supports transferring projects between organizations. For detailed instructions and examples, see [Transfer projects to an organization](/docs/manage/orgs-project-transfer).
+
+Key requirements:
+
+- Must use a personal API key
+- Requires admin permissions in the source organization and at least member permissions in the target
+
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/transferproject)

@@ -4,7 +4,12 @@ enableTableOfContents: true
 updatedOn: '2025-01-20T20:22:35.268Z'
 ---
 
-When creating an organization as an Admin &#8212; or as a member of an organization that's already up and running &#8212; you may need to transfer existing projects from your personal account to your target organization.
+As an Admin or Member of an organization, you can transfer projects in the following ways:
+
+- From personal accounts to organizations
+- Between different organizations (via API)
+
+This guide explains how to transfer projects using both the UI and API methods, and covers important requirements and limitations.
 
 ## Guidelines
 
