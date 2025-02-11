@@ -1075,7 +1075,7 @@
   items:
     - title: Neon Twin
       slug: guides/neon-twin-intro
-      icon: partner-guide # TODO change icon
+      icon: neon-twin
       tag: new
       items:
         - section: pg_dump / pg_restore
