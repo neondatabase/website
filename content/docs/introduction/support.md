@@ -33,13 +33,13 @@ The support channels you can access differ according to your [Support Plan](#sup
 | [Support tickets](#support-tickets)                                           |     -     | &check;  | &check;  |  &check;   |
 | [Prioritized support tickets](#prioritized-support-tickets)                   |     -     |    -     | &check;  |  &check;   |
 | [Video chat](#video-chat)                                                     |     -     |    -     |    -     |     \*     |
-| [Slack channel](#slack-channel)                                               |     -     |    -     |    -     |     \*     |
+| [Slack channel](#slack-channel)                                               |     -     |    -     |    -     |    \*\*    |
 | [SLAs](#slas)                                                                 |     -     |    -     | &check;  |  &check;   |
 | [Dedicated Support Engineer](#dedicated-support-engineer)                     |     -     |    -     |    -     |    \*\*    |
 
 <div style={{margin: '-30px 0 30px 0'}}>
-<small><sup>*</sup>Video chats may be scheduled on a case-by-case basis. See [Video chat](#video-chat).</small><br/>
-<small><sup>**</sup>Dedicated Support Engineers are available as a paid addon. See [Dedicated Support Engineer](#dedicated-support-engineer).</small>
+<small><sup>*</sup>[Video chats](#video-chat) may be scheduled on a case-by-case basis.</small><br/>
+<small><sup>**</sup>[Slack channels](#slack-channel) and [Dedicated Support Engineers](#dedicated-support-engineer) are available as a paid addons.</small>
 </div>
 
 ### Neon Discord Server
