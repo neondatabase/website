@@ -35,7 +35,7 @@ curl --request PATCH \
   "endpoint": {
     "settings": {
       "pg_settings": {
-        "cron.database_name": "neondb"
+        "cron.database_name": "your_dbname"
       }
     }
   }
