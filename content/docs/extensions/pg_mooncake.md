@@ -3,7 +3,7 @@ title: The pg_mooncake extension
 subtitle: Fast analytics in Postgres with columnstore tables and DuckDB execution
 tag: new
 enableTableOfContents: true
-updatedOn: '2025-01-22T18:34:11.800Z'
+updatedOn: '2025-02-07T19:29:48.914Z'
 ---
 
 The [pg_mooncake](https://github.com/Mooncake-Labs/pg_mooncake) extension enables fast analytic workloads in Postgres by adding native columnstore tables and vectorized execution (DuckDB).
@@ -28,15 +28,6 @@ In addition, you can:
 - Run DuckDB specific aggregate functions like `approx_count_distinct`
 - Read existing Iceberg and Delta Lake tables
 - Write Delta Lake tables from Postgres tables
-
-**Version availability:**
-
-`pg_mooncake` is supported on the following versions of Postgres.
-
-- Postgres 14 - `pg_mooncake` 0.1.0
-- Postgres 15 - `pg_mooncake` 0.1.0
-- Postgres 16 - `pg_mooncake` 0.1.0
-- Postgres 17 -`pg_mooncake` 0.1.0
 
 <Admonition type="note">
 `pg_mooncake` is an open-source extension for Postgres that can be installed on any Neon Project using the instructions below.

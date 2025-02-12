@@ -15,10 +15,18 @@
     > * {
       &:first-child {
         @apply mt-0;
+
+        img {
+          @apply mt-0;
+        }
       }
 
       &:last-child {
         @apply mb-0;
+
+        img {
+          @apply mb-0;
+        }
       }
     }
 

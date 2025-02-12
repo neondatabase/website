@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2025-02-04T13:13:46.241Z'
+updatedOn: '2025-02-07T19:29:48.916Z'
 ---
 
 Our development teams are focused on helping you ship faster with Postgres. This roadmap describes committed features we're working on right now, what we delivered recently, and a peek at what's on the horizon.
@@ -21,7 +21,7 @@ Here's a snapshot of what we're working on now:
 - **Improved migration assistance**: The [Neon Migration Assistant](/docs/import/migration-assistant) was introduced in Q4 2024. More improvements are coming in 2025 to make data import easier and faster.
 - **Support for the [pg_search](https://github.com/paradedb/paradedb/tree/dev/pg_search) extension**: This extension enables full text search over heap tables.
 - **Scheduled updates**: We will be rolling out support for a scheduled updates feature in Neon to facilitate Postgres updates, security patches, and Neon feature enhancements. [Learn more](/docs/changelog/2025-01-24#scheduled-updates-coming-soon).
-- **Scheduled backups**: Regular snapshots with point-in-time recovery.
+- **Backup & restore**: We'll start with scheduled snapshots with instant point-in-time recovery, eventually expanding this feature with more traditional automated backup capabilities.
 - **Vercel preview deployment support**: We're adding support for preview deployments to our [Native Vercel Integration](/docs/guides/vercel-native-integration).
 - **Branch protection enhancements**: We're enhancing safeguards for [protected branches](/docs/guides/protected-branches) to strengthen their security and prevent accidental actions.
 - **Neon on Azure GA**: We're working toward a GA release with deeper Azure integration.
@@ -41,10 +41,12 @@ And here's a quick list of what we'll be taking on in the near future:
 - **Private Networking on Azure**: Following on [AWS PrivateLink support](/docs/guides/neon-private-networking), Azure Private Link is next.
 - **Console navigation improvements**: Enhancing navigation for multi-project organizations, branch clarity, and better SQL Editor and Tables page interactions.
 - **Private networking support on Azure**: We're planning to extend Neon's [Private Networking](/docs/guides/neon-private-networking) feature to support Azure Private Link.
-- **More Auth provider support for Neon Identity**: This feature lets you sync user profiles from your auth provider to your database automatically. See [Neon Identity](/docs/guides/neon-identity) for details.
+- **More Auth provider support for Neon Auth**: This feature lets you sync user profiles from your auth provider to your database automatically. See [Neon Auth](/docs/guides/neon-identity) for details.
 
 ## What we've shipped recently 🚢
 
+- **Save your connection details to [1Password](https://1password.com/)**: See [Save your connection details to 1Password](/docs/connect/connect-from-any-app#save-your-connection-details-to-1password).
+- **Query monitoring in the console**: Monitor your [active queries](/docs/introduction/monitor-active-queries) and [query history](/docs/introduction/monitor-query-history) in the Neon Console.
 - **The Neon Slack App**: Stay connected to your Neon Serverless Postgres databases in Slack. See [Neon Slack App](/docs/manage/slack-app).
 - **Schema-only branches**: Create branches that include only your database schema—ideal for workflows involving sensitive data. This feature is now available in Early Access. [Learn more](/docs/guides/branching-schema-only).
 - Support for the [postgres_fdw](/docs/extensions/postgres_fdw), [dblink](https://neon.tech/docs/extensions/dblink), and [pg_repack](/docs/extensions/pg_repack) Postgres extensions.
@@ -52,7 +54,7 @@ And here's a quick list of what we'll be taking on in the near future:
 - **Neon Chat for Visual Studio Code**: This AI-powered assistant lets you chat with the latest Neon documentation without leaving your IDE
 - **A GitHub Copilot extension**: This extension provides chat-based access to the latest Neon documentation with repository context, making it easier to configure Neon for your project. You can find it here: [Neon Database Copilot Extension](https://github.com/marketplace/neon-database)
 - **Schema Diff API**: Neon now supports schema checks in agentic systems and deployment pipelines with the new schema diff API endpoint. Learn more about [Schema Diff](/docs/guides/schema-diff), which is also available via the console and CLI.
-- **Neon Identity (Early Access)**: Sync user profiles from your auth provider to your database automatically. Currently in Early Access. See [Neon Identity](/docs/guides/neon-identity) for details.
+- **Neon Auth (Early Access)**: Sync user profiles from your auth provider to your database automatically. Currently in Early Access. See [Neon Auth](/docs/guides/neon-auth) for details.
 - **Postgres 17**: Now the default version for all newly created projects.
 - **Support for [pg_cron](/docs/extensions/pg_cron)**: Schedule and manage periodic jobs directly in your Postgres database with this extension.
 - **Neon on AgentStack**: Integrate Neon with AgentStack to enable AI agents to create ephemeral or long-lived Postgres instances for structured data storage. Explore the [Neon tool](https://github.com/AgentOps-AI/AgentStack/blob/main/agentstack/templates/crewai/tools/neon_tool.py) in AgentStack's repo.
@@ -75,7 +77,7 @@ And here's a quick list of what we'll be taking on in the near future:
 - **Python SDK**: Our new [Python SDK](https://pypi.org/project/neon-api/) wraps the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), allowing you to manage the Neon platform directly from your Python applications.
 - **Neon in the Vercel Marketplace**: Neon is now a first-party native integration in the Vercel Marketplace. This integration lets Vercel users add Postgres to their projects and manage billing directly through Vercel. For details, see [Install the Neon Postgres Native Integration on Vercel](/docs/guides/vercel-native-integration).
 - **Archive storage on the Free Plan**: Archive storage is now available on the Free Plan for automatically archiving inactive branches. This feature helps minimize storage costs, allowing us to expand the Free Plan even further. Learn more in [Branch Archiving](/docs/guides/branch-archiving).
-- **Neon Authorize**: This feature integrates with third-party **authentication providers** like Auth0, Clerk, and Stack Auth to bring authorization to your code base by leveraging Postgres [Row-Level Security (RLS)](https://www.postgresql.org/docs/current/ddl-rowsecurity.html). [Read the announcement](https://neon.tech/blog/introducing-neon-authorize) and [check out the docs](/docs/guides/neon-authorize).
+- **Neon RLS Authorize**: This feature integrates with third-party **authentication providers** like Auth0, Clerk, and Stack Auth to bring authorization to your code base by leveraging Postgres [Row-Level Security (RLS)](https://www.postgresql.org/docs/current/ddl-rowsecurity.html). [Read the announcement](https://neon.tech/blog/introducing-neon-authorize) and [check out the docs](/docs/guides/neon-rls-authorize).
 - **Neon on Azure**: You can deploy Neon databases on Azure, starting with the East US 2 region. This marks the first milestone on our Azure roadmap—many more exciting updates are on the way, including deeper integrations with the Azure ecosystem. [Read the announcement](https://neon.tech/blog/first-azure-region-available-in-neon).
 - **End-to-end RAG pipelines in Postgres**: Our new and open source [pgrag](/docs/extensions/pgrag) extension lets you create end-to-end Retrieval-Augmented Generation (RAG) pipelines in Postgres. There's no need for additional programming languages or libraries. With the functions provided by `pgrag`, you can build a complete RAG pipeline directly within your SQL client.
 - **Support for Analytics with pg_mooncake**: This new extension, brought to the community by [mooncake.dev](https://mooncake.dev/), introduces native columnstore tables with DuckDB execution for _fast_ analytics directly in Postgres. [Read the announcement](https://www.mooncake.dev/blog/pgmooncake-neon).

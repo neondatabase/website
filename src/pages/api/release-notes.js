@@ -2,7 +2,7 @@ import fs from 'fs/promises';
 
 import matter from 'gray-matter';
 
-import { CHANGELOG_DIR_PATH } from 'constants/docs';
+import { CHANGELOG_DIR_PATH } from 'constants/content';
 import { getPostSlugs } from 'utils/api-docs';
 import getExcerpt from 'utils/get-excerpt';
 

@@ -3,7 +3,7 @@ title: Replicate data to an external Postgres instance
 subtitle: Learn how to replicate data from Neon to an external Postgres instance
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-03T20:41:57.324Z'
+updatedOn: '2025-02-11T11:32:44.540Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from Neon to external subscribers. This guide shows you how to stream data from a Neon Postgres database to an external Postgres database (a Postgres destination other than Neon). If you're looking to replicate data from one Neon Postgres instance to another, see [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
@@ -118,16 +118,8 @@ Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables 
 ### Create a publication on the source database
 
 Publications are a fundamental part of logical replication in Postgres. They define what will be replicated.
-To create a publication for all tables in your database:
 
-```sql
-CREATE PUBLICATION my_publication FOR ALL TABLES;
-```
-
-<Admonition type="important">
-Avoid defining publications with `FOR ALL TABLES` if you want the flexibility to add or drop tables from the publication later. It is not possible to modify a publication defined with `FOR ALL TABLES` to include or exclude specific tables. For details, see [Logical replication tips](/docs/guides/logical-replication-tips).
-
-To create a publication for a specific table, you can use the following syntax:
+To create a publication for a specific table:
 
 ```sql shouldWrap
 CREATE PUBLICATION my_publication FOR TABLE playing_with_neon;
@@ -140,7 +132,6 @@ CREATE PUBLICATION my_publication FOR TABLE users, departments;
 ```
 
 For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
-</Admonition>
 
 ## Prepare your destination database
 

@@ -4,7 +4,7 @@ subtitle: Learn about Neon as a managed Postgres service
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2025-01-31T21:06:22.114Z'
+updatedOn: '2025-02-10T20:48:12.533Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
@@ -89,6 +89,61 @@ Of the parameter settings listed above, the `max_connections`, `maintenance_work
   ![max_connections calculator](/docs/reference/max_connection_calculator.png)
 
   _You can use connection pooling in Neon to increase the number of supported connections. For more information, see [Connection pooling](/docs/connect/connection-pooling)._
+
+- The `maintenance_work_mem` value is set according to your minimum compute size RAM. The formula is:
+
+  ```go
+  maintenance_work_mem = max(min_compute_size RAM in bytes * 1024/63,963,136, 65,536)
+  ```
+
+  However, you can increase the setting for the current session; for example:
+
+  ```sql
+  SET maintenance_work_mem='10 GB';
+  ```
+
+  If you do increase `maintenance_work_mem`, your setting should not exceed 60 percent of your compute's available RAM.
+
+  | Compute Units (CU) | vCPU | RAM    | maintenance_work_mem |
+  | :----------------- | :--- | :----- | :------------------- |
+  | 0.25               | 0.25 | 1 GB   | 64 MB                |
+  | 0.50               | 0.50 | 2 GB   | 64 MB                |
+  | 1                  | 1    | 4 GB   | 67 MB                |
+  | 2                  | 2    | 8 GB   | 134 MB               |
+  | 3                  | 3    | 12 GB  | 201 MB               |
+  | 4                  | 4    | 16 GB  | 268 MB               |
+  | 5                  | 5    | 20 GB  | 335 MB               |
+  | 6                  | 6    | 24 GB  | 402 MB               |
+  | 7                  | 7    | 28 GB  | 470 MB               |
+  | 8                  | 8    | 32 GB  | 537 MB               |
+  | 9                  | 9    | 36 GB  | 604 MB               |
+  | 10                 | 10   | 40 GB  | 671 MB               |
+  | 11                 | 11   | 44 GB  | 738 MB               |
+  | 12                 | 12   | 48 GB  | 805 MB               |
+  | 13                 | 13   | 52 GB  | 872 MB               |
+  | 14                 | 14   | 56 GB  | 939 MB               |
+  | 15                 | 15   | 60 GB  | 1007 MB              |
+  | 16                 | 16   | 64 GB  | 1074 MB              |
+  | 18                 | 18   | 72 GB  | 1208 MB              |
+  | 20                 | 20   | 80 GB  | 1342 MB              |
+  | 22                 | 22   | 88 GB  | 1476 MB              |
+  | 24                 | 24   | 96 GB  | 1610 MB              |
+  | 26                 | 26   | 104 GB | 1744 MB              |
+  | 28                 | 28   | 112 GB | 1878 MB              |
+  | 30                 | 30   | 120 GB | 2012 MB              |
+  | 32                 | 32   | 128 GB | 2146 MB              |
+  | 34                 | 34   | 136 GB | 2280 MB              |
+  | 36                 | 36   | 144 GB | 2414 MB              |
+  | 38                 | 38   | 152 GB | 2548 MB              |
+  | 40                 | 40   | 160 GB | 2682 MB              |
+  | 42                 | 42   | 168 GB | 2816 MB              |
+  | 44                 | 44   | 176 GB | 2950 MB              |
+  | 46                 | 46   | 184 GB | 3084 MB              |
+  | 48                 | 48   | 192 GB | 3218 MB              |
+  | 50                 | 50   | 200 GB | 3352 MB              |
+  | 52                 | 52   | 208 GB | 3486 MB              |
+  | 54                 | 54   | 216 GB | 3620 MB              |
+  | 56                 | 56   | 224 GB | 3754 MB              |
 
 - The formula for `max_worker_processes` is:
 

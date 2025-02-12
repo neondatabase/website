@@ -5,14 +5,14 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/about
   - /docs/introduction/about
-updatedOn: '2024-11-30T11:53:56.054Z'
+updatedOn: '2025-02-08T16:44:52.276Z'
 ---
 
 Looking back at Neon's debut blog post, [SELECT ’Hello, World’](https://neon.tech/blog/hello-world), the fundamental reasons for **Why Neon** remain the same:
 
 - **To build the best Postgres experience in the cloud**
 
-  This is still our core mission today. It was clear to us then, as it is now, that database workloads are shifting into the cloud &#8212; and no one wants to manage a database themselves.
+  This is still our core mission today. It was clear to us then, as it is now, that database workloads are shifting to the cloud &#8212; and no one wants to manage a database themselves.
 
 - **In an ever-changing technology stack, we believe Postgres is here to stay**
 
@@ -24,7 +24,7 @@ Looking back at Neon's debut blog post, [SELECT ’Hello, World’](https://neon
 
 - **The belief that our architecture can provide a better Developer Experience (DevX)**
 
-  Features such as autoscaling, branching, time travel, and instant databases, backups, and restore improve the developer experience by allowing quick environment setup, efficient developer workflows, and immediate database availability.
+  Features such as autoscaling, branching, time travel, instant provisioning, and instant point-in-time restore improve the developer experience by allowing quick environment setup, efficient developer workflows, and immediate database availability.
 
 These are Neon's reasons, but given the many _database-as-a-service_ options available today, let's take a look at the reasons why **you** should choose Neon:
 
@@ -42,11 +42,11 @@ From its beginning as a [DARPA-sponsored project at Berkeley](https://www.postgr
 
 Neon's [architecture](/docs/introduction/architecture-overview) separates compute from storage, which enables serverless features like instant provisioning, [autoscaling](/docs/get-started-with-neon/production-readiness#autoscaling), [scale to zero](/docs/get-started-with-neon/production-readiness#scale-to-zero), and more.
 
-Separating compute from storage refers to an architecture where the database computation processes (queries, transactions, etc.) are handled by one set of resources (compute), while the data itself is stored on a separate set of resources (storage). This design contrasts with traditional architectures where compute and storage are tightly coupled on the same server. In Neon, Postgres runs on a compute, and data (except for what's cached in memory) resides on Neon's storage layer.
+Separating compute from storage refers to an architecture where the database computation processes (queries, transactions, etc.) are handled by one set of resources (compute), while the data itself is stored on a separate set of resources (storage). This design contrasts with traditional architectures where compute and storage are tightly coupled on the same server. In Neon, Postgres runs on a compute, and data (except for what's cached in local compute memory) resides on Neon's storage layer.
 
-Separation of compute and storage enables scalability as these resources can be scaled independently. You can adjust for processing power or storage capacity as needed without affecting the other. This approach is also cost-efficient. The ability to scale resources independently means you can benefit from the lower cost of storage compared to compute or avoid paying for additional storage when you only require extra processing power. Decoupling compute and storage also improves availability and durability, as data remains accessible and safe even if a compute fails.
+Separation of compute and storage allows these resources to be scaled independently. You can adjust for processing power or storage capacity as needed without affecting the other. This approach is also cost-efficient. The ability to scale resources independently means you can benefit from the lower cost of storage compared to compute or avoid paying for additional storage when you only require extra processing power. Decoupling compute and storage also improves availability and durability, as data remains accessible and safe, even if a compute fails.
 
-[Read more about the benefits of Neon's serverless architecture](/docs/introduction/serverless) and how it supports database-per-user architectures, variable workloads, and database branching workflows.
+[Read more about the benefits of Neon's serverless architecture](/docs/introduction/serverless) and how it supports database-per-user architectures, variable workloads, database branching workflows, and [AI agents](https://neon.tech/use-cases/ai-agents).
 
 <Admonition type="tip" title="Did you know?">
 Neon's autoscaling feature instantly scales your compute and memory resources. **No manual intervention or restarts are required.** 
@@ -62,7 +62,7 @@ Being a fully managed service means that Neon provides high availability without
 
 **Neon is developed under an Apache 2.0 license.**
 
-Neon is not the first to offer separation of storage and compute for Postgres. AWS Aurora is probably the most famous example; however, it is proprietary and tied to AWS’s internal infrastructure.
+Neon is not the first to offer separation of storage and compute for Postgres. AWS Aurora is probably the most famous example — but it's proprietary and tied to AWS’s internal infrastructure.
 
 We believe we have an opportunity to define the standard for cloud Postgres. We carefully designed our storage, focusing on cloud independence, performance, manageability, DevX, and cost. We chose the most permissive open-source license, Apache 2.0, and invited the world to participate. You can already build and run your own self-hosted instance of Neon. Check out our [neon GitHub repository](https://github.com/neondatabase) and the [#self-hosted](https://discord.com/channels/1176467419317940276/1184894814769127464) channel on our Discord server.
 
@@ -88,6 +88,7 @@ Neon is designed for a wide range of users, from individual developers to enterp
 
 - **Teams and organizations** that aim to enhance their development workflows with the ability to create database branches for testing new features or updates, mirroring the branching process used in code version control.
 - **Enterprises** requiring scalable, high-performance database solutions with advanced features like autoscaling, scale to zero, point-in-time restore, and logical replication. Enterprises can benefit from custom pricing, higher resource allowances, and enterprise-level support to meet their specific requirements.
+- **AI agents** that need to rapidly provision Postgres databases, execute SQL queries, and efficiently manage Neon infrastructure. With one-second provision times, scale-to-zero compute, and agent-friendly client interfaces, Neon enables AI agents to manage database fleets at scale while keeping costs low. AI agents are on track to surpass humans in the number of databases created on the Neon platform. [Learn more about this use case](https://neon.tech/use-cases/ai-agents).
 
 In summary, Neon is built for anyone who requires a Postgres database and wants to benefit from the scalability, ease of use, cost savings, and advanced DevX capabilities provided by Neon's serverless architecture.
 
@@ -107,7 +108,7 @@ postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbna
 
 Additionally, after signing up, we land you on your project dashboard, where you'll find connection snippets for various frameworks, languages, and platforms.
 
-![Next.js connection snippet from the Connection details widget on the Neon Dashboard](/docs/get-started-with-neon/connection_snippet.png)
+![Next.js connection snippet from the Connection details widget on the Neon Dashboard](/docs/connect/code_connection_examples.png)
 
 If you are not quite ready to hook up an application, you can explore Neon from the console. Create the `playing_with_neon` table using the Neon [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), run some queries, or create a database branch.
 
