@@ -111,7 +111,7 @@ const Navigation = ({ isDarkTheme }) => (
                                           'size-4',
                                           isDarkTheme
                                             ? 'text-white'
-                                            : 'text-gray-new-20 dark:text-white'
+                                            : 'text-gray-new-20 dark:text-white dark:[&_stop:not([stop-opacity])]:gradient-stop-opacity-40 dark:[&_stop[stop-opacity="0.6"]]:gradient-stop-opacity-100'
                                         )}
                                       />
                                     </div>

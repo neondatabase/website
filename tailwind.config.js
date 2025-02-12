@@ -400,7 +400,7 @@ module.exports = {
     require('tailwindcss/plugin')(({ addVariant }) => {
       addVariant('search-cancel', '&::-webkit-search-cancel-button');
     }),
-    plugin(({ matchUtilities, theme }) => {
+    plugin(({ matchUtilities, addUtilities, theme }) => {
       matchUtilities(
         {
           'border-image': (value) => ({
@@ -412,6 +412,14 @@ module.exports = {
         },
         { values: theme('backgroundImage') }
       );
+      addUtilities({
+        '.gradient-stop-opacity-40': {
+          'stop-opacity': '0.4',
+        },
+        '.gradient-stop-opacity-100': {
+          'stop-opacity': '1',
+        },
+      });
     }),
   ],
 };
