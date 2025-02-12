@@ -62,7 +62,7 @@ You can transfer projects to a destination organization using two different API 
 
 ### Transfer personal projects to an organization
 
-Use the Project Transfer API to transfer projects from your personal Neon account to a specified organization account.
+Use the [Project Transfer API](https://api-docs.neon.tech/reference/transferprojectsfromorgtoorg) to transfer projects from your personal Neon account to a specified organization account.
 
 `POST /users/me/projects/transfer`
 
