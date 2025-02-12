@@ -100,7 +100,7 @@ const Video = forwardRef(
                 alt=""
                 loading="eager"
               />
-              <h2 className="font-title text-[64px] font-medium leading-none tracking-tighter text-white lt:text-[48px] md:text-[42px] xs:text-[30px]">
+              <h2 className="font-title text-[64px] font-medium leading-none tracking-[-0.04em] text-white lt:text-[48px] md:text-[42px] xs:text-[30px]">
                 {videoTitle}
               </h2>
             </div>

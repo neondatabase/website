@@ -1,7 +1,6 @@
 import AiIndex from 'components/pages/home/ai-index';
 import Bento from 'components/pages/home/bento';
-import Create from 'components/pages/home/create';
-import Hero from 'components/pages/home/hero';
+import Hero from 'components/pages/home/hero/hero';
 import Industry from 'components/pages/home/industry';
 import InstantProvisioning from 'components/pages/home/instant-provisioning';
 import Lightning from 'components/pages/home/lightning';
@@ -31,7 +30,6 @@ const Homepage = () => (
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
     />
-    <Create />
     <Hero />
     <Logos />
     <InstantProvisioning />

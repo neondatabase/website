@@ -1,3 +1,1 @@
-import Hero from './hero';
-
-export default Hero;
+export { default } from './hero';
