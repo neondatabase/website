@@ -78,9 +78,9 @@ To read more about how this works, see: [Quicker serverless Postgres connections
 
 ### Putting app and database close together
 
-Let’s go through the different scenarios here from lowest latency to highest:
+I
 
-1. **App and database on same VM** \- 1ms to connect and 1ms to query \[Not possible with Neon\] When you put your database and your app on the exact same machine, latency is measured in microseconds. \[Is there a way to give someone an environment that shows this? Maybe github codespace?\]
+1. **App and database on same VM** - 1ms to connect and 1ms to query \[Not possible with Neon\] When you put your database and your app on the exact same machine, latency is measured in microseconds. 
 2. **App and database in same region (datacenter) connecting over private network \-** 1ms to connect, 1ms to query \[Not exactly possible on Neon, you can connect through PrivateLink but it doesnt save you any time\]
 3. **App and database in same region (datacenter) connecting over public network** \- 3ms to connect, 1ms to query \- This is the fastest way to connect that is accessible to all Neon users. What you’re doing here is picking the same AWS or Azure region for your database and your application (be it serverless, like lambda functions on AWS, or serverful).
    1. You still use the publicly routable address of your database, but data is traveling 0 miles so it is very fast.
@@ -89,9 +89,15 @@ Let’s go through the different scenarios here from lowest latency to highest:
 
 ### Minimizing time spent answering the query
 
+Until you start to scale, the vast majority of your standard database queries are going to execute in single digit milliseconds.  
+
+[Docs Tips]
+
 ## Definitions
 
 ### Serverless
+
+[Docs serverless terminology]
 
 ### Scale to zero
 
