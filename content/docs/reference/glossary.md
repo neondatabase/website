@@ -315,6 +315,10 @@ A component of the Neon platform that acts as an intermediary between connecting
 
 The user account that registers and authenticates with Neon using an email, GitHub, Google, or partner account. After authenticating, a Neon user account can create and manage projects, branches, users, databases, and other project resources.
 
+## Neon Org
+
+A named organization entity in Neon that groups multiple Neon users under a shared account. See [Organization](#organization) for details.
+
 ## NeonVM
 
 A QEMU-based tool used by Neon to create and manage VMs within a Kubernetes cluster, allowing for the allocation and deallocation of vCPU and RAM. For more information, refer to the NeonVM source in the [neondatabase/autoscaling](https://github.com/neondatabase/autoscaling/tree/main/neonvm) repository.
