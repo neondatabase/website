@@ -75,14 +75,14 @@ const BlogPostCard = ({
       {largeCover && (
         <Link
           className={clsx(
-            'group w-full overflow-hidden rounded-md',
+            'group aspect-[16/9] w-full overflow-hidden rounded-lg bg-[#181818]',
             fullSize && 'col-span-6 xl:col-span-5'
           )}
           to={link}
         >
           <Image
             className={clsx(
-              'w-full rounded-lg transition-transform duration-200',
+              'size-full rounded-lg object-cover transition-transform duration-200',
               withImageHover && 'group-hover:scale-110'
             )}
             src={largeCover?.mediaItemUrl}
