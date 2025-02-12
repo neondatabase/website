@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-10-08T17:24:35.409Z'
 ---
 
-At Neon, our serverless architecture takes a different approach to high availability. Instead of maintaining idle standby replicas, we achieve multi-AZ resilience through our separation of storage and compute.
+At Neon, our serverless architecture takes a different approach to high availability. Instead of maintaining idle standby compute replicas, we achieve multi-AZ resilience through our separation of storage and compute.
 
 ![Neon architecture diagram](/docs/introduction/neon_architecture_4.jpg)
 
@@ -17,7 +17,7 @@ Based on this separation, we can break our approach into two main parts:
 
 - **Compute resiliency** &#8212; _Keeping your application running_
 
-  Our architecture scales to handle traffic spikes and restarts or reschedules compute instances when issues occur, with recovery times typically ranging from a few seconds to a few minutes. While this means your application needs to handle brief disconnections, it eliminates the cost of maintaining idle standby instances.
+  Our architecture scales to handle traffic spikes and restarts or reschedules compute instances when issues occur, with recovery times typically ranging from a few seconds to a few minutes. While this means your application needs to handle brief disconnections, it provides cost efficiency by eliminating the need for continuously running standby compute instances.
 
 ## Storage redundancy
 
@@ -63,33 +63,33 @@ Our serverless architecture manages compute failures through rapid recovery and 
 
 Your compute endpoint exists essentially as metadata — with your connection string being the core element. This design means endpoints can be instantly reassigned to new compute resources without changing your application's configuration. When you first connect, Neon assigns your endpoint to an available VM from our ready-to-use pool, eliminating traditional provisioning delays.
 
-#### Postgres failure
+### Postgres failure
 
 Postgres runs inside the VM. If Postgres crashes, an internal Neon process detects the issue and automatically restarts Postgres. This recovery process typically completes within a few seconds.
 
 ![Postgres restarting after failure](/docs/introduction/postgres_fails.png)
 
-#### VM failure
+### VM failure
 
 In rarer cases, the VM itself may fail due to issues like a kernel panic or the host's termination. When this happens, Neon recreates the VM and reattaches your compute endpoint. This process may take a little longer than restarting Postgres, but it still typically resolves in seconds.
 
 ![VM restarting after failure](/docs/introduction/vm_fails.png)
 
-#### Unresponsive endpoints
+### Unresponsive endpoints
 
 If a compute endpoint becomes unhealthy or unresponsive, we will automatically detect and reattach it to a new compute after 5 minutes. Your application may experience connectivity issues until the endpoint is restored.
 
-#### Node failures
+### Node failures
 
-Kubernetes nodes are the underlying infrastructure hosting multiple compute instances. When a node becomes unavailable, Neon automatically reschedules compute instances to other healthy nodes, a process that typically takes about 2 minutes. While your data remains safe during this process, compute availability will be temporarily affected until rescheduling is complete.
+Kubernetes nodes are the underlying infrastructure hosting multiple compute instances. When a node becomes unavailable, Neon automatically reschedules compute instances to other healthy nodes, a process that typically takes 1-2 minutes. While your data remains safe during this process, compute availability will be temporarily affected until rescheduling is complete.
 
-#### Availability Zone failures
+### Availability Zone failures
 
 Availability Zones are physically separate data centers within a cloud region. When an AZ becomes unavailable, compute instances in that AZ will be automatically rescheduled to healthy AZs. Recovery time typically takes 1-10 minutes, depending on node availability in the destination AZs. Your connection string remains stable, and new connections will be routed to the recovered instance.
 
-Multi-AZ support is available in all regions for recovery purposes. While compute instances run in a single AZ, they can be automatically rescheduled to other AZs if needed.
+Multi-AZ support is available in all regions for recovery purposes. While compute instances run in a single AZ at any given time, storage components are continuously distributed across multiple AZs, and compute can be automatically rescheduled to other AZs if needed.
 
-#### Recap of failover times
+### Recap of failover times
 
 Here's a summary of how different types of compute failures are handled and their expected recovery times:
 
@@ -98,7 +98,7 @@ Here's a summary of how different types of compute failures are handled and thei
 | Postgres crash            | Brief interruption                 | Automatic restart                       | Seconds       |
 | VM failure                | Brief interruption                 | VM recreation and endpoint reattachment | Seconds       |
 | Unresponsive endpoint     | Intermittent connectivity          | Automatic recovery initiation           | 5 minutes     |
-| Node failure              | Compute unavailable                | Rescheduling to healthy nodes           | ~2 minutes    |
+| Node failure              | Compute unavailable                | Rescheduling to healthy nodes           | 1-2 minutes    |
 | Availability Zone failure | Compute unavailable in affected AZ | Rescheduling to healthy AZs             | 1-10 minutes  |
 
 ### Impact on session data after failover?
