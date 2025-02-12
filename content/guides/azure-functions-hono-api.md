@@ -548,6 +548,7 @@ Good luck, and happy coding!
 
 ## Additional Resources
 
+- [GitHub Repository for this article](https://github.com/jchadwick/neon-azure-api)
 - [Neon Documentation](/docs)
 - [Using Hono with Azure Functions](https://hono.dev/docs/getting-started/azure-functions)
 - [Azure Functions Documentation](https://learn.microsoft.com/en-us/azure/azure-functions/)
