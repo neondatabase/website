@@ -49,11 +49,11 @@ Here is the basic flow:
    SELECT * FROM neon_auth.users_sync;
    ```
 
-   | id          | name          | email             | created_at        | updated_at        | deleted_at | raw_json                      |
-   | ----------- | ------------- | ----------------- | ---------------- | ---------------- | ---------- | ----------------------------- |
-   | d37b6a30... | Jordan Rivera | jordan@company.co | 2025-02-12 19:44... | null             | null       | \{"id": "d37b6a30...", ...\}    |
-   | 0153cc96... | Alex Kumar    | alex@acme.com     | 2025-02-12 19:44... | null             | null       | \{"id": "0153cc96...", ...\}    |
-   | 51e491df... | Sam Patel     | sam@startup.dev   | 2025-02-12 19:43... | 2025-02-12 19:46... | null       | \{"id": "51e491df...", ...\}    |
+   | id          | name          | email             | created_at          | updated_at          | deleted_at | raw_json                     |
+   | ----------- | ------------- | ----------------- | ------------------- | ------------------- | ---------- | ---------------------------- |
+   | d37b6a30... | Jordan Rivera | jordan@company.co | 2025-02-12 19:44... | null                | null       | \{"id": "d37b6a30...", ...\} |
+   | 0153cc96... | Alex Kumar    | alex@acme.com     | 2025-02-12 19:44... | null                | null       | \{"id": "0153cc96...", ...\} |
+   | 51e491df... | Sam Patel     | sam@startup.dev   | 2025-02-12 19:43... | 2025-02-12 19:46... | null       | \{"id": "51e491df...", ...\} |
 
 ### Table structure
 
