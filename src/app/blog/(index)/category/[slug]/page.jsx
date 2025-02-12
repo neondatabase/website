@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 
 import BlogGridItem from 'components/pages/blog/blog-grid-item';
 import BlogHeader from 'components/pages/blog/blog-header';
-import LoadMorePosts from 'components/shared/load-more-posts';
+import ScrollLoader from 'components/shared/scroll-loader';
 import { BLOG_BASE_PATH, BLOG_CATEGORY_BASE_PATH } from 'constants/blog';
 import { getBlogCategoryDescription } from 'constants/seo-data';
 import { getAllCategories, getCategoryBySlug, getPostsByCategorySlug } from 'utils/api-wp';
@@ -20,13 +20,11 @@ const BlogCategoryPage = async ({ params: { slug } }) => {
       <BlogHeader title="Blog" basePath={BLOG_BASE_PATH}>
         <h2 className="sr-only">– {category.name}</h2>
       </BlogHeader>
-      <div className="grid grid-cols-2 gap-x-6 md:grid-cols-1">
-        <LoadMorePosts className="mt-8 md:mt-6" defaultCountPosts={8} countToAdd={8}>
-          {posts.map((post, index) => (
-            <BlogGridItem key={post.slug} index={index} category={category} post={post} />
-          ))}
-        </LoadMorePosts>
-      </div>
+      <ScrollLoader itemsCount={8} className="grid grid-cols-2 gap-x-6 xl:gap-x-5 md:grid-cols-1">
+        {posts.map((post, index) => (
+          <BlogGridItem key={post.slug} index={index} category={category} post={post} />
+        ))}
+      </ScrollLoader>
     </>
   );
 };
