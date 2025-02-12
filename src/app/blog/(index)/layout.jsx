@@ -1,24 +1,23 @@
-import Communities from 'components/pages/blog/communities';
 import Sidebar from 'components/pages/blog/sidebar';
 import Container from 'components/shared/container';
-import { getAllWpBlogCategories } from 'utils/api-posts';
+import { getAllCategories } from 'utils/api-wp';
 
 // eslint-disable-next-line react/prop-types
 const BlogPageLayout = async ({ children }) => {
-  const categories = await getAllWpBlogCategories();
+  const categories = await getAllCategories();
 
   return (
-    <>
-      <div className="safe-paddings pt-16 lt:pt-0">
-        <Container className="flex lt:flex-col" size="1344">
-          <Sidebar categories={categories} />
-          <div className="grow-1 relative grid gap-y-20 pb-40 2xl:pl-16 xl:gap-y-16 xl:pb-32 lt:pl-0 lt:pt-8 lg:gap-y-20 lg:pb-28 md:pb-20">
-            {children}
-          </div>
-        </Container>
-      </div>
-      <Communities />
-    </>
+    <div className="safe-paddings pb-24 pt-16 lg:pb-20 lg:pt-12 sm:pb-16 sm:pt-10">
+      <Container className="flex flex-col" size="1344">
+        <div className="flex gap-8 pl-16 xl:gap-6 xl:pl-0 lg:flex-col lg:gap-0">
+          <Sidebar
+            className="mt-[88px] w-[192px] shrink-0 lg:top-[72px] lg:mb-10 lg:mt-0 lg:min-h-fit lg:w-full md:top-[60px] md:mb-8"
+            categories={categories}
+          />
+          <div className="w-full max-w-3xl lg:max-w-full">{children}</div>
+        </div>
+      </Container>
+    </div>
   );
 };
 

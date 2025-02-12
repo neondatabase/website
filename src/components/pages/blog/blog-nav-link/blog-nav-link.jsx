@@ -16,8 +16,11 @@ const BlogNavLink = ({ name, slug }) => {
   return (
     <Link
       className={clsx(
-        'whitespace-pre border-l py-1.5 pl-2.5 text-xs font-semibold uppercase leading-none transition-colors duration-200 hover:text-green-45 lt:border-b-2 lt:border-l-0 lt:pb-2.5 lt:pl-0 lt:pt-0',
-        isActive ? 'border-green-45 text-green-45' : 'border-transparent'
+        'w-full whitespace-pre py-[3px] text-[15px] font-medium tracking-extra-tight text-gray-new-80 transition-colors duration-200',
+        'lg:border-b-2 lg:text-sm',
+        isActive
+          ? 'text-green-45 lg:border-green-45 lg:text-white'
+          : 'hover:text-white lg:border-transparent'
       )}
       to={url}
     >

@@ -1,7 +1,9 @@
 import { cache } from 'react';
 
-import { BLOG_POSTS_PER_PAGE } from 'constants/blog';
+import { BLOG_POSTS_PER_PAGE, EXTRA_CATEGORIES } from 'constants/blog';
 import { gql, graphQLClientAdmin, fetchGraphQL, graphQLClient } from 'lib/graphQLClient';
+import { getAllChangelogs } from 'utils/api-docs';
+import { getAllGuides } from 'utils/api-guides';
 
 import getAuthToken from './api-auth';
 
@@ -40,8 +42,22 @@ const getAllWpBlogCategories = cache(async () => {
     (category) => category.slug !== 'uncategorized' && category.posts.nodes.length > 0
   );
 
-  return [...filteredCategories, { name: 'All posts', slug: 'all-posts' }];
+  return filteredCategories;
 });
+
+const getAllCategories = async () => {
+  const wpCategories = await getAllWpBlogCategories();
+  return [...wpCategories, ...EXTRA_CATEGORIES];
+};
+
+const getCategoryBySlug = async (slug) => {
+  const extraCategory = EXTRA_CATEGORIES.find((cat) => cat.slug === slug);
+  if (extraCategory) return extraCategory;
+
+  const wpCategories = await getAllWpBlogCategories();
+  const wpCategory = wpCategories.find((cat) => cat.slug === slug);
+  return wpCategory;
+};
 
 const fetchWpPostsByCategorySlug = async (slug, after) => {
   const postsQuery = gql`
@@ -52,9 +68,10 @@ const fetchWpPostsByCategorySlug = async (slug, after) => {
         where: { categoryName: $categoryName, orderby: { field: DATE, order: DESC } }
       ) {
         nodes {
-          title(format: RENDERED)
           slug
           date
+          title(format: RENDERED)
+          content(format: RENDERED)
           pageBlogPost {
             largeCover {
               altText
@@ -85,59 +102,6 @@ const fetchWpPostsByCategorySlug = async (slug, after) => {
     }
   `;
 
-  const allPostsQuery = gql`
-    query AllPosts($first: Int!, $after: String) {
-      posts(first: $first, after: $after, where: { orderby: { field: DATE, order: DESC } }) {
-        nodes {
-          categories {
-            nodes {
-              name
-              slug
-            }
-          }
-          excerpt
-          slug
-          title(format: RENDERED)
-          date
-          pageBlogPost {
-            largeCover {
-              altText
-              mediaItemUrl
-            }
-            description
-            authors {
-              author {
-                ... on PostAuthor {
-                  title
-                  postAuthor {
-                    role
-                    url
-                    image {
-                      altText
-                      mediaItemUrl
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-        pageInfo {
-          hasNextPage
-          endCursor
-        }
-      }
-    }
-  `;
-
-  if (slug === 'all-posts') {
-    const allPostsData = await fetchGraphQL(graphQLClient).request(allPostsQuery, {
-      first: BLOG_POSTS_PER_PAGE,
-      after,
-    });
-
-    return allPostsData?.posts;
-  }
   const categoryName = slug.charAt(0).toUpperCase() + slug.slice(1);
 
   const data = await fetchGraphQL(graphQLClient).request(postsQuery, {
@@ -165,282 +129,17 @@ const getWpPostsByCategorySlug = cache(async (slug) => {
   return allPosts;
 });
 
-const getWpBlogPage = cache(async () => {
-  const blogPageQuery = gql`
-    query BlogPage {
-      page(idType: URI, id: "blog") {
-        template {
-          ... on Template_Blog {
-            templateName
-            pageBlog {
-              featuredPosts {
-                post {
-                  ... on Post {
-                    categories {
-                      nodes {
-                        name
-                        slug
-                      }
-                    }
-                    title(format: RENDERED)
-                    slug
-                    date
-                    pageBlogPost {
-                      largeCover {
-                        altText
-                        mediaItemUrl
-                      }
-                      authors {
-                        author {
-                          ... on PostAuthor {
-                            title
-                            postAuthor {
-                              role
-                              url
-                              image {
-                                altText
-                                mediaItemUrl
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-              workflowsFeaturedPosts {
-                post {
-                  ... on Post {
-                    title(format: RENDERED)
-                    slug
-                    date
-                    pageBlogPost {
-                      largeCover {
-                        altText
-                        mediaItemUrl
-                      }
-                      authors {
-                        author {
-                          ... on PostAuthor {
-                            title
-                            postAuthor {
-                              role
-                              url
-                              image {
-                                altText
-                                mediaItemUrl
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-              companyFeaturedPosts {
-                post {
-                  ... on Post {
-                    title(format: RENDERED)
-                    slug
-                    date
-                    pageBlogPost {
-                      largeCover {
-                        altText
-                        mediaItemUrl
-                      }
-                      authors {
-                        author {
-                          ... on PostAuthor {
-                            title
-                            postAuthor {
-                              role
-                              url
-                              image {
-                                altText
-                                mediaItemUrl
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-              communityFeaturedPosts {
-                post {
-                  ... on Post {
-                    title(format: RENDERED)
-                    slug
-                    date
-                    pageBlogPost {
-                      largeCover {
-                        altText
-                        mediaItemUrl
-                      }
-                      authors {
-                        author {
-                          ... on PostAuthor {
-                            title
-                            postAuthor {
-                              role
-                              url
-                              image {
-                                altText
-                                mediaItemUrl
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-              postgresFeaturedPosts {
-                post {
-                  ... on Post {
-                    title(format: RENDERED)
-                    slug
-                    date
-                    pageBlogPost {
-                      largeCover {
-                        altText
-                        mediaItemUrl
-                      }
-                      authors {
-                        author {
-                          ... on PostAuthor {
-                            title
-                            postAuthor {
-                              role
-                              url
-                              image {
-                                altText
-                                mediaItemUrl
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-              aiFeaturedPosts {
-                post {
-                  ... on Post {
-                    title(format: RENDERED)
-                    slug
-                    date
-                    pageBlogPost {
-                      largeCover {
-                        altText
-                        mediaItemUrl
-                      }
-                      authors {
-                        author {
-                          ... on PostAuthor {
-                            title
-                            postAuthor {
-                              role
-                              url
-                              image {
-                                altText
-                                mediaItemUrl
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-              videos {
-                post {
-                  ... on Video {
-                    title(format: RENDERED)
-                    date
-                    pageBlogPost: videoPost {
-                      url
-                      largeCover: coverImage {
-                        mediaItemUrl
-                        altText
-                      }
-                      author {
-                        ... on PostAuthor {
-                          title(format: RENDERED)
-                          postAuthor {
-                            role
-                            url
-                            image {
-                              altText
-                              mediaItemUrl
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-              appearances {
-                post {
-                  ... on Appearance {
-                    title(format: RENDERED)
-                    appearancePost {
-                      url
-                      coverImage {
-                        mediaItemUrl
-                        altText
-                      }
-                    }
-                  }
-                }
-              }
-              engineeringFeaturedPosts {
-                post {
-                  ... on Post {
-                    title(format: RENDERED)
-                    slug
-                    date
-                    pageBlogPost {
-                      largeCover {
-                        altText
-                        mediaItemUrl
-                      }
-                      authors {
-                        author {
-                          ... on PostAuthor {
-                            title
-                            postAuthor {
-                              role
-                              url
-                              image {
-                                altText
-                                mediaItemUrl
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `;
-  const data = await fetchGraphQL(graphQLClient).request(blogPageQuery);
+const getPostsByCategorySlug = async (slug) => {
+  if (slug === 'guides') {
+    return getAllGuides();
+  }
 
-  return data?.page?.template?.pageBlog;
-});
+  if (slug === 'changelog') {
+    return getAllChangelogs();
+  }
+
+  return getWpPostsByCategorySlug(slug);
+};
 
 const fetchAllWpPosts = async (after) => {
   const allPostsQuery = gql`
@@ -454,12 +153,12 @@ const fetchAllWpPosts = async (after) => {
             }
           }
           modifiedGmt
-          excerpt
           slug
-          title(format: RENDERED)
           date
+          title(format: RENDERED)
           content(format: RENDERED)
           pageBlogPost {
+            isFeatured
             largeCover {
               altText
               mediaItemUrl
@@ -502,16 +201,48 @@ const getAllWpPosts = cache(async () => {
   let afterCursor = null;
 
   while (true) {
-    // eslint-disable-next-line no-await-in-loop
-    const { nodes: posts, pageInfo } = await fetchAllWpPosts(afterCursor);
+    try {
+      const { nodes: posts, pageInfo } = await fetchAllWpPosts(afterCursor);
 
-    allPosts = allPosts.concat(posts);
-    if (!pageInfo.hasNextPage) break;
-    afterCursor = pageInfo.endCursor;
+      allPosts = allPosts.concat(posts);
+      if (!pageInfo.hasNextPage) break;
+      afterCursor = pageInfo.endCursor;
+    } catch (error) {
+      console.error('Error fetching posts:', error);
+      break;
+    }
   }
 
   return allPosts;
 });
+
+const getAllPosts = async () => {
+  const [wpPosts, guides, changelogs] = await Promise.all([
+    getAllWpPosts(),
+    getAllGuides(),
+    getAllChangelogs(),
+  ]);
+
+  // Separate first two featured posts
+  const [featuredWpPosts, restWpPosts] = wpPosts.reduce(
+    ([featured, rest], post) => {
+      if (post.pageBlogPost?.isFeatured && featured.length < 2) {
+        featured.push(post);
+      } else {
+        rest.push(post);
+      }
+      return [featured, rest];
+    },
+    [[], []]
+  );
+
+  // Sort the rest posts by date, newest first
+  const restPosts = [...restWpPosts, ...guides, ...changelogs];
+  restPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  // Combine the results
+  return [...featuredWpPosts, ...restPosts];
+};
 
 const getWpPostBySlug = cache(async (slug) => {
   const postBySlugQuery = gql`
@@ -902,12 +633,14 @@ const getAllWpCaseStudiesCategories = cache(async () => {
 export {
   fetchAllWpPosts,
   getAllWpBlogCategories,
+  getAllCategories,
   getAllWpCaseStudiesPosts,
   getAllWpCaseStudiesCategories,
   getAllWpPosts,
-  getWpBlogPage,
+  getAllPosts,
+  getCategoryBySlug,
   getWpPostBySlug,
-  getWpPostsByCategorySlug,
+  getPostsByCategorySlug,
   getWpPreviewPost,
   getWpPreviewPostData,
 };

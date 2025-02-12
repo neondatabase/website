@@ -81,8 +81,6 @@ const TopBar = ({ isDarkTheme }) => (
   </Link>
 );
 
-TopBar.propTypes = {
-  isDarkTheme: PropTypes.bool,
-};
+TopBar.propTypes = { isDarkTheme: PropTypes.bool };
 
 export default TopBar;
