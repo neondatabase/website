@@ -41,6 +41,7 @@ import getCodeProps from 'lib/rehype-code-props';
 import getGlossaryItem from 'utils/get-glossary-item';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
+import DeployPostgresButton from '../deploy-postgres-button';
 
 const sharedComponents = Object.keys(sharedMdxComponents).reduce((acc, key) => {
   acc[key] = (props) => IncludeBlock({ url: sharedMdxComponents[key], ...props });
@@ -180,6 +181,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   InkeepEmbedded,
   Video,
   Steps,
+  DeployPostgresButton,
   ...sharedComponents,
 });
 
