@@ -18,22 +18,24 @@ Please note that `pg_cron` jobs will only run when your compute is active. We th
 
 ## Enable the `pg_cron` extension
 
-To install `pg_cron`, you must first enable it by setting the `cron.database_name` parameter to the name of the database where you want to install `pg_cron`. This requires running an API command using either the [Update project API](https://api-docs.neon.tech/reference/updateproject) or the [Update compute endpoint API](https://api-docs.neon.tech/reference/updateprojectendpoint).
+To install `pg_cron` on Neon, you must first enable it by setting the `cron.database_name` parameter to the name of the database where you want to install `pg_cron`. This requires making an [Update compute endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint) API call.
 
-The `cron.database_name` parameter is passed to your Postgres instance through the endpoint settings object. The following `Update project` API example shows where to specify your Neon `project_id`, [Neon API key](/docs/manage/api-keys), and database name.
+The `cron.database_name` parameter is passed to your Postgres instance through the `pg_settings` option in the endpoint settings object. The following `Update endpoint` API example shows where to specify your Neon `project_id`, `endpoint_id`, [Neon API key](/docs/manage/api-keys), and database name.
+
+The `project_id` and `endpoint_id` values can be obtained from the Neon Console or [using the Neon API](https://api-docs.neon.tech/reference/path-parameters). In the Neon Console, the `project_id` is found on your project's **Settings** page, and will look something like this: `young-sun-12345678`. The `endpoint_id` is found on the **Compute** tab on your **Branches** page, where it is referred to as the **Compute ID**. It will have an `ep` prefix, and look similar to this: `ep-still-rain-abcd1234`.
 
 ```bash
 curl --request PATCH \
-     --url https://console.neon.tech/api/v2/projects/<your_project_id> \
+     --url https://console.neon.tech/api/v2/projects/<project_id>/endpoints/<endpoint_id> \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'authorization: Bearer $NEON_API_KEY$' \
      --header 'content-type: application/json' \
      --data '
 {
-  "project": {
-    "default_endpoint_settings": {
+  "endpoint": {
+    "settings": {
       "pg_settings": {
-        "cron.database_name": "your_db_name"
+        "cron.database_name": "your_dbname"
       }
     }
   }
@@ -41,11 +43,13 @@ curl --request PATCH \
 '
 ```
 
-After setting `cron.database_name`, you can then install the `pg_cron` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+After setting `cron.database_name`, you can install the `pg_cron` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_cron;
 ```
+
+If you have trouble with this setup, please reach out to [Neon Support](https://console.neon.tech/app/projects?modal=support) or find us on [Discord](https://t.co/kORvEuCUpJ).
 
 **Version availability:**
 
