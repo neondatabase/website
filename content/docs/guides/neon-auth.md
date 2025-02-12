@@ -65,7 +65,7 @@ The following columns are included in the `neon_auth.users_sync` table:
 - `email`: The user's primary email (nullable)
 - `created_at`: When the user signed up (nullable)
 - `deleted_at`: When the user was deleted, if applicable (nullable)
-- `updated_at`: When user info was last updated, if applicable (nullable)
+- `updated_at`: When the user was last updated, if applicable (nullable)
 
 Updates to user profiles in the auth provider are automatically synchronized.
 
