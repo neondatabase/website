@@ -3,7 +3,7 @@ title: Neon on Azure
 enableTableOfContents: true
 tag: new
 isDraft: false
-updatedOn: '2024-12-17T14:21:01.045Z'
+updatedOn: '2025-02-11T11:45:30.841Z'
 ---
 
 <InfoBlock>
@@ -118,13 +118,33 @@ For Azure `region_id` values, see [Regions](/docs/introduction/regions).
 
 For supported Azure regions, refer to our [Regions](/docs/introduction/regions) page. For the Public Preview, Neon supports a limited number of Azure regions. To request support for other Azure regions, see [Request a region](/docs/introduction/regions#request-a-region).
 
+## Examples
+
+<TechnologyNavigation open>
+
+<a href="https://neon.tech/blog/multitenant-private-ai-chat-with-neon-on-azure" title="Multitenant private RAG with Neon on Azure" description="Tenant AI Chat Solution Accelerator uses Neon Serverless Postgres on Azure." icon="azure"></a>
+
+<a href="https://neon.tech/guides/query-postgres-azure-functions" title="Azure Functions" description="Connect from Azure Functions to Neon" icon="azure"></a>
+
+<a href="https://neon.tech/guides/azure-functions-referral-system" title="Azure Functions" description="Building a Serverless Referral System with Neon Postgres and Azure Functions" icon="azure"></a>
+
+<a href="https://neon.tech/blog/building-sql-query-assistant-with-dotnet-azure-functions-openai" title="Azure Functions, Azure OpenAI" description="Building an Intelligent SQL Query Assistant with Neon, .NET, Azure Functions, and Azure OpenAI service" icon="azure"></a>
+
+<a href="https://neon.tech/blog/generative-feedback-loops-with-neon-serverless-postgres-azure-functions-and-azure-openai" title="Azure Functions, Azure OpenAI" description="Generative Feedback Loops with Neon serverless Postgres, Azure Functions, and Azure OpenAI" icon="azure"></a>
+
+<a href="https://neon.tech/blog/how-to-create-your-personal-ai-powered-email-assistant-in-azure" title="Azure App Service" description="Create Your Personal AI Powered Email Assistant in Azure" icon="azure"></a>
+
+<a href="https://neon.tech/guides/azure-todo-static-web-app" title="Azure Static Web Apps" description="Building Azure Static Web Apps with Neon" icon="azure"></a>
+
+<a href="https://neon.tech/guides/azure-ai-language" title="Azure AI Language" description="Learn how to analyze customer feedback using Azure AI Language and store results in Neon Postgres" icon="azure"></a>
+
+</TechnologyNavigation>
+
 ## Related resources
 
 <TechnologyNavigation open>
 
 <a href="/docs/guides/dotnet-npgsql" title=".NET" description="Connect a .NET (C#) application to Neon" icon="dotnet"></a>
-
-<a href="https://neon.tech/guides/query-postgres-azure-functions" title="Azure Functions" description="Connect from Azure Functions to Neon" icon="azure"></a>
 
 <a href="/docs/guides/dotnet-entity-framework" title="Connect from Entity Framework" description="Connect a Dotnet Entity Framework application to Neon" icon="entity"></a>
 

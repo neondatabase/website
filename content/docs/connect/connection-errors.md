@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/connectivity-issues
   - /docs/connect/connectivity-issues
-updatedOn: '2025-01-20T21:19:45.974Z'
+updatedOn: '2025-02-03T20:41:57.300Z'
 ---
 
 This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered include:
@@ -20,6 +20,7 @@ This topic describes how to resolve connection errors you may encounter when usi
 - [You have exceeded the limit of concurrently active endpoints](#you-have-exceeded-the-limit-of-concurrently-active-endpoints)
 - [Remaining connection slots are reserved for roles with the SUPERUSER attribute](#remaining-connection-slots-are-reserved-for-roles-with-the-superuser-attribute)
 - [Relation not found](#relation-not-found)
+- [Postgrex: DBConnection ConnectionError ssl send: closed](#postgrex-dbconnection-connectionerror-ssl-send-closed)
 - [query_wait_timeout SSL connection has been closed unexpectedly](#querywaittimeout-ssl-connection-has-been-closed-unexpectedly)
 - [The request could not be authorized due to an internal error](#the-request-could-not-be-authorized-due-to-an-internal-error)
 - [Terminating connection due to idle-in-transaction timeout](#terminating-connection-due-to-idle-in-transaction-timeout)
@@ -126,7 +127,7 @@ The following error is often the result of an incorrectly defined connection inf
 ERROR:  password authentication failed for user '<user_name>' connection to server at "ep-billowing-fun-123456.us-west-2.aws.neon.tech" (12.345.67.89), port 5432 failed: ERROR:  connection is insecure (try using `sslmode=require`)
 ```
 
-Check your connection to see if it is defined correctly. Your Neon connection string can be obtained from the **Connection Details** widget on the Neon **Dashboard**. It appears similar to this:
+Check your connection to see if it is defined correctly. Your Neon connection string can be obtained by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. It appears similar to this:
 
 ```text shouldWrap
 postgresql://[user]:[password]@[neon_hostname]/[dbname]
@@ -221,6 +222,20 @@ If you are already using connection pooling, you may need to reach out to Neon S
 ## Relation not found
 
 This error is often encountered when attempting to set the Postgres `search_path` session variable using a `SET search_path` statement over a pooled connection. For more information and workarounds, please see [Connection pooling in transaction mode](/docs/connect/connection-pooling#connection-pooling-in-transaction-mode).
+
+## Postgrex: DBConnection ConnectionError ssl send: closed
+
+Postgrex has an `:idle_interval` connection parameter that defines an interval for pinging connections after a period of inactivity. The default setting is `1000ms`. If you rely on Neon's [autosuspend](https://neon.tech/docs/introduction/auto-suspend) feature to scale your compute to zero when your database is not active, this setting will prevent that and you may encounter a `(DBConnection.ConnectionError) ssl send: closed (ecto_sql 3.12.0)` error as a result. As a workaround, you can set the interval to a higher value to allow your Neon compute to suspend. For example:
+
+```elixir
+config :app_name, AppName.Repo
+  # normal connection options
+  ...
+  idle_interval:
+:timer.hours(24)
+```
+
+For additional details, refer to this discussion on our Discord server: [Compute not suspended due to Postgrex idle_interval setting](https://discord.com/channels/1176467419317940276/1295401751574351923/1295419826319265903)
 
 ## query_wait_timeout SSL connection has been closed unexpectedly
 

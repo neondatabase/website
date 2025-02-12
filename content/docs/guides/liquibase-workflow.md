@@ -2,7 +2,7 @@
 title: Liquibase developer workflow with Neon
 subtitle: Implement a developer workflow with Liquibase and Neon branching
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.654Z'
+updatedOn: '2025-02-03T20:41:57.316Z'
 ---
 
 Liquibase is an open-source database-independent library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
@@ -72,7 +72,7 @@ To create a branch:
 
 ## Retrieve your Neon database connection strings
 
-From the [Neon Console](https://console.neon.tech/app/projects), select your project and retrieve connection strings for your target and source databases from the **Connection Details** widget on the Neon **Dashboard**.
+From the [Neon Console](https://console.neon.tech/app/projects), retrieve connection strings for your target and source databases by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
 
 <Admonition type="note">
 The target database is the database on your `dev1` branch where you will will do your development work. Your source database is where you will apply your schema changes later, once you are satisfied with the changes on your development branch.

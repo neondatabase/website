@@ -3,7 +3,7 @@ title: Connect with pgcli
 subtitle: Learn how to connect to Neon using the interactive pgcli client
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-07T21:36:52.639Z'
+updatedOn: '2025-02-03T20:41:57.299Z'
 ---
 
 The `pgcli` client is an interactive command-line interface for Postgres that offers several advantages over the traditional `psql` client, including syntax highlighting, autocompletion, multi-line editing, and query history.
@@ -22,9 +22,9 @@ pgcli --help
 
 ## Connect to Neon
 
-The easiest way to connect to Neon using the `pgcli` client is with a connection string, which you can obtain from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you.
+The easiest way to connect to Neon using the `pgcli` client is with a connection string, which you can obtain by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you.
 
-![Connection details widget](/docs/connect/connection_details.png)
+![Connection details modal](/docs/connect/connection_details.png)
 
 From your terminal or command prompt, run the `pgcli` client with the connection string. Your command will look something like this:
 

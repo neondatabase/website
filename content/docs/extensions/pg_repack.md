@@ -3,7 +3,7 @@ title: The pg_repack extension
 subtitle: Remove bloat from your tables and indexes with minimal locking
 enableTableOfContents: true
 tag: new
-updatedOn: '2025-01-24T20:21:15.308Z'
+updatedOn: '2025-02-03T20:41:57.303Z'
 ---
 
 Postgres, like any database system, can accumulate bloat over time due to frequent updates and deletes. Bloat refers to wasted space within your tables and indexes, which can lead to decreased query performance and increased storage usage. `pg_repack` is a powerful Postgres extension that allows you to efficiently remove this bloat by rewriting tables and indexes online, with minimal locking. Unlike `VACUUM FULL` or `CLUSTER`, `pg_repack` avoids exclusive locks, ensuring your applications remain available during the reorganization process.
@@ -99,9 +99,9 @@ Let's break down the key components:
 These options specify how `pg_repack` connects to your database. You can often omit the `DBNAME` from the main command if you provide these connection options.
 
 - **`-d DBNAME`, `--dbname=DBNAME`**: Specifies the database name to connect to.
-- **`-h HOSTNAME`, `--host=HOSTNAME`**: Specifies the hostname of your Neon endpoint. You can find this in your Neon **Connection Details**.
+- **`-h HOSTNAME`, `--host=HOSTNAME`**: Specifies the hostname of your Neon endpoint. You can find this by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
 - **`-p PORT`, `--port=PORT`**: Specifies the port. For Neon, this is always `5432`.
-- **`-U USERNAME`, `--username=USERNAME`**: Specifies your Neon username. You can find this in your Neon **Connection Details**.
+- **`-U USERNAME`, `--username=USERNAME`**: Specifies your Neon username. You can find this by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
 - **`-W`, `--password`**: Forces `pg_repack` to prompt for your password.
 
 ### Generic options
@@ -176,7 +176,7 @@ Let's walk through a practical example of using `pg_repack` to reorganize a tabl
 
 ### Connect to your Neon Database
 
-Ensure you are connected to your Neon database using [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor). You can find your connection details in the **Connection Details** widget on the **Neon Console**
+Ensure you are connected to your Neon database using [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor). You can find your connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
 
 ### Create a sample table with bloat (Optional)
 

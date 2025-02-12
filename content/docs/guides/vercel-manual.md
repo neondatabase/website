@@ -2,7 +2,7 @@
 title: Connect Vercel and Neon manually
 subtitle: Learn how to connect a Vercel project to a Neon database manually
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.667Z'
+updatedOn: '2025-02-03T20:41:57.339Z'
 ---
 
 This guide describes how to manually connect a Vercel project to a Neon database.
@@ -19,9 +19,9 @@ For other Vercel integration options, refer to the [Neon and Vercel integration 
 
 ## Gather your Neon connection details
 
-You can these details from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you.
+You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you.
 
-![Connection details widget](/docs/connect/connection_details.png)
+![Connection details modal](/docs/connect/connection_details.png)
 
 The connection string includes the role name, hostname, and database name. For example:
 

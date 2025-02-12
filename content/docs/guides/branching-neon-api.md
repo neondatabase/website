@@ -2,7 +2,7 @@
 title: Branching with the Neon API
 subtitle: Learn how to create and delete branches with the Neon API
 enableTableOfContents: true
-updatedOn: '2024-12-12T15:31:10.126Z'
+updatedOn: '2025-01-31T16:41:54.393Z'
 ---
 
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon API. For other branch-related API methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
@@ -240,5 +240,33 @@ POST /projects/{project_id}/branches/{branch_id_to_restore}/restore
 ```
 
 For details on how to use this endpoint to restore a branch to its own or another branch's history, restore a branch to the head of its parent, and other restore options, see [Branch Restore using the API](/docs/guides/branch-restore#how-to-use-branch-restore).
+
+## Creating a schema-only branch using the API
+
+<Admonition type="note">
+The API is in Beta and subject to change.
+</Admonition>
+
+To create a schema-only branch using the Neon API, use the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) endpoint with the `init_source` option set to `schema-only`, as shown below. Required values include:
+
+- Your Neon `project_id`
+- The `parent_id`, which is the branch ID of the branch containing the schema you want to copy
+
+```bash
+curl --request POST \
+     --url https://console.neon.tech/api/v2/projects/wispy-salad-58347608/branches \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '
+{
+  "branch": {
+    "parent_id": "br-super-mode-w371g4od",
+    "name": "my_schema_only_branch",
+    "init_source": "schema-only"
+  }
+}
+'
+```
 
 <NeedHelp/>

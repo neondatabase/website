@@ -3,7 +3,7 @@ title: Stream changes from your Neon database to anywhere
 subtitle: Learn how to capture and stream changes and rows from your database to
   anywhere with Sequin
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.064Z'
+updatedOn: '2025-02-11T11:32:44.541Z'
 ---
 
 Neon's Logical Replication features makes it possible to detect every change in your database. It can be used to power read-replicas and backups, but can also be used to add streaming characteristics to Neon.
@@ -48,7 +48,7 @@ logical
 
 After enabling logical replication on Neon, you'll now connect your Neon database to Sequin. Follow these steps:
 
-1. In Neon, copy your database connection string from the **Connection Details** section on the **Project Dashboard**, which will look similar to this:
+1. In Neon, copy your database connection string. You can find the it by clicking the **Connect** button on your **Project Dashboard**. It will look similar to this:
 
    ```sql shouldWrap
    postgresql://neondb_owner:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require
@@ -67,16 +67,12 @@ After enabling logical replication on Neon, you'll now connect your Neon databas
 4. Create a publication to indicate which tables will publish changes to the replication slot. Run the following SQL command:
 
    ```sql
-   CREATE PUBLICATION sequin_pub FOR ALL TABLES;
-   ```
-
-   This will publish changes from all tables. If you want to publish changes from specific tables only, you can use:
-
-   ```sql
    CREATE PUBLICATION sequin_pub FOR TABLE table1, table2, table3;
    ```
 
-   Defining specific tables lets you add or remove tables from the publication later, which you cannot do if you've created a publication with `FOR ALL TABLES`.
+   <Admonition type="note">
+   Defining specific tables lets you add or remove tables from the publication later, which you cannot do when creating publications with `FOR ALL TABLES`.
+   </Admonition>
 
 5. Back in the Sequin Console, enter the name of the replication slot (`sequin_slot`) and publication (`sequin_pub`) you just created. Then, name your database (e.g. `neondb`) and click **Create Database**.
 

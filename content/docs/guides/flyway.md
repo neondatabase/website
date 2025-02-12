@@ -2,7 +2,7 @@
 title: Get started with Flyway and Neon
 subtitle: Learn how to manage schema changes in Neon with Flyway
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.391Z'
+updatedOn: '2025-02-03T20:41:57.314Z'
 ---
 
 Flyway is a database migration tool that facilitates version control for databases. It allows developers to manage and track changes to the database schema, ensuring that the database evolves consistently across different environments.
@@ -55,7 +55,7 @@ source ~/.zshrc
 
 ## Retrieve your Neon database connection string
 
-From the Neon **Dashboard**, retrieve your password and a Java connection string from the **Connection Details** widget.
+Find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select the **Java** option from the **Connection string** drop-down menu.
 
 Your Java connection string should look something like this:
 

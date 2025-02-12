@@ -7,7 +7,7 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/setting-up-a-project
-updatedOn: '2025-01-20T13:01:32.029Z'
+updatedOn: '2025-02-07T19:29:48.915Z'
 ---
 
 <InfoBlock>
@@ -61,14 +61,7 @@ After signing up, you'll start with a `main` branch and the empty database `neon
 
 After you sign up, you are guided through some onboarding steps that ask you to create a **Project**. After that, you are presented with the project **Quickstart**.
 
-<div style={{ display: 'flex' }}>
-  <div style={{ flex: '0 0 45%', paddingRight: '20px', marginTop: '.75em'}}>
-    ![onboarding](/docs/get-started-with-neon/onboarding.png "no-border")
-  </div>
-  <div style={{ flex: '0 0 55%', display: 'flex', alignItems: 'center' }}>
-    ![quickstart](/docs/get-started-with-neon/quickstart.png "no-border")
-  </div>
-</div>
+![onboarding](/docs/get-started-with-neon/onboarding.png)
 
 The steps should be self-explanatory, but it's important to understand a few key points:
 
@@ -79,10 +72,6 @@ The steps should be self-explanatory, but it's important to understand a few key
 - **We create your default branch `main` for you**
 
   `main` is the default (primary) branch and hosts your database, role, and a compute that you can connect your application to.
-
-- **Use the project _Quickstart_ or this tutorial**
-
-  Once you complete the onboarding, you are presented with the project **Quickstart**. You can use this interactive quickstart to learn the basics &#8212; or follow along with this tutorial for a deeper explanation. You can open the **Quickstart** anytime from the project sidebar.
 
 At this point, if you want to just get started connecting Neon to your toolchain, go to [Day 2 - Connecting Neon to your tools](/docs/get-started-with-neon/connect-neon). Or if you want a more detailed walkthrough of some of our key console and branching features, let's keep going.
 
@@ -315,5 +304,9 @@ Depending on your development workflow, you can use branch reset:
 </Steps>
 
 Make sure that your development team is always working from the latest schema and data by including branch reset in your workflow. To read more about using branching in your workflows, see [Day 3 - Branching workfows](/docs/get-started-with-neon/workflow-primer).
+
+<Admonition type="tip" title="working with sensitive data?">
+Neon also supports schema-only branching. [Learn more](/docs/guides/branching-schema-only).
+</Admonition>
 
 <NeedHelp/>
