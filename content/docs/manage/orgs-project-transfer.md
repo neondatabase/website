@@ -19,8 +19,8 @@ Before transferring projects, review these important guidelines covering transfe
 
 | Transfer method                                      | Project limit                            |
 | ---------------------------------------------------- | ---------------------------------------- |
-| [Neon Console](#transfer-from-the-neon-console)                                          | Up to 200 projects at a time             |
-| [API](#transfer-projects-via-api)                                                  | Up to 400 projects in a single operation |
+| [Neon Console](#transfer-from-the-neon-console)      | Up to 200 projects at a time             |
+| [API](#transfer-projects-via-api)                    | Up to 400 projects in a single operation |
 | [Python script](#transfer-large-numbers-of-projects) | Unlimited (processes in batches)         |
 
 The number of projects you can transfer is limited by the target Organization plan's allowance.
