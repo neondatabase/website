@@ -372,17 +372,16 @@ To use AgentOps, make sure you have your `AGENTOPS_API_KEY` configured in your `
 
 Use AgentOps to gain insights into your agents' behavior and performance, allowing for continuous improvement and optimization.
 
-
 With a total run cost of only $0.01 in OpenAI credits (as seen in the AgentOps dashboard), this AI agent runs efficiently while requiring no custom code. It avoids complex programming for tasks like web-scraping and SQL queries, making it widely applicable.
 </Admonition>
 
 **Congratulations!** You have successfully built and run a Web Scraper agent using AgentStack, Neon, and Firecrawl, demonstrating how to automate web data extraction and storage into a serverless Postgres database with minimal effort!
 
-## Next Steps  
+## Next Steps
 
-- **Explore more tools:** Browse AgentStack's [community tools](https://docs.agentstack.sh/tools/community), including Perplexity (knowledge retrieval), Composio (platform connections), and Stripe (payments).  
-- **Expand your crew:** Add more agents and tasks to handle complex workflows.  
-- **Monitor performance:** Use [AgentOps](https://docs.agentops.ai/) to track and optimize execution and costs.  
+- **Explore more tools:** Browse AgentStack's [community tools](https://docs.agentstack.sh/tools/community), including Perplexity (knowledge retrieval), Composio (platform connections), and Stripe (payments).
+- **Expand your crew:** Add more agents and tasks to handle complex workflows.
+- **Monitor performance:** Use [AgentOps](https://docs.agentops.ai/) to track and optimize execution and costs.
 
 You can find the source code for the application described in this guide on GitHub.
 
