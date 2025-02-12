@@ -90,7 +90,7 @@ const Navigation = ({ isDarkTheme }) => (
                                     isExtended
                                       ? 'gap-3 before:rounded-[14px]'
                                       : 'gap-2.5 before:rounded-[10px]',
-                                    'before:absolute before:-inset-2.5 before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100',
+                                    'before:pointer-events-none before:absolute before:-inset-2.5 before:transform-gpu before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100',
                                     isDarkTheme
                                       ? 'before:bg-[#16181D]'
                                       : 'before:bg-[#f5f5f5] dark:before:bg-[#16181D]'
