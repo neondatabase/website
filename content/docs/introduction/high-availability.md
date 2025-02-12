@@ -57,7 +57,7 @@ Here's a summary of how different storage components handle and recover from fai
 
 ## Compute failover
 
-Our serverless architecture manages compute failures through rapid recovery and automatic traffic redirection, without the need to maintain idle standby replicas. Because compute instances are stateless, failures don't affect your data, and your connection string remains stable. The system typically resolves issues within seconds to minutes, depending on the type of failure. However, your application should be configured to handle brief disconnections and reconnect automatically.
+Our serverless architecture manages compute failures through rapid recovery and automatic traffic redirection, without the need to maintain idle standby replicas. Because compute instances are stateless, failures don't affect your data, and your connection string remains unchanged. The system typically resolves issues within seconds to minutes, depending on the type of failure. However, your application should be configured to handle brief disconnections and reconnect automatically.
 
 ### Compute endpoints as metadata
 
@@ -81,7 +81,7 @@ If a compute endpoint becomes unhealthy or unresponsive, we will automatically d
 
 #### Node failures
 
-Kubernetes nodes are the underlying infrastructure hosting multiple compute instances. When a node becomes unavailable, Neon automatically reschedules compute instances to other healthy nodes, a process that typically takes about 2 minutes. While your data remains safe during this process, compute availability will be impacted until rescheduling is complete.
+Kubernetes nodes are the underlying infrastructure hosting multiple compute instances. When a node becomes unavailable, Neon automatically reschedules compute instances to other healthy nodes, a process that typically takes about 2 minutes. While your data remains safe during this process, compute availability will be temporarily affected until rescheduling is complete.
 
 #### Availability Zone failures
 
