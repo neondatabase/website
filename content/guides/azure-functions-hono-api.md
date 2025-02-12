@@ -70,11 +70,11 @@ And now that I have all my dependencies, I'll update my function to use Hono.
 First, I'll create a file to hold my application logic, `src/app.ts`:
 
 ```typescript
-import { Hono } from "hono";
+import { Hono } from 'hono';
 
 const app = new Hono();
 
-app.get("/api", (c) => c.text("Recipes API"));
+app.get('/api', (c) => c.text('Recipes API'));
 
 export default app;
 ```
@@ -85,14 +85,14 @@ export default app;
 Then, replace the contents of `src/functions/RecipeApi.ts` with the following:
 
 ```typescript
-import { app } from "@azure/functions";
-import { azureHonoHandler } from "@marplex/hono-azurefunc-adapter";
-import honoApp from "../app";
+import { app } from '@azure/functions';
+import { azureHonoHandler } from '@marplex/hono-azurefunc-adapter';
+import honoApp from '../app';
 
-app.http("RecipesApi", {
-  methods: ["GET", "POST", "DELETE", "PUT"],
-  authLevel: "anonymous",
-  route: "{*proxy}",
+app.http('RecipesApi', {
+  methods: ['GET', 'POST', 'DELETE', 'PUT'],
+  authLevel: 'anonymous',
+  route: '{*proxy}',
   handler: azureHonoHandler(honoApp.fetch),
 });
 ```
@@ -149,7 +149,7 @@ export interface Recipe {
 
 // A simple view of recipe, excluding things like ingredients and preparation steps
 // e.g. for a list of recipes
-export type RecipeOverview = Pick<Recipe, "id" | "name" | "description">;
+export type RecipeOverview = Pick<Recipe, 'id' | 'name' | 'description'>;
 ```
 
 Just two models: one for recipes and another to describe the ingredients of those recipes.
@@ -212,13 +212,13 @@ FROM (VALUES
 ### Database Interaction
 
 Neon databases are serverless, distributed, fully managed, and a whole bunch of other things, but most importantly, they're just Postgres databases.
-So, I can use the `pg` package to interact with my database just like I would with any other Postgres database.  
+So, I can use the `pg` package to interact with my database just like I would with any other Postgres database.
 
 ```bash
 npm install pg
 ```
 
-Unfortunately, the `pg` package does not include any types (at least not as of this writing), 
+Unfortunately, the `pg` package does not include any types (at least not as of this writing),
 so I'll also install the types for the `pg` package to give myself a better development experience:
 
 ```bash
@@ -244,7 +244,7 @@ I'll create a new file, `src/lib/db.ts`, to hold my database connection logic:
 
 ```typescript
 // src/lib/db.ts
-import { Pool } from "pg";
+import { Pool } from 'pg';
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -261,17 +261,17 @@ For that, let's head back to `src/app.ts`.
 First, I'll import the `db` connection from `src/lib/db.ts` and the `RecipeOverview` type from `src/models.d.ts`.
 
 ```typescript
-import { Hono } from "hono";
-import db from "./lib/db";
-import type { RecipeOverview } from "./models";
+import { Hono } from 'hono';
+import db from './lib/db';
+import type { RecipeOverview } from './models';
 ```
 
 Then, I'll add an endpoint to query all recipes from the database (including their ingredients):
 
 ```typescript
-app.get("/api/recipes", async (c) => {
+app.get('/api/recipes', async (c) => {
   const { rows: recipes } = await db.query<RecipeOverview>(
-    "SELECT id, name, description FROM recipes"
+    'SELECT id, name, description FROM recipes'
   );
   return c.json(recipes);
 });
@@ -291,8 +291,8 @@ Exciting stuff - I've now queried my database from an Azure Function using TypeS
 Let's add another endpoint to get a single recipe by its ID, including its ingredients in the response:
 
 ```typescript
-app.get("/api/recipes/:id", async (c) => {
-  const recipeId = +c.req.param("id");
+app.get('/api/recipes/:id', async (c) => {
+  const recipeId = +c.req.param('id');
 
   const [recipeResults, ingredientsResults] = await Promise.all([
     db.query<Recipe>(
@@ -338,9 +338,8 @@ Now, when I hit the `/api/recipes/1` endpoint, I should see the following output
 And, finally, let's add an endpoint to _create_ a new recipe:
 
 ```typescript
-app.post("/api/recipes", async (c) => {
-  const { name, description, url, preparation_steps, ingredients } =
-    await c.req.json<Recipe>();
+app.post('/api/recipes', async (c) => {
+  const { name, description, url, preparation_steps, ingredients } = await c.req.json<Recipe>();
 
   // create the recipe, retrieving the added recipe
   // so we can use its id to add ingredients below
@@ -366,7 +365,7 @@ app.post("/api/recipes", async (c) => {
         // ($1, $2, $3, $4),($5, $6, $7, $8),($9, $10, $11, $12)
         (_, i) => `($${i * 4 + 1}, $${i * 4 + 2}, $${i * 4 + 3}, $${i * 4 + 4})`
       )
-      .join(",")}
+      .join(',')}
     RETURNING id, name, quantity_amount, quantity_type
     `,
     ingredients.flatMap((ingredient) => [
@@ -437,7 +436,7 @@ I like to use the Azure CLI to do everything, so I'll create a new resource grou
 ```
 
 Next you'll need to create a storage account to hold your function's code.
-I'll create a new storage account in the same resource group using the command 
+I'll create a new storage account in the same resource group using the command
 (ensuring that my storage account name is globally unique):
 
 ```bash
@@ -447,19 +446,19 @@ I'll create a new storage account in the same resource group using the command
     --location eastus2
 ```
 
-> **NOTE:** 
-> 
-> If this command produces an error (like mine did at first), double-check that 
-> the Microsoft.Storage Resource Provider is registered for your subscription. 
-> 
-> You can do this through the Azure Portal:
-> * Go to your subscription page
-> * Navigate to the "Resource providers" blade
-> * Find "Microsoft.Storage" in the list
-> * Click "Register" if it's not already registered
+> **NOTE:**
 >
+> If this command produces an error (like mine did at first), double-check that
+> the Microsoft.Storage Resource Provider is registered for your subscription.
+>
+> You can do this through the Azure Portal:
+>
+> - Go to your subscription page
+> - Navigate to the "Resource providers" blade
+> - Find "Microsoft.Storage" in the list
+> - Click "Register" if it's not already registered
 
-Then, I'll create a new Function App in that resource group using the command below 
+Then, I'll create a new Function App in that resource group using the command below
 (again, ensuring that my function app name is globally unique):
 
 ```bash
@@ -528,14 +527,15 @@ And that's it! My Recipes API is deployed and working in the cloud.
 
 ### Wrapping Up
 
-The setup I've shown here provides a solid foundation for building a robust, type-safe, and scalable JSON API. 
+The setup I've shown here provides a solid foundation for building a robust, type-safe, and scalable JSON API.
 While this is where I'm going to end this post, there is still several things I've had to leave out.
 
 Using what I've already shown in this article you should be able take care of some of these yourself, such as:
-* adding new endpoints to update and delete recipes
-* adding error handling
-* introducing input validation to new recipes
-* updating the `/recipes` endpoint with pagination and filtering of recipes
+
+- adding new endpoints to update and delete recipes
+- adding error handling
+- introducing input validation to new recipes
+- updating the `/recipes` endpoint with pagination and filtering of recipes
 
 Perhaps the biggest thing I've left out is security.  
 If you hadn't noticed, this API is completely open and doesn't require any authentication to access, meaning that anyone can come along and add recipes to the database.
@@ -543,7 +543,7 @@ If you hadn't noticed, this API is completely open and doesn't require any authe
 Now, I could have introduced some basic HTTP authentication, but one of Neon's best features is its built-in support for JWT authentication and Row Level Security, so I've decided to create an entirely separate post to cover that.
 Stay tuned for that post!
 
-In the meantime, I hope you've found this post helpful and that it inspires you to build your own APIs combining the strengths of TypeScript, Postgres (via Neon), and Azure Functions to create efficient and maintainable backend services that are super easy to develop, deploy, and scale. 
+In the meantime, I hope you've found this post helpful and that it inspires you to build your own APIs combining the strengths of TypeScript, Postgres (via Neon), and Azure Functions to create efficient and maintainable backend services that are super easy to develop, deploy, and scale.
 Good luck, and happy coding!
 
 ## Additional Resources
