@@ -3,7 +3,7 @@ title: Replicate data with Decodable
 subtitle: Learn how to replicate data from Neon with Decodable
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-03T20:41:57.320Z'
+updatedOn: '2025-02-11T11:32:44.537Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -117,11 +117,10 @@ ALTER TABLE <tbl1> REPLICA IDENTITY FULL;
 Next, create a [publication](https://www.postgresql.org/docs/current/sql-createpublication.html) with the name `dbz_publication`. Include all the tables you would like to ingest into Decodable.
 
 ```sql
-CREATE PUBLICATION dbz_publication FOR TABLE <tbl1, tbl2, tbl3>;
+CREATE PUBLICATION dbz_publication FOR TABLE <tbl1, tbl2, tbl3>>;
 ```
 
 Refer to the [Postgres docs](https://www.postgresql.org/docs/current/sql-alterpublication.html) if you need to add or remove tables from your publication.
-Alternatively, you also can create a publication `FOR ALL TABLES`.
 
 Upon start-up, the Decodable connector for Postgres will automatically create the [replication slot](https://www.postgresql.org/docs/current/logicaldecoding-explanation.html#LOGICALDECODING-REPLICATION-SLOTS) required for ingesting data change events from Postgres.
 The slot's name will be prefixed with `decodable_`, followed by a unique identifier.

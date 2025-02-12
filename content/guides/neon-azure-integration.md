@@ -1,6 +1,6 @@
 ---
-title: 'Setting up Neon serverless Postgres as an Azure Native Integration'
-subtitle: "A step-by-step guide to deploying Neon's serverless Postgres via the Azure Marketplace"
+title: Get started with Neon Serverless Postgres on Azure
+subtitle: A step-by-step guide to deploying Neon's serverless Postgres via the Azure Marketplace
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-12-12T00:00:00.000Z'

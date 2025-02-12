@@ -3,7 +3,7 @@ title: Manage updates
 enableTableOfContents: true
 isDraft: false
 tag: new
-updatedOn: '2025-02-07T17:55:42.639Z'
+updatedOn: '2025-02-10T16:29:54.730Z'
 ---
 
 <Admonition type="note" title="updates coming soon">
@@ -122,13 +122,18 @@ curl --request GET \
 In the response, locate the `maintenance_window` field. It specifies the selected weekday and hour for updates. For Free Plan accounts, the update window is set by Neon. Paid plan accounts can [choose a preferred update window](#updates-on-paid-plans). The `weekdays` value is a number from 1 to 7, representing the day of the week.
 
 ```json
+{
+...
+  "settings": {
       "maintenance_window": {
-        "weekdays": [
-          5
-        ],
-        "start_time": "07:00",
-        "end_time": "08:00"
-      }
+         "weekdays": [5],
+         "start_time": "07:00",
+         "end_time": "08:00"
+      },
+   }
+  "maintenance_scheduled_for": "2025-02-07T07:00"
+...
+}
 ```
 
 If there's a planned update, you'll also find a `maintenance_scheduled_for` field in the response body. This value matches the `start_time` in your `maintenance_window` but is formatted as a timestamp. If the `maintenance_scheduled_for` field in not present in the response, this means there is no planned update at this time.
@@ -145,6 +150,6 @@ For compute restart instructions, see [Restart a compute](/docs/manage/endpoints
 
 Most Postgres connection drivers include built-in retry mechanisms that automatically handle short-lived connection interruptions. This means that for most applications, a brief restart should result in minimal disruption, as the driver will transparently reconnect.
 
-However, if your application has strict availability requirements, you may want to ensure that your connection settings are configured to allow for retries. Check your driver's documentation for options like connection timeouts, retry intervals, and connection pooling strategies. You retry configuration should account for the few seconds it takes to apply updates to your Neon compute.
+However, if your application has strict availability requirements, you may want to ensure that your connection settings are configured to allow for retries. Check your driver's documentation for options like connection timeouts, retry intervals, and connection pooling strategies. Your retry configuration should account for the few seconds it takes to apply updates to your Neon compute. For related information, see [Build connection timeout handling into your application](/docs/connect/connection-latency#build-connection-timeout-handling-into-your-application).
 
 <NeedHelp/>

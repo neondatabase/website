@@ -127,6 +127,7 @@ module.exports = {
       letterSpacing: {
         tighter: '-0.04em',
         'extra-tight': '-0.02em',
+        snug: '-0.01em',
         wider: '0.04em',
       },
       boxShadow: {
@@ -134,16 +135,22 @@ module.exports = {
         contact: '0px 4px 10px 0px rgba(0, 0, 0, .5), 0px 4px 30px 0px rgba(0, 0, 0, .5)',
       },
       backgroundImage: ({ theme }) => ({
+        'header-menu-banner':
+          'radial-gradient(69.47% 49.51% at 29.09% 0%, #131D3E 0%, rgba(25, 39, 82, 0.00) 100%),' +
+          'radial-gradient(14.22% 14.24% at 82.11% 0%, #A3F0E9 0%, rgba(163, 240, 233, 0.00) 100%),' +
+          'radial-gradient(46.71% 50% at 80.6% 0%, rgba(86, 198, 189, 0.60) 0%, rgba(33, 80, 91, 0.00) 100%),' +
+          'linear-gradient(0deg, #18191B, #18191B)',
+        'header-menu-banner-mobile':
+          'radial-gradient(16.35% 46.44% at 99.06% 3.75%, rgba(86, 198, 189, 0.60) 13.19%, rgba(33, 80, 91, 0.00) 100%),' +
+          'radial-gradient(30.11% 65.43% at 71.03% 0%, #131D3E 0%, rgba(25, 39, 82, 0.00) 100%),' +
+          'radial-gradient(43.11% 44.64% at 99.53% 4.38%, #A3F0E9 0%, rgba(163, 240, 233, 0.00) 100%),' +
+          'linear-gradient(0deg, #18191B, #18191B)',
         'header-docs-button-border':
           'radial-gradient(78.71% 83.93% at 50% 3.57%, rgba(255, 255, 255, 0.78), transparent),' +
           'linear-gradient(0deg, #BCBEC2, #BCBEC2)',
         'header-docs-button-border-dark':
           'radial-gradient(54.19% 83.93% at 50% 3.57%, rgba(255, 255, 255, 0.55), transparent),' +
           'linear-gradient(0deg, #303236, #303236)',
-        'subscribe-sm':
-          'linear-gradient(160deg, rgba(173, 224, 235, 0) 23%, rgba(173, 224, 235, 0.45) 50%, rgba(173, 224, 235, 0) 77%);',
-        'pricing-table-featured-column':
-          'linear-gradient(180deg, rgba(19, 20, 21, 0.80) 93%, rgba(19, 20, 21, 0) 100%);',
         'home-lightning-title':
           'radial-gradient(30.52% 57.36% at 67.98% 84.29%, #070707 8.6%, #525252 44.72%, #A7A7A7 69.37%, #FFFFFF 100%)',
         'home-lightning-title-xl':
@@ -188,6 +195,10 @@ module.exports = {
           'radial-gradient(18.96% 17.96% at 13% -1%, #C7D3FF 0%, #7995F7 8.96%, #4E5F9C 26.83%, rgba(78, 95, 156, 0) 100%),' +
           'radial-gradient(57.03% 30.65% at 100% 36.84%, #191C27 0%, rgba(25, 28, 39, 0) 100%),' +
           'linear-gradient(0deg, #141416, #141416)',
+        'blog-subscribe-form':
+          'linear-gradient(160deg, rgba(173, 224, 235, 0) 23%, rgba(173, 224, 235, 0.45) 50%, rgba(173, 224, 235, 0) 77%);',
+        'pricing-table-featured-column':
+          'linear-gradient(180deg, rgba(19, 20, 21, 0.80) 93%, rgba(19, 20, 21, 0) 100%);',
         'variable-list-icon-bg': 'linear-gradient(220deg, #272A35 8%, #16181D 70%)',
         'variable-list-icon-border': 'linear-gradient(224deg, #FFF 2.43%, rgba(255, 255, 255, 0))',
         'variable-value-1': 'linear-gradient(220deg, #FFFFFF 22%, #41BAB9 142%)',
