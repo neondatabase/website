@@ -16,8 +16,8 @@ You can use the `vpc` CLI command to manage [Private Networking](/docs/guides/ne
 
 The `vpc` command includes subcommands for managing VPC endpoints and project-level VPC endpoint restrictions.
 
-| Subcommand                            | Description                                    |
-| :------------------------------------ | :--------------------------------------------- |
+| Subcommand                               | Description                                    |
+| :--------------------------------------- | :--------------------------------------------- |
 | [endpoint](#the-vpc-endpoint-subcommand) | Manage VPC endpoints                           |
 | [project](#the-vpc-project-subcommand)   | Manage project-level VPC endpoint restrictions |
 
