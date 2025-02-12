@@ -29,12 +29,14 @@ import UseCaseList from 'components/pages/use-case/use-case-list';
 import Admonition from 'components/shared/admonition';
 import AnchorHeading from 'components/shared/anchor-heading';
 import CodeBlock from 'components/shared/code-block';
+import ColdStartsGraphic from 'components/shared/cold-starts-graphic';
 import ComputeCalculator from 'components/shared/compute-calculator';
 import CtaBlock from 'components/shared/cta-block';
 import DocCta from 'components/shared/doc-cta';
 import ExtensionRequest from 'components/shared/extension-request';
 import ImageZoom from 'components/shared/image-zoom';
 import InkeepEmbedded from 'components/shared/inkeep-embedded';
+import LatencyParts from 'components/shared/latency-parts';
 import Link from 'components/shared/link';
 import RegionRequest from 'components/shared/region-request';
 import getCodeProps from 'lib/rehype-code-props';
@@ -171,6 +173,8 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   DocsList,
   RegionRequest,
   ExtensionRequest,
+  LatencyParts,
+  ColdStartsGraphic,
   CTA: isUseCase ? CtaBlock : DocCta,
   Testimonial,
   TestimonialsWrapper,
