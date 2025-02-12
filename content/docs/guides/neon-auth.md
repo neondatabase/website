@@ -49,10 +49,10 @@ Here is the basic flow:
    SELECT * FROM neon_auth.users_sync;
    ```
 
-   | id          | name          | email               | created_at           | updated_at           | deleted_at | raw_json                      |
-   | ----------- | ------------- | ------------------- | ------------------- | ------------------- | ---------- | ----------------------------- |
-   | 21373f88... | Sam Patel     | sam@startupinc.dev  | Feb 12, 2025 1:41 pm | null                | null       | \{"id": "21373f88-...", ...\}   |
-   | 542c424b... | Alex Kumar    | alex@acme.com       | Dec 17, 2024 2:07 pm | Feb 12, 2025 2:30 pm | null       | \{"id": "542c424b-...", ...\}   |
+   | id          | name       | email              | created_at           | updated_at           | deleted_at | raw_json                      |
+   | ----------- | ---------- | ------------------ | -------------------- | -------------------- | ---------- | ----------------------------- |
+   | 21373f88... | Sam Patel  | sam@startupinc.dev | Feb 12, 2025 1:41 pm | null                 | null       | \{"id": "21373f88-...", ...\} |
+   | 542c424b... | Alex Kumar | alex@acme.com      | Dec 17, 2024 2:07 pm | Feb 12, 2025 2:30 pm | null       | \{"id": "542c424b-...", ...\} |
 
 ### Table structure
 
