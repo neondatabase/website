@@ -19,8 +19,8 @@ Before transferring projects, review these important guidelines covering transfe
 
 | Transfer method                                      | Project limit                            |
 | ---------------------------------------------------- | ---------------------------------------- |
-| NeonConsole                                          | Up to 200 projects at a time             |
-| API                                                  | Up to 400 projects in a single operation |
+| [Neon Console](#transfer-from-the-neon-console)                                          | Up to 200 projects at a time             |
+| [API](#transfer-projects-via-api)                                                  | Up to 400 projects in a single operation |
 | [Python script](#transfer-large-numbers-of-projects) | Unlimited (processes in batches)         |
 
 The number of projects you can transfer is limited by the target Organization plan's allowance.
@@ -119,9 +119,9 @@ This requires:
 - Your personal API key with access to both the source and destination organizations
 - **Admin** permissions in the source organization (where projects are currently located)
 - At least **Member** permissions in the destination organization (where projects will be transferred to)
-- Compatible billing plans between organizations (e.g., projects can move some Scale to Launch but not the other way around)
+- Compatible billing plans between organizations (e.g., projects can move from Scale to Launch but not the other way around)
 
-Projects with GitHub or Vercel integrations cannot be transferred
+<Admonition type="note">Projects with GitHub or Vercel integrations cannot be transferred</Admonition>
 
 **Example request**
 
