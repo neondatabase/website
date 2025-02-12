@@ -35,9 +35,7 @@ You can visualize the way each factor contributes like this:
 
 <LatencyParts />
 
-**What about cold starts?** Databases on Neon can scale to zero when there are no active queries for a certain amount of time. We cover how these work below in [Cold Starts](#cold-starts).
-
-\<aside\>Here’s a Neon Database for you to test this on: Click this button and we’ll create a database for you and give you the connection string, you can use it to test everything we’re about to go through.\</aside\>
+**What about cold starts?** Databases on Neon can scale to zero when there are no active queries for a certain amount of time. We kept this topic separate below in [Cold Starts](#cold-starts) because _only `TBD%` of all queries on Neon encounter a cold start._
 
 ### Establishing a connection
 
