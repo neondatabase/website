@@ -18,8 +18,8 @@ The `vpc` command includes subcommands for managing VPC endpoints and project-le
 
 | Subcommand                            | Description                                    |
 | :------------------------------------ | :--------------------------------------------- |
-| [endpoint](#the-vpc-endpoint-command) | Manage VPC endpoints                           |
-| [project](#the-vpc-project-command)   | Manage project-level VPC endpoint restrictions |
+| [endpoint](#the-vpc-endpoint-subcommand) | Manage VPC endpoints                           |
+| [project](#the-vpc-project-subcommand)   | Manage project-level VPC endpoint restrictions |
 
 ## The `vpc endpoint` subcommand
 
@@ -113,7 +113,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 - **Restrict connections to a specific VPC**
 
-  Configure or update a VPC endpoint restriction for a Neon project. When a VPC endpoint ID is assigned as a restriction, only connections from this specific VPC are accepted.
+  Configure or update a VPC endpoint restriction for a Neon project. When a VPC endpoint ID is assigned as a restriction, the specified project only accepts connections from the specified VPC.
 
   ```bash
   neon vpc project restrict vpce-1234567890abcdef0 --project-id orange-credit-12345678
