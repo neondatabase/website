@@ -6,7 +6,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-identity
 tag: beta
-updatedOn: '2025-01-31T21:21:32.228Z'
+updatedOn: '2025-02-12T20:50:28.600Z'
 ---
 
 <ComingSoon />
