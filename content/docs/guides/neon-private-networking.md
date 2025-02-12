@@ -23,6 +23,7 @@ With **Neon Private Networking**, you can connect to your database via AWS Priva
 
 ## Prerequisites
 
+- You must be a Neon Business or Enterprise account user to use this feature, and the user account must belong to a [Neon organization](/docs/manage/organizations). You'll encounter an access error if you attempt to run the required Neon CLI commands or API calls from a personal Neon account or from a Neon plan that does not support the Private Networking feature.
 - Ensure that your **client application is deployed on AWS** in the same region as the Neon database you plan to connect to. The Private Networking feature is available in all [Neon-supported AWS regions](/docs/introduction/regions#aws-regions). Both your private access client application and Neon database must be in one of these regions.
 - Add a [VPC endpoint](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html#concepts-vpc-endpoints) to the AWS Virtual Private Cloud ([VPC](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)) where your client application is deployed. The steps are outlined below.
 - Install the Neon CLI. You will use it to add your VPC endpoint ID to your Neon organization. For installation instructions, see [Neon CLI — Install and connect](/docs/reference/cli-install).
@@ -162,7 +163,7 @@ To configure Neon Private Networking, perform the following steps:
     neon projects update ---block-public-connections
     ```
 
-    If you've got more than one Neon project, specify the `--project-id` option with your Neon project ID. You can find you Neon project ID under your project's settings in the Neon Console, or by running this Neon CLI command: `neon projects list`
+    If you've got more than one Neon project, specify the `--project-id` option with your Neon project ID. You can find your Neon project ID under your project's settings in the Neon Console, or by running this Neon CLI command: `neon projects list`
 
     </TabItem>
 
@@ -207,7 +208,18 @@ You can specify a CLI command similar to the following to restrict project acces
 neon vpc project restrict vpce-1234567890abcdef0 --project-id orange-credit-12345678
 ```
 
-You will need to provide the VPC endpoint ID that you want to restrict and your Neon project ID. You can find you Neon project ID under your project's settings in the Neon Console, or by running this Neon CLI command: `neon projects list`
+You will need to provide the VPC endpoint ID that you want to restrict and your Neon project ID. You can find your Neon project ID under your project's settings in the Neon Console, or by running this Neon CLI command: `neon projects list`
+
+After adding a restriction, you can check the status of the VPC endpoint to view the restricted project using the [vpc endpoint status` command](/docs/reference/cli-vpc#the-vpc-endpoint-subcommand). You will need to provide your VPC endpoint ID, region ID, and Neon organization ID.
+
+```bash
+neonctl vpc endpoint status vpce-1234567890abcdef0 --region-id=aws-eu-central-1 --org-id=org-nameless-block-72040075
+┌────────────────────────┬───────┬─────────────────────────┬─────────────────────────────┐
+│ Vpc Endpoint Id        │ State │ Num Restricted Projects │ Example Restricted Projects │
+├────────────────────────┼───────┼─────────────────────────┼─────────────────────────────┤
+│ vpce-1234567890abcdef0 │ new   │ 1                       │ orange-credit-12345678      │
+└────────────────────────┴───────┴─────────────────────────┴─────────────────────────────┘
+```
 
 </TabItem>
 
@@ -222,6 +234,15 @@ curl --request POST \
      --header 'authorization: Bearer $NEON_API_KEY' \
      --header 'content-type: application/json' \
      --data '{"label":"my_vpc"}'
+```
+
+After adding a restriction, you can check the status of the VPC endpoint to view the restricted project using the [Retrieve VPC endpoint details](https://api-docs.neon.tech/reference/getorganizationvpcendpointdetails) API. You will need to provide your VPC endpoint ID, region ID, Neon organization ID, and a Neon API key.
+
+```bash
+curl --request GET \
+     --url https://console.neon.tech/api/v2/organizations/org-nameless-block-72040075/vpc/region/aws-eu-central-1/vpc_endpoints/vpce-1234567890abcdef0 \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY'
 ```
 
 </TabItem>
