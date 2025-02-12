@@ -20,7 +20,7 @@ Please note that `pg_cron` jobs will only run when your compute is active. We th
 
 To install `pg_cron` on Neon, you must first enable it by setting the `cron.database_name` parameter to the name of the database where you want to install `pg_cron`. This requires making an [Update compute endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint) API call.
 
-The `cron.database_name` parameter is passed to your Postgres instance through the `pg_settings` option in the endpoint settings object. The following `Update endpoint` API example shows where to specify your Neon `project_id`, `endpoint_id`, [Neon API key](/docs/manage/api-keys), and database name. 
+The `cron.database_name` parameter is passed to your Postgres instance through the `pg_settings` option in the endpoint settings object. The following `Update endpoint` API example shows where to specify your Neon `project_id`, `endpoint_id`, [Neon API key](/docs/manage/api-keys), and database name.
 
 The `project_id` and `endpoint_id` values can be obtained from the Neon Console or [using the Neon API](https://api-docs.neon.tech/reference/path-parameters). In the Neon Console, the `project_id` is found on your project's **Settings** page, and will look something like this: `young-sun-12345678`. The `endpoint_id` is found on the **Compute** tab on your **Branches** page, where it is referred to as the **Compute ID**. It will have an `ep` prefix, and look similar to this: `ep-still-rain-abcd1234`.
 
