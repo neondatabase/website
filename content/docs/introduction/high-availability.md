@@ -59,7 +59,7 @@ Here's a summary of how different storage components handle and recover from fai
 
 Our serverless architecture manages compute failures through rapid recovery and automatic traffic redirection, without the need to maintain idle standby replicas. Because compute instances are stateless, failures don't affect your data, and your connection string remains unchanged. The system typically resolves issues within seconds to minutes, depending on the type of failure. However, your application should be configured to handle brief disconnections and reconnect automatically.
 
-### Compute endpoints as metadata
+### Compute endpoints are ephemeral
 
 Your compute endpoint exists essentially as metadata — with your connection string being the core element. This design means endpoints can be instantly reassigned to new compute resources without changing your application's configuration. When you first connect, Neon assigns your endpoint to an available VM from our ready-to-use pool, eliminating traditional provisioning delays.
 
