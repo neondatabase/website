@@ -17,7 +17,7 @@ const BlogCategoryPage = async ({ params: { slug } }) => {
 
   return (
     <>
-      <BlogHeader title="Blog" basePath={BLOG_BASE_PATH}>
+      <BlogHeader className="lg:-top-[68px] md:-top-[60px]" title="Blog" basePath={BLOG_BASE_PATH}>
         <span className="sr-only">– {category.name}</span>
       </BlogHeader>
       <ScrollLoader itemsCount={8} className="grid grid-cols-2 gap-x-6 xl:gap-x-5 md:grid-cols-1">
