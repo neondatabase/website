@@ -45,11 +45,11 @@ Before you get any data from the database, you need to connect to it. This proce
 
 ![Nine round-trips to get a result on a standard TCP connection to Postgres](https://neon.tech/_next/image?url=https%3A%2F%2Fneondatabase.wpengine.com%2Fwp-content%2Fuploads%2F2023%2F08%2Fimage-5.png&w=3840&q=85&dpl=dpl_93LwG65BEFC73DGwgsAif219AFEd)
 
-When you combine “multiple round trips” with any sort of network latency you get a compounding effect. 
+When you combine “multiple round trips” with any sort of network latency you get a compounding effect.
 
 \[Interactive graphic showing compounding effect of increasing network latency\]
 
-How often you must establish a database connection depends on how you build your app. 
+How often you must establish a database connection depends on how you build your app.
 
 #### Long Running
 
@@ -65,10 +65,9 @@ Serverless functions may be executing independently in short-lived environments,
 
 **Tips for short-lived (serverless):**
 
-1. Execute functions in a region that is the same or close to your database  
-2. Use an HTTP API \[Link to serverless driver\] \- establishing the HTTP connection is faster than establishing a TCP connection.  
+1. Execute functions in a region that is the same or close to your database
+2. Use an HTTP API \[Link to serverless driver\] \- establishing the HTTP connection is faster than establishing a TCP connection.
 3. Execute multiple queries in a single function \- so that you only pay the connection tax once.
-
 
 <Admonition type="tip" title="Reducing roundtrips with the Serverless Driver">
 Neon's [serverless driver](/docs/serverless-driver) and proxy have been optimized to reduce the number of roundtrips to the absolute minimum: Four round-trips to get a result.
@@ -81,12 +80,12 @@ To read more about how this works, see: [Quicker serverless Postgres connections
 
 Let’s go through the different scenarios here from lowest latency to highest:
 
-1. **App and database on same VM** \- 1ms to connect and 1ms to query  \[Not possible with Neon\] When you put your database and your app on the exact same machine, latency is measured in microseconds. \[Is there a way to give someone an environment that shows this? Maybe github codespace?\]  
-2. **App and database in same region (datacenter) connecting over private network \-** 1ms to connect, 1ms to query \[Not exactly possible on Neon, you can connect through PrivateLink but it doesnt save you any time\]  
-3. **App and database in same region (datacenter) connecting over public network** \- 3ms to connect, 1ms to query \- This is the fastest way to connect that is accessible to all Neon users. What you’re doing here is picking the same AWS or Azure region for your database and your application (be it serverless, like lambda functions on AWS, or serverful).  
-   1. You still use the publicly routable address of your database, but data is traveling 0 miles so it is very fast.  
-   2. This doesn’t mean your app has to be running on AWS directly, for example Vercel runs infra on AWS so picking the same Vercel and Neon region has the same effect.  
-4. **App and database in different region \-** Now we get into that compounding effect 
+1. **App and database on same VM** \- 1ms to connect and 1ms to query \[Not possible with Neon\] When you put your database and your app on the exact same machine, latency is measured in microseconds. \[Is there a way to give someone an environment that shows this? Maybe github codespace?\]
+2. **App and database in same region (datacenter) connecting over private network \-** 1ms to connect, 1ms to query \[Not exactly possible on Neon, you can connect through PrivateLink but it doesnt save you any time\]
+3. **App and database in same region (datacenter) connecting over public network** \- 3ms to connect, 1ms to query \- This is the fastest way to connect that is accessible to all Neon users. What you’re doing here is picking the same AWS or Azure region for your database and your application (be it serverless, like lambda functions on AWS, or serverful).
+   1. You still use the publicly routable address of your database, but data is traveling 0 miles so it is very fast.
+   2. This doesn’t mean your app has to be running on AWS directly, for example Vercel runs infra on AWS so picking the same Vercel and Neon region has the same effect.
+4. **App and database in different region \-** Now we get into that compounding effect
 
 ### Minimizing time spent answering the query
 
@@ -99,7 +98,7 @@ Let’s go through the different scenarios here from lowest latency to highest:
 When a Neon compute endpoint hasn't received any connections for a specified amount of time, it can [autosuspend](https://neon.tech/docs/introduction/auto-suspend).
 This is useful for:
 
--  **Resource Management** - Turning off unused databases is automatic.
+- **Resource Management** - Turning off unused databases is automatic.
 - **Cost-Efficiency** - Never pay for compute that's not serving queries.
 
 But scale to zero is only useful if compute can start up quickly again when it's needed. That's why [cold start](#cold-starts) times are so important.
@@ -115,7 +114,6 @@ Here are some example scenarios where scale to zero may be useful:
 - **Internal Apps** - If the userbase for your app is a limited number of employees, the db is likely idle more than active.
 - **Database-per-user Architectures** - Instead of having a single database for all users, if you have a separate database for each user, the activity level of any one database may be low enough that scale to zero results in significant cost reduction.
 - **Small Projects** - For small projects, configuring the production database to scale to zero can make it more cost-efficient without major impact to UX.
-
 
 ### Cold Starts
 
