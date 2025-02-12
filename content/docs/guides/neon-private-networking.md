@@ -107,6 +107,8 @@ To configure Neon Private Networking, perform the following steps:
 
     </Tabs>
 
+    Optionally, you can limit access to a Neon project by allowing connections only from a specific VPC endpoint. For instructions, see [Assigning a VPC endpoint restrictions](#assigning-a-vpc-endpoint-restriction).
+
 ## Enable Private DNS
 
     After adding you VPC endpoint ID to your Neon organization, enable private DNS lookup for the VPC endpoint in AWS.
@@ -196,7 +198,7 @@ To configure Neon Private Networking, perform the following steps:
 
 ## Assigning a VPC endpoint restriction
 
-You can restrict clients from an AWS VPC from connecting to particular projects in a Neon organization using the Neon CLI or API.
+You can limit access to a Neon project by allowing connections only from a specific VPC endpoint. Use the Neon CLI or API to set this restriction.
 
 <Tabs labels={["CLI", "API"]}>
 
