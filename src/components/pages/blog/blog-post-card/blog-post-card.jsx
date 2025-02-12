@@ -136,7 +136,7 @@ const BlogPostCard = ({
           {/* title */}
           <h1
             className={clsx(
-              'font-medium leading-snug tracking-tighter transition-colors duration-200 group-hover:text-green-45 md:text-lg',
+              'font-medium leading-snug tracking-tighter transition-colors duration-200 group-hover:text-gray-new-80 md:text-lg',
               fullSize ? 'text-2xl lg:text-xl' : 'text-xl'
             )}
           >
@@ -146,7 +146,7 @@ const BlogPostCard = ({
           {fullSize && (
             <div
               className={clsx(
-                'mt-2 text-lg font-light tracking-extra-tight text-gray-new-94 lg:text-base md:text-[15px]',
+                'mt-2 font-light tracking-extra-tight text-gray-new-90 lg:text-base md:text-[15px]',
                 largeCover ? 'line-clamp-2' : 'line-clamp-3'
               )}
             >
