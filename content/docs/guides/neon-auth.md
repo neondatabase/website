@@ -49,10 +49,11 @@ Here is the basic flow:
    SELECT * FROM neon_auth.users_sync;
    ```
 
-   | id          | name          | email               | created_at           | updated_at           | deleted_at | raw_json                      |
-   | ----------- | ------------- | ------------------- | ------------------- | ------------------- | ---------- | ----------------------------- |
-   | 21373f88... | Sam Patel     | sam@startupinc.dev  | Feb 12, 2025 1:41 pm | null                | null       | \{"id": "21373f88-...", ...\}   |
-   | 542c424b... | Alex Kumar    | alex@acme.com       | Dec 17, 2024 2:07 pm | Feb 12, 2025 2:30 pm | null       | \{"id": "542c424b-...", ...\}   |
+   | id          | name          | email             | created_at        | updated_at        | deleted_at | raw_json                      |
+   | ----------- | ------------- | ----------------- | ---------------- | ---------------- | ---------- | ----------------------------- |
+   | d37b6a30... | Jordan Rivera | jordan@company.co | 2025-02-12 19:44... | null             | null       | \{"id": "d37b6a30...", ...\}    |
+   | 0153cc96... | Alex Kumar    | alex@acme.com     | 2025-02-12 19:44... | null             | null       | \{"id": "0153cc96...", ...\}    |
+   | 51e491df... | Sam Patel     | sam@startup.dev   | 2025-02-12 19:43... | 2025-02-12 19:46... | null       | \{"id": "51e491df...", ...\}    |
 
 ### Table structure
 
@@ -151,7 +152,7 @@ CREATE TABLE todos (
     id SERIAL PRIMARY KEY,
     task TEXT NOT NULL,
     user_id UUID NOT NULL REFERENCES neon_auth.users_sync(id) ON DELETE CASCADE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 
 -- For content that should persist after user deletion (e.g., blog posts)
@@ -160,7 +161,7 @@ CREATE TABLE posts (
     title TEXT NOT NULL,
     content TEXT NOT NULL,
     author_id UUID REFERENCES neon_auth.users_sync(id) ON DELETE SET NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 ```
 
