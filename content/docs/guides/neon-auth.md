@@ -49,10 +49,10 @@ Here is the basic flow:
    SELECT * FROM neon_auth.users_sync;
    ```
 
-   | id          | name       | email             | created_at    | raw_json                      |
-   | ----------- | ---------- | ----------------- | ------------- | ----------------------------- |
-   | 21373f88... | Sarah Chen | sarah@acme.dev    | 2024-12-17... | \{"id": "21373f88-...", ...\} |
-   | 0310a9a5... | Alex Kumar | alex@startmeup.co | 2024-12-17... | \{"id": "0310a9a5-...", ...\} |
+   | id          | name          | email               | created_at           | updated_at           | deleted_at | raw_json                      |
+   | ----------- | ------------- | ------------------- | ------------------- | ------------------- | ---------- | ----------------------------- |
+   | 21373f88... | Sam Patel     | sam@startupinc.dev  | Feb 12, 2025 1:41 pm | null                | null       | \{"id": "21373f88-...", ...\}   |
+   | 542c424b... | Alex Kumar    | alex@acme.com       | Dec 17, 2024 2:07 pm | Feb 12, 2025 2:30 pm | null       | \{"id": "542c424b-...", ...\}   |
 
 ### Table structure
 
@@ -64,6 +64,7 @@ The following columns are included in the `neon_auth.users_sync` table:
 - `email`: The user's primary email (nullable)
 - `created_at`: When the user signed up (nullable)
 - `deleted_at`: When the user was deleted, if applicable (nullable)
+- `updated_at`: When user info was last updated, if applicable (nullable)
 
 Updates to user profiles in the auth provider are automatically synchronized.
 
@@ -82,7 +83,7 @@ Without Neon Auth, keeping user data in sync often involves:
 1. Using additional services (like Inngest) for background jobs
 2. Writing and maintaining sync logic
 
-Here's how you'd typically sync user data without Neon Auth:
+Here's how you'd typically sync user data _without_ Neon Auth:
 
 ```typescript
 import { AuthProvider } from '@auth/sdk';
