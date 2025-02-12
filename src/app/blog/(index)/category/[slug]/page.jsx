@@ -18,7 +18,7 @@ const BlogCategoryPage = async ({ params: { slug } }) => {
   return (
     <>
       <BlogHeader title="Blog" basePath={BLOG_BASE_PATH}>
-        <h2 className="sr-only">– {category.name}</h2>
+        <span className="sr-only">– {category.name}</span>
       </BlogHeader>
       <ScrollLoader itemsCount={8} className="grid grid-cols-2 gap-x-6 xl:gap-x-5 md:grid-cols-1">
         {posts.map((post, index) => (
