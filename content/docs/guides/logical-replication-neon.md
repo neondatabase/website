@@ -3,7 +3,7 @@ title: Logical replication in Neon
 subtitle: Information about logical replication specific to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-03T20:41:57.323Z'
+updatedOn: '2025-02-11T11:32:44.539Z'
 ---
 
 <LRBeta/>
@@ -147,7 +147,7 @@ Creating a subscription that connects to the same database cluster (for example,
 For example, on the publisher database, you would create the publication and the replication slot, as shown:
 
 ```sql
-CREATE PUBLICATION my_publication FOR ALL TABLES;
+CREATE PUBLICATION my_publication FOR TABLES <table1>, <table2>;
 SELECT pg_create_logical_replication_slot('my_replication_slot', 'pgoutput');
 ```
 

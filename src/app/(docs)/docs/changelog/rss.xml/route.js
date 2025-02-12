@@ -1,14 +1,14 @@
 /* eslint-disable import/prefer-default-export */
 import Rss from 'rss';
 
+import { CHANGELOG_DIR_PATH } from 'constants/content';
 import { CHANGELOG_BASE_PATH } from 'constants/docs';
-import { CHANGELOG_DIR_PATH, getAllChangelogPosts, getPostBySlug } from 'utils/api-docs';
-import getChangelogDateFromSlug from 'utils/get-changelog-date-from-slug';
+import { getAllChangelogs, getPostBySlug } from 'utils/api-docs';
 
 const SITE_URL = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
 
 export async function GET() {
-  const allChangelogPosts = await getAllChangelogPosts();
+  const allChangelogPosts = await getAllChangelogs();
 
   const feed = new Rss({
     id: CHANGELOG_BASE_PATH,
@@ -20,10 +20,10 @@ export async function GET() {
   });
 
   allChangelogPosts.forEach((post) => {
-    const { slug } = post;
+    const { slug, label, date } = post;
     const { data, content } = getPostBySlug(slug, CHANGELOG_DIR_PATH);
 
-    const heading = content.match(/# (.*)/)?.[1];
+    const heading = data.title || content.match(/# (.*)/)?.[1];
 
     const description =
       data.description ||
@@ -31,14 +31,12 @@ export async function GET() {
 
     const url = `${SITE_URL}${CHANGELOG_BASE_PATH}${slug}`;
 
-    const { label, datetime } = getChangelogDateFromSlug(slug);
-
     feed.item({
       id: url,
       title: `${heading} release - ${label}`,
       url,
       guid: url,
-      date: new Date(datetime),
+      date: new Date(date),
       description,
     });
   });

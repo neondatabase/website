@@ -1,74 +1,42 @@
-import clsx from 'clsx';
 import { notFound } from 'next/navigation';
 
-import BlogPostCard from 'components/pages/blog/blog-post-card';
-import SubscribeForm from 'components/pages/blog-post/subscribe-form';
-import LoadMorePosts from 'components/shared/load-more-posts';
-import { BLOG_CATEGORY_BASE_PATH } from 'constants/blog';
+import BlogGridItem from 'components/pages/blog/blog-grid-item';
+import BlogHeader from 'components/pages/blog/blog-header';
+import ScrollLoader from 'components/shared/scroll-loader';
+import { BLOG_BASE_PATH, BLOG_CATEGORY_BASE_PATH } from 'constants/blog';
 import { getBlogCategoryDescription } from 'constants/seo-data';
-import { getAllWpBlogCategories, getWpPostsByCategorySlug } from 'utils/api-posts';
+import { getAllCategories, getCategoryBySlug, getPostsByCategorySlug } from 'utils/api-wp';
 import getMetadata from 'utils/get-metadata';
-
-const generateBlogTitle = (category) => {
-  if (category.slug === 'all-posts') return 'All Blog Posts';
-  return `${category.name} Blog`;
-};
 
 // eslint-disable-next-line react/prop-types
 const BlogCategoryPage = async ({ params: { slug } }) => {
-  const categories = await getAllWpBlogCategories();
-  const posts = await getWpPostsByCategorySlug(slug);
-  const category = categories.find((cat) => cat.slug === slug);
+  const category = await getCategoryBySlug(slug);
+  const posts = await getPostsByCategorySlug(slug);
 
   if (!posts || !category) return notFound();
 
   return (
     <>
-      <h1 className="sr-only">{generateBlogTitle(category)}</h1>
-      <div className="dark grid grid-cols-3 gap-x-7 gap-y-16 2xl:gap-y-12 xl:gap-x-6 xl:gap-y-10 md:grid-cols-2 md:gap-y-5 sm:grid-cols-1">
-        {category.slug === 'all-posts' ? (
-          <LoadMorePosts defaultCountPosts={13} countToAdd={12}>
-            {posts.map((post, index) => (
-              <BlogPostCard
-                className={clsx({ 'col-span-full': index === 0 })}
-                {...post}
-                size={index === 0 ? 'xl' : 'md'}
-                key={post.slug}
-                withAuthorPhoto={index !== 0}
-                isPriority={index === 0}
-                imageWidth={index === 0 ? 716 : 380}
-                imageHeight={index === 0 ? 403 : 214}
-              />
-            ))}
-          </LoadMorePosts>
-        ) : (
-          posts.map((post, index) => (
-            <BlogPostCard
-              className={clsx({ 'col-span-full': index === 0 })}
-              {...post}
-              size={index === 0 ? 'xl' : 'md'}
-              key={post.slug}
-              withAuthorPhoto={index !== 0}
-              isPriority={index === 0}
-              imageWidth={index === 0 ? 716 : 380}
-              imageHeight={index === 0 ? 403 : 214}
-            />
-          ))
-        )}
-      </div>
-      <SubscribeForm size="md" />
+      <BlogHeader className="lg:-top-[68px] md:-top-[60px]" title="Blog" basePath={BLOG_BASE_PATH}>
+        <span className="sr-only">– {category.name}</span>
+      </BlogHeader>
+      <ScrollLoader itemsCount={8} className="grid grid-cols-2 gap-x-6 xl:gap-x-5 md:grid-cols-1">
+        {posts.map((post, index) => (
+          <BlogGridItem key={post.slug} index={index} category={category} post={post} />
+        ))}
+      </ScrollLoader>
     </>
   );
 };
 
 export async function generateMetadata({ params }) {
-  const categories = await getAllWpBlogCategories();
+  const categories = await getAllCategories();
   const category = categories.find((cat) => cat.slug === params.slug);
 
   if (!category) return notFound();
 
   return getMetadata({
-    title: `${generateBlogTitle(category)} - Neon`,
+    title: `${category.name} Blog - Neon`,
     description: getBlogCategoryDescription(params.slug),
     pathname: `${BLOG_CATEGORY_BASE_PATH}${params.slug}`,
     imagePath: '/images/social-previews/blog.jpg',
@@ -76,7 +44,7 @@ export async function generateMetadata({ params }) {
 }
 
 export async function generateStaticParams() {
-  const categories = await getAllWpBlogCategories();
+  const categories = await getAllCategories();
 
   return categories.map((category) => ({
     slug: category.slug,

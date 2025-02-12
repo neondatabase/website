@@ -1,234 +1,179 @@
 import clsx from 'clsx';
+import he from 'he';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link/link';
-import { BLOG_CATEGORY_BASE_PATH, CATEGORY_COLORS } from 'constants/blog';
+import { BLOG_CATEGORY_BASE_PATH, CATEGORY_COLORS, EXTRA_CATEGORIES } from 'constants/blog';
 import LINKS from 'constants/links';
+import getExcerpt from 'utils/get-excerpt';
 import getFormattedDate from 'utils/get-formatted-date';
 
-const imageSizes = {
-  xl: {
-    width: 672,
-    height: 368,
-  },
-  lg: {
-    width: 672,
-    height: 368,
-  },
-  md: {
-    width: 452,
-    height: 254,
-  },
-  sm: {
-    width: 212,
-    height: 119,
-  },
-  video: {
-    width: 204,
-    height: 114,
-  },
-};
+import Authors from '../authors';
 
 const BlogPostCard = ({
   className,
   title,
+  subtitle,
+  content,
   slug,
   date,
+  category,
   categories,
-  pageBlogPost: { url, authors, largeCover, author },
-  size = 'lg',
-  withAuthorPhoto = false,
+  pageBlogPost,
+  author,
+  fullSize = false,
   withImageHover = true,
-  isPriority = false,
   imageWidth = null,
   imageHeight = null,
+  isPriority = false,
 }) => {
-  const checkSize = (...sizes) => sizes.includes(size);
-  const category = categories?.nodes[0];
-  const postAuthor = authors?.[0]?.author || author;
+  const { largeCover, authors } = pageBlogPost || {};
+  const authorsData = authors?.map(({ author: { title, postAuthor } }) => ({
+    name: title,
+    photo: postAuthor?.image?.mediaItemUrl,
+  }));
 
-  // get the short version of the author's name, e.g. "John Doe" => "John D."
-  const authorName = postAuthor?.title
-    ?.split(' ')
-    .map((name, index) => (index === 1 ? `${name[0]}.` : name))
-    .join(' ');
+  const excerpt = subtitle || (content && getExcerpt(he.decode(content), 280));
 
   const formattedDate = getFormattedDate(date);
-  const link = url || `${LINKS.blog}/${slug}`;
+
+  const extraCategory = category && EXTRA_CATEGORIES.find((cat) => cat.slug === category);
+
+  const link = (() => {
+    if (extraCategory) return `${extraCategory.basePath}${slug}`;
+    return `${LINKS.blog}/${slug}`;
+  })();
+
+  const cat = (() => {
+    if (extraCategory) {
+      return {
+        slug: `${BLOG_CATEGORY_BASE_PATH}${extraCategory.slug}`,
+        name: extraCategory.name,
+      };
+    }
+
+    if (categories) {
+      const wpCategory = categories?.nodes[0];
+      return {
+        slug: `${BLOG_CATEGORY_BASE_PATH}${wpCategory?.slug}`,
+        name: wpCategory?.name,
+      };
+    }
+
+    return null;
+  })();
 
   return (
     <article
       className={clsx(
-        `blog-post-card-${size}`,
-        className,
-        size === 'xl'
-          ? 'grid grid-cols-10 gap-x-10 space-x-3 2xl:gap-x-6 xl:space-x-0 md:flex md:flex-col md:gap-y-4'
-          : 'flex flex-col'
+        'blog-post-card flex',
+        fullSize ? 'flex-row-reverse items-start gap-6 xl:gap-5 md:flex-col' : 'flex-col gap-4',
+        className
       )}
     >
-      {size !== 'xs' && (
+      {largeCover && (
         <Link
           className={clsx(
-            'group w-full max-w-[716px] shrink-0 overflow-hidden rounded-md md:max-w-none',
-            {
-              'col-span-6 xl:col-span-5 md:max-w-full': size === 'xl',
-            }
+            'group aspect-[16/9] w-full overflow-hidden rounded-lg bg-[#181818]',
+            fullSize && 'col-span-6 xl:col-span-5'
           )}
           to={link}
-          target={url ? '_blank' : undefined}
-          rel={url ? 'noopener noreferrer' : undefined}
         >
-          {largeCover?.mediaItemUrl ? (
-            <Image
-              className={clsx('w-full rounded-md transition-transform duration-200', {
-                'group-hover:scale-110': withImageHover,
-              })}
-              src={largeCover?.mediaItemUrl}
-              alt={largeCover?.altText || title}
-              width={imageWidth || imageSizes[size].width}
-              height={imageHeight || imageSizes[size].height}
-              quality={85}
-              priority={isPriority}
-              sizes="(max-width: 767px) 100vw"
-            />
-          ) : (
-            <Image
-              className={clsx('w-full rounded-md transition-transform duration-200', {
-                'group-hover:scale-110': withImageHover,
-              })}
-              src="/images/placeholder.jpg"
-              alt={title}
-              width={imageWidth || imageSizes[size].width}
-              height={imageHeight || imageSizes[size].height}
-              priority={isPriority}
-              sizes="(max-width: 767px) 100vw"
-              aria-hidden
-            />
-          )}
+          <Image
+            className={clsx(
+              'size-full rounded-lg object-cover transition-transform duration-200',
+              withImageHover && 'group-hover:scale-110'
+            )}
+            src={largeCover?.mediaItemUrl}
+            alt={largeCover?.altText || title}
+            width={imageWidth}
+            height={imageHeight}
+            priority={isPriority}
+            sizes="(max-width: 767px) 100vw"
+            aria-hidden
+          />
         </Link>
       )}
       <div
-        className={clsx('flex flex-col', {
-          'col-span-4 xl:col-span-5': size === 'xl',
-        })}
-      >
-        {category && size !== 'xs' && (
-          <Link
-            className={clsx(
-              'text-[11px] font-semibold uppercase leading-none -tracking-extra-tight',
-              CATEGORY_COLORS[category?.slug] || 'text-green-45',
-              size === 'lg' ? 'mt-[18px] md:mt-4' : 'mt-3'
-            )}
-            to={`${BLOG_CATEGORY_BASE_PATH}${category?.slug}`}
-          >
-            {category?.name}
-          </Link>
+        className={clsx(
+          'flex flex-col',
+          fullSize && largeCover ? 'w-[408px] shrink-0 md:w-full' : 'w-full'
         )}
-        <Link
-          className="group flex flex-col"
-          to={link}
-          target={url ? '_blank' : undefined}
-          rel={url ? 'noopener noreferrer' : undefined}
+      >
+        <div
+          className={clsx(
+            'flex gap-2 text-[13px] leading-none tracking-extra-tight',
+            fullSize ? 'mb-4' : 'mb-2'
+          )}
         >
+          {/* category */}
+          {cat && (
+            <Link
+              className={clsx(
+                'font-med<a class="font-medium text-green-45" href="/blog/category/company">Company</a>ium',
+                CATEGORY_COLORS[cat.slug] || 'text-green-45'
+              )}
+              to={cat.slug}
+            >
+              {cat.name}
+            </Link>
+          )}
+
+          {/* date */}
+          <time
+            className={clsx(
+              'relative block shrink-0 uppercase leading-none tracking-extra-tight text-gray-new-60',
+              cat &&
+                'pl-[11px] before:absolute before:left-0 before:top-1/2 before:inline-block before:size-[3px] before:rounded-full before:bg-gray-new-30'
+            )}
+            dateTime={date}
+          >
+            {formattedDate}
+          </time>
+        </div>
+        <Link className="group flex flex-col" to={link}>
+          {/* title */}
           <h1
             className={clsx(
-              'font-title font-medium leading-dense transition-colors duration-200 group-hover:text-green-45',
-              size === 'xl' && 'text-4xl tracking-tighter xl:text-3xl md:text-2xl',
-              size === 'lg' && 'text-3xl tracking-tighter lg:text-2xl xs:text-base',
-              checkSize('md', 'sm', 'xs') &&
-                'line-clamp-2 text-lg tracking-extra-tight lg:text-base',
-              !!category && 'mt-2 md:mt-1.5',
-              !category && size === 'lg' && 'mt-5 md:mt-4',
-              !category && size === 'md' && 'mt-3',
-              !category && size === 'sm' && 'mt-2',
-              size === 'video' && 'mt-2.5 line-clamp-2 text-lg tracking-extra-tight'
+              'font-medium leading-snug tracking-tighter transition-colors duration-200 group-hover:text-gray-new-80 md:text-lg',
+              fullSize ? 'text-2xl lg:text-xl' : 'text-xl'
             )}
           >
             {title}
           </h1>
-          <div
-            className={clsx(
-              'flex items-center',
-              (checkSize('lg', 'xl') || withAuthorPhoto) && 'mt-3 md:mt-2.5',
-              withAuthorPhoto && 'md:mt-2.5',
-              checkSize('md', 'sm', 'xs') && !withAuthorPhoto && 'mt-2 lg:mt-1.5'
-            )}
-          >
-            {/* avatar */}
-            <Image
-              className={clsx(
-                'rounded-full md:h-6 md:w-6 xs:mr-2 xs:block',
-                checkSize('lg', 'xl') || withAuthorPhoto ? 'mr-2 block' : 'hidden'
-              )}
-              src={postAuthor.postAuthor?.image?.mediaItemUrl}
-              alt={postAuthor?.title}
-              quality={85}
-              width={28}
-              height={28}
-            />
-
+          {/* excerpt */}
+          {fullSize && (
             <div
               className={clsx(
-                'flex items-center',
-                size === 'sm' &&
-                  'xl:flex-col xl:items-start lt:flex-row lt:items-center lg:flex-col lg:items-start xs:flex-row xs:items-center',
-                withAuthorPhoto && 'xl:flex-col xl:items-start md:flex-row md:items-center',
-                size === 'video' && 'mt-2 w-full'
+                'mt-2 font-light tracking-extra-tight text-gray-new-90 lg:text-base md:text-[15px]',
+                largeCover ? 'line-clamp-2' : 'line-clamp-3'
               )}
             >
-              {/* author */}
-              <span
-                className={clsx(
-                  'leading-none tracking-extra-tight',
-                  checkSize('lg', 'xl') ? 'text-gray-new-90' : 'text-gray-new-80',
-                  size === 'lg' && 'text-[15px] lg:text-sm xs:text-[13px]',
-                  size === 'video' && 'truncate text-sm',
-                  checkSize('xl', 'md', 'sm', 'xs') && 'text-sm leading-none lg:text-[13px]'
-                )}
-              >
-                {size === 'sm' ? (
-                  <>
-                    <span className="xl:hidden" aria-hidden>
-                      {authorName}
-                    </span>
-                    <span className="hidden xl:block">{postAuthor?.title}</span>
-                  </>
-                ) : (
-                  postAuthor?.title
-                )}
-              </span>
-
-              <time
-                className={clsx(
-                  'relative block shrink-0 pl-[11px] uppercase leading-none tracking-extra-tight text-gray-new-70',
-                  'before:absolute before:left-1 before:top-1/2 before:inline-block before:h-[3px] before:w-[3px] before:rounded-full before:bg-gray-new-30',
-                  size === 'lg' && 'text-[15px] font-light lg:text-sm xs:text-xs',
-                  checkSize('xl', 'md', 'sm', 'xs') &&
-                    'text-[13px] font-light lg:text-xs lg:leading-none',
-                  size === 'sm' &&
-                    'xl:mt-1 xl:pl-0 xl:before:hidden lt:mt-0 lt:pl-[11px] lt:before:inline-block lg:mt-1 lg:pl-0 lg:before:hidden xs:mt-0 xs:pl-[11px] xs:before:inline-block',
-                  withAuthorPhoto &&
-                    'xl:mt-1 xl:pl-0 xl:before:hidden md:mt-0 md:pl-[11px] md:before:inline-block',
-                  size === 'video' && 'text-[11px] font-normal '
-                )}
-                dateTime={date}
-              >
-                {formattedDate}
-              </time>
+              {excerpt}
             </div>
-          </div>
+          )}
+          {/* authors */}
+          {authorsData || author ? (
+            <Authors
+              className={clsx(fullSize ? 'mt-4' : 'mt-2.5')}
+              authors={authorsData || [author]}
+            />
+          ) : null}
         </Link>
       </div>
     </article>
   );
 };
 
-export const BlogPostCardPropTypes = {
-  title: PropTypes.string,
-  date: PropTypes.string,
-  imageWidth: PropTypes.number,
-  imageHeight: PropTypes.number,
+BlogPostCard.propTypes = {
+  className: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string,
+  content: PropTypes.string.isRequired,
+  slug: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  category: PropTypes.string,
   categories: PropTypes.shape({
     nodes: PropTypes.arrayOf(
       PropTypes.shape({
@@ -236,7 +181,7 @@ export const BlogPostCardPropTypes = {
         slug: PropTypes.string,
       })
     ),
-  }),
+  }).isRequired,
   pageBlogPost: PropTypes.shape({
     largeCover: PropTypes.shape({
       mediaItemUrl: PropTypes.string,
@@ -255,12 +200,15 @@ export const BlogPostCardPropTypes = {
       })
     ),
   }),
-};
-
-BlogPostCard.propTypes = {
-  className: PropTypes.string,
-  size: PropTypes.oneOf(['xl', 'lg', 'md', 'sm', 'xs', 'video']),
-  ...BlogPostCardPropTypes,
+  author: PropTypes.shape({
+    name: PropTypes.string,
+    photo: PropTypes.string,
+  }),
+  fullSize: PropTypes.bool,
+  withImageHover: PropTypes.bool,
+  imageWidth: PropTypes.number.isRequired,
+  imageHeight: PropTypes.number.isRequired,
+  isPriority: PropTypes.bool,
 };
 
 export default BlogPostCard;

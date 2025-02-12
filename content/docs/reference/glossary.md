@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2025-02-03T20:41:57.345Z'
+updatedOn: '2025-02-12T12:37:54.272Z'
 ---
 
 ## access token
@@ -314,6 +314,10 @@ A component of the Neon platform that acts as an intermediary between connecting
 ## Neon user
 
 The user account that registers and authenticates with Neon using an email, GitHub, Google, or partner account. After authenticating, a Neon user account can create and manage projects, branches, users, databases, and other project resources.
+
+## Neon Org
+
+A named organization entity in Neon that groups multiple Neon users under a shared account. See [Organization](#organization) for details.
 
 ## NeonVM
 
