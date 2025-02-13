@@ -15,6 +15,7 @@ Neon offers project deployment in multiple AWS and Azure regions. To minimize la
 - 🇺🇸 AWS US East (Ohio) &mdash; `aws-us-east-2`
 - 🇺🇸 AWS US West (Oregon) &mdash; `aws-us-west-2`
 - 🇩🇪 AWS Europe (Frankfurt) &mdash; `aws-eu-central-1`
+- 🇬🇧 AWS Europe (London) &mdash; `aws-eu-west-2`
 - 🇸🇬 AWS Asia Pacific (Singapore) &mdash; `aws-ap-southeast-1`
 - 🇦🇺 AWS Asia Pacific (Sydney) &mdash; `aws-ap-southeast-2`
 
@@ -60,6 +61,8 @@ If you are unsure of your project's region, you can find this information in the
 | AWS Europe (Frankfurt) — aws-eu-central-1         | 18.158.63.175, 3.125.234.79, 3.125.57.42                                               |
 | AWS Asia Pacific (Singapore) — aws-ap-southeast-1 | 54.254.50.26, 54.254.92.70, 54.255.161.23                                              |
 | AWS Asia Pacific (Sydney) — aws-ap-southeast-2    | 13.237.134.148, 13.55.152.144, 54.153.185.87                                           |
+| AWS Europe (London) — aws-eu-west-2               | 3.10.42.8, 18.133.205.39, 52.56.191.86                                                 |
+
 
 ### Azure NAT Gateway IP Addresses
 
