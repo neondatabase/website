@@ -132,7 +132,7 @@ const Hero = () => {
                       'mt-6 w-full !py-4 !text-base !font-medium leading-none tracking-tighter transition-colors duration-300 sm:max-w-none',
                       highlighted
                         ? 'bg-green-45 text-black hover:bg-[#00ffaa]'
-                        : 'bg-gray-new-15 hover:bg-gray-new-30'
+                        : 'bg-gray-new-20 hover:bg-gray-new-30'
                     )}
                     size="sm"
                     to={button.url}
@@ -194,8 +194,8 @@ const Hero = () => {
         </div>
         <CtaBlock
           className="max-w-[656px]"
-          title="Custom Enterprise Plans"
-          description="Connect with our team for higher resource limits, dedicated requirements, annual contracts, and more."
+          title="Custom Plans"
+          description="Connect with our team for HIPAA compliance, annual contracts, higher resource limits, and more."
           buttonText="Talk to Sales"
           buttonUrl={LINKS.contactSales}
           size="sm"

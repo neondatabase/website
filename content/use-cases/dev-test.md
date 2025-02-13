@@ -15,8 +15,10 @@ Database branching is a game-changer for dev/test environments: there's no need 
   - You "move" your non-prod environments to Neon (i.e. by syncing a subset of data daily)
   - To build / test / debug in Neon
   - Once the changes are tested, you apply them back to prod
-Try this workflow in Neon right away ([we have a Free plan](https://console.neon.tech/signup)). Follow the steps [in this guide](https://neon.tech/docs/use-cases/dev-test) to set things up.
+Try this workflow in Neon right away. You can follow the steps [in this guide](https://neon.tech/docs/use-cases/dev-test) to set things up.
 </Admonition>
+
+<CTA title="Get $100 in credits" description="Sign up now and get $100 in credits when you upgrade." buttonText="Claim the offer" buttonUrl="https://fyi.neon.tech/credits" />
 
 ## Ephemeral Environments Are Inefficient in Traditional Postgres
 
@@ -241,7 +243,7 @@ url="/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-
 ---
 
 <Admonition type="note" title="Get $100 in credits">
-Neon offers a Free Plan, and we’ll discount up to $100 off your first invoice when you upgrade. Claim the offer by signing up through [this link](https://fyi.neon.tech/credits).
+Neon offers a Free Plan, and we’ll give you $100 in credits when you first upgrade. Claim the offer by signing up through [this link](https://fyi.neon.tech/credits).
 </Admonition>
 
 ---

@@ -35,7 +35,7 @@ const Card = ({
           )}
         >
           <Image
-            className="h-8 w-fit"
+            className="h-8 w-fit opacity-80 transition-opacity duration-200 group-hover:opacity-100"
             src={logo.mediaItemUrl}
             alt={title}
             width={logo.mediaDetails.width}

@@ -4,10 +4,8 @@ subtitle: Use logical replication to migrate data to a different Neon project, a
   Postgres version, or region
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-11T11:32:44.539Z'
+updatedOn: '2025-02-14T17:05:10.000Z'
 ---
-
-<LRBeta/>
 
 Neon's logical replication feature allows you to replicate data from one Neon project to another. This enables different replication scenarios, including:
 

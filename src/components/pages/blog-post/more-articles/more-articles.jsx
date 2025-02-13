@@ -5,7 +5,7 @@ import BlogPostCard from 'components/pages/blog/blog-post-card';
 
 const MoreArticles = ({ className = null, posts }) => (
   <section className={clsx('more-articles flex flex-col', className)}>
-    <h2 className="flex items-center font-title text-xs font-medium uppercase leading-none tracking-[0.02em] text-blue-80">
+    <h2 className="flex items-center font-title text-xs font-medium uppercase leading-none -tracking-extra-tight text-blue-80">
       <span className="">More from Neon</span>
       <span className="ml-2 h-px grow bg-gray-new-20" />
     </h2>

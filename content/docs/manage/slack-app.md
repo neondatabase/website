@@ -2,16 +2,12 @@
 title: Neon Slack App
 enableTableOfContents: true
 subtitle: Track your Neon projects and organizations from Slack
-updatedOn: '2025-01-27T19:45:55.719Z'
+updatedOn: '2025-03-07T19:33:48.344Z'
 ---
 
 The Neon Slack App allows you to monitor your Neon usage and manage organization membership directly from Slack. Get quick access to project information and resource usage metrics without leaving your workspace.
 
-<img
-src="/docs/manage/slack_app_overview.png"
-alt="Neon Slack App showing authentication and usage commands in action"
-style={{ width: "75%", display: "block", margin: "40px auto" }}
-/>
+![Neon Slack App commands](/docs/manage/slack_app_overview.png)
 
 ## Setup
 
@@ -42,9 +38,6 @@ Once authenticated, you're ready to use all available commands.
 | `/neon feedback`        | Share your thoughts to improve the Neon Slack App |
 | `/neon projects usage`  | View resource usage for a specific project        |
 | `/neon projects shared` | See projects others have shared with you          |
-| `/neon org set`         | Set your active organization                      |
-| `/neon org`             | View your active organization                     |
-| `/neon org clear`       | Clear your active organization                    |
 | `/neon invite user`     | Invite a user to your organization                |
 
 ## Example workflows
@@ -57,21 +50,7 @@ Open a DM with the Neon Slack App and run the following command to instantly vie
 /neon usage
 ```
 
-<img src="/docs/manage/slack_app_usage.png" alt="results of /neon usage showing compute, storage, and data transfer" style={{ display: "block", margin: "1rem 0", width: "80%" }} />
-
-### Switching between organizations
-
-To take actions on behalf of a specific organization, set your context using the following command:
-
-```bash
-/neon org set
-```
-
-When finished, you can return to your personal view by clearing your defaults:
-
-```bash
-/neon org clear
-```
+![results of neon usage command](/docs/manage/slack_app_usage.png)
 
 ### Usage notifications
 
@@ -86,9 +65,8 @@ The Neon Slack App allows you to:
 
 - View project information and resource usage
 - Monitor system status
-- Manage organization membership
 - Access shared projects
-- Switch between organizations
+- Invite users to your organization
 
 </details>
 

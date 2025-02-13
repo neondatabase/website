@@ -27,6 +27,11 @@ export default {
     imagePath: '/images/social-previews/blog.jpg',
     pathname: LINKS.blog,
   },
+  guides: {
+    title: 'Guides — Neon',
+    description: 'Learn how to use Neon with our guides.',
+    pathname: LINKS.guides,
+  },
   branching: {
     title: 'Instant branching for Postgres — Neon',
     description:
@@ -52,6 +57,13 @@ export default {
     description: 'The Neon CLI brings serverless Postgres to your terminal.',
     pathname: LINKS.cli,
     imagePath: '/images/social-previews/cli.jpg',
+  },
+  faster: {
+    title: 'Faster is what we help you ship - Neon',
+    description: 'A page dedicated to teams shipping faster experiences faster on Neon.',
+    imagePath: '/images/social-previews/faster.jpg',
+    pathname: LINKS.faster,
+    type: 'article',
   },
   contactSales: {
     title: 'Contact Sales — Neon',
@@ -79,17 +91,18 @@ export default {
     pathname: LINKS.developerDays1,
   },
   enterprise: {
-    title: 'Neon for Enterprises: Postgres Fleets - Neon',
+    title: 'Neon for Enterprise - Neon',
     description:
-      'Enterprises use Neon to deliver a Postgres layer that is automated, instantly scalable and cost efficient.',
+      'Switch to Neon for improved scalability, reliability, and engineering efficiency. For developers and AI Agents.',
     pathname: LINKS.enterprise,
     imagePath: '/images/social-previews/enterprise.jpg',
   },
-  generateTicket: {
-    title: 'Grab the ticket for Neon Deploy',
+  serverlessApps: {
+    title: 'Postgres for serverless apps — Neon',
     description:
-      "Generate a unique ticket image with your GitHub profile and participate in Neon's right after the conference.",
-    pathname: LINKS.generateTicket,
+      'Scale your app effortlessly with Neon’s serverless Postgres. With automatic scaling, pooler built on pgBouncer, and usage-based pricing.',
+    pathname: `${LINKS.useCases}/serverless-apps`,
+    imagePath: '/images/social-previews/serverless-apps.jpg',
   },
   partners: {
     title: 'Accelerate your business with Neon partnership — Neon',
@@ -133,12 +146,10 @@ export default {
     pathname: LINKS.flow,
     type: 'article',
   },
-  // TODO: Add REAL SEO data for scalable architecture page
   scalableArchitecture: {
     title: 'Neon Scalable Architecture — Neon',
     description:
       'Neon is a distributed team building open-source, cloud-native Postgres. We are a well-funded startup with deep knowledge of Postgres internals and decades of experience building databases.',
-    // imagePath: '',
     pathname: LINKS.scalableArchitecture,
   },
   stage: {
@@ -147,15 +158,18 @@ export default {
       'Join us online on October 30th at 10:00 AM PT to learn how Neon empowers developers to ship faster with Postgres.',
     pathname: LINKS.stage,
   },
-  error: {
-    title: 'Page Is Broken — Neon',
+  security: {
+    title: 'Security — Neon',
+    description:
+      "Discover Neon's security & compliance standards, including SOC 2, GDPR, and HIPAA, with encryption and access controls to protect your data.",
+    imagePath: '/images/social-previews/security.jpg',
+    pathname: LINKS.security,
   },
-  404: {
-    title: 'Page Not Found — Neon',
-  },
-  '404-ticket': {
-    title: 'Ticket Not Found - Neon',
-    imagePath: '/images/social-previews/no-name-ticket.jpg',
+  generateTicket: {
+    title: 'Grab the ticket for Neon Deploy',
+    description:
+      "Generate a unique ticket image with your GitHub profile and participate in Neon's right after the conference.",
+    pathname: LINKS.generateTicket,
   },
   ticket({ name, login: githubHandle }) {
     const userName = name || githubHandle;
@@ -164,6 +178,16 @@ export default {
       title: `${userName}'s ticket for Neon Deploy - Neon`,
       description: `Join ${userName} virtually at Deploy on October 30th to learn how Neon empowers developers to ship faster with Postgres.`,
     };
+  },
+  '404-ticket': {
+    title: 'Ticket Not Found - Neon',
+    imagePath: '/images/social-previews/no-name-ticket.jpg',
+  },
+  error: {
+    title: 'Page Is Broken — Neon',
+  },
+  404: {
+    title: 'Page Not Found — Neon',
   },
 };
 

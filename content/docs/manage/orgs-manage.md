@@ -1,7 +1,7 @@
 ---
 title: Manage Neon Organizations
 enableTableOfContents: true
-updatedOn: '2024-11-29T18:50:41.470Z'
+updatedOn: '2025-03-14T18:29:25.736Z'
 ---
 
 Learn how to manage your organization's projects, invite Members and Collaborators, revise permissions, and oversee billing details. This section explains which specific actions each Member can take based on their assigned roles and permissions.
@@ -19,6 +19,7 @@ Learn how to manage your organization's projects, invite Members and Collaborato
     <ul>
       <li><a href="#create-and-delete-projects">Create and delete projects</a></li>
       <li><a href="#passwordless-authentication">Passwordless authentication</a></li>
+      <li><a href="#rename-an-organization">Rename an organization</a></li>
       <li><a href="#delete-an-organization">Delete an organization</a></li>
       <li><a href="#billing">Billing</a></li>
     </ul>
@@ -44,7 +45,7 @@ To invite Members:
 - Monitor the status of sent invites on the **Pending Invites** page; from here, you can resend or cancel invitations as needed.
 
 <Admonition type="note" title="Invites not received?">
-If invite emails aren’t received, they may be in spam or quarantined. Recipients should check these folders and mark Neon emails as safe.
+If invite emails aren't received, they may be in spam or quarantined. Recipients should check these folders and mark Neon emails as safe.
 </Admonition>
 
 ## Set permissions
@@ -56,6 +57,12 @@ Permissions within the organization are exclusively managed by Admins. As an Adm
 - You cannot leave the organization if you are the only Admin. Promote a Member to Admin before you try to leave the org.
 
   ![organization members](/docs/manage/orgs_members_kebab.png 'no-border')
+
+## Rename an organization
+
+Only Admins can rename an organization. Go to the **Settings** page under **General information**. Changing the organization name applies globally—the new name will appear for everyone in the organization.
+
+![organization settings](/docs/manage/orgs_id.png 'no-border')
 
 ## Invite Collaborators
 
@@ -137,5 +144,18 @@ As the Admin for the organization account:
 - You have full access to edit all billing information.
 - Promote a Member to Admin if you want to delegate billing management; however, all Admins will have the capability to edit billing details.
 - While all Members can view the **Billing** page, only admins can make changes.
+
+For detailed information on pricing and plans, refer to [Neon plans](/docs/introduction/plans).
+
+### Downgrade to Free Plan
+
+Admins can downgrade an organization from a paid plan (Launch, Scale, or Enterprise) to the Free plan, with certain limitations:
+
+- The organization must operate within Free plan limits (including storage, project counts, and branch limits)
+- The organization cannot have more than 1 member (Free organizations can only have a single member)
+
+When you start a downgrade (via **Billing** > **Billing summary** > **Change plan**), Neon automatically checks if your organization meets these requirements. If needed, you'll see a notification explaining what needs to be addressed before downgrading.
+
+If you can't meet these requirements but still wish to downgrade, use the **Request support** option during the downgrade process.
 
 For detailed information on pricing and plans, refer to [Neon plans](/docs/introduction/plans).

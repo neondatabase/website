@@ -46,6 +46,27 @@
     }
   }
 
+  .with-list-style {
+    ul,
+    ol {
+      list-style: auto;
+
+      @apply my-5 ml-10 mr-16 md:mx-4;
+
+      li {
+        @apply relative my-2.5 pl-1 tracking-tight;
+
+        b {
+          @apply font-medium;
+        }
+
+        p {
+          @apply mt-0;
+        }
+      }
+    }
+  }
+
   .flat-none br {
     content: none;
   }
@@ -81,4 +102,11 @@
 .button-line-animation {
   animation: lineAnimation 5s linear infinite;
   animation-timing-function: steps(75);
+}
+
+.text-with-links {
+  a {
+    @apply whitespace-nowrap border-b border-gray-new-70/40 text-gray-new-80;
+    @apply transition-colors duration-200 hover:border-green-45/40 hover:text-green-45;
+  }
 }

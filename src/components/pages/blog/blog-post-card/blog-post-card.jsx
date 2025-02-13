@@ -53,15 +53,12 @@ const BlogPostCard = ({
       };
     }
 
-    if (categories) {
-      const wpCategory = categories?.nodes[0];
-      return {
-        slug: `${BLOG_CATEGORY_BASE_PATH}${wpCategory?.slug}`,
-        name: wpCategory?.name,
-      };
-    }
+    const wpCategory = category || categories?.nodes[0];
 
-    return null;
+    return {
+      slug: `${BLOG_CATEGORY_BASE_PATH}${wpCategory?.slug}`,
+      name: wpCategory?.name,
+    };
   })();
 
   return (

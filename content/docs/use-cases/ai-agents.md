@@ -2,7 +2,7 @@
 title: Neon for AI Agents
 subtitle: Use Neon as the Postgres backend for your agents
 enableTableOfContents: true
-updatedOn: '2024-12-12T19:49:26.796Z'
+updatedOn: '2025-03-07T21:44:32.257Z'
 ---
 
 AI agents can now provision infrastructure, including databases. With AI agents already creating databases every few seconds, they are poised to manage a significant portion of the web's infrastructure in the future — and, like developers, AI agents love working with Neon: **Replit partnered with Neon to back Replit Agents, which are already creating thousands of Postgres databases per day**. [Learn more](https://neon.tech/blog/looking-at-how-replit-agent-handles-databases).
@@ -49,7 +49,7 @@ console.log(await toolkit.sql(project, `SELECT name FROM users`));
 await toolkit.deleteProject(project);
 ```
 
-Neon also supports a [Model Context Protocol (MCP) server](https://github.com/neondatabase/mcp-server-neon) that lets you use any MCP Client, such as Claude Desktop, to manage Postgres databases with Neon using natural language; for example:
+Neon also supports a [Model Context Protocol (MCP) server](https://github.com/neondatabase/mcp-server-neon) that lets you use any MCP Client, such as Cursor or Claude Desktop, to manage Postgres databases with Neon using natural language; for example:
 
 - `Create a new Postgres database, and call it "my-database". Let's then create a table called users with the following columns: id, name, email, and password.`
 - `I want to run a migration on my project called "my-project" that alters the users table to add a new column called "created_at".`
@@ -61,6 +61,6 @@ Both tools are open source. You can find them on GitHub.
 
 <a href="https://github.com/neondatabase/toolkit" description="A terse client that lets you spin up a Postgres database in seconds and run SQL queries" icon="github">@neondatabase/toolkit</a>
 
-<a href="https://github.com/neondatabase/mcp-server-neon" description="A Model Context Protocol (MCP) server for Neon that lets MCP Clients interact with Neon’s API using natural language" icon="github">Neon MCP Server</a>
+<a href="/docs/ai/neon-mcp-server" description="A Model Context Protocol (MCP) server for Neon that lets MCP Clients interact with Neon’s API using natural language" icon="openai">Neon MCP Server</a>
 
 </DetailIconCards>

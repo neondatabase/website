@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 import remarkGfm from 'remark-gfm';
 
+import ChatOptions from 'components/pages/doc/chat-options';
 import CodeTabs from 'components/pages/doc/code-tabs';
 import CommunityBanner from 'components/pages/doc/community-banner';
 import DefinitionList from 'components/pages/doc/definition-list';
@@ -18,7 +19,7 @@ import LinkPreview from 'components/pages/doc/link-preview';
 import Steps from 'components/pages/doc/steps';
 import Tabs from 'components/pages/doc/tabs';
 import TabItem from 'components/pages/doc/tabs/tab-item';
-import TechnologyNavigation from 'components/pages/doc/technology-navigation';
+import TechCards from 'components/pages/doc/tech-cards';
 import Video from 'components/pages/doc/video';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
 import SubscriptionForm from 'components/pages/use-case/subscription-form';
@@ -26,17 +27,18 @@ import Testimonial from 'components/pages/use-case/testimonial';
 import TestimonialsWrapper from 'components/pages/use-case/testimonials-wrapper';
 import UseCaseContext from 'components/pages/use-case/use-case-context';
 import UseCaseList from 'components/pages/use-case/use-case-list';
+import DeployPostgresButton from 'components/shared//deploy-postgres-button';
 import Admonition from 'components/shared/admonition';
 import AnchorHeading from 'components/shared/anchor-heading';
 import CodeBlock from 'components/shared/code-block';
 import ComputeCalculator from 'components/shared/compute-calculator';
 import CtaBlock from 'components/shared/cta-block';
 import DocCta from 'components/shared/doc-cta';
-import ExtensionRequest from 'components/shared/extension-request';
 import ImageZoom from 'components/shared/image-zoom';
 import InkeepEmbedded from 'components/shared/inkeep-embedded';
+import LatencyCalculator from 'components/shared/latency-calculator';
 import Link from 'components/shared/link';
-import RegionRequest from 'components/shared/region-request';
+import RequestForm from 'components/shared/request-form';
 import getCodeProps from 'lib/rehype-code-props';
 import getGlossaryItem from 'utils/get-glossary-item';
 
@@ -161,15 +163,15 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   Admonition,
   CodeTabs,
   DetailIconCards,
-  TechnologyNavigation,
+  TechCards,
   CommunityBanner,
   Tabs,
   TabItem,
   InfoBlock,
   LinkPreview,
   DocsList,
-  RegionRequest,
-  ExtensionRequest,
+  RequestForm,
+  LatencyCalculator,
   CTA: isUseCase ? CtaBlock : DocCta,
   Testimonial,
   TestimonialsWrapper,
@@ -180,6 +182,8 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   InkeepEmbedded,
   Video,
   Steps,
+  DeployPostgresButton,
+  ChatOptions,
   ...sharedComponents,
 });
 
@@ -194,10 +198,14 @@ const Content = ({
   isUseCase = false,
 }) => (
   <div
-    className={clsx('prose-doc prose dark:prose-invert xs:prose-code:break-words', className, {
-      'dark:prose-p:text-gray-new-70 dark:prose-strong:text-white dark:prose-li:text-gray-new-70 dark:prose-table:text-gray-new-70':
-        isUseCase,
-    })}
+    className={clsx(
+      'prose-doc post-content prose dark:prose-invert xs:prose-code:break-words',
+      className,
+      {
+        'dark:prose-p:text-gray-new-70 dark:prose-strong:text-white dark:prose-li:text-gray-new-70 dark:prose-table:text-gray-new-70':
+          isUseCase,
+      }
+    )}
   >
     {asHTML ? (
       <div dangerouslySetInnerHTML={{ __html: content }} />

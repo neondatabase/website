@@ -151,13 +151,6 @@ module.exports = {
         'header-docs-button-border-dark':
           'radial-gradient(54.19% 83.93% at 50% 3.57%, rgba(255, 255, 255, 0.55), transparent),' +
           'linear-gradient(0deg, #303236, #303236)',
-        'home-hero-video-bg':
-          'radial-gradient(16.57% 34.37% at 15.61% 0%, rgba(255, 255, 255, 0.40) 0%, rgba(227, 227, 238, 0.00) 100%),' +
-          'radial-gradient(29.57% 39.14% at 1.91% 0.86%, rgba(112, 234, 250, 0.30) 0%, rgba(112, 234, 250, 0.00) 100%)',
-        'home-hero-video-border':
-          'radial-gradient(16.57% 34.37% at 15.61% 0%, rgba(255, 255, 255, 0.40) 0%, rgba(227, 227, 238, 0.00) 100%),' +
-          'radial-gradient(29.57% 39.14% at 1.91% 0.86%, rgba(112, 234, 250, 0.30) 0%, rgba(112, 234, 250, 0.00) 100%),' +
-          'linear-gradient(-45deg, #222D39, #111417, #111417 80%, #519BA6)',
         'home-lightning-title':
           'radial-gradient(30.52% 57.36% at 67.98% 84.29%, #070707 8.6%, #525252 44.72%, #A7A7A7 69.37%, #FFFFFF 100%)',
         'home-lightning-title-xl':
@@ -229,6 +222,22 @@ module.exports = {
           'linear-gradient(100deg, rgba(33, 39, 58, 0.80) -6.09%, rgba(24, 25, 27, 0.80) 27.66%)',
         'azure-form-input-3':
           'linear-gradient(276deg, rgba(32, 48, 55, 0.80) 2.61%, rgba(24, 25, 27, 0.80) 32.96%)',
+        'serverless-apps-hero-border':
+          'linear-gradient(27deg, transparent 76%, #1B9A86 90%, #5AADBB),' +
+          'linear-gradient(0deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.10))',
+        'security-card-bg':
+          'radial-gradient(111.21% 103.81% at 1.9% 0%, rgba(19, 20, 21, 0.60) 0%, rgba(19, 20, 21, 0.00) 100%),' +
+          'linear-gradient(0deg, #0C0C0D, #0C0C0D)',
+        'security-card-link-bg':
+          'radial-gradient(43.67% 34.97% at 0.71% 0%, rgba(35, 54, 50, 0.80) 0%, rgba(19, 20, 21, 0.00) 100%),' +
+          'radial-gradient(94.73% 89.93% at 1.9% 0%, rgba(21, 33, 30, 0.80) 0%, rgba(19, 20, 21, 0.00) 100%),' +
+          'radial-gradient(111.21% 103.81% at 1.9% 0%, rgba(19, 20, 21, 0.60) 0%, rgba(19, 20, 21, 0.00) 100%),' +
+          'linear-gradient(0deg, #0C0C0D, #0C0C0D)',
+        'security-slide-icon-bg':
+          'radial-gradient(50% 50% at 50% 100%, rgba(0, 229, 153, 0.15) 0%, rgba(0, 229, 153, 0.00) 100%),' +
+          'radial-gradient(78.12% 78.13% at 50% 0%, rgba(226, 230, 235, 0.06) 0%, rgba(226, 230, 235, 0.00) 100%),' +
+          'linear-gradient(0deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.02)),' +
+          'linear-gradient(0deg, #0C0C0D, #0C0C0D)',
         // for deploy page
         'color-picker-variant-1': 'linear-gradient(225deg, #4CFFFF 31.6%, #00E660 74.65%);',
         'color-picker-variant-2': 'linear-gradient(225deg, #BDF471 35.94%, #00CC33 100%);',
@@ -400,7 +409,7 @@ module.exports = {
     require('tailwindcss/plugin')(({ addVariant }) => {
       addVariant('search-cancel', '&::-webkit-search-cancel-button');
     }),
-    plugin(({ matchUtilities, theme }) => {
+    plugin(({ matchUtilities, addUtilities, theme }) => {
       matchUtilities(
         {
           'border-image': (value) => ({
@@ -412,6 +421,14 @@ module.exports = {
         },
         { values: theme('backgroundImage') }
       );
+      addUtilities({
+        '.gradient-stop-opacity-40': {
+          'stop-opacity': '0.4',
+        },
+        '.gradient-stop-opacity-100': {
+          'stop-opacity': '1',
+        },
+      });
     }),
   ],
 };

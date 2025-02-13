@@ -3,7 +3,7 @@ title: Platform overview
 enableTableOfContents: true
 subtitle: Find information about managing all aspects of your database using the Neon
   platform
-updatedOn: '2025-02-05T21:06:28.072Z'
+updatedOn: '2025-03-05T21:09:38.755Z'
 ---
 
 ## Access control
@@ -83,5 +83,17 @@ Learn how Neon secures your projects and data, and explore the security features
 <a href="/docs/security/soc2-compliance" description="Learn how Neon complies with various standards" icon="check">Compliance</a>
 
 <a href="/docs/security/acceptable-use-policy" description="Read about Neon's acceptable use policies" icon="privacy">Acceptable Use Policy</a>
+
+</DetailIconCards>
+
+## Maintenance & updates
+
+<DetailIconCards>
+
+<a href="/docs/manage/maintenance-updates-overview" description="Overview of Neon platform maintenance and compute updates" icon="research">Overview</a>
+
+<a href="/docs/manage/platform-maintenance" description="Find out how Neon manages essential platform maintenance and critical security updates" icon="gui">Platform maintenance</a>
+
+<a href="/docs/manage/updates" description="Learn about updates for Neon computes ond Postgres" icon="import">Updates</a>
 
 </DetailIconCards>

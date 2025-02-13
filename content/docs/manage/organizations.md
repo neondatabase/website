@@ -2,14 +2,14 @@
 title: Organizations
 subtitle: Invite Members to your Organization and collaborate on projects
 enableTableOfContents: true
-updatedOn: '2025-01-10T18:30:20.395Z'
+updatedOn: '2025-03-12T15:00:50.932Z'
 ---
 
 Build your team in Neon with Organizations. Manage all of your team's projects under a single account — with billing, role management, and project collaboration capabilities in one accessible location.
 
 ## About Neon Organizations
 
-In the Neon Console, the Organizations page provides a centralized view of all your team's projects. From there, you can create new projects, manage existing ones, as well as oversee your organization's members and your billing information.
+In the Neon Console, the Organizations page provides a centralized view of all your team's projects. From there, you can create new projects, manage existing ones, as well as oversee your organization's members, your billing information, and access to preview features through the Early Access Program.
 
 ![organizations projects tab](/docs/manage/org_projects.png)
 
@@ -17,21 +17,27 @@ In the Neon Console, the Organizations page provides a centralized view of all y
 
 Each organization is made up of three types of users:
 
-- **Admin** — Administrators have access to all projects in the organization. Additionally, admins manage all permissions, invitations, and billing details.
+- **Admin** — Administrators have access to all projects in the organization. Additionally, admins manage all permissions, invitations, billing details, and Early Access Program enrollment.
 - **Members** — Members have access to all the projects that belong to the organization. They need to be invited to the organization by an Admin.
 - **Collaborators** — Collaborators are people given limited access to particular projects. See [Collaborators](/docs/guides/project-collaboration-guide). They do not have access to the Organization dashboard. Projects will appear under the **Shared with you** grouping in their personal account.
 
 Here's a breakdown of what actions each role can take:
 
-| Action                                                                                 | Admin | Member | Collaborator |
-| -------------------------------------------------------------------------------------- | :---: | :----: | :----------: |
-| [Create projects](/docs/manage/orgs-manage#create-and-delete-projects)                 |  ✅   |   ✅   |      ❌      |
-| [Delete projects](/docs/manage/orgs-manage#create-and-delete-projects)                 |  ✅   |   ❌   |      ❌      |
-| Manage [members](/docs/manage/orgs-manage#invite-members)                              |  ✅   |   ❌   |      ❌      |
-| Manage [collaborators](/docs/manage/orgs-manage#invite-collaborators) (share projects) |  ✅   |   ✅   |      ✅      |
-| [Set permissions](/docs/manage/orgs-manage#set-permissions)                            |  ✅   |   ❌   |      ❌      |
-| [Manage billing](/docs/manage/orgs-manage#billing)                                     |  ✅   |   ❌   |      ❌      |
-| [Delete organization](/docs/manage/orgs-manage#delete-an-organization)                 |  ✅   |   ❌   |      ❌      |
+| Action                                                                                       | Admin | Member | Collaborator |
+| -------------------------------------------------------------------------------------------- | :---: | :----: | :----------: |
+| [Create projects](/docs/manage/orgs-manage#create-and-delete-projects)                       |  ✅   |   ✅   |      ❌      |
+| [Delete projects](/docs/manage/orgs-manage#create-and-delete-projects)                       |  ✅   |   ❌   |      ❌      |
+| [Transfer projects](/docs/manage/orgs-project-transfer)\*                                    |  ✅   |   ✅   |      ❌      |
+| Manage [members](/docs/manage/orgs-manage#invite-members)                                    |  ✅   |   ❌   |      ❌      |
+| Manage [collaborators](/docs/manage/orgs-manage#invite-collaborators) (share projects)       |  ✅   |   ✅   |      ✅      |
+| [Set permissions](/docs/manage/orgs-manage#set-permissions)                                  |  ✅   |   ❌   |      ❌      |
+| [Manage billing](/docs/manage/orgs-manage#billing)                                           |  ✅   |   ❌   |      ❌      |
+| [Delete organization](/docs/manage/orgs-manage#delete-an-organization)                       |  ✅   |   ❌   |      ❌      |
+| [Rename organization](/docs/manage/orgs-manage#rename-an-organization)                       |  ✅   |   ❌   |      ❌      |
+| [Enable Early Access Program](/docs/introduction/roadmap#join-the-neon-early-access-program) |  ✅   |   ❌   |      ❌      |
+| [Install/Remove Neon Auth](/docs/guides/neon-auth)                                           |  ✅   |   ❌   |      ❌      |
+
+\* Some restrictions apply. See the [Transfer projects to an organization](/docs/manage/orgs-project-transfer) for details.
 
 ## Create an organization
 
