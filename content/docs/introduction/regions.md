@@ -63,7 +63,6 @@ If you are unsure of your project's region, you can find this information in the
 | AWS Asia Pacific (Sydney) — aws-ap-southeast-2    | 13.237.134.148, 13.55.152.144, 54.153.185.87                                           |
 | AWS Europe (London) — aws-eu-west-2               | 3.10.42.8, 18.133.205.39, 52.56.191.86                                                 |
 
-
 ### Azure NAT Gateway IP Addresses
 
 | Region                                     | NAT Gateway IP Addresses                       |
