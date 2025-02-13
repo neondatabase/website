@@ -151,13 +151,6 @@ module.exports = {
         'header-docs-button-border-dark':
           'radial-gradient(54.19% 83.93% at 50% 3.57%, rgba(255, 255, 255, 0.55), transparent),' +
           'linear-gradient(0deg, #303236, #303236)',
-        'home-hero-video-bg':
-          'radial-gradient(16.57% 34.37% at 15.61% 0%, rgba(255, 255, 255, 0.40) 0%, rgba(227, 227, 238, 0.00) 100%),' +
-          'radial-gradient(29.57% 39.14% at 1.91% 0.86%, rgba(112, 234, 250, 0.30) 0%, rgba(112, 234, 250, 0.00) 100%)',
-        'home-hero-video-border':
-          'radial-gradient(16.57% 34.37% at 15.61% 0%, rgba(255, 255, 255, 0.40) 0%, rgba(227, 227, 238, 0.00) 100%),' +
-          'radial-gradient(29.57% 39.14% at 1.91% 0.86%, rgba(112, 234, 250, 0.30) 0%, rgba(112, 234, 250, 0.00) 100%),' +
-          'linear-gradient(-45deg, #222D39, #111417, #111417 80%, #519BA6)',
         'home-lightning-title':
           'radial-gradient(30.52% 57.36% at 67.98% 84.29%, #070707 8.6%, #525252 44.72%, #A7A7A7 69.37%, #FFFFFF 100%)',
         'home-lightning-title-xl':
@@ -400,7 +393,7 @@ module.exports = {
     require('tailwindcss/plugin')(({ addVariant }) => {
       addVariant('search-cancel', '&::-webkit-search-cancel-button');
     }),
-    plugin(({ matchUtilities, theme }) => {
+    plugin(({ matchUtilities, addUtilities, theme }) => {
       matchUtilities(
         {
           'border-image': (value) => ({
@@ -412,6 +405,14 @@ module.exports = {
         },
         { values: theme('backgroundImage') }
       );
+      addUtilities({
+        '.gradient-stop-opacity-40': {
+          'stop-opacity': '0.4',
+        },
+        '.gradient-stop-opacity-100': {
+          'stop-opacity': '1',
+        },
+      });
     }),
   ],
 };
