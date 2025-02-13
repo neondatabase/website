@@ -460,8 +460,8 @@ This `async def main() -> None:` function is the core of your script, where you 
   ```python
   stream = group_chat.run_stream(
       task="Get the 10 most recent Machine Learning papers from arXiv. Print the titles and links to the papers in the chat. Save them in a database named 'arxiv_papers'",
-    )
-    await Console(stream)
+  )
+  await Console(stream)
   ```
     Finally, we initiate and run the group chat using `group_chat.run_stream()`. We provide the initial `task` for the agents: to retrieve the 10 most recent Machine Learning papers from arXiv, display their titles and links, and then store this information in a database named `arxiv_papers`.  `Console(stream)` is used to provide a real-time, streaming output of the conversation to the console, making it easy for you to follow along with the agent's interactions.
 
