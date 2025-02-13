@@ -4,20 +4,38 @@ enableTableOfContents: true
 updatedOn: '2025-01-20T20:22:35.268Z'
 ---
 
-When creating an organization as an Admin &#8212; or as a member of an organization that's already up and running &#8212; you may need to transfer existing projects from your personal account to your target organization.
+As an Admin or Member of an organization, you can transfer projects in the following ways:
+
+- From personal accounts to organizations
+- Between different organizations (via API)
+
+This guide explains how to transfer projects using both the UI and API methods, and covers important requirements and limitations.
 
 ## Guidelines
 
-The Neon Console allows you to transfer projects up to 200 projects at a time, while the API supports up to 400 projects in a single operation. If you need to transfer more than 200 projects, our [Python script](#transfer-large-numbers-of-projects) can help you efficiently manage this one-time​ task.
+Before transferring projects, review these important guidelines covering transfer limits, requirements, and other key considerations.
 
-A few important points to keep in mind:
+### Transfer limits
 
-- You must be at least a Member of the selected Organization to transfer projects to it.
-- The number of projects you can transfer is limited by the target Organization plan's allowance.
-- The billing plan of the organization must match or exceed the billing plan of the personal Neon account you are transferring projects from. For example, attempting to transfer projects from a Scale plan personal account to a Launch plan organization will result in an error.
-- If any organization members were already collaborators on the projects being transferred, we'll remove their collaborator access since they'll get full access as org members anyway.
-- Transferring projects between Organizations is currently not supported. You can only transfer projects from a personal Neon account to an Organization. If you need to move projects between Organizations, please contact [Neon Support](https://console.neon.tech/app/projects?modal=support).
-- Project transfers are not yet supported to or from Vercel-managed orgs.
+| Transfer method                                      | Project limit                            |
+| ---------------------------------------------------- | ---------------------------------------- |
+| [Neon Console](#transfer-from-the-neon-console)      | Up to 200 projects at a time             |
+| [API](#transfer-projects-via-api)                    | Up to 400 projects in a single operation |
+| [Python script](#transfer-large-numbers-of-projects) | Unlimited (processes in batches)         |
+
+The number of projects you can transfer is limited by the target Organization plan's allowance.
+
+### Requirements
+
+- Minimum **Member** role in the target Organization. **Admin** role if tranferring from an organization.
+- Compatible billing plans (can transfer from higher to lower tier, not vice versa)
+- Projects must not have GitHub or Vercel integrations
+- Vercel-managed organizations are not supported
+
+### Additional considerations
+
+- If any organization members were already collaborators on the projects being transferred, we'll remove their collaborator access since they'll get full access as org members anyway
+- Transferring projects between Organizations is currently supported using the [API](#transfer-between-organizations-via-api) only
 
 ## Transfer from the Neon Console
 
@@ -37,7 +55,14 @@ Navigate to the Organization you want to import projects into. In the **Billing*
 
 ## Transfer projects via API
 
-Use the Project Transfer API to transfer projects from your personal Neon account to a specified organization account.
+You can transfer projects to a destination organization using two different API endpoints, depending on your use case:
+
+- [Transfer personal projects to an organization](#transfer-personal-projects-to-an-organization)
+- [Transfer projects between organizations](#transfer-projects-between-organizations)
+
+### Transfer personal projects to an organization
+
+Use the [Project Transfer API](https://api-docs.neon.tech/reference/transferprojectsfromorgtoorg) to transfer projects from your personal Neon account to a specified organization account.
 
 `POST /users/me/projects/transfer`
 
@@ -82,6 +107,59 @@ And here's a sample response showing incompatible subscription types:
   "error": "Transfer failed: the organization has too many projects or its plan is incompatible with the source account."
 }
 ```
+
+### Transfer projects between organizations
+
+Use the Organization Transfer API to transfer projects between two specified organization accounts.
+
+`POST /organizations/{destination_org_id}/projects/transfer`
+
+This requires:
+
+- Your personal API key with access to both the source and destination organizations
+- **Admin** permissions in the source organization (where projects are currently located)
+- At least **Member** permissions in the destination organization (where projects will be transferred to)
+- Compatible billing plans between organizations (e.g., projects can move from Scale to Launch but not the other way around)
+
+<Admonition type="note">Projects with GitHub or Vercel integrations cannot be transferred</Admonition>
+
+**Example request**
+
+```bash
+curl --request POST \
+     --url 'https://console.neon.tech/api/v2/organizations/{destination_org_id}/projects/transfer' \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $PERSONAL_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '{
+  "project_ids": [
+    "project-id-1",
+    "project-id-2"
+  ]
+}'
+```
+
+Where:
+
+- `destination_org_id` is the organization receiving the projects
+- `project_ids` is an array of up to 400 project IDs to transfer
+
+### Response behavior
+
+A successful transfer returns a 200 status code with an empty JSON object:
+
+```json
+{}
+```
+
+You can verify the transfer in the Neon Console or by listing the projects in the destination organization via API.
+
+### Error responses
+
+The API may return these errors:
+
+- **`406`** – Transfer failed - the target organization has too many projects or its plan is incompatible with the source organization. Reduce projects or upgrade the organization.
+- **`422`** – One or more of the provided project IDs have GitHub or Vercel integrations installed. Transferring integration projects is currently not supported.
 
 ## Transfer large numbers of projects
 

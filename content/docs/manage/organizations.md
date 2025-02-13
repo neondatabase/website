@@ -27,11 +27,14 @@ Here's a breakdown of what actions each role can take:
 | -------------------------------------------------------------------------------------- | :---: | :----: | :----------: |
 | [Create projects](/docs/manage/orgs-manage#create-and-delete-projects)                 |  ✅   |   ✅   |      ❌      |
 | [Delete projects](/docs/manage/orgs-manage#create-and-delete-projects)                 |  ✅   |   ❌   |      ❌      |
+| [Transfer projects](/docs/manage/orgs-project-transfer)\*                              |  ✅   |   ✅   |      ❌      |
 | Manage [members](/docs/manage/orgs-manage#invite-members)                              |  ✅   |   ❌   |      ❌      |
 | Manage [collaborators](/docs/manage/orgs-manage#invite-collaborators) (share projects) |  ✅   |   ✅   |      ✅      |
 | [Set permissions](/docs/manage/orgs-manage#set-permissions)                            |  ✅   |   ❌   |      ❌      |
 | [Manage billing](/docs/manage/orgs-manage#billing)                                     |  ✅   |   ❌   |      ❌      |
 | [Delete organization](/docs/manage/orgs-manage#delete-an-organization)                 |  ✅   |   ❌   |      ❌      |
+
+\* Some restrictions apply. See the [Transfer projects to an organization](/docs/manage/orgs-project-transfer) for details.
 
 ## Create an organization
 
