@@ -23,8 +23,8 @@ With **Neon Private Networking**, you can connect to your database via AWS Priva
 
 ## Prerequisites
 
-- You must be a Neon [Business](/docs/introduction/plans#business) and [Enterprise](/docs/introduction/plans#enterprise) account user, and your user account must belong to a [Neon organization](/docs/manage/organizations). You'll encounter an access error if you attempt the setup from a personal Neon account or on a Neon plan that does not offer Private Networking.
-- Ensure that your **client application is deployed on AWS** in the same region as the Neon database you plan to connect to. The Private Networking feature is available in all [Neon-supported AWS regions](/docs/introduction/regions#aws-regions). Both your private access client application and Neon database must be in one of these regions.
+- You must be a Neon [Business](/docs/introduction/plans#business) and [Enterprise](/docs/introduction/plans#enterprise) account user, and your user account must be [Neon organization](/docs/manage/organizations) Admin account. You'll encounter an access error if you attempt the setup from a personal Neon account or on a Neon plan that does not offer Private Networking.
+- **Ensure that your client application is deployed on AWS in the same region as the Neon database you plan to connect to.** The Private Networking feature is available in all [Neon-supported AWS regions](/docs/introduction/regions#aws-regions). Both your private access client application and Neon database must be in one of these regions.
 - Install the Neon CLI. You will use it to add your VPC endpoint ID to your Neon organization. For installation instructions, see [Neon CLI — Install and connect](/docs/reference/cli-install).
 
 ## Configuration steps
@@ -138,33 +138,21 @@ To configure Neon Private Networking, perform the following steps:
 
 ## Restrict public internet access
 
-    At this point, it's still possible to connect to your Neon database over the public internet using the original Neon database connection string.
+    At this point, it's still possible to connect to a database in your Neon project over the public internet using a database connection string.
 
-    You can restrict public internet access via this connection string via the Neon Console, CLI, or API.
+    You can restrict public internet access to your Neon project via the Neon CLI or API.
 
-    <Tabs labels={["Neon Console", "CLI", "API"]}>
-
-    <TabItem>
-
-    To block access via the Neon Console, you can use Neon's [IP Allow](/docs/introduction/ip-allow) feature.
-
-    You can access your **IP Allow** configuration for your Neon project on the **Network security** page in your project's **Settings**.
-
-    Enter **0.0.0.0** in the ***Allowed IP addresses and ranges***** to block all connections over the public internet, and click **Save changes**.
-
-    ![Neon IP Allow configuration](/docs/guides/pl_neon_ip_allow.png)
-
-    </TabItem>
+    <Tabs labels={["CLI", "API"]}>
 
     <TabItem>
 
     To block access via the Neon CLI, use the [neon projects update](/docs/reference/cli-projects#update) command with the `--block-public-connections` option.
 
     ```bash
-    neon projects update ---block-public-connections
+    neon projects update --block-public-connections
     ```
 
-    If you've got more than one Neon project, specify the `--project-id` option with your Neon project ID. You can find your Neon project ID under your project's settings in the Neon Console, or by running this Neon CLI command: `neon projects list`
+    If have more than one Neon project, you will need to specify the `--project-id` option with your Neon project ID. You can find your Neon project ID under your project's settings in the Neon Console, or by running this Neon CLI command: `neon projects list`
 
     </TabItem>
 
@@ -197,7 +185,7 @@ To configure Neon Private Networking, perform the following steps:
 
 ## Assigning a VPC endpoint restriction
 
-You can limit access to a Neon project by allowing connections only from a specific VPC endpoint. Use the Neon CLI or API to set this restriction.
+You can limit access to a Neon project by allowing connections only from specified VPC endpoints. Use the Neon CLI or API to set a restriction.
 
 <Tabs labels={["CLI", "API"]}>
 
