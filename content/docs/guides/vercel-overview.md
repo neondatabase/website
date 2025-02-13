@@ -42,21 +42,13 @@ This setup simply involves setting environment variables in Vercel to connect yo
 
 ## Transitioning from Vercel Postgres?
 
-  <Admonition type="important">
-  **Starting in Q4, 2024, Vercel will transition Vercel Postgres stores to the Native Vercel Integration for Neon Postgres**. Until November, you can continue using Vercel Postgres as usual. The transition will follow the principles outlined below:
+<Admonition type="important">
+**Vercel has now completed transitioning almost all Vercel Postgres stores to the Native Vercel Integration for Neon Postgres.**
 
-- Zero downtime, so there's no impact on user applications
-- Integrated billing in Vercel
-- Access to all Neon features and plans
-
-No action is required on your part. Vercel will perform the transition for you.
-
-After the transition, you will be able to manage your databases via the Native Vercel Integration from the **Storage** tab on your Vercel Dashboard. You will also be able to access your databases from the Neon Console.
-
-To learn more, please refer to the [Vercel announcement](https://vercel.com/blog/introducing-the-vercel-marketplace) and the [Neon announcement](https://neon.tech/blog/leveling-up-our-partnership-with-vercel).
+You can now manage your databases via the Native Vercel Integration from the **Storage** tab on your Vercel Dashboard and in the Neon Console.
 </Admonition>
 
-If you're transitioning from Vercel Postgres to Neon, welcome! We're glad you're here. We've prepared a **transition guide** to answer questions and help you get started.
+For those who have transitioned from Vercel Postgres to Neon, welcome! We're glad you're here. We've prepared a **transition guide** to answer questions and help you get started.
 
 <DetailIconCards>
 
