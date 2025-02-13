@@ -17,7 +17,7 @@ Here's a snapshot of what we're working on now:
 
 - **Data anonymization**: We're simplifying PII data anonymization to make Neon an ideal staging environment for your team's app development.
 - **HIPAA compliance**: We are working toward HIPAA readiness, targeting completion by the end of Q2 2025. Learn more about Neon's compliance milestones on our [Compliance page](/docs/security/compliance).
-- **More regions**: London 🇬🇧 and São Paulo 🇧🇷 are locked in for Q1 2025. Brazilian developers: we’d love to sponsor meetups and connect! Share your thoughts via the [Feedback form](https://console.neon.tech/app/projects?modal=feedback) in the Neon Console or our [Discord feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042). If you'd like support in other regions, please [submit a request](/docs/introduction/regions#request-a-region).
+- **More regions**: São Paulo 🇧🇷 is locked in for Q1 2025. Brazilian developers: we’d love to sponsor meetups and connect! Share your thoughts via the [Feedback form](https://console.neon.tech/app/projects?modal=feedback) in the Neon Console or our [Discord feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042). If you'd like support in other regions, please [submit a request](/docs/introduction/regions#request-a-region).
 - **Improved migration assistance**: The [Neon Migration Assistant](/docs/import/migration-assistant) was introduced in Q4 2024. More improvements are coming in 2025 to make data import easier and faster.
 - **Support for the [pg_search](https://github.com/paradedb/paradedb/tree/dev/pg_search) extension**: This extension enables full text search over heap tables.
 - **Scheduled updates**: We will be rolling out support for a scheduled updates feature in Neon to facilitate Postgres updates, security patches, and Neon feature enhancements. [Learn more](/docs/changelog/2025-01-24#scheduled-updates-coming-soon).
@@ -45,6 +45,7 @@ And here's a quick list of what we'll be taking on in the near future:
 
 ## What we've shipped recently 🚢
 
+- **London 🇬🇧**: Neon is now available in the London region: AWS Europe (London) — `aws-eu-west-2`.
 - **Save your connection details to [1Password](https://1password.com/)**: See [Save your connection details to 1Password](/docs/connect/connect-from-any-app#save-your-connection-details-to-1password).
 - **Query monitoring in the console**: Monitor your [active queries](/docs/introduction/monitor-active-queries) and [query history](/docs/introduction/monitor-query-history) in the Neon Console.
 - **The Neon Slack App**: Stay connected to your Neon Serverless Postgres databases in Slack. See [Neon Slack App](/docs/manage/slack-app).
