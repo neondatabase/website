@@ -85,7 +85,7 @@ TopbarClient.propTypes = {
   link: PropTypes.shape({
     url: PropTypes.string.isRequired,
     target: PropTypes.string,
-  }),
+  }).isRequired,
   isDarkTheme: PropTypes.bool,
 };
 

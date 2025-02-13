@@ -7,7 +7,7 @@ import TopbarClient from './topbar-client';
 const Topbar = async ({ isDarkTheme }) => {
   const topbar = await getTopbar();
 
-  if (!topbar) return null;
+  if (!topbar?.text || !topbar?.link) return null;
 
   return <TopbarClient {...topbar} isDarkTheme={isDarkTheme} />;
 };
