@@ -6,13 +6,13 @@ isDraft: false
 updatedOn: '2025-01-22T18:43:21.518Z'
 ---
 
-<Admonition type="warning">
+<Admonition type="info">
 Please be advised that the content in this guide is subject to change.
 </Admonition>
 
-As of mid-February 2025, Vercel has transitioned almost all Vercel Postgres stores to a [Vercel Native Integration for Neon Postgres](/docs/guides/vercel-native-integration).
+Vercel has now transitioned almost all Vercel Postgres stores to a [Vercel Native Integration for Neon Postgres](/docs/guides/vercel-native-integration).
 
-We know moving to a new platform may bring up questions, so we’ve prepared this guide to answer as many as possible.
+We know moving to a new platform may bring up questions, so we’ve prepared this guide to answer as many of those questions as possible.
 
 ## About the transition
 
@@ -61,7 +61,7 @@ The Vercel Hobby plan is free and aimed at developers with personal projects, an
 | **Database**      | First Database              | 10                            |
 | **Storage**       | First 256 MB Included       | Up to 512 MB                  |
 
-Additional use (called "Extra usage" in Neon) for a fee is not available on the Vercel Hobby Plan or the Neon Free Plan.
+Additional use (called "Extra usage" in Neon) for a fee is not available on the Vercel Hobby Plan or the Neon Free Plan. No change here!
 
 #### Vercel Pro Plan vs Neon Launch Plan
 
