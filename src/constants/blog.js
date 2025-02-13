@@ -3,7 +3,7 @@ import { GUIDES_BASE_PATH } from './guides';
 
 const BLOG_BASE_PATH = '/blog/';
 const BLOG_CATEGORY_BASE_PATH = `${BLOG_BASE_PATH}category/`;
-const BLOG_POSTS_PER_PAGE = 500;
+const BLOG_POSTS_PER_PAGE = 100;
 
 const CATEGORY_COLORS = {
   company: 'text-green-45',
