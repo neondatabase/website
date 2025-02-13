@@ -36,7 +36,7 @@ Neon applies updates to computes based on the following rules:
 If a compute is excluded from an update, Neon will apply the missed update with the next update, assuming the compute meets the update criteria mentioned above.
 
 <Admonition type="important">
-Please be aware that Neon will occasionally apply updates outside of scheduled update windows to address important security issues or perform essential operating system and platform maintenance.
+Please be aware that Neon occasionally applies updates outside of scheduled update windows to address important security issues or perform essential  platform maintenance.
 </Admonition>
 
 ## Updates on the Free Plan
