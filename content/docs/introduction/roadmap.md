@@ -45,7 +45,7 @@ And here's a quick list of what we'll be taking on in the near future:
 
 ## What we've shipped recently 🚢
 
-- **London 🇬🇧**: Neon is now available in the London region: AWS Europe (London) — `aws-eu-west-2`. 
+- **London 🇬🇧**: Neon is now available in the London region: AWS Europe (London) — `aws-eu-west-2`.
 - **Save your connection details to [1Password](https://1password.com/)**: See [Save your connection details to 1Password](/docs/connect/connect-from-any-app#save-your-connection-details-to-1password).
 - **Query monitoring in the console**: Monitor your [active queries](/docs/introduction/monitor-active-queries) and [query history](/docs/introduction/monitor-query-history) in the Neon Console.
 - **The Neon Slack App**: Stay connected to your Neon Serverless Postgres databases in Slack. See [Neon Slack App](/docs/manage/slack-app).
