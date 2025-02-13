@@ -1,7 +1,7 @@
 ---
 title: Transfer projects to an organization
 enableTableOfContents: true
-updatedOn: '2025-01-20T20:22:35.268Z'
+updatedOn: '2025-02-13T13:32:35.159Z'
 ---
 
 As an Admin or Member of an organization, you can transfer projects in the following ways:
