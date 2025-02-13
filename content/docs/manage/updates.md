@@ -7,7 +7,7 @@ updatedOn: '2025-02-10T16:29:54.730Z'
 ---
 
 <Admonition type="note" title="updates coming soon">
-Free Plan accounts can expect to start seeing update notices in early February, at least 24 hours before any scheduled update. Update notices for Neon's paid plans will start rolling out in the second week of February, with at least 7 days' notice before a planned update. For the latest information about updates, you can also follow announcements in the [Neon Changelog](https://neon.tech/docs/changelog), published every Friday.
+Free Plan accounts can expect to see update notices in early February, at least 24 hours before any scheduled update. Update notices for Neon's Launch and Scale plans will start rolling out in the second week of February, with at least 7 days' notice before a planned update. Business and Enterprise plan accounts will see update notices toward the end of February. For the latest information about updates, you can follow our announcements in the [Neon Changelog](https://neon.tech/docs/changelog), published every Friday.
 </Admonition>
 
 To keep your Neon computes and Postgres instances up to date with the latest patches and Neon features, Neon applies scheduled updates to your project's computes. We notify you of scheduled updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can schedule an update window — a specific day and hour for updates.
@@ -76,8 +76,8 @@ You can check your project's settings for upcoming scheduled updates. We'll post
 <TabItem>
 On Neon paid plans, the [Create project](https://api-docs.neon.tech/reference/createproject) and [Update project](https://api-docs.neon.tech/reference/updateproject) APIs let you define an update window using the `maintenance_window` object, as shown in the `Update project` example below.
 
-- The `weekdays` parameter accepts an integer (`1` for Monday, `7` for Sunday) or an array of integers to specify multiple weekdays.
-- The `start_time` and `end_time` values must be in UTC (`HH:MM` format) and at least one hour apart. Shorter intervals are not supported. Both times must fall on the same day. For example, (`22:00`, `23:00`) and (`23:00–00:00`) are valid settings, but (`22:00`, `03:00`) is not, as it would span multiple days.
+- The `weekdays` parameter accepts an integer (`1` for Monday, `2` for Tuesday, and so on) or an array of integers to specify multiple weekdays.
+- The `start_time` and `end_time` values must be in UTC (`HH:MM` format) and at least one hour apart. Shorter intervals are not supported. Both times must fall on the same day. For example, (`22:00`, `23:00`) and (`23:00`, `00:00`) are valid settings, but (`22:00`, `03:00`) is not, as it would span multiple days.
 
 ```bash
 curl --request PATCH \
@@ -108,7 +108,7 @@ curl --request PATCH \
 
 ## Check for updates using the Neon API
 
-You can retrive your update window and check for scheduled updates using the [Get project details](https://api-docs.neon.tech/reference/getproject) endpoint.
+You can retrieve your update window and check for scheduled updates using the [Get project details](https://api-docs.neon.tech/reference/getproject) endpoint.
 
 To get your project details, send the following request, replacing `<your_project_id>` with your Neon project ID, and `$NEON_API_KEY` with your [Neon API key](/docs/manage/api-keys):
 
