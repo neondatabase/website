@@ -156,11 +156,6 @@ const defaultConfig = {
         permanent: true,
       },
       {
-        source: '/blog/category/case-study',
-        destination: '/case-studies',
-        permanent: true,
-      },
-      {
         source: '/team',
         destination: '/about-us',
         permanent: true,
