@@ -7,7 +7,7 @@ updatedOn: '2025-02-13T15:55:14.144Z'
 ---
 
 <Admonition type="note" title="updates coming soon">
-Free Plan accounts can expect to see update notices in early February, at least 24 hours before any scheduled update. Update notices for Neon's Launch and Scale plans will start rolling out in the second week of February, with at least 7 days' notice before a planned update. Business and Enterprise plan accounts will see update notices toward the end of February. For the latest information about updates, follow our announcements in the [Neon Changelog](https://neon.tech/docs/changelog).
+Free Plan accounts can expect to see update notices in early February, at least 24 hours before any planned update. Update notices for Neon's Launch and Scale plans will start rolling out in the second week of February, with at least 7 days' notice before a planned update. Business and Enterprise plan accounts will see update notices toward the end of February. For the latest information about updates, follow our announcements in the [Neon Changelog](https://neon.tech/docs/changelog).
 </Admonition>
 
 To keep your Neon computes and Postgres instances up to date with the latest patches and features, Neon applies updates to your project's computes. We notify you of updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can select an update window — a specific day and hour for updates.
@@ -33,7 +33,7 @@ Neon applies updates to computes based on the following rules:
 - Computes in a transition state (e.g., shutting down or restarting) at the time of an update are not updated.
 - Computes larger than 8 CU are not updated.
 
-If a compute is excluded from an update, Neon will apply the missed update with the next scheduled update, assuming the compute meets the update criteria mentioned above.
+If a compute is excluded from an update, Neon will apply the missed update with the next update, assuming the compute meets the update criteria mentioned above.
 
 <Admonition type="important">
 Please be aware that Neon will occasionally apply updates outside of scheduled update windows to address important security issues or perform essential operating system and platform maintenance.
