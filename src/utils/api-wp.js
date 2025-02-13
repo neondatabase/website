@@ -21,126 +21,6 @@ const POST_SEO_FRAGMENT = gql`
   }
 `;
 
-const getAllWpBlogCategories = cache(async () => {
-  const categoriesQuery = gql`
-    query Categories {
-      categories {
-        nodes {
-          name
-          slug
-          posts {
-            nodes {
-              id
-            }
-          }
-        }
-      }
-    }
-  `;
-  const data = await fetchGraphQL(graphQLClient).request(categoriesQuery);
-  const filteredCategories = data?.categories?.nodes.filter(
-    (category) => category.slug !== 'uncategorized' && category.posts.nodes.length > 0
-  );
-
-  return filteredCategories;
-});
-
-const getAllCategories = async () => {
-  const wpCategories = await getAllWpBlogCategories();
-  return [...wpCategories, ...EXTRA_CATEGORIES];
-};
-
-const getCategoryBySlug = async (slug) => {
-  const extraCategory = EXTRA_CATEGORIES.find((cat) => cat.slug === slug);
-  if (extraCategory) return extraCategory;
-
-  const wpCategories = await getAllWpBlogCategories();
-  const wpCategory = wpCategories.find((cat) => cat.slug === slug);
-  return wpCategory;
-};
-
-const fetchWpPostsByCategorySlug = async (slug, after) => {
-  const postsQuery = gql`
-    query Query($categoryName: String!, $first: Int!, $after: String) {
-      posts(
-        first: $first
-        after: $after
-        where: { categoryName: $categoryName, orderby: { field: DATE, order: DESC } }
-      ) {
-        nodes {
-          slug
-          date
-          title(format: RENDERED)
-          content(format: RENDERED)
-          pageBlogPost {
-            largeCover {
-              altText
-              mediaItemUrl
-            }
-            authors {
-              author {
-                ... on PostAuthor {
-                  title
-                  postAuthor {
-                    role
-                    url
-                    image {
-                      altText
-                      mediaItemUrl
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-        pageInfo {
-          hasNextPage
-          endCursor
-        }
-      }
-    }
-  `;
-
-  const categoryName = slug.charAt(0).toUpperCase() + slug.slice(1);
-
-  const data = await fetchGraphQL(graphQLClient).request(postsQuery, {
-    first: BLOG_POSTS_PER_PAGE,
-    after,
-    categoryName,
-  });
-
-  return data?.posts;
-};
-
-const getWpPostsByCategorySlug = cache(async (slug) => {
-  let allPosts = [];
-  let afterCursor = null;
-
-  while (true) {
-    // eslint-disable-next-line no-await-in-loop
-    const { nodes: posts, pageInfo } = await fetchWpPostsByCategorySlug(slug, afterCursor);
-
-    allPosts = allPosts.concat(posts);
-    if (!pageInfo.hasNextPage) break;
-    afterCursor = pageInfo.endCursor;
-  }
-
-  return allPosts;
-});
-
-const getPostsByCategorySlug = async (slug) => {
-  if (slug === 'guides') {
-    return getAllGuides();
-  }
-
-  if (slug === 'changelog') {
-    return getAllChangelogs();
-  }
-
-  return getWpPostsByCategorySlug(slug);
-};
-
 const fetchAllWpPosts = async (after) => {
   const allPostsQuery = gql`
     query AllPosts($first: Int!, $after: String) {
@@ -242,6 +122,62 @@ const getAllPosts = async () => {
 
   // Combine the results
   return [...featuredWpPosts, ...restPosts];
+};
+
+const getAllWpBlogCategories = cache(async () => {
+  const categoriesQuery = gql`
+    query Categories {
+      categories {
+        nodes {
+          name
+          slug
+          posts {
+            nodes {
+              id
+            }
+          }
+        }
+      }
+    }
+  `;
+  const data = await fetchGraphQL(graphQLClient).request(categoriesQuery);
+  const filteredCategories = data?.categories?.nodes.filter(
+    (category) => category.slug !== 'uncategorized' && category.posts.nodes.length > 0
+  );
+
+  return filteredCategories;
+});
+
+const getAllCategories = async () => {
+  const wpCategories = await getAllWpBlogCategories();
+  return [...wpCategories, ...EXTRA_CATEGORIES];
+};
+
+const getCategoryBySlug = async (slug) => {
+  const extraCategory = EXTRA_CATEGORIES.find((cat) => cat.slug === slug);
+  if (extraCategory) return extraCategory;
+
+  const wpCategories = await getAllWpBlogCategories();
+  const wpCategory = wpCategories.find((cat) => cat.slug === slug);
+  return wpCategory;
+};
+
+const getPostsByCategorySlug = async (slug) => {
+  if (slug === 'guides') {
+    return getAllGuides();
+  }
+
+  if (slug === 'changelog') {
+    return getAllChangelogs();
+  }
+
+  const allWpPosts = await getAllWpPosts();
+
+  const filteredWpPosts = allWpPosts.filter((post) =>
+    post.categories.nodes.some((category) => category.slug === slug)
+  );
+
+  return filteredWpPosts;
 };
 
 const getWpPostBySlug = cache(async (slug) => {
