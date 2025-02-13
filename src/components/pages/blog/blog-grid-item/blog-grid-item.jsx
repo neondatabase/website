@@ -15,7 +15,7 @@ const BlogGridItem = ({ className, post, category, index }) => {
           : 'col-span-full border-t border-gray-new-15 py-8 first:border-0 first:border-t-0 first:pt-0 last:pb-0',
         className
       )}
-      categories={{ nodes: [category] }}
+      category={category}
       fullSize={!isFeatured}
       isPriority={index < 5}
       imageWidth={isFeatured ? 372 : 336}

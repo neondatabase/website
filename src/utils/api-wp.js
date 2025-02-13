@@ -285,7 +285,7 @@ const getWpPostBySlug = cache(async (slug) => {
         }
         ...wpPostSeo
       }
-      posts(first: 4, where: { orderby: { field: DATE, order: DESC } }) {
+      posts(first: 3, where: { orderby: { field: DATE, order: DESC } }) {
         nodes {
           categories {
             nodes {
