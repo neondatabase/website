@@ -6,8 +6,8 @@ isDraft: false
 updatedOn: '2024-12-11T21:23:33.087Z'
 ---
 
-<Admonition type="comingSoon" title="Feature coming soon">
-This feature is currently awaiting release. It will be opened to all Vercel Native Integration users soon.
+<Admonition type="comingSoon" title="Beta">
+This feature is currently in Beta. Let us know what you think via the [Feedback form](https://console.neon.tech/app/projects?modal=feedback) in the Neon Console or on our [Discord channel](https://discord.com/channels/1176467419317940276/1176788564890112042).
 </Admonition>
 
 <InfoBlock>
