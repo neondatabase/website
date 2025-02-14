@@ -264,7 +264,7 @@ The queries used in this step are explained below:
 
 ### Restore schema
 
-In this step, I use pg_restore to restore the schema from the `all-schema.bak` file, which was saved to the GitHub workspace during the Dump schema step.
+In this step, I use `pg_restore` to restore the schema from the `all-schema.bak` file, which was saved to the GitHub workspace during the Dump schema step.
 
 The flags used in this step are explained below:
 
