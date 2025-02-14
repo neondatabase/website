@@ -6,7 +6,7 @@ createdAt: '2025-02-12T00:00:00.000Z'
 updatedOn: '2025-02-12T00:00:00.000Z'
 ---
 
-When we say "Ship faster with Postgres," faster works as a noun and a verb. Our mission is not just about helping you build and ship softare faster. It's about helping you deliver that same feeling of faster to your customers.
+When we say "Ship faster with Postgres" — it's not just about helping you build and ship software faster. It's about helping you deliver that same feeling of **faster** to your customers.
 
 ## Open Source Faster
 
@@ -32,8 +32,8 @@ Some of the incredible businesses delivering better experiences for their custom
 - **[Cedalio](https://cedalio.com)** – One-database-per-client model with auto-suspend. [Details](/blog/how-cedalio-uses-neon-for-an-efficient-development-workflow)
 - **[BaseHub](https://basehub.com)** – Uses autoscaling to handle peak loads with zero manual tuning. [Details](/blog/meet-basehub-developer-velocity-and-efficiency-right-down-to-the-database)
 - **[Create.xyz](https://create.xyz)** – Spins up Postgres backends instantly for AI-generated apps. [Details](/blog/from-idea-to-full-stack-app-in-one-conversation-with-create)
-- **[OpusFlow](https://opusflow.io)** – DB-per-tenant delivers fast, no-noisy-neighbor experience for energy customers. [Details](/blog/how-opusflow-achieves-tenant-isolation-in-postgres-without-managing-servers)
-- **[222](https://222.place)** – Auto-scales for heavy traffic surges without manual ops. [Details](/blog/how-222-uses-neon-to-handle-their-frequent-spikes-in-demand)
+- **[OpusFlow](https://opusflow.io)** – DB-per-tenant delivers a fast, no-noisy-neighbor experience for energy customers. [Details](https://neon.tech/blog/how-opusflow-achieves-tenant-isolation-in-postgres-without-managing-servers)
+- **[222](https://222.place)** – Autoscales for heavy traffic surges without manual ops. [Details](/blog/how-222-uses-neon-to-handle-their-frequent-spikes-in-demand)
 - **[Recrowd](https://recrowd.com)** – Scales up for crowdfunding spikes, down when idle. [Details](/blog/how-recrowd-uses-neon-autoscaling-to-meet-fluctuating-demand)
 - **[BeatGig](https://beatgig.com)** – Uses instant read replicas for fast analytics. [Details](/blog/neon-read-replicas-in-the-wild-how-beatgig-uses-them)
 - **[ketteQ](https://ketteq.com)** – Runs hundreds of forecast simulations in parallel with instant branches. [Details](/blog/database-branching-for-postgres-with-neon)
@@ -45,7 +45,7 @@ Is your company using Neon to ship faster experiences faster? [Let us know in th
 
 ## Faster Features
 
-We take pride in [owning our tenth of a second](https://x.com/tobi/status/1787139157078188180?lang=en). Here are some of the faster features we are particularly proud of.
+Great software isn’t just functional—it’s fast. At Neon, it’s something we refine and build into our service in countless small ways. Here are some of the faster features we’re particularly proud of.
 
 - **Faster Provisioning** - Get a ready-to-use Postgres database in less than a second. Try it right here. 👇
   <DeployPostgresButton />
@@ -65,9 +65,9 @@ Don't take our word for it. The best way to understand the performance of a serv
 
 <CTA title="Try Postgres on Neon" description="Neon is Serverless Postgres built for the cloud. Sign up for a free account to get started." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
 
-## Open Source Benchmarks
+### Check Open Source Benchmarks
 
-Test faster yourself with these open-source third-party benchmarks.
+Test **faster** yourself with these open-source third-party benchmarks.
 
 - **[Vercel-to-DB Latency Benchmarks](https://db-latency.vercel.app/)** - Open source latency benchmarks written by Vercel
 - **[Postgres Library Benchmarks for Node.js](https://github.com/porsager/postgres-benchmarks#results)** - _(not Neon-specific)_ compare the different Postgres drivers.
@@ -86,14 +86,14 @@ You can visualize the way each factor contributes like this:
 
 <LatencyCalculator />
 
-**What about cold starts?** Databases on Neon can scale to zero when there are no active queries for a certain amount of time. We kept this topic separate below in [Cold Starts](#cold-starts) because _across the more than one million active databases on our platform, there are fewer than 5 cold starts per second._ Cold starts don't factor in to your real-world experience often enough to become an important consideration.
+**What about cold starts?** Databases on Neon can scale to zero when there are no active queries for a certain amount of time. We kept this topic separate below in [Cold Starts](#cold-starts) because _across the more than one million active databases on our platform, they occur very seldomly — there are fewer than 5 cold starts per second._ Cold starts don't factor in to your real-world experience often enough to become an important consideration.
 
 ### Establishing a connection
 
 Before you get any data from the database, you need to connect to it. This process of establishing the network connection and verifying the credentials on both sides traditionally takes several back and forth trips between application and database.
 
 **Standard Postgres TCP connections require nine roundtrips:**
-![Nine round-trips to get a result on a standard TCP connection to Postgres](/_next/image?url=https%3A%2F%2Fneondatabase.wpengine.com%2Fwp-content%2Fuploads%2F2023%2F08%2Fimage-5.png&w=3840&q=85&dpl=dpl_93LwG65BEFC73DGwgsAif219AFEd)
+![Nine round-trips to get a result on a standard TCP connection to Postgres](/faster/postgres-tcp-roundtrips.jpg)
 
 When you combine nine round trips with any sort of network latency you get a 9x compounding effect on latency. How often you must establish a database connection depends on how you architect your app:
 
@@ -109,7 +109,7 @@ Serverless functions may be executing independently in short-lived environments,
 1. Execute functions in a region that is the same or close to your database
 2. Execute [multiple queries in a single function](/docs/serverless/serverless-driver#issue-multiple-queries-with-the-transaction-function) - so you only pay the connection tax once.
 3. Use an HTTP API via the [Neon Serverless Driver](/docs/serverless/serverless-driver) - To reduce the number of roundtrips required to establish the connection.
-   ![Serverless driver round-trips](/_next/image?url=https%3A%2F%2Fneondatabase.wpengine.com%2Fwp-content%2Fuploads%2F2023%2F08%2FDevDays-GM-Quicker-2.jpg&w=3840&q=85&dpl=dpl_93LwG65BEFC73DGwgsAif219AFEd)
+   ![Serverless driver round-trips](/faster/postgres-http-roundtrips.jpg)
    Neon's [serverless driver](/docs/serverless-driver) and proxy have been optimized to reduce the number of roundtrips to the absolute minimum. To read more about how this works, see: [Quicker serverless Postgres connections](/blog/quicker-serverless-postgres)
 </Admonition>
 
@@ -117,12 +117,11 @@ Serverless functions may be executing independently in short-lived environments,
 
 Client-database proximity plays a major role in real-world database latency. Here are the different scenarios laid out from lowest to highest latency.
 
-1. **App and database on same VM** - `1ms` to connect and `1ms-nms` to query. When you put your database and your app on the exact same machine, latency is measured in microseconds. _This setup is not possible on Neon because it is a distributed cloud platform._
-2. **App and database in same region (datacenter) connecting over private network \-** 1ms to connect, 1ms to query \[Not exactly possible on Neon, you can connect through PrivateLink but it doesnt save you any time\]
-3. **App and database in same region (datacenter) connecting over public network** \- 3ms to connect, 1ms to query \- This is the fastest way to connect that is accessible to all Neon users. What you’re doing here is picking the same AWS or Azure region for your database and your application (be it serverless, like lambda functions on AWS, or serverful).
-   1. You still use the publicly routable address of your database, but data is traveling 0 miles so it is very fast.
-   2. This doesn’t mean your app has to be running on AWS directly, for example Vercel runs infra on AWS so picking the same Vercel and Neon region has the same effect.
-4. **App and database in different region \-** Now we get into that compounding effect
+| Architecture  | Roundtrip | Connect | On Neon |
+| ------------- | ------- | ------- | ------- |
+| **Same Machine**<br/>When you put your database and your app on the exact same machine, latency is measured in microseconds.  | >1ms | ~1ms | Not applicable |
+| **Same Region**<br/>Place the client (App) and Database in the same datacenter and region for lowest-possible latency.  | ~1ms | ~3ms | Same [Region](https://neon.tech/docs/introduction/regions) for Client and DB, see [Private Link](https://neon.tech/docs/guides/neon-private-networking) for VPC |
+| **Different Region**<br/>When client and database are in different regions, your latency varies based on geographic proximity. | Varies | 4x-8x Roundtrip | Different/varying [Region](https://neon.tech/docs/introduction/regions) for Client and DB |
 
 ### Minimizing database time spent answering the query
 
@@ -132,10 +131,10 @@ As your business (and database) grows, connection and network transit latency re
 2. **Profile slow queries** – Identify which SQL statements are slow or resource-intensive by starting with the [Query History View](/docs/introduction/monitor-query-history) in Neon.
    ![Neon query history tab](/docs/introduction/query_history.png)
    _The Query History tab shows total calls, avg time, and total time of each query._
-   You can dig deeper with [`pg_stat_statements`](/docs/extensions/pg_stat_statements)
+   You can dig deeper with [pg_stat_statements](/docs/extensions/pg_stat_statements)
 3. **Add indexes on high-impact columns** – Create indexes on columns that are frequently used in `WHERE` filters, `JOIN` conditions, or `ORDER BY` clauses to avoid full table scans. An index lets Postgres perform an index scan instead of a slower sequential scan, dramatically reducing query execution time.
 4. **Reduce table and index bloat** – Reclaim wasted space and improve performance by eliminating bloat (accumulated dead rows) in tables and indexes. Schedule regular maintenance like `VACUUM` to remove dead tuples and use `REINDEX` on bloated indexes. You can also fine-tune autovacuum settings to keep bloat in check over time.
-5. **Leverage caching for reads** – Ensure frequently accessed data is served from memory instead of disk. Neon’s architecture extends Postgres’s shared memory buffers with a local file system cache, so aim for a high cache hit ratio. After installing the Neon extension, you can query the `neon_stat_file_cache` view to monitor how often data is read from cache versus storage and adjust your workload or memory allocation if needed.
+5. **Leverage caching for reads** – Ensure frequently accessed data is served from memory instead of disk. Neon’s architecture extends Postgres’s shared memory buffers with a local file system cache, so aim for a high cache hit ratio. You can monitor the **Local file cache hit rate** chart on the **Monitoring** page in the Neon Console to see how often data is read from cache versus storage and adjust your workload or memory allocation if needed.
 
 **Further reading** – See [PostgreSQL query performance guide](/docs/postgresql/query-performance) for in-depth explanations and tips.
 
@@ -160,7 +159,7 @@ To us, serverless means:
 <li>New computes (and cold starts) for every connection/query</li>
 </ul>
 
-For more, read the full [Serverless Docs](/docs/introduction/serverless)
+For a full write-up, read the full [Serverless Docs](/docs/introduction/serverless)
 
 ### Scale to zero
 
