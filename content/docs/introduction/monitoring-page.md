@@ -84,7 +84,15 @@ Idle connections are those that are open but not currently being used. While a f
 
 **TOTAL**: The sum of active and idle connections for the selected compute.
 
-The limit on the maximum number of simultaneous connections (defined by the Postgres `max_connections` setting) is set according to your Neon compute size configuration. Monitoring the total number of connections helps ensure you don't hit your connection limit, as reaching it can prevent new connections from being established, leading to connection errors. For the connection limit for each Neon compute size, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute). Increasing your compute size is one way to increase your connection limit. Another option is to use connection pooling, which supports up to 10,000 simultaneous connections. To learn more, see [Connection pooling](/docs/connect/connection-pooling).
+**MAX**: The maximum number of simultaneous connections allowed for your compute size.
+
+The MAX line helps you visualize how close you are to reaching your connection limit. When your TOTAL connections approach the MAX line, you may want to consider:
+
+- Increasing your compute size to allow for more connections
+- Implementing [connection pooling](/docs/connect/connection-pooling), which supports up to 10,000 simultaneous connections
+- Optimizing your application's connection management
+
+The connection limit (defined by the Postgres `max_connections` setting) is set according to your Neon compute size configuration. For the connection limit for each Neon compute size, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
 
 ### Database size
 
@@ -137,7 +145,7 @@ Queries not served from either Postgres shared buffers (128 MB on all Neon compu
 
 Your working set is the size of the distinct set of Postgres pages (relation data and indexes) accessed in a given time interval - to optimize for performance and consistent latency it is recommended to size your compute so that the working set fits into Neon's [Local File Cache (LFC)](/docs/extensions/neon#what-is-the-local-file-cache) for quick access.
 
-The **Working set size** graph provides a visual representation of how much data has being accessed over different time intervals. Here’s how to interpret the graph:
+The **Working set size** graph provides a visual representation of how much data has being accessed over different time intervals. Here's how to interpret the graph:
 
 - **5m** (5 minutes): This line shows how much data has been accessed in the last 5 minutes.
 - **15m** (15 minutes): Similar to the 5-minute window, this metric tracks data accessed over the last 15 minutes.
