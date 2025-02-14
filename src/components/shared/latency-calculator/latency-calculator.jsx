@@ -31,9 +31,8 @@ const LatencyCalculator = () => {
       )}
     >
       <span className="text-lg font-semibold">End-to-End Database Query Latency Factors</span>
-
-      <div className="my-4 flex w-full gap-4">
-        <div className="flex flex-1 flex-col gap-0.5">
+      <div className="my-4 flex w-full flex-col gap-4">
+        <div className="flex max-w-[400px] flex-1 flex-col gap-0.5 md:max-w-full">
           <label htmlFor="latency-slider" className="text-gray-700 mb-1 block text-sm font-medium">
             Client-DB Roundtrip Latency: {roundtripLatency}ms
           </label>
@@ -51,7 +50,7 @@ const LatencyCalculator = () => {
             {roundtripLatency}ms is typical of {getApproximation(roundtripLatency)}
           </span>
         </div>
-        <div>
+        <div className="flex max-w-[400px] flex-1 flex-col gap-0.5 md:max-w-full">
           <label
             htmlFor="processingTime-slider"
             className="text-gray-700 mb-1 block text-sm font-medium"
@@ -69,34 +68,36 @@ const LatencyCalculator = () => {
             onChange={(e) => setprocessingTime(parseInt(e.target.value))}
           />
         </div>
-        <div className="flex items-center gap-2">
-          <input
-            type="checkbox"
-            id="longLivedConnections"
-            checked={longLivedConnections}
-            onChange={() => {
-              setLongLivedConnections(!longLivedConnections);
-            }}
-          />
-          <label
-            htmlFor="longLivedConnections"
-            className="text-gray-700 mb-1 block text-sm font-medium"
-          >
-            Long-lived Connections
-          </label>
-        </div>
-        <div className="flex items-center gap-2">
-          <input
-            type="checkbox"
-            id="httpApi"
-            checked={httpApi}
-            onChange={() => {
-              setHttpApi(!httpApi);
-            }}
-          />
-          <label htmlFor="httpApi" className="text-gray-700 mb-1 block text-sm font-medium">
-            HTTP API
-          </label>
+        <div className="flex gap-4">
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="longLivedConnections"
+              checked={longLivedConnections}
+              onChange={() => {
+                setLongLivedConnections(!longLivedConnections);
+              }}
+            />
+            <label
+              htmlFor="longLivedConnections"
+              className="text-gray-700 block text-sm font-medium"
+            >
+              Long-lived Connections
+            </label>
+          </div>
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="httpApi"
+              checked={httpApi}
+              onChange={() => {
+                setHttpApi(!httpApi);
+              }}
+            />
+            <label htmlFor="httpApi" className="text-gray-700 block text-sm font-medium">
+              HTTP API
+            </label>
+          </div>
         </div>
       </div>
 
