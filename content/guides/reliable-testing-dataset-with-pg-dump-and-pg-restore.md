@@ -65,7 +65,7 @@ jobs:
 
 ### name
 
-This name will appear in the Actions section of the GitHub UI. Regardless of what you name your file, this is the name that will be displayed.
+This name will appear in the **Actions** section of the GitHub UI. Regardless of what you name your file, this is the name that will be displayed.
 
 ## on
 
