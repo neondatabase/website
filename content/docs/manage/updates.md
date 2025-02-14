@@ -12,19 +12,19 @@ Free Plan accounts can expect to see update notices in early February, at least 
 
 To keep your Neon computes and Postgres instances up to date with the latest patches and features, Neon applies updates to your project's computes. We notify you of updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can select an update window — a specific day and hour for updates.
 
-Neon must briefly restart a compute to apply an update. The entire process takes just a few seconds, minimizing any potential disruption.
+Neon briefly restarts a compute to apply an update. The entire process takes just a few seconds, minimizing any potential disruption.
 
 ## What updates are included?
 
 Updates may include some or all of the following:
 
 - Postgres minor version upgrades, typically released quarterly
-- Postgres security patches and fixes
+- Security patches and fixes
 - Neon features and enhancements
 
 ## How often are updates applied?
 
-Updates are typically applied weekly but may occur more or less frequently as needed.
+Updates are typically applied weekly but may occur more or less frequently, as needed.
 
 Neon applies updates to computes based on the following rules:
 
@@ -35,8 +35,8 @@ Neon applies updates to computes based on the following rules:
 
 If a compute is excluded from an update, Neon will apply the missed update with the next update, assuming the compute meets the update criteria mentioned above.
 
-<Admonition type="important">
-Please be aware that Neon occasionally applies updates outside of scheduled update windows to address important security issues or perform essential  platform maintenance.
+<Admonition type="important" title="updates outside of scheduled windows">
+Neon must sometimes apply updates requiring compute restarts outside of scheduled update windows to address important security issues or perform essential platform maintenance.
 </Admonition>
 
 ## Updates on the Free Plan
