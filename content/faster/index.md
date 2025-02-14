@@ -189,8 +189,8 @@ Here are some example scenarios where scale to zero may be useful:
 - **Database-per-user Architectures** - Instead of having a single database for all users, if you have a separate database for each user, the activity level of any one database may be low enough that scale to zero results in significant cost reduction.
 - **Small Projects** - For small projects, configuring the production database to scale to zero can make it more cost-efficient without major impact to UX.
 
+## Ready to Ship Faster?
 
-##  Ready to Ship Faster?
 The best way to understand the speed and flexibility of Neon is to try it yourself. With instant provisioning, branching, and autoscaling, Neon helps you build and ship faster experiences—without managing infrastructure.
 
 Sign up for free today—no credit card required—and see how Neon can accelerate your workflow.
