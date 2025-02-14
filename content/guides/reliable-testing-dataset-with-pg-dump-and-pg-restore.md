@@ -211,11 +211,11 @@ In this step, I use `pg_dump` to export the entire schema from the production da
 
 The flags used in this step are explained below:
 
-| Flag          | Meaning                                                                          |
-| ------------- | -------------------------------------------------------------------------------- |
-| -Fc           | Dumps the database in a custom format.                                           |
-| --schema-only | Dumps only the schema (table structures, indexes, constraints) without any data. |
-| -f            | Specifies the output file where the schema dump will be stored.                  |
+| Flag            | Meaning                                                                          |
+| --------------- | -------------------------------------------------------------------------------- |
+| `-Fc`           | Dumps the database in a custom format.                                           |
+| `--schema-only` | Dumps only the schema (table structures, indexes, constraints) without any data. |
+| `-f `           | Specifies the output file where the schema dump will be stored.                  |
 
 ### Dump data
 
@@ -257,10 +257,10 @@ In this step, I use `psql` to drop the schema and create a fresh one. Since this
 
 The queries used in this step are explained below:
 
-| Step                                  | Effect                                                   |
-| ------------------------------------- | -------------------------------------------------------- |
-| DROP SCHEMA IF EXISTS public CASCADE; | Removes the public schema and everything inside it.      |
-| CREATE SCHEMA public;                 | Recreates the public schema for a clean restore process. |
+| Step                                    | Effect                                                   |
+| --------------------------------------- | -------------------------------------------------------- |
+| `DROP SCHEMA IF EXISTS public CASCADE;` | Removes the public schema and everything inside it.      |
+| `CREATE SCHEMA public;`                 | Recreates the public schema for a clean restore process. |
 
 ### Restore schema
 
@@ -268,14 +268,14 @@ In this step, I use `pg_restore` to restore the schema from the `all-schema.bak`
 
 The flags used in this step are explained below:
 
-| Flag          | Meaning                                                                                                        |
-| ------------- | -------------------------------------------------------------------------------------------------------------- |
-| --clean       | Drops existing database objects before recreating them, ensuring a clean restore.                              |
-| --no-owner    | Ignores ownership information in the dump file, so restored objects are owned by the user running the restore. |
-| --no-acl      | Excludes access control (GRANT/REVOKE) statements from the restore, preventing permission changes.             |
-| –if-exits     | Ensures that DROP commands (used with --clean) only execute if the object exists, preventing errors.           |
-| --schema-only | Restores only the schema (table structures, indexes, constraints) without inserting any data.                  |
-| -d            | Specifies the target database to restore into.                                                                 |
+| Flag            | Meaning                                                                                                        |
+| --------------- | -------------------------------------------------------------------------------------------------------------- |
+| `--clean`       | Drops existing database objects before recreating them, ensuring a clean restore.                              |
+| `--no-owner`    | Ignores ownership information in the dump file, so restored objects are owned by the user running the restore. |
+| `--no-acl`      | Excludes access control (GRANT/REVOKE) statements from the restore, preventing permission changes.             |
+| `–if-exits`     | Ensures that DROP commands (used with --clean) only execute if the object exists, preventing errors.           |
+| `--schema-only` | Restores only the schema (table structures, indexes, constraints) without inserting any data.                  |
+| `-d`            | Specifies the target database to restore into.                                                                 |
 
 ## Restore data
 
