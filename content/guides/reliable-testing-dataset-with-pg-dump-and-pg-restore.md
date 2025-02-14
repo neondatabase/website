@@ -219,7 +219,7 @@ The flags used in this step are explained below:
 
 ### Dump data
 
-In this step, I use psql to query the data. This is the most complex step, involving three SQL queries, each targeting one of the three tables. The queries are as follows:
+In this step, I use `psql` to query the data. This is the most complex step, involving three SQL queries, each targeting one of the three tables. The queries are as follows:
 
 #### Transactions query
 
