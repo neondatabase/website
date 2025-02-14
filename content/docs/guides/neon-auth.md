@@ -130,13 +130,19 @@ async function createTodo(userId: string, task: string) {
 
 ## Getting started
 
-1. From the Neon Console, navigate to the **Auth** tab. Choose your provider and click **Connect**. Currently, only Stack Auth is available for Early Access users.
-1. You'll be asked to authenticate and select the project you want to integrate with.
-1. Once connected, you'll see the integration view. This shows your synced users, connection status, and quick links to your provider's documentation and console to help configure your application (e.g. SSO or API keys)
+Neon Auth offers two ways to connect your authentication provider:
 
-Here's an example of Neon Auth with Stack Auth. As we add more providers and features, this interface will continue to evolve.
+1. **Quick Start (Recommended)**
+   - Automatically provision a pre-configured Stack Auth project, managed by Neon
+   - Includes recommended security settings
+   - Best for new projects or first-time Stack Auth users
 
-![Neon Auth with stackauth deployed](/docs/guides/identity_stackauth.png)
+2. **Manual Setup**
+   - Connect your existing Stack Auth project
+   - Configure authentication settings to match your needs
+   - Provide your Stack Auth project details during setup
+
+Choose your setup option in the Neon Console under the **Auth** tab.
 
 ## Best practices
 

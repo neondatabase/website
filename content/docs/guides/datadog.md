@@ -20,10 +20,6 @@ updatedOn: '2024-11-22T10:01:08.293Z'
 
 Available for Scale and Business Plan users, the Neon Datadog integration lets you monitor Neon database performance, resource utilization, and system health directly from Datadog's observability platform.
 
-<Admonition type="note" title="beta">
-This feature is currently in Beta for Scale and Business plan users. It will remain free of charge for those users during the Beta period.
-</Admonition>
-
 ## How it works
 
 The integration leverages a [list of metrics](#available-metrics) that Neon makes available for export to third-party services. By configuring the integration with your Datadog API key, Neon automatically sends metrics from your project to your selected Datadog site. Some of the key metrics include:

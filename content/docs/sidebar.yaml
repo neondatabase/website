@@ -547,7 +547,6 @@
           items:
             - title: Datadog Integration
               slug: guides/datadog
-              tag: new
         - section: Deploy
           items:
             - title: Vercel
