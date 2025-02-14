@@ -33,7 +33,7 @@ In the root of your project, create a `.github` directory. Inside it, add anothe
 
 Now add the following code.
 
-There's a lot happening here, so before I get to the pg_dump, pg_restore and psql steps, let me briefly explain what this first part does.
+There's a lot happening here, so before I get to the `pg_dump`, `pg_restore` and `psql` steps, let me briefly explain what this first part does.
 
 ```yml
 name: Dump Test Data
