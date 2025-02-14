@@ -100,7 +100,7 @@ In my example, the foreign key relationships are as follows:
 
 ### users
 
-This is the schema used to create the users table.
+This is the schema used to create the `users` table.
 
 ```sql
 CREATE TABLE users (
