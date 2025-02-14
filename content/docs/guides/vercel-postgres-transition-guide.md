@@ -98,7 +98,7 @@ Neon is working with the Vercel team to transition Enterprise customers. If you 
 Once the transition to Neon Postgres is complete, you will be able to access a variety of advanced Neon features that were not available in Vercel Postgres (subject to your plan limits).
 
 <Admonition type="note">
-Please be aware that if you're a **Vercel Pro Plan** user, you are subject to the limits of the [Vercel Plan Pro plan](#vercel-pro-plan-vs-neon-launch-plan). There's no requirement for you to migrate to a Neon plan, but doing so may provide access to higher limits and additional features. For example, the Vercel Pro Plan does not support [history retention](/docs/reference/glossary#history), which enables Neon's point-in-time restore feature. For a full overview of Neon plans and features, refer to our [Pricing](https://neon.tech/pricing) page. If you switch to a Neon plan, you will still be billed through Vercel.
+Please be aware that if you are on a **Vercel Postgres Pro Plan**, you are subject to the limits of that [plan](#vercel-pro-plan-vs-neon-launch-plan). There's no requirement for you to migrate to a Neon plan, but doing so may provide access to higher limits and additional features. For example, the Vercel Postgres Pro Plan does not support [history retention](/docs/reference/glossary#history), which enables Neon's point-in-time restore feature. For a full overview of Neon plans and features, refer to our [Pricing](https://neon.tech/pricing) page. If you switch to a Neon plan, you will still be billed through Vercel.
 </Admonition>
 
 Neon features:
@@ -128,7 +128,7 @@ The transition to Neon also unblocks several limitations:
 - **Terraform support**. The [Vercel Terraform Provider](https://vercel.com/guides/integrating-terraform-with-vercel) did not support Vercel Postgres. With Neon Postgres, you have access to a [Neon Terraform provider](/docs/reference/terraform).
 - **Larger computes**. On Vercel, databases on Hobby plans are limited to 0.25 logical CPUs. The Neon Free plan supports computes up to 2 vCPUs and [Autoscaling](/docs/introduction/autoscaling). Neon paid plans support much larger compute sizes.
 - **Postgres roles**. On Vercel, you were limited to a single Postgres database access role. There is no such limit on Neon. You can create additional Postgres roles as needed.
-- **Point-in-time restore**. In Vercel Postgres, Neon's history retention is set to 0, which means point-in-time restore is not possible. Once you are on a Neon plan (free or paid), the default setting is 1 day, and you can configure longer periods on Neon's paid plans. **Please note that if you're on a Vercel Pro Plan, you'll need to migrate to a Neon plan for the point-in-time restore feature**.
+- **Point-in-time restore**. In Vercel Postgres, Neon's history retention is set to 0, which means point-in-time restore is not possible. Once you are on a Neon plan (free or paid), the default setting is 1 day, and you can configure longer periods on Neon's paid plans. **Please note that if you are on a Vercel Postgres Pro Plan, you'll need to sign up for a Neon plan for the point-in-time restore feature**.
 
 ### What Postgres versions are supported?
 
