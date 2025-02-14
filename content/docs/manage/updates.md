@@ -10,21 +10,21 @@ updatedOn: '2025-02-13T23:17:07.658Z'
 Free Plan accounts can expect to see update notices in early February, at least 24 hours before any planned update. Update notices for Neon's Launch and Scale plans will start rolling out in the second week of February, with at least 7 days' notice before a planned update. Business and Enterprise plan accounts will see update notices toward the end of February. For the latest information about updates, follow our announcements in the [Neon Changelog](https://neon.tech/docs/changelog).
 </Admonition>
 
-To keep your Neon computes and Postgres instances up to date with the latest patches and features, Neon applies updates to your project's computes. We notify you of updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can select an update window — a specific day and hour for updates.
+To keep your Neon [computes](/docs/reference/glossary#compute) and Postgres instances up to date with the latest patches and features, Neon applies updates to your project's computes. We notify you of updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can select an update window — a specific day and hour for updates.
 
-Neon must briefly restart a compute to apply an update. The entire process takes just a few seconds, minimizing any potential disruption.
+Neon briefly restarts a compute to apply an update. The entire process takes just a few seconds, minimizing any potential disruption.
 
 ## What updates are included?
 
 Updates may include some or all of the following:
 
 - Postgres minor version upgrades, typically released quarterly
-- Postgres security patches and fixes
+- Security patches and fixes
 - Neon features and enhancements
 
 ## How often are updates applied?
 
-Updates are typically applied weekly but may occur more or less frequently as needed.
+Updates are typically released weekly but may occur more or less frequently, as needed.
 
 Neon applies updates to computes based on the following rules:
 
@@ -35,8 +35,8 @@ Neon applies updates to computes based on the following rules:
 
 If a compute is excluded from an update, Neon will apply the missed update with the next update, assuming the compute meets the update criteria mentioned above.
 
-<Admonition type="important">
-Please be aware that Neon occasionally applies updates outside of scheduled update windows to address important security issues or perform essential  platform maintenance.
+<Admonition type="important" title="updates outside of scheduled update windows">
+Please be aware that Neon may occasionally restart computes outside scheduled update windows to address critical security issues or perform essential platform maintenance.
 </Admonition>
 
 ## Updates on the Free Plan
@@ -108,7 +108,7 @@ curl --request PATCH \
 
 ## Check for updates using the Neon API
 
-You can retrieve your update window and check for planned updates using the [Get project details](https://api-docs.neon.tech/reference/getproject) endpoint.
+You can retrieve your update window and check for planned updates using the [Retrieve project details](https://api-docs.neon.tech/reference/getproject) endpoint.
 
 To get your project details, send the following request, replacing `<your_project_id>` with your Neon project ID, and `$NEON_API_KEY` with your [Neon API key](/docs/manage/api-keys):
 
