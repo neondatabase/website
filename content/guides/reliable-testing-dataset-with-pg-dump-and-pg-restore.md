@@ -279,7 +279,7 @@ The flags used in this step are explained below:
 
 ## Restore data
 
-In this step, I use psql to restore the data to the target database from the `.csv` files generated in the **Dump data** step.
+In this step, I use `psql` to restore the data to the target database from the `.csv` files generated in the **Dump data** step.
 
 ## Finished
 
