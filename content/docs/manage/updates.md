@@ -108,7 +108,7 @@ curl --request PATCH \
 
 ## Check for updates using the Neon API
 
-You can retrieve your update window and check for planned updates using the [Get project details](https://api-docs.neon.tech/reference/getproject) endpoint.
+You can retrieve your update window and check for planned updates using the [Retrieve project details](https://api-docs.neon.tech/reference/getproject) endpoint.
 
 To get your project details, send the following request, replacing `<your_project_id>` with your Neon project ID, and `$NEON_API_KEY` with your [Neon API key](/docs/manage/api-keys):
 
