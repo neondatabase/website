@@ -8,8 +8,6 @@ enableTableOfContents: true
 updatedOn: '2025-02-11T11:32:44.542Z'
 ---
 
-<LRBeta/>
-
 This guide describes how to migrate your database from Azure Database for PostgreSQL to Neon, using logical replication.
 
 Logical replication for Postgres transfers data from a source Postgres database to another, as a stream of tuples (records) or SQL statements. This allows for minimal downtime during the migration process, since all the records don't need to be copied at once.

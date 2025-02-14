@@ -9,8 +9,6 @@ redirectFrom:
 updatedOn: '2025-02-11T15:10:57.061Z'
 ---
 
-<LRBeta/>
-
 Neon's logical replication feature, available to all Neon users, allows you to replicate data to and from your Neon Postgres database:
 
 - Stream data from your Neon database to external destinations, enabling Change Data Capture (CDC) and real-time analytics. External sources might include data warehouses, analytical database services, real-time stream processing systems, messaging and event-streaming platforms, and external Postgres databases, among others. See [Replicate data from Neon](#replicate-data-from-neon).
