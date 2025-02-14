@@ -148,7 +148,7 @@ CREATE TABLE transactions (
 
 The **transactions** table in my example relies on data from both the **users** and **products** tables. When performing a partial data dump, it's important that transaction rows can reference either a `user_id` from the **users** table or a `product_id` from the **products** table.
 
-With this in mind, I'll start with the **transactions** table when deciding which data to include in the partial dump.
+With this in mind, I'll start with the `transactions` table when deciding which data to include in the partial dump.
 
 ## Dump and restore partial data
 
