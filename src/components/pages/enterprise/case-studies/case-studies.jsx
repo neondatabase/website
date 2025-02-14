@@ -1,10 +1,12 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 import Container from 'components/shared/container/container';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
+import ArrowRightIcon from 'icons/arrow-right.inline.svg';
 
 import lines from './images/lines.svg';
 
@@ -13,24 +15,22 @@ const CaseStudies = ({ items }) => (
     <Container className="flex items-end justify-between gap-x-4" size="960">
       <div>
         <h2 className="font-title text-[52px] font-medium tracking-tighter">Neon’s impact</h2>
-        <p className="text-lg leading-snug tracking-tight text-gray-new-80">
+        <p className="-mt-1 text-lg leading-snug tracking-tight text-gray-new-80">
           Discover how our solutions have made a real-world impact.
         </p>
       </div>
       <Link
-        className="mb-2 text-lg font-medium leading-none tracking-tight sm:text-base"
+        className="mb-2 text-lg font-medium leading-none tracking-tight"
         theme="white"
         size="xs"
-        to={LINKS.contactSales}
-        rel="noopener noreferrer"
-        target="_blank"
+        to={LINKS.caseStudies}
         withArrow
       >
         Explore all case studies
       </Link>
     </Container>
-    <Container className="relative mt-10" size="1216">
-      <ul className="grid grid-cols-3 px-6">
+    <Container className="relative mt-11" size="1216">
+      <ul className="grid w-[1216px] grid-cols-3 px-6">
         {items.map(({ title, description, logo, link }, index) => (
           <li key={index}>
             <Link className="group relative block h-[230px] w-full rounded-xl p-10" to={link}>
@@ -42,14 +42,23 @@ const CaseStudies = ({ items }) => (
                     dangerouslySetInnerHTML={{ __html: description }}
                   />
                 </p>
-                <Image
-                  className="relative h-6 w-fit xl:h-5 sm:h-[18px]"
-                  src={logo.src}
-                  alt={logo.alt}
-                  width={logo.width}
-                  height={logo.height}
-                  priority
-                />
+                <div className="relative flex items-center gap-x-2.5">
+                  <Image
+                    className="relative h-6 w-fit"
+                    src={logo.src}
+                    alt={logo.alt}
+                    width={logo.width}
+                    height={logo.height}
+                    priority
+                  />
+                  <ArrowRightIcon
+                    className={clsx(
+                      'pointer-events-none -mb-px shrink-0',
+                      'opacity-0 transition-opacity duration-300 group-hover:opacity-100'
+                    )}
+                    aria-hidden
+                  />
+                </div>
               </div>
               <div
                 className={clsx(
@@ -63,7 +72,7 @@ const CaseStudies = ({ items }) => (
         ))}
       </ul>
       <Image
-        className="pointer-events-none absolute left-1/2 top-2 -z-10 -translate-x-1/2"
+        className="pointer-events-none absolute left-0 top-2 -z-10 w-[1216px] max-w-none"
         src={lines}
         width={1216}
         height={444}

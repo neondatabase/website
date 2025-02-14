@@ -29,6 +29,9 @@ import instantDb from 'images/pages/enterprise/bento/instant-db.jpg';
 import integration from 'images/pages/enterprise/bento/integration.jpg';
 import provenSuccess from 'images/pages/enterprise/bento/proven-success.jpg';
 import serverlessScalability from 'images/pages/enterprise/bento/serverless-scalability.jpg';
+import alexCo from 'images/pages/enterprise/testimonials/alex-co.jpg';
+import codyJenkins from 'images/pages/enterprise/testimonials/cody-jenkins.jpg';
+import robertChandler from 'images/pages/enterprise/testimonials/robert-chandler.jpg';
 import getMetadata from 'utils/get-metadata';
 
 export const metadata = getMetadata({
@@ -59,7 +62,7 @@ const splitItems = [
     description:
       'Neon offers serverless Postgres, scaling CPU, memory, and connections instantly to match demand for optimal cost-performance.',
     linkText: 'Learn more',
-    linkUrl: '/',
+    linkUrl: '/docs/introduction/autoscaling',
   },
   {
     icon: multiIcon,
@@ -67,7 +70,7 @@ const splitItems = [
     description:
       'Neon simplifies multi-tenant management by isolating tenants into regional projects, ensuring sovereignty, compliance, and no noise issues.',
     linkText: 'Learn more',
-    linkUrl: '/',
+    linkUrl: '/use-cases/database-per-tenant',
   },
   {
     icon: connectionIcon,
@@ -75,7 +78,7 @@ const splitItems = [
     description:
       'Neon supports 10,000+ connections with no timeouts, ensuring consistent performance for real-time apps, APIs, and high-traffic systems.',
     linkText: 'Learn more',
-    linkUrl: '/',
+    linkUrl: '/blog/survive-thousands-connections',
   },
   {
     icon: recoveryIcon,
@@ -83,7 +86,7 @@ const splitItems = [
     description:
       'Neon simplifies disaster recovery with branching, letting you restore your database to any point instantly — no more lengthy backups.',
     linkText: 'Learn more',
-    linkUrl: '/',
+    linkUrl: 'https://www.youtube.com/watch?v=ZnxLCOkb_R0',
   },
   {
     icon: durabilityIcon,
@@ -91,7 +94,7 @@ const splitItems = [
     description:
       'Neon ensures high availability with transactions replicated across zones and data stored in object storage with 99.99999999% durability.',
     linkText: 'Learn more',
-    linkUrl: '/',
+    linkUrl: '/blog/our-approach-to-high-availability',
   },
   {
     icon: expertiseIcon,
@@ -99,7 +102,7 @@ const splitItems = [
     description:
       'Built by Postgres experts with decades of experience, Neon offers help with performance tuning, complex migrations, and more.',
     linkText: 'Learn more',
-    linkUrl: '/',
+    linkUrl: '/blog/top-3-features-in-postgres-17#contributions-by-neon-engineers-in-postgres-17',
   },
 ];
 
@@ -135,7 +138,7 @@ const caseStudies = [
       width: 91,
       height: 24,
     },
-    link: `${LINKS.blog}/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases`,
+    link: `${LINKS.blog}/from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle`,
   },
   {
     title: '95% fewer migration issues',
@@ -168,7 +171,7 @@ const caseStudies = [
       width: 104,
       height: 24,
     },
-    link: `${LINKS.blog}/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases`,
+    link: `${LINKS.blog}/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora`,
   },
 ];
 
@@ -182,24 +185,22 @@ const howNeonHelpsTabs = [
   },
   {
     title: 'Realistic test data',
-    challenge:
-      'Maintaining separate instances for development, testing, staging, and production is complex and resource-intensive.',
+    challenge: 'Testing with incomplete or artificial data fails to uncover edge cases.',
     description:
-      'You can spin up new ephemeral environments instantly via branching within your production project, with data and schema reflecting the latest state.',
+      'You can directly deploy a branch with a transformed sample of production data, preserving production patterns and compliance without manual work.',
+  },
+  {
+    title: 'Data consistency',
+    challenge: 'Environments quickly get out of sync, making it harder to reproduce issues.',
+    description:
+      'You can update all environments in a single click, so developers can reproduce production issues accurately in a controlled environment.',
   },
   {
     title: 'Simplified maintenance',
     challenge:
-      'Maintaining separate instances for development, testing, staging, and production is complex and resource-intensive.',
+      'Managing environments slows down development, introduces errors, and creates deployment bottlenecks.',
     description:
-      'You can spin up new ephemeral environments instantly via branching within your production project, with data and schema reflecting the latest state.',
-  },
-  {
-    title: 'Data consistency',
-    challenge:
-      'Maintaining separate instances for development, testing, staging, and production is complex and resource-intensive.',
-    description:
-      'You can spin up new ephemeral environments instantly via branching within your production project, with data and schema reflecting the latest state.',
+      'Ephemeral environments are created and discarded automatically via CI/CD and APIs, accelerating releases while boosting engineering productivity.',
   },
 ];
 
@@ -212,9 +213,8 @@ const bentoCards = [
       src: instantDb,
       width: 480,
       height: 384,
-      // className: 'bottom-0 left-0 sm:-bottom-5 sm:-left-5 sm:w-[540px] sm:max-w-none',
     },
-    className: 'col-span-3', // md:col-span-2 md:order-1 md:aspect-[1.882]
+    className: 'col-span-3',
   },
   {
     title: 'Proven success.',
@@ -223,9 +223,8 @@ const bentoCards = [
       src: provenSuccess,
       width: 316,
       height: 384,
-      // className: 'left-0 bottom-0 sm:inset-x-0 sm:mx-auto sm:bottom-2.5 sm:w-[262px]',
     },
-    className: 'col-span-2', // md:col-span-1 md:order-2 md:aspect-[0.906]
+    className: 'col-span-2',
   },
   {
     title: 'Cost efficiency.',
@@ -234,9 +233,8 @@ const bentoCards = [
       src: costEfficiency,
       width: 316,
       height: 384,
-      // className: 'left-0 bottom-0 sm:inset-x-0 sm:mx-auto sm:bottom-2.5 sm:w-[262px]',
     },
-    className: 'col-span-2', // md:col-span-1 md:order-3 md:aspect-[0.906]
+    className: 'col-span-2',
   },
   {
     title: 'Powerful API.',
@@ -245,10 +243,8 @@ const bentoCards = [
       src: api,
       width: 316,
       height: 384,
-      // className:
-      //   'bottom-[55px] px-[34px] left-0 lg:px-5 lg:left-1.5 lg:bottom-[42px] md:px-9 md:-left-0.5 sm:left-0 sm:px-11 sm:bottom-8',
     },
-    className: 'col-span-2', // md:col-span-1 md:order-5 md:aspect-[0.906]
+    className: 'col-span-2',
   },
   {
     title: 'Seamless integration.',
@@ -257,9 +253,8 @@ const bentoCards = [
       src: integration,
       width: 316,
       height: 384,
-      // className: 'bottom-0 left-0 md:-bottom-8',
     },
-    className: 'col-span-2', // md:col-span-1 md:order-6 md:aspect-[0.906]
+    className: 'col-span-2',
   },
   {
     title: 'Serverless scalability.',
@@ -269,9 +264,8 @@ const bentoCards = [
       src: serverlessScalability,
       width: 480,
       height: 384,
-      // className: 'bottom-0 left-0 sm:-bottom-5 sm:-left-5 sm:w-[540px] sm:max-w-none',
     },
-    className: 'col-span-3', // md:col-span-2 md:order-4 md:aspect-[1.882]
+    className: 'col-span-3',
   },
 ];
 
@@ -283,36 +277,48 @@ const faqItems = [
   },
   {
     question: 'Is Neon compliant?',
-    answer: `Neon serves a wide range of companies, from startups to large enterprises, across many industries. Over 4,000 new databases are created daily on Neon, supporting everything from startups building the next wave of AI tools to platforms like Vercel, Replit, and Retool. Visit our <a href="/case-studies">case studies page</a> to explore customer stories.`,
+    answer: `Yes. Neon adheres to SOC 2, ISO 27001, ISO 27701 standards and complies with GDPR and CCPA regulations. HIPAA compliance will come very soon. <a href="/docs/security/compliance">Read more.</a>`,
   },
   {
     question: 'How secure is Neon’s platform?',
-    answer: `Neon serves a wide range of companies, from startups to large enterprises, across many industries. Over 4,000 new databases are created daily on Neon, supporting everything from startups building the next wave of AI tools to platforms like Vercel, Replit, and Retool. Visit our <a href="/case-studies">case studies page</a> to explore customer stories.`,
+    answer: `Neon offers enterprise-grade security with SSL/TLS encryption, IP allowlisting, and AES-256 encryption for data at rest. Protected branches add additional layers of security. <a href="/docs/security/security-overview">Read more.</a>`,
   },
   {
     question: 'What level of uptime can I expect with Neon?',
-    answer: `Neon serves a wide range of companies, from startups to large enterprises, across many industries. Over 4,000 new databases are created daily on Neon, supporting everything from startups building the next wave of AI tools to platforms like Vercel, Replit, and Retool. Visit our <a href="/case-studies">case studies page</a> to explore customer stories.`,
+    answer: `Neon offers a 99.95% uptime SLA for enterprise customers, ensuring consistent availability and performance for mission-critical applications. <a href="/neon-business-sla">Read more.</a>`,
   },
   {
     question: 'What kind of technical support does Neon provide?',
-    answer: `Neon serves a wide range of companies, from startups to large enterprises, across many industries. Over 4,000 new databases are created daily on Neon, supporting everything from startups building the next wave of AI tools to platforms like Vercel, Replit, and Retool. Visit our <a href="/case-studies">case studies page</a> to explore customer stories.`,
+    answer: `Enterprise customers benefit from 24/7 priority support, giving you round-the-clock access to database experts for any issues or guidance needed. <a href="/docs/introduction/support">Read more.</a>`,
   },
   {
     question: 'In which cloud environments is Neon available?',
-    answer: `Neon serves a wide range of companies, from startups to large enterprises, across many industries. Over 4,000 new databases are created daily on Neon, supporting everything from startups building the next wave of AI tools to platforms like Vercel, Replit, and Retool. Visit our <a href="/case-studies">case studies page</a> to explore customer stories.`,
+    answer: `Neon is available on both AWS and Azure cloud platforms. If you’re interested in Google Cloud Provider, <a href="/docs/introduction/regions#request-a-region">tell us here.</a>`,
+  },
+  {
+    question: 'Does Neon offer annual contracts?',
+    answer: `Yes, we provide annual contracts for Enterprise clients accounting for higher resource limits and dedicated requirements. If you’re interested, <a href="/contact-sales">contact us.</a>`,
+  },
+  {
+    question: 'Can Neon help with migrations?',
+    answer: `Absolutely. Our expert team assists Enterprise clients throughout the migration process. <a href="/migration-assistance">Tell us here</a> if you’re considering migrating to Neon.`,
+  },
+  {
+    question: 'What can I expect during the sales process?',
+    answer: `Our sales process is designed to be smooth and flexible: <ol><li><b>Reach Out:</b> Fill out our contact form.</li><li><b>Information Gathering:</b> We’ll email you to learn more about your workload and requirements.</li><li><b>Call with Solutions Team:</b> Discuss timelines, configurations, and request demos or follow-ups.</li><li><b>Pricing Proposal:</b> Based on your inputs, we’ll provide a pricing proposal, often with a proof-of-concept migration plan.</li><li><b>Additional Details (if needed):</b> For complex setups, we may request more information, like itemized bills or specifics about your current environment.</li><li><b>Stakeholder Support:</b> We assist with security reviews, documentation, and answering any stakeholder questions.</li></ol> We’re always happy to adjust the process to fit your unique needs. Click here to read a detailed description of our process.`,
   },
 ];
 
 const EnterprisePage = () => (
   <Layout headerClassName="!absolute !bg-transparent">
     <Hero />
-    <Logos className="mt-[105px]" logos={logos} />
+    <Logos className="mt-[102px]" logos={logos} />
     <TestimonialNew
-      className="mt-[122px]"
+      className="mt-[118px]"
       quote="Neon worked out of the box, handling hundreds of Lambdas without any of the connection issues we saw in Aurora v2. On top of that, it costs us 1/6 of what we were paying with AWS."
       name="Cody Jenkins"
       position="Head of Engineering at Invenco"
-      logo={{ src: invenco, alt: 'Invenco', width: 98, height: 24 }}
+      avatar={{ src: codyJenkins, width: 30, height: 30 }}
     />
     <SplitViewGridNew
       className="mt-[200px]"
@@ -323,19 +329,19 @@ const EnterprisePage = () => (
     <CaseStudies items={caseStudies} />
     <HowNeonHelps tabs={howNeonHelpsTabs} />
     <TestimonialNew
-      className="mt-[144px]"
+      className="mt-[126px]"
       quote="Time to launch is crucial for us: when we tried Neon and saw that spinning up a new ephemeral environment takes seconds, we were blown away."
       name="Alex Co"
       position="Head of Platform Engineering at Mindvalley"
-      logo={{ src: mindvalley, alt: 'Mindvalley', width: 138, height: 28 }}
+      avatar={{ src: alexCo, width: 30, height: 30 }}
     />
     <Bento cards={bentoCards} />
     <TestimonialNew
-      className="mt-[146px]"
+      className="mt-[130px]"
       quote="With Neon’s preview branches, we can catch issues early and fix them before they hit production."
       name="Robert Chandler"
       position="CTO at Wordware.ai"
-      logo={{ src: wordware, alt: 'Wordware', width: 144, height: 28 }}
+      avatar={{ src: robertChandler, width: 30, height: 30 }}
     />
     <Faq items={faqItems} />
     <CTA

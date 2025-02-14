@@ -1,6 +1,5 @@
 'use client';
 
-
 import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import Image from 'next/image';
@@ -41,7 +40,7 @@ const Tabs = ({ tabs }) => {
           <li key={index}>
             <button
               className={clsx(
-                'border-l-[3px] py-2.5 pl-3 text-left text-xl font-medium leading-snug tracking-tight text-gray-new-90 transition-colors duration-200 ease-in-out focus-visible:rounded-md focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-0',
+                'border-l-[3px] py-2.5 pl-3.5 text-left text-xl font-medium leading-snug tracking-tight text-gray-new-90 transition-colors duration-200 ease-in-out focus-visible:rounded-md focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-0',
                 index === activeTab
                   ? 'cursor-default border-primary-1 font-semibold text-white'
                   : 'hover:text-gray-30 border-transparent font-medium'
@@ -54,9 +53,7 @@ const Tabs = ({ tabs }) => {
           </li>
         ))}
       </ul>
-
-      {/* TODO: replace border with gradient */}
-      <div className="relative min-h-[280px] w-full grow overflow-hidden rounded-[14px] border border-gray-new-10 bg-gray-new-10 bg-[radial-gradient(43.84%_41.89%_at_100%_0%,rgba(21,55,55,0.80)_0%,rgba(0,33,33,0.00)_100%),linear-gradient(180deg,rgba(1,119,119,0.00)_21.94%,rgba(1,119,119,0.08)_100%)] p-8 pb-3.5">
+      <div className="relative min-h-[280px] w-full grow overflow-hidden rounded-[14px] bg-[#0F1115] bg-[radial-gradient(37.46%_41.61%_at_100%_0%,#153737_0%,rgba(0,33,33,0)_100%),linear-gradient(180deg,rgba(1,119,119,0)_21.94%,rgba(1,119,119,0.1)_100%)] p-8 pb-3.5">
         <div className="flex items-center gap-x-2">
           <Image className="shrink-0" src={infoIcon} width={22} height={22} alt="" />
           <h3 className="text-xl font-semibold leading-none tracking-tighter text-white">
@@ -119,6 +116,7 @@ const Tabs = ({ tabs }) => {
         </LazyMotion>
         <span className="absolute -bottom-14 -left-32 h-[83px] w-[155px] rounded-[100%] bg-[rgba(85,255,255,0.60)] mix-blend-plus-lighter blur-2xl" />
         <span className="absolute -bottom-40 -left-20 h-[293px] w-[175px] -rotate-45 rounded-[100%] bg-[linear-gradient(180deg,rgba(0,229,191,0.80)_0%,rgba(0,127,85,0.00)_100%)] opacity-40 blur-2xl" />
+        <span className="absolute inset-0 rounded-[inherit] border border-white mix-blend-soft-light" />
       </div>
     </div>
   );

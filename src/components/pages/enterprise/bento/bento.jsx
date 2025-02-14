@@ -6,33 +6,31 @@ import React from 'react';
 import Container from 'components/shared/container';
 
 const Bento = ({ cards }) => (
-  <section className="bento safe-paddings mt-[199px]">
+  <section className="bento safe-paddings mt-[202px]">
     <Container className="" size="1152">
       <h2 className="mx-auto text-center font-title text-[48px] font-medium leading-none tracking-extra-tight text-white">
         Add Postgres to your platform or AI Agent
       </h2>
-      <ul className="mt-10 grid grid-cols-7 grid-rows-[384px_384px] gap-x-5 gap-y-2.5">
-        {/*   grid-cols-[[col1-start]_480px_[col2-start]_316px_[col3-start]_316px_[col3-end]]   */}
+      <ul className="mt-10 grid grid-cols-7 grid-rows-[384px_384px] gap-x-5 gap-y-5">
         {cards.map(({ title, description, image, className }, index) => (
           <li
             className={clsx(
               className,
-              'overflow-hidden rounded-[14px] bg-[rgba(48,50,54,0.31)] p-px'
+              'relative flex h-full flex-col overflow-hidden rounded-[14px] border border-[rgba(48,50,54,0.31)] bg-gray-new-10 p-6'
             )}
             key={index}
           >
-            <div className="relative flex h-full flex-col overflow-hidden rounded-[15px] bg-gray-new-10 p-6">
-              <Image
-                className={clsx('pointer-events-none absolute inset-0 w-full')} // image.className
-                src={image.src}
-                width={image.width}
-                height={image.height}
-                alt={title}
-              />
-              <p className="relative mt-auto text-lg font-light leading-snug text-gray-new-60">
-                <span className="font-medium text-white">{title}</span> {description}
-              </p>
-            </div>
+            <p className="relative z-20 mt-auto text-lg font-light leading-snug tracking-tight text-gray-new-60">
+              <span className="font-medium text-white">{title}</span> {description}
+            </p>
+            <Image
+              className="absolute bottom-0 left-0 right-0 top-0 z-10 h-full w-auto min-w-full"
+              src={image.src}
+              width={image.width}
+              height={image.height}
+              quality={99}
+              alt=""
+            />
           </li>
         ))}
       </ul>
@@ -50,7 +48,6 @@ Bento.propTypes = {
         src: PropTypes.string.isRequired,
         width: PropTypes.number.isRequired,
         height: PropTypes.number.isRequired,
-        className: PropTypes.string,
       }).isRequired,
     })
   ).isRequired,

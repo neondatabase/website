@@ -46,6 +46,21 @@
     }
   }
 
+  .with-list-primary {
+    ul,
+    ol {
+      @apply my-2 ml-5 pl-0;
+
+      li {
+        @apply relative my-2 list-none pl-4 before:absolute before:left-0 before:top-2.5 before:h-1.5 before:w-1.5 before:rounded-full before:bg-green-45;
+
+        p {
+          @apply mt-0;
+        }
+      }
+    }
+  }
+
   .flat-none br {
     content: none;
   }

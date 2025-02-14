@@ -15,17 +15,9 @@ const SplitViewGridNew = ({ className = null, title, items }) => (
         <ul className="grid grid-cols-2 gap-x-[26px] gap-y-11">
           {items.map(({ icon, title, description, linkText, linkUrl }, index) => (
             <li className="flex flex-col" key={index}>
-              <div className="flex gap-x-2">
-                <Image
-                  className="mt-0.5 shrink-0"
-                  src={icon}
-                  alt=""
-                  loading="lazy"
-                  width={22}
-                  height={22}
-                  aria-hidden
-                />
-                <h3 className="font-title text-[22px] font-medium leading-tight -tracking-[0.03em] xl:text-xl">
+              <div className="flex items-center gap-x-2">
+                <Image className="shrink-0" src={icon} width={22} height={22} alt="" />
+                <h3 className="font-title text-[22px] font-medium leading-tight -tracking-[0.03em]">
                   {title}
                 </h3>
               </div>
