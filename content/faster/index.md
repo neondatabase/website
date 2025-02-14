@@ -1,23 +1,23 @@
 ---
 title: Faster is what we help you ship
-subtitle: A page dedicated to teams shipping faster experiences faster on Neon.
+subtitle: This page is dedicated to teams shipping faster experiences faster on Neon.
 enableTableOfContents: true
 createdAt: '2025-02-12T00:00:00.000Z'
 updatedOn: '2025-02-12T00:00:00.000Z'
 ---
 
-When we say "Ship faster with Postgres" -- faster is a noun and a verb. Our mission is not just about helping you build and ship softare faster. It's about helping you deliver that same feeling of faster to your customers.
+When we say "Ship faster with Postgres," faster works as a noun and a verb. Our mission is not just about helping you build and ship softare faster. It's about helping you deliver that same feeling of faster to your customers.
 
 ## Open Source Faster
 
-Peer behind the curtain and learn how faster gets shipped with these open source examples.
+See for yourself how faster gets shipped with these open source examples.
 
 - [NextFaster](https://next-faster.vercel.app/) - 400ms initial page load and 10ms nth pageloads on this full-stack Next.JS demo backed by Vercel and Neon. [Source](https://github.com/ethanniser/NextFaster) created by [@ethanniser](https://x.com/ethanniser), [RhysSullivan](https://x.com/RhysSullivan)
-- [AI Chatbot](https://chat.vercel.ai) - uses Vercel's AI SDK to provide a fast SOTA chatbot UI template on Vercel and Neon. [Source](https://github.com/vercel/ai-chatbot) created by [Vercel Team](https://vercel.com)
+- [AI Chatbot](https://chat.vercel.ai) - uses Vercel's AI SDK to provide a fast SOTA chatbot UI template on Vercel and Neon. [Source](https://github.com/vercel/ai-chatbot) created by Vercel Team
 - [Book inventory](https://next-books-search.vercel.app/) - full-stack Next.JS template to search/filter/paginate 600,000 books on Vercel and Neon. [Source](https://github.com/vercel-labs/book-inventory) - credit to [@leerob](https://x.com/leeerob)
 - [Vector DB per Tenant](https://db-per-tenant.up.railway.app/) - Fast, secure chat-with-pdf app showing how to provision a dedicated vector database instance for each user on [Railway](https://railway.com) and Neon. [Source](https://github.com/neondatabase/db-per-tenant) created by [Mahmoud](https://x.com/thisismahmoud_)
 
-If you have an open-source demo that illustrates faster capabulities of Neon, [let us know here](#) we'd love to feature it on this page.
+If you have an open-source demo that illustrates the capabilities of Neon, [let us know here](#) we'd love to feature it.
 
 ## Faster in Production
 
@@ -59,17 +59,22 @@ We take pride in [owning our tenth of a second](https://x.com/tobi/status/178713
 
 You can read about the [architectural decisions for Neon](https://neon.tech/blog/architecture-decisions-in-neon) and even see [all of our engineering RFCs](https://github.com/neondatabase/neon/tree/main/docs/rfcs), too. If you're interested [we're hiring](https://neon.tech/careers).
 
-## Faster Open Source Benchmarks
+
+## Try it yourself
+
+Don't take our word for it. The best way to understand the performance of a service is to try it yourself. We've made Neon as easy as possible to try with a generous free plan with no credit card required.
+
+<CTA title="Try Postgres on Neon" description="Neon is Serverless Postgres built for the cloud. Sign up for a free account to get started." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
+
+## Open Source Benchmarks
 
 Test faster yourself with these open-source third-party benchmarks.
 
-- https://db-latency.vercel.app/ - Open source (https://github.com/vercel-labs/function-database-latency) and written by Vercel
+- **[Vercel-to-DB Latency Benchmarks](https://db-latency.vercel.app/)** - Open source latency benchmarks written by Vercel
+- **[Postgres Library Benchmarks for Node.js](https://github.com/porsager/postgres-benchmarks#results)** - _(not Neon-specific)_ compare the different Postgres drivers.
 
 If you have an open-source benchmark that includes Neon [let us know here](#) we'd love to feature it on this page.
 
-## Try it yourself, faster
-
-It takes only ten seconds to
 
 ## How to ship faster
 
@@ -121,17 +126,18 @@ Client-database proximity plays a major role in real-world database latency. Her
    2. This doesn’t mean your app has to be running on AWS directly, for example Vercel runs infra on AWS so picking the same Vercel and Neon region has the same effect.
 4. **App and database in different region \-** Now we get into that compounding effect
 
-### Minimizing time spent answering the query
+### Minimizing database time spent answering the query
 
 As your business (and database) grows, connection and network transit latency remain static and database processing time becomes the most important factor to optimize. Here are some pointers:
 
-- **Use connection pooling and autoscaling** – Use the built-in connection pooler to handle many client connections efficiently, and enable Neon’s autoscaling so the database can allocate sufficient RAM/CPU on demand.
-- **Profile slow queries** – Identify which SQL statements are slow or resource-intensive by starting with the [Query History View](https://neon.tech/docs/introduction/monitor-query-history) in Neon.
+1. **Use connection pooling and autoscaling** – Use the built-in connection pooler to handle many client connections efficiently, and enable Neon’s autoscaling so the database can allocate sufficient RAM/CPU on demand.
+2. **Profile slow queries** – Identify which SQL statements are slow or resource-intensive by starting with the [Query History View](https://neon.tech/docs/introduction/monitor-query-history) in Neon.
   ![Neon query history tab](/docs/introduction/query_history.png)
-  You can dig deeper with `pg_stat_statements`](https://neon.tech/docs/extensions/pg_stat_statements)
-- **Add indexes on high-impact columns** – Create indexes on columns that are frequently used in `WHERE` filters, `JOIN` conditions, or `ORDER BY` clauses to avoid full table scans. An index lets Postgres perform an index scan instead of a slower sequential scan, dramatically reducing query execution time.
-- **Reduce table and index bloat** – Reclaim wasted space and improve performance by eliminating bloat (accumulated dead rows) in tables and indexes. Schedule regular maintenance like `VACUUM` to remove dead tuples and use `REINDEX` on bloated indexes. You can also fine-tune autovacuum settings to keep bloat in check over time.
-- **Leverage caching for reads** – Ensure frequently accessed data is served from memory instead of disk. Neon’s architecture extends Postgres’s shared memory buffers with a local file system cache, so aim for a high cache hit ratio. After installing the Neon extension, you can query the `neon_stat_file_cache` view to monitor how often data is read from cache versus storage and adjust your workload or memory allocation if needed.
+  _The Query History tab shows total calls, avg time, and total time of each query._
+  You can dig deeper with [`pg_stat_statements`](https://neon.tech/docs/extensions/pg_stat_statements)
+3. **Add indexes on high-impact columns** – Create indexes on columns that are frequently used in `WHERE` filters, `JOIN` conditions, or `ORDER BY` clauses to avoid full table scans. An index lets Postgres perform an index scan instead of a slower sequential scan, dramatically reducing query execution time.
+4. **Reduce table and index bloat** – Reclaim wasted space and improve performance by eliminating bloat (accumulated dead rows) in tables and indexes. Schedule regular maintenance like `VACUUM` to remove dead tuples and use `REINDEX` on bloated indexes. You can also fine-tune autovacuum settings to keep bloat in check over time.
+5. **Leverage caching for reads** – Ensure frequently accessed data is served from memory instead of disk. Neon’s architecture extends Postgres’s shared memory buffers with a local file system cache, so aim for a high cache hit ratio. After installing the Neon extension, you can query the `neon_stat_file_cache` view to monitor how often data is read from cache versus storage and adjust your workload or memory allocation if needed.
 
 **Further reading** – See [PostgreSQL query performance guide](https://neon.tech/docs/postgresql/query-performance) for in-depth explanations and tips.
 
@@ -146,14 +152,14 @@ To us, serverless means:
 - Instant Provisioning
 - No server management
 - Autoscaling
-- Usage-based pricing - _Your costs are directly tied to the resources your workload consumes—both compute and storage._
+- Usage-based pricing
 - Built-in availability and fault tolerance
 
-<span className="text-code-red-1">It does NOT mean:</span>
+<span style={{'color':'red'}}>It does NOT mean:</span>
 
-<ul className="text-code-red-1">
+<ul style={{'color':'red'}}>
 <li>Pay-per-query</li>
-<li>New computes are created for every connection/query</li>
+<li>New computes (and cold starts) for every connection/query</li>
 </ul>
 
 For more, read the full [Serverless Docs](https://neon.tech/docs/introduction/serverless)
