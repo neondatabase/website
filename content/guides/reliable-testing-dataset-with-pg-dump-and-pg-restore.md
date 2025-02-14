@@ -207,7 +207,7 @@ The above code snippet might look a bit complicated at first, but it’s actuall
 
 ### Dump schema
 
-In this step, I use pg_dump to export the entire schema from the production database and save it to the GitHub workspace as a file named `all-schema.bak`. This file is stored in memory so it can be accessed later by the **Restore schema** step towards the end of the job.
+In this step, I use `pg_dump` to export the entire schema from the production database and save it to the GitHub workspace as a file named `all-schema.bak`. This file is stored in memory so it can be accessed later by the **Restore schema** step towards the end of the job.
 
 The flags used in this step are explained below:
 
