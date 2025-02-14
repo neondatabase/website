@@ -133,6 +133,7 @@ async function createTodo(userId: string, task: string) {
 Neon Auth offers two ways to connect your authentication provider:
 
 1. **Quick Start (Recommended)**
+
    - Automatically provision a pre-configured Stack Auth project, managed by Neon
    - Includes recommended security settings
    - Best for new projects or first-time Stack Auth users
