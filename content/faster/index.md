@@ -78,7 +78,7 @@ If you have an open-source benchmark that includes Neon [let us know here](#) we
 
 Shipping faster UX is a full-stack job. For databases, your real-world speed depends primarily on three things:
 
-1. **Connection Approach:** Long-lived connections or connection for every query?
+1. **Connection Approach:** Long-lived connections or a connection for every query?
 2. **Client-Database Proximity:** How close is your application (the client) to the database?
 3. **Database Processing Time:** How much time is the database spending answering each query?
 
