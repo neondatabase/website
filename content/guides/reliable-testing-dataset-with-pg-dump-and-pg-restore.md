@@ -253,7 +253,7 @@ The results are saved to the GitHub workspace memory as a file called `users-sub
 
 ### Drop tables and schema
 
-In this step, I use psql to drop the schema and create a fresh one. Since this Action runs on a schedule, this cleanup ensures the target database is ready for new schema and data, avoiding any errors from schema changes since the last run.
+In this step, I use `psql` to drop the schema and create a fresh one. Since this Action runs on a schedule, this cleanup ensures the target database is ready for new schema and data, avoiding any errors from schema changes since the last run.
 
 The queries used in this step are explained below:
 
