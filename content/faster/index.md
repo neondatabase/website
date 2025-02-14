@@ -86,7 +86,7 @@ You can visualize the way each factor contributes like this:
 
 <LatencyCalculator />
 
-**What about cold starts?** Databases on Neon can scale to zero when there are no active queries for a certain amount of time. We kept this topic separate below in [Cold Starts](#cold-starts) because _across the more than one million active databases on our platform, they occur very seldomly — there are fewer than 5 cold starts per second._ Cold starts don't factor in to your real-world experience often enough to become an important consideration.
+**What about cold starts?** Databases on Neon can scale to zero when there are no active queries for a certain amount of time. We kept this topic separate below in [Cold Starts](#cold-starts) because _across the more than one million active databases on our platform, they occur very seldomly — there are fewer than 5 cold starts per second._ Cold starts don't factor in to your real-world experience often enough to become an important consideration. And for the use cases where no cold starts are required, you can disable scale to zero with the click of a button starting with our [Launch plan](https://neon.tech/pricing).
 
 ### Establishing a connection
 
