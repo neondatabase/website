@@ -13,7 +13,7 @@ There are several ways to do this, but here's a straightforward approach using `
 
 ## Running partial data dumps inside GitHub Actions
 
-You can run pg_dump, pg_restore, and psql from the command line, but sometimes, an automated, reproducible approach is more convenient. To better control when data dumps occur, I use a [scheduled GitHub Action](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#schedule) to export data from my production database and restore it to a testing database. This method works across different Postgres database providers, but if you're looking for a cost-effective testing environment, consider trying Neon. Check out our [getting started guide](https://neon.tech/docs/get-started-with-neon/signing-up#sign-up) to see how easy it is to set up.
+You can run `pg_dump`, `pg_restore`, and `psql` from the command line, but sometimes, an automated, reproducible approach is more convenient. To better control when data dumps occur, I use a [scheduled GitHub Action](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#schedule) to export data from my production database and restore it to a testing database. This method works across different Postgres database providers, but if you're looking for a cost-effective testing environment, consider trying Neon. Check out our [getting started guide](https://neon.tech/docs/get-started-with-neon/signing-up#sign-up) to see how easy it is to set up.
 
 ## What is a scheduled GitHub Action?
 
