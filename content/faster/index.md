@@ -17,7 +17,7 @@ See for yourself how faster gets shipped with these open source examples.
 - [Book inventory](https://next-books-search.vercel.app/) - full-stack Next.JS template to search/filter/paginate 600,000 books on Vercel and Neon. [Source](https://github.com/vercel-labs/book-inventory) - credit to [@leerob](https://x.com/leeerob)
 - [Vector DB per Tenant](https://db-per-tenant.up.railway.app/) - Fast, secure chat-with-pdf app showing how to provision a dedicated vector database instance for each user on [Railway](https://railway.com) and Neon. [Source](https://github.com/neondatabase/db-per-tenant) created by [Mahmoud](https://x.com/thisismahmoud_)
 
-If you have an open-source demo that illustrates the capabilities of Neon, [let us know here](#) we'd love to feature it.
+If you have an open-source demo that illustrates the capabilities of Neon, [let us know in Discord](https://neon.tech/discord) we'd love to feature it.
 
 ## Faster in Production
 
@@ -49,7 +49,7 @@ Great software isn’t just functional—it’s fast. At Neon, it’s something 
 
 - **Faster Provisioning** - Get a ready-to-use Postgres database in less than a second. Try it right here. 👇
   <DeployPostgresButton />
-- **Faster Branching** - Our custom storage engine gives you data + schema clone of any size database in less than a second. [Try it in a web demo](https://neon-demos-branching.vercel.app/) [View Source](https://github.com/neondatabase/branching-demo)
+- **Faster Branching** - Our storage engine gives you data + schema clone of any size database in less than a second. [Try it in a web demo](https://neon-demos-branching.vercel.app/) [View Source](https://github.com/neondatabase/branching-demo)
 - **Faster recovery** - The same storage engine lets you restore a 1TB DB in seconds [Demo video](https://www.youtube.com/watch?v=ZnxLCOkb_R0)
 - **Faster autoscaling** - Our [Postgres autoscaling](/docs/guides/autoscaling-algorithm) algorithm that checks memory usage 10 times/second, VM metrics every 5 seconds to provision exactly the right compute to serve your workload. [How we do it](/blog/dynamically-estimating-and-scaling-postgres-working-set-size).
 - **Faster serverless connections** - We built an open-source HTTP proxy to reduce the number of roundtrips required to establish a database connection from 8 to 4. [Read how](/blog/quicker-serverless-postgres)
