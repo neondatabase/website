@@ -116,7 +116,7 @@ CREATE TABLE users (
 
 ### products
 
-This is the schema used to create the products table.
+This is the schema used to create the `products` table.
 
 ```sql
 CREATE TABLE products (
