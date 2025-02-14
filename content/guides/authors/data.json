@@ -54,5 +54,13 @@
       "title": "GitHub",
       "url": "https://github.com/jchadwick"
     }
+  },
+  "paul-scanlon": {
+    "name": "Paul Scanlon",
+    "position": "Technical Product Marketing Manager",
+    "link": {
+      "title": "GitHub",
+      "url": "https://github.com/PaulieScanlon"
+    }
   }
 }
