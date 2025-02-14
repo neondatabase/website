@@ -6,10 +6,8 @@ isDraft: false
 redirectFrom:
   - /docs/introduction/logical-replication
   - /docs/guides/logical-replication-clickhouse
-updatedOn: '2025-02-11T15:10:57.061Z'
+updatedOn: '2025-02-14T17:05:09.999Z'
 ---
-
-<LRBeta/>
 
 Neon's logical replication feature, available to all Neon users, allows you to replicate data to and from your Neon Postgres database:
 
