@@ -53,6 +53,13 @@ export default {
     pathname: LINKS.cli,
     imagePath: '/images/social-previews/cli.jpg',
   },
+  faster: {
+    title: 'Faster is what we help you ship - Neon',
+    description: 'A page dedicated to teams shipping faster experiences faster on Neon.',
+    imagePath: '/images/social-previews/faster.jpg',
+    pathname: LINKS.faster,
+    type: 'article',
+  },
   contactSales: {
     title: 'Contact Sales — Neon',
     description: 'Interested in learning more about our plans and pricing? Contact our sales team.',
