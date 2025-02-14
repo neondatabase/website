@@ -143,7 +143,7 @@ Neon Auth offers two ways to connect your authentication provider:
    - Configure authentication settings to match your needs
    - Provide your Stack Auth project details during setup
 
-Choose your setup option in the Neon Console under the **Auth** tab.
+Choose your setup option in the Neon Console under the **Auth** page.
 
 ## Best practices
 
