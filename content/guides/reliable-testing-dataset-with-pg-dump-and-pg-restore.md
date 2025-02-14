@@ -89,7 +89,7 @@ The job is named `dump-and-restore`, which will be displayed in the GitHub UI wh
 
 The first step in the job is to install Postgres. While there are various methods and alternative options available in the [GitHub Marketplace](https://github.com/marketplace?query=Postgres), I prefer to install directly from Apt (Advanced Packaging Tool) for added security, especially since you're providing direct access to your production database.
 
-The next step is to define a variable that is needed when using pg_dump, pg_restore, and psql. This variable is named `POSTGRES` and will be referenced later as `$POSTGRES/pg_dump`.
+The next step is to define a variable that is needed when using `pg_dump`, `pg_restore`, and `psql`. This variable is named `POSTGRES` and will be referenced later as `$POSTGRES/pg_dump`.
 
 Before I jump into the dump/restore parts, I'll quickly explain the schema I've used in this example. It’s important to note the foreign key relationships between the tables.
 
