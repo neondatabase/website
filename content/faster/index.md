@@ -171,6 +171,12 @@ This is useful for:
 
 But scale to zero is only useful if compute can start up quickly again when it's needed. That's why [cold start](#cold-starts) times are so important.
 
+### Cold Starts
+
+A cold start in Neon begins when a database project with a suspended compute endpoint receives a connection.
+Neon starts the database compute, processes the query, and serves the response.
+The compute stays active as long as there are active connections.
+
 #### Applications of scale to zero
 
 Look at the cold start times documented above and decide: _In what scenarios is the occasional 500ms of additional latency acceptable?_
@@ -183,10 +189,10 @@ Here are some example scenarios where scale to zero may be useful:
 - **Database-per-user Architectures** - Instead of having a single database for all users, if you have a separate database for each user, the activity level of any one database may be low enough that scale to zero results in significant cost reduction.
 - **Small Projects** - For small projects, configuring the production database to scale to zero can make it more cost-efficient without major impact to UX.
 
-### Cold Starts
 
-A cold start in Neon begins when a database project with a suspended compute endpoint receives a connection.
-Neon starts the database compute, processes the query, and serves the response.
-The compute stays active as long as there are active connections.
+##  Ready to Ship Faster?
+The best way to understand the speed and flexibility of Neon is to try it yourself. With instant provisioning, branching, and autoscaling, Neon helps you build and ship faster experiences—without managing infrastructure.
 
-Try running a query to get a visual of how it works:
+Sign up for free today—no credit card required—and see how Neon can accelerate your workflow.
+
+<CTA title="Try Postgres on Neon" description="Neon is Serverless Postgres built for the cloud. Get started in seconds with our free plan." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
