@@ -81,7 +81,7 @@ To do this, navigate to **Settings** > **Settings and variables** > **Actions** 
 
 ![Screenshot of GitHub repository secrets](/guides/images/reliable-testing-dataset-with-pg-dump-and-pg-restore/screenshot-of-github-respository-secrets.jpg)
 
-The last variable defines the Postgres version to install in the Action environment. Since pg_dump, pg_restore, and psql depend on Postgres, you'll need to install it within the Action—I’ll cover this in more detail later. It’s also worth noting the version of Postgres you install here should be the same version used by both your source and target database. In my example, all use [Postgres 17](https://neon.tech/blog/postgres-17).
+The last variable defines the Postgres version to install in the Action environment. Since `pg_dump`, `pg_restore`, and `psql` depend on Postgres, you'll need to install it within the Action—I’ll cover this in more detail later. It’s also worth noting the version of Postgres you install here should be the same version used by both your source and target database. In my example, all use [Postgres 17](https://neon.tech/blog/postgres-17).
 
 ### jobs/steps
 
