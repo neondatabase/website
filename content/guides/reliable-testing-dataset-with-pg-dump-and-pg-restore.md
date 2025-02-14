@@ -223,7 +223,7 @@ In this step, I use `psql` to query the data. This is the most complex step, inv
 
 #### Transactions query
 
-This query selects the 50 most recent **transactions** from the **transactions** table. Depending on your requirements, you can increase the `LIMIT` or modify the query.
+This query selects the 50 most recent **transactions** from the `transactions` table. Depending on your requirements, you can increase the `LIMIT` or modify the query.
 
 ```sql
 SELECT * FROM transactions ORDER BY transaction_id DESC LIMIT 50
