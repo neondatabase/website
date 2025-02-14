@@ -3,7 +3,7 @@ title: Vercel Postgres Transition Guide
 subtitle: Everything you need to know about transitioning from Vercel Postgres to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-13T13:15:08.389Z'
+updatedOn: '2025-02-14T16:07:23.202Z'
 ---
 
 <Admonition type="info">
@@ -42,9 +42,9 @@ Billing for the [Vercel Native Integration for Neon Postgres](/docs/guides/verce
 
 ### What plan will you be on after the transition?
 
-- **Vercel Hobby Plan** Databases will be migrated to the Neon Free Plan, which gives you more compute hours, data transfer, Databases (a.k.a. "Projects" in Neon), and storage than you had on the Vercel Hobby Plan. See [Vercel Hobby Plan vs Neon Free Plan](#vercel-hobby-plan-vs-neon-free-plan) for a comparison.
+- **Vercel Hobby Plan**: Databases will be migrated to the Neon Free Plan, which gives you more compute hours, data transfer, Databases (a.k.a. "Projects" in Neon), and storage than you had on the Vercel Hobby Plan. See [Vercel Hobby Plan vs Neon Free Plan](#vercel-hobby-plan-vs-neon-free-plan) for a comparison.
 
-- **Vercel Pro Plan** prices and limits will not change. This ensures no pricing surprises when transitioning to Neon. You can stay on your Vercel Pro Plan or you can switch to a Neon plan. For a Vercel-Neon plan comparison, see [Vercel Pro Plan vs Neon Launch Plan](#vercel-pro-plan-vs-neon-launch-plan).
+- **Vercel Pro Plan prices and limits will not change**: This ensures no pricing surprises when transitioning to Neon. You can stay on your Vercel Pro Plan or you can switch to a Neon plan. For a Vercel-Neon plan comparison, see [Vercel Pro Plan vs Neon Launch Plan](#vercel-pro-plan-vs-neon-launch-plan).
 
 ### How do Vercel Postgres plans compare to Neon plans?
 
@@ -95,13 +95,19 @@ Neon is working with the Vercel team to transition Enterprise customers. If you 
 
 ### What Neon features will I have access to after the migration?
 
-Once the transition to Neon Postgres is complete, you will gain access to a variety of advanced Neon features that were not available in Vercel Postgres, including:
+Once the transition to Neon Postgres is complete, you will be able to access a variety of advanced Neon features that were not available in Vercel Postgres (subject to your plan limits).
+
+<Admonition type="note">
+Please be aware that if you are on a **Vercel Postgres Pro Plan**, you are subject to the limits of that [plan](#vercel-pro-plan-vs-neon-launch-plan). There's no requirement for you to migrate to a Neon plan, but doing so provides access to higher limits and additional features. For example, the Vercel Postgres Pro Plan does not support [history retention](/docs/reference/glossary#history), which enables Neon's point-in-time restore feature. For a full overview of Neon plans, features, and limits, refer to our [Pricing](https://neon.tech/pricing) page. If you switch to a Neon plan, you will still be billed through Vercel.
+</Admonition>
+
+Neon features:
 
 - [The Neon Console](https://console.neon.tech/app/projects) &#8212; manage all your projects and databases from a dedicated console
 - [Database branching](/docs/guides/branching-intro) &#8212; branch your database like code for development, testing, and database workflows
 - [Autoscaling](/docs/introduction/autoscaling) &#8212; scale your database automatically for performance and cost savings
 - [Scale to Zero](/docs/introduction/scale-to-zero) &#8212; configure scale-to-zero behavior
-- [Branch Restore](/docs/guides/branch-restore) &#8212; instant point-in-time recovery
+- [Branch Restore](/docs/guides/branch-restore) &#8212; instant point-in-time restore
 - [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) &#8212; Neon projects, roles, databases and more via API calls
 - [Neon CLI](/docs/reference/neon-cli) &#8212; manage your Neon projects, roles, databases and more from the command-line
 - [IP Allow](/docs/introduction/ip-allow) &#8212; limit access to the IP addresses you trust
@@ -114,7 +120,7 @@ Once the transition to Neon Postgres is complete, you will gain access to a vari
 - [Logical Replication](/docs/guides/logical-replication-guide) &#8212; replicate data to and from Neon
 - [The Neon GitHub Integration](/docs/guides/neon-github-integration) &#8212; connect your Neon project to your repo and build GitHub Actions workflows
 
-### What Vercel Postgres limitations are lifted by the transitions to Neon?
+### What Vercel Postgres limitations are lifted by the transition to Neon?
 
 The transition to Neon also unblocks several limitations:
 
@@ -122,7 +128,7 @@ The transition to Neon also unblocks several limitations:
 - **Terraform support**. The [Vercel Terraform Provider](https://vercel.com/guides/integrating-terraform-with-vercel) did not support Vercel Postgres. With Neon Postgres, you have access to a [Neon Terraform provider](/docs/reference/terraform).
 - **Larger computes**. On Vercel, databases on Hobby plans are limited to 0.25 logical CPUs. The Neon Free plan supports computes up to 2 vCPUs and [Autoscaling](/docs/introduction/autoscaling). Neon paid plans support much larger compute sizes.
 - **Postgres roles**. On Vercel, you were limited to a single Postgres database access role. There is no such limit on Neon. You can create additional Postgres roles as needed.
-- **Point-in-time restore**. In Vercel Postgres, Neon's history retention is set to 0, which means point-in-time restore is not possible. On Neon, the default setting is 1 day, and you can configure longer periods on Neon's paid plans.
+- **Point-in-time restore**. In Vercel Postgres, Neon's history retention is set to 0, which means point-in-time restore is not possible. Once you are on a Neon plan (free or paid), the default setting is 1 day, and you can configure longer periods on Neon's paid plans. **Please note that if you are on a Vercel Postgres Pro Plan, you'll need to sign up for a Neon plan for the point-in-time restore feature**.
 
 ### What Postgres versions are supported?
 
