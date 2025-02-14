@@ -35,6 +35,7 @@ import DocCta from 'components/shared/doc-cta';
 import ExtensionRequest from 'components/shared/extension-request';
 import ImageZoom from 'components/shared/image-zoom';
 import InkeepEmbedded from 'components/shared/inkeep-embedded';
+import LatencyCalculator from 'components/shared/latency-calculator';
 import Link from 'components/shared/link';
 import RegionRequest from 'components/shared/region-request';
 import getCodeProps from 'lib/rehype-code-props';
@@ -171,6 +172,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   DocsList,
   RegionRequest,
   ExtensionRequest,
+  LatencyCalculator,
   CTA: isUseCase ? CtaBlock : DocCta,
   Testimonial,
   TestimonialsWrapper,
