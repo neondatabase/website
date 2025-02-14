@@ -9,7 +9,7 @@ subtitle: A practical guide to extracting a test dataset from Postgres using pg_
 
 As your Postgres database grows, you'll likely need a way to generate a smaller, 'good-enough' dataset that preserves the structure and referential integrity of production but is better suited for testing.
 
-There are several ways to do this, but here's a straightforward approach using pg_dump, pg_restore, psql and GitHub Actions.
+There are several ways to do this, but here's a straightforward approach using `pg_dump`, `pg_restore`, `psql` and GitHub Actions.
 
 ## Running partial data dumps inside GitHub Actions
 
