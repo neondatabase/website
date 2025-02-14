@@ -132,7 +132,7 @@ CREATE TABLE products (
 
 ### transactions
 
-This is the schema used to create the transactions table.
+This is the schema used to create the `transactions` table.
 
 ```sql
 CREATE TABLE transactions (
