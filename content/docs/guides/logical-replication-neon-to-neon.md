@@ -7,8 +7,6 @@ isDraft: false
 updatedOn: '2025-02-11T11:32:44.539Z'
 ---
 
-<LRBeta/>
-
 Neon's logical replication feature allows you to replicate data from one Neon project to another. This enables different replication scenarios, including:
 
 - **Postgres version migration**: Moving data from one Postgres version to another; for example, from a Neon project that runs Postgres 16 to one that runs Postgres 17.

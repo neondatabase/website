@@ -7,8 +7,6 @@ tag: new
 updatedOn: '2025-02-11T11:32:44.537Z'
 ---
 
-<LRBeta/>
-
 <MigrationAssistant/>
 
 Neon's logical replication feature allows you to replicate data from Aurora PostgreSQL to Neon.

@@ -6,8 +6,6 @@ isDraft: false
 updatedOn: '2025-02-11T11:32:44.541Z'
 ---
 
-<LRBeta/>
-
 <MigrationAssistant/>
 
 Neon's logical replication feature allows you to replicate data from Amazon RDS PostgreSQL to Neon.
