@@ -10,7 +10,7 @@ updatedOn: '2025-02-13T23:17:07.658Z'
 Free Plan accounts can expect to see update notices in early February, at least 24 hours before any planned update. Update notices for Neon's Launch and Scale plans will start rolling out in the second week of February, with at least 7 days' notice before a planned update. Business and Enterprise plan accounts will see update notices toward the end of February. For the latest information about updates, follow our announcements in the [Neon Changelog](https://neon.tech/docs/changelog).
 </Admonition>
 
-To keep your Neon computes and Postgres instances up to date with the latest patches and features, Neon applies updates to your project's computes. We notify you of updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can select an update window — a specific day and hour for updates.
+To keep your Neon [computes](/docs/reference/glossary#compute) and Postgres instances up to date with the latest patches and features, Neon applies updates to your project's computes. We notify you of updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can select an update window — a specific day and hour for updates.
 
 Neon briefly restarts a compute to apply an update. The entire process takes just a few seconds, minimizing any potential disruption.
 
@@ -24,7 +24,7 @@ Updates may include some or all of the following:
 
 ## How often are updates applied?
 
-Updates are typically applied weekly but may occur more or less frequently, as needed.
+Updates are typically released weekly but may occur more or less frequently, as needed.
 
 Neon applies updates to computes based on the following rules:
 
