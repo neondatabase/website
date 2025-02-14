@@ -59,7 +59,6 @@ We take pride in [owning our tenth of a second](https://x.com/tobi/status/178713
 
 You can read about the [architectural decisions for Neon](https://neon.tech/blog/architecture-decisions-in-neon) and even see [all of our engineering RFCs](https://github.com/neondatabase/neon/tree/main/docs/rfcs), too. If you're interested [we're hiring](https://neon.tech/careers).
 
-
 ## Try it yourself
 
 Don't take our word for it. The best way to understand the performance of a service is to try it yourself. We've made Neon as easy as possible to try with a generous free plan with no credit card required.
@@ -74,7 +73,6 @@ Test faster yourself with these open-source third-party benchmarks.
 - **[Postgres Library Benchmarks for Node.js](https://github.com/porsager/postgres-benchmarks#results)** - _(not Neon-specific)_ compare the different Postgres drivers.
 
 If you have an open-source benchmark that includes Neon [let us know here](#) we'd love to feature it on this page.
-
 
 ## How to ship faster
 
@@ -132,9 +130,9 @@ As your business (and database) grows, connection and network transit latency re
 
 1. **Use connection pooling and autoscaling** – Use the built-in connection pooler to handle many client connections efficiently, and enable Neon’s autoscaling so the database can allocate sufficient RAM/CPU on demand.
 2. **Profile slow queries** – Identify which SQL statements are slow or resource-intensive by starting with the [Query History View](https://neon.tech/docs/introduction/monitor-query-history) in Neon.
-  ![Neon query history tab](/docs/introduction/query_history.png)
-  _The Query History tab shows total calls, avg time, and total time of each query._
-  You can dig deeper with [`pg_stat_statements`](https://neon.tech/docs/extensions/pg_stat_statements)
+   ![Neon query history tab](/docs/introduction/query_history.png)
+   _The Query History tab shows total calls, avg time, and total time of each query._
+   You can dig deeper with [`pg_stat_statements`](https://neon.tech/docs/extensions/pg_stat_statements)
 3. **Add indexes on high-impact columns** – Create indexes on columns that are frequently used in `WHERE` filters, `JOIN` conditions, or `ORDER BY` clauses to avoid full table scans. An index lets Postgres perform an index scan instead of a slower sequential scan, dramatically reducing query execution time.
 4. **Reduce table and index bloat** – Reclaim wasted space and improve performance by eliminating bloat (accumulated dead rows) in tables and indexes. Schedule regular maintenance like `VACUUM` to remove dead tuples and use `REINDEX` on bloated indexes. You can also fine-tune autovacuum settings to keep bloat in check over time.
 5. **Leverage caching for reads** – Ensure frequently accessed data is served from memory instead of disk. Neon’s architecture extends Postgres’s shared memory buffers with a local file system cache, so aim for a high cache hit ratio. After installing the Neon extension, you can query the `neon_stat_file_cache` view to monitor how often data is read from cache versus storage and adjust your workload or memory allocation if needed.
