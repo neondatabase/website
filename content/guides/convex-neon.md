@@ -77,7 +77,6 @@ Now, you'll set up the self-hosted Convex backend using Docker Compose, configur
       ```
    1. Modify `[YOUR_NEON_CONNECTION_STRING]` for Convex:
 
-      <Admonition type="note" title="How to modify the connection string">
         Convex requires a specific connection string format for Neon:
          
         `postgres://username:password@hostname`  
@@ -95,9 +94,6 @@ Now, you'll set up the self-hosted Convex backend using Docker Compose, configur
         ```bash
         postgres://neondb_owner:password@ep-xxxxx.aws.neon.tech
         ```
-
-      </Admonition>
-    
 
 4.  **Start Convex services with Docker Compose:** With the configuration in place, start the Convex backend and dashboard services using Docker Compose. Execute the following command in your terminal within the `convex-neon-integration` directory:
 
@@ -377,9 +373,9 @@ With the self-hosted Convex backend powered by Neon running, the next step is to
 
 12.  **Run the Convex chat application** by executing the following command in your terminal within the `convex-tutorial` directory:
 
-    ```bash
-    npm run dev
-    ```
+        ```bash
+        npm run dev
+        ```
 
 ## Using the chat application
 
