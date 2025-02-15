@@ -34,7 +34,7 @@ Before you begin, ensure you have the following prerequisites:
 
     For optimal performance, it's best to locate your Neon database and Convex backend in the same geographical region. Convex's cloud-hosted platform achieves very low query times  because the database and backend are co-located.
 
-    While this guide focuses on setup and integration specifically for local development, for production applications, consider the physical proximity of your Neon Postgres and Convex Backend server to minimize latency and ensure the best user experience.
+    While this guide focuses on setup and integration specifically for local development, for production applications, consider the physical proximity of your Neon Postgres and Convex Backend server to minimize latency.
 </Admonition>
 
 Before integrating Convex with Neon, you need to set up a Neon database. Convex expects a database named `convex_self_hosted` to work with, so you will create this database in Neon.
@@ -45,7 +45,7 @@ Before integrating Convex with Neon, you need to set up a Neon database. Convex 
     CREATE DATABASE convex_self_hosted;
     ```
 
-- Once the database is created, you can retrieve the connection string by clicking on "Connect" in the Neon project's dashboard. Select the `convex_self_hosted` database and copy the connection string. You will need this connection string later to configure the Convex backend to use Neon Postgres.
+- Once the database is created, you can retrieve the connection string by clicking on **Connect** in the Neon project's dashboard. Select the `convex_self_hosted` database and copy the connection string. You will need this connection string later to configure the Convex backend to use Neon Postgres.
 
     ![Neon Connection string for convex_self_hosted database](/docs/guides/neon-connection-string-for-convex-database.png)
 
