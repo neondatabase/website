@@ -68,27 +68,36 @@ The next step is to set up a self-hosted Convex backend using Docker Compose. Th
 
     This command utilizes [`npx degit`](https://www.npmjs.com/package/degit) to download the `docker-compose.yml` file from the [Convex GitHub repository](https://github.com/get-convex/convex-backend/blob/main/self-hosted/docker/docker-compose.yml) and places it in your current directory.
 
-3. **Configure Neon connection string:** To instruct Convex to use Neon Postgres as its database, you need to provide the Neon connection string via an environment variable. Create a `.env` file in the same directory as your `docker-compose.yml` file. Add the following line to your `.env` file, replacing `[YOUR_NEON_CONNECTION_STRING]` with your actual Neon connection string obtained in the previous step [Setting up Neon Database](#setting-up-neon-database):
+3. **Set up Neon connection string:**  Add your Neon connection string you copied earlier to a `.env` file to configure Convex.
 
-    <Admonition type="important">
-        When configuring the `DATABASE_URL` environment variable, it's crucial to ensure your Neon connection string is in the correct format for Convex. Convex expects the connection string to include only the core connection details, specifically in the format: `postgres://username:password@hostname:port`.
+   1. Create a `.env` file in the same directory as `docker-compose.yml`.
+   1. Add this line:
+      ```env
+      DATABASE_URL=[YOUR_NEON_CONNECTION_STRING]
+      ```
+   1. Modify `[YOUR_NEON_CONNECTION_STRING]` for Convex:
 
-        **Important:** You need to remove the database name and any additional parameters appended after the hostname in your Neon-provided connection string.
+      <Admonition type="note" title="How to modify the connection string">
+        Convex requires a specific format:  
+        `postgres://username:password@hostname`  
+        
+        Remove the database name and extra parameters from your Neon connection string.
+         
+        **Neon default:**
 
-        **For example:**
+        ```bash
+        postgresql://neondb_owner:password@ep-xxxxx.aws.neon.tech/convex_self_hosted?sslmode=require
+        ```
+        
+        **For Convex:**
 
-        If your Neon connection string looks like this:
-        `postgresql://neondb_owner:password@ep-xxxxx.aws.neon.tech/**convex_self_hosted?sslmode=require**`
+        ```bash
+        postgres://neondb_owner:password@ep-xxxxx.aws.neon.tech
+        ```
 
-        You should modify it to this format for Convex:
-        `postgres://neondb_owner:password@ep-xxxxx.aws.neon.tech`
-    </Admonition>
+      </Admonition>
 
-    ```env
-    DATABASE_URL=[YOUR_NEON_CONNECTION_STRING]
-    ```
-
-    
+   
 
 4.  **Start Convex services with Docker Compose:** With the configuration in place, start the Convex backend and dashboard services using Docker Compose. Execute the following command in your terminal within the `convex-neon-integration` directory:
 
@@ -169,7 +178,7 @@ With the self-hosted Convex backend powered by Neon running, the next step is to
     npm run predev
     ```
 
-    This would start the Convex server and generate the necessary TypeScript files for the chat application.
+    This starts the Convex server and generates the necessary TypeScript files for the chat application.
 
 5.  **Implement the `sendMessage` Mutation:** Following the [Convex tutorial - Your first mutation](https://docs.convex.dev/tutorial/#your-first-mutation) section, create a new file `convex/chat.ts` in your `convex-tutorial` project. Add the following code to this file. This code defines a Convex mutation function to insert new messages into the database:
 
