@@ -33,6 +33,7 @@ Before you begin, ensure you have the following prerequisites installed and conf
     For optimal performance, especially in production, it's highly recommended to locate your Neon database and Convex backend in the same geographical region. Convex's cloud-hosted platform achieves extremely low query times because the database and backend are co-located within their infrastructure.
 
     While this guide focuses on setup and integration specifically for local development, for production applications, consider the physical proximity of your Neon Postgres and Convex Backend server to minimize latency.
+
 </Admonition>
 
 ## Setting up Neon Database
@@ -41,13 +42,14 @@ To get started with your Postgres database, create a new Neon project using [pg.
 
 - Navigate to the [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) in your Neon project console to create the `convex_self_hosted` database.
 - Execute the following SQL command to create the database:
-    ```sql
-    CREATE DATABASE convex_self_hosted;
-    ```
+
+  ```sql
+  CREATE DATABASE convex_self_hosted;
+  ```
 
 - Once the database is created, you can retrieve the connection string by clicking on "Connect" in the Neon project's dashboard. Select the `convex_self_hosted` database and copy the connection string. You will need this connection string later to configure the Convex backend to use Neon Postgres.
 
-    ![Neon Connection string for convex_self_hosted database](/docs/guides/neon-connection-string-for-convex-database.png)
+  ![Neon Connection string for convex_self_hosted database](/docs/guides/neon-connection-string-for-convex-database.png)
 
 ## Setting up Self-Hosted Convex with Docker Compose
 
@@ -68,27 +70,27 @@ Now, you'll set up the self-hosted Convex backend using Docker Compose, configur
 
     This command uses [`npx degit`](https://www.npmjs.com/package/degit) to fetch the `docker-compose.yml` file from the [Convex GitHub repository](https://github.com/get-convex/convex-backend/blob/main/self-hosted/docker/docker-compose.yml).
 
-3. **Set up Neon connection string:**  Add your Neon connection string you copied earlier to a `.env` file to configure Convex.
+3.  **Set up Neon connection string:** Add your Neon connection string you copied earlier to a `.env` file to configure Convex.
 
-   1. Create a `.env` file in the same directory as `docker-compose.yml`.
-   1. Add this line:
-      ```env
-      DATABASE_URL=[YOUR_NEON_CONNECTION_STRING]
-      ```
-   1. Modify `[YOUR_NEON_CONNECTION_STRING]` for Convex:
+    1.  Create a `.env` file in the same directory as `docker-compose.yml`.
+    1.  Add this line:
+        ```env
+        DATABASE_URL=[YOUR_NEON_CONNECTION_STRING]
+        ```
+    1.  Modify `[YOUR_NEON_CONNECTION_STRING]` for Convex:
 
         Convex requires a specific connection string format for Neon:
-         
-        `postgres://username:password@hostname`  
-        
+
+        `postgres://username:password@hostname`
+
         Remove the database name and extra parameters from your Neon connection string.
-         
+
         **Neon default:**
 
         ```bash
         postgresql://neondb_owner:password@ep-xxxxx.aws.neon.tech/convex_self_hosted?sslmode=require
         ```
-        
+
         **For Convex:**
 
         ```bash
@@ -103,17 +105,18 @@ Now, you'll set up the self-hosted Convex backend using Docker Compose, configur
 
     The `-d` flag runs the containers in detached mode (in the background). Docker Compose will download the necessary images, create containers, and start the Convex services.
 
-5. **Access the Convex Dashboard:** Once `docker compose up -d` completes, the Convex dashboard should be accessible in your browser at [http://localhost:6791](http://localhost:6791).  It might take a few moments for the services to fully start. If it's not immediately available, wait a short time and refresh the page.
+5.  **Access the Convex Dashboard:** Once `docker compose up -d` completes, the Convex dashboard should be accessible in your browser at [http://localhost:6791](http://localhost:6791). It might take a few moments for the services to fully start. If it's not immediately available, wait a short time and refresh the page.
 
     You should see the Convex dashboard login screen:
 
     ![Convex Dashboard](/docs/guides/convex-dashboard.png)
 
     **Login to the Convex Dashboard:**
-    * When you access the dashboard for the first time, you will be prompted to log in.
-    * For the password, you will use the `CONVEX_SELF_HOSTED_ADMIN_KEY` generated in the next step.
 
-6. **Verify Neon Postgres Connection (Optional but Recommended):** You can confirm that Convex is using your Neon Postgres database by checking the Docker container logs. This verifies that the `DATABASE_URL` environment variable was correctly processed.
+    - When you access the dashboard for the first time, you will be prompted to log in.
+    - For the password, you will use the `CONVEX_SELF_HOSTED_ADMIN_KEY` generated in the next step.
+
+6.  **Verify Neon Postgres Connection (Optional but Recommended):** You can confirm that Convex is using your Neon Postgres database by checking the Docker container logs. This verifies that the `DATABASE_URL` environment variable was correctly processed.
 
     Run this command in your terminal within the `convex-neon-integration` directory:
 
@@ -125,7 +128,7 @@ Now, you'll set up the self-hosted Convex backend using Docker Compose, configur
 
     ![Convex Postgres Logs](/docs/guides/convex-postgres-logs.png)
 
-7. **Retrieve the Admin Key:**  You need the `CONVEX_SELF_HOSTED_ADMIN_KEY` to log into the Convex dashboard and configure your chat application. Execute this command to retrieve it:
+7.  **Retrieve the Admin Key:** You need the `CONVEX_SELF_HOSTED_ADMIN_KEY` to log into the Convex dashboard and configure your chat application. Execute this command to retrieve it:
 
     ```bash
     docker compose exec backend ./generate_admin_key.sh
@@ -156,7 +159,7 @@ With the self-hosted Convex backend powered by Neon running, the next step is to
     npm install
     ```
 
-3. **Update Convex library version:** It is required to update the `convex` npm package to the latest version within the `convex-tutorial` project. This is needed as the existing version present in the tutorial repository is not the latest and will cause issues with the self-hosted Convex backend.
+3.  **Update Convex library version:** It is required to update the `convex` npm package to the latest version within the `convex-tutorial` project. This is needed as the existing version present in the tutorial repository is not the latest and will cause issues with the self-hosted Convex backend.
 
     ```bash
     npm install convex@latest
@@ -174,7 +177,7 @@ With the self-hosted Convex backend powered by Neon running, the next step is to
     - `CONVEX_SELF_HOSTED_URL`: Also set to the same URL, `http://localhost:3210`.
     - `CONVEX_SELF_HOSTED_ADMIN_KEY`: This key is essential for authenticating development operations against your self-hosted Convex instance. Replace `<your_generated_admin_key>` with the admin key you generated in the previous step [Setting up self-hosted Convex with Docker Compose](#setting-up-self-hosted-convex-with-docker-compose).
 
-5. **Initialize Convex project:** Run the following command to initialize the Convex project and generate the necessary TypeScript files for the chat application:
+5.  **Initialize Convex project:** Run the following command to initialize the Convex project and generate the necessary TypeScript files for the chat application:
 
     ```bash
     npm run predev
@@ -186,21 +189,21 @@ With the self-hosted Convex backend powered by Neon running, the next step is to
 
     ```typescript
     // convex/chat.ts
-    import { mutation } from "./_generated/server";
-    import { v } from "convex/values";
+    import { mutation } from './_generated/server';
+    import { v } from 'convex/values';
 
     export const sendMessage = mutation({
-        args: {
-            user: v.string(),
-            body: v.string(),
-        },
-        handler: async (ctx, args) => {
-            console.log("This TypeScript function is running on the server.");
-            await ctx.db.insert("messages", {
-                user: args.user,
-                body: args.body,
-            });
-        },
+      args: {
+        user: v.string(),
+        body: v.string(),
+      },
+      handler: async (ctx, args) => {
+        console.log('This TypeScript function is running on the server.');
+        await ctx.db.insert('messages', {
+          user: args.user,
+          body: args.body,
+        });
+      },
     });
     ```
 
@@ -208,8 +211,8 @@ With the self-hosted Convex backend powered by Neon running, the next step is to
 
     ```tsx
     // src/App.tsx
-    import { useMutation } from "convex/react"; // [!code ++]
-    import { api } from "../convex/_generated/api"; // [!code ++]
+    import { useMutation } from 'convex/react'; // [!code ++]
+    import { api } from '../convex/_generated/api'; // [!code ++]
     // ... other imports and component setup
 
     export default function App() {
@@ -222,9 +225,9 @@ With the self-hosted Convex backend powered by Neon running, the next step is to
           <form
             onSubmit={async (e) => {
               e.preventDefault();
-              alert("Mutation not implemented yet"); // [!code --]
+              alert('Mutation not implemented yet'); // [!code --]
               await sendMessage({ user: NAME, body: newMessageText }); // [!code ++]
-              setNewMessageText("");
+              setNewMessageText('');
             }}
           >
             {/* ... form input and button */}
@@ -234,110 +237,111 @@ With the self-hosted Convex backend powered by Neon running, the next step is to
     }
     ```
 
-8. **Implement the `getMessages` query:** Following the [Convex tutorial - Your first query](https://docs.convex.dev/tutorial/#your-first-query) section, add a Convex query function to `convex/chat.ts` to fetch messages from the database. Add the following `getMessages` query function to your `convex/chat.ts` file:
+8.  **Implement the `getMessages` query:** Following the [Convex tutorial - Your first query](https://docs.convex.dev/tutorial/#your-first-query) section, add a Convex query function to `convex/chat.ts` to fetch messages from the database. Add the following `getMessages` query function to your `convex/chat.ts` file:
 
     ```typescript
     // convex/chat.ts
-    import { query, mutation } from "./_generated/server"; // [!code ++]
+    import { query, mutation } from './_generated/server'; // [!code ++]
     // ... existing sendMessage mutation
 
-    export const getMessages = query({ // [!code ++]
-        args: {}, // [!code ++]
-        handler: async (ctx) => { // [!code ++]
-            const messages = await ctx.db.query("messages").order("desc").take(50); // [!code ++]
-            return messages.reverse(); // [!code ++]
-        }, // [!code ++]
+    export const getMessages = query({
+      // [!code ++]
+      args: {}, // [!code ++]
+      handler: async (ctx) => {
+        // [!code ++]
+        const messages = await ctx.db.query('messages').order('desc').take(50); // [!code ++]
+        return messages.reverse(); // [!code ++]
+      }, // [!code ++]
     }); // [!code ++]
     ```
 
-9. **Update `src/App.tsx` to Use `getMessages` query:** Finally, update `src/App.tsx` to fetch and display messages using the `useQuery` hook and the `getMessages` query function. Replace the relevant section in `src/App.tsx` with the following code:
+9.  **Update `src/App.tsx` to Use `getMessages` query:** Finally, update `src/App.tsx` to fetch and display messages using the `useQuery` hook and the `getMessages` query function. Replace the relevant section in `src/App.tsx` with the following code:
 
     ```tsx
     // src/App.tsx
-    import { useQuery, useMutation } from "convex/react"; // [!code ++]
+    import { useQuery, useMutation } from 'convex/react'; // [!code ++]
     // ... other imports and component setup
 
     export default function App() {
-        const messages = [ // [!code --]
-            { _id: "1", user: "Alice", body: "Good morning!" }, // [!code --]
-            { _id: "2", user: NAME, body: "Beautiful sunrise today" }, // [!code --]
-        ]; // [!code --]
-        const messages = useQuery(api.chat.getMessages); // [!code ++]
+      const messages = [
+        // [!code --]
+        { _id: '1', user: 'Alice', body: 'Good morning!' }, // [!code --]
+        { _id: '2', user: NAME, body: 'Beautiful sunrise today' }, // [!code --]
+      ]; // [!code --]
+      const messages = useQuery(api.chat.getMessages); // [!code ++]
 
-        // ... remaining component code
+      // ... remaining component code
     }
     ```
 
 10. Your `App.tsx` file should look like the following code after all updates:
 
     ```tsx
-    import { useEffect, useState } from "react";
-    import { faker } from "@faker-js/faker";
-    import { api } from "../convex/_generated/api";
-    import { useQuery, useMutation } from "convex/react";
+    import { useEffect, useState } from 'react';
+    import { faker } from '@faker-js/faker';
+    import { api } from '../convex/_generated/api';
+    import { useQuery, useMutation } from 'convex/react';
 
     const NAME = getOrSetFakeName();
 
     export default function App() {
-    const messages = useQuery(api.chat.getMessages);
-    const sendMessage = useMutation(api.chat.sendMessage);
-    const [newMessageText, setNewMessageText] = useState("");
+      const messages = useQuery(api.chat.getMessages);
+      const sendMessage = useMutation(api.chat.sendMessage);
+      const [newMessageText, setNewMessageText] = useState('');
 
-    useEffect(() => {
+      useEffect(() => {
         setTimeout(() => {
-            window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+          window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         }, 0);
-    }, [messages]);
+      }, [messages]);
 
-    return (
+      return (
         <main className="chat">
-            <header>
-                <h1>Convex Chat</h1>
-                <p>
-                    Connected as <strong>{NAME}</strong>
-                </p>
-            </header>
-            {messages?.map((message) => (
-                <article
-                    key={message._id}
-                    className={message.user === NAME ? "message-mine" : ""}
-                >
-                <div>{message.user}</div>
-                <p>{message.body}</p>
-                </article>
-            ))}
-            <form
-                onSubmit={async (e) => {
-                    e.preventDefault();
-                    await sendMessage({ user: NAME, body: newMessageText });
-                    setNewMessageText("");
-                }} >
-                <input
-                    value={newMessageText}
-                    onChange={async (e) => {
-                        const text = e.target.value;
-                        setNewMessageText(text);
-                    }}
-                    placeholder="Write a message…"
-                    autoFocus
-                />
-                <button type="submit" disabled={!newMessageText}>
-                    Send
-                </button>
-            </form>
+          <header>
+            <h1>Convex Chat</h1>
+            <p>
+              Connected as <strong>{NAME}</strong>
+            </p>
+          </header>
+          {messages?.map((message) => (
+            <article key={message._id} className={message.user === NAME ? 'message-mine' : ''}>
+              <div>{message.user}</div>
+              <p>{message.body}</p>
+            </article>
+          ))}
+          <form
+            onSubmit={async (e) => {
+              e.preventDefault();
+              await sendMessage({ user: NAME, body: newMessageText });
+              setNewMessageText('');
+            }}
+          >
+            <input
+              value={newMessageText}
+              onChange={async (e) => {
+                const text = e.target.value;
+                setNewMessageText(text);
+              }}
+              placeholder="Write a message…"
+              autoFocus
+            />
+            <button type="submit" disabled={!newMessageText}>
+              Send
+            </button>
+          </form>
         </main>
-        );
+      );
     }
 
     function getOrSetFakeName() {
-        const NAME_KEY = "tutorial_name";
-        const name = sessionStorage.getItem(NAME_KEY);
-        if (!name) {
-            const newName = faker.person.firstName();
-            sessionStorage.setItem(NAME_KEY, newName);
-            return newName;
-        }
-        return name;
+      const NAME_KEY = 'tutorial_name';
+      const name = sessionStorage.getItem(NAME_KEY);
+      if (!name) {
+        const newName = faker.person.firstName();
+        sessionStorage.setItem(NAME_KEY, newName);
+        return newName;
+      }
+      return name;
     }
     ```
 
@@ -345,37 +349,37 @@ With the self-hosted Convex backend powered by Neon running, the next step is to
 
     ```typescript
     // convex/chat.ts
-    import { query, mutation } from "./_generated/server";
-    import { v } from "convex/values";
+    import { query, mutation } from './_generated/server';
+    import { v } from 'convex/values';
 
     export const sendMessage = mutation({
-        args: {
-            user: v.string(),
-            body: v.string(),
-        },
-        handler: async (ctx, args) => {
-            console.log("This TypeScript function is running on the server.");
-            await ctx.db.insert("messages", {
-                user: args.user,
-                body: args.body,
-            });
-        },
+      args: {
+        user: v.string(),
+        body: v.string(),
+      },
+      handler: async (ctx, args) => {
+        console.log('This TypeScript function is running on the server.');
+        await ctx.db.insert('messages', {
+          user: args.user,
+          body: args.body,
+        });
+      },
     });
 
     export const getMessages = query({
-        args: {},
-        handler: async (ctx) => {
-            const messages = await ctx.db.query("messages").order("desc").take(50);
-            return messages.reverse();
-        },
+      args: {},
+      handler: async (ctx) => {
+        const messages = await ctx.db.query('messages').order('desc').take(50);
+        return messages.reverse();
+      },
     });
     ```
 
-12.  **Run the Convex chat application** by executing the following command in your terminal within the `convex-tutorial` directory:
+12. **Run the Convex chat application** by executing the following command in your terminal within the `convex-tutorial` directory:
 
-        ```bash
-        npm run dev
-        ```
+    ```bash
+    npm run dev
+    ```
 
 ## Using the chat application
 
