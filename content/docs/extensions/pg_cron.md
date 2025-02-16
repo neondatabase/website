@@ -215,6 +215,32 @@ SELECT * FROM cron.job_run_details ORDER BY start_time DESC LIMIT 5;
 
 This table includes details like the job ID, run ID, execution status, start and end times, and any return messages.
 
+### Running pg_cron jobs in multiple databases
+
+The `pg_cron` extension can only be installed in one database per PostgreSQL cluster. If you need to schedule jobs in multiple databases, you can use the `cron.schedule_in_database()` function. This function allows you to create a cron job that runs in a specific database, even if `pg_cron` is installed in a different database.
+
+## Running pg_cron jobs in multiple databases
+
+The `pg_cron` extension can only be installed in one database per Postgres cluster (each compute in a Neon project runs a Postgres instance, i.e., a Postgres cluster). If you need to schedule jobs in multiple databases, you can use the `cron.schedule_in_database()` function. This function allows you to create a cron job that runs in a specific database, even if `pg_cron` is installed in a different database.
+
+### Example: Scheduling a job in a different database
+
+To schedule a job in another database, use `cron.schedule_in_database()` and specify the target database name:
+
+```sql
+SELECT cron.schedule_in_database(
+    'my_job',                     -- Job name
+    '0 * * * *',                  -- Cron schedule (every hour)
+    'my_database',                 -- Target database
+    'VACUUM ANALYZE my_table'      -- SQL command to run
+);
+```
+
+In this example:
+
+- The job named `my_job` runs every hour `(0 * * * *)`.
+- It executes `VACUUM ANALYZE my_table` in `my_database`, even if `pg_cron` is installed in another database.
+
 ## Extension settings
 
 `pg_cron` has several configuration parameters that influence its behavior. These settings are managed by Neon and cannot be directly modified by users. Understanding these settings can be helpful for monitoring and troubleshooting. You can view the current configuration in your Neon database using the following query:
