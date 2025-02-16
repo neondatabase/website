@@ -91,14 +91,14 @@ We'll use Claude Desktop to interact with Neon MCP server. Here's how to set it 
 
   This command configures Neon MCP server to connect to your Neon account using the **Neon API Key**, as shown here:
 
-    ```bash
-    npx @neondatabase/mcp-server-neon init napi_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-    Need to install the following packages:
-    @neondatabase/mcp-server-neon@0.1.9
-    Ok to proceed? (y) y
+  ```bash
+  npx @neondatabase/mcp-server-neon init napi_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  Need to install the following packages:
+  @neondatabase/mcp-server-neon@0.1.9
+  Ok to proceed? (y) y
 
-    Config written to: /Users/user_name/Library/Application Support/Claude/fake_config.json
-    The Neon MCP server will start automatically the next time you open Claude.
+  Config written to: /Users/user_name/Library/Application Support/Claude/fake_config.json
+  The Neon MCP server will start automatically the next time you open Claude.
   ```
 
 - Restart Claude Desktop. You can do so by quitting the Claude Desktop and opening it again.
@@ -159,7 +159,7 @@ Neon MCP server can be used in various scenarios. Here are just a few possibilit
 
 ## Security considerations
 
-When Claude uses the Neon MCP tool, you'll see an authorization prompt: "Allow tool from "neon"?" 
+When Claude uses the Neon MCP tool, you'll see an authorization prompt: "Allow tool from "neon"?"
 
 ![Claude output](/guides/images/claude_mcp/claude_allow_tool.png)
 
