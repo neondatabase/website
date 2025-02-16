@@ -7,25 +7,25 @@ createdAt: '2025-02-06T00:00:00.000Z'
 updatedOn: '2025-02-06T00:00:00.000Z'
 ---
 
-Imagine managing your database with natural language. Instead of complex SQL, simply ask your AI assistant to "create a new table for customer orders" or "show me last quarter's sales figures." This is the power of the Model Context Protocol (MCP), an open standard for AI interaction with external systems. Neon's MCP server brings this to life, seamlessly integrating AI tools like Claude for easy database management.
+Imagine managing your database with natural language. Instead of complex SQL, you can simply ask your AI assistant to "create a new table for customer orders" or "show me last quarter's sales figures." This is the power of the [Model Context Protocol (MCP)](https://github.com/modelcontextprotocol), an open standard for AI interaction with external systems.
 
-This guide will introduce you to Neon's MCP server, which allows you to use Large Language Models (LLMs) for intuitive database management. At its core, Neon MCP server allows Claude to easily communicate with the Neon API.
+This guide will introduce you to [Neon's MCP server](https://github.com/neondatabase/mcp-server-neon), which allows you to use Large Language Models (LLMs) for intuitive database management. At its core, Neon MCP server allows tools like Claude to easily communicate with the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 With Neon's MCP server and an LLM like Claude, you can simplify workflows, improve productivity, and manage your Postgres databases more naturally. Let’s explore how this approach can make database management easier and more efficient.
 
 ## Understanding MCP
 
-The **Model Context Protocol (MCP)** is a standard that helps LLMs communicate with external tools, like databases and APIs. It's like a translator, making it easier to connect LLMs to services and data. For Neon MCP server, it's the protocol that lets Claude (and other LLMs) understand and control your Neon databases through the Neon API.
+The **Model Context Protocol (MCP)** is a standard that helps LLMs communicate with external tools, like databases and APIs. It's like a translator, making it easier to connect LLMs to services and data. For the Neon MCP server, it's the protocol that lets Claude (and other LLMs) understand and control your Neon databases through the Neon API.
 
-MCP follows a client-server architecture, where a host application can connect to multiple servers, enabling seamless interaction with various data sources. The key components include:
+MCP follows a client-server architecture, where a host application can connect to multiple servers. The key components include:
 
-- Host: These are LLM applications, such as Claude Desktop or integrated development environments (IDEs), that initiate connections to MCP servers
-- Client: These reside within the host application and maintain one-to-one connections with individual servers
-- Server: These programs provide context, tools, and prompts to clients, enabling access to external data and functionalities
+- **Host**: These are LLM applications, such as Claude Desktop or integrated development environments (IDEs), that initiate connections to MCP servers
+- **Client**: These reside within the host application and maintain one-to-one connections with individual servers
+- **Server**: These programs provide context, tools, and prompts to clients, enabling access to external data and functionalities
 
 ### Why use MCP?
 
-Traditionally, connecting AI models to different data sources required developers to create custom code and solutions for each integration. This fragmented approach led to increased development time, higher maintenance burdens, and limited interoperability between AI models and tools. MCP tackles this challenge by providing a single, standardized protocol that simplifies the integration process, accelerates development, and enhances the capabilities of AI assistants
+Traditionally, connecting AI models to different data sources required developers to create custom code for each integration. This fragmented approach led to increased development time, maintenance burdens, and limited interoperability between AI models and tools. MCP tackles this challenge by providing a standardized protocol that simplifies integration, accelerates development, and enhances the capabilities of AI assistants.
 
 ### What is Neon MCP server?
 
@@ -34,8 +34,8 @@ Traditionally, connecting AI models to different data sources required developer
 Examples of natural language commands that are converted to **Neon API actions**:
 
 - **Create a Postgres database called `my-database`**: Calls the Neon API to create a database
-- **Add a column `created_at` to the 'users' table in project `my-project`**: Uses the Neon API to run a SQL command
-- **List all my Neon projects**: Calls the Neon API to fetch project list
+- **Add a column `created_at` to the 'users' table in project `my-project`**: Uses the Neon API to run an SQL command
+- **List all my Neon projects**: Calls the Neon API to fetch a project list
 
 ### Why use Neon MCP server?
 
@@ -55,7 +55,7 @@ Neon MCP server exposes the following actions, which primarily map to **Neon API
 
 - `list_projects`: Action to list all your Neon projects. This uses the Neon API to retrieve a summary of all projects associated with your Neon account.
 - `describe_project`: Action to get detailed information about a specific Neon project. Provides comprehensive details about a chosen project, such as its ID, name, and associated branches.
-- `create_project`: Action to create a new Neon project. Allows you to provision a new Neon project.
+- `create_project`: Action to create a new Neon project — a container in Neon for branches, databases, roles, and computes.
 - `delete_project`: Action to delete an existing Neon project.
 - `create_branch`: Action to create a new branch within a Neon project. Leverages Neon's branching feature, allowing you to create new branches for development or migrations.
 - `delete_branch`: Action to delete an existing branch in a Neon project.
@@ -71,7 +71,7 @@ These actions enable any MCP Host to interact with various functionalities of th
 
 ## Setting up Neon MCP server
 
-We will be using Claude Desktop to interact with Neon MCP server. Here's how to set it up:
+We'll use Claude Desktop to interact with Neon MCP server. Here's how to set it up:
 
 ### Prerequisites
 
@@ -87,21 +87,40 @@ We will be using Claude Desktop to interact with Neon MCP server. Here's how to 
   npx @neondatabase/mcp-server-neon init $NEON_API_KEY
   ```
 
-  Replace `$NEON_API_KEY` with your actual Neon API key.
+  Replace `$NEON_API_KEY` with your actual Neon API key, as shown here:
 
-  This command configures Neon MCP server to connect to your Neon account using the **Neon API Key**.
+  This command configures Neon MCP server to connect to your Neon account using the **Neon API Key**, as shown here:
 
-- Restart Claude Desktop
+    ```bash
+    npx @neondatabase/mcp-server-neon init napi_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    Need to install the following packages:
+    @neondatabase/mcp-server-neon@0.1.9
+    Ok to proceed? (y) y
 
-- Test: Ask Claude `"List my Neon projects"`. If it works (you see your projects listed by Claude, fetched using the **Neon API**).
+    Config written to: /Users/user_name/Library/Application Support/Claude/fake_config.json
+    The Neon MCP server will start automatically the next time you open Claude.
+  ```
+
+- Restart Claude Desktop. You can do so by quitting the Claude Desktop and opening it again.
+
+- Test: Ask Claude `"List my Neon projects"`. If it works, you'll see your projects listed by Claude, fetched using the **Neon API**. For example, you might see output similar to this:
+
+  ![Claude output](/guides/images/claude_mcp/claude_list_project.png)
 
 ## Using Neon MCP server
 
 Neon MCP server lets you manage Neon via **Neon API calls**
 
+### Neon platform operations
+
+- **List databases:** `"What databases do I have in my Neon project?"`
+- **Create a new Neon project**: `"Create a new Neon named my-project"`
+- **Create a new database**: `"Create a new database called my-database in the Neon project named my-project"`
+
 ### Simple SQL queries
 
-- **Run SQL:** `"Show me 10 latest posts from 'posts' table in database 'my-database' of project 'my-project'"` (Triggers `run_sql` action to execute query)
+- **Insert records"** `"Create a table named posts with 20 records."`
+- **Query a table:** `"Show me 10 posts from 'posts' table in database 'my-database' of project 'my-project'"` (Triggers `run_sql` action to execute query)
 
 ### Schema exploration
 
@@ -118,7 +137,7 @@ width={960}
 height={1080}
 />
 
-Claude, using Neon MCP server will:
+Using Neon MCP server, Claude will:
 
 1. **Confirm project:** Check which project you are referring to.
 2. **Check schema:** Look at the `posts` table structure.
@@ -131,7 +150,7 @@ This shows how Neon MCP server simplifies and makes database management safer wi
 
 ## Real-world use cases
 
-Neon MCP server can be used in various scenarios:
+Neon MCP server can be used in various scenarios. Here are just a few possibilities:
 
 - **SaaS apps:** Faster development with natural language database management
 - **Dev/Test:** Quick database setup for testing
@@ -140,7 +159,11 @@ Neon MCP server can be used in various scenarios:
 
 ## Security considerations
 
-When Claude uses the Neon MCP tool, you'll see an authorization prompt: "Allow tool from 'neon'?" For your security, review the tool's purpose before selecting "Allow" to proceed. Remember that LLMs can sometimes produce unexpected results, so careful monitoring is always recommended.
+When Claude uses the Neon MCP tool, you'll see an authorization prompt: "Allow tool from "neon"?" 
+
+![Claude output](/guides/images/claude_mcp/claude_allow_tool.png)
+
+For your security, review the tool's purpose before permitting the operation to proceed. Remember that LLMs can sometimes produce unexpected results, so careful monitoring is always recommended.
 
 ## Conclusion
 
