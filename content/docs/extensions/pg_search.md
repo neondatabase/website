@@ -1,0 +1,473 @@
+---
+title: The pg_search (ParadeDB) extension
+subtitle: Full-text search and analytics directly within your Postgres database
+tag: new
+enableTableOfContents: true
+updatedOn: '2025-02-16T00:00:00.000Z'
+---
+
+The `pg_search` extension enhances Postgres with full-text search capabilities.  Operating within the familiar Postgres environment, it introduces functions and operators that leverage BM25 indexes to deliver efficient and highly relevant text queries. This allows you to perform searches using standard SQL syntax alongside flexible JSON query objects, mirroring advanced features found in systems like Elasticsearch. By bringing search capabilities into Postgres, `pg_search` eliminates the complexity of external search engines, simplifying your architecture and ensuring real-time, ACID-compliant search functionality that remains tightly coupled with your core transactional data within the trusted Postgres ecosystem.
+
+<CTA />
+
+This guide introduces the `pg_search` extension.  You'll learn how to enable it on Neon, understand the fundamentals of BM25 scoring and inverted indexes, and explore hands-on examples to create indexes and perform full-text searches within your Neon Postgres database.
+
+<Admonition type="note" title="pg_search on Neon">
+
+`pg_search` (version 15.2) is currently only available on Postgres 17 compute instances on Neon. Manual `pg_search` version upgrades via `ALTER EXTENSION` are not yet supported. 
+
+</Admonition>
+
+## Enable the `pg_search` extension
+
+You can install the `pg_search` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+
+```sql
+CREATE EXTENSION IF NOT EXISTS pg_search;
+```
+
+**Version availability:**
+
+Please refer to the [list of all extensions](/docs/extensions/pg-extensions) available in Neon for up-to-date extension version information.
+
+## Understanding text search with `pg_search`
+
+`pg_search` enables text searching within your Postgres database, helping you find rows containing specific keywords or phrases in text columns.  Unlike basic `LIKE` queries, `pg_search` offers advanced scoring, relevance ranking, and language handling to deliver more accurate and context-aware search results. The extension provides several key features:
+
+- **Relevance Ranking:**  Ordering search results by relevance, placing the most relevant matches higher, not just based on keyword presence.
+- **Language Handling:**  Depending on setup, `pg_search` can handle different languages and their rules for word analysis.
+- **Stemming:**  Recognizing word variations like "run," "running," and "runs" as related, linking them to a root form ("run") for broader matches.
+
+### BM25: The Relevance scoring algorithm
+
+`pg_search` utilizes the [**BM25 (Best Matching 25)**](https://en.wikipedia.org/wiki/Okapi_BM25) algorithm, a widely adopted ranking function by modern search engines, to calculate relevance scores for full-text search results. BM25 considers several factors to determine relevance:
+
+*   **Term Frequency (TF):**  How often a search term appears in a row's text. More occurrences suggest higher relevance.
+*   **Inverse Document Frequency (IDF):**  How common or rare your search term is across all rows.  Less common words often indicate more specific results.
+*   **Document Length Normalization:** BM25 adjusts for text length, preventing longer rows from automatically seeming more relevant.
+
+BM25 assigns a relevance score to each row, with higher scores indicating better matches.
+
+### Inverted Index for efficient searching
+
+For fast searching, `pg_search` uses an **inverted index**.  Think of it as an index in the back of a book, but instead of mapping topics to page numbers, it maps words (terms) to the database rows (documents) where they appear.
+
+This index structure lets `pg_search` quickly find rows containing your search terms without scanning every table row, greatly speeding up queries.
+
+With these basics in mind, let's learn how to create a BM25 index and start performing full-text searches with `pg_search` on Neon.
+
+## Getting started with `pg_search`
+
+`pg_search` has a special operator, `@@@`, that you can use in SQL queries to perform full-text searches.  This operator allows you to search for specific words or phrases within text columns, returning rows that match your search criteria. You can also sort results by relevance and highlight matched terms. Let us create a sample table, setting up a BM25 index, and running some search queries to explore `pg_search` in action.
+
+### Creating a sample table for text search
+
+To demonstrate how `pg_search` functions, we'll begin by creating a sample table named `mock_items` and populating it with example data. ParadeDB provides a convenient tool to generate a test table with sample data for experimentation.
+
+First, connect to your Neon database using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Once connected, execute the following SQL command:
+
+```sql
+CALL paradedb.create_bm25_test_table(
+  schema_name => 'public',
+  table_name => 'mock_items'
+);
+```
+
+It will generate a table named `mock_items`, which include the columns: `id`, `description`, `rating`, and `category`, which we will utilize in our search examples.
+
+Let's examine the initial items within our newly created `mock_items` table. Run the following SQL query:
+
+```sql
+SELECT description, rating, category
+FROM mock_items
+LIMIT 3;
+```
+
+The output will display the first three rows from the `mock_items` table:
+
+```text
+       description               | rating |  category
+--------------------------+--------+-------------
+ Ergonomic metal keyboard |      4 | Electronics
+ Plastic Keyboard         |      4 | Electronics
+ Sleek running shoes      |      5 | Footwear
+(3 rows)
+```
+
+Next, let's create our first search index, named `item_search_idx`, on the `mock_items` table. This index will enable searching across the `id`, `description`, and `category` columns.  It's necessary to designate one column as the `key_field`; we will use `id` for this purpose. The `key_field` serves as a unique identifier for each item within the index.
+
+<Admonition type="note" title="Key Field Selection">
+It is crucial to select a column that consistently contains a unique value for every row. This ensures the search index operates as intended.
+</Admonition>
+
+Run the following SQL command to create the `item_search_idx` index:
+
+```sql
+CREATE INDEX item_search_idx ON mock_items
+USING bm25 (id, description, category)
+WITH (key_field='id');
+```
+
+This will create a BM25 index on the `mock_items` table, enabling us to search within the `id`, `description`, and `category` columns. The `key_field` parameter specifies that the `id` column serves as the unique identifier for each row in the index.
+
+Now that we have our `item_search_idx` index, let's explore some searches using the `@@@` operator in our SQL queries.
+
+### Simple keyword search
+
+Let's begin by finding all items where the `description` contains the word **'shoes'**. Run the following SQL query:
+
+```sql
+SELECT description, category
+FROM mock_items
+WHERE description @@@ 'shoes';
+```
+
+This query will locate all rows in `mock_items` where the `description` column includes the word **'shoes'**.
+
+```text
+     description           | category
+----------------------+----------
+ Sleek running shoes  | Footwear
+ White jogging shoes  | Footwear
+ Generic shoes        | Footwear
+(3 rows)
+```
+
+### Searching for exact phrases
+
+To search for a specific phrase, enclose it in double quotes. Let's find items where the `description` contains the exact phrase **"metal keyboard"**:
+
+```sql
+SELECT description, category
+FROM mock_items
+WHERE description @@@ '"metal keyboard"';
+```
+
+This search will exclusively find rows that contain the exact phrase **"metal keyboard"**.
+
+```text
+description               | category
+--------------------------+------------
+ Ergonomic metal keyboard | Electronics
+(1 row)
+```
+
+If we remove the double quotes, the search will find rows containing both **'metal'** and **'keyboard'**, but the words are not required to be adjacent.
+
+```sql
+
+SELECT description, category
+FROM mock_items
+WHERE description @@@ 'metal keyboard';
+```
+
+The output is:
+```text
+description               | category
+--------------------------+------------
+ Ergonomic metal keyboard | Electronics
+ Plastic Keyboard         | Electronics
+(2 rows)
+```
+
+### Advanced search options
+
+#### paradedb.match: Similar word search and keyword matching
+
+The `paradedb.match` function is used for keyword searches and for finding words similar to your search term, even with typos.
+
+For example, to find items similar to **'running shoes'**, use:
+
+```sql
+SELECT description, category
+FROM mock_items
+WHERE id @@@ paradedb.match('description', 'running shoes');
+```
+
+```text
+  description            | category
+-----------------------+----------
+  Sleek running shoes  | Footwear
+  White jogging shoes  | Footwear
+  Generic shoes        | Footwear
+(3 rows)
+```
+
+You can also use `paradedb.match` with JSON syntax for more complex queries. For instance, to find items with a description similar to **'running shoes'**:
+
+```sql
+SELECT description, category
+FROM mock_items
+WHERE id @@@ '{"match": {"field": "description", "value": "running shoes"}}'::jsonb;
+```
+
+#### Searching with typos: Fuzzy matching
+
+To retrieve results even with minor errors in the search term, you can use `paradedb.match` with the `distance` option.
+
+Suppose you mistyped **'running'** as **'runing'**. You can still find relevant results using fuzzy matching:
+
+```sql
+SELECT description, category
+FROM mock_items
+WHERE id @@@ paradedb.match('description', 'runing', distance => 1);
+```
+
+This will find items where the `description` is similar to **'runing'** within a [Levenshtein distance](https://en.wikipedia.org/wiki/Levenshtein_distance) of 1.
+
+```text
+  description              | category
+-------------------------+----------
+    Sleek running shoes  | Footwear
+(1 rows)
+```
+
+#### paradedb.phrase: Searching for phrases with words nearby
+
+The `paradedb.phrase` function, combined with the `slop` option, helps you find phrases even if the words are not immediately adjacent. The `slop` value specifies the number of intervening words allowed.  A `slop` of 1 permits one extra word in between.
+
+```sql
+SELECT description, category
+FROM mock_items
+WHERE id @@@ paradedb.phrase('description', ARRAY['white', 'shoes'], slop => 1);
+```
+
+This query will find rows where **'white'** and **'shoes'** are within one word or less of each other.
+
+```text
+  description              | category
+-------------------------+----------
+    White jogging shoes  | Footwear
+(1 rows)
+```
+
+### Sorting search results by relevance
+
+To ensure the most relevant results are displayed first, you can sort your search results by relevance. Utilize `paradedb.score()` with `ORDER BY` to achieve this:
+
+```sql
+SELECT description, category, rating, paradedb.score(id)
+FROM mock_items
+WHERE description @@@ 'shoes'
+ORDER BY paradedb.score(id) DESC;
+```
+
+This query will find items matching **'shoes'** and then present them in order from most to least relevant based on their search score (BM25 relevance score).
+
+```text
+description           | category | rating | score
+----------------------+----------+--------+-------------
+  Generic shoes       |	Footwear |	 4   |	2.8772602
+  Sleek running shoes |	Footwear |	 5   |	2.4849067
+  White jogging shoes |	Footwear |   3   |	2.4849067
+(3 rows)
+```
+
+### Highlighting search results
+
+To highlight matched terms in the search results, you can use the `paradedb.snippet()` function. This function generates snippets of text containing the matched words, making it easier to identify relevant content.
+
+```sql
+SELECT id, paradedb.snippet(description)
+FROM mock_items
+WHERE description @@@ 'shoes'
+LIMIT 3;
+```
+
+This will provide snippets of the `description` where the words matching your search are wrapped in `<b></b>` tags by default. This visual cue makes the matched terms stand out when results are displayed in your application.
+
+```text
+  id  | snippet
+----+-----------------------------------
+  3 | Sleek running <b>shoes</b>
+  4 | White jogging <b>shoes</b>
+  5 | Generic <b>shoes</b>
+(3 rows)
+```
+
+If you prefer different tags, you can customize the tags using the `start_tag` and `end_tag` options with `paradedb.snippet()`. For example:
+
+```sql
+SELECT id, paradedb.snippet(description, start_tag => '<start>', end_tag => '</end>')
+FROM mock_items
+WHERE description @@@ 'shoes'
+LIMIT 3;
+```
+
+This will wrap the matched words in `<start>` and `</end>` tags instead of the default `<b>` and `</b>`.
+
+```text
+  id  | snippet
+----+-----------------------------------
+  3 | Sleek running <start>shoes</end>
+  4 | White jogging <start>shoes</end>
+  5 | Generic <start>shoes</end>
+(3 rows)
+```
+
+### Combining search words with `AND/OR`
+
+To create more complex searches, you can use `OR` and `AND` operators to combine keywords. For instance, to retrieve items with **'shoes'** in the `description` OR **'Electronics'** in the `category`, you can use:
+
+```sql
+SELECT description, category
+FROM mock_items
+WHERE description @@@ 'shoes' OR category @@@ 'Electronics'
+LIMIT 3;
+```
+
+This will find items that satisfy either of these conditions.
+
+```text
+     description               | category
+--------------------------+------------
+ Ergonomic metal keyboard | Electronics
+ Plastic Keyboard         | Electronics
+ Sleek running shoes      | Footwear
+(3 rows)
+```
+
+### Miscellaneous search options
+
+There are several other functions and options available in `pg_search`. Here are a few more useful functions for advanced searching:
+
+- `paradedb.term`: This function allows for exact term matching and is particularly useful for filtering based on structured data fields like categories or ratings. It ensures that only documents containing the precise term are returned.
+
+- `paradedb.phrase_prefix`: Ideal for implementing autocomplete or search-as-you-type features. It finds phrases where the words start with the search term.
+
+- `paradedb.range`:  Allows you to define range-based queries, especially useful for filtering numeric or date fields.
+
+### Complex search queries with `paradedb.boolean`
+
+For more complex search requirements, `paradedb.boolean` allows you to combine multiple search queries using boolean logic.  It uses `must`, `should`, and `must_not` clauses to define the conditions for a match.
+
+*   `must`: Specifies conditions that **must** be met for a document to be included in the results.
+*   `should`: Specifies conditions that **should** be met. Documents matching `should` clauses will have a higher score, but at least one `must` or `should` clause needs to be satisfied for a document to be returned (if `should` is present alongside `must`). If only `should` clauses are present, at least one should match.
+*   `must_not`: Specifies conditions that **must not** be met. Documents matching these conditions are excluded.
+
+Here’s an example using `paradedb.boolean` to find items that are in the 'Electronics' category, have a description containing 'keyboard', but specifically excluding 'plas' prefixed descriptions:
+
+<CodeTabs labels={["Function Syntax", "JSON Syntax"]}>
+
+```sql
+SELECT description, rating, category
+FROM mock_items
+WHERE id @@@ paradedb.boolean(
+    must => ARRAY[
+      paradedb.term('category', 'electronics'),
+      paradedb.term('description', 'keyboard')
+    ],
+    must_not => ARRAY[
+      paradedb.phrase_prefix('description', ARRAY['plas'])
+    ]
+);
+```
+
+```sql
+SELECT description, rating, category
+FROM mock_items
+WHERE id @@@
+'{
+    "boolean": {
+      "must": [
+          {
+            "term": {
+             "field": "category",
+             "value": "electronics"
+            }
+          },
+          {
+            "term": {
+             "field": "description",
+             "value": "keyboard"
+            }
+          }
+      ],
+      "must_not": [
+          {
+            "phrase_prefix": {
+             "field": "description",
+             "phrases": ["plas"]
+            }
+          }
+      ]
+    }
+}'::jsonb;
+```
+</CodeTabs>
+
+This query will return items that are in the 'Electronics' category, have 'keyboard' in the description, and do not have 'plas' prefixed descriptions.
+
+```text
+description               | rating | category
+--------------------------+--------+-------------
+ Ergonomic metal keyboard |      4 | Electronics
+(1 row)
+```
+
+## Performance optimizations for `pg_search`
+
+To maximize performance of `pg_search`, tuning configuration parameters for indexing and query speed is key.
+
+<Admonition type="warning" title="important">
+Currently, `pg_search` on Neon does not support direct control over memory and parallelism settings. We will be supporting these features in future updates, until then the default settings are optimized for most use cases.
+</Admonition>
+
+### Key Performance Parameters
+
+- **`max_parallel_workers`:**  Limits the total number of background processes Postgres can use for parallel operations across the entire system.  Increasing this allows more parallel processing for all Postgres operations, including `pg_search`.
+- **`paradedb.create_index_memory_budget`:** Controls memory *per indexing thread* during `CREATE INDEX`. Increasing it allows for more in-memory processing, speeding up index builds, especially for large indexes.
+
+### Optimizing Indexing Speed
+
+Adjust these settings before `CREATE INDEX` for faster index builds:
+
+- **Increase Parallelism with Postgres Settings:** For faster indexing, increase the number of parallel workers available to Postgres.  This can be done by setting `max_parallel_workers` to a higher value.
+
+  ```sql
+  SET max_parallel_workers = 4; -- Adjust based on vCPUs
+  ```
+
+- **Boost Indexing Memory:** Increase memory per indexing thread with `paradedb.create_index_memory_budget`.
+    ```sql
+    SET paradedb.create_index_memory_budget = 2048; -- 2GB memory budget
+    ```
+
+### Configuration Enhancements
+
+For more advanced tuning, consider the following settings:
+
+- **`paradedb.create_index_parallelism`:**  Directly control threads for `CREATE INDEX`.
+- **`paradedb.statement_parallelism`:** Manage threads for `INSERT`, `UPDATE`, `COPY` indexing.
+- **`paradedb.statement_memory_budget`:** Memory control for indexing during data modifications.
+
+These settings provide finer control over resource usage.
+
+
+## Best practices for using pg_search/ParadeDB
+
+To optimize your search functionality and ensure efficient performance, consider the following best practices when using `pg_search`:
+
+* **Analyze query plans:** Use `EXPLAIN` to analyze query plans and identify potential bottlenecks.
+* **Index all relevant columns:** Include all columns used in search queries, sorting, or filtering for optimal performance.
+* **Utilize query builder functions:** Leverage query builder functions or JSON syntax for complex queries like fuzzy matching and phrase matching.
+
+## Conclusion
+
+You have successfully learned how to enable and utilize the `pg_search` extension on Neon for full-text search. By leveraging BM25 scoring and inverted indexes, `pg_search` provides powerful search capabilities directly within your Postgres database, eliminating the need for external search engines and ensuring real-time, ACID-compliant search functionality.
+
+While this guide provides a comprehensive introduction to `pg_search` on Neon, it is not exhaustive.  We haven't covered topics like:
+
+- **Advanced Tokenization and Language Handling:**  Exploring specialized [tokenizers](https://docs.paradedb.com/documentation/indexing/tokenizers#tokenizers) and language-specific features.
+- **Deeper dive into Query types:**  Exploring the full range of query functions like `more_like_this`, `regex_phrase`, and compound queries for complex search needs.
+- **Leveraging Fast Fields:**  Optimizing performance with [fast fields](https://docs.paradedb.com/documentation/indexing/fast_fields#fast-fields) for aggregations, filtering, and sorting, and understanding their configuration.
+- **Query-Time Boosting:**  Fine-tuning search relevance by applying [boosts](https://docs.paradedb.com/documentation/advanced/compound/boost#boost) to specific fields or terms within your queries.
+
+For a deeper dive into these and other advanced features, please refer to the official [ParadeDB documentation](https://docs.paradedb.com/welcome/introduction).
+
+## Resources
+
+- [ParadeDB Documentation](https://docs.paradedb.com/welcome/introduction)
+- [Stemming in ParadeDB](https://docs.paradedb.com/documentation/indexing/token_filters#stemmer)
+- [BM25 Algorithm](https://en.wikipedia.org/wiki/Okapi_BM25)
+- [Levenshtein distance](https://en.wikipedia.org/wiki/Levenshtein_distance)

@@ -896,6 +896,9 @@
             - title: pg_repack
               slug: extensions/pg_repack
               tag: new
+            - title: pg_search
+              slug: extensions/pg_search
+              tag: new
             - title: pg_tiktoken
               slug: extensions/pg_tiktoken
             - title: pg_trgm
