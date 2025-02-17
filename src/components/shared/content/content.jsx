@@ -11,6 +11,7 @@ import CommunityBanner from 'components/pages/doc/community-banner';
 import DefinitionList from 'components/pages/doc/definition-list';
 import DetailIconCards from 'components/pages/doc/detail-icon-cards';
 import DocsList from 'components/pages/doc/docs-list';
+// eslint-disable-next-line import/no-cycle
 import IncludeBlock from 'components/pages/doc/include-block';
 import InfoBlock from 'components/pages/doc/info-block';
 import LinkPreview from 'components/pages/doc/link-preview';
@@ -34,12 +35,14 @@ import DocCta from 'components/shared/doc-cta';
 import ExtensionRequest from 'components/shared/extension-request';
 import ImageZoom from 'components/shared/image-zoom';
 import InkeepEmbedded from 'components/shared/inkeep-embedded';
+import LatencyCalculator from 'components/shared/latency-calculator';
 import Link from 'components/shared/link';
 import RegionRequest from 'components/shared/region-request';
 import getCodeProps from 'lib/rehype-code-props';
 import getGlossaryItem from 'utils/get-glossary-item';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
+import DeployPostgresButton from '../deploy-postgres-button';
 
 const sharedComponents = Object.keys(sharedMdxComponents).reduce((acc, key) => {
   acc[key] = (props) => IncludeBlock({ url: sharedMdxComponents[key], ...props });
@@ -169,6 +172,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   DocsList,
   RegionRequest,
   ExtensionRequest,
+  LatencyCalculator,
   CTA: isUseCase ? CtaBlock : DocCta,
   Testimonial,
   TestimonialsWrapper,
@@ -179,6 +183,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   InkeepEmbedded,
   Video,
   Steps,
+  DeployPostgresButton,
   ...sharedComponents,
 });
 

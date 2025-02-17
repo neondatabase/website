@@ -151,10 +151,6 @@ module.exports = {
         'header-docs-button-border-dark':
           'radial-gradient(54.19% 83.93% at 50% 3.57%, rgba(255, 255, 255, 0.55), transparent),' +
           'linear-gradient(0deg, #303236, #303236)',
-        'subscribe-sm':
-          'linear-gradient(160deg, rgba(173, 224, 235, 0) 23%, rgba(173, 224, 235, 0.45) 50%, rgba(173, 224, 235, 0) 77%);',
-        'pricing-table-featured-column':
-          'linear-gradient(180deg, rgba(19, 20, 21, 0.80) 93%, rgba(19, 20, 21, 0) 100%);',
         'home-lightning-title':
           'radial-gradient(30.52% 57.36% at 67.98% 84.29%, #070707 8.6%, #525252 44.72%, #A7A7A7 69.37%, #FFFFFF 100%)',
         'home-lightning-title-xl':
@@ -199,6 +195,10 @@ module.exports = {
           'radial-gradient(18.96% 17.96% at 13% -1%, #C7D3FF 0%, #7995F7 8.96%, #4E5F9C 26.83%, rgba(78, 95, 156, 0) 100%),' +
           'radial-gradient(57.03% 30.65% at 100% 36.84%, #191C27 0%, rgba(25, 28, 39, 0) 100%),' +
           'linear-gradient(0deg, #141416, #141416)',
+        'blog-subscribe-form':
+          'linear-gradient(160deg, rgba(173, 224, 235, 0) 23%, rgba(173, 224, 235, 0.45) 50%, rgba(173, 224, 235, 0) 77%);',
+        'pricing-table-featured-column':
+          'linear-gradient(180deg, rgba(19, 20, 21, 0.80) 93%, rgba(19, 20, 21, 0) 100%);',
         'variable-list-icon-bg': 'linear-gradient(220deg, #272A35 8%, #16181D 70%)',
         'variable-list-icon-border': 'linear-gradient(224deg, #FFF 2.43%, rgba(255, 255, 255, 0))',
         'variable-value-1': 'linear-gradient(220deg, #FFFFFF 22%, #41BAB9 142%)',
@@ -393,7 +393,7 @@ module.exports = {
     require('tailwindcss/plugin')(({ addVariant }) => {
       addVariant('search-cancel', '&::-webkit-search-cancel-button');
     }),
-    plugin(({ matchUtilities, theme }) => {
+    plugin(({ matchUtilities, addUtilities, theme }) => {
       matchUtilities(
         {
           'border-image': (value) => ({
@@ -405,6 +405,14 @@ module.exports = {
         },
         { values: theme('backgroundImage') }
       );
+      addUtilities({
+        '.gradient-stop-opacity-40': {
+          'stop-opacity': '0.4',
+        },
+        '.gradient-stop-opacity-100': {
+          'stop-opacity': '1',
+        },
+      });
     }),
   ],
 };

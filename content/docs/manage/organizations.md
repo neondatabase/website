@@ -2,7 +2,7 @@
 title: Organizations
 subtitle: Invite Members to your Organization and collaborate on projects
 enableTableOfContents: true
-updatedOn: '2025-01-10T18:30:20.395Z'
+updatedOn: '2025-02-13T13:32:35.155Z'
 ---
 
 Build your team in Neon with Organizations. Manage all of your team's projects under a single account — with billing, role management, and project collaboration capabilities in one accessible location.
@@ -27,11 +27,14 @@ Here's a breakdown of what actions each role can take:
 | -------------------------------------------------------------------------------------- | :---: | :----: | :----------: |
 | [Create projects](/docs/manage/orgs-manage#create-and-delete-projects)                 |  ✅   |   ✅   |      ❌      |
 | [Delete projects](/docs/manage/orgs-manage#create-and-delete-projects)                 |  ✅   |   ❌   |      ❌      |
+| [Transfer projects](/docs/manage/orgs-project-transfer)\*                              |  ✅   |   ✅   |      ❌      |
 | Manage [members](/docs/manage/orgs-manage#invite-members)                              |  ✅   |   ❌   |      ❌      |
 | Manage [collaborators](/docs/manage/orgs-manage#invite-collaborators) (share projects) |  ✅   |   ✅   |      ✅      |
 | [Set permissions](/docs/manage/orgs-manage#set-permissions)                            |  ✅   |   ❌   |      ❌      |
 | [Manage billing](/docs/manage/orgs-manage#billing)                                     |  ✅   |   ❌   |      ❌      |
 | [Delete organization](/docs/manage/orgs-manage#delete-an-organization)                 |  ✅   |   ❌   |      ❌      |
+
+\* Some restrictions apply. See the [Transfer projects to an organization](/docs/manage/orgs-project-transfer) for details.
 
 ## Create an organization
 

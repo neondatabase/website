@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/guides/vercel-postgres
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-01-07T21:29:43.643Z'
+updatedOn: '2025-02-13T13:15:08.386Z'
 ---
 
 Neon supports different options for integrating Neon and Vercel, including a native integration that you can install from the Vercel Marketplace, a "previews integration" that creates a database branch with every pull request, and a manual setup option. If you're currently a Vercel Postgres user, you'll also find information below about the upcoming transition from Vercel Postgres to Neon.
@@ -42,21 +42,13 @@ This setup simply involves setting environment variables in Vercel to connect yo
 
 ## Transitioning from Vercel Postgres?
 
-  <Admonition type="important">
-  **Starting in Q4, 2024, Vercel will transition Vercel Postgres stores to the Native Vercel Integration for Neon Postgres**. Until November, you can continue using Vercel Postgres as usual. The transition will follow the principles outlined below:
+<Admonition type="important">
+**Vercel has now completed transitioning almost all Vercel Postgres stores to the Native Vercel Integration for Neon Postgres.**
 
-- Zero downtime, so there's no impact on user applications
-- Integrated billing in Vercel
-- Access to all Neon features and plans
-
-No action is required on your part. Vercel will perform the transition for you.
-
-After the transition, you will be able to manage your databases via the Native Vercel Integration from the **Storage** tab on your Vercel Dashboard. You will also be able to access your databases from the Neon Console.
-
-To learn more, please refer to the [Vercel announcement](https://vercel.com/blog/introducing-the-vercel-marketplace) and the [Neon announcement](https://neon.tech/blog/leveling-up-our-partnership-with-vercel).
+You can now manage your databases via the Native Vercel Integration from the **Storage** tab on your Vercel Dashboard and in the Neon Console.
 </Admonition>
 
-If you're transitioning from Vercel Postgres to Neon, welcome! We're glad you're here. We've prepared a **transition guide** to answer questions and help you get started.
+For those who have transitioned from Vercel Postgres to Neon, welcome! We're glad you're here. We've prepared a **transition guide** to answer questions and help you get started.
 
 <DetailIconCards>
 

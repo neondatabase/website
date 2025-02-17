@@ -3,7 +3,7 @@ title: Replicate data with Airbyte
 subtitle: Learn how to replicate data from Neon with Airbyte
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-03T20:41:57.318Z'
+updatedOn: '2025-02-11T11:32:44.535Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -138,13 +138,7 @@ Perform the following steps for each table you want to replicate data from:
 2. Create the Postgres publication. Include all tables you want to replicate as part of the publication:
 
    ```sql
-   CREATE PUBLICATION airbyte_publication FOR TABLE <table_name, table_name, table_name>;
-   ```
-
-   Alternatively, you can create a publication for all tables:
-
-   ```sql
-   CREATE PUBLICATION airbyte_publication FOR ALL TABLES;
+   CREATE PUBLICATION airbyte_publication FOR TABLE <tbl1, tbl2, tbl3>;
    ```
 
    The publication name is customizable. Refer to the [Postgres docs](https://www.postgresql.org/docs/current/logical-replication-publication.html) if you need to add or remove tables from your publication.
