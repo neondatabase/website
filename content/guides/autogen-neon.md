@@ -7,13 +7,13 @@ createdAt: '2025-02-12T00:00:00.000Z'
 updatedOn: '2025-02-12T00:00:00.000Z'
 ---
 
-This guide demonstrates how to integrate AutoGen with Neon. [AutoGen](https://microsoft.github.io/autogen/stable) is an open-source framework developed by Microsoft for building AI agents that can converse, plan, and interact with tools (APIs). Combining AutoGen with Neon allows AI agents to manage your database, execute SQL queries, and automate data-related tasks seamlessly.
+This guide demonstrates how to integrate AutoGen with Neon. [AutoGen](https://microsoft.github.io/autogen/stable) is an open-source framework developed by Microsoft for building AI agents that can converse, plan, and interact with tools (APIs). Combining AutoGen with Neon allows AI agents to manage your database, execute SQL queries, and automate data-related tasks.
 
-In this guide, we'll walk through building an AI agent with a practical example: creating a system that retrieves recent machine learning papers from arXiv and stores them in a Neon database. Through this example, you will learn how to:
+In this guide, we'll walk through building an AI agent with a practical example: creating a system that retrieves recent machine learning papers from arXiv and stores them in a Neon database. Following this example, you will learn how to:
 
 - Create an AutoGen agent with Neon API integration.
 - Implement database operations (like project creation and SQL queries) as agent tools.
-- Set up a collaborative workflow where multiple agents work together to accomplish research tasks.
+- Set up a workflow where multiple agents work together to accomplish research tasks.
 
 ## Prerequisites
 
@@ -23,7 +23,7 @@ Before you begin, make sure you have the following prerequisites:
 
 - **Neon account and API key:**
     - Sign up for a free Neon account at [neon.tech](https://console.neon.tech/signup).
-    - After signing up, get your Neon API Key from the [Neon console](https://console.neon.tech/app/settings/profile). This API key is essential for authenticating your application with Neon.
+    - After signing up, get your Neon API Key from the [Neon console](https://console.neon.tech/app/settings/profile). This API key is needed to authenticate your application with Neon.
 
 - **OpenAI account and API key:**
     - This guide uses the `gpt-4o` model from OpenAI to power the AI agent. If you don't have an OpenAI account, sign up at [platform.openai.com](https://platform.openai.com/).
@@ -37,10 +37,10 @@ Before we start building your AI agent, let's understand some fundamental concep
 
 ### What is AutoGen?
 
-AutoGen is a powerful framework designed to simplify the development of applications using LLMs. It allows you to construct complex AI workflows by creating **conversational agents** that are capable of:
+AutoGen is a framework designed to simplify the development of applications using LLMs. It allows you to construct AI workflows by creating **conversational agents** that are capable of:
 
 - **Conversation:** Engaging in multi-agent dialogues to solve tasks collaboratively.
-- **Planning:** Developing and executing strategic plans to achieve intricate goals.
+- **Planning:** Developing and executing strategic plans to achieve goals.
 - **Tool utilization:** Integrating with external tools and APIs to extend their capabilities beyond simple text generation, enabling real-world interactions.
 
 ### Key components of AutoGen
@@ -49,7 +49,7 @@ AutoGen is a powerful framework designed to simplify the development of applicat
     - **Receive and process messages:** Accept and understand messages from users or other agents.
     - **Act autonomously:** Perform tasks, utilize tools, or generate responses based on their programmed logic and received messages.
     - **Agent types:** AutoGen offers various agent types, including:
-        - **`AssistantAgent`:** A versatile agent powered by an LLM, capable of using tools and designed to be helpful and instruction-following. Ideal for general tasks and complex reasoning.
+        - **`AssistantAgent`:** A versatile agent powered by an LLM, capable of using tools and designed to be helpful and able to follow instructions. Ideal for general tasks and complex reasoning.
         - **`CodeExecutorAgent`:**  A specialized agent designed to execute code snippets. Useful for tasks requiring script execution or interacting with system commands.
         - **`UserProxyAgent`:** An agent that serves as an interface for human users. It can relay communications between the user and other agents and can be configured to request human input at specific workflow stages.
 
@@ -73,11 +73,11 @@ Utilizing these fundamental components, AutoGen provides a robust and adaptable 
 
 Neon's architecture is particularly well-suited for AI agent development, offering several key advantages:
 
-- **One-Second Provisioning:** Neon databases can be provisioned in about a second. This is *critical* for AI agents that need to dynamically create databases for tasks like testing hypotheses, generating code, or managing session-specific data.  Traditional databases, with provisioning times often measured in minutes, create a significant bottleneck. Neon's speed keeps agents operating efficiently.
+- **One-Second Provisioning:** Neon databases can be provisioned in about a second. This is *critical* for AI agents that need to dynamically create databases. Traditional databases, with provisioning times often measured in minutes, create a significant bottleneck. Neon's speed keeps agents operating efficiently.
 
 - **Scale-to-Zero and Serverless Pricing:** Neon's serverless architecture automatically scales databases down to zero when idle, and you only pay for active compute time.  This is cost-effective for AI agent workflows, which often involve unpredictable workloads and many short-lived database instances.  It enables "database-per-agent" or "database-per-session" patterns without incurring prohibitive costs.
 
-- **Agent-Friendly API:** Neon provides a simple REST API for managing databases, branches, and configurations.  This API is easy for AI agents (and human developers) to interact with programmatically, allowing agents to manage their own database infrastructure without complex tooling.
+- **Agent-Friendly API:** Neon provides a simple REST API for managing databases, roles, branches, and various other Neon platform operations.  This API is easy for AI agents (and human developers) to interact with programmatically, allowing agents to manage their own database infrastructure without complex tooling.
 
 ## Building the AI agent
 
@@ -104,6 +104,10 @@ python-dotenv
 neon-api
 psycopg2-binary
 ```
+
+<Admonition type="note">
+`neon-api` is the [Python wrapper for Neon's API](https://github.com/neondatabase/neon-api-python).
+</Admonition>
 
 Install these libraries using pip:
 
@@ -515,6 +519,7 @@ You can find the source code for the application described in this guide on GitH
 
 - [AutoGen documentation](https://microsoft.github.io/autogen/stable/)
 - [Neon documentation](/docs)
+- [neon_api: Python API wrapper for the Neon API](https://github.com/neondatabase/neon-api-python)
 - [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api)
 - [Neon API keys](/docs/manage/api-keys#creating-api-keys)
 - [Postgres for AI Agents](/use-cases/ai-agents)
