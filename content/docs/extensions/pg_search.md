@@ -413,27 +413,27 @@ To maximize performance of `pg_search`, tuning configuration parameters for inde
 Currently, `pg_search` on Neon does not support direct control over memory and parallelism settings. We will be supporting these features in future updates, until then the default settings are optimized for most use cases.
 </Admonition>
 
-### Key Performance Parameters
+### Key performance parameters
 
 - **`max_parallel_workers`:**  Limits the total number of background processes Postgres can use for parallel operations across the entire system.  Increasing this allows more parallel processing for all Postgres operations, including `pg_search`.
 - **`paradedb.create_index_memory_budget`:** Controls memory *per indexing thread* during `CREATE INDEX`. Increasing it allows for more in-memory processing, speeding up index builds, especially for large indexes.
 
-### Optimizing Indexing Speed
+### Optimizing Indexing speed
 
 Adjust these settings before `CREATE INDEX` for faster index builds:
 
-- **Increase Parallelism with Postgres Settings:** For faster indexing, increase the number of parallel workers available to Postgres.  This can be done by setting `max_parallel_workers` to a higher value.
+- **Increase parallelism with Postgres settings:** For faster indexing, increase the number of parallel workers available to Postgres.  This can be done by setting `max_parallel_workers` to a higher value.
 
   ```sql
   SET max_parallel_workers = 4; -- Adjust based on vCPUs
   ```
 
-- **Boost Indexing Memory:** Increase memory per indexing thread with `paradedb.create_index_memory_budget`.
+- **Boost Indexing memory:** Increase memory per indexing thread with `paradedb.create_index_memory_budget`.
     ```sql
     SET paradedb.create_index_memory_budget = 2048; -- 2GB memory budget
     ```
 
-### Configuration Enhancements
+### Configuration enhancements
 
 For more advanced tuning, consider the following settings:
 
@@ -444,7 +444,7 @@ For more advanced tuning, consider the following settings:
 These settings provide finer control over resource usage.
 
 
-## Best practices for using pg_search/ParadeDB
+## Best practices for using `pg_search`
 
 To optimize your search functionality and ensure efficient performance, consider the following best practices when using `pg_search`:
 
@@ -458,7 +458,7 @@ You have successfully learned how to enable and utilize the `pg_search` extensio
 
 While this guide provides a comprehensive introduction to `pg_search` on Neon, it is not exhaustive.  We haven't covered topics like:
 
-- **Advanced Tokenization and Language Handling:**  Exploring specialized [tokenizers](https://docs.paradedb.com/documentation/indexing/tokenizers#tokenizers) and language-specific features.
+- **Advanced Tokenization and language handling:**  Exploring specialized [tokenizers](https://docs.paradedb.com/documentation/indexing/tokenizers#tokenizers) and language-specific features.
 - **Deeper dive into Query types:**  Exploring the full range of query functions like `more_like_this`, `regex_phrase`, and compound queries for complex search needs.
 - **Leveraging Fast Fields:**  Optimizing performance with [fast fields](https://docs.paradedb.com/documentation/indexing/fast_fields#fast-fields) for aggregations, filtering, and sorting, and understanding their configuration.
 - **Query-Time Boosting:**  Fine-tuning search relevance by applying [boosts](https://docs.paradedb.com/documentation/advanced/compound/boost#boost) to specific fields or terms within your queries.
