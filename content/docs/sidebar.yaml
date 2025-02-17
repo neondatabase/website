@@ -490,7 +490,7 @@
         - title: SQLAlchemy
           slug: guides/sqlalchemy
     - title: Neon Auth
-      slug: guides/neon-identity
+      slug: guides/neon-auth
       icon: partner-guide
       tag: beta
     - title: Neon RLS Authorize
