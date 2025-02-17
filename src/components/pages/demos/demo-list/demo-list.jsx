@@ -26,7 +26,7 @@ const items = [
         title: 'Multi-user RAG Chat in Azure: Database project per customer',
         description:
           "RAG Chat example on Azure creates one Neon project per customer, each customer's data will be completely isolated",
-        demoLink: 'https://multiuser-rag-g0e0g3h6ekhtf7cg.germanywestcentral-01.azurewebsites.net/',
+        demoLink: 'https://multiuser-rag-g0e0g3h6ekhtf7cg.germanywestcentral-01.azurewebsites.net',
         sourceLink: 'https://github.com/neondatabase-labs/azure-tenant-ai-chat',
       },
     ],
