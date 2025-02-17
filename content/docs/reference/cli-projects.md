@@ -261,10 +261,10 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 - Block connections from the public internet:
 
-  This option is used with Neon's Private Networking feature to block access from the public internet. See [Private Networking — Restrict public internet access](/docs/guides/neon-private-networking#restrict-public-internet-access).
+  This option is used with Neon's Private Networking feature to block access from the public internet. See [Private Networking — Restrict public internet access](/docs/guides/neon-private-networking#restrict-public-internet-access). You must specify the ID of you Neon project, as shown below.
 
   ```bash
-  neon projects update muddy-wood-859533 --block-public-connections
+  neon projects update orange-credit-12345678 --block-vpc-connections true
   ```
 
 ### delete
