@@ -494,8 +494,8 @@
       icon: partner-guide
       tag: beta
     - title: Neon RLS Authorize
-      slug: guides/neon-rls-authorize
       icon: auth
+      slug: guides/neon-rls-authorize
       items:
         - section: Overview
           items:
