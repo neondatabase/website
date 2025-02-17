@@ -22,12 +22,13 @@ Before you begin, make sure you have the following prerequisites:
 - **Python 3.10 or higher:** This guide requires Python 3.10 or a later version. If you don't have it installed, download it from [python.org](https://www.python.org/downloads/).
 
 - **Neon account and API key:**
-    - Sign up for a free Neon account at [neon.tech](https://console.neon.tech/signup).
-    - After signing up, get your Neon API Key from the [Neon console](https://console.neon.tech/app/settings/profile). This API key is needed to authenticate your application with Neon.
+
+  - Sign up for a free Neon account at [neon.tech](https://console.neon.tech/signup).
+  - After signing up, get your Neon API Key from the [Neon console](https://console.neon.tech/app/settings/profile). This API key is needed to authenticate your application with Neon.
 
 - **OpenAI account and API key:**
-    - This guide uses the `gpt-4o` model from OpenAI to power the AI agent. If you don't have an OpenAI account, sign up at [platform.openai.com](https://platform.openai.com/).
-    - Generate a new API key from the [OpenAI Platform API keys section](https://platform.openai.com/api-keys). This key allows AutoGen to interact with OpenAI's models.
+  - This guide uses the `gpt-4o` model from OpenAI to power the AI agent. If you don't have an OpenAI account, sign up at [platform.openai.com](https://platform.openai.com/).
+  - Generate a new API key from the [OpenAI Platform API keys section](https://platform.openai.com/api-keys). This key allows AutoGen to interact with OpenAI's models.
 
 With these prerequisites in place, you are ready to build your AI agent.
 
@@ -46,26 +47,29 @@ AutoGen is a framework designed to simplify the development of applications usin
 ### Key components of AutoGen
 
 - **Agents:** The foundational building blocks in AutoGen. Agents are autonomous entities that can:
-    - **Receive and process messages:** Accept and understand messages from users or other agents.
-    - **Act autonomously:** Perform tasks, utilize tools, or generate responses based on their programmed logic and received messages.
-    - **Agent types:** AutoGen offers various agent types, including:
-        - **`AssistantAgent`:** A versatile agent powered by an LLM, capable of using tools and designed to be helpful and able to follow instructions. Ideal for general tasks and complex reasoning.
-        - **`CodeExecutorAgent`:**  A specialized agent designed to execute code snippets. Useful for tasks requiring script execution or interacting with system commands.
-        - **`UserProxyAgent`:** An agent that serves as an interface for human users. It can relay communications between the user and other agents and can be configured to request human input at specific workflow stages.
+
+  - **Receive and process messages:** Accept and understand messages from users or other agents.
+  - **Act autonomously:** Perform tasks, utilize tools, or generate responses based on their programmed logic and received messages.
+  - **Agent types:** AutoGen offers various agent types, including:
+    - **`AssistantAgent`:** A versatile agent powered by an LLM, capable of using tools and designed to be helpful and able to follow instructions. Ideal for general tasks and complex reasoning.
+    - **`CodeExecutorAgent`:** A specialized agent designed to execute code snippets. Useful for tasks requiring script execution or interacting with system commands.
+    - **`UserProxyAgent`:** An agent that serves as an interface for human users. It can relay communications between the user and other agents and can be configured to request human input at specific workflow stages.
 
 - **Teams (Group chat):** AutoGen facilitates forming agent teams to tackle complex problems collaboratively. Key team configurations include:
-    - **`RoundRobinGroupChat`:** A straightforward team setup where agents communicate in turns, following a round-robin approach to ensure balanced contribution from each member.
-    - **`SelectorGroupChat`:** A more sophisticated team configuration enabling advanced agent selection mechanisms, including LLM-driven speaker selection for dynamic conversation flow.
+
+  - **`RoundRobinGroupChat`:** A straightforward team setup where agents communicate in turns, following a round-robin approach to ensure balanced contribution from each member.
+  - **`SelectorGroupChat`:** A more sophisticated team configuration enabling advanced agent selection mechanisms, including LLM-driven speaker selection for dynamic conversation flow.
 
 - **Tools:** AutoGen agents can leverage tools to interact with external environments or perform specialized functions. Tools can be:
-    - **Python functions:** Custom Python functions that agents can call to execute specific actions or computations.
-    - **External APIs:** Integrations with external services, allowing agents to access a wide range of functionalities like web searching.
+
+  - **Python functions:** Custom Python functions that agents can call to execute specific actions or computations.
+  - **External APIs:** Integrations with external services, allowing agents to access a wide range of functionalities like web searching.
 
 - **Code execution:** AutoGen equips agents with code execution capabilities, enabling them to perform tasks involving computation, data manipulation, or system interactions, enhancing their problem-solving abilities.
 
 - **Termination conditions:** To effectively manage conversations and workflows, AutoGen allows defining termination conditions. These conditions specify criteria for ending a conversation or task, ensuring efficient resource use and task completion. Examples include:
-    - **`TextMentionTermination`:** Ends the conversation when a predefined text or phrase is detected in the dialogue (e.g., "TERMINATE").
-    - **`MaxMessageTermination`:** Automatically stops the conversation after a set number of messages have been exchanged, preventing infinite loops.
+  - **`TextMentionTermination`:** Ends the conversation when a predefined text or phrase is detected in the dialogue (e.g., "TERMINATE").
+  - **`MaxMessageTermination`:** Automatically stops the conversation after a set number of messages have been exchanged, preventing infinite loops.
 
 Utilizing these fundamental components, AutoGen provides a robust and adaptable framework for building a diverse array of AI applications, ranging from simple interactive chatbots to intricate, collaborative multi-agent systems.
 
@@ -73,11 +77,11 @@ Utilizing these fundamental components, AutoGen provides a robust and adaptable 
 
 Neon's architecture is particularly well-suited for AI agent development, offering several key advantages:
 
-- **One-Second Provisioning:** Neon databases can be provisioned in about a second. This is *critical* for AI agents that need to dynamically create databases. Traditional databases, with provisioning times often measured in minutes, create a significant bottleneck. Neon's speed keeps agents operating efficiently.
+- **One-Second Provisioning:** Neon databases can be provisioned in about a second. This is _critical_ for AI agents that need to dynamically create databases. Traditional databases, with provisioning times often measured in minutes, create a significant bottleneck. Neon's speed keeps agents operating efficiently.
 
-- **Scale-to-Zero and Serverless Pricing:** Neon's serverless architecture automatically scales databases down to zero when idle, and you only pay for active compute time.  This is cost-effective for AI agent workflows, which often involve unpredictable workloads and many short-lived database instances.  It enables "database-per-agent" or "database-per-session" patterns without incurring prohibitive costs.
+- **Scale-to-Zero and Serverless Pricing:** Neon's serverless architecture automatically scales databases down to zero when idle, and you only pay for active compute time. This is cost-effective for AI agent workflows, which often involve unpredictable workloads and many short-lived database instances. It enables "database-per-agent" or "database-per-session" patterns without incurring prohibitive costs.
 
-- **Agent-Friendly API:** Neon provides a simple REST API for managing databases, roles, branches, and various other Neon platform operations.  This API is easy for AI agents (and human developers) to interact with programmatically, allowing agents to manage their own database infrastructure without complex tooling.
+- **Agent-Friendly API:** Neon provides a simple REST API for managing databases, roles, branches, and various other Neon platform operations. This API is easy for AI agents (and human developers) to interact with programmatically, allowing agents to manage their own database infrastructure without complex tooling.
 
 ## Building the AI agent
 
@@ -410,12 +414,15 @@ async def main() -> None:
 This `async def main() -> None:` function is the core of your script, where you set up and orchestrate the AutoGen agents to perform the desired task. Let's break down what happens inside:
 
 - **Initialize model client:**
+
   ```python
   model_client = OpenAIChatCompletionClient(model="gpt-4o", temperature=0.6)
   ```
-    This line initializes the OpenAI model client, specifying `gpt-4o` as the LLM to be used. `OpenAIChatCompletionClient` is configured to interact with OpenAI's API, using the API key you've set up.
+
+  This line initializes the OpenAI model client, specifying `gpt-4o` as the LLM to be used. `OpenAIChatCompletionClient` is configured to interact with OpenAI's API, using the API key you've set up.
 
 - **Create `assistant` agent:**
+
   ```python
   assistant = AssistantAgent(
       name="assistant",
@@ -423,9 +430,11 @@ This `async def main() -> None:` function is the core of your script, where you 
       model_client=model_client,
   )
   ```
-    Here, we instantiate the primary agent, `assistant`, using `AssistantAgent`. This agent is designed to be the main problem solver. The `system_message` is a crucial part of its configuration, defining its role, capabilities, and instructions on how to interact with other agents and tools.  It emphasizes task planning, delegation, and using the specialized `code_executor` and `db_admin` agents for specific sub-tasks.
+
+  Here, we instantiate the primary agent, `assistant`, using `AssistantAgent`. This agent is designed to be the main problem solver. The `system_message` is a crucial part of its configuration, defining its role, capabilities, and instructions on how to interact with other agents and tools. It emphasizes task planning, delegation, and using the specialized `code_executor` and `db_admin` agents for specific sub-tasks.
 
 - **Create `code_executor` agent:**
+
   ```python
   code_executor = CodeExecutorAgent(
       name="code_executor",
@@ -433,9 +442,11 @@ This `async def main() -> None:` function is the core of your script, where you 
       sources=["assistant"],
   )
   ```
-    We then create a `CodeExecutorAgent` named `code_executor`. This agent is specialized in executing code and is equipped with `LocalCommandLineCodeExecutor` to run code locally. The `sources=["assistant"]` configuration indicates that this agent is intended to execute code suggested by the `assistant` agent.
+
+  We then create a `CodeExecutorAgent` named `code_executor`. This agent is specialized in executing code and is equipped with `LocalCommandLineCodeExecutor` to run code locally. The `sources=["assistant"]` configuration indicates that this agent is intended to execute code suggested by the `assistant` agent.
 
 - **Create `db_admin` agent:**
+
   ```python
   db_admin = AssistantAgent(
       name="db_admin",
@@ -444,30 +455,37 @@ This `async def main() -> None:` function is the core of your script, where you 
       tools=[create_database, run_sql_query],
   )
   ```
-    Next, you create another `AssistantAgent`, `db_admin`, which is specifically designed for database administration tasks.  Critically, we equip this agent with the `tools=[create_database, run_sql_query]` we defined earlier. The `system_message` for `db_admin` instructs it on its role as a database admin assistant and how to use the provided tools.
+
+  Next, you create another `AssistantAgent`, `db_admin`, which is specifically designed for database administration tasks. Critically, we equip this agent with the `tools=[create_database, run_sql_query]` we defined earlier. The `system_message` for `db_admin` instructs it on its role as a database admin assistant and how to use the provided tools.
 
 - **Define termination conditions:**
+
   ```python
   termination = TextMentionTermination("TERMINATE") | MaxMessageTermination(20)
   ```
-    This sets up termination conditions for your group chat. The conversation will end if either the phrase "TERMINATE" is mentioned by any agent (`TextMentionTermination`) or if the conversation reaches 20 messages (`MaxMessageTermination(20)`), whichever comes first. This is important to prevent conversations from running indefinitely.
+
+  This sets up termination conditions for your group chat. The conversation will end if either the phrase "TERMINATE" is mentioned by any agent (`TextMentionTermination`) or if the conversation reaches 20 messages (`MaxMessageTermination(20)`), whichever comes first. This is important to prevent conversations from running indefinitely.
 
 - **Create `group_chat`:**
+
   ```python
   group_chat = RoundRobinGroupChat(
       [assistant, code_executor, db_admin], termination_condition=termination
   )
   ```
-    We then assemble your agents into a team using `RoundRobinGroupChat`. This configuration ensures that the agents (`assistant`, `code_executor`, `db_admin`) will take turns speaking in a round-robin fashion. The `termination_condition=termination` applies the termination conditions we defined earlier to this chat.
+
+  We then assemble your agents into a team using `RoundRobinGroupChat`. This configuration ensures that the agents (`assistant`, `code_executor`, `db_admin`) will take turns speaking in a round-robin fashion. The `termination_condition=termination` applies the termination conditions we defined earlier to this chat.
 
 - **Run the chat:**
+
   ```python
   stream = group_chat.run_stream(
       task="Get the 10 most recent Machine Learning papers from arXiv. Print the titles and links to the papers in the chat. Save them in a database named 'arxiv_papers'",
   )
   await Console(stream)
   ```
-    Finally, we initiate and run the group chat using `group_chat.run_stream()`. We provide the initial `task` for the agents: to retrieve the 10 most recent Machine Learning papers from arXiv, display their titles and links, and then store this information in a database named `arxiv_papers`.  `Console(stream)` is used to provide a real-time, streaming output of the conversation to the console, making it easy for you to follow along with the agent's interactions.
+
+  Finally, we initiate and run the group chat using `group_chat.run_stream()`. We provide the initial `task` for the agents: to retrieve the 10 most recent Machine Learning papers from arXiv, display their titles and links, and then store this information in a database named `arxiv_papers`. `Console(stream)` is used to provide a real-time, streaming output of the conversation to the console, making it easy for you to follow along with the agent's interactions.
 
     <Admonition type="warning">
         This guide uses `LocalCommandLineCodeExecutor` for simplicity, which allows AI agents to execute commands directly on your local machine. **This setup is highly insecure and is strictly NOT recommended for production environments.**  Agents could potentially perform harmful actions on your system.
@@ -475,6 +493,7 @@ This `async def main() -> None:` function is the core of your script, where you 
         For production deployments, we strongly advise using `DockerCommandLineCodeExecutor`. This executor runs code within isolated Docker containers, significantly enhancing security by limiting the agent's access to your system.
 
         Setting up `DockerCommandLineCodeExecutor` involves additional configuration steps, including Docker setup and image management, which are beyond the scope of this getting started guide.  Please refer to the [AutoGen documentation](https://microsoft.github.io/autogen/stable/reference/python/autogen_ext.code_executors.docker.html#autogen_ext.code_executors.docker.DockerCommandLineCodeExecutor) for detailed instructions on how to configure and use `DockerCommandLineCodeExecutor` securely.
+
     </Admonition>
 
 ### Running the example
@@ -497,7 +516,7 @@ Executing this command will:
 
 ### Expected output
 
-Upon running `python main.py`, you will see a detailed, turn-based conversation unfold in your console.  This output will illustrate the dynamic interaction between your agents.
+Upon running `python main.py`, you will see a detailed, turn-based conversation unfold in your console. This output will illustrate the dynamic interaction between your agents.
 
 ![Autogen-Neon example output 1](/docs/guides/autogen-neon-output-1.png)
 ![Autogen-Neon example output 2](/docs/guides/autogen-neon-output-2.png)
