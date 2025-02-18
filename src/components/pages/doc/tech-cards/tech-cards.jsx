@@ -7,6 +7,8 @@ import NextLink from 'next/link';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { DOCS_BASE_PATH } from 'constants/docs';
+
 import TechCardsWrapper from './tech-cards-wrapper';
 
 const ICONS_PATH = '/images/technology-logos';
@@ -23,6 +25,8 @@ const TechCards = ({ children = null, withToggler = false }) => (
 
       const hasDarkIcon = fs.existsSync(`public${iconPathDark}`);
 
+      const isExternal = href.startsWith('http') || !href.includes(DOCS_BASE_PATH);
+
       return (
         <li className="!m-0 before:hidden">
           <NextLink
@@ -34,6 +38,8 @@ const TechCards = ({ children = null, withToggler = false }) => (
             )}
             key={index}
             href={href}
+            target={isExternal ? '_blank' : undefined}
+            rel={isExternal ? 'noopener noreferrer' : undefined}
           >
             <div className="relative z-10">
               <img
