@@ -36,8 +36,6 @@ Explore supported Postgres extensions by category. Also see:
 
 <a href="/docs/extensions/pg_duckdb" description="Accelerate analytical queries with the embedded DuckDB engine" icon="a-chart">pg_duckdb</a>
 
-<a href="/docs/extensions/pg_search" description="Adds powerful full-text search capabilities to Postgres using BM25 algorithm and inverted indexes" icon="search">pg_search</a>
-
 </DetailIconCards>
 
 ## Auditing / Logging
@@ -249,6 +247,8 @@ Explore supported Postgres extensions by category. Also see:
 <a href="/docs/extensions/pg_trgm" description="Provides functions and operators for determining the similarity of alphanumeric text based on trigram matching, and index operator classes for fast string similarity search" icon="search">pg_trgm</a>
 
 <a href="https://github.com/dimitri/prefix" description="A prefix range module that supports efficient queries on text columns with prefix-based searching and matching capabilities" icon="search">prefix</a>
+
+<a href="/docs/extensions/pg_search" description="Add powerful full-text search capabilities to Postgres using BM25 algorithm and inverted indexes" icon="search">pg_search</a>
 
 <a href="https://www.postgresql.org/docs/16/unaccent.html" description="A text search dictionary that removes accents from characters, simplifying text search in Postgres" icon="search">unaccent</a>
 
