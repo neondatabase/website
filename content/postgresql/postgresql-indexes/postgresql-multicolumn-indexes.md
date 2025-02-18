@@ -76,7 +76,7 @@ WHERE column2 = v2 and column3 = v3;
 
 Note that you can also use the `WHERE` clause to define a partially multicolumn index.
 
-In such scenarios, PostgreSQL will still consider using the index, but scanning the whole index may not be the cheapest option. The planner evaluates different execution paths, and if an index scan is not the most efficient, it may choose a sequential scan instead.
+In such scenarios, PostgreSQL will still consider using the index, but scanning the whole index may have a higher cost than other options. The planner evaluates different execution paths, and if an index scan is not the most efficient, it may choose a sequential scan instead.
 
 <Admonition type="note">
 You can also use a `WHERE` clause to define a partial multicolumn index (an index on multiple columns that only includes rows satisfying a given condition).
