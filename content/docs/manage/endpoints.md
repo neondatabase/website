@@ -180,7 +180,8 @@ Compute size support differs by [Neon plan](https://neon.tech/docs/introduction/
 | 34                | 34   | 136      | 102           | 4000            |
 | 36                | 36   | 144      | 108           | 4000            |
 | 38                | 38   | 152      | 114           | 4000            |
-| 
+
+|
 
 When selecting a compute size, ideally, you want to keep as much of your dataset in memory as possible. This improves performance by reducing the amount of reads from storage. If your dataset is not too large, select a compute size that will hold the entire dataset in memory. For larger datasets that cannot be fully held in memory, select a compute size that can hold your [working set](/docs/reference/glossary#working-set). Selecting a compute size for a working set involves advanced steps, which are outlined below. See [Sizing your compute based on the working set](#sizing-your-compute-based-on-the-working-set).
 
