@@ -15,7 +15,7 @@ import DispatchLogo from 'icons/enterprise/case-studies/dispatch.inline.svg';
 import InvencoLogo from 'icons/enterprise/case-studies/invenco.inline.svg';
 import MindvalleyLogo from 'icons/enterprise/case-studies/mindvalley.inline.svg';
 import NeoTaxLogo from 'icons/enterprise/case-studies/neo-tax.inline.svg';
-import RetoolLogo from 'icons/enterprise/case-studies/retool.inline.svg';
+import RetoolLogo from 'icons/enterprise/case-studies/re-tool.inline.svg';
 import WordwareLogo from 'icons/enterprise/case-studies/wordware.inline.svg';
 import connectionIcon from 'icons/enterprise/connection.svg';
 import durabilityIcon from 'icons/enterprise/durability.svg';

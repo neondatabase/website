@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import { LazyMotion, domAnimation, AnimatePresence, m } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const variantsAnimation = {
   open: {
@@ -19,13 +19,7 @@ const variantsAnimation = {
 };
 
 const Item = ({ question, answer, id = null, initialState = 'closed', index }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    if (initialState === 'open') {
-      setIsOpen(true);
-    }
-  }, [initialState]);
+  const [isOpen, setIsOpen] = useState(initialState === 'open');
 
   const handleOpen = () => {
     setIsOpen((prev) => !prev);
