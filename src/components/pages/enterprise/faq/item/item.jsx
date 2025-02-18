@@ -28,18 +28,18 @@ const Item = ({ question, answer, id = null, initialState = 'closed', index }) =
   return (
     <li className="overflow-hidden border-b border-gray-new-15 py-[18px] last:border-0" id={id}>
       <button
-        className="relative flex w-full items-start justify-between gap-4 text-left after:absolute after:-inset-y-5 after:left-0 after:w-full"
+        className="group relative flex w-full items-start justify-between gap-4 text-left after:absolute after:-inset-y-5 after:left-0 after:w-full"
         type="button"
         aria-expanded={isOpen}
         aria-controls={`panel-${index}`}
         onClick={handleOpen}
       >
-        <h3 className="text-xl font-medium leading-snug tracking-tighter lg:text-lg md:text-[18px]">
+        <h3 className="text-xl font-medium leading-snug tracking-tighter transition-colors duration-300 group-hover:text-primary-2 lg:text-lg md:text-[18px]">
           {question}
         </h3>
         <span
           className={clsx(
-            'mr-2.5 mt-2.5 h-2 w-2 shrink-0 transform border-l border-t border-gray-new-80 transition-transform duration-300',
+            'mr-2.5 mt-2.5 h-2 w-2 shrink-0 transform border-l border-t border-gray-new-80 transition duration-300 group-hover:border-primary-2',
             isOpen ? 'rotate-[405deg]' : 'rotate-[225deg]'
           )}
         />

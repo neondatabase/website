@@ -53,7 +53,7 @@ const Tabs = ({ tabs }) => {
           </li>
         ))}
       </ul>
-      <div className="relative min-h-[280px] w-full grow overflow-hidden rounded-[14px] bg-[#0F1115] bg-[radial-gradient(37.46%_41.61%_at_100%_0%,#153737_0%,rgba(0,33,33,0)_100%),linear-gradient(180deg,rgba(1,119,119,0)_21.94%,rgba(1,119,119,0.1)_100%)] p-8 pb-3.5 lg:px-6 lg:py-5 sm:min-h-[300px]">
+      <div className="relative min-h-[280px] w-full grow overflow-hidden rounded-[14px] bg-[#0F1115] bg-[radial-gradient(37.46%_41.61%_at_100%_0%,#153737_0%,rgba(0,33,33,0)_100%),linear-gradient(180deg,rgba(1,119,119,0)_21.94%,rgba(1,119,119,0.1)_100%)] p-8 pb-3.5 lg:px-6 lg:py-5 sm:min-h-[320px]">
         <div className="flex items-center gap-x-2">
           <Image className="shrink-0" src={infoIcon} width={22} height={22} alt="" loading="lazy" />
           <h3 className="text-xl font-semibold leading-none tracking-tighter text-white lg:text-lg">

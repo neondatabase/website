@@ -40,7 +40,7 @@
 
   .case-study-gradient-icon {
     svg {
-      @apply transition-colors duration-200;
+      @apply transition duration-300;
 
       stop {
         stop-color: #dee0e4;
