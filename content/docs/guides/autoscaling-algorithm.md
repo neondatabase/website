@@ -2,7 +2,7 @@
 title: Understanding Neon’s autoscaling algorithm
 subtitle: How Neon’s algorithm scales resources to match your workload
 enableTableOfContents: true
-updatedOn: '2024-12-01T21:48:07.691Z'
+updatedOn: '2025-02-18T19:59:08.873Z'
 ---
 
 <InfoBlock>

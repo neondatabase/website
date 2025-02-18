@@ -2,7 +2,7 @@
 title: Manage computes
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-10T14:29:38.087Z'
+updatedOn: '2025-02-18T19:59:08.874Z'
 ---
 
 A compute is a virtualized service that runs applications. In Neon, a compute runs Postgres.
