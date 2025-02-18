@@ -5,7 +5,7 @@ enableTableOfContents: false
 updatedOn: '2024-11-28T11:50:49.801Z'
 ---
 
-<TechnologyNavigation open>
+<TechCards open>
 
 <a href="/docs/guides/node" title="Node.js" description="Connect a Node.js application to Neon" icon="node-js"></a>
 
@@ -39,4 +39,4 @@ updatedOn: '2024-11-28T11:50:49.801Z'
 
 <a href="/docs/guides/sveltekit" title="Sveltekit" description="Connect a Sveltekit application to Neon" icon="svelte"></a>
 
-</TechnologyNavigation>
+</TechCards>

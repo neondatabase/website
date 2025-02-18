@@ -7,12 +7,12 @@ import NextLink from 'next/link';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Wrapper from './wrapper';
+import TechCardsWrapper from './tech-cards-wrapper';
 
 const ICONS_PATH = '/images/technology-logos';
 
-const TechnologyNavigation = ({ children = null, open = false }) => (
-  <Wrapper open={open}>
+const TechCards = ({ children = null, open = false }) => (
+  <TechCardsWrapper open={open}>
     {React.Children.map(children, (child, index) => {
       if (!child) return null;
 
@@ -63,12 +63,12 @@ const TechnologyNavigation = ({ children = null, open = false }) => (
         </li>
       );
     })}
-  </Wrapper>
+  </TechCardsWrapper>
 );
 
-TechnologyNavigation.propTypes = {
+TechCards.propTypes = {
   children: PropTypes.node,
   open: PropTypes.bool,
 };
 
-export default TechnologyNavigation;
+export default TechCards;

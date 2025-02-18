@@ -18,7 +18,7 @@ import LinkPreview from 'components/pages/doc/link-preview';
 import Steps from 'components/pages/doc/steps';
 import Tabs from 'components/pages/doc/tabs';
 import TabItem from 'components/pages/doc/tabs/tab-item';
-import TechnologyNavigation from 'components/pages/doc/technology-navigation';
+import TechCards from 'components/pages/doc/tech-cards';
 import Video from 'components/pages/doc/video';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
 import SubscriptionForm from 'components/pages/use-case/subscription-form';
@@ -163,7 +163,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   Admonition,
   CodeTabs,
   DetailIconCards,
-  TechnologyNavigation,
+  TechCards,
   CommunityBanner,
   Tabs,
   TabItem,

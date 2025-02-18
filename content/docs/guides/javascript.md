@@ -11,7 +11,7 @@ Neon Postgres should be accessed from the server-side in JavaScript applications
 
 Find detailed instructions for connecting to Neon from various JavaScript frameworks.
 
-<TechnologyNavigation open>
+<TechCards open>
 
 <a href="/docs/guides/node" title="Node.js" description="Connect a Node.js application to Neon" icon="node-js"></a>
 
@@ -19,6 +19,6 @@ Find detailed instructions for connecting to Neon from various JavaScript framew
 
 <a href="/docs/guides/bun" title="Bun" description="Connect a Bun application to Neon" icon="bun"></a>
 
-</TechnologyNavigation>
+</TechCards>
 
 <NeedHelp/>

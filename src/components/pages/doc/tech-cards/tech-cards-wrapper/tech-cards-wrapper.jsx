@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 
 import ChevronRight from 'icons/chevron-right-sm.inline.svg';
 
-const Wrapper = ({ children, open }) => {
+const TechCardsWrapper = ({ children, open }) => {
   const [isOpen, setIsOpen] = useState(open);
 
   const handleClick = () => {
@@ -39,9 +39,9 @@ const Wrapper = ({ children, open }) => {
   );
 };
 
-Wrapper.propTypes = {
+TechCardsWrapper.propTypes = {
   children: PropTypes.node.isRequired,
   open: PropTypes.bool.isRequired,
 };
 
-export default Wrapper;
+export default TechCardsWrapper;

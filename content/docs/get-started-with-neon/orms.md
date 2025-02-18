@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-11-28T11:18:12.622Z'
 ---
 
-<TechnologyNavigation open>
+<TechCards open>
 
 <a href="/docs/guides/django" title="Django" description="Connect a Django application to Neon" icon="django"></a>
 
@@ -19,4 +19,4 @@ updatedOn: '2024-11-28T11:18:12.622Z'
 
 <a href="/docs/guides/sqlalchemy" title="SQLAlchemy" description="Connect a SQLAlchemy application to Neon" icon="sqlalchemy"></a>
 
-</TechnologyNavigation>
+</TechCards>
