@@ -3,10 +3,8 @@ title: Monitor query history
 subtitle: View and analyze query history for your Neon database
 enableTableOfContents: true
 tag: new
-updatedOn: '2025-02-07T17:55:42.639Z'
+updatedOn: '2025-02-18T17:23:26.962Z'
 ---
-
-<EarlyAccess />
 
 You can monitor query history for your Neon project from the **Monitoring** page in the Neon Console.
 
