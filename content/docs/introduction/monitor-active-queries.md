@@ -6,8 +6,6 @@ tag: new
 updatedOn: '2025-02-05T21:06:28.070Z'
 ---
 
-<EarlyAccess />
-
 You can monitor active queries for your Neon project from the **Monitoring** page in the Neon Console.
 
 1. In the Neon Console, select a project.
