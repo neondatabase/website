@@ -232,7 +232,7 @@ If your target S3 bucket (or other object storage) requires authentication, ensu
 `pg_duckdb` allows you to cache data lake files locally, which can significantly improve query performance when accessing the same files repeatedly. You can use the `duckdb.cache()` function to explicitly cache a Parquet or CSV file.
 
 <Admonition type="important">
-Caching files on Neon consumes storage space on your Neon project. Ensure you have sufficient storage capacity to accommodate cached files.
+Cached files on Neon uses your project's storage. Make sure you have enough storage available before caching large files.
 </Admonition>
 
 ```sql
