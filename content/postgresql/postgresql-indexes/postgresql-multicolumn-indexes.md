@@ -60,7 +60,9 @@ WHERE column1 = v1;
 
 In these cases, the condition on `column1` (and optionally on `column2`) allows PostgreSQL to efficiently narrow down the portion of the index that needs to be scanned.
 
-However, if a query does _not_ constrain the first column of the index, PostgreSQL must evaluate whether an index scan is the most efficient execution plan. For instance, consider a query with only later columns in the `WHERE` clause:
+However, if a query does _not_ constrain the first column of the index, PostgreSQL must evaluate whether a full index scan on this index is more efficient than alternative indexes or a table scan.
+
+For instance, consider a query with only later columns in the `WHERE` clause:
 
 ```sql
 WHERE column3 = v3;
