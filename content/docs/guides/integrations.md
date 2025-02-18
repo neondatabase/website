@@ -92,6 +92,8 @@ updatedOn: '2024-12-26T17:57:49.401Z'
 
 <a href="/docs/guides/knex" title="Knex" description="Connect from Knex to Neon" icon="knex"></a>
 
+<a href="/guides/convex-neon" title="Convex" description="Integrate Convex with Neon Postgres" icon="convex"></a>
+
 </TechnologyNavigation>
 
 ## Replicate data from Neon
