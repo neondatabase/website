@@ -11,7 +11,7 @@ const Faq = ({ items }) => (
         Your questions, <br className="lg:hidden" />
         answered
       </h2>
-      <ul className="-my-4 flex flex-col xl:-my-5 lg:mt-4">
+      <ul className="-my-4 flex w-full flex-col xl:-my-5 lg:mt-4">
         {items.map((item, index) => (
           <Item {...item} key={index} index={index} />
         ))}
@@ -26,9 +26,6 @@ Faq.propTypes = {
       question: PropTypes.string.isRequired,
       answer: PropTypes.string.isRequired,
       id: PropTypes.string,
-      linkText: PropTypes.string,
-      linkUrl: PropTypes.string,
-      linkLabel: PropTypes.string,
       initialState: PropTypes.string,
       index: PropTypes.number.isRequired,
     })

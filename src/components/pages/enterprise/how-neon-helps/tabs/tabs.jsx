@@ -35,15 +35,15 @@ const Tabs = ({ tabs }) => {
 
   return (
     <div className="mt-11 flex gap-10 md:mt-10 md:flex-col md:gap-6">
-      <ul className="flex w-[280px] shrink-0 grow flex-col gap-y-2.5 lg:w-[216px]">
+      <ul className="flex w-[280px] shrink-0 grow flex-col gap-y-2.5 lg:w-[216px] md:w-full">
         {tabs.map(({ title }, index) => (
           <li key={index}>
             <button
               className={clsx(
-                'border-l-[3px] py-2.5 pl-3.5 text-left text-xl font-medium leading-snug tracking-tight text-gray-new-90 transition-colors duration-200 ease-in-out focus-visible:rounded-md focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-0 lg:py-2 lg:text-lg',
+                'w-full border-l-[3px] py-2.5 pl-3.5 text-left text-xl font-medium leading-snug tracking-tight text-gray-new-90 transition-all duration-200 ease-in-out focus-visible:rounded-md focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-0 lg:py-2 lg:text-lg',
                 index === activeTab
-                  ? 'cursor-default border-primary-1 font-semibold text-white'
-                  : 'hover:text-gray-30 border-transparent font-medium'
+                  ? 'cursor-default border-primary-1 text-white'
+                  : 'border-transparent hover:text-white'
               )}
               type="button"
               onClick={() => handleClick(index)}
@@ -55,7 +55,7 @@ const Tabs = ({ tabs }) => {
       </ul>
       <div className="relative min-h-[280px] w-full grow overflow-hidden rounded-[14px] bg-[#0F1115] bg-[radial-gradient(37.46%_41.61%_at_100%_0%,#153737_0%,rgba(0,33,33,0)_100%),linear-gradient(180deg,rgba(1,119,119,0)_21.94%,rgba(1,119,119,0.1)_100%)] p-8 pb-3.5 lg:px-6 lg:py-5 sm:min-h-[300px]">
         <div className="flex items-center gap-x-2">
-          <Image className="shrink-0" src={infoIcon} width={22} height={22} alt="" />
+          <Image className="shrink-0" src={infoIcon} width={22} height={22} alt="" loading="lazy" />
           <h3 className="text-xl font-semibold leading-none tracking-tighter text-white lg:text-lg">
             The problem
           </h3>

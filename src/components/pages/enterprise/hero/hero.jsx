@@ -3,7 +3,7 @@ import Container from 'components/shared/container/container';
 import LINKS from 'constants/links';
 
 const Hero = () => (
-  <section className="hero safe-paddings relative overflow-hidden pt-[170px] xl:pt-[150px] lg:pt-[112px] md:pt-[100px]">
+  <section className="hero safe-paddings relative overflow-hidden pt-[170px] xl:pt-[150px] lg:pt-28 md:pt-24">
     <Container className="relative z-10 flex flex-col items-center text-center" size="medium">
       <h1 className="mx-auto font-title text-[68px] font-medium leading-[0.9] -tracking-[0.02em] xl:text-[58px] lg:text-5xl md:px-5 md:text-4xl">
         Let Postgres work <br className="xs:hidden" /> smarter, not harder

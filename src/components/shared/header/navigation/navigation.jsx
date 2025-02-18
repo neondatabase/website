@@ -70,9 +70,9 @@ const Navigation = ({ isDarkTheme }) => (
                         key={index}
                       >
                         {title && (
-                          <h3 className="mb-5 text-[11px] font-medium uppercase leading-none text-gray-new-40 dark:text-gray-new-50">
+                          <span className="mb-5 block text-[11px] font-medium uppercase leading-none text-gray-new-40 dark:text-gray-new-50">
                             {title}
-                          </h3>
+                          </span>
                         )}
                         <ul className={clsx('flex flex-col', isExtended ? 'gap-5' : 'gap-[18px]')}>
                           {items.map(

@@ -11,18 +11,18 @@ import Logos from 'components/shared/logos';
 import TestimonialNew from 'components/shared/testimonial-new';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
+import DispatchLogo from 'icons/enterprise/case-studies/dispatch.inline.svg';
+import InvencoLogo from 'icons/enterprise/case-studies/invenco.inline.svg';
+import MindvalleyLogo from 'icons/enterprise/case-studies/mindvalley.inline.svg';
+import NeoTaxLogo from 'icons/enterprise/case-studies/neo-tax.inline.svg';
+import RetoolLogo from 'icons/enterprise/case-studies/retool.inline.svg';
+import WordwareLogo from 'icons/enterprise/case-studies/wordware.inline.svg';
 import connectionIcon from 'icons/enterprise/connection.svg';
 import durabilityIcon from 'icons/enterprise/durability.svg';
 import expertiseIcon from 'icons/enterprise/expertise.svg';
-import dispatch from 'icons/enterprise/impact/dispatch.svg';
-import neoTax from 'icons/enterprise/impact/neo-tax.svg';
 import multiIcon from 'icons/enterprise/multi.svg';
 import recoveryIcon from 'icons/enterprise/recovery.svg';
 import scalabilityIcon from 'icons/enterprise/scalability.svg';
-import invenco from 'images/pages/contact-sales/invenco.svg';
-import mindvalley from 'images/pages/contact-sales/mindvalley.svg';
-import retool from 'images/pages/contact-sales/retool.svg';
-import wordware from 'images/pages/contact-sales/wordware.svg';
 import apiMd from 'images/pages/enterprise/bento/api-md.jpg';
 import api from 'images/pages/enterprise/bento/api.jpg';
 import costEfficiencyMd from 'images/pages/enterprise/bento/cost-efficiency-md.jpg';
@@ -66,48 +66,42 @@ const features = [
     title: 'Scalability',
     description:
       'Neon offers serverless Postgres, scaling CPU, memory, and connections instantly to match demand for optimal cost-performance.',
-    linkText: 'Learn more',
-    linkUrl: '/docs/introduction/autoscaling',
+    url: '/docs/introduction/autoscaling',
   },
   {
     icon: multiIcon,
     title: 'Multi-tenancy',
     description:
       'Neon simplifies multi-tenant management by isolating tenants into regional projects, ensuring sovereignty, compliance, and no noise issues.',
-    linkText: 'Learn more',
-    linkUrl: '/use-cases/database-per-tenant',
+    url: '/use-cases/database-per-tenant',
   },
   {
     icon: connectionIcon,
     title: 'Connection management',
     description:
       'Neon supports 10,000+ connections with no timeouts, ensuring consistent performance for real-time apps, APIs, and high-traffic systems.',
-    linkText: 'Learn more',
-    linkUrl: '/blog/survive-thousands-connections',
+    url: '/blog/survive-thousands-connections',
   },
   {
     icon: recoveryIcon,
     title: 'Disaster recovery',
     description:
       'Neon simplifies disaster recovery with branching, letting you restore your database to any point instantly — no more lengthy backups.',
-    linkText: 'Learn more',
-    linkUrl: 'https://www.youtube.com/watch?v=ZnxLCOkb_R0',
+    url: 'https://www.youtube.com/watch?v=ZnxLCOkb_R0',
   },
   {
     icon: durabilityIcon,
     title: 'Durability',
     description:
       'Neon ensures high availability with transactions replicated across zones and data stored in object storage with 99.99999999% durability.',
-    linkText: 'Learn more',
-    linkUrl: '/blog/our-approach-to-high-availability',
+    url: '/blog/our-approach-to-high-availability',
   },
   {
     icon: expertiseIcon,
     title: 'Postgres expertise',
     description:
       'Built by Postgres experts with decades of experience, Neon offers help with performance tuning, complex migrations, and more.',
-    linkText: 'Learn more',
-    linkUrl: '/blog/top-3-features-in-postgres-17#contributions-by-neon-engineers-in-postgres-17',
+    url: '/blog/top-3-features-in-postgres-17#contributions-by-neon-engineers-in-postgres-17',
   },
 ];
 
@@ -115,67 +109,37 @@ const caseStudies = [
   {
     title: '300k+ databases',
     description: 'managed by 1 engineer.',
-    logo: {
-      src: retool,
-      alt: 'Retool',
-      width: 100,
-      height: 24,
-    },
+    logo: RetoolLogo,
     link: `${LINKS.blog}/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases`,
   },
   {
     title: '5x faster',
     description: 'environments creation.',
-    logo: {
-      src: mindvalley,
-      alt: 'Mindvalley',
-      width: 118,
-      height: 24,
-    },
+    logo: MindvalleyLogo,
     link: `${LINKS.blog}/how-mindvalley-minimizes-time-to-launch-with-neon-branches`,
   },
   {
     title: 'From days to minutes',
     description: 'development cycles.',
-    logo: {
-      src: neoTax,
-      alt: 'Neo.Tax',
-      width: 91,
-      height: 24,
-    },
+    logo: NeoTaxLogo,
     link: `${LINKS.blog}/from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle`,
   },
   {
     title: '95% fewer migration issues',
     description: 'thanks to preview branches.',
-    logo: {
-      src: wordware,
-      alt: 'Wordware',
-      width: 125,
-      height: 24,
-    },
+    logo: WordwareLogo,
     link: `${LINKS.blog}/building-ai-agents-just-got-faster-with-wordware-and-neon`,
   },
   {
     title: '80% savings',
     description: 'in&nbsp;database costs.',
-    logo: {
-      src: invenco,
-      alt: 'Invenco',
-      width: 98,
-      height: 24,
-    },
+    logo: InvencoLogo,
     link: `${LINKS.blog}/why-invenco-migrated-from-aurora-serverless-v2-to-neon`,
   },
   {
     title: '10x less capacity',
     description: 'vs Aurora Global.',
-    logo: {
-      src: dispatch,
-      alt: 'Dispatch',
-      width: 104,
-      height: 24,
-    },
+    logo: DispatchLogo,
     link: `${LINKS.blog}/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora`,
   },
 ];
@@ -214,80 +178,46 @@ const bentoCards = [
     title: 'Instant database provisioning.',
     description:
       'Neon enables the creation of new databases in under a second, allowing your users to start building right away.',
-    image: {
-      src: instantDb,
-      width: 480,
-      height: 384,
-    },
-    imageMd: {
-      src: instantDbMd,
-    },
+    image: instantDb,
+    imageMd: instantDbMd,
     className: 'col-span-3 lg:col-span-4 sm:col-span-1',
   },
   {
     title: 'Proven success.',
     description: 'Top products like Replit, Vercel Postgres, and RetoolDB are built on Neon.',
-    image: {
-      src: provenSuccess,
-      width: 316,
-      height: 384,
-    },
-    imageMd: {
-      src: provenSuccessMd,
-    },
+    image: provenSuccess,
+    imageMd: provenSuccessMd,
     className: 'col-span-2 lg:col-span-3 sm:col-span-1',
   },
   {
     title: 'Cost efficiency.',
     description: 'Scale-to-zero minimizes costs for inactive databases, saving money.',
-    image: {
-      src: costEfficiency,
-      width: 316,
-      height: 384,
-    },
-    imageMd: {
-      src: costEfficiencyMd,
-    },
+    image: costEfficiency,
+    imageLg: costEfficiencyMd,
+    imageMd: costEfficiencyMd,
     className: 'col-span-2 lg:col-span-3 lg:-mr-[18%] sm:mx-0 sm:col-span-1',
   },
   {
     title: 'Powerful API.',
     description: 'Use the Neon API to create databases, run migrations, and manage limits.',
-    image: {
-      src: api,
-      width: 316,
-      height: 384,
-    },
-    imageMd: {
-      src: apiMd,
-    },
+    image: api,
+    imageLg: apiMd,
+    imageMd: apiMd,
     className: 'col-span-2 lg:col-span-3 lg:col-start-5 lg:-ml-[18%] sm:mx-0 sm:col-span-1',
   },
   {
     title: 'Seamless integration.',
     description: 'Neon supports OAuth and more for effortless Postgres embedding.',
-    image: {
-      src: integration,
-      width: 316,
-      height: 384,
-    },
-    imageMd: {
-      src: integrationMd,
-    },
+    image: integration,
+    imageMd: integrationMd,
     className: 'col-span-2 lg:col-span-3 sm:col-span-1',
   },
   {
     title: 'Serverless scalability.',
     description:
       "Neon's architecture automatically adjusts resources based on demand, reducing manual load for developers and agents.",
-    image: {
-      src: serverlessScalability,
-      width: 480,
-      height: 384,
-    },
-    imageMd: {
-      src: serverlessScalabilityMd,
-    },
+    image: serverlessScalability,
+    imageMd: serverlessScalabilityMd,
     className: 'col-span-3 lg:col-span-4 sm:col-span-1',
   },
 ];
@@ -341,7 +271,8 @@ const EnterprisePage = () => (
       quote="Neon worked out of the box, handling hundreds of Lambdas without any of the connection issues we saw in Aurora v2. On top of that, it costs us 1/6 of what we were paying with AWS."
       name="Cody Jenkins"
       position="Head of Engineering at Invenco"
-      avatar={{ src: codyJenkins, width: 30, height: 30 }}
+      avatar={codyJenkins}
+      isPriority
     />
     <Features title="Hundreds of Enterprises are switching to Neon. Here’s why" items={features} />
     <Usage />
@@ -352,7 +283,7 @@ const EnterprisePage = () => (
       quote="Time to launch is crucial for us: when we tried Neon and saw that spinning up a new ephemeral environment takes seconds, we were blown away."
       name="Alex Co"
       position="Head of Platform Engineering at Mindvalley"
-      avatar={{ src: alexCo, width: 30, height: 30 }}
+      avatar={alexCo}
     />
     <Bento cards={bentoCards} />
     <TestimonialNew
@@ -360,13 +291,13 @@ const EnterprisePage = () => (
       quote="With Neon’s preview branches, we can catch issues early and fix them before they hit production."
       name="Robert Chandler"
       position="CTO at Wordware.ai"
-      avatar={{ src: robertChandler, width: 30, height: 30 }}
+      avatar={robertChandler}
     />
     <Faq items={faqItems} />
     <CTA
       className="pb-[300px] pt-[390px] xl:pb-[266px] xl:pt-[322px] lg:pb-[270px] lg:pt-[288px] md:pb-[170px] md:pt-[163px]"
       title="The Postgres of tomorrow, <br /> available today"
-      titleClassName="!text-[68px] xl:!text-[56px] lg:!text-[40px] md:!text-[32px]"
+      titleClassName="!text-[68px] leading-none xl:!text-[56px] lg:!text-[40px] md:!text-[32px]"
       buttonText="Book a meeting with our team"
       buttonUrl={LINKS.contactSales}
     />

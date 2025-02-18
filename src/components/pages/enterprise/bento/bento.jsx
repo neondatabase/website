@@ -7,12 +7,15 @@ import Container from 'components/shared/container';
 
 const Bento = ({ cards }) => (
   <section className="bento safe-paddings mt-[202px] xl:mt-[160px] lg:mt-[128px] md:mt-[94px]">
-    <Container className="xl:max-w-[1024px] xl:px-8 lg:max-w-[768px]" size="1152">
+    <Container
+      className="xl:max-w-[1024px] xl:px-8 lg:!max-w-[704px] sm:!max-w-[360px]"
+      size="1152"
+    >
       <h2 className="mx-auto text-center font-title text-[48px] font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-[36px] md:text-[32px]">
         Add Postgres to your platform or AI Agent
       </h2>
-      <ul className="mx-auto mt-10 grid grid-cols-7 grid-rows-[384px_384px] gap-5 xl:mt-11 xl:grid-rows-[318px_318px] lg:mt-9 lg:max-w-[704px] lg:grid-rows-[318px_318px_318px] sm:grid-cols-1 sm:grid-rows-[repeat(6,minmax(298px,1fr))] sm:gap-y-[18px]">
-        {cards.map(({ title, description, image, imageMd, className }, index) => (
+      <ul className="mx-auto mt-10 grid grid-cols-7 grid-rows-[384px_384px] gap-5 xl:mt-11 xl:grid-rows-[318px_318px] lg:mt-9 lg:grid-rows-[318px_318px_318px] sm:grid-cols-1 sm:grid-rows-[repeat(6,minmax(298px,1fr))] sm:gap-y-[18px]">
+        {cards.map(({ title, description, image, imageLg, imageMd, className }, index) => (
           <li
             className={clsx(
               className,
@@ -24,18 +27,27 @@ const Bento = ({ cards }) => (
               <span className="font-medium text-white">{title}</span> {description}
             </p>
             <Image
-              className="absolute bottom-0 left-0 right-0 top-0 z-10 h-full w-auto min-w-full max-w-none lg:h-auto sm:hidden"
-              src={image.src}
-              width={image.width}
-              height={image.height}
+              className={clsx(
+                'absolute bottom-0 left-0 right-0 top-0 z-10 h-full w-auto min-w-full max-w-none',
+                {
+                  'lg:hidden': imageLg,
+                  'sm:hidden': imageMd,
+                }
+              )}
+              src={image}
+              width={image.width / 2}
+              height={image.height / 2}
               quality={99}
               alt=""
             />
             <Image
-              className="absolute inset-0 z-10 hidden w-full min-w-full sm:block"
-              src={imageMd.src}
-              width={320}
-              height={298}
+              className={clsx('absolute inset-0 z-10 hidden min-h-full min-w-full max-w-none', {
+                'lg:block': imageLg,
+                'sm:block': imageMd,
+              })}
+              src={imageLg || imageMd}
+              width={imageLg ? imageLg.width / 2 : imageMd.width / 2}
+              height={imageLg ? imageLg.height / 2 : imageMd.height / 2}
               quality={99}
               alt=""
             />
@@ -52,11 +64,9 @@ Bento.propTypes = {
       title: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
       className: PropTypes.string.isRequired,
-      image: PropTypes.shape({
-        src: PropTypes.string.isRequired,
-        width: PropTypes.number.isRequired,
-        height: PropTypes.number.isRequired,
-      }).isRequired,
+      image: PropTypes.object.isRequired,
+      imageLg: PropTypes.object,
+      imageMd: PropTypes.object.isRequired,
     })
   ).isRequired,
 };
