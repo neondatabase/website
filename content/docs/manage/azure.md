@@ -120,7 +120,7 @@ For supported Azure regions, refer to our [Regions](/docs/introduction/regions) 
 
 ## Azure examples
 
-<TechCards open>
+<TechCards>
 
 <a href="https://neon.tech/guides/neon-azure-integration" title="Get started with Neon on Azure" description="Deploy Neon's serverless Postgres via the Azure Marketplace" icon="azure"></a>
 
@@ -144,7 +144,7 @@ For supported Azure regions, refer to our [Regions](/docs/introduction/regions) 
 
 ## Related resources
 
-<TechCards open>
+<TechCards>
 
 <a href="/docs/guides/dotnet-npgsql" title=".NET" description="Connect a .NET (C#) application to Neon" icon="dotnet"></a>
 

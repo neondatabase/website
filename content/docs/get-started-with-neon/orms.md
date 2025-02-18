@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2024-11-28T11:18:12.622Z'
 ---
 
-<TechCards open>
+<TechCards>
 
 <a href="/docs/guides/django" title="Django" description="Connect a Django application to Neon" icon="django"></a>
 

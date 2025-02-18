@@ -6,8 +6,8 @@ import React, { useState } from 'react';
 
 import ChevronRight from 'icons/chevron-right-sm.inline.svg';
 
-const TechCardsWrapper = ({ children, open }) => {
-  const [isOpen, setIsOpen] = useState(open);
+const TechCardsWrapper = ({ children, withToggler }) => {
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
     setIsOpen((isOpen) => !isOpen);
@@ -16,9 +16,9 @@ const TechCardsWrapper = ({ children, open }) => {
   return (
     <>
       <ul className="not-prose !mb-0 !mt-7 grid grid-cols-3 gap-5 !p-0 sm:grid-cols-1">
-        {!isOpen ? children.slice(0, 3) : children}
+        {withToggler && !isOpen ? children.slice(0, 3) : children}
       </ul>
-      {!open && (
+      {withToggler && (
         <button
           type="button"
           className="mx-auto mt-4 flex items-center rounded-full bg-gray-new-98 px-[18px] py-1.5 text-black-new transition-colors duration-200 hover:bg-gray-new-94 dark:bg-gray-new-10 dark:text-gray-new-80 dark:hover:bg-gray-new-15"
@@ -41,7 +41,7 @@ const TechCardsWrapper = ({ children, open }) => {
 
 TechCardsWrapper.propTypes = {
   children: PropTypes.node.isRequired,
-  open: PropTypes.bool.isRequired,
+  withToggler: PropTypes.bool.isRequired,
 };
 
 export default TechCardsWrapper;

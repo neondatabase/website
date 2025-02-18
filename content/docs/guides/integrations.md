@@ -10,7 +10,7 @@ updatedOn: '2025-02-18T21:22:27.351Z'
 
 ## Monitor
 
-<TechCards open>
+<TechCards>
 
 <a href="/docs/guides/datadog" title="Datadog" description="Send metrics and events from Neon Postgres to Datadog" icon="datadog"></a>
 
@@ -18,7 +18,7 @@ updatedOn: '2025-02-18T21:22:27.351Z'
 
 ## Deploy
 
-<TechCards open>
+<TechCards>
 
 <a href="/docs/guides/vercel-overview" title="Vercel" description="Learn how to integrate Neon with Vercel" icon="vercel"></a>
 
@@ -42,7 +42,7 @@ updatedOn: '2025-02-18T21:22:27.351Z'
 
 ## Serverless
 
-<TechCards open>
+<TechCards>
 
 <a href="/docs/serverless/serverless-driver" title="Neon" description="Connect with the Neon serverless driver" icon="neon"></a>
 
@@ -54,7 +54,7 @@ updatedOn: '2025-02-18T21:22:27.351Z'
 
 ## Query
 
-<TechCards open>
+<TechCards>
 
 <a href="/docs/guides/exograph" title="Exograph" description="Use Exograph with Neon" icon="exograph"></a>
 
@@ -78,7 +78,7 @@ updatedOn: '2025-02-18T21:22:27.351Z'
 
 ## Develop
 
-<TechCards open>
+<TechCards>
 
 <a href="/docs/guides/neon-github-app" title="GitHub integration" description="Use the Neon GitHub integration" icon="github"></a>
 
@@ -98,7 +98,7 @@ updatedOn: '2025-02-18T21:22:27.351Z'
 
 ## Replicate data from Neon
 
-<TechCards open>
+<TechCards>
 
 <a href="/docs/guides/logical-replication-airbyte" title="Airbyte" description="Replicate data from Neon with Airbyte" icon="airbyte"></a>
 
@@ -132,7 +132,7 @@ updatedOn: '2025-02-18T21:22:27.351Z'
 
 ## Replicate data to Neon
 
-<TechCards open>
+<TechCards>
 
 <a href="/docs/guides/logical-replication-alloydb" title="AlloyDB" description="Replicate data from AlloyDB to Neon" icon="alloydb"></a>
 
@@ -150,7 +150,7 @@ updatedOn: '2025-02-18T21:22:27.351Z'
 
 ## Schema Migration
 
-<TechCards open>
+<TechCards>
 
 <a href="/docs/guides/django-migrations" title="Django" description="Connect a Django application to Neon" icon="django"></a>
 
@@ -176,7 +176,7 @@ updatedOn: '2025-02-18T21:22:27.351Z'
 
 ## Authenticate
 
-<TechCards open>
+<TechCards>
 
 <a href="/docs/guides/auth-auth0" title="Auth0" description="Authenticate Neon Postgres application users with Auth0" icon="auth0"></a>
 

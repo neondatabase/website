@@ -7,7 +7,7 @@ redirectFrom:
 updatedOn: '2024-11-03T11:19:09.438Z'
 ---
 
-<TechCards open>
+<TechCards>
 
 <a href="/docs/guides/dotnet-npgsql" title=".NET" description="Connect a .NET (C#) application to Neon" icon="dotnet"></a>
 

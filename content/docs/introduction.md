@@ -25,7 +25,7 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 
 ## Quickstarts
 
-<TechCards>
+<TechCards withToggler>
 
 <a href="/docs/guides/drizzle" title="Drizzle" description="Learn how to use Drizzle ORM with your Neon Postgres database (Drizzle docs)" icon="drizzle"></a>
 

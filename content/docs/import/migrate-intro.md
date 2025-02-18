@@ -52,7 +52,7 @@ If you're planning to migrate a production workload to Neon, let us know&#8212;w
 
 Postgres logical replication in Neon provides an efficient way to migrate data from other Postgres providers with minimal downtime. By replicating data in real-time, this method allows you to transition your applications to Neon without interrupting your services. Please refer to our logical replication guides for instructions.
 
-<TechCards open>
+<TechCards>
 
 <a href="/docs/guides/logical-replication-alloydb" title="AlloyDB" description="Replicate data from AlloyDB to Neon" icon="alloydb"></a>
 

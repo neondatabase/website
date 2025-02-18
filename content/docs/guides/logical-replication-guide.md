@@ -41,7 +41,7 @@ To get started, jump into one of our step-by-step logical replication guides.
 
 ## Replicate data from Neon
 
-<TechCards open>
+<TechCards>
 
 <a href="/docs/guides/logical-replication-airbyte" title="Airbyte" description="Replicate data from Neon with Airbyte" icon="airbyte"></a>
 
@@ -75,7 +75,7 @@ To get started, jump into one of our step-by-step logical replication guides.
 
 ## Replicate data to Neon
 
-<TechCards open>
+<TechCards>
 
 <a href="/docs/guides/logical-replication-alloydb" title="AlloyDB" description="Replicate data from AlloyDB to Neon" icon="alloydb"></a>
 

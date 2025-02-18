@@ -13,7 +13,7 @@ Neon Postgres should be accessed from the server side in React applications. Usi
 
 Find detailed instructions for connecting to Neon from various React meta-frameworks.
 
-<TechCards open>
+<TechCards>
 
 <a href="/docs/guides/nextjs" title="Next.js" description="Connect a Next.js application to Neon" icon="next-js"></a>
 

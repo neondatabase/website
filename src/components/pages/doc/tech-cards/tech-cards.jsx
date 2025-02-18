@@ -11,8 +11,8 @@ import TechCardsWrapper from './tech-cards-wrapper';
 
 const ICONS_PATH = '/images/technology-logos';
 
-const TechCards = ({ children = null, open = false }) => (
-  <TechCardsWrapper open={open}>
+const TechCards = ({ children = null, withToggler = false }) => (
+  <TechCardsWrapper withToggler={withToggler}>
     {React.Children.map(children, (child, index) => {
       if (!child) return null;
 
@@ -68,7 +68,7 @@ const TechCards = ({ children = null, open = false }) => (
 
 TechCards.propTypes = {
   children: PropTypes.node,
-  open: PropTypes.bool,
+  withToggler: PropTypes.bool,
 };
 
 export default TechCards;

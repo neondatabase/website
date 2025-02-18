@@ -5,7 +5,7 @@ enableTableOfContents: false
 updatedOn: '2024-11-28T11:50:49.801Z'
 ---
 
-<TechCards open>
+<TechCards>
 
 <a href="/docs/guides/node" title="Node.js" description="Connect a Node.js application to Neon" icon="node-js"></a>
 
