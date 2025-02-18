@@ -242,7 +242,7 @@ Explore supported Postgres extensions by category. Also see:
 
 <a href="https://www.postgresql.org/docs/16/fuzzystrmatch.html" description="Provides several functions to determine similarities and distance between strings in Postgres" icon="search">fuzzystrmatch</a>
 
-<a href="/docs/extensions/pg_search" description="ParadeDB full-text search and analytics directly within your Postgres database using BM25 indexes" icon="search">pg_search</a>
+<a href="/docs/extensions/pg_search" description="An Elasticsearch alternative using Postgres for full-text search and analytics built by ParadeDB" icon="search">pg_search</a>
 
 <a href="/docs/extensions/pg_trgm" description="Provides functions and operators for determining the similarity of alphanumeric text based on trigram matching, and index operator classes for fast string similarity search" icon="search">pg_trgm</a>
 

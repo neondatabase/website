@@ -1,22 +1,22 @@
 ---
-title: The pg_search (ParadeDB) extension
-subtitle: Full-text search and analytics directly within your Postgres database
+title: The pg_search extension
+subtitle: An Elasticsearch alternative using Postgres for full-text search and analytics
 tag: new
 enableTableOfContents: true
 updatedOn: '2025-02-16T00:00:00.000Z'
 ---
 
-The `pg_search` extension adds functions and operators to Postgres that use [**BM25 (Best Matching 25)**](https://en.wikipedia.org/wiki/Okapi_BM25) indexes for efficient, high-relevance text searches. It supports standard SQL syntax and JSON query objects, offering features similar to those in Elasticsearch.
+The `pg_search` extension by ParadeDB adds functions and operators to Postgres that use [BM25 (Best Matching 25)](https://en.wikipedia.org/wiki/Okapi_BM25) indexes for efficient, high-relevance text searches. It supports standard SQL syntax and JSON query objects, offering features similar to those in Elasticsearch.
 
-By bringing these search capabilities to Postgres, `pg_search` eliminates the need to integrate external search engines, simplifying your architecture and providing real-time search functionality that's tightly coupled with your transactional data.
+`pg_search` eliminates the need to integrate external search engines, simplifying your architecture and providing real-time search functionality that's tightly coupled with your transactional data.
 
 <CTA />
 
-This guide introduces `pg_search`.  You'll learn how to enable it on Neon, understand the fundamentals of BM25 scoring and inverted indexes, and explore hands-on examples to create indexes and perform full-text searches within your Neon Postgres database.
+In this guide, you'll learn how to enable `pg_search` on Neon, understand the fundamentals of BM25 scoring and inverted indexes, and explore hands-on examples to create indexes and perform full-text searches on your Postgres database.
 
 <Admonition type="note" title="pg_search on Neon">
 
-`pg_search` (version 15.2) is currently only available on Neon projects that use Postgres 17. Manual `pg_search` version upgrades via `ALTER EXTENSION` are not yet supported. 
+`pg_search` (version 15.2) is currently only available on Neon projects using Postgres 17. Manual `pg_search` version upgrades via `ALTER EXTENSION` are not yet supported. 
 
 </Admonition>
 
