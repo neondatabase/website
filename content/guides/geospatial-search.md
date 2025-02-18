@@ -13,13 +13,13 @@ This makes Postgres a great option for applications involving maps, location-bas
 
 ## Steps
 
-* Install and enable PostGIS
-* Create a table with a geometry column
-* Insert and retrieve geospatial data
-* Perform geospatial queries using `ST_DWithin`
-* Sort locations by distance using `ST_Distance`
-* Find locations within a polygon using `ST_MakeEnvelope`
-* Index using GiST indexes
+- Install and enable PostGIS
+- Create a table with a geometry column
+- Insert and retrieve geospatial data
+- Perform geospatial queries using `ST_DWithin`
+- Sort locations by distance using `ST_Distance`
+- Find locations within a polygon using `ST_MakeEnvelope`
+- Index using GiST indexes
 
 ### Install and enable PostGIS
 
