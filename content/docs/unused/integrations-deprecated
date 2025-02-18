@@ -14,7 +14,7 @@ There are two ways to authenticate:
 
 Github single-sign-on makes it very easy to connect interactively. However, as it requires opening a link with a web browser, it is not suitable for applications. For applications, generate an authentication token in the Cloud Console.
 
-{/*### Using from Vercel*/}
+{/_### Using from Vercel_/}
 
 ### Using from Hasura
 
@@ -239,7 +239,7 @@ const result = await sql.uafe(req.body);
 
 ### Using from Next.js + vercel
 
-1. [Create a next.js project](https://nextjs.org/learn/basics/create-nextjs-app/setup) if you don’t have one.
+1. [Create a next.js project](https://nextjs.org/docs/app/getting-started/installation) if you don’t have one.
 2. Create a Neon project for your app. You can configure your db schema from Neon Console or using tools like Prisma.
 3. Add postgres client to your app. In this example we use [postgres.js](https://www.npmjs.com/package/postgres).
 4. Put your Neon credentials to the `.env` file:
