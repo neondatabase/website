@@ -6,15 +6,17 @@ enableTableOfContents: true
 updatedOn: '2025-02-16T00:00:00.000Z'
 ---
 
-The `pg_search` extension enhances Postgres with full-text search capabilities.  Operating within the familiar Postgres environment, it introduces functions and operators that leverage BM25 indexes to deliver efficient and highly relevant text queries. This allows you to perform searches using standard SQL syntax alongside flexible JSON query objects, mirroring advanced features found in systems like Elasticsearch. By bringing search capabilities into Postgres, `pg_search` eliminates the complexity of external search engines, simplifying your architecture and ensuring real-time, ACID-compliant search functionality that remains tightly coupled with your core transactional data within the trusted Postgres ecosystem.
+The `pg_search` extension adds functions and operators to Postgres that use [**BM25 (Best Matching 25)**](https://en.wikipedia.org/wiki/Okapi_BM25) indexes for efficient, high-relevance text searches. It supports standard SQL syntax and JSON query objects, offering features similar to those in Elasticsearch.
+
+By bringing these search capabilities to Postgres, `pg_search` eliminates the need to integrate external search engines, simplifying your architecture and providing real-time search functionality that's tightly coupled with your transactional data.
 
 <CTA />
 
-This guide introduces the `pg_search` extension.  You'll learn how to enable it on Neon, understand the fundamentals of BM25 scoring and inverted indexes, and explore hands-on examples to create indexes and perform full-text searches within your Neon Postgres database.
+This guide introduces `pg_search`.  You'll learn how to enable it on Neon, understand the fundamentals of BM25 scoring and inverted indexes, and explore hands-on examples to create indexes and perform full-text searches within your Neon Postgres database.
 
 <Admonition type="note" title="pg_search on Neon">
 
-`pg_search` (version 15.2) is currently only available on Postgres 17 compute instances on Neon. Manual `pg_search` version upgrades via `ALTER EXTENSION` are not yet supported. 
+`pg_search` (version 15.2) is currently only available on Neon projects that use Postgres 17. Manual `pg_search` version upgrades via `ALTER EXTENSION` are not yet supported. 
 
 </Admonition>
 
@@ -26,17 +28,13 @@ You can install the `pg_search` extension by running the following `CREATE EXTEN
 CREATE EXTENSION IF NOT EXISTS pg_search;
 ```
 
-**Version availability:**
-
-Please refer to the [list of all extensions](/docs/extensions/pg-extensions) available in Neon for up-to-date extension version information.
-
 ## Understanding text search with `pg_search`
 
 `pg_search` enables text searching within your Postgres database, helping you find rows containing specific keywords or phrases in text columns.  Unlike basic `LIKE` queries, `pg_search` offers advanced scoring, relevance ranking, and language handling to deliver more accurate and context-aware search results. The extension provides several key features:
 
 - **Relevance Ranking:**  Ordering search results by relevance, placing the most relevant matches higher, not just based on keyword presence.
 - **Language Handling:**  Depending on setup, `pg_search` can handle different languages and their rules for word analysis.
-- **Stemming:**  Recognizing word variations like "run," "running," and "runs" as related, linking them to a root form ("run") for broader matches.
+- **Stemming:**  Recognizing word variations like "run," "running," and "runs" as being related, linking them to a root form ("run") for broader matches.
 
 ### BM25: The Relevance scoring algorithm
 
@@ -458,10 +456,10 @@ You have successfully learned how to enable and utilize the `pg_search` extensio
 
 While this guide provides a comprehensive introduction to `pg_search` on Neon, it is not exhaustive.  We haven't covered topics like:
 
-- **Advanced Tokenization and language handling:**  Exploring specialized [tokenizers](https://docs.paradedb.com/documentation/indexing/tokenizers#tokenizers) and language-specific features.
-- **Deeper dive into Query types:**  Exploring the full range of query functions like `more_like_this`, `regex_phrase`, and compound queries for complex search needs.
-- **Leveraging Fast Fields:**  Optimizing performance with [fast fields](https://docs.paradedb.com/documentation/indexing/fast_fields#fast-fields) for aggregations, filtering, and sorting, and understanding their configuration.
-- **Query-Time Boosting:**  Fine-tuning search relevance by applying [boosts](https://docs.paradedb.com/documentation/advanced/compound/boost#boost) to specific fields or terms within your queries.
+- **Advanced tokenization and language handling:**  Exploring specialized [tokenizers](https://docs.paradedb.com/documentation/indexing/tokenizers#tokenizers) and language-specific features.
+- **The full range of query types:**  Exploring the full range of query functions like `more_like_this`, `regex_phrase`, and compound queries for complex search needs.
+- **Leveraging fast fields:**  Optimizing performance with [fast fields](https://docs.paradedb.com/documentation/indexing/fast_fields#fast-fields) for aggregations, filtering, and sorting, and understanding their configuration.
+- **Query-time boosting:**  Fine-tuning search relevance by applying [boosts](https://docs.paradedb.com/documentation/advanced/compound/boost#boost) to specific fields or terms within your queries.
 
 For a deeper dive into these and other advanced features, please refer to the official [ParadeDB documentation](https://docs.paradedb.com/welcome/introduction).
 
