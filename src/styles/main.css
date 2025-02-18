@@ -46,13 +46,19 @@
     }
   }
 
-  .with-list-primary {
+  .with-list-style {
     ul,
     ol {
-      @apply my-2 ml-5 pl-0;
+      list-style: auto;
+
+      @apply my-5 ml-10 mr-16 md:mx-4;
 
       li {
-        @apply relative my-2 list-none pl-4 before:absolute before:left-0 before:top-2.5 before:h-1.5 before:w-1.5 before:rounded-full before:bg-green-45;
+        @apply relative my-2.5 pl-1 tracking-tight;
+
+        b {
+          @apply font-medium;
+        }
 
         p {
           @apply mt-0;

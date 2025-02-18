@@ -1,13 +1,13 @@
 import Bento from 'components/pages/enterprise/bento';
 import CaseStudies from 'components/pages/enterprise/case-studies';
 import Faq from 'components/pages/enterprise/faq';
+import Features from 'components/pages/enterprise/features';
 import Hero from 'components/pages/enterprise/hero';
 import HowNeonHelps from 'components/pages/enterprise/how-neon-helps';
 import Usage from 'components/pages/enterprise/usage';
 import CTA from 'components/shared/cta';
 import Layout from 'components/shared/layout';
 import Logos from 'components/shared/logos';
-import SplitViewGridNew from 'components/shared/split-view-grid-new';
 import TestimonialNew from 'components/shared/testimonial-new';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
@@ -23,11 +23,17 @@ import invenco from 'images/pages/contact-sales/invenco.svg';
 import mindvalley from 'images/pages/contact-sales/mindvalley.svg';
 import retool from 'images/pages/contact-sales/retool.svg';
 import wordware from 'images/pages/contact-sales/wordware.svg';
+import apiMd from 'images/pages/enterprise/bento/api-md.jpg';
 import api from 'images/pages/enterprise/bento/api.jpg';
+import costEfficiencyMd from 'images/pages/enterprise/bento/cost-efficiency-md.jpg';
 import costEfficiency from 'images/pages/enterprise/bento/cost-efficiency.jpg';
+import instantDbMd from 'images/pages/enterprise/bento/instant-db-md.jpg';
 import instantDb from 'images/pages/enterprise/bento/instant-db.jpg';
+import integrationMd from 'images/pages/enterprise/bento/integration-md.jpg';
 import integration from 'images/pages/enterprise/bento/integration.jpg';
+import provenSuccessMd from 'images/pages/enterprise/bento/proven-success-md.jpg';
 import provenSuccess from 'images/pages/enterprise/bento/proven-success.jpg';
+import serverlessScalabilityMd from 'images/pages/enterprise/bento/serverless-scalability-md.jpg';
 import serverlessScalability from 'images/pages/enterprise/bento/serverless-scalability.jpg';
 import alexCo from 'images/pages/enterprise/testimonials/alex-co.jpg';
 import codyJenkins from 'images/pages/enterprise/testimonials/cody-jenkins.jpg';
@@ -36,7 +42,6 @@ import getMetadata from 'utils/get-metadata';
 
 export const metadata = getMetadata({
   ...SEO_DATA.enterprise,
-  robotsNoindex: 'noindex',
 });
 
 const logos = [
@@ -55,7 +60,7 @@ const logos = [
   'encore',
 ];
 
-const splitItems = [
+const features = [
   {
     icon: scalabilityIcon,
     title: 'Scalability',
@@ -214,7 +219,10 @@ const bentoCards = [
       width: 480,
       height: 384,
     },
-    className: 'col-span-3',
+    imageMd: {
+      src: instantDbMd,
+    },
+    className: 'col-span-3 lg:col-span-4 sm:col-span-1',
   },
   {
     title: 'Proven success.',
@@ -224,7 +232,10 @@ const bentoCards = [
       width: 316,
       height: 384,
     },
-    className: 'col-span-2',
+    imageMd: {
+      src: provenSuccessMd,
+    },
+    className: 'col-span-2 lg:col-span-3 sm:col-span-1',
   },
   {
     title: 'Cost efficiency.',
@@ -234,7 +245,10 @@ const bentoCards = [
       width: 316,
       height: 384,
     },
-    className: 'col-span-2',
+    imageMd: {
+      src: costEfficiencyMd,
+    },
+    className: 'col-span-2 lg:col-span-3 lg:-mr-[18%] sm:mx-0 sm:col-span-1',
   },
   {
     title: 'Powerful API.',
@@ -244,7 +258,10 @@ const bentoCards = [
       width: 316,
       height: 384,
     },
-    className: 'col-span-2',
+    imageMd: {
+      src: apiMd,
+    },
+    className: 'col-span-2 lg:col-span-3 lg:col-start-5 lg:-ml-[18%] sm:mx-0 sm:col-span-1',
   },
   {
     title: 'Seamless integration.',
@@ -254,7 +271,10 @@ const bentoCards = [
       width: 316,
       height: 384,
     },
-    className: 'col-span-2',
+    imageMd: {
+      src: integrationMd,
+    },
+    className: 'col-span-2 lg:col-span-3 sm:col-span-1',
   },
   {
     title: 'Serverless scalability.',
@@ -265,7 +285,10 @@ const bentoCards = [
       width: 480,
       height: 384,
     },
-    className: 'col-span-3',
+    imageMd: {
+      src: serverlessScalabilityMd,
+    },
+    className: 'col-span-3 lg:col-span-4 sm:col-span-1',
   },
 ];
 
@@ -312,24 +335,20 @@ const faqItems = [
 const EnterprisePage = () => (
   <Layout headerClassName="!absolute !bg-transparent">
     <Hero />
-    <Logos className="mt-[102px]" logos={logos} />
+    <Logos className="mt-[102px] xl:mt-[86px] lg:mt-[76px] md:mt-[68px]" logos={logos} />
     <TestimonialNew
-      className="mt-[118px]"
+      className="mt-[118px] xl:mt-[80px] lg:mt-[76px]"
       quote="Neon worked out of the box, handling hundreds of Lambdas without any of the connection issues we saw in Aurora v2. On top of that, it costs us 1/6 of what we were paying with AWS."
       name="Cody Jenkins"
       position="Head of Engineering at Invenco"
       avatar={{ src: codyJenkins, width: 30, height: 30 }}
     />
-    <SplitViewGridNew
-      className="mt-[200px]"
-      title="Hundreds of Enterprises are switching to Neon. Here’s why"
-      items={splitItems}
-    />
+    <Features title="Hundreds of Enterprises are switching to Neon. Here’s why" items={features} />
     <Usage />
     <CaseStudies items={caseStudies} />
     <HowNeonHelps tabs={howNeonHelpsTabs} />
     <TestimonialNew
-      className="mt-[126px]"
+      className="mt-[126px] xl:mt-[106px] lg:mt-[70px] md:mt-[58px]"
       quote="Time to launch is crucial for us: when we tried Neon and saw that spinning up a new ephemeral environment takes seconds, we were blown away."
       name="Alex Co"
       position="Head of Platform Engineering at Mindvalley"
@@ -337,7 +356,7 @@ const EnterprisePage = () => (
     />
     <Bento cards={bentoCards} />
     <TestimonialNew
-      className="mt-[130px]"
+      className="mt-[130px] xl:mt-[106px] lg:mt-[48px] md:mt-[62px]"
       quote="With Neon’s preview branches, we can catch issues early and fix them before they hit production."
       name="Robert Chandler"
       position="CTO at Wordware.ai"
@@ -345,9 +364,9 @@ const EnterprisePage = () => (
     />
     <Faq items={faqItems} />
     <CTA
-      className="pb-[300px] pt-[390px]"
+      className="pb-[300px] pt-[390px] xl:pb-[266px] xl:pt-[322px] lg:pb-[270px] lg:pt-[288px] md:pb-[170px] md:pt-[163px]"
       title="The Postgres of tomorrow, <br /> available today"
-      titleClassName="!text-[68px]"
+      titleClassName="!text-[68px] xl:!text-[56px] lg:!text-[40px] md:!text-[32px]"
       buttonText="Book a meeting with our team"
       buttonUrl={LINKS.contactSales}
     />

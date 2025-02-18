@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import sendGtagEvent from 'utils/send-gtag-event';
 
@@ -21,7 +21,15 @@ const variantsAnimation = {
 };
 
 const Item = ({ question, answer, id = null, initialState = 'closed', index }) => {
-  const [isOpen, setIsOpen] = useState(initialState === 'open');
+  const [isOpen, setIsOpen] = useState(false); // Начальное состояние всегда false
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+    if (initialState === 'open') {
+      setIsOpen(true);
+    }
+  }, [initialState]);
 
   const handleOpen = () => {
     setIsOpen((prev) => !prev);
@@ -33,6 +41,18 @@ const Item = ({ question, answer, id = null, initialState = 'closed', index }) =
     sendGtagEvent(eventName, properties);
   };
 
+  if (!isMounted) {
+    return (
+      <li className="overflow-hidden border-b border-gray-new-30 py-[18px] last:border-0" id={id}>
+        <div className="relative flex w-full items-start justify-between gap-4 text-left">
+          <h3 className="text-xl font-medium leading-snug tracking-tighter lg:text-lg">
+            {question}
+          </h3>
+        </div>
+      </li>
+    );
+  }
+
   return (
     <li className="overflow-hidden border-b border-gray-new-30 py-[18px] last:border-0" id={id}>
       <button
@@ -42,7 +62,9 @@ const Item = ({ question, answer, id = null, initialState = 'closed', index }) =
         aria-controls={index}
         onClick={handleOpen}
       >
-        <h3 className="text-xl font-medium leading-snug tracking-tighter">{question}</h3>
+        <h3 className="text-xl font-medium leading-snug tracking-tighter lg:text-lg md:text-[18px]">
+          {question}
+        </h3>
         <span
           className={clsx(
             'mr-2.5 mt-2.5 h-2 w-2 shrink-0 rotate-45 transform border-l border-t border-gray-new-80 transition-transform duration-300',
@@ -61,7 +83,7 @@ const Item = ({ question, answer, id = null, initialState = 'closed', index }) =
           }}
         >
           <p
-            className="with-link-primary with-list-primary pt-4 text-base leading-normal text-gray-new-80"
+            className="with-link-primary with-list-style pt-4 text-base leading-normal text-gray-new-80 lg:pt-5"
             dangerouslySetInnerHTML={{ __html: answer }}
           />
         </m.div>
