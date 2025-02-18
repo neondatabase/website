@@ -206,7 +206,7 @@ Output:
 (2 rows)
 ```
 
-The output indicates that PostgreSQL performs a sequential scan instead of using the index, because the first column of the index (`last_name`) is not constrained. Since using the index would require scanning all its entries, the planner determined that a sequential scan was more efficient.
+The output indicates that PostgreSQL performs a sequential scan instead of using the index, because the first column of the index (`last_name`) is not constrained. Since using the index would require scanning all its entries, the planner determined that a sequential scan on the table was more efficient.
 
 ## Summary
 
