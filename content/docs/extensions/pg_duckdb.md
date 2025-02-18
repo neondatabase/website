@@ -178,8 +178,10 @@ The `duckdb.secrets` table is a secure vault for storing access keys and tokens.
 ```sql
 -- Securely store AWS S3 credentials
 INSERT INTO duckdb.secrets (type, key_id, secret, region)
-VALUES ('S3', 'YOUR_ACCESS_KEY_ID', 'YOUR_SECRET_ACCESS_KEY', 'us-east-1');
+VALUES ('S3', 'YOUR_ACCESS_KEY_ID', 'YOUR_SECRET_ACCESS_KEY', 'YOUR_REGION');
 ```
+
+Replace `'YOUR_ACCESS_KEY_ID'`, `'YOUR_SECRET_ACCESS_KEY'`, and `'YOUR_REGION'` with your actual AWS credentials and region.
 
 <Admonition type="note">
 Never expose your credentials in your queries. Always use the `duckdb.secrets` table to securely store and manage your access keys and tokens.
