@@ -34,6 +34,10 @@ Explore supported Postgres extensions by category. Also see:
 
 <a href="/docs/extensions/timescaledb" description="Enables Postgres as a time-series database for efficient storage and retrieval of time-series data" icon="a-chart">timescaledb</a>
 
+<a href="/docs/extensions/pg_duckdb" description="Accelerate analytical queries with the embedded DuckDB engine" icon="a-chart">pg_duckdb</a>
+
+<a href="/docs/extensions/pg_search" description="Adds powerful full-text search capabilities to Postgres using BM25 algorithm and inverted indexes" icon="search">pg_search</a>
+
 </DetailIconCards>
 
 ## Auditing / Logging

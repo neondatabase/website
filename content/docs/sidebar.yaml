@@ -884,6 +884,9 @@
             - title: pg_cron
               slug: extensions/pg_cron
               tag: new
+            - title: pg_duckdb
+              slug: extensions/pg_duckdb
+              tag: new
             - title: pg_mooncake
               slug: extensions/pg_mooncake
               tag: new
