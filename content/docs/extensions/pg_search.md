@@ -405,11 +405,78 @@ description               | rating | category
 
 ## Performance optimizations for `pg_search`
 
-To maximize performance of `pg_search`, tuning configuration parameters for indexing and query speed is key.
+To maximize performance of `pg_search`, you can tune both Postgres and `pg_search` configuration parameters for indexing and query speed.
 
-<Admonition type="warning" title="important">
-Currently, `pg_search` on Neon does not support direct control over memory and parallelism settings. We will be supporting these features in future updates, until then the default settings are optimized for most use cases.
-</Admonition>
+`pg_search` parameter names start with `paradedb`. Bother Postgres and `pg_search` settings can be configured for the current session using a `SET` statement.
+
+### Index build
+
+Use the following parameters optimize index build time:
+
+- `maintenance_work_mem`: Increasing this Postgres setting can significantly improve index build times because it makes writing to the Postgres Write-Ahead Log (WAL) faster. For example, for a 100 million row table, a multiple GB value can shorten index build time from hours to minutes. 
+
+  In Neon, `maintenance_work_mem` is set to a conservative value according to your Neon compute size RAM. However, you can increase the setting for the current session:
+
+  ```bash
+  SET maintenance_work_mem='10 GB';
+  ```
+
+  Your setting should not exceed 60 percent of your compute's available RAM. For more information, see [Neon parameter settings by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
+
+- `paradedb.create_index_memory_budget`: This parameter sets the amount of memory per indexing thread before the index segment needs to be written to disk. The default is 1024MB (1 GB). Only very large tables would require a single segment larger than 1 GB. If set to `0`, `maintenance_work_mem` divided by `paradedb.create_index_parallelism` will be used as the value. For more on this parameter, see [ParadeDB: Indexing Memory per Thread](https://docs.paradedb.com/documentation/configuration/index#indexing-memory-per-thread).
+
+- `paradedb.create_index_parallelism`: This parameter sets the number of threads used during `CREATE INDEX`. The default is `0`, which automatically detects the “available parallelism” of your Neon compute. You can explicitly set the value as shown: 
+  
+    ```bash
+    SET paradedb.create_index_parallelism = 8;
+    ```
+
+### Throughput
+
+Several settings can be used to tune the throughput of `INSERT/UPDATE/COPY` statements to the BM25 index.
+
+- `paradedb.statement_parallelism`: Controls the number of indexing threads used during `INSERT/UPDATE/COPY`. The default is `0`, which automatically detects the “available parallelism” of your Neon compute.
+
+    If your typical update patterns are single-row atomic `INSERT` or `UPDATE` statements, then a value of `1` can prevent unnecessary threads from being created. For bulk inserts and updates, a larger value is better.
+
+    ```bash
+    SET paradedb.statement_parallelism = 1;
+    ```
+
+- `paradedb.statement_memory_budget`: Defaults to 1024 MB (1 GB). It sets the amount of memory per indexing thread before the index segment needs to be written to disk. In terms of indexing performance, a larger setting is generally better.
+
+    If set to 0, `maintenance_work_mem` divided by `paradedb.statement_parallelism` will be used.
+
+    If your typical update patterns are single-row atomic `INSERT` or `UPDATE` statements, then a value of 15 MB can prevent unnecessary memory from being allocated. For bulk inserts and updates, a larger value is better.
+
+    ```bash
+    SET paradedb.statement_memory_budget = 15;
+    ```
+
+    For more about this setting, see [ParadeDB: Statement Memory Budget](https://docs.paradedb.com/documentation/configuration/write#statement-memory-budget).
+
+### Search performance
+
+Expensive search queries can benefit from more parallel Postgres workers and increased shared buffer memory.
+
+#### Parallel worker settings
+
+- `max_worker_processes` sets the total number of worker processes across all connections. 
+- `max_parallel_workers` defines how many of those workers can be used for parallel scans.
+
+In Neon, these settings are set according to your compute size. See [Neon parameter settings by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
+
+Additionally, `max_parallel_workers_per_gather` determines how many parallel workers a single query can use. In Neon, the default value is `2`, but you can change the value for the session as shown:
+
+    ```bash
+    SET max_parallel_workers_per_gather = 8;
+    ```
+
+The number of parallel workers should not exceed the computes vCPU count.
+
+#### Shared buffers
+
+`shared_buffers` controls how much memory is available to the Postgres buffer cache. In Neon, `shared_buffers` size is set to a modest value according to your compute size, but Neon also extends shared buffers through a Local File Cache (LFC) that acts as an extension of shared buffers. The LFC can use up to 80% of your compute's RAM.
 
 ### Key performance parameters
 
@@ -430,17 +497,6 @@ Adjust these settings before `CREATE INDEX` for faster index builds:
     ```sql
     SET paradedb.create_index_memory_budget = 2048; -- 2GB memory budget
     ```
-
-### Configuration enhancements
-
-For more advanced tuning, consider the following settings:
-
-- **`paradedb.create_index_parallelism`:**  Directly control threads for `CREATE INDEX`.
-- **`paradedb.statement_parallelism`:** Manage threads for `INSERT`, `UPDATE`, `COPY` indexing.
-- **`paradedb.statement_memory_budget`:** Memory control for indexing during data modifications.
-
-These settings provide finer control over resource usage.
-
 
 ## Best practices for using `pg_search`
 
