@@ -28,6 +28,8 @@ Explore supported Postgres extensions by category. Also see:
 
 <DetailIconCards>
 
+<a href="/docs/extensions/pg_duckdb" description="Adds Accelerated analytics with DuckDB in Postgres" icon="a-chart">pg_duckdb</a>
+
 <a href="/docs/extensions/pg_mooncake" description="Adds columnstore tables and DuckDB execution for fast analytics in Postgres." icon="a-chart">pg_mooncake</a>
 
 <a href="https://github.com/citusdata/postgresql-hll" description="Implements a HyperLogLog data structure as a native data type for efficient and tunable distinct value counting" icon="a-chart">hll</a>

@@ -177,11 +177,26 @@ The `duckdb.secrets` table is a secure vault for storing access keys and tokens.
 
 ```sql
 -- Securely store AWS S3 credentials
-INSERT INTO duckdb.secrets (type, key_id, secret, region)
-VALUES ('S3', 'YOUR_ACCESS_KEY_ID', 'YOUR_SECRET_ACCESS_KEY', 'YOUR_REGION');
+INSERT INTO duckdb.secrets
+(type, key_id, secret, session_token, region)
+VALUES ('S3', 'access_key_id', 'secret_access_key', 'session_token', 'us-east-1');
 ```
 
-Replace `'YOUR_ACCESS_KEY_ID'`, `'YOUR_SECRET_ACCESS_KEY'`, and `'YOUR_REGION'` with your actual AWS credentials and region.
+Replace the `type`, `key_id`, `secret`, `session_token`, and `region` with your actual AWS credentials and region.
+
+You can also optionally set a [scope](https://github.com/duckdb/pg_duckdb/blob/3248efaef4835914653e7cf4e0cde68baa3865c8/docs/secrets.md) to use different secrets for different buckets.
+
+To use a secret temporarily, you can use the following sytax, which you can also use for short-lived tokens:
+
+```sql
+select duckdb.raw_query('CREATE SECRET my3_secret (
+TYPE S3,
+KEY_ID ''ASIAFAKE123456789XYZ'',
+SECRET ''secret'',
+SESSION_TOKEN ''token'',
+REGION ''us-east-2''
+);');
+```
 
 <Admonition type="note">
 Never expose your credentials in your queries. Always use the `duckdb.secrets` table to securely store and manage your access keys and tokens.
@@ -229,12 +244,12 @@ WITH (FORMAT 'parquet');
 
 If your target S3 bucket (or other object storage) requires authentication, ensure you have configured your credentials in the `duckdb.secrets` table as described in the [Securing Data Lake Access with Secrets Manager](#securing-data-lake-access-with-secrets-manager) section. `pg_duckdb` will automatically use the stored secrets when exporting data to protected locations.
 
-### Caching Data Lake files
+### Caching data lake files locally to speed up queries
 
 `pg_duckdb` allows you to cache data lake files locally, which can significantly improve query performance when accessing the same files repeatedly. You can use the `duckdb.cache()` function to explicitly cache a Parquet or CSV file.
 
-<Admonition type="important">
-Cached files on Neon uses your project's storage. Make sure you have enough storage available before caching large files.
+<Admonition type="note">
+`pg_duckdb` caches the files locally on the Neon compute using its `CachedFile` implementation within its fork of `HTTPSFileSystem`.
 </Admonition>
 
 ```sql
@@ -280,6 +295,12 @@ DuckDB configuration settings, such as memory limits and maximum memory usage, a
 ### Querying DuckDB directly
 
 `duckdb.query('your duckdb select query')`:  Allows you to run arbitrary DuckDB `SELECT` queries directly. This is useful for leveraging DuckDB-specific SQL syntax or functions not yet directly exposed as standard Postgres functions via `pg_duckdb`.
+
+
+## Limitations
+
+- Unsigned extensions are not supported. Only DuckDB and DuckDB community-maintained extensions can be used with DockDB on Neon.
+- To protect your Neon compute's VM filesystem, we set `duckdb.disabled_filesystems=’LocalFilesystem’`, which prevents accessing files on the compute's local file system.
 
 ## Test data
 
