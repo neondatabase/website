@@ -16,6 +16,17 @@ nextLink:
 
 **Summary**: in this tutorial, you will learn how to terminate a process in PostgreSQL using the `pg_terminate_backend()` function.
 
+<Admonition type="tip" title="Neon Note">
+On Neon, you can only run `pg_terminate_backend()` on your own session. `Superuser`, which is not granted to users on Neon, is required to cancel other users' sessions. As a workaround, you can identify the user running the query and request that the user terminate the query or session. To identify the user:
+
+```sql
+SELECT pid, usename, client_addr, application_name, state, query, now() - query_start AS duration
+FROM pg_stat_activity
+WHERE state <> 'idle'
+ORDER BY duration DESC;
+```
+</Admonition>
+
 ## Introduction to the pg_terminate_backend() function
 
 The `pg_terminate_backend()` function allows you to terminate a backend process, which effectively kills the connection associated with that process.
