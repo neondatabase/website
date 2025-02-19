@@ -910,20 +910,43 @@ WHERE
   OR state = '<idle>';
 ```
 
-### Drop long-running or idle connections
+### Cancel or terminate queries and sessions
 
-To terminate a session belonging to you:
+On the Neon platform, superuser privileges are not available, so you can only cancel or terminate your own queries and sessions. You cannot stop other users' queries or sessions directly.
+
+To cancel or terminate a process:
+
+- **Cancel a running query** (without ending the session):  
+  Use `pg_cancel_backend(pid)`.
+
+- **Terminate a session** (including all running queries):  
+  Use `pg_terminate_backend(pid)`.
+
+Examples:
+
+Cancel a query:
+
+```sql
+SELECT pg_cancel_backend(pid)
+FROM pg_stat_activity
+WHERE datname = 'databasename'
+  AND pid <> pg_backend_pid();
+```
+
+Terminate a session:
 
 ```sql
 SELECT pg_terminate_backend(pid)
 FROM pg_stat_activity
 WHERE datname = 'databasename'
   AND pid <> pg_backend_pid()
-  AND state IN ('idle');
+  AND state = 'idle';
 ```
 
 <Admonition type="note">
-To terminate a query or session, you can run `pg_cancel_backend(pid)` or `pg_terminate_backend(pid)`, respectively. The first command terminates the currently executing query, and the second one (used in the query above) terminates both the query and the session. However, you can only run these commands for your own session. `Superuser`, which is not granted to users on the Neon platform, is required to cancel other users' queries or sessions. As a workaround, you can identify the user running the query and request that the user terminate the query or session. To identify the user:
+Since you cannot terminate other users' queries or sessions on Neon, you may need to contact the user running the query and ask them to stop it.
+
+To identify long-running queries and the users executing them, run:
 
 ```sql
 SELECT pid, usename, client_addr, application_name, state, query, now() - query_start AS duration
@@ -932,6 +955,7 @@ WHERE state <> 'idle'
 ORDER BY duration DESC;
 ```
 </Admonition>
+
 
 ## Postgres version
 
