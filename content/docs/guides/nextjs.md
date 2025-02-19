@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/vercel
   - /docs/integrations/vercel
-updatedOn: '2025-02-03T20:41:57.331Z'
+updatedOn: '2025-02-18T15:25:38.976Z'
 ---
 
 Next.js by Vercel is an open-source web development framework that enables React-based web applications. This topic describes how to create a Neon project and access it from a Next.js application.
@@ -27,7 +27,7 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 ## Create a Next.js project and add dependencies
 
-1. Create a Next.js project if you do not have one. For instructions, see [Create a Next.js App](https://nextjs.org/learn/basics/create-nextjs-app/setup), in the Vercel documentation.
+1. Create a Next.js project if you do not have one. For instructions, see [Create a Next.js App](https://nextjs.org/docs/app/getting-started/installation), in the Vercel documentation.
 
 2. Add project dependencies using one of the following commands:
 

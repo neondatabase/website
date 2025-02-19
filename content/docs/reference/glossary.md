@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2025-02-12T12:37:54.272Z'
+updatedOn: '2025-02-18T19:59:08.876Z'
 ---
 
 ## access token
@@ -265,7 +265,7 @@ A feature provided by some hypervisors, such as QEMU, that allows the transfer o
 
 ## Local File Cache
 
-The Local File Cache (LFC) is a layer of caching that stores frequently accessed data from the storage layer in the local memory of the compute. This cache helps to reduce latency and improve query performance by minimizing the need to fetch data from the storage layer repeatedly. The LFC acts as an add-on or extension of Postgres [shared buffers](#shared-buffers). In Neon the `shared_buffers` parameter [scales with compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size). The LFC extends cache memory up to 80% of your compute's RAM.
+The Local File Cache (LFC) is a layer of caching that stores frequently accessed data from the storage layer in the local memory of the compute. This cache helps to reduce latency and improve query performance by minimizing the need to fetch data from the storage layer repeatedly. The LFC acts as an add-on or extension of Postgres [shared buffers](#shared-buffers). In Neon the `shared_buffers` parameter [scales with compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size). The LFC extends cache memory up to 75% of your compute's RAM.
 
 ### logical data size
 
