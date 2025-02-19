@@ -3,28 +3,6 @@ title: Neon documentation
 updatedOn: '2025-02-12T10:58:29.262Z'
 ---
 
-<Admonition type="important">
-We are working on automatic switching between HTTP and WebSocket as needed. Check our roadmap to see what's coming soon and our Friday Changelog for the features-of-the-week.
-</Admonition>
-
-<Admonition type="warning">
-We are working on automatic switching between HTTP and WebSocket as needed. Check our roadmap to see what's coming soon and our Friday Changelog for the features-of-the-week.
-</Admonition>
-
-<Admonition type="note">
-We are working on automatic switching between HTTP and WebSocket as needed. Check our roadmap to see what's coming soon and our Friday Changelog for the features-of-the-week.
-</Admonition>
-
-<Admonition type="tip">
-We are working on automatic switching between HTTP and WebSocket as needed. Check our roadmap to see what's coming soon and our Friday Changelog for the features-of-the-week.
-</Admonition>
-
-<Admonition type="info">
-We are working on automatic switching between HTTP and WebSocket as needed. Check our roadmap to see what's coming soon and our Friday Changelog for the features-of-the-week.
-</Admonition>
-
----
-
 Neon is a serverless Postgres platform designed to help you build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as autoscaling, branching, point-in-time restore, and more. Get started today with our [generous free plan](https://console.neon.tech).
 
 <CTA title="Did you know?" description="Neon's database branching can help you integrate Postgres into your development workflow. Branch your data like code. <a href='/docs/get-started-with-neon/workflow-primer'>Read our primer</a> to learn&nbsp;how." isIntro></CTA>
