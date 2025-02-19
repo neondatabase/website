@@ -6,7 +6,7 @@ import React from 'react';
 import Container from 'components/shared/container/container';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
-import ArrowRightIcon from 'icons/arrow-right.inline.svg';
+import arrowRightIcon from 'icons/enterprise/arrow-right.svg';
 
 import linesMd from './images/lines-md.svg';
 import lines from './images/lines.svg';
@@ -59,12 +59,15 @@ const CaseStudies = ({ items }) => (
                 </p>
                 <div className="relative flex items-center gap-x-2.5 md:mt-4">
                   <Logo className="h-6 w-fit lg:h-5 md:h-[18px]" aria-hidden />
-                  <ArrowRightIcon
+                  <Image
                     className={clsx(
                       'pointer-events-none -mb-px shrink-0 md:w-2.5',
                       'opacity-0 group-hover:opacity-100'
                     )}
-                    aria-hidden
+                    src={arrowRightIcon}
+                    width={16}
+                    height={8}
+                    alt=""
                   />
                 </div>
               </div>

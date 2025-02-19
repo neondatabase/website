@@ -79,9 +79,9 @@ export default {
     pathname: LINKS.developerDays1,
   },
   enterprise: {
-    title: 'Neon for Enterprises: Postgres Fleets - Neon',
+    title: 'Neon for Enterprise - Neon',
     description:
-      'Enterprises use Neon to deliver a Postgres layer that is automated, instantly scalable and cost efficient.',
+      'Switch to Neon for improved scalability, reliability, and engineering efficiency. For developers and AI Agents.',
     pathname: LINKS.enterprise,
     imagePath: '/images/social-previews/enterprise.jpg',
   },

@@ -80,20 +80,20 @@ const features = [
     title: 'Connection management',
     description:
       'Neon supports 10,000+ connections with no timeouts, ensuring consistent performance for real-time apps, APIs, and high-traffic systems.',
-    url: '/blog/survive-thousands-connections',
+    url: '/docs/connect/connection-pooling',
   },
   {
     icon: recoveryIcon,
     title: 'Disaster recovery',
     description:
       'Neon simplifies disaster recovery with branching, letting you restore your database to any point instantly — no more lengthy backups.',
-    url: 'https://www.youtube.com/watch?v=ZnxLCOkb_R0',
+    url: '/blog/recover-large-postgres-databases',
   },
   {
     icon: durabilityIcon,
     title: 'Durability',
     description:
-      'Neon ensures high availability with transactions replicated across zones and data stored in object storage with 99.99999999% durability.',
+      'Neon ensures high availability with transactions replicated across AZs and data stored.',
     url: '/blog/our-approach-to-high-availability',
   },
   {
@@ -207,7 +207,7 @@ const bentoCards = [
   },
   {
     title: 'Seamless integration.',
-    description: 'Neon supports OAuth and more for effortless Postgres embedding.',
+    description: 'Integrate Neon into your developer platform or AI Agent via API or OAuth.',
     image: integration,
     imageMd: integrationMd,
     className: 'col-span-2 lg:col-span-3 sm:col-span-1',
@@ -225,12 +225,12 @@ const bentoCards = [
 const faqItems = [
   {
     question: 'Which companies are using Neon?',
-    answer: `Neon serves a wide range of companies, from startups to large enterprises, across many industries. Over 4,000 new databases are created daily on Neon, supporting everything from startups building the next wave of AI tools to platforms like Vercel, Replit, and Retool. Visit our <a href="/case-studies">case studies page</a> to explore customer stories.`,
+    answer: `Neon serves a wide range of companies, from startups to large enterprises, across many industries. Over 18k new databases are created daily on Neon, supporting everything from startups building the next wave of AI tools to platforms like Vercel, Replit, and Retool. Visit our <a href="/case-studies">case studies page</a> to explore customer stories.`,
     initialState: 'open',
   },
   {
     question: 'Is Neon compliant?',
-    answer: `Yes. Neon adheres to SOC 2, ISO 27001, ISO 27701 standards and complies with GDPR and CCPA regulations. HIPAA compliance will come very soon. <a href="/docs/security/compliance">Read more.</a>`,
+    answer: `Yes. Neon adheres to SOC 2, ISO 27001, ISO 27701 standards and complies with GDPR, CCPA, and HIPAA. <a href="/docs/security/compliance">Read more.</a>.`,
   },
   {
     question: 'How secure is Neon’s platform?',
@@ -258,7 +258,7 @@ const faqItems = [
   },
   {
     question: 'What can I expect during the sales process?',
-    answer: `Our sales process is designed to be smooth and flexible: <ol><li><b>Reach Out:</b> Fill out our contact form.</li><li><b>Information Gathering:</b> We’ll email you to learn more about your workload and requirements.</li><li><b>Call with Solutions Team:</b> Discuss timelines, configurations, and request demos or follow-ups.</li><li><b>Pricing Proposal:</b> Based on your inputs, we’ll provide a pricing proposal, often with a proof-of-concept migration plan.</li><li><b>Additional Details (if needed):</b> For complex setups, we may request more information, like itemized bills or specifics about your current environment.</li><li><b>Stakeholder Support:</b> We assist with security reviews, documentation, and answering any stakeholder questions.</li></ol> We’re always happy to adjust the process to fit your unique needs. Click here to read a detailed description of our process.`,
+    answer: `Our sales process is designed to be smooth and flexible: <ol><li><b>Reach Out:</b> Fill out our contact form.</li><li><b>Information Gathering:</b> We’ll email you to learn more about your workload and requirements.</li><li><b>Call with Solutions Team:</b> Discuss timelines, configurations, and request demos or follow-ups.</li><li><b>Pricing Proposal:</b> Based on your inputs, we’ll provide a pricing proposal, often with a proof-of-concept migration plan.</li><li><b>Additional Details (if needed):</b> For complex setups, we may request more information, like itemized bills or specifics about your current environment.</li><li><b>Stakeholder Support:</b> We assist with security reviews, documentation, and answering any stakeholder questions.</li></ol> We’re always happy to adjust the process to fit your unique needs. <a href="/contact-sales">Reach out to us</a> and tell us about your use case: we're here to help.`,
   },
 ];
 

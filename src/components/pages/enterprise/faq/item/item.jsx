@@ -56,7 +56,6 @@ const Item = ({ question, answer, id = null, initialState = 'closed', index }) =
               opacity: { duration: 0.2 },
               height: { duration: 0.3 },
             }}
-            aria-hidden={isOpen}
           >
             <p
               className="with-link-primary with-list-style pt-4 text-base leading-normal text-gray-new-80 lg:pt-5"
