@@ -15,7 +15,7 @@ const TechCardsWrapper = ({ children, withToggler }) => {
 
   return (
     <>
-      <ul className="not-prose !mb-0 !mt-7 grid grid-cols-3 gap-5 !p-0 sm:grid-cols-1">
+      <ul className="not-prose !my-7 grid grid-cols-3 gap-5 !p-0 sm:grid-cols-1">
         {withToggler && !isOpen ? children.slice(0, 3) : children}
       </ul>
       {withToggler && (
