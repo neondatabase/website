@@ -333,7 +333,7 @@ const getWpPostBySlug = cache(async (slug) => {
 
   const data = await fetchGraphQL(graphQLClient).request(postBySlugQuery, { id: slug });
 
-  const sortedPosts = data?.posts?.nodes.filter((post) => post.slug !== slug).slice(0, 3);
+  const sortedPosts = data?.posts?.nodes.filter((post) => post.slug !== slug).slice(0, 4);
 
   return {
     post: data?.post,
@@ -438,7 +438,7 @@ const getWpPreviewPostData = async (id, status) => {
 
     const sortedPosts = data?.posts?.nodes
       .filter((post) => post.slug !== data?.post?.slug)
-      .slice(0, 3);
+      .slice(0, 4);
 
     return {
       post: data?.post,
@@ -537,7 +537,7 @@ const getWpPreviewPostData = async (id, status) => {
 
     const sortedPosts = revisionPostData?.posts?.nodes
       .filter((post) => post.slug !== revisionPostData?.post?.revisions?.edges[0].post.slug)
-      .slice(0, 3);
+      .slice(0, 4);
 
     return {
       post: revisionPostData?.post?.revisions?.edges[0].post,
