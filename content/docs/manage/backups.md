@@ -47,11 +47,15 @@ Command was: ALTER DEFAULT PRIVILEGES FOR ROLE cloud_admin IN SCHEMA public GRAN
 This is a protected role in Neon that cannot be modified. To avoid this issue, you can add a `-O` or `--no-owner` option to your `pg_restore` command, as described [Database object ownership consideration](/docs/import/migrate-from-postgres#database-object-ownership-considerations).
 </Admonition>
 
-## Automate Postgres Backups with a GitHub Action
+## Automate postgres backups with a GitHub Action
 
-These blog posts from Neon community members describe how you can schedule a backup to an Amazon S3 storage bucket using a GitHub Action:
+These blog posts describe how you can schedule a backup to an Amazon S3 storage bucket using GitHub Actions:
 
-- [How To Use GitHub Actions To Schedule PostgreSQL Backups](https://thenewstack.io/how-to-schedule-postgresql-backups-with-github-actions/)
+- [How To Use GitHub Actions To Schedule PostgreSQL Backups](https://neon.tech/blog/how-to-create-an-aws-s3-bucket-for-postgres-backups)
+- [How to Set Up Nightly Backups to AWS S3 for Multiple Neon Projects](https://neon.tech/blog/nightly-backups-for-multiple-neon-projects)
+
+## Community guides
+
 - [Nightly Postgres Backups via GitHub Actions](https://joshstrange.com/2024/04/26/nightly-postgres-backups-via-github-actions/)
 
 <NeedHelp/>
