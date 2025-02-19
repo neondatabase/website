@@ -335,7 +335,7 @@ const getWpPostBySlug = cache(async (slug) => {
 
   const data = await fetchGraphQL(graphQLClient).request(postBySlugQuery, { id: slug });
 
-  const sortedPosts = data?.posts?.nodes.filter((post) => post.slug !== slug).slice(0, 4);
+  const sortedPosts = data?.posts?.nodes.filter((post) => post.slug !== slug).slice(0, 3);
 
   return {
     post: data?.post,
@@ -396,7 +396,7 @@ const getWpPreviewPostData = async (id, status) => {
           ...wpPostSeo
         }
 
-        posts(first: 4, where: { orderby: { field: DATE, order: DESC } }) {
+        posts(first: 3, where: { orderby: { field: DATE, order: DESC } }) {
           nodes {
             categories {
               nodes {
@@ -440,7 +440,7 @@ const getWpPreviewPostData = async (id, status) => {
 
     const sortedPosts = data?.posts?.nodes
       .filter((post) => post.slug !== data?.post?.slug)
-      .slice(0, 4);
+      .slice(0, 3);
 
     return {
       post: data?.post,
@@ -493,7 +493,7 @@ const getWpPreviewPostData = async (id, status) => {
           }
         }
 
-        posts(first: 4, where: { orderby: { field: DATE, order: DESC } }) {
+        posts(first: 3, where: { orderby: { field: DATE, order: DESC } }) {
           nodes {
             categories {
               nodes {
@@ -539,7 +539,7 @@ const getWpPreviewPostData = async (id, status) => {
 
     const sortedPosts = revisionPostData?.posts?.nodes
       .filter((post) => post.slug !== revisionPostData?.post?.revisions?.edges[0].post.slug)
-      .slice(0, 4);
+      .slice(0, 3);
 
     return {
       post: revisionPostData?.post?.revisions?.edges[0].post,
