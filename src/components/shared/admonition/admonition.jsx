@@ -42,7 +42,7 @@ const themes = {
 };
 
 const Admonition = ({ children = null, type = 'note', title = null, asHTML = false }) => {
-  const typeText = type.charAt(0).toUpperCase() + type.slice(1).replace('-', ' ');
+  const typeText = type.replace('-', ' ');
   const Icon = themes[type].icon;
 
   return (
