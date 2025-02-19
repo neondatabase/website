@@ -18,7 +18,7 @@ const TopBar = ({ isDarkTheme }) => (
       'safe-paddings relative z-50 flex h-9 w-full items-center justify-center gap-x-2.5 overflow-hidden px-4 py-2.5 leading-none transition-colors duration-200 dark:bg-[#0B0C0F] dark:hover:bg-gray-new-8',
       isDarkTheme ? 'bg-[#0B0C0F] hover:bg-gray-new-8' : 'bg-[#F5FBFD] hover:bg-[#f1fcff]'
     )}
-    to="https://neon.tech/docs/guides/neon-twin-intro"
+    to="/blog/recover-production-database/"
     onClick={() => {
       sendGtagEvent('click_announcement_banner');
     }}
@@ -70,7 +70,7 @@ const TopBar = ({ isDarkTheme }) => (
         isDarkTheme ? 'text-gray-new-90' : 'text-gray-new-15'
       )}
     >
-      Learn how to set up a Neon Twin—a dev environment in Neon that mirrors production. Build on Neon, keep prod elsewhere
+      "I dropped a table in production—now what?" Learn how to fix it in seconds with Neon's instant PITR
     </span>
     <ChevronIcon
       className={clsx(
