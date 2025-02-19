@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
+import ComingSoonIcon from 'icons/docs/admonition/coming-soon.inline.svg';
 import ImportantIcon from 'icons/docs/admonition/important.inline.svg';
 import InfoIcon from 'icons/docs/admonition/info.inline.svg';
 import NoteIcon from 'icons/docs/admonition/note.inline.svg';
@@ -33,9 +34,15 @@ const themes = {
     borderClassName: 'border-gray-new-50 dark:border-gray-5',
     icon: InfoIcon,
   },
+  'coming-soon': {
+    titleClassName: 'text-[#8873EF] dark:text-secondary-5',
+    borderClassName: 'border-[#8873EF] dark:border-secondary-5',
+    icon: ComingSoonIcon,
+  },
 };
 
 const Admonition = ({ children = null, type = 'note', title = null, asHTML = false }) => {
+  const typeText = type.charAt(0).toUpperCase() + type.slice(1).replace('-', ' ');
   const Icon = themes[type].icon;
 
   return (
@@ -49,7 +56,7 @@ const Admonition = ({ children = null, type = 'note', title = null, asHTML = fal
       <div className={clsx('flex items-center gap-1.5', themes[type].titleClassName)}>
         <Icon width={14} height={14} />
         <h4 className="text-[13px] font-semibold uppercase leading-none tracking-normal">
-          {title || type}
+          {title || typeText}
         </h4>
       </div>
       {asHTML ? (
