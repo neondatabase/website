@@ -118,7 +118,7 @@ const getWpPostsByCategorySlug = cache(async (slug) => {
   let afterCursor = null;
 
   // Limit posts fetch for development & previews
-  const isProduction = process.env.VERCEL_ENV === 'production';
+  const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
   const first = isProduction ? BLOG_POSTS_PER_PAGE : BLOG_POSTS_FOR_PREVIEW;
 
   while (true) {
@@ -205,7 +205,7 @@ const getAllWpPosts = cache(async () => {
   let afterCursor = null;
 
   // Limit posts fetch for development & previews
-  const isProduction = process.env.VERCEL_ENV === 'production';
+  const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
   const first = isProduction ? BLOG_POSTS_PER_PAGE : BLOG_POSTS_FOR_PREVIEW;
 
   while (true) {
