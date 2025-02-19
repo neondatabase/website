@@ -49,7 +49,7 @@ This is a protected role in Neon that cannot be modified. To avoid this issue, y
 
 ## Automate postgres backups with a GitHub Action
 
-These blog posts describe how you can schedule a backup to an Amazon S3 storage bucket using GitHub Actions:
+These Neon posts describe how you can schedule a backup to an Amazon S3 storage bucket using GitHub Actions:
 
 - [How To Use GitHub Actions To Schedule PostgreSQL Backups](https://neon.tech/blog/how-to-create-an-aws-s3-bucket-for-postgres-backups)
 - [How to Set Up Nightly Backups to AWS S3 for Multiple Neon Projects](https://neon.tech/blog/nightly-backups-for-multiple-neon-projects)
