@@ -37,32 +37,6 @@
   inkeep-portal {
     @apply relative z-50;
   }
-
-  .case-study-gradient-icon {
-    svg {
-      @apply transition duration-300;
-
-      stop {
-        stop-color: #dee0e4;
-
-        + stop {
-          stop-color: #abb0ba;
-        }
-      }
-    }
-
-    &:hover {
-      svg {
-        stop {
-          stop-color: #fff;
-
-          + stop {
-            stop-color: #fff;
-          }
-        }
-      }
-    }
-  }
 }
 
 @layer utilities {

@@ -43,10 +43,10 @@ const CaseStudies = ({ items }) => (
     </Container>
     <Container className="relative mt-11 xl:mt-12 xl:!px-0 md:mt-10 md:!px-0" size="1216">
       <ul className="grid w-full grid-cols-3 px-6 xl:px-0 md:grid-cols-2">
-        {items.map(({ title, description, logo: Logo, link }, index) => (
+        {items.map(({ title, description, logo, link }, index) => (
           <li key={index}>
             <Link
-              className="case-study-gradient-icon group relative block h-[230px] w-full rounded-xl p-10 xl:h-[196px] xl:p-8 lg:h-[169px] lg:pb-6 md:h-auto md:px-5 md:pb-[22px] md:pt-4"
+              className="group relative block h-[230px] w-full rounded-xl p-10 xl:h-[196px] xl:p-8 lg:h-[169px] lg:pb-6 md:h-auto md:px-5 md:pb-[22px] md:pt-4"
               to={link}
             >
               <div className="relative z-10 flex h-full flex-col justify-between">
@@ -58,10 +58,19 @@ const CaseStudies = ({ items }) => (
                   />
                 </p>
                 <div className="relative flex items-center gap-x-2.5 md:mt-4">
-                  <Logo className="h-6 w-fit lg:h-5 md:h-[18px]" aria-hidden />
                   <Image
                     className={clsx(
-                      'pointer-events-none -mb-px shrink-0 md:w-2.5',
+                      'pointer-events-none h-6 w-fit shrink-0 transition-opacity duration-300 lg:h-5 md:h-[18px]',
+                      'opacity-80 group-hover:opacity-100'
+                    )}
+                    src={logo.src}
+                    width={logo.width}
+                    height={logo.height}
+                    alt=""
+                  />
+                  <Image
+                    className={clsx(
+                      'pointer-events-none -mb-px shrink-0 transition-opacity duration-300 md:w-2.5',
                       'opacity-0 group-hover:opacity-100'
                     )}
                     src={arrowRightIcon}

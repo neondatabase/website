@@ -11,12 +11,12 @@ import Logos from 'components/shared/logos';
 import TestimonialNew from 'components/shared/testimonial-new';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
-import DispatchLogo from 'icons/enterprise/case-studies/dispatch.inline.svg';
-import InvencoLogo from 'icons/enterprise/case-studies/invenco.inline.svg';
-import MindvalleyLogo from 'icons/enterprise/case-studies/mindvalley.inline.svg';
-import NeoTaxLogo from 'icons/enterprise/case-studies/neo-tax.inline.svg';
-import RetoolLogo from 'icons/enterprise/case-studies/re-tool.inline.svg';
-import WordwareLogo from 'icons/enterprise/case-studies/wordware.inline.svg';
+import dispatchLogo from 'icons/enterprise/case-studies/dispatch.svg';
+import invencoLogo from 'icons/enterprise/case-studies/invenco.svg';
+import mindvalleyLogo from 'icons/enterprise/case-studies/mindvalley.svg';
+import neoTaxLogo from 'icons/enterprise/case-studies/neo-tax.svg';
+import retoolLogo from 'icons/enterprise/case-studies/re-tool.svg';
+import wordwareLogo from 'icons/enterprise/case-studies/wordware.svg';
 import connectionIcon from 'icons/enterprise/connection.svg';
 import durabilityIcon from 'icons/enterprise/durability.svg';
 import expertiseIcon from 'icons/enterprise/expertise.svg';
@@ -109,37 +109,61 @@ const caseStudies = [
   {
     title: '300k+ databases',
     description: 'managed by 1 engineer.',
-    logo: RetoolLogo,
+    logo: {
+      src: retoolLogo,
+      width: 95,
+      height: 24,
+    },
     link: `${LINKS.blog}/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases`,
   },
   {
     title: '5x faster',
     description: 'environments creation.',
-    logo: MindvalleyLogo,
+    logo: {
+      src: mindvalleyLogo,
+      width: 118,
+      height: 24,
+    },
     link: `${LINKS.blog}/how-mindvalley-minimizes-time-to-launch-with-neon-branches`,
   },
   {
     title: 'From days to minutes',
     description: 'development cycles.',
-    logo: NeoTaxLogo,
+    logo: {
+      src: neoTaxLogo,
+      width: 91,
+      height: 24,
+    },
     link: `${LINKS.blog}/from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle`,
   },
   {
     title: '95% fewer migration issues',
     description: 'thanks to preview branches.',
-    logo: WordwareLogo,
+    logo: {
+      src: wordwareLogo,
+      width: 121,
+      height: 24,
+    },
     link: `${LINKS.blog}/building-ai-agents-just-got-faster-with-wordware-and-neon`,
   },
   {
     title: '80% savings',
     description: 'in&nbsp;database costs.',
-    logo: InvencoLogo,
+    logo: {
+      src: invencoLogo,
+      width: 97,
+      height: 24,
+    },
     link: `${LINKS.blog}/why-invenco-migrated-from-aurora-serverless-v2-to-neon`,
   },
   {
     title: '10x less capacity',
     description: 'vs Aurora Global.',
-    logo: DispatchLogo,
+    logo: {
+      src: dispatchLogo,
+      width: 104,
+      height: 24,
+    },
     link: `${LINKS.blog}/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora`,
   },
 ];
