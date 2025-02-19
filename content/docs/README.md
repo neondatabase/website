@@ -363,19 +363,35 @@ curl --request POST \
 
 To improve the documentation readability, one can leverage an Admonition custom component. Just wrap your piece of text with `<Admonition></Admonition>` and pass the type.
 
-There are 6 types of Admonition: `note`, `important`, `tip`, `warning`, `info`, `comingSoon`; the default is `note`.
+There are 6 types of Admonition: `note`, `important`, `tip`, `info`, `warning`, `coming-soon`; the default is `note`.
 
 You may also specify an optional title with prop `title`.
 
 Example:
 
 ```md
-<Admonition type="note" title="Your title">
-  The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation.
+<Admonition type="note">
+Highlights information that users should take into account, even when skimming.
+</Admonition>
+
+<Admonition type="important">
+Crucial information necessary for users to succeed.
+</Admonition>
+
+<Admonition type="tip">
+Optional information to help a user be more successful.
 </Admonition>
 
 <Admonition type="info">
-  The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation.
+Information that helps users understand the things better.
+</Admonition>
+
+<Admonition type="warning">
+Critical content demanding immediate user attention due to potential risks.
+</Admonition>
+
+<Admonition type="coming-soon">
+Information about features that are coming soon.
 </Admonition>
 ```
 

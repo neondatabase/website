@@ -8,7 +8,7 @@ updatedOn: '2025-02-03T20:41:57.306Z'
 
 User authentication is a critical requirement for web applications. Modern applications require advanced features like social login and multi-factor authentication besides the regular login flow. Additionally, managing personally identifiable information (PII) requires a secure solution compliant with data protection regulations.
 
-<Admonition type="comingSoon">
+<Admonition type="coming-soon">
 Looking to manage **authorization** along with authentication? Currently in Early Access for select users, [Neon RLS Authorize](/docs/guides/neon-authorize) brings JSON Web Token (JWT) authorization directly to Postgres, where you can use Row-level Security (RLS) policies to manage access at the database level.
 </Admonition>
 

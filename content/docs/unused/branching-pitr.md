@@ -9,7 +9,7 @@ redirectFrom:
 updatedOn: '2025-02-03T20:41:57.346Z'
 ---
 
-<Admonition type="comingSoon" title="New feature: Branch restore">
+<Admonition type="coming-soon" title="New feature: Branch restore">
 A simpler one-click branch restore operation is now available. Read more about it [here](/docs/guides/branch-restore). The restore procedure described on this page is still valid and might fit your specific use case.
 </Admonition>
 
