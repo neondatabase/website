@@ -628,6 +628,9 @@
               slug: guides/typeorm
             - title: Knex
               slug: guides/knex
+            - title: Convex
+              slug: /guides/convex-neon
+              tag: new
         - section: Replicate from Neon
           items:
             - title: Airbyte
