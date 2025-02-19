@@ -173,7 +173,7 @@ For secure access to data lakes, `pg_duckdb` integrates with DuckDB's [Secrets M
 
 #### Securely storing your credentials
 
-The `duckdb.secrets` table is a secure vault for storing access keys and tokens. If you have a private S3 bucket or GCS bucket, which requires authentication, you can store your credentials securely in `duckdb.secrets`. This allows you to access your data lakes without exposing your credentials in your queries.
+The `duckdb.secrets` table is a secure vault for storing access keys and tokens. If you have a private S3 bucket or GCS bucket, which requires authentication, you can store your credentials securely in `duckdb.secrets`. This allows you to access your data lakes without exposing  credentials in your queries.
 
 ```sql
 -- Securely store AWS S3 credentials
@@ -184,9 +184,9 @@ VALUES ('S3', 'access_key_id', 'secret_access_key', 'session_token', 'us-east-1'
 
 Replace the `type`, `key_id`, `secret`, `session_token`, and `region` with your actual AWS credentials and region.
 
-You can also optionally set a [scope](https://github.com/duckdb/pg_duckdb/blob/3248efaef4835914653e7cf4e0cde68baa3865c8/docs/secrets.md) to use different secrets for different buckets.
+You can optionally set a [scope](https://github.com/duckdb/pg_duckdb/blob/3248efaef4835914653e7cf4e0cde68baa3865c8/docs/secrets.md) to use different secrets for different buckets.
 
-To use a secret temporarily, you can use the following sytax, which you can also use for short-lived tokens:
+To set secret temporarily or when using short-lived tokens, you can use the following syntax:
 
 ```sql
 select duckdb.raw_query('CREATE SECRET my3_secret (
@@ -199,7 +199,7 @@ REGION ''us-east-2''
 ```
 
 <Admonition type="note">
-Never expose your credentials in your queries. Always use the `duckdb.secrets` table to securely store and manage your access keys and tokens.
+Whenever possible, we recommend using the `duckdb.secrets` table to securely store and manage your access keys and tokens.
 </Admonition>
 
 #### Accessing Data Lakes securely using secrets
