@@ -298,7 +298,7 @@ export default async function Home() {
           <input
             type="submit"
             value={'Delete Quote'}
-            className="cursor-pointer rounded bg-[#00E699] px-4 py-2 font-semibold text-gray-800 transition-colors hover:bg-[#00e5BF] focus:outline-none"
+            className="text-gray-800 cursor-pointer rounded bg-[#00E699] px-4 py-2 font-semibold transition-colors hover:bg-[#00e5BF] focus:outline-none"
           />
         </div>
       </form>
@@ -310,21 +310,21 @@ export default async function Home() {
           type="text"
           name="message"
           placeholder="Mistakes are the portals of discovery - James Joyce"
-          className="w-full appearance-none rounded border p-3 text-center leading-tight text-gray-700 focus:outline-none"
+          className="text-gray-700 w-full appearance-none rounded border p-3 text-center leading-tight focus:outline-none"
         />
       </div>
       <div className="w-full text-center">
         <input
           type="submit"
           value={'Save Quote'}
-          className="cursor-pointer rounded bg-[#00E699] px-4 py-2 font-semibold text-gray-800 transition-colors hover:bg-[#00e5BF] focus:outline-none"
+          className="text-gray-800 cursor-pointer rounded bg-[#00E699] px-4 py-2 font-semibold transition-colors hover:bg-[#00e5BF] focus:outline-none"
         />
       </div>
     </form>
   );
   return (
     <main className="align-center -mt-16 flex min-h-screen flex-col items-center justify-center px-24">
-      <h2 className="pb-6 text-2xl text-gray-400">
+      <h2 className="text-gray-400 pb-6 text-2xl">
         {existingMessage ? 'Your quote is wonderful...' : 'Save an inspiring quote for yourself...'}
       </h2>
       {ui}
