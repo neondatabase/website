@@ -6,10 +6,10 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-identity
 tag: beta
-updatedOn: '2025-02-14T19:32:07.600Z'
+updatedOn: '2025-02-19T17:45:09.013Z'
 ---
 
-<ComingSoon />
+<FeatureBetaProps feature_name="Neon Auth" />
 
 **Neon Auth** connects your authentication provider to your Neon database, automatically synchronizing user profiles so that you own your auth data. Access your user data directly in your database environment, with no custom integration code needed.
 
