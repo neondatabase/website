@@ -6,11 +6,11 @@ enableTableOfContents: true
 updatedOn: '2025-02-18T00:00:00.000Z'
 ---
 
-`pg_duckdb` is a Postgres extension that integrates the [DuckDB](https://duckdb.org) analytics engine directly into Postgres. It allows you to leverage DuckDB's analytical query processing while working within your familiar Postgres environment. With `pg_duckdb`, you can achieve significantly faster analytical queries, especially when dealing with large datasets or complex analytical workloads.
+`pg_duckdb` is a Postgres extension that integrates the [DuckDB](https://duckdb.org) analytics engine directly into Postgres. It allows you to leverage DuckDB's analytical query processing capabilities while working within your familiar Postgres environment. With `pg_duckdb`, you can achieve significantly faster analytical queries, especially when dealing with large datasets or complex analytical workloads.
 
 <CTA />
 
-This guide provides an introduction to the `pg_duckdb` extension for Neon. You will learn how to enable the extension, explore its key features, perform analytical queries and integrate it with data lakes.
+This guide provides an introduction to the `pg_duckdb` extension. You will learn how to enable the extension, explore its key features, perform analytical queries and integrate it with data lakes.
 
 <Admonition type="note">
 `pg_duckdb` is an open-source Postgres extension that embeds DuckDB's columnar analytics engine, developed in collaboration with [Hydra](https://hydra.so) and [MotherDuck](https://motherduck.com). It can be installed on any Neon Project using the instructions below.
@@ -31,18 +31,18 @@ Please refer to the [list of all extensions](/docs/extensions/pg-extensions) ava
 
 ## Key features of `pg_duckdb`
 
-`pg_duckdb` brings a range of powerful features to your Postgres database. Few of the key features include:
+`pg_duckdb` brings a range of powerful features to your Postgres database, some of which are outlined in the following table.
 
 | Feature                     | Description                                                                                                                                                           |
 |-----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Accelerated analytical queries** | Execute analytical queries with DuckDB's vectorized engine, achieving significantly faster performance compared to native Postgres for many analytical workloads. |
-| **Data Lake Integration**       | Query parquet, CSV, and JSON files directly from object storage (like AWS S3, Google Cloud Storage, and Cloudflare R2) using familiar SQL syntax.                |
+| **Data Lake integration**       | Query parquet, CSV, and JSON files directly from object storage (like AWS S3, Google Cloud Storage, and Cloudflare R2) using familiar SQL syntax.                |
 | **Iceberg and Delta Lake support** | Access and analyze data stored in Iceberg and Delta Lake formats, enabling seamless integration with modern data lake architectures.                               |
 | **DuckDB function ecosystem**   | Utilize DuckDB's rich set of built-in functions, including specialized JSON functions.                         |
 | **Secure secrets management**    | Securely manage credentials for accessing data lakes and cloud storage through `duckdb.secrets`.                                                        |
 | **Export result to Data Lakes**    |  Export query results directly to object storage in Parquet format, enabling seamless data movement between Postgres and data lakes.                              |
-| **File Caching**             | Cache data lake files locally for faster subsequent access, improving query performance for frequently accessed data.                                                 |
-| **Force DuckDB Execution**   |  Optionally force queries to be executed by DuckDB's engine, even when queries only involve Postgres tables.                                                        |
+| **File caching**             | Cache data lake files locally for faster subsequent access, improving query performance for frequently accessed data.                                                 |
+| **Forced DuckDB execution**   |  Optionally force queries to be executed by DuckDB's engine, even when queries only involve Postgres tables.                                                        |
 
 Let's explore these features in detail with examples in the following sections.
 
@@ -56,7 +56,7 @@ One of the most compelling features of `pg_duckdb` is its ability to directly qu
 
 #### Analyzing parquet files on AWS S3 / Google Cloud Storage / Azure Blob Storage
 
-Let's start with a practical example of querying a publicly hosted Netflix dataset in Parquet format on AWS S3. We'll use `pg_duckdb` to find the top 3 TV shows based on their "Days In Top 10" ranking
+Let's start with a practical example of querying a **publicly hosted** Netflix dataset in Parquet format on AWS S3. We'll use `pg_duckdb` to find the top 3 TV shows based on their "Days In Top 10" ranking
 
 ```sql
 SELECT r['Title'], max(r['Days In Top 10']) AS MaxDaysInTop10
@@ -67,9 +67,9 @@ ORDER BY MaxDaysInTop10 DESC
 LIMIT 3;
 ```
 
-**Query Breakdown:**
+**Query breakdown:**
 
-- **`read_parquet('s3://...')`**: A function which reads data from the specified Parquet file located in S3. It handles the connection to S3, retrieves the file, and understands the Parquet format to efficiently load the data into the query.
+The **`read_parquet('s3://...')`** function reads data from the specified Parquet file located in S3. It handles the connection to S3, retrieves the file, and understands the Parquet format to efficiently load the data into the query.
 
 The rest of the query filters for TV shows, groups them by title, finds the maximum "Days In Top 10" for each show, and returns the top 3.
 
@@ -169,7 +169,7 @@ FROM read_parquet('s3://us-prd-motherduck-open-datasets/netflix/netflix_daily_to
 
 ### Securing Data Lake access with Secrets Manager
 
-For secure access to data lakes, `pg_duckdb` integrates with DuckDB's [Secrets Manager](https://duckdb.org/docs/configuration/secrets_manager.html). This is essential for protecting your cloud storage credentials.
+For secure access to data lakes, `pg_duckdb` integrates with DuckDB's [Secrets Manager](https://duckdb.org/docs/configuration/secrets_manager.html), which you can use to protect your cloud storage credentials.
 
 #### Securely storing your credentials
 
@@ -217,7 +217,7 @@ WITH (FORMAT 'parquet');
 
 **Example:**
 
-Let's say you have a Postgres table named `customer_analytics` and you want to export data from it to an S3 bucket called `neon-exported-data` in Parquet format.
+Let's say you have a Postgres table named `customer_analytics`, and you want to export data from that table to an S3 bucket called `neon-exported-data` in Parquet format.
 
 ```sql
 COPY (SELECT customer_id, region, order_count FROM customer_analytics WHERE last_activity_date > now() - interval '30 days')
@@ -248,7 +248,7 @@ SELECT * FROM duckdb.cache_info();
 SELECT duckdb.cache_delete('your_cache_key'); -- Replace 'your_cache_key' with the actual cache key from duckdb.cache_info()
 ```
 
-Once a file is cached, subsequent queries accessing the same URL will automatically use the cached version, provided the remote data hasn't changed (determined by eTag).  Cache management is manual; you need to use `duckdb.cache_delete()` to remove files from the cache when they are no longer needed.
+Once a file is cached, subsequent queries accessing the same URL will automatically use the cached version, provided the remote data hasn't changed (determined by ETag — entity tag).  Cache management is manual; you need to use `duckdb.cache_delete()` to remove files from the cache when they are no longer needed.
 
 ## Forcing DuckDB execution
 
@@ -280,6 +280,16 @@ DuckDB configuration settings, such as memory limits and maximum memory usage, a
 ### Querying DuckDB directly
 
 `duckdb.query('your duckdb select query')`:  Allows you to run arbitrary DuckDB `SELECT` queries directly. This is useful for leveraging DuckDB-specific SQL syntax or functions not yet directly exposed as standard Postgres functions via `pg_duckdb`.
+
+## Test data
+
+You can find several open datasets for testing in the MotherDuck public S3 bucket: `s3://us-prd-motherduck-open-datasets`.
+
+To view available datasets, [install the aws CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html#getting-started-install-instructions) and run the following command:
+
+```bash
+aws s3 ls s3://us-prd-motherduck-open-datasets --no-sign-request --recursive
+```
 
 ## Conclusion
 
