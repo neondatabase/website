@@ -248,8 +248,6 @@ Explore supported Postgres extensions by category. Also see:
 
 <a href="https://github.com/dimitri/prefix" description="A prefix range module that supports efficient queries on text columns with prefix-based searching and matching capabilities" icon="search">prefix</a>
 
-<a href="/docs/extensions/pg_search" description="Add powerful full-text search capabilities to Postgres using BM25 algorithm and inverted indexes" icon="search">pg_search</a>
-
 <a href="https://www.postgresql.org/docs/16/unaccent.html" description="A text search dictionary that removes accents from characters, simplifying text search in Postgres" icon="search">unaccent</a>
 
 </DetailIconCards>
