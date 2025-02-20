@@ -18,10 +18,6 @@ updatedOn: '2025-02-20T02:00:36.056Z'
 </DocsList>
 </InfoBlock>
 
-<Admonition type="note" title="coming soon">
-This feature is not yet available in all regions.
-</Admonition>
-
 The [Neon Postgres Native Integration](https://vercel.com/marketplace/neon), available on the Vercel Marketplace, allows you to add a Postgres database to your Vercel project. You can optionally configure the integration to create a database branch for each Vercel preview deployment. This guide explains how to set up that configuration.
 
 <details>
