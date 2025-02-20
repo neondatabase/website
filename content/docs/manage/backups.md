@@ -24,6 +24,13 @@ Neon retains a history for all branches, allowing you to restore your data to a 
 
 For information about creating a point-in-time restore branch, see [Branching — Point-in-time restore](/docs/guides/branching-pitr).
 
+## Backup Postgres to S3 using GitHub Actions
+
+This two-part guide walks you through setting up an S3 bucket and a GitHub Action to automate `pg_dump` backups on a recurring schedule. You'll also learn how to configure retention settings to manage how long backups are stored before being deleted.
+
+1. [Create an S3 bucket to store Postgres backups](/docs/manage/backups-aws-s3-backup-part-1)
+2. [Set up a GitHub Action to perform nightly Postgres backups](/docs/manage/backups-aws-s3-backup-part-2)
+
 ## pg_dump
 
 You can backup a database using `pg_dump`, in the same way backups are created for a standalone Postgres instance.
@@ -46,16 +53,5 @@ Command was: ALTER DEFAULT PRIVILEGES FOR ROLE cloud_admin IN SCHEMA public GRAN
 
 This is a protected role in Neon that cannot be modified. To avoid this issue, you can add a `-O` or `--no-owner` option to your `pg_restore` command, as described [Database object ownership consideration](/docs/import/migrate-from-postgres#database-object-ownership-considerations).
 </Admonition>
-
-## Automate postgres backups with a GitHub Action
-
-These Neon posts describe how you can schedule a backup to an Amazon S3 storage bucket using GitHub Actions:
-
-- [How To Use GitHub Actions To Schedule PostgreSQL Backups](https://neon.tech/blog/how-to-create-an-aws-s3-bucket-for-postgres-backups)
-- [How to Set Up Nightly Backups to AWS S3 for Multiple Neon Projects](https://neon.tech/blog/nightly-backups-for-multiple-neon-projects)
-
-## Community guides
-
-- [Nightly Postgres Backups via GitHub Actions](https://joshstrange.com/2024/04/26/nightly-postgres-backups-via-github-actions/)
 
 <NeedHelp/>
