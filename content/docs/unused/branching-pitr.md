@@ -6,10 +6,10 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/tutorial/data-recovery
   - /docs/guides/branching-data-recovery
-updatedOn: '2025-02-19T11:27:41.880Z'
+updatedOn: '2025-02-20T17:29:13.760Z'
 ---
 
-<Admonition type="coming-soon" title="New feature: Branch restore">
+<Admonition type="comingSoon" title="New feature: Branch restore">
 A simpler one-click branch restore operation is now available. Read more about it [here](/docs/guides/branch-restore). The restore procedure described on this page is still valid and might fit your specific use case.
 </Admonition>
 

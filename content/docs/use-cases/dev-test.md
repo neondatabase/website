@@ -3,7 +3,7 @@ title: Neon for Development and Testing
 subtitle: Boost developer productivity with Neon—a flexible development sandbox for
   running non-production workloads.
 enableTableOfContents: true
-updatedOn: '2025-02-11T18:04:21.936Z'
+updatedOn: '2025-02-20T12:23:17.868Z'
 ---
 
 What sets Neon apart from other Postgres providers, beyond its true serverless nature, is its focus on delivering an exceptional developer experience.
@@ -25,6 +25,8 @@ Together, these features create a fast, flexible, and developer-friendly databas
 ## Move non-production to Neon
 
 Not every team is ready for a full database migration. However, even if teams aren’t ready to migrate their production databases, they can still improve efficiency by moving their non-production workloads to Neon using a [Neon Twin](/docs/guides/neon-twin-intro).
+
+![Dev/Test Twin Workflow](/use-cases/dev-test-twin-workflow.png)
 
 <CTA title="Create a Neon Twin" description="A Neon Twin is a full or partial clone of your production or staging database, providing developers and teams with isolated, sandboxed environments that closely mirror production. <br><br>Learn how to create a Twin <a href='/docs/guides/neon-twin-intro'>here</a>." isIntro />
 
