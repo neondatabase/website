@@ -1,9 +1,10 @@
 ---
 title: Vercel Native Integration Previews
-subtitle: Create a database branch for every preview deployment with Neon's native Vercel integration
+subtitle: Create a database branch for every preview deployment with Neon's native
+  Vercel integration
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-12-11T21:23:33.087Z'
+updatedOn: '2025-02-20T02:00:36.056Z'
 ---
 
 <InfoBlock>
