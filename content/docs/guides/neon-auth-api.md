@@ -3,7 +3,7 @@ title: Manage Neon Auth using the API
 enableTableOfContents: true
 ---
 
-Learn how to manage your Neon Auth integration using the Neon API. Create a new integration, add users, and claim ownership of your Neon-managed auth project to your auth provider.
+Learn how to manage your Neon Auth integration using the Neon API. Create a new integration, generate SDK keys, add users, and claim ownership of your Neon-managed auth project to your auth provider.
 
 ## Prerequisites
 
@@ -95,6 +95,41 @@ Example response:
 
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/listProjectIdentityIntegrations)
 
+## Generate SDK keys
+
+Generates SDK keys for your auth provider integration. These keys are used to set up your frontend and backend SDKs.
+
+Required parameters:
+
+- `project_id`: Your Neon project ID
+- `auth_provider`: The authentication provider (currently `"stack"`)
+
+```bash shouldWrap
+curl --request POST \
+     --url 'https://console.neon.tech/api/v2/projects/auth/keys' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '{
+       "project_id": "project-id",
+       "auth_provider": "stack"
+     }' | jq
+```
+
+Example response:
+```json shouldWrap
+{
+  "auth_provider": "stack",
+  "auth_provider_project_id": "project-id-123",
+  "pub_client_key": "pck_example...",
+  "secret_server_key": "ssk_example...",
+  "jwks_url": "https://api.stack-auth.com/api/v1/projects/project-id-123/.well-known/jwks.json",
+  "schema_name": "neon_auth",
+  "table_name": "users_sync"
+}
+```
+
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/createProjectIdentityAuthProviderSDKKeys)
+
 ## Create users
 
 Creates a new user in your auth provider's system.
@@ -104,7 +139,10 @@ Required parameters:
 - `project_id`: Your Neon project ID
 - `auth_provider`: The authentication provider (currently `"stack"`)
 - `email`: User's email address
-- `password`: User's password
+
+Optional parameters:
+
+- `name`: User's display name (1-255 characters)
 
 ```bash shouldWrap
 curl --request POST \
@@ -115,7 +153,7 @@ curl --request POST \
        "project_id": "project-id",
        "auth_provider": "stack",
        "email": "user@example.com",
-       "password": "secure-password"
+       "name": "Example User"
      }' | jq
 ```
 
@@ -181,3 +219,4 @@ curl --request DELETE \
 ```
 
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/deleteProjectIdentityIntegration)
+
