@@ -250,7 +250,7 @@ INNER JOIN product_groups USING (group_id);
 ```
 
 ![PostgreSQL Window Function - RANK function](/postgresqltutorial/PostgreSQL-Window-Function-RANK-function.png)
-In the laptop product group, both `Dell Vostro` and `Sony VAIO` products have the same price, therefore, they receive the same rank 1\. The next row in the group is `HP Elite` that receives the rank 3 because the rank 2 is skipped.
+In the laptop product group, both `Sony VAIO` and `Lenovo Thinkpad` products have the same price, therefore, they receive the same rank 1\. The next row in the group is `Dell Vostro` that receives the rank 3 because the rank 2 is skipped.
 
 Similar to the `RANK()` function, the [`DENSE_RANK()`](postgresql-window-function/postgresql-dense_rank-function) function assigns a rank to each row within an ordered partition, but the ranks have no gap. In other words, the same ranks are assigned to multiple rows and no ranks are skipped.
 
@@ -270,7 +270,7 @@ INNER JOIN product_groups USING (group_id);
 ```
 
 ![PostgreSQL Window Function - DENSE_RANK function](/postgresqltutorial/PostgreSQL-Window-Function-DENSE_RANK-function.png)
-Within the laptop product group, rank 1 is assigned twice to `Dell Vostro` and `Sony VAIO`. The next rank is 2 assigned to `HP Elite`.
+Within the laptop product group, rank 1 is assigned twice to `Sony VAIO` and `Lenovo Thinkpad`. The next rank is 2 assigned to `Dell Vostro`.
 
 ## The FIRST_VALUE and LAST_VALUE functions
 
