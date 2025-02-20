@@ -34,7 +34,7 @@ const themes = {
     borderClassName: 'border-gray-new-50 dark:border-gray-5',
     icon: InfoIcon,
   },
-  'coming-soon': {
+  comingSoon: {
     titleClassName: 'text-[#8873EF] dark:text-secondary-5',
     borderClassName: 'border-[#8873EF] dark:border-secondary-5',
     icon: ComingSoonIcon,
@@ -42,18 +42,19 @@ const themes = {
 };
 
 const Admonition = ({ children = null, type = 'note', title = null, asHTML = false }) => {
-  const typeText = type.replace('-', ' ');
-  const Icon = themes[type].icon;
+  const typeText = type == 'comingSoon' ? 'Coming soon' : type;
+  const theme = themes[type] || themes.note;
+  const Icon = theme.icon;
 
   return (
     <div
       className={clsx(
         'admonition not-prose mt-5 rounded-[1px] border-l-4 bg-gray-new-98 px-5 py-4 dark:bg-gray-new-8',
-        themes[type].borderClassName,
+        theme.borderClassName,
         '[&_pre[data-language]]:!bg-white [&_pre[data-language]]:dark:!bg-gray-new-8 [&_pre]:px-4 [&_pre]:py-3 [&_pre_code]:!text-sm'
       )}
     >
-      <div className={clsx('flex items-center gap-1.5', themes[type].titleClassName)}>
+      <div className={clsx('flex items-center gap-1.5', theme.titleClassName)}>
         <Icon width={14} height={14} />
         <h4 className="text-[13px] font-semibold uppercase leading-none tracking-normal">
           {title || typeText}
