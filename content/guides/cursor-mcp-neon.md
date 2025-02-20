@@ -19,7 +19,7 @@ Let's break down the key components of this workflow:
 
 - **Neon MCP Server**: Neon's MCP server acts as a bridge between MCP clients like Cursor and [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), allowing them to interact with your Neon databases using natural language commands. It provides a set of tools that enable Cursor to perform database operations like querying tables, adding columns, and executing SQL commands.
 
-- **Model Context Protocol (MCP)**: MCP provides the lightweight communication standard that allows Cursor and Neon MCP Server to work together seamlessly, facilitating fast, natural language interactions for database management.
+- **Model Context Protocol (MCP)**: MCP provides the lightweight communication standard that allows Cursor and Neon MCP Server to work together to let you manage your database using natural language.
 
 This toolset streamlines database design and development, allowing for rapid experimentation and iteration on schema changes. It's perfect for early-stage development, where speed and agility are paramount, and formal migration tracking is less critical.
 
