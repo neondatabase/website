@@ -15,11 +15,11 @@ This guide demonstrates how to use [Cursor's Composer](https://docs.cursor.com/c
 
 Let's break down the key components in this setup:
 
-- **Cursor**: Cursor is an AI-first code editor that supports Model Context Protocol (MCP) for interfacing with to external tools (APIs, databases, etc.)
+- **Cursor**: Cursor is an AI-first code editor that supports Model Context Protocol (MCP) for interfacing with external tools (APIs, databases, etc.)
 
 - **Neon MCP Server**: Neon's MCP server acts as a bridge between MCP clients like Cursor and [Neon's API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), letting you work with Neon databases using natural language commands.
 
-- **Model Context Protocol (MCP)**: MCP is lightweight communication standard that allows Cursor and Neon MCP Server to work together.
+- **Model Context Protocol (MCP)**: MCP is a lightweight communication standard that allows Cursor and Neon MCP Server to work together.
 
 ## Setting up Neon MCP Server in Cursor
 
@@ -34,7 +34,7 @@ Before you begin, ensure you have the following:
 3.  **Neon API Key:** After signing up, get your Neon API Key from the [Neon console](https://console.neon.tech/app/settings/profile). This API key is needed to authenticate your application with Neon. For instructions, see [Manage API keys](https://neon.tech/docs/manage/api-keys).
 
     <Admonition type="warning" title="Neon API Key Security">
-    Keep your Neon API key secure and never share it publicly. It provides access to your Neon projects.
+    Keep your Neon API key secure, and never share it publicly. It provides access to your Neon projects.
     </Admonition>
 
 4.  **Node.js (>= v18) and npm:** Ensure Node.js (version 18 or later) and npm are installed. Download them from [nodejs.org](https://nodejs.org).
@@ -158,7 +158,7 @@ While the Neon MCP server allows you to utilize all of Neon's functionalities, y
 
 ## Bonus: Creating a project and branch
 
-Beyond schema changes, you can also manage your Neon projects and branches directly within Cursor using natural language commands. This can be useful for setting up a development environment quickly.
+Beyond schema changes, you can also manage your Neon projects and branches directly within Cursor using natural language commands. This can be useful for quickly setting up a new development or test environment.
 
 ### Creating a new project
 
