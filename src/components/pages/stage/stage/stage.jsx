@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 import Button from 'components/shared/button';
 import TwitterShareButton from 'components/shared/twitter-share-button';
-import { DEPLOY_AGENDA } from 'constants/deploy';
+import DEPLOY_AGENDA from 'constants/deploy';
 
 // TODO: Replace with actual video
 const DEPLOY_STAGE_VIDEO =

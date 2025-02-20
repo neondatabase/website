@@ -131,7 +131,6 @@ module.exports = {
         wider: '0.04em',
       },
       boxShadow: {
-        social: 'inset 0px -2px 10px rgba(255, 255, 255, 0.15)',
         contact: '0px 4px 10px 0px rgba(0, 0, 0, .5), 0px 4px 30px 0px rgba(0, 0, 0, .5)',
       },
       backgroundImage: ({ theme }) => ({
