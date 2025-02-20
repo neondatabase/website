@@ -6,10 +6,6 @@ isDraft: false
 updatedOn: '2024-12-11T21:23:33.087Z'
 ---
 
-<Admonition type="comingSoon" title="Coming Soon">
-This feature is not yet available in all regions. If it's not available your region, you can expect to see it soon.
-</Admonition>
-
 <InfoBlock>
 <DocsList title="What you will learn:">
 <p>How to create a database branch for each preview deployment</p>
@@ -20,6 +16,10 @@ This feature is not yet available in all regions. If it's not available your reg
 <a href="/docs/guides/vercel-native-integration">Neon Postgres Native Integration</a>
 </DocsList>
 </InfoBlock>
+
+<Admonition type="note" title="coming soon">
+This feature is not yet available in all regions.
+</Admonition>
 
 The [Neon Postgres Native Integration](https://vercel.com/marketplace/neon), available on the Vercel Marketplace, allows you to add a Postgres database to your Vercel project. You can optionally configure the integration to create a database branch for each Vercel preview deployment. This guide explains how to set up that configuration.
 
