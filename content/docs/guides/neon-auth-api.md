@@ -29,6 +29,7 @@ To create an integration, you'll need:
 </Admonition>
 
 Required parameters:
+
 - `project_id`: Your Neon project ID
 - `branch_id`: Your project's main branch ID
 - `database_name`: Name of your database (defaults to `"neondb"`)
@@ -49,6 +50,7 @@ curl --request POST \
 ```
 
 Example response:
+
 ```json shouldWrap
 {
   "auth_provider": "stack",
@@ -74,6 +76,7 @@ curl --request GET \
 ```
 
 Example response:
+
 ```json shouldWrap
 {
   "data": [
@@ -97,6 +100,7 @@ Example response:
 Creates a new user in your auth provider's system.
 
 Required parameters:
+
 - `project_id`: Your Neon project ID
 - `auth_provider`: The authentication provider (currently `"stack"`)
 - `email`: User's email address
@@ -116,6 +120,7 @@ curl --request POST \
 ```
 
 Example response:
+
 ```json shouldWrap
 {
   "id": "user-id-123"
@@ -139,6 +144,7 @@ SELECT id, email, name, created_at FROM neon_auth.users_sync;
 Transfer ownership of your Neon-managed auth project to your own auth provider account. This is a two-step process:
 
 1. Request a transfer URL:
+
 ```bash shouldWrap
 curl --request POST \
      --url 'https://console.neon.tech/api/v2/projects/auth/transfer_ownership' \
@@ -151,6 +157,7 @@ curl --request POST \
 ```
 
 Example response:
+
 ```json shouldWrap
 {
   "url": "https://app.stack-auth.com/integrations/neon/projects/transfer/confirm?code=example123"
