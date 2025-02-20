@@ -63,10 +63,9 @@ Before you begin, ensure you have the following:
 
      ![Add Neon MCP Server in Cursor](/docs/guides/cursor-add-mcp-server.png)
 
+   Cursor will attempt to connect. Your new "Neon" MCP server should appear in the MCP Servers list with all the available tools.
 
-    Cursor will attempt to connect. Your new "Neon" MCP server should appear in the MCP Servers list with all the available tools.
-
-    ![Cursor with Neon MCP Tools](/docs/guides/cursor-with-neon-mcp-tools.png)
+   ![Cursor with Neon MCP Tools](/docs/guides/cursor-with-neon-mcp-tools.png)
 
 You've now configured Neon MCP Server in Cursor and can manage your Neon Postgres databases using AI.
 
