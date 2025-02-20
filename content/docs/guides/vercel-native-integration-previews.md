@@ -6,8 +6,8 @@ isDraft: false
 updatedOn: '2024-12-11T21:23:33.087Z'
 ---
 
-<Admonition type="comingSoon" title="Beta">
-This feature is currently in Beta. Let us know what you think via the [Feedback form](https://console.neon.tech/app/projects?modal=feedback) in the Neon Console or on our [Discord channel](https://discord.com/channels/1176467419317940276/1176788564890112042).
+<Admonition type="comingSoon" title="Coming Soon">
+This feature is not yet available in all regions. If it's not available your region, you can expect to see it soon.
 </Admonition>
 
 <InfoBlock>
@@ -112,7 +112,7 @@ After enabling database branches for preview deployments, a database branch is c
 
 ## Applying schema changes to database branches
 
-If you're managing your database schema in code using a tool like Prisma Migrate or Drizzle ORM, you can add build commands, including a schema migration command, to your Vercel deployment configuration. This way, you can preview application and database changes together, which is one of the key advantages of this configuration.
+If you're managing your database schema in code using a tool like Prisma Migrate or Drizzle ORM, you can add build commands, including a schema migration command, to your Vercel deployment configuration. This way, you can preview application and database changes together.
 
 To add build commands to your Vercel project previews:
 
