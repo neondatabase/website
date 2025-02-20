@@ -150,7 +150,7 @@ Choose your setup option in the Neon Console under the **Auth** page.
 When you create a Neon Auth integration using Quick Start, Neon manages the auth project for you. You can claim ownership of the project to your own Stack Auth account by clicking **Transfer ownership** in the **Auth** page. This gives you direct access to manage your project in the Stack Auth dashboard while maintaining the integration with your Neon database.
 
 <Admonition type="note">
-After transfer, you'll still be able to access your project from the Neon Console, but you'll also have direct access from the Stack Auth dashboard.
+After the transfer, you'll still be able to access your project from the Neon Console, but you'll also have direct access from the Stack Auth dashboard.
 </Admonition>
 
 ## Using the API
