@@ -282,7 +282,6 @@
           slug: guides/protected-branches
         - title: Private Networking
           slug: guides/neon-private-networking
-          tag: beta
     - title: Platform
       icon: management
       slug: manage/platform
