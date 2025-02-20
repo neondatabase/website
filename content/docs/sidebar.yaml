@@ -489,12 +489,12 @@
         - title: SQLAlchemy
           slug: guides/sqlalchemy
     - title: Neon Auth
-      slug: guides/neon-identity
+      slug: guides/neon-auth
       icon: partner-guide
       tag: beta
     - title: Neon RLS Authorize
-      slug: guides/neon-rls-authorize
       icon: auth
+      slug: guides/neon-rls-authorize
       items:
         - section: Overview
           items:
@@ -555,6 +555,8 @@
                   slug: guides/vercel-overview
                 - title: Vercel Native Integration
                   slug: guides/vercel-native-integration
+                - title: Vercel Native Integration Previews
+                  slug: guides/vercel-native-integration-previews
                 - title: Neon Previews Integration
                   slug: guides/vercel-previews-integration
                 - title: Connect manually
@@ -627,6 +629,9 @@
               slug: guides/typeorm
             - title: Knex
               slug: guides/knex
+            - title: Convex
+              slug: /guides/convex-neon
+              tag: new
         - section: Replicate from Neon
           items:
             - title: Airbyte

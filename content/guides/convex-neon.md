@@ -75,7 +75,7 @@ Now, you'll set up the self-hosted Convex backend using Docker Compose, configur
     1.  Create a `.env` file in the same directory as `docker-compose.yml`.
     1.  Add this line:
         ```env
-        DATABASE_URL=[YOUR_NEON_CONNECTION_STRING]
+        POSTGRES_URL=[YOUR_NEON_CONNECTION_STRING]
         ```
     1.  Modify `[YOUR_NEON_CONNECTION_STRING]` for Convex:
 
@@ -116,7 +116,7 @@ Now, you'll set up the self-hosted Convex backend using Docker Compose, configur
     - When you access the dashboard for the first time, you will be prompted to log in.
     - For the password, you will use the `CONVEX_SELF_HOSTED_ADMIN_KEY` generated in the next step.
 
-6.  **Verify Neon Postgres Connection (Optional but Recommended):** You can confirm that Convex is using your Neon Postgres database by checking the Docker container logs. This verifies that the `DATABASE_URL` environment variable was correctly processed.
+6.  **Verify Neon Postgres Connection (Optional but Recommended):** You can confirm that Convex is using your Neon Postgres database by checking the Docker container logs. This verifies that the `POSTGRES_URL` environment variable was correctly processed.
 
     Run this command in your terminal within the `convex-neon-integration` directory:
 
