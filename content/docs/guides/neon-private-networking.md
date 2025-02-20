@@ -7,7 +7,7 @@ redirectFrom:
 updatedOn: '2025-02-20T17:57:40.907Z'
 ---
 
-<Admonition type="coming-soon" title="Private Networking availability">
+<Admonition type="comingSoon" title="Private Networking availability">
 Private Networking is available on Neon's [Business](/docs/introduction/plans#business) and [Enterprise](/docs/introduction/plans#enterprise) plans.
 </Admonition>
 
