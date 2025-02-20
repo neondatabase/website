@@ -3,7 +3,7 @@ title: Create a Neon Twin
 subtitle: Learn how to Twin your production database with Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-11T18:04:21.934Z'
+updatedOn: '2025-02-20T12:23:17.865Z'
 ---
 
 <CTA title="Explore our dev/test use case" description="Move development and testing to Neon—keep production right where it is.<br/><br/>Read more about our dev/test use case <a href='/docs/use-cases/dev-test'>here</a>." isIntro></CTA>
