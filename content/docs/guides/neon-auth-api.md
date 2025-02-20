@@ -167,7 +167,7 @@ Example response:
 2. Open the returned URL in a browser to complete the transfer. You'll be asked to confirm which Stack Auth account should receive ownership of the project.
 
 <Admonition type="note">
-After transfer, you'll still be able to access your project from the Neon dashboard, but you'll also have direct access from the Stack Auth dashboard.
+After the transfer, you'll still be able to access your project from the Neon dashboard, but you'll also have direct access from the Stack Auth dashboard.
 </Admonition>
 
 ## Delete integration
