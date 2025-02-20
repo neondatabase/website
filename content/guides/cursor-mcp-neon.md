@@ -42,24 +42,27 @@ Before you begin, ensure you have the following:
 ### Installation and Configuration
 
 **Add Neon MCP Server to Cursor:**
-  1. Open Cursor and go to **Cursor Settings** in the Navbar.
-  1. In Settings, navigate to **Features**.
-  1. Scroll to the **MCP Servers** section.
-      ![Cursor MCP Servers section](/docs/guides/cursor-settings-features.png)
-  1. Click **+ Add new MCP server**.
 
-  1. In the "Add MCP Server" modal:
-        - **Name:** Give your server a descriptive name (e.g., `Neon`).
-        - **Type:** Select `command`.
-        - **Command:** Enter the following command, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key which you obtained earlier in the [Prerequisites](#prerequisites) section.
+1. Open Cursor and go to **Cursor Settings** in the Navbar.
+1. In Settings, navigate to **Features**.
+1. Scroll to the **MCP Servers** section.
+   ![Cursor MCP Servers section](/docs/guides/cursor-settings-features.png)
+1. Click **+ Add new MCP server**.
 
-            ```bash
-            npx -y @neondatabase/mcp-server-neon start <YOUR_NEON_API_KEY>
-            ```
+1. In the "Add MCP Server" modal:
 
-        - Click **Add**.
+   - **Name:** Give your server a descriptive name (e.g., `Neon`).
+   - **Type:** Select `command`.
+   - **Command:** Enter the following command, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key which you obtained earlier in the [Prerequisites](#prerequisites) section.
 
-          ![Add Neon MCP Server in Cursor](/docs/guides/cursor-add-mcp-server.png)
+     ```bash
+     npx -y @neondatabase/mcp-server-neon start <YOUR_NEON_API_KEY>
+     ```
+
+   - Click **Add**.
+
+     ![Add Neon MCP Server in Cursor](/docs/guides/cursor-add-mcp-server.png)
+
 
     Cursor will attempt to connect. Your new "Neon" MCP server should appear in the MCP Servers list with all the available tools.
 
@@ -145,8 +148,8 @@ Cursor: I'll complete the migration and apply the changes to the main branch.
 
 - **Natural language interaction:** You can use simple, conversational English to interact with your database.
 - **Step-by-step guidance:** Cursor (Claude) confirms each step and provides details like branch names and migration IDs.
-- **MCP Tools in Action:**  The underlying MCP tools (`get_database_tables`, `run_sql`, `prepare_database_migration`, `complete_database_migration`) illustrate the automated process.
-- **Branching for safety:**  The agent automatically creates a temporary branch for schema changes. The user will be prompted to confirm the migration before applying it to the main branch.
+- **MCP Tools in Action:** The underlying MCP tools (`get_database_tables`, `run_sql`, `prepare_database_migration`, `complete_database_migration`) illustrate the automated process.
+- **Branching for safety:** The agent automatically creates a temporary branch for schema changes. The user will be prompted to confirm the migration before applying it to the main branch.
 
 You can verify the changes in your Neon Console or by querying the database directly.
 
@@ -162,7 +165,7 @@ Beyond schema changes, you can also manage your Neon projects and branches direc
 
 ### Creating a new project
 
-Let's say you want to create a new Neon project named "my-new-project".  You can simply tell Cursor:
+Let's say you want to create a new Neon project named "my-new-project". You can simply tell Cursor:
 
 ```
 User: Create a Neon project named "my-new-project"
@@ -172,12 +175,12 @@ Cursor: I'll help you create a new Neon project with the specified name.
 > Project ID: orange-dawn-33739962
 > Default branch: main
 > Default database: neondb
-> The project is ready to use. You can start creating tables and working with your database right away. 
+> The project is ready to use. You can start creating tables and working with your database right away.
 ```
 
 ![Cursor creating a new Neon project](/docs/guides/cursor-mcp-create-new-project.png)
 
-Cursor will then use the `create_project` MCP tool to initiate the project creation.  It will provide you with a project ID and name.
+Cursor will then use the `create_project` MCP tool to initiate the project creation. It will provide you with a project ID and name.
 
 ### Creating a New Branch
 
