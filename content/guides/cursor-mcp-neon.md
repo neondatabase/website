@@ -80,14 +80,6 @@ Before you begin, ensure you have the following:
 
         ![Cursor with Neon MCP Tools](/docs/guides/cursor-with-neon-mcp-tools.png)
 
-- **Verify the Connection:**
-    - Open Cursor's **Composer**. Use `⌘I` to open it, and `⌘N` to create a new Composer.
-    - Make sure to select the agent mode.
-        ![Cursor composer](/docs/guides/cursor-composer.png)
-    - Type **List my Neon projects** in the Composer input and press `Enter`.
-    - Cursor will communicate with the Neon MCP server and use your API key to fetch your Neon projects.
-    - A list of your Neon projects in the Composer output confirms a successful connection.
-
 You've now configured Neon MCP Server in Cursor and can manage your Neon Postgres databases using AI.
 
 ## Neon MCP Server Tools
@@ -229,6 +221,8 @@ Cursor: Perfect! I've created a new branch named "feature-x". Here are the detai
 > Parent branch ID: br-odd-pine-a5y53krm
 > The branch has been created successfully and is ready for use.
 ```
+
+![Cursor creating a new Neon branch](/docs/guides/cursor-mcp-create-new-branch.png)
 
 Cursor will use the `create_branch` MCP tool to create the branch and provide you with the branch name and ID. Notice how we don't need to specify the project ID, as Cursor remembers the active project context.
 
