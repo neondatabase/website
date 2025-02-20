@@ -40,24 +40,22 @@ import codyJenkins from 'images/pages/enterprise/testimonials/cody-jenkins.jpg';
 import robertChandler from 'images/pages/enterprise/testimonials/robert-chandler.jpg';
 import getMetadata from 'utils/get-metadata';
 
-export const metadata = getMetadata({
-  ...SEO_DATA.enterprise,
-});
+export const metadata = getMetadata(SEO_DATA.enterprise);
 
 const logos = [
-  'bunnyshell',
-  'hasura',
+  'eqt',
+  'openai',
+  'zimmer',
+  'outfront',
+  'adobe',
+  'genomics',
   'replit',
-  'vercel',
   'retool',
-  'illa',
-  'octolis',
-  'cloudflare',
-  'wundergraph',
-  'fabric-io',
-  'snaplet',
-  'fl0',
-  'encore',
+  'albertsons',
+  'akqa',
+  'vercel',
+  'bcg',
+  'wordware',
 ];
 
 const features = [
