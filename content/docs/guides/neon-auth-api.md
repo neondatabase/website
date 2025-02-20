@@ -116,6 +116,7 @@ curl --request POST \
 ```
 
 Example response:
+
 ```json shouldWrap
 {
   "auth_provider": "stack",
@@ -219,4 +220,3 @@ curl --request DELETE \
 ```
 
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/deleteProjectIdentityIntegration)
-
