@@ -2,7 +2,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
-const { getAllPosts, getAllChangelogPosts } = require('./src/utils/api-docs');
+const { getAllPosts, getAllChangelogs } = require('./src/utils/api-docs');
 const generateChangelogPath = require('./src/utils/generate-changelog-path');
 const generateDocPagePath = require('./src/utils/generate-doc-page-path');
 
@@ -109,7 +109,7 @@ const defaultConfig = {
   },
   async redirects() {
     const docPosts = await getAllPosts();
-    const changelogPosts = await getAllChangelogPosts();
+    const changelogPosts = await getAllChangelogs();
     const docsRedirects = docPosts.reduce((acc, post) => {
       const { slug, redirectFrom: postRedirects } = post;
       if (!postRedirects || !postRedirects.length) {
@@ -153,11 +153,6 @@ const defaultConfig = {
       {
         source: '/2024-plan-updates',
         destination: '/pricing',
-        permanent: true,
-      },
-      {
-        source: '/blog/category/case-study',
-        destination: '/case-studies',
         permanent: true,
       },
       {

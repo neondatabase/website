@@ -163,6 +163,9 @@
               slug: guides/logical-replication-postgres-to-neon
             - title: Replicate from RDS
               slug: guides/logical-replication-rds-to-neon
+            - title: Replicate from Supabase
+              slug: guides/logical-replication-supabase-to-neon
+              tag: new
         - section: Data migration services
           items:
             - title: AWS Data Migration Service (DMS)
@@ -354,16 +357,6 @@
             - title: Slack App
               slug: manage/slack-app
               tag: beta
-        - section: Security
-          items:
-            - title: Overview
-              slug: security/security-overview
-            - title: Security reporting
-              slug: security/security-reporting
-            - title: Compliance
-              slug: security/compliance
-            - title: Acceptable Use Policy
-              slug: security/acceptable-use-policy
         - section: Backups
           items:
             - title: Backups
@@ -389,6 +382,7 @@
           slug: use-cases/platforms
         - title: Dev/Test
           slug: use-cases/dev-test
+
     - title: Regions
       slug: introduction/regions
       icon: regions
@@ -496,12 +490,12 @@
         - title: SQLAlchemy
           slug: guides/sqlalchemy
     - title: Neon Auth
-      slug: guides/neon-identity
+      slug: guides/neon-auth
       icon: partner-guide
       tag: beta
     - title: Neon RLS Authorize
-      slug: guides/neon-rls-authorize
       icon: auth
+      slug: guides/neon-rls-authorize
       items:
         - section: Overview
           items:
@@ -553,7 +547,6 @@
           items:
             - title: Datadog Integration
               slug: guides/datadog
-              tag: new
         - section: Deploy
           items:
             - title: Vercel
@@ -637,6 +630,9 @@
               slug: guides/typeorm
             - title: Knex
               slug: guides/knex
+            - title: Convex
+              slug: /guides/convex-neon
+              tag: new
         - section: Replicate from Neon
           items:
             - title: Airbyte
@@ -673,6 +669,8 @@
               slug: guides/logical-replication-alloydb
             - title: Aurora
               slug: guides/logical-replication-aurora-to-neon
+            - title: Replicate from Azure
+              slug: import/migrate-from-azure-postgres
             - title: Cloud SQL
               slug: guides/logical-replication-cloud-sql
             - title: Neon to Neon
@@ -681,6 +679,8 @@
               slug: guides/logical-replication-postgres-to-neon
             - title: AWS RDS
               slug: guides/logical-replication-rds-to-neon
+            - title: Replicate from Supabase
+              slug: guides/logical-replication-supabase-to-neon
         - section: Schema Migration
           items:
             - title: Django
@@ -821,12 +821,25 @@
     - title: Examples repo
       slug: https://github.com/neondatabase/examples
       icon: cli
+- section: Workflows
+  items:
+    - title: Neon Twin
+      slug: guides/neon-twin-intro
+      icon: neon-twin
+      tag: new
+      items:
+        - section: pg_dump / pg_restore
+          items:
+            - title: Full Twin
+              slug: guides/neon-twin-full-pg-dump-restore
+            - title: Partial Twin
+              slug: guides/neon-twin-partial-pg-dump-restore
 - section: Postgres
   items:
     - title: PostgreSQL Tutorial
       slug: /postgresql/tutorial
       icon: get-started
-    - title: Neon Postgres guides
+    - title: Postgres guides
       slug: postgresql/introduction
       icon: postgres-guides
       items:
@@ -853,7 +866,7 @@
               slug: data-types/tsvector
             - title: UUID
               slug: data-types/uuid
-        - title: Extensions
+        - title: Postgres extensions
           slug: extensions/extensions-intro
           items:
             - title: Supported extensions
@@ -1039,7 +1052,7 @@
           slug: postgresql/query-reference
         - title: Compatibility
           slug: reference/compatibility
-    - title: Extensions
+    - title: Postgres extensions
       slug: extensions/extensions-intro
       icon: frameworks
     - title: Version support
@@ -1048,6 +1061,20 @@
     - title: Upgrade
       slug: postgresql/postgres-upgrade
       icon: import
+- section: Security
+  items:
+    - title: Overview
+      slug: security/security-overview
+      icon: auth
+    - title: Security reporting
+      slug: security/security-reporting
+      icon: import
+    - title: Compliance
+      slug: security/compliance
+      icon: postgres-guides
+    - title: Acceptable Use Policy
+      slug: security/acceptable-use-policy
+      icon: docs
 - section: Resources
   items:
     - title: Partner guide

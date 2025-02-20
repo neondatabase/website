@@ -21,6 +21,7 @@ import ImportIcon from 'icons/docs/sidebar/import.inline.svg';
 import IntegrationsIcon from 'icons/docs/sidebar/integrations.inline.svg';
 import LanguagesIcon from 'icons/docs/sidebar/languages.inline.svg';
 import ManagementIcon from 'icons/docs/sidebar/management.inline.svg';
+import NeonTwin from 'icons/docs/sidebar/neon-twin.inline.svg';
 import PartnerGuideIcon from 'icons/docs/sidebar/partner-guide.inline.svg';
 import PostgresGuidesIcon from 'icons/docs/sidebar/postgres-guides.inline.svg';
 import RegionsIcon from 'icons/docs/sidebar/regions.inline.svg';
@@ -55,6 +56,7 @@ const icons = {
   integrations: IntegrationsIcon,
   languages: LanguagesIcon,
   management: ManagementIcon,
+  'neon-twin': NeonTwin,
   'partner-guide': PartnerGuideIcon,
   'postgres-guides': PostgresGuidesIcon,
   regions: RegionsIcon,

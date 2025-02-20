@@ -14,6 +14,7 @@ export default {
   developerDays1: '/developer-days-1',
   enterprise: '/enterprise',
   flow: '/flow',
+  faster: '/faster',
   generateTicket: '/generate-ticket',
   guides: '/guides',
   partners: '/partners',

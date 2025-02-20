@@ -5,7 +5,7 @@ subtitle: Find detailed instructions for integration across various platforms an
 enableTableOfContents: true
 redirectFrom:
   - /docs/integrations/integrations-list/
-updatedOn: '2024-12-26T17:57:49.401Z'
+updatedOn: '2025-02-18T21:22:27.351Z'
 ---
 
 ## Monitor
@@ -91,6 +91,8 @@ updatedOn: '2024-12-26T17:57:49.401Z'
 <a href="/docs/guides/typeorm" title="TypeORM" description="Connect from TypeORM to Neon" icon="typeorm"></a>
 
 <a href="/docs/guides/knex" title="Knex" description="Connect from Knex to Neon" icon="knex"></a>
+
+<a href="/guides/convex-neon" title="Convex" description="Integrate Convex with Neon Postgres" icon="convex"></a>
 
 </TechnologyNavigation>
 
