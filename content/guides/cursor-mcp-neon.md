@@ -7,7 +7,7 @@ createdAt: '2025-02-20T00:00:00.000Z'
 updatedOn: '2025-02-20T00:00:00.000Z'
 ---
 
-Imagine adjusting your database schema simply by describing the change in plain English. This is possible by combining [Cursor](https://cursor.com), the AI-first code editor, with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon). This combination is designed to accelerate development and prototyping, not to replace production database migrations.
+Imagine adjusting your database schema simply by describing the change in plain English. This is possible by combining [Cursor](https://cursor.com), the AI-first code editor, with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon). This combination is designed to accelerate development and prototyping, not replace production database migrations.
 
 This guide demonstrates how to use [Cursor's Composer](https://docs.cursor.com/composer) and Neon's MCP server to streamline development-phase database migrations for your Neon Postgres projects. You'll learn how to set up this workflow and see how AI can make iterative database adjustments faster and more accessible.
 
