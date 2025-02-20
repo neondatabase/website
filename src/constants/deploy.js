@@ -112,4 +112,4 @@ const DEPLOY_AGENDA = [
   },
 ];
 
-export { DEPLOY_AGENDA };
+export default DEPLOY_AGENDA;
