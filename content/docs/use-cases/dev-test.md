@@ -26,6 +26,8 @@ Together, these features create a fast, flexible, and developer-friendly databas
 
 Not every team is ready for a full database migration. However, even if teams aren’t ready to migrate their production databases, they can still improve efficiency by moving their non-production workloads to Neon using a [Neon Twin](/docs/guides/neon-twin-intro).
 
+![Dev/Test Twin Workflow](/use-cases/dev-test-twin-workflow.png)
+
 <CTA title="Create a Neon Twin" description="A Neon Twin is a full or partial clone of your production or staging database, providing developers and teams with isolated, sandboxed environments that closely mirror production. <br><br>Learn how to create a Twin <a href='/docs/guides/neon-twin-intro'>here</a>." isIntro />
 
 ## Workflows
