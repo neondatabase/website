@@ -12,6 +12,8 @@ updatedOn: '2025-02-11T18:04:21.934Z'
 
 A Neon Twin is a full or partial clone of your production or staging database, providing developers and teams with isolated, sandboxed environments that closely mirror production.
 
+![Dev/Test Twin Workflow](/use-cases/dev-test-twin-workflow.png)
+
 ## Designed for efficiency
 
 Creating a Neon Twin will streamline development workflows, enhance productivity, and help teams ship faster—all while being more [cost-effective](/docs/introduction/pricing-estimation-guide) and easier to manage than traditional development/testing environments.
