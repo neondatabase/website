@@ -493,6 +493,11 @@
       slug: guides/neon-auth
       icon: partner-guide
       tag: beta
+      items:
+        - title: About
+          slug: guides/neon-auth
+        - title: API
+          slug: guides/neon-auth-api
     - title: Neon RLS Authorize
       icon: auth
       slug: guides/neon-rls-authorize
