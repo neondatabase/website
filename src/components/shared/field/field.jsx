@@ -85,7 +85,7 @@ const Field = forwardRef(
         <p
           className={clsx(
             'error-message absolute !top-auto bottom-full right-0 z-10 max-w-[350px] translate-y-4 text-end text-sm leading-none text-secondary-1',
-            'xs:static xs:ml-auto xs:mt-2 xs:translate-y-0 [&_a:hover]:no-underline [&_a]:underline [&_a]:underline-offset-2',
+            'sm:static sm:ml-auto sm:mt-2 sm:translate-y-0 [&_a:hover]:no-underline [&_a]:underline [&_a]:underline-offset-2',
             errorClassName
           )}
           data-test="error-field-message"
