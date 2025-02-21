@@ -103,11 +103,11 @@ Your default branch `main` now has a table with some data.
 
 Now that you have some sample data, let's explore how the AI Assistant can help you write SQL queries using natural language prompts.
 
-From the SQL Editor, click the **AI Assistant** button in the top-right corner. Try these example prompts:
+From the SQL Editor, click the **AI Assistant** button in the top-right corner and try a few prompts:
 
-- "Add three more rows to the playing_with_neon table with tech company names"
-- "Show me the highest value in the table"
-- "Calculate the average value grouped by the first letter of the name"
+- _Add three more rows to the playing_with_neon table with tech company names_
+- _Show me the highest value in the table_
+- _Calculate the average value grouped by the first letter of the name_
 
 ![Neon SQL Editor AI Assistant](/docs/get-started-with-neon/sql_assistant.png)
 
