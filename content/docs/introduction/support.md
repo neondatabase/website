@@ -1,7 +1,7 @@
 ---
 title: Support
 enableTableOfContents: true
-updatedOn: '2025-02-11T22:04:31.743Z'
+updatedOn: '2025-02-21T13:47:57.046Z'
 ---
 
 This page outlines Neon's support plans, available channels, and policies. To learn how to access support, please refer to the [Support channels](#support-channels) section. Identify the channels available to you based on your plan and follow the links to navigate to the relevant information.
@@ -72,10 +72,10 @@ Neon AI chat is not an official Neon Support channel.
 
 Paying users can contact support by opening a support ticket in the Neon Console. Select **Support** from the **?** menu at the top of the Neon Console. This will open the **Create Support Ticket** modal, where you can describe your issue.
 
-To access the modal directly, click here: [Open Support Ticket](https://console.neon.tech/app/projects?modal=support).
+To access the modal directly, click here: [Open Support Ticket](https://console.neon.tech/app/projects?modal=support). If you are a paying user and cannot access the support ticket modal, you can contact Neon support at `support@neon.tech`.
 
-<Admonition type="note">
-If you are a paying user and cannot access the support ticket form in the Neon Console for some reason, you can contact Neon support at the following email address: `support@neon.tech`.
+<Admonition type="note" title="Receiving support under an SLA">
+To receive support under an [SLA](#slas), you must submit a ticket through the Neon Console or email `support@neon.tech`. These are the only channels that integrate with Neon's internal escalation system, ensuring your issue is tracked and prioritized appropriately.
 </Admonition>
 
 ![Support ticket modal](/docs/introduction/neon_support_modal.png)
@@ -97,6 +97,10 @@ Video chat is available to Priority and Enterprise support plan customers and ma
 ### SLAs
 
 Support Level Agreements (SLAs) are available to Business and Enterprise support plan customers. For Business plan, see [Business Plan SLA](https://neon.tech/neon-business-sla). If you are interested in exploring an Enterprise-level SLA, [get in touch with our sales team](/contact-sales).
+
+<Admonition type="note" title="Receiving support under an SLA">
+To receive support under an SLA, you must submit a ticket through the Neon Console or email `support@neon.tech`. These are the only channels that integrate with Neon's internal escalation system, ensuring your issue is tracked and prioritized appropriately.
+</Admonition>
 
 ### Dedicated Support Engineer
 
