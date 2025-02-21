@@ -2,7 +2,7 @@
 title: High Availability (HA) in Neon
 subtitle: Understanding Neon's approach to High Availability
 enableTableOfContents: true
-updatedOn: '2024-10-08T17:24:35.409Z'
+updatedOn: '2025-02-21T19:10:29.546Z'
 ---
 
 At Neon, our serverless architecture takes a different approach to high availability. Instead of maintaining idle standby compute replicas, we achieve multi-AZ resilience through our separation of storage and compute.
