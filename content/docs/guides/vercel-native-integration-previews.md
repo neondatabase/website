@@ -56,6 +56,7 @@ To connect your Vercel project to your Neon database:
    ![Connect a Vercel Project](/docs/guides/vercel_native_connect_project.png)
 
 4. On the **Connect Project** dialog:
+
    1. Select the Vercel project you want to connect to.
    1. Under **Environments**, choose the Vercel environments you want to make your database available to (**Development**, **Preview**, **Production**). This will add a set of database [environment variables](/docs/guides/vercel-native-integration#environment-variables-set-by-the-integration) to the selected environments in your Vercel project.
 
@@ -66,7 +67,7 @@ To connect your Vercel project to your Neon database:
 
       ![Vercel deployment configuration](/docs/guides/vercel_native_deployments_configuration.png)
 
-6. Click **Connect** to finish the setup.
+5. Click **Connect** to finish the setup.
 
    Now, with each commit to a branch in your application's GitHub repository, preview deployments will be created with their own isolated database branch. You can follow the steps in the next section to test the setup.
 
