@@ -1,6 +1,7 @@
 ---
 title: Manage Neon Auth using the API
 enableTableOfContents: true
+updatedOn: '2025-02-21T13:30:24.355Z'
 ---
 
 Learn how to manage your Neon Auth integration using the Neon API. Create a new integration, generate SDK keys, add users, and claim ownership of your Neon-managed auth project to your auth provider.
