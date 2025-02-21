@@ -116,7 +116,7 @@ Each query you run is automatically saved with an AI-generated description, maki
 ```sql
 -- Text to SQL original prompt:
 -- Add three more rows to the playing_with_neon table with tech company names
-INSERT INTO public.playing_with_neon (name, value) VALUES 
+INSERT INTO public.playing_with_neon (name, value) VALUES
 ('Google', 1000.5),
 ('Apple', 1200.75),
 ('Microsoft', 950.25);
