@@ -190,7 +190,7 @@ You can manage your Neon Auth integration programmatically using the API. This i
 
 Key operations:
 
-- Create a Neon-managed auth integration
+- Create or remove a Neon-managed auth integration
 - Generate SDK keys for your integration
 - Create users in your auth provider
 - Transfer ownership to your auth provider
