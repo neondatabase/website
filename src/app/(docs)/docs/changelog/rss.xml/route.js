@@ -28,8 +28,7 @@ export async function GET() {
     const heading = data.title || content.match(/# (.*)/)?.[1];
 
     const description =
-      data.description ||
-      `${heading} and more. Check out the full list of changes for this release note.`;
+      data.description || `${heading} and more. Check out the full list of updates.`;
 
     const url = `${SITE_URL}${CHANGELOG_BASE_PATH}${slug}`;
 
