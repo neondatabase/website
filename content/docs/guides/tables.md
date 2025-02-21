@@ -72,10 +72,9 @@ In addition to managing data, you can manage your database schema directly from 
 
 ![Drizzle Studio Schema Management UI](/docs/relnotes/drizzle_schema_mgmt.png)
 
-## Tables page enhancements and updates
+## Tables page updates
 
-The **Tables** page in the Neon Console is powered by a Drizzle Studio integration. You can check the Drizzle Studio integration version in your browser by inspecting the Tables page. For example, in Chrome, right-click, select **Inspect**, and go to the **Console** tab to view the current `Tables version`. You can cross-reference this version with the [Neon Drizzle Studio Integration Changelog](https://github.com/neondatabase/neon-drizzle-studio-changelog/blob/main/CHANGELOG.md) to track enhancements and fixes.
-The Drizzle Studio integration that powers the **Tables** page currently does not support partitioned tables. Partitioned tables are not displayed on the **Tables** page.
+The **Tables** page in the Neon Console is powered by a Drizzle Studio integration. You can check the Drizzle Studio integration version in your browser by inspecting the Tables page. For example, in Chrome, right-click, select **Inspect**, and go to the **Console** tab to view the current `Tables version`. You can cross-reference this version with the [Neon Drizzle Studio Integration Changelog](https://github.com/neondatabase/neon-drizzle-studio-changelog/blob/main/CHANGELOG.md) to track updates.
 
 ## Reporting errors
 
@@ -84,7 +83,7 @@ If you see an **Unexpected error happened** message on the **Tables** page, foll
 ![Unexpected error happened on Tables page](/docs/guides/tables_error.png)
 
 1. Click **Download Error Context** to download the error context file.
-2. [Open a support ticket](https://console.neon.tech/app/projects?modal=support) and describe what you were doing when the error occurred. We'll work with our partners at Drizzle to investigate and resolve the issue.
+2. [Open a support ticket](https://console.neon.tech/app/projects?modal=support) and provide a details description of what were doing when the error occurred. Please include any screen captures or files that will help us reproduce the issue. We'll work with our partners at Drizzle to investigate and resolve the issue.
 3. If you're on the Free Plan, you can report the issue with your context file on [Discord](https://discord.gg/92vNTzKDGp).
 
 If you encounter a **"Something went wrong"** error on the **Tables** page, try the following troubleshooting steps:

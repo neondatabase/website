@@ -55,16 +55,16 @@ To connect your Vercel project to your Neon database:
 
    ![Connect a Vercel Project](/docs/guides/vercel_native_connect_project.png)
 
-4. Select the environments you want to make your database available to (**Development**, **Preview**, **Production**). This will add a set of database [environment variables](/docs/guides/vercel-native-integration#environment-variables-set-by-the-integration) to the selected environments in your Vercel project.
+4. On the **Connect Project** dialog:
+   1. Select the Vercel project you want to connect to.
+   1. Under **Environments**, choose the Vercel environments you want to make your database available to (**Development**, **Preview**, **Production**). This will add a set of database [environment variables](/docs/guides/vercel-native-integration#environment-variables-set-by-the-integration) to the selected environments in your Vercel project.
 
-   ![Select a Vercel Project](/docs/guides/vercel_native_select_environments.png)
+   1. Under **Deployments**:
 
-5. Under **Advanced Options**:
+      - Enable the **Resource is required to be in an active state before deployment can start** option. This setting ensures that a database branch can be created.
+      - Under **Choose actions to enable for this integration**, select the **Preview** option. This setting creates a database branch for **preview deployments** only. Leave the **Production** option unchecked — you don't need to create database branches for your Production environment.
 
-   1. Enable the **Required** option under "Deployments Configuration". This setting ensures that a database branch is created for each preview deployment; otherwise, the preview deployment fails.
-   1. Under **Create a database branch for deployment**, select **Preview**. This setting creates a database branch for **preview** deployments only. Leave the **Development** and **Production** options unchecked — they do not do anything, and you don't need to create database branches for those environments.
-
-   ![Vercel deployment configuration](/docs/guides/vercel_native_deployments_configuration.png)
+      ![Vercel deployment configuration](/docs/guides/vercel_native_deployments_configuration.png)
 
 6. Click **Connect** to finish the setup.
 
@@ -76,7 +76,7 @@ To connect your Vercel project to your Neon database:
 
 ## Testing the database branching setup
 
-After enabling database branches for preview deployments, a database branch is created when you push commits on your local git branch to your source code repository. To see the integration in action, follow these steps:
+After enabling database branches for preview deployments, a database branch is created when you push commits from your local git branch to your source code repository. To see the integration in action, follow these steps:
 
 1. Create a branch in your local source code repository.
 
@@ -104,7 +104,7 @@ After enabling database branches for preview deployments, a database branch is c
    - The integration creates a branch in Neon. This branch is an isolated copy of your default branch, with its own dedicated compute. The branch is created with the same name as your `git` branch but includes a `preview/` prefix. You can view branches in the Neon Console, on your Neon project's **Branches** page.
    - The integration automatically passes environment variables for your database branch to connect the preview deployment to the database branch.
      <Admonition type="info" title="How are database variables set for preview deployments?">
-     Vercel calls a webhook before the preview deployment build stage. During this call, environment variables for the new database branch are created. These variables override the existing preview environment variables in Vercel but apply only to the specific preview deployment they were created for. The environment variables visible in Vercel remain unchanged across preview deployments.
+     Vercel calls a webhook before the preview deployment build stage. During this call, environment variables for the new database branch are created. These variables override the existing preview environment variables in Vercel but apply only to the specific preview deployment they were created for. The environment variables visible in Vercel remain unchanged.
      </Admonition>
 
 ## Applying schema changes to database branches
