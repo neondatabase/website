@@ -75,3 +75,23 @@ In addition to managing data, you can manage your database schema directly from 
 ## Limitations
 
 The Drizzle Studio integration that powers the **Tables** page currently does not support partitioned tables. Partitioned tables are not displayed on the **Tables** page.
+
+## Reporting errors
+
+If you see an **Unexpected error happened** message on the **Tables** page, follow the steps below:
+
+![Unexpected error happened on Tables page](/docs/guides/tables_error.png)
+
+1. Click **Download Error Context** to download the error context file.
+2. [Open a support ticket](https://console.neon.tech/app/projects?modal=support) and describe what you were doing when the error occurred. We'll work with our partners at Drizzle to investigate and resolve the issue.
+3. If you're on the Free Plan, you can report the issue with your context file on [Discord](https://discord.gg/92vNTzKDGp).
+
+If you encounter a **"Something went wrong"** error on the **Tables** page, try the following troubleshooting steps:
+
+- **Refresh the page:** — This can resolve temporary glitches.
+- **Clear browser cache:** — Cached files might cause issues, so clearing the cache could help.
+- **Disable browser extensions:** — Extensions may interfere with the page’s functionality.
+- **Use a different browser or device:** — Check if the issue occurs on another browser or device.
+- **Try incognito mode:** — Using an incognito window can help bypass issues related to cookies or extensions.
+
+If the issue persists, please reach out to [Neon support](https://console.neon.tech/app/projects?modal=support) or on [Discord](https://discord.gg/92vNTzKDGp), and we’ll investigate further.
