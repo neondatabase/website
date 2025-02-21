@@ -126,6 +126,10 @@
       @apply mx-auto rounded-md;
     }
 
+    .twitter-tweet iframe {
+      @apply rounded-xl;
+    }
+
     .wp-block-embed:not(.wp-block-embed-twitter) {
       .wp-block-embed__wrapper {
         @apply relative h-0 overflow-hidden pb-[56.25%];
