@@ -198,10 +198,14 @@ const Content = ({
   isUseCase = false,
 }) => (
   <div
-    className={clsx('prose-doc prose dark:prose-invert xs:prose-code:break-words', className, {
-      'dark:prose-p:text-gray-new-70 dark:prose-strong:text-white dark:prose-li:text-gray-new-70 dark:prose-table:text-gray-new-70':
-        isUseCase,
-    })}
+    className={clsx(
+      'prose-doc post-content prose dark:prose-invert xs:prose-code:break-words',
+      className,
+      {
+        'dark:prose-p:text-gray-new-70 dark:prose-strong:text-white dark:prose-li:text-gray-new-70 dark:prose-table:text-gray-new-70':
+          isUseCase,
+      }
+    )}
   >
     {asHTML ? (
       <div dangerouslySetInnerHTML={{ __html: content }} />
