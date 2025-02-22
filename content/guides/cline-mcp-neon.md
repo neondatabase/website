@@ -115,39 +115,39 @@ For your security, review the tool's purpose before permitting the operation to 
 Here's the conversation log between the user and Cline:
 
 ```text shouldWrap
-User: In my neon project id: round-salad-44063611 list all the tables
-Cascade: I'll help you list all the tables in your Neon project. I'll use the default database name 'neondb' since none was specified.
-> Called MCP Tool (get_database_tables)
-> I found one table in your database:
-> playing_with_neon (in the public schema)
-> Would you like to see more details about this table's structure or perform any other operations with it?
+User: in my neon project id: fancy-bush-59303206, list all my tables
+Cline: I need to list all tables in the specified Neon project. Since I have access to the Neon MCP server, I can use the get_database_tables tool to accomplish this task. The tool requires:
+> projectId - which the user provided: "fancy-bush-59303206"
+> databaseName - which I can default to "neondb" as it's the standard default database name in Neon
+> Cline wants to use a tool on the neon MCP server: get_database_tables
+> Your Neon project (fancy-bush-59303206) has 1 table in the public schema:
+> - playing_with_neon (Base Table)
 
-User: Can you show me first 5 rows?
-Cascade: I'll query the first 5 rows from the playing_with_neon table.
-> Called MCP Tool (run_sql)
-> Here are the first 5 rows from the table. The table has three columns:
-> id (sequential numbers)
-> name (string values)
-> value (decimal numbers)
-> Would you like to perform any other operations with this data?
 
-User: can you add a created_at column?
-Cascade: I'll help you add a created_at column to the playing_with_neon table. I'll set it up with a timestamp data type and set it to automatically record the creation time of new rows.
-> Called MCP Tool (prepare_database_migration)
-> Let me verify the change in the temporary branch to make sure it was applied correctly.
-> Called MCP Tool (run_sql)
-> I've added the created_at column to the playing_with_neon table in a temporary branch. Would you like to commit this migration to the main branch?
-> Migration Details:
-> Migration ID: a65babcd-d1cc-401f-89b5-762570570102
-> Temporary Branch Name: br-silent-cherry-a1eqrl6i
-> Temporary Branch ID: br-silent-cherry-a1eqrl6i
-> Migration Result: Success
-> Please let me know if you'd like to proceed with applying this change to the main branch.
+User: can you show me first 5 rows in it?
+Cline: I'll use the run_sql tool to execute a SELECT statement that retrieves the first 5 rows from the playing_with_neon table. I'll use LIMIT 5 to ensure we only get the first 5 rows.
+> Cline wants to use a tool on the neon MCP server: run_sql
+> I have successfully retrieved the first 5 rows from the playing_with_neon table. I'll present this data in a clear, formatted way.
+> | id | name       | value     |
+> |----|------------|-----------|
+> | 1  | c4ca4238a0 | 0.857180 |
+> | 2  | c81e728d9d | 0.416151 |
+> | 3  | eccbc87e4b | 0.440935 |
+> | 4  | a87ff679a2 | 0.438505 |
+> | 5  | e4da3b7fbb | 0.686455 |
 
-User: yeah do it
-Cascade: I'll complete the migration and apply the changes to the main branch.
-> Called MCP Tool (complete_database_migration)
-> The migration has been successfully completed! The created_at column has been added to your table in the main branch, and the temporary branch has been cleaned up.
+User: can you add a created_at column, use a temporary branch
+Cline: I'll use the prepare_database_migration tool to add a created_at column to the playing_with_neon table. This tool will automatically create a temporary branch for safety. After the migration is prepared, I'll need to verify it before completing it.
+> Cline wants to use a tool on the neon MCP server: prepare_database_migration
+> Let me verify the migration by checking the table structure in the temporary branch. I'll use run_sql to describe the table and ensure the created_at column was added correctly.
+> Cline wants to use a tool on the neon MCP server: run_sql
+> The created_at column has been successfully added to the table in the temporary branch with the correct data type and default value. Let me verify the data by selecting a few rows to ensure everything looks correct.
+> Cline wants to use a tool on the neon MCP server: run_sql
+> The migration looks good - the created_at column has been added successfully and is populated with timestamps. Now I can complete the migration to apply these changes to the main branch.
+> Cline wants to use a tool on the neon MCP server: complete_database_migration
+> The migration has been successfully completed and the temporary branch has been deleted. Let me verify the changes in the main branch and show the updated table structure.
+> Cline wants to use a tool on the neon MCP server: run_sql
+> The migration has been successfully completed. The created_at column has been added to the table and is populated with timestamps.
 ```
 
 **Key takeaways:**
@@ -175,7 +175,7 @@ Let's say you want to create a new Neon project named "my-new-project". You can 
 
 ```text shouldWrap
 User: Create a Neon project named "my-new-project"
-Cascade: I see that I have access to the Neon MCP server which provides tools for interacting with Neon's API. Looking at the available tools, I can use the create_project tool to create a new Neon project with the specified name "my-new-project".
+Cline: I see that I have access to the Neon MCP server which provides tools for interacting with Neon's API. Looking at the available tools, I can use the create_project tool to create a new Neon project with the specified name "my-new-project".
 > Cline wants to use a tool on the neon MCP server:
 > create_project ARGUMENTS: { "name": "my-new-project" }
 > I've created a new Neon project named "my-new-project". Here are the project details:
