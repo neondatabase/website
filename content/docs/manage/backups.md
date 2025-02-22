@@ -23,11 +23,11 @@ Neon offers two primary backup strategies, which you can use separately or in co
 
 <Steps>
 
-## Built-in Point-in-Time Restore (PITR)
+## Instant Point-in-Time Restore (PITR)
 
-    With Neon's built-in point-in-time restore capability, you can automatically retain a "history" of changes—ranging from 1 day up to 30 days, depending on your Neon plan. This feature lets you recover your database to any specific moment without the need for traditional database backups or separate backup automation. It's ideal if your primary concern is fast recovery after an unexpected event.
+    With Neon's instant point-in-time restore capability, you can automatically retain a "history" of changes—ranging from 1 day up to 30 days, depending on your Neon plan. This feature lets you recover your database to any specific moment without the need for traditional database backups or separate backup automation. It's ideal if your primary concern is fast recovery after an unexpected event.
 
-    By default, Neon projects retain **1 day** of history. You can increase your history retention period on paid plans as follows:
+    By default, Neon projects retain **1 day** of history. You can increase your history retention period on Neon as follows:
 
     | Plan                                                   | History Retention Limit  |
     | :----------------------------------------------------- | :----------------------- |
@@ -58,5 +58,5 @@ Neon offers two primary backup strategies, which you can use separately or in co
 </Steps>
 
 <Admonition type="note" title="Backup & Restore Questions?">
-Neon is actively developing _Backup & Restore_ features that will allow you to schedule snapshots and backups directly from the Neon Console and API. If you have questions about backups, please reach out to [Neon Support](https://console.neon.tech/app/projects?modal=support). For assistance with regulatory or compliance requirements, our [Sales team](https://neon.tech/contact-sales) is here to help.
+If you have questions about backups, please reach out to [Neon Support](https://console.neon.tech/app/projects?modal=support).
 </Admonition>
