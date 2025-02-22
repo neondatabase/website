@@ -29,6 +29,13 @@ const items = [
         demoLink: 'https://multiuser-rag-g0e0g3h6ekhtf7cg.germanywestcentral-01.azurewebsites.net',
         sourceLink: 'https://github.com/neondatabase-labs/azure-tenant-ai-chat',
       },
+      {
+        title: 'AI-Powered Neon Database Q&A Chatbot in Azure',
+        description:
+          "Ask questions about data in Neon database using React and FastAPI in Python.",
+        demoLink: 'https://rag-vrjtpx5tgrsnm-ca.wittyriver-637b2279.eastus2.azurecontainerapps.io',
+        sourceLink: 'https://github.com/neondatabase-labs/rag-neon-postgres-openai-azure-python',
+      },
     ],
   },
   {
