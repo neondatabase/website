@@ -42,13 +42,13 @@ Neon offers two primary backup strategies, which you can use separately or in co
 
     To get started, see [Point-in-time restore](/docs/introduction/point-in-time-restore).
 
-## Traditional backups with `pg_dump`
+## Backups with `pg_dump`
 
     For scenarios that require a more traditional approach to backups—such as business continuity, disaster recovery, or compliance with regulatory requirements—you can use traditional methods, such as creating regular backups using the Postgres `pg_dump` utility.
 
     For information about using `pg_dump` with Neon, you can refer to our [Migrate data from Postgres with pg_dump and pg_restore](/docs/import/migrate-from-postgres) guide.
 
-    **Automating backups to S3 using GitHub Actions**
+    **Automating backups to S3 with `pg_dump` and GitHub Actions**
 
     If you need to automate `pg_dump` backups to remote storage, this two-part guide walks you through setting up an S3 bucket and a GitHub Action to automate backups on a recurring schedule. You'll also learn how to configure retention settings to manage how long `pg_dump` backups are stored before being deleted.
 
