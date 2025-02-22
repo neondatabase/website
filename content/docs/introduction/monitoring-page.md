@@ -120,6 +120,10 @@ The **Rows** graph shows the number of rows deleted, updated, and inserted over 
 
 Tracking rows inserted, updated, and deleted over time provides insights into your database's activity patterns. You can use this data to identify trends or irregularities, such as insert spikes or an unusual number of deletions.
 
+<Admonition type="note">
+This graph does not report rows deleted by `TRUNCATE TABLE` operations. The graphs only reports data for row-level operations. 
+</Admonition>
+
 ### Replication delay bytes
 
 ![Replication delay bytes](/docs/introduction/rep_delay_bytes.png)
