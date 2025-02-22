@@ -67,8 +67,6 @@ Before you begin, ensure you have the following:
    }
    ```
 
-   ![Windsurf mcp_config.json Example](/docs/guides/windsurf-mcp-config-json.png)
-
    - **`neon`**: This is a name you choose for your MCP server connection.
    - **`command`**: This is the command Windsurf will execute to start the Neon MCP server. It includes the `npx` command to run the `@neondatabase/mcp-server-neon` package and passes your Neon API key as an argument.
    - Replace `<YOUR_NEON_API_KEY>` with your actual Neon API key that you obtained from the [Prerequisites](#prerequisites) section.
@@ -114,53 +112,42 @@ Check out the video below to see how Windsurf and Neon MCP Server can help you a
 </video>
 
 <Admonition type="tip" title="Security Reminder">
-Be aware that Cascade currently executes commands directly from your prompts without confirmation unlike other IDE's and apps like Claude.  Review your requests thoroughly to avoid unintended or unwanted actions.
+Be aware that Cascade currently executes commands directly from your prompts without confirmation unlike other IDE's and apps like [Cursor](/guides/cursor-mcp-neon) and [Claude](/guides/neon-mcp-server).  Review your requests thoroughly to avoid unintended or unwanted actions.
 </Admonition>
 
 Here's the conversation log between the user and Cascade:
 
 ```text shouldWrap
-User: In my neon project id: round-salad-44063611 list all the tables
-Cascade: I'll help you list all the tables in your Neon project. I'll use the default database name 'neondb' since none was specified.
-> Called MCP Tool (get_database_tables)
-> I found one table in your database:
-> playing_with_neon (in the public schema)
-> Would you like to see more details about this table's structure or perform any other operations with it?
+User: in my neon project id: fancy-bush-59303206, list all the tables
+Cascade: I'll help you list all the tables in your Neon project. I'll use the default database name 'neondb' since it wasn't specified.
+> MCP Tool: neon / get_database_tables
+> I found 1 table in your Neon project:
+> - playing_with_neon (in the public schema)
+> Would you like to see more details about this table or perform any operations on it?
 
-User: Can you show me first 5 rows?
+User: can you show me first 5 rows?
 Cascade: I'll query the first 5 rows from the playing_with_neon table.
-> Called MCP Tool (run_sql)
+> MCP Tool: neon / run_sql
 > Here are the first 5 rows from the table. The table has three columns:
-> id (sequential numbers)
-> name (string values)
-> value (decimal numbers)
-> Would you like to perform any other operations with this data?
+> id: An integer identifier
+> name: A string column containing what appears to be hash-like values
+> value: A numeric column with decimal values between 0 and 1
+> Would you like to perform any other operations on this table?
 
-User: can you add a created_at column?
-Cascade: I'll help you add a created_at column to the playing_with_neon table. I'll set it up with a timestamp data type and set it to automatically record the creation time of new rows.
-> Called MCP Tool (prepare_database_migration)
-> Let me verify the change in the temporary branch to make sure it was applied correctly.
-> Called MCP Tool (run_sql)
-> I've added the created_at column to the playing_with_neon table in a temporary branch. Would you like to commit this migration to the main branch?
-> Migration Details:
-> Migration ID: a65babcd-d1cc-401f-89b5-762570570102
-> Temporary Branch Name: br-silent-cherry-a1eqrl6i
-> Temporary Branch ID: br-silent-cherry-a1eqrl6i
-> Migration Result: Success
-> Please let me know if you'd like to proceed with applying this change to the main branch.
-
-User: yeah do it
-Cascade: I'll complete the migration and apply the changes to the main branch.
-> Called MCP Tool (complete_database_migration)
-> The migration has been successfully completed! The created_at column has been added to your table in the main branch, and the temporary branch has been cleaned up.
+User: can you add created_at column?
+Cascade: I'll help you add a created_at column to the playing_with_neon table. I'll create a migration to add this column with a timestamp data type.
+> MCP Tool: neon / prepare_database_migration
+> Let me verify the changes in the temporary branch to make sure the column was added correctly.
+> I've verified that the created_at column has been added successfully in the temporary branch. Would you like me to commit this migration to the main branch?
+> The migration has been completed successfully! The created_at column has been added to the playing_with_neon table. Let's verify the change in the main branch:
+> Perfect! The created_at column has been successfully added and populated with timestamps. For existing rows, it was set to the time when the column was added. Any new rows added to the table will automatically get their creation timestamp.
 ```
 
 **Key takeaways:**
 
 - **Natural language interaction:** You can use simple, conversational English to interact with your database through Windsurf's Cascade.
-- **Step-by-step guidance:** Cascade confirms each step and provides details like branch names and migration IDs.
 - **MCP Tools in Action:** The underlying MCP tools (`get_database_tables`, `run_sql`, `prepare_database_migration`, `complete_database_migration`) illustrate the automated process.
-- **Branching for safety:** The agent automatically creates a temporary branch for schema changes. The user will be prompted to confirm the migration before applying it to the main branch.
+- **Branching for safety:** The agent automatically creates a temporary branch for schema changes and tests them before committing to the main branch.
 
 You can verify the changes in your Neon Console or by querying the database directly.
 
