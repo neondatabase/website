@@ -1,6 +1,7 @@
 ---
 title: Set up a GitHub Action to perform nightly Postgres backups
 enableTableOfContents: true
+tag: new
 updatedOn: '2025-02-20T00:00:00.000Z'
 ---
 
