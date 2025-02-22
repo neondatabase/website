@@ -38,15 +38,15 @@ Neon offers two primary backup strategies, which you can use separately or in co
 
     With this strategy, the only required action is setting your desired history retention period. Please keep in mind that increasing your history retention period also increases storage, as changes to your data are retained for a longer period.
 
-    ![History retention](/docs/manage/backups_history_retention.png)    
+    ![History retention](/docs/manage/backups_history_retention.png)
 
     To get started, see [Point-in-time restore](/docs/introduction/point-in-time-restore).
 
-## Traditional backups with `pg_dump` 
+## Traditional backups with `pg_dump`
 
     For scenarios that require a more traditional approach to backups—such as business continuity, disaster recovery, or compliance with regulatory requirements—you can use traditional methods such creating regular backups using the Postgres `pg_dump` utility.
 
-    For information about using `pg_dump` with Neon, you can refer to our [Migrate data from Postgres with pg_dump and pg_restore](/docs/import/migrate-from-postgres) guide. 
+    For information about using `pg_dump` with Neon, you can refer to our [Migrate data from Postgres with pg_dump and pg_restore](/docs/import/migrate-from-postgres) guide.
 
     **Automating Postgres backups to S3 using GitHub Actions**
 
