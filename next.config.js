@@ -267,6 +267,11 @@ const defaultConfig = {
         destination: '/docs/changelog',
         permanent: false,
       },
+      {
+        source: '/early-access-program',
+        destination: '/docs/introduction/roadmap#join-the-neon-early-access-program',
+        permanent: true,
+      },
       ...docsRedirects,
       ...changelogRedirects,
     ];
