@@ -6,6 +6,7 @@ updatedOn: '2025-02-19T17:08:35.912Z'
 
 <InfoBlock>
 <DocsList title="What you will learn:">
+<p>About backup strategies</p>
 <p>About built-in backups with point-in-time restore</p>
 <p>Creating backups using pg_dump</p>
 <p>How to automate backups with GitHub Actions</p>
@@ -18,40 +19,44 @@ updatedOn: '2025-02-19T17:08:35.912Z'
 
 </InfoBlock>
 
-## Built-in backups with Neon's point-in-time restore feature
+Neon offers two primary backup strategies, which you can use separately or in combination, depending on your requirements.
 
-Neon retains a history for all branches, allowing you to restore your data to a particular date and time or Log Sequence Number (LSN). The history retention period is configurable. The supported limits are up to 24 hours for [Neon Free Plan](/docs/introduction/plans#free-plan) users, 7 days for [Launch](/docs/introduction/plans#launch), 14 days for [Scale](/docs/introduction/plans#scale), and 30 days for [Business](/docs/introduction/plans#business) plan users. With this backup option, no action or automation is required. You can restore your data to a past state at any time by creating a database branch, which is a near-instant operation. This feature is referred to as [Point-in-time restore](/docs/introduction/point-in-time-restore).
+<Steps>
 
-For information about creating a point-in-time restore branch, see [Branching — Point-in-time restore](/docs/guides/branching-pitr).
+## Built-in Point-in-Time Restore (PITR)
 
-## Backup Postgres to S3 using GitHub Actions
+    With Neon's built-in point-in-time restore capability, you can automatically retain a "history" of changes—ranging from 1 day up to 30 days depending on your Neon plan. This feature lets you recover your database to any specific moment without the need for traditional database backups or separate backup automation. It's ideal if your primary concern is fast recovery after an unexpected event.
 
-This two-part guide walks you through setting up an S3 bucket and a GitHub Action to automate `pg_dump` backups on a recurring schedule. You'll also learn how to configure retention settings to manage how long backups are stored before being deleted.
+    By default, Neon projects retain **1 day** of history. You can increase your history retention period on paid plans as follows:
 
-1. [Create an S3 bucket to store Postgres backups](/docs/manage/backups-aws-s3-backup-part-1)
-2. [Set up a GitHub Action to perform nightly Postgres backups](/docs/manage/backups-aws-s3-backup-part-2)
+    | Plan                                                   | History Retention Limit  |
+    | :----------------------------------------------------- | :----------------------- |
+    | [Free](/docs/introduction/plans#free-plan)             | 1 day                    |
+    | [Launch](/docs/introduction/plans#launch)              | 7 days                   |
+    | [Scale](/docs/introduction/plans#scale)                | 14 days                  |
+    | [Business](/docs/introduction/plans#business)          | 30 days                  |
 
-## pg_dump
+    With this strategy, the only required action is setting your desired history retention period. Please keep in mind that increasing your history retention period also increases storage, as changes to your data are retained for a longer period.
 
-You can backup a database using `pg_dump`, in the same way backups are created for a standalone Postgres instance.
+    ![History retention](/docs/manage/backups_history_retention.png)    
 
-<Admonition type="important">
-Avoid using `pg_dump` over a [pooled Neon connection](/docs/connect/connection-pooling) (see PgBouncer issues [452](https://github.com/pgbouncer/pgbouncer/issues/452) & [976](https://github.com/pgbouncer/pgbouncer/issues/976) for details). Use an unpooled connection instead.
+    To get started, see [Point-in-time restore](/docs/introduction/point-in-time-restore).
+
+## Traditional backups with `pg_dump` 
+
+    For scenarios that require a more traditional approach to backups—such as business continuity, disaster recovery, or compliance with regulatory requirements—you can use traditional methods such creating regular backups using the Postgres `pg_dump` utility.
+
+    For information about using `pg_dump` with Neon, you can refer to our [Migrate data from Postgres with pg_dump and pg_restore](/docs/import/migrate-from-postgres) guide. 
+
+    **Automating Postgres backups to S3 using GitHub Actions**
+
+    If you need to automate `pg_dump` backups to remote storage, this two-part guide walks you through setting up an S3 bucket and a GitHub Action to automate backups on a recurring schedule. You'll also learn how to configure retention settings to manage how long `pg_dump` backups are stored before being deleted.
+
+    1. [Create an S3 bucket to store Postgres backups](/docs/manage/backups-aws-s3-backup-part-1)
+    2. [Set up a GitHub Action to perform nightly Postgres backups](/docs/manage/backups-aws-s3-backup-part-2)
+
+</Steps>
+
+<Admonition type="note" title="Backup & Restore Questions?">
+Neon is actively developing _Backup & Restore_ features that will allow you to schedule snapshots and backups directly from the Neon Console and API. If you have any questions about backups, please reach out to [Neon Support](https://console.neon.tech/app/projects?modal=support). For assistance with regulatory or compliance requirements, our [Sales team](https://neon.tech/contact-sales) is here to help.
 </Admonition>
-
-This method dumps a single database in a single branch of your Neon project. If you need to create backups for multiple databases in multiple branches, you must perform a dump operation for each database in each branch separately.
-
-To dump a database from your Neon project, please refer to the `pg_dump` instructions in our [Migrate data from Postgres with pg_dump and pg_restore](/docs/import/migrate-from-postgres) guide.
-
-<Admonition type="tip">
-When restoring a database dumped from Neon, you may encounter `ALTER OWNER` errors related to a `cloud_admin` role; for example:
-
-```bash
-pg_restore: error: could not execute query: ERROR: permission denied to change default privileges
-Command was: ALTER DEFAULT PRIVILEGES FOR ROLE cloud_admin IN SCHEMA public GRANT ALL ON SEQUENCES TO neon_superuser WITH GRANT OPTION;
-```
-
-This is a protected role in Neon that cannot be modified. To avoid this issue, you can add a `-O` or `--no-owner` option to your `pg_restore` command, as described [Database object ownership consideration](/docs/import/migrate-from-postgres#database-object-ownership-considerations).
-</Admonition>
-
-<NeedHelp/>

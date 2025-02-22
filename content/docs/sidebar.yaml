@@ -361,6 +361,10 @@
           items:
             - title: Backups
               slug: manage/backups
+            - title: Part 1 - Create an S3 bucket
+              slug: manage/backups-aws-s3-backup-part-1
+            - title: Part 2 - Automate nightly backups
+              slug: manage/backups-aws-s3-backup-part-2
         - section: Updates
           items:
             - title: Updates
