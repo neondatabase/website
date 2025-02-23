@@ -67,23 +67,23 @@ Before you begin, ensure you have the following:
 
    ![Cursor with Neon MCP Tools](/docs/guides/cursor-with-neon-mcp-tools.png)
 
-    You've now configured Neon MCP Server in Cursor and can manage your Neon Postgres databases using AI.
+   You've now configured Neon MCP Server in Cursor and can manage your Neon Postgres databases using AI.
 
 1. Open the Cursor **Composer** view using the keyboard shortcut **Command + I** (on Mac) or **Control + I** (on Windows).
 
-    ![Cursor Composer view](/docs/guides/cursor_composer_view.png)
+   ![Cursor Composer view](/docs/guides/cursor_composer_view.png)
 
-1. Type `List your available MCP tools` in the Composer text field, select the **agent** option in the corner of the field, and click **Submit**. 
+1. Type `List your available MCP tools` in the Composer text field, select the **agent** option in the corner of the field, and click **Submit**.
 
-    **_Note: The agent option here is tiny and easy to miss!_**
+   **_Note: The agent option here is tiny and easy to miss!_**
 
-    ![Cursor list available tools](/docs/guides/cursor_list_tools.png)
+   ![Cursor list available tools](/docs/guides/cursor_list_tools.png)
 
 1. Try out an Neon MCP Server tool by typing `Tell me about my Neon project <project_id>`. **You'll need to provide your Neon project ID.**
 
-    ![Cursor list project details](/docs/guides/cursor_project_details.png)
+   ![Cursor list project details](/docs/guides/cursor_project_details.png)
 
-    Cursor uses the Neon MCP Server `describe_project` tool to retrieve your project's details.
+   Cursor uses the Neon MCP Server `describe_project` tool to retrieve your project's details.
 
 ## Neon MCP Server Tools
 
