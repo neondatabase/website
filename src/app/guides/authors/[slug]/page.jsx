@@ -9,21 +9,36 @@ import { GUIDES_BASE_PATH } from 'constants/guides';
 import { getAllGuides } from 'utils/api-guides';
 import getMetadata from 'utils/get-metadata';
 
-export async function generateMetadata() {
-  // TO-DO: Update real data here
+const GUIDES_DIR_PATH = 'content/guides';
+
+export async function generateStaticParams() {
+  const authors = fs.readFileSync(
+    `${process.cwd()}/${GUIDES_DIR_PATH}/authors/data.json`,
+    'utf8'
+  );
+  const authorsData = JSON.parse(authors);
+  return Object.keys(authorsData).map((authorID) => ({
+    slug: authorID,
+  }));
+}
+
+export async function generateMetadata({ params }) {
+  const authors = fs.readFileSync(
+    `${process.cwd()}/${GUIDES_DIR_PATH}/authors/data.json`,
+    'utf8'
+  );
+  const authorsData = JSON.parse(authors);
+  if (!authorsData[params.slug]) return notFound();
   return getMetadata({
-    title: 'Neon guides',
-    // description: '',
-    // type: '',
+    title: `Neon guides by ${authorsData[params.slug].name}`,
     rssPathname: `${GUIDES_BASE_PATH}rss.xml`,
   });
 }
 
-const GuidesPage = async () => {
-  const posts = (await getAllGuides()).filter(i => i.author === params.slug);
-  // TO-DO: Update text here
+const GuidePost = async ({ params }) => {
+  const { slug } = params;
+  const posts = await getAllGuides();
   if (!posts) return <div className="text-18">No guides yet</div>;
-
   return (
     <Layout headerWithBorder burgerWithoutBorder isHeaderSticky hasThemesSupport>
       <div className="safe-paddings flex flex-1 flex-col dark:bg-black-pure dark:text-white lg:block">
