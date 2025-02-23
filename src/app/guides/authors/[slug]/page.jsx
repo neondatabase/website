@@ -1,33 +1,24 @@
 /* eslint-disable react/prop-types */
 
+import { notFound } from 'next/navigation';
+
 import BlogHeader from 'components/pages/blog/blog-header';
 import GuideCard from 'components/pages/guides/guide-card';
 import Sidebar from 'components/pages/guides/sidebar';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
 import { GUIDES_BASE_PATH } from 'constants/guides';
-import { getAllGuides } from 'utils/api-guides';
+import { getAllGuides, getAuthors } from 'utils/api-guides';
 import getMetadata from 'utils/get-metadata';
 
-const GUIDES_DIR_PATH = 'content/guides';
-
 export async function generateStaticParams() {
-  const authors = fs.readFileSync(
-    `${process.cwd()}/${GUIDES_DIR_PATH}/authors/data.json`,
-    'utf8'
-  );
-  const authorsData = JSON.parse(authors);
-  return Object.keys(authorsData).map((authorID) => ({
-    slug: authorID,
+  return Object.keys(getAuthors()).map((slug) => ({
+    slug,
   }));
 }
 
 export async function generateMetadata({ params }) {
-  const authors = fs.readFileSync(
-    `${process.cwd()}/${GUIDES_DIR_PATH}/authors/data.json`,
-    'utf8'
-  );
-  const authorsData = JSON.parse(authors);
+  const authorsData = getAuthors();
   if (!authorsData[params.slug]) return notFound();
   return getMetadata({
     title: `Neon guides by ${authorsData[params.slug].name}`,
@@ -35,9 +26,11 @@ export async function generateMetadata({ params }) {
   });
 }
 
-const GuidePost = async ({ params }) => {
-  const { slug } = params;
-  const posts = await getAllGuides();
+const GuidesPage = async ({ params }) => {
+  const authorsData = getAuthors();
+  const posts = (await getAllGuides()).filter(
+    (i) => i.author.name === authorsData[params.slug].name
+  );
   if (!posts) return <div className="text-18">No guides yet</div>;
   return (
     <Layout headerWithBorder burgerWithoutBorder isHeaderSticky hasThemesSupport>
