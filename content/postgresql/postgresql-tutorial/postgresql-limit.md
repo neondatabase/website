@@ -174,7 +174,7 @@ Output:
 
 How it works.
 
-- First, sort all the films by rental rates from high to low using the `ORDER BY rental_rate` clause.
+- First, sort all the films by rental rates from high to low using the `ORDER BY rental_rate DESC` clause.
 - Second, take only 10 rows from the top using the `LIMIT 10` clause.
 
 ## Summary
