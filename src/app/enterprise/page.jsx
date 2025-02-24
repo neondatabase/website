@@ -56,6 +56,7 @@ const logos = [
   'vercel',
   'bcg',
   'wordware',
+  'commure',
 ];
 
 const features = [
