@@ -2,7 +2,7 @@
 title: Neon ORM guides
 subtitle: Find detailed instructions for connecting to Neon from various ORMs
 enableTableOfContents: true
-updatedOn: '2024-11-28T11:18:12.622Z'
+updatedOn: '2025-02-24T15:53:13.356Z'
 ---
 
 <TechCards>
