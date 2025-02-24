@@ -78,11 +78,11 @@
       @apply w-full border-hidden md:min-w-[500px];
 
       th {
-        @apply border border-white border-opacity-[0.06] p-3.5 md:px-2;
+        @apply border border-gray-new-20 p-3.5 md:px-2;
       }
 
       td {
-        @apply border border-white border-opacity-[0.06] p-3.5 md:px-2;
+        @apply border border-gray-new-20 p-3.5 md:px-2;
       }
     }
 

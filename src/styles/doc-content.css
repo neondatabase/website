@@ -149,7 +149,7 @@
       @apply my-10 w-full leading-normal md:min-w-[500px];
 
       th {
-        @apply p-2.5 pt-0 align-top;
+        @apply p-2.5 pt-0 text-left align-top;
       }
 
       td {
