@@ -14,7 +14,6 @@ Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary
 
 - Ensure that pg_dump and pg_restore are installed (verify by running: `pg_dump -V`). For optimal performance, we recommend using the latest versions of these tools and ensure that the client version matches your Neon project's Postgres version (14, 15, 16, or 17).
 
-
 ## Install `pg_dump` and `pg_restore` 
 
 If you don't have the `pg_dump` and `pg_restore` utilities installed locally, you'll need to install them on your preferred platform.
@@ -46,9 +45,9 @@ If you don't have the `pg_dump` and `pg_restore` utilities installed locally, yo
 
 ## Creating a backup with `pg_dump`
 
-Retrieve the connection string for your Neon database:
+Following this procedure will create a database backup locally, where you're running the `pg_dump` command.  
 
-1. Navigate to your Neon **Project Dashboard** and click the **Connect** button to open the **Connect to your database** modal.
+1. Retrieve the connection string for your Neon database by navigate to your Neon **Project Dashboard** and clicking the **Connect** button to open the **Connect to your database** modal.
 
 2. Deselect the **Connection pooling** option. You need a direct connection string, not a pooled one.
 
