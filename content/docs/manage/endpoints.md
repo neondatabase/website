@@ -243,7 +243,7 @@ You can restart a compute using one of the following methods:
   ```
 
   <Admonition type="note">
-  The [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API only works on an active compute. If you're compute is idle, you can start it by running a query to wake it up (e.g., `SELECT version();` will do it) or running the [Start compute endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API. 
+  The [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API only works on an active compute. If you're compute is idle, you can wake it up with a query or the [Start compute endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API. 
   </Admonition>
 
 - Stop activity on your compute (stop running queries) and wait for your compute to suspend due to inactivity. By default, Neon suspends a compute after 5 minutes of inactivity. You can watch the status of your compute on the **Branches** page in the Neon Console. Select your branch and monitor your compute's **Status** field. Wait for it to report an `Idle` status. The compute will restart the next time it's accessed, and the status will change to `Active`.
