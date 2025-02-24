@@ -7,7 +7,7 @@ redirectFrom:
 updatedOn: '2024-11-03T11:19:09.438Z'
 ---
 
-<TechnologyNavigation open>
+<TechCards>
 
 <a href="/docs/guides/dotnet-npgsql" title=".NET" description="Connect a .NET (C#) application to Neon" icon="dotnet"></a>
 
@@ -23,4 +23,4 @@ updatedOn: '2024-11-03T11:19:09.438Z'
 
 <a href="/docs/guides/rust" title="Rust" description="Connect a Rust application to Neon" icon="rust"></a>
 
-</TechnologyNavigation>
+</TechCards>
