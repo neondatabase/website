@@ -282,7 +282,6 @@
           slug: guides/protected-branches
         - title: Private Networking
           slug: guides/neon-private-networking
-          tag: beta
     - title: Platform
       icon: management
       slug: manage/platform
@@ -361,6 +360,12 @@
           items:
             - title: Backups
               slug: manage/backups
+            - title: Part 1 - Create an S3 bucket
+              slug: manage/backups-aws-s3-backup-part-1
+              tag: new
+            - title: Part 2 - Automate nightly backups
+              slug: manage/backups-aws-s3-backup-part-2
+              tag: new
         - section: Updates
           items:
             - title: Updates
@@ -493,6 +498,11 @@
       slug: guides/neon-auth
       icon: partner-guide
       tag: beta
+      items:
+        - title: About
+          slug: guides/neon-auth
+        - title: API
+          slug: guides/neon-auth-api
     - title: Neon RLS Authorize
       icon: auth
       slug: guides/neon-rls-authorize
@@ -556,6 +566,8 @@
                   slug: guides/vercel-overview
                 - title: Vercel Native Integration
                   slug: guides/vercel-native-integration
+                - title: Vercel Native Integration Previews
+                  slug: guides/vercel-native-integration-previews
                 - title: Neon Previews Integration
                   slug: guides/vercel-previews-integration
                 - title: Connect manually

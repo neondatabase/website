@@ -2,7 +2,7 @@
 title: Manage computes
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-18T19:59:08.874Z'
+updatedOn: '2025-02-21T15:22:59.788Z'
 ---
 
 A compute is a virtualized service that runs applications. In Neon, a compute runs Postgres.
@@ -241,7 +241,6 @@ You can restart a compute using one of the following methods:
      --header 'authorization: Bearer $NEON_API_KEY'
   ```
 - Stop activity on your compute (stop running queries) and wait for your compute to suspend due to inactivity. By default, Neon suspends a compute after 5 minutes of inactivity. You can watch the status of your compute on the **Branches** page in the Neon Console. Select your branch and monitor your compute's **Status** field. Wait for it to report an `Idle` status. The compute will restart the next time it's accessed, and the status will change to `Active`.
-- Temporarily resizing your compute or changing your autoscaling minimum or maximum compute size setting restarts a compute. For compute resize instructions, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
 
 ## Delete a compute
 

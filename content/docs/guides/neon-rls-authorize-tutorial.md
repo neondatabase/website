@@ -2,7 +2,7 @@
 title: Neon RLS Authorize tutorial
 subtitle: Learn how Row-level Security (RLS) protects user data
 enableTableOfContents: true
-updatedOn: '2025-02-05T00:04:30.542Z'
+updatedOn: '2025-02-21T13:30:24.359Z'
 redirectFrom:
   - /docs/guides/neon-authorize-tutorial
 ---
@@ -38,7 +38,9 @@ To get started, you'll need:
 
   Follow the instructions in the readme to set up Clerk, configure environment variables, and start the application. You can also find more info in our [Clerk and Neon RLS Authorize Quickstart](/docs/guides/neon-rls-authorize-clerk).
 
-## Step 1 — Create test users
+<Steps>
+
+## Create test users
 
 Start the sample application:
 
@@ -76,7 +78,7 @@ When each user creates a todo, it's securely linked to their `userId` in the dat
 
 The `userId` column is populated directly from the authenticated `(auth.user_id())` in the Clerk JWT, linking each todo to the correct user.
 
-## Step 2 — Create todos
+## Create todos
 
 Let's create some sample Todos for both Alice and Bob.
 
@@ -123,7 +125,7 @@ pgPolicy('view todos', {
 
 This policy ensures that each `SELECT` query only returns rows where the `user_id` matches the `auth.user_id()` derived from the authenticated user’s JWT. This means that users can only access their own Todos. By enforcing this rule at the database level, the RLS policy provides an extra layer of security beyond the application layer.
 
-## Step 3 — Remove access control from application code
+## Remove access control from application code
 
 Now, let's test what happens when we remove access control from the application layer to rely solely on RLS at the database level.
 
@@ -151,7 +153,7 @@ Check your two open Todo users, reload the page, and see what happens:
 
 Nothing happens. RLS is still in place, and isolation is maintained: no data leaks. 💪
 
-## Step 4 — Disable RLS
+## Disable RLS
 
 Let's see what happens when we disable RLS on our todos table. Go to your Clerk project in the Neon Console and in the SQL Editor run:
 
@@ -163,7 +165,7 @@ ALTER TABLE public.todos DISABLE ROW LEVEL SECURITY;
 
 Bob sees all of Alice's todos, and Alice now knows about her birthday party. Disabling RLS removed all RLS policies, including the `view todos` policy on `SELECT` queries that helped enforce data isolation. Birthday surprise is _ruined_.
 
-## Step 5 — RLS as a safety net
+## RLS as a safety net
 
 Another scenario, imagine a team member writes the `getTodos` function like this, thinking it's filtering todos by the current user:
 
@@ -217,6 +219,8 @@ export async function getTodos(): Promise<Array<Todo>> {
     .orderBy(asc(schema.todos.insertedAt));
 }
 ```
+
+</Steps>
 
 ## Appendix: Understanding RLS policies in Drizzle
 

@@ -241,7 +241,12 @@ const Table = () => {
                             </span>
                             {item[key]?.subtitle && (
                               <span
-                                className="mt-1 text-sm font-light leading-snug tracking-tight text-gray-new-70"
+                                className={clsx(
+                                  'mt-1 text-sm font-light leading-snug tracking-tight text-gray-new-70',
+                                  '[&_a]:border-b [&_a]:border-gray-new-70',
+                                  '[&_a]:transition-colors [&_a]:duration-200',
+                                  '[&_a:hover]:border-transparent [&_a:hover]:text-green-45'
+                                )}
                                 dangerouslySetInnerHTML={{ __html: item[key].subtitle }}
                               />
                             )}
