@@ -4,13 +4,28 @@ import { liteClient as algoliasearch } from 'algoliasearch/lite';
 import PropTypes from 'prop-types';
 import { InstantSearch } from 'react-instantsearch';
 
+import debounce from 'utils/debounce';
+
 const searchClient = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
   process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY
 );
 
+const debouncedSetUiState = debounce((uiState, setUiState) => setUiState(uiState), 500);
+
+const onStateChange = ({ uiState, setUiState }) => {
+  const { neon_blog: { query } = {} } = uiState;
+
+  if (!query) {
+    setUiState({});
+    return;
+  }
+
+  debouncedSetUiState(uiState, setUiState);
+};
+
 const AlgoliaSearch = ({ indexName, children }) => (
-  <InstantSearch indexName={indexName} searchClient={searchClient}>
+  <InstantSearch indexName={indexName} searchClient={searchClient} onStateChange={onStateChange}>
     {children}
   </InstantSearch>
 );
