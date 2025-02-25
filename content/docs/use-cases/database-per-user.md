@@ -610,7 +610,7 @@ name: acme-analytics-prod
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Runs at midnight
+    - cron: '0 0 * * *' # Runs at midnight UTC
   workflow_dispatch:
 
 jobs:
@@ -684,7 +684,7 @@ name: acme-analytics-prod
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Runs at midnight
+    - cron: '0 0 * * *' # Runs at midnight UTC
   workflow_dispatch:
 ```
 

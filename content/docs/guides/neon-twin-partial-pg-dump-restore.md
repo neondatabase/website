@@ -33,7 +33,7 @@ name: Create Neon Twin
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Runs at midnight ET (us-east-1)
+    - cron: '0 0 * * *' # Runs at midnight UTC
   workflow_dispatch:
 
 env:
@@ -191,7 +191,7 @@ Add a `pull_request` event and configure it to listen for merges into the main `
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Runs at midnight ET (us-east-1)
+    - cron: '0 0 * * *' # Runs at midnight UTC
   pull_request: // [!code ++]
     types: [closed] // [!code ++]
     branches: // [!code ++]
