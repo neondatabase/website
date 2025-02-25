@@ -18,6 +18,7 @@ const onStateChange = ({ uiState, setUiState, indexName }) => {
 
   // debounce only if non-empty query
   if (!query) {
+    debouncedSetUiState.cancel();
     setUiState({});
     return;
   }
