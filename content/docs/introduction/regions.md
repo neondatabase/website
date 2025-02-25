@@ -63,7 +63,7 @@ If you are unsure of your project's region, you can find this information in the
 | AWS Europe (London) — aws-eu-west-2               | 3.10.42.8, 18.133.205.39, 52.56.191.86                                                 |
 | AWS Asia Pacific (Singapore) — aws-ap-southeast-1 | 54.254.50.26, 54.254.92.70, 54.255.161.23                                              |
 | AWS Asia Pacific (Sydney) — aws-ap-southeast-2    | 13.237.134.148, 13.55.152.144, 54.153.185.87                                           |
-| AWS South America (São Paulo) — aws-sa-east-1     | tbd, tbd, tbd                                                                          |
+| AWS South America (São Paulo) — aws-sa-east-1     | 18.230.1.215, 52.67.202.176, 54.232.117.41                                             |
 
 ### Azure NAT Gateway IP Addresses
 
