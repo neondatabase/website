@@ -13,8 +13,8 @@ const searchClient = algoliasearch(
 
 const debouncedSetUiState = debounce((uiState, setUiState) => setUiState(uiState), 500);
 
-const onStateChange = ({ uiState, setUiState }) => {
-  const { neon_blog: { query } = {} } = uiState;
+const onStateChange = ({ uiState, setUiState, indexName }) => {
+  const { [indexName]: { query } = {} } = uiState;
 
   if (!query) {
     setUiState({});
@@ -25,7 +25,11 @@ const onStateChange = ({ uiState, setUiState }) => {
 };
 
 const AlgoliaSearch = ({ indexName, children }) => (
-  <InstantSearch indexName={indexName} searchClient={searchClient} onStateChange={onStateChange}>
+  <InstantSearch
+    indexName={indexName}
+    searchClient={searchClient}
+    onStateChange={({ uiState, setUiState }) => onStateChange({ uiState, setUiState, indexName })}
+  >
     {children}
   </InstantSearch>
 );
