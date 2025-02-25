@@ -19,7 +19,7 @@ const BlogPageLayout = async ({ children }) => {
             <Sidebar categories={categories} />
             <div className="w-full max-w-3xl lg:max-w-full">
               <BlogHeader
-                className="lg:-top-[68px] md:-top-[60px]"
+                className="lg:-top-[68px] md:-top-[116px]"
                 title="Blog"
                 basePath={BLOG_BASE_PATH}
               />
