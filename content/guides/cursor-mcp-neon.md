@@ -113,6 +113,10 @@ Let's walk through a typical development scenario: Quickly adding a column for p
 
 Check out the video below to see how Cursor and Neon MCP Server can help you add a new column to your database table using natural language commands.
 
+<Admonition type="tip">
+Use `⌘I` to open Cursor's Composer and `⌘N` to create a new Composer.
+</Admonition>
+
 <video autoPlay playsInline muted loop width="800" height="600" controls>
   <source type="video/mp4" src="/videos/pages/doc/cursor-neon-mcp.mp4"/>
 </video>
@@ -123,7 +127,7 @@ For your security, review the tool's purpose before permitting the operation to 
 
 Here's the conversation log between the user and Cursor:
 
-```
+```text shouldWrap
 User: In my neon project id: round-salad-44063611 list all the tables
 Cursor: I'll help you list all the tables in your Neon project. I'll use the default database name 'neondb' since none was specified.
 > Called MCP Tool (get_database_tables)
@@ -182,7 +186,7 @@ Beyond schema changes, you can also manage your Neon projects and branches direc
 
 Let's say you want to create a new Neon project named "my-new-project". You can simply tell Cursor:
 
-```
+```text shouldWrap
 User: Create a Neon project named "my-new-project"
 Cursor: I'll help you create a new Neon project with the specified name.
 > Called MCP Tool (create_project)
@@ -201,7 +205,7 @@ Cursor will then use the `create_project` MCP tool to initiate the project creat
 
 Once you have a project, you can easily create new branches for development or experimentation. For example, to create a branch named "feature-x" in your "my-new-project" project:
 
-```
+```text shouldWrap
 User: Create a branch named "feature-x"
 Cursor: Perfect! I've created a new branch named "feature-x". Here are the details:
 > Branch ID: br-cold-mountain-a523ka2w
