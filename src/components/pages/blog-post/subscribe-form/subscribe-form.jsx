@@ -109,7 +109,7 @@ const SubscribeForm = ({ className = null, size = 'md', dataTest }) => {
           'mt:pt-7 rounded-xl bg-black-new px-[60px] py-[70px] 2xl:mx-0 2xl:px-7 xl:py-14 lt:px-11 lg:pb-16 md:px-5 md:pb-12 md:pt-7':
             size === 'md',
           'relative overflow-hidden rounded-md px-7 py-6': size === 'sm',
-          'before:absolute before:inset-0 before:z-[0] before:rounded-md before:bg-secondary-9 before:bg-opacity-10 before:bg-subscribe-sm after:absolute after:inset-px after:z-[0] after:rounded-md after:bg-black-new':
+          'before:absolute before:inset-0 before:z-[0] before:rounded-md before:bg-secondary-9 before:bg-opacity-10 before:bg-blog-subscribe-form after:absolute after:inset-px after:z-[0] after:rounded-md after:bg-black-new':
             size === 'sm',
         })}
       >

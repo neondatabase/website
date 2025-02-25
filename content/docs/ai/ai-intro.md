@@ -3,10 +3,10 @@ title: AI & Embeddings
 subtitle: Power AI agents with serverless Postgres — and build AI applications with Neon
   as your vector database
 enableTableOfContents: true
-updatedOn: '2025-01-10T15:44:20.067Z'
+updatedOn: '2025-02-12T20:50:28.597Z'
 ---
 
-Neon enables AI agents to provision Postgres databases in seconds, execute SQL queries, and easily manage Neon infrastructure. With one-second provision times, scale-to-zero compute, and agent-friendly Neon API interfaces, Neon lets AI agents manage database fleets at scale while minimizing costs. [Learn more about this use case](https://neon.tech/use-cases/ai-agents).
+Neon enables AI agents to provision Postgres databases in seconds, execute SQL queries, and easily manage Neon infrastructure. With one-second provision times, scale-to-zero compute, and agent-friendly client interfaces, Neon lets AI agents manage database fleets at scale while minimizing costs. [Learn more about this use case](https://neon.tech/use-cases/ai-agents).
 
 Neon also supports vector data, a key component for AI applications. With the **pgvector** open-source extension, you can use Neon as a vector database for storing and querying embeddings. This allows you to use Postgres as your vector store, eliminating the need for data migration or third-party solutions.
 
@@ -22,9 +22,9 @@ Neon supports Postgres for AI agents with the following tools and interfaces:
 
 <a href="https://github.com/neondatabase/mcp-server-neon/tree/main/mcp-client" description="A Model Context Protocol (MCP) client CLI that can be used to interact with any MCP server" icon="github">Neon MCP Client CLI</a>
 
-<a href="https://github.com/AgentOps-AI/AgentStack/blob/main/agentstack/templates/crewai/tools/neon_tool.py" description="A Neon tool for AgentStack that allows agents to create ephemeral or long-lived Postgres instances for structured data storage" icon="github">Neon tool for AgentStack</a>
+<a href="https://docs.agentstack.sh/tools/tool/neon" description="A Neon tool for AgentStack that allows agents to create ephemeral or long-lived Postgres instances for structured data storage" icon="github">Neon tool for AgentStack</a>
 
-<a href="https://composio.dev/tools?search=neon" description="A full integration between LLMs and AI agents and Neon's API" icon="openai">Neon tool for Composio</a>
+<a href="/guides/composio-crewai-neon" description="A full integration between LLMs and AI agents and Neon's API" icon="code">Neon tool for Composio</a>
 
 </DetailIconCards>
 

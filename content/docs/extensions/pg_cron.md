@@ -3,7 +3,7 @@ title: The pg_cron extension
 subtitle: Schedule and manage cron jobs directly within your Neon Postgres database
 tag: new
 enableTableOfContents: true
-updatedOn: '2024-11-01T10:00:00.000Z'
+updatedOn: '2025-02-24T15:50:35.888Z'
 ---
 
 The `pg_cron` extension provides a simple, cron-based job scheduler for Postgres. It operates directly within your database, allowing you to schedule standard SQL commands or calls to stored procedures using familiar cron syntax. This eliminates the need for external cron utilities for many database maintenance and automation tasks.
@@ -18,15 +18,53 @@ Please note that `pg_cron` jobs will only run when your compute is active. We th
 
 ## Enable the `pg_cron` extension
 
-`pg_cron` is currently available only on paid Neon plans. To install `pg_cron`, it must first be enabled by Neon Support. [Open a support ticket](https://console.neon.tech/app/projects?modal=support) with your endpoint ID and database name to request it. After it's enabled by Neon Support, you need to [restart your compute](/docs/manage/endpoints#restart-a-compute) to apply the changes.
+To install `pg_cron` on Neon, you must first enable it by setting the `cron.database_name` parameter to the name of the database where you want to install `pg_cron`. This requires making an [Update compute endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint) API call.
 
-You can then enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+The `cron.database_name` parameter is passed to your Postgres instance through the `pg_settings` option in the endpoint settings object. The following `Update endpoint` API example shows where to specify your Neon `project_id`, `endpoint_id`, [Neon API key](/docs/manage/api-keys), and database name.
+
+The `project_id` and `endpoint_id` values can be obtained from the Neon Console or [using the Neon API](https://api-docs.neon.tech/reference/path-parameters). In the Neon Console, the `project_id` is found on your project's **Settings** page, and will look something like this: `young-sun-12345678`. The `endpoint_id` is found on the **Compute** tab on your **Branches** page, where it is referred to as the **Compute ID**. It will have an `ep` prefix, and look similar to this: `ep-still-rain-abcd1234`.
+
+```bash
+curl --request PATCH \
+     --url https://console.neon.tech/api/v2/projects/<project_id>/endpoints/<endpoint_id> \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY$' \
+     --header 'content-type: application/json' \
+     --data '
+{
+  "endpoint": {
+    "settings": {
+      "pg_settings": {
+        "cron.database_name": "your_dbname"
+      }
+    }
+  }
+}
+'
+```
+
+After setting `cron.database_name`, you must restart your compute to apply the new setting. You can do this using the [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API. Specify the same `project_id` and `endpoint_id` used to set the `cron.database_name` parameter above. **Please note that restarting your compute endpoint will drop current connections to your database.**
+
+```bash
+curl --request POST \
+     --url https://console.neon.tech/api/v2/projects/<project_id>/endpoints/<endpoint_id>/restart \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY'
+```
+
+<Admonition type="note">
+The [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API only works on an active compute. If you're compute is idle, you can start it by running a query to wake it up or running the [Start compute endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API. For more information and other compute restart options, see [Restart a compute](/docs/manage/endpoints#restart-a-compute).
+</Admonition>
+
+You can then install the `pg_cron` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_cron;
 ```
 
-**Version availability:**
+If you have trouble with this setup, please reach out to [Neon Support](https://console.neon.tech/app/projects?modal=support) or find us on [Discord](https://t.co/kORvEuCUpJ).
+
+## `pg_cron` version availability
 
 Please refer to the [list of all extensions](/docs/extensions/pg-extensions) available in Neon for up-to-date extension version information.
 
@@ -176,6 +214,32 @@ SELECT * FROM cron.job_run_details ORDER BY start_time DESC LIMIT 5;
 ```
 
 This table includes details like the job ID, run ID, execution status, start and end times, and any return messages.
+
+### Running pg_cron jobs in multiple databases
+
+The `pg_cron` extension can only be installed in one database per PostgreSQL cluster. If you need to schedule jobs in multiple databases, you can use the `cron.schedule_in_database()` function. This function allows you to create a cron job that runs in a specific database, even if `pg_cron` is installed in a different database.
+
+## Running pg_cron jobs in multiple databases
+
+The `pg_cron` extension can only be installed in one database per Postgres cluster (each compute in a Neon project runs a Postgres instance, i.e., a Postgres cluster). If you need to schedule jobs in multiple databases, you can use the `cron.schedule_in_database()` function. This function allows you to create a cron job that runs in a specific database, even if `pg_cron` is installed in a different database.
+
+### Example: Scheduling a job in a different database
+
+To schedule a job in another database, use `cron.schedule_in_database()` and specify the target database name:
+
+```sql
+SELECT cron.schedule_in_database(
+    'my_job',                     -- Job name
+    '0 * * * *',                  -- Cron schedule (every hour)
+    'my_database',                 -- Target database
+    'VACUUM ANALYZE my_table'      -- SQL command to run
+);
+```
+
+In this example:
+
+- The job named `my_job` runs every hour `(0 * * * *)`.
+- It executes `VACUUM ANALYZE my_table` in `my_database`, even if `pg_cron` is installed in another database.
 
 ## Extension settings
 

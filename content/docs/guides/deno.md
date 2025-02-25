@@ -2,7 +2,7 @@
 title: Use Neon with Deno Deploy
 subtitle: Connect a Neon Postgres database to your Deno Deploy application
 enableTableOfContents: true
-updatedOn: '2024-10-24T12:58:41.887Z'
+updatedOn: '2025-02-03T20:41:57.310Z'
 ---
 
 [Deno Deploy](https://deno.com/deploy) is a scalable serverless platform for running JavaScript, TypeScript, and WebAssembly at the edge, designed by the creators of Deno. It simplifies the deployment process and offers automatic scaling, zero-downtime deployments, and global distribution.
@@ -23,7 +23,7 @@ To follow the instructions in this guide, you will need:
 
 ## Retrieve your Neon database connection string
 
-Retrieve your database connection string from the **Connection Details** widget in the Neon Console.
+Find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
 
 Your connection string should look something like this:
 

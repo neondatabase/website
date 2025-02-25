@@ -156,11 +156,6 @@ const defaultConfig = {
         permanent: true,
       },
       {
-        source: '/blog/category/case-study',
-        destination: '/case-studies',
-        permanent: true,
-      },
-      {
         source: '/team',
         destination: '/about-us',
         permanent: true,
@@ -271,6 +266,11 @@ const defaultConfig = {
         source: '/changelog',
         destination: '/docs/changelog',
         permanent: false,
+      },
+      {
+        source: '/early-access-program',
+        destination: '/docs/introduction/roadmap#join-the-neon-early-access-program',
+        permanent: true,
       },
       ...docsRedirects,
       ...changelogRedirects,

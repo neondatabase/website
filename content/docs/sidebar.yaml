@@ -163,6 +163,9 @@
               slug: guides/logical-replication-postgres-to-neon
             - title: Replicate from RDS
               slug: guides/logical-replication-rds-to-neon
+            - title: Replicate from Supabase
+              slug: guides/logical-replication-supabase-to-neon
+              tag: new
         - section: Data migration services
           items:
             - title: AWS Data Migration Service (DMS)
@@ -233,6 +236,8 @@
               slug: guides/branching-github-actions
             - title: Branching — Testing queries
               slug: guides/branching-test-queries
+            - title: Schema-only branches
+              slug: guides/branching-schema-only
         - title: Logical replication
           slug: guides/logical-replication-guide
           items:
@@ -277,7 +282,6 @@
           slug: guides/protected-branches
         - title: Private Networking
           slug: guides/neon-private-networking
-          tag: beta
     - title: Platform
       icon: management
       slug: manage/platform
@@ -339,6 +343,12 @@
               slug: introduction/monitoring-page
             - title: System operations
               slug: manage/operations
+            - title: Active queries
+              slug: introduction/monitor-active-queries
+              tag: new
+            - title: Query history
+              slug: introduction/monitor-query-history
+              tag: new
             - title: External tools
               slug: introduction/monitor-external-tools
         - section: Team Tools
@@ -346,20 +356,21 @@
             - title: Slack App
               slug: manage/slack-app
               tag: beta
-        - section: Security
-          items:
-            - title: Overview
-              slug: security/security-overview
-            - title: Security reporting
-              slug: security/security-reporting
-            - title: Compliance
-              slug: security/compliance
-            - title: Acceptable Use Policy
-              slug: security/acceptable-use-policy
         - section: Backups
           items:
             - title: Backups
               slug: manage/backups
+            - title: Part 1 - Create an S3 bucket
+              slug: manage/backups-aws-s3-backup-part-1
+              tag: new
+            - title: Part 2 - Automate nightly backups
+              slug: manage/backups-aws-s3-backup-part-2
+              tag: new
+        - section: Updates
+          items:
+            - title: Updates
+              slug: manage/updates
+              tag: new
     - title: Use cases
       slug: use-cases/use-cases-overview
       icon: docs
@@ -376,6 +387,7 @@
           slug: use-cases/platforms
         - title: Dev/Test
           slug: use-cases/dev-test
+
     - title: Regions
       slug: introduction/regions
       icon: regions
@@ -482,56 +494,61 @@
           slug: guides/ruby-on-rails
         - title: SQLAlchemy
           slug: guides/sqlalchemy
-    - title: Neon Identity
-      slug: guides/neon-identity
+    - title: Neon Auth
+      slug: guides/neon-auth
       icon: partner-guide
       tag: beta
-    - title: Neon Authorize
-      slug: guides/neon-authorize
+      items:
+        - title: About
+          slug: guides/neon-auth
+        - title: API
+          slug: guides/neon-auth-api
+    - title: Neon RLS Authorize
       icon: auth
+      slug: guides/neon-rls-authorize
       items:
         - section: Overview
           items:
             - title: About
-              slug: guides/neon-authorize
+              slug: guides/neon-rls-authorize
             - title: Tutorial
-              slug: guides/neon-authorize-tutorial
+              slug: guides/neon-rls-authorize-tutorial
             - title: Drizzle RLS
-              slug: guides/neon-authorize-drizzle
+              slug: guides/neon-rls-authorize-drizzle
             - title: Troubleshooting
-              slug: guides/neon-authorize-troubleshooting
+              slug: guides/neon-rls-authorize-troubleshooting
             - title: What's next
-              slug: guides/neon-authorize-future
+              slug: guides/neon-rls-authorize-future
         - section: Quickstarts
           items:
             - title: Clerk
-              slug: guides/neon-authorize-clerk
+              slug: guides/neon-rls-authorize-clerk
             - title: Stack Auth
-              slug: guides/neon-authorize-stack-auth
+              slug: guides/neon-rls-authorize-stack-auth
             - title: Auth0
-              slug: guides/neon-authorize-auth0
+              slug: guides/neon-rls-authorize-auth0
             - title: Stytch
-              slug: guides/neon-authorize-stytch
+              slug: guides/neon-rls-authorize-stytch
             - title: Keycloak
-              slug: guides/neon-authorize-keycloak
+              slug: guides/neon-rls-authorize-keycloak
             - title: AWS Cognito
-              slug: guides/neon-authorize-aws-cognito
+              slug: guides/neon-rls-authorize-aws-cognito
             - title: Azure Active Directory
-              slug: guides/neon-authorize-azure-ad
+              slug: guides/neon-rls-authorize-azure-ad
             - title: Descope
-              slug: guides/neon-authorize-descope
+              slug: guides/neon-rls-authorize-descope
             - title: Firebase / GCP Identity Platform
-              slug: guides/neon-authorize-firebase-gcp
+              slug: guides/neon-rls-authorize-firebase-gcp
             - title: Google Identity
-              slug: guides/neon-authorize-google-identity
+              slug: guides/neon-rls-authorize-google-identity
             - title: PropelAuth
-              slug: guides/neon-authorize-propelauth
+              slug: guides/neon-rls-authorize-propelauth
             - title: SuperTokens
-              slug: guides/neon-authorize-supertokens
+              slug: guides/neon-rls-authorize-supertokens
             - title: WorkOS
-              slug: guides/neon-authorize-workos
+              slug: guides/neon-rls-authorize-workos
             - title: Custom JWT
-              slug: guides/neon-authorize-custom-jwt
+              slug: guides/neon-rls-authorize-custom-jwt
     - title: Integrations
       icon: integrations
       slug: guides/integrations
@@ -540,7 +557,6 @@
           items:
             - title: Datadog Integration
               slug: guides/datadog
-              tag: new
         - section: Deploy
           items:
             - title: Vercel
@@ -550,6 +566,8 @@
                   slug: guides/vercel-overview
                 - title: Vercel Native Integration
                   slug: guides/vercel-native-integration
+                - title: Vercel Native Integration Previews
+                  slug: guides/vercel-native-integration-previews
                 - title: Neon Previews Integration
                   slug: guides/vercel-previews-integration
                 - title: Connect manually
@@ -582,7 +600,7 @@
             - title: AWS Lambda
               slug: guides/aws-lambda
             - title: Azure Functions
-              slug: https://neon.tech/guides/query-postgres-azure-functions
+              slug: /guides/query-postgres-azure-functions
               tag: new
             - title: Trigger serverless functions with Inngest
               slug: guides/trigger-serverless-functions
@@ -622,6 +640,9 @@
               slug: guides/typeorm
             - title: Knex
               slug: guides/knex
+            - title: Convex
+              slug: /guides/convex-neon
+              tag: new
         - section: Replicate from Neon
           items:
             - title: Airbyte
@@ -658,6 +679,8 @@
               slug: guides/logical-replication-alloydb
             - title: Aurora
               slug: guides/logical-replication-aurora-to-neon
+            - title: Replicate from Azure
+              slug: import/migrate-from-azure-postgres
             - title: Cloud SQL
               slug: guides/logical-replication-cloud-sql
             - title: Neon to Neon
@@ -666,6 +689,8 @@
               slug: guides/logical-replication-postgres-to-neon
             - title: AWS RDS
               slug: guides/logical-replication-rds-to-neon
+            - title: Replicate from Supabase
+              slug: guides/logical-replication-supabase-to-neon
         - section: Schema Migration
           items:
             - title: Django
@@ -758,6 +783,8 @@
           slug: reference/cli-projects
         - title: ip-allow
           slug: reference/cli-ip-allow
+        - title: vpc
+          slug: reference/cli-vpc
         - title: branches
           slug: reference/cli-branches
         - title: databases
@@ -804,12 +831,25 @@
     - title: Examples repo
       slug: https://github.com/neondatabase/examples
       icon: cli
+- section: Workflows
+  items:
+    - title: Neon Twin
+      slug: guides/neon-twin-intro
+      icon: neon-twin
+      tag: new
+      items:
+        - section: pg_dump / pg_restore
+          items:
+            - title: Full Twin
+              slug: guides/neon-twin-full-pg-dump-restore
+            - title: Partial Twin
+              slug: guides/neon-twin-partial-pg-dump-restore
 - section: Postgres
   items:
     - title: PostgreSQL Tutorial
       slug: /postgresql/tutorial
       icon: get-started
-    - title: Neon Postgres guides
+    - title: Postgres guides
       slug: postgresql/introduction
       icon: postgres-guides
       items:
@@ -836,7 +876,7 @@
               slug: data-types/tsvector
             - title: UUID
               slug: data-types/uuid
-        - title: Extensions
+        - title: Postgres extensions
           slug: extensions/extensions-intro
           items:
             - title: Supported extensions
@@ -1022,7 +1062,7 @@
           slug: postgresql/query-reference
         - title: Compatibility
           slug: reference/compatibility
-    - title: Extensions
+    - title: Postgres extensions
       slug: extensions/extensions-intro
       icon: frameworks
     - title: Version support
@@ -1031,6 +1071,20 @@
     - title: Upgrade
       slug: postgresql/postgres-upgrade
       icon: import
+- section: Security
+  items:
+    - title: Overview
+      slug: security/security-overview
+      icon: auth
+    - title: Security reporting
+      slug: security/security-reporting
+      icon: import
+    - title: Compliance
+      slug: security/compliance
+      icon: postgres-guides
+    - title: Acceptable Use Policy
+      slug: security/acceptable-use-policy
+      icon: docs
 - section: Resources
   items:
     - title: Partner guide

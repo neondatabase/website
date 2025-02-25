@@ -2,7 +2,7 @@
 title: Google Colab
 subtitle: Use Google Colab with Neon for vector similarity search
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.637Z'
+updatedOn: '2025-02-03T20:41:57.298Z'
 ---
 
 [Google Colab](https://colab.research.google.com/) is a hosted Jupyter Notebook service that requires no setup to use and provides free access to computing resources, including GPUs and TPUs.
@@ -16,9 +16,9 @@ To perform the steps in this guide, you require a Neon database for storing vect
 
 ## Retrieve your database connection string
 
-In the **Connection Details** widget on the Neon **Dashboard**, select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
+Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal, and select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
 
-![Connection details widget](/docs/connect/connection_details.png)
+![Connection modal](/docs/connect/connection_details.png)
 
 ## Create a notebook
 

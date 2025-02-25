@@ -53,6 +53,13 @@ export default {
     pathname: LINKS.cli,
     imagePath: '/images/social-previews/cli.jpg',
   },
+  faster: {
+    title: 'Faster is what we help you ship - Neon',
+    description: 'A page dedicated to teams shipping faster experiences faster on Neon.',
+    imagePath: '/images/social-previews/faster.jpg',
+    pathname: LINKS.faster,
+    type: 'article',
+  },
   contactSales: {
     title: 'Contact Sales — Neon',
     description: 'Interested in learning more about our plans and pricing? Contact our sales team.',
@@ -79,9 +86,9 @@ export default {
     pathname: LINKS.developerDays1,
   },
   enterprise: {
-    title: 'Neon for Enterprises: Postgres Fleets - Neon',
+    title: 'Neon for Enterprise - Neon',
     description:
-      'Enterprises use Neon to deliver a Postgres layer that is automated, instantly scalable and cost efficient.',
+      'Switch to Neon for improved scalability, reliability, and engineering efficiency. For developers and AI Agents.',
     pathname: LINKS.enterprise,
     imagePath: '/images/social-previews/enterprise.jpg',
   },

@@ -3,7 +3,7 @@ title: Use StepZen with Neon
 subtitle: Learn how to use StepZen to build a GraphQL API for your Neon database
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-12-12T15:31:10.130Z'
+updatedOn: '2025-02-03T20:41:57.338Z'
 ---
 
 _This guide was contributed by Roy Derks from StepZen_
@@ -20,9 +20,9 @@ Before generating a GraphQL API, you must set up a Neon database, which you can 
 2. Select a Neon project. If you do not have one, see [Create a project](/docs/manage/projects#create-a-project).
 3. [Create a database](/docs/manage/databases#create-a-database) or use the ready-to-use `dbname` database.
 
-You can find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**.
+You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**.
 
-![Connection details widget](/docs/connect/connection_details.png)
+![Connection details modal](/docs/connect/connection_details.png)
 
 Using the connection string, you can seed the database with the data from the `init.sql` file, which you can find [here](https://github.com/stepzen-dev/examples/blob/main/with-neon/init.sql).
 

@@ -79,6 +79,10 @@
       }
     }
 
+    > .prose-doc {
+      @apply mt-10;
+    }
+
     h2 {
       @apply mb-3 mt-10;
     }

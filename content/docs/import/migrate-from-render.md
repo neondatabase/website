@@ -5,7 +5,7 @@ subtitle: Learn how to migrate your database from Render to Neon Postgres using 
 redirectFrom:
   - /docs/import/import-from-render
 enableTableOfContents: true
-updatedOn: '2025-01-27T15:25:05.412Z'
+updatedOn: '2025-02-03T20:41:57.342Z'
 ---
 
 This guide describes how to migrate a database from Render to Neon Postgres.
@@ -104,8 +104,8 @@ For more information, see [Create a database](/docs/manage/databases#create-a-da
 
 ### Retrieve Neon connection details
 
-1. In the Neon Console, go to your project dashboard.
-2. Find the **Connection Details** widget.
+1. In the Neon Console, go to your **Project Dashboard**.
+2. Select **Connect** to open the **Connect to your database** modal.
 3. Copy the connection string. It will look similar to this:
 
    ```

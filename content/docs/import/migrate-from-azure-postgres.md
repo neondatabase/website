@@ -5,10 +5,8 @@ subtitle: Learn how to migrate your database from Azure PostgreSQL to Neon using
 redirectFrom:
   - /docs/import/import-from-azure-postgres
 enableTableOfContents: true
-updatedOn: '2025-01-27T15:25:05.410Z'
+updatedOn: '2025-02-14T17:05:10.002Z'
 ---
-
-<LRBeta/>
 
 This guide describes how to migrate your database from Azure Database for PostgreSQL to Neon, using logical replication.
 
@@ -90,33 +88,27 @@ END;
 $do$;
 ```
 
-### Create a publication on the Azure PostgreSQL database
+### Create a publication on the source database
 
-Publications define which tables will be replicated to the destination database. To create a publication for all tables in your database, run the following query:
+Publications are a fundamental part of logical replication in Postgres. They define what will be replicated. The following commands examples create publication named `azure_publication` with one or more tables.
 
-```sql
-CREATE PUBLICATION azure_publication FOR ALL TABLES;
-```
-
-This command creates a publication named `azure_publication` that includes all tables in the `public` schema, since we want to copy all the data. For details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
-
-<Admonition type="important">
-Avoid defining publications with `FOR ALL TABLES` if you want the flexibility to add or drop tables from the publication later. It is not possible to modify a publication defined with `FOR ALL TABLES` to include or exclude specific tables. For details, see [Logical replication tips](/docs/guides/logical-replication-tips).
-
-To create a publication for a specific table, you can use the following syntax:
+To create a publication for a specific table:
 
 ```sql shouldWrap
-CREATE PUBLICATION my_publication FOR TABLE playing_with_neon;
+CREATE PUBLICATION azure_publication FOR <tbl_name>;
 ```
 
 To create a publication for multiple tables, provide a comma-separated list of tables:
 
 ```sql shouldWrap
-CREATE PUBLICATION my_publication FOR TABLE users, departments;
+CREATE PUBLICATION azure_publication FOR TABLE <tbl1, tbl2, tbl3>;
 ```
 
-For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
+<Admonition type="note">
+Defining specific tables lets you add or remove tables from the publication later, which you cannot do when creating publications with `FOR ALL TABLES`.
 </Admonition>
+
+For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
 
 ### Allow inbound traffic from Neon
 
@@ -138,7 +130,7 @@ You need to allow inbound traffic from Neon Postgres servers so it can connect t
 
 This section describes how to prepare your destination Neon PostgreSQL database (the subscriber) to receive replicated data.
 
-You can find the connection details for the Neon database on the **Connection Details** widget in the Neon Console. For details, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. See [Connect from any application](/docs/connect/connect-from-any-app).
 
 ### Create the Neon database
 

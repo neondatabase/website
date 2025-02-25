@@ -17,13 +17,14 @@ const getPostSlugs = async (pathname) => {
   return files.map((file) => file.replace(pathname, '').replace('.md', ''));
 };
 
+export const getAuthors = () => {
+  const authors = fs.readFileSync(`${process.cwd()}/${GUIDES_DIR_PATH}/authors/data.json`, 'utf8');
+  return JSON.parse(authors);
+};
+
 const getAuthor = (id) => {
   try {
-    const authors = fs.readFileSync(
-      `${process.cwd()}/${GUIDES_DIR_PATH}/authors/data.json`,
-      'utf8'
-    );
-    const authorsData = JSON.parse(authors);
+    const authorsData = getAuthors();
     const authorData = authorsData[id];
     const authorPhoto = `/guides/authors/${id}.jpg`;
     const author = {
@@ -63,7 +64,7 @@ const getAllGuides = async () => {
 
       const slugWithoutFirstSlash = slug.slice(1);
       const {
-        data: { title, subtitle, createdAt, updatedOn, isDraft, isFeatured, redirectFrom },
+        data: { title, subtitle, createdAt, updatedOn, isDraft, redirectFrom },
         content,
         author,
       } = data;
@@ -80,7 +81,6 @@ const getAllGuides = async () => {
         date: createdAt,
         content,
         isDraft,
-        isFeatured,
         redirectFrom,
       };
     })

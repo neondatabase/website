@@ -113,7 +113,7 @@ const Logo = ({
             const Tag = url ? 'a' : 'button';
             return (
               <Tag
-                className="group flex w-full items-center gap-x-2 whitespace-nowrap rounded-[5px] p-2.5 text-left text-[13px] leading-none -tracking-[0.01em] text-gray-new-30 transition-colors duration-200 hover:bg-[#F5F5F5] hover:text-gray-new-10 dark:text-gray-new-70 dark:hover:bg-[#16181D] dark:hover:text-gray-new-94"
+                className="group flex w-full items-center gap-x-2 whitespace-nowrap rounded-[5px] p-2.5 text-left text-[13px] leading-none tracking-snug text-gray-new-30 transition-colors duration-200 hover:bg-[#F5F5F5] hover:text-gray-new-10 dark:text-gray-new-70 dark:hover:bg-[#16181D] dark:hover:text-gray-new-94"
                 key={name}
                 href={url}
                 onClick={url ? undefined : handleCopySvg}
@@ -131,7 +131,7 @@ const Logo = ({
           open={open}
           onOpenChange={setOpen}
         >
-          <Toast.Title className="flex items-center gap-x-2 whitespace-nowrap text-sm leading-none tracking-[-0.01em]">
+          <Toast.Title className="flex items-center gap-x-2 whitespace-nowrap text-sm leading-none tracking-snug">
             <CheckIcon />
             Copied to clipboard!
           </Toast.Title>

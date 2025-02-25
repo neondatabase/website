@@ -1,8 +1,10 @@
+import { PropTypes } from 'prop-types';
+
 import RssButton from 'components/shared/rss-button';
 import { GUIDES_BASE_PATH } from 'constants/guides';
 
-const Sidebar = () => (
-  <aside className="col-span-3 pb-10 lt:col-span-3 lg:hidden">
+const Sidebar = ({ className }) => (
+  <aside className={className}>
     <div className="relative flex h-full flex-col">
       <div className="relative flex-1">
         <nav className="no-scrollbars sticky top-32 flex items-center gap-2.5">
@@ -12,5 +14,9 @@ const Sidebar = () => (
     </div>
   </aside>
 );
+
+Sidebar.propTypes = {
+  className: PropTypes.string,
+};
 
 export default Sidebar;

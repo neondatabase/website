@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 
+import BlogHeader from 'components/pages/blog/blog-header';
 import GuideCard from 'components/pages/guides/guide-card';
 import Sidebar from 'components/pages/guides/sidebar';
 import Container from 'components/shared/container';
@@ -30,8 +31,9 @@ const GuidesPage = async () => {
           className="grid w-full flex-1 grid-cols-12 gap-x-10 pb-20 pt-16 xl:gap-x-7 lg:block lg:gap-x-5 lg:pt-11 md:pt-10 sm:pt-8"
           size="1344"
         >
-          <Sidebar />
+          <Sidebar className="col-span-3 mt-[88px] pb-10 lt:col-span-3 lg:hidden" />
           <div className="col-span-7 col-start-4 flex flex-col 2xl:col-span-7 2xl:mx-5 xl:col-span-9 xl:ml-11 xl:mr-0 xl:max-w-[750px] lg:mx-auto lg:pt-0">
+            <BlogHeader title="Guides" basePath={GUIDES_BASE_PATH} />
             <ul>
               {posts.map(({ title, subtitle, author, createdAt, updatedOn, slug }) => (
                 <li

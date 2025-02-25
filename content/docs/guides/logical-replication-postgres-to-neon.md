@@ -4,10 +4,8 @@ subtitle: Learn how to replicate data from a local Postgres instance or another 
   provider to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-01-27T15:25:05.408Z'
+updatedOn: '2025-02-14T17:05:10.001Z'
 ---
-
-<LRBeta/>
 
 Neon's logical replication feature allows you to replicate data from a local Postgres instance or another Postgres provider to Neon. If you're looking to replicate data from one Neon Postgres instance to another, see [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
 
@@ -83,16 +81,8 @@ Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables 
 ### Create a publication on the source database
 
 Publications are a fundamental part of logical replication in Postgres. They define what will be replicated.
-To create a publication for all tables in your database:
 
-```sql
-CREATE PUBLICATION my_publication FOR ALL TABLES;
-```
-
-<Admonition type="important">
-Avoid defining publications with `FOR ALL TABLES` if you want the flexibility to add or drop tables from the publication later. It is not possible to modify a publication defined with `FOR ALL TABLES` to include or exclude specific tables. For details, see [Logical replication tips](/docs/guides/logical-replication-tips).
-
-To create a publication for a specific table, you can use the following syntax:
+To create a publication for a specific table:
 
 ```sql shouldWrap
 CREATE PUBLICATION my_publication FOR TABLE playing_with_neon;
@@ -104,8 +94,11 @@ To create a publication for multiple tables, provide a comma-separated list of t
 CREATE PUBLICATION my_publication FOR TABLE users, departments;
 ```
 
-For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
+<Admonition type="note">
+Defining specific tables lets you add or remove tables from the publication later, which you cannot do when creating publications with `FOR ALL TABLES`.
 </Admonition>
+
+For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
 
 ## Prepare your Neon destination database
 
@@ -178,6 +171,6 @@ SELECT subname, received_lsn, latest_end_lsn, last_msg_receipt_time FROM pg_cata
 
 After the replication operation is complete, you can switch your application over to the destination database by swapping out your source database connection details for your destination database connection details.
 
-You can find the connection details for a Neon database on the **Connection Details** widget in the Neon Console. For details, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find your Neon database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. See [Connect from any application](/docs/connect/connect-from-any-app).
 
 </Steps>

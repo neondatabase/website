@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import he from 'he';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
@@ -32,7 +33,8 @@ const BlogPostCard = ({
     name: title,
     photo: postAuthor?.image?.mediaItemUrl,
   }));
-  const excerpt = subtitle || (content && getExcerpt(content, 280));
+
+  const excerpt = subtitle || (content && getExcerpt(he.decode(content), 280));
 
   const formattedDate = getFormattedDate(date);
 
@@ -51,15 +53,12 @@ const BlogPostCard = ({
       };
     }
 
-    if (categories) {
-      const wpCategory = categories?.nodes[0];
-      return {
-        slug: `${BLOG_CATEGORY_BASE_PATH}${wpCategory?.slug}`,
-        name: wpCategory?.name,
-      };
-    }
+    const wpCategory = category || categories?.nodes[0];
 
-    return null;
+    return {
+      slug: `${BLOG_CATEGORY_BASE_PATH}${wpCategory?.slug}`,
+      name: wpCategory?.name,
+    };
   })();
 
   return (
@@ -73,14 +72,14 @@ const BlogPostCard = ({
       {largeCover && (
         <Link
           className={clsx(
-            'group w-full overflow-hidden rounded-md',
+            'group aspect-[16/9] w-full overflow-hidden rounded-lg bg-[#181818]',
             fullSize && 'col-span-6 xl:col-span-5'
           )}
           to={link}
         >
           <Image
             className={clsx(
-              'w-full rounded-lg transition-transform duration-200',
+              'size-full rounded-lg object-cover transition-transform duration-200',
               withImageHover && 'group-hover:scale-110'
             )}
             src={largeCover?.mediaItemUrl}
@@ -134,7 +133,7 @@ const BlogPostCard = ({
           {/* title */}
           <h1
             className={clsx(
-              'font-medium leading-snug tracking-tighter transition-colors duration-200 group-hover:text-green-45 md:text-lg',
+              'font-medium leading-snug tracking-tighter transition-colors duration-200 group-hover:text-gray-new-80 md:text-lg',
               fullSize ? 'text-2xl lg:text-xl' : 'text-xl'
             )}
           >
@@ -144,7 +143,7 @@ const BlogPostCard = ({
           {fullSize && (
             <div
               className={clsx(
-                'mt-2 text-lg font-light tracking-extra-tight text-gray-new-94 lg:text-base md:text-[15px]',
+                'mt-2 font-light tracking-extra-tight text-gray-new-90 lg:text-base md:text-[15px]',
                 largeCover ? 'line-clamp-2' : 'line-clamp-3'
               )}
             >

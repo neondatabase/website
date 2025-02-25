@@ -4,7 +4,7 @@ subtitle: Learn how to create an automatic audit trail for your Postgres databas
   Bemi
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-11-30T11:53:56.057Z'
+updatedOn: '2025-02-11T11:32:44.531Z'
 ---
 
 [Bemi](https://bemi.io/) is an open-source solution that plugs into Postgres and ORMs such as Prisma, TypeORM, SQLAlchemy, and Ruby on Rails to track database changes automatically. It unlocks robust context-aware audit trails and time travel querying inside your application.
@@ -49,7 +49,7 @@ The following instructions assume you are connecting with a Postgres role create
 
 To connect your database to Bemi:
 
-1. In Neon, retrieve your database connection string from the **Connection Details** widget on the **Project Dashboard**, which will look similar to this:
+1. In Neon, retrieve your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. It will look similar to this:
 
    ```sql shouldWrap
    postgresql://neondb_owner:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require
@@ -97,7 +97,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public TO [username];
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO [username];
 
 -- Create "bemi" PUBLICATION to enable logical replication
-CREATE PUBLICATION bemi FOR ALL TABLES;
+CREATE PUBLICATION bemi FOR TABLE <tbl1, tbl2, tbl3>;
 
 -- Create a procedure to set REPLICA IDENTITY FULL for tables to track the "before" state on DB row changes
 CREATE OR REPLACE PROCEDURE _bemi_set_replica_identity() AS $$ DECLARE current_tablename TEXT;
@@ -111,7 +111,7 @@ CALL _bemi_set_replica_identity();
 ```
 
 <Admonition type="note">
-After creating a read-only role, you can find the connection details for this role in the **Connection Details** widget in the Neon console. Use this role when connecting your Neon database to Bemi, as described [above](#connect-your-neon-database-to-bemi).
+After creating a read-only role, you can find the connection details for this role by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Use this role when connecting your Neon database to Bemi, as described [above](#connect-your-neon-database-to-bemi).
 </Admonition>
 
 ## Allow inbound traffic

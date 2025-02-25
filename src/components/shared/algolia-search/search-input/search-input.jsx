@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { SearchBox } from 'react-instantsearch';
 
 const SearchInput = ({ className, isBlog = false }) => (
-  <SearchBox className={clsx(className, isBlog && 'dark')} placeholder="Search" />
+  <SearchBox className={clsx(className, isBlog && 'dark')} placeholder="Search..." />
 );
 
 SearchInput.propTypes = {

@@ -4,7 +4,7 @@ import CTA from 'components/shared/cta';
 import Layout from 'components/shared/layout';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
-import { getAllWpCaseStudiesPosts, getAllWpCaseStudiesCategories } from 'utils/api-posts';
+import { getAllWpCaseStudiesPosts, getAllWpCaseStudiesCategories } from 'utils/api-wp';
 import getMetadata from 'utils/get-metadata';
 
 export const metadata = getMetadata(SEO_DATA.caseStudies);
