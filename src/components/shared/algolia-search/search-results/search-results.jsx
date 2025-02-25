@@ -13,6 +13,11 @@ const SearchResults = ({ posts, className, children }) => {
     return children;
   }
 
+  if (items.length === 0) {
+    // TO-DO: Update text here
+    return <div className="w-full text-center text-lg">No search results found</div>;
+  }
+
   return (
     <div className={className}>
       {items.map(({ url, index }) => {

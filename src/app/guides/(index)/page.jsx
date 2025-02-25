@@ -22,7 +22,7 @@ export async function generateMetadata() {
 const GuidesPage = async () => {
   const posts = await getAllGuides();
   // TO-DO: Update text here
-  if (!posts) return <div className="text-18">No guides yet</div>;
+  if (!posts) return <div className="w-full text-center text-lg">No guides yet</div>;
 
   return (
     <Layout headerWithBorder burgerWithoutBorder isHeaderSticky hasThemesSupport>
