@@ -362,7 +362,7 @@ After allowing enough time for your workload to run fully and generate the neces
 ```sql
 \x
 Expanded display is on.
-SELECT * FROM neon.neon_stat_file_cache;
+SELECT * FROM neon_stat_file_cache;
 file_cache_misses:                 2133643
 file_cache_hits:                   108999742
 file_cache_used:                   607
