@@ -13,11 +13,11 @@ const Sidebar = ({ categories }) => {
     ...categories,
   ];
   return (
-    <aside className="relative mt-[88px] flex w-[192px] shrink-0 flex-col gap-y-10 lg:top-[72px] lg:mb-10 lg:mt-0 lg:min-h-fit lg:w-full md:top-[60px] md:mb-8">
+    <aside className="relative mt-[88px] flex w-[206px] shrink-0 flex-col gap-y-10 xl:w-[202px] lg:top-[72px] lg:mb-10 lg:mt-0 lg:min-h-fit lg:w-full md:top-[60px] md:mb-8">
       <div className="flex-1">
         <nav className="sticky top-24 flex flex-col gap-5 lg:max-w-5xl lg:flex-row-reverse lg:items-end lg:justify-between lg:gap-6 md:block">
           <div className="flex shrink-0 gap-1.5 overflow-hidden md:w-full">
-            <SearchInput className="w-full lg:w-[192px] md:w-full" isBlog />
+            <SearchInput className="w-full lg:w-[232px] md:w-full" isBlog />
           </div>
           <div className="lg:no-scrollbars lg:-ml-8 lg:overflow-auto lg:pl-8 md:-mx-4 md:mt-6 md:px-4">
             <ul className="flex flex-col gap-y-2.5 lg:flex-row lg:gap-x-5 lg:after:shrink-0 lg:after:grow-0 lg:after:basis-px lg:after:content-['']">

@@ -14,7 +14,7 @@ const BlogPageLayout = async ({ children }) => {
   return (
     <div className="safe-paddings pb-24 pt-16 lg:pb-20 lg:pt-12 sm:pb-16 sm:pt-10">
       <Container className="flex flex-col" size="1344">
-        <div className="flex gap-8 pl-16 xl:gap-6 xl:pl-0 lg:flex-col lg:gap-0">
+        <div className="flex gap-[18px] pl-16 xl:gap-3.5 xl:pl-0 lg:flex-col lg:gap-0">
           <AlgoliaSearch indexName={process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME}>
             <Sidebar categories={categories} />
             <div className="w-full max-w-3xl lg:max-w-full">
