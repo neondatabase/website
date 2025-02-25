@@ -2,7 +2,7 @@
 
 import { liteClient as algoliasearch } from 'algoliasearch/lite';
 import PropTypes from 'prop-types';
-import { InstantSearch } from 'react-instantsearch';
+import { InstantSearchNext } from 'react-instantsearch-nextjs';
 
 import debounce from 'utils/debounce';
 
@@ -16,6 +16,7 @@ const debouncedSetUiState = debounce((uiState, setUiState) => setUiState(uiState
 const onStateChange = ({ uiState, setUiState, indexName }) => {
   const { [indexName]: { query } = {} } = uiState;
 
+  // debounce only if non-empty query
   if (!query) {
     setUiState({});
     return;
@@ -25,13 +26,14 @@ const onStateChange = ({ uiState, setUiState, indexName }) => {
 };
 
 const AlgoliaSearch = ({ indexName, children }) => (
-  <InstantSearch
+  <InstantSearchNext
     indexName={indexName}
     searchClient={searchClient}
+    routing
     onStateChange={({ uiState, setUiState }) => onStateChange({ uiState, setUiState, indexName })}
   >
     {children}
-  </InstantSearch>
+  </InstantSearchNext>
 );
 
 AlgoliaSearch.propTypes = {
