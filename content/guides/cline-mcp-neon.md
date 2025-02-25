@@ -46,20 +46,15 @@ Before you begin, ensure you have the following:
 1. Open Cline by clicking on the Cline icon in the VS Code sidebar.
 2. To configure MCP Servers in Cline, you need to modify the `cline_mcp_settings.json` file.
    ![Cline Add MCP Tool](/docs/guides/cline-add-mcp.gif)
-4. This will open the `cline_mcp_settings.json` file.
-5. In the `cline_mcp_settings.json` file, you need to specify a list of MCP servers. Use the following JSON structure as a template, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key that you obtained from the [Prerequisites](#prerequisites) section.
+3. This will open the `cline_mcp_settings.json` file.
+4. In the `cline_mcp_settings.json` file, you need to specify a list of MCP servers. Use the following JSON structure as a template, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key that you obtained from the [Prerequisites](#prerequisites) section.
 
    ```json
    {
-    "mcpServers": {
-      "neon": {
-        "command": "npx",
-        "args": [
-          "-y",
-          "@neondatabase/mcp-server-neon",
-          "start",
-          "<YOUR_NEON_API_KEY>"
-        ]
+     "mcpServers": {
+       "neon": {
+         "command": "npx",
+         "args": ["-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
        }
      }
    }
@@ -69,10 +64,10 @@ Before you begin, ensure you have the following:
    - **`command`**: This is the command Cline will execute to start the Neon MCP server. It includes the `npx` command to run the `@neondatabase/mcp-server-neon` package and passes your Neon API key as an argument.
    - Replace `<YOUR_NEON_API_KEY>` with your actual Neon API key that you obtained from the [Prerequisites](#prerequisites) section.
 
-6.  **Save** the `cline_mcp_settings.json` file.
-8.  If the integration is successful, you should see the Neon MCP server listed in the Cline MCP Servers Installed section.
+5. **Save** the `cline_mcp_settings.json` file.
+6. If the integration is successful, you should see the Neon MCP server listed in the Cline MCP Servers Installed section.
 
-   ![Cline Available MCP Tools](/docs/guides/cline-available-mcp-tools.png)
+![Cline Available MCP Tools](/docs/guides/cline-available-mcp-tools.png)
 
 You've now configured Neon MCP Server in Cline and can manage your Neon Postgres databases using AI.
 

@@ -53,17 +53,12 @@ Before you begin, ensure you have the following:
 
    ```json
    {
-    "mcpServers": {
-      "neon": {
-        "command": "npx",
-        "args": [
-          "-y",
-          "@neondatabase/mcp-server-neon",
-          "start",
-          "<YOUR_NEON_API_KEY>"
-        ]
-      }
-    }
+     "mcpServers": {
+       "neon": {
+         "command": "npx",
+         "args": ["-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+       }
+     }
    }
    ```
 
@@ -71,11 +66,11 @@ Before you begin, ensure you have the following:
    - **`command`**: This is the command Windsurf will execute to start the Neon MCP server. It includes the `npx` command to run the `@neondatabase/mcp-server-neon` package and passes your Neon API key as an argument.
    - Replace `<YOUR_NEON_API_KEY>` with your actual Neon API key that you obtained from the [Prerequisites](#prerequisites) section.
 
-6.  **Save** the `mcp_config.json` file.
-7.  Click **"Refresh"** (🔄) in the MCP toolbar in Windsurf Cascade.
-8.  If the integration is successful, the toolbar should indicate that you have MCP servers available, and you should see "1 available MCP server" (or more if you configured additional servers).
+7. **Save** the `mcp_config.json` file.
+8. Click **"Refresh"** (🔄) in the MCP toolbar in Windsurf Cascade.
+9. If the integration is successful, the toolbar should indicate that you have MCP servers available, and you should see "1 available MCP server" (or more if you configured additional servers).
 
-   ![Windsurf MCP Toolbar with Server Available](/docs/guides/windsurf-mcp-server-available.png)
+![Windsurf MCP Toolbar with Server Available](/docs/guides/windsurf-mcp-server-available.png)
 
 You've now configured Neon MCP Server in Windsurf and can manage your Neon Postgres databases using AI.
 
