@@ -12,12 +12,12 @@ With the [TimescaleDB extension](https://www.timescale.com/), you can you can ef
 
 ## Steps
 
-* Install and enable TimescaleDB
-* Create a hypertable
-* Insert and retrieve timeseries data
-* Query time-based aggregations
-* Use `last()` to find the most recent value
-* Generate histograms for data analysis
+- Install and enable TimescaleDB
+- Create a hypertable
+- Insert and retrieve timeseries data
+- Query time-based aggregations
+- Use `last()` to find the most recent value
+- Generate histograms for data analysis
 
 ### Install and enable TimescaleDB
 
@@ -88,7 +88,7 @@ The above query outputs the following results.
 The `avg_price` for AAPL is the average of the 3 `stock_prices` rows for AAPL on February 22.
 
 | bucket                 | ticker | avg_price |
-|------------------------|--------|-----------|
+| ---------------------- | ------ | --------- |
 | 2025-02-22 00:00:00+00 | AAPL   | 175.4     |
 | 2025-02-22 00:00:00+00 | GOOGL  | 2823.1    |
 
@@ -122,7 +122,7 @@ AAPL has one price in the 5th bucket (174.8), one in the 6th bucket (175.3), and
 Buckets are 0-indexed, so 170-171 is bucket 0, 171-172 is bucket 1, and so on.
 
 | ticker | bucket | frequency |
-|--------|--------|-----------|
+| ------ | ------ | --------- |
 | AAPL   | 5      | 1         |
 | AAPL   | 6      | 1         |
 | AAPL   | 7      | 1         |
