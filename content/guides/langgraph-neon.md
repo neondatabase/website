@@ -9,7 +9,7 @@ updatedOn: '2025-02-21T00:00:00.000Z'
 
 This guide demonstrates how to integrate LangGraph with Neon. [LangGraph](https://www.langchain.com/langgraph) is a library in the [LangChain](https://www.langchain.com/langchain) ecosystem that simplifies the development of complex, multi-agent LLM applications by using a directed graph structure for efficient coordination and state management.
 
-This guide walks through building a simple [ReAct (Reason + Act)](https://arxiv.org/abs/2210.03629) agent using LangGraph that interacts with Neon to create a database and perform SQL queries.  It builds upon the concepts demonstrated in the [prebuilt ReAct agent from LangGraph](https://langchain-ai.github.io/langgraph/how-tos/create-react-agent).
+This guide walks through building a simple [ReAct (Reason + Act)](https://arxiv.org/abs/2210.03629) agent using LangGraph that interacts with Neon to create a database and perform SQL queries. It builds upon the concepts demonstrated in the [prebuilt ReAct agent from LangGraph](https://langchain-ai.github.io/langgraph/how-tos/create-react-agent).
 
 ## Prerequisites
 
@@ -23,9 +23,8 @@ Before you begin, make sure you have the following prerequisites:
   - After signing up, get your Neon API Key from the [Neon console](https://console.neon.tech/app/settings/profile). This API key is needed to authenticate your application with Neon.
 
 - **Google API key:**
-  - This guide utilizes the `gemini-2.0-flash` model from Google. You'll need a Google API key to proceed. If you don't already have one, get an API key from the [Google AI Studio](https://aistudio.google.com/apikey). 
+  - This guide utilizes the `gemini-2.0-flash` model from Google. You'll need a Google API key to proceed. If you don't already have one, get an API key from the [Google AI Studio](https://aistudio.google.com/apikey).
   - The free tier is sufficient for the example in this guide.
-
 
 ## LangGraph basics
 
@@ -34,7 +33,7 @@ Before building your AI agent workflows, it's important to understand the core c
 ### What is LangGraph?
 
 LangGraph is an open‐source orchestration framework for building stateful, multi-actor applications with large language models (LLMs). It enables you to create complex agentic workflows by modeling your application as a graph of interconnected nodes. With LangGraph, you can:
-  
+
 - **Manage state:** Persist and update the conversation and workflow state across interactions.
 - **Customize workflows:** Design flexible control flows—including conditional branching, loops, and hierarchical structures—to suit your specific use case.
 - **Stream agent reasoning:** Deliver real-time, token-by-token streaming of agent actions to enhance user experience.
@@ -266,7 +265,6 @@ def create_database(project_name: str) -> str:
 
 This Python function, decorated with LangChain's `@tool`, allows LangGraph agents to create a Neon project and retrieve its connection URI. It takes a `project_name` as input and uses `neon_client` to interact with the Neon API. If the project is created successfully, the function returns the connection URI; otherwise, it returns an error message.
 
-
 #### Define `run_sql_query` tool
 
 ```python
@@ -298,8 +296,7 @@ def run_sql_query(connection_uri: str, query: str) -> str:
         conn.close()
 ```
 
-Similarily, `run_sql_query` decorated with LangChain's `@tool`, executes an SQL query on a Neon database. It takes a `connection_uri` and a `query` as input, connects to the database using `psycopg2`, and runs the query. If the query returns results, they are fetched and returned; otherwise, a success message is provided. In case of an error, the function rolls back the transaction and returns an error message.  
-
+Similarily, `run_sql_query` decorated with LangChain's `@tool`, executes an SQL query on a Neon database. It takes a `connection_uri` and a `query` as input, connects to the database using `psycopg2`, and runs the query. If the query returns results, they are fetched and returned; otherwise, a success message is provided. In case of an error, the function rolls back the transaction and returns an error message.
 
 #### Define agent setup and graph invocation
 
@@ -338,9 +335,9 @@ This is the core part of the script where the LangGraph agent is set up and invo
 - `system_prompt = SystemMessage(...)`: Defines the system message for the AI agent. This message is crucial as it sets the agent's persona and provides instructions on how to use the available tools. It dynamically lists the tools and their descriptions in the prompt, instructing the agent on its capabilities.
 - `model = ChatGoogleGenerativeAI(model="gemini-2.0-flash")`: Initializes the language model that will power the agent. Here, `ChatGoogleGenerativeAI` is used to specify Google's Gemini `gemini-2.0-flash` model.
 - `agent_graph = create_react_agent(...)`: This line is where the LangGraph agent is created using the `create_react_agent` function.
-    - `model=model`: Specifies the language model (`gemini-2.0-flash`) to be used by the agent for reasoning and generating responses.
-    - `tools=available_tools`: Passes the list of tools (`create_database`, `run_sql_query`) that the agent can use.
-    - `prompt=system_prompt`: Sets the system prompt that defines the agent's behavior and instructions.
+  - `model=model`: Specifies the language model (`gemini-2.0-flash`) to be used by the agent for reasoning and generating responses.
+  - `tools=available_tools`: Passes the list of tools (`create_database`, `run_sql_query`) that the agent can use.
+  - `prompt=system_prompt`: Sets the system prompt that defines the agent's behavior and instructions.
 - `inputs = {"messages": [...]}`: Defines the input to the agent. In this case, it's a user message asking the agent to perform a series of database tasks: create a Neon project, create a table named `users`, add 10 sample records, and then print these records as a Markdown table.
 - `result = agent_graph.invoke(inputs)`: Invokes the LangGraph agent with the specified input. This starts the agent's execution, processing the user's request and orchestrating the use of tools to fulfill the task. The `invoke` method runs the agent and returns the final state, which includes the conversation history and the outcomes of the agent's actions.
 - `for message in result["messages"]: print(message.pretty_repr())`: Iterates through the messages in the `result["messages"]` list, which contains the history of the agent's conversation and actions. `message.pretty_repr()` is used to print each message in a human-readable format, showing the step-by-step execution of the agent's thought process and actions.
@@ -361,13 +358,15 @@ The graph visually represents the cyclical workflow of the LangGraph agent. Let'
 - **`__start__` Node:** This is the entry point of the graph. Execution begins here when a task is initiated. It represents the starting point of the agent's workflow.
 
 - **`agent` Node:** This node represents the core reasoning component of the agent, powered by the Gemini model.
-    - **Decision Point:** The `agent` node is responsible for processing user input and deciding the next course of action. It determines whether to:
-        - **Engage tools:** If the task requires database operations (like creating a project or running SQL queries), the agent decides to use the available tools. This is represented by the dotted line leading to the `tools` node.
-        - **Respond directly:** If the agent can directly answer the user or has completed the task without needing further tool use, it can proceed to the `__end__` node. This is represented by the dotted line leading directly to the `__end__` node.
+
+  - **Decision Point:** The `agent` node is responsible for processing user input and deciding the next course of action. It determines whether to:
+    - **Engage tools:** If the task requires database operations (like creating a project or running SQL queries), the agent decides to use the available tools. This is represented by the dotted line leading to the `tools` node.
+    - **Respond directly:** If the agent can directly answer the user or has completed the task without needing further tool use, it can proceed to the `__end__` node. This is represented by the dotted line leading directly to the `__end__` node.
 
 - **`tools` Node:** This node is activated when the `agent` node decides to use a tool.
-    - **Tool execution:** Within the `tools` node, the appropriate tool (either `create_database` or `run_sql_query` in this example) is executed based on the agent's decision.
-    - **Feedback loop:** After executing the tool and obtaining results, the workflow loops back to the `agent` node (solid line). This allows the agent to process the tool's output, reason further, and decide on the next step based on the new information. This loop is central to the ReAct (Reason and Act) pattern, enabling iterative problem-solving.
+
+  - **Tool execution:** Within the `tools` node, the appropriate tool (either `create_database` or `run_sql_query` in this example) is executed based on the agent's decision.
+  - **Feedback loop:** After executing the tool and obtaining results, the workflow loops back to the `agent` node (solid line). This allows the agent to process the tool's output, reason further, and decide on the next step based on the new information. This loop is central to the ReAct (Reason and Act) pattern, enabling iterative problem-solving.
 
 - **`__end__` Node:** This is the termination point of the graph. When the workflow reaches this node, it signifies that the agent has completed its task or conversation according to the defined termination conditions.
 
@@ -384,7 +383,7 @@ The agent will then create a new Neon project, create a table named `users`, ins
 Here's the entire conversation log showing the step-by-step execution of the agent:
 
 ```text shouldWrap
-Step by Step execution : 
+Step by Step execution :
 ================================ Human Message =================================
 
 Create a new Neon project called langgraph and create a table named users. Add 10 sample records to the table. Then print the records as a markdown table.
@@ -473,9 +472,9 @@ You can find the source code for the application described in this guide on GitH
 
 This guide has provided an introductory exploration into building AI agents using LangGraph and Neon. You have now seen how to construct an agent capable of performing database operations within Neon, driven by natural language commands. This example illustrates the fundamental structure of LangGraph, demonstrating its approach to managing workflows through interconnected [Nodes](https://langchain-ai.github.io/langgraph/concepts/low_level/#nodes) and [Edges](https://langchain-ai.github.io/langgraph/concepts/low_level/#edges).
 
-While this guide covers the basics, LangGraph offers a range of features for developing more advanced applications. To expand your understanding and capabilities, it is recommended to further investigate several key aspects of the framework. [Checkpointers](https://langchain-ai.github.io/langgraph/concepts/persistence) provide a mechanism for state persistence, enabling agents to retain context across sessions and resume operations.  The use of [Command](https://langchain-ai.github.io/langgraph/how-tos/command) objects allows for control over workflow and state updates within nodes, enhancing agent responsiveness.
+While this guide covers the basics, LangGraph offers a range of features for developing more advanced applications. To expand your understanding and capabilities, it is recommended to further investigate several key aspects of the framework. [Checkpointers](https://langchain-ai.github.io/langgraph/concepts/persistence) provide a mechanism for state persistence, enabling agents to retain context across sessions and resume operations. The use of [Command](https://langchain-ai.github.io/langgraph/how-tos/command) objects allows for control over workflow and state updates within nodes, enhancing agent responsiveness.
 
-For optimizing application performance and user experience, LangGraph supports [Streaming](https://langchain-ai.github.io/langgraph/concepts/streaming), which can provide real-time outputs and token-by-token updates during agent execution.  Understanding the [Recursion Limit](https://langchain-ai.github.io/langgraph/concepts/low_level/#recursion-limit) is important for managing the execution depth of complex workflows and ensuring predictable behavior.  Furthermore, [Human-in-the-Loop](https://langchain-ai.github.io/langgraph/concepts/human_in_the_loop) workflows, facilitated by the `interrupt` function and `Command` objects, offer options for integrating human oversight into agent processes, which may be necessary for applications requiring validation or control. Consider adding it for `DELETE` and `UPDATE` operations to the `run_sql_query` tool to enhance the agent's capabilities.
+For optimizing application performance and user experience, LangGraph supports [Streaming](https://langchain-ai.github.io/langgraph/concepts/streaming), which can provide real-time outputs and token-by-token updates during agent execution. Understanding the [Recursion Limit](https://langchain-ai.github.io/langgraph/concepts/low_level/#recursion-limit) is important for managing the execution depth of complex workflows and ensuring predictable behavior. Furthermore, [Human-in-the-Loop](https://langchain-ai.github.io/langgraph/concepts/human_in_the_loop) workflows, facilitated by the `interrupt` function and `Command` objects, offer options for integrating human oversight into agent processes, which may be necessary for applications requiring validation or control. Consider adding it for `DELETE` and `UPDATE` operations to the `run_sql_query` tool to enhance the agent's capabilities.
 
 ## Resources
 
