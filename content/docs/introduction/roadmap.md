@@ -17,12 +17,10 @@ Here's a snapshot of what we're working on now:
 
 - **Data anonymization**: We're simplifying PII data anonymization to make Neon an ideal staging environment for your team's app development.
 - **HIPAA compliance**: We are working toward HIPAA readiness, targeting completion by the end of Q2 2025. Learn more about Neon's compliance milestones on our [Compliance page](/docs/security/compliance).
-- **More regions**: São Paulo 🇧🇷 is locked in for Q1 2025. Brazilian developers: we'd love to sponsor meetups and connect! Share your thoughts via the [Feedback form](https://console.neon.tech/app/projects?modal=feedback) in the Neon Console or our [Discord feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042). If you'd like support in other regions, please [submit a request](/docs/introduction/regions#request-a-region).
 - **Improved migration assistance**: The [Neon Migration Assistant](/docs/import/migration-assistant) was introduced in Q4 2024. More improvements are coming in 2025 to make data import easier and faster.
 - **Support for the [pg_search](https://github.com/paradedb/paradedb/tree/dev/pg_search) extension**: This extension enables full text search over heap tables.
 - **Scheduled updates**: We will be rolling out support for a scheduled updates feature in Neon to facilitate Postgres updates, security patches, and Neon feature enhancements. [Learn more](/docs/changelog/2025-01-24#scheduled-updates-comingSoon).
 - **Backup & restore**: We'll start with scheduled snapshots with instant point-in-time recovery, eventually expanding this feature with more traditional automated backup capabilities.
-- **Vercel preview deployment support**: We're adding support for preview deployments to our [Native Vercel Integration](/docs/guides/vercel-native-integration).
 - **Branch protection enhancements**: We're enhancing safeguards for [protected branches](/docs/guides/protected-branches) to strengthen their security and prevent accidental actions.
 - **Neon on Azure GA**: We're working toward a GA release with deeper Azure integration.
 - **Inbound logical replication GA**: Neon supports Postgres logical replication for inbound and outbound data. Outbound replication (replicating data from Neon) is GA. In 2025, inbound replication (replicating data to Neon) will also reach GA.
@@ -45,6 +43,8 @@ And here's a quick list of what we'll be taking on in the near future:
 
 ## What we've shipped recently 🚢
 
+- **AWS São Paulo region**: Create projects in São Paulo (sa-east-1) for lower latency access from the South America and data residency within Brazil.
+- **Vercel preview deployment support**: We added support for preview deployments to our **Vercel Native Integration**. See [Vercel Native Integration Previews](/docs/guides/vercel-native-integration-previews).
 - **Manage your database from Cursor or Claude Desktop**: Manage your Neon database directly from [Cursor](https://neon.tech/guides/cursor-mcp-neon) or [Claude Desktop](https://neon.tech/guides/neon-mcp-server) using natural language, made possible by the [Neon Model Context Protocol (MCP) Server](https://github.com/neondatabase/mcp-server-neon).
 - **Database Branching for Vercel Preview Environments**: We added support for **database branching for preview environments** to the **Neon Postgres Native Integration**, available from the [Vercel Marketplace](https://vercel.com/marketplace).
 - **AWS London region**: Create projects in London (eu-west-2) for lower latency access from the UK and data residency within the United Kingdom.
