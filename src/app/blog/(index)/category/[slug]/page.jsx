@@ -17,7 +17,7 @@ const BlogCategoryPage = async ({ params: { slug } }) => {
   return (
     <>
       <h2 className="sr-only">{category.name}</h2>
-      <ScrollLoader itemsCount={8} className="grid grid-cols-2 gap-x-6 xl:gap-x-5 md:grid-cols-1">
+      <ScrollLoader className="grid grid-cols-2 gap-x-6 xl:gap-x-5 md:grid-cols-1" itemsCount={8}>
         {posts.map((post, index) => (
           <BlogGridItem key={post.slug} index={index} category={category} post={post} />
         ))}
