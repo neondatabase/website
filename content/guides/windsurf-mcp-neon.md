@@ -1,5 +1,5 @@
 ---
-title: 'AI-assisted database migrations with Windsurf and Neon Postgres MCP Server'
+title: 'Getting started with Windsurf and Neon Postgres MCP Server'
 subtitle: 'Make schema changes with natural language using Codeium Windsurf and Neon MCP Server'
 author: dhanush-reddy
 enableTableOfContents: true
