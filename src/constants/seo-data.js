@@ -92,12 +92,6 @@ export default {
     pathname: LINKS.enterprise,
     imagePath: '/images/social-previews/enterprise.jpg',
   },
-  generateTicket: {
-    title: 'Grab the ticket for Neon Deploy',
-    description:
-      "Generate a unique ticket image with your GitHub profile and participate in Neon's right after the conference.",
-    pathname: LINKS.generateTicket,
-  },
   partners: {
     title: 'Accelerate your business with Neon partnership — Neon',
     description: 'Bring familiar, reliable and scalable Postgres experience to your customers.',
@@ -145,7 +139,6 @@ export default {
     title: 'Neon Scalable Architecture — Neon',
     description:
       'Neon is a distributed team building open-source, cloud-native Postgres. We are a well-funded startup with deep knowledge of Postgres internals and decades of experience building databases.',
-    // imagePath: '',
     pathname: LINKS.scalableArchitecture,
   },
   stage: {
@@ -154,15 +147,11 @@ export default {
       'Join us online on October 30th at 10:00 AM PT to learn how Neon empowers developers to ship faster with Postgres.',
     pathname: LINKS.stage,
   },
-  error: {
-    title: 'Page Is Broken — Neon',
-  },
-  404: {
-    title: 'Page Not Found — Neon',
-  },
-  '404-ticket': {
-    title: 'Ticket Not Found - Neon',
-    imagePath: '/images/social-previews/no-name-ticket.jpg',
+  generateTicket: {
+    title: 'Grab the ticket for Neon Deploy',
+    description:
+      "Generate a unique ticket image with your GitHub profile and participate in Neon's right after the conference.",
+    pathname: LINKS.generateTicket,
   },
   ticket({ name, login: githubHandle }) {
     const userName = name || githubHandle;
@@ -171,6 +160,16 @@ export default {
       title: `${userName}'s ticket for Neon Deploy - Neon`,
       description: `Join ${userName} virtually at Deploy on October 30th to learn how Neon empowers developers to ship faster with Postgres.`,
     };
+  },
+  '404-ticket': {
+    title: 'Ticket Not Found - Neon',
+    imagePath: '/images/social-previews/no-name-ticket.jpg',
+  },
+  error: {
+    title: 'Page Is Broken — Neon',
+  },
+  404: {
+    title: 'Page Not Found — Neon',
   },
 };
 
