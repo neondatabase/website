@@ -132,12 +132,13 @@ export async function generateMetadata({ params }) {
   return getMetadata({ ...SEO_DATA['404-ticket'] });
 }
 
-export async function generateStaticParams() {
-  const users = await prisma.user.findMany();
+// TODO: Uncomment when we have tickets back
+// export async function generateStaticParams() {
+//   const users = await prisma.user.findMany();
 
-  return users.map((user) => ({
-    handle: user.login,
-  }));
-}
+//   return users.map((user) => ({
+//     handle: user.login,
+//   }));
+// }
 
 export const revalidate = 0;
