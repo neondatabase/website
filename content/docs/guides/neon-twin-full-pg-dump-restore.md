@@ -3,7 +3,7 @@ title: Full Twin
 subtitle: Create a full Twin of your production database
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-11T18:04:21.931Z'
+updatedOn: '2025-02-25T18:52:09.455Z'
 ---
 
 This workflow will create a full Neon Twin using `pg_dump` and `pg_restore`.
@@ -33,7 +33,7 @@ name: Create Neon Twin
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Runs at midnight ET (us-east-1)
+    - cron: '0 0 * * *' # Runs at midnight UTC
   workflow_dispatch:
 
 env:
@@ -130,7 +130,7 @@ Add a `pull_request` event and configure it to listen for merges into the main `
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Runs at midnight ET (us-east-1)
+    - cron: '0 0 * * *' # Runs at midnight UTC
   pull_request: // [!code ++]
     types: [closed] // [!code ++]
     branches: // [!code ++]
