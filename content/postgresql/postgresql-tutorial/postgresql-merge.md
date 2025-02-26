@@ -232,7 +232,7 @@ PostgreSQL 17's enhanced `MERGE` command with `RETURNING` clause support provide
 
 - The `MERGE` statement allows you to conditionally `INSERT`, `UPDATE`, or `DELETE` rows in a target table based on the presence of matching records in a source table. This consolidates multiple operations into a single, efficient command.
 
-2. When was the MERGE statement introduced in PostgreSQL?
+2. When was the `MERGE` statement introduced in PostgreSQL?
 
 - The `MERGE` statement was officially introduced in PostgreSQL version 15, released in October 2022.
 
