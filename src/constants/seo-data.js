@@ -92,6 +92,12 @@ export default {
     pathname: LINKS.enterprise,
     imagePath: '/images/social-previews/enterprise.jpg',
   },
+  serverlessApps: {
+    title: 'Postgres for serverless apps — Neon',
+    description:
+      'Scale your app effortlessly with Neon’s serverless Postgres. With automatic scaling, pooler built on pgBouncer, and usage-based pricing.',
+    pathname: `${LINKS.useCases}/serverless-apps`,
+  },
   generateTicket: {
     title: 'Grab the ticket for Neon Deploy',
     description:

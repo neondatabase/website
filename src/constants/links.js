@@ -27,7 +27,6 @@ export default {
   templates: '/templates',
   thankYou: '/thank-you',
   useCases: '/use-cases',
-  variableLoad: '/variable-load',
   migrationAssistance: '/migration-assistance',
   // Docs
   docs: '/docs',
