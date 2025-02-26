@@ -36,7 +36,7 @@ const TicketPage = async ({ params }) => {
               {userName}&apos;s <br className="hidden md:block" />
               Ticket
             </h1>
-            <p className="relative z-50 mt-5 max-w-[363px] text-[1.15rem] font-light leading-tight tracking-tight text-gray-new-70 xl:mx-auto xl:max-w-[579px] xl:text-lg xl:leading-[1.375] xl:tracking-tighter lg:mt-4 lg:max-w-[610px] lg:text-base">
+            <p className="relative z-50 mt-5 max-w-[363px] text-[1.15rem] font-light leading-tight tracking-tight text-gray-new-70 xl:mx-auto xl:max-w-[579px] xl:text-lg xl:leading-snug xl:tracking-tighter lg:mt-4 lg:max-w-[610px] lg:text-base">
               Join {userName.split(' ')[0]} at Neon Deploy on{' '}
               <time dateTime="2024-10-30T17:00:00Z">October 30th, 10 a.m. PT</time>
             </p>

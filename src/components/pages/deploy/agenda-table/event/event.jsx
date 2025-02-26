@@ -62,7 +62,7 @@ const Event = ({
       </td>
       <td
         className={clsx(
-          'py-4 pr-4 text-xl tracking-extra-tight transition-colors duration-200 lg:text-base sm:py-0 sm:pr-0 sm:text-xl sm:leading-[1.25] xs:text-lg',
+          'py-4 pr-4 text-xl tracking-extra-tight transition-colors duration-200 lg:text-base sm:py-0 sm:pr-0 sm:text-xl sm:leading-tight xs:text-lg',
           { 'group-hover:text-green-45': bio || description }
         )}
       >

@@ -41,7 +41,7 @@ const SocialShare = ({ className = null, url }) => {
           </p>
         </button>
       </div>
-      {/* <h2 className="ml-6 shrink-0 font-sans text-sm leading-[1.375] -tracking-tighter text-gray-5 flat-none md:flat-breaks md:ml-0 text-start">
+      {/* <h2 className="ml-6 shrink-0 font-sans text-sm leading-snug -tracking-tighter text-gray-5 flat-none md:flat-breaks md:ml-0 text-start">
         Share with <br /> your friends
       </h2> */}
     </div>

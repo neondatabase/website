@@ -45,7 +45,7 @@ const EventModal = ({
         )}
       </div>
     </div>
-    <div className="border-gray-15 text-gray-90 mt-4 border-t pt-4 text-sm font-light leading-[1.25]">
+    <div className="border-gray-15 text-gray-90 mt-4 border-t pt-4 text-sm font-light leading-tight">
       {bio}
     </div>
     {(xUrl || linkedinUrl || githubUrl) && (
@@ -85,7 +85,7 @@ const EventModal = ({
     {description && (
       <div className="mt-11">
         <span className="block text-xl leading-dense tracking-extra-tight sm:text-lg">{event}</span>
-        <p className="text-gray-90 border-gray-15 mt-4 border-t pt-4 text-sm font-light leading-[1.25]">
+        <p className="text-gray-90 border-gray-15 mt-4 border-t pt-4 text-sm font-light leading-tight">
           {description}
         </p>
       </div>
