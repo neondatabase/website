@@ -60,7 +60,7 @@ const logos = [
 ];
 
 const PartnersPage = () => (
-  <Layout headerClassName="!absolute !bg-transparent">
+  <Layout>
     <Hero />
     <Logos logos={logos} withGreenFade />
     <SplitViewGrid
