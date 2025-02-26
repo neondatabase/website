@@ -67,14 +67,15 @@ Additional use (called "Extra usage" in Neon) for a fee is not available on the 
 
 The Vercel Pro plan is is tailored for professional developers, freelancers, and small businesses. In Neon, the equivalent plan is our [Launch Plan](/docs/introduction/plans#launch-plan) at $19 per month. The following table provides a comparison of what's included:
 
-| **Resource**        | **Vercel Pro (Included)** | **Neon Launch Plan (Included)**  |
-| :------------------ | :------------------------ | :------------------------------- |
-| **Compute hours**   | 100                       | 300                              |
-| **Data transfer**   | 256 MB                    | Reasonable usage (no hard limit) |
-| **Databases**       | First database            | 100                              |
-| **Branches**        | -                         | 5000                             |
-| **Storage**         | First 256 MB              | Up to 10 GB                      |
-| **Archive storage** | -                         | Up to 50 GB                      |
+| **Resource**                     | **Vercel Pro (Included)** | **Neon Launch Plan (Included)**  |
+| :------------------------------- | :------------------------ | :------------------------------- |
+| **Compute hours**                | 100                       | 300                              |
+| **Data transfer**                | 256 MB                    | Reasonable usage (no hard limit) |
+| **Databases**                    | First database            | 100                              |
+| **Branches**                     | -                         | 5000                             |
+| **Storage**                      | First 256 MB              | Up to 10 GB                      |
+| **Archive storage**              | -                         | Up to 50 GB                      |
+| **Point-in-time restore (PITR)** | Not available             | Up to 7 days                     |
 
 Both the Vercel Pro and Neon Launch plans offer additional use (called "Extra usage" in Neon) for a fee, as outlined below. In Neon, additional units of compute and storage cost more, but you get more compute and storage with your plan's monthly fee, and Neon does not charge for data transfer, additional databases, or written data.
 
@@ -86,6 +87,10 @@ Both the Vercel Pro and Neon Launch plans offer additional use (called "Extra us
 | **Storage**       | $0.12 - 1 GB                | First 10 GB included; afterwards $1.75 per-GB |
 
 Neon also offers [Scale](/docs/introduction/plans#scale-plan) and [Business](/docs/introduction/plans#business-plan) plans, which include more storage, compute hours, projects, and features. Be sure to take a look at these plans if the Launch plan does not meet your requirements.
+
+<Admonition type="note" title="Upgrading to a Neon plan">
+To upgrade to a Neon plan to take advantage of additional features and higher plan allowances, see [Changing your plan](/docs/guides/vercel-native-integration#changing-your-plan).
+</Admonition>
 
 ### What about Enterprise customers?
 
