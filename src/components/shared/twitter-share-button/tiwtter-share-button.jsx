@@ -71,7 +71,7 @@ const TwitterShareButton = ({
   return (
     <Button
       className={clsx(
-        'relative flex items-center gap-4 px-6 py-[18px] pr-7 font-sans text-xl font-semibold leading-none tracking-[-0.02em] text-white transition duration-200 lg:px-8 xs:px-3 xs:py-2',
+        'relative flex items-center gap-4 px-6 py-[18px] pr-7 font-sans text-xl font-semibold leading-none tracking-extra-tight text-white transition duration-200 lg:px-8 xs:px-3 xs:py-2',
         additionalClassName
       )}
       type="button"

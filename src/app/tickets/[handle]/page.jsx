@@ -41,7 +41,7 @@ const TicketPage = async ({ params }) => {
               <time dateTime="2024-10-30T17:00:00Z">October 30th, 10 a.m. PT</time>
             </p>
             <Link
-              className="pointer-events-auto mt-[18px] flex items-end text-lg leading-none tracking-[-0.02em] text-green-45 underline decoration-green-45/40 underline-offset-[8px] transition-colors duration-200 hover:decoration-green-45 xl:justify-center lg:text-base"
+              className="pointer-events-auto mt-[18px] flex items-end text-lg leading-none tracking-extra-tight text-green-45 underline decoration-green-45/40 underline-offset-[8px] transition-colors duration-200 hover:decoration-green-45 xl:justify-center lg:text-base"
               to={LINKS.stage}
             >
               <span>Watch the event live</span>

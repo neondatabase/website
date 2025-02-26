@@ -92,7 +92,7 @@ const CardItemsList = ({ className = null, items, ariaHidden = false, size = 'md
               )}
             >
               <h3
-                className={clsx('text-xl leading-tight tracking-[-0.02em]', {
+                className={clsx('text-xl leading-tight tracking-extra-tight', {
                   'xl:text-lg': !isLarge,
                 })}
               >

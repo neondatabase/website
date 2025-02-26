@@ -37,7 +37,7 @@ const Stage = () => {
             Neon Live
           </h2>
           <TwitterShareButton
-            className="!gap-0 !px-0 !text-sm !font-light tracking-[-0.02em]"
+            className="!gap-0 !px-0 !text-sm !font-light tracking-extra-tight"
             url={`${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/stage`}
             shareText="Watching @neondatabase Deploy live! 🔥 Join at "
             iconSize="small"
