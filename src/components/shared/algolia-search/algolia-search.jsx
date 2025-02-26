@@ -11,12 +11,12 @@ const searchClient = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY
 );
 
-const debouncedSetUiState = debounce((uiState, setUiState) => setUiState(uiState), 500);
+const debouncedSetUiState = debounce((uiState, setUiState) => setUiState(uiState), 300);
 
 const onStateChange = ({ uiState, setUiState, indexName }) => {
   const { [indexName]: { query } = {} } = uiState;
 
-  // debounce only if non-empty query
+  // debounce only non-empty query
   if (!query) {
     debouncedSetUiState.cancel();
     setUiState({});
