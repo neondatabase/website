@@ -188,7 +188,7 @@ To monitor usage in Vercel:
 
 When you install the Neon Postgres Native Integration from the Vercel Marketplace, you have access to all the same Neon plans that are available to anyone signing up for Neon directly. Changing your plan (upgrading or downgrading) is performed in Vercel.
 
-1. On the Vercel Dashboard, navigate to **Storage** tab.
+1. On the Vercel Dashboard, navigate to the **Storage** tab.
 2. Select your Neon Database.
 3. Select **Settings** from the sidebar.
 
