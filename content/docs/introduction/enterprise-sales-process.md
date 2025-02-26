@@ -5,7 +5,7 @@ subtitle: A guide to working with the Neon sales team
 updatedOn: '2024-12-01T21:48:07.693Z'
 ---
 
-Our goal at Neon is to make the sales process as easy and efficient as possible. Below, we've outlined what our typical process looks like so you'll know what to expect when you reach out to us. Depending on your needs, additional discussions and consultations may be required. We'll be happy to arrange those as needed. 
+Our goal at Neon is to make the sales process as easy and efficient as possible. Below, we've outlined what our typical process looks like so you'll know what to expect when you reach out to us. Depending on your needs, additional discussions and consultations may be required. We'll be happy to arrange those as needed.
 
 <Steps>
 
