@@ -190,16 +190,16 @@ When you install the Neon Postgres Native Integration from the Vercel Marketplac
 
 1. On the Vercel Dashboard, navigate to **Storage** tab.
 2. Select your Neon Database.
-2. Select **Settings** from the sidebar.
+3. Select **Settings** from the sidebar.
 
    ![Vercel settings](/docs/guides/vercel_settings.png)
 
-3. In the **Update configuration** section, select **Change Configuration**.
+4. In the **Update configuration** section, select **Change Configuration**.
 
    ![Vercel update configuration modal](/docs/guides/vercel_update_configuration.png)
 
-4. Select the desired **Installation plan**, and click **Save**.
-5. Follow the prompts to complete the plan change, providing your payment method if necessary.
+5. Select the desired **Installation plan**, and click **Save**.
+6. Follow the prompts to complete the plan change, providing your payment method if necessary.
 
 For an overview of Neon's plans, please visit our [Pricing](https://neon.tech/pricing) page.
 
