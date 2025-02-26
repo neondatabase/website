@@ -42,17 +42,21 @@ Billing for the [Vercel Native Integration for Neon Postgres](/docs/guides/verce
 
 ### What plan will you be on after the transition?
 
-- **Vercel Hobby Plan**: Databases will be migrated to the Neon Free Plan, which gives you more compute hours, data transfer, Databases (a.k.a. "Projects" in Neon), and storage than you had on the Vercel Hobby Plan. See [Vercel Hobby Plan vs Neon Free Plan](#vercel-hobby-plan-vs-neon-free-plan) for a comparison.
+- **Vercel Hobby Plan**: Databases that were on Vercel's Hobby Plan were transitioned to the Neon Free Plan, which gives you more compute hours, data transfer, Databases (a.k.a. "Projects" in Neon), and storage than you had while on the Vercel Hobby Plan. See [Vercel Hobby Plan vs Neon Free Plan](#vercel-hobby-plan-vs-neon-free-plan) for a comparison.
 
-- **Vercel Pro Plan prices and limits will not change**: This ensures no pricing surprises when transitioning to Neon. You can stay on your Vercel Pro Plan or you can switch to a Neon plan. For a Vercel-Neon plan comparison, see [Vercel Pro Plan vs Neon Launch Plan](#vercel-pro-plan-vs-neon-launch-plan).
+- **Vercel Pro Plan prices and limits will not change until you change to a Neon Plan**: This ensures no pricing surprises when transitioning to Neon. You can stay on this plan or you can switch to a Neon plan. For a Vercel-Neon plan comparison, see [Vercel Pro Plan vs Neon Launch Plan](#vercel-pro-plan-vs-neon-launch-plan).
 
 ### How do Vercel Postgres plans compare to Neon plans?
 
-Vercel Postgres was available with Vercel's Hobby and Pro plans. Let's take a look at these plans and compare to Neon:
+Before the transition to Neon, Vercel Postgres was available on Vercel's Hobby and Pro plans. Let's take a look at these plans and compare to Neon.
+
+<Admonition type="important">
+**Vercel Postgres is no longer included in Vercel's Hobby and Pro plans. The only supported upgrade or downgrade path is to a Neon Plan.** Vercel Postgres users previously on Vercel's Hobby Plan were transitioned to the Neon Free Plan, which offers higher limits and more features. Vercel Postgres users previously on Vercel's Pro Plan remain on a plan with the same limits — changing to a Neon plan is optional in this case.
+</Admonition>
 
 #### Vercel Hobby Plan vs Neon Free Plan
 
-The Vercel Hobby plan is free and aimed at developers with personal projects, and small-scale applications. In Neon, the equivalent plan is our [Free Plan](/docs/introduction/plans#free-plan). Here are some of the differences to be aware of:
+When Vercel Postgres was available on the Vercel's Hobby plan, it was free and aimed at developers with personal projects, and small-scale applications. In Neon, the equivalent plan is our [Free Plan](/docs/introduction/plans#free-plan). Here are some of the differences you will see after the transition:
 
 | **Resource**      | **Vercel Hobby (Included)** | **Neon Free Plan (Included)** |
 | :---------------- | :-------------------------- | :---------------------------- |
@@ -61,11 +65,11 @@ The Vercel Hobby plan is free and aimed at developers with personal projects, an
 | **Database**      | First Database              | 10                            |
 | **Storage**       | First 256 MB Included       | Up to 512 MB                  |
 
-Additional use (called "Extra usage" in Neon) for a fee is not available on the Vercel Hobby Plan or the Neon Free Plan. No change here!
+Additional use (called "Extra usage" in Neon) for a fee was not available on the Vercel Hobby Plan, nor is it available Neon Free Plan.
 
 #### Vercel Pro Plan vs Neon Launch Plan
 
-The Vercel Pro plan is is tailored for professional developers, freelancers, and small businesses. In Neon, the equivalent plan is our [Launch Plan](/docs/introduction/plans#launch-plan) at $19 per month. The following table provides a comparison of what's included:
+When Vercel Postgres was available on the Vercel's Pro Plan, it was tailored for professional developers, freelancers, and small businesses. In Neon, the equivalent plan is our [Launch Plan](/docs/introduction/plans#launch-plan) at $19 per month. The following table provides a comparison:
 
 | **Resource**                     | **Vercel Pro (Included)** | **Neon Launch Plan (Included)**  |
 | :------------------------------- | :------------------------ | :------------------------------- |
@@ -77,7 +81,7 @@ The Vercel Pro plan is is tailored for professional developers, freelancers, and
 | **Archive storage**              | -                         | Up to 50 GB                      |
 | **Point-in-time restore (PITR)** | Not available             | Up to 7 days                     |
 
-Both the Vercel Pro and Neon Launch plans offer additional use (called "Extra usage" in Neon) for a fee, as outlined below. In Neon, additional units of compute and storage cost more, but you get more compute and storage with your plan's monthly fee, and Neon does not charge for data transfer, additional databases, or written data.
+The Vercel Pro plan offered additional use for a fee. The Neon Launch plan also offers additional use (called "Extra usage" in Neon). In Neon, additional units of compute and storage cost more, but you get more compute and storage with your plan's monthly fee, and there's no charge for data transfer, additional databases, or written data.
 
 | **Resource**      | **Vercel Pro (Additional)** | **Neon Launch Plan (Extra usage)**            |
 | :---------------- | :-------------------------- | :-------------------------------------------- |
@@ -100,10 +104,10 @@ Neon is working with the Vercel team to transition Enterprise customers. If you 
 
 ### What Neon features will I have access to after the migration?
 
-Once the transition to Neon Postgres is complete, you will be able to access a variety of advanced Neon features that were not available in Vercel Postgres (subject to your plan limits).
+After transitioning or upgrading to a Neon plan, you will be able to access a variety of advanced Neon features that were not available in Vercel Postgres (subject to your plan limits).
 
 <Admonition type="note">
-Please be aware that if you are on a **Vercel Postgres Pro Plan**, you are subject to the limits of that [plan](#vercel-pro-plan-vs-neon-launch-plan). There's no requirement for you to migrate to a Neon plan, but doing so provides access to higher limits and additional features. For example, the Vercel Postgres Pro Plan does not support [history retention](/docs/reference/glossary#history), which enables Neon's point-in-time restore feature. For a full overview of Neon plans, features, and limits, refer to our [Pricing](https://neon.tech/pricing) page. If you switch to a Neon plan, you will still be billed through Vercel.
+Please be aware that if you were a Vercel Postgres user on the Vercel Pro Plan, you remain subject to the limits of that [plan](#vercel-pro-plan-vs-neon-launch-plan) until you move to a Neon Plan. There's no requirement for you to move to a Neon plan, but doing so provides access to higher limits and additional features. For example, the old Vercel plan does not support [history retention](/docs/reference/glossary#history), which enables Neon's point-in-time restore feature. It also lacks support for branching. For a full overview of Neon plans, features, and limits, refer to our [Pricing](https://neon.tech/pricing) page. If you change to a Neon plan, you will still be billed through Vercel.
 </Admonition>
 
 Neon features:
