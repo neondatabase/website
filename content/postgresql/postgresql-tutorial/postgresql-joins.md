@@ -224,7 +224,7 @@ Here is the output:
 
 The following Venn diagram illustrates the right join:
 
-![PostgreSQL Join - Right Join](/postgresqltutorial/PostgreSQL-Join-Right-Join.png)
+![PostgreSQL Join - Right Join](/postgresqltutorial/join-right.svg)
 Similarly, you can get rows from the right table that do not have matching rows from the left table by adding a `WHERE` clause as follows:
 
 ```sql
@@ -252,7 +252,7 @@ Output:
 
 The `RIGHT JOIN` and `RIGHT OUTER JOIN` are the same therefore you can use them interchangeably.
 
-The following diagram illustrates the right join that returns rows from the right table that do not have matching rows in the left table:
+The following  diagram illustrates the right join that returns rows from the right table that do not have matching rows in the left table:
 
 ![PostgreSQL Join - Right Join with Where](/postgresqltutorial/join-right.svg)
 
@@ -319,7 +319,7 @@ Here is the result:
 
 The following Venn diagram illustrates the full outer join that returns rows from a table that do not have the corresponding rows in the other table:
 
-![PostgreSQL Join - Full Outer Join with Where](/postgresqltutorial/PostgreSQL-Join-Full-Outer-Join-with-Where.png)
+![PostgreSQL Join - Full Outer Join with Where](/postgresqltutorial/join-full-anti.svg)
 The following picture shows all the PostgreSQL joins that we discussed so far with the detailed syntax:
 
 ![PostgreSQL Joins](/postgresqltutorial/PostgreSQL-Joins.png)
