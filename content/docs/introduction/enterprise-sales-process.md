@@ -5,40 +5,42 @@ subtitle: A guide to working with the Neon sales team
 updatedOn: '2024-12-01T21:48:07.693Z'
 ---
 
-Our goal at Neon is to make the sales process straightforward and efficient. Here’s what to expect when you reach out to our team. Depending on your needs, there might be additional discussions, but we’re always open to scheduling extra time to address your questions.
+We know your time is valuable. Our goal at Neon is to make the sales process as easy and efficient as possible. Here’s what to expect when you reach out to our team. Depending on your needs, additional discussions may be necessary — and we’re always ready to schedule extra time to work through all of your questions.
 
 <Steps>
 
-## Contact us
+## Reach out to us
 
-Start by filling out our [contact form](https://neon.tech/contact-sales) to let us know how we can assist you. If you’re looking for specific plans or pricing, sharing details about your feature requirements and workload is optional but helpful in speeding up the process.
+Start by filling out our [contact form](https://neon.tech/contact-sales) to let us know how we can help. If you’re looking for specific plans or pricing, sharing details about your feature requirements and workload will get the ball rolling immediately and speed up the overall process.
 
 ## Understanding your needs
 
-We’ll reach out to gather more information about your requirements, including:
+After contacting us, we'll reach out by email to gather more information about your requirements, including things such as:
 
 - Your current environment and setup
-- Workload, feature, and performance needs
+- Workload, feature, and performance requirements
 
-This helps us understand your needs and prepare relevant plan and pricing details.
+These details help us understand your needs and prepare plan and pricing proposals.
 
 ## Call with the Neon solutions team
 
-If an Enterprise plan is a good fit for your use case, we’ll set up a call to discuss:
+If an Enterprise plan is a good fit for your use case, our solutions team will set up a call to discuss:
 
 - Configuration options and timelines
 - Add-ons like support packages or custom requirements
-- Any other questions you have
+- Any other questions you might have
 
-We can provide a demo or schedule a follow-up demo if you’re interested in specific features.
+Optionally, we can provide a demo or schedule a follow-up call if you’re interested in specific features.
+
+_Our solutions team is made up of experience technical staff who have worked through migrations with some of our largest customers. They love what they do._
 
 ## Pricing and migration proposal
 
-Based on our discussions, we’ll create a pricing proposal, often including a proof-of-concept migration plan. The proposal is tailored using:
+Based on our discussions, we’ll create a pricing proposal, often including a proof-of-concept migration plan. The proposal will be tailored using:
 
 - Information from our initial conversation
 - Your environment details
-- Your workload and performance requirements
+- Your workload, feature, and performance requirements
 
 We’ll send the proposal and arrange a follow-up call if needed.
 
@@ -50,16 +52,16 @@ If you have a more complex setup (e.g., multiple databases or special configurat
 - Performance metrics
 - Infrastructure specifics
 
-This helps us provide accurate pricing and recommendations.
+This helps us provide accurate pricing and plan recommendations.
 
 ## Stakeholder collaboration
 
-We’re happy to support your security team or other stakeholders by:
+During this process, we’ll be happy to support your security team or other stakeholders by:
 
 - Answering security-related questions
 - Providing necessary documentation
 - Participating in reviews as needed
 
-We’re flexible and ready to adapt our process to fit your needs. [Reach out to us](https://neon.tech/contact-sales) to get started.
-
 </Steps>
+
+We’ve laid out our typical process above, but we're flexible and ready to adjust the process to fit your specific needs. [Reach out to us](https://neon.tech/contact-sales) to get started. We look forward to hearing from you.
