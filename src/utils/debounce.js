@@ -6,10 +6,12 @@ function debounce(func, wait = 100) {
     if (lastTimeout) {
       clearTimeout(lastTimeout);
     }
-    lastTimeout = setTimeout(() => {
-      lastTimeout = null;
-      Promise.resolve(func.apply(that, args)).then(debounced.resolve).catch(debounced.reject);
-    }, wait);
+    return new Promise((resolve, reject) => {
+      lastTimeout = setTimeout(() => {
+        lastTimeout = null;
+        Promise.resolve(func.apply(that, args)).then(resolve).catch(reject);
+      }, wait);
+    });
   }
 
   debounced.cancel = () => {
