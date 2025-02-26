@@ -15,7 +15,10 @@ const BlogPage = async () => {
   if (!posts) return notFound();
 
   return (
-    <ScrollLoader className="grid grid-cols-2 gap-x-6 xl:gap-x-5 md:grid-cols-1" itemsCount={8}>
+    <ScrollLoader
+      className="blog-posts grid grid-cols-2 gap-x-6 xl:gap-x-5 md:grid-cols-1"
+      itemsCount={8}
+    >
       {posts.map((post, index) => (
         <BlogGridItem key={post.slug} index={index} post={post} />
       ))}

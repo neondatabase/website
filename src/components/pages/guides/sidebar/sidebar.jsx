@@ -1,11 +1,12 @@
-import { PropTypes } from 'prop-types';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+
+import SearchInput from 'components/shared/algolia-search/search-input';
 
 const Sidebar = ({ className }) => (
-  <aside className={className}>
-    <div className="relative flex h-full flex-col">
-      <div className="relative flex-1">
-        <nav className="no-scrollbars sticky top-32 flex items-center gap-2.5" />
-      </div>
+  <aside className={clsx('relative flex h-full flex-col', className)}>
+    <div className="sticky top-24">
+      <SearchInput className="w-full" isBlog />
     </div>
   </aside>
 );

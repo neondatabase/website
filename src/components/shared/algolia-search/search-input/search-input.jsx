@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { SearchBox } from 'react-instantsearch';
 
-const SearchInput = ({ className, isBlog = false }) => {
+const SearchInput = ({ className }) => {
   /**
    * Handle keyboard shortcuts for search box without using ref
    * https://www.algolia.com/doc/guides/building-search-ui/upgrade-guides/react/#replace-focusshortcuts-with-custom-code
@@ -29,8 +29,8 @@ const SearchInput = ({ className, isBlog = false }) => {
   }, []);
 
   return (
-    <div className="relative md:w-full">
-      <SearchBox className={clsx(className, isBlog && 'dark')} placeholder="Search..." />
+    <div className={clsx('relative', className)}>
+      <SearchBox placeholder="Search..." />
       <span className="pointer-events-none absolute right-1.5 top-1/2 z-10 flex h-5 -translate-y-1/2 items-center rounded-[3px] border border-gray-new-20 bg-black-pure px-1.5 text-xs font-medium text-white md:hidden">
         ⌘K
         <span className="sr-only">Press ⌘K to focus on the search input</span>
@@ -41,7 +41,6 @@ const SearchInput = ({ className, isBlog = false }) => {
 
 SearchInput.propTypes = {
   className: PropTypes.string,
-  isBlog: PropTypes.bool,
 };
 
 export default SearchInput;

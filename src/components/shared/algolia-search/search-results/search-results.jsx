@@ -1,11 +1,13 @@
 'use client';
 
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useInstantSearch, useHits } from 'react-instantsearch';
 
 import BlogGridItem from 'components/pages/blog/blog-grid-item';
+import GuideCard from 'components/pages/guides/guide-card';
 
-const SearchResults = ({ posts, className, children }) => {
+const SearchResults = ({ posts, indexName, className, children }) => {
   const { indexUiState } = useInstantSearch();
   const { items } = useHits();
 
@@ -19,12 +21,14 @@ const SearchResults = ({ posts, className, children }) => {
   }
 
   return (
-    <div className={className}>
+    <div className={clsx('search-results', className)}>
       {items.map(({ url, index }) => {
         const slug = url.split('/').pop();
         const post = posts.find((post) => post.slug === slug);
 
         if (!post) return null;
+
+        if (indexName === 'guides') return <GuideCard key={post.slug} {...post} />;
 
         return <BlogGridItem key={post.slug} index={index} post={post} />;
       })}
@@ -33,8 +37,9 @@ const SearchResults = ({ posts, className, children }) => {
 };
 
 SearchResults.propTypes = {
-  className: PropTypes.string,
   posts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  indexName: PropTypes.string,
+  className: PropTypes.string,
   children: PropTypes.node.isRequired,
 };
 
