@@ -252,7 +252,7 @@ Output:
 
 The `RIGHT JOIN` and `RIGHT OUTER JOIN` are the same therefore you can use them interchangeably.
 
-The following  diagram illustrates the right join that returns rows from the right table that do not have matching rows in the left table:
+The following diagram illustrates the right join that returns rows from the right table that do not have matching rows in the left table:
 
 ![PostgreSQL Join - Right Join with Where](/postgresqltutorial/join-right.svg)
 
