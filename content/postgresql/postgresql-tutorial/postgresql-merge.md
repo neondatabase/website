@@ -100,7 +100,7 @@ INSERT INTO product_updates VALUES
 
 ## Using MERGE with RETURNING
 
-Now let's see how PostgreSQL 17's enhanced `MERGE` command can handle all three operations (`INSERT`, `UPDATE`, `DELETE`) while providing detailed feedback through the RETURNING clause:
+Now let's see how PostgreSQL 17's enhanced `MERGE` command can handle all three operations (`INSERT`, `UPDATE`, `DELETE`) while providing detailed feedback through the `RETURNING` clause:
 
 ```sql
 MERGE INTO products p
@@ -225,3 +225,53 @@ RETURNING
 ## Conclusion
 
 PostgreSQL 17's enhanced `MERGE` command with `RETURNING` clause support provides a powerful tool for data synchronization and maintenance. The ability to perform multiple operations in a single statement while getting immediate feedback makes it an invaluable feature for modern applications.
+
+## Frequently Asked Questions (FAQ)
+
+1.	What is the purpose of the MERGE statement in PostgreSQL?
+
+  - The `MERGE` statement allows you to conditionally `INSERT`, `UPDATE`, or `DELETE` rows in a target table based on the presence of matching records in a source table. This consolidates multiple operations into a single, efficient command.
+
+2.	When was the MERGE statement introduced in PostgreSQL?
+
+  - The `MERGE` statement was officially introduced in PostgreSQL version 15, released in October 2022.
+
+3.	How does the MERGE statement determine which operation to perform?
+
+  - The `MERGE` statement uses a specified `ON` condition to match rows between the source and target tables. Based on whether a match is found (`MATCHED`) or not (`NOT MATCHED`), and any additional conditions, it executes the corresponding `INSERT`, `UPDATE`, `DELETE`, or `DO NOTHING` actions.
+
+4.	Can I use the `MERGE` statement with views in PostgreSQL?
+
+  - Yes, starting from PostgreSQL 17, the `MERGE` command can be used with updatable views. For `MERGE` to work with views, the views must be consistent:
+  - Trigger-updatable views need `INSTEAD OF` triggers for all actions.
+	- Auto-updatable views cannot have any triggers.
+	- Mixing types of views or using rule-updatable views is not allowed.
+
+5.	What privileges are required to execute a `MERGE` statement?
+
+  - To execute a `MERGE` statement, you need:
+	- `SELECT` privilege on the source table or query.
+	- Appropriate privileges on the target table:
+  	- `INSERT` privilege for insert actions.
+  	- `UPDATE` privilege for update actions.
+  	- `DELETE` privilege for delete actions.
+
+6.	Is the `MERGE` statement atomic in PostgreSQL?
+
+  - Yes, the `MERGE` statement in PostgreSQL is atomic. This means all specified actions (`INSERT`, `UPDATE`, `DELETE`) are performed as a single unit. If an error occurs during execution, the entire operation is rolled back, ensuring data integrity.
+
+7.	Can I use the `RETURNING` clause with the `MERGE` statement?
+
+  - Yes, starting from PostgreSQL 17, the `MERGE` statement supports the `RETURNING` clause. This allows you to retrieve information about the rows affected by the `MERGE` operation, including the specific action performed (`INSERT`, `UPDATE`, or `DELETE`) on each row.
+
+8.	How does the `MERGE` statement handle concurrent data modifications?
+
+  - The `MERGE` statement ensures data consistency during concurrent operations by acquiring the necessary locks on the target table. This prevents other transactions from modifying the same rows simultaneously, thereby avoiding conflicts.
+
+9.	Are there any performance considerations when using the `MERGE` statement?
+
+  - While the `MERGE` statement simplifies complex operations into a single command, it’s essential to ensure that the `ON` condition is well-optimized, typically by indexing the columns involved. Proper indexing can significantly enhance performance.
+
+10.	Can I perform different actions based on additional conditions within the `MERGE` statement?
+
+- Yes, the `MERGE` statement allows for multiple `WHEN` clauses with additional conditions. This enables you to specify different actions (`INSERT`, `UPDATE`, `DELETE`, or `DO NOTHING`) based on various criteria, providing fine-grained control over the operation.
