@@ -189,9 +189,17 @@ To monitor usage in Vercel:
 When you install the Neon Postgres Native Integration from the Vercel Marketplace, you have access to all the same Neon plans that are available to anyone signing up for Neon directly. Changing your plan (upgrading or downgrading) is performed in Vercel.
 
 1. On the Vercel Dashboard, navigate to **Storage** tab.
-2. Select **Settings**.
-3. In the **Update configuration** section, select **Change Configuration**.
-4. Select the desired **Installation plan**, and click **Save**.
+2. Select your Neon Database.
+3. Select **Settings** from the sidebar.
+
+   ![Vercel settings](/docs/guides/vercel_settings.png)
+
+4. In the **Update configuration** section, select **Change Configuration**.
+
+   ![Vercel update configuration modal](/docs/guides/vercel_update_configuration.png)
+
+5. Select the desired **Installation plan**, and click **Save**.
+6. Follow the prompts to complete the plan change, providing your payment method if necessary.
 
 For an overview of Neon's plans, please visit our [Pricing](https://neon.tech/pricing) page.
 
