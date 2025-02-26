@@ -112,7 +112,7 @@ And here's a sample response showing incompatible subscription types:
 
 Use the Organization Transfer API to transfer projects between two specified organization accounts.
 
-`POST /organizations/{destination_org_id}/projects/transfer`
+`POST /organizations/{source_org_id}/projects/transfer`
 
 This requires:
 
@@ -127,7 +127,7 @@ This requires:
 
 ```bash
 curl --request POST \
-     --url 'https://console.neon.tech/api/v2/organizations/{destination_org_id}/projects/transfer' \
+     --url 'https://console.neon.tech/api/v2/organizations/{source_org_id}/projects/transfer' \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $PERSONAL_API_KEY' \
      --header 'content-type: application/json' \
@@ -135,12 +135,14 @@ curl --request POST \
   "project_ids": [
     "project-id-1",
     "project-id-2"
-  ]
+  ],
+  "destination_org_id": "destination-org-id"
 }'
 ```
 
 Where:
 
+- `source_org_id` (in URL path) is the organization where projects currently reside
 - `destination_org_id` is the organization receiving the projects
 - `project_ids` is an array of up to 400 project IDs to transfer
 
