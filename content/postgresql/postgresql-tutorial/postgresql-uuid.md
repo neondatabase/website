@@ -59,6 +59,17 @@ Output:
 (1 row)
 ```
 
+You can try the `gen_random_uuid()` function using the interactive SQL editor below. Running the query will provision a Postgres database on Neon, and you can execute the query to see the output.
+
+<SqlEditor
+defaultQuery={`SELECT gen_random_uuid();`}
+/>
+
+<SqlEditor
+defaultQuery={`INSERT INTO users (name, email) VALUES ('John Doe', 'john.doe@example.com');\nSELECT * FROM users;`}
+setupQuery="CREATE TABLE IF NOT EXISTS users (id SERIAL PRIMARY KEY, name VARCHAR(255), email VARCHAR(255));"
+/>
+
 ## Creating a table with a UUID column
 
 We will [create a table](postgresql-create-table) whose [primary key](postgresql-primary-key) is a UUID data type. Additionally, the values of the primary key column will be generated automatically using the `gen_random_uuid()` function.
