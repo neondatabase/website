@@ -236,7 +236,7 @@ PostgreSQL 17's enhanced `MERGE` command with `RETURNING` clause support provide
 
 - The `MERGE` statement was officially introduced in PostgreSQL version 15, released in October 2022.
 
-3. How does the MERGE statement determine which operation to perform?
+3. How does the `MERGE` statement determine which operation to perform?
 
 - The `MERGE` statement uses a specified `ON` condition to match rows between the source and target tables. Based on whether a match is found (`MATCHED`) or not (`NOT MATCHED`), and any additional conditions, it executes the corresponding `INSERT`, `UPDATE`, `DELETE`, or `DO NOTHING` actions.
 
