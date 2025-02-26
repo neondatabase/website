@@ -228,7 +228,7 @@ PostgreSQL 17's enhanced `MERGE` command with `RETURNING` clause support provide
 
 ## Frequently Asked Questions (FAQ)
 
-1. What is the purpose of the MERGE statement in PostgreSQL?
+1. What is the purpose of the `MERGE` statement in PostgreSQL?
 
 - The `MERGE` statement allows you to conditionally `INSERT`, `UPDATE`, or `DELETE` rows in a target table based on the presence of matching records in a source table. This consolidates multiple operations into a single, efficient command.
 
