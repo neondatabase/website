@@ -55,7 +55,7 @@ For example, the following declares a variable called `counter` with the type `i
 counter int = 0;
 ```
 
-Sometimes, you’ll see the :\= operator instead of \= operator. They are have the same meaning:
+Sometimes, you’ll see the :\= operator instead of \= operator. They have the same meaning:
 
 ```
 counter int := 0;
