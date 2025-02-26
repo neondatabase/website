@@ -174,7 +174,7 @@ If the function has many parameters, you should call it using the named notation
 
 ### 2\) Using named notation
 
-The following shows how to call the `get_film_count` function using the positional notation:
+The following shows how to call the `get_film_count` function using the named notation:
 
 ```sql
 select get_film_count(
