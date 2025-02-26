@@ -4,7 +4,7 @@ subtitle: Create a database branch for every preview deployment with Neon's nati
   Vercel integration
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-21T20:49:03.649Z'
+updatedOn: '2025-02-26T15:44:25.356Z'
 ---
 
 <InfoBlock>
