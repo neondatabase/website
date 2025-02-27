@@ -135,6 +135,8 @@ Extensions installations and updates are automatically applied to any read repli
 
 <ExtensionRequest />
 
+_We appreciate all extension requests. While we can’t guarantee support, we regularly review requests, prioritizing them based on criteria such as user demand, Neon’s product direction, and popularity within the Postgres ecosystem._
+
 ### Custom-built extensions
 
 For [Enterprise](/docs/introduction/plans#enterprise) plan customers, Neon supports custom-built Postgres extensions for exclusive use with your Neon account. If you developed your own Postgres extension and want to use it with Neon, please reach out to us as described above. Please include the following information in your request:
