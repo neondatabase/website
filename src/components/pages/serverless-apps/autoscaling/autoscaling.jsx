@@ -22,8 +22,14 @@ const Autoscaling = () => (
           webm: -c:v libvpx-vp9 -crf 20 -vf scale=1920:-2 -deadline best -an
         */}
         <PauseableVideo width={960} height={384}>
-          <source src="/videos/pages/serverless-apps/autoscaling.mp4" type="video/mp4" />
-          <source src="/videos/pages/serverless-apps/autoscaling.webm" type="video/webm" />
+          <source
+            src="/videos/pages/serverless-apps/autoscaling.mp4?updated=20250227160000"
+            type="video/mp4"
+          />
+          <source
+            src="/videos/pages/serverless-apps/autoscaling.webm?updated=20250227160000"
+            type="video/webm"
+          />
         </PauseableVideo>
         <p className="absolute bottom-0 left-0 max-w-[784px] p-6 font-light tracking-extra-tight text-gray-new-80 lg:relative lg:max-w-[605px] md:p-5">
           Neon integrates a pooler built on PgBouncer directly into its architecture: every endpoint
