@@ -21,7 +21,7 @@ const Autoscaling = () => (
           mp4: -pix_fmt yuv420p -vf scale=1920:-2 -movflags faststart -vcodec libx264 -crf 20
           webm: -c:v libvpx-vp9 -crf 20 -vf scale=1920:-2 -deadline best -an
         */}
-        <PauseableVideo className="" width={960} height={384}>
+        <PauseableVideo width={960} height={384}>
           <source src="/videos/pages/serverless-apps/autoscaling.mp4" type="video/mp4" />
           <source src="/videos/pages/serverless-apps/autoscaling.webm" type="video/webm" />
         </PauseableVideo>
