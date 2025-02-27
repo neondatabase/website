@@ -15,7 +15,7 @@ const TestimonialNew = ({
   isPriority,
 }) => (
   <div className={clsx('testimonial-new safe-paddings', className)}>
-    <Container className="lg:pt-18 relative px-16 pt-20 md:!px-5 md:pt-16" size="960">
+    <Container className="relative px-16 pt-20 lg:pt-[72px] md:!px-5 md:pt-16" size="960">
       <Image
         className="absolute left-1/2 top-0 -z-10 -ml-2.5 w-fit -translate-x-1/2 lg:h-20 md:h-[76px]"
         src={quoteIcon}

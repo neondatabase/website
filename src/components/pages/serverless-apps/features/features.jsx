@@ -141,7 +141,7 @@ const Features = () => (
               </h3>
               <p
                 className={clsx(
-                  'mt-2 text-lg font-light leading-snug tracking-extra-tight text-gray-new-70',
+                  'mt-2 text-lg font-light leading-snug tracking-extra-tight text-gray-new-70 lg:text-base md:text-sm',
                   '[&_a:hover]:border-white [&_a]:border-b [&_a]:border-gray-new-70 [&_a]:transition-colors [&_a]:duration-300'
                 )}
                 dangerouslySetInnerHTML={{ __html: desctiprion }}
@@ -149,11 +149,11 @@ const Features = () => (
               <ul className="mt-6 flex flex-wrap gap-3 lg:mt-4 lg:gap-x-2">
                 {features.map(({ title, icon }) => (
                   <li
-                    className="flex items-center gap-2.5 rounded-full border border-gray-new-15 px-5 py-3 lg:px-4 lg:py-2.5 md:px-3 md:py-2"
+                    className="flex h-10 items-center gap-2.5 rounded-full border border-gray-new-15 px-[18px] lg:h-[34px] lg:px-3 md:h-[30px]"
                     key={title}
                   >
-                    <Image className="md:size-[4.5]" src={icon} width="16" height="16" />
-                    <span className="text-[15px] font-medium leading-none text-[#E3E4E9] lg:text-sm md:text-xs">
+                    <Image className="md:size-[14px]" src={icon} width="16" height="16" />
+                    <span className="text-[15px] font-medium leading-none tracking-extra-tight text-[#E3E4E9] lg:text-sm md:text-xs">
                       {title}
                     </span>
                   </li>
