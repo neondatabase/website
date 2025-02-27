@@ -141,7 +141,7 @@ const Features = () => (
               </h3>
               <p
                 className={clsx(
-                  'mt-2 text-lg font-light leading-snug tracking-extra-tight text-gray-new-70 lg:text-base md:text-sm',
+                  'mt-2 text-lg font-light leading-snug tracking-extra-tight text-gray-new-70 lg:text-base',
                   '[&_a:hover]:border-white [&_a]:border-b [&_a]:border-gray-new-70 [&_a]:transition-colors [&_a]:duration-300'
                 )}
                 dangerouslySetInnerHTML={{ __html: desctiprion }}
@@ -153,7 +153,7 @@ const Features = () => (
                     key={title}
                   >
                     <Image className="md:size-[14px]" src={icon} width="16" height="16" />
-                    <span className="text-[15px] font-medium leading-none tracking-extra-tight text-[#E3E4E9] lg:text-sm md:text-xs">
+                    <span className="text-[15px] font-medium leading-none tracking-extra-tight text-[#E3E4E9] lg:text-sm">
                       {title}
                     </span>
                   </li>

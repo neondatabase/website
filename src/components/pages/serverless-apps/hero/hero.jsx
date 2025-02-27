@@ -30,7 +30,7 @@ const Hero = () => (
           'xl:mt-14 lg:mt-12 lg:px-7 lg:py-6 md:mt-10 md:p-6'
         )}
       >
-        <div className="sm: relative z-10 flex w-full gap-5 md:flex-col md:gap-8">
+        <div className="relative z-10 flex w-full gap-5 lg:gap-0 md:flex-col md:gap-8">
           <div className="flex-1">
             <h2 className="text-balance text-2xl font-medium leading-snug tracking-tighter">
               Why use Neon for serverless architectures:

@@ -6,12 +6,12 @@ const Autoscaling = () => (
     <Container className="flex flex-col items-center" size="960">
       <div className="flex w-full justify-between sm:flex-col sm:items-center sm:gap-4 sm:text-center">
         <h2 className="max-w-md font-title text-[48px] font-medium leading-[0.9] tracking-tighter xl:text-[44px] xl:leading-none lg:max-w-xs lg:text-4xl sm:max-w-full sm:text-[32px]">
-          Thousands of connections and real&#8209;time autoscaling
+          Thousands of connections and real-time autoscaling
         </h2>
         <p className="mt-1 max-w-md text-lg font-light leading-snug tracking-extra-tight text-gray-new-70 xl:font-normal xl:tracking-extra-tight lg:mt-0 lg:max-w-[266px] lg:text-base sm:max-w-full">
           Neon autoscales CPU and memory in real time based on your workload. Our autoscaling
           algorithm dynamically allocates compute resources, reducing your bill — you no longer need
-          to provision for peak —while ensuring good performance.
+          to provision for peak — while ensuring good performance.
         </p>
       </div>
       <div className="relative mt-10 w-full">
