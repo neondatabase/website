@@ -23,15 +23,15 @@ const Autoscaling = () => (
         */}
         <PauseableVideo width={960} height={384}>
           <source
-            src="/videos/pages/serverless-apps/autoscaling.mp4?updated=20250227160000"
+            src="/videos/pages/serverless-apps/autoscaling.mp4?updated=20250227180000"
             type="video/mp4"
           />
           <source
-            src="/videos/pages/serverless-apps/autoscaling.webm?updated=20250227160000"
+            src="/videos/pages/serverless-apps/autoscaling.webm?updated=20250227180000"
             type="video/webm"
           />
         </PauseableVideo>
-        <p className="absolute bottom-0 left-0 max-w-[784px] p-6 font-light tracking-extra-tight text-gray-new-80 lg:relative lg:max-w-[605px] md:p-5">
+        <p className="absolute bottom-0 left-0 z-10 max-w-[784px] p-6 font-light tracking-extra-tight text-gray-new-80 lg:relative lg:max-w-[605px] md:p-5">
           Neon integrates a pooler built on PgBouncer directly into its architecture: every endpoint
           has connection pooling enabled. Connections scale automatically with traffic up to 10,000
           concurrently.

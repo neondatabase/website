@@ -76,9 +76,11 @@ const Hero = () => (
             </Button>
           </div>
         </div>
-        <span className="pointer-events-none absolute -top-3 right-0 h-[273px] w-[230px] -translate-y-full translate-x-1/2 rounded-[100%] bg-[#CF9FFF] opacity-50 mix-blend-plus-lighter blur-2xl" />
-        <span className="pointer-events-none absolute -right-5 -top-6 h-[224px] w-[403px] -translate-y-full rounded-[100%] bg-[#00E5BF] opacity-80 mix-blend-plus-lighter blur-2xl" />
+        <span className="pointer-events-none absolute -bottom-[148px] -left-[65px] h-[360px] w-[265px] rotate-[140deg] rounded-[100%] bg-[#0B1228] opacity-20 blur-3xl" />
         <span className="pointer-events-none absolute -right-[110px] top-32 h-[451px] w-[348px] -translate-y-full rotate-[109deg] rounded-[100%] bg-gradient-to-b from-[#00E5BF] to-transparent opacity-30 blur-3xl" />
+        <span className="pointer-events-none absolute -right-5 -top-6 h-[224px] w-[403px] -translate-y-full rounded-[100%] bg-[#00E5BF] opacity-80 mix-blend-plus-lighter blur-2xl" />
+        <span className="pointer-events-none absolute -top-3 right-0 h-[273px] w-[230px] -translate-y-full translate-x-1/2 rounded-[100%] bg-[#CF9FFF] opacity-50 mix-blend-plus-lighter blur-2xl" />
+        <span className="pointer-events-none absolute inset-px rounded-[inherit] bg-[url('/images/bg-pattern.png')] bg-[6px,3.45px]" />
         <span className="pointer-events-none absolute bottom-6 right-[310px] top-5 border-l border-dashed border-white mix-blend-overlay lg:inset-y-6 lg:right-[282px] md:hidden" />
         <GradientBorder className="border-image-serverless-apps-hero-border" />
       </div>
