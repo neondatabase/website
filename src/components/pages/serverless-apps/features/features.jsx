@@ -120,7 +120,7 @@ const Features = () => (
       <h2 className="text-center font-title text-[52px] font-medium leading-none tracking-tighter xl:text-[48px] lg:text-[44px] md:text-4xl">
         True serverless Postgres
       </h2>
-      <ul className="mt-20 flex flex-col gap-[120px] lg:mt-16 lg:gap-[104px] md:mx-auto md:mt-14 md:max-w-[448px] md:gap-14">
+      <ul className="mt-20 flex flex-col gap-[120px] lg:mt-16 lg:gap-[104px] md:mx-auto md:mt-14 md:max-w-md md:gap-14">
         {items.map(({ title, desctiprion, features, image }, index) => (
           <li
             className="grid grid-cols-2 items-center gap-16 lg:gap-8 md:grid-cols-1 md:gap-[18px]"
@@ -132,10 +132,12 @@ const Features = () => (
                 src={image.src}
                 width="448"
                 height={image.height}
+                alt={title}
+                quality={99}
               />
               <span className="pointer-events-none absolute inset-0 rounded-[inherit] border border-gray-new-20/30" />
             </div>
-            <div className={clsx(index % 2 === 1 && '-order-1 md:order-none')}>
+            <div className={clsx('relative', index % 2 === 1 && '-order-1 md:order-none')}>
               <h3 className="text-2xl font-medium leading-snug tracking-extra-tight lg:text-xl md:text-lg">
                 {title}
               </h3>

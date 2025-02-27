@@ -17,7 +17,7 @@ const TestimonialNew = ({
   <div className={clsx('testimonial-new safe-paddings', className)}>
     <Container className="relative px-16 pt-[68px] lg:pt-[60px] md:pt-[52px]" size="960">
       <Image
-        className="absolute left-1/2 top-0 -z-10 -ml-2.5 -mt-7 -translate-x-1/2 lg:h-20 md:h-[76px]"
+        className="absolute left-1/2 top-0 -z-10 -ml-2.5 -mt-7 -translate-x-1/2 lg:h-20 lg:w-auto md:h-[72px]"
         src={quoteIcon}
         width={104}
         height={89}
@@ -35,7 +35,7 @@ const TestimonialNew = ({
             {quote}
           </p>
         </blockquote>
-        <figcaption className="mt-6 flex items-center justify-center text-lg font-light leading-tight tracking-tight text-gray-new-70 lg:mt-5 lg:text-base md:flex-col md:text-sm">
+        <figcaption className="mt-5 flex items-center justify-center text-lg font-light leading-tight tracking-tight text-gray-new-70 lg:mt-[18px] lg:text-base md:flex-col md:text-sm">
           {avatar && (
             <Image
               className="mr-2.5 rounded-full md:mx-auto"
