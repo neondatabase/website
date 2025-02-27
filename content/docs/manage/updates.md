@@ -148,9 +148,9 @@ For compute restart instructions, see [Restart a compute](/docs/manage/endpoints
 
 # Updating large computes
 
-Computes larger than 8 CU or configured to scale past 8 CU are not updated automatically (_scheduled updates do not apply to these computes_). To receive updates, you need to restart them. A restart may happen automatically due to [scale to zero](/docs/introduction/scale-to-zero), but if scale to zero is disabled or your compute runs continuously, you'll need to plan regular restarts.  
+Computes larger than 8 CU or configured to scale past 8 CU are not updated automatically (_scheduled updates do not apply to these computes_). To receive updates, you need to restart them. A restart may happen automatically due to [scale to zero](/docs/introduction/scale-to-zero), but if scale to zero is disabled or your compute runs continuously, you'll need to plan regular restarts.
 
-Neon typically releases compute updates weekly, so we recommend scheduling weekly compute restarts.  
+Neon typically releases compute updates weekly, so we recommend scheduling weekly compute restarts.
 
 For restart instructions, see [Restart a compute](/docs/manage/endpoints#restart-a-compute).
 
