@@ -97,6 +97,7 @@ export default {
     description:
       'Scale your app effortlessly with Neon’s serverless Postgres. With automatic scaling, pooler built on pgBouncer, and usage-based pricing.',
     pathname: `${LINKS.useCases}/serverless-apps`,
+    imagePath: '/images/social-previews/serverless-apps.jpg',
   },
   generateTicket: {
     title: 'Grab the ticket for Neon Deploy',
