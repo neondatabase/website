@@ -30,7 +30,7 @@ const Autoscaling = () => (
           has connection pooling enabled. Connections scale automatically with traffic up to 10,000
           concurrently.
         </p>
-        <GradientBorder className="hidden lg:block" withBlend />
+        <GradientBorder withBlend />
       </div>
     </Container>
   </section>
