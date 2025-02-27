@@ -31,7 +31,7 @@ Neon applies updates to computes based on the following rules:
 - Computes that have been active for 30 days or more receive updates.
 - Computes that are restarted receive available updates immediately.
 - Computes in a transition state (e.g., shutting down or restarting) at the time of an update are not updated.
-- Computes larger than 8 CU are not updated.
+- Computes larger than 8 CU or that can scale past 8 CU are not updated automatically. See [Updating large computes](#updating-large-computes).
 
 If a compute is excluded from an update, Neon will apply the missed update with the next update, assuming the compute meets the update criteria mentioned above.
 
@@ -145,6 +145,14 @@ Computes receive available updates immediately upon restart. For example, if Neo
 If a compute regularly scales to zero, it will receive updates when it starts up again. In such cases, you may not need to pay much attention to update notifications, as updates will be applied naturally through your compute's stop/start cycles.
 
 For compute restart instructions, see [Restart a compute](/docs/manage/endpoints#restart-a-compute).
+
+# Updating large computes
+
+Computes larger than 8 CU or configured to scale past 8 CU are not updated automatically (_scheduled updates do not apply to these computes_). To receive updates, you need to restart them. A restart may happen automatically due to [scale to zero](/docs/introduction/scale-to-zero), but if scale to zero is disabled or your compute runs continuously, you'll need to plan regular restarts.  
+
+Neon typically releases compute updates weekly, so we recommend scheduling weekly compute restarts.  
+
+For restart instructions, see [Restart a compute](/docs/manage/endpoints#restart-a-compute).
 
 ## Handling connection disruptions
 
