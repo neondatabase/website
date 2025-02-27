@@ -154,7 +154,13 @@ const Features = () => (
                     className="flex h-10 items-center gap-2.5 rounded-full border border-gray-new-15 px-[18px] lg:h-[34px] lg:px-3 md:h-[30px]"
                     key={title}
                   >
-                    <Image className="md:size-[14px]" src={icon} width="16" height="16" />
+                    <Image
+                      className="md:size-[14px]"
+                      src={icon}
+                      width="16"
+                      height="16"
+                      alt={title}
+                    />
                     <span className="text-[15px] font-medium leading-none tracking-extra-tight text-[#E3E4E9] lg:text-sm">
                       {title}
                     </span>

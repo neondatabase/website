@@ -43,7 +43,7 @@ const Hero = () => (
                     src={checkIcon}
                     width={16}
                     height={16}
-                    alt=""
+                    alt="check"
                     priority
                   />
                   <p className="tracking-extra-tight text-gray-new-90 lg:text-[15px] md:text-base">
