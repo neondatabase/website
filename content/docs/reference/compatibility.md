@@ -195,7 +195,7 @@ Currently, Postgres server logs can only be accessed Neon Support team. Should y
 
 ## Unlogged tables
 
-Unlogged tables are maintained on Neon compute local storage. These tables do not survive compute restarts (including when a Neon compute is placed into an idle state after a period of inactivity). This is unlike a standalone Postgres installation, where unlogged tables are only truncated in the event of abnormal process termination. Additionally, unlogged tables are limited by compute local storage size.
+Unlogged tables are maintained on Neon compute local storage. These tables do not survive compute restarts (including when a Neon compute is placed into an idle state after a period of inactivity). This is unlike a standalone Postgres installation, where unlogged tables are only truncated in the event of abnormal process termination. Additionally, unlogged tables are limited by compute local disk space. Neon computes allocate 20 GiB of local disk space or 15 GiB x the maximum compute size (whichever is highest) for temporary files used by Postgres.
 
 ## Memory
 
