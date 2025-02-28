@@ -7,7 +7,7 @@ updatedOn: '2025-02-26T19:49:47.776Z'
 As an Admin or Member of an organization, you can transfer projects in the following ways:
 
 - From personal accounts to organizations
-- Between different organizations (via API)
+- Between different organizations
 
 This guide explains how to transfer projects using both the UI and API methods, and covers important requirements and limitations.
 
@@ -27,7 +27,8 @@ The number of projects you can transfer is limited by the target Organization pl
 
 ### Requirements
 
-- Minimum **Member** role in the target Organization. **Admin** role if tranferring from an organization.
+- Minimum **Member** role in the target Organization
+- **Admin** role in the source organization when transferring between organizations
 - Compatible billing plans (can transfer from higher to lower tier, not vice versa)
 - Projects must not have GitHub or Vercel integrations
 - Vercel-managed organizations are not supported
@@ -39,11 +40,15 @@ The number of projects you can transfer is limited by the target Organization pl
 
 ## Transfer from the Neon Console
 
-You can transfer individual projects by selecting each project to transfer from your personal account, or you can transfer in bulk by starting from the destination Organization.
+You can transfer projects in a few ways:
+
+- Individual projects from your personal account to an organization
+- Individual projects between organizations
+- Bulk transfers from your personal account to an organization
 
 ### Transfer a single project
 
-Make sure you're in your personal account. Find the project you want to transfer, then start the Transfer from under projects settings.
+From your project's **Settings** page, select the **Transfer** tab and choose a destination from your member organizations. For organization projects, Admin permissions are required to initiate the transfer.
 
 ![transfer single project](/docs/manage/transfer_single.gif)
 
