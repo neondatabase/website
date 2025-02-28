@@ -15,6 +15,7 @@ import speedIcon from 'icons/serverless-apps/features/speed.svg';
 import storageIcon from 'icons/serverless-apps/features/storage.svg';
 import timerIcon from 'icons/serverless-apps/features/timer.svg';
 import noServer from 'images/pages/serverless-apps/features/no-server.jpg';
+import paySm from 'images/pages/serverless-apps/features/pay-sm.jpg';
 import pay from 'images/pages/serverless-apps/features/pay.jpg';
 import provisioning from 'images/pages/serverless-apps/features/provisioning.jpg';
 import separation from 'images/pages/serverless-apps/features/separation.jpg';
@@ -111,6 +112,12 @@ const items = [
       src: pay,
       height: 326,
     },
+    imageSm: {
+      src: paySm,
+      height: 244,
+    },
+    imageText:
+      'Typical CPU utilization pattern in a production database in RDS. Traffic peaks once per day up to 60% capacity, going down to 10% capacity for the rest of the day. Based on a real use case.',
   },
 ];
 
@@ -120,21 +127,36 @@ const Features = () => (
       <h2 className="text-center font-title text-[52px] font-medium leading-none tracking-tighter xl:text-[48px] lg:text-[44px] md:text-4xl">
         True serverless Postgres
       </h2>
-      <ul className="mt-20 flex flex-col gap-[120px] lg:mt-16 lg:gap-[104px] md:mx-auto md:mt-14 md:max-w-md md:gap-14">
-        {items.map(({ title, desctiprion, features, image }, index) => (
+      <ul className="mt-20 flex flex-col gap-[120px] lg:mx-auto lg:mt-16 lg:max-w-3xl lg:gap-[104px] md:mt-14 md:max-w-sm md:gap-14">
+        {items.map(({ title, desctiprion, features, image, imageSm, imageText }, index) => (
           <li
             className="grid grid-cols-2 items-center gap-16 lg:gap-8 md:grid-cols-1 md:gap-[18px]"
             key={title}
           >
-            <div className="relative rounded-[10px]">
+            <div className="relative overflow-hidden rounded-[10px] lg:rounded-lg">
               <Image
-                className="rounded-[inherit]"
+                className={clsx('rounded-[inherit]', imageSm && 'lg:hidden')}
                 src={image.src}
                 width="448"
                 height={image.height}
                 alt={title}
                 quality={99}
               />
+              {imageSm && (
+                <Image
+                  className={clsx('hidden rounded-[inherit] lg:block')}
+                  src={imageSm.src}
+                  width="448"
+                  height={imageSm.height}
+                  alt={title}
+                  quality={99}
+                />
+              )}
+              {imageText && (
+                <p className="absolute inset-x-0 bottom-0 text-pretty p-4 text-sm font-light leading-snug tracking-extra-tight text-gray-new-50 lg:px-3 lg:py-2.5 lg:text-[13px] sm:px-2.5 sm:py-2 xs:text-[3.6vw]">
+                  {imageText}
+                </p>
+              )}
               <span className="pointer-events-none absolute inset-0 rounded-[inherit] border border-gray-new-20/30" />
             </div>
             <div className={clsx('relative', index % 2 === 1 && '-order-1 md:order-none')}>

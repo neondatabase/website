@@ -31,7 +31,7 @@ const Autoscaling = () => (
             type="video/webm"
           />
         </PauseableVideo>
-        <p className="absolute bottom-0 left-0 z-10 max-w-[784px] p-6 font-light tracking-extra-tight text-gray-new-80 lg:relative lg:max-w-[605px] md:p-5">
+        <p className="absolute bottom-0 left-0 z-10 max-w-[784px] text-pretty p-6 font-light tracking-extra-tight text-gray-new-80 lg:relative lg:max-w-[605px] md:p-5 sm:p-4 sm:text-sm">
           Neon integrates a pooler built on PgBouncer directly into its architecture: every endpoint
           has connection pooling enabled. Connections scale automatically with traffic up to 10,000
           concurrently.
