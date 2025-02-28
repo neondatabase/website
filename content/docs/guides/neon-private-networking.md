@@ -270,4 +270,32 @@ The Neon API provides endpoints for managing VPC endpoints and project-level VPC
 
 The Private Networking feature supports a maximum of **10 private networking configurations per AWS region**. Supported AWS regions are listed [above](#create-an-aws-vpc-endpoint).
 
+## Using Private Networking with Vercel Enterprise
+
+<Admonition type="note">
+Private Networking with Vercel Secure Compute requires managed setup by Vercel. This feature is only available to Vercel Enterprise customers using [Secure Compute](https://vercel.com/docs/security/secure-compute). Please contact your Vercel account representative to enable this feature.
+</Admonition>
+
+If you're a Vercel Enterprise customer using Secure Compute, you can configure private network connectivity between your Vercel project and your Neon database using AWS PrivateLink. This allows your application to connect to Neon without exposing the database to the public internet.
+
+### Requirements
+
+- A Vercel Enterprise account with Secure Compute enabled
+- A Neon account on the [Business or Enterprise plan](/docs/introduction/plans)
+- Your Vercel project and Neon database must be in the same AWS region
+- The Neon Postgres Previews Integration cannot be installed on the same Vercel Project
+
+### Setup process
+
+1. Contact your Vercel account representative to initiate the setup
+2. Vercel will create a VPC endpoint in your Secure Compute VPC and provide you with the endpoint ID
+3. Follow steps 2-4 in the [Configuration steps](#configuration-steps) section above to:
+   - Add the VPC Endpoint ID to your Neon organization
+   - Check your database connection string
+   - Optionally restrict public internet access
+
+<Admonition type="tip">
+Your database connection string remains the same. The private connection is handled automatically when accessing your database from within your Secure Compute environment.
+</Admonition>
+
 <NeedHelp />
