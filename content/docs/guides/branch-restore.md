@@ -7,7 +7,7 @@ redirectFrom:
   - /docs/guides/branching-pitr
   - /docs/guides/branch-refresh
   - /docs/guides/branch-promote
-updatedOn: '2024-10-22T15:41:04.374Z'
+updatedOn: '2025-02-28T11:10:41.825Z'
 ---
 
 With Neon's branch restore capability, you can easily restore a branch to an earlier state in its own or another branch's history. You can use Time Travel Assist to connect to a specific point in your history retention window, where you can run read-only queries to pinpoint the exact moment you need to restore to. You can also use Schema Diff to get a side-by-side, GitHub-style visual comparison of your selected branches before restoring.
