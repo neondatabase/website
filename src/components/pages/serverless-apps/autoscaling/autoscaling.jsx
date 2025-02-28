@@ -21,7 +21,11 @@ const Autoscaling = () => (
           mp4: -pix_fmt yuv420p -vf scale=1920:-2 -movflags faststart -vcodec libx264 -crf 20
           webm: -c:v libvpx-vp9 -crf 20 -vf scale=1920:-2 -deadline best -an
         */}
-        <PauseableVideo width={960} height={384}>
+        <PauseableVideo
+          className="relative z-10 [mask-image:linear-gradient(180deg,black_calc(100%-70px),transparent)]"
+          width={960}
+          height={384}
+        >
           <source
             src="/videos/pages/serverless-apps/autoscaling.mp4?updated=20250227180000"
             type="video/mp4"
@@ -36,6 +40,13 @@ const Autoscaling = () => (
           has connection pooling enabled. Connections scale automatically with traffic up to 10,000
           concurrently.
         </p>
+        <div className="pointer-events-none absolute inset-0 hidden mix-blend-plus-lighter lg:block">
+          <span className="absolute left-1/4 top-1/3 h-[10%] w-[9%] -rotate-[68deg] rounded-[100%] bg-[#355696] blur-3xl" />
+          <span className="absolute bottom-4 left-4 h-3/4 w-[18%] -rotate-[68deg] rounded-[100%] bg-[#5452A3] opacity-20 mix-blend-plus-lighter blur-3xl" />
+          <span className="absolute -top-[12%] right-[20%] h-3/4 w-[23%] -rotate-[68deg] rounded-[100%] bg-[#393749] blur-3xl" />
+          <span className="absolute right-4 top-[12%] h-2/3 w-1/5 -rotate-[68deg] rounded-[100%] bg-[#3E486C] blur-3xl" />
+          <span className="absolute -right-20 top-5 h-2/3 w-2/3 rounded-[100%] bg-[#667CA8] opacity-40 mix-blend-color-dodge blur-2xl" />
+        </div>
         <GradientBorder withBlend />
       </div>
     </Container>
