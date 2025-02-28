@@ -24,7 +24,7 @@ const items = [
   {
     title: 'Separation of compute and storage',
     desctiprion:
-      '<a href="/docs/introduction/architecture-overview">Neon’s architecture</a> decouples compute and storage layers. Compute nodes handle query execution, while the storage layer persists data on distributed, highly durable object storage.</a>',
+      '<a href="/blog/architecture-decisions-in-neon">Neon’s architecture</a> decouples compute and storage layers. Compute nodes handle query execution, while the storage layer persists data on distributed, highly durable object storage.</a>',
     features: [
       {
         title: 'Elastic scaling',
@@ -166,7 +166,7 @@ const Features = () => (
               <p
                 className={clsx(
                   'mt-2 text-lg font-light leading-snug tracking-extra-tight text-gray-new-70 lg:text-base',
-                  '[&_a:hover]:border-white [&_a]:border-b [&_a]:border-gray-new-70 [&_a]:transition-colors [&_a]:duration-300'
+                  '[&_a:hover]:border-gray-new-70 [&_a]:border-b [&_a]:border-gray-new-70/40 [&_a]:font-normal [&_a]:transition-colors [&_a]:duration-300'
                 )}
                 dangerouslySetInnerHTML={{ __html: desctiprion }}
               />

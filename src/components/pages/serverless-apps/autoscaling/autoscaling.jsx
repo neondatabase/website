@@ -1,6 +1,9 @@
+import clsx from 'clsx';
+
 import Container from 'components/shared/container/container';
 import GradientBorder from 'components/shared/gradient-border/index';
 import PauseableVideo from 'components/shared/pauseable-video';
+import LINKS from 'constants/links';
 
 const Autoscaling = () => (
   <section className="autoscaling safe-paddings pt-40 xl:pt-[136px] lg:pt-[108px] md:pt-20">
@@ -9,10 +12,16 @@ const Autoscaling = () => (
         <h2 className="max-w-md font-title text-[48px] font-medium leading-[0.9] tracking-tighter xl:text-[44px] xl:leading-none lg:flex-1 lg:text-4xl sm:max-w-full sm:text-[32px]">
           Thousands of connections and real-time autoscaling
         </h2>
-        <p className="mt-1 max-w-md text-lg font-light leading-snug tracking-extra-tight text-gray-new-70 xl:font-normal xl:tracking-extra-tight lg:mt-0 lg:flex-1 lg:text-base sm:max-w-full">
-          Neon autoscales CPU and memory in real time based on your workload. Our autoscaling
-          algorithm dynamically allocates compute resources, reducing your bill — you no longer need
-          to provision for peak — while ensuring good performance.
+        <p
+          className={clsx(
+            'mt-1 max-w-md text-lg font-light leading-snug tracking-extra-tight text-gray-new-70 xl:font-normal xl:tracking-extra-tight lg:mt-0 lg:flex-1 lg:text-base sm:max-w-full',
+            '[&_a:hover]:border-gray-new-70 [&_a]:border-b [&_a]:border-gray-new-70/40 [&_a]:transition-colors [&_a]:duration-300'
+          )}
+        >
+          Neon autoscales CPU and memory in real time based on your workload. Our{' '}
+          <a href={`${LINKS.blog}/architecture-decisions-in-neon`}>autoscaling algorithm</a>{' '}
+          dynamically allocates compute resources, reducing your bill — you no longer need to
+          provision for peak — while ensuring good performance.
         </p>
       </header>
       <div className="relative mt-10 w-full overflow-hidden rounded-[10px] bg-[#0A0A0A]">
@@ -35,10 +44,18 @@ const Autoscaling = () => (
             type="video/webm"
           />
         </PauseableVideo>
-        <p className="absolute bottom-0 left-0 z-10 max-w-[784px] text-pretty p-6 font-light tracking-extra-tight text-gray-new-80 lg:relative lg:max-w-[605px] md:p-5 sm:p-4 sm:text-sm">
-          Neon integrates a pooler built on PgBouncer directly into its architecture: every endpoint
-          has connection pooling enabled. Connections scale automatically with traffic up to 10,000
-          concurrently.
+        <p
+          className={clsx(
+            'absolute bottom-0 left-0 z-10 max-w-[784px] text-pretty p-6 font-light tracking-extra-tight text-gray-new-80 lg:relative lg:max-w-[605px] md:p-5 sm:p-4 sm:text-sm',
+            '[&_a:hover]:border-gray-new-70 [&_a]:border-b [&_a]:border-gray-new-70/40 [&_a]:transition-colors [&_a]:duration-300'
+          )}
+        >
+          Neon integrates a pooler built on{' '}
+          <a href="https://www.pgbouncer.org/" target="_blank" rel="noopener noreferrer">
+            PgBouncer
+          </a>{' '}
+          directly into its architecture: every endpoint has connection pooling enabled. Connections
+          scale automatically with traffic up to 10,000 concurrently.
         </p>
         <div className="pointer-events-none absolute inset-0 hidden mix-blend-plus-lighter lg:block">
           <span className="absolute left-1/4 top-[40%] h-1/5 w-1/5 -rotate-[68deg] rounded-[100%] bg-[#355696] blur-3xl" />

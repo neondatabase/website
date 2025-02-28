@@ -4,7 +4,6 @@ import Image from 'next/image';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container/container';
 import GradientBorder from 'components/shared/gradient-border';
-import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import checkIcon from 'icons/serverless-apps/check.svg';
 
@@ -57,15 +56,13 @@ const Hero = () => (
             <h3 className="text-balance text-xl font-medium leading-snug tracking-tighter md:text-2xl">
               Sign up to get the Free Plan, plus $100 in credits
             </h3>
-            <p className="mt-2 text-pretty font-light leading-snug tracking-extra-tight text-gray-new-70 xl:font-normal">
-              ...or{' '}
-              <Link
-                className="border-b border-gray-new-70/40 font-normal transition-colors duration-200 hover:border-white"
-                to={LINKS.contactSales}
-              >
-                talk to our team
-              </Link>{' '}
-              if you have any questions.
+            <p
+              className={clsx(
+                'mt-2 text-pretty font-light leading-snug tracking-extra-tight text-gray-new-70 xl:font-normal',
+                '[&_a:hover]:border-gray-new-70 [&_a]:border-b [&_a]:border-gray-new-70/40 [&_a]:font-normal [&_a]:transition-colors [&_a]:duration-300'
+              )}
+            >
+              ...or <a href={LINKS.contactSales}>talk to our team</a> if you have any questions.
             </p>
             <Button
               className="mt-5 h-11 w-full font-semibold tracking-tighter"
