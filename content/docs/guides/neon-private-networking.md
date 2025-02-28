@@ -266,17 +266,13 @@ The Neon API provides endpoints for managing VPC endpoints and project-level VPC
 - [Assign or update a VPC endpoint restriction](https://api-docs.neon.tech/reference/assignprojectvpcendpoint)
 - [Delete a VPC endpoint restriction](https://api-docs.neon.tech/reference/deleteprojectvpcendpoint)
 
-## Limits
-
-The Private Networking feature supports a maximum of **10 private networking configurations per AWS region**. Supported AWS regions are listed [above](#create-an-aws-vpc-endpoint).
-
 ## Using Private Networking with Vercel Enterprise
 
-<Admonition type="note">
-Private Networking with Vercel Secure Compute requires managed setup by Vercel. This feature is only available to Vercel Enterprise customers using [Secure Compute](https://vercel.com/docs/security/secure-compute). Please contact your Vercel account representative to enable this feature.
-</Admonition>
-
 If you're a Vercel Enterprise customer using Secure Compute, you can configure private network connectivity between your Vercel project and your Neon database using AWS PrivateLink. This allows your application to connect to Neon without exposing the database to the public internet.
+
+<Admonition type="note">
+This managed feature is only available to Vercel Enterprise customers using [Secure Compute](https://vercel.com/docs/security/secure-compute). Please contact your Vercel account representative to enable this feature.
+</Admonition>
 
 ### Requirements
 
@@ -297,5 +293,9 @@ If you're a Vercel Enterprise customer using Secure Compute, you can configure p
 <Admonition type="tip">
 Your database connection string remains the same. The private connection is handled automatically when accessing your database from within your Secure Compute environment.
 </Admonition>
+
+## Limits
+
+The Private Networking feature supports a maximum of **10 private networking configurations per AWS region**. Supported AWS regions are listed [above](#create-an-aws-vpc-endpoint).
 
 <NeedHelp />
