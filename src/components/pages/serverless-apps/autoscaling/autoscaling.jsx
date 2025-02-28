@@ -41,11 +41,11 @@ const Autoscaling = () => (
           concurrently.
         </p>
         <div className="pointer-events-none absolute inset-0 hidden mix-blend-plus-lighter lg:block">
-          <span className="absolute left-1/4 top-1/3 h-[10%] w-[9%] -rotate-[68deg] rounded-[100%] bg-[#355696] blur-3xl" />
+          <span className="absolute left-1/4 top-[40%] h-1/5 w-1/5 -rotate-[68deg] rounded-[100%] bg-[#355696] blur-3xl" />
           <span className="absolute bottom-4 left-4 h-3/4 w-[18%] -rotate-[68deg] rounded-[100%] bg-[#5452A3] opacity-20 mix-blend-plus-lighter blur-3xl" />
           <span className="absolute -top-[12%] right-[20%] h-3/4 w-[23%] -rotate-[68deg] rounded-[100%] bg-[#393749] blur-3xl" />
           <span className="absolute right-4 top-[12%] h-2/3 w-1/5 -rotate-[68deg] rounded-[100%] bg-[#3E486C] blur-3xl" />
-          <span className="absolute -right-20 top-5 h-2/3 w-2/3 rounded-[100%] bg-[#667CA8] opacity-40 mix-blend-color-dodge blur-2xl" />
+          <span className="absolute -right-20 top-5 h-2/3 w-2/3 rounded-[100%] bg-[#667CA8] opacity-40 mix-blend-color-dodge blur-2xl xs:opacity-20" />
         </div>
         <GradientBorder withBlend />
       </div>
