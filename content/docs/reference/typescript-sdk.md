@@ -1,7 +1,7 @@
 ---
 title: TypeScript SDK for the Neon API
 enableTableOfContents: true
-updatedOn: '2025-02-28T12:02:19.640Z'
+updatedOn: '2025-02-28T12:08:12.273Z'
 ---
 
 <InfoBlock>
