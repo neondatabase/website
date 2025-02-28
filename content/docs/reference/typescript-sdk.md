@@ -100,7 +100,7 @@ async function listNeonProjects() {
     const response = await apiClient.listProjects({});
     console.log(response.data.projects);
   } catch (error) {
-    console.error("Error listing projects:", error);
+    console.error('Error listing projects:', error);
   }
 }
 
@@ -170,21 +170,21 @@ async function createNeonProject(projectName: string) {
       project: {
         name: projectName,
         region_id: 'aws-us-east-1',
-        pg_version: 17
+        pg_version: 17,
       },
     });
-    console.log("Project created:", response.data.project);
-    console.log("Project ID:", response.data.project.id);
-    console.log("Database connection string:", response.data.connection_uris[0].connection_uri);
+    console.log('Project created:', response.data.project);
+    console.log('Project ID:', response.data.project.id);
+    console.log('Database connection string:', response.data.connection_uris[0].connection_uri);
   } catch (error) {
-    console.error("Error creating project:", error);
+    console.error('Error creating project:', error);
     throw error;
   }
 }
 
 // Example usage: Create a project named "test-project"
-createNeonProject("test-project").catch(error => {
-  console.error("Error creating project:", error.message);
+createNeonProject('test-project').catch((error) => {
+  console.error('Error creating project:', error.message);
 });
 ```
 
@@ -211,23 +211,25 @@ async function createNeonBranch(projectId: string, branchName: string, parentBra
         name: branchName,
         parent_id: parentBranchId, // Optional: Specify a source branch. If omitted, the default branch will be used
       },
-      endpoints: [{
-        type: EndpointType.ReadWrite, // If you need read-only access, use EndpointType.ReadOnly,
-        // Optional: Specify the number of compute units (CU) for the endpoint. If omitted, the default value is 0.25 for both min and max.
-        // autoscaling_limit_min_cu: 0.25,
-        // autoscaling_limit_max_cu: 1,
-      }]
+      endpoints: [
+        {
+          type: EndpointType.ReadWrite, // If you need read-only access, use EndpointType.ReadOnly,
+          // Optional: Specify the number of compute units (CU) for the endpoint. If omitted, the default value is 0.25 for both min and max.
+          // autoscaling_limit_min_cu: 0.25,
+          // autoscaling_limit_max_cu: 1,
+        },
+      ],
     });
-    console.log("Branch created:", response.data.branch);
+    console.log('Branch created:', response.data.branch);
   } catch (error) {
-    console.error("Error creating branch:", error);
+    console.error('Error creating branch:', error);
     throw error;
   }
 }
 
 // Example usage: Create a branch named "dev-1" in the project with ID "your-project-id"
-createNeonBranch("your-project-id", "dev-1").catch(error => {
-  console.error("Error creating branch:", error.message);
+createNeonBranch('your-project-id', 'dev-1').catch((error) => {
+  console.error('Error creating branch:', error.message);
 });
 ```
 
@@ -236,8 +238,6 @@ createNeonBranch("your-project-id", "dev-1").catch(error => {
 - `parent_id` (optional): Specifies the branch to branch from. If omitted, the project's default branch is used.
 - `EndpointType`: Enum to define endpoint type (`ReadWrite` or `ReadOnly`).
 - Compute Unit (CU) customization (optional): Control compute size using `autoscaling_limit_min_cu` and `autoscaling_limit_max_cu`. Refer to [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration) for available options.
-
-
 
 ### List Branches
 
@@ -253,16 +253,16 @@ const apiClient = createApiClient({
 async function listNeonBranches(projectId: string) {
   try {
     const response = await apiClient.listProjectBranches({ projectId });
-    console.log("Branches:", response.data.branches);
+    console.log('Branches:', response.data.branches);
   } catch (error) {
-    console.error("Error listing branches:", error);
+    console.error('Error listing branches:', error);
     throw error;
   }
 }
 
 // Example usage: List branches in the project with ID "your-project-id"
-listNeonBranches("your-project-id").catch(error => {
-    console.error("Error listing branches:", error.message);
+listNeonBranches('your-project-id').catch((error) => {
+  console.error('Error listing branches:', error.message);
 });
 ```
 
@@ -282,29 +282,32 @@ const apiClient = createApiClient({
   apiKey: process.env.NEON_API_KEY!,
 });
 
-async function createNeonDatabase(projectId: string, branchId: string, databaseName: string, databaseOwner: string) {
+async function createNeonDatabase(
+  projectId: string,
+  branchId: string,
+  databaseName: string,
+  databaseOwner: string
+) {
   try {
-    const response = await apiClient.createProjectBranchDatabase(
-      projectId,
-      branchId,
-      {
-        database: {
-          name: databaseName,
-          owner_name: databaseOwner,
-        }
-      }
-    );
-    console.log("Database created:", response.data.database);
+    const response = await apiClient.createProjectBranchDatabase(projectId, branchId, {
+      database: {
+        name: databaseName,
+        owner_name: databaseOwner,
+      },
+    });
+    console.log('Database created:', response.data.database);
   } catch (error) {
-    console.error("Error creating database:", error);
+    console.error('Error creating database:', error);
     throw error;
   }
 }
 
 // Example usage: In the project with ID "your-project-id", create a database named "mydatabase" in the branch with ID "your-branch-id" and owner "neondb_owner"
-createNeonDatabase("your-project-id", "your-branch-id", "mydatabase", "neondb_owner").catch(error => {
-  console.error("Error creating database:", error.message);
-});
+createNeonDatabase('your-project-id', 'your-branch-id', 'mydatabase', 'neondb_owner').catch(
+  (error) => {
+    console.error('Error creating database:', error.message);
+  }
+);
 ```
 
 - The `owner_name` parameter specifies the owner of the database. Ensure this role exists in the branch beforehand.
@@ -323,23 +326,19 @@ const apiClient = createApiClient({
 
 async function createNeonRole(projectId: string, branchId: string, roleName: string) {
   try {
-    const response = await apiClient.createProjectBranchRole(
-      projectId,
-      branchId,
-      {
-        role: { name: roleName }
-      },
-    );
-    console.log("Role created:", response.data.role);
+    const response = await apiClient.createProjectBranchRole(projectId, branchId, {
+      role: { name: roleName },
+    });
+    console.log('Role created:', response.data.role);
   } catch (error) {
-    console.error("Error creating role:", error);
+    console.error('Error creating role:', error);
     throw error;
   }
 }
 
 // Example usage: In the project with ID "your-project-id", create a role named "new_user_role" in the branch with ID "your-branch-id"
-createNeonRole("your-project-id", "your-branch-id", "new_user_role").catch(error => {
-  console.error("Error creating role:", error.message);
+createNeonRole('your-project-id', 'your-branch-id', 'new_user_role').catch((error) => {
+  console.error('Error creating role:', error.message);
 });
 ```
 
@@ -353,11 +352,11 @@ createNeonRole("your-project-id", "your-branch-id", "new_user_role").catch(error
 The Neon TypeScript SDK provides comprehensive type definitions for all request and response objects, enums, and interfaces. Leveraging these types enhances your development experience by enabling:
 
 - **Type Safety**: TypeScript types ensure that you are using the SDK methods and data structures correctly, catching type-related errors during development rather than at runtime.
-- **Improved Code Completion**:  Modern IDEs and code editors utilize TypeScript types to provide intelligent code completion and suggestions, making it easier to discover and use SDK features.
+- **Improved Code Completion**: Modern IDEs and code editors utilize TypeScript types to provide intelligent code completion and suggestions, making it easier to discover and use SDK features.
 
 ### Utilizing SDK Types
 
-The `@neondatabase/api-client` package exports all the TypeScript types you need to interact with the Neon API in a type-safe manner.  You can import these types directly into your TypeScript files.
+The `@neondatabase/api-client` package exports all the TypeScript types you need to interact with the Neon API in a type-safe manner. You can import these types directly into your TypeScript files.
 
 For example, when listing projects, you can use the `ProjectsResponse` type to explicitly define the structure of the API response:
 
@@ -373,9 +372,9 @@ async function listNeonProjects(): Promise<void> {
   try {
     const response: AxiosResponse<ProjectsResponse> = await apiClient.listProjects({});
     const projects = response.data.projects;
-    console.log("Projects:", projects);
+    console.log('Projects:', projects);
   } catch (error) {
-    console.error("Error listing projects:", error);
+    console.error('Error listing projects:', error);
   }
 }
 
@@ -393,111 +392,111 @@ By using TypeScript types, you ensure that your code interacts with the Neon API
 
 ## Key SDK Method Signatures
 
-To give you a better overview of the SDK, here are some of the key methods available, categorized by their resource.  For complete details and parameters for each method, please refer to the full [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+To give you a better overview of the SDK, here are some of the key methods available, categorized by their resource. For complete details and parameters for each method, please refer to the full [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 ### Manage API keys
 
-*   `listApiKeys()`: Retrieves a list of API keys for your account.
-*   `createApiKey(data: ApiKeyCreateRequest)`: Creates a new API key.
-*   `revokeApiKey(keyId: number)`: Revokes an existing API key.
+- `listApiKeys()`: Retrieves a list of API keys for your account.
+- `createApiKey(data: ApiKeyCreateRequest)`: Creates a new API key.
+- `revokeApiKey(keyId: number)`: Revokes an existing API key.
 
 ### Manage projects
 
-*   `listProjects(query?: ListProjectsParams)`: Retrieves a list of projects in your Neon account.
-*   `listSharedProjects(query?: ListSharedProjectsParams)`: Retrieves a list of projects shared with your account.
-*   `createProject(data: ProjectCreateRequest)`: Creates a new Neon project.
-*   `getProject(projectId: string)`: Retrieves details for a specific project.
-*   `updateProject(projectId: string, data: ProjectUpdateRequest)`: Updates settings for a specific project.
-*   `deleteProject(projectId: string)`: Deletes a Neon project.
-*   `listProjectOperations(projectId: string, query?: ListProjectOperationsParams)`: Retrieves operations for a project.
-*   `getProjectOperation(projectId: string, operationId: string)`: Retrieves details for a specific operation.
-*   `getConnectionUri(projectId: string, query: GetConnectionUriParams)`: Retrieves a connection URI for a project.
-*   `listProjectPermissions(projectId: string)`: Retrieves project access permissions.
-*   `grantPermissionToProject(projectId: string, data: GrantPermissionToProjectRequest)`: Grants project access to a user.
-*   `revokePermissionFromProject(projectId: string, permissionId: string)`: Revokes project access from a user.
-*   `getProjectJwks(projectId: string)`: Retrieves JWKS URLs for a project.
-*   `addProjectJwks(projectId: string, data: AddProjectJWKSRequest)`: Adds a JWKS URL to a project.
-*   `deleteProjectJwks(projectId: string, jwksId: string)`: Deletes a JWKS URL from a project.
+- `listProjects(query?: ListProjectsParams)`: Retrieves a list of projects in your Neon account.
+- `listSharedProjects(query?: ListSharedProjectsParams)`: Retrieves a list of projects shared with your account.
+- `createProject(data: ProjectCreateRequest)`: Creates a new Neon project.
+- `getProject(projectId: string)`: Retrieves details for a specific project.
+- `updateProject(projectId: string, data: ProjectUpdateRequest)`: Updates settings for a specific project.
+- `deleteProject(projectId: string)`: Deletes a Neon project.
+- `listProjectOperations(projectId: string, query?: ListProjectOperationsParams)`: Retrieves operations for a project.
+- `getProjectOperation(projectId: string, operationId: string)`: Retrieves details for a specific operation.
+- `getConnectionUri(projectId: string, query: GetConnectionUriParams)`: Retrieves a connection URI for a project.
+- `listProjectPermissions(projectId: string)`: Retrieves project access permissions.
+- `grantPermissionToProject(projectId: string, data: GrantPermissionToProjectRequest)`: Grants project access to a user.
+- `revokePermissionFromProject(projectId: string, permissionId: string)`: Revokes project access from a user.
+- `getProjectJwks(projectId: string)`: Retrieves JWKS URLs for a project.
+- `addProjectJwks(projectId: string, data: AddProjectJWKSRequest)`: Adds a JWKS URL to a project.
+- `deleteProjectJwks(projectId: string, jwksId: string)`: Deletes a JWKS URL from a project.
 
 ### Manage branches
 
-*   `listProjectBranches(projectId: string, query?: ListProjectBranchesParams)`: Retrieves a list of branches within a project.
-*   `countProjectBranches(projectId: string, query?: CountProjectBranchesParams)`: Retrieves the number of branches in a project.
-*   `createProjectBranch(projectId: string, data?: BranchCreateRequest)`: Creates a new branch within a project.
-*   `getProjectBranch(projectId: string, branchId: string)`: Retrieves details for a specific branch.
-*   `updateProjectBranch(projectId: string, branchId: string, data: BranchUpdateRequest)`: Updates settings for a specific branch.
-*   `deleteProjectBranch(projectId: string, branchId: string)`: Deletes a branch from a project.
-*   `restoreProjectBranch(projectId: string, branchId: string, data: BranchRestoreRequest)`: Restores a branch to a point in time.
-*   `setDefaultProjectBranch(projectId: string, branchId: string)`: Sets a branch as the default for the project.
-*   `getProjectBranchSchema(projectId: string, branchId: string, query?: GetProjectBranchSchemaParams)`: Retrieves the schema for a branch database.
-*   `getProjectBranchSchemaComparison(projectId: string, branchId: string, query?: GetProjectBranchSchemaComparisonParams)`: Compares branch schemas.
-*   `listProjectBranchEndpoints(projectId: string, branchId: string)`: Retrieves endpoints for a branch.
-*   `listProjectBranchDatabases(projectId: string, branchId: string)`: Retrieves databases for a branch.
-*   `createProjectBranchDatabase(projectId: string, branchId: string, data: DatabaseCreateRequest)`: Creates a database in a branch.
-*   `getProjectBranchDatabase(projectId: string, branchId: string, databaseName: string)`: Retrieves details for a branch database.
-*   `updateProjectBranchDatabase(projectId: string, branchId: string, databaseName: string, data: DatabaseUpdateRequest)`: Updates a branch database.
-*   `deleteProjectBranchDatabase(projectId: string, branchId: string, databaseName: string)`: Deletes a database from a branch.
-*   `listProjectBranchRoles(projectId: string, branchId: string)`: Retrieves roles for a branch.
-*   `createProjectBranchRole(projectId: string, branchId: string, data: RoleCreateRequest)`: Creates a role in a branch.
-*   `getProjectBranchRole(projectId: string, branchId: string, roleName: string)`: Retrieves details for a branch role.
-*   `deleteProjectBranchRole(projectId: string, branchId: string, roleName: string)`: Deletes a role from a branch.
-*   `resetProjectBranchRolePassword(projectId: string, branchId: string, roleName: string)`: Resets a branch role password.
+- `listProjectBranches(projectId: string, query?: ListProjectBranchesParams)`: Retrieves a list of branches within a project.
+- `countProjectBranches(projectId: string, query?: CountProjectBranchesParams)`: Retrieves the number of branches in a project.
+- `createProjectBranch(projectId: string, data?: BranchCreateRequest)`: Creates a new branch within a project.
+- `getProjectBranch(projectId: string, branchId: string)`: Retrieves details for a specific branch.
+- `updateProjectBranch(projectId: string, branchId: string, data: BranchUpdateRequest)`: Updates settings for a specific branch.
+- `deleteProjectBranch(projectId: string, branchId: string)`: Deletes a branch from a project.
+- `restoreProjectBranch(projectId: string, branchId: string, data: BranchRestoreRequest)`: Restores a branch to a point in time.
+- `setDefaultProjectBranch(projectId: string, branchId: string)`: Sets a branch as the default for the project.
+- `getProjectBranchSchema(projectId: string, branchId: string, query?: GetProjectBranchSchemaParams)`: Retrieves the schema for a branch database.
+- `getProjectBranchSchemaComparison(projectId: string, branchId: string, query?: GetProjectBranchSchemaComparisonParams)`: Compares branch schemas.
+- `listProjectBranchEndpoints(projectId: string, branchId: string)`: Retrieves endpoints for a branch.
+- `listProjectBranchDatabases(projectId: string, branchId: string)`: Retrieves databases for a branch.
+- `createProjectBranchDatabase(projectId: string, branchId: string, data: DatabaseCreateRequest)`: Creates a database in a branch.
+- `getProjectBranchDatabase(projectId: string, branchId: string, databaseName: string)`: Retrieves details for a branch database.
+- `updateProjectBranchDatabase(projectId: string, branchId: string, databaseName: string, data: DatabaseUpdateRequest)`: Updates a branch database.
+- `deleteProjectBranchDatabase(projectId: string, branchId: string, databaseName: string)`: Deletes a database from a branch.
+- `listProjectBranchRoles(projectId: string, branchId: string)`: Retrieves roles for a branch.
+- `createProjectBranchRole(projectId: string, branchId: string, data: RoleCreateRequest)`: Creates a role in a branch.
+- `getProjectBranchRole(projectId: string, branchId: string, roleName: string)`: Retrieves details for a branch role.
+- `deleteProjectBranchRole(projectId: string, branchId: string, roleName: string)`: Deletes a role from a branch.
+- `resetProjectBranchRolePassword(projectId: string, branchId: string, roleName: string)`: Resets a branch role password.
 
 ### Manage Compute Endpoints
 
-*   `listProjectEndpoints(projectId: string)`: Retrieves a list of endpoints within a project.
-*   `createProjectEndpoint(projectId: string, data: EndpointCreateRequest)`: Creates a new endpoint within a project.
-*   `getProjectEndpoint(projectId: string, endpointId: string)`: Retrieves details for a specific endpoint.
-*   `updateProjectEndpoint(projectId: string, endpointId: string, data: EndpointUpdateRequest)`: Updates settings for a specific endpoint.
-*   `deleteProjectEndpoint(projectId: string, endpointId: string)`: Deletes an endpoint from a project.
-*   `startProjectEndpoint(projectId: string, endpointId: string)`: Starts an endpoint.
-*   `suspendProjectEndpoint(projectId: string, endpointId: string)`: Suspends an endpoint.
-*   `restartProjectEndpoint(projectId: string, endpointId: string)`: Restarts an endpoint.
+- `listProjectEndpoints(projectId: string)`: Retrieves a list of endpoints within a project.
+- `createProjectEndpoint(projectId: string, data: EndpointCreateRequest)`: Creates a new endpoint within a project.
+- `getProjectEndpoint(projectId: string, endpointId: string)`: Retrieves details for a specific endpoint.
+- `updateProjectEndpoint(projectId: string, endpointId: string, data: EndpointUpdateRequest)`: Updates settings for a specific endpoint.
+- `deleteProjectEndpoint(projectId: string, endpointId: string)`: Deletes an endpoint from a project.
+- `startProjectEndpoint(projectId: string, endpointId: string)`: Starts an endpoint.
+- `suspendProjectEndpoint(projectId: string, endpointId: string)`: Suspends an endpoint.
+- `restartProjectEndpoint(projectId: string, endpointId: string)`: Restarts an endpoint.
 
 ### Retrieve Consumption Metrics
 
-*   `getConsumptionHistoryPerAccount(query: GetConsumptionHistoryPerAccountParams)`: Retrieves account consumption metrics.
-*   `getConsumptionHistoryPerProject(query: GetConsumptionHistoryPerProjectParams)`: Retrieves project consumption metrics.
+- `getConsumptionHistoryPerAccount(query: GetConsumptionHistoryPerAccountParams)`: Retrieves account consumption metrics.
+- `getConsumptionHistoryPerProject(query: GetConsumptionHistoryPerProjectParams)`: Retrieves project consumption metrics.
 
 ### Manage Organizations
 
-*   `getOrganization(orgId: string)`: Retrieves organization details.
-*   `getOrganizationMembers(orgId: string)`: Retrieves members of an organization.
-*   `getOrganizationMember(orgId: string, memberId: string)`: Retrieves details for a specific organization member.
-*   `getOrganizationInvitations(orgId: string)`: Retrieves invitations for an organization.
-*   `listOrgApiKeys(orgId: string)`: Lists API keys for an organization.
-*   `createOrgApiKey(orgId: string, data: OrgApiKeyCreateRequest)`: Creates an API key for an organization.
-*   `revokeOrgApiKey(orgId: string, keyId: number)`: Revokes an organization API key.
-*   `createOrganizationInvitations(orgId: string, data: OrganizationInvitesCreateRequest)`: Creates organization invitations.
-*   `updateOrganizationMember(orgId: string, memberId: string, data: OrganizationMemberUpdateRequest)`: Updates an organization member's role.
-*   `removeOrganizationMember(orgId: string, memberId: string)`: Removes a member from an organization.
-*   `transferProjectsFromOrgToOrg(sourceOrgId: string, data: TransferProjectsToOrganizationRequest)`: Transfers projects between organizations.
-*   `listOrganizationVpcEndpoints(orgId: string, regionId: string)`: Lists VPC endpoints for an organization.
-*   `getOrganizationVpcEndpointDetails(orgId: string, regionId: string, vpcEndpointId: string)`: Retrieves VPC endpoint details for an organization.
-*   `assignOrganizationVpcEndpoint(orgId: string, regionId: string, vpcEndpointId: string, data: VPCEndpointAssignment)`: Assigns/updates a VPC endpoint for an organization.
-*   `deleteOrganizationVpcEndpoint(orgId: string, regionId: string, vpcEndpointId: string)`: Deletes a VPC endpoint from an organization.
+- `getOrganization(orgId: string)`: Retrieves organization details.
+- `getOrganizationMembers(orgId: string)`: Retrieves members of an organization.
+- `getOrganizationMember(orgId: string, memberId: string)`: Retrieves details for a specific organization member.
+- `getOrganizationInvitations(orgId: string)`: Retrieves invitations for an organization.
+- `listOrgApiKeys(orgId: string)`: Lists API keys for an organization.
+- `createOrgApiKey(orgId: string, data: OrgApiKeyCreateRequest)`: Creates an API key for an organization.
+- `revokeOrgApiKey(orgId: string, keyId: number)`: Revokes an organization API key.
+- `createOrganizationInvitations(orgId: string, data: OrganizationInvitesCreateRequest)`: Creates organization invitations.
+- `updateOrganizationMember(orgId: string, memberId: string, data: OrganizationMemberUpdateRequest)`: Updates an organization member's role.
+- `removeOrganizationMember(orgId: string, memberId: string)`: Removes a member from an organization.
+- `transferProjectsFromOrgToOrg(sourceOrgId: string, data: TransferProjectsToOrganizationRequest)`: Transfers projects between organizations.
+- `listOrganizationVpcEndpoints(orgId: string, regionId: string)`: Lists VPC endpoints for an organization.
+- `getOrganizationVpcEndpointDetails(orgId: string, regionId: string, vpcEndpointId: string)`: Retrieves VPC endpoint details for an organization.
+- `assignOrganizationVpcEndpoint(orgId: string, regionId: string, vpcEndpointId: string, data: VPCEndpointAssignment)`: Assigns/updates a VPC endpoint for an organization.
+- `deleteOrganizationVpcEndpoint(orgId: string, regionId: string, vpcEndpointId: string)`: Deletes a VPC endpoint from an organization.
 
 ### Manage Users
 
-*   `getCurrentUserInfo()`: Retrieves details for the current user.
-*   `getCurrentUserOrganizations()`: Retrieves organizations for the current user.
-*   `transferProjectsFromUserToOrg(data: TransferProjectsToOrganizationRequest)`: Transfers projects from a user to an organization.
+- `getCurrentUserInfo()`: Retrieves details for the current user.
+- `getCurrentUserOrganizations()`: Retrieves organizations for the current user.
+- `transferProjectsFromUserToOrg(data: TransferProjectsToOrganizationRequest)`: Transfers projects from a user to an organization.
 
 ### Regions
 
-*   `getActiveRegions()`: Retrieves a list of active Neon regions.
+- `getActiveRegions()`: Retrieves a list of active Neon regions.
 
 ### Manage Auth Integrations
 
-*   `createProjectIdentityIntegration(data: IdentityCreateIntegrationRequest)`: Creates Neon Auth integration.
-*   `createProjectIdentityAuthProviderSdkKeys(data: IdentityCreateAuthProviderSDKKeysRequest)`: Creates Auth Provider SDK keys.
-*   `transferProjectIdentityAuthProviderProject(data: IdentityTransferAuthProviderProjectRequest)`: Transfers Neon-managed Auth project ownership.
-*   `listProjectIdentityIntegrations(projectId: string)`: Lists Auth Provider integrations for a project.
-*   `deleteProjectIdentityIntegration(projectId: string, authProvider: IdentitySupportedAuthProvider)`: Deletes an Auth Provider integration.
+- `createProjectIdentityIntegration(data: IdentityCreateIntegrationRequest)`: Creates Neon Auth integration.
+- `createProjectIdentityAuthProviderSdkKeys(data: IdentityCreateAuthProviderSDKKeysRequest)`: Creates Auth Provider SDK keys.
+- `transferProjectIdentityAuthProviderProject(data: IdentityTransferAuthProviderProjectRequest)`: Transfers Neon-managed Auth project ownership.
+- `listProjectIdentityIntegrations(projectId: string)`: Lists Auth Provider integrations for a project.
+- `deleteProjectIdentityIntegration(projectId: string, authProvider: IdentitySupportedAuthProvider)`: Deletes an Auth Provider integration.
 
 ### General
 
-*   `getProjectOperation(projectId: string, operationId: string)`: Retrieves details for a specific operation.
+- `getProjectOperation(projectId: string, operationId: string)`: Retrieves details for a specific operation.
 
 ## Error Handling
 
@@ -508,15 +507,16 @@ When working with APIs, handling errors gracefully is crucial for building robus
 When an error occurs during an API request, the SDK throws an `AxiosError` object, which extends the standard JavaScript `Error` object. The `AxiosError` object contains additional properties that provide details about the error, including:
 
 **`error.response`**: This property (if present) is an Axios response object containing details from the API error response.
-  - **`error.response.status`**: The HTTP status code of the error response (e.g., 400, 401, 404, 500).
-  - **`error.response.data`**: The response body, which, for Neon API errors, often follows a consistent structure, including an `error` object with `code` and `message` properties.
+
+- **`error.response.status`**: The HTTP status code of the error response (e.g., 400, 401, 404, 500).
+- **`error.response.data`**: The response body, which, for Neon API errors, often follows a consistent structure, including an `error` object with `code` and `message` properties.
 
 ### Common Error Scenarios and Debugging
 
-- **Invalid API Key (401 Unauthorized):**  Ensure your `NEON_API_KEY` environment variable is correctly set with a valid API key from the Neon Console.
+- **Invalid API Key (401 Unauthorized):** Ensure your `NEON_API_KEY` environment variable is correctly set with a valid API key from the Neon Console.
 - **Project or Branch Not Found (404 Not Found):** Verify that the `projectId` and `branchId` values you are using are correct and that the resources exist in your Neon account. Double-check IDs in the Neon Console.
-- **Rate Limiting (429 Too Many Requests):**  If you are making requests too frequently, the API might rate-limit you. Implement retry mechanisms with exponential backoff or reduce the frequency of your API calls.
-- **Request Body Validation Errors (400 Bad Request):**  If you receive 400 errors, carefully review the request body you are sending, ensuring it conforms to the expected schema for the API endpoint. Refer to the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api) for request body structures.
+- **Rate Limiting (429 Too Many Requests):** If you are making requests too frequently, the API might rate-limit you. Implement retry mechanisms with exponential backoff or reduce the frequency of your API calls.
+- **Request Body Validation Errors (400 Bad Request):** If you receive 400 errors, carefully review the request body you are sending, ensuring it conforms to the expected schema for the API endpoint. Refer to the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api) for request body structures.
 
 ## References
 
