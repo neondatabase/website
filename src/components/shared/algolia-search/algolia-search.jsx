@@ -30,7 +30,19 @@ const AlgoliaSearch = ({ indexName, children }) => (
   <InstantSearchNext
     indexName={indexName}
     searchClient={searchClient}
-    routing
+    routing={{
+      router: {
+        createURL: ({ qsModule, routeState, location }) => {
+          const { protocol, hostname, port = '', pathname, hash } = location;
+          const queryString = qsModule.stringify(routeState, {
+            encode: false,
+          });
+          const portWithPrefix = port === '' ? '' : `:${port}`;
+
+          return `${protocol}//${hostname}${portWithPrefix}${pathname}?${queryString}${hash}`;
+        },
+      },
+    }}
     onStateChange={({ uiState, setUiState }) => onStateChange({ uiState, setUiState, indexName })}
   >
     {children}
