@@ -22,7 +22,7 @@ While there are dedicated graph databases, extensions like [ltree](https://www.p
 
 ## Enable ltree and pgRouting
 
-ltree adds a new `LTREE` type to Postgres for storing hierarchies, like categories.
+`ltree` adds a new `LTREE` type to Postgres for storing hierarchies, like categories.
 In Neon, ltree is already installed, you just need to enable it using the following command.
 
 ```sql
