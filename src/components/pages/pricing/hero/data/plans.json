@@ -182,13 +182,13 @@
       "title": "Everything in Scale, plus...",
       "features": [
         { "title": "Compliance (SOC 2, ISO)" },
-        { "title": "99.95% SLA" },
-        { "title": "Priority Support" },
         { "title": "Private Link" },
+        { "title": "1:1 Migration Assistance" },
         {
-          "title": "Migration assistance"
+          "title": "Priority Support"
         },
-        { "title": "PITR (30 days)" }
+        { "title": "99.95% SLA" },
+        { "title": "PITR up to 30 days" }
       ]
     },
     "button": {
