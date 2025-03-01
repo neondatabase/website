@@ -50,7 +50,7 @@ CREATE TABLE categories (
 
 ## Insert and retrieve hierarchical data
 
-The ltree type allows inserting hierarchical paths:
+The `ltree` type allows inserting hierarchical paths:
 
 ```sql
 INSERT INTO categories (name, path) VALUES
