@@ -29,7 +29,7 @@ In Neon, `ltree` is already installed, you just need to enable it using the foll
 CREATE EXTENSION IF NOT EXISTS ltree;
 ```
 
-pgRouting is a separate extension that can be used for routing and shortest path calculations in network data, like finding the shortest path between two cities.
+`pgrouting` is a separate extension that can be used for routing and shortest path calculations in network data, like finding the shortest path between two cities.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pgrouting;
