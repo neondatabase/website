@@ -37,7 +37,7 @@ CREATE EXTENSION IF NOT EXISTS pgrouting;
 
 ## Create a table to store hierarchical data
 
-With ltree, you can store hierarchical relationships such as category trees, organizational charts, or file directories.
+With `ltree`, you can store hierarchical relationships such as category trees, organizational charts, or file directories.
 You can create a table to store a category tree using the following command.
 
 ```sql
