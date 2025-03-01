@@ -43,7 +43,7 @@ Cost-efficient storage where Neon archives inactive branches after a defined thr
 
 ## Scale to Zero
 
-A Neon feature that suspends a compute after a specified period of inactivity (5 minutes) to minimize compute usage. When suspended, a compute is placed into an idle state. Otherwise, the compute is in an `Active` state. Users on paid plans can disable the _Scale to Zero_ feature for an "always-active" compute. For more information, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
+A Neon feature that suspends a compute after a specified period of inactivity (5 minutes by default) to minimize compute usage. When suspended, a compute is placed into an idle state. Otherwise, the compute is in an `Active` state. Users on paid plans can disable the _Scale to Zero_ feature for an "always-active" compute. For more information, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
 
 ## autoscaler-agent
 
