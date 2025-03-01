@@ -72,7 +72,7 @@ SELECT * FROM categories WHERE path <@ 'Electronics.Laptops';
 
 ## Create a table to store network data
 
-With pgRouting, you can model roads, social networks, or any graph-like data structure.
+With `pgrouting`, you can model roads, social networks, or any graph-like data structure.
 For example, the following table stores a graph of roads that have an associated `cost`.
 Each road has a source and a target, and an associated `cost`.
 
