@@ -13,7 +13,7 @@ While there are dedicated graph databases, extensions like [ltree](https://www.p
 
 ## Steps
 
-* Enable ltree and pgRouting
+* Enable the `ltree` and `pgrouting` extensions
 * Create a table to store hierarchical data
 * Insert and retrieve hierarchical data
 * Perform hierarchical queries using ltree
