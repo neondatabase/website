@@ -18,7 +18,11 @@ This guide provides an introduction to the `pg_duckdb` extension. You will learn
 
 ## Enable the `pg_duckdb` extension
 
-You can install the `pg_duckdb` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+<Admonition type="note" title="This extension must be enabled by Neon Support">
+Before installing the `pg_duckdb` extension, you must first [send a request to Neon Support](https://console.neon.tech/app/projects?modal=support) to enable it.
+</Admonition>
+
+After the the `pg_duckdb` extension is enabled by Neon Support, install it by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_duckdb;
@@ -248,8 +252,10 @@ If your target S3 bucket (or other object storage) requires authentication, ensu
 
 `pg_duckdb` allows you to cache data lake files locally, which can significantly improve query performance when accessing the same files repeatedly. You can use the `duckdb.cache()` function to explicitly cache a Parquet or CSV file.
 
+The cache resides on the Neon [compute](/docs/reference/glossary#compute). Due to Neon's serverless architecture, the cache content lives as long as your compute is running. If your compute is suspended due to [scale to zero](/docs/reference/glossary#scale-to-zero) the cache is emptied and you will need to reload it again after the compute is started.
+
 <Admonition type="note">
-`pg_duckdb` caches the files locally on the Neon compute using its `CachedFile` implementation within its fork of `HTTPSFileSystem`.
+`pg_duckdb` caches the files locally using its `CachedFile` implementation within its fork of `HTTPSFileSystem`.
 </Admonition>
 
 ```sql
@@ -289,17 +295,41 @@ SET duckdb.force_execution = false;
 Setting `duckdb.force_execution` to `true` can be beneficial if you want to leverage DuckDB's potentially different query planning or execution strategies even for purely Postgres workloads. In most cases, leaving this setting at its default (`false`) is recommended for optimal performance and automatic engagement of DuckDB only when its features are explicitly used.
 
 <Admonition type="note" title="configuration">
-DuckDB configuration settings, such as memory limits and maximum memory usage, are pre-configured on Neon and cannot be modified.  These defaults are optimized for common workloads and vary based on your project's compute.
+DuckDB configuration settings, such as memory limits and maximum memory usage, are pre-configured on Neon and cannot be modified. These defaults are optimized for common workloads and vary based on your project's compute.
 </Admonition>
 
 ### Querying DuckDB directly
 
 `duckdb.query('your duckdb select query')`:  Allows you to run arbitrary DuckDB `SELECT` queries directly. This is useful for leveraging DuckDB-specific SQL syntax or functions not yet directly exposed as standard Postgres functions via `pg_duckdb`.
 
+### Working with DuckDB core extensions
+
+On Neon, several DuckDB core extensions are pre-installed with `pg_duckdb`. You can view installed extensions by running this query:
+
+```sql
+SELECT extension_name, installed, description
+FROM duckdb_extensions();
+```
+
+If you install a DuckDB core extension that is not pre-installed, it will only remain installed while your Neon [compute](/docs/reference/glossary#compute) is running. If your compute [scales to zero](/docs/reference/glossary#scale-to-zero) due to inactivity, the extension is removed. After your compute restarts due to activity, you must reinstall the extension.
+
+To reinstall an extension, first truncate the `duckdb.extensions` table, then reinstall the extension as shown in the following example:
+
+```sql
+TRUNCATE duckdb.extensions;
+TRUNCATE TABLE
+
+SELECT duckdb.install_extension('iceberg'); 
+install_extension 
+-------------------
+ t
+(1 row)
+```
 
 ## Limitations
 
-- Unsigned extensions are not supported. Only DuckDB and DuckDB community-maintained extensions can be used with DockDB on Neon.
+- Only DuckDB core extensions are supported. See [DuckDB — Core Extensions](https://duckdb.org/docs/stable/extensions/core_extensions.html).
+- Community and unsigned DuckDB extensions cannot be used with DuckDB on Neon, as these could contain un-reviewed third-party code, introducing potential security risks. For related information, see [DuckDB — Securing Extensions](https://duckdb.org/docs/stable/operations_manual/securing_duckdb/securing_extensions.html).
 - To protect your Neon compute's VM filesystem, we set `duckdb.disabled_filesystems=’LocalFilesystem’`, which prevents accessing files on the compute's local file system.
 
 ## Test data
@@ -314,7 +344,7 @@ aws s3 ls s3://us-prd-motherduck-open-datasets --no-sign-request --recursive
 
 ## Conclusion
 
-`pg_duckdb` is a powerful extension that brings the speed and efficiency of DuckDB's analytical engine directly into your Postgres environment. By enabling `pg_duckdb`, you can accelerate your analytical queries, seamlessly integrate with data lakes, and leverage DuckDB's rich set of functions and features.
+`pg_duckdb` is a powerful extension that brings the speed and efficiency of DuckDB's analytical engine directly into your Postgres environment. By enabling `pg_duckdb`, you can accelerate your analytical queries,  integrate with data lakes, and leverage DuckDB's rich set of functions and features.
 
 ## Resources
 
