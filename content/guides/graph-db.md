@@ -13,12 +13,12 @@ While there are dedicated graph databases, extensions like [ltree](https://www.p
 
 ## Steps
 
-* Enable the `ltree` and `pgrouting` extensions
-* Create a table to store hierarchical data
-* Insert and retrieve hierarchical data
-* Perform hierarchical queries using ltree
-* Create a table to store network data
-* Insert and query network data
+- Enable the `ltree` and `pgrouting` extensions
+- Create a table to store hierarchical data
+- Insert and retrieve hierarchical data
+- Perform hierarchical queries using ltree
+- Create a table to store network data
+- Insert and query network data
 
 ## Enable ltree and pgRouting
 
@@ -65,10 +65,10 @@ You can retrieve all subcategories under a given path using `<@` as follows.
 SELECT * FROM categories WHERE path <@ 'Electronics.Laptops';
 ```
 
-| id | name            | path                       |
-|----|----------------|-----------------------------|
-| 2  | Laptops        | Electronics.Laptops         |
-| 3  | Gaming Laptops | Electronics.Laptops.Gaming  |
+| id  | name           | path                       |
+| --- | -------------- | -------------------------- |
+| 2   | Laptops        | Electronics.Laptops        |
+| 3   | Gaming Laptops | Electronics.Laptops.Gaming |
 
 ## Create a table to store network data
 
@@ -109,8 +109,8 @@ SELECT * FROM pgr_dijkstra(
 The above query returns the following, which shows the shortest path from node 1 to node 4 is by visiting each node in order (1, 2, 3, 4) with an aggregate cost of 9.5.
 
 | seq | path_seq | node | edge | cost | agg_cost |
-|-----|---------|------|------|------|----------|
-| 1   | 1       | 1    | 1    | 4    | 0        |
-| 2   | 2       | 2    | 2    | 3    | 4        |
-| 3   | 3       | 3    | 3    | 2.5  | 7        |
-| 4   | 4       | 4    | 4    | 0    | 9.5      |
+| --- | -------- | ---- | ---- | ---- | -------- |
+| 1   | 1        | 1    | 1    | 4    | 0        |
+| 2   | 2        | 2    | 2    | 3    | 4        |
+| 3   | 3        | 3    | 3    | 2.5  | 7        |
+| 4   | 4        | 4    | 4    | 0    | 9.5      |
