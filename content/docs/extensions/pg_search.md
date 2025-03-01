@@ -6,7 +6,7 @@ enableTableOfContents: true
 updatedOn: '2025-02-16T00:00:00.000Z'
 ---
 
-The `pg_search` extension by ParadeDB adds functions and operators to Postgres that use [BM25 (Best Matching 25)](https://en.wikipedia.org/wiki/Okapi_BM25) indexes for efficient, high-relevance text searches. It supports standard SQL syntax and JSON query objects, offering features similar to those in Elasticsearch.
+The `pg_search` extension by [ParadeDB](https://www.paradedb.com/) adds functions and operators to Postgres that use [BM25 (Best Matching 25)](https://en.wikipedia.org/wiki/Okapi_BM25) indexes for efficient, high-relevance text searches. It supports standard SQL syntax and JSON query objects, offering features similar to those in Elasticsearch.
 
 `pg_search` eliminates the need to integrate external search engines, simplifying your architecture and providing real-time search functionality that's tightly coupled with your transactional data.
 
@@ -16,7 +16,7 @@ In this guide, you'll learn how to enable `pg_search` on Neon, understand the fu
 
 <Admonition type="note" title="pg_search on Neon">
 
-`pg_search` (version 15.2) is currently only available on Neon projects using Postgres 17. Manual `pg_search` version upgrades via `ALTER EXTENSION` are not yet supported. 
+`pg_search` is currently only available on Neon projects using Postgres 17.
 
 </Admonition>
 
@@ -35,6 +35,8 @@ CREATE EXTENSION IF NOT EXISTS pg_search;
 - **Relevance Ranking:**  Ordering search results by relevance, placing the most relevant matches higher, not just based on keyword presence.
 - **Language Handling:**  Depending on setup, `pg_search` can handle different languages and their rules for word analysis.
 - **Stemming:**  Recognizing word variations like "run," "running," and "runs" as being related, linking them to a root form ("run") for broader matches.
+- **Hybrid Search**: Combine BM25 scores with `pgvector` scores to build hybrid search experiences
+- **Faceted Search**: Categorizing and bucketing results based on filters applied as part of the search query
 
 ### BM25: The Relevance scoring algorithm
 
@@ -56,7 +58,7 @@ With these basics in mind, let's learn how to create a BM25 index and start perf
 
 ## Getting started with `pg_search`
 
-`pg_search` has a special operator, `@@@`, that you can use in SQL queries to perform full-text searches.  This operator allows you to search for specific words or phrases within text columns, returning rows that match your search criteria. You can also sort results by relevance and highlight matched terms. Let us create a sample table, setting up a BM25 index, and running some search queries to explore `pg_search` in action.
+`pg_search` has a special operator, `@@@`, that you can use in SQL queries to perform full-text searches.  This operator allows you to search for specific words or phrases within text columns, returning rows that match your search criteria. You can also sort results by relevance and highlight matched terms. Let us create a sample table, set up a BM25 index, and run some search queries to explore `pg_search` in action.
 
 ### Creating a sample table for text search
 
