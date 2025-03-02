@@ -86,12 +86,13 @@ async function getTicketData(handle) {
   return userData;
 }
 
-export async function generateStaticParams() {
-  const users = await prisma.user.findMany();
-  return users.map((user) => ({
-    handle: user.login,
-  }));
-}
+// TODO: Uncomment when we have tickets back
+// export async function generateStaticParams() {
+//   const users = await prisma.user.findMany();
+//   return users.map((user) => ({
+//     handle: user.login,
+//   }));
+// }
 
 export async function generateMetadata({ params }) {
   const { handle } = params;

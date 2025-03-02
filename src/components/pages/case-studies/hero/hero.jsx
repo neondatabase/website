@@ -105,12 +105,7 @@ const FeaturedCard = ({
 FeaturedCard.propTypes = CardPropTypes;
 
 const Hero = ({ items }) => {
-  const featuredItems = items.filter(
-    (item) =>
-      item.caseStudyPost.isFeatured === true ||
-      // TODO: remove before release
-      item.title === 'Vercel'
-  );
+  const featuredItems = items.filter((item) => item.caseStudyPost.isFeatured === true);
 
   return (
     <section className="hero safe-paddings pt-48 xl:pt-[152px] lg:pt-12 md:pt-9">

@@ -153,7 +153,7 @@ CONTEXT:  PL/pgSQL function inline_code_block line 15 at RAISE
 SQL state: P0001
 ```
 
-In this example, the `too_many_rows` exception occurs because the [`select into`](https://neon.tech/postgresql/plpgsql-select-into/) statement returns more than one row while it is supposed to return one row.
+In this example, the `too_many_rows` exception occurs because the [`select into`](https://neon.tech/postgresql/postgresql-plpgsql/pl-pgsql-select-into/) statement returns more than one row while it is supposed to return one row.
 
 ### 3\) Handling multiple exceptions
 

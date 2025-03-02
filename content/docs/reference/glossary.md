@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2025-02-03T20:41:57.345Z'
+updatedOn: '2025-03-01T22:22:30.952Z'
 ---
 
 ## access token
@@ -43,7 +43,7 @@ Cost-efficient storage where Neon archives inactive branches after a defined thr
 
 ## Scale to Zero
 
-A Neon feature that suspends a compute after a specified period of inactivity (5 minutes) to minimize compute usage. When suspended, a compute is placed into an idle state. Otherwise, the compute is in an `Active` state. Users on paid plans can disable the _Scale to Zero_ feature for an "always-active" compute. For more information, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
+A Neon feature that suspends a compute after a specified period of inactivity (5 minutes by default) to minimize compute usage. When suspended, a compute is placed into an idle state. Otherwise, the compute is in an `Active` state. Users on paid plans can disable the _Scale to Zero_ feature for an "always-active" compute. For more information, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
 
 ## autoscaler-agent
 
@@ -273,7 +273,7 @@ A feature provided by some hypervisors, such as QEMU, that allows the transfer o
 
 ## Local File Cache
 
-The Local File Cache (LFC) is a layer of caching that stores frequently accessed data from the storage layer in the local memory of the compute. This cache helps to reduce latency and improve query performance by minimizing the need to fetch data from the storage layer repeatedly. The LFC acts as an add-on or extension of Postgres [shared buffers](#shared-buffers). In Neon the `shared_buffers` parameter [scales with compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size). The LFC extends cache memory up to 80% of your compute's RAM.
+The Local File Cache (LFC) is a layer of caching that stores frequently accessed data from the storage layer in the local memory of the compute. This cache helps to reduce latency and improve query performance by minimizing the need to fetch data from the storage layer repeatedly. The LFC acts as an add-on or extension of Postgres [shared buffers](#shared-buffers). In Neon the `shared_buffers` parameter [scales with compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size). The LFC extends cache memory up to 75% of your compute's RAM.
 
 ### logical data size
 
@@ -322,6 +322,10 @@ A component of the Neon platform that acts as an intermediary between connecting
 ## Neon user
 
 The user account that registers and authenticates with Neon using an email, GitHub, Google, or partner account. After authenticating, a Neon user account can create and manage projects, branches, users, databases, and other project resources.
+
+## Neon Org
+
+A named organization entity in Neon that groups multiple Neon users under a shared account. See [Organization](#organization) for details.
 
 ## NeonVM
 

@@ -7,7 +7,7 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/setting-up-a-project
-updatedOn: '2025-01-31T16:41:54.388Z'
+updatedOn: '2025-02-21T19:20:49.630Z'
 ---
 
 <InfoBlock>
@@ -24,7 +24,7 @@ updatedOn: '2025-01-31T16:41:54.388Z'
 </DocsList>
 </InfoBlock>
 
-This tutorial walks you through your first steps using Neon as your Postgres database. You’ll explore the Neon object hierarchy and learn how database branching can simplify your development workflow.
+This tutorial walks you through your first steps using Neon as your Postgres database. You'll explore the Neon object hierarchy and learn how database branching can simplify your development workflow.
 
 ## About branching
 
@@ -59,16 +59,9 @@ After signing up, you'll start with a `main` branch and the empty database `neon
 
 ## Onboarding in the Neon Console
 
-After you sign up, you are guided through some onboarding steps that ask you to create a **Project**. After that, you are presented with the project **Quickstart**.
+After you sign up, you are guided through some onboarding steps that ask you to create a **Project**.
 
-<div style={{ display: 'flex' }}>
-  <div style={{ flex: '0 0 45%', paddingRight: '20px', marginTop: '.75em'}}>
-    ![onboarding](/docs/get-started-with-neon/onboarding.png "no-border")
-  </div>
-  <div style={{ flex: '0 0 55%', display: 'flex', alignItems: 'center' }}>
-    ![quickstart](/docs/get-started-with-neon/quickstart.png "no-border")
-  </div>
-</div>
+![onboarding](/docs/get-started-with-neon/onboarding.png)
 
 The steps should be self-explanatory, but it's important to understand a few key points:
 
@@ -79,10 +72,6 @@ The steps should be self-explanatory, but it's important to understand a few key
 - **We create your default branch `main` for you**
 
   `main` is the default (primary) branch and hosts your database, role, and a compute that you can connect your application to.
-
-- **Use the project _Quickstart_ or this tutorial**
-
-  Once you complete the onboarding, you are presented with the project **Quickstart**. You can use this interactive quickstart to learn the basics &#8212; or follow along with this tutorial for a deeper explanation. You can open the **Quickstart** anytime from the project sidebar.
 
 At this point, if you want to just get started connecting Neon to your toolchain, go to [Day 2 - Connecting Neon to your tools](/docs/get-started-with-neon/connect-neon). Or if you want a more detailed walkthrough of some of our key console and branching features, let's keep going.
 
@@ -98,6 +87,8 @@ The first time you open the SQL Editor for a new project, the editor includes pl
 
 For this tutorial, go ahead and create this sample table: click **Run**.
 
+Every query you run in the SQL Editor is automatically saved with an AI-generated description, making it easy to find and reference your work later. For example, the sample table creation above will be saved with a description like "create and populate sample table in Neon". You can view your query history anytime by clicking the **History** button in the SQL Editor.
+
 Or if you want to add the table from the command line and you already have `psql` installed:
 
 ```sql shouldWrap
@@ -108,11 +99,38 @@ INSERT INTO playing_with_neon(name, value)
 
 Your default branch `main` now has a table with some data.
 
+## Try the AI Assistant
+
+Now that you have some sample data, let's explore how the AI Assistant can help you write SQL queries using natural language prompts.
+
+From the SQL Editor, click the **AI Assistant** button in the top-right corner and try a few prompts:
+
+- _Add three more rows to the playing_with_neon table with tech company names_
+- _Show me the highest value in the table_
+- _Calculate the average value grouped by the first letter of the name_
+
+![Neon SQL Editor AI Assistant](/docs/get-started-with-neon/sql_assistant.png)
+
+Each query you run is automatically saved with an AI-generated description, making it easy to find and reuse queries later. For example, when you ask the AI Assistant to add company data, you should see a response like:
+
+```sql
+-- Text to SQL original prompt:
+-- Add three more rows to the playing_with_neon table with tech company names
+INSERT INTO public.playing_with_neon (name, value) VALUES
+('Google', 1000.5),
+('Apple', 1200.75),
+('Microsoft', 950.25);
+```
+
+With the description: "Add tech companies to playing_with_neon table"
+
+Learn more about AI features in the [SQL Editor documentation](/docs/get-started-with-neon/query-with-neon-sql-editor#ai-features).
+
 ## View and modify data in the console
 
 Now that you have some data to play with, let's take a look at it on the **Tables** page in the Neon Console. The **Tables** page, powered by [Drizzle Studio](https://orm.drizzle.team/drizzle-studio/overview), provides a visual interface for exploring and modifying data directly from the console. The integration with Drizzle Studio provides the ability to add, update, and delete records, filter data, add or remove columns, drop or truncate tables, and export data in `.json` and `.csv` formats.
 
-![Tables page Drizzle integration](/docs/relnotes/tables_page_drizzle.png)
+![Tables page Drizzle integration](/docs/get-started-with-neon/tables_drizzle.png)
 
 For a detailed guide on how to interact with your data using the **Tables** page, visit [Managing your data with interactive tables](/docs/guides/tables).
 

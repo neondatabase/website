@@ -63,7 +63,7 @@ begin
    into film_count
    from film;
 
-   assert film_count > 0, 'Film not found, check the film table';
+   assert film_count < 0, 'Film not found, check the film table';
 end$$;
 ```
 

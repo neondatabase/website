@@ -2,7 +2,7 @@
 title: Neon for Database-per-user
 subtitle: How to configure Neon for multi-tenancy - plus a few design tips
 enableTableOfContents: true
-updatedOn: '2024-12-12T19:49:26.797Z'
+updatedOn: '2025-02-25T18:52:09.458Z'
 ---
 
 With its serverless and API-first nature, Neon is an excellent choice for building database-per-user applications (or apps where each user/customer has their own Postgres database). Neon is particularly well-suited for architectures that prioritize maximum database isolation, achieving the equivalent of instance-level isolation.
@@ -610,7 +610,7 @@ name: acme-analytics-prod
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Runs at midnight
+    - cron: '0 0 * * *' # Runs at midnight UTC
   workflow_dispatch:
 
 jobs:
@@ -684,7 +684,7 @@ name: acme-analytics-prod
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Runs at midnight
+    - cron: '0 0 * * *' # Runs at midnight UTC
   workflow_dispatch:
 ```
 

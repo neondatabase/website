@@ -3,10 +3,10 @@ title: AI & Embeddings
 subtitle: Power AI agents with serverless Postgres — and build AI applications with Neon
   as your vector database
 enableTableOfContents: true
-updatedOn: '2025-02-01T18:03:17.621Z'
+updatedOn: '2025-02-25T19:38:13.494Z'
 ---
 
-Neon enables AI agents to provision Postgres databases in seconds, execute SQL queries, and easily manage Neon infrastructure. With one-second provision times, scale-to-zero compute, and agent-friendly Neon API interfaces, Neon lets AI agents manage database fleets at scale while minimizing costs. [Learn more about this use case](https://neon.tech/use-cases/ai-agents).
+Neon enables AI agents to provision Postgres databases in seconds, execute SQL queries, and easily manage Neon infrastructure. With one-second provision times, scale-to-zero compute, and agent-friendly client interfaces, Neon lets AI agents manage database fleets at scale while minimizing costs. [Learn more about this use case](https://neon.tech/use-cases/ai-agents).
 
 Neon also supports vector data, a key component for AI applications. With the **pgvector** open-source extension, you can use Neon as a vector database for storing and querying embeddings. This allows you to use Postgres as your vector store, eliminating the need for data migration or third-party solutions.
 
@@ -20,11 +20,19 @@ Neon supports Postgres for AI agents with the following tools and interfaces:
 
 <a href="https://github.com/neondatabase/mcp-server-neon" description="A Model Context Protocol (MCP) server for Neon that lets MCP Clients interact with Neon’s API using natural language" icon="github">Neon MCP Server</a>
 
-<a href="https://github.com/neondatabase/mcp-server-neon/tree/main/mcp-client" description="A Model Context Protocol (MCP) client CLI that can be used to interact with any MCP server" icon="github">Neon MCP Client CLI</a>
+<a href="https://github.com/neondatabase/mcp-server-neon/tree/main/mcp-client" description="A Model Context Protocol (MCP) client CLI that can be used to interact with any MCP server" icon="github">MCP Client CLI</a>
 
-<a href="https://github.com/AgentOps-AI/AgentStack/blob/main/docs/tools/tool/neon.mdx" description="A Neon tool for AgentStack that allows agents to create ephemeral or long-lived Postgres instances for structured data storage" icon="github">Neon tool for AgentStack</a>
+<a href="https://neon.tech/guides/neon-mcp-server" description="Getting started with Claude Desktop and Neon MCP server" icon="openai">Claude Desktop with Neon MCP Server</a>
 
-<a href="/guides/composio-crewai-neon" description="A full integration between LLMs and AI agents and Neon's API" icon="code">Neon tool for Composio</a>
+<a href="https://neon.tech/guides/cline-mcp-neon" description="Getting started with Cline and Neon Postgres MCP Server" icon="openai">Cline with Neon MCP Server</a>
+
+<a href="https://neon.tech/guides/windsurf-mcp-neon" description="Getting started with Windsurf and Neon Postgres MCP Server" icon="openai">Windsurf with Neon MCP Server</a>
+
+<a href="https://neon.tech/guides/agentstack-neon" description="Building AI Agents with AgentStack and Neon" icon="openai">Neon tool for AgentStack</a>
+
+<a href="https://neon.tech/guides/composio-crewai-neon" description="Building AI Agents with CrewAI, Composio, and Neon" icon="openai">Neon tool for Composio</a>
+
+<a href="https://neon.tech/guides/langgraph-neon" description="A step-by-step guide to building AI agents with LangGraph and Neon" icon="openai">LangGraph + Neon</a>
 
 </DetailIconCards>
 
@@ -134,7 +142,7 @@ Share your AI app on our **#showcase** channel on [Discord](https://discord.gg/9
 
 <a href="https://github.com/neondatabase/neon-vector-search-openai-notebooks" description="Jupyter Notebook for vector search with Neon, pgvector, and OpenAI" icon="github">Jupyter Notebook for vector search with Neon</a>
 
-<a href="https://github.com/ItzCrazyKns/Neon-Image-Search" description="Community: An image serch app built with Neon and Vertex AI" icon="github">Image search with Neon and Vertex AI</a>
+<a href="https://github.com/ItzCrazyKns/Neon-Image-Search" description="Community: An image search app built with Neon and Vertex AI" icon="github">Image search with Neon and Vertex AI</a>
 
 <a href="https://github.com/mistralai/cookbook/blob/main/third_party/Neon/neon_text_to_sql.ipynb" description="A Text-to-SQL conversion app built with Mistral AI, Neon, and LangChain" icon="github">Text-to-SQL conversion with Mistral + LangChain</a>
 

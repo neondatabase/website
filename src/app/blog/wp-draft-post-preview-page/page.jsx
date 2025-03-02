@@ -14,7 +14,7 @@ import SubscribeForm from 'components/pages/blog-post/subscribe-form';
 import Admonition from 'components/shared/admonition';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
-import { getWpPreviewPostData } from 'utils/api-posts';
+import { getWpPreviewPostData } from 'utils/api-wp';
 import getFormattedDate from 'utils/get-formatted-date';
 import getMetadata from 'utils/get-metadata';
 import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blocks';

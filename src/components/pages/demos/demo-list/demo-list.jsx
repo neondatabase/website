@@ -19,6 +19,26 @@ const items = [
     ],
   },
   {
+    category: 'Neon on Azure',
+    categoryTextColor: 'text-blue-60',
+    items: [
+      {
+        title: 'Multi-user RAG Chat in Azure: Database project per customer',
+        description:
+          "RAG Chat example on Azure creates one Neon project per customer, each customer's data will be completely isolated",
+        demoLink: 'https://multiuser-rag-g0e0g3h6ekhtf7cg.germanywestcentral-01.azurewebsites.net',
+        sourceLink: 'https://github.com/neondatabase-labs/azure-tenant-ai-chat',
+      },
+      {
+        title: 'AI-Powered Neon Database Q&A Chatbot in Azure',
+        description:
+          "Ask questions about data in Neon database using React and FastAPI in Python.",
+        demoLink: 'https://rag-vrjtpx5tgrsnm-ca.wittyriver-637b2279.eastus2.azurecontainerapps.io',
+        sourceLink: 'https://github.com/neondatabase-labs/rag-neon-postgres-openai-azure-python',
+      },
+    ],
+  },
+  {
     category: 'Branching',
     categoryTextColor: 'text-blue-80',
     items: [

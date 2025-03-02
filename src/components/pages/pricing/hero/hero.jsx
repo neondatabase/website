@@ -132,7 +132,7 @@ const Hero = () => {
                       'mt-6 w-full !py-4 !text-base !font-medium leading-none tracking-tighter transition-colors duration-300 sm:max-w-none',
                       highlighted
                         ? 'bg-green-45 text-black hover:bg-[#00ffaa]'
-                        : 'bg-gray-new-15 hover:bg-gray-new-30'
+                        : 'bg-gray-new-20 hover:bg-gray-new-30'
                     )}
                     size="sm"
                     to={button.url}

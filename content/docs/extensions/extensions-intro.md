@@ -1,7 +1,7 @@
 ---
 title: Postgres extensions
 enableTableOfContents: true
-updatedOn: '2025-01-30T21:03:38.097Z'
+updatedOn: '2025-02-12T10:58:29.258Z'
 ---
 
 Explore supported Postgres extensions by category. Also see:
@@ -10,7 +10,7 @@ Explore supported Postgres extensions by category. Also see:
 - [Install an extension](/docs/extensions/pg-extensions#install-an-extension)
 - [Update an extension](/docs/extensions/pg-extensions#update-an-extension-version)
 
-Do you need an extension we don’t support yet? [Let us know](/docs/extensions/pg-extensions#request-extension-support).
+**Need an extension we don't have?** 📩 [Request an extension](/docs/extensions/pg-extensions#request-extension-support)
 
 ## AI / Machine Learning
 

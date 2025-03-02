@@ -3,7 +3,7 @@ title: Replicate data to Materialize
 subtitle: Learn how to replicate data from Neon to Materialize
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-03T20:41:57.322Z'
+updatedOn: '2025-02-11T11:32:44.538Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -58,7 +58,7 @@ After logical replication is enabled in Neon, the next step is to create a publi
    For specific tables:
 
    ```sql
-   CREATE PUBLICATION mz_source FOR TABLE <table1>, <table2>;
+   CREATE PUBLICATION mz_source FOR TABLE <tbl1, tbl2, tbl3>;
    ```
 
    The `mz_source` publication will contain the set of change events generated from the specified tables and will later be used to ingest the replication stream.
@@ -195,11 +195,11 @@ Now that you’ve configured your database network and created an ingestion clus
    CREATE SOURCE mz_source
    IN CLUSTER ingest_postgres
    FROM POSTGRES CONNECTION pg_connection (PUBLICATION 'mz_source')
-   FOR ALL TABLES;
+   FOR TABLES <table1>, <table2>;
    ```
 
    <Admonition type="tip" title="Tips">
-   - To ingest data from specific schemas or tables in your publication, you can use `FOR SCHEMAS (<schema1>,<schema2>)` or `FOR TABLES (<table1>, <table2>)` instead of `FOR ALL TABLES`.
+   - To ingest data from specific schemas, you can use `FOR SCHEMAS (<schema1>,<schema2>)`.
    - After creating a source, you can incorporate upstream schema changes for specific replicated tables using the `ALTER SOURCE...{ADD | DROP} SUBSOURCE` syntax.
    </Admonition>
 

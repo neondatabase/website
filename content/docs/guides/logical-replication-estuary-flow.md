@@ -3,7 +3,7 @@ title: Replicate Data with Estuary Flow
 subtitle: Learn how to replicate data from Neon with Estuary Flow
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-03T20:41:57.320Z'
+updatedOn: '2025-02-11T11:32:44.538Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -111,7 +111,7 @@ Create a [publication](https://www.postgresql.org/docs/current/sql-createpublica
 CREATE PUBLICATION estuary_publication FOR TABLE <tbl1, tbl2, tbl3>;
 ```
 
-Refer to the [Postgres docs](https://www.postgresql.org/docs/current/sql-alterpublication.html) if you need to add or remove tables from your publication. Alternatively, you also can create a publication `FOR ALL TABLES`.
+Refer to the [Postgres docs](https://www.postgresql.org/docs/current/sql-alterpublication.html) if you need to add or remove tables from your publication.
 
 Upon startup, the Estuary Flow connector for Postgres will automatically create the [replication slot](https://www.postgresql.org/docs/current/logicaldecoding-explanation.html#LOGICALDECODING-REPLICATION-SLOTS) required for ingesting data change events from Postgres. The slot's name will be prefixed with `estuary_`, followed by a unique identifier.
 

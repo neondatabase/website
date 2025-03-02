@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/conceptual-guides/regions
-updatedOn: '2024-12-30T21:13:29.488Z'
+updatedOn: '2025-02-26T15:18:22.330Z'
 ---
 
 Neon offers project deployment in multiple AWS and Azure regions. To minimize latency between your Neon database and application, we recommend choosing the region closest to your application server.
@@ -15,8 +15,10 @@ Neon offers project deployment in multiple AWS and Azure regions. To minimize la
 - 🇺🇸 AWS US East (Ohio) &mdash; `aws-us-east-2`
 - 🇺🇸 AWS US West (Oregon) &mdash; `aws-us-west-2`
 - 🇩🇪 AWS Europe (Frankfurt) &mdash; `aws-eu-central-1`
+- 🇬🇧 AWS Europe (London) &mdash; `aws-eu-west-2`
 - 🇸🇬 AWS Asia Pacific (Singapore) &mdash; `aws-ap-southeast-1`
 - 🇦🇺 AWS Asia Pacific (Sydney) &mdash; `aws-ap-southeast-2`
+- 🇧🇷 AWS South America (São Paulo) &mdash; `aws-sa-east-1`
 
 ## Azure regions
 
@@ -58,8 +60,10 @@ If you are unsure of your project's region, you can find this information in the
 | AWS US East (Ohio) — aws-us-east-2                | 18.217.181.229, 3.129.145.179, 3.139.195.115                                           |
 | AWS US West (Oregon) — aws-us-west-2              | 44.235.241.217, 52.32.22.241, 52.37.48.254, 54.213.57.47                               |
 | AWS Europe (Frankfurt) — aws-eu-central-1         | 18.158.63.175, 3.125.234.79, 3.125.57.42                                               |
+| AWS Europe (London) — aws-eu-west-2               | 3.10.42.8, 18.133.205.39, 52.56.191.86                                                 |
 | AWS Asia Pacific (Singapore) — aws-ap-southeast-1 | 54.254.50.26, 54.254.92.70, 54.255.161.23                                              |
 | AWS Asia Pacific (Sydney) — aws-ap-southeast-2    | 13.237.134.148, 13.55.152.144, 54.153.185.87                                           |
+| AWS South America (São Paulo) — aws-sa-east-1     | 18.230.1.215, 52.67.202.176, 54.232.117.41                                             |
 
 ### Azure NAT Gateway IP Addresses
 

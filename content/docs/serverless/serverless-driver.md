@@ -207,7 +207,7 @@ For additional details, see [Options and configuration](https://github.com/neond
 
 The `transaction(queriesOrFn, options)` function is exposed as a property on the query function. It allows multiple queries to be executed within a single, non-interactive transaction.
 
-The first argument to `transaction(), queriesOrFn`, is either an array of queries or a non-async function that receives a query function as its argument and returns an array of queries.
+The first argument to `transaction()`, `queriesOrFn`, is either an array of queries or a non-async function that receives a query function as its argument and returns an array of queries.
 
 The array-of-queries case looks like this:
 
@@ -234,7 +234,7 @@ const [authors, tags] = await neon(process.env.DATABASE_URL).transaction((txn) =
 ]);
 ```
 
-The optional second argument to `transaction()`, `options`, has the same keys as the options to the ordinary query function -- `arrayMode`, `fullResults` and `fetchOptions` — plus three additional keys that concern the transaction configuration. These transaction-related keys are: `isolationMode`, `readOnly` and `deferrable`.
+The optional second argument to `transaction()`, `options`, has the same keys as the options to the ordinary query function — `arrayMode`, `fullResults` and `fetchOptions` — plus three additional keys that concern the transaction configuration. These transaction-related keys are: `isolationMode`, `readOnly` and `deferrable`.
 
 Note that options **cannot** be supplied for individual queries within a transaction. Query and transaction options must instead be passed as the second argument of the `transaction()` function. For example, this `arrayMode` setting is ineffective (and TypeScript won't compile it): `await sql.transaction([sql('SELECT now()', [], { arrayMode: true })])`. Instead, use `await sql.transaction([sql('SELECT now()')], { arrayMode: true })`.
 

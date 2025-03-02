@@ -16,7 +16,7 @@ nextLink:
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `SELECT INTO` statement to create a new table from the result set of a query.
 
-If you want to select data into variables, check out the [PL/pgSQL SELECT INTO statement](https://neon.tech/postgresql/plpgsql-select-into/).
+If you want to select data into variables, check out the [PL/pgSQL SELECT INTO statement](https://neon.tech/postgresql/postgresql-plpgsql/pl-pgsql-select-into/).
 
 ## Introduction to PostgreSQL SELECT INTO statement
 
@@ -46,7 +46,7 @@ The [`WHERE`](postgresql-where) clause allows you to specify a condition that de
 
 Besides the `WHERE` clause, you can use other clauses in the `SELECT` statement for the `SELECT INTO` statement such as [`INNER JOIN`](postgresql-inner-join), [`LEFT JOIN`](postgresql-left-join), [`GROUP BY`](postgresql-group-by), and [`HAVING`](postgresql-having).
 
-Note that you cannot use the [`SELECT INTO`](https://neon.tech/postgresql/plpgsql-select-into/) statement in PL/pgSQL because it interprets the `INTO` clause differently. In this case, you can use the [`CREATE TABLE AS`](postgresql-create-table-as) statement which provides more functionality than the `SELECT INTO` statement.
+Note that you cannot use the [`SELECT INTO`](https://neon.tech/postgresql/postgresql-plpgsql/pl-pgsql-select-into/) statement in PL/pgSQL because it interprets the `INTO` clause differently. In this case, you can use the [`CREATE TABLE AS`](postgresql-create-table-as) statement which provides more functionality than the `SELECT INTO` statement.
 
 ## PostgreSQL SELECT INTO examples
 
