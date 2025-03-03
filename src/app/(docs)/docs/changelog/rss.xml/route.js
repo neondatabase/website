@@ -24,21 +24,17 @@ export async function GET() {
     const { slug, date } = post;
     const { data, content } = getPostBySlug(slug, CHANGELOG_DIR_PATH);
     const label = getFormattedDate(date);
-
     const heading = data.title || content.match(/# (.*)/)?.[1];
-
-    const description =
-      data.description || `${heading} and more. Check out the full list of updates.`;
 
     const url = `${SITE_URL}${CHANGELOG_BASE_PATH}${slug}`;
 
     feed.item({
       id: url,
       title: `${heading} release - ${label}`,
+      description: 'Check out the full list of updates.',
       url,
       guid: url,
       date: new Date(date),
-      description,
     });
   });
 
