@@ -5,7 +5,7 @@ isDraft: false
 updatedOn: '2025-02-28T20:32:00.526Z'
 ---
 
-Neon must occasionally perform mandatory platform maintenance operations outside the [scheduled updates](/docs/manage/updates) performed on Neon computes. This means that you may experience brief unscheduled disruptions from time to time.
+Neon must occasionally perform essential platform maintenance operations outside the [scheduled updates](/docs/manage/updates) performed on Neon computes. This means that you may experience brief unscheduled disruptions from time to time.
 
 Platform maintenance operations may include any of the following:
 
