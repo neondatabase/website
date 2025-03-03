@@ -67,7 +67,7 @@ const Hero = () => (
             <Button
               className="mt-5 h-11 w-full font-semibold tracking-tighter"
               theme="primary"
-              to={LINKS.signup}
+              to={LINKS.signupCredits}
             >
               Sign up
             </Button>

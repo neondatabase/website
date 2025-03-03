@@ -54,8 +54,8 @@ const Autoscaling = () => (
           <a href="https://www.pgbouncer.org/" target="_blank" rel="noopener noreferrer">
             PgBouncer
           </a>{' '}
-          directly into its architecture: every endpoint has connection pooling enabled. Connections
-          scale automatically with traffic up to 10,000 concurrently.
+          directly into its architecture: every endpoint has connection pooling enabled. Supports up
+          to 10,000 concurrent connections.
         </p>
         <div className="pointer-events-none absolute inset-0 hidden mix-blend-plus-lighter lg:block">
           <span className="absolute left-1/4 top-[40%] h-1/5 w-1/5 -rotate-[68deg] rounded-[100%] bg-[#355696] blur-3xl" />

@@ -37,7 +37,7 @@ const ServerlessAppsPage = () => (
       titleClassName="leading-dense !text-6xl xl:!text-5xl lg:!text-4xl md:!text-[32px]"
       description="Start saving with Neon."
       buttonText="Sign up"
-      buttonUrl={LINKS.signup}
+      buttonUrl={LINKS.signupCredits}
       buttonClassName="mt-9 h-12 min-w-48 lg:h-11 xl:mt-6 lg:mt-5 md:mt-4 md:h-10"
     />
   </Layout>
