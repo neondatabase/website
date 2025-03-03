@@ -117,7 +117,7 @@ After logging in, got back to GitHub and navigate to **Settings** > **Actions** 
 
 From the options select **Linux** under the **Runner Image** section and **x64** in the **Architecture** section.
 
-![Screenshot of GitHub - Self-hosted Runners](/guides/images/gihub-actions-self-hosted-runners/gihub-actions-self-hosted-runners-linux-self-hosted-runner.jpg)
+![Screenshot of GitHub - Self-hosted Runners](/guides/images/gihub-actions-self-hosted-runners/gihub-actions-self-hosted-runners-github-runner-instructions.jpg)
 
 Follow the **Download** and **Configure** steps. When you reach the final step, **Create the runner and start the configuration experience**, press **Enter** to accept the default options. However, skip the last step, which runs `./run.sh`—I'll explain why next.
 
