@@ -70,7 +70,8 @@ const TopBar = ({ isDarkTheme }) => (
         isDarkTheme ? 'text-gray-new-90' : 'text-gray-new-15'
       )}
     >
-      In Neon, point-in-time restores are instant—even for 100 TB databases. See how it compares to AWS RDS
+      In Neon, point-in-time restores are instant—even for 100 TB databases. See how it compares to
+      AWS RDS
     </span>
     <ChevronIcon
       className={clsx(
