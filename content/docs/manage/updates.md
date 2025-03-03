@@ -40,7 +40,7 @@ Neon applies updates to computes based on the following rules:
 If a compute is excluded from an update, Neon will apply the missed update with the next update, assuming the compute meets the update criteria mentioned above.
 
 <Admonition type="important" title="updates outside of scheduled update windows">
-Please be aware that Neon occasionally performs essential platform maintenance outside of scheduled update windows for Neon computes. To learn more, see [Platform maintenance](/docs/manage/platform-maintenance).
+Please be aware that Neon must occasionally perform essential platform maintenance outside the scheduled updates performed on Neon computes. This means that you may experience brief unscheduled disruptions from time to time. To learn more, see [Platform maintenance](/docs/manage/platform-maintenance).
 </Admonition>
 
 ## Updates on the Free Plan
