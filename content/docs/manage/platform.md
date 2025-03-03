@@ -95,5 +95,3 @@ Learn how Neon secures your projects and data, and explore the security features
 <a href="/docs/manage/updates" description="Learn about scheduled updates for Neon computes and Postgres" icon="import">Scheduled updates</a>
 
 </DetailIconCards>
-
-

@@ -24,7 +24,7 @@ Updates to Neon computes may include some or all of the following:
 - Neon features and enhancements
 - Updates to other tools and components included in Neon compute images
 
-These scheduled compute updates do not include [platform maintenance operations](/docs/manage/platform-maintenance). 
+These scheduled compute updates do not include [platform maintenance operations](/docs/manage/platform-maintenance).
 
 ## How often are updates applied?
 
