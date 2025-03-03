@@ -23,6 +23,9 @@ import expertiseIcon from 'icons/enterprise/expertise.svg';
 import multiIcon from 'icons/enterprise/multi.svg';
 import recoveryIcon from 'icons/enterprise/recovery.svg';
 import scalabilityIcon from 'icons/enterprise/scalability.svg';
+import authorAlexCo from 'images/authors/alex-co.jpg';
+import authorCodyJenkins from 'images/authors/cody-jenkins.jpg';
+import authorRobertChandler from 'images/authors/robert-chandler.jpg';
 import apiMd from 'images/pages/enterprise/bento/api-md.jpg';
 import api from 'images/pages/enterprise/bento/api.jpg';
 import costEfficiencyMd from 'images/pages/enterprise/bento/cost-efficiency-md.jpg';
@@ -35,9 +38,6 @@ import provenSuccessMd from 'images/pages/enterprise/bento/proven-success-md.jpg
 import provenSuccess from 'images/pages/enterprise/bento/proven-success.jpg';
 import serverlessScalabilityMd from 'images/pages/enterprise/bento/serverless-scalability-md.jpg';
 import serverlessScalability from 'images/pages/enterprise/bento/serverless-scalability.jpg';
-import alexCo from 'images/pages/enterprise/testimonials/alex-co.jpg';
-import codyJenkins from 'images/pages/enterprise/testimonials/cody-jenkins.jpg';
-import robertChandler from 'images/pages/enterprise/testimonials/robert-chandler.jpg';
 import getMetadata from 'utils/get-metadata';
 
 export const metadata = getMetadata(SEO_DATA.enterprise);
@@ -294,7 +294,7 @@ const EnterprisePage = () => (
       quote="Neon worked out of the box, handling hundreds of Lambdas without any of the connection issues we saw in Aurora v2. On top of that, it costs us 1/6 of what we were paying with AWS."
       name="Cody Jenkins"
       position="Head of Engineering at Invenco"
-      avatar={codyJenkins}
+      avatar={authorCodyJenkins}
       isPriority
     />
     <Features title="Hundreds of Enterprises are switching to Neon. Here’s why" items={features} />
@@ -306,7 +306,7 @@ const EnterprisePage = () => (
       quote="Time to launch is crucial for us: when we tried Neon and saw that spinning up a new ephemeral environment takes seconds, we were blown away."
       name="Alex Co"
       position="Head of Platform Engineering at Mindvalley"
-      avatar={alexCo}
+      avatar={authorAlexCo}
     />
     <Bento cards={bentoCards} />
     <TestimonialNew
@@ -314,7 +314,7 @@ const EnterprisePage = () => (
       quote="With Neon’s preview branches, we can catch issues early and fix them before they hit production."
       name="Robert Chandler"
       position="CTO at Wordware.ai"
-      avatar={robertChandler}
+      avatar={authorRobertChandler}
     />
     <Faq items={faqItems} />
     <CTA
