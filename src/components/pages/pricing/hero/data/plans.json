@@ -23,7 +23,8 @@
             "text": "compute hours",
             "href": "#compute-hour"
           }
-        ]
+        ],
+        "info": "For main branch. Additional branches limited to 5 compute hours"
       },
       {
         "icon": "autoscale",
