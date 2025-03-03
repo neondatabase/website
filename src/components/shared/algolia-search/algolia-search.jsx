@@ -31,15 +31,37 @@ const AlgoliaSearch = ({ indexName, children }) => (
     indexName={indexName}
     searchClient={searchClient}
     routing={{
+      // customize search urls to ?query=... format
       router: {
         createURL: ({ qsModule, routeState, location }) => {
-          const { protocol, hostname, port = '', pathname, hash } = location;
-          const queryString = qsModule.stringify(routeState, {
-            encode: false,
-          });
-          const portWithPrefix = port === '' ? '' : `:${port}`;
+          const { pathname } = location;
+          const basePath = pathname.split('/')[1];
+          const queryParameters = {};
 
-          return `${protocol}//${hostname}${portWithPrefix}${pathname}?${queryString}${hash}`;
+          if (routeState.query) {
+            queryParameters.query = encodeURIComponent(routeState.query);
+          }
+
+          const queryString = qsModule.stringify(queryParameters, {
+            addQueryPrefix: true,
+            arrayFormat: 'repeat',
+          });
+
+          return `/${basePath}${queryString}`;
+        },
+        parseURL: ({ qsModule, location }) => {
+          const { query = '' } = qsModule.parse(location.search.slice(1));
+          return { query: decodeURIComponent(query) };
+        },
+      },
+      stateMapping: {
+        stateToRoute(uiState) {
+          const indexUiState = uiState[indexName] || {};
+          return { query: indexUiState.query };
+        },
+
+        routeToState(routeState) {
+          return { [indexName]: { query: routeState.query } };
         },
       },
     }}
