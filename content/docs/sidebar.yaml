@@ -504,6 +504,8 @@
       items:
         - title: About
           slug: guides/neon-auth
+        - title: Tutorial
+          slug: guides/neon-auth-tutorial
         - title: API
           slug: guides/neon-auth-api
     - title: Neon RLS Authorize
