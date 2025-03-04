@@ -8,12 +8,12 @@ updatedOn: '2025-02-27T00:00:00.000Z'
 
 <FeatureBetaProps feature_name="Neon Auth" />
 
-Modern application development is becoming increasingly reliant on third-party authentication providers like [Clerk](https://clerk.com), [Stack Auth](https://stack-auth.com) etc to handle secure user management. While these platforms excel at streamlining login workflows and protecting sensitive data, developers frequently encounter a hidden challenge: maintaining parity between external identity records and their application's database.  
+Modern application development is becoming increasingly reliant on third-party authentication providers like [Clerk](https://clerk.com), [Stack Auth](https://stack-auth.com), etc., to handle secure user management. While these platforms excel at streamlining login workflows and protecting sensitive data, developers frequently encounter a hidden challenge: maintaining parity between external identity records and their application's database.  
 
 Profile updates, role changes, and user deletions in your authentication service don’t automatically reflect in your application’s data layer. Today, developers typically address this gap through several approaches:  
 
 - **Webhooks**: Many providers offer real-time event notifications (e.g., `user.updated`) to trigger immediate updates in your system.  
-- **Polling**: Periodically querying the auth provider’s API checks for changes, but introduces latency and risks hitting rate limits.  
+- **Polling**: Periodically querying the auth provider’s API checks for changes, but this approach introduces latency and risks hitting rate limits.  
 - **Login-time sync**: Fetching fresh profile data during authentication ensures accuracy for active users at the expense of increased latency while also leaving stale data for inactive accounts.
 
 While these methods partially mitigate the problem, they often require writing custom synchronization scripts, implementing brittle listeners, and manually reconciling data discrepancies – turning a theoretical time-saver into an ongoing maintenance burden.  
@@ -21,7 +21,7 @@ While these methods partially mitigate the problem, they often require writing c
 Neon Auth offers a streamlined solution to this common challenge. Instead of grappling with complex synchronization methods, Neon Auth automatically synchronizes user profiles directly from your authentication provider to your Neon Postgres database. This eliminates the need for manual updates, ensuring accurate, real-time data. You gain the benefits of efficient, automated user data management while retaining complete control over your core application information
 
 <Admonition type="note">
-Currently, Neon Auth is available for use with Stack Auth, with support for additional authentication providers like Clerk coming soon.
+Currently, Neon Auth is available for use with Stack Auth, with support for additional authentication providers coming soon.
 </Admonition>
 
 ## A typical user data synchronization scenario
@@ -106,10 +106,10 @@ Neon Auth introduces a simplified architecture that removes the need for webhook
 
 With Neon Auth, the architecture is significantly cleaner and more efficient:
 
-- **Automated Synchronization**: Neon Auth handles the entire synchronization process automatically in the background. You no longer need to set up and maintain complex synchronization logic.
-- **No Webhooks or Polling**: No need to develop and maintain webhook endpoints for different user events (e.g., `user.created`, `user.updated`, `user.deleted`). Neon Auth automatically syncs user data changes to your database without requiring external triggers.
-- **Direct Database Access**: Your application can directly query user data from the `neon_auth.users_sync` table in your Neon Postgres database. This simplifies data access and improves query performance.
-- **Error Handling and Retries**: Neon Auth includes built-in error handling and retry mechanisms to ensure data consistency without requiring custom code.
+- **Automated synchronization**: Neon Auth handles the entire synchronization process automatically in the background. You no longer need to set up and maintain complex synchronization logic.
+- **No webhooks or polling**: No need to develop and maintain webhook endpoints for different user events (e.g., `user.created`, `user.updated`, `user.deleted`). Neon Auth automatically syncs user data changes to your database without requiring external triggers.
+- **Direct database access**: Your application can directly query user data from the `neon_auth.users_sync` table in your Neon Postgres database. This simplifies data access and improves query performance.
+- **Error handling and retries**: Neon Auth includes built-in error handling and retry mechanisms to ensure data consistency without requiring custom code.
 
 ### Enhanced data consistency
 
