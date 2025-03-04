@@ -143,7 +143,7 @@ const REGIONS = {
     { id: 'us-central1', name: 'GCP - Council Bluffs' },
     { id: 'us-east1', name: 'GCP - Moncks Corner' },
     { id: 'us-east4', name: 'GCP - Ashburn' },
-    { id: 'us-west-1', name: 'GCP - Oregon' },
+    { id: 'us-west1', name: 'GCP - Oregon' },
     { id: 'us-west2', name: 'GCP - Los Angeles' },
     { id: 'us-west3', name: 'GCP - Salt Lake City' },
   ],
