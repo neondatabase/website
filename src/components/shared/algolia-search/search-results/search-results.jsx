@@ -30,7 +30,7 @@ const SearchResults = ({ posts, indexName, className, children }) => {
 
         if (indexName === 'guides') return <GuideCard key={post.slug} {...post} />;
 
-        return <BlogGridItem key={post.slug} index={index} post={post} />;
+        return <BlogGridItem key={post.slug} post={post} isPriority={index < 5} />;
       })}
     </div>
   );
