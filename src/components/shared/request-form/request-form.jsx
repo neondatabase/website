@@ -261,8 +261,8 @@ const EXTENSIONS = {
 };
 
 const DATA = {
-  regions: REGIONS,
-  extensions: EXTENSIONS,
+  region: REGIONS,
+  extension: EXTENSIONS,
 };
 
 function getCookie(name) {
