@@ -9,89 +9,14 @@ import {
 } from '@headlessui/react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
+import Button from 'components/shared/button';
 import CheckIcon from 'icons/check.inline.svg';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
+import { emailRegexp } from 'utils/forms';
 
-import Button from '../button';
-
-const DEFAULT_DATA = {
-  title: 'Request a new extension',
-  description: 'Looking for a specific extension in Neon? Suggest one using this form.',
-  buttonText: 'Request',
-  extensions: [
-    'aiven_extras',
-    'adminpack',
-    'amcheck',
-    'auth_delay',
-    'auto_explain',
-    'aws_commons',
-    'aws_lambda',
-    'aws_s3',
-    'basebackup_to_shell',
-    'basic_archive',
-    'bool_plperl',
-    'bool_plperlu',
-    'cstore_fdw',
-    'Citus',
-    'dblink',
-    'dict_xsyn',
-    'file_fdw',
-    'flow_control',
-    'hstore_plperl',
-    'hstore_plperlu',
-    'http',
-    'jsonb_plperl',
-    'jsonb_plperlu',
-    'log_fdw',
-    'mongo_fdw',
-    'Multicorn',
-    'mysql_fdw',
-    'old_snapshot',
-    'oracle_fdw',
-    'orafce',
-    'pageinspect',
-    'passwordcheck',
-    'pg_anon',
-    'pg_bigm',
-    'pg_buffercache',
-    'pg_freespacemap',
-    'pg_parquet',
-    'pg_proctab',
-    'pg_similarity',
-    'pgSphere',
-    'pg_surgery',
-    'pg_transport',
-    'pg_visibility',
-    'pg_walinspect',
-    'pg_bulkload',
-    'pg_prometheus',
-    'pglogical',
-    'pldebugger',
-    'pljava',
-    'plperl',
-    'plperlu',
-    'plprofiler',
-    'pltcl',
-    'PL/Proxy',
-    'PostPic',
-    'Postgres_fdw',
-    'postgis_legacy',
-    'pgaudit',
-    'PgMemcache',
-    'rds_tools',
-    'sepgsql',
-    'sslinfo',
-    'tds_fdw',
-    'test_decoding',
-    'test_parser',
-    'Texcaller',
-    'timetravel',
-    'uuid',
-    'ZomboDB',
-  ],
-};
+import DATA from './data';
 
 function getCookie(name) {
   if (typeof document === 'undefined') return null;
@@ -101,27 +26,55 @@ function getCookie(name) {
   return null;
 }
 
-const ExtensionRequest = ({
-  title = DEFAULT_DATA.title,
-  description = DEFAULT_DATA.description,
-  buttonText = DEFAULT_DATA.buttonText,
-  options = DEFAULT_DATA.extensions,
-}) => {
+const RequestForm = ({ type }) => {
+  const { title, description, placeholder, buttonText, options, extendedOptions } = DATA[type];
+
   const isRecognized = !!getCookie('ajs_user_id');
-
-  const [selected, setSelected] = useState();
-  const [email, setEmail] = useState();
-  const [requestComplete, setRequestComplete] = useState(false);
+  const [selected, setSelected] = useState('');
+  const [email, setEmail] = useState('');
   const [query, setQuery] = useState('');
+  const [isValid, setIsValid] = useState(false);
+  const [isSent, setIsSent] = useState(false);
 
-  const filteredOptions =
-    query === ''
-      ? options
-      : options.filter((option) => option.toLowerCase().includes(query.toLowerCase()));
+  const filteredOptions = useMemo(() => {
+    if (query === '') return options;
+    return options.filter(
+      (option) =>
+        option.name.toLowerCase().includes(query.toLowerCase()) ||
+        option.id?.toLowerCase().includes(query.toLowerCase())
+    );
+  }, [options, query]);
 
-  const matchingOption = filteredOptions.find(
-    (option) => option.toLowerCase() === query.toLowerCase()
+  const matchingOption = useMemo(
+    () => filteredOptions.find((option) => option.name.toLowerCase() === query.toLowerCase()),
+    [filteredOptions, query]
   );
+
+  useEffect(() => {
+    // Form is valid if an option is selected and either user is recognized or valid email is given
+    setIsValid(!!selected && (isRecognized || emailRegexp.test(email)));
+  }, [selected, email, isRecognized]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (isValid) {
+      if (window.zaraz) {
+        const { eventName, eventProps } = DATA[type];
+        const eventData = {
+          [eventProps.name]: selected.name,
+        };
+        if (eventProps.id && selected.id) {
+          eventData[eventProps.id] = selected.id;
+        }
+        if (!isRecognized && email) {
+          window.zaraz.track('identify', { email });
+        }
+        window.zaraz.track(eventName, eventData);
+      }
+      setIsSent(true);
+    }
+  };
 
   return (
     <figure
@@ -136,18 +89,18 @@ const ExtensionRequest = ({
       <p className="mt-2.5 font-light leading-tight text-gray-new-30 dark:text-gray-new-70">
         {description}
       </p>
-      {requestComplete ? (
-        <div className="mt-6 flex min-h-10 items-center gap-2 sm:min-h-0 sm:items-start">
-          <CheckIcon className="-mt-1 size-4 shrink-0 text-green-45 sm:mt-1" aria-hidden />
-          <p className="text-[17px] font-light">Request logged. We appreciate your feedback!</p>
-        </div>
-      ) : (
-        <div className="mt-6 flex items-end gap-4 md:flex-col md:items-start">
+      {!isSent ? (
+        <form
+          className="mt-6 flex items-end gap-4 md:flex-col md:items-start"
+          onSubmit={handleSubmit}
+        >
           <div className="flex-1 md:w-full">
             <Combobox
               value={selected}
               immediate
-              onChange={(value) => setSelected(value)}
+              onChange={(value) => {
+                setSelected(value);
+              }}
               onClose={() => setQuery('')}
             >
               <div className="relative">
@@ -157,8 +110,9 @@ const ExtensionRequest = ({
                     'focus:outline-none data-[focus]:outline-1 data-[focus]:-outline-offset-1 data-[focus]:outline-gray-new-70',
                     'dark:bg-gray-new-15 dark:data-[focus]:outline-gray-new-30'
                   )}
+                  displayValue={(option) => option?.name}
                   autoComplete="off"
-                  placeholder="Select an extension"
+                  placeholder={placeholder}
                   onChange={(event) => setQuery(event.target.value)}
                 />
                 <ComboboxButton className="group absolute inset-y-0 right-0 px-2.5">
@@ -176,21 +130,31 @@ const ExtensionRequest = ({
                 modal={false}
                 transition
               >
-                {filteredOptions.map((option) => (
+                {filteredOptions.map((option, index) => (
                   <ComboboxOption
-                    key={option}
+                    key={index}
                     value={option}
                     className={clsx(
                       'group flex min-h-10 cursor-pointer select-none flex-wrap items-center gap-1.5 px-4 py-2 text-sm data-[focus]:bg-gray-new-94',
                       'dark:data-[focus]:bg-gray-new-15'
                     )}
                   >
-                    {option}
+                    {option.name}
+                    {option.id && (
+                      <code
+                        className={clsx(
+                          'whitespace-nowrap rounded-sm bg-gray-new-90 px-1.5 py-1 text-xs leading-none',
+                          'dark:bg-gray-new-20'
+                        )}
+                      >
+                        {option.id}
+                      </code>
+                    )}
                   </ComboboxOption>
                 ))}
-                {query !== '' && !matchingOption && (
+                {extendedOptions && query !== '' && !matchingOption && (
                   <ComboboxOption
-                    value={query}
+                    value={{ name: query }}
                     className={clsx(
                       'group flex min-h-10 cursor-pointer select-none flex-wrap items-center gap-1.5 px-4 py-2 text-sm data-[focus]:bg-gray-new-94',
                       'dark:data-[focus]:bg-gray-new-15'
@@ -210,10 +174,11 @@ const ExtensionRequest = ({
               className={clsx(
                 'remove-autocomplete-styles h-10 min-w-64 rounded border-none bg-gray-new-94 px-4 py-3 md:w-full',
                 '2xl:min-w-52 xl:min-w-40 xl:text-sm',
-                'focus:outline-1 focus:-outline-offset-1 focus:outline-gray-new-70',
+                'focus:outline focus:-outline-offset-1 focus:outline-gray-new-70',
                 'dark:bg-gray-new-15 dark:focus:outline-gray-new-30'
               )}
-              placeholder="Email (optional)"
+              placeholder="Email"
+              required
               onChange={(e) => setEmail(e.target.value)}
             />
           )}
@@ -221,35 +186,27 @@ const ExtensionRequest = ({
           <Button
             className={clsx(
               'px-6 py-3 font-semibold leading-none md:w-full',
-              !selected && 'pointer-events-none opacity-70'
+              !isValid && 'pointer-events-none select-none opacity-70'
             )}
+            type="submit"
             theme="primary"
-            disabled={!selected}
-            onClick={() => {
-              if (selected) {
-                if (window.zaraz) {
-                  if (!isRecognized && email) {
-                    window.zaraz.track('identify', { email });
-                  }
-                  window.zaraz.track('Extension Requested', { extension_name: selected });
-                }
-                setRequestComplete(true);
-              }
-            }}
+            disabled={!isValid}
           >
             {buttonText}
           </Button>
+        </form>
+      ) : (
+        <div className="mt-6 flex min-h-10 items-center gap-2 sm:min-h-0 sm:items-start">
+          <CheckIcon className="-mt-1 size-4 shrink-0 text-green-45 sm:mt-1" aria-hidden />
+          <p className="text-[17px] font-light">Request logged. We appreciate your feedback!</p>
         </div>
       )}
     </figure>
   );
 };
 
-ExtensionRequest.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.node,
-  buttonText: PropTypes.string,
-  options: PropTypes.array,
+RequestForm.propTypes = {
+  type: PropTypes.oneOf(Object.keys(DATA)).isRequired,
 };
 
-export default ExtensionRequest;
+export default RequestForm;
