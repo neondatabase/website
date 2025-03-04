@@ -168,13 +168,4 @@ JOIN neon_auth.users_sync ON posts.author_id = neon_auth.users_sync.id;
 
 Neon Auth streamlines user data synchronization, replacing cumbersome manual methods with an automated, efficient solution. This simplifies development, accelerates query performance, ensures data consistency, and minimizes infrastructure costs.
 
-
-| Feature             | Before Neon Auth                                     | After Neon Auth                                    |
-|----------------------|------------------------------------------------------|----------------------------------------------------|
-| **Infrastructure**    | Multiple moving parts<br/>(Webhooks, retry logic, jobs) | No additional infrastructure required               |
-| **Code Complexity**   | Custom code overhead<br/>(event parsing, sync logic)     | No custom code needed for synchronization           |
-| **Querying Data**     | Awkward queries<br/>(fetching from auth provider API)   | Easier queries<br/>(data directly in database)          |
-| **Data Consistency**  | Risk of stale/inconsistent data                    | Enhanced data consistency                          |
-| **Cognitive Load**    | Need to manage data in two places                  | Less cognitive load<br/>(single source of user data)   |
-
 By leveraging Neon Auth, you can focus on building your application's core features while leaving the complexities of user data management to Neon.
