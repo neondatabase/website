@@ -2,6 +2,7 @@ const getExcerpt = (content, length = 5000) => {
   const excerpt = content
     .replace(/```(.|\n)*?```/g, '') // remove code blocks
     .replace(/<(.|\n)*?>/g, '') // remove html tags
+    .replace(/^(#+\s.*[a-zA-Z])$/gm, '$1.') // add period to headings ending with a letter
     .replace(/(\r\n|\n|\r)/gm, ' ') // replace new lines with spaces
     .replace(/\s+/g, ' ') // replace multiple spaces with single space
     .replace(/!\[[^\]]+\]\([^\)]+\)/g, '') // remove markdown images
