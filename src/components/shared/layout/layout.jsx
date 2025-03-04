@@ -17,10 +17,8 @@ const Layout = ({
   isHeaderSticky = false,
   isHeaderStickyOverlay = false,
   hasThemesSupport = false,
-  showSearchInput = false,
   isDocPage = false,
   docPageType = null,
-  searchIndexName = null,
   customType = null,
   isClient = false,
 }) => (
@@ -35,11 +33,9 @@ const Layout = ({
         isSticky={isHeaderSticky}
         isStickyOverlay={isHeaderStickyOverlay}
         hasThemesSupport={hasThemesSupport}
-        showSearchInput={showSearchInput}
         isDocPage={isDocPage}
         docPageType={docPageType}
         withBorder={headerWithBorder}
-        searchIndexName={searchIndexName}
         customType={customType}
         isClient={isClient}
       />
@@ -64,11 +60,9 @@ Layout.propTypes = {
   isHeaderSticky: PropTypes.bool,
   isHeaderStickyOverlay: PropTypes.bool,
   headerWithBorder: PropTypes.bool,
-  showSearchInput: PropTypes.bool,
   isDocPage: PropTypes.bool,
   docPageType: PropTypes.string,
   hasThemesSupport: PropTypes.bool,
-  searchIndexName: PropTypes.string,
   customType: PropTypes.shape({
     title: PropTypes.string,
     link: PropTypes.string,

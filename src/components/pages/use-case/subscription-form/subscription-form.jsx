@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useCookie, useLocalStorage, useLocation } from 'react-use';
 
-import BgDecor from 'components/shared/use-case-calculator/bg-decor';
+import BgDecor from 'components/pages/use-case/bg-decor';
 import { HUBSPOT_USE_CASES_FORM_ID } from 'constants/forms';
 import ErrorIcon from 'icons/error.inline.svg';
 import CheckIcon from 'icons/subscription-form-check.inline.svg';

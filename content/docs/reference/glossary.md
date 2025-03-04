@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2025-02-18T19:59:08.876Z'
+updatedOn: '2025-03-02T15:57:43.219Z'
 ---
 
 ## access token
@@ -43,7 +43,7 @@ Cost-efficient storage where Neon archives inactive branches after a defined thr
 
 ## Scale to Zero
 
-A Neon feature that suspends a compute after a specified period of inactivity (5 minutes) to minimize compute usage. When suspended, a compute is placed into an idle state. Otherwise, the compute is in an `Active` state. Users on paid plans can disable the _Scale to Zero_ feature for an "always-active" compute. For more information, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
+A Neon feature that suspends a compute after a specified period of inactivity (5 minutes by default) to minimize compute usage. When suspended, a compute is placed into an idle state. Otherwise, the compute is in an `Active` state. Users on paid plans can disable the _Scale to Zero_ feature for an "always-active" compute. For more information, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
 
 ## autoscaler-agent
 
@@ -222,6 +222,14 @@ A custom volume-based paid plan offered by Neon. See [Neon plans](/docs/introduc
 ## Free Plan
 
 See [Neon Free Plan](#neon-free-plan).
+
+## GB-month
+
+In Neon, **GB-month** is a unit of measure representing the storage of 1 gigabyte (GB) of data for one month. Storage usage is measured periodically and accumulated over the billing period. At the start of each billing period, GB-month usage resets to zero.
+
+GB-month usage reflects both the amount of storage used and how long it was used. For example, storing 10 GB for an entire month results in **10 GB-months**, while storing 10 GB for half a month results in **5 GB-months**.
+
+Deleting data will reduce the rate at which GB-month usage increases from that point forward, but it does not decrease the GB-month usage accrued up to that point.
 
 ## History
 

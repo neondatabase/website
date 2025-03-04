@@ -2,7 +2,7 @@
 title: Simplify RLS with Drizzle
 subtitle: Use Drizzle crudPolicy to manage Row-Level Security with Neon RLS Authorize
 enableTableOfContents: true
-updatedOn: '2025-01-10T00:37:35.164Z'
+updatedOn: '2025-03-02T14:35:19.531Z'
 redirectFrom:
   - /docs/guides/neon-authorize-drizzle
 ---
@@ -196,7 +196,7 @@ export const posts = pgTable(
 
 ## Example application
 
-Check out our [social wall sample application](https://github.com/neondatabase-labs/social-wall-drizzle-neon-rls), a simple schema that demonstrates RLS policies with `crudPolicy`. It implements a social wall where:
+Check out our [social wall sample application](https://github.com/neondatabase-labs/social-wall-drizzle-neon-rls-authorize), a simple schema that demonstrates RLS policies with `crudPolicy`. It implements a social wall where:
 
 - Anyone can view the wall
 - Authenticated users can modify their own posts

@@ -283,7 +283,7 @@
         - title: Private Networking
           slug: guides/neon-private-networking
     - title: Platform
-      icon: management
+      icon: platform
       slug: manage/platform
       items:
         - section: Access control
@@ -366,14 +366,17 @@
             - title: Part 2 - Automate nightly backups
               slug: manage/backups-aws-s3-backup-part-2
               tag: new
-        - section: Updates
+        - section: Maintenance & updates
           items:
-            - title: Updates
+            - title: Platform maintenance
+              slug: manage/platform-maintenance              
+              tag: new
+            - title: Scheduled updates
               slug: manage/updates
               tag: new
     - title: Use cases
       slug: use-cases/use-cases-overview
-      icon: docs
+      icon: use-case
       items:
         - title: SaaS apps
           slug: use-cases/saas-apps
@@ -480,7 +483,7 @@
           slug: guides/rust
     - title: ORMs
       slug: get-started-with-neon/orms
-      icon: use-cases
+      icon: orm
       items:
         - title: Django (Django ORM)
           slug: guides/django
@@ -496,15 +499,17 @@
           slug: guides/sqlalchemy
     - title: Neon Auth
       slug: guides/neon-auth
-      icon: partner-guide
+      icon: auth
       tag: beta
       items:
         - title: About
           slug: guides/neon-auth
+        - title: Tutorial
+          slug: guides/neon-auth-tutorial
         - title: API
           slug: guides/neon-auth-api
     - title: Neon RLS Authorize
-      icon: auth
+      icon: lock
       slug: guides/neon-rls-authorize
       items:
         - section: Overview
@@ -824,13 +829,13 @@
     - title: Terraform
       slug: reference/terraform
       tag: community
-      icon: management
+      icon: terraform
     - title: Find your template
       slug: /templates
-      icon: languages
+      icon: template
     - title: Examples repo
       slug: https://github.com/neondatabase/examples
-      icon: cli
+      icon: search
 - section: Workflows
   items:
     - title: Neon Twin
@@ -848,7 +853,7 @@
   items:
     - title: PostgreSQL Tutorial
       slug: /postgresql/tutorial
-      icon: get-started
+      icon: tutorial
     - title: Postgres guides
       slug: postgresql/introduction
       icon: postgres-guides
@@ -1064,24 +1069,24 @@
           slug: reference/compatibility
     - title: Postgres extensions
       slug: extensions/extensions-intro
-      icon: frameworks
+      icon: extension
     - title: Version support
       slug: postgresql/postgres-version-policy
-      icon: why-neon
+      icon: version
     - title: Upgrade
       slug: postgresql/postgres-upgrade
-      icon: import
+      icon: upgrade
 - section: Security
   items:
     - title: Overview
       slug: security/security-overview
-      icon: auth
+      icon: security
     - title: Security reporting
       slug: security/security-reporting
-      icon: import
+      icon: report
     - title: Compliance
       slug: security/compliance
-      icon: postgres-guides
+      icon: award
     - title: Acceptable Use Policy
       slug: security/acceptable-use-policy
       icon: docs

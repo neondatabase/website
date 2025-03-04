@@ -27,7 +27,6 @@ export default {
   templates: '/templates',
   thankYou: '/thank-you',
   useCases: '/use-cases',
-  variableLoad: '/variable-load',
   migrationAssistance: '/migration-assistance',
   // Docs
   docs: '/docs',
@@ -63,6 +62,7 @@ export default {
   console: 'https://console.neon.tech',
   login: 'https://console.neon.tech/login',
   signup: 'https://console.neon.tech/signup',
+  signupCredits: 'https://fyi.neon.tech/credits',
   consoleSupport: 'https://console.neon.tech/app/projects?modal=support',
   // Socials
   discord: 'https://discord.gg/92vNTzKDGp',

@@ -4,7 +4,7 @@ subtitle: Create a database branch for every preview deployment with Neon's nati
   Vercel integration
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-26T15:44:25.356Z'
+updatedOn: '2025-02-26T21:40:16.301Z'
 ---
 
 <InfoBlock>
@@ -21,7 +21,7 @@ updatedOn: '2025-02-26T15:44:25.356Z'
 The [Neon Postgres Native Integration](https://vercel.com/marketplace/neon), available on the Vercel Marketplace, allows you to add a Postgres database to your Vercel project. You can optionally configure the integration to create a database branch for each Vercel preview deployment. This guide explains how to set up that configuration.
 
 <Admonition type="note">
-The database branching preview feature is only supported for users on a Neon plan. If you are on a Vercel Postgres legacy plan, you will need to change to a Neon plan. To change your plan, see [Changing your plan](https://neon.tech/docs/guides/vercel-native-integration#changing-your-plan).
+The database branching preview feature is only supported for users on a Neon plan. If you are on a Vercel Postgres legacy plan, you will need to [change your plan](https://neon.tech/docs/guides/vercel-native-integration#changing-your-plan).
 </Admonition>
 
 <details>

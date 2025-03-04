@@ -31,8 +31,7 @@ const items = [
       },
       {
         title: 'AI-Powered Neon Database Q&A Chatbot in Azure',
-        description:
-          "Ask questions about data in Neon database using React and FastAPI in Python.",
+        description: 'Ask questions about data in Neon database using React and FastAPI in Python.',
         demoLink: 'https://rag-vrjtpx5tgrsnm-ca.wittyriver-637b2279.eastus2.azurecontainerapps.io',
         sourceLink: 'https://github.com/neondatabase-labs/rag-neon-postgres-openai-azure-python',
       },
@@ -238,7 +237,7 @@ const DemoList = () => (
                       {title}
                     </h3>
                     <p
-                      className="tracking-snug with-link-primary mt-3 font-light leading-snug text-gray-new-60"
+                      className="with-link-primary mt-3 font-light leading-snug tracking-snug text-gray-new-60"
                       dangerouslySetInnerHTML={{ __html: description }}
                     />
                   </div>
