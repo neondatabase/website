@@ -17,7 +17,7 @@ Start by filling out our [contact form](https://neon.tech/contact-sales) to let 
 
 After contacting us, we'll reach out by email to gather more information about your requirements. We'll ask you for information about:
 
-- Your current database environment, such as the number of databases, regions, your application stack, and integrations with other tools, platforms, and services 
+- Your current database environment, such as the number of databases, regions, your application stack, and integrations with other tools, platforms, and services
 - Your workload, feature, and performance requirements
 - Security and compliance requirements
 - Your desired outcome and timeline
