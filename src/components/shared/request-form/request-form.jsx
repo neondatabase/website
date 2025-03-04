@@ -154,7 +154,7 @@ const RequestForm = ({ type }) => {
                 ))}
                 {extendedOptions && query !== '' && !matchingOption && (
                   <ComboboxOption
-                    value={query}
+                    value={{ name: query }}
                     className={clsx(
                       'group flex min-h-10 cursor-pointer select-none flex-wrap items-center gap-1.5 px-4 py-2 text-sm data-[focus]:bg-gray-new-94',
                       'dark:data-[focus]:bg-gray-new-15'
