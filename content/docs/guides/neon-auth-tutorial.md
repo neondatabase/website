@@ -21,7 +21,7 @@ While these methods partially mitigate the problem, they often require writing c
 Neon Auth offers a streamlined solution to this common challenge. Instead of grappling with complex synchronization methods, Neon Auth automatically synchronizes user profiles directly from your authentication provider to your Neon Postgres database. This eliminates the need for manual updates, ensuring accurate, real-time data. You gain the benefits of efficient, automated user data management while retaining complete control over your core application information
 
 <Admonition type="note">
-Currently, Neon Auth is available for use with Stack Auth, with support for additional authentication providers like Clerk coming soon.
+Currently, Neon Auth is available for use with Stack Auth, with support for additional authentication providers coming soon.
 </Admonition>
 
 ## A typical user data synchronization scenario
