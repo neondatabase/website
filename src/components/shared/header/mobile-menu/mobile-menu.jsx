@@ -191,8 +191,8 @@ MobileMenuItem.propTypes = {
 const mobileMenuItems = [
   ...MENUS.header,
   {
-    text: 'GitHub',
-    to: LINKS.github,
+    text: 'Discord',
+    to: LINKS.discord,
   },
 ];
 
