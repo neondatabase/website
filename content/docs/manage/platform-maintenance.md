@@ -5,7 +5,9 @@ isDraft: false
 updatedOn: '2025-03-04T10:48:53.512Z'
 ---
 
-Neon must occasionally perform essential platform maintenance outside the [scheduled updates](/docs/manage/updates) performed on Neon computes. This means that you may experience brief unscheduled disruptions from time to time.
+Neon must occasionally perform essential platform maintenance outside the [scheduled updates](/docs/manage/updates) performed on Neon computes. This means that you may experience brief planned and possibly unplanned disruptions from time to time.
+
+For planned maintenance notices, you can view or subscribe to the [Neon Status page](https://neonstatus.com/) for your region. To learn more, see [Neon Status](/docs/introduction/status).
 
 Platform maintenance operations may include any of the following:
 
@@ -16,7 +18,7 @@ Platform maintenance operations may include any of the following:
 We strive to avoid disruptions as much as possible, but certain updates, such as essential platform maintenance or critical security patches, may require compute restarts or result in temporary latency for operations like compute starts, queries, or API requests.
 
 <Admonition type="note">
-Whenever possible, we try to perform essential platform maintenance outside of normal business hours in affected regions to minimize disruption.
+Whenever possible, we try to provide advanced notice and perform platform maintenance outside of normal business hours in affected regions to minimize disruption.
 </Admonition>
 
 ## Handling disruptions and latency during platform maintenance
