@@ -113,6 +113,22 @@ const fetchWpPostsByCategorySlug = async (slug, first, after) => {
   return data?.posts;
 };
 
+const splitPostsByFeatured = (posts) => {
+  const [featuredPosts, restPosts] = posts.reduce(
+    ([featured, rest], post) => {
+      if (post.pageBlogPost?.isFeatured && featured.length < 2) {
+        featured.push({ ...post, isFeatured: true });
+      } else {
+        rest.push(post);
+      }
+      return [featured, rest];
+    },
+    [[], []]
+  );
+
+  return [featuredPosts, restPosts];
+};
+
 const getWpPostsByCategorySlug = cache(async (slug) => {
   let allPosts = [];
   let afterCursor = null;
@@ -142,7 +158,9 @@ const getPostsByCategorySlug = async (slug) => {
     return getAllChangelogs();
   }
 
-  return getWpPostsByCategorySlug(slug);
+  const wpPosts = await getWpPostsByCategorySlug(slug);
+  const [featuredWpPosts, restWpPosts] = splitPostsByFeatured(wpPosts);
+  return [...featuredWpPosts, ...restWpPosts];
 };
 
 const fetchAllWpPosts = async (first, after) => {
@@ -232,17 +250,7 @@ const getAllPosts = async () => {
   ]);
 
   // Separate first two featured posts
-  const [featuredWpPosts, restWpPosts] = wpPosts.reduce(
-    ([featured, rest], post) => {
-      if (post.pageBlogPost?.isFeatured && featured.length < 2) {
-        featured.push(post);
-      } else {
-        rest.push(post);
-      }
-      return [featured, rest];
-    },
-    [[], []]
-  );
+  const [featuredWpPosts, restWpPosts] = splitPostsByFeatured(wpPosts);
 
   // Sort the rest posts by date, newest first
   const restPosts = [...restWpPosts, ...guides, ...changelogs];

@@ -1,1 +1,3 @@
-export { default } from './changelog-list';
+import ChangelogList from './changelog-list';
+
+export default ChangelogList;

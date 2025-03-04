@@ -1,40 +1,30 @@
 'use client';
 
-import { useThrottleCallback } from '@react-hook/throttle';
 import PropTypes from 'prop-types';
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 
-const ScrollLoader = ({ className, itemsCount, children }) => {
-  const [itemsVisible, setItemsVisible] = useState(itemsCount);
-  const ref = useRef(null);
-
-  const updateItemsVisible = useCallback(() => {
-    const { clientHeight } = document.documentElement;
-    const elBottom = ref.current?.getBoundingClientRect().bottom || 0;
-    if (clientHeight >= elBottom - 200) {
-      setItemsVisible((prev) => prev + itemsCount);
-    }
-  }, [itemsCount]);
-
-  const onScroll = useThrottleCallback(updateItemsVisible, 100);
+const ScrollLoader = ({ itemsCount, children }) => {
+  const [triggerRef, isTriggerInView] = useInView({ rootMargin: '200px' });
+  const [isStarted, setIsStarted] = useState(false);
+  const [itemsVisible, setItemsVisible] = useState(0);
 
   useEffect(() => {
-    updateItemsVisible();
-
-    window.addEventListener('scroll', onScroll);
-
-    return () => window.removeEventListener('scroll', onScroll);
-  }, [onScroll, updateItemsVisible]);
+    if (isTriggerInView) {
+      setItemsVisible((prev) => prev + itemsCount);
+      setIsStarted(true);
+    }
+  }, [itemsCount, isTriggerInView]);
 
   return (
-    <div className={className} ref={ref}>
-      {children.slice(0, itemsVisible)}
-    </div>
+    <>
+      {isStarted && children.slice(0, itemsVisible)}
+      <span className="w-full" ref={triggerRef} />
+    </>
   );
 };
 
 ScrollLoader.propTypes = {
-  className: PropTypes.string,
   itemsCount: PropTypes.number.isRequired,
   children: PropTypes.node.isRequired,
 };

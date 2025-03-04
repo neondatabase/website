@@ -15,17 +15,26 @@ const BlogPage = async () => {
   if (!posts) return notFound();
 
   return (
-    <ScrollLoader
-      className="blog-posts grid grid-cols-2 gap-x-6 xl:gap-x-5 md:grid-cols-1"
-      itemsCount={8}
-    >
-      {posts.map((post, index) => (
-        <BlogGridItem key={post.slug} index={index} post={post} />
+    <div className="blog-posts grid grid-cols-2 gap-x-6 xl:gap-x-5 md:grid-cols-1">
+      {posts.slice(0, 10).map((post, index) => (
+        <BlogGridItem
+          key={post.slug}
+          post={post}
+          isFeatured={post.isFeatured}
+          isPriority={index < 5}
+        />
       ))}
-    </ScrollLoader>
+      {posts.length > 10 && (
+        <ScrollLoader itemsCount={10}>
+          {posts.slice(10).map((post) => (
+            <BlogGridItem key={post.slug} post={post} />
+          ))}
+        </ScrollLoader>
+      )}
+    </div>
   );
 };
 
-export const revalidate = 60;
+export const revalidate = 300;
 
 export default BlogPage;
