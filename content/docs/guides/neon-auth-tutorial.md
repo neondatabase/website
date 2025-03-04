@@ -5,7 +5,7 @@ subtitle: See how Neon Auth eliminates the complexity of manual user data
   robust.
 enableTableOfContents: true
 tag: beta
-updatedOn: '2025-03-04T14:57:18.929Z'
+updatedOn: '2025-03-04T15:01:14.286Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth" />
