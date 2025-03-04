@@ -133,7 +133,7 @@ Extensions installations and updates are automatically applied to any read repli
 
 ## Request extension support
 
-<ExtensionRequest />
+<RequestForm type="extensions" />
 
 _We appreciate all extension requests. While we can’t guarantee support, we regularly review requests, prioritizing them based on criteria such as user demand, Neon’s product direction, and popularity within the Postgres ecosystem._
 

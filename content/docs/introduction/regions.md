@@ -32,7 +32,7 @@ For information about Neon deployment options on Azure, see [Neon on Azure](/doc
 
 ## Request a region
 
-<RegionRequest />
+<RequestForm type="regions" />
 
 ## Select a region for your Neon project
 
