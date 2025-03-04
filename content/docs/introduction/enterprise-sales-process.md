@@ -17,9 +17,16 @@ Start by filling out our [contact form](https://neon.tech/contact-sales) to let 
 
 After contacting us, we'll reach out by email to gather more information about your requirements. We'll ask you for information about:
 
-- You data size
-- Your current environment and setup
-- Workload, feature, and performance requirements
+- Your current database environment, such as the number fo databases, regions, your application stack, and integrations with other tools, platforms, and services 
+- Your workload, feature, and performance requirements
+- Security and compliance requirements
+- Your desired outcome and timeline 
+
+We may also ask you to run our [https://github.com/neondatabase-labs/pg-prechecks](pg-prechecks script) to gather information about your Postgres server and send the results back to the Neon solutions team.
+
+<Admonition type="note" title="about pg-prechecks">
+`pg-prechecks` provides a summary of a Postgres database server’s status and configuration, providing an overview at a glance. It also allows you to share relevant details with Neon. You can learn more by reviewing the [pg-prechecks README(https://github.com/neondatabase-labs/pg-prechecks?tab=readme-ov-file#pg-prechecks).
+</Admonition>
 
 These details help us understand your needs and prepare plan and pricing proposals.
 
