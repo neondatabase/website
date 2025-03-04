@@ -366,9 +366,12 @@
             - title: Part 2 - Automate nightly backups
               slug: manage/backups-aws-s3-backup-part-2
               tag: new
-        - section: Updates
+        - section: Maintenance & updates
           items:
-            - title: Updates
+            - title: Platform maintenance
+              slug: manage/platform-maintenance              
+              tag: new
+            - title: Scheduled updates
               slug: manage/updates
               tag: new
     - title: Use cases

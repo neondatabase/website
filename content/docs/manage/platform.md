@@ -85,3 +85,13 @@ Learn how Neon secures your projects and data, and explore the security features
 <a href="/docs/security/acceptable-use-policy" description="Read about Neon's acceptable use policies" icon="privacy">Acceptable Use Policy</a>
 
 </DetailIconCards>
+
+## Maintenance & updates
+
+<DetailIconCards>
+
+<a href="/docs/manage/platform-maintenance" description="Find out how Neon manages essential platform maintenance and critical security updates" icon="gui">Platform maintenance</a>
+
+<a href="/docs/manage/updates" description="Learn about scheduled updates for Neon computes and Postgres" icon="import">Scheduled updates</a>
+
+</DetailIconCards>
