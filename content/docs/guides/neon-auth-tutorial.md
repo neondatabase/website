@@ -107,7 +107,7 @@ Neon Auth introduces a simplified architecture that removes the need for webhook
 With Neon Auth, the architecture is significantly cleaner and more efficient:
 
 - **Automated synchronization**: Neon Auth handles the entire synchronization process automatically in the background. You no longer need to set up and maintain complex synchronization logic.
-- **No Webhooks or Polling**: No need to develop and maintain webhook endpoints for different user events (e.g., `user.created`, `user.updated`, `user.deleted`). Neon Auth automatically syncs user data changes to your database without requiring external triggers.
+- **No webhooks or polling**: No need to develop and maintain webhook endpoints for different user events (e.g., `user.created`, `user.updated`, `user.deleted`). Neon Auth automatically syncs user data changes to your database without requiring external triggers.
 - **Direct Database Access**: Your application can directly query user data from the `neon_auth.users_sync` table in your Neon Postgres database. This simplifies data access and improves query performance.
 - **Error handling and retries**: Neon Auth includes built-in error handling and retry mechanisms to ensure data consistency without requiring custom code.
 
