@@ -8,7 +8,7 @@ updatedOn: '2025-02-27T00:00:00.000Z'
 
 <FeatureBetaProps feature_name="Neon Auth" />
 
-Modern application development is becoming increasingly reliant on third-party authentication providers like [Clerk](https://clerk.com), [Stack Auth](https://stack-auth.com) etc to handle secure user management. While these platforms excel at streamlining login workflows and protecting sensitive data, developers frequently encounter a hidden challenge: maintaining parity between external identity records and their application's database.  
+Modern application development is becoming increasingly reliant on third-party authentication providers like [Clerk](https://clerk.com), [Stack Auth](https://stack-auth.com), etc., to handle secure user management. While these platforms excel at streamlining login workflows and protecting sensitive data, developers frequently encounter a hidden challenge: maintaining parity between external identity records and their application's database.  
 
 Profile updates, role changes, and user deletions in your authentication service don’t automatically reflect in your application’s data layer. Today, developers typically address this gap through several approaches:  
 
