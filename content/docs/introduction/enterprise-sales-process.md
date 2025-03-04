@@ -17,15 +17,15 @@ Start by filling out our [contact form](https://neon.tech/contact-sales) to let 
 
 After contacting us, we'll reach out by email to gather more information about your requirements. We'll ask you for information about:
 
-- Your current database environment, such as the number fo databases, regions, your application stack, and integrations with other tools, platforms, and services 
+- Your current database environment, such as the number of databases, regions, your application stack, and integrations with other tools, platforms, and services 
 - Your workload, feature, and performance requirements
 - Security and compliance requirements
 - Your desired outcome and timeline 
 
-We may also ask you to run our [https://github.com/neondatabase-labs/pg-prechecks](pg-prechecks script) to gather information about your Postgres server and send the results back to the Neon solutions team.
+We may also ask you to run our [pg-prechecks script](https://github.com/neondatabase-labs/pg-prechecks) to gather details about your Postgres server and send the results back to the Neon solutions team.
 
 <Admonition type="note" title="about pg-prechecks">
-`pg-prechecks` provides a summary of a Postgres database server’s status and configuration, providing an overview at a glance. It also allows you to share relevant details with Neon. You can learn more by reviewing the [pg-prechecks README(https://github.com/neondatabase-labs/pg-prechecks?tab=readme-ov-file#pg-prechecks).
+The `pg-prechecks` script provides a summary of a Postgres database server’s status and configuration, providing an overview at a glance. It also allows you to share relevant details with Neon. `pg-prechecks` is a heavily modified version of `pt-pg-summary`, which is part of the Percona Toolkit. Learn more about this tool, refer to the [pg-prechecks README](https://github.com/neondatabase-labs/pg-prechecks?tab=readme-ov-file#pg-prechecks).
 </Admonition>
 
 These details help us understand your needs and prepare plan and pricing proposals.
@@ -38,7 +38,7 @@ If an Enterprise plan is a good fit for your use case, our solutions team will s
 - Add-ons like support packages or custom requirements
 - Any other questions you might have
 
-Optionally, we can provide a demo or schedule a follow-up call if you’re interested in specific features.
+Optionally, we can provide a demo or schedule a follow-up call if you’re interested in learning more about specific features.
 
 _Our solutions team is made up of experience technical staff who have worked through migrations with some of our largest customers._
 
@@ -50,21 +50,11 @@ Based on our discussions, we’ll create a pricing proposal, often including a p
 - Your environment details
 - Your workload, feature, and performance requirements
 
-We’ll send the proposal and arrange a follow-up call if needed.
-
-## Additional information
-
-If you have a more complex setup (e.g., multiple databases or special configurations), we might ask for additional details, such as:
-
-- Current billing details
-- Performance metrics
-- Infrastructure specifics
-
-This helps us provide accurate pricing and plan recommendations.
+We’ll send the pricing proposal and migration plan and arrange a follow-up call to go through the , answer any questions you may have, and set out timelines should you decide to move forward.
 
 ## Stakeholder collaboration
 
-During this process, we’ll be happy to support your security team or other stakeholders by:
+At any time during the process, we’ll be happy to support your security team or other stakeholders by:
 
 - Answering security-related questions
 - Providing documentation
