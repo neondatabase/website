@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2023-10-07T10:43:33.416Z'
 ---
 
-To stay informed about Neon's status, we provide a dedicated status page for each region that Neon supports. 
+To stay informed about Neon's status, we provide a dedicated status page for each region that Neon supports.
 
 ![Neon status page](/docs/introduction/neon_status_page.png)
 
@@ -19,7 +19,7 @@ Status pages provide status for:
 
 <Admonition type="note" title="platform maintenance notices">
 You can also monitor your region's status page for upcoming [platform maintenance](/docs/manage/platform-maintenance).
-</Admonition> 
+</Admonition>
 
 To view the Neon Status page, navigate to [https://neonstatus.com/](https://neonstatus.com/).
 
