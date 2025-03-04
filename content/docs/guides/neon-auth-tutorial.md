@@ -13,7 +13,7 @@ Modern application development is becoming increasingly reliant on third-party a
 Profile updates, role changes, and user deletions in your authentication service don’t automatically reflect in your application’s data layer. Today, developers typically address this gap through several approaches:  
 
 - **Webhooks**: Many providers offer real-time event notifications (e.g., `user.updated`) to trigger immediate updates in your system.  
-- **Polling**: Periodically querying the auth provider’s API checks for changes, but introduces latency and risks hitting rate limits.  
+- **Polling**: Periodically querying the auth provider’s API checks for changes, but this approach introduces latency and risks hitting rate limits.  
 - **Login-time sync**: Fetching fresh profile data during authentication ensures accuracy for active users at the expense of increased latency while also leaving stale data for inactive accounts.
 
 While these methods partially mitigate the problem, they often require writing custom synchronization scripts, implementing brittle listeners, and manually reconciling data discrepancies – turning a theoretical time-saver into an ongoing maintenance burden.  
