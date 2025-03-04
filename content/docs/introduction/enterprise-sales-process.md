@@ -20,7 +20,7 @@ After contacting us, we'll reach out by email to gather more information about y
 - Your current database environment, such as the number of databases, regions, your application stack, and integrations with other tools, platforms, and services 
 - Your workload, feature, and performance requirements
 - Security and compliance requirements
-- Your desired outcome and timeline 
+- Your desired outcome and timeline
 
 We may also ask you to run our [pg-prechecks script](https://github.com/neondatabase-labs/pg-prechecks) to gather details about your Postgres server and send the results back to the Neon solutions team.
 
