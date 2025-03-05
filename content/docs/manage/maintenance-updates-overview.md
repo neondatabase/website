@@ -16,7 +16,7 @@ For both types of updates, we strive to minimize disruption to database operatio
 
 ### Where to check for maintenance and updates
 
-| Type | Where to check | Details |
-|------|--------------|---------|
-| **Platform maintenance** | [Neon Status](https://neonstatus.com/) | Check the regional status page where your Neon project resides for upcoming platform maintenance. Optionally, subscribe to a regional status page to receive status updates. See [Neon Status](/docs/introduction/status) for details. |
-| **Updates** | [Neon Console](https://console.neon.tech/app/projects) | On your Neon project dashboard, go to **Settings** > **Updates** to view your update window and check for update notices. Paid plans allow you to select a preferred update window. |
+| Type                     | Where to check                                         | Details                                                                                                                                                                                                                                |
+| ------------------------ | ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Platform maintenance** | [Neon Status](https://neonstatus.com/)                 | Check the regional status page where your Neon project resides for upcoming platform maintenance. Optionally, subscribe to a regional status page to receive status updates. See [Neon Status](/docs/introduction/status) for details. |
+| **Updates**              | [Neon Console](https://console.neon.tech/app/projects) | On your Neon project dashboard, go to **Settings** > **Updates** to view your update window and check for update notices. Paid plans allow you to select a preferred update window.                                                    |
