@@ -2,8 +2,6 @@ import { notFound } from 'next/navigation';
 
 import BlogGridItem from 'components/pages/blog/blog-grid-item';
 import BlogHeader from 'components/pages/blog/blog-header';
-import AlgoliaSearch from 'components/shared/algolia-search';
-import SearchResults from 'components/shared/algolia-search/search-results';
 import ScrollLoader from 'components/shared/scroll-loader';
 import { BLOG_BASE_PATH, BLOG_CATEGORY_BASE_PATH } from 'constants/blog';
 import { getBlogCategoryDescription } from 'constants/seo-data';
@@ -19,35 +17,30 @@ const BlogCategoryPage = async ({ params: { slug } }) => {
 
   return (
     <>
-      <h2 className="sr-only">{category.name}</h2>
-
-      <AlgoliaSearch indexName={process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME}>
-        <BlogHeader
-          className="lg:-top-[68px] md:-top-[116px]"
-          title={`Blog ${category.name}`}
-          basePath={BLOG_BASE_PATH}
-        />
-        <SearchResults posts={posts}>
-          <div className="blog-posts grid grid-cols-2 gap-x-6 xl:gap-x-5 md:grid-cols-1">
-            {posts.slice(0, 10).map((post, index) => (
-              <BlogGridItem
-                key={post.slug}
-                post={post}
-                category={category}
-                isFeatured={post.isFeatured}
-                isPriority={index < 5}
-              />
+      <BlogHeader
+        className="lg:-top-[68px] md:-top-[116px]"
+        title="Blog"
+        category={category.name}
+        basePath={BLOG_BASE_PATH}
+      />
+      <div className="blog-posts grid grid-cols-2 gap-x-6 xl:gap-x-5 md:grid-cols-1">
+        {posts.slice(0, 10).map((post, index) => (
+          <BlogGridItem
+            key={post.slug}
+            post={post}
+            category={category}
+            isFeatured={post.isFeatured}
+            isPriority={index < 5}
+          />
+        ))}
+        {posts.length > 10 && (
+          <ScrollLoader itemsCount={10}>
+            {posts.slice(10).map((post) => (
+              <BlogGridItem key={post.slug} post={post} category={category} />
             ))}
-            {posts.length > 10 && (
-              <ScrollLoader itemsCount={10}>
-                {posts.slice(10).map((post) => (
-                  <BlogGridItem key={post.slug} post={post} category={category} />
-                ))}
-              </ScrollLoader>
-            )}
-          </div>
-        </SearchResults>
-      </AlgoliaSearch>
+          </ScrollLoader>
+        )}
+      </div>
     </>
   );
 };

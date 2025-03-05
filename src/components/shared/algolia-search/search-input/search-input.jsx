@@ -5,7 +5,9 @@ import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { SearchBox } from 'react-instantsearch';
 
-const SearchInput = ({ className }) => {
+import Link from 'components/shared/link';
+
+const SearchInput = ({ className, basePath, withAlgolia }) => {
   /**
    * Handle keyboard shortcuts for search box without using ref
    * https://www.algolia.com/doc/guides/building-search-ui/upgrade-guides/react/#replace-focusshortcuts-with-custom-code
@@ -21,6 +23,7 @@ const SearchInput = ({ className }) => {
   };
 
   useEffect(() => {
+    document.querySelector('.ais-SearchBox-input').focus();
     window.addEventListener('keydown', handleKeyDown);
 
     return () => {
@@ -30,7 +33,13 @@ const SearchInput = ({ className }) => {
 
   return (
     <div className={clsx('relative', className)}>
-      <SearchBox placeholder="Search..." />
+      {withAlgolia ? (
+        <SearchBox placeholder="Search..." />
+      ) : (
+        <Link className="ais-SearchBox-input text-white/50" to={`${basePath}/search`}>
+          Search...
+        </Link>
+      )}
       <span
         className={clsx(
           'pointer-events-none absolute right-1.5 top-1/2 z-10 flex h-5 -translate-y-1/2 items-center px-1.5',
@@ -48,6 +57,8 @@ const SearchInput = ({ className }) => {
 
 SearchInput.propTypes = {
   className: PropTypes.string,
+  basePath: PropTypes.string,
+  withAlgolia: PropTypes.bool,
 };
 
 export default SearchInput;
