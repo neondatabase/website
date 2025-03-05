@@ -5,14 +5,30 @@ enableTableOfContents: true
 updatedOn: '2023-10-07T10:43:33.416Z'
 ---
 
-For our customers to stay informed about the performance and availability of Neon, we provide a dedicated status page where you can monitor the health of our service in real-time.
+To stay informed about Neon's status, we provide a dedicated status page for each region that Neon supports. To view the Neon Status page, navigate to [https://neonstatus.com/](https://neonstatus.com/).
 
-The status page includes the status for:
+Remember to bookmark the Neon Status page for easy access.
 
-- Console and API Requests
-- Database Operations
+![Neon status page](/docs/introduction/neon_status_page.png)
+
+For status information applicable to your Neon project, monitor the status page for the region where your Neon project resides. If you don't know the region, you can find it on the **Project Dashboard** in the Neon Console.
+
+Status pages provide status for:
+
 - Database Connectivity
+- Database Operations
+- Console and API Requests
 
-To view the Neon Status page, please click [here](https://neonstatus.com/).
+<Admonition type="note" title="platform maintenance notices">
+You can monitor or subscribe to your region's [status page](/docs/manage/platform-maintenance) to stay informed about upcoming platform maintenance. See [Subscribing to Neon status pages](#subscribing-to-neon-status-pages) below.
 
-We strive to maintain the highest level of service availability and performance, but in the case of interruptions or maintenance, you'll be able to find the information you need promptly and accurately. Please remember to bookmark the link for easy access.
+Neon also applies regular updates to your project's computes, but these updates are not posted to regional status pages since they are specific to your Neon project. To stay informed about these updates, watch for update notices in your project's settings in the Neon Console. See [Updates](/docs/manage/updates) for details.
+</Admonition>
+
+## Subscribing to Neon status pages
+
+Follow the instructions from the **Subscribe to updates** link on a regional status page to subscribe to updates via email, RSS, or Slack.
+
+![Neon status page](/docs/introduction/neon_status_subscribe.png)
+
+<NeedHelp/>
