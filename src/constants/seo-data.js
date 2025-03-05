@@ -27,6 +27,11 @@ export default {
     imagePath: '/images/social-previews/blog.jpg',
     pathname: LINKS.blog,
   },
+  guides: {
+    title: 'Guides — Neon',
+    description: 'Learn how to use Neon with our guides.',
+    pathname: LINKS.guides,
+  },
   branching: {
     title: 'Instant branching for Postgres — Neon',
     description:

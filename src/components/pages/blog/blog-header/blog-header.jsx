@@ -7,11 +7,11 @@ import RssButton from 'components/shared/rss-button';
 const BlogHeader = ({ className, title, category, basePath }) => (
   <div
     className={clsx(
-      'relative mb-12 flex items-end justify-between gap-5 lg:mb-10 md:mb-8 sm:flex-col',
+      'relative mb-12 flex items-end justify-between gap-8 lg:mb-10 md:mb-8 md:flex-col',
       className
     )}
   >
-    <div className="flex items-end gap-5 sm:w-full sm:justify-between">
+    <div className="flex items-end gap-5 md:w-full md:justify-between">
       <h1 className="font-title text-4xl font-medium leading-none tracking-extra-tight lg:text-[32px] md:text-[28px]">
         {title}
         {category && <span className="sr-only">{category}</span>}
