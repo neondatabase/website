@@ -1,7 +1,6 @@
 ---
 title: The dblink extension
 subtitle: Connect to and query other Postgres databases from Neon using dblink
-tag: new
 enableTableOfContents: true
 updatedOn: '2025-01-24T19:33:03.060Z'
 ---

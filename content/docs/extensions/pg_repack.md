@@ -2,7 +2,6 @@
 title: The pg_repack extension
 subtitle: Remove bloat from your tables and indexes with minimal locking
 enableTableOfContents: true
-tag: new
 updatedOn: '2025-02-03T20:41:57.303Z'
 ---
 

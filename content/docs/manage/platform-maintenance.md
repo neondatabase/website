@@ -2,6 +2,7 @@
 title: Platform maintenance
 enableTableOfContents: true
 isDraft: false
+tag: new
 updatedOn: '2025-03-04T10:48:53.512Z'
 ---
 
