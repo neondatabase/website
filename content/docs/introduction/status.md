@@ -5,11 +5,13 @@ enableTableOfContents: true
 updatedOn: '2023-10-07T10:43:33.416Z'
 ---
 
-To stay informed about Neon's status, we provide a dedicated status page for each region that Neon supports.
+To stay informed about Neon's status, we provide a dedicated status page for each region that Neon supports. To view the Neon Status page, navigate to [https://neonstatus.com/](https://neonstatus.com/).
+
+Remember to bookmark the Neon Status page for easy access.
 
 ![Neon status page](/docs/introduction/neon_status_page.png)
 
-You'll want to monitor the status page for the region where you created your Neon project. You can find your Neon project's region in the Neon Console.
+For status information applicable to your Neon project, monitor the status page for the region where your Neon project resides. If you don't know the region, you can find it on the **Project Dashboard** in the Neon Console.
 
 Status pages provide status for:
 
@@ -18,12 +20,10 @@ Status pages provide status for:
 - Console and API Requests
 
 <Admonition type="note" title="platform maintenance notices">
-You can also monitor your region's status page for upcoming [platform maintenance](/docs/manage/platform-maintenance).
+You can monitor or subscribe to your region's [status page](/docs/manage/platform-maintenance) for upcoming platform maintenance.
+
+Neon also applies regular updates to your project's computes, but these updates are not posted to regional status pages since they are specific to your Neon project. To stay informed about these updates, watch for update notices in your project's settings in the Neon Console. See [Updates](/docs/manage/updates) for details.
 </Admonition>
-
-To view the Neon Status page, navigate to [https://neonstatus.com/](https://neonstatus.com/).
-
-Please remember to bookmark the Neon Status page for easy access.
 
 ## Subscribing to Neon status pages
 
