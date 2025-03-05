@@ -8,7 +8,7 @@ import BlogGridItem from 'components/pages/blog/blog-grid-item';
 import GuideCard from 'components/pages/guides/guide-card';
 
 const SearchResults = ({ posts, indexName, className, children }) => {
-  const { indexUiState } = useInstantSearch();
+  const { indexUiState } = useInstantSearch({ query: false });
   const { items } = useHits();
 
   if (!indexUiState.query) {
@@ -30,7 +30,7 @@ const SearchResults = ({ posts, indexName, className, children }) => {
 
         if (indexName === 'guides') return <GuideCard key={post.slug} {...post} />;
 
-        return <BlogGridItem key={post.slug} index={index} post={post} />;
+        return <BlogGridItem key={post.slug} post={post} isPriority={index < 5} />;
       })}
     </div>
   );

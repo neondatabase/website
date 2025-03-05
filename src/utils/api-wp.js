@@ -142,7 +142,8 @@ const getPostsByCategorySlug = async (slug) => {
     return getAllChangelogs();
   }
 
-  return getWpPostsByCategorySlug(slug);
+  const wpPosts = await getWpPostsByCategorySlug(slug);
+  return wpPosts;
 };
 
 const fetchAllWpPosts = async (first, after) => {
@@ -235,7 +236,7 @@ const getAllPosts = async () => {
   const [featuredWpPosts, restWpPosts] = wpPosts.reduce(
     ([featured, rest], post) => {
       if (post.pageBlogPost?.isFeatured && featured.length < 2) {
-        featured.push(post);
+        featured.push({ ...post, isFeatured: true });
       } else {
         rest.push(post);
       }

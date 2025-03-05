@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
-import ReleaseNoteList from 'components/pages/changelog/changelog-list';
+import ChangelogList from 'components/pages/changelog/changelog-list';
 import Hero from 'components/pages/changelog/hero';
 import Breadcrumbs from 'components/pages/doc/breadcrumbs';
 import EditOnGithub from 'components/pages/doc/edit-on-github';
@@ -9,36 +9,21 @@ import Modal from 'components/pages/doc/modal';
 import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
 import NavigationLinks from 'components/shared/navigation-links';
-// import SidebarCta from 'components/shared/sidebar-cta';
 import TableOfContents from 'components/shared/table-of-contents';
-// import Pagination from 'components/pages/changelog/pagination';
-// import ChangelogFilter from 'components/pages/changelog/changelog-filter';
 import { DOCS_BASE_PATH } from 'constants/docs';
 import LINKS from 'constants/links';
 
 import Tag from '../tag';
 
-// TODO: Add pagination for changelog
-const Changelog = ({
-  // currentSlug,
-  items,
-}) => (
+const Changelog = ({ posts }) => (
   <>
     <Hero />
-    {/* <ChangelogFilter currentSlug={currentSlug} /> */}
-    <ReleaseNoteList className="mt-4" items={items} />
-    {/* {pageCount > 1 && <Pagination currentPageIndex={currentPageIndex} pageCount={pageCount} />} */}
+    <ChangelogList className="mt-4" posts={posts} />
   </>
 );
 
 Changelog.propTypes = {
-  // currentSlug: PropTypes.string,
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      slug: PropTypes.string.isRequired,
-      content: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  posts: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 const MODALS = [
@@ -100,7 +85,7 @@ const Post = ({
           />
         )}
         {isChangelog ? (
-          <Changelog currentSlug={currentSlug} items={changelogPosts} />
+          <Changelog currentSlug={currentSlug} posts={changelogPosts} />
         ) : (
           <article>
             <h1
