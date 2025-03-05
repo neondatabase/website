@@ -16,10 +16,7 @@ For both types of updates, we strive to minimize disruptions through advanced no
 
 ### Where to check for maintenance and updates
 
-| Type | Where to check | Details |
-|------|--------------|---------|
-| **Platform maintenance** | [Neon Status](https://neonstatus.com/) | Check the regional status page where your Neon compute resides for maintenance notices. Optionally, subscribe for updates. See [Neon Status](/docs/introduction/status) for more details. |
-| **Compute updates** | [Neon Console](https://console.neon.tech/app/projects) | In the Neon project dashboard, go to **Settings** > **Updates** to view your update window and check for update notices. Paid plans allow you to select a preferred update window. |
-
-
-
+| Type                     | Where to check                                         | Details                                                                                                                                                                                   |
+| ------------------------ | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Platform maintenance** | [Neon Status](https://neonstatus.com/)                 | Check the regional status page where your Neon compute resides for maintenance notices. Optionally, subscribe for updates. See [Neon Status](/docs/introduction/status) for more details. |
+| **Compute updates**      | [Neon Console](https://console.neon.tech/app/projects) | In the Neon project dashboard, go to **Settings** > **Updates** to view your update window and check for update notices. Paid plans allow you to select a preferred update window.        |
