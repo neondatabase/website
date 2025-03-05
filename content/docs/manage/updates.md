@@ -6,10 +6,6 @@ tag: new
 updatedOn: '2025-03-04T10:48:53.516Z'
 ---
 
-<Admonition type="note" title="updates coming soon">
-Free Plan accounts can expect to see update notices in early February, at least 24 hours before any planned update. Update notices for Neon's Launch and Scale plans will start rolling out in the second week of February, with at least 7 days' notice before a planned update. Business plan accounts will see update notices toward the end of February. For the latest information about updates, follow our announcements in the [Neon Changelog](https://neon.tech/docs/changelog).
-</Admonition>
-
 To keep your Neon [computes](/docs/reference/glossary#compute) and Postgres instances up to date with the latest patches and features, Neon applies updates to your project's computes. We notify you of updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can select an update window — a specific day and hour for updates.
 
 Neon briefly restarts a compute to apply an update. The entire process takes just a few seconds, minimizing any potential disruption.
@@ -40,7 +36,7 @@ Neon applies updates to computes based on the following rules:
 If a compute is excluded from an update, Neon will apply the missed update with the next update, assuming the compute meets the update criteria mentioned above.
 
 <Admonition type="important" title="updates outside of scheduled update windows">
-Please be aware that Neon must occasionally perform essential platform maintenance outside the scheduled updates performed on Neon computes. This means that you may experience brief unscheduled disruptions from time to time. To learn more, see [Platform maintenance](/docs/manage/platform-maintenance).
+Please be aware that Neon must occasionally perform essential **platform maintenance** outside the scheduled updates performed on Neon computes. This means that you may experience brief disruptions from time to time. To learn more, see [Platform maintenance](/docs/manage/platform-maintenance).
 </Admonition>
 
 ## Updates on the Free Plan

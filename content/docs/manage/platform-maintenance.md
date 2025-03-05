@@ -18,7 +18,7 @@ Platform maintenance operations may include any of the following:
 We strive to avoid disruptions as much as possible, but certain updates, such as essential platform maintenance or critical security patches, may require compute restarts or result in temporary latency for operations like compute starts, queries, or API requests.
 
 <Admonition type="note">
-Whenever possible, we try to provide advanced notice and perform platform maintenance outside of normal business hours in affected regions to minimize disruption.
+Whenever possible, we try to perform platform maintenance outside of normal business hours in affected regions to minimize disruption.
 </Admonition>
 
 ## Handling disruptions and latency during platform maintenance
