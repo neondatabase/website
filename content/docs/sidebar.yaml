@@ -1090,6 +1090,9 @@
     - title: Acceptable Use Policy
       slug: security/acceptable-use-policy
       icon: docs
+    - title: AI use in Neon
+      slug: security/ai-use-in-neon
+      icon: ai
 - section: Resources
   items:
     - title: Partner guide
