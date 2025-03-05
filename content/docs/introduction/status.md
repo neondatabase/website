@@ -20,7 +20,7 @@ Status pages provide status for:
 - Console and API Requests
 
 <Admonition type="note" title="platform maintenance notices">
-You can monitor or subscribe to your region's [status page](/docs/manage/platform-maintenance) for upcoming platform maintenance. See [below](#subscribing-to-neon-status-pages).
+You can monitor or subscribe to your region's [status page](/docs/manage/platform-maintenance) to stay informed about upcoming platform maintenance. See [Subscribing to Neon status pages](#subscribing-to-neon-status-pages) below.
 
 Neon also applies regular updates to your project's computes, but these updates are not posted to regional status pages since they are specific to your Neon project. To stay informed about these updates, watch for update notices in your project's settings in the Neon Console. See [Updates](/docs/manage/updates) for details.
 </Admonition>
