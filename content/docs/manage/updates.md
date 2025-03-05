@@ -15,12 +15,12 @@ Neon briefly restarts a compute to apply an update. The entire process takes jus
 Updates to Neon computes may include some or all of the following:
 
 - Postgres minor version upgrades, typically released quarterly
-- Security patches and update
+- Security patches and updates
 - Operating system updates
 - Neon features and enhancements
 - Updates to other tools and components included in Neon compute images
 
-Neon compute updates do not include [platform maintenance](/docs/manage/platform-maintenance).
+Neon compute updates do not include [Neon platform maintenance](/docs/manage/platform-maintenance).
 
 ## How often are updates applied?
 
@@ -148,17 +148,17 @@ For compute restart instructions, see [Restart a compute](/docs/manage/endpoints
 
 ## Updating large computes
 
-Computes larger than 8 CU or configured to scale past 8 CU are not updated automatically (_scheduled updates do not apply to these computes_). To receive updates, you need to restart them. A restart may happen automatically due to [scale to zero](/docs/introduction/scale-to-zero), but if scale to zero is disabled or your compute runs continuously, you'll need to plan regular restarts.
+Computes larger than 8 CU or set to scale beyond 8 CU are not updated automatically (_scheduled updates do not apply_). To apply updates, you'll need to restart them manually. A restart may occur automatically due to [scale to zero](/docs/introduction/scale-to-zero), but if scale to zero is disabled or your compute runs continuously, please plan for manual restarts.
 
 Neon typically releases compute updates weekly, so we recommend scheduling weekly compute restarts.
 
 For restart instructions, see [Restart a compute](/docs/manage/endpoints#restart-a-compute).
 
-## Handling connection disruptions
+## Handling connection disruptions during compute updates
 
 Most Postgres connection drivers include built-in retry mechanisms that automatically handle short-lived connection interruptions. This means that for most applications, a brief restart should result in minimal disruption, as the driver will transparently reconnect.
 
-However, if your application has strict availability requirements, you may want to ensure that your connection settings are configured to allow for retries. Check your driver's documentation for options like connection timeouts, retry intervals, and connection pooling strategies. Your retry configuration should account for the few seconds it takes to apply updates to your Neon compute. For related information, see [Build connection timeout handling into your application](/docs/connect/connection-latency#build-connection-timeout-handling-into-your-application).
+However, if your application has strict availability requirements, you may want to ensure that your connection settings are configured to allow for retries. Check your driver's documentation for options like connection timeouts, retry intervals, and connection pooling strategies. Your configuration should account for the few seconds it takes to apply updates to your Neon compute. For related information, see [Build connection timeout handling into your application](/docs/connect/connection-latency#build-connection-timeout-handling-into-your-application).
 
 If your application or integration uses the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) or [SDKs](https://neon.tech/docs/reference/sdk) that wrap the Neon API, we recommend building in the same type of retry logic.
 
