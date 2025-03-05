@@ -20,7 +20,7 @@ const BlogPage = async () => {
   return (
     <AlgoliaSearch indexName={process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME}>
       <BlogHeader
-        className="lg:-top-[68px] md:-top-[116px]"
+        className="lg:-top-[68px] md:-top-[62px]"
         title="Blog"
         basePath={BLOG_BASE_PATH}
       />
