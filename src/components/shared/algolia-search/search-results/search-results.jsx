@@ -8,7 +8,7 @@ import BlogGridItem from 'components/pages/blog/blog-grid-item';
 import GuideCard from 'components/pages/guides/guide-card';
 
 const SearchResults = ({ posts, indexName, className, children }) => {
-  const { indexUiState } = useInstantSearch();
+  const { indexUiState } = useInstantSearch({ query: false });
   const { items } = useHits();
 
   if (!indexUiState.query) {
