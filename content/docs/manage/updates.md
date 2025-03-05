@@ -1,5 +1,5 @@
 ---
-title: Scheduled updates
+title: Updates
 enableTableOfContents: true
 isDraft: false
 tag: new
