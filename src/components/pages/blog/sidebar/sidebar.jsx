@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 
 import BlogNavLink from 'components/pages/blog/blog-nav-link';
-import SearchInput from 'components/shared/algolia-search/search-input';
 import Socials from 'components/shared/socials/index';
 
 const Sidebar = ({ categories }) => {
@@ -15,8 +14,7 @@ const Sidebar = ({ categories }) => {
   return (
     <aside className="relative mt-[88px] flex w-[206px] shrink-0 flex-col gap-y-10 xl:w-[202px] lg:top-[72px] lg:mb-10 lg:mt-0 lg:min-h-fit lg:w-full md:top-[60px] md:mb-8">
       <div className="flex-1">
-        <nav className="sticky top-24 flex flex-col gap-5 lg:max-w-5xl lg:flex-row-reverse lg:items-end lg:justify-between lg:gap-6 md:block">
-          <SearchInput className="dark w-full shrink-0 lg:w-[232px] md:w-full" />
+        <nav className="sticky top-24">
           <div className="lg:no-scrollbars lg:-ml-8 lg:overflow-auto lg:pl-8 md:-mx-4 md:mt-6 md:px-4">
             <ul className="flex flex-col gap-y-2.5 lg:flex-row lg:gap-x-5 lg:after:shrink-0 lg:after:grow-0 lg:after:basis-px lg:after:content-['']">
               {allCategories.map(({ name, slug }, index) => (
