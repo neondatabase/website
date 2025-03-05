@@ -87,7 +87,7 @@ Without Neon Auth, you would typically need to:
 
 Here's how you would structure your database and perform insert operations _without_ Neon Auth:
 
-#### Create a `users` table:
+#### 1. Create a `users` table:
 
 ```sql
 CREATE TABLE users (
@@ -100,7 +100,7 @@ CREATE TABLE users (
 );
 ```
 
-#### Insert a user into the `users` table:
+#### 2. Insert a user into the `users` table:
 
 To insert this user into your database when a new user is created in your auth provider, you might set up a webhook endpoint. Here’s an example of a simplified webhook handler that would receive a `user.created` event from your auth provider and insert the user into your `users` table:
 
@@ -165,7 +165,7 @@ With Neon Auth, Neon automatically creates and manages the `neon_auth.users_sync
 
 Here's how you would structure your `todos` table and perform insert operations _with_ Neon Auth:
 
-#### 1. Users table
+#### Users table
 
 `neon_auth.users_sync` table is automatically created and kept in sync by Neon Auth (no action needed from you) and is available for direct use in your schema and queries. Here is the table structure as [discussed above](#table-structure):
 
@@ -181,7 +181,7 @@ updated_at TIMESTAMPTZ
 ```
 
 
-#### 2. Create a `todos` table with a foreign key to the `neon_auth.users_sync` table:
+#### 1. Create a `todos` table with a foreign key to the `neon_auth.users_sync` table:
 
 ```sql
 CREATE TABLE todos (
@@ -192,7 +192,7 @@ CREATE TABLE todos (
 );
 ```
 
-#### 3. Insert a todo, referencing the `neon_auth.users_sync` table:
+#### 2. Insert a todo, referencing the `neon_auth.users_sync` table:
 
 ```sql
 INSERT INTO todos (task, user_id)
