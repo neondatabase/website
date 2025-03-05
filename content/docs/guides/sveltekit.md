@@ -2,7 +2,6 @@
 title: Connect a Sveltekit application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Sveltekit application
 enableTableOfContents: true
-tag: new
 updatedOn: '2025-02-03T20:41:57.338Z'
 ---
 

@@ -1,8 +1,7 @@
 ---
 title: Platform overview
 enableTableOfContents: true
-subtitle: Find information about managing all aspects of your database using the Neon
-  platform
+subtitle: Find information about managing all aspects of your database using the Neon platform
 updatedOn: '2025-03-04T10:48:53.514Z'
 ---
 
@@ -90,8 +89,10 @@ Learn how Neon secures your projects and data, and explore the security features
 
 <DetailIconCards>
 
+<a href="/docs/manage/maintenance-updates-overview" description="Overview of Neon platform maintenance and compute updates" icon="research">Overview</a>
+
 <a href="/docs/manage/platform-maintenance" description="Find out how Neon manages essential platform maintenance and critical security updates" icon="gui">Platform maintenance</a>
 
-<a href="/docs/manage/updates" description="Learn about scheduled updates for Neon computes and Postgres" icon="import">Scheduled updates</a>
+<a href="/docs/manage/updates" description="Learn about updates for Neon computes ond Postgres" icon="import">Updates</a>
 
 </DetailIconCards>
