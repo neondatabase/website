@@ -18,37 +18,34 @@ const BlogCategoryPage = async ({ params: { slug } }) => {
   if (!posts || !category) return notFound();
 
   return (
-    <>
-      <h2 className="sr-only">{category.name}</h2>
-
-      <AlgoliaSearch indexName={process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME}>
-        <BlogHeader
-          className="lg:-top-[68px] md:-top-[116px]"
-          title={`Blog ${category.name}`}
-          basePath={BLOG_BASE_PATH}
-        />
-        <SearchResults posts={posts}>
-          <div className="blog-posts grid grid-cols-2 gap-x-6 xl:gap-x-5 md:grid-cols-1">
-            {posts.slice(0, 10).map((post, index) => (
-              <BlogGridItem
-                key={post.slug}
-                post={post}
-                category={category}
-                isFeatured={post.isFeatured}
-                isPriority={index < 5}
-              />
-            ))}
-            {posts.length > 10 && (
-              <ScrollLoader itemsCount={10}>
-                {posts.slice(10).map((post) => (
-                  <BlogGridItem key={post.slug} post={post} category={category} />
-                ))}
-              </ScrollLoader>
-            )}
-          </div>
-        </SearchResults>
-      </AlgoliaSearch>
-    </>
+    <AlgoliaSearch indexName={process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME}>
+      <BlogHeader
+        className="lg:-top-[68px] md:-top-[116px]"
+        title="Blog"
+        category={category.name}
+        basePath={BLOG_BASE_PATH}
+      />
+      <SearchResults posts={posts}>
+        <div className="blog-posts grid grid-cols-2 gap-x-6 xl:gap-x-5 md:grid-cols-1">
+          {posts.slice(0, 10).map((post, index) => (
+            <BlogGridItem
+              key={post.slug}
+              post={post}
+              category={category}
+              isFeatured={post.isFeatured}
+              isPriority={index < 5}
+            />
+          ))}
+          {posts.length > 10 && (
+            <ScrollLoader itemsCount={10}>
+              {posts.slice(10).map((post) => (
+                <BlogGridItem key={post.slug} post={post} category={category} />
+              ))}
+            </ScrollLoader>
+          )}
+        </div>
+      </SearchResults>
+    </AlgoliaSearch>
   );
 };
 
