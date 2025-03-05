@@ -3,7 +3,7 @@ title: Platform maintenance
 enableTableOfContents: true
 isDraft: false
 tag: new
-updatedOn: '2025-03-04T10:48:53.512Z'
+updatedOn: '2025-03-05T21:09:38.755Z'
 ---
 
 Neon occasionally performs essential **platform maintenance** outside the [scheduled updates](/docs/manage/updates) performed on Neon computes. This means that you may experience brief disruptions from time to time for these important updates.

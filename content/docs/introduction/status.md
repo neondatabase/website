@@ -2,7 +2,7 @@
 title: Neon status
 subtitle: Stay informed about the performance and availability of Neon
 enableTableOfContents: true
-updatedOn: '2023-10-07T10:43:33.416Z'
+updatedOn: '2025-03-05T21:09:38.754Z'
 ---
 
 To stay informed about Neon's status, we provide a dedicated status page for each region that Neon supports. To view the Neon Status page, navigate to [https://neonstatus.com/](https://neonstatus.com/).
