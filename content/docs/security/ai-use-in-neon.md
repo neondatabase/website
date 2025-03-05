@@ -9,7 +9,7 @@ Neon integrates AI to enhance user experience across different parts of the plat
 
 ## AI in the Neon SQL Editor
 
-The Neon SQL Editor includes AI-powered features to assist with writing and optimizing SQL queries. To enable these capabilities, we share your database schema with the AI agent, but **no actual data is shared**. 
+The Neon SQL Editor includes AI-powered features to assist with writing and optimizing SQL queries. To enable these capabilities, we share your database schema with the AI agent, but **no actual data is shared**.
 
 Neon currently uses [Amazon Bedrock](https://aws.amazon.com/bedrock/) as the LLM provider for the Neon SQL Editor. All requests are processed within AWS’s secure infrastructure, where other Neon resources are also managed.
 
