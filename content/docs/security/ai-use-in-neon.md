@@ -2,7 +2,7 @@
 title: AI use in Neon
 subtitle: How Neon integrates AI into its platform
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.073Z'
+updatedOn: '2025-03-05T10:59:36.029Z'
 ---
 
 Neon integrates AI to enhance user experience across different parts of the platform. Below is an overview of where and how AI is used in Neon.
