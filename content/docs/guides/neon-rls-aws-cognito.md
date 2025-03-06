@@ -1,8 +1,9 @@
 ---
 title: Secure your data with AWS Cognito and Neon RLS
-subtitle: Implement Row-level Security policies in Postgres using AWS Cognito and Neon RLS
+subtitle: Implement Row-level Security policies in Postgres using AWS Cognito and Neon
+  RLS
 enableTableOfContents: true
-updatedOn: '2025-02-03T20:41:57.325Z'
+updatedOn: '2025-03-06T15:24:01.897Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-aws-cognito
   - /docs/guides/neon-authorize-aws-cognito

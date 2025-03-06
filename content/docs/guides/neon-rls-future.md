@@ -2,7 +2,7 @@
 title: Neon RLS roadmap
 subtitle: Learn about upcoming features and improvements for Neon RLS
 enableTableOfContents: true
-updatedOn: '2024-12-03T17:00:08.179Z'
+updatedOn: '2025-03-06T15:24:01.901Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-future
   - /docs/guides/neon-authorize-future

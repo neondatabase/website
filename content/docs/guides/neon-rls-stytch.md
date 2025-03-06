@@ -2,7 +2,7 @@
 title: Secure your data with Stytch and Neon RLS
 subtitle: Implement Row-level Security policies in Postgres using Stytch and Neon RLS
 enableTableOfContents: true
-updatedOn: '2025-02-03T20:41:57.329Z'
+updatedOn: '2025-03-06T15:24:01.904Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-stytch
   - /docs/guides/neon-authorize-stytch

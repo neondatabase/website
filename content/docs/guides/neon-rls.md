@@ -1,8 +1,9 @@
 ---
 title: About Neon RLS
-subtitle: Secure your application at the database level using Postgres's Row-Level Security
+subtitle: Secure your application at the database level using Postgres's Row-Level
+  Security
 enableTableOfContents: true
-updatedOn: '2025-01-21T01:48:50.914Z'
+updatedOn: '2025-03-06T15:24:01.906Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize
   - /docs/guides/neon-authorize

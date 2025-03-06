@@ -2,7 +2,7 @@
 title: Secure your data with Descope and Neon RLS
 subtitle: Implement Row-level Security policies in Postgres using Descope and Neon RLS
 enableTableOfContents: true
-updatedOn: '2025-02-03T20:41:57.326Z'
+updatedOn: '2025-03-06T15:24:01.899Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-descope
   - /docs/guides/neon-authorize-descope

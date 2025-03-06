@@ -2,7 +2,7 @@
 title: Secure your data with Firebase and Neon RLS
 subtitle: Implement Row-level Security policies in Postgres using Firebase and Neon RLS
 enableTableOfContents: true
-updatedOn: '2025-02-03T20:41:57.327Z'
+updatedOn: '2025-03-06T15:24:01.900Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-firebase-gcp
   - /docs/guides/neon-authorize-firebase-gcp

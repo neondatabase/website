@@ -2,7 +2,7 @@
 title: Simplify RLS with Drizzle
 subtitle: Use Drizzle crudPolicy to manage Row-Level Security with Neon RLS
 enableTableOfContents: true
-updatedOn: '2025-03-02T14:35:19.531Z'
+updatedOn: '2025-03-06T15:24:01.899Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-drizzle
   - /docs/guides/neon-authorize-drizzle
