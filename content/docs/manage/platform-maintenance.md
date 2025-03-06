@@ -6,9 +6,7 @@ tag: new
 updatedOn: '2025-03-05T21:09:38.755Z'
 ---
 
-Neon occasionally performs essential **platform maintenance** outside the [scheduled updates](/docs/manage/updates) performed on Neon computes. This means that you may experience brief disruptions from time to time for these important updates.
-
-For notification of planned platform maintenance, you can monitor or subscribe to the [Neon Status page](https://neonstatus.com/) for your region. To learn more, see [Neon Status](/docs/introduction/status).
+Neon occasionally performs essential **platform maintenance** outside of [scheduled updates](/docs/manage/updates) performed on Neon computes. This means that you may experience brief disruptions from time to time for these important updates.
 
 Platform maintenance may include any of the following:
 
@@ -21,6 +19,14 @@ We strive to avoid disruptions as much as possible, but certain updates may requ
 <Admonition type="note">
 Whenever possible, we perform platform maintenance outside of normal business hours in affected regions to minimize disruption.
 </Admonition>
+
+## Where to check for maintenance
+
+For notification of planned platform maintenance, you can monitor or subscribe to the [Neon Status page](https://neonstatus.com/) for your region. To learn more, see [Neon Status](/docs/introduction/status).
+
+If there is ongoing maintenance, you'll see a **Maintenance** indicator at the top of the Neon Console. Clicking on the indicator takes you to the Neon Status page where you can read the maintenance notification.
+
+![Maintenance indicator](/docs/manage/maintenance_indicator.png)
 
 ## Handling disruptions and latency during platform maintenance
 
