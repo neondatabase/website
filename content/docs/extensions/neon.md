@@ -109,7 +109,7 @@ The `neon` extension is installed by default to a system-owned `postgres` databa
 ```sql
 postgres=> \dv
                     List of relations
- Schema |            Name            | Type |    Owner    
+ Schema |            Name            | Type |    Owner
 --------+----------------------------+------+-------------
  public | local_cache                | view | cloud_admin
  public | neon_backend_perf_counters | view | cloud_admin
@@ -123,7 +123,7 @@ postgres=> \dv
 ```sql
 postgres=> \df
                                                                           List of functions
- Schema |                 Name                 | Result data type |                                    Argument data types                                    | Type 
+ Schema |                 Name                 | Result data type |                                    Argument data types                                    | Type
 --------+--------------------------------------+------------------+-------------------------------------------------------------------------------------------+------
  public | approximate_working_set_size         | integer          | reset boolean                                                                             | func
  public | approximate_working_set_size_seconds | integer          | duration integer DEFAULT NULL::integer                                                    | func
