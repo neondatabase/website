@@ -1,37 +1,38 @@
 ---
-title: Secure your data with Stack Auth and Neon RLS Authorize
-subtitle: Implement Row-level Security policies in Postgres using Stack Auth and Neon RLS Authorize
+title: Secure your data with Stack Auth and Neon RLS
+subtitle: Implement Row-level Security policies in Postgres using Stack Auth and Neon RLS
 enableTableOfContents: true
 updatedOn: '2025-02-03T20:41:57.329Z'
 redirectFrom:
+  - /docs/guides/neon-rls-authorize-stack-auth
   - /docs/guides/neon-authorize-stack-auth
 ---
 
 <InfoBlock>
 <DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/stack-nextjs-neon-rls-authorize">Stack Auth + Neon RLS Authorize</a>
+  <a href="https://github.com/neondatabase-labs/stack-nextjs-neon-rls-authorize">Stack Auth + Neon RLS</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
-  <a href="/docs/guides/neon-rls-authorize-tutorial">Neon RLS Authorize Tutorial</a>
-   <a href="/docs/guides/neon-rls-authorize-drizzle">Simplify RLS with Drizzle</a>
+  <a href="/docs/guides/neon-rls-tutorial">Neon RLS Tutorial</a>
+   <a href="/docs/guides/neon-rls-drizzle">Simplify RLS with Drizzle</a>
 </DocsList>
 </InfoBlock>
 
-Use Stack Auth with Neon RLS Authorize to add secure, database-level authorization to your application. This guide assumes you already have an application using Stack Auth for user authentication. It shows you how to integrate Stack Auth with Neon RLS Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
+Use Stack Auth with Neon RLS to add secure, database-level authorization to your application. This guide assumes you already have an application using Stack Auth for user authentication. It shows you how to integrate Stack Auth with Neon RLS, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 
 ## How it works
 
-Stack Auth handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon RLS Authorize. Neon RLS Authorize validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
+Stack Auth handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon RLS. Neon RLS validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
 
 ## Prerequisites
 
 To follow along with this guide, you will need:
 
 - A Neon account. Sign up at [Neon](https://neon.tech) if you don't have one.
-- A [Stack Auth](https://stack-auth.com/) account with an existing application (e.g., a **todos** app) that uses Stack Auth for user authentication. If you don't have an app, check our [demo](https://github.com/neondatabase-labs/stack-nextjs-neon-rls-authorize) for similar schema and policies in action.
+- A [Stack Auth](https://stack-auth.com/) account with an existing application (e.g., a **todos** app) that uses Stack Auth for user authentication. If you don't have an app, check our [demo](https://github.com/neondatabase-labs/stack-nextjs-neon-rls) for similar schema and policies in action.
 
-## Integrate Stack Auth with Neon RLS Authorize
+## Integrate Stack Auth with Neon RLS
 
 In this first set of steps, we'll integrate Stack Auth as an authorization provider in Neon. When these steps are complete, Stack Auth will start passing JWTs to your Neon database, which you can then use to create policies.
 
@@ -63,7 +64,7 @@ At this point, you can use the **Get Started** setup steps from RLS Authorize in
 
 ### 3. Install the pg_session_jwt extension in your database
 
-Neon RLS Authorize uses the [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt) extension to handle authenticated sessions through JSON Web Tokens (JWTs). This extension allows secure transmission of authentication data from your application to Postgres, where you can enforce Row-Level Security (RLS) policies based on the user's identity.
+Neon RLS uses the [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt) extension to handle authenticated sessions through JSON Web Tokens (JWTs). This extension allows secure transmission of authentication data from your application to Postgres, where you can enforce Row-Level Security (RLS) policies based on the user's identity.
 
 To install the extension in the `neondb` database, run:
 
@@ -106,7 +107,7 @@ GRANT USAGE ON SCHEMA public TO anonymous;
 
 ### 5. Install the Neon Serverless Driver
 
-Neon's Serverless Driver manages the connection between your application and the Neon Postgres database. For Neon RLS Authorize, you must use HTTP. While it is technically possible to access the HTTP API without using our driver, we recommend using the driver for best performance. The driver also supports WebSockets and TCP connections, so make sure you use the HTTP method when working with Neon RLS Authorize.
+Neon's Serverless Driver manages the connection between your application and the Neon Postgres database. For Neon RLS, you must use HTTP. While it is technically possible to access the HTTP API without using our driver, we recommend using the driver for best performance. The driver also supports WebSockets and TCP connections, so make sure you use the HTTP method when working with Neon RLS.
 
 Install it using the following command:
 
@@ -139,7 +140,7 @@ The `DATABASE_URL` is intended for admin tasks and can run any query while the `
 
 ## Add RLS policies
 
-Now that you've integrated Stack Auth with Neon RLS Authorize, you can securely pass JWTs to your Neon database. Let's start looking at how to add RLS policies to your schema and how you can execute authenticated queries from your application.
+Now that you've integrated Stack Auth with Neon RLS, you can securely pass JWTs to your Neon database. Let's start looking at how to add RLS policies to your schema and how you can execute authenticated queries from your application.
 
 ### 1. Add Row-Level Security policies
 

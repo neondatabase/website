@@ -1,73 +1,66 @@
 ---
-title: Secure your data with AWS Cognito and Neon RLS Authorize
-subtitle: Implement Row-level Security policies in Postgres using AWS Cognito and Neon RLS Authorize
+title: Secure your data with Keycloak and Neon RLS
+subtitle: Implement Row-level Security policies in Postgres using Keycloak and Neon RLS
 enableTableOfContents: true
-updatedOn: '2025-02-03T20:41:57.325Z'
+updatedOn: '2025-02-03T20:41:57.328Z'
 redirectFrom:
-  - /docs/guides/neon-authorize-aws-cognito
+  - /docs/guides/neon-rls-authorize-keycloak
+  - /docs/guides/neon-authorize-keycloak
 ---
 
 <InfoBlock>
-<DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/aws-cognito-express-htmx-neon-rls-authorize">AWS Cognito + Neon RLS Authorize</a>
-</DocsList>
-
 <DocsList title="Related docs" theme="docs">
-  <a href="/docs/guides/neon-rls-authorize-tutorial">Neon RLS Authorize Tutorial</a>
-  <a href="/docs/guides/neon-rls-authorize-drizzle">Simplify RLS with Drizzle</a>
+  <a href="/docs/guides/neon-rls-tutorial">Neon RLS Tutorial</a>
+  <a href="/docs/guides/neon-rls-drizzle">Simplify RLS with Drizzle</a>
 </DocsList>
 </InfoBlock>
 
-Use AWS Cognito with Neon RLS Authorize to add secure, database-level authorization to your application. This guide assumes you already have an application using AWS Cognito for user authentication. It shows you how to integrate AWS Cognito with Neon RLS Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
+Use Keycloak with Neon RLS to add secure, database-level authorization to your application. This guide assumes you already have an application using Keycloak for user authentication. It shows you how to integrate Keycloak with Neon RLS, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 
 ## How it works
 
-AWS Cognito handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon RLS Authorize. Neon RLS Authorize validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
+Keycloak handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon RLS. Neon RLS validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
 
 ## Prerequisites
 
 To follow along with this guide, you will need:
 
 - A Neon account. Sign up at [Neon](https://neon.tech) if you don't have one.
-- A [AWS Cognito](https://aws.amazon.com/pm/cognito/) account with an existing application (e.g., a **todos** app) that uses AWS Cognito for user authentication. If you don't have an app, check our [demo](https://github.com/neondatabase-labs/stytch-nextjs-neon-rls) for similar schema and policies in action.
+- A [Keycloak](https://www.keycloak.org/) instance with an existing application (e.g., a todos app) that uses Keycloak for user authentication.
 
-## Integrate AWS Cognito with Neon RLS Authorize
+## Integrate Keycloak with Neon RLS
 
-In this first set of steps, we'll integrate AWS Cognito as an authorization provider in Neon. When these steps are complete, AWS Cognito will start passing JWTs to your Neon database, which you can then use to create policies.
+In this first set of steps, we'll integrate Keycloak as an authorization provider in Neon. When these steps are complete, Keycloak will start passing JWTs to your Neon database, which you can then use to create policies.
 
-### 1. Get your AWS Cognito JWKS URL
+### 1. Get your Keycloak JWKS
 
-When integrating AWS Cognito with Neon, you'll need to provide the JWKS (JSON Web Key Set) URL. This allows your database to validate the JWT tokens and extract the user_id for use in RLS policies.
+<Admonition type="note">
+  To ensure compatibility with Neon RLS, configure Keycloak to use only one signing algorithm (RS256 or ES256). You can verify this by opening the JWKS URL and checking the keys manually.
+</Admonition>
 
-The AWS Cognito JWKS URL follows this format:
+When integrating Keycloak with Neon, you'll need to provide the JWKS (JSON Web Key Set) URL. This allows your database to validate the JWT tokens and extract the user_id for use in RLS policies.
+
+The Keycloak JWKS URL follows this format:
 
 ```
-https://cognito-idp.{YOUR_AWS_COGNITO_REGION}.amazonaws.com/{YOUR_AWS_COGNITO_USER_POOL_ID}/.well-known/jwks.json
+https://{YOUR_KEYCLOAK_DOMAIN}/auth/realms/{YOUR_REALM}/protocol/openid-connect/certs
 ```
 
-You can locate your JWKS URL in the AWS Cognito console under User pools, labeled as Token signing key URL.
+Replace `{YOUR_KEYCLOAK_DOMAIN}` with your Keycloak domain and `{YOUR_REALM}` with your Keycloak realm.
 
-![Find your AWS Cognito JWKS URL](/docs/guides/aws_cognito_user_pool.png)
+### 2. Add Keycloak as an authorization provider in the Neon Console
 
-Replace `{YOUR_AWS_COGNITO_REGION}` and `{YOUR_AWS_COGNITO_USER_POOL_ID}` with your actual AWS Cognito region and user pool ID. For example, if your region is `us-east-1` and your user pool ID is `us-east-1_XXXXXXXXX`, your JWKS URL would be:
-
-```plaintext shouldWrap
-https://cognito-idp.us-east-1.amazonaws.com/us-east-1_XXXXXXXXX/.well-known/jwks.json
-```
-
-### 2. Add AWS Cognito as an authorization provider in the Neon Console
-
-Once you have the JWKS URL, go to the **Neon Console**, navigate to **Settings** > **RLS Authorize**, and add AWS Cognito as an authentication provider. Paste your copied URL and AWS Cognito will be automatically recognized and selected.
+Once you have the JWKS URL, go to the **Neon Console**, navigate to **Settings** > **RLS Authorize**, and add Keycloak as an authentication provider. Paste your copied URL and Keycloak will be automatically recognized and selected.
 
 <div style={{ display: 'flex', justifyContent: 'center'}}>
-  <img src="/docs/guides/aws_cognito_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
+  <img src="/docs/guides/keycloak_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
 </div>
 
 At this point, you can use the **Get Started** setup steps from RLS Authorize in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
 
 ### 3. Install the pg_session_jwt extension in your database
 
-Neon RLS Authorize uses the [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt) extension to handle authenticated sessions through JSON Web Tokens (JWTs). This extension allows secure transmission of authentication data from your application to Postgres, where you can enforce Row-Level Security (RLS) policies based on the user's identity.
+Neon RLS uses the [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt) extension to handle authenticated sessions through JSON Web Tokens (JWTs). This extension allows secure transmission of authentication data from your application to Postgres, where you can enforce Row-Level Security (RLS) policies based on the user's identity.
 
 To install the extension in the `neondb` database, run:
 
@@ -110,7 +103,7 @@ GRANT USAGE ON SCHEMA public TO anonymous;
 
 ### 5. Install the Neon Serverless Driver
 
-Neon's Serverless Driver manages the connection between your application and the Neon Postgres database. For Neon RLS Authorize, you must use HTTP. While it is technically possible to access the HTTP API without using our driver, we recommend using the driver for best performance. The driver also supports WebSockets and TCP connections, so make sure you use the HTTP method when working with Neon RLS Authorize.
+Neon's Serverless Driver manages the connection between your application and the Neon Postgres database. For Neon RLS, you must use HTTP. While it is technically possible to access the HTTP API without using our driver, we recommend using the driver for best performance. The driver also supports WebSockets and TCP connections, so make sure you use the HTTP method when working with Neon RLS.
 
 Install it using the following command:
 
@@ -143,7 +136,7 @@ The `DATABASE_URL` is intended for admin tasks and can run any query while the `
 
 ## Add RLS policies
 
-Now that you've integrated AWS Cognito with Neon RLS Authorize, you can securely pass JWTs to your Neon database. Let's start looking at how to add RLS policies to your schema and how you can execute authenticated queries from your application.
+Now that you've integrated Keycloak with Neon RLS, you can securely pass JWTs to your Neon database. Let's start looking at how to add RLS policies to your schema and how you can execute authenticated queries from your application.
 
 ### 1. Add Row-Level Security policies
 
@@ -226,52 +219,38 @@ The `crudPolicy` function simplifies policy creation by generating all necessary
 
 ### 2. Run your first authorized query
 
-With RLS policies in place, you can now query the database using JWTs from AWS Cognito, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from both the backend and the frontend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
+With RLS policies in place, you can now query the database using JWTs from Keycloak, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from both the backend and the frontend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
 
 <Tabs labels={["server-component.tsx","client-component.tsx",".env"]}>
 
 <TabItem>
 
 ```typescript shouldWrap
-"use server";
+'use server';
 
 import { neon } from '@neondatabase/serverless';
-import { cookies } from 'next/headers';
-import { fetchAuthSession } from "aws-amplify/auth/server";
-import { runWithAmplifyServerContext } from "@/app/utils/amplify-server-util";
-
-async function getCognitoSession() {
-  try {
-    const session = await runWithAmplifyServerContext({
-      nextServerContext: { cookies },
-      operation: (contextSpec) => fetchAuthSession(contextSpec),
-    });
-
-    if (!session?.tokens?.accessToken) {
-      throw new Error('No valid session found');
-    }
-
-    return session.tokens.accessToken.toString();
-  } catch (error) {
-    console.error("Error fetching session:", error);
-    throw new Error('Failed to authenticate session');
-  }
-}
+import { getUserInfo } from '@/lib/auth'
 
 export default async function TodoList() {
+  const userInfo = await getUserInfo() // [!code highlight]
+  if (!userInfo) {
+    throw new Error('No user info available');
+  }
+
   const sql = neon(process.env.DATABASE_AUTHENTICATED_URL!, {
     authToken: async () => {
-      const sessionToken = await getCognitoSession(); // [!code highlight]
-      if (!sessionToken) {
-        throw new Error('No session token available');
+      const jwt = userInfo.token; // [!code highlight]
+      if (!jwt) {
+        throw new Error('No JWT token available');
       }
-      return sessionToken;
+      return jwt;
     },
   });
 
   // WHERE filter is optional because of RLS.
   // But we send it anyway for performance reasons.
-  const todos = await sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
+  const todos = await
+    sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
 
   return (
     <ul>
@@ -292,7 +271,7 @@ export default async function TodoList() {
 
 import type { Todo } from '@/app/schema';
 import { neon } from '@neondatabase/serverless';
-import { getCurrentUser, fetchAuthSession } from 'aws-amplify/auth';
+import { useKeycloak } from '@react-keycloak/web';
 import { useEffect, useState } from 'react';
 
 const getDb = (token: string) =>
@@ -301,30 +280,27 @@ const getDb = (token: string) =>
   });
 
 export default function TodoList() {
+  const { keycloak, initialized } = useKeycloak();
   const [todos, setTodos] = useState<Array<Todo>>();
 
   useEffect(() => {
-    async function fetchTodos() {
-      const session = await fetchAuthSession(); // [!code highlight]
-      const user = await getCurrentUser();
-
-      if (!session?.tokens?.accessToken || !user) {
+    async function loadTodos() {
+      const sessionToken = keycloak.token; // [!code highlight]
+      if (!sessionToken) {
         return;
       }
-
-      const authToken = session.tokens.accessToken.toString();
-      const sql = getDb(authToken);
+      const sql = getDb(sessionToken);
 
       // WHERE filter is optional because of RLS.
       // But we send it anyway for performance reasons.
       const todosResponse = await
-        sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
+        sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
 
       setTodos(todosResponse as Array<Todo>);
     }
 
-    fetchTodos();
-  }, []);
+    loadTodos();
+  }, [initialized, keycloak.authenticated]);
 
   return (
     <ul>

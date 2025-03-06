@@ -1,13 +1,14 @@
 ---
-title: Troubleshooting Neon RLS Authorize
-subtitle: Common issues and solutions when using Neon RLS Authorize
+title: Troubleshooting Neon RLS
+subtitle: Common issues and solutions when using Neon RLS
 enableTableOfContents: true
 updatedOn: '2024-10-30T14:14:05.674Z'
 redirectFrom:
+  - /docs/guides/neon-rls-authorize-troubleshooting
   - /docs/guides/neon-authorize-troubleshooting
 ---
 
-This page covers common errors you might encounter when implementing Row-Level Security (RLS) policies with Neon RLS Authorize and your authentication provider.
+This page covers common errors you might encounter when implementing Row-Level Security (RLS) policies with Neon RLS and your authentication provider.
 
 Errors:
 
@@ -37,7 +38,7 @@ This issue typically occurs when:
 
 3. **Unsupported role name**
 
-   The Postgres username used in your connection string is not a role registered for Neon RLS Authorize. Currently, only the roles `anonymous` and `authenticated` are supported. Make sure that the role name in your connection string matches one of these supported roles.
+   The Postgres username used in your connection string is not a role registered for Neon RLS. Currently, only the roles `anonymous` and `authenticated` are supported. Make sure that the role name in your connection string matches one of these supported roles.
 
 **Solution:**
 
@@ -90,7 +91,7 @@ TO anonymous;
 ```
 
 <Admonition type="note">
-Neon RLS Authorize prompts you to run these commands when you first set up your authentication provider on the Neon RLS Authorize drawer in the Neon Console. If you're using a different database, you will have to run these commands manually.
+Neon RLS prompts you to run these commands when you first set up your authentication provider on the Neon RLS drawer in the Neon Console. If you're using a different database, you will have to run these commands manually.
 </Admonition>
 
 ---
@@ -101,7 +102,7 @@ Neon RLS Authorize prompts you to run these commands when you first set up your 
 invalid RSA signing algorithm
 ```
 
-Neon RLS Authorize only supports JWTs signed with the `ES256` and `RS256` algorithms. If the Neon Proxy receives a JWT signed with any other algorithm, it will produce an error.
+Neon RLS only supports JWTs signed with the `ES256` and `RS256` algorithms. If the Neon Proxy receives a JWT signed with any other algorithm, it will produce an error.
 
 **Solution:**
 
