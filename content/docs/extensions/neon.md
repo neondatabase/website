@@ -3,7 +3,7 @@ title: The neon extension
 subtitle: An extension for Neon-specific statistics including the Local File Cache hit
   ratio
 enableTableOfContents: true
-updatedOn: '2025-02-18T19:59:08.870Z'
+updatedOn: '2025-03-06T21:17:10.078Z'
 ---
 
 The `neon` extension provides functions and views designed to gather Neon-specific metrics.
