@@ -31,6 +31,7 @@ After logging into the Neon Console, proceed to the [Projects](https://console.n
    CREATE TABLE favorite_coffee_blends (
        id SERIAL PRIMARY KEY,
        name TEXT,
+       origin TEXT,
        notes TEXT
    );
    ```
