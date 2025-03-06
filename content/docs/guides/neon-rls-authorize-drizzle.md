@@ -124,7 +124,7 @@ export const authUid = (userIdColumn: AnyPgColumn) =>
 
 This helper:
 
-1. Wraps Neon RLS Authorize's `auth.user_id()` function (from the [pg_session_jwt](/docs/guides/neon-rls#how-the-pgsessionjwt-extension-works) extension)
+1. Wraps Neon RLS Authorize's `auth.user_id()` function (from the [pg_session_jwt](/docs/guides/neon-rls-authorize-workos) extension)
 2. Compares the authenticated user's ID with a table column
 3. Returns a SQL expression suitable for use in `read` and `modify` parameters
 

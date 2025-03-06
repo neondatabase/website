@@ -12,4 +12,4 @@ Then, look at the examples of how to do branching and Point-in-Time queries (com
 
 If you are new to Postgres, look at our [web query editor](/docs/tutorials#query-via-ui) for a primer.
 
-For instructions on how to use Neon with your application stack, see [Integrations](/docs/integrations).
+For instructions on how to use Neon with your application stack, see [Integrations](/docs/manage/integrations).
