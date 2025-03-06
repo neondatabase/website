@@ -109,13 +109,17 @@ A role in Neon with limited access to specific projects shared with them. Shared
 
 ## Compute
 
-A service that provides virtualized computing resources, including CPU, memory, and storage, for running applications. In the context of Neon, a compute runs Postgres.
+A service that provides virtualized computing resources, equipped with an operating system, a specified number of virtual CPUs (vCPUs), and a defined amount of RAM. It provides the processing power and resources for running applications. In the context of Neon, a compute runs Postgres and includes supporting components and extensions.
 
-Neon creates a primary read-write compute for the project's default branch. Neon supports both read-write and [read replica](/docs/introduction/read-replicas) computes. A branch can have a single primary (read-write) compute but supports multiple read replica computes. The compute hostname is required to connect to a Neon Postgres database from a client or application. A [compute endpoint](#compute-endpoint) is the access point through which users connect to a Neon compute.
+A [compute endpoint](#compute-endpoint) is the access point for connecting to a Neon compute.
+
+Neon creates a primary read-write compute for the project's default branch. Neon supports both read-write and [read replica](/docs/introduction/read-replicas) computes. A branch can have a single primary (read-write) compute but supports multiple read replica computes. The compute hostname is required to connect to a Neon Postgres database from a client or application.
 
 ## compute endpoint
 
-The access point through which users connect to a Neon compute. In the context of Neon, the compute endpoint is represented by a connection string, which includes necessary credentials and connection parameters. This connection string enables clients, such as applications or users, to securely connect to a Postgres database running on a Neon compute. See [connection string](#connection-string).
+The network access point for connecting to a [Neon compute](#compute).
+
+In Neon, a compute endpoint is represented by a hostname, such as `ep-aged-math-668285.us-east-2.aws.neon.tech`, which directs traffic to the appropriate Neon compute. Additional attributes further define a compute endpoint, including `project_id`, `region_id`, `branch_id`, and `type`. These attributes specify the associated Neon project, branch, cloud service region, and whether the endpoint is read-write or read-only. For additional endpoint attributes, refer to the [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint).
 
 ## compute size
 
@@ -209,7 +213,7 @@ A Neon Control Plane operation that deletes stored data when a Neon project is d
 
 ## Endpoint ID
 
-A string that identifies a Neon compute. Neon Endpoint IDs are generated Heroku-like memorable random names, similar to `ep-calm-flower-a5b75h79`. These names are always prefixed by `ep` for "endpoint". You can find your Endpoint ID by navigating to your project in the Neon Console, selecting **Branches** from the sidebar, and clicking on a branch. The Endpoint ID is shown in the table under the **Computes** heading.
+A string that identifies a Neon compute endpoint. Neon Endpoint IDs are generated Heroku-like memorable random names, similar to `ep-calm-flower-a5b75h79`. These names are always prefixed by `ep` for "endpoint". You can find your Endpoint ID by navigating to your project in the Neon Console, selecting **Branches** from the sidebar, and clicking on a branch. The **Endpoint ID** is shown in the table under the **Computes** heading.
 
 ## Egress
 
