@@ -42,7 +42,7 @@ export default {
   cliReference: '/docs/reference/neon-cli',
   connectionPooling: '/docs/connect/connection-pooling',
   docsBranching: '/docs/introduction/branching',
-  migration: '/docs/import/migration-assistant',
+  migration: '/docs/import/import-data-assistant',
   rlsAuthorize: '/docs/guides/neon-rls-authorize',
   security: '/docs/security/security-overview',
   serverless: '/docs/introduction/serverless',

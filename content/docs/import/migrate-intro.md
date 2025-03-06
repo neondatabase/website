@@ -18,7 +18,7 @@ If you're planning to migrate a production workload to Neon, let us know&#8212;w
 
 <DetailIconCards>
 
-<a href="/docs/import/migration-assistant" description="Move your existing database to Neon using our guided migration tool" icon="neon">Neon Migration Assistant</a>
+<a href="/docs/import/import-data-assistant" description="Move your existing database to Neon using our guided migration tool" icon="neon">Import Data Assistant</a>
 
 <a href="/docs/import/migrate-from-postgres" description="Migrate data from another Postgres database using pg_dump and pg_restore" icon="postgres">Migrate with pg_dump and pg_restore</a>
 
