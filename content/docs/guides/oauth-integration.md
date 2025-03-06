@@ -36,7 +36,7 @@ Here is a high-level overview of how Neon's OAuth implementation works:
 2. An authorization URL is generated.
 3. The user is redirected to Neon’s OAuth consent screen to authorize the application.
 4. The user logs in and authorizes the application, granting it the necessary permissions.
-3. A redirect is performed to a callback endpoint, which includes an access token that allows the application to manage Neon resources on the user’s behalf.
+5. A redirect is performed to a callback endpoint, which includes an access token that allows the application to manage Neon resources on the user’s behalf.
 
 ## About the Neon OAuth server
 
