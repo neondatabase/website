@@ -885,6 +885,8 @@
               slug: extensions/citext
             - title: hstore
               slug: extensions/hstore
+            - title: ltree
+              slug: extensions/ltree
             - title: neon
               slug: extensions/neon
             - title: neon_utils
