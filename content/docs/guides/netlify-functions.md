@@ -41,10 +41,10 @@ After logging into the Neon Console, proceed to the [Projects](https://console.n
    ```sql
    INSERT INTO favorite_coffee_blends (name, origin, notes)
    VALUES
-       ('Morning Joy', 'Citrus, Honey, Floral'),
-       ('Dark Roast Delight', 'Rich, Chocolate, Nutty'),
-       ('Arabica Aroma', 'Smooth, Caramel, Fruity'),
-       ('Robusta Revolution', 'Strong, Bold, Bitter');
+       ('Morning Joy', 'Ethiopia', 'Citrus, Honey, Floral'),
+       ('Dark Roast Delight', 'Colombia', 'Rich, Chocolate, Nutty'),
+       ('Arabica Aroma', 'Brazil', 'Smooth, Caramel, Fruity'),
+       ('Robusta Revolution', 'Vietnam', 'Strong, Bold, Bitter');
    ```
 
 ### Retrieve your Neon database connection string
