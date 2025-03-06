@@ -2,7 +2,7 @@
 title: Import Data Assistant
 subtitle: Move your existing database to Neon using our guided tool
 enableTableOfContents: true
-updatedOn: '2025-01-24T20:21:43.511Z'
+updatedOn: '2025-03-06T19:30:39.633Z'
 redirectFrom:
   - /docs/import/migration-assistant
 ---
