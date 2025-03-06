@@ -1,88 +1,74 @@
 ---
-title: Secure your data with Firebase and Neon RLS Authorize
-subtitle: Implement Row-level Security policies in Postgres using Firebase and Neon RLS Authorize
+title: Secure your data with AWS Cognito and Neon RLS
+subtitle: Implement Row-level Security policies in Postgres using AWS Cognito and Neon RLS
 enableTableOfContents: true
-updatedOn: '2025-02-03T20:41:57.327Z'
+updatedOn: '2025-02-03T20:41:57.325Z'
 redirectFrom:
-  - /docs/guides/neon-authorize-firebase-gcp
-  - /docs/guides/neon-authorize-google-identity
+  - /docs/guides/neon-rls-authorize-aws-cognito
+  - /docs/guides/neon-authorize-aws-cognito
 ---
 
 <InfoBlock>
-<DocsList title="What You'll Learn">
-  <p>Firebase/GCP Identity Platform integration</p>
-  <p>JWT authentication setup</p>
-  <p>Row-Level Security policies</p>
+<DocsList title="Sample project" theme="repo">
+  <a href="https://github.com/neondatabase-labs/aws-cognito-express-htmx-neon-rls">AWS Cognito + Neon RLS</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
-  <a href="/docs/guides/neon-rls-authorize-tutorial">Neon RLS Authorize Tutorial</a>
-  <a href="https://firebase.google.com/docs/auth">Firebase Authentication documentation</a>
-  <a href="https://cloud.google.com/identity-platform/docs/sign-in-user-email">GCP Identity Platform Quickstart</a>
+  <a href="/docs/guides/neon-rls-tutorial">Neon RLS Tutorial</a>
+  <a href="/docs/guides/neon-rls-drizzle">Simplify RLS with Drizzle</a>
 </DocsList>
 </InfoBlock>
 
-Use Firebase or Google Cloud Identity Platform with Neon RLS Authorize to add secure, database-level authorization to your application.
-
-This guide assumes you already have an application using Firebase or GCP Identity Platform for user authentication. It shows you how to integrate with Neon RLS Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
+Use AWS Cognito with Neon RLS to add secure, database-level authorization to your application. This guide assumes you already have an application using AWS Cognito for user authentication. It shows you how to integrate AWS Cognito with Neon RLS, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 
 ## How it works
 
-Firebase and Google Cloud Identity Platform share the same underlying authentication infrastructure, but focus on different use cases: Firebase for mobile and web application developers, and GCP Identity Platform for enterprise-level identity management (leveraging Firebase in its implementation).
-
-Both services generate JSON Web Tokens (JWTs) for user authentication, which are passed to Neon RLS Authorize. Unlike some other authentication providers that issue a dedicated JWKS URL per project, Firebase and GCP Identity Platform use a common JWKS URL and rely on the Project ID in the JWT's Audience claim to identify specific projects.
-
-When you make a database request, Neon RLS Authorize validates these JWTs and uses the embedded user identity metadata to enforce [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) (RLS) policies in Postgres, securing database queries based on user identity. This flow is enabled by the [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt) extension.
+AWS Cognito handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon RLS. Neon RLS validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
 
 ## Prerequisites
 
 To follow along with this guide, you will need:
 
 - A Neon account. Sign up at [Neon](https://neon.tech) if you don't have one.
-- A [Firebase](https://firebase.google.com) or [GCP Identity Platform](https://cloud.google.com/security/products/identity-platform) project with Authentication enabled:
-  - [Set up Firebase Authentication](https://firebase.google.com/docs/auth)
-  - [Set up Identity Platform](https://cloud.google.com/identity-platform/docs/sign-in-user-email)
+- A [AWS Cognito](https://aws.amazon.com/pm/cognito/) account with an existing application (e.g., a **todos** app) that uses AWS Cognito for user authentication. If you don't have an app, check our [demo](https://github.com/neondatabase-labs/stytch-nextjs-neon-rls) for similar schema and policies in action.
 
-## Integrate Firebase/GCP Identity Platform with Neon RLS Authorize
+## Integrate AWS Cognito with Neon RLS
 
-In this first set of steps, we'll integrate Firebase/GCP Identity Platform as an authorization provider in Neon. When these steps are complete, your authentication service (whether Firebase or GCP Identity Platform) will start passing JWTs to your Neon database, which you can then use to create policies.
+In this first set of steps, we'll integrate AWS Cognito as an authorization provider in Neon. When these steps are complete, AWS Cognito will start passing JWTs to your Neon database, which you can then use to create policies.
 
-### 1. Get the JWKS URL and Project ID
+### 1. Get your AWS Cognito JWKS URL
 
-You'll need two pieces of information:
+When integrating AWS Cognito with Neon, you'll need to provide the JWKS (JSON Web Key Set) URL. This allows your database to validate the JWT tokens and extract the user_id for use in RLS policies.
 
-1. **JWKS URL** - This is the same for all projects:
+The AWS Cognito JWKS URL follows this format:
 
-   ```plaintext
-   https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com
-   ```
+```
+https://cognito-idp.{YOUR_AWS_COGNITO_REGION}.amazonaws.com/{YOUR_AWS_COGNITO_USER_POOL_ID}/.well-known/jwks.json
+```
 
-2. **Project ID** - This serves as your JWT Audience value:
+You can locate your JWKS URL in the AWS Cognito console under User pools, labeled as Token signing key URL.
 
-   - Go to the [Firebase Console](https://console.firebase.google.com)
-   - Navigate to **Settings** > **General** > **Project ID**
+![Find your AWS Cognito JWKS URL](/docs/guides/aws_cognito_user_pool.png)
 
-   <Admonition type="note" title="Note">
-   Every GCP Identity Platform project automatically creates a corresponding Firebase project, which is why we use the Firebase Console to get the Project ID.
-   </Admonition>
+Replace `{YOUR_AWS_COGNITO_REGION}` and `{YOUR_AWS_COGNITO_USER_POOL_ID}` with your actual AWS Cognito region and user pool ID. For example, if your region is `us-east-1` and your user pool ID is `us-east-1_XXXXXXXXX`, your JWKS URL would be:
 
-   <div style={{ display: 'flex', justifyContent: 'center'}}>
-     <img src="/docs/guides/firebase_project_id.png" alt="Firebase Project Id" style={{ width: '100%', maxWidth: '900px', height: 'auto' }} />
-   </div>
+```plaintext shouldWrap
+https://cognito-idp.us-east-1.amazonaws.com/us-east-1_XXXXXXXXX/.well-known/jwks.json
+```
 
-### 2. Add Firebase/GCP Identity Platform as an authorization provider in the Neon Console
+### 2. Add AWS Cognito as an authorization provider in the Neon Console
 
-Once you have the JWKS URL, go to the **Neon Console**, navigate to **Settings** > **RLS Authorize**, and add Firebase/GCP Identity Platform as an authentication provider. Paste your copied URL and Firebase/GCP Identity Platform will be automatically recognized and selected.
+Once you have the JWKS URL, go to the **Neon Console**, navigate to **Settings** > **RLS Authorize**, and add AWS Cognito as an authentication provider. Paste your copied URL and AWS Cognito will be automatically recognized and selected.
 
 <div style={{ display: 'flex', justifyContent: 'center'}}>
-  <img src="/docs/guides/firebase_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
+  <img src="/docs/guides/aws_cognito_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
 </div>
 
 At this point, you can use the **Get Started** setup steps from RLS Authorize in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
 
 ### 3. Install the pg_session_jwt extension in your database
 
-Neon RLS Authorize uses the [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt) extension to handle authenticated sessions through JSON Web Tokens (JWTs). This extension allows secure transmission of authentication data from your application to Postgres, where you can enforce Row-Level Security (RLS) policies based on the user's identity.
+Neon RLS uses the [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt) extension to handle authenticated sessions through JSON Web Tokens (JWTs). This extension allows secure transmission of authentication data from your application to Postgres, where you can enforce Row-Level Security (RLS) policies based on the user's identity.
 
 To install the extension in the `neondb` database, run:
 
@@ -125,7 +111,7 @@ GRANT USAGE ON SCHEMA public TO anonymous;
 
 ### 5. Install the Neon Serverless Driver
 
-Neon’s Serverless Driver manages the connection between your application and the Neon Postgres database. For Neon RLS Authorize, you must use HTTP. While it is technically possible to access the HTTP API without using our driver, we recommend using the driver for best performance. The driver also supports WebSockets and TCP connections, so make sure you use the HTTP method when working with Neon RLS Authorize.
+Neon's Serverless Driver manages the connection between your application and the Neon Postgres database. For Neon RLS, you must use HTTP. While it is technically possible to access the HTTP API without using our driver, we recommend using the driver for best performance. The driver also supports WebSockets and TCP connections, so make sure you use the HTTP method when working with Neon RLS.
 
 Install it using the following command:
 
@@ -158,7 +144,7 @@ The `DATABASE_URL` is intended for admin tasks and can run any query while the `
 
 ## Add RLS policies
 
-Now that you’ve integrated Firebase with Neon RLS Authorize, you can securely pass JWTs to your Neon database. Let's start looking at how to add RLS policies to your schema and how you can execute authenticated queries from your application.
+Now that you've integrated AWS Cognito with Neon RLS, you can securely pass JWTs to your Neon database. Let's start looking at how to add RLS policies to your schema and how you can execute authenticated queries from your application.
 
 ### 1. Add Row-Level Security policies
 
@@ -241,38 +227,52 @@ The `crudPolicy` function simplifies policy creation by generating all necessary
 
 ### 2. Run your first authorized query
 
-With RLS policies in place, you can now query the database using JWTs from your authentication provider, restricting access based on the user's identity. Here's how to run authenticated queries from both the backend and the frontend of your application using authentication tokens. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
+With RLS policies in place, you can now query the database using JWTs from AWS Cognito, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from both the backend and the frontend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
 
 <Tabs labels={["server-component.tsx","client-component.tsx",".env"]}>
 
 <TabItem>
 
-```typescript
-'use server';
+```typescript shouldWrap
+"use server";
 
 import { neon } from '@neondatabase/serverless';
-import { getUserInfo } from '@/lib/auth'
+import { cookies } from 'next/headers';
+import { fetchAuthSession } from "aws-amplify/auth/server";
+import { runWithAmplifyServerContext } from "@/app/utils/amplify-server-util";
+
+async function getCognitoSession() {
+  try {
+    const session = await runWithAmplifyServerContext({
+      nextServerContext: { cookies },
+      operation: (contextSpec) => fetchAuthSession(contextSpec),
+    });
+
+    if (!session?.tokens?.accessToken) {
+      throw new Error('No valid session found');
+    }
+
+    return session.tokens.accessToken.toString();
+  } catch (error) {
+    console.error("Error fetching session:", error);
+    throw new Error('Failed to authenticate session');
+  }
+}
 
 export default async function TodoList() {
-  const userInfo = await getUserInfo(); // [!code highlight]
-  if (!userInfo) {
-    throw new Error('No user info available');
-  }
-
   const sql = neon(process.env.DATABASE_AUTHENTICATED_URL!, {
     authToken: async () => {
-      const jwt = userInfo.token; // [!code highlight]
-      if (!jwt) {
-        throw new Error('No JWT token available');
+      const sessionToken = await getCognitoSession(); // [!code highlight]
+      if (!sessionToken) {
+        throw new Error('No session token available');
       }
-      return jwt;
+      return sessionToken;
     },
   });
 
   // WHERE filter is optional because of RLS.
   // But we send it anyway for performance reasons.
-  const todos = await
-    sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
+  const todos = await sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
 
   return (
     <ul>
@@ -288,12 +288,12 @@ export default async function TodoList() {
 
 <TabItem>
 
-```typescript
+```typescript shouldWrap
 'use client';
 
 import type { Todo } from '@/app/schema';
 import { neon } from '@neondatabase/serverless';
-import { getAuth } from 'firebase/auth';
+import { getCurrentUser, fetchAuthSession } from 'aws-amplify/auth';
 import { useEffect, useState } from 'react';
 
 const getDb = (token: string) =>
@@ -301,32 +301,38 @@ const getDb = (token: string) =>
     authToken: token, // [!code highlight]
   });
 
-export function TodoList() {
-  const auth = getAuth();
+export default function TodoList() {
   const [todos, setTodos] = useState<Array<Todo>>();
 
   useEffect(() => {
-    async function loadTodos() {
-      const user = auth.currentUser;
-      if (!user) {
+    async function fetchTodos() {
+      const session = await fetchAuthSession(); // [!code highlight]
+      const user = await getCurrentUser();
+
+      if (!session?.tokens?.accessToken || !user) {
         return;
       }
 
-      const idToken = await user.getIdToken(); // [!code highlight]
-      const sql = getDb(idToken);
+      const authToken = session.tokens.accessToken.toString();
+      const sql = getDb(authToken);
 
+      // WHERE filter is optional because of RLS.
+      // But we send it anyway for performance reasons.
       const todosResponse = await
         sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
+
       setTodos(todosResponse as Array<Todo>);
     }
 
-    loadTodos();
-  }, [auth.currentUser]);
+    fetchTodos();
+  }, []);
 
   return (
     <ul>
       {todos?.map((todo) => (
-        <li key={todo.id}>{todo.task}</li>
+        <li key={todo.id}>
+          {todo.task}
+        </li>
       ))}
     </ul>
   );
@@ -349,5 +355,4 @@ NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL='<AUTHENTICATED_CONNECTION_STRING>'
 ```
 
 </TabItem>
-
 </Tabs>

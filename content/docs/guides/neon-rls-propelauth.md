@@ -1,65 +1,74 @@
 ---
-title: Secure your data with Keycloak and Neon RLS Authorize
-subtitle: Implement Row-level Security policies in Postgres using Keycloak and Neon RLS Authorize
+title: Secure your data with PropelAuth and Neon RLS
+subtitle: Implement Row-level Security policies in Postgres using PropelAuth and Neon RLS
 enableTableOfContents: true
 updatedOn: '2025-02-03T20:41:57.328Z'
 redirectFrom:
-  - /docs/guides/neon-authorize-keycloak
+  - /docs/guides/neon-rls-authorize-propelauth
+  - /docs/guides/neon-authorize-propelauth
 ---
 
 <InfoBlock>
+<DocsList title="Sample project" theme="repo">
+  <a href="https://github.com/neondatabase-labs/propelauth-nextjs-neon-rls">PropelAuth + Neon RLS</a>
+</DocsList>
+
 <DocsList title="Related docs" theme="docs">
-  <a href="/docs/guides/neon-rls-authorize-tutorial">Neon RLS Authorize Tutorial</a>
-  <a href="/docs/guides/neon-rls-authorize-drizzle">Simplify RLS with Drizzle</a>
+  <a href="/docs/guides/neon-rls-tutorial">Neon RLS Tutorial</a>
+  <a href="/docs/guides/neon-rls-drizzle">Simplify RLS with Drizzle</a>
 </DocsList>
 </InfoBlock>
 
-Use Keycloak with Neon RLS Authorize to add secure, database-level authorization to your application. This guide assumes you already have an application using Keycloak for user authentication. It shows you how to integrate Keycloak with Neon RLS Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
+Use PropelAuth with Neon RLS to add secure, database-level authorization to your application. This guide assumes you already have an application using PropelAuth for user authentication. It shows you how to integrate PropelAuth with Neon RLS, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 
 ## How it works
 
-Keycloak handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon RLS Authorize. Neon RLS Authorize validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
+PropelAuth handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon RLS. Neon RLS validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
 
 ## Prerequisites
 
 To follow along with this guide, you will need:
 
 - A Neon account. Sign up at [Neon](https://neon.tech) if you don't have one.
-- A [Keycloak](https://www.keycloak.org/) instance with an existing application (e.g., a todos app) that uses Keycloak for user authentication.
+- A [PropelAuth](https://www.propelauth.com/) project with an existing application (e.g., a **todos** app) that uses PropelAuth for user authentication. If you don't have an app, check our [demo](https://github.com/neondatabase-labs/propelauth-nextjs-neon-rls) for similar schema and policies in action.
 
-## Integrate Keycloak with Neon RLS Authorize
+## Integrate PropelAuth with Neon RLS
 
-In this first set of steps, we'll integrate Keycloak as an authorization provider in Neon. When these steps are complete, Keycloak will start passing JWTs to your Neon database, which you can then use to create policies.
+In this first set of steps, we'll integrate PropelAuth as an authorization provider in Neon. When these steps are complete, PropelAuth will start passing JWTs to your Neon database, which you can then use to create policies.
 
-### 1. Get your Keycloak JWKS
+### 1. Get your PropelAuth JWKS URL
 
-<Admonition type="note">
-  To ensure compatibility with Neon RLS Authorize, configure Keycloak to use only one signing algorithm (RS256 or ES256). You can verify this by opening the JWKS URL and checking the keys manually.
-</Admonition>
+When integrating PropelAuth with Neon, you'll need to provide the JWKS (JSON Web Key Set) URL. This allows your database to validate the JWT tokens and extract the user_id for use in RLS policies.
 
-When integrating Keycloak with Neon, you'll need to provide the JWKS (JSON Web Key Set) URL. This allows your database to validate the JWT tokens and extract the user_id for use in RLS policies.
-
-The Keycloak JWKS URL follows this format:
+The PropelAuth JWKS URL follows this format:
 
 ```
-https://{YOUR_KEYCLOAK_DOMAIN}/auth/realms/{YOUR_REALM}/protocol/openid-connect/certs
+https://{YOUR_PROPEL_AUTH_URL}/.well-known/jwks.json
 ```
 
-Replace `{YOUR_KEYCLOAK_DOMAIN}` with your Keycloak domain and `{YOUR_REALM}` with your Keycloak realm.
+You can locate your PropelAuth Auth URL by navigating to the **Backend Integration** section in your PropelAuth project settings
 
-### 2. Add Keycloak as an authorization provider in the Neon Console
+![PropelAuth Auth URL](/docs/guides/propelauth_backend_integration_page.png)
 
-Once you have the JWKS URL, go to the **Neon Console**, navigate to **Settings** > **RLS Authorize**, and add Keycloak as an authentication provider. Paste your copied URL and Keycloak will be automatically recognized and selected.
+Replace `{YOUR_PROPEL_AUTH_URL}` with your PropelAuth URL. For example, if your PropelAuth URL is `https://3211758.propelauthtest.com`, your JWKS URL would be:
+
+```
+https://3211758.propelauthtest.com/.well-known/jwks.json
+```
+
+### 2. Add PropelAuth as an authorization provider in the Neon Console
+
+Once you have the JWKS URL, go to the **Neon Console**, navigate to **Settings** > **RLS Authorize**, and add PropelAuth as an authentication provider. Paste your copied URL and PropelAuth will be automatically recognized and selected.
 
 <div style={{ display: 'flex', justifyContent: 'center'}}>
-  <img src="/docs/guides/keycloak_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
+  <img src="/docs/guides/propelauth_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
 </div>
 
 At this point, you can use the **Get Started** setup steps from RLS Authorize in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
 
 ### 3. Install the pg_session_jwt extension in your database
 
-Neon RLS Authorize uses the [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt) extension to handle authenticated sessions through JSON Web Tokens (JWTs). This extension allows secure transmission of authentication data from your application to Postgres, where you can enforce Row-Level Security (RLS) policies based on the user's identity.
+Neon RLS uses the [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt) extension to handle authenticated sessions through JSON Web Tokens (JWTs). This extension allows secure transmission of authentication data from your application to Postgres, where you can enforce Row-Level Security (RLS) policies based on the user's identity.
 
 To install the extension in the `neondb` database, run:
 
@@ -102,7 +111,7 @@ GRANT USAGE ON SCHEMA public TO anonymous;
 
 ### 5. Install the Neon Serverless Driver
 
-Neon's Serverless Driver manages the connection between your application and the Neon Postgres database. For Neon RLS Authorize, you must use HTTP. While it is technically possible to access the HTTP API without using our driver, we recommend using the driver for best performance. The driver also supports WebSockets and TCP connections, so make sure you use the HTTP method when working with Neon RLS Authorize.
+Neon's Serverless Driver manages the connection between your application and the Neon Postgres database. For Neon RLS, you must use HTTP. While it is technically possible to access the HTTP API without using our driver, we recommend using the driver for best performance. The driver also supports WebSockets and TCP connections, so make sure you use the HTTP method when working with Neon RLS.
 
 Install it using the following command:
 
@@ -135,7 +144,7 @@ The `DATABASE_URL` is intended for admin tasks and can run any query while the `
 
 ## Add RLS policies
 
-Now that you've integrated Keycloak with Neon RLS Authorize, you can securely pass JWTs to your Neon database. Let's start looking at how to add RLS policies to your schema and how you can execute authenticated queries from your application.
+Now that you've integrated PropelAuth with Neon RLS, you can securely pass JWTs to your Neon database. Let's start looking at how to add RLS policies to your schema and how you can execute authenticated queries from your application.
 
 ### 1. Add Row-Level Security policies
 
@@ -218,7 +227,7 @@ The `crudPolicy` function simplifies policy creation by generating all necessary
 
 ### 2. Run your first authorized query
 
-With RLS policies in place, you can now query the database using JWTs from Keycloak, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from both the backend and the frontend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
+With RLS policies in place, you can now query the database using JWTs from PropelAuth, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from both the backend and the frontend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
 
 <Tabs labels={["server-component.tsx","client-component.tsx",".env"]}>
 
@@ -228,36 +237,37 @@ With RLS policies in place, you can now query the database using JWTs from Keycl
 'use server';
 
 import { neon } from '@neondatabase/serverless';
-import { getUserInfo } from '@/lib/auth'
+import { getUser, getAccessTokenAsync } from "@propelauth/nextjs/server/app-router";
 
 export default async function TodoList() {
-  const userInfo = await getUserInfo() // [!code highlight]
-  if (!userInfo) {
-    throw new Error('No user info available');
-  }
+    const user = await getUser();
+    if (!user) {
+        throw new Error('No user');
+    }
 
-  const sql = neon(process.env.DATABASE_AUTHENTICATED_URL!, {
-    authToken: async () => {
-      const jwt = userInfo.token; // [!code highlight]
-      if (!jwt) {
-        throw new Error('No JWT token available');
-      }
-      return jwt;
-    },
-  });
+    const jwt = await getAccessTokenAsync(); // [!code highlight]
 
-  // WHERE filter is optional because of RLS.
-  // But we send it anyway for performance reasons.
-  const todos = await
-    sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
+    const sql = neon(process.env.DATABASE_AUTHENTICATED_URL!, {
+        authToken: async () => {
+            if (!jwt) {
+                throw new Error('No JWT token available');
+            }
+            return jwt; // [!code highlight]
+        },
+    });
 
-  return (
-    <ul>
-      {todos.map((todo) => (
-        <li key={todo.id}>{todo.task}</li>
-      ))}
-    </ul>
-  );
+    // WHERE filter is optional because of RLS.
+    // But we send it anyway for performance reasons.
+    const todos = await
+        sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
+
+    return (
+        <ul>
+            {todos.map((todo) => (
+                <li key={todo.id}>{todo.task}</li>
+            ))}
+        </ul>
+    );
 }
 ```
 
@@ -270,46 +280,46 @@ export default async function TodoList() {
 
 import type { Todo } from '@/app/schema';
 import { neon } from '@neondatabase/serverless';
-import { useKeycloak } from '@react-keycloak/web';
+import { useUser } from "@propelauth/nextjs/client";
 import { useEffect, useState } from 'react';
 
 const getDb = (token: string) =>
-  neon(process.env.NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL!, {
-    authToken: token, // [!code highlight]
-  });
+    neon(process.env.NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL!, {
+        authToken: token, // [!code highlight]
+    });
 
 export default function TodoList() {
-  const { keycloak, initialized } = useKeycloak();
-  const [todos, setTodos] = useState<Array<Todo>>();
+    const { accessToken } = useUser();  // [!code highlight]
+    const [todos, setTodos] = useState<Array<Todo>>();
 
-  useEffect(() => {
-    async function loadTodos() {
-      const sessionToken = keycloak.token; // [!code highlight]
-      if (!sessionToken) {
-        return;
-      }
-      const sql = getDb(sessionToken);
+    useEffect(() => {
+        async function loadTodos() {
+            if (!accessToken) {
+                return;
+            }
 
-      // WHERE filter is optional because of RLS.
-      // But we send it anyway for performance reasons.
-      const todosResponse = await
-        sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
+            const sql = getDb(accessToken);
 
-      setTodos(todosResponse as Array<Todo>);
-    }
+            // WHERE filter is optional because of RLS.
+            // But we send it anyway for performance reasons.
+            const todosResponse = await
+                sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
 
-    loadTodos();
-  }, [initialized, keycloak.authenticated]);
+            setTodos(todosResponse as Array<Todo>);
+        }
 
-  return (
-    <ul>
-      {todos?.map((todo) => (
-        <li key={todo.id}>
-          {todo.task}
-        </li>
-      ))}
-    </ul>
-  );
+        loadTodos();
+    }, [accessToken]);
+
+    return (
+        <ul>
+            {todos?.map((todo) => (
+                <li key={todo.id}>
+                    {todo.task}
+                </li>
+            ))}
+        </ul>
+    );
 }
 ```
 

@@ -1,30 +1,31 @@
 ---
-title: Using Custom JWTs with Neon RLS Authorize
-subtitle: A step-by-step guide for using custom JWTs with Neon RLS Authorize
+title: Using Custom JWTs with Neon RLS
+subtitle: A step-by-step guide for using custom JWTs with Neon RLS
 enableTableOfContents: true
 updatedOn: '2025-01-27T19:31:29.572Z'
 redirectFrom:
+  - /docs/guides/neon-rls-authorize-custom-jwt
   - /docs/guides/neon-authorize-custom-jwt
 ---
 
 <InfoBlock>
 <DocsList title="Demo project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/rls-authorize-demo-custom-jwt">Neon RLS Authorize with custom generated JWTs</a>
+  <a href="https://github.com/neondatabase-labs/rls-authorize-demo-custom-jwt">Neon RLS with custom generated JWTs</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
-  <a href="/docs/guides/neon-rls-authorize-tutorial">Neon RLS Authorize Tutorial</a>
-  <a href="/docs/guides/neon-rls-authorize-drizzle">Simplify RLS with Drizzle</a>
+  <a href="/docs/guides/neon-rls-tutorial">Neon RLS Tutorial</a>
+  <a href="/docs/guides/neon-rls-drizzle">Simplify RLS with Drizzle</a>
 </DocsList>
 </InfoBlock>
 
-[Neon RLS Authorize](/docs/guides/neon-rls-authorize) lets you implement authorization directly within your Postgres database using Row-Level Security (RLS). While it works well with authentication providers like [Auth0](https://auth0.com) and [Clerk](https://clerk.com), you can also use your own custom-generated JSON Web Tokens (JWTs). This gives you fine-grained control over how tokens are created and validated, ideal for specific application needs or when you prefer to manage authentication independently.
+[Neon RLS](/docs/guides/neon-rls) lets you implement authorization directly within your Postgres database using Row-Level Security (RLS). While it works well with authentication providers like [Auth0](https://auth0.com) and [Clerk](https://clerk.com), you can also use your own custom-generated JSON Web Tokens (JWTs). This gives you fine-grained control over how tokens are created and validated, ideal for specific application needs or when you prefer to manage authentication independently.
 
-This guide walks you through using custom JWTs with Neon RLS Authorize, covering:
+This guide walks you through using custom JWTs with Neon RLS, covering:
 
 - Generating keys for JWT signing
 - Creating custom JWTs with specific claims
-- Configuring Neon RLS Authorize to validate your JWTs
+- Configuring Neon RLS to validate your JWTs
 - Authenticating requests and enforcing RLS policies based on JWT claims
 
 ## When to use custom JWTs
@@ -46,7 +47,7 @@ Before starting, make sure you have:
 JWTs are digitally signed to ensure they're authentic and haven't been tampered with. You'll need a public/private key pair for this:
 
 - **Private key:** Used to sign your JWTs. Keep this secret!
-- **Public key:** Used by Neon RLS Authorize to verify the signatures.
+- **Public key:** Used by Neon RLS to verify the signatures.
 
 We'll use the `jose` library in TypeScript to generate an RSA key pair. Here's a simple way to do it:
 
@@ -67,7 +68,7 @@ async function generateAndExportKeys() {
   // Add metadata to the private key JWK.
   // 'use': Indicates the key's intended use (e.g., 'sig' for signing).
   // 'kid': A unique identifier for the key, useful for key management and rotation.
-  // 'alg': Specifies the algorithm to be used with the key (Neon RLS Authorize supports only RS256 and ES256 currently).
+  // 'alg': Specifies the algorithm to be used with the key (Neon RLS supports only RS256 and ES256 currently).
   privateJwk.use = 'sig';
   privateJwk.kid = 'my-key-id';
   privateJwk.alg = 'RS256';
@@ -103,7 +104,7 @@ generateAndExportKeys();
 
 ## Create your custom JWTs
 
-Now, let's create JWTs in your application. These JWTs will contain "claims" – pieces of information that Neon RLS Authorize will use to enforce your security rules.
+Now, let's create JWTs in your application. These JWTs will contain "claims" – pieces of information that Neon RLS will use to enforce your security rules.
 
 Here's an example using `jose`, adapted from the demo app:
 
@@ -145,13 +146,13 @@ console.log('JWT:', token);
 - `role`: User's role (e.g., "admin", "viewer").
 - `permissions`: Specific actions the user can perform.
 
-## Set up Neon RLS Authorize
+## Set up Neon RLS
 
-Now, let's configure Neon RLS Authorize to trust your custom JWTs:
+Now, let's configure Neon RLS to trust your custom JWTs:
 
 ### Expose Your Public Key
 
-Neon RLS Authorize needs your public key to verify JWT signatures. You'll usually expose it via a JWKS (JSON Web Key Set) endpoint. A JWKS endpoint is a standard way to publish your public keys so that services like Neon RLS Authorize can retrieve them. The demo app uses a [Cloudflare Worker](https://workers.cloudflare.com/) for this, serving the key at `/.well-known/jwks.json`.
+Neon RLS needs your public key to verify JWT signatures. You'll usually expose it via a JWKS (JSON Web Key Set) endpoint. A JWKS endpoint is a standard way to publish your public keys so that services like Neon RLS can retrieve them. The demo app uses a [Cloudflare Worker](https://workers.cloudflare.com/) for this, serving the key at `/.well-known/jwks.json`.
 
 ```typescript
 // Example from the demo app (src/index.ts)
@@ -164,14 +165,14 @@ app.get('/.well-known/jwks.json', async (c) => {
 
 This makes the public key available at `https://your-app.com/.well-known/jwks.json`.
 
-### Add JWKS url to Neon RLS Authorize
+### Add JWKS url to Neon RLS
 
 1. Go to the **Neon Console**, navigate to **Settings** > **RLS Authorize**.
 2. Click **Add Provider**.
 3. Set the **JWKS URL** to your endpoint (e.g., `https://your-app.com/.well-known/jwks.json`).
    ![Custom JWT JWKS url in Neon](/docs/guides/custom_jwt_jwks_url_in_neon.png)
 4. Click **Set Up**
-5. Follow the steps in the UI to set up roles for Neon RLS Authorize. You can ignore the schema-related steps for this guide.
+5. Follow the steps in the UI to set up roles for Neon RLS. You can ignore the schema-related steps for this guide.
 6. Note down the connection strings for the `neondb_owner` and `authenticated, passwordless` roles. You'll need both:
    - **`neondb_owner`:** Full privileges, used for migrations.
    - **`authenticated`:** Used by your application, access restricted by RLS.
@@ -253,7 +254,7 @@ const users = await db.select().from(usersTable);
 
 **How it works:**
 
-1. When you send a request with a JWT, Neon RLS Authorize verifies the signature using the public key.
+1. When you send a request with a JWT, Neon RLS verifies the signature using the public key.
 2. If the signature is valid and the JWT hasn't expired, the claims are extracted.
 3. The `pg_session_jwt` extension makes the claims available to RLS policies via `auth.session()` and `auth.user_id()`.
 4. RLS policies evaluate the claims to allow or deny access.
@@ -303,13 +304,13 @@ export default app;
 
 ## Conclusion
 
-Using custom JWTs with Neon RLS Authorize offers a powerful way to implement fine-grained authorization in Postgres. By controlling JWT generation and combining it with the security of RLS, you can build robust applications that enforce data access rules at the database level. Remember to secure your private key, design your JWT claims thoughtfully, and test your RLS policies thoroughly.
+Using custom JWTs with Neon RLS offers a powerful way to implement fine-grained authorization in Postgres. By controlling JWT generation and combining it with the security of RLS, you can build robust applications that enforce data access rules at the database level. Remember to secure your private key, design your JWT claims thoughtfully, and test your RLS policies thoroughly.
 
-We hope this guide has helped you understand how to use custom JWTs with Neon RLS Authorize.
+We hope this guide has helped you understand how to use custom JWTs with Neon RLS.
 
 ## Additional Resources
 
-- [Neon RLS Authorize Tutorial](/docs/guides/neon-rls-authorize-tutorial)
+- [Neon RLS Tutorial](/docs/guides/neon-rls-tutorial)
 - [WTF are JWTs?](/blog/wtf-are-jwts)
 - [jose library](https://github.com/panva/jose)
 
