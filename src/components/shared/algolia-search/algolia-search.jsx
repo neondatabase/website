@@ -34,7 +34,13 @@ const AlgoliaSearch = ({ indexName, children, posts, searchInputClassName }) => 
     debouncedSetUiState(uiState, setUiState);
   };
 
-  if (!mounted) return children;
+  if (!mounted)
+    return (
+      <>
+        <SearchInput className={searchInputClassName} isPlaceholder />
+        {children}
+      </>
+    );
 
   return (
     <InstantSearchNext
