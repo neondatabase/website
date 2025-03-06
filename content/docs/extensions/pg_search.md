@@ -16,7 +16,7 @@ In this guide, you'll learn how to enable `pg_search` on Neon, understand the fu
 
 <Admonition type="note" title="pg_search on Neon">
 
-`pg_search` is currently only available on Neon projects using Postgres 17.
+`pg_search` is currently only available on Neon projects created in an [AWS region](/docs/introduction/regions#aws-regions) and using Postgres 17.
 
 </Admonition>
 
