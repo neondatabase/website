@@ -17,23 +17,22 @@ const searchClient = algoliasearch(
 
 const debouncedSetUiState = debounce((uiState, setUiState) => setUiState(uiState), 100);
 
-const onStateChange = ({ uiState, setUiState, indexName }) => {
-  const { [indexName]: { query } = {} } = uiState;
-
-  // debounce only non-empty query
-  if (!query) {
-    debouncedSetUiState.cancel();
-    setUiState({});
-    return;
-  }
-
-  debouncedSetUiState(uiState, setUiState);
-};
-
-const AlgoliaSearch = ({ indexName, children, posts }) => {
+const AlgoliaSearch = ({ indexName, children, posts, searchInputClassName }) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => setMounted(true), []);
+
+  const onStateChange = ({ uiState, setUiState }) => {
+    const { [indexName]: { query } = {} } = uiState;
+
+    if (!query) {
+      debouncedSetUiState.cancel();
+      setUiState({});
+      return;
+    }
+
+    debouncedSetUiState(uiState, setUiState);
+  };
 
   if (!mounted) return children;
 
@@ -76,9 +75,9 @@ const AlgoliaSearch = ({ indexName, children, posts }) => {
           },
         },
       }}
-      onStateChange={({ uiState, setUiState }) => onStateChange({ uiState, setUiState, indexName })}
+      onStateChange={onStateChange}
     >
-      <SearchInput />
+      <SearchInput className={searchInputClassName} />
       <SearchResults posts={posts} indexName={indexName}>
         {children}
       </SearchResults>
@@ -90,6 +89,7 @@ AlgoliaSearch.propTypes = {
   indexName: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
   posts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  searchInputClassName: PropTypes.string,
 };
 
 export default AlgoliaSearch;

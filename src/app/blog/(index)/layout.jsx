@@ -11,7 +11,7 @@ const BlogPageLayout = async ({ children }) => {
       <Container className="flex flex-col" size="1344">
         <div className="flex gap-[18px] pl-16 xl:gap-3.5 xl:pl-0 lg:flex-col lg:gap-0">
           <Sidebar categories={categories} />
-          <div className="w-full max-w-3xl lg:max-w-full">{children}</div>
+          <div className="relative w-full max-w-3xl lg:max-w-full">{children}</div>
         </div>
       </Container>
     </div>

@@ -29,7 +29,7 @@ const SearchInput = ({ className }) => {
   }, []);
 
   return (
-    <div className={clsx('relative', className)}>
+    <div className={clsx('absolute right-0 top-0 md:w-full', className)}>
       <SearchBox placeholder="Search..." />
       <span
         className={clsx(

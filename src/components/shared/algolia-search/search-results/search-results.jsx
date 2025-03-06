@@ -28,7 +28,8 @@ const SearchResults = ({ posts, indexName, className, children }) => {
 
         if (!post) return null;
 
-        if (indexName === 'guides') return <GuideCard key={post.slug} {...post} />;
+        if (indexName === process.env.NEXT_PUBLIC_ALGOLIA_GUIDES_INDEX_NAME)
+          return <GuideCard key={post.slug} {...post} />;
 
         return <BlogGridItem key={post.slug} post={post} isPriority={index < 5} />;
       })}

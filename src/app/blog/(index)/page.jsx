@@ -17,30 +17,36 @@ const BlogPage = async () => {
   if (!posts) return notFound();
 
   return (
-    <AlgoliaSearch indexName={process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME} posts={posts}>
+    <>
       <BlogHeader
-        className="lg:-top-[68px] md:-top-[62px]"
+        className="lg:-top-[68px] md:-top-[62px] md:pb-16"
         title="Blog"
         basePath={BLOG_BASE_PATH}
       />
-      <div className="blog-posts grid grid-cols-2 gap-x-6 xl:gap-x-5 md:grid-cols-1">
-        {posts.slice(0, 10).map((post, index) => (
-          <BlogGridItem
-            key={post.slug}
-            post={post}
-            isFeatured={post.isFeatured}
-            isPriority={index < 5}
-          />
-        ))}
-        {posts.length > 10 && (
-          <ScrollLoader itemsCount={10}>
-            {posts.slice(10).map((post) => (
-              <BlogGridItem key={post.slug} post={post} />
-            ))}
-          </ScrollLoader>
-        )}
-      </div>
-    </AlgoliaSearch>
+      <AlgoliaSearch
+        indexName={process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME}
+        posts={posts}
+        searchInputClassName="lg:-top-[68px] md:top-0"
+      >
+        <div className="blog-posts grid grid-cols-2 gap-x-6 xl:gap-x-5 md:grid-cols-1">
+          {posts.slice(0, 10).map((post, index) => (
+            <BlogGridItem
+              key={post.slug}
+              post={post}
+              isFeatured={post.isFeatured}
+              isPriority={index < 5}
+            />
+          ))}
+          {posts.length > 10 && (
+            <ScrollLoader itemsCount={10}>
+              {posts.slice(10).map((post) => (
+                <BlogGridItem key={post.slug} post={post} />
+              ))}
+            </ScrollLoader>
+          )}
+        </div>
+      </AlgoliaSearch>
+    </>
   );
 };
 
