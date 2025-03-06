@@ -51,16 +51,10 @@ To install the extension on a database:
 CREATE EXTENSION neon;
 ```
 
-To connect to your database. You can find a connection string for yoru database on the Neon Dashboard.
+To connect to your database. You can find a connection string for your database on the Neon Dashboard.
 
 ```bash shouldWrap
 psql postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
-```
-
-If you are already connected via `psql`, you can simply switch to the `postgres` database using the `\c` command:
-
-```shell
-\c dbname
 ```
 
 Issue the following query to view LFC usage data for your compute:
