@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
-import SearchInput from 'components/shared/algolia-search/search-input';
 import RssButton from 'components/shared/rss-button';
 
 const BlogHeader = ({ className, title, category, basePath }) => (
@@ -18,7 +17,6 @@ const BlogHeader = ({ className, title, category, basePath }) => (
       </h1>
       <RssButton className="mb-1 lg:mb-0.5" basePath={basePath} title={title} />
     </div>
-    <SearchInput className="dark w-[232px] md:w-full" />
   </div>
 );
 
