@@ -46,7 +46,7 @@ Onboard faster and keep in sync
 Accelerate feature development and code reviews
 : Automate branch creation for each Git branch or pull request. Use tools like GitHub Actions or Neon's integrations:
 : - [Neon GitHub Integration](/docs/guides/neon-github-integration): Easily create a branch for every PR.
-: - [Neon Vercel Integration](/docs/guides/vercel): Create and integrate a branch into every Vercel preview deployment.
+: - [Neon Vercel Integration](/docs/guides/vercel-native-integration-previews): Create and integrate a branch into every Vercel preview deployment.
 
 Enhance testing and CI/CD
 : Run test suites on exact copies of your production database using branches. Save time with instant branch creation, shaving minutes off every test run.

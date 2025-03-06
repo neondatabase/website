@@ -40,7 +40,7 @@ Neon’s database branching feature addresses these challenges. A branch is an i
 When you push changes to your application repository, triggering a preview deployment in Vercel, the integration automatically creates a database branch in Neon and connects it to your preview deployment by setting Vercel preview environment variables.
 
 <Admonition type="tip" title="Postgres Previews video introduction">
-For a video introduction to the integration, see [Video: A Postgres database for Every Preview Deployment](/docs/guides/vercel#video-a-postgres-database-for-every-preview-deployment).
+For a video introduction to the integration, see [Video: A Postgres database for Every Preview Deployment](/docs/guides/vercel-native-integration-previews).
 </Admonition>
 
 ## Prerequisites
@@ -84,7 +84,7 @@ To add the integration:
     1.  Select the Neon project that you want to connect to your Vercel project by selecting the Neon project, database, and role that Vercel will use to connect.
 
       <Admonition type="note">
-      The integration is dependent on the selected Postgres role. Removing it would cause the integration to stop functioning. If you need to change the role used by the integration in the future, see [Change the database and role for preview branches](/docs/guides/vercel#change-the-database-and-role-for-preview-branches).
+      The integration is dependent on the selected Postgres role. Removing it would cause the integration to stop functioning. If you need to change the role used by the integration in the future, see [Change the database and role for preview branches](/docs/guides/vercel-native-integration-previews).
       </Admonition>
         ![Connect to Neon](/docs/guides/vercel_connect_neon.png)
 
@@ -353,7 +353,7 @@ Neon projects created after March, 2023 store role passwords in a secure storage
 
 ### The integration stops working after removing Postgres roles in Neon
 
-The integration is dependent on the Postgres role you specify when installing the integration. Removing this role will cause the integration to stop creating preview deployment branches. If you need to change the role used by the integration, see [Change the database and role for preview branches](/docs/guides/vercel#change-the-database-and-role-for-preview-branches).
+The integration is dependent on the Postgres role you specify when installing the integration. Removing this role will cause the integration to stop creating preview deployment branches. If you need to change the role used by the integration, see [Change the database and role for preview branches](/docs/guides/vercel-native-integration-previews).
 
 ## Video: A Postgres database for Every Preview Deployment
 
