@@ -6,13 +6,19 @@ import AlgoliaSearch from 'components/shared/algolia-search';
 import ScrollLoader from 'components/shared/scroll-loader';
 import { BLOG_BASE_PATH, BLOG_CATEGORY_BASE_PATH } from 'constants/blog';
 import { getBlogCategoryDescription } from 'constants/seo-data';
-import { getAllCategories, getCategoryBySlug, getPostsByCategorySlug } from 'utils/api-wp';
+import {
+  getAllCategories,
+  getAllPosts,
+  getCategoryBySlug,
+  getPostsByCategorySlug,
+} from 'utils/api-wp';
 import getMetadata from 'utils/get-metadata';
 
 // eslint-disable-next-line react/prop-types
 const BlogCategoryPage = async ({ params: { slug } }) => {
   const category = await getCategoryBySlug(slug);
   const posts = await getPostsByCategorySlug(slug);
+  const allPosts = await getAllPosts();
 
   if (!posts || !category) return notFound();
 
@@ -26,7 +32,7 @@ const BlogCategoryPage = async ({ params: { slug } }) => {
       />
       <AlgoliaSearch
         indexName={process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME}
-        posts={posts}
+        posts={allPosts}
         searchInputClassName="lg:-top-[68px] md:top-0"
       >
         <div className="blog-posts grid grid-cols-2 gap-x-6 xl:gap-x-5 md:grid-cols-1">
