@@ -10,7 +10,7 @@ redirectFrom:
 
 <InfoBlock>
 <DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/auth0-nextjs-neon-rls">Auth0 + Neon RLS</a>
+  <a href="https://github.com/neondatabase-labs/auth0-nextjs-neon-rls-authorize">Auth0 + Neon RLS</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
