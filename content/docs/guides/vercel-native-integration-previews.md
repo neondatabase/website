@@ -142,7 +142,7 @@ To disconnect a Neon database from a Vercel project:
 3. In the left-hand navigation on your database page, select **Projects**.
 4. Under **Projects**, select your project, and select **Remove Project Connection** from the menu.
 
-This will disconnect the database from your Vercel project by removing all of the Neon database environment variables from your Vercel project. After disconnecting a database, branches will no longer be created with each preview deployment. However, any previously created database branches will not not deleted. You have to remove those branches manually if you no longer want them.
+This will disconnect the database from your Vercel project by removing all of the Neon database environment variables from your Vercel project. After disconnecting a database, branches will no longer be created with each preview deployment. However, any previously created database branches will not be deleted. You have to remove those branches manually if you no longer want them.
 
 ## Manage branches created by the integration
 
