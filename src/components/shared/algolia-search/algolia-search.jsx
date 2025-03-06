@@ -37,7 +37,7 @@ const AlgoliaSearch = ({ indexName, children, posts, searchInputClassName }) => 
   if (!mounted)
     return (
       <>
-        <SearchInput className={searchInputClassName} isPlaceholder />
+        <SearchInput className={searchInputClassName} asPlaceholder />
         {children}
       </>
     );
