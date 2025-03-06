@@ -10,7 +10,7 @@ const sharedMdxComponents = {
   LRBeta: 'shared-content/lr-inbound-beta',
   FeatureBeta: 'shared-content/feature-beta',
   FeatureBetaProps: 'shared-content/feature-beta-props',
-  MigrationAssistant: 'shared-content/migration-assistant',
+  ImportDataAssistant: 'shared-content/import-data-assistant',
   LinkAPIKey: 'shared-content/manage-api-keys',
 };
 

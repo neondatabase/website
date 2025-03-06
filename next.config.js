@@ -202,6 +202,11 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/docs/import/migration-assistant',
+        destination: '/docs/import/import-data-assistant',
+        permanent: true,
+      },
+      {
         source: '/driver',
         destination: '/docs/serverless/serverless-driver',
         permanent: false,
