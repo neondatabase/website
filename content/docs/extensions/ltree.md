@@ -232,7 +232,7 @@ You can calculate the "distance" between two nodes in the tree:
 
 ```sql
 -- Calculate the distance between two categories
-SELECT 
+SELECT
     nlevel('electronics.computers.laptops.gaming'::ltree) +
     nlevel('electronics.smartphones.android'::ltree) -
     2 * nlevel(lca(
