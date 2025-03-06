@@ -21,7 +21,7 @@ const GuidesPage = async () => {
     <AlgoliaSearch
       indexName={process.env.NEXT_PUBLIC_ALGOLIA_GUIDES_INDEX_NAME}
       posts={posts}
-      searchInputClassName="md:relative md:mb-8"
+      searchInputClassName="lg:top-0 md:relative md:mb-8"
     >
       <div className="guides">
         {posts.map((post) => (
