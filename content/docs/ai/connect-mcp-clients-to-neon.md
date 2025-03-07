@@ -65,6 +65,7 @@ Here's an example of using Neon MCP Server with Claude Desktop:
 
 Here's an example of using Neon MCP Server with Cursor:
 <video autoPlay playsInline muted loop width="800" height="600" controls>
+
 <source type="video/mp4" src="/videos/pages/doc/cursor-neon-mcp.mp4"/>
 </video>
 
@@ -94,6 +95,7 @@ Here's an example of using Neon MCP Server with Cursor:
 
 Here's an example of using Neon MCP Server with Windsurf:
 <video autoPlay playsInline muted loop width="800" height="600" controls>
+
 <source type="video/mp4" src="/videos/pages/doc/windsurf-neon-mcp.mp4"/>
 </video>
 
@@ -114,6 +116,7 @@ Here's an example of using Neon MCP Server with Windsurf:
 
 Here's an example of using Neon MCP Server with Cline:
 <video autoPlay playsInline muted loop width="800" height="600" controls>
+
 <source type="video/mp4" src="/videos/pages/doc/cline-neon-mcp.mp4"/>
 </video>
 
