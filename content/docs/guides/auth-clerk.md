@@ -271,7 +271,7 @@ export async function deleteUserMessage() {
 }
 ```
 
-The `addUserMessage` function inserts a new message into the `user_messages` table, while `deleteUserMessage` removes the message associated with the current user.
+The `createUserMessage` function inserts a new message into the `user_messages` table, while `deleteUserMessage` removes the message associated with the current user.
 
 Next, we implement a minimal UI to interact with these functions. Replace the contents of the `app/page.tsx` file with the following:
 
