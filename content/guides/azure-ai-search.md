@@ -1,7 +1,7 @@
 ---
 title: Full-Text Search with Neon and Azure AI Search
 subtitle: Build a powerful hybrid search system for developer resources with Neon and Azure AI Search
-author: Bobby Iliev
+author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-01-05T00:00:00.000Z'
 updatedOn: '2025-01-05T00:00:00.000Z'

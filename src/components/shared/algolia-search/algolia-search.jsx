@@ -51,19 +51,17 @@ const AlgoliaSearch = ({ indexName, children, posts, searchInputClassName }) => 
         router: {
           createURL: ({ qsModule, routeState, location }) => {
             const { pathname } = location;
-            const basePath = pathname.split('/')[1];
-            const queryParameters = {};
-
-            if (routeState.query) {
-              queryParameters.query = encodeURIComponent(routeState.query);
+            if (!routeState.query) {
+              return pathname;
             }
 
+            const queryParameters = { query: encodeURIComponent(routeState.query) };
             const queryString = qsModule.stringify(queryParameters, {
               addQueryPrefix: true,
               arrayFormat: 'repeat',
             });
 
-            return `/${basePath}${queryString}`;
+            return `${pathname}${queryString}`;
           },
           parseURL: ({ qsModule, location }) => {
             const { query = '' } = qsModule.parse(location.search.slice(1));
