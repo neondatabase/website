@@ -32,12 +32,11 @@ import CodeBlock from 'components/shared/code-block';
 import ComputeCalculator from 'components/shared/compute-calculator';
 import CtaBlock from 'components/shared/cta-block';
 import DocCta from 'components/shared/doc-cta';
-import ExtensionRequest from 'components/shared/extension-request';
 import ImageZoom from 'components/shared/image-zoom';
 import InkeepEmbedded from 'components/shared/inkeep-embedded';
 import LatencyCalculator from 'components/shared/latency-calculator';
 import Link from 'components/shared/link';
-import RegionRequest from 'components/shared/region-request';
+import RequestForm from 'components/shared/request-form';
 import getCodeProps from 'lib/rehype-code-props';
 import getGlossaryItem from 'utils/get-glossary-item';
 
@@ -170,8 +169,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   InfoBlock,
   LinkPreview,
   DocsList,
-  RegionRequest,
-  ExtensionRequest,
+  RequestForm,
   LatencyCalculator,
   CTA: isUseCase ? CtaBlock : DocCta,
   Testimonial,
