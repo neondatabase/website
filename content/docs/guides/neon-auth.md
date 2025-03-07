@@ -161,7 +161,7 @@ VALUES ('Buy groceries', 'user-id-123');
 
 ### After Neon Auth
 
-With Neon Auth, Neon automatically creates and manages the `neon_auth.users_sync` table, keeping it synchronized with your connected authentication provider.  You can directly rely on this table for user data, significantly simplifying your database operations.
+With Neon Auth, Neon automatically creates and manages the `neon_auth.users_sync` table, keeping it synchronized with your connected authentication provider. You can directly rely on this table for user data, significantly simplifying your database operations.
 
 Here's how you would structure your `todos` table and perform insert operations _with_ Neon Auth:
 
@@ -179,7 +179,6 @@ created_at TIMESTAMPTZ,
 deleted_at TIMESTAMPTZ,
 updated_at TIMESTAMPTZ
 ```
-
 
 #### 1. Create a `todos` table with a foreign key to the `neon_auth.users_sync` table:
 
