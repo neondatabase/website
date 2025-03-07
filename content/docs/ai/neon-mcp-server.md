@@ -5,23 +5,23 @@ enableTableOfContents: true
 updatedOn: '2025-03-06T00:00:00.000Z'
 ---
 
-The **Neon MCP Server** is an open-source tool that unlocks a more intuitive way to interact with your Neon Postgres databases: **natural language**. Instead of writing SQL queries or navigating APIs, you can simply use conversational English to manage your Neon projects and databases.
+The **Neon MCP Server** is an open-source tool that lets you interact with your Neon Postgres databases in **natural language**.
 
-Think of it this way:  Imagine you want to create a new database. Instead of using the Neon Console or API, you could just type a request like, "Create a database named 'my-new-database'".  Or, to see your projects, you might ask, "List all my Neon projects".  The Neon MCP Server is what makes this possible.
+Imagine you want to create a new database. Instead of using the Neon Console or API, you could just type a request like, "Create a database named 'my-new-database'".  Or, to see your projects, you might ask, "List all my Neon projects".  The Neon MCP Server makes this possible.
 
-It works by acting as a smart bridge between your natural language requests and the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).  Built upon the [Model Context Protocol (MCP)](https://modelcontextprotocol.org), it translates your simple commands into the necessary Neon API calls, allowing you to manage everything from creating projects and branches to running queries and performing database migrations – all through simple conversation.
+It works by acting as a bridge between natural language requests and the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).  Built upon the [Model Context Protocol (MCP)](https://modelcontextprotocol.org), it translates your requests into the necessary Neon API calls, allowing you to manage everything from creating projects and branches to running queries and performing database migrations.
 
 ## Understanding MCP and Neon MCP Server
 
 The [**Model Context Protocol (MCP)**](https://modelcontextprotocol.org) standardizes communication between LLMs and external tools. It defines a client-server architecture, enabling LLMs (Hosts) to connect to specialized servers that provide context and tools for interacting with external systems. The key components of the MCP architecture are:
 
-- **Host**: These are LLM applications, such as Claude Desktop or integrated development environments (IDEs), that initiate connections to MCP servers
-- **Client**: These reside within the host application and maintain one-to-one connections with individual servers
-- **Server**: These programs provide context, tools, and prompts to clients, enabling access to external data and functionalities
+- **Hosts**: These are AI applications, such as Claude Desktop or IDEs like Cursor, that initiate connections to MCP servers
+- **Clients**: These reside within the host application and maintain one-to-one connections with individual MCP servers
+- **Server**: These programs, such as Neon's MCP Server, provide context, tools, and prompts to clients, enabling access to external data and functionalities
 
 ### Why use MCP?
 
-Traditionally, connecting AI models to different data sources required developers to create custom code for each integration. This fragmented approach led to increased development time, maintenance burdens, and limited interoperability between AI models and tools. MCP tackles this challenge by providing a standardized protocol that simplifies integration, accelerates development, and enhances the capabilities of AI assistants.
+Traditionally, connecting AI models to different data sources required developers to create custom code for each integration. This fragmented approach increased development time, maintenance burdens, and limited interoperability between AI models and tools. MCP addresses this challenge by providing a standardized protocol that simplifies integration, accelerates development, and enhances the capabilities of AI assistants.
 
 ### What is Neon MCP server?
 
@@ -29,14 +29,14 @@ Traditionally, connecting AI models to different data sources required developer
 
 **Key Benefits of using Neon MCP Server:**
 
-- **Natural Language Interaction:** Manage Neon databases using intuitive, conversational commands.
-- **Simplified Database Management:** Perform complex actions without writing SQL or directly using the Neon API.
+- **Natural language interaction:** Manage Neon databases using intuitive, conversational commands.
+- **Simplified database management:** Perform complex actions without writing SQL or directly using the Neon API.
 - **Enhanced Productivity:** Streamline workflows for database administration and development.
-- **Accessibility for Non-Developers:** Empower users with varying technical backgrounds to interact with Neon databases.
-- **Safe Database Migrations:** Leverage Neon's branching capabilities for safe and previewable database schema changes initiated via natural language.
+- **Accessibility for non-developers:** Empower users with varying technical backgrounds to interact with Neon databases.
+- **Database migration support:** Leverage Neon's branching capabilities for database schema changes initiated via natural language.
 
 <Admonition type="warning" title="Security Considerations">
-The Neon MCP server grants powerful database management capabilities through natural language requests.  **Always review and authorize actions** requested by the LLM before execution. Ensure that only authorized users and applications have access to the MCP server and Neon API keys.
+The Neon MCP server grants powerful database management capabilities through natural language requests.  **Always review and authorize actions** requested by the LLM before execution. Ensure that only authorized users and applications have access to the Neon MCP server and Neon API keys.
 </Admonition>
 
 ## Installation
@@ -49,15 +49,15 @@ You can install the Neon MCP Server using either `npm` or `smithery`.
 - **Neon API Key:**  You will need a Neon API key to authenticate the Neon MCP Server with your Neon account. You can create one from the [Neon Console](https://console.neon.tech/app/settings/api-keys) under your Profile settings. Refer to the [Neon documentation on API Keys](/docs/manage/api-keys#creating-api-keys) for detailed instructions.
 
 <Admonition type="note">
-We recommend using Smithery for installation, as it streamlines the process and guarantees compatibility across MCP clients. Note that only Claude Desktop is automatically configured with the Neon MCP Server when installed via npm. For manual configuration of [Cursor](/guides/cursor-mcp-neon), [Cline](/guides/cline-mcp-neon) and [Winsurf](/guides/windsurf-mcp-neon), please refer to our detailed guides
+We recommend using Smithery for installation, as it streamlines the process and guarantees compatibility across MCP clients. Note that only Claude Desktop is automatically configured with the Neon MCP Server when installed via npm. For manual configuration of [Cursor](/guides/cursor-mcp-neon), [Cline](/guides/cline-mcp-neon) and [Windsurf](/guides/windsurf-mcp-neon), please refer to our detailed guides.
 </Admonition>
 
 ### Installation via Smithery - MCP Registry
 
 [Smithery](https://smithery.ai) provides a streamlined method for installing MCP servers.
 
-1.  **Open your terminal.**
-2.  **Run the Smithery installation command:**
+1.  Open your terminal.
+2.  Run the Smithery installation command:
 
     ```bash
     npx -y @smithery/cli install neon --client <client_name>
@@ -88,19 +88,19 @@ We recommend using Smithery for installation, as it streamlines the process and 
     neon successfully installed for claude
     ```
 
-3.  **Restart your MCP Client application.** For example, if you are using Claude Desktop, quit and reopen the application.
+3.  Restart your MCP Client application. For example, if you are using Claude Desktop, quit and reopen the application.
 
 ### Installation via npm
 
-1.  **Open your terminal.**
-2.  **Run the initialization command:**
+1.  Open your terminal.
+2.  Run the initialization command:
 
     ```bash
     npx @neondatabase/mcp-server-neon init $NEON_API_KEY
     ```
     Replace `$NEON_API_KEY` with your actual Neon API key.
     
-3.  Restart Claude Desktop
+3.  Restart Claude Desktop.
 
 ## Supported Actions (Tools)
 
@@ -121,6 +121,7 @@ The Neon MCP Server provides the following actions, which are exposed as "tools"
 
 **SQL Query Execution:**
 
+- **`get_connection_string`**: Returns your database connection string.
 - **`run_sql`**: Executes a single SQL query against a specified Neon database. Supports both read and write operations.
 - **`run_sql_transaction`**: Executes a series of SQL queries within a single transaction against a Neon database.
 - **`get_database_tables`**: Lists all tables within a specified Neon database.
@@ -149,7 +150,7 @@ width={960}
 height={1080}
 />
 
-You can also refere to our individual guides for detailed examples on using the Neon MCP Server with specific MCP clients:
+You can also refer to our individual guides for detailed examples on using the Neon MCP Server with specific MCP clients:
 
 - [Claude Desktop](/guides/neon-mcp-server)
 - [Cursor](/guides/cursor-mcp-neon)
@@ -163,13 +164,8 @@ The Neon MCP Server enables natural language interaction with Neon Postgres data
 ## Resources
 
 - [MCP Protocol](https://modelcontextprotocol.org)
-- [Neon Docs](/docs)
 - [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api)
 - [Neon API Keys](/docs/manage/api-keys#creating-api-keys)
 - [Neon MCP server GitHub](https://github.com/neondatabase/mcp-server-neon)
-- [Getting started with Neon MCP server with Claude Desktop](/guides/neon-mcp-server)
-- [AI-assisted database migrations with Cursor and Neon Postgres MCP Server](/guides/cursor-mcp-neon)
-- [Getting started with Cline and Neon Postgres MCP Server](/guides/cline-mcp-neon)
-- [Getting started with Windsurf and Neon Postgres MCP Server](/guides/windsurf-mcp-neon)
 
 <NeedHelp/>

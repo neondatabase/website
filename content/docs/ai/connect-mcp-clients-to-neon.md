@@ -5,14 +5,14 @@ enableTableOfContents: true
 updatedOn: '2025-03-06T00:00:00.000Z'
 ---
 
-The **Neon MCP Server** allows you to connect various Model Context Protocol (MCP) compatible AI tools to your Neon Postgres databases. This guide provides instructions for connecting popular MCP clients to the Neon MCP Server, enabling natural language interaction with your Neon projects.
+The **Neon MCP Server** allows you to connect various [**Model Context Protocol (MCP)**](https://modelcontextprotocol.org) compatible AI tools to your Neon Postgres databases. This guide provides instructions for connecting popular MCP clients to the Neon MCP Server, enabling natural language interaction with your Neon projects.
 
 This guide covers the setup for the following MCP Clients:
 
-- [Claude Desktop](https://claude.ai/download)
-- [Cursor](https://cursor.com/)
-- [Windsurf (Codeium)](https://codeium.com/windsurf)
-- [Cline (VS Code extension)](https://cline.bot)
+- [Claude Desktop](#claude-desktop)
+- [Cursor](#cursor)
+- [Windsurf (Codeium)](#cline-vs-code-extension)
+- [Cline (VS Code extension)](#cline-vs-code-extension)
 
 By connecting these tools to the Neon MCP Server, you can manage your Neon projects, databases, and schemas using natural language commands within the MCP client interface.
 
@@ -23,10 +23,6 @@ Before you begin, ensure you have:
 - **Neon Account and API Key:** You need a Neon account and a Neon API key. Create an API key in your [Neon Console](https://console.neon.tech/app/settings/api-keys). See [Neon API Keys documentation](/docs/manage/api-keys#creating-api-keys) for details.
 - **Node.js (>= v18.0.0) and npm:** Ensure Node.js version 18 or later and npm are installed. Download them from [nodejs.org](https://nodejs.org).
 - **MCP Client Application:** Download and install your preferred MCP client application from the links provided above.
-
-<Admonition type="note" title="Generic Postgres MCP Server">
-If you only require basic database operations (like running SQL queries) through natural language, you can also use the [generic Postgres MCP server](https://github.com/modelcontextprotocol/servers/tree/main/src/postgres) with Neon. We strongly recommend using the Neon MCP Server for full Neon integration, including managing Neon projects, schemas, migrations, and more.
-</Admonition>
 
 ## Connecting MCP Clients
 
@@ -57,7 +53,7 @@ Here's an example of using Neon MCP Server with Claude Desktop:
 3. Click "+ Add new MCP server".
 4. In the "Add MCP Server" modal:
     - **Name:** `Neon` (or any descriptive name)
-    - Chose `command` for type
+    - Choose `command` for type
     - **Command:** 
         ```bash
         npx -y @neondatabase/mcp-server-neon start <YOUR_NEON_API_KEY>` 
@@ -90,7 +86,7 @@ Here's an example of using Neon MCP Server with Cursor:
     ```
     Replace `<YOUR_NEON_API_KEY>` with your Neon API key.
 
-4. Click on Refresh button in Cascade to load the new MCP server.
+4. Click the **Refresh** button in Cascade to load the new MCP server.
 
 Here's an example of using Neon MCP Server with Windsurf:
 <video autoPlay playsInline muted loop width="800" height="600" controls>
@@ -99,9 +95,9 @@ Here's an example of using Neon MCP Server with Windsurf:
 
 ### Cline (VS Code Extension)
 
-1.  **Open Cline in VS Code.** (Sidebar -> Cline icon)
-2.  **Click "Configure MCP Servers"** in the Cline panel. This opens `cline_mcp_settings.json`.
-3.  **Edit `cline_mcp_settings.json`:** Add the following within the `mcpServers` section, replacing `<YOUR_NEON_API_KEY>` with your Neon API Key:
+1.  Open Cline in VS Code (Sidebar -> Cline icon).
+2.  Click "Configure MCP Servers" in the Cline panel. This opens `cline_mcp_settings.json`.
+3.  Edit `cline_mcp_settings.json`, adding the following within the `mcpServers` section and replacing `<YOUR_NEON_API_KEY>` with your Neon API Key:
 
     ```json
     "neon": {
@@ -132,7 +128,7 @@ Replace `<client_name>` with the name of your MCP client application. Supported 
 - `enconvo` for [Enconvo](https://www.enconvo.com/)
 
 
-For MCP clients not listed here, you can manually configure them by adding the following Neon MCP Server configuration to their respective `mcp_config` file within the mcpServers section:
+For MCP clients not listed here, you can manually configure them by adding the following Neon MCP Server configuration to their respective `mcp_config` file within the `mcpServers` section:
 
 ```json
 "neon": {
@@ -153,13 +149,12 @@ Once connected, you can start interacting with your Neon Postgres databases usin
 ## Resources
 
 - [MCP Protocol](https://modelcontextprotocol.org)
-- [Neon Docs](/docs)
 - [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api)
 - [Neon API Keys](/docs/manage/api-keys#creating-api-keys)
 - [Neon MCP server GitHub](https://github.com/neondatabase/mcp-server-neon)
-- [Getting started with Neon MCP server with Claude Desktop](/guides/neon-mcp-server)
-- [AI-assisted database migrations with Cursor and Neon Postgres MCP Server](/guides/cursor-mcp-neon)
-- [Getting started with Cline and Neon Postgres MCP Server](/guides/cline-mcp-neon)
-- [Getting started with Windsurf and Neon Postgres MCP Server](/guides/windsurf-mcp-neon)
+- [Get started with Neon MCP server with Claude Desktop](/guides/neon-mcp-server)
+- [Get started with Cursor and Neon Postgres MCP Server](/guides/cursor-mcp-neon)
+- [Get started with Cline and Neon Postgres MCP Server](/guides/cline-mcp-neon)
+- [Get started with Windsurf and Neon Postgres MCP Server](/guides/windsurf-mcp-neon)
 
 <NeedHelp/>
