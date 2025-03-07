@@ -7,7 +7,7 @@ image: '/images/social-previews/use-cases/ai-agents.jpg'
 ---
 
 <Admonition type="note" title="Why Neon">
-[Replit Agent](https://neon.tech/blog/looking-at-how-replit-agent-handles-databases) and [Create.xyz](https://neon.tech/blog/from-idea-to-full-stack-app-in-one-conversation-with-create) use Neon to let their agents deploy databases as needed. Users don’t have to sign up with third-party services—the experience is fully integrated.
+[Replit Agent](https://neon.tech/blog/looking-at-how-replit-agent-handles-databases) and [Create.xyz](https://neon.tech/blog/from-idea-to-full-stack-app-in-one-conversation-with-create) use Neon to let their agents deploy databases as needed. Users do not have to sign up with third-party services: the experience is fully integrated.
 
 If you’d like to offer this level of integration, [reach out to us](https://neon.tech/contact-sales).  
 </Admonition>
@@ -16,7 +16,7 @@ If you’d like to offer this level of integration, [reach out to us](https://ne
 text="Neon’s speed of provisioning and serverless scale-to-zero is critical for us. We can serve users iterating on quick ideas efficiently while also supporting them as they scale"
 author={{
   name: 'Dhruv Amin',
-  company: 'Co-founder at Create.xyzl',
+  company: 'Co-founder at Create.xyz'
 }}
 />
 
