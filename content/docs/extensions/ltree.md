@@ -98,13 +98,13 @@ WHERE path <@ 'electronics.computers';
 This query returns:
 
 ```text
-| id | name               | path                                |
-|----|--------------------|------------------------------------|
-| 2  | Computers          | electronics.computers              |
-| 3  | Laptops            | electronics.computers.laptops      |
-| 4  | Gaming Laptops     | electronics.computers.laptops.gaming |
+| id | name               | path                                   |
+|----|--------------------|----------------------------------------|
+| 2  | Computers          | electronics.computers                  |
+| 3  | Laptops            | electronics.computers.laptops          |
+| 4  | Gaming Laptops     | electronics.computers.laptops.gaming   |
 | 5  | Business Laptops   | electronics.computers.laptops.business |
-| 6  | Desktop Computers  | electronics.computers.desktops     |
+| 6  | Desktop Computers  | electronics.computers.desktops         | 
 ```
 
 **Finding all ancestors of a node**
@@ -120,11 +120,11 @@ WHERE path @> 'electronics.computers.laptops.gaming';
 This query returns:
 
 ```text
-| id | name       | path                   |
-|----|------------|------------------------|
-| 1  | Electronics| electronics            |
-| 2  | Computers  | electronics.computers  |
-| 3  | Laptops    | electronics.computers.laptops |
+| id | name       | path                                     |
+|----|------------|------------------------------------------|
+| 1  | Electronics| electronics                              |
+| 2  | Computers  | electronics.computers                    |
+| 3  | Laptops    | electronics.computers.laptops            |
 | 4  | Gaming Laptops | electronics.computers.laptops.gaming |
 ```
 
@@ -142,7 +142,7 @@ This query returns:
 
 ```text
 | id | name               | path                   |
-|----|--------------------|-----------------------|
+|----|--------------------|------------------------|
 | 2  | Computers          | electronics.computers  |
 | 7  | Smartphones        | electronics.smartphones|
 | 11 | Men's Clothing     | clothing.mens          |
@@ -164,9 +164,9 @@ WHERE path ~ 'electronics.computers.laptops.*';
 This query returns:
 
 ```text
-| id | name             | path                                |
-|----|------------------|------------------------------------|
-| 4  | Gaming Laptops   | electronics.computers.laptops.gaming |
+| id | name             | path                                   |
+|----|------------------|----------------------------------------|
+| 4  | Gaming Laptops   | electronics.computers.laptops.gaming   |
 | 5  | Business Laptops | electronics.computers.laptops.business |
 ```
 
@@ -174,11 +174,10 @@ You can also use more complex patterns:
 
 ```sql
 -- Find categories that match a specific pattern
--- ? matches any single label
 -- * matches zero or more labels
 SELECT id, name, path
 FROM product_categories
-WHERE path ~ '*.?.ios';
+WHERE path ~ '*.*.ios'
 ```
 
 This would match paths like `electronics.smartphones.ios`.
@@ -201,8 +200,8 @@ WHERE path = 'electronics.computers.laptops.gaming';
 This query returns:
 
 ```text
-| id | name           | subpath             |
-|----|----------------|---------------------|
+| id | name           | subpath               |
+|----|----------------|-----------------------|
 | 4  | Gaming Laptops | electronics.computers |
 ```
 
@@ -211,7 +210,7 @@ This query returns:
 The `lca()` function finds the least common ancestor of a set of paths:
 
 ```sql
--- Find the common ancestor of gaming laptops and business laptops
+-- Find the least common ancestor of gaming laptops and business laptops
 SELECT lca(
     'electronics.computers.laptops.gaming'::ltree,
     'electronics.computers.laptops.business'::ltree
@@ -221,8 +220,8 @@ SELECT lca(
 This query returns:
 
 ```text
-| common_ancestor              |
-|------------------------------|
+| common_ancestor               |
+|-------------------------------|
 | electronics.computers.laptops |
 ```
 
@@ -246,7 +245,7 @@ This query returns:
 ```text
 | distance |
 |----------|
-| 4        |
+| 5        |
 ```
 
 The distance is calculated as the sum of the levels of both paths minus twice the level of their least common ancestor.
