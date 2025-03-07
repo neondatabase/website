@@ -18,17 +18,15 @@ This guide provides an introduction to the `pg_duckdb` extension. You will learn
 
 ## Enable the `pg_duckdb` extension
 
-<Admonition type="note" title="This extension must be enabled by Neon Support">
-Before installing the `pg_duckdb` extension, you must first [send a request to Neon Support](https://console.neon.tech/app/projects?modal=support) to enable it.
-</Admonition>
+1. Before installing the `pg_duckdb` extension, you must first [send a request to Neon Support](https://console.neon.tech/app/projects?modal=support) to enable it.
 
-After the the `pg_duckdb` extension is enabled by Neon Support, install it by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+2. After the the `pg_duckdb` extension is enabled by Neon Support, install it by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
-```sql
-CREATE EXTENSION IF NOT EXISTS pg_duckdb;
-```
+    ```sql
+    CREATE EXTENSION IF NOT EXISTS pg_duckdb;
+    ```
 
-**Version availability:**
+## Version availability
 
 Please refer to the [list of all extensions](/docs/extensions/pg-extensions) available in Neon for up-to-date extension version information.
 
@@ -46,13 +44,13 @@ Please refer to the [list of all extensions](/docs/extensions/pg-extensions) ava
 | **Secure secrets management**    | Securely manage credentials for accessing data lakes and cloud storage through `duckdb.secrets`.                                                        |
 | **Export result to Data Lakes**    |  Export query results directly to object storage in Parquet format, enabling seamless data movement between Postgres and data lakes.                              |
 | **File caching**             | Cache data lake files locally for faster subsequent access, improving query performance for frequently accessed data.                                                 |
-| **Forced DuckDB execution**   |  Optionally force queries to be executed by DuckDB's engine, even when queries only involve Postgres tables.                                                        |
+| **Forced DuckDB execution**   |  Optionally, force queries to be executed by DuckDB's engine, even when queries only involve Postgres tables.                                                        |
 
 Let's explore these features in detail with examples in the following sections.
 
 ## Querying data with `pg_duckdb`
 
-Now that you have enabled `pg_duckdb` and understand its key features, let's dive into practical examples of how to use it for accelerated analytics and data lake integration.
+Now that you've enabled `pg_duckdb` and understand its key features, let's dive into practical examples of how to use it for accelerated analytics and data lake integration.
 
 ### Reading data directly from Data Lakes
 
@@ -157,8 +155,7 @@ ORDER BY total_quantity DESC;
 Querying Delta Lake tables is similar using the `delta_scan` function.
 
 ```sql
-SELECT *
-FROM delta_scan('s3://your-delta-lake-bucket/delta/table');
+SELECT * FROM delta_scan('s3://your-delta-lake-bucket/delta/table');
 ```
 
 ### Approximate distinct count
@@ -212,8 +209,7 @@ Once you have stored your credentials in `duckdb.secrets`, `pg_duckdb` automatic
 
 ```sql
 -- Access data from S3 using stored secrets
-SELECT *
-FROM read_parquet('s3://my-bucket/my-secure-data.parquet');
+SELECT * FROM read_parquet('s3://my-bucket/my-secure-data.parquet');
 ```
 
 The queries above will automatically use the stored credentials from `duckdb.secrets` to access the specified data lake resources.
@@ -252,10 +248,12 @@ If your target S3 bucket (or other object storage) requires authentication, ensu
 
 `pg_duckdb` allows you to cache data lake files locally, which can significantly improve query performance when accessing the same files repeatedly. You can use the `duckdb.cache()` function to explicitly cache a Parquet or CSV file.
 
+Please ensure that your Neon compute has enough local storage for the data lake file you want to cache locally. Neon computes allocate 20 GiB of local disk space or 15 GiB x your maximum compute size (whichever is highest). Neon supports compute sizes up to 56 CU. See [Compute size](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
+
 The cache resides on the Neon [compute](/docs/reference/glossary#compute). Due to Neon's serverless architecture, the cache content lives as long as your compute is running. If your compute is suspended due to [scale to zero](/docs/reference/glossary#scale-to-zero) the cache is emptied and you will need to reload it again after the compute is started.
 
 <Admonition type="note">
-`pg_duckdb` caches the files locally using its `CachedFile` implementation within its fork of `HTTPSFileSystem`.
+`pg_duckdb` caches files using its `CachedFile` implementation within its fork of `HTTPSFileSystem`.
 </Admonition>
 
 ```sql
@@ -269,7 +267,7 @@ SELECT * FROM duckdb.cache_info();
 SELECT duckdb.cache_delete('your_cache_key'); -- Replace 'your_cache_key' with the actual cache key from duckdb.cache_info()
 ```
 
-Once a file is cached, subsequent queries accessing the same URL will automatically use the cached version, provided the remote data hasn't changed (determined by ETag — entity tag).  Cache management is manual; you need to use `duckdb.cache_delete()` to remove files from the cache when they are no longer needed.
+Once a file is cached, subsequent queries accessing the same URL will automatically use the cached version, provided the remote data hasn't changed (determined by [ETag — entity tag](https://en.wikipedia.org/wiki/HTTP_ETag)).  Cache management is manual; you need to use `duckdb.cache_delete()` to remove files from the cache when they are no longer needed.
 
 ## Forcing DuckDB execution
 
@@ -304,12 +302,7 @@ DuckDB configuration settings, such as memory limits and maximum memory usage, a
 
 ### Working with DuckDB core extensions
 
-On Neon, several DuckDB core extensions are pre-installed with `pg_duckdb`. You can view installed extensions by running this query:
-
-```sql
-SELECT extension_name, installed, description
-FROM duckdb_extensions();
-```
+On Neon, several DuckDB core extensions are pre-installed with `pg_duckdb`.
 
 If you install a DuckDB core extension that is not pre-installed, it will only remain installed while your Neon [compute](/docs/reference/glossary#compute) is running. If your compute [scales to zero](/docs/reference/glossary#scale-to-zero) due to inactivity, the extension is removed. After your compute restarts due to activity, you must reinstall the extension.
 
