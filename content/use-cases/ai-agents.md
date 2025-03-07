@@ -7,8 +7,16 @@ image: '/images/social-previews/use-cases/ai-agents.jpg'
 ---
 
 <Admonition type="note" title="TL;DR">
-Replit partnered with Neon to back Replit Agents, which are already creating thousands of Postgres databases. If you’re building an AI agent that interacts with infrastructure, [we’d love to connect](/agent-design-partner) — we’re looking for design partners in this space.
+Replit Agent and Create.xyz have deeply integrated Neon into their agentic experience. The apps their agents build come with a Postgres database powered by Neon—without requiring the end-user to sign up with an external third party. If you're looking to build something similar, reach out to us.
 </Admonition>
+
+<Testimonial
+text="The speed of provisioning and serverless scale-to-zero of Neon is critical for us. We can serve users iterating on quick ideas efficiently while also supporting them as they scale, without making them think about database setup."
+author={{
+  name: 'Dhruv Amin',
+  company: 'Co-founder at Create.xyz',
+}}
+/>
 
 ---
 
