@@ -1,19 +1,20 @@
 ---
-title: Neon RLS Authorize tutorial
+title: Neon RLS tutorial
 subtitle: Learn how Row-level Security (RLS) protects user data
 enableTableOfContents: true
-updatedOn: '2025-02-21T13:30:24.359Z'
+updatedOn: '2025-03-06T15:24:01.905Z'
 redirectFrom:
+  - /docs/guides/neon-rls-authorize-tutorial
   - /docs/guides/neon-authorize-tutorial
 ---
 
 <InfoBlock>
 <DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/clerk-nextjs-neon-rls-authorize">Clerk + Neon RLS Authorize</a>
+  <a href="https://github.com/neondatabase-labs/clerk-nextjs-neon-rls">Clerk + Neon RLS</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
-  <a href="/docs/guides/neon-rls-authorize">About Neon RLS Authorize</a>
+  <a href="/docs/guides/neon-rls">About Neon RLS</a>
   <a href="https://orm.drizzle.team/docs/rls">Row-Level security in Drizzle</a>
 </DocsList>
 </InfoBlock>
@@ -28,15 +29,15 @@ This `todos` app is built with Next.js and Drizzle ORM, using Clerk for user aut
 
 To get started, you'll need:
 
-- **Neon account**: Sign up at [Neon](https://neon.tech) and create your first project in **AWS** (note: [Azure](/docs/guides/neon-rls-authorize#current-limitations) regions are not currently supported).
+- **Neon account**: Sign up at [Neon](https://neon.tech) and create your first project in **AWS** (note: [Azure](/docs/guides/neon-rls#current-limitations) regions are not currently supported).
 - **Clerk account**: Sign up for a [Clerk](https://clerk.com/) account and application. Clerk provides a free plan to get you started.
-- **Neon RLS Authorize + Clerk example application**: Clone the sample [Clerk + Neon RLS Authorize repository](https://github.com/neondatabase-labs/clerk-nextjs-neon-rls-authorize):
+- **Neon RLS + Clerk example application**: Clone the sample [Clerk + Neon RLS repository](https://github.com/neondatabase-labs/clerk-nextjs-neon-rls):
 
   ```bash
-  git clone https://github.com/neondatabase-labs/clerk-nextjs-neon-rls-authorize.git
+  git clone https://github.com/neondatabase-labs/clerk-nextjs-neon-rls.git
   ```
 
-  Follow the instructions in the readme to set up Clerk, configure environment variables, and start the application. You can also find more info in our [Clerk and Neon RLS Authorize Quickstart](/docs/guides/neon-rls-authorize-clerk).
+  Follow the instructions in the readme to set up Clerk, configure environment variables, and start the application. You can also find more info in our [Clerk and Neon RLS Quickstart](/docs/guides/neon-rls-clerk).
 
 <Steps>
 
@@ -300,4 +301,4 @@ Here is the output, showing columns `policyname, cmd, qual, with_check` only:
 (4 rows)
 ```
 
-To get an understanding of `auth.user_id()` and the role it plays in these policies, see this [explanation](/docs/guides/neon-rls-authorize#how-neon-rls-authorize-gets-authuserid-from-the-jwt).
+To get an understanding of `auth.user_id()` and the role it plays in these policies, see this [explanation](/docs/guides/neon-rls#how-neon-rls-gets-authuserid-from-the-jwt).

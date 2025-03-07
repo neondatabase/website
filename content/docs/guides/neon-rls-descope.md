@@ -1,69 +1,74 @@
 ---
-title: Secure your data with Stack Auth and Neon RLS Authorize
-subtitle: Implement Row-level Security policies in Postgres using Stack Auth and Neon RLS Authorize
+title: Secure your data with Descope and Neon RLS
+subtitle: Implement Row-level Security policies in Postgres using Descope and Neon RLS
 enableTableOfContents: true
-updatedOn: '2025-02-03T20:41:57.329Z'
+updatedOn: '2025-03-06T15:24:01.899Z'
 redirectFrom:
-  - /docs/guides/neon-authorize-stack-auth
+  - /docs/guides/neon-rls-authorize-descope
+  - /docs/guides/neon-authorize-descope
 ---
 
 <InfoBlock>
 <DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/stack-nextjs-neon-rls-authorize">Stack Auth + Neon RLS Authorize</a>
+  <a href="https://github.com/neondatabase-labs/descope-react-frontend-neon-rls-authorize">Descope + Neon RLS</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
-  <a href="/docs/guides/neon-rls-authorize-tutorial">Neon RLS Authorize Tutorial</a>
-   <a href="/docs/guides/neon-rls-authorize-drizzle">Simplify RLS with Drizzle</a>
+  <a href="/docs/guides/neon-rls-tutorial">Neon RLS Tutorial</a>
+  <a href="/docs/guides/neon-rls-drizzle">Simplify RLS with Drizzle</a>
 </DocsList>
 </InfoBlock>
 
-Use Stack Auth with Neon RLS Authorize to add secure, database-level authorization to your application. This guide assumes you already have an application using Stack Auth for user authentication. It shows you how to integrate Stack Auth with Neon RLS Authorize, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
+Use Descope with Neon RLS to add secure, database-level authorization to your application. This guide assumes you already have an application using Descope for user authentication. It shows you how to integrate Descope with Neon RLS, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 
 ## How it works
 
-Stack Auth handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon RLS Authorize. Neon RLS Authorize validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
+Descope handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon RLS. Neon RLS validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
 
 ## Prerequisites
 
 To follow along with this guide, you will need:
 
 - A Neon account. Sign up at [Neon](https://neon.tech) if you don't have one.
-- A [Stack Auth](https://stack-auth.com/) account with an existing application (e.g., a **todos** app) that uses Stack Auth for user authentication. If you don't have an app, check our [demo](https://github.com/neondatabase-labs/stack-nextjs-neon-rls-authorize) for similar schema and policies in action.
+- A [Descope](https://www.descope.com/) account with an existing application (e.g., a **todos** app) that uses Descope for user authentication. If you don't have an app, check our [demo](https://github.com/neondatabase-labs/stytch-nextjs-neon-rls) for similar schema and policies in action.
 
-## Integrate Stack Auth with Neon RLS Authorize
+## Integrate Descope with Neon RLS
 
-In this first set of steps, we'll integrate Stack Auth as an authorization provider in Neon. When these steps are complete, Stack Auth will start passing JWTs to your Neon database, which you can then use to create policies.
+In this first set of steps, we'll integrate Descope as an authorization provider in Neon. When these steps are complete, Descope will start passing JWTs to your Neon database, which you can then use to create policies.
 
-### 1. Get your Stack Auth JWKS URL
+### 1. Get your Descope JWKS URL
 
-When integrating Stack Auth with Neon, you'll need to provide the JWKS (JSON Web Key Set) URL. This allows your database to validate the JWT tokens and extract the user_id for use in RLS policies.
+When integrating Descope with Neon, you'll need to provide the JWKS (JSON Web Key Set) URL. This allows your database to validate the JWT tokens and extract the user_id for use in RLS policies.
 
-The Stack Auth JWKS URL follows this format:
+The Descope JWKS URL follows this format:
 
-```plaintext shouldWrap
-https://api.stack-auth.com/api/v1/projects/{YOUR_PROJECT_ID}/.well-known/jwks.json
+```
+https://api.descope.com/{YOUR_DESCOPE_PROJECT_ID}/.well-known/jwks.json
 ```
 
-Replace `{YOUR_PROJECT_ID}` with your actual Stack Auth project ID. For example, if your project ID is `my-awesome-project`, your JWKS URL would be:
+You can locate your Descope Project ID in the Project Settings page.
 
-```plaintext shouldWrap
-https://api.stack-auth.com/api/v1/projects/my-awesome-project/.well-known/jwks.json
+![Find your Descope Project ID](/docs/guides/descope_project_id.png)
+
+Replace `{YOUR_DESCOPE_PROJECT_ID}` with your actual Descope Project ID to get the JWKS URL. For example, if your Descope Project ID is `1234`, the JWKS URL would be:
+
+```
+https://api.descope.com/1234/.well-known/jwks.json
 ```
 
-### 2. Add Stack Auth as an authorization provider in the Neon Console
+### 2. Add Descope as an authorization provider in the Neon Console
 
-Once you have the JWKS URL, go to the **Neon Console**, navigate to **Settings** > **RLS Authorize**, and add Stack Auth as an authentication provider. Paste your copied URL and Stack Auth will be automatically recognized and selected.
+Once you have the JWKS URL, go to the **Neon Console**, navigate to **Settings** > **RLS Authorize**, and add Descope as an authentication provider. Paste your copied URL and Descope will be automatically recognized and selected.
 
 <div style={{ display: 'flex', justifyContent: 'center'}}>
-  <img src="/docs/guides/stack_auth_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
+  <img src="/docs/guides/descope_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
 </div>
 
 At this point, you can use the **Get Started** setup steps from RLS Authorize in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
 
 ### 3. Install the pg_session_jwt extension in your database
 
-Neon RLS Authorize uses the [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt) extension to handle authenticated sessions through JSON Web Tokens (JWTs). This extension allows secure transmission of authentication data from your application to Postgres, where you can enforce Row-Level Security (RLS) policies based on the user's identity.
+Neon RLS uses the [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt) extension to handle authenticated sessions through JSON Web Tokens (JWTs). This extension allows secure transmission of authentication data from your application to Postgres, where you can enforce Row-Level Security (RLS) policies based on the user's identity.
 
 To install the extension in the `neondb` database, run:
 
@@ -106,7 +111,7 @@ GRANT USAGE ON SCHEMA public TO anonymous;
 
 ### 5. Install the Neon Serverless Driver
 
-Neon's Serverless Driver manages the connection between your application and the Neon Postgres database. For Neon RLS Authorize, you must use HTTP. While it is technically possible to access the HTTP API without using our driver, we recommend using the driver for best performance. The driver also supports WebSockets and TCP connections, so make sure you use the HTTP method when working with Neon RLS Authorize.
+Neon's Serverless Driver manages the connection between your application and the Neon Postgres database. For Neon RLS, you must use HTTP. While it is technically possible to access the HTTP API without using our driver, we recommend using the driver for best performance. The driver also supports WebSockets and TCP connections, so make sure you use the HTTP method when working with Neon RLS.
 
 Install it using the following command:
 
@@ -139,7 +144,7 @@ The `DATABASE_URL` is intended for admin tasks and can run any query while the `
 
 ## Add RLS policies
 
-Now that you've integrated Stack Auth with Neon RLS Authorize, you can securely pass JWTs to your Neon database. Let's start looking at how to add RLS policies to your schema and how you can execute authenticated queries from your application.
+Now that you've integrated Descope with Neon RLS, you can securely pass JWTs to your Neon database. Let's start looking at how to add RLS policies to your schema and how you can execute authenticated queries from your application.
 
 ### 1. Add Row-Level Security policies
 
@@ -190,7 +195,7 @@ CREATE TABLE todos (
   user_id text not null default (auth.user_id()),
   task text check (char_length(task) > 0),
   is_complete boolean default false,
-  inserted_at timestamp not null default now()
+  inserted_at timestamptz not null default now()
 );
 
 -- 1st enable row level security for your table
@@ -222,7 +227,7 @@ The `crudPolicy` function simplifies policy creation by generating all necessary
 
 ### 2. Run your first authorized query
 
-With RLS policies in place, you can now query the database using JWTs from Stack Auth, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from both the backend and the frontend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
+With RLS policies in place, you can now query the database using JWTs from Descope, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from both the backend and the frontend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
 
 <Tabs labels={["server-component.tsx","client-component.tsx",".env"]}>
 
@@ -232,24 +237,29 @@ With RLS policies in place, you can now query the database using JWTs from Stack
 'use server';
 
 import { neon } from '@neondatabase/serverless';
-import { stackServerApp } from "@/stack";
+import { session } from '@descope/nextjs-sdk/server';
 
 export async function TodoList() {
-  const user = await stackServerApp.getUser();
+  const sessionRes = session(); // [!code highlight]
+  if (!sessionRes) {
+    throw new Error('No session found');
+  }
+
+  const { jwt } = sessionRes; // [!code highlight]
+
   const sql = neon(process.env.DATABASE_AUTHENTICATED_URL!, {
     authToken: async () => {
-      const authToken = (await user?.getAuthJson())?.accessToken; // [!code highlight]
-      if (!authToken) {
-        throw new Error('No token');
+      if (!jwt) {
+        throw new Error('No JWT token available');
       }
-      return authToken;
+      return jwt;
     },
   });
 
   // WHERE filter is optional because of RLS.
   // But we send it anyway for performance reasons.
   const todos = await
-    sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
+    sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
 
   return (
     <ul>
@@ -270,7 +280,7 @@ export async function TodoList() {
 
 import type { Todo } from '@/app/schema';
 import { neon } from '@neondatabase/serverless';
-import { useUser } from '@stackframe/stack';
+import { useSession } from '@descope/nextjs-sdk/client';
 import { useEffect, useState } from 'react';
 
 const getDb = (token: string) =>
@@ -279,18 +289,16 @@ const getDb = (token: string) =>
   });
 
 export function TodoList() {
-  const user = useUser();
+  const { sessionToken } = useSession(); // [!code highlight]
   const [todos, setTodos] = useState<Array<Todo>>();
 
   useEffect(() => {
     async function loadTodos() {
-      const authToken = (await user?.getAuthJson())?.accessToken; // [!code highlight]
-
-      if (!authToken) {
+      if (!sessionToken) {
         return;
       }
 
-      const sql = getDb(authToken);
+      const sql = getDb(sessionToken);
 
       // WHERE filter is optional because of RLS.
       // But we send it anyway for performance reasons.
@@ -301,7 +309,7 @@ export function TodoList() {
     }
 
     loadTodos();
-  }, [user]);
+  }, [sessionToken]);
 
   return (
     <ul>

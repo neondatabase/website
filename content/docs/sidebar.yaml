@@ -123,8 +123,8 @@
       items:
         - section: Import utilities
           items:
-            - title: Migration Assistant
-              slug: import/migration-assistant
+            - title: Import Data Assistant
+              slug: import/import-data-assistant
             - title: Migrate from Postgres with pg_dump and pg_restore
               slug: import/migrate-from-postgres
             - title: Migrate from a Neon project
@@ -502,52 +502,52 @@
           slug: guides/neon-auth-tutorial
         - title: API
           slug: guides/neon-auth-api
-    - title: Neon RLS Authorize
+    - title: Neon RLS
       icon: lock
-      slug: guides/neon-rls-authorize
+      slug: guides/neon-rls
       items:
         - section: Overview
           items:
             - title: About
-              slug: guides/neon-rls-authorize
+              slug: guides/neon-rls
             - title: Tutorial
-              slug: guides/neon-rls-authorize-tutorial
+              slug: guides/neon-rls-tutorial
             - title: Drizzle RLS
-              slug: guides/neon-rls-authorize-drizzle
+              slug: guides/neon-rls-drizzle
             - title: Troubleshooting
-              slug: guides/neon-rls-authorize-troubleshooting
+              slug: guides/neon-rls-troubleshooting
             - title: What's next
-              slug: guides/neon-rls-authorize-future
+              slug: guides/neon-rls-future
         - section: Quickstarts
           items:
             - title: Clerk
-              slug: guides/neon-rls-authorize-clerk
+              slug: guides/neon-rls-clerk
             - title: Stack Auth
-              slug: guides/neon-rls-authorize-stack-auth
+              slug: guides/neon-rls-stack-auth
             - title: Auth0
-              slug: guides/neon-rls-authorize-auth0
+              slug: guides/neon-rls-auth0
             - title: Stytch
-              slug: guides/neon-rls-authorize-stytch
+              slug: guides/neon-rls-stytch
             - title: Keycloak
-              slug: guides/neon-rls-authorize-keycloak
+              slug: guides/neon-rls-keycloak
             - title: AWS Cognito
-              slug: guides/neon-rls-authorize-aws-cognito
+              slug: guides/neon-rls-aws-cognito
             - title: Azure Active Directory
-              slug: guides/neon-rls-authorize-azure-ad
+              slug: guides/neon-rls-azure-ad
             - title: Descope
-              slug: guides/neon-rls-authorize-descope
+              slug: guides/neon-rls-descope
             - title: Firebase / GCP Identity Platform
-              slug: guides/neon-rls-authorize-firebase-gcp
+              slug: guides/neon-rls-firebase-gcp
             - title: Google Identity
-              slug: guides/neon-rls-authorize-google-identity
+              slug: guides/neon-rls-google-identity
             - title: PropelAuth
-              slug: guides/neon-rls-authorize-propelauth
+              slug: guides/neon-rls-propelauth
             - title: SuperTokens
-              slug: guides/neon-rls-authorize-supertokens
+              slug: guides/neon-rls-supertokens
             - title: WorkOS
-              slug: guides/neon-rls-authorize-workos
+              slug: guides/neon-rls-workos
             - title: Custom JWT
-              slug: guides/neon-rls-authorize-custom-jwt
+              slug: guides/neon-rls-custom-jwt
     - title: Integrations
       icon: integrations
       slug: guides/integrations

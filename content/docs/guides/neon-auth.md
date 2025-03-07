@@ -6,7 +6,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-identity
 tag: beta
-updatedOn: '2025-02-28T20:32:00.521Z'
+updatedOn: '2025-03-07T19:39:00.600Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth" />
@@ -61,9 +61,9 @@ The following columns are included in the `neon_auth.users_sync` table:
 
 - `raw_json`: Complete user profile as JSON
 - `id`: The unique ID of the user
-- `name`: The user's display name (nullable)
-- `email`: The user's primary email (nullable)
-- `created_at`: When the user signed up (nullable)
+- `name`: The user's display name
+- `email`: The user's primary email
+- `created_at`: When the user signed up
 - `deleted_at`: When the user was deleted, if applicable (nullable)
 - `updated_at`: When the user was last updated, if applicable (nullable)
 
@@ -253,3 +253,9 @@ FROM posts
 LEFT JOIN neon_auth.users_sync ON posts.author_id = neon_auth.users_sync.id
 WHERE neon_auth.users_sync.deleted_at IS NULL;
 ```
+
+## Limitations
+
+<Admonition type="important">
+Neon Auth is not compatible with Private Link (Neon Private Networking). If you have Private Link enabled for your Neon project, Neon Auth will not work. This is because Neon Auth requires internet access to connect to third-party authentication providers, while Private Link restricts connections to private AWS networks.
+</Admonition>

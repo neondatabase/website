@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2025-02-28T20:32:00.525Z'
+updatedOn: '2025-03-06T19:30:39.637Z'
 ---
 
 Our development teams are focused on helping you ship faster with Postgres. This roadmap describes committed features we're working on right now, what we delivered recently, and a peek at what's on the horizon.
@@ -17,7 +17,7 @@ Here's a snapshot of what we're working on now:
 
 - **Data anonymization**: We're simplifying PII data anonymization to make Neon an ideal staging environment for your team's app development.
 - **HIPAA compliance**: We are working toward HIPAA readiness, targeting completion by the end of Q2 2025. Learn more about Neon's compliance milestones on our [Compliance page](/docs/security/compliance).
-- **Improved migration assistance**: The [Neon Migration Assistant](/docs/import/migration-assistant) was introduced in Q4 2024. More improvements are coming in 2025 to make data import easier and faster.
+- **Improved migration assistance**: The [Import Data Assistant](/docs/import/import-data-assistant) was introduced in Q4 2024. More improvements are coming in 2025 to make data import easier and faster.
 - **Support for the [pg_search](https://github.com/paradedb/paradedb/tree/dev/pg_search) extension**: This extension enables full text search over heap tables.
 - **Backup & restore**: We'll start with scheduled snapshots with instant point-in-time recovery, eventually expanding this feature with more traditional automated backup capabilities.
 - **Branch protection enhancements**: We're enhancing safeguards for [protected branches](/docs/guides/protected-branches) to strengthen their security and prevent accidental actions.
@@ -77,11 +77,11 @@ And here's a quick list of what we'll be taking on in the near future:
 - **Organizations GA**: Organization Accounts are now generally available. Create a new organization, transfer over your projects, invite your team and get started collaborating. Refer to our [Organizations docs](/docs/manage/organizations) to learn more.
 - **Private Networking**: Private and secure network access to your compute resources without traversing public networks. Support for AWS PrivateLink is available in [Public Beta](/docs/guides/neon-private-networking).
 - **Schema Diff GitHub Action**: This action leverages our [Schema Diff](/docs/guides/schema-diff) feature to compare database schemas across branches and post the differences as a comment on your pull request, streamlining the review process. It's also supported with our [Neon GitHub integration](/docs/guides/neon-github-integration).
-- **Migration Assistant**: Helps you migrate data to Neon from other Postgres databases. All you need to get started is a connection string for your existing database. See [Neon Migration Assistant](/docs/import/migration-assistant) for instructions.
+- **Import Data Assistant**: Helps you migrate data to Neon from other Postgres databases. All you need to get started is a connection string for your existing database. See [Import Data Assistant](/docs/import/import-data-assistant) for instructions.
 - **Python SDK**: Our new [Python SDK](https://pypi.org/project/neon-api/) wraps the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), allowing you to manage the Neon platform directly from your Python applications.
 - **Neon in the Vercel Marketplace**: Neon is now a first-party native integration in the Vercel Marketplace. This integration lets Vercel users add Postgres to their projects and manage billing directly through Vercel. For details, see [Install the Neon Postgres Native Integration on Vercel](/docs/guides/vercel-native-integration).
 - **Archive storage on the Free Plan**: Archive storage is now available on the Free Plan for automatically archiving inactive branches. This feature helps minimize storage costs, allowing us to expand the Free Plan even further. Learn more in [Branch Archiving](/docs/guides/branch-archiving).
-- **Neon RLS Authorize**: This feature integrates with third-party **authentication providers** like Auth0, Clerk, and Stack Auth to bring authorization to your code base by leveraging Postgres [Row-Level Security (RLS)](https://www.postgresql.org/docs/current/ddl-rowsecurity.html). [Read the announcement](https://neon.tech/blog/introducing-neon-authorize) and [check out the docs](/docs/guides/neon-rls-authorize).
+- **Neon RLS**: This feature integrates with third-party **authentication providers** like Auth0, Clerk, and Stack Auth to bring authorization to your code base by leveraging Postgres [Row-Level Security (RLS)](https://www.postgresql.org/docs/current/ddl-rowsecurity.html). [Read the announcement](https://neon.tech/blog/introducing-neon-authorize) and [check out the docs](/docs/guides/neon-rls).
 - **Neon on Azure**: You can deploy Neon databases on Azure, starting with the East US 2 region. This marks the first milestone on our Azure roadmap—many more exciting updates are on the way, including deeper integrations with the Azure ecosystem. [Read the announcement](https://neon.tech/blog/first-azure-region-available-in-neon).
 - **End-to-end RAG pipelines in Postgres**: Our new and open source [pgrag](/docs/extensions/pgrag) extension lets you create end-to-end Retrieval-Augmented Generation (RAG) pipelines in Postgres. There's no need for additional programming languages or libraries. With the functions provided by `pgrag`, you can build a complete RAG pipeline directly within your SQL client.
 - **Support for Analytics with pg_mooncake**: This new extension, brought to the community by [mooncake.dev](https://mooncake.dev/), introduces native columnstore tables with DuckDB execution for _fast_ analytics directly in Postgres. [Read the announcement](https://www.mooncake.dev/blog/pgmooncake-neon).

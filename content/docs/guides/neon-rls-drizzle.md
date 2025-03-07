@@ -1,9 +1,10 @@
 ---
 title: Simplify RLS with Drizzle
-subtitle: Use Drizzle crudPolicy to manage Row-Level Security with Neon RLS Authorize
+subtitle: Use Drizzle crudPolicy to manage Row-Level Security with Neon RLS
 enableTableOfContents: true
-updatedOn: '2025-03-02T14:35:19.531Z'
+updatedOn: '2025-03-06T15:24:01.899Z'
 redirectFrom:
+  - /docs/guides/neon-rls-authorize-drizzle
   - /docs/guides/neon-authorize-drizzle
 ---
 
@@ -14,7 +15,7 @@ redirectFrom:
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
-  <a href="/docs/guides/neon-rls-authorize">About Neon RLS Authorize</a>
+  <a href="/docs/guides/neon-rls">About Neon RLS</a>
   <a href="https://orm.drizzle.team/docs/rls">RLS in Drizzle</a>
 </DocsList>
 
@@ -31,7 +32,7 @@ To illustrate, let's consider a simple **Todo** list app with RLS policies appli
 - `USING` clause — controls which existing rows can be accessed
 - `WITH CHECK` clause — controls what new or modified data can be written
 
-<Admonition type="note">To get an understanding of `auth.user_id()` and the role it plays in these policies, see this [explanation](/docs/guides/neon-rls-authorize#how-neon-rls-authorize-gets-authuserid-from-the-jwt).</Admonition>
+<Admonition type="note">To get an understanding of `auth.user_id()` and the role it plays in these policies, see this [explanation](/docs/guides/neon-rls#how-neon-rls-gets-authuserid-from-the-jwt).</Admonition>
 
 Here's how these clauses apply to each operation:
 
@@ -124,7 +125,7 @@ export const authUid = (userIdColumn: AnyPgColumn) =>
 
 This helper:
 
-1. Wraps Neon RLS Authorize's `auth.user_id()` function (from the [pg_session_jwt](/docs/guides/neon-rls#how-the-pgsessionjwt-extension-works) extension)
+1. Wraps Neon RLS's `auth.user_id()` function (from the [pg_session_jwt](/docs/guides/neon-rls#how-the-pgsessionjwt-extension-works) extension)
 2. Compares the authenticated user's ID with a table column
 3. Returns a SQL expression suitable for use in `read` and `modify` parameters
 

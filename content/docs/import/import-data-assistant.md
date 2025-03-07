@@ -1,11 +1,13 @@
 ---
-title: Neon Migration Assistant
+title: Import Data Assistant
 subtitle: Move your existing database to Neon using our guided tool
 enableTableOfContents: true
-updatedOn: '2025-01-24T20:21:43.511Z'
+updatedOn: '2025-03-06T19:30:39.633Z'
+redirectFrom:
+  - /docs/import/migration-assistant
 ---
 
-When you're ready to move your data to Neon, our Migration Assistant can help. You need only the connection string to your existing database to get started.
+When you're ready to move your data to Neon, our Import Data Assistant can help. You need only the connection string to your existing database to get started.
 
 <FeatureBeta/>
 
@@ -15,7 +17,7 @@ Enter your current database connection string, and the Assistant will:
 
 1. Run some preliminary checks on your database. If necessary, you'll be prompted to make changes to your source database before proceeding. Note that these are information checks only; the Assistant does not make any changes to your source database.
 1. Based on these initial checks, the Assistant tries to create a Neon project that best matches your environment, such as region and Postgres version.
-1. The Migration Assistant provides `pg_dump` and `pg_restore` commands to transfer your data, pre-populated with the correct connection strings.
+1. The Import Data Assistant provides `pg_dump` and `pg_restore` commands to transfer your data, pre-populated with the correct connection strings.
 
 Future versions will add more automation to these steps, and also add support for **logical replication** to help minimize downtime during larger transfers.
 
