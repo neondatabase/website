@@ -60,6 +60,7 @@ Neon MCP server exposes the following actions, which primarily map to **Neon API
 - `create_branch`: Action to create a new branch within a Neon project. Leverages Neon's branching feature, allowing you to create new branches for development or migrations.
 - `delete_branch`: Action to delete an existing branch in a Neon project.
 - `describe_branch`: Action to get details about a specific branch. Retrieves information about a particular branch, such as its name and ID.
+- `get_connection_string`: Action to retrieve a connection string for a specific database in a Neon project. Returns a formatted connection string that can be used to connect to the database.
 - `run_sql`: Action to execute a single SQL query against a Neon database. Allows you to run read or write SQL queries.
 - `run_sql_transaction`: Action to execute a series of SQL queries within a transaction against a Neon database. Enables running multiple SQL statements as a single atomic transaction, ensuring data consistency.
 - `get_database_tables`: Action to list all tables in a specified Neon database. Provides a list of tables.
