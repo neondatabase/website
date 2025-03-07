@@ -61,9 +61,9 @@ The following columns are included in the `neon_auth.users_sync` table:
 
 - `raw_json`: Complete user profile as JSON
 - `id`: The unique ID of the user
-- `name`: The user's display name (nullable)
-- `email`: The user's primary email (nullable)
-- `created_at`: When the user signed up (nullable)
+- `name`: The user's display name
+- `email`: The user's primary email
+- `created_at`: When the user signed up
 - `deleted_at`: When the user was deleted, if applicable (nullable)
 - `updated_at`: When the user was last updated, if applicable (nullable)
 
