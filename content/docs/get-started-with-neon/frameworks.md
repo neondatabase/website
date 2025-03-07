@@ -2,10 +2,10 @@
 title: Neon framework guides
 subtitle: Find detailed instructions for connecting to Neon from various frameworks
 enableTableOfContents: false
-updatedOn: '2024-11-28T11:50:49.801Z'
+updatedOn: '2025-02-24T15:53:13.354Z'
 ---
 
-<TechnologyNavigation open>
+<TechCards>
 
 <a href="/docs/guides/node" title="Node.js" description="Connect a Node.js application to Neon" icon="node-js"></a>
 
@@ -39,4 +39,4 @@ updatedOn: '2024-11-28T11:50:49.801Z'
 
 <a href="/docs/guides/sveltekit" title="Sveltekit" description="Connect a Sveltekit application to Neon" icon="svelte"></a>
 
-</TechnologyNavigation>
+</TechCards>

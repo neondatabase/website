@@ -141,6 +141,16 @@ const defaultConfig = {
 
     return [
       {
+        source: '/yc-startups',
+        destination: '/startups',
+        permanent: true,
+      },
+      {
+        source: '/yc-deal-terms',
+        destination: '/startups-deal-terms',
+        permanent: true,
+      },
+      {
         source: '/postgresql',
         destination: '/postgresql/tutorial',
         permanent: true,
@@ -189,6 +199,11 @@ const defaultConfig = {
       {
         source: '/early-access',
         destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/docs/import/migration-assistant',
+        destination: '/docs/import/import-data-assistant',
         permanent: true,
       },
       {
@@ -266,6 +281,11 @@ const defaultConfig = {
         source: '/changelog',
         destination: '/docs/changelog',
         permanent: false,
+      },
+      {
+        source: '/early-access-program',
+        destination: '/docs/introduction/roadmap#join-the-neon-early-access-program',
+        permanent: true,
       },
       ...docsRedirects,
       ...changelogRedirects,

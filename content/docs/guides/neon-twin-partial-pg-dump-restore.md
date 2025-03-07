@@ -3,7 +3,7 @@ title: Partial Twin
 subtitle: Create a partial Twin of your production database
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-11T18:04:21.935Z'
+updatedOn: '2025-03-03T16:46:05.779Z'
 ---
 
 This workflow will create a partial Neon Twin using `pg_dump`, `pg_restore` and `psql`.
@@ -33,7 +33,7 @@ name: Create Neon Twin
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Runs at midnight ET (us-east-1)
+    - cron: '0 0 * * *' # Runs at midnight UTC
   workflow_dispatch:
 
 env:
@@ -191,7 +191,7 @@ Add a `pull_request` event and configure it to listen for merges into the main `
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Runs at midnight ET (us-east-1)
+    - cron: '0 0 * * *' # Runs at midnight UTC
   pull_request: // [!code ++]
     types: [closed] // [!code ++]
     branches: // [!code ++]
@@ -219,7 +219,9 @@ jobs:
 
 ## Limitations
 
-Be aware of [usage limits](https://docs.github.com/en/actions/administering-github-actions/usage-limits-billing-and-administration#usage-limits): Each GitHub Action job can run for up to 6 hours. If a job exceeds this limit, it will be terminated and fail to complete. If your dump/restore process takes longer, consider using [self-hosted runners](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners#about-self-hosted-runners).
+Be aware of [usage limits](https://docs.github.com/en/actions/administering-github-actions/usage-limits-billing-and-administration#usage-limits): Each GitHub Action job can run for up to 6 hours. If a job exceeds this limit, it will be terminated and fail to complete.
+
+If your dump/restore process takes longer, consider using [self-hosted runners](/guides/gihub-actions-self-hosted-runners).
 
 ## Further reading
 

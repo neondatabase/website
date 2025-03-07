@@ -4,6 +4,8 @@ import Rss from 'rss';
 import { CHANGELOG_DIR_PATH } from 'constants/content';
 import { CHANGELOG_BASE_PATH } from 'constants/docs';
 import { getAllChangelogs, getPostBySlug } from 'utils/api-docs';
+import getExcerpt from 'utils/get-excerpt';
+import getFormattedDate from 'utils/get-formatted-date';
 
 const SITE_URL = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
 
@@ -20,24 +22,20 @@ export async function GET() {
   });
 
   allChangelogPosts.forEach((post) => {
-    const { slug, label, date } = post;
+    const { slug, date } = post;
     const { data, content } = getPostBySlug(slug, CHANGELOG_DIR_PATH);
-
+    const label = getFormattedDate(date);
     const heading = data.title || content.match(/# (.*)/)?.[1];
-
-    const description =
-      data.description ||
-      `${heading} and more. Check out the full list of changes for this release note.`;
-
+    const description = getExcerpt(content, 160);
     const url = `${SITE_URL}${CHANGELOG_BASE_PATH}${slug}`;
 
     feed.item({
       id: url,
       title: `${heading} release - ${label}`,
+      description,
       url,
       guid: url,
       date: new Date(date),
-      description,
     });
   });
 

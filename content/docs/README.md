@@ -1,5 +1,5 @@
 ---
-updatedOn: '2025-02-19T11:27:41.875Z'
+updatedOn: '2025-02-20T17:29:13.754Z'
 ---
 
 # Docs
@@ -363,7 +363,7 @@ curl --request POST \
 
 To improve the documentation readability, one can leverage an Admonition custom component. Just wrap your piece of text with `<Admonition></Admonition>` and pass the type.
 
-There are 6 types of Admonition: `note`, `important`, `tip`, `info`, `warning`, `coming-soon`; the default is `note`.
+There are 6 types of Admonition: `note`, `important`, `tip`, `info`, `warning`, `comingSoon`; the default is `note`.
 
 You may also specify an optional title with prop `title`.
 
@@ -390,7 +390,7 @@ Information that helps users understand the things better.
 Critical content demanding immediate user attention due to potential risks.
 </Admonition>
 
-<Admonition type="coming-soon">
+<Admonition type="comingSoon">
 Information about features that are coming soon.
 </Admonition>
 ```

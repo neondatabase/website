@@ -1,7 +1,7 @@
 ---
 title: Monitoring dashboard
 enableTableOfContents: true
-updatedOn: '2025-02-14T19:32:07.601Z'
+updatedOn: '2025-02-22T21:54:33.849Z'
 ---
 
 The **Monitoring** dashboard in the Neon console provides several graphs for monitoring system and database metrics. You can access the **Monitoring** dashboard from the sidebar in the Neon Console. Observable metrics include:
@@ -119,6 +119,10 @@ Deadlocks occur in a database when two or more transactions simultaneously block
 The **Rows** graph shows the number of rows deleted, updated, and inserted over time for the named database on the selected branch. The named database is always the oldest database on the selected branch. Row metrics are reset to zero whenever your compute restarts.
 
 Tracking rows inserted, updated, and deleted over time provides insights into your database's activity patterns. You can use this data to identify trends or irregularities, such as insert spikes or an unusual number of deletions.
+
+<Admonition type="note">
+Row metrics only capture row-level changes (`INSERT`, `UPDATE`, `DELETE`, etc.) and exclude table-level operations such as `TRUNCATE`.
+</Admonition>
 
 ### Replication delay bytes
 

@@ -1,9 +1,8 @@
 ---
 title: Neon on Azure
 enableTableOfContents: true
-tag: new
 isDraft: false
-updatedOn: '2025-02-12T10:58:29.263Z'
+updatedOn: '2025-03-05T21:09:38.754Z'
 ---
 
 <InfoBlock>
@@ -120,7 +119,7 @@ For supported Azure regions, refer to our [Regions](/docs/introduction/regions) 
 
 ## Azure examples
 
-<TechnologyNavigation open>
+<TechCards>
 
 <a href="https://neon.tech/guides/neon-azure-integration" title="Get started with Neon on Azure" description="Deploy Neon's serverless Postgres via the Azure Marketplace" icon="azure"></a>
 
@@ -140,11 +139,11 @@ For supported Azure regions, refer to our [Regions](/docs/introduction/regions) 
 
 <a href="https://neon.tech/guides/azure-ai-language" title="Azure AI Language" description="Learn how to analyze customer feedback using Azure AI Language and store results in Neon Postgres" icon="azure"></a>
 
-</TechnologyNavigation>
+</TechCards>
 
 ## Related resources
 
-<TechnologyNavigation open>
+<TechCards>
 
 <a href="/docs/guides/dotnet-npgsql" title=".NET" description="Connect a .NET (C#) application to Neon" icon="dotnet"></a>
 
@@ -160,4 +159,4 @@ For supported Azure regions, refer to our [Regions](/docs/introduction/regions) 
 
 <a href="https://neon.tech/guides/read-replica-entity-framework" title="Neon Read Replicas with Entity Framework" description="Scale your .NET application with Entity Framework and Neon Postgres Read Replicas" icon="entity"></a>
 
-</TechnologyNavigation>
+</TechCards>
