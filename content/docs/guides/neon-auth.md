@@ -253,3 +253,9 @@ FROM posts
 LEFT JOIN neon_auth.users_sync ON posts.author_id = neon_auth.users_sync.id
 WHERE neon_auth.users_sync.deleted_at IS NULL;
 ```
+
+## Limitations
+
+<Admonition type="important">
+Neon Auth is not compatible with Private Link (Neon Private Networking). If you have Private Link enabled for your Neon project, Neon Auth will not work. This is because Neon Auth requires internet access to connect to third-party authentication providers, while Private Link restricts connections to private AWS networks.
+</Admonition>
