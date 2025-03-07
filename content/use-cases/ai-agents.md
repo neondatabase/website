@@ -57,18 +57,19 @@ Neon is simply Postgres. Everything an agent knows about Postgres is available i
 
 <SubscriptionForm title="If you’re building an AI agent, let’s talk!" description="We’re working closely with design partners to make Neon even better for agents, in exchange for discounts and other services. Let’s work together and make your AI project a success." />
 
-## AI agents are now provisioning more databases on Neon than humans—many thousands per day. 
+## AI agents are now provisioning more databases on Neon than humans—many thousands per day.
 
 ---
 
-The scale is massive, and Neon is built to handle it. 
+The scale is massive, and Neon is built to handle it.
 
 ### Purpose-built interfaces for AI Agents.
+
 Neon offers dedicated interfaces that make it easy for AI agents to deploy and manage databases:
 
-**[Model Context Protocol (MCP) server](https://github.com/neondatabase-labs/mcp-server-neon):** Enables any MCP Client to interact with Neon's API using natural language. AI agents can use Neon's MCP server to automate tasks such as creating databases, running SQL queries, and managing database migrations. [Explore our MCP guides](https://neon.tech/blog?query=MCP). 
+**[Model Context Protocol (MCP) server](https://github.com/neondatabase-labs/mcp-server-neon):** Enables any MCP Client to interact with Neon's API using natural language. AI agents can use Neon's MCP server to automate tasks such as creating databases, running SQL queries, and managing database migrations. [Explore our MCP guides](https://neon.tech/blog?query=MCP).
 
-**[@neondatabase/toolkit](https://github.com/neondatabase/toolkit):** A lightweight client designed for AI agents that need to spin up Postgres databases in seconds and run SQL queries. It includes both the Neon TypeScript SDK and the Neon Serverless Driver. 
+**[@neondatabase/toolkit](https://github.com/neondatabase/toolkit):** A lightweight client designed for AI agents that need to spin up Postgres databases in seconds and run SQL queries. It includes both the Neon TypeScript SDK and the Neon Serverless Driver.
 
 ```jsx showLineNumbers
 import { NeonToolkit } from "@neondatabase/toolkit";
@@ -97,20 +98,24 @@ await toolkit.deleteProject(project);
 
 ```
 
-### Control resource consumption at scale. 
+### Control resource consumption at scale.
+
 Managing thousands of databases requires predictable resource allocation. With Neon’s API, you can:
 
 - Set limits on compute uptime, CPU usage, data writes, storage, and data transfer
 - Define different quota tiers (e.g. for free, pro, and enterprise plans)
 
-### Define compute configuration. 
+### Define compute configuration.
+
 AI agents need flexibility in how they allocate and scale database resources. Neon enables precise compute management:
 
 - Configure autoscaling limits to control min/max CPU allocation
 - Adjust scale to zero behavior
 
-### Monitor the fleet. 
-Tracking thousands of databases requires visibility: 
+### Monitor the fleet.
+
+Tracking thousands of databases requires visibility:
+
 - Monitor total compute uptime, CPU seconds used, and data written/transferred
 - Notify users before they hit hard limits
 
