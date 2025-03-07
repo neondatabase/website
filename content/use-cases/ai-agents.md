@@ -1,6 +1,6 @@
 ---
-title: 'Postgres for AI Agents'
-subtitle: Neon databases are fast to provision, easy to manage, and they scale to zero — perfect for AI agents.
+title: 'The Postgres API for Agents'
+subtitle: Join Replit Agent and Create.xyz and let your agent deploy Neon databases with no friction for the user.
 enableTableOfContents: true
 updatedOn: '2024-10-09T09:00:00.000Z'
 image: '/images/social-previews/use-cases/ai-agents.jpg'
