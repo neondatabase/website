@@ -49,7 +49,7 @@ console.log(await toolkit.sql(project, `SELECT name FROM users`));
 await toolkit.deleteProject(project);
 ```
 
-Neon also supports a [Model Context Protocol (MCP) server](https://github.com/neondatabase/mcp-server-neon) that lets you use any MCP Client, such as Claude Desktop, to manage Postgres databases with Neon using natural language; for example:
+Neon also supports a [Model Context Protocol (MCP) server](https://github.com/neondatabase/mcp-server-neon) that lets you use any MCP Client, such as Cursor or Claude Desktop, to manage Postgres databases with Neon using natural language; for example:
 
 - `Create a new Postgres database, and call it "my-database". Let's then create a table called users with the following columns: id, name, email, and password.`
 - `I want to run a migration on my project called "my-project" that alters the users table to add a new column called "created_at".`
@@ -61,6 +61,6 @@ Both tools are open source. You can find them on GitHub.
 
 <a href="https://github.com/neondatabase/toolkit" description="A terse client that lets you spin up a Postgres database in seconds and run SQL queries" icon="github">@neondatabase/toolkit</a>
 
-<a href="https://github.com/neondatabase/mcp-server-neon" description="A Model Context Protocol (MCP) server for Neon that lets MCP Clients interact with Neon’s API using natural language" icon="github">Neon MCP Server</a>
+<a href="/docs/ai/neon-mcp-server" description="A Model Context Protocol (MCP) server for Neon that lets MCP Clients interact with Neon’s API using natural language" icon="openai">Neon MCP Server</a>
 
 </DetailIconCards>

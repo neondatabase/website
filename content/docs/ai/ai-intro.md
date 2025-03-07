@@ -10,23 +10,25 @@ Neon enables AI agents to provision Postgres databases in seconds, execute SQL q
 
 Neon also supports vector data, a key component for AI applications. With the **pgvector** open-source extension, you can use Neon as a vector database for storing and querying embeddings. This allows you to use Postgres as your vector store, eliminating the need for data migration or third-party solutions.
 
-## Neon for AI Agents
+## Neon for AI Agents and tools
 
-Neon supports Postgres for AI agents with the following tools and interfaces:
+Neon supports Postgres for AI agents and tools with the following tools and interfaces:
 
 <DetailIconCards>
 
 <a href="https://github.com/neondatabase/toolkit" description="A terse client that lets you spin up a Postgres database in seconds and run SQL queries" icon="github">@neondatabase/toolkit</a>
 
-<a href="https://github.com/neondatabase/mcp-server-neon" description="A Model Context Protocol (MCP) server for Neon that lets MCP Clients interact with Neon’s API using natural language" icon="github">Neon MCP Server</a>
+<a href="/docs/ai/neon-mcp-server" description="A Model Context Protocol (MCP) server for Neon that lets AI tool like Cursor interact manage Neon " icon="github">Neon MCP Server</a>
 
-<a href="https://github.com/neondatabase/mcp-server-neon/tree/main/mcp-client" description="A Model Context Protocol (MCP) client CLI that can be used to interact with any MCP server" icon="github">MCP Client CLI</a>
+<a href="/docs/ai/connect-mcp-clients-to-neon" description="Learn how to connect MCP clients such as Cursor, Claude Desktop, Cline, and Windsurf to your Neon Postgres database " icon="github">Connect MCP Clients to Neon</a>
 
-<a href="https://neon.tech/guides/neon-mcp-server" description="Getting started with Claude Desktop and Neon MCP server" icon="openai">Claude Desktop with Neon MCP Server</a>
+<a href="https://neon.tech/guides/neon-mcp-server" description="Get started with Claude Desktop and Neon MCP server" icon="openai">Claude Desktop with Neon MCP Server</a>
 
-<a href="https://neon.tech/guides/cline-mcp-neon" description="Getting started with Cline and Neon Postgres MCP Server" icon="openai">Cline with Neon MCP Server</a>
+<a href="https://neon.tech/guides/cline-mcp-neon" description="Get started with Cline and Neon Postgres MCP Server" icon="openai">Cline with Neon MCP Server</a>
 
-<a href="https://neon.tech/guides/windsurf-mcp-neon" description="Getting started with Windsurf and Neon Postgres MCP Server" icon="openai">Windsurf with Neon MCP Server</a>
+<a href="https://neon.tech/guides/windsurf-mcp-neon" description="Get started with Windsurf and Neon Postgres MCP Server" icon="openai">Windsurf with Neon MCP Server</a>
+
+<a href="/guides/cursor-mcp-neon" description="Get started with Cursor and Neon Postgres MCP Server" icon="openai">Cursor with Neon MCP Server</a>
 
 <a href="https://neon.tech/guides/agentstack-neon" description="Building AI Agents with AgentStack and Neon" icon="openai">Neon tool for AgentStack</a>
 
