@@ -6,7 +6,6 @@ updatedOn: '2024-10-09T09:00:00.000Z'
 image: '/images/social-previews/use-cases/ai-agents.jpg'
 ---
 
-
 <Admonition type="note" title="Why Neon">
 Replit Agent and Create.xyz use Neon to let their agents deploy databases as needed. Users do not have to sign up with third-party services: the experience is fully integrated.
 
