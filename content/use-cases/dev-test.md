@@ -18,7 +18,7 @@ Database branching is a game-changer for dev/test environments: there's no need 
 Try this workflow in Neon right away. You can follow the steps [in this guide](https://neon.tech/docs/use-cases/dev-test) to set things up.
 </Admonition>
 
-<CTA title="Get $100 in credits" description="Sign up now and get $100 in credits when you upgrade. Or&nbsp;<a href='/contact-sales'>talk to our team</a> if you have any questions." buttonText="Claim the offer" buttonUrl="https://fyi.neon.tech/credits" />
+<CTA title="Get $100 in credits" description="Sign up now and get $100 in credits when you upgrade." buttonText="Claim the offer" buttonUrl="https://fyi.neon.tech/credits" />
 
 ## Ephemeral Environments Are Inefficient in Traditional Postgres
 
