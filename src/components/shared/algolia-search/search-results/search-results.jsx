@@ -15,20 +15,22 @@ const SearchResults = ({ posts, indexName, className, children }) => {
     return children;
   }
 
-  if (items.length === 0) {
-    // TO-DO: Update text here
+  const matchedPosts = items
+    .map(({ url }) => {
+      const slug = url.split('/').pop();
+      return posts.find((post) => post.slug === slug);
+    })
+    .filter((post) => post !== undefined);
+
+  if (items.length === 0 || matchedPosts.length === 0) {
     return <div className="w-full text-center text-lg">No search results found</div>;
   }
 
   return (
     <div className={clsx('search-results', className)}>
-      {items.map(({ url, index }) => {
-        const slug = url.split('/').pop();
-        const post = posts.find((post) => post.slug === slug);
-
-        if (!post) return null;
-
-        if (indexName === 'guides') return <GuideCard key={post.slug} {...post} />;
+      {matchedPosts.map((post, index) => {
+        if (indexName === process.env.NEXT_PUBLIC_ALGOLIA_GUIDES_INDEX_NAME)
+          return <GuideCard key={post.slug} {...post} />;
 
         return <BlogGridItem key={post.slug} post={post} isPriority={index < 5} />;
       })}
