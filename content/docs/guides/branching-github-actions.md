@@ -21,7 +21,7 @@ Neon supports a GitHub integration that connects your Neon project to a GitHub r
 This GitHub Action creates a new branch in your Neon project.
 
 <Admonition type="tip" title="GitHub Actions Marketplace">
-You can find this action on the **GitHub Actions Marketplace**: [Neon Database Create Branch Action](https://github.com/marketplace/actions/neon-database-create-branch-action).
+You can find this action on the **GitHub Actions Marketplace**: [Neon Database Create Branch Action](https://github.com/marketplace/actions/neon-create-branch-github-action).
 </Admonition>
 
 ### Prerequisites
