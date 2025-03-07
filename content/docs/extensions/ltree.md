@@ -104,7 +104,7 @@ This query returns:
 | 3  | Laptops            | electronics.computers.laptops          |
 | 4  | Gaming Laptops     | electronics.computers.laptops.gaming   |
 | 5  | Business Laptops   | electronics.computers.laptops.business |
-| 6  | Desktop Computers  | electronics.computers.desktops         | 
+| 6  | Desktop Computers  | electronics.computers.desktops         |
 ```
 
 **Finding all ancestors of a node**
