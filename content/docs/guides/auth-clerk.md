@@ -244,7 +244,7 @@ Create a new file at `app/actions.ts` with the following content:
 ```typescript
 'use server';
 
-import { currentUser } from '@clerk/nextjs';
+import { currentUser } from '@clerk/nextjs/server';
 import { UserMessages } from './db/schema';
 import { db } from './db';
 import { redirect } from 'next/navigation';
