@@ -104,4 +104,36 @@ EXPLAIN (ANALYZE,BUFFERS,PREFETCH,FILECACHE) SELECT COUNT(*) FROM pgbench_accoun
 
 The `neon` extension is installed by default to a system-owned `postgres` database in each Neon project. The `postgres` database includes functions and views owned by the Neon system role (`cloud_admin`) that are used to collect statistics. This data helps the Neon team enhance the Neon service.
 
+**Views**:
+
+```sql
+postgres=> \dv
+                    List of relations
+ Schema |            Name            | Type |    Owner
+--------+----------------------------+------+-------------
+ public | local_cache                | view | cloud_admin
+ public | neon_backend_perf_counters | view | cloud_admin
+ public | neon_lfc_stats             | view | cloud_admin
+ public | neon_perf_counters         | view | cloud_admin
+ public | neon_stat_file_cache       | view | cloud_admin
+```
+
+**Functions**:
+
+```sql
+postgres=> \df
+                                                                          List of functions
+ Schema |                 Name                 | Result data type |                                    Argument data types                                    | Type
+--------+--------------------------------------+------------------+-------------------------------------------------------------------------------------------+------
+ public | approximate_working_set_size         | integer          | reset boolean                                                                             | func
+ public | approximate_working_set_size_seconds | integer          | duration integer DEFAULT NULL::integer                                                    | func
+ public | backpressure_lsns                    | record           | OUT received_lsn pg_lsn, OUT disk_consistent_lsn pg_lsn, OUT remote_consistent_lsn pg_lsn | func
+ public | backpressure_throttling_time         | bigint           |                                                                                           | func
+ public | get_backend_perf_counters            | SETOF record     |                                                                                           | func
+ public | get_perf_counters                    | SETOF record     |                                                                                           | func
+ public | local_cache_pages                    | SETOF record     |                                                                                           | func
+ public | neon_get_lfc_stats                   | SETOF record     |                                                                                           | func
+ public | pg_cluster_size                      | bigint           |                                                                                           | func
+```
+
 <NeedHelp/>
