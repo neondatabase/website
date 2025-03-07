@@ -120,12 +120,12 @@ WHERE path @> 'electronics.computers.laptops.gaming';
 This query returns:
 
 ```text
-| id | name       | path                                     |
-|----|------------|------------------------------------------|
-| 1  | Electronics| electronics                              |
-| 2  | Computers  | electronics.computers                    |
-| 3  | Laptops    | electronics.computers.laptops            |
-| 4  | Gaming Laptops | electronics.computers.laptops.gaming |
+| id | name           | path                                     |
+|----|----------------|------------------------------------------|
+| 1  | Electronics    | electronics                              |
+| 2  | Computers      | electronics.computers                    |
+| 3  | Laptops        | electronics.computers.laptops            |
+| 4  | Gaming Laptops | electronics.computers.laptops.gaming     |
 ```
 
 **Finding nodes at a specific level**
