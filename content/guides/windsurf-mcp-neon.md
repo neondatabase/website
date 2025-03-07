@@ -1,5 +1,5 @@
 ---
-title: 'Getting started with Windsurf and Neon Postgres MCP Server'
+title: 'Get started with Windsurf and Neon Postgres MCP Server'
 subtitle: 'Make schema changes with natural language using Codeium Windsurf and Neon MCP Server'
 author: dhanush-reddy
 enableTableOfContents: true

@@ -1,5 +1,5 @@
 ---
-title: 'AI-assisted database migrations with Cursor and Neon Postgres MCP Server'
+title: 'Get started with Cursor and Neon Postgres MCP Server'
 subtitle: 'Make schema changes with natural language using Cursor and Neon MCP Server'
 author: dhanush-reddy
 enableTableOfContents: true
