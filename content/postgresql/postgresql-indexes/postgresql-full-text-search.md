@@ -179,7 +179,7 @@ CREATE TABLE posts(
    title TEXT NOT NULL,
    body TEXT,
    body_search TSVECTOR
-      GENERATED ALWAYS AS (to_tsvector(body)) STORED
+      GENERATED ALWAYS AS (to_tsvector('english',body)) STORED
 );
 ```
 

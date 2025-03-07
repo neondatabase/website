@@ -6,7 +6,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-identity
 tag: beta
-updatedOn: '2025-02-19T17:45:09.013Z'
+updatedOn: '2025-02-28T20:32:00.521Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth" />
@@ -144,6 +144,72 @@ Neon Auth offers two ways to connect your authentication provider:
    - Provide your Stack Auth project details during setup
 
 Choose your setup option in the Neon Console under the **Auth** page.
+
+<Admonition type="note">
+Only [organization admins](/docs/manage/organizations#user-roles-and-permissions) can install or remove Neon Auth. Organization members and [project collaborators](/docs/guides/project-collaboration-guide) do not have permission to modify Neon Auth settings.
+</Admonition>
+
+## Transfer ownership
+
+When you create a Neon Auth integration using the **Quick Start** option from the **Auth** page (or using the [Create integration API](/docs/guides/neon-auth-api#create-integration)), Neon manages the auth project for you.
+
+<Tabs labels={["Neon Console", "API"]}>
+
+<TabItem>
+
+You can claim ownership of the project to your own Stack Auth account by clicking **Transfer ownership** in the **Auth** page.
+
+![The Transfer ownership button appears when your integration is Neon managed](/docs/guides/auth-transfer-ownership.png)
+
+This opens a transfer confirmation page where you can select which Stack Auth account should receive ownership of the project. After confirming the transfer, you'll have direct access to manage your project in the Stack Auth dashboard while maintaining the integration with your Neon database.
+
+</TabItem>
+
+<TabItem>
+
+Request a transfer URL using the transfer ownership endpoint:
+
+```bash shouldWrap
+curl --request POST \
+     --url 'https://console.neon.tech/api/v2/projects/auth/transfer_ownership' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --data '{
+       "project_id": "project-id",
+       "auth_provider": "stack"
+     }'
+```
+
+Then open the returned URL in a browser to complete the transfer. See [Transfer ownership using the API](/docs/guides/neon-auth-api#transfer-to-your-auth-provider-optional) for details.
+
+</TabItem>
+</Tabs>
+
+<Admonition type="note">
+After transfer, you'll still be able to access your project from the Neon Console, but you'll also have direct access from the Stack Auth dashboard.
+</Admonition>
+
+## Creating users
+
+You can create new users directly from the Neon Console, whether you're using a Neon-managed auth project or your own auth provider. This can be useful during development and testing.
+
+![Create user in Neon Auth](/docs/guides/neon_auth_create_user.png)
+
+The user will be created in your `neon_auth.users_sync` table and automatically propagated to your auth project (Neon-managed or provider-owned).
+
+You can also create users from the API. See the next section for details.
+
+## Using the API
+
+You can manage your Neon Auth integration programmatically using the API. This includes creating integrations, managing users, and transferring ownership.
+
+Key operations:
+
+- Create or remove a Neon-managed auth integration
+- Generate SDK keys for your integration
+- Create users in your auth provider
+- Transfer ownership to your auth provider
+
+See [Manage Neon Auth using the API](/docs/guides/neon-auth-api) for more information.
 
 ## Best practices
 

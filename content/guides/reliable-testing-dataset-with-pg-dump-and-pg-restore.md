@@ -40,7 +40,7 @@ name: Dump Test Data
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Runs at midnight ET (us-east-1)
+    - cron: '0 0 * * *' # Runs at midnight UTC
   workflow_dispatch:
 
 env:
@@ -158,7 +158,7 @@ Add the following code after the **Set PostgreSQL binary path** step.
 name: Dump Test Data
 on:
   schedule:
-    - cron: '0 0 * * *' # Runs at midnight ET (us-east-1)
+    - cron: '0 0 * * *' # Runs at midnight UTC
   workflow_dispatch:
 env:
   PROD_DATABASE_URL: ${{ secrets.PROD_DATABASE_URL }} # Production or staging database

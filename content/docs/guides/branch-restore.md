@@ -7,7 +7,7 @@ redirectFrom:
   - /docs/guides/branching-pitr
   - /docs/guides/branch-refresh
   - /docs/guides/branch-promote
-updatedOn: '2024-10-22T15:41:04.374Z'
+updatedOn: '2025-02-28T11:10:41.825Z'
 ---
 
 With Neon's branch restore capability, you can easily restore a branch to an earlier state in its own or another branch's history. You can use Time Travel Assist to connect to a specific point in your history retention window, where you can run read-only queries to pinpoint the exact moment you need to restore to. You can also use Schema Diff to get a side-by-side, GitHub-style visual comparison of your selected branches before restoring.
@@ -267,7 +267,7 @@ There are minimal impacts to billing from the branch restore and Time Travel Ass
 
 ## Limitations
 
-- Deleting backup branches is currently only supported for Early Access users, and it's only supported for backups created by restore operations on root branches. See [Deleting backup branches](#deleting-backup-branches) for details.
+- Deleting backup branches is only supported for backups created by restore operations on root branches. See [Deleting backup branches](#deleting-backup-branches) for details.
 - [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent) restores from the parent branch, which may be a backup branch if you performed a restore operation on the parent branch.
 
   For example, let's say you have a `main` branch with a child development branch `dev/alex`. You are working on `dev/alex` and decide to restore to an earlier point in time to fix something during development. At this point, `dev/alex`'s parent switches from `main` to the backup `dev/alex_old_timestamp`. A day later, you want to refresh `dev/alex` with the latest data from `main`. You can't use **Reset from parent**, since the backup is now the parent. Instead, use **Branch Restore** and select the original parent `main` as the source.

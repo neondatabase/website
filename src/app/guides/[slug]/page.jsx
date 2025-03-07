@@ -38,6 +38,7 @@ export async function generateMetadata({ params }) {
     pathname: `${LINKS.guides}/${slug}`,
     rssPathname: null,
     type: 'article',
+    category: 'Guides',
     authors: [author.name],
   });
 }

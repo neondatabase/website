@@ -1,158 +1,101 @@
 'use client';
 
-import { DocSearchButton, DocSearchModal, useDocSearchKeyboardEvents } from '@docsearch/react';
-import clsx from 'clsx';
-import { useRouter } from 'next/navigation';
+import { liteClient as algoliasearch } from 'algoliasearch/lite';
 import PropTypes from 'prop-types';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
+import { useEffect, useState } from 'react';
+import { InstantSearchNext } from 'react-instantsearch-nextjs';
 
-import Link from 'components/shared/link';
 import debounce from 'utils/debounce';
 
-const Hit = ({ hit, children }) => (
-  <Link
-    className={clsx({
-      'DocSearch-Hit--Result': hit.__is_result?.(),
-      'DocSearch-Hit--Parent': hit.__is_parent?.(),
-      'DocSearch-Hit--FirstChild': hit.__is_first?.(),
-      'DocSearch-Hit--LastChild': hit.__is_last?.(),
-      'DocSearch-Hit--Child': hit.__is_child?.(),
-    })}
-    to={hit.url}
-  >
-    {children}
-  </Link>
+import SearchInput from './search-input';
+import SearchResults from './search-results';
+
+const searchClient = algoliasearch(
+  process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
+  process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY
 );
 
-Hit.propTypes = {
-  hit: PropTypes.shape({
-    __is_result: PropTypes.func,
-    __is_parent: PropTypes.func,
-    __is_first: PropTypes.func,
-    __is_last: PropTypes.func,
-    __is_child: PropTypes.func,
-    url: PropTypes.string,
-  }).isRequired,
-  children: PropTypes.node.isRequired,
-};
+const debouncedSetUiState = debounce((uiState, setUiState) => setUiState(uiState), 100);
 
-const AlgoliaSearch = ({ className = null, isBlog = false, indexName }) => {
-  const router = useRouter();
-  const searchButtonRef = useRef(null);
-  const [isOpen, setIsOpen] = useState(false);
-  const [initialQuery, setInitialQuery] = useState(null);
+const AlgoliaSearch = ({ indexName, children, posts, searchInputClassName }) => {
+  const [mounted, setMounted] = useState(false);
 
-  const onOpen = useCallback(() => {
-    setIsOpen(true);
-  }, []);
+  useEffect(() => setMounted(true), []);
 
-  const onClose = useCallback(() => {
-    setIsOpen(false);
-  }, [setIsOpen]);
+  const onStateChange = ({ uiState, setUiState }) => {
+    const { [indexName]: { query } = {} } = uiState;
 
-  const onInput = useCallback(
-    (event) => {
-      setIsOpen(true);
-      setInitialQuery(event.key);
-    },
-    [setIsOpen, setInitialQuery]
-  );
-
-  useDocSearchKeyboardEvents({
-    isOpen,
-    onOpen,
-    onClose,
-    onInput,
-    searchButtonRef,
-  });
-
-  // @NOTE: this is a workaround to prevent scroll to the page bottom when closing search modal in Safari
-  // https://github.com/algolia/docsearch/issues/1260#issuecomment-1011939736
-  useEffect(() => {
-    let div = document.querySelector('.fixed[data-docsearch-fixed]');
-
-    if (!div) {
-      div = document.createElement('div');
-      div.classList.add('fixed');
-      div.setAttribute('data-docsearch-fixed', '');
-      div.innerHTML = '<input type="text" aria-label="hidden">';
-      document.body.appendChild(div);
+    if (!query) {
+      debouncedSetUiState.cancel();
+      setUiState({});
+      return;
     }
-  }, []);
+
+    debouncedSetUiState(uiState, setUiState);
+  };
+
+  if (!mounted)
+    return (
+      <>
+        <SearchInput className={searchInputClassName} asPlaceholder />
+        {children}
+      </>
+    );
 
   return (
-    <div className={clsx('relative flex items-center justify-between', className)}>
-      <DocSearchButton
-        ref={searchButtonRef}
-        aria-label="Open search with CTRL+K or Command+K"
-        onClick={onOpen}
-      />
-      {isOpen &&
-        createPortal(
-          <div className={clsx({ dark: isBlog })}>
-            <DocSearchModal
-              initialQuery={initialQuery}
-              initialScrollY={window.scrollY}
-              navigator={{
-                navigate({ itemUrl }) {
-                  setIsOpen(false);
-                  router.push(itemUrl);
-                },
-              }}
-              appId={process.env.NEXT_PUBLIC_ALGOLIA_APP_ID}
-              apiKey={process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY}
-              indexName={indexName}
-              placeholder="Search..."
-              transformSearchClient={(searchClient) => ({
-                ...searchClient,
-                search: debounce(searchClient.search, 500),
-              })}
-              hitComponent={Hit}
-              transformItems={(items) =>
-                items.map((item, index) => {
-                  // We transform the absolute URL into a relative URL to leverage next/link prefetch.
-                  const a = document.createElement('a');
-                  a.href = item.url;
+    <InstantSearchNext
+      indexName={indexName}
+      searchClient={searchClient}
+      routing={{
+        // customize search urls to ?query=... format
+        router: {
+          createURL: ({ qsModule, routeState, location }) => {
+            const { pathname } = location;
+            const basePath = pathname.split('/')[1];
+            const queryParameters = {};
 
-                  if (item.hierarchy?.lvl0) {
-                    item.hierarchy.lvl0 = item.hierarchy.lvl0.replace(/&amp;/g, '&');
-                  }
+            if (routeState.query) {
+              queryParameters.query = encodeURIComponent(routeState.query);
+            }
 
-                  if (item._highlightResult?.hierarchy?.lvl0?.value) {
-                    item._highlightResult.hierarchy.lvl0.value =
-                      item._highlightResult.hierarchy.lvl0.value.replace(/&amp;/g, '&');
-                  }
+            const queryString = qsModule.stringify(queryParameters, {
+              addQueryPrefix: true,
+              arrayFormat: 'repeat',
+            });
 
-                  return {
-                    ...item,
-                    url: `${a.pathname}${a.hash}`,
-                    __is_result: () => true,
-                    __is_parent: () => item.type === 'lvl1' && items.length > 1 && index === 0,
-                    __is_child: () =>
-                      item.type !== 'lvl1' &&
-                      items.length > 1 &&
-                      items[0].type === 'lvl1' &&
-                      index !== 0,
-                    __is_first: () => index === 1,
-                    __is_last: () => index === items.length - 1 && index !== 0,
-                  };
-                })
-              }
-              insights
-              onClose={onClose}
-            />
-          </div>,
-          document.body
-        )}
-    </div>
+            return `/${basePath}${queryString}`;
+          },
+          parseURL: ({ qsModule, location }) => {
+            const { query = '' } = qsModule.parse(location.search.slice(1));
+            return { query: decodeURIComponent(query) };
+          },
+        },
+        stateMapping: {
+          stateToRoute(uiState) {
+            const indexUiState = uiState[indexName] || {};
+            return { query: indexUiState.query };
+          },
+
+          routeToState(routeState) {
+            return { [indexName]: { query: routeState.query } };
+          },
+        },
+      }}
+      onStateChange={onStateChange}
+    >
+      <SearchInput className={searchInputClassName} />
+      <SearchResults posts={posts} indexName={indexName}>
+        {children}
+      </SearchResults>
+    </InstantSearchNext>
   );
 };
 
 AlgoliaSearch.propTypes = {
-  className: PropTypes.string,
-  isBlog: PropTypes.bool,
   indexName: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+  posts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  searchInputClassName: PropTypes.string,
 };
 
 export default AlgoliaSearch;

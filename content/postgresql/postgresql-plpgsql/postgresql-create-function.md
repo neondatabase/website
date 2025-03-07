@@ -91,7 +91,7 @@ In the function body:
 
 - Use the [dollar\-quoted string constant syntax](dollar-quoted-string-constants) that starts with `$$` and ends with `$$`. Between these `$$`, you can place a [block](plpgsql-block-structure) containing the declaration and logic of the function.
 - In the declaration section, declare a variable `film_count` that stores the number of films from the `film` table.
-- In the body of the block, use the [`select into`](https://neon.tech/postgresql/plpgsql-select-into/) statement to select the number of films whose lengths are between `len_from` and `len_to` and assign it to the `film_count` variable. At the end of the block, use the `return` statement to return the `film_count`.
+- In the body of the block, use the [`select into`](https://neon.tech/postgresql/postgresql-plpgsql/pl-pgsql-select-into/) statement to select the number of films whose lengths are between `len_from` and `len_to` and assign it to the `film_count` variable. At the end of the block, use the `return` statement to return the `film_count`.
 
 To execute the create function statement, you can use any PostgreSQL client tool including psql and pgAdmin
 
@@ -174,7 +174,7 @@ If the function has many parameters, you should call it using the named notation
 
 ### 2\) Using named notation
 
-The following shows how to call the `get_film_count` function using the positional notation:
+The following shows how to call the `get_film_count` function using the named notation:
 
 ```sql
 select get_film_count(

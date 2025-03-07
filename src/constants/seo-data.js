@@ -27,6 +27,11 @@ export default {
     imagePath: '/images/social-previews/blog.jpg',
     pathname: LINKS.blog,
   },
+  guides: {
+    title: 'Guides — Neon',
+    description: 'Learn how to use Neon with our guides.',
+    pathname: LINKS.guides,
+  },
   branching: {
     title: 'Instant branching for Postgres — Neon',
     description:
@@ -91,6 +96,13 @@ export default {
       'Switch to Neon for improved scalability, reliability, and engineering efficiency. For developers and AI Agents.',
     pathname: LINKS.enterprise,
     imagePath: '/images/social-previews/enterprise.jpg',
+  },
+  serverlessApps: {
+    title: 'Postgres for serverless apps — Neon',
+    description:
+      'Scale your app effortlessly with Neon’s serverless Postgres. With automatic scaling, pooler built on pgBouncer, and usage-based pricing.',
+    pathname: `${LINKS.useCases}/serverless-apps`,
+    imagePath: '/images/social-previews/serverless-apps.jpg',
   },
   generateTicket: {
     title: 'Grab the ticket for Neon Deploy',
