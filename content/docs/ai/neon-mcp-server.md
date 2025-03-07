@@ -8,9 +8,9 @@ updatedOn: '2025-03-07T21:44:32.256Z'
 
 The **Neon MCP Server** is an open-source tool that lets you interact with your Neon Postgres databases in **natural language**.
 
-Imagine you want to create a new database. Instead of using the Neon Console or API, you could just type a request like, "Create a database named 'my-new-database'".  Or, to see your projects, you might ask, "List all my Neon projects".  The Neon MCP Server makes this possible.
+Imagine you want to create a new database. Instead of using the Neon Console or API, you could just type a request like, "Create a database named 'my-new-database'". Or, to see your projects, you might ask, "List all my Neon projects". The Neon MCP Server makes this possible.
 
-It works by acting as a bridge between natural language requests and the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).  Built upon the [Model Context Protocol (MCP)](https://modelcontextprotocol.org), it translates your requests into the necessary Neon API calls, allowing you to manage everything from creating projects and branches to running queries and performing database migrations.
+It works by acting as a bridge between natural language requests and the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Built upon the [Model Context Protocol (MCP)](https://modelcontextprotocol.org), it translates your requests into the necessary Neon API calls, allowing you to manage everything from creating projects and branches to running queries and performing database migrations.
 
 ## Understanding MCP and Neon MCP Server
 
@@ -26,7 +26,7 @@ Traditionally, connecting AI models to different data sources required developer
 
 ### What is Neon MCP server?
 
-**Neon MCP Server** acts as the **Server** in the MCP architecture, specifically designed for Neon. It provides a set of **tools** that MCP Clients (like Claude Desktop, Cursor) can utilize to manage Neon resources.  This includes actions for project management, branch management, executing SQL queries, and handling database migrations, all driven by natural language requests.
+**Neon MCP Server** acts as the **Server** in the MCP architecture, specifically designed for Neon. It provides a set of **tools** that MCP Clients (like Claude Desktop, Cursor) can utilize to manage Neon resources. This includes actions for project management, branch management, executing SQL queries, and handling database migrations, all driven by natural language requests.
 
 **Key Benefits of using Neon MCP Server:**
 
@@ -47,7 +47,7 @@ You can install the Neon MCP Server using either `npm` or `smithery`.
 ### Prerequisites
 
 - **Node.js (>= v18.0.0):** Ensure Node.js version 18 or higher is installed on your system. You can download it from [nodejs.org](https://nodejs.org/).
-- **Neon API Key:**  You will need a Neon API key to authenticate the Neon MCP Server with your Neon account. You can create one from the [Neon Console](https://console.neon.tech/app/settings/api-keys) under your Profile settings. Refer to the [Neon documentation on API Keys](/docs/manage/api-keys#creating-api-keys) for detailed instructions.
+- **Neon API Key:** You will need a Neon API key to authenticate the Neon MCP Server with your Neon account. You can create one from the [Neon Console](https://console.neon.tech/app/settings/api-keys) under your Profile settings. Refer to the [Neon documentation on API Keys](/docs/manage/api-keys#creating-api-keys) for detailed instructions.
 
 <Admonition type="note">
 We recommend using Smithery for installation, as it streamlines the process and guarantees compatibility across MCP clients. Note that only Claude Desktop is automatically configured with the Neon MCP Server when installed via npm. For manual configuration of [Cursor](/guides/cursor-mcp-neon), [Cline](/guides/cline-mcp-neon) and [Windsurf](/guides/windsurf-mcp-neon), please refer to our detailed guides.
@@ -84,7 +84,7 @@ We recommend using Smithery for installation, as it streamlines the process and 
     ✔ Successfully resolved neon
     Installing remote server. Please ensure you trust the server author, especially when sharing sensitive data.
     For information on Smithery's data policy, please visit: https://smithery.ai/docs/data-policy
-    ? The API key for accessing the Neon. You can generate one through the Neon console. (required) 
+    ? The API key for accessing the Neon. You can generate one through the Neon console. (required)
     *********************************************************************
     neon successfully installed for claude
     ```
@@ -99,8 +99,9 @@ We recommend using Smithery for installation, as it streamlines the process and 
     ```bash
     npx @neondatabase/mcp-server-neon init $NEON_API_KEY
     ```
+
     Replace `$NEON_API_KEY` with your actual Neon API key.
-    
+
 3.  Restart Claude Desktop.
 
 ## Supported Actions (Tools)
@@ -116,7 +117,7 @@ The Neon MCP Server provides the following actions, which are exposed as "tools"
 
 **Branch Management:**
 
-- **`create_branch`**: Creates a new branch within a specified Neon project.  Leverages [Neon's branching](/docs/introduction/branching) feature for development, testing, or migrations.
+- **`create_branch`**: Creates a new branch within a specified Neon project. Leverages [Neon's branching](/docs/introduction/branching) feature for development, testing, or migrations.
 - **`delete_branch`**: Deletes an existing branch from a Neon project.
 - **`describe_branch`**: Retrieves details about a specific branch, such as its name, ID, and parent branch.
 
@@ -130,7 +131,7 @@ The Neon MCP Server provides the following actions, which are exposed as "tools"
 
 **Database Migrations (Schema Changes):**
 
-- **`prepare_database_migration`**: Initiates a database migration process.  Critically, it creates a temporary branch to apply and test the migration safely before affecting the main branch.
+- **`prepare_database_migration`**: Initiates a database migration process. Critically, it creates a temporary branch to apply and test the migration safely before affecting the main branch.
 - **`complete_database_migration`**: Finalizes and applies a prepared database migration to the main branch. This action merges changes from the temporary migration branch and cleans up temporary resources.
 
 ## Usage examples
@@ -139,7 +140,7 @@ After installing and configuring the Neon MCP Server with your chosen MCP client
 
 **Example interactions**
 
-- **List projects:**  `"List my Neon projects"`
+- **List projects:** `"List my Neon projects"`
 - **Create a new project:** `"Create a Neon project named 'my-test-project'"`
 - **List tables in a database:** `"What tables are in the database 'my-database' in project 'my-project'?"`
 - **Add a column to a table:** `"Add a column 'email' of type VARCHAR to the 'users' table in database 'main' of project 'my-project'"`

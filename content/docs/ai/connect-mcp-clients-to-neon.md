@@ -37,6 +37,7 @@ The following sections detail the steps to connect each MCP client to the Neon M
     ```bash
     npx -y @smithery/cli install neon --client claude
     ```
+
     Enter your Neon API key when prompted.
 
 3.  Restart Claude Desktop.
@@ -53,18 +54,18 @@ Here's an example of using Neon MCP Server with Claude Desktop:
 2. Navigate to Features -> MCP Servers.
 3. Click "+ Add new MCP server".
 4. In the "Add MCP Server" modal:
-    - **Name:** `Neon` (or any descriptive name)
-    - Choose `command` for type
-    - **Command:** 
-        ```bash
-        npx -y @neondatabase/mcp-server-neon start <YOUR_NEON_API_KEY>` 
-        ```
-        (Replace `<YOUR_NEON_API_KEY>` with your Neon API key)
-    - Click **Add**.
+   - **Name:** `Neon` (or any descriptive name)
+   - Choose `command` for type
+   - **Command:**
+     ```bash
+     npx -y @neondatabase/mcp-server-neon start <YOUR_NEON_API_KEY>`
+     ```
+     (Replace `<YOUR_NEON_API_KEY>` with your Neon API key)
+   - Click **Add**.
 
 Here's an example of using Neon MCP Server with Cursor:
 <video autoPlay playsInline muted loop width="800" height="600" controls>
-    <source type="video/mp4" src="/videos/pages/doc/cursor-neon-mcp.mp4"/>
+<source type="video/mp4" src="/videos/pages/doc/cursor-neon-mcp.mp4"/>
 </video>
 
 ### Windsurf (Codeium)
@@ -72,26 +73,28 @@ Here's an example of using Neon MCP Server with Cursor:
 1. Open your terminal.
 2. Run the following command:
 
-    ```bash
-    npx -y @smithery/cli install neon --client windsurf
-    ```
-    Enter your Neon API key when prompted.
+   ```bash
+   npx -y @smithery/cli install neon --client windsurf
+   ```
 
-3.  You can also manually configure Windsurf by editing the `mcp_config.json` file by adding the following within the `mcpServers` section at `~/.codeium/windsurf/mcp_config.json`:
+   Enter your Neon API key when prompted.
 
-    ```json
-    "neon": {
-      "command": "npx",
-      "args": ["-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
-    }
-    ```
-    Replace `<YOUR_NEON_API_KEY>` with your Neon API key.
+3. You can also manually configure Windsurf by editing the `mcp_config.json` file by adding the following within the `mcpServers` section at `~/.codeium/windsurf/mcp_config.json`:
+
+   ```json
+   "neon": {
+     "command": "npx",
+     "args": ["-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+   }
+   ```
+
+   Replace `<YOUR_NEON_API_KEY>` with your Neon API key.
 
 4. Click the **Refresh** button in Cascade to load the new MCP server.
 
 Here's an example of using Neon MCP Server with Windsurf:
 <video autoPlay playsInline muted loop width="800" height="600" controls>
-    <source type="video/mp4" src="/videos/pages/doc/windsurf-neon-mcp.mp4"/>
+<source type="video/mp4" src="/videos/pages/doc/windsurf-neon-mcp.mp4"/>
 </video>
 
 ### Cline (VS Code Extension)
@@ -111,7 +114,7 @@ Here's an example of using Neon MCP Server with Windsurf:
 
 Here's an example of using Neon MCP Server with Cline:
 <video autoPlay playsInline muted loop width="800" height="600" controls>
-    <source type="video/mp4" src="/videos/pages/doc/cline-neon-mcp.mp4"/>
+<source type="video/mp4" src="/videos/pages/doc/cline-neon-mcp.mp4"/>
 </video>
 
 ### Any other MCP client
@@ -128,7 +131,6 @@ Replace `<client_name>` with the name of your MCP client application. Supported 
 - `witsy` for [Witsy](https://witsyai.com/)
 - `enconvo` for [Enconvo](https://www.enconvo.com/)
 
-
 For MCP clients not listed here, you can manually configure them by adding the following Neon MCP Server configuration to their respective `mcp_config` file within the `mcpServers` section:
 
 ```json
@@ -137,6 +139,7 @@ For MCP clients not listed here, you can manually configure them by adding the f
   "args": ["-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
 }
 ```
+
 Replace `<YOUR_NEON_API_KEY>` with your Neon API key.
 
 <Admonition type="note">
