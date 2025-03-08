@@ -32,7 +32,7 @@ If you use the `DISTINCT` option, the `SUM()` function calculates the sum of onl
 
 For example, without the `DISTINCT` option, the `SUM()` of 1, 1, and 2 will return 4\. But the sum of distinct values of 1, 1, and 2 will return 3 (1 \+ 2\) because the `SUM()` function ignores one duplicate value (1\).
 
-The `SUM()` of an empty set will return `NULL`, not zero.
+The `SUM()` of an empty set will return `NULL`, not zero.bhuvan
 
 ## PostgreSQL SUM() function examples
 
