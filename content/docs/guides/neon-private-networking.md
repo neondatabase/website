@@ -284,7 +284,7 @@ This managed feature is only available to Vercel Enterprise customers using [Sec
 ### Setup process
 
 1. Contact your Vercel account representative to initiate the setup
-2. Vercel will create a VPC endpoint in your Secure Compute VPC and provide you with the endpoint ID
+2. Vercel will create a VPC endpoint in your Secure Compute VPC and provide you with the VPC endpoint ID
 3. Follow steps 2-4 in the [Configuration steps](#configuration-steps) section above to:
    - Add the VPC Endpoint ID to your Neon organization
    - Check your database connection string
