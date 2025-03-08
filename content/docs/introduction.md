@@ -1,5 +1,5 @@
 ---
-title: Neon documentation
+title: Neon Docs
 updatedOn: '2025-02-24T15:53:13.360Z'
 ---
 
@@ -77,7 +77,7 @@ description="Manage your Neon Postgres databases directly from Cursor and other 
 
 </TechCards>
 
-## Explore the docs
+## Explore the Neon Docs
 
 <DetailIconCards>
 
