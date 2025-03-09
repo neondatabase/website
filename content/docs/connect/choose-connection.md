@@ -40,10 +40,6 @@ If you are using the serverless driver, you also need to choose whether to query
 
   If you require session or interactive transaction support or compatibility with [node-postgres](https://node-postgres.com/) (the popular **npm** `pg` package), use WebSockets. See [Use the driver over WebSockets](/docs/serverless/serverless-driver#use-the-driver-over-websockets).
 
-<Admonition type="note">
-We are working on automatic switching between HTTP and WebSocket as needed. Check our [roadmap](/docs/introduction/roadmap) to see what's coming soon and our Friday [Changelog](/docs/changelog) for the features-of-the-week.
-</Admonition>
-
 ### Next, choose your connection type: direct or pooled
 
 You then need to decide whether to use direct connections or pooled connections (using PgBouncer for Neon-side pooling):
@@ -57,7 +53,7 @@ You then need to decide whether to use direct connections or pooled connections 
   If your application is focused mainly on tasks like migrations or administrative operations that require stable and long-lived connections, use an unpooled connection.
 
 <Admonition type="note">
-Connection pooling is not a magic bullet. PgBouncer can keep many application connections open (up to 10,000) concurrently, but only a limited number of these can be actively querying the Postgres server at any given time. For example, 64 active backend connections (transactions between PgBouncer and Postgres) per user-database pair, as determined by the PgBouncer's `default_pool_size` setting, mean that Postgres user `alex` can hold up to 64 connections to a single database at one time.
+PgBouncer can keep many application connections open (up to 10,000) concurrently, but only a certain number of these can be actively querying the Postgres server at any given time. This number is defined by the PgBouncer `default_pool_size` setting. See [Neon PgBouncer configuration settings](/docs/connect/connection-pooling#neon-pgbouncer-configuration-settings) for details.
 </Admonition>
 
 For more information on these choices, see:
