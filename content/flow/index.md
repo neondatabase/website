@@ -56,6 +56,8 @@ author={{
   }}
 />
 
+<CTA title="Get $100 in credits" description="Sign up now and get $100 in credits when you upgrade." buttonText="Claim offer" buttonUrl="https://fyi.neon.tech/credits" />
+
 ## Examples of database branching workflows you can implement
 
 The concept of database branching is new, and it takes a while to get used to. To help you visualize how it can be achieved in practice, we’ll cover three initial workflows:
