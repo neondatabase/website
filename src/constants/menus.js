@@ -368,7 +368,8 @@ export default {
         {
           text: 'HIPAA',
           description: 'In progress',
-          icon: 'wip-icon',
+          description: 'Compliant',
+          icon: 'check-icon',
           to: LINKS.certHIPAA,
         },
         {
