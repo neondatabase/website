@@ -2,7 +2,7 @@
 title: Secure your data with Clerk and Neon RLS
 subtitle: Implement Row-level Security policies in Postgres using Clerk and Neon RLS
 enableTableOfContents: true
-updatedOn: '2025-03-06T15:24:01.898Z'
+updatedOn: '2025-03-10T18:26:02.765Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-clerk
   - /docs/guides/neon-authorize-clerk

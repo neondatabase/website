@@ -2,7 +2,7 @@
 title: Using Custom JWTs with Neon RLS
 subtitle: A step-by-step guide for using custom JWTs with Neon RLS
 enableTableOfContents: true
-updatedOn: '2025-03-06T15:24:01.898Z'
+updatedOn: '2025-03-10T18:26:02.765Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-custom-jwt
   - /docs/guides/neon-authorize-custom-jwt
