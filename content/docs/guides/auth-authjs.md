@@ -189,7 +189,7 @@ CREATE TABLE IF NOT EXISTS sessions (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS verification_tokens (
+CREATE TABLE IF NOT EXISTS verification_token (
   identifier TEXT,
   token TEXT,
   expires TIMESTAMPTZ NOT NULL,
