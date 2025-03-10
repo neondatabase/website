@@ -1,5 +1,5 @@
 ---
-title: 'Get started with Neon MCP server and Claude Desktop'
+title: 'Get started with Claude Desktop and Neon MCP Server'
 subtitle: 'Enable natural language interaction with your Neon Postgres databases using LLMs'
 author: dhanush-reddy
 enableTableOfContents: true
