@@ -152,8 +152,8 @@ IP Allow List
 SOC 2 Type 2 Compliant
 : Neon has been SOC 2 Type 2 Compliant since Dec 2, 2023. View full compliance details in the [Trust Center](https://trust.neon.tech/).
 
-HIPAA compliance in-progress
-: Neon is actively pursuing attaining HIPAA compliance. [Contact our team](/contact-sales) to get notified of updates.
+HIPAA Compliant
+: Neon is HIPAA compliant. For more information about our compliance certifications, visit our [Trust Center](https://trust.neon.tech/).
 
 </DefinitionList>
 
