@@ -30,7 +30,7 @@ This issue typically occurs when:
 
 1. **JWKS URL not configured or incorrect**
 
-   You did not add the JWKS URL in the RLS Authorize settings, or the configured JWKS URL is not returning the key associated with the `kid` field in your JWT.
+   You did not add the JWKS URL in the RLS settings, or the configured JWKS URL is not returning the key associated with the `kid` field in your JWT.
 
 2. **JWT and JWKS mismatch**
 

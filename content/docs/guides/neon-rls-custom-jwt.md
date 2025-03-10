@@ -167,7 +167,7 @@ This makes the public key available at `https://your-app.com/.well-known/jwks.js
 
 ### Add JWKS url to Neon RLS
 
-1. Go to the **Neon Console**, navigate to **Settings** > **RLS Authorize**.
+1. Go to the **Neon Console**, navigate to **Settings** > **RLS**.
 2. Click **Add Provider**.
 3. Set the **JWKS URL** to your endpoint (e.g., `https://your-app.com/.well-known/jwks.json`).
    ![Custom JWT JWKS url in Neon](/docs/guides/custom_jwt_jwks_url_in_neon.png)

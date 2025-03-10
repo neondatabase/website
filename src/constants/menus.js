@@ -94,7 +94,7 @@ export default {
             {
               icon: PrivacyIcon,
               iconGradient: PrivacyGradientIcon,
-              title: 'RLS Authorize',
+              title: 'RLS',
               description: 'RLS made simple',
               to: LINKS.rlsAuthorize,
             },
