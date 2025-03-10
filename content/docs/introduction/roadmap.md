@@ -41,6 +41,7 @@ And here's a quick list of what we'll be taking on in the near future:
 - **More Auth provider support for Neon Auth**: This feature lets you sync user profiles from your auth provider to your database automatically. See [Neon Auth](/docs/guides/neon-identity) for details.
 
 ## What we've shipped recently 🚢
+
 - **HIPAA compliance**: We have achieved HIPAA compliance. Learn more about Neon's compliance milestones on our [Compliance page](/docs/security/compliance).
 
 - **Scheduled updates**: Business plan users can now check for update notices and choose preferred update windows for Postgres updates, security patches, and Neon feature enhancements.
