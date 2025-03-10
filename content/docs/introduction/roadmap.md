@@ -16,7 +16,7 @@ Our development teams are focused on helping you ship faster with Postgres. This
 Here's a snapshot of what we're working on now:
 
 - **Data anonymization**: We're simplifying PII data anonymization to make Neon an ideal staging environment for your team's app development.
-- **HIPAA compliance**: We are working toward HIPAA readiness, targeting completion by the end of Q2 2025. Learn more about Neon's compliance milestones on our [Compliance page](/docs/security/compliance).
+
 - **Improved migration assistance**: The [Import Data Assistant](/docs/import/import-data-assistant) was introduced in Q4 2024. More improvements are coming in 2025 to make data import easier and faster.
 - **Support for the [pg_search](https://github.com/paradedb/paradedb/tree/dev/pg_search) extension**: This extension enables full text search over heap tables.
 - **Backup & restore**: We'll start with scheduled snapshots with instant point-in-time recovery, eventually expanding this feature with more traditional automated backup capabilities.
@@ -41,6 +41,7 @@ And here's a quick list of what we'll be taking on in the near future:
 - **More Auth provider support for Neon Auth**: This feature lets you sync user profiles from your auth provider to your database automatically. See [Neon Auth](/docs/guides/neon-identity) for details.
 
 ## What we've shipped recently 🚢
+- **HIPAA compliance**: We have achieved HIPAA compliance. Learn more about Neon's compliance milestones on our [Compliance page](/docs/security/compliance).
 
 - **Scheduled updates**: Business plan users can now check for update notices and choose preferred update windows for Postgres updates, security patches, and Neon feature enhancements.
 - **AWS São Paulo region**: Create projects in São Paulo (sa-east-1) for lower latency access from the South America and data residency within Brazil.
