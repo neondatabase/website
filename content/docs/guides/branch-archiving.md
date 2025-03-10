@@ -45,7 +45,7 @@ If your Neon project was inactive for more than a week before the introduction o
 
 Connecting to an archived branch, querying it, or performing some other action that accesses it will trigger the unarchive process. Branches with large amounts of data may experience slightly slower connection and query times while a branch is being unarchived.
 
-<Admonition type="note" title"cost implications">
+<Admonition type="note" title="cost implications">
 When you unarchive a branch, its data is brought back into regular Neon storage and will remain there until the branch once again meets the criteria for archiving. [Neon plans](/docs/introduction/plans) have a **monthly storage allowance** and a **monthly archive storage allowance**. If you exceed either of these allowances, there is a per-GB cost. Archive storage is cheaper than regular storage.
 </Admonition>
 
