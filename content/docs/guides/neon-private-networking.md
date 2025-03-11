@@ -108,10 +108,6 @@ To configure Neon Private Networking, perform the following steps:
 
     Optionally, you can limit access to a Neon project by allowing connections only from a specific VPC endpoint. For instructions, see [Assigning a VPC endpoint restrictions](#assigning-a-vpc-endpoint-restriction).
 
-      <Admonition type="note">
-        A removed VPC endpoint cannot be added back to the Neon organization.
-      </Admonition>
-
 ## Enable Private DNS
 
     After adding you VPC endpoint ID to your Neon organization, enable private DNS lookup for the VPC endpoint in AWS.
@@ -270,8 +266,12 @@ The Neon API provides endpoints for managing VPC endpoints and project-level VPC
 - [Assign or update a VPC endpoint restriction](https://api-docs.neon.tech/reference/assignprojectvpcendpoint)
 - [Delete a VPC endpoint restriction](https://api-docs.neon.tech/reference/deleteprojectvpcendpoint)
 
-## Limits
+## Private Networking limits
 
 The Private Networking feature supports a maximum of **10 private networking configurations per AWS region**. Supported AWS regions are listed [above](#create-an-aws-vpc-endpoint).
+
+## Limitations
+
+If you remove a VPC endpoint from a Neon organization, that VPC endpoint cannot be added back to the same Neon organization. Attempting to do so will result in an error. The workaround is to set up a new VPC endpoint.
 
 <NeedHelp />
