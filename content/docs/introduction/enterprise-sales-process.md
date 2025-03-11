@@ -1,11 +1,11 @@
 ---
 title: Neon Postgres sales process
 enableTableOfContents: true
-subtitle: A guide to working with the Neon sales team
+subtitle: A guide to Neon's Enterprise sales process
 updatedOn: '2024-12-01T21:48:07.693Z'
 ---
 
-Our goal at Neon is to make the sales process as easy and efficient as possible. Below, we've outlined what our typical process looks like so you'll know what to expect when you reach out to us. Depending on your needs, additional discussions and consultations may be required. We'll be happy to arrange those as needed.
+Our goal at Neon is to make the sales process as easy and efficient as possible. Below, we've outlined our typical process so you'll know what to expect when you contact us. Depending on your needs, additional discussions and consultations may be required. We'll be happy to arrange those as needed.
 
 <Steps>
 
@@ -13,9 +13,9 @@ Our goal at Neon is to make the sales process as easy and efficient as possible.
 
 Start by filling out our [contact form](https://neon.tech/contact-sales) to let us know how we can help. If you’re looking for specific plans or pricing, sharing details about your feature requirements and workload will get the ball rolling immediately and speed up the overall process.
 
-## Understanding your needs
+## Information gathering
 
-After contacting us, we'll reach out by email to gather more information about your requirements. We'll ask you for information about:
+After contacting us, we'll email you to gather more information about your requirements. We'll ask you for information about:
 
 - Your current database environment, such as the number of databases, regions, your application stack, and integrations with other tools, platforms, and services
 - Your workload, feature, and performance requirements
@@ -30,7 +30,7 @@ The `pg-prechecks` script provides a summary of a Postgres database server’s s
 
 These details help us understand your needs and prepare plan and pricing proposals.
 
-## Call with the Neon solutions team
+## Call with the Neon Solutions team
 
 If an Enterprise plan is a good fit for your use case, our solutions team will set up a call to discuss:
 
@@ -38,28 +38,35 @@ If an Enterprise plan is a good fit for your use case, our solutions team will s
 - Add-ons like support packages or custom requirements
 - Any other questions you might have
 
-Optionally, we can provide a demo or schedule a follow-up call if you’re interested in learning more about specific features.
+If you're interested in learning more about specific features, we can provide a demo or schedule a follow-up call.
 
-_Our solutions team is made up of experience technical staff who have worked through migrations with some of our largest customers._
+_Our solutions team is made up of experienced technical staff who have worked through many complex migrations with some of our largest customers._
 
 ## Pricing and migration proposal
 
-Based on our discussions, we’ll create a pricing proposal, often including a proof-of-concept migration plan. The proposal will be tailored using:
+We’ll create a pricing proposal based on our discussions, often including a proof-of-concept migration plan. The proposal will be tailored using the following:
 
 - Information from our initial conversation
 - Your environment details
 - Your workload, feature, and performance requirements
 
-We’ll send the pricing proposal and migration plan and arrange a follow-up call to go through the , answer any questions you may have, and set out timelines should you decide to move forward.
+We’ll send the pricing proposal and migration plan and arrange a follow-up call to discuss them, answer any questions you may have, and set out timelines should you decide to move forward.
 
-## Stakeholder collaboration
+## Additional details
+
+For complex setups, we may request more information, such as:
+
+- Specifics about your current environment
+- Usage and billing details from your current provider 
+
+## Stakeholder support
 
 At any time during the process, we’ll be happy to support your security team or other stakeholders by:
 
 - Answering security-related questions
 - Providing documentation
-- Participating in reviews as needed
+- Participating in security and compliance reviews as needed
 
 </Steps>
 
-We’ve laid out our typical process above, but we're flexible and ready to adjust the process to fit your specific needs. [Reach out to us](https://neon.tech/contact-sales) to get started.
+We’ve laid out our typical process above, but we're flexible and ready to adjust it to fit your specific needs. [Contact us](https://neon.tech/contact-sales) to get started.
