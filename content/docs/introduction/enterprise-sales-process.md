@@ -2,7 +2,7 @@
 title: Neon Enterprise Sales Process
 enableTableOfContents: true
 subtitle: A guide to Neon's Enterprise sales process
-updatedOn: '2024-12-01T21:48:07.693Z'
+updatedOn: '2025-03-11T12:53:58.440Z'
 ---
 
 Our goal at Neon is to make the sales process as easy and efficient as possible. Below, we've outlined our typical process so you'll know what to expect when you contact us. Depending on your needs, additional discussions and consultations may be required. We'll be happy to arrange those as needed.
