@@ -420,6 +420,8 @@
           slug: introduction/billing-aws-marketplace
         - title: Azure Marketplace
           slug: introduction/billing-azure-marketplace
+        - title: Enterprise sales process
+          slug: introduction/enterprise-sales-process
     - title: Neon on Azure
       slug: manage/azure
       icon: azure
