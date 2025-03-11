@@ -1,60 +1,34 @@
-/* eslint-disable react/prop-types */
+import { notFound } from 'next/navigation';
 
-import BlogHeader from 'components/pages/blog/blog-header';
 import GuideCard from 'components/pages/guides/guide-card';
-import Sidebar from 'components/pages/guides/sidebar';
-import Container from 'components/shared/container';
-import Layout from 'components/shared/layout';
+import AlgoliaSearch from 'components/shared/algolia-search';
 import { GUIDES_BASE_PATH } from 'constants/guides';
+import SEO_DATA from 'constants/seo-data';
 import { getAllGuides } from 'utils/api-guides';
 import getMetadata from 'utils/get-metadata';
 
-export async function generateMetadata() {
-  // TO-DO: Update real data here
-  return getMetadata({
-    title: 'Neon guides',
-    // description: '',
-    // type: '',
-    rssPathname: `${GUIDES_BASE_PATH}rss.xml`,
-  });
-}
+export const metadata = getMetadata({
+  ...SEO_DATA.guides,
+  rssPathname: `${GUIDES_BASE_PATH}rss.xml`,
+});
 
 const GuidesPage = async () => {
   const posts = await getAllGuides();
-  // TO-DO: Update text here
-  if (!posts) return <div className="text-18">No guides yet</div>;
+
+  if (!posts) return notFound();
 
   return (
-    <Layout headerWithBorder isHeaderSticky hasThemesSupport>
-      <div className="safe-paddings flex flex-1 flex-col dark:bg-black-pure dark:text-white lg:block">
-        <Container
-          className="grid w-full flex-1 grid-cols-12 gap-x-10 pb-20 pt-16 xl:gap-x-7 lg:block lg:gap-x-5 lg:pt-11 md:pt-10 sm:pt-8"
-          size="1344"
-        >
-          <Sidebar className="col-span-3 mt-[88px] pb-10 lt:col-span-3 lg:hidden" />
-          <div className="col-span-7 col-start-4 flex flex-col 2xl:col-span-7 2xl:mx-5 xl:col-span-9 xl:ml-11 xl:mr-0 xl:max-w-[750px] lg:mx-auto lg:pt-0">
-            <BlogHeader title="Guides" basePath={GUIDES_BASE_PATH} />
-            <ul>
-              {posts.map(({ title, subtitle, author, createdAt, updatedOn, slug }) => (
-                <li
-                  key={slug}
-                  className="border-b border-gray-new-15/20 pb-5 pt-6 first:pt-0 last:border-none last:pb-0 dark:border-gray-new-15/80"
-                >
-                  <GuideCard
-                    title={title}
-                    subtitle={subtitle}
-                    author={author}
-                    createdAt={createdAt}
-                    updatedOn={updatedOn}
-                    slug={slug}
-                  />
-                </li>
-              ))}
-            </ul>
-          </div>
-        </Container>
+    <AlgoliaSearch
+      indexName={process.env.NEXT_PUBLIC_ALGOLIA_GUIDES_INDEX_NAME}
+      posts={posts}
+      searchInputClassName="lg:top-0 md:relative md:mb-8"
+    >
+      <div className="guides">
+        {posts.map((post) => (
+          <GuideCard key={post.slug} {...post} />
+        ))}
       </div>
-    </Layout>
+    </AlgoliaSearch>
   );
 };
 

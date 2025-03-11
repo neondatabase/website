@@ -1,13 +1,9 @@
-import clsx from 'clsx';
-import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
 
 import BlogNavLink from 'components/pages/blog/blog-nav-link';
 import Socials from 'components/shared/socials/index';
 
-const AlgoliaSearch = dynamic(() => import('components/shared/algolia-search'));
-
-const Sidebar = ({ className, categories }) => {
+const Sidebar = ({ categories }) => {
   const allCategories = [
     {
       name: 'All posts',
@@ -16,23 +12,18 @@ const Sidebar = ({ className, categories }) => {
     ...categories,
   ];
   return (
-    <aside className={clsx('relative flex flex-col gap-y-10', className)}>
-      <div className="flex-1">
-        <nav className="no-scrollbars sticky top-24  lg:-mx-8 lg:flex lg:max-w-5xl lg:items-end lg:justify-between lg:overflow-auto lg:px-8 md:-mx-4 md:px-4">
-          <div className="flex gap-1.5 lg:hidden">
-            <AlgoliaSearch
-              className="w-full"
-              indexName={process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME}
-              isBlog
-            />
+    <aside className="relative z-10 mt-[88px] flex w-[206px] shrink-0 flex-col gap-y-10 xl:w-[202px] lg:top-[72px] lg:mb-10 lg:mt-0 lg:min-h-fit lg:w-full md:top-[120px] md:mb-8">
+      <div className="min-h-[calc(100vh-380px)] flex-1 lg:min-h-0">
+        <nav className="sticky top-24">
+          <div className="lg:no-scrollbars lg:-ml-8 lg:overflow-auto lg:pl-8 md:-mx-4 md:px-4">
+            <ul className="flex flex-col gap-y-2.5 lg:flex-row lg:gap-x-5 lg:after:shrink-0 lg:after:grow-0 lg:after:basis-px lg:after:content-['']">
+              {allCategories.map(({ name, slug }, index) => (
+                <li className="flex" key={index}>
+                  <BlogNavLink name={name} slug={slug} />
+                </li>
+              ))}
+            </ul>
           </div>
-          <ul className="mt-5 flex flex-col gap-y-2.5 lg:mt-0 lg:flex-row lg:gap-x-5 lg:after:shrink-0 lg:after:grow-0 lg:after:basis-px lg:after:content-['']">
-            {allCategories.map(({ name, slug }, index) => (
-              <li className="flex" key={index}>
-                <BlogNavLink name={name} slug={slug} />
-              </li>
-            ))}
-          </ul>
         </nav>
       </div>
       <div className="sticky bottom-0 -mb-10 mt-auto shrink-0 bg-black-pure pb-10 pt-5 leading-none lg:hidden">
@@ -45,7 +36,6 @@ const Sidebar = ({ className, categories }) => {
 export default Sidebar;
 
 Sidebar.propTypes = {
-  className: PropTypes.string,
   categories: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,

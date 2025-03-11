@@ -18,7 +18,6 @@ const AiChatPage = async () => {
     <Layout
       headerClassName="lg:border-none"
       docPageType="aiChat"
-      showSearchInput
       isDocPage
       isHeaderSticky
       headerWithBorder

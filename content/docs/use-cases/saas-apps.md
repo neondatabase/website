@@ -3,7 +3,7 @@ title: Neon for SaaS apps
 subtitle: Build SaaS apps faster on Neon with autoscaling, database branching, and the
   serverless operating model
 enableTableOfContents: true
-updatedOn: '2025-01-22T08:45:40.806Z'
+updatedOn: '2025-03-10T17:50:45.192Z'
 ---
 
 Teams are accelerating development workflows and reducing operational overhead with Neon’s database branching, autoscaling, and serverless operating model. Learn how you can do the same.
@@ -152,8 +152,8 @@ IP Allow List
 SOC 2 Type 2 Compliant
 : Neon has been SOC 2 Type 2 Compliant since Dec 2, 2023. View full compliance details in the [Trust Center](https://trust.neon.tech/).
 
-HIPAA compliance in-progress
-: Neon is actively pursuing attaining HIPAA compliance. [Contact our team](/contact-sales) to get notified of updates.
+HIPAA Compliant
+: Neon is HIPAA compliant. For more information about our compliance certifications, visit our [Trust Center](https://trust.neon.tech/).
 
 </DefinitionList>
 

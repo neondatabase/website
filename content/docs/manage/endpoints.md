@@ -2,7 +2,7 @@
 title: Manage computes
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-24T16:25:25.419Z'
+updatedOn: '2025-03-06T11:08:51.321Z'
 ---
 
 A compute is a virtualized service that runs applications. In Neon, a compute runs Postgres.
@@ -32,7 +32,7 @@ Compute details shown on the **Computes** tab include:
 
 - The type of compute, which can be **Primary** (read-write) or **Read Replica** (read-only).
 - The compute status, typically **Active** or **Idle**.
-- **Compute ID**: The compute ID, which always starts with an `ep-` prefix; for example: `ep-quiet-butterfly-w2qres1h`
+- **Compute ID**: The compute endpoints ID, which always starts with an `ep-` prefix; for example: `ep-quiet-butterfly-w2qres1h`
 - **Size**: The size of the compute. Shows autoscaling minimum and maximum vCPU values if autoscaling is enabled.
 - **Last active**: The date and time the compute was last active.
 

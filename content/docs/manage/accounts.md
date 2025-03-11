@@ -2,7 +2,7 @@
 title: Accounts
 subtitle: Find out which account type is right for you
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.074Z'
+updatedOn: '2025-03-07T12:50:26.778Z'
 ---
 
 Neon offers two account types for you to choose from:
@@ -57,6 +57,6 @@ Here's where to go in the Neon Console to complete these actions:
 | **Delete all projects**     | Go to the **Projects** page and manually [delete](/docs/manage/projects#delete-a-project) each project from **Settings → Delete**.                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | **Downgrade your account**  | Go to **Billing → Change plan** and select **Downgrade to Free plan**. <br/> ![downgrade to free plan](/docs/manage/downgrade_to_free.png)                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
-Once all conditions are met and all your checkmarks show green, you can safely deactivate your account. You'll get a confirmation email soon afterwards. If you change your mind, just log back in within 180 days to reactivate your account with your personal info intact. API keys, however, will not be restored.
+Once all conditions are met and all your checkmarks show green, you can safely deactivate your account. You'll get a confirmation email soon afterwards. If you change your mind, just log back in within 30 days to reactivate your account with your personal info intact. API keys, however, will not be restored.
 
-After 180 days, your account will be permanently removed.
+After 30 days, your account will be permanently removed.

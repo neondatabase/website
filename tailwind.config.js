@@ -222,6 +222,9 @@ module.exports = {
           'linear-gradient(100deg, rgba(33, 39, 58, 0.80) -6.09%, rgba(24, 25, 27, 0.80) 27.66%)',
         'azure-form-input-3':
           'linear-gradient(276deg, rgba(32, 48, 55, 0.80) 2.61%, rgba(24, 25, 27, 0.80) 32.96%)',
+        'serverless-apps-hero-border':
+          'linear-gradient(27deg, transparent 76%, #1B9A86 90%, #5AADBB),' +
+          'linear-gradient(0deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.10))',
         // for deploy page
         'color-picker-variant-1': 'linear-gradient(225deg, #4CFFFF 31.6%, #00E660 74.65%);',
         'color-picker-variant-2': 'linear-gradient(225deg, #BDF471 35.94%, #00CC33 100%);',

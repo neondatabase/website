@@ -18,7 +18,7 @@ const TopBar = ({ isDarkTheme }) => (
       'safe-paddings relative z-50 flex h-9 w-full items-center justify-center gap-x-2.5 overflow-hidden px-4 py-2.5 leading-none transition-colors duration-200 dark:bg-[#0B0C0F] dark:hover:bg-gray-new-8',
       isDarkTheme ? 'bg-[#0B0C0F] hover:bg-gray-new-8' : 'bg-[#F5FBFD] hover:bg-[#f1fcff]'
     )}
-    to="/blog/recover-large-postgres-databases/"
+    to="https://neon.tech/blog/outage-simulator"
     onClick={() => {
       sendGtagEvent('click_announcement_banner');
     }}
@@ -70,7 +70,8 @@ const TopBar = ({ isDarkTheme }) => (
         isDarkTheme ? 'text-gray-new-90' : 'text-gray-new-15'
       )}
     >
-      In Neon, point-in-time restores are instant—even for 100 TB databases. See how it compares to AWS RDS
+      Run our Outage Simulator — take down a 1TB Neon DB and restore it in milliseconds with Instant
+      Restore
     </span>
     <ChevronIcon
       className={clsx(

@@ -3,7 +3,7 @@ title: Compliance
 enableTableOfContents: false
 redirectFrom:
   - /docs/security/soc2-compliance
-updatedOn: '2024-10-01T22:13:33.461Z'
+updatedOn: '2025-03-10T17:50:45.191Z'
 ---
 
 At Neon, we prioritize data security and privacy, and we have achieved several key compliances that validate our efforts. We have completed audits for SOC 2 Type 1 and Type 2, SOC 3, ISO 27001, and ISO 27701, and we adhere to GDPR and CCPA regulations.
@@ -34,7 +34,7 @@ The California Consumer Privacy Act (CCPA) grants California residents new right
 
 ## HIPAA
 
-Neon is not yet HIPAA compliant. However, we are actively working towards achieving HIPAA readiness, with a target completion by the end of Q2 2025. Once compliant, we will be able to support applications that require HIPAA compliance, including those that process Protected Health Information (PHI).
+Neon is HIPAA compliant. This means we can support applications that require HIPAA compliance, including those that process Protected Health Information (PHI). For more information about our HIPAA compliance, please visit our [Trust Center](https://trust.neon.tech/).
 
 ## Questions?
 

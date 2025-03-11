@@ -7,7 +7,7 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/setting-up-a-project
-updatedOn: '2025-02-21T19:20:49.630Z'
+updatedOn: '2025-03-06T11:08:51.319Z'
 ---
 
 <InfoBlock>
@@ -178,7 +178,7 @@ You can create and manage branches from the Neon Console, but here we'll use the
    neon branches create --name dev/alex
    ```
 
-   The command output provides details about your new branch, including the branch ID, compute ID, and the connection URI that you can use to connect to this branch's database.
+   The command output provides details about your new branch, including the branch ID, compute endpoint ID, and the connection URI that you can use to connect to this branch's database.
 
 There are other branch creation options available when using the CLI. See [Create a branch with the CLI](/docs/guides/branching-neon-cli#create-a-branch-with-the-cli) for more.
 
