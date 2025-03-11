@@ -1,5 +1,5 @@
 ---
-title: Neon Enterprise sales process
+title: Neon Enterprise Sales Process
 enableTableOfContents: true
 subtitle: A guide to Neon's Enterprise sales process
 updatedOn: '2024-12-01T21:48:07.693Z'
