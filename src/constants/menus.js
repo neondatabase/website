@@ -94,7 +94,7 @@ export default {
             {
               icon: PrivacyIcon,
               iconGradient: PrivacyGradientIcon,
-              title: 'RLS Authorize',
+              title: 'RLS',
               description: 'RLS made simple',
               to: LINKS.rlsAuthorize,
             },
@@ -368,7 +368,8 @@ export default {
         {
           text: 'HIPAA',
           description: 'In progress',
-          icon: 'wip-icon',
+          description: 'Compliant',
+          icon: 'check-icon',
           to: LINKS.certHIPAA,
         },
         {

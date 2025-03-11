@@ -93,6 +93,12 @@ const fetchWpPostsByCategorySlug = async (slug, first, after) => {
               }
             }
           }
+          categories {
+            nodes {
+              name
+              slug
+            }
+          }
         }
         pageInfo {
           hasNextPage
@@ -142,7 +148,8 @@ const getPostsByCategorySlug = async (slug) => {
     return getAllChangelogs();
   }
 
-  return getWpPostsByCategorySlug(slug);
+  const wpPosts = await getWpPostsByCategorySlug(slug);
+  return wpPosts;
 };
 
 const fetchAllWpPosts = async (first, after) => {
@@ -150,15 +157,9 @@ const fetchAllWpPosts = async (first, after) => {
     query AllPosts($first: Int!, $after: String) {
       posts(first: $first, after: $after) {
         nodes {
-          categories {
-            nodes {
-              name
-              slug
-            }
-          }
-          modifiedGmt
           slug
           date
+          modifiedGmt
           title(format: RENDERED)
           content(format: RENDERED)
           pageBlogPost {
@@ -182,6 +183,12 @@ const fetchAllWpPosts = async (first, after) => {
                   }
                 }
               }
+            }
+          }
+          categories {
+            nodes {
+              name
+              slug
             }
           }
         }
@@ -235,7 +242,7 @@ const getAllPosts = async () => {
   const [featuredWpPosts, restWpPosts] = wpPosts.reduce(
     ([featured, rest], post) => {
       if (post.pageBlogPost?.isFeatured && featured.length < 2) {
-        featured.push(post);
+        featured.push({ ...post, isFeatured: true });
       } else {
         rest.push(post);
       }

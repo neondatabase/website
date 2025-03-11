@@ -64,7 +64,6 @@
               slug: guides/nextjs
             - title: Nuxt
               slug: guides/nuxt
-              tag: new
             - title: Node.js
               slug: guides/node
             - title: Quarkus (JDBC)
@@ -85,7 +84,6 @@
               slug: guides/sqlalchemy
             - title: Sveltekit
               slug: guides/sveltekit
-              tag: new
             - title: Symfony
               slug: guides/symfony
     - title: Connect
@@ -125,8 +123,8 @@
       items:
         - section: Import utilities
           items:
-            - title: Migration Assistant
-              slug: import/migration-assistant
+            - title: Import Data Assistant
+              slug: import/import-data-assistant
             - title: Migrate from Postgres with pg_dump and pg_restore
               slug: import/migrate-from-postgres
             - title: Migrate from a Neon project
@@ -165,7 +163,6 @@
               slug: guides/logical-replication-rds-to-neon
             - title: Replicate from Supabase
               slug: guides/logical-replication-supabase-to-neon
-              tag: new
         - section: Data migration services
           items:
             - title: AWS Data Migration Service (DMS)
@@ -345,10 +342,8 @@
               slug: manage/operations
             - title: Active queries
               slug: introduction/monitor-active-queries
-              tag: new
             - title: Query history
               slug: introduction/monitor-query-history
-              tag: new
             - title: External tools
               slug: introduction/monitor-external-tools
         - section: Team Tools
@@ -368,10 +363,13 @@
               tag: new
         - section: Maintenance & updates
           items:
+            - title: Overview
+              slug: manage/maintenance-updates-overview              
+              tag: new
             - title: Platform maintenance
               slug: manage/platform-maintenance              
               tag: new
-            - title: Scheduled updates
+            - title: Updates
               slug: manage/updates
               tag: new
     - title: Use cases
@@ -422,11 +420,9 @@
           slug: introduction/billing-aws-marketplace
         - title: Azure Marketplace
           slug: introduction/billing-azure-marketplace
-          tag: new
     - title: Neon on Azure
       slug: manage/azure
       icon: azure
-      tag: new
 - section: Develop
   items:
     - title: Frameworks
@@ -445,7 +441,6 @@
           slug: guides/node
         - title: Nuxt
           slug: guides/nuxt
-          tag: new
         - title: Phoenix
           slug: guides/phoenix
         - title: Quarkus (JDBC)
@@ -462,7 +457,6 @@
           slug: guides/solid-start
         - title: Sveltekit
           slug: guides/sveltekit
-          tag: new
         - title: Symfony
           slug: guides/symfony
     - title: Languages
@@ -508,52 +502,52 @@
           slug: guides/neon-auth-tutorial
         - title: API
           slug: guides/neon-auth-api
-    - title: Neon RLS Authorize
+    - title: Neon RLS
       icon: lock
-      slug: guides/neon-rls-authorize
+      slug: guides/neon-rls
       items:
         - section: Overview
           items:
             - title: About
-              slug: guides/neon-rls-authorize
+              slug: guides/neon-rls
             - title: Tutorial
-              slug: guides/neon-rls-authorize-tutorial
+              slug: guides/neon-rls-tutorial
             - title: Drizzle RLS
-              slug: guides/neon-rls-authorize-drizzle
+              slug: guides/neon-rls-drizzle
             - title: Troubleshooting
-              slug: guides/neon-rls-authorize-troubleshooting
+              slug: guides/neon-rls-troubleshooting
             - title: What's next
-              slug: guides/neon-rls-authorize-future
+              slug: guides/neon-rls-future
         - section: Quickstarts
           items:
             - title: Clerk
-              slug: guides/neon-rls-authorize-clerk
+              slug: guides/neon-rls-clerk
             - title: Stack Auth
-              slug: guides/neon-rls-authorize-stack-auth
+              slug: guides/neon-rls-stack-auth
             - title: Auth0
-              slug: guides/neon-rls-authorize-auth0
+              slug: guides/neon-rls-auth0
             - title: Stytch
-              slug: guides/neon-rls-authorize-stytch
+              slug: guides/neon-rls-stytch
             - title: Keycloak
-              slug: guides/neon-rls-authorize-keycloak
+              slug: guides/neon-rls-keycloak
             - title: AWS Cognito
-              slug: guides/neon-rls-authorize-aws-cognito
+              slug: guides/neon-rls-aws-cognito
             - title: Azure Active Directory
-              slug: guides/neon-rls-authorize-azure-ad
+              slug: guides/neon-rls-azure-ad
             - title: Descope
-              slug: guides/neon-rls-authorize-descope
+              slug: guides/neon-rls-descope
             - title: Firebase / GCP Identity Platform
-              slug: guides/neon-rls-authorize-firebase-gcp
+              slug: guides/neon-rls-firebase-gcp
             - title: Google Identity
-              slug: guides/neon-rls-authorize-google-identity
+              slug: guides/neon-rls-google-identity
             - title: PropelAuth
-              slug: guides/neon-rls-authorize-propelauth
+              slug: guides/neon-rls-propelauth
             - title: SuperTokens
-              slug: guides/neon-rls-authorize-supertokens
+              slug: guides/neon-rls-supertokens
             - title: WorkOS
-              slug: guides/neon-rls-authorize-workos
+              slug: guides/neon-rls-workos
             - title: Custom JWT
-              slug: guides/neon-rls-authorize-custom-jwt
+              slug: guides/neon-rls-custom-jwt
     - title: Integrations
       icon: integrations
       slug: guides/integrations
@@ -606,7 +600,6 @@
               slug: guides/aws-lambda
             - title: Azure Functions
               slug: /guides/query-postgres-azure-functions
-              tag: new
             - title: Trigger serverless functions with Inngest
               slug: guides/trigger-serverless-functions
         - section: Query
@@ -888,11 +881,12 @@
               slug: extensions/pg-extensions
             - title: dblink
               slug: extensions/dblink
-              tag: new
             - title: citext
               slug: extensions/citext
             - title: hstore
               slug: extensions/hstore
+            - title: ltree
+              slug: extensions/ltree
             - title: neon
               slug: extensions/neon
             - title: neon_utils
@@ -903,7 +897,6 @@
               slug: extensions/pgrag
             - title: pg_cron
               slug: extensions/pg_cron
-              tag: new
             - title: pg_mooncake
               slug: extensions/pg_mooncake
               tag: new
@@ -915,7 +908,6 @@
               slug: extensions/pg_stat_statements
             - title: pg_repack
               slug: extensions/pg_repack
-              tag: new
             - title: pg_tiktoken
               slug: extensions/pg_tiktoken
             - title: pg_trgm
@@ -926,7 +918,6 @@
               slug: extensions/postgis-related-extensions
             - title: postgres_fdw
               slug: extensions/postgres_fdw
-              tag: new
             - title: timescaledb
               slug: extensions/timescaledb
             - title: wal2json
@@ -972,7 +963,6 @@
                   slug: functions/array_to_json
                 - title: json
                   slug: functions/json
-                  tag: new
                 - title: json_agg
                   slug: functions/json_agg
                 - title: json_array_elements
@@ -983,7 +973,6 @@
                   slug: functions/json_each
                 - title: json_exists
                   slug: functions/json_exists
-                  tag: new
                 - title: json_extract_path
                   slug: functions/json_extract_path
                 - title: json_extract_path_text
@@ -994,20 +983,16 @@
                   slug: functions/json_populate_record
                 - title: json_query
                   slug: functions/json_query
-                  tag: new
                 - title: json_scalar
                   slug: functions/json_scalar
-                  tag: new
                 - title: json_serialize
                   slug: functions/json_serialize
-                  tag: new
                 - title: json_table
                   slug: functions/json_table
                 - title: json_to_record
                   slug: functions/json_to_record
                 - title: json_value
                   slug: functions/json_value
-                  tag: new
                 - title: jsonb_array_elements
                   slug: functions/jsonb_array_elements
                 - title: jsonb_each
@@ -1090,6 +1075,9 @@
     - title: Acceptable Use Policy
       slug: security/acceptable-use-policy
       icon: docs
+    - title: AI use in Neon
+      slug: security/ai-use-in-neon
+      icon: ai
 - section: Resources
   items:
     - title: Partner guide
