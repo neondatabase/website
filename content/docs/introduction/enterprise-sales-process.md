@@ -57,7 +57,7 @@ We’ll send the pricing proposal and migration plan and arrange a follow-up cal
 For complex setups, we may request more information, such as:
 
 - Specifics about your current environment
-- Usage and billing details from your current provider 
+- Usage and billing details from your current provider
 
 ## Stakeholder support
 
