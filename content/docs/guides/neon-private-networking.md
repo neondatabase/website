@@ -110,7 +110,7 @@ To configure Neon Private Networking, perform the following steps:
 
 ## Enable Private DNS
 
-    After adding you VPC endpoint ID to your Neon organization, enable private DNS lookup for the VPC endpoint in AWS.
+    After adding your VPC endpoint ID to your Neon organization, enable private DNS lookup for the VPC endpoint in AWS.
 
     1. In AWS, select the VPC endpoint you created.
     1. Choose **Modify private DNS name**.
