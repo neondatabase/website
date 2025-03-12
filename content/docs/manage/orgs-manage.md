@@ -19,6 +19,7 @@ Learn how to manage your organization's projects, invite Members and Collaborato
     <ul>
       <li><a href="#create-and-delete-projects">Create and delete projects</a></li>
       <li><a href="#passwordless-authentication">Passwordless authentication</a></li>
+      <li><a href="#rename-an-organization">Rename an organization</a></li>
       <li><a href="#delete-an-organization">Delete an organization</a></li>
       <li><a href="#billing">Billing</a></li>
     </ul>
@@ -56,6 +57,12 @@ Permissions within the organization are exclusively managed by Admins. As an Adm
 - You cannot leave the organization if you are the only Admin. Promote a Member to Admin before you try to leave the org.
 
   ![organization members](/docs/manage/orgs_members_kebab.png 'no-border')
+
+## Rename an organization
+
+Only Admins can rename an organization. Go to the **Settings** page under **General information**. Changing the organization name applies globally—the new name will appear for everyone in the organization.
+
+![organization settings](/docs/manage/orgs_id.png 'no-border')
 
 ## Invite Collaborators
 
