@@ -272,6 +272,6 @@ The Private Networking feature supports a maximum of **10 private networking con
 
 ## Limitations
 
-If you remove a VPC endpoint from a Neon organization, that VPC endpoint cannot be added back to the same Neon organization. Attempting to do so will result in an error. The workaround is to set up a new VPC endpoint.
+If you remove a VPC endpoint from a Neon organization, that VPC endpoint cannot be added back to the same Neon organization. Attempting to do so will result in an error. In this case, you must set up a new VPC endpoint.
 
 <NeedHelp />
