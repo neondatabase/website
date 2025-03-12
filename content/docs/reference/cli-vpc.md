@@ -31,7 +31,7 @@ The `vpc endpoint` subcommand lets you to list, assign, remove, and get the stat
 | :------------ | :------------------------------------------------------------------------------------------------------------------------------------ |
 | `list`        | List configured VPC endpoints for the Neon organization.                                                                              |
 | `assign <id>` | Add or update a VPC endpoint in the Neon organization. The ID is the VPC endpoint ID. Aliases for this command are `add` and `update` |
-| `remove <id>` | Remove a VPC endpoint from the Neon organization. The ID is the VPC endpoint ID.                                                      |
+| `remove <id>` | Remove a VPC endpoint from the Neon organization. The ID is the VPC endpoint ID. A removed VPC endpoint cannot be added back.         |
 | `status <id>` | Get the status of a VPC endpoint for the Neon organization. The ID is the VPC endpoint ID.                                            |
 
 ### Options
@@ -71,6 +71,10 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
   ```bash
   neon vpc endpoint remove vpce-1234567890abcdef0 --org-id org-bold-bonus-12345678
   ```
+
+  <Admonition type="note">
+  A removed VPC endpoint cannot be added back to the Neon organization.
+  </Admonition>
 
 - **Get the status of a VPC endpoint**
 
