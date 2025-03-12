@@ -750,6 +750,8 @@
               slug: ai/llamaindex
             - title: Inngest
               slug: ai/inngest
+            - title: Semantic Kernel
+              slug: ai/semantic-kernel  
         - title: Prepare your AI app for production
           slug: ai/ai-vector-search-optimization
           items:
