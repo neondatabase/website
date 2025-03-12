@@ -125,7 +125,7 @@ class Program
 
         string userPrompt = "Explain Retrieval-Augmented Generation (RAG) in simple terms.";
         var response = await kernel.InvokePromptAsync(userPrompt);
-        
+
         Console.WriteLine("✅ Chat Completion Response:");
         Console.WriteLine(response);
     }
