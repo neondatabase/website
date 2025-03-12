@@ -33,6 +33,7 @@ Here's a breakdown of what actions each role can take:
 | [Set permissions](/docs/manage/orgs-manage#set-permissions)                                  |  ✅   |   ❌   |      ❌      |
 | [Manage billing](/docs/manage/orgs-manage#billing)                                           |  ✅   |   ❌   |      ❌      |
 | [Delete organization](/docs/manage/orgs-manage#delete-an-organization)                       |  ✅   |   ❌   |      ❌      |
+| Rename organization                                                                          |  ✅   |   ❌   |      ❌      |
 | [Enable Early Access Program](/docs/introduction/roadmap#join-the-neon-early-access-program) |  ✅   |   ❌   |      ❌      |
 | [Install/Remove Neon Auth](/docs/guides/neon-auth)                                           |  ✅   |   ❌   |      ❌      |
 
