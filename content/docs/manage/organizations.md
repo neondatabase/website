@@ -2,7 +2,7 @@
 title: Organizations
 subtitle: Invite Members to your Organization and collaborate on projects
 enableTableOfContents: true
-updatedOn: '2025-02-28T20:32:00.525Z'
+updatedOn: '2025-03-12T15:00:50.932Z'
 ---
 
 Build your team in Neon with Organizations. Manage all of your team's projects under a single account — with billing, role management, and project collaboration capabilities in one accessible location.
