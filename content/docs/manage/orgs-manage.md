@@ -60,13 +60,7 @@ Permissions within the organization are exclusively managed by Admins. As an Adm
 
 ## Rename an organization
 
-Only Admins can rename an organization. To rename your organization:
-
-1. Navigate to your Organization's **Settings** page.
-2. In the **General information** section, find your current organization name.
-3. Edit the organization name field and click **Save**.
-
-Note that Members without Admin permissions cannot modify the organization name.
+Only Admins can rename an organization from the **Settings** page under the **General information** section. The organization name change applies globally and will appear this way for all members of the organization.
 
 ![organization settings](/docs/manage/orgs_id.png 'no-border')
 
