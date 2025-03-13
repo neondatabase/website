@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 
 import Container from 'components/shared/container/container';
@@ -14,15 +13,7 @@ const SubProcessors = () => (
           <h2 className="font-title text-[44px] font-medium leading-[0.9] tracking-extra-tight xl:text-4xl lg:text-[36px] md:text-[32px]">
             Sub-Processors
           </h2>
-          <div
-            className={clsx(
-              'mt-4 flex flex-col gap-2 text-pretty leading-snug tracking-extra-tight text-gray-new-70',
-              '[&_a]:whitespace-nowrap [&_a]:border-b [&_a]:border-gray-new-70/40 [&_a]:text-gray-new-80',
-              '[&_a]:transition-colors [&_a]:duration-200',
-              '[&_a:hover]:border-green-45 [&_a:hover]:text-green-45',
-              'lg:text-[15px] sm:text-sm sm:font-light'
-            )}
-          >
+          <div className="text-with-links mt-4 flex flex-col gap-2 text-pretty leading-snug tracking-extra-tight text-gray-new-70 lg:text-[15px] sm:text-sm sm:font-light">
             <p>
               Neon engages with carefully selected third-party sub-processors that assist in service
               delivery.

@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 
 import Container from 'components/shared/container/container';
@@ -45,14 +44,7 @@ const TrustCenter = () => (
           <h2 className="font-title text-[44px] font-medium leading-[0.9] tracking-extra-tight xl:text-4xl lg:text-[36px] md:text-[32px]">
             Trust Center
           </h2>
-          <div
-            className={clsx(
-              'mt-4 flex flex-col gap-2 leading-snug tracking-extra-tight text-gray-new-70 lg:text-[15px]',
-              '[&_a]:whitespace-nowrap [&_a]:border-b [&_a]:border-gray-new-70/40 [&_a]:text-gray-new-80',
-              '[&_a]:transition-colors [&_a]:duration-200',
-              '[&_a:hover]:border-green-45 [&_a:hover]:text-green-45'
-            )}
-          >
+          <div className="text-with-links mt-4 flex flex-col gap-2 leading-snug tracking-extra-tight text-gray-new-70 lg:text-[15px]">
             <p>
               Request audit reports, certifications, and compliance documentation via our{' '}
               <a href={LINKS.trust} target="_blank" rel="noreferrer">
@@ -66,7 +58,7 @@ const TrustCenter = () => (
             </p>
           </div>
         </div>
-        <div className="mt-4 grid grow grid-cols-2 gap-x-8 gap-y-9 lg:mt-2 lg:max-w-[290px] lg:grid-cols-1 lg:gap-7 sm:mt-0">
+        <div className="mt-4 grid grow grid-cols-2 gap-x-8 gap-y-9 lg:mt-2 lg:max-w-[290px] lg:grid-cols-1 lg:gap-7 md:max-w-full sm:mt-0">
           {FEATURES.map(({ title, description, icon }) => (
             <div key={title}>
               <div className="flex items-start gap-2">

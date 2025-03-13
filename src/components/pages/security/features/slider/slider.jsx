@@ -93,7 +93,11 @@ const Slider = ({ title, items }) => {
         onReachEnd={() => setIsEnd(true)}
       >
         {items.map(({ title, description, link, icon }) => (
-          <SwiperSlide className="!h-[247px] !w-[422px] lg:!h-[229px] lg:!w-80" key={title}>
+          <SwiperSlide
+            tag="li"
+            className="!h-[247px] !w-[422px] lg:!h-[229px] lg:!w-80"
+            key={title}
+          >
             <div
               className={clsx(
                 'relative flex size-full flex-col justify-between rounded-lg p-6 lg:p-4',

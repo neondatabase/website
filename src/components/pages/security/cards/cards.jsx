@@ -7,7 +7,7 @@ import GradientBorder from 'components/shared/gradient-border';
 const Cards = ({ data, isPriority, className }) => (
   <div
     className={clsx(
-      'security-cards mt-11 grid grid-cols-2 gap-5 lg:mt-8 lg:gap-4 md:mt-6 sm:grid-cols-1',
+      'mt-11 grid grid-cols-2 gap-5 lg:mt-8 lg:gap-4 md:mt-6 sm:grid-cols-1',
       className
     )}
   >
@@ -15,7 +15,7 @@ const Cards = ({ data, isPriority, className }) => (
       ({ title, description, logo, banner, borderClassName, highlightClassName }, index) => (
         <div
           className={clsx(
-            'security-card relative overflow-hidden rounded-xl bg-security-card-bg p-6 lg:p-5 md:p-[18px]',
+            'relative overflow-hidden rounded-xl bg-security-card-bg p-6 lg:p-5 md:p-[18px]',
             banner && 'col-span-2 sm:col-span-1 sm:pb-[203px]',
             className
           )}
@@ -43,12 +43,7 @@ const Cards = ({ data, isPriority, className }) => (
               dangerouslySetInnerHTML={{ __html: title }}
             />
             <p
-              className={clsx(
-                'mt-2.5 font-light leading-snug tracking-extra-tight text-gray-new-70 lg:mt-2 lg:text-[15px] md:text-sm',
-                '[&_a]:whitespace-nowrap [&_a]:border-b [&_a]:border-gray-new-70/40 [&_a]:text-gray-new-80',
-                '[&_a]:transition-colors [&_a]:duration-200',
-                '[&_a:hover]:border-green-45 [&_a:hover]:text-green-45'
-              )}
+              className="text-with-links mt-2.5 font-light leading-snug tracking-extra-tight text-gray-new-70 lg:mt-2 lg:text-[15px] md:text-sm sm:text-sm sm:font-light"
               dangerouslySetInnerHTML={{ __html: description }}
             />
           </div>
