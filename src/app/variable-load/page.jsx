@@ -4,7 +4,6 @@ import slugify from 'slugify';
 import Efficiency from 'components/pages/variable/efficiency';
 import Hero from 'components/pages/variable/hero';
 import Load from 'components/pages/variable/load';
-import RelevantArticles from 'components/pages/variable/relevant-articles';
 import Unique from 'components/pages/variable/unique';
 import Container from 'components/shared/container';
 import Cta from 'components/shared/cta';
@@ -62,7 +61,6 @@ const VariableLoadPage = async () => {
             </div>
           </div>
         </Container>
-        <RelevantArticles />
         <Cta
           className="pb-[240px] pt-[340px] lg:pb-32 lg:pt-52 sm:pb-[110px]"
           title="Ask us for a<br> price estimation"
