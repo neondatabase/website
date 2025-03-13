@@ -182,7 +182,10 @@
     "otherFeatures": {
       "title": "Everything in Scale, plus...",
       "features": [
-        { "title": "Compliance (SOC 2, ISO)" },
+        { 
+          "title": "Compliance (SOC 2, ISO, HIPAA)",
+          "info": "HIPAA available via BAA. Ask us about it"
+        },
         { "title": "99.95% SLA" },
         { "title": "Priority Support" },
         { "title": "Private Link" },
