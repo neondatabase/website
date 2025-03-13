@@ -23,7 +23,7 @@ const Navigation = ({ isDarkTheme }) => (
                 isDarkTheme ? 'text-white' : 'text-black dark:text-white'
               )}
               to={to}
-              theme={isDarkTheme && to ? 'white' : 'black'}
+              theme={to && (isDarkTheme ? 'white' : 'black')}
             >
               {text}
               {hasSubmenu && (
