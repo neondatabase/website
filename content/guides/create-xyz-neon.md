@@ -34,7 +34,7 @@ This app will allow users to generate images using Stable Diffusion, view them i
 1. Navigate to the [Create.xyz](https://create.xyz) website and log in to your account.
 2. Click on "New Project" to begin. You'll be presented with the builder interface.
 
-    ![Start a New Project](/docs/guides/create_xyz_new_project.png)
+   ![Start a New Project](/docs/guides/create_xyz_new_project.png)
 
 ### Describe your app
 
@@ -96,9 +96,9 @@ Create.xyz offers a robust version history. This feature enables instant restora
 
 To restore a past version:
 
-1. **Browse Chat History:**  Find the desired version in your chat conversation.
-2. **One-Click Restore:**  Click on that version.
-3. **Publish:**  Click 'Publish' to deploy the restored version.
+1. **Browse Chat History:** Find the desired version in your chat conversation.
+2. **One-Click Restore:** Click on that version.
+3. **Publish:** Click 'Publish' to deploy the restored version.
 
 ![Restore Past Version](/docs/guides/create_xyz_restore_project.png)
 
@@ -109,24 +109,24 @@ Create.xyz instantly switches your app back to that earlier state.
 
 To make the most of Create and build apps efficiently, consider the following tips:
 
-*   **Prompting Best Practices**:
+- **Prompting Best Practices**:
 
-    *   **Context is key**:  Start prompts with clear context. For example describe the app's purpose and main features. For example say, "I want to add a new feature to allow users to download images."
-    *   **Iterate in small steps**: Break down complex changes.  For a whole new page, start by describing the header, then the body, then the footer in separate prompts. This gives you more control.
-    *   **Show, Don't just tell**: Use images! Paste screenshots or drag and drop images into the chat to show Create exactly what you want the style or layout to be wherever possible.
-    *   **Pinpoint errors**: Be specific when things go wrong. Instead of saying "it's broken", paste error messages or describe exactly what you expected to happen vs. what did happen.
+  - **Context is key**: Start prompts with clear context. For example describe the app's purpose and main features. For example say, "I want to add a new feature to allow users to download images."
+  - **Iterate in small steps**: Break down complex changes. For a whole new page, start by describing the header, then the body, then the footer in separate prompts. This gives you more control.
+  - **Show, Don't just tell**: Use images! Paste screenshots or drag and drop images into the chat to show Create exactly what you want the style or layout to be wherever possible.
+  - **Pinpoint errors**: Be specific when things go wrong. Instead of saying "it's broken", paste error messages or describe exactly what you expected to happen vs. what did happen.
 
-*   **Leverage Create's integrations**:
+- **Leverage Create's integrations**:
 
-    *   **Explore the Integration library**:  Create has many integrations ready to use.  Type `/` in the chat to see them.  Integrations include AI models, UI libraries, and services like Stripe.
-    *   **Choose the right AI model**: Experiment with different AI models for different tasks. For example, use Stable Diffusion for image generation, OpenAI/Claude for text generation etc.
+  - **Explore the Integration library**: Create has many integrations ready to use. Type `/` in the chat to see them. Integrations include AI models, UI libraries, and services like Stripe.
+  - **Choose the right AI model**: Experiment with different AI models for different tasks. For example, use Stable Diffusion for image generation, OpenAI/Claude for text generation etc.
 
 ## Resources
 
--   [Create.xyz](https://create.xyz)
--   [Create.xyz Docs](https://docs.create.xyz)
--   [From Idea to Full Stack App in One Conversation with Create](/blog/from-idea-to-full-stack-app-in-one-conversation-with-create)
--   [Create.xyz Templates](https://www.create.xyz/templates)
--   [Create.xyz Community](https://www.create.xyz/community)
+- [Create.xyz](https://create.xyz)
+- [Create.xyz Docs](https://docs.create.xyz)
+- [From Idea to Full Stack App in One Conversation with Create](/blog/from-idea-to-full-stack-app-in-one-conversation-with-create)
+- [Create.xyz Templates](https://www.create.xyz/templates)
+- [Create.xyz Community](https://www.create.xyz/community)
 
 <NeedHelp />
