@@ -1,6 +1,6 @@
 ---
-title: Building Full Stack apps in minutes with Create and Neon
-subtitle: Go from Text prompt to Full-Stack Database backed applications in minutes with Create and Neon
+title: Building Full Stack apps in minutes with Create.xyz
+subtitle: Go from Text prompt to Full-Stack Database backed applications in minutes with Create.xyz
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-03-12T00:00:00.000Z'
@@ -9,30 +9,17 @@ updatedOn: '2025-03-12T00:00:00.000Z'
 
 The landscape of application development is rapidly changing, with AI-powered tools empowering even non technical users to build faster and more intuitively than ever before. Imagine describing your app idea in a simple conversation and watching it materialize in seconds, complete with a fully functional database. This is now possible with [Create](https://create.xyz), a text-to-app builder that works with out-of-the-box support for 50+ integrations such as Stripe, ElevenLabs, Google Maps, Stable Diffusion, OpenAI, and more.
 
-This guide will introduce you to Create and demonstrate how it leverages [**Neon**](https://neon.tech/), the serverless Postgres database, to make building database-backed applications incredibly easy and fast. We'll walk through creating a simple AI Image Generator app using Create, showcasing how effortlessly you can go from a text prompt to a functional, full-stack application powered by Neon.
+This guide will introduce you to Create and demonstrate how you can use it to make building database-backed applications incredibly easy and fast. We'll walk through creating a simple AI Image Generator, showcasing how you can go from a text prompt to a functional, full-stack application.
 
-With Create and Neon, you can focus on your app's core functionality and design, leaving the backend complexities to the AI. Let's dive in and explore the future of app development!
+## Create & Neon
 
-## Create and Neon: Powering effortless app development
+Create leverages Neon as the database backend for its AI-powered app development platform. This integration delivers a fully managed database solution, which is fundamental to Create's rapid app development experience. By abstracting away database complexities, Create users can concentrate solely on their application's functionality and design.
 
-Create leverages Neon's serverless Postgres database as the core backend for its AI-powered app development platform. This integration delivers a persistent, scalable, and fully managed database solution, which is fundamental to Create's seamless and rapid app development experience. By completely abstracting away database complexities, Neon empowers Create users to concentrate solely on their application's functionality and design, knowing they are supported by a robust and efficient database infrastructure.
-
-This streamlined experience is immediately apparent during app creation. Thanks to instant provisioning with Neon, users bypass traditional database setup delays and can immediately focus on developing their application's core logic. There's no need to wrestle with manual database configuration, scaling concerns, or ongoing management – Neon operates invisibly and efficiently in the background, handling it all.
-
-*   **Serverless Architecture:**  Neon's serverless nature means true autoscaling. Neon autoscales infrastructure, automatically adjusting resources based on demand. This ensures your application can handle user growth and varying workloads without requiring manual scaling interventions.
-*   **Cost-Effective Pay-as-you-go:**  Neon's pay-as-you-go pricing provides a significant advantage for platforms like Create. This ensures efficient resource spending, as Create only pays for active database usage. This cost-effective model is vital for AI agent platforms to operate sustainably and scale efficiently, optimizing resource allocation and overall platform costs.
-
-Beyond speed and scalability, Neon's true strength for Create users lies in enabling seamless iteration. A critical aspect of application evolution is managing schema migrations, and Neon's branching feature directly addresses this challenge, unlocking a new level of development agility. When the need arises to evolve an application, add new features, or refine its data structure, Neon's branching capabilities become instrumental.
-
-*   **Branching for Iteration and Zero-Downtime Schema Changes:** Neon's branch-based architecture streamlines iterative development and schema migrations. Create leverages Neon's branching to provide isolated development environments, allowing users to safely experiment with database changes and evolve their applications without risking downtime or disrupting the live application. This ensures seamless iteration and confident schema updates.
-
-The combination of Create and Neon offers a powerful, intuitive, and efficient platform for building full-stack applications. By abstracting away backend complexities and providing a seamless development experience, Create and Neon empower users to focus on their app's core functionality and design, accelerating the app development lifecycle from ideation to deployment.
+This experience is immediately apparent during app creation. Neon's instant database provisioning lets users bypass database setup and and focus on developing their application. Neon operates invisibly in the background. To learn more about how Create.xyz uses Neon, see [From Idea to Full Stack App in One Conversation with Create](https://neon.tech/blog/from-idea-to-full-stack-app-in-one-conversation-with-creat).
 
 ## Prerequisites
 
-Before you start, ensure you have the following:
-
-- **Create Account**: Sign up for a free account at [create.xyz](https://create.xyz/). The free plan is sufficient to follow this guide.
+Before you start, ensure you have a **Create Account**. You can sign up for a free account at [create.xyz](https://create.xyz/). The free plan is sufficient to follow this guide.
 
 <Admonition type="important" title="Vibe Coding Ahead 😎">
 Follow this guide only if you're ready to experience the future of app development through AI-powered tools. You'll be amazed at how quickly you can build a full-stack application with Create and Neon that really works!
@@ -40,14 +27,14 @@ Follow this guide only if you're ready to experience the future of app developme
 
 ## Building an AI Image Generator app
 
-In this guide, we'll walk through creating an AI Image Generator app using Create and Neon. This app will allow users to generate images using Stable Diffusion, view them in a gallery, and track download counts for each image. We'll leverage Create's AI capabilities and Neon's database backend to build this app in minutes without writing a single line of code.
+This app will allow users to generate images using Stable Diffusion, view them in a gallery, and track download counts for each image. We'll leverage Create's AI capabilities to build this app in minutes without writing a single line of code.
 
 ### Start a new project
 
-- Navigate to the [Create.xyz](https://create.xyz) website and log in to your account.
-- Click on "New Project" to begin. You'll be presented with the builder interface.
+1. Navigate to the [Create.xyz](https://create.xyz) website and log in to your account.
+2. Click on "New Project" to begin. You'll be presented with the builder interface.
 
-![Start a New Project](/docs/guides/create_xyz_new_project.png)
+    ![Start a New Project](/docs/guides/create_xyz_new_project.png)
 
 ### Describe your app
 
@@ -77,7 +64,7 @@ If the app doesn't work as expected, provide specific details in the chat window
 
 You may want to add new features or refine existing ones as you iterate on your app. Create makes it easy to enhance your app by simply describing the new features you want to add. Let's add a download counter feature to track the number of downloads for each generated image.
 
-In the chat window, you can say: "Allow users to download images and track the number of downloads for each image.". Create will start adding the necessary components to your app to support this feature.
+In the chat window, you can say: "Allow users to download images and track the number of downloads for each image". Create will start adding the necessary components to your app to support this feature.
 
 ![Adding a New Feature](/docs/guides/create_xyz_add_new_feature.jpeg)
 
@@ -103,10 +90,9 @@ Finally, you can deploy the app by clicking on the "Publish" button.
 
 ![Publishing the App](/docs/guides/create_xyz_publish_app.png)
 
-<Admonition type="note" title="Version History, Powered by Neon's Branching for Seamless Restore">
+<Admonition type="note" title="Version history for restoring a past version of your app">
 
-Create.xyz offers a robust version history thanks to Neon's database branching. Instead of just saving snapshots, Neon creates actual branches of your database for every change. This powerful feature enables instant and reliable restoration to any past version of your app.
-
+Create.xyz offers a robust version history. This feature enables instant restoration to any past version of your, in case you need to rewind.
 
 To restore a past version:
 
@@ -116,7 +102,7 @@ To restore a past version:
 
 ![Restore Past Version](/docs/guides/create_xyz_restore_project.png)
 
-Create.xyz, using Neon's branching, instantly switches your app back to that earlier state. This branching approach provides a truly effortless and reliable way to manage your app's development history.
+Create.xyz instantly switches your app back to that earlier state.
 </Admonition>
 
 ## Tips for building apps with Create
@@ -134,7 +120,6 @@ To make the most of Create and build apps efficiently, consider the following ti
 
     *   **Explore the Integration library**:  Create has many integrations ready to use.  Type `/` in the chat to see them.  Integrations include AI models, UI libraries, and services like Stripe.
     *   **Choose the right AI model**: Experiment with different AI models for different tasks. For example, use Stable Diffusion for image generation, OpenAI/Claude for text generation etc.
-
 
 ## Resources
 
