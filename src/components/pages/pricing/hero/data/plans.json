@@ -183,7 +183,7 @@
       "title": "Everything in Scale, plus...",
       "features": [
         { "title": "SOC 2, HIPAA (upon request)" },
-          "title": "0-downtime migrations"
+        { "title": "0-downtime migrations" },
         { "title": "Private Link" },
         { "title": "Priority Support" },
         {
