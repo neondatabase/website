@@ -34,9 +34,13 @@ The California Consumer Privacy Act (CCPA) grants California residents new right
 
 ## HIPAA
 
-Neon is HIPAA compliant. This means we can support applications that require HIPAA compliance, including those that process Protected Health Information (PHI). For more information about our HIPAA compliance, please visit our [Trust Center](https://trust.neon.tech/).
+Neon is HIPAA compliant. This means we can support applications that require HIPAA compliance, including those that process Protected Health Information (PHI).
 
-To enable HIPAA for your Neon projects, please [contact the Neon Sales team](https://neon.tech/contact-sales).
+To request a draft Business Associate Agreement (BAA), please [contact the Neon Sales team](https://neon.tech/contact-sales). Once a BAA is signed, the Neon Sales team will assist you with enabling HIPAA for your Neon account.  
+
+HIPAA-enabled accounts can request access to HIPAA audit logs by [opening a support request](https://console.neon.tech/app/projects?modal=support).
+
+For additional information about HIPAA compliance and Neon, please refer to the [Neon HIPAA Compliance Guide](https://neon.tech/hipaa-compliance-guide).
 
 ## Questions?
 
