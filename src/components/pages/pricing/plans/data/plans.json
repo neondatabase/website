@@ -298,6 +298,16 @@
     {
       "rows": "1",
       "feature": {
+        "title": "HIPAA"
+      },
+      "free": false,
+      "launch": false,
+      "scale": false,
+      "business": "Contact us"
+    },
+    {
+      "rows": "1",
+      "feature": {
         "title": "SLA"
       },
       "free": false,
@@ -407,8 +417,18 @@
     {
       "rows": "2",
       "feature": {
-        "title": "Neon Authorize",
+        "title": "Neon RLS",
         "subtitle": "Row-level security"
+      },
+      "free": true,
+      "launch": true,
+      "scale": true,
+      "business": true
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Neon Auth"
       },
       "free": true,
       "launch": true,
