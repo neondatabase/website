@@ -4,7 +4,7 @@ subtitle: Learn how to connect to your Neon database via AWS PrivateLink
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
-updatedOn: '2025-02-22T09:59:21.105Z'
+updatedOn: '2025-03-12T15:31:54.852Z'
 ---
 
 <Admonition type="comingSoon" title="Private Networking availability">
@@ -110,7 +110,7 @@ To configure Neon Private Networking, perform the following steps:
 
 ## Enable Private DNS
 
-    After adding you VPC endpoint ID to your Neon organization, enable private DNS lookup for the VPC endpoint in AWS.
+    After adding your VPC endpoint ID to your Neon organization, enable private DNS lookup for the VPC endpoint in AWS.
 
     1. In AWS, select the VPC endpoint you created.
     1. Choose **Modify private DNS name**.
@@ -266,8 +266,12 @@ The Neon API provides endpoints for managing VPC endpoints and project-level VPC
 - [Assign or update a VPC endpoint restriction](https://api-docs.neon.tech/reference/assignprojectvpcendpoint)
 - [Delete a VPC endpoint restriction](https://api-docs.neon.tech/reference/deleteprojectvpcendpoint)
 
-## Limits
+## Private Networking limits
 
 The Private Networking feature supports a maximum of **10 private networking configurations per AWS region**. Supported AWS regions are listed [above](#create-an-aws-vpc-endpoint).
+
+## Limitations
+
+If you remove a VPC endpoint from a Neon organization, that VPC endpoint cannot be added back to the same Neon organization. Attempting to do so will result in an error. In this case, you must set up a new VPC endpoint.
 
 <NeedHelp />
