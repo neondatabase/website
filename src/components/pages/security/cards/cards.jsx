@@ -43,7 +43,7 @@ const Cards = ({ data, isPriority, className }) => (
               dangerouslySetInnerHTML={{ __html: title }}
             />
             <p
-              className="text-with-links mt-2.5 font-light leading-snug tracking-extra-tight text-gray-new-70 lg:mt-2 lg:text-[15px] md:text-sm sm:text-sm sm:font-light"
+              className="text-with-links mt-2.5 text-pretty font-light leading-snug tracking-extra-tight text-gray-new-70 lg:mt-2 lg:text-[15px] md:text-sm sm:text-sm sm:font-light"
               dangerouslySetInnerHTML={{ __html: description }}
             />
           </div>

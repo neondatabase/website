@@ -37,7 +37,7 @@ const CARDS = [
     title:
       'United States Health Insurance Portability and Accountability&nbsp;Act of&nbsp;1996 (HIPAA)',
     description:
-      'Neon plans to achieve HIPAA compliance by Q2 2025 to support customers handling PHI. Our security measures will include encryption of electronic PHI, least-privilege access control, security monitoring for unauthorized data access, and comprehensive audit logging.',
+      'Neon has achieved HIPAA compliance to support customers handling protected health information (PHI). Our security measures include encryption of electronic PHI, least-privilege access control, security monitoring for unauthorized data access, and comprehensive audit logging.',
     banner: {
       src: HIPAALogo,
       width: 399,

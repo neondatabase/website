@@ -184,7 +184,7 @@ const DATA = [
       {
         title: 'Github Secret Scanning Partner Program',
         description:
-          'Neon will join the GitHub Secret Scanning Partnership in Q1 2025 to improve secret detection and remediation across repositories.',
+          'Neon joined the GitHub Secret Scanning Partnership in to improve secret detection and remediation across repositories.',
         icon: radarIcon,
       },
     ],
@@ -194,8 +194,7 @@ const DATA = [
     items: [
       {
         title: 'Background Checks',
-        description:
-          'Neon runs a program via HackerOne, where verified researchers can securely report vulnerabilities and earn rewards for eligible findings.',
+        description: 'Neon conducts reference checks for all employees before onboarding.',
         icon: searchIcon,
       },
       {
