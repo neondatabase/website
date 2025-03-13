@@ -386,8 +386,8 @@ export default {
               to: LINKS.hipaaContractors,
             },
             {
-              text: 'Business Associate Agreement',
-              to: LINKS.businessAgreement,
+              text: 'Sensitive Data Terms',
+              to: LINKS.sensitiveDataTerms,
             },
           ],
         },

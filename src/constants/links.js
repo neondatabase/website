@@ -58,7 +58,7 @@ export default {
   cookiePolicy: '/cookie-policy',
   subprocessors: '/subprocessors',
   businessInformation: '/business-info',
-  businessAgreement: '/business-associate-agreement',
+  sensitiveDataTerms: '/sensitive-data-terms',
   hipaaCompliance: '/hipaa-compliance-guide',
   hipaaContractors: '/hipaa-contractors',
   // Console
