@@ -799,8 +799,6 @@
           slug: reference/cli-connection-string
         - title: set-context
           slug: reference/cli-set-context
-        - title: create-app
-          slug: reference/cli-create-app
         - title: completion
           slug: reference/cli-completion
     - title: SDKs
