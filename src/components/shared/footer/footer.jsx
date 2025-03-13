@@ -98,7 +98,9 @@ const Footer = ({ hasThemesSupport = false, theme = null }) => {
                           <span
                             className={clsx(
                               'ml-1.5 dark:text-gray-new-40',
-                              isDarkTheme ? 'text-gray-new-40' : 'text-gray-new-70'
+                              isDarkTheme ? 'text-gray-new-40' : 'text-gray-new-70',
+                              to &&
+                                'transition-colors duration-200 group-hover/link:text-green-45/50'
                             )}
                           >
                             {description}
@@ -111,7 +113,7 @@ const Footer = ({ hasThemesSupport = false, theme = null }) => {
                       {hasSubmenu && (
                         <div
                           className={clsx(
-                            'absolute bottom-full right-0 w-[230px] pb-2.5',
+                            'absolute bottom-full right-0 min-w-[230px] pb-2.5',
                             'pointer-events-none opacity-0',
                             'origin-bottom-right transition-[opacity,transform] duration-200 [transform:rotateX(12deg)_scale(0.9)]',
                             'group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-hover:[transform:none]'
