@@ -152,12 +152,10 @@ export default {
     pathname: LINKS.flow,
     type: 'article',
   },
-  // TODO: Add REAL SEO data for scalable architecture page
   scalableArchitecture: {
     title: 'Neon Scalable Architecture — Neon',
     description:
       'Neon is a distributed team building open-source, cloud-native Postgres. We are a well-funded startup with deep knowledge of Postgres internals and decades of experience building databases.',
-    // imagePath: '',
     pathname: LINKS.scalableArchitecture,
   },
   stage: {
@@ -165,6 +163,13 @@ export default {
     description:
       'Join us online on October 30th at 10:00 AM PT to learn how Neon empowers developers to ship faster with Postgres.',
     pathname: LINKS.stage,
+  },
+  security: {
+    title: 'Security — Neon',
+    description:
+      "Discover Neon's security & compliance standards, including SOC 2, GDPR, and HIPAA, with encryption and access controls to protect your data.",
+    imagePath: '/images/social-previews/security.jpg',
+    pathname: LINKS.security,
   },
   error: {
     title: 'Page Is Broken — Neon',

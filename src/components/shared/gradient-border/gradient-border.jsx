@@ -5,7 +5,7 @@ const GradientBorder = ({ withBlend = false, className }) => (
   <span
     className={clsx(
       'pointer-events-none absolute inset-0 z-10 rounded-[inherit]',
-      withBlend ? 'border border-white mix-blend-overlay' : 'border-linear',
+      withBlend ? 'border border-black mix-blend-overlay dark:border-white' : 'border-linear',
       className
     )}
     aria-hidden
