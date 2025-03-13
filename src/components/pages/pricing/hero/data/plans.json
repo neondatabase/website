@@ -182,12 +182,12 @@
     "otherFeatures": {
       "title": "Everything in Scale, plus...",
       "features": [
-        { "title": "Compliance (SOC 2, ISO)" },
-        { "title": "99.95% SLA" },
-        { "title": "Priority Support" },
+        { "title": "SOC 2, HIPAA (upon request)" },
+          "title": "0-downtime migrations"
         { "title": "Private Link" },
+        { "title": "Priority Support" },
         {
-          "title": "Migration assistance"
+          "title": "99.95% SLA"
         },
         { "title": "PITR (30 days)" }
       ]
