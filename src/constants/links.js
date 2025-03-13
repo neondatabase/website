@@ -83,4 +83,5 @@ export default {
   certHIPAA: 'https://trust.neon.tech/?itemUid=aec41c33-0f3a-4030-ac59-49adfd4a975b',
   // Other
   apiReference: 'https://api-docs.neon.tech/reference/getting-started-with-neon-api',
+  bugBounty: 'https://hackerone.com/neon_bbp',
 };

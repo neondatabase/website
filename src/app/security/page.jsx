@@ -23,7 +23,7 @@ const SecurityPage = () => (
     <CTA
       className="pb-[290px] pt-[348px] xl:pb-[242px] xl:pt-[278px] lg:pb-[200px] lg:pt-[260px] sm:pb-[100px] sm:pt-40"
       title="The Postgres of tomorrow, available today"
-      titleClassName="max-w-[745px] lg:max-w-[600px] md:max-w-[400px]"
+      titleClassName="max-w-[745px] lg:max-w-[600px] md:max-w-[400px] md:leading-none"
       buttonText="Book a meeting with our team"
       buttonUrl={LINKS.contactSales}
     />

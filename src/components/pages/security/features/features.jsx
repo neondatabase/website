@@ -1,4 +1,5 @@
 import Container from 'components/shared/container';
+import LINKS from 'constants/links';
 import accessIcon from 'icons/security/access.svg';
 import bugIcon from 'icons/security/bug.svg';
 import chartsIcon from 'icons/security/charts.svg';
@@ -153,6 +154,7 @@ const DATA = [
         title: 'Bug Bounty Program',
         description:
           'Neon runs a program via HackerOne, where verified researchers can securely report vulnerabilities and earn rewards for eligible findings.',
+        link: LINKS.bugBounty,
         icon: bugIcon,
       },
       {

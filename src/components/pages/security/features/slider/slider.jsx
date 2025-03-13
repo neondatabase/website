@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import GradientBorder from 'components/shared/gradient-border';
+import Link from 'components/shared/link';
 import Chevron from 'icons/chevron-right-lg.inline.svg';
 
 import 'swiper/css';
@@ -91,24 +92,39 @@ const Slider = ({ title, items }) => {
         onReachBeginning={() => setIsBeginning(true)}
         onReachEnd={() => setIsEnd(true)}
       >
-        {items.map(({ title, description, icon }) => (
-          <SwiperSlide
-            className="mr-5 !h-[247px] !w-[422px] lg:mr-4 lg:!h-[229px] lg:!w-80 md:mr-3"
-            key={title}
-          >
-            <div className="flex size-full flex-col justify-between rounded-lg border border-gray-new-15 bg-security-card-bg p-6 lg:p-4">
+        {items.map(({ title, description, link, icon }) => (
+          <SwiperSlide className="!h-[247px] !w-[422px] lg:!h-[229px] lg:!w-80" key={title}>
+            <div
+              className={clsx(
+                'relative flex size-full flex-col justify-between rounded-lg p-6 lg:p-4',
+                link ? 'bg-security-card-link-bg' : 'bg-security-card-bg'
+              )}
+            >
               <div className="relative flex size-12 items-center justify-center rounded-full bg-security-slide-icon-bg lg:size-10">
                 <Image className="lg:size-5" src={icon} alt={title} width={24} height={24} />
                 <GradientBorder withBlend />
               </div>
               <div>
-                <h4 className="swiper-no-swiping w-fit text-lg font-medium leading-snug tracking-extra-tight lg:text-[15px]">
+                <h4 className="swiper-no-swiping w-fit text-lg font-medium leading-snug tracking-extra-tight lg:pointer-events-none lg:text-[15px]">
                   {title}
                 </h4>
-                <p className="swiper-no-swiping mt-2.5 text-pretty font-light leading-snug tracking-extra-tight text-gray-new-70 lg:mt-2 lg:text-sm">
+                <p className="swiper-no-swiping mt-2.5 text-pretty font-light leading-snug tracking-extra-tight text-gray-new-70 lg:pointer-events-none lg:mt-2 lg:text-sm">
                   {description}
                 </p>
+                {link && (
+                  <Link
+                    className="mt-3.5 flex text-[15px] leading-none -tracking-[0.03em] lg:mt-3 lg:text-sm"
+                    to={link}
+                    theme="green"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    withArrow
+                  >
+                    Learn more
+                  </Link>
+                )}
               </div>
+              <GradientBorder className="!rounded-[10px]" withBlend />
             </div>
           </SwiperSlide>
         ))}
@@ -135,6 +151,7 @@ Slider.propTypes = {
     PropTypes.shape({
       title: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
+      link: PropTypes.string,
       icon: PropTypes.string.isRequired,
     })
   ).isRequired,
