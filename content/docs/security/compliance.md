@@ -36,6 +36,8 @@ The California Consumer Privacy Act (CCPA) grants California residents new right
 
 Neon offers HIPAA compliance as part of our Business and Enterprise plans, enabling applications that handle Protected Health Information (PHI) to meet compliance requirements.
 
+A copy of Neon's HIPAA compliance report can be requested through our [Trust Center](https://trust.neon.tech/).
+
 To request a draft Business Associate Agreement (BAA), please [contact the Neon Sales team](https://neon.tech/contact-sales). Once a BAA is signed, the Neon Sales team can assist you with enabling HIPAA for your Neon account.  
 
 HIPAA-enabled accounts can request access to HIPAA audit logs by [opening a support request](https://console.neon.tech/app/projects?modal=support).
