@@ -101,7 +101,7 @@ const Hero = () => {
   );
 
   return (
-    <section className="hero safe-paddings relative pt-40 xl:pt-[152px] lg:pt-32 md:pt-[88px]">
+    <section className="hero safe-paddings relative pt-40 xl:pt-[152px] lg:pt-[88px] md:pt-20">
       <Container className="relative z-10 xl:px-8" size="1100">
         <div className="flex flex-col items-center text-center">
           <h1 className="font-title text-[62px] font-medium leading-none -tracking-[0.03em] text-white xl:text-[56px] lg:text-[48px] sm:text-[36px]">
