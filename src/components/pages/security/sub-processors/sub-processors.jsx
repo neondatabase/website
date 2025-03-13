@@ -35,7 +35,14 @@ const SubProcessors = () => (
           </div>
         </div>
         <div className="relative shrink-0 overflow-hidden rounded-xl lg:shrink-[unset] md:grow sm:w-full">
-          <Image className="sm:w-full" src={subprocessors} width={448} height={268} alt="" />
+          <Image
+            className="sm:w-full"
+            src={subprocessors}
+            width={448}
+            height={268}
+            quality={100}
+            alt=""
+          />
           <GradientBorder withBlend />
         </div>
       </div>
