@@ -101,15 +101,13 @@ If the restrictions above prevent you from transferring your project, consider t
 
 Changing the Neon pricing plan for an Azure subscription involves the following steps:
 
-1. [Creating a new Neon resource](#create-a-neon-resource) with the desired pricing plan.
-2. Opening a [support ticket](https://console.neon.tech/app/projects?modal=support) to request assistance transferring your existing Neon projects to the new Neon resource. The Neon support team will transfer your projects from the "old" Neon organization to the new one. If you're on the Neon Free Plan and can't open a support ticket, you can email Neon support at `support@neon.tech`.
-3. Once the project transfer is complete, you can [delete your old Neon resource](#deleting-a-neon-resource-in-azure). If the old resource was on a paid plan, deleting it will stop billing.
+1. Navigate to the [Azure portal](https://portal.azure.com/) and sign in.
+2. Locate your Neon Serverless Postgres resource by searching for it at the top of the page or locating it under **Resources** or **Navigate** > **All resources**.
+3. Select your Neon resource to open the **Overview** page.
+4. Select the **Change Plan** tab. This will open the **Change Plan** drawer where you can select from available Neon plans. Supported plans include the Neon Free Plan, Scale Plan, and Business Plan. A description of what's included in each plan is provided in the **Description** column in the drawer, but for more information about Neon plans, please visit our [Pricing](https://neon.tech/pricing) page.
 
-   <Admonition type="important" title="Do not delete your old Neon resource until the transfer is completed">
-   Deleting a Neon resource from Azure removes the Neon organization and all associated projects and data. Before deleting your old resource, ensure your projects and data have been successfully transferred to the new organization.
-   </Admonition>
-
-Alternatively, you can perform the migration to the new Neon resource yourself. First, create a new Neon resource as described above. This will create a new organization in Neon. Add a Neon project to the new organization, then migrate your data from the project in your old organization to the project in the new organization using `pg_dump` and `pg_restore`. See [Migrate data from Postgres with pg_dump and pg_restore](/docs/import/migrate-from-postgres#run-a-test-migration) for instructions. You can [delete your old Neon resource](#deleting-a-neon-resource-in-azure) after you've migrated your data.
+   ![Azure change plan](/docs/introduction/azure_change_plan.png)
+5. Click **Change Plan** to complete the plan change.
 
 ## Enterprise Plan
 
