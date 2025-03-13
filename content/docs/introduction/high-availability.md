@@ -51,7 +51,7 @@ Here's a summary of how different storage components handle and recover from fai
 
 | Component      | Failure impact                                 | Recovery mechanism                  | Recovery time |
 | -------------- | ---------------------------------------------- | ----------------------------------- | ------------- |
-| Safekeeper     | WAL writes continue to other Safekeepers       | Automatic redistribution across AZs | Seconds       |
+| Safekeeper     | WAL writes continue to other Safekeepers       | Redundancy is built-in              | Immediate     |
 | Pageserver     | Read requests automatically route to secondary | Automatic failover to secondary     | Seconds       |
 | Object storage | No impact - 99.999999999% durability           | Multi-AZ redundancy built-in        | Immediate     |
 
