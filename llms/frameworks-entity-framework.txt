@@ -87,7 +87,7 @@ If you do not have one already, create a Neon project.
    ```json
    {
      "ConnectionStrings": {
-       "TodoDbConnection": "Host=your-neon-host;Database=your-db;Username=your-username;Password=your-password;SSL Mode=Require"
+       "TodoDbConnection": "Host=[neon_hostname];Database=[dbname];Username=[username];Password=[password];SSL Mode=Require"
      }
    }
    ```

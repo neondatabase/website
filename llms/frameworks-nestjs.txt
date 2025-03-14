@@ -43,7 +43,7 @@ npm install @neondatabase/serverless
 Add a `.env` file to your project directory and add your Neon connection string to it. You can find your connection details by clicking **Connect** on the Neon **Project Dashboard**.
 
 ```shell
-DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require"
+DATABASE_URL="postgresql://<[user]:[password]@[neon_hostname]:<port>/<dbname>?sslmode=require"
 ```
 
 ## Configure the Postgres client

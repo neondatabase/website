@@ -96,8 +96,8 @@ const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
 const pool = new Pool({
   host: PGHOST,
   database: PGDATABASE,
-  username: PGUSER,
-  password: PGPASSWORD,
+  username: "[username]",
+  password: "[password]",
   port: 5432,
   ssl: {
     require: true,
@@ -128,8 +128,8 @@ const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
 const sql = postgres({
   host: PGHOST,
   database: PGDATABASE,
-  username: PGUSER,
-  password: PGPASSWORD,
+  username: "[username]",
+  password: "[password]",
   port: 5432,
   ssl: 'require',
 });
@@ -168,8 +168,8 @@ const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
 const sql = postgres({
   host: PGHOST,
   database: PGDATABASE,
-  username: PGUSER,
-  password: PGPASSWORD,
+  username: "[username]",
+  password: "[password]",
   port: 5432,
   ssl: 'require',
   connection: {

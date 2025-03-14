@@ -43,7 +43,7 @@ If you do not have one already, create a Neon project.
    ```json
    {
      "ConnectionStrings": {
-       "DefaultConnection": "Host=your-neon-host;Database=your-database;Username=your-username;Password=your-password;SSL Mode=Require;Trust Server Certificate=true"
+       "DefaultConnection": "Host=[neon_hostname];Database=[dbname];Username=[username];Password=[password];SSL Mode=Require;Trust Server Certificate=true"
      }
    }
    ```
