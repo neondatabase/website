@@ -101,6 +101,20 @@ All systems are hosted on AWS and Azure, where we have implemented specific secu
 
 To learn more about how we protect your data and uphold the highest standards of security and privacy, please visit our [Trust Center](https://trust.neon.tech/).
 
+## GitHub secret scanning
+
+Neon is a [GitHub Secret Scanning Partner](https://docs.github.com/en/code-security/secret-scanning/secret-scanning-partner-program). If a Neon database credential or API key is detected in a GitHub repository, GitHub alerts Neon through an automated system. This system validates the credential, notifies our security team, and informs affected customers.
+
+By integrating with GitHub Secret Scanning, Neon helps users quickly identify and mitigate exposed credentials, reducing the risk of unauthorized access.
+
+To avoid leaking secrets, follow these security best practices:
+
+- Use environment variables instead of hardcoding credentials.
+- Store sensitive information in secret management tools like AWS Secrets Manager or HashiCorp Vault.
+- Regularly rotate database credentials and API keys.
+
+If you have questions about this integration or need help securing your credentials, contact us at `security@neon.tech`.
+
 ## Security reporting
 
 Neon adheres to the [securitytxt.org](https://securitytxt.org/) standard for transparent and efficient security reporting. For details on how to report potential vulnerabilities, please visit our [Security reporting](/docs/security/security-reporting) page or refer to our [security.txt](https://neon.tech/security.txt) file.
