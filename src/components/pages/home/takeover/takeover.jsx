@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
+import LINKS from 'constants/links';
 import bg from 'images/pages/home/hero/bg.jpg';
 
 const Takeover = () => (
@@ -24,7 +25,7 @@ const Takeover = () => (
             className="!w-[220px] font-semibold lg:text-sm"
             theme="primary"
             size="md-new"
-            to="/"
+            to={`${LINKS.blog}/pgsearch-on-neon`}
             tag_name="HP Pgsearch"
             analyticsEvent="home_hp_pgsearch_clicked"
           >
