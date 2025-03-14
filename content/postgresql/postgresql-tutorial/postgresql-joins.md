@@ -116,9 +116,9 @@ Output:
 
 The inner join examines each row in the first table (`basket_a`). It compares the value in the `fruit_a` column with the value in the `fruit_b` column of each row in the second table (`basket_b`). If these values are equal, the inner join creates a new row that contains columns from both tables and adds this new row to the result set.
 
-The following Venn diagram illustrates the inner join:
+The following diagram illustrates the inner join:
 
-![PostgreSQL Join - Inner Join](/postgresqltutorial/PostgreSQL-Join-Inner-Join.png)
+![PostgreSQL Join - Inner Join](/postgresqltutorial/join.svg)
 
 ## PostgreSQL left join
 
@@ -154,9 +154,9 @@ If these values are equal, the left join creates a new row that contains columns
 
 In case the values do not equal, the left join also creates a new row that contains columns from both tables and adds it to the result set. However, it fills the columns of the right table (`basket_b`) with null. (see the row \#3 and \#4 in the result set).
 
-The following Venn diagram illustrates the left join:
+The following diagram illustrates the left join:
 
-![PostgreSQL Join - Left Join](/postgresqltutorial/PostgreSQL-Join-Left-Join.png)
+![PostgreSQL Join - Left Join](/postgresqltutorial/join-left.svg)
 To select rows from the left table that do not have matching rows in the right table, you use the left join with a [`WHERE`](postgresql-where) clause. For example:
 
 ```sql
@@ -185,9 +185,9 @@ The output is:
 
 Note that the `LEFT JOIN` is the same as the `LEFT OUTER JOIN` so you can use them interchangeably.
 
-The following Venn diagram illustrates the left join that returns rows from the left table that do not have matching rows from the right table:
+**Left Anti-Join:** The following diagram illustrates the left join that returns rows from the left table that do not have matching rows from the right table:
 
-![PostgreSQL Join - Left Join with Where](/postgresqltutorial/PostgreSQL-Join-Left-Join-with-Where.png)
+![PostgreSQL Left Anti-Join](/postgresqltutorial/join-left-anti.svg)
 
 ## PostgreSQL right join
 
@@ -224,7 +224,7 @@ Here is the output:
 
 The following Venn diagram illustrates the right join:
 
-![PostgreSQL Join - Right Join](/postgresqltutorial/PostgreSQL-Join-Right-Join.png)
+![PostgreSQL Join - Right Join](/postgresqltutorial/join-right.svg)
 Similarly, you can get rows from the right table that do not have matching rows from the left table by adding a `WHERE` clause as follows:
 
 ```sql
@@ -252,9 +252,9 @@ Output:
 
 The `RIGHT JOIN` and `RIGHT OUTER JOIN` are the same therefore you can use them interchangeably.
 
-The following Venn diagram illustrates the right join that returns rows from the right table that do not have matching rows in the left table:
+The following diagram illustrates the right join that returns rows from the right table that do not have matching rows in the left table:
 
-![PostgreSQL Join - Right Join with Where](/postgresqltutorial/PostgreSQL-Join-Right-Join-with-Where.png)
+![PostgreSQL Join - Right Join with Where](/postgresqltutorial/join-right.svg)
 
 ## PostgreSQL full outer join
 
@@ -287,9 +287,9 @@ Output:
 
 ```
 
-The following Venn diagram illustrates the full outer join:
+The following diagram illustrates the full outer join:
 
-![PostgreSQL Join - Full Outer Join](/postgresqltutorial/PostgreSQL-Join-Full-Outer-Join.png)
+![PostgreSQL Join - Full Outer Join](/postgresqltutorial/join-full.svg)
 To return rows in a table that do not have matching rows in the other, you use the full join with a `WHERE` clause like this:
 
 ```sql
@@ -319,7 +319,7 @@ Here is the result:
 
 The following Venn diagram illustrates the full outer join that returns rows from a table that do not have the corresponding rows in the other table:
 
-![PostgreSQL Join - Full Outer Join with Where](/postgresqltutorial/PostgreSQL-Join-Full-Outer-Join-with-Where.png)
+![PostgreSQL Join - Full Outer Join with Where](/postgresqltutorial/join-full-anti.svg)
 The following picture shows all the PostgreSQL joins that we discussed so far with the detailed syntax:
 
 ![PostgreSQL Joins](/postgresqltutorial/PostgreSQL-Joins.png)
