@@ -103,7 +103,17 @@ To learn more about how we protect your data and uphold the highest standards of
 
 ## GitHub secret scanning
 
-Passwords and API key tokens generated for use with your Neon databases and projects are secured through the [GitHub secret scanning partner program](https://docs.github.com/en/code-security/secret-scanning/secret-scanning-partner-program). If passwords or API key tokens are committed in plain text to a public GitHub repository, Neon will notify the email address associated with the Neon project so that you may take corrective action.
+Neon is a [GitHub Secret Scanning Partner](https://docs.github.com/en/code-security/secret-scanning/secret-scanning-partner-program). When a Neon database credential or API key is detected by GitHub, GitHub notifies Neon through an automated system that validates the credential, alerts our security team on Slack, and notifies customers of the leak.
+
+By integrating with GitHub's Secret Scanning, Neon provides an additional layer of security for our users, ensuring that exposed credentials are identified quickly and mitigated before they can be abused. This proactive approach helps prevent unauthorized access.
+
+To prevent accidentally leaking secrets, we strongly recommend following these security best practices:
+
+- Use environment variables instead of hardcoding credentials.
+- Store sensitive information in secret management tools like AWS Secrets Manager or HashiCorp Vault.
+- Regularly rotate database credentials and API keys to minimize risk.
+
+If you have any questions about this integration or require assistance securing your credentials, you can reach out to us at `security@neon.tech`.
 
 ## Security reporting
 
