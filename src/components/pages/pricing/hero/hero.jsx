@@ -194,8 +194,8 @@ const Hero = () => {
         </div>
         <CtaBlock
           className="max-w-[656px]"
-          title="Custom Enterprise Plans"
-          description="Connect with our team for higher resource limits, dedicated requirements, annual contracts, and more."
+          title="Custom Plans"
+          description="Connect with our team for HIPAA compliance, annual contracts, higher resource limits, and more."
           buttonText="Talk to Sales"
           buttonUrl={LINKS.contactSales}
           size="sm"

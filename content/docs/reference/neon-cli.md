@@ -2,6 +2,8 @@
 title: Neon CLI
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
+redirectFrom:
+  - /docs/reference/cli-create-app
 updatedOn: '2025-02-05T17:44:21.069Z'
 ---
 
@@ -155,7 +157,6 @@ Commands:
   neon operations                  Manage operations               [aliases: operation]
   neon connection-string [branch]  Get connection string                  [aliases: cs]
   neon set-context                 Set the current context
-  neon create-app                  Initialize a new Neon project   [aliases: bootstrap]
   neon completion                  generate completion script
 
 Global options:
@@ -188,7 +189,6 @@ Options:
 | [operations](/docs/reference/cli-operations)               | `list`                                                                                                       | Manage operations                                 |
 | [connection-string](/docs/reference/cli-connection-string) |                                                                                                              | Get connection string                             |
 | [set-context](/docs/reference/cli-set-context)             |                                                                                                              | Set context for session                           |
-| [create-app](/docs/reference/cli-create-app)               |                                                                                                              | Initialize a new Neon project                     |
 | [completion](/docs/reference/cli-completion)               |                                                                                                              | Generate a completion script                      |
 
 ## Global options

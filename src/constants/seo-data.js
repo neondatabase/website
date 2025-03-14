@@ -104,12 +104,6 @@ export default {
     pathname: `${LINKS.useCases}/serverless-apps`,
     imagePath: '/images/social-previews/serverless-apps.jpg',
   },
-  generateTicket: {
-    title: 'Grab the ticket for Neon Deploy',
-    description:
-      "Generate a unique ticket image with your GitHub profile and participate in Neon's right after the conference.",
-    pathname: LINKS.generateTicket,
-  },
   partners: {
     title: 'Accelerate your business with Neon partnership — Neon',
     description: 'Bring familiar, reliable and scalable Postgres experience to your customers.',
@@ -152,7 +146,6 @@ export default {
     pathname: LINKS.flow,
     type: 'article',
   },
-  // TODO: Add REAL SEO data for scalable architecture page
   scalableArchitecture: {
     title: 'Neon Scalable Architecture — Neon',
     description:
@@ -164,6 +157,13 @@ export default {
     description:
       'Join us online on October 30th at 10:00 AM PT to learn how Neon empowers developers to ship faster with Postgres.',
     pathname: LINKS.stage,
+  },
+  security: {
+    title: 'Security — Neon',
+    description:
+      "Discover Neon's security & compliance standards, including SOC 2, GDPR, and HIPAA, with encryption and access controls to protect your data.",
+    imagePath: '/images/social-previews/security.jpg',
+    pathname: LINKS.security,
   },
   generateTicket: {
     title: 'Grab the ticket for Neon Deploy',

@@ -19,15 +19,16 @@ export default {
   guides: '/guides',
   partners: '/partners',
   awsIsrael: '/partners/aws-israel',
+  migrationAssistance: '/migration-assistance',
   postgresqltutorial: '/postgresql/tutorial',
   pricing: '/pricing',
   scalableArchitecture: '/scalable-architecture',
   scaleTrial: '/scale-trial',
+  security: '/security',
   stage: '/stage',
   templates: '/templates',
   thankYou: '/thank-you',
   useCases: '/use-cases',
-  migrationAssistance: '/migration-assistance',
   // Docs
   docs: '/docs',
   docsHome: '/docs/introduction',
@@ -44,7 +45,6 @@ export default {
   docsBranching: '/docs/introduction/branching',
   migration: '/docs/import/import-data-assistant',
   rlsAuthorize: '/docs/guides/neon-rls-authorize',
-  security: '/docs/security/security-overview',
   serverless: '/docs/introduction/serverless',
   support: '/docs/introduction/support',
   variableTraffic: '/docs/use-cases/variable-traffic',
@@ -58,6 +58,9 @@ export default {
   cookiePolicy: '/cookie-policy',
   subprocessors: '/subprocessors',
   businessInformation: '/business-info',
+  sensitiveDataTerms: '/sensitive-data-terms',
+  hipaaCompliance: '/hipaa-compliance-guide',
+  hipaaContractors: '/hipaa-contractors',
   // Console
   console: 'https://console.neon.tech',
   login: 'https://console.neon.tech/login',
@@ -80,4 +83,5 @@ export default {
   certHIPAA: 'https://trust.neon.tech/?itemUid=aec41c33-0f3a-4030-ac59-49adfd4a975b',
   // Other
   apiReference: 'https://api-docs.neon.tech/reference/getting-started-with-neon-api',
+  bugBounty: 'https://hackerone.com/neon_bbp',
 };
