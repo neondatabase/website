@@ -57,6 +57,19 @@ const defaultConfig = {
         ],
       },
       {
+        source: '/:all*(txt)',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'text/plain; charset=utf-8',
+          },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=0, must-revalidate',
+          },
+        ],
+      },
+      {
         source: '/animations/:all*',
         headers: [
           {
@@ -293,6 +306,14 @@ const defaultConfig = {
   },
   async rewrites() {
     return [
+      {
+        source: '/llms.txt',
+        destination: '/public/llms.txt',
+      },
+      {
+        source: '/llms/:path*.txt',
+        destination: '/public/llms/:path*.txt',
+      },
       {
         source: '/api_spec/release/v2.json',
         destination: 'https://dfv3qgd2ykmrx.cloudfront.net/api_spec/release/v2.json',
