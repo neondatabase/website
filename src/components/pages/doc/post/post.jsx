@@ -73,8 +73,10 @@ const Post = ({
   fileOriginPath,
   tableOfContents,
 }) => {
-  const modal = MODALS.find((modal) =>
-    breadcrumbs.some((breadcrumb) => modal.breadcrumb === breadcrumb.title)
+  const modal = MODALS.find(
+    (modal) =>
+      breadcrumbs.some((breadcrumb) => modal.breadcrumb === breadcrumb.title) ||
+      (currentSlug === 'introduction' && modal.breadcrumb === 'Neon Docs')
   );
 
   return (
