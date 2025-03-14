@@ -104,12 +104,6 @@ export default {
     pathname: `${LINKS.useCases}/serverless-apps`,
     imagePath: '/images/social-previews/serverless-apps.jpg',
   },
-  generateTicket: {
-    title: 'Grab the ticket for Neon Deploy',
-    description:
-      "Generate a unique ticket image with your GitHub profile and participate in Neon's right after the conference.",
-    pathname: LINKS.generateTicket,
-  },
   partners: {
     title: 'Accelerate your business with Neon partnership — Neon',
     description: 'Bring familiar, reliable and scalable Postgres experience to your customers.',
@@ -171,15 +165,11 @@ export default {
     imagePath: '/images/social-previews/security.jpg',
     pathname: LINKS.security,
   },
-  error: {
-    title: 'Page Is Broken — Neon',
-  },
-  404: {
-    title: 'Page Not Found — Neon',
-  },
-  '404-ticket': {
-    title: 'Ticket Not Found - Neon',
-    imagePath: '/images/social-previews/no-name-ticket.jpg',
+  generateTicket: {
+    title: 'Grab the ticket for Neon Deploy',
+    description:
+      "Generate a unique ticket image with your GitHub profile and participate in Neon's right after the conference.",
+    pathname: LINKS.generateTicket,
   },
   ticket({ name, login: githubHandle }) {
     const userName = name || githubHandle;
@@ -188,6 +178,16 @@ export default {
       title: `${userName}'s ticket for Neon Deploy - Neon`,
       description: `Join ${userName} virtually at Deploy on October 30th to learn how Neon empowers developers to ship faster with Postgres.`,
     };
+  },
+  '404-ticket': {
+    title: 'Ticket Not Found - Neon',
+    imagePath: '/images/social-previews/no-name-ticket.jpg',
+  },
+  error: {
+    title: 'Page Is Broken — Neon',
+  },
+  404: {
+    title: 'Page Not Found — Neon',
   },
 };
 
