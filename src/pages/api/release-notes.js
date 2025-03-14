@@ -1,17 +1,15 @@
 import fs from 'fs/promises';
-import path from 'path';
 
 import matter from 'gray-matter';
 
-import { RELEASE_NOTES_DIR_PATH } from 'constants/docs';
+import { CHANGELOG_DIR_PATH } from 'constants/content';
 import { getPostSlugs } from 'utils/api-docs';
 import getExcerpt from 'utils/get-excerpt';
 
 // TODO: move this function to utils/api-docs
 const getPostBySlug = async (slug, pathname) => {
   try {
-    const pathDirectory = path.join(process.cwd(), `${pathname}/${slug}.md`);
-    const source = await fs.readFile(pathDirectory, 'utf8');
+    const source = await fs.readFile(`${process.cwd()}/${pathname}/${slug}.md`, 'utf8');
     const { data, content } = matter(source);
 
     const match = content.match(/### (.+)/);
@@ -32,11 +30,11 @@ const getPostBySlug = async (slug, pathname) => {
 
 export default async function handler(req, res) {
   try {
-    const slugs = (await getPostSlugs(RELEASE_NOTES_DIR_PATH)).map((slug) => slug.replace('/', ''));
+    const slugs = (await getPostSlugs(CHANGELOG_DIR_PATH)).map((slug) => slug.replace('/', ''));
 
     const releaseNotesPromises = slugs.map(async (slug) => {
       try {
-        const post = await getPostBySlug(slug, RELEASE_NOTES_DIR_PATH);
+        const post = await getPostBySlug(slug, CHANGELOG_DIR_PATH);
         const { data, title } = post;
         if (process.env.NODE_ENV === 'production') {
           if (data?.isDraft) {

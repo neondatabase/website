@@ -1,8 +1,5 @@
-'use client';
-
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { useInView } from 'react-intersection-observer';
 
 import Container from 'components/shared/container';
 import StatusBadge from 'components/shared/footer/status-badge';
@@ -10,83 +7,144 @@ import ThemeSelect from 'components/shared/footer/theme-select';
 import Link from 'components/shared/link';
 import Logo from 'components/shared/logo';
 import MENUS from 'constants/menus.js';
+import ChevronIcon from 'icons/chevron-down.inline.svg';
 
-const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) => {
-  const isDarkTheme = theme === 'black' || theme === 'black-new' || theme === 'gray-8';
-  const [ref, inView] = useInView({ triggerOnce: true });
+const Footer = ({ hasThemesSupport = false, theme = null }) => {
+  const isDarkTheme = theme === 'dark';
+
   return (
     <footer
       className={clsx(
-        'z-999 safe-paddings relative mt-auto overflow-hidden dark:bg-gray-new-8 dark:text-white',
-        !isDarkTheme && withTopBorder && 'border-t border-gray-new-90 dark:border-gray-new-20',
-        isDarkTheme && withTopBorder && 'border-t border-gray-2',
-        { 'border-gray-new-15 bg-black-new text-white': theme === 'black-new' },
-        { 'bg-black text-white': theme === 'black' },
-        { 'bg-white text-black': theme === 'white' }
+        'safe-paddings relative z-50 mt-auto dark:bg-black-pure dark:text-white',
+        'before:absolute before:left-1/2 before:top-0 before:h-px before:w-full before:max-w-[1920px] before:-translate-x-1/2 before:opacity-10 before:[mask-image:linear-gradient(90deg,transparent_0%,black_40%,black_60%,transparent_100%);] dark:before:bg-white',
+        isDarkTheme ? 'bg-black-pure before:bg-white' : 'bg-white before:bg-gray-new-10'
       )}
-      ref={ref}
     >
-      <Container className="flex justify-between py-10 xl:py-8" size="lg">
-        <div className="flex flex-col items-start justify-between md:w-full md:space-y-8 sm:space-y-6">
-          <div className="mb-7 flex flex-col xl:mb-5 md:mb-0 md:w-full md:flex-row md:items-start md:justify-between">
-            <div className="flex flex-col">
-              <Link className="block" to="/">
-                <span className="sr-only">Neon</span>
-                <Logo className="w-auto sm:h-6" isThemeBlack={isDarkTheme} />
-              </Link>
-              <StatusBadge isDocPage={isDocPage} inView={inView} />
+      <Container
+        className="flex justify-between gap-x-10 pb-[51px] pt-10 xl:pt-9 lg:pb-9 sm:py-8"
+        size="1344"
+      >
+        <div className="flex flex-col items-start justify-between lg:w-full lg:flex-row sm:flex-col sm:gap-y-5">
+          <div className="mb-[30px] flex grow flex-col lg:mb-0 sm:w-full sm:flex-row sm:justify-between">
+            <div className="flex grow flex-col items-start">
+              <Logo
+                className="h-8 w-[116px] lg:h-7 lg:w-auto sm:h-[26px]"
+                isDarkTheme={isDarkTheme}
+                width={116}
+                height={32}
+              />
+
+              <StatusBadge hasThemesSupport={hasThemesSupport} isDarkTheme={isDarkTheme} />
+              {hasThemesSupport && <ThemeSelect className="mt-7 xl:mt-6 md:mt-3" />}
             </div>
-            {isDocPage && <ThemeSelect className="mt-7 xl:mt-6 md:mt-0" />}
           </div>
-          <div
-            className={clsx(
-              { 'tracking-tight text-gray-new-80': theme === 'black-new' || theme === 'gray-8' },
-              'space-y-[18px] text-sm leading-none dark:text-gray-new-80 lg:leading-tight'
-            )}
-          >
+          <div className="flex flex-col gap-x-1 gap-y-3 text-[13px] leading-none tracking-extra-tight text-gray-new-40 lg:flex-row lg:self-end lg:leading-tight sm:flex-col sm:self-start">
             <p>Made in SF and the World</p>
-            <p>Neon 2023 Ⓒ All rights reserved</p>
+            <p>
+              <span className="lg:hidden">Copyright </span>Ⓒ 2022 – 2025 Neon, Inc.
+            </p>
           </div>
         </div>
-        <div className="flex space-x-[123px] xl:space-x-8 md:hidden">
-          {MENUS.footer.map(({ heading, links }, index) => (
-            <div className={clsx('flex flex-col xl:w-full')} key={index}>
+        <div className="flex w-full max-w-[860px] justify-between xl:max-w-[700px] lg:hidden">
+          {MENUS.footer.map(({ heading, items }, index) => (
+            <div className="flex flex-col pt-3" key={index}>
               <span
                 className={clsx(
-                  {
-                    'text-[13px] font-semibold text-gray-new-60':
-                      theme === 'black-new' || theme === 'gray-8',
-                  },
-                  'relative text-sm font-bold uppercase leading-none tracking-wider dark:text-gray-new-60'
+                  'relative text-xs font-semibold uppercase leading-none tracking-normal dark:text-white',
+                  isDarkTheme ? 'text-white' : 'text-gray-new-10'
                 )}
               >
                 {heading}
               </span>
-              <ul className="mt-6 flex grow flex-col space-y-[18px]">
-                {links.map(({ to, text, icon }, index) => {
-                  const isExternalUrl = to.startsWith('http');
+              <ul className="mt-7 flex grow flex-col gap-y-5">
+                {items.map(({ to, text, description, icon, links }, index) => {
+                  const Tag = to ? Link : 'div';
+                  const isExternalUrl = to?.startsWith('http');
+                  const hasSubmenu = links?.length > 0;
+
                   return (
-                    <li className="flex" key={index}>
-                      <Link
-                        className="group relative flex items-center gap-2 whitespace-nowrap leading-none"
+                    <li
+                      className={clsx(
+                        'flex w-fit',
+                        hasSubmenu && 'group relative [perspective:2000px]'
+                      )}
+                      key={index}
+                    >
+                      <Tag
+                        className={clsx(
+                          'group/link relative flex items-center whitespace-nowrap text-[15px] leading-none tracking-extra-tight dark:text-gray-new-70',
+                          isDarkTheme ? 'text-gray-new-70' : 'text-gray-new-30',
+                          to && 'hover:!text-green-45',
+                          hasSubmenu && 'cursor-pointer'
+                        )}
                         to={to}
-                        theme={isDarkTheme ? 'white' : 'black'}
-                        target={isExternalUrl ? '_blank' : null}
+                        theme={isDarkTheme ? 'gray-70' : 'gray-30'}
                         rel={isExternalUrl ? 'noopener noreferrer' : null}
+                        target={isExternalUrl ? '_blank' : null}
                       >
                         {icon && (
                           <span
                             className={clsx(
                               icon,
-                              'inline-block h-4 w-4 transition-colors duration-200',
-                              isDarkTheme
-                                ? 'bg-white group-hover:bg-primary-2'
-                                : 'bg-black group-hover:bg-primary-2 dark:bg-white dark:group-hover:bg-primary-2'
+                              'inline-block dark:bg-gray-new-70',
+                              heading === 'Compliance' ? 'mr-1.5 size-3' : 'mr-2.5 size-4',
+                              isDarkTheme ? 'bg-gray-new-70' : 'bg-gray-new-30',
+                              to && 'transition-colors duration-200 group-hover/link:bg-green-45'
                             )}
                           />
                         )}
                         {text}
-                      </Link>
+                        {description && (
+                          <span
+                            className={clsx(
+                              'ml-1.5 dark:text-gray-new-40',
+                              isDarkTheme ? 'text-gray-new-40' : 'text-gray-new-70',
+                              to &&
+                                'transition-colors duration-200 group-hover/link:text-green-45/50'
+                            )}
+                          >
+                            {description}
+                          </span>
+                        )}
+                        {hasSubmenu && (
+                          <ChevronIcon className="ml-1 size-3.5 scale-75 [&_path]:stroke-2" />
+                        )}
+                      </Tag>
+                      {hasSubmenu && (
+                        <div
+                          className={clsx(
+                            'absolute bottom-full right-0 min-w-[230px] pb-2.5',
+                            'pointer-events-none opacity-0',
+                            'origin-bottom-right transition-[opacity,transform] duration-200 [transform:rotateX(12deg)_scale(0.9)]',
+                            'group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-hover:[transform:none]'
+                          )}
+                        >
+                          <ul
+                            className={clsx(
+                              'relative flex w-full flex-col gap-y-1 rounded-[14px] border px-2 py-2.5 dark:border-[#16181D] dark:bg-[#0B0C0F] dark:shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]',
+                              isDarkTheme
+                                ? 'border-[#16181D] bg-[#0B0C0F] shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]'
+                                : 'border-gray-new-94 bg-white shadow-[0px_14px_20px_0px_rgba(0,0,0,.1)]'
+                            )}
+                          >
+                            {links.map(({ text, to }, index) => (
+                              <li key={index}>
+                                <Link
+                                  className={clsx(
+                                    'relative flex items-center overflow-hidden whitespace-nowrap rounded-lg p-3 text-[15px] leading-dense transition-colors duration-300 dark:text-white dark:hover:bg-[#16181D]',
+                                    isDarkTheme
+                                      ? 'text-gray-new-90 hover:bg-[#16181D]'
+                                      : 'text-gray-new-10 hover:bg-[#F5F5F5]'
+                                  )}
+                                  to={to}
+                                >
+                                  {text}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
                     </li>
                   );
                 })}
@@ -100,9 +158,8 @@ const Footer = ({ isDocPage = false, withTopBorder = false, theme = 'white' }) =
 };
 
 Footer.propTypes = {
-  isDocPage: PropTypes.bool,
-  withTopBorder: PropTypes.bool,
-  theme: PropTypes.oneOf(['white', 'black', 'black-new', 'gray-8']),
+  hasThemesSupport: PropTypes.bool,
+  theme: PropTypes.oneOf(['light', 'dark']),
 };
 
 export default Footer;

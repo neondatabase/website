@@ -1,0 +1,54 @@
+name: Format Markdown
+
+on:
+  push:
+    branches:
+      - '**'
+    paths:
+      - 'content/**/*.md'
+      
+jobs:
+  format-markdown:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 2
+        token: ${{ secrets.ACCESS_TOKEN }}
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 18
+
+    - name: Install Prettier
+      run: npm install prettier
+
+    - name: Run Prettier
+      run: npx prettier --write "content/**/*.md" --ignore-path .prettierignore
+
+    - name: Commit changes
+      run: |
+        git config user.name "GitHub Action"
+        git config user.email "action@github.com"
+        export HUSKY=0
+        git add -A
+        # Check for meaningful changes before committing 
+        if [ -n "$(git status --porcelain)" ]; then
+          # Commit only modified markdown files, not all changes
+          git commit -m "chore: format content markdown files with Prettier"
+          echo "Changes committed"
+        else
+          echo "No significant changes to commit"
+          exit 0
+        fi
+
+    - name: Pull latest changes
+      run: git pull --rebase
+
+    - name: Push changes
+      run: git push
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}

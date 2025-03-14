@@ -4,14 +4,14 @@ import React, { forwardRef } from 'react';
 
 const styles = {
   size: {
-    '2xl': 't-8xl font-bold leading-dense',
-    xl: 't-7xl font-bold leading-dense',
-    lg: 'text-[72px] font-bold leading-tight 2xl:text-6xl xl:text-[56px] xl:leading-dense md:text-[44px]',
-    md: 't-6xl font-bold leading-dense',
+    '2xl': 't-8xl font-medium leading-dense',
+    xl: 't-7xl font-medium leading-dense',
+    lg: 'text-[72px] font-medium leading-tight 2xl:text-6xl xl:text-[56px] xl:leading-dense md:text-[44px]',
+    md: 't-6xl font-medium leading-dense',
     '2sm':
       'text-[56px] font-medium leading-none tracking-tighter xl:text-[44px] lg:text-[40px] sm:text-[30px]',
-    sm: 't-4xl font-semibold',
-    xs: 't-base font-bold tracking-wider uppercase',
+    sm: 't-4xl font-medium',
+    xs: 't-base font-medium tracking-wider uppercase',
   },
   theme: {
     white: 'text-white',
@@ -20,7 +20,7 @@ const styles = {
 };
 
 const HeadingBadge = ({ text }) => (
-  <span className="nowrap mb-2 inline-block rounded-full bg-pricing-primary-4 px-[14px] py-[7px] text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-primary-1 lg:text-[10px]">
+  <span className="nowrap mb-2 inline-block rounded-full bg-[rgba(19,236,182,0.1)] px-[14px] py-[7px] text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-primary-1 lg:text-[10px]">
     {text}
   </span>
 );
@@ -39,7 +39,12 @@ const Heading = forwardRef(
     },
     ref
   ) => {
-    const className = clsx(styles.size[size], styles.theme[theme], additionalClassName);
+    const className = clsx(
+      'font-title',
+      styles.size[size],
+      styles.theme[theme],
+      additionalClassName
+    );
 
     if (asHTML) {
       return badge ? (

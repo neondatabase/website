@@ -1,55 +1,49 @@
 import 'styles/globals.css';
 
+import dynamic from 'next/dynamic';
 import Script from 'next/script';
 
-import TopBar from 'components/shared/topbar';
+import { ActiveLabelProvider } from 'components/pages/doc/code-tabs/CodeTabsContext';
 
+import { inter, esbuild } from './fonts';
+import { HomepageVisitProvider } from './homepage-visit-context';
+import PostHogProvider from './posthog-provider';
 import ThemeProvider from './provider';
+import SessionProvider from './session-provider';
 
-const fontsBasePath = '/fonts';
-const fontsPaths = [
-  '/ibm-plex-sans/ibm-plex-sans-bold.woff2',
-  '/ibm-plex-sans/ibm-plex-sans-regular.woff2',
-];
+const PostHogPageView = dynamic(() => import('./posthog-pageview'), {
+  ssr: false,
+});
 
 export const preferredRegion = 'edge';
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+  themeColor: '#000000',
+};
+
 // eslint-disable-next-line react/prop-types
 const RootLayout = ({ children }) => (
-  <html lang="en">
+  <html lang="en" className={`${inter.variable} ${esbuild.variable} dark`}>
     <head>
       {process.env.NODE_ENV === 'production' && (
-        <Script id="google-tag-manager" strategy="afterInteractive">
-          {`
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl+'';f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer', 'GTM-MJLTK6F');
-      `}
-        </Script>
+        <Script strategy="afterInteractive" src="https://neonapi.io/cb.js" />
       )}
-      {fontsPaths.map((fontPath, index) => (
-        <link
-          rel="preload"
-          href={`${fontsBasePath}${fontPath}`}
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-          key={index}
-        />
-      ))}
       <link rel="preconnect" href="https://console.neon.tech" />
-      <link rel="preconnect" href="https://auth.neon.tech" />
     </head>
     <body>
-      {process.env.NODE_ENV === 'production' && (
-        <noscript
-          dangerouslySetInnerHTML={{
-            __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MJLTK6F" height="0" width="0" style="display: none; visibility: hidden" aria-hidden="true"></iframe>`,
-          }}
-        />
-      )}
-      <ThemeProvider>
-        <TopBar />
-        {children}
-      </ThemeProvider>
+      <SessionProvider>
+        <PostHogProvider>
+          <PostHogPageView />
+          <ThemeProvider>
+            <HomepageVisitProvider>
+              <ActiveLabelProvider>{children}</ActiveLabelProvider>
+            </HomepageVisitProvider>
+          </ThemeProvider>
+        </PostHogProvider>
+      </SessionProvider>
     </body>
   </html>
 );

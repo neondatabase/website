@@ -1,12 +1,11 @@
 ---
 title: Manage multiple database environments
-subtitle: Learn how to create and manage multiple database environments with Neon and
-  Flyway
+subtitle: Learn how to manage schemas for multiple database environments with Flyway
 enableTableOfContents: true
-updatedOn: '2023-11-24T19:55:37.121Z'
+updatedOn: '2025-02-03T20:41:57.313Z'
 ---
 
-Flyway is a database migration tool that facilitates version control for databases. It allows developers to manage and track changes to the database schema, ensuring that the database evolves consistently across different environments.
+With Flyway, you can manage and track changes to your database schema, ensuring that the database evolves consistently across different environments.
 
 When automating releases, there are often multiple environments or a chain of environments that you must deliver changes to in a particular order. Such environments might include _development_, _staging_, and _production_.
 
@@ -15,8 +14,7 @@ In this guide, we'll show you how to use Neon's branching feature to spin up a b
 ## Prerequisites
 
 - A flyway installation. See [Get started with Flyway and Neon](/docs/guides/flyway) for installation instructions.
-- A Neon account. See [Sign up](/docs/get-started-with-neon/signing-up).
-- A Neon project. See [Create your first project](/docs/get-started-with-neon/setting-up-a-project).
+- A Neon account and project. See [Sign up](/docs/get-started-with-neon/signing-up).
 - A database. This guide uses the ready-to-use `neondb` database on the `main` branch of your Neon project. You can create your own database if you like. See [Create a database](/docs/manage/databases#create-a-database) for instructions.
 
 ## Add a table to your database
@@ -51,26 +49,20 @@ Perform these steps twice, once for your _development_ branch and once for your 
 
 <TabItem>
 
-<CodeBlock showLineNumbers>
-
-```bash
-neonctl branches create --name development
+```bash showLineNumbers
+neon branches create --name development
 ```
-
-</CodeBlock>
 
 </TabItem>
 
 <TabItem>
 
-<CodeBlock showLineNumbers>
-
-```bash
+```bash showLineNumbers
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/{project_id}/branches \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API' \
-     --header 'content-type: application/json' \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API" \
+     --header 'Content-Type: application/json' \
      --data '
 {
   "branch": {
@@ -85,8 +77,6 @@ curl --request POST \
 ' | jq
 ```
 
-</CodeBlock>
-
 </TabItem>
 
 </Tabs>
@@ -95,39 +85,27 @@ When you are finished, you should have a _development_ branch and a _staging_ br
 
 ## Retrieve your Neon database connection strings
 
-From the Neon **Dashboard**, retrieve the connection string for each branch (`main`, `development`, and `staging`) from the **Connection Details** widget. Use the **Branch** drop-down menu to select each branch before copying the connection string.
+From the Neon **Dashboard**, click **Connect** to retrieve the connection string for each branch (`main`, `development`, and `staging`) from the **Connect to your database** modal. Use the **Branch** drop-down menu to select each branch before copying the connection string.
 
-Your connection strings should look something like the ones shown below. Note that the hostname differs for each (the part starting with `ep-` and ending with `aws.neon.tech`). That's because each branch is hosted on its own compute instance.
+Your connection strings should look something like the ones shown below. Note that the hostname differs for each (the part starting with `ep-` and ending with `aws.neon.tech`). That's because each branch is hosted on its own compute.
 
 - **main**
 
-    <CodeBlock shouldWrap>
-
-    ```bash
-    jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
-    ```
-
-    </CodeBlock>
+  ```bash shouldWrap
+  jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
+  ```
 
 - **development**
 
-    <CodeBlock shouldWrap>
-
-    ```bash
-    jdbc:postgresql://ep-mute-night-47642501.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
-    ```
-
-    </CodeBlock>
+  ```bash shouldWrap
+  jdbc:postgresql://ep-mute-night-47642501.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
+  ```
 
 - **staging**
 
-    <CodeBlock shouldWrap>
-
-    ```bash
-    jdbc:postgresql://ep-shrill-shape-27763949.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
-    ```
-
-    </CodeBlock>
+  ```bash shouldWrap
+  jdbc:postgresql://ep-shrill-shape-27763949.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
+  ```
 
 ## Configure flyway to connect each environment
 
@@ -139,33 +117,29 @@ By default, Flyway loads its configuration from the default `conf/flyway.conf` f
 
 1. Switch to your Flyway `/conf` directory and create the following configuration files, one for each environment, by copying the default configuration file. For example:
 
-    ```bash
-    cd ~/flyway-x.y.z/conf
-    cp flyway.conf env_dev.conf
-    cp flyway.conf env_staging.conf
-    cp flyway.conf env_prod.conf
-    ```
+   ```bash
+   cd ~/flyway-x.y.z/conf
+   cp flyway.conf env_dev.conf
+   cp flyway.conf env_staging.conf
+   cp flyway.conf env_prod.conf
+   ```
 
-2. In each configuration file, update the following items with the correct connection details for that database environment. The `url` setting will differ for each environment (in `env_prod.conf` this will point to `main`). In this example, where you are the only user, the `user` and `password` settings should be the same for each of your three database environments.
+2. In each configuration file, update the following items with the correct connection details for that database environment. The `url` setting will differ for each environment (in `env_prod.conf`, the `url` will point to `main`). In this example, where you are the only user, the `user` and `password` settings should be the same for each of your three database environments.
 
-    <CodeBlock shouldWrap>
+   ```bash shouldWrap
+   flyway.url=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/neondb
 
-    ```bash
-    flyway.url=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/neondb
+   flyway.user=alex
 
-    flyway.user=alex
+   flyway.password=AbC123dEf
 
-    flyway.password=AbC123dEf
+   flyway.locations=filesystem:/home/alex/flyway-x.y.z/sql
 
-    flyway.locations=filesystem:/home/alex/flyway-x.y.z/sql
+   flyway.baselineOnMigrate=true
+   ```
 
-    flyway.baselineOnMigrate=true
-    ```
-
-    </CodeBlock>
-
-    - The `flyway.locations` setting tells Flyway where to look for your migration files. We'll create them in the `/sql` directory in a later step.
-    - The `flyway.baselineOnMigrate=true` setting tells Flyway to perform a baseline action when you run the `migrate` command on a non-empty schema with no Flyway schema history table. The schema will then be initialized with the `baselineVersion` before executing migrations. Only migrations above the `baselineVersion` will then be applied. This is useful for initial Flyway deployments on projects with an existing database. You can disable this setting by commenting it out again or setting it to false after applying your first migration on the database.
+   - The `flyway.locations` setting tells Flyway where to look for your migration files. We'll create them in the `/sql` directory in a later step.
+   - The `flyway.baselineOnMigrate=true` setting tells Flyway to perform a baseline action when you run the `migrate` command on a non-empty schema with no Flyway schema history table. The schema will then be initialized with the `baselineVersion` before executing migrations. Only migrations above the `baselineVersion` will then be applied. This is useful for initial Flyway deployments on projects with an existing database. You can disable this setting by commenting it out again or setting it to false after applying your first migration on the database.
 
 ## Create a migration
 
@@ -185,43 +159,31 @@ Run the migration on each environment in order by specifying the environment's c
 
 <TabItem>
 
-<CodeBlock showLineNumbers>
-
-```bash
+```bash showLineNumbers
 flyway migrate -configFiles="conf/env_dev.conf"
 ```
 
-</CodeBlock>
-
 </TabItem>
 
 <TabItem>
 
-<CodeBlock showLineNumbers>
-
-```bash
+```bash showLineNumbers
 flyway migrate -configFiles="conf/env_staging.conf"
 ```
 
-</CodeBlock>
-
 </TabItem>
 
 <TabItem>
 
-<CodeBlock showLineNumbers>
-
-```bash
+```bash showLineNumbers
 flyway migrate -configFiles="conf/env_prod.conf"
 ```
-
-</CodeBlock>
 
 </TabItem>
 
 </Tabs>
 
-If the migration command succesful, you’ll see output similar to the following. You'll should see this output for each command.
+A successful migration command returns output similar to the following:
 
 ```bash
 Database: jdbc:postgresql://ep-nameless-unit-49929920.us-east-2.aws.neon.tech/neondb (PostgreSQL 15.4)
@@ -235,11 +197,11 @@ Successfully applied 1 migration to schema "public", now at version v2 (executio
 A Flyway report has been generated here: /home/alex/flyway-x.y.z/report.html
 ```
 
-Your database should now be consistent across all three environments. You can verify that the data was added to each database by viewing the branch and table on the **Tables** page in the Neon console. Select **Tables** from the sidebar and select your database.
+After you run the migration commands, your database should be consistent across all three environments. You can verify that the data was added to each database by viewing the branch and table on the **Tables** page in the Neon Console. Select **Tables** from the sidebar and select your database.
 
 ## Conclusion
 
-You've seen how you can instantly create new database environment with Neon's branching feature and how to keep schemas consistent across different environments using Flyway. The steps in this guide were performed manually from the command line but could be easily integrated into your release management pipeline. Neon provides a [CLI](https://neon.tech/docs/reference/neon-cli) and [API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) for automating various tasks in Neon, such as branch creation, which you can also integrate into your release automation.
+You've seen how you can instantly create new database environment with Neon's branching feature and how to keep schemas consistent across different environments using Flyway. The steps in this guide were performed manually from the command line but could be easily integrated into your release management pipeline. Neon provides a [CLI](/docs/reference/neon-cli) and [API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) for automating various tasks in Neon, such as branch creation, which you can also integrate into your release automation.
 
 ## References
 

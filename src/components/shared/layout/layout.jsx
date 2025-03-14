@@ -1,60 +1,73 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
+import CookieConsent from 'components/shared/cookie-consent';
 import Footer from 'components/shared/footer';
 import Header from 'components/shared/header';
+import Topbar from 'components/shared/topbar';
 
 const Layout = ({
   className = null,
   headerClassName = null,
-  headerTheme,
-  footerTheme = 'white',
+  headerTheme = null,
+  footerTheme = null,
   withOverflowHidden = false,
-  isSignIn = false,
   children,
+  headerWithBorder = false,
   isHeaderSticky = false,
-  headerWithBottomBorder = false,
-  footerWithTopBorder = false,
+  isHeaderStickyOverlay = false,
+  hasThemesSupport = false,
   isDocPage = false,
-  isBlogPage = false,
+  docPageType = null,
+  customType = null,
+  isClient = false,
 }) => (
-  // 44px is the height of the topbar
-  <div className="relative flex min-h-[calc(100vh-44px)] flex-col">
-    <Header
-      className={headerClassName}
-      withBottomBorder={headerWithBottomBorder}
-      theme={headerTheme}
-      isSignIn={isSignIn}
-      isSticky={isHeaderSticky}
-      isDocPage={isDocPage}
-      isBlogPage={isBlogPage}
-    />
-    <main
-      className={clsx(
-        withOverflowHidden && 'overflow-hidden',
-        'flex flex-1 flex-col dark:bg-black',
-        className
-      )}
-    >
-      {children}
-    </main>
-    <Footer isDocPage={isDocPage} theme={footerTheme} withTopBorder={footerWithTopBorder} />
-  </div>
+  <>
+    <Topbar isDarkTheme={headerTheme === 'dark'} />
+    {/* 36px is the height of the topbar */}
+    <div className="relative flex min-h-[calc(100vh-36px)] flex-col pt-safe">
+      <Header
+        className={headerClassName}
+        theme={headerTheme}
+        isDarkTheme={headerTheme === 'dark'}
+        isSticky={isHeaderSticky}
+        isStickyOverlay={isHeaderStickyOverlay}
+        hasThemesSupport={hasThemesSupport}
+        isDocPage={isDocPage}
+        docPageType={docPageType}
+        withBorder={headerWithBorder}
+        customType={customType}
+        isClient={isClient}
+      />
+      <main
+        className={clsx(withOverflowHidden && 'overflow-hidden', 'flex flex-1 flex-col', className)}
+      >
+        {children}
+      </main>
+      <Footer hasThemesSupport={hasThemesSupport} theme={footerTheme} />
+      <CookieConsent />
+    </div>
+  </>
 );
 
 Layout.propTypes = {
   className: PropTypes.string,
   headerClassName: PropTypes.string,
-  headerTheme: PropTypes.oneOf(['white', 'black', 'black-new', 'gray-8']).isRequired,
-  footerTheme: PropTypes.oneOf(['white', 'black', 'black-new', 'gray-8']),
+  headerTheme: PropTypes.oneOf(['light', 'dark']),
+  footerTheme: PropTypes.oneOf(['light', 'dark']),
   withOverflowHidden: PropTypes.bool,
   children: PropTypes.node.isRequired,
-  isSignIn: PropTypes.bool,
   isHeaderSticky: PropTypes.bool,
-  headerWithBottomBorder: PropTypes.bool,
-  footerWithTopBorder: PropTypes.bool,
+  isHeaderStickyOverlay: PropTypes.bool,
+  headerWithBorder: PropTypes.bool,
   isDocPage: PropTypes.bool,
-  isBlogPage: PropTypes.bool,
+  docPageType: PropTypes.string,
+  hasThemesSupport: PropTypes.bool,
+  customType: PropTypes.shape({
+    title: PropTypes.string,
+    link: PropTypes.string,
+  }),
+  isClient: PropTypes.bool,
 };
 
 export default Layout;

@@ -1,10 +1,10 @@
 ---
 title: Security reporting
 enableTableOfContents: true
-updatedOn: '2023-10-07T10:43:33.430Z'
+updatedOn: '2025-03-07T12:51:22.977Z'
 ---
 
-Neon is currently in Technical Preview. We have established a security reporting procedure to address security issues quickly.
+We have established the following security reporting procedure to address security issues quickly.
 
 <Admonition type="important">
 If you have a security concern or believe you have found a vulnerability in any part of our infrastructure, please contact us at [security@neon.tech](mailto:security@neon.tech). If you need to share sensitive information, we can provide you with a security contact number through [Signal](https://signal.org/).
@@ -20,7 +20,9 @@ If you have a security concern or believe you have found a vulnerability in any 
 
 We strive to resolve all problems quickly and publicize any discoveries after their resolution.
 
-Neon does not have a bug bounty program and does not pay financial bonuses or bounties for reporting bugs or vulnerability issues.
+## Bug bounty program with HackerOne
+
+Neon offers a public bug bounty program. If you discover a vulnerability, report it through our [bug bounty program](https://hackerone.com/neon_bbp).
 
 ## How to disclose vulnerabilities
 

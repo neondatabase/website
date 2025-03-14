@@ -27,7 +27,7 @@ const HeroWithForm = () => (
         <time className="label-secondary-2" dateTime="2022-12-06">
           December 6-8 | 9:00 - 10:00 PT
         </time>
-        <h1 className="mt-5 text-center text-[72px] font-bold leading-dense 2xl:text-6xl xl:text-5xl lg:text-4xl">
+        <h1 className="font-titletext-[72px] mt-5  text-center font-medium leading-dense 2xl:text-6xl xl:text-5xl lg:text-4xl">
           Neon Developer Days
         </h1>
         <p className="mt-5 max-w-[640px] text-center text-xl leading-normal md:text-lg">

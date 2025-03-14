@@ -104,3 +104,19 @@ Add information if you're having trouble updating any dependencies, this could b
 Space for a free-form description of the problem
 
 </details>
+
+### remark-gfm
+
+[Breaks with latest version of remark-gfm](https://github.com/hashicorp/next-mdx-remote/issues/403)
+
+- **Issue found on:** 01 December, 2023
+- **Problematic version:** 4.0.0
+- **Last stable version:** 3.0.1
+
+### eslint-plugin-cypress, eslint
+
+Currently, the [eslint-plugin-cypress](https://github.com/cypress-io/eslint-plugin-cypress) does not support eslint version 9. We will refrain from updating both until such support is available. Once compatibility with eslint version 9 is confirmed for eslint-plugin-cypress, we will proceed with updating both dependencies.
+
+- **Issue found on:** 23 April, 2024
+- **Problematic version:** eslint-plugin-cypress >3.x.x, eslint >9.0.0
+- **Last stable version:** eslint-plugin-cypress 2.15.2, eslint 8.57.0

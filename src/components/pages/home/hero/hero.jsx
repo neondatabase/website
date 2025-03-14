@@ -1,157 +1,167 @@
-import clsx from 'clsx';
-import { useInView } from 'react-intersection-observer';
+'use client';
 
-import BlinkingText from 'components/shared/blinking-text';
+import clsx from 'clsx';
+import Image from 'next/image';
+import { useState, useRef, createRef, useEffect, useCallback } from 'react';
+import useWindowSize from 'react-use/lib/useWindowSize';
+
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
-import Heading from 'components/shared/heading';
-// import TypingText from 'components/shared/typing-text';
 import LINKS from 'constants/links';
-import useLottie from 'hooks/use-lottie';
+import useIsSafari from 'hooks/use-is-safari';
+import branchingIcon from 'icons/home/hero/branching.svg';
+import scalingIcon from 'icons/home/hero/scaling.svg';
+import bg from 'images/pages/home/hero/bg.jpg';
 
-import animationData from './data/hero-lottie-data.json';
+import Video from './video';
 
-const titlePhrases = ['Serverless', 'Fault-tolerant', 'Branchable', 'Bottomless'];
+const Hls = require('hls.js/dist/hls.light.min.js');
+
+const IS_MOBILE_SCREEN_WIDTH = 639;
+
+/* 
+  Video optimization parameters:
+    -mp4: -pix_fmt yuv420p -vf "scale=-2:932" -movflags faststart -vcodec libx264 -crf 20
+    Scaling
+      -m3u8: -codec: copy -start_number 0 -hls_time 2 -hls_list_size 0 -f hls scaling.m3u8
+    Branching
+      -m3u8: -codec: copy -start_number 0 -hls_time 3 -hls_list_size 0 -f hls branching.m3u8
+*/
+const ITEMS = [
+  {
+    video: {
+      icon: scalingIcon,
+      title: 'Scaling',
+      mp4: '/videos/pages/home/hero/scaling.mp4?updated=20240514120633',
+      m3u8: '/videos/pages/home/hero/scaling.m3u8?updated=20240514120633',
+      bgImage: '/videos/pages/home/hero/scaling.jpg',
+    },
+    title: 'Scaling',
+    description:
+      'Focus on building applications with time and money-saving features like instant provisioning, autoscaling according to load, and scale to zero.',
+    linkLabel: 'Discover Autoscaling',
+    linkUrl: LINKS.autoscaling,
+  },
+  {
+    video: {
+      icon: branchingIcon,
+      title: 'Branching',
+      mp4: '/videos/pages/home/hero/branching.mp4?updated=20240508184252',
+      m3u8: '/videos/pages/home/hero/branching.m3u8?updated=20240508184252',
+      bgImage: '/videos/pages/home/hero/branching.jpg',
+    },
+    title: 'Branching',
+    description:
+      'Instantly branch your data and schema to access isolated DB copies for development, CI/CD, and schema migrations with copy-on-write storage.',
+    linkLabel: 'Explore Branching',
+    linkUrl: LINKS.docsBranching,
+  },
+];
 
 const Hero = () => {
-  // eslint-disable-next-line no-unused-vars
-  const [titleRef, isTitleInView, titleEntry] = useInView({ triggerOnce: true, threshold: 0.5 });
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
-  const { animationRef, isAnimationPlaying, animationVisibilityRef } =
-    // const { animationRef, isAnimationPlaying, isAnimationFinished, animationVisibilityRef } =
-    useLottie({
-      lottieOptions: {
-        animationData,
-        rendererSettings: {
-          filterSize: {
-            width: '400%',
-            height: '400%',
-            x: '-100%',
-            y: '-100%',
-          },
-        },
-      },
-      useInViewOptions: { threshold: 0.5 },
+  const { width: windowWidth } = useWindowSize();
+  const [isMobile, setIsMobile] = useState(false);
+  const [initialVideoPlayback, setInitialVideoPlayback] = useState(true);
+
+  const videoRefs = useRef(ITEMS.map(() => createRef()));
+
+  const isSafari = useIsSafari();
+
+  useEffect(() => {
+    setIsMobile(windowWidth <= IS_MOBILE_SCREEN_WIDTH);
+  }, [windowWidth]);
+
+  useEffect(() => {
+    videoRefs.current.forEach((ref, index) => {
+      const videoElement = ref.current;
+      const videoSrc = isSafari ? ITEMS[index].video.mp4 : ITEMS[index].video.m3u8;
+
+      if (!videoElement) return;
+
+      // Using HLS.js for browsers that support it, except for Safari which has native HLS support.
+      if (Hls.isSupported() && !isSafari) {
+        const hls = new Hls();
+        hls.loadSource(videoSrc);
+        hls.attachMedia(videoElement);
+      } else {
+        const source = document.createElement('source');
+        source.src = videoSrc;
+        source.type = 'video/mp4';
+        videoElement.appendChild(source);
+      }
     });
+  }, [videoRefs, isSafari]);
 
-  const titleContent = (
-    <span className="lg:hidden">
-      <BlinkingText parentElement={titleEntry?.target} shouldAnimationStart={isAnimationPlaying}>
-        {'Serverless Postgres'.split('').map((letter, index) => (
-          <span
-            className={clsx('animate-text-blink', letter === '/' && 'text-secondary-2')}
-            style={{ animationPlayState: 'paused' }}
-            key={index}
-          >
-            {letter}
-          </span>
-        ))}
-      </BlinkingText>
-    </span>
-  );
-
-  const titleContentLg = (
-    <span className="hidden lg:inline">
-      <BlinkingText parentElement={titleEntry?.target} shouldAnimationStart={isAnimationPlaying}>
-        {`${titlePhrases[0]} Postgres`.split('').map((letter, index) => (
-          <span className="animate-text-blink" style={{ animationPlayState: 'paused' }} key={index}>
-            {letter}
-          </span>
-        ))}
-      </BlinkingText>
-    </span>
+  const switchVideo = useCallback(
+    (index) => {
+      videoRefs.current[currentVideoIndex].current.pause();
+      videoRefs.current[currentVideoIndex].current.currentTime = 0;
+      setCurrentVideoIndex(index);
+    },
+    [currentVideoIndex]
   );
 
   return (
-    <section className="safe-paddings bg-black pt-[320px] 3xl:pt-[280px] 2xl:pt-[230px] xl:pt-[193px] lg:pt-12 md:pt-6">
-      <Container
-        className="z-20 flex items-center justify-between lg:flex-col lg:justify-center"
-        size="md"
-        id="container"
-      >
-        <div className="relative z-20 max-w-[860px] 3xl:max-w-[750px] 2xl:max-w-[610px] xl:max-w-[535px] lg:text-center">
-          <Heading
-            id="hero-title"
-            className="with-highlighted-text-secondary-2"
-            tag="h1"
-            size="2xl"
-            theme="white"
-            ref={titleRef}
-          >
-            {titleContent}
-            {titleContentLg}
-          </Heading>
-          <p className="t-xl mt-7 max-w-[550px] text-white 2xl:mt-6 2xl:max-w-[480px] xl:mt-5 xl:max-w-[456px] lg:mx-auto lg:max-w-[414px]">
-            The fully managed serverless Postgres with a generous free tier. We separate storage
-            and compute to offer autoscaling, branching, and bottomless storage.
+    <section className="hero safe-paddings relative pt-[168px] xl:pt-[152px] lg:pt-32 md:pt-[88px]">
+      <Container className="relative z-10 xl:px-8" size="1100">
+        <div className="flex flex-col items-center text-center">
+          <h1 className="font-title text-[72px] font-medium leading-none -tracking-[0.03em] text-white xl:text-[64px] lg:text-[56px] sm:text-[32px]">
+            Ship faster with Postgres
+          </h1>
+          <p className="mt-2.5 max-w-xl text-lg font-light leading-snug tracking-tighter text-gray-new-80 lg:mt-2.5 lg:text-base">
+            The database you love, on a serverless platform designed to help you build reliable and
+            scalable applications faster.
           </p>
           <Button
-            id="hero-button"
-            className="mt-10 2xl:mt-8 xl:mt-7 md:mt-6"
-            to={LINKS.signup}
-            size="md"
+            className="pointer-events-auto relative mt-7 px-9 font-semibold xl:mt-6 md:px-7"
             theme="primary"
+            size="md-new"
+            to={LINKS.signup}
+            target="_blank"
+            tag_name="Hero"
+            analyticsEvent="home_hero_get_started_clicked"
           >
-            Sign up
+            Get Started
           </Button>
         </div>
-        <div
-          className="!absolute -right-1 top-[-165px] w-[820px] 3xl:right-[-17px] 3xl:top-[-122px] 3xl:w-[677px] 2xl:right-[-14px] 2xl:top-[-102px] 2xl:w-[564px] xl:right-[-132px] xl:top-[-88px] xl:w-[492px] lg:!relative lg:right-0 lg:top-0 lg:-mr-2.5 lg:mt-10 lg:w-[451px] sm:mt-8 sm:w-[391px] xs:w-[294px]"
-          ref={animationVisibilityRef}
-          aria-hidden
-        >
-          <img
-            src="data:image/svg+xml;charset=utf-8,%3Csvg width='820' height='830' xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3C/svg%3E"
-            alt=""
-            aria-hidden
-          />
 
-          <div className="absolute right-0 top-0 z-10 w-full" ref={animationRef} />
-          <div className="absolute left-1/2 top-1/2 h-[888px] w-[888px] translate-x-[-51%] translate-y-[-51.6%] rounded-full border-2 border-gray-1 3xl:h-[716px] 3xl:w-[716px] 2xl:h-[600px] 2xl:w-[600px] xl:h-[520px] xl:w-[520px] lg:h-[480px] lg:w-[480px] sm:h-[420px] sm:w-[420px] xs:hidden" />
-          <div className="absolute left-1/2 top-1/2 h-[1000px] w-[1000px] translate-x-[-51%] translate-y-[-51.6%] rounded-full border-2 border-gray-1 3xl:h-[796px] 3xl:w-[796px] 2xl:h-[670px] 2xl:w-[670px] xl:h-[590px] xl:w-[590px] lg:h-[540px] lg:w-[540px] sm:h-[470px] sm:w-[470px] xs:hidden" />
-          <div className="absolute left-1/2 top-1/2 h-[1160px] w-[1160px] translate-x-[-51%] translate-y-[-51.6%] rounded-full border-2 border-gray-1 3xl:h-[924px] 3xl:w-[924px]  2xl:h-[780px] 2xl:w-[780px] xl:h-[700px] xl:w-[700px] lg:h-[630px] lg:w-[630px] sm:h-[520px] sm:w-[520px] xs:hidden" />
-
-          <div className="absolute left-[383px] top-[-54px] h-6 w-6 3xl:left-[310px] 3xl:top-[-37px] 2xl:left-[126px] 2xl:top-[-42px] xl:hidden">
-            <div className="absolute left-0 top-0 h-6 w-12 rounded-l-full bg-black" />
-            <div
-              className="circle circle-with-text circle-with-text-right !translate-x-0 !translate-y-0"
-              data-text="Cloudflare Workers"
+        <div className="mt-[74px] flex gap-x-2.5 xl:mt-16 lg:mt-14 sm:mt-9 sm:flex-col sm:gap-y-9">
+          {ITEMS.map((item, index) => (
+            <Video
+              className={clsx(
+                'transition-all duration-700',
+                currentVideoIndex === index
+                  ? 'w-[64.7273%] flex-shrink-0 xl:w-[61.863%] lg:w-[62.746%] sm:w-full'
+                  : 'w-full'
+              )}
+              videoClassName={clsx(index === 1 && 'left-[-172px]')}
+              {...item}
+              isActive={currentVideoIndex === index}
+              isMobile={isMobile}
+              switchVideo={() => switchVideo((currentVideoIndex + 1) % ITEMS.length)}
+              setActiveVideoIndex={() => setCurrentVideoIndex(index)}
+              initialVideoPlayback={initialVideoPlayback}
+              setInitialVideoPlayback={setInitialVideoPlayback}
+              ref={videoRefs.current[index]}
+              index={index}
+              key={index}
             />
-          </div>
-
-          <div className="absolute right-[81px] top-[89px] h-6 w-6 3xl:right-[81px] 3xl:top-[67px] 2xl:right-[68px] 2xl:top-[2px] xl:hidden lg:right-[47px] lg:top-[1px] lg:block sm:hidden">
-            <div className="absolute left-0 top-0 h-6 w-12 rounded-l-full bg-black" />
-            <div
-              className="circle circle-with-text circle-with-text-right !translate-x-0 !translate-y-0"
-              data-text="Hasura Cloud"
-            />
-          </div>
-
-          <div className="absolute left-[-5px] top-[185px] h-6 w-6 3xl:left-[4px] 3xl:top-[152px] 2xl:left-[-3px] 2xl:top-[128px] xl:left-[-9px] xl:top-[54px] lg:left-[-3px] lg:top-[97px] sm:hidden">
-            <div className="absolute right-0 top-0 h-6 w-12 rounded-r-full bg-black" />
-            <div
-              className="circle circle-with-text circle-with-text-left !translate-x-0 !translate-y-0"
-              data-text="Vercel"
-            />
-          </div>
-
-          <div className="absolute bottom-[61px] left-[41px] top-auto h-6 w-6 3xl:left-[39px] 2xl:bottom-[51px] 2xl:left-[25px] xl:bottom-[44px] xl:left-[15px] lg:bottom-[36px] lg:left-[17px] sm:hidden">
-            <div className="absolute right-0 top-0 h-6 w-12 rounded-r-full bg-black" />
-            <div
-              className="circle circle-with-text circle-with-text-left !translate-x-0 !translate-y-0"
-              data-text="Netlify"
-            />
-          </div>
-
-          <div className="absolute bottom-[-48px] right-[233px] top-auto h-6 w-6 3xl:bottom-[-28px] 3xl:right-[190px] 2xl:bottom-[-29px] 2xl:right-[162px] xl:hidden lg:right-[131px] lg:block sm:hidden">
-            <div className="absolute left-0 top-0 h-6 w-12 rounded-l-full bg-black" />
-            <div
-              className="circle circle-with-text circle-with-text-right !translate-x-0 !translate-y-0"
-              data-text="Amazon Lambda"
-            />
-          </div>
+          ))}
         </div>
       </Container>
+
+      <Image
+        className="pointer-events-none absolute left-1/2 top-0 max-w-none -translate-x-1/2 xl:top-8 xl:w-[1588px] lg:top-6 lg:w-[1420px] md:top-[76px] md:w-[1058px]"
+        src={bg}
+        sizes="(max-width: 767px) 1058px"
+        width={1920}
+        height={1210}
+        quality={100}
+        alt=""
+        priority
+      />
     </section>
   );
 };

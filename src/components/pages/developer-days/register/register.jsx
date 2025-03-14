@@ -28,7 +28,7 @@ const lines = {
 const Register = ({ type }) => (
   <section
     className={clsx(
-      'safe-paddings register bg-black pb-60 text-white xl:pb-40 xl:pt-[408px] md:pt-[364px] sm:pb-20 sm:pt-[190px]',
+      'safe-paddings register bg-black-pure pb-60 text-white xl:pb-40 xl:pt-[408px] md:pt-[364px] sm:pb-20 sm:pt-[190px]',
       lines[type].className
     )}
   >

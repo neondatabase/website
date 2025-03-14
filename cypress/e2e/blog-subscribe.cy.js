@@ -1,10 +1,11 @@
 describe('Blog Index Subscribe Form', () => {
   beforeEach(() => {
     cy.visit('/blog');
+
     cy.getByData('blog-subscribe-form').should('exist');
   });
 
-  it('allows users to subscribe to blog post', () => {
+  it('allows users to subscribe to blog index page', () => {
     cy.formSuccessSubmit();
     cy.get("input[name='email']").type('info@example.com');
     cy.get('form').submit();

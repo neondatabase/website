@@ -1,12 +1,15 @@
 /* eslint-disable no-case-declarations */
+import clsx from 'clsx';
 import parse, { attributesToProps, domToReact } from 'html-react-parser';
 import isBoolean from 'lodash.isboolean';
 import isEmpty from 'lodash.isempty';
 import Image from 'next/image';
 
 import EmbedTweet from 'components/shared/embed-tweet';
+import Link from 'components/shared/link';
 
 import AnchorHeading from '../components/shared/anchor-heading';
+import ImageZoom from '../components/shared/image-zoom';
 
 function isBooleanString(string) {
   return string === 'true' || string === 'false';
@@ -64,20 +67,27 @@ function transformProps(props) {
 const sharedComponents = {
   h2: AnchorHeading('h2'),
   img: (props) => {
-    const urlWithoutSize = props.src.replace(/-\d+x\d+/i, '');
+    const { src, className, width, height, alt, isPriority } = props;
+    const urlWithoutSize = src.replace(/-\d+x\d+/i, '');
 
     return (
-      <Image
-        className="rounded-md"
-        src={urlWithoutSize}
-        width={props.width || 975}
-        height={props.height || 512}
-        quality={85}
-        alt={props.alt || 'Post image'}
-        priority={props.isPriority || false}
-        sizes="(max-width: 767px) 100vw"
-      />
+      <ImageZoom src={urlWithoutSize} isDark>
+        <Image
+          className={clsx('rounded-md', className)}
+          src={urlWithoutSize}
+          width={width || 975}
+          height={height || 512}
+          quality={85}
+          alt={alt || 'Post image'}
+          priority={isPriority || false}
+          sizes="(max-width: 767px) 100vw"
+        />
+      </ImageZoom>
     );
+  },
+  a: (props) => {
+    const { href, ...otherProps } = props;
+    return <Link to={href} {...otherProps} />;
   },
 };
 
@@ -106,29 +116,76 @@ export default function getReactContentWithLazyBlocks(content, pageComponents, i
     },
     replace: (domNode) => {
       if (domNode.type === 'tag') {
-        if (
-          domNode.attribs?.class?.includes('wp-block-lazyblock') ||
-          domNode.attribs?.class?.includes('wp-block-image')
-        ) {
+        if (domNode.attribs?.class?.includes('wp-block-lazyblock')) {
           const element =
             domNode.children[0].type === 'tag' ? domNode.children[0] : domNode.children[1];
 
           const Component = components[element.name];
           if (!Component) return <></>;
 
-          if (
-            domNode.attribs?.class?.includes('wp-block-image') &&
-            domNode.children[0].name === 'img'
-          ) {
-            const isPriority = isFirstImage;
-            isFirstImage = false;
-            const props = transformProps(attributesToProps({ ...element.attribs, isPriority }));
-            return <Component {...props} />;
-          }
-
           const props = transformProps(attributesToProps(element.attribs));
 
           return <Component {...props} />;
+        }
+
+        if (domNode.attribs?.class?.includes('wp-block-image')) {
+          const element =
+            domNode.children[0].type === 'tag' ? domNode.children[0] : domNode.children[1];
+          const Component = components[element.name];
+
+          if (!Component) return <></>;
+
+          if (domNode.children[0].name === 'img') {
+            const isPriority = isFirstImage;
+            isFirstImage = false;
+            const props = transformProps(attributesToProps({ ...element.attribs, isPriority }));
+            const { className: imgClassName, ...otherImgProps } = props;
+            const captionProps = transformProps(attributesToProps(element?.next?.attribs));
+            const { className: captionClassName, ...otherCaptionProps } = captionProps;
+            const caption = element?.next?.children;
+
+            return caption ? (
+              <figure>
+                <Component className={clsx('my-0', imgClassName)} {...otherImgProps} />
+                <figcaption
+                  className={clsx('flex justify-center text-center', captionClassName)}
+                  {...otherCaptionProps}
+                >
+                  {domToReact(caption)}
+                </figcaption>
+              </figure>
+            ) : (
+              <Component {...props} />
+            );
+          }
+
+          if (element.name === 'a' && element.children[0].name === 'img') {
+            const linkProps = transformProps(attributesToProps(element?.attribs));
+            const { href: linkHref, ...otherLinkProps } = linkProps;
+            const imgProps = transformProps(attributesToProps(element?.children[0]?.attribs));
+            const { className: imgClassName, ...otherImgProps } = imgProps;
+            const captionProps = transformProps(attributesToProps(element?.next?.attribs));
+            const { className: captionClassName, ...otherCaptionProps } = captionProps;
+
+            const caption = element?.next?.children;
+
+            const Component = components[element?.children[0]?.name];
+            return (
+              <figure className="image-with-link">
+                <Link to={linkHref} {...otherLinkProps}>
+                  <Component className={clsx('my-0', imgClassName)} {...otherImgProps} />
+                  {caption && (
+                    <figcaption
+                      className={clsx('flex justify-center text-center', captionClassName)}
+                      {...otherCaptionProps}
+                    >
+                      {domToReact(caption)}
+                    </figcaption>
+                  )}
+                </Link>
+              </figure>
+            );
+          }
         }
 
         if (domNode.attribs?.class?.includes('wp-block-embed-twitter')) {
@@ -148,7 +205,7 @@ export default function getReactContentWithLazyBlocks(content, pageComponents, i
         if (domNode.attribs?.class?.includes('wp-block-heading')) {
           return AnchorHeading(domNode.name)({
             children: domToReact(domNode.children),
-            className: `${domNode.attribs.class} scroll-mt-20`,
+            className: `${domNode.attribs.class} !scroll-mt-20`,
           });
         }
 

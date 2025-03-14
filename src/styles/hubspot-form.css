@@ -1,0 +1,247 @@
+.hubspot-form-wrapper {
+  @apply rounded-[10px] bg-black-new px-9 pb-11 pt-9 xl:px-6 xl:pb-9 md:px-5 md:py-6;
+}
+
+.hubspot-form {
+  .actions {
+    @apply flex items-center space-x-7 sm:flex-col sm:space-x-0 sm:space-y-5;
+  }
+
+  .hs-fieldtype-checkbox .hs-form-checkbox-display span,
+  .hs-fieldtype-radio .hs-form-radio-display span {
+    @apply inline-block leading-tight;
+  }
+
+  .submitted-message {
+    @apply mx-auto;
+
+    p {
+      @apply mt-3 text-center text-base;
+
+      strong {
+        @apply text-lg font-medium;
+      }
+    }
+  }
+
+  .hs-form {
+    @apply flex flex-col space-y-6;
+
+    fieldset {
+      -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+      @apply max-w-full;
+
+      &.form-columns-2 {
+        @apply flex space-x-5;
+
+        @screen lg {
+          @apply flex flex-col space-x-0 space-y-6;
+        }
+
+        .hs-form-field {
+          @screen lg {
+            @apply w-full;
+          }
+
+          .input {
+            @apply mr-0;
+          }
+        }
+      }
+
+      &.form-columns-1 {
+        .hs-form-field {
+          .input {
+            @apply mr-0;
+          }
+        }
+      }
+
+      &.form-columns-0 {
+        @apply order-1;
+      }
+    }
+
+    .hs-error-msgs {
+      @apply mt-2;
+
+      @screen lg {
+        @apply mt-1;
+      }
+
+      label {
+        @apply text-xs leading-none text-secondary-1 !important;
+      }
+    }
+
+    .hs_error_rollup {
+      label {
+        @apply hidden;
+      }
+    }
+
+    .hs-form-field {
+      label {
+        @apply block text-sm leading-none text-gray-new-70;
+      }
+
+      input {
+        @apply text-base leading-none;
+
+        &.is-placeholder {
+          @apply text-gray-new-40;
+        }
+
+        &.error {
+          @apply border-secondary-1 !important;
+        }
+
+        &[type='text'],
+        &[type='email'],
+        &[type='number'],
+        &[type='tel'] {
+          @apply mt-2 h-10 w-full bg-white bg-opacity-[0.04] px-4 text-base leading-none !important;
+          @apply appearance-none rounded border border-transparent outline-none transition-colors duration-200 placeholder:text-gray-new-40 hover:border-gray-new-15 focus:border-gray-new-15 focus:outline-none active:border-gray-new-15;
+        }
+      }
+
+      select {
+        @apply mt-2 h-10 w-full bg-white bg-opacity-[0.04] bg-no-repeat px-4 text-base !important;
+        @apply appearance-none rounded border border-transparent outline-none transition-colors duration-200 placeholder:text-gray-new-40 hover:border-gray-new-15 focus:border-gray-new-15 focus:outline-none active:border-gray-new-15;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' viewBox='0 0 16 16' class='h-4 w-4'%3E%3Cpath stroke='%23fff' d='m14.855 6.486-6.857 6.857-6.857-6.857'%3E%3C/path%3E%3C/svg%3E");
+        background-position-x: calc(100% - 16px);
+        background-position-y: 12px;
+
+        &.is-placeholder {
+          @apply text-gray-new-40;
+        }
+
+        &.error {
+          @apply border-secondary-1 !important;
+        }
+      }
+
+      textarea {
+        @apply mt-2 min-h-[6rem] w-full appearance-none rounded border border-transparent bg-white bg-opacity-[0.04] px-4 py-4 text-base outline-none transition-colors duration-200 placeholder:text-gray-new-40 hover:border-gray-new-15 focus:border-gray-new-15 focus:outline-none active:border-gray-new-15 !important;
+      }
+
+      &.hs-fieldtype-checkbox,
+      &.hs-fieldtype-radio {
+        ul {
+          @apply mt-2.5;
+
+          &.no-list {
+            @apply mt-0;
+          }
+
+          li {
+            @apply mt-1.5;
+
+            &:first-child {
+              @apply mt-0;
+            }
+
+            & span {
+              @apply flex min-h-[24px] items-center leading-tight;
+            }
+          }
+        }
+      }
+    }
+
+    .hs-button {
+      @apply flex h-12 w-full items-center justify-center whitespace-nowrap rounded-[60px] bg-green-45 px-10 text-center text-lg font-medium leading-none tracking-[-0.02em] text-black transition-[color,background-image] duration-200 hover:cursor-pointer hover:bg-[#00e5bf] disabled:pointer-events-none disabled:bg-gray-3 disabled:text-white disabled:hover:bg-primary-1 md:h-[54px] sm:w-full;
+    }
+  }
+}
+
+.hs-fieldtype-checkbox {
+  .hs-form-checkbox-display {
+    @apply cursor-pointer;
+
+    input {
+      @apply sr-only;
+
+      &:hover {
+        ~ span::before {
+          @apply border-gray-4 !important;
+        }
+      }
+
+      &:checked {
+        ~ span::before {
+          @apply bg-primary-1 bg-center bg-no-repeat !important;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='10' fill='none' viewBox='0 0 14 10'%3E%3Cpath stroke='black' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10' stroke-width='1.6' d='M1 4.467 5.286 8.8 13 1'/%3E%3C/svg%3E");
+        }
+      }
+    }
+
+    span {
+      &:not(.hs-form-required) {
+        @apply relative pl-9;
+
+        &::before {
+          content: '';
+          @apply absolute left-0 top-0 block h-5 w-5 transform rounded border border-gray-new-40 bg-transparent transition-colors duration-200 !important;
+        }
+      }
+    }
+  }
+}
+
+.hs-fieldtype-radio {
+  .hs-form-radio-display {
+    @apply cursor-pointer;
+
+    input {
+      @apply sr-only;
+
+      &:hover {
+        ~ span::before {
+          @apply border-gray-4 !important;
+        }
+      }
+
+      &:checked {
+        ~ span::before {
+          @apply bg-primary-1 bg-center bg-no-repeat !important;
+        }
+      }
+    }
+
+    span {
+      @apply ml-0 !important;
+
+      &:not(.hs-form-required) {
+        @apply relative pl-6;
+
+        &::before {
+          content: '';
+          @apply absolute bottom-0 left-0 top-0 my-auto block h-3.5 w-3.5 transform rounded-full border border-gray-new-40 bg-transparent transition-colors duration-200 !important;
+        }
+      }
+    }
+  }
+}
+
+.legal-consent-container {
+  @apply space-y-5 text-[15px] font-light leading-tight;
+
+  a {
+    @apply leading-tight text-green-45 underline decoration-green-45/40 decoration-1 underline-offset-[3px] transition-colors duration-500 hover:decoration-green-45/100;
+
+    & > span {
+      @apply no-underline !important;
+    }
+  }
+
+  .hs-form-booleancheckbox-display {
+    p {
+      @apply text-[15px] font-light leading-tight;
+
+      a {
+        @apply leading-tight text-green-45 underline decoration-green-45/40 decoration-1 underline-offset-[3px] transition-colors duration-500 hover:decoration-green-45/100;
+      }
+    }
+  }
+}

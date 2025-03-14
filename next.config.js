@@ -2,14 +2,12 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
-const { getAllPosts } = require('./src/utils/api-docs');
+const { getAllPosts, getAllChangelogs } = require('./src/utils/api-docs');
+const generateChangelogPath = require('./src/utils/generate-changelog-path');
 const generateDocPagePath = require('./src/utils/generate-doc-page-path');
 
 const defaultConfig = {
   poweredByHeader: false,
-  experimental: {
-    appDir: true,
-  },
   images: {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
@@ -21,6 +19,24 @@ const defaultConfig = {
   },
   async headers() {
     return [
+      {
+        source: '/',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'max-age=0, s-maxage=31536000',
+          },
+        ],
+      },
+      {
+        source: '/home',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'max-age=0, s-maxage=31536000',
+          },
+        ],
+      },
       {
         source: '/fonts/:slug*',
         headers: [
@@ -50,6 +66,33 @@ const defaultConfig = {
         ],
       },
       {
+        source: '/videos/:all*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/docs/:all*(svg|jpg|png)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=0, must-revalidate',
+          },
+        ],
+      },
+      {
+        source: '/images/technology-logos/:all*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=0, must-revalidate',
+          },
+        ],
+      },
+      {
         source: '/blog/parsing-json-from-postgres-in-js',
         headers: [
           {
@@ -66,6 +109,7 @@ const defaultConfig = {
   },
   async redirects() {
     const docPosts = await getAllPosts();
+    const changelogPosts = await getAllChangelogs();
     const docsRedirects = docPosts.reduce((acc, post) => {
       const { slug, redirectFrom: postRedirects } = post;
       if (!postRedirects || !postRedirects.length) {
@@ -80,8 +124,47 @@ const defaultConfig = {
 
       return [...acc, ...postRedirectsArray];
     }, []);
+    const changelogRedirects = changelogPosts.reduce((acc, post) => {
+      const { slug, redirectFrom: postRedirects } = post;
+      if (!postRedirects || !postRedirects.length) {
+        return acc;
+      }
+
+      const postRedirectsArray = postRedirects.map((redirect) => ({
+        source: redirect,
+        destination: generateChangelogPath(slug),
+        permanent: true,
+      }));
+
+      return [...acc, ...postRedirectsArray];
+    }, []);
 
     return [
+      {
+        source: '/yc-startups',
+        destination: '/startups',
+        permanent: true,
+      },
+      {
+        source: '/yc-deal-terms',
+        destination: '/startups-deal-terms',
+        permanent: true,
+      },
+      {
+        source: '/postgresql',
+        destination: '/postgresql/tutorial',
+        permanent: true,
+      },
+      {
+        source: '/blog/the-non-obviousness-of-postgres-roles',
+        destination: '/blog/postgres-roles',
+        permanent: true,
+      },
+      {
+        source: '/2024-plan-updates',
+        destination: '/pricing',
+        permanent: true,
+      },
       {
         source: '/team',
         destination: '/about-us',
@@ -90,6 +173,11 @@ const defaultConfig = {
       {
         source: '/jobs',
         destination: '/careers',
+        permanent: true,
+      },
+      {
+        source: '/docs/release-notes/:path*',
+        destination: '/docs/changelog/:path*',
         permanent: true,
       },
       // Proxy has an error message, that suggests to read `https://neon.tech/sni` for more details.
@@ -111,6 +199,11 @@ const defaultConfig = {
       {
         source: '/early-access',
         destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/docs/import/migration-assistant',
+        destination: '/docs/import/import-data-assistant',
         permanent: true,
       },
       {
@@ -144,6 +237,11 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/discord',
+        destination: 'https://discord.gg/92vNTzKDGp',
+        permanent: false,
+      },
+      {
         source: '/developer-days',
         destination: 'https://devdays.neon.tech',
         permanent: true,
@@ -159,7 +257,38 @@ const defaultConfig = {
         destination: '/docs/postgres/:path*',
         permanent: true,
       },
+      {
+        source: '/sign_in',
+        destination: 'https://console.neon.tech/signup',
+        permanent: true,
+      },
+      {
+        source: '/ai',
+        destination: '/docs/ai/ai-intro',
+        permanent: true,
+      },
+      {
+        source: '/deploy',
+        destination: '/stage',
+        permanent: true,
+      },
+      {
+        source: '/generate-ticket',
+        destination: '/stage',
+        permanent: true,
+      },
+      {
+        source: '/changelog',
+        destination: '/docs/changelog',
+        permanent: false,
+      },
+      {
+        source: '/early-access-program',
+        destination: '/docs/introduction/roadmap#join-the-neon-early-access-program',
+        permanent: true,
+      },
       ...docsRedirects,
+      ...changelogRedirects,
     ];
   },
   async rewrites() {
@@ -183,6 +312,34 @@ const defaultConfig = {
       {
         source: '/demos/playground/:path*',
         destination: 'https://postgres-ai-playground.vercel.app/demos/playground/:path*',
+      },
+      {
+        source: '/demos/instant-postgres',
+        destination: 'https://instant-postgres.mahmoudw.com/demos/instant-postgres',
+      },
+      {
+        source: '/demos/instant-postgres/:path*',
+        destination: 'https://instant-postgres.mahmoudw.com/demos/instant-postgres/:path*',
+      },
+      {
+        source: '/developer-days/:path*',
+        destination: 'https://neon-dev-days-next.vercel.app/developer-days/:path*',
+      },
+      {
+        source: '/demos/regional-latency',
+        destination: 'https://latencies-ui.vercel.app/demos/regional-latency',
+      },
+      {
+        source: '/demos/regional-latency/:asset*',
+        destination: 'https://latencies-ui.vercel.app/demos/regional-latency/:asset*',
+      },
+      {
+        source: '/dev-for-rds',
+        destination: 'https://dev-for-rds.vercel.app/dev-for-rds',
+      },
+      {
+        source: '/dev-for-rds/:path*',
+        destination: 'https://dev-for-rds.vercel.app/dev-for-rds/:path*',
       },
     ];
   },
@@ -239,6 +396,11 @@ const defaultConfig = {
     fileLoaderRule.exclude = /\.svg$/i;
 
     return config;
+  },
+  env: {
+    INKEEP_INTEGRATION_API_KEY: process.env.INKEEP_INTEGRATION_API_KEY,
+    INKEEP_INTEGRATION_ID: process.env.INKEEP_INTEGRATION_ID,
+    INKEEP_ORGANIZATION_ID: process.env.INKEEP_ORGANIZATION_ID,
   },
 };
 

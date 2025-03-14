@@ -1,47 +1,45 @@
-import Logos from 'components/pages/partners/logos';
-import Calculator from 'components/pages/pricing/calculator';
-import CTA from 'components/pages/pricing/cta';
-import Estimates from 'components/pages/pricing/estimates';
 import Faq from 'components/pages/pricing/faq';
 import Hero from 'components/pages/pricing/hero';
-import Metrics from 'components/pages/pricing/metrics';
+import Plans from 'components/pages/pricing/plans';
+import CTA from 'components/shared/cta';
 import Layout from 'components/shared/layout';
+import Logos from 'components/shared/logos';
+import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
 
 export const metadata = getMetadata(SEO_DATA.pricing);
 
 const logos = [
-  'bunnyshell',
-  'hasura',
+  'eqt',
+  'openai',
+  'zimmer',
+  'outfront',
+  'adobe',
+  'genomics',
   'replit',
+  'retool',
+  'albertsons',
+  'akqa',
   'vercel',
-  'illa',
-  'octolis',
-  'cloudflare',
-  'airplane',
-  'wundergraph',
-  'fabric-io',
-  'snaplet',
-  'fl0',
-  'dynaboard',
-  'opus',
+  'bcg',
+  'wordware',
+  'commure',
 ];
 
 const PricingPage = () => (
-  <Layout
-    className="bg-black-new text-white"
-    headerTheme="black-new"
-    footerTheme="black-new"
-    footerWithTopBorder
-  >
+  <Layout>
     <Hero />
-    <Logos className="mt-[152px] xl:mt-40 lg:mt-28 md:mt-20" logos={logos} />
-    <Metrics />
-    <Estimates />
-    <Calculator />
+    <Logos className="mt-[136px] xl:mt-28 lg:mt-24 lg:pt-0 md:mt-20" logos={logos} />
+    <Plans className="my-[184px] scroll-mt-5 px-safe xl:my-40 lg:mt-32 md:my-20" />
     <Faq />
-    <CTA />
+    <CTA
+      className="pb-[350px] pt-[445px] xl:pb-[200px] xl:pt-[260px] lg:pb-[150px] lg:pt-[220px] sm:pb-[100px] sm:pt-[160px]"
+      title="Still have a question?"
+      description="Complete the form below to get in touch with our Sales team."
+      buttonText="Talk to Sales"
+      buttonUrl={LINKS.contactSales}
+    />
   </Layout>
 );
 

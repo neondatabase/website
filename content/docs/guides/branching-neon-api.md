@@ -2,8 +2,9 @@
 title: Branching with the Neon API
 subtitle: Learn how to create and delete branches with the Neon API
 enableTableOfContents: true
-updatedOn: '2023-11-24T11:25:06.749Z'
+updatedOn: '2025-01-31T16:41:54.393Z'
 ---
+
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon API. For other branch-related API methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 <Admonition type="note">
@@ -12,28 +13,28 @@ The API examples that follow may only show some of the user-configurable request
 
 The `jq` program specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
 
-### Prerequisites
+## Prerequisites
 
 A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](../manage/api-keys#create-an-api-key). In the examples below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
-### Create a branch with the API
+## Create a branch with the API
 
 The following Neon API method creates a branch. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranch).
 
-```text
+```http
 POST /projects/{project_id}/branches
 ```
 
 The API method appears as follows when specified in a cURL command:
 
 <Admonition type="note">
-This method does not require a request body. Without a request body, the method creates a branch from the project's primary branch, and a compute endpoint is not created.
+This method does not require a request body. Without a request body, the method creates a branch from the project's default branch, and a compute is not created.
 </Admonition>
 
-```curl
+```bash
 curl 'https://console.neon.tech/api/v2/projects/<project_id>/branches' \
   -H 'Accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
   "endpoints": [
@@ -48,11 +49,11 @@ curl 'https://console.neon.tech/api/v2/projects/<project_id>/branches' \
 ```
 
 - The `project_id` for a Neon project is found on the **Settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API. It is a generated value that looks something like this: `autumn-disk-484331`.
-- The `endpoints` attribute creates a compute endpoint, which is required to connect to the branch. Neon supports `read_write` and `read_only` endpoint types. A branch can be created with or without a compute endpoint. You can specify `read_only` to create a [read replica](/docs/guides/read-replica-guide).
+- The `endpoints` attribute creates a compute, which is required to connect to the branch. Neon supports `read_write` and `read_only` compute types. A branch can be created with or without a compute. You can specify `read_only` to create a [read replica](/docs/guides/read-replica-guide).
 - The `branch` attribute specifies the parent branch.
-- The `parent_id` can be obtained by listing the branches for your project. See [List branches](#list-branches-with-the-api). The `parent_id` is the `id` of the branch you are branching from. A branch `id` has a `br-` prefix. You can branch from your Neon project's primary branch or a non-primary branch.
+- The `parent_id` can be obtained by listing the branches for your project. See [List branches](#list-branches-with-the-api). The `parent_id` is the `id` of the branch you are branching from. A branch `id` has a `br-` prefix. You can branch from your Neon project's default branch or a non-default branch.
 
-The response includes information about the branch, the branch's compute endpoint, and the `create_branch` and `start_compute` operations that were initiated.
+The response includes information about the branch, the branch's compute, and the `create_branch` and `start_compute` operations that were initiated.
 
 ```json
 {
@@ -118,25 +119,25 @@ The response includes information about the branch, the branch's compute endpoin
 }
 ```
 
-### List branches with the API
+## List branches with the API
 
 The following Neon API method lists branches for the specified project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojectbranches).
 
-```text
+```http
 GET /projects/{project_id}/branches
 ```
 
 The API method appears as follows when specified in a cURL command:
 
-```curl
+```bash
 curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' | jq
+  -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
 
 The `project_id` for a Neon project is found on the **Settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API.
 
-The response lists the project's primary branch and any child branches. The name of the primary branch in this example is `main`.
+The response lists the project's default branch and any child branches. The name of the default branch in this example is `main`.
 
 Response:
 
@@ -168,11 +169,11 @@ Response:
 }
 ```
 
-### Delete a branch with the API
+## Delete a branch with the API
 
 The following Neon API method deletes the specified branch. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteprojectbranch).
 
-```text
+```http
 DELETE /projects/{project_id}/branches/{branch_id}
 ```
 
@@ -182,7 +183,7 @@ The API method appears as follows when specified in a cURL command:
 curl -X 'DELETE' \
   'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches/br-dawn-scene-747675' \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer $NEON_API_KEY' | jq
+  -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
 
 - The `project_id` for a Neon project is found on the **Settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API.
@@ -229,5 +230,43 @@ The response shows information about the branch being deleted and the `suspend_c
 ```
 
 You can verify that a branch is deleted by listing the branches for your project. See [List branches](#list-branches-with-the-api). The deleted branch should no longer be listed.
+
+## Restoring a branch using the API
+
+To revert changes or recover lost data, you can use the branch restore endpoint in the Neon API.
+
+```bash
+POST /projects/{project_id}/branches/{branch_id_to_restore}/restore
+```
+
+For details on how to use this endpoint to restore a branch to its own or another branch's history, restore a branch to the head of its parent, and other restore options, see [Branch Restore using the API](/docs/guides/branch-restore#how-to-use-branch-restore).
+
+## Creating a schema-only branch using the API
+
+<Admonition type="note">
+The API is in Beta and subject to change.
+</Admonition>
+
+To create a schema-only branch using the Neon API, use the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) endpoint with the `init_source` option set to `schema-only`, as shown below. Required values include:
+
+- Your Neon `project_id`
+- The `parent_id`, which is the branch ID of the branch containing the schema you want to copy
+
+```bash
+curl --request POST \
+     --url https://console.neon.tech/api/v2/projects/wispy-salad-58347608/branches \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '
+{
+  "branch": {
+    "parent_id": "br-super-mode-w371g4od",
+    "name": "my_schema_only_branch",
+    "init_source": "schema-only"
+  }
+}
+'
+```
 
 <NeedHelp/>

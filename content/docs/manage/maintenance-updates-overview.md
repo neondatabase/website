@@ -1,0 +1,22 @@
+---
+title: Maintenance & updates overview
+enableTableOfContents: true
+isDraft: false
+tag: new
+updatedOn: '2025-03-05T21:09:38.755Z'
+---
+
+Neon performs two types of updates: **platform maintenance** and **updates** to your Neon [computes](/docs/reference/glossary#compute). While both are essential for maintaining a stable, secure, and optimized environment, they serve different purposes.
+
+- **Platform maintenance** includes updates to Neon's infrastructure, resource management operations, and critical security patches. These changes ensure platform stability and security. To learn more, see [Platform maintenance](/docs/manage/platform-maintenance).
+
+- **Updates** apply improvements and updates to individual Neon computes, including Postgres updates, operating system patches, and new Neon features. These updates keep your Neon compute environment and Postgres instances current and optimized. To learn more, see [Updates](/docs/manage/updates).
+
+For both types of updates, we strive to minimize disruption to database operations and provide advanced notification. The table below outlines where you can check for upcoming maintenance and updates.
+
+### Where to check for maintenance and updates
+
+| Type                     | Where to check                                         | Details                                                                                                                                                                                                                                |
+| ------------------------ | ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Platform maintenance** | [Neon Status](https://neonstatus.com/)                 | Check the regional status page where your Neon project resides for upcoming platform maintenance. Optionally, subscribe to a regional status page to receive status updates. See [Neon Status](/docs/introduction/status) for details. |
+| **Updates**              | [Neon Console](https://console.neon.tech/app/projects) | On your Neon project dashboard, go to **Settings** > **Updates** to view your update window and check for update notices. Paid plans allow you to select a preferred update window.                                                    |

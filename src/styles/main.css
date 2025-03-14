@@ -1,6 +1,6 @@
 @layer base {
   body {
-    @apply relative min-w-[320px] !overflow-x-hidden font-sans text-black antialiased;
+    @apply relative min-w-[320px] !overflow-x-hidden bg-white font-sans text-black antialiased dark:bg-black-pure dark:text-white;
     -webkit-tap-highlight-color: transparent;
   }
 
@@ -22,69 +22,20 @@
     transition: all 0.3s ease-out;
   }
 
-  /* used in components/partners/integration/api/code-tabs/code-tabs.jsx */
-  .code-block {
-    pre {
-      @apply overflow-x-auto;
-
-      code {
-        text-shadow: unset;
-        @apply highlighted-code !font-mono text-sm !text-white ![text-shadow:unset];
-      }
-    }
-
-    .comment.linenumber {
-      @apply -mr-8;
-    }
+  .templates-search[type='search']::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    height: 16px;
+    width: 16px;
+    background-image: url(/images/templates/close-light-mode.svg);
+    cursor: pointer;
   }
 
-  .mask-styles {
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-position: center center;
+  .dark .templates-search[type='search']::-webkit-search-cancel-button {
+    background-image: url(/images/templates/close-dark-mode.svg);
   }
 
-  .footer-icon-size {
-    -webkit-mask-size: 16px 16px;
-  }
-
-  /* Used in a /src/components/pages/doc/sidebar/item/item.jsx  */
-  /* Allows changing color of and svg without inserting inline svg */
-  .arrow-mask {
-    -webkit-mask-image: url('/images/chevron-right.svg');
-    -webkit-mask-size: 6px 10px;
-    @apply mask-styles;
-  }
-
-  /* Used in a /src/components/shared/footer/footer.jsx  */
-  .github-icon {
-    -webkit-mask-image: url('/images/footer/github.svg');
-    @apply mask-styles footer-icon-size;
-  }
-
-  .discourse-icon {
-    -webkit-mask-image: url('/images/footer/discourse.svg');
-    @apply mask-styles footer-icon-size;
-  }
-
-  .linkedin-icon {
-    -webkit-mask-image: url('/images/footer/linkedin.svg');
-    @apply mask-styles footer-icon-size;
-  }
-
-  .x-icon {
-    -webkit-mask-image: url('/images/footer/x.svg');
-    @apply mask-styles footer-icon-size;
-  }
-
-  .youtube-icon {
-    -webkit-mask-image: url('/images/footer/youtube.svg');
-    @apply mask-styles footer-icon-size;
-  }
-
-  .multi-checkbox {
-    input[type='checkbox'] {
-      @apply border-green-45 bg-green-45 bg-[url(/images/check.svg)];
-    }
+  inkeep-portal {
+    @apply relative z-50;
   }
 }
 
@@ -92,6 +43,27 @@
   .with-link-primary {
     a {
       @apply text-green-45 transition-colors duration-200 hover:text-[#00FFAA];
+    }
+  }
+
+  .with-list-style {
+    ul,
+    ol {
+      list-style: auto;
+
+      @apply my-5 ml-10 mr-16 md:mx-4;
+
+      li {
+        @apply relative my-2.5 pl-1 tracking-tight;
+
+        b {
+          @apply font-medium;
+        }
+
+        p {
+          @apply mt-0;
+        }
+      }
     }
   }
 
@@ -123,11 +95,18 @@
     transform: translateY(0);
   }
   100% {
-    transform: translateY(-150px);
+    transform: translateY(-100%);
   }
 }
 
 .button-line-animation {
   animation: lineAnimation 5s linear infinite;
   animation-timing-function: steps(75);
+}
+
+.text-with-links {
+  a {
+    @apply whitespace-nowrap border-b border-gray-new-70/40 text-gray-new-80;
+    @apply transition-colors duration-200 hover:border-green-45/40 hover:text-green-45;
+  }
 }

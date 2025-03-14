@@ -3,6 +3,7 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 import Link from 'components/shared/link';
 
@@ -23,19 +24,26 @@ const statusData = {
 
 const fetchStatus = async () => {
   const res = await fetch('https://neonstatus.com/api/v1/summary');
-  const data = await res.json();
+  const response = await res.json();
+  const data = response.subpages;
 
-  if (data.ongoing_incidents.length > 0) {
+  const hasOngoingIncidents = data.some((subpage) => subpage.summary.ongoing_incidents.length > 0);
+  const hasInProgressMaintenances = data.some(
+    (subpage) => subpage.summary.in_progress_maintenances.length > 0
+  );
+
+  if (hasOngoingIncidents) {
     return 'HASISSUES';
   }
-  if (data.in_progress_maintenances.length > 0) {
+  if (hasInProgressMaintenances) {
     return 'UNDERMAINTENANCE';
   }
   return 'UP';
 };
 
-const StatusBadge = ({ isDocPage = false, inView = false }) => {
+const StatusBadge = ({ hasThemesSupport = false, isDarkTheme = true }) => {
   const [currentStatus, setCurrentStatus] = useState(null);
+  const [ref, inView] = useInView({ triggerOnce: true, rootMargin: '0px 0px 200px 0px' });
 
   useEffect(() => {
     if (inView) {
@@ -56,8 +64,9 @@ const StatusBadge = ({ isDocPage = false, inView = false }) => {
       rel="noopener noreferrer"
       className={clsx(
         'flex items-center justify-center gap-x-1.5',
-        isDocPage ? 'mt-12 lg:mt-10' : 'mt-[100px] lg:mt-16 md:mt-8'
+        hasThemesSupport ? 'mt-12 lg:mt-8' : 'mt-auto lg:mt-8 md:mt-8'
       )}
+      ref={ref}
     >
       <span
         className={clsx(
@@ -65,13 +74,18 @@ const StatusBadge = ({ isDocPage = false, inView = false }) => {
           currentStatus ? statusData[currentStatus].color : 'bg-gray-new-50'
         )}
       />
-      <span className="whitespace-nowrap text-sm leading-none tracking-[0.02em]">
+      <span
+        className={clsx(
+          'whitespace-nowrap text-sm leading-none tracking-extra-tight dark:text-white',
+          isDarkTheme ? 'text-white' : 'text-black-new'
+        )}
+      >
         {currentStatus ? statusData[currentStatus].text : 'All systems operational'}
       </span>
     </Link>
   );
 };
 
-StatusBadge.propTypes = { isDocPage: PropTypes.bool, inView: PropTypes.bool };
+StatusBadge.propTypes = { hasThemesSupport: PropTypes.bool, isDarkTheme: PropTypes.bool };
 
 export default StatusBadge;

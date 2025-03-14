@@ -1,7 +1,5 @@
 import SEO_DATA, { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
 
-import pagesWithNoTopbar from './pages-with-no-topbar';
-
 const DEFAULT_TITLE = SEO_DATA.index.title;
 const DEFAULT_DESCRIPTION = SEO_DATA.index.description;
 
@@ -38,11 +36,6 @@ export default function getMetadata({
     metadataBase: new URL(SITE_URL),
     title: metaTitle,
     description: metaDescription,
-    viewport: {
-      width: 'device-width',
-      initialScale: 1,
-      viewportFit: 'cover',
-    },
     alternates: {
       canonical: isPostgres
         ? `https://www.postgresql.org/docs/16/${currentSlug}.html`
@@ -54,7 +47,6 @@ export default function getMetadata({
     manifest: `${SITE_URL}/manifest.json`,
     keywords: Array.from(new Set(keywords?.split(',').map((keyword) => keyword.trim()))).join(', '), // Remove duplicates
     robots,
-    themeColor: pagesWithNoTopbar.includes(pathname) ? '#0c0d0d' : '#00e699',
     icons: {
       icon: '/favicon/favicon.png',
       apple: [

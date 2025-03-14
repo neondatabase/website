@@ -18,8 +18,10 @@ export async function GET(request) {
     return new Response('Invalid token', { status: 401 });
   }
 
-  if (postType !== 'post') {
-    return new Response('Preview functionality only works for blog posts', { status: 401 });
+  if (postType !== 'post' && postType !== 'page') {
+    return new Response('Preview functionality only works for blog posts and pages', {
+      status: 401,
+    });
   }
 
   draftMode().enable();
@@ -31,5 +33,7 @@ export async function GET(request) {
 
   const slug = permalink && postStatus === 'publish' ? permalink : 'wp-draft-post-preview-page';
 
-  redirect(`/blog/${slug}?${redirectSearchParams.toString()}`);
+  postType === 'page'
+    ? redirect(`/${slug}?${redirectSearchParams.toString()}`)
+    : redirect(`/blog/${slug}?${redirectSearchParams.toString()}`);
 }

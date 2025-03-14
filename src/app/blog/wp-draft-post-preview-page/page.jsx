@@ -1,7 +1,8 @@
-import { draftMode } from 'next/headers';
+/* eslint-disable react/prop-types */
 import { notFound } from 'next/navigation';
 
 import Aside from 'components/pages/blog-post/aside';
+import CodeBlock from 'components/pages/blog-post/code-block';
 import CodeTabs from 'components/pages/blog-post/code-tabs';
 import Content from 'components/pages/blog-post/content';
 import CTA from 'components/pages/blog-post/cta';
@@ -10,11 +11,10 @@ import MoreArticles from 'components/pages/blog-post/more-articles';
 import PreviewWarning from 'components/pages/blog-post/preview-warning';
 import SocialShare from 'components/pages/blog-post/social-share';
 import SubscribeForm from 'components/pages/blog-post/subscribe-form';
-import CodeBlock from 'components/shared/code-block';
-import Layout from 'components/shared/layout';
+import Admonition from 'components/shared/admonition';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
-import { getWpPreviewPostData } from 'utils/api-posts';
+import { getWpPreviewPostData } from 'utils/api-wp';
 import getFormattedDate from 'utils/get-formatted-date';
 import getMetadata from 'utils/get-metadata';
 import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blocks';
@@ -31,17 +31,16 @@ import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blo
   You can't have a post in Wordpress with the "wp-draft-post-preview-page" slug. Please be careful.
 */
 const BlogDraft = async ({ searchParams }) => {
-  const { isEnabled: isDraftModeEnabled } = draftMode();
+  // TODO: this is a temporary fix for a known problem with accessing serachParams on the Vercel side - https://github.com/vercel/next.js/issues/54507
+  await Promise.resolve(JSON.stringify(searchParams));
 
-  if (!isDraftModeEnabled) {
+  if (!searchParams?.id || !searchParams?.status) {
     return notFound();
   }
 
   const { post, relatedPosts } = await getWpPreviewPostData(searchParams?.id, searchParams?.status);
 
-  if (!post) {
-    return notFound();
-  }
+  if (!post) return notFound();
 
   const { slug, title, content, pageBlogPost, date, dateGmt, modifiedGmt, categories, seo } = post;
   const shareUrl = `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${LINKS.blog}/${slug}`;
@@ -53,6 +52,7 @@ const BlogDraft = async ({ searchParams }) => {
       blogpostcode: CodeBlock,
       blogpostcodetabs: CodeTabs,
       blogpostcta: CTA,
+      blogpostadmonition: (props) => <Admonition {...props} asHTML />,
     },
     true
   );
@@ -72,18 +72,12 @@ const BlogDraft = async ({ searchParams }) => {
   };
 
   return (
-    <Layout
-      className="bg-black-new text-white"
-      headerTheme="gray-8"
-      footerTheme="black-new"
-      footerWithTopBorder
-      isHeaderSticky
-    >
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="safe-paddings bg-gray-new-8">
+      <div className="safe-paddings bg-black-pure">
         <article className="dark mx-auto grid max-w-[1472px] grid-cols-12 gap-x-10 pb-40 pt-16 2xl:px-10 xl:gap-x-6 xl:pb-32 xl:pt-12 lg:max-w-none lg:px-8 lg:pb-28 lg:pt-10 md:gap-x-0 md:px-4 md:pb-20 md:pt-8">
           <Hero
             className="col-start-4 col-end-10 xl:col-start-1 xl:col-end-9 lg:col-span-full"
@@ -105,14 +99,14 @@ const BlogDraft = async ({ searchParams }) => {
             posts={relatedPosts}
           />
           <SocialShare
-            className="hidden col-span-full lg:mt-14 lg:flex md:mt-12"
+            className="col-span-full hidden lg:mt-14 lg:flex md:mt-12"
             title={title}
             slug={shareUrl}
           />
 
           <SubscribeForm
             size="sm"
-            className="mt-16 col-span-6 col-start-4 xl:col-span-8 lg:col-span-full"
+            className="col-span-6 col-start-4 mt-16 xl:col-span-8 lg:col-span-full"
           />
           <MoreArticles
             className="col-span-10 col-start-2 mt-16 xl:col-span-full xl:mt-14 lg:mt-12 md:mt-11"
@@ -120,8 +114,8 @@ const BlogDraft = async ({ searchParams }) => {
           />
         </article>
       </div>
-      {isDraftModeEnabled && <PreviewWarning />}
-    </Layout>
+      <PreviewWarning />
+    </>
   );
 };
 

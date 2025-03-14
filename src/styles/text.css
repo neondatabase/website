@@ -133,10 +133,6 @@
 .t-8xl {
   @apply text-8xl;
 
-  @screen 3xl {
-    font-size: 88px;
-  }
-
   @screen 2xl {
     font-size: 72px;
   }

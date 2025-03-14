@@ -1,63 +1,125 @@
 @layer components {
+  :root {
+    --shiki-color-text: #18191b;
+    --shiki-color-background: transparent;
+    --shiki-token-constant: #da0b51;
+    --shiki-token-string: #078345;
+    --shiki-token-comment: #b3b3b3;
+    --shiki-token-keyword: #206cdf;
+    --shiki-token-parameter: #a35200;
+    --shiki-token-function: #078345;
+    --shiki-token-string-expression: #078345;
+    --shiki-token-punctuation: #18191b;
+    --shiki-token-link: #078345;
+    --shiki-token-operator: #a86624;
+    --shiki-token-embed: #18191b;
+  }
+
+  .dark {
+    --shiki-color-text: #ffffff;
+    --shiki-color-background: transparent;
+    --shiki-token-constant: #f6558c;
+    --shiki-token-string: #47d18c;
+    --shiki-token-comment: #b3b3b3;
+    --shiki-token-keyword: #66a3ff;
+    --shiki-token-parameter: #ff990a;
+    --shiki-token-function: #47d18c;
+    --shiki-token-string-expression: #47d18c;
+    --shiki-token-punctuation: #ffffff;
+    --shiki-token-link: #47d18c;
+    --shiki-token-operator: #ba8c5e;
+    --shiki-token-embed: #ffffff;
+  }
+
+  .homepage-shiki {
+    --shiki-color-text: #ffffff;
+    --shiki-color-background: transparent;
+    --shiki-token-constant: #a199ff;
+    --shiki-token-string: #52c9e0;
+    --shiki-token-comment: #797d86;
+    --shiki-token-keyword: #afb1b6;
+    --shiki-token-parameter: #ff990a;
+    --shiki-token-function: #52c9e0;
+    --shiki-token-string-expression: #ecec79;
+    --shiki-token-punctuation: #ffffff;
+    --shiki-token-link: #52c9e0;
+    --shiki-token-operator: #ba8c5e;
+    --shiki-token-embed: #ffffff;
+  }
+
+  pre .line {
+    &.highlighted,
+    &[data-highlighted-line] {
+      @apply bg-[rgba(0,85,255,0.08)] shadow-[inset_3px_0px_0px_0px_#0055ff] dark:bg-[rgba(0,229,153,0.08)] dark:shadow-[inset_3px_0px_0px_0px_#00E599];
+    }
+  }
+
+  [data-line-numbers='true'] pre {
+    counter-reset: line;
+  }
+
+  [data-line-numbers='true'] pre .line::before {
+    counter-increment: line;
+    content: counter(line);
+
+    /* Other styling */
+    display: inline-block;
+    width: 1rem;
+    margin-right: 1.25rem;
+    text-align: right;
+    color: gray;
+  }
+
+  code .line {
+    @apply px-4;
+  }
+
+  code .line::after {
+    @apply invisible overflow-hidden text-sm content-["'"];
+  }
+
+  .line .highlighted-word {
+    @apply -mx-[3px] rounded border border-[#c2c2c4] bg-[#f6f6f7] px-1 py-0.5 dark:border-[#3c3f44] dark:bg-[#202127];
+  }
+
   .highlighted-code {
-    .token.keyword,
-    .token.class-name,
-    .token.url,
-    .token.tag {
-      @apply text-code-blue-1 dark:text-code-blue-2;
+    pre {
+      @apply overflow-x-auto px-1 py-6;
+    }
+  }
+
+  .show-linenumbers {
+    pre code {
+      counter-reset: line;
     }
 
-    .token.console,
-    .token.class-name.namespace,
-    .token.tag.attr-name {
-      @apply text-black dark:text-white;
-    }
+    pre code > .line::before {
+      counter-increment: line;
+      content: counter(line);
 
-    .token.boolean,
-    .token.number,
-    .token.symbol,
-    .token.variable,
-    .token.constant,
-    .token.property,
-    .token.property-access,
-    .token.deleted {
-      @apply text-code-red-1 dark:text-code-red-2;
+      /* Other styling */
+      @apply mr-5 inline-block w-4 text-right text-gray-new-50;
     }
+  }
 
-    .token.builtin,
-    .token.function,
-    .token.string,
-    .token.char,
-    .token.selector,
-    .token.tag.attr-value,
-    .token.atrule,
-    .token.inserted {
-      @apply text-code-green-1 dark:text-code-green-2;
+  .homepage-shiki {
+    .show-linenumbers {
+      pre code > .line::before {
+        @apply text-gray-new-20;
+      }
     }
+  }
 
-    .token.punctuation {
-      @apply !text-code-gray-2;
-    }
+  .has-diff code .line {
+    @apply pl-6;
 
-    .token.regex,
-    .token.important {
-      @apply text-code-orange-1 dark:text-code-orange-2;
-    }
-
-    .token.operator,
-    .token.entity {
-      @apply text-code-brown-1 dark:text-code-brown-2;
-    }
-
-    .token.comment,
-    .token.prolog,
-    .token.doctype,
-    .token.cdata {
-      @apply text-code-gray-1;
-    }
-
-    .react-syntax-highlighter-line-number.linenumber {
-      @apply !min-w-[2.25em] !text-left text-gray-5;
+    &.diff {
+      &.add {
+        @apply bg-[#00E599]/10 before:absolute before:left-2 before:text-code-green-1 before:content-['+'];
+      }
+      &.remove {
+        @apply bg-[#FF275D]/10 before:absolute before:left-2 before:text-code-red-1/50 before:content-['—'];
+      }
     }
   }
 }

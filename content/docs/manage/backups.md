@@ -1,25 +1,62 @@
 ---
 title: Backups
 enableTableOfContents: true
-updatedOn: '2023-11-24T11:25:06.759Z'
+updatedOn: '2025-02-22T16:36:52.249Z'
 ---
 
-Neon does not yet provide support for configuring automated backups in the Neon Console or API. This feature is on our roadmap. You can expect it to be introduced in the coming months. In the meantime, we support the following backup options:
+<InfoBlock>
+<DocsList title="What you will learn:">
+<p>About backup strategies</p>
+<p>About built-in backups with point-in-time restore</p>
+<p>Creating backups using pg_dump</p>
+<p>How to automate backups with GitHub Actions</p>
+</DocsList>
 
-## Built-in backups with Neon's point-in-time restore feature
+<DocsList title="Related resources" theme="docs">
+  <a href="/docs/introduction/point-in-time-restore">Branch reset and restore</a>
+  <a href="/docs/import/migrate-from-postgres">Migrate data with pg_dump and pg_restore</a>
+</DocsList>
 
-By default, Neon retains a 7-day history for all branches, allowing you to restore your data to a particular date and time or Log Sequence Number (LSN). The history retention period is configurable. The supported range is 0 to 7 days for [Neon Free Tier](/docs/introduction/free-tier) users, and 0 to 30 days for [Neon Pro Plan](/docs/introduction/pro-plan) users. With this backup option, no action or automation is required. You can restore your data to a past state at any time by creating a database branch, which is a near-instant operation. This feature is referred to [Point-in-time restore](/docs/introduction/point-in-time-restore).
+</InfoBlock>
 
-For information about creating a point-in-time restore branch, see [Branching — Point-in-time restore](/docs/guides/branching-pitr).
+Neon offers two primary backup strategies, which you can use separately or in combination, depending on your requirements.
 
-## pg_dump
+<Steps>
 
-You can backup a database using `pg_dump`, in the same way backups are created for a standalone Postgres instance.
+## Instant Point-in-Time Restore (PITR)
 
-This method dumps a single database in a single branch of your Neon project. If you need to create backups for multiple databases in multiple branches, you must perform a dump operation for each database in each branch separately.
+    With Neon's instant point-in-time restore capability, you can automatically retain a "history" of changes—ranging from 1 day up to 30 days, depending on your Neon plan. This feature lets you recover your database to any specific moment without the need for traditional database backups or separate backup automation. It's ideal if your primary concern is fast recovery after an unexpected event.
 
-To dump a database from your Neon project, please refer to the `pg_dump` instructions in our [Import from Postgres](/docs/import/import-from-postgres) guide.
+    By default, Neon projects retain **1 day** of history. You can increase your history retention period on Neon as follows:
 
-Please be aware that dumping data from Neon is considered "data transfer". For data transfer costs, please refer to our [Billing](/docs/introduction/billing) documentation.
+    | Plan                                                   | History Retention Limit  |
+    | :----------------------------------------------------- | :----------------------- |
+    | [Free](/docs/introduction/plans#free-plan)             | 1 day                    |
+    | [Launch](/docs/introduction/plans#launch)              | 7 days                   |
+    | [Scale](/docs/introduction/plans#scale)                | 14 days                  |
+    | [Business](/docs/introduction/plans#business)          | 30 days                  |
 
-<NeedHelp/>
+    With this strategy, the only required action is setting your desired history retention period. Please keep in mind that increasing your history retention period also increases storage, as changes to your data are retained for a longer period.
+
+    ![History retention](/docs/manage/backups_history_retention.png)
+
+    To get started, see [Point-in-time restore](/docs/introduction/point-in-time-restore).
+
+## Backups with `pg_dump`
+
+    For scenarios that require a more traditional approach to backups—such as business continuity, disaster recovery, or compliance with regulatory requirements—you can use traditional methods, such as creating regular backups using the Postgres `pg_dump` utility.
+
+    For information about using `pg_dump` with Neon, you can refer to our [Migrate data from Postgres with pg_dump and pg_restore](/docs/import/migrate-from-postgres) guide.
+
+    **Automating backups to S3 with `pg_dump` and GitHub Actions**
+
+    If you need to automate `pg_dump` backups to remote storage, this two-part guide walks you through setting up an S3 bucket and a GitHub Action to automate backups on a recurring schedule. You'll also learn how to configure retention settings to manage how long `pg_dump` backups are stored before being deleted.
+
+    1. [Create an S3 bucket to store Postgres backups](/docs/manage/backups-aws-s3-backup-part-1)
+    2. [Set up a GitHub Action to perform nightly Postgres backups](/docs/manage/backups-aws-s3-backup-part-2)
+
+</Steps>
+
+<Admonition type="note" title="Backup & Restore Questions?">
+If you have questions about backups, please reach out to [Neon Support](https://console.neon.tech/app/projects?modal=support).
+</Admonition>

@@ -1,235 +1,206 @@
 'use client';
 
 import clsx from 'clsx';
-import { LazyMotion, domAnimation, m, useAnimation } from 'framer-motion';
-import { useEffect, useMemo, useState } from 'react';
+import { LazyMotion, domAnimation, m } from 'framer-motion';
+import { useFeatureFlagVariantKey, usePostHog } from 'posthog-js/react';
+import { useMemo } from 'react';
 
-import AnimatedButton from 'components/shared/animated-button';
+import Button from 'components/shared/button';
 import Container from 'components/shared/container';
+import CtaBlock from 'components/shared/cta-block';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
-import CheckIcon from 'icons/check.inline.svg';
-import sendGtagEvent from 'utils/send-gtag-event';
 
-const items = [
-  {
-    type: 'Free',
-    price: 'Try Neon now',
-    description:
-      'Essential features to help you get started with Neon. Perfect for prototyping and personal projects.',
-    features: [
-      { title: '1 project' },
-      { title: '10 branches' },
-      { title: '3 GiB of data per branch' },
-      { title: 'A shared compute with 1 GB of RAM' },
-    ],
-    button: {
-      url: 'https://console.neon.tech/sign_in',
-      text: 'Get Started',
-      theme: 'white-outline',
-      event: 'pricing_hero_free_btn_click',
+import plansOriginal from './data/plans.json';
+import Features from './features';
+
+const scaleCardBorderVariants = {
+  from: {
+    opacity: 0,
+  },
+  to: {
+    opacity: [0, 0.4, 0.2, 1, 0.5, 1],
+    transition: {
+      ease: 'easeInOut',
+      duration: 1,
     },
   },
-  {
-    type: 'Pro',
-    price: 'Starting at <span class="font-normal text-pricing-primary-1">$0.00</span>',
-    description:
-      'A usage-based plan for small to medium teams. Unlimited resources with advanced configuration options.',
-    features: [
-      { title: 'Unlimited projects & databases' },
-      { title: 'Unlimited branches' },
-      { title: 'Autoscaling' },
-      { title: 'Configurable compute size' },
-      { title: 'Read replicas' },
-    ],
-    button: {
-      url: 'https://console.neon.tech/app/projects?show_enroll_to_pro=true',
-      text: 'Upgrade',
-      theme: 'primary',
-      event: 'pricing_hero_pro_btn_click',
-    },
+  exit: {
+    opacity: 0,
   },
-  {
-    type: 'Custom',
-    price: 'Contact us',
-    description:
-      'Custom volume-based plans for medium to large teams, database fleets, and resale.',
-    features: [
-      { title: 'Custom contracts' },
-      { title: 'Prepaid plans' },
-      { title: 'Volume discounts' },
-      { title: 'Enterprise support' },
-    ],
-    button: {
-      url: LINKS.contactSales,
-      text: 'Contact Sales',
-      theme: 'white-outline',
-      event: 'pricing_hero_custom_btn_click',
-    },
-  },
-];
+};
 
 const Hero = () => {
-  const [isLoad, setIsLoad] = useState(false);
-  const [hoverCount, setHoverCount] = useState(0);
-  const [activeItemIndex, setActiveItemIndex] = useState(1);
-  const controls = useAnimation();
+  const posthog = usePostHog();
+  const isComputePriceRaised =
+    useFeatureFlagVariantKey('website_growth_compute_price_rising') === 'show_0_24' && false;
 
-  const borderLightVariants = useMemo(
-    () => ({
-      from: {
-        opacity: 0,
-      },
-      to: {
-        opacity: hoverCount === 0 ? [0, 1, 0.5, 1, 0.75, 1] : [0, 0.4, 0.2, 1, 0.5, 1],
-        transition: {
-          ease: 'easeInOut',
-          duration: hoverCount === 0 ? 0.5 : 1,
-        },
-      },
-      exit: {
-        opacity: 0,
-      },
-    }),
-    [hoverCount]
-  );
+  const plans = useMemo(() => {
+    if (isComputePriceRaised) {
+      return plansOriginal.map((plan) => ({
+        ...plan,
+        features: plan.features.map((feature) => {
+          if (feature.id === 'compute_time') {
+            return {
+              ...feature,
+              info: 'Additional at $0.24 per compute hour',
+            };
+          }
+          return feature;
+        }),
+      }));
+    }
 
-  useEffect(() => {
-    controls.start('to');
-  }, [controls]);
-
-  useEffect(() => {
-    setIsLoad(true);
-  }, []);
+    return plansOriginal;
+  }, [isComputePriceRaised]);
 
   return (
-    <section className="hero safe-paddings overflow-hidden pt-36 2xl:pt-[150px] xl:pt-[120px] lg:pt-[52px] md:pt-[40px]">
-      <Container className="flex flex-col items-center" size="medium">
+    <section className="hero safe-paddings overflow-hidden pt-36 2xl:pt-[150px] xl:pt-[120px] lg:pt-[52px] md:pt-10">
+      <Container className="flex flex-col items-center" size="1344">
         <Heading
-          className="inline-flex flex-col text-center font-medium !leading-none tracking-tighter md:text-4xl"
+          className="text-center font-medium !leading-none tracking-tighter xl:text-6xl lg:text-[56px] md:!text-4xl"
           tag="h1"
           size="lg"
         >
-          <span className="text-pricing-primary-1">Start Free.</span>{' '}
-          <span>Only pay for what you use.</span>
+          <span>Neon Pricing</span>
         </Heading>
-        <p className="mx-auto mt-5 max-w-[656px] text-center text-xl font-light leading-snug xl:mt-4 xl:max-w-[570px] xl:text-lg md:mt-3 md:text-base">
-          Neon brings serverless architecture to Postgres, which allows us to offer you flexible
-          usage and volume-based plans.
+        <p className="mx-auto mt-3 max-w-[680px] text-center text-xl font-light leading-snug tracking-extra-tight text-gray-new-80 xl:max-w-[560px] lg:text-lg md:text-base">
+          Pricing plans that grow with you. From prototype to Enterprise.
         </p>
-        <div className="relative mx-auto mt-16 max-w-[1220px] xl:mt-12 md:mt-9">
-          <ul className="relative z-10 grid grid-cols-3 gap-x-11 xl:gap-x-6 lg:grid-cols-2 lg:gap-x-4 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
-            {items.map(({ type, price, description, features, button }, index) => (
-              <li
-                className={clsx(
-                  'group relative rounded-[10px]',
-                  type === 'Pro' && 'lg:-order-1 lg:col-span-full'
-                )}
-                style={{
-                  '--accentColor':
-                    type === 'Free' ? '#ade0eb' : type === 'Pro' ? '#00e599' : '#f0f075',
-                  '--hoverColor':
-                    type === 'Free' ? '#c6eaf1' : type === 'Pro' ? '#00ffaa' : '#f5f5a3',
-                }}
-                key={index}
-                onPointerEnter={() => {
-                  setActiveItemIndex(index);
-                  setHoverCount((prev) => (prev === 1 ? 0 : prev + 1));
-                  controls.start('to');
-                }}
-              >
-                <Link
+        <div className="relative mx-auto mt-16 xl:mt-14 xl:max-w-[644px] lg:mt-11 md:mt-9">
+          <h2 className="sr-only">Neon pricing plans</h2>
+          <ul className="grid-gap relative z-10 grid grid-cols-4 gap-x-8 2xl:gap-x-6 xl:grid-cols-2 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
+            {plans.map(
+              (
+                {
+                  planId,
+                  type,
+                  highlighted = false,
+                  price,
+                  priceFrom = false,
+                  headerLinks,
+                  description,
+                  features,
+                  otherFeatures,
+                  button,
+                },
+                index
+              ) => (
+                <li
                   className={clsx(
-                    'relative z-10 flex min-h-full flex-col rounded-[10px] px-7 py-5 transition-colors duration-500 xl:p-5 xl:pb-3 lg:p-5',
-                    activeItemIndex !== index ? 'bg-gray-new-8' : 'bg-transparent'
+                    'group relative flex min-h-full flex-col rounded-[10px] p-6 pt-5',
+                    !highlighted && 'bg-black-new'
                   )}
-                  to={button.url}
-                  onClick={() => {
-                    sendGtagEvent(button.event);
-                  }}
+                  key={index}
                 >
-                  <div className="mb-6 min-h-[280px] flex flex-col border-b border-dashed border-gray-new-20 pb-4 xl:mb-7 lg:min-h-max">
-                    <span className="text-xl font-medium leading-none tracking-tight text-[var(--accentColor)]">
-                      {type}
-                    </span>
+                  <div className="flex items-center justify-between">
                     <h3
-                      className="mt-7 text-[36px] font-light leading-none tracking-tighter xl:mt-6 xl:text-[32px] md:mt-4"
-                      dangerouslySetInnerHTML={{ __html: price }}
-                    />
-                    <AnimatedButton
                       className={clsx(
-                        'mt-7 w-full !bg-[var(--accentColor)] !py-4 !text-lg !font-medium tracking-tight group-hover:!bg-[var(--hoverColor)] xl:mt-8 md:mt-7 sm:max-w-none',
-                        type === 'Pro'
-                          ? 'lg:absolute lg:right-8 lg:top-0 lg:max-w-[210px] md:relative md:right-0 md:max-w-[304px]'
-                          : 'lg:max-w-[304px]'
-                      )}
-                      isAnimated={activeItemIndex === index}
-                      animationColor="var(--accentColor)"
-                      theme="primary"
-                      size="sm"
-                    >
-                      {button.text}
-                    </AnimatedButton>
-                    <p
-                      className={clsx(
-                        'mt-9 font-light leading-snug tracking-tight text-gray-new-70 md:mt-8',
-                        type === 'Pro' ? 'lg:mt-5' : 'lg:min-h-[66px]'
+                        'text-xl font-medium leading-none tracking-extra-tight',
+                        highlighted ? 'text-green-45' : 'text-white'
                       )}
                     >
-                      {description}
-                    </p>
-                  </div>
-                  <div className="mt-auto flex grow flex-col">
-                    <ul
-                      className={clsx(
-                        'mb-4 flex flex-col flex-wrap space-y-4 xl:mb-5 lg:mb-2.5 md:mb-7',
-                        type === 'Pro' ? 'lg:max-h-28 lg:gap-4 lg:space-y-0 md:max-h-max' : ''
-                      )}
-                    >
-                      {features.map(({ title, label }, index) => (
-                        <li
-                          className={clsx(
-                            'relative pl-6 leading-tight tracking-tight',
-                            type === 'Pro' && 'lg:w-1/3 md:w-full'
-                          )}
-                          key={index}
-                        >
-                          <CheckIcon
-                            className="absolute left-0 top-[2px] h-4 w-4 text-[var(--accentColor)]"
-                            aria-hidden
-                          />
-                          <span>{title}</span>
-                          {label && (
-                            <span className="ml-2 whitespace-nowrap rounded-full bg-pricing-primary-4 px-3 py-1 align-middle text-[10px] font-semibold uppercase leading-none tracking-[0.02em] text-pricing-primary-1">
-                              {label}
-                            </span>
-                          )}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </Link>
-                <LazyMotion features={domAnimation}>
-                  <m.span
-                    className={clsx(
-                      'pointer-events-none absolute left-0 top-0 z-20 h-full w-full rounded-[10px] border transition-colors duration-300 md:border-[var(--accentColor)] md:!opacity-100',
-                      isLoad !== true && '!opacity-100',
-                      activeItemIndex === index
-                        ? 'border-[var(--accentColor)]'
-                        : 'border-transparent'
+                      {type}
+                    </h3>
+                    {headerLinks && (
+                      <p
+                        className={clsx(
+                          'text-sm font-light leading-none text-gray-new-50',
+                          '[&_a]:border-b [&_a]:border-[#85888E]/50 [&_a]:pb-0.5 [&_a]:tracking-tighter',
+                          '[&_a]:transition-colors [&_a]:duration-200 hover:[&_a]:border-transparent hover:[&_a]:text-gray-new-80'
+                        )}
+                        dangerouslySetInnerHTML={{ __html: headerLinks }}
+                      />
                     )}
-                    initial="from"
-                    exit="exit"
-                    variants={borderLightVariants}
-                    animate={controls}
-                    aria-hidden
-                  />
-                </LazyMotion>
-              </li>
-            ))}
+                  </div>
+                  <p className="relative mt-16 ">
+                    {priceFrom && (
+                      <em className="absolute -top-5 block text-sm font-light not-italic leading-none tracking-extra-tight text-gray-new-50">
+                        From
+                      </em>
+                    )}
+                    <span className="text-[40px] font-medium leading-none tracking-tighter">
+                      ${price}
+                    </span>{' '}
+                    <span className="text-sm font-light tracking-extra-tight text-gray-new-50">
+                      /month
+                    </span>
+                  </p>
+                  <Button
+                    className={clsx(
+                      'mt-6 w-full !py-4 !text-base !font-medium leading-none tracking-tighter transition-colors duration-300 sm:max-w-none',
+                      highlighted
+                        ? 'bg-green-45 text-black hover:bg-[#00ffaa]'
+                        : 'bg-gray-new-20 hover:bg-gray-new-30'
+                    )}
+                    size="sm"
+                    to={button.url}
+                    tag_name={button.event}
+                    onClick={() => {
+                      posthog.capture('ui_interaction', {
+                        action: 'pricing_page_get_started_clicked',
+                        plan: planId,
+                        place: 'hero',
+                      });
+                    }}
+                  >
+                    {button.text}
+                  </Button>
+                  <p
+                    className={clsx(
+                      'mt-5 leading-snug tracking-extra-tight text-gray-new-60',
+                      '[&_a]:text-white [&_a]:underline [&_a]:decoration-1 [&_a]:underline-offset-4 [&_a]:transition-colors [&_a]:duration-200 hover:[&_a]:decoration-transparent'
+                    )}
+                  >
+                    {Array.isArray(description)
+                      ? description.map((part, i) =>
+                          typeof part === 'string' ? (
+                            part
+                          ) : (
+                            <Link key={i} to={part.href} onClick={part.onClick}>
+                              {part.text}
+                            </Link>
+                          )
+                        )
+                      : description}
+                  </p>
+                  <Features features={features} type={type} highlighted={highlighted} />
+                  {otherFeatures && (
+                    <Features
+                      title={otherFeatures.title}
+                      features={otherFeatures.features}
+                      type={type}
+                      highlighted={highlighted}
+                      hasToggler
+                    />
+                  )}
+                  {highlighted && (
+                    <LazyMotion features={domAnimation}>
+                      <m.span
+                        className="pointer-events-none absolute left-0 top-0 z-20 h-full w-full rounded-[10px] border border-green-45/70 md:!opacity-100"
+                        initial="from"
+                        exit="exit"
+                        variants={scaleCardBorderVariants}
+                        animate="to"
+                        aria-hidden
+                      />
+                    </LazyMotion>
+                  )}
+                </li>
+              )
+            )}
           </ul>
         </div>
+        <CtaBlock
+          className="max-w-[656px]"
+          title="Custom Plans"
+          description="Connect with our team for HIPAA compliance, annual contracts, higher resource limits, and more."
+          buttonText="Talk to Sales"
+          buttonUrl={LINKS.contactSales}
+          size="sm"
+          hasDecor={false}
+        />
       </Container>
     </section>
   );

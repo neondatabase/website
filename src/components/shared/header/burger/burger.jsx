@@ -7,80 +7,80 @@ const ANIMATION_DURATION = 0.2;
 const Burger = ({ className = null, isToggled = null, onClick = null }) => (
   <LazyMotion features={domAnimation}>
     <m.button
-      className={clsx('relative -mr-1 -mt-1 flex h-8 w-7 shrink rounded-full', className)}
+      className={clsx('-mt-1.5 flex h-8 w-7 shrink rounded-full', className)}
       type="button"
       animate={isToggled ? 'toggled' : 'initial'}
       aria-label={isToggled ? 'Close menu' : 'Open menu'}
       onClick={onClick}
     >
       <m.span
-        className="absolute left-1.5 top-2.5 block h-0.5 w-4 rounded-full bg-current"
+        className="absolute left-px top-2 block h-0.5 w-6 rounded-full bg-current"
         variants={{
           initial: {
-            top: 10,
-            display: 'block',
+            top: 8,
+            visibility: 'visible',
             transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION },
           },
           toggled: {
             top: 12,
             transition: { duration: ANIMATION_DURATION },
-            transitionEnd: { display: 'none' },
+            transitionEnd: { visibility: 'hidden' },
           },
         }}
       />
       <m.span
-        className="absolute left-1.5 top-[15px] block h-0.5 w-4 rounded-full bg-current"
+        className="absolute left-px top-4 block h-0.5 w-6 rounded-full bg-current"
         variants={{
           initial: {
-            display: 'block',
+            visibility: 'visible',
             transition: { delay: ANIMATION_DURATION },
           },
           toggled: {
-            display: 'none',
+            visibility: 'hidden',
             transition: { delay: ANIMATION_DURATION },
           },
         }}
       />
       <m.span
-        className="absolute bottom-2.5 left-1.5 block h-0.5 w-4 rounded-full bg-current"
+        className="absolute bottom-1.5 left-px block h-0.5 w-6 rounded-full bg-current"
         variants={{
           initial: {
-            bottom: 10,
-            display: 'block',
+            bottom: 6,
+            visibility: 'visible',
             transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION },
           },
           toggled: {
             bottom: 12,
             transition: { duration: ANIMATION_DURATION },
-            transitionEnd: { display: 'none' },
+            transitionEnd: { visibility: 'hidden' },
           },
         }}
       />
       <m.span
-        className="absolute left-1.5 top-3.5 hidden h-0.5 w-4 rounded-full bg-current"
+        className="absolute left-[3px] top-4 h-0.5 w-[22px] rounded-full bg-current"
         variants={{
           initial: {
             rotate: '0deg',
             transition: { duration: ANIMATION_DURATION },
-            transitionEnd: { display: 'none' },
+            transitionEnd: { visibility: 'hidden' },
           },
           toggled: {
-            display: 'block',
+            visibility: 'visible',
             rotate: '45deg',
             transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION },
           },
         }}
       />
       <m.span
-        className="absolute left-1.5 top-3.5 hidden h-0.5 w-4 rounded-full bg-current"
+        className="absolute left-[3px] top-4 h-0.5 w-[22px] rounded-full bg-current"
         variants={{
           initial: {
             rotate: '0deg',
             transition: { duration: ANIMATION_DURATION },
-            transitionEnd: { display: 'none' },
+            transitionEnd: { visibility: 'hidden' },
           },
           toggled: {
-            display: 'block',
+            visibility: 'visible',
             rotate: '-45deg',
             transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION },
           },

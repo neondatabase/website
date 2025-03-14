@@ -2,10 +2,15 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container/container';
+import QuoteIcon from 'icons/quote.inline.svg';
 
-import QuoteIcon from './images/quote.inline.svg';
-
-const Testimonial = ({ className = '', quote, name, position }) => (
+const Testimonial = ({
+  className = '',
+  quoteClassName = 'text-[28px] xl:text-2xl lg:text-xl md:text-lg',
+  quote,
+  name,
+  position,
+}) => (
   <div className={clsx('testimonial safe-paddings', className)}>
     <Container className="flex flex-col items-center text-center" size="xs" as="figure">
       <QuoteIcon
@@ -15,7 +20,12 @@ const Testimonial = ({ className = '', quote, name, position }) => (
         aria-hidden
       />
       <blockquote className="mt-6 lg:mt-4 md:mt-2.5">
-        <p className="max-w-[796px] text-[28px] font-light leading-snug tracking-tighter xl:max-w-[706px] xl:text-2xl lg:max-w-[584px] lg:text-xl md:text-lg">
+        <p
+          className={clsx(
+            'max-w-[796px] font-light leading-snug tracking-tighter xl:max-w-[706px] lg:max-w-[584px]',
+            quoteClassName
+          )}
+        >
           {quote}
         </p>
       </blockquote>
@@ -28,6 +38,7 @@ const Testimonial = ({ className = '', quote, name, position }) => (
 
 Testimonial.propTypes = {
   className: PropTypes.string,
+  quoteClassName: PropTypes.string,
   quote: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   position: PropTypes.string.isRequired,

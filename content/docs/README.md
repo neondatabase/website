@@ -1,6 +1,7 @@
 ---
-updatedOn: '2023-11-24T11:25:06.736Z'
+updatedOn: '2025-02-20T17:29:13.754Z'
 ---
+
 # Docs
 
 Welcome to Neon docs! This folder contains the source code of the [Neon docs](https://neon.tech/docs/).
@@ -19,10 +20,11 @@ Right now Markdown files accept the following fields:
 
 1. `title` — title of the page (required)
 2. `subTitle` — subtitle of the page.
-3. `redirectFrom` — array of strings with paths to redirect from to the page, should start and end with a slash, e.g. `/docs/old-path/`
-4. `isDraft` — flag that says the page is not ready yet. It won't appear in production but will appear in the development mode.
-5. `enableTableOfContents` — flag that turns on the display of the outline for the page. The outline gets built out of second and third-level headings ([`h2`, `h3`]), thus appears as two-level nested max.
-6. `ogImage` - the social preview image of the page.
+3. `tag` — tag for the page. It can be one of the following: `new`, `beta`, `coming soon`, `deprecated`, or you can use your own tag. Don't forget to add it to the `sidebar.yaml` file as well.
+4. `redirectFrom` — array of strings with paths to redirect from to the page, should start and end with a slash, e.g. `/docs/old-path/`
+5. `isDraft` — flag that says the page is not ready yet. It won't appear in production but will appear in the development mode.
+6. `enableTableOfContents` — flag that turns on the display of the outline for the page. The outline gets built out of second and third-level headings ([`h2`, `h3`]), thus appears as two-level nested max.
+7. `ogImage` - the social preview image of the page.
 
 > ⚠️ Please note that the project won't build if at least one of the Markdown files is missing a required field.
 
@@ -70,7 +72,7 @@ For example:
 
 ### How to add a new page
 
-In order to add a new page to the root level, add `slug` in the same level with `title`.
+In order to add a new page to the root level, add `slug` in the same level with `title`. You can add `tag` as well if your page is tagged.
 
 ```diff yaml
  - title: Root page 1
@@ -83,9 +85,11 @@ In order to add a new page to the root level, add `slug` in the same level with 
        slug: page-2
 + - title: Root page 1
 +   slug: root-page-1
++   tag: new
 +   items:
 +     - title: Page 1
 +       slug: page-1
++       tag: coming soon
 + - title: Root page 2
 +   slug: root-page-2
 +   items:
@@ -148,80 +152,95 @@ To add a single page <https://example.com/changelog> to the docs sidebar, add th
 
 ## Code blocks
 
-All available languages for code blocks can be found [here](https://prismjs.com/index.html#supported-languages).
+All available languages for code blocks can be found [here](https://shiki.matsu.io/languages).
 
-You can use fenced code blocks with three backticks (```) on the lines before and after the code block.
+You can use fenced code blocks with three backticks (```) on the lines before and after the code block. And display code with options
 
-To display code with options, wrap your code with `<CodeBlock></CodeBlock>` component.
+- enable highlighting single lines, multiple lines, and ranges of code lines
 
-Right now `<CodeBlock>` accepts the following fields:
+  Examples:
+
+  - Single line highlight
+
+    ````md
+    ```c++ {1}
+    #include <iostream>
+
+    int main() {
+        std::cout << "Hello World";
+        return 0;
+    }
+    ```
+    ````
+
+  - Multiple lines
+
+    ````md
+    ```c++ {1,2,5}
+    #include <iostream>
+
+    int main() {
+        std::cout << "Hello World";
+        return 0;
+    }
+    ```
+    ````
+
+  - Range of code lines
+
+    ````md
+    ```c++ {1-3,5}
+    #include <iostream>
+
+    int main() {
+        std::cout << "Hello World";
+        return 0;
+    }
+    ```
+    ````
+
+- use `[!code highlight]` to highlight a line.
+
+  ```ts
+  export function foo() {
+    console.log('Highlighted'); // [!code highlight]
+  }
+  ```
+
+- use `[!code word:xxx]` to highlight a word.
+
+  ```ts
+  export function foo() {
+    // [!code word:Hello]
+    const msg = 'Hello World';
+    console.log(msg); // prints Hello World
+  }
+  ```
 
 - `showLineNumbers` - flag to show on the line numbers in the code block.
+
+  Example:
+
+  ````md
+  ```c++ showLineNumbers
+  #include <iostream>
+
+  int main() {
+      std::cout << "Hello World";
+      return 0;
+  }
+  ```
+  ````
+
 - `shouldWrap` - flag to enable code wrapping in the code block.
-- `highlight` - string to enable highlighting single lines, multiple lines, and ranges of code lines. Note that it also activates the `showLineNumbers` feature.
 
-Example:
+  Example:
 
-````md
-<CodeBlock shouldWrap>
-
-```powershell
-powershell -Command "Start-Process -FilePath powershell -Verb RunAs -ArgumentList '-NoProfile','-InputFormat None','-ExecutionPolicy Bypass','-Command ""iex (iwr -UseBasicParsing https://cli.configu.com/install.ps1)""'"
-```
-
-</CodeBlock>
-````
-
-Single line
-
-````md
-<CodeBlock highlight="1">
-
-```c++
-#include <iostream>
-
-int main() {
-    std::cout << "Hello World";
-    return 0;
-}
-```
-
-</CodeBlock>
-````
-
-Multiple lines
-
-````md
-<CodeBlock highlight="1,2,5">
-
-```c++
-#include <iostream>
-
-int main() {
-    std::cout << "Hello World";
-    return 0;
-}
-```
-
-</CodeBlock>
-````
-
-Range of code lines
-
-````md
-<CodeBlock highlight="1-3,5">
-
-```c++
-#include <iostream>
-
-int main() {
-    std::cout << "Hello World";
-    return 0;
-}
-```
-
-</CodeBlock>
-````
+  ````md
+  ```powershell shouldWrap
+  powershell -Command "Start-Process -FilePath powershell -Verb RunAs -ArgumentList '-NoProfile','-InputFormat None','-ExecutionPolicy Bypass','-Command ""iex (iwr -UseBasicParsing https://cli.configu.com/install.ps1)""'"
+  ```
+  ````
 
 ## Code Tabs
 
@@ -230,15 +249,11 @@ To display code tabs, wrap all pieces of code with `<CodeTabs></CodeTabs>` and w
 ````md
 <CodeTabs labels={["Shell", "C++", "C#", "Java"]}>
 
-<CodeBlock highlight="2-4">
-
-```bash
+```bash {2-4}
 #!/bin/bash
 STR="Hello World!"
 echo $STR
 ```
-
-</CodeBlock>
 
 ```c++
 #include <iostream>
@@ -277,7 +292,7 @@ class GFG {
 <details>
 <summary>Examples</summary>
 
-![Code tabs example](code-tabs-example.jpg)
+![Code tabs example](images/code-tabs-example.jpg)
 
 </details>
 
@@ -291,9 +306,7 @@ To display the tabs with content as image, video, code block, .etc, wrap the `Ta
 <TabItem>
 In your config v3 project, head to the `/metadata/databases/databases.yaml` file and add the database configuration as below.
 
-<CodeBlock showLineNumbers>
-
-```bash
+```bash showLineNumbers
 - name: <db_name>
   kind: postgres
   configuration:
@@ -307,8 +320,6 @@ In your config v3 project, head to the `/metadata/databases/databases.yaml` file
   tables: []
   functions: []
 ```
-
-</CodeBlock>
 
 Apply the Metadata by running:
 
@@ -330,9 +341,9 @@ Alternatively, you can create read replicas using the Neon API or Neon CLI.
 ```bash
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/late-bar-27572981/endpoints \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY' \
-     --header 'content-type: application/json' \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
+     --header 'Content-Type: application/json' \
      --data '
 {
   "endpoint": {
@@ -352,26 +363,91 @@ curl --request POST \
 
 To improve the documentation readability, one can leverage an Admonition custom component. Just wrap your piece of text with `<Admonition></Admonition>` and pass the type.
 
-There are 5 types of Admonition: `note`, `important`, `tip`, `warning`, `info`; the default is `note`.
+There are 6 types of Admonition: `note`, `important`, `tip`, `info`, `warning`, `comingSoon`; the default is `note`.
 
 You may also specify an optional title with prop `title`.
 
 Example:
 
 ```md
-<Admonition type="note" title="Your title">
-  The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation.
+<Admonition type="note">
+Highlights information that users should take into account, even when skimming.
+</Admonition>
+
+<Admonition type="important">
+Crucial information necessary for users to succeed.
+</Admonition>
+
+<Admonition type="tip">
+Optional information to help a user be more successful.
 </Admonition>
 
 <Admonition type="info">
-  The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation.
+Information that helps users understand the things better.
+</Admonition>
+
+<Admonition type="warning">
+Critical content demanding immediate user attention due to potential risks.
+</Admonition>
+
+<Admonition type="comingSoon">
+Information about features that are coming soon.
 </Admonition>
 ```
 
 <details>
 <summary>Examples</summary>
 
-![Admonition example](admonition-example.jpg)
+![Admonition example](images/admonition-example.jpg)
+
+</details>
+
+## CTA
+
+This is a simple block with title, description text and one CTA button that accomplish certain actions.
+
+```md
+<CTA />
+```
+
+Check the example for default data of CTA block
+
+<details>
+<summary>Example</summary>
+
+![CTA example](images/cta-example.jpg)
+
+</details>
+
+To change text in CTA block, you can pass to the component props `title`, `description`, `buttonText`, `buttonUrl`:
+
+```md
+<CTA title="Try it on Neon!" description="Neon is Serverless Postgres built for the cloud. Explore Postgres features and functions in our user-friendly SQL Editor. Sign up for a free account to get started." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
+```
+
+## Steps
+
+To display numbered steps, wrap the content with `Steps` component.  
+Steps will be splitted by `h2` headings.
+
+```md
+<Steps>
+
+## Step 1: Create the Initial Schema
+
+First, create a new database called `people` on the `main` branch and add some sample data to it.
+
+## Step 2: Create a development branch
+
+Create a new development branch off of `main`. This branch will be an exact, isolated copy of `main`.
+
+</Steps>
+```
+
+<details>
+<summary>Example</summary>
+
+![Steps example](images/steps-example.jpg)
 
 </details>
 
@@ -384,18 +460,24 @@ Example file structure:
 ```md
 ├── public
 │ ├── docs
-│   ├── conceptual-guides
-│   ├── neon_architecture_2.png // put images in a directory with the same name as the .md file
+│ │ ├── conceptual-guides
+│ │ ├── neon_architecture_2.png // put images in a directory with the same name as the .md file
 ├── content
 │ ├── docs
-│   ├── conceptual-guides
-│   ├── architecture-overview.md
+│ │ ├── conceptual-guides
+│ │ ├── architecture-overview.md
 ```
 
-Example content in `architecture-overview.md`:
+To display images using Markdown syntax, use the following syntax: `![alt text](image url)`. Example content in `architecture-overview.md`:
 
 ```md
 ![Neon architecture diagram](/docs/conceptual-guides/neon_architecture_2.png)
+```
+
+If you need an image without border to show an annotated piece of UI, use the `"no-border"` attribute as in the example below:
+
+```md
+![Neon architecture diagram](/docs/conceptual-guides/neon_architecture_2.png 'no-border')
 ```
 
 With this approach, all images on your doc pages will be displayed both on the production and GitHub preview.
@@ -407,10 +489,10 @@ Custom `mdx` component that makes possible using [extended markdown syntax for d
 The usage is pretty [straightforward](https://github.com/neondatabase/website/pull/231/commits/8f795eaf700c31794a2267fc5978c22bfc649a0c):
 
 ```md
-{/* other content here */}
+[comment]: <> (other content here)
 
 <DefinitionList>
-{/* required new line */}
+[comment]: <> (required new line)
 Scenario executor
 : First definition
 : Second definition
@@ -427,10 +509,10 @@ Another term for smoke test
 [Stress test](/)
 : First and **only** definition for both terms with additional markup <br/> Read more: [link](/)
 
-{/* other content here */}
+[comment]: <> (other content here)
 </DefinitionList>
 
-{/* other content here */}
+[comment]: <> (other content here)
 ```
 
 ### Acceptable markup for term
@@ -456,7 +538,7 @@ Another term for smoke test
 <details>
 <summary>Examples</summary>
 
-![Definition list example](definition-list-example.jpg)
+![Definition list example](images/definition-list-example.jpg)
 
 </details>
 
@@ -474,13 +556,15 @@ Another term for smoke test
 </DetailIconCards>
 ```
 
+List of available icons in folder: /website/src/components/pages/doc/detail-icon-cards/images
+
 ## Shared MDX components
 
 Create a [markdown file](https://github.com/neondatabase/website/blob/main/content/docs/shared-content/need-help.md) in folder `content/docs/shared-content/`, add to `sharedMdxComponents` the name of component and the path to component.
 
 ```js
 const sharedMdxComponents = {
-  // name of component: path to component (not including content/docs/)
+  // ConponentName: 'shared-content/component-filename'
   NeedHelp: 'shared-content/need-help',
 };
 
@@ -496,7 +580,20 @@ Insert a shared markdown and render inline.
 - [pg_tiktoken source code on GitHub](https://github.com/kelvich/pg_tiktoken)
 
 <NeedHelp/>
+```
 
+You can pass props to the shared component:
+
+```md
+<ComponentWithProps text="The pgvector extension" />
+```
+
+`component-with-props.md`
+
+```md
+<Admonition type="note" title="Test component with props">
+  {text}
+</Admonition>
 ```
 
 ## Contributing

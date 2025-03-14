@@ -2,7 +2,7 @@
 title: Google Colab
 subtitle: Use Google Colab with Neon for vector similarity search
 enableTableOfContents: true
-updatedOn: '2023-11-24T11:25:06.740Z'
+updatedOn: '2025-02-03T20:41:57.298Z'
 ---
 
 [Google Colab](https://colab.research.google.com/) is a hosted Jupyter Notebook service that requires no setup to use and provides free access to computing resources, including GPUs and TPUs.
@@ -16,9 +16,9 @@ To perform the steps in this guide, you require a Neon database for storing vect
 
 ## Retrieve your database connection string
 
-In the **Connection Details** widget on the Neon **Dashboard**, select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
+Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal, and select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
 
-![Connection details widget](/docs/connect/connection_details.png)
+![Connection modal](/docs/connect/connection_details.png)
 
 ## Create a notebook
 
@@ -34,41 +34,37 @@ Alternatively, you can open a predefined Google Colab notebook for this guide by
 
 ## Connect to your database
 
-1. In your Colab notebook, create a code block to define your database connection and create a cursor object. Replace `postgres://[user]:[password]@[neon_hostname]/[dbname]` with the database connection string you retrieved in the previous step.
+1. In your Colab notebook, create a code block to define your database connection and create a cursor object. Replace `postgresql://[user]:[password]@[neon_hostname]/[dbname]` with the database connection string you retrieved in the previous step.
 
-    <CodeBlock shouldWrap>
+   ```python shouldWrap
+   import os
+   import psycopg2
 
-    ```python
-    import os
-    import psycopg2
+   # Provide your Neon connection string
+   connection_string = "postgresql://[user]:[password]@[neon_hostname]/[dbname]"
 
-    # Provide your Neon connection string
-    connection_string = "postgres://[user]:[password]@[neon_hostname]/[dbname]"
+   # Connect using the connection string
+   connection = psycopg2.connect(connection_string)
 
-    # Connect using the connection string
-    connection = psycopg2.connect(connection_string)
-
-    # Create a new cursor object
-    cursor = connection.cursor()
-    ```
-
-    </CodeBlock>
+   # Create a new cursor object
+   cursor = connection.cursor()
+   ```
 
 2. Execute the code block (**Ctrl** + **Enter**).
 
 3. Add a code block for testing the database connection.
 
-    ```python
-    # Execute this query to test the database connection
-    cursor.execute("SELECT 1;")
-    result = cursor.fetchone()
+   ```python
+   # Execute this query to test the database connection
+   cursor.execute("SELECT 1;")
+   result = cursor.fetchone()
 
-    # Check the query result
-    if result == (1,):
-        print("Your database connection was successful!")
-    else:
-        print("Your connection failed.")
-    ```
+   # Check the query result
+   if result == (1,):
+       print("Your database connection was successful!")
+   else:
+       print("Your connection failed.")
+   ```
 
 4. Execute the code block (**Ctrl** + **Enter**).
 
@@ -76,10 +72,10 @@ Alternatively, you can open a predefined Google Colab notebook for this guide by
 
 1. Create a codeblock to install the `pgvector` extension to enable your Neon database as a vector store:
 
-    ```python
-    # Execute this query to install the pgvector extension
-    cursor.execute("CREATE EXTENSION IF NOT EXISTS vector;")
-    ```
+   ```python
+   # Execute this query to install the pgvector extension
+   cursor.execute("CREATE EXTENSION IF NOT EXISTS vector;")
+   ```
 
 2. Execute the code block (**Ctrl** + **Enter**).
 
@@ -87,30 +83,26 @@ Alternatively, you can open a predefined Google Colab notebook for this guide by
 
 1. Add a code block to create a table and insert data:
 
-    <CodeBlock shouldWrap>
+   ```python shouldWrap
+   create_table_sql = '''
+   CREATE TABLE items (
+   id BIGSERIAL PRIMARY KEY,
+   embedding VECTOR(3)
+   );
+   '''
 
-    ```python
-    create_table_sql = '''
-    CREATE TABLE items (
-    id BIGSERIAL PRIMARY KEY,
-    embedding VECTOR(3)
-    );
-    '''
+   # Insert data
+   insert_data_sql = '''
+   INSERT INTO items (embedding) VALUES ('[1,2,3]'), ('[4,5,6]'), ('[7,8,9]');
+   '''
 
-    # Insert data
-    insert_data_sql = '''
-    INSERT INTO items (embedding) VALUES ('[1,2,3]'), ('[4,5,6]'), ('[7,8,9]');
-    '''
+   # Execute the SQL statements
+   cursor.execute(create_table_sql)
+   cursor.execute(insert_data_sql)
 
-    # Execute the SQL statements
-    cursor.execute(create_table_sql)
-    cursor.execute(insert_data_sql)
-
-    # Commit the changes
-    connection.commit()
-    ```
-
-    </CodeBlock>
+   # Commit the changes
+   connection.commit()
+   ```
 
 2. Execute the code block (**Ctrl** + **Enter**).
 
@@ -118,15 +110,11 @@ Alternatively, you can open a predefined Google Colab notebook for this guide by
 
 1. Add a codeblock to perform a vector similarity search.
 
-    <CodeBlock shouldWrap>
-
-    ```python
-    cursor.execute("SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 3;")
-    all_data = cursor.fetchall()
-    print(all_data)
-    ```
-
-    </CodeBlock>
+   ```python shouldWrap
+   cursor.execute("SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 3;")
+   all_data = cursor.fetchall()
+   print(all_data)
+   ```
 
 2. Execute the code block (**Ctrl** + **Enter**).
 

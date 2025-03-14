@@ -22,7 +22,7 @@ const items = [
     icon: storageIcon,
     title: 'Bottomless storage',
     description:
-      'Neon\'s  architecture, which separates storage and compute, provides scale out and unlimited storage',
+      "Neon's  architecture, which separates storage and compute, provides scale out and unlimited storage",
   },
   {
     icon: appsIcon,
@@ -35,10 +35,10 @@ const items = [
 const Features = () => (
   <section className="features safe-paddings">
     <Container className="grid-gap-x grid grid-cols-12" size="medium">
-      <div className="col-span-10 col-start-2 grid grid-cols-10 gap-x-10 rounded-2xl bg-gray-new-8 p-12 xl:col-span-full xl:col-start-1 xl:grid-cols-12 xl:items-center xl:gap-x-6 xl:p-8 lg:gap-x-4 lg:pb-10 lg:pt-9 md:p-8">
+      <div className="col-span-10 col-start-2 grid grid-cols-10 gap-x-10 rounded-2xl bg-black-new p-12 xl:col-span-full xl:col-start-1 xl:grid-cols-12 xl:items-center xl:gap-x-6 xl:p-8 lg:gap-x-4 lg:pb-10 lg:pt-9 md:p-8">
         <div className="col-span-4 col-start-1 flex max-w-[360px] flex-col items-start xl:self-start xl:justify-self-start lg:col-span-full lg:max-w-none">
           <GradientLabel>Features</GradientLabel>
-          <h2 className="mt-3 text-4xl font-medium leading-none tracking-extra-tight xl:text-[36px] lg:max-w-none">
+          <h2 className="mt-3 font-title text-4xl font-medium leading-none tracking-extra-tight xl:text-[36px] lg:max-w-none">
             Making developers more productive in the cloud
           </h2>
           <p className="mt-4 text-lg font-light leading-snug xl:text-base md:mt-2.5 sm:max-w-none sm:pr-1.5">
@@ -61,10 +61,10 @@ const Features = () => (
                 aria-hidden
               />
               <div className="flex flex-col">
-                <h3 className="text-[22px] font-medium leading-tight tracking-[-0.02em] xl:text-xl">
+                <h3 className="text-[22px] font-medium leading-tight tracking-extra-tight xl:text-xl">
                   {title}
                 </h3>
-                <p className="mt-2 font-light leading-snug text-gray-new-70">{description}</p>
+                <p className="mt-2 font-light leading-snug text-gray-new-60">{description}</p>
               </div>
             </li>
           ))}

@@ -2,7 +2,7 @@
 import Rss from 'rss';
 
 import { BLOG_BASE_PATH } from 'constants/blog';
-import { getAllWpPosts } from 'utils/api-posts';
+import { getAllWpPosts } from 'utils/api-wp';
 
 const SITE_URL = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
 
@@ -19,8 +19,18 @@ export async function GET() {
   });
 
   allBlogPosts.forEach((post) => {
-    const { slug, excerpt, date, title } = post;
+    const {
+      categories,
+      slug,
+      excerpt,
+      date,
+      title,
+      content,
+      pageBlogPost: { authors },
+    } = post;
     const url = `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${BLOG_BASE_PATH}${slug}`;
+
+    const postCategories = categories.nodes.map((category) => category.name);
 
     feed.item({
       id: url,
@@ -28,6 +38,9 @@ export async function GET() {
       description: excerpt,
       url,
       date: new Date(date),
+      author: authors[0].author.title,
+      categories: postCategories,
+      custom_elements: [{ 'content:encoded': content }],
     });
   });
 

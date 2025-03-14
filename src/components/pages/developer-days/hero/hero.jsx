@@ -41,7 +41,7 @@ const Hero = () => {
   const [backgroundColor, setBackgroundColor] = useState('#f3f281');
   useBodyLockScroll(isOpenModal);
   return (
-    <section className="safe-paddings relative bg-black pt-[182px] text-white xl:pt-[136px] lg:pt-[76px] md:pt-16 sm:pt-12">
+    <section className="safe-paddings relative bg-black-pure pt-[182px] text-white xl:pt-[136px] lg:pt-[76px] md:pt-16 sm:pt-12">
       <img
         className="absolute left-1/2 top-0 w-full max-w-[1920px] -translate-x-1/2 blur-[80px] lg:hidden"
         src={bgShapeSvg}

@@ -9,7 +9,7 @@ import LINKS from 'constants/links';
 import linkedinIcon from 'icons/linkedin.svg';
 import xIcon from 'icons/x.svg';
 
-// import DiscordIcon from './images/subscribe-discord.inline.svg';
+import discordIcon from './images/subscribe-discord.svg';
 import githubIcon from './images/subscribe-github.svg';
 import illustration from './images/subscribe-illustration.jpg';
 
@@ -24,11 +24,11 @@ const links = [
     to: LINKS.linkedin,
     name: 'LinkedIn',
   },
-  // {
-  //   icon: DiscordIcon,
-  //   to: LINKS.discord,
-  //   name: 'Discord',
-  // },
+  {
+    icon: discordIcon,
+    to: LINKS.discord,
+    name: 'Discord',
+  },
   {
     icon: githubIcon,
     to: LINKS.github,
@@ -37,26 +37,23 @@ const links = [
 ];
 
 const Subscribe = () => (
-  <section
-    id="subscribe"
-    className="safe-paddings my-48 3xl:my-44 2xl:my-40 xl:my-32 lg:my-24 md:my-20"
-  >
-    <Container className="flex items-center justify-between lg:block" size="md">
+  <section className="safe-paddings my-44 2xl:my-40 xl:my-32 lg:my-24 md:my-20" id="subscribe">
+    <Container className="grid-gap-x grid grid-cols-12 items-center lg:block" size="medium">
       <Image
-        className="max-w-[800px] 3xl:max-w-[660px] 2xl:max-w-[550px] xl:max-w-[430px] lg:!hidden"
+        className="col-span-5 lg:!hidden"
         src={illustration}
         alt=""
         loading="lazy"
         aria-hidden
       />
 
-      <div className="max-w-[710px] 3xl:max-w-[590px] 2xl:max-w-[488px] xl:max-w-[456px] lg:max-w-none">
-        <Heading className="lg:text-center" tag="h2" size="xl" theme="black">
+      <div className="col-span-6 col-start-7 ml-1.5 lg:ml-0">
+        <Heading className="lg:text-center" tag="h2" size="md" theme="black">
           Subscribe to our&nbsp;Newsletter
         </Heading>
 
         <SubscriptionForm
-          className="mt-10 2xl:mt-8 xl:mt-7"
+          className="mt-12 2xl:mt-8 xl:mt-7"
           formId={HUBSPOT_NEWSLETTERS_FORM_ID}
           localStorageKey="submittedEmailNewsletterForm"
         />

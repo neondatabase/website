@@ -1,8 +1,8 @@
 ---
 title: Get started with Flyway and Neon
-subtitle: Learn how to manage schema changes in Neon with the Flyway command-line tool
+subtitle: Learn how to manage schema changes in Neon with Flyway
 enableTableOfContents: true
-updatedOn: '2023-11-24T19:55:37.124Z'
+updatedOn: '2025-02-03T20:41:57.314Z'
 ---
 
 Flyway is a database migration tool that facilitates version control for databases. It allows developers to manage and track changes to the database schema, ensuring that the database evolves consistently across different environments.
@@ -21,19 +21,19 @@ This guide steps you through installing the Flyway command-line tool, configurin
 
 2. Extract the Flyway files. For example:
 
-    ```bash
-    cd ~/Downloads
-    tar -xzvf flyway-commandline-x.y.z-linux-x64.tar.gz -C ~/
-    ```
+   ```bash
+   cd ~/Downloads
+   tar -xzvf flyway-commandline-x.y.z-linux-x64.tar.gz -C ~/
+   ```
 
 3. Open a command prompt to view the contents of your Flyway installation:
 
-    ```bash
-    cd ~/flyway-x.y.z
-    ls
-    assets  drivers  flyway.cmd  jre  licenses    rules
-    conf    flyway   jars        lib  README.txt  sql
-    ```
+   ```bash
+   cd ~/flyway-x.y.z
+   ls
+   assets  drivers  flyway.cmd  jre  licenses    rules
+   conf    flyway   jars        lib  README.txt  sql
+   ```
 
 ## Set your path variable
 
@@ -55,25 +55,19 @@ source ~/.zshrc
 
 ## Retrieve your Neon database connection string
 
-From the Neon **Dashboard**, retrieve your password and a Java connection string from the **Connection Details** widget.
+Find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select the **Java** option from the **Connection string** drop-down menu.
 
 Your Java connection string should look something like this:
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
 ```
-
-</CodeBlock>
 
 ## Configure flyway
 
 To configure Flyway to connect to your Neon database, create a `flyway.conf` file in the /conf directory. Include the following items, modified to use the connection details you retrieved in the previous step.
 
-<CodeBlock shouldWrap>
-
-```bash
+```bash shouldWrap
 flyway.url=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/neondb
 
 flyway.user=alex
@@ -82,8 +76,6 @@ flyway.password=AbC123dEf
 
 flyway.locations=filesystem:/home/alex/flyway-x.y.z/sql
 ```
-
-</CodeBlock>
 
 ## Create the first migration
 
@@ -115,7 +107,7 @@ Migrating schema "PUBLIC" to version 1 - Create person table
 Successfully applied 1 migration to schema "PUBLIC" (execution time 00:00.033s)
 ```
 
-To verify that the `person` table was created, you can view it on the **Tables** page in the Neon console. Select **Tables** from the sidebar and select your database.
+To verify that the `person` table was created, you can view it on the **Tables** page in the Neon Console. Select **Tables** from the sidebar and select your database.
 
 ## Add a second migration
 
@@ -144,7 +136,7 @@ Successfully applied 1 migration to schema "public", now at version v2 (executio
 A Flyway report has been generated here: /home/alex/flyway-x.y.z/sql/report.html
 ```
 
-You can verify that the data was added by viewing the table on the **Tables** page in the Neon console. Select **Tables** from the sidebar and select your database.
+You can verify that the data was added by viewing the table on the **Tables** page in the Neon Console. Select **Tables** from the sidebar and select your database.
 
 ## View your schema migration history
 
@@ -163,7 +155,7 @@ Schema version: 2
 A Flyway report has been generated here: /home/alex/flyway-x.y.z/sql/report.html
 ```
 
-You can also view the table on the **Tables** page in the Neon console. Select **Tables** from the sidebar and select your database.
+You can also view the table on the **Tables** page in the Neon Console. Select **Tables** from the sidebar and select your database.
 
 ## Next steps
 

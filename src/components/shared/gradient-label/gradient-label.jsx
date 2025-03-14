@@ -23,7 +23,7 @@ const GradientLabel = ({ className = '', children, theme = 'green' }) => (
   >
     <span
       className={clsx(
-        'relative z-20 block rounded-[40px] px-[13px] py-1.5 text-sm font-medium leading-none -tracking-extra-tight',
+        'relative z-20 block rounded-[40px] px-[13px] py-1.5 text-sm font-medium leading-none',
         themeClassName[theme].text
       )}
     >

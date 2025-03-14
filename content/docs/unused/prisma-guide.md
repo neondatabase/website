@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/guides/prisma-tutorial
-updatedOn: '2023-11-24T11:25:06.768Z'
+updatedOn: '2024-08-07T21:36:52.679Z'
 ---
 
 Prisma is an open source next-generation ORM that consists of the following parts:
@@ -23,16 +23,12 @@ This guide steps you through how to connect from Prisma to Neon, how to use Pris
 
 The project is created and you are presented with a dialog that provides connection details. Copy the connection string, which looks similar to the following:
 
-<CodeBlock shouldWrap>
-
-```text
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb
+```text shouldWrap
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb
 ```
 
-</CodeBlock>
-
 <Admonition type="info">
-A Neon project is created with a default Postgres role named for your account, and a ready-to-use database named `neondb`. This guide uses the `neondb` database as the primary database.
+Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a default role named `neondb_owner`. This guide uses a `neondb` database as the primary database.
 </Admonition>
 
 ## Create a shadow database for Prisma Migrate
@@ -47,13 +43,9 @@ For cloud-hosted databases like Neon, you must create the shadow database manual
 
 The connection string for this database should be the same as the connection string for your `neondb` database except for the database name:
 
-<CodeBlock shouldWrap>
-
-```text
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/shadow
+```text shouldWrap
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/shadow
 ```
-
-</CodeBlock>
 
 ## Set up your Prisma project
 
@@ -103,17 +95,13 @@ In this step, you will update your project's `.env` file with the connection str
 
 When you are finished, your `.env` file should have entries similar to the following:
 
-<CodeBlock shouldWrap>
-
-```text
-DATABASE_URL=postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?connect_timeout=10
-SHADOW_DATABASE_URL=postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/shadow?connect_timeout=10
+```text shouldWrap
+DATABASE_URL=postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?connect_timeout=10
+SHADOW_DATABASE_URL=postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/shadow?connect_timeout=10
 ```
 
-</CodeBlock>
-
 <Admonition type="note">
-A `?connect_timeout=10` parameter is added to the connection strings above to avoid database connection timeouts. The default `connect_timeout` setting is 5 seconds, which is usually enough time for a database connection to be established. However, network latency combined with the short amount of time required to start an idle Neon compute instance can sometimes result in a connection failure. Setting `connect_timeout=10` helps avoid this issue.
+A `?connect_timeout=10` parameter is added to the connection strings above to avoid database connection timeouts. The default `connect_timeout` setting is 5 seconds, which is usually enough time for a database connection to be established. However, network latency combined with the short amount of time required to start an idle Neon compute can sometimes result in a connection failure. Setting `connect_timeout=10` helps avoid this issue.
 </Admonition>
 
 ## Add a model to your schema.prisma file
@@ -206,7 +194,7 @@ found 0 vulnerabilities
 
 To view the `Elements` table that was created in your `neondb` database by the migration performed in the previous step:
 
-1. Navigate to the [Neon console](https://console.neon.tech/).
+1. Navigate to the [Neon Console](https://console.neon.tech/).
 2. Select your project.
 3. Select **Tables**.
 4. Select the `neondb` database and default `public` schema. The `Elements` table should be visible in the sidebar. The table has no data at this point. Data is added later in this guide.
@@ -261,7 +249,7 @@ You have a couple of options for adding data to the `Elements` table. You can ad
 
 ### Option A: Add data using the Neon SQL Editor
 
-1. Navigate to the [Neon console](https://console.neon.tech/).
+1. Navigate to the [Neon Console](https://console.neon.tech/).
 1. Select your project.
 1. Select the **SQL Editor**.
 1. Select the `main` branch of your project and select the `neondb` database.
@@ -437,7 +425,7 @@ Another use case for Introspection is when using plain SQL for schema changes or
 
 Let's assume your database has an extended version of the `Elements` table used in the previous steps. This table is called `Elements_ext`. Let's create that table in the Neon SQL Editor:
 
-1. Navigate to the [Neon console](https://console.neon.tech/).
+1. Navigate to the [Neon Console](https://console.neon.tech/).
 1. Select your project.
 1. Select the **SQL Editor**.
 1. Select the `main` branch of your project and select the `neondb` database.

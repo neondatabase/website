@@ -1,6 +1,6 @@
 describe('Contact Form', () => {
   beforeEach(() => {
-    cy.visit(`/contact-sales`);
+    cy.visit('/contact-sales');
   });
 
   it('allows users to contact sales', () => {
