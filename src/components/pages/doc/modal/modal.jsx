@@ -6,10 +6,12 @@ import { useState, useEffect } from 'react';
 
 import Link from 'components/shared/link';
 import CloseIcon from 'icons/close-small.inline.svg';
+import SlackIcon from 'icons/docs/slack.inline.svg';
 import SupportIcon from 'icons/docs/support.inline.svg';
 
 const icons = {
   support: SupportIcon,
+  slack: SlackIcon,
 };
 
 const Modal = ({ type, title, description, link }) => {

@@ -47,6 +47,16 @@ const MODALS = [
       url: LINKS.consoleSupport,
     },
   },
+  {
+    type: 'slack',
+    breadcrumb: 'Neon Docs',
+    title: ':slack: Monitor Neon from Slack',
+    description: 'Track your projects directly from Slack with the Neon Slack app.',
+    link: {
+      title: 'Get the Neon Slack app',
+      url: '/docs/manage/slack-app',
+    },
+  },
 ];
 
 const Post = ({
