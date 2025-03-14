@@ -193,7 +193,7 @@ WHERE id @@@ paradedb.match('description', 'running shoes');
 (3 rows)
 ```
 
-You can also use `paradedb.match` with JSON syntax for more complex queries. For instance, to find items with a description similar to **'running shoes'**:
+You can also use `paradedb.match` with JSON syntax. For instance, to find items with a description similar to **'running shoes'**:
 
 ```sql
 SELECT description, category
@@ -329,13 +329,15 @@ This will find items that satisfy either of these conditions.
 
 ### Miscellaneous search options
 
-There are several other functions and options available in `pg_search`. Here are a few more useful functions for advanced searching:
+There are many other query builder functions available in `pg_search`, such as these ones, which serve different use cases:
 
 - `paradedb.term`: This function allows for exact term matching and is particularly useful for filtering based on structured data fields like categories or ratings. It ensures that only documents containing the precise term are returned.
 
 - `paradedb.phrase_prefix`: Ideal for implementing autocomplete or search-as-you-type features. It finds phrases where the words start with the search term.
 
 - `paradedb.range`:  Allows you to define range-based queries, especially useful for filtering numeric or date fields.
+
+For a complete list of query builder functions, refer to ParadeDB's [Query Builder](https://docs.paradedb.com/documentation/advanced/overview) documentation.
 
 ### Complex search queries with `paradedb.boolean`
 
@@ -413,7 +415,7 @@ To optimize `pg_search` performance, adjust both Postgres and `pg_search` settin
 
 ### Index build time
 
-Optimize index build time with these settings:
+Optimize index build time with these settings. The `maintenance_work_mem` setting is typically only one requiring tuning. The other two setting have proven default values that typically do not require modification.
 
 - **`maintenance_work_mem`**: : Sets the maximum amount of memory used for maintenance operations such as `CREATE INDEX`. Increasing this setting can speed up index builds by improving Write-Ahead Log (WAL) performance. For example, on a 100-million-row table, allocating multiple GBs can reduce index build time from hours to minutes.
 
