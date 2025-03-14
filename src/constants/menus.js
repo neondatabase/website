@@ -23,6 +23,7 @@ import PeopleIcon from 'icons/header/people.inline.svg';
 import PrivacyGradientIcon from 'icons/header/privacy-gradient.inline.svg';
 import PrivacyIcon from 'icons/header/privacy.inline.svg';
 import SaasIcon from 'icons/header/saas.inline.svg';
+import SecurityIcon from 'icons/header/security.inline.svg';
 import ServerlessIcon from 'icons/header/serverless.inline.svg';
 import StarGradientIcon from 'icons/header/star-gradient.inline.svg';
 import StarIcon from 'icons/header/star.inline.svg';
@@ -205,6 +206,11 @@ export default {
               title: 'Contact',
               to: LINKS.contactSales,
             },
+            {
+              icon: SecurityIcon,
+              title: 'Security',
+              to: LINKS.security,
+            },
           ],
         },
       ],
@@ -367,10 +373,23 @@ export default {
         },
         {
           text: 'HIPAA',
-          description: 'In progress',
           description: 'Compliant',
           icon: 'check-icon',
           to: LINKS.certHIPAA,
+          links: [
+            {
+              text: 'Compliance Guide',
+              to: LINKS.hipaaCompliance,
+            },
+            {
+              text: 'Neon’s Sub Contractors',
+              to: LINKS.hipaaContractors,
+            },
+            {
+              text: 'Sensitive Data Terms',
+              to: LINKS.sensitiveDataTerms,
+            },
+          ],
         },
         {
           text: 'Trust Center',

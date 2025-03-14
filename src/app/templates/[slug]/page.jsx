@@ -63,7 +63,7 @@ const TemplatePage = ({ params }) => {
     },
   ];
   return (
-    <Layout headerWithBorder burgerWithoutBorder isHeaderSticky hasThemesSupport>
+    <Layout headerWithBorder isHeaderSticky hasThemesSupport>
       <section>
         <Container
           className="relative mb-[104px] mt-12 w-full xl:mb-24 xl:mt-10 lg:mb-20 lg:mt-8 sm:mb-[72px] sm:mt-6"

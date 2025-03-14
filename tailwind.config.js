@@ -225,6 +225,19 @@ module.exports = {
         'serverless-apps-hero-border':
           'linear-gradient(27deg, transparent 76%, #1B9A86 90%, #5AADBB),' +
           'linear-gradient(0deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.10))',
+        'security-card-bg':
+          'radial-gradient(111.21% 103.81% at 1.9% 0%, rgba(19, 20, 21, 0.60) 0%, rgba(19, 20, 21, 0.00) 100%),' +
+          'linear-gradient(0deg, #0C0C0D, #0C0C0D)',
+        'security-card-link-bg':
+          'radial-gradient(43.67% 34.97% at 0.71% 0%, rgba(35, 54, 50, 0.80) 0%, rgba(19, 20, 21, 0.00) 100%),' +
+          'radial-gradient(94.73% 89.93% at 1.9% 0%, rgba(21, 33, 30, 0.80) 0%, rgba(19, 20, 21, 0.00) 100%),' +
+          'radial-gradient(111.21% 103.81% at 1.9% 0%, rgba(19, 20, 21, 0.60) 0%, rgba(19, 20, 21, 0.00) 100%),' +
+          'linear-gradient(0deg, #0C0C0D, #0C0C0D)',
+        'security-slide-icon-bg':
+          'radial-gradient(50% 50% at 50% 100%, rgba(0, 229, 153, 0.15) 0%, rgba(0, 229, 153, 0.00) 100%),' +
+          'radial-gradient(78.12% 78.13% at 50% 0%, rgba(226, 230, 235, 0.06) 0%, rgba(226, 230, 235, 0.00) 100%),' +
+          'linear-gradient(0deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.02)),' +
+          'linear-gradient(0deg, #0C0C0D, #0C0C0D)',
         // for deploy page
         'color-picker-variant-1': 'linear-gradient(225deg, #4CFFFF 31.6%, #00E660 74.65%);',
         'color-picker-variant-2': 'linear-gradient(225deg, #BDF471 35.94%, #00CC33 100%);',

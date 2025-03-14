@@ -103,3 +103,10 @@
   animation: lineAnimation 5s linear infinite;
   animation-timing-function: steps(75);
 }
+
+.text-with-links {
+  a {
+    @apply whitespace-nowrap border-b border-gray-new-70/40 text-gray-new-80;
+    @apply transition-colors duration-200 hover:border-green-45/40 hover:text-green-45;
+  }
+}

@@ -37,7 +37,7 @@ const Stage = () => {
             Neon Live
           </h2>
           <TwitterShareButton
-            className="!gap-0 !px-0 !text-sm !font-light tracking-[-0.02em]"
+            className="!gap-0 !px-0 !text-sm !font-light tracking-extra-tight"
             url={`${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/stage`}
             shareText="Watching @neondatabase Deploy live! 🔥 Join at "
             iconSize="small"
@@ -87,7 +87,7 @@ const Stage = () => {
                       : false
                   }
                 >
-                  <h3 className="text-base font-medium leading-[1.25] tracking-tighter text-white">
+                  <h3 className="text-base font-medium leading-tight tracking-tighter text-white">
                     {event}
                   </h3>
                   <figure className="mt-3 flex items-center">
@@ -102,7 +102,7 @@ const Stage = () => {
                       />
                     )}
 
-                    <figcaption className="font-mono text-sm font-light leading-[1.25] tracking-tight text-gray-5">
+                    <figcaption className="font-mono text-sm font-light leading-tight tracking-tight text-gray-5">
                       {speaker.name}, {company}
                     </figcaption>
                   </figure>

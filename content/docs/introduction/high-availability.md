@@ -2,7 +2,7 @@
 title: High Availability (HA) in Neon
 subtitle: Understanding Neon's approach to High Availability
 enableTableOfContents: true
-updatedOn: '2025-02-21T19:10:29.546Z'
+updatedOn: '2025-03-13T12:56:34.386Z'
 ---
 
 At Neon, our serverless architecture takes a different approach to high availability. Instead of maintaining idle standby compute replicas, we achieve multi-AZ resilience through our separation of storage and compute.
@@ -49,11 +49,11 @@ In this architecture:
 
 Here's a summary of how different storage components handle and recover from failures:
 
-| Component      | Failure impact                                 | Recovery mechanism                  | Recovery time |
-| -------------- | ---------------------------------------------- | ----------------------------------- | ------------- |
-| Safekeeper     | WAL writes continue to other Safekeepers       | Automatic redistribution across AZs | Seconds       |
-| Pageserver     | Read requests automatically route to secondary | Automatic failover to secondary     | Seconds       |
-| Object storage | No impact - 99.999999999% durability           | Multi-AZ redundancy built-in        | Immediate     |
+| Component      | Failure impact                                 | Recovery mechanism              | Recovery time |
+| -------------- | ---------------------------------------------- | ------------------------------- | ------------- |
+| Safekeeper     | WAL writes continue to other Safekeepers       | Redundancy is built-in          | Immediate     |
+| Pageserver     | Read requests automatically route to secondary | Automatic failover to secondary | Seconds       |
+| Object storage | No impact - 99.999999999% durability           | Multi-AZ redundancy built-in    | Immediate     |
 
 ## Compute failover
 

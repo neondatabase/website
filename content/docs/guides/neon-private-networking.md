@@ -4,7 +4,7 @@ subtitle: Learn how to connect to your Neon database via AWS PrivateLink
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
-updatedOn: '2025-03-12T15:31:54.852Z'
+updatedOn: '2025-03-13T12:02:31.961Z'
 ---
 
 <Admonition type="comingSoon" title="Private Networking availability">
@@ -34,6 +34,10 @@ To configure Neon Private Networking, perform the following steps:
 <Steps>
 
 ## Create an AWS VPC endpoint
+
+    <Admonition type="important">
+    Do not enable **private DNS names** for the VPC endpoint until [Step 3](/docs/guides/neon-private-networking#enable-private-dns). You must add the VPC endpoint to your Neon organization first, as described in [Step 2](/docs/guides/neon-private-networking#add-your-vpc-endpoint-id-to-your-neon-organization).
+    </Admonition>
 
     1. Go to the AWS **VPC > Endpoints** dashboard and select **Create endpoint**. Make sure you create the endpoint in the same VPC as your client application.
 
