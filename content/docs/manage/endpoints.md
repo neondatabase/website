@@ -32,7 +32,7 @@ Compute details shown on the **Computes** tab include:
 
 - The type of compute, which can be **Primary** (read-write) or **Read Replica** (read-only).
 - The compute status, typically **Active** or **Idle**.
-- **Compute ID**: The compute endpoints ID, which always starts with an `ep-` prefix; for example: `ep-quiet-butterfly-w2qres1h`
+- **Endpoint ID**: The compute endpoints ID, which always starts with an `ep-` prefix; for example: `ep-quiet-butterfly-w2qres1h`
 - **Size**: The size of the compute. Shows autoscaling minimum and maximum vCPU values if autoscaling is enabled.
 - **Last active**: The date and time the compute was last active.
 
