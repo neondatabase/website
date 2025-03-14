@@ -67,6 +67,7 @@ Before you begin, make sure you have:
 Add the PostgreSQL JDBC driver to your project:
 
 **Maven:**
+
 ```xml
 <dependency>
     <groupId>org.postgresql</groupId>
@@ -76,6 +77,7 @@ Add the PostgreSQL JDBC driver to your project:
 ```
 
 **Gradle:**
+
 ```groovy
 implementation 'org.postgresql:postgresql:42.7.1'
 ```
@@ -93,7 +95,7 @@ public class DatabaseConnection {
     private static final String URL = "jdbc:postgresql://[neon_hostname]/[dbname]?sslmode=require";
     private static final String USER = "[user]";
     private static final String PASSWORD = "[password]";
-    
+
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
@@ -119,7 +121,7 @@ public class CreateTableExample {
                 "email VARCHAR(100) NOT NULL UNIQUE, " +
                 "country VARCHAR(50), " +
                 "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)";
-        
+
         try (Connection connection = DatabaseConnection.getConnection();
              Statement statement = connection.createStatement()) {
             statement.execute(createTableSQL);
@@ -143,14 +145,14 @@ import java.sql.SQLException;
 public class InsertRecordExample {
     public static void main(String[] args) {
         String insertSQL = "INSERT INTO users (name, email, country) VALUES (?, ?, ?)";
-        
+
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(insertSQL)) {
-            
+
             preparedStatement.setString(1, "John Doe");
             preparedStatement.setString(2, "john.doe@example.com");
             preparedStatement.setString(3, "USA");
-            
+
             int rowsAffected = preparedStatement.executeUpdate();
             System.out.println(rowsAffected + " row(s) inserted.");
         } catch (SQLException e) {
@@ -174,38 +176,38 @@ public class InsertMultipleRecordsExample {
         String name;
         String email;
         String country;
-        
+
         User(String name, String email, String country) {
             this.name = name;
             this.email = email;
             this.country = country;
         }
     }
-    
+
     public static void main(String[] args) {
         String insertSQL = "INSERT INTO users (name, email, country) VALUES (?, ?, ?)";
-        
+
         List<User> users = Arrays.asList(
             new User("Jane Smith", "jane.smith@example.com", "Canada"),
             new User("Bob Johnson", "bob.johnson@example.com", "UK"),
             new User("Alice Brown", "alice.brown@example.com", "Australia")
         );
-        
+
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(insertSQL)) {
-            
+
             connection.setAutoCommit(false);
-            
+
             for (User user : users) {
                 preparedStatement.setString(1, user.name);
                 preparedStatement.setString(2, user.email);
                 preparedStatement.setString(3, user.country);
                 preparedStatement.addBatch();
             }
-            
+
             int[] rowsAffected = preparedStatement.executeBatch();
             connection.commit();
-            
+
             System.out.println("Inserted " + rowsAffected.length + " records.");
         } catch (SQLException e) {
             System.err.println("Error inserting records: " + e.getMessage());
@@ -225,21 +227,21 @@ import java.sql.SQLException;
 public class QueryRecordsExample {
     public static void main(String[] args) {
         String selectSQL = "SELECT * FROM users";
-        
+
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(selectSQL);
              ResultSet resultSet = preparedStatement.executeQuery()) {
-            
+
             System.out.println("Users:");
             System.out.println("-------------------------------");
-            
+
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
                 String email = resultSet.getString("email");
                 String country = resultSet.getString("country");
-                
-                System.out.printf("ID: %d, Name: %s, Email: %s, Country: %s%n", 
+
+                System.out.printf("ID: %d, Name: %s, Email: %s, Country: %s%n",
                         id, name, email, country);
             }
         } catch (SQLException e) {
@@ -259,13 +261,13 @@ import java.sql.SQLException;
 public class UpdateRecordExample {
     public static void main(String[] args) {
         String updateSQL = "UPDATE users SET country = ? WHERE email = ?";
-        
+
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(updateSQL)) {
-            
+
             preparedStatement.setString(1, "Germany");
             preparedStatement.setString(2, "john.doe@example.com");
-            
+
             int rowsAffected = preparedStatement.executeUpdate();
             System.out.println(rowsAffected + " row(s) updated.");
         } catch (SQLException e) {
@@ -285,12 +287,12 @@ import java.sql.SQLException;
 public class DeleteRecordExample {
     public static void main(String[] args) {
         String deleteSQL = "DELETE FROM users WHERE email = ?";
-        
+
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(deleteSQL)) {
-            
+
             preparedStatement.setString(1, "alice.brown@example.com");
-            
+
             int rowsAffected = preparedStatement.executeUpdate();
             System.out.println(rowsAffected + " row(s) deleted.");
         } catch (SQLException e) {
@@ -319,61 +321,61 @@ public class NeonJdbcCrudExample {
     private static final String URL = "jdbc:postgresql://[neon_hostname]/[dbname]?sslmode=require";
     private static final String USER = "[user]";
     private static final String PASSWORD = "[password]";
-    
+
     static class User {
         String name;
         String email;
         String country;
-        
+
         User(String name, String email, String country) {
             this.name = name;
             this.email = email;
             this.country = country;
         }
     }
-    
+
     public static void main(String[] args) {
         try {
             // Create table
             createTable();
-            
+
             // Insert records
             insertUser("John Doe", "john.doe@example.com", "USA");
-            
+
             List<User> users = Arrays.asList(
                 new User("Jane Smith", "jane.smith@example.com", "Canada"),
                 new User("Bob Johnson", "bob.johnson@example.com", "UK"),
                 new User("Alice Brown", "alice.brown@example.com", "Australia")
             );
             insertMultipleUsers(users);
-            
+
             // Query records
             System.out.println("\nAll users after insertion:");
             queryUsers();
-            
+
             // Update a record
             updateUser("john.doe@example.com", "Germany");
-            
+
             // Query records after update
             System.out.println("\nAll users after update:");
             queryUsers();
-            
+
             // Delete a record
             deleteUser("alice.brown@example.com");
-            
+
             // Query records after deletion
             System.out.println("\nAll users after deletion:");
             queryUsers();
-            
+
         } catch (SQLException e) {
             System.err.println("Database error: " + e.getMessage());
         }
     }
-    
+
     private static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
-    
+
     private static void createTable() throws SQLException {
         String createTableSQL = "CREATE TABLE IF NOT EXISTS users (" +
                 "id SERIAL PRIMARY KEY, " +
@@ -381,96 +383,96 @@ public class NeonJdbcCrudExample {
                 "email VARCHAR(100) NOT NULL UNIQUE, " +
                 "country VARCHAR(50), " +
                 "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)";
-        
+
         try (Connection connection = getConnection();
              Statement statement = connection.createStatement()) {
             statement.execute(createTableSQL);
             System.out.println("Table 'users' created successfully.");
         }
     }
-    
+
     private static void insertUser(String name, String email, String country) throws SQLException {
         String insertSQL = "INSERT INTO users (name, email, country) VALUES (?, ?, ?)";
-        
+
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(insertSQL)) {
-            
+
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, email);
             preparedStatement.setString(3, country);
-            
+
             int rowsAffected = preparedStatement.executeUpdate();
             System.out.println(rowsAffected + " user inserted: " + name);
         }
     }
-    
+
     private static void insertMultipleUsers(List<User> users) throws SQLException {
         String insertSQL = "INSERT INTO users (name, email, country) VALUES (?, ?, ?)";
-        
+
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(insertSQL)) {
-            
+
             connection.setAutoCommit(false);
-            
+
             for (User user : users) {
                 preparedStatement.setString(1, user.name);
                 preparedStatement.setString(2, user.email);
                 preparedStatement.setString(3, user.country);
                 preparedStatement.addBatch();
             }
-            
+
             int[] rowsAffected = preparedStatement.executeBatch();
             connection.commit();
-            
+
             System.out.println("Inserted " + rowsAffected.length + " additional users.");
         }
     }
-    
+
     private static void queryUsers() throws SQLException {
         String selectSQL = "SELECT * FROM users";
-        
+
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(selectSQL);
              ResultSet resultSet = preparedStatement.executeQuery()) {
-            
+
             System.out.println("-------------------------------");
-            
+
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
                 String email = resultSet.getString("email");
                 String country = resultSet.getString("country");
-                
-                System.out.printf("ID: %d, Name: %s, Email: %s, Country: %s%n", 
+
+                System.out.printf("ID: %d, Name: %s, Email: %s, Country: %s%n",
                         id, name, email, country);
             }
-            
+
             System.out.println("-------------------------------");
         }
     }
-    
+
     private static void updateUser(String email, String newCountry) throws SQLException {
         String updateSQL = "UPDATE users SET country = ? WHERE email = ?";
-        
+
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(updateSQL)) {
-            
+
             preparedStatement.setString(1, newCountry);
             preparedStatement.setString(2, email);
-            
+
             int rowsAffected = preparedStatement.executeUpdate();
             System.out.println(rowsAffected + " user updated: " + email + " now in " + newCountry);
         }
     }
-    
+
     private static void deleteUser(String email) throws SQLException {
         String deleteSQL = "DELETE FROM users WHERE email = ?";
-        
+
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(deleteSQL)) {
-            
+
             preparedStatement.setString(1, email);
-            
+
             int rowsAffected = preparedStatement.executeUpdate();
             System.out.println(rowsAffected + " user deleted: " + email);
         }
