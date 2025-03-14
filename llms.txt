@@ -1,0 +1,34 @@
+# Neon Postgres
+
+> Neon is a serverless Postgres database with features like branching, autoscaling, and a generous free tier.
+
+## Docs
+
+### Frameworks
+
+- [Neon Frameworks - Next.js](https://neon.tech/llms/frameworks-nextjs.txt): Guide for integrating Neon with Next.js applications
+- [Neon Frameworks - Node.js](https://neon.tech/llms/frameworks-node.txt): Connect a Node.js application to Neon
+- [Neon Frameworks - NestJS](https://neon.tech/llms/frameworks-nestjs.txt): Connect a NestJS application to Neon
+- [Neon Frameworks - Astro](https://neon.tech/llms/frameworks-astro.txt): Connect an Astro application to Neon
+- [Neon Frameworks - Entity Framework](https://neon.tech/llms/frameworks-entity-framework.txt): Connect an Entity Framework application to Neon
+- [Neon Frameworks - Nuxt](https://neon.tech/llms/frameworks-nuxt.txt): Connect a Nuxt application to Neon
+- [Neon Frameworks - OAuth Integration](https://neon.tech/llms/frameworks-oauth.txt): Integrate Neon with OAuth for secure authentication
+- [Neon Frameworks - Phoenix](https://neon.tech/llms/frameworks-phoenix.txt): Connect a Phoenix application to Neon
+- [Neon Frameworks - Quarkus JDBC](https://neon.tech/llms/frameworks-quarkus-jdbc.txt): Connect Quarkus to Neon using JDBC
+- [Neon Frameworks - Quarkus Reactive](https://neon.tech/llms/frameworks-quarkus-reactive.txt): Connect Quarkus to Neon using Reactive SQL Client
+- [Neon Frameworks - React](https://neon.tech/llms/frameworks-react.txt): Connect a React application to Neon
+- [Neon Frameworks - Reflex](https://neon.tech/llms/frameworks-reflex.txt): Build a Python app with Reflex and Neon
+- [Neon Frameworks - Remix](https://neon.tech/llms/frameworks-remix.txt): Connect a Remix application to Neon
+- [Neon Frameworks - Symfony](https://neon.tech/llms/frameworks-symfony.txt): Connect from Symfony with Doctrine to Neon
+- [Neon Frameworks - SolidStart](https://neon.tech/llms/frameworks-solidstart.txt): Connect a SolidStart application to Neon
+- [Neon Frameworks - SvelteKit](https://neon.tech/llms/frameworks-sveltekit.txt): Connect a SvelteKit application to Neon
+
+### Languages
+
+- [Neon Languages - .NET/C#](https://neon.tech/llms/languages-dotnet.txt): Connect a .NET (C#) application to Neon
+- [Neon Languages - Elixir](https://neon.tech/llms/languages-elixir.txt): Connect from Elixir with Ecto to Neon
+- [Neon Languages - Go](https://neon.tech/llms/languages-go.txt): Connect a Go application to Neon
+- [Neon Languages - Java](https://neon.tech/llms/languages-java.txt): Connect a Java application to Neon
+- [Neon Languages - JavaScript](https://neon.tech/llms/languages-javascript.txt): Connect a JavaScript application to Neon
+- [Neon Languages - Python](https://neon.tech/llms/languages-python.txt): Connect a Python application to Neon using Psycopg
+- [Neon Languages - Rust](https://neon.tech/llms/languages-rust.txt): Connect a Rust application to Neon
