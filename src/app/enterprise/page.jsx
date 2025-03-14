@@ -286,7 +286,7 @@ const faqItems = [
 ];
 
 const EnterprisePage = () => (
-  <Layout>
+  <Layout headerClassName="!absolute !bg-transparent">
     <Hero />
     <Logos className="mt-[102px] xl:mt-[86px] lg:mt-[76px] md:mt-[68px]" logos={logos} />
     <TestimonialNew
