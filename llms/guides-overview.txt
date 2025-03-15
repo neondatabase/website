@@ -1,0 +1,85 @@
+# Neon Postgres Guides
+
+This guide provides an overview of the various guides available for using Neon Postgres effectively across different use cases, frameworks, and integrations.
+
+## Framework Integration Guides
+
+Connect Neon to popular frameworks:
+
+1. **Web Frameworks**
+   - Next.js: Server Components, Server Actions, Edge Functions
+   - Astro: SSR and SSG with Neon
+   - SvelteKit: Endpoints and server routes
+   - Remix: Loaders and actions
+
+2. **Backend Frameworks**
+   - NestJS: TypeORM and Prisma integration
+   - Django: ORM configuration
+   - Laravel: Eloquent ORM setup
+   - Express: Connection pooling strategies
+
+## Authentication Guides
+
+Secure your Neon database with authentication:
+
+1. **Auth Providers**
+   - Auth0: JWT validation and role-based access
+   - Clerk: User management and session handling
+   - NextAuth.js: OAuth integration
+   - Okta: Enterprise authentication
+
+2. **Security Practices**
+   - Environment variable management
+   - Connection encryption
+   - Role-based access control
+   - API key management
+
+## Branching Guides
+
+Leverage Neon's branching capabilities:
+
+1. **Development Workflows**
+   - Creating branches for feature development
+   - Testing queries before production
+   - Schema-only branches for sensitive data
+   - Branch archiving for cost optimization
+
+2. **Automation**
+   - Branching with the Neon API
+   - Branching with the Neon CLI
+   - GitHub Actions integration
+   - Vercel preview deployments
+
+## Serverless Integration Guides
+
+Optimize for serverless environments:
+
+1. **Serverless Platforms**
+   - Vercel Functions and Edge Functions
+   - AWS Lambda
+   - Cloudflare Workers
+   - Netlify Functions
+
+2. **Connection Strategies**
+   - HTTP and WebSocket connections
+   - Connection pooling in serverless
+   - Cold start optimization
+   - Transaction management
+
+## Data Management Guides
+
+Effectively manage your data:
+
+1. **Data Operations**
+   - Table management through the Neon Console
+   - Bulk operations
+   - Data filtering and export
+   - Schema management
+
+2. **Performance Optimization**
+   - Query optimization
+   - Index strategies
+   - Autoscaling configuration
+   - Read replicas for read-heavy workloads
+
+For detailed instructions on specific guides, refer to the Neon documentation.
