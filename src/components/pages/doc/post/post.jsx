@@ -57,6 +57,56 @@ const MODALS = [
       url: '/docs/manage/slack-app',
     },
   },
+  {
+    type: 'slack',
+    breadcrumb: 'Organizations',
+    title: 'Collaborate in Slack',
+    description: 'Invite teammates to your Neon organization right from Slack',
+    link: {
+      title: 'Get the Neon Slack app',
+      url: '/docs/manage/slack-app',
+    },
+  },
+  {
+    type: 'slack',
+    breadcrumb: 'Manage organizations',
+    title: 'Collaborate in Slack',
+    description: 'Invite teammates to your Neon organization right from Slack',
+    link: {
+      title: 'Get the Neon Slack app',
+      url: '/docs/manage/slack-app',
+    },
+  },
+  {
+    type: 'slack',
+    breadcrumb: 'Transfer a project',
+    title: 'Collaborate in Slack',
+    description: 'Invite teammates to your Neon organization right from Slack',
+    link: {
+      title: 'Get the Neon Slack app',
+      url: '/docs/manage/slack-app',
+    },
+  },
+  {
+    type: 'slack',
+    breadcrumb: 'Monitor usage',
+    title: 'Track usage in Slack',
+    description: 'Check project usage and get consumption alerts',
+    link: {
+      title: 'Get the Neon Slack app',
+      url: '/docs/manage/slack-app',
+    },
+  },
+  {
+    type: 'slack',
+    breadcrumb: 'Usage metrics',
+    title: 'Track usage in Slack',
+    description: 'Check project usage and get consumption alerts',
+    link: {
+      title: 'Get the Neon Slack app',
+      url: '/docs/manage/slack-app',
+    },
+  },
 ];
 
 const Post = ({
