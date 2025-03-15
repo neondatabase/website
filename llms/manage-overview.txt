@@ -1,0 +1,107 @@
+# Managing Neon Postgres Projects
+
+This guide provides an overview of managing Neon Postgres projects, including understanding the object hierarchy and managing various components.
+
+## Neon Object Hierarchy
+
+Understanding how objects in Neon are related:
+
+1. **Neon Account**
+   - The account you signed up with (email, GitHub, Google, etc.)
+   - Contains API keys for programmatic access
+   - Manages billing and usage
+
+2. **Organizations**
+   - Container for team projects
+   - Manages roles and permissions
+   - Centralizes billing
+
+3. **Projects**
+   - Container for branches, computes, roles, and databases
+   - Defines the region where resources reside
+   - Limited by plan restrictions
+
+4. **Branches**
+   - Contains data and schema
+   - Supports parent-child relationships
+   - Includes default/root branch (main)
+
+5. **Computes**
+   - R/W (read/write) computes
+   - Read Replica computes
+   - Defines resources (vCPU and memory)
+
+6. **Roles**
+   - Postgres roles for authentication
+   - Required to create and access databases
+   - Limited to 500 roles per branch
+
+7. **Databases**
+   - Container for SQL objects
+   - Belongs to a branch
+   - Limited to 500 databases per branch
+
+## Managing Projects
+
+Create and manage Neon projects:
+
+1. **Project Creation**
+   - Select region and Postgres version
+   - Configure compute size
+   - Set project name and description
+
+2. **Project Settings**
+   - Update project details
+   - Configure project-wide settings
+   - Manage project access
+
+3. **Project Deletion**
+   - Back up important data
+   - Delete project and all resources
+   - Understand permanent data loss implications
+
+## Managing Branches
+
+Leverage Neon's branching capabilities:
+
+1. **Branch Operations**
+   - Create branches from existing branches
+   - Set default branch
+   - Create schema-only branches
+   - Delete branches
+
+2. **Branch Archiving**
+   - Automatic archiving of inactive branches
+   - Manual archiving for cost optimization
+   - Restore archived branches
+
+## Managing Computes
+
+Configure compute resources:
+
+1. **Compute Settings**
+   - Size computes (vCPU and memory)
+   - Configure autoscaling
+   - Enable/disable scale to zero
+   - Set minimum and maximum compute units
+
+2. **Read Replicas**
+   - Create read replicas for read-heavy workloads
+   - Configure read replica computes
+   - Connect to read replicas
+
+## Managing Roles and Databases
+
+Administer database objects:
+
+1. **Role Management**
+   - Create and delete roles
+   - Reset role passwords
+   - Assign privileges
+
+2. **Database Management**
+   - Create and delete databases
+   - Configure database settings
+   - Monitor database usage
+
+For detailed instructions on specific management tasks, refer to the Neon documentation.

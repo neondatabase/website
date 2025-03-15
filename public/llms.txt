@@ -32,3 +32,12 @@
 - [Neon Languages - JavaScript](https://neon.tech/llms/languages-javascript.txt): Connect a JavaScript application to Neon
 - [Neon Languages - Python](https://neon.tech/llms/languages-python.txt): Connect a Python application to Neon using Psycopg
 - [Neon Languages - Rust](https://neon.tech/llms/languages-rust.txt): Connect a Rust application to Neon
+
+### Core Documentation
+
+- [Neon Connect - Overview](https://neon.tech/llms/connect-overview.txt): Guide to connecting to Neon Postgres from different clients and applications
+- [Neon Extensions - Overview](https://neon.tech/llms/extensions-overview.txt): Guide to PostgreSQL extensions supported by Neon
+- [Neon Guides - Overview](https://neon.tech/llms/guides-overview.txt): Comprehensive guides for using Neon with various frameworks and integrations
+- [Neon Import - Overview](https://neon.tech/llms/import-overview.txt): Guide to migrating data to Neon from different database providers
+- [Neon Manage - Overview](https://neon.tech/llms/manage-overview.txt): Guide to managing Neon projects, branches, computes, and databases
+- [Neon Serverless - Overview](https://neon.tech/llms/serverless-overview.txt): Guide to using the Neon serverless driver for HTTP and WebSocket connections
