@@ -47,6 +47,66 @@ const MODALS = [
       url: LINKS.consoleSupport,
     },
   },
+  {
+    type: 'slack',
+    breadcrumb: 'Neon Docs',
+    title: 'Manage Neon in Slack',
+    description: 'Get alerts, track usage, and manage your team right from Slack',
+    link: {
+      title: 'Get the Neon Slack app',
+      url: '/docs/manage/slack-app',
+    },
+  },
+  {
+    type: 'slack',
+    breadcrumb: 'Organizations',
+    title: 'Collaborate in Slack',
+    description: 'Invite teammates to your Neon organization right from Slack',
+    link: {
+      title: 'Get the Neon Slack app',
+      url: '/docs/manage/slack-app',
+    },
+  },
+  {
+    type: 'slack',
+    breadcrumb: 'Manage organizations',
+    title: 'Collaborate in Slack',
+    description: 'Invite teammates to your Neon organization right from Slack',
+    link: {
+      title: 'Get the Neon Slack app',
+      url: '/docs/manage/slack-app',
+    },
+  },
+  {
+    type: 'slack',
+    breadcrumb: 'Transfer a project',
+    title: 'Collaborate in Slack',
+    description: 'Invite teammates to your Neon organization right from Slack',
+    link: {
+      title: 'Get the Neon Slack app',
+      url: '/docs/manage/slack-app',
+    },
+  },
+  {
+    type: 'slack',
+    breadcrumb: 'Monitor billing and usage',
+    title: 'Track usage in Slack',
+    description: 'Check project usage and get consumption alerts',
+    link: {
+      title: 'Get the Neon Slack app',
+      url: '/docs/manage/slack-app',
+    },
+  },
+  {
+    type: 'slack',
+    breadcrumb: 'Usage metrics',
+    title: 'Track usage in Slack',
+    description: 'Check project usage and get consumption alerts',
+    link: {
+      title: 'Get the Neon Slack app',
+      url: '/docs/manage/slack-app',
+    },
+  },
 ];
 
 const Post = ({
@@ -63,8 +123,10 @@ const Post = ({
   fileOriginPath,
   tableOfContents,
 }) => {
-  const modal = MODALS.find((modal) =>
-    breadcrumbs.some((breadcrumb) => modal.breadcrumb === breadcrumb.title)
+  const modal = MODALS.find(
+    (modal) =>
+      breadcrumbs.some((breadcrumb) => modal.breadcrumb === breadcrumb.title) ||
+      (currentSlug === 'introduction' && modal.breadcrumb === 'Neon Docs')
   );
 
   return (
