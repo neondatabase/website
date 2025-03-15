@@ -9,6 +9,8 @@ The Neon website implements the [llms.txt standard](https://llmstxt.org/) to pro
 1. The repository files in `/llms/` directory (for version control and documentation)
 2. The public files in `/public/llms/` directory (for serving via the website)
 
+> **Important:** Changes made to files in the `/llms/` directory are NOT automatically reflected in the `/public/llms/` directory. You must manually copy any modified or new files to the public directory for them to be served on the website.
+
 ## Adding New Files
 
 When adding new framework or language guides to the llms.txt system, follow these steps:
