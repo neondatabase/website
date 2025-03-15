@@ -801,6 +801,8 @@
           slug: reference/cli-set-context
         - title: completion
           slug: reference/cli-completion
+        - title: CLI messages
+          slug: reference/cli-messages
     - title: SDKs
       slug: reference/sdk
       icon: sdk
