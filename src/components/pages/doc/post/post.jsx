@@ -89,7 +89,7 @@ const MODALS = [
   },
   {
     type: 'slack',
-    breadcrumb: 'Monitor usage',
+    breadcrumb: 'Monitor billing and usage',
     title: 'Track usage in Slack',
     description: 'Check project usage and get consumption alerts',
     link: {
