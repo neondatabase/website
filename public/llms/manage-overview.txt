@@ -1,107 +1,39 @@
-# Managing Neon Postgres Projects
+# Overview of the Neon object hierarchy
 
-This guide provides an overview of managing Neon Postgres projects, including understanding the object hierarchy and managing various components.
+Managing your Neon project requires an understanding of the Neon object hierarchy. The following diagram shows how objects in Neon are related. See below for a description of each object.
 
-## Neon Object Hierarchy
+![Neon object hierarchy](/docs/manage/neon_object_hierarchy.jpg)
 
-Understanding how objects in Neon are related:
+## Neon account
 
-1. **Neon Account**
-   - The account you signed up with (email, GitHub, Google, etc.)
-   - Contains API keys for programmatic access
-   - Manages billing and usage
+This is the Neon account you signed up with. Neon supports signing up with an email, GitHub, Google, or partner account.
 
-2. **Organizations**
-   - Container for team projects
-   - Manages roles and permissions
-   - Centralizes billing
+**API keys** are global and belong to the Neon account. API keys are used with the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) to create and manage Neon projects or objects within a Neon project. While there is no strict limit on the number of API keys you can create, we recommend keeping it under 10,000 per Neon account. For more about API keys, see [Manage API keys](/docs/manage/api-keys).
 
-3. **Projects**
-   - Container for branches, computes, roles, and databases
-   - Defines the region where resources reside
-   - Limited by plan restrictions
+## Organizations
 
-4. **Branches**
-   - Contains data and schema
-   - Supports parent-child relationships
-   - Includes default/root branch (main)
+Neon's Organizations feature allows you organize and manage a team's projects under a single Neon account — with billing, role management, and project transfer capabilities all in one accessible location in the Neon Console.
 
-5. **Computes**
-   - R/W (read/write) computes
-   - Read Replica computes
-   - Defines resources (vCPU and memory)
+## Projects
 
-6. **Roles**
-   - Postgres roles for authentication
-   - Required to create and access databases
-   - Limited to 500 roles per branch
+A project is a container for all objects except for API keys, which are global and work with any project owned by your Neon account. Branches, computes, roles, and databases belong to a project. A Neon project also defines the region where project resources reside. A Neon account can have multiple projects, but plan limits define the number of projects per Neon account. For more information, see [Manage projects](/docs/manage/projects).
 
-7. **Databases**
-   - Container for SQL objects
-   - Belongs to a branch
-   - Limited to 500 databases per branch
+## Default branch
 
-## Managing Projects
+Data resides in a branch. Each Neon project is created with a default branch called `main`. This initial branch is also your project's root branch, which cannot be deleted. After creating more branches, you can designate a different branch as your default branch, but your root branch cannot be deleted. You can create child branches from any branch in your project. Each branch can contain multiple databases and roles. Plan limits define the number of branches you can create in a project and the amount of data per branch. To learn more, see [Manage branches](/docs/manage/branches).
 
-Create and manage Neon projects:
+## R/W computes and Read Replicas
 
-1. **Project Creation**
-   - Select region and Postgres version
-   - Configure compute size
-   - Set project name and description
+A compute is a virtualized computing resource that includes vCPU and memory for running applications. In the context of Neon, a compute runs Postgres. When you create a project in Neon, a primary R/W (read/write) compute is created for a project's default branch. Neon supports both R/W and [Read Replica](/docs/introduction/read-replicas) computes. A branch can have a single primary R/W compute but supports multiple Read Replica computes. To connect to a database that resides on a branch, you must connect via a R/W or Read Replica compute associated with the branch. Your Neon plan defines the resources (vCPU and RAM) available to your R/W and Read Replica computes. For more information, see [Manage computes](/docs/manage/endpoints). Compute size, autoscaling, and scale to zero are all settings that are configured for R/W and Read Replica computes.
 
-2. **Project Settings**
-   - Update project details
-   - Configure project-wide settings
-   - Manage project access
+## Roles
 
-3. **Project Deletion**
-   - Back up important data
-   - Delete project and all resources
-   - Understand permanent data loss implications
+In Neon, roles are Postgres roles. A role is required to create and access a database. A role belongs to a branch. There is a limit of 500 roles per branch. The default branch of a Neon project is created with a role named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`. This role is the owner of the database. Any role created via the Neon Console, CLI, or API is created with [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) privileges. For more information, see [Manage roles](/docs/manage/roles).
 
-## Managing Branches
+## Databases
 
-Leverage Neon's branching capabilities:
+As with any standalone instance of Postgres, a database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In Neon, a database belongs to a branch. If you do not specify your own database name when creating a project, the default branch of your project is created with a ready-to-use database named `neondb`. There is a limit of 500 databases per branch. For more information, see [Manage databases](/docs/manage/databases).
 
-1. **Branch Operations**
-   - Create branches from existing branches
-   - Set default branch
-   - Create schema-only branches
-   - Delete branches
+## Schemas
 
-2. **Branch Archiving**
-   - Automatic archiving of inactive branches
-   - Manual archiving for cost optimization
-   - Restore archived branches
-
-## Managing Computes
-
-Configure compute resources:
-
-1. **Compute Settings**
-   - Size computes (vCPU and memory)
-   - Configure autoscaling
-   - Enable/disable scale to zero
-   - Set minimum and maximum compute units
-
-2. **Read Replicas**
-   - Create read replicas for read-heavy workloads
-   - Configure read replica computes
-   - Connect to read replicas
-
-## Managing Roles and Databases
-
-Administer database objects:
-
-1. **Role Management**
-   - Create and delete roles
-   - Reset role passwords
-   - Assign privileges
-
-2. **Database Management**
-   - Create and delete databases
-   - Configure database settings
-   - Monitor database usage
-
-For detailed instructions on specific management tasks, refer to the Neon documentation.
+All databases in Neon are created with a `public` schema, which is the default behavior for any standard PostgreSQL instance. SQL objects are created in the `public` schema, by default. For more information about the `public` schema, refer to [The Public schema](https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-PUBLIC), in the _PostgreSQL documentation_.
