@@ -50,8 +50,8 @@ const MODALS = [
   {
     type: 'slack',
     breadcrumb: 'Neon Docs',
-    title: ':slack: Monitor Neon from Slack',
-    description: 'Track your projects directly from Slack with the Neon Slack app.',
+    title: 'Manage Neon in Slack',
+    description: 'Get alerts, track usage, and manage your team right from Slack',
     link: {
       title: 'Get the Neon Slack app',
       url: '/docs/manage/slack-app',
