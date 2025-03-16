@@ -72,7 +72,7 @@ const ChatOptions = ({ isSidebar = false }) => {
               >
                 <div
                   className={clsx(
-                    'flex size-10 items-center justify-center rounded-lg border',
+                    'flex size-10 shrink-0 items-center justify-center rounded-lg border',
                     'transition-colors duration-200',
                     'border-gray-new-90 text-gray-new-50 group-hover:border-gray-new-80 group-hover:bg-gray-new-98',
                     'dark:border-gray-new-15 dark:text-gray-new-60 dark:group-hover:border-gray-new-20 dark:group-hover:bg-gray-new-8'
