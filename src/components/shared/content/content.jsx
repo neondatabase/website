@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 import remarkGfm from 'remark-gfm';
 
+import ChatOptions from 'components/pages/doc/chat-options';
 import CodeTabs from 'components/pages/doc/code-tabs';
 import CommunityBanner from 'components/pages/doc/community-banner';
 import DefinitionList from 'components/pages/doc/definition-list';
@@ -26,6 +27,7 @@ import Testimonial from 'components/pages/use-case/testimonial';
 import TestimonialsWrapper from 'components/pages/use-case/testimonials-wrapper';
 import UseCaseContext from 'components/pages/use-case/use-case-context';
 import UseCaseList from 'components/pages/use-case/use-case-list';
+import DeployPostgresButton from 'components/shared//deploy-postgres-button';
 import Admonition from 'components/shared/admonition';
 import AnchorHeading from 'components/shared/anchor-heading';
 import CodeBlock from 'components/shared/code-block';
@@ -41,7 +43,6 @@ import getCodeProps from 'lib/rehype-code-props';
 import getGlossaryItem from 'utils/get-glossary-item';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
-import DeployPostgresButton from '../deploy-postgres-button';
 
 const sharedComponents = Object.keys(sharedMdxComponents).reduce((acc, key) => {
   acc[key] = (props) => IncludeBlock({ url: sharedMdxComponents[key], ...props });
@@ -182,6 +183,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   Video,
   Steps,
   DeployPostgresButton,
+  ChatOptions,
   ...sharedComponents,
 });
 
