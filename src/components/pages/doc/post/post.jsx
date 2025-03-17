@@ -48,6 +48,45 @@ const MODALS = [
       url: LINKS.consoleSupport,
     },
   },
+  {
+    type: 'slack',
+    breadcrumb: 'Neon Docs',
+    title: 'Manage Neon in Slack',
+    description: 'Get alerts, track usage, and manage your team right from Slack',
+    link: {
+      title: 'Get the Neon Slack app',
+      url: '/docs/manage/slack-app',
+    },
+  },
+  {
+    type: 'slack',
+    breadcrumb: ['Organizations', 'Manage organizations', 'Transfer a project'],
+    title: 'Collaborate in Slack',
+    description: 'Invite teammates to your Neon organization right from Slack',
+    link: {
+      title: 'Get the Neon Slack app',
+      url: '/docs/manage/slack-app',
+    },
+  },
+  {
+    type: 'slack',
+    breadcrumb: [
+      'Monitor billing and usage',
+      'Usage metrics',
+      'Plans',
+      'Pricing estimation guide',
+      'Extra usage',
+      'Sample project billing',
+      'Manage billing',
+      'Plans and billing',
+    ],
+    title: 'Track usage in Slack',
+    description: 'Check project usage and get consumption alerts',
+    link: {
+      title: 'Get the Neon Slack app',
+      url: '/docs/manage/slack-app',
+    },
+  },
 ];
 
 const Post = ({
@@ -65,9 +104,24 @@ const Post = ({
   fileOriginPath,
   tableOfContents,
 }) => {
-  const modal = MODALS.find((modal) =>
-    breadcrumbs.some((breadcrumb) => modal.breadcrumb === breadcrumb.title)
-  );
+  // Excluded pages that should not show the Track usage popup
+  const excludedPages = ['AWS Marketplace', 'Azure Marketplace', 'Enterprise sales process'];
+  const isExcludedPage = breadcrumbs.some((breadcrumb) => excludedPages.includes(breadcrumb.title));
+
+  const modal =
+    !isExcludedPage &&
+    MODALS.find(
+      (modal) =>
+        breadcrumbs.some((breadcrumb) =>
+          Array.isArray(modal.breadcrumb)
+            ? modal.breadcrumb.includes(breadcrumb.title)
+            : modal.breadcrumb === breadcrumb.title
+        ) ||
+        (currentSlug === 'introduction' &&
+          (Array.isArray(modal.breadcrumb)
+            ? modal.breadcrumb.includes('Neon Docs')
+            : modal.breadcrumb === 'Neon Docs'))
+    );
 
   return (
     <>
