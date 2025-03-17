@@ -44,9 +44,9 @@ const themeClassNames = {
   },
   default: {
     block: 'mt-12 hidden xl:block',
-    title: '',
+    title: 'w-fit',
     list: 'not-prose !mt-7 grid list-none grid-cols-4 gap-x-4 gap-y-5 !p-0 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1',
-    item: 'flex items-center gap-3',
+    item: 'flex items-center gap-3 w-fit',
   },
 };
 
@@ -81,10 +81,9 @@ const ChatOptions = ({ isSidebar = false }) => {
                   <Icon width={18} height={18} />
                 </div>
                 <p
-                  className={clsx(
-                    'whitespace-nowrap leading-tight tracking-extra-tight',
-                    isSidebar && 'sr-only'
-                  )}
+                  className={
+                    isSidebar ? 'sr-only' : 'whitespace-nowrap leading-tight tracking-extra-tight'
+                  }
                 >
                   {title}
                 </p>
