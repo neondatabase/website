@@ -1,9 +1,12 @@
 import LINKS from 'constants/links';
 
+// type - unique identifier for the modal
+// pagesToShow - array of page titles and sections where the modal should be shown
+// 'Neon Docs' - show modal on the introduction page
 const MODALS = [
   {
     type: 'migrate',
-    matchTitle: 'Migrate to Neon',
+    pagesToShow: ['Migrate to Neon'],
     title: 'Migrating to Neon?',
     description: 'Our team can help minimize downtime.',
     link: {
@@ -13,7 +16,7 @@ const MODALS = [
   },
   {
     type: 'support',
-    matchTitle: 'Support',
+    pagesToShow: ['Support'],
     title: 'Need help now?',
     description: 'Please reach out to our Support team!',
     link: {

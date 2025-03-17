@@ -40,8 +40,10 @@ const Post = ({
   fileOriginPath,
   tableOfContents,
 }) => {
-  const modal = MODALS.find((modal) =>
-    breadcrumbs.some((breadcrumb) => modal.matchTitle === breadcrumb.title)
+  const modal = MODALS.find(
+    (modal) =>
+      breadcrumbs.some((breadcrumb) => modal.pagesToShow.includes(breadcrumb.title)) ||
+      (currentSlug === 'introduction' && modal.pagesToShow.includes('Neon Docs'))
   );
 
   return (
