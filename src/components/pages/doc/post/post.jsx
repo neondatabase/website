@@ -72,11 +72,12 @@ const MODALS = [
     breadcrumb: [
       'Monitor billing and usage',
       'Usage metrics',
-      'Neon plans',
+      'Plans',
       'Pricing estimation guide',
       'Extra usage',
       'Sample project billing',
       'Manage billing',
+      'Plans and billing',
     ],
     title: 'Track usage in Slack',
     description: 'Check project usage and get consumption alerts',
