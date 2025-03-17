@@ -99,15 +99,15 @@ The version 1 UUID generation functions in `uuid-ossp` are based on the time of 
 
   **Key characteristics of Version 4 UUIDs:**
 
-  *   **Randomly Generated:**  Based on high-quality random number generators.
-  *   **High Uniqueness Probability:** Extremely low probability of collision, making them suitable for most applications requiring unique identifiers.
+  - **Randomly Generated:**  Based on high-quality random number generators.
+  - **High Uniqueness Probability:** Extremely low probability of collision, making them suitable for most applications requiring unique identifiers.
 
   **Use Cases:**
 
-  *   General-purpose unique identifiers where predictability or specific ordering is not required.
-  *   Primary keys for database tables, especially in distributed systems.
-  *   Identifying records in systems where high randomness and uniqueness are paramount.
-  *   Simplifying UUID generation when deterministic or time-based approaches are not necessary.
+  - General-purpose unique identifiers where predictability or specific ordering is not required.
+  - Primary keys for database tables, especially in distributed systems.
+  - Identifying records in systems where high randomness and uniqueness are paramount.
+  - Simplifying UUID generation when deterministic or time-based approaches are not necessary.
 
 
 ### Version 5 UUIDs (Name-Based, SHA-1 Hash)
@@ -200,9 +200,9 @@ The `uuid_ossp` extension is a valuable tool for UUID generation in Postgres. It
 
 To effectively use `uuid_ossp`, remember these key recommendations:
 
-*   **For general use, version 4 UUIDs (`uuid_generate_v4()` or `gen_random_uuid()`) are ideal for random unique IDs.**
-*   **For deterministic IDs, choose version 5 (`uuid_generate_v5()`) over version 3 (`uuid_generate_v3()`) for better security.**
-*   **Use version 1 UUIDs (`uuid_generate_v1()` or `uuid_generate_v1mc()`) only when time-based ordering is essential, keeping privacy implications in mind.**
+- **For general use, version 4 UUIDs (`uuid_generate_v4()` or `gen_random_uuid()`) are ideal for random unique IDs.**
+- **For deterministic IDs, choose version 5 (`uuid_generate_v5()`) over version 3 (`uuid_generate_v3()`) for better security.**
+- **Use version 1 UUIDs (`uuid_generate_v1()` or `uuid_generate_v1mc()`) only when time-based ordering is essential, keeping privacy implications in mind.**
 
 By selecting the appropriate UUID version based on your requirements, you can ensure the uniqueness and consistency of identifiers in your Postgres database.
 
