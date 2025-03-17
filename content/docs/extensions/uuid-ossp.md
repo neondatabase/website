@@ -9,17 +9,11 @@ The `uuid-ossp` extension provides a suite of functions for generating Universal
 
 <CTA />
 
-This guide provides an introduction to the `uuid-ossp` extension. You'll learn how to enable the extension, explore the functions for generating different types of UUIDs, understand common use cases where UUIDs are beneficial, and consider important aspects like performance and security.
+This guide provides an introduction to the `uuid-ossp` extension. You'll learn how to enable the extension on Neon, explore the functions for generating different types of UUIDs, understand common use cases where UUIDs are beneficial, and consider important aspects like performance and security.
 
 <Admonition type="note">
 `uuid-ossp` is a widely-used Postgres extension that offers a range of UUID generation methods beyond the basic built-in functions. It is particularly valuable when you need specific types of UUIDs or require deterministic, name-based UUIDs for consistent identifiers.
 </Admonition>
-
-**Version availability:**
-
-Please refer to the [list of all extensions](/docs/extensions/pg-extensions) available in Neon for up-to-date extension version information.
-
-The current version of the `uuid-ossp` extension in Neon is `1.1`.
 
 ## Enable the `uuid-ossp` extension
 
@@ -28,6 +22,12 @@ You can enable the extension by running the following `CREATE EXTENSION` stateme
 ```sql
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 ```
+
+**Version availability:**
+
+Please refer to the [list of all extensions](/docs/extensions/pg-extensions) available in Neon for up-to-date extension version information.
+
+The current version of the `uuid-ossp` extension in Neon is `1.1`.
 
 ## UUID Functions
 
@@ -90,7 +90,7 @@ The version 1 UUID generation functions in `uuid-ossp` are based on the time of 
 
 - `uuid_generate_v4()`:
 
-  The `uuid_generate_v4()` function generates version 4 UUIDs, which are derived entirely from random numbers. These are the most common type of UUIDs due to their simplicity and strong guarantee of uniqueness. PostgreSQL also provides the built-in function [`gen_random_uuid()`](/postgresql/postgresql-tutorial/postgresql-uuid#generating-uuid-values) which is functionally equivalent to `uuid_generate_v4()`.
+  The `uuid_generate_v4()` function generates version 4 UUIDs, which are derived entirely from random numbers. These are the most common type of UUIDs due to their simplicity and strong guarantee of uniqueness. Postgres also provides the built-in function [`gen_random_uuid()`](/postgresql/postgresql-tutorial/postgresql-uuid#generating-uuid-values) which is functionally equivalent to `uuid_generate_v4()`.
 
   ```sql
   SELECT uuid_generate_v4();
@@ -139,8 +139,8 @@ The version 1 UUID generation functions in `uuid-ossp` are based on the time of 
 
   **Purpose of the Nil UUID:**
 
-  - **Representing Absence:**  Similar to `NULL` for other data types, the nil UUID is often used to indicate the absence of a UUID value or as a default placeholder.
-  - **Special Value:** It does not correspond to any real-world generated UUID and is a specific, non-existent UUID value for particular use cases.
+  - **Representing absence:**  Similar to `NULL` for other data types, the nil UUID is often used to indicate the absence of a UUID value or as a default placeholder.
+  - **Special value:** It does not correspond to any real-world generated UUID and is a specific, non-existent UUID value for particular use cases.
 
   **Use Cases:**
 
@@ -152,47 +152,53 @@ The version 1 UUID generation functions in `uuid-ossp` are based on the time of 
 
   These functions return constant UUIDs that are specifically designated as namespaces for different identifier types, as per the UUID specification. They are intended to be used as the `namespace` argument in `uuid_generate_v3()` and `uuid_generate_v5()` functions.
 
-  *   **`uuid_ns_dns()`: DNS Namespace UUID**
+  *   `uuid_ns_dns()`
+      
+      Represents the DNS namespace, intended for generating UUIDs from DNS names.
       ```sql
       SELECT uuid_generate_v5(uuid_ns_dns(), 'example.com');
       -- cfbff0d1-9375-5685-968c-48ce8b15ae17 (always the same for 'example.com')
       SELECT uuid_generate_v3(uuid_ns_dns(), 'example.com');
       -- 9073926b-929f-31c2-abc9-fad77ae3e8eb (always the same for 'example.com')
       ```
-      Represents the DNS namespace, intended for generating UUIDs from DNS names.
 
-  *   **`uuid_ns_url()`: URL Namespace UUID**
+  *   `uuid_ns_url()`
+
+      Represents the URL namespace, for generating UUIDs from URLs.
       ```sql
       SELECT uuid_generate_v3(uuid_ns_url(), 'https://example.com');
       -- 68794df6-5e20-385f-ab08-bb73f8a433cb (always the same for 'https://example.com')
       ```
-      Represents the URL namespace, for generating UUIDs from URLs.
 
-  *   **`uuid_ns_oid()`: ISO OID Namespace UUID**
+  *   `uuid_ns_oid()`
+
+      Represents the ISO Object Identifier (OID) namespace. Note that these OIDs refer to the ASN.1 standard and are distinct from PostgreSQL's internal OIDs.
       ```sql
       SELECT uuid_generate_v5(uuid_ns_oid(), '12345');
       -- bf547c8b-0674-5afe-97ad-d6e7556e56fa (always the same for '12345')
       ```
-      Represents the ISO Object Identifier (OID) namespace. Note that these OIDs refer to the ASN.1 standard and are distinct from PostgreSQL's internal OIDs.
+      
 
-  *   **`uuid_ns_x500()`: X.500 DN Namespace UUID**
+  *   `uuid_ns_x500()`
+
+      Represents the X.500 Distinguished Name (DN) namespace.
       ```sql
       SSELECT uuid_generate_v5(uuid_ns_x500(), 'CN=John Doe, DC=example, DC=com');
       -- e9ba549f-a675-5490-b054-ad862cb8c1d2 (always the same for 'CN=John Doe, DC=example, DC=com')
       ```
-      Represents the X.500 Distinguished Name (DN) namespace.
+      
 
   **Usage of Namespace UUID Constants:**
 
   These constants are crucial for generating deterministic UUIDs based on specific namespaces, ensuring consistent UUIDs for the same input name across different systems.
 
-## Performance and Storage Considerations
+## Performance and storage considerations
 
 While UUIDs offer significant advantages, it's important to be aware of potential performance and storage implications:
 
-- **Storage Size:** UUIDs are 128-bit values (16 bytes), which are larger than typical integer primary keys (4 bytes for `integer`, 8 bytes for `bigint`). This increased size can lead to higher storage requirements, especially in tables with a very large number of rows.
+- **Storage size:** UUIDs are 128-bit values (16 bytes), which are larger than typical integer primary keys (4 bytes for `integer`, 8 bytes for `bigint`). This increased size can lead to higher storage requirements, especially in tables with a very large number of rows.
 
-- **Indexing Performance:** Randomly generated UUIDs (version 4) can lead to less efficient indexing compared to sequential integer IDs. Inserting rows with random UUIDs as primary keys can cause index fragmentation, as new entries are inserted at random locations in the index. This can slow down write operations and potentially affect read query performance, especially in very large tables and under high write loads. However, using sequential or time-ordered UUIDs (like version 1, or version 7 from other extensions) can mitigate this issue.
+- **Indexing performance:** Randomly generated UUIDs (version 4) can lead to less efficient indexing compared to sequential integer IDs. Inserting rows with random UUIDs as primary keys can cause index fragmentation, as new entries are inserted at random locations in the index. This can slow down write operations and potentially affect read query performance, especially in very large tables and under high write loads. However, using sequential or time-ordered UUIDs (like version 1) can mitigate this issue.
 
 ## Conclusion
 
