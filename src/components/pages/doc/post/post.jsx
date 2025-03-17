@@ -102,18 +102,24 @@ const Post = ({
   fileOriginPath,
   tableOfContents,
 }) => {
-  const modal = MODALS.find(
-    (modal) =>
-      breadcrumbs.some((breadcrumb) =>
-        Array.isArray(modal.breadcrumb)
-          ? modal.breadcrumb.includes(breadcrumb.title)
-          : modal.breadcrumb === breadcrumb.title
-      ) ||
-      (currentSlug === 'introduction' &&
-        (Array.isArray(modal.breadcrumb)
-          ? modal.breadcrumb.includes('Neon Docs')
-          : modal.breadcrumb === 'Neon Docs'))
-  );
+  // Excluded pages that should not show the Track usage popup
+  const excludedPages = ['AWS Marketplace', 'Azure Marketplace', 'Enterprise sales process'];
+  const isExcludedPage = breadcrumbs.some((breadcrumb) => excludedPages.includes(breadcrumb.title));
+
+  const modal =
+    !isExcludedPage &&
+    MODALS.find(
+      (modal) =>
+        breadcrumbs.some((breadcrumb) =>
+          Array.isArray(modal.breadcrumb)
+            ? modal.breadcrumb.includes(breadcrumb.title)
+            : modal.breadcrumb === breadcrumb.title
+        ) ||
+        (currentSlug === 'introduction' &&
+          (Array.isArray(modal.breadcrumb)
+            ? modal.breadcrumb.includes('Neon Docs')
+            : modal.breadcrumb === 'Neon Docs'))
+    );
 
   return (
     <>
