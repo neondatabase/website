@@ -37,7 +37,7 @@ const ITEMS = [
 
 const themeClassNames = {
   sidebar: {
-    block: 'mt-[60px]',
+    block: 'mt-[60px] max-w-[184px]',
     title: 'mb-4 text-sm font-semibold leading-tight tracking-extra-tight',
     list: 'flex flex-wrap gap-2',
     item: 'block',
@@ -57,7 +57,7 @@ const ChatOptions = ({ isSidebar = false }) => {
 
   return (
     <div className={classNames.block}>
-      <TitleTag className={classNames.title}>Where to Use Neon AI</TitleTag>
+      <TitleTag className={classNames.title}>Where to Use Neon AI Chat&nbsp;Assistants</TitleTag>
       <ul className={classNames.list}>
         {ITEMS.map(({ title, icon, link, isExternal, className }) => {
           const Icon = icon;
