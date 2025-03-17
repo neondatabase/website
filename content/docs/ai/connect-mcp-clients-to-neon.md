@@ -23,13 +23,8 @@ Before you begin, ensure you have:
 
 - **Neon Account and API Key:** You need a Neon account and a Neon API key. Create an API key in your [Neon Console](https://console.neon.tech/app/settings/api-keys). See [Neon API Keys documentation](/docs/manage/api-keys#creating-api-keys) for details.
 - **Node.js (>= v18.0.0) and npm:** Ensure Node.js version 18 or later and npm are installed. Download them from [nodejs.org](https://nodejs.org).
-- **MCP Client Application:** Download and install your preferred MCP client application from the links provided above.
 
-## Connecting MCP Clients
-
-The following sections detail the steps to connect each MCP client to the Neon MCP Server.
-
-### Claude Desktop
+## Claude Desktop
 
 1.  Open your terminal.
 2.  Run the following command:
@@ -42,16 +37,10 @@ The following sections detail the steps to connect each MCP client to the Neon M
 
 3.  Restart Claude Desktop.
 
-Here's an example of using Neon MCP Server with Claude Desktop:
-
-<video autoPlay playsInline muted loop width="800" height="600" controls>
-    <source type="video/mp4" src="/videos/pages/doc/neon-mcp.mp4"/>
-</video>
-
-### Cursor
+## Cursor
 
 1. Open Cursor and go to Cursor Settings. (Navbar -> Cursor Settings)
-2. Navigate to Features -> MCP Servers.
+2. Navigate to MCP Servers.
 3. Click "+ Add new MCP server".
 4. In the "Add MCP Server" modal:
    - **Name:** `Neon` (or any descriptive name)
@@ -63,13 +52,7 @@ Here's an example of using Neon MCP Server with Claude Desktop:
      (Replace `<YOUR_NEON_API_KEY>` with your Neon API key)
    - Click **Add**.
 
-Here's an example of using Neon MCP Server with Cursor:
-<video autoPlay playsInline muted loop width="800" height="600" controls>
-
-<source type="video/mp4" src="/videos/pages/doc/cursor-neon-mcp.mp4"/>
-</video>
-
-### Windsurf (Codeium)
+## Windsurf (Codeium)
 
 1. Open your terminal.
 2. Run the following command:
@@ -93,13 +76,7 @@ Here's an example of using Neon MCP Server with Cursor:
 
 4. Click the **Refresh** button in Cascade to load the new MCP server.
 
-Here's an example of using Neon MCP Server with Windsurf:
-<video autoPlay playsInline muted loop width="800" height="600" controls>
-
-<source type="video/mp4" src="/videos/pages/doc/windsurf-neon-mcp.mp4"/>
-</video>
-
-### Cline (VS Code Extension)
+## Cline (VS Code Extension)
 
 1.  Open Cline in VS Code (Sidebar -> Cline icon).
 2.  Click "Configure MCP Servers" in the Cline panel. This opens `cline_mcp_settings.json`.
@@ -114,13 +91,7 @@ Here's an example of using Neon MCP Server with Windsurf:
 
 4.  **Save `cline_mcp_settings.json`.**
 
-Here's an example of using Neon MCP Server with Cline:
-<video autoPlay playsInline muted loop width="800" height="600" controls>
-
-<source type="video/mp4" src="/videos/pages/doc/cline-neon-mcp.mp4"/>
-</video>
-
-### Any other MCP client
+## Any other MCP client
 
 You can connect other MCP clients to the Neon MCP Server by running the following command in your terminal:
 
