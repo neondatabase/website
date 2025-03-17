@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 
 import Link from 'components/shared/link';
 import CloseIcon from 'icons/close-small.inline.svg';
-import SupportIcon from 'icons/docs/support.inline.svg';
+import SupportIcon from 'icons/docs/modal/support.inline.svg';
 
 const icons = {
   support: SupportIcon,
