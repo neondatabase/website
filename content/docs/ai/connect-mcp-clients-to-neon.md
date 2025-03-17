@@ -37,6 +37,8 @@ Before you begin, ensure you have:
 
 3.  Restart Claude Desktop.
 
+For more, see [Get started with Neon MCP server with Claude Desktop](/guides/neon-mcp-server).
+
 ## Cursor
 
 1. Open Cursor and go to Cursor Settings. (Navbar -> Cursor Settings)
@@ -51,6 +53,8 @@ Before you begin, ensure you have:
      ```
      (Replace `<YOUR_NEON_API_KEY>` with your Neon API key)
    - Click **Add**.
+
+For more, see [Get started with Cursor and Neon Postgres MCP Server](/guides/cursor-mcp-neon).
 
 ## Windsurf (Codeium)
 
@@ -76,6 +80,8 @@ Before you begin, ensure you have:
 
 4. Click the **Refresh** button in Cascade to load the new MCP server.
 
+For more, see [Get started with Windsurf and Neon Postgres MCP Server](/guides/windsurf-mcp-neon).
+
 ## Cline (VS Code Extension)
 
 1.  Open Cline in VS Code (Sidebar -> Cline icon).
@@ -90,6 +96,8 @@ Before you begin, ensure you have:
     ```
 
 4.  **Save `cline_mcp_settings.json`.**
+
+For more, see [Get started with Cline and Neon Postgres MCP Server](/guides/cline-mcp-neon).
 
 ## Any other MCP client
 
@@ -130,9 +138,5 @@ Once connected, you can start interacting with your Neon Postgres databases usin
 - [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api)
 - [Neon API Keys](/docs/manage/api-keys#creating-api-keys)
 - [Neon MCP server GitHub](https://github.com/neondatabase/mcp-server-neon)
-- [Get started with Neon MCP server with Claude Desktop](/guides/neon-mcp-server)
-- [Get started with Cursor and Neon Postgres MCP Server](/guides/cursor-mcp-neon)
-- [Get started with Cline and Neon Postgres MCP Server](/guides/cline-mcp-neon)
-- [Get started with Windsurf and Neon Postgres MCP Server](/guides/windsurf-mcp-neon)
 
 <NeedHelp/>
