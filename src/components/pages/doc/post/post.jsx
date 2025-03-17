@@ -59,7 +59,7 @@ const Post = ({
   isChangelog = false,
   isUseCase = false,
   isPostgres = false,
-  isHomepage = false,
+  isDocsIndex = false,
   changelogPosts = [],
   currentSlug,
   fileOriginPath,
@@ -147,15 +147,15 @@ const Post = ({
           )}
           {!isUseCase && (
             <div
-              className={clsx(
+              className={
                 enableTableOfContents &&
-                  'mt-2.5 w-56 shrink-0 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70'
-              )}
+                'mt-2.5 shrink-0 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70'
+              }
             >
               <EditOnGithub fileOriginPath={fileOriginPath} />
-              {isHomepage && <ChatOptions isSidebar />}
             </div>
           )}
+          {isDocsIndex && <ChatOptions isSidebar />}
         </div>
       </div>
 
@@ -182,7 +182,7 @@ Post.propTypes = {
   isChangelog: PropTypes.bool,
   isUseCase: PropTypes.bool,
   isPostgres: PropTypes.bool,
-  isHomepage: PropTypes.bool,
+  isDocsIndex: PropTypes.bool,
   changelogPosts: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string,

@@ -78,7 +78,7 @@ const DocPost = async ({ params }) => {
   const sidebar = getSidebar();
   const flatSidebar = await getFlatSidebar(sidebar);
 
-  const isHomepage = currentSlug === 'introduction';
+  const isDocsIndex = currentSlug === 'introduction';
   const isChangelogIndex = !!currentSlug.match('changelog')?.length;
   const allChangelogPosts = await getAllChangelogs();
 
@@ -134,7 +134,7 @@ const DocPost = async ({ params }) => {
         currentSlug={currentSlug}
         fileOriginPath={fileOriginPath}
         tableOfContents={tableOfContents}
-        isHomepage={isHomepage}
+        isDocsIndex={isDocsIndex}
       />
     </>
   );

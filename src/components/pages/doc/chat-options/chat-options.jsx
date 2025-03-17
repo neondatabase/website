@@ -37,7 +37,7 @@ const ITEMS = [
 
 const themeClassNames = {
   sidebar: {
-    block: 'mt-16',
+    block: 'mt-[60px]',
     title: 'mb-4 text-sm font-semibold leading-tight tracking-extra-tight',
     list: 'flex flex-wrap gap-2',
     item: 'block',
@@ -46,7 +46,7 @@ const themeClassNames = {
     block: 'mt-12 hidden xl:block',
     title: '',
     list: 'not-prose !mt-7 grid list-none grid-cols-4 gap-x-4 gap-y-5 !p-0 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1',
-    item: 'flex items-center gap-2',
+    item: 'flex items-center gap-3',
   },
 };
 
@@ -80,9 +80,14 @@ const ChatOptions = ({ isSidebar = false }) => {
                 >
                   <Icon width={18} height={18} />
                 </div>
-                {!isSidebar && (
-                  <p className="whitespace-nowrap leading-tight tracking-extra-tight">{title}</p>
-                )}
+                <p
+                  className={clsx(
+                    'whitespace-nowrap leading-tight tracking-extra-tight',
+                    isSidebar && 'sr-only'
+                  )}
+                >
+                  {title}
+                </p>
               </Link>
             </li>
           );
