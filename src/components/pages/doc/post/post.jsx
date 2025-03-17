@@ -59,7 +59,7 @@ const MODALS = [
   },
   {
     type: 'slack',
-    breadcrumb: 'Organizations',
+    breadcrumb: ['Organizations', 'Manage organizations', 'Transfer a project'],
     title: 'Collaborate in Slack',
     description: 'Invite teammates to your Neon organization right from Slack',
     link: {
@@ -69,37 +69,15 @@ const MODALS = [
   },
   {
     type: 'slack',
-    breadcrumb: 'Manage organizations',
-    title: 'Collaborate in Slack',
-    description: 'Invite teammates to your Neon organization right from Slack',
-    link: {
-      title: 'Get the Neon Slack app',
-      url: '/docs/manage/slack-app',
-    },
-  },
-  {
-    type: 'slack',
-    breadcrumb: 'Transfer a project',
-    title: 'Collaborate in Slack',
-    description: 'Invite teammates to your Neon organization right from Slack',
-    link: {
-      title: 'Get the Neon Slack app',
-      url: '/docs/manage/slack-app',
-    },
-  },
-  {
-    type: 'slack',
-    breadcrumb: 'Monitor billing and usage',
-    title: 'Track usage in Slack',
-    description: 'Check project usage and get consumption alerts',
-    link: {
-      title: 'Get the Neon Slack app',
-      url: '/docs/manage/slack-app',
-    },
-  },
-  {
-    type: 'slack',
-    breadcrumb: 'Usage metrics',
+    breadcrumb: [
+      'Monitor billing and usage',
+      'Usage metrics',
+      'Neon plans',
+      'Pricing estimation guide',
+      'Extra usage',
+      'Sample project billing',
+      'Manage billing',
+    ],
     title: 'Track usage in Slack',
     description: 'Check project usage and get consumption alerts',
     link: {
@@ -125,8 +103,15 @@ const Post = ({
 }) => {
   const modal = MODALS.find(
     (modal) =>
-      breadcrumbs.some((breadcrumb) => modal.breadcrumb === breadcrumb.title) ||
-      (currentSlug === 'introduction' && modal.breadcrumb === 'Neon Docs')
+      breadcrumbs.some((breadcrumb) =>
+        Array.isArray(modal.breadcrumb)
+          ? modal.breadcrumb.includes(breadcrumb.title)
+          : modal.breadcrumb === breadcrumb.title
+      ) ||
+      (currentSlug === 'introduction' &&
+        (Array.isArray(modal.breadcrumb)
+          ? modal.breadcrumb.includes('Neon Docs')
+          : modal.breadcrumb === 'Neon Docs'))
   );
 
   return (
