@@ -19,7 +19,7 @@ const Try = () => (
             The Neon CLI brings serverless Postgres to&nbsp;your&nbsp;terminal.
           </p>
           <AnimatedButton
-            className="relative mt-12 px-6 py-[17px] text-lg font-semibold tracking-[-0.02em] lg:mt-7 md:mt-6"
+            className="relative mt-12 px-6 py-[17px] text-lg font-semibold tracking-extra-tight lg:mt-7 md:mt-6"
             theme="primary"
             to={LINKS.cliInstall}
             isAnimated

@@ -1,6 +1,6 @@
 import { cache } from 'react';
 
-import { BLOG_POSTS_PER_PAGE, EXTRA_CATEGORIES } from 'constants/blog';
+import { BLOG_POSTS_PER_PAGE, BLOG_POSTS_FOR_PREVIEW, EXTRA_CATEGORIES } from 'constants/blog';
 import { gql, graphQLClientAdmin, fetchGraphQL, graphQLClient } from 'lib/graphQLClient';
 import { getAllChangelogs } from 'utils/api-docs';
 import { getAllGuides } from 'utils/api-guides';
@@ -59,7 +59,7 @@ const getCategoryBySlug = async (slug) => {
   return wpCategory;
 };
 
-const fetchWpPostsByCategorySlug = async (slug, after) => {
+const fetchWpPostsByCategorySlug = async (slug, first, after) => {
   const postsQuery = gql`
     query Query($categoryName: String!, $first: Int!, $after: String) {
       posts(
@@ -93,6 +93,12 @@ const fetchWpPostsByCategorySlug = async (slug, after) => {
               }
             }
           }
+          categories {
+            nodes {
+              name
+              slug
+            }
+          }
         }
         pageInfo {
           hasNextPage
@@ -105,7 +111,7 @@ const fetchWpPostsByCategorySlug = async (slug, after) => {
   const categoryName = slug.charAt(0).toUpperCase() + slug.slice(1);
 
   const data = await fetchGraphQL(graphQLClient).request(postsQuery, {
-    first: BLOG_POSTS_PER_PAGE,
+    first,
     after,
     categoryName,
   });
@@ -117,12 +123,16 @@ const getWpPostsByCategorySlug = cache(async (slug) => {
   let allPosts = [];
   let afterCursor = null;
 
+  // Limit posts fetch for development & previews
+  const isProduction = process.env.VERCEL_ENV === 'production';
+  const first = isProduction ? BLOG_POSTS_PER_PAGE : BLOG_POSTS_FOR_PREVIEW;
+
   while (true) {
     // eslint-disable-next-line no-await-in-loop
-    const { nodes: posts, pageInfo } = await fetchWpPostsByCategorySlug(slug, afterCursor);
+    const { nodes: posts, pageInfo } = await fetchWpPostsByCategorySlug(slug, first, afterCursor);
 
     allPosts = allPosts.concat(posts);
-    if (!pageInfo.hasNextPage) break;
+    if (!isProduction || !pageInfo.hasNextPage) break;
     afterCursor = pageInfo.endCursor;
   }
 
@@ -138,23 +148,18 @@ const getPostsByCategorySlug = async (slug) => {
     return getAllChangelogs();
   }
 
-  return getWpPostsByCategorySlug(slug);
+  const wpPosts = await getWpPostsByCategorySlug(slug);
+  return wpPosts;
 };
 
-const fetchAllWpPosts = async (after) => {
+const fetchAllWpPosts = async (first, after) => {
   const allPostsQuery = gql`
     query AllPosts($first: Int!, $after: String) {
       posts(first: $first, after: $after) {
         nodes {
-          categories {
-            nodes {
-              name
-              slug
-            }
-          }
-          modifiedGmt
           slug
           date
+          modifiedGmt
           title(format: RENDERED)
           content(format: RENDERED)
           pageBlogPost {
@@ -180,6 +185,12 @@ const fetchAllWpPosts = async (after) => {
               }
             }
           }
+          categories {
+            nodes {
+              name
+              slug
+            }
+          }
         }
         pageInfo {
           hasNextPage
@@ -189,7 +200,7 @@ const fetchAllWpPosts = async (after) => {
     }
   `;
   const data = await fetchGraphQL(graphQLClient).request(allPostsQuery, {
-    first: BLOG_POSTS_PER_PAGE,
+    first,
     after,
   });
 
@@ -200,12 +211,16 @@ const getAllWpPosts = cache(async () => {
   let allPosts = [];
   let afterCursor = null;
 
+  // Limit posts fetch for development & previews
+  const isProduction = process.env.VERCEL_ENV === 'production';
+  const first = isProduction ? BLOG_POSTS_PER_PAGE : BLOG_POSTS_FOR_PREVIEW;
+
   while (true) {
     try {
-      const { nodes: posts, pageInfo } = await fetchAllWpPosts(afterCursor);
+      const { nodes: posts, pageInfo } = await fetchAllWpPosts(first, afterCursor);
 
       allPosts = allPosts.concat(posts);
-      if (!pageInfo.hasNextPage) break;
+      if (!isProduction || !pageInfo.hasNextPage) break;
       afterCursor = pageInfo.endCursor;
     } catch (error) {
       console.error('Error fetching posts:', error);
@@ -227,7 +242,7 @@ const getAllPosts = async () => {
   const [featuredWpPosts, restWpPosts] = wpPosts.reduce(
     ([featured, rest], post) => {
       if (post.pageBlogPost?.isFeatured && featured.length < 2) {
-        featured.push(post);
+        featured.push({ ...post, isFeatured: true });
       } else {
         rest.push(post);
       }
@@ -388,7 +403,7 @@ const getWpPreviewPostData = async (id, status) => {
           ...wpPostSeo
         }
 
-        posts(first: 4, where: { orderby: { field: DATE, order: DESC } }) {
+        posts(first: 3, where: { orderby: { field: DATE, order: DESC } }) {
           nodes {
             categories {
               nodes {
@@ -485,7 +500,7 @@ const getWpPreviewPostData = async (id, status) => {
           }
         }
 
-        posts(first: 4, where: { orderby: { field: DATE, order: DESC } }) {
+        posts(first: 3, where: { orderby: { field: DATE, order: DESC } }) {
           nodes {
             categories {
               nodes {

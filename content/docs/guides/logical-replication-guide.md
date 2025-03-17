@@ -6,7 +6,7 @@ isDraft: false
 redirectFrom:
   - /docs/introduction/logical-replication
   - /docs/guides/logical-replication-clickhouse
-updatedOn: '2025-02-14T17:05:09.999Z'
+updatedOn: '2025-02-24T15:53:13.359Z'
 ---
 
 Neon's logical replication feature, available to all Neon users, allows you to replicate data to and from your Neon Postgres database:
@@ -41,7 +41,7 @@ To get started, jump into one of our step-by-step logical replication guides.
 
 ## Replicate data from Neon
 
-<TechnologyNavigation open>
+<TechCards>
 
 <a href="/docs/guides/logical-replication-airbyte" title="Airbyte" description="Replicate data from Neon with Airbyte" icon="airbyte"></a>
 
@@ -71,11 +71,11 @@ To get started, jump into one of our step-by-step logical replication guides.
 
 <a href="/docs/guides/logical-replication-inngest" title="Inngest" description="Replicate data from Neon to Inngest" icon="inngest"></a>
 
-</TechnologyNavigation>
+</TechCards>
 
 ## Replicate data to Neon
 
-<TechnologyNavigation open>
+<TechCards>
 
 <a href="/docs/guides/logical-replication-alloydb" title="AlloyDB" description="Replicate data from AlloyDB to Neon" icon="alloydb"></a>
 
@@ -93,4 +93,4 @@ To get started, jump into one of our step-by-step logical replication guides.
 
 <a href="/docs/guides/logical-replication-supabase-to-neon" title="Supabase" description="Replicate data from Supabase to Neon" icon="supabase"></a>
 
-</TechnologyNavigation>
+</TechCards>

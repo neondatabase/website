@@ -23,9 +23,10 @@ import PeopleIcon from 'icons/header/people.inline.svg';
 import PrivacyGradientIcon from 'icons/header/privacy-gradient.inline.svg';
 import PrivacyIcon from 'icons/header/privacy.inline.svg';
 import SaasIcon from 'icons/header/saas.inline.svg';
+import SecurityIcon from 'icons/header/security.inline.svg';
+import ServerlessIcon from 'icons/header/serverless.inline.svg';
 import StarGradientIcon from 'icons/header/star-gradient.inline.svg';
 import StarIcon from 'icons/header/star.inline.svg';
-import VariableIcon from 'icons/header/variable.inline.svg';
 
 import LINKS from './links';
 
@@ -94,7 +95,7 @@ export default {
             {
               icon: PrivacyIcon,
               iconGradient: PrivacyGradientIcon,
-              title: 'RLS Authorize',
+              title: 'RLS',
               description: 'RLS made simple',
               to: LINKS.rlsAuthorize,
             },
@@ -122,9 +123,9 @@ export default {
               to: `${LINKS.useCases}/postgres-for-saas`,
             },
             {
-              icon: VariableIcon,
-              title: 'Variable traffic',
-              to: LINKS.variableTraffic,
+              icon: ServerlessIcon,
+              title: 'Serverless Apps',
+              to: `${LINKS.useCases}/serverless-apps`,
             },
             {
               icon: DatabaseIcon,
@@ -204,6 +205,11 @@ export default {
               icon: ChatIcon,
               title: 'Contact',
               to: LINKS.contactSales,
+            },
+            {
+              icon: SecurityIcon,
+              title: 'Security',
+              to: LINKS.security,
             },
           ],
         },
@@ -367,9 +373,23 @@ export default {
         },
         {
           text: 'HIPAA',
-          description: 'In progress',
-          icon: 'wip-icon',
+          description: 'Compliant',
+          icon: 'check-icon',
           to: LINKS.certHIPAA,
+          links: [
+            {
+              text: 'Compliance Guide',
+              to: LINKS.hipaaCompliance,
+            },
+            {
+              text: 'Neon’s Sub Contractors',
+              to: LINKS.hipaaContractors,
+            },
+            {
+              text: 'Sensitive Data Terms',
+              to: LINKS.sensitiveDataTerms,
+            },
+          ],
         },
         {
           text: 'Trust Center',

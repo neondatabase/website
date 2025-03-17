@@ -28,8 +28,10 @@ Companies are managing fleets of thousands of Neon databases with very small tea
 2. **Instant provisioning**: Databases are ready in under a second.
 3. **Autoscaling w/ scale-to-zero**: Neon databases pause automatically to eliminate fixed costs, and CPU/memory scale up and down automatically per-customer.
 
-In Neon, **1 tenant = 1 project**. Our $69 /month pricing plan includes 1,000 projects — [sign up](https://console.neon.tech/signup) and [follow this guide](https://neon.tech/docs/use-cases/database-per-user) to get started.
+In Neon, **1 tenant = 1 project**. Our pricing plans include thousands of projects — follow this guide](https://neon.tech/docs/use-cases/database-per-user) to get started.
 </Admonition>
+
+<CTA title="Get $100 in credits" description="Sign up today and get $100 in credits when you upgrade." buttonText="Claim offer" buttonUrl="https://fyi.neon.tech/credits" />
 
 <Testimonial
 text="We’ve been able to automate virtually all database management tasks via the Neon API. We manage +300,000 projects with minimal engineering overhead"
@@ -116,4 +118,4 @@ author={{
 }}
 />
 
-<CTA title="Next Steps" description="Sign up here to get the Free Plan plus $100 credit. Or&nbsp;<a href='/contact-sales'>talk to our team</a> if you have any questions." buttonText="Get the Free Plan + $100 Credit" buttonUrl="https://fyi.neon.tech/credits" />
+<CTA title="Next Steps" description="Sign up to Neon and get $100 in credits when you upgrade." buttonText="Claim offer" buttonUrl="https://fyi.neon.tech/credits" />

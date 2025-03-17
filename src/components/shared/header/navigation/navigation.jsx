@@ -14,6 +14,7 @@ const Navigation = ({ isDarkTheme }) => (
         const Tag = to ? Link : 'button';
         const hasSubmenu = sections?.length > 0;
         const gridSubmenu = sections?.length > 1;
+        const theme = to ? { theme: isDarkTheme ? 'white' : 'black' } : {};
 
         return (
           <li className={clsx('relative [perspective:2000px]', hasSubmenu && 'group')} key={index}>
@@ -23,7 +24,7 @@ const Navigation = ({ isDarkTheme }) => (
                 isDarkTheme ? 'text-white' : 'text-black dark:text-white'
               )}
               to={to}
-              theme={isDarkTheme && to ? 'white' : 'black'}
+              {...theme}
             >
               {text}
               {hasSubmenu && (
@@ -70,9 +71,9 @@ const Navigation = ({ isDarkTheme }) => (
                         key={index}
                       >
                         {title && (
-                          <h3 className="mb-5 text-[11px] font-medium uppercase leading-none text-gray-new-40 dark:text-gray-new-50">
+                          <span className="mb-5 block text-[11px] font-medium uppercase leading-none text-gray-new-40 dark:text-gray-new-50">
                             {title}
-                          </h3>
+                          </span>
                         )}
                         <ul className={clsx('flex flex-col', isExtended ? 'gap-5' : 'gap-[18px]')}>
                           {items.map(

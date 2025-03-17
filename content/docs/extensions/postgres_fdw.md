@@ -1,9 +1,8 @@
 ---
 title: The postgres_fdw extension
 subtitle: Access data in remote Postgres databases from Neon using postgres_fdw
-tag: new
 enableTableOfContents: true
-updatedOn: '2025-01-30T21:03:38.102Z'
+updatedOn: '2025-03-05T21:09:38.748Z'
 ---
 
 The `postgres_fdw` (Foreign Data Wrapper) extension provides a powerful and standards-compliant way to access data stored in external Postgres databases from your Neon project. For compliance or regulatory reasons, you might need to keep sensitive data on-premises or within a specific jurisdiction; `postgres_fdw` lets you query this data directly from your Neon database without migrating it, maintaining data residency. This enables you to leverage Neon's features while adhering to data storage policies. This simplifies data integration, enables cross-database querying, and allows you to build applications that seamlessly interact with data across different Postgres deployments.

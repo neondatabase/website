@@ -46,6 +46,7 @@ const AboutUsPage = async () => {
       <Leadership />
       <Investors />
       <Cta
+        className="pb-[320px] pt-[350px] xl:pb-[220px] xl:pt-[270px] lg:pb-[156px] lg:pt-[200px] sm:pb-[80px] sm:pt-[180px]"
         title="Become a part of our&nbsp;team"
         description="We're looking for people who care deeply about quality to build with us."
         buttonText="View Open Roles"

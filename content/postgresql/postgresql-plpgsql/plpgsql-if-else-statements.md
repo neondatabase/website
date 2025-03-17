@@ -73,7 +73,7 @@ NOTICE:  The film 0 could not be found
 
 In this example, we select a film by a specific film id (`0`).
 
-The `found` is a global variable that is available in PL/pgSQL. The [`select into`](https://neon.tech/postgresql/plpgsql-select-into/) statement sets the `found` variable if a row is assigned or `false` if no row is returned.
+The `found` is a global variable that is available in PL/pgSQL. The [`select into`](https://neon.tech/postgresql/postgresql-plpgsql/pl-pgsql-select-into/) statement sets the `found` variable if a row is assigned or `false` if no row is returned.
 
 We use the `if` statement to check if the film with id (0\) exists and raise a notice if it does not.
 
