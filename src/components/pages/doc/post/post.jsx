@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import ChangelogList from 'components/pages/changelog/changelog-list';
 import Hero from 'components/pages/changelog/hero';
 import Breadcrumbs from 'components/pages/doc/breadcrumbs';
+import ChatOptions from 'components/pages/doc/chat-options';
 import EditOnGithub from 'components/pages/doc/edit-on-github';
 import Modal from 'components/pages/doc/modal';
 import MODALS from 'components/pages/doc/modal/data';
@@ -35,6 +36,7 @@ const Post = ({
   isChangelog = false,
   isUseCase = false,
   isPostgres = false,
+  isDocsIndex = false,
   changelogPosts = [],
   currentSlug,
   fileOriginPath,
@@ -122,14 +124,17 @@ const Post = ({
           {enableTableOfContents && (
             <TableOfContents items={tableOfContents} isUseCase={isUseCase} />
           )}
-          <div
-            className={clsx(
-              enableTableOfContents &&
-                'mt-2.5 w-56 shrink-0 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70'
-            )}
-          >
-            {!isUseCase && <EditOnGithub fileOriginPath={fileOriginPath} />}
-          </div>
+          {!isUseCase && (
+            <div
+              className={
+                enableTableOfContents &&
+                'mt-2.5 shrink-0 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70'
+              }
+            >
+              <EditOnGithub fileOriginPath={fileOriginPath} />
+            </div>
+          )}
+          {isDocsIndex && <ChatOptions isSidebar />}
         </div>
       </div>
 
@@ -156,6 +161,7 @@ Post.propTypes = {
   isChangelog: PropTypes.bool,
   isUseCase: PropTypes.bool,
   isPostgres: PropTypes.bool,
+  isDocsIndex: PropTypes.bool,
   changelogPosts: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string,
