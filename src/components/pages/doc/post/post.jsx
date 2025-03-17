@@ -41,7 +41,7 @@ const Post = ({
   tableOfContents,
 }) => {
   const modal = MODALS.find((modal) =>
-    breadcrumbs.some((breadcrumb) => modal.breadcrumb === breadcrumb.title)
+    breadcrumbs.some((breadcrumb) => modal.pageTitle === breadcrumb.title)
   );
 
   return (

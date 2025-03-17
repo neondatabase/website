@@ -3,7 +3,7 @@ import LINKS from 'constants/links';
 const MODALS = [
   {
     type: 'migrate',
-    breadcrumb: 'Migrate to Neon',
+    pageTitle: 'Migrate to Neon',
     title: 'Migrating to Neon?',
     description: 'Our team can help minimize downtime.',
     link: {
@@ -13,7 +13,7 @@ const MODALS = [
   },
   {
     type: 'support',
-    breadcrumb: 'Support',
+    pageTitle: 'Support',
     title: 'Need help now?',
     description: 'Please reach out to our Support team!',
     link: {
