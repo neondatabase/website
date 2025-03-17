@@ -57,7 +57,7 @@ const ChatOptions = ({ isSidebar = false }) => {
 
   return (
     <div className={classNames.block}>
-      <TitleTag className={classNames.title}>Where to Use Neon AI Chat&nbsp;Assistants</TitleTag>
+      <TitleTag className={classNames.title}>Neon AI Chat Assistants</TitleTag>
       <ul className={classNames.list}>
         {ITEMS.map(({ title, icon, link, isExternal, className }) => {
           const Icon = icon;
