@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import { PropTypes } from 'prop-types';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import Link from 'components/shared/link';
 import CloseIcon from 'icons/close-small.inline.svg';
@@ -13,12 +13,8 @@ const icons = {
 };
 
 const Modal = ({ type, title, description, link }) => {
-  const [isOpen, setIsOpen] = useState(false);
   const modalClosedKey = `${type}ModalClosed`;
-
-  useEffect(() => {
-    setIsOpen(localStorage.getItem(modalClosedKey) !== 'true');
-  }, [modalClosedKey]);
+  const [isOpen, setIsOpen] = useState(localStorage.getItem(modalClosedKey) !== 'true');
 
   const handleClose = () => {
     setIsOpen(false);
