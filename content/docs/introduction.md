@@ -8,7 +8,7 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 <CTA title="Manage Neon from Cursor ✨" 
 description="Manage your Neon Postgres databases directly from Cursor and other AI tools with simple, conversational commands. No SQL or API calls needed—just ask. <a href='/docs/ai/connect-mcp-clients-to-neon'>Learn how</a> ➡️" isIntro></CTA>
 
-**✨ Chat with Neon AI**: Available in [Docs](https://neon.tech/ai-chat), [GitHub Copilot](https://github.com/marketplace/neon-database), [VS Code](https://marketplace.visualstudio.com/items?itemName=buildwithlayer.neon-integration-expert-15j6N), and [Discord](https://discord.com/channels/1176467419317940276/1222626436502782013)
+<ChatOptions/>
 
 ## Get started
 
