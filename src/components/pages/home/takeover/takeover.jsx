@@ -17,7 +17,7 @@ const Takeover = () => (
           Search faster with&nbsp;Postgres
         </h1>
         <p className="mt-3 max-w-[640px] text-lg font-light leading-snug tracking-tighter text-gray-new-80 lg:max-w-[520px] lg:text-base sm:px-3 sm:text-[15px]">
-          ParadeDB is now available in all Neon databases for up to 1,300x faster text search
+          ParadeDB is now available in all Neon databases for up to 1,000x faster text search
           queries. Get Elastic-level performance without leaving Postgres.
         </p>
         <div className="mt-8 flex items-center gap-5 xl:mt-7 sm:flex-col">
