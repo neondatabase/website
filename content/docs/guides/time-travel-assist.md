@@ -5,17 +5,17 @@ enableTableOfContents: true
 updatedOn: '2025-02-07T17:55:42.638Z'
 ---
 
-To help review your data's history, Time Travel lets you connect to any selected point in time within your history retention window and then run queries against that connection.
+To help review your data's history, Time Travel lets you connect to any selected point in time within your restore window and then run queries against that connection.
 
 You can use Time Travel from two places in the Neon Console, and from the Neon CLI:
 
 - **SQL Editor** &#8212; Time Travel is built into the SQL editor letting you switch between queries of your current data and previous iterations of your data in the same view.
 - **Restore** &#8212; Time Travel Assist is also built into the Branch Restore flow where it can help you make sure you've targeted the correct restore point before you restore a branch.
-- **Neon CLI** &#8212; Use the Neon CLI to quickly establish point-in-time connections for automated scripts or command-line-based data analysis.
+- **Neon CLI** &#8212; Use the Neon CLI to quickly establish instant restore connections for automated scripts or command-line-based data analysis.
 
 ## How Time Travel works
 
-Time Travel leverages Neon's instant branching capability to create a temporary branch and compute at the selected point in time, which are automatically removed once you are done querying against this point-in-time connection. The computes are ephemeral: they are not listed on the **Branches** page or in a CLI or API list branches request.
+Time Travel leverages Neon's instant branching capability to create a temporary branch and compute at the selected point in time, which are automatically removed once you are done querying against this instant restore connection. The computes are ephemeral: they are not listed on the **Branches** page or in a CLI or API list branches request.
 
 However, you can see the history of operations related to the creation and deletion of branches and ephemeral computes on the **Operations** page:
 
@@ -28,13 +28,13 @@ However, you can see the history of operations related to the creation and delet
 
 The ephemeral endpoints are created with a .50 CU compute size, which has 0.50 vCPU size with 2 GB of RAM. An ephemeral compute remains active for as long as you keep running queries against it. After 30 seconds of inactivity, the timeline is deleted and the endpoint is removed.
 
-### History retention
+### Restore window
 
-You are only able to run Time Travel queries that fall within your history retention window, which starts at 24 hours for Free Plan users, up to 7 days for Launch, 14 days for Scale, and 30 days for Business plan users.
+You are only able to run Time Travel queries that fall within your restore window, which starts at 24 hours for Free Plan users, up to 7 days for Launch, 14 days for Scale, and 30 days for Business plan users.
 
-You cannot select a time outside your current retention window.
+You cannot select a time outside your current restore window.
 
-To change your retention period, see [Configure history retention](/docs/manage/projects#configure-history-retention).
+To change your restore window, see [Configure restore window](/docs/manage/projects#configure-restore-window).
 
 ### Data integrity
 
@@ -44,7 +44,7 @@ Time Travel only allows non-destructive read-only queries. You cannot alter hist
 
 ### Time Travel with the SQL Editor
 
-Time Travel in the SQL Editor offers a non-destructive way to explore your database's historical data through read-only queries. By toggling Time Travel in the editor, you switch from querying your current data to querying against a selected point within your history retention window.
+Time Travel in the SQL Editor offers a non-destructive way to explore your database's historical data through read-only queries. By toggling Time Travel in the editor, you switch from querying your current data to querying against a selected point within your restore window window.
 
 You can use this feature to help with scenarios like:
 
@@ -80,7 +80,7 @@ Here is how to use Time Travel from both the **SQL Editor** and from the **Resto
 
    ![Time Travel toggle](/docs/guides/time_travel_toggle.png)
 
-1. Use the Date & Time selector to choose a point within your history retention window.
+1. Use the Date & Time selector to choose a point within your restore window.
 1. Write your read-only query in the editor, then click **Run**. You don't have to include time parameters in the query; the query is automatically targeted to your selected timestamp.
 
 </TabItem>

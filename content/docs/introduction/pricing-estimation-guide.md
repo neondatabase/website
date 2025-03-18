@@ -38,7 +38,7 @@ Estimate your monthly usage to see if any "extra usage" is required beyond the s
 
 - **Storage (GB-month)**: How much storage do you expect to use? This includes:
   - The logical data size of your data
-  - The size of your history, determined by your [history retention](/docs/introduction/point-in-time-restore#history-retention) setting in Neon and the volume of insert, update, and delete operations written to your history. See [Storage](/docs/introduction/usage-metrics#storage).
+  - The size of your history, determined by your [restore window](/docs/introduction/point-in-time-restore#history-retention) setting in Neon and the volume of insert, update, and delete operations written to your history. See [Storage](/docs/introduction/usage-metrics#storage).
 - **Archive Storage (GB-month)**: How much archive storage do you expect to use?
   - Branches **older than 14 days** and **not accessed for the past 24 hours** are moved to cost-efficient archive storage automatically. For more, see [Branch archiving](/docs/guides/branch-archiving).
   - This will only apply if you have branches that are not accessed regularly.

@@ -37,7 +37,7 @@ Branch data the same way you branch your code.
 
 <a href="/docs/introduction/branching" description="With Neon, you can instantly branch your data in the same way that you branch your code" icon="branching">Learn about branching</a>
 
-<a href="/docs/guides/branching-pitr" description="Restore your data to a past state with database branching" icon="invert">Point-in-time restore</a>
+<a href="/docs/guides/branching-pitr" description="Restore your data to a past state with database branching" icon="invert">Instant restore</a>
 
 <a href="/docs/guides/branching-test-queries" description="Use branching to test queries before running them in production" icon="queries">Test queries on a branch</a>
 

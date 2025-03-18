@@ -10,7 +10,7 @@ redirectFrom:
 updatedOn: '2025-02-28T11:10:41.825Z'
 ---
 
-With Neon's branch restore capability, you can easily restore a branch to an earlier state in its own or another branch's history. You can use Time Travel Assist to connect to a specific point in your history retention window, where you can run read-only queries to pinpoint the exact moment you need to restore to. You can also use Schema Diff to get a side-by-side, GitHub-style visual comparison of your selected branches before restoring.
+With Neon's branch restore capability, you can easily restore a branch to an earlier state in its own or another branch's history. You can use Time Travel Assist to connect to a specific point in your restore window window, where you can run read-only queries to pinpoint the exact moment you need to restore to. You can also use Schema Diff to get a side-by-side, GitHub-style visual comparison of your selected branches before restoring.
 
 ## How branch restore works
 
@@ -20,7 +20,7 @@ The restore operation lets you revert the state of a selected branch to an earli
 
 ![branch restore to timestamp](/docs/guides/branch-restore_feature.png)
 
-The default history retention for a Neon project differs by plan. You can revert a branch to any time within your configured [retention window](/docs/manage/projects#configure-history-retention), down to the millisecond.
+The default restore window for a Neon project differs by plan. You can revert a branch to any time within your configured [restore window](/docs/manage/projects#configure-restore-window), down to the millisecond.
 
 A few key points to keep in mind about the restore operation:
 

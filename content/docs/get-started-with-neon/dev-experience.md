@@ -41,7 +41,7 @@ Neon's Schema Diff tool lets you compare the schemas for two selected branches i
 
 ## Instant database recovery
 
-**Instant point-in-time restore with time travel**
+**Instant instant restore with time travel**
 
 We've all heard about multi-hour outages and data losses due to errant queries or problematic migrations. Neon's [Point-in-Time Restore](/docs/guides/branch-restore) feature allows you to instantly restore your data to a point in time before the issue occurred. With Neon, you can perform a restore operation in a few clicks, letting you get back online in the time it takes to choose a restore point, which can be a date and time or a [Log Sequence Number (LSN)](/docs/reference/glossary#lsn).
 
