@@ -16,7 +16,7 @@ const icons = {
 
 const Modal = ({ type, title, description, link }) => {
   const modalClosedKey = `${type}ModalClosed`;
-  const [isOpen, setIsOpen] = useLocalStorage(modalClosedKey, true);
+  const [isClosed, setIsClosed] = useLocalStorage(modalClosedKey, false);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const Modal = ({ type, title, description, link }) => {
   }, []);
 
   const handleClose = () => {
-    setIsOpen(false);
+    setIsClosed(true);
   };
 
   const Icon = icons[type];
@@ -32,7 +32,7 @@ const Modal = ({ type, title, description, link }) => {
   return (
     <LazyMotion features={domAnimation}>
       <AnimatePresence>
-        {isMounted && isOpen && (
+        {isMounted && !isClosed && (
           <m.div
             className={clsx(
               'fixed bottom-4 right-4 z-[100] flex w-80 flex-col rounded-lg border p-5 pt-[18px] xs:inset-x-3 xs:bottom-3 xs:w-auto',
@@ -41,10 +41,10 @@ const Modal = ({ type, title, description, link }) => {
               'dark:border-[#1D1E20] dark:bg-[#101013] dark:bg-[radial-gradient(89%_63%_at_100%_100%,#1D2930,transparent)]',
               'dark:shadow-[0px_2px_10px_0px_rgba(0,0,0,.4),0px_2px_30px_0px_rgba(0,0,0,.5)]'
             )}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            transition={{ duration: 0.3 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
           >
             {Icon && <Icon className="mb-2.5 h-5 w-5 text-secondary-8 dark:text-green-45" />}
             <p className="font-medium leading-snug tracking-extra-tight text-black-new dark:text-white">
