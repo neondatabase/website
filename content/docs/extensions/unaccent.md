@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2025-03-17T10:00:00.000Z'
 ---
 
-The `unaccent` extension for Postgres enables handling of text data in a more user-friendly and language-tolerant way. It allows you to remove [accents/stress](https://en.wikipedia.org/wiki/Stress_(linguistics)) ([diacritic signs](https://en.wikipedia.org/wiki/Diacritic)) from text strings, making it easier to perform searches and comparisons that are insensitive to accents. This is particularly useful in multilingual applications where users might not consistently use accents when typing search queries.
+The `unaccent` extension for Postgres enables handling of text data in a more user-friendly and language-tolerant way. It allows you to remove [accents/stress](<https://en.wikipedia.org/wiki/Stress_(linguistics)>) ([diacritic signs](https://en.wikipedia.org/wiki/Diacritic)) from text strings, making it easier to perform searches and comparisons that are insensitive to accents. This is particularly useful in multilingual applications where users might not consistently use accents when typing search queries.
 
 Imagine a user searching for "Hôtel" but only typing "Hotel". Without `unaccent`, the database might not find the intended results. With `unaccent`, you can ensure that searches are more forgiving and return relevant results regardless of accent variations.
 
@@ -108,11 +108,11 @@ id | name
 ---|------
  1 | cafe
  2 | café
- ```
+```
 
 ### Case-insensitive and accent-insensitive searching with `ILIKE`
 
-For even more flexible searching, you can combine `unaccent()` with the [`ILIKE`](/postgresql/postgresql-tutorial/postgresql-like#postgresql-extensions-of-the-like-operator) operator for case-insensitive and accent-insensitive searches.  This is particularly useful for free-text search scenarios.
+For even more flexible searching, you can combine `unaccent()` with the [`ILIKE`](/postgresql/postgresql-tutorial/postgresql-like#postgresql-extensions-of-the-like-operator) operator for case-insensitive and accent-insensitive searches. This is particularly useful for free-text search scenarios.
 
 ```sql
 SELECT * FROM product WHERE unaccent(name) ILIKE unaccent('%cafe%');
@@ -145,7 +145,7 @@ Using `unaccent()` in queries can have performance implications, especially in l
 
 ### Indexing with `unaccent()`
 
-Directly indexing an expression like `unaccent(column)` typically doesn't work efficiently because, by default, `unaccent()` is not marked as an `IMMUTABLE` function.  Postgres requires functions used in index expressions to be `IMMUTABLE` to guarantee consistent index usage.
+Directly indexing an expression like `unaccent(column)` typically doesn't work efficiently because, by default, `unaccent()` is not marked as an `IMMUTABLE` function. Postgres requires functions used in index expressions to be `IMMUTABLE` to guarantee consistent index usage.
 
 To enable indexing with `unaccent()`, you can create an `IMMUTABLE` wrapper function around it. This wrapper function essentially tells Postgres that the function's output will always be the same for a given input, allowing it to be used in index expressions.
 
@@ -160,7 +160,7 @@ $$ LANGUAGE sql IMMUTABLE PARALLEL SAFE STRICT;
 
 **Explanation:**
 
-- `CREATE OR REPLACE FUNCTION f_unaccent(text) RETURNS text`:  This defines a new function named `f_unaccent` that takes text as input and returns text.
+- `CREATE OR REPLACE FUNCTION f_unaccent(text) RETURNS text`: This defines a new function named `f_unaccent` that takes text as input and returns text.
 - `AS $$ ... $$ LANGUAGE sql IMMUTABLE PARALLEL SAFE STRICT`: This is the function body, written in SQL, and the important part is declaring it `IMMUTABLE`.
 - `SELECT public.unaccent('public.unaccent', $1);`: Inside the wrapper, we are calling the original `unaccent` function, making sure to schema-qualify it as `public.unaccent` for robustness.
 

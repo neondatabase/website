@@ -66,7 +66,7 @@ The `pgcrypto` extension provides a wide range of cryptographic functions that c
 
 - **`gen_salt(type text [, iter_count integer ])`**:
 
-  The `gen_salt` function generates new, random salt values for use with the `crypt()` function. The `type` parameter specifies the hashing algorithm (e.g., `bf` for Blowfish, `md5`, `xdes`, `des`). For algorithms like [Blowfish](https://en.wikipedia.org/wiki/Blowfish_(cipher)) and [Extended DES](https://en.wikipedia.org/wiki/Data_Encryption_Standard) (`xdes`), you can specify `iter_count` to control the number of iterations, increasing the computational cost and security.
+  The `gen_salt` function generates new, random salt values for use with the `crypt()` function. The `type` parameter specifies the hashing algorithm (e.g., `bf` for Blowfish, `md5`, `xdes`, `des`). For algorithms like [Blowfish](<https://en.wikipedia.org/wiki/Blowfish_(cipher)>) and [Extended DES](https://en.wikipedia.org/wiki/Data_Encryption_Standard) (`xdes`), you can specify `iter_count` to control the number of iterations, increasing the computational cost and security.
 
   ```sql
   SELECT gen_salt('bf'); -- Generate a Blowfish salt
@@ -81,7 +81,7 @@ For general-purpose encryption needs, `pgcrypto` implements the encryption part 
 
 - **`pgp_sym_encrypt(data, psw [, options ])`**:
 
-  The `pgp_sym_encrypt` function encrypts `data` using symmetric-key encryption with a provided password `psw`.  Symmetric encryption uses the same key for both encryption and decryption.
+  The `pgp_sym_encrypt` function encrypts `data` using symmetric-key encryption with a provided password `psw`. Symmetric encryption uses the same key for both encryption and decryption.
 
   ```sql
   SELECT pgp_sym_encrypt('Confidential Data', 'encryption_password');
@@ -131,7 +131,7 @@ For general-purpose encryption needs, `pgcrypto` implements the encryption part 
 
 - **`gen_random_uuid()`**:
 
-  The `gen_random_uuid()` function generates a version 4 universally unique identifier (UUID) based on random numbers.  This is functionally equivalent to PostgreSQL's built-in [`gen_random_uuid()`](/postgresql/postgresql-tutorial/postgresql-uuid#generating-uuid-values).
+  The `gen_random_uuid()` function generates a version 4 universally unique identifier (UUID) based on random numbers. This is functionally equivalent to PostgreSQL's built-in [`gen_random_uuid()`](/postgresql/postgresql-tutorial/postgresql-uuid#generating-uuid-values).
 
   ```sql
   SELECT gen_random_uuid();
@@ -142,7 +142,7 @@ For general-purpose encryption needs, `pgcrypto` implements the encryption part 
 
 `pgcrypto` offers a wide range of practical applications for enhancing data security within your Postgres environment:
 
-- **Secure Password Storage**:  Use `crypt()` and `gen_salt()` to securely store user passwords as hashes, protecting them from exposure in case of a data breach.
+- **Secure Password Storage**: Use `crypt()` and `gen_salt()` to securely store user passwords as hashes, protecting them from exposure in case of a data breach.
 - **Data encryption at Rest (Column-Level)**: Employ `pgp_sym_encrypt()` or `pgp_pub_encrypt()` to encrypt sensitive data columns within your tables, ensuring data confidentiality even if the database is compromised.
 - **Data anonymization**: Leverage encryption functions to pseudonymize or anonymize sensitive data for non-production environments or for compliance purposes.
 
@@ -152,58 +152,60 @@ Let's walk through a practical example of using `pgcrypto` to securely store and
 
 1. Hash and salt a password using `crypt()` and `gen_salt()`
 
-    Suppose you want to hash the password `"mypassword"`.  You'll use `gen_salt()` to generate a salt and `crypt()` to hash the password with the salt. For this example, we'll use the Blowfish algorithm with 4 rounds (iterations):
+   Suppose you want to hash the password `"mypassword"`. You'll use `gen_salt()` to generate a salt and `crypt()` to hash the password with the salt. For this example, we'll use the Blowfish algorithm with 4 rounds (iterations):
 
-    ```sql
-    SELECT crypt('mypassword', gen_salt('bf', 4));
-    -- $2a$04$vVVrQ777SjxyQKuFp7z6ue (example hashed password output)
-    ```
-    The output is the hashed password, which includes the salt and algorithm identifier.  **You should store this entire hashed password string in your database, not the original password.**
+   ```sql
+   SELECT crypt('mypassword', gen_salt('bf', 4));
+   -- $2a$04$vVVrQ777SjxyQKuFp7z6ue (example hashed password output)
+   ```
+
+   The output is the hashed password, which includes the salt and algorithm identifier. **You should store this entire hashed password string in your database, not the original password.**
 
 2. Store the hashed password:
 
-    Create a table to store usernames and their hashed passwords.
+   Create a table to store usernames and their hashed passwords.
 
-    ```sql
-    CREATE TABLE users (
-        username VARCHAR(50) PRIMARY KEY,
-        password_hash TEXT NOT NULL
-    );
+   ```sql
+   CREATE TABLE users (
+       username VARCHAR(50) PRIMARY KEY,
+       password_hash TEXT NOT NULL
+   );
 
-    INSERT INTO users (username, password_hash) VALUES
-    ('testuser', '$2a$04$vVVrQ777SjxyQKuFp7z6ue'); -- Replace with the hash from the previous step
-    ```
+   INSERT INTO users (username, password_hash) VALUES
+   ('testuser', '$2a$04$vVVrQ777SjxyQKuFp7z6ue'); -- Replace with the hash from the previous step
+   ```
 
 3. Verify a password during login:
 
-    When a user attempts to log in, you'll receive the password they entered (e.g., `"mypassword"` again). To verify it, you'll use `crypt()` again, passing the entered password and the stored `password_hash` from the database.
+   When a user attempts to log in, you'll receive the password they entered (e.g., `"mypassword"` again). To verify it, you'll use `crypt()` again, passing the entered password and the stored `password_hash` from the database.
 
-    ```sql
-    SELECT password_hash = crypt('mypassword', password_hash) AS password_match
-    FROM users
-    WHERE username = 'testuser';
-    -- password_match
-    -- --------------
-    -- t
-    -- (1 row)
-    ```
+   ```sql
+   SELECT password_hash = crypt('mypassword', password_hash) AS password_match
+   FROM users
+   WHERE username = 'testuser';
+   -- password_match
+   -- --------------
+   -- t
+   -- (1 row)
+   ```
 
-    If the passwords match, `crypt()` will return the same stored hash (or a hash that compares as equal), and the query will return `t` (true).
+   If the passwords match, `crypt()` will return the same stored hash (or a hash that compares as equal), and the query will return `t` (true).
 
-5. Incorrect password attempt:
+4. Incorrect password attempt:
 
-    If the user enters an incorrect password (e.g., `"wrongpassword"`), the verification will fail:
+   If the user enters an incorrect password (e.g., `"wrongpassword"`), the verification will fail:
 
-    ```sql
-    SELECT password_hash = crypt('wrongpassword', password_hash) AS password_match
-    FROM users
-    WHERE username = 'testuser';
-    -- password_match
-    -- --------------
-    -- f
-    -- (1 row)
-    ```
-    In this case, the query returns `f` (false), indicating an incorrect password.
+   ```sql
+   SELECT password_hash = crypt('wrongpassword', password_hash) AS password_match
+   FROM users
+   WHERE username = 'testuser';
+   -- password_match
+   -- --------------
+   -- f
+   -- (1 row)
+   ```
+
+   In this case, the query returns `f` (false), indicating an incorrect password.
 
 By following these steps, you can securely store and verify user passwords using `pgcrypto` in your Postgres database.
 
@@ -211,14 +213,14 @@ By following these steps, you can securely store and verify user passwords using
 
 While `pgcrypto` provides robust security features, it's important to consider the performance implications of cryptographic operations:
 
-- **Computational overhead**: Encryption, decryption, and hashing operations inherently require computational resources.  The extent of the overhead depends on the chosen algorithms, data size, and frequency of operations.
+- **Computational overhead**: Encryption, decryption, and hashing operations inherently require computational resources. The extent of the overhead depends on the chosen algorithms, data size, and frequency of operations.
 - **Password hashing**: Password hashing algorithms, like those used in `crypt()`, are intentionally designed to be slow to resist brute-force attacks. This can introduce a slight delay during user authentication processes.
 
 ## Security considerations
 
 When using `pgcrypto`, it's crucial to adhere to security best practices:
 
-- **Key management**: Securely manage encryption keys. Store them outside the database if possible, and implement key rotation policies.  Never store keys in plaintext within the database as that would defeat the purpose of encryption.
+- **Key management**: Securely manage encryption keys. Store them outside the database if possible, and implement key rotation policies. Never store keys in plaintext within the database as that would defeat the purpose of encryption.
 - **Algorithm selection**: Choose appropriate cryptographic algorithms based on your security requirements. For password hashing, use strong algorithms like Blowfish with sufficient iteration counts. For data encryption, select robust and widely-vetted algorithms like AES.
 
 ## Conclusion
