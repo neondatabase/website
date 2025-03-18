@@ -10,6 +10,7 @@ import useLocalStorage from 'hooks/use-local-storage';
 import CloseIcon from 'icons/close-small.inline.svg';
 import SlackIcon from 'icons/docs/modal/slack.inline.svg';
 import SupportIcon from 'icons/docs/modal/support.inline.svg';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 const icons = {
   support: SupportIcon,
@@ -60,6 +61,12 @@ const Modal = ({ id, title, description, link }) => {
               theme="blue-green"
               size="2xs"
               withArrow
+              onClick={() => {
+                sendGtagEvent('click_modal_link', {
+                  modal: id,
+                  link: link.title,
+                });
+              }}
             >
               {link.title}
             </Link>
