@@ -46,15 +46,15 @@ By leveraging these features, `pg_search` enhances both performance and flexibil
 
 `pg_search` utilizes the [**BM25 (Best Matching 25)**](https://en.wikipedia.org/wiki/Okapi_BM25) algorithm, a widely adopted ranking function by modern search engines, to calculate relevance scores for full-text search results. BM25 considers several factors to determine relevance:
 
-*   **Term Frequency (TF):**  How often a search term appears in a row's text. More occurrences suggest higher relevance.
-*   **Inverse Document Frequency (IDF):**  How common or rare your search term is across all rows.  Less common words often indicate more specific results.
-*   **Document Length Normalization:** BM25 adjusts for text length, preventing longer rows from automatically seeming more relevant.
+- **Term Frequency (TF):** How often a search term appears in a row's text. More occurrences suggest higher relevance.
+- **Inverse Document Frequency (IDF):** How common or rare your search term is across all rows. Less common words often indicate more specific results.
+- **Document Length Normalization:** BM25 adjusts for text length, preventing longer rows from automatically seeming more relevant.
 
 BM25 assigns a relevance score to each row, with higher scores indicating better matches.
 
 ### Inverted Index for efficient searching
 
-For fast searching, `pg_search` uses an **inverted index**.  Think of it as an index in the back of a book, but instead of mapping topics to page numbers, it maps words (terms) to the database rows (documents) where they appear.
+For fast searching, `pg_search` uses an **inverted index**. Think of it as an index in the back of a book, but instead of mapping topics to page numbers, it maps words (terms) to the database rows (documents) where they appear.
 
 This index structure lets `pg_search` quickly find rows containing your search terms without scanning every table row, greatly speeding up queries.
 
@@ -62,7 +62,7 @@ With these basics in mind, let's learn how to create a BM25 index and start perf
 
 ## Getting started with `pg_search`
 
-`pg_search` has a special operator, `@@@`, that you can use in SQL queries to perform full-text searches.  This operator allows you to search for specific words or phrases within text columns, returning rows that match your search criteria. You can also sort results by relevance and highlight matched terms. Let us create a sample table, set up a BM25 index, and run some search queries to explore `pg_search` in action.
+`pg_search` has a special operator, `@@@`, that you can use in SQL queries to perform full-text searches. This operator allows you to search for specific words or phrases within text columns, returning rows that match your search criteria. You can also sort results by relevance and highlight matched terms. Let us create a sample table, set up a BM25 index, and run some search queries to explore `pg_search` in action.
 
 ### Creating a sample table for text search
 
@@ -98,7 +98,7 @@ The output will display the first three rows from the `mock_items` table:
 (3 rows)
 ```
 
-Next, let's create our first search index, named `item_search_idx`, on the `mock_items` table. This index will enable searching across the `id`, `description`, and `category` columns.  It's necessary to designate one column as the `key_field`; we will use `id` for this purpose. The `key_field` serves as a unique identifier for each item within the index.
+Next, let's create our first search index, named `item_search_idx`, on the `mock_items` table. This index will enable searching across the `id`, `description`, and `category` columns. It's necessary to designate one column as the `key_field`; we will use `id` for this purpose. The `key_field` serves as a unique identifier for each item within the index.
 
 <Admonition type="note" title="Key Field Selection">
 It is crucial to select a column that consistently contains a unique value for every row. This ensures the search index operates as intended.
@@ -166,6 +166,7 @@ WHERE description @@@ 'metal keyboard';
 ```
 
 The output is:
+
 ```text
 description               | category
 --------------------------+------------
@@ -228,7 +229,7 @@ This will find items where the `description` is similar to **'runing'** within a
 
 #### paradedb.phrase: Searching for phrases with words nearby
 
-The `paradedb.phrase` function, combined with the `slop` option, helps you find phrases even if the words are not immediately adjacent. The `slop` value specifies the number of intervening words allowed.  A `slop` of 1 permits one extra word in between.
+The `paradedb.phrase` function, combined with the `slop` option, helps you find phrases even if the words are not immediately adjacent. The `slop` value specifies the number of intervening words allowed. A `slop` of 1 permits one extra word in between.
 
 ```sql
 SELECT description, category
@@ -355,7 +356,7 @@ Optimize index build time with these settings. The `maintenance_work_mem` settin
       SET maintenance_work_mem = '10 GB';
       ```
 
-- **`paradedb.create_index_memory_budget`**: Defines the memory per indexing thread before writing index segments to disk. The default is 1024 MB (1 GB). Large tables may need a higher value. If set to `0`, the budget is derived from `maintenance_work_mem` and `paradedb.create_index_parallelism`. 
+- **`paradedb.create_index_memory_budget`**: Defines the memory per indexing thread before writing index segments to disk. The default is 1024 MB (1 GB). Large tables may need a higher value. If set to `0`, the budget is derived from `maintenance_work_mem` and `paradedb.create_index_parallelism`.
 
   ```sql
   SET paradedb.create_index_memory_budget = 2048;
@@ -382,9 +383,9 @@ Tune `INSERT/UPDATE/COPY` throughput for the BM25 index with these settings:
   - Use `1` for single-row atomic inserts/updates to avoid unnecessary threading.
   - Use a higher value for bulk inserts and updates.
 
-      ```sql
-      SET paradedb.statement_parallelism = 1;
-      ```
+    ```sql
+    SET paradedb.statement_parallelism = 1;
+    ```
 
 - **`paradedb.statement_memory_budget`**: Memory per indexing thread before writing to disk. Default is 1024 MB (1 GB). Higher values may improve indexing performnace. See [ParadeDB — Statement Memory Budget](https://docs.paradedb.com/documentation/configuration/write#statement-memory-budget).
 
@@ -392,9 +393,9 @@ Tune `INSERT/UPDATE/COPY` throughput for the BM25 index with these settings:
   - For single-row updates, 15 MB prevents excess memory allocation.
   - For bulk inserts/updates, increase as needed.
 
-      ```sql
-      SET paradedb.statement_memory_budget = 15;
-      ```
+    ```sql
+    SET paradedb.statement_memory_budget = 15;
+    ```
 
 ### Search performance
 
@@ -411,13 +412,12 @@ Increase parallel workers to speed up indexing:
       ```
 
 - **`max_parallel_workers`**: Defines the number of workers available for parallel scans.
-      
+
       ```sql
       SET max_parallel_workers = 8;
       ```
 
 - **`max_parallel_workers_per_gather`**: Limits parallel workers per query. The default in Neon is `2`, but you can adjust. The total number of parallel workers should not exceed your Neon compute's vCPU count. See [Neon parameter settings by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
-      
       ```sql
       SET max_parallel_workers_per_gather = 8;
       ```
@@ -446,20 +446,20 @@ For additional details, see [Running pg_prewarm on indexes](/docs/extensions/pg_
 
 To optimize your search functionality and ensure efficient performance, consider the following best practices when using `pg_search`:
 
-* **Analyze query plans:** Use `EXPLAIN` to analyze query plans and identify potential bottlenecks.
-* **Index all relevant columns:** Include all columns used in search queries, sorting, or filtering for optimal performance.
-* **Utilize query builder functions:** Leverage query builder functions or JSON syntax for complex queries like fuzzy matching and phrase matching.
+- **Analyze query plans:** Use `EXPLAIN` to analyze query plans and identify potential bottlenecks.
+- **Index all relevant columns:** Include all columns used in search queries, sorting, or filtering for optimal performance.
+- **Utilize query builder functions:** Leverage query builder functions or JSON syntax for complex queries like fuzzy matching and phrase matching.
 
 ## Conclusion
 
 You have successfully learned how to enable and utilize the `pg_search` extension on Neon for full-text search. By leveraging BM25 scoring and inverted indexes, `pg_search` provides powerful search capabilities directly within your Postgres database, eliminating the need for external search engines and ensuring real-time, ACID-compliant search functionality.
 
-While this guide provides a comprehensive introduction to `pg_search` on Neon, it is not exhaustive.  We haven't covered topics like:
+While this guide provides a comprehensive introduction to `pg_search` on Neon, it is not exhaustive. We haven't covered topics like:
 
-- **Advanced tokenization and language handling:**  Exploring specialized [tokenizers](https://docs.paradedb.com/documentation/indexing/tokenizers#tokenizers) and language-specific features.
-- **The full range of query types:**  Exploring the full range of query functions like `more_like_this`, `regex_phrase`, and compound queries for complex search needs.
-- **Leveraging fast fields:**  Optimizing performance with [fast fields](https://docs.paradedb.com/documentation/indexing/fast_fields#fast-fields) for aggregations, filtering, and sorting, and understanding their configuration.
-- **Query-time boosting:**  Fine-tuning search relevance by applying [boosts](https://docs.paradedb.com/documentation/advanced/compound/boost#boost) to specific fields or terms within your queries.
+- **Advanced tokenization and language handling:** Exploring specialized [tokenizers](https://docs.paradedb.com/documentation/indexing/tokenizers#tokenizers) and language-specific features.
+- **The full range of query types:** Exploring the full range of query functions like `more_like_this`, `regex_phrase`, and compound queries for complex search needs.
+- **Leveraging fast fields:** Optimizing performance with [fast fields](https://docs.paradedb.com/documentation/indexing/fast_fields#fast-fields) for aggregations, filtering, and sorting, and understanding their configuration.
+- **Query-time boosting:** Fine-tuning search relevance by applying [boosts](https://docs.paradedb.com/documentation/advanced/compound/boost#boost) to specific fields or terms within your queries.
 
 For a deeper dive into these and other advanced features, please refer to the official [ParadeDB documentation](https://docs.paradedb.com/welcome/introduction).
 
