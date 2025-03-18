@@ -120,7 +120,10 @@ To connect your Vercel project to your Neon database:
 3. Select the Vercel project you want to connect and the environments you want to add database environment variables to (**Development**, **Preview**, **Production**).
 4. Optionally, under **Advanced Options**, you can:
 
-   - Specify an **Environment Variables Prefix** for the database environment variables that will be added to your Vercel project. A prefix is not required but may help you track and identify variables later.
+   - Specify an **Environment Variables Prefix** for the database environment variables that will be added to your Vercel project. A prefix is not required but may help you track and identify variables later. 
+      <Admonition type="note">
+      Please be aware that environment variables are already prefixed by `DATABASE`, `PG`, or `POSTGRES` — see [Environment variables set by the integration](#environment-variables-set-by-the-integration). Any prefix you add is applied in addition the existing prefix. The only way to modify or remove a prefix after adding it is to remove the connection to the Vercel project and add it back with the modified or removed prefix.
+      </Admonition> 
    - Under **Deployments Configuration**, you can toggle the **Required** option and select **Preview** to create a Neon branch with every preview deployment (the **Development** and **Production** options here do not do anything — you can ignore them). Enabling the **Required** option means that a database branch must be created for each preview deployment.
 
    <Admonition type="note" title="A database branch for every preview deployment">
