@@ -35,7 +35,7 @@ const MODALS = [
   },
   {
     id: 'slack',
-    pagesToShow: ['Organizations', 'Manage organizations', 'Transfer a project'],
+    pagesToShow: ['Organizations'],
     title: 'Collaborate in Slack',
     description: 'Invite teammates to your Neon organization right from Slack',
     link: {
@@ -45,15 +45,7 @@ const MODALS = [
   },
   {
     id: 'slack',
-    pagesToShow: [
-      'Monitor billing and usage',
-      'Usage metrics',
-      'Neon plans',
-      'Pricing estimation guide',
-      'Extra usage',
-      'Sample project billing',
-      'Manage billing',
-    ],
+    pagesToShow: ['Plans and billing'],
     title: 'Track usage in Slack',
     description: 'Check project usage and get consumption alerts',
     link: {
