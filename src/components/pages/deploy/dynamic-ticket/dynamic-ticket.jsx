@@ -244,7 +244,7 @@ const DynamicTicket = ({
                   </p>
                   <time
                     dateTime="2023-11-02T10:00"
-                    className="whitespace-nowrap text-sm uppercase leading-dense tracking-[0.01em] text-white lg:text-[12px] md:text-[12px]"
+                    className="whitespace-nowrap text-sm uppercase leading-dense -tracking-snug text-white lg:text-[12px] md:text-[12px]"
                   >
                     10 AM PT,
                     <br />

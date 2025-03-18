@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2025-03-10T17:50:45.189Z'
+updatedOn: '2025-03-14T18:29:25.734Z'
 ---
 
 Our development teams are focused on helping you ship faster with Postgres. This roadmap describes committed features we're working on right now, what we delivered recently, and a peek at what's on the horizon.
@@ -41,6 +41,7 @@ And here's a quick list of what we'll be taking on in the near future:
 
 ## What we've shipped recently 🚢
 
+- **GitHub Secret Scanning**: Neon joined GitHub's Secret Scanning Partner Program to automatically detect and protect against exposed database credentials in public repositories.
 - **HIPAA compliance**: We have achieved HIPAA compliance. Learn more about Neon's compliance milestones on our [Compliance page](/docs/security/compliance).
 - **Scheduled updates**: Business plan users can now check for update notices and choose preferred update windows for Postgres updates, security patches, and Neon feature enhancements.
 - **AWS São Paulo region**: Create projects in São Paulo (sa-east-1) for lower latency access from the South America and data residency within Brazil.
