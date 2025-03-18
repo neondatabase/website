@@ -35,7 +35,7 @@ const Takeover = () => (
             className="relative font-medium -tracking-[0.03em]"
             theme="white"
             size="2xs"
-            to="/"
+            to={LINKS.signup}
             withArrow
           >
             Try ParadeDB now
