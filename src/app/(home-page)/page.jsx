@@ -1,3 +1,4 @@
+
 import AiIndex from 'components/pages/home/ai-index';
 import Bento from 'components/pages/home/bento';
 import Hero from 'components/pages/home/hero';
@@ -6,6 +7,7 @@ import InstantProvisioning from 'components/pages/home/instant-provisioning';
 import Lightning from 'components/pages/home/lightning';
 import Logos from 'components/pages/home/logos';
 import Multitenancy from 'components/pages/home/multitenancy';
+import Takeover from 'components/pages/home/takeover';
 import Trusted from 'components/pages/home/trusted';
 import Cta from 'components/shared/cta';
 import SEO_DATA from 'constants/seo-data';
@@ -30,6 +32,7 @@ const Homepage = () => (
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
     />
+    <Takeover />
     <Hero />
     <Logos />
     <InstantProvisioning />

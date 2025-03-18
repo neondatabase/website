@@ -1,17 +1,14 @@
 'use client';
 
 import clsx from 'clsx';
-import Image from 'next/image';
 import { useState, useRef, createRef, useEffect, useCallback } from 'react';
 import useWindowSize from 'react-use/lib/useWindowSize';
 
-import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import LINKS from 'constants/links';
 import useIsSafari from 'hooks/use-is-safari';
 import branchingIcon from 'icons/home/hero/branching.svg';
 import scalingIcon from 'icons/home/hero/scaling.svg';
-import bg from 'images/pages/home/hero/bg.jpg';
 
 import Video from './video';
 
@@ -104,30 +101,19 @@ const Hero = () => {
   );
 
   return (
-    <section className="hero safe-paddings relative pt-[168px] xl:pt-[152px] lg:pt-32 md:pt-[88px]">
+    <section className="hero safe-paddings relative pt-40 xl:pt-[152px] lg:pt-[88px] md:pt-20">
       <Container className="relative z-10 xl:px-8" size="1100">
         <div className="flex flex-col items-center text-center">
-          <h1 className="font-title text-[72px] font-medium leading-none -tracking-[0.03em] text-white xl:text-[64px] lg:text-[56px] sm:text-[32px]">
-            Ship faster with Postgres
+          <h1 className="font-title text-[62px] font-medium leading-none -tracking-[0.03em] text-white xl:text-[56px] lg:text-[48px] sm:text-[36px]">
+            About Neon
           </h1>
           <p className="mt-2.5 max-w-xl text-lg font-light leading-snug tracking-tighter text-gray-new-80 lg:mt-2.5 lg:text-base">
-            The database you love, on a serverless platform designed to help you build reliable and
-            scalable applications faster.
+            Neon is the Postgres database you love, on a serverless platform designed
+            to&nbsp;help&nbsp;you build reliable and scalable applications faster.
           </p>
-          <Button
-            className="pointer-events-auto relative mt-7 px-9 font-semibold xl:mt-6 md:px-7"
-            theme="primary"
-            size="md-new"
-            to={LINKS.signup}
-            target="_blank"
-            tag_name="Hero"
-            analyticsEvent="home_hero_get_started_clicked"
-          >
-            Get Started
-          </Button>
         </div>
 
-        <div className="mt-[74px] flex gap-x-2.5 xl:mt-16 lg:mt-14 sm:mt-9 sm:flex-col sm:gap-y-9">
+        <div className="mt-12 flex gap-x-2.5 xl:mt-10 sm:mt-7 sm:flex-col sm:gap-y-9">
           {ITEMS.map((item, index) => (
             <Video
               className={clsx(
@@ -151,17 +137,6 @@ const Hero = () => {
           ))}
         </div>
       </Container>
-
-      <Image
-        className="pointer-events-none absolute left-1/2 top-0 max-w-none -translate-x-1/2 xl:top-8 xl:w-[1588px] lg:top-6 lg:w-[1420px] md:top-[76px] md:w-[1058px]"
-        src={bg}
-        sizes="(max-width: 767px) 1058px"
-        width={1920}
-        height={1210}
-        quality={100}
-        alt=""
-        priority
-      />
     </section>
   );
 };
