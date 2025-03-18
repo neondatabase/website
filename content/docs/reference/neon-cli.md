@@ -239,11 +239,11 @@ Global options are supported with any Neon CLI command.
       
   The authentication flow for the Neon CLI follows this order:
 
-- If the `--api-key` option is provided, it takes precedence and is used for authentication.
-- If the `--api-key` option is not provided, the `NEON_API_KEY` environment variable is used if it is set.
-- If both `--api-key` option and `NEON_API_KEY` environment variable are not provided or set, the CLI falls back to the
-  `credentials.json` file created by the `neon auth` command.
-- If the credentials file is not found, the Neon CLI initiates the `neon auth` web authentication process.
+  - If the `--api-key` option is provided, it takes precedence and is used for authentication.
+  - If the `--api-key` option is not provided, the `NEON_API_KEY` environment variable is used if it is set.
+  - If both `--api-key` option and `NEON_API_KEY` environment variable are not provided or set, the CLI falls back to the
+    `credentials.json` file created by the `neon auth` command.
+  - If the credentials file is not found, the Neon CLI initiates the `neon auth` web authentication process.
 
   </Admonition>
 
