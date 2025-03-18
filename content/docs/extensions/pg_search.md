@@ -439,7 +439,7 @@ Tune `INSERT/UPDATE/COPY` throughput for the BM25 index with these settings:
 
 ### Search performance
 
-Expensive search queries benefit from parallel workers and increased shared buffer memory.
+Search performance can benefit from parallel workers, more memory provided by larger Neon compute sizes, and preloading indexes into memory.
 
 #### Parallel workers
 
@@ -462,19 +462,17 @@ Increase parallel workers to speed up indexing:
 SET max_parallel_workers_per_gather = 8;
 `
 
-#### Shared buffers
+#### Keeping indexes in memory
 
-Keeping indexes in memory improves performance. `shared_buffers` defines Postgres buffer cache size. In Neon, this is set based on compute size. Additionally, **Neon’s Local File Cache (LFC)** extends shared buffers and can use up to 75% of your compute’s RAM.
+Keeping indexes in memory improves query performance by reducing disk access. In Postgres, `shared_buffers` defines the buffer cache size, which determines how much memory is allocated for caching data. In Neon, this value is set automatically based on your compute size.
 
-For LFC sizes by compute size, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+In addition to `shared_buffers`, **Neon’s Local File Cache (LFC)** extends memory up to 75% of your compute’s RAM. This allows frequently accessed indexes and data to remain in memory, improving performance.
 
-#### Prewarming your indexes
+Both `shared_buffers` and the LFC size depend on your compute size. For details, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
 
-Using the Postgres `pg_prewarm` extension to preload data into into your buffers and cache can significantly improve query response times by ensuring that your data is readily available in memory. Do this after index creation and also after any restart of your Neon compute, which runs Postgres.
+To further optimize performance, you can use the Postgres `pg_prewarm` extension to preload indexes into memory. This ensures fast query response times by warming up the cache after index creation or a restart of your Neon compute.
 
-Refer to the [pg_prewarm extension](/docs/extensions/pg_prewarm) guide for how to install the `pg_prewarm` extension.
-
-To run `pg_prewarm` on a search index:
+To run `pg_prewarm` on an index:
 
 ```sql
 pg_prewarm('index_name')
