@@ -16,7 +16,7 @@ In this guide, you'll learn how to enable `pg_search` on Neon, understand the fu
 
 <Admonition type="note" title="pg_search on Neon">
 
-`pg_search` is currently only available on Neon projects created in an [AWS region](/docs/introduction/regions#aws-regions) and using Postgres 17.
+`pg_search` is currently only available on Neon projects using Postgres 17 and created in an [AWS region](/docs/introduction/regions#aws-regions).
 
 </Admonition>
 
@@ -30,13 +30,17 @@ CREATE EXTENSION IF NOT EXISTS pg_search;
 
 ## Understanding text search with `pg_search`
 
-`pg_search` enables text searching within your Postgres database, helping you find rows containing specific keywords or phrases in text columns.  Unlike basic `LIKE` queries, `pg_search` offers advanced scoring, relevance ranking, and language handling to deliver more accurate and context-aware search results. The extension provides several key features:
+`pg_search` enables text searching within your Postgres database, helping you find rows containing specific keywords or phrases in text columns. Unlike basic `LIKE` queries, `pg_search` offers advanced scoring, relevance ranking, and language handling to deliver more accurate and context-aware search results. It also addresses major performance limitations of native Postgres full-text search (FTS) by using a **BM25 covering index**, which indexes text along with metadata (numeric, datetime, JSON, etc.), enabling complex boolean, aggregate, and ordered queries to be processed significantly faster—often reducing query times from minutes to seconds.
 
-- **Relevance Ranking:**  Ordering search results by relevance, placing the most relevant matches higher, not just based on keyword presence.
-- **Language Handling:**  Depending on setup, `pg_search` can handle different languages and their rules for word analysis.
-- **Stemming:**  Recognizing word variations like "run," "running," and "runs" as being related, linking them to a root form ("run") for broader matches.
-- **Hybrid Search**: Combine BM25 scores with `pgvector` scores to build hybrid search experiences
-- **Faceted Search**: Categorizing and bucketing results based on filters applied as part of the search query
+Key features include:
+
+- **Advanced relevance ranking:** Orders search results by relevance, incorporating phrase, regex, fuzzy matching, and other specialized FTS queries.
+- **Powerful indexing with flexible tokenization:** Supports multiple tokenizers (e.g., ICU, Lindera) and token filters (e.g., language-aware stemmers), improving search accuracy across different languages.
+- **Hybrid search:** Combines BM25 scores with `pgvector` embeddings to enhance search experiences.
+- **Faceted search:** Allows categorization and filtering of search results based on query parameters.
+- **Expressive query builder:** Provides an Elastic DSL-like query syntax for constructing complex search queries.
+
+By leveraging these features, `pg_search` enhances both performance and flexibility, making full-text search in Postgres more efficient and developer-friendly.
 
 ### BM25: The Relevance scoring algorithm
 
@@ -327,85 +331,11 @@ This will find items that satisfy either of these conditions.
 (3 rows)
 ```
 
-### Miscellaneous search options
+### Query builder functions
 
-There are many other query builder functions available in `pg_search`, such as these ones, which serve different use cases:
+In addition to query strings, query builder functions can be used to compose various types of complex queries.
 
-- `paradedb.term`: This function allows for exact term matching and is particularly useful for filtering based on structured data fields like categories or ratings. It ensures that only documents containing the precise term are returned.
-
-- `paradedb.phrase_prefix`: Ideal for implementing autocomplete or search-as-you-type features. It finds phrases where the words start with the search term.
-
-- `paradedb.range`:  Allows you to define range-based queries, especially useful for filtering numeric or date fields.
-
-For a complete list of query builder functions, refer to ParadeDB's [Query Builder](https://docs.paradedb.com/documentation/advanced/overview) documentation.
-
-### Complex search queries with `paradedb.boolean`
-
-For more complex search requirements, `paradedb.boolean` allows you to combine multiple search queries using boolean logic.  It uses `must`, `should`, and `must_not` clauses to define the conditions for a match.
-
-*   `must`: Specifies conditions that **must** be met for a document to be included in the results.
-*   `should`: Specifies conditions that **should** be met. Documents matching `should` clauses will have a higher score, but at least one `must` or `should` clause needs to be satisfied for a document to be returned (if `should` is present alongside `must`). If only `should` clauses are present, at least one should match.
-*   `must_not`: Specifies conditions that **must not** be met. Documents matching these conditions are excluded.
-
-Here’s an example using `paradedb.boolean` to find items that are in the 'Electronics' category, have a description containing 'keyboard', but specifically excluding 'plas' prefixed descriptions:
-
-<CodeTabs labels={["Function Syntax", "JSON Syntax"]}>
-
-```sql
-SELECT description, rating, category
-FROM mock_items
-WHERE id @@@ paradedb.boolean(
-    must => ARRAY[
-      paradedb.term('category', 'electronics'),
-      paradedb.term('description', 'keyboard')
-    ],
-    must_not => ARRAY[
-      paradedb.phrase_prefix('description', ARRAY['plas'])
-    ]
-);
-```
-
-```sql
-SELECT description, rating, category
-FROM mock_items
-WHERE id @@@
-'{
-    "boolean": {
-      "must": [
-          {
-            "term": {
-             "field": "category",
-             "value": "electronics"
-            }
-          },
-          {
-            "term": {
-             "field": "description",
-             "value": "keyboard"
-            }
-          }
-      ],
-      "must_not": [
-          {
-            "phrase_prefix": {
-             "field": "description",
-             "phrases": ["plas"]
-            }
-          }
-      ]
-    }
-}'::jsonb;
-```
-</CodeTabs>
-
-This query will return items that are in the 'Electronics' category, have 'keyboard' in the description, and do not have 'plas' prefixed descriptions.
-
-```text
-description               | rating | category
---------------------------+--------+-------------
- Ergonomic metal keyboard |      4 | Electronics
-(1 row)
-```
+For a list of supported query builder functions, refer to ParadeDB's [Query Builder](https://docs.paradedb.com/documentation/advanced/overview) documentation.
 
 ## Performance optimizations for `pg_search`
 
@@ -497,6 +427,20 @@ Increase parallel workers to speed up indexing:
 Keeping indexes in memory improves performance. `shared_buffers` defines Postgres buffer cache size. In Neon, this is set based on compute size. Additionally, **Neon’s Local File Cache (LFC)** extends shared buffers and can use up to 75% of your compute’s RAM.
 
 For LFC sizes by compute size, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+
+#### Prewarming your indexes
+
+Using the Postgres `pg_prewarm` extension to preload data into into your buffers and cache can significantly improve query response times by ensuring that your data is readily available in memory. Do this after index creation and also after any restart of your Neon compute, which runs Postgres.
+
+Refer to the [pg_prewarm extension](/docs/extensions/pg_prewarm) guide for how to install the `pg_prewarm` extension.
+
+To run `pg_prewarm` on a search index:
+
+```sql
+pg_prewarm('index_name')
+```
+
+For additional details, see [Running pg_prewarm on indexes](/docs/extensions/pg_prewarm#running-pgprewarm-on-indexes).
 
 ## Best practices for using `pg_search`
 
