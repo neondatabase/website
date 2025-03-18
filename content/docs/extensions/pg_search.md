@@ -326,9 +326,9 @@ This will find items that satisfy either of these conditions.
 ```text
      description               | category
 --------------------------+------------
- Ergonomic metal keyboard | Electronics
- Plastic Keyboard         | Electronics
- Sleek running shoes      | Footwear
+Ergonomic metal keyboard | Electronics
+Plastic Keyboard         | Electronics
+Sleek running shoes      | Footwear
 (3 rows)
 ```
 
@@ -337,6 +337,46 @@ This will find items that satisfy either of these conditions.
 In addition to query strings, query builder functions can be used to compose various types of complex queries.
 
 For a list of supported query builder functions, refer to ParadeDB's [Query Builder](https://docs.paradedb.com/documentation/advanced/overview) documentation.
+
+### Joined search with multiple tables
+
+`pg_search` supports full-text search over JOINs, which is crucial for database schemas that store data in a normalized fashion. Let's create a table called `orders` that references our `mock_items` table:
+
+```sql
+CALL paradedb.create_bm25_test_table(
+  schema_name => 'public',
+  table_name => 'orders',
+  table_type => 'Orders'
+);
+
+ALTER TABLE orders
+ADD CONSTRAINT foreign_key_product_id
+FOREIGN KEY (product_id)
+REFERENCES mock_items(id);
+
+SELECT * FROM orders LIMIT 3;
+```
+
+Next, let's create a BM25 index over the `orders` table:
+
+```sql
+CREATE INDEX orders_idx ON orders
+USING bm25 (order_id, customer_name)
+WITH (key_field='order_id');
+```
+
+Now we can perform a search across both tables using a JOIN. The following query searches for rows where `customer_name` matches 'Johnson' and `description` matches 'shoes':
+
+```sql
+SELECT o.order_id, o.customer_name, m.description
+FROM orders o
+JOIN mock_items m ON o.product_id = m.id
+WHERE o.customer_name @@@ 'Johnson' AND m.description @@@ 'shoes'
+ORDER BY order_id
+LIMIT 5;
+```
+
+This demonstrates how `pg_search` can be used to search across related tables, allowing for powerful queries that combine data from multiple sources.
 
 ## Performance optimizations for `pg_search`
 
@@ -387,7 +427,7 @@ Tune `INSERT/UPDATE/COPY` throughput for the BM25 index with these settings:
     SET paradedb.statement_parallelism = 1;
     ```
 
-- **`paradedb.statement_memory_budget`**: Memory per indexing thread before writing to disk. Default is 1024 MB (1 GB). Higher values may improve indexing performnace. See [ParadeDB — Statement Memory Budget](https://docs.paradedb.com/documentation/configuration/write#statement-memory-budget).
+- **`paradedb.statement_memory_budget`**: Memory per indexing thread before writing to disk. Default is 1024 MB (1 GB). Higher values may improve indexing performance. See [ParadeDB — Statement Memory Budget](https://docs.paradedb.com/documentation/configuration/write#statement-memory-budget).
 
   - If set to `0`, `maintenance_work_mem / paradedb.statement_parallelism` is used.
   - For single-row updates, 15 MB prevents excess memory allocation.
