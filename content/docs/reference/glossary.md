@@ -576,7 +576,7 @@ You can obtain an unpooled connection string for your database by clicking the *
 
 ## Time Travel
 
-A Neon feature that lets you connect to any selected point in time within your restore window window and run queries against that connection. See [Time Travel](/docs/guides/time-travel-assist).
+A Neon feature that lets you connect to any selected point in time within your restore window and run queries against that connection. See [Time Travel](/docs/guides/time-travel-assist).
 
 ## user
 

@@ -34,7 +34,7 @@ To create a point-in-time branch:
 6. Under **Include data up to**, select the **Specific date and time** option, which creates a branch with data up to the specified date and time. For example, if the data loss occurred on Nov 26, 2023 at 5:01pm, select Nov 11, 2023, at 5:00pm, just before the faulty query was run.
 
 <Admonition type="note">
-The **Specific date and time** option does not include data changes that occurred after the specified date and time, which means the branch contains data as it existed previously. You can only specify a date and time that falls within your restore window window. See [Configure restore window](/docs/manage/projects#configure-restore-window).
+The **Specific date and time** option does not include data changes that occurred after the specified date and time, which means the branch contains data as it existed previously. You can only specify a date and time that falls within your restore window. See [Configure restore window](/docs/manage/projects#configure-restore-window).
 </Admonition>
 
 7. Click **Create new branch** to create your branch.

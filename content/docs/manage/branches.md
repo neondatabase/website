@@ -15,7 +15,7 @@ For more information about branches and how you can use them in your development
 You can create and manage branches using the Neon Console, [Neon CLI](/docs/reference/neon-cli), or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 <Admonition type="important">
-When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, which will add to your storage usage as they age out of your project's [restore window window](/docs/introduction/point-in-time-restore#history-retention).
+When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, which will add to your storage usage as they age out of your project's [restore window](/docs/introduction/point-in-time-restore#history-retention).
 </Admonition>
 
 ## Create a branch
@@ -32,7 +32,7 @@ To create a branch:
 7. Select an **Include data up to** option to specify the data to be included in your branch.
 
 <Admonition type="note">
-The **Specific date and time** and the **Specific Log Sequence Number Data** options do not include data changes that occurred after the specified date and time or LSN. You can only specify a date and time or LSN value that falls within your [restore window window](/docs/manage/projects#configure-restore-window).
+The **Specific date and time** and the **Specific Log Sequence Number Data** options do not include data changes that occurred after the specified date and time or LSN. You can only specify a date and time or LSN value that falls within your [restore window](/docs/manage/projects#configure-restore-window).
 </Admonition>
 
 8. Click **Create new branch**.

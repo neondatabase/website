@@ -71,7 +71,7 @@ Understanding the information provided by the **Explain** and **Analyze** featur
 
 ## Time Travel
 
-You can toggle Time Travel in the SQL Editor to switch from querying your current data to querying against a selected point within your [restore window window](/docs/manage/projects#configure-restore-window).
+You can toggle Time Travel in the SQL Editor to switch from querying your current data to querying against a selected point within your [restore window](/docs/manage/projects#configure-restore-window).
 
 ![time travel in SQL Editor](/docs/get-started-with-neon/time_travel_sql_editor.png 'no-border')
 
