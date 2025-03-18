@@ -14,7 +14,7 @@ const icons = {
   support: SupportIcon,
 };
 
-const Modal = ({ type, title, description, link }) => {
+const Modal = ({ id, title, description, link }) => {
   const [closedModals, setClosedModals] = useLocalStorage('closedModals', []);
   const [isMounted, setIsMounted] = useState(false);
 
@@ -23,11 +23,11 @@ const Modal = ({ type, title, description, link }) => {
   }, []);
 
   const handleClose = () => {
-    setClosedModals((prevClosedModals) => [...prevClosedModals, type]);
+    setClosedModals((prevClosedModals) => [...prevClosedModals, id]);
   };
 
-  const isClosed = closedModals.includes(type);
-  const Icon = icons[type];
+  const isClosed = closedModals.includes(id);
+  const Icon = icons[id];
 
   return (
     <LazyMotion features={domAnimation}>
@@ -77,7 +77,7 @@ const Modal = ({ type, title, description, link }) => {
 };
 
 Modal.propTypes = {
-  type: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   link: PropTypes.shape({
