@@ -141,6 +141,16 @@ const defaultConfig = {
 
     return [
       {
+        source: '/bm',
+        destination: '/?ref=tbm-p',
+        permanent: true,
+      },
+      {
+        source: '/burningmonk',
+        destination: '/?ref=tbm-p',
+        permanent: true,
+      },
+      {
         source: '/yc-startups',
         destination: '/startups',
         permanent: true,
