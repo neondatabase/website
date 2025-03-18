@@ -506,6 +506,7 @@ For a deeper dive into these and other advanced features, please refer to the of
 Neon Postgres purchases made through the Azure Marketplace now contribute towards your Microsoft Azure Consumption Commitment (MACC). This means that any spending on Neon Postgres through Azure Marketplace will help fulfill your organization's committed Azure spend.
 
 ### How it works
+
 - When you purchase Neon Postgres via Azure Marketplace, the cost is billed through your Microsoft Azure subscription.
 - These charges are eligible to count toward your MACC, helping you maximize your existing commitment to Azure.
 - There are no additional steps required—your eligible Neon Postgres spend is automatically applied to your MACC.
