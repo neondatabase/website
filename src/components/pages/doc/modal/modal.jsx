@@ -15,8 +15,7 @@ const icons = {
 };
 
 const Modal = ({ type, title, description, link }) => {
-  const modalClosedKey = `${type}ModalClosed`;
-  const [isClosed, setIsClosed] = useLocalStorage(modalClosedKey, false);
+  const [closedModals, setClosedModals] = useLocalStorage('closedModals', []);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -24,9 +23,10 @@ const Modal = ({ type, title, description, link }) => {
   }, []);
 
   const handleClose = () => {
-    setIsClosed(true);
+    setClosedModals((prevClosedModals) => [...prevClosedModals, type]);
   };
 
+  const isClosed = closedModals.includes(type);
   const Icon = icons[type];
 
   return (
@@ -42,9 +42,8 @@ const Modal = ({ type, title, description, link }) => {
               'dark:shadow-[0px_2px_10px_0px_rgba(0,0,0,.4),0px_2px_30px_0px_rgba(0,0,0,.5)]'
             )}
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            animate={{ opacity: 1, transition: { delay: 3 } }}
+            exit={{ opacity: 0, transition: { duration: 0.1 } }}
           >
             {Icon && <Icon className="mb-2.5 h-5 w-5 text-secondary-8 dark:text-green-45" />}
             <p className="font-medium leading-snug tracking-extra-tight text-black-new dark:text-white">
