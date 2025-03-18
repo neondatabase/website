@@ -62,7 +62,7 @@ const Modal = ({ id, title, description, link }) => {
               size="2xs"
               withArrow
               onClick={() => {
-                sendGtagEvent('click_modal_link', {
+                sendGtagEvent('click_docs_modal_link', {
                   modal: id,
                   link: link.title,
                 });
