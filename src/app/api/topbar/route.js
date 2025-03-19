@@ -24,8 +24,11 @@ export async function GET() {
   try {
     const data = await graphQLClient.request(topbarQuery);
     const response = NextResponse.json(data?.globalFields?.globalFields?.topbar, { status: 200 });
+    response.headers.set('Cache-Control', 'public, max-age=3600, s-maxage=3600');
     return response;
   } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error);
     return NextResponse.json({ error: 'Failed to fetch topbar data' }, { status: 500 });
   }
 }
