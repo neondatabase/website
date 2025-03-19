@@ -115,7 +115,7 @@ Neon features:
 - [Database branching](/docs/guides/branching-intro) &#8212; branch your database like code for development, testing, and database workflows
 - [Autoscaling](/docs/introduction/autoscaling) &#8212; scale your database automatically for performance and cost savings
 - [Scale to Zero](/docs/introduction/scale-to-zero) &#8212; configure scale-to-zero behavior
-- [Branch Restore](/docs/guides/branch-restore) &#8212; instant instant restore
+- [Branch Restore](/docs/guides/branch-restore) &#8212; instant restore
 - [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) &#8212; Neon projects, roles, databases and more via API calls
 - [Neon CLI](/docs/reference/neon-cli) &#8212; manage your Neon projects, roles, databases and more from the command-line
 - [IP Allow](/docs/introduction/ip-allow) &#8212; limit access to the IP addresses you trust
