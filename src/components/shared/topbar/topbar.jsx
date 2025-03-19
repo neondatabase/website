@@ -6,7 +6,11 @@ const TOPBAR_API_URL = '/api/topbar';
 
 const Topbar = async ({ isDarkTheme }) => {
   try {
-    const response = await fetch(TOPBAR_API_URL);
+    const response = await fetch(TOPBAR_API_URL, {
+      next: {
+        revalidate: 3600,
+      },
+    });
     const topbar = await response.json();
 
     if (!topbar?.text || !topbar?.link) return null;
