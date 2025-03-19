@@ -92,7 +92,7 @@ The Vercel Pro plan offered additional use for a fee. The Neon Launch plan also 
 Neon also offers [Scale](/docs/introduction/plans#scale-plan) and [Business](/docs/introduction/plans#business-plan) plans, which include more storage, compute hours, projects, and features. Be sure to take a look at these plans if the Launch plan does not meet your requirements.
 
 <Admonition type="note" title="Upgrading to a Neon plan">
-To upgrade to a Neon plan to take advantage of additional features like branching and instant restore (PITR) and higher plan allowances, see [Changing your plan](/docs/guides/vercel-native-integration#changing-your-plan).
+To upgrade to a Neon plan to take advantage of additional features like branching and instant restore and higher plan allowances, see [Changing your plan](/docs/guides/vercel-native-integration#changing-your-plan).
 </Admonition>
 
 ### What about Enterprise customers?
