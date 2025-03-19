@@ -6,6 +6,7 @@ import InstantProvisioning from 'components/pages/home/instant-provisioning';
 import Lightning from 'components/pages/home/lightning';
 import Logos from 'components/pages/home/logos';
 import Multitenancy from 'components/pages/home/multitenancy';
+import Takeover from 'components/pages/home/takeover';
 import Trusted from 'components/pages/home/trusted';
 import Cta from 'components/shared/cta';
 import SEO_DATA from 'constants/seo-data';
@@ -18,6 +19,7 @@ export const metadata = getMetadata({
 
 const PgtPage = () => (
   <>
+    <Takeover />
     <Hero />
     <Logos />
     <InstantProvisioning />
