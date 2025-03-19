@@ -72,7 +72,7 @@ Refer to the following guide for instructions.
 
 ### Data recovery
 
-If you lose data due to an unintended deletion or some other event, you can restore a branch to any point in its restore window period to recover lost data. You can also create a new point-in-time branch for historical analysis or any other reason.
+If you lose data due to an unintended deletion or some other event, you can restore a branch to any point in its restore window to recover lost data. You can also create a new restore branch for historical analysis or any other reason.
 
 ![data recovery branch](/docs/introduction/branching_data_loss.png)
 
