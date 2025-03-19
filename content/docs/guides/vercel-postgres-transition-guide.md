@@ -71,13 +71,13 @@ Additional use (called "Extra usage" in Neon) for a fee was not available on the
 
 When Vercel Postgres was available on the Vercel's Pro Plan, it was tailored for professional developers, freelancers, and small businesses. In Neon, the equivalent plan is our [Launch Plan](/docs/introduction/plans#launch-plan) at $19 per month. The following table provides a comparison:
 
-| **Resource**               | **Vercel Pro (Included)** | **Neon Launch Plan (Included)**  |
-| :------------------------- | :------------------------ | :------------------------------- |
-| **Compute hours**          | 100                       | 300                              |
-| **Data transfer**          | 256 MB                    | Reasonable usage (no hard limit) |
-| **Databases**              | First database            | 100                              |
-| **Branches**               | Not available             | 5000                             |
-| **Storage**                | First 256 MB              | Up to 10 GB                      |
+| **Resource**        | **Vercel Pro (Included)** | **Neon Launch Plan (Included)**  |
+| :------------------ | :------------------------ | :------------------------------- |
+| **Compute hours**   | 100                       | 300                              |
+| **Data transfer**   | 256 MB                    | Reasonable usage (no hard limit) |
+| **Databases**       | First database            | 100                              |
+| **Branches**        | Not available             | 5000                             |
+| **Storage**         | First 256 MB              | Up to 10 GB                      |
 | **Instant restore** | Not available             | Up to 7 days                     |
 
 The Vercel Pro plan offered additional use for a fee. The Neon Launch plan also offers additional use (called "Extra usage" in Neon). In Neon, additional units of compute and storage cost more, but you get more compute and storage with your plan's monthly fee, and there's no charge for data transfer, additional databases, or written data.
