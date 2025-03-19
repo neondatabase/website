@@ -24,7 +24,7 @@ Looking back at Neon's debut blog post, [SELECT ’Hello, World’](https://neon
 
 - **The belief that our architecture can provide a better Developer Experience (DevX)**
 
-  Features such as autoscaling, branching, time travel, instant provisioning, and instant instant restore improve the developer experience by allowing quick environment setup, efficient developer workflows, and immediate database availability.
+  Features such as autoscaling, branching, time travel, instant provisioning, and instant restore improve the developer experience by allowing quick environment setup, efficient developer workflows, and immediate database availability.
 
 These are Neon's reasons, but given the many _database-as-a-service_ options available today, let's take a look at the reasons why **you** should choose Neon:
 
