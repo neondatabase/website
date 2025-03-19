@@ -89,7 +89,7 @@ If you choose to extend your restore window beyond the default &#8212; to take f
 
 ![Restore window setting](/docs/get-started-with-neon/history_retention_setting.png)
 
-For more, see [Branch reset and restore](/docs/introduction/restore-window).
+For more, see [Branch reset and restore](/docs/introduction/branch-restore).
 
 ## Configure IP Allow
 

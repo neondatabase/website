@@ -5,6 +5,7 @@ enableTableOfContents: true
 updatedOn: '2025-01-31T16:41:54.394Z'
 redirectFrom:
   - /docs/introduction/point-in-time-restore
+  - /docs/introduction/restore-window
 ---
 
 Neon retains a history of changes for all branches. This shared history provides the basis for a variety of branch restore and reset operations: resetting a branch to its parent, restoring a branch to its history, creating a new branch from a selected point-in-time, and Time Travel queries against the shared history. You can use these features to reset a development branch to main, to recover lost data, as a database backup strategy, or to view the past state of your database.

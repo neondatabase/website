@@ -8,7 +8,7 @@ This topic describes [Storage](#storage), [Archive storage](#archive-storage), [
 
 ## Storage
 
-Neon's storage engine is designed to support a serverless architecture and enable features such as [instant restore](/docs/introduction/point-in-time-restore), [time travel](/docs/guides/time-travel-assist), and [branching](/docs/guides/branching-intro). For this reason, storage in Neon differs somewhat from other database services.
+Neon's storage engine is designed to support a serverless architecture and enable features such as [instant restore](/docs/introduction/branch-restore), [time travel](/docs/guides/time-travel-assist), and [branching](/docs/guides/branching-intro). For this reason, storage in Neon differs somewhat from other database services.
 
 In Neon, storage consists of your total **data size** and **history**.
 
@@ -23,7 +23,7 @@ In Neon, storage consists of your total **data size** and **history**.
   The size of your history depends on a couple of factors:
 
   - **The volume of changes to your data** &#8212; the volume of inserts, updates, and deletes. For example, a write-heavy workload will generate more history than a read-heavy workload.
-  - **How much history you keep** &#8212; referred to as [restore window](/docs/introduction/point-in-time-restore#history-retention), which can be an hour, a day, a week, or even a month. Restore window is configurable for each Neon project. As you might imagine, 1 day of history would generally require less storage than 30 days of history, but less history limits the features that depend on it. For example, 1 day of history means that your maximum instant restore point is only 1 day in the past.
+  - **How much history you keep** &#8212; referred to as [restore window](/docs/introduction/branch-restore#restore-window), which can be an hour, a day, a week, or even a month. Restore window is configurable for each Neon project. As you might imagine, 1 day of history would generally require less storage than 30 days of history, but less history limits the features that depend on it. For example, 1 day of history means that your maximum instant restore point is only 1 day in the past.
 
 ### How branching affects storage
 
@@ -61,7 +61,7 @@ Yes. Any data-modifying operation, such as deleting a row from a table in your d
 <details>
 <summary>**What increases the size of history?**</summary>
 
-Any data-modifying operation increases the size of your history. As WAL records age out of your [restore window](/docs/introduction/point-in-time-restore#history-retention), they are removed, reducing your history and potentially decreasing your total storage size.
+Any data-modifying operation increases the size of your history. As WAL records age out of your [restore window](/docs/introduction/branch-restore#restore-window), they are removed, reducing your history and potentially decreasing your total storage size.
 
 </details>
 
@@ -72,7 +72,7 @@ Here are some strategies to consider:
 
 - **Optimize your restore window**
 
-  Your restore window setting controls how much change history your project retains. Decreasing history reduces the window available for things like instant restore or time-travel. Retaining no history at all would make branches expensive, as a branch can only share data with its parent if history is retained. Your goal should be a balanced restore window configuration; one that supports the features you need but does not consume too much storage. See [Restore window](/docs/introduction/point-in-time-restore#history-retention) for how to configure your retention period.
+  Your restore window setting controls how much change history your project retains. Decreasing history reduces the window available for things like instant restore or time-travel. Retaining no history at all would make branches expensive, as a branch can only share data with its parent if history is retained. Your goal should be a balanced restore window configuration; one that supports the features you need but does not consume too much storage. See [Restore window](/docs/introduction/branch-restore#restore-window) for how to configure your restore window.
 
 - **Use branches instead of duplicating data**
 
@@ -106,7 +106,7 @@ These factors could be contributing to your high storage consumption:
 - **Frequent data modifications:** If you are performing a lot of writes (inserts, updates, deletes), each operation generates WAL records, which are added to your history. For instance, rewriting your entire database daily can lead to a storage amount that is a multiple of your database size, depending on the number of days of history your Neon project retains.
 - **Restore window:** The length of your restore window plays a significant role. If you perform many data modifications daily and your restore window is set to 7 days, you will accumulate a 7-day history of those changes, which can increase your storage significantly.
 
-To mitigate this issue, consider adjusting your [restore window](/docs/introduction/point-in-time-restore#history-retention) setting. Perhaps you can do with a shorter window for instant restore, for example. Retaining less history should reduce your future storage consumption.
+To mitigate this issue, consider adjusting your [restore window](/docs/introduction/branch-restore#restore-window) setting. Perhaps you can do with a shorter window for instant restore, for example. Retaining less history should reduce your future storage consumption.
 
 Also, make sure you don't have old branches lying around. If you created a bunch of branches and let those age out of your restore window, that could also explain why your storage is so large.
 
@@ -144,7 +144,7 @@ In short, `VACUUM FULL` can help reduce your data size and future storage costs,
 
 **Recommendations**
 
-- **Set a reasonable history window** &#8212; We recommend setting your restore window period to balance your data recovery needs and storage costs. Longer history means more data recovery options, but it consumes more storage.
+- **Set a reasonable history window** &#8212; We recommend setting your restore window to balance your data recovery needs and storage costs. Longer history means more data recovery options, but it consumes more storage.
 - **Use VACUUM FULL sparingly** &#8212; Because it locks tables and can temporarily increase storage costs, only run `VACUUM FULL` when there is a significant amount of space to be reclaimed and you're prepared for a temporary spike in storage consumption.
 - **Consider timing** &#8212; Running `VACUUM FULL` near the end of the month can help minimize the time that temporary storage spikes impact your bill, since charges are prorated.
 - **Manual VACUUM for scale to zero users** — In Neon, [autovacuum](https://www.postgresql.org/docs/current/routine-vacuuming.html#AUTOVACUUM) is enabled by default. However, when your compute endpoint suspends due to inactivity, the database activity statistics that autovacuum relies on are lost. If your project uses [scale to zero](/docs/guides/scale-to-zero-guide#considerations), it’s safer to run manual `VACUUM` operations regularly on frequently updated tables rather than relying on autovacuum. This helps avoid potential issues caused by the loss of statistics when your compute endpoint is suspended.

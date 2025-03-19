@@ -217,7 +217,7 @@
             - title: About branching
               slug: introduction/branching
             - title: Branch reset and restore
-              slug: introduction/restore-window
+              slug: introduction/branch-restore
               items:
                 - title: Reset from parent
                   slug: guides/reset-from-parent

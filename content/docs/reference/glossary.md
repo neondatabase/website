@@ -63,7 +63,7 @@ A mechanism that manages the lag between the Pageserver and compute node or the 
 
 ## backup branch
 
-A branch created by a [instant restore](#point-in-time-restore) operation. When you restore a branch from a particular point in time, the current branch is saved as a backup branch.
+A branch created by a [instant restore](#branch-restore) operation. When you restore a branch from a particular point in time, the current branch is saved as a backup branch.
 
 ## branch
 
@@ -357,7 +357,7 @@ A paid Neon service plan. See [Neon plans](/docs/introduction/plans).
 
 ## Pageserver
 
-A Neon architecture component that reads WAL records from Safekeepers to identify modified pages. The Pageserver accumulates and indexes incoming WAL records in memory and writes them to disk in batches. Each batch is written to an immutable file that is never modified after creation. Using these files, the Pageserver can quickly reconstruct any version of a page dating back to the defined restore window period. Neon retains a history for all branches.
+A Neon architecture component that reads WAL records from Safekeepers to identify modified pages. The Pageserver accumulates and indexes incoming WAL records in memory and writes them to disk in batches. Each batch is written to an immutable file that is never modified after creation. Using these files, the Pageserver can quickly reconstruct any version of a page dating back to the defined restore window. Neon retains a history for all branches.
 
 The Pageserver uploads immutable files to cloud storage, which is the final, highly durable destination for data. After a file is successfully uploaded to cloud storage, the corresponding WAL records can be removed from the Safekeepers.
 
@@ -375,7 +375,7 @@ Restoration of data to a state that existed at an earlier time. Neon retains a h
 
 By default, Neon retains a history of changes for **1 day** across all plans to help avoid unexpected storage costs. You can increase the retention window to 24 hours for [Neon Free Plan](/docs/introduction/plans#free-plan) users, 7 days for [Launch](/docs/introduction/plans#launch), 14 days for [Scale](/docs/introduction/plans#scale), and 30 days for [Business](/docs/introduction/plans#business) plan users. Keep in mind that this will increase your storage usage and may lead to higher costs, especially if you have many active branches.
 
-For more information about this feature, see [Branching — Instant restore](/docs/introduction/point-in-time-restore).
+For more information about this feature, see [Branching — Instant restore](/docs/introduction/branch-restore).
 
 ## pooled connection string
 

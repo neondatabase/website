@@ -87,7 +87,7 @@ Neon supports fixed-size and autoscaling compute configurations.
 
 By default, Neon retains a history of changes for all branches in your project, enabling features like:
 
-- [Instant restore](/docs/introduction/restore-window) for recovering lost data
+- [Instant restore](/docs/introduction/branch-restore) for recovering lost data
 - [Time Travel](/docs/guides/time-travel-assist) queries for investigating data issues
 
 The default retention window is **1 day** across all plans to help avoid unexpected storage costs. If you extend this restore window, you'll expand the range of data recovery and query options, but note that this will also increase your [storage](/docs/introduction/usage-metrics#storage) usage, especially with multiple active branches.

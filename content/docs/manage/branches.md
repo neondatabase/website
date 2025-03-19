@@ -15,7 +15,7 @@ For more information about branches and how you can use them in your development
 You can create and manage branches using the Neon Console, [Neon CLI](/docs/reference/neon-cli), or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 <Admonition type="important">
-When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, which will add to your storage usage as they age out of your project's [restore window](/docs/introduction/point-in-time-restore#history-retention).
+When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, which will add to your storage usage as they age out of your project's [restore window](/docs/introduction/branch-restore#restore-window).
 </Admonition>
 
 ## Create a branch
@@ -250,7 +250,7 @@ See [Schema-only branches](/docs/guides/branching-schema-only).
 
 ### Backup branch
 
-A branch created by a [instant restore](#point-in-time-restore) operation. When you restore a branch from a particular point in time, the current branch is saved as a backup branch. Performing a restore operation on a root branch, creates a backup branch without a parent branch (a root branch). See [Branch restore](/docs/guides/branch-restore).
+A branch created by a [instant restore](#branch-restore) operation. When you restore a branch from a particular point in time, the current branch is saved as a backup branch. Performing a restore operation on a root branch, creates a backup branch without a parent branch (a root branch). See [Branch restore](/docs/guides/branch-restore).
 
 ## Branching with the Neon CLI
 

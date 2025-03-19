@@ -13,7 +13,7 @@ updatedOn: '2025-02-22T16:36:52.249Z'
 </DocsList>
 
 <DocsList title="Related resources" theme="docs">
-  <a href="/docs/introduction/restore-window">Branch reset and restore</a>
+  <a href="/docs/introduction/branch-restore">Branch reset and restore</a>
   <a href="/docs/import/migrate-from-postgres">Migrate data with pg_dump and pg_restore</a>
 </DocsList>
 
@@ -40,7 +40,7 @@ Neon offers two primary backup strategies, which you can use separately or in co
 
     ![Restore window](/docs/manage/backups_history_retention.png)
 
-    To get started, see [Branch reset and restore](/docs/introduction/restore-window).
+    To get started, see [Branch reset and restore](/docs/introduction/branch-restore).
 
 ## Backups with `pg_dump`
 
