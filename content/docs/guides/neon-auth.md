@@ -293,13 +293,13 @@ For organization-owned projects, only organization admins can manage Neon Auth s
 
 The following table shows which actions each user can perform:
 
-| Actions              | Admin | Members | Collaborator |
-| ------------------- | :---: | :-----: | :----------: |
-| Install Neon Auth   |  ✅   |   ❌    |      ❌      |
-| Remove Neon Auth    |  ✅   |   ❌    |      ❌      |
-| Transfer ownership  |  ✅   |   ❌    |      ❌      |
-| Generate SDK Keys   |  ✅   |   ❌    |      ❌      |
-| Create users        |  ✅   |   ✅    |      ✅      |
+| Actions            | Admin | Members | Collaborator |
+| ------------------ | :---: | :-----: | :----------: |
+| Install Neon Auth  |  ✅   |   ❌    |      ❌      |
+| Remove Neon Auth   |  ✅   |   ❌    |      ❌      |
+| Transfer ownership |  ✅   |   ❌    |      ❌      |
+| Generate SDK Keys  |  ✅   |   ❌    |      ❌      |
+| Create users       |  ✅   |   ✅    |      ✅      |
 
 For more information about organization roles and permissions, see [User roles and permissions](/docs/manage/organizations#user-roles-and-permissions).
 

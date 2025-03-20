@@ -23,27 +23,27 @@ Each organization is made up of three types of users:
 
 The following table shows what actions each role can perform in the organization and in organization-owned projects:
 
-| Action                                | Admin | Member | Collaborator |
-| ------------------------------------- | :---: | :----: | :----------: |
-| **Organization-wide actions**         |       |        |              |
-| [Create organization projects](/docs/manage/orgs-manage#create-and-delete-projects) |  ✅   |   ✅   |      ❌      |
-| [Invite members](/docs/manage/orgs-manage#invite-members) |  ✅   |   ❌   |      ❌      |
-| [Set permissions](/docs/manage/orgs-manage#set-permissions) |  ✅   |   ❌   |      ❌      |
-| [Manage billing](/docs/manage/orgs-manage#billing) |  ✅   |   ❌   |      ❌      |
-| [Delete organization](/docs/manage/orgs-manage#delete-an-organization) |  ✅   |   ❌   |      ❌      |
-| [Rename organization](/docs/manage/orgs-manage#rename-an-organization) |  ✅   |   ❌   |      ❌      |
+| Action                                                                                       | Admin | Member | Collaborator |
+| -------------------------------------------------------------------------------------------- | :---: | :----: | :----------: |
+| **Organization-wide actions**                                                                |       |        |              |
+| [Create organization projects](/docs/manage/orgs-manage#create-and-delete-projects)          |  ✅   |   ✅   |      ❌      |
+| [Invite members](/docs/manage/orgs-manage#invite-members)                                    |  ✅   |   ❌   |      ❌      |
+| [Set permissions](/docs/manage/orgs-manage#set-permissions)                                  |  ✅   |   ❌   |      ❌      |
+| [Manage billing](/docs/manage/orgs-manage#billing)                                           |  ✅   |   ❌   |      ❌      |
+| [Delete organization](/docs/manage/orgs-manage#delete-an-organization)                       |  ✅   |   ❌   |      ❌      |
+| [Rename organization](/docs/manage/orgs-manage#rename-an-organization)                       |  ✅   |   ❌   |      ❌      |
 | [Enable Early Access Program](/docs/introduction/roadmap#join-the-neon-early-access-program) |  ✅   |   ❌   |      ❌      |
-| **Project management actions**        |       |        |              |
-| [Manage databases](/docs/manage/databases) |  ✅   |   ✅   |      ✅      |
-| [Configure computes](/docs/manage/endpoints) |  ✅   |   ✅   |      ✅      |
-| [Manage roles](/docs/manage/users)    |  ✅   |   ✅   |      ✅      |
-| [Invite collaborators](/docs/guides/project-collaboration-guide#invite-collaborators) |  ✅   |   ✅   |      ✅      |
-| [Transfer projects](/docs/manage/orgs-project-transfer) |  ✅   |   ✅   |      ❌      |
-| [Delete project](/docs/manage/orgs-manage#create-and-delete-projects) |  ✅   |   ❌   |      ❌      |
-| **Integrations**                      |       |        |              |
-| [Configure Neon Auth](/docs/guides/neon-auth#permissions) |  ✅   |   ✅   |      ❌      |
-| [Configure Vercel](/docs/guides/vercel-overview) |  ✅   |   ✅   |      ❌      |
-| [Configure GitHub](/docs/guides/neon-github-integration) |  ✅   |   ✅   |      ❌      |
+| **Project management actions**                                                               |       |        |              |
+| [Manage databases](/docs/manage/databases)                                                   |  ✅   |   ✅   |      ✅      |
+| [Configure computes](/docs/manage/endpoints)                                                 |  ✅   |   ✅   |      ✅      |
+| [Manage roles](/docs/manage/users)                                                           |  ✅   |   ✅   |      ✅      |
+| [Invite collaborators](/docs/guides/project-collaboration-guide#invite-collaborators)        |  ✅   |   ✅   |      ✅      |
+| [Transfer projects](/docs/manage/orgs-project-transfer)                                      |  ✅   |   ✅   |      ❌      |
+| [Delete project](/docs/manage/orgs-manage#create-and-delete-projects)                        |  ✅   |   ❌   |      ❌      |
+| **Integrations**                                                                             |       |        |              |
+| [Configure Neon Auth](/docs/guides/neon-auth#permissions)                                    |  ✅   |   ✅   |      ❌      |
+| [Configure Vercel](/docs/guides/vercel-overview)                                             |  ✅   |   ✅   |      ❌      |
+| [Configure GitHub](/docs/guides/neon-github-integration)                                     |  ✅   |   ✅   |      ❌      |
 
 <Admonition type="note">
 Collaborators have the same restrictions in both organization and personal projects: they cannot delete projects or configure integrations.
