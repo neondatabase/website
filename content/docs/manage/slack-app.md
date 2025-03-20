@@ -21,7 +21,7 @@ className="border-none"
 to="https://slack.com/oauth/v2/authorize?client_id=2231113872023.8135357564067&scope=chat:write,commands,im:history,team:read&user_scope="
 target="\_blank"
 rel="noopener noreferrer"
-tag_name="Add to Slack"
+tagName="Add to Slack"
 analyticsEvent="click_add_to_slack_link">
 <img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcSet="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" />
 <span className="sr-only">Add to Slack</span>

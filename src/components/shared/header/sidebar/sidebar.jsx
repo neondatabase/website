@@ -41,7 +41,7 @@ const Sidebar = ({ isDarkTheme }) => (
       className="h-8 whitespace-nowrap px-6 text-[13px] font-semibold leading-none tracking-extra-tight transition-colors duration-200 lg:hidden"
       to={LINKS.signup}
       theme="primary"
-      tag_name="Header"
+      tagName="Header"
       analyticsEvent="header_sign_up_clicked"
     >
       Sign Up
