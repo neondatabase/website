@@ -2,7 +2,7 @@ import { PropTypes } from 'prop-types';
 
 import TopbarClient from './topbar-client';
 
-const TOPBAR_API_URL = '/api/topbar';
+const TOPBAR_API_URL = `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/api/topbar`;
 
 const Topbar = async ({ isDarkTheme }) => {
   try {
