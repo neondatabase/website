@@ -82,9 +82,9 @@ updatedOn: '2025-03-13T15:57:17.063Z'
 
 Neon pricing plans include allowances for compute, storage, and projects. For details on each plan's allowances, see [Neon Plans](/docs/introduction/plans). If you exceed these allowances on a paid plan, overage charges will apply to your monthly bill. You can track your usage on the **Billing** page in the Neon Console. For guidance, see [Monitoring Billing](/docs/introduction/monitor-usage).
 
-## Apply Neon Postgres spending to your Microsoft Azure Consumption Commitment (MACC)
+## Microsoft Azure Consumption Commitment (MACC)
 
-Neon Postgres purchases made through the Azure Marketplace now contribute towards your Microsoft Azure Consumption Commitment (MACC). This means that any spending on Neon Postgres through Azure Marketplace will help fulfill your organization's committed Azure spend.
+As an Azure Benefit Eligible partner on Azure Marketplace, Neon Postgres purchases made through the Azure Marketplace  contribute towards your Microsoft Azure Consumption Commitment (MACC). This means that any spending on Neon Postgres through Azure Marketplace will help fulfill your organization's committed Azure spend.
 
 ### How it works
 
