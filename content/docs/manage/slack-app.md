@@ -2,7 +2,7 @@
 title: Neon Slack App
 enableTableOfContents: true
 subtitle: Track your Neon projects and organizations from Slack
-updatedOn: '2025-03-07T19:33:48.344Z'
+updatedOn: '2025-03-19T12:43:23.197Z'
 ---
 
 The Neon Slack App allows you to monitor your Neon usage and manage organization membership directly from Slack. Get quick access to project information and resource usage metrics without leaving your workspace.
@@ -16,7 +16,16 @@ The Neon Slack App allows you to monitor your Neon usage and manage organization
 ## Install the Neon Slack App
 
 Click the **Add to Slack** button and follow the prompts.
-<a target="_blank" href="https://slack.com/oauth/v2/authorize?client_id=2231113872023.8135357564067&scope=chat:write,commands,im:history,team:read&user_scope="><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcSet="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>
+<Button
+className="border-none"
+to="https://slack.com/oauth/v2/authorize?client_id=2231113872023.8135357564067&scope=chat:write,commands,im:history,team:read&user_scope="
+target="\_blank"
+rel="noopener noreferrer"
+tag_name="Add to Slack"
+analyticsEvent="click_add_to_slack_link">
+<img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcSet="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" />
+<span className="sr-only">Add to Slack</span>
+</Button>
 
 ## Authenticate with Neon
 

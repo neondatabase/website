@@ -30,6 +30,7 @@ import UseCaseList from 'components/pages/use-case/use-case-list';
 import DeployPostgresButton from 'components/shared//deploy-postgres-button';
 import Admonition from 'components/shared/admonition';
 import AnchorHeading from 'components/shared/anchor-heading';
+import Button from 'components/shared/button';
 import CodeBlock from 'components/shared/code-block';
 import ComputeCalculator from 'components/shared/compute-calculator';
 import CtaBlock from 'components/shared/cta-block';
@@ -158,6 +159,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
       />
     );
   },
+  Button,
   YoutubeIframe,
   DefinitionList,
   Admonition,
