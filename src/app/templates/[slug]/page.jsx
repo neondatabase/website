@@ -146,7 +146,7 @@ const TemplatePage = ({ params }) => {
             </div>
             <Image
               className="mt-12 lg:mt-10"
-              src={`https://neon.tech/docs/og?title=${btoa(name)}&breadcrumb=${btoa('Templates')}`}
+              src={`/docs/og?title=${btoa(name)}&breadcrumb=${btoa('Templates')}`}
               alt={`Thumbnail - ${name}`}
               width={512}
               height={288}
