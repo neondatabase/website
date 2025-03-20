@@ -14,7 +14,7 @@ const DiscordLink = ({ isDarkTheme }) => (
     className={`flex items-center gap-x-1.5 text-[13px] leading-none tracking-extra-tight transition-colors duration-200 ${
       isDarkTheme
         ? 'text-white hover:text-green-45'
-        : 'text-gray-new-8 hover:text-green-45 dark:text-white dark:hover:text-green-45'
+        : 'text-gray-new-40 hover:text-green-45 dark:text-white dark:hover:text-green-45'
     }`}
     to={LINKS.discord}
     target="_blank"
