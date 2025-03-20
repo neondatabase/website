@@ -25,7 +25,7 @@ export async function GET() {
     const data = await graphQLClient.request(topbarQuery);
     const topbarData = data?.globalFields?.globalFields?.topbar || { text: '', link: null };
     const response = NextResponse.json(topbarData, { status: 200 });
-    response.revalidate = 3600; // Revalidate every 1 hour
+    response.revalidate = 60; // Revalidate every 1 min
     return response;
   } catch (error) {
     // eslint-disable-next-line no-console
