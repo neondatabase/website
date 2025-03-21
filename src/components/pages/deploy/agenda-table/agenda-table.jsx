@@ -24,9 +24,9 @@ const AgendaTable = () => {
           <table className="w-full lg:min-w-[680px] sm:min-w-fit">
             <thead className="border-b border-gray-new-15 text-left text-sm font-medium leading-none text-gray-new-60 sm:hidden">
               <tr>
-                <th className="pb-5 pr-4 tracking-[0.02em]">Speaker</th>
-                <th className="pb-5 pr-4 tracking-[0.02em]">Talk</th>
-                {/* <th className="pb-5 tracking-[0.02em]">Schedule (PT)</th> */}
+                <th className="pb-5 pr-4 -tracking-extra-tight">Speaker</th>
+                <th className="pb-5 pr-4 -tracking-extra-tight">Talk</th>
+                {/* <th className="pb-5 -tracking-extra-tight">Schedule (PT)</th> */}
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-new-15 border-b border-t border-gray-new-15 text-lg leading-dense md:text-base">

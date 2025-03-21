@@ -2,7 +2,7 @@
 title: Troubleshooting Neon RLS
 subtitle: Common issues and solutions when using Neon RLS
 enableTableOfContents: true
-updatedOn: '2025-03-06T15:24:01.904Z'
+updatedOn: '2025-03-10T18:26:02.771Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-troubleshooting
   - /docs/guides/neon-authorize-troubleshooting
@@ -30,7 +30,7 @@ This issue typically occurs when:
 
 1. **JWKS URL not configured or incorrect**
 
-   You did not add the JWKS URL in the RLS Authorize settings, or the configured JWKS URL is not returning the key associated with the `kid` field in your JWT.
+   You did not add the JWKS URL in the RLS settings, or the configured JWKS URL is not returning the key associated with the `kid` field in your JWT.
 
 2. **JWT and JWKS mismatch**
 

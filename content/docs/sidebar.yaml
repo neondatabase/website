@@ -420,6 +420,8 @@
           slug: introduction/billing-aws-marketplace
         - title: Azure Marketplace
           slug: introduction/billing-azure-marketplace
+        - title: Enterprise sales process
+          slug: introduction/enterprise-sales-process
     - title: Neon on Azure
       slug: manage/azure
       icon: azure
@@ -748,6 +750,8 @@
               slug: ai/llamaindex
             - title: Inngest
               slug: ai/inngest
+            - title: Semantic Kernel
+              slug: ai/semantic-kernel  
         - title: Prepare your AI app for production
           slug: ai/ai-vector-search-optimization
           items:
@@ -795,8 +799,6 @@
           slug: reference/cli-connection-string
         - title: set-context
           slug: reference/cli-set-context
-        - title: create-app
-          slug: reference/cli-create-app
         - title: completion
           slug: reference/cli-completion
     - title: SDKs
@@ -908,6 +910,9 @@
               slug: extensions/pg_stat_statements
             - title: pg_repack
               slug: extensions/pg_repack
+            - title: pg_search
+              slug: extensions/pg_search
+              tag: new
             - title: pg_tiktoken
               slug: extensions/pg_tiktoken
             - title: pg_trgm

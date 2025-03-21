@@ -38,7 +38,7 @@ const SplitViewGrid = ({
           {isGradientLabel ? (
             <GradientLabel>{label}</GradientLabel>
           ) : (
-            <span className="inline-block rounded-[40px] bg-green-45/10 px-3.5 py-2 text-xs font-semibold uppercase leading-none tracking-[0.02em] text-green-45">
+            <span className="inline-block rounded-[40px] bg-green-45/10 px-3.5 py-2 text-xs font-semibold uppercase leading-none -tracking-extra-tight text-green-45">
               {label}
             </span>
           )}
@@ -92,7 +92,7 @@ const SplitViewGrid = ({
               />
               <div className="flex flex-col">
                 <h3
-                  className={clsx('font-title font-medium leading-tight tracking-[-0.02em]', {
+                  className={clsx('font-title font-medium leading-tight tracking-extra-tight', {
                     'text-[22px] xl:text-xl': size === 'md',
                     'text-lg': size === 'sm',
                   })}

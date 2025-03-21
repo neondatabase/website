@@ -138,7 +138,7 @@ const SubscribeForm = ({ className = null, size = 'md', dataTest }) => {
                 <h2 className="font-title text-4xl font-medium leading-none tracking-tighter xl:text-[32px] sm:text-[28px]">
                   Subscribe to <mark className="bg-transparent text-green-45">Neon’s News</mark>
                 </h2>
-                <p className="mt-4 text-lg leading-none tracking-[-0.02em] text-gray-new-80 xl:mt-2 xl:text-base xl:leading-tight sm:mx-auto sm:mt-2.5 sm:max-w-[300px]">
+                <p className="mt-4 text-lg leading-none tracking-extra-tight text-gray-new-80 xl:mt-2 xl:text-base xl:leading-tight sm:mx-auto sm:mt-2.5 sm:max-w-[300px]">
                   Get insider access to Neon's latest news and events
                 </p>
               </>
@@ -245,7 +245,7 @@ const SubscribeForm = ({ className = null, size = 'md', dataTest }) => {
               {formState === STATES.ERROR && errorMessage && (
                 <span
                   className={clsx(
-                    'absolute left-7 top-full text-sm leading-none tracking-[-0.02em] text-secondary-1 sm:text-xs sm:leading-tight',
+                    'absolute left-7 top-full text-sm leading-none tracking-extra-tight text-secondary-1 sm:text-xs sm:leading-tight',
                     size === 'sm' ? 'mt-1.5' : 'mt-2.5'
                   )}
                   data-test="error-message"

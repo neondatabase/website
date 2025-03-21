@@ -3,7 +3,7 @@ title: Secure your data with AWS Cognito and Neon RLS
 subtitle: Implement Row-level Security policies in Postgres using AWS Cognito and Neon
   RLS
 enableTableOfContents: true
-updatedOn: '2025-03-06T15:24:01.897Z'
+updatedOn: '2025-03-10T18:26:02.763Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-aws-cognito
   - /docs/guides/neon-authorize-aws-cognito
@@ -59,13 +59,13 @@ https://cognito-idp.us-east-1.amazonaws.com/us-east-1_XXXXXXXXX/.well-known/jwks
 
 ### 2. Add AWS Cognito as an authorization provider in the Neon Console
 
-Once you have the JWKS URL, go to the **Neon Console**, navigate to **Settings** > **RLS Authorize**, and add AWS Cognito as an authentication provider. Paste your copied URL and AWS Cognito will be automatically recognized and selected.
+Once you have the JWKS URL, go to the **Neon Console**, navigate to **Settings** > **RLS**, and add AWS Cognito as an authentication provider. Paste your copied URL and AWS Cognito will be automatically recognized and selected.
 
 <div style={{ display: 'flex', justifyContent: 'center'}}>
   <img src="/docs/guides/aws_cognito_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
 </div>
 
-At this point, you can use the **Get Started** setup steps from RLS Authorize in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
+At this point, you can use the **Get Started** setup steps from RLS in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
 
 ### 3. Install the pg_session_jwt extension in your database
 

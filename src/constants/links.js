@@ -19,15 +19,16 @@ export default {
   guides: '/guides',
   partners: '/partners',
   awsIsrael: '/partners/aws-israel',
+  migrationAssistance: '/migration-assistance',
   postgresqltutorial: '/postgresql/tutorial',
   pricing: '/pricing',
   scalableArchitecture: '/scalable-architecture',
   scaleTrial: '/scale-trial',
+  security: '/security',
   stage: '/stage',
   templates: '/templates',
   thankYou: '/thank-you',
   useCases: '/use-cases',
-  migrationAssistance: '/migration-assistance',
   // Docs
   docs: '/docs',
   docsHome: '/docs/introduction',
@@ -44,7 +45,6 @@ export default {
   docsBranching: '/docs/introduction/branching',
   migration: '/docs/import/import-data-assistant',
   rlsAuthorize: '/docs/guides/neon-rls-authorize',
-  security: '/docs/security/security-overview',
   serverless: '/docs/introduction/serverless',
   support: '/docs/introduction/support',
   variableTraffic: '/docs/use-cases/variable-traffic',
@@ -58,6 +58,9 @@ export default {
   cookiePolicy: '/cookie-policy',
   subprocessors: '/subprocessors',
   businessInformation: '/business-info',
+  sensitiveDataTerms: '/sensitive-data-terms',
+  hipaaCompliance: '/hipaa-compliance-guide',
+  hipaaContractors: '/hipaa-contractors',
   // Console
   console: 'https://console.neon.tech',
   login: 'https://console.neon.tech/login',
@@ -70,6 +73,11 @@ export default {
   linkedin: 'https://www.linkedin.com/company/neon-inc/',
   twitter: 'https://twitter.com/neondatabase/',
   youtube: 'https://www.youtube.com/channel/UCoMzQTJSIr7-RU1QbomQI2w',
+  // Copilot
+  githubCopilot: 'https://github.com/marketplace/neon-database',
+  discordCopilot: 'https://discord.com/channels/1176467419317940276/1222626436502782013',
+  vscodeCopilot:
+    'https://marketplace.visualstudio.com/items?itemName=buildwithlayer.neon-integration-expert-15j6N',
   // Compliance
   trust: 'https://trust.neon.tech',
   certCCPA: 'https://trust.neon.tech/?itemUid=4064ac33-7b48-407b-aed7-ce02971d1ec1',
@@ -80,4 +88,5 @@ export default {
   certHIPAA: 'https://trust.neon.tech/?itemUid=aec41c33-0f3a-4030-ac59-49adfd4a975b',
   // Other
   apiReference: 'https://api-docs.neon.tech/reference/getting-started-with-neon-api',
+  bugBounty: 'https://hackerone.com/neon_bbp',
 };

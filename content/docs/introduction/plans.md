@@ -11,7 +11,7 @@ redirectFrom:
   - /docs/introduction/pro-plan
   - /docs/introduction/custom-plan
   - /docs/reference/technical-preview-free-tier
-updatedOn: '2024-12-13T15:57:03.740Z'
+updatedOn: '2025-03-13T20:13:21.746Z'
 ---
 
 Neon's plans are designed to meet different user requirements, ranging from hobby projects to enterprise-level production workloads. We also offer custom enterprise plans with volume-based discounts for large teams or database fleets. Refer to our [Pricing](https://neon.tech/pricing) page for fees and a detailed plan comparison.
@@ -195,6 +195,7 @@ Business plan users have access to [extra compute, storage, and projects](/docs/
 - Enhanced security features including SOC 2 compliance, branch protection, and allowed IP configurations
 - [Priority support](/docs/introduction/support)
 - [Service SLA of 99.95% uptime](https://neon.tech/neon-business-sla)
+- HIPAA Compliance (separately billed add-on)
 
 For a complete list of features and comparisons with other plans, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
 
@@ -218,6 +219,7 @@ Additionally, the _Enterprise_ plan can be tailored to your specific requirement
 - Custom pricing with discounts
 - Higher resource allowances for projects, branches, storage, archive storage, and compute
 - Scale to zero
+- HIPAA Compliance (separately billed add-on)
 
 Enterprise plan users have access to **Enterprise** support, which includes everything offered with the **Priority** plan plus Enterprise-level SLAs. For more information, Neon support plans are outlined on our [Support](/docs/introduction/support) page.
 

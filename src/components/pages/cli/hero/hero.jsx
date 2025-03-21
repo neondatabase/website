@@ -17,7 +17,7 @@ const Hero = () => (
         The Neon CLI brings serverless Postgres to the command line.
       </p>
       <AnimatedButton
-        className="relative mt-9 px-8 py-[17px] text-lg font-semibold tracking-[-0.02em] lg:mt-7 md:mt-6"
+        className="relative mt-9 px-8 py-[17px] text-lg font-semibold tracking-extra-tight lg:mt-7 md:mt-6"
         theme="primary"
         to={LINKS.cliReference}
         linesOffsetTop={22}
