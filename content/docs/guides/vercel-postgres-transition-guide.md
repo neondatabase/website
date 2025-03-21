@@ -71,14 +71,14 @@ Additional use (called "Extra usage" in Neon) for a fee was not available on the
 
 When Vercel Postgres was available on the Vercel's Pro Plan, it was tailored for professional developers, freelancers, and small businesses. In Neon, the equivalent plan is our [Launch Plan](/docs/introduction/plans#launch-plan) at $19 per month. The following table provides a comparison:
 
-| **Resource**                     | **Vercel Pro (Included)** | **Neon Launch Plan (Included)**  |
-| :------------------------------- | :------------------------ | :------------------------------- |
-| **Compute hours**                | 100                       | 300                              |
-| **Data transfer**                | 256 MB                    | Reasonable usage (no hard limit) |
-| **Databases**                    | First database            | 100                              |
-| **Branches**                     | Not available             | 5000                             |
-| **Storage**                      | First 256 MB              | Up to 10 GB                      |
-| **Point-in-time restore (PITR)** | Not available             | Up to 7 days                     |
+| **Resource**        | **Vercel Pro (Included)** | **Neon Launch Plan (Included)**  |
+| :------------------ | :------------------------ | :------------------------------- |
+| **Compute hours**   | 100                       | 300                              |
+| **Data transfer**   | 256 MB                    | Reasonable usage (no hard limit) |
+| **Databases**       | First database            | 100                              |
+| **Branches**        | Not available             | 5000                             |
+| **Storage**         | First 256 MB              | Up to 10 GB                      |
+| **Instant restore** | Not available             | Up to 7 days                     |
 
 The Vercel Pro plan offered additional use for a fee. The Neon Launch plan also offers additional use (called "Extra usage" in Neon). In Neon, additional units of compute and storage cost more, but you get more compute and storage with your plan's monthly fee, and there's no charge for data transfer, additional databases, or written data.
 
@@ -92,7 +92,7 @@ The Vercel Pro plan offered additional use for a fee. The Neon Launch plan also 
 Neon also offers [Scale](/docs/introduction/plans#scale-plan) and [Business](/docs/introduction/plans#business-plan) plans, which include more storage, compute hours, projects, and features. Be sure to take a look at these plans if the Launch plan does not meet your requirements.
 
 <Admonition type="note" title="Upgrading to a Neon plan">
-To upgrade to a Neon plan to take advantage of additional features like branching and point-in-time restore (PITR) and higher plan allowances, see [Changing your plan](/docs/guides/vercel-native-integration#changing-your-plan).
+To upgrade to a Neon plan to take advantage of additional features like branching and instant restore and higher plan allowances, see [Changing your plan](/docs/guides/vercel-native-integration#changing-your-plan).
 </Admonition>
 
 ### What about Enterprise customers?
@@ -106,7 +106,7 @@ Neon is working with the Vercel team to transition Enterprise customers. If you 
 After moving to a Neon plan, you will be able to access a variety of advanced Neon features that were not available in Vercel Postgres (subject to your plan limits).
 
 <Admonition type="note">
-If you were a Vercel Postgres user on the Vercel Pro Plan, you remain subject to the limits of that [plan](#vercel-pro-plan-vs-neon-launch-plan) until you move to a Neon Plan. There's no requirement for you to move to a Neon plan, but doing so provides access to higher limits and additional features. For example, the the Vercel plan does not support branching or point-in-time restore. For a full overview of Neon plans, features, and limits, refer to our [Pricing](https://neon.tech/pricing) page. If you change to a Neon plan, you will still be billed through Vercel.
+If you were a Vercel Postgres user on the Vercel Pro Plan, you remain subject to the limits of that [plan](#vercel-pro-plan-vs-neon-launch-plan) until you move to a Neon Plan. There's no requirement for you to move to a Neon plan, but doing so provides access to higher limits and additional features. For example, the the Vercel plan does not support branching or instant restore. For a full overview of Neon plans, features, and limits, refer to our [Pricing](https://neon.tech/pricing) page. If you change to a Neon plan, you will still be billed through Vercel.
 </Admonition>
 
 Neon features:
@@ -115,7 +115,7 @@ Neon features:
 - [Database branching](/docs/guides/branching-intro) &#8212; branch your database like code for development, testing, and database workflows
 - [Autoscaling](/docs/introduction/autoscaling) &#8212; scale your database automatically for performance and cost savings
 - [Scale to Zero](/docs/introduction/scale-to-zero) &#8212; configure scale-to-zero behavior
-- [Branch Restore](/docs/guides/branch-restore) &#8212; instant point-in-time restore
+- [Branch Restore](/docs/guides/branch-restore) &#8212; instant restore
 - [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) &#8212; Neon projects, roles, databases and more via API calls
 - [Neon CLI](/docs/reference/neon-cli) &#8212; manage your Neon projects, roles, databases and more from the command-line
 - [IP Allow](/docs/introduction/ip-allow) &#8212; limit access to the IP addresses you trust
@@ -136,7 +136,7 @@ The transition to Neon also unblocks several limitations:
 - **Terraform support**. The [Vercel Terraform Provider](https://vercel.com/guides/integrating-terraform-with-vercel) did not support Vercel Postgres. With Neon Postgres, you have access to a [Neon Terraform provider](/docs/reference/terraform).
 - **Larger computes**. On Vercel, databases on Hobby plans are limited to 0.25 logical CPUs. The Neon Free plan supports computes up to 2 vCPUs and [Autoscaling](/docs/introduction/autoscaling). Neon paid plans support much larger compute sizes.
 - **Postgres roles**. On Vercel, you were limited to a single Postgres database access role. There is no such limit on Neon. You can create additional Postgres roles as needed.
-- **Point-in-time restore**. In Vercel Postgres, Neon's history retention is set to 0, which means point-in-time restore is not possible. Once you are on a Neon plan (free or paid), the default setting is 1 day, and you can configure longer periods on Neon's paid plans. **Please note that if you have not moved to a Neon plan, you will not have access Neon's point-in-time restore feature**.
+- **Instant restore**. In Vercel Postgres, Neon's restore window is set to 0, which means instant restore is not possible. Once you are on a Neon plan (free or paid), the default setting is 1 day, and you can configure longer periods on Neon's paid plans. **Please note that if you have not moved to a Neon plan, you will not have access Neon's instant restore feature**.
 
 ### What Postgres versions are supported?
 

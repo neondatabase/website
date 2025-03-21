@@ -175,7 +175,7 @@ Neon projects created using the CLI use the default Postgres version, which is P
         "branch_logical_size_limit_bytes": 214748364800,
         "store_passwords": true,
         "creation_source": "neonctl",
-        "history_retention_seconds": 604800,
+        "history_retention_seconds": 604800, // Controls the restore window in seconds
         "created_at": "2023-08-04T16:16:45Z",
         "updated_at": "2023-08-04T16:16:45Z",
         "consumption_period_start": "0001-01-01T00:00:00Z",
