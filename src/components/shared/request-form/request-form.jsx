@@ -15,6 +15,7 @@ import Button from 'components/shared/button';
 import CheckIcon from 'icons/check.inline.svg';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import { emailRegexp } from 'utils/forms';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 import DATA from './data';
 
@@ -68,9 +69,9 @@ const RequestForm = ({ type }) => {
           eventData[eventProps.id] = selected.id;
         }
         if (!isRecognized && email) {
-          window.zaraz.track('identify', { email });
+          sendGtagEvent('identify', { email });
         }
-        window.zaraz.track(eventName, eventData);
+        sendGtagEvent(eventName, eventData);
       }
       setIsSent(true);
     }
