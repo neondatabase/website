@@ -52,7 +52,7 @@ export async function GET(request) {
             width: '100%',
             display: 'flex',
             flexDirection: 'column',
-            padding: '44px 56px 84px',
+            padding: '44px 56px 76px',
           }}
         >
           <img
@@ -61,7 +61,7 @@ export async function GET(request) {
             src={backgroundData}
             style={{ position: 'absolute', top: 0, left: 0 }}
           />
-          {hasLogo && <img width="229" height="64" src={logoData} />}
+          {hasLogo && <img width="235" height="64" src={logoData} />}
           <div
             style={{
               display: 'flex',
@@ -76,8 +76,8 @@ export async function GET(request) {
                 fontStyle: 'normal',
                 fontSize: 28,
                 lineHeight: 1,
-                marginBottom: 18,
-                letterSpacing: '0.05em',
+                marginBottom: 24,
+                letterSpacing: '0.02em',
                 color: '#797D86',
                 whiteSpace: 'pre-wrap',
               }}
@@ -92,13 +92,13 @@ export async function GET(request) {
                 textOverflow: 'ellipsis',
                 WebkitBoxOrient: 'vertical',
                 WebkitLineClamp: 3,
-                marginTop: 10,
                 fontFamily: 'ESBuild',
                 fontStyle: 'normal',
                 fontWeight: 500,
                 fontSize: 88,
                 lineHeight: 1,
-                letterSpacing: '-0.04em',
+                paddingBottom: 10,
+                letterSpacing: '-0.03em',
                 color: 'white',
               }}
             >
