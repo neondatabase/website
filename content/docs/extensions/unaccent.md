@@ -25,8 +25,6 @@ CREATE EXTENSION IF NOT EXISTS unaccent;
 
 Please refer to the [list of all extensions](/docs/extensions/pg-extensions) available in Neon for up-to-date extension version information.
 
-The current version of the `unaccent` extension in Neon is `1.1`.
-
 ## Removing accents with `unaccent()`
 
 The primary function provided by the `unaccent` extension is `unaccent()`. This function takes a text input and returns the same text with accents removed.
@@ -56,7 +54,7 @@ As you can see, `unaccent()` effectively strips the diacritics, transforming wor
 
 `unaccent` is most commonly used to enhance text searching, making it more forgiving and user-friendly. Let's explore some typical use cases:
 
-### Basic Accent-Insensitive searching
+### Basic accent-insensitive searching
 
 Imagine you have a product catalog and want users to be able to search for products regardless of whether they use accents or not. For instance, a user might search for "cafe" or "café" and expect to find products containing "café".
 
@@ -110,7 +108,7 @@ id | name
  2 | café
  ```
 
-### Case-Insensitive and Accent-Insensitive searching with `ILIKE`
+### Case-insensitive and accent-insensitive searching with `ILIKE`
 
 For even more flexible searching, you can combine `unaccent()` with the [`ILIKE`](/postgresql/postgresql-tutorial/postgresql-like#postgresql-extensions-of-the-like-operator) operator for case-insensitive and accent-insensitive searches.  This is particularly useful for free-text search scenarios.
 
@@ -177,7 +175,7 @@ SELECT * FROM products WHERE f_unaccent(name) = f_unaccent('cafe');
 -- This query can now use the 'idx_products_name_unaccent' index
 ```
 
-**Alternative: Generated Columns**
+**Alternative: Generated columns**
 
 Another strategy for optimizing performance is to use generated columns. You can add a new column to your table that stores the unaccented version of your text data. This column can then be indexed directly and queried efficiently.
 
@@ -197,7 +195,7 @@ Generated columns add storage overhead but can offer performance benefits for re
 
 While `unaccent` is very useful, it's important to be aware of its limitations:
 
-- **Rule-Based:** `unaccent` operates based on a predefined set of rules defined in its configuration file (`unaccent.rules`). The effectiveness of accent removal depends on the completeness and accuracy of these rules for your target languages.
+- **Rule-based:** `unaccent` operates based on a predefined set of rules defined in its configuration file (`unaccent.rules`). The effectiveness of accent removal depends on the completeness and accuracy of these rules for your target languages.
 - **Language specificity:** The default rules are primarily geared towards European languages. For languages with different diacritic systems or complex character transformations, the default rules might not be sufficient, and customization of the `unaccent.rules` file might be required.
 - **No contextual understanding:** `unaccent` performs a character-by-character transformation based on its rules. It does not understand the context or meaning of words. In some cases, this might lead to over-simplification or loss of subtle distinctions in meaning that accents might convey in certain languages.
 

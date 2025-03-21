@@ -5,11 +5,11 @@ enableTableOfContents: true
 updatedOn: '2025-03-17T00:00:00.000Z'
 ---
 
-The `pgcrypto` extension offers a range of cryptographic functions within Postgres. These functions enable encryption, decryption and hashing operations through standard SQL queries. This can reduce reliance on external cryptographic tools for data security tasks in a Postgres environment.
+The `pgcrypto` extension offers a range of cryptographic functions within Postgres. These functions enable encryption, decryption, and hashing operations through standard SQL queries. This can reduce reliance on external cryptographic tools for data security tasks in a Postgres environment.
 
 <CTA />
 
-This guide provides an introduction to the `pgcrypto` extension. You'll learn how to enable the extension on Neon, utilize its core cryptographic functions, understand practical applications for data security, manage security considerations and best practices.
+In this guide, you'll learn how to enable the `pgcrypto` extension on Neon, use its core cryptographic functions, explore practical applications for data security, and follow best practices for managing security considerations.
 
 ## Enable the `pgcrypto` extension
 
@@ -23,13 +23,11 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
 Please refer to the [list of all extensions](/docs/extensions/pg-extensions) available in Neon for up-to-date extension version information.
 
-The current version of the `pgcrypto` extension in Neon is `1.3`.
-
-## Cryptographic Functions
+## Cryptographic functions
 
 The `pgcrypto` extension provides a wide range of cryptographic functions that can be used directly within SQL queries. These functions can be broadly categorized into the following groups:
 
-### General Hashing Functions
+### General hashing functions
 
 `pgcrypto` provides functions for generating one-way hashes, crucial for verifying data integrity and securely comparing data without revealing the original content.
 
@@ -51,7 +49,7 @@ The `pgcrypto` extension provides a wide range of cryptographic functions that c
   -- \x261415730795bccaedb60061af12bf8fdb0833b4bad7735214dc78789e233257 (binary output)
   ```
 
-### Password Hashing Functions
+### Password hashing functions
 
 `pgcrypto` includes specialized functions designed for securely hashing passwords, essential for protecting user credentials.
 
@@ -75,7 +73,7 @@ The `pgcrypto` extension provides a wide range of cryptographic functions that c
   -- $2a$10$nnHUvyZckh1VBh5zWNEFKO (example output)
   ```
 
-### PGP Encryption Functions
+### PGP encryption functions
 
 For general-purpose encryption needs, `pgcrypto` implements the encryption part of the OpenPGP standard, providing functions for both symmetric-key and public-key encryption.
 
@@ -116,7 +114,7 @@ For general-purpose encryption needs, `pgcrypto` implements the encryption part 
   -- Secret Message (plaintext output)
   ```
 
-### Random Data Functions
+### Random data functions
 
 `pgcrypto` provides functions for generating cryptographically secure random data, essential for various security operations.
 
@@ -138,15 +136,15 @@ For general-purpose encryption needs, `pgcrypto` implements the encryption part 
   -- 90d18ac7-4af7-458d-8f7a-a7211b5d3eee (example output)
   ```
 
-## Practical Applications
+## Practical applications
 
 `pgcrypto` offers a wide range of practical applications for enhancing data security within your Postgres environment:
 
-- **Secure Password Storage**:  Use `crypt()` and `gen_salt()` to securely store user passwords as hashes, protecting them from exposure in case of a data breach.
-- **Data encryption at Rest (Column-Level)**: Employ `pgp_sym_encrypt()` or `pgp_pub_encrypt()` to encrypt sensitive data columns within your tables, ensuring data confidentiality even if the database is compromised.
+- **Secure password storage**:  Use `crypt()` and `gen_salt()` to securely store user passwords as hashes, protecting them from exposure in case of a data breach.
+- **Data encryption at rest (Column-Level)**: Employ `pgp_sym_encrypt()` or `pgp_pub_encrypt()` to encrypt sensitive data columns within your tables, ensuring data confidentiality even if the database is compromised.
 - **Data anonymization**: Leverage encryption functions to pseudonymize or anonymize sensitive data for non-production environments or for compliance purposes.
 
-## Example: Secure Password Storage
+## Example: Secure password storage
 
 Let's walk through a practical example of using `pgcrypto` to securely store and verify user passwords in a Postgres database.
 
@@ -227,6 +225,6 @@ The `pgcrypto` extension is a powerful and versatile tool for enhancing data sec
 
 ## Resources
 
-- [`pgcrypto` extension in PostgreSQL Documentation](https://www.postgresql.org/docs/current/pgcrypto.html)
+- [`pgcrypto` extension in the PostgreSQL Documentation](https://www.postgresql.org/docs/current/pgcrypto.html)
 
 <NeedHelp />
