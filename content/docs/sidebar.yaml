@@ -893,6 +893,9 @@
               slug: extensions/neon
             - title: neon_utils
               slug: extensions/neon-utils
+            - title: pgcrypto
+              slug: extensions/pgcrypto
+              tag: new
             - title: pgvector
               slug: extensions/pgvector
             - title: pgrag
@@ -925,6 +928,12 @@
               slug: extensions/postgres_fdw
             - title: timescaledb
               slug: extensions/timescaledb
+            - title: unaccent
+              slug: extensions/unaccent
+              tag: new
+            - title: uuid-ossp
+              slug: extensions/uuid-ossp
+              tag: new
             - title: wal2json
               slug: extensions/wal2json
         - title: Functions
