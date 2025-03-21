@@ -41,7 +41,7 @@ const Item = ({
     <li className="group/item flex flex-col">
       <LinkTag
         className={clsx(
-          'group flex w-full items-center gap-2 py-1.5 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200 md:py-[7px]',
+          'group flex w-full gap-2 py-1.5 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200 md:py-[7px]',
           currentSlug === slug
             ? 'font-medium text-black-new dark:text-white'
             : 'font-normal text-gray-new-40 hover:text-black-new dark:text-gray-new-80 dark:hover:text-white'
@@ -53,13 +53,11 @@ const Item = ({
         onClick={handleClick}
       >
         {ariaLabel && <span className="sr-only">{ariaLabel}</span>}
-        {icon && <Icon title={icon} className="size-4.5" />}
-        <span
-          className="[&_code]:rounded-sm [&_code]:bg-gray-new-94 [&_code]:px-1.5 [&_code]:py-px [&_code]:font-mono [&_code]:font-normal [&_code]:leading-none dark:[&_code]:bg-gray-new-15"
-          aria-hidden={!!ariaLabel}
-          dangerouslySetInnerHTML={{ __html: title }}
-        />
-        {tag && <Tag className="ml-2 mt-0.5" label={tag} size="sm" />}
+        {icon && <Icon title={icon} className="size-4.5 shrink-0" />}
+        <span className="text-pretty" aria-hidden={!!ariaLabel}>
+          {title}&nbsp;
+          {tag && <Tag className="relative -top-px ml-1 inline-block" label={tag} size="sm" />}
+        </span>
       </LinkTag>
       {children}
     </li>

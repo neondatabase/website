@@ -4,14 +4,15 @@ import PropTypes from 'prop-types';
 import ChangelogList from 'components/pages/changelog/changelog-list';
 import Hero from 'components/pages/changelog/hero';
 import Breadcrumbs from 'components/pages/doc/breadcrumbs';
+import ChatOptions from 'components/pages/doc/chat-options';
 import EditOnGithub from 'components/pages/doc/edit-on-github';
 import Modal from 'components/pages/doc/modal';
+import MODALS from 'components/pages/doc/modal/data';
 import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
 import NavigationLinks from 'components/shared/navigation-links';
 import TableOfContents from 'components/shared/table-of-contents';
 import { DOCS_BASE_PATH } from 'constants/docs';
-import LINKS from 'constants/links';
 
 import Tag from '../tag';
 
@@ -26,29 +27,6 @@ Changelog.propTypes = {
   posts: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-const MODALS = [
-  {
-    type: 'migrate',
-    breadcrumb: 'Migrate to Neon',
-    title: 'Migrating to Neon?',
-    description: 'Our team can help minimize downtime.',
-    link: {
-      title: 'Get migration assistance',
-      url: LINKS.migrationAssistance,
-    },
-  },
-  {
-    type: 'support',
-    breadcrumb: 'Support',
-    title: 'Need help now?',
-    description: 'Please reach out to our Support team!',
-    link: {
-      title: 'Get support',
-      url: LINKS.consoleSupport,
-    },
-  },
-];
-
 const Post = ({
   data: { title, subtitle, enableTableOfContents = false, tag = null, updatedOn = null },
   content,
@@ -58,13 +36,16 @@ const Post = ({
   isChangelog = false,
   isUseCase = false,
   isPostgres = false,
+  isDocsIndex = false,
   changelogPosts = [],
   currentSlug,
   fileOriginPath,
   tableOfContents,
 }) => {
-  const modal = MODALS.find((modal) =>
-    breadcrumbs.some((breadcrumb) => modal.breadcrumb === breadcrumb.title)
+  const modal = MODALS.find(
+    (modal) =>
+      breadcrumbs.some((breadcrumb) => modal.pagesToShow.includes(breadcrumb.title)) ||
+      (isDocsIndex && modal.pagesToShow.includes('Neon Docs'))
   );
 
   return (
@@ -143,14 +124,17 @@ const Post = ({
           {enableTableOfContents && (
             <TableOfContents items={tableOfContents} isUseCase={isUseCase} />
           )}
-          <div
-            className={clsx(
-              enableTableOfContents &&
-                'mt-2.5 w-56 shrink-0 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70'
-            )}
-          >
-            {!isUseCase && <EditOnGithub fileOriginPath={fileOriginPath} />}
-          </div>
+          {!isUseCase && (
+            <div
+              className={
+                enableTableOfContents &&
+                'mt-2.5 shrink-0 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70'
+              }
+            >
+              <EditOnGithub fileOriginPath={fileOriginPath} />
+            </div>
+          )}
+          {isDocsIndex && <ChatOptions isSidebar />}
         </div>
       </div>
 
@@ -177,6 +161,7 @@ Post.propTypes = {
   isChangelog: PropTypes.bool,
   isUseCase: PropTypes.bool,
   isPostgres: PropTypes.bool,
+  isDocsIndex: PropTypes.bool,
   changelogPosts: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string,

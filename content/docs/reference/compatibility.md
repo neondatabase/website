@@ -4,7 +4,7 @@ subtitle: Learn about Neon as a managed Postgres service
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2025-02-28T11:10:41.828Z'
+updatedOn: '2025-03-18T15:50:56.626Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
@@ -79,7 +79,7 @@ Of the parameter settings listed above, the `max_connections`, `maintenance_work
   max_connections = max(100, min(4000, 450.5 * compute_size))
   ```
 
-  For example, if you have a fixed compute size of 4 CU, that size is be both your `max_compute_size` and `min_compute_size`. Inputting that value into the formula gives you a `max_connections` setting of 1802. For an autoscaling configuration with a `min_compute_size` of 0.25 CU and a `max_compute_size` of 2 CU, the `max_connections` setting would be 901.
+  For example, if you have a fixed compute size of 4 CU, that size is both your `max_compute_size` and `min_compute_size`. Inputting that value into the formula gives you a `max_connections` setting of 1802. For an autoscaling configuration with a `min_compute_size` of 0.25 CU and a `max_compute_size` of 2 CU, the `max_connections` setting would be 901.
 
     <Admonition type="note">
     It's important to note that `max_connections` does not scale dynamically in an autoscaling configuration. It’s a static setting determined by your minimum and maximum compute size.
