@@ -62,6 +62,27 @@ import CodeSnippet from 'components/shared/code-snippet';
 />
 ```
 
+## Usage in Markdown Files
+
+Once the CodeSnippet component is registered in the docs pipeline, you can use it directly in Markdown files:
+
+```md
+<CodeSnippet 
+  url="https://raw.githubusercontent.com/neondatabase/serverless/main/index.ts"
+  title="Neon Serverless Driver"
+/>
+```
+
+### Available Props in Markdown
+
+| Prop        | Type      | Default                         | Description                                             |
+|-------------|-----------|--------------------------------|---------------------------------------------------------|
+| url         | string    | (required)                     | URL to the raw file                                     |
+| language    | string    | ''                             | Language for syntax highlighting (defaults to file extension) |
+| title       | string    | ''                             | Optional title to display above the snippet             |
+| fallback    | string    | 'Failed to load code snippet'  | Content to display if loading fails                     |
+| showSource  | string    | 'true'                         | Whether to show a link to the source (use 'true' or 'false' as string) |
+
 ## Best Practices
 
 1. Always use raw URLs from the GitHub repository (e.g., `https://raw.githubusercontent.com/...`).
