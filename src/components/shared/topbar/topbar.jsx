@@ -2,9 +2,7 @@ import { PropTypes } from 'prop-types';
 
 import TopbarClient from './topbar-client';
 
-// TODO: Change with the prod URL once API route is deployed
-// const TOPBAR_API_URL = `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/api/topbar`;
-const TOPBAR_API_URL = 'https://neon-next-git-wp-topbar-api-neondatabase.vercel.app/api/topbar';
+const TOPBAR_API_URL = `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/api/topbar`;
 
 const Topbar = async ({ isDarkTheme }) => {
   try {
