@@ -1,5 +1,5 @@
 ---
-title: Building AI-Powered applications with Replit Agent
+title: Building AI-powered applications with Replit Agent
 subtitle: A guide to building AI applications with Replit Agent
 author: dhanush-reddy
 enableTableOfContents: true
