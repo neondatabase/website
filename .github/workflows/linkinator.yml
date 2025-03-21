@@ -6,14 +6,22 @@ on:
 
 env:
   GATSBY_DEFAULT_SITE_URL: https://neon.tech
+permissions:
+  contents: read
+
 jobs:
   linkinator:
     name: 'Checks broken links'
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
-      - uses: actions/checkout@v2
-      - uses: JustinBeckwith/linkinator-action@v1
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5 # v2.7.0
+      - uses: JustinBeckwith/linkinator-action@3d5ba091319fa7b0ac14703761eebb7d100e6f6d # v1.11.0
         with:
           paths: ${{ env.GATSBY_DEFAULT_SITE_URL }}
           concurrency: 100
