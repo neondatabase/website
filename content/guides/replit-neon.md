@@ -7,9 +7,9 @@ createdAt: '2025-03-15T00:00:00.000Z'
 updatedOn: '2025-03-15T00:00:00.000Z'
 ---
 
-[Replit Agent](https://docs.replit.com/replitai/agent) is a newly integrated, AI-powered tool within [Replit](https://replit.com) that simplifies the process of building applications. It allows you to describe the application you want to create using natural language, and the Agent helps translate your ideas into a working project. This approach is designed to make application development more accessible and efficient, particularly for those new to coding or looking to quickly test out app concepts.
+[Replit Agent](https://docs.replit.com/replitai/agent) is a newly integrated, AI-powered tool within [Replit](https://replit.com) that simplifies the process of building applications. It allows you to describe the application you want to create using natural language and translates your ideas into a working project. This approach is designed to make application development more accessible and efficient, particularly for those new to coding or looking to quickly test out app concepts.
 
-Replit Agent leverages the existing Replit platform, taking advantage of its infrastructure to provide a streamlined development experience. It integrates with Replit's online IDE, hosting features, and package management, offering an end-to-end solution within a familiar environment. This AI integration means you can bypass complex configurations and focus on describing your app's features and functionality. As you start using Replit Agent, you'll notice how tasks like database setup, code generation, and even deployment are handled automatically, freeing you to concentrate on bringing your application ideas to life. This guide will introduce you to the basics of Replit Agent by walking through a practical example by creating an AI powered MCQ Quiz generator from PDF documents.
+Replit Agent integrates with Replit's online IDE, hosting features, and package management, offering an end-to-end solution within a familiar environment. This AI integration means you can bypass complex configurations and focus on describing your app's features and functionality. As you start using Replit Agent, you'll notice how tasks like database setup, code generation, and even deployment are handled automatically, freeing you to concentrate on bringing your application ideas to life. This guide introduces you to the basics of Replit Agent by walking through a practical example of creating an AI-powered MCQ Quiz generator from PDF documents.
 
 ## Prerequisites
 
@@ -53,13 +53,14 @@ Create an AI application that generates multiple-choice questions (MCQs) from up
 ```
 
 Click "Start Building" to initiate the app creation process.
+
 ### Review and approve the agent generated plan
 
 Replit Agent will present a development plan, outlining the proposed architecture and features for your application. Carefully review this plan, which details the intended technologies, functionalities, and implementation steps.
 
 Click "Approve Plan & Start" to authorize Replit Agent to proceed with the application build process based on the outlined plan.
 
-### Watch Replit Agent in Action
+### Watch Replit Agent in action
 
 You can now observe Replit Agent as it autonomously generates the application code, creating files within the project explorer and generating code in the editor window in real-time. Agent manages both frontend and backend code generation. You can sit back and watch as the application structure takes shape 😎
 
@@ -67,13 +68,13 @@ You can now observe Replit Agent as it autonomously generates the application co
 Developing applications with AI Agents is inherently an iterative process. As you work with evolving libraries and configurations, occasional unexpected behavior is to be anticipated.  When issues occur, **refer to the video above to see a practical example of iterative debugging.**  Proactively engage Replit Agent by describing the specific problem – detail what you observed, your intended functionality, and any error messages. Replit Agent will then provide guidance and code modifications to address the issue.
 </Admonition>
 
-### Run the Initially Generated Application
+### Run the generated application
 
-Upon completion of the initial code generation phase, Replit Agent will automatically launch your application within the Replit webview. This allows you to interact with the initial MCQ Generator.
+Upon completion of the initial code generation phase, Replit Agent will automatically launch your application within the Replit webview. This allows you to interact with the initial MCQ (Multiple Choice Question) Generator.
 
-### Debugging and Iterative Refinement with Replit Agent
+### Debugging and iterative refinement with Replit Agent
 
-As said, Software development often involves debugging, and Replit Agent is designed to assist in this process. As demonstrated in the video, encountering errors is a normal part of development, and Agent can help diagnose and resolve them.
+Software development often involves debugging, and Replit Agent is designed to assist in this process. As demonstrated in the video, encountering errors is a normal part of development, and Agent can help diagnose and resolve them.
 
 Should you encounter an error, **carefully examine the error message** displayed in the Replit webview or the console. **Copy the full error message and paste it directly into the Replit Agent chat window.**
 
@@ -83,32 +84,32 @@ Replit Agent is trained to interpret error messages and suggest corrective actio
 
 Review the Agent's proposed solution and watch as it implements the necessary code modifications. This iterative process of debugging and refinement is a key aspect of developing applications with Replit Agent.
 
-### Add OpenAI API Key
+### Add OpenAI API key
 
 To enable the AI-powered MCQ generation, you must integrate your OpenAI API key into the generated application. Replit Agent will prompt you to add this key to integrate with OpenAI's `gpt-4o-mini` model.
 
     ![Replit Agent OpenAI API key prompt](/docs/guides/replit-agent-openai-key.png)
 
-### Validate MCQ Generation Functionality
+### Validate MCQ generation functionality
 
 With the OpenAI API key integrated, test the core application feature: generating MCQs from uploaded PDF documents. Upload a sample PDF file to the application and observe the MCQ generation process.
 
     ![Replit Agent Test app](/docs/guides/replit-agent-test-app.png)
 
-### Review, Verify, and Share Generated MCQs
+### Review, verify, and share generated MCQs
 
 Examine the generated MCQs, assessing their relevance, accuracy, and overall quality based on the source PDF document. Test the generated shareable link by opening it in a new browser session. This link should direct users to the generated MCQs, enabling them to review and attempt the quiz.
 
     ![Replit Agent Share Quiz](/docs/guides/replit-agent-share-quiz.png)
 
-### Database Integration
+### Database integration
 
 A quick review of the generated code will reveal that Replit Agent has defaulted to an in-memory database for simplicity. To confirm this, you can directly ask the Agent about data storage. While in-memory databases are suitable for initial development, they are not ideal for production applications where data persistence is crucial. For a production-grade application, integrating a persistent database like Postgres is essential. You can now instruct Replit Agent to switch your application's data layer to a fully managed Postgres, powered by Neon. Replit Agent will make the necessary changes to the application code to integrate the Postgres database.
 
     ![Replit Agent Database Integration](/docs/guides/replit-agent-create-database.png)
 
 
-### Deploying your application to Production
+### Deploying your application to production
 
 After iteratively refining and testing your AI MCQ Generator application, you're ready to deploy it to a production environment. Replit simplifies the deployment process, enabling you to host your application online with just a few clicks.
 
@@ -122,17 +123,17 @@ Replit manages the deployment process, making your application publicly accessib
 
     ![Replit Agent Final App](/docs/guides/replit-agent-final-app.png)
 
-Your AI MCQ Generator application should now be live and accessible to users. Share the deployment link with others to showcase what you _vibe coded_ in under 20 minutes with Replit Agent
+Your AI MCQ Generator application should now be live and accessible to users. Share the deployment link with others to showcase what you _vibe coded_ in under 20 minutes with Replit Agent.
 
 ## Best practices for building applications with Replit Agent
 
 To optimize your Replit Agent development experience and build applications effectively, consider these best practices:
 
-- **Prompt Engineering:**
+- **Prompt engineering:**
     - **Improve Prompt**: Use the "Improve Prompt" feature in Replit Agent to refine the prompt and provide additional context. This helps Replit Agent better understand your requirements and generate more accurate code.
         ![Replit Agent Improve Prompt](/docs/guides/replit-agent-improve-prompt.png)
     - **Contextual prompts:** Initiate prompts with clear and comprehensive context. For example, "Modify the MCQ display to show one question at a time."
-    - **Incremental Iteration:** Decompose complex feature additions into smaller, incremental prompts for greater control and reduced complexity. For instance, when developing a multi-step form, address each form section sequentially.
+    - **Incremental iteration:** Decompose complex feature additions into smaller, incremental prompts for greater control and reduced complexity. For instance, when developing a multi-step form, address each form section sequentially.
     - **Specific feedback:** When encountering issues, provide precise and detailed feedback to Replit Agent. Include error messages, descriptions of expected vs. actual behavior, and relevant context for efficient debugging and issue resolution.
 
 - **Leveraging Replit Platform Features:**
