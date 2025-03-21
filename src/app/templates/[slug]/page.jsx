@@ -17,8 +17,10 @@ import getMetadata from 'utils/get-metadata';
 
 export async function generateMetadata({ params }) {
   const { slug } = params;
+
   const template = templates.find((template) => template.slug === slug);
   if (!template) return notFound();
+
   const { name, description } = template;
   const encodedTitle = Buffer.from(name).toString('base64');
 
@@ -26,6 +28,7 @@ export async function generateMetadata({ params }) {
     title: `${name} - Neon Templates`,
     description,
     imagePath: `${VERCEL_URL}/docs/og?title=${encodedTitle}&breadcrumb=${btoa('Templates')}`,
+    pathname: `${LINKS.templates}/${slug}`,
   });
 }
 export async function generateStaticParams() {
