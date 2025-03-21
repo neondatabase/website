@@ -43,9 +43,9 @@ The following table shows what actions each role can perform in the organization
 | **Integrations**                                                                             |       |        |              |
 | [Install GitHub integration](/docs/guides/neon-github-integration#install-the-github-app-and-connect-your-neon-project) |  ✅   |   ❌   |      ❌      |
 | [Install Neon Auth](/docs/guides/neon-auth#permissions)                                    |  ✅   |   ❌   |      ❌      |
-| [Install Vercel Previews Integration*](/docs/guides/vercel-previews-integration#how-to-install)             |  ✅   |   ❌   |      ❌      |
+| [Install the Neon Postgres Previews Integration on Vercel*](/docs/guides/vercel-previews-integration#how-to-install)             |  ✅   |   ❌   |      ❌      |
 | [Connect project to GitHub integration](/docs/guides/neon-github-integration#connect-more-neon-projects-with-the-github-app) |  ✅   |   ✅   |      ❌      |
-| [Connect Vercel project (Previews Integration)](/docs/guides/vercel-previews-integration)                |  ✅   |   ✅   |      ❌      |
+| [Connect project (Neon Postgres Previews Integration)](/docs/guides/vercel-previews-integration#how-to-install)         |  ✅   |   ✅   |      ❌      |
 
 \* The Vercel Native Integration is managed entirely in Vercel and uses Vercel's permission system (see [Vercel Team Roles](https://vercel.com/docs/rbac/access-roles/team-level-roles)). For the Previews Integration, projects must first be made available in Vercel before they can be connected to Neon.
 
