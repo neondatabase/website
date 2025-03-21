@@ -26,7 +26,7 @@ import CodeSnippet from 'components/shared/code-snippet';
 
 ## Features
 
-- **Build-time Fetching**: Files are fetched at build time for optimal performance and SEO.
+- **Build-time Fetching**: Files are fetched once at build time for optimal performance and SEO, with no automatic revalidation.
 - **Syntax Highlighting**: Automatically detects language from file extension or uses provided language prop.
 - **Error Handling**: Displays fallback content if the file cannot be fetched.
 - **Source Link**: Optionally shows a link to the original source file.

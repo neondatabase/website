@@ -17,7 +17,7 @@ const CodeSnippet = async ({
   title = '',
 }) => {
   try {
-    const response = await fetch(url, { next: { revalidate: 3600 } }); // Cache for 1 hour
+    const response = await fetch(url); // Fetch once at build time
 
     if (!response.ok) {
       throw new Error(`Failed to fetch: ${response.status} ${response.statusText}`);
