@@ -47,7 +47,7 @@ The following table shows what actions each role can perform in the organization
 | [Connect project to GitHub integration](/docs/guides/neon-github-integration#connect-more-neon-projects-with-the-github-app) |  ✅   |   ✅   |      ❌      |
 | [Connect project (Neon Postgres Previews Integration)](/docs/guides/vercel-previews-integration#how-to-install)         |  ✅   |   ✅   |      ❌      |
 
-\* The Vercel Native Integration is managed entirely in Vercel and uses Vercel's permission system (see [Vercel Team Roles](https://vercel.com/docs/rbac/access-roles/team-level-roles)). For the Previews Integration, projects must first be made available in Vercel before they can be connected to Neon.
+\* The Vercel Native Integrations are managed entirely in Vercel and use Vercel's permission system (see [Vercel Team Roles](https://vercel.com/docs/rbac/access-roles/team-level-roles)). For the Neon Postgres Previews Integration, projects must first be made available in Vercel before they can be connected to Neon.
 
 <Admonition type="note">
 Collaborators have the same restrictions in both organization and personal projects: they cannot delete projects or configure integrations.
