@@ -41,9 +41,13 @@ The following table shows what actions each role can perform in the organization
 | [Transfer projects](/docs/manage/orgs-project-transfer)                                      |  ✅   |   ✅   |      ❌      |
 | [Delete project](/docs/manage/orgs-manage#create-and-delete-projects)                        |  ✅   |   ❌   |      ❌      |
 | **Integrations**                                                                             |       |        |              |
-| [Configure Neon Auth](/docs/guides/neon-auth#permissions)                                    |  ✅   |   ✅   |      ❌      |
-| [Configure Vercel](/docs/guides/vercel-overview)                                             |  ✅   |   ✅   |      ❌      |
-| [Configure GitHub](/docs/guides/neon-github-integration)                                     |  ✅   |   ✅   |      ❌      |
+| [Install GitHub integration](/docs/guides/neon-github-integration#install-the-github-app-and-connect-your-neon-project) |  ✅   |   ❌   |      ❌      |
+| [Install Neon Auth](/docs/guides/neon-auth#permissions)                                    |  ✅   |   ❌   |      ❌      |
+| [Install Vercel Previews Integration*](/docs/guides/vercel-previews-integration#how-to-install)             |  ✅   |   ❌   |      ❌      |
+| [Connect project to GitHub integration](/docs/guides/neon-github-integration#connect-more-neon-projects-with-the-github-app) |  ✅   |   ✅   |      ❌      |
+| [Connect Vercel project (Previews Integration)](/docs/guides/vercel-previews-integration)                |  ✅   |   ✅   |      ❌      |
+
+\* The Vercel Native Integration is managed entirely in Vercel and uses Vercel's permission system (see [Vercel Team Roles](https://vercel.com/docs/rbac/access-roles/team-level-roles)). For the Previews Integration, projects must first be made available in Vercel before they can be connected to Neon.
 
 <Admonition type="note">
 Collaborators have the same restrictions in both organization and personal projects: they cannot delete projects or configure integrations.
