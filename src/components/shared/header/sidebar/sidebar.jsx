@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Button from 'components/shared/button';
@@ -11,16 +12,18 @@ const themePropTypes = {
 
 const DiscordLink = ({ isDarkTheme }) => (
   <Link
-    className={`flex items-center gap-x-1.5 text-[13px] leading-none tracking-extra-tight transition-colors duration-200 ${
+    className={clsx(
+      'transition-colors duration-200',
       isDarkTheme
         ? 'text-white hover:text-green-45'
         : 'text-gray-new-40 hover:text-green-45 dark:text-white dark:hover:text-green-45'
-    }`}
+    )}
     to={LINKS.discord}
     target="_blank"
     rel="noopener noreferrer"
   >
     <DiscordIcon width={20} height={20} />
+    <span className="sr-only">Discord</span>
   </Link>
 );
 
