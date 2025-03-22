@@ -96,7 +96,7 @@ Add the following configuration to the `mcp.json` file, replacing `<YOUR_NEON_AP
    "mcpServers": {
       "neon": {
          "command": "wsl",
-         "args": ["/c", "npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+         "args": ["npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
       }
    }
 }
