@@ -66,7 +66,7 @@ To create a role:
 7. Click **Create**. The role is created and you are provided with the password for the role.
 
 <Admonition type="note">
-Role names cannot exceed 63 characters, and some names are not permitted. See [Protected role names](#protected-role-names).
+Role names cannot exceed 63 characters, and some names are not permitted. See [Reserved role names](#reserved-role-names).
 </Admonition>
 
 ### Delete a role
@@ -135,7 +135,7 @@ POST /projects/{project_id}/branches/{branch_id}/roles
 ```
 
 <Admonition type="note">
-Role names cannot exceed 63 characters, and some role names are not permitted. See [Protected role names](#protected-role-names).
+Role names cannot exceed 63 characters, and some role names are not permitted. See [Reserved role names](#reserved-role-names).
 </Admonition>
 
 The API method appears as follows when specified in a cURL command. The `project_id` and `branch_id` are required parameters, and the role `name` is a required attribute. The length of a role name is limited to 63 bytes.
@@ -406,9 +406,9 @@ The Neon API and CLI also support creating `NOLOGIN` roles:
 - The Neon API [Create role](https://api-docs.neon.tech/reference/createprojectbranchrole) endpoint supports a `no_login` attribute.
 - The Neon CLI [`neon roles create`](/docs/reference/cli-roles#create) command supports a `--no-login` option.
 
-## Protected role names
+## Reserved role names
 
-The following names are protected and cannot be given to a role:
+The following names are reserved and cannot be given to a role:
 
 - Any name starting with `pg_`
 - `neon_superuser`
