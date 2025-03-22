@@ -12,7 +12,7 @@ This guide covers the setup for the following MCP Clients:
 
 - [Claude Desktop](#claude-desktop)
 - [Cursor](#cursor)
-- [Windsurf (Codeium)](#cline-vs-code-extension)
+- [Windsurf (Codeium)](#windsurf-codeium)
 - [Cline (VS Code extension)](#cline-vs-code-extension)
 
 By connecting these tools to the Neon MCP Server, you can manage your Neon projects, databases, and schemas using natural language commands within the MCP client interface.
@@ -24,16 +24,18 @@ Before you begin, ensure you have:
 - **Neon Account and API Key:** You need a Neon account and a Neon API key. Create an API key in your [Neon Console](https://console.neon.tech/app/settings/api-keys). See [Neon API Keys documentation](/docs/manage/api-keys#creating-api-keys) for details.
 - **Node.js (>= v18.0.0) and npm:** Ensure Node.js version 18 or later and npm are installed. Download them from [nodejs.org](https://nodejs.org).
 
+<Admonition type="note">
+Ensure you are using the latest version of your chosen MCP client as MCP integration may not be available in older versions. If you are using an older version, update your MCP client to the latest version.
+</Admonition>
+
 ## Claude Desktop
 
 1.  Open your terminal.
-2.  Run the following command:
+2.  Run the following command, replacing `YOUR_NEON_API_KEY` with your actual Neon API key:
 
     ```bash
-    npx -y @smithery/cli install neon --client claude
+    npx -y @smithery/cli install neon --client claude --config "{\"neonApiKey\":\"YOUR_NEON_API_KEY\"}"
     ```
-
-    Enter your Neon API key when prompted.
 
 3.  Restart Claude Desktop.
 
@@ -41,79 +43,67 @@ For more, see [Get started with Neon MCP server with Claude Desktop](/guides/neo
 
 ## Cursor
 
-1. Open Cursor and go to Cursor Settings. (Navbar -> Cursor Settings)
-2. Navigate to MCP Servers.
-3. Click "+ Add new MCP server".
-4. In the "Add MCP Server" modal:
-   - **Name:** `Neon` (or any descriptive name)
-   - Choose `command` for type
-   - **Command:**
-     ```bash
-     npx -y @neondatabase/mcp-server-neon start <YOUR_NEON_API_KEY>`
-     ```
-     (Replace `<YOUR_NEON_API_KEY>` with your Neon API key)
-   - Click **Add**.
+1. Open Cursor.
+2. Open your terminal.
+3. Run the following command, replacing `YOUR_NEON_API_KEY` with your actual Neon API key:
+
+   ```bash
+   npx -y @smithery/cli@latest install neon --client cursor --config "{\"neonApiKey\":\"YOUR_NEON_API_KEY\"}"
+   ```
+
+4. Restart Cursor if necessary.
+
 
 For more, see [Get started with Cursor and Neon Postgres MCP Server](/guides/cursor-mcp-neon).
 
 ## Windsurf (Codeium)
 
 1. Open your terminal.
-2. Run the following command:
+2. Run the following command, replacing `YOUR_NEON_API_KEY` with your actual Neon API key:
 
    ```bash
-   npx -y @smithery/cli install neon --client windsurf
+   npx -y @smithery/cli@latest install neon --client windsurf --config "{\"neonApiKey\":\"YOUR_NEON_API_KEY\"}"
    ```
 
-   Enter your Neon API key when prompted.
+3. Click the **Refresh** button in Windsurf Cascade to load the new MCP server.
 
-3. You can also manually configure Windsurf by editing the `mcp_config.json` file by adding the following within the `mcpServers` section at `~/.codeium/windsurf/mcp_config.json`:
-
-   ```json
-   "neon": {
-     "command": "npx",
-     "args": ["-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
-   }
-   ```
-
-   Replace `<YOUR_NEON_API_KEY>` with your Neon API key.
-
-4. Click the **Refresh** button in Cascade to load the new MCP server.
 
 For more, see [Get started with Windsurf and Neon Postgres MCP Server](/guides/windsurf-mcp-neon).
 
 ## Cline (VS Code Extension)
 
-1.  Open Cline in VS Code (Sidebar -> Cline icon).
-2.  Click "Configure MCP Servers" in the Cline panel. This opens `cline_mcp_settings.json`.
-3.  Edit `cline_mcp_settings.json`, adding the following within the `mcpServers` section and replacing `<YOUR_NEON_API_KEY>` with your Neon API Key:
+1. Open Cline in VS Code (Sidebar -> Cline icon).
+2. Open your terminal.
+3. Run the following command, replacing `YOUR_NEON_API_KEY` with your actual Neon API key:
 
-    ```json
-    "neon": {
-      "command": "npx",
-      "args": ["-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
-    }
+    ```bash
+    npx -y @smithery/cli@latest install neon --client cline --config "{\"neonApiKey\":\"YOUR_NEON_API_KEY\"}"
     ```
-
-4.  **Save `cline_mcp_settings.json`.**
 
 For more, see [Get started with Cline and Neon Postgres MCP Server](/guides/cline-mcp-neon).
 
-## Any other MCP client
+## Other MCP Clients
 
 You can connect other MCP clients to the Neon MCP Server by running the following command in your terminal:
 
 ```bash
-npx -y @smithery/cli install neon --client <client_name>
+npx -y @smithery/cli@latest install neon --client <client_name> --config "{\"neonApiKey\":\"YOUR_NEON_API_KEY\"}"
 ```
 
-Replace `<client_name>` with the name of your MCP client application. Supported client names include:
+Replace `<client_name>` with the name of your MCP client application and `YOUR_NEON_API_KEY` with your Neon API key. Supported client names include:
 
-- `roo-cline` for [Roo Cline VS Code extension](https://github.com/RooVetGit/Roo-Code)
 - `witsy` for [Witsy](https://witsyai.com/)
 - `enconvo` for [Enconvo](https://www.enconvo.com/)
 
-For MCP clients not listed here, you can manually configure them by adding the following Neon MCP Server configuration to their respective `mcp_config` file within the `mcpServers` section:
+## Manual configuration
+
+If your MCP client is not listed here or you prefer manual configuration, you can manually add the Neon MCP Server details to your client's `mcp_config` file.  The specific configuration varies slightly depending on your operating system.
+
+<Tabs labels={["MacOS/Linux", "Windows", "Windows (WSL)"]}>
+
+<TabItem>
+
+For **MacOS and Linux**, add the following JSON configuration within the `mcpServers` section of your client's `mcp_config` file, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key:
 
 ```json
 "neon": {
@@ -121,6 +111,36 @@ For MCP clients not listed here, you can manually configure them by adding the f
   "args": ["-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
 }
 ```
+
+</TabItem>
+
+<TabItem>
+
+For **Windows**, add the following JSON configuration within the `mcpServers` section of your client's `mcp_config` file, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key:
+
+```json
+"neon": {
+  "command": "cmd",
+  "args": ["/c", "npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+}
+```
+
+</TabItem>
+
+<TabItem>
+
+For **Windows Subsystem for Linux (WSL)**, add the following JSON configuration within the `mcpServers` section of your client's `mcp_config` file, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key:
+
+```json
+"neon": {
+  "command": "wsl",
+  "args": ["npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+}
+```
+
+</TabItem>
+
+</Tabs>
 
 Replace `<YOUR_NEON_API_KEY>` with your Neon API key.
 
