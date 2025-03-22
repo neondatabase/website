@@ -44,7 +44,7 @@ To create a database:
 1. Click **Create**.
 
 <Admonition type="note">
-Some names are not permitted. See [Protected database names](#protected-database-names).
+Some names are not permitted. See [Reserved database names](#reserved-database-names).
 </Admonition>
 
 ### View databases
@@ -102,7 +102,7 @@ POST /projects/{project_id}/branches/{branch_id}/databases
 ```
 
 <Admonition type="note">
-Some names are not permitted for databases. See [Protected database names](#protected-database-names).
+Some names are not permitted for databases. See [Reserved database names](#reserved-database-names).
 </Admonition>
 
 The API method appears as follows when specified in a cURL command. The `project_id` and `branch_id` are required parameters, and a database `name` and `owner` are required attributes.
@@ -347,9 +347,9 @@ As of Postgres 15, only a database owner has the `CREATE` privilege on a databas
 
 For more information about database object privileges in Postgres, see [Privileges](https://www.postgresql.org/docs/current/ddl-priv.html).
 
-## Protected database names
+## Reserved database names
 
-The following names are protected and cannot be given to a database:
+The following names are reserved and cannot be given to a database:
 
 - `postgres`
 - `template0`
