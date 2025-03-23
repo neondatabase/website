@@ -8,7 +8,7 @@ updatedOn: '2025-03-18T00:30:19.134Z'
 
 Neon supports the Postgres extensions shown in the following table. The supported version of the extension sometimes differs by Postgres version. A dash (`-`) indicates that an extension is not yet supported.
 
-**Need an extension we don't have?** 📩 [Request an extension](/docs/extensions/pg-extensions#request-extension-support)
+**Need an extension we don't have?** 📩 [Request an extension](/docs/extensions/pg-extensions#request-an-extension)
 
 <a id="default-extensions/"></a>
 
@@ -126,7 +126,7 @@ When Neon releases a new extension or new extension version, a compute restart i
 Extensions installations and updates are automatically applied to any read replica computes on the same branch as your primary compute the next time the read replica compute restarts.  
 </Admonition>
 
-## Request extension support
+## Request an extension
 
 <RequestForm type="extension" />
 
@@ -170,7 +170,7 @@ SET neon.allow_unstable_extensions = 'true';
 
 **Things to know about experimental extensions:**
 
-- **Use with caution:** We recommend trying experimental extensions in a separate project—not in the Neon project used for production.
+- **Use with caution:** We recommend trying experimental extensions in a separate project—not in the Neon project you use for production.
 - **Limited support:** Experimental extensions aren’t covered by Neon support. If an extension causes your database to fail or prevents it from starting, we’ll help you disable it if possible—but we can’t guarantee more than that.
 - **No guarantees:** An experimental extension might never become fully supported. It could require significant work from Neon or the extension’s maintainers before it’s ready for general use.
 - **Subject to change or removal:** Experimental extensions may be updated at any time, including breaking changes. They can also be removed—especially if they pose security or operational risks.
