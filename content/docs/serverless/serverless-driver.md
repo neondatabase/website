@@ -57,7 +57,7 @@ const result = await sql`SELECT * FROM table WHERE id = ${id}`;
 // For manually parameterized queries, use the query() function
 const result = await sql.query('SELECT * FROM table WHERE id = $1', [id]);
 
-// For interpolating trusted strings (like table names), use the unsafe() function
+// For interpolating trusted strings (like column or table names), use the unsafe() function
 const table = condition ? 'table1' : 'table2'; // known-safe string values
 const result = await sql`SELECT * FROM ${sql.unsafe(table)} WHERE id = ${id}`;
 
