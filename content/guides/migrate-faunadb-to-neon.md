@@ -19,7 +19,7 @@ If you have questions or require help with migrating large production datasets f
 
 ## FaunaDB vs. Neon (Postgres)
 
-Before diving into the migration process, it's crucial to understand the fundamental differences between FaunaDB and Neon (Postgres). While both are databases, they operate with distinct paradigms:
+Before diving into the migration process, it's important to understand the fundamental differences between FaunaDB and Neon (Postgres). While both are databases, they operate with distinct paradigms:
 
 | Feature          | FaunaDB                                    | Neon (Postgres)                               |
 |-------------------|---------------------------------------------|-----------------------------------------------|
@@ -305,13 +305,13 @@ CREATE INDEX idx_products_price_asc ON products(price) INCLUDE (name, descriptio
 
 Here we are adding a foreign key constraint `fk_category` to ensure that the `category_id` in the `products` table references the `id` column in the `categories` table. This constraint enforces referential integrity between the two tables.
 
-<Admonition type="tip" title="Donot want to use Raw SQL?">
+<Admonition type="tip" title="Don't want to use Raw SQL?">
 If you prefer a more programmatic approach to schema translation, you can use any Postgres library or ORM (object-relational mapping) tool in your chosen programming language. These tools can help automate the schema creation process and provide a more structured way to define your Postgres schema. Learn more on our [language guides](/docs/get-started-with-neon/languages) and [ORM guides](/docs/get-started-with-neon/orms) section.
 </Admonition>
 
 ### Step 4: Data import to Neon Postgres
 
-With your Neon Postgres database ready and your data exported from FaunaDB, the next crucial step is to import this data into your newly created tables.
+With your Neon Postgres database ready and your data exported from FaunaDB, the next step is to import this data into your newly created tables.
 
 For this guide, we'll demonstrate importing data from the `product.json` file (exported from FaunaDB) into the `products` table in Neon Postgres.
 
