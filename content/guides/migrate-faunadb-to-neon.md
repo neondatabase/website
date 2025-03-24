@@ -28,7 +28,7 @@ Before diving into the migration process, it's crucial to understand the fundame
 | **Query language**| FQL (Fauna Query Language), functional     | SQL (Structured Query Language), declarative  |
 | **Schema** | Implicit, schemaless/schema-optional, evolving | Explicit, schema-first, requires migrations    |
 | **Transactions** | ACID, stateless, HTTPS requests | ACID, stateful/Stateless, persistent TCP/HTTP/Websocket connections      |
-| **Server model** | Serverless (managed), cloud-Native          | Serverless (managed), cloud-native            |
+| **Server model** | Serverless (managed), cloud-native          | Serverless (managed), cloud-native            |
 
 
 ## Migration steps
