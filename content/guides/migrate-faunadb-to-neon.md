@@ -25,14 +25,12 @@ Before diving into the migration process, it's crucial to understand the fundame
 
 | Feature          | FaunaDB                                    | Neon (Postgres)                               |
 |-------------------|---------------------------------------------|-----------------------------------------------|
-| **Database type** | Multi-Model (Document-Relational)          | Relational (SQL)        |
+| **Database type** | Multi-model (Document-relational)          | Relational (SQL)        |
 | **Data model** | JSON documents in collections, flexible schema | Tables with rows and columns, rigid schema  |
 | **Query language**| FQL (Fauna Query Language), Functional     | SQL (Structured Query Language), Declarative  |
 | **Schema** | Implicit, Schemaless/Schema-optional, evolving | Explicit, Schema-first, Requires migrations    |
-| **Indexes** | Explicit, Application-driven, Materialized views | Implicit/Explicit, Query planner-driven, Standard indexes |
 | **Transactions** | ACID, Stateless, HTTPS requests | ACID, Stateful/Stateless, Persistent/HTTP/Websocket connections      |
 | **Server model** | Serverless (Managed), Cloud-Native          | Serverless (Managed), Cloud-Native            |
-| **Data Integrity** | Application level constraints             | Schema level constraints |
 
 
 ## Migration steps
@@ -209,9 +207,44 @@ If you need a refresher on Postgres, you can refer to our [PostgreSQL Tutorial](
 *   **Field Definitions to Columns:**  FaunaDB field definitions will guide your Neon Postgres column definitions. Pay attention to data types like `String`, `Number`, `Time`, `Ref`, and optionality (`?` for nullable).
 *   **Unique constraints:** Translate FaunaDB `unique` constraints in FSL to `UNIQUE` constraints in your Postgres `CREATE TABLE` statements.
 *   **Indexes:** Translate FaunaDB `index` definitions in FSL to `CREATE INDEX` statements in Postgres.  Consider the `terms` and `values` of FaunaDB indexes to create effective Postgres indexes.
-*   **Computed Fields/Functions/Roles:**  FaunaDB's more advanced schema features like `compute`, functions, and roles will require careful consideration for translation.  Computed fields might translate to Postgres views or computed columns. UDFs will likely need to be rewritten as stored procedures or application logic.
+*   **Computed Fields/Functions:**  FaunaDB's more advanced schema features like `compute`, functions will require careful consideration for translation.  Computed fields might translate to Postgres views or computed columns. UDFs will likely need to be rewritten as stored procedures or application logic.
 
 #### Example FSL to Postgres DDL translation
+
+Let's consider the `Category` collection from the FSL schema and translate it to a `categories` table in Neon Postgres. Here's the FSL schema for the `Category` collection:
+
+```fsl
+collection Category {
+  name: String
+  description: String
+  compute products: Set<Product> = (category => Product.byCategory(category))
+
+  unique [.name]
+
+  index byName {
+    terms [.name]
+  }
+}
+```
+
+**Neon Postgres DDL (Translated):**
+
+Here's how you can translate the `Category` collection to a `categories` table with the necessary constraints and indexes:
+
+```sql
+CREATE TABLE categories (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  description TEXT,
+  -- Constraints
+  CONSTRAINT unique_category_name UNIQUE (name)
+);
+
+-- Indexes (create indexes after data migration if possible for speeding up data import)
+CREATE INDEX idx_categories_name ON categories(name);
+```
+
+Now let's consider the `Product` collection from the FSL schema and translate it to a `products` table in Neon Postgres. Here's the FSL schema for the `Product` collection:
 
 ```fsl
 collection Product {
@@ -245,20 +278,34 @@ collection Product {
 
 **Neon Postgres DDL (Translated):**
 
+Now that you have a `categories` table created in Neon Postgres, here's how you can translate the `Product` collection to a `products` table with the necessary constraints, references and indexes:
+
 ```sql
--- Neon Postgres Table for Product
 CREATE TABLE products (
   id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   description TEXT,
   price INT NOT NULL,
-  category_id BIGINT NOT NULL,
+  category_id INT NOT NULL,
   stock INT NOT NULL,
+  -- Constraints
   CONSTRAINT unique_product_name UNIQUE (name),
   CONSTRAINT stock_valid CHECK (stock >= 0),
-  CONSTRAINT price_valid CHECK (price > 0)
+  CONSTRAINT price_valid CHECK (price > 0),
+  -- Foreign key
+  CONSTRAINT fk_category
+    FOREIGN KEY (category_id)
+    REFERENCES categories(id)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE
 );
+
+-- Indexes (create indexes after data migration if possible for speeding up data import)
+CREATE INDEX idx_products_category ON products(category_id); 
+CREATE INDEX idx_products_price_asc ON products(price) INCLUDE (name, description, stock);
 ```
+
+Here we are adding a foreign key constraint `fk_category` to ensure that the `category_id` in the `products` table references the `id` column in the `categories` table. This constraint enforces referential integrity between the two tables.
 
 <Admonition type="tip" title="Donot want to use Raw SQL?">
 If you prefer a more programmatic approach to schema translation, you can use any Postgres library or ORM (object-relational mapping) tool in your chosen programming language. These tools can help automate the schema creation process and provide a more structured way to define your Postgres schema. Learn more on our [language guides](/docs/get-started-with-neon/languages) and [ORM guides](/docs/get-started-with-neon/orms) section.
@@ -328,7 +375,27 @@ importProducts();
 You can adapt this script to import data from other collections by adjusting the file paths, table names, and data transformations as needed.
 
 <Admonition type="tip" title="Importing multiple collections with references">
-When importing data from multiple collections with references (e.g., `Product` referencing `Category`), you'll need to ensure that the referenced data is imported first, i.e., `Category` data before `Product` data. This sequence ensures that foreign key constraints are satisfied during the import process.
+When importing data that spans multiple collections with relationships (for instance, `Product` collection documents referencing `Category` collection documents), it is **essential to import data in the correct order** to maintain data integrity.
+
+Specifically, you must **import the data for the *referenced* collection (e.g., `Category`) *before* importing the data for the *referencing* collection (e.g., `Product`)**.
+
+Keep the following considerations in mind when importing data with relationships:
+
+- **Establish referenced data first:**  Postgres, being a relational database, relies on foreign key constraints to enforce relationships between tables. When you import data into the `Product` table that is intended to reference entries in the `Category` table, those `Category` entries must already exist in Postgres.
+
+- **ID handling depends on your strategy:**  While FaunaDB uses its own distributed document ID system, Postgres ID generation is more flexible. **Whether you need to transform IDs depends on your chosen ID strategy in Postgres:**
+
+    - **Scenario 1: Using Postgres-Generated IDs:** If you are using Postgres's default ID generation mechanisms (like `SERIAL`, `UUID`, or `IDENTITY` columns), then **Postgres will automatically generate *new* IDs** for the rows in your tables. In this scenario, you *will* need to manage ID transformation for relationships.
+
+    - **Scenario 2: Retaining FaunaDB IDs:**  If you are explicitly setting IDs during import to retain FaunaDB IDs in Postgres, you must ensure that the IDs are correctly mapped and managed. You may choose this approach if you:
+        -  Want to retain FaunaDB IDs for compatibility and speed up the migration process.
+        -  Have a strategy to manage ID collisions and ensure uniqueness at the application level.
+
+- **Managing IDs for Relationships (Regardless of ID retention):**  Even if you *do* successfully retain FaunaDB IDs in Postgres (Scenario 2),  you still need to be mindful of how relationships are established.  If you are using foreign keys in Postgres (the recommended approach for relational data), you must ensure that the IDs used in your referencing tables (e.g., `product.category_id`) **correctly match the IDs in the referenced table (e.g., `categories.id`)**. This will be be valid if you are mapping the JSON data to Postgres tables without any transformation.
+
+- **Strategies for ID management (If Not Retaining FaunaDB IDs):** If you are using Postgres-generated IDs, you will need a strategy to:
+    - **Option 1: Pre-map IDs:**  Before importing `Product` data, you might need to process your JSON data to replace the FaunaDB `Category` document IDs with the **newly generated Postgres IDs** of the corresponding categories. This involves creating a mapping between the FaunaDB IDs and the Postgres-generated IDs for the `Category` table and replacing the `category.id` references in your `Product.json` data dump with the corresponding Postgres IDs.
+    - **Option 2:  Lookup-based Insertion:** During the import of `Product` data, instead of directly inserting IDs, you might perform a **lookup** in the already imported `Category` table based on a unique identifier (like category name) from your JSON data to retrieve the correct Postgres `category_id` to use as a foreign key. Follow this [example below](#inserting-a-new-document) for a reference.
 </Admonition>
 
 
@@ -344,42 +411,42 @@ Here are some key translation patterns to consider when converting Fauna's `FQL`
 
 #### Retrieving all documents from a collection
 
-**Fauna (FQL):**
+For example, to retrieve all documents from the `Product` collection using FQL:
 
 ```fql
-let collection = Collection(${collection_name})
+let collection = Collection("Product")
 collection.all()
 ```
 
-**Neon Postgres (SQL):**
+Assuming you have ported 'Product' collection to 'products' table in Neon Postgres, the equivalent SQL query would be:
 
 ```sql
-SELECT * FROM <your_table_name>; -- Replace <your_table_name> with your Neon table name
+SELECT * FROM products;
 ```
 
-#### Retrieving a document by ID
+#### Filtering data - Simple WHERE clause
 
-**FaunaDB (FQL):**
+For example, to filter products by name in FQL:
 
 ```fql
 Product.where(.name == 'avocados');
 ```
 
-**Neon Postgres (SQL):**
+The equivalent SQL query would be:
 
 ```sql
 SELECT * FROM products WHERE name = 'avocados';
 ```
 
-#### Filtering data
+#### Filtering data - Nested field WHERE clause (Joins equivalent)
 
-**FaunaDB (FQL):**
+For example, to filter products by category name in FQL:
 
 ```fql
 Product.where(.category?.name == "party")
 ```
 
-**Neon Postgres (SQL):**
+The equivalent SQL query would involve a join between the `products` and `categories` tables:
 
 ```sql
 SELECT p.*
@@ -388,11 +455,140 @@ JOIN categories c ON p.category_id = c.id
 WHERE c.name = 'party';
 ```
 
+#### Ordering data
+
+For example, to order products by price in ascending order:
+
+```fql
+Product.all().order(.price)
+```
+
+The equivalent SQL query would be:
+
+```sql
+SELECT * FROM products ORDER BY price ASC;
+```
+
+#### Counting documents
+
+For example, to count all documents in the `Product` collection in FQL:
+
+```fql
+Product.all().count();
+```
+
+The equivalent SQL query would be:
+
+```sql
+SELECT COUNT(*) FROM products;
+```
+
+#### Aggregations
+
+For example, to calculate the total stock count of all products in FQL:
+
+```fql
+let stockCounts = Product.all().map(doc => doc.stock )
+stockCounts.aggregate(0, (a, b) => a + b)
+```
+
+The equivalent SQL query would be:
+
+```sql
+SELECT SUM(stock) FROM products;
+```
+#### Filtering data -  `AND` and `OR` conditions
+
+For example, to filter products that are both priced above $10 AND have less than 50 units in stock in FQL:
+
+```fql
+Product.where(.price > 10 && .stock < 50)
+```
+
+The equivalent SQL query to achieve the same filtering would be:
+
+```sql
+SELECT * FROM products WHERE price > 10 AND stock < 50;
+```
+
+For example, to filter products that are either in the "party" category OR priced below 20 in FQL:
+
+```fql
+Product.where(.category?.name == "party" || .price < 20)
+```
+
+The equivalent SQL query, involving a join to access the category name, would be:
+
+```sql
+SELECT p.*
+FROM products p
+JOIN categories c ON p.category_id = c.id
+WHERE c.name = 'party' OR p.price < 20;
+```
+
+#### Updating a document
+
+For example, to update the description of a product named "avocados" in FQL:
+
+```fql
+let productRef = Product.where(.name == 'avocados').first()
+Product.byId(productRef!.id)!.update({ description: "Fresh, ripe avocados from California" })
+```
+
+The equivalent SQL query to update the same product description would be:
+
+```sql
+UPDATE products
+SET description = 'Fresh, ripe avocados from California'
+WHERE name = 'avocados'
+LIMIT 1;
+```
+
+#### Deleting a document
+
+For example, to delete a product named "pizza" in FQL:
+
+```fql
+let productRef = Product.where(.name == 'pizza').first()
+Product.byId(productRef!.id)!.delete()
+```
+
+The equivalent SQL query to delete the same product would be:
+
+```sql
+DELETE FROM products
+WHERE name = 'pizza'
+LIMIT 1;
+```
+
+#### Inserting a new document
+
+For example, to insert a new product "Organic Strawberries" in FQL, linking it to the "produce" category:
+
+```fql
+Product.create({
+  name: "Organic Strawberries",
+  price: 699,
+  stock: 150,
+  description: "Fresh strawberries",
+  category: Category.where(.name == "produce").first()
+})
+```
+
+The equivalent SQL query to insert the same product and link it to the "produce" category would be:
+
+```sql
+INSERT INTO products (name, price, stock, description, category_id)
+VALUES ('Organic Strawberries', 699, 150, 'Fresh strawberries', (SELECT id FROM categories WHERE name = 'produce'))
+RETURNING *;
+```
+
 **Actionable steps for query conversion:**
 
 1.  **Review application queries:** Identify the key queries in your application that interact with FaunaDB.
 2.  **Translate FQL to SQL (focus on key queries):** Translate these key FQL queries into equivalent SQL queries, focusing on the patterns shown in the examples above.
-3.  **Test SQL queries:** Test your translated SQL queries to ensure they function correctly and efficiently.
+3.  **Test SQL queries:** Test your translated SQL queries against your Neon Postgres database to ensure they function correctly, return the expected data, and are performant. You might need to use [`EXPLAIN ANALYZE`](/postgresql/postgresql-tutorial/postgresql-explain) in Postgres to analyze query performance and optimize indexes if needed.
+
 
 <Admonition type="note" title="Recommendation for complex queries">
 Given the potential volume of unstructured data insertion and retrieval queries in your application, which can be challenging to implement within a two-month timeframe, we recommend prioritizing the queries that are most critical to your application's core functionality and performance. For handling deeply nested unstructured data, consider using the [JSONB datatype in Postgres](/postgresql/postgresql-tutorial/postgresql-json)
