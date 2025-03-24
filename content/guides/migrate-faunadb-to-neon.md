@@ -30,7 +30,7 @@ Before diving into the migration process, it's crucial to understand the fundame
 | **Query language**| FQL (Fauna Query Language), Functional     | SQL (Structured Query Language), Declarative  |
 | **Schema** | Implicit, Schemaless/Schema-optional, evolving | Explicit, Schema-first, Requires migrations    |
 | **Indexes** | Explicit, Application-driven, Materialized views | Implicit/Explicit, Query planner-driven, Standard indexes |
-| **Transactions** | ACID, Stateless, HTTPS requests | ACID, Stateful, Persistent/HTTP/Websocket Connections      |
+| **Transactions** | ACID, Stateless, HTTPS requests | ACID, Stateful/Stateless, Persistent/HTTP/Websocket connections      |
 | **Server model** | Serverless (Managed), Cloud-Native          | Serverless (Managed), Cloud-Native            |
 | **Data Integrity** | Application level constraints             | Schema level constraints |
 
@@ -397,5 +397,11 @@ WHERE c.name = 'party';
 <Admonition type="note" title="Recommendation for complex queries">
 Given the potential volume of unstructured data insertion and retrieval queries in your application, which can be challenging to implement within a two-month timeframe, we recommend prioritizing the queries that are most critical to your application's core functionality and performance. For handling deeply nested unstructured data, consider using the [JSONB datatype in Postgres](/postgresql/postgresql-tutorial/postgresql-json)
 </Admonition>
+
+## Resources
+
+- [The Future of Fauna](https://fauna.com/blog/the-future-of-fauna)
+- [Migrate off Fauna](https://docs.fauna.com/fauna/current/migrate/?lang=javascript)
+- Modernizing from PostgreSQL to Serverless with Fauna: [Part 1](https://fauna.com/blog/modernizing-from-postgresql-to-serverless-with-fauna-part-1) [Part 2](https://fauna.com/blog/modernizing-from-postgresql-to-serverless-with-fauna-part-2) [Part 3](https://fauna.com/blog/modernizing-from-postgresql-to-serverless-with-fauna-part-3)
 
 <NeedHelp />
