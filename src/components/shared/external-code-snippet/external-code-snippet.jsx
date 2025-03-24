@@ -16,8 +16,16 @@ const ExternalCodeSnippet = async ({
   showSource = true,
   title = '',
 }) => {
+  if (!url) {
+    return (
+      <CodeBlockWrapper className={clsx('bg-gray-new-98 dark:bg-gray-new-10', className)}>
+        <div className="p-4 text-gray-new-50">URL is required for ExternalCodeSnippet</div>
+      </CodeBlockWrapper>
+    );
+  }
+
   try {
-    const response = await fetch(url); // Fetch once at build time
+    const response = await fetch(url, { cache: 'force-cache' }); // Fetch once at build time with caching
 
     if (!response.ok) {
       throw new Error(`Failed to fetch: ${response.status} ${response.statusText}`);
@@ -53,6 +61,7 @@ const ExternalCodeSnippet = async ({
       </div>
     );
   } catch (error) {
+    console.error(`Error fetching external code snippet from ${url}:`, error);
     // Return fallback content if fetch fails
     return (
       <CodeBlockWrapper className={clsx('bg-gray-new-98 dark:bg-gray-new-10', className)}>

@@ -35,6 +35,7 @@ import CodeBlock from 'components/shared/code-block';
 import ComputeCalculator from 'components/shared/compute-calculator';
 import CtaBlock from 'components/shared/cta-block';
 import DocCta from 'components/shared/doc-cta';
+import ExternalCodeSnippet from 'components/shared/external-code-snippet';
 import ImageZoom from 'components/shared/image-zoom';
 import InkeepEmbedded from 'components/shared/inkeep-embedded';
 import LatencyCalculator from 'components/shared/latency-calculator';
@@ -187,6 +188,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   Steps,
   DeployPostgresButton,
   ChatOptions,
+  ExternalCodeSnippet,
   ...sharedComponents,
 });
 
