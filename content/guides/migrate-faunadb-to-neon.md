@@ -14,7 +14,7 @@ This guide is designed to help FaunaDB users understand how to transition to Neo
 <Admonition type="note">
 Migrating from FaunaDB to Neon Postgres involves schema translation, data migration, and query conversion. This guide provides a structured approach to help you navigate the migration process effectively.
 
-If you have questions or require help with migrating large production datasets from FaunaDB, please [contact us for migration assistance](/migration-assistance).
+If you have questions or require help with migrating large production datasets from FaunaDB, please [contact Neon for migration assistance](/migration-assistance).
 </Admonition>
 
 ## FaunaDB vs. Neon (Postgres)
