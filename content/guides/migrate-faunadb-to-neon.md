@@ -1,22 +1,20 @@
 ---
-title: The missing FaunaDB migration guide
-subtitle: 'Learn how to migrate from FaunaDB to Neon Postgres effectively'
+title:  Migrating from FaunaDB to Neon Postgres
+subtitle: 'Learn how to migrate your data and applications from FaunaDB to Neon Postgres'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-03-23T00:00:00.000Z'
 updatedOn: '2025-03-23T00:00:00.000Z'
 ---
 
-As FaunaDB [announces the end of its services](https://fauna.com/blog/the-future-of-fauna) by **May 30, 2025**, many users are now seeking robust and reliable database alternatives to maintain their application momentum. FaunaDB has been valued for its flexible document-relational model and global reach, powering a wide array of applications.  With the upcoming discontinuation, finding a replacement that offers both similar capabilities and long-term stability, while also mitigating vendor lock-in, is paramount.
+Like Fauna, Neon offers a **serverless architecture**. However, Neon is built on **Postgres**. This foundation provides the best of both worlds: the modern, scalable benefits of serverless with the reliability and familiarity of Postgres.
 
-For FaunaDB users considering their next steps, **Neon emerges as a strong contender**.  Like Fauna, Neon offers a **serverless architecture**, providing effortless scalability and operational simplicity.  However, Neon distinguishes itself by being built on **pure Postgres**. This foundation provides the best of both worlds: the modern, scalable benefits of serverless with the rock-solid reliability and widespread familiarity of Postgres, all while avoiding vendor lock-in.
-
-This guide is designed to help FaunaDB users understand how to transition to Neon Postgres effectively, ensuring a seamless migration process and continued success for your applications beyond the FaunaDB sunset, all while embracing the freedom of open standards.
+This guide is designed to help FaunaDB users understand how to transition to Neon Postgres.
 
 <Admonition type="note">
-Migrating from FaunaDB to Neon Postgres is a complex process involving schema translation, data migration, and query conversion. This guide provides a structured approach to help you navigate the migration process effectively.
+Migrating from FaunaDB to Neon Postgres involves schema translation, data migration, and query conversion. This guide provides a structured approach to help you navigate the migration process effectively.
 
-If you have questions or require help with migrating large production datasets from FaunaDB, please contact [Neon Support](/migration-assistance)
+If you have questions or require help with migrating large production datasets from FaunaDB, please [contact us for migration assistance](/migration-assistance).
 </Admonition>
 
 ## FaunaDB vs. Neon (Postgres)
@@ -25,21 +23,21 @@ Before diving into the migration process, it's crucial to understand the fundame
 
 | Feature          | FaunaDB                                    | Neon (Postgres)                               |
 |-------------------|---------------------------------------------|-----------------------------------------------|
-| **Database type** | Multi-model (Document-relational)          | Relational (SQL)        |
+| **Database type** | Multi-model (document-relational)          | Relational (SQL)        |
 | **Data model** | JSON documents in collections, flexible schema | Tables with rows and columns, rigid schema  |
-| **Query language**| FQL (Fauna Query Language), Functional     | SQL (Structured Query Language), Declarative  |
-| **Schema** | Implicit, Schemaless/Schema-optional, evolving | Explicit, Schema-first, Requires migrations    |
-| **Transactions** | ACID, Stateless, HTTPS requests | ACID, Stateful/Stateless, Persistent/HTTP/Websocket connections      |
-| **Server model** | Serverless (Managed), Cloud-Native          | Serverless (Managed), Cloud-Native            |
+| **Query language**| FQL (Fauna Query Language), functional     | SQL (Structured Query Language), declarative  |
+| **Schema** | Implicit, schemaless/schema-optional, evolving | Explicit, schema-first, requires migrations    |
+| **Transactions** | ACID, stateless, HTTPS requests | ACID, stateful/Stateless, persistent TCP/HTTP/Websocket connections      |
+| **Server model** | Serverless (managed), cloud-Native          | Serverless (managed), cloud-native            |
 
 
 ## Migration steps
 
-The migration process from FaunaDB to Neon Postgres involves several key steps, each essential for a successful transition. These steps include exporting your data and schema from FaunaDB, translating your schema to Postgres DDL, importing your data into Neon, converting your queries from FQL to SQL. Let's break down these steps in detail:
+The migration process from FaunaDB to Neon Postgres involves several key steps, each essential for a successful transition. These steps include exporting your data and schema from FaunaDB, translating your schema to Postgres DDL, importing your data into Neon, and converting your queries from FQL to SQL. Let's break down these steps in detail:
 
 ### Step 1: Exporting data from FaunaDB
 
-If you are on a paid FaunaDB plan, you can utilize the database's export functionality to save data in JSON format directly to an Amazon S3 bucket. [Fauna CLI](https://docs.fauna.com/fauna/current/build/cli/v4/) can be used to [export data to S3](https://docs.fauna.com/fauna/current/manage/exports/).
+If you are on a paid FaunaDB plan, you can utilize the database's export functionality to save data in JSON format directly to an Amazon S3 bucket. [Fauna CLI](https://docs.fauna.com/fauna/current/build/cli/v4/) can be used to [export data to S3](https://docs.fauna.com/fauna/current/manage/exports/)
 
 ```bash
 fauna export create s3 \
@@ -137,7 +135,7 @@ For example, here's a sample JSON file for the exported `Product` collection:
 
 ### Step 2: Exporting FaunaDB schema (FSL schema pull)
 
-Alongside data, you'll need to export your FaunaDB schema, defined in Fauna Schema Language (FSL).
+In addition to your data, you'll need to export your FaunaDB schema, defined in Fauna Schema Language (FSL).
 
 **Using `fauna schema pull` command:**
 
@@ -187,27 +185,27 @@ collection Product {
 }
 ```
 
-### Step 3: Schema translation - FSL to Neon Postgres DDL
+### Step 3: Schema translation - FSL to Postgres DDL
 
 <Admonition type="info" title="Manual schema translation 🥺">
-Unfortunately, there isn't a fully automated FSL to SQL DDL converter as these are fundamentally different database paradigms. You'll need to manually translate your FaunaDB schema to Neon Postgres DDL. This process involves mapping FaunaDB collections, fields, indexes, and constraints to Postgres tables, columns, indexes, and constraints.
+Unfortunately, there isn't a fully automated FSL to SQL DDL converter as these are fundamentally different database paradigms. You'll need to manually translate your FaunaDB schema to Postgres DDL. This process involves mapping FaunaDB collections, fields, indexes, and constraints to Postgres tables, columns, indexes, and constraints.
 </Admonition>
 
 Begin by thoroughly examining the exported Fauna Schema Language (FSL) files. This step is crucial for gaining a comprehensive understanding of your FaunaDB schema structure. Pay close attention to the definitions of collections, their associated fields, indexes, and constraints.
 
 For instance, the Product collection, as shown in the above example `collections.fsl` file, includes fields like `name`, `description`, `price`, `category`, and `stock`. The schema also specifies unique and check constraints for data integrity, along with indexes to optimize query performance.
 
-Once you have a clear grasp of your exported FSL schema, the next step involves translating it into Neon Postgres Data Definition Language (DDL). This translation process is necessary to create equivalent tables and indexes within your Neon Postgres database. By accurately converting your FaunaDB schema into DDL, you ensure a smooth transition and maintain the structural integrity of your data during migration.
+Once you have a clear grasp of your exported FSL schema, the next step involves translating it into Postgres Data Definition Language (DDL). This translation process is necessary to create equivalent tables and indexes within your Postgres database. By accurately converting your FaunaDB schema into DDL, you ensure a smooth transition and maintain the structural integrity of your data during migration.
 
-If you need a refresher on Postgres, you can refer to our [PostgreSQL Tutorial](/postgresql/tutorial).
+If you need a refresher on Postgres, you can refer to Neon's [PostgreSQL Tutorial](/postgresql/tutorial).
 
 **Key translation considerations:**
 
-*   **Collections to Tables:** Each FaunaDB collection in your FSL schema could become a Neon Postgres table.
-*   **Field Definitions to Columns:**  FaunaDB field definitions will guide your Neon Postgres column definitions. Pay attention to data types like `String`, `Number`, `Time`, `Ref`, and optionality (`?` for nullable).
+*   **Collections to tables:** Each FaunaDB collection in your FSL schema could become a Neon Postgres table.
+*   **Field definitions to columns:**  FaunaDB field definitions will guide your Neon Postgres column definitions. Pay attention to data types like `String`, `Number`, `Time`, `Ref`, and optionality (`?` for nullable).
 *   **Unique constraints:** Translate FaunaDB `unique` constraints in FSL to `UNIQUE` constraints in your Postgres `CREATE TABLE` statements.
 *   **Indexes:** Translate FaunaDB `index` definitions in FSL to `CREATE INDEX` statements in Postgres.  Consider the `terms` and `values` of FaunaDB indexes to create effective Postgres indexes.
-*   **Computed Fields/Functions:**  FaunaDB's more advanced schema features like `compute`, functions will require careful consideration for translation.  Computed fields might translate to Postgres views or computed columns. UDFs will likely need to be rewritten as stored procedures or application logic.
+*   **Computed fields/functions:**  FaunaDB's more advanced schema features like `compute`, functions will require careful consideration for translation.  Computed fields might translate to Postgres views or computed columns. UDFs will likely need to be rewritten as stored procedures or application logic.
 
 #### Example FSL to Postgres DDL translation
 
@@ -395,7 +393,7 @@ Keep the following considerations in mind when importing data with relationships
 
 - **Strategies for ID management (If Not Retaining FaunaDB IDs):** If you are using Postgres-generated IDs, you will need a strategy to:
     - **Option 1: Pre-map IDs:**  Before importing `Product` data, you might need to process your JSON data to replace the FaunaDB `Category` document IDs with the **newly generated Postgres IDs** of the corresponding categories. This involves creating a mapping between the FaunaDB IDs and the Postgres-generated IDs for the `Category` table and replacing the `category.id` references in your `Product.json` data dump with the corresponding Postgres IDs.
-    - **Option 2:  Lookup-based Insertion:** During the import of `Product` data, instead of directly inserting IDs, you might perform a **lookup** in the already imported `Category` table based on a unique identifier (like category name) from your JSON data to retrieve the correct Postgres `category_id` to use as a foreign key. Follow this [example below](#inserting-a-new-document) for a reference.
+    - **Option 2:  Lookup-based Insertion:** During the import of `Product` data, instead of directly inserting IDs, you might perform a **lookup** in the already imported `Category` table based on a unique identifier (like category name) from your JSON data to retrieve the correct Postgres `category_id` to use as a foreign key. You can use the [example below](#inserting-a-new-document) as a reference.
 </Admonition>
 
 
@@ -591,7 +589,7 @@ RETURNING *;
 
 
 <Admonition type="note" title="Recommendation for complex queries">
-Given the potential volume of unstructured data insertion and retrieval queries in your application, which can be challenging to implement within a two-month timeframe, we recommend prioritizing the queries that are most critical to your application's core functionality and performance. For handling deeply nested unstructured data, consider using the [JSONB datatype in Postgres](/postgresql/postgresql-tutorial/postgresql-json)
+Given the potential volume of unstructured data insertion and retrieval queries in your application, which can be challenging to implement within a short timeframe, we recommend prioritizing the queries that are most critical to your application's core functionality and performance. For handling deeply nested unstructured data, consider using the [JSONB datatype in Postgres](/postgresql/postgresql-tutorial/postgresql-json)
 </Admonition>
 
 ## Resources
