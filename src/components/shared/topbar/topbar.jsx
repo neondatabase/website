@@ -8,7 +8,7 @@ const Topbar = async ({ isDarkTheme }) => {
   try {
     const response = await fetch(TOPBAR_API_URL, {
       next: {
-        revalidate: 3600,
+        revalidate: 600, // 10 minutes
       },
     });
     const topbar = await response.json();
