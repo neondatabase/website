@@ -84,7 +84,7 @@ If you see an **Unexpected error happened** message on the **Tables** page, foll
 
 1. Click **Download Error Context** to download the error context file.
 2. [Open a support ticket](https://console.neon.tech/app/projects?modal=support) and provide a details description of what were doing when the error occurred. Please include any screen captures or files that will help us reproduce the issue. We'll work with our partners at Drizzle to investigate and resolve the issue.
-3. If you're on the Free Plan, you can report the issue with your context file on [Discord](https://discord.gg/92vNTzKDGp).
+3. If you're on the Free Plan, you can report the issue on [Discord](https://discord.gg/92vNTzKDGp).
 
 If you encounter a **"Something went wrong"** error on the **Tables** page, try the following troubleshooting steps:
 
