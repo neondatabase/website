@@ -12,7 +12,8 @@ const sharedMdxComponents = {
   FeatureBetaProps: 'shared-content/feature-beta-props',
   MigrationAssistant: 'shared-content/migration-assistant',
   LinkAPIKey: 'shared-content/manage-api-keys',
-  ExternalCodeSnippet: 'shared-content/external-code-snippet',
+  // Use direct component instead of template file for external snippets
+  ExternalCodeSnippet: 'https://raw.githubusercontent.com',
 };
 
 module.exports = sharedMdxComponents;

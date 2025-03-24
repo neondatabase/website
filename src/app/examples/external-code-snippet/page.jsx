@@ -41,6 +41,13 @@ const ExternalCodeSnippetExamplePage = () => (
       url="https://raw.githubusercontent.com/neondatabase/serverless/main/index.ts" title="Neon
       Serverless Driver" /&gt;
     </div>
+
+    <h2 className="mb-4 mt-8 text-2xl font-semibold">Direct Component Usage Example</h2>
+    <p className="mb-4">This example shows how ExternalCodeSnippet works when used directly:</p>
+    <ExternalCodeSnippet
+      url="https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/neon-auth.mdc"
+      title="Neon Auth Rules"
+    />
   </div>
 );
 
