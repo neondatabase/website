@@ -8,7 +8,7 @@ updatedOn: '2025-03-17T20:41:57.345Z'
 The [Neon serverless driver](https://github.com/neondatabase/serverless) (version 1.0.0) is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over **HTTP** or **WebSockets** in place of TCP. The driver's low-latency capability is due to [message pipelining and other optimizations](https://neon.tech/blog/quicker-serverless-postgres).
 
 <Admonition type="note">
-The Neon serverless driver requires Node.js version 19 or higher.
+The Neon serverless driver version 1.0.0 and higher requires Node.js version 19 or higher.
 </Admonition>
 
 When to query over HTTP vs WebSockets:
