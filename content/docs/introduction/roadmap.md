@@ -17,7 +17,6 @@ Here's a snapshot of what we're working on now:
 
 - **Data anonymization**: We're simplifying PII data anonymization to make Neon an ideal staging environment for your team's app development.
 - **Improved migration assistance**: The [Import Data Assistant](/docs/import/import-data-assistant) was introduced in Q4 2024. More improvements are coming in 2025 to make data import easier and faster.
-- **Support for the [pg_search](https://github.com/paradedb/paradedb/tree/dev/pg_search) extension**: This extension enables full text search over heap tables.
 - **Backup & restore**: We'll start with scheduled snapshots with instant point-in-time recovery, eventually expanding this feature with more traditional automated backup capabilities.
 - **Branch protection enhancements**: We're enhancing safeguards for [protected branches](/docs/guides/protected-branches) to strengthen their security and prevent accidental actions.
 - **Neon on Azure GA**: We're working toward a GA release with deeper Azure integration.
@@ -41,6 +40,8 @@ And here's a quick list of what we'll be taking on in the near future:
 
 ## What we've shipped recently 🚢
 
+- **Support for [pg_search](https://neon.tech/docs/extensions/pg_search)**. We partnered with [ParadeDB](https://www.paradedb.com/) to bring `pg_search` to Neon, delivering up to 1,000x faster full-text search inside Postgres. [Read the announcement](https://neon.tech/blog/pgsearch-on-neon).
+- **MACC-eligibility on Azure**: Neon Postgres purchases made through the Azure Marketplace are now counted toward your Microsoft Azure Consumption Commitment (MACC). [Learn more](https://neon.tech/docs/introduction/billing-azure-marketplace#microsoft-azure-consumption-commitment-macc).
 - **GitHub Secret Scanning**: Neon joined GitHub's Secret Scanning Partner Program to automatically detect and protect against exposed database credentials in public repositories.
 - **HIPAA compliance**: We have achieved HIPAA compliance. Learn more about Neon's compliance milestones on our [Compliance page](/docs/security/compliance).
 - **Scheduled updates**: Business plan users can now check for update notices and choose preferred update windows for Postgres updates, security patches, and Neon feature enhancements.
