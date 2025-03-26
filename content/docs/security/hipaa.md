@@ -12,7 +12,7 @@ Neon's HIPAA functionality is only available to customers who have signed a Busi
 
 HIPAA is a federal law that sets national standards for the protection of health information. It requires businesses handling PHI to implement safeguards to ensure privacy and security.
 
-## Key HIPAA terms you should know:
+## Key HIPAA terms
 
 - Protected Health Information (PHI): Any identifiable health-related data.
 - Covered Entity: Healthcare providers, plans, or clearinghouses that handle PHI.
@@ -89,4 +89,4 @@ For any questions regarding our HIPAA compliance or to report an issue, please r
 
 - Email: hipaa@neon.tech
 
-This guide provides a high-level overview of Neon's HIPAA compliance efforts. For more details, please refer to your Business Associate Agreement (BAA) or contact us directly via our [support channels](https://neon.tech/docs/introduction/support).
+_This guide provides a high-level overview of Neon's HIPAA compliance efforts. For more details, please refer to your Business Associate Agreement (BAA) or contact us directly via our [support channels](https://neon.tech/docs/introduction/support)._
