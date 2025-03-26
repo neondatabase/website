@@ -12,7 +12,7 @@ Neon's HIPAA functionality is only available to customers who have signed a Busi
 
 HIPAA is a federal law that sets national standards for the protection of health information. It requires businesses handling PHI to implement safeguards to ensure privacy and security.
 
-## Key HIPAA Terms You Should Know:
+## Key HIPAA terms you should know:
 
 - Protected Health Information (PHI): Any identifiable health-related data.
 - Covered Entity: Healthcare providers, plans, or clearinghouses that handle PHI.
@@ -21,7 +21,7 @@ HIPAA is a federal law that sets national standards for the protection of health
 - Security Rule: Safeguards to protect electronic PHI.
 - Privacy Rule: Rules governing how PHI is used and disclosed.
 
-## How Neon Protects Your Data
+## How Neon protects your data
 
 1. Use and Disclosure of PHI
 
@@ -54,13 +54,17 @@ HIPAA is a federal law that sets national standards for the protection of health
    - Customers can request access to their PHI by [opening a request with Neon Support](https://console.neon.tech/app/projects?modal=support).
    - Any updates or corrections to PHI need to be carried out by the customer.
 
-## Your Rights and What to Expect
+## Your rights and what to expect
 
 - Transparency: You can request details about how your PHI is being used.
 - Security: Our technical safeguards are designed to prevent unauthorized access.
 - Data Control: You retain ownership of your data; we are custodians ensuring its protection.
 
-## In Case of a Security Incident
+## Availability of audit events
+
+Audit events may not be logged if database endpoints experience exceptionally heavy load, as we prioritize database availability over capturing log events.
+
+## Security incidents
 
 If a security breach occurs, Neon will:
 
@@ -79,10 +83,10 @@ A: We conduct regular internal audits and provide training to our employees to e
 **Q: What should I do if I suspect a data breach?**  
 A: Contact our security team immediately at security@neon.tech.
 
-## Contact Information
+## Contact information
 
 For any questions regarding our HIPAA compliance or to report an issue, please reach out to:
 
 - Email: hipaa@neon.tech
 
-This guide provides a high-level overview of Neon's HIPAA compliance efforts. For more details, please refer to our full Business Associate Agreement (BAA) or contact us directly via our support channels.
+This guide provides a high-level overview of Neon's HIPAA compliance efforts. For more details, please refer to your Business Associate Agreement (BAA) or contact us directly via our [support channels](https://neon.tech/docs/introduction/support).

@@ -1077,6 +1077,9 @@
     - title: Compliance
       slug: security/compliance
       icon: award
+    - title: HIPAA
+      slug: security/hipaa
+      icon: auth
     - title: Acceptable Use Policy
       slug: security/acceptable-use-policy
       icon: docs
