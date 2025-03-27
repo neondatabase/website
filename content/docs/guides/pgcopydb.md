@@ -31,10 +31,10 @@ updatedOn: '2025-03-27T00:00:00.000Z'
 *   **Built-in monitoring**: `pgcopydb` includes a sentinel table and associated commands (`pgcopydb stream sentinel`) for built-in monitoring. This allows you to:
     - **Track migration progress**: Monitor the status of data transfer and overall migration health.
 
-This guide will walk you through using `pgcopydb` to perform an initial data migration to Neon which uses pgcopydb for logical decoding.
+This guide will walk you through using `pgcopydb` to perform an initial data migration to Neon which uses pgcopydb
 
 <Admonition type="note">
-Logical replication with `pgcopydb clone --follow` doesn’t currently work on Neon. We’re actively working on a solution to enable it. In the meantime, you can still use `pgcopydb` for a one-time data migration to Neon via logical decoding.
+Logical replication with `pgcopydb clone --follow` doesn’t currently work on Neon. You can still use `pgcopydb` for a one-time data migration to Neon.
 </Admonition>
 
 ## Prerequisites
