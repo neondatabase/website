@@ -378,7 +378,7 @@ Scale to zero places your compute into an idle state when it's not being used, w
 
 ## Data Transfer
 
-Data transfer refers to the total volume of data transferred out of Neon (egress) during a billing period. Any data transferred via your database connection string is counted as data transfer, including data transferred via Postgres logical replication to any destination, including Neon. While Neon doesn’t charge for egress, Free plan projects are limited to 5 GB of data transfer per month. If a project exceeds this limit, its compute is suspended and the following error is shown:
+Data transfer refers to the total volume of data transferred out of Neon (egress) during a billing period. Egress also includes data transferred from Neon via Postgres logical replication to any destination, including Neon itself. While Neon doesn’t charge for egress, Free plan projects are limited to 5 GB of data transfer per month. If a project exceeds this limit, its compute is suspended and the following error is shown:
 
 ```text shouldWrap
 Your project has exceeded the data transfer quota. Upgrade your plan to increase limits.
