@@ -378,15 +378,17 @@ Scale to zero places your compute into an idle state when it's not being used, w
 
 ## Data Transfer
 
-Data transfer usage refers to the total volume of data transferred out of Neon (known as "egress") during a given billing period. Neon does not charge for egress data, but we do limit the amount of egress available on Free Plan projects to 5 GB per month. The project's compute is suspended if the data transfer allowance is exceeded, and the following error message will be reported:
+Data transfer refers to the total volume of data transferred out of Neon (egress) during a billing period. While Neon doesn’t charge for egress, Free Plan projects are limited to 5 GB of data transfer per month. If a project exceeds this limit, its compute is suspended and the following error is shown:
 
 ```text shouldWrap
 Your project has exceeded the data transfer quota. Upgrade your plan to increase limits.
 ```
 
-If you hit this limit and need to upgrade your plan, you can do so from your Neon account's **Billing** page. For instructions, see [Change your plan](/docs/introduction/manage-billing#change-your-plan). Free Plan users can monitor **Data transfer** usage from the **Resources remaining** widget on the **Project Dashboard**.
+You can upgrade your plan from the **Billing** page in your Neon account. For details, see [Change your plan](/docs/introduction/manage-billing#change-your-plan). Free Plan users can track their data transfer usage on the Project Dashboard.
 
-For all other plans, Neon maintains a reasonable usage policy. This means there is no set limit on data transfer, but usage is expected to stay within a range typical for standard operations. If your usage significantly exceeds this expected range, Neon may reach out to discuss your usage and possible plan adjustments. Paying users can monitor per-project **Data transfer** usage from the **Usage** widget on the **Project Dashboard**.
+For paid plans, Neon applies a reasonable usage policy—there’s no fixed limit, but usage should remain within what’s typical for most workloads. If usage is unusually high, Neon may reach out to discuss your use case and plan options. Paying users can view Data transfer usage per project in the Usage widget on the **Project Dashboard** or **Billing** page.
+
+Neon measures data transfer as any traffic sent through the public connection string. This includes not only external data access but also internal operations, such as using Postgres logical replication to move data between branches or tables within the same project. This replication traffic still counts toward your data transfer usage.
 
 ## Projects
 
