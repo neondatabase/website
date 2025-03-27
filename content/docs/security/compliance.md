@@ -42,7 +42,7 @@ To request a draft Business Associate Agreement (BAA), please [contact the Neon 
 
 HIPAA-enabled accounts can request access to HIPAA audit logs by [opening a support request](https://console.neon.tech/app/projects?modal=support).
 
-For additional information about HIPAA compliance and Neon, please refer to the [Neon HIPAA Compliance Guide](https://neon.tech/hipaa-compliance-guide).
+For additional information about HIPAA compliance and Neon, please refer to the [Neon HIPAA Compliance Guide](/docs/security/hipaa).
 
 ## Questions?
 
@@ -50,4 +50,4 @@ To learn more about how we protect your data and uphold the highest standards of
 
 - For security inquiries, contact us at [security@neon.tech](mailto:security@neon.tech).
 - For privacy-related questions, reach out to [privacy@neon.tech](mailto:privacy@neon.tech).
-- For sales information, connect with us at [sales@neon.tech](mailto:privacy@neon.tech).
+- For sales information, please [contact our sales team](https://neon.tech/contact-sales).

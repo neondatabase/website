@@ -58,7 +58,7 @@ const Cta = ({
           to={buttonUrl}
           target={isExternal ? '_blank' : null}
           rel={isExternal ? 'noopener noreferrer' : null}
-          tag_name="Footer"
+          tagName="Footer"
         >
           {buttonText}
         </Button>

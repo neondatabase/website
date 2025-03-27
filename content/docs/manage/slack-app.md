@@ -2,7 +2,7 @@
 title: Neon Slack App
 enableTableOfContents: true
 subtitle: Track your Neon projects and organizations from Slack
-updatedOn: '2025-03-07T19:33:48.344Z'
+updatedOn: '2025-03-19T12:43:23.197Z'
 ---
 
 The Neon Slack App allows you to monitor your Neon usage and manage organization membership directly from Slack. Get quick access to project information and resource usage metrics without leaving your workspace.
@@ -16,7 +16,16 @@ The Neon Slack App allows you to monitor your Neon usage and manage organization
 ## Install the Neon Slack App
 
 Click the **Add to Slack** button and follow the prompts.
-<a target="_blank" href="https://slack.com/oauth/v2/authorize?client_id=2231113872023.8135357564067&scope=chat:write,commands,im:history,team:read&user_scope="><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcSet="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>
+<Button
+className="border-none"
+to="https://slack.com/oauth/v2/authorize?client_id=2231113872023.8135357564067&scope=chat:write,commands,im:history,team:read&user_scope="
+target="\_blank"
+rel="noopener noreferrer"
+tagName="Add to Slack"
+analyticsEvent="click_add_to_slack_link">
+<img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcSet="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" />
+<span className="sr-only">Add to Slack</span>
+</Button>
 
 ## Authenticate with Neon
 
@@ -30,15 +39,15 @@ Once authenticated, you're ready to use all available commands.
 
 | **Command**             | **Description**                                   |
 | ----------------------- | ------------------------------------------------- |
-| `/neon auth`            | Log in to your Neon account                       |
-| `/neon projects`        | List your projects (with IDs)                     |
-| `/neon usage`           | View your overall resource usage                  |
-| `/neon help`            | Show all available commands                       |
-| `/neon status`          | Check Neon's system status                        |
-| `/neon feedback`        | Share your thoughts to improve the Neon Slack App |
-| `/neon projects usage`  | View resource usage for a specific project        |
-| `/neon projects shared` | See projects others have shared with you          |
-| `/neon invite user`     | Invite a user to your organization                |
+| `/neon auth`            | Connect Slack to your Neon account                |
+| `/neon projects`        | List your Neon projects                          |
+| `/neon usage`          | Show overall resource usage for your account      |
+| `/neon help`           | List all available commands                       |
+| `/neon status`         | Check the current status of Neon's cloud service  |
+| `/neon feedback`       | Share your thoughts and suggestions about the Neon Slack App |
+| `/neon invite user`    | Invite users to your organization                 |
+| `/neon subscribe`      | Subscribe to your Neon account updates            |
+| `/neon unsubscribe`    | Unsubscribe from your Neon account updates       |
 
 ## Example workflows
 
@@ -54,7 +63,17 @@ Open a DM with the Neon Slack App and run the following command to instantly vie
 
 ### Usage notifications
 
-In addition to checking usage on demand, the Neon Slack App will automatically notify you when you approach or reach your resource limits for compute hours, storage, or data transfer.
+You can receive automated notifications about your Neon usage in any public channel. First, subscribe to notifications using the steps in the section below. Once subscribed, the channel will receive automatic notifications when you approach or reach your resource limits for compute hours, storage, or data transfer.
+
+### Subscribe to notifications in a channel
+
+To receive Neon notifications in a specific Slack channel:
+
+1. Go to the public channel where you want to receive notifications
+2. Run `/neon subscribe` - you'll be prompted to run `/invite @Neon (Beta)` if needed
+3. After inviting the bot, run `/neon subscribe` again
+
+Once subscribed, the channel will start receiving important Neon usage notifications. To stop receiving notifications, use the `/neon unsubscribe` command in the same channel.
 
 ## FAQs
 
@@ -65,7 +84,7 @@ The Neon Slack App allows you to:
 
 - View project information and resource usage
 - Monitor system status
-- Access shared projects
+- Manage notifications in channels
 - Invite users to your organization
 
 </details>
@@ -80,6 +99,6 @@ No, the Neon Slack App is primarily for viewing usage details and managing organ
 <details>
 <summary>**Can I control which notifications I receive?**</summary>
 
-Currently, all users receive usage limit notifications. There's no way to customize notification preferences within the Slack App.
+You can control where notifications are sent using the `/neon subscribe` and `/neon unsubscribe` commands in any public channel. However, you cannot customize which types of notifications you receive - all subscribed channels will receive all important Neon updates and usage alerts.
 
 </details>

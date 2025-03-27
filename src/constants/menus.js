@@ -93,18 +93,18 @@ export default {
           title: 'Backend',
           items: [
             {
-              icon: PrivacyIcon,
-              iconGradient: PrivacyGradientIcon,
-              title: 'RLS',
-              description: 'RLS made simple',
-              to: LINKS.rlsAuthorize,
-            },
-            {
               icon: ApiIcon,
               iconGradient: ApiGradientIcon,
               title: 'Auth',
               description: 'Authenticate your users',
               to: LINKS.auth,
+            },
+            {
+              icon: PrivacyIcon,
+              iconGradient: PrivacyGradientIcon,
+              title: 'RLS',
+              description: 'RLS made simple',
+              to: LINKS.rlsAuthorize,
             },
           ],
           isExtended: true,

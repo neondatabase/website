@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/security/security
   - /docs/security
-updatedOn: '2025-03-14T12:04:32.890Z'
+updatedOn: '2025-03-21T10:30:14.622Z'
 ---
 
 At Neon, security is our highest priority. We are committed to implementing best practices and earning the trust of our users. A key aspect of earning this trust is by ensuring that every touchpoint in our system, from connections, to data storage, to our internal processes, adheres to the highest security standards.
@@ -103,7 +103,7 @@ To learn more about how we protect your data and uphold the highest standards of
 
 ## GitHub secret scanning
 
-Neon is a [GitHub Secret Scanning Partner](https://docs.github.com/en/code-security/secret-scanning/secret-scanning-partner-program). If a Neon database credential or API key is detected in a GitHub repository, GitHub alerts Neon through an automated system. This system validates the credential, notifies our security team, and informs affected customers.
+Neon is a [GitHub Secret Scanning Partner](https://docs.github.com/en/code-security/secret-scanning/secret-scanning-partner-program). If a Neon database credential or API key is detected in a GitHub repository, GitHub alerts Neon through an automated system. This system validates the credential and notifies our security team.
 
 By integrating with GitHub Secret Scanning, Neon helps users quickly identify and mitigate exposed credentials, reducing the risk of unauthorized access.
 

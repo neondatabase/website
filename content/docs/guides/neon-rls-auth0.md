@@ -248,8 +248,7 @@ export async function TodoList() {
 
     // WHERE filter is optional because of RLS.
     // But we send it anyway for performance reasons.
-    const todos = await
-        sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
+    const todos = await sql`SELECT * FROM todos WHERE user_id = auth.user_id()`; // [!code highlight]
 
     return (
         <ul>
@@ -294,8 +293,7 @@ export function TodoList() {
 
             // WHERE filter is optional because of RLS.
             // But we send it anyway for performance reasons.
-            const todosResponse = await
-                sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
+            const todosResponse = await sql`SELECT * FROM todos WHERE user_id = auth.user_id()`; // [!code highlight]
 
             setTodos(todosResponse as Array<Todo>);
         }

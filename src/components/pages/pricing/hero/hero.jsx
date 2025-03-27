@@ -136,7 +136,7 @@ const Hero = () => {
                     )}
                     size="sm"
                     to={button.url}
-                    tag_name={button.event}
+                    tagName={button.event}
                     onClick={() => {
                       posthog.capture('ui_interaction', {
                         action: 'pricing_page_get_started_clicked',
