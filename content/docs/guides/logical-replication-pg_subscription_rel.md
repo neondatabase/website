@@ -104,19 +104,19 @@ The `srsubstate` column uses single-character codes for different stages in a ta
 
 *   **`d` - Data is being copied:**  It means initial data synchronization is active. A `tablesync worker` is copying table data from publisher to subscriber using `COPY`.
 
-*   **`f` - Finished Table Copy:** This state confirms the `tablesync worker` completed the initial data copy. However, the table might not be fully synchronized yet, as changes could have occurred on the publisher during the copy.
+*   **`f` - Finished table copy:** This state confirms the `tablesync worker` completed the initial data copy. However, the table might not be fully synchronized yet, as changes could have occurred on the publisher during the copy.
 
 *   **`s` - Synchronized:** This state is a crucial intermediary state. The subscriber has caught up with all publisher changes committed *up to the point* of initial data copy. The subscriber's table reflects a consistent snapshot of the publisher's table, including transactions during the copy.
 
-*   **`r` - Ready (Normal Replication):**  This is the desired, stable state in LR, the table is actively and continuously replicating changes from the publisher. The `apply worker` receives and applies these changes to the subscriber ongoing.
+*   **`r` - Ready (Normal replication):**  This is the desired, stable state in LR, the table is actively and continuously replicating changes from the publisher. The `apply worker` receives and applies these changes to the subscriber ongoing.
 
 The typical lifecycle and transitions of these states are visualized in the diagram below:
 
 ![pg_subscription_rel different substates](/docs/guides/pg_subscription_rel.svg)
 
-**Typical State Progression:**
+**Typical state progression:**
 
-| State Code | Description                      |
+| State code | Description                      |
 |------------|----------------------------------|
 | `i`        | Table added to subscription.     |
 | `d`        | Initial data copy in progress.   |
@@ -181,3 +181,7 @@ Once you have successfully monitored the replication status using `pg_subscripti
 - 'r' state: Normal, healthy state. Ongoing replication is active. It is the desired state for continuous replication.
 
 In addition to monitoring the `pg_subscription_rel` catalog and its states, it is also essential to monitor the overall resource utilization on both the publisher and subscriber. This includes monitoring disk space usage (especially on the publisher for WAL retention), CPU utilization, and memory consumption. High resource usage can often indicate performance bottlenecks in the replication process which need to be addressed.
+
+## References
+
+- [pg_subscription_rel on PostgreSQL documentation](https://www.postgresql.org/docs/current/catalog-pg-subscription-rel.html)
