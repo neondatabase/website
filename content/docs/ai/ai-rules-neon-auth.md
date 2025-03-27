@@ -1,6 +1,6 @@
 ---
-title: 'AI Rules: Neon Auth'
-subtitle: 'Context rules for AI tools to help implement authentication with Stack Auth and Neon databases'
+title: "AI Rules: Neon Auth"
+subtitle: Context rules for AI tools to help implement authentication with Stack Auth and Neon databases
 enableTableOfContents: true
 ---
 
@@ -11,28 +11,12 @@ enableTableOfContents: true
 </DocsList>
 
 <DocsList title="Repository" theme="repo">
-  <a href="https://github.com/neondatabase-labs/ai-rules">AI Rules Repository</a>
+  <a href="https://github.com/neondatabase-labs/ai-rules">READ ME</a>
   <a href="https://github.com/neondatabase-labs/ai-rules/blob/main/neon-auth.mdc">neon-auth.mdc</a>
 </DocsList>
 </InfoBlock>
 
-## How to use
-
-You can use these rules in two ways:
-
-### Option 1: Copy from this page
-
-Copy the rules below and save them to `.cursor/rules/neon-auth.mdc` in your project. This is convenient if you just want to get started quickly.
-
-### Option 2: Use the repository
-
-Visit the [AI Rules repository](https://github.com/neondatabase-labs/ai-rules) to:
-- Access the latest version of these rules
-- Find other Neon AI rules
-- See complete setup instructions
-- Contribute improvements
-
-For any AI tool, the rules will work the same way - either copied directly or downloaded from the repository.
+<AIRule/>
 
 ## Rules
 

@@ -12,6 +12,7 @@ const sharedMdxComponents = {
   FeatureBetaProps: 'shared-content/feature-beta-props',
   MigrationAssistant: 'shared-content/migration-assistant',
   LinkAPIKey: 'shared-content/manage-api-keys',
+  AIRule: 'shared-content/ai-rule-usage',
 };
 
 module.exports = sharedMdxComponents;
