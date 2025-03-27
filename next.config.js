@@ -297,6 +297,11 @@ const defaultConfig = {
         destination: '/docs/introduction/roadmap#join-the-neon-early-access-program',
         permanent: true,
       },
+      {
+        source: '/hipaa-compliance-guide',
+        destination: '/docs/security/hipaa',
+        permanent: true,
+      },
       ...docsRedirects,
       ...changelogRedirects,
     ];
