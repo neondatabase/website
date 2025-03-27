@@ -3,7 +3,7 @@ title: "Monitoring and troubleshooting logical replication with pg_subscription_
 subtitle: "Learn how to monitor and troubleshoot logical replication in Postgres using the pg_subscription_rel system catalog and understanding its internal workings."
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-03-05T21:09:38.752Z'
+updatedOn: '2025-03-27T00:00:00.000Z'
 ---
 
 PostgreSQL logical replication is a versatile mechanism for replicating data objects and their modifications.  It differs from physical replication by focusing on transactional changes, based on object identity like primary keys, instead of byte-by-byte copying. This ensures changes on the subscriber maintain the same commit order as on the publisher, guaranteeing data consistency. Logical replication supports selective replication and works across different PostgreSQL versions.
