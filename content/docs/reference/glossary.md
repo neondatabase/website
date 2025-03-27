@@ -185,7 +185,7 @@ A method of storing inactive data that converts plaintext data into a coded form
 
 ## Data transfer
 
-A usage metric that measures the total volume of data transferred out of Neon (egress) during a billing period. This includes any traffic sent through the public connection string, even within the same project—for example, data moved via logical replication between branches. Neon does not charge for data transfer, but Free Plan projects are limited to 5 GB per month. See [Data transfer](/docs/introduction/usage-metrics#data-transfer).
+A usage metric that measures the total volume of data transferred out of Neon (egress) during a billing period. This includes any traffic sent through your database connection string, including data moved between Neon projects, branches, or tables via logical replication. Neon does not charge for data transfer, but Free Plan projects are limited to 5 GB per month. See [Data transfer](/docs/introduction/usage-metrics#data-transfer).
 
 ## Database
 
