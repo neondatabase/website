@@ -59,7 +59,7 @@ export default {
   subprocessors: '/subprocessors',
   businessInformation: '/business-info',
   sensitiveDataTerms: '/sensitive-data-terms',
-  hipaaCompliance: '/hipaa-compliance-guide',
+  hipaaCompliance: '/docs/security/hipaa',
   hipaaContractors: '/hipaa-contractors',
   // Console
   console: 'https://console.neon.tech',
