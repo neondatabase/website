@@ -17,7 +17,7 @@ The **Query History** view shows the top 100 previously run queries for the sele
 
 The **Query History** view is powered by the `pg_stat_statements` Postgres extension, installed on a system managed database in your Postgres instance.
 
-<Admonition type="note" title="query history retention">
+<Admonition type="note" title="query restore window">
 In Neon, data collected by the `pg_stat_statements` extension is not retained when your Neon compute (where Postgres runs) is suspended or restarted. For example, if your compute scales down to zero due to inactivity, your query history is lost. New data will be gathered once your compute restarts.
 </Admonition>
 

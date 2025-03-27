@@ -1,0 +1,4 @@
+/docs/get-started-with-neon/history_retention_setting.png
+/docs/manage/history_retention.png
+/docs/relnotes/history_retention.png
+/docs/manage/backups_history_retention.png

@@ -986,7 +986,7 @@ FROM pg_database;
 Alternatively, you can check the **Data size** value on the **Branches** page in the Neon Console, which gives you the data size for the databases on that branch.
 
 <Admonition type="note">
-Data size does not include the [history](/docs/reference/glossary#history) that is maintained in Neon to support features like point-in-time restore.
+Data size does not include the [history](/docs/reference/glossary#history) that is maintained in Neon to support features like instant restore.
 </Admonition>
 
 <NeedHelp/>
