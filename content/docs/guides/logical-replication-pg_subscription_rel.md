@@ -6,17 +6,17 @@ isDraft: false
 updatedOn: '2025-03-27T00:00:00.000Z'
 ---
 
-PostgreSQL logical replication is a versatile mechanism for replicating data objects and their modifications.  It differs from physical replication by focusing on transactional changes, based on object identity like primary keys, instead of byte-by-byte copying. This ensures changes on the subscriber maintain the same commit order as on the publisher, guaranteeing data consistency. Logical replication supports selective replication and works across different PostgreSQL versions.
+Postgres logical replication is a versatile mechanism for replicating data objects and their modifications.  It differs from physical replication by focusing on transactional changes, based on object identity like primary keys, instead of byte-by-byte copying. This ensures changes on the subscriber maintain the same commit order as on the publisher, guaranteeing data consistency. Logical replication supports selective replication and works across different versions of Postgres.
 
 This guide explains the inner workings of Postgres logical replication. It explores key processes and focuses on using the `pg_subscription_rel` system catalog for monitoring and troubleshooting.
 
 <Admonition type="note" title="Prerequisites">
-This guide assumes you have a basic understanding of PostgreSQL logical replication concepts and have a working logical replication setup. If you need a refresher on logical replication basics, check out our [Postgres logical replication concepts guide](/docs/guides/logical-replication-concepts).
+This guide assumes you have a basic understanding of Postgres logical replication concepts and have a working logical replication setup. If you need a refresher on logical replication basics, check out our [Postgres logical replication concepts guide](/docs/guides/logical-replication-concepts).
 </Admonition>
 
-## Understanding Key Processes in Logical Replication
+## Understanding key processes in logical replication
 
-To understand logical replication and monitor it effectively, you need to grasp the key processes involved. Logical replication in Postgres relies on several components working together to replicate data changes accurately.
+Logical replication in Postgres relies on several components working together to replicate data changes accurately. Understanding these components is crucial for effective monitoring and troubleshooting. Here are the key processes involved in logical replication:
 
 ### Logical decoding
 
@@ -88,7 +88,7 @@ Unlike catalogs with broader replication statistics, `pg_subscription_rel` shows
 
 To use `pg_subscription_rel` for monitoring, understanding its key columns is essential:
 
-*   **`srsubid` (oid):**  A foreign key linking to the `pg_subscription` catalog. It uniquely identifies the **subscription** for a table. Each row in `pg_subscription_rel` is associated with one subscription.
+*   **`srsubid` (oid):**  A foreign key linking to the `pg_subscription` catalog. It uniquely identifies the **subscription** for a table. Each row in `pg_subscription_rel` is associated with a subscription.
 
 *   **`srrelid` (oid):**  Another foreign key, linking to `pg_class`. It identifies the **specific table (relation)** being replicated. This column shows which table's replication status is reported in that row.
 
@@ -139,7 +139,7 @@ The 'r' (Ready) state indicates full, continuous replication mode. Changes strea
 
 ## Monitoring replication status using SQL queries
 
-To check the replication state of tables within a specific subscription, execute the following SQL query:
+To check the replication state of tables within a specific subscription, execute the following SQL query on the subscriber database:
 
 ```sql
 SELECT srrelid::regclass, srsubstate
@@ -161,34 +161,23 @@ Once you have successfully monitored the replication status using `pg_subscripti
 
 ![Troubleshooting in pg_subscription_rel](/docs/guides/pg_subscription_rel_troubleshoot.svg)
 
-**Troubleshooting Steps Based on `srsubstate`:**
+**Troubleshooting steps Based on `srsubstate`:**
 
-- **Table Stuck in 'i' (initialize) State:**
-    *   **Check Publisher Connection Details:** Verify connection details (hostname, port, credentials) to the publisher are correct in the subscription definition.
-    *   **Verify Replication Privileges:** Ensure the subscription user has necessary replication privileges on the publisher database to connect and stream changes.
-    *   **Examine Publication Inclusion:**  On the publisher, verify the table is correctly included in the publication the subscription uses. Forgetting to add tables to publications is common.
+- **Table stuck in 'i' (initialize) state:**
+    *   **Check publisher connection details:** Verify connection details (hostname, port, credentials) to the publisher are correct in the subscription definition.
+    *   **Verify replication privileges:** Ensure the subscription user has necessary replication privileges on the publisher database to connect and stream changes.
+    *   **Examine publication inclusion:**  On the publisher, verify the table is correctly included in the publication the subscription uses. Forgetting to add tables to publications is common.
 
-- **Table Stuck in 'd' (data copy) State:**
-    *   **Investigate Network Connectivity:** Check network connection between Neon subscriber and publisher. Look for latency or instability slowing down data copy.
-    *   **Monitor Resource Utilization:** Check CPU, memory, disk I/O on both Neon subscriber and publisher. Resource bottlenecks prolong data copy.
-    *   **Assess Table Size:** Large tables take longer to copy. A prolonged 'd' state may be normal for very large tables.
+- **Table stuck in 'd' (data copy) state:**
+    *   **Investigate network connectivity:** Check network connection between subscriber and publisher. Look for latency or instability slowing down data copy.
+    *   **Monitor resource utilization:** Check CPU, memory, disk I/O on both subscriber and publisher. Resource bottlenecks prolong data copy.
+    *   **Assess table size:** Large tables take longer to copy. A prolonged 'd' state may be normal for very large tables.
 
-- **Table Stuck in 'f' (finished copy) State:**
-    *   **Review Subscriber Logs for Copy Errors:** Examine subscriber PostgreSQL logs for errors during or after data copy. Logs may detail why the process isn't proceeding beyond 'f'.
-    *   **Check Schema Compatibility:**  Carefully verify schema compatibility between publisher and subscriber tables. Data type, constraint, or column definition differences can cause issues after data copy, preventing transition to 'synchronized'.
+- **Table stuck in 'f' (finished copy) state:**
+    *   **Review subscriber logs for copy errors:** Examine subscriber Postgres logs for errors during or after data copy. Logs may detail why the process isn't proceeding beyond 'f'.
+    *   **Check schema compatibility:**  Carefully verify schema compatibility between publisher and subscriber tables. Data type, constraint, or column definition differences can cause issues after data copy, preventing transition to 'synchronized'.
 
 - 's' state: Expected during initial setup, indicating synchronization and expected transition to 'r'.
 - 'r' state: Normal, healthy state. Ongoing replication is active. It is the desired state for continuous replication.
 
-## Essential methods for monitoring logical replication
-
-Effective monitoring is essential for ensuring the ongoing health and efficiency of your PostgreSQL logical replication setup. In addition to using `pg_subscription_rel`, consider the following methods for comprehensive monitoring:
-
-| Monitoring View/Function          | Location (Publisher/Subscriber) | Key Fields to Monitor                                                                                                                                   | What to Monitor For                                                                                               |
-| --------------------------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `pg_stat_replication`             | Publisher                       | `state`, `sent_lsn`, `write_lsn`, `flush_lsn`, `replay_lsn`                                                                                    | Overall replication status, progress of WAL data being sent and acknowledged, and potential replication lag.                                                              |
-| `pg_stat_replication_slots`       | Publisher                       | `slot_name`, `active`, `confirmed_flush_lsn`, `pg_current_wal_lsn`, `retained_walsize`, `restart_lsn`                                    | Status and health of replication slots, whether a walsender is currently active, the LSN up to which the subscriber has confirmed receiving data, the amount of WAL retained, and the LSN from which the subscriber will restart after a disconnection.                  |
-| `pg_wal_lsn_diff(pg_current_wal_lsn(), confirmed_flush_lsn)` | Publisher                       | The result of this function, which calculates the difference between `pg_current_wal_lsn()` and `confirmed_flush_lsn`.                                                                                                                            | Replication lag, specifically measured in bytes. Monitoring this value is crucial for understanding the real-time nature of the replication.                                                                                          |
-| `SELECT count(*) FROM pg_replication_slots WHERE NOT active;` | Publisher                       | The count returned by this query.                                                                                                                        |  Number of inactive replication slots. Periodically checking for inactive slots is important as they can lead to the accumulation of WAL files and potentially fill up disk space if not managed.                                                    |
-
-In addition to these Postgres-specific views, it is also essential to monitor the overall resource utilization on both the publisher and subscriber servers. This includes monitoring disk space usage (especially on the publisher for WAL retention), CPU utilization, and memory consumption. High resource usage can often indicate performance bottlenecks in the replication process which need to be addressed.
+In addition to monitoring the `pg_subscription_rel` catalog and its states, it is also essential to monitor the overall resource utilization on both the publisher and subscriber. This includes monitoring disk space usage (especially on the publisher for WAL retention), CPU utilization, and memory consumption. High resource usage can often indicate performance bottlenecks in the replication process which need to be addressed.
