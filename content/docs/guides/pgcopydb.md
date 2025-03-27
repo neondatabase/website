@@ -1,5 +1,5 @@
 ---
-title: Replicate data from Postgres to Neon using pgcopydb
+title: Migrate data to Neon Postgres using pgcopydb
 subtitle: Streamline your Postgres data migration to Neon using pgcopydb
 enableTableOfContents: true
 isDraft: false
@@ -8,11 +8,11 @@ updatedOn: '2025-03-27T00:00:00.000Z'
 
 `pgcopydb` is an open-source tool designed to facilitate the copying of a Postgres database from one server to another. Its primary use case is for migrations to new Postgres systems, whether due to hardware upgrades, architectural changes, or major version updates.
 
-`pgcopydb` simplifies and accelerates Postgres database migrations, offering significant advantages over traditional methods like `pg_dump` and `pg_restore`, especially for large databases and near-zero downtime migrations.
+`pgcopydb` simplifies and accelerates Postgres database migrations, offering significant advantages over traditional methods like `pg_dump` and `pg_restore`, especially for large databases.
 
 ## Why use pgcopydb for data migration?
 
-`pgcopydb` is specifically designed to automate and optimize Postgres database copying and replication, making it an excellent choice for migrating data to Neon. It builds upon standard Postgres tools and enhances them with features crucial for efficient and reliable migrations. Key benefits include:
+`pgcopydb` is specifically designed to automate and optimize Postgres database copying, making it an excellent choice for migrating data to Neon. It builds upon standard Postgres tools and enhances them with features crucial for efficient and reliable migrations. Key benefits include:
 
 - **Automated parallel migration**: `pgcopydb` excels at parallel processing, significantly speeding up several critical migration phases:
     - **Data transfer:**  It streams data in parallel from multiple tables and even splits large tables into chunks, maximizing throughput.
@@ -29,13 +29,12 @@ updatedOn: '2025-03-27T00:00:00.000Z'
 - **Resumable operations**: `pgcopydb` provides the `--resume` option, allowing migration restarts from interruption points. This ensures resilience against network issues or unexpected failures, preventing the need to restart the entire migration from scratch.
 
 *   **Built-in monitoring**: `pgcopydb` includes a sentinel table and associated commands (`pgcopydb stream sentinel`) for built-in monitoring. This allows you to:
-    - **Track migration progress**: Monitor the status of data transfer, replication lag, and overall migration health.
-    - **Manage replication stream**: Control aspects of the replication process, such as pausing or resuming change application, and managing cutover points.
+    - **Track migration progress**: Monitor the status of data transfer and overall migration health.
 
 This guide will walk you through using `pgcopydb` to perform an initial data migration to Neon which uses pgcopydb for logical decoding.
 
 <Admonition type="note">
-Logical replication with Neon currently doesn't work on Neon. We are working on a solution to enable logical replication on Neon. You can still use `pgcopydb` to migrate your data to Neon via logical decoding to do a one-time migration.
+Logical replication with `pgcopydb clone --follow` doesn’t currently work on Neon. We’re actively working on a solution to enable it. In the meantime, you can still use `pgcopydb` for a one-time data migration to Neon via logical decoding.
 </Admonition>
 
 ## Prerequisites
@@ -54,8 +53,8 @@ Before you begin, ensure you have the following:
 Before proceeding, set the following environment variables for your source and target Postgres databases where you will run `pgcopydb` commands:
 
 ```bash
-export PGCOPYDB_SOURCE_PGURI="Postgres://source_user:source_password@source_host:source_port/source_db"
-export PGCOPYDB_TARGET_PGURI="Postgres://neon_user:neon_password@neon_host:neon_port/neon_db"
+export PGCOPYDB_SOURCE_PGURI="postgresql://source_user:source_password@source_host:source_port/source_db"
+export PGCOPYDB_TARGET_PGURI="postgresql://neon_user:neon_user_password@xxxx.neon.tech/neondb?sslmode=require"
 ```
 
 You can replace the placeholders with your actual connection details. You can get Neon database connection details from the Neon console.
@@ -106,6 +105,30 @@ Switch your application to Neon and validate the migration after `pgcopydb clone
 
 
 </Steps>
+
+## Advanced usage
+
+`pgcopydb` offers several advanced options to optimize and customize your migration. Here are some key considerations for large database migrations:
+
+### Boosting migration speed with parallelism
+
+`--table-jobs <integer>` & `--index-jobs <integer>`: These options control the number of concurrent jobs for copying tables and creating indexes, respectively. For large databases, increasing these values is crucial for reducing migration time.
+
+### Handling large tables efficiently
+
+`--split-tables-larger-than <bytes>`:  This option is essential for handling large tables efficiently. It automatically splits tables exceeding the specified size into smaller chunks for parallel import.  Use this to dramatically accelerate migration of massive datasets. Start with a size like `1GB` or `500MB` and adjust based on your table sizes.
+
+**Example:**
+
+```bash
+pgcopydb clone --table-jobs 8 --index-jobs 12 --split-tables-larger-than 500MB
+```
+
+This command will run the migration with 8 concurrent table jobs, 12 concurrent index jobs, and split tables larger than 500MB into smaller chunks for parallel import.
+
+### Filtering and selective migration
+
+`--filters <filename>`:  Sometimes you only need to migrate a subset of your database. `--filters` allows you to precisely control which tables, indexes, or schemas are included in the migration.  This is useful for selective migrations or excluding unnecessary data.
 
 ## Reference
 
