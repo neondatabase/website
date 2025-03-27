@@ -35,6 +35,7 @@ import CodeBlock from 'components/shared/code-block';
 import ComputeCalculator from 'components/shared/compute-calculator';
 import CtaBlock from 'components/shared/cta-block';
 import DocCta from 'components/shared/doc-cta';
+import ExternalCodeSnippet from 'components/shared/external-code-snippet';
 import ImageZoom from 'components/shared/image-zoom';
 import InkeepEmbedded from 'components/shared/inkeep-embedded';
 import LatencyCalculator from 'components/shared/latency-calculator';
@@ -46,7 +47,8 @@ import getGlossaryItem from 'utils/get-glossary-item';
 import sharedMdxComponents from '../../../../content/docs/shared-content';
 
 const sharedComponents = Object.keys(sharedMdxComponents).reduce((acc, key) => {
-  acc[key] = (props) => IncludeBlock({ url: sharedMdxComponents[key], ...props });
+  const url = sharedMdxComponents[key];
+  acc[key] = (props) => IncludeBlock({ url, ...props });
   return acc;
 }, {});
 
@@ -186,6 +188,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   Steps,
   DeployPostgresButton,
   ChatOptions,
+  ExternalCodeSnippet,
   ...sharedComponents,
 });
 
