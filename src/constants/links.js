@@ -44,7 +44,7 @@ export default {
   connectionPooling: '/docs/connect/connection-pooling',
   docsBranching: '/docs/introduction/branching',
   migration: '/docs/import/import-data-assistant',
-  rlsAuthorize: '/docs/guides/neon-rls-authorize',
+  rlsAuthorize: '/docs/guides/neon-rls',
   serverless: '/docs/introduction/serverless',
   support: '/docs/introduction/support',
   variableTraffic: '/docs/use-cases/variable-traffic',
@@ -59,7 +59,7 @@ export default {
   subprocessors: '/subprocessors',
   businessInformation: '/business-info',
   sensitiveDataTerms: '/sensitive-data-terms',
-  hipaaCompliance: '/hipaa-compliance-guide',
+  hipaaCompliance: '/docs/security/hipaa',
   hipaaContractors: '/hipaa-contractors',
   // Console
   console: 'https://console.neon.tech',
