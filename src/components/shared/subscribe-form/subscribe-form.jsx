@@ -22,16 +22,20 @@ const appearAndExitAnimationVariants = {
 
 const themeClassNames = {
   sidebar: {
-    block: 'mt-12 max-w-[228px] p-3.5 flex-col gap-3',
+    block: 'mt-12 max-w-[228px] flex-col gap-3 p-3.5',
     title: 'text-[15px] font-medium leading-snug tracking-tighter',
     input: 'pr-20',
+    sendText: 'hidden',
+    errorMessage: 'mt-5',
   },
   default: {
-    // block: 'hidden xl:block',
     block:
-      'mb-5 gap-[72px] py-[18px] px-6 sm:p-[18px] sm:pt-3.5 items-center md:gap-10 sm:gap-2.5 sm:flex-col xs:items-start',
-    title: 'text-lg font-medium leading-snug tracking-tighter shrink-0',
+      'mb-5 hidden items-center gap-[72px] px-6 py-[18px] xl:flex md:gap-10 sm:flex-col sm:gap-2.5 sm:p-[18px] sm:pt-3.5 xs:items-start',
+    title: 'shrink-0 text-lg font-medium leading-snug tracking-tighter',
     input: 'pr-32 xs:pr-20',
+    sendText: 'text-[13px] font-semibold tracking-extra-tight xs:hidden',
+    sendIcon: 'hidden xs:block',
+    errorMessage: 'mt-1.5 sm:mt-6',
   },
 };
 
@@ -111,7 +115,7 @@ const SubscribeForm = ({ isSidebar = false }) => {
     <section
       className={clsx(
         'subscribe-form safe-paddings relative flex scroll-mt-20 rounded-lg bg-gray-new-94',
-        'dark:bg-subscribe-form-dark dark:shadow-[0px_2px_10px_0px_rgba(0,0,0,0.4),0px_2px_30px_0px_rgba(0,0,0,0.5)]',
+        'dark:bg-subscribe-form-dark dark:shadow-[0px_2px_10px_0px_rgba(0,0,0,.4),0px_2px_30px_0px_rgba(0,0,0,.5)]',
         'lg:scroll-mt-10',
         classNames.block
       )}
@@ -160,16 +164,8 @@ const SubscribeForm = ({ isSidebar = false }) => {
                 aria-label="Subscribe"
                 variants={appearAndExitAnimationVariants}
               >
-                <span
-                  className={clsx(
-                    isSidebar
-                      ? 'hidden'
-                      : 'text-[13px] font-semibold tracking-extra-tight xs:hidden'
-                  )}
-                >
-                  Subscribe
-                </span>
-                <SendIcon className={clsx(!isSidebar && 'hidden xs:block')} />
+                <span className={classNames.sendText}>Subscribe</span>
+                <SendIcon className={classNames.sendIcon} />
               </m.button>
             )}
             {formState === FORM_STATES.LOADING && (
@@ -221,7 +217,7 @@ const SubscribeForm = ({ isSidebar = false }) => {
             className={clsx(
               'absolute left-1/2 top-full -translate-x-1/2 whitespace-nowrap',
               'text-xs leading-none tracking-extra-tight text-secondary-1',
-              isSidebar ? 'mt-5' : 'mt-1.5 sm:mt-6'
+              classNames.errorMessage
             )}
             data-test="error-message"
           >
