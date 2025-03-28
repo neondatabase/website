@@ -39,7 +39,7 @@ const themeClassNames = {
   },
 };
 
-const SubscribeForm = ({ isSidebar = false }) => {
+const ChangelogForm = ({ isSidebar = false }) => {
   const theme = isSidebar ? 'sidebar' : 'default';
   const classNames = themeClassNames[theme];
 
@@ -114,12 +114,12 @@ const SubscribeForm = ({ isSidebar = false }) => {
   return (
     <section
       className={clsx(
-        'subscribe-form safe-paddings relative flex scroll-mt-20 rounded-lg bg-gray-new-94',
+        'changelog-form safe-paddings relative flex scroll-mt-20 rounded-lg bg-gray-new-94',
         'dark:bg-subscribe-form-dark dark:shadow-[0px_2px_10px_0px_rgba(0,0,0,.4),0px_2px_30px_0px_rgba(0,0,0,.5)]',
         'lg:scroll-mt-10',
         classNames.block
       )}
-      id="subscribe-form"
+      id="changelog-form"
     >
       <h2 className={classNames.title}>
         Subscribe to our changelog.
@@ -230,8 +230,8 @@ const SubscribeForm = ({ isSidebar = false }) => {
   );
 };
 
-SubscribeForm.propTypes = {
+ChangelogForm.propTypes = {
   isSidebar: PropTypes.bool,
 };
 
-export default SubscribeForm;
+export default ChangelogForm;
