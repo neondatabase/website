@@ -23,7 +23,7 @@ Learn the fundamentals of building AI applications with Neon:
 
 ## AI frameworks and integrations
 
-Build AI applications faster with these popular frameworks:
+Build AI applications faster with these popular frameworks, tools, and services:
 
 <DetailIconCards>
 
