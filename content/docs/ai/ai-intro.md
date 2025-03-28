@@ -80,7 +80,7 @@ Hackable, fully-featured, pre-built starter apps to get you up and running:
 Real-world AI applications built with Neon that you can reference as code examples or inspiration.
 
 <Admonition type="tip" title="Built something cool?">
-Share your AI app on our [#showcase](https://discord.gg/neon) channel on Discord for consideration.
+Share your AI app on our [#showcase](https://discord.gg/neon) channel on Discord.
 </Admonition>
 
 <DetailIconCards>
