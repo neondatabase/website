@@ -44,7 +44,7 @@ export default {
   connectionPooling: '/docs/connect/connection-pooling',
   docsBranching: '/docs/introduction/branching',
   migration: '/docs/import/import-data-assistant',
-  rlsAuthorize: '/docs/guides/neon-rls-authorize',
+  rlsAuthorize: '/docs/guides/neon-rls',
   serverless: '/docs/introduction/serverless',
   support: '/docs/introduction/support',
   variableTraffic: '/docs/use-cases/variable-traffic',
