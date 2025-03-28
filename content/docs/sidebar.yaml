@@ -741,6 +741,8 @@
           slug: ai/ai-concepts
         - title: The pgvector extension
           slug: extensions/pgvector
+        - title: AI Rules for Neon Auth
+          slug: ai/ai-rules-neon-auth
         - title: AI integrations
           slug: ai/langchain
           items:
