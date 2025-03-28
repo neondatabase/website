@@ -191,7 +191,7 @@ export const posts = pgTable(
 
 ## Example application
 
-Check out our [social wall sample application](https://github.com/neondatabase-labs/social-wall-drizzle-neon-rls-authorize), a simple schema that demonstrates RLS policies with `crudPolicy`. It implements a social wall where:
+Check out our [social wall sample application](https://github.com/neondatabase-labs/social-wall-drizzle-neon-rls), a simple schema that demonstrates RLS policies with `crudPolicy`. It implements a social wall where:
 
 - Anyone can view the wall
 - Authenticated users can modify their own posts

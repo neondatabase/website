@@ -11,7 +11,7 @@ redirectFrom:
 
 <InfoBlock>
 <DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/azure-ad-b2c-nextjs-neon-rls-authorize">Azure Active Directory + Neon RLS</a>
+  <a href="https://github.com/neondatabase-labs/azure-ad-b2c-nextjs-neon-rls">Azure Active Directory + Neon RLS</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">

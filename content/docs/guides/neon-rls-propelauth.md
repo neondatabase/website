@@ -11,7 +11,7 @@ redirectFrom:
 
 <InfoBlock>
 <DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/propelauth-nextjs-neon-rls-authorize">PropelAuth + Neon RLS</a>
+  <a href="https://github.com/neondatabase-labs/propelauth-nextjs-neon-rls">PropelAuth + Neon RLS</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">

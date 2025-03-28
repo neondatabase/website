@@ -11,7 +11,7 @@ redirectFrom:
 
 <InfoBlock>
 <DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/supertokens-nestjs-solidjs-drizzle-neon-rls-authorize">SuperTokens + Neon RLS</a>
+  <a href="https://github.com/neondatabase-labs/supertokens-nestjs-solidjs-drizzle-neon-rls">SuperTokens + Neon RLS</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">

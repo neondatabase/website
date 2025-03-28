@@ -11,7 +11,7 @@ redirectFrom:
 
 <InfoBlock>
 <DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/stack-nextjs-neon-rls-authorize">Stack Auth + Neon RLS</a>
+  <a href="https://github.com/neondatabase-labs/stack-nextjs-neon-rls">Stack Auth + Neon RLS</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
