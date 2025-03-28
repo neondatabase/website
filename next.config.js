@@ -141,6 +141,11 @@ const defaultConfig = {
 
     return [
       {
+        source: '/msbuild',
+        destination: '/',
+        permanent: true,
+      },
+      {
         source: '/bm',
         destination: '/?ref=tbm-p',
         permanent: true,
