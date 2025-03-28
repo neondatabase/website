@@ -21,7 +21,6 @@ Here's a snapshot of what we're working on now:
 - **Branch protection enhancements**: We're enhancing safeguards for [protected branches](/docs/guides/protected-branches) to strengthen their security and prevent accidental actions.
 - **Neon on Azure GA**: We're working toward a GA release with deeper Azure integration.
 - **Inbound logical replication GA**: Neon supports Postgres logical replication for inbound and outbound data. Outbound replication (replicating data from Neon) is GA. In 2025, inbound replication (replicating data to Neon) will also reach GA.
-- **Neon serverless driver GA**: The [Neon serverless driver](/docs/serverless/serverless-driver) lets you connect to Neon from serverless environments over HTTP or WebSockets. We're fine-tuning its performance and preparing it for general availability (GA).
 
 Other features you would like to see? [Let us know](#share-your-thoughts).
 
@@ -40,7 +39,8 @@ And here's a quick list of what we'll be taking on in the near future:
 
 ## What we've shipped recently 🚢
 
-- **Support for [pg_search](https://neon.tech/docs/extensions/pg_search)**. We partnered with [ParadeDB](https://www.paradedb.com/) to bring `pg_search` to Neon, delivering up to 1,000x faster full-text search inside Postgres. [Read the announcement](https://neon.tech/blog/pgsearch-on-neon).
+- **Neon serverless driver GA**: Our JavaScript/TypeScript serverless driver has reached version 1.0.0, bringing stronger SQL injection safeguards and better performance for serverless environments.
+- **Support for [pg_search](https://neon.tech/docs/extensions/pg_search)**: We partnered with [ParadeDB](https://www.paradedb.com/) to bring `pg_search` to Neon, delivering up to 1,000x faster full-text search inside Postgres. [Read the announcement](https://neon.tech/blog/pgsearch-on-neon).
 - **MACC-eligibility on Azure**: Neon Postgres purchases made through the Azure Marketplace are now counted toward your Microsoft Azure Consumption Commitment (MACC). [Learn more](https://neon.tech/docs/introduction/billing-azure-marketplace#microsoft-azure-consumption-commitment-macc).
 - **GitHub Secret Scanning**: Neon joined GitHub's Secret Scanning Partner Program to automatically detect and protect against exposed database credentials in public repositories.
 - **HIPAA compliance**: We have achieved HIPAA compliance. Learn more about Neon's compliance milestones on our [Compliance page](/docs/security/compliance).
