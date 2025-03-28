@@ -11,6 +11,7 @@ import MODALS from 'components/pages/doc/modal/data';
 import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
 import NavigationLinks from 'components/shared/navigation-links';
+import SubscribeForm from 'components/shared/subscribe-form';
 import TableOfContents from 'components/shared/table-of-contents';
 import { DOCS_BASE_PATH } from 'constants/docs';
 
@@ -19,6 +20,7 @@ import Tag from '../tag';
 const Changelog = ({ posts }) => (
   <>
     <Hero />
+    <SubscribeForm />
     <ChangelogList className="mt-4" posts={posts} />
   </>
 );
@@ -135,6 +137,7 @@ const Post = ({
             </div>
           )}
           {isDocsIndex && <ChatOptions isSidebar />}
+          {isChangelog && <SubscribeForm isSidebar />}
         </div>
       </div>
 
