@@ -1,19 +1,19 @@
 ---
-title: Neon Slack App
+title: Neon App for Slack
 enableTableOfContents: true
 subtitle: Track your Neon projects and organizations from Slack
 updatedOn: '2025-03-19T12:43:23.197Z'
 ---
 
-The Neon Slack App allows you to monitor your Neon usage and manage organization membership directly from Slack. Get quick access to project information and resource usage metrics without leaving your workspace.
+The Neon App for Slack allows you to monitor your Neon usage and manage organization membership directly from Slack. Get quick access to project information and resource usage metrics without leaving your workspace.
 
-![Neon Slack App commands](/docs/manage/slack_app_overview.png)
+![Neon App for Slack commands](/docs/manage/slack_app_overview.png)
 
 ## Setup
 
 <Steps>
 
-## Install the Neon Slack App
+## Install the Neon App for Slack
 
 Click the **Add to Slack** button and follow the prompts.
 <Button
@@ -44,7 +44,7 @@ Once authenticated, you're ready to use all available commands.
 | `/neon usage`          | Show overall resource usage for your account      |
 | `/neon help`           | List all available commands                       |
 | `/neon status`         | Check the current status of Neon's cloud service  |
-| `/neon feedback`       | Share your thoughts and suggestions about the Neon Slack App |
+| `/neon feedback`       | Share your thoughts and suggestions about the Neon App for Slack |
 | `/neon invite user`    | Invite users to your organization                 |
 | `/neon subscribe`      | Subscribe to your Neon account updates            |
 | `/neon unsubscribe`    | Unsubscribe from your Neon account updates       |
@@ -53,7 +53,7 @@ Once authenticated, you're ready to use all available commands.
 
 ### Check your Neon usage statistics
 
-Open a DM with the Neon Slack App and run the following command to instantly view your current data transfer, compute time, and storage usage across all projects:
+Open a DM with the Neon App for Slack and run the following command to instantly view your current data transfer, compute time, and storage usage across all projects:
 
 ```
 /neon usage
@@ -78,9 +78,9 @@ Once subscribed, the channel will start receiving important Neon usage notificat
 ## FAQs
 
 <details>
-<summary>**What can I do with the Neon Slack App?**</summary>
+<summary>**What can I do with the Neon App for Slack?**</summary>
 
-The Neon Slack App allows you to:
+The Neon App for Slack allows you to:
 
 - View project information and resource usage
 - Monitor system status
@@ -92,7 +92,7 @@ The Neon Slack App allows you to:
 <details>
 <summary>**Does this app allow me to modify databases or projects?**</summary>
 
-No, the Neon Slack App is primarily for viewing usage details and managing organization membership, not for direct database management.
+No, the Neon App for Slack is primarily for viewing usage details and managing organization membership, not for direct database management.
 
 </details>
 

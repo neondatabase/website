@@ -29,7 +29,7 @@ const MODALS = [
     title: 'Manage Neon in Slack',
     description: 'Get alerts, track usage, and manage your team right from Slack',
     link: {
-      title: 'Get the Neon Slack app',
+      title: 'Get the Neon App for Slack',
       url: '/docs/manage/slack-app',
     },
   },
@@ -39,7 +39,7 @@ const MODALS = [
     title: 'Collaborate in Slack',
     description: 'Invite teammates to your Neon organization right from Slack',
     link: {
-      title: 'Get the Neon Slack app',
+      title: 'Get the Neon App for Slack',
       url: '/docs/manage/slack-app',
     },
   },
@@ -49,7 +49,7 @@ const MODALS = [
     title: 'Track usage in Slack',
     description: 'Check project usage and get consumption alerts',
     link: {
-      title: 'Get the Neon Slack app',
+      title: 'Get the Neon App for Slack',
       url: '/docs/manage/slack-app',
     },
   },
