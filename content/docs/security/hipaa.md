@@ -66,18 +66,49 @@ Audit events may not be logged if database endpoints experience exceptionally he
 
 ## Enabling HIPAA for a Neon project
 
-Once the Neon team has enabled HIPAA for your account, you can enable HIPAA compliance when creating a new project. HIPAA can only be enabled during Neon project creation.
+Once the Neon team has enabled HIPAA for your Neon account, you can enable HIPAA compliance when creating a new project. HIPAA can only be enabled during Neon project creation.
 
-To create a new Neon project, see [Create a project](/docs/manage/projects#create-a-project).
+<Tabs labels={["Console", "API"]}>
+
+<TabItem>
+
+For how to create a new Neon project via the Neon Console, see [Create a project](/docs/manage/projects#create-a-project).
 
 On the **Create Project** form, select the **Enable HIPAA compliance for this project** checkbox. This option only appears if HIPAA is enabled on your account.
 
 ![Enable HIPAA option during project creation](/docs/security/enable_hipaa.png)
 
+</TabItem>
+
+<TabItem>
+
+To create a new HIPAA-enabled Neon project via the Neon API, set `audit_log_level` to `hipaa` in the `project settings` object, as shown below.
+
+```bash
+curl --request POST \
+     --url https://console.neon.tech/api/v2/projects \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '
+{
+  "project": {
+    "settings": {
+      "audit_log_level": "hipaa"
+    },
+    "pg_version": 17
+  }
+}
+'
+```
+</TabItem>
+
+</Tabs>
+
 If you have trouble enabling HIPAA, contact [Neon Sales](https://neon.tech/contact-sales).
 
 <Admonition type="note">
-Once HIPAA compliance is enabled for a Neon project, it cannot be disabled — you can only delete the Neon project. If a HIPAA-enabled project is deleted, Neon retains the audit data for the duration specified in the BAA.
+Once HIPAA compliance is enabled for a Neon project, it cannot be disabled — you can only delete the Neon project. If a HIPAA-enabled project is deleted, Neon retains the audit data for the duration specified in the Business Associate Agreement (BAA).
 </Admonition>
 
 ## Security incidents
