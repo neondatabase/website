@@ -23,9 +23,9 @@ Neon offers two primary backup strategies, which you can use separately or in co
 
 <Steps>
 
-## Instant Restore
+## Instant restore
 
-    With Neon's instant restore capability, you can automatically retain a "history" of changes—ranging from 1 day up to 30 days, depending on your Neon plan. This feature lets you recover your database to any specific moment without the need for traditional database backups or separate backup automation. It's ideal if your primary concern is fast recovery after an unexpected event.
+    With Neon's instant restore capability (also known as point-in-time restore or PITR), you can automatically retain a "history" of changes—ranging from 1 day up to 30 days, depending on your Neon plan. This feature lets you restore your database to any specific moment without the need for traditional database backups or separate backup automation. It's ideal if your primary concern is fast recovery after an unexpected event.
 
     By default, Neon projects retain **1 day** of history. You can increase your restore window on Neon as follows:
 

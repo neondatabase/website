@@ -80,7 +80,7 @@ Refer to the following guides for instructions.
 
 <DetailIconCards>
 
-<a href="/docs/guides/branch-restore" description="Restore a branch to its history with Branch Restore" icon="invert">Branch Restore with Time Travel</a>
+<a href="/docs/guides/branch-restore" description="Restore a branch to its history with Instant restore" icon="invert">Instant restore with Time Travel</a>
 
 <a href="/docs/guides/branching-pitr" description="Learn how to create a branch from historical data" icon="screen">Create a branch from the past</a>
 

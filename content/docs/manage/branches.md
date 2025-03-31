@@ -158,13 +158,13 @@ You can use the Neon Console, CLI, or API. For details, see [Reset from parent](
 
 ## Restore a branch to its own or another branch's history
 
-There are several restore operations available using Neon's Branch Restore feature:
+There are several restore operations available using Neon's instant restore feature:
 
 - Restore a branch to its own history
 - Restore a branch to the head of another branch
 - Restore a branch to the history of another branch
 
-You can use the Neon Console, CLI, or API. For more details, see [Branch Restore](/docs/guides/branch-restore).
+You can use the Neon Console, CLI, or API. For more details, see [Instant restore](/docs/guides/branch-restore).
 
 ## Delete a branch
 

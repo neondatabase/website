@@ -5,12 +5,12 @@ enableTableOfContents: true
 updatedOn: '2025-02-07T17:55:42.638Z'
 ---
 
-To help review your data's history, Time Travel lets you connect to any selected point in time within your restore window and then run queries against that connection.
+To help review your data's history, Time Travel lets you connect to any selected point in time within your restore window and then run queries against that connection. This capability is part of Neon's instant restore feature, which maintains a history of changes through Write-Ahead Log (WAL) records.
 
 You can use Time Travel from two places in the Neon Console, and from the Neon CLI:
 
 - **SQL Editor** &#8212; Time Travel is built into the SQL editor letting you switch between queries of your current data and previous iterations of your data in the same view.
-- **Restore** &#8212; Time Travel Assist is also built into the Branch Restore flow where it can help you make sure you've targeted the correct restore point before you restore a branch.
+- **Restore** &#8212; Time Travel Assist is also built into the instant restore flow where it can help you make sure you've targeted the correct restore point before you restore a branch.
 - **Neon CLI** &#8212; Use the Neon CLI to quickly establish instant restore connections for automated scripts or command-line-based data analysis.
 
 ## How Time Travel works
@@ -57,9 +57,8 @@ Here's an example of a completed Time Travel query.
 
 ![time travel from sql editor](/docs/guides/time_travel_sql.png)
 
-### Time Travel Assist with Branch Restore
-
-Time Travel Assist is also available from the **Restore** page, as part of the [Branch Restore](/docs/guides/branch-restore) feature. Before completing a restore operation, it's a good idea to use Time Travel Assist to verify that you've targetted the correct restore point.
+### Time Travel Assist with instant restore
+Time Travel Assist is also available from the **Restore** page, as part of the [Instant restore](/docs/guides/branch-restore) feature.
 
 An SQL editor is built into the **Restore** page for this purpose. When you make your branch and timestamp selection to restore a branch, this selection can also be used as the point-in-time connection to query against.
 
@@ -71,7 +70,7 @@ Here is an example of a completed query:
 
 Here is how to use Time Travel from both the **SQL Editor** and from the **Restore** page:
 
-<Tabs labels={["SQL Editor", "Branch Restore", "CLI"]}>
+<Tabs labels={["SQL Editor", "Instant restore", "CLI"]}>
 
 <TabItem>
 

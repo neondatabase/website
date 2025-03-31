@@ -1,6 +1,6 @@
 ---
-title: Branch Restore
-subtitle: Learn how to revert changes or recover lost data using Neon Branch Restore
+title: Instant restore
+subtitle: Learn how to revert changes or recover lost data using Neon's instant restore
   with Time Travel Assist
 enableTableOfContents: true
 redirectFrom:
@@ -10,9 +10,9 @@ redirectFrom:
 updatedOn: '2025-02-28T11:10:41.825Z'
 ---
 
-With Neon's branch restore capability, you can easily restore a branch to an earlier state in its own or another branch's history. You can use Time Travel Assist to connect to a specific point in your restore window, where you can run read-only queries to pinpoint the exact moment you need to restore to. You can also use Schema Diff to get a side-by-side, GitHub-style visual comparison of your selected branches before restoring.
+With Neon's instant restore capability (also known as point-in-time restore or PITR), you can easily restore a branch to an earlier state in its own or another branch's history. You can use Time Travel Assist to connect to a specific point in your restore window, where you can run read-only queries to pinpoint the exact moment you need to restore to. You can also use Schema Diff to get a side-by-side, GitHub-style visual comparison of your selected branches before restoring.
 
-## How branch restore works
+## How instant restore works
 
 ### Restore from history
 
@@ -59,7 +59,7 @@ Existing connections to the selected branch are temporarily interrupted during t
 
 #### Technical details
 
-Neon is open source and built in public, so if you are interested in understanding the technical implementation of a branch restore operation, see the details below.
+Neon is open source and built in public, so if you are interested in understanding the technical implementation behind instant restore, see the details below.
 
 <details>
 <summary>View technical details</summary>
@@ -79,7 +79,7 @@ Use Time Travel Assist to make sure you've targeted the correct restore point be
 
 See [Time Travel Assist](/docs/guides/time-travel-assist) to learn more.
 
-## How to use branch restore
+## How to use instant restore
 
 You can use the Neon Console, CLI, or API to restore branches.
 
@@ -260,9 +260,9 @@ To keep your **Branches** page organized, consider renaming backup branches that
 
 ## Billing considerations
 
-There are minimal impacts to billing from the branch restore and Time Travel Assist features:
+There are minimal impacts to billing from the instant restore and Time Travel Assist features:
 
-- **Branch Restore** &#8212; The backups created when you restore a branch do add to your total number of branches, but since they do not have a compute attached they do not add to consumption costs.
+- **Instant restore** &#8212; The backups created when you restore a branch do add to your total number of branches, but since they do not have a compute attached they do not add to consumption costs.
 - **Time Travel Assist** &#8212; Costs related to Time Travel queries are minimal. See [Billing considerations](/docs/guides/time-travel-assist#billing-considerations).
 
 ## Limitations
@@ -270,4 +270,4 @@ There are minimal impacts to billing from the branch restore and Time Travel Ass
 - Deleting backup branches is only supported for backups created by restore operations on root branches. See [Deleting backup branches](#deleting-backup-branches) for details.
 - [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent) restores from the parent branch, which may be a backup branch if you performed a restore operation on the parent branch.
 
-  For example, let's say you have a `main` branch with a child development branch `dev/alex`. You are working on `dev/alex` and decide to restore to an earlier point in time to fix something during development. At this point, `dev/alex`'s parent switches from `main` to the backup `dev/alex_old_timestamp`. A day later, you want to refresh `dev/alex` with the latest data from `main`. You can't use **Reset from parent**, since the backup is now the parent. Instead, use **Branch Restore** and select the original parent `main` as the source.
+  For example, let's say you have a `main` branch with a child development branch `dev/alex`. You are working on `dev/alex` and decide to restore to an earlier point in time to fix something during development. At this point, `dev/alex`'s parent switches from `main` to the backup `dev/alex_old_timestamp`. A day later, you want to refresh `dev/alex` with the latest data from `main`. You can't use **Reset from parent**, since the backup is now the parent. Instead, use **Instant restore** and select the original parent `main` as the source.

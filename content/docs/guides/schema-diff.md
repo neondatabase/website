@@ -12,7 +12,7 @@ Neon's Schema Diff tool lets you compare an SQL script of the schemas for two se
 Schema Diff is available in the Neon Console for use in two ways:
 
 - Compare a branch's schema to its parent
-- Compare selected branches during a branch restore operation
+- Compare selected branches during an instant restore operation
 
 You can also use the `branches schema-diff` command in the Neon CLI or `compare-schema` endpoint in the Neon API to effect a variety of comparisons.
 
@@ -61,7 +61,7 @@ The two-pane view shows the schema for both your target and your selected branch
 You can use the Neon CLI to:
 
 - Compare the latest schemas of any two branches
-- Compare against a specific point in its own or another branch’s history
+- Compare against a specific point in its own or another branch's history
 
 Use the `schema-diff` subcommand from the `branches` command:
 
@@ -125,36 +125,4 @@ The `compare_schema` endpoint supports the following parameters:
 - `timestamp` / `base_timestamp` values must be provided in <LinkPreview href="https://en.wikipedia.org/wiki/ISO_8601" title="ISO 8601" preview="An international standard covering the worldwide exchange and communication of date and time-related data.">ISO 8601 format</LinkPreview>.
 </Admonition>
 
-Here’s an example of the `compare_schema` diff output for the `neondb` database after comparing target branch `br-rough-boat-a54bs9yb` with the base branch `br-royal-star-a54kykl2`.
-
-```diff
---- a/neondb
-+++ b/neondb
-@@ -27,7 +27,8 @@
- CREATE TABLE public.playing_with_neon (
-     id integer NOT NULL,
-     name text NOT NULL,
--    value real
-+    value real,
-+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP
- );
-```
-
-**Output explanation:**
-
-- `-` (minus) identifies Lines that were removed from the base branch schema.
-- `+` (plus) identifies lines that were added in the target branch schema.
-
-In the example above, the `created_at` column was added to the `public.playing_with_neon` table on the target branch.
-
-## Schema Diff GitHub Action
-
-Neon supports a [Schema Diff GitHub Action](/docs/guides/branching-github-actions#schema-diff-action) that performs a database schema diff on specified Neon branches for each pull request and writes a comment to the pull request highlighting the schema differences.
-
-This action supports workflows where schema changes are made on a branch. When you create or update a pull request containing schema changes, the action automatically generates a comment within the pull request. By including the schema diff as part of the comment, reviewers can easily assess the changes directly within the pull request.
-
-To learn more, see the [Schema Diff GitHub Action](/docs/guides/branching-github-actions#schema-diff-action).
-
-## Tutorial
-
-For a step-by-step guide showing you how to compare two development branches using Schema Diff, see [Schema diff tutorial](/docs/guides/schema-diff-tutorial).
+Here's an example of the `compare_schema` diff output for the `

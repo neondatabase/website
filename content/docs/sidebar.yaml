@@ -211,6 +211,8 @@
           items:
             - title: Scale to zero guide
               slug: guides/scale-to-zero-guide
+        - title: Instant restore
+          slug: guides/branch-restore
         - title: Branching
           slug: guides/branching-intro
           items:

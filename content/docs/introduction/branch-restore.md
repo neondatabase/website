@@ -31,6 +31,4 @@ Find out more about the different branch reset and restore features that Neon pr
 
 <a href="/docs/guides/reset-from-parent" description="Learn how to restore a branch to its history with Time Travel assist" icon="split-branch">Reset a branch from its parent</a>
 
-<a href="/docs/guides/branching-pitr" description="Create a new point-in-time branch from timestamp or LSN" icon="split-branch">Create a point-in-time branch</a>
-
 </DetailIconCards>
