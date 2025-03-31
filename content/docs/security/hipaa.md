@@ -6,7 +6,7 @@ updatedOn: '2025-03-19T13:27:32.000Z'
 
 At Neon, we take the security and privacy of your health information seriously. This guide is designed to help you understand how Neon complies with the Health Insurance Portability and Accountability Act (HIPAA) and what that means for you as a customer. Our Business Associate Agreement (BAA) outlines our commitment to safeguarding Protected Health Information (PHI) and complying with HIPAA regulations.
 
-Neon's HIPAA functionality is only available to customers who have signed a Business Associate Agreement (BAA) with Neon. To request a draft BAA, please contact [Neon Sales](https://neon.tech/contact-sales). After you've signed a BAA, see [How to enable HIPAA for a Neon project](#how-to-enable-hipaa-for-neon-project).
+Neon's HIPAA functionality is only available to customers who have signed a Business Associate Agreement (BAA) with Neon. To request a draft BAA, please contact [Neon Sales](https://neon.tech/contact-sales). After you've signed a BAA, see [Enabling HIPAA for a Neon project](#enabling-hipaa-for-a-neon-project).
 
 ## What is HIPAA?
 
@@ -64,13 +64,13 @@ HIPAA is a federal law that sets national standards for the protection of health
 
 Audit events may not be logged if database endpoints experience exceptionally heavy load, as we prioritize database availability over capturing log events.
 
-## How to enable HIPAA compliance for a Neon project
+## Enabling HIPAA for a Neon project
 
 Once the Neon team has enabled HIPAA for your account, you can enable HIPAA compliance when creating a new project. HIPAA can only be enabled during Neon project creation.
 
 To create a new Neon project, see [Create a project](/docs/manage/projects#create-a-project).
 
-On the **Create Project** form, select the **Enable HIPAA compliance for this project** checkbox. This option only appears if HIPAA has been enabled on your account by the Neon team.
+On the **Create Project** form, select the **Enable HIPAA compliance for this project** checkbox. This option only appears if HIPAA is enabled on your account.
 
 ![Enable HIPAA option during project creation](/docs/security/enable_hipaa.png)
 
