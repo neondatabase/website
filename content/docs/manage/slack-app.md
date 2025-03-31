@@ -80,7 +80,7 @@ Open a DM with the Neon App for Slack and run the following command to instantly
 
 ### Usage notifications
 
-You can receive automated notifications about your Neon usage in any public channel. First, subscribe to notifications using the steps in the section below. Once subscribed, the channel will receive automatic notifications when you approach or reach your resource limits for compute hours, storage, or data transfer.
+You can receive automated notifications about your Neon usage in any channel (public or private). First, subscribe to notifications using the steps in the section below. Once subscribed, the channel will receive automatic notifications when you approach or reach your resource limits for compute hours, storage, or data transfer.
 
 ### Subscribe to notifications in a channel
 
