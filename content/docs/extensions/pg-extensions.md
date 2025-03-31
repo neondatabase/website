@@ -8,7 +8,7 @@ updatedOn: '2025-03-18T00:30:19.134Z'
 
 Neon supports the Postgres extensions shown in the following table. The supported version of the extension sometimes differs by Postgres version. A dash (`-`) indicates that an extension is not yet supported.
 
-**Need an extension we don't have?** 📩 [Request an extension](/docs/extensions/pg-extensions#request-extension-support)
+**Need an extension we don't have?** 📩 [Request an extension](/docs/extensions/pg-extensions#request-an-extension)
 
 <a id="default-extensions/"></a>
 
@@ -58,7 +58,7 @@ Neon supports the Postgres extensions shown in the following table. The supporte
 | [pg_tiktoken](/docs/extensions/pg_tiktoken)                                                      |  0.0.1 |  0.0.1 |  0.0.1 |  0.0.1 | The [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role has `EXECUTE` privilege on the `pg_stat_statements_reset()` function.                                                                                                                                                                                                                                                                                                                    |
 | [pg_trgm](/docs/extensions/pg_trgm)                                                              |    1.6 |    1.6 |    1.6 |    1.6 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [pg_uuidv7](https://github.com/fboulnois/pg_uuidv7)                                              |    1.6 |    1.6 |    1.6 |    1.6 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| [pgcrypto](https://www.postgresql.org/docs/16/pgcrypto.html)                                     |    1.3 |    1.3 |    1.3 |    1.3 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| [pgcrypto](/docs/extensions/pgcrypto)                                     |    1.3 |    1.3 |    1.3 |    1.3 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [pgjwt](https://github.com/michelp/pgjwt)                                                        |  0.2.0 |  0.2.0 |  0.2.0 |  0.2.0 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [pgrag](/docs/extensions/pgrag)                                                                  |  0.0.0 |  0.0.0 |  0.0.0 |  0.0.0 | This extension is **experimental**. Using a separate, dedicated Neon project is recommended. Run `SET neon.allow_unstable_extensions='true';` before installing.                                                                                                                                                                                                                                                                                              |
 | [pgrouting](/docs/extensions/postgis-related-extensions#pgrouting)                               |  3.4.2 |  3.4.2 |  3.4.2 |  3.6.2 | The PostGIS extension must be installed first.                                                                                                                                                                                                                                                                                                                                                                                                                |
@@ -90,9 +90,9 @@ Neon supports the Postgres extensions shown in the following table. The supporte
 | [timescaledb](/docs/extensions/timescaledb)                                                      | 2.10.1 | 2.10.1 | 2.13.0 | 2.17.1 | Only Apache-2 licensed features are supported. Compression is not supported.                                                                                                                                                                                                                                                                                                                                                                                  |
 | [tsm_system_rows](https://www.postgresql.org/docs/16/tsm-system-rows.html)                       |    1.0 |    1.0 |    1.0 |    1.0 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [tsm_system_time](https://www.postgresql.org/docs/16/tsm-system-time.html)                       |    1.0 |    1.0 |    1.0 |    1.0 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| [unaccent](https://www.postgresql.org/docs/16/unaccent.html)                                     |    1.1 |    1.1 |    1.1 |    1.1 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| [unaccent](/docs/extensions/unaccent)                                     |    1.1 |    1.1 |    1.1 |    1.1 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [unit](https://github.com/df7cb/postgresql-unit)                                                 |      7 |      7 |      7 |      7 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| [uuid-ossp](https://www.postgresql.org/docs/16/uuid-ossp.html)                                   |    1.1 |    1.1 |    1.1 |    1.1 | Double-quote the extension name when installing: `CREATE EXTENSION "uuid-ossp"`                                                                                                                                                                                                                                                                                                                                                                               |
+| [uuid-ossp](/docs/extensions/uuid-ossp)                                   |    1.1 |    1.1 |    1.1 |    1.1 | Double-quote the extension name when installing: `CREATE EXTENSION "uuid-ossp"`                                                                                                                                                                                                                                                                                                                                                                               |
 | [wal2json](/docs/extensions/wal2json)                                                            |    2.6 |    2.6 |    2.6 |    2.6 | `CREATE EXTENSION` not required. This decoder plugin is available by default but requires enabling [logical replication](/docs/guides/logical-replication-guide) in Neon.                                                                                                                                                                                                                                                                                     |
 | [xml2](https://www.postgresql.org/docs/current/xml2.html)                                        |    1.1 |    1.1 |    1.1 |    1.1 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 
@@ -126,19 +126,13 @@ When Neon releases a new extension or new extension version, a compute restart i
 Extensions installations and updates are automatically applied to any read replica computes on the same branch as your primary compute the next time the read replica compute restarts.  
 </Admonition>
 
-## Extension support notes
-
-- Neon supports the `uuid-ossp` extension for generating UUIDs instead of the `uuid` extension.
-- The `sslinfo` extension is not supported. Neon handles connections via a proxy that checks SSL.
-- The `file_fdw` extension is not supported. Files would not remain accessible when Neon scales to zero.
-
-## Request extension support
+## Request an extension
 
 <RequestForm type="extension" />
 
-_We appreciate all extension requests. While we can’t guarantee support, we regularly review requests, prioritizing them based on criteria such as user demand, Neon’s product direction, and popularity within the Postgres ecosystem._
+_We appreciate all extension requests. While we can’t guarantee support, we regularly review requests and prioritize them based on factors like user demand, popularity in the Postgres ecosystem, and Neon’s product direction. Some extensions are simple to add, while others require significant integration work._
 
-### Custom-built extensions
+## Custom-built extensions
 
 For [Enterprise](/docs/introduction/plans#enterprise) plan customers, Neon supports custom-built Postgres extensions for exclusive use with your Neon account. If you developed your own Postgres extension and want to use it with Neon, please reach out to us as described above. Please include the following information in your request:
 
@@ -151,5 +145,42 @@ Please keep in mind that certain restrictions may apply with respect to Postgres
 Depending on the nature of your extension, Neon may also request a liability waiver.
 
 Custom-built extensions are not yet supported for Neon projects provisioned on Azure.
+
+## Extension support
+
+Neon supports a large number of Postgres extensions. When we say an extension is “supported,” we mean that it's available for you to enable and use in your project.
+
+We don’t actively maintain third-party extension code. If you run into an issue or discover a bug with an extension, we recommend reporting it to the extension’s upstream maintainers. If a fix is released, we’re happy to update to the latest version of the extension. 
+
+For the extension versions that Neon supports, refer to the [Supported extensions table](/docs/extensions/pg-extensions) above. You can request support for a new version of an extension by opening a [support ticket](https://console.neon.tech/app/projects?modal=support) or by reaching out to us on [Discord](https://discord.com/invite/92vNTzKDGp).
+
+## Experimental extensions
+
+Neon occasionally adds support for extensions that are in early stages of development or undergoing validation. These extensions require an explicit opt-in and are not recommended for production use.
+
+To run these extensions, you'll be required to configure the following session variable before installing the extension:
+
+```sql
+SET neon.allow_unstable_extensions = 'true';
+```
+
+<Admonition type="note">
+"Unstable" doesn’t mean the extension is buggy. It means that we have not yet met service level expectations for the extension, often related to testing and Neon integration requirements. 
+</Admonition> 
+
+**Things to know about experimental extensions:**
+
+- **Use with caution:** We recommend trying experimental extensions in a separate project—not in the Neon project you use for production.
+- **Limited support:** Experimental extensions aren’t covered by Neon support. If an extension causes your database to fail or prevents it from starting, we’ll help you disable it if possible—but we can’t guarantee more than that.
+- **No guarantees:** An experimental extension might never become fully supported. It could require significant work from Neon or the extension’s maintainers before it’s ready for general use.
+- **Subject to change or removal:** Experimental extensions may be updated at any time, including breaking changes. They can also be removed—especially if they pose security or operational risks.
+
+If you're experimenting with an extension and run into trouble, we recommend checking with the extension’s maintainers or community for support.
+
+## Extension notes
+
+- Neon supports the `uuid-ossp` extension for generating UUIDs instead of the `uuid` extension.
+- The `sslinfo` extension is not supported. Neon handles connections via a proxy that checks SSL.
+- The `file_fdw` extension is not supported. Files would not remain accessible when Neon scales to zero.
 
 <NeedHelp/>

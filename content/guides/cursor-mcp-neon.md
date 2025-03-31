@@ -44,12 +44,15 @@ Before you begin, ensure you have the following:
 **Add Neon MCP Server to Cursor:**
 
 1. Open Cursor and go to **Cursor Settings**.
-1. Navigate to **MCP**.
-1. Scroll to the **MCP Servers** section.
+2. Navigate to **MCP**.
+3. Scroll to the **MCP If not, you might need to manually create a file named `mcp.json`  Servers** section.
    ![Cursor MCP Servers section](/docs/guides/cursor-settings-features.png)
-1. Click **+ Add new MCP server**.
+4. Click **+ Add new MCP server**.
 
-1. In the "Add MCP Server" modal:
+<Tabs labels={["MacOS/Linux", "Windows", "Windows (WSL)"]}>
+
+<TabItem>
+In the "Add MCP Server" modal:
 
    - **Name:** Give your server a descriptive name (e.g., `Neon`).
    - **Type:** Select `command`.
@@ -62,6 +65,47 @@ Before you begin, ensure you have the following:
    - Click **Add**.
 
      ![Add Neon MCP Server in Cursor](/docs/guides/cursor-add-mcp-server.png)
+</TabItem>
+
+<TabItem>
+Cursor may prompt you to create an `mcp.json` file if one doesn't already exist. **Create it if prompted.**
+
+Add the following configuration to the `mcp.json` file, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key which you obtained earlier in the [Prerequisites](#prerequisites) section.
+
+```json
+{
+   "mcpServers": {
+      "neon": {
+         "command": "cmd",
+         "args": ["/c", "npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+      }
+   }
+}
+```
+
+Save the `mcp.json` file.
+</TabItem>
+
+<TabItem>
+Cursor may prompt you to create an `mcp.json` file if one doesn't already exist. **Create it if prompted.**
+
+Add the following configuration to the `mcp.json` file, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key which you obtained earlier in the [Prerequisites](#prerequisites) section.
+
+```json
+{
+   "mcpServers": {
+      "neon": {
+         "command": "wsl",
+         "args": ["npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+      }
+   }
+}
+```
+
+Save the `mcp.json` file.
+</TabItem>
+
+</Tabs>
 
    Cursor will attempt to connect. Your new "Neon" MCP server should appear in the MCP Servers list with all the available tools.
 

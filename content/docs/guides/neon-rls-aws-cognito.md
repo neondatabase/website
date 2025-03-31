@@ -11,7 +11,7 @@ redirectFrom:
 
 <InfoBlock>
 <DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/aws-cognito-express-htmx-neon-rls-authorize">AWS Cognito + Neon RLS</a>
+  <a href="https://github.com/neondatabase-labs/aws-cognito-express-htmx-neon-rls">AWS Cognito + Neon RLS</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">

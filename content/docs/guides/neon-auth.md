@@ -287,6 +287,22 @@ Key operations:
 
 See [Manage Neon Auth using the API](/docs/guides/neon-auth-api) for more information.
 
+## Permissions
+
+For organization-owned projects, only organization admins can manage Neon Auth settings. Organization members and project collaborators can use Neon Auth features once configured — like adding users — but they cannot modify the integration settings.
+
+The following table shows which actions each user can perform:
+
+| Actions            | Admin | Members | Collaborator |
+| ------------------ | :---: | :-----: | :----------: |
+| Install Neon Auth  |  ✅   |   ❌    |      ❌      |
+| Remove Neon Auth   |  ✅   |   ❌    |      ❌      |
+| Transfer ownership |  ✅   |   ❌    |      ❌      |
+| Generate SDK Keys  |  ✅   |   ❌    |      ❌      |
+| Create users       |  ✅   |   ✅    |      ✅      |
+
+For more information about organization roles and permissions, see [User roles and permissions](/docs/manage/organizations#user-roles-and-permissions).
+
 ## Best practices
 
 ### Foreign keys and the users_sync table

@@ -15,7 +15,7 @@ This guide will introduce you to Create and demonstrate how you can use it to ma
 
 Create leverages Neon as the database backend for its AI-powered app development platform. This integration delivers a fully managed database solution, which is fundamental to Create's rapid app development experience. By abstracting away database complexities, Create users can concentrate solely on their application's functionality and design.
 
-This experience is immediately apparent during app creation. Neon's instant database provisioning lets users bypass database setup and and focus on developing their application. Neon operates invisibly in the background. To learn more about how Create.xyz uses Neon, see [From Idea to Full Stack App in One Conversation with Create](https://neon.tech/blog/from-idea-to-full-stack-app-in-one-conversation-with-creat).
+This experience is immediately apparent during app creation. Neon's instant database provisioning lets users bypass database setup and and focus on developing their application. Neon operates invisibly in the background. To learn more about how Create.xyz uses Neon, see [From Idea to Full Stack App in One Conversation with Create](https://neon.tech/blog/from-idea-to-full-stack-app-in-one-conversation-with-create).
 
 ## Prerequisites
 

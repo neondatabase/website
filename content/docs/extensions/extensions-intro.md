@@ -10,7 +10,7 @@ Explore supported Postgres extensions by category. Also see:
 - [Install an extension](/docs/extensions/pg-extensions#install-an-extension)
 - [Update an extension](/docs/extensions/pg-extensions#update-an-extension-version)
 
-**Need an extension we don't have?** 📩 [Request an extension](/docs/extensions/pg-extensions#request-extension-support)
+**Need an extension we don't have?** 📩 [Request an extension](/docs/extensions/pg-extensions#request-an-extension)
 
 ## AI / Machine Learning
 
@@ -90,11 +90,11 @@ Explore supported Postgres extensions by category. Also see:
 
 <a href="https://www.postgresql.org/docs/16/tablefunc.html" description="Contains functions that return tables (multiple rows), including crosstab, which can pivot row data into columns dynamically" icon="data">tablefunc</a>
 
-<a href="https://www.postgresql.org/docs/16/unaccent.html" description="A text search dictionary that removes accents from characters, simplifying text search in Postgres" icon="data">unaccent</a>
+<a href="/docs/extensions/unaccent" description="A text search dictionary that removes accents from characters, simplifying text search in Postgres" icon="data">unaccent</a>
 
 <a href="https://github.com/df7cb/postgresql-unit" description="Implements a data type for SI units, plus byte, for storage, manipulation, and calculation of scientific units" icon="data">unit</a>
 
-<a href="https://www.postgresql.org/docs/16/uuid-ossp.html" description="Provides functions to generate universally unique identifiers (UUIDs) in Postgres, supporting various UUID standards" icon="data">uuid-ossp</a>
+<a href="/docs/extensions/uuid-ossp" description="Provides functions to generate universally unique identifiers (UUIDs) in Postgres, supporting various UUID standards" icon="data">uuid-ossp</a>
 
 <a href="/docs/extensions/wal2json" description="A Postgres logical decoding plugin that converts Write-Ahead Log (WAL) changes into JSON objects" icon="data">wal2json</a>
 
@@ -248,7 +248,7 @@ Explore supported Postgres extensions by category. Also see:
 
 <a href="https://github.com/dimitri/prefix" description="A prefix range module that supports efficient queries on text columns with prefix-based searching and matching capabilities" icon="search">prefix</a>
 
-<a href="https://www.postgresql.org/docs/16/unaccent.html" description="A text search dictionary that removes accents from characters, simplifying text search in Postgres" icon="search">unaccent</a>
+<a href="/docs/extensions/unaccent" description="A text search dictionary that removes accents from characters, simplifying text search in Postgres" icon="search">unaccent</a>
 
 </DetailIconCards>
 
@@ -258,7 +258,7 @@ Explore supported Postgres extensions by category. Also see:
 
 <a href="/docs/guides/neon-authorize#how-the-pgsessionjwt-extension-works" description="Enables RLS policies to verify user identity directly within SQL queries" icon="check">pg_session_jwt</a>
 
-<a href="https://www.postgresql.org/docs/16/pgcrypto.html" description="Offers cryptographic functions, allowing for encryption and hashing of data within Postgres" icon="check">pgcrypto</a>
+<a href="/docs/extensions/pgcrypto" description="Offers cryptographic functions, allowing for encryption and hashing of data within Postgres" icon="check">pgcrypto</a>
 
 <a href="https://github.com/michelp/pgjwt" description="Implements JSON Web Tokens (JWT) in Postgres, allowing for secure token creation and verification" icon="check">pgjwt</a>
 

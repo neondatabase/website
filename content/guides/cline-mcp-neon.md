@@ -47,7 +47,12 @@ Before you begin, ensure you have the following:
 2. To configure MCP Servers in Cline, you need to modify the `cline_mcp_settings.json` file.
    ![Cline Add MCP Tool](/docs/guides/cline-add-mcp.gif)
 3. This will open the `cline_mcp_settings.json` file.
-4. In the `cline_mcp_settings.json` file, you need to specify a list of MCP servers. Use the following JSON structure as a template, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key that you obtained from the [Prerequisites](#prerequisites) section.
+4. In the `cline_mcp_settings.json` file, you need to specify a list of MCP servers.
+
+<Tabs labels={["MacOS/Linux", "Windows", "Windows (WSL)"]}>
+
+<TabItem>
+Use the following JSON structure as a template, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key that you obtained from the [Prerequisites](#prerequisites) section.
 
    ```json
    {
@@ -59,9 +64,48 @@ Before you begin, ensure you have the following:
      }
    }
    ```
+</TabItem>
+
+<TabItem>
+Use the following JSON structure as a template, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key that you obtained from the [Prerequisites](#prerequisites) section.
+
+   ```json
+   {
+     "mcpServers": {
+       "neon": {
+         "command": "cmd",
+         "args": ["/c", "npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+       }
+     }
+   }
+   ```
+</TabItem>
+
+<TabItem>
+Use the following JSON structure as a template, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key that you obtained from the [Prerequisites](#prerequisites) section.
+
+   ```json
+   {
+     "mcpServers": {
+       "neon": {
+         "command": "wsl",
+         "args": ["npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+       }
+     }
+   }
+   ```
+</TabItem>
+
+</Tabs>
 
    - **`neon`**: This is a name you choose for your MCP server connection.
-   - **`command`**: This is the command Cline will execute to start the Neon MCP server. It includes the `npx` command to run the `@neondatabase/mcp-server-neon` package and passes your Neon API key as an argument.
+   - **`command`**: This is the command Cline will execute to start the Neon MCP server.
+     - For **MacOS/Linux**, it uses `npx` directly.
+     - For **Windows**, it uses `cmd /c` to execute the `npx` command in the command prompt.
+     - For **Windows (WSL)**, it uses `wsl /c` to execute the `npx` command within the WSL environment.
+     - The `npx` command runs the `@neondatabase/mcp-server-neon` package and passes your Neon API key as an argument.
+   - Replace `<YOUR_NEON_API_KEY>` with your actual Neon API key that you obtained from the [Prerequisites](#prerequisites) section.
+
    - Replace `<YOUR_NEON_API_KEY>` with your actual Neon API key that you obtained from the [Prerequisites](#prerequisites) section.
 
 5. **Save** the `cline_mcp_settings.json` file.
