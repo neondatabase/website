@@ -29,7 +29,7 @@ Neon offers two primary backup strategies, which you can use separately or in co
 
     By default, Neon projects retain **1 day** of history. You can increase your restore window on Neon as follows:
 
-    | Plan                                                   | Restore Window Limit  |
+    | Plan                                                   | Restore window limit  |
     | :----------------------------------------------------- | :----------------------- |
     | [Free](/docs/introduction/plans#free-plan)             | 1 day                    |
     | [Launch](/docs/introduction/plans#launch)              | 7 days                   |
