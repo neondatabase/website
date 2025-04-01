@@ -122,6 +122,6 @@ No, the Neon App for Slack is primarily for viewing usage details and managing o
 <details>
 <summary>**Can I control which notifications I receive?**</summary>
 
-You can control where notifications are sent using the `/neon subscribe` and `/neon unsubscribe` commands in any channel. However, you cannot customize which types of notifications you receive - all subscribed channels will receive all important Neon updates and usage alerts.
+You can control where notifications are sent using the `/neon subscribe` and `/neon unsubscribe` commands in any channel. However, you cannot customize which types of notifications you receive — all subscribed channels will receive all important Neon updates and usage alerts.
 
 </details>
