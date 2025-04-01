@@ -33,6 +33,7 @@ const DocsLink = ({ href, children, ...otherProps }) => {
 
   return (
     <Link
+      className="!block text-pretty [&_svg]:ml-2 [&_svg]:inline-flex"
       to={href}
       target={isExternal ? '_blank' : undefined}
       rel={isExternal ? 'noopener noreferrer' : undefined}
