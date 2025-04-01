@@ -7,6 +7,8 @@ redirectFrom:
   - /docs/guides/branching-pitr
   - /docs/guides/branch-refresh
   - /docs/guides/branch-promote
+  - /docs/guides/branch-restore
+  - /docs/guides/instant-restore
 updatedOn: '2025-02-28T11:10:41.825Z'
 ---
 
@@ -21,7 +23,7 @@ updatedOn: '2025-02-28T11:10:41.825Z'
 </DocsList>
 </InfoBlock>
 
-With Neon's instant restore capability (also known as point-in-time restore or PITR), you can easily restore a branch to an earlier state in its own or another branch's history. You can use Time Travel Assist to connect to a specific point in your restore window, where you can run read-only queries to pinpoint the exact moment you need to restore to. You can also use Schema Diff to get a side-by-side, GitHub-style visual comparison of your selected branches before restoring.
+With Neon's instant restore capability, also known as point-in-time restore or PITR, you can easily restore a branch to an earlier state in its own or another branch's history. You can use Time Travel Assist to connect to a specific point in your restore window, where you can run read-only queries to pinpoint the exact moment you need to restore to. You can also use Schema Diff to get a side-by-side, GitHub-style visual comparison of your selected branches before restoring.
 
 ## How instant restore works
 
