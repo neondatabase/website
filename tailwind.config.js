@@ -195,6 +195,9 @@ module.exports = {
           'radial-gradient(18.96% 17.96% at 13% -1%, #C7D3FF 0%, #7995F7 8.96%, #4E5F9C 26.83%, rgba(78, 95, 156, 0) 100%),' +
           'radial-gradient(57.03% 30.65% at 100% 36.84%, #191C27 0%, rgba(25, 28, 39, 0) 100%),' +
           'linear-gradient(0deg, #141416, #141416)',
+        'subscribe-form-dark':
+          'radial-gradient(98.19% 94.16% at 96.13% 96.15%, rgba(21, 40, 40, 0.90) 0%, rgba(16, 30, 30, 0.00) 100%),' +
+          'linear-gradient(0deg, #101013, #101013)',
         'blog-subscribe-form':
           'linear-gradient(160deg, rgba(173, 224, 235, 0) 23%, rgba(173, 224, 235, 0.45) 50%, rgba(173, 224, 235, 0) 77%);',
         'pricing-table-featured-column':
