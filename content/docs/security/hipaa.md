@@ -66,15 +66,15 @@ Audit events may not be logged if database endpoints experience exceptionally he
 
 ## Enabling HIPAA for a Neon project
 
-Once the Neon team has enabled HIPAA for your Neon account, you can enable HIPAA compliance when creating a new project. HIPAA can only be enabled during Neon project creation.
+Once a Business Associate Agreement (BAA) has been signed and you have the HIPAA add-on enabled, you can create a HIPAA-compliant project. HIPAA compliance must be selected at the time of project creation and cannot be added later.
 
 <Tabs labels={["Console", "API"]}>
 
 <TabItem>
 
-For how to create a new Neon project via the Neon Console, see [Create a project](/docs/manage/projects#create-a-project).
+To learn how to create a new Neon project using the Neon Console, see [Create a project](/docs/manage/projects#create-a-project)
 
-On the **Create Project** form, select the **Enable HIPAA compliance for this project** checkbox. This option only appears if HIPAA is enabled on your account.
+On the **Create Project** form, select the **Enable HIPAA compliance for this project** checkbox. This option only appears if the HIPAA add-on is enabled for your account.
 
 ![Enable HIPAA option during project creation](/docs/security/enable_hipaa.png)
 
@@ -82,7 +82,7 @@ On the **Create Project** form, select the **Enable HIPAA compliance for this pr
 
 <TabItem>
 
-To create a new HIPAA-enabled Neon project via the Neon API, set `audit_log_level` to `hipaa` in the `project settings` object, as shown below.
+To create a new HIPAA-compliant Neon project via the Neon API, set `audit_log_level` to `hipaa` in the `project settings` object, as shown below.
 
 ```bash
 curl --request POST \
@@ -108,7 +108,7 @@ curl --request POST \
 If you have trouble enabling HIPAA, contact [Neon Sales](https://neon.tech/contact-sales) or email `hipaa@neon.tech`.
 
 <Admonition type="note">
-Once HIPAA compliance is enabled for a Neon project, it cannot be disabled — you can only delete the Neon project. If a HIPAA-enabled project is deleted, Neon retains the audit data for the duration specified in the Business Associate Agreement (BAA).
+Once HIPAA compliance is enabled for a Neon project, it cannot be disabled. If you want to delete HIPAA-compliant Neon project, please submit a [support request](https://console.neon.tech/app/projects?modal=support). Before deleting a HIPAA-compliant project, the Neon team will be advise you to store your audit logs and data. Neon retains audit log data for the duration specified in the Business Associate Agreement (BAA).
 </Admonition>
 
 ## Security incidents
