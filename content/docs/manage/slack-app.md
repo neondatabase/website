@@ -65,6 +65,7 @@ Once authenticated, you're ready to use all available commands.
 | `/neon invite user`    | Invite users to your organization                 |
 | `/neon subscribe`      | Subscribe to your Neon account updates            |
 | `/neon unsubscribe`    | Unsubscribe from your Neon account updates       |
+| `/neon disconnect`     | Disconnect your Neon account and subscribed channels |
 
 ## Example workflows
 
@@ -91,6 +92,8 @@ To receive Neon notifications in a Slack channel:
 3. After inviting the bot, run `/neon subscribe` again
 
 Once subscribed, the channel will start receiving important Neon usage notifications. To stop receiving notifications, use the `/neon unsubscribe` command in the same channel.
+
+Use `/neon disconnect` to remove your Neon account connection and unsubscribe from all channels, while keeping the app installed for future use.
 
 ## Support
 
