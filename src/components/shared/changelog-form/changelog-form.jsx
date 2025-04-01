@@ -30,7 +30,7 @@ const themeClassNames = {
   },
   default: {
     block:
-      'mb-5 hidden items-center gap-[72px] px-6 py-[18px] xl:flex md:gap-10 sm:flex-col sm:gap-2.5 sm:p-[18px] sm:pt-3.5 xs:items-start',
+      'mb-5 hidden items-center gap-[72px] px-6 py-[18px] xl:flex md:gap-10 sm:flex-col sm:gap-2.5 sm:p-[18px] sm:pt-3.5 sm:items-start',
     title: 'shrink-0 text-lg font-medium leading-snug tracking-tighter',
     input: 'pr-32 xs:pr-20',
     sendText: 'text-[13px] font-semibold tracking-extra-tight xs:hidden',
@@ -96,6 +96,10 @@ const ChangelogForm = ({ isSidebar = false }) => {
             setFormState(FORM_STATES.SUCCESS);
             setEmail('Thank you!');
           }, loadingAnimationStartedTime);
+          doNowOrAfterSomeTime(() => {
+            setFormState(FORM_STATES.DEFAULT);
+            setEmail('');
+          }, loadingAnimationStartedTime + 3000);
         } else {
           doNowOrAfterSomeTime(() => {
             setFormState(FORM_STATES.ERROR);
@@ -129,14 +133,14 @@ const ChangelogForm = ({ isSidebar = false }) => {
         <input
           className={clsx(
             'remove-autocomplete-styles h-[38px] w-full appearance-none pl-4 tracking-extra-tight',
-            'rounded-full border bg-white text-[13px] focus:outline-none dark:bg-black-new md:text-base',
+            'rounded-full border bg-white text-[13px] focus:outline-none dark:bg-black-new lg:text-base',
             'placeholder:text-gray-new-50/60 dark:placeholder:text-gray-new-70/60',
             (formState === FORM_STATES.DEFAULT || formState === FORM_STATES.ERROR) &&
               classNames.input,
             formState === FORM_STATES.ERROR
               ? 'border-secondary-1'
               : 'border-gray-new-90 dark:border-gray-new-15',
-            formState === FORM_STATES.SUCCESS && 'text-green-45'
+            formState === FORM_STATES.SUCCESS && 'dark:text-green-45'
           )}
           type="email"
           name="email"
@@ -150,7 +154,7 @@ const ChangelogForm = ({ isSidebar = false }) => {
             {(formState === FORM_STATES.DEFAULT || formState === FORM_STATES.ERROR) && (
               <m.button
                 className={clsx(
-                  'absolute inset-y-1 right-1 rounded-full',
+                  'absolute inset-y-1 right-1 rounded-full outline-none',
                   'h-[30px] min-w-16 px-6',
                   'text-black-new transition-colors duration-200',
                   formState === FORM_STATES.ERROR
@@ -162,6 +166,7 @@ const ChangelogForm = ({ isSidebar = false }) => {
                 animate="animate"
                 exit="exit"
                 aria-label="Subscribe"
+                disabled={formState !== FORM_STATES.DEFAULT}
                 variants={appearAndExitAnimationVariants}
               >
                 <span className={classNames.sendText}>Subscribe</span>
@@ -217,6 +222,7 @@ const ChangelogForm = ({ isSidebar = false }) => {
             className={clsx(
               'absolute left-1/2 top-full -translate-x-1/2 whitespace-nowrap',
               'text-xs leading-none tracking-extra-tight text-secondary-1',
+              'xl:left-4 xl:translate-x-0 sm:left-1/2 sm:-translate-x-1/2',
               classNames.errorMessage
             )}
             data-test="error-message"
