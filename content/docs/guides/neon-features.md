@@ -1,11 +1,11 @@
 ---
 title: Neon feature guides
 subtitle: Explore Neon's capabilities with our feature guides
-enableTableOfContents: false
+enableTableOfContents: true
 updatedOn: '2025-01-10T00:37:35.166Z'
 ---
 
-### Autoscaling
+## Autoscaling
 
 Automatically scale compute resources up and down based on demand.
 
@@ -17,7 +17,7 @@ Automatically scale compute resources up and down based on demand.
 
 </DetailIconCards>
 
-### Scale to zero
+## Scale to zero
 
 Enable or disable scale to zero for your Neon computes.
 
@@ -29,7 +29,7 @@ Enable or disable scale to zero for your Neon computes.
 
 </DetailIconCards>
 
-### Branching
+## Branching
 
 Branch data the same way you branch your code.
 
@@ -51,7 +51,7 @@ Branch data the same way you branch your code.
 
 </DetailIconCards>
 
-### Logical replication
+## Logical replication
 
 Replicate data from Neon to external data platforms and services.
 
@@ -67,7 +67,7 @@ Replicate data from Neon to external data platforms and services.
 
 </DetailIconCards>
 
-### Read replicas
+## Read replicas
 
 Learn how Neon read replicas can help you scale and manage read-only workloads.
 
@@ -87,7 +87,7 @@ Learn how Neon read replicas can help you scale and manage read-only workloads.
 
 </DetailIconCards>
 
-### Time Travel
+## Time Travel
 
 Travel back in time to view your database's history.
 
@@ -99,7 +99,7 @@ Travel back in time to view your database's history.
 
 </DetailIconCards>
 
-### Schema Diff
+## Schema Diff
 
 Compare your database branches.
 
@@ -111,7 +111,7 @@ Compare your database branches.
 
 </DetailIconCards>
 
-### Project collaboration
+## Project collaboration
 
 Invite other users to collaborate on your Neon project.
 
@@ -121,7 +121,7 @@ Invite other users to collaborate on your Neon project.
 
 </DetailIconCards>
 
-### IP Allow
+## IP Allow
 
 Limit access to trusted IP addresses.
 
@@ -131,7 +131,7 @@ Limit access to trusted IP addresses.
 
 </DetailIconCards>
 
-### Protected branches
+## Protected branches
 
 Protect your production or sensitive data.
 
@@ -141,7 +141,7 @@ Protect your production or sensitive data.
 
 </DetailIconCards>
 
-### Private Networking
+## Private Networking
 
 Secure your database connections with private access.
 
