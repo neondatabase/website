@@ -23,7 +23,7 @@ In Neon, storage consists of your total **data size** and **history**.
   The size of your history depends on a couple of factors:
 
   - **The volume of changes to your data** &#8212; the volume of inserts, updates, and deletes. For example, a write-heavy workload will generate more history than a read-heavy workload.
-  - **How much history you keep** &#8212; referred to as [restore window](/docs/introduction/branch-restore#restore-window), which can be an hour, a day, a week, or even a month. Restore window is configurable for each Neon project. As you might imagine, 1 day of history would generally require less storage than 30 days of history, but less history limits the features that depend on it. For example, 1 day of history means that your maximum instant restore point is only 1 day in the past.
+  - **How much history you keep** &#8212; referred to as [restore window](/docs/introduction/branching#restore-window), which can be an hour, a day, a week, or even a month. Restore window is configurable for each Neon project. As you might imagine, 1 day of history would generally require less storage than 30 days of history, but less history limits the features that depend on it. For example, 1 day of history means that your maximum instant restore point is only 1 day in the past.
 
 ### How branching affects storage
 
@@ -61,7 +61,7 @@ Yes. Any data-modifying operation, such as deleting a row from a table in your d
 <details>
 <summary>**What increases the size of history?**</summary>
 
-Any data-modifying operation increases the size of your history. As WAL records age out of your [restore window](/docs/introduction/branch-restore#restore-window), they are removed, reducing your history and potentially decreasing your total storage size.
+Any data-modifying operation increases the size of your history. As WAL records age out of your [restore window](/docs/introduction/branching#restore-window), they are removed, reducing your history and potentially decreasing your total storage size.
 
 </details>
 
@@ -72,7 +72,7 @@ Here are some strategies to consider:
 
 - **Optimize your restore window**
 
-  Your restore window setting controls how much change history your project retains. Decreasing history reduces the window available for things like instant restore or time-travel. Retaining no history at all would make branches expensive, as a branch can only share data with its parent if history is retained. Your goal should be a balanced restore window configuration; one that supports the features you need but does not consume too much storage. See [Restore window](/docs/introduction/branch-restore#restore-window) for how to configure your restore window.
+  Your restore window setting controls how much change history your project retains. Decreasing history reduces the window available for things like instant restore or time-travel. Retaining no history at all would make branches expensive, as a branch can only share data with its parent if history is retained. Your goal should be a balanced restore window configuration; one that supports the features you need but does not consume too much storage. See [Restore window](/docs/introduction/branching#restore-window) for how to configure your restore window.
 
 - **Use branches instead of duplicating data**
 
@@ -106,7 +106,7 @@ These factors could be contributing to your high storage consumption:
 - **Frequent data modifications:** If you are performing a lot of writes (inserts, updates, deletes), each operation generates WAL records, which are added to your history. For instance, rewriting your entire database daily can lead to a storage amount that is a multiple of your database size, depending on the number of days of history your Neon project retains.
 - **Restore window:** The length of your restore window plays a significant role. If you perform many data modifications daily and your restore window is set to 7 days, you will accumulate a 7-day history of those changes, which can increase your storage significantly.
 
-To mitigate this issue, consider adjusting your [restore window](/docs/introduction/branch-restore#restore-window) setting. Perhaps you can do with a shorter window for instant restore, for example. Retaining less history should reduce your future storage consumption.
+To mitigate this issue, consider adjusting your [restore window](/docs/introduction/branching#restore-window) setting. Perhaps you can do with a shorter window for instant restore, for example. Retaining less history should reduce your future storage consumption.
 
 Also, make sure you don't have old branches lying around. If you created a bunch of branches and let those age out of your restore window, that could also explain why your storage is so large.
 

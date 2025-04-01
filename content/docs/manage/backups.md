@@ -38,7 +38,7 @@ Neon offers two primary backup strategies, which you can use separately or in co
 
     With this strategy, the only required action is setting your desired restore window. Please keep in mind that increasing your restore window also increases storage, as changes to your data are retained for a longer period.
 
-    ![Restore window](/docs/manage/backups_history_retention.png)
+    ![Restore window](/docs/manage/history_retention.png)
 
     To get started, see [Branch reset and restore](/docs/introduction/branch-restore).
 
