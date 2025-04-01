@@ -6,7 +6,7 @@ updatedOn: '2025-03-19T13:27:32.000Z'
 
 At Neon, we take the security and privacy of your health information seriously. This guide is designed to help you understand how Neon complies with the Health Insurance Portability and Accountability Act (HIPAA) and what that means for you as a customer. Our Business Associate Agreement (BAA) outlines our commitment to safeguarding Protected Health Information (PHI) and complying with HIPAA regulations.
 
-Neon's HIPAA functionality is only available to customers who have signed a Business Associate Agreement (BAA) with Neon. To request a draft BAA, please contact [Neon Sales](https://neon.tech/contact-sales). After you've signed a BAA, see [Enabling HIPAA for a Neon project](#enabling-hipaa-for-a-neon-project).
+Neon's HIPAA functionality is only available to customers who have signed a Business Associate Agreement (BAA) with Neon. To request a draft BAA, please contact [Neon Sales](https://neon.tech/contact-sales) or email `hipaa@neon.tech`. After you've signed a BAA, see [Enabling HIPAA for a Neon project](#enabling-hipaa-for-a-neon-project).
 
 ## What is HIPAA?
 
@@ -105,7 +105,7 @@ curl --request POST \
 
 </Tabs>
 
-If you have trouble enabling HIPAA, contact [Neon Sales](https://neon.tech/contact-sales).
+If you have trouble enabling HIPAA, contact [Neon Sales](https://neon.tech/contact-sales) or email `hipaa@neon.tech`.
 
 <Admonition type="note">
 Once HIPAA compliance is enabled for a Neon project, it cannot be disabled — you can only delete the Neon project. If a HIPAA-enabled project is deleted, Neon retains the audit data for the duration specified in the Business Associate Agreement (BAA).
