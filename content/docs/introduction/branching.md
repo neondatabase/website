@@ -6,7 +6,6 @@ redirectFrom:
   - /docs/conceptual-guides/branches
   - /docs/conceptual-guides/branching
   - /docs/concepts/branching
-  - /docs/introduction/branch-restore
 updatedOn: '2025-01-31T16:41:54.394Z'
 ---
 

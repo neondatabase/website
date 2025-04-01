@@ -41,10 +41,6 @@ A Neon Control Plane operation that applies a new configuration to a Neon object
 
 Cost-efficient storage where Neon archives inactive branches after a defined threshold. For Neon projects created in AWS regions, inactive branches are archived in Amazon S3 storage. For Neon projects created in Azure regions, branches are archived in Azure Blob storage.
 
-## Scale to Zero
-
-A Neon feature that suspends a compute after a specified period of inactivity (5 minutes by default) to minimize compute usage. When suspended, a compute is placed into an idle state. Otherwise, the compute is in an `Active` state. Users on paid plans can disable the _Scale to Zero_ feature for an "always-active" compute. For more information, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
-
 ## autoscaler-agent
 
 A control mechanism in the Neon autoscaling system that collects metrics from VMs, makes scaling decisions, and performs checks and requests to implement those decisions.
@@ -239,6 +235,14 @@ Deleting data will reduce the rate at which GB-month usage increases from that p
 
 The history of data changes for all branches in your Neon project. A history is maintained to support _instant restore_. For more information, see [Storage details](/docs/introduction/usage-metrics#storage-details).
 
+## Instant restore
+
+Restoration of data to a state that existed at an earlier time. Neon retains a history of changes in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to an earlier point. A instant restore is performed by creating a branch using the **Time** or **LSN** option.
+
+By default, Neon retains a history of changes for **1 day** across all plans to help avoid unexpected storage costs. You can increase the retention window to 24 hours for [Neon Free Plan](/docs/introduction/plans#free-plan) users, 7 days for [Launch](/docs/introduction/plans#launch), 14 days for [Scale](/docs/introduction/plans#scale), and 30 days for [Business](/docs/introduction/plans#business) plan users. Keep in mind that this will increase your storage usage and may lead to higher costs, especially if you have many active branches.
+
+For more information about this feature, see [Branching — Instant restore](/docs/introduction/branch-restore).
+
 ## IP Allow
 
 A Neon feature used to control which IP addresses can access databases in a Neon project, often utilized to restrict public internet access. See [IP Allow](/docs/introduction/ip-allow).
@@ -369,13 +373,9 @@ The ability to authenticate without providing a password. Neon’s [Passwordless
 
 Peak usage is the highest amount of a resource (like storage or projects) you’ve used during the current billing period. If you go over your plan’s limit, extra charges are added in set increments. You’re charged for these extra units from the date you went over the limit, with the charges prorated for the rest of the month.
 
-## instant restore
+## point-in-time restore (PITR)
 
-Restoration of data to a state that existed at an earlier time. Neon retains a history of changes in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to an earlier point. A instant restore is performed by creating a branch using the **Time** or **LSN** option.
-
-By default, Neon retains a history of changes for **1 day** across all plans to help avoid unexpected storage costs. You can increase the retention window to 24 hours for [Neon Free Plan](/docs/introduction/plans#free-plan) users, 7 days for [Launch](/docs/introduction/plans#launch), 14 days for [Scale](/docs/introduction/plans#scale), and 30 days for [Business](/docs/introduction/plans#business) plan users. Keep in mind that this will increase your storage usage and may lead to higher costs, especially if you have many active branches.
-
-For more information about this feature, see [Branching — Instant restore](/docs/introduction/branch-restore).
+A database recovery capability that allows restoring data to a specific moment in the past using Write-Ahead Log (WAL) records. In Neon, this capability is implemented through the instant restore feature, which performs point-in-time restores with near-zero delay.
 
 ## pooled connection string
 
@@ -493,6 +493,10 @@ A Neon architecture component responsible for the durability of database changes
 ## Scale plan
 
 A paid plan offered by Neon that provides full platform and support access. It's designed for scaling production workloads. See [Neon plans](/docs/introduction/plans).
+
+## Scale to Zero
+
+A Neon feature that suspends a compute after a specified period of inactivity (5 minutes by default) to minimize compute usage. When suspended, a compute is placed into an idle state. Otherwise, the compute is in an `Active` state. Users on paid plans can disable the _Scale to Zero_ feature for an "always-active" compute. For more information, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
 
 ## schema-only branch
 
