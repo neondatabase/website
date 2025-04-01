@@ -93,6 +93,8 @@ To receive Neon notifications in a Slack channel:
 
 Once subscribed, the channel will start receiving important Neon usage notifications. To stop receiving notifications, use the `/neon unsubscribe` command in the same channel.
 
+Use `/neon disconnect` to remove your Neon account connection and unsubscribe from all channels, while keeping the app installed for future use.
+
 ## Support
 
 If you encounter any issues with the Neon App for Slack, please open a support ticket in the [Neon Console](https://console.neon.tech/app/projects?modal=support). Free plan users can get help through our [Discord community](https://discord.gg/92vNTzKDGp).
