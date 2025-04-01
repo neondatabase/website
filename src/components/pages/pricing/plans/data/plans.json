@@ -484,6 +484,17 @@
       "launch": true,
       "scale": true,
       "business": true
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Slack Integration",
+        "subtitle": "<a href='/docs/manage/slack-app'>More info in docs</a>"
+      },
+      "free": true,
+      "launch": true,
+      "scale": true,
+      "business": true
     }
   ]
 }
