@@ -10,7 +10,7 @@ redirectFrom:
 updatedOn: '2025-02-28T11:10:41.825Z'
 ---
 
-Neon's instant restore capability (also known as point-in-time restore or PITR in the industry) lets you recover your database to any specific moment within your restore window. This powerful feature is built on Neon's architecture, which maintains a history of changes through Write-Ahead Log (WAL) records.
+Neon's instant restore capability, also known as point-in-time restore or PITR, lets you recover your database to any specific moment within your restore window. This powerful feature is built on Neon's architecture, which maintains a history of changes through Write-Ahead Log (WAL) records.
 
 With instant restore, you can:
 - Recover lost data by restoring to a point before the data loss occurred
