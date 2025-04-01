@@ -94,7 +94,7 @@ Once subscribed, the channel will start receiving important Neon usage notificat
 
 ## Support
 
-If you encounter any issues with the Neon App for Slack, please open a support ticket in the [Neon Console](https://console.neon.tech/app/projects?modal=support) or email [support@neon.tech](mailto:support@neon.tech). Free plan users can get help through our [Discord community](https://discord.gg/92vNTzKDGp).
+If you encounter any issues with the Neon App for Slack, please open a support ticket in the [Neon Console](https://console.neon.tech/app/projects?modal=support). Free plan users can get help through our [Discord community](https://discord.gg/92vNTzKDGp).
 
 For more details about our support options, see our [Support documentation](/docs/introduction/support).
 
