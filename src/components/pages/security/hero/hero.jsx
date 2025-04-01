@@ -1,16 +1,25 @@
+import Button from 'components/shared/button';
 import Container from 'components/shared/container/container';
+import LINKS from 'constants/links';
 
 const Hero = () => (
-  <section className="hero safe-paddings relative pt-40 xl:pt-[150px] lg:pt-12 md:pt-10">
-    <Container className="relative z-10 flex flex-col items-center text-center" size="960">
-      <h1 className="mx-auto font-title text-6xl font-medium leading-[0.9] tracking-extra-tight xl:text-[56px] lg:text-5xl md:text-4xl">
-        Neon’s Security & Compliance
+  <section className="hero safe-paddings relative pt-40">
+    <Container className="relative z-10 flex !max-w-[576px] flex-col items-start" size="xxs">
+      <h1 className="max-w-[540px] font-title text-[52px] font-medium leading-none tracking-extra-tight">
+        Postgres failures happen. Long restores make them worse.
       </h1>
-      <p className="mx-auto mt-4 max-w-[714px] text-lg leading-snug tracking-extra-tight text-gray-new-80 xl:max-w-[772px] lg:mt-3.5 lg:max-w-[580px] lg:text-base sm:mt-3">
-        At Neon, security, compliance, privacy, and transparency are core to our platform. We
-        protect customer data through industry leading security controls, independent audits, and
-        strict adherence to global compliance standards.
+      <p className="mt-4 text-lg leading-snug tracking-extra-tight text-gray-new-80">
+        We surveyed 50 developers managing 1TB+ Postgres databases in production. We asked them
+        about failures, recovery times, and business impact. Here’s what they told us.
       </p>
+      <Button
+        className="mt-10 whitespace-nowrap !px-5 font-semibold leading-none tracking-tighter transition-colors duration-200 lg:hidden"
+        to={LINKS.signup}
+        theme="primary"
+        size="xs"
+      >
+        Download raw survey results
+      </Button>
     </Container>
   </section>
 );

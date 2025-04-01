@@ -120,6 +120,11 @@ export default {
     imagePath: '/images/social-previews/pricing.jpg',
     pathname: LINKS.pricing,
   },
+  report: {
+    title: 'Report — Neon',
+    description: '',
+    pathname: LINKS.report,
+  },
   thankYou: {
     title: 'Thank you for subscribing — Neon',
     description: 'Thank you for subscribing to the Neon newsletter',

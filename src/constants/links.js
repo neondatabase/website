@@ -22,6 +22,7 @@ export default {
   migrationAssistance: '/migration-assistance',
   postgresqltutorial: '/postgresql/tutorial',
   pricing: '/pricing',
+  report: '/report',
   scalableArchitecture: '/scalable-architecture',
   scaleTrial: '/scale-trial',
   security: '/security',
