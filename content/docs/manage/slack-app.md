@@ -65,6 +65,7 @@ Once authenticated, you're ready to use all available commands.
 | `/neon invite user`    | Invite users to your organization                 |
 | `/neon subscribe`      | Subscribe to your Neon account updates            |
 | `/neon unsubscribe`    | Unsubscribe from your Neon account updates       |
+| `/neon disconnect`     | Disconnect your Neon account and subscribed channels |
 
 ## Example workflows
 
