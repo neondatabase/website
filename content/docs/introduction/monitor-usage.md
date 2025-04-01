@@ -191,7 +191,7 @@ curl --request GET \
     "branch_logical_size_limit_bytes": 214748364800,
     "store_passwords": true,
     "creation_source": "console",
-    "history_retention_seconds": 86400, // Controls the restore window in seconds
+    "history_retention_seconds": 86400,
     "created_at": "2024-04-02T12:54:33Z",
     "updated_at": "2024-04-10T17:26:07Z",
     "synthetic_storage_size": 492988552,

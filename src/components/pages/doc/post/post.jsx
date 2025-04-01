@@ -8,6 +8,7 @@ import ChatOptions from 'components/pages/doc/chat-options';
 import EditOnGithub from 'components/pages/doc/edit-on-github';
 import Modal from 'components/pages/doc/modal';
 import MODALS from 'components/pages/doc/modal/data';
+import ChangelogForm from 'components/shared/changelog-form';
 import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
 import NavigationLinks from 'components/shared/navigation-links';
@@ -19,6 +20,7 @@ import Tag from '../tag';
 const Changelog = ({ posts }) => (
   <>
     <Hero />
+    <ChangelogForm />
     <ChangelogList className="mt-4" posts={posts} />
   </>
 );
@@ -135,6 +137,7 @@ const Post = ({
             </div>
           )}
           {isDocsIndex && <ChatOptions isSidebar />}
+          {isChangelog && <ChangelogForm isSidebar />}
         </div>
       </div>
 
