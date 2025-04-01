@@ -22,7 +22,7 @@ updatedOn: '2025-03-19T12:43:23.197Z'
   </Button>
 </figure>
 
-The Neon App for Slack allows you to monitor your Neon usage and manage organization membership directly from Slack. Get quick access to project information and resource usage metrics without leaving your workspace. The app is available to all Neon users on both free and paid plans - check out our [pricing page](https://neon.tech/pricing) for more details.
+The Neon App for Slack allows you to monitor your Neon usage and manage organization membership directly from Slack. Get quick access to project information and resource usage metrics without leaving your workspace. The app is available to all Neon users on both free and paid plans — check out our [pricing page](https://neon.tech/pricing) for more details.
 
 ![Neon App for Slack commands](/docs/manage/slack_app_overview.png)
 
