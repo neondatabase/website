@@ -108,7 +108,7 @@ curl --request POST \
 If you have trouble enabling HIPAA, contact [Neon Sales](https://neon.tech/contact-sales) or email `hipaa@neon.tech`.
 
 <Admonition type="note">
-Once HIPAA compliance is enabled for a Neon project, it cannot be disabled. If you want to delete HIPAA-compliant Neon project, please submit a [support request](https://console.neon.tech/app/projects?modal=support). Before deleting a HIPAA-compliant project, you will be advised to store all necessary audit logs and data. Neon retains audit log data for the duration specified in the Business Associate Agreement (BAA).
+Once HIPAA compliance is enabled for a Neon project, it cannot be disabled. If you want to delete HIPAA-compliant Neon project, please submit a [support request](https://console.neon.tech/app/projects?modal=support). Before deleting a HIPAA-compliant project, you are advised to store all necessary audit logs and data. Neon retains audit log data for the duration specified in the Business Associate Agreement (BAA).
 </Admonition>
 
 ## Security incidents
