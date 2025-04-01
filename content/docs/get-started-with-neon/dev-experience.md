@@ -39,7 +39,7 @@ To learn more, read [Database Branching Workflows](https://neon.tech/flow), and 
 Neon's Schema Diff tool lets you compare the schemas for two selected branches in a side-by-side view. For more, see [Schema Diff](/docs/guides/schema-diff).
 </Admonition>
 
-## Instant database recovery
+## Instant restore
 
 **Instant restore with time travel**
 
