@@ -40,7 +40,7 @@ Neon offers two primary backup strategies, which you can use separately or in co
 
     ![Restore window](/docs/manage/history_retention.png)
 
-    To get started, see [Branch reset and restore](/docs/introduction/branch-restore).
+    To get started, see [Instant restore](/docs/introduction/branch-restore).
 
 ## Backups with `pg_dump`
 
