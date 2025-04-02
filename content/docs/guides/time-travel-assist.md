@@ -11,7 +11,7 @@ You can use Time Travel from two places in the Neon Console, and from the Neon C
 
 - **SQL Editor** &#8212; Time Travel is built into the SQL editor letting you switch between queries of your current data and previous iterations of your data in the same view.
 - **Restore** &#8212; Time Travel Assist is also built into the instant restore flow where it can help you make sure you've targeted the correct restore point before you restore a branch.
-- **Neon CLI** &#8212; Use the Neon CLI to quickly establish instant restore connections for automated scripts or command-line-based data analysis.
+- **Neon CLI** &#8212; Use the Neon CLI to quickly establish point-in-time connections for automated scripts or command-line-based data analysis.
 
 ## How Time Travel works
 
