@@ -52,14 +52,7 @@ export const getActiveItems = (items, currentSlug, result = [], parents = []) =>
   }, result);
 };
 
-const Sidebar = ({
-  className = null,
-  sidebar,
-  slug,
-  basePath,
-  customType,
-  isPostgresPage = false,
-}) => {
+const Sidebar = ({ className = null, sidebar, slug, basePath, customType, docPageType = null }) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
 
@@ -102,7 +95,7 @@ const Sidebar = ({
           </Link>
         </div>
         <div className="mt-[54px] px-[52px] xl:px-8">
-          <InkeepTrigger isPostgresPage={isPostgresPage} />
+          <InkeepTrigger docPageType={docPageType} />
           <div
             className={clsx(
               'relative',
@@ -111,10 +104,10 @@ const Sidebar = ({
             )}
           >
             <nav
-              className="no-scrollbars z-10 h-[calc(100vh-183px)] overflow-y-scroll py-8"
+              className="no-scrollbars z-10 h-[calc(100vh-166px)] overflow-y-scroll py-8"
               ref={menuWrapperRef}
             >
-              <div className="relative w-full" style={{ height: menuHeight }}>
+              <div className="relative w-full overflow-hidden" style={{ height: menuHeight }}>
                 <Menu
                   depth={0}
                   basePath={basePath}
@@ -144,7 +137,7 @@ Sidebar.propTypes = {
     title: PropTypes.string,
     link: PropTypes.string,
   }),
-  isPostgresPage: PropTypes.bool,
+  docPageType: PropTypes.string,
 };
 
 export default Sidebar;

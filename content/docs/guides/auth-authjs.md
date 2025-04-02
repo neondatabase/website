@@ -3,7 +3,7 @@ title: Authenticate Neon Postgres application users with Auth.js
 subtitle: Learn how to add passwordless authentication to your Neon Postgres database
   application using Auth.js and Resend
 enableTableOfContents: true
-updatedOn: '2025-01-08T15:53:54.574Z'
+updatedOn: '2025-03-10T17:29:57.965Z'
 ---
 
 <Admonition type="tip" title="Did you know?">
@@ -64,7 +64,7 @@ touch .env
 
 ### Retrieve your Neon database connection string
 
-Navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
+You can find your database connection string by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
 
 ```bash shouldWrap
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
@@ -106,7 +106,7 @@ import Resend from 'next-auth/providers/resend';
 import PostgresAdapter from '@auth/pg-adapter';
 import { Pool } from '@neondatabase/serverless';
 
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+// *DO NOT* create a `Pool` here, outside the request handler.
 
 export const { handlers, auth, signIn, signOut } = NextAuth(() => {
   const pool = new Pool({ connectionString: process.env.DATABASE_URL });
@@ -189,7 +189,7 @@ CREATE TABLE IF NOT EXISTS sessions (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS verification_tokens (
+CREATE TABLE IF NOT EXISTS verification_token (
   identifier TEXT,
   token TEXT,
   expires TIMESTAMPTZ NOT NULL,

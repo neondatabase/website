@@ -54,7 +54,7 @@ const CtaBlock = ({
   >
     <div
       className={clsx(
-        'sm:gap-[18px sm:flex-col] relative z-10 flex gap-6 sm:items-center',
+        'relative z-10 flex gap-6 sm:flex-col sm:items-center sm:gap-[18px]',
         themeClassNames[theme].container
       )}
     >
@@ -63,7 +63,7 @@ const CtaBlock = ({
         {description && (
           <p
             className={clsx(
-              'mt-2.5 [&>a:hover]:underline [&>a]:text-primary-2',
+              'mt-2.5 text-pretty [&>a:hover]:underline [&>a]:text-primary-2',
               sizeClassNames[size].description,
               hasDecor ? 'text-gray-new-70' : 'text-gray-new-60'
             )}

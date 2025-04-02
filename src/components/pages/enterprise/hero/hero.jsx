@@ -1,40 +1,24 @@
-import Image from 'next/image';
-
-import AnimatedButton from 'components/shared/animated-button';
+import Button from 'components/shared/button';
 import Container from 'components/shared/container/container';
-
-import logoPattern from './images/logo-pattern.jpg';
+import LINKS from 'constants/links';
 
 const Hero = () => (
-  <section className="hero safe-paddings relative overflow-hidden pb-32 pt-[306px] xl:pb-24 xl:pt-[239px] lg:pb-20 lg:pt-[194px] md:pb-14 md:pt-[164px]">
-    <Image
-      className="pointer-events-none absolute left-1/2 top-[68px] h-auto w-[1472px] max-w-none -translate-x-1/2 object-cover xl:top-[74px] xl:w-[1040px] lg:top-7 lg:w-[1024px] md:top-1 md:w-[1040px]"
-      src={logoPattern}
-      alt=""
-      quality={99}
-      priority
-      aria-hidden
-    />
+  <section className="hero safe-paddings relative overflow-hidden pt-[170px] xl:pt-[150px] lg:pt-28 md:pt-24">
     <Container className="relative z-10 flex flex-col items-center text-center" size="medium">
-      <div className="absolute left-1/2 top-0 -z-10 h-[270px] w-3/4 -translate-x-1/2 rounded-[1000px] bg-black-pure blur-[30px] lg:w-full" />
-      <h1 className="mx-auto font-title text-6xl font-medium leading-none tracking-[-0.02em] xl:text-[56px] lg:text-5xl md:text-4xl sm:text-[36px]">
-        Neon for Enterprises
+      <h1 className="mx-auto font-title text-[68px] font-medium leading-[0.9] tracking-extra-tight xl:text-[58px] lg:text-5xl md:px-5 md:text-4xl">
+        Let Postgres work <br className="xs:hidden" /> smarter, not harder
       </h1>
-      <p className="mt-5 text-xl font-light leading-snug xl:text-lg lg:mt-4 md:mt-2.5 md:text-base">
-        Enterprises use Neon to operate hundreds of thousands of Postgres databases <br />
-        with full compliance and security.
+      <p className="mt-4 text-lg leading-snug tracking-extra-tight text-gray-new-80 xl:mt-3 lg:mx-auto lg:max-w-[380px] lg:text-base">
+        Learn how Enterprises are maximizing engineering efficiency with Neon.
       </p>
-      <AnimatedButton
-        className="relative mt-9 px-[34px] py-[17px] text-lg font-semibold tracking-[-0.02em] lg:mt-7 md:mt-6"
+      <Button
+        className="relative mt-8 h-12 w-[156px] text-base !font-semibold tracking-tight lg:mt-7 lg:h-11 md:mt-6"
         theme="primary"
-        to="#request-trial"
-        linesOffsetTop={22}
-        linesOffsetSide={22}
-        linesOffsetBottom={40}
-        isAnimated
+        to={LINKS.contactSales}
+        target="_blank"
       >
-        Request an Enterprise Trial
-      </AnimatedButton>
+        Contact us
+      </Button>
     </Container>
   </section>
 );

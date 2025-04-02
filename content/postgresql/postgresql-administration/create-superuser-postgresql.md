@@ -22,6 +22,10 @@ In PostgreSQL, a superuser is a special role with the highest privileges. A supe
 
 In other words, a superuser can bypass all security checks except the right to log in.
 
+<Admonition type="tip" title="Neon Note">
+Neon is a managed Postgres service, so you cannot access the host operating system or connect using the Postgres `superuser` account like you can in a standalone Postgres installation. Instead, Neon provides the `neon_superuser` role with elevated privileges. For more information about roles in Neon, see [Manage roles](https://neon.tech/docs/manage/roles).
+</Admonition>
+
 By default, PostgreSQL has a superuser role called `postgres`. Typically, you use the `postgres` user role for performing administrative tasks and don’t need to create additional users with the superuser privilege.
 
 However, if you need additional superuser roles, you can create them using the `CREATE ROLE` statement or change a regular user to a superuser using the `ALTER ROLE` statement.

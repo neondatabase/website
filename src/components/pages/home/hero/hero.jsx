@@ -104,33 +104,23 @@ const Hero = () => {
   );
 
   return (
-    <section className="hero safe-paddings relative pt-[136px] xl:pt-[120px] lg:pt-24">
-      <Image
-        className="pointer-events-none absolute left-1/2 top-0 min-w-[1760px] -translate-x-1/2 xl:min-w-[1588px] lg:top-[-22px] lg:min-w-[1420px] md:top-[46px] md:min-w-[1058px]"
-        src={bg}
-        sizes="(max-width: 639px) 1058px"
-        width={1760}
-        height={980}
-        quality={100}
-        alt=""
-        priority
-      />
-
-      <Container className="xl:px-8" size="1100">
-        <div className="text-center">
-          <h1 className="font-title text-[72px] font-medium leading-none -tracking-[0.03em] text-white xl:text-[64px] lg:text-[48px] md:text-[40px] sm:text-[32px]">
+    <section className="hero safe-paddings relative pt-[168px] xl:pt-[152px] lg:pt-32 md:pt-[88px]">
+      <Container className="relative z-10 xl:px-8" size="1100">
+        <div className="flex flex-col items-center text-center">
+          <h1 className="font-title text-[72px] font-medium leading-none -tracking-[0.03em] text-white xl:text-[64px] lg:text-[56px] sm:text-[32px]">
             Ship faster with Postgres
           </h1>
-          <p className="mx-auto mt-3.5 max-w-xl text-[19px] font-light leading-snug -tracking-[0.04em] text-gray-new-80 lg:mt-2.5 lg:max-w-lg lg:text-balance lg:text-base sm:max-w-xs">
+          <p className="mt-2.5 max-w-xl text-lg font-light leading-snug tracking-tighter text-gray-new-80 lg:mt-2.5 lg:text-base">
             The database you love, on a serverless platform designed to help you build reliable and
             scalable applications faster.
           </p>
           <Button
-            className="pointer-events-auto relative mt-[26px] h-11 w-[144px] text-[15px] !font-semibold tracking-tighter xl:mt-8 lg:mt-6 sm:h-10"
+            className="pointer-events-auto relative mt-7 px-9 font-semibold xl:mt-6 md:px-7"
             theme="primary"
+            size="md-new"
             to={LINKS.signup}
             target="_blank"
-            tag_name="Hero"
+            tagName="Hero"
             analyticsEvent="home_hero_get_started_clicked"
           >
             Get Started
@@ -161,6 +151,17 @@ const Hero = () => {
           ))}
         </div>
       </Container>
+
+      <Image
+        className="pointer-events-none absolute left-1/2 top-0 max-w-none -translate-x-1/2 xl:top-8 xl:w-[1588px] lg:top-6 lg:w-[1420px] md:top-[76px] md:w-[1058px]"
+        src={bg}
+        sizes="(max-width: 767px) 1058px"
+        width={1920}
+        height={1210}
+        quality={100}
+        alt=""
+        priority
+      />
     </section>
   );
 };

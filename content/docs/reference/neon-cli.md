@@ -2,7 +2,9 @@
 title: Neon CLI
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.078Z'
+redirectFrom:
+  - /docs/reference/cli-create-app
+updatedOn: '2025-03-18T22:36:48.410Z'
 ---
 
 The Neon CLI is a command-line interface that lets you manage Neon directly from the terminal. This documentation references all commands and options available in the Neon CLI.
@@ -44,7 +46,7 @@ curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonct
 Run the CLI from the download directory:
 
 ```bash
-neonctl <command> [options]
+neon <command> [options]
 ```
 
 </TabItem>
@@ -139,23 +141,23 @@ bunx neonctl <command>
 ## Synopsis
 
 ```bash
-neonctl --help
-usage: neonctl <command> [options]                               [aliases: neon]
+neon --help
+usage: neon <command> [options]                               [aliases: neonctl]
 
 Commands:
-  neonctl auth                        Authenticate                      [aliases: login]
-  neonctl me                          Show current user
-  neonctl orgs                        Manage organizations                [aliases: org]
-  neonctl projects                    Manage projects                 [aliases: project]
-  neonctl ip-allow                    Manage IP Allow
-  neonctl branches                    Manage branches                   [aliases: branch]
-  neonctl databases                   Manage databases            [aliases: database, db]
-  neonctl roles                       Manage roles                        [aliases: role]
-  neonctl operations                  Manage operations               [aliases: operation]
-  neonctl connection-string [branch]  Get connection string                  [aliases: cs]
-  neonctl set-context                 Set the current context
-  neonctl create-app                  Initialize a new Neon project   [aliases: bootstrap]
-  neonctl completion                  generate completion script
+  neon auth                        Authenticate                      [aliases: login]
+  neon me                          Show current user
+  neon orgs                        Manage organizations                [aliases: org]
+  neon projects                    Manage projects                 [aliases: project]
+  neon ip-allow                    Manage IP Allow
+  neonctl vpc                      Manage VPC endpoints and project VPC restrictions
+  neon branches                    Manage branches                   [aliases: branch]
+  neon databases                   Manage databases            [aliases: database, db]
+  neon roles                       Manage roles                        [aliases: role]
+  neon operations                  Manage operations               [aliases: operation]
+  neon connection-string [branch]  Get connection string                  [aliases: cs]
+  neon set-context                 Set the current context
+  neon completion                  generate completion script
 
 Global options:
   -o, --output      Set output format
@@ -173,21 +175,21 @@ Options:
 
 ## Commands
 
-| Command                                                    | Subcommands                                                                                                  | Description                   |
-| ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ----------------------------- |
-| [auth](/docs/reference/cli-auth)                           |                                                                                                              | Authenticate                  |
-| [me](/docs/reference/cli-me)                               |                                                                                                              | Show current user             |
-| [orgs](/docs/reference/cli-orgs)                           | `list`                                                                                                       | Manage organizations          |
-| [projects](/docs/reference/cli-projects)                   | `list`, `create`, `update`, `delete`, `get`                                                                  | Manage projects               |
-| [ip-allow](/docs/reference/cli-ip-allow)                   | `list`, `add`, `remove`, `reset`                                                                             | Manage IP Allow               |
-| [branches](/docs/reference/cli-branches)                   | `list`, `create`, `reset`, `restore`, `rename`, `schema-diff`, `set-default`, `add-compute`, `delete`, `get` | Manage branches               |
-| [databases](/docs/reference/cli-databases)                 | `list`, `create`, `delete`                                                                                   | Manage databases              |
-| [roles](/docs/reference/cli-roles)                         | `list`, `create`, `delete`                                                                                   | Manage roles                  |
-| [operations](/docs/reference/cli-operations)               | `list`                                                                                                       | Manage operations             |
-| [connection-string](/docs/reference/cli-connection-string) |                                                                                                              | Get connection string         |
-| [set-context](/docs/reference/cli-set-context)             |                                                                                                              | Set context for session       |
-| [create-app](/docs/reference/cli-create-app)               |                                                                                                              | Initialize a new Neon project |
-| [completion](/docs/reference/cli-completion)               |                                                                                                              | Generate a completion script  |
+| Command                                                    | Subcommands                                                                                                  | Description                                       |
+| ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------- |
+| [auth](/docs/reference/cli-auth)                           |                                                                                                              | Authenticate                                      |
+| [me](/docs/reference/cli-me)                               |                                                                                                              | Show current user                                 |
+| [orgs](/docs/reference/cli-orgs)                           | `list`                                                                                                       | Manage organizations                              |
+| [projects](/docs/reference/cli-projects)                   | `list`, `create`, `update`, `delete`, `get`                                                                  | Manage projects                                   |
+| [ip-allow](/docs/reference/cli-ip-allow)                   | `list`, `add`, `remove`, `reset`                                                                             | Manage IP Allow                                   |
+| [vpc](/docs/reference/cli-vpc)                             | `endpoint`, `project`                                                                                        | Manage VPC endpoints and project VPC restrictions |
+| [branches](/docs/reference/cli-branches)                   | `list`, `create`, `reset`, `restore`, `rename`, `schema-diff`, `set-default`, `add-compute`, `delete`, `get` | Manage branches                                   |
+| [databases](/docs/reference/cli-databases)                 | `list`, `create`, `delete`                                                                                   | Manage databases                                  |
+| [roles](/docs/reference/cli-roles)                         | `list`, `create`, `delete`                                                                                   | Manage roles                                      |
+| [operations](/docs/reference/cli-operations)               | `list`                                                                                                       | Manage operations                                 |
+| [connection-string](/docs/reference/cli-connection-string) |                                                                                                              | Get connection string                             |
+| [set-context](/docs/reference/cli-set-context)             |                                                                                                              | Set context for session                           |
+| [completion](/docs/reference/cli-completion)               |                                                                                                              | Generate a completion script                      |
 
 ## Global options
 
@@ -216,12 +218,12 @@ Global options are supported with any Neon CLI command.
   Specifies the path to the `neonctl` configuration directory. To view the default configuration directory containing you `credentials.json` file, run `neon --help`. The credentials file is created when you authenticate using the `neon auth` command. This option is only necessary if you move your `neonctl` configuration file to a location other than the default.
 
   ```bash
-  neonctl projects list --config-dir /home/<user>/.config/neonctl
+  neon projects list --config-dir /home/<user>/.config/neonctl
   ```
 
 - <a id="api-key"></a>`--api-key`
 
-  Specifies your Neon API key. You can authenticate using a Neon API key when running a Neon CLI command instead of using `neonctl auth`. For information about obtaining an Neon API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
+  Specifies your Neon API key. You can authenticate using a Neon API key when running a Neon CLI command instead of using `neon auth`. For information about obtaining an Neon API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 
   ```bash
   neon <command> --api-key <neon_api_key>
@@ -233,16 +235,13 @@ Global options are supported with any Neon CLI command.
   export NEON_API_KEY=<neon_api_key>
   ```
 
-  <Admonition type="info">
-      
   The authentication flow for the Neon CLI follows this order:
 
-  - If the `--api-key` option is provided, it is used for authentication.
-  - If the `--api-key` option is not provided, the `NEON_API_KEY` environment variable setting is used.
-  - If there is no `--api-key` option or `NEON_API_KEY` environment variable setting, the CLI looks for the `credentials.json` file created by the `neon auth` command.
+  - If the `--api-key` option is provided, it takes precedence and is used for authentication.
+  - If the `--api-key` option is not provided, the `NEON_API_KEY` environment variable is used if it is set.
+  - If both `--api-key` option and `NEON_API_KEY` environment variable are not provided or set, the CLI falls back to the
+    `credentials.json` file created by the `neon auth` command.
   - If the credentials file is not found, the Neon CLI initiates the `neon auth` web authentication process.
-
-  </Admonition>
 
 - <a id="color"></a>`--color`
 
@@ -263,7 +262,7 @@ Global options are supported with any Neon CLI command.
 
 - <a id="help"></a>`-h, --help`
 
-  Shows the `neonctl` command-line help. You can view help for `neonctl`, a `neonctl` command, or a `neonctl` subcommand, as shown in the following examples:
+  Shows the `neon` command-line help. You can view help for `neon`, a `neon` command, or a `neon` subcommand, as shown in the following examples:
 
   ```bash
   neon --help

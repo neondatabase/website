@@ -97,9 +97,20 @@
         "title": "Branches"
       },
       "free": "10 <span>per project</span>",
-      "launch": "500 <span>per project</span>",
-      "scale": "500 <span>per project</span>",
-      "business": "500 <span>per project</span>"
+      "launch": "5,000 <span>per project</span>",
+      "scale": "5,000 <span>per project</span>",
+      "business": "5,000 <span>per project</span>"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Schema-only branches",
+        "subtitle": "<a href='/docs/guides/branching-schema-only'>More info in docs</a>"
+      },
+      "free": "Up to 3 <span>per project</span>",
+      "launch": "Up to 5 <span>per project</span>",
+      "scale": "Up to 10 <span>per project</span>",
+      "business": "Up to 25 <span>per project</span>"
     },
     {
       "rows": "1",
@@ -193,7 +204,7 @@
       "rows": "2",
       "feature": {
         "title": "Standard Extensions",
-        "subtitle": "View <a href='/docs/extensions/extensions-intro' class='underline'>Supported Extensions</a>"
+        "subtitle": "View <a href='/docs/extensions/extensions-intro'>Supported Extensions</a>"
       },
       "free": true,
       "launch": true,
@@ -287,6 +298,16 @@
     {
       "rows": "1",
       "feature": {
+        "title": "HIPAA"
+      },
+      "free": false,
+      "launch": false,
+      "scale": false,
+      "business": "Contact us"
+    },
+    {
+      "rows": "1",
+      "feature": {
         "title": "SLA"
       },
       "free": false,
@@ -362,8 +383,7 @@
     {
       "rows": "2",
       "feature": {
-        "title": "Migration Assistance",
-        "subtitle": "With waived migration fees"
+        "title": "Migration Assistance"
       },
       "free": false,
       "launch": false,
@@ -387,7 +407,7 @@
       "rows": "2",
       "feature": {
         "title": "High Availability",
-        "subtitle": "<a href='/docs/introduction/high-availability' class='underline'>Our approach</a>"
+        "subtitle": "<a href='/docs/introduction/high-availability'>Our approach</a>"
       },
       "free": true,
       "launch": true,
@@ -397,8 +417,18 @@
     {
       "rows": "2",
       "feature": {
-        "title": "Neon Authorize",
+        "title": "Neon RLS",
         "subtitle": "Row-level security"
+      },
+      "free": true,
+      "launch": true,
+      "scale": true,
+      "business": true
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Neon Auth"
       },
       "free": true,
       "launch": true,
@@ -449,6 +479,17 @@
       "rows": "1",
       "feature": {
         "title": "API"
+      },
+      "free": true,
+      "launch": true,
+      "scale": true,
+      "business": true
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Slack Integration",
+        "subtitle": "<a href='/docs/manage/slack-app'>More info in docs</a>"
       },
       "free": true,
       "launch": true,

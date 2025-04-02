@@ -1,296 +1,218 @@
-import aboutUsDarkIcon from 'icons/header/about-us-dark.svg';
-import aboutUsIcon from 'icons/header/about-us.svg';
-import aiAgentsDarkIcon from 'icons/header/ai-agents-dark.svg';
-import aiAgentsIcon from 'icons/header/ai-agents.svg';
-import aiDarkIcon from 'icons/header/ai-dark.svg';
-import aiIcon from 'icons/header/ai.svg';
-import apiDarkIcon from 'icons/header/api-dark.svg';
-import apiIcon from 'icons/header/api.svg';
-import autoscalingDarkIcon from 'icons/header/autoscaling-dark.svg';
-import autoscalingIcon from 'icons/header/autoscaling.svg';
-import blogDarkIcon from 'icons/header/blog-dark.svg';
-import blogIcon from 'icons/header/blog.svg';
-import branchingDarkIcon from 'icons/header/branching-dark.svg';
-import branchingIcon from 'icons/header/branching.svg';
-import careersDarkIcon from 'icons/header/careers-dark.svg';
-import careersIcon from 'icons/header/careers.svg';
-import caseDatabaseDarkIcon from 'icons/header/case-database-dark.svg';
-import caseDatabaseIcon from 'icons/header/case-database.svg';
-import caseDevDarkIcon from 'icons/header/case-dev-dark.svg';
-import caseDevIcon from 'icons/header/case-dev.svg';
-import caseSaasDarkIcon from 'icons/header/case-saas-dark.svg';
-import caseSaasIcon from 'icons/header/case-saas.svg';
-import caseStudiesDarkIcon from 'icons/header/case-studies-dark.svg';
-import caseStudiesIcon from 'icons/header/case-studies.svg';
-import caseVariableDarkIcon from 'icons/header/case-variable-dark.svg';
-import caseVariableIcon from 'icons/header/case-variable.svg';
-// import caseVelocityDarkIcon from 'icons/header/case-velocity-dark.svg';
-// import caseVelocityIcon from 'icons/header/case-velocity.svg';
-import changelogDarkIcon from 'icons/header/changelog-dark.svg';
-import changelogIcon from 'icons/header/changelog.svg';
-import connectionPoolerDarkIcon from 'icons/header/connection-pooler-dark.svg';
-import connectionPoolerIcon from 'icons/header/connection-pooler.svg';
-import consoleDarkIcon from 'icons/header/console-dark.svg';
-import consoleIcon from 'icons/header/console.svg';
-import demosDarkIcon from 'icons/header/demos-dark.svg';
-import demosIcon from 'icons/header/demos.svg';
-import discordDarkIcon from 'icons/header/discord-dark.svg';
-import discordIcon from 'icons/header/discord.svg';
-// import enterpriseDarkIcon from 'icons/header/enterprise-dark.svg';
-// import enterpriseIcon from 'icons/header/enterprise.svg';
-import partnersDarkIcon from 'icons/header/partners-dark.svg';
-import partnersIcon from 'icons/header/partners.svg';
-import scaleToZeroDarkIcon from 'icons/header/scale-to-zero-dark.svg';
-import scaleToZeroIcon from 'icons/header/scale-to-zero.svg';
-import serverlessDarkIcon from 'icons/header/serverless-dark.svg';
-import serverlessIcon from 'icons/header/serverless.svg';
+import AiAgentsIcon from 'icons/header/ai-agent.inline.svg';
+import ApiGradientIcon from 'icons/header/api-gradient.inline.svg';
+import ApiIcon from 'icons/header/api.inline.svg';
+import AutoscalingGradientIcon from 'icons/header/autoscaling-gradient.inline.svg';
+import AutoscalingIcon from 'icons/header/autoscaling.inline.svg';
+import BlogIcon from 'icons/header/blog.inline.svg';
+import BuildingGradientIcon from 'icons/header/building-gradient.inline.svg';
+import BuildingIcon from 'icons/header/building.inline.svg';
+import CareerIcon from 'icons/header/career.inline.svg';
+import ChatIcon from 'icons/header/chat.inline.svg';
+import ConnectionGradientIcon from 'icons/header/connection-gradient.inline.svg';
+import ConnectionIcon from 'icons/header/connection.inline.svg';
+import DatabaseGradientIcon from 'icons/header/database-gradient.inline.svg';
+import DatabaseIcon from 'icons/header/database.inline.svg';
+import FlowGradientIcon from 'icons/header/flow-gradient.inline.svg';
+import FlowIcon from 'icons/header/flow.inline.svg';
+import FolderGradientIcon from 'icons/header/folder-gradient.inline.svg';
+import FolderIcon from 'icons/header/folder.inline.svg';
+import GearIcon from 'icons/header/gear.inline.svg';
+import MigrationGradientIcon from 'icons/header/migration-gradient.inline.svg';
+import MigrationIcon from 'icons/header/migration.inline.svg';
+import PeopleIcon from 'icons/header/people.inline.svg';
+import PrivacyGradientIcon from 'icons/header/privacy-gradient.inline.svg';
+import PrivacyIcon from 'icons/header/privacy.inline.svg';
+import SaasIcon from 'icons/header/saas.inline.svg';
+import SecurityIcon from 'icons/header/security.inline.svg';
+import ServerlessIcon from 'icons/header/serverless.inline.svg';
+import StarGradientIcon from 'icons/header/star-gradient.inline.svg';
+import StarIcon from 'icons/header/star.inline.svg';
 
 import LINKS from './links';
 
 export default {
   header: [
     {
-      text: 'Features',
-      items: [
+      text: 'Product',
+      sections: [
         {
-          icon: {
-            light: serverlessIcon,
-            dark: serverlessDarkIcon,
-          },
-          text: 'Serverless',
-          description: 'Built for the cloud',
-          to: LINKS.serverless,
+          title: 'Database',
+          items: [
+            {
+              icon: AutoscalingIcon,
+              iconGradient: AutoscalingGradientIcon,
+              title: 'Autoscaling',
+              description: 'Automatic instance sizing',
+              to: LINKS.autoscaling,
+            },
+            {
+              icon: ConnectionIcon,
+              iconGradient: ConnectionGradientIcon,
+              title: 'Connection pooler',
+              description: 'Thousands of connections',
+              to: LINKS.connectionPooling,
+            },
+            {
+              icon: DatabaseIcon,
+              iconGradient: DatabaseGradientIcon,
+              title: 'Instant PITR',
+              description: 'Copy-on-write storage',
+              to: LINKS.branchRestore,
+            },
+          ],
+          isExtended: true,
         },
         {
-          icon: {
-            light: autoscalingIcon,
-            dark: autoscalingDarkIcon,
+          banner: {
+            title: 'What is Neon?',
+            description: 'Serverless Postgres',
+            to: LINKS.whyNeon,
           },
-          text: 'Autoscaling',
-          description: 'Automatic instance sizing',
-          to: LINKS.autoscaling,
         },
         {
-          icon: {
-            light: branchingIcon,
-            dark: branchingDarkIcon,
-          },
-          text: 'Branching',
-          description: 'Copy schema + data',
-          to: LINKS.flow,
+          title: 'Workflow',
+          items: [
+            {
+              icon: FlowIcon,
+              iconGradient: FlowGradientIcon,
+              title: 'Branching',
+              description: 'For ephemeral environments',
+              to: LINKS.flow,
+            },
+            {
+              icon: MigrationIcon,
+              iconGradient: MigrationGradientIcon,
+              title: 'Migration tool',
+              description: 'Move data to Neon',
+              to: LINKS.migration,
+            },
+          ],
+          isExtended: true,
         },
         {
-          icon: {
-            light: scaleToZeroIcon,
-            dark: scaleToZeroDarkIcon,
-          },
-          text: 'Scale-to-zero',
-          description: 'Lower costs for dev/test',
-          to: LINKS.scaleToZero,
-        },
-        {
-          icon: {
-            light: apiIcon,
-            dark: apiDarkIcon,
-          },
-          text: 'API',
-          description: 'Less management work',
-          to: LINKS.api,
-        },
-        {
-          icon: {
-            light: connectionPoolerIcon,
-            dark: connectionPoolerDarkIcon,
-          },
-          text: 'Connection pooler',
-          description: ' Thousands of connections',
-          to: LINKS.connectionPooling,
-        },
-        {
-          icon: {
-            light: consoleIcon,
-            dark: consoleDarkIcon,
-          },
-          text: 'Authorize',
-          description: 'Row-level security',
-          to: LINKS.authorize,
-        },
-        {
-          icon: {
-            light: aiIcon,
-            dark: aiDarkIcon,
-          },
-          text: 'AI',
-          description: 'Powered by pgvector',
-          to: LINKS.ai,
+          title: 'Backend',
+          items: [
+            {
+              icon: ApiIcon,
+              iconGradient: ApiGradientIcon,
+              title: 'Auth',
+              description: 'Authenticate your users',
+              to: LINKS.auth,
+            },
+            {
+              icon: PrivacyIcon,
+              iconGradient: PrivacyGradientIcon,
+              title: 'RLS',
+              description: 'RLS made simple',
+              to: LINKS.rlsAuthorize,
+            },
+          ],
+          isExtended: true,
         },
       ],
     },
     {
-      text: 'Pricing',
-      to: LINKS.pricing,
+      text: 'Solutions',
+      sections: [
+        {
+          title: 'Use cases',
+          items: [
+            {
+              icon: SaasIcon,
+              title: 'SaaS Apps',
+              to: `${LINKS.useCases}/postgres-for-saas`,
+            },
+            {
+              icon: ServerlessIcon,
+              title: 'Serverless Apps',
+              to: `${LINKS.useCases}/serverless-apps`,
+            },
+            {
+              icon: DatabaseIcon,
+              title: 'Database per Tenant',
+              to: `${LINKS.useCases}/database-per-tenant`,
+            },
+            {
+              icon: GearIcon,
+              title: 'Dev/Test',
+              to: `${LINKS.useCases}/dev-test`,
+            },
+            {
+              icon: AiAgentsIcon,
+              title: 'Agents',
+              to: `${LINKS.useCases}/ai-agents`,
+            },
+          ],
+        },
+        {
+          title: 'For teams',
+          items: [
+            {
+              icon: BuildingIcon,
+              iconGradient: BuildingGradientIcon,
+              title: 'Enterprise',
+              description: 'Scale & grow',
+              to: LINKS.enterprise,
+            },
+            {
+              icon: StarIcon,
+              iconGradient: StarGradientIcon,
+              title: 'Partners',
+              description: 'Add Neon to your platform',
+              to: LINKS.partners,
+            },
+            {
+              icon: FolderIcon,
+              iconGradient: FolderGradientIcon,
+              title: 'Case studies',
+              description: 'Explore customer stories',
+              to: LINKS.caseStudies,
+            },
+          ],
+          isExtended: true,
+        },
+      ],
     },
     {
       text: 'Docs',
       to: LINKS.docs,
     },
     {
-      text: 'Use cases',
-      items: [
-        {
-          icon: {
-            light: caseSaasIcon,
-            dark: caseSaasDarkIcon,
-          },
-          text: 'SaaS Apps',
-          description: 'Build faster with Neon',
-          to: `${LINKS.useCases}/postgres-for-saas`,
-        },
-        {
-          icon: {
-            light: caseVariableIcon,
-            dark: caseVariableDarkIcon,
-          },
-          text: 'Variable Traffic',
-          description: 'Scale up/down automatically',
-          to: LINKS.variableLoad,
-        },
-        // {
-        //   icon: {
-        //     light: caseDevIcon,
-        //     dark: caseDevDarkIcon,
-        //   },
-        //   text: 'Dev/Stage/Test',
-        //   description: 'Build and test on Neon',
-        //   to: `${LINKS.useCases}/dev-stage-test`,
-        // },
-        {
-          icon: {
-            light: caseDatabaseIcon,
-            dark: caseDatabaseDarkIcon,
-          },
-          text: 'Database per Tenant',
-          description: 'Grow to thousands of tenants',
-          to: `${LINKS.useCases}/database-per-tenant`,
-        },
-        {
-          icon: {
-            light: caseDevIcon,
-            dark: caseDevDarkIcon,
-          },
-          text: 'Dev/Test',
-          description: 'For ephemeral environments',
-          to: `${LINKS.useCases}/dev-test`,
-        },
-        {
-          icon: {
-            light: aiAgentsIcon,
-            dark: aiAgentsDarkIcon,
-          },
-          text: 'Agents',
-          description: 'A database backend for agents',
-          to: `${LINKS.useCases}/ai-agents`,
-        },
-        // {
-        //   icon: {
-        //     light: caseVelocityIcon,
-        //     dark: caseVelocityDarkIcon,
-        //   },
-        //   text: 'Development Velocity',
-        //   description: 'Ship faster than ever',
-        //   to: `${LINKS.useCases}/development-velocity`,
-        // },
-      ],
-    },
-    {
-      text: 'Resources',
-      items: [
-        {
-          icon: {
-            light: blogIcon,
-            dark: blogDarkIcon,
-          },
-          text: 'Blog',
-          description: 'Learn from the experts',
-          to: LINKS.blog,
-        },
-        {
-          icon: {
-            light: changelogIcon,
-            dark: changelogDarkIcon,
-          },
-          text: 'Changelog',
-          description: 'Explore product updates',
-          to: LINKS.changelog,
-        },
-        {
-          icon: {
-            light: demosIcon,
-            dark: demosDarkIcon,
-          },
-          text: 'Demos',
-          description: 'Try interactive demos',
-          to: LINKS.demos,
-        },
-        {
-          icon: {
-            light: discordIcon,
-            dark: discordDarkIcon,
-          },
-          text: 'Discord',
-          description: 'Join the community',
-          to: LINKS.discord,
-        },
-      ],
+      text: 'Pricing',
+      to: LINKS.pricing,
     },
     {
       text: 'Company',
-      items: [
+      sections: [
         {
-          icon: {
-            light: aboutUsIcon,
-            dark: aboutUsDarkIcon,
-          },
-          text: 'About us',
-          description: 'Meet the team',
-          to: LINKS.aboutUs,
+          items: [
+            {
+              icon: BlogIcon,
+              title: 'Blog',
+              to: LINKS.blog,
+            },
+            {
+              icon: PeopleIcon,
+              title: 'About us',
+              to: LINKS.aboutUs,
+            },
+            {
+              icon: CareerIcon,
+              title: 'Careers',
+              to: LINKS.careers,
+            },
+            {
+              icon: ChatIcon,
+              title: 'Contact',
+              to: LINKS.contactSales,
+            },
+            {
+              icon: SecurityIcon,
+              title: 'Security',
+              to: LINKS.security,
+            },
+          ],
         },
-        {
-          icon: {
-            light: careersIcon,
-            dark: careersDarkIcon,
-          },
-          text: 'Careers',
-          description: 'Join Neon',
-          to: LINKS.careers,
-        },
-        {
-          icon: {
-            light: partnersIcon,
-            dark: partnersDarkIcon,
-          },
-          text: 'Partners',
-          description: 'Add Neon to your platform',
-          to: LINKS.partners,
-        },
-        {
-          icon: {
-            light: caseStudiesIcon,
-            dark: caseStudiesDarkIcon,
-          },
-          text: 'Case studies',
-          description: 'Explore customer stories',
-          to: LINKS.caseStudies,
-        },
-        // {
-        //   icon: {
-        //     light: enterpriseIcon,
-        //     dark: enterpriseDarkIcon,
-        //   },
-        //   text: 'Enterprise',
-        //   description: 'Scale & grow',
-        //   to: LINKS.enterprise,
-        // },
       ],
     },
   ],
@@ -451,9 +373,23 @@ export default {
         },
         {
           text: 'HIPAA',
-          description: 'In progress',
-          icon: 'wip-icon',
+          description: 'Compliant',
+          icon: 'check-icon',
           to: LINKS.certHIPAA,
+          links: [
+            {
+              text: 'Compliance Guide',
+              to: LINKS.hipaaCompliance,
+            },
+            {
+              text: 'Neon’s Sub Contractors',
+              to: LINKS.hipaaContractors,
+            },
+            {
+              text: 'Sensitive Data Terms',
+              to: LINKS.sensitiveDataTerms,
+            },
+          ],
         },
         {
           text: 'Trust Center',

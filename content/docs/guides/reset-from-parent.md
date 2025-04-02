@@ -2,7 +2,7 @@
 title: Reset from parent
 subtitle: Learn how to reset a branch from its parent
 enableTableOfContents: true
-updatedOn: '2024-10-16T12:24:24.103Z'
+updatedOn: '2025-02-21T18:32:44.263Z'
 ---
 
 Neon's **Reset from parent** feature lets you instantly reset all databases on a branch to the latest schema and data from its parent branch, helping you recover from issues, start on new feature development, or keep the different branches in your environment in sync.
@@ -21,9 +21,10 @@ When you reset a branch to its parent, the data and schema is completely replace
 
 ### Key points
 
-- You can only reset a branch to the latest data from its parent. Point-in-time resets based on timestamp or LSN are possible using [Branch Restore](/docs/guides/branch-restore), a similar feature, with some differences: branch restore leaves a backup branch and is in general is intended more for data recovery than development workflow.
+- You can only reset a branch to the latest data from its parent. Point-in-time resets based on timestamp or LSN are possible using [Instant restore](/docs/introduction/branch-restore), a similar feature, with some differences: instant restore leaves a backup branch and is in general is intended more for data recovery than development workflow.
 - This reset is a complete overwrite, not a refresh or a merge. Any local changes made to the child branch are lost during this reset.
 - Existing connections will be temporarily interrupted during the reset. However, your connection details _do not change_. All connections are re-established as soon as the reset is done.
+- Root branches (like your project's `main` branch or schema-only branches) cannot be reset because they have no parent branch to reset to.
 
 ## How to Reset from parent
 
@@ -53,7 +54,7 @@ Using the CLI, you can reset a branch from parent using the following command:
 neon branches reset <id|name> --parent
 ```
 
-In the `id|name` field, specify the branch ID or name of the child branch whose data you want to reset. The `--parent` parameter specifies the kind of reset action that Neon will perform.
+In the `id|name` field, specify the branch ID or name of the child branch whose data you want to reset. The `--parent` parameter is a boolean specifying the kind of reset action that Neon will perform.
 
 If you have multiple projects in your account, you'll also have to include the `project-id` in the command along with the branch.
 
@@ -84,7 +85,7 @@ To reset a branch to its parent using the API, use the branch restore endpoint, 
 POST /projects/{project_id}/branches/{branch_id_to_restore}/restore
 ```
 
-For details, see [Branch Restore using the API](/docs/guides/branch-restore#how-to-use-branch-restore)
+For details, see [Instant restore using the API](/docs/guides/branch-restore#how-to-use-branch-restore)
 
 </TabItem>
 
@@ -96,20 +97,20 @@ You can include resetting database branches as part of your CI/CD workflow. For 
 
 ### For new features
 
-Initiate feature development by resetting your development branch to align with staging or production, ensuring a fresh starting point. Use the command:
+Start feature development with a clean slate by resetting your development branch to align with staging or production (whichever is its parent). This replaces the branch's current state with the parent's latest data and schema. Use the command:
 
 ```bash
-neon branches reset --name dev-branch --parent staging
+neon branches reset dev-branch --parent
 ```
 
-This strategy preserves a stable connection string for your development environment, while still giving your team a clean slate for each new feature.
+This strategy preserves a stable connection string for your development environment, while still ensuring every new feature begins with a fully updated and consistent environment.
 
 ### Refresh staging
 
-Keep **staging** in sync with **production** to minimize discrepancies. Automate staging updates with:
+Reset **staging** to match its parent branch (i.e., **production**) for a reliable testing baseline. Automate staging updates with:
 
 ```bash
-neon branches reset --name staging --parent main
+neon branches reset staging --parent
 ```
 
 This ensures staging accurately reflects the current production state for reliable testing.

@@ -2,7 +2,7 @@
 title: Trigger serverless functions
 subtitle: Use Inngest to trigger serverless functions from your Neon database changes
 enableTableOfContents: true
-updatedOn: '2024-11-05T20:10:30.045Z'
+updatedOn: '2025-02-03T20:41:57.339Z'
 ---
 
 Combining your serverless Neon database with [Inngest](https://www.inngest.com/?utm_source=neon&utm_medium=trigger-serverless-functions-guide) enables you to **trigger serverless functions** running on Vercel, AWS, and Cloudflare Worker **based on database changes.**
@@ -73,9 +73,9 @@ The Inngest Integration requires Postgres admin credentials to complete its setu
 
 ![Neon authorization step inside the Inngest integrations page](/docs/guides/inngest-integration-neon-authorize-step.png)
 
-You can find your admin Postgres credentials in your Neon project dashboard’s **Connection Details** section:
+You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**.
 
-![Connection details section on the Neon console dashboard](/docs/guides/neon-console-connection-details.png)
+![Connection modal](/docs/connect/connection-details.png)
 
 ## Triggering Serverless functions from database changes
 

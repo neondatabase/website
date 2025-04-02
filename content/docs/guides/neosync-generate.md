@@ -2,7 +2,7 @@
 title: Generate synthetic data with Neosync
 subtitle: Learn how to generate synthetic data in your Neon database with Neosync
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.659Z'
+updatedOn: '2025-02-03T20:41:57.330Z'
 ---
 
 [Neosync](https://www.neosync.dev/) is an open-source synthetic data orchestration platform that can create synthetic data and sync it across all of your Neon database environments.
@@ -59,7 +59,7 @@ Next, we'll create the table for your data.
 
 ### Copy the connection string for your database
 
-Navigate to the **Dashboard** in Neon and copy the connection string for the destination database from the **Connection Details** widget.
+Navigate to the **Project Dashboard** in Neon, click **Connect**, and copy the connection string for the destination database from the **Connect to your database** modal.
 
 <Admonition type="note">
 Make sure you select the correct database (`neosync`) from the **Database** drop-down menu.

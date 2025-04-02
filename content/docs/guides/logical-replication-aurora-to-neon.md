@@ -3,11 +3,8 @@ title: Replicate data from Aurora PostgreSQL
 subtitle: Learn how to replicate data from Aurora PostgreSQL to Neon
 enableTableOfContents: true
 isDraft: false
-tag: new
-updatedOn: '2024-11-15T20:32:35.027Z'
+updatedOn: '2025-03-05T21:09:38.751Z'
 ---
-
-<LRBeta/>
 
 <MigrationAssistant/>
 
@@ -26,6 +23,8 @@ Neon's logical replication feature allows you to replicate data from Aurora Post
 - A Neon project with a Postgres database to receive the replicated data. For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin
 - Review our [logical replication tips](/docs/guides/logical-replication-tips), based on real-world customer data migration experiences
+
+<Steps>
 
 ## Prepare your source database
 
@@ -102,16 +101,7 @@ You need to allow inbound connections to your Aurora Postgres instance from Neon
 
 Publications are a fundamental part of logical replication in Postgres. They define what will be replicated.
 
-To create a publication for all tables in your source database, run the following query. You can use a publication name of your choice.
-
-```sql
-CREATE PUBLICATION my_publication FOR ALL TABLES;
-```
-
-<Admonition type="important">
-Avoid defining publications with `FOR ALL TABLES` if you want the flexibility to add or drop tables from the publication later. It is not possible to modify a publication defined with `FOR ALL TABLES` to include or exclude specific tables. For details, see [Logical replication tips](/docs/guides/logical-replication-tips).
-
-To create a publication for a specific table, you can use the following syntax:
+To create a publication for a specific table:
 
 ```sql shouldWrap
 CREATE PUBLICATION my_publication FOR TABLE playing_with_neon;
@@ -123,8 +113,11 @@ To create a publication for multiple tables, provide a comma-separated list of t
 CREATE PUBLICATION my_publication FOR TABLE users, departments;
 ```
 
-For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
+<Admonition type="note">
+Defining specific tables lets you add or remove tables from the publication later, which you cannot do when creating publications with `FOR ALL TABLES`.
 </Admonition>
+
+For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
 
 ## Prepare your destination database
 
@@ -200,4 +193,6 @@ SELECT subname, received_lsn, latest_end_lsn, last_msg_receipt_time FROM pg_cata
 
 After the replication operation is complete, you can switch your application over to the destination database by swapping out your Aurora source database connection details for your Neon destination database connection details.
 
-You can find your Neon connection details on the **Connection Details** widget in the Neon Console. For details, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find your Neon database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For details, see [Connect from any application](/docs/connect/connect-from-any-app).
+
+</Steps>

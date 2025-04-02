@@ -7,7 +7,7 @@ const ANIMATION_DURATION = 0.2;
 const Burger = ({ className = null, isToggled = null, onClick = null }) => (
   <LazyMotion features={domAnimation}>
     <m.button
-      className={clsx('-mr-1 -mt-1.5 flex h-8 w-7 shrink rounded-full', className)}
+      className={clsx('-mt-1.5 flex h-8 w-7 shrink rounded-full', className)}
       type="button"
       animate={isToggled ? 'toggled' : 'initial'}
       aria-label={isToggled ? 'Close menu' : 'Open menu'}

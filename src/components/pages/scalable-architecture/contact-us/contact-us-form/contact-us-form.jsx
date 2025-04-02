@@ -196,7 +196,7 @@ const ContactUsForm = ({ className = null }) => {
           className="w-[168px] shrink-0  md:order-1 sm:mt-6 sm:w-full"
           type="submit"
           theme="primary"
-          size="new-md-2"
+          size="md-new"
           disabled={formState === FORM_STATES.LOADING || formState === FORM_STATES.SUCCESS}
         >
           {formState === FORM_STATES.SUCCESS ? 'Submitted' : 'Submit'}

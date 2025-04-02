@@ -1,5 +1,5 @@
 ---
-updatedOn: '2024-10-09T23:54:43.681Z'
+updatedOn: '2025-02-20T17:29:13.754Z'
 ---
 
 # Docs
@@ -292,7 +292,7 @@ class GFG {
 <details>
 <summary>Examples</summary>
 
-![Code tabs example](code-tabs-example.jpg)
+![Code tabs example](images/code-tabs-example.jpg)
 
 </details>
 
@@ -363,26 +363,42 @@ curl --request POST \
 
 To improve the documentation readability, one can leverage an Admonition custom component. Just wrap your piece of text with `<Admonition></Admonition>` and pass the type.
 
-There are 6 types of Admonition: `note`, `important`, `tip`, `warning`, `info`, `comingSoon`; the default is `note`.
+There are 6 types of Admonition: `note`, `important`, `tip`, `info`, `warning`, `comingSoon`; the default is `note`.
 
 You may also specify an optional title with prop `title`.
 
 Example:
 
 ```md
-<Admonition type="note" title="Your title">
-  The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation.
+<Admonition type="note">
+Highlights information that users should take into account, even when skimming.
+</Admonition>
+
+<Admonition type="important">
+Crucial information necessary for users to succeed.
+</Admonition>
+
+<Admonition type="tip">
+Optional information to help a user be more successful.
 </Admonition>
 
 <Admonition type="info">
-  The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation.
+Information that helps users understand the things better.
+</Admonition>
+
+<Admonition type="warning">
+Critical content demanding immediate user attention due to potential risks.
+</Admonition>
+
+<Admonition type="comingSoon">
+Information about features that are coming soon.
 </Admonition>
 ```
 
 <details>
 <summary>Examples</summary>
 
-![Admonition example](admonition-example.jpg)
+![Admonition example](images/admonition-example.jpg)
 
 </details>
 
@@ -399,7 +415,7 @@ Check the example for default data of CTA block
 <details>
 <summary>Example</summary>
 
-![CTA example](cta-example.jpg)
+![CTA example](images/cta-example.jpg)
 
 </details>
 
@@ -408,6 +424,32 @@ To change text in CTA block, you can pass to the component props `title`, `descr
 ```md
 <CTA title="Try it on Neon!" description="Neon is Serverless Postgres built for the cloud. Explore Postgres features and functions in our user-friendly SQL Editor. Sign up for a free account to get started." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
 ```
+
+## Steps
+
+To display numbered steps, wrap the content with `Steps` component.  
+Steps will be splitted by `h2` headings.
+
+```md
+<Steps>
+
+## Step 1: Create the Initial Schema
+
+First, create a new database called `people` on the `main` branch and add some sample data to it.
+
+## Step 2: Create a development branch
+
+Create a new development branch off of `main`. This branch will be an exact, isolated copy of `main`.
+
+</Steps>
+```
+
+<details>
+<summary>Example</summary>
+
+![Steps example](images/steps-example.jpg)
+
+</details>
 
 ## Images
 
@@ -496,7 +538,7 @@ Another term for smoke test
 <details>
 <summary>Examples</summary>
 
-![Definition list example](definition-list-example.jpg)
+![Definition list example](images/definition-list-example.jpg)
 
 </details>
 
@@ -522,7 +564,7 @@ Create a [markdown file](https://github.com/neondatabase/website/blob/main/conte
 
 ```js
 const sharedMdxComponents = {
-  // name of component: path to component (not including content/docs/)
+  // ConponentName: 'shared-content/component-filename'
   NeedHelp: 'shared-content/need-help',
 };
 
@@ -538,6 +580,20 @@ Insert a shared markdown and render inline.
 - [pg_tiktoken source code on GitHub](https://github.com/kelvich/pg_tiktoken)
 
 <NeedHelp/>
+```
+
+You can pass props to the shared component:
+
+```md
+<ComponentWithProps text="The pgvector extension" />
+```
+
+`component-with-props.md`
+
+```md
+<Admonition type="note" title="Test component with props">
+  {text}
+</Admonition>
 ```
 
 ## Contributing

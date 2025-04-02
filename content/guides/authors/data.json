@@ -46,5 +46,21 @@
       "title": "GitHub",
       "url": "https://github.com/AdalbertPungu"
     }
+  },
+  "jess-chadwick": {
+    "name": "Jess Chadwick",
+    "position": "Principal Software Engineer",
+    "link": {
+      "title": "GitHub",
+      "url": "https://github.com/jchadwick"
+    }
+  },
+  "paul-scanlon": {
+    "name": "Paul Scanlon",
+    "position": "Technical Product Marketing Manager",
+    "link": {
+      "title": "GitHub",
+      "url": "https://github.com/PaulieScanlon"
+    }
   }
 }

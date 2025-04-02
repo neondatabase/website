@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/cloud/tutorials
   - /docs/how-to-guides/import-an-existing-database
   - /docs/import/import-from-postgres
-updatedOn: '2025-01-09T12:42:28.913Z'
+updatedOn: '2025-02-03T20:41:57.341Z'
 ---
 
 This topic describes migrating data from one Postgres database to another using the `pg_dump` and `pg_restore`.
@@ -26,7 +26,7 @@ If you are performing this procedure to migrate data from one Neon project to an
 - Optionally, create a role in Neon to perform the restore operation. The role that performs the restore operation becomes the owner of restored database objects. For example, if you want role `sally` to own database objects, create `role` sally in Neon and perform the restore operation as `sally`.
 - If you have assigned database object ownership to different roles in your source database, read [Database object ownership considerations](#database-object-ownership-considerations). You may want to add the `-O, --no-owner` option to your `pg_restore` command to avoid errors.
 - Create the target database in Neon. For example, if you are migrating a database named `pagila`, create a database named `pagila` in Neon. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
-- Retrieve the connection string for the target Neon database. You can find it in the **Connection Details** widget on the Neon **Dashboard**. It will look something like this:
+- Retrieve the connection string for the target Neon database. You can find the connection string by clicking the **Connect** button on your **Project Dashboard**. It will look something like this:
 
   ```bash shouldWrap
   postgresql://[user]:[password]@[neon_hostname]/[dbname]

@@ -2,7 +2,7 @@
 title: Neon CLI commands — projects
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-12-12T15:31:10.134Z'
+updatedOn: '2025-02-20T17:57:40.910Z'
 ---
 
 ## Before you begin
@@ -115,6 +115,10 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--set-context`  | Set the current context to the new project.                                                                                                                                                                       | boolean |          |
 | `--cu`           | The compute size for the default branch's primary compute. Could be a fixed size (e.g., "2") or a range delimited by a dash (e.g., "0.5-3").                                                                      | string  |          |
 
+<Admonition type="note">
+Neon projects created using the CLI use the default Postgres version, which is Postgres 17. To create a project with a different Postgres version, you can use the [Neon Console](https://neon.tech/docs/manage/projects#create-a-project) or [Neon API](https://api-docs.neon.tech/reference/createproject). 
+</Admonition>
+
 #### Examples
 
 - Create a project with a user-defined name in a specific region:
@@ -165,7 +169,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
         "autoscaling_limit_max_cu": 1,
         "suspend_timeout_seconds": 0
         },
-        "pg_version": 15,
+        "pg_version": 17,
         "proxy_host": "us-east-2.aws.neon.tech",
         "branch_logical_size_limit": 204800,
         "branch_logical_size_limit_bytes": 214748364800,
@@ -234,23 +238,34 @@ The `id` is the project ID, which you can obtain by listing your projects or fro
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `update` subcommand supports this option:
 
-| Option           | Description                                                                                   | Type   | Required |
-| ---------------- | --------------------------------------------------------------------------------------------- | ------ | :------: |
-| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string |          |
-| `--name`         | The project name. The value cannot be empty.                                                  | string | &check;  |
+| Option                       | Description                                                                                                                                  | Type    | Required |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ------- | :------: |
+| `--context-file`             | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                                                | string  |          |
+| `--block-vpc-connections`    | When set, connections using VPC endpoints are disallowed. Use `--block-vpc-connections=false` to set the value to false.                     | boolean |          |
+| `--block-public-connections` | When set, connections from the public internet are disallowed. Use `--block-public-connections=false` to set the value to false.             | boolean |          |
+| `--cu`                       | The compute size for the default branch's primary compute. Could be a fixed size (e.g., "2") or a range delimited by a dash (e.g., "0.5-3"). | string  |          |
+| `--name`                     | The project name. The value cannot be empty.                                                                                                 | string  | &check;  |
 
 #### Examples
 
-Update the project name:
+- Update the project name:
 
-```bash
-neon projects update muddy-wood-859533 --name dev_project_1
-┌───────────────────┬───────────────┬───────────────┬──────────────────────┐
-│ Id                │ Name          │ Region Id     │ Created At           │
-├───────────────────┼───────────────┼───────────────┼──────────────────────┤
-│ muddy-wood-859533 │ dev_project_1 │ aws-us-west-2 │ 2023-07-09T17:04:29Z │
-└───────────────────┴───────────────┴───────────────┴──────────────────────┘
-```
+  ```bash
+  neon projects update muddy-wood-859533 --name dev_project_1
+  ┌───────────────────┬───────────────┬───────────────┬──────────────────────┐
+  │ Id                │ Name          │ Region Id     │ Created At           │
+  ├───────────────────┼───────────────┼───────────────┼──────────────────────┤
+  │ muddy-wood-859533 │ dev_project_1 │ aws-us-west-2 │ 2023-07-09T17:04:29Z │
+  └───────────────────┴───────────────┴───────────────┴──────────────────────┘
+  ```
+
+- Block connections from the public internet:
+
+  This option is used with Neon's Private Networking feature to block access from the public internet. See [Private Networking — Restrict public internet access](/docs/guides/neon-private-networking#restrict-public-internet-access). You must specify the ID of you Neon project, as shown below.
+
+  ```bash
+  neon projects update orange-credit-12345678 --block-public-connections=true
+  ```
 
 ### delete
 

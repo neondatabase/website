@@ -14,6 +14,7 @@ import Field from 'components/shared/field';
 import Link from 'components/shared/link';
 import { FORM_STATES, HUBSPOT_CONTACT_SALES_FORM_ID } from 'constants/forms';
 import LINKS from 'constants/links';
+import { checkBlacklistEmails } from 'utils/check-blacklist-emails';
 import { doNowOrAfterSomeTime, sendHubspotFormData } from 'utils/forms';
 
 const schema = yup
@@ -22,7 +23,8 @@ const schema = yup
     email: yup
       .string()
       .email('Please enter a valid email')
-      .required('Email address is a required field'),
+      .required('Email address is a required field')
+      .test(checkBlacklistEmails({ validation: { useDefaultBlockList: true } })),
     companySize: yup.string().notOneOf(['hidden'], 'Required field'),
     message: yup.string().required('Message is a required field'),
   })
@@ -135,7 +137,7 @@ const ContactForm = () => {
       />
       <Field
         name="email"
-        label="Email *"
+        label="Work Email *"
         type="email"
         autoComplete="email"
         placeholder="info@acme.com"

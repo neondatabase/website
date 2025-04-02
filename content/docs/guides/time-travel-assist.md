@@ -2,15 +2,15 @@
 title: Time Travel
 subtitle: Learn how to query point-in-time connections against your data's history
 enableTableOfContents: true
-updatedOn: '2024-11-22T19:06:16.919Z'
+updatedOn: '2025-02-07T17:55:42.638Z'
 ---
 
-To help review your data's history, Time Travel lets you connect to any selected point in time within your history retention window and then run queries against that connection.
+To help review your data's history, Time Travel lets you connect to any selected point in time within your restore window and then run queries against that connection. This capability is part of Neon's instant restore feature, which maintains a history of changes through Write-Ahead Log (WAL) records.
 
 You can use Time Travel from two places in the Neon Console, and from the Neon CLI:
 
 - **SQL Editor** &#8212; Time Travel is built into the SQL editor letting you switch between queries of your current data and previous iterations of your data in the same view.
-- **Restore** &#8212; Time Travel Assist is also built into the Branch Restore flow where it can help you make sure you've targeted the correct restore point before you restore a branch.
+- **Restore** &#8212; Time Travel Assist is also built into the instant restore flow where it can help you make sure you've targeted the correct restore point before you restore a branch.
 - **Neon CLI** &#8212; Use the Neon CLI to quickly establish point-in-time connections for automated scripts or command-line-based data analysis.
 
 ## How Time Travel works
@@ -26,15 +26,15 @@ However, you can see the history of operations related to the creation and delet
 
 ### How long do ephemeral endpoints remain active
 
-The ephemeral endpoints are created according to your configured [default compute size](/docs/manage/projects#reset-the-default-compute-size). An ephemeral compute remains active for as long as you keep running queries against it. After 30 seconds of inactivity, the timeline is deleted and the endpoint is removed.
+The ephemeral endpoints are created with a .50 CU compute size, which has 0.50 vCPU size with 2 GB of RAM. An ephemeral compute remains active for as long as you keep running queries against it. After 30 seconds of inactivity, the timeline is deleted and the endpoint is removed.
 
-### History retention
+### Restore window
 
-You are only able to run Time Travel queries that fall within your history retention window, which starts at 24 hours for Free Plan users, up to 7 days for Launch, 14 days for Scale, and 30 days for Business plan users.
+You are only able to run Time Travel queries that fall within your restore window, which starts at 24 hours for Free Plan users, up to 7 days for Launch, 14 days for Scale, and 30 days for Business plan users.
 
-You cannot select a time outside your current retention window.
+You cannot select a time outside your current restore window.
 
-To change your retention period, see [Configure history retention](/docs/manage/projects#configure-history-retention).
+To change your restore window, see [Configure restore window](/docs/manage/projects#configure-restore-window).
 
 ### Data integrity
 
@@ -44,7 +44,7 @@ Time Travel only allows non-destructive read-only queries. You cannot alter hist
 
 ### Time Travel with the SQL Editor
 
-Time Travel in the SQL Editor offers a non-destructive way to explore your database's historical data through read-only queries. By toggling Time Travel in the editor, you switch from querying your current data to querying against a selected point within your history retention window.
+Time Travel in the SQL Editor offers a non-destructive way to explore your database's historical data through read-only queries. By toggling Time Travel in the editor, you switch from querying your current data to querying against a selected point within your restore window.
 
 You can use this feature to help with scenarios like:
 
@@ -57,9 +57,8 @@ Here's an example of a completed Time Travel query.
 
 ![time travel from sql editor](/docs/guides/time_travel_sql.png)
 
-### Time Travel Assist with Branch Restore
-
-Time Travel Assist is also available from the **Restore** page, as part of the [Branch Restore](/docs/guides/branch-restore) feature. Before completing a restore operation, it's a good idea to use Time Travel Assist to verify that you've targetted the correct restore point.
+### Time Travel Assist with instant restore
+Time Travel Assist is also available from the **Restore** page, as part of the [Instant restore](/docs/guides/branch-restore) feature. Before completing a restore operation, it's a good idea to use Time Travel Assist to verify that you've targetted the correct restore point.
 
 An SQL editor is built into the **Restore** page for this purpose. When you make your branch and timestamp selection to restore a branch, this selection can also be used as the point-in-time connection to query against.
 
@@ -71,7 +70,7 @@ Here is an example of a completed query:
 
 Here is how to use Time Travel from both the **SQL Editor** and from the **Restore** page:
 
-<Tabs labels={["SQL Editor", "Branch Restore", "CLI"]}>
+<Tabs labels={["SQL Editor", "Instant restore", "CLI"]}>
 
 <TabItem>
 
@@ -80,7 +79,7 @@ Here is how to use Time Travel from both the **SQL Editor** and from the **Resto
 
    ![Time Travel toggle](/docs/guides/time_travel_toggle.png)
 
-1. Use the Date & Time selector to choose a point within your history retention window.
+1. Use the Date & Time selector to choose a point within your restore window.
 1. Write your read-only query in the editor, then click **Run**. You don't have to include time parameters in the query; the query is automatically targeted to your selected timestamp.
 
 </TabItem>
@@ -183,5 +182,5 @@ The ephemeral endpoints used to run your Time Travel queries do contribute to yo
 
 A couple of details to note:
 
-- The endpoints are shortlived. They are suspended 10 seconds after you stop querying.
-- Since these endpoints are created according to your default compute size (which applies to all new branch computes you create), you may want to reduce this default if you're performing a lot of time-travel queries for troubleshooting.
+- The endpoints are shortlived. They are suspended 30 seconds after you stop querying.
+- Ephemeral endpoints are created with a .50 CU compute size, which has 0.50 vCPU size with 2 GB of RAM. This is Neon's second smallest compute size. For more about compute sizes in Neon, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute). For more about compute usage and billing, see [Usage metrics — Compute](/docs/introduction/usage-metrics#compute).

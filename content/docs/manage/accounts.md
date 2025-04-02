@@ -2,7 +2,7 @@
 title: Accounts
 subtitle: Find out which account type is right for you
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.074Z'
+updatedOn: '2025-03-07T12:50:26.778Z'
 ---
 
 Neon offers two account types for you to choose from:
@@ -12,7 +12,7 @@ Neon offers two account types for you to choose from:
 
 ## Personal accounts
 
-When you first sign up with Neon, whether you're signing up on your own or you're invited to join, you start with a personal account. During your [onboarding](/docs/get-started-with-neon/signing-up#step-2-onboarding-in-the-neon-console), you are prompted to create your first personal project that you can get started with.
+When you first sign up with Neon, whether you're signing up on your own or you're invited to join, you start with a personal account. During your [onboarding](/docs/get-started-with-neon/signing-up#onboarding-in-the-neon-console), you are prompted to create your first personal project that you can get started with.
 
 You can always access your personal account settings from your **Profile** dropdown.
 
@@ -41,7 +41,7 @@ Easily switch between your personal account and any organization you are a Membe
 
 ## Deleting your account
 
-After deleting your account, it is suspended for 180 days; if you log back within this period your account will be reactivated. After 180 days, your account and related information is permanently purged and cannot be recovered.
+After deleting your account, you'll have a brief window to reactivate it if you change your mind. Just log back in to restore your account. Once this window closes, however, your account and related information will be permanently purged and cannot be recovered.
 
 Before deleting your account, you must take deliberate steps to remove your resources. This includes deleting all projects, leaving any organizations, and, if you're on a paid plan, downgrading to the Free Plan.
 
@@ -57,6 +57,6 @@ Here's where to go in the Neon Console to complete these actions:
 | **Delete all projects**     | Go to the **Projects** page and manually [delete](/docs/manage/projects#delete-a-project) each project from **Settings → Delete**.                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | **Downgrade your account**  | Go to **Billing → Change plan** and select **Downgrade to Free plan**. <br/> ![downgrade to free plan](/docs/manage/downgrade_to_free.png)                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
-Once all conditions are met and all your checkmarks show green, you can safely deactivate your account. You'll get a confirmation email soon afterwards. If you change your mind, just log back in within 180 days to reactivate your account with your personal info intact. API keys, however, will not be restored.
+Once all conditions are met and all your checkmarks show green, you can safely deactivate your account. You'll get a confirmation email soon afterwards. If you change your mind, just log back in within 30 days to reactivate your account with your personal info intact. API keys, however, will not be restored.
 
-After 180 days, your account will be permanently removed.
+After 30 days, your account will be permanently removed.

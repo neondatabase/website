@@ -9,7 +9,7 @@ import useCookie from 'react-use/lib/useCookie';
 import useLocation from 'react-use/lib/useLocation';
 
 import LinesIllustration from 'components/shared/lines-illustration';
-import { HUBSPOT_NEWSLETTERS_FORM_ID } from 'constants/forms';
+import { HUBSPOT_NEWSLETTERS_FORM_ID, FORM_STATES } from 'constants/forms';
 import useLocalStorage from 'hooks/use-local-storage';
 import CheckIcon from 'icons/subscription-form-check.inline.svg';
 import { doNowOrAfterSomeTime, emailRegexp, sendHubspotFormData } from 'utils/forms';
@@ -17,29 +17,22 @@ import { doNowOrAfterSomeTime, emailRegexp, sendHubspotFormData } from 'utils/fo
 import SendIcon from './images/send.inline.svg';
 import subscribeSmPattern from './images/subscribe-sm.pattern.svg';
 
-const STATES = {
-  DEFAULT: 'default',
-  SUCCESS: 'success',
-  ERROR: 'error',
-  LOADING: 'loading',
-};
-
 const appearAndExitAnimationVariants = {
   initial: { opacity: 0 },
   animate: { opacity: 1, transition: { duration: 0.2 } },
   exit: { opacity: 0, transition: { duration: 0.2 } },
 };
 
-const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
+const SubscribeForm = ({ className = null, size = 'md', dataTest }) => {
   const [email, setEmail] = useState('');
-  const [formState, setFormState] = useState(STATES.DEFAULT);
+  const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
   const [submittedEmail, setSubmittedEmail] = useLocalStorage('submittedEmailNewsletterForm', []);
   const [errorMessage, setErrorMessage] = useState('');
   const [hubspotutk] = useCookie('hubspotutk');
   const { href } = useLocation();
   const handleInputChange = (event) => {
     setEmail(event.currentTarget.value.trim());
-    setFormState(STATES.DEFAULT);
+    setFormState(FORM_STATES.DEFAULT);
     setErrorMessage('');
   };
 
@@ -53,17 +46,17 @@ const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
 
     if (!email) {
       setErrorMessage('Please enter your email');
-      setFormState(STATES.ERROR);
+      setFormState(FORM_STATES.ERROR);
     } else if (!emailRegexp.test(email)) {
       setErrorMessage('Please enter a valid email');
-      setFormState(STATES.ERROR);
+      setFormState(FORM_STATES.ERROR);
     } else if (submittedEmail.includes(email)) {
       setErrorMessage('You have already submitted this email');
-      setFormState(STATES.ERROR);
+      setFormState(FORM_STATES.ERROR);
     } else {
       setSubmittedEmail([...submittedEmail, email]);
       setErrorMessage('');
-      setFormState(STATES.LOADING);
+      setFormState(FORM_STATES.LOADING);
 
       const loadingAnimationStartedTime = Date.now();
 
@@ -81,18 +74,18 @@ const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
 
         if (response.ok) {
           doNowOrAfterSomeTime(() => {
-            setFormState(STATES.SUCCESS);
+            setFormState(FORM_STATES.SUCCESS);
             setEmail('Thank you for subscribing!');
           }, loadingAnimationStartedTime);
         } else {
           doNowOrAfterSomeTime(() => {
-            setFormState(STATES.ERROR);
+            setFormState(FORM_STATES.ERROR);
             setErrorMessage('Please reload the page and try again');
           }, loadingAnimationStartedTime);
         }
       } catch (error) {
         doNowOrAfterSomeTime(() => {
-          setFormState(STATES.ERROR);
+          setFormState(FORM_STATES.ERROR);
           setErrorMessage('Please reload the page and try again');
         }, loadingAnimationStartedTime);
       }
@@ -106,12 +99,10 @@ const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
     >
       <div
         className={clsx('overflow-hidden', {
-          'pb-[125px] pt-[118px] xl:pb-[123px] xl:pt-[104px] lg:pb-28 lg:pt-20 md:pb-24 md:pt-16':
-            size === 'lg',
-          'mt:pt-7 -mx-7 rounded-xl bg-black-new px-[60px] py-[70px] 2xl:mx-0 2xl:px-7 xl:py-14 lt:px-11 lg:pb-16 md:px-5 md:pb-12 md:pt-7':
+          'mt:pt-7 rounded-xl bg-black-new px-[60px] py-[70px] 2xl:mx-0 2xl:px-7 xl:py-14 lt:px-11 lg:pb-16 md:px-5 md:pb-12 md:pt-7':
             size === 'md',
           'relative overflow-hidden rounded-md px-7 py-6': size === 'sm',
-          'before:absolute before:inset-0 before:z-[0] before:rounded-md before:bg-secondary-9 before:bg-opacity-10 before:bg-subscribe-sm after:absolute after:inset-px after:z-[0] after:rounded-md after:bg-black-new':
+          'before:absolute before:inset-0 before:z-[0] before:rounded-md before:bg-secondary-9 before:bg-opacity-10 before:bg-blog-subscribe-form after:absolute after:inset-px after:z-[0] after:rounded-md after:bg-black-new':
             size === 'sm',
         })}
       >
@@ -127,10 +118,7 @@ const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
         <div
           className={clsx(
             'mx-auto flex items-center justify-between',
-            size === 'sm' ? 'md:flex-col md:items-center' : 'lg:flex-col',
-            {
-              'pr-12 2xl:px-10 2xl:pr-0 lg:px-8 md:px-4': size === 'lg',
-            }
+            size === 'sm' ? 'md:flex-col md:items-center' : 'lg:flex-col'
           )}
         >
           <div className="relative z-20 lg:text-center">
@@ -143,7 +131,7 @@ const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
                 <h2 className="font-title text-4xl font-medium leading-none tracking-tighter xl:text-[32px] sm:text-[28px]">
                   Subscribe to <mark className="bg-transparent text-green-45">Neon’s News</mark>
                 </h2>
-                <p className="mt-4 text-lg leading-none tracking-[-0.02em] text-gray-new-80 xl:mt-2 xl:text-base xl:leading-tight sm:mx-auto sm:mt-2.5 sm:max-w-[300px]">
+                <p className="mt-4 text-lg leading-none tracking-extra-tight text-gray-new-80 xl:mt-2 xl:text-base xl:leading-tight sm:mx-auto sm:mt-2.5 sm:max-w-[300px]">
                   Get insider access to Neon's latest news and events
                 </p>
               </>
@@ -151,7 +139,6 @@ const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
           </div>
           <form
             className={clsx('relative w-full md:mt-7', {
-              'max-w-[518px] xl:max-w-[456px] lg:mt-5': size === 'lg',
               'max-w-[518px] 2xl:max-w-[400px] xl:max-w-[350px] lt:mt-0 lt:max-w-[416px] lg:mt-5 lg:max-w-[464px] sm:mt-6':
                 size === 'md',
               'max-w-[350px]': size === 'sm',
@@ -168,26 +155,26 @@ const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
                   size === 'sm'
                     ? 'h-12 pr-32 2xl:pl-5 2xl:pr-[120px] xl:pl-7 xl:pr-32'
                     : 'h-14 pr-36',
-                  formState === STATES.ERROR ? 'border-secondary-1' : 'border-green-45',
-                  formState === STATES.SUCCESS ? 'text-green-45' : 'text-white'
+                  formState === FORM_STATES.ERROR ? 'border-secondary-1' : 'border-green-45',
+                  formState === FORM_STATES.SUCCESS ? 'text-green-45' : 'text-white'
                 )}
                 type="email"
                 name="email"
                 value={email}
                 placeholder="Your email address..."
-                disabled={formState === STATES.LOADING || formState === STATES.SUCCESS}
+                disabled={formState === FORM_STATES.LOADING || formState === FORM_STATES.SUCCESS}
                 onChange={handleInputChange}
               />
               <LazyMotion features={domAnimation}>
                 <AnimatePresence>
-                  {(formState === STATES.DEFAULT || formState === STATES.ERROR) && (
+                  {(formState === FORM_STATES.DEFAULT || formState === FORM_STATES.ERROR) && (
                     <m.button
                       className={clsx(
                         'absolute inset-y-2 right-2 rounded-[80px] font-bold leading-none text-black transition-colors duration-200 sm:px-5 xs:flex xs:h-10 xs:w-10 xs:items-center xs:justify-center xs:px-0',
                         size === 'sm'
                           ? 'h-8 px-5 py-2 2xl:px-4 xl:px-5 xs:inset-y-1 xs:right-1'
                           : 'h-10 px-7 py-3',
-                        formState === STATES.ERROR
+                        formState === FORM_STATES.ERROR
                           ? 'bg-secondary-1/50'
                           : 'bg-green-45 hover:bg-[#00FFAA]'
                       )}
@@ -202,7 +189,7 @@ const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
                       <SendIcon className="hidden h-6 w-6 xs:block" />
                     </m.button>
                   )}
-                  {formState === STATES.LOADING && (
+                  {formState === FORM_STATES.LOADING && (
                     <m.div
                       className={clsx(
                         'absolute right-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-green-45'
@@ -233,7 +220,7 @@ const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
                       </svg>
                     </m.div>
                   )}
-                  {formState === STATES.SUCCESS && (
+                  {formState === FORM_STATES.SUCCESS && (
                     <m.div
                       className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-green-45 text-black"
                       initial="initial"
@@ -248,10 +235,10 @@ const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
                 </AnimatePresence>
               </LazyMotion>
 
-              {formState === STATES.ERROR && errorMessage && (
+              {formState === FORM_STATES.ERROR && errorMessage && (
                 <span
                   className={clsx(
-                    'absolute left-7 top-full text-sm leading-none tracking-[-0.02em] text-secondary-1 sm:text-xs sm:leading-tight',
+                    'absolute left-7 top-full text-sm leading-none tracking-extra-tight text-secondary-1 sm:text-xs sm:leading-tight',
                     size === 'sm' ? 'mt-1.5' : 'mt-2.5'
                   )}
                   data-test="error-message"
@@ -263,7 +250,7 @@ const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
             {size !== 'sm' && (
               <LinesIllustration
                 className="z-10 !w-[125%]"
-                color={formState === STATES.ERROR ? '#FF4C79' : '#00E599'}
+                color={formState === FORM_STATES.ERROR ? '#FF4C79' : '#00E599'}
                 bgColor="#0C0D0D"
               />
             )}
@@ -276,7 +263,7 @@ const SubscribeForm = ({ className = null, size = 'lg', dataTest }) => {
 
 SubscribeForm.propTypes = {
   className: PropTypes.string,
-  size: PropTypes.oneOf(['lg', 'md', 'sm']),
+  size: PropTypes.oneOf(['md', 'sm']),
   dataTest: PropTypes.string,
 };
 

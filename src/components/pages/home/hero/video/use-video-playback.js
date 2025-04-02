@@ -21,15 +21,16 @@ const useVideoPlayback = (
 
   const updateProgress = useCallback(
     (video) => () => {
-      const { currentTime } = video;
+      const progress = progressBarRef.current;
+      if (!progress) return;
 
       // It is necessary that before switching to the next video progress bar remains filled in those cases
       // when we add a delay before automatic switching to the next video. - handleVideoSwitchDelay
+      const { currentTime } = video;
       if (currentTime === 0.1) {
         return;
       }
 
-      const progress = progressBarRef.current;
       const percentage = currentTime / video.duration;
       progress.style.transform = `scaleX(${percentage})`;
     },

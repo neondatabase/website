@@ -23,7 +23,8 @@
             "text": "compute hours",
             "href": "#compute-hour"
           }
-        ]
+        ],
+        "info": "For main branch. Additional branches limited to 5 compute hours"
       },
       {
         "icon": "autoscale",
@@ -54,7 +55,7 @@
       {
         "icon": "projects",
         "title": "100 projects",
-        "info": "500 branches per project"
+        "info": "5,000 branches per project"
       },
       {
         "icon": "storage",
@@ -181,13 +182,12 @@
     "otherFeatures": {
       "title": "Everything in Scale, plus...",
       "features": [
-        { "title": "Compliance (SOC 2, ISO)" },
-        { "title": "99.95% SLA" },
-        { "title": "Priority Support" },
+        { "title": "SOC 2, HIPAA (upon request)" },
+        { "title": "0-downtime migrations" },
         { "title": "Private Link" },
+        { "title": "Priority Support" },
         {
-          "title": "Migration assistance",
-          "info": "With 0 migration fees—we will waive them"
+          "title": "99.95% SLA"
         },
         { "title": "PITR (30 days)" }
       ]

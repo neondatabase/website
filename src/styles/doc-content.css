@@ -69,6 +69,20 @@
     @apply prose-a:border-b prose-a:border-transparent prose-a:font-normal prose-a:text-secondary-8 prose-a:no-underline prose-a:transition-[border-color] prose-a:duration-200 prose-a:ease-in-out hover:prose-a:border-secondary-8 dark:prose-a:text-primary-1 dark:hover:prose-a:border-primary-1 prose-a:sm:break-words;
     @apply prose-pre:px-0;
 
+    > * {
+      &:first-child {
+        @apply mt-0;
+      }
+
+      &:last-child {
+        @apply mb-0;
+      }
+    }
+
+    > .prose-doc {
+      @apply mt-10;
+    }
+
     h2 {
       @apply mb-3 mt-10;
     }
@@ -139,7 +153,7 @@
       @apply my-10 w-full leading-normal md:min-w-[500px];
 
       th {
-        @apply p-2.5 pt-0 align-top;
+        @apply p-2.5 pt-0 text-left align-top;
       }
 
       td {
@@ -177,7 +191,7 @@
       > code {
         text-shadow: unset;
 
-        @apply !font-mono text-sm !text-black-new dark:!text-white dark:![text-shadow:unset] md:min-w-[686px];
+        @apply !font-mono text-sm !text-black-new dark:!text-white dark:![text-shadow:unset];
       }
     }
 
@@ -216,6 +230,10 @@
           @apply hidden;
         }
       }
+    }
+
+    details summary {
+      @apply cursor-pointer;
     }
   }
 

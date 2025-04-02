@@ -11,14 +11,13 @@ import BranchLogo from './images/branch.inline.svg';
 import BunnyshellLogo from './images/bunnyshell.inline.svg';
 import CloudflareLogo from './images/cloudflare.inline.svg';
 import CodeInstituteLogo from './images/code-institute.inline.svg';
+import CommureLogo from './images/commure.inline.svg';
 import EncoreLogo from './images/encore.inline.svg';
 import EqtLogo from './images/eqt.inline.svg';
 import Fl0Logo from './images/fl0.inline.svg';
 import GenomicsLogo from './images/genomics.inline.svg';
 import HasuraLogo from './images/hasura.inline.svg';
 import IllaLogo from './images/illa.inline.svg';
-import MasterSchoolLogo from './images/masterschool.inline.svg';
-// import NerdwalletLogo from './images/nerdwallet.inline.svg';
 import OctolisLogo from './images/octolis.inline.svg';
 import OpenAILogo from './images/openai.inline.svg';
 import OpusLogo from './images/opus.inline.svg';
@@ -35,36 +34,35 @@ import WundergraphLogo from './images/wundergraph.inline.svg';
 import ZimmerBioLogo from './images/zimmer-biomet.inline.svg';
 
 const allLogos = {
+  adobe: AdobeLogo,
+  akqa: AKQALogo,
+  albertsons: AlbertsonsLogo,
+  bcg: BCGLogo,
+  branch: BranchLogo,
   bunnyshell: BunnyshellLogo,
+  cloudflare: CloudflareLogo,
+  commure: CommureLogo,
+  'code-institute': CodeInstituteLogo,
+  encore: EncoreLogo,
+  eqt: EqtLogo,
+  'fabric-io': FabricIoLogo,
+  fl0: Fl0Logo,
+  genomics: GenomicsLogo,
   hasura: HasuraLogo,
-  replit: ReplitLogo,
-  shakudo: ShakudoLogo,
-  vercel: VercelLogo,
   illa: IllaLogo,
   octolis: OctolisLogo,
-  cloudflare: CloudflareLogo,
-  wundergraph: WundergraphLogo,
-  'fabric-io': FabricIoLogo,
-  snaplet: SnapletLogo,
-  fl0: Fl0Logo,
-  opus: OpusLogo,
-  genomics: GenomicsLogo,
-  branch: BranchLogo,
-  'code-institute': CodeInstituteLogo,
-  'master-school': MasterSchoolLogo,
-  outfront: OutfrontLogo,
-  supergood: SupergoodLogo,
-  zimmer: ZimmerBioLogo,
-  eqt: EqtLogo,
-  encore: EncoreLogo,
-  retool: RetoolLogo,
   openai: OpenAILogo,
-  albertsons: AlbertsonsLogo,
-  adobe: AdobeLogo,
-  // nerdwallet: NerdwalletLogo,
+  opus: OpusLogo,
+  outfront: OutfrontLogo,
+  replit: ReplitLogo,
+  retool: RetoolLogo,
+  shakudo: ShakudoLogo,
+  snaplet: SnapletLogo,
+  supergood: SupergoodLogo,
+  vercel: VercelLogo,
   wordware: WordwareLogo,
-  akqa: AKQALogo,
-  bcg: BCGLogo,
+  wundergraph: WundergraphLogo,
+  zimmer: ZimmerBioLogo,
 };
 
 const LogosWall = ({ className, fill, logos }) => (

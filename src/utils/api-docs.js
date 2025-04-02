@@ -4,13 +4,9 @@ const { glob } = require('glob');
 const matter = require('gray-matter');
 const jsYaml = require('js-yaml');
 
-const { CHANGELOG_DIR_PATH } = require('../constants/docs');
+const { DOCS_DIR_PATH, CHANGELOG_DIR_PATH } = require('../constants/content');
 
 const getExcerpt = require('./get-excerpt');
-
-const DOCS_DIR_PATH = 'content/docs';
-const USE_CASES_DIR_PATH = 'content/use-cases';
-const FLOW_DIR_PATH = 'content/flow';
 
 const getPostSlugs = async (pathname) => {
   const files = await glob.sync(`${pathname}/**/*.md`, {
@@ -72,20 +68,28 @@ const getNavigationLinks = (slug, flatSidebar) => {
   };
 };
 
-const getAllChangelogPosts = async () => {
+const getAllChangelogs = async () => {
   const slugs = await getPostSlugs(CHANGELOG_DIR_PATH);
 
   return slugs
     .map((slug) => {
       if (!getPostBySlug(slug, CHANGELOG_DIR_PATH)) return;
-      const post = getPostBySlug(slug, CHANGELOG_DIR_PATH);
-      const { data, content } = post;
-
-      return {
-        slug: slug.replace('/', ''),
-        isDraft: data?.isDraft,
+      const {
+        data: { title, isDraft, redirectFrom },
         content,
-        redirectFrom: data?.redirectFrom,
+      } = getPostBySlug(slug, CHANGELOG_DIR_PATH);
+      const slugWithoutFirstSlash = slug.slice(1);
+      const date = slugWithoutFirstSlash;
+
+      // eslint-disable-next-line consistent-return
+      return {
+        title: title || content.match(/# (.*)/)?.[1],
+        slug: slugWithoutFirstSlash,
+        category: 'changelog',
+        date,
+        content,
+        isDraft,
+        redirectFrom,
       };
     })
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft);
@@ -96,10 +100,6 @@ module.exports = {
   getPostBySlug,
   getSidebar,
   getNavigationLinks,
-  getAllChangelogPosts,
+  getAllChangelogs,
   getAllPosts,
-  DOCS_DIR_PATH,
-  USE_CASES_DIR_PATH,
-  FLOW_DIR_PATH,
-  CHANGELOG_DIR_PATH,
 };

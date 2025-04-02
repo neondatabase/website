@@ -29,7 +29,9 @@ The PostgreSQL tutorial demonstrates many unique features of PostgreSQL that pos
 
 ### [Getting Started with PostgreSQL](./postgresql-getting-started/)
 
-This section helps you get started with PostgreSQL by showing you how to install PostgreSQL on Windows, Linux, and macOS. You also learn how to connect to PostgreSQL using the psql tool as well as how to load a sample database into the PostgreSQL for practicing.## Basic PostgreSQL Tutorial
+This section helps you get started with PostgreSQL by showing you how to install PostgreSQL on Windows, Linux, and macOS. You also learn how to connect to PostgreSQL using the psql tool as well as how to load a sample database into the PostgreSQL for practicing.
+
+## Basic PostgreSQL Tutorial
 
 First, you’ll learn how to query data from a single table using basic data techniques, which include selecting data, sorting result sets, and filtering rows.
 

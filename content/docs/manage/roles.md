@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/manage/users
-updatedOn: '2024-12-13T21:17:10.768Z'
+updatedOn: '2025-02-07T19:29:48.918Z'
 ---
 
 In Neon, roles are Postgres roles. Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`. This role owns the database that is created in your Neon project's default branch.
@@ -66,7 +66,7 @@ To create a role:
 7. Click **Create**. The role is created and you are provided with the password for the role.
 
 <Admonition type="note">
-Role names cannot exceed 63 characters, and some names are not permitted. See [Protected role names](#protected-role-names).
+Role names cannot exceed 63 characters, and some names are not permitted. See [Reserved role names](#reserved-role-names).
 </Admonition>
 
 ### Delete a role
@@ -135,7 +135,7 @@ POST /projects/{project_id}/branches/{branch_id}/roles
 ```
 
 <Admonition type="note">
-Role names cannot exceed 63 characters, and some role names are not permitted. See [Protected role names](#protected-role-names).
+Role names cannot exceed 63 characters, and some role names are not permitted. See [Reserved role names](#reserved-role-names).
 </Admonition>
 
 The API method appears as follows when specified in a cURL command. The `project_id` and `branch_id` are required parameters, and the role `name` is a required attribute. The length of a role name is limited to 63 bytes.
@@ -364,7 +364,7 @@ CREATE ROLE <name> WITH LOGIN PASSWORD 'password';
 ```
 
 - `WITH LOGIN` means that the role will have a login privilege, required for the role to log in to your Neon Postgres instance. If the role is used only for privilege management, the `WITH LOGIN` privilege is unnecessary.
-- A password is required and must have a minimum entropy of 60 bits.
+- A password must have a minimum entropy of 60 bits.
 
     <Admonition type="info">  
     To create a password with 60 bits of entropy, you can follow these password composition guidelines:
@@ -385,13 +385,30 @@ CREATE ROLE <name> WITH LOGIN PASSWORD 'password';
   Passwords must be supplied in plain text but are encrypted when stored. Hashed passwords are not supported.
 
   The guidelines should help you create a password with approximately 60 bits of entropy. However, depending on the exact characters used, the actual entropy might vary slightly. Always aim for a longer and more complex password if you're uncertain. It's also recommended to use a trusted password manager to create and store your complex passwords safely.
+
+  Neon also supports the `NOLOGIN` option: `CREATE ROLE role_name NOLOGIN;` This allows you to define roles that cannot authenticate but can be granted privileges.
   </Admonition>
 
 For role creation and access management examples, refer to the [Manage database access](/docs/manage/database-access) guide.
 
-## Protected role names
+## Creating NOLOGIN roles
 
-The following names are protected and cannot be given to a role:
+Neon supports creating Postgres roles with the `NOLOGIN` attribute. This allows you to define roles that cannot authenticate but can be granted privileges.
+
+```sql
+CREATE ROLE my_role NOLOGIN;
+```
+
+Roles with `NOLOGIN` are commonly used for permission management.
+
+The Neon API and CLI also support creating `NOLOGIN` roles:
+
+- The Neon API [Create role](https://api-docs.neon.tech/reference/createprojectbranchrole) endpoint supports a `no_login` attribute.
+- The Neon CLI [`neon roles create`](/docs/reference/cli-roles#create) command supports a `--no-login` option.
+
+## Reserved role names
+
+The following names are reserved and cannot be given to a role:
 
 - Any name starting with `pg_`
 - `neon_superuser`
