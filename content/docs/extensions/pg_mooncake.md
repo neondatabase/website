@@ -13,6 +13,8 @@ Columnstore tables improve analytical queries by storing data vertically, enabli
 
 Queries on `pg_mooncake` columnstore tables are executed by DuckDB. 
 
+The extension is maintained by [Mooncake Labs](https://www.mooncake.dev/).
+
 <CTA />
 
 You can create and use `pg_mooncake` columnstore tables like regular Postgres heap tables to run: 
@@ -89,6 +91,8 @@ Set your default bucket:
 ```sql
 SET mooncake.default_bucket = 's3://<bucket>';
 ```
+
+You can also use R2 and GCP buckets. See experience [here](https://pgmooncake.com/docs/cloud-storage).
 
 <Admonition type="note">
 In the future, you will not have to bring your own bucket to use `pg_mooncake` with Neon. 
