@@ -83,7 +83,7 @@ Neon supports fixed-size and autoscaling compute configurations.
 - **Fixed size:** Select a fixed compute size ranging from .25 CUs to 56 CUs. A fixed-size compute does not scale to meet workload demand.
 - **Autoscaling:** Specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries in response to the current load. Currently, the _Autoscaling_ feature supports a range of 1/4 (.25) CU to 16 CUs. The 1/4 CU and 1/2 CU settings are _shared compute_. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
 
-### Configure restore window
+### Configure your restore window
 
 By default, Neon retains a history of changes for all branches in your project, enabling features like:
 
