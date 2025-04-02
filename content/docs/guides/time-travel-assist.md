@@ -15,7 +15,7 @@ You can use Time Travel from two places in the Neon Console, and from the Neon C
 
 ## How Time Travel works
 
-Time Travel leverages Neon's instant branching capability to create a temporary branch and compute at the selected point in time, which are automatically removed once you are done querying against this instant restore connection. The computes are ephemeral: they are not listed on the **Branches** page or in a CLI or API list branches request.
+Time Travel leverages Neon's instant branching capability to create a temporary branch and compute at the selected point in time, which are automatically removed once you are done querying against this point-in-time connection. The computes are ephemeral: they are not listed on the **Branches** page or in a CLI or API list branches request.
 
 However, you can see the history of operations related to the creation and deletion of branches and ephemeral computes on the **Operations** page:
 
