@@ -24,7 +24,7 @@ Looking back at Neon's debut blog post, [SELECT ’Hello, World’](https://neon
 
 - **The belief that our architecture can provide a better Developer Experience (DevX)**
 
-  Features such as autoscaling, branching, time travel, instant provisioning, and instant point-in-time restore improve the developer experience by allowing quick environment setup, efficient developer workflows, and immediate database availability.
+  Features such as autoscaling, branching, time travel, instant provisioning, and instant restore improve the developer experience by allowing quick environment setup, efficient developer workflows, and immediate database availability.
 
 These are Neon's reasons, but given the many _database-as-a-service_ options available today, let's take a look at the reasons why **you** should choose Neon:
 
@@ -87,7 +87,7 @@ Neon is designed for a wide range of users, from individual developers to enterp
   </Admonition>
 
 - **Teams and organizations** that aim to enhance their development workflows with the ability to create database branches for testing new features or updates, mirroring the branching process used in code version control.
-- **Enterprises** requiring scalable, high-performance database solutions with advanced features like autoscaling, scale to zero, point-in-time restore, and logical replication. Enterprises can benefit from custom pricing, higher resource allowances, and enterprise-level support to meet their specific requirements.
+- **Enterprises** requiring scalable, high-performance database solutions with advanced features like autoscaling, scale to zero, instant restore, and logical replication. Enterprises can benefit from custom pricing, higher resource allowances, and enterprise-level support to meet their specific requirements.
 - **AI agents** that need to rapidly provision Postgres databases, execute SQL queries, and efficiently manage Neon infrastructure. With one-second provision times, scale-to-zero compute, and agent-friendly client interfaces, Neon enables AI agents to manage database fleets at scale while keeping costs low. AI agents are on track to surpass humans in the number of databases created on the Neon platform. [Learn more about this use case](https://neon.tech/use-cases/ai-agents).
 
 In summary, Neon is built for anyone who requires a Postgres database and wants to benefit from the scalability, ease of use, cost savings, and advanced DevX capabilities provided by Neon's serverless architecture.

@@ -83,24 +83,24 @@ Neon supports fixed-size and autoscaling compute configurations.
 - **Fixed size:** Select a fixed compute size ranging from .25 CUs to 56 CUs. A fixed-size compute does not scale to meet workload demand.
 - **Autoscaling:** Specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries in response to the current load. Currently, the _Autoscaling_ feature supports a range of 1/4 (.25) CU to 16 CUs. The 1/4 CU and 1/2 CU settings are _shared compute_. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
 
-### Configure history retention
+### Configure your restore window
 
 By default, Neon retains a history of changes for all branches in your project, enabling features like:
 
-- [Point-in-time restore](/docs/introduction/point-in-time-restore) for recovering lost data
+- [Instant restore](/docs/introduction/branch-restore) for recovering lost data
 - [Time Travel](/docs/guides/time-travel-assist) queries for investigating data issues
 
-The default retention window is **1 day** across all plans to help avoid unexpected storage costs. If you extend this retention window, you'll expand the range of data recovery and query options, but note that this will also increase your [storage](/docs/introduction/usage-metrics#storage) usage, especially with multiple active branches.
+The default retention window is **1 day** across all plans to help avoid unexpected storage costs. If you extend this restore window, you'll expand the range of data recovery and query options, but note that this will also increase your [storage](/docs/introduction/usage-metrics#storage) usage, especially with multiple active branches.
 
-Also note that adjusting the history retention period affects _all_ branches in your project.
+Also note that adjusting the restore window affects _all_ branches in your project.
 
-To configure the history retention period for a project:
+To configure the restore window for a project:
 
 1. Select a project in the Neon Console.
 2. On the Neon **Dashboard**, select **Settings**.
 3. Select **Storage**.
-   ![History retention configuration](/docs/manage/history_retention.png)
-4. Use the slider to select the history retention period.
+   ![Restore window configuration](/docs/manage/history_retention.png)
+4. Use the slider to select the restore window.
 5. Click **Save**.
 
 For more information about available plan limits, see [Neon plans](/docs/introduction/plans).

@@ -15,7 +15,7 @@ For more information about branches and how you can use them in your development
 You can create and manage branches using the Neon Console, [Neon CLI](/docs/reference/neon-cli), or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 <Admonition type="important">
-When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, which will add to your storage usage as they age out of your project's [history retention window](/docs/introduction/point-in-time-restore#history-retention).
+When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, which will add to your storage usage as they age out of your project's [restore window](/docs/introduction/branching#restore-window).
 </Admonition>
 
 ## Create a branch
@@ -32,7 +32,7 @@ To create a branch:
 7. Select an **Include data up to** option to specify the data to be included in your branch.
 
 <Admonition type="note">
-The **Specific date and time** and the **Specific Log Sequence Number Data** options do not include data changes that occurred after the specified date and time or LSN. You can only specify a date and time or LSN value that falls within your [history retention window](/docs/manage/projects#configure-history-retention).
+The **Specific date and time** and the **Specific Log Sequence Number Data** options do not include data changes that occurred after the specified date and time or LSN. You can only specify a date and time or LSN value that falls within your [restore window](/docs/manage/projects#configure-restore-window).
 </Admonition>
 
 8. Click **Create new branch**.
@@ -158,13 +158,13 @@ You can use the Neon Console, CLI, or API. For details, see [Reset from parent](
 
 ## Restore a branch to its own or another branch's history
 
-There are several restore operations available using Neon's Branch Restore feature:
+There are several restore operations available using Neon's instant restore feature:
 
 - Restore a branch to its own history
 - Restore a branch to the head of another branch
 - Restore a branch to the history of another branch
 
-You can use the Neon Console, CLI, or API. For more details, see [Branch Restore](/docs/guides/branch-restore).
+You can use the Neon Console, CLI, or API. For more details, see [Instant restore](/docs/guides/branch-restore).
 
 ## Delete a branch
 
@@ -189,7 +189,7 @@ FROM pg_database;
 
 The query value may differ slightly from the **Data size** reported in the Neon Console.
 
-Data size is your logical data size. It does not include the [history](/docs/reference/glossary#history) that Neon retains to support features like point-in-time restore.
+Data size is your logical data size. It does not include the [history](/docs/reference/glossary#history) that Neon retains to support features like instant restore.
 
 ## Branch types
 
@@ -201,7 +201,7 @@ A root branch is a branch without a parent branch. Each Neon project starts with
 
 Neon also supports two other types of root branches that have no parent but _can_ be deleted:
 
-- [Backup branches](#backup-branch), created by point-in-time restore operations on other root branches.
+- [Backup branches](#backup-branch), created by instant restore operations on other root branches.
 - [Schema-only branches](#schema-only-branch).
 
 The number of root branches allowed in a project depends on your Neon plan.
@@ -250,7 +250,7 @@ See [Schema-only branches](/docs/guides/branching-schema-only).
 
 ### Backup branch
 
-A branch created by a [point-in-time restore](#point-in-time-restore) operation. When you restore a branch from a particular point in time, the current branch is saved as a backup branch. Performing a restore operation on a root branch, creates a backup branch without a parent branch (a root branch). See [Branch restore](/docs/guides/branch-restore).
+A branch created by an [instant restore](#branch-restore) operation. When you restore a branch from a particular point in time, the current branch is saved as a backup branch. Performing a restore operation on a root branch, creates a backup branch without a parent branch (a root branch). See [Instant restore](/docs/guides/branch-restore).
 
 ## Branching with the Neon CLI
 

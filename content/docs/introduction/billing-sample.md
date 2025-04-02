@@ -35,7 +35,7 @@ Given the high number of connections used by this application, [connection pooli
 ### Compute hours and storage:
 
 - **Compute hours.** This is the metric Neon uses to track compute usage. 1 compute hour is equal to 1 active hour for a compute with 1 vCPU. If you have a compute with .25 vCPU, as you do in this sample scenario, it takes 4 active hours to use 1 compute hour. You can use this formula to calculate compute hour usage: `compute hours = compute size * active hours`. The average daily number of active hours is 23.94, totaling 718.35 active hours for the sample month. This indicates steady but low-intensity database usage.
-- **Storage.** The amount of database storage currently used by your project. It includes the total volume of data across all branches plus a history of database changes. The amount of history retained is defined by your chosen [history retention period](/docs/manage/projects#configure-history-retention). The storage size in this sample scenario is now over 25 GB and growing steadily with new written data as the user base grows.
+- **Storage.** The amount of database storage currently used by your project. It includes the total volume of data across all branches plus a history of database changes. The amount of history retained is defined by your chosen [restore window](/docs/manage/projects#configure-restore-window). The storage size in this sample scenario is now over 25 GB and growing steadily with new written data as the user base grows.
 
 ## Usage breakdown for the month
 

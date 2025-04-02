@@ -41,7 +41,7 @@ How branches boost development velocity:
 
 <DefinitionList bulletType="check">
 Onboard faster and keep in sync
-: You can give each developer their own branch for local development. Developers can use [branch reset](/docs/introduction/point-in-time-restore) to instantly restore and sync with the latest changes.
+: You can give each developer their own branch for local development. Developers can use [branch reset](docs/introduction/branching#restore-and-recover-data) to instantly restore and sync with the latest changes.
 
 Accelerate feature development and code reviews
 : Automate branch creation for each Git branch or pull request. Use tools like GitHub Actions or Neon's integrations:

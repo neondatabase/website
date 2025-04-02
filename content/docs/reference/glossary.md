@@ -41,10 +41,6 @@ A Neon Control Plane operation that applies a new configuration to a Neon object
 
 Cost-efficient storage where Neon archives inactive branches after a defined threshold. For Neon projects created in AWS regions, inactive branches are archived in Amazon S3 storage. For Neon projects created in Azure regions, branches are archived in Azure Blob storage.
 
-## Scale to Zero
-
-A Neon feature that suspends a compute after a specified period of inactivity (5 minutes by default) to minimize compute usage. When suspended, a compute is placed into an idle state. Otherwise, the compute is in an `Active` state. Users on paid plans can disable the _Scale to Zero_ feature for an "always-active" compute. For more information, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
-
 ## autoscaler-agent
 
 A control mechanism in the Neon autoscaling system that collects metrics from VMs, makes scaling decisions, and performs checks and requests to implement those decisions.
@@ -63,7 +59,7 @@ A mechanism that manages the lag between the Pageserver and compute node or the 
 
 ## backup branch
 
-A branch created by a [point-in-time restore](#point-in-time-restore) operation. When you restore a branch from a particular point in time, the current branch is saved as a backup branch.
+A branch created by a [instant restore](#branch-restore) operation. When you restore a branch from a particular point in time, the current branch is saved as a backup branch.
 
 ## branch
 
@@ -237,7 +233,15 @@ Deleting data will reduce the rate at which GB-month usage increases from that p
 
 ## History
 
-The history of data changes for all branches in your Neon project. A history is maintained to support _point-in-time restore_. For more information, see [Storage details](/docs/introduction/usage-metrics#storage-details).
+The history of data changes for all branches in your Neon project. A history is maintained to support _instant restore_. For more information, see [Storage details](/docs/introduction/usage-metrics#storage-details).
+
+## Instant restore
+
+Restoration of data to a state that existed at an earlier time. Neon retains a history of changes in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to an earlier point. A instant restore is performed by creating a branch using the **Time** or **LSN** option.
+
+By default, Neon retains a history of changes for **1 day** across all plans to help avoid unexpected storage costs. You can increase the retention window to 24 hours for [Neon Free Plan](/docs/introduction/plans#free-plan) users, 7 days for [Launch](/docs/introduction/plans#launch), 14 days for [Scale](/docs/introduction/plans#scale), and 30 days for [Business](/docs/introduction/plans#business) plan users. Keep in mind that this will increase your storage usage and may lead to higher costs, especially if you have many active branches.
+
+For more information about this feature, see [Branching — Instant restore](/docs/introduction/branch-restore).
 
 ## IP Allow
 
@@ -305,7 +309,7 @@ An [Organizations](#organization) role in Neon with access to all projects withi
 
 ## Neon
 
-A serverless Postgres platform designed to help developers build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as autoscaling, branching, point-in-time restore, and more. For more information, see [Why Neon?](/docs/introduction).
+A serverless Postgres platform designed to help developers build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as autoscaling, branching, instant restore, and more. For more information, see [Why Neon?](/docs/introduction).
 
 ## Neon API
 
@@ -357,7 +361,7 @@ A paid Neon service plan. See [Neon plans](/docs/introduction/plans).
 
 ## Pageserver
 
-A Neon architecture component that reads WAL records from Safekeepers to identify modified pages. The Pageserver accumulates and indexes incoming WAL records in memory and writes them to disk in batches. Each batch is written to an immutable file that is never modified after creation. Using these files, the Pageserver can quickly reconstruct any version of a page dating back to the defined history retention period. Neon retains a history for all branches.
+A Neon architecture component that reads WAL records from Safekeepers to identify modified pages. The Pageserver accumulates and indexes incoming WAL records in memory and writes them to disk in batches. Each batch is written to an immutable file that is never modified after creation. Using these files, the Pageserver can quickly reconstruct any version of a page dating back to the defined restore window. Neon retains a history for all branches.
 
 The Pageserver uploads immutable files to cloud storage, which is the final, highly durable destination for data. After a file is successfully uploaded to cloud storage, the corresponding WAL records can be removed from the Safekeepers.
 
@@ -369,13 +373,9 @@ The ability to authenticate without providing a password. Neon’s [Passwordless
 
 Peak usage is the highest amount of a resource (like storage or projects) you’ve used during the current billing period. If you go over your plan’s limit, extra charges are added in set increments. You’re charged for these extra units from the date you went over the limit, with the charges prorated for the rest of the month.
 
-## point-in-time restore
+## point-in-time restore (PITR)
 
-Restoration of data to a state that existed at an earlier time. Neon retains a history of changes in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to an earlier point. A point-in-time restore is performed by creating a branch using the **Time** or **LSN** option.
-
-By default, Neon retains a history of changes for **1 day** across all plans to help avoid unexpected storage costs. You can increase the retention window to 24 hours for [Neon Free Plan](/docs/introduction/plans#free-plan) users, 7 days for [Launch](/docs/introduction/plans#launch), 14 days for [Scale](/docs/introduction/plans#scale), and 30 days for [Business](/docs/introduction/plans#business) plan users. Keep in mind that this will increase your storage usage and may lead to higher costs, especially if you have many active branches.
-
-For more information about this feature, see [Branching — Point-in-time restore](/docs/introduction/point-in-time-restore).
+A database recovery capability that allows restoring data to a specific moment in the past using Write-Ahead Log (WAL) records. In Neon, this capability is implemented through the instant restore feature, which performs point-in-time restores with near-zero delay.
 
 ## pooled connection string
 
@@ -481,7 +481,7 @@ A branch with no parent. Each Neon project starts with a root branch named `main
 
 Neon also supports two other types of root branches that have no parent but _can_ be deleted:
 
-- [Backup branches](#backup-branch), created by point-in-time restore operations on other root branches.
+- [Backup branches](#backup-branch), created by instant restore operations on other root branches.
 - [Schema-only branches](#schema-only-branch).
 
 The number of root branches allowed in a project depends on your Neon plan.
@@ -493,6 +493,10 @@ A Neon architecture component responsible for the durability of database changes
 ## Scale plan
 
 A paid plan offered by Neon that provides full platform and support access. It's designed for scaling production workloads. See [Neon plans](/docs/introduction/plans).
+
+## Scale to Zero
+
+A Neon feature that suspends a compute after a specified period of inactivity (5 minutes by default) to minimize compute usage. When suspended, a compute is placed into an idle state. Otherwise, the compute is in an `Active` state. Users on paid plans can disable the _Scale to Zero_ feature for an "always-active" compute. For more information, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
 
 ## schema-only branch
 
@@ -576,7 +580,7 @@ You can obtain an unpooled connection string for your database by clicking the *
 
 ## Time Travel
 
-A Neon feature that lets you connect to any selected point in time within your history retention window and run queries against that connection. See [Time Travel](/docs/guides/time-travel-assist).
+A Neon feature that lets you connect to any selected point in time within your restore window and run queries against that connection. See [Time Travel](/docs/guides/time-travel-assist).
 
 ## user
 
@@ -616,7 +620,7 @@ A subset of frequently accessed or recently used data and indexes that ideally r
 
 ## Write-Ahead Logging (WAL)
 
-A standard mechanism that ensures the durability of your data. Neon relies on WAL to separate storage and compute, and to support features such as branching and point-in-time restore.
+A standard mechanism that ensures the durability of your data. Neon relies on WAL to separate storage and compute, and to support features such as branching and instant restore.
 
 In logical replication, the WAL records all changes to the data, serving as the source for data that needs to be replicated.
 
