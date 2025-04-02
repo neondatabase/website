@@ -273,7 +273,7 @@ When creating a branch from a protected parent branch, role passwords on the chi
   neon branches create --name data_recovery --parent 2023-07-11T10:00:00Z
   ```
 
-  The timestamp must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/). For more information about instant restore, see [Branch restore](/docs/guides/branch-restore).
+  The timestamp must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/). For more information about instant restore, see [Instant restore](/docs/guides/branch-restore).
 
 - Create a branch and connect to it with `psql`.
 
