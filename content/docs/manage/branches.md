@@ -250,7 +250,7 @@ See [Schema-only branches](/docs/guides/branching-schema-only).
 
 ### Backup branch
 
-A branch created by a [instant restore](#branch-restore) operation. When you restore a branch from a particular point in time, the current branch is saved as a backup branch. Performing a restore operation on a root branch, creates a backup branch without a parent branch (a root branch). See [Instant restore](/docs/guides/branch-restore).
+A branch created by an [instant restore](#branch-restore) operation. When you restore a branch from a particular point in time, the current branch is saved as a backup branch. Performing a restore operation on a root branch, creates a backup branch without a parent branch (a root branch). See [Instant restore](/docs/guides/branch-restore).
 
 ## Branching with the Neon CLI
 
