@@ -7,7 +7,7 @@ createdAt: '2025-03-28T13:24:36.612Z'
 updatedOn: '2025-03-28T13:24:36.612Z'
 ---
 
-PostgreSQL has a built-in mechanism for publish/subscribe (Pub/Sub) communication using the LISTEN and NOTIFY commands.
+PostgreSQL has a built-in mechanism for publish/subscribe (Pub/Sub) communication using the `LISTEN` and `NOTIFY` commands.
 This allows different sessions to send messages to each other using Postgres, without needing a separate service like Kafka or RabbitMQ.
 
 ## Steps
