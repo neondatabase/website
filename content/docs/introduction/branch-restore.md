@@ -33,7 +33,7 @@ The restore operation lets you revert the state of a selected branch to an earli
 
 ![branch restore to timestamp](/docs/guides/branch-restore_feature.png)
 
-The default restore window for a Neon project differs by plan. You can revert a branch to any time within your configured [restore window](/docs/manage/projects#configure-restore-window), down to the millisecond.
+The default restore window for a Neon project differs by plan. You can revert a branch to any time within your configured [restore window](/docs/manage/projects#configure-your-restore-window), down to the millisecond.
 
 A few key points to keep in mind about the restore operation:
 
