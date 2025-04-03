@@ -19,7 +19,7 @@ updatedOn: '2025-02-03T20:41:57.304Z'
   <div style={{ flex: 1, paddingRight: '20px' }}>
     <h3>Data Management</h3>
     <p>
-      <a href="#configure-your-history-retention-period">Configure your history retention</a><br />
+      <a href="#configure-your-restore-window">Configure your restore window</a><br />
       <a href="#monitoring">Monitoring</a><br />
       <a href="#create-staging-or-test-branches">Create staging or test branches</a>
     </p>
@@ -79,17 +79,17 @@ postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.te
 
 The `-pooler` flag directs connections to a connection pooling port at the Neon proxy. Unless you have a specific reason to avoid connection pooling, we recommend using it in production. You can find a pooled connection string for your database by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. The **Connection pooling** toggle should be enabled by default. For more information, see [Connection pooling](/docs/connect/connection-pooling).
 
-## Configure your history retention period
+## Configure your restore window
 
-Neon retains a history of changes for all branches. This history enables point-in-time restore and time travel queries, among other development-focused features. Keeping a history enables recovering lost data or viewing the past state of your database, which is helpful when trying to determine when an issue occurred or find a restore point. Neon's history can also function as a database backup strategy.
+Neon retains a history of changes for all branches. This history enables instant restore and time travel queries, among other development-focused features. Keeping a history enables recovering lost data or viewing the past state of your database, which is helpful when trying to determine when an issue occurred or find a restore point. Neon's history can also function as a database backup strategy.
 
-By default, Neon's history retention window is set to **1 day** across all plans to help you avoid unexpected storage costs.
+By default, Neon's restore window is set to **1 day** across all plans to help you avoid unexpected storage costs.
 
-If you choose to extend your retention window beyond the default &#8212; to take full advantage of the features that this history enables &#8212; keep in mind that this will increase your storage usage and may lead to higher costs, especially if you have many active branches. Make sure you select a history retention period that aligns with your goals.
+If you choose to extend your restore window beyond the default &#8212; to take full advantage of the features that this history enables &#8212; keep in mind that this will increase your storage usage and may lead to higher costs, especially if you have many active branches. Make sure you select a restore window that aligns with your goals.
 
-![History retention setting](/docs/get-started-with-neon/history_retention_setting.png)
+![Restore window setting](/docs/get-started-with-neon/history_retention_setting.png)
 
-For more, see [Branch reset and restore](/docs/introduction/point-in-time-restore).
+For more, see [Branch reset and restore](/docs/introduction/branch-restore).
 
 ## Configure IP Allow
 
