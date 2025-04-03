@@ -4,12 +4,15 @@ import Image from 'next/image';
 import Container from 'components/shared/container';
 import GradientBorder from 'components/shared/gradient-border/index';
 import Link from 'components/shared/link';
+import { LogosWall } from 'components/shared/logos';
 import LINKS from 'constants/links';
 
 import api from './images/api.jpg';
 import autoscaling from './images/autoscaling.jpg';
 import autosuspend from './images/autosuspend.jpg';
 import instantDb from './images/instant-db.jpg';
+
+const logos = ['create', 'replit', 'comigo', 'rubric', 'wordware', 'basehub'];
 
 const ITEMS = [
   {
@@ -80,6 +83,12 @@ const Bento = () => (
           </li>
         ))}
       </ul>
+      <div className="mt-24 flex items-center gap-10 md:flex-col md:gap-8">
+        <p className="max-w-[184px] font-medium leading-snug tracking-extra-tight text-gray-new-70 md:text-sm">
+          Trusted in production by&nbsp;thousands of teams.
+        </p>
+        <LogosWall logos={logos} size="sm" />
+      </div>
     </Container>
   </section>
 );
