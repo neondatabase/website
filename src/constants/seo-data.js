@@ -9,6 +9,13 @@ export default {
       'The database you love, on a serverless platform designed to help you build reliable and scalable applications faster.',
     pathname: '',
   },
+  // TODO: Update AI page with the actual meta data
+  ai: {
+    title: 'Neon is Postgres for AI',
+    description: 'Whether you’re building an Agent, coding with AI or just vibing',
+    imagePath: '/images/social-previews/ai.jpg',
+    pathname: LINKS.ai,
+  },
   aiChat: {
     title: 'Neon AI Chat',
     description: 'AI assistant trained on documentation, help articles, and other content',
