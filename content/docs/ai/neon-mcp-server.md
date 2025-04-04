@@ -36,6 +36,22 @@ Traditionally, connecting AI models to different data sources required developer
 - **Accessibility for non-developers:** Empower users with varying technical backgrounds to interact with Neon databases.
 - **Database migration support:** Leverage Neon's branching capabilities for database schema changes initiated via natural language.
 
+### Remote MCP Server (Preview)
+
+Neon now offers a hosted MCP server in the cloud. Our remote MCP server makes it easier to integrate AI workflows into clients like Cursor, Windsurf, and Claude Desktop—no API keys or local setup required.
+
+You can start using it today by pointing your client to:
+
+```text
+https://mcp.neon.tech
+```
+
+<Admonition type="note">
+The remote MCP server is currently in **preview** while the MCP OAuth spec continues to evolve. Things might change, and we'd love your feedback as we improve.
+</Admonition>
+
+For client-specific setup instructions, see [Connect MCP Clients to Neon](/docs/ai/connect-mcp-clients-to-neon).
+
 <Admonition type="warning" title="Security Considerations">
 The Neon MCP server grants powerful database management capabilities through natural language requests.  **Always review and authorize actions** requested by the LLM before execution. Ensure that only authorized users and applications have access to the Neon MCP server and Neon API keys.
 </Admonition>

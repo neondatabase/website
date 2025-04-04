@@ -8,6 +8,11 @@ updatedOn: '2025-03-07T21:52:34.652Z'
 
 The **Neon MCP Server** allows you to connect various [**Model Context Protocol (MCP)**](https://modelcontextprotocol.org) compatible AI tools to your Neon Postgres databases. This guide provides instructions for connecting popular MCP clients to the Neon MCP Server, enabling natural language interaction with your Neon projects.
 
+Neon offers two options for using the MCP Server:
+
+1. **Remote MCP Server (Preview)**: A hosted version that requires no API keys or local setup
+2. **Local MCP Server**: A self-hosted version that runs on your machine
+
 This guide covers the setup for the following MCP Clients:
 
 - [Claude Desktop](#claude-desktop)
@@ -17,9 +22,25 @@ This guide covers the setup for the following MCP Clients:
 
 By connecting these tools to the Neon MCP Server, you can manage your Neon projects, databases, and schemas using natural language commands within the MCP client interface.
 
-## Prerequisites
+## Remote MCP Server (Preview)
 
-Before you begin, ensure you have:
+Neon offers a hosted MCP server in the cloud that makes it easier to integrate AI workflows into clients like Cursor, Windsurf, and Claude Desktop—no API keys or local setup required.
+
+You can start using it today by pointing your client to:
+
+```text
+https://mcp.neon.tech
+```
+
+<Admonition type="note">
+The remote MCP server is currently in **preview** while the MCP OAuth spec continues to evolve. Things might change, and we'd love your feedback as we improve.
+</Admonition>
+
+Each client has a slightly different configuration process for the remote MCP server. See the client-specific sections below for details.
+
+## Local MCP Server Prerequisites
+
+If you prefer to use the local MCP server, ensure you have:
 
 - **Neon Account and API Key:** You need a Neon account and a Neon API key. Create an API key in your [Neon Console](https://console.neon.tech/app/settings/api-keys). See [Neon API Keys documentation](/docs/manage/api-keys#creating-api-keys) for details.
 - **Node.js (>= v18.0.0) and npm:** Ensure Node.js version 18 or later and npm are installed. Download them from [nodejs.org](https://nodejs.org).
@@ -30,18 +51,59 @@ Ensure you are using the latest version of your chosen MCP client as MCP integra
 
 ## Claude Desktop
 
-1.  Open your terminal.
-2.  Run the following command, replacing `YOUR_NEON_API_KEY` with your actual Neon API key:
+### Remote MCP Server (Preview)
+
+Claude Desktop can connect to Neon's remote MCP server without requiring API keys or local setup:
+
+1. Open Claude Desktop.
+2. Go to Settings.
+3. Under **MCP Servers**, add:
+
+    ```ini
+    "Neon": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
+    }
+    ```
+
+4. Restart Claude Desktop.
+
+### Local MCP Server
+
+To use the local MCP server with Claude Desktop:
+
+1. Open your terminal.
+2. Run the following command, replacing `YOUR_NEON_API_KEY` with your actual Neon API key:
 
     ```bash
     npx -y @smithery/cli install neon --client claude --config "{\"neonApiKey\":\"YOUR_NEON_API_KEY\"}"
     ```
 
-3.  Restart Claude Desktop.
+3. Restart Claude Desktop.
 
 For more, see [Get started with Neon MCP server with Claude Desktop](/guides/neon-mcp-server).
 
 ## Cursor
+
+### Remote MCP Server (Preview)
+
+Cursor can connect to Neon's remote MCP server without requiring API keys or local setup:
+
+1. Open Cursor Settings.
+2. Under **MCP Servers**, add:
+
+    ```ini
+    "Neon": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
+    }
+    ```
+
+That's it—you're connected to Neon's remote MCP Server.
+
+### Local MCP Server
+
+To use the local MCP server with Cursor:
 
 1. Open Cursor.
 2. Open your terminal.
@@ -53,10 +115,29 @@ For more, see [Get started with Neon MCP server with Claude Desktop](/guides/neo
 
 4. Restart Cursor if necessary.
 
-
 For more, see [Get started with Cursor and Neon Postgres MCP Server](/guides/cursor-mcp-neon).
 
 ## Windsurf (Codeium)
+
+### Remote MCP Server (Preview)
+
+Windsurf can connect to Neon's remote MCP server without requiring API keys or local setup:
+
+1. Open Windsurf Settings.
+2. Under **MCP Servers**, add:
+
+    ```ini
+    "Neon": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
+    }
+    ```
+
+3. Click the **Refresh** button in Windsurf Cascade to load the new MCP server.
+
+### Local MCP Server
+
+To use the local MCP server with Windsurf:
 
 1. Open your terminal.
 2. Run the following command, replacing `YOUR_NEON_API_KEY` with your actual Neon API key:
@@ -67,10 +148,28 @@ For more, see [Get started with Cursor and Neon Postgres MCP Server](/guides/cur
 
 3. Click the **Refresh** button in Windsurf Cascade to load the new MCP server.
 
-
 For more, see [Get started with Windsurf and Neon Postgres MCP Server](/guides/windsurf-mcp-neon).
 
 ## Cline (VS Code Extension)
+
+### Remote MCP Server (Preview)
+
+Cline can connect to Neon's remote MCP server without requiring API keys or local setup:
+
+1. Open Cline in VS Code (Sidebar -> Cline icon).
+2. Open Cline Settings.
+3. Under **MCP Servers**, add:
+
+    ```ini
+    "Neon": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
+    }
+    ```
+
+### Local MCP Server
+
+To use the local MCP server with Cline:
 
 1. Open Cline in VS Code (Sidebar -> Cline icon).
 2. Open your terminal.
