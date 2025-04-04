@@ -5,25 +5,39 @@ import PropTypes from 'prop-types';
 import Container from 'components/shared/container/container';
 import quoteIcon from 'icons/quote.svg';
 
+const CompanyLogo = ({ className, src, width, isPriority }) => (
+  <Image
+    className={clsx('h-9 lg:h-7 lg:w-auto md:h-6', className)}
+    src={src}
+    width={width}
+    height={36}
+    alt=""
+    priority={isPriority}
+  />
+);
+
+CompanyLogo.propTypes = {
+  className: PropTypes.string,
+  src: PropTypes.string.isRequired,
+  width: PropTypes.number.isRequired,
+  isPriority: PropTypes.bool,
+};
+
 const TestimonialNew = ({
   className = '',
   quoteClassName = '',
   quote,
-  name,
-  position,
-  avatar,
+  author,
   company,
   isPriority,
 }) => (
   <div className={clsx('testimonial-new safe-paddings', className)}>
     <Container className="relative flex flex-col items-center px-16 md:px-5" size="960">
-      {company ? (
-        <Image
-          className="mb-7 lg:mb-6 lg:h-7 lg:w-auto md:mb-5 md:h-6"
+      {company && author ? (
+        <CompanyLogo
+          className="mb-7 lg:mb-6 md:mb-5"
           src={company.src}
           width={company.width}
-          height={36}
-          alt=""
           priority={isPriority}
         />
       ) : (
@@ -50,23 +64,29 @@ const TestimonialNew = ({
           </p>
         </blockquote>
         <figcaption className="mt-5 flex items-center justify-center lg:mt-[18px] md:flex-col">
-          {avatar && (
-            <Image
-              className="mr-2.5 rounded-full md:mx-auto"
-              src={avatar}
-              width={30}
-              height={30}
-              quality={100}
-              alt={`${name} photo`}
-              priority={isPriority}
-            />
+          {author ? (
+            <>
+              {author.avatar && (
+                <Image
+                  className="mr-2.5 rounded-full md:mx-auto"
+                  src={author.avatar}
+                  width={30}
+                  height={30}
+                  quality={100}
+                  alt={`${author.name} photo`}
+                  priority={isPriority}
+                />
+              )}
+              <span className="text-lg font-light leading-tight tracking-extra-tight text-gray-new-70 lg:text-base md:mx-auto md:mt-2 md:max-w-[70%] md:text-center md:text-sm">
+                {author.name}
+                <cite className="ml-1.5 not-italic text-gray-new-50 before:mr-1.5 before:inline-flex before:h-px before:w-4 before:bg-gray-new-50 before:align-middle">
+                  {author.position}
+                </cite>
+              </span>
+            </>
+          ) : (
+            company && <CompanyLogo src={company.src} width={company.width} priority={isPriority} />
           )}
-          <span className="text-lg font-light leading-tight tracking-extra-tight text-gray-new-70 lg:text-base md:mx-auto md:mt-2 md:max-w-[70%] md:text-center md:text-sm">
-            {name}
-            <cite className="ml-1.5 not-italic text-gray-new-50 before:mr-1.5 before:inline-flex before:h-px before:w-4 before:bg-gray-new-50 before:align-middle">
-              {position}
-            </cite>
-          </span>
         </figcaption>
       </figure>
     </Container>
@@ -77,9 +97,11 @@ TestimonialNew.propTypes = {
   className: PropTypes.string,
   quoteClassName: PropTypes.string,
   quote: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  position: PropTypes.string.isRequired,
-  avatar: PropTypes.object,
+  author: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    position: PropTypes.string.isRequired,
+    avatar: PropTypes.object,
+  }),
   company: PropTypes.shape({
     src: PropTypes.string.isRequired,
     width: PropTypes.number.isRequired,
