@@ -54,6 +54,8 @@ const Bento = () => (
           className="mt-6 text-lg leading-none tracking-[-0.03em] lg:mt-5 lg:text-base"
           to={LINKS.bookMeeting}
           theme="white"
+          target="_blank"
+          rel="noopener noreferrer"
           withArrow
         >
           Schedule a call
