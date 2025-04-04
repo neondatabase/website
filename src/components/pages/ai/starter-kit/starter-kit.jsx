@@ -64,6 +64,7 @@ const StarterKit = () => (
         withArrow
       >
         Learn more
+        <span className="sr-only">about Neon's AI Starter Kit</span>
       </Link>
       <ul className="mt-14 grid grid-cols-2 gap-x-[72px] gap-y-10 lg:mt-11 lg:gap-x-16 sm:grid-cols-1">
         {ITEMS.map(({ title, description, icon }) => (
