@@ -146,7 +146,7 @@ Now that you've integrated Auth0 with Neon RLS, you can securely pass JWTs to yo
 
 Here are examples of implementing RLS policies for a **todos** table – the Drizzle example leverages the simplified `crudPolicy` function, while the SQL example demonstrates the use of individual RLS policies.
 
-<Tabs labels={["Drizzle","PostgreSQL"]}>
+<Tabs labels={["Drizzle","SQL"]}>
 
 <TabItem>
 
