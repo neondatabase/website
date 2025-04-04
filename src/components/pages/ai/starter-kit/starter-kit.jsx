@@ -49,23 +49,23 @@ const ITEMS = [
 
 const StarterKit = () => (
   <section className="starter-kit safe-paddings mt-section">
-    <Container className="max-w-[640px]">
+    <Container className="!max-w-[640px] md:px-5 sm:!max-w-sm">
       <h2 className="font-title text-5xl font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:text-[32px]">
         Neon's AI Starter Kit
       </h2>
-      <p className="mt-3 max-w-lg text-lg leading-snug tracking-extra-tight text-gray-new-70">
+      <p className="mt-3 max-w-lg text-lg leading-snug tracking-extra-tight text-gray-new-70 lg:max-w-md lg:text-base">
         Neon's AI Starter Kit offers resources, apps, and examples to kickstart Neon as your vector
         database.
       </p>
       <Link
-        className="mt-6 text-lg leading-none tracking-[-0.03em]"
+        className="mt-6 text-lg leading-none tracking-[-0.03em] lg:mt-5 lg:text-base"
         to={LINKS.docsAi}
         theme="white"
         withArrow
       >
         Learn more
       </Link>
-      <ul className="mt-14 grid grid-cols-2 gap-x-[72px] gap-y-10">
+      <ul className="mt-14 grid grid-cols-2 gap-x-[72px] gap-y-10 lg:mt-11 lg:gap-x-16 sm:grid-cols-1">
         {ITEMS.map(({ title, description, icon }) => (
           <li key={title}>
             <Image
@@ -76,9 +76,11 @@ const StarterKit = () => (
               height={22}
               quality={100}
             />
-            <h3 className="text-xl font-semibold leading-dense tracking-tighter">{title}</h3>
+            <h3 className="text-xl font-semibold leading-dense tracking-tighter lg:text-lg">
+              {title}
+            </h3>
             <p
-              className="mt-2 text-lg tracking-extra-tight text-gray-new-70"
+              className="mt-2 text-pretty text-lg tracking-extra-tight text-gray-new-70 lg:text-base"
               dangerouslySetInnerHTML={{ __html: description }}
             />
           </li>

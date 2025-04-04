@@ -22,7 +22,7 @@ const AiPage = () => (
     <Usage />
     <TestimonialNew
       className="mt-section"
-      quote="The combination of flexible resource limits and nearly instant&nbsp;database provisioning made Neon a no-brainer."
+      quote="The combination of flexible resource limits and nearly instant&nbsp;database provisioning made Neon a&nbsp;no&#8209;brainer."
       name="Lincoln Bergeson"
       position="Infrastructure Engineer at Replit"
       avatar={authorLincolnBergeson}

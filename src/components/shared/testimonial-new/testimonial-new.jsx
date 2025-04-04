@@ -16,7 +16,7 @@ const TestimonialNew = ({
   isPriority,
 }) => (
   <div className={clsx('testimonial-new safe-paddings', className)}>
-    <Container className="relative flex flex-col items-center px-16" size="960">
+    <Container className="relative flex flex-col items-center px-16 md:px-5" size="960">
       {company ? (
         <Image
           className="mb-7 lg:mb-6 lg:h-7 lg:w-auto md:mb-5 md:h-6"
