@@ -110,3 +110,7 @@
     @apply transition-colors duration-200 hover:border-green-45/40 hover:text-green-45;
   }
 }
+
+.mt-section {
+  @apply mt-[200px] xl:mt-[176px] lg:mt-[152px] md:mt-[104px];
+}

@@ -29,7 +29,7 @@ const ITEMS = [
 ];
 
 const Usage = () => (
-  <section className="usage safe-paddings relative overflow-hidden pt-[200px]">
+  <section className="usage safe-paddings mt-section relative">
     <Container size="768">
       <h2 className="font-title text-[52px] font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:text-[32px]">
         Neon lets you ship faster with AI
@@ -42,7 +42,7 @@ const Usage = () => (
           >
             <div>
               <h3 className="text-2xl font-medium leading-snug tracking-extra-tight">{title}</h3>
-              <p className="mt-2 text-lg tracking-extra-tight text-gray-new-70">{description}</p>
+              <p className="mt-2 text-lg tracking-tight text-gray-new-70">{description}</p>
               {link && (
                 <Link
                   className="mt-4 text-lg leading-none tracking-[-0.03em]"

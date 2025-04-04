@@ -40,7 +40,7 @@ const ITEMS = [
 ];
 
 const Bento = () => (
-  <section className="bento safe-paddings relative overflow-hidden pt-[200px]">
+  <section className="bento safe-paddings mt-section">
     <Container className="max-w-[832px]">
       <div className="mx-auto flex max-w-xl flex-col items-center text-center">
         <h2 className="font-title text-5xl font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:text-[32px]">

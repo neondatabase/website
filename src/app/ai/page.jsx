@@ -1,5 +1,7 @@
 import Bento from 'components/pages/ai/bento';
 import Hero from 'components/pages/ai/hero';
+import PgVector from 'components/pages/ai/pgvector';
+import StarterKit from 'components/pages/ai/starter-kit';
 import Usage from 'components/pages/ai/usage';
 import CTA from 'components/shared/cta';
 import Layout from 'components/shared/layout';
@@ -19,7 +21,7 @@ const AiPage = () => (
     <Hero />
     <Usage />
     <TestimonialNew
-      className="mt-[200px] xl:mt-[176px] lg:mt-[153px] md:mt-[120px]"
+      className="mt-section"
       quote="The combination of flexible resource limits and nearly instant&nbsp;database provisioning made Neon a no-brainer."
       name="Lincoln Bergeson"
       position="Infrastructure Engineer at Replit"
@@ -30,8 +32,10 @@ const AiPage = () => (
       }}
     />
     <Bento />
+    <PgVector />
+    <StarterKit />
     <TestimonialNew
-      className="mt-[200px] xl:mt-[160px] lg:mt-[140px] md:mt-[120px]"
+      className="mt-section"
       quote="Neon’s speed of provisioning and serverless scale-to-zero is critical for us. We can serve users iterating on quick ideas efficiently while also supporting them as they scale, without making them think about database setup."
       name="Dhruv Amin"
       position="Co-founder at Create.xyz"
