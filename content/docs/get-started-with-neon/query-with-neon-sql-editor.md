@@ -196,6 +196,10 @@ The Neon SQL Editor offers three AI-driven features:
 
 <Admonition type="important">
 To enhance your experience with the Neon SQL Editor's AI features, we share your database schema with the AI agent. No actual data is shared. We currently use AWS Bedrock as our LLM provider, ensuring all requests remain within AWS's secure infrastructure where other Neon resources are also managed.
+
+_There is a maximum limit of 5 AI requests every 60 seconds._
 </Admonition>
+
+
 
 <NeedHelp/>
