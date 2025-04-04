@@ -444,6 +444,7 @@
   items:
     - title: AI for agents
       slug: ai/ai-agents-tools
+      icon: ai-agent
       items:
         - title: Overview
           slug: ai/ai-agents-tools
@@ -483,6 +484,7 @@
               slug: https://neon.tech/guides/langgraph-neon
     - title: AI Starter Kit
       slug: ai/ai-intro
+      icon: sparks
       items:
         - section: Core concepts
           items:
