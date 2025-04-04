@@ -151,7 +151,7 @@ Now that you've integrated PropelAuth with Neon RLS, you can securely pass JWTs 
 
 Here are examples of implementing RLS policies for a **todos** table – the Drizzle example leverages the simplified `crudPolicy` function, while the SQL example demonstrates the use of individual RLS policies.
 
-<Tabs labels={["Drizzle","SQL"]}>
+<Tabs labels={["Drizzle","PostgreSQL"]}>
 
 <TabItem>
 
