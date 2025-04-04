@@ -48,7 +48,7 @@ const ITEMS = [
 ];
 
 const StarterKit = () => (
-  <section className="starter-kit safe-paddings mt-section">
+  <section className="starter-kit safe-paddings mt-[200px] xl:mt-[176px] lg:mt-[152px] md:mt-[104px]">
     <Container className="!max-w-[640px] md:px-5 sm:!max-w-sm">
       <h2 className="font-title text-5xl font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:text-[32px]">
         Neon's AI Starter Kit

@@ -21,7 +21,7 @@ const AiPage = () => (
     <Hero />
     <Usage />
     <TestimonialNew
-      className="mt-section"
+      className="mt-[200px] xl:mt-[176px] lg:mt-[152px] md:mt-[104px]"
       quote="The combination of flexible resource limits and nearly instant&nbsp;database provisioning made Neon a&nbsp;no&#8209;brainer."
       name="Lincoln Bergeson"
       position="Infrastructure Engineer at Replit"
@@ -35,7 +35,7 @@ const AiPage = () => (
     <PgVector />
     <StarterKit />
     <TestimonialNew
-      className="mt-section"
+      className="mt-[200px] xl:mt-[176px] lg:mt-[152px] md:mt-[104px]"
       quote="Neon’s speed of provisioning and serverless scale-to-zero is critical for us. We can serve users iterating on quick ideas efficiently while also supporting them as they scale, without making them think about database setup."
       name="Dhruv Amin"
       position="Co-founder at Create.xyz"

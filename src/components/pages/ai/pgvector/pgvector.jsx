@@ -6,7 +6,7 @@ import Container from 'components/shared/container';
 import vector from './images/vector.png';
 
 const PgVector = () => (
-  <section className="pgvector safe-paddings mt-section relative">
+  <section className="pgvector safe-paddings relative mt-[200px] xl:mt-[176px] lg:mt-[152px] md:mt-[104px]">
     <Container className="!max-w-[640px] md:px-5">
       <h2 className="font-title text-5xl font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:text-[32px] md:leading-dense">
         Postgres as a vector{' '}
@@ -30,8 +30,9 @@ const PgVector = () => (
         className={clsx(
           'mt-11 space-y-6 text-[28px] tracking-extra-tight text-gray-new-60',
           '[&_a]:text-white [&_span]:text-white',
-          '[&_a]:border-b [&_a]:border-gray-new-70 [&_a]:transition-colors [&_a]:duration-200',
-          '[&_a:hover]:border-green-45/40 [&_a:hover]:text-green-45',
+          '[&_a:hover]:text-green-45 [&_a]:relative [&_a]:transition-colors [&_a]:duration-200',
+          '[&_a]:after:absolute [&_a]:after:inset-x-0 [&_a]:after:-bottom-1 [&_a]:after:h-px  [&_a]:after:bg-gray-new-70/60',
+          '[&_a:hover]:after:bg-green-45/40 [&_a]:after:transition-colors [&_a]:after:duration-200',
           'lg:mt-10 lg:text-2xl md:mt-7 md:space-y-5 md:text-xl'
         )}
       >
