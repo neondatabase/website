@@ -64,7 +64,7 @@ The following table displays the `GIN` operator classes:
 |              | `? (jsonb,text)`         |
 |              | `?\| (jsonb,text[])`      |
 |              | `?& (jsonb,text[])`      |
-| jsonb_path_ops | `@> (jsonb,jsonb)`     |
+| `jsonb_path_ops` | `@> (jsonb,jsonb)`     |
 |              | `@? (jsonb,jsonpath)`    |
 |              | `@@ (jsonb,jsonpath)`    |
 | `tsvector_ops` | `@@ (tsvector,tsquery)`  |
