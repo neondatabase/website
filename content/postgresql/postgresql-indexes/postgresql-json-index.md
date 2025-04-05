@@ -58,7 +58,7 @@ The following table displays the `GIN` operator classes:
 |              | `@> (anyarray,anyarray)` |
 |              | `<@ (anyarray,anyarray)` |
 |              | `= (anyarray,anyarray)`  |
-| jsonb_ops    | `@> (jsonb,jsonb)`       |
+| `jsonb_ops`    | `@> (jsonb,jsonb)`       |
 |              | `@? (jsonb,jsonpath)`    |
 |              | `@@ (jsonb,jsonpath)`    |
 |              | `? (jsonb,text)`         |
