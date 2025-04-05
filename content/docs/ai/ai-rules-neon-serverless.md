@@ -15,7 +15,7 @@ enableTableOfContents: true
 </DocsList>
 </InfoBlock>
 
-<AIRule/>
+<AIRule file="neon-serverless.mdc" name="Neon Serverless" />
 
 ## Rules
 

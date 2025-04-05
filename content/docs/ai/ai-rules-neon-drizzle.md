@@ -15,7 +15,7 @@ enableTableOfContents: true
 </DocsList>
 </InfoBlock>
 
-<AIRule/>
+<AIRule file="neon-drizzle.mdc" name="Neon with Drizzle" />
 
 ## Rules
 

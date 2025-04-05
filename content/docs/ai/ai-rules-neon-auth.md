@@ -16,7 +16,7 @@ enableTableOfContents: true
 </DocsList>
 </InfoBlock>
 
-<AIRule/>
+<AIRule file="neon-auth.mdc" name="Neon Auth" />
 
 ## Rules
 
