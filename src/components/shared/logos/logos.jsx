@@ -6,12 +6,15 @@ import Container from 'components/shared/container/container';
 import AdobeLogo from './images/adobe.inline.svg';
 import AKQALogo from './images/akqa.inline.svg';
 import AlbertsonsLogo from './images/albertsons.inline.svg';
+import BasehubLogo from './images/basehub.inline.svg';
 import BCGLogo from './images/bcg.inline.svg';
 import BranchLogo from './images/branch.inline.svg';
 import BunnyshellLogo from './images/bunnyshell.inline.svg';
 import CloudflareLogo from './images/cloudflare.inline.svg';
 import CodeInstituteLogo from './images/code-institute.inline.svg';
+import ComigoLogo from './images/comigo.inline.svg';
 import CommureLogo from './images/commure.inline.svg';
+import CreateLogo from './images/create.inline.svg';
 import EncoreLogo from './images/encore.inline.svg';
 import EqtLogo from './images/eqt.inline.svg';
 import Fl0Logo from './images/fl0.inline.svg';
@@ -24,6 +27,7 @@ import OpusLogo from './images/opus.inline.svg';
 import OutfrontLogo from './images/outfront7.inline.svg';
 import ReplitLogo from './images/replit.inline.svg';
 import RetoolLogo from './images/retool.inline.svg';
+import RubricLogo from './images/rubric.inline.svg';
 import ShakudoLogo from './images/shakudo.inline.svg';
 import SnapletLogo from './images/snaplet.inline.svg';
 import SupergoodLogo from './images/supergood.inline.svg';
@@ -37,12 +41,15 @@ const allLogos = {
   adobe: AdobeLogo,
   akqa: AKQALogo,
   albertsons: AlbertsonsLogo,
+  basehub: BasehubLogo,
   bcg: BCGLogo,
   branch: BranchLogo,
   bunnyshell: BunnyshellLogo,
   cloudflare: CloudflareLogo,
-  commure: CommureLogo,
   'code-institute': CodeInstituteLogo,
+  comigo: ComigoLogo,
+  commure: CommureLogo,
+  create: CreateLogo,
   encore: EncoreLogo,
   eqt: EqtLogo,
   'fabric-io': FabricIoLogo,
@@ -56,6 +63,7 @@ const allLogos = {
   outfront: OutfrontLogo,
   replit: ReplitLogo,
   retool: RetoolLogo,
+  rubric: RubricLogo,
   shakudo: ShakudoLogo,
   snaplet: SnapletLogo,
   supergood: SupergoodLogo,
@@ -65,46 +73,48 @@ const allLogos = {
   zimmer: ZimmerBioLogo,
 };
 
-const LogosWall = ({ className, fill, logos }) => (
-  <div className={clsx('logos', className)}>
-    <ul className="logos-content">
-      {logos.map((logo, idx) => {
-        const Logo = allLogos[logo];
-        return (
-          <li key={idx}>
-            <Logo className={clsx('h-10 w-auto md:h-8', fill)} />
-          </li>
-        );
-      })}
-    </ul>
-    <ul className="logos-content" aria-hidden="true">
-      {logos.map((logo, idx) => {
-        const Logo = allLogos[logo];
-        return (
-          <li key={idx}>
-            <Logo className={clsx('h-10 w-auto md:h-8', fill)} />
-          </li>
-        );
-      })}
-    </ul>
+const sizes = {
+  sm: 'logos-sm h-6',
+  lg: 'h-10 md:h-8',
+};
+
+const LogosWall = ({ className, logoClassName, logos, size = 'lg' }) => (
+  <div
+    className={clsx('logos logos-sides-fade flex w-full overflow-hidden', sizes[size], className)}
+  >
+    {Array.from({ length: 2 }).map((_, index) => (
+      <ul key={index} className="logos-content" aria-hidden={index > 0 && 'true'}>
+        {logos.map((logo, index) => {
+          const Logo = allLogos[logo];
+          if (!Logo) return null;
+          return (
+            <li className="h-full" key={index}>
+              <Logo className={clsx('h-full w-auto', logoClassName)} />
+            </li>
+          );
+        })}
+      </ul>
+    ))}
   </div>
 );
 
 LogosWall.propTypes = {
   className: PropTypes.string,
-  fill: PropTypes.string,
-  logos: PropTypes.array,
+  logoClassName: PropTypes.string,
+  logos: PropTypes.arrayOf(PropTypes.oneOf(Object.keys(allLogos))).isRequired,
+  size: PropTypes.oneOf(Object.keys(sizes)),
 };
 
-const Logos = ({ className = '', withGreenFade = false, logos }) => (
+const Logos = ({ className = '', withGreenFade = false, logos, size }) => (
   <Container size="medium" className={clsx('w-full', className)}>
     <div className="relative select-none">
-      <LogosWall className="logos-sides-fade" logos={logos} />
+      <LogosWall logos={logos} size={size} />
       {withGreenFade && (
         <LogosWall
           className="logos-central-mask absolute inset-0"
-          fill="fill-green-45"
           logos={logos}
+          logoClassName="fill-green-45"
+          size={size}
         />
       )}
     </div>
@@ -114,7 +124,9 @@ const Logos = ({ className = '', withGreenFade = false, logos }) => (
 Logos.propTypes = {
   className: PropTypes.string,
   withGreenFade: PropTypes.bool,
-  logos: PropTypes.array,
+  logos: PropTypes.arrayOf(PropTypes.oneOf(Object.keys(allLogos))).isRequired,
+  size: PropTypes.oneOf(Object.keys(sizes)),
 };
 
+export { LogosWall };
 export default Logos;

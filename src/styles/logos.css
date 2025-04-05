@@ -20,7 +20,9 @@
       --gap: theme(spacing.14);
     }
 
-    @apply flex w-full overflow-hidden;
+    &-sm {
+      --gap: theme(spacing.9);
+    }
 
     gap: var(--gap);
   }

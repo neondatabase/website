@@ -9,6 +9,13 @@ export default {
       'The database you love, on a serverless platform designed to help you build reliable and scalable applications faster.',
     pathname: '',
   },
+  ai: {
+    title: 'Postgres for AI — Neon',
+    description:
+      'Build AI agents faster with Neon, the serverless Postgres optimized for vectors, scale, and speed.',
+    imagePath: '/images/social-previews/ai.jpg',
+    pathname: LINKS.ai,
+  },
   aiChat: {
     title: 'Neon AI Chat',
     description: 'AI assistant trained on documentation, help articles, and other content',

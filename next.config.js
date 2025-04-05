@@ -277,11 +277,11 @@ const defaultConfig = {
         destination: 'https://console.neon.tech/signup',
         permanent: true,
       },
-      {
-        source: '/ai',
-        destination: '/docs/ai/ai-intro',
-        permanent: true,
-      },
+      // {
+      //   source: '/ai',
+      //   destination: '/docs/ai/ai-intro',
+      //   permanent: true,
+      // },
       {
         source: '/deploy',
         destination: '/stage',

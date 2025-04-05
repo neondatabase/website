@@ -10,7 +10,7 @@ import SplitViewGrid from 'components/shared/split-view-grid';
 import Testimonial from 'components/shared/testimonial';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
-import compatibilityIcon from 'icons/ai/compatibility.svg';
+import compatibilityIcon from 'icons/partners/compatibility.svg';
 import currencyIcon from 'icons/partners/currency.svg';
 import speedIcon from 'icons/partners/speed.svg';
 import userIcon from 'icons/partners/user.svg';
