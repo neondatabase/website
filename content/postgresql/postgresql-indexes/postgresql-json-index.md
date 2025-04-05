@@ -62,7 +62,7 @@ The following table displays the `GIN` operator classes:
 |              | `@? (jsonb,jsonpath)`    |
 |              | `@@ (jsonb,jsonpath)`    |
 |              | `? (jsonb,text)`         |
-|              | `?! (jsonb,text[])`      |
+|              | `?\| (jsonb,text[])`      |
 |              | `?& (jsonb,text[])`      |
 | jsonb_path_ops | `@> (jsonb,jsonb)`     |
 |              | `@? (jsonb,jsonpath)`    |
