@@ -54,20 +54,20 @@ The following table displays the `GIN` operator classes:
 
 | Name         | Indexable Operators      |
 |--------------|--------------------------|
-| `array_ops`    | `&& (anyarray,anyarray)` |
+| `array_ops`  | `&& (anyarray,anyarray)` |
 |              | `@> (anyarray,anyarray)` |
 |              | `<@ (anyarray,anyarray)` |
 |              | `= (anyarray,anyarray)`  |
-| `jsonb_ops`    | `@> (jsonb,jsonb)`       |
+| `jsonb_ops`  | `@> (jsonb,jsonb)`       |
 |              | `@? (jsonb,jsonpath)`    |
 |              | `@@ (jsonb,jsonpath)`    |
 |              | `? (jsonb,text)`         |
-|              | `?\| (jsonb,text[])`      |
+|              | `?\| (jsonb,text[])`     |
 |              | `?& (jsonb,text[])`      |
-| `jsonb_path_ops` | `@> (jsonb,jsonb)`     |
+| `jsonb_path_ops` | `@> (jsonb,jsonb)`   |
 |              | `@? (jsonb,jsonpath)`    |
 |              | `@@ (jsonb,jsonpath)`    |
-| `tsvector_ops` | `@@ (tsvector,tsquery)`  |
+| `tsvector_ops` | `@@ (tsvector,tsquery)`|
 
 Note that if you don’t explicitly specify a `GIN` operator class, the statement will use the `jsonb_ops` operator by default, which is suitable for most cases.
 
