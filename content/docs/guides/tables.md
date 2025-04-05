@@ -93,6 +93,6 @@ If you encounter a **"Something went wrong"** error on the **Tables** page, try 
 - **Disable browser extensions** — Extensions may interfere with the page’s functionality.
 - **Use a different browser or device** — Check if the issue occurs on another browser or device.
 - **Try incognito mode** — Using an incognito window can help bypass issues related to cookies or extensions.
-- **Use a VPN connection** — In some regions, Asia-Pacific in particular, using the Neon Console over a VPN connection has resolved the issue.
+- **Use a VPN connection** — In some regions, Asia Pacific regions in particular, using the Neon Console over a VPN connection has resolved the issue.
 
 If the issue persists, please reach out to [Neon support](https://console.neon.tech/app/projects?modal=support) or on [Discord](https://discord.gg/92vNTzKDGp), and we’ll investigate further.
