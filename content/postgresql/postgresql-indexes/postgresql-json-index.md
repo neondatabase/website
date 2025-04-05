@@ -54,7 +54,7 @@ The following table displays the `GIN` operator classes:
 
 | Name         | Indexable Operators      |
 |--------------|--------------------------|
-| array_ops    | `&& (anyarray,anyarray)` |
+| `array_ops`    | `&& (anyarray,anyarray)` |
 |              | `@> (anyarray,anyarray)` |
 |              | `<@ (anyarray,anyarray)` |
 |              | `= (anyarray,anyarray)`  |
