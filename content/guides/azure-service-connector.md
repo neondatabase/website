@@ -157,7 +157,7 @@ Adapt the code to fetch and use the environment variables according to your appl
 
 | Client type             | Primary configuration                                | Example variable / property                 | Notes                                                                       |
 | :---------------------- | :--------------------------------------------------- | :------------------------------------------ | :-------------------------------------------------------------------------- |
-| .NET                    | Env var: connection string                           | `NEON_POSTGRESQL_CONNECTIONSTRING`          | Standard Npgsql format. (eg, `Server=ep-still-mud-a12aa123.eastus2.azure.neon.tech;Database=<database-name>;Port=5432;Ssl Mode=Require;User Id=<username>`. |
+| .NET                    | Env var: connection string                           | `NEON_POSTGRESQL_CONNECTIONSTRING`          | Standard Npgsql format. (eg, `Server=ep-still-mud-a12aa123.eastus2.azure.neon.tech;Database=<database-name>;Port=5432;Ssl Mode=Require;User Id=<username>`). |
 | Java (JDBC)             | Env var: connection string                           | `NEON_POSTGRESQL_CONNECTIONSTRING`          | `jdbc:postgresql://...` format.                                             |
 | Java (Spring Boot JDBC) | Application Properties | `spring.datasource.url`, `...username`, `...password` | Service Connector sets corresponding env vars that Spring Boot picks up. |
 | Python (psycopg2) | Env var: connection string                           | `NEON_POSTGRESQL_CONNECTIONSTRING`          | Key-value format `dbname=... host=... user=... password=... port=... sslmode=require` |
