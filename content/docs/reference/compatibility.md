@@ -4,7 +4,7 @@ subtitle: Learn about Neon as a managed Postgres service
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2025-02-28T11:10:41.828Z'
+updatedOn: '2025-03-18T15:50:56.626Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
@@ -42,6 +42,7 @@ Because Neon is a managed Postgres service, Postgres parameters are not user-con
 | `client_connection_check_interval`    | 60000         |                                                                                                                                                                                                                                                                                |
 | `dynamic_shared_memory_type`          | mmap          |                                                                                                                                                                                                                                                                                |
 | `effective_io_concurrency`            | 20            |                                                                                                                                                                                                                                                                                |
+| `effective_cache_size    `            |               | Set based on the [Local File Cache (LFC)](/docs/reference/glossary#local-file-cache) size of your maximum Neon compute size                                                                                                                                                   |
 | `fsync`                               | off           | Neon syncs data to the Neon Storage Engine to store your data safely and reliably                                                                                                                                                                                              |
 | `hot_standby`                         | off           |                                                                                                                                                                                                                                                                                |
 | `idle_in_transaction_session_timeout` | 300000        |                                                                                                                                                                                                                                                                                |
@@ -70,7 +71,7 @@ Because Neon is a managed Postgres service, Postgres parameters are not user-con
 ### Parameter settings that differ by compute size
 
 Of the parameter settings listed above, the `max_connections`, `maintenance_work_mem`,
-`shared_buffers`, and `max_worker_processes` differ by your compute size—defined in [Compute Units (CU)](/docs/reference/glossary#compute-unit-cu)—or by your autoscaling configuration, which has a minimum and maximum compute size. To understand how values are set, see the formulas below.
+`shared_buffers`, `max_worker_processes`, and `effective_cache_size` differ by your compute size—defined in [Compute Units (CU)](/docs/reference/glossary#compute-unit-cu)—or by your autoscaling configuration, which has a minimum and maximum compute size. To understand how values are set, see the formulas below.
 
 - The formula for `max_connections` is:
 
@@ -79,7 +80,7 @@ Of the parameter settings listed above, the `max_connections`, `maintenance_work
   max_connections = max(100, min(4000, 450.5 * compute_size))
   ```
 
-  For example, if you have a fixed compute size of 4 CU, that size is be both your `max_compute_size` and `min_compute_size`. Inputting that value into the formula gives you a `max_connections` setting of 1802. For an autoscaling configuration with a `min_compute_size` of 0.25 CU and a `max_compute_size` of 2 CU, the `max_connections` setting would be 901.
+  For example, if you have a fixed compute size of 4 CU, that size is both your `max_compute_size` and `min_compute_size`. Inputting that value into the formula gives you a `max_connections` setting of 1802. For an autoscaling configuration with a `min_compute_size` of 0.25 CU and a `max_compute_size` of 2 CU, the `max_connections` setting would be 901.
 
     <Admonition type="note">
     It's important to note that `max_connections` does not scale dynamically in an autoscaling configuration. It’s a static setting determined by your minimum and maximum compute size.
@@ -160,6 +161,8 @@ Of the parameter settings listed above, the `max_connections`, `maintenance_work
   backends = 1 + max_connections + max_worker_processes
   shared_buffers_mb = max(128, (1023 + backends * 256) / 1024)
   ```
+
+- The `effective_cache_size` parameter is set based on the [Local File Cache (LFC)](/docs/reference/glossary#local-file-cache) size of your maximum Neon compute size. This helps the Postgres query planner make smarter decisions, which can improve query performance. For details on LFC size by compute size, see the table in [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
 
 ### Configuring Postgres parameters for a session, database, or role
 

@@ -38,7 +38,7 @@ Typically, you define a generated column when [creating a table](postgresql-crea
 ```plaintextsql
 CREATE TABLE table_name(
    ...,
-   colum_name type GENERATED ALWAYS AS (expression ) STORED | VIRTUAL,
+   column_name type GENERATED ALWAYS AS (expression ) STORED | VIRTUAL,
    ...
 );
 ```

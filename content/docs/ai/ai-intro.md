@@ -1,76 +1,45 @@
 ---
-title: AI & Embeddings
-subtitle: Power AI agents with serverless Postgres — and build AI applications with Neon
-  as your vector database
+title: AI Starter Kit
+subtitle: Resources for building AI applications with Neon Postgres
 enableTableOfContents: true
 updatedOn: '2025-03-07T21:44:32.252Z'
 ---
 
-Neon enables AI agents to provision Postgres databases in seconds, execute SQL queries, and easily manage Neon infrastructure. With one-second provision times, scale-to-zero compute, and agent-friendly client interfaces, Neon lets AI agents manage database fleets at scale while minimizing costs. [Learn more about this use case](https://neon.tech/use-cases/ai-agents).
+This guide collects resources for building AI applications with Neon Postgres. You'll find core concepts, starter applications, framework integrations, and deployment guides. Use these resources to build applications like RAG chatbots, semantic search engines, or custom AI tools.
 
-Neon also supports vector data, a key component for AI applications. With the **pgvector** open-source extension, you can use Neon as a vector database for storing and querying embeddings. This allows you to use Postgres as your vector store, eliminating the need for data migration or third-party solutions.
+<CTA title="Start building AI apps with Neon" description="Sign up for Neon Postgres and jumpstart your AI application with our starter apps and resources." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
 
-## Neon for AI Agents and tools
+## Getting started
 
-Neon supports Postgres for AI agents and tools with the following tools and interfaces:
-
-<DetailIconCards>
-
-<a href="https://github.com/neondatabase/toolkit" description="A terse client that lets you spin up a Postgres database in seconds and run SQL queries" icon="github">@neondatabase/toolkit</a>
-
-<a href="/docs/ai/neon-mcp-server" description="A Model Context Protocol (MCP) server for Neon that lets AI tool like Cursor interact manage Neon " icon="github">Neon MCP Server</a>
-
-<a href="/docs/ai/connect-mcp-clients-to-neon" description="Learn how to connect MCP clients such as Cursor, Claude Desktop, Cline, and Windsurf to your Neon Postgres database " icon="github">Connect MCP Clients to Neon</a>
-
-<a href="https://neon.tech/guides/neon-mcp-server" description="Get started with Claude Desktop and Neon MCP server" icon="openai">Claude Desktop with Neon MCP Server</a>
-
-<a href="https://neon.tech/guides/cline-mcp-neon" description="Get started with Cline and Neon Postgres MCP Server" icon="openai">Cline with Neon MCP Server</a>
-
-<a href="https://neon.tech/guides/windsurf-mcp-neon" description="Get started with Windsurf and Neon Postgres MCP Server" icon="openai">Windsurf with Neon MCP Server</a>
-
-<a href="/guides/cursor-mcp-neon" description="Get started with Cursor and Neon Postgres MCP Server" icon="openai">Cursor with Neon MCP Server</a>
-
-<a href="https://neon.tech/guides/agentstack-neon" description="Building AI Agents with AgentStack and Neon" icon="openai">Neon tool for AgentStack</a>
-
-<a href="https://neon.tech/guides/composio-crewai-neon" description="Building AI Agents with CrewAI, Composio, and Neon" icon="openai">Neon tool for Composio</a>
-
-<a href="https://neon.tech/guides/langgraph-neon" description="A step-by-step guide to building AI agents with LangGraph and Neon" icon="openai">LangGraph + Neon</a>
-
-</DetailIconCards>
-
-## Neon for AI Apps
-
-Neon's AI Starter Kit provides resources, starter apps, and examples to help get you started with Neon as your vector database.
-
-<CTA title="Ship faster with Neon's AI Starter Kit" description="Sign up for Neon Postgres and jumpstart your AI application. Our starter apps and resources will help you get up and running." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
-
-The **Neon AI Starter Kit** includes:
-
-- Neon Postgres with the latest version of the Postgres [pgvector](/docs/extensions/pgvector) extension for storing vector embeddings
-- A variety of hackable, pre-built [AI starter apps](#ai-starter-apps):
-  - AI chat
-  - RAG chat
-  - Semantic search
-  - Hybrid search
-  - Reverse image search
-  - Chat with PDF
-- A [vector search optimization guide](/docs/ai/ai-vector-search-optimization) for better AI application performance
-- A [scaling guide](/docs/ai/ai-scale-with-neon) for scaling your app with Neon's Autoscaling and Read Replica features
-- A collection of [AI apps built with Neon](#ai-apps-built-with-neon) that you can reference while building your own app
-
-### AI basics
+Learn the fundamentals of building AI applications with Neon:
 
 <DetailIconCards>
 
-<a href="/docs/ai/ai-concepts" description="Learn how embeddings are used to build AI applications" icon="openai">AI concepts</a>
+<a href="/docs/ai/ai-concepts" description="Learn the fundamentals of embeddings and vector search for AI applications" icon="openai">AI concepts</a>
 
-<a href="/docs/extensions/pgvector" description="Learn about the pgvector Postgres extension" icon="openai">The pgvector extension</a>
+<a href="/docs/extensions/pgvector" description="Get started with pgvector for storing and querying vector embeddings" icon="openai">pgvector extension</a>
 
 </DetailIconCards>
 
-### AI starter apps
+## AI frameworks and integrations
 
-Hackable, fully-featured, pre-built [starter apps](#ai-starter-apps) to get you up and running.
+Build AI applications faster with these popular frameworks, tools, and services:
+
+<DetailIconCards>
+
+<a href="/docs/ai/langchain" description="Create AI applications using LangChain with OpenAI and Neon" icon="langchain">LangChain</a>
+
+<a href="/docs/ai/llamaindex" description="Build RAG applications using LlamaIndex with OpenAI and Neon" icon="llamaindex">LlamaIndex</a>
+
+<a href="/docs/ai/semantic-kernel" description="Develop AI applications using Semantic Kernel with Azure OpenAI" icon="openai">Semantic Kernel</a>
+
+<a href="/docs/ai/inngest" description="Build reliable AI workflows with Inngest and Neon" icon="openai">Inngest</a>
+
+</DetailIconCards>
+
+## Starter applications
+
+Hackable, fully-featured, pre-built starter apps to get you up and running:
 
 <DetailIconCards>
 
@@ -82,9 +51,9 @@ Hackable, fully-featured, pre-built [starter apps](#ai-starter-apps) to get you 
 
 <a href="https://github.com/neondatabase/examples/tree/main/ai/langchain/rag-nextjs" description="A Next.js RAG chatbot starter app built with OpenAI and LangChain" icon="github">RAG chatbot (OpenAI + LangChain)</a>
 
-<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/semantic-search-nextjs" description="A Next.js Semantic Search chatbot starter app built with OpenAI and LlamaIndex" icon="github">Semantic search chatbot (OpenAI + LlamaIndex)</a>
+<a href="https://github.com/neondatabase/examples/tree/main/ai/llamaindex/semantic-search-nextjs" description="A Next.js Semantic Search chatbot starter app built with OpenAI and LlamaIndex" icon="github">Semantic search (OpenAI + LlamaIndex)</a>
 
-<a href="https://github.com/neondatabase/examples/tree/main/ai/langchain/semantic-search-nextjs" description="A Next.js Semantic Search chatbot starter app built with OpenAI and LangChain" icon="github">Semantic search chatbot (OpenAI + LangChain)</a>
+<a href="https://github.com/neondatabase/examples/tree/main/ai/langchain/semantic-search-nextjs" description="A Next.js Semantic Search chatbot starter app built with OpenAI and LangChain" icon="github">Semantic search (OpenAI + LangChain)</a>
 
 <a href="https://github.com/neondatabase/examples/tree/main/ai/hybrid-search-nextjs" description="A Next.js Hybrid Search starter app built with OpenAI" icon="github">Hybrid search (OpenAI)</a>
 
@@ -96,34 +65,22 @@ Hackable, fully-featured, pre-built [starter apps](#ai-starter-apps) to get you 
 
 </DetailIconCards>
 
-### AI integrations
-
-Learn how to integrate Neon Postgres with LLMs and AI platforms.
+## Scale your AI application
 
 <DetailIconCards>
 
-<a href="/docs/ai/langchain" description="Learn how to use LangChain with OpenAI to create AI applications faster" icon="langchain">LangChain (with OpenAI)</a>
+<a href="/docs/ai/ai-scale-with-neon" description="Learn how to scale your AI application with Autoscaling and Read Replicas" icon="openai">Scale with Neon</a>
 
-<a href="/docs/ai/llamaindex" description="Learn how to use LlamaIndex with OpenAI to create AI applications faster" icon="llamaindex">LlamaIndex (with OpenAI)</a>
-
-</DetailIconCards>
-
-### Preparing your AI app for production
-
-<DetailIconCards>
-
-<a href="ai-vector-search-optimization" description="Optimize pgvector search for better application performance" icon="openai">Optimize pgvector search</a>
-
-<a href="/docs/ai/ai-scale-with-neon" description="Scale your AI app with Neon's Autoscaling and Read Replica features" icon="openai">Scale with Neon</a>
+<a href="/docs/ai/ai-vector-search-optimization" description="Best practices for optimizing vector search performance" icon="openai">Optimize vector search</a>
 
 </DetailIconCards>
 
-### AI apps built with Neon
+## Featured examples
 
-AI applications built with Neon Postgres that you can reference as code examples or inspiration.
+Real-world AI applications built with Neon that you can reference as code examples or inspiration.
 
-<Admonition type="tip" title="Feature your app here">
-Share your AI app on our **#showcase** channel on [Discord](https://discord.gg/92vNTzKDGp) for consideration.
+<Admonition type="tip" title="Built something cool?">
+Share your AI app on our [#showcase](https://discord.gg/neon) channel on Discord.
 </Admonition>
 
 <DetailIconCards>
@@ -152,14 +109,18 @@ Share your AI app on our **#showcase** channel on [Discord](https://discord.gg/9
 
 </DetailIconCards>
 
-## AI tools
+## Vector search tools and notebooks
 
-Learn about popular AI tools and how to use them with Neon Postgres.
+Optimize your vector search implementation and experiment with different approaches:
 
 <DetailIconCards>
 
-<a href="/docs/ai/ai-google-colab" description="A cloud-based environment to write and execute Python code, perfect for machine learning and data science tasks" icon="openai">Google Colab</a>
+<a href="/docs/ai/ai-vector-search-optimization" description="Best practices for optimizing vector search performance" icon="openai">Vector search optimization</a>
 
-<a href="/docs/ai/ai-azure-notebooks" description="A cloud-based Jupyter notebook service integrated with Azure Data Studio for creating, running, and sharing notebooks" icon="openai">Azure Data Studio Notebooks</a>
+<a href="https://github.com/neondatabase/neon-vector-search-openai-notebooks" description="Interactive notebooks for vector search with OpenAI" icon="github">Vector search notebooks</a>
+
+<a href="/docs/ai/ai-google-colab" description="Use Neon with Google Colab for ML experiments" icon="openai">Google Colab guide</a>
+
+<a href="/docs/ai/ai-azure-notebooks" description="A cloud-based Jupyter notebook service integrated with Azure Data Studio" icon="openai">Azure Data Studio Notebooks</a>
 
 </DetailIconCards>

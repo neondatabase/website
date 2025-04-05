@@ -1,0 +1,110 @@
+# Neon Serverless Driver
+
+This guide provides an overview of the Neon serverless driver, which allows you to query data from serverless and edge environments over HTTP or WebSockets.
+
+## Overview
+
+The Neon serverless driver is a low-latency Postgres driver for JavaScript and TypeScript that enables connections to Neon Postgres from serverless environments without using TCP connections.
+
+Key features:
+- Connect over HTTP or WebSockets
+- Low-latency with message pipelining
+- Compatible with node-postgres
+- TypeScript support included
+
+## When to Use HTTP vs WebSockets
+
+Choose the right connection method:
+
+1. **HTTP**
+   - Faster for single, non-interactive transactions ("one-shot queries")
+   - Supports multiple queries via a single transaction
+   - Simpler implementation for basic queries
+
+2. **WebSockets**
+   - Required for session or interactive transaction support
+   - Provides compatibility with node-postgres
+   - Better for complex transaction workflows
+
+## Installation
+
+Install the driver with your preferred JavaScript package manager:
+
+```shell
+npm install @neondatabase/serverless
+```
+
+The driver includes TypeScript types (equivalent to @types/pg).
+
+## Using the Driver over HTTP
+
+The `neon` function is used for queries over HTTP:
+
+```javascript
+import { neon } from '@neondatabase/serverless';
+
+const sql = neon(process.env.DATABASE_URL);
+const posts = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
+// or using tagged template literals
+const posts = await sql`SELECT * FROM posts WHERE id = ${postId}`;
+```
+
+Configuration options:
+- `arrayMode`: Return rows as arrays instead of objects
+- `fullResults`: Return additional metadata alongside result rows
+- `fetchOptions`: Custom options for the fetch call
+
+For multiple queries in a transaction:
+
+```javascript
+const [posts, tags] = await sql.transaction([
+  sql`SELECT * FROM posts ORDER BY posted_at DESC LIMIT ${showLatestN}`,
+  sql`SELECT * FROM tags`
+], {
+  isolationLevel: 'RepeatableRead',
+  readOnly: true
+});
+```
+
+## Using the Driver over WebSockets
+
+The `Pool` and `Client` constructors provide WebSocket connections:
+
+```javascript
+import { Pool } from '@neondatabase/serverless';
+
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+const result = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
+await pool.end();
+```
+
+In Node.js environments, supply a WebSocket constructor:
+
+```javascript
+import { Pool, neonConfig } from '@neondatabase/serverless';
+import ws from 'ws';
+
+neonConfig.webSocketConstructor = ws;
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+```
+
+## Serverless Environment Considerations
+
+Important notes for serverless deployments:
+
+1. **Connection Lifecycle**
+   - WebSocket connections can't outlive a single request
+   - Create, use, and close connections within a single handler
+   - Don't reuse connections across requests
+
+2. **Edge Functions**
+   - Use `ctx.waitUntil()` to properly close connections
+   - Handle connection timeouts appropriately
+   - Consider HTTP for simpler one-shot queries
+
+3. **Local Development**
+   - Set up a local proxy for development
+   - Configure to connect to local Postgres
+   - Test both HTTP and WebSocket connections
+
+For detailed instructions and advanced configuration options, refer to the Neon documentation.

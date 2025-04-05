@@ -14,7 +14,7 @@ In this scenario, your team has recently introduced a streamlined checkout proce
 To follow this tutorial, you'll need:
 
 - A Neon account. [Sign up here](/docs/get-started-with-neon/signing-up).
-- A [history retention](/docs/manage/projects#configure-history-retention) period that covers the timeframe of interest, allowing for effective use of Time Travel.
+- A [restore window](/docs/manage/projects#configure-restore-window) that covers the timeframe of interest, allowing for effective use of Time Travel.
 
 <Steps>
 

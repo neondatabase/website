@@ -2,10 +2,14 @@
 title: Neon serverless driver
 enableTableOfContents: true
 subtitle: Connect to Neon from serverless environments over HTTP or WebSockets
-updatedOn: '2025-02-03T20:41:57.345Z'
+updatedOn: '2025-03-17T20:41:57.345Z'
 ---
 
 The [Neon serverless driver](https://github.com/neondatabase/serverless) is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over **HTTP** or **WebSockets** in place of TCP. The driver's low-latency capability is due to [message pipelining and other optimizations](https://neon.tech/blog/quicker-serverless-postgres).
+
+<Admonition type="important" title="The Neon serverless driver is now generally available (GA)">
+The GA version of the Neon serverless driver, v1.0.0 and higher, requires Node.js version 19 or higher. It also includes a **breaking change** but only if you're calling the HTTP query template function as a conventional function. For details, please see the [1.0.0 release notes](https://github.com/neondatabase/serverless/pull/149) or read the [blog post](https://neon.tech/blog/serverless-driver-ga).
+</Admonition>
 
 When to query over HTTP vs WebSockets:
 
@@ -38,7 +42,41 @@ The examples that follow assume that your database connection string is assigned
 
 ## Use the driver over HTTP
 
-The Neon serverless driver uses the [neon](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#neon-function) function for queries over HTTP.
+The Neon serverless driver uses the [neon](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#neon-function) function for queries over HTTP. The function returns a query function that can only be used as a template function for improved safety against SQL injection vulnerabilities.
+
+For example:
+
+```javascript
+import { neon } from '@neondatabase/serverless';
+const sql = neon(process.env.DATABASE_URL);
+const id = 1;
+
+// Safe and convenient template function usage
+const result = await sql`SELECT * FROM table WHERE id = ${id}`;
+
+// For manually parameterized queries, use the query() function
+const result = await sql.query('SELECT * FROM table WHERE id = $1', [id]);
+
+// For interpolating trusted strings (like column or table names), use the unsafe() function
+const table = condition ? 'table1' : 'table2'; // known-safe string values
+const result = await sql`SELECT * FROM ${sql.unsafe(table)} WHERE id = ${id}`;
+
+// Alternatively, use template literals for known-safe values
+const table = condition ? sql`table1` : sql`table2`;
+const result = await sql`SELECT * FROM ${table} WHERE id = ${id}`;
+```
+
+SQL template queries are fully composable, including those with parameters:
+
+```javascript
+const name = 'Olivia';
+const limit = 1;
+const whereClause = sql`WHERE name = ${name}`;
+const limitClause = sql`LIMIT ${limit}`;
+
+// Parameters are numbered appropriately at query time
+const result = await sql`SELECT * FROM table ${whereClause} ${limitClause}`;
+```
 
 You can use raw SQL queries or tools such as [Drizzle-ORM](https://orm.drizzle.team/docs/quick-postgresql/neon), [kysely](https://github.com/kysely-org/kysely), [Zapatos](https://jawj.github.io/zapatos/), and others for type safety.
 
@@ -48,8 +86,10 @@ You can use raw SQL queries or tools such as [Drizzle-ORM](https://orm.drizzle.t
 import { neon } from '@neondatabase/serverless';
 
 const sql = neon(process.env.DATABASE_URL);
-const posts = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
-// `post` is now [{ id: 12, title: 'My post', ... }] (or undefined)
+const posts = await sql`SELECT * FROM posts WHERE id = ${postId}`;
+// or using query() for parameterized queries
+const posts = await sql.query('SELECT * FROM posts WHERE id = $1', [postId]);
+// `posts` is now [{ id: 12, title: 'My post', ... }] (or undefined)
 ```
 
 ```typescript
@@ -72,8 +112,10 @@ import { neon } from '@neondatabase/serverless';
 
 export default async (req: Request) => {
   const sql = neon(process.env.DATABASE_URL);
-  const posts = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
-  return new Response(JSON.stringify(post));
+  const posts = await sql`SELECT * FROM posts WHERE id = ${postId}`;
+  // or using query() for parameterized queries
+  const posts = await sql.query('SELECT * FROM posts WHERE id = $1', [postId]);
+  return new Response(JSON.stringify(posts));
 }
 
 export const config = {
@@ -87,9 +129,10 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(request: NextApiRequest, res: NextApiResponse) {
   const sql = neon(process.env.DATABASE_URL!);
-  const posts = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
-
-  return res.status(500).send(post);
+  const posts = await sql`SELECT * FROM posts WHERE id = ${postId}`;
+  // or using query() for parameterized queries
+  const posts = await sql.query('SELECT * FROM posts WHERE id = $1', [postId]);
+  return res.status(200).json(posts);
 }
 ```
 
@@ -101,47 +144,47 @@ The maximum request size and response size for queries over HTTP is 64 MB.
 
 ### neon function configuration options
 
-The `neon(...)` function returns a query function that can be used both as a tagged-template function and as an ordinary function:
+The `neon(...)` function returns a query function that can be used as a template function, with additional properties for special cases:
 
 ```javascript
 import { neon } from '@neondatabase/serverless';
 const sql = neon(process.env.DATABASE_URL);
 
-// as a tagged-template function
-const rowsA = await sql`SELECT * FROM posts WHERE id = ${postId}`;
+// Use as a template function (recommended)
+const rows = await sql`SELECT * FROM posts WHERE id = ${postId}`;
 
-// as an ordinary function (exactly equivalent)
-const rowsB = await sql('SELECT * FROM posts WHERE id = $1', [postId]);
+// Use query() for manually parameterized queries
+const rows = await sql.query('SELECT * FROM posts WHERE id = $1', [postId]);
+
+// Use unsafe() for trusted string interpolation
+const table = 'posts'; // trusted value
+const rows = await sql`SELECT * FROM ${sql.unsafe(table)} WHERE id = ${postId}`;
 ```
 
-By default, the query function returned by `neon(...)` returns only the rows resulting from the provided SQL query, and it returns them as an array of objects where the keys are column names. For example:
+By default, the query function returns only the rows resulting from the provided SQL query, and it returns them as an array of objects where the keys are column names. For example:
 
 ```javascript
-import { neon } from '@neondatabase/serverless';
-const sql = neon(process.env.DATABASE_URL);
 const rows = await sql`SELECT * FROM posts WHERE id = ${postId}`;
 // -> [{ id: 12, title: "My post", ... }]
 ```
 
-However, you can customize the return format of the query function using the configuration options `fullResults` and `arrayMode`. These options are available both on the `neon(...)` function and on the query function it returns (but only when the query function is called as an ordinary function, not as a tagged-template function).
+You can customize the return format using the configuration options `fullResults` and `arrayMode`. These options are available both on the `neon(...)` function and on the query function it returns.
 
 - `arrayMode: boolean`, `false` by default
 
   The default `arrayMode` value is `false`. When it is true, rows are returned as an array of arrays instead of an array of objects:
 
   ```javascript
-  import { neon } from '@neondatabase/serverless';
   const sql = neon(process.env.DATABASE_URL, { arrayMode: true });
   const rows = await sql`SELECT * FROM posts WHERE id = ${postId}`;
   // -> [[12, "My post", ...]]
   ```
 
-  Or, with the same effect:
+  Or, with the same effect when using query():
 
   ```javascript
-  import { neon } from '@neondatabase/serverless';
   const sql = neon(process.env.DATABASE_URL);
-  const rows = await sql('SELECT * FROM posts WHERE id = $1', [postId], { arrayMode: true });
+  const rows = await sql.query('SELECT * FROM posts WHERE id = $1', [postId], { arrayMode: true });
   // -> [[12, "My post", ...]]
   ```
 
@@ -150,7 +193,6 @@ However, you can customize the return format of the query function using the con
   The default `fullResults` value is `false`. When it is `true`, additional metadata is returned alongside the result rows, which are then found in the `rows` property of the return value. The metadata matches what would be returned by `node-postgres`:
 
   ```javascript
-  import { neon } from '@neondatabase/serverless';
   const sql = neon(process.env.DATABASE_URL, { fullResults: true });
   const results = await sql`SELECT * FROM posts WHERE id = ${postId}`;
   /* -> {
@@ -167,12 +209,11 @@ However, you can customize the return format of the query function using the con
   */
   ```
 
-  Or, with the same effect:
+  Or, with the same effect when using query():
 
   ```javascript
-  import { neon } from '@neondatabase/serverless';
   const sql = neon(process.env.DATABASE_URL);
-  const results = await sql('SELECT * FROM posts WHERE id = $1', [postId], { fullResults: true });
+  const results = await sql.query('SELECT * FROM posts WHERE id = $1', [postId], { fullResults: true });
   // -> { ... same as above ... }
   ```
 

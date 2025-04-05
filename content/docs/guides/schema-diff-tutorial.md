@@ -379,7 +379,7 @@ Now that you have some differences between your branches, you can view the schem
 
 You will see the schema differences between `dev/jordan` and its parent `main`, including the new address table that we added to the `dev/jordan` branch.
 
-You can also launch Schema Diff from the **Restore** page, usually as part of verifying schemas before you restore a branch to its own or another branch's history. See [Branch restore](/docs/guides/branch-restore) for more info.
+You can also launch Schema Diff from the **Restore** page, usually as part of verifying schemas before you restore a branch to its own or another branch's history. See [Instant restore](/docs/guides/branch-restore) for more info.
 
 </TabItem>
 

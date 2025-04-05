@@ -6,10 +6,12 @@ import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 import remarkGfm from 'remark-gfm';
 
+import ChatOptions from 'components/pages/doc/chat-options';
 import CodeTabs from 'components/pages/doc/code-tabs';
 import CommunityBanner from 'components/pages/doc/community-banner';
 import DefinitionList from 'components/pages/doc/definition-list';
 import DetailIconCards from 'components/pages/doc/detail-icon-cards';
+import DocsLink from 'components/pages/doc/docs-link';
 import DocsList from 'components/pages/doc/docs-list';
 // eslint-disable-next-line import/no-cycle
 import IncludeBlock from 'components/pages/doc/include-block';
@@ -26,8 +28,10 @@ import Testimonial from 'components/pages/use-case/testimonial';
 import TestimonialsWrapper from 'components/pages/use-case/testimonials-wrapper';
 import UseCaseContext from 'components/pages/use-case/use-case-context';
 import UseCaseList from 'components/pages/use-case/use-case-list';
+import DeployPostgresButton from 'components/shared//deploy-postgres-button';
 import Admonition from 'components/shared/admonition';
 import AnchorHeading from 'components/shared/anchor-heading';
+import Button from 'components/shared/button';
 import CodeBlock from 'components/shared/code-block';
 import ComputeCalculator from 'components/shared/compute-calculator';
 import CtaBlock from 'components/shared/cta-block';
@@ -35,13 +39,10 @@ import DocCta from 'components/shared/doc-cta';
 import ImageZoom from 'components/shared/image-zoom';
 import InkeepEmbedded from 'components/shared/inkeep-embedded';
 import LatencyCalculator from 'components/shared/latency-calculator';
-import Link from 'components/shared/link';
 import RequestForm from 'components/shared/request-form';
 import getCodeProps from 'lib/rehype-code-props';
-import getGlossaryItem from 'utils/get-glossary-item';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
-import DeployPostgresButton from '../deploy-postgres-button';
 
 const sharedComponents = Object.keys(sharedMdxComponents).reduce((acc, key) => {
   acc[key] = (props) => IncludeBlock({ url: sharedMdxComponents[key], ...props });
@@ -67,45 +68,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   // eslint-disable-next-line react/jsx-no-useless-fragment
   undefined: (props) => <Fragment {...props} />,
   pre: (props) => <CodeBlock {...props} />,
-  a: (props) => {
-    const { href, children, ...otherProps } = props;
-    const baseUrl = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
-    const isExternal = href?.startsWith('http') && !href?.startsWith(baseUrl);
-    const isGlossary =
-      href?.startsWith('/docs/reference/glossary') ||
-      href?.startsWith(`${baseUrl}/docs/reference/glossary`);
-    const icon = (isExternal && 'external') || (isGlossary && 'glossary') || null;
-
-    if (children === '#id') {
-      const id = href?.startsWith('#') ? href.replace('#', '') : undefined;
-      return <span id={id} />;
-    }
-
-    // Automatically generate previews for glossary links
-    if (isGlossary) {
-      const glossaryItem = getGlossaryItem(href);
-      if (glossaryItem) {
-        const { title, preview } = glossaryItem;
-        return (
-          <LinkPreview href={href} title={title} preview={preview} {...otherProps}>
-            {children}
-          </LinkPreview>
-        );
-      }
-    }
-
-    return (
-      <Link
-        to={href}
-        target={isExternal ? '_blank' : undefined}
-        rel={isExternal ? 'noopener noreferrer' : undefined}
-        icon={icon}
-        {...otherProps}
-      >
-        {children}
-      </Link>
-    );
-  },
+  a: (props) => <DocsLink {...props} />,
   img: (props) => {
     const { className, title, src, ...rest } = props;
 
@@ -157,6 +120,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
       />
     );
   },
+  Button,
   YoutubeIframe,
   DefinitionList,
   Admonition,
@@ -182,6 +146,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   Video,
   Steps,
   DeployPostgresButton,
+  ChatOptions,
   ...sharedComponents,
 });
 

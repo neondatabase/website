@@ -10,7 +10,7 @@ redirectFrom:
 
 <InfoBlock>
 <DocsList title="Demo project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/rls-authorize-demo-custom-jwt">Neon RLS with custom generated JWTs</a>
+  <a href="https://github.com/neondatabase-labs/rls-demo-custom-jwt">Neon RLS with custom generated JWTs</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">

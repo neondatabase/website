@@ -44,7 +44,7 @@ export default {
   connectionPooling: '/docs/connect/connection-pooling',
   docsBranching: '/docs/introduction/branching',
   migration: '/docs/import/import-data-assistant',
-  rlsAuthorize: '/docs/guides/neon-rls-authorize',
+  rlsAuthorize: '/docs/guides/neon-rls',
   serverless: '/docs/introduction/serverless',
   support: '/docs/introduction/support',
   variableTraffic: '/docs/use-cases/variable-traffic',
@@ -59,7 +59,7 @@ export default {
   subprocessors: '/subprocessors',
   businessInformation: '/business-info',
   sensitiveDataTerms: '/sensitive-data-terms',
-  hipaaCompliance: '/hipaa-compliance-guide',
+  hipaaCompliance: '/docs/security/hipaa',
   hipaaContractors: '/hipaa-contractors',
   // Console
   console: 'https://console.neon.tech',
@@ -73,6 +73,11 @@ export default {
   linkedin: 'https://www.linkedin.com/company/neon-inc/',
   twitter: 'https://twitter.com/neondatabase/',
   youtube: 'https://www.youtube.com/channel/UCoMzQTJSIr7-RU1QbomQI2w',
+  // Copilot
+  githubCopilot: 'https://github.com/marketplace/neon-database',
+  discordCopilot: 'https://discord.com/channels/1176467419317940276/1222626436502782013',
+  vscodeCopilot:
+    'https://marketplace.visualstudio.com/items?itemName=buildwithlayer.neon-integration-expert-15j6N',
   // Compliance
   trust: 'https://trust.neon.tech',
   certCCPA: 'https://trust.neon.tech/?itemUid=4064ac33-7b48-407b-aed7-ce02971d1ec1',

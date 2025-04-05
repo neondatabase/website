@@ -120,7 +120,7 @@ const Hero = () => {
             size="md-new"
             to={LINKS.signup}
             target="_blank"
-            tag_name="Hero"
+            tagName="Hero"
             analyticsEvent="home_hero_get_started_clicked"
           >
             Get Started

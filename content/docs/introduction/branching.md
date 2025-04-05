@@ -5,10 +5,14 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/branches
   - /docs/conceptual-guides/branching
+  - /docs/concepts/branching
+  - /docs/introduction/point-in-time-restore
 updatedOn: '2025-01-31T16:41:54.394Z'
 ---
 
 With Neon, you can quickly and cost-effectively branch your data for development, testing, and various other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines.
+
+You can also rewind your data or create branches from the past to recover from mistakes or analyze historical states.
 
 ## What is a branch?
 
@@ -70,18 +74,35 @@ Refer to the following guide for instructions.
 
 </DetailIconCards>
 
-### Data recovery
+## Restore and recover data
 
-If you lose data due to an unintended deletion or some other event, you can restore a branch to any point in its history retention period to recover lost data. You can also create a new point-in-time branch for historical analysis or any other reason.
+If you lose data due to an unintended deletion or some other event, you can restore a branch to any point in its restore window to recover lost data. You can also create a new restore branch for historical analysis or any other reason.
 
-![data recovery branch](/docs/introduction/branching_data_loss.png)
+![Recover from data loss using restore branching](/docs/introduction/branching_data_loss.png)
 
-Refer to the following guides for instructions.
+### Restore window
+
+Your **restore window** determines how far back Neon maintains a history of changes for each branch. By default, this is set to **1 day** to help you avoid unexpected storage costs. You can increase it up to:
+
+- 24 hours on the [Free plan](/docs/introduction/plans#free-plan)  
+- 7 days on [Launch](/docs/introduction/plans#launch)  
+- 14 days on [Scale](/docs/introduction/plans#scale)  
+- 30 days on [Business](/docs/introduction/plans#business)
+
+You can configure your restore window in the Neon Console under **Settings** > **Storage** > **Instant restore**. See [Configure restore window](/docs/manage/projects#configure-restore-window).
+
+<Admonition type="note">Increasing your restore window affects **all branches** in your project and increases [project storage](/docs/introduction/usage-metrics#storage). You can reduce it to zero to minimize cost.</Admonition>
+
+History is retained in the form of Write-Ahead-Log (WAL) records. As WAL records age out of the retention period, they are evicted from storage and no longer count toward project storage.
+
+Learn how to use these data recovery features:
 
 <DetailIconCards>
 
-<a href="/docs/guides/branch-restore" description="Restore a branch to its history with Branch Restore" icon="invert">Branch Restore with Time Travel</a>
+<a href="/docs/guides/branch-restore" description="Restore a branch to an earlier point in its history" icon="invert">Instant restore</a>
 
-<a href="/docs/guides/branching-pitr" description="Learn how to create a branch from historical data" icon="screen">Create a branch from the past</a>
+<a href="/docs/guides/reset-from-parent" description="Reset a branch to match its parent" icon="split-branch">Reset from parent</a>
+
+<a href="/docs/manage/history/time-travel" description="Run SQL queries against your database's past state" icon="queries">Time Travel queries</a>
 
 </DetailIconCards>
