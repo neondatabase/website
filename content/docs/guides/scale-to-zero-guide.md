@@ -39,7 +39,7 @@ To configure the scale to zero setting for an individual compute:
 
 ### Configure the scale to zero default
 
-Configuring the scale to zero setting in your project's settings sets the project's default, which is applied to all computes created from that point forward. Existing compute scale to zero settings are unaffected.
+Configuring the scale to zero setting in your project's settings sets the project's default, which is applied to all computes created from that point forward. Existing compute scale to zero settings are unaffected. See [Change your project's default compute settings](/docs/manage/projects#change-your-projects-default-compute-settings) for more info about compute defaults.
 
 To configure the scale to zero default for an existing project:
 

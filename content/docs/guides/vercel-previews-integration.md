@@ -37,7 +37,7 @@ However, when databases are involved, teams often use a single database containi
 
 Neon’s database branching feature addresses these challenges. A branch is an isolated clone of your database, so creating it only takes a few seconds. This makes it an effective solution for preview deployments, enabling you to create a full database copy for each pull request that includes your database schema changes, which you can apply automatically by adding migrate command to your Vercel deployment configuration.
 
-When you push changes to your application repository, triggering a preview deployment in Vercel, the integration automatically creates a database branch in Neon and connects it to your preview deployment by setting Vercel preview environment variables.
+When you push changes to your application repository, triggering a preview deployment in Vercel, the integration automatically creates a database branch in Neon and connects it to your preview deployment by setting Vercel preview environment variables. Like any new branch, it inherits your project's default compute settings, which determine the compute resources allocated to the branch — like compute size and autoscaling configuration (see [configure default compute](/docs/manage/projects#change-your-projects-default-compute-settings) for more info).
 
 <Admonition type="tip" title="Postgres Previews video introduction">
 For a video introduction to the integration, see [Video: A Postgres database for Every Preview Deployment](/docs/guides/vercel#video-a-postgres-database-for-every-preview-deployment).
