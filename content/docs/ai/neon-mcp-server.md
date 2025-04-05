@@ -104,6 +104,33 @@ We recommend using Smithery for installation, as it streamlines the process and 
 
 3.  Restart Claude Desktop.
 
+### Remote MCP Server setup (Preview)
+
+Neon now offers a hosted MCP server in the cloud, making it easier to integrate AI workflows into clients like Cursor, Windsurf, and Claude Desktop—no API keys or local setup is required.
+
+You can start using it today by pointing your client to:
+
+```text
+https://mcp.neon.tech
+```
+
+In Cursor, for example, the configuration looks like this:
+
+```ini
+"Neon": {
+  "command": "npx",
+  "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
+}
+```
+
+When you enable the Neon MCP server, you'll be directed through a browser-based authorization flow.
+
+<Admonition type="note">
+The remote MCP server is currently in **preview** while the MCP OAuth spec continues to evolve. Things might change, and we'd love your feedback as we improve. [Read the announcement](https://neon.tech/blog/announcing-neons-remote-mcp-server).
+</Admonition>
+
+For client-specific setup instructions, see [Connect MCP Clients to Neon](/docs/ai/connect-mcp-clients-to-neon).
+
 ## Supported Actions (Tools)
 
 The Neon MCP Server provides the following actions, which are exposed as "tools" to MCP Clients. You can use these tools to interact with your Neon projects and databases using natural language commands.
