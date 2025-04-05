@@ -70,9 +70,7 @@ CREATE EXTENSION pg_mooncake;
 
 Run the commands outlined in the following steps on your Neon database to setup your object store.
 
-<Admonition type="tip">
-If you don't have an object storage bucket, you can get a free S3 express bucket [here](https://s3.pgmooncake.com/). When using the free s3 bucket, the `SELECT` and `SET` statements defined below are generated for you, which you can copy and run.
-</Admonition>
+_If you don't have an object storage bucket, you can get a free S3 express bucket [here](https://s3.pgmooncake.com/). When using the free s3 bucket, the `SELECT` and `SET` statements defined below are generated for you, which you can copy and run._
 
 Add your object storage credentials. In this case, S3:
 
@@ -87,9 +85,9 @@ Set your default bucket:
 SET mooncake.default_bucket = 's3://<bucket>';
 ```
 
-You can also use R2 and GCP buckets. See experience [here](https://pgmooncake.com/docs/cloud-storage).
+<Admonition type="note" title="R2 and GCP buckets also supported">
+The `pg_mooncake` extension also supports R2 and GCP buckets. For set up instructions, refer to **pg_mooncake's** [cloud storage docs](https://pgmooncake.com/docs/cloud-storage).
 
-<Admonition type="note">
 In the future, you will not have to bring your own bucket to use `pg_mooncake` with Neon. 
 </Admonition>
 
