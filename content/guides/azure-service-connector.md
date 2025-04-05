@@ -7,11 +7,11 @@ createdAt: '2025-04-04T00:00:00.000Z'
 updatedOn: '2025-04-04T00:00:00.000Z'
 ---
 
-Azure Service Connector streamlines connecting Azure compute services to backing services like Neon. It achieves this primarily by managing connection secrets (like database credentials using Azure Key Vault for secure storage) and configuring your application with the necessary connection details, typically via environment variables. Your application code then uses this injected configuration with standard database drivers and libraries to connect to Neon.
+Azure Service Connector lets you connect Azure compute services to backing services like Neon. It achieves this primarily by managing connection secrets (like database credentials using Azure Key Vault for secure storage) and configuring your application with the necessary connection details, typically via environment variables. Your application code then uses this injected configuration with standard database drivers and libraries to connect to Neon.
 
 While Service Connector offers significant automation for some Azure-native services (like using Managed Identities), its integration with Neon currently relies on **connection string authentication**. This means you'll need to provide your Neon database credentials during setup, but Service Connector helps manage how these credentials are stored and exposed to your application.
 
-This guide demonstrates connecting an Azure compute service (using **Azure App Service** as an example) to your Neon database using the Azure Service Connector via the Azure portal.
+This guide demonstrates connecting an Azure compute service (using **Azure App Service** as an example) to your Neon database using the Azure Service Connector via the Azure Portal.
 
 ## Prerequisites
 
@@ -96,7 +96,7 @@ Follow these steps to create a service connection from your Azure compute servic
 
 6.  **Configure networking:**
     - For Neon connections via Service Connector in the portal, you can **skip** this step. Network access controls (like IP allow lists) are managed directly within your Neon project settings, not through Service Connector's network configuration options (Firewall, Service Endpoint, Private Endpoint) which apply primarily to Azure target services.
-    - Refer to Neon's [IP allow](/docs/introduction/ip-allow) documentation to configure network access if needed.
+    - Refer to Neon's [IP Allow](/docs/introduction/ip-allow) documentation to configure network access if needed.
     - Click **Next: Review + Create**.
 
 7.  **Review and create:**
