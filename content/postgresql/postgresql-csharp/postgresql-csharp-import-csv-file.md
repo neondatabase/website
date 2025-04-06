@@ -16,7 +16,7 @@ nextLink:
 
 **Summary**: in this tutorial, you will learn how to import data from a CSV file into a table in PostgreSQL using C\#.
 
-This tutorial begins where the [Inserting data into a table in PostgreSQL tutoria](postgresql-csharp-insert)l left off.
+This tutorial begins where the [Inserting data into a table in PostgreSQL tutoria](postgresql-csharp-insert)l left off.
 
 ## How to import a CSV file into the PostgreSQL database using C\#
 
@@ -108,7 +108,7 @@ To learn more details on reading data from a CSV file using the `CsvHelper` pack
 
 Note that you can [download the students.csv file](/postgresqltutorial/students.csv) from here.
 
-Let’s discuss how the program works.
+Let's discuss how the program works.
 
 ### Declaring Student record
 
@@ -244,7 +244,7 @@ First, open a terminal and connect to the `elearning` database using the `ed` us
 psql -U ed -d elearning
 ```
 
-It’ll prompt you to enter a password for the `ed` user. Input the valid password and press Enter to connect to the PostgreSQL.
+It'll prompt you to enter a password for the `ed` user. Input the valid password and press Enter to connect to the PostgreSQL.
 
 Second, query data from the `students` table:
 
@@ -257,17 +257,17 @@ Output:
 ```
  id | first_name | last_name |            email             | registration_date
 ----+------------+-----------+------------------------------+-------------------
-  1 | John       | Doe       | [[email protected]](../cdn-cgi/l/email-protection.html)           | 2024-05-20
-  2 | Emma       | Smith     | [[email protected]](../cdn-cgi/l/email-protection.html)         | 2024-05-20
-  3 | Liam       | Johnson   | [[email protected]](../cdn-cgi/l/email-protection.html)       | 2024-05-20
-  4 | Olivia     | Williams  | [[email protected]](../cdn-cgi/l/email-protection.html)    | 2024-05-20
-  5 | Noah       | Brown     | [[email protected]](../cdn-cgi/l/email-protection.html)         | 2024-05-15
-  6 | Ava        | Jones     | [[email protected]](../cdn-cgi/l/email-protection.html)          | 2024-05-15
-  7 | William    | Garcia    | [[email protected]](../cdn-cgi/l/email-protection.html)     | 2024-05-15
-  8 | Sophia     | Miller    | [[email protected]](../cdn-cgi/l/email-protection.html)      | 2024-05-10
-  9 | James      | Davis     | [[email protected]](../cdn-cgi/l/email-protection.html)        | 2024-05-10
- 10 | Isabella   | Rodriguez | [[email protected]](../cdn-cgi/l/email-protection.html) | 2024-05-10
- 11 | Benjamin   | Martinez  | [[email protected]](../cdn-cgi/l/email-protection.html)  | 2024-05-10
+  1 | John       | Doe       | john.doe@example.com           | 2024-05-20
+  2 | Emma       | Smith     | emma.smith@example.com         | 2024-05-20
+  3 | Liam       | Johnson   | liam.johnson@example.com       | 2024-05-20
+  4 | Olivia     | Williams  | olivia.williams@example.com    | 2024-05-20
+  5 | Noah       | Brown     | noah.brown@example.com         | 2024-05-15
+  6 | Ava        | Jones     | ava.jones@example.com          | 2024-05-15
+  7 | William    | Garcia    | william.garcia@example.com     | 2024-05-15
+  8 | Sophia     | Miller    | sophia.miller@example.com      | 2024-05-10
+  9 | James      | Davis     | james.davis@example.com        | 2024-05-10
+ 10 | Isabella   | Rodriguez | isabella.rodriguez@example.com | 2024-05-10
+ 11 | Benjamin   | Martinez  | benjamin.martinez@example.com  | 2024-05-10
 (11 rows)
 ```
 
