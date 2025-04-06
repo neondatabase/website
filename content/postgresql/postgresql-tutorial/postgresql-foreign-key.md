@@ -55,7 +55,7 @@ In this syntax:
 
 The delete and update actions determine the behaviors when the primary key in the parent table is deleted and updated.
 
-Since the primary key is rarely updated, the `ON UPDATE action` is infrequently used in practice. We’ll focus on the `ON DELETE` action.
+Since the primary key is rarely updated, the `ON UPDATE action` is infrequently used in practice. We'll focus on the `ON DELETE` action.
 
 PostgreSQL supports the following actions:
 
@@ -118,9 +118,9 @@ VALUES('BlueBird Inc'),
       ('Dolphin LLC');
 
 INSERT INTO contacts(customer_id, contact_name, phone, email)
-VALUES(1,'John Doe','(408)-111-1234','[[email protected]](../cdn-cgi/l/email-protection.html)'),
-      (1,'Jane Doe','(408)-111-1235','[[email protected]](../cdn-cgi/l/email-protection.html)'),
-      (2,'David Wright','(408)-222-1234','[[email protected]](../cdn-cgi/l/email-protection.html)');
+VALUES(1,'John Doe','(408)-111-1234','john.doe@example.com'),
+      (1,'Jane Doe','(408)-111-1235','jane.doe@example.com'),
+      (2,'David Wright','(408)-222-1234','david.wright@example.com');
 ```
 
 The following statement deletes the customer id 1 from the `customers` table:
@@ -138,7 +138,7 @@ DETAIL:  Key (customer_id)=(1) is still referenced from table "contacts".
 SQL state: 23503
 ```
 
-The `RESTRICT` action is similar to the `NO ACTION`. The difference only arises when you define the foreign key constraint as `DEFERRABLE` with an `INITIALLY DEFERRED` or `INITIALLY IMMEDIATE` mode. We’ll discuss more on this in the upcoming tutorial.
+The `RESTRICT` action is similar to the `NO ACTION`. The difference only arises when you define the foreign key constraint as `DEFERRABLE` with an `INITIALLY DEFERRED` or `INITIALLY IMMEDIATE` mode. We'll discuss more on this in the upcoming tutorial.
 
 ### SET NULL
 
@@ -178,9 +178,9 @@ VALUES('BlueBird Inc'),
       ('Dolphin LLC');
 
 INSERT INTO contacts(customer_id, contact_name, phone, email)
-VALUES(1,'John Doe','(408)-111-1234','[[email protected]](../cdn-cgi/l/email-protection.html)'),
-      (1,'Jane Doe','(408)-111-1235','[[email protected]](../cdn-cgi/l/email-protection.html)'),
-      (2,'David Wright','(408)-222-1234','[[email protected]](../cdn-cgi/l/email-protection.html)');
+VALUES(1,'John Doe','(408)-111-1234','john.doe@example.com'),
+      (1,'Jane Doe','(408)-111-1235','jane.doe@example.com'),
+      (2,'David Wright','(408)-222-1234','david.wright@example.com');
 ```
 
 Third, delete the customer with id 1 from the `customers` table:
@@ -203,9 +203,9 @@ Output:
 ```
  contact_id | customer_id | contact_name |     phone      |          email
 ------------+-------------+--------------+----------------+--------------------------
-          3 |           2 | David Wright | (408)-222-1234 | [[email protected]](../cdn-cgi/l/email-protection.html)
-          1 |        null | John Doe     | (408)-111-1234 | [[email protected]](../cdn-cgi/l/email-protection.html)
-          2 |        null | Jane Doe     | (408)-111-1235 | [[email protected]](../cdn-cgi/l/email-protection.html)
+          3 |           2 | David Wright | (408)-222-1234 | david.wright@example.com
+          1 |        null | John Doe     | (408)-111-1234 | john.doe@example.com
+          2 |        null | Jane Doe     | (408)-111-1235 | jane.doe@example.com
 (3 rows)
 ```
 
@@ -245,9 +245,9 @@ VALUES('BlueBird Inc'),
       ('Dolphin LLC');
 
 INSERT INTO contacts(customer_id, contact_name, phone, email)
-VALUES(1,'John Doe','(408)-111-1234','[[email protected]](../cdn-cgi/l/email-protection.html)'),
-      (1,'Jane Doe','(408)-111-1235','[[email protected]](../cdn-cgi/l/email-protection.html)'),
-      (2,'David Wright','(408)-222-1234','[[email protected]](../cdn-cgi/l/email-protection.html)');
+VALUES(1,'John Doe','(408)-111-1234','john.doe@example.com'),
+      (1,'Jane Doe','(408)-111-1235','jane.doe@example.com'),
+      (2,'David Wright','(408)-222-1234','david.wright@example.com');
 ```
 
 The following statement deletes the customer id 1:
@@ -268,7 +268,7 @@ Output:
 ```
  contact_id | customer_id | contact_name |     phone      |          email
 ------------+-------------+--------------+----------------+--------------------------
-          3 |           2 | David Wright | (408)-222-1234 | [[email protected]](../cdn-cgi/l/email-protection.html)
+          3 |           2 | David Wright | (408)-222-1234 | david.wright@example.com
 (1 row)
 ```
 
@@ -296,7 +296,7 @@ ALTER TABLE child_table
 DROP CONSTRAINT constraint_fkey;
 ```
 
-Second, add a new foreign key constraint with  `ON DELETE CASCADE` action:
+Second, add a new foreign key constraint with  `ON DELETE CASCADE` action:
 
 ```sql
 ALTER TABLE child_table
