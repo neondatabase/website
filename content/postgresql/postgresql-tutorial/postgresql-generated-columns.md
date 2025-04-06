@@ -67,7 +67,7 @@ A generated column cannot have a default value or an identity definition. Additi
 
 ## PostgreSQL Generated Column examples
 
-Let’s explore some examples of using generated columns.
+Let's explore some examples of using generated columns.
 
 ### 1\) Concatenating columns
 
@@ -89,8 +89,8 @@ Second, insert rows into the `contacts` table. The values of the `full_name` col
 ```sql
 INSERT INTO contacts(first_name, last_name, email)
 VALUES
-   ('John', 'Doe', '[[email protected]](../cdn-cgi/l/email-protection.html)'),
-   ('Jane', 'Doe', '[[email protected]](../cdn-cgi/l/email-protection.html)')
+   ('John', 'Doe', 'john.doe@example.com'),
+   ('Jane', 'Doe', 'jane.doe@example.com')
 RETURNING *;
 ```
 
@@ -99,8 +99,8 @@ Output:
 ```text
  id | first_name | last_name | full_name |              email
 ----+------------+-----------+-----------+---------------------------------
-  1 | John       | Doe       | John Doe  | [[email protected]](../cdn-cgi/l/email-protection.html)
-  2 | Jane       | Doe       | Jane Doe  | [[email protected]](../cdn-cgi/l/email-protection.html)
+  1 | John       | Doe       | John Doe  | john.doe@example.com
+  2 | Jane       | Doe       | Jane Doe  | jane.doe@example.com
 (2 rows)
 ```
 
