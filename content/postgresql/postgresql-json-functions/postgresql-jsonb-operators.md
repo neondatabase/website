@@ -594,20 +594,3 @@ Output:
  iPhone 15 Pro  | 999.99
 (1 row)
 ```
-
-## Summary
-
-- PostgreSQL JSONB operators allow you to manipulate and query JSONB data effectively.
-- The operator `->` extracts a field as a JSONB value from a JSON object by a key.
-- The operator `->>` extracts a field value as text from a JSON object by a specified key.
-- The operator `#>` extracts a JSON object or an element at the specified path.
-- The operator `#>>` extracts a JSON object or element at a specified path as text.
-- The operator `@>` returns true if a JSONB value contains another JSONB value or false otherwise.
-- The operator `<@` returns true if a JSON value is contained within the another JSONB value or false otherwise.
-- The operator `?` returns true if a text string exists as a top\-level key of a JSON object or as an array element of a JSON array, or false otherwise.
-- The operator `?|` returns true if any elements in a text array exist as top\-level keys of a JSON object or as elements of a JSON array, or false otherwise.
-- The operator `?&` returns true if all elements in a text array exist as the top\-level keys of a JSON object or as elements of a JSON array, or false otherwise.
-- The operator `||` concatenates two JSONB values into a single one.
-- The operator `-` allows you to delete a key/value pair from a JSON object or a matching string value from a JSON array.
-- The operator `@?` returns true if a JSON path returns any items for the specified JSONB value.
-- The operator `@@` evaluates a JSON path against a JSONB value and returns a boolean result based on whether the JSON path matches any items within the JSONB value.

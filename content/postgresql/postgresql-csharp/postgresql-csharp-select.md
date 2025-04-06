@@ -83,17 +83,17 @@ catch (NpgsqlException ex)
 
 Output:
 
-```cs
-2       Emma    Smith   emma.smith@example.com    5/20/2024
-3       Liam    Johnson liam.johnson@example.com  5/20/2024
-4       Olivia  Williams        olivia.williams@example.com       5/20/2024
-5       Noah    Brown   noah.brown@example.com    5/15/2024
-6       Ava     Jones   ava.jones@example.com     5/15/2024
-7       William Garcia  william.garcia@example.com        5/15/2024
-8       Sophia  Miller  sophia.miller@example.com 5/10/2024
-9       James   Davis   james.davis@example.com   5/10/2024
-10      Isabella        Rodriguez       isabella.rodriguez@example.com    5/10/2024
-11      Benjamin        Martinez        benjamin.martinez@example.com     5/10/2024
+```text
+2   Emma     Smith      emma.smith@example.com          5/20/2024
+3   Liam     Johnson    liam.johnson@example.com        5/20/2024
+4   Olivia   Williams   olivia.williams@example.com     5/20/2024
+5   Noah     Brown      noah.brown@example.com          5/15/2024
+6   Ava      Jones      ava.jones@example.com           5/15/2024
+7   William  Garcia     william.garcia@example.com      5/15/2024
+8   Sophia   Miller     sophia.miller@example.com       5/10/2024
+9   James    Davis      james.davis@example.com         5/10/2024
+10  Isabella Rodriguez  isabella.rodriguez@example.com  5/10/2024
+11  Benjamin Martinez   benjamin.martinez@example.com   5/10/2024
 ```
 
 ## Querying data with parameters
