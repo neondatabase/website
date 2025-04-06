@@ -71,7 +71,7 @@ create table candidates (
 
 Fourth, use the role `joe` to log in to the PostgreSQL server in a separate session.
 
-Fifth, attempt to select data from the `candidates` table from the `joe`‘s session:
+Fifth, attempt to select data from the `candidates` table from the `joe`'s session:
 
 ```sql
 SELECT * FROM candidates;
@@ -85,7 +85,7 @@ ERROR:  permission denied for table candidates
 
 The output indicates that the role joe does not have the privilege of retrieving data from the `candidates` table.
 
-To grant the `SELECT` privilege on the `candidates` table to the role `joe`, you execute the following `GRANT` statement in the `postgres`‘ session:
+To grant the `SELECT` privilege on the `candidates` table to the role `joe`, you execute the following `GRANT` statement in the `postgres`' session:
 
 ```sql
 GRANT SELECT
@@ -93,7 +93,7 @@ ON candidates
 TO joe;
 ```
 
-Sixth, execute the `SELECT` statement from the `joe`‘s session:
+Sixth, execute the `SELECT` statement from the `joe`'s session:
 
 ```sql
 SELECT * FROM candidates;
@@ -105,7 +105,7 @@ Seventh, execute the following [`INSERT`](../postgresql-tutorial/postgresql-inse
 
 ```sql
 INSERT INTO candidates(first_name, last_name, email, phone)
-VALUES('Joe','Com','[[email protected]](../cdn-cgi/l/email-protection.html)','408-111-2222');
+VALUES('Joe','Com','joe.com@example.com','408-111-2222');
 ```
 
 PostgreSQL issued the following error because `joe` does not have the `INSERT` privilege on the `candidates` table:
@@ -122,18 +122,18 @@ ON candidates
 TO joe;
 ```
 
-Ninth, execute the `INSERT` statement again from the `joe`‘s session:
+Ninth, execute the `INSERT` statement again from the `joe`'s session:
 
 ```sql
 INSERT INTO candidates(first_name, last_name, email, phone)
-VALUES('Joe','Com','[[email protected]](../cdn-cgi/l/email-protection.html)','408-111-2222');
+VALUES('Joe','Com','joe.com@example.com','408-111-2222');
 ```
 
 Now, `joe` can insert data into the `candidates` table. Additionally, it can update or delete data from the table.
 
 ## More PostgreSQL GRANT statement examples
 
-Let’s take some more examples of using the `GRANT` statement.
+Let's take some more examples of using the `GRANT` statement.
 
 ### 1\) Grant all privileges on a table to a role
 
