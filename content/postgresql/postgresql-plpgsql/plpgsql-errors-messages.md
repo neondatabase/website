@@ -18,7 +18,7 @@ nextLink:
 
 ## Reporting messages
 
-In PL/pgSQL, you use the `raise` statement to issue a message. Here’s the syntax of the `raise` statement:
+In PL/pgSQL, you use the `raise` statement to issue a message. Here's the syntax of the `raise` statement:
 
 ```csssql
 raise level format;
@@ -37,11 +37,11 @@ The `level` option determines the error severity with the following values:
 - `warning`
 - `exception`
 
-If you don’t specify the `level`, the `raise` statement will use `exception` level that raises an error and stops the current transaction by default. We’ll discuss the `raise exception` shortly.
+If you don't specify the `level`, the `raise` statement will use `exception` level that raises an error and stops the current transaction by default. We'll discuss the `raise exception` shortly.
 
 ### Format
 
-The `format` is a string that specifies the message. The `format` uses percentage ( `%`) placeholders that will be substituted by the arguments.
+The `format` is a string that specifies the message. The `format` uses percentage ( `%`) placeholders that will be substituted by the arguments.
 
 The number of placeholders must be the same as the number of arguments. Otherwise, PostgreSQL will issue an error:
 
@@ -70,7 +70,7 @@ warning:  warning message 2015-09-10 21:17:39.398+07
 notice:  notice message 2015-09-10 21:17:39.398+07
 ```
 
-Notice that not all messages are reported back to the client. PostgreSQL only reports the `info`, `warning`, and `notice` level messages back to the client. This is controlled by `client_min_messages` and `log_min_messages` configuration parameters.
+Notice that not all messages are reported back to the client. PostgreSQL only reports the `info`, `warning`, and `notice` level messages back to the client. This is controlled by `client_min_messages` and `log_min_messages` configuration parameters.
 
 ## Raising errors
 
@@ -85,8 +85,8 @@ using option = expression
 The `option` can be:
 
 - `hint`: provide the hint message so that the root cause of the error is easier to discover.
-- `detail`:  give detailed information about the error.
-- `errcode`: identify the error code, which can be either by condition name or an `SQLSTATE` code. Please refer to the [table of error codes and condition names](https://www.postgresql.org/docs/current/static/errcodes-appendix.html).
+- `detail`:  give detailed information about the error.
+- `errcode`: identify the error code, which can be either by condition name or an `SQLSTATE` code. Please refer to the [table of error codes and condition names](https://www.postgresql.org/docs/current/static/errcodes-appendix.html).
 
 The `expression` is a string\-valued expression.
 
@@ -95,7 +95,7 @@ The following example raises a duplicate email error message:
 ```sql
 do $$
 declare
-  email varchar(255) := '[[email protected]](../cdn-cgi/l/email-protection.html)';
+  email varchar(255) := 'john.doe@example.com';
 begin
   -- check email for duplicate
   -- ...
@@ -106,7 +106,7 @@ end $$;
 ```
 
 ```sql
-ERROR:  duplicate email: [[email protected]](../cdn-cgi/l/email-protection.html)
+ERROR:  duplicate email: john.doe@example.com
 HINT:  check the email again
 CONTEXT:  PL/pgSQL function inline_code_block line 8 at RAISE
 ```
