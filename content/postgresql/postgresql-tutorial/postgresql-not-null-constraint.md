@@ -196,7 +196,7 @@ INSERT INTO users (username, email)
 VALUES
 	('user1', NULL),
 	(NULL, 'user2@example.com'),
-	('user2', 'user3@example.com'),
+	('user2', 'user2@example.com'),
 	('user3', '');
 ```
 
