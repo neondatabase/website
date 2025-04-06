@@ -589,8 +589,8 @@ WHERE
 Output:
 
 ```text
-  product_name  | price
-----------------+--------
- iPhone 15 Pro  | 999.99
+product_name   | price
+---------------+--------
+iPhone 15 Pro  | 999.99
 (1 row)
 ```
