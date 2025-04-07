@@ -29,7 +29,6 @@ const AiPage = () => (
     />
     <Bento />
     <PgVector />
-    <StarterKit />
     <TestimonialNew
       className="mt-[200px] xl:mt-[176px] lg:mt-[152px] md:mt-[104px]"
       quote="Neon’s speed of provisioning and serverless scale-to-zero is critical for us. We can serve users iterating on quick ideas efficiently while also supporting them as they scale, without making them think about database setup."
@@ -43,6 +42,7 @@ const AiPage = () => (
         width: 135,
       }}
     />
+    <StarterKit />
     <CTA
       className="pb-[290px] pt-[348px] xl:pb-[242px] xl:pt-[278px] lg:pb-[200px] lg:pt-[260px] sm:pb-[100px] sm:pt-40"
       title="The Postgres of tomorrow, available today"
