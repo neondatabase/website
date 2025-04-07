@@ -173,6 +173,7 @@ const EXTENSIONS = {
     { name: 'pg_visibility' },
     { name: 'pg_walinspect' },
     { name: 'pg_bulkload' },
+    { name: 'pg_documentdb' },
     { name: 'pg_prometheus' },
     { name: 'pglogical' },
     { name: 'pldebugger' },
