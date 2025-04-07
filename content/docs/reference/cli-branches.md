@@ -267,13 +267,13 @@ When creating a branch from a protected parent branch, role passwords on the chi
   neon branches create --name my_child_branch --parent mybranch
   ```
 
-- Create a point-in-time restore branch by specifying the `--parent` option with a timestamp:
+- Create an instant restore branch by specifying the `--parent` option with a timestamp:
 
   ```bash
   neon branches create --name data_recovery --parent 2023-07-11T10:00:00Z
   ```
 
-  The timestamp must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/). For more information about point-in-time restore, see [Branching — Point-in-time restore (PITR)](/docs/guides/branching-pitr).
+  The timestamp must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/). For more information about instant restore, see [Instant restore](/docs/guides/branch-restore).
 
 - Create a branch and connect to it with `psql`.
 

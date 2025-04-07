@@ -7,13 +7,13 @@ updatedOn: '2025-02-22T16:36:52.249Z'
 <InfoBlock>
 <DocsList title="What you will learn:">
 <p>About backup strategies</p>
-<p>About built-in backups with point-in-time restore</p>
+<p>About built-in backups with instant restore</p>
 <p>Creating backups using pg_dump</p>
 <p>How to automate backups with GitHub Actions</p>
 </DocsList>
 
 <DocsList title="Related resources" theme="docs">
-  <a href="/docs/introduction/point-in-time-restore">Branch reset and restore</a>
+  <a href="/docs/introduction/branch-restore">Branch reset and restore</a>
   <a href="/docs/import/migrate-from-postgres">Migrate data with pg_dump and pg_restore</a>
 </DocsList>
 
@@ -23,24 +23,24 @@ Neon offers two primary backup strategies, which you can use separately or in co
 
 <Steps>
 
-## Instant Point-in-Time Restore (PITR)
+## Instant restore
 
-    With Neon's instant point-in-time restore capability, you can automatically retain a "history" of changes—ranging from 1 day up to 30 days, depending on your Neon plan. This feature lets you recover your database to any specific moment without the need for traditional database backups or separate backup automation. It's ideal if your primary concern is fast recovery after an unexpected event.
+    With Neon's instant restore capability, also known as point-in-time restore or PITR, you can automatically retain a "history" of changes—ranging from 1 day up to 30 days, depending on your Neon plan. This feature lets you restore your database to any specific moment without the need for traditional database backups or separate backup automation. It's ideal if your primary concern is fast recovery after an unexpected event.
 
-    By default, Neon projects retain **1 day** of history. You can increase your history retention period on Neon as follows:
+    By default, Neon projects retain **1 day** of history. You can increase your restore window on Neon as follows:
 
-    | Plan                                                   | History Retention Limit  |
+    | Plan                                                   | Restore window limit  |
     | :----------------------------------------------------- | :----------------------- |
     | [Free](/docs/introduction/plans#free-plan)             | 1 day                    |
     | [Launch](/docs/introduction/plans#launch)              | 7 days                   |
     | [Scale](/docs/introduction/plans#scale)                | 14 days                  |
     | [Business](/docs/introduction/plans#business)          | 30 days                  |
 
-    With this strategy, the only required action is setting your desired history retention period. Please keep in mind that increasing your history retention period also increases storage, as changes to your data are retained for a longer period.
+    With this strategy, the only required action is setting your desired restore window. Please keep in mind that increasing your restore window also increases storage, as changes to your data are retained for a longer period.
 
-    ![History retention](/docs/manage/backups_history_retention.png)
+    ![Restore window](/docs/manage/history_retention.png)
 
-    To get started, see [Point-in-time restore](/docs/introduction/point-in-time-restore).
+    To get started, see [Instant restore](/docs/introduction/branch-restore).
 
 ## Backups with `pg_dump`
 

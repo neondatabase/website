@@ -209,32 +209,43 @@
         - title: Scale to zero
           slug: introduction/scale-to-zero
           items:
+            - title: Overview
+              slug: introduction/scale-to-zero
             - title: Scale to zero guide
               slug: guides/scale-to-zero-guide
+        - title: Instant restore
+          slug: introduction/branch-restore
         - title: Branching
           slug: guides/branching-intro
           items:
-            - title: About branching
-              slug: introduction/branching
-            - title: Branch reset and restore
-              slug: introduction/point-in-time-restore
+            - section: Get started
+              items:
+                - title: Get started with branching
+                  slug: guides/branching-intro
+            - section: Concepts
+              items:
+                - title: About branching
+                  slug: introduction/branching
+                - title: Schema-only branches
+                  slug: guides/branching-schema-only
+                - title: Branch archiving
+                  slug: guides/branch-archiving
+            - section: Restore and reset
               items:
                 - title: Reset from parent
                   slug: guides/reset-from-parent
-                - title: Branch Restore
-                  slug: guides/branch-restore
-            - title: Branch archiving
-              slug: guides/branch-archiving
-            - title: Branching with the CLI
-              slug: guides/branching-neon-cli
-            - title: Branching with the API
-              slug: guides/branching-neon-api
-            - title: Branching with GitHub Actions
-              slug: guides/branching-github-actions
-            - title: Branching — Testing queries
-              slug: guides/branching-test-queries
-            - title: Schema-only branches
-              slug: guides/branching-schema-only
+                - title: Instant restore
+                  slug: introduction/branch-restore
+            - section: Branching in workflows
+              items:
+                - title: Branching with the CLI
+                  slug: guides/branching-neon-cli
+                - title: Branching with the API
+                  slug: guides/branching-neon-api
+                - title: Branching with GitHub Actions
+                  slug: guides/branching-github-actions
+                - title: Branching — Testing queries
+                  slug: guides/branching-test-queries
         - title: Logical replication
           slug: guides/logical-replication-guide
           items:
@@ -266,11 +277,15 @@
         - title: Time Travel
           slug: guides/time-travel-assist
           items:
+            - title: Overview
+              slug: guides/time-travel-assist
             - title: Time Travel tutorial
               slug: guides/time-travel-tutorial
         - title: Schema diff
           slug: guides/schema-diff
           items:
+            - title: Overview
+              slug: guides/schema-diff
             - title: Schema diff tutorial
               slug: guides/schema-diff-tutorial
         - title: IP Allow
@@ -429,6 +444,7 @@
   items:
     - title: AI for agents
       slug: ai/ai-agents-tools
+      icon: ai-agent
       items:
         - title: Overview
           slug: ai/ai-agents-tools
@@ -468,6 +484,7 @@
               slug: https://neon.tech/guides/langgraph-neon
     - title: AI Starter Kit
       slug: ai/ai-intro
+      icon: sparks
       items:
         - section: Core concepts
           items:

@@ -21,7 +21,7 @@ When you reset a branch to its parent, the data and schema is completely replace
 
 ### Key points
 
-- You can only reset a branch to the latest data from its parent. Point-in-time resets based on timestamp or LSN are possible using [Branch Restore](/docs/guides/branch-restore), a similar feature, with some differences: branch restore leaves a backup branch and is in general is intended more for data recovery than development workflow.
+- You can only reset a branch to the latest data from its parent. Point-in-time resets based on timestamp or LSN are possible using [Instant restore](/docs/introduction/branch-restore), a similar feature, with some differences: instant restore leaves a backup branch and is in general is intended more for data recovery than development workflow.
 - This reset is a complete overwrite, not a refresh or a merge. Any local changes made to the child branch are lost during this reset.
 - Existing connections will be temporarily interrupted during the reset. However, your connection details _do not change_. All connections are re-established as soon as the reset is done.
 - Root branches (like your project's `main` branch or schema-only branches) cannot be reset because they have no parent branch to reset to.
@@ -85,7 +85,7 @@ To reset a branch to its parent using the API, use the branch restore endpoint, 
 POST /projects/{project_id}/branches/{branch_id_to_restore}/restore
 ```
 
-For details, see [Branch Restore using the API](/docs/guides/branch-restore#how-to-use-branch-restore)
+For details, see [Instant restore using the API](/docs/guides/branch-restore#how-to-use-branch-restore)
 
 </TabItem>
 

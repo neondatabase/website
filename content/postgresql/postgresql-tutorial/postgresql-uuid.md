@@ -38,7 +38,7 @@ To store UUID values in the PostgreSQL database, you use the UUID data type.
 
 ## Generating UUID values
 
-PostgreSQL provides you with a function to generate a UUID:
+PostgreSQL provides you with a function to generate a UUID:
 
 ```sql
 gen_random_uuid()
@@ -78,16 +78,16 @@ CREATE TABLE contacts (
 
 In this statement, the data type of the `contact_id` column is `UUID`.
 
-The `contact_id` column has a default value provided by the `gen_random_uuid()` function, therefore, whenever you insert a new row without specifying the value for the contact_id `column`, PostgreSQL will call the `gen_random_uuid()` function to generate the value for it.
+The `contact_id` column has a default value provided by the `gen_random_uuid()` function, therefore, whenever you insert a new row without specifying the value for the contact_id `column`, PostgreSQL will call the `gen_random_uuid()` function to generate the value for it.
 
 Second, [insert](postgresql-insert) some data into the `contacts` table:
 
 ```sql
 INSERT INTO contacts ( first_name, last_name, email, phone)
 VALUES
-  ('John', 'Smith', '[[email protected]](../cdn-cgi/l/email-protection.html)',  '408-237-2345'),
-  ('Jane', 'Smith', '[[email protected]](../cdn-cgi/l/email-protection.html)', '408-237-2344'),
-  ('Alex', 'Smith', '[[email protected]](../cdn-cgi/l/email-protection.html)', '408-237-2343')
+  ('John', 'Smith', 'john.smith@example.com',  '408-237-2345'),
+  ('Jane', 'Smith', 'jane.smith@example.com', '408-237-2344'),
+  ('Alex', 'Smith', 'alex.smith@example.com', '408-237-2343')
 RETURNING *;
 ```
 
@@ -96,9 +96,9 @@ Output:
 ```text
               contact_id              | first_name | last_name |         email          |    phone
 --------------------------------------+------------+-----------+------------------------+--------------
- ca61da8c-938a-48a6-8eb6-55aa08cd1b08 | John       | Smith     | [[email protected]](../cdn-cgi/l/email-protection.html) | 408-237-2345
- fe2af584-8576-4d0e-b10d-6ec970732f8e | Jane       | Smith     | [[email protected]](../cdn-cgi/l/email-protection.html) | 408-237-2344
- 141aefe8-f553-43b9-bfbf-91361e83b15e | Alex       | Smith     | [[email protected]](../cdn-cgi/l/email-protection.html) | 408-237-2343
+ ca61da8c-938a-48a6-8eb6-55aa08cd1b08 | John       | Smith     | john.smith@example.com | 408-237-2345
+ fe2af584-8576-4d0e-b10d-6ec970732f8e | Jane       | Smith     | jane.smith@example.com | 408-237-2344
+ 141aefe8-f553-43b9-bfbf-91361e83b15e | Alex       | Smith     | alex.smith@example.com | 408-237-2343
 (3 rows)
 
 ```
