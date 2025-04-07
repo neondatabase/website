@@ -7,7 +7,7 @@ createdAt: '2025-04-04T00:00:00.000Z'
 updatedOn: '2025-04-04T00:00:00.000Z'
 ---
 
-Azure Service Connector lets you connect Azure compute services to backing services like Neon. It achieves this primarily by managing connection secrets (like database credentials using Azure Key Vault for secure storage) and configuring your application with the necessary connection details, typically via environment variables. Your application code then uses this injected configuration with standard database drivers and libraries to connect to Neon.
+Azure Service Connector lets you connect Azure compute services to backend services like Neon. It achieves this primarily by managing connection secrets (like database credentials using Azure Key Vault for secure storage) and configuring your application with the necessary connection details, typically via environment variables. Your application code then uses this injected configuration with standard database drivers and libraries to connect to Neon.
 
 While Service Connector offers significant automation for some Azure-native services (like using Managed Identities), its integration with Neon currently relies on **connection string authentication**. This means you'll need to provide your Neon database credentials during setup, but Service Connector helps manage how these credentials are stored and exposed to your application.
 
