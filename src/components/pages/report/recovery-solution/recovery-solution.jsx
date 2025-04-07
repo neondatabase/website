@@ -1,7 +1,6 @@
 import Image from 'next/image';
 
 import Container from 'components/shared/container/container';
-import LINKS from 'constants/links';
 import dbIcon from 'icons/report/db-icon.svg';
 import restoreIcon from 'icons/report/restore-icon.svg';
 
@@ -43,7 +42,7 @@ const RecoverySolution = () => (
 
       <p className="with-link-primary mt-12 text-lg leading-snug tracking-extra-tight text-gray-new-90 md:mt-10 sm:mt-7 sm:text-base">
         Want to see it in action?{' '}
-        <a className="ml-2 tracking-tighter" href={LINKS.demo}>
+        <a className="ml-2 tracking-tighter" href="https://fyi.neon.tech/branching" target="_blank" rel="noreferrer">
           Here's a demo →
         </a>
       </p>

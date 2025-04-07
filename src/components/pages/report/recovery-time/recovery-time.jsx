@@ -4,7 +4,7 @@ import Container from 'components/shared/container/container';
 import percentIcon from 'icons/report/percent-icon.svg';
 
 const RecoveryTime = () => (
-  <section className="recovery-time safe-paddings mt-[120px]">
+  <section className="recovery-time safe-paddings mt-20">
     <Container
       className="relative z-10 flex !max-w-[576px] flex-col items-center text-center"
       size="xxs"

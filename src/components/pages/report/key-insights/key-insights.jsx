@@ -70,6 +70,7 @@ const KeyInsights = () => (
               <p className="relative text-sm leading-snug tracking-tight text-gray-new-60">
                 {description}
               </p>
+              <span className="pointer-events-none absolute -top-1.5 left-[18px] inline-block h-[11px] w-[11px] rotate-45 border-l border-t border-solid border-gray-new-20 bg-black-pure" />
             </div>
           </li>
         ))}

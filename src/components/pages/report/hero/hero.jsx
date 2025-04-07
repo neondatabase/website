@@ -1,6 +1,5 @@
 import Button from 'components/shared/button';
 import Container from 'components/shared/container/container';
-import LINKS from 'constants/links';
 
 const Hero = () => (
   <section className="hero safe-paddings relative pt-40 lg:pt-20 md:pt-12 sm:pt-8">
@@ -14,7 +13,7 @@ const Hero = () => (
       </p>
       <Button
         className="mt-10 whitespace-nowrap !px-5 font-semibold leading-none tracking-tighter transition-colors duration-200 lg:!text-base sm:mt-8"
-        to={LINKS.signup}
+        to="/report/Database_Recovery_Developer_Survey_2025_Neon.numbers"
         theme="primary"
         size="xs"
       >
