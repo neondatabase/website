@@ -72,16 +72,22 @@ On the **General** page, you are permitted to change the name of your project or
 
 ### Change your project's default compute settings
 
-You can change your project's default compute settings on the **Compute** page.
+You can change your project's default compute settings on the **Compute** page. These settings determine the compute resources allocated to any new branches or read replicas you create.
 
-_Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute. The number of CUs determines the processing capacity of the compute. One CU is equal to 1 vCPU with 4 GB of RAM. Currently, a Neon compute can have anywhere from .25 CUs to 56 CUs. Larger compute sizes will be supported in a future release.
+<Admonition type="important">
+Changes to default compute settings only affect **newly created computes**. Existing computes, including those on your primary branch and read replicas, will not be automatically updated. To change settings for existing computes, you need to update them individually through the **Branches** page.
+</Admonition>
 
-By default, new branches inherit the compute size from your first branch (i.e., `main`). However, there may be times when you want to configure this default.
+A Compute Unit (CU) represents 1 vCPU with 4 GB of RAM. New branches inherit compute settings from your first branch, but you can change these defaults to:
 
-Neon supports fixed-size and autoscaling compute configurations.
+- Set smaller compute sizes for preview deployments and development branches
+- Standardize settings across read replicas
+- Optimize resource usage and costs for non-production workloads
 
-- **Fixed size:** Select a fixed compute size ranging from .25 CUs to 56 CUs. A fixed-size compute does not scale to meet workload demand.
-- **Autoscaling:** Specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries in response to the current load. Currently, the _Autoscaling_ feature supports a range of 1/4 (.25) CU to 16 CUs. The 1/4 CU and 1/2 CU settings are _shared compute_. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
+Neon supports two compute configurations:
+
+- **Fixed size:** Select a fixed compute size ranging from .25 CUs to 56 CUs
+- **Autoscaling:** Specify minimum and maximum compute sizes (from .25 CU to 16 CUs) to automatically scale based on workload. Note: When setting maximum above 10 CUs, the minimum must be at least max/8. For more information, see [Autoscaling](/docs/introduction/autoscaling)
 
 ### Configure your restore window
 

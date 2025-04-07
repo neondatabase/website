@@ -44,7 +44,7 @@ To edit a compute:
 
 ## Configure autoscaling defaults for your project
 
-You can configure autoscaling configuration defaults for your project so that **newly created computes** (including those created when you create a new branch or add read replica) are created with the same autoscaling configuration. This will save your from having to configure autoscaling each time, assuming you want the same settings for all of your computes.
+You can configure autoscaling configuration defaults for your project so that **newly created computes** (including those created when you create a new branch or add read replica) are created with the same autoscaling configuration. This saves you from having to configure autoscaling settings with each new compute. See [Change your project's default compute settings](/docs/manage/projects#change-your-projects-default-compute-settings) for more detail.
 
 <Admonition type="note">
 Changing your autoscaling default settings does not alter the autoscaling configuration for existing computes.
