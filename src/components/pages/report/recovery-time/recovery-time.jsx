@@ -9,8 +9,14 @@ const RecoveryTime = () => (
       className="relative z-10 flex !max-w-[576px] flex-col items-center text-center"
       size="xxs"
     >
-      <Image className="ml-2" src={percentIcon} width={330} height={178} alt="68%" />
-      <h2 className="mx-auto -mt-10 max-w-[465px] font-title text-[36px] font-medium leading-dense tracking-tighter">
+      <Image
+        className="ml-2 lg:max-w-[295px] sm:max-w-[260px]"
+        src={percentIcon}
+        width={330}
+        height={178}
+        alt="68%"
+      />
+      <h2 className="mx-auto -mt-10 max-w-[465px] font-title text-[36px] font-medium leading-dense tracking-tighter md:-mt-12 md:max-w-[405px] md:text-[32px] sm:-mt-[30px] sm:text-[28px]">
         of teams requested faster point-in-time recovery solutions
       </h2>
       <p className="mx-auto mt-2 max-w-[356px] text-sm leading-snug tracking-tight text-gray-new-60">

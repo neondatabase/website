@@ -42,19 +42,21 @@ const DATA = [
 ];
 
 const KeyInsights = () => (
-  <section className="key-insights safe-paddings mt-[134px]">
+  <section className="key-insights safe-paddings mt-[134px] lg:mt-28 md:mt-[100px] sm:mt-[88px]">
     <Container
       className="relative z-10 flex !max-w-[576px] flex-col items-start text-white"
       size="xxs"
     >
-      <h2 className="font-title text-5xl font-medium leading-tight tracking-tight">Key insights</h2>
-      <ul className="mt-12 flex flex-col gap-y-[42px]">
+      <h2 className="font-title text-5xl font-medium leading-tight tracking-tight lg:text-[44px] md:text-[40px] sm:text-[32px]">
+        Key insights
+      </h2>
+      <ul className="mt-12 flex flex-col gap-y-[42px] lg:mt-10 lg:gap-y-[38px] md:gap-y-[36px] sm:mt-8 sm:gap-y-[31px]">
         {DATA.map(({ percentage, title, description }, index) => (
           <li className="flex flex-col" key={index}>
-            <span className="bg-[linear-gradient(180deg,#00E599_24.85%,#007F55_68.32%)] bg-clip-text text-[36px] font-medium leading-none tracking-tighter text-transparent">
+            <span className="bg-[linear-gradient(180deg,#00E599_24.85%,#007F55_68.32%)] bg-clip-text text-[36px] font-medium leading-none tracking-tighter text-transparent sm:text-[32px]">
               {percentage}
             </span>
-            <h3 className="mt-2 text-xl font-medium leading-snug tracking-tight text-gray-new-90">
+            <h3 className="mt-2 text-xl font-medium leading-snug tracking-tight text-gray-new-90 md:text-[18px] sm:text-[16px]">
               {title}
             </h3>
             <div className="relative mt-5 max-w-[536px] rounded-lg border border-gray-new-20 py-3 pl-11 pr-5">

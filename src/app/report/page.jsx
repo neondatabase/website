@@ -19,9 +19,9 @@ const ReportPage = () => (
     <RecoveryTime />
     <RecoverySolution />
     <CTA
-      className="pb-[328px] pt-[380px] xl:pb-[242px] xl:pt-[278px] lg:pb-[200px] lg:pt-[260px] sm:pb-[100px] sm:pt-40"
+      className="pb-[328px] pt-[380px] xl:pb-[234px] xl:pt-[303px] md:pb-[193px] md:pt-[273px] sm:pb-[150px] sm:pt-36"
       title="Wanna meet us?"
-      titleClassName="font-title !text-[72px] max-w-[745px] lg:max-w-[600px] md:max-w-[400px] md:leading-none"
+      titleClassName="font-title !text-[72px] max-w-[745px] lg:max-w-[600px] md:!text-[56px] md:max-w-[400px] md:leading-none sm:!text-[40px]"
       buttonText="Book a meeting with our team"
       buttonUrl={LINKS.contactSales}
     />
