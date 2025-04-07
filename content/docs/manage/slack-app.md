@@ -8,7 +8,7 @@ updatedOn: '2025-03-19T12:43:23.197Z'
 <figure className="doc-cta not-prose rounded-[10px] my-5 flex items-end gap-x-16 px-7 py-6 md:flex-col md:items-start border border-gray-new-90 bg-[linear-gradient(to_right,#FAFAFA_0%,rgba(250,250,250,0)100%)] dark:border-gray-new-20 dark:bg-[linear-gradient(to_right,#18191B_28.86%,#131415_74.18%)]">
   <div>
     <h2 className="!my-0 font-semibold tracking-extra-tight text-2xl leading-dense">Add Neon to your Slack workspace!</h2>
-    <p className="mt-2 text-gray-new-20 dark:text-gray-new-80 text-sm font-light">Monitor your Neon projects, track usage, and manage your organization directly from Slack. Available to all Neon users, free and paid.</p>
+    <p className="mt-2 text-gray-new-20 dark:text-gray-new-80 text-sm font-light">Monitor your Neon projects, track usage, and manage your organization directly from Slack. Available to all Neon users, free and paid. A Neon account is required to use this integration.</p>
   </div>
   <Button
     className="border-none md:mt-4"
@@ -94,6 +94,10 @@ To receive Neon notifications in a Slack channel:
 Once subscribed, the channel will start receiving important Neon usage notifications. To stop receiving notifications, use the `/neon unsubscribe` command in the same channel.
 
 Use `/neon disconnect` to remove your Neon account connection and unsubscribe from all channels, while keeping the app installed for future use.
+
+## Data deletion
+
+Neon respects your right to request deletion of your personal data at any time. To do so, email us at privacy@neon.tech or submit a support ticket via the Neon Console. Once we verify your identity, we will delete your data within 30 days, unless a legal or contractual obligation requires us to retain it. For more details, see our [Privacy Policy](https://neon.tech/privacy-policy).
 
 ## Support
 
