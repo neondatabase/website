@@ -99,7 +99,7 @@ jobs:
 
       - name: Set file, folder and path variables
         run: |
-          GZIP_NAME="$(date +'%B-%d-%Y@%H:%M:%S').gz"
+          GZIP_NAME="$(date +'%B-%d-%Y@%H:%M:%S').sql.gz"
           FOLDER_NAME="${{ github.workflow }}"
           UPLOAD_PATH="s3://${{ env.S3_BUCKET_NAME }}/${FOLDER_NAME}/${GZIP_NAME}"
 
