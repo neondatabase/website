@@ -181,7 +181,7 @@ The version 1 UUID generation functions in `uuid-ossp` are based on the time of 
     Represents the X.500 Distinguished Name (DN) namespace.
 
     ```sql
-    SSELECT uuid_generate_v5(uuid_ns_x500(), 'CN=John Doe, DC=example, DC=com');
+    SELECT uuid_generate_v5(uuid_ns_x500(), 'CN=John Doe, DC=example, DC=com');
     -- e9ba549f-a675-5490-b054-ad862cb8c1d2 (always the same for 'CN=John Doe, DC=example, DC=com')
     ```
 
