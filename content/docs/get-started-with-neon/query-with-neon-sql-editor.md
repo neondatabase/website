@@ -200,6 +200,4 @@ To enhance your experience with the Neon SQL Editor's AI features, we share your
 _There is a maximum limit of 5 AI requests every 60 seconds._
 </Admonition>
 
-
-
 <NeedHelp/>

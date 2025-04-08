@@ -1,5 +1,5 @@
 ---
-title:  "Build your first AI Agent for Postgres on Azure"
+title: 'Build your first AI Agent for Postgres on Azure'
 subtitle: 'Learn how to build an AI Agent for Postgres using Azure AI Agent Service and Neon'
 author: boburmirzo
 enableTableOfContents: true
@@ -24,7 +24,6 @@ Imagine you run a SaaS product and track tenant-level usage data for billing (li
 For example, when a user asks questions about their invoice, the AI can query Neon for relevant usage logs, summarize usage patterns, and offer explanations before routing to a human. Or when you open your billing dashboard, the agent proactively explains any spikes or changes:
 
 > "Your API usage increased by 250% on April 3rd due to increased traffic from users in the EU region."
-> 
 
 We’ll build an AI agent that connects to your Postgres database and uses a simple Python function to fetch and analyze the data.
 
@@ -38,7 +37,7 @@ We’ll use [**Neon Serverless Postgres**](https://neon.tech/) as our database. 
 
 ## Create a Neon Database on Azure
 
-Open the [new Neon Resource page](https://portal.azure.com/#view/Azure_Marketplace_Neon/NeonCreateResource.ReactView) on the Azure portal, and it brings up the form to create a Neon Serverless Postgres Resource. Fill out the form with the required fields and deploy it. 
+Open the [new Neon Resource page](https://portal.azure.com/#view/Azure_Marketplace_Neon/NeonCreateResource.ReactView) on the Azure portal, and it brings up the form to create a Neon Serverless Postgres Resource. Fill out the form with the required fields and deploy it.
 
 ### Obtain Neon Database Credentials
 
@@ -55,7 +54,7 @@ Open the [new Neon Resource page](https://portal.azure.com/#view/Azure_Marketpl
 
 ## Create an AI Foundry Project on Azure
 
-Create a new hub and project in the Azure AI Foundry portal by [following the guide](https://learn.microsoft.com/en-us/azure/ai-services/agents/quickstart?pivots=ai-foundry-portal#create-a-hub-and-project-in-azure-ai-foundry-portal) in the Microsoft docs. You also need to [deploy a model](https://learn.microsoft.com/en-us/azure/ai-services/agents/quickstart?pivots=ai-foundry-portal#deploy-a-model) like GPT-4o. 
+Create a new hub and project in the Azure AI Foundry portal by [following the guide](https://learn.microsoft.com/en-us/azure/ai-services/agents/quickstart?pivots=ai-foundry-portal#create-a-hub-and-project-in-azure-ai-foundry-portal) in the Microsoft docs. You also need to [deploy a model](https://learn.microsoft.com/en-us/azure/ai-services/agents/quickstart?pivots=ai-foundry-portal#deploy-a-model) like GPT-4o.
 
 You only need the **Project connection string** and **Model Deployment Name** from the Azure AI Foundry portal. You can also find your connection string in the **overview** for your project in the [**Azure AI Foundry portal**](https://ai.azure.com/), under **Project details** > **Project connection string**.
 
@@ -96,7 +95,7 @@ pandas
 python-dotenv
 sqlalchemy
 psycopg2-binary
-azure-ai-projects 
+azure-ai-projects
 azure-identity
 ```
 
@@ -204,9 +203,9 @@ print("✅ usage_data table created and mock data inserted.")
 Next, we configure an AI agent tool to retrieve data from Postgres. The Python script [`billing_agent_tools.py`](https://github.com/neondatabase-labs/neon-azure-ai-agent-service-get-started/blob/main/billing_agent_tools.py) contains:
 
 - The function `billing_anomaly_summary()` that:
-    - Pulls usage data from Neon.
-    - Computes `% change` in `api_calls`.
-    - Flags anomalies with a threshold of `> 1.5x` change.
+  - Pulls usage data from Neon.
+  - Computes `% change` in `api_calls`.
+  - Flags anomalies with a threshold of `> 1.5x` change.
 - Exports `user_functions` list for the Azure AI Agent to use. You do not need to run it separately.
 
 ```python
@@ -276,25 +275,15 @@ user_functions = [billing_anomaly_summary]
 Now we'll set up the AI agent and integrate it with our Neon Postgres tool using the **Azure AI Agent Service SDK.** The [Python script](https://github.com/neondatabase-labs/neon-azure-ai-agent-service-get-started/blob/main/billing_anomaly_agent.py) does the following:
 
 - **Creates the agent**
-    
-    Instantiates an AI agent using the selected model (`gpt-4o`, for example), adds tool access, and sets instructions that tell the agent how to behave (e.g., “You are a helpful SaaS assistant…”).
-    
+  Instantiates an AI agent using the selected model (`gpt-4o`, for example), adds tool access, and sets instructions that tell the agent how to behave (e.g., “You are a helpful SaaS assistant…”).
 - **Creates a conversation thread**
-    
-    A thread is started to hold a conversation between the user and the agent.
-    
+  A thread is started to hold a conversation between the user and the agent.
 - **Posts a user message**
-    
-    Sends a question like “Why did my billing spike for tenant_456 this week?” to the agent.
-    
+  Sends a question like “Why did my billing spike for tenant_456 this week?” to the agent.
 - **Processes the request**
-    
-    The agent reads the message, determines that it should use the custom tool to retrieve usage data, and processes the query.
-    
+  The agent reads the message, determines that it should use the custom tool to retrieve usage data, and processes the query.
 - **Displays the response**
-    
-    Prints the response from the agent with a natural language explanation based on the tool’s output.
-    
+  Prints the response from the agent with a natural language explanation based on the tool’s output.
 
 ```python
 # billing_anomaly_agent.py
@@ -402,12 +391,9 @@ After running your agent using the Azure AI Agent SDK, it is saved within your A
 - Go to the **Agents** section in your [Azure AI Foundry](https://ai.azure.com/) workspace.
 - Find your **billing anomaly agent** in the list and click to open it.
 - Use the playground interface to test different financial or billing-related questions, such as:
-    
-    > “Did tenant_456 exceed their API usage quota this month?”
-    > 
-    > 
-    > “Explain recent storage usage changes for tenant_456.”
-    > 
+  > “Did tenant_456 exceed their API usage quota this month?”
+  >
+  > “Explain recent storage usage changes for tenant_456.”
 
 This is a great way to validate your agent's behavior without writing more code.
 

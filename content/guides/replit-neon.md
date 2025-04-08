@@ -78,7 +78,7 @@ Software development often involves debugging, and Replit Agent is designed to a
 
 Should you encounter an error, **carefully examine the error message** displayed in the Replit webview or the console. **Copy the full error message and paste it directly into the Replit Agent chat window.**
 
-Replit Agent is trained to interpret error messages and suggest corrective actions. It will analyze the provided error information, identify the root cause, and propose code modifications to rectify the issue.  In our case, Agent accurately identified and resolved a `pdf.js` library error, providing specific code changes.
+Replit Agent is trained to interpret error messages and suggest corrective actions. It will analyze the provided error information, identify the root cause, and propose code modifications to rectify the issue. In our case, Agent accurately identified and resolved a `pdf.js` library error, providing specific code changes.
 
     ![Replit Agent PDF.js error](/docs/guides/replit-agent-pdfjs-error.png)
 
@@ -108,7 +108,6 @@ A quick review of the generated code will reveal that Replit Agent has defaulted
 
     ![Replit Agent Database Integration](/docs/guides/replit-agent-create-database.png)
 
-
 ### Deploying your application to production
 
 After iteratively refining and testing your AI MCQ Generator application, you're ready to deploy it to a production environment. Replit simplifies the deployment process, enabling you to host your application online with just a few clicks.
@@ -130,15 +129,16 @@ Your AI MCQ Generator application should now be live and accessible to users. Sh
 To optimize your Replit Agent development experience and build applications effectively, consider these best practices:
 
 - **Prompt engineering:**
-    - **Improve Prompt**: Use the "Improve Prompt" feature in Replit Agent to refine the prompt and provide additional context. This helps Replit Agent better understand your requirements and generate more accurate code.
-        ![Replit Agent Improve Prompt](/docs/guides/replit-agent-improve-prompt.png)
-    - **Contextual prompts:** Initiate prompts with clear and comprehensive context. For example, "Modify the MCQ display to show one question at a time."
-    - **Incremental iteration:** Decompose complex feature additions into smaller, incremental prompts for greater control and reduced complexity. For instance, when developing a multi-step form, address each form section sequentially.
-    - **Specific feedback:** When encountering issues, provide precise and detailed feedback to Replit Agent. Include error messages, descriptions of expected vs. actual behavior, and relevant context for efficient debugging and issue resolution.
+
+  - **Improve Prompt**: Use the "Improve Prompt" feature in Replit Agent to refine the prompt and provide additional context. This helps Replit Agent better understand your requirements and generate more accurate code.
+    ![Replit Agent Improve Prompt](/docs/guides/replit-agent-improve-prompt.png)
+  - **Contextual prompts:** Initiate prompts with clear and comprehensive context. For example, "Modify the MCQ display to show one question at a time."
+  - **Incremental iteration:** Decompose complex feature additions into smaller, incremental prompts for greater control and reduced complexity. For instance, when developing a multi-step form, address each form section sequentially.
+  - **Specific feedback:** When encountering issues, provide precise and detailed feedback to Replit Agent. Include error messages, descriptions of expected vs. actual behavior, and relevant context for efficient debugging and issue resolution.
 
 - **Leveraging Replit Platform Features:**
-    - **Secure secrets management:** Always employ Replit Secrets for storing API keys, database credentials, and other sensitive information.
-    - **Deployment**: Use Replit's built-in deployment features to host your applications online. This simplifies the deployment process and makes your applications accessible to a wider audience. You never have to worry about server management, scaling, or maintenance.
+  - **Secure secrets management:** Always employ Replit Secrets for storing API keys, database credentials, and other sensitive information.
+  - **Deployment**: Use Replit's built-in deployment features to host your applications online. This simplifies the deployment process and makes your applications accessible to a wider audience. You never have to worry about server management, scaling, or maintenance.
 
 ## Resources
 
@@ -148,4 +148,4 @@ To optimize your Replit Agent development experience and build applications effe
 - [Replit Deployments: Choosing the Right Deployment Type](https://youtu.be/sXP5d0k1atk)
 - [Bringing Postgres to Replit with Neon](/blog/neon-replit-integration)
 
-<NeedHelp /> 
+<NeedHelp />

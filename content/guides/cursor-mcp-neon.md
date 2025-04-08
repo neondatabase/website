@@ -45,7 +45,7 @@ Before you begin, ensure you have the following:
 
 1. Open Cursor and go to **Cursor Settings**.
 2. Navigate to **MCP**.
-3. Scroll to the **MCP If not, you might need to manually create a file named `mcp.json`  Servers** section.
+3. Scroll to the **MCP If not, you might need to manually create a file named `mcp.json` Servers** section.
    ![Cursor MCP Servers section](/docs/guides/cursor-settings-features.png)
 4. Click **+ Add new MCP server**.
 
@@ -54,17 +54,18 @@ Before you begin, ensure you have the following:
 <TabItem>
 In the "Add MCP Server" modal:
 
-   - **Name:** Give your server a descriptive name (e.g., `Neon`).
-   - **Type:** Select `command`.
-   - **Command:** Enter the following command, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key which you obtained earlier in the [Prerequisites](#prerequisites) section.
+- **Name:** Give your server a descriptive name (e.g., `Neon`).
+- **Type:** Select `command`.
+- **Command:** Enter the following command, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key which you obtained earlier in the [Prerequisites](#prerequisites) section.
 
-     ```bash
-     npx -y @neondatabase/mcp-server-neon start <YOUR_NEON_API_KEY>
-     ```
+  ```bash
+  npx -y @neondatabase/mcp-server-neon start <YOUR_NEON_API_KEY>
+  ```
 
-   - Click **Add**.
+- Click **Add**.
 
-     ![Add Neon MCP Server in Cursor](/docs/guides/cursor-add-mcp-server.png)
+       ![Add Neon MCP Server in Cursor](/docs/guides/cursor-add-mcp-server.png)
+
 </TabItem>
 
 <TabItem>
@@ -74,12 +75,12 @@ Add the following configuration to the `mcp.json` file, replacing `<YOUR_NEON_AP
 
 ```json
 {
-   "mcpServers": {
-      "neon": {
-         "command": "cmd",
-         "args": ["/c", "npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
-      }
-   }
+  "mcpServers": {
+    "neon": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+    }
+  }
 }
 ```
 
@@ -93,12 +94,12 @@ Add the following configuration to the `mcp.json` file, replacing `<YOUR_NEON_AP
 
 ```json
 {
-   "mcpServers": {
-      "neon": {
-         "command": "wsl",
-         "args": ["npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
-      }
-   }
+  "mcpServers": {
+    "neon": {
+      "command": "wsl",
+      "args": ["npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+    }
+  }
 }
 ```
 
@@ -107,11 +108,11 @@ Save the `mcp.json` file.
 
 </Tabs>
 
-   Cursor will attempt to connect. Your new "Neon" MCP server should appear in the MCP Servers list with all the available tools.
+Cursor will attempt to connect. Your new "Neon" MCP server should appear in the MCP Servers list with all the available tools.
 
-   ![Cursor with Neon MCP Tools](/docs/guides/cursor-with-neon-mcp-tools.png)
+![Cursor with Neon MCP Tools](/docs/guides/cursor-with-neon-mcp-tools.png)
 
-   You've now configured Neon MCP Server in Cursor and can manage your Neon Postgres databases using AI.
+You've now configured Neon MCP Server in Cursor and can manage your Neon Postgres databases using AI.
 
 1. Open a Cursor **Chat** using the keyboard shortcut **Command + I** (on Mac) or **Control + I** (on Windows) and select the **Agent** option from the drop-down menu.
 

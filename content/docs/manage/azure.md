@@ -117,46 +117,47 @@ For Azure `region_id` values, see [Regions](/docs/introduction/regions).
 
 For supported Azure regions, refer to our [Regions](/docs/introduction/regions) page. For the Public Preview, Neon supports a limited number of Azure regions. To request support for other Azure regions, see [Request a region](/docs/introduction/regions#request-a-region).
 
-## Azure examples
+## Resources to get you started with Neon on Azure
 
-<TechCards>
+Find the resources you need to get started with Neon on Azure, from deployment options to integration guides and examples.
 
-<a href="https://neon.tech/guides/neon-azure-integration" title="Get started with Neon on Azure" description="Deploy Neon's serverless Postgres via the Azure Marketplace" icon="azure"></a>
+### Migrate data to Neon on Azure
 
-<a href="https://neon.tech/blog/multitenant-private-ai-chat-with-neon-on-azure" title="Multitenant private RAG with Neon on Azure" description="Tenant AI Chat Solution Accelerator uses Neon Serverless Postgres on Azure." icon="azure"></a>
+- [Migrate data from Azure PostgreSQL](https://neon.tech/docs/import/migrate-from-azure-postgres) - Replicate data from Azure PostgreSQL to
 
-<a href="https://neon.tech/guides/query-postgres-azure-functions" title="Azure Functions" description="Connect from Azure Functions to Neon" icon="azure"></a>
+### Connect to Neon from Azure services
 
-<a href="https://neon.tech/guides/azure-functions-referral-system" title="Azure Functions" description="Building a Serverless Referral System with Neon Postgres and Azure Functions" icon="azure"></a>
+- [Connect with Azure Service Connector](https://neon.tech/guides/azure-service-connector) - Connect Azure services to Neon
 
-<a href="https://neon.tech/blog/building-sql-query-assistant-with-dotnet-azure-functions-openai" title="Azure Functions, Azure OpenAI" description="Building an Intelligent SQL Query Assistant with Neon, .NET, Azure Functions, and Azure OpenAI service" icon="azure"></a>
+### Azure functions & serverless
 
-<a href="https://neon.tech/blog/generative-feedback-loops-with-neon-serverless-postgres-azure-functions-and-azure-openai" title="Azure Functions, Azure OpenAI" description="Generative Feedback Loops with Neon serverless Postgres, Azure Functions, and Azure OpenAI" icon="azure"></a>
+- [Query Postgres from Azure Functions](https://neon.tech/guides/query-postgres-azure-functions) - Connect from Azure Functions to Neon
+- [Building a serverless referral system](https://neon.tech/guides/azure-functions-referral-system) - Create a referral system with Neon and Azure Functions
+- [Building a robust JSON API with TypeScript](https://neon.tech/guides/azure-functions-hono-api) - Build APIs with TypeScript, Postgres, and Azure Functions
+- [Azure Static Web Apps with Neon](https://neon.tech/guides/azure-todo-static-web-app) - Building Azure Static Web Apps with Neon
+- [Azure Logic Apps with Neon](https://neon.tech/guides/azure-logic-apps) — Integrate Neon with Azure Logic Apps
 
-<a href="https://neon.tech/blog/how-to-create-your-personal-ai-powered-email-assistant-in-azure" title="Azure App Service" description="Create Your Personal AI Powered Email Assistant in Azure" icon="azure"></a>
+### AI & machine learning with Neon on Azure
 
-<a href="https://neon.tech/guides/azure-todo-static-web-app" title="Azure Static Web Apps" description="Building Azure Static Web Apps with Neon" icon="azure"></a>
+- [Multitenant RAG with Neon on Azure](https://neon.tech/blog/multitenant-private-ai-chat-with-neon-on-azure) - Build a tenant AI chat solution with Neon on Azure
+- [Azure AI Language with Neon](https://neon.tech/guides/azure-ai-language) - Analyze customer feedback using Azure AI Language and store results in Neon
+- [Building an AI chatbot with Neon](https://neon.tech/guides/azure-ai-chatbot) - Create AI-powered chatbots with Neon and Azure
+- [Azure AI Search with Neon](https://neon.tech/guides/azure-ai-search) - Implement search functionality using Azure AI Search and Neon
+- [AI-powered email assistant in Azure](https://neon.tech/blog/how-to-create-your-personal-ai-powered-email-assistant-in-azure) - Create a personal AI email assistant in Azure
+- [SQL query assistant with .NET and Azure OpenAI](https://neon.tech/blog/building-sql-query-assistant-with-dotnet-azure-functions-openai) - Build an intelligent SQL query assistant with Neon, .NET, and Azure OpenAI
+- [Generative feedback loops with Azure OpenAI](https://neon.tech/blog/generative-feedback-loops-with-neon-serverless-postgres-azure-functions-and-azure-openai) - Create generative feedback loops with Neon, Azure Functions, and Azure OpenAI
+- [Build your first AI agent for Postgres on Azure](https://neon.tech/guides/azure-ai-agent-service) — Build an AI agent for Postgres using Azure AI Agent Service
 
-<a href="https://neon.tech/guides/azure-ai-language" title="Azure AI Language" description="Learn how to analyze customer feedback using Azure AI Language and store results in Neon Postgres" icon="azure"></a>
+### Frameworks & languages
 
-</TechCards>
+- [.NET with Neon](https://neon.tech/docs/guides/dotnet-npgsql) - Connect a .NET (C#) application to Neon
+- [Entity Framework with Neon](https://neon.tech/docs/guides/dotnet-entity-framework) - Connect Entity Framework applications to Neon
+- [Entity Framework schema migrations](https://neon.tech/docs/guides/entity-migrations) - Schema migration with Neon and Entity Framework
+- [Azure DevOps Entity Framework migrations](https://neon.tech/guides/azure-devops-entity-migrations) - Manage Entity Framework migrations with Azure DevOps
+- [ASP.NET with Neon and Entity Framework](https://neon.tech/guides/dotnet-neon-entity-framework) - Build ASP.NET Core applications with Neon and Entity Framework
+- [RESTful API with ASP.NET Core and Swagger](https://neon.tech/guides/aspnet-core-api-neon) - Build APIs with ASP.NET Core, Swagger, and Neon
+- [Neon read replicas with Entity Framework](https://neon.tech/guides/read-replica-entity-framework) - Scale .NET applications with Entity Framework and Neon read replicas
 
-## Related resources
+### Security & access control
 
-<TechCards>
-
-<a href="/docs/guides/dotnet-npgsql" title=".NET" description="Connect a .NET (C#) application to Neon" icon="dotnet"></a>
-
-<a href="/docs/guides/dotnet-entity-framework" title="Connect from Entity Framework" description="Connect a Dotnet Entity Framework application to Neon" icon="entity"></a>
-
-<a href="/docs/guides/entity-migrations" title="Entity Framework Schema Migrations" description="Schema migration with Neon and Entity Framework" icon="entity"></a>
-
-<a href="/docs/import/migrate-from-azure-postgres" title="Replicate data from Azure PostgreSQL" description="Replicate data from Azure PostgreSQL to Neon" icon="azure"></a>
-
-<a href="https://neon.tech/guides/dotnet-neon-entity-framework" title="ASP.NET with Neon and Entity Framework" description="Building ASP.NET Core Applications with Neon and Entity Framework Core" icon="entity"></a>
-
-<a href="https://neon.tech/guides/aspnet-core-api-neon" title="ASP.NET Core, Swagger, and Neon" description="Building a RESTful API with ASP.NET Core, Swagger, and Neon" icon="entity"></a>
-
-<a href="https://neon.tech/guides/read-replica-entity-framework" title="Neon Read Replicas with Entity Framework" description="Scale your .NET application with Entity Framework and Neon Postgres Read Replicas" icon="entity"></a>
-
-</TechCards>
+- [Row-level security with Azure AD](https://neon.tech/docs/guides/neon-rls-azure-ad) - Implement row-level security with Azure Active Directory
