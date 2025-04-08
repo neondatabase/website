@@ -87,6 +87,12 @@ If you prefer a written guide, follow these steps:
     
     This command uses `npx` to run a [small helper (`mcp-remote`)](https://github.com/geelen/mcp-remote) that connects to Neon's hosted server endpoint (`https://mcp.neon.tech/sse`).
 
+    Alternatively, if your MCP client just asks you to enter an SSE URL, you can use the following:
+
+    ```
+    https://mcp.neon.tech/sse
+    ```
+
 3.  Save the configuration and **restart or refresh** your MCP client application.
 4.  The first time the client initializes Neon's MCP server, it should trigger an **OAuth flow**:
     *   Your browser will open a Neon page asking you to authorize the "Neon MCP Server" to access your Neon account.
