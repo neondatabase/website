@@ -2,7 +2,7 @@
 title: Neon App for Slack
 enableTableOfContents: true
 subtitle: Track your Neon projects and organizations from Slack
-updatedOn: '2025-03-19T12:43:23.197Z'
+updatedOn: '2025-04-08T22:55:27.452Z'
 ---
 
 <figure className="doc-cta not-prose rounded-[10px] my-5 flex items-end gap-x-16 px-7 py-6 md:flex-col md:items-start border border-gray-new-90 bg-[linear-gradient(to_right,#FAFAFA_0%,rgba(250,250,250,0)100%)] dark:border-gray-new-20 dark:bg-[linear-gradient(to_right,#18191B_28.86%,#131415_74.18%)]">
