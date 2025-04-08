@@ -1,5 +1,6 @@
 export default {
   aboutUs: '/about-us',
+  ai: '/ai',
   aiChat: '/ai-chat',
   blog: '/blog',
   branching: '/branching',
@@ -32,7 +33,7 @@ export default {
   // Docs
   docs: '/docs',
   docsHome: '/docs/introduction',
-  ai: '/docs/ai/ai-intro',
+  docsAi: '/docs/ai/ai-intro',
   api: '/docs/reference/api-reference',
   auth: '/docs/guides/neon-auth',
   autoscaling: '/docs/introduction/autoscaling',
@@ -89,4 +90,5 @@ export default {
   // Other
   apiReference: 'https://api-docs.neon.tech/reference/getting-started-with-neon-api',
   bugBounty: 'https://hackerone.com/neon_bbp',
+  bookMeeting: 'https://calendly.com/d/cm8j-8yw-fq8',
 };
