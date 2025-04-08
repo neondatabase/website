@@ -25,7 +25,7 @@ updatedOn: '2025-03-27T00:00:00.000Z'
 
 - **Parallel migration**: `pgcopydb` processes multiple migration phases concurrently:
 
-  - **Data transfer:** Streams data in parallel from multiple tables and splits large tables into chunks
+  - **Data transfer:** Streams data in parallel from multiple tables and splits large tables into chunks. This distributes the load and reduces migration time for large datasets.
   - **Index creation:** Builds indexes concurrently after data loading
   - **Constraint application:** Applies constraints in parallel while maintaining data integrity
     This parallel processing reduces migration time and minimizes downtime.
@@ -36,12 +36,6 @@ updatedOn: '2025-03-27T00:00:00.000Z'
   - **Table copying precedes indexes and constraints:** Copies table data first, then creates indexes and applies constraints
 
   This ordered approach maintains data integrity and avoids errors during migration.
-
-- **Large table splitting**: For tables that could become bottlenecks, `pgcopydb` splits them into smaller chunks for parallel import. This distributes the load and reduces migration time for large datasets.
-
-- **Resumable operations**: The `--resume` option lets you restart migrations from interruption points, handling network issues or failures without restarting from the beginning. Requires that your source database supports snapshots, which may not be available on some hosted database services.
-
-- **Built-in monitoring**: `pgcopydb` includes a sentinel table and associated commands (`pgcopydb stream sentinel`) for monitoring. This allows you to track migration progress and overall health.
 
 This guide walks you through using `pgcopydb` to migrate data to Neon.
 
@@ -55,8 +49,7 @@ Before you begin, ensure you have the following:
 
 - **Source postgres database**: You need access to the Postgres database you intend to migrate. This can be a local instance, a cloud-hosted database (AWS RDS, GCP Cloud SQL, Azure Database for Postgres, or any other Postgres provider), or even a different Neon project.
 - **Neon project**: You must have an active Neon project and a database ready to receive the migrated data. If you don't have a Neon project yet, see [Create a Neon project](/docs/manage/projects#create-a-project) to get started. Note that storage beyond your plan's included amount will incur additional charges.
-- **pgcopydb installation**: `pgcopydb` must be installed on a machine that has network connectivity to both your source Postgres database and your Neon database. This machine should also have sufficient resources (CPU, memory, disk space) to handle the migration workload. Install `pgcopydb` by following the instructions in the [pgcopydb documentation](https://pgcopydb.readthedocs.io/en/latest/install.html).
-- **Network connectivity**: Ensure that the machine running `pgcopydb` can connect to both your source Postgres server and your Neon Postgres endpoint. Check firewall rules and network configurations to allow traffic on the Postgres port.
+- **pgcopydb installation**: `pgcopydb` must be installed on a machine that has network connectivity to both your source Postgres database and your Neon database. Check firewall rules and network configurations to allow traffic on the Postgres port. This machine should also have sufficient resources (CPU, memory, disk space) to handle the migration workload. Install `pgcopydb` by following the instructions in the [pgcopydb documentation](https://pgcopydb.readthedocs.io/en/latest/install.html).
 
 <Steps>
 
@@ -79,9 +72,13 @@ Run the `pgcopydb clone` command with the `--no-owner` flag to skip ownership ch
 pgcopydb clone --no-owner
 ```
 
+<Admonition type="tip">
+When using `--no-owner` flag in `pgcopydb`, often pair it with `--no-acl`, especially if the source has custom ACLs or default privileges. This flag skips restoring permissions (`GRANT`/`REVOKE`, `ALTER DEFAULT PRIVILEGES`). This is crucial because the user connecting to the target database often lacks the high-level rights to reapply all source permissions. For example, even when migrating between Neon databases, the target user might get "permission denied" errors when trying to restore privileges involving administrative roles (like `cloud_admin`, `neon_superuser`), as they may lack permission to manage settings for those specific roles. This typically halts `pgcopydb` during the `pg_restore` phase. Using `--no-acl` avoids these specific permission errors and allows the migration to proceed smoothly. However, this means that any custom permissions set on the source database won't be replicated in the target database. You may need to manually set them up afterward.
+</Admonition>
+
 ## Monitor the migration progress
 
-Monitor progress in a separate terminal (you'll need to either set the environment variables again or use the `--source` flag):
+You can monitor the migration progress using the `pgcopydb list progress` command. This command provides real-time updates on the migration status, including the number of rows copied and the current phase. You can either set the `--source` flag to your source database connection string or make use of the `PGCOPYDB_SOURCE_PGURI` environment variable.
 
 ```bash
 pgcopydb list progress --source "your-source-connection-string" --summary
