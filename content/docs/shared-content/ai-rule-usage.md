@@ -1,6 +1,7 @@
 ---
 updatedOn: '2025-04-08T22:55:27.453Z'
 ---
+
 ## How to use
 
 You can use these rules in two ways:
