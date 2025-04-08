@@ -85,7 +85,7 @@ using option = expression
 The `option` can be:
 
 - `hint`: provide the hint message so that the root cause of the error is easier to discover.
-- `detail`:  give detailed information about the error.
+- `detail`: give detailed information about the error.
 - `errcode`: identify the error code, which can be either by condition name or an `SQLSTATE` code. Please refer to the [table of error codes and condition names](https://www.postgresql.org/docs/current/static/errcodes-appendix.html).
 
 The `expression` is a string\-valued expression.

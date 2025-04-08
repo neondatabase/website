@@ -17,7 +17,7 @@ The Model Context Protocol (MCP) is a standardized way for AI tools to interact 
 
 ## Integrate Neon in your IDE
 
-These tools leverage the Neon MCP server to provide natural language interfaces and 
+These tools leverage the Neon MCP server to provide natural language interfaces and
 AI-enhanced database management capabilities within your preferred development environment.
 
 <DetailIconCards>

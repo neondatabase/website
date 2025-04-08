@@ -59,16 +59,16 @@ To configure autoscaling defaults:
 
 The next time you create a compute, these settings will be applied to it.
 
-###  Autoscaling defaults for each Neon plan
+### Autoscaling defaults for each Neon plan
 
 The following table outlines the initial default autoscaling settings for newly created projects on each Neon plan.
 
-| **Neon plan**  | **Minimum compute size** | **Maximum compute size** |
-|----------------|--------------------------|--------------------------|
-| Free           | 0.25                     | 2                        |
-| Launch         | 1                        | 4                        |
-| Scale          | 1                        | 8                        |
-| Business       | 1                        | 8                        |
+| **Neon plan** | **Minimum compute size** | **Maximum compute size** |
+| ------------- | ------------------------ | ------------------------ |
+| Free          | 0.25                     | 2                        |
+| Launch        | 1                        | 4                        |
+| Scale         | 1                        | 8                        |
+| Business      | 1                        | 8                        |
 
 ## Monitor autoscaling
 

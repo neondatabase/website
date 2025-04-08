@@ -1,5 +1,5 @@
 ---
-title: "AI Rules: Neon with Drizzle"
+title: 'AI Rules: Neon with Drizzle'
 subtitle: Context rules for AI tools to help implement Drizzle ORM with Neon databases
 enableTableOfContents: true
 ---
@@ -19,12 +19,13 @@ enableTableOfContents: true
 
 ## Rules
 
-`````markdown shouldWrap
+````markdown shouldWrap
 ---
 description: Use this rules when integrating Neon (serverless Postgres) with Drizzle ORM
 globs: *.ts, *.tsx
 alwaysApply: false
 ---
+
 # Neon and Drizzle integration guidelines
 
 ## Overview
@@ -32,33 +33,40 @@ alwaysApply: false
 This guide covers the specific integration patterns and optimizations for using **Drizzle ORM** with **Neon** serverless Postgres databases. Follow these guidelines to ensure efficient database operations in serverless environments.
 
 ## Dependencies
+
 For Neon with Drizzle ORM integration, include these specific dependencies:
+
 ```bash
 npm install drizzle-orm @neondatabase/serverless dotenv
 npm install -D drizzle-kit
 ```
 
 ## Neon Connection Configuration
+
 - Always use the Neon connection string format:
+
 ```
 DATABASE_URL=postgres://username:password@ep-instance-id.region.aws.neon.tech/neondb
 ```
+
 - Store this in `.env` or `.env.local` file
 
 ## Neon Connection Setup
+
 When connecting to Neon specifically:
+
 - Use the `neon` client from `@neondatabase/serverless` package
 - Pass the connection string to create the SQL client
 - Use `drizzle` with the `neon-http` adapter specifically
 
 ```typescript
 // src/db.ts
-import { drizzle } from "drizzle-orm/neon-http";
-import { neon } from "@neondatabase/serverless";
-import { config } from "dotenv";
+import { drizzle } from 'drizzle-orm/neon-http';
+import { neon } from '@neondatabase/serverless';
+import { config } from 'dotenv';
 
 // Load environment variables
-config({ path: ".env" });
+config({ path: '.env' });
 
 if (!process.env.DATABASE_URL) {
   throw new Error('DATABASE_URL is not defined');
@@ -74,18 +82,23 @@ export const db = drizzle({ client: sql });
 ## Neon Database Considerations
 
 ### Default Settings
+
 - Neon projects come with a ready-to-use database named `neondb`
 - Default role is typically `neondb_owner`
 - Connection strings include the correct endpoint based on your region
 
 ### Serverless Optimization
+
 Neon is optimized for serverless environments:
+
 - Use the HTTP-based `neon-http` adapter instead of node-postgres
 - Take advantage of connection pooling for serverless functions
 - Consider Neon's auto-scaling capabilities when designing schemas
 
 ## Schema Considerations for Neon
+
 When defining schemas for Neon:
+
 - Use Postgres-specific types from `drizzle-orm/pg-core`
 - Leverage Postgres features that Neon supports:
   - JSON/JSONB columns
@@ -95,15 +108,7 @@ When defining schemas for Neon:
 
 ```typescript
 // src/schema.ts
-import { 
-  pgTable, 
-  serial, 
-  text, 
-  integer, 
-  timestamp, 
-  jsonb,
-  pgEnum 
-} from 'drizzle-orm/pg-core';
+import { pgTable, serial, text, integer, timestamp, jsonb, pgEnum } from 'drizzle-orm/pg-core';
 
 // Example of Postgres-specific enum with Neon
 export const userRoleEnum = pgEnum('user_role', ['admin', 'user', 'guest']);
@@ -113,7 +118,7 @@ export const usersTable = pgTable('users', {
   name: text('name').notNull(),
   email: text('email').notNull().unique(),
   role: userRoleEnum('role').default('user'),
-  metadata: jsonb('metadata'),  // Postgres JSONB supported by Neon
+  metadata: jsonb('metadata'), // Postgres JSONB supported by Neon
   // Other columns
 });
 
@@ -123,19 +128,20 @@ export type NewUser = typeof usersTable.$inferInsert;
 ```
 
 ## Drizzle Config for Neon
+
 Neon-specific configuration in `drizzle.config.ts`:
 
 ```typescript
 // drizzle.config.ts
 import { config } from 'dotenv';
-import { defineConfig } from "drizzle-kit";
+import { defineConfig } from 'drizzle-kit';
 
 config({ path: '.env' });
 
 export default defineConfig({
-  schema: "./src/schema.ts",
-  out: "./migrations",
-  dialect: "postgresql", // Neon uses Postgres dialect
+  schema: './src/schema.ts',
+  out: './migrations',
+  dialect: 'postgresql', // Neon uses Postgres dialect
   dbCredentials: {
     url: process.env.DATABASE_URL!,
   },
@@ -148,7 +154,9 @@ export default defineConfig({
 ## Neon-Specific Query Optimizations
 
 ### Efficient Queries for Serverless
+
 Optimize for Neon's serverless environment:
+
 - Keep connections short-lived
 - Use prepared statements for repeated queries
 - Batch operations when possible
@@ -165,7 +173,8 @@ export async function batchInsertUsers(users: NewUser[]) {
 }
 
 // For complex queries, use prepared statements
-export const getUsersByRolePrepared = db.select()
+export const getUsersByRolePrepared = db
+  .select()
   .from(usersTable)
   .where(sql`${usersTable.role} = $1`)
   .prepare('get_users_by_role');
@@ -174,6 +183,7 @@ export const getUsersByRolePrepared = db.select()
 ```
 
 ### Transaction Handling with Neon
+
 Neon supports transactions through Drizzle:
 
 ```typescript
@@ -183,28 +193,29 @@ import { usersTable, postsTable } from '../schema';
 export async function createUserWithPosts(user: NewUser, posts: NewPost[]) {
   return await db.transaction(async (tx) => {
     const [newUser] = await tx.insert(usersTable).values(user).returning();
-    
+
     if (posts.length > 0) {
       await tx.insert(postsTable).values(
-        posts.map(post => ({
+        posts.map((post) => ({
           ...post,
-          userId: newUser.id
+          userId: newUser.id,
         }))
       );
     }
-    
+
     return newUser;
   });
 }
 ```
 
 ## Working with Neon Branches
+
 Neon supports database branching for development and testing:
 
 ```typescript
 // Using different Neon branches with environment variables
-import { drizzle } from "drizzle-orm/neon-http";
-import { neon } from "@neondatabase/serverless";
+import { drizzle } from 'drizzle-orm/neon-http';
+import { neon } from '@neondatabase/serverless';
 
 // For multi-branch setup
 const getBranchUrl = () => {
@@ -222,6 +233,7 @@ export const db = drizzle({ client: sql });
 ```
 
 ## Neon-Specific Error Handling
+
 Handle Neon-specific connection issues:
 
 ```typescript
@@ -237,7 +249,7 @@ export async function safeNeonOperation<T>(operation: () => Promise<T>): Promise
       console.error('Neon connection pool timeout');
       // Handle appropriately
     }
-    
+
     // Re-throw for other handling
     throw error;
   }
@@ -245,23 +257,24 @@ export async function safeNeonOperation<T>(operation: () => Promise<T>): Promise
 
 // Usage
 export async function getUserSafely(id: number) {
-  return safeNeonOperation(() => 
-    db.select().from(usersTable).where(eq(usersTable.id, id))
-  );
+  return safeNeonOperation(() => db.select().from(usersTable).where(eq(usersTable.id, id)));
 }
 ```
 
 ## Best Practices for Neon with Drizzle
 
 1. **Connection Management**
+
    - Keep connection times short for serverless functions
    - Use connection pooling for high traffic applications
 
 2. **Neon Features**
+
    - Utilize Neon branching for development and testing
    - Consider Neon's auto-scaling for database design
 
 3. **Query Optimization**
+
    - Batch operations when possible
    - Use prepared statements for repeated queries
    - Optimize complex joins to minimize data transfer
@@ -270,4 +283,4 @@ export async function getUserSafely(id: number) {
    - Leverage Postgres-specific features supported by Neon
    - Use appropriate indexes for your query patterns
    - Consider Neon's performance characteristics for large tables
-   `````
+````
