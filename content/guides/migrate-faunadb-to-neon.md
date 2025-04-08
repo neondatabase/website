@@ -387,7 +387,7 @@ Keep the following considerations in mind when importing data with relationships
 - **Managing IDs for Relationships (Regardless of ID retention):** Even if you _do_ successfully retain FaunaDB IDs in Postgres (Scenario 2), you still need to be mindful of how relationships are established. If you are using foreign keys in Postgres (the recommended approach for relational data), you must ensure that the IDs used in your referencing tables (e.g., `product.category_id`) **correctly match the IDs in the referenced table (e.g., `categories.id`)**. This will be be valid if you are mapping the JSON data to Postgres tables without any transformation.
 
 - **Strategies for ID management (If Not Retaining FaunaDB IDs):** If you are using Postgres-generated IDs, you will need a strategy to: - **Option 1: Pre-map IDs:** Before importing `Product` data, you might need to process your JSON data to replace the FaunaDB `Category` document IDs with the **newly generated Postgres IDs** of the corresponding categories. This involves creating a mapping between the FaunaDB IDs and the Postgres-generated IDs for the `Category` table and replacing the `category.id` references in your `Product.json` data dump with the corresponding Postgres IDs. - **Option 2: Lookup-based Insertion:** During the import of `Product` data, instead of directly inserting IDs, you might perform a **lookup** in the already imported `Category` table based on a unique identifier (like category name) from your JSON data to retrieve the correct Postgres `category_id` to use as a foreign key. You can use the [example below](#inserting-a-new-document) as a reference.
-  </Admonition>
+</Admonition>
 
 ### Step 5: Query conversion - FQL to SQL
 

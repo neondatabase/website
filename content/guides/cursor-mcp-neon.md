@@ -66,7 +66,7 @@ In the "Add MCP Server" modal:
 
        ![Add Neon MCP Server in Cursor](/docs/guides/cursor-add-mcp-server.png)
 
-  </TabItem>
+</TabItem>
 
 <TabItem>
 Cursor may prompt you to create an `mcp.json` file if one doesn't already exist. **Create it if prompted.**
