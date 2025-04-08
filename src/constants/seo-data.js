@@ -121,9 +121,11 @@ export default {
     pathname: LINKS.pricing,
   },
   report: {
-    title: 'Report — Neon',
-    description: '',
+    title: 'Impact of Postgres restores survey',
+    description:
+      'We asked 50 developers managing production Postgres about recovery times and their business impact.',
     pathname: LINKS.report,
+    imagePath: '/images/social-previews/report.jpg',
   },
   thankYou: {
     title: 'Thank you for subscribing — Neon',

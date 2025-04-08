@@ -1,6 +1,6 @@
-import Hero from 'components/pages/report/hero';
 import Compliance from 'components/pages/security/compliance';
 import Features from 'components/pages/security/features';
+import Hero from 'components/pages/security/hero';
 import Privacy from 'components/pages/security/privacy';
 import SubProcessors from 'components/pages/security/sub-processors';
 import TrustCenter from 'components/pages/security/trust-center';
