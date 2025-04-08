@@ -29,7 +29,7 @@ const Hero = () => (
         />
       </div>
       <h1 className="max-w-[646px] font-title text-[60px] font-medium leading-none tracking-extra-tight xl:text-[56px] lg:max-w-xl lg:text-5xl md:max-w-full md:text-4xl">
-        Neon is Postgres for&nbsp;AI.{' '}
+        Postgres for&nbsp;AI. <br className="md:hidden" />
         <span className="text-gray-new-60">
           Perfect for Agents, AI&nbsp;coding, or just&nbsp;vibing.
         </span>
