@@ -10,7 +10,7 @@ The **Neon MCP Server** allows you to connect various [**Model Context Protocol 
 
 You can connect to Neon MCP Server in two ways:
 
-1.  **Remote MCP Server (Preview):** Connect to Neon's managed MCP server using OAuth. **Easiest setup, recommended.**
+1.  **Remote MCP Server (Preview):** Connect to Neon's managed MCP server using OAuth.
 2.  **Local Server:** Install and run the server locally, using a Neon API key.
 
 This guide covers the setup for the following MCP Clients:
@@ -24,16 +24,11 @@ By connecting these tools to the Neon MCP Server, you can manage your Neon proje
 
 ## Prerequisites
 
-### For Remote Hosted Server:
-
 - An MCP Client application.
 - A Neon account (for OAuth authorization).
-
-### For Local Server:
-
-- An MCP Client application.
-- A Neon Account and **Neon API Key**. Create an API key in your [Neon Console](https://console.neon.tech/app/settings/api-keys). See [Neon API Keys documentation](/docs/manage/api-keys#creating-api-keys).
 - **Node.js (>= v18.0.0) and npm:** Download from [nodejs.org](https://nodejs.org).
+
+For Local MCP Server setup, you also need a Neon API key. See [Neon API Keys documentation](/docs/manage/api-keys#creating-api-keys).
 
 <Admonition type="note">
 Ensure you are using the latest version of your chosen MCP client as MCP integration may not be available in older versions. If you are using an older version, update your MCP client to the latest version.
@@ -46,7 +41,7 @@ Ensure you are using the latest version of your chosen MCP client as MCP integra
 <TabItem>
 
 1.  Open Claude desktop and navigate to **Settings**.
-2.  Under the **Developer** tab, click **Edit Config** to open the configuration file (`mcp_config.json`).
+2.  Under the **Developer** tab, click **Edit Config** (On Windows, its under File -> Settings -> Developer -> Edit Config) to open the configuration file (`claude_desktop_config.json`).
 3.  Add the "Neon" server entry within the `mcpServers` object:
     ```json
     {
@@ -175,7 +170,7 @@ For more, see [Get started with Windsurf and Neon Postgres MCP Server](/guides/w
 <TabItem>
 
 1. Open Cline in VS Code (Sidebar -> Cline icon).
-2.  Click **Configure MCP Servers** to open the configuration file.
+2.  Click **MCP Servers** Icon -> **Installed** -> **Configure MCP Servers** to open the configuration file.
 3.  Add the "Neon" server entry within the `mcpServers` object:
     ```json
     {
