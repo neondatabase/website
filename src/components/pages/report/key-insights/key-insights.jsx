@@ -47,7 +47,7 @@ const KeyInsights = () => (
       className="relative z-10 flex !max-w-xl flex-col items-start lg:!max-w-[642px]"
       size="xxs"
     >
-      <h2 className="font-title text-5xl font-medium leading-tight tracking-tight xl:text-[44px] lg:text-5xl sm:text-[32px]">
+      <h2 className="font-title text-5xl font-medium leading-tight tracking-tight xl:text-[44px] lg:text-4xl sm:text-[32px]">
         Key insights
       </h2>
       <ul className="mt-12 flex flex-col gap-y-[42px] xl:mt-10 xl:gap-y-[38px] sm:mt-8 sm:gap-y-8">

@@ -147,7 +147,7 @@ const RecoveryStories = () => {
   return (
     <section className="recovery-stories safe-paddings mt-[155px] xl:mt-[140px] sm:mt-[126px]">
       <Container className="flex !max-w-xl flex-col items-start lg:!max-w-[642px]" size="xxs">
-        <h2 className="relative z-10 font-title text-5xl font-medium leading-tight tracking-extra-tight xl:text-[44px] lg:text-5xl sm:text-[32px]">
+        <h2 className="relative z-10 font-title text-5xl font-medium leading-tight tracking-extra-tight xl:text-[44px] lg:text-4xl sm:text-[32px]">
           Recovery horror stories
         </h2>
         <m.ul className="recovery-stories-list mt-11 flex flex-col gap-y-9 xl:mt-10 xl:gap-y-7 lg:mt-[38px] sm:mt-7">
@@ -187,7 +187,7 @@ const RecoveryStories = () => {
         </m.ul>
         {DATA.length > 5 && (
           <button
-            className="mt-5 flex items-center gap-x-2 text-[15px] font-medium text-white transition-colors hover:text-green-45 lg:mt-3"
+            className="mt-5 flex items-center gap-x-2 text-[15px] font-medium text-white transition-colors hover:text-green-45 lg:mt-3 xs:mx-auto"
             type="button"
             aria-expanded={isExpanded}
             aria-controls="recovery-stories-list"
@@ -195,7 +195,13 @@ const RecoveryStories = () => {
           >
             {isExpanded ? 'Show less' : 'Show more'}
             <span className="sr-only">recovery stories</span>
-            <ArrowDownIcon width={12} height={7} alt="" aria-hidden />
+            <ArrowDownIcon
+              className={isExpanded && 'mt-0.5 rotate-180'}
+              width={12}
+              height={7}
+              alt=""
+              aria-hidden
+            />
           </button>
         )}
         <Image
