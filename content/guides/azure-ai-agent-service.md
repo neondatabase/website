@@ -1,7 +1,7 @@
 ---
 title:  "Build your first AI Agent for Postgres on Azure"
 subtitle: 'Learn how to build an AI Agent for Postgres using Azure AI Agent Service and Neon'
-author: Boburmirzo
+author: boburmirzo
 enableTableOfContents: true
 createdAt: '2025-04-07T00:00:00.000Z'
 updatedOn: '2025-04-07T00:00:00.000Z'
