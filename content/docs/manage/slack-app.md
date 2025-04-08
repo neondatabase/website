@@ -54,18 +54,18 @@ Once authenticated, you're ready to use all available commands.
 
 ## Available commands
 
-| **Command**             | **Description**                                   |
-| ----------------------- | ------------------------------------------------- |
-| `/neon auth`            | Connect Slack to your Neon account                |
-| `/neon projects`        | List your Neon projects                          |
-| `/neon usage`          | Show overall resource usage for your account      |
-| `/neon help`           | List all available commands                       |
-| `/neon status`         | Check the current status of Neon's cloud service  |
-| `/neon feedback`       | Share your thoughts and suggestions about the Neon App for Slack |
-| `/neon invite user`    | Invite users to your organization                 |
-| `/neon subscribe`      | Subscribe to your Neon account updates            |
-| `/neon unsubscribe`    | Unsubscribe from your Neon account updates       |
-| `/neon disconnect`     | Disconnect your Neon account and subscribed channels |
+| **Command**         | **Description**                                                  |
+| ------------------- | ---------------------------------------------------------------- |
+| `/neon auth`        | Connect Slack to your Neon account                               |
+| `/neon projects`    | List your Neon projects                                          |
+| `/neon usage`       | Show overall resource usage for your account                     |
+| `/neon help`        | List all available commands                                      |
+| `/neon status`      | Check the current status of Neon's cloud service                 |
+| `/neon feedback`    | Share your thoughts and suggestions about the Neon App for Slack |
+| `/neon invite user` | Invite users to your organization                                |
+| `/neon subscribe`   | Subscribe to your Neon account updates                           |
+| `/neon unsubscribe` | Unsubscribe from your Neon account updates                       |
+| `/neon disconnect`  | Disconnect your Neon account and subscribed channels             |
 
 ## Example workflows
 

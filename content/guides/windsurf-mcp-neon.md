@@ -56,57 +56,60 @@ Before you begin, ensure you have the following:
 <TabItem>
 Use the following JSON structure as a template, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key that you obtained from the [Prerequisites](#prerequisites) section.
 
-   ```json shouldWrap
-   {
-     "mcpServers": {
-       "neon": {
-         "command": "npx",
-         "args": ["-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
-       }
-     }
-   }
-   ```
+```json shouldWrap
+{
+  "mcpServers": {
+    "neon": {
+      "command": "npx",
+      "args": ["-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+    }
+  }
+}
+```
+
 </TabItem>
 
 <TabItem>
 Use the following JSON structure as a template, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key that you obtained from the [Prerequisites](#prerequisites) section.
 
-   ```json shouldWrap
-   {
-     "mcpServers": {
-       "neon": {
-         "command": "cmd",
-         "args": ["/c", "npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
-       }
-     }
-   }
-   ```
+```json shouldWrap
+{
+  "mcpServers": {
+    "neon": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+    }
+  }
+}
+```
+
 </TabItem>
 
 <TabItem>
 Use the following JSON structure as a template, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key that you obtained from the [Prerequisites](#prerequisites) section.
 
-   ```json shouldWrap
-   {
-     "mcpServers": {
-       "neon": {
-         "command": "wsl",
-         "args": ["npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
-       }
-     }
-   }
-   ```
+```json shouldWrap
+{
+  "mcpServers": {
+    "neon": {
+      "command": "wsl",
+      "args": ["npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+    }
+  }
+}
+```
+
 </TabItem>
 
 </Tabs>
 
-   - **`neon`**: This is a name you choose for your MCP server connection.
-   - **`command`**: This is the command Windsurf will execute to start the Neon MCP server.
-     - For **MacOS/Linux**, it uses `npx` directly.
-     - For **Windows**, it uses `cmd /c` to execute the `npx` command in the command prompt.
-     - For **Windows (WSL)**, it uses `wsl /c` to execute the `npx` command within the WSL environment.
-     - The `npx` command runs the `@neondatabase/mcp-server-neon` package and passes your Neon API key as an argument.
-   - Replace `<YOUR_NEON_API_KEY>` with your actual Neon API key that you obtained from the [Prerequisites](#prerequisites) section.
+- **`neon`**: This is a name you choose for your MCP server connection.
+- **`command`**: This is the command Windsurf will execute to start the Neon MCP server.
+  - For **MacOS/Linux**, it uses `npx` directly.
+  - For **Windows**, it uses `cmd /c` to execute the `npx` command in the command prompt.
+  - For **Windows (WSL)**, it uses `wsl /c` to execute the `npx` command within the WSL environment.
+  - The `npx` command runs the `@neondatabase/mcp-server-neon` package and passes your Neon API key as an argument.
+- Replace `<YOUR_NEON_API_KEY>` with your actual Neon API key that you obtained from the [Prerequisites](#prerequisites) section.
 
 7. **Save** the `mcp_config.json` file.
 8. Click **"Refresh"** (🔄) in the MCP toolbar in Windsurf Cascade.

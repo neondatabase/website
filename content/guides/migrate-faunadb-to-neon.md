@@ -1,5 +1,5 @@
 ---
-title:  Migrating from FaunaDB to Neon Postgres
+title: Migrating from FaunaDB to Neon Postgres
 subtitle: 'Learn how to migrate your data and applications from FaunaDB to Neon Postgres'
 author: dhanush-reddy
 enableTableOfContents: true
@@ -21,15 +21,14 @@ If you have questions or require help with migrating large production datasets f
 
 Before diving into the migration process, it's important to understand the fundamental differences between FaunaDB and Neon (Postgres). While both are databases, they operate with distinct paradigms:
 
-| Feature          | FaunaDB                                    | Neon (Postgres)                               |
-|-------------------|---------------------------------------------|-----------------------------------------------|
-| **Database type** | Multi-model (document-relational)          | Relational (SQL)        |
-| **Data model** | JSON documents in collections, flexible schema | Tables with rows and columns, rigid schema  |
-| **Query language**| FQL (Fauna Query Language), functional     | SQL (Structured Query Language), declarative  |
-| **Schema** | Implicit, schemaless/schema-optional, evolving | Explicit, schema-first, requires migrations    |
-| **Transactions** | ACID, stateless, HTTPS requests | ACID, stateful/Stateless, persistent TCP/HTTP/Websocket connections      |
-| **Server model** | Serverless (managed), cloud-native          | Serverless (managed), cloud-native            |
-
+| Feature            | FaunaDB                                        | Neon (Postgres)                                                     |
+| ------------------ | ---------------------------------------------- | ------------------------------------------------------------------- |
+| **Database type**  | Multi-model (document-relational)              | Relational (SQL)                                                    |
+| **Data model**     | JSON documents in collections, flexible schema | Tables with rows and columns, rigid schema                          |
+| **Query language** | FQL (Fauna Query Language), functional         | SQL (Structured Query Language), declarative                        |
+| **Schema**         | Implicit, schemaless/schema-optional, evolving | Explicit, schema-first, requires migrations                         |
+| **Transactions**   | ACID, stateless, HTTPS requests                | ACID, stateful/Stateless, persistent TCP/HTTP/Websocket connections |
+| **Server model**   | Serverless (managed), cloud-native             | Serverless (managed), cloud-native                                  |
 
 ## Migration steps
 
@@ -51,8 +50,8 @@ fauna export create s3 \
 For smaller datasets, you can export data directly to your local filesystem using FQL. The following script demonstrates exporting data from FaunaDB collections as JSON files. For example, here's a Node.js script that exports data from specific collections (e.g., `Product`, `Category`) to JSON files (e.g., `Product.json`, `Category.json`):
 
 ```javascript
-import { Client, fql, FaunaError } from "fauna";
-import fs from "fs";
+import { Client, fql, FaunaError } from 'fauna';
+import fs from 'fs';
 
 // Route queries to a specific database
 // using the authentication secret in
@@ -62,7 +61,7 @@ const client = new Client();
 // Specify the collections to export.
 // You can retrieve a list of user-defined collections
 // using a `Collection.all()` query.
-const collectionsToExport = ["Product", "Category"];
+const collectionsToExport = ['Product', 'Category'];
 
 // Loop through the collections.
 for (const collectionName of collectionsToExport) {
@@ -87,19 +86,14 @@ for (const collectionName of collectionsToExport) {
     const jsonData = JSON.stringify(documents, null, 2);
 
     // Write the JSON string to a file named `<collectionName>.json`.
-    fs.writeFileSync(`${collectionName}.json`, jsonData, "utf-8");
+    fs.writeFileSync(`${collectionName}.json`, jsonData, 'utf-8');
 
-    console.log(
-      `${collectionName} collection data written to ${collectionName}.json`
-    );
+    console.log(`${collectionName} collection data written to ${collectionName}.json`);
   } catch (error) {
     if (error instanceof FaunaError) {
       console.error(`Error exporting ${collectionName}:`, error);
     } else {
-      console.error(
-        `An unexpected error occurred for ${collectionName}:`,
-        error
-      );
+      console.error(`An unexpected error occurred for ${collectionName}:`, error);
     }
   }
 }
@@ -201,11 +195,11 @@ If you need a refresher on Postgres, you can refer to Neon's [PostgreSQL Tutoria
 
 **Key translation considerations:**
 
-*   **Collections to tables:** Each FaunaDB collection in your FSL schema could become a Neon Postgres table.
-*   **Field definitions to columns:**  FaunaDB field definitions will guide your Neon Postgres column definitions. Pay attention to data types like `String`, `Number`, `Time`, `Ref`, and optionality (`?` for nullable).
-*   **Unique constraints:** Translate FaunaDB `unique` constraints in FSL to `UNIQUE` constraints in your Postgres `CREATE TABLE` statements.
-*   **Indexes:** Translate FaunaDB `index` definitions in FSL to `CREATE INDEX` statements in Postgres.  Consider the `terms` and `values` of FaunaDB indexes to create effective Postgres indexes.
-*   **Computed fields/functions:**  FaunaDB's more advanced schema features like `compute`, functions will require careful consideration for translation.  Computed fields might translate to Postgres views or computed columns. UDFs will likely need to be rewritten as stored procedures or application logic.
+- **Collections to tables:** Each FaunaDB collection in your FSL schema could become a Neon Postgres table.
+- **Field definitions to columns:** FaunaDB field definitions will guide your Neon Postgres column definitions. Pay attention to data types like `String`, `Number`, `Time`, `Ref`, and optionality (`?` for nullable).
+- **Unique constraints:** Translate FaunaDB `unique` constraints in FSL to `UNIQUE` constraints in your Postgres `CREATE TABLE` statements.
+- **Indexes:** Translate FaunaDB `index` definitions in FSL to `CREATE INDEX` statements in Postgres. Consider the `terms` and `values` of FaunaDB indexes to create effective Postgres indexes.
+- **Computed fields/functions:** FaunaDB's more advanced schema features like `compute`, functions will require careful consideration for translation. Computed fields might translate to Postgres views or computed columns. UDFs will likely need to be rewritten as stored procedures or application logic.
 
 #### Example FSL to Postgres DDL translation
 
@@ -299,7 +293,7 @@ CREATE TABLE products (
 );
 
 -- Indexes (create indexes after data migration if possible for speeding up data import)
-CREATE INDEX idx_products_category ON products(category_id); 
+CREATE INDEX idx_products_category ON products(category_id);
 CREATE INDEX idx_products_price_asc ON products(price) INCLUDE (name, description, stock);
 ```
 
@@ -326,45 +320,46 @@ import fs from 'fs';
 const { Client } = pg;
 
 async function importProducts() {
-    const neonConnectionString = process.env.NEON_CONNECTION_STRING;
-    const client = new Client({ connectionString: neonConnectionString });
+  const neonConnectionString = process.env.NEON_CONNECTION_STRING;
+  const client = new Client({ connectionString: neonConnectionString });
 
-    try {
-        await client.connect();
-        const rawData = fs.readFileSync('Product.json');
-        const productData = JSON.parse(rawData);
+  try {
+    await client.connect();
+    const rawData = fs.readFileSync('Product.json');
+    const productData = JSON.parse(rawData);
 
-        // Start transaction
-        await client.query('BEGIN');
+    // Start transaction
+    await client.query('BEGIN');
 
-        // Build a bulk insert query for a batch of records
-        const insertValues = [];
-        const placeholders = [];
+    // Build a bulk insert query for a batch of records
+    const insertValues = [];
+    const placeholders = [];
 
-        productData[0].data.forEach((product, index) => {
-            const { name, description, price, stock, category } = product;
-            const categoryId = Number(category.id);
+    productData[0].data.forEach((product, index) => {
+      const { name, description, price, stock, category } = product;
+      const categoryId = Number(category.id);
 
-            const offset = index * 5;
-            placeholders.push(`($${offset + 1}, $${offset + 2}, $${offset + 3}, $${offset + 4}, $${offset + 5})`);
-            insertValues.push(name, description, price, stock, categoryId);
-        });
+      const offset = index * 5;
+      placeholders.push(
+        `($${offset + 1}, $${offset + 2}, $${offset + 3}, $${offset + 4}, $${offset + 5})`
+      );
+      insertValues.push(name, description, price, stock, categoryId);
+    });
 
-        const insertQuery = `
+    const insertQuery = `
           INSERT INTO products (name, description, price, stock, category_id)
           VALUES ${placeholders.join(', ')}
         `;
 
-        await client.query(insertQuery, insertValues);
-        await client.query('COMMIT');
-        console.log('Products imported successfully!');
-
-    } catch (error) {
-        console.error('Error during product import:', error);
-        await client.query('ROLLBACK');
-    } finally {
-        await client.end();
-    }
+    await client.query(insertQuery, insertValues);
+    await client.query('COMMIT');
+    console.log('Products imported successfully!');
+  } catch (error) {
+    console.error('Error during product import:', error);
+    await client.query('ROLLBACK');
+  } finally {
+    await client.end();
+  }
 }
 
 importProducts();
@@ -375,27 +370,24 @@ You can adapt this script to import data from other collections by adjusting the
 <Admonition type="tip" title="Importing multiple collections with references">
 When importing data that spans multiple collections with relationships (for instance, `Product` collection documents referencing `Category` collection documents), it is **essential to import data in the correct order** to maintain data integrity.
 
-Specifically, you must **import the data for the *referenced* collection (e.g., `Category`) *before* importing the data for the *referencing* collection (e.g., `Product`)**.
+Specifically, you must **import the data for the _referenced_ collection (e.g., `Category`) _before_ importing the data for the _referencing_ collection (e.g., `Product`)**.
 
 Keep the following considerations in mind when importing data with relationships:
 
-- **Establish referenced data first:**  Postgres, being a relational database, relies on foreign key constraints to enforce relationships between tables. When you import data into the `Product` table that is intended to reference entries in the `Category` table, those `Category` entries must already exist in Postgres.
+- **Establish referenced data first:** Postgres, being a relational database, relies on foreign key constraints to enforce relationships between tables. When you import data into the `Product` table that is intended to reference entries in the `Category` table, those `Category` entries must already exist in Postgres.
 
-- **ID handling depends on your strategy:**  While FaunaDB uses its own distributed document ID system, Postgres ID generation is more flexible. **Whether you need to transform IDs depends on your chosen ID strategy in Postgres:**
+- **ID handling depends on your strategy:** While FaunaDB uses its own distributed document ID system, Postgres ID generation is more flexible. **Whether you need to transform IDs depends on your chosen ID strategy in Postgres:**
 
-    - **Scenario 1: Using Postgres-Generated IDs:** If you are using Postgres's default ID generation mechanisms (like `SERIAL`, `UUID`, or `IDENTITY` columns), then **Postgres will automatically generate *new* IDs** for the rows in your tables. In this scenario, you *will* need to manage ID transformation for relationships.
+  - **Scenario 1: Using Postgres-Generated IDs:** If you are using Postgres's default ID generation mechanisms (like `SERIAL`, `UUID`, or `IDENTITY` columns), then **Postgres will automatically generate _new_ IDs** for the rows in your tables. In this scenario, you _will_ need to manage ID transformation for relationships.
 
-    - **Scenario 2: Retaining FaunaDB IDs:**  If you are explicitly setting IDs during import to retain FaunaDB IDs in Postgres, you must ensure that the IDs are correctly mapped and managed. You may choose this approach if you:
-        -  Want to retain FaunaDB IDs for compatibility and speed up the migration process.
-        -  Have a strategy to manage ID collisions and ensure uniqueness at the application level.
+  - **Scenario 2: Retaining FaunaDB IDs:** If you are explicitly setting IDs during import to retain FaunaDB IDs in Postgres, you must ensure that the IDs are correctly mapped and managed. You may choose this approach if you:
+    - Want to retain FaunaDB IDs for compatibility and speed up the migration process.
+    - Have a strategy to manage ID collisions and ensure uniqueness at the application level.
 
-- **Managing IDs for Relationships (Regardless of ID retention):**  Even if you *do* successfully retain FaunaDB IDs in Postgres (Scenario 2),  you still need to be mindful of how relationships are established.  If you are using foreign keys in Postgres (the recommended approach for relational data), you must ensure that the IDs used in your referencing tables (e.g., `product.category_id`) **correctly match the IDs in the referenced table (e.g., `categories.id`)**. This will be be valid if you are mapping the JSON data to Postgres tables without any transformation.
+- **Managing IDs for Relationships (Regardless of ID retention):** Even if you _do_ successfully retain FaunaDB IDs in Postgres (Scenario 2), you still need to be mindful of how relationships are established. If you are using foreign keys in Postgres (the recommended approach for relational data), you must ensure that the IDs used in your referencing tables (e.g., `product.category_id`) **correctly match the IDs in the referenced table (e.g., `categories.id`)**. This will be be valid if you are mapping the JSON data to Postgres tables without any transformation.
 
-- **Strategies for ID management (If Not Retaining FaunaDB IDs):** If you are using Postgres-generated IDs, you will need a strategy to:
-    - **Option 1: Pre-map IDs:**  Before importing `Product` data, you might need to process your JSON data to replace the FaunaDB `Category` document IDs with the **newly generated Postgres IDs** of the corresponding categories. This involves creating a mapping between the FaunaDB IDs and the Postgres-generated IDs for the `Category` table and replacing the `category.id` references in your `Product.json` data dump with the corresponding Postgres IDs.
-    - **Option 2:  Lookup-based Insertion:** During the import of `Product` data, instead of directly inserting IDs, you might perform a **lookup** in the already imported `Category` table based on a unique identifier (like category name) from your JSON data to retrieve the correct Postgres `category_id` to use as a foreign key. You can use the [example below](#inserting-a-new-document) as a reference.
-</Admonition>
-
+- **Strategies for ID management (If Not Retaining FaunaDB IDs):** If you are using Postgres-generated IDs, you will need a strategy to: - **Option 1: Pre-map IDs:** Before importing `Product` data, you might need to process your JSON data to replace the FaunaDB `Category` document IDs with the **newly generated Postgres IDs** of the corresponding categories. This involves creating a mapping between the FaunaDB IDs and the Postgres-generated IDs for the `Category` table and replacing the `category.id` references in your `Product.json` data dump with the corresponding Postgres IDs. - **Option 2: Lookup-based Insertion:** During the import of `Product` data, instead of directly inserting IDs, you might perform a **lookup** in the already imported `Category` table based on a unique identifier (like category name) from your JSON data to retrieve the correct Postgres `category_id` to use as a foreign key. You can use the [example below](#inserting-a-new-document) as a reference.
+  </Admonition>
 
 ### Step 5: Query conversion - FQL to SQL
 
@@ -495,7 +487,8 @@ The equivalent SQL query would be:
 ```sql
 SELECT SUM(stock) FROM products;
 ```
-#### Filtering data -  `AND` and `OR` conditions
+
+#### Filtering data - `AND` and `OR` conditions
 
 For example, to filter products that are both priced above $10 AND have less than 50 units in stock in FQL:
 
@@ -586,7 +579,6 @@ RETURNING *;
 1.  **Review application queries:** Identify the key queries in your application that interact with FaunaDB.
 2.  **Translate FQL to SQL (focus on key queries):** Translate these key FQL queries into equivalent SQL queries, focusing on the patterns shown in the examples above.
 3.  **Test SQL queries:** Test your translated SQL queries against your Neon Postgres database to ensure they function correctly, return the expected data, and are performant. You might need to use [`EXPLAIN ANALYZE`](/postgresql/postgresql-tutorial/postgresql-explain) in Postgres to analyze query performance and optimize indexes if needed.
-
 
 <Admonition type="note" title="Recommendation for complex queries">
 Given the potential volume of unstructured data insertion and retrieval queries in your application, which can be challenging to implement within a short timeframe, we recommend prioritizing the queries that are most critical to your application's core functionality and performance. For handling deeply nested unstructured data, consider using the [JSONB datatype in Postgres](/postgresql/postgresql-tutorial/postgresql-json)

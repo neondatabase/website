@@ -123,7 +123,7 @@ Find the resources you need to get started with Neon on Azure, from deployment o
 
 ### Migrate data to Neon on Azure
 
-- [Migrate data from Azure PostgreSQL](https://neon.tech/docs/import/migrate-from-azure-postgres) - Replicate data from Azure PostgreSQL to 
+- [Migrate data from Azure PostgreSQL](https://neon.tech/docs/import/migrate-from-azure-postgres) - Replicate data from Azure PostgreSQL to
 
 ### Connect to Neon from Azure services
 
@@ -161,5 +161,3 @@ Find the resources you need to get started with Neon on Azure, from deployment o
 ### Security & access control
 
 - [Row-level security with Azure AD](https://neon.tech/docs/guides/neon-rls-azure-ad) - Implement row-level security with Azure Active Directory
-
-

@@ -296,7 +296,7 @@ ALTER TABLE child_table
 DROP CONSTRAINT constraint_fkey;
 ```
 
-Second, add a new foreign key constraint with  `ON DELETE CASCADE` action:
+Second, add a new foreign key constraint with `ON DELETE CASCADE` action:
 
 ```sql
 ALTER TABLE child_table

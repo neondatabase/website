@@ -12,10 +12,10 @@ This allows different sessions to send messages to each other using Postgres, wi
 
 ## Steps
 
-* Overview
-* Set Up a Listener in Node.js
-* Send a Message using `NOTIFY`
-* Limitations of `LISTEN`/`NOTIFY`
+- Overview
+- Set Up a Listener in Node.js
+- Send a Message using `NOTIFY`
+- Limitations of `LISTEN`/`NOTIFY`
 
 ### Overview
 
