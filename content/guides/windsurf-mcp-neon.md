@@ -23,7 +23,11 @@ Let's break down the key components in this setup:
 
 ## Setting up Neon MCP Server in Windsurf
 
-The following steps show how to set up Neon MCP Server in Windsurf.
+You have two options for connecting Windsurf to the Neon MCP Server:
+
+1. **Remote MCP Server (Preview):** Connect to Neon's managed MCP server using OAuth for authentication. This method is more convenient as it eliminates the need to manage API keys in Windsurf. Additionally, you will automatically receive the latest features and improvements as soon as they are released.
+
+2. **Local MCP Server:** Run the Neon MCP server locally on your machine, authenticating with a Neon API key.
 
 ### Prerequisites
 

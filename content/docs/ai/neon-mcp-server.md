@@ -87,12 +87,6 @@ If you prefer a written guide, follow these steps:
     
     This command uses `npx` to run a [small helper (`mcp-remote`)](https://github.com/geelen/mcp-remote) that connects to Neon's hosted server endpoint (`https://mcp.neon.tech/sse`).
 
-    Alternatively, if your MCP client just asks you to enter an SSE URL, you can use the following:
-
-    ```
-    https://mcp.neon.tech/sse
-    ```
-
 3.  Save the configuration and **restart or refresh** your MCP client application.
 4.  The first time the client initializes Neon's MCP server, it should trigger an **OAuth flow**:
     *   Your browser will open a Neon page asking you to authorize the "Neon MCP Server" to access your Neon account.
@@ -110,7 +104,7 @@ You can install Neon MCP server locally using `npm` or `smithey`.
 - **Neon API Key:** You will need a Neon API key to authenticate the Neon MCP Server with your Neon account. You can create one from the [Neon Console](https://console.neon.tech/app/settings/api-keys) under your Profile settings. Refer to the [Neon documentation on API Keys](/docs/manage/api-keys#creating-api-keys) for detailed instructions.
 
 <Admonition type="note">
-We recommend using Smithery for installation, as it streamlines the process and guarantees compatibility across MCP clients. Note that only Claude Desktop is automatically configured with the Neon MCP Server when installed via npm. For manual configuration of [Cursor](/guides/cursor-mcp-neon), [Cline](/guides/cline-mcp-neon) and [Windsurf](/guides/windsurf-mcp-neon), please refer to our detailed guides.
+We recommend using Smithery for installation, as it streamlines the process and guarantees compatibility across MCP clients.
 </Admonition>
 
 #### Installation via Smithery - MCP Registry
@@ -127,7 +121,7 @@ We recommend using Smithery for installation, as it streamlines the process and 
     Replace `<client_name>` with the name of your MCP client application. Supported client names include:
 
     - `claude` for [Claude Desktop](https://claude.ai/download)
-    - `cursor` for [Cursor](https://cursor.com)
+    - `cursor` for [Cursor](https://cursor.com) (Installing via `smithery` makes the MCP server a global MCP server in Cursor)
     - `windsurf` for [Windsurf Editor](https://codeium.com/windsurf)
     - `roo-cline` for [Roo Cline VS Code extension](https://github.com/RooVetGit/Roo-Code)
     - `witsy` for [Witsy](https://witsyai.com/)
@@ -155,16 +149,57 @@ We recommend using Smithery for installation, as it streamlines the process and 
 
 #### Installation via npm
 
-1.  Open your terminal.
-2.  Run the initialization command:
+Open your MCP client application and navigate to the settings where you can configure MCP servers. The location of these settings may vary depending on your client. Add a configuration block for "Neon" under the `mcpServers` key. Your configuration should look like this:
 
-    ```bash
-    npx @neondatabase/mcp-server-neon init $NEON_API_KEY
-    ```
+```json
+{
+  "mcpServers": {
+    "neon": {
+      "command": "npx",
+      "args": ["-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+    }
+  }
+}
+```
 
-    Replace `$NEON_API_KEY` with your actual Neon API key.
+<Admonition type="note">
 
-3.  Restart Claude Desktop.
+If you are using Windows and encounter issues while adding the MCP server, you might need to use the Command Prompt (`cmd`) or Windows Subsystem for Linux (`wsl`) to run the necessary commands. Your configuration setup may resemble the following:
+ 
+  <CodeTabs labels={["Windows", "Windows (WSL)"]}>
+      
+      ```json
+      {
+        "mcpServers": {
+          "neon": {
+            "command": "cmd",
+            "args": ["/c", "npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+          }
+        }
+      }
+      ```
+
+      ```json
+      {
+        "mcpServers": {
+          "neon": {
+            "command": "wsl",
+            "args": ["npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+          }
+        }
+      }
+      ```
+  </CodeTabs>
+
+</Admonition>
+
+### Troubleshooting
+
+If your client does not use `JSON` for configuration of MCP servers (such as older versions of Cursor), you can use the following command when prompted:
+
+```bash
+npx -y @neondatabase/mcp-server-neon start <YOUR_NEON_API_KEY>
+```
 
 ## Supported Actions (Tools)
 

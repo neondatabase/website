@@ -169,17 +169,38 @@ Now that you have the Neon MCP server set up either remotely or locally, you can
 
    ![Cursor Composer view](/docs/guides/cursor_chat_view.png)
 
-1. Type `List your available MCP tools` in the Composer text field, select the **agent** option in the corner of the field, and click **Submit**.
+2. Type `List your available MCP tools` in the Composer text field, select the **agent** option in the corner of the field, and click **Submit**.
 
    **_Note: The agent option here is tiny and easy to miss!_**
 
    ![Cursor list available tools](/docs/guides/cursor_list_tools.png)
 
-1. Try out an Neon MCP Server tool by typing `Tell me about my Neon project <project_id>`. **You'll need to provide your Neon project ID.**
+3. Try out an Neon MCP Server tool by typing `Tell me about my Neon project <project_id>`. **You'll need to provide your Neon project ID.**
 
    ![Cursor list project details](/docs/guides/cursor_project_details.png)
 
    Cursor uses the Neon MCP Server `describe_project` tool to retrieve your project's details.
+
+### Global MCP Server in Cursor
+
+You can also set up a global MCP server in Cursor. This allows you to use the same MCP server configuration across all your projects. To do this, follow these steps:
+
+1. Open Cursor.
+2. Go to the **Settings**.
+3. In the **MCP Servers** section, click on **+ Add new Global MCP Server**.
+   ![Cursor add new global MCP server](/docs/guides/cursor-global-mcp-server.png)
+4. Paste the same JSON configuration either for the **Remote Hosted** or **Local MCP Server** as mentioned above.
+5. Save the configuration.
+6. Restart Cursor or reload the window (`Developer: Reload Window` from the Command Palette).
+7. You now have Neon MCP Server set up globally in Cursor. You can use it in any project without needing to configure it again for each project.
+
+### Troubleshooting
+
+If you are on a version of Cursor that does not support JSON configuration for MCP servers, you can use the following command when prompted:
+
+```bash
+npx -y @neondatabase/mcp-server-neon start <YOUR_NEON_API_KEY>
+```
 
 ## Neon MCP Server Tools
 

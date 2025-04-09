@@ -11,7 +11,7 @@ The **Neon MCP Server** allows you to connect various [**Model Context Protocol 
 You can connect to Neon MCP Server in two ways:
 
 1.  **Remote MCP Server (Preview):** Connect to Neon's managed MCP server using OAuth.
-2.  **Local Server:** Install and run the server locally, using a Neon API key.
+2.  **Local MCP Server:** Install and run the MCP server locally, using a Neon API key.
 
 This guide covers the setup for the following MCP Clients:
 
@@ -25,7 +25,7 @@ By connecting these tools to the Neon MCP Server, you can manage your Neon proje
 ## Prerequisites
 
 - An MCP Client application.
-- A Neon account (for OAuth authorization).
+- A [Neon account](https://console.neon.tech/signup).
 - **Node.js (>= v18.0.0) and npm:** Download from [nodejs.org](https://nodejs.org).
 
 For Local MCP Server setup, you also need a Neon API key. See [Neon API Keys documentation](/docs/manage/api-keys#creating-api-keys).
@@ -40,9 +40,9 @@ Ensure you are using the latest version of your chosen MCP client as MCP integra
 
 <TabItem>
 
-1.  Open Claude desktop and navigate to **Settings**.
-2.  Under the **Developer** tab, click **Edit Config** (On Windows, its under File -> Settings -> Developer -> Edit Config) to open the configuration file (`claude_desktop_config.json`).
-3.  Add the "Neon" server entry within the `mcpServers` object:
+1. Open Claude desktop and navigate to **Settings**.
+2. Under the **Developer** tab, click **Edit Config** (On Windows, its under File -> Settings -> Developer -> Edit Config) to open the configuration file (`claude_desktop_config.json`).
+3. Add the "Neon" server entry within the `mcpServers` object:
     ```json
     {
       "mcpServers": {
@@ -57,8 +57,8 @@ Ensure you are using the latest version of your chosen MCP client as MCP integra
       }
     }
     ```
-4.  Save the configuration file and **restart** Claude Desktop.
-5.  The first time it connects, follow the on-screen OAuth prompts in your browser to authorize Neon.
+4. Save the configuration file and **restart** Claude Desktop.
+5. An OAuth window will open in your browser. Follow the prompts to authorize Claude to access your Neon account.
 
 </TabItem>
 
@@ -84,7 +84,7 @@ For more, see [Get started with Neon MCP server with Claude Desktop](/guides/neo
 <TabItem>
 
 1.  Open Cursor. Create a `.cursor` directory in your project root if needed.
-2.  Create or open the `.cursor/mcp.json` file.
+2.  Create or open the `mcp.json` file in the `.cursor` directory.
 3.  Add the "Neon" server entry within the `mcpServers` object:
     ```json
     {
@@ -101,20 +101,30 @@ For more, see [Get started with Neon MCP server with Claude Desktop](/guides/neo
     }
     ```
 4.  Save the configuration file. Cursor may detect the change or require a restart.
-5.  The first time it connects, follow the on-screen OAuth prompts in your browser.
+5.  An OAuth window will open in your browser. Follow the prompts to authorize Cursor to access your Neon account.
 
 </TabItem>
 <TabItem>
 
-1. Open Cursor.
-2. Open your terminal.
-3. Run the following command, replacing `YOUR_NEON_API_KEY` with your actual Neon API key:
-
-   ```bash
-   npx -y @smithery/cli@latest install neon --client cursor --config "{\"neonApiKey\":\"YOUR_NEON_API_KEY\"}"
-   ```
-
-4. Restart Cursor if necessary.
+1.  Open Cursor. Create a `.cursor` directory in your project root if needed.
+2.  Create or open the `mcp.json` file in the `.cursor` directory.
+3.  Add the "Neon" server entry within the `mcpServers` object. Replace `<YOUR_NEON_API_KEY>` with your actual Neon API key which you obtained from the [prerequisites](#prerequisites) section:
+    ```json
+    {
+      "mcpServers": {
+        "Neon": {
+          "command": "npx",
+          "args": [
+            "-y",
+            "@neondatabase/mcp-server-neon",
+            "start",
+            "<YOUR_NEON_API_KEY>"
+          ]
+        }
+      }
+    }
+    ```
+4.  Save the configuration file. Cursor may detect the change or require a restart.
 
 </TabItem>
 </Tabs>
@@ -127,7 +137,7 @@ For more, see [Get started with Cursor and Neon Postgres MCP Server](/guides/cur
 <TabItem>
 
 1.  Open Windsurf and navigate to the Cascade assistant sidebar.
-2.  Click the hammer (MCP) icon, then **Configure** to open the configuration file (e.g., `.config/mcp_config.json`).
+2.  Click the hammer (MCP) icon, then **Configure** to open the configuration file (`~/.codeium/windsurf/mcp_config.json`).
 3.  Add the "Neon" server entry within the `mcpServers` object:
     ```json
     {
@@ -145,7 +155,7 @@ For more, see [Get started with Cursor and Neon Postgres MCP Server](/guides/cur
     ```
 4.  Save the file.
 5.  Click the **Refresh** button in the Cascade sidebar next to "available MCP servers".
-6.  Follow the on-screen OAuth prompts in your browser.
+6.  An OAuth window will open in your browser. Follow the prompts to authorize Windsurf to access your Neon account.
 
 </TabItem>
 <TabItem>
@@ -170,8 +180,8 @@ For more, see [Get started with Windsurf and Neon Postgres MCP Server](/guides/w
 <TabItem>
 
 1. Open Cline in VS Code (Sidebar -> Cline icon).
-2.  Click **MCP Servers** Icon -> **Installed** -> **Configure MCP Servers** to open the configuration file.
-3.  Add the "Neon" server entry within the `mcpServers` object:
+2. Click **MCP Servers** Icon -> **Installed** -> **Configure MCP Servers** to open the configuration file.
+3. Add the "Neon" server entry within the `mcpServers` object:
     ```json
     {
       "mcpServers": {
@@ -186,8 +196,8 @@ For more, see [Get started with Windsurf and Neon Postgres MCP Server](/guides/w
       }
     }
     ```
-4.  Save the file. Cline should reload the configuration automatically.
-5.  The first time it connects, follow the on-screen OAuth prompts in your browser.
+4. Save the file. Cline should reload the configuration automatically.
+5. An OAuth window will open in your browser. Follow the prompts to authorize Cline to access your Neon account.
 
 </TabItem>
 <TabItem>
@@ -222,7 +232,7 @@ If your client requires manual setup:
 
 #### Remote Hosted Server
 
-Add this OS-independent configuration to your client's `mcpServers`:
+Add the following JSON configuration within the `mcpServers` section of your client's `MCP` configuration file:
 
 ```json
 "neon": {
@@ -284,6 +294,14 @@ Replace `<YOUR_NEON_API_KEY>` with your Neon API key.
 <Admonition type="note">
 After successful configuration, you should see the Neon MCP Server listed as active in your MCP client's settings or tool list. You can enter "List my Neon projects" in the MCP client to see your Neon projects and verify the connection.
 </Admonition>
+
+## Troubleshooting
+
+If your client does not use `JSON` for configuration of MCP servers (such as older versions of Cursor), you can use the following command when prompted:
+
+```bash
+npx -y @neondatabase/mcp-server-neon start <YOUR_NEON_API_KEY>
+```
 
 ## Next Steps
 
