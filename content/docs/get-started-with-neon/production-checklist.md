@@ -17,7 +17,7 @@ updatedOn: '2025-02-03T20:41:57.304Z'
     
     <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
       <input type="checkbox" style={{ marginRight: '10px' }} />
-      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#set-maximum-compute-to-the-highest-cu-available-for-your-plan">Set max compute to the highest CU available for your plan</a></h3>
+      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#set-max-compute-to-the-highest-cu-available-for-your-plan">Set max compute to the highest CU available for your plan</a></h3>
     </div>
     <p style={{ marginLeft: '23px' }}>Set your compute to automatically scale up, allowing your app to handle traffic surges and stay performant without manual scaling.</p>
     
@@ -35,13 +35,13 @@ updatedOn: '2025-02-03T20:41:57.304Z'
     
     <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
       <input type="checkbox" style={{ marginRight: '10px' }} />
-      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#configure-your-restore-window">Increase your project's restore window to 7 days</a></h3>
+      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#increase-your-projects-restore-window-to-7-days">Increase your project's restore window to 7 days</a></h3>
     </div>
     <p style={{ marginLeft: '23px' }}>Protect your data with a longer restore window for quick recovery, ensuring data integrity and availability.</p>
     
     <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
       <input type="checkbox" style={{ marginRight: '10px' }} />
-      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#configure-ip-allow">Restrict database access to trusted IPs</a></h3>
+      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#restrict-database-access-to-trusted-ips">Restrict database access to trusted IPs</a></h3>
     </div>
     <p style={{ marginLeft: '23px' }}>Secure your database by limiting connections to trusted IP addresses, enhancing security and control.</p>
     
@@ -53,15 +53,15 @@ updatedOn: '2025-02-03T20:41:57.304Z'
     
     <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
       <input type="checkbox" style={{ marginRight: '10px' }} />
-      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#install-pg_stat_statements">Install pg_stat_statements</a></h3>
+      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#install-pgstatstatements">Install pg_stat_statements</a></h3>
     </div>
     <p style={{ marginLeft: '23px' }}>Enable query performance monitoring to track execution times and frequency.</p>
     
     <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
       <input type="checkbox" style={{ marginRight: '10px' }} />
-      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#upgrade-to-a-neon-business-plan-for-priority-support">Upgrade to a Neon business plan for priority support</a></h3>
+      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#upgrade-to-a-neon-business-plan-for-priority-support">Upgrade to get priority support</a></h3>
     </div>
-    <p style={{ marginLeft: '23px' }}>Get faster support for your production database with a business plan, ensuring priority handling of your requests.</p>
+    <p style={{ marginLeft: '23px' }}>Get faster support and priority handling for your production database with a Business plan.</p>
   </div>
 </div>
 </div>
@@ -83,7 +83,7 @@ We recommend that you **fit your data in memory** and use Neon **autoscaling**:
 
 A Compute Unit (CU) in Neon measures the processing power or "size" of a Neon compute. One CU includes 1 vCPU and 4 GB of RAM. Neon computes can range from **0.25** CUs to **56** CUs, depending on your [Neon plan](/docs/introduction/plans).
 
-## Set maximum compute to the highest CU available for your plan
+## Set max compute to the highest CU available for your plan
 
 Use Neon's [autoscaling](/docs/guides/autoscaling-algorithm) feature to dynamically adjust your compute resources based on your current workload. This means you don't need to scale manually during traffic surges.
 
@@ -154,8 +154,10 @@ Neon's IP Allow feature ensures that only trusted IP addresses can connect to yo
 
 Combine an IP allow list with protected branches for enhanced security. This setup ensures that only trusted IPs can access critical data, reducing the risk of unauthorized access and safeguarding data integrity.
 
-- **Enhanced Security**: By applying an IP allow list to a protected branch, you ensure that only trusted IPs can access critical data, reducing the risk of unauthorized access.
-- **Data Integrity**: The protected branch status ensures that your production data is not accidentally deleted or altered, providing an additional layer of integrity protection.
+**Configuration details**
+
+- **IP Allow List**: Restricts access to specific, trusted IP addresses, preventing unauthorized connections.
+- **Protected Branch**: Safeguards critical data from accidental deletions or modifications by designating branches as protected.
 
 Available with the Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans, you can configure **IP Allow** and protected branches in your Neon project's settings. For more information, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow) and [Protected branches guide](/docs/guides/protected-branches).
 
@@ -202,18 +204,13 @@ You can also use the **Monitoring Dashboard** in the Neon Console to view live g
 
 For more information, see the [Monitoring documentation](/docs/introduction/monitoring).
 
-## Upgrade to a Neon business plan for priority support
+## Upgrade to a Neon Business plan for priority support
 
-Get faster support for your production database with a business plan, ensuring priority handling of your requests.
+Support tickets opened by Business and Enterprise support plan customers are given top priority by the Neon Support team.
 
 **Recommendation**
 
-Opt for a Neon business plan to access priority support, which is essential for maintaining uptime and quickly resolving issues in production environments.
-
-**Key benefits for production**
-
-- **Faster response times**: Your support tickets are given top priority, ensuring quicker assistance and resolution of issues.
-- **Access to SLAs**: Benefit from Support Level Agreements (SLAs), which guarantee specific response times and support quality.
+Upgrade to a [Business plan](/docs/introduction/plans#business) to get both [Priority support](/docs/introduction/support#prioritized-support-tickets) and acccess to the [Business SLA](https://neon.tech/neon-business-sla).
 
 For more information, see the [Support documentation](/docs/introduction/support).
 
