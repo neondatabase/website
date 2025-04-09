@@ -29,7 +29,7 @@ You have two options for connecting Cursor to the Neon MCP Server:
 
 2. **Local MCP Server:** Run the Neon MCP server locally on your machine, authenticating with a Neon API key.
 
-#### Prerequisites
+### Prerequisites
 
 Before you begin, ensure you have the following:
 
@@ -38,8 +38,10 @@ Before you begin, ensure you have the following:
 3. **Neon API Key (for Local MCP server):** After signing up, get your Neon API Key from the [Neon console](https://console.neon.tech/app/settings/api-keys). This API key is needed to authenticate your application with Neon. For instructions, see [Manage API keys](https://neon.tech/docs/manage/api-keys).
 
    <Admonition type="warning" title="Neon API Key Security">
-    Keep your Neon API key secure, and never share it publicly. It provides access to your Neon projects.
-    </Admonition>
+   Keep your Neon API key secure, and never share it publicly. It provides access to your Neon projects.
+   </Admonition>
+
+4.  **Node.js (>= v18) and npm:** Ensure Node.js (version 18 or later) and npm are installed. Download them from [nodejs.org](https://nodejs.org).
 
 ### Option 1: Setting up the Remote Hosted Neon MCP Server
 
@@ -69,12 +71,11 @@ This method uses Neon's managed server and OAuth authentication.
 
       ![Cursor MCP JSON](/docs/guides/cursor-remote-mcp-server-json.png)
 
+   Save the `mcp.json` file after pasting the configuration.
+
 4. **Restart Cursor** or reload the window (`Developer: Reload Window` from the Command Palette). If Cursor prompts you to Enable the MCP server, click **Enable**.
 
-5. You may be prompted to authorize the Neon MCP server connection. Follow these steps:
-   - Your browser will open a Neon page requesting authorization.
-   - Review the permissions and click **Authorize**.
-   - Close the browser tab once you see the success message.
+5. An OAuth window will open in your browser. Follow the prompts to authorize Cursor to access your Neon account.
 
 6.  You can verify that the connection is successful by checking the **MCP Servers** section in Cursor settings.
       ![Cursor with Neon MCP Tools](/docs/guides/cursor-with-neon-mcp-tools.png)
@@ -151,15 +152,19 @@ key for authentication.
    
       ![Cursor Local MCP JSON](/docs/guides/cursor-local-mcp-server-json.png)
 
-4. **Restart Cursor** or reload the window (`Developer: Reload Window` from the Command Palette).
+4. Save the `mcp.json` file after pasting the configuration.
 
-5. Cursor is now connected to Neon's MCP server. You can verify that the connection is successful by checking the **MCP Servers** section in Cursor settings.
+5. **Restart Cursor** or reload the window (`Developer: Reload Window` from the Command Palette).
+
+6. Cursor is now connected to Neon's MCP server. You can verify that the connection is successful by checking the **MCP Servers** section in Cursor settings.
 
       ![Cursor with Neon MCP Tools](/docs/guides/cursor-with-neon-mcp-tools.png)
 
    You've now configured Neon MCP Server in Cursor and can manage your Neon Postgres databases using AI.
 
 ### Verification
+
+Now that you have the Neon MCP server set up either remotely or locally, you can verify the connection and test the available tools.
 
 1. Open a Cursor **Chat** using the keyboard shortcut **Command + I** (on Mac) or **Control + I** (on Windows) and select the **Agent** option from the drop-down menu.
 
