@@ -43,7 +43,7 @@ Before you begin, ensure you have the following:
     </Admonition>
 4.  **Node.js (>= v18) and npm:** Ensure Node.js (version 18 or later) and npm are installed. Download them from [nodejs.org](https://nodejs.org).
 
-### Option 1: Setting up the Remote Hosted Neon MCP Server
+### Option 1: Setting up the remote hosted Neon MCP Server
 
 This method uses Neon's managed server and OAuth authentication.
 
