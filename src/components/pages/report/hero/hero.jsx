@@ -16,7 +16,7 @@ const Hero = () => (
       </p>
       <Button
         className="mt-[38px] whitespace-nowrap !px-5 !py-4 font-semibold leading-none tracking-tighter transition-colors duration-200 xl:mt-[36px] xl:!text-base md:mt-8 sm:mt-7"
-        to="/report/Database_Recovery_Developer_Survey_2025_Neon.numbers"
+        to="/report/Database_Recovery_Developer_Survey_2025_Neon.csv"
         theme="primary"
         size="xs"
       >
