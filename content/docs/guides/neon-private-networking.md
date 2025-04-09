@@ -155,7 +155,7 @@ To configure Neon Private Networking, perform the following steps:
     To block access via the Neon CLI, use the [neon projects update](/docs/reference/cli-projects#update) command with the `--block-public-connections` option.
 
     ```bash
-    neon projects update orange-credit-12345678 --block-vpc-connections true
+    neon projects update orange-credit-12345678 --block-public-connections true
     ```
 
     In the example above, `orange-credit-12345678` is the Neon project ID. You can find _your_ Neon project ID under your project's settings in the Neon Console, or by running this Neon CLI command: `neon projects list`
