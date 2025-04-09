@@ -2,7 +2,7 @@
 title: The uuid-ossp extension
 subtitle: Generate Universally Unique Identifiers (UUIDs) in your Postgres database
 enableTableOfContents: true
-updatedOn: '2025-03-17T00:00:00.000Z'
+updatedOn: '2025-04-09T10:37:44.425Z'
 ---
 
 The `uuid-ossp` extension provides a suite of functions for generating Universally Unique Identifiers (UUIDs) directly within your Postgres database. UUIDs are essential for ensuring data uniqueness across distributed systems and are widely used as primary keys and for various other applications requiring unique IDs. This extension offers a variety of UUID generation methods, including time-based, random, and name-based UUIDs, providing flexibility for different use cases.
@@ -181,7 +181,8 @@ The version 1 UUID generation functions in `uuid-ossp` are based on the time of 
     Represents the X.500 Distinguished Name (DN) namespace.
 
     ```sql
-    SSELECT uuid_generate_v5(uuid_ns_x500(), 'CN=John Doe, DC=example, DC=com');
+
+    SELECT uuid_generate_v5(uuid_ns_x500(), 'CN=John Doe, DC=example, DC=com');
     -- e9ba549f-a675-5490-b054-ad862cb8c1d2 (always the same for 'CN=John Doe, DC=example, DC=com')
     ```
 

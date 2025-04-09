@@ -2,7 +2,7 @@
 title: The pgcrypto extension
 subtitle: Secure your data with cryptographic functions in Postgres
 enableTableOfContents: true
-updatedOn: '2025-03-17T00:00:00.000Z'
+updatedOn: '2025-04-08T22:55:27.445Z'
 ---
 
 The `pgcrypto` extension offers a range of cryptographic functions within Postgres. These functions enable encryption, decryption, and hashing operations through standard SQL queries. This can reduce reliance on external cryptographic tools for data security tasks in a Postgres environment.

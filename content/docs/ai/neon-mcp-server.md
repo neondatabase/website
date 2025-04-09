@@ -3,7 +3,7 @@ title: Neon MCP Server
 subtitle: Manage your Neon Postgres databases using natural language commands with the
   Neon MCP Server.
 enableTableOfContents: true
-updatedOn: '2025-03-07T21:48:31.327Z'
+updatedOn: '2025-04-09T18:21:30.647Z'
 ---
 
 The **Neon MCP Server** is an open-source tool that lets you interact with your Neon Postgres databases in **natural language**.
@@ -40,20 +40,70 @@ Traditionally, connecting AI models to different data sources required developer
 The Neon MCP server grants powerful database management capabilities through natural language requests.  **Always review and authorize actions** requested by the LLM before execution. Ensure that only authorized users and applications have access to the Neon MCP server and Neon API keys.
 </Admonition>
 
-## Installation
+## Setup options
 
-You can install the Neon MCP Server using either `npm` or `smithery`.
+You can set up the Neon MCP Server in two ways:
 
-### Prerequisites
+### Remote hosted server (Preview)
+
+You can use Neon's managed MCP server, available at `https://mcp.neon.tech`. This is the **easiest** way to start using the Neon MCP Server. It streamlines the setup process by utilizing OAuth for authentication, eliminating the need to manage Neon API keys directly in your client configuration.
+
+<Admonition type="note">
+The remote hosted MCP server is currently in its preview phase. As the [OAuth specification for MCP](https://spec.modelcontextprotocol.io/specification/2025-03-26/basic/authorization/) is still quite new, we are releasing it in this preview state. During the initial weeks, you may experience some adjustments to the setup. However, the instructions provided should be straightforward to follow at this time.
+</Admonition>
+
+#### Prerequisites:
+
+- An MCP Client application (e.g., Cursor, Windsurf, Claude Desktop, Cline).
+- A Neon account.
+
+#### Setup steps:
+
+You can watch the video below for a quick overview of the setup process.
+
+<video playsInline loop width="800" height="600" controls>
+  <source type="video/mp4" src="https://neondatabase.wpengine.com/wp-content/uploads/2025/04/neon-hosted-mcp-server.mp4"/>
+</video>
+
+Steps:
+
+1.  Go to your MCP Client's settings where you configure MCP Servers (this varies by client)
+2.  Register a new MCP Server. Add a configuration block for "Neon" under 'mcpServers' key. The configuration should look like this:
+
+    ```json
+    {
+      "mcpServers": {
+        "Neon": {
+          "command": "npx",
+          "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
+        }
+      }
+    }
+    ```
+
+    This command uses `npx` to run a [small helper (`mcp-remote`)](https://github.com/geelen/mcp-remote) that connects to Neon's hosted server endpoint (`https://mcp.neon.tech/sse`).
+
+3.  Save the configuration and **restart or refresh** your MCP client application.
+4.  The first time the client initializes Neon's MCP server, it should trigger an **OAuth flow**:
+    - Your browser will open a Neon page asking you to authorize the "Neon MCP Server" to access your Neon account.
+    - Review the requested permissions and click **Authorize**.
+    - You should see a success message, and you can close the browser tab.
+5.  Your MCP client should now be connected to the Neon Remote MCP Server and ready to use.
+
+### Local MCP Server
+
+You can install Neon MCP server locally using `npm` or `smithey`.
+
+#### Prerequisites
 
 - **Node.js (>= v18.0.0):** Ensure Node.js version 18 or higher is installed on your system. You can download it from [nodejs.org](https://nodejs.org/).
 - **Neon API Key:** You will need a Neon API key to authenticate the Neon MCP Server with your Neon account. You can create one from the [Neon Console](https://console.neon.tech/app/settings/api-keys) under your Profile settings. Refer to the [Neon documentation on API Keys](/docs/manage/api-keys#creating-api-keys) for detailed instructions.
 
 <Admonition type="note">
-We recommend using Smithery for installation, as it streamlines the process and guarantees compatibility across MCP clients. Note that only Claude Desktop is automatically configured with the Neon MCP Server when installed via npm. For manual configuration of [Cursor](/guides/cursor-mcp-neon), [Cline](/guides/cline-mcp-neon) and [Windsurf](/guides/windsurf-mcp-neon), please refer to our detailed guides.
+We recommend using Smithery for installation, as it streamlines the process and guarantees compatibility across MCP clients.
 </Admonition>
 
-### Installation via Smithery - MCP Registry
+#### Installation via Smithery - MCP Registry
 
 [Smithery](https://smithery.ai) provides a streamlined method for installing MCP servers.
 
@@ -67,10 +117,12 @@ We recommend using Smithery for installation, as it streamlines the process and 
     Replace `<client_name>` with the name of your MCP client application. Supported client names include:
 
     - `claude` for [Claude Desktop](https://claude.ai/download)
+    - `cursor` for [Cursor](https://cursor.com) (Installing via `smithery` makes the MCP server a global MCP server in Cursor)
     - `windsurf` for [Windsurf Editor](https://codeium.com/windsurf)
     - `roo-cline` for [Roo Cline VS Code extension](https://github.com/RooVetGit/Roo-Code)
     - `witsy` for [Witsy](https://witsyai.com/)
     - `enconvo` for [Enconvo](https://www.enconvo.com/)
+    - `vscode` for [Visual Studio Code (Preview)](https://code.visualstudio.com/docs/copilot/chat/mcp-servers)
 
     For example, to install for Claude Desktop, use:
 
@@ -91,18 +143,60 @@ We recommend using Smithery for installation, as it streamlines the process and 
 
 3.  Restart your MCP Client application. For example, if you are using Claude Desktop, quit and reopen the application.
 
-### Installation via npm
+#### Installation via npm
 
-1.  Open your terminal.
-2.  Run the initialization command:
+Open your MCP client application and navigate to the settings where you can configure MCP servers. The location of these settings may vary depending on your client. Add a configuration block for "Neon" under the `mcpServers` key. Your configuration should look like this:
 
-    ```bash
-    npx @neondatabase/mcp-server-neon init $NEON_API_KEY
-    ```
+```json
+{
+  "mcpServers": {
+    "neon": {
+      "command": "npx",
+      "args": ["-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+    }
+  }
+}
+```
 
-    Replace `$NEON_API_KEY` with your actual Neon API key.
+<Admonition type="note">
 
-3.  Restart Claude Desktop.
+If you are using Windows and encounter issues while adding the MCP server, you might need to use the Command Prompt (`cmd`) or Windows Subsystem for Linux (`wsl`) to run the necessary commands. Your configuration setup may resemble the following:
+
+<CodeTabs labels={["Windows", "Windows (WSL)"]}>
+
+      ```json
+      {
+        "mcpServers": {
+          "neon": {
+            "command": "cmd",
+            "args": ["/c", "npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+          }
+        }
+      }
+      ```
+
+      ```json
+      {
+        "mcpServers": {
+          "neon": {
+            "command": "wsl",
+            "args": ["npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+          }
+        }
+      }
+      ```
+
+  </CodeTabs>
+
+</Admonition>
+
+### Troubleshooting
+
+If your client does not use `JSON` for configuration of MCP servers (such as older versions of Cursor), you can use the following command when prompted:
+
+```bash
+npx -y @neondatabase/mcp-server-neon start <YOUR_NEON_API_KEY>
+```
 
 ## Supported Actions (Tools)
 
@@ -136,7 +230,7 @@ The Neon MCP Server provides the following actions, which are exposed as "tools"
 
 ## Usage examples
 
-After installing and configuring the Neon MCP Server with your chosen MCP client, you can start interacting with your Neon databases using natural language.
+After setting up either the remote or local server and connecting your MCP client, you can start interacting with your Neon databases using natural language.
 
 **Example interactions**
 

@@ -4,7 +4,7 @@ subtitle: Learn how to connect to your Neon database via AWS PrivateLink
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
-updatedOn: '2025-03-13T12:02:31.961Z'
+updatedOn: '2025-04-09T10:37:44.428Z'
 ---
 
 <Admonition type="comingSoon" title="Private Networking availability">
@@ -155,7 +155,7 @@ To configure Neon Private Networking, perform the following steps:
     To block access via the Neon CLI, use the [neon projects update](/docs/reference/cli-projects#update) command with the `--block-public-connections` option.
 
     ```bash
-    neon projects update orange-credit-12345678 --block-vpc-connections true
+    neon projects update orange-credit-12345678 --block-public-connections true
     ```
 
     In the example above, `orange-credit-12345678` is the Neon project ID. You can find _your_ Neon project ID under your project's settings in the Neon Console, or by running this Neon CLI command: `neon projects list`
