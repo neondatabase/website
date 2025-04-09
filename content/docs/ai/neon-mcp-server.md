@@ -75,23 +75,19 @@ If you prefer a written guide, follow these steps:
       "mcpServers": {
         "Neon": {
           "command": "npx",
-          "args": [
-            "-y",
-            "mcp-remote",
-            "https://mcp.neon.tech/sse"
-          ]
+          "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
         }
       }
     }
     ```
-    
+
     This command uses `npx` to run a [small helper (`mcp-remote`)](https://github.com/geelen/mcp-remote) that connects to Neon's hosted server endpoint (`https://mcp.neon.tech/sse`).
 
 3.  Save the configuration and **restart or refresh** your MCP client application.
 4.  The first time the client initializes Neon's MCP server, it should trigger an **OAuth flow**:
-    *   Your browser will open a Neon page asking you to authorize the "Neon MCP Server" to access your Neon account.
-    *   Review the requested permissions and click **Authorize**.
-    *   You should see a success message, and you can close the browser tab.
+    - Your browser will open a Neon page asking you to authorize the "Neon MCP Server" to access your Neon account.
+    - Review the requested permissions and click **Authorize**.
+    - You should see a success message, and you can close the browser tab.
 5.  Your MCP client should now be connected to the Neon Remote MCP Server and ready to use.
 
 ### Local MCP Server
@@ -165,9 +161,9 @@ Open your MCP client application and navigate to the settings where you can conf
 <Admonition type="note">
 
 If you are using Windows and encounter issues while adding the MCP server, you might need to use the Command Prompt (`cmd`) or Windows Subsystem for Linux (`wsl`) to run the necessary commands. Your configuration setup may resemble the following:
- 
-  <CodeTabs labels={["Windows", "Windows (WSL)"]}>
-      
+
+<CodeTabs labels={["Windows", "Windows (WSL)"]}>
+
       ```json
       {
         "mcpServers": {
@@ -189,6 +185,7 @@ If you are using Windows and encounter issues while adding the MCP server, you m
         }
       }
       ```
+
   </CodeTabs>
 
 </Admonition>

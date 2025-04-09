@@ -92,25 +92,22 @@ You have two options for connecting Claude to the Neon MCP Server:
 ### Option 1: Setting up the Remote Hosted Neon MCP Server
 
 1. Open Claude desktop and navigate to **Settings**.
-    ![Claude settings](/guides/images/claude_mcp/claude_settings.png)
+   ![Claude settings](/guides/images/claude_mcp/claude_settings.png)
 2. Under the **Developer** tab, click **Edit Config** (On Windows, it's under File -> Settings -> Developer -> Edit Config) to open the location of configuration file (`claude_desktop_config.json`).
-    ![Claude config](/guides/images/claude_mcp/claude_developer_config.png)
+   ![Claude config](/guides/images/claude_mcp/claude_developer_config.png)
 3. Open the `claude_desktop_config.json` file in a text editor of your choice.
 4. Add the "Neon" server entry within the `mcpServers` object:
-    ```json
-    {
-      "mcpServers": {
-        "Neon": {
-          "command": "npx",
-          "args": [
-            "-y",
-            "mcp-remote",
-            "https://mcp.neon.tech/sse"
-          ]
-        }
-      }
-    }
-    ```
+
+   ```json
+   {
+     "mcpServers": {
+       "Neon": {
+         "command": "npx",
+         "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
+       }
+     }
+   }
+   ```
 
 5. Save the configuration file and **restart** Claude Desktop.
 6. An OAuth window will open in your browser. Follow the prompts to authorize Claude to access your Neon account.
@@ -138,8 +135,8 @@ This method runs the Neon MCP server locally on your machine, using a Neon API k
     ✔ Successfully resolved neon
     Installing remote server. Please ensure you trust the server author, especially when sharing sensitive data.
     For information on Smithery's data policy, please visit: https://smithery.ai/docs/data-policy
-    ? The API key for accessing the Neon. You can generate one through the Neon 
-    console. (required) 
+    ? The API key for accessing the Neon. You can generate one through the Neon
+    console. (required)
     *********************************************************************
     neon successfully installed for claude
     ```
@@ -151,14 +148,14 @@ This method runs the Neon MCP server locally on your machine, using a Neon API k
 You can verify that the connection to the Neon MCP server either remote or local is successful by following these steps:
 
 1. In Claude hover over the 🔨 icon to see the available tools.
-    ![Claude available tools](/guides/images/claude_mcp/claude_available_tools.png)
+   ![Claude available tools](/guides/images/claude_mcp/claude_available_tools.png)
 2. Click on the icon to see the list of available tools in detail. You should see the Neon MCP server's tools listed.
-    ![Claude list available tools](/guides/images/claude_mcp/claude_list_available_tools.png)
+   ![Claude list available tools](/guides/images/claude_mcp/claude_list_available_tools.png)
 3. Claude is now connected to Neon's remote MCP server.
 
 Ask Claude `"List my Neon projects"`. If it works, you'll see your projects listed by Claude, fetched using the **Neon API**. For example, you might see output similar to this:
 
-  ![Claude output](/guides/images/claude_mcp/claude_list_project.png)
+![Claude output](/guides/images/claude_mcp/claude_list_project.png)
 
 ## Using Neon MCP server
 

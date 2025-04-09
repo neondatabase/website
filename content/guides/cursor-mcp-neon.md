@@ -41,7 +41,7 @@ Before you begin, ensure you have the following:
    Keep your Neon API key secure, and never share it publicly. It provides access to your Neon projects.
    </Admonition>
 
-4.  **Node.js (>= v18) and npm:** Ensure Node.js (version 18 or later) and npm are installed. Download them from [nodejs.org](https://nodejs.org).
+4. **Node.js (>= v18) and npm:** Ensure Node.js (version 18 or later) and npm are installed. Download them from [nodejs.org](https://nodejs.org).
 
 ### Option 1: Setting up the Remote Hosted Neon MCP Server
 
@@ -54,22 +54,18 @@ This method uses Neon's managed server and OAuth authentication.
 
    ```json
    {
-      "mcpServers": {
-         "Neon": {
-            "command": "npx",
-            "args": [
-               "-y",
-               "mcp-remote",
-               "https://mcp.neon.tech/sse"
-            ]
-         }
-      }
+     "mcpServers": {
+       "Neon": {
+         "command": "npx",
+         "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
+       }
+     }
    }
    ```
 
    If you have other MCP servers configured, you can copy just the `Neon` part.
 
-      ![Cursor MCP JSON](/docs/guides/cursor-remote-mcp-server-json.png)
+   ![Cursor MCP JSON](/docs/guides/cursor-remote-mcp-server-json.png)
 
    Save the `mcp.json` file after pasting the configuration.
 
@@ -77,8 +73,8 @@ This method uses Neon's managed server and OAuth authentication.
 
 5. An OAuth window will open in your browser. Follow the prompts to authorize Cursor to access your Neon account.
 
-6.  You can verify that the connection is successful by checking the **MCP Servers** section in Cursor settings.
-      ![Cursor with Neon MCP Tools](/docs/guides/cursor-with-neon-mcp-tools.png)
+6. You can verify that the connection is successful by checking the **MCP Servers** section in Cursor settings.
+   ![Cursor with Neon MCP Tools](/docs/guides/cursor-with-neon-mcp-tools.png)
 
 7. Cursor is now connected to Neon's remote MCP server.
 
@@ -95,61 +91,52 @@ This method runs the Neon MCP server locally on your machine, using a Neon API k
 3. Paste the following JSON configuration into a file named `mcp.json` in the `.cursor` directory. Replace `<YOUR_NEON_API_KEY>` with your actual Neon API key which you obtained from the [prerequisites](#prerequisites) section:
 
    <CodeTabs labels={["MacOS/Linux", "Windows", "Windows (WSL)"]}>
+
    ```json
    {
-      "mcpServers": {
-         "Neon": {
-            "command": "npx",
-            "args": [
-               "-y",
-               "@neondatabase/mcp-server-neon",
-               "start",
-               "<YOUR_NEON_API_KEY>"
-            ]
-         }
-      }
+     "mcpServers": {
+       "Neon": {
+         "command": "npx",
+         "args": ["-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+       }
+     }
    }
    ```
 
    ```json
    {
-      "mcpServers": {
-         "Neon": {
-            "command": "cmd",
-            "args": [
-               "/c",
-               "npx",
-               "-y",
-               "@neondatabase/mcp-server-neon",
-               "start",
-               "<YOUR_NEON_API_KEY>"
-            ]
-         }
-      }
+     "mcpServers": {
+       "Neon": {
+         "command": "cmd",
+         "args": [
+           "/c",
+           "npx",
+           "-y",
+           "@neondatabase/mcp-server-neon",
+           "start",
+           "<YOUR_NEON_API_KEY>"
+         ]
+       }
+     }
    }
    ```
 
    ```json
    {
-      "mcpServers": {
-         "Neon": {
-            "command": "wsl",
-            "args": [
-               "npx",
-               "-y",
-               "@neondatabase/mcp-server-neon",
-               "start",
-               "<YOUR_NEON_API_KEY>"
-            ]
-         }
-      }
+     "mcpServers": {
+       "Neon": {
+         "command": "wsl",
+         "args": ["npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+       }
+     }
    }
    ```
+
    </CodeTabs>
 
    If you have other MCP servers configured, you can copy just the `Neon` part.
-   
-      ![Cursor Local MCP JSON](/docs/guides/cursor-local-mcp-server-json.png)
+
+   ![Cursor Local MCP JSON](/docs/guides/cursor-local-mcp-server-json.png)
 
 4. Save the `mcp.json` file after pasting the configuration.
 
@@ -157,7 +144,7 @@ This method runs the Neon MCP server locally on your machine, using a Neon API k
 
 6. Cursor is now connected to Neon's MCP server. You can verify that the connection is successful by checking the **MCP Servers** section in Cursor settings.
 
-      ![Cursor with Neon MCP Tools](/docs/guides/cursor-with-neon-mcp-tools.png)
+   ![Cursor with Neon MCP Tools](/docs/guides/cursor-with-neon-mcp-tools.png)
 
 You've now configured Neon MCP Server in Cursor and can manage your Neon Postgres databases using AI.
 
