@@ -57,7 +57,7 @@ In this example, the COPY statement exports all data from all columns of the `pe
 
 ![postgresql export csv](/postgresqltutorial/postgresql-export-csv.jpg)Sometimes, you may want to export data from some columns of a table to a CSV file. To achieve this, you can specify the column names together with the table name after `COPY` keyword.
 
-For example, the following statement exports data from the `first_name`, `last_name`, and `email`  columns of the `persons` table to `person_partial_db.csv`
+For example, the following statement exports data from the `first_name`, `last_name`, and `email` columns of the `persons` table to `person_partial_db.csv`
 
 ```
 COPY persons(first_name,last_name,email)

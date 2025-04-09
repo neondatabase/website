@@ -53,7 +53,6 @@ For more, see [Get started with Neon MCP server with Claude Desktop](/guides/neo
 
 4. Restart Cursor if necessary.
 
-
 For more, see [Get started with Cursor and Neon Postgres MCP Server](/guides/cursor-mcp-neon).
 
 ## Windsurf (Codeium)
@@ -67,7 +66,6 @@ For more, see [Get started with Cursor and Neon Postgres MCP Server](/guides/cur
 
 3. Click the **Refresh** button in Windsurf Cascade to load the new MCP server.
 
-
 For more, see [Get started with Windsurf and Neon Postgres MCP Server](/guides/windsurf-mcp-neon).
 
 ## Cline (VS Code Extension)
@@ -76,9 +74,9 @@ For more, see [Get started with Windsurf and Neon Postgres MCP Server](/guides/w
 2. Open your terminal.
 3. Run the following command, replacing `YOUR_NEON_API_KEY` with your actual Neon API key:
 
-    ```bash
-    npx -y @smithery/cli@latest install neon --client cline --config "{\"neonApiKey\":\"YOUR_NEON_API_KEY\"}"
-    ```
+   ```bash
+   npx -y @smithery/cli@latest install neon --client cline --config "{\"neonApiKey\":\"YOUR_NEON_API_KEY\"}"
+   ```
 
 For more, see [Get started with Cline and Neon Postgres MCP Server](/guides/cline-mcp-neon).
 
@@ -97,7 +95,7 @@ Replace `<client_name>` with the name of your MCP client application and `YOUR_N
 
 ## Manual configuration
 
-If your MCP client is not listed here or you prefer manual configuration, you can manually add the Neon MCP Server details to your client's `mcp_config` file.  The specific configuration varies slightly depending on your operating system.
+If your MCP client is not listed here or you prefer manual configuration, you can manually add the Neon MCP Server details to your client's `mcp_config` file. The specific configuration varies slightly depending on your operating system.
 
 <Tabs labels={["MacOS/Linux", "Windows", "Windows (WSL)"]}>
 

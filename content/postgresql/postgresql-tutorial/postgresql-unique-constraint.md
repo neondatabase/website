@@ -128,7 +128,7 @@ FROM
   pg_stat_activity;
 ```
 
-You should look at the result to find the `state` column with the value  `idle in transaction`. Those are the transactions that are pending to complete.
+You should look at the result to find the `state` column with the value `idle in transaction`. Those are the transactions that are pending to complete.
 
 ## Summary
 

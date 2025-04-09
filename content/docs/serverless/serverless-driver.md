@@ -213,7 +213,9 @@ You can customize the return format using the configuration options `fullResults
 
   ```javascript
   const sql = neon(process.env.DATABASE_URL);
-  const results = await sql.query('SELECT * FROM posts WHERE id = $1', [postId], { fullResults: true });
+  const results = await sql.query('SELECT * FROM posts WHERE id = $1', [postId], {
+    fullResults: true,
+  });
   // -> { ... same as above ... }
   ```
 
