@@ -88,8 +88,7 @@ The remote hosted MCP server is in preview due to the [new OAuth MCP specificati
 
 ### Option 2: Setting up the Local Neon MCP Server
 
-This method runs the Neon MCP server locally on your machine, using a Neon API
-key for authentication.
+This method runs the Neon MCP server locally on your machine, using a Neon API key for authentication.
 
 1. Open Cursor.
 2. Create a `.cursor` directory in your project's root directory. This is where Cursor will look for the MCP server configuration.
