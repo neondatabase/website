@@ -141,7 +141,7 @@ Set your restore window to 7 days to ensure data integrity and quick recovery.
 
 **Restore window details**
 
-By default, Neon's restore window is set to **1 day**. Extending it to 7 days helps protect you against data loss, letting you recover from human or application errors that may go unnoticed for days. It can also help with compliance with industry regulations that need longer retention periods. While upping your restore window does lead to increased storage costs, the added security and recoverability are useful for data integrity in production.
+By default, Neon's restore window is set to **1 day**. Extending it to 7 days helps protect you against data loss, letting you recover from human or application errors that may go unnoticed for days. It can also help you comply with any industry regulations that need longer retention periods. While a longer restore window can increase storage costs, it provides exta security and recoverability for production data.
 
 ![Restore window setting](/docs/get-started-with-neon/history_retention_setting.png)
 
