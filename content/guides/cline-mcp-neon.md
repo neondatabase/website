@@ -47,7 +47,7 @@ Before you begin, ensure you have the following:
 
 This method uses Neon's managed server and OAuth authentication.
 
-### Installation and Configuration
+### Installation and configuration
 
 1. Open Cline by clicking on the Cline icon in the VS Code sidebar.
 2. To configure MCP Servers in Cline, you need to modify the `cline_mcp_settings.json` file.
