@@ -1,5 +1,5 @@
 ---
-title: "AI Rules: Neon Auth"
+title: 'AI Rules: Neon Auth'
 subtitle: Context rules for AI tools to help implement authentication with Stack Auth and Neon databases
 enableTableOfContents: true
 ---
@@ -20,12 +20,13 @@ enableTableOfContents: true
 
 ## Rules
 
-`````markdown shouldWrap
+````markdown shouldWrap
 ---
 description: Use these rules to relate your database data with your Auth users information
 globs: *.tsx, *.ts
 alwaysApply: false
 ---
+
 # Neon Auth guidelines
 
 ## Overview
@@ -41,14 +42,14 @@ This document provides comprehensive guidelines for implementing authentication 
 
 - Run the installation wizard with:  
   `npx @stackframe/init-stack@latest`
-- Update your API keys in your `.env.local` file:  
-  - `NEXT_PUBLIC_STACK_PROJECT_ID`  
-  - `NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY`  
+- Update your API keys in your `.env.local` file:
+  - `NEXT_PUBLIC_STACK_PROJECT_ID`
+  - `NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY`
   - `STACK_SECRET_SERVER_KEY`
-- Key files created/updated include:  
-  - `app/handler/[...stack]/page.tsx` (default auth pages)  
-  - `app/layout.tsx` (wrapped with StackProvider and StackTheme)  
-  - `app/loading.tsx` (provides a Suspense fallback)  
+- Key files created/updated include:
+  - `app/handler/[...stack]/page.tsx` (default auth pages)
+  - `app/layout.tsx` (wrapped with StackProvider and StackTheme)
+  - `app/loading.tsx` (provides a Suspense fallback)
   - `stack.ts` (initializes your Stack server app)
 
 ### UI Components
@@ -56,7 +57,7 @@ This document provides comprehensive guidelines for implementing authentication 
 - Use pre-built components from `@stackframe/stack` like `<UserButton />`, `<SignIn />`, and `<SignUp />` to quickly set up auth UI.
 - You can also compose smaller pieces like `<OAuthButtonGroup />`, `<MagicLinkSignIn />`, and `<CredentialSignIn />` for custom flows.
 - Example:
-  
+
   ```tsx
   import { SignIn } from '@stackframe/stack';
   export default function Page() {
@@ -74,13 +75,13 @@ This document provides comprehensive guidelines for implementing authentication 
 
 - Client Components rely on hooks like `useUser()` and `useStackApp()`.
 - Example:
-  
+
   ```tsx
-  "use client";
-  import { useUser } from "@stackframe/stack";
+  'use client';
+  import { useUser } from '@stackframe/stack';
   export function MyComponent() {
     const user = useUser();
-    return <div>{user ? `Hello, ${user.displayName}` : "Not logged in"}</div>;
+    return <div>{user ? `Hello, ${user.displayName}` : 'Not logged in'}</div>;
   }
   ```
 
@@ -88,12 +89,12 @@ This document provides comprehensive guidelines for implementing authentication 
 
 - For Server Components, use `stackServerApp.getUser()` from your `stack.ts` file.
 - Example:
-  
+
   ```tsx
-  import { stackServerApp } from "@/stack";
+  import { stackServerApp } from '@/stack';
   export default async function ServerComponent() {
     const user = await stackServerApp.getUser();
-    return <div>{user ? `Hello, ${user.displayName}` : "Not logged in"}</div>;
+    return <div>{user ? `Hello, ${user.displayName}` : 'Not logged in'}</div>;
   }
   ```
 
@@ -104,7 +105,7 @@ This document provides comprehensive guidelines for implementing authentication 
   - Using `await stackServerApp.getUser({ or: "redirect" })` in Server Components.
   - Implementing middleware that checks for a user and redirects to `/handler/sign-in` if not found.
 - Example middleware:
-  
+
   ```tsx
   export async function middleware(request: NextRequest) {
     const user = await stackServerApp.getUser();
@@ -168,18 +169,18 @@ SELECT * FROM neon_auth.users_sync WHERE deleted_at IS NULL;
 To join user data with your application tables:
 
 ```sql
-SELECT 
+SELECT
   t.*,
   u.id AS user_id,
   u.name AS user_name,
   u.email AS user_email
-FROM 
+FROM
   public.todos t
-LEFT JOIN 
+LEFT JOIN
   neon_auth.users_sync u ON t.owner = u.id
-WHERE 
+WHERE
   u.deleted_at IS NULL
-ORDER BY 
+ORDER BY
   t.id;
 ```
 
@@ -254,6 +255,7 @@ type CurrentUser = {
 ## Best Practices for Integration
 
 ### Stack Auth Best Practices
+
 - Use the appropriate methods based on component type:
   - Use hook-based methods (`useXyz`) in Client Components
   - Use promise-based methods (`getXyz`) in Server Components
@@ -261,6 +263,7 @@ type CurrentUser = {
 - Use pre-built UI components whenever possible to ensure proper auth flow handling
 
 ### Neon Auth Best Practices
+
 - Always use `LEFT JOIN` when relating with `neon_auth.users_sync`
   - Ensures queries work even if user records are missing
 - Always filter out users with `deleted_at IS NOT NULL`
@@ -281,16 +284,17 @@ type CurrentUser = {
 ## Example: Custom Profile Page with Database Integration
 
 ### Frontend Component
+
 ```tsx
 'use client';
 import { useUser, useStackApp, UserButton } from '@stackframe/stack';
 export default function ProfilePage() {
-  const user = useUser({ or: "redirect" });
+  const user = useUser({ or: 'redirect' });
   const app = useStackApp();
   return (
     <div>
       <UserButton />
-      <h1>Welcome, {user.displayName || "User"}</h1>
+      <h1>Welcome, {user.displayName || 'User'}</h1>
       <p>Email: {user.primaryEmail}</p>
       <button onClick={() => user.signOut()}>Sign Out</button>
     </div>
@@ -299,17 +303,19 @@ export default function ProfilePage() {
 ```
 
 ### Database Query for User's Content
+
 ```sql
 -- Get all todos for the currently logged in user
-SELECT 
+SELECT
   t.*
-FROM 
+FROM
   public.todos t
-LEFT JOIN 
+LEFT JOIN
   neon_auth.users_sync u ON t.owner = u.id
-WHERE 
+WHERE
   u.id = $current_user_id
   AND u.deleted_at IS NULL
-ORDER BY 
+ORDER BY
   t.created_at DESC;
-`````
+```
+````

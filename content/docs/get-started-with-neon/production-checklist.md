@@ -119,13 +119,14 @@ Connection pooling with [PgBouncer](https://www.pgbouncer.org/) allows your data
 
 **Recommendation**
 
- For production environments, enable connection pooling. This increases the number of simultaneous connections your database can handle and optimizes resource usage.
+For production environments, enable connection pooling. This increases the number of simultaneous connections your database can handle and optimizes resource usage.
 
 **Connection details**
 
- Use a pooled connection string by adding `-pooler` to your endpoint ID, or simply copy the pooled connection string from your Neon Project Dashboard. This string allows your database to efficiently manage multiple connections. For more information, see [Connection pooling](/docs/connect/connection-pooling).
+Use a pooled connection string by adding `-pooler` to your endpoint ID, or simply copy the pooled connection string from your Neon Project Dashboard. This string allows your database to efficiently manage multiple connections. For more information, see [Connection pooling](/docs/connect/connection-pooling).
 
 Example connection string:
+
 ```bash
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```

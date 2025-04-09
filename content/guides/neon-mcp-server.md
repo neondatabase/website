@@ -85,15 +85,15 @@ We'll use Claude Desktop to interact with Neon MCP server. Here's how to set it 
 1.  Open your terminal.
 2.  Run the following command, replacing `YOUR_NEON_API_KEY` with your actual Neon API key:
 
-  This command configures Neon MCP server to connect to your Neon account using the **Neon API Key**, as shown here:
+This command configures Neon MCP server to connect to your Neon account using the **Neon API Key**, as shown here:
 
-  ```bash
-  npx -y @smithery/cli@latest install neon --client claude --config "{\"neonApiKey\":\"napi_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"}"
-  ✔ Successfully resolved neon
-  Installing remote server. Please ensure you trust the server author, especially when sharing sensitive data.
-  For information on Smithery's data policy, please visit: https://smithery.ai/docs/data-policy
-  neon successfully installed for claude
-  ```
+```bash
+npx -y @smithery/cli@latest install neon --client claude --config "{\"neonApiKey\":\"napi_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"}"
+✔ Successfully resolved neon
+Installing remote server. Please ensure you trust the server author, especially when sharing sensitive data.
+For information on Smithery's data policy, please visit: https://smithery.ai/docs/data-policy
+neon successfully installed for claude
+```
 
 3.  Restart Claude Desktop. You can do so by quitting the Claude Desktop and opening it again.
 

@@ -88,7 +88,7 @@ SET mooncake.default_bucket = 's3://<bucket>';
 <Admonition type="note" title="R2 and GCP buckets also supported">
 The `pg_mooncake` extension also supports R2 and GCP buckets. For set up instructions, refer to **pg_mooncake's** [cloud storage docs](https://pgmooncake.com/docs/cloud-storage).
 
-In the future, you will not have to bring your own bucket to use `pg_mooncake` with Neon. 
+In the future, you will not have to bring your own bucket to use `pg_mooncake` with Neon.
 </Admonition>
 
 ## Create a columnstore table with `USING columnstore`
