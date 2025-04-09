@@ -166,17 +166,11 @@ Let's walk through a typical development scenario: Quickly adding a column for p
 
 **Scenario:** During development, you decide to track timestamps for entries in your `playing_with_neon` table. You want to quickly add a `created_at` column.
 
-Check out the video below to see how Cline and Neon MCP Server can help you add a new column to your database table using natural language commands.
-
-<video autoPlay playsInline muted loop width="800" height="600" controls>
-  <source type="video/mp4" src="/videos/pages/doc/cline-neon-mcp.mp4"/>
-</video>
-
 <Admonition type="tip" title="Security Reminder">
 For your security, review the tool's purpose before permitting the operation to proceed. Remember that LLMs can sometimes produce unexpected results, so careful monitoring is always recommended.
 </Admonition>
 
-Here's the conversation log between the user and Cline:
+Following is a sample interaction with Cline where you can see how it uses the Neon MCP server to add a column to your table:
 
 ```text shouldWrap
 User: in my neon project id: fancy-bush-59303206, list all my tables

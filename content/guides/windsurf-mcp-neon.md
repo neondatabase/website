@@ -178,17 +178,11 @@ Let's walk through a typical development scenario: Quickly adding a column for p
 
 **Scenario:** During development, you decide to track timestamps for entries in your `playing_with_neon` table. You want to quickly add a `created_at` column.
 
-Check out the video below to see how Windsurf and Neon MCP Server can help you add a new column to your database table using natural language commands.
-
-<video autoPlay playsInline muted loop width="800" height="600" controls>
-  <source type="video/mp4" src="/videos/pages/doc/windsurf-neon-mcp.mp4"/>
-</video>
-
 <Admonition type="tip" title="Security Reminder">
 Be aware that Cascade currently executes commands directly from your prompts without confirmation unlike other IDE's and apps like [Cursor](/guides/cursor-mcp-neon) and [Claude](/guides/neon-mcp-server).  Review your requests thoroughly to avoid unintended or unwanted actions.
 </Admonition>
 
-Here's the conversation log between the user and Cascade:
+Following is a sample interaction with Cascade where you can see how it uses the Neon MCP server to add a new column to your database table:
 
 ```text shouldWrap
 User: in my neon project id: fancy-bush-59303206, list all the tables
