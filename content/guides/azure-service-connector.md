@@ -83,8 +83,8 @@ Follow these steps to create a service connection from your Azure compute servic
 
             ![Store Secret in Key Vault Option](/docs/guides/azure-service-connector/key-vault-creation.png)
 
-          Service Connector will then reference this secret. This is more secure than storing the password directly in App Service configuration.
-          </Admonition>
+            Service Connector will then reference this secret. This is more secure than storing the password directly in App Service configuration.
+            </Admonition>
 
       2.  **Key Vault reference (for pre-existing Key Vault secret):**
           - Select the **Key Vault** tile.

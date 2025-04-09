@@ -144,7 +144,7 @@ This method runs the Neon MCP server locally on your machine, using a Neon API k
 
 6. Cursor is now connected to Neon's MCP server. You can verify that the connection is successful by checking the **MCP Servers** section in Cursor settings.
 
-![Cursor with Neon MCP Tools](/docs/guides/cursor-with-neon-mcp-tools.png)
+   ![Cursor with Neon MCP Tools](/docs/guides/cursor-with-neon-mcp-tools.png)
 
 You've now configured Neon MCP Server in Cursor and can manage your Neon Postgres databases using AI.
 
