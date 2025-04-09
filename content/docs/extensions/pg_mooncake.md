@@ -3,7 +3,7 @@ title: The pg_mooncake extension
 subtitle: Fast analytics in Postgres with columnstore tables and DuckDB execution
 tag: new
 enableTableOfContents: true
-updatedOn: '2025-02-07T19:29:48.914Z'
+updatedOn: '2025-04-08T22:55:27.444Z'
 ---
 
 The [pg_mooncake](https://github.com/Mooncake-Labs/pg_mooncake) extension enables fast analytic workloads in Postgres by adding native columnstore tables and vectorized execution (DuckDB).
@@ -88,7 +88,7 @@ SET mooncake.default_bucket = 's3://<bucket>';
 <Admonition type="note" title="R2 and GCP buckets also supported">
 The `pg_mooncake` extension also supports R2 and GCP buckets. For set up instructions, refer to **pg_mooncake's** [cloud storage docs](https://pgmooncake.com/docs/cloud-storage).
 
-In the future, you will not have to bring your own bucket to use `pg_mooncake` with Neon. 
+In the future, you will not have to bring your own bucket to use `pg_mooncake` with Neon.
 </Admonition>
 
 ## Create a columnstore table with `USING columnstore`

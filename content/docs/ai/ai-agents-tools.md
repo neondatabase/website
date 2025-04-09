@@ -2,6 +2,7 @@
 title: Ship faster with AI tools
 subtitle: AI-powered tools for development and database management
 enableTableOfContents: true
+updatedOn: '2025-04-08T22:55:27.438Z'
 ---
 
 Neon provides several ways to integrate with AI tools and agents, from natural language database control to autonomous agent frameworks. Choose the tools that fit your workflow.
@@ -17,7 +18,7 @@ The Model Context Protocol (MCP) is a standardized way for AI tools to interact 
 
 ## Integrate Neon in your IDE
 
-These tools leverage the Neon MCP server to provide natural language interfaces and 
+These tools leverage the Neon MCP server to provide natural language interfaces and
 AI-enhanced database management capabilities within your preferred development environment.
 
 <DetailIconCards>

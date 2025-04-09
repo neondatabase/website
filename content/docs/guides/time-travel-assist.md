@@ -2,7 +2,7 @@
 title: Time Travel
 subtitle: Learn how to query point-in-time connections against your data's history
 enableTableOfContents: true
-updatedOn: '2025-02-07T17:55:42.638Z'
+updatedOn: '2025-04-08T22:55:27.448Z'
 ---
 
 To help review your data's history, Time Travel lets you connect to any selected point in time within your restore window and then run queries against that connection. This capability is part of Neon's instant restore feature, which maintains a history of changes through Write-Ahead Log (WAL) records.
@@ -58,6 +58,7 @@ Here's an example of a completed Time Travel query.
 ![time travel from sql editor](/docs/guides/time_travel_sql.png)
 
 ### Time Travel Assist with instant restore
+
 Time Travel Assist is also available from the **Restore** page, as part of the [Instant restore](/docs/guides/branch-restore) feature. Before completing a restore operation, it's a good idea to use Time Travel Assist to verify that you've targetted the correct restore point.
 
 An SQL editor is built into the **Restore** page for this purpose. When you make your branch and timestamp selection to restore a branch, this selection can also be used as the point-in-time connection to query against.

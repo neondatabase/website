@@ -1,7 +1,7 @@
 ---
 title: Usage metrics
 enableTableOfContents: true
-updatedOn: '2025-01-09T10:27:36.267Z'
+updatedOn: '2025-04-08T22:55:27.450Z'
 ---
 
 This topic describes [Storage](#storage), [Archive storage](#archive-storage), [Compute](#compute), [Data transfer](#data-transfer) and [Project](#projects) usage metrics in detail so that you can better manage your [plan](/docs/introduction/plans) allowances and extra usage.
@@ -386,7 +386,7 @@ Your project has exceeded the data transfer quota. Upgrade your plan to increase
 
 If you hit the data transfer limit on the Free plan, you can upgrade your plan from the **Billing** page in your Neon account. For details, see [Change your plan](/docs/introduction/manage-billing#change-your-plan).
 
-For paid plans, Neon applies a reasonable usage policy—there’s no fixed limit, but usage should remain within what’s typical for most workloads. If usage is unusually high, Neon may reach out to discuss your use case and plan options. 
+For paid plans, Neon applies a reasonable usage policy—there’s no fixed limit, but usage should remain within what’s typical for most workloads. If usage is unusually high, Neon may reach out to discuss your use case and plan options.
 
 You can monitor your data transfer usage on the **Project Dashboard** or **Billing** page.
 

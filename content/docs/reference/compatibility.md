@@ -4,7 +4,7 @@ subtitle: Learn about Neon as a managed Postgres service
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2025-03-18T15:50:56.626Z'
+updatedOn: '2025-04-08T22:55:27.452Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
@@ -42,7 +42,7 @@ Because Neon is a managed Postgres service, Postgres parameters are not user-con
 | `client_connection_check_interval`    | 60000         |                                                                                                                                                                                                                                                                                |
 | `dynamic_shared_memory_type`          | mmap          |                                                                                                                                                                                                                                                                                |
 | `effective_io_concurrency`            | 20            |                                                                                                                                                                                                                                                                                |
-| `effective_cache_size    `            |               | Set based on the [Local File Cache (LFC)](/docs/reference/glossary#local-file-cache) size of your maximum Neon compute size                                                                                                                                                   |
+| `effective_cache_size    `            |               | Set based on the [Local File Cache (LFC)](/docs/reference/glossary#local-file-cache) size of your maximum Neon compute size                                                                                                                                                    |
 | `fsync`                               | off           | Neon syncs data to the Neon Storage Engine to store your data safely and reliably                                                                                                                                                                                              |
 | `hot_standby`                         | off           |                                                                                                                                                                                                                                                                                |
 | `idle_in_transaction_session_timeout` | 300000        |                                                                                                                                                                                                                                                                                |
