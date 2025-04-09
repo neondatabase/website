@@ -57,7 +57,7 @@ The remote hosted MCP server is currently in its preview phase. As the [OAuth sp
 - An MCP Client application (e.g., Cursor, Windsurf, Claude Desktop, Cline).
 - A Neon account.
 
-#### Setup Steps:
+#### Setup steps:
 
 You can watch the video below for a quick overview of the setup process.
 
