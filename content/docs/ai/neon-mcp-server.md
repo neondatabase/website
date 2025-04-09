@@ -40,7 +40,7 @@ Traditionally, connecting AI models to different data sources required developer
 The Neon MCP server grants powerful database management capabilities through natural language requests.  **Always review and authorize actions** requested by the LLM before execution. Ensure that only authorized users and applications have access to the Neon MCP server and Neon API keys.
 </Admonition>
 
-## Setup Options
+## Setup options
 
 You can set up the Neon MCP Server in two ways:
 
