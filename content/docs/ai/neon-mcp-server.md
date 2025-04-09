@@ -65,7 +65,7 @@ You can watch the video below for a quick overview of the setup process.
   <source type="video/mp4" src="https://neondatabase.wpengine.com/wp-content/uploads/2025/04/neon-hosted-mcp-server.mp4"/>
 </video>
 
-If you prefer a written guide, follow these steps:
+Steps:
 
 1.  Go to your MCP Client's settings where you configure MCP Servers (this varies by client)
 2.  Register a new MCP Server. Add a configuration block for "Neon" under 'mcpServers' key. The configuration should look like this:
