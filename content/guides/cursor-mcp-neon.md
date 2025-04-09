@@ -67,14 +67,19 @@ This method uses Neon's managed server and OAuth authentication.
 
    If you have other MCP servers configured, you can copy just the `Neon` part.
 
-4. **Restart Cursor** or reload the window (`Developer: Reload Window` from the Command Palette).
-5. Open Cursor Composer to initiate an **OAuth flow**:
+      ![Cursor MCP JSON](/docs/guides/cursor-remote-mcp-server-json.png)
+
+4. **Restart Cursor** or reload the window (`Developer: Reload Window` from the Command Palette). If Cursor prompts you to Enable the MCP server, click **Enable**.
+
+5. You may be prompted to authorize the Neon MCP server connection. Follow these steps:
    - Your browser will open a Neon page requesting authorization.
    - Review the permissions and click **Authorize**.
    - Close the browser tab once you see the success message.
-6. Cursor is now connected to Neon's remote MCP server. You can verify that the connection is successful by checking the **MCP Servers** section in Cursor settings.
 
-   ![Cursor with Neon MCP Tools](/docs/guides/cursor-with-neon-mcp-tools.png)
+6.  You can verify that the connection is successful by checking the **MCP Servers** section in Cursor settings.
+      ![Cursor with Neon MCP Tools](/docs/guides/cursor-with-neon-mcp-tools.png)
+
+7. Cursor is now connected to Neon's remote MCP server.
 
 <Admonition type="note">
 The remote hosted MCP server is in preview due to the [new OAuth MCP specification](https://spec.modelcontextprotocol.io/specification/2025-03-26/basic/authorization/), expect potential changes as we continue to refine the OAuth integration.
@@ -87,7 +92,7 @@ key for authentication.
 
 1. Open Cursor.
 2. Create a `.cursor` directory in your project's root directory. This is where Cursor will look for the MCP server configuration.
-3. Paste the following JSON configuration into a file named `mcp.json` in the `.cursor` directory:
+3. Paste the following JSON configuration into a file named `mcp.json` in the `.cursor` directory. Replace `<YOUR_NEON_API_KEY>` with your actual Neon API key which you obtained from the [prerequisites](#prerequisites) section:
 
    <CodeTabs labels={["MacOS/Linux", "Windows", "Windows (WSL)"]}>
    ```json
@@ -144,6 +149,7 @@ key for authentication.
 
    If you have other MCP servers configured, you can copy just the `Neon` part.
    
+      ![Cursor Local MCP JSON](/docs/guides/cursor-local-mcp-server-json.png)
 
 4. **Restart Cursor** or reload the window (`Developer: Reload Window` from the Command Palette).
 
