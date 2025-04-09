@@ -89,7 +89,7 @@ You have two options for connecting Claude to the Neon MCP Server:
 
 2. **Local MCP Server:** Run the Neon MCP server locally on your machine, authenticating with a Neon API key.
 
-### Option 1: Setting up the Remote Hosted Neon MCP Server
+### Option 1: Setting up the remote hosted Neon MCP Server
 
 1. Open Claude desktop and navigate to **Settings**.
    ![Claude settings](/guides/images/claude_mcp/claude_settings.png)
