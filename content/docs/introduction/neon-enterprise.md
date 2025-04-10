@@ -13,7 +13,7 @@ Neon combines the power of Postgres with a modern serverless architecture to hel
 
 - **Serverless Postgres** – Instant autoscaling of CPU, memory, and connections
 - **10,000+ connections** – Built-in connection pooling
-- **Database branching** – Create production-grade environments on the fly
+- **Database branching & instant provisioning** – Create production-grade environments on the fly
 - **Multi-tenancy** – Project-level isolation for tenant data and resources
 - **High availability and disaster recovery** – PITR, branching, and multi-AZ durability
 - **Security and compliance** – HIPAA, SOC 2, ISO 27001, GDPR, CCPA
@@ -45,7 +45,7 @@ Isolate customer data into separate Neon projects to isolate data and resources 
 
 ## Enterprise features
 
-### Platform & integrations
+### Platform
 
 - Available on AWS and Azure
 - API access for database management
@@ -89,7 +89,7 @@ Isolate customer data into separate Neon projects to isolate data and resources 
 
 Neon powers platforms like [Vercel](/blog/neon-postgres-on-vercel), [Replit](https://www.linkedin.com/posts/nikitashamgunov_heres-the-story-on-how-we-accidentally-created-activity-7242909460304699393-6mr2/), [Retool](/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases), and [Koyeb](https://www.koyeb.com/blog/serverless-postgres-public-preview).
 
-Explore [use cases](https://neon.tech/use-cases) to see how Neon supports SaaS apps, AI platforms, and multi-tenant services.
+Explore our [case studies](https://neon.tech/case-studies) and use cases to see how Neon supports [SaaS apps](https://neon.tech/use-cases/postgres-for-saas), Serverless apps](https://neon.tech/use-cases/serverless-apps), [AI agent platforms](https://neon.tech/use-cases/ai-agents), and [multi-tenant services](https://neon.tech/use-cases/database-per-tenant).
 
 ## Getting started
 
@@ -133,7 +133,7 @@ Use this checklist to evaluate Neon for your team:
 - [ ] [Configurable update windows](/docs/manage/updates) and [managed platform maintenance](/docs/manage/platform-maintenance)
 - [ ] [Usage quotas and billing visibility](/docs/guides/partner-intro#billing)
 - [ ] [SLAs](/docs/introduction/support#slas)
-- [ ] Postgres [data import](/docs/guides/logical-replication-guide#replicate-data-to-neon) (inbound logical replication, [dump & restore](/docs/import/migrate-from-postgres), and the [Import Data Assistant](/docs/import/import-data-assistant))
+- [ ] Postgres data import — [inbound logical replication](), [dump & restore](/docs/import/migrate-from-postgres), and the [Import Data Assistant](/docs/import/import-data-assistant))
 - [ ] Postgres [data export to external data services & platforms](/docs/guides/logical-replication-guide#replicate-data-from-neon) (outbound logical replication)
 
 ### Developer experience
