@@ -89,7 +89,7 @@ Isolate customer data and resources into separate Neon projects for efficient ma
 
 Neon powers platforms like [Vercel](/blog/neon-postgres-on-vercel), [Replit](https://www.linkedin.com/posts/nikitashamgunov_heres-the-story-on-how-we-accidentally-created-activity-7242909460304699393-6mr2/), [Retool](/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases), and [Koyeb](https://www.koyeb.com/blog/serverless-postgres-public-preview).
 
-Explore our [case studies](https://neon.tech/case-studies) and use cases to see how Neon supports [SaaS apps](https://neon.tech/use-cases/postgres-for-saas), Serverless apps](https://neon.tech/use-cases/serverless-apps), [AI agent platforms](https://neon.tech/use-cases/ai-agents), and [multi-tenant services](https://neon.tech/use-cases/database-per-tenant).
+Explore our [case studies](https://neon.tech/case-studies) and use cases to see how Neon supports [SaaS apps](https://neon.tech/use-cases/postgres-for-saas), [Serverless apps](https://neon.tech/use-cases/serverless-apps), [AI agent platforms](https://neon.tech/use-cases/ai-agents), and [multi-tenant services](https://neon.tech/use-cases/database-per-tenant).
 
 ## Getting started
 
