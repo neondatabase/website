@@ -50,7 +50,7 @@ Vector similarity search computes similarities (the distance) between data point
 - Manhattan (L1): Also known as "taxicab" or "city block" distance.
 - Cosine: This calculates the cosine of the angle between two vectors.
 
-Other distance metrics supported by the `pgvector` extension include [Hamming distance](https://en.wikipedia.org/wiki/Hamming_distance) and [Jaccard distance]https://en.wikipedia.org/wiki/Jaccard_index).
+Other distance metrics supported by the `pgvector` extension include [Hamming distance](https://en.wikipedia.org/wiki/Hamming_distance) and [Jaccard distance](https://en.wikipedia.org/wiki/Jaccard_index).
 
 Different distance metrics can be more appropriate for different tasks, depending on the nature of the data and the specific relationships you're interested in. For instance, cosine similarity is often used in text analysis.
 
