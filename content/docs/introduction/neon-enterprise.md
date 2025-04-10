@@ -41,7 +41,7 @@ Spin up Postgres instances instantly for agent workloads, data processing, or lo
 
 ### Multi-tenant applications
 
-Isolate customer data into separate Neon projects to isolate data and resources and to meet compliance requirements. Built-in autoscaling and usage tracking help you stay efficient.
+Isolate customer data and resources into separate Neon projects for efficient management and to meet compliance requirements. 
 
 ## Enterprise features
 
