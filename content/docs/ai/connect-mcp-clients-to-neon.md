@@ -199,7 +199,7 @@ For more, see [Get started with Windsurf and Neon Postgres MCP Server](/guides/w
 
 For more, see [Get started with Cline and Neon Postgres MCP Server](/guides/cline-mcp-neon).
 
-## Other MCP Clients
+## Other MCP clients
 
 Adapt the instructions above for other clients:
 
@@ -291,7 +291,7 @@ If your client does not use `JSON` for configuration of MCP servers (such as old
 npx -y @neondatabase/mcp-server-neon start <YOUR_NEON_API_KEY>
 ```
 
-## Next Steps
+## Next steps
 
 Once connected, you can start interacting with your Neon Postgres databases using natural language commands within your chosen MCP client. Explore the [Supported Actions (Tools)](/docs/ai/neon-mcp-server#supported-actions-tools) of the Neon MCP Server to understand the available functionalities.
 
