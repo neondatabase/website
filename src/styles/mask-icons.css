@@ -13,33 +13,16 @@
   }
 
   /* Used in a /src/components/pages/pricing/hero/features/features.jsx  */
-  .pricing-icon-size {
-    -webkit-mask-size: 14px 15px;
-  }
-
   .pricing-check-icon {
     -webkit-mask-image: url('/images/check.svg');
-    @apply mask-styles pricing-icon-size;
+    -webkit-mask-size: 14px 15px;
+    @apply mask-styles;
   }
 
-  .pricing-autoscale-icon {
-    -webkit-mask-image: url('/images/pricing/autoscale.svg');
-    @apply mask-styles pricing-icon-size;
-  }
-
-  .pricing-clock-icon {
-    -webkit-mask-image: url('/images/pricing/clock.svg');
-    @apply mask-styles pricing-icon-size;
-  }
-
-  .pricing-projects-icon {
-    -webkit-mask-image: url('/images/pricing/projects.svg');
-    @apply mask-styles pricing-icon-size;
-  }
-
-  .pricing-storage-icon {
-    -webkit-mask-image: url('/images/pricing/storage.svg');
-    @apply mask-styles pricing-icon-size;
+  .pricing-minus-icon {
+    -webkit-mask-image: url('/images/minus.svg');
+    -webkit-mask-size: 12px 3px;
+    @apply mask-styles;
   }
 
   /* Used in a /src/components/shared/footer/footer.jsx  */

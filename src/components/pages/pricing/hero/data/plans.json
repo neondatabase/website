@@ -3,38 +3,46 @@
     "planId": "free",
     "type": "Free Plan",
     "price": 0,
-    "description": "To kickstart your projects, no credit card required.",
+    "description": "For vibe coders and developers launching side projects.",
     "features": [
       {
-        "icon": "projects",
-        "title": "10 projects",
-        "info": "10 branches per project"
-      },
-      {
-        "icon": "storage",
-        "title": "0.5 GB storage"
-      },
-      {
-        "icon": "clock",
-        "title": [
-          "190 ",
+        "items": [
+          { "title": "10 projects" },
+          { "title": "10 branches per project" },
+          { "title": "0.5 GiB per project" },
           {
-            "type": "link",
-            "text": "compute hours",
-            "href": "#compute-hour"
-          }
-        ],
-        "info": "For main branch. Additional branches limited to 5 compute hours"
+            "title": [
+              "50 ",
+              {
+                "type": "link",
+                "text": "compute hours",
+                "href": "#compute-hour"
+              },
+              " per project"
+            ]
+          },
+          {
+            "title": "Scale to 2 CU",
+            "info": "2 CU = 2 vCPU, 8 GB RAM"
+          },
+          { "title": "5 GB data transfer" },
+          { "title": "Instant Restores", "info": "Within a 6-hour window" }
+        ]
       },
       {
-        "icon": "autoscale",
-        "title": "Autoscaling up to 2 CU",
-        "info": "2 CU = 2 vCPU, 8 GB RAM"
+        "disabled": true,
+        "items": [
+          { "title": "More projects" },
+          { "title": "More branches" },
+          { "title": "More storage" },
+          { "title": "More compute hours" },
+          { "title": "Compliance and security" },
+          { "title": "Metrics export" },
+          { "title": "Support" }
+        ]
       }
     ],
-    "otherFeatures": {
-      "features": [{ "title": "Read replicas" }, { "title": "Built-in high availability" }]
-    },
+    "limitations": {},
     "button": {
       "url": "https://console.neon.tech/signup",
       "text": "Start for free",
@@ -44,102 +52,64 @@
     }
   },
   {
-    "planId": "launch",
-    "type": "Launch",
+    "planId": "serverless",
+    "type": "Serverless",
     "highlighted": true,
-    "price": 19,
+    "price": 5,
     "priceFrom": true,
     "headerLinks": "Pay via <a href='https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa' target='_blank' rel='noopener noreferrer'>AWS</a>",
-    "description": "The resources, features, and support you need to launch.",
+    "description": "For early-stage startups and growing projects that need scalability.",
     "features": [
       {
-        "icon": "projects",
-        "title": "100 projects",
-        "info": "5,000 branches per project"
-      },
-      {
-        "icon": "storage",
-        "title": "10 GB storage",
-        "info": "Extra: $1.75 per GB"
-      },
-      {
-        "id": "compute_time",
-        "icon": "clock",
-        "title": [
-          "300 ",
+        "items": [
           {
-            "type": "link",
-            "text": "compute hours",
-            "href": "#compute-hour"
-          }
-        ],
-        "info": "Additional at $0.16 per compute hour"
+            "title": "10 projects",
+            "info": "Then $5 per project"
+          },
+          { "title": "100 branches" },
+          { "title": "0.5 GiB per project", "info": "Then $0.39-0.29 per GB" },
+          {
+            "title": [
+              "100 ",
+              {
+                "type": "link",
+                "text": "compute hours",
+                "href": "#compute-hour"
+              },
+              " per project"
+            ],
+            "info": "Then $0.18-0.22 per compute hour"
+          },
+          {
+            "title": "Scale to 8 CU",
+            "info": "8 CU = 8 vCPU, 32 GB RAM"
+          },
+          { "title": "100 GB data transfer", "info": "Then $10 per GB" },
+          { "title": "Instant Restores", "info": "Within a 24-hour window" },
+          { "title": "Standard Support" }
+        ]
       },
       {
-        "icon": "autoscale",
-        "title": "Autoscaling up to 4 CU",
-        "info": "4 CU = 4 vCPU, 16 GB RAM"
+        "title": {
+          "text": "Add-ons",
+          "info": "Incur additional costs. See detailed table."
+        },
+        "items": [
+          { "title": "More CPU/memory" },
+          { "title": "Standard Support" },
+          { "title": "Metrics export" },
+          { "title": "IP Allow" },
+          { "title": "SOC2 certified" },
+          { "title": "Instant Restores", "info": "Within a 30-day window" }
+        ]
       }
     ],
-    "otherFeatures": {
-      "title": "Everything in Free, plus...",
-      "features": [{ "title": "Organization accounts" }, { "title": "Standard Support" }]
-    },
     "button": {
       "url": "https://console.neon.tech/app/billing#plans",
-      "text": "Get started",
+      "text": "Select plan",
       "theme": "primary",
       "event": "Hero Launch Panel",
       "analyticsEvent": "pricing_page_get_started_with_launch_plan_clicked"
-    }
-  },
-  {
-    "planId": "scale",
-    "type": "Scale",
-    "price": 69,
-    "priceFrom": true,
-    "headerLinks": "Pay via <a href='https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa' target='_blank' rel='noopener noreferrer'>AWS</a> or <a href='https://azuremarketplace.microsoft.com/en-us/marketplace/apps/neon1722366567200.neon_serverless_postgres_azure_prod?tab=PlansAndPrice' target='_blank' rel='noopener noreferrer'>Azure</a>",
-    "description": "More capacity and functionality for scaling production workloads.",
-    "features": [
-      {
-        "icon": "projects",
-        "title": "1000 projects",
-        "info": "$50 per 1000 extra projects"
-      },
-      {
-        "icon": "storage",
-        "title": "50 GB storage",
-        "info": "Extra: $1.5 per GB"
-      },
-      {
-        "id": "compute_time",
-        "icon": "clock",
-        "title": [
-          "750 ",
-          {
-            "type": "link",
-            "text": "compute hours",
-            "href": "#compute-hour"
-          }
-        ],
-        "info": "Additional at $0.16 per compute hour"
-      },
-      {
-        "icon": "autoscale",
-        "title": "Autoscaling up to 8 CU",
-        "info": "8 CU = 8 vCPU, 32 GB RAM"
-      }
-    ],
-    "otherFeatures": {
-      "title": "Everything in Launch, plus...",
-      "features": [{ "title": "IP Allow Rules" }, { "title": "Datadog integration" }]
-    },
-    "button": {
-      "url": "https://console.neon.tech/app/billing#plans",
-      "text": "Get started",
-      "theme": "white-outline",
-      "event": "Hero Scale Panel",
-      "analyticsEvent": "pricing_page_get_started_with_scale_plan_clicked"
     }
   },
   {
@@ -147,54 +117,69 @@
     "type": "Business",
     "price": 700,
     "priceFrom": true,
-    "headerLinks": "<a href='/migration-assistance'>Get migration help</a>",
-    "description": "For larger workloads, with best compliance and security. ",
+    "headerLinks": "Pay via <a href='https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa' target='_blank' rel='noopener noreferrer'>AWS</a> or <a href='https://azuremarketplace.microsoft.com/en-us/marketplace/apps/neon1722366567200.neon_serverless_postgres_azure_prod?tab=PlansAndPrice' target='_blank' rel='noopener noreferrer'>Azure</a>",
+    "description": "For growing teams that need extra security, compliance, and support.",
     "features": [
       {
-        "icon": "projects",
-        "title": "5,000 projects",
-        "info": "$50 per 5,000 extra projects"
-      },
-      {
-        "icon": "storage",
-        "title": "500 GB storage",
-        "info": "Extra: $0.5 per GB"
-      },
-      {
-        "id": "compute_time",
-        "icon": "clock",
-        "title": [
-          "1000 ",
+        "title": { "text": "Same as Serverless plan, plus:" },
+        "items": [
           {
-            "type": "link",
-            "text": "compute hours",
-            "href": "#compute-hour"
-          }
-        ],
-        "info": "Additional at $0.16 per compute hour"
+            "title": "Scale to 52 CU",
+            "info": "52 CU = 52 vCPU, 224 GB RAM"
+          },
+          { "title": "Priority Support" },
+          { "title": "Metrics export" },
+          { "title": "IP Allow" },
+          { "title": "SOC2 certified" },
+          { "title": "PrivateLink" }
+        ]
       },
       {
-        "icon": "autoscale",
-        "title": "Autoscaling up to 16+ CU",
-        "info": "Ask us about larger compute sizes"
+        "title": {
+          "text": "Add-ons",
+          "info": "Incur additional costs. See detailed table."
+        },
+        "items": [
+          { "title": "HIPAA certified" },
+          { "title": "Instant Restores", "info": "Within a 30-day window" }
+        ]
       }
     ],
-    "otherFeatures": {
-      "title": "Everything in Scale, plus...",
-      "features": [
-        { "title": "SOC 2, HIPAA (upon request)" },
-        { "title": "0-downtime migrations" },
-        { "title": "Private Link" },
-        { "title": "Priority Support" },
-        {
-          "title": "99.95% SLA"
-        },
-        { "title": "PITR (30 days)" }
-      ]
-    },
     "button": {
       "url": "https://console.neon.tech/app/billing#plans",
-      "text": "Get started",
+      "text": "Select plan",
+      "theme": "white-outline",
+      "event": "Hero Scale Panel",
+      "analyticsEvent": "pricing_page_get_started_with_scale_plan_clicked"
+    }
+  },
+  {
+    "planId": "enterprise",
+    "type": "Enterprise",
+    "priceFrom": false,
+    "customPrice": true,
+    "headerLinks": "<a href='/migration-assistance'>Get migration help</a>",
+    "description": "For larger teams looking for annual contracts and tailored solutions.",
+    "features": [
+      {
+        "title": { "text": "Adjusted to your needs" },
+        "items": [
+          { "title": "Invoice payments" },
+          { "title": "Annual commitments" },
+          { "title": "Special pricing" },
+          { "title": "0-downtime migrations" },
+          { "title": "Dedicated Slack channel" },
+          { "title": "Assigned solution engineer" },
+          { "title": "Security questionnaires" },
+          { "title": "Compliance certifications" },
+          { "title": "Custom domain proxy" },
+          { "title": "Highest level of support" }
+        ]
+      }
+    ],
+    "button": {
+      "url": "https://console.neon.tech/app/billing#plans",
+      "text": "Select plan",
       "theme": "white-outline",
       "event": "Hero Enterprise Panel",
       "analyticsEvent": "pricing_page_get_started_with_business_plan_clicked"
