@@ -161,7 +161,7 @@
       "enterprise": ""
     },
     {
-      "rows": "9",
+      "rows": "6",
       "feature": {
         "title": "Compute",
         "subtitle": "Tiered pricing. Pay less the more compute hours you consume."
@@ -169,29 +169,29 @@
       "free": "N/A",
       "serverless": [
         {
-          "title": "100-1,000 compute hours",
+          "title": "100-1,000 hours",
           "subtitle": "$0.22 per compute hour"
         },
         {
-          "title": "1,000-10,000 compute hours",
+          "title": "1,000-10,000 hours",
           "subtitle": "$0.20 per compute hour"
         },
         {
-          "title": ">10,000 compute hours",
+          "title": ">10,000 hours",
           "subtitle": "$0.18 per compute hour"
         }
       ],
       "business": [
         {
-          "title": "100-1,000 compute hours",
+          "title": "100-1,000 hours",
           "subtitle": "$0.22 per compute hour"
         },
         {
-          "title": "1,000-10,000 compute hours",
+          "title": "1,000-10,000 hours",
           "subtitle": "$0.20 per compute hour"
         },
         {
-          "title": ">10,000 compute hours",
+          "title": ">10,000 hours",
           "subtitle": "$0.18 per compute hour"
         }
       ],

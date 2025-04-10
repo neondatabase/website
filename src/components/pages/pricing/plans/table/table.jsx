@@ -20,9 +20,6 @@ const rowHeight = {
   4: 'h-[110px] lg:h-[110px]',
   5: 'h-[130px] lg:h-[130px]',
   6: 'h-[172px] lg:h-[172px]',
-  7: 'h-[190px] lg:h-[190px]',
-  8: 'h-[210px] lg:h-[210px]',
-  9: 'h-[240px] lg:h-[240px]',
 };
 
 const DEFAULT_ROWS_TO_SHOW = 8;
