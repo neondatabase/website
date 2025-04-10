@@ -97,12 +97,12 @@ Use this checklist to evaluate Neon for your team:
 
 ### Technical capabilities
 - [ ] Postgres compatibility — [support for Postgres 14, 15, 16, 17](/docs/postgresql/postgres-version-policy#neon-version-support-policy) and [70+ Postgres extensions](/docs/extensions/pg-extensions)
-- [ ] [High availability](docs/introduction/high-availability) with automated failover
-- [ ] [Point-in-time restore (PITR)](docs/introduction/branch-restore)
-- [ ] [Read replicas](docs/introduction/read-replicas) for horizontal scaling
-- [ ] Performance at scale ([connection pooling](docs/connect/connection-pooling), [low-latency serverles driver](docs/serverless/serverless-driver), [autoscaling compute](docs/introduction/autoscaling))
-- [ ] Monitoring and observability ([monitoring dashboard](docs/introduction/monitoring-page), [query monitoring](docs/introduction/monitor-active-queries), and [metrics export](docs/guides/datadog))
-- [ ] [Data durability](docs/introduction/architecture-overview#durability)
+- [ ] [High availability](/docs/introduction/high-availability) with automated failover
+- [ ] [Point-in-time restore (PITR)](/docs/introduction/branch-restore)
+- [ ] [Read replicas](/docs/introduction/read-replicas) for horizontal scaling
+- [ ] Performance at scale ([connection pooling](/docs/connect/connection-pooling), [low-latency serverles driver](/docs/serverless/serverless-driver), [autoscaling compute](/docs/introduction/autoscaling))
+- [ ] Monitoring and observability ([monitoring dashboard](/docs/introduction/monitoring-page), [query monitoring](/docs/introduction/monitor-active-queries), and [metrics export](/docs/guides/datadog))
+- [ ] [Data durability](/docs/introduction/architecture-overview#durability)
 - [ ] [Terraform support and infrastructure automation](/docs/reference/terraform)
 - [ ] [Private networking (AWS PrivateLink)](/docs/guides/neon-private-networking)
 - [ ] [Region and data residency control](/docs/introduction/regions)
@@ -116,18 +116,18 @@ Use this checklist to evaluate Neon for your team:
 - [ ] [Instant point-in-time restore (PITR)](/docs/introduction/branch-restore)
 - [ ] [Branching for dev/test environments](/docs/introduction/branching)
 - [ ] [Near zero-downtime migrations](https://neon.tech/migration-assistance)
-- [ ] [Configurable update windows](/docs/manage/updates) and [managed platform maintenance](docs/manage/platform-maintenance)
-- [ ] [Usage quotas and billing visibility](docs/guides/partner-intro#billing)
-- [ ] [SLAs](docs/introduction/support#slas)
-- [ ] Postgres [data import](docs/guides/logical-replication-guide#replicate-data-to-neon) (inbound logical replication, [dump & restore](docs/import/migrate-from-postgres), and the [Import Data Assistant](docs/import/import-data-assistant))
+- [ ] [Configurable update windows](/docs/manage/updates) and [managed platform maintenance](/docs/manage/platform-maintenance)
+- [ ] [Usage quotas and billing visibility](/docs/guides/partner-intro#billing)
+- [ ] [SLAs](/docs/introduction/support#slas)
+- [ ] Postgres [data import](/docs/guides/logical-replication-guide#replicate-data-to-neon) (inbound logical replication, [dump & restore](/docs/import/migrate-from-postgres), and the [Import Data Assistant](/docs/import/import-data-assistant))
 - [ ] Postgres [data export to external data services & platforms](/docs/guides/logical-replication-guide#replicate-data-from-neon) (outbound logical replication)
 
 ### Developer experience
-- [ ] Branching for preview environments — [Vercel integration](/docs/guides/vercel-overview), [GitHub integration](docs/guides/neon-github-integration)
-- [ ] [Autoscaling](docs/introduction/autoscaling) and [scale-to-zero](docs/introduction/scale-to-zero)
-- [ ] [SDKs](docs/reference/sdk) (JS, Python, Go, etc.)
-- [ ] [CLI](docs/reference/neon-cli) and [API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) access
-- [ ] CI/CD integration ([Terraform](/docs/reference/terraform), [GitHub Actions](/docs/guides/neon-github-integration), [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), [Neon CLI](docs/reference/neon-cli))
+- [ ] Branching for preview environments — [Vercel integration](/docs/guides/vercel-overview), [GitHub integration](/docs/guides/neon-github-integration)
+- [ ] [Autoscaling](/docs/introduction/autoscaling) and [scale-to-zero](/docs/introduction/scale-to-zero)
+- [ ] [SDKs](/docs/reference/sdk) (JS, Python, Go, etc.)
+- [ ] [CLI](/docs/reference/neon-cli) and [API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) access
+- [ ] CI/CD integration ([Terraform](/docs/reference/terraform), [GitHub Actions](/docs/guides/neon-github-integration), [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), [Neon CLI](/docs/reference/neon-cli))
 - [ ] [Docs](/docs/introduction) and [quickstarts](/docs/introduction#quickstarts) for major frameworks
 
 ### Enterprise Support
