@@ -1,7 +1,7 @@
 ---
 title: Neon for Enterprise
 enableTableOfContents: true
-subtitle: Maximize engineering efficiency on Neon
+subtitle: Explore Neon’s features for enterprise teams and workloads
 updatedOn: '2024-12-01T21:48:07.693Z'
 ---
 
@@ -123,7 +123,7 @@ Use this checklist to evaluate Neon for your team:
 - [ ] Postgres [data export to external data services & platforms](/docs/guides/logical-replication-guide#replicate-data-from-neon) (outbound logical replication)
 
 ### Developer experience
-- [ ] Branching for preview environments ([Vercel integration](/docs/guides/vercel-overview), [GitHub integration](docs/guides/neon-github-integration) for custom workflows)
+- [ ] Branching for preview environments — [Vercel integration](/docs/guides/vercel-overview), [GitHub integration](docs/guides/neon-github-integration)
 - [ ] [Autoscaling](docs/introduction/autoscaling) and [scale-to-zero](docs/introduction/scale-to-zero)
 - [ ] [SDKs](docs/reference/sdk) (JS, Python, Go, etc.)
 - [ ] [CLI](docs/reference/neon-cli) and [API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) access

@@ -28,7 +28,7 @@ Start with an overview of Neon's pricing plans to learn what's included, then us
 
 <DetailIconCards>
 
-<a href="https://neon.tech/enterprise" description="Find out how Enterprises are maximizing engineering efficiency with Neon" icon="handshake">Neon for the Enterprise</a>
+<a href="/docs/introduction/neon-enterprise" description="Explore Neon’s features for enterprise teams and workloads" icon="handshake">Neon for Enterprise</a>
 
 <a href="/docs/introduction/enterprise-sales-process" description="Learn about Neon's Enterprise sales process and what to expect" icon="import">Neon Enterprise Sales Process</a>
 
