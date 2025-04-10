@@ -2,7 +2,7 @@
 title: AI Concepts
 subtitle: Learn how embeddings are used to build AI applications
 enableTableOfContents: true
-updatedOn: '2024-07-16T11:13:23.834Z'
+updatedOn: '2025-04-10T08:53:43.993Z'
 ---
 
 Embeddings are an essential component in building AI applications. This topic describes embeddings and how they are used, generated, and stored in Postgres.
