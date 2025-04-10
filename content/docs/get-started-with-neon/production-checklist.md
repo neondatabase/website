@@ -25,7 +25,7 @@ updatedOn: '2025-02-03T20:41:57.304Z'
       <input type="checkbox" style={{ marginRight: '10px' }} />
       <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#disable-scale-to-zero">Disable scale to zero</a></h3>
     </div>
-    <p style={{ marginLeft: '23px' }}>Prevent cold-start delays by keeping your default branch running at all times.</p>
+    <p style={{ marginLeft: '23px' }}>Avoid cold-starts by keeping your default branch running at all times.</p>
     
     <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
       <input type="checkbox" style={{ marginRight: '10px' }} />
@@ -37,19 +37,19 @@ updatedOn: '2025-02-03T20:41:57.304Z'
       <input type="checkbox" style={{ marginRight: '10px' }} />
       <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#increase-your-projects-restore-window-to-7-days">Increase your project's restore window to 7 days</a></h3>
     </div>
-    <p style={{ marginLeft: '23px' }}>Protect your data with a longer restore window for quick recovery, ensuring data integrity and availability.</p>
+    <p style={{ marginLeft: '23px' }}>Protect your production data from accidental loss. Keep at least a 7-day restore window for quick data recovery and analysis.</p>
     
     <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
       <input type="checkbox" style={{ marginRight: '10px' }} />
       <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#restrict-database-access-to-trusted-ips">Restrict database access to trusted IPs</a></h3>
     </div>
-    <p style={{ marginLeft: '23px' }}>Secure your database by limiting connections to trusted IP addresses, enhancing security and control.</p>
+    <p style={{ marginLeft: '23px' }}>Secure your database by limiting connections to trusted IP addresses.</p>
     
     <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
       <input type="checkbox" style={{ marginRight: '10px' }} />
       <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#install-the-neon-app-for-slack">Install the Neon app for Slack</a></h3>
     </div>
-    <p style={{ marginLeft: '23px' }}>Receive instant alerts about your production database directly in Slack, ensuring timely responses to issues.</p>
+    <p style={{ marginLeft: '23px' }}>Get instant alerts about your production database in your team's Slack channel.</p>
     
     <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
       <input type="checkbox" style={{ marginRight: '10px' }} />
@@ -101,7 +101,7 @@ To get started with Autoscaling, read:
 
 ## Disable scale to zero
 
-Scale to zero turns off your compute after a period of inactivity. Ideal for development or other environments with sporadic usage.
+Scale to zero turns off your compute after a period of inactivity. Ideal for development or other environments with bursty usage.
 
 **Recommendation**
 
@@ -115,7 +115,7 @@ Disabling scale to zero is available on paid plans only. See [Configuring Scale 
 
 ## Use a pooled connection
 
-Connection pooling with [PgBouncer](https://www.pgbouncer.org/) allows your database to handle up to 10,000 concurrent connections, optimizing resource usage.
+Connection pooling with [PgBouncer](https://www.pgbouncer.org/) allows your database to handle up to 10,000 concurrent connections, reducing connection overhead and improving performance.
 
 **Recommendation**
 
@@ -123,11 +123,11 @@ For production environments, enable connection pooling. This increases the numbe
 
 **Connection details**
 
-Use a pooled connection string by adding `-pooler` to your endpoint ID, or simply copy the pooled connection string from your Neon Project Dashboard. This string allows your database to efficiently manage multiple connections. For more information, see [Connection pooling](/docs/connect/connection-pooling).
+Use a pooled connection string by adding `-pooler` to your endpoint ID, or simply copy the pooled connection string from the **Connect** widget in your **Project Dashboard**. Use this string as your database connection in your application's environment variables. For more information, see [Connection pooling](/docs/connect/connection-pooling).
 
 Example connection string:
 
-```bash
+```bash shouldWrap
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
@@ -153,12 +153,12 @@ Neon's IP Allow feature ensures that only trusted IP addresses can connect to yo
 
 **Recommendation**
 
-Combine an IP allow list with protected branches for enhanced security. This setup ensures that only trusted IPs can access critical data, reducing the risk of unauthorized access and safeguarding data integrity.
+Combine an allowlist with protected branches for enhanced security. This setup ensures that only trusted IPs can access critical data, reducing the risk of unauthorized access and safeguarding data integrity.
 
 **Configuration details**
 
-- **IP Allow List**: Restricts access to specific, trusted IP addresses, preventing unauthorized connections.
-- **Protected Branch**: Safeguards critical data from accidental deletions or modifications by designating branches as protected.
+- **IP Allow**: Restricts access to specific, trusted IP addresses, preventing unauthorized connections.
+- **Protected branch**: Safeguards critical data from accidental deletions or modifications by designating branches as protected.
 
 Available with the Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans, you can configure **IP Allow** and protected branches in your Neon project's settings. For more information, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow) and [Protected branches guide](/docs/guides/protected-branches).
 
@@ -177,7 +177,7 @@ Install the Neon app for Slack to monitor your Neon projects and receive critica
 - **Real-time alerts**: Immediate notifications about performance issues.
 - **Team collaboration**: Use `/neon subscribe` to add alerts to your team's channel, keeping everyone informed.
 
-For more information, see the [Neon App for Slack documentation](/docs/manage/slack-app).
+For more information, or to get started, see the [Neon App for Slack](/docs/manage/slack-app).
 
 ## Install pg_stat_statements
 
@@ -203,7 +203,7 @@ You can also use the **Monitoring Dashboard** in the Neon Console to view live g
 
 ![Monitoring page connections graph](/docs/introduction/monitor_connections.png)
 
-For more information, see the [Monitoring documentation](/docs/introduction/monitoring).
+For more information, see [Query performancee](/docs/postgresql/query-performance) and [Monitoring](/docs/introduction/monitoring).
 
 ## Upgrade to a Neon Business plan for priority support
 
