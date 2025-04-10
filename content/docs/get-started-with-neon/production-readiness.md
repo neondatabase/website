@@ -7,6 +7,8 @@ updatedOn: '2025-02-08T16:44:52.275Z'
 
 Learn how autoscaling, scale to zero, Neon's storage architecture, change data capture, read replicas, and support for thousands of connections can improve performance, reliability, and efficiency for your production environments.
 
+<CTA title="Production checklist" description="Ready to move to production? Use our checklist to ensure your database is optimized with all recommended settings and features." buttonText="View checklist" buttonUrl="/docs/get-started-with-neon/production-checklist" />
+
 ## Autoscaling
 
 **Automatically scale to meet demand.**
