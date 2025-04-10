@@ -24,29 +24,36 @@ Neon combines the power of Postgres with a modern serverless architecture to hel
 ## Who is the Enterprise plan for?
 
 ### Engineering teams at scale
+
 Accelerate development workflows with branching, preview environments, and database automation. Move faster without managing Postgres infrastructure.
 
 ### SaaS platforms embedding Postgres
-Offer Postgres to your users with built-in scalability, fast provisioning, and API-level control. 
+
+Offer Postgres to your users with built-in scalability, fast provisioning, and API-level control.
 
 ### Teams managing database fleets
+
 Provision and manage thousands of databases with API-driven workflows. Use branching and autoscaling to reduce operational overhead and control costs.
 
 ### AI platforms and agentic apps
+
 Spin up Postgres instances instantly for agent workloads, data processing, or long-lived sessions. Ideal for real-time inference and rapid prototyping.
 
 ### Multi-tenant applications
+
 Isolate customer data into separate Neon projects to isolate data and resources and to meet compliance requirements. Built-in autoscaling and usage tracking help you stay efficient.
 
 ## Enterprise features
 
 ### Platform & integrations
+
 - Available on AWS and Azure
 - API access for database management
 - Terraform provider for Infrastructure as Code
 - Private networking
 
 ### Scalability & connection management
+
 - Serverless scaling of compute and connections
 - Support for 10,000+ concurrent connections
 - Built-in connection pooling to reduce connection overhead
@@ -54,24 +61,28 @@ Isolate customer data into separate Neon projects to isolate data and resources 
 - Dynamic compute with usage-based billing
 
 ### Security & compliance
+
 - HIPAA, SOC 2 Type II, SOC 3, ISO 27001, ISO 27701, GDPR, CCPA
 - Encryption in transit and at rest
 - IP allowlisting and protected branches
 
 ### Disaster & availability
+
 - High availability with multi-AZ durability
 - Instant point-in-time recovery (PITR)
 - Real-time metrics and observability
 
 ### Migration & onboarding
+
 - Minimal-downtime migration support
 - Logical replication for live cutovers
 - Expert-led onboarding
 - Proof-of-concept migration plans
 
 ### Enterprise support
-- Prioritized support tickets  
-- Slack channel  
+
+- Prioritized support tickets
+- Slack channel
 - SLAs
 
 ### Built for modern workloads
@@ -89,13 +100,14 @@ Explore [use cases](https://neon.tech/use-cases) to see how Neon supports SaaS a
 
 Learn more about our [Enterprise sales process](/docs/introduction/enterprise-sales-process).
 
-[Get in touch](https://neon.tech/contact-sales) to start a conversation. 
+[Get in touch](https://neon.tech/contact-sales) to start a conversation.
 
 ## Enterprise checklist
 
 Use this checklist to evaluate Neon for your team:
 
 ### Technical capabilities
+
 - [ ] Postgres compatibility — [support for Postgres 14, 15, 16, 17](/docs/postgresql/postgres-version-policy#neon-version-support-policy) and [70+ Postgres extensions](/docs/extensions/pg-extensions)
 - [ ] [High availability](docs/introduction/high-availability) with automated failover
 - [ ] [Point-in-time restore (PITR)](docs/introduction/branch-restore)
@@ -108,11 +120,13 @@ Use this checklist to evaluate Neon for your team:
 - [ ] [Region and data residency control](/docs/introduction/regions)
 
 ### Security & compliance
+
 - [ ] [HIPAA, SOC 2 Type II, SOC 3, ISO 27001, ISO 27701, GDPR, CCPA](/docs/security/compliance)
 - [ ] [Encryption at rest](/docs/security/security-overview#data-at-rest-encryption) and [secure connections](/docs/security/security-overview#secure-connections)
 - [ ] [IP allowlists](/docs/introduction/ip-allow), [protected branches](/docs/guides/protected-branches), [schema-only branches](/docs/guides/branching-schema-only)
 
 ### Operational features
+
 - [ ] [Instant point-in-time restore (PITR)](/docs/introduction/branch-restore)
 - [ ] [Branching for dev/test environments](/docs/introduction/branching)
 - [ ] [Near zero-downtime migrations](https://neon.tech/migration-assistance)
@@ -123,6 +137,7 @@ Use this checklist to evaluate Neon for your team:
 - [ ] Postgres [data export to external data services & platforms](/docs/guides/logical-replication-guide#replicate-data-from-neon) (outbound logical replication)
 
 ### Developer experience
+
 - [ ] Branching for preview environments — [Vercel integration](/docs/guides/vercel-overview), [GitHub integration](docs/guides/neon-github-integration)
 - [ ] [Autoscaling](docs/introduction/autoscaling) and [scale-to-zero](docs/introduction/scale-to-zero)
 - [ ] [SDKs](docs/reference/sdk) (JS, Python, Go, etc.)
@@ -132,8 +147,8 @@ Use this checklist to evaluate Neon for your team:
 
 ### Enterprise Support
 
-- [ ] Prioritized support tickets  
-- [ ] Slack channel  
+- [ ] Prioritized support tickets
+- [ ] Slack channel
 - [ ] SLAs
 
-   See [Support channels](/docs/introduction/support#support-channels) for details.
+  See [Support channels](/docs/introduction/support#support-channels) for details.
