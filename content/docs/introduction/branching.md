@@ -89,7 +89,7 @@ Your **restore window** determines how far back Neon maintains a history of chan
 - 14 days on [Scale](/docs/introduction/plans#scale)
 - 30 days on [Business](/docs/introduction/plans#business)
 
-You can configure your restore window in the Neon Console under **Settings** > **Storage** > **Instant restore**. See [Configure restore window](/docs/manage/projects#configure-restore-window).
+You can configure your restore window in the Neon Console under **Settings** > **Storage** > **Instant restore**. See [Configure restore window](/docs/manage/projects#configure-your-restore-window).
 
 <Admonition type="note">Increasing your restore window affects **all branches** in your project and increases [project storage](/docs/introduction/usage-metrics#storage). You can reduce it to zero to minimize cost.</Admonition>
 
