@@ -39,13 +39,13 @@ Neon supports companies in all these scenarios, providing a scalable, fully mana
 
    With Neon, you get more than just a database—you get a team invested in your success. Whether you're preparing for a major product launch, scaling to meet growing demand, or optimizing costs, we work alongside you to ensure your database can handle the load.
 
-☑️ **Migration support**  
+☑️ **Migration assistance**  
 
    The Neon Solutions team will help you transition with minimal downtime. We'll work with you to assess your current setup, identify requirements, and ensure a smooth migration. Whether you're switching from another Postgres provider or a different database entirely, we provide the guidance as assistance to get you up and running quickly.
 
 ☑️ **Enterprise support**  
 
-   Our enterprise support team includes Postgres experts who can help you troubleshoot issues, optimize performance, and ensure database stability. Get direct access to our engineers via Slack and priority support to keep your database running smoothly. Learn more about [Enterprise support](/docs/introduction/plans#enterprise).
+   Our enterprise support team includes Postgres experts who can help you troubleshoot issues, optimize performance, and ensure database stability. Get direct access to our engineers via Slack and priority support to keep your databases running smoothly. Learn more about [Enterprise support](/docs/introduction/plans#enterprise).
 
 ☑️ **Custom pricing**  
 
@@ -71,9 +71,9 @@ Neon supports companies in all these scenarios, providing a scalable, fully mana
 
    Neon supports 10,000+ connections with no timeouts, ensuring consistent performance for real-time apps, APIs, and high-traffic systems. Built-in connection pooling helps optimize efficiency without complexity.
 
-☑️ **Disaster recovery**  
+☑️ **Instant recovery**  
 
-   Neon simplifies disaster recovery with branching, letting you restore your database to any point instantly — no more lengthy backups. Whether recovering from data corruption or accidental deletion, you can revert in seconds.
+   Neon simplifies disaster recovery with branching, letting you restore your database to any point instantly — find your last known good with time travel queries or by comparing schemas and revert to a point in time in seconds.
 
 ☑️ **Durability**  
 
@@ -97,34 +97,6 @@ Neon supports companies in all these scenarios, providing a scalable, fully mana
 
 </DetailIconCards>
 
-## Features that enable Enterprises
-
-<table border="1">
-  <tr>
-    <th>Migration support</th>
-    <th>Enterprise support</th>
-  </tr>
-  <tr>
-    <td>Moving to Neon Postgres? We help you transition with minimal downtime. Our team works with you to assess your current setup, optimize your schema, and ensure a smooth migration. Whether you're switching from another Postgres provider or a different database entirely, we provide the guidance and tools to get you up and running quickly.</td>
-    <td>We’re here when you need us. Our enterprise support team includes Postgres experts who can help you troubleshoot issues, optimize performance, and ensure database stability. Get direct access to our engineers via Slack and priority support to keep your database running smoothly.</td>
-  </tr>
-  <tr>
-    <th>Custom pricing</th>
-    <th>Postgres expertise</th>
-  </tr>
-  <tr>
-    <td>Neon Postgres offers flexible pricing for enterprise customers. Whether you need volume discounts, custom compute and storage allocations, or consolidated billing through AWS Marketplace, we work with you to find the best pricing model for your needs.</td>
-    <td>Neon is built by Postgres contributors who understand the challenges of scaling and optimizing databases. Our deep knowledge of Postgres internals, cloud infrastructure, and performance tuning helps you get the most out of your database.</td>
-  </tr>
-  <tr>
-    <th>A database partner</th>
-    <th>Built for modern apps</th>
-  </tr>
-  <tr>
-    <td>With Neon Postgres, you get more than just a database—you get a team invested in your success. Whether you're preparing for a major product launch, scaling to meet growing demand, or optimizing costs, we work alongside you to ensure your database can handle the load.</td>
-    <td>Neon Postgres is designed for developers building dynamic, high-performance applications. With instant branching, serverless autoscaling, and built-in connection pooling, we help teams ship faster without worrying about database limits. Whether you're running a SaaS platform, AI-powered service, or multi-tenant application, Neon provides the flexibility and performance to meet your needs.</td>
-  </tr>
-</table>
 
 
 
