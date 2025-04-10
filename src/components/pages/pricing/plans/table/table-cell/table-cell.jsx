@@ -33,7 +33,7 @@ const TableCell = ({ item, ...otherProps }) => {
 
   if (Array.isArray(item)) {
     return (
-      <div className="space-y-1.5">
+      <div className="space-y-2.5">
         {item.map((subitem, index) => (
           <CellItem {...subitem} {...otherProps} subindex={index + 1} key={index} />
         ))}

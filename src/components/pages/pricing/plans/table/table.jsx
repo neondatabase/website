@@ -14,12 +14,11 @@ import TableHeading from './table-heading';
 
 // Styles to set fixed height for table cells
 const rowHeight = {
-  1: 'h-[47px]',
-  2: 'h-[70px] lg:h-[70px]',
-  3: 'h-[90px] lg:h-[90px]',
-  4: 'h-[110px] lg:h-[110px]',
-  5: 'h-[130px] lg:h-[130px]',
-  6: 'h-[172px] lg:h-[172px]',
+  1: 'h-12',
+  2: 'h-[70px]',
+  3: 'h-[90px]',
+  4: 'h-[110px]',
+  6: 'h-[180px]',
 };
 
 const DEFAULT_ROWS_TO_SHOW = 8;
@@ -122,14 +121,12 @@ const Table = () => {
                       >
                         {isGroupHeader ? (
                           <>
-                            <span className="text-[13px] font-medium uppercase leading-none tracking-wide text-gray-new-50 lg:text-xs">
+                            <span className="text-[13px] font-medium uppercase leading-none tracking-wide text-gray-new-80 lg:text-xs">
                               {featureTitle}
                             </span>
                             {feature?.subtitle && (
-                              <span className="relative mt-1.5 h-5">
-                                <span className="absolute left-0 top-0 truncate whitespace-nowrap text-sm font-light leading-snug tracking-tight text-gray-new-60 sm:max-w-[calc(100vw-40px)]">
-                                  {feature.subtitle}
-                                </span>
+                              <span className="mt-1.5 text-sm font-light leading-snug tracking-tight text-gray-new-60">
+                                {feature.subtitle}
                               </span>
                             )}
                           </>
