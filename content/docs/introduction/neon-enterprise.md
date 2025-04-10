@@ -137,6 +137,7 @@ Use this checklist to evaluate Neon for your team:
 - [ ] Postgres [data export to external data services & platforms](/docs/guides/logical-replication-guide#replicate-data-from-neon) (outbound logical replication)
 
 ### Developer experience
+
 - [ ] Branching for preview environments — [Vercel integration](/docs/guides/vercel-overview), [GitHub integration](/docs/guides/neon-github-integration)
 - [ ] [Autoscaling](/docs/introduction/autoscaling) and [scale-to-zero](/docs/introduction/scale-to-zero)
 - [ ] [SDKs](/docs/reference/sdk) (JS, Python, Go, etc.)
