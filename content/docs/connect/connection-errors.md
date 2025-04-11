@@ -293,7 +293,7 @@ Name:	ap-southeast-1.aws.neon.tech
 Address: 203.0.113.30
 ```
 
-If the hostname does not resolve, you'll see an error instead, where the the DNS query is refused by the resolver:
+If the hostname does not resolve, you'll see an error instead, where the DNS query is refused by the resolver:
 
 ```bash shouldWrap
 ** server can't find ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech: REFUSED
