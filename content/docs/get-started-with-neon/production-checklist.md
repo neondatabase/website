@@ -11,55 +11,55 @@ updatedOn: '2025-02-03T20:41:57.304Z'
   <div>
     <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
       <input type="checkbox" style={{ marginRight: '10px' }} />
-      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#set-minimum-compute-to-at-least-1-cu">Set minimum compute to at least 1 vCPU</a></h3>
+      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#set-minimum-compute-to-at-least-1-cu">1. Set minimum compute to at least 1 vCPU</a></h3>
     </div>
     <p style={{ marginLeft: '23px' }}>Make sure your default branch can handle production traffic. A higher minimum compute helps you avoid performance bottlenecks.</p>
     
     <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
       <input type="checkbox" style={{ marginRight: '10px' }} />
-      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#set-max-compute-to-the-highest-cu-available-for-your-plan">Set max compute to the highest CU available for your plan</a></h3>
+      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#set-max-compute-to-the-highest-cu-available-for-your-plan">2. Set max compute to the highest CU available for your plan</a></h3>
     </div>
     <p style={{ marginLeft: '23px' }}>Set your compute to automatically scale up, allowing your app to handle traffic surges and stay performant without manual scaling.</p>
     
     <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
       <input type="checkbox" style={{ marginRight: '10px' }} />
-      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#disable-scale-to-zero">Disable scale to zero</a></h3>
+      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#disable-scale-to-zero">3. Disable scale to zero</a></h3>
     </div>
     <p style={{ marginLeft: '23px' }}>Avoid cold-starts by keeping your default branch running at all times.</p>
     
     <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
       <input type="checkbox" style={{ marginRight: '10px' }} />
-      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#use-a-pooled-connection">Use a pooled connection</a></h3>
+      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#use-a-pooled-connection">4. Use a pooled connection</a></h3>
     </div>
     <p style={{ marginLeft: '22px' }}>Increase your database's ability to handle concurrent connections by using connection pooling.</p>
     
     <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
       <input type="checkbox" style={{ marginRight: '10px' }} />
-      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#increase-your-projects-restore-window-to-7-days">Increase your project's restore window to 7 days</a></h3>
+      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#increase-your-projects-restore-window-to-7-days">5. Increase your project's restore window to 7 days</a></h3>
     </div>
     <p style={{ marginLeft: '23px' }}>Protect your production data from accidental loss. Keep at least a 7-day restore window for quick data recovery and analysis.</p>
     
     <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
       <input type="checkbox" style={{ marginRight: '10px' }} />
-      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#restrict-database-access-to-trusted-ips">Restrict database access to trusted IPs</a></h3>
+      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#restrict-database-access-to-trusted-ips">6. Restrict database access to trusted IPs</a></h3>
     </div>
     <p style={{ marginLeft: '23px' }}>Secure your database by limiting connections to trusted IP addresses.</p>
     
     <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
       <input type="checkbox" style={{ marginRight: '10px' }} />
-      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#install-the-neon-app-for-slack">Install the Neon app for Slack</a></h3>
+      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#install-the-neon-app-for-slack">7. Install the Neon app for Slack</a></h3>
     </div>
     <p style={{ marginLeft: '23px' }}>Get instant alerts about your production database in your team's Slack channel.</p>
     
     <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
       <input type="checkbox" style={{ marginRight: '10px' }} />
-      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#install-pgstatstatements">Install pg_stat_statements</a></h3>
+      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#install-pgstatstatements">8. Install pg_stat_statements</a></h3>
     </div>
     <p style={{ marginLeft: '23px' }}>Enable query performance monitoring to track execution times and frequency.</p>
     
     <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
       <input type="checkbox" style={{ marginRight: '10px' }} />
-      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#upgrade-to-a-neon-business-plan-for-priority-support">Upgrade to get priority support</a></h3>
+      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#upgrade-to-a-neon-business-plan-for-priority-support">9. Upgrade to get priority support</a></h3>
     </div>
     <p style={{ marginLeft: '23px' }}>Get faster support and priority handling for your production database with a Business plan.</p>
   </div>
