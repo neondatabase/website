@@ -266,39 +266,47 @@ Be aware that leaving transactions idle for extended periods can prevent vacuumi
 
 ## DNS resolution issues
 
-Some users may experience DNS resolution failures when attempting to connect to their Neon database or when using the Tables page in the Neon Console. This issue manifests as an error similar to:
+Users in Asia Pacific regions sometimes experience DNS resolution failures when attempting to connect to their Neon database directly or from the **Tables** page or **SQL Editor** in the Neon Console. This issue manifest in different ways. For example, on the **Tables** page on the Neon Console, you might see an **Unexpected error happened** message like this one.
 
-```txt shouldWrap
-** server can't find ep-example-database-123456.us-east-1.aws.neon.tech: REFUSED
+![Unexpected error happened on Tables page](/docs/guides/tables_error.png)
+
+To check for a DNS resolution issue, you can run an `nslookup` command on your Neon hostname, which is the part of your Neon database [connection string](/docs/reference/glossary#connection-string) starting with your endpoint ID (e.g., `ep-cool-darkness-a1b2c3d4`) and ending with `neon.tech`. For example:
+
+```bash shouldWrap
+nslookup ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech
 ```
 
-When this error occurs, DNS resolution is failing when querying a Neon hostname. Meanwhile, users in other regions may be able to resolve the same hostname successfully.
+If the Neon hostname resolves correctly, you'll see output similar to this:
 
-In the Neon Console, particularly on the Tables page, you might see an "Unexpected error happened" message with instructions to download the error context and report it to support. This is often caused by the same underlying DNS resolution issues.
+```bash
+nslookup ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech
+Server:		192.168.2.1
+Address:	192.168.2.1#53
 
-### Testing Results
-
-#### Working Case
-Running nslookup in a working environment returns:
-
-```txt shouldWrap
-ep-example-database-123456.us-east-1.aws.neon.tech
-→ CNAME → us-east-1.aws.neon.tech
-→ IPs: 54.x.y.z, 52.a.b.c, 18.d.e.f
+Non-authoritative answer:
+p-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech	canonical name = ap-southeast-1.aws.neon.tech.
+Name:	ap-southeast-1.aws.neon.tech
+Address: 203.0.113.10
+Name:	ap-southeast-1.aws.neon.tech
+Address: 203.0.113.20
+Name:	ap-southeast-1.aws.neon.tech
+Address: 203.0.113.30
 ```
 
-DNS resolution works as expected.
+If the hostname does not resolve, you'll see an error instead, where the the DNS query is refused by the resolver:
 
-#### Non-Working Case
-Running nslookup returns:
-
-```txt shouldWrap
-** server can't find ep-example-database-123456.us-east-1.aws.neon.tech: REFUSED
+```bash shouldWrap
+** server can't find ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech: REFUSED
 ```
 
-The DNS query is refused by the resolver.
+To verify that it's in fact a DNS issue, you can run the following test using a public DNS resolver, such as Google DNS:
 
-### Root Cause Analysis
+```bash
+nslookup ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech 8.8.8.8
+```
+If this succeeds, it's confirmed that the issue is with your default DNS resolver.
+
+**Cause**
 
 This is not a Neon-side or AWS-side DNS misconfiguration. Instead, it's most likely a regional DNS resolution failure caused by one or more of the following:
 
@@ -307,15 +315,12 @@ This is not a Neon-side or AWS-side DNS misconfiguration. Instead, it's most lik
 - Local DNS filtering
 - IPv6-specific resolver quirks
 
+**Workarounds**
+
 Users report that switching to public DNS or using VPN fixes the issue.
 
-### Recommended User Workarounds
-
-<Admonition type="info">
-If you're experiencing DNS resolution issues, try one of the following workarounds:
-</Admonition>
-
 1. **Use a Public DNS Resolver**
+
    - Google DNS: 8.8.8.8, 8.8.4.4
    - Cloudflare DNS: 1.1.1.1, 1.0.0.1
 
@@ -323,17 +328,12 @@ If you're experiencing DNS resolution issues, try one of the following workaroun
    - OS level (macOS, Windows, Linux)
    - Router level
    - Mobile device network settings
-   - Android Private DNS (dns.google or 1dot1dot1dot1.cloudflare-dns.com)
+   - Android Private DNS (`dns.google` or [https://one.one.one.one/dns/](https://one.one.one.one/dns/))
+
+   See [How to Turn on Private DNS Mode](https://news.trendmicro.com/2023/03/21/how-to-turn-on-private-dns-mode/) for OS-level instructions.
 
 2. **Use a VPN**
-   - Using a VPN routes DNS queries through a different resolver and often bypasses the issue entirely.
 
-3. **Run a DNS test**
-   ```bash
-   nslookup ep-example-database-123456.us-east-1.aws.neon.tech 8.8.8.8
-   ```
-   If this succeeds, it's confirmed that the issue is with your default DNS resolver.
-
-For more information on configuring private DNS, see [How to Turn on Private DNS Mode](https://news.trendmicro.com/2023/03/21/how-to-turn-on-private-dns-mode/).
+   Using a VPN routes DNS queries through a different resolver and often bypasses the issue entirely.
 
 <NeedHelp/>
