@@ -266,7 +266,7 @@ Be aware that leaving transactions idle for extended periods can prevent vacuumi
 
 ## DNS resolution issues
 
-Users in Asia Pacific regions sometimes experience DNS resolution failures when attempting to connect to their Neon database directly or from the **Tables** page or **SQL Editor** in the Neon Console. This issue manifest in different ways. For example, on the **Tables** page on the Neon Console, you might see an **Unexpected error happened** message like this one.
+Users in Asia Pacific regions sometimes experience DNS resolution failures when attempting to connect to their Neon database directly or from the **Tables** page or **SQL Editor** in the Neon Console. This issue shows up in different ways. For example, on the **Tables** page on the Neon Console, you might see an **Unexpected error happened** message like this one.
 
 ![Unexpected error happened on Tables page](/docs/guides/tables_error.png)
 
