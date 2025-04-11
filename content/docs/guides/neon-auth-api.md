@@ -6,6 +6,17 @@ updatedOn: '2025-02-21T13:30:24.355Z'
 
 Learn how to manage your Neon Auth integration using the Neon API. Create a new integration, generate SDK keys, add users, and claim ownership of your Neon-managed auth project to your auth provider.
 
+<InfoBlock>
+  <DocsList title="Related docs" theme="docs">
+    <a href="/docs/guides/neon-auth">About Neon Auth</a>
+    <a href="/docs/guides/neon-auth-tutorial">Neon Auth Tutorial</a>
+  </DocsList>
+
+  <DocsList title="Sample project" theme="repo">
+    <a href="https://github.com/neondatabase-labs/neon-auth-demo-app">Neon Auth Demo App</a>
+  </DocsList>
+</InfoBlock>
+
 ## Prerequisites
 
 - A Neon API key (see [Create an API Key](/docs/manage/api-keys#create-an-organization-api-key))
