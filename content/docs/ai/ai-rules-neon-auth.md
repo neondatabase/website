@@ -1,7 +1,6 @@
 ---
 title: 'AI Rules: Neon Auth'
-subtitle: Context rules for AI tools to help implement authentication with Stack Auth
-  and Neon databases
+subtitle: Context rules for AI tools to help implement authentication with Stack Auth and Neon databases
 enableTableOfContents: true
 updatedOn: '2025-04-08T22:55:27.440Z'
 ---
