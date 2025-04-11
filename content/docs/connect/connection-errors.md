@@ -266,13 +266,15 @@ Be aware that leaving transactions idle for extended periods can prevent vacuumi
 
 ## DNS resolution issues
 
-Some users may experience DNS resolution failures when attempting to connect to their Neon database. This issue manifests as an error similar to:
+Some users may experience DNS resolution failures when attempting to connect to their Neon database or when using the Tables page in the Neon Console. This issue manifests as an error similar to:
 
 ```txt shouldWrap
 ** server can't find ep-example-database-123456.us-east-1.aws.neon.tech: REFUSED
 ```
 
 When this error occurs, DNS resolution is failing when querying a Neon hostname. Meanwhile, users in other regions may be able to resolve the same hostname successfully.
+
+In the Neon Console, particularly on the Tables page, you might see an "Unexpected error happened" message with instructions to download the error context and report it to support. This is often caused by the same underlying DNS resolution issues.
 
 ### Testing Results
 
