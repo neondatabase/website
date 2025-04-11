@@ -11,6 +11,17 @@ updatedOn: '2025-03-07T21:27:12.098Z'
 
 <FeatureBetaProps feature_name="Neon Auth" />
 
+<InfoBlock>
+  <DocsList title="Related docs" theme="docs">
+    <a href="/docs/guides/neon-auth-tutorial">Neon Auth Tutorial</a>
+    <a href="/docs/guides/neon-auth-api">Manage Neon Auth using the API</a>
+  </DocsList>
+
+  <DocsList title="Sample project" theme="repo">
+    <a href="https://github.com/neondatabase-labs/neon-auth-demo-app">Neon Auth Demo App</a>
+  </DocsList>
+</InfoBlock>
+
 **Neon Auth** connects your authentication provider to your Neon database, automatically synchronizing user profiles so that you own your auth data. Access your user data directly in your database environment, with no custom integration code needed.
 
 ## Authentication and synchronization
