@@ -6,7 +6,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-identity
 tag: beta
-updatedOn: '2025-03-07T21:27:12.098Z'
+updatedOn: '2025-04-11T20:01:29.104Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth" />
