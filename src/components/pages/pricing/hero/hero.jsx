@@ -2,8 +2,7 @@
 
 import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
-import { useFeatureFlagVariantKey, usePostHog } from 'posthog-js/react';
-import { useMemo } from 'react';
+import { usePostHog } from 'posthog-js/react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
@@ -12,7 +11,7 @@ import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 
-import plansOriginal from './data/plans.json';
+import PLANS from './data/plans.json';
 import Features from './features';
 
 const scaleCardBorderVariants = {
@@ -33,27 +32,6 @@ const scaleCardBorderVariants = {
 
 const Hero = () => {
   const posthog = usePostHog();
-  const isComputePriceRaised =
-    useFeatureFlagVariantKey('website_growth_compute_price_rising') === 'show_0_24' && false;
-
-  const plans = useMemo(() => {
-    if (isComputePriceRaised) {
-      return plansOriginal.map((plan) => ({
-        ...plan,
-        features: plan.features.map((feature) => {
-          if (feature.id === 'compute_time') {
-            return {
-              ...feature,
-              info: 'Additional at $0.24 per compute hour',
-            };
-          }
-          return feature;
-        }),
-      }));
-    }
-
-    return plansOriginal;
-  }, [isComputePriceRaised]);
 
   return (
     <section className="hero safe-paddings overflow-hidden pt-[158px] xl:pt-[134px] lg:pt-14 md:pt-12">
@@ -71,7 +49,7 @@ const Hero = () => {
         <div className="relative mx-auto mt-16 xl:mt-14 xl:max-w-[644px] lg:mt-11 md:mt-9">
           <h2 className="sr-only">Neon pricing plans</h2>
           <ul className="grid-gap relative z-10 grid grid-cols-4 gap-x-8 2xl:gap-x-6 xl:grid-cols-2 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
-            {plans.map(
+            {PLANS.map(
               (
                 {
                   planId,

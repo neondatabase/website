@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import Button from 'components/shared/button';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 
-import tableData from '../data/plans.json';
+import PLANS from '../data/plans.json';
 
 import TableCell from './table-cell';
 import TableHeading from './table-heading';
@@ -26,13 +26,13 @@ const DEFAULT_ROWS_TO_SHOW = 8;
 const Table = () => {
   const posthog = usePostHog();
 
-  const labelList = tableData.headings;
+  const labelList = PLANS.headings;
   const [currentRow, setCurrentRow] = useState('');
-  const [tableRows, setTableRows] = useState(tableData.cols.slice(0, DEFAULT_ROWS_TO_SHOW));
+  const [tableRows, setTableRows] = useState(PLANS.cols.slice(0, DEFAULT_ROWS_TO_SHOW));
 
   useEffect(() => {
     if (window.location.hash === '#plans') {
-      setTableRows(tableData.cols);
+      setTableRows(PLANS.cols);
     }
   }, []);
 
@@ -57,9 +57,9 @@ const Table = () => {
   }, [tableRows]);
 
   const isHiddenItems =
-    tableData.cols.length > DEFAULT_ROWS_TO_SHOW && tableRows.length <= DEFAULT_ROWS_TO_SHOW;
+    PLANS.cols.length > DEFAULT_ROWS_TO_SHOW && tableRows.length <= DEFAULT_ROWS_TO_SHOW;
 
-  const rowsWithGroupHeader = tableData.cols.reduce((acc, item, index) => {
+  const rowsWithGroupHeader = PLANS.cols.reduce((acc, item, index) => {
     if (item.feature?.groupHeader) {
       acc.push(index);
     }
@@ -69,7 +69,7 @@ const Table = () => {
   return (
     <div className="mx-auto flex max-w-[1216px] flex-col xl:max-w-none xl:px-8 lg:pr-0 md:pl-5">
       <ul className="no-scrollbars px-4.5 relative flex w-full lg:overflow-x-auto lg:pl-0 lg:pr-8 md:pr-5">
-        {Object.keys(tableData.headings).map((key, i, arr) => {
+        {Object.keys(PLANS.headings).map((key, i, arr) => {
           const isHighlightedColumn = key === 'serverless';
           const isLabelsColumn = i === 0;
 
@@ -208,7 +208,7 @@ const Table = () => {
         <Button
           className="mx-auto mt-6 h-[38px] rounded-full px-5 text-[15px] font-medium transition-colors duration-200"
           theme="gray-10"
-          onClick={() => setTableRows(tableData.cols)}
+          onClick={() => setTableRows(PLANS.cols)}
         >
           Show more
           <ChevronIcon className="ml-2.5 inline-block h-auto w-3" />
