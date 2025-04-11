@@ -39,7 +39,7 @@ const DATA = [
     link: LINKS.auth,
   },
   {
-    title: 'GPDR and ISO compliance',
+    title: 'GDPR and ISO compliance',
     description: 'Visit our Security page for more information.',
     link: LINKS.security,
   },
