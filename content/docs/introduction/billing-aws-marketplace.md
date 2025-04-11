@@ -9,4 +9,4 @@ Neon supports billing through the [AWS Marketplace](https://aws.amazon.com/marke
 
 Neon [self-service pricing plans](https://neon.tech/pricing) are currently not purchasable through the AWS Marketplace. You can only purchase these plans through Neon.
 
-If you have any questions or require assistance with billing via AWS, please reach out to [Neon Support](https://console.neon.tech/app/projects?modal=support).
+If you have any questions about billing in general or require assistance, please reach out to [Neon Support](https://console.neon.tech/app/projects?modal=support).
