@@ -24,6 +24,7 @@ This topic describes how to resolve connection errors you may encounter when usi
 - [query_wait_timeout SSL connection has been closed unexpectedly](#querywaittimeout-ssl-connection-has-been-closed-unexpectedly)
 - [The request could not be authorized due to an internal error](#the-request-could-not-be-authorized-due-to-an-internal-error)
 - [Terminating connection due to idle-in-transaction timeout](#terminating-connection-due-to-idle-in-transaction-timeout)
+- [DNS resolution issues](#dns-resolution-issues)
 
 <Admonition type="info">
 Connection problems are sometimes related to a system issue. To check for system issues, please refer to the [Neon status page](https://neonstatus.com/).  
@@ -262,5 +263,77 @@ If you encounter this error, you can adjust the `idle_in_transaction_session_tim
 3. Change at the role level: `ALTER ROLE <role> SET idle_in_transaction_session_timeout = 0;` (replace `<role>` with the name of the user role)
 
 Be aware that leaving transactions idle for extended periods can prevent vacuuming and increase the number of open connections. Please use caution and consider only changing the value temporarily, as needed.
+
+## DNS resolution issues
+
+Users in Asia Pacific regions sometimes experience DNS resolution failures when attempting to connect to their Neon database directly or from the **Tables** page or **SQL Editor** in the Neon Console. This issue shows up in different ways. For example, on the **Tables** page on the Neon Console, you might see an **Unexpected error happened** message like this one.
+
+![Unexpected error happened on Tables page](/docs/guides/tables_error.png)
+
+To check for a DNS resolution issue, you can run an `nslookup` command on your Neon hostname, which is the part of your Neon database [connection string](/docs/reference/glossary#connection-string) starting with your endpoint ID (e.g., `ep-cool-darkness-a1b2c3d4`) and ending with `neon.tech`. For example:
+
+```bash shouldWrap
+nslookup ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech
+```
+
+If the Neon hostname resolves correctly, you'll see output similar to this:
+
+```bash
+nslookup ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech
+Server:		192.168.2.1
+Address:	192.168.2.1#53
+
+Non-authoritative answer:
+p-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech	canonical name = ap-southeast-1.aws.neon.tech.
+Name:	ap-southeast-1.aws.neon.tech
+Address: 203.0.113.10
+Name:	ap-southeast-1.aws.neon.tech
+Address: 203.0.113.20
+Name:	ap-southeast-1.aws.neon.tech
+Address: 203.0.113.30
+```
+
+If the hostname does not resolve, you'll see an error instead, where the DNS query is refused by the resolver:
+
+```bash shouldWrap
+** server can't find ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech: REFUSED
+```
+
+To verify that it's in fact a DNS issue, you can run the following test using a public DNS resolver, such as Google DNS:
+
+```bash
+nslookup ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech 8.8.8.8
+```
+If this succeeds, it's confirmed that the issue is with your default DNS resolver.
+
+**Cause**
+
+This is not a Neon-side or AWS-side DNS misconfiguration. Instead, it's most likely a regional DNS resolution failure caused by one or more of the following:
+
+- Misconfigured or restrictive DNS resolvers (e.g., ISP DNS)
+- Regional caching or delayed propagation
+- Local DNS filtering
+- IPv6-specific resolver quirks
+
+**Workarounds**
+
+Users report that switching to public DNS or using VPN fixes the issue.
+
+1. **Use a Public DNS Resolver**
+
+   - Google DNS: 8.8.8.8, 8.8.4.4
+   - Cloudflare DNS: 1.1.1.1, 1.0.0.1
+
+   These can be changed at:
+   - OS level (macOS, Windows, Linux)
+   - Router level
+   - Mobile device network settings
+   - Android Private DNS (`dns.google` or [https://one.one.one.one/dns/](https://one.one.one.one/dns/))
+
+   See [How to Turn on Private DNS Mode](https://news.trendmicro.com/2023/03/21/how-to-turn-on-private-dns-mode/) for OS-level instructions.
+
+2. **Use a VPN**
+
+   Using a VPN routes DNS queries through a different resolver and often bypasses the issue entirely.
 
 <NeedHelp/>
