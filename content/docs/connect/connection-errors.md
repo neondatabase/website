@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/connectivity-issues
   - /docs/connect/connectivity-issues
-updatedOn: '2025-02-03T20:41:57.300Z'
+updatedOn: '2025-04-10T23:38:28.339Z'
 ---
 
 This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered include:
@@ -107,8 +107,8 @@ Neon has tested the following drivers for SNI support:
 | ----------------- | ---------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
 | npgsql            | C#         | &check;     |                                                                                                                                                   |
 | Postgrex          | Elixir     | &check;     | [Requires ssl_opts with server_name_indication](/docs/guides/elixir-ecto#configure-ecto)                                                          |
-| github.com/lib/pq | Go         | &check;     | Supported with macOS Build 436, Windows Build 202, and Ubuntu 20, 21 and 22                                                                       |
-| pgx               | Go         | &check;     | SNI support merged with v5.0.0-beta.3 yet                                                                                                         |
+| github.com/lib/pq | Go         | &check;     | Supported with macOS Build 436, Windows Build 202, and Ubuntu 20, 21 and 22 (Deprecated, use pgx instead)                                         |
+| pgx               | Go         | &check;     | Recommended driver for Go. SNI support available in v5.0.0-beta.3 and later                                                                       |
 | go-pg             | Go         | &check;     | requires `verify-full` mode                                                                                                                       |
 | JDBC              | Java       | &check;     |                                                                                                                                                   |
 | node-postgres     | JavaScript | &check;     | Requires the `ssl: {'sslmode': 'require'}` option                                                                                                 |

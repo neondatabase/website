@@ -228,14 +228,7 @@
        title: "BYTEA"
      - slug: "postgresql-tutorial/postgresql-composite-types"
        title: "Composite Types"
-   - section: Set Operators
-     items:
-     - slug: "postgresql-tutorial/postgresql-union"
-       title: "UNION"
-     - slug: "postgresql-tutorial/postgresql-intersect"
-       title: "INTERSECT"
-     - slug: "postgresql-tutorial/postgresql-except"
-       title: "EXCEPT"
+
    - section: Conditional Expressions & Operators
      items:
      - slug: "postgresql-tutorial/postgresql-case"

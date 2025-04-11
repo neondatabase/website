@@ -57,7 +57,6 @@
     "highlighted": true,
     "price": 5,
     "priceFrom": true,
-    "headerLinks": "Pay via <a href='https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa' target='_blank' rel='noopener noreferrer'>AWS</a>",
     "description": "For early-stage startups and growing projects that need scalability.",
     "features": [
       {
@@ -117,7 +116,7 @@
     "type": "Business",
     "price": 700,
     "priceFrom": true,
-    "headerLinks": "Pay via <a href='https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa' target='_blank' rel='noopener noreferrer'>AWS</a> or <a href='https://azuremarketplace.microsoft.com/en-us/marketplace/apps/neon1722366567200.neon_serverless_postgres_azure_prod?tab=PlansAndPrice' target='_blank' rel='noopener noreferrer'>Azure</a>",
+    "headerLinks": "Pay via <a href='https://azuremarketplace.microsoft.com/en-us/marketplace/apps/neon1722366567200.neon_serverless_postgres_azure_prod?tab=PlansAndPrice' target='_blank' rel='noopener noreferrer'>Azure</a>",
     "description": "For growing teams that need extra security, compliance, and support.",
     "features": [
       {

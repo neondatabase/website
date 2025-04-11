@@ -74,17 +74,17 @@ Follow these steps to create a service connection from your Azure compute servic
           - Enter your Neon database **Username**.
           - Enter your Neon database **Password**.
 
-          <Admonition type="important" title="Important">
+            <Admonition type="important" title="Important">
             Check the **Store Secret in Key Vault** box. This prompts you to select an existing Azure Key Vault or **Create new**.
 
                 ![Select Store secret in Key Vault](/docs/guides/azure-service-connector/key-vault-selection.png)
 
-          If you create new, Azure provisions a Key Vault instance and securely stores _the password_ as a secret within it.
+            If you create new, Azure provisions a Key Vault instance and securely stores _the password_ as a secret within it.
 
-              ![Store Secret in Key Vault Option](/docs/guides/azure-service-connector/key-vault-creation.png)
+            ![Store Secret in Key Vault Option](/docs/guides/azure-service-connector/key-vault-creation.png)
 
-          Service Connector will then reference this secret. This is more secure than storing the password directly in App Service configuration.
-          </Admonition>
+            Service Connector will then reference this secret. This is more secure than storing the password directly in App Service configuration.
+            </Admonition>
 
       2.  **Key Vault reference (for pre-existing Key Vault secret):**
           - Select the **Key Vault** tile.
