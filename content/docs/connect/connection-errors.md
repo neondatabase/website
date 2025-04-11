@@ -24,6 +24,7 @@ This topic describes how to resolve connection errors you may encounter when usi
 - [query_wait_timeout SSL connection has been closed unexpectedly](#querywaittimeout-ssl-connection-has-been-closed-unexpectedly)
 - [The request could not be authorized due to an internal error](#the-request-could-not-be-authorized-due-to-an-internal-error)
 - [Terminating connection due to idle-in-transaction timeout](#terminating-connection-due-to-idle-in-transaction-timeout)
+- [DNS resolution issues](#dns-resolution-issues)
 
 <Admonition type="info">
 Connection problems are sometimes related to a system issue. To check for system issues, please refer to the [Neon status page](https://neonstatus.com/).  
@@ -262,5 +263,75 @@ If you encounter this error, you can adjust the `idle_in_transaction_session_tim
 3. Change at the role level: `ALTER ROLE <role> SET idle_in_transaction_session_timeout = 0;` (replace `<role>` with the name of the user role)
 
 Be aware that leaving transactions idle for extended periods can prevent vacuuming and increase the number of open connections. Please use caution and consider only changing the value temporarily, as needed.
+
+## DNS resolution issues
+
+Some users may experience DNS resolution failures when attempting to connect to their Neon database. This issue manifests as an error similar to:
+
+```txt shouldWrap
+** server can't find ep-example-database-123456.us-east-1.aws.neon.tech: REFUSED
+```
+
+When this error occurs, DNS resolution is failing when querying a Neon hostname. Meanwhile, users in other regions may be able to resolve the same hostname successfully.
+
+### Testing Results
+
+#### Working Case
+Running nslookup in a working environment returns:
+
+```txt shouldWrap
+ep-example-database-123456.us-east-1.aws.neon.tech
+→ CNAME → us-east-1.aws.neon.tech
+→ IPs: 54.x.y.z, 52.a.b.c, 18.d.e.f
+```
+
+DNS resolution works as expected.
+
+#### Non-Working Case
+Running nslookup returns:
+
+```txt shouldWrap
+** server can't find ep-example-database-123456.us-east-1.aws.neon.tech: REFUSED
+```
+
+The DNS query is refused by the resolver.
+
+### Root Cause Analysis
+
+This is not a Neon-side or AWS-side DNS misconfiguration. Instead, it's most likely a regional DNS resolution failure caused by one or more of the following:
+
+- Misconfigured or restrictive DNS resolvers (e.g., ISP DNS)
+- Regional caching or delayed propagation
+- Local DNS filtering
+- IPv6-specific resolver quirks
+
+Users report that switching to public DNS or using VPN fixes the issue.
+
+### Recommended User Workarounds
+
+<Admonition type="info">
+If you're experiencing DNS resolution issues, try one of the following workarounds:
+</Admonition>
+
+1. **Use a Public DNS Resolver**
+   - Google DNS: 8.8.8.8, 8.8.4.4
+   - Cloudflare DNS: 1.1.1.1, 1.0.0.1
+
+   These can be changed at:
+   - OS level (macOS, Windows, Linux)
+   - Router level
+   - Mobile device network settings
+   - Android Private DNS (dns.google or 1dot1dot1dot1.cloudflare-dns.com)
+
+2. **Use a VPN**
+   - Using a VPN routes DNS queries through a different resolver and often bypasses the issue entirely.
+
+3. **Run a DNS test**
+   ```bash
+   nslookup ep-example-database-123456.us-east-1.aws.neon.tech 8.8.8.8
+   ```
+   If this succeeds, it's confirmed that the issue is with your default DNS resolver.
+
+For more information on configuring private DNS, see [How to Turn on Private DNS Mode](https://news.trendmicro.com/2023/03/21/how-to-turn-on-private-dns-mode/).
 
 <NeedHelp/>
