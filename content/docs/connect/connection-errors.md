@@ -304,6 +304,7 @@ To verify that it's in fact a DNS issue, you can run the following test using a 
 ```bash
 nslookup ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech 8.8.8.8
 ```
+
 If this succeeds, it's confirmed that the issue is with your default DNS resolver.
 
 **Cause**
@@ -325,6 +326,7 @@ Users report that switching to public DNS or using VPN fixes the issue.
    - Cloudflare DNS: 1.1.1.1, 1.0.0.1
 
    These can be changed at:
+
    - OS level (macOS, Windows, Linux)
    - Router level
    - Mobile device network settings
