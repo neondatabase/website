@@ -111,6 +111,7 @@ You have two options for connecting Claude to the Neon MCP Server:
 
 5. Save the configuration file and **restart** Claude Desktop.
 6. An OAuth window will open in your browser. Follow the prompts to authorize Claude to access your Neon account.
+   ![Neon OAuth window](/docs/guides/neon-oauth-window.png)
 7. After authorization, you can start using the Neon MCP server with Claude.
 
 <Admonition type="note">

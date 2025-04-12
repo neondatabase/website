@@ -474,10 +474,14 @@
               slug: https://neon.tech/guides/cline-mcp-neon
             - title: Windsurf
               slug: https://neon.tech/guides/windsurf-mcp-neon
+            - title: Zed
+              slug: https://neon.tech/guides/zed-mcp-neon
         - section: Agent Frameworks
           items:
             - title: AgentStack
               slug: https://neon.tech/guides/agentstack-neon
+            - title: AutoGen
+              slug: https://neon.tech/guides/autogen-neon
             - title: Composio + CrewAI
               slug: https://neon.tech/guides/composio-crewai-neon
             - title: LangGraph
