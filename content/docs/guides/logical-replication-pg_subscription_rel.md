@@ -112,7 +112,7 @@ The `srsubstate` column uses single-character codes for different stages in a ta
 
 The typical lifecycle and transitions of these states are visualized in the diagram below:
 
-![pg_subscription_rel different substates](/docs/guides/pg_subscription_rel.svg)
+![pg_subscription_rel different substates](/docs/guides/pg_subscription_rel.png)
 
 **Typical state progression:**
 
@@ -159,7 +159,7 @@ This query returns the OID and name of all subscriptions in the database. Use th
 
 Once you have successfully monitored the replication status using `pg_subscription_rel`, you can use the information to troubleshoot common logical replication issues
 
-![Troubleshooting in pg_subscription_rel](/docs/guides/pg_subscription_rel_troubleshoot.svg)
+![Troubleshooting in pg_subscription_rel](/docs/guides/pg_subscription_rel_troubleshoot.png)
 
 **Troubleshooting steps Based on `srsubstate`:**
 
