@@ -281,7 +281,7 @@ Zed: I'll complete the migration using the provided migration ID:
 
 - **Natural language interaction:** You can use simple, conversational English to interact with your database.
 - **Step-by-step guidance:** Zed (Claude) confirms each step and provides details like branch names and migration IDs.
-- **MCP Tools in Action:** The underlying MCP tools (`get_database_tables`, `run_sql`, `prepare_database_migration`, `complete_database_migration`) illustrate the automated process.
+- **MCP Tools in action:** The underlying MCP tools (`get_database_tables`, `run_sql`, `prepare_database_migration`, `complete_database_migration`) illustrate the automated process.
 - **Branching for safety:** The agent automatically creates a temporary branch for schema changes. The user will be prompted to confirm the migration before applying it to the main branch.
 
 You can verify the changes in your Neon Console or by querying the database directly.
