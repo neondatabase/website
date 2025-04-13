@@ -266,7 +266,7 @@ Be aware that leaving transactions idle for extended periods can prevent vacuumi
 
 ## DNS resolution issues
 
-Users sometimes experience DNS resolution failures when connecting to their Neon database directly via a Postgres driver, from the **Tables** page, or the **SQL Editor** in the Neon Console. For example, on the **Tables** page on the Neon Console, you might see an **Unexpected error happened** message like this one:
+Some users encounter DNS resolution failures when connecting to their Neon database. These issues are often reported when using the **Tables** page in the Neon Console. In such cases, users may see an **Unexpected error happened** message like the one below:
 
 ![Unexpected error happened on Tables page](/docs/guides/tables_error.png)
 
@@ -293,13 +293,13 @@ Name:	ap-southeast-1.aws.neon.tech
 Address: 203.0.113.30
 ```
 
-If the hostname does not resolve, you might see an error like this instead, where the DNS query is refused:
+If the hostname does not resolve, you might see an error like this, where the DNS query is refused:
 
 ```bash shouldWrap
 ** server can't find ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech: REFUSED
 ```
 
-To verify that it's a DNS resolution issue, you can run the following test using a public DNS resolver, such as Google DNS:
+To verify that it's a DNS resolution issue, run the following test using a public DNS resolver, such as Google DNS:
 
 ```bash
 nslookup ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech 8.8.8.8
@@ -309,15 +309,13 @@ If this succeeds, it's very likely a DNS resolution issue.
 
 **Cause**
 
-Failure to resolve the Neon hostname can happen for different reasons, including:
+Failure to resolve the Neon hostname can happen for different reasons:
 
 - Regional DNS caching or propagation delays
 - Restrictive or misconfigured DNS resolvers (such as those provided by your ISP)
 - System-wide web proxy settings that interfere with DNS resolution
 
 **Workarounds**
-
-Possible workarounds include:
 
 1. **Using a Public DNS Resolver**
 
@@ -337,13 +335,11 @@ Possible workarounds include:
       - **Windows**: Control Panel → Network and Internet → Network Connections → Right-click your connection → Properties → Internet Protocol Version 4 (TCP/IPv4)
       - **Linux**: Edit `/etc/resolv.conf` or configure your network manager (e.g., NetworkManager, Netplan)
 
-      See this [How to Turn on Private DNS Mode](https://news.trendmicro.com/2023/03/21/how-to-turn-on-private-dns-mode/) article for detailed instructions.
+      This article provides detailed instructions: [How to Turn on Private DNS Mode](https://news.trendmicro.com/2023/03/21/how-to-turn-on-private-dns-mode/)
 
 2. **Disable system-wide web proxies**
 
-   If you’re using a proxy configured at the OS level, it may interfere with DNS lookups.
-
-   How to check and disable system proxy settings:
+   If you’re using a proxy configured at the OS level, it may interfere with DNS lookups. To check and disable system proxy settings:
 
    - **macOS**: System Settings → Network → Wi-Fi → Details → Proxies. Uncheck any active proxy options (e.g., "Web Proxy (HTTP)", "Secure Web Proxy (HTTPS)")
    - **Windows**: Settings → Network & Internet → Proxy. Turn off "Use a proxy server" if it's enabled
