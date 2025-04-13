@@ -54,7 +54,7 @@ The remote hosted MCP server is currently in its preview phase. As the [OAuth sp
 
 #### Prerequisites:
 
-- An MCP Client application (e.g., Cursor, Windsurf, Claude Desktop, Cline).
+- An MCP Client application (e.g., Cursor, Windsurf, Claude Desktop, Cline, Zed).
 - A Neon account.
 
 #### Setup steps:
@@ -252,6 +252,7 @@ You can also refer to our individual guides for detailed examples on using the N
 - [Cursor](/guides/cursor-mcp-neon)
 - [Cline](/guides/cline-mcp-neon)
 - [Windsurf (Codium)](/guides/windsurf-mcp-neon)
+- [Zed](/guides/zed-mcp-neon)
 
 ## Conclusion
 

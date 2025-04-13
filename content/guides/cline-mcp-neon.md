@@ -72,7 +72,8 @@ This method uses Neon's managed server and OAuth authentication.
 6. **Save** the `cline_mcp_settings.json` file.
 7. You should see a notification in VS Code that says: "MCP servers updated".
    ![Cline MCP Server Updated](/docs/guides/cline-mcp-config-update.png)
-8. Cline is now connected to Neon's remote MCP server.
+8. An OAuth window will open in your browser. Follow the prompts to authorize Cline to access your Neon account. Once authorized, Cline will be connected to Neon's remote MCP server.
+  ![Neon OAuth window](/docs/guides/neon-oauth-window.png)
 
 <Admonition type="note">
   The remote hosted MCP server is in preview due to the [new OAuth MCP specification](https://spec.modelcontextprotocol.io/specification/2025-03-26/basic/authorization/), expect potential changes as we continue to refine the OAuth integration.

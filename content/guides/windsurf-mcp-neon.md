@@ -76,6 +76,7 @@ You can either watch the video below or follow the steps to set up the Neon MCP 
 6. **Save** the `mcp_config.json` file.
 7. Click **"Refresh"** (🔄) in the MCP toolbar in Windsurf Cascade.
 8. An OAuth window will open in your browser. Follow the prompts to authorize Windsurf to access your Neon account.
+  ![Neon OAuth window](/docs/guides/neon-oauth-window.png)
 9. You can verify that the connection is successful by checking the available MCP servers in Cascade. The toolbar should indicate that you have MCP servers available, and you should see "1 available MCP server" (or more if you configured additional servers).
 
    ![Windsurf MCP Toolbar with Server Available](/docs/guides/windsurf-mcp-server-available.png)
