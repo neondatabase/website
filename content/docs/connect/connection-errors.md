@@ -266,11 +266,11 @@ Be aware that leaving transactions idle for extended periods can prevent vacuumi
 
 ## DNS resolution issues
 
-Users in certain regions sometimes experience DNS resolution failures when attempting to connect to their Neon database directly or from the **Tables** page or **SQL Editor** in the Neon Console. For example, on the **Tables** page on the Neon Console, you might see an **Unexpected error happened** message like this one:
+Users sometimes experience DNS resolution failures when connecting to their Neon database directly via a Postgres driver, from the **Tables** page, or the **SQL Editor** in the Neon Console. For example, on the **Tables** page on the Neon Console, you might see an **Unexpected error happened** message like this one:
 
 ![Unexpected error happened on Tables page](/docs/guides/tables_error.png)
 
-To check for a DNS resolution issue, you can run an `nslookup` command on your Neon hostname, which is the part of your Neon database [connection string](/docs/reference/glossary#connection-string) starting with your endpoint ID (e.g., `ep-cool-darkness-a1b2c3d4`) and ending with `neon.tech`. For example:
+To check for a DNS resolution issue, you can run `nslookup` on your Neon hostname, which is the part of your Neon database [connection string](/docs/reference/glossary#connection-string) starting with your endpoint ID (e.g., `ep-cool-darkness-a1b2c3d4`) and ending with `neon.tech`. For example:
 
 ```bash shouldWrap
 nslookup ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech
@@ -293,34 +293,33 @@ Name:	ap-southeast-1.aws.neon.tech
 Address: 203.0.113.30
 ```
 
-If the hostname does not resolve, you'll see an error instead, where the DNS query is refused by the resolver:
+If the hostname does not resolve, you might see an error like this instead, where the DNS query is refused:
 
 ```bash shouldWrap
 ** server can't find ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech: REFUSED
 ```
 
-To verify that it's in fact a DNS issue, you can run the following test using a public DNS resolver, such as Google DNS:
+To verify that it's a DNS resolution issue, you can run the following test using a public DNS resolver, such as Google DNS:
 
 ```bash
 nslookup ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech 8.8.8.8
 ```
 
-If this succeeds, it's confirmed that the issue is with your default DNS resolver.
+If this succeeds, it's very likely a DNS resolution issue.
 
 **Cause**
 
-This is not a Neon-side or AWS-side DNS misconfiguration. Instead, it's most likely a regional DNS resolution failure caused by one or more of the following:
+Failure to resolve the Neon hostname can happen for different reasons, including:
 
-- Misconfigured or restrictive DNS resolvers (e.g., ISP DNS)
-- Regional caching or delayed propagation
-- Local DNS filtering
-- IPv6-specific resolver quirks
+- Regional DNS caching or propagation delays
+- Restrictive or misconfigured DNS resolvers (such as those provided by your ISP)
+- System-wide web proxy settings that interfere with DNS resolution
 
 **Workarounds**
 
-Users report that switching to public DNS or using VPN fixes the issue.
+Possible workarounds include:
 
-1. **Use a Public DNS Resolver**
+1. **Using a Public DNS Resolver**
 
    - Google DNS: 8.8.8.8, 8.8.4.4
    - Cloudflare DNS: 1.1.1.1, 1.0.0.1
@@ -330,12 +329,28 @@ Users report that switching to public DNS or using VPN fixes the issue.
    - OS level (macOS, Windows, Linux)
    - Router level
    - Mobile device network settings
-   - Android Private DNS (`dns.google` or [https://one.one.one.one/dns/](https://one.one.one.one/dns/))
+   - Android Private DNS (configure a trusted provider such as `dns.google` or `1dot1dot1dot1.cloudflare-dns.com`)
 
-   See [How to Turn on Private DNS Mode](https://news.trendmicro.com/2023/03/21/how-to-turn-on-private-dns-mode/) for OS-level instructions.
+   To change your DNS configuration at the OS level:
 
-2. **Use a VPN**
+      - **macOS**: System Settings → Network → Wi-Fi → Details → DNS
+      - **Windows**: Control Panel → Network and Internet → Network Connections → Right-click your connection → Properties → Internet Protocol Version 4 (TCP/IPv4)
+      - **Linux**: Edit `/etc/resolv.conf` or configure your network manager (e.g., NetworkManager, Netplan)
 
-   Using a VPN routes DNS queries through a different resolver and often bypasses the issue entirely.
+      See this [How to Turn on Private DNS Mode](https://news.trendmicro.com/2023/03/21/how-to-turn-on-private-dns-mode/) article for detailed instructions.
+
+2. **Disable system-wide web proxies**
+
+   If you’re using a proxy configured at the OS level, it may interfere with DNS lookups.
+
+   How to check and disable system proxy settings:
+
+   - **macOS**: System Settings → Network → Wi-Fi → Details → Proxies. Uncheck any active proxy options (e.g., "Web Proxy (HTTP)", "Secure Web Proxy (HTTPS)")
+   - **Windows**: Settings → Network & Internet → Proxy. Turn off "Use a proxy server" if it's enabled
+   - **Linux**: Check your environment variables (e.g., `http_proxy`, `https_proxy`) and system settings under Network/Proxy. 
+
+3. **Using a VPN**
+
+   Using a VPN routes DNS queries through a different resolver and often bypasses the issue entirely.   
 
 <NeedHelp/>
