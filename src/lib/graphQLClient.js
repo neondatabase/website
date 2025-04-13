@@ -3,10 +3,12 @@ import { GraphQLClient } from 'graphql-request';
 
 export { gql } from 'graphql-request';
 
-export const graphQLClient = new GraphQLClient(process.env.WP_GRAPHQL_URL);
+const wpGraphqlUrl = process.env.WP_GRAPHQL_URL || 'http://localhost:3000/graphql';
+
+export const graphQLClient = new GraphQLClient(wpGraphqlUrl);
 
 export const graphQLClientAdmin = (authToken) =>
-  new GraphQLClient(process.env.WP_GRAPHQL_URL, {
+  new GraphQLClient(wpGraphqlUrl, {
     headers: {
       Authorization: `Bearer ${authToken}`,
     },

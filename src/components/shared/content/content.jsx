@@ -35,6 +35,7 @@ import Button from 'components/shared/button';
 import CodeBlock from 'components/shared/code-block';
 import ComputeCalculator from 'components/shared/compute-calculator';
 import CtaBlock from 'components/shared/cta-block';
+import DNSChecker from 'components/shared/dns-checker/dns-checker';
 import DocCta from 'components/shared/doc-cta';
 import ImageZoom from 'components/shared/image-zoom';
 import InkeepEmbedded from 'components/shared/inkeep-embedded';
@@ -147,6 +148,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   Steps,
   DeployPostgresButton,
   ChatOptions,
+  DNSChecker,
   ...sharedComponents,
 });
 

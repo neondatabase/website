@@ -270,6 +270,12 @@ Some users encounter DNS resolution failures when connecting to their Neon datab
 
 ![Unexpected error happened on Tables page](/docs/guides/tables_error.png)
 
+### DNS Resolution Checker
+
+Enter your Neon hostname below to check for DNS resolution issues:
+
+<DNSChecker />
+
 To check for a DNS resolution issue, you can run `nslookup` on your Neon hostname, which is the part of your Neon database [connection string](/docs/reference/glossary#connection-string) starting with your endpoint ID (e.g., `ep-cool-darkness-a1b2c3d4`) and ending with `neon.tech`. For example:
 
 ```bash shouldWrap
