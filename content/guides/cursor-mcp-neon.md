@@ -72,7 +72,7 @@ This method uses Neon's managed server and OAuth authentication.
 4. **Restart Cursor** or reload the window (`Developer: Reload Window` from the Command Palette). If Cursor prompts you to Enable the MCP server, click **Enable**.
 
 5. An OAuth window will open in your browser. Follow the prompts to authorize Cursor to access your Neon account.
-  ![Neon OAuth window](/docs/guides/neon-oauth-window.png)
+   ![Neon OAuth window](/docs/guides/neon-oauth-window.png)
 
 6. You can verify that the connection is successful by checking the **MCP Servers** section in Cursor settings.
    ![Cursor with Neon MCP Tools](/docs/guides/cursor-with-neon-mcp-tools.png)
