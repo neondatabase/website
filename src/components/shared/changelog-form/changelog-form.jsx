@@ -22,7 +22,7 @@ const appearAndExitAnimationVariants = {
 
 const themeClassNames = {
   sidebar: {
-    block: 'mt-12 max-w-[228px] flex-col gap-3 p-3.5',
+    block: 'mt-12 flex-col gap-3 p-3.5',
     title: 'text-[15px] font-medium leading-snug tracking-tighter',
     input: 'pr-20',
     sendText: 'hidden',
@@ -30,7 +30,7 @@ const themeClassNames = {
   },
   default: {
     block:
-      'mb-5 hidden items-center gap-[72px] px-6 py-[18px] xl:flex md:gap-10 sm:flex-col sm:gap-2.5 sm:p-[18px] sm:pt-3.5 sm:items-start',
+      'items-center gap-[72px] px-6 py-[18px] md:gap-10 sm:flex-col sm:gap-2.5 sm:p-[18px] sm:pt-3.5 sm:items-start',
     title: 'shrink-0 text-lg font-medium leading-snug tracking-tighter',
     input: 'pr-32 xs:pr-20',
     sendText: 'text-[13px] font-semibold tracking-extra-tight xs:hidden',
@@ -39,7 +39,7 @@ const themeClassNames = {
   },
 };
 
-const ChangelogForm = ({ isSidebar = false }) => {
+const ChangelogForm = ({ isSidebar = false, className }) => {
   const theme = isSidebar ? 'sidebar' : 'default';
   const classNames = themeClassNames[theme];
 
@@ -116,14 +116,14 @@ const ChangelogForm = ({ isSidebar = false }) => {
   };
 
   return (
-    <section
+    <div
       className={clsx(
         'changelog-form safe-paddings relative flex scroll-mt-20 rounded-lg bg-gray-new-94',
         'dark:bg-subscribe-form-dark dark:shadow-[0px_2px_10px_0px_rgba(0,0,0,.4),0px_2px_30px_0px_rgba(0,0,0,.5)]',
         'lg:scroll-mt-10',
-        classNames.block
+        classNames.block,
+        className
       )}
-      id="changelog-form"
     >
       <h2 className={classNames.title}>
         Subscribe to our changelog.
@@ -232,12 +232,13 @@ const ChangelogForm = ({ isSidebar = false }) => {
         )}
       </form>
       <GradientBorder className="hidden !rounded-[10px] dark:block" withBlend />
-    </section>
+    </div>
   );
 };
 
 ChangelogForm.propTypes = {
   isSidebar: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 export default ChangelogForm;
