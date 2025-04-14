@@ -14,10 +14,11 @@ import TableHeading from './table-heading';
 
 // Styles to set fixed height for table cells
 const rowHeight = {
-  1: 'h-12',
+  1: 'h-[46px]',
   2: 'h-[70px]',
   3: 'h-[90px]',
   4: 'h-[110px]',
+  5: 'h-[128px]',
   6: 'h-[180px]',
 };
 
@@ -67,8 +68,8 @@ const Table = () => {
   }, []);
 
   return (
-    <div className="mx-auto flex max-w-[1216px] flex-col xl:max-w-none xl:px-8 lg:pr-0 md:pl-5">
-      <ul className="no-scrollbars px-4.5 relative flex w-full lg:overflow-x-auto lg:pl-0 lg:pr-8 md:pr-5">
+    <div className="mx-auto flex max-w-[1216px] flex-col xl:max-w-none xl:px-8 xl:pr-0 md:pl-5">
+      <ul className="no-scrollbars px-4.5 relative flex w-full xl:overflow-x-auto xl:pl-0 xl:pr-8 md:pr-5">
         {Object.keys(PLANS.headings).map((key, i, arr) => {
           const isHighlightedColumn = key === 'serverless';
           const isLabelsColumn = i === 0;
@@ -76,13 +77,12 @@ const Table = () => {
           return (
             <li
               className={clsx('relative py-5 xl:py-4', {
-                'z-30 flex-1 bg-black-pure lg:sticky lg:left-0 lg:top-0 lg:min-w-[200px] lg:shadow-[8px_18px_20px_0px_rgba(5,5,5,.8)]':
+                'z-30 flex-1 bg-black-pure xl:sticky xl:left-0 xl:top-0 xl:min-w-[288px] xl:shadow-[8px_18px_20px_0px_rgba(5,5,5,.8)] lg:min-w-[268px]':
                   isLabelsColumn,
-                'basis-[240px] last:basis-[208px] xl:basis-[19%] xl:last:basis-[160px] lg:shrink-0 lg:basis-[200px]':
-                  !isLabelsColumn,
+                'basis-[240px] last:basis-[208px] xl:shrink-0': !isLabelsColumn,
                 'before:absolute before:inset-y-0 before:-left-6 before:z-0 before:w-[208px] before:rounded-md before:bg-pricing-table-featured-column xl:before:-left-3 xl:before:w-[180px] lg:before:-left-5 lg:before:w-[196px]':
                   isHighlightedColumn,
-                'lg:basis-[220px]': i === 1,
+                'xl:basis-[220px]': i === 0,
               })}
               key={key}
             >
@@ -93,7 +93,7 @@ const Table = () => {
                 isFeaturedPlan={isHighlightedColumn}
                 {...labelList[isLabelsColumn ? arr[1] : key]}
               />
-              <ul className="relative z-10 flex w-full grow flex-col">
+              <ul className="relative z-10 flex w-full grow flex-col pt-[18px]">
                 {tableRows.map((item, index) => {
                   const { rows = 1, feature } = item;
                   const featureTitle = feature?.title || feature;
@@ -103,12 +103,12 @@ const Table = () => {
                     return (
                       <li
                         className={clsx(
-                          'relative flex flex-col transition-colors',
+                          'relative flex flex-col text-balance transition-colors',
                           rowHeight[rows],
                           isHiddenItems &&
                             'last-of-type:border-b last-of-type:border-dashed last-of-type:border-gray-new-15',
                           isGroupHeader
-                            ? 'justify-end pb-3.5'
+                            ? 'justify-end pb-3.5 pr-3'
                             : 'border-t border-dashed border-gray-new-15 py-3 lg:py-2.5',
                           i === 1 && 'lg:pl-5',
                           currentRow === index.toString() && !isGroupHeader
@@ -121,26 +121,27 @@ const Table = () => {
                       >
                         {isGroupHeader ? (
                           <>
-                            <span className="text-[13px] font-medium uppercase leading-none tracking-wide text-gray-new-80 lg:text-xs">
+                            <span className="text-lg font-medium leading-none tracking-extra-tight">
                               {featureTitle}
                             </span>
                             {feature?.subtitle && (
-                              <span className="mt-1.5 text-sm font-light leading-snug tracking-tight text-gray-new-60">
-                                {feature.subtitle}
-                              </span>
+                              <span
+                                className="mt-2 text-sm font-light leading-snug tracking-extra-tight text-gray-new-70"
+                                dangerouslySetInnerHTML={{ __html: feature.subtitle }}
+                              />
                             )}
                           </>
                         ) : (
                           <>
                             <span
-                              className="relative w-fit text-balance pr-5 text-lg leading-tight tracking-extra-tight lg:text-base"
+                              className="relative w-fit text-balance pr-5 leading-tight tracking-extra-tight lg:text-base"
                               dangerouslySetInnerHTML={{ __html: featureTitle }}
                             />
                             {feature?.subtitle && (
                               <span
                                 className={clsx(
-                                  'mt-1 text-balance pr-5 text-sm font-light leading-snug tracking-tight text-gray-new-60',
-                                  '[&_a]:border-b [&_a]:border-gray-new-60',
+                                  'mt-1 text-balance pr-5 text-sm font-light leading-snug tracking-tight text-gray-new-50',
+                                  '[&_a]:border-b [&_a]:border-gray-new-50',
                                   '[&_a]:transition-colors [&_a]:duration-200',
                                   '[&_a:hover]:border-green-45 [&_a:hover]:text-green-45'
                                 )}
@@ -156,7 +157,7 @@ const Table = () => {
                   return (
                     <li
                       className={clsx(
-                        'relative flex flex-col transition-colors',
+                        'relative flex flex-col text-gray-new-90 transition-colors',
                         rowHeight[rows],
                         isHiddenItems &&
                           'last-of-type:border-b last-of-type:border-dashed last-of-type:border-gray-new-15',

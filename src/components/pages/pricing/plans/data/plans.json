@@ -109,7 +109,7 @@
       "enterprise": ""
     },
     {
-      "rows": "4",
+      "rows": "5",
       "feature": {
         "groupHeader": true,
         "title": "Usage-based pricing",
@@ -205,7 +205,7 @@
       "enterprise": ""
     },
     {
-      "rows": "3",
+      "rows": "4",
       "feature": {
         "groupHeader": true,
         "title": "Add-ons",
