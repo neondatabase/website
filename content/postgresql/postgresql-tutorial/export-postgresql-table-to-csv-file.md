@@ -10,8 +10,8 @@ previousLink:
   title: 'Import CSV File Into PostgreSQL Table'
   slug: 'postgresql-tutorial/import-csv-file-into-posgresql-table'
 nextLink:
-  title: 'PostgreSQL Data Types'
-  slug: 'postgresql-tutorial/postgresql-data-types'
+  title: 'Subquery'
+  slug: 'postgresql-tutorial/postgresql-subquery'
 ---
 
 **Summary**: in this tutorial, you will learn various techniques to export data from PostgreSQL tables to CSV files.
