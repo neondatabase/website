@@ -22,6 +22,10 @@ const rowHeight = {
   6: 'h-[180px]',
 };
 
+const mobileRowHeight = {
+  2: 'md:h-[70px]',
+};
+
 const DEFAULT_ROWS_TO_SHOW = 8;
 
 const Table = () => {
@@ -76,18 +80,18 @@ const Table = () => {
 
           return (
             <li
-              className={clsx('relative py-5 xl:py-4', {
-                'z-30 flex-1 bg-black-pure xl:sticky xl:left-0 xl:top-0 xl:min-w-[288px] xl:shadow-[8px_18px_20px_0px_rgba(5,5,5,.8)] lg:min-w-[268px]':
+              className={clsx('relative py-5 lg:py-4', {
+                'z-30 flex-1 bg-black-pure xl:sticky xl:left-0 xl:top-0 xl:min-w-[288px] xl:shadow-[8px_18px_20px_0px_rgba(5,5,5,.8)] lg:min-w-[268px] md:min-w-[220px]':
                   isLabelsColumn,
                 'basis-[240px] last:basis-[208px] xl:shrink-0': !isLabelsColumn,
-                'before:absolute before:inset-y-0 before:-left-6 before:z-0 before:w-[208px] before:rounded-md before:bg-pricing-table-featured-column xl:before:-left-3 xl:before:w-[180px] lg:before:-left-5 lg:before:w-[196px]':
+                'before:absolute before:inset-y-0 before:-left-6 before:z-0 before:w-[208px] before:rounded-md before:bg-pricing-table-featured-column lg:before:-left-5 lg:before:w-[196px]':
                   isHighlightedColumn,
                 'xl:basis-[220px]': i === 0,
               })}
               key={key}
             >
               <TableHeading
-                className={clsx(i === 1 && 'lg:ml-5')}
+                className={clsx(i === 1 && 'xl:ml-5')}
                 planId={key}
                 isLabelsColumn={isLabelsColumn}
                 isFeaturedPlan={isHighlightedColumn}
@@ -95,7 +99,7 @@ const Table = () => {
               />
               <ul className="relative z-10 flex w-full grow flex-col pt-[18px]">
                 {tableRows.map((item, index) => {
-                  const { rows = 1, feature } = item;
+                  const { rows = 1, mobileRows, feature } = item;
                   const featureTitle = feature?.title || feature;
 
                   if (i === 0) {
@@ -105,16 +109,17 @@ const Table = () => {
                         className={clsx(
                           'relative flex flex-col text-balance transition-colors',
                           rowHeight[rows],
+                          mobileRows && mobileRowHeight[mobileRows],
                           isHiddenItems &&
                             'last-of-type:border-b last-of-type:border-dashed last-of-type:border-gray-new-15',
                           isGroupHeader
                             ? 'justify-end pb-3.5 pr-3'
                             : 'border-t border-dashed border-gray-new-15 py-3 lg:py-2.5',
-                          i === 1 && 'lg:pl-5',
                           currentRow === index.toString() && !isGroupHeader
                             ? 'bg-gray-new-8 before:opacity-100 lg:bg-transparent'
                             : 'before:opacity-0',
-                          'before:absolute before:inset-y-0 before:-left-5 before:z-0 before:w-5 before:rounded-bl-lg before:rounded-tl-lg before:bg-gray-new-8 before:transition-opacity lg:before:hidden'
+                          i === 1 && 'xl:pl-5',
+                          'before:absolute before:-inset-y-px before:-left-5 before:z-0 before:w-5 before:rounded-bl-lg before:rounded-tl-lg before:bg-gray-new-8 before:transition-opacity lg:before:hidden'
                         )}
                         data-row-id={index}
                         key={index}
@@ -134,13 +139,13 @@ const Table = () => {
                         ) : (
                           <>
                             <span
-                              className="relative w-fit text-balance pr-5 leading-tight tracking-extra-tight lg:text-base"
+                              className="relative w-fit text-balance pr-5 leading-tight tracking-extra-tight lg:text-base md:pr-4"
                               dangerouslySetInnerHTML={{ __html: featureTitle }}
                             />
                             {feature?.subtitle && (
                               <span
                                 className={clsx(
-                                  'mt-1 text-balance pr-5 text-sm font-light leading-snug tracking-tight text-gray-new-50',
+                                  'mt-1 text-balance pr-5 text-sm font-light leading-snug tracking-tight text-gray-new-50 md:pr-4',
                                   '[&_a]:border-b [&_a]:border-gray-new-50',
                                   '[&_a]:transition-colors [&_a]:duration-200',
                                   '[&_a:hover]:border-green-45 [&_a:hover]:text-green-45'
@@ -159,6 +164,7 @@ const Table = () => {
                       className={clsx(
                         'relative flex flex-col text-gray-new-90 transition-colors',
                         rowHeight[rows],
+                        mobileRows && mobileRowHeight[mobileRows],
                         isHiddenItems &&
                           'last-of-type:border-b last-of-type:border-dashed last-of-type:border-gray-new-15',
                         !rowsWithGroupHeader.includes(index) && 'py-3 lg:py-2.5',
@@ -166,13 +172,14 @@ const Table = () => {
                         currentRow === index.toString() &&
                           !rowsWithGroupHeader.includes(index) &&
                           'bg-gray-new-8 before:opacity-100 lg:bg-transparent',
+                        i === 1 && 'xl:pl-5',
                         i === arr.length - 1 &&
-                          'before:absolute before:inset-y-0 before:-right-5 before:z-0 before:w-5 before:rounded-br-lg before:rounded-tr-lg before:bg-gray-new-8 before:opacity-0 before:transition-opacity lg:before:hidden'
+                          'before:absolute before:-inset-y-px before:-right-5 before:z-0 before:w-5 before:rounded-br-lg before:rounded-tr-lg before:bg-gray-new-8 before:opacity-0 before:transition-opacity lg:before:hidden'
                       )}
                       data-row-id={index}
                       key={index}
                     >
-                      <div className={clsx('max-w-[160px] lg:max-w-[156px]', i === 1 && 'lg:ml-5')}>
+                      <div className="max-w-[160px]">
                         <TableCell item={item[key]} id={key} index={index} />
                       </div>
                     </li>
@@ -183,7 +190,7 @@ const Table = () => {
                 <Button
                   className={clsx(
                     'relative z-20 mt-8 h-10 w-full max-w-[160px] tracking-tight 2xl:!text-base xl:mt-6 xl:h-9 lg:max-w-[156px]',
-                    i === 1 && 'lg:ml-5',
+                    i === 1 && 'xl:ml-5',
                     isHighlightedColumn ? '!font-semibold' : 'bg-opacity-80 !font-medium'
                   )}
                   size="xs"

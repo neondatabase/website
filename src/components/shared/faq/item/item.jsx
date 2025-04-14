@@ -58,7 +58,7 @@ const Item = ({ question, answer, id = null, initialState = 'closed', index }) =
             }}
           >
             <p
-              className="with-link-primary with-list-style pt-4 text-base leading-normal text-gray-new-80 lg:pt-5"
+              className="with-link-primary with-list-style pr-14 pt-4 text-base leading-normal tracking-extra-tight text-gray-new-80 lg:pt-5"
               dangerouslySetInnerHTML={{ __html: answer }}
             />
           </m.div>

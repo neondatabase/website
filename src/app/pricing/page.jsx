@@ -72,7 +72,7 @@ const faqItems = [
 const PricingPage = () => (
   <Layout>
     <Hero />
-    <Logos className="mt-[136px] xl:mt-28 lg:mt-24 lg:pt-0 md:mt-20" logos={logos} />
+    <Logos className="mt-[136px] lg:mt-24 lg:pt-0 md:mt-20" logos={logos} />
     <Plans />
     <Features />
     <Faq items={faqItems} />

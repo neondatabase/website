@@ -7,7 +7,6 @@ import { usePostHog } from 'posthog-js/react';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import CtaBlock from 'components/shared/cta-block';
-import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 
@@ -35,20 +34,16 @@ const Hero = () => {
 
   return (
     <section className="hero safe-paddings overflow-hidden pt-[158px] xl:pt-[134px] lg:pt-14 md:pt-12">
-      <Container className="flex flex-col items-center" size="1344">
-        <Heading
-          className="text-center font-medium !leading-none tracking-tighter xl:text-6xl lg:text-[56px] md:!text-4xl"
-          tag="h1"
-          size="lg"
-        >
-          <span>Neon Pricing</span>
-        </Heading>
-        <p className="mx-auto mt-4 max-w-[680px] text-center text-xl font-light leading-snug tracking-extra-tight text-gray-new-80 xl:max-w-[560px] lg:text-lg md:text-base">
+      <Container className="flex flex-col items-center xl:max-w-[704px] lg:!max-w-3xl" size="1344">
+        <h1 className="text-center font-title text-[72px] font-medium leading-none tracking-tighter xl:text-6xl lg:text-[56px] md:text-4xl">
+          Neon Pricing
+        </h1>
+        <p className="mx-auto mt-4 max-w-[680px] text-center text-xl font-light leading-snug tracking-extra-tight text-gray-new-80 lg:text-lg md:text-base">
           Pricing plans that grow with you. From prototype to Enterprise.
         </p>
-        <div className="relative mx-auto mt-16 xl:mt-14 xl:max-w-[644px] lg:mt-11 md:mt-9">
+        <div className="relative mx-auto mt-16 xl:mt-14 lg:mt-11 md:mt-9">
           <h2 className="sr-only">Neon pricing plans</h2>
-          <ul className="grid-gap relative z-10 grid grid-cols-4 gap-x-8 2xl:gap-x-6 xl:grid-cols-2 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
+          <ul className="grid-gap relative z-10 grid grid-cols-4 gap-x-8 2xl:gap-x-6 xl:grid-cols-2 lg:gap-7 md:grid-cols-1 md:gap-4">
             {PLANS.map(
               (
                 {
@@ -167,7 +162,7 @@ const Hero = () => {
           </ul>
         </div>
         <CtaBlock
-          className="max-w-[656px]"
+          className="max-w-[656px] xl:mt-8 lg:mt-7 lg:max-w-full md:mt-4"
           title="Custom Plans"
           description="Connect with our team for HIPAA compliance, annual contracts, higher resource limits, and more."
           buttonText="Talk to Sales"

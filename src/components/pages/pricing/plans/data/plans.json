@@ -250,6 +250,7 @@
       "enterprise": "Included"
     },
     {
+      "mobileRows": "2",
       "feature": "IP Allow Whitelist IP addresses",
       "free": "N/A",
       "serverless": "$50",
