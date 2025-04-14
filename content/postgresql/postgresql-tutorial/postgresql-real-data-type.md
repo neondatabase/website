@@ -20,8 +20,7 @@ nextLink:
 
 The `REAL` data type allows you to store single\-precision floating\-point numbers in the database.
 
-A value of the real type takes 4 bytes of storage space. Its valid range is from `-3.40282347 × 1E38` and `3.40282347 × 1E38`.
-
+A value of the real type takes 4 bytes of storage space. Its valid range is from `-3.40282347 × 1E38` to `3.40282347 × 1E38`.
 Typically, you use the `REAL` data type to store floating\-point numbers with relatively large ranges and precision is not critical, or when you are concerned about the storage space.
 
 However, you can use the [double precision](postgresql-double-precision-type) data type if you need higher precision.
