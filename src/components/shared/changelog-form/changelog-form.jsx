@@ -22,19 +22,18 @@ const appearAndExitAnimationVariants = {
 
 const themeClassNames = {
   sidebar: {
-    block: 'mt-12 flex-col gap-3 p-3.5',
-    title: 'text-[15px] font-medium leading-snug tracking-tighter',
-    input: 'pr-20',
-    sendText: 'hidden',
+    block:
+      'mt-12 flex-col gap-3 p-3.5 lg:flex-row lg:items-center lg:gap-[72px] lg:px-6 lg:py-[18px]',
+    title: 'text-[15px] lg:shrink-0 lg:text-lg',
+    input: 'pr-20 lg:pr-32',
+    sendText: 'hidden lg:block',
     errorMessage: 'mt-5',
   },
   default: {
-    block:
-      'items-center gap-[72px] px-6 py-[18px] md:gap-10 sm:flex-col sm:gap-2.5 sm:p-[18px] sm:pt-3.5 sm:items-start',
-    title: 'shrink-0 text-lg font-medium leading-snug tracking-tighter',
-    input: 'pr-32 xs:pr-20',
-    sendText: 'text-[13px] font-semibold tracking-extra-tight xs:hidden',
-    sendIcon: 'hidden xs:block',
+    block: 'items-center gap-[72px] px-6 py-[18px]',
+    title: 'shrink-0 text-lg',
+    input: 'pr-32',
+    sendIcon: 'hidden',
     errorMessage: 'mt-1.5 sm:mt-6',
   },
 };
@@ -119,13 +118,16 @@ const ChangelogForm = ({ isSidebar = false, className }) => {
     <div
       className={clsx(
         'changelog-form safe-paddings relative flex scroll-mt-20 rounded-lg bg-gray-new-94',
-        'dark:bg-subscribe-form-dark dark:shadow-[0px_2px_10px_0px_rgba(0,0,0,.4),0px_2px_30px_0px_rgba(0,0,0,.5)]',
-        'lg:scroll-mt-10',
         classNames.block,
-        className
+        className,
+        'lg:scroll-mt-10 md:gap-10 sm:flex-col sm:items-start sm:gap-2.5 sm:p-[18px] sm:pt-3.5',
+        'dark:bg-subscribe-form-dark dark:shadow-[0px_2px_10px_0px_rgba(0,0,0,.4),0px_2px_30px_0px_rgba(0,0,0,.5)]'
       )}
+      id="changelog-form"
     >
-      <h2 className={classNames.title}>
+      <h2
+        className={clsx(classNames.title, 'font-medium leading-snug tracking-tighter xs:text-base')}
+      >
         Subscribe to our changelog.
         <br /> No spam, guaranteed.
       </h2>
@@ -133,14 +135,14 @@ const ChangelogForm = ({ isSidebar = false, className }) => {
         <input
           className={clsx(
             'remove-autocomplete-styles h-[38px] w-full appearance-none pl-4 tracking-extra-tight',
-            'rounded-full border bg-white text-[13px] focus:outline-none dark:bg-black-new lg:text-base',
-            'placeholder:text-gray-new-50/60 dark:placeholder:text-gray-new-70/60',
             (formState === FORM_STATES.DEFAULT || formState === FORM_STATES.ERROR) &&
               classNames.input,
+            'rounded-full border bg-white text-[13px] focus:outline-none dark:bg-black-new lg:text-base xs:pr-20',
             formState === FORM_STATES.ERROR
               ? 'border-secondary-1'
               : 'border-gray-new-90 dark:border-gray-new-15',
-            formState === FORM_STATES.SUCCESS && 'dark:text-green-45'
+            formState === FORM_STATES.SUCCESS && 'dark:text-green-45',
+            'placeholder:text-gray-new-50/60 dark:placeholder:text-gray-new-70/60'
           )}
           type="email"
           name="email"
@@ -169,8 +171,15 @@ const ChangelogForm = ({ isSidebar = false, className }) => {
                 disabled={formState !== FORM_STATES.DEFAULT}
                 variants={appearAndExitAnimationVariants}
               >
-                <span className={classNames.sendText}>Subscribe</span>
-                <SendIcon className={classNames.sendIcon} />
+                <span
+                  className={clsx(
+                    classNames.sendText,
+                    'text-[13px] font-semibold tracking-extra-tight xs:hidden'
+                  )}
+                >
+                  Subscribe
+                </span>
+                <SendIcon className={clsx(classNames.sendIcon, 'lg:hidden xs:block')} />
               </m.button>
             )}
             {formState === FORM_STATES.LOADING && (
