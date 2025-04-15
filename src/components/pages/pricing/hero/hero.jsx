@@ -46,7 +46,7 @@ const Hero = () => {
         </p>
         <div className="relative mx-auto mt-16 xl:mt-14 lg:mt-12 md:mt-10">
           <h2 className="sr-only">Neon pricing plans</h2>
-          <ul className="grid-gap relative z-10 grid grid-cols-4 gap-x-8 2xl:gap-x-6 xl:grid-cols-2 lg:gap-7 md:grid-cols-1 md:gap-4">
+          <ul className="grid-gap relative z-10 grid grid-cols-4 gap-8 xl:grid-cols-2 lg:gap-7 md:grid-cols-1 md:gap-4">
             {PLANS.map(
               (
                 {
@@ -165,7 +165,7 @@ const Hero = () => {
           </ul>
         </div>
         <CtaBlock
-          className="max-w-[656px] xl:mt-8 lg:mt-7 lg:max-w-full md:mt-4 md:max-w-[520px] sm:!p-6"
+          className="max-w-[656px] xl:mt-8 lg:mt-7 lg:max-w-full md:mt-4 md:max-w-[552px] sm:!p-6"
           contentClassName="!text-left sm:!max-w-full"
           title="Custom Plans"
           description="Connect with our team for HIPAA compliance, annual contracts, higher resource limits, and more."

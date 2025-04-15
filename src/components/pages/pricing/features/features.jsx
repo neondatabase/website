@@ -68,6 +68,7 @@ const Features = () => (
               withArrow
             >
               Read more
+              <span className="sr-only">about {title}</span>
             </Link>
           </li>
         ))}
