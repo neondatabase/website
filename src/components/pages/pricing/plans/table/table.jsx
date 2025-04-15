@@ -72,7 +72,7 @@ const Table = () => {
   }, []);
 
   return (
-    <div className="mx-auto flex max-w-[1216px] flex-col xl:max-w-none xl:px-8 xl:pr-0 md:pl-5">
+    <div className="mx-auto flex max-w-[1216px] flex-col xl:max-w-none xl:px-8 xl:pr-0 md:pl-4">
       <ul className="no-scrollbars px-4.5 relative flex w-full xl:overflow-x-auto xl:pl-0 xl:pr-8 md:pr-5">
         {Object.keys(PLANS.headings).map((key, i, arr) => {
           const isHighlightedColumn = key === 'serverless';
@@ -214,7 +214,7 @@ const Table = () => {
       </ul>
       {isHiddenItems && (
         <Button
-          className="mx-auto mt-6 h-[38px] rounded-full px-5 text-[15px] font-medium transition-colors duration-200"
+          className="mx-auto mt-6 h-[38px] rounded-full px-5 text-[15px] font-medium transition-colors duration-200 sm:-translate-x-2.5"
           theme="gray-10"
           onClick={() => setTableRows(PLANS.cols)}
         >

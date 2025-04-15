@@ -35,6 +35,7 @@ const themeClassNames = {
 
 const CtaBlock = ({
   className,
+  contentClassName,
   title,
   description,
   buttonText,
@@ -58,7 +59,7 @@ const CtaBlock = ({
         themeClassNames[theme].container
       )}
     >
-      <div className={clsx('sm:text-center', themeClassNames[theme].content)}>
+      <div className={clsx('sm:text-center', themeClassNames[theme].content, contentClassName)}>
         <h3 className={clsx('font-medium', sizeClassNames[size].heading)}>{title}</h3>
         {description && (
           <p
@@ -119,6 +120,7 @@ const CtaBlock = ({
 
 CtaBlock.propTypes = {
   className: PropTypes.string,
+  contentClassName: PropTypes.string,
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
   buttonText: PropTypes.string.isRequired,

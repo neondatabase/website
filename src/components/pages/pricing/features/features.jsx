@@ -46,19 +46,21 @@ const DATA = [
 ];
 
 const Features = () => (
-  <section className="features mt-[184px] scroll-mt-5 px-safe xl:mt-40 lg:mt-36 md:mt-[104px]">
-    <Container size="1152" className="xl:px-16">
-      <h2 className="text-balance text-center font-title text-[52px] font-medium leading-none tracking-extra-tight xl:text-5xl lg:text-4xl md:text-[32px]">
+  <section className="features mt-[184px] scroll-mt-5 px-safe xl:mt-40 lg:mt-36 md:mt-28">
+    <Container size="1152" className="xl:px-16 md:px-5">
+      <h2 className="text-center font-title text-[52px] font-medium leading-none tracking-extra-tight xl:text-5xl lg:text-4xl md:text-[32px]">
         Features in all Neon databases
       </h2>
-      <ul className="mx-auto mt-14 grid grid-cols-4 justify-center gap-x-10 gap-y-11 xl:grid-cols-3 lg:mt-12 lg:max-w-[640px] lg:grid-cols-2 lg:gap-10 sm:mt-10 xs:grid-cols-1">
+      <ul className="mx-auto mt-14 grid grid-cols-4 justify-center gap-x-10 gap-y-11 xl:grid-cols-3 lg:mt-12 lg:max-w-[640px] lg:grid-cols-2 lg:gap-10 md:gap-[34px] sm:mt-10 xs:grid-cols-1">
         {DATA.map(({ title, description, link }) => (
           <li className="sm:max-w-[260px]" key={title}>
             <span className="pricing-check-icon block size-6 scale-150 bg-green-45" aria-hidden />
-            <h3 className="mt-2.5 text-xl font-medium leading-snug tracking-extra-tight">
+            <h3 className="mt-2.5 text-xl font-medium leading-snug tracking-extra-tight md:text-lg">
               {title}
             </h3>
-            <p className="mt-2 leading-snug tracking-extra-tight text-gray-new-70">{description}</p>
+            <p className="mt-2 leading-snug tracking-extra-tight text-gray-new-70 md:mt-1.5">
+              {description}
+            </p>
             <Link
               href={link}
               className="mt-4 text-[15px] leading-none tracking-[-0.03em]"

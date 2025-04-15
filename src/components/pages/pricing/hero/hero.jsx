@@ -34,14 +34,17 @@ const Hero = () => {
 
   return (
     <section className="hero safe-paddings overflow-hidden pt-[158px] xl:pt-[134px] lg:pt-14 md:pt-12">
-      <Container className="flex flex-col items-center xl:max-w-[704px] lg:!max-w-3xl" size="1344">
-        <h1 className="text-center font-title text-[72px] font-medium leading-none tracking-tighter xl:text-6xl lg:text-[56px] md:text-4xl">
+      <Container
+        className="flex flex-col items-center xl:max-w-[704px] lg:!max-w-3xl md:px-5"
+        size="1344"
+      >
+        <h1 className="text-center font-title text-[72px] font-medium leading-none tracking-tighter xl:text-6xl lg:text-[56px] md:text-5xl">
           Neon Pricing
         </h1>
-        <p className="mx-auto mt-4 max-w-[680px] text-center text-xl font-light leading-snug tracking-extra-tight text-gray-new-80 lg:text-lg md:text-base">
+        <p className="mx-auto mt-4 max-w-[680px] text-center text-xl font-light leading-snug tracking-extra-tight text-gray-new-80 lg:text-lg md:mt-3 md:text-base">
           Pricing plans that grow with you. From prototype to Enterprise.
         </p>
-        <div className="relative mx-auto mt-16 xl:mt-14 lg:mt-11 md:mt-9">
+        <div className="relative mx-auto mt-16 xl:mt-14 lg:mt-12 md:mt-10">
           <h2 className="sr-only">Neon pricing plans</h2>
           <ul className="grid-gap relative z-10 grid grid-cols-4 gap-x-8 2xl:gap-x-6 xl:grid-cols-2 lg:gap-7 md:grid-cols-1 md:gap-4">
             {PLANS.map(
@@ -125,7 +128,7 @@ const Hero = () => {
                   </Button>
                   <p
                     className={clsx(
-                      'mt-5 text-[15px] leading-snug tracking-extra-tight text-gray-new-60',
+                      'mt-5 text-[15px] leading-snug tracking-extra-tight text-gray-new-60 lg:text-base',
                       '[&_a]:text-white [&_a]:underline [&_a]:decoration-1 [&_a]:underline-offset-4 [&_a]:transition-colors [&_a]:duration-200 hover:[&_a]:decoration-transparent'
                     )}
                   >
@@ -162,11 +165,13 @@ const Hero = () => {
           </ul>
         </div>
         <CtaBlock
-          className="max-w-[656px] xl:mt-8 lg:mt-7 lg:max-w-full md:mt-4"
+          className="max-w-[656px] xl:mt-8 lg:mt-7 lg:max-w-full md:mt-4 md:max-w-[520px] sm:!p-6"
+          contentClassName="!text-left sm:!max-w-full"
           title="Custom Plans"
           description="Connect with our team for HIPAA compliance, annual contracts, higher resource limits, and more."
           buttonText="Talk to Sales"
           buttonUrl={LINKS.contactSales}
+          buttonClassName="sm:w-full"
           size="sm"
           hasDecor={false}
         />

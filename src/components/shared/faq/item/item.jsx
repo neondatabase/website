@@ -26,15 +26,18 @@ const Item = ({ question, answer, id = null, initialState = 'closed', index }) =
   };
 
   return (
-    <li className="overflow-hidden border-b border-gray-new-15 py-[18px] last:border-0" id={id}>
+    <li
+      className="overflow-hidden border-b border-gray-new-15 py-[18px] last:border-0 md:min-h-[58px] md:py-3.5"
+      id={id}
+    >
       <button
-        className="group relative flex w-full items-start justify-between gap-4 text-left after:absolute after:-inset-y-5 after:left-0 after:w-full"
+        className="group relative flex w-full items-start justify-between gap-4 text-left after:absolute after:-inset-y-5 after:left-0 after:w-full md:after:-inset-y-3"
         type="button"
         aria-expanded={isOpen}
         aria-controls={`panel-${index}`}
         onClick={handleOpen}
       >
-        <h3 className="text-xl font-medium leading-snug tracking-tighter transition-colors duration-300 group-hover:text-primary-2 lg:text-lg md:text-[18px]">
+        <h3 className="text-xl font-medium leading-snug tracking-tighter transition-colors duration-300 group-hover:text-primary-2 lg:text-lg md:text-base">
           {question}
         </h3>
         <span
@@ -58,7 +61,7 @@ const Item = ({ question, answer, id = null, initialState = 'closed', index }) =
             }}
           >
             <p
-              className="with-link-primary with-list-style pr-14 pt-4 text-base leading-normal tracking-extra-tight text-gray-new-80 lg:pt-5 md:pr-8"
+              className="with-link-primary with-list-style pr-14 pt-4 tracking-extra-tight text-gray-new-80 md:pr-8 md:text-[15px]"
               dangerouslySetInnerHTML={{ __html: answer }}
             />
           </m.div>
