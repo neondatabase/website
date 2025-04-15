@@ -16,19 +16,19 @@ Use the following instructions to connect to a new Neon database. This connectio
 
 1. Navigate to [Hasura Cloud](https://cloud.hasura.io/projects) and sign up or log in.
 2. On the Hasura Cloud dashboard, click **Create a project** to create a new Hasura project.
-    ![Hasura Create a Projects](/docs/guides/hasura/create-project.png)
+   ![Hasura Create a Projects](/docs/guides/hasura/create-project.png)
 3. After the project is initialized, click **Launch Console** to open the Hasura Console.
-    ![Hasura Launch Console](/docs/guides/hasura/launch-console.png)
+   ![Hasura Launch Console](/docs/guides/hasura/launch-console.png)
 4. On the Hasura Console, Select **Data** from the top navigation bar.
 5. Click **Postgres** > **Connect Neon Database**.
-    ![Hasura Connect Neon Database](/docs/guides/hasura/connect-neon-database.png)
+   ![Hasura Connect Neon Database](/docs/guides/hasura/connect-neon-database.png)
 6. When prompted to login or sign up for Neon, we recommend selecting **Hasura** for seamless authentication.
 7. You will be redirected to an Oauth page to authorize Hasura to access your Neon account. Click **Authorize** to allow Hasura to create a new Neon project and database.
-    ![Hasura Authorize Neon](/docs/guides/hasura/authorize-hasura.png)
+   ![Hasura Authorize Neon](/docs/guides/hasura/authorize-hasura.png)
 
 After authenticating, a new Neon Postgres database is created and connected to your Hasura project, and the Neon project connection string is associated with the `PG_DATABASE_URL` environment variable.
 
-  ![Environment Variables](/docs/guides/hasura/environment-variables.png)
+![Environment Variables](/docs/guides/hasura/environment-variables.png)
 
 To start exploring Hasura's GraphQL API with data stored in Neon, see [Load a template in Hasura](#load-a-template-in-hasura-optional).
 
@@ -56,17 +56,17 @@ The following steps describe how to navigate to Hasura Cloud and connect to your
 2. Click **Create Project** to create a Hasura Cloud project or click **Launch Console** to open an existing project.
 3. In the Hasura Console, select **Data** from the top navigation bar.
 4. Click **Postgres** > **Connect Existing Database**.
-    ![Hasura Connect Existing Database](/docs/guides/hasura/connect-existing-database.png)
+   ![Hasura Connect Existing Database](/docs/guides/hasura/connect-existing-database.png)
 
 5. Paste your connection string into the **Database URL** field.
 
-    <Admonition type="tip">
-    To enhance security and manageability, consider using environment variables in Hasura instead of hardcoding the connection string. To do this, navigate to **Hasura Project settings** > **Env vars** > **New env var** and create a new variable (e.g., `NEON_DATABASE_URL`) with your connection string as its value.
-      
-      ![Create Environment Variable](/docs/guides/hasura/create-env-var.png)
+   <Admonition type="tip">
+   To enhance security and manageability, consider using environment variables in Hasura instead of hardcoding the connection string. To do this, navigate to **Hasura Project settings** > **Env vars** > **New env var** and create a new variable (e.g., `NEON_DATABASE_URL`) with your connection string as its value.
+     
+     ![Create Environment Variable](/docs/guides/hasura/create-env-var.png)
 
-    Then, in the connection tab, select **Connect database via Environment variable** and enter the variable name you created. This approach keeps your connection string secure and simplifies future updates.
-    </Admonition>
+   Then, in the connection tab, select **Connect database via Environment variable** and enter the variable name you created. This approach keeps your connection string secure and simplifies future updates.
+   </Admonition>
 
 6. Enter a display name for your database in the **Database name** field, and click **Connect Database**.
 
