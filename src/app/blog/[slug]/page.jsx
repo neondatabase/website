@@ -11,7 +11,6 @@ import Hero from 'components/pages/blog-post/hero';
 import MoreArticles from 'components/pages/blog-post/more-articles';
 import SocialShare from 'components/pages/blog-post/social-share';
 import Admonition from 'components/shared/admonition';
-import ChangelogForm from 'components/shared/changelog-form';
 import LINKS from 'constants/links';
 import { getAllWpPosts, getWpPostBySlug } from 'utils/api-wp';
 import getFormattedDate from 'utils/get-formatted-date';
@@ -71,7 +70,6 @@ const BlogPage = async ({ params }) => {
             category={categories.nodes[0]}
             {...pageBlogPost}
           />
-          <ChangelogForm className="mb-5 hidden lg:flex" />
           <Content
             className="post-content col-start-4 col-end-10 row-start-2 mt-10 xl:col-start-1 xl:col-end-9 lg:col-span-full lg:row-start-3"
             html={contentWithLazyBlocks}
