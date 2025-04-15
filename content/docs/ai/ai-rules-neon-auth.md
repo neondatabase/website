@@ -22,6 +22,18 @@ updatedOn: '2025-04-08T22:55:27.440Z'
 
 ## Rules
 
+<ExternalCode
+  url="https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/neon-auth.md"
+  language="md"
+  shouldWrap
+/>
+
+<ExternalCode
+  url="https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/neon-auth.mdc"
+  language="md"
+  shouldWrap
+/>
+
 ````markdown shouldWrap
 ---
 description: Use these rules to relate your database data with your Auth users information
