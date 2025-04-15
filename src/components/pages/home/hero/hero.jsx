@@ -117,7 +117,7 @@ const Hero = () => {
           </p>
           <div className="mt-8 flex items-center gap-6">
             <Button
-              className="px-8 font-semibold md:px-7"
+              className="!px-8 font-semibold md:!px-7"
               theme="primary"
               size="md-new"
               to={LINKS.signup}
