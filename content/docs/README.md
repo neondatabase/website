@@ -332,9 +332,7 @@ The `ExternalCode` component allows embedding code content from external sources
 ### Best Practices
 
 1. Always use raw URLs from the GitHub repository (e.g., `https://raw.githubusercontent.com/...`).
-2. Include a descriptive title to help readers understand the content's context.
-3. For critical content, implement a fallback message in case the remote content fails to load.
-4. Use the `language` prop when the file extension doesn't match the actual content type.
+2. Use the `language` prop when the file extension doesn't match the actual content type.
 
 ## Tabs
 
