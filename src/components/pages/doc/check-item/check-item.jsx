@@ -1,18 +1,28 @@
+'use client';
+
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
 import slugify from 'slugify';
 
 import Link from 'components/shared/link';
+import useLocalStorage from 'hooks/use-local-storage';
 
 const CheckItem = ({ title, href, children, ...otherProps }) => {
-  const Tag = href ? Link : 'div';
-
   const id = slugify(title, {
     lower: true,
     strict: true,
     remove: /[*+~.()'"!:@]/g,
   }).replace(/_/g, '');
+
+  const [mounted, setMounted] = React.useState(false);
+  const [isChecked, setIsChecked] = useLocalStorage(`checklist-${id}`, false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const Tag = href ? Link : 'div';
 
   return (
     <div className="mt-3">
@@ -29,6 +39,8 @@ const CheckItem = ({ title, href, children, ...otherProps }) => {
           )}
           type="checkbox"
           id={id}
+          checked={mounted ? isChecked : false}
+          onChange={() => setIsChecked((prev) => !prev)}
         />
         <h3 className="m-0 text-lg font-medium leading-tight tracking-extra-tight">
           <Tag className="" href={href || null} {...otherProps}>
