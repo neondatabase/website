@@ -22,7 +22,7 @@ const CheckItem = ({ title, href, children, ...otherProps }) => {
             'remove-autocomplete-styles pointer-events-none appearance-none',
             'absolute left-0 top-0.5 z-10 h-4 w-4 rounded border border-black/10 bg-black/5 transition-colors duration-200 hover:bg-black/10',
             'dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10',
-            'before:absolute before:inset-0 before:z-10 before:bg-[url(/images/check.svg)] before:bg-[length:14px_14px] before:bg-center before:bg-no-repeat',
+            'before:absolute before:inset-0 before:z-10 before:bg-[url(/images/check.svg)] before:bg-[length:12px_12px] before:bg-center before:bg-no-repeat before:invert',
             'before:opacity-0 before:transition-opacity before:duration-200',
             'checked:border-secondary-8/50 checked:!bg-secondary-8/70 checked:before:opacity-100',
             'dark:checked:border-white/30 dark:checked:!bg-white/10'
