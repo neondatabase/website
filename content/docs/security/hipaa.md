@@ -1,7 +1,7 @@
 ---
 title: HIPAA Compliance
 enableTableOfContents: true
-updatedOn: '2025-04-08T22:55:27.453Z'
+updatedOn: '2025-04-16T12:44:00.000Z'
 ---
 
 At Neon, we take the security and privacy of your health information seriously. This guide is designed to help you understand how Neon complies with the Health Insurance Portability and Accountability Act (HIPAA) and what that means for you as a customer. Our Business Associate Agreement (BAA) outlines our commitment to safeguarding Protected Health Information (PHI) and complying with HIPAA regulations.
@@ -66,17 +66,33 @@ Audit events may not be logged if database endpoints experience exceptionally he
 
 ## Enabling HIPAA for a Neon project
 
-Once a Business Associate Agreement (BAA) has been signed and you have the HIPAA add-on enabled, you can create a HIPAA-compliant project. HIPAA compliance must be selected at the time of project creation and cannot be added later.
+Once a Business Associate Agreement (BAA) has been signed and you have the HIPAA add-on enabled, you can create a HIPAA-compliant project or enable HIPAA for an existing project.
 
-<Tabs labels={["Console", "API"]}>
+<Tabs labels={["New Project", "Existing Project", "API"]}>
 
 <TabItem>
 
-To learn how to create a new Neon project using the Neon Console, see [Create a project](/docs/manage/projects#create-a-project)
+To enable HIPAA compliance when creating a new Neon project using the Neon Console, see [Create a project](/docs/manage/projects#create-a-project)
 
 On the **Create Project** form, select the **Enable HIPAA compliance for this project** checkbox. This option only appears if the HIPAA add-on is enabled for your account.
 
 ![Enable HIPAA option during project creation](/docs/security/enable_hipaa.png)
+
+</TabItem>
+
+<TabItem>
+
+To enable HIPAA compliance for an existing Neon project:
+
+1. In the Neon Console, navigate to **Project settings** > **General**.
+2. Toggle on the **HIPAA compliance** option.
+3. Click **Save** to apply the changes.
+
+![Enable HIPAA for an existing project](/docs/security/enable_hipaa_existing.png)
+
+<Admonition type="important">
+Enabling HIPAA on a project will force a restart of all computes to apply the new settings. This will temporarily interrupt database connections, similar to what happens when enabling logical replication.
+</Admonition>
 
 </TabItem>
 
@@ -101,6 +117,29 @@ curl --request POST \
 }
 '
 ```
+
+To enable HIPAA for an existing project, use the [Update project API](https://api-docs.neon.tech/reference/updateproject):
+
+```bash
+curl --request PATCH \
+     --url https://console.neon.tech/api/v2/projects/YOUR_PROJECT_ID \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '
+{
+  "project": {
+    "settings": {
+      "hipaa": true
+    }
+  }
+}
+'
+```
+
+<Admonition type="important">
+Enabling HIPAA on an existing project will force a restart of all computes to apply the new settings. This will temporarily interrupt database connections.
+</Admonition>
 
 </TabItem>
 
