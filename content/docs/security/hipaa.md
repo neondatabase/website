@@ -4,9 +4,11 @@ enableTableOfContents: true
 updatedOn: '2025-04-16T12:44:00.000Z'
 ---
 
-At Neon, we take the security and privacy of your health information seriously. This guide is designed to help you understand how Neon complies with the Health Insurance Portability and Accountability Act (HIPAA) and what that means for you as a customer. Our Business Associate Agreement (BAA) outlines our commitment to safeguarding Protected Health Information (PHI) and complying with HIPAA regulations.
+Neon offers HIPAA compliance as part of our Business and Enterprise plans, available upon request.
 
-Neon's HIPAA functionality is only available to customers who have signed a Business Associate Agreement (BAA) with Neon. To request a draft BAA, please contact [Neon Sales](https://neon.tech/contact-sales) or email `hipaa@neon.tech`. After you've signed a BAA, see [Enabling HIPAA for a Neon project](#enabling-hipaa-for-a-neon-project).
+We take the security and privacy of health information seriously. This guide explains how Neon supports HIPAA compliance and what it means for you as a customer. HIPAA features are only available to customers who have signed a Business Associate Agreement (BAA) with Neon. The BAA outlines our responsibilities for protecting Protected Health Information (PHI) and ensuring HIPAA compliance.
+
+To request HIPAA support and receive a draft BAA, contact [Neon Sales](https://neon.tech/contact-sales) or email `hipaa@neon.tech`. After the BAA is signed, you can proceed with [enabling HIPAA for a Neon project](#enabling-hipaa-for-a-neon-project).
 
 ## What is HIPAA?
 
@@ -51,7 +53,7 @@ HIPAA is a federal law that sets national standards for the protection of health
    - Customers need to avoid including PHI in support tickets or metadata fields.
 
 6. PHI Access and Amendments
-   - Customers can request access to their PHI by [opening a request with Neon Support](https://console.neon.tech/app/projects?modal=support).
+   - Customers can request access to audit logs by contacting `hipaa@neon.tech`.
    - Any updates or corrections to PHI need to be carried out by the customer.
 
 ## Your rights and what to expect
@@ -147,11 +149,15 @@ Enabling HIPAA on an existing project will force a restart of all computes to ap
 
 </Tabs>
 
-If you have trouble enabling HIPAA, contact [Neon Sales](https://neon.tech/contact-sales) or email `hipaa@neon.tech`.
+If you have trouble enabling HIPAA, contact `hipaa@neon.tech`.
 
-<Admonition type="note">
-Once HIPAA compliance is enabled for a Neon project, it cannot be disabled. If you want to delete HIPAA-compliant Neon project, please submit a [support request](https://console.neon.tech/app/projects?modal=support). Before deleting a HIPAA-compliant project, you are advised to store all necessary audit logs and data. Neon retains audit log data for the duration specified in the Business Associate Agreement (BAA).
-</Admonition>
+## Disabling HIPAA
+
+Once HIPAA compliance is enabled for a Neon project, it cannot be turned off.
+
+To delete a HIPAA-compliant project, submit a [support request](https://console.neon.tech/app/projects?modal=support). Before doing so, make sure to export any audit logs or data you may need. Neon retains audit logs for the duration specified in your Business Associate Agreement (BAA).
+
+If you want to disable HIPAA for your Neon account entirely, you’ll also need to [submit a support request](https://console.neon.tech/app/projects?modal=support). This can only be done after all HIPAA-enabled projects have been removed.
 
 ## Security incidents
 
@@ -176,6 +182,6 @@ A: Contact our security team immediately at security@neon.tech.
 
 For any questions regarding our HIPAA compliance or to report an issue, please reach out to:
 
-- Email: hipaa@neon.tech
+- Email: `hipaa@neon.tech`
 
 _This guide provides a high-level overview of Neon's HIPAA compliance efforts. For more details, please refer to your Business Associate Agreement (BAA) or contact us directly via our [support channels](https://neon.tech/docs/introduction/support)._
