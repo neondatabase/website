@@ -1,6 +1,6 @@
 ---
 title: The Neon Datadog integration
-subtitle: Send metrics and events from Neon Postgres to Datadog
+subtitle: Send metrics and logs from Neon Postgres to Datadog
 enableTableOfContents: true
 updatedOn: '2025-03-05T21:09:38.751Z'
 ---
@@ -8,6 +8,7 @@ updatedOn: '2025-03-05T21:09:38.751Z'
 <InfoBlock>
 <DocsList title="What you will learn:">
 <p>How to set up the integration</p>
+<p>How to configure log forwarding</p>
 <p>The full list of externally-available metrics</p>
 </DocsList>
 
@@ -21,16 +22,51 @@ Available for Scale and Business Plan users, the Neon Datadog integration lets y
 
 ## How it works
 
-The integration leverages a [list of metrics](#available-metrics) that Neon makes available for export to third-party services. By configuring the integration with your Datadog API key, Neon automatically sends metrics from your project to your selected Datadog site. Some of the key metrics include:
+The integration enables secure, reliable export of metrics and logs to Datadog. By configuring the integration with your Datadog API key, Neon automatically sends data from your project to your selected Datadog site.
+
+<Admonition type="note">
+Data is sent for all computes in your Neon project. For example, if you have multiple branches, each with an attached compute, both metrics and logs will be collected and sent for each compute.
+</Admonition>
+
+### Metrics
+
+The integration exports [a comprehensive set of metrics](#available-metrics) including:
 
 - **Connection counts** &#8212; Tracks active and idle database connections.
 - **Database size** &#8212; Monitors total size of all databases in bytes.
 - **Replication delay** &#8212; Measures replication lag in bytes and seconds.
 - **Compute metrics** &#8212; Includes CPU and memory usage statistics for your compute.
 
-<Admonition type="note"> 
-Metrics are sent for all computes in your Neon project. For example, if you have multiple branches, each with an attached compute, metrics will be collected and sent for each compute. 
+### Logs
+
+<FeatureBetaProps feature_name="Datadog logs export" />
+
+The Neon Datadog integration can forward PostgreSQL logs to your Datadog account. This includes:
+
+- Error messages and warnings
+- Database connection events
+- System notifications
+- General PostgreSQL logs
+
+#### Working with Logs in Datadog
+
+Logs in Datadog include the following labels for filtering and organization:
+
+- `project_id`: Your Neon project identifier
+- `endpoint_id`: The specific compute endpoint
+- Standard PostgreSQL log fields (timestamp, log level, etc.)
+
+<Admonition type="note">
+Neon computes only send logs when they are active. If the [Scale to Zero](/docs/introduction/scale-to-zero) feature is enabled and a compute is suspended due to inactivity, no logs will be sent during the suspension.
 </Admonition>
+
+### Performance impact
+
+Log forwarding is designed to have minimal impact on your database performance. However, enabling this feature may result in:
+
+- Slight increase in compute resource usage for log processing
+- Additional network egress for log transmission (Neon does not charge for data transfer on paid plans)
+- Associated costs based on log volume in Datadog
 
 ## Prerequisites
 
@@ -43,10 +79,18 @@ Before getting started, ensure the following:
 ## Steps to integrate Datadog with Neon
 
 1. In the Neon Console, navigate to the **Integrations** page in your Neon project.
-2. Locate the **Datadog** card and click **Add**.
-3. Enter your **Datadog API key**. You can generate or retrieve [Datadog API Keys](https://app.datadoghq.com/organization-settings/api-keys) from your Datadog organization.
-4. Select the Datadog **site** that you used when setting up your Datadog account.
-5. Click **Confirm** to complete the integration.
+1. Locate the **Datadog** card and click **Add**.
+1. Enter your **Datadog API key**. You can generate or retrieve [Datadog API Keys](https://app.datadoghq.com/organization-settings/api-keys) from your Datadog organization.
+1. Select the Datadog **site** that you used when setting up your Datadog account.
+1. Select what you want to export. You can enable either or both:
+   - **Metrics**: System metrics and database statistics (CPU, memory, connections, etc.)
+   - **Postgres logs**: Error messages, warnings, connection events, and system notifications
+1. Click **Confirm** to complete the integration.
+
+
+<Admonition type="note">
+You can change these settings later by editing your integration configuration.
+</Admonition>
 
 Optionally, you can import the Neon-provided JSON configuration file into Datadog, which creates a pre-built dashboard from Neon metrics, similar to the charts available on our Monitoring page. See [Import Neon dashboard](#import-neon-dashboard)
 
@@ -701,6 +745,45 @@ In Datadog, metric labels are referred to as `tags.` See [Getting Started with T
 | host_memory_swapped_out_bytes_total           | compute-host-metrics | The number of bytes that have been swapped out from main memory.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | host_memory_total_bytes                       | compute-host-metrics | The total number of bytes of main memory.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | host_memory_used_bytes                        | compute-host-metrics | The number of bytes of main memory used by programs or caches.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+
+## Log forwarding
+
+When log forwarding is enabled, Neon sends Postgres logs to your Datadog account in real-time.
+
+### Available logs
+
+- Error messages and warnings
+- Database connection events
+- System notifications
+- General PostgreSQL logs
+
+For detailed information about PostgreSQL log formats and message types, see the [PostgreSQL documentation on error reporting and logging](https://www.postgresql.org/docs/current/runtime-config-logging.html).
+
+### Working with logs in Datadog
+
+Logs in Datadog include the following labels for filtering and organization:
+- `project_id`: Your Neon project identifier
+- `endpoint_id`: The specific compute endpoint
+- Standard PostgreSQL log fields (timestamp, log level, etc.)
+
+### Log retention and volume
+
+- Logs are forwarded in real-time
+- Log retention in Datadog follows your Datadog account settings
+- Log volume depends on:
+  - Database activity level
+  - Postgres log settings
+
+### Performance impact
+
+Log forwarding is designed to have minimal impact on your database performance. However, enabling this feature may result in:
+- Slight increase in compute resource usage for log processing
+- Additional network egress for log transmission
+- Associated costs based on log volume in Datadog
+
+<Admonition type="note">
+If your compute instance is suspended due to [Scale to Zero](/docs/introduction/scale-to-zero), log forwarding will pause until the compute becomes active again.
+</Admonition>
 
 ## Feedback and future improvements
 
