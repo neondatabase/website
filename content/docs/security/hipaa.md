@@ -8,7 +8,7 @@ Neon offers HIPAA compliance as part of our Business and Enterprise plans, avail
 
 We take the security and privacy of health information seriously. This guide explains how Neon supports HIPAA compliance and what it means for you as a customer. HIPAA features are only available to customers who have signed a Business Associate Agreement (BAA) with Neon. The BAA outlines our responsibilities for protecting Protected Health Information (PHI) and ensuring HIPAA compliance.
 
-To request HIPAA support and receive a draft BAA, contact [Neon Sales](https://neon.tech/contact-sales) or email `hipaa@neon.tech`. After the BAA is signed, you can proceed with [enabling HIPAA for a Neon project](#enabling-hipaa-for-a-neon-project).
+To request HIPAA support and receive a draft BAA, contact [Neon Sales](https://neon.tech/contact-sales) or email `hipaa@neon.tech`. After the BAA is signed, HIPAA will be enabled for your account, and you can proceed with [enabling HIPAA for your Neon projects](#enabling-hipaa-for-a-neon-project).
 
 ## What is HIPAA?
 
@@ -180,8 +180,6 @@ A: Contact our security team immediately at security@neon.tech.
 
 ## Contact information
 
-For any questions regarding our HIPAA compliance or to report an issue, please reach out to:
-
-- Email: `hipaa@neon.tech`
+For any questions regarding our HIPAA compliance or to report an issue, please reach out to `hipaa@neon.tech`.
 
 _This guide provides a high-level overview of Neon's HIPAA compliance efforts. For more details, please refer to your Business Associate Agreement (BAA) or contact us directly via our [support channels](https://neon.tech/docs/introduction/support)._
