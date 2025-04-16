@@ -68,13 +68,13 @@ Audit events may not be logged if database endpoints experience exceptionally he
 
 Once a Business Associate Agreement (BAA) has been signed and you have the HIPAA add-on enabled, you can create a HIPAA-compliant project or enable HIPAA for an existing project.
 
-<Tabs labels={["New Project", "Existing Project", "API"]}>
+<Tabs labels={["New project", "Existing project", "API"]}>
 
 <TabItem>
 
-To enable HIPAA compliance when creating a new Neon project using the Neon Console, see [Create a project](/docs/manage/projects#create-a-project)
+To enable HIPAA compliance when creating a new Neon project using the Neon Console, see [Create a project](/docs/manage/projects#create-a-project).
 
-On the **Create Project** form, select the **Enable HIPAA compliance for this project** checkbox. This option only appears if the HIPAA add-on is enabled for your account.
+1. On the **Create Project** form, select the **Enable HIPAA compliance for this project** checkbox. This option only appears if the HIPAA add-on is enabled for your account.
 
 ![Enable HIPAA option during project creation](/docs/security/enable_hipaa.png)
 
@@ -91,7 +91,7 @@ To enable HIPAA compliance for an existing Neon project:
 ![Enable HIPAA for an existing project](/docs/security/enable_hipaa_existing.png)
 
 <Admonition type="important">
-Enabling HIPAA on a project will force a restart of all computes to apply the new settings. This will temporarily interrupt database connections, similar to what happens when enabling logical replication.
+Enabling HIPAA on a project will force a restart of all computes to apply the new setting. This will temporarily interrupt database connections.
 </Admonition>
 
 </TabItem>
@@ -138,7 +138,7 @@ curl --request PATCH \
 ```
 
 <Admonition type="important">
-Enabling HIPAA on an existing project will force a restart of all computes to apply the new settings. This will temporarily interrupt database connections.
+Enabling HIPAA on an existing project will force a restart of all computes to apply the new setting. This will temporarily interrupt database connections.
 </Admonition>
 
 </TabItem>
