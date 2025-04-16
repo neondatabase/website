@@ -72,9 +72,9 @@ Once a Business Associate Agreement (BAA) has been signed and you have the HIPAA
 
 <TabItem>
 
-To enable HIPAA compliance when creating a new Neon project using the Neon Console, see [Create a project](/docs/manage/projects#create-a-project).
+For Neon project creation steps, see [Create a project](/docs/manage/projects#create-a-project).
 
-1. On the **Create Project** form, select the **Enable HIPAA compliance for this project** checkbox. This option only appears if the HIPAA add-on is enabled for your account.
+When you create a project, select the **Enable HIPAA compliance for this project** checkbox on the **Create Project** form. This option only appears if HIPAA is enabled for your account.
 
 ![Enable HIPAA option during project creation](/docs/security/enable_hipaa.png)
 
@@ -90,8 +90,10 @@ To enable HIPAA compliance for an existing Neon project:
 
 ![Enable HIPAA for an existing project](/docs/security/enable_hipaa_existing.png)
 
+This option only appears if HIPAA is enabled for your account.
+
 <Admonition type="important">
-Enabling HIPAA on a project will force a restart of all computes to apply the new setting. This will temporarily interrupt database connections.
+Enabling HIPAA on a project will force a restart of all project computes to apply the new setting. This will temporarily interrupt database connections.
 </Admonition>
 
 </TabItem>
@@ -118,7 +120,7 @@ curl --request POST \
 '
 ```
 
-To enable HIPAA for an existing project, use the [Update project API](https://api-docs.neon.tech/reference/updateproject):
+To enable HIPAA for an existing project, set `hippa` to `true` in the `project settings` object using the [Update project API](https://api-docs.neon.tech/reference/updateproject):
 
 ```bash
 curl --request PATCH \
