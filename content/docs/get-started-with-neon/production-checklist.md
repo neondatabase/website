@@ -5,66 +5,38 @@ enableTableOfContents: true
 updatedOn: '2025-02-03T20:41:57.304Z'
 ---
 
-<div className="checklist doc-cta prose-doc rounded-[10px] my-5 flex flex-col gap-x-16 px-7 py-6 border border-gray-new-90 bg-[linear-gradient(to_right,#FAFAFA_0%,rgba(250,250,250,0)100%)] dark:border-gray-new-20 dark:bg-[linear-gradient(to_right,#18191B_28.86%,#131415_74.18%)]">
+<CheckList>
+
 ## Production checklist
-<div className="checklist">
-  <div>
-    <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-      <input type="checkbox" style={{ marginRight: '10px' }} />
-      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#set-minimum-compute-to-at-least-1-cu">1. Set minimum compute to at least 1 vCPU</a></h3>
-    </div>
-    <p style={{ marginLeft: '23px' }}>Make sure your default branch can handle production traffic. A higher minimum compute helps you avoid performance bottlenecks.</p>
-    
-    <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-      <input type="checkbox" style={{ marginRight: '10px' }} />
-      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#set-max-compute-to-the-highest-cu-available-for-your-plan">2. Set max compute to the highest CU available for your plan</a></h3>
-    </div>
-    <p style={{ marginLeft: '23px' }}>Set your compute to automatically scale up, allowing your app to handle traffic surges and stay performant without manual scaling.</p>
-    
-    <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-      <input type="checkbox" style={{ marginRight: '10px' }} />
-      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#disable-scale-to-zero">3. Disable scale to zero</a></h3>
-    </div>
-    <p style={{ marginLeft: '23px' }}>Avoid cold-starts by keeping your default branch running at all times.</p>
-    
-    <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-      <input type="checkbox" style={{ marginRight: '10px' }} />
-      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#use-a-pooled-connection">4. Use a pooled connection</a></h3>
-    </div>
-    <p style={{ marginLeft: '22px' }}>Increase your database's ability to handle concurrent connections by using connection pooling.</p>
-    
-    <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-      <input type="checkbox" style={{ marginRight: '10px' }} />
-      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#increase-your-projects-restore-window-to-7-days">5. Increase your project's restore window to 7 days</a></h3>
-    </div>
-    <p style={{ marginLeft: '23px' }}>Protect your production data from accidental loss. Keep at least a 7-day restore window for quick data recovery and analysis.</p>
-    
-    <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-      <input type="checkbox" style={{ marginRight: '10px' }} />
-      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#restrict-database-access-to-trusted-ips">6. Restrict database access to trusted IPs</a></h3>
-    </div>
-    <p style={{ marginLeft: '23px' }}>Secure your database by limiting connections to trusted IP addresses.</p>
-    
-    <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-      <input type="checkbox" style={{ marginRight: '10px' }} />
-      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#install-the-neon-app-for-slack">7. Install the Neon app for Slack</a></h3>
-    </div>
-    <p style={{ marginLeft: '23px' }}>Get instant alerts about your production database in your team's Slack channel.</p>
-    
-    <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-      <input type="checkbox" style={{ marginRight: '10px' }} />
-      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#install-pgstatstatements">8. Install pg_stat_statements</a></h3>
-    </div>
-    <p style={{ marginLeft: '23px' }}>Enable query performance monitoring to track execution times and frequency.</p>
-    
-    <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-      <input type="checkbox" style={{ marginRight: '10px' }} />
-      <h3 style={{ margin: 0 , fontSize: '115%' }}><a href="#upgrade-to-a-neon-business-plan-for-priority-support">9. Upgrade to get priority support</a></h3>
-    </div>
-    <p style={{ marginLeft: '23px' }}>Get faster support and priority handling for your production database with a Business plan.</p>
-  </div>
-</div>
-</div>
+
+<CheckItem title="1. Set minimum compute to at least 1 vCPU" href="#set-minimum-compute-to-at-least-1-cu">
+  Make sure your default branch can handle production traffic. A higher minimum compute helps you avoid performance bottlenecks.
+</CheckItem>
+<CheckItem title="2. Set max compute to the highest CU available for your plan" href="#set-max-compute-to-the-highest-cu-available-for-your-plan">
+  Set your compute to automatically scale up, allowing your app to handle traffic surges and stay performant without manual scaling.
+</CheckItem>
+<CheckItem title="3. Disable scale to zero" href="#disable-scale-to-zero">
+  Scale to zero turns off your compute after a period of inactivity. Ideal for development or other environments with bursty usage.
+</CheckItem>
+<CheckItem title="4. Use a pooled connection" href="#use-a-pooled-connection">
+  Increase your database's ability to handle concurrent connections by using connection pooling.
+</CheckItem>
+<CheckItem title="5. Increase your project's restore window to 7 days" href="#increase-your-projects-restore-window-to-7-days">
+  Protect your production data from accidental loss. Keep at least a 7-day restore window for quick data recovery and analysis.
+</CheckItem>
+<CheckItem title="6. Restrict database access to trusted IPs" href="#restrict-database-access-to-trusted-ips">
+  Secure your database by limiting connections to trusted IP addresses.
+</CheckItem>
+<CheckItem title="7. Install the Neon app for Slack" href="#install-the-neon-app-for-slack">
+  Get instant alerts about your production database in your team's Slack channel.
+</CheckItem>
+<CheckItem title="8. Install pg_stat_statements" href="#install-pgstatstatements">
+  Enable query performance monitoring to track execution times and frequency.
+</CheckItem>
+<CheckItem title="9. Upgrade to get priority support" href="#upgrade-to-a-neon-business-plan-for-priority-support">
+  Get faster support and priority handling for your production database with a Business plan.
+</CheckItem>
+</CheckList>
 
 <Steps>
 
