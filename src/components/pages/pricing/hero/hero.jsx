@@ -167,9 +167,9 @@ const Hero = () => {
         <CtaBlock
           className="max-w-[656px] xl:mt-8 lg:mt-7 lg:max-w-full md:mt-4 md:max-w-[552px] sm:!p-6"
           contentClassName="!text-left sm:!max-w-full"
-          title="Custom Plans"
-          description="Connect with our team for HIPAA compliance, annual contracts, higher resource limits, and more."
-          buttonText="Talk to Sales"
+          title="Personalized migration plans: Switch to Neon without downtime"
+          description="Our experienced Solutions Engineers will help you migrate your production application to Neon with minimal disruption."
+          buttonText="Book a meeting"
           buttonUrl={LINKS.contactSales}
           buttonClassName="sm:w-full"
           size="sm"
