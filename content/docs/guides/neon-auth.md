@@ -217,6 +217,10 @@ For a more detailed walkthrough, see the [Neon Auth Tutorial](/docs/guides/neon-
 
 ## Getting started
 
+<Admonition type="note">
+Currently, Neon Auth is available for use with Stack Auth, with support for additional authentication providers coming soon.
+</Admonition>
+
 Neon Auth offers two ways to connect your authentication provider:
 
 1. **Quick Start (Recommended)**
