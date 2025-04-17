@@ -159,7 +159,7 @@ Neon MCP server exposes the following actions, which primarily map to **Neon API
 - `prepare_database_migration`: Initiates a database migration process, utilizing a temporary branch for safety. Begins the process of altering your database schema, safely using Neon's branching feature.
 - `complete_database_migration`: Completes a migration process, applying changes to your main database and cleaning up temporary resources.
 
-These actions enable any MCP client like Cline to interact with various functionalities of the **Neon platform via the Neon API.** Certain tools, especially database migration ones, are tailored for AI agent and LLM usage, leveraging Neon’s branching for safe preview and commit.
+These actions enable any MCP client like Cline to interact with various functionalities of the **Neon platform via the Neon API.** Certain tools, especially database migration ones, are tailored for AI agent and LLM usage, leveraging Neon's branching for safe preview and commit.
 
 ## Development Workflow: Adding a Column with Cline and Neon MCP
 
@@ -202,9 +202,9 @@ Cline: I'll use the prepare_database_migration tool to add a created_at column t
 > Cline wants to use a tool on the neon MCP server: run_sql
 > The created_at column has been successfully added to the table in the temporary branch with the correct data type and default value. Let me verify the data by selecting a few rows to ensure everything looks correct.
 > Cline wants to use a tool on the neon MCP server: run_sql
-> The migration looks good - the created_at column has been added successfully and is populated with timestamps. Now I can complete the migration to apply these changes to the main branch.
+> The migration looks good - the created_at column has been added successfully and is populated with timestamps. Now I can complete the migration to apply these changes to the production branch.
 > Cline wants to use a tool on the neon MCP server: complete_database_migration
-> The migration has been successfully completed and the temporary branch has been deleted. Let me verify the changes in the main branch and show the updated table structure.
+> The migration has been successfully completed and the temporary branch has been deleted. Let me verify the changes in the production branch and show the updated table structure.
 > Cline wants to use a tool on the neon MCP server: run_sql
 > The migration has been successfully completed. The created_at column has been added to the table and is populated with timestamps.
 ```
@@ -214,7 +214,7 @@ Cline: I'll use the prepare_database_migration tool to add a created_at column t
 - **Natural language interaction:** You can use simple, conversational English to interact with your database through Cline.
 - **Step-by-step guidance:** Cline confirms each step and provides details like branch names and migration IDs.
 - **MCP Tools in Action:** The underlying MCP tools (`get_database_tables`, `run_sql`, `prepare_database_migration`, `complete_database_migration`) illustrate the automated process.
-- **Branching for safety:** The agent automatically creates a temporary branch for schema changes. The user will be prompted to confirm the migration before applying it to the main branch.
+- **Branching for safety:** The agent automatically creates a temporary branch for schema changes. The user will be prompted to confirm the migration before applying it to the production branch.
 
 You can verify the changes in your Neon Console or by querying the database directly.
 

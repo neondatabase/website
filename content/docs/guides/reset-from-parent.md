@@ -9,9 +9,9 @@ Neon's **Reset from parent** feature lets you instantly reset all databases on a
 
 ## Example scenario
 
-When working with database branches, you might find yourself in a situation where you need to update your working branch to the latest data from your main branch.
+When working with database branches, you might find yourself in a situation where you need to update your working branch to the latest data from your production branch.
 
-For example, let's say you have two child branches `staging` and `development` forked from your `main` branch. You have been working on the `development` branch and find it is now too far out of date with `main`.
+For example, let's say you have two child branches `staging` and `development` forked from your `production` branch. You have been working on the `development` branch and find it is now too far out of date with `production`.
 
 You have no schema changes in `development` to consider or preserve; you just want a quick refresh of the data. With the **Reset from parent** feature, you can perform a clean, instant reset to the latest data from the parent in a single operation, saving you the complication of manually creating and restoring branches.
 
@@ -24,7 +24,7 @@ When you reset a branch to its parent, the data and schema is completely replace
 - You can only reset a branch to the latest data from its parent. Point-in-time resets based on timestamp or LSN are possible using [Instant restore](/docs/introduction/branch-restore), a similar feature, with some differences: instant restore leaves a backup branch and is in general is intended more for data recovery than development workflow.
 - This reset is a complete overwrite, not a refresh or a merge. Any local changes made to the child branch are lost during this reset.
 - Existing connections will be temporarily interrupted during the reset. However, your connection details _do not change_. All connections are re-established as soon as the reset is done.
-- Root branches (like your project's `main` branch or schema-only branches) cannot be reset because they have no parent branch to reset to.
+- Root branches (like your project's `production` branch or schema-only branches) cannot be reset because they have no parent branch to reset to.
 
 ## How to Reset from parent
 

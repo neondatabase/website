@@ -113,7 +113,7 @@ The Neon CLI [branches list](/docs/reference/cli-branches#list) command shows a 
       ┌───────────────────────────┬──────┬─────────┬───────────────┬──────────────────────┐
       │ Id                        │ Name │ Default │ Current State │ Created At           │
       ├───────────────────────────┼──────┼─────────┼───────────────┼──────────────────────┤
-      │ br-muddy-firefly-a7kzf0d4 │ main │ true    │ ready         │ 2024-10-30T14:59:57Z │
+      │ br-muddy-firefly-a7kzf0d4 │ production │ true    │ ready         │ 2024-10-30T14:59:57Z │
       └───────────────────────────┴──────┴─────────┴───────────────┴──────────────────────┘
       ```
 
@@ -145,7 +145,7 @@ This example shows a branch that is currently `archived`. The `state_changed_at`
     "parent_id": "br-falling-glade-w25m64ct",
     "parent_lsn": "0/1F78F48",
     "parent_timestamp": "2024-10-02T08:54:18Z",
-    "name": "dev/alex",
+    "name": "development",
     "current_state": "archived",
     "state_changed_at": "2024-11-06T14:20:58Z",
     "logical_size": 30810112,

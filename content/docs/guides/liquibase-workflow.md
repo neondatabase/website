@@ -7,7 +7,7 @@ updatedOn: '2025-02-03T20:41:57.316Z'
 
 Liquibase is an open-source database-independent library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
 
-This guide shows how to set up a developer workflow using Liquibase with Neon's branching feature. The workflow involves making schema changes to a database on a development branch and applying those changes back to the source database on the main branch of your Neon project.
+This guide shows how to set up a developer workflow using Liquibase with Neon's branching feature. The workflow involves making schema changes to a database on a development branch and applying those changes back to the source database on the production branch of your Neon project.
 
 The instructions in this guide are based on the workflow described in the [Liquibase Developer Workflow](https://www.liquibase.org/get-started/developer-workflow) tutorial.
 
@@ -59,14 +59,14 @@ For demonstration purposes, create a `blog` database in Neon with two tables, `p
 
 ## Prepare a development database
 
-Now, let's prepare a development database in Neon by creating a development branch, where you can safely make changes to your database schema without affecting the source database on your `main` branch. A branch is a copy-on-write clone of the data in your Neon project, so it will include a copy of the `blog` database with the `authors` and `posts` tables that you just created.
+Now, let's prepare a development database in Neon by creating a development branch, where you can safely make changes to your database schema without affecting the source database on your `production` branch. A branch is a copy-on-write clone of the data in your Neon project, so it will include a copy of the `blog` database with the `authors` and `posts` tables that you just created.
 
 To create a branch:
 
-1. In the Neon Console, select **Branches**. You will see your `main` branch, where you just created your `blog` database and tables.
+1. In the Neon Console, select **Branches**. You will see your `production` branch, where you just created your `blog` database and tables.
 2. Click **New Branch** to open the branch creation dialog.
-3. Enter a name for the branch. Let's call it `dev1`.
-4. Leave `main` selected as the parent branch. This is where you created the `blog` database.
+3. Enter a name for the branch. Let's call it `feature/blog-schema`.
+4. Leave `production` selected as the parent branch. This is where you created the `blog` database.
 5. Leave the remaining default settings. Creating a branch from **Head** creates a branch with the latest data, and a compute is required to connect to the database on the branch.
 6. Click **Create Branch** to create your branch.
 
@@ -75,22 +75,22 @@ To create a branch:
 From the [Neon Console](https://console.neon.tech/app/projects), retrieve connection strings for your target and source databases by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
 
 <Admonition type="note">
-The target database is the database on your `dev1` branch where you will will do your development work. Your source database is where you will apply your schema changes later, once you are satisfied with the changes on your development branch.
+The target database is the database on your `feature/blog-schema` branch where you will do your development work. Your source database is where you will apply your schema changes later, once you are satisfied with the changes on your development branch.
 </Admonition>
 
-1. Select the `dev1` branch, the `blog` database, and copy the connection string.
+1. Select the `feature/blog-schema` branch, the `blog` database, and copy the connection string.
 
-   ```bash
+   ```bash shouldWrap
    postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog
    ```
 
-2. Select the `main` branch, the `blog` database, and copy the connection string.
+2. Select the `production` branch, the `blog` database, and copy the connection string.
 
-   ```bash
+   ```bash shouldWrap
    postgresql://alex:AbC123dEf@ep-silent-hill-85675036.us-east-2.aws.neon.tech/blog
    ```
 
-Be careful not to mix up your connection strings. You'll see that the hostname (the part starting with `-ep` and ending in `neon.tech`) differs. This is because the `dev1` branch is a separate instance of Postgres, hosted on its own compute.
+Be careful not to mix up your connection strings. You'll see that the hostname (the part starting with `ep-` and ending in `neon.tech`) differs. This is because the `feature/blog-schema` branch is a separate instance of Postgres, hosted on its own compute.
 
 ## Update your liquibase.properties file
 
@@ -106,20 +106,20 @@ The `liquibase.properties` file defines the location of the Liquibase changelog 
 
    The [changelog file](https://docs.liquibase.com/parameters/changelog-file.html) is where you define database schema changes (changesets).
 
-3. Change the target database `url`, `username`, and `password` settings to the correct values for the `blog` database on your `dev1` branch. You can obtain the required details from the connection string you copied previously. You will need to swap out the hostname (`ep-silent-hill-85675036.us-east-2.aws.neon.tech`), username, and password for your own.
+3. Change the target database `url`, `username`, and `password` settings to the correct values for the `blog` database on your `feature/blog-schema` branch. You can obtain the required details from the connection string you copied previously. You will need to swap out the hostname (`ep-cool-darkness-123456.us-east-2.aws.neon.tech`), username, and password for your own.
 
    ```bash shouldWrap
-   liquibase.command.url=jdbc:postgresql://ep-silent-hill-85675036.us-east-2.aws.neon.tech:5432/blog
+   liquibase.command.url=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog
 
    liquibase.command.username: alex
 
    liquibase.command.password: AbC123dEf
    ```
 
-4. Change the source database settings to the correct values for the `blog` database on your `main` branch. The username and password will be the same as your `dev1` branch, but make sure to use the right hostname. Copy the snippet below and replace the hostname (`ep-cool-darkness-123456.us-east-2.aws.neon.tech`), username, and password for your own.
+4. Change the source database settings to the correct values for the `blog` database on your `production` branch. The username and password will be the same as your `feature/blog-schema` branch, but make sure to use the right hostname. Copy the snippet below and replace the hostname (`ep-silent-hill-85675036.us-east-2.aws.neon.tech`), username, and password for your own.
 
    ```bash shouldWrap
-   liquibase.command.referenceUrl: jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog
+   liquibase.command.referenceUrl: jdbc:postgresql://ep-silent-hill-85675036.us-east-2.aws.neon.tech:5432/blog
 
    liquibase.command.referenceUsername: alex
 
@@ -226,7 +226,7 @@ Now, you can start making database schema changes by creating [changesets](https
 
 ### Deploy the schema change
 
-Run the [update](https://docs.liquibase.com/commands/update/update.html) command to deploy the schema change to your target database (your development database on the `dev1` branch).
+Run the [update](https://docs.liquibase.com/commands/update/update.html) command to deploy the schema change to your target database (your development database on the `feature/blog-schema` branch).
 
 ```bash
 liquibase update
@@ -257,7 +257,7 @@ When you run a changeset for the first time, Liquibase automatically creates two
 - [databasechangelog](https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html): Tracks which changesets have been run.
 - [databasechangeloglock](https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html): Ensures only one instance of Liquibase runs at a time.
 
-You can verify these tables were created by viewing the `blog` database on your `dev1` branch on the **Tables** page in the Neon Console. Select **Tables** from the sidebar.
+You can verify these tables were created by viewing the `blog` database on your `feature/blog-schema` branch on the **Tables** page in the Neon Console. Select **Tables** from the sidebar.
 </Admonition>
 
 At this point, you can continue to iterate, applying schema changes to your database, until you are satisfied with the modified schema.
@@ -269,7 +269,7 @@ It is a best practice to review schema changes before saving and applying them t
 You can run the [status](https://docs.liquibase.com/commands/change-tracking/status.html) command to see if there are any changesets that haven't been applied to the source database. Notice that the command specifies the hostname of the source database:
 
 ```bash shouldWrap
-liquibase --url=jdbc:postgresql://ep-rapid-bush-01185324.us-east-2.aws.neon.tech:5432/blog status --verbose
+liquibase --url=jdbc:postgresql://ep-silent-hill-85675036.us-east-2.aws.neon.tech:5432/blog status --verbose
 ```
 
 <details>
@@ -281,7 +281,7 @@ If the command was successful, you’ll see output similar to the following indi
 Starting Liquibase at 12:30:51 (version 4.24.0 #14062 built at 2023-09-28 12:18+0000)
 Liquibase Version: 4.24.0
 Liquibase Open Source 4.24.0 by Liquibase
-1 changesets have not been applied to alex@jdbc:postgresql://ep-rapid-bush-01185324.us-east-2.aws.neon.tech:5432/blog
+1 changesets have not been applied to alex@jdbc:postgresql://ep-silent-hill-85675036.us-east-2.aws.neon.tech:5432/blog
      dbchangelog.xml::myIDNumber1234::alex
 Liquibase command 'status' was executed successfully.
 ```
@@ -293,7 +293,7 @@ Liquibase command 'status' was executed successfully.
 Before applying the update, you can run the [updateSQL](https://docs.liquibase.com/commands/update/update-sql.html) command to inspect the SQL Liquibase will apply when running the update command:
 
 ```bash shouldWrap
-liquibase --url=jdbc:postgresql://ep-rapid-bush-01185324.us-east-2.aws.neon.tech:5432/blog updateSQL
+liquibase --url=jdbc:postgresql://ep-silent-hill-85675036.us-east-2.aws.neon.tech:5432/blog updateSQL
 ```
 
 <details>
@@ -319,7 +319,7 @@ SET SEARCH_PATH TO public, "$user","public";
 -- *********************************************************************
 -- Change Log: dbchangelog.xml
 -- Ran at: 2023-10-08, 12:32 p.m.
--- Against: alex@jdbc:postgresql://ep-rapid-bush-01185324.us-east-2.aws.neon.tech:5432/blog
+-- Against: alex@jdbc:postgresql://ep-silent-hill-85675036.us-east-2.aws.neon.tech:5432/blog
 -- Liquibase version: 4.24.0
 -- *********************************************************************
 
@@ -421,7 +421,7 @@ When you are satisfied with the changes that will be applied, save your changelo
 Apply the new changesets to the source database on your default branch:
 
 ```bash shouldWrap
-liquibase --url=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog update
+liquibase --url=jdbc:postgresql://ep-silent-hill-85675036.us-east-2.aws.neon.tech:5432/blog update
 ```
 
 <details>
