@@ -1,13 +1,17 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import useLocalStorage from 'hooks/use-local-storage';
 
 const CheckList = ({ id, children }) => {
+  const pathname = usePathname();
+  const slug = pathname.split('/').pop();
+  const checkListId = id || slug;
   const [mounted, setMounted] = useState(false);
-  const [checklist, setChecklist] = useLocalStorage(`checklist-${id}`, []);
+  const [checklist, setChecklist] = useLocalStorage(`checklist-${checkListId}`, []);
 
   useEffect(() => {
     setMounted(true);
@@ -43,7 +47,7 @@ const CheckList = ({ id, children }) => {
 };
 
 CheckList.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   children: PropTypes.node.isRequired,
 };
 
