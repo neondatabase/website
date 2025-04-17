@@ -103,9 +103,9 @@ To handle [dev/test](https://neon.tech/use-cases/dev-test) in a project-per-user
 
 The methodology:
 
-- **Within the non-prod project, load your testing data into the main branch.** This main branch will serve as the primary source for all dev/test environments.
-- **Create ephemeral environments via child branches.** For each ephemeral environment, create a child branch from the main branch. These branches are fully isolated in terms of resources and come with an up-to-date copy of your testing dataset.
-- **Automate the process.** Use CI/CD and automations to streamline your workflow. You can reset child branches with one click to keep them in sync with the main branch as needed, maintaining data consistency across your dev/test environments.
+- **Within the non-prod project, load your testing data into the production branch.** This production branch will serve as the primary source for all dev/test environments.
+- **Create ephemeral environments via child branches.** For each ephemeral environment, create a child branch from the production branch. These branches are fully isolated in terms of resources and come with an up-to-date copy of your testing dataset.
+- **Automate the process.** Use CI/CD and automations to streamline your workflow. You can reset child branches with one click to keep them in sync with the production branch as needed, maintaining data consistency across your dev/test environments.
 
 ## Designing a Control Plane
 

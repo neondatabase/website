@@ -39,14 +39,14 @@ Creates a Neon-managed authentication project for your database (currently suppo
 
 <Admonition type="note">
 To create an integration, you'll need:
-- Your main branch ID. Get it from the Neon Console on the **Branches** page, or use the [List Branches endpoint](https://api-docs.neon.tech/reference/listprojectbranches) (look for `"default": true`)
+- Your production branch ID. Get it from the Neon Console on the **Branches** page, or use the [List Branches endpoint](https://api-docs.neon.tech/reference/listprojectbranches) (look for `"default": true`)
 - Your database name and role name. Get them by clicking on the **Connect** button on your **Project Dashboard** in the Neon Console, or use the [List Databases endpoint](https://api-docs.neon.tech/reference/listprojectbranches)
 </Admonition>
 
 Required parameters:
 
 - `project_id`: Your Neon project ID
-- `branch_id`: Your project's main branch ID
+- `branch_id`: Your project's production branch ID
 - `database_name`: Name of your database (defaults to `"neondb"`)
 - `role_name`: Database role for authenticated users (defaults to `"neondb_owner"`)
 

@@ -54,15 +54,15 @@ The Neon CLI provides a `neon connection-string` command you can use to extract 
 
 Using the option `--parent`, you can specify any non-default branch that you want to use as the parent for your new branch, depending on the needs of your development workflow.
 
-In this example, we're creating a branch for a hotfix called `alex/hotfix` using the long-lived development branch `dev/alex` as the parent:
+In this example, we're creating a hotfix branch called `hotfix/critical-fix` using the `development` branch as the parent:
 
 ```bash shouldWrap
-neon branches create --name alex/hotfix --parent dev/alex --project-id crimson-voice-12345678
+neon branches create --name hotfix/critical-fix --parent development --project-id crimson-voice-12345678
 branch
 ┌───────────────────────┬─────────────┬─────────┬──────────────────────┬──────────────────────┐
 │ Id                    │ Name        │ Default │ Created At           │ Updated At           │
 ├───────────────────────┼─────────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-misty-mud-a5poo34s │ alex/hotfix │ false   │ 2024-04-23T17:04:10Z │ 2024-04-23T17:04:10Z │
+│ br-misty-mud-a5poo34s │ hotfix/critical-fix │ false   │ 2024-04-23T17:04:10Z │ 2024-04-23T17:04:10Z │
 └───────────────────────┴─────────────┴─────────┴──────────────────────┴──────────────────────┘
 endpoints
 ┌──────────────────────────┬──────────────────────┐
@@ -133,7 +133,7 @@ This API key configuration ensures that the API key is kept secure while still p
 
 ## Resetting a branch from its parent
 
-Depending on your development workflow, you might need to periodically reset a branch to match the latest state of its parent. This is useful, for example, when resetting a long-lived development branch back to the main branch before starting work on a new feature.
+Depending on your development workflow, you might need to periodically reset a branch to match the latest state of its parent. This is useful, for example, when resetting a development branch back to the production branch before starting work on a new feature.
 
 Use the following command to reset a branch to the current state (HEAD) of its parent branch:
 
@@ -143,26 +143,26 @@ neon branches reset <id|name> --parent
 
 Example:
 
-This example resets a developer's branch to match the latest state of its parent branch:
+This example resets a feature branch to match the latest state of its parent branch:
 
 ```bash
-neon branches reset dev/alex --parent
-┌────────────────────────────┬──────────┬─────────┬──────────────────────┬──────────────────────┐
-│ Id                         │ Name     │ Default │ Created At           │ Last Reset At        │
-├────────────────────────────┼──────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-twilight-smoke-123456   │ dev/alex │ false   │ 2024-04-23T17:01:49Z │ 2024-04-23T17:57:35Z │
+neon branches reset feature/user-auth --parent
+┌────────────────────────────┬───────────────────┬─────────┬──────────────────────┬──────────────────────┐
+│ Id                         │ Name              │ Default │ Created At           │ Last Reset At        │
+├────────────────────────────┼───────────────────┼─────────┼──────────────────────┼──────────────────────┤
+│ br-twilight-smoke-123456   │ feature/user-auth │ false   │ 2024-04-23T17:01:49Z │ 2024-04-23T17:57:35Z │
 ```
 
 If the branch you want to reset has child branches, you need to include the `preserve-under-name` parameter. This will save the current state of your branch under a new name before performing the reset. The child branches will then show this newly named branch as their parent. This step ensures that your original branch can be reset cleanly, as all child branches will have been transferred to the new parent name.
 
-For example, here we are resetting `dev/alex` to its parent while preserving its latest state under the branch name `dev/alex_backup`:
+For example, here we are resetting `feature/user-auth` to its parent while preserving its latest state under the branch name `feature/user-auth-backup`:
 
 ```bash
-neon branches reset dev/alex --parent --preserve-under-name dev/alex_backup
+neon branches reset feature/user-auth --parent --preserve-under-name feature/user-auth-backup
 ┌────────────────────────────┬──────────┬─────────┬──────────────────────┬──────────────────────┐
 │ Id                         │ Name     │ Default │ Created At           │ Last Reset At        │
 ├────────────────────────────┼──────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-twilight-smoke-a5ofkxry │ dev/alex │ false   │ 2024-04-23T17:01:49Z │ 2024-04-23T18:02:36Z │
+│ br-twilight-smoke-a5ofkxry │ feature/user-auth │ false   │ 2024-04-23T17:01:49Z │ 2024-04-23T18:02:36Z │
 ```
 
 For more details, see [Reset from parent](/docs/guides/reset-from-parent).
@@ -175,10 +175,10 @@ Using the CLI, you can restore a branch to an earlier point in its history or an
 neon branches restore <target id|name> <source id|name @ timestamp|lsn>
 ```
 
-This command restores the branch `main` to an earlier timestamp in it's own history, saving to a backup branch called `main_restore_backup_2024-02-20`
+This command restores the branch `production` to an earlier timestamp in its own history, saving to a backup branch called `production_restore_backup_2024-02-20`
 
-```bash shouldWrap
-neon branches restore main ^self@2024-05-06T10:00:00.000Z --preserve-under-name main_restore_backup_2024-05-06
+```bash
+neon branches restore production ^self@2024-05-06T10:00:00.000Z --preserve-under-name production_restore_backup_2024-05-06
 ```
 
 Results of the operation:
@@ -195,7 +195,7 @@ Backup branch
 ┌─────────────────────────┬────────────────────────────────┐
 │ Id                      │ Name                           │
 ├─────────────────────────┼────────────────────────────────┤
-│ br-flat-forest-a5z016gm │ main_restore_backup_2024-05-06 │
+│ br-flat-forest-a5z016gm │ production_restore_backup_2024-05-06 │
 └─────────────────────────┴────────────────────────────────┘
 ```
 

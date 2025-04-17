@@ -106,7 +106,7 @@ To try out schema-only branches:
 
 2. Navigate to the **Tables** page in the Neon Console, and select your `main` branch from the bread-crumb menu at the top of the console. Your `employees` table will have both schema and data, as shown here:
 
-   ![main branch with schema and data](/docs/guides/schema-data-branch.png)
+   ![production branch with schema and data](/docs/guides/schema-data-branch.png)
 
 3. Create a schema-only branch following the instructions above. See [Creating schema-only branches](#creating-schema-only-branches). In this example, we've named the branch `employees_schema_only`.
 
@@ -135,7 +135,7 @@ Unlike other branches, schema-only branches do not have a parent branch, as you 
 
 ![schema-only branch](/docs/guides/schema_only_no_parent.png)
 
-Schema-only branches are independent [root branches](/docs/reference/glossary#root-branch), just like the `main` branch in your Neon project. When you create a schema-only branch, you’re creating a new **root branch**.
+Schema-only branches are independent [root branches](/docs/reference/glossary#root-branch), just like the `production` branch in your Neon project. When you create a schema-only branch, you're creating a new **root branch**.
 
 ### Key points about schema-only branches
 

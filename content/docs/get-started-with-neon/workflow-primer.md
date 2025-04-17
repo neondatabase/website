@@ -98,7 +98,7 @@ run-name: Delete a Neon Branch 🚀
 on:
   push:
     branches:
-      - 'main'
+      - 'production'
 jobs:
   delete-neon-branch:
     uses: neondatabase/delete-branch-action@v3

@@ -58,13 +58,13 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
   ```bash
   neon branches list --project-id solitary-leaf-288182
-  ┌────────────────────────┬──────────┬──────────────────────┬──────────────────────┐
-  │ Id                     │ Name     │ Created At           │ Updated At           │
-  ├────────────────────────┼──────────┼──────────────────────┼──────────────────────┤
-  │ br-small-meadow-878874 │ main     │ 2023-07-06T13:15:12Z │ 2023-07-06T14:26:32Z │
-  ├────────────────────────┼──────────┼──────────────────────┼──────────────────────┤
-  │ br-round-queen-335380  │ mybranch │ 2023-07-06T14:45:50Z │ 2023-07-06T14:45:50Z │
-  └────────────────────────┴──────────┴──────────────────────┴──────────────────────┘
+  ┌────────────────────────┬─────────────┬──────────────────────┬──────────────────────┐
+  │ Id                     │ Name        │ Created At           │ Updated At           │
+  ├────────────────────────┼─────────────┼──────────────────────┼──────────────────────┤
+  │ br-small-meadow-878874 │ production  │ 2023-07-06T13:15:12Z │ 2023-07-06T14:26:32Z │
+  ├────────────────────────┼─────────────┼──────────────────────┼──────────────────────┤
+  │ br-round-queen-335380  │ development │ 2023-07-06T14:45:50Z │ 2023-07-06T14:45:50Z │
+  └────────────────────────┴─────────────┴──────────────────────┴──────────────────────┘
   ```
 
 - List branches with the `json` output format. This format provides more information than the default `table` output format.
@@ -75,7 +75,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
   {
       "id": "br-wild-boat-648259",
       "project_id": "solitary-leaf-288182",
-      "name": "main",
+      "name": "production",
       "current_state": "ready",
       "logical_size": 29515776,
       "creation_source": "console",
@@ -93,7 +93,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
       "project_id": "solitary-leaf-288182",
       "parent_id": "br-wild-boat-648259",
       "parent_lsn": "0/1E88838",
-      "name": "mybranch",
+      "name": "development",
       "current_state": "ready",
       "creation_source": "console",
       "default": false,
@@ -240,7 +240,7 @@ When creating a branch from a protected parent branch, role passwords on the chi
 - Create a branch with a user-defined name:
 
   ```bash
-  neon branches create --name mybranch
+  neon branches create --name feature/user-auth
   ```
 
 - Set the compute size when creating a branch:
@@ -261,10 +261,10 @@ When creating a branch from a protected parent branch, role passwords on the chi
   neon branches create --name my_read_replica_branch --type read_only
   ```
 
-- Create a branch from a parent branch other than your `main` branch
+- Create a branch from a parent branch other than your `production` branch
 
   ```bash
-  neon branches create --name my_child_branch --parent mybranch
+  neon branches create --name feature/payment-api --parent development
   ```
 
 - Create an instant restore branch by specifying the `--parent` option with a timestamp:
@@ -327,12 +327,12 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 #### Example
 
 ```bash
-neon branches reset dev/alex --parent
-┌──────────────────────┬──────────┬─────────┬──────────────────────┬──────────────────────┐
-│ Id                   │ Name     │ Default │ Created At           │ Last Reset At        │
-├──────────────────────┼──────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-aged-sun-a5qowy01 │ dev/alex │ false   │ 2024-05-07T09:31:59Z │ 2024-05-07T09:36:32Z │
-└──────────────────────┴──────────┴─────────┴──────────────────────┴──────────────────────┘
+neon branches reset development --parent
+┌──────────────────────┬────────────┬─────────┬──────────────────────┬──────────────────────┐
+│ Id                   │ Name       │ Default │ Created At           │ Last Reset At        │
+├──────────────────────┼────────────┼─────────┼──────────────────────┼──────────────────────┤
+│ br-aged-sun-a5qowy01 │ development│ false   │ 2024-05-07T09:31:59Z │ 2024-05-07T09:36:32Z │
+└──────────────────────┴────────────┴─────────┴──────────────────────┴──────────────────────┘
 ```
 
 ## restore
@@ -373,10 +373,10 @@ Examples of the different kinds of restore operations you can do:
 
 #### Restoring a branch to an earlier point in its own history (with backup)
 
-This command restores the branch `main` to an earlier timestamp, saving to a backup branch called `main_restore_backup_2024-02-20`
+This command restores the branch `production` to an earlier timestamp, saving to a backup branch called `production_restore_backup_2024-02-20`
 
 ```bash shouldWrap
-neon branches restore main ^self@2024-05-06T10:00:00.000Z --preserve-under-name main_restore_backup_2024-05-06
+neon branches restore production ^self@2024-05-06T10:00:00.000Z --preserve-under-name production_restore_backup_2024-05-06
 ```
 
 Results of the operation:
@@ -393,16 +393,16 @@ Backup branch
 ┌─────────────────────────┬────────────────────────────────┐
 │ Id                      │ Name                           │
 ├─────────────────────────┼────────────────────────────────┤
-│ br-flat-forest-a5z016gm │ main_restore_backup_2024-05-06 │
+│ br-flat-forest-a5z016gm │ production_restore_backup_2024-05-06 │
 └─────────────────────────┴────────────────────────────────┘
 ```
 
 #### Restoring a branch (target) to the head of another branch (source)
 
-This command restores the target branch `dev/alex` to latest data (head) from the source branch `main`.
+This command restores the target branch `feature/user-auth` to latest data (head) from the source branch `production`.
 
 ```bash shouldWrap
-neon branches restore dev/alex main
+neon branches restore feature/user-auth production
 ```
 
 Results of the operation:
@@ -410,19 +410,19 @@ Results of the operation:
 ```bash shouldWrap
 INFO: Restoring branch br-restless-frost-69810125 to the branch br-curly-bar-82389180 head
 Restored branch
-┌────────────────────────────┬──────────┬──────────────────────┐
-│ Id                         │ Name     │ Last Reset At        │
-├────────────────────────────┼──────────┼──────────────────────┤
-│ br-restless-frost-69810125 │ dev/alex │ 2024-02-21T15:42:34Z │
-└────────────────────────────┴──────────┴──────────────────────┘
+┌────────────────────────────┬───────────────────┬──────────────────────┐
+│ Id                         │ Name              │ Last Reset At        │
+├────────────────────────────┼───────────────────┼──────────────────────┤
+│ br-restless-frost-69810125 │ feature/user-auth │ 2024-02-21T15:42:34Z │
+└────────────────────────────┴───────────────────┴──────────────────────┘
 ```
 
 #### Restoring a branch to its parent at an earlier point in time
 
-This command restores the branch `dev/alex` to a selected point in time from its parent branch.
+This command restores the branch `feature/user-auth` to a selected point in time from its parent branch.
 
 ```bash shouldWrap
-neon branches restore dev/alex ^parent@2024-02-21T10:30:00.000Z
+neon branches restore feature/user-auth ^parent@2024-02-21T10:30:00.000Z
 ```
 
 Results of the operation:
@@ -430,11 +430,11 @@ Results of the operation:
 ```bash shouldWrap
 INFO: Restoring branch br-restless-frost-69810125 to the branch br-patient-union-a5s838zf timestamp 2024-02-21T10:30:00.000Z
 Restored branch
-┌────────────────────────────┬──────────┬──────────────────────┐
-│ Id                         │ Name     │ Last Reset At        │
-├────────────────────────────┼──────────┼──────────────────────┤
-│ br-restless-frost-69810125 │ dev/alex │ 2024-02-21T15:55:04Z │
-└────────────────────────────┴──────────┴──────────────────────┘
+┌────────────────────────────┬───────────────────┬──────────────────────┐
+│ Id                         │ Name              │ Last Reset At        │
+├────────────────────────────┼───────────────────┼──────────────────────┤
+│ br-restless-frost-69810125 │ feature/user-auth │ 2024-02-21T15:55:04Z │
+└────────────────────────────┴───────────────────┴──────────────────────┘
 ```
 
 ## rename
@@ -482,7 +482,7 @@ This command:
 neon branches schema-diff [base-branch] [compare-source[@(timestamp|lsn)]]
 ```
 
-`[base-branch]` specifies the branch you want to compare against. For example, if you want to compare a development branch against the production branch `main`, select `main` as your base.
+`[base-branch]` specifies the branch you want to compare against. For example, if you want to compare a development branch against the production branch `production`, select `production` as your base.
 
 This setting is **optional**. If you leave it out, the operation uses either of the following as the base:
 
@@ -520,13 +520,13 @@ Examples of different kinds of schema diff operations you can do:
 
 #### Compare to another branch's head
 
-This command compares the schema of the `main` branch to the head of the branch `dev/alex`.
+This command compares the schema of the `production` branch to the head of the branch `development`.
 
-```
-neon branches schema-diff main dev/alex
+```bash
+neon branches schema-diff production development
 ```
 
-The output indicates that in the table `public.playing_with_neon`, a new column `description character varying(255)` has been added in the `dev/alex` branch that is not present in the `main` branch.
+The output indicates that in the table `public.playing_with_neon`, a new column `description character varying(255)` has been added in the `development` branch that is not present in the `production` branch.
 
 ```diff
 --- Database: neondb	(Branch: br-wandering-firefly-a50un462) // [!code --]
@@ -544,26 +544,26 @@ The output indicates that in the table `public.playing_with_neon`, a new column 
 
 #### Comparing a branch to an earlier point in its history
 
-This command compares the schema of `dev-alex` to a previous state in its history at LSN 0/123456.
+This command compares the schema of `feature/user-auth` to a previous state in its history at LSN 0/123456.
 
 ```bash
-neon branches schema-diff dev-alex ^self@0/123456
+neon branches schema-diff feature/user-auth ^self@0/123456
 ```
 
 #### Comparing a branch to its parent
 
-This command compares the schema of `dev/alex` to the head of its parent branch.
+This command compares the schema of `feature/user-auth` to the head of its parent branch.
 
 ```bash
-neon branches schema-diff dev/alex ^parent
+neon branches schema-diff feature/user-auth ^parent
 ```
 
 #### Comparing a branch to an earlier point in another branch's history
 
-This command compares the schema of the `main` branch to the state of the `dev/jordan` branch at timestamp `2024-06-01T00:00:00.000Z`.
+This command compares the schema of the `production` branch to the state of the `feature/payment-api` branch at timestamp `2024-06-01T00:00:00.000Z`.
 
 ```bash
-neon branches schema-diff main dev/jordan@2024-06-01T00:00:00.000Z
+neon branches schema-diff production feature/payment-api@2024-06-01T00:00:00.000Z
 ```
 
 ## set-default
@@ -702,22 +702,22 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 #### Examples
 
 ```bash
-neon branches get main
-┌────────────────────────┬──────┬──────────────────────┬──────────────────────┐
-│ Id                     │ Name │ Created At           │ Updated At           │
-├────────────────────────┼──────┼──────────────────────┼──────────────────────┤
-│ br-small-meadow-878874 │ main │ 2023-07-06T13:15:12Z │ 2023-07-06T13:32:37Z │
-└────────────────────────┴──────┴──────────────────────┴──────────────────────┘
+neon branches get production
+┌────────────────────────┬────────────┬──────────────────────┬──────────────────────┐
+│ Id                     │ Name       │ Created At           │ Updated At           │
+├────────────────────────┼────────────┼──────────────────────┼──────────────────────┤
+│ br-small-meadow-878874 │ production │ 2023-07-06T13:15:12Z │ 2023-07-06T13:32:37Z │
+└────────────────────────┴────────────┴──────────────────────┴──────────────────────┘
 ```
 
 A `get` example with the `--output` format option set to `json`:
 
 ```bash
-neon branches get main --output json
+neon branches get production --output json
 {
   "id": "br-lingering-bread-896475",
   "project_id": "noisy-rain-039137",
-  "name": "main",
+  "name": "production",
   "current_state": "ready",
   "logical_size": 29769728,
   "creation_source": "console",
@@ -729,6 +729,7 @@ neon branches get main --output json
   "data_transfer_bytes": 20715,
   "created_at": "2023-06-28T10:17:28Z",
   "updated_at": "2023-07-11T12:22:59Z"
+}
 ```
 
 <NeedHelp/>
