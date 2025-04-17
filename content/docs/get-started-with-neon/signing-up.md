@@ -174,6 +174,7 @@ Your project comes with a `development` branch that's an isolated copy of your `
    ```bash
    neon branches list
    ```
+
    This command shows your existing branches, including the `production` and `development` branches.
 
 ## Make some sample schema changes
