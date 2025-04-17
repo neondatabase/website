@@ -32,10 +32,10 @@ Each [branch](/docs/introduction/branching) is a fully-isolated copy of its pare
 
 After signing up, you'll start with two branches:
 
-- A `production` branch (the default branch) intended for your production workload
-- A `development` branch (created as a child of production) that you can use for local development
+- A `production` branch (the default branch) intended for your production workload, configured with a larger compute size (1-4 CU)
+- A `development` branch (created as a child of production) that you can use for local development, configured with a smaller compute size (0.25-1 CU)
 
-You'll add data to the `production` branch's database and then create additional development branches as needed.
+You can change these sizes at any time, but these are meant to align with typical usage, where production will need more compute than your less active development branches.
 
 <Steps>
 
