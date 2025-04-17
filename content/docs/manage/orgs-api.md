@@ -37,19 +37,19 @@ Both examples retrieve a list of projects, but notice how the personal API key r
 
 Some operations require a personal API key from an organization admin and cannot be performed using organization API keys. These operations are marked with ❌ in the matrix below.
 
-| Action                                                                                    | Personal API Key | Organization API Key |
-| ----------------------------------------------------------------------------------------- | ---------------- | -------------------- |
-| [Create an organization API key](#create-api-keys)                                        | ✅               | ❌                   |
-| [Get a list of organization API keys](#list-api-keys)                                     | ✅               | ✅                   |
-| [Revoke an organization API key](#revoke-an-api-key)                                      | ✅               | ✅                   |
-| [Get organization details](#get-organization-details)                                     | ✅               | ✅                   |
-| [Get organization members details](#list-members)                                         | ✅               | ✅                   |
-| [Get organization member details](#get-member-details)                                    | ✅               | ✅                   |
-| [Update the role for an organization member](#update-member-role)                         | ✅               | ✅                   |
-| [Remove member from the organization](#remove-member)                                     | ✅               | ❌                   |
-| [Get organization invitation details](#list-invitations)                                  | ✅               | ✅                   |
-| [Create organization invitations](#create-invitations)                                    | ✅               | ❌                   |
-| [Transfer projects between organizations](#transfer-projects-between-organizations)       | ✅               | ❌                   |
+| Action                                                                              | Personal API Key | Organization API Key |
+| ----------------------------------------------------------------------------------- | ---------------- | -------------------- |
+| [Create an organization API key](#create-api-keys)                                  | ✅               | ❌                   |
+| [Get a list of organization API keys](#list-api-keys)                               | ✅               | ✅                   |
+| [Revoke an organization API key](#revoke-an-api-key)                                | ✅               | ✅                   |
+| [Get organization details](#get-organization-details)                               | ✅               | ✅                   |
+| [Get organization members details](#list-members)                                   | ✅               | ✅                   |
+| [Get organization member details](#get-member-details)                              | ✅               | ✅                   |
+| [Update the role for an organization member](#update-member-role)                   | ✅               | ✅                   |
+| [Remove member from the organization](#remove-member)                               | ✅               | ❌                   |
+| [Get organization invitation details](#list-invitations)                            | ✅               | ✅                   |
+| [Create organization invitations](#create-invitations)                              | ✅               | ❌                   |
+| [Transfer projects between organizations](#transfer-projects-between-organizations) | ✅               | ❌                   |
 
 ## Finding your org_id
 
