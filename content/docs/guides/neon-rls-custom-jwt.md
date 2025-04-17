@@ -2,7 +2,7 @@
 title: Using Custom JWTs with Neon RLS
 subtitle: A step-by-step guide for using custom JWTs with Neon RLS
 enableTableOfContents: true
-updatedOn: '2025-03-06T15:24:01.898Z'
+updatedOn: '2025-03-10T18:26:02.765Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-custom-jwt
   - /docs/guides/neon-authorize-custom-jwt
@@ -10,7 +10,7 @@ redirectFrom:
 
 <InfoBlock>
 <DocsList title="Demo project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/rls-authorize-demo-custom-jwt">Neon RLS with custom generated JWTs</a>
+  <a href="https://github.com/neondatabase-labs/rls-demo-custom-jwt">Neon RLS with custom generated JWTs</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
@@ -167,7 +167,7 @@ This makes the public key available at `https://your-app.com/.well-known/jwks.js
 
 ### Add JWKS url to Neon RLS
 
-1. Go to the **Neon Console**, navigate to **Settings** > **RLS Authorize**.
+1. Go to the **Neon Console**, navigate to **Settings** > **RLS**.
 2. Click **Add Provider**.
 3. Set the **JWKS URL** to your endpoint (e.g., `https://your-app.com/.well-known/jwks.json`).
    ![Custom JWT JWKS url in Neon](/docs/guides/custom_jwt_jwks_url_in_neon.png)

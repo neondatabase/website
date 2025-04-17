@@ -23,7 +23,7 @@ const Layout = ({
   isClient = false,
 }) => (
   <>
-    <Topbar isDarkTheme={headerTheme === 'dark'} />
+    {!isClient && <Topbar isDarkTheme={headerTheme === 'dark'} />}
     {/* 36px is the height of the topbar */}
     <div className="relative flex min-h-[calc(100vh-36px)] flex-col pt-safe">
       <Header

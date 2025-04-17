@@ -2,7 +2,7 @@
 title: Secure your data with Descope and Neon RLS
 subtitle: Implement Row-level Security policies in Postgres using Descope and Neon RLS
 enableTableOfContents: true
-updatedOn: '2025-03-06T15:24:01.899Z'
+updatedOn: '2025-03-10T18:26:02.766Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-descope
   - /docs/guides/neon-authorize-descope
@@ -10,7 +10,7 @@ redirectFrom:
 
 <InfoBlock>
 <DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/descope-react-frontend-neon-rls-authorize">Descope + Neon RLS</a>
+  <a href="https://github.com/neondatabase-labs/descope-react-frontend-neon-rls">Descope + Neon RLS</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
@@ -58,13 +58,13 @@ https://api.descope.com/1234/.well-known/jwks.json
 
 ### 2. Add Descope as an authorization provider in the Neon Console
 
-Once you have the JWKS URL, go to the **Neon Console**, navigate to **Settings** > **RLS Authorize**, and add Descope as an authentication provider. Paste your copied URL and Descope will be automatically recognized and selected.
+Once you have the JWKS URL, go to the **Neon Console**, navigate to **Settings** > **RLS**, and add Descope as an authentication provider. Paste your copied URL and Descope will be automatically recognized and selected.
 
 <div style={{ display: 'flex', justifyContent: 'center'}}>
   <img src="/docs/guides/descope_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
 </div>
 
-At this point, you can use the **Get Started** setup steps from RLS Authorize in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
+At this point, you can use the **Get Started** setup steps from RLS in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
 
 ### 3. Install the pg_session_jwt extension in your database
 

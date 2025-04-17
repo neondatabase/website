@@ -42,10 +42,12 @@ const Event = ({
             />
           )}
           <div className="flex flex-col items-start text-left">
-            <span className="text-base font-medium tracking-[-0.02em] sm:text-[15px]">{name}</span>
+            <span className="text-base font-medium tracking-extra-tight sm:text-[15px]">
+              {name}
+            </span>
             {role && (
               <span className="mt-0.5 text-[13px] font-light text-gray-new-80">
-                <span className="tracking-[-0.02em]">{role}</span>
+                <span className="tracking-extra-tight">{role}</span>
                 {/* <span>, {company}</span> */}
               </span>
             )}
@@ -60,7 +62,7 @@ const Event = ({
       </td>
       <td
         className={clsx(
-          'py-4 pr-4 text-xl tracking-[-0.02em] transition-colors duration-200 lg:text-base sm:py-0 sm:pr-0 sm:text-xl sm:leading-[1.25] xs:text-lg',
+          'py-4 pr-4 text-xl tracking-extra-tight transition-colors duration-200 lg:text-base sm:py-0 sm:pr-0 sm:text-xl sm:leading-tight xs:text-lg',
           { 'group-hover:text-green-45': bio || description }
         )}
       >

@@ -12,7 +12,7 @@ Neon's Schema Diff tool lets you compare an SQL script of the schemas for two se
 Schema Diff is available in the Neon Console for use in two ways:
 
 - Compare a branch's schema to its parent
-- Compare selected branches during a branch restore operation
+- Compare selected branches during an instant restore operation
 
 You can also use the `branches schema-diff` command in the Neon CLI or `compare-schema` endpoint in the Neon API to effect a variety of comparisons.
 
@@ -61,7 +61,7 @@ The two-pane view shows the schema for both your target and your selected branch
 You can use the Neon CLI to:
 
 - Compare the latest schemas of any two branches
-- Compare against a specific point in its own or another branch’s history
+- Compare against a specific point in its own or another branch's history
 
 Use the `schema-diff` subcommand from the `branches` command:
 

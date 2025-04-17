@@ -16,7 +16,7 @@ nextLink:
 
 **Summary**: in this tutorial, you will learn how to update data in the PostgreSQL database using C\#.
 
-This tutorial begins where [importing data from a CSV file into PostgreSQL tutorial](postgresql-csharp-import-csv-file) is left off.
+This tutorial begins where [importing data from a CSV file into PostgreSQL tutorial](postgresql-csharp-import-csv-file) is left off.
 
 ## How to update data in PostgreSQL using C\#
 
@@ -79,7 +79,7 @@ try
     await using var cmd = dataSource.CreateCommand(sql);
 
     // Bind parameters
-    cmd.Parameters.AddWithValue("@email", "[[email protected]](../cdn-cgi/l/email-protection.html)");
+    cmd.Parameters.AddWithValue("@email", "john.doe@example.com");
     cmd.Parameters.AddWithValue("@id", 1);
 
     // Execute the UPDATE statement
@@ -121,7 +121,7 @@ Fourth, create a new `NpgsqlCommand` object and bind the values to its parameter
 ```cs
 await using var cmd = dataSource.CreateCommand(sql);
 
-cmd.Parameters.AddWithValue("@email", "[[email protected]](../cdn-cgi/l/email-protection.html)");
+cmd.Parameters.AddWithValue("@email", "john.doe@example.com");
 cmd.Parameters.AddWithValue("@id", 1);
 ```
 
@@ -150,7 +150,7 @@ First, open a terminal and connect to the `elearning` database using the `ed` us
 psql -U ed -d elearning
 ```
 
-It’ll prompt you to enter a password for the `ed` user. Input the valid password and press Enter to connect to the PostgreSQL.
+It'll prompt you to enter a password for the `ed` user. Input the valid password and press Enter to connect to the PostgreSQL.
 
 Second, query data from the `students` table:
 
@@ -164,11 +164,11 @@ Output:
 ```cs
  id | first_name | last_name |       email       | registration_date
 ----+------------+-----------+-------------------+-------------------
-  1 | John       | Doe       | [[email protected]](../cdn-cgi/l/email-protection.html) | 2024-05-20
+  1 | John       | Doe       | john.doe@example.com | 2024-05-20
 (1 row)
 ```
 
-The output indicates that the program has successfully updated the email of row id 1 to `[[email protected]](../cdn-cgi/l/email-protection.html)`.
+The output indicates that the program has successfully updated the email of row id 1 to `john.doe@example.com`.
 
 ## Summary
 

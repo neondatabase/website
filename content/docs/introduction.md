@@ -1,13 +1,14 @@
 ---
-title: Neon documentation
-updatedOn: '2025-02-24T15:53:13.360Z'
+title: Neon Docs
+updatedOn: '2025-03-17T13:32:16.633Z'
 ---
 
-Neon is a serverless Postgres platform designed to help you build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as autoscaling, branching, point-in-time restore, and more. Get started today with our [generous free plan](https://console.neon.tech).
+Neon is a serverless Postgres platform designed to help you build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as autoscaling, branching, instant restore, and more. Get started today with our [generous free plan](https://console.neon.tech).
 
-<CTA title="Did you know?" description="Neon's database branching can help you integrate Postgres into your development workflow. Branch your data like code. <a href='/docs/get-started-with-neon/workflow-primer'>Read our primer</a> to learn&nbsp;how." isIntro></CTA>
+<CTA title="Manage Neon from Cursor ✨" 
+description="Manage your Neon Postgres databases from Cursor and other AI tools using simple, conversational commands with Neon's MCP Server. <a href='/docs/ai/connect-mcp-clients-to-neon'>Learn how</a> ➡️" isIntro></CTA>
 
-**✨ Chat with Neon AI**: Available in [Docs](https://neon.tech/ai-chat), [GitHub Copilot](https://github.com/marketplace/neon-database), [VS Code](https://marketplace.visualstudio.com/items?itemName=buildwithlayer.neon-integration-expert-15j6N), and [Discord](https://discord.com/channels/1176467419317940276/1222626436502782013)
+<ChatOptions/>
 
 ## Get started
 
@@ -75,7 +76,7 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 
 </TechCards>
 
-## Explore the docs
+## Explore the Neon Docs
 
 <DetailIconCards>
 

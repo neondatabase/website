@@ -3,7 +3,7 @@ title: Secure your data with Azure Active Directory and Neon RLS
 subtitle: Implement Row-level Security policies in Postgres using Azure Active Directory
   and Neon RLS
 enableTableOfContents: true
-updatedOn: '2025-03-06T15:24:01.897Z'
+updatedOn: '2025-03-10T18:26:02.764Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-azure-ad
   - /docs/guides/neon-authorize-azure-ad
@@ -11,7 +11,7 @@ redirectFrom:
 
 <InfoBlock>
 <DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/azure-ad-b2c-nextjs-neon-rls-authorize">Azure Active Directory + Neon RLS</a>
+  <a href="https://github.com/neondatabase-labs/azure-ad-b2c-nextjs-neon-rls">Azure Active Directory + Neon RLS</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
@@ -55,13 +55,13 @@ https://login.microsoftonline.com/12345678-1234-1234-1234-1234567890ab/discovery
 
 ### 2. Add Azure Active Directory as an authorization provider in the Neon Console
 
-Once you have the JWKS URL, go to the **Neon Console**, navigate to **Settings** > **RLS Authorize**, and add Azure Active Directory as an authentication provider. Paste your copied URL and Azure Active Directory will be automatically recognized and selected.
+Once you have the JWKS URL, go to the **Neon Console**, navigate to **Settings** > **RLS**, and add Azure Active Directory as an authentication provider. Paste your copied URL and Azure Active Directory will be automatically recognized and selected.
 
 <div style={{ display: 'flex', justifyContent: 'center'}}>
   <img src="/docs/guides/azure_ad_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
 </div>
 
-At this point, you can use the **Get Started** setup steps from RLS Authorize in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
+At this point, you can use the **Get Started** setup steps from RLS in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
 
 ### 3. Install the pg_session_jwt extension in your database
 

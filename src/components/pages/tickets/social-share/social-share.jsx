@@ -28,7 +28,7 @@ const SocialShare = ({ className = null, url }) => {
         </TwitterShareButton>
         <button
           className={clsx(
-            'social-share relative flex items-center justify-center gap-3.5 whitespace-nowrap rounded-md px-6 py-[18px] pr-7 font-sans text-xl font-medium leading-none tracking-[-0.02em] text-white shadow-social transition duration-200 lg:px-8 xs:px-3 xs:py-2',
+            'social-share relative flex items-center justify-center gap-3.5 whitespace-nowrap rounded-md px-6 py-[18px] pr-7 font-sans text-xl font-medium leading-none tracking-extra-tight text-white shadow-social transition duration-200 lg:px-8 xs:px-3 xs:py-2',
             isCopied && 'pointer-events-none'
           )}
           type="button"
@@ -36,12 +36,12 @@ const SocialShare = ({ className = null, url }) => {
           onClick={() => handleCopy(url)}
         >
           <CopyIcon className="h-[26px] shrink-0" aria-hidden />
-          <p className="min-w-[82px] font-sans text-xl font-medium leading-none tracking-[-0.02em] text-white sm:text-base">
+          <p className="min-w-[82px] font-sans text-xl font-medium leading-none tracking-extra-tight text-white sm:text-base">
             {isCopied ? 'Copied!' : 'Copy link'}
           </p>
         </button>
       </div>
-      {/* <h2 className="ml-6 shrink-0 font-sans text-sm leading-[1.375] -tracking-tighter text-gray-5 flat-none md:flat-breaks md:ml-0 text-start">
+      {/* <h2 className="ml-6 shrink-0 font-sans text-sm leading-snug -tracking-tighter text-gray-5 flat-none md:flat-breaks md:ml-0 text-start">
         Share with <br /> your friends
       </h2> */}
     </div>

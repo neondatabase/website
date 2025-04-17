@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 
 import Button from 'components/shared/button';
 import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 const maskPassword = (uri) => {
   const url = new URL(uri);
@@ -36,10 +37,7 @@ const DeployPostgresButton = () => {
     setFormState((prev) => ({ ...prev, isLoading: true }));
 
     // @ts-ignore
-    if (window.zaraz) {
-      // @ts-ignore
-      window.zaraz.track('Button Clicked', { text: 'Deploy Postgres database per tenant' });
-    }
+    sendGtagEvent('Button Clicked', { text: 'Deploy Postgres database per tenant' });
 
     try {
       const response = await fetch(`/api/deploy-postgres`, {

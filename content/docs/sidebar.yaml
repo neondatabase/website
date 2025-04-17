@@ -123,8 +123,8 @@
       items:
         - section: Import utilities
           items:
-            - title: Migration Assistant
-              slug: import/migration-assistant
+            - title: Import Data Assistant
+              slug: import/import-data-assistant
             - title: Migrate from Postgres with pg_dump and pg_restore
               slug: import/migrate-from-postgres
             - title: Migrate from a Neon project
@@ -209,32 +209,43 @@
         - title: Scale to zero
           slug: introduction/scale-to-zero
           items:
+            - title: Overview
+              slug: introduction/scale-to-zero
             - title: Scale to zero guide
               slug: guides/scale-to-zero-guide
+        - title: Instant restore
+          slug: introduction/branch-restore
         - title: Branching
           slug: guides/branching-intro
           items:
-            - title: About branching
-              slug: introduction/branching
-            - title: Branch reset and restore
-              slug: introduction/point-in-time-restore
+            - section: Get started
+              items:
+                - title: Get started with branching
+                  slug: guides/branching-intro
+            - section: Concepts
+              items:
+                - title: About branching
+                  slug: introduction/branching
+                - title: Schema-only branches
+                  slug: guides/branching-schema-only
+                - title: Branch archiving
+                  slug: guides/branch-archiving
+            - section: Restore and reset
               items:
                 - title: Reset from parent
                   slug: guides/reset-from-parent
-                - title: Branch Restore
-                  slug: guides/branch-restore
-            - title: Branch archiving
-              slug: guides/branch-archiving
-            - title: Branching with the CLI
-              slug: guides/branching-neon-cli
-            - title: Branching with the API
-              slug: guides/branching-neon-api
-            - title: Branching with GitHub Actions
-              slug: guides/branching-github-actions
-            - title: Branching — Testing queries
-              slug: guides/branching-test-queries
-            - title: Schema-only branches
-              slug: guides/branching-schema-only
+                - title: Instant restore
+                  slug: introduction/branch-restore
+            - section: Branching in workflows
+              items:
+                - title: Branching with the CLI
+                  slug: guides/branching-neon-cli
+                - title: Branching with the API
+                  slug: guides/branching-neon-api
+                - title: Branching with GitHub Actions
+                  slug: guides/branching-github-actions
+                - title: Branching — Testing queries
+                  slug: guides/branching-test-queries
         - title: Logical replication
           slug: guides/logical-replication-guide
           items:
@@ -266,11 +277,15 @@
         - title: Time Travel
           slug: guides/time-travel-assist
           items:
+            - title: Overview
+              slug: guides/time-travel-assist
             - title: Time Travel tutorial
               slug: guides/time-travel-tutorial
         - title: Schema diff
           slug: guides/schema-diff
           items:
+            - title: Overview
+              slug: guides/schema-diff
             - title: Schema diff tutorial
               slug: guides/schema-diff-tutorial
         - title: IP Allow
@@ -348,7 +363,7 @@
               slug: introduction/monitor-external-tools
         - section: Team Tools
           items:
-            - title: Slack App
+            - title: App for Slack
               slug: manage/slack-app
               tag: beta
         - section: Backups
@@ -388,7 +403,6 @@
           slug: use-cases/platforms
         - title: Dev/Test
           slug: use-cases/dev-test
-
     - title: Regions
       slug: introduction/regions
       icon: regions
@@ -420,10 +434,154 @@
           slug: introduction/billing-aws-marketplace
         - title: Azure Marketplace
           slug: introduction/billing-azure-marketplace
+        - title: Enterprise sales process
+          slug: introduction/enterprise-sales-process
     - title: Neon on Azure
       slug: manage/azure
       icon: azure
-- section: Develop
+- section: AI with Neon
+  icon: ai
+  items:
+    - title: AI for agents
+      slug: ai/ai-agents-tools
+      icon: ai-agent
+      items:
+        - title: Overview
+          slug: ai/ai-agents-tools
+        - section: MCP Integration
+          items:
+            - title: Neon MCP Server
+              slug: ai/neon-mcp-server
+            - title: Connect MCP Clients
+              slug: ai/connect-mcp-clients-to-neon
+        - section: AI rules & prompts
+          items:
+            - title: AI rules
+              slug: ai/ai-rules
+            - title: Neon Auth
+              slug: ai/ai-rules-neon-auth
+            - title: Drizzle
+              slug: ai/ai-rules-neon-drizzle
+            - title: Neon Serverless
+              slug: ai/ai-rules-neon-serverless
+        - section: IDE & Tool Integration
+          items:
+            - title: Claude Desktop
+              slug: https://neon.tech/guides/neon-mcp-server
+            - title: Cursor IDE
+              slug: https://neon.tech/guides/cursor-mcp-neon
+            - title: Cline
+              slug: https://neon.tech/guides/cline-mcp-neon
+            - title: Windsurf
+              slug: https://neon.tech/guides/windsurf-mcp-neon
+            - title: Zed
+              slug: https://neon.tech/guides/zed-mcp-neon
+        - section: Agent Frameworks
+          items:
+            - title: AgentStack
+              slug: https://neon.tech/guides/agentstack-neon
+            - title: AutoGen
+              slug: https://neon.tech/guides/autogen-neon
+            - title: Composio + CrewAI
+              slug: https://neon.tech/guides/composio-crewai-neon
+            - title: LangGraph
+              slug: https://neon.tech/guides/langgraph-neon
+    - title: AI Starter Kit
+      slug: ai/ai-intro
+      icon: sparks
+      items:
+        - section: Core concepts
+          items:
+            - title: Introduction
+              slug: ai/ai-intro
+            - title: Embeddings
+              slug: ai/ai-concepts
+            - title: Pgvector
+              slug: extensions/pgvector
+        - section: AI frameworks
+          items:
+            - title: LangChain
+              slug: ai/langchain
+            - title: LlamaIndex
+              slug: ai/llamaindex
+            - title: Semantic Kernel
+              slug: ai/semantic-kernel
+            - title: Inngest
+              slug: ai/inngest
+        - section: Optimize & scale
+          items:
+            - title: Optimize vector search
+              slug: ai/ai-vector-search-optimization
+            - title: Scale with Neon
+              slug: ai/ai-scale-with-neon
+- section: Dev tools
+  items:
+    - title: CLI Reference
+      icon: cli
+      slug: reference/neon-cli
+      items:
+        - title: Install and connect
+          slug: reference/cli-install
+        - title: auth
+          slug: reference/cli-auth
+        - title: me
+          slug: reference/cli-me
+        - title: orgs
+          slug: reference/cli-orgs
+        - title: projects
+          slug: reference/cli-projects
+        - title: ip-allow
+          slug: reference/cli-ip-allow
+        - title: vpc
+          slug: reference/cli-vpc
+        - title: branches
+          slug: reference/cli-branches
+        - title: databases
+          slug: reference/cli-databases
+        - title: roles
+          slug: reference/cli-roles
+        - title: operations
+          slug: reference/cli-operations
+        - title: connection-string
+          slug: reference/cli-connection-string
+        - title: set-context
+          slug: reference/cli-set-context
+        - title: completion
+          slug: reference/cli-completion
+    - title: API Reference
+      slug: https://api-docs.neon.tech/reference/getting-started-with-neon-api
+      icon: api
+    - title: SDKs
+      slug: reference/sdk
+      icon: sdk
+      items:
+        - section: Neon SDKs
+          items:
+            - title: TypeScript SDK
+              slug: reference/typescript-sdk
+            - title: Python SDK
+              slug: reference/python-sdk
+            - title: The @neondatabase/toolkit
+              slug: reference/neondatabase-toolkit
+        - section: Community SDKs
+          items:
+            - title: Go SDK
+              slug: https://github.com/kislerdm/neon-sdk-go
+              tag: community
+            - title: Node.js / Deno SDK
+              slug: https://github.com/paambaati/neon-js-sdk
+              tag: community
+    - title: Terraform
+      slug: reference/terraform
+      tag: community
+      icon: terraform
+    - title: Find your template
+      slug: /templates
+      icon: template
+    - title: Examples repo
+      slug: https://github.com/neondatabase/examples
+      icon: search
+- section: Frameworks & integrations
   items:
     - title: Frameworks
       slug: get-started-with-neon/frameworks
@@ -491,63 +649,6 @@
           slug: guides/ruby-on-rails
         - title: SQLAlchemy
           slug: guides/sqlalchemy
-    - title: Neon Auth
-      slug: guides/neon-auth
-      icon: auth
-      tag: beta
-      items:
-        - title: About
-          slug: guides/neon-auth
-        - title: Tutorial
-          slug: guides/neon-auth-tutorial
-        - title: API
-          slug: guides/neon-auth-api
-    - title: Neon RLS
-      icon: lock
-      slug: guides/neon-rls
-      items:
-        - section: Overview
-          items:
-            - title: About
-              slug: guides/neon-rls
-            - title: Tutorial
-              slug: guides/neon-rls-tutorial
-            - title: Drizzle RLS
-              slug: guides/neon-rls-drizzle
-            - title: Troubleshooting
-              slug: guides/neon-rls-troubleshooting
-            - title: What's next
-              slug: guides/neon-rls-future
-        - section: Quickstarts
-          items:
-            - title: Clerk
-              slug: guides/neon-rls-clerk
-            - title: Stack Auth
-              slug: guides/neon-rls-stack-auth
-            - title: Auth0
-              slug: guides/neon-rls-auth0
-            - title: Stytch
-              slug: guides/neon-rls-stytch
-            - title: Keycloak
-              slug: guides/neon-rls-keycloak
-            - title: AWS Cognito
-              slug: guides/neon-rls-aws-cognito
-            - title: Azure Active Directory
-              slug: guides/neon-rls-azure-ad
-            - title: Descope
-              slug: guides/neon-rls-descope
-            - title: Firebase / GCP Identity Platform
-              slug: guides/neon-rls-firebase-gcp
-            - title: Google Identity
-              slug: guides/neon-rls-google-identity
-            - title: PropelAuth
-              slug: guides/neon-rls-propelauth
-            - title: SuperTokens
-              slug: guides/neon-rls-supertokens
-            - title: WorkOS
-              slug: guides/neon-rls-workos
-            - title: Custom JWT
-              slug: guides/neon-rls-custom-jwt
     - title: Integrations
       icon: integrations
       slug: guides/integrations
@@ -731,104 +832,65 @@
               slug: guides/auth-clerk
             - title: Okta
               slug: guides/auth-okta
-    - title: AI & Embeddings
-      icon: ai
-      slug: ai/ai-intro
+- section: Auth & access
+  items:
+    - title: Neon Auth
+      slug: guides/neon-auth
+      icon: auth
+      tag: beta
       items:
-        - title: AI concepts
-          slug: ai/ai-concepts
-        - title: The pgvector extension
-          slug: extensions/pgvector
-        - title: AI integrations
-          slug: ai/langchain
-          items:
-            - title: LangChain
-              slug: ai/langchain
-            - title: LlamaIndex
-              slug: ai/llamaindex
-            - title: Inngest
-              slug: ai/inngest
-        - title: Prepare your AI app for production
-          slug: ai/ai-vector-search-optimization
-          items:
-            - title: Optimize pgvector search
-              slug: ai/ai-vector-search-optimization
-            - title: Scale with Neon
-              slug: ai/ai-scale-with-neon
-        - title: AI tools
-          slug: ai/ai-google-colab
-          items:
-            - title: Google Colab
-              slug: ai/ai-google-colab
-            - title: Azure Data Studio Notebooks
-              slug: ai/ai-azure-notebooks
-    - title: API Reference
-      slug: https://api-docs.neon.tech/reference/getting-started-with-neon-api
-      icon: api
-    - title: CLI Reference
-      icon: cli
-      slug: reference/neon-cli
+        - title: About
+          slug: guides/neon-auth
+        - title: Tutorial
+          slug: guides/neon-auth-tutorial
+        - title: API
+          slug: guides/neon-auth-api
+    - title: Neon RLS
+      icon: lock
+      slug: guides/neon-rls
       items:
-        - title: Install and connect
-          slug: reference/cli-install
-        - title: auth
-          slug: reference/cli-auth
-        - title: me
-          slug: reference/cli-me
-        - title: orgs
-          slug: reference/cli-orgs
-        - title: projects
-          slug: reference/cli-projects
-        - title: ip-allow
-          slug: reference/cli-ip-allow
-        - title: vpc
-          slug: reference/cli-vpc
-        - title: branches
-          slug: reference/cli-branches
-        - title: databases
-          slug: reference/cli-databases
-        - title: roles
-          slug: reference/cli-roles
-        - title: operations
-          slug: reference/cli-operations
-        - title: connection-string
-          slug: reference/cli-connection-string
-        - title: set-context
-          slug: reference/cli-set-context
-        - title: create-app
-          slug: reference/cli-create-app
-        - title: completion
-          slug: reference/cli-completion
-    - title: SDKs
-      slug: reference/sdk
-      icon: sdk
-      items:
-        - section: Neon SDKs
+        - section: Overview
           items:
-            - title: TypeScript SDK
-              slug: reference/typescript-sdk
-            - title: Python SDK
-              slug: reference/python-sdk
-            - title: The @neondatabase/toolkit
-              slug: reference/neondatabase-toolkit
-        - section: Community SDKs
+            - title: About
+              slug: guides/neon-rls
+            - title: Tutorial
+              slug: guides/neon-rls-tutorial
+            - title: Drizzle RLS
+              slug: guides/neon-rls-drizzle
+            - title: Troubleshooting
+              slug: guides/neon-rls-troubleshooting
+            - title: What's next
+              slug: guides/neon-rls-future
+        - section: Quickstarts
           items:
-            - title: Go SDK
-              slug: https://github.com/kislerdm/neon-sdk-go
-              tag: community
-            - title: Node.js / Deno SDK
-              slug: https://github.com/paambaati/neon-js-sdk
-              tag: community
-    - title: Terraform
-      slug: reference/terraform
-      tag: community
-      icon: terraform
-    - title: Find your template
-      slug: /templates
-      icon: template
-    - title: Examples repo
-      slug: https://github.com/neondatabase/examples
-      icon: search
+            - title: Clerk
+              slug: guides/neon-rls-clerk
+            - title: Stack Auth
+              slug: guides/neon-rls-stack-auth
+            - title: Auth0
+              slug: guides/neon-rls-auth0
+            - title: Stytch
+              slug: guides/neon-rls-stytch
+            - title: Keycloak
+              slug: guides/neon-rls-keycloak
+            - title: AWS Cognito
+              slug: guides/neon-rls-aws-cognito
+            - title: Azure Active Directory
+              slug: guides/neon-rls-azure-ad
+            - title: Descope
+              slug: guides/neon-rls-descope
+            - title: Firebase / GCP Identity Platform
+              slug: guides/neon-rls-firebase-gcp
+            - title: Google Identity
+              slug: guides/neon-rls-google-identity
+            - title: PropelAuth
+              slug: guides/neon-rls-propelauth
+            - title: SuperTokens
+              slug: guides/neon-rls-supertokens
+            - title: WorkOS
+              slug: guides/neon-rls-workos
+            - title: Custom JWT
+              slug: guides/neon-rls-custom-jwt
 - section: Workflows
   items:
     - title: Neon Twin
@@ -885,10 +947,15 @@
               slug: extensions/citext
             - title: hstore
               slug: extensions/hstore
+            - title: ltree
+              slug: extensions/ltree
             - title: neon
               slug: extensions/neon
             - title: neon_utils
               slug: extensions/neon-utils
+            - title: pgcrypto
+              slug: extensions/pgcrypto
+              tag: new
             - title: pgvector
               slug: extensions/pgvector
             - title: pgrag
@@ -906,6 +973,9 @@
               slug: extensions/pg_stat_statements
             - title: pg_repack
               slug: extensions/pg_repack
+            - title: pg_search
+              slug: extensions/pg_search
+              tag: new
             - title: pg_tiktoken
               slug: extensions/pg_tiktoken
             - title: pg_trgm
@@ -918,6 +988,12 @@
               slug: extensions/postgres_fdw
             - title: timescaledb
               slug: extensions/timescaledb
+            - title: unaccent
+              slug: extensions/unaccent
+              tag: new
+            - title: uuid-ossp
+              slug: extensions/uuid-ossp
+              tag: new
             - title: wal2json
               slug: extensions/wal2json
         - title: Functions
@@ -1070,6 +1146,9 @@
     - title: Compliance
       slug: security/compliance
       icon: award
+    - title: HIPAA
+      slug: security/hipaa
+      icon: auth
     - title: Acceptable Use Policy
       slug: security/acceptable-use-policy
       icon: docs

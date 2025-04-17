@@ -1,7 +1,7 @@
 ---
 title: Enable Autoscaling in Neon
 enableTableOfContents: true
-updatedOn: '2024-12-13T20:52:57.582Z'
+updatedOn: '2025-04-08T22:55:27.447Z'
 ---
 
 <InfoBlock>
@@ -44,7 +44,7 @@ To edit a compute:
 
 ## Configure autoscaling defaults for your project
 
-You can configure autoscaling configuration defaults for your project so that **newly created computes** (including those created when you create a new branch or add read replica) are created with the same autoscaling configuration. This will save your from having to configure autoscaling each time, assuming you want the same settings for all of your computes.
+You can configure autoscaling configuration defaults for your project so that **newly created computes** (including those created when you create a new branch or add read replica) are created with the same autoscaling configuration. This saves you from having to configure autoscaling settings with each new compute. See [Change your project's default compute settings](/docs/manage/projects#change-your-projects-default-compute-settings) for more detail.
 
 <Admonition type="note">
 Changing your autoscaling default settings does not alter the autoscaling configuration for existing computes.
@@ -58,6 +58,17 @@ To configure autoscaling defaults:
 4. Use the slider to specify a minimum and maximum compute size and **Save** your changes.
 
 The next time you create a compute, these settings will be applied to it.
+
+### Autoscaling defaults for each Neon plan
+
+The following table outlines the initial default autoscaling settings for newly created projects on each Neon plan.
+
+| **Neon plan** | **Minimum compute size** | **Maximum compute size** |
+| ------------- | ------------------------ | ------------------------ |
+| Free          | 0.25                     | 2                        |
+| Launch        | 1                        | 4                        |
+| Scale         | 1                        | 8                        |
+| Business      | 1                        | 8                        |
 
 ## Monitor autoscaling
 

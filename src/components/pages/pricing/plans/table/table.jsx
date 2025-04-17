@@ -61,7 +61,7 @@ const TableHeading = ({
         size="xs"
         theme={isFeaturedPlan ? 'primary' : 'gray-15'}
         to={buttonUrl}
-        tag_name={`Details Table Top > ${label}`}
+        tagName={`Details Table Top > ${label}`}
         onClick={() => {
           posthog.capture('ui_interaction', {
             action: 'pricing_page_get_started_clicked',
@@ -343,7 +343,7 @@ const Table = () => {
                   size="xs"
                   theme={isHighlightedColumn ? 'primary' : 'gray-15'}
                   to={labelList[key].buttonUrl}
-                  tag_name={`Details Table Bottom > ${labelList[key].label}`}
+                  tagName={`Details Table Bottom > ${labelList[key].label}`}
                   onClick={() => {
                     posthog.capture('ui_interaction', {
                       action: 'pricing_page_get_started_clicked',

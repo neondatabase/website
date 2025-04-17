@@ -2,7 +2,7 @@
 title: Secure your data with Auth0 and Neon RLS
 subtitle: Implement Row-level Security policies in Postgres using Auth0 and Neon RLS
 enableTableOfContents: true
-updatedOn: '2025-03-06T15:24:01.896Z'
+updatedOn: '2025-03-10T18:26:02.759Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-auth0
   - /docs/guides/neon-authorize-auth0
@@ -10,7 +10,7 @@ redirectFrom:
 
 <InfoBlock>
 <DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/auth0-nextjs-neon-rls-authorize">Auth0 + Neon RLS</a>
+  <a href="https://github.com/neondatabase-labs/auth0-nextjs-neon-rls">Auth0 + Neon RLS</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
@@ -54,7 +54,7 @@ Copy your **Domain** and use that to form your JWKS URL. For example, here's the
 
 ### 2. Add Auth0 as an authorization provider in the Neon Console
 
-Once you have the JWKS URL, go to the **Neon Console**, navigate to **Settings** > **RLS Authorize**, and add Auth0 as an authentication provider. Paste your copied URL and Auth0 will be automatically recognized and selected.
+Once you have the JWKS URL, go to the **Neon Console**, navigate to **Settings** > **RLS**, and add Auth0 as an authentication provider. Paste your copied URL and Auth0 will be automatically recognized and selected.
 
 <div style={{ display: 'flex', justifyContent: 'center'}}>
   <img src="/docs/guides/auth0_neon_add_jwks.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
@@ -248,8 +248,7 @@ export async function TodoList() {
 
     // WHERE filter is optional because of RLS.
     // But we send it anyway for performance reasons.
-    const todos = await
-        sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
+    const todos = await sql`SELECT * FROM todos WHERE user_id = auth.user_id()`; // [!code highlight]
 
     return (
         <ul>
@@ -294,8 +293,7 @@ export function TodoList() {
 
             // WHERE filter is optional because of RLS.
             // But we send it anyway for performance reasons.
-            const todosResponse = await
-                sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
+            const todosResponse = await sql`SELECT * FROM todos WHERE user_id = auth.user_id()`; // [!code highlight]
 
             setTodos(todosResponse as Array<Todo>);
         }

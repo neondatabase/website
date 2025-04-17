@@ -39,11 +39,11 @@ To learn more, read [Database Branching Workflows](https://neon.tech/flow), and 
 Neon's Schema Diff tool lets you compare the schemas for two selected branches in a side-by-side view. For more, see [Schema Diff](/docs/guides/schema-diff).
 </Admonition>
 
-## Instant database recovery
+## Instant restore
 
-**Instant point-in-time restore with time travel**
+**Instant restore with time travel**
 
-We've all heard about multi-hour outages and data losses due to errant queries or problematic migrations. Neon's [Point-in-Time Restore](/docs/guides/branch-restore) feature allows you to instantly restore your data to a point in time before the issue occurred. With Neon, you can perform a restore operation in a few clicks, letting you get back online in the time it takes to choose a restore point, which can be a date and time or a [Log Sequence Number (LSN)](/docs/reference/glossary#lsn).
+We've all heard about multi-hour outages and data losses due to errant queries or problematic migrations. Neon's [Instant restore](/docs/guides/branch-restore) feature allows you to instantly restore your data to a point in time before the issue occurred. With Neon, you can perform a restore operation in a few clicks, letting you get back online in the time it takes to choose a restore point, which can be a date and time or a [Log Sequence Number (LSN)](/docs/reference/glossary#lsn).
 
 To help you find the correct restore point, Neon provides a [Time Travel Assist](/docs/guides/time-travel-assist) feature that lets you connect to any selected time or LSN within your database history and run queries. Time Travel Assist is designed to work in tandem with Neon's restore capability to facilitate precise and informed restore operations.
 

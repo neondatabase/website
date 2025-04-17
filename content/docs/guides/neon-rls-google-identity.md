@@ -3,7 +3,7 @@ title: Secure Your Data with Neon RLS and Firebase or GCP Identity Platform
 subtitle: Implement Row-Level Security in Postgres using Firebase or GCP Identity
   Platform
 enableTableOfContents: true
-updatedOn: '2025-03-06T15:24:01.901Z'
+updatedOn: '2025-03-10T18:26:02.767Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-google-identity
   - /docs/guides/neon-authorize-google-identity
@@ -73,7 +73,7 @@ Once you have the JWKS URL, go to the **Neon Console** and add Google Identity a
   <img src="/docs/guides/google_identity_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
 </div>
 
-At this point, you can use the **Get Started** setup steps from RLS Authorize in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
+At this point, you can use the **Get Started** setup steps from RLS in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
 
 ### 3. Install the pg_session_jwt extension in your database
 

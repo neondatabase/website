@@ -11,7 +11,7 @@ redirectFrom:
   - /docs/introduction/pro-plan
   - /docs/introduction/custom-plan
   - /docs/reference/technical-preview-free-tier
-updatedOn: '2024-12-13T15:57:03.740Z'
+updatedOn: '2025-03-13T20:13:21.746Z'
 ---
 
 Neon's plans are designed to meet different user requirements, ranging from hobby projects to enterprise-level production workloads. We also offer custom enterprise plans with volume-based discounts for large teams or database fleets. Refer to our [Pricing](https://neon.tech/pricing) page for fees and a detailed plan comparison.
@@ -65,7 +65,7 @@ The Free Plan includes the following usage allowances:
 - All supported regions
 - Project collaboration
 - Advanced Postgres features such as connection pooling, logical replication, and 60+ Postgres extensions
-- Neon features such as branching, point-in-time restore up to **24 hours** in the past, time travel connections, and more
+- Neon features such as branching, instant restore up to **24 hours** in the past, time travel connections, and more
 - [Community support](/docs/introduction/support)
 
 For a complete list of features, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
@@ -110,7 +110,7 @@ Launch plan users have access to [extra compute and storage](/docs/introduction/
 - Monitoring with 7 days of historical data
 - Advanced Postgres features, including connection pooling, logical replication, and 60+ Postgres extensions
 - Branch protection (up to 2 branches)
-- Neon features such as branching, point-in-time restore up to **7 days** in the past, time travel connections, and more
+- Neon features such as branching, instant restore up to **7 days** in the past, time travel connections, and more
 - [Standard support](/docs/introduction/support)
 
 For a complete list of features, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
@@ -151,7 +151,7 @@ Scale plan users have access to [extra compute, storage, and projects](/docs/int
 - Advanced Postgres features, including connection pooling, logical replication, 60+ Postgres extensions, and customer-provided custom extensions (on AWS-provisioned projects only)
 - Branch protection (up to 5 branches)
 - Monitoring with 7 days of historical data
-- Neon features such as branching, point-in-time restore up to **14 days** in the past, time travel connections, and more
+- Neon features such as branching, instant restore up to **14 days** in the past, time travel connections, and more
 - [Standard support](/docs/introduction/support)
 
 For a complete list of features, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
@@ -191,10 +191,11 @@ Business plan users have access to [extra compute, storage, and projects](/docs/
 - Scale to zero
 - Monitoring with 14 days of historical data
 - Advanced Postgres features, including connection pooling, logical replication, and 60+ Postgres extensions
-- Neon features such as branching, point-in-time restore up to **30 days** in the past, time travel connections, and more
+- Neon features such as branching, instant restore up to **30 days** in the past, time travel connections, and more
 - Enhanced security features including SOC 2 compliance, branch protection, and allowed IP configurations
 - [Priority support](/docs/introduction/support)
 - [Service SLA of 99.95% uptime](https://neon.tech/neon-business-sla)
+- HIPAA Compliance (separately billed add-on)
 
 For a complete list of features and comparisons with other plans, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
 
@@ -218,6 +219,7 @@ Additionally, the _Enterprise_ plan can be tailored to your specific requirement
 - Custom pricing with discounts
 - Higher resource allowances for projects, branches, storage, archive storage, and compute
 - Scale to zero
+- HIPAA Compliance (separately billed add-on)
 
 Enterprise plan users have access to **Enterprise** support, which includes everything offered with the **Priority** plan plus Enterprise-level SLAs. For more information, Neon support plans are outlined on our [Support](/docs/introduction/support) page.
 

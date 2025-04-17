@@ -157,7 +157,7 @@
       }
 
       cite {
-        @apply mt-3.5 inline-flex font-normal not-italic leading-none tracking-[-0.02em] text-gray-new-70;
+        @apply mt-3.5 inline-flex font-normal not-italic leading-none tracking-extra-tight text-gray-new-70;
 
         em {
           @apply not-italic;
@@ -180,7 +180,7 @@
       }
 
       cite {
-        @apply mt-3.5 inline-flex font-normal not-italic leading-none tracking-[-0.02em] text-gray-new-70;
+        @apply mt-3.5 inline-flex font-normal not-italic leading-none tracking-extra-tight text-gray-new-70;
 
         em {
           @apply not-italic;
