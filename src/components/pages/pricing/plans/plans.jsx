@@ -1,16 +1,9 @@
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
-
 import Table from './table';
 
-const Plans = ({ className }) => (
-  <section id="plans" className={clsx('plans px-safe', className)}>
+const Plans = () => (
+  <section id="plans" className="plans mt-[184px] scroll-mt-5 px-safe xl:mt-40 lg:mt-36 md:mt-24">
     <Table />
   </section>
 );
-
-Plans.propTypes = {
-  className: PropTypes.string,
-};
 
 export default Plans;
