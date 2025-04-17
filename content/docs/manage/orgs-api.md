@@ -39,16 +39,16 @@ Some operations require a personal API key from an organization admin and cannot
 
 | Action                                                                                    | Personal API Key | Organization API Key |
 | ----------------------------------------------------------------------------------------- | ---------------- | -------------------- |
-| [Create an organization API key](#create-an-organization-api-key)                         | ✅               | ❌                   |
-| [Get a list of organization API keys](#list-organization-api-keys)                        | ✅               | ✅                   |
-| [Revoke an organization API key](#revoke-an-organization-api-key)                         | ✅               | ✅                   |
+| [Create an organization API key](#create-api-keys)                                        | ✅               | ❌                   |
+| [Get a list of organization API keys](#list-api-keys)                                     | ✅               | ✅                   |
+| [Revoke an organization API key](#revoke-an-api-key)                                      | ✅               | ✅                   |
 | [Get organization details](#get-organization-details)                                     | ✅               | ✅                   |
-| [Get organization members details](#get-details-about-all-members)                        | ✅               | ✅                   |
-| [Get organization member details](#get-details-about-an-individual-member)                | ✅               | ✅                   |
-| [Update the role for an organization member](#update-the-role-for-an-organization-member) | ✅               | ✅                   |
-| [Remove member from the organization](#remove-member-from-the-organization)               | ✅               | ❌                   |
-| [Get organization invitation details](#get-organization-invitation-details)               | ✅               | ✅                   |
-| [Create organization invitations](#create-organization-invitations)                       | ✅               | ❌                   |
+| [Get organization members details](#list-members)                                         | ✅               | ✅                   |
+| [Get organization member details](#get-member-details)                                    | ✅               | ✅                   |
+| [Update the role for an organization member](#update-member-role)                         | ✅               | ✅                   |
+| [Remove member from the organization](#remove-member)                                     | ✅               | ❌                   |
+| [Get organization invitation details](#list-invitations)                                  | ✅               | ✅                   |
+| [Create organization invitations](#create-invitations)                                    | ✅               | ❌                   |
 | [Transfer projects between organizations](#transfer-projects-between-organizations)       | ✅               | ❌                   |
 
 ## Finding your org_id
@@ -195,7 +195,7 @@ Example response:
 
 ## Get member details
 
-Retrieves information about a specific member using their member ID (obtained from the [Get all members](#get-details-about-all-members) endpoint).
+Retrieves information about a specific member using their member ID (obtained from the [List members](#list-members) endpoint).
 
 ```bash shouldWrap
 curl --request GET \
