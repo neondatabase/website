@@ -76,7 +76,7 @@ Remember that Postgres checks shared buffers first before it checks your compute
 
 You can also use `EXPLAIN ANALYZE` with the `FILECACHE` option to view LFC cache hit and miss data. Installing the `neon` extension is not required. For example:
 
-```sql {6,12,16,22}
+```sql {5,6,11,12,15,16,21,22}
 EXPLAIN (ANALYZE,BUFFERS,PREFETCH,FILECACHE) SELECT COUNT(*) FROM pgbench_accounts;
 
  Finalize Aggregate  (cost=214486.94..214486.95 rows=1 width=8) (actual time=5195.378..5196.034 rows=1 loops=1)
