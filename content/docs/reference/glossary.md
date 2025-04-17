@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2025-03-06T11:08:51.322Z'
+updatedOn: '2025-04-17T16:06:46.410Z'
 ---
 
 ## access token
@@ -65,7 +65,10 @@ A branch created by a [instant restore](#branch-restore) operation. When you res
 
 An isolated copy of data, similar to a Git branch. Data includes databases, schemas, tables, records, indexes, roles — everything that comprises data in a Postgres instance. Just as a Git branch allows developers to work on separate features or fixes without impacting their main line of code, a Neon branch enables users to modify a copy of their data in isolation from their main line of data. This approach facilitates parallel database development, testing, and other features, similar to Git's code branching system.
 
-Each Neon project is created with a main line of data referred to as the [root branch](#root-branch). A branch created from the root branch or another branch is a [copy-on-write](#copy-on-write) clone.
+Each Neon project is created with two branches by default:
+
+- **production** - The default branch. This main line of data is referred to as [root branch](#root-branch).
+- **development** - A child branch of production. A branch created from the root branch or another branch is a [copy-on-write](#copy-on-write) clone.
 
 You can create a branch from the current or past state of another branch. A branch created from the current state of another branch includes the data that existed on that branch at the time of branch creation. A branch created from a past state of another branch includes the data that existed in the past state.
 
@@ -225,7 +228,7 @@ See [Neon Free Plan](#neon-free-plan).
 
 ## GB-month
 
-In Neon, **GB-month** is a unit of measure representing the storage of 1 gigabyte (GB) of data for one month. Storage usage is measured periodically and accumulated over the billing period. At the start of each billing period, GB-month usage resets to zero.
+In Neon, **GB-month** is a unit of measure representing the storage of 1 gigabyte (GB) of data for one month. A gigabyte is defined as 10^9 bytes (1,000,000,000 bytes). Storage usage is measured periodically and accumulated over the billing period. At the start of each billing period, GB-month usage resets to zero.
 
 GB-month usage reflects both the amount of storage used and how long it was used. For example, storing 10 GB for an entire month results in **10 GB-months**, while storing 10 GB for half a month results in **5 GB-months**.
 
@@ -405,7 +408,7 @@ A feature in Neon that allows secure connections to Neon databases through AWS P
 
 ## default branch
 
-A designation that is given to a [branch](#branch) in a Neon project. Each Neon project is initially created with a [root branch](#root-branch) called `main`, which carries the _default branch_ designation by default.
+A designation that is given to a [branch](#branch) in a Neon project. Each Neon project is initially created with a [root branch](#root-branch) called `production`, which carries the _default branch_ designation by default.
 
 The default branch has a larger compute hour allowance on the Free Plan. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available.
 
@@ -477,7 +480,7 @@ Selling the Neon service as part of another service offering. Neon's Platform Pa
 
 ## root branch
 
-A branch with no parent. Each Neon project starts with a root branch named `main`, which cannot be deleted and is set as the [default branch](#default-branch) for the project.
+A branch with no parent. Each Neon project starts with a root branch named `production`, which cannot be deleted and is set as the [default branch](#default-branch) for the project.
 
 Neon also supports two other types of root branches that have no parent but _can_ be deleted:
 

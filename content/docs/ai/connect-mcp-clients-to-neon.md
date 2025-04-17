@@ -1,9 +1,9 @@
 ---
 title: Connect MCP Clients to Neon
-subtitle: Learn how to connect MCP clients such as Cursor, Claude Desktop, Cline, and
-  Windsurf to your Neon Postgres database.
+subtitle: Learn how to connect MCP clients such as Cursor, Claude Desktop, Cline,
+  Windsurf and Zed to your Neon Postgres database.
 enableTableOfContents: true
-updatedOn: '2025-04-10T08:52:50.356Z'
+updatedOn: '2025-04-13T12:26:57.407Z'
 ---
 
 The **Neon MCP Server** allows you to connect various [**Model Context Protocol (MCP)**](https://modelcontextprotocol.org) compatible AI tools to your Neon Postgres databases. This guide provides instructions for connecting popular MCP clients to the Neon MCP Server, enabling natural language interaction with your Neon projects.
@@ -14,6 +14,7 @@ This guide covers the setup for the following MCP Clients:
 - [Cursor](#cursor)
 - [Windsurf (Codeium)](#windsurf-codeium)
 - [Cline (VS Code extension)](#cline-vs-code-extension)
+- [Zed](#zed)
 
 By connecting these tools to the Neon MCP Server, you can manage your Neon projects, databases, and schemas using natural language commands within the MCP client interface.
 
@@ -47,7 +48,7 @@ The remote hosted MCP server is in preview due to the [new OAuth MCP specificati
 <TabItem>
 
 1. Open Claude desktop and navigate to **Settings**.
-2. Under the **Developer** tab, click **Edit Config** (On Windows, its under File -> Settings -> Developer -> Edit Config) to open the configuration file (`claude_desktop_config.json`).
+2. Under the **Developer** tab, click **Edit Config** (On Windows, it's under File -> Settings -> Developer -> Edit Config) to open the configuration file (`claude_desktop_config.json`).
 3. Add the "Neon" server entry within the `mcpServers` object:
    ```json
    {
@@ -60,7 +61,7 @@ The remote hosted MCP server is in preview due to the [new OAuth MCP specificati
    }
    ```
 4. Save the configuration file and **restart** Claude Desktop.
-5. An OAuth window will open in your browser. Follow the prompts to authorize Claude to access your Neon account.
+5. An OAuth window will open in your browser. Follow the prompts to authorize Claude Desktop to access your Neon account.
 
 </TabItem>
 
@@ -70,7 +71,7 @@ The remote hosted MCP server is in preview due to the [new OAuth MCP specificati
 2.  Run the following command, replacing `YOUR_NEON_API_KEY` with your actual Neon API key:
 
     ```bash
-    npx -y @smithery/cli install neon --client claude --config "{\"neonApiKey\":\"YOUR_NEON_API_KEY\"}"
+    npx -y @smithery/cli@latest install neon --client claude --config "{\"neonApiKey\":\"YOUR_NEON_API_KEY\"}"
     ```
 
 3.  Restart Claude Desktop.
@@ -199,6 +200,51 @@ For more, see [Get started with Windsurf and Neon Postgres MCP Server](/guides/w
 
 For more, see [Get started with Cline and Neon Postgres MCP Server](/guides/cline-mcp-neon).
 
+## Zed
+
+<Admonition type="note">
+MCP support in Zed is currently in **preview**. Ensure you're using the Preview version of Zed to add MCP servers (called **Context Servers** in Zed). Download the preview version from [zed.dev/releases/preview](https://zed.dev/releases/preview).
+</Admonition>
+
+<Tabs labels={["Remote MCP Server", "Local MCP Server"]}>
+<TabItem>
+
+1. Open the Zed Preview application.
+2. Click the Assistant (✨) icon in the bottom right corner.
+3. Click **Settings** in the top right panel of the Assistant.
+4. In the **Context Servers** section, click **+ Add Context Server**.
+5. Configure the Neon Server:
+   - Enter **Neon** in the **Name** field.
+   - In the **Command** field, enter:
+     ```bash
+     npx -y mcp-remote https://mcp.neon.tech/sse
+     ```
+   - Click **Add Server**.
+6. An OAuth window will open in your browser. Follow the prompts to authorize Zed to access your Neon account.
+7. Check the Context Servers section in Zed settings to ensure the connection is successful. "Neon" should be listed.
+
+</TabItem>
+
+<TabItem>
+
+1. Open the Zed Preview application.
+2. Click the Assistant (✨) icon in the bottom right corner.
+3. Click **Settings** in the top right panel of the Assistant.
+4. In the **Context Servers** section, click **+ Add Context Server**.
+5. Configure the Neon Server:
+   - Enter **Neon** in the **Name** field.
+   - In the **Command** field, enter the following, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key obtained from the [prerequisites](#prerequisites) section:
+     ```bash
+     npx -y @neondatabase/mcp-server-neon start <YOUR_NEON_API_KEY>
+     ```
+   - Click **Add Server**.
+6. Check the Context Servers section in Zed settings to ensure the connection is successful. "Neon" should be listed.
+
+</TabItem>
+</Tabs>
+
+For more details, including workflow examples and troubleshooting, see [Get started with Zed and Neon Postgres MCP Server](/guides/zed-mcp-neon).
+
 ## Other MCP clients
 
 Adapt the instructions above for other clients:
@@ -288,6 +334,10 @@ After successful configuration, you should see the Neon MCP Server listed as act
 If your client does not use `JSON` for configuration of MCP servers (such as older versions of Cursor), you can use the following command when prompted:
 
 ```bash
+# For Remote MCP server
+npx -y mcp-remote https://mcp.neon.tech/sse
+
+# For Local MCP server
 npx -y @neondatabase/mcp-server-neon start <YOUR_NEON_API_KEY>
 ```
 

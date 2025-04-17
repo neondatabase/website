@@ -6,10 +6,21 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-identity
 tag: beta
-updatedOn: '2025-03-07T21:27:12.098Z'
+updatedOn: '2025-04-17T13:11:55.870Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth" />
+
+<InfoBlock>
+  <DocsList title="Related docs" theme="docs">
+    <a href="/docs/guides/neon-auth-tutorial">Neon Auth Tutorial</a>
+    <a href="/docs/guides/neon-auth-api">Manage Neon Auth using the API</a>
+  </DocsList>
+
+  <DocsList title="Sample project" theme="repo">
+    <a href="https://github.com/neondatabase-labs/neon-auth-demo-app">Neon Auth Demo App</a>
+  </DocsList>
+</InfoBlock>
 
 **Neon Auth** connects your authentication provider to your Neon database, automatically synchronizing user profiles so that you own your auth data. Access your user data directly in your database environment, with no custom integration code needed.
 
@@ -205,6 +216,10 @@ With Neon Auth, you skip the complexities of creating and synchronizing your own
 For a more detailed walkthrough, see the [Neon Auth Tutorial](/docs/guides/neon-auth-tutorial).
 
 ## Getting started
+
+<Admonition type="note">
+Currently, Neon Auth is available for use with Stack Auth, with support for additional authentication providers coming soon.
+</Admonition>
 
 Neon Auth offers two ways to connect your authentication provider:
 

@@ -76,6 +76,7 @@ You can either watch the video below or follow the steps to set up the Neon MCP 
 6. **Save** the `mcp_config.json` file.
 7. Click **"Refresh"** (🔄) in the MCP toolbar in Windsurf Cascade.
 8. An OAuth window will open in your browser. Follow the prompts to authorize Windsurf to access your Neon account.
+   ![Neon OAuth window](/docs/guides/neon-oauth-window.png)
 9. You can verify that the connection is successful by checking the available MCP servers in Cascade. The toolbar should indicate that you have MCP servers available, and you should see "1 available MCP server" (or more if you configured additional servers).
 
    ![Windsurf MCP Toolbar with Server Available](/docs/guides/windsurf-mcp-server-available.png)
@@ -170,7 +171,7 @@ Neon MCP server exposes the following actions, which primarily map to **Neon API
 - `prepare_database_migration`: Initiates a database migration process, utilizing a temporary branch for safety. Begins the process of altering your database schema, safely using Neon's branching feature.
 - `complete_database_migration`: Completes a migration process, applying changes to your main database and cleaning up temporary resources.
 
-These actions enable any MCP client like Windsurf to interact with various functionalities of the **Neon platform via the Neon API.** Certain tools, especially database migration ones, are tailored for AI agent and LLM usage, leveraging Neon’s branching for safe preview and commit.
+These actions enable any MCP client like Windsurf to interact with various functionalities of the **Neon platform via the Neon API.** Certain tools, especially database migration ones, are tailored for AI agent and LLM usage, leveraging Neon's branching for safe preview and commit.
 
 ## Development Workflow: Adding a Column with Windsurf and Neon MCP
 
@@ -205,8 +206,8 @@ User: can you add created_at column?
 Cascade: I'll help you add a created_at column to the playing_with_neon table. I'll create a migration to add this column with a timestamp data type.
 > MCP Tool: neon / prepare_database_migration
 > Let me verify the changes in the temporary branch to make sure the column was added correctly.
-> I've verified that the created_at column has been added successfully in the temporary branch. Would you like me to commit this migration to the main branch?
-> The migration has been completed successfully! The created_at column has been added to the playing_with_neon table. Let's verify the change in the main branch:
+> I've verified that the created_at column has been added successfully in the temporary branch. Would you like me to commit this migration to the production branch?
+> The migration has been completed successfully! The created_at column has been added to the playing_with_neon table. Let's verify the change in the production branch:
 > Perfect! The created_at column has been successfully added and populated with timestamps. For existing rows, it was set to the time when the column was added. Any new rows added to the table will automatically get their creation timestamp.
 ```
 
@@ -214,7 +215,7 @@ Cascade: I'll help you add a created_at column to the playing_with_neon table. I
 
 - **Natural language interaction:** You can use simple, conversational English to interact with your database through Windsurf's Cascade.
 - **MCP Tools in Action:** The underlying MCP tools (`get_database_tables`, `run_sql`, `prepare_database_migration`, `complete_database_migration`) illustrate the automated process.
-- **Branching for safety:** The agent automatically creates a temporary branch for schema changes and tests them before committing to the main branch.
+- **Branching for safety:** The agent automatically creates a temporary branch for schema changes and tests them before committing to the production branch.
 
 You can verify the changes in your Neon Console or by querying the database directly.
 
@@ -262,7 +263,7 @@ Cascade: I'll create a new branch named "feature-x" in your Neon project.
 > Branch Name: `feature-x`
 > Branch ID: `br-aged-sun-a5woam3c`
 > Project ID: `restless-butterfly-08800888`
-> The branch has been created successfully and is ready for use. You can now make changes to this branch without affecting the main branch. Would you like to do anything with this new branch?
+> The branch has been created successfully and is ready for use. You can now make changes to this branch without affecting the production branch. Would you like to do anything with this new branch?
 ```
 
 ![Windsurf creating a new Neon branch](/docs/guides/windsurf-mcp-create-new-branch.png)

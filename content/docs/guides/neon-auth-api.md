@@ -1,8 +1,22 @@
 ---
 title: Manage Neon Auth using the API
 enableTableOfContents: true
-updatedOn: '2025-02-21T13:30:24.355Z'
+updatedOn: '2025-04-17T16:06:46.405Z'
+tag: beta
 ---
+
+<FeatureBetaProps feature_name="Neon Auth" />
+
+<InfoBlock>
+  <DocsList title="Related docs" theme="docs">
+    <a href="/docs/guides/neon-auth">About Neon Auth</a>
+    <a href="/docs/guides/neon-auth-tutorial">Neon Auth Tutorial</a>
+  </DocsList>
+
+  <DocsList title="Sample project" theme="repo">
+    <a href="https://github.com/neondatabase-labs/neon-auth-demo-app">Neon Auth Demo App</a>
+  </DocsList>
+</InfoBlock>
 
 Learn how to manage your Neon Auth integration using the Neon API. Create a new integration, generate SDK keys, add users, and claim ownership of your Neon-managed auth project to your auth provider.
 
@@ -25,14 +39,14 @@ Creates a Neon-managed authentication project for your database (currently suppo
 
 <Admonition type="note">
 To create an integration, you'll need:
-- Your main branch ID. Get it from the Neon Console on the **Branches** page, or use the [List Branches endpoint](https://api-docs.neon.tech/reference/listprojectbranches) (look for `"default": true`)
+- Your production branch ID. Get it from the Neon Console on the **Branches** page, or use the [List Branches endpoint](https://api-docs.neon.tech/reference/listprojectbranches) (look for `"default": true`)
 - Your database name and role name. Get them by clicking on the **Connect** button on your **Project Dashboard** in the Neon Console, or use the [List Databases endpoint](https://api-docs.neon.tech/reference/listprojectbranches)
 </Admonition>
 
 Required parameters:
 
 - `project_id`: Your Neon project ID
-- `branch_id`: Your project's main branch ID
+- `branch_id`: Your project's production branch ID
 - `database_name`: Name of your database (defaults to `"neondb"`)
 - `role_name`: Database role for authenticated users (defaults to `"neondb_owner"`)
 
