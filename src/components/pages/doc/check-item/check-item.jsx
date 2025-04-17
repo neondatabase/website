@@ -2,26 +2,19 @@
 
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React from 'react';
 import slugify from 'slugify';
 
 import Link from 'components/shared/link';
-import useLocalStorage from 'hooks/use-local-storage';
 
-const CheckItem = ({ title, href, children, ...otherProps }) => {
+const CheckItem = ({ title, href, children, checklist = [], onToggle, ...otherProps }) => {
   const id = slugify(title, {
     lower: true,
     strict: true,
     remove: /[*+~.()'"!:@]/g,
   }).replace(/_/g, '');
 
-  const [mounted, setMounted] = React.useState(false);
-  const [isChecked, setIsChecked] = useLocalStorage(`checklist-${id}`, false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
+  const isChecked = checklist.includes(id);
   const Tag = href ? Link : 'div';
 
   return (
@@ -39,8 +32,8 @@ const CheckItem = ({ title, href, children, ...otherProps }) => {
           )}
           type="checkbox"
           id={id}
-          checked={mounted ? isChecked : false}
-          onChange={() => setIsChecked((prev) => !prev)}
+          checked={isChecked}
+          onChange={() => onToggle(id)}
         />
         <h3 className="m-0 text-lg font-medium leading-tight tracking-extra-tight">
           <Tag className="" href={href || null} {...otherProps}>
@@ -57,6 +50,8 @@ CheckItem.propTypes = {
   title: PropTypes.string.isRequired,
   href: PropTypes.string,
   children: PropTypes.node.isRequired,
+  checklist: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onToggle: PropTypes.func.isRequired,
 };
 
 export default CheckItem;

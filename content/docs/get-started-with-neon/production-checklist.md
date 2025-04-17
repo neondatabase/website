@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2025-02-03T20:41:57.304Z'
 ---
 
-<CheckList>
+<CheckList id="production-checklist">
 
 ## Production checklist
 
