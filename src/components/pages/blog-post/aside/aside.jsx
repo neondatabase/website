@@ -10,7 +10,7 @@ import SocialShare from '../social-share';
 
 const Aside = ({ className, title, slug, authors, posts }) => (
   <aside className={clsx('aside ml-auto max-w-[298px] lg:ml-0 lg:max-w-full', className)}>
-    <div className="sticky top-24">
+    <div className="no-scrollbars sticky top-24 max-h-[calc(100vh-100px)] overflow-y-auto pb-5">
       {Array.isArray(authors) && authors.length > 0 && (
         <>
           <h3 className="mb-5 text-[12px] font-semibold uppercase leading-none -tracking-extra-tight text-blue-80 lg:hidden">
