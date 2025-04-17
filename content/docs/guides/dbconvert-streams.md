@@ -191,10 +191,7 @@ When setting up a CDC pipeline in DBConvert Streams:
 
 ## Allow inbound traffic
 
-If you are using Neon's **IP Allow** feature to limit IP addresses that can connect to Neon, you will need to allow inbound traffic from DBConvert Streams's IP addresses. You can find a IP address when deploying your instance of dbconvert streams in the cloud. For information about configuring allowed IPs in Neon, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
-
-
-
+If you are using Neon's **IP Allow** feature to limit IP addresses that can connect to Neon, you will need to allow inbound traffic from DBConvert Streams's IP addresses. You can find an IP address when deploying your instance of dbconvert streams in the cloud. For information about configuring allowed IPs in Neon, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 ## References
 
 - [DBConvert Streams Documentation](https://docs.dbconvert.com)
