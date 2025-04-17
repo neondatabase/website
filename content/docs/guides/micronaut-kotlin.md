@@ -14,6 +14,7 @@ To create a Neon project and access it from a Micronaut Kotlin application:
 3. [Configure the Postgres connection](#configure-the-postgres-connection)
 4. [Run the application](#run-the-application)
 
+<Steps>
 ## Create a Neon project
 
 If you do not have one already, create a Neon project. Save your connection details including your password. They are required when defining connection settings.
@@ -212,5 +213,6 @@ You can find the source code for the applications described in this guide on Git
 <DetailIconCards>
 <a href="https://github.com/neondatabase/examples/tree/main/with-micronaut-kotlin" description="Get started with Micronaut Kotlin and Neon" icon="github">Get started with Micronaut Kotlin and Neon</a>
 </DetailIconCards>
+</Steps>
 
 <NeedHelp/>
