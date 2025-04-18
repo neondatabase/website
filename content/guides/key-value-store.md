@@ -11,14 +11,14 @@ PostgreSQL is well known for its relational features, but it also offers powerfu
 
 ## Steps
 
-- Install and enable `hstore`
-- Create a table with an `hstore` column
-- Insert and query key-value data with `hstore`
-- Using `JSONB`
-- Create a table with a `JSONB` column
-- Insert and query key-value data with `JSONB`
-- Index key-value data for performance
-- `hstore` vs `JSONB`
+* [Install and enable `hstore`](#install-and-enable-hstore)
+* [Create a table with an `hstore` column](#create-a-table-with-an-hstore-column)
+* [Insert and query key-value data with `hstore`](#insert-and-query-key-value-data-with-hstore)
+* [Using `JSONB`](#using-jsonb)
+* [Create a table with a `JSONB` column](#create-a-table-with-a-jsonb-column)
+* [Insert and query key-value data with `JSONB`](#insert-and-query-key-value-data-with-jsonb)
+* [Index key-value data for performance](#index-key-value-data-for-performance)
+* [`hstore` vs `JSONB`](#hstore-vs-jsonb)
 
 ### Install and enable `hstore`
 
