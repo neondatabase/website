@@ -146,7 +146,7 @@ Export Neon metrics to DataDog and centralize your database monitoring with your
 
 **Recommendation**
 
-Set up DataDog integration to monitor key metrics:
+Set up DataDog integration to monitor and set alerts for key metrics:
 
 - Connection counts (active and idle database connections)
 - Database size (total size of all databases)
