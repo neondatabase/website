@@ -12,7 +12,11 @@ updatedOn: '2025-04-18T22:19:31.000Z'
 </DocsList>
 </InfoBlock>
 
-This guide shows you how to automatically generate a REST API from your Postgres schema using [PostgREST](https://postgrest.org/), an open-source tool that connects directly to your database. We'll walk through how to pair PostgREST with a Neon Postgres database in a local development environment.
+## What is PostgREST?
+
+PostgREST is a standalone web server that automatically turns your PostgreSQL database schema into a RESTful API. It uses the database's structure, constraints, and permissions to create API endpoints without requiring you to write any backend code. The API follows REST conventions and supports full CRUD operations, filtering, pagination, and even complex joins.
+
+This guide shows you how to set up PostgREST with a Neon Postgres database using Docker for local development. You'll learn how to configure basic read access, add authenticated endpoints with JWT tokens, and implement row-level security for fine-grained access control.
 
 <Steps>
 
