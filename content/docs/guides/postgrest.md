@@ -6,8 +6,20 @@ updatedOn: '2025-04-18T22:19:31.000Z'
 ---
 
 <InfoBlock>
-<DocsList title="Related docs" theme="docs">
+<DocsList title="What you will learn:">
+<p>What is PostgREST and how it works</p>
+<p>Setting up a Neon project for PostgREST</p>
+<p>Running PostgREST with Docker</p>
+<p>Adding authentication with JWT</p>
+<p>Implementing Row-Level Security</p>
+</DocsList>
+
+<DocsList title="Related resources" theme="docs">
 <a href="https://docs.postgrest.org/en/v12/">PostgREST Documentation</a>
+<a href="https://postgrest.org/en/v12/tutorials/tut0.html">PostgREST Tutorials</a>
+</DocsList>
+
+<DocsList title="Source code" theme="repo">
 <a href="https://github.com/PostgREST/postgrest">PostgREST GitHub Repository</a>
 </DocsList>
 </InfoBlock>
@@ -154,6 +166,8 @@ Example JWT payload for RLS:
 
 With this token, an API call to `/students` will only return records where `id = 1`.
 
+</Steps>
+
 ## Summary
 
 Using Neon and PostgREST, you can instantly expose your Postgres database as a REST API with full CRUD support and row-level access control—without writing any backend code.
@@ -193,7 +207,5 @@ Now that you have a basic PostgREST API running with Neon, here are some ways to
 
 - Browse [example applications](https://docs.postgrest.org/en/v12/ecosystem.html#example-apps) built with PostgREST to get inspiration for your own projects
 - Try out [templates](https://docs.postgrest.org/en/v12/ecosystem.html#templates) that combine PostgREST with various frontend technologies
-
-</Steps>
 
 <NeedHelp/>
