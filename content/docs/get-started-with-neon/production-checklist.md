@@ -3,7 +3,7 @@ title: Getting ready for production
 subtitle: A checklist of recommended settings to optimize performance, security, and
   reliability
 enableTableOfContents: true
-updatedOn: '2025-04-18T17:31:33.342Z'
+updatedOn: '2025-04-18T17:49:23.224Z'
 ---
 
 <CheckList id="production-checklist">
@@ -146,7 +146,7 @@ Export Neon metrics to DataDog and centralize your database monitoring with your
 
 **Recommendation**
 
-Set up DataDog integration to monitor key metrics:
+Set up DataDog integration to monitor and set alerts for key metrics:
 
 - Connection counts (active and idle database connections)
 - Database size (total size of all databases)

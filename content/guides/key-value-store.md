@@ -117,5 +117,5 @@ CREATE INDEX idx_jsonb_attrs ON products_json USING GIN (attributes);
 
 Both `hstore` and `JSONB` offer an alternative to external key-value stores and enable you to keep your key-value data in the same place as the rest of your data. Whether you choose `hstore` or `JSONB` depends on your needs:
 
-* If you need nested data, arrays, or any data type beyond strings, use `JSONB`.
-* If you need extra performance and are certain you don't need more complex data types, `hstore` can be faster for very simple key-value lookups and use less disk space.
+- If you need nested data, arrays, or any data type beyond strings, use `JSONB`.
+- If you need extra performance and are certain you don't need more complex data types, `hstore` can be faster for very simple key-value lookups and use less disk space.
