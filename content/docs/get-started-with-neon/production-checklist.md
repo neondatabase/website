@@ -145,13 +145,14 @@ Export Neon metrics to DataDog and centralize your database monitoring with your
 
 **Recommendation**
 
-Set up DataDog integration to:
+Set up DataDog integration to monitor key metrics:
 
-- Monitor compute resources (CPU, memory) alongside connection counts and database size
-- Track replication delays
-- Analyze resource usage and connection patterns
+- Connection counts (active and idle database connections)
+- Database size (total size of all databases)
+- Replication delay (lag in bytes and seconds)
+- Compute metrics (CPU and memory usage)
 
-For more information, see [DataDog integration](/docs/integrations/datadog).
+For more information, see [The Neon DataDog integration](/docs/guides/datadog).
 
 ## Ensure your app reconnects after your database restarts
 
