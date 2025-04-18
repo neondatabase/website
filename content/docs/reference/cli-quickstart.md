@@ -215,6 +215,8 @@ There's lots more you can do with the `connection-string` command. See [Neon CLI
 
 Now that you're set up with the Neon CLI, you can:
 
+- Create more Neon projects with `neon projects create`
+- Manage your branches with various `neon branches` commands such as `reset`, `restore`, `rename`, `schema-diff`, and more 
 - Create and manage databases with `neon databases create`
 - Create and manage roles with `neon roles create`
 - View the full set of Neon CLI commands available to you with `neon --help`
