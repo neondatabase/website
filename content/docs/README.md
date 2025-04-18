@@ -451,6 +451,39 @@ Create a new development branch off of `main`. This branch will be an exact, iso
 
 </details>
 
+## Checklist
+
+To display a checklist, use the `CheckList` component with `CheckItem` items inside.
+
+```md
+<CheckList id="checklist-id">
+
+<CheckItem title="Check item 1" href="#check-item-1">
+  Check item 1 description
+</CheckItem>
+
+<CheckItem title="Check item 2" href="#check-item-2">
+  Check item 2 description
+</CheckItem>
+
+</CheckList>
+```
+
+### Notes
+
+- You can use `id` prop to set the id of the checklist.
+- Checklist options saved in the browser local storage.
+- Checklists with the same `id` will use the same local storage between pages.
+- If you don't pass `id`, the id will be generated from the page `slug`.
+- The best practice is to use `CheckList` with the `Steps` component on the page.
+
+<details>
+<summary>Example</summary>
+
+![Checklist example](images/checklist-example.jpg)
+
+</details>
+
 ## Images
 
 The images should be sourced in `public/docs` directory and be used in `.md` with the relative path, that begins with a `/` slash
