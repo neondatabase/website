@@ -172,6 +172,7 @@ curl --request POST \
 See [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) for details.
 
 For more information:
+
 - [Build connection timeout handling into your application](/docs/connect/connection-latency#build-connection-timeout-handling-into-your-application)
 - [Maintenance & updates overview](/docs/manage/maintenance-updates-overview)
 
