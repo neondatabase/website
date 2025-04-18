@@ -163,12 +163,12 @@ Make sure to replace `yourusername` with your GitHub username or organization na
 Install the essential packages:
 
 ```bash
-go get github.com/lib/pq               # PostgreSQL driver
-go get github.com/gorilla/mux          # HTTP router
-go get github.com/golang-jwt/jwt/v5    # JWT library
-go get golang.org/x/crypto/bcrypt      # Password hashing
-go get github.com/google/uuid          # UUID generation
-go get github.com/joho/godotenv        # Load environment variables
+go get github.com/jackc/pgx/v5          # PostgreSQL driver
+go get github.com/gorilla/mux           # HTTP router
+go get github.com/golang-jwt/jwt/v5     # JWT library
+go get golang.org/x/crypto/bcrypt       # Password hashing
+go get github.com/google/uuid           # UUID generation
+go get github.com/joho/godotenv         # Load environment variables
 ```
 
 For this guide, let's focus on the key components we'll need:
@@ -189,7 +189,7 @@ import (
     "database/sql"
     "log"
 
-    _ "github.com/lib/pq"
+    _ "github.com/jackc/pgx/v5/stdlib"
 )
 
 // Connect establishes a connection to the Postgres database

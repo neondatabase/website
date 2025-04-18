@@ -136,11 +136,11 @@ go mod init github.com/yourusername/feature-flag-system
 Now let's install the required dependencies:
 
 ```bash
-go get github.com/lib/pq               # PostgreSQL driver
-go get github.com/gorilla/mux          # HTTP router
-go get github.com/joho/godotenv        # Environment variable management
-go get github.com/google/uuid          # For generating unique IDs
-go get github.com/jmoiron/sqlx         # Enhanced database operations
+go get github.com/jackc/pgx/v5          # PostgreSQL driver
+go get github.com/gorilla/mux           # HTTP router
+go get github.com/joho/godotenv         # Environment variable management
+go get github.com/google/uuid           # For generating unique IDs
+go get github.com/jmoiron/sqlx          # Enhanced database operations
 ```
 
 Create a basic project structure:
@@ -181,7 +181,7 @@ import (
 	"log"
 
 	"github.com/jmoiron/sqlx"
-	_ "github.com/lib/pq"
+	_ "github.com/jackc/pgx/v5/stdlib"
 )
 
 // DB is our database wrapper

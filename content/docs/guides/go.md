@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/go
   - /docs/integrations/go
-updatedOn: '2025-02-03T20:41:57.314Z'
+updatedOn: '2025-04-10T23:35:05.976Z'
 ---
 
 To connect to Neon from a Go application:
@@ -28,7 +28,7 @@ To create a Neon project:
 Connecting to Neon requires configuring connection settings in your Go project's `.go` file.
 
 <Admonition type="note">
-Neon is fully compatible with the `sql/db` package and common Postgres drivers, such as `lib/pq` and `pgx`.
+Neon is fully compatible with the `sql/db` package and common Postgres drivers, such as `pgx`.
 </Admonition>
 
 Specify the connection settings in your `.go` file, as shown in the following example:
@@ -37,10 +37,11 @@ Specify the connection settings in your `.go` file, as shown in the following ex
 package main
 
 import (
+    "context"
     "database/sql"
     "fmt"
 
-    _ "github.com/lib/pq"
+    _ "github.com/jackc/pgx/v5/stdlib"
 )
 
 func main() {
@@ -53,6 +54,36 @@ func main() {
 
     var version string
     if err := db.QueryRow("select version()").Scan(&version); err != nil {
+        panic(err)
+    }
+
+    fmt.Printf("version=%s\n", version)
+}
+```
+
+Alternatively, you can use the native pgx driver without the database/sql abstraction:
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/jackc/pgx/v5"
+)
+
+func main() {
+    connStr := "postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
+    conn, err := pgx.Connect(context.Background(), connStr)
+    if err != nil {
+        panic(err)
+    }
+    defer conn.Close(context.Background())
+
+    var version string
+    err = conn.QueryRow(context.Background(), "select version()").Scan(&version)
+    if err != nil {
         panic(err)
     }
 
