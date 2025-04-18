@@ -27,13 +27,16 @@ updatedOn: '2025-02-03T20:41:57.304Z'
 <CheckItem title="6. Restrict database access to trusted IPs" href="#restrict-database-access-to-trusted-ips">
   Secure your database by limiting connections to trusted IP addresses.
 </CheckItem>
-<CheckItem title="7. Install the Neon app for Slack" href="#install-the-neon-app-for-slack">
-  Get instant alerts about your production database in your team's Slack channel.
+<CheckItem title="7. Set up metrics export to DataDog" href="#set-up-metrics-export-to-datadog">
+  Export Neon metrics to DataDog and centralize your database monitoring with your existing observability stack.
 </CheckItem>
 <CheckItem title="8. Install pg_stat_statements" href="#install-pgstatstatements">
   Enable query performance monitoring to track execution times and frequency.
 </CheckItem>
-<CheckItem title="9. Upgrade to get priority support" href="#upgrade-to-a-neon-business-plan-for-priority-support">
+<CheckItem title="9. Ensure your app reconnects after your database restarts" href="#ensure-your-app-reconnects-after-your-database-restarts">
+  Verify your application handles compute restarts gracefully.
+</CheckItem>
+<CheckItem title="10. Upgrade to get priority support" href="#upgrade-to-a-neon-business-plan-for-priority-support">
   Get faster support and priority handling for your production database with a Business plan.
 </CheckItem>
 </CheckList>
@@ -136,20 +139,40 @@ Available with the Neon [Scale](/docs/introduction/plans#scale) and [Business](/
 
 ![IP allow setting settings](/docs/get-started-with-neon/ip_allow_settings.png)
 
-## Install the Neon app for Slack
+## Set up metrics export to DataDog
 
-Receive instant alerts about your production database directly in Slack, ensuring timely responses to issues.
+Export Neon metrics to DataDog and centralize your database monitoring with your existing observability stack.
 
 **Recommendation**
 
-Install the Neon app for Slack to monitor your Neon projects and receive critical alerts in your team channel. This integration helps you stay informed about your database's performance and resource usage.
+Set up DataDog integration to:
 
-**Key features for production**
+- Monitor compute resources (CPU, memory) alongside connection counts and database size
+- Track replication delays
+- Analyze resource usage and connection patterns
 
-- **Real-time alerts**: Immediate notifications about performance issues.
-- **Team collaboration**: Use `/neon subscribe` to add alerts to your team's channel, keeping everyone informed.
+For more information, see [DataDog integration](/docs/integrations/datadog).
 
-For more information, or to get started, see the [Neon App for Slack](/docs/manage/slack-app).
+## Ensure your app reconnects after your database restarts
+
+Verify your application handles compute restarts gracefully. Neon occasionally restarts computes for updates and maintenance.
+
+**Recommendation**
+
+Most database drivers and connection pools handle reconnection automatically, but it's important to test this behavior. You can use you use the Neon API to trigger a restart and watch your application reconnect:
+
+```bash shouldWrap
+curl --request POST \
+  --url https://console.neon.tech/api/v2/projects/your_project_id/endpoints/your_endpoint_id/restart \
+  --header 'accept: application/json' \
+  --header 'authorization: Bearer $NEON_API_KEY'
+```
+
+See [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) for details.
+
+For more information:
+- [Build connection timeout handling into your application](/docs/connect/connection-latency#build-connection-timeout-handling-into-your-application)
+- [Maintenance & updates overview](/docs/manage/maintenance-updates-overview)
 
 ## Install pg_stat_statements
 
