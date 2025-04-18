@@ -20,7 +20,7 @@ import Tag from '../tag';
 const Changelog = ({ posts }) => (
   <>
     <Hero />
-    <ChangelogForm />
+    <ChangelogForm className="mb-5 hidden xl:flex" />
     <ChangelogList className="mt-4" posts={posts} />
   </>
 );
@@ -128,10 +128,10 @@ const Post = ({
           )}
           {!isUseCase && (
             <div
-              className={
+              className={clsx(
                 enableTableOfContents &&
-                'mt-2.5 shrink-0 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70'
-              }
+                  'mt-2.5 shrink-0 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70'
+              )}
             >
               <EditOnGithub fileOriginPath={fileOriginPath} />
             </div>

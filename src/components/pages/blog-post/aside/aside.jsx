@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
+import ChangelogForm from 'components/shared/changelog-form';
 import Link from 'components/shared/link/link';
 import LINKS from 'constants/links';
 
@@ -9,7 +10,7 @@ import SocialShare from '../social-share';
 
 const Aside = ({ className, title, slug, authors, posts }) => (
   <aside className={clsx('aside ml-auto max-w-[298px] lg:ml-0 lg:max-w-full', className)}>
-    <div className="sticky top-24">
+    <div className="no-scrollbars sticky top-24 max-h-[calc(100vh-100px)] overflow-y-auto pb-5">
       {Array.isArray(authors) && authors.length > 0 && (
         <>
           <h3 className="mb-5 text-[12px] font-semibold uppercase leading-none -tracking-extra-tight text-blue-80 lg:hidden">
@@ -97,6 +98,7 @@ const Aside = ({ className, title, slug, authors, posts }) => (
         ))}
       </ul>
       <SocialShare className="mt-16 lg:hidden" title={title} slug={slug} withTopBorder />
+      <ChangelogForm isSidebar />
     </div>
   </aside>
 );
