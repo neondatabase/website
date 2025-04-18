@@ -7,7 +7,6 @@ import useWindowSize from 'react-use/lib/useWindowSize';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
-import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import useIsSafari from 'hooks/use-is-safari';
 import branchingIcon from 'icons/home/hero/branching.svg';
@@ -123,18 +122,20 @@ const Hero = () => {
               to={LINKS.signup}
               target="_blank"
               tagName="Hero"
-              analyticsEvent="home_hero_get_started_clicked"
+              analyticsEvent="home_hero_start_for_free_clicked"
             >
               Start for Free
             </Button>
-            <Link
+            <Button
               className="text-[15px] font-medium"
               theme="white"
               to={LINKS.contactSales}
+              tagName="Hero"
+              analyticsEvent="home_hero_talk_to_us_clicked"
               withArrow
             >
               Talk to Us
-            </Link>
+            </Button>
           </div>
         </div>
 
