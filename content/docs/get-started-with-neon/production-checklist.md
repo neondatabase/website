@@ -1,8 +1,9 @@
 ---
 title: Getting ready for production
-subtitle: A checklist of recommended settings to optimize performance, security, and reliability
+subtitle: A checklist of recommended settings to optimize performance, security, and
+  reliability
 enableTableOfContents: true
-updatedOn: '2025-02-03T20:41:57.304Z'
+updatedOn: '2025-04-18T17:31:33.342Z'
 ---
 
 <CheckList id="production-checklist">
