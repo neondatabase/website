@@ -1,5 +1,5 @@
 ---
-title: Getting started with the Neon CLI
+title: Neon CLI Quickstart
 subtitle: Learn how to use the Neon CLI to manage your Neon resources
 enableTableOfContents: true
 updatedOn: '2025-04-18T11:00:00.000Z'

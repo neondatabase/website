@@ -520,7 +520,7 @@
       icon: cli
       slug: reference/neon-cli
       items:
-        - title: Getting started
+        - title: Quickstart
           slug: reference/cli-quickstart
         - title: Install and connect
           slug: reference/cli-install
