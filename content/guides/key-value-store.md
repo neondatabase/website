@@ -11,14 +11,14 @@ PostgreSQL is well known for its relational features, but it also offers powerfu
 
 ## Steps
 
-* Install and enable `hstore`
-* Create a table with an `hstore` column
-* Insert and query key-value data with `hstore`
-* Using `JSONB`
-* Create a table with a `JSONB` column
-* Insert and query key-value data with `JSONB`
-* Index key-value data for performance
-* `hstore` vs `JSONB`
+- Install and enable `hstore`
+- Create a table with an `hstore` column
+- Insert and query key-value data with `hstore`
+- Using `JSONB`
+- Create a table with a `JSONB` column
+- Insert and query key-value data with `JSONB`
+- Index key-value data for performance
+- `hstore` vs `JSONB`
 
 ### Install and enable `hstore`
 
@@ -117,5 +117,5 @@ CREATE INDEX idx_jsonb_attrs ON products_json USING GIN (attributes);
 
 Both `hstore` and `JSONB` offer an alternative to external key-value stores and enable you to keep your key-value data in the same place as the rest of your data. Whether you choose `hstore` or `JSONB` depends on your needs:
 
-* If you need nested data, arrays, or any data type beyond strings, use `JSONB`.
-* If you need extra performance and are certain you don't need more complex data types, `hstore` can be faster for very simple key-value lookups and use less disk space.
+- If you need nested data, arrays, or any data type beyond strings, use `JSONB`.
+- If you need extra performance and are certain you don't need more complex data types, `hstore` can be faster for very simple key-value lookups and use less disk space.
