@@ -19,6 +19,7 @@
 - [Neon Frameworks - React](https://neon.tech/llms/frameworks-react.txt): Connect a React application to Neon
 - [Neon Frameworks - Reflex](https://neon.tech/llms/frameworks-reflex.txt): Build a Python app with Reflex and Neon
 - [Neon Frameworks - Remix](https://neon.tech/llms/frameworks-remix.txt): Connect a Remix application to Neon
+- [Neon Frameworks - Micronaut Kotlin](https://neon.tech/llms/frameworks-micronaut-kotlin.txt): Connect a Micronaut Kotlin application to Neon
 - [Neon Frameworks - Symfony](https://neon.tech/llms/frameworks-symfony.txt): Connect from Symfony with Doctrine to Neon
 - [Neon Frameworks - SolidStart](https://neon.tech/llms/frameworks-solidstart.txt): Connect a SolidStart application to Neon
 - [Neon Frameworks - SvelteKit](https://neon.tech/llms/frameworks-sveltekit.txt): Connect a SvelteKit application to Neon

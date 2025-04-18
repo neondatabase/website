@@ -27,6 +27,8 @@ updatedOn: '2025-02-24T15:53:13.354Z'
 
 <a href="/docs/guides/quarkus-reactive" title="Quarkus" description="Connect Quarkus (Reactive) to Neon" icon="quarkus"></a>
 
+<a href="/docs/guides/micronaut-kotlin" title="Micronaut Kotlin" description="Connect a Micronaut Kotlin application to Neon" icon="micronaut"></a>
+
 <a href="/docs/guides/react" title="React" description="Connect a React application to Neon" icon="react"></a>
 
 <a href="/docs/guides/reflex" title="Reflex" description="Build Python Apps with Reflex and Neon" icon="reflex"></a>
