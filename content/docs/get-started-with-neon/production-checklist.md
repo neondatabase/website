@@ -201,7 +201,7 @@ You can also use the **Monitoring Dashboard** in the Neon Console to view live g
 
 ![Monitoring page connections graph](/docs/introduction/monitor_connections.png)
 
-For more information, see [Query performancee](/docs/postgresql/query-performance) and [Monitoring](/docs/introduction/monitoring).
+For more information, see [Query performance](/docs/postgresql/query-performance) and [Monitoring](/docs/introduction/monitoring).
 
 ## Upgrade to a Neon Business plan for priority support
 
