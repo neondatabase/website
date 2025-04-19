@@ -1,5 +1,6 @@
 ---
-title: Deploying Neon on Azure
+title: Deploy Neon on Azure
+subtitle: Learn how to deploy Neon as a Native ISV Service on Azure
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2025-04-08T22:55:27.451Z'
@@ -10,33 +11,23 @@ updatedOn: '2025-04-08T22:55:27.451Z'
 <InfoBlock>
 
 <DocsList title="What you will learn:">
-<p>How to deploy the Neon native integration on Azure</p>
-<p>About creating Neon projects in Azure regions (no integration)</p>
+<p>How to deploy on Azure as a native service</p>
 </DocsList>
 
 <DocsList title="Related resources" theme="docs">
   <a href="/docs/manage/azure">Neon on Azure</a>
-  <a href="/docs/manage/azure-deploy">Deploying Neon on Azure</a>
+  <a href="/docs/manage/azure-develop">Developing with Neon on Azure</a>
 </DocsList>
 
 </InfoBlock>
 
-[Neon is available on the Azure Marketplace](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/neon1722366567200.neon_serverless_postgres_azure_prod?tab=Overview) as an [Azure Native ISV Service](https://learn.microsoft.com/en-us/azure/partner-solutions/partners), allowing you to work with Neon the same way you work with other native solutions from Microsoft. Billing is handled directly through Azure, and you can choose from Neon pricing plans when setting up the integration.
+[Neon is available on the Azure Marketplace](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/neon1722366567200.neon_serverless_postgres_azure_prod?tab=Overview) as an [Azure Native ISV Service](https://learn.microsoft.com/en-us/azure/partner-solutions/partners), allowing you to work with Neon the same way you work with other native solutions from Microsoft. 
 
-For supported Azure regions, refer to our [Regions](/docs/introduction/regions) page.
+This guide steps you through deploying Neon as an Azure native service.
 
 <Admonition type="note">
 You can also create Neon projects in Azure regions without the integration — to learn more, see [Create Neon projects in Azure regions (no integration)](docs/manage/azure#option-2-create-neon-projects-in-azure-regions-no-integration).
 </Admonition>
-
-## Deployment options on Azure
-
-Neon offers the following deployment options on Azure:
-
-- **Option 1: Deploy Neon as an Azure Native ISV Service** — use Neon as a native Azure service, integrated with the [Azure portal](https://portal.azure.com/#home), [CLI](https://learn.microsoft.com/en-us/cli/azure/neon?view=azure-cli-latest), and [SDKs](https://learn.microsoft.com/en-us/dotnet/api/overview/azure/neonpostgres?view=azure-dotnet-preview). This option enables you to manage Neon as part of your Azure infrastructure with unified billing in Azure.
-  <PublicPreview/>
-- **Option 2: Create Neon projects in Azure regions (no integration)** — create a Neon project in an Azure region without using the native Azure integration. Project creation and billing is managed through Neon. There is no difference from a Neon project created in an AWS region — your Neon project simply resides in an Azure region instead of AWS region.
-
 
 ## Prerequisites
 
@@ -94,11 +85,15 @@ Neon offers the following deployment options on Azure:
 
    ![Project page in Neon](/docs/introduction/azure_neon_project_page.png)
 
-1. From here, you can follow the [Neon Getting Started](/docs/get-started-with-neon/signing-up) to start working with your Neon project and familiarizing yourself with the Neon platform.
+1. From here, you can follow the [Neon Getting Started](/docs/get-started-with-neon/signing-up) to start working with your Neon project and familiarize yourself with the Neon platform.
 
 ## Create Neon projects in Azure regions (no integration)
 
-If you want to deploy a Neon project to an Azure region without using the **Azure Native ISV Service** integration, you can simply select one of our supported Azure regions when creating a Neon project. You might consider this option if:
+If you want to deploy a Neon project to an Azure region without using the **Azure Native ISV Service** integration, you can simply select one of our supported Azure regions when creating a Neon project from the Neon Console. 
+
+If you do not use the Azure integration, there is no difference from a Neon project created in an AWS region — your Neon project simply resides in an Azure region instead of AWS region.
+
+You might consider this option if:
 
 - Part of your infrastructure runs on Azure but you don't need the native integration
 - An Azure region is closer to your application than a Neon AWS region

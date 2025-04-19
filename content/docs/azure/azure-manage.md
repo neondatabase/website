@@ -1,5 +1,6 @@
 ---
-title: Managing Neon on Azure
+title: Manage Neon on Azure
+subtitle: Instructions for managing your Neon resource on Azure
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2025-04-08T22:55:27.451Z'

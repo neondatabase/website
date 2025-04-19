@@ -1,5 +1,5 @@
 ---
-title: Developing with Neon on Azure
+title: Develop with Neon on Azure
 subtitle: Find the resources you need to start developing with Neon on Azure
 enableTableOfContents: true
 isDraft: false
@@ -10,16 +10,16 @@ updatedOn: '2025-04-08T22:55:27.451Z'
 
 <InfoBlock>
 
-<DocsList title="What you will find here:">
+<DocsList title="What you will find on this page:">
   <p>Getting started resources</p>
   <p>How to connect</p>
-  <p>Azure CLIs, SDKs, and APIs</p>
+  <p>Azure CLIs and SDKs</p>
   <p>Azure-focussed guides, sample apps, and tutorials</p>
 </DocsList>
 
 <DocsList title="Related resources" theme="docs">
   <a href="/docs/manage/azure">Neon on Azure</a>
-  <a href="/docs/manage/azure-develop">Develop with Neon on Azure</a>
+  <a href="/docs/manage/azure-deploy">Deploy Neon on Azure</a>
 </DocsList>
 
 </InfoBlock>
