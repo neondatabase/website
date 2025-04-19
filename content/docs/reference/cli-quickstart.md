@@ -2,7 +2,7 @@
 title: Neon CLI Quickstart
 subtitle: Learn how to use the Neon CLI to manage your Neon resources
 enableTableOfContents: true
-updatedOn: '2025-04-19T00:09:59.925Z'
+updatedOn: '2025-04-19T00:14:19.027Z'
 ---
 
 The Neon CLI is a command-line interface that lets you manage Neon directly from the terminal. This guide will help you quickly set up and start using the Neon CLI.
