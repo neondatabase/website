@@ -181,7 +181,7 @@ Here are some common operations you can perform with the Neon CLI:
 neon projects list
 ```
 
-If you want to list projects in your organization, don't forget to set your organization context or specify your `--org-id <your-org-id>`. Otherwise, you'll list the projects in your personal Neon account.
+If you want to list projects in your organization, don't forget to set your organization context or specify `--org-id <your-org-id>`. Otherwise, you'll list the projects in your personal Neon account.
 
 For more about the `projects` command, see [Neon CLI commands — projects](/docs/reference/cli-projects).
 
