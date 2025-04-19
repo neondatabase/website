@@ -214,7 +214,8 @@ To delete your database:
 
 1. On the Vercel Dashboard, navigate to **Storage** tab.
 2. Select **Settings**.
-3. Navigate to the Delete Database section and follow the instructions.
+3. Select your Database, if you have more than one.
+4. Navigate to the **Delete Database** section and follow the instructions.
 
 This action is not reversible, so please proceed with caution.
 
