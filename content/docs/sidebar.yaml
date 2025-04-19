@@ -439,6 +439,13 @@
     - title: Neon on Azure
       slug: manage/azure
       icon: azure
+      items:
+        - title: Deploy Neon on Azure
+          slug: azure/azure-deploy
+        - title: Manage Neon on Azure
+          slug: azure/azure-manage
+        - title: Develop with Neon on Azure
+          slug: azure/azure-develop
 - section: AI with Neon
   icon: ai
   items:
