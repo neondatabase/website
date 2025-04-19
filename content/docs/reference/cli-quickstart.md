@@ -18,16 +18,19 @@ Choose your platform and install the Neon CLI:
 <TabItem>
 
 **Install with Homebrew**
+
 ```bash
 brew install neonctl
 ```
 
 **Install via npm**
+
 ```shell
 npm i -g neonctl
 ```
 
 **Install with bun**
+
 ```bash
 bun install -g neonctl
 ```
@@ -37,11 +40,13 @@ bun install -g neonctl
 <TabItem>
 
 **Install via npm**
+
 ```shell
 npm i -g neonctl
 ```
 
 **Install with bun**
+
 ```bash
 bun install -g neonctl
 ```
@@ -51,11 +56,13 @@ bun install -g neonctl
 <TabItem>
 
 **Install via npm**
+
 ```shell
 npm i -g neonctl
 ```
 
 **Install with bun**
+
 ```bash
 bun install -g neonctl
 ```
@@ -65,6 +72,7 @@ bun install -g neonctl
 </Tabs>
 
 Verify the installation by checking the CLI version:
+
 ```bash
 neon --version
 ```
@@ -120,7 +128,7 @@ $ cat .neon
 
 {
   "projectId": "cool-darkness-12345678"
-}%                         
+}%
 ```
 
 You can also create named context files for different projects:
@@ -141,7 +149,7 @@ To switch contexts, add the `--context-file` option to any command, specifying y
 neon branches list --context-file Documents/my-org-context
 ```
 
-For more about the `set-context` command, see [Neon CLI commands — set-context](/docs/reference/cli-set-context). 
+For more about the `set-context` command, see [Neon CLI commands — set-context](/docs/reference/cli-set-context).
 
 ## Enable shell completion
 
@@ -216,7 +224,7 @@ There's lots more you can do with the `connection-string` command. See [Neon CLI
 Now that you're set up with the Neon CLI, you can:
 
 - Create more Neon projects with `neon projects create`
-- Manage your branches with various `neon branches` commands such as `reset`, `restore`, `rename`, `schema-diff`, and more 
+- Manage your branches with various `neon branches` commands such as `reset`, `restore`, `rename`, `schema-diff`, and more
 - Create and manage databases with `neon databases create`
 - Create and manage roles with `neon roles create`
 - View the full set of Neon CLI commands available to you with `neon --help`
