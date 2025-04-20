@@ -12,6 +12,8 @@ To connect to Neon from Laravel:
 1. [Create a Neon Project](#create-a-neon-project)
 2. [Configure the connection](#configure-the-connection)
 
+<Steps>
+
 ## Create a Neon project
 
 If you do not have one already, create a Neon project. Save your connection details including your password. They are required when defining connection settings.
@@ -34,6 +36,8 @@ DB_PASSWORD=[password]
 ```
 
 You can find your database connection details by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+
+</Steps>
 
 ## Connection issues
 

@@ -22,6 +22,8 @@ To connect to Neon from a Node.js application:
 4. [Configure the Postgres client](#configure-the-postgres-client)
 5. [Run app.js](#run-appjs)
 
+<Steps>
+
 ## Create a Neon project
 
 If you do not have one already, create a Neon project.
@@ -222,6 +224,8 @@ Run `node app.js` to view the result.
   version: 'PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit'
 }
 ```
+
+</Steps>
 
 ## Endpoint ID variable
 

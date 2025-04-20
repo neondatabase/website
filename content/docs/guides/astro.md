@@ -15,6 +15,8 @@ To create a Neon project and access it from an Astro site or application:
 3. [Configure a Postgres client](#configure-the-postgres-client)
 4. [Run the app](#run-the-app)
 
+<Steps>
+
 ## Create a Neon project
 
 If you do not have one already, create a Neon project. Save your connection details including your password. They are required when defining connection settings.
@@ -122,6 +124,8 @@ When you run `npm run dev` you can expect to see the following when you visit [l
 ```shell shouldWrap
 PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
 ```
+
+</Steps>
 
 ### Server Endpoints (API Routes)
 

@@ -18,6 +18,8 @@ To connect to Neon from a .NET application:
 3. [Store your Neon credentials](#store-your-neon-credentials)
 4. [Perform database operations](#perform-database-operations)
 
+<Steps>
+
 ## Create a Neon project
 
 If you do not have one already, create a Neon project.
@@ -195,6 +197,8 @@ using(var conn = new NpgsqlConnection(connString))
     }
 }
 ```
+
+</Steps>
 
 ## Best Practices
 
