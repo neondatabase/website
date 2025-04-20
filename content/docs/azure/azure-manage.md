@@ -3,7 +3,7 @@ title: Manage Neon on Azure
 subtitle: Instructions for managing your Neon resource on Azure
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-04-08T22:55:27.451Z'
+updatedOn: '2025-04-20T13:56:04.995Z'
 ---
 
 <PublicPreview/>

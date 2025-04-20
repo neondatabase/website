@@ -3,7 +3,7 @@ title: Neon on Azure
 subtitle: Use Neon on Azure as a Native ISV Service
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-04-08T22:55:27.451Z'
+updatedOn: '2025-04-20T13:56:04.997Z'
 ---
 
 <PublicPreview/>
