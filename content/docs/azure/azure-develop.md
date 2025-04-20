@@ -77,6 +77,7 @@ Azure provides an Azure-native CLI and SDKs for working with the Neon platform. 
 - [SQL query assistant with .NET and Azure OpenAI](https://neon.tech/blog/building-sql-query-assistant-with-dotnet-azure-functions-openai) - Build an intelligent SQL query assistant with Neon, .NET, and Azure OpenAI
 - [Generative feedback loops with Azure OpenAI](https://neon.tech/blog/generative-feedback-loops-with-neon-serverless-postgres-azure-functions-and-azure-openai) - Create generative feedback loops with Neon, Azure Functions, and Azure OpenAI
 - [Build your first AI agent for Postgres on Azure](https://neon.tech/guides/azure-ai-agent-service) — Build an AI agent for Postgres using Azure AI Agent Service
+- [Semantic Kernel](/docs/ai/semantic-kernel) — Build AI RAG and agentic workflows with Semantic Kernel and Neon
 
 ## Frameworks & languages
 
