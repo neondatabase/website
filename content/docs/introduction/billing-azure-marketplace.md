@@ -53,11 +53,15 @@ Changing the Neon pricing plan for an Azure subscription involves the following 
 1. Navigate to the [Azure portal](https://portal.azure.com/) and sign in.
 2. Locate your Neon Serverless Postgres resource by searching for it at the top of the page or locating it under **Resources** or **Navigate** > **All resources**.
 3. Select your Neon resource to open the **Overview** page.
-4. Select the **Change Plan** tab. This will open the **Change Plan** drawer where you can select from available Neon plans. Supported plans include the Neon Free Plan, Scale Plan, and Business Plan. A description of what's included in each plan is provided in the **Description** column in the drawer, but for more information about Neon plans, please visit our [Pricing](https://neon.tech/pricing) page.
+4. Select the **Change Plan** tab. This will open the **Change Plan** drawer where you can select from available Neon plans. A description of what's included in each plan is provided in the **Description** column in the drawer, but for more information about Neon plans, please visit our [Pricing](https://neon.tech/pricing) page.
 
    ![Azure change plan](/docs/introduction/azure_change_plan.png)
 
 5. Click **Change Plan** to complete the plan change.
+
+## Stop billing on Azure
+
+To stop billing for Neon on Azure, you can remove your Neon resource. For instructions, see [Deleting a Neon resource in Azure](/docs/azure/azure-manage#deleting-a-neon-resource-in-azure).
 
 ## Questions?
 

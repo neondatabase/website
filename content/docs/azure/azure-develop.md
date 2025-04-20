@@ -26,6 +26,8 @@ updatedOn: '2025-04-08T22:55:27.451Z'
 
 ## Azure CLIs and SDKs for Neon
 
+Azure provides an Azure-native CLI and SDKs for working with the Neon platform. In addition, the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), [CLI](/docs/reference/neon-cli), and [SDKs](https://neon.tech/docs/reference/sdk) are also available to you.
+
 <DetailIconCards>
 
 <a href="https://learn.microsoft.com/en-us/cli/azure/neon?view=azure-cli-latest" description="Manage your Neon Resource with the Azure CLI" icon="cli">Azure CLI — az neon</a>
@@ -45,11 +47,11 @@ updatedOn: '2025-04-08T22:55:27.451Z'
 ## Getting started
 
 - [Get started with Neon Serverless Postgres on Azure](https://neon.tech/guides/neon-azure-integration) — A step-by-step guide to deploying Neon's serverless Postgres via the Azure Marketplace
-- [Familiarize yourself with Neon](/docs/get-started-with-neon/signing-up) — Get to know Neon by stepping through our official getting started guides
+- [Familiarize yourself with Neon](/docs/get-started-with-neon/signing-up) — Get to know the Neon platform and features by stepping through our official getting started guides
 
 ## Migrate data to Neon on Azure
 
-- [Migrate data from Azure PostgreSQL](https://neon.tech/docs/import/migrate-from-azure-postgres) - Replicate data from Azure PostgreSQL to
+- [Migrating data to Neon](/docs/import/migrate-intro) — learn how to move data to Neon from various sources using different migration tools and methods
 
 ## Connect to Neon
 

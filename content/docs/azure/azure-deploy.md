@@ -12,6 +12,7 @@ updatedOn: '2025-04-08T22:55:27.451Z'
 
 <DocsList title="What you will learn:">
 <p>How to deploy on Azure as a native service</p>
+<p>About creating Neon projects in Azure regions without the integration</p>
 </DocsList>
 
 <DocsList title="Related resources" theme="docs">
@@ -26,7 +27,7 @@ updatedOn: '2025-04-08T22:55:27.451Z'
 This guide steps you through deploying Neon as an Azure native service.
 
 <Admonition type="note">
-You can also create Neon projects in Azure regions without the integration — to learn more, see [Create Neon projects in Azure regions (no integration)](docs/manage/azure#option-2-create-neon-projects-in-azure-regions-no-integration).
+You can also create Neon projects in Azure regions without the native service integration—to learn more, see [Create Neon projects in Azure regions without the integration](#create-neon-projects-in-azure-regions-without-the-integration).
 </Admonition>
 
 ## Prerequisites
@@ -53,7 +54,7 @@ You can also create Neon projects in Azure regions without the integration — t
    | **Subscription**           | From the drop-down, select an Azure subscription where you have Owner or Contributor access.                                                                                                                                                                                                                                                                                                                                                              |
    | **Resource group**         | Select an existing Azure resource group or create a new one. A resource group is like a container or a folder used to organize and manage resources in Azure. For more information, see [Azure Resource Group overview](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview).                                                                                                                                              |
    | **Resource Name**          | Enter a name for the Azure resource representing your Neon organization. This name is used only in Azure.                                                                                                                                                                                                                                                                                                                                                 |
-   | **Region**                 | Select a region to deploy your Azure resource. This is the region for your Azure resource, not for your Neon projects and data. Neon will let you select from [supported regions](/docs/introduction/regions#azure-regions) when you create a Neon project, which you'll do after setting up the Neon resource in Azure. For example, you can create a Neon resource in the (US) West US 3 region and create a Neon project (Europe) Germany West Central |
+   | **Region**                 | Select a region to deploy your Azure resource. This is the region for your Azure resource, not for your Neon projects and data. You will select from [Azure-supported regions](/docs/introduction/regions#azure-regions) when you create the Neon project in a later step. For example, you can create a Neon resource in the (US) West US 3 region and create a Neon project (Europe) Germany West Central. |
    | **Neon Organization name** | Provide a name for your [Neon Organization](/docs/reference/glossary#organization), such as a team name or company name. The name you specify will be your [Organization](/docs/reference/glossary#organization) name in the Neon Console. Your Neon projects will reside in this named organization.                                                                                                                                                     |
    | **Plan**                   | Select a plan. You have three to choose from: **Free**, **Scale**, and **Business**. Select **Change Plan** to view details about each plan. For more information about Neon's plans, please refer to the [Neon Pricing](https://neon.tech/home) page. The Neon **Launch Plan** is currently not available in the Azure Marketplace.                                                                                                                      |
    | **Billing term**           | Select a billing term for the selected plan. You can choose from a **1-Month** or a **1-Year** billing term (monthly or yearly billing).                                                                                                                                                                                                                                                                                                                  |
@@ -64,6 +65,10 @@ You can also create Neon projects in Azure regions without the integration — t
 1. On the **Project** page, enter a name for your Neon project, select a Postgres version, specify a name for your database, and choose a region. We recommend selecting the region closest to your application.
 
    ![Create project in Azure](/docs/introduction/azure_create_project.png)
+
+      <Admonition type="note">
+        A Neon organization created via the Azure portal supports creating Neon projects in [Azure regions](/docs/introduction/regions#azure-regions) only. Neon's AWS regions are not supported with Neon on Azure.
+      </Admonition>
 
 1. Click **Next**.
 1. Optionally specify tags for your resource, then click **Next**. For more about tags, see [Use tags to organize your Azure resources](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources).
@@ -79,19 +84,15 @@ You can also create Neon projects in Azure regions without the integration — t
 
    You will be directed to the Neon Console where you can start working with your newly created Neon organization and project.
 
-   <Admonition type="note">
-   A Neon Organization created via the Azure portal supports creating Neon projects in Azure regions only.
-   </Admonition>
-
    ![Project page in Neon](/docs/introduction/azure_neon_project_page.png)
 
-1. From here, you can follow the [Neon Getting Started](/docs/get-started-with-neon/signing-up) to start working with your Neon project and familiarize yourself with the Neon platform.
+1. From here, follow the [Neon Getting Started](/docs/get-started-with-neon/signing-up) guide to begin working with your Neon project and get familiar with the platform.
 
-## Create Neon projects in Azure regions (no integration)
+## Create Neon projects in Azure regions without the integration
 
 If you want to deploy a Neon project to an Azure region without using the **Azure Native ISV Service** integration, you can simply select one of our supported Azure regions when creating a Neon project from the Neon Console. 
 
-If you do not use the Azure integration, there is no difference from a Neon project created in an AWS region — your Neon project simply resides in an Azure region instead of AWS region.
+If you do not use the Azure integration, there is no difference from a Neon project created in an AWS region—your Neon project simply resides in an Azure region instead of AWS region.
 
 You might consider this option if:
 

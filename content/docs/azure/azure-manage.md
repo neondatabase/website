@@ -23,7 +23,7 @@ updatedOn: '2025-04-08T22:55:27.451Z'
 
 </InfoBlock>
 
-This topic describes how to manage your Neon resource on Azure. It covers how to create additional Neon projects, how to transfer Neon projects to an Azure-created Neon organization, how to delete a Neon resource on Azure, and troubleshooting.
+This topic describes how to manage your Neon resource on Azure. It covers how to create additional Neon projects, how to transfer Neon projects to an Azure-created Neon organization, how to delete a Neon resource, and troubleshooting.
 
 ## Creating additional Neon projects
 
@@ -39,16 +39,18 @@ See [Create a project](/docs/manage/projects#create-a-project) for how to create
 
 You can transfer existing Neon projects to an Azure-created organization, but note these restrictions:
 
-- The Neon project must belong to a personal Neon account, not an organization. Transfers between organizations are not yet supported.
-- The Neon project must be in an [Azure region](/docs/introduction/regions#azure-regions). Azure-created Neon organizations do not support projects created in [AWS regions](/docs/introduction/regions#aws-regions).
-- The billing plan of the Azure-managed organization must match or exceed the billing plan of the personal Neon account you are transferring projects from. For example, attempting to transfer projects from a Scale plan personal account to a Free plan organization will result in an error.
+- The Neon project you are transferring must belong to a personal Neon account, not an organization.
+- The Neon project you are transferring must be in an [Azure region](/docs/introduction/regions#azure-regions). Azure-created Neon organizations do not support projects created in [AWS regions](/docs/introduction/regions#aws-regions).
+- The billing plan of the Azure-managed organization must match or exceed the billing plan of the personal Neon account you are transferring projects from. For example, attempting to transfer projects from a Neon paid plan personal account to a Free plan Azure-managed organization will result in an error.
 
 For detailed transfer steps, see [Transfer projects to an organization](/docs/manage/orgs-project-transfer).
 
 If the restrictions above prevent you from transferring your project, consider these options:
 
 - Open a [support ticket](https://console.neon.tech/app/projects?modal=support) for assistance with transferring your Neon project (supported only for projects that reside in [Azure regions](/docs/introduction/regions#azure-regions)). If you're on the Neon Free Plan and can't open a support ticket, you can email Neon support at `support@neon.tech`.
-- Migrate your data to the Azure organization project using `pg_dump` and `pg_restore`. Refer to [Migrate data from Postgres with pg_dump and pg_restore](/docs/import/migrate-from-postgres#run-a-test-migration) for instructions.
+- Create a new Neon project in an Azure-managed organization and migrate your database using one of these options:
+    - [Neon Import Data Assistant](/docs/import/import-data-assistant)
+    - [pg_dump and pg_restore](/docs/import/migrate-from-postgres#run-a-test-migration)
 
 ## Deleting a Neon Resource in Azure
 
