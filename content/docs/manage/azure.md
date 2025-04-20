@@ -11,6 +11,7 @@ updatedOn: '2025-04-20T13:56:04.997Z'
 [Neon is available on the Azure Marketplace](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/neon1722366567200.neon_serverless_postgres_azure_prod?tab=Overview) as an [Azure Native ISV Service](https://learn.microsoft.com/en-us/azure/partner-solutions/partners), allowing you to work with Neon the same way you work with other native solutions from Microsoft. Billing is handled directly through Azure, and you can choose from Neon pricing plans when deploying the service.
 
 ## Key benefits
+
 Deploying Neon natively on Azure lets you manage your Neon organization alongside the rest of your Azure infrastructure. Key benefits include:
 
 - **Azure-native management**: Provision and manage Neon organizations directly from the Azure portal.
