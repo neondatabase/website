@@ -6,7 +6,7 @@ updatedOn: '2024-08-23T09:00:00.000Z'
 image: '/images/social-previews/use-cases/db-per-tenant.jpg'
 ---
 
-<Admonition type="note" title="TL;DR">
+<Admonition type="note" title="Summary">
 Neon makes it easy to isolate each tenant in their own Postgres database with instance-level isolation, without the cost or complexity this architecture requires on other services (like AWS RDS).
 
 - **No more noisy neighbors** - Every customer runs on a separate Neon project, ensuring stable performance and reducing cross-tenant risk.
@@ -74,10 +74,6 @@ Neon reimagines Postgres for modern SaaS. With serverless infrastructure, autosc
 
 ![Database-per-user](/use-cases/database-per-user.jpg)
 
-<Admonition type="note" title="Tip">
-You can also migrate schemas across thousands of projects [automatically.](https://neon.tech/blog/migrating-schemas)
-</Admonition>
-
 ### Scale each tenant independently
 
 In RDS, you’d have to choose an instance size and disk allocation up front—and scale manually as usage changes. With Neon, compute autoscales on demand, and storage grows and shrinks automatically. **You don’t need to provision compute or storage in advance.** Every tenant gets their own resources, and those resources scale automatically based on usage. No manual resizing, no idle waste. 
@@ -86,7 +82,7 @@ In RDS, you’d have to choose an instance size and disk allocation up front—a
 - **Scale to zero when idle** - If a tenant isn’t using their database, Neon pauses compute and you pay nothing until they return.
 - **Fine-grained control** - Set compute limits, quotas, and performance policies per tenant to match their plan or use case.
 
-<Admonition type="note" title="Tip">
+<Admonition type="note" title="Dive deeper">
 Keep reading about how [compute autoscaling](https://neon.tech/docs/introduction/autoscaling) works in Neon.
 </Admonition>
 
@@ -102,7 +98,7 @@ Neon takes a completely different approach. Thanks to our copy-on-write storage 
 
 This is especially valuable in B2B SaaS platforms, where customers may request a rollback to a specific date due to data errors, user mistakes, or compliance requirements. With Neon, you can fulfill these requests in seconds—without escalation, without disruption, and without touching the rest of your fleet.
 
-<Admonition type="note" title="Tip">
+<Admonition type="note" title="Dive deeper">
 Learn more about how [instant restore](https://neon.tech/docs/introduction/branch-restore) works in Neon.
 </Admonition>
 
@@ -116,7 +112,7 @@ Neon was built to help you manage thousands of Postgres databases like they’re
 - **Billing aligned to actual usage** - Neon’s pricing is based on consumption—not provisioned capacity—so you only pay for what each tenant uses.
 - **One engineer can manage thousands of tenants** - With the right automation in place, there's no need for a large DevOps team.
 
-<Admonition type="note" title="Tip">
+<Admonition type="note" title="Dive deeper">
 Explore the [Neon API documentation](https://neon.tech/docs/reference/api-reference) and start building.
 </Admonition>
 
@@ -130,7 +126,7 @@ When you're building a multi-tenant SaaS platform—especially in regulated indu
 - **Audit-friendly recovery workflows** - Instant, per-tenant PITR enables precise rollback to any point in time—helping you meet data retention and recovery SLAs.
 - **Enterprise-level security** - All Neon projects use TLS for connections, and built-in encryption is applied to data at rest and in transit.
 
-<Admonition type="note" title="Tip">
+<Admonition type="note" title="Dive deeper">
 [Review our security page](https://neon.tech/security) for details on compliance, SLAs, and our full security commitments.
 </Admonition>
 
@@ -142,7 +138,6 @@ To take advantage of [database branching workflows for dev/test](https://neon.te
 - To instantly create ephemeral environments, derive child branches from the main branch. These branches are fully isolated resource-wise and already include an up-to-date copy of the testing dataset. They can then be synced with the main branch with just one click.
 - Once the work is complete, ephemeral dev/test environments (child branches) can be deleted automatically via your CI/CD.
 
-![A dedicated project for dev/test](/use-cases/dev-test.jpg)
 
 <Admonition type="note" title="Tip">
 Check the [Database Per User Guide](https://neon.tech/use-cases/database-per-tenant) in our documentation for step by step instructions on how to set this up. 
