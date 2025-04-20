@@ -9,9 +9,6 @@ Laravel is a web application framework with expressive, elegant syntax. Connecti
 
 To connect to Neon from Laravel:
 
-1. [Create a Neon Project](#create-a-neon-project)
-2. [Configure the connection](#configure-the-connection)
-
 <Steps>
 
 ## Create a Neon project

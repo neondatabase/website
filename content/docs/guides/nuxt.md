@@ -9,10 +9,7 @@ updatedOn: '2025-03-05T21:09:38.752Z'
 
 To create a Neon project and access it from a Nuxt.js application:
 
-1. [Create a Neon project](#create-a-neon-project)
-2. [Create a Nuxt project and add dependencies](#create-a-nuxt-project-and-add-dependencies)
-3. [Configure a Postgres client](#configure-the-postgres-client)
-4. [Run the app](#run-the-app)
+<Steps>
 
 ## Create a Neon project
 
@@ -97,6 +94,8 @@ When you run `npm run dev` you can expect to see the following on [localhost:300
 ```shell shouldWrap
 PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
 ```
+
+</Steps>
 
 ## Source code
 

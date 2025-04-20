@@ -12,8 +12,7 @@ Symfony is a free and open-source PHP web application framework. Symfony uses th
 
 To connect to Neon from Symfony with Doctrine:
 
-1. [Create a Neon Project](#create-a-neon-project)
-2. [Configure the connection](#configure-the-connection)
+<Steps>
 
 ## Create a Neon project
 
@@ -32,5 +31,7 @@ DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?charset=ut
 ```
 
 You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+
+</Steps>
 
 <NeedHelp/>

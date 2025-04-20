@@ -16,12 +16,6 @@ The same configuration steps can be used for Express and Next.js applications.
 
 To connect to Neon from a Node.js application:
 
-1. [Create a Neon Project](#create-a-neon-project)
-2. [Create a NodeJS project and add dependencies](#create-a-nodejs-project-and-add-dependencies)
-3. [Store your Neon credentials](#store-your-neon-credentials)
-4. [Configure the Postgres client](#configure-the-postgres-client)
-5. [Run app.js](#run-appjs)
-
 <Steps>
 
 ## Create a Neon project

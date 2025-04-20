@@ -9,11 +9,7 @@ updatedOn: '2025-02-03T20:41:57.333Z'
 
 To connect to Neon from a Quarkus application:
 
-1. [Create a Neon Project](#create-a-neon-project)
-2. [Create a Quarkus project and add dependencies](#create-a-quarkus-project)
-3. [Configure a PostgreSQL data source](#configure-a-postgresql-data-source)
-4. [Use the Reactive PostgreSQL client](#use-the-reactive-postgresql-client)
-5. [Run the application](#run-the-application)
+<Steps>
 
 ## Create a Neon project
 
@@ -101,5 +97,7 @@ Visit [localhost:8080/postgres/version](http://localhost:8080/postgres/version) 
 ```
 PostgreSQL 15.4 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
 ```
+
+</Steps>
 
 <NeedHelp/>

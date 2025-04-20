@@ -16,10 +16,7 @@ To complete the steps in this topic, ensure that you have an SQLAlchemy installa
 
 To connect to Neon from SQLAlchemy:
 
-1. [Create a Neon project](#create-a-neon-project)
-1. [Install psycopg2](#install-psycopg2)
-1. [Create the "hello neon" program](#create-the-hello-neon-program)
-1. [Create an SQLAlchemy engine for your Neon project](#create-an-sqlalchemy-engine-for-your-neon-project)
+<Steps>
 
 ## Create a Neon project
 
@@ -96,6 +93,8 @@ For additional information about connecting from SQLAlchemy, refer to the follow
 
 - [Establishing Connectivity - the Engine](https://docs.sqlalchemy.org/en/14/tutorial/engine.html)
 - [Connecting to PostgreSQL with SQLAlchemy](https://docs.sqlalchemy.org/en/14/core/engines.html#postgresql)
+
+</Steps>
 
 ## SQLAlchemy connection errors
 

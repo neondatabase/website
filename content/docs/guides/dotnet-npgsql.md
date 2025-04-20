@@ -13,11 +13,6 @@ The same configuration steps can be used for any .NET application type, includin
 
 To connect to Neon from a .NET application:
 
-1. [Create a Neon Project](#create-a-neon-project)
-2. [Create a .NET project and add dependencies](#create-a-net-project-and-add-dependencies)
-3. [Store your Neon credentials](#store-your-neon-credentials)
-4. [Perform database operations](#perform-database-operations)
-
 <Steps>
 
 ## Create a Neon project
@@ -71,7 +66,7 @@ To ensure the security of your data, never commit your credentials to version co
 
 ## Perform database operations
 
-### Step 1: Create table
+### Create table
 
 The following code gets the connection string from `appsettings.json`, establishes a connection to your Neon database, and creates a new table for storing books. We use the `NpgsqlConnection` to open a connection and then execute a `CREATE TABLE` statement using NpgsqlCommand's `ExecuteNonQuery()` method. The table includes columns for the book's ID (automatically generated), title, author, and publication year.
 
@@ -103,7 +98,7 @@ using (var conn = new NpgsqlConnection(connString))
 }
 ```
 
-### Step 2: Add books
+### Add books
 
 Next, we'll insert some books into our new table. We use an `INSERT` statement with parameters to safely add books to the database. The `ExecuteNonQuery()` method tells us how many books were added.
 
@@ -131,7 +126,7 @@ using (var conn = new NpgsqlConnection(connString))
 }
 ```
 
-### Step 3: List books
+### List books
 
 To retrieve our books, we'll use a `SELECT` statement and read the results using a DataReader. The reader allows us to iterate through the results row by row, accessing each column value with the appropriate Get method based on its data type.
 
@@ -155,7 +150,7 @@ using (var conn = new NpgsqlConnection(connString))
 }
 ```
 
-### Step 4: Update books
+### Update books
 
 To update books in our database, we use an `UPDATE` statement with parameters to ensure the operation is performed safely. The `ExecuteNonQuery()` method tells us how many books were updated.
 
@@ -179,7 +174,7 @@ using (var conn = new NpgsqlConnection(connString))
 }
 ```
 
-### Step 5: Remove books
+### Remove books
 
 To delete books from our database, we use a `DELETE` statement with parameters to ensure the operation is performed safely. The `ExecuteNonQuery()` method tells us how many books were deleted.
 

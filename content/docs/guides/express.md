@@ -9,12 +9,6 @@ This guide describes how to create a Neon project and connect to it from an Expr
 
 To connect to Neon from an Express application:
 
-1. [Create a Neon Project](#create-a-neon-project)
-2. [Create an Express project and add dependencies](#create-an-express-project-and-add-dependencies)
-3. [Store your Neon credentials](#store-your-neon-credentials)
-4. [Configure the Postgres client](#configure-the-postgres-client)
-5. [Run app.js](#run-appjs)
-
 <Steps>
 
 ## Create a Neon project

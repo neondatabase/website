@@ -8,13 +8,9 @@ updatedOn: '2025-02-03T20:41:57.333Z'
 
 This guide describes how to create a Neon project and connect to it from a simple Python application using [Psycopg (psycopg2)](https://pypi.org/project/psycopg2/), a popular Postgres database adapter for the Python programming language. The application connects to Neon and retrieves the current time and Postgres version.
 
-To connect:
+To connect a Python application to Neon:
 
-1. [Create a Neon Project](#create-a-neon-project)
-2. [Create a Python project](#create-a-python-project)
-3. [Store your Neon credentials](#store-your-neon-credentials)
-4. [Configure your Python script](#configure-your-python-script)
-5. [Test your connection](#test-your-connection)
+<Steps>
 
 ## Create a Neon project
 
@@ -175,6 +171,8 @@ If the connection is successful, the script returns information similar to the f
 Current time: 2023-05-24 08:53:10.403140+00:00
 PostgreSQL version: PostgreSQL 15.2 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
 ```
+
+</Steps>
 
 ## Source code
 

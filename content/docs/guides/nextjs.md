@@ -12,11 +12,6 @@ Next.js by Vercel is an open-source web development framework that enables React
 
 To create a Neon project and access it from a Next.js application:
 
-1. [Create a Neon project](#create-a-neon-project)
-2. [Create a Next.js project and add dependencies](#create-a-nextjs-project-and-add-dependencies)
-3. [Configure a Postgres client](#configure-the-postgres-client)
-4. [Run the app](#run-the-app)
-
 <Steps>
 
 ## Create a Neon project

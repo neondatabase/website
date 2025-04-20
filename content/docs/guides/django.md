@@ -11,9 +11,6 @@ updatedOn: '2025-02-03T20:41:57.311Z'
 
 To connect to Neon from a Django application:
 
-1. [Create a Neon project](#create-a-neon-project)
-2. [Configure Django connection settings](#configure-django-connection-settings)
-
 <Steps>
 
 ## Create a Neon project
