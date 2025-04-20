@@ -137,7 +137,7 @@ $ cat .neon
 {
   "projectId": "broad-surf-52155946",
   "orgId": "org-solid-base-83603457"
-}% 
+}%
 ```
 
 You can also create named context files for different organization and project contexts:
