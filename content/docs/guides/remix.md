@@ -2,7 +2,7 @@
 title: Connect a Remix application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Remix application
 enableTableOfContents: true
-updatedOn: '2025-02-03T20:41:57.335Z'
+updatedOn: '2025-04-20T15:44:26.054Z'
 ---
 
 Remix is an open-source full stack JavaScript framework that lets you focus on building out the user interface using familiar web standards. This guide explains how to connect Remix with Neon using a secure server-side request.

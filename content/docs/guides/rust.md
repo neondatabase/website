@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/rust
   - /docs/integrations/rust
-updatedOn: '2025-02-03T20:41:57.336Z'
+updatedOn: '2025-04-20T15:44:26.055Z'
 ---
 
 This guide describes how to create a Neon project and connect to it from a Rust application.
