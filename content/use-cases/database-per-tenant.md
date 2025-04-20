@@ -1,6 +1,6 @@
 ---
 title: 'Data Isolation at Scale'
-subtitle: Give every customer their own Postgres database, with zero overhead and full control.
+subtitle: Give every tenant a dedicated Postgres database. Meet compliance requirements, eliminate noisy neighbors, and scale without friction.
 enableTableOfContents: true
 updatedOn: '2024-08-23T09:00:00.000Z'
 image: '/images/social-previews/use-cases/db-per-tenant.jpg'
