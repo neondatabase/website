@@ -189,8 +189,6 @@ When you run `npm run dev` you can expect to see the following when you visit th
 
 </Steps>
 
-
-
 ## Source code
 
 You can find the source code for the applications described in this guide on GitHub.
