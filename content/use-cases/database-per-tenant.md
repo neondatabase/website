@@ -29,6 +29,9 @@ One of the first design decisions you’ll face when building an application wit
 - **Simplify management** - If your customers require isolated workflows like backups, PITR, or migrations, database-per-tenant makes these easier to manage without cross-tenant risk.
 - **Avoiding noisy neighbors** - When customers share an instance, a spike in usage from one tenant can degrade performance for others. Isolating tenants ensures consistent performance.
 
+![Postgres instance per tenant](/use-cases/multitenant-postgres-instance-per-tenant.jpg)
+
+
 ## Scaling database-per-user architectures in AWS is not a good idea
 
 Managed Postgres services like Amazon RDS weren’t designed for high-volume, database-per-tenant use cases. While you can technically isolate each customer with their own database, doing so at scale becomes operationally and financially unsustainable.
@@ -41,6 +44,9 @@ Many teams try to save money by putting all their tenants into one large RDS ins
 - **Noisy neighbors** - Resource-hungry tenants can degrade performance for others sharing the same compute.
 - **Complex maintenance** - Backups, PITR, monitoring, and upgrades become harder to manage when they're tied to a massive shared instance.
 - **Rigid scaling** - You can’t scale individual tenants—you have to scale the entire instance, often overpaying for idle capacity.
+
+![Multi-tenant Postgres instance for all tenants](/use-cases/multitenant-single-postgres-instance.jpg)
+
 
 ### 2. Spinning up one RDS instance per tenant
 
