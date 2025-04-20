@@ -11,9 +11,7 @@ Using Reflex, you can build frontend and backend applications using Python to ma
 
 To connect to Neon from a Reflex application:
 
-1. [Create a Neon project](#create-a-neon-project)
-2. [Set up a Reflex project](#set-up-a-reflex-project)
-3. [Configure Reflex connection settings](#configure-reflex-connection-settings)
+<Steps>
 
 ## Create a Neon project
 
@@ -137,6 +135,8 @@ To configure the connection settings:
 3. Save the changes to the `rxconfig.py` file.
 
    Now, you can run the Reflex app and start building your Python full-stack application with Reflex and Neon.
+
+</Steps>
 
 ## Creating a data model
 

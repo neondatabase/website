@@ -9,13 +9,11 @@ updatedOn: '2025-02-03T20:41:57.335Z'
 
 To connect to Neon from a Ruby on Rails application:
 
-1. [Create a Neon Project](#create-a-neon-project)
-2. [Create a Rails Project](#create-a-rails-project)
-3. [Configure a PostgreSQL Database using Rails](#configure-a-postgresql-database-using-rails)
-4. [Create a Rails Controller](#create-a-rails-controller-to-query-the-database)
-5. [Run the application](#run-the-application)
-
+<Admonition type="note">
 This guide was tested using Ruby v3.3.0 and Rails v7.1.2.
+</Admonition>
+
+<Steps>
 
 ## Create a Neon Project
 
@@ -112,6 +110,8 @@ Visit [localhost:3000/](http://localhost:3000/) in your web browser. Your Neon d
 ```
 PostgreSQL 15.5 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
 ```
+
+</Steps>
 
 ## Schema migration with Ruby on Rails
 

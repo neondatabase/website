@@ -11,8 +11,7 @@ updatedOn: '2025-02-03T20:41:57.311Z'
 
 To connect to Neon from a Django application:
 
-1. [Create a Neon project](#create-a-neon-project)
-2. [Configure Django connection settings](#configure-django-connection-settings)
+<Steps>
 
 ## Create a Neon project
 
@@ -63,6 +62,8 @@ Neon places computes into an idle state and closes connections after 5 minutes o
 You can find all of the connection details listed above by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 For additional information about Django project settings, see [Django Settings: Databases](https://docs.djangoproject.com/en/4.0/ref/settings#databases), in the Django documentation.
+
+</Steps>
 
 ## Connection issues
 

@@ -11,12 +11,7 @@ The instructions in this guide follow the steps outlined in the [Ecto Getting St
 
 To connect to Neon from Elixir with Ecto:
 
-1. [Create a database in Neon and copy the connection string](#create-a-database-in-neon-and-copy-the-connection-string)
-2. [Create an Elixir project](#create-an-elixir-project)
-3. [Add Ecto and Postgrex to the application](#add-ecto-and-postgrex-to-the-application)
-4. [Configure Ecto](#configure-ecto)
-5. [Create a migration and add a table](#create-a-migration-and-add-a-table)
-6. [Next steps](#next-steps)
+<Steps>
 
 ## Create a database in Neon and copy the connection string
 
@@ -185,6 +180,8 @@ You can use the **Tables** feature in the Neon Console to view the table that wa
 1. Select a project.
 1. Select **Tables** from the sidebar.
 1. Select the Branch, Database (`friends`), and the schema (`public`). You should see the `people` table along with a `schema_migration` table that was created by the migration.
+
+</Steps>
 
 ## Application code
 

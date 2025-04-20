@@ -10,8 +10,7 @@ updatedOn: '2025-04-10T23:35:05.976Z'
 
 To connect to Neon from a Go application:
 
-1. [Create a Neon project](#create-a-neon-project)
-2. [Configure Go project connection settings](#configure-go-application-connection-settings)
+<Steps>
 
 ## Create a Neon project
 
@@ -92,5 +91,7 @@ func main() {
 ```
 
 You can find your database connection details by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+
+</Steps>
 
 <NeedHelp/>
