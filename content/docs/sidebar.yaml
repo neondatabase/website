@@ -127,6 +127,8 @@
               slug: import/import-data-assistant
             - title: Migrate from Postgres with pg_dump and pg_restore
               slug: import/migrate-from-postgres
+            - title: Migrate with pgcopydb
+              slug: guides/pgcopydb
             - title: Migrate from a Neon project
               slug: import/migrate-from-neon
             - title: Migrate schema only
@@ -916,8 +918,6 @@
               slug: guides/neon-twin-full-pg-dump-restore
             - title: Partial Twin
               slug: guides/neon-twin-partial-pg-dump-restore
-            - title: pgcopydb
-              slug: guides/pgcopydb
 - section: Postgres
   items:
     - title: PostgreSQL Tutorial
