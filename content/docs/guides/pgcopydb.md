@@ -7,6 +7,14 @@ updatedOn: '2025-03-27T00:00:00.000Z'
 ---
 
 <InfoBlock>
+<DocsList title="What you will learn">
+  <li>Why use pgcopydb for data migration</li>
+  <li>Setting up environment variables for migration</li>
+  <li>Running and monitoring the migration process</li>
+  <li>Advanced usage options for optimizing migrations</li>
+</DocsList>
+
+<div>
 <DocsList title="Repo" theme="repo">
   <a href="https://github.com/dimitri/pgcopydb">pgcopydb GitHub repository</a>
 </DocsList>
@@ -14,6 +22,7 @@ updatedOn: '2025-03-27T00:00:00.000Z'
 <DocsList title="Related docs" theme="docs">
   <a href="https://pgcopydb.readthedocs.io/">pgcopydb documentation</a>
 </DocsList>
+</div>
 
 </InfoBlock>
 
@@ -140,10 +149,5 @@ For more detail, see [Same-table Concurrency](https://pgcopydb.readthedocs.io/en
 ### Filtering and selective migration
 
 `--filters <filename>`: Sometimes you only need to migrate a subset of your database. `--filters` allows you to precisely control which tables, indexes, or schemas are included in the migration. This is useful for selective migrations or excluding unnecessary data. For filter configuration and examples, see the [pgcopydb filtering documentation](https://pgcopydb.readthedocs.io/en/latest/ref/pgcopydb_config.html#filtering).
-
-## Reference
-
-- [pgcopydb documentation](https://pgcopydb.readthedocs.io/)
-- [pgcopydb GitHub repository](https://github.com/dimitri/pgcopydb)
 
 <NeedHelp/>
