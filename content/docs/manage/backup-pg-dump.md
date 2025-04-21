@@ -1,5 +1,6 @@
 ---
-title: Backup and restore with `pg_dump`
+title: Backups with pg_dump
+subtitle: Learn how to create a backup of your Neon database using pg_dump
 enableTableOfContents: true
 updatedOn: '2025-02-22T16:36:52.249Z'
 ---
@@ -12,7 +13,8 @@ Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary
 
 ## Prerequisites
 
-- Make sure `pg_dump` and `pg_restore` are installed. You can verify by running `pg_dump -V`. We recommend using the latest versions of these tools, and ensuring that the client version matches your Neon project's Postgres version (14–17).
+- Make sure `pg_dump` and `pg_restore` are installed. You can verify by running `pg_dump -V`. 
+- We recommend using the latest versions of `pg_dump` and `pg_restore`, and ensuring that the client version matches your Neon project's Postgres version (14–17).
 
 ## Install `pg_dump` and `pg_restore` 
 
@@ -60,21 +62,17 @@ Following this procedure will create a database backup locally, where you're run
 3. Create a backup of your Neon database by running the following `pg_dump` command with your Neon database connection string.
 
     ```bash shouldWrap
-    pg_dump --no-owner --no-privileges --no-publications --no-subscriptions -Fc -v -d "<neon_database_connection_string>" -f <dump_file_name>
+    pg_dump -Fc -v -d "<neon_database_connection_string>" -f <dump_file_name>
     ```
 
-    After adding your Neon database connection string and a dump file name, your command will look like this:
+    After adding your Neon database connection string and a dump file name, your command will look something like this:
 
     ```bash shouldWrap
-    pg_dump --no-owner --no-privileges --no-publications --no-subscriptions -Fc -v -d "postgresql://neondb_owner:npg_AbC123dEf@ep-dry-morning-a8vn5za2.eastus2.azure.neon.tech/neondb?sslmode=require" -f mydatabase.bak
+    pg_dump -Fc -v -d "postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require" -f mydatabase.bak
     ```
 
     The `pg_dump` command above includes these arguments:
 
-    - `--no-owner`: Excludes ownership information from the dump.
-    - `--no-privileges`: Excludes grant/revoke statements from the dump.
-    - `--no-publications`: Excludes publication definitions from the dump.
-    - `--no-subscriptions`: Excludes subscription definitions from the dump.
     - `-Fc`: Sends the output to a custom-format archive suitable for input into `pg_restore`.
     - `-v`: Runs `pg_dump` in verbose mode, allowing you to monitor what happens during the dump operation.
     - `-d`: Specifies the [connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING) for your Neon database.
@@ -97,7 +95,7 @@ This procedure shows how to restore a database using the `pg_restore` utility fr
     Your connection string should look something like this:
 
     ```bash shouldWrap
-    postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require
+    postgresql://alex:AbC123dEf@ep-dry-morning-a8vn5za2.us-east-2.aws.neon.tech/neondb?sslmode=require
     ```
 
 4. Restore your data to the target database in Neon with `pg_restore`.
@@ -106,8 +104,11 @@ This procedure shows how to restore a database using the `pg_restore` utility fr
     pg_restore -v -d "<neon_database_connection_string>" <dump_file_name>
     ```
 
+    After adding your Neon database connection string and the dump file name, your command will look something like this:
+
+
     ```bash shouldWrap
-    pg_restore -v -d "postgresql://neondb_owner:npg_AbC123dEf@ep-dry-morning-a8vn5za2.eastus2.azure.neon.tech/neondb?sslmode=require" mydatabase.bak
+    pg_restore -v -d "postgresql://alex:AbC123dEf@ep-dry-morning-a8vn5za2.us-east-2.aws.neon.tech/neondb?sslmode=require" mydatabase.bak
     ```
 
     The example above includes these arguments:
@@ -118,23 +119,23 @@ This procedure shows how to restore a database using the `pg_restore` utility fr
 
     For more command options, see [Advanced pg_dump and pg_restore options](#advanced-pgdump-and-pgrestore-options).
 
-## pg_dump and pg_restore example
+## `pg_dump` and `pg_restore` example
 
-The following example shows how data is dumped from source database named `neondb` in one Neon project and restored to a `neondb` database in another Neon project using the commands described in the previous sections. (A database named `neondb` was created in the source Neon project prior to running the restore operation.)
+The following example shows how data is dumped from source database named `neondb` in one Neon project and restored to a `neondb` database in another Neon project using the commands described in the previous sections. (A database named `neondb` was created in the Neon project prior to running the restore operation.)
 
 Before performing this procedure:
 
 - A new Neon project was created for the destination database, and a database with the same name as the source database was created (`neondb`)
 - Connection strings for the source and destination databases were collected:
-    - source: `postgresql://neondb_owner:npg_AbC123dEf@ep-dry-morning-a8vn5za2.eastus2.azure.neon.tech/neondb?sslmode=require`
-    - destination: `postgresql://neondb_owner:npg_AbC123dEf@ep-dry-morning-a8vn5za2.eastus2.azure.neon.tech/neondb?sslmode=require`
+    - source: `postgresql://neondb_owner:npg_AbC123dEf@ep-dry-morning-a8vn5za2.us-east-2.aws.neon.tech/neondb?sslmode=require`
+    - destination: `postgresql://neondb_owner:npg_AbC123dEf@ep-dry-morning-a8vn5za2.us-east-2.aws.neon.tech/neondb?sslmode=require`
 
 ```bash shouldWrap
 ~$ cd mydump
-~/mydump$ pg_dump --no-owner --no-privileges --no-publications --no-subscriptions -Fc -v -d "postgresql://neondb_owner:npg_AbC123dEf@ep-dry-morning-a8vn5za2.eastus2.azure.neon.tech/neondb?sslmode=require" -f mydatabase.bak
+~/mydump$ pg_dump -Fc -v -d "postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require" -f mydatabase.bak
 
 ~/mydump$ ls
-mydumpfile.bak
+mydatabase.bak
 
-~/mydump$ pg_restore -v -d "postgresql://neondb_owner:npg_AbC123dEf@ep-dry-morning-a8vn5za2.eastus2.azure.neon.tech/neondb?sslmode=require" mydatabase.bak
+~/mydump$ pg_restore -v -d "postgresql://alex:AbC123dEf@ep-dry-morning-a8vn5za2.us-east-2.aws.neon.tech/neondb?sslmode=require" mydatabase.bak
 ```
