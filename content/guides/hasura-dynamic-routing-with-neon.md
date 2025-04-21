@@ -16,7 +16,7 @@ This guide demonstrates how to combine the power of [Neon's database branching](
 Before you start, ensure you have the following:
 
 - **A Neon Account:** Sign up for a free Neon account at [neon.tech](https://console.neon.tech/signup).
-- **A Neon Project:** You need to have a Neon project. If you donot have one, create it via [pg.new](https://pg.new)
+- **A Neon Project:** You need to have a Neon project. If you do not have one, create it via [pg.new](https://pg.new)
 - **A Hasura Instance:** A running Hasura instance (v2.x or later). This can be Hasura Cloud Professional or Enterprise tiers, or a self-hosted Enterprise instance. Dynamic routing is not available in the free tier.
 
 ## Understanding the core concepts
@@ -105,7 +105,7 @@ Now, add your Neon branches to the connection set for the data source you just c
       Then, in the connection modal, select **Connect database via Environment variable** and enter the variable name you created. This approach keeps your connection string secure and simplifies future updates.
       </Admonition>
 
-6.  Repeat step 5 for other branches, e.g., `staging_branch`, `feature_x_branch`, etc, using their respective connection strings.
+6.  Repeat step 5 for other branches, e.g., `staging_branch`, `feature_x_branch`, etc., using their respective connection strings.
 
 You should now see `dev_branch`, `feature_x_branch` and `staging_branch` listed under "Available Connections for Templating".
 
@@ -244,7 +244,7 @@ Here's an example of how you might implement this in your Kriti template:
         {{$.connection_set.staging_branch}}
     {{ elif ($.request.query.operation_type == "mutation")}}
         {{$.primary}}
-    {{ elif ($.request.headers?[no-stale-read] == "true")}}
+    {{ elif ($.request.headers?["no-stale-read"] == "true")}}
         {{$.primary}}
     {{ else }}
         {{$.default}}
@@ -270,6 +270,8 @@ Combining Neon's instant database branching with Hasura's dynamic routing offers
 
 ## Resources
 
-- [Neon Branching Documentation](/docs/introduction/branching)
+- [Neon Branching](/docs/introduction/branching)
+- [Neon Read Replica](/docs/introduction/read-replicas)
 - [Hasura Dynamic Database Connection Routing](https://hasura.io/docs/2.0/databases/database-config/dynamic-db-connection/)
 - [Hasura Kriti Templating Specification](https://hasura.io/docs/2.0/api-reference/kriti-templating/)
+- [Hasura Read Replicas](https://hasura.io/docs/2.0/databases/database-config/read-replicas/)
