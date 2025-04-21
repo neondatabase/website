@@ -15,14 +15,12 @@ Neon makes it easy to isolate each tenant in their own Postgres database with in
 - **Instant per-customer recovery** - If there’s an issue (or a customer request), you can instantly roll back any tenant’s database without affecting the rest of your fleet.
 - **API-first management** - Provision, scale, and manage all your Neon projects programmatically—one engineer can manage thousands of tenants.
 
-
 Sign up [using this link](http://fyi.neon.tech/credits) to claim $100 off your first invoice, and [follow this guide](https://neon.tech/docs/use-cases/database-per-user) to get started.
 </Admonition>
 
-
 ## Why database-per-user?
 
-One of the first design decisions you’ll face when building an application with Postgres is how to organize your multitenancy. For certain use cases, adopting a database-per-tenant approach is the most beneficial: 
+One of the first design decisions you’ll face when building an application with Postgres is how to organize your multitenancy. For certain use cases, adopting a database-per-tenant approach is the most beneficial:
 
 - **Meet strict data privacy requirements** - If you’re operating a B2B SaaS platform with customers in regulated industries, they may require maximum data isolation at the instance level. A database-per-tenant approach allows you to meet these stringent data privacy demands by offering each customer their own isolated database.
 - **Comply with regional data regulations** - In cases where data regulations require customer data to be stored within specific regions, creating separate databases in each region provides a straightforward path to compliance.
@@ -31,13 +29,13 @@ One of the first design decisions you’ll face when building an application wit
 
 ![Postgres instance per tenant](/use-cases/multitenant-postgres-instance-per-tenant.jpg)
 
-
 ## Scaling database-per-user architectures in AWS is not a good idea
 
 Managed Postgres services like Amazon RDS weren’t designed for high-volume, database-per-tenant use cases. While you can technically isolate each customer with their own database, doing so at scale becomes operationally and financially unsustainable.
 There are two common paths teams take—both with major drawbacks:
 
 ### 1. Cramming thousands of databases into a single RDS instance
+
 Many teams try to save money by putting all their tenants into one large RDS instance. But this leads to:
 
 - **Single point of failure** - If that instance goes down, all of your customers are impacted.
@@ -47,7 +45,6 @@ Many teams try to save money by putting all their tenants into one large RDS ins
 
 ![Multi-tenant Postgres instance for all tenants](/use-cases/multitenant-single-postgres-instance.jpg)
 
-
 ### 2. Spinning up one RDS instance per tenant
 
 This approach gives you the isolation you’re looking for, but it comes at a steep cost—both in dollars and engineering time. The truth is, RDS was never designed for this kind of architecture:
@@ -55,7 +52,7 @@ This approach gives you the isolation you’re looking for, but it comes at a st
 - **Expensive and wasteful** - Each RDS instance has a baseline cost, even when idle. Multiply that across hundreds or thousands of tenants, and your bill quickly becomes unsustainable. Storage also doesn’t scale down: once it grows, you’re stuck paying for it.
 - **No dynamic scaling** - RDS instances don’t autoscale. Resizing compute often requires manual intervention—and in many cases, downtime.
 - **High operational burden** - You’ll soon need a dedicated team just to handle instance provisioning, monitoring, patching, and scaling logistics. Even basic tasks become complex at scale.
-- **Slow setups** - Spinning up a new RDS instance can take minutes, not seconds—far from ideal from the end-user experience. 
+- **Slow setups** - Spinning up a new RDS instance can take minutes, not seconds—far from ideal from the end-user experience.
 
 <Testimonial
 text="Our customers require their data to live in an isolated database, but implementing this in RDS was cumbersome and expensive"
@@ -82,7 +79,7 @@ Neon reimagines Postgres for modern SaaS. With serverless infrastructure, autosc
 
 ### Scale each tenant independently
 
-In RDS, you’d have to choose an instance size and disk allocation up front—and scale manually as usage changes. With Neon, compute autoscales on demand, and storage grows and shrinks automatically. **You don’t need to provision compute or storage in advance.** Every tenant gets their own resources, and those resources scale automatically based on usage. No manual resizing, no idle waste. 
+In RDS, you’d have to choose an instance size and disk allocation up front—and scale manually as usage changes. With Neon, compute autoscales on demand, and storage grows and shrinks automatically. **You don’t need to provision compute or storage in advance.** Every tenant gets their own resources, and those resources scale automatically based on usage. No manual resizing, no idle waste.
 
 - **No more over-provisioning** - Your busiest customers get more power when they need it. Everyone else runs lean—or not at all.
 - **Scale to zero when idle** - If a tenant isn’t using their database, Neon pauses compute and you pay nothing until they return.
@@ -143,7 +140,6 @@ To take advantage of [database branching workflows for dev/test](https://neon.te
 - Load your testing data to the main branch. This main branch acts as the primary source for all dev/test environments (they can be hundreds).
 - To instantly create ephemeral environments, derive child branches from the main branch. These branches are fully isolated resource-wise and already include an up-to-date copy of the testing dataset. They can then be synced with the main branch with just one click.
 - Once the work is complete, ephemeral dev/test environments (child branches) can be deleted automatically via your CI/CD.
-
 
 <Admonition type="note" title="Info">
 Read more about [how to do dev/test environments in Neon](https://neon.tech/use-cases/dev-test) using branches.  
