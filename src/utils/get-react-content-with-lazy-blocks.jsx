@@ -209,6 +209,16 @@ export default function getReactContentWithLazyBlocks(content, pageComponents, i
           });
         }
 
+        if (domNode.name === 'video') {
+          const props = transformProps(attributesToProps(domNode.attribs));
+          const children = domToReact(domNode.children);
+          return (
+            <video {...props} crossOrigin="anonymous">
+              {children}
+            </video>
+          );
+        }
+
         if (!includeBaseTags) return <></>;
       }
     },

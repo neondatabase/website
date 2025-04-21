@@ -5,15 +5,14 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/symfony
   - /docs/integrations/symfony
-updatedOn: '2025-02-03T20:41:57.339Z'
+updatedOn: '2025-04-20T15:44:26.057Z'
 ---
 
 Symfony is a free and open-source PHP web application framework. Symfony uses the Doctrine library for database access. Connecting to Neon from Symfony with Doctrine is the same as connecting to a standalone Postgres installation from Symfony with Doctrine. Only the connection details differ.
 
 To connect to Neon from Symfony with Doctrine:
 
-1. [Create a Neon Project](#create-a-neon-project)
-2. [Configure the connection](#configure-the-connection)
+<Steps>
 
 ## Create a Neon project
 
@@ -32,5 +31,7 @@ DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?charset=ut
 ```
 
 You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+
+</Steps>
 
 <NeedHelp/>

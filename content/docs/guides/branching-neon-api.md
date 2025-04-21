@@ -239,7 +239,7 @@ To revert changes or recover lost data, you can use the branch restore endpoint 
 POST /projects/{project_id}/branches/{branch_id_to_restore}/restore
 ```
 
-For details on how to use this endpoint to restore a branch to its own or another branch's history, restore a branch to the head of its parent, and other restore options, see [Branch Restore using the API](/docs/guides/branch-restore#how-to-use-branch-restore).
+For details on how to use this endpoint to restore a branch to its own or another branch's history, restore a branch to the head of its parent, and other restore options, see [Instant restore using the API](/docs/guides/branch-restore#how-to-use-branch-restore).
 
 ## Creating a schema-only branch using the API
 

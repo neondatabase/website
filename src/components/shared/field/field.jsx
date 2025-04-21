@@ -14,7 +14,7 @@ const themes = {
   transparent:
     'w-full h-10 border border-gray-new-15 outline-none !bg-transparent mt-2 px-[15px] placeholder:text-gray-new-40 placeholder:text-base',
   checkbox:
-    'absolute pointer-events-none top-1/2 left-0 -translate-y-1/2 w-[18px] h-[18px] border !border-white/10 hover:!border-white/50 before:absolute before:inset-0 before:z-10 before:bg-center before:bg-no-repeat checked:bg-white before:bg-[url("/images/check.svg")] before:bg-[length:14px_14px] before:opacity-0 before:transition-opacity before:duration-200 checked:before:opacity-100 disabled:!border-white/10',
+    'absolute pointer-events-none top-1/2 left-0 -translate-y-1/2 w-[18px] h-[18px] border !border-white/10 hover:!border-white/50 before:absolute before:inset-0 before:z-10 before:bg-center before:bg-no-repeat checked:bg-white before:bg-[url(/images/check.svg)] before:bg-[length:14px_14px] before:opacity-0 before:transition-opacity before:duration-200 checked:before:opacity-100 disabled:!border-white/10',
 };
 
 const baseStyles =

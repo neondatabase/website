@@ -4,11 +4,11 @@ subtitle: Learn how to connect to your Neon database via AWS PrivateLink
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
-updatedOn: '2025-03-13T12:02:31.961Z'
+updatedOn: '2025-04-09T10:37:44.428Z'
 ---
 
 <Admonition type="comingSoon" title="Private Networking availability">
-Private Networking is available on Neon's [Business](/docs/introduction/plans#business) and [Enterprise](/docs/introduction/plans#enterprise) plans.
+Private Networking is available on Neon's [Business](/docs/introduction/plans#business) and [Enterprise](/docs/introduction/plans#enterprise) plans. If you're on a different plan, you can request a trial from the **Network Security** page in your project's settings.
 </Admonition>
 
 The **Neon Private Networking** feature enables secure connections to your Neon databases via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html), bypassing the open internet for enhanced security.
@@ -48,14 +48,16 @@ To configure Neon Private Networking, perform the following steps:
 
        ![VPC Create endpoint](/docs/guides/pl_vpc_create_endpoint.png)
 
-    1. Under **Service settings**, specify the **Service name**. It must be one of the following serice names, depending on your region:
+    1. Under **Service settings**, specify the **Service name**. It must be one of the following service names, depending on your region:
 
        - **us-east-1**: `com.amazonaws.vpce.us-east-1.vpce-svc-0de57c578b0e614a9`
        - **us-east-2**: `com.amazonaws.vpce.us-east-2.vpce-svc-010736480bcef5824`
        - **eu-central-1**: `com.amazonaws.vpce.eu-central-1.vpce-svc-05554c35009a5eccb`
+       - **aws-eu-west-2**: `com.amazonaws.vpce.eu-west-2.vpce-svc-0c6fedbe99fced2cd`
        - **us-west-2**: `com.amazonaws.vpce.us-west-2.vpce-svc-060e0d5f582365b8e`
        - **ap-southeast-1**: `com.amazonaws.vpce.ap-southeast-1.vpce-svc-07c68d307f9f05687`
        - **ap-southeast-2**: `com.amazonaws.vpce.ap-southeast-2.vpce-svc-031161490f5647f32`
+       - **aws-sa-east-1**: `com.amazonaws.vpce.sa-east-1.vpce-svc-061204a851dbd1a47`
 
     1. Click **Verify service**. If successful, you should see a `Service name verified` message.
 
@@ -153,7 +155,7 @@ To configure Neon Private Networking, perform the following steps:
     To block access via the Neon CLI, use the [neon projects update](/docs/reference/cli-projects#update) command with the `--block-public-connections` option.
 
     ```bash
-    neon projects update orange-credit-12345678 --block-vpc-connections true
+    neon projects update orange-credit-12345678 --block-public-connections true
     ```
 
     In the example above, `orange-credit-12345678` is the Neon project ID. You can find _your_ Neon project ID under your project's settings in the Neon Console, or by running this Neon CLI command: `neon projects list`

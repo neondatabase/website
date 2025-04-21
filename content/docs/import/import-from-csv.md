@@ -1,61 +1,75 @@
 ---
 title: Import data from CSV
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.667Z'
+updatedOn: '2025-04-21T13:38:49.804Z'
 ---
 
-This topic describes how to import data into a Neon database table from a CSV file.
+This topic shows how to import data into a Neon database table from a CSV file using a simple example.
 
-The instructions require a working installation of [psql](https://www.postgresql.org/download/). The `psql` client is the native command-line client for Postgres. It provides an interactive session for sending commands to Postgres. For more information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/current/app-psql.html), in the _PostgreSQL Documentation_.
+The instructions require a working installation of [psql](https://www.postgresql.org/download/). The `psql` client is the native command-line client for Postgres. It provides an interactive session for sending commands to Postgres. For installation instructions, see [How to install psql](/docs/connect/query-with-psql-editor#how-to-install-psql).
 
 The following example uses the ready-to-use `neondb` database that is created with your Neon project, a table named `customer`, and a data file named `customer.csv`. Data is loaded from the `customer.csv` file into the `customer` table.
 
-1. Connect to the `neondb` database using `psql`. For example:
+<Steps>
 
-   ```bash shouldWrap
-   psql postgresql://[user]:[password]@[neon_hostname]/[dbname]
-   ```
+## Connect to your database
 
-   <Admonition type="note">
-   For more information about connecting to Neon with `psql`, see [Connect with psql](/docs/connect/query-with-psql-editor).
-   </Admonition>
+Connect to the `neondb` database using `psql`. For example:
 
-2. Create the `customer` table.
+```bash shouldWrap
+psql "<your_neon_database_connection_string>"
+```
 
-   ```sql
-   CREATE TABLE customer (
-     id SERIAL,
-     first_name VARCHAR(50),
-     last_name VARCHAR(50),
-     email VARCHAR(255),
-     PRIMARY KEY (id)
-   )
-   ```
+You can find your connection string on your Neon Project Dashboard. Click on the **Connect** button. Use the drop-down menu to copy a full `psql` connection command.
 
-   <Admonition type="tip">
-   You can also create tables using the **SQL Editor** in the Neon Console. See [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
-   </Admonition>
+<Admonition type="note">
+For more information about connecting to Neon with `psql`, see [Connect with psql](/docs/connect/query-with-psql-editor).
+</Admonition>
 
-3. Prepare a `customer.csv` file with the following data:
+## Create the target table
 
-   ```text
-   First Name,Last Name,Email
-   1,Casey,Smith,casey.smith@example.com
-   2,Sally,Jones,sally.jones@example.com
-   ```
+Create the `customer` table — table you are importing to must exist in your database and the columns must match your CSV file.
 
-4. From your `psql` prompt, load the data from the `customer.csv` file using the `\copy` option.
+```sql
+CREATE TABLE customer (
+   id SERIAL,
+   first_name VARCHAR(50),
+   last_name VARCHAR(50),
+   email VARCHAR(255),
+   PRIMARY KEY (id)
+)
+```
 
-   ```bash
-   \copy customer FROM '/path/to/customer.csv' DELIMITER ',' CSV HEADER
-   ```
+<Admonition type="tip">
+You can also create tables using the **SQL Editor** in the Neon Console. See [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
+</Admonition>
 
-   If the command runs successfully, it returns the number of records copied to the database:
+## Prepare the CSV file
 
-   ```bash
-   COPY 2
-   ```
+Prepare a `customer.csv` file with the following data — note that the columns in the CSV file match the columns in the table you created in the previous step.
 
-   For more information about the `\copy` option, refer to the [psql reference](https://www.postgresql.org/docs/current/app-psql.html), in the _PostgreSQL Documentation_.
+```text
+First Name,Last Name,Email
+1,Casey,Smith,casey.smith@example.com
+2,Sally,Jones,sally.jones@example.com
+```
+
+## Load the data
+
+From your `psql` prompt, load the data from the `customer.csv` file using the `\copy` option.
+
+```bash
+\copy customer FROM '/path/to/customer.csv' DELIMITER ',' CSV HEADER
+```
+
+If the command runs successfully, it returns the number of records copied to the database:
+
+```bash
+COPY 2
+```
+
+For more information about the `\copy` option, refer to the [psql reference](https://www.postgresql.org/docs/current/app-psql.html), in the _PostgreSQL Documentation_.
+
+</Steps>
 
 <NeedHelp/>

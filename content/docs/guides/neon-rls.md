@@ -230,15 +230,13 @@ The configuration of the expected audience can be done via the Neon RLS UI or vi
 You can use these sample ToDo applications to get started using Neon RLS with popular authentication providers.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase-labs/clerk-nextjs-frontend-neon-rls" description="A Todo List built with Clerk, Next.js, and Neon RLS (SQL from the Frontend)" icon="github">Clerk (Frontend) + Neon RLS</a>
-<a href="https://github.com/neondatabase-labs/stack-nextjs-neon-rls" description="A Todo List built with Stack Auth, Next.js, and Neon RLS (SQL from the Backend)" icon="github">Stack Auth + Neon RLS</a>
-<a href="https://github.com/neondatabase-labs/auth0-nextjs-neon-rls" description="A Todo List built with Auth0, Next.js, and Neon RLS (SQL from the Backend)" icon="github">Auth0 + Neon RLS</a>
-<a href="https://github.com/neondatabase-labs/stytch-nextjs-neon-rls" description="A Todo List built with Stytch, Next.js, and Neon RLS (SQL from the Backend)" icon="github">Stytch + Neon RLS</a>
-<a href="https://github.com/neondatabase-labs/azure-ad-b2c-nextjs-neon-rls" description="A Todo List built with Azure AD B2C, Next.js, and Neon RLS (SQL from the Backend)" icon="github">Azure AD B2C + Neon RLS</a>
-<a href="https://github.com/neondatabase-labs/descope-react-frontend-neon-rls" description="A Todo list built with Descope, Next.js, and Neon RLS (SQL from the frontend)" icon="github">Descope + Neon RLS</a>
-<a href="https://github.com/neondatabase-labs/propelauth-nextjs-neon-rls" description="A Todo list built with PropelAuth, Next.js, and Neon RLS (SQL from Frontend and Backend)" icon="github">PropelAuth + Neon RLS</a>
-<a href="https://github.com/neondatabase-labs/supertokens-nestjs-solidjs-drizzle-neon-rls" description="A Demo app built with SuperTokens, Nest.js, Solid.js, Drizzle, and Neon RLS (SQL from the Backend)" icon="github">SuperTokens + Neon RLS</a>
-<a href="https://github.com/neondatabase-labs/workos-drizzle-sveltekit-neon-rls" description="A Demo Post App built with WorkOS, SvelteKit, Neon RLS (SQL from the Backend)" icon="github">WorkOS + Neon RLS</a>
+<a href="https://github.com/neondatabase-labs/stack-nextjs-neon-rls" description="A Todo List built with Stack Auth, Next.js, and Neon RLS" icon="github">Stack Auth + Neon RLS</a>
+<a href="https://github.com/neondatabase-labs/auth0-nextjs-neon-rls" description="A Todo List built with Auth0, Next.js, and Neon RLS" icon="github">Auth0 + Neon RLS</a>
+<a href="https://github.com/neondatabase-labs/stytch-nextjs-neon-rls" description="A Todo List built with Stytch, Next.js, and Neon RLS" icon="github">Stytch + Neon RLS</a>
+<a href="https://github.com/neondatabase-labs/azure-ad-b2c-nextjs-neon-rls" description="A Todo List built with Azure AD B2C, Next.js, and Neon RLS" icon="github">Azure AD B2C + Neon RLS</a>
+<a href="https://github.com/neondatabase-labs/propelauth-nextjs-neon-rls" description="A Todo list built with PropelAuth, Next.js, and Neon RLS" icon="github">PropelAuth + Neon RLS</a>
+<a href="https://github.com/neondatabase-labs/supertokens-nestjs-solidjs-drizzle-neon-rls" description="A Demo app built with SuperTokens, Nest.js, Solid.js, Drizzle, and Neon RLS" icon="github">SuperTokens + Neon RLS</a>
+<a href="https://github.com/neondatabase-labs/workos-drizzle-sveltekit-neon-rls" description="A Demo Post App built with WorkOS, SvelteKit, Neon RLS" icon="github">WorkOS + Neon RLS</a>
 <a href="https://github.com/neondatabase-labs/authorize-demo-custom-jwt" description="A demo of Neon RLS with custom generated JWTs" icon="github">Neon RLS with custom JWTs</a>
 </DetailIconCards>
 

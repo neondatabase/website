@@ -2,14 +2,10 @@
 title: Schema-only branches
 subtitle: Protect sensitive data with schema-only branches
 enableTableOfContents: true
-updatedOn: '2025-03-05T17:24:03.376Z'
+updatedOn: '2025-04-17T16:06:46.404Z'
 ---
 
 <EarlyAccess />
-
-<Admonition type="important">
-The schema-only branch feature is temporarily unavailable while we make updates. Existing schema-only branches will continue to work, but new ones cannot be created. We plan to reenable this feature soon.
-</Admonition>
 
 Neon supports creating schema-only branches, letting you create branches that replicate only the database schema from a source branch — without copying any of the actual data. This feature is ideal for working with confidential information. Instead of duplicating this sensitive data, you can now create a branch with just the database structure and populate it with randomized or anonymized data instead. This provides your team with a secure and compliant environment for developing and testing using Neon branches.
 
@@ -110,7 +106,7 @@ To try out schema-only branches:
 
 2. Navigate to the **Tables** page in the Neon Console, and select your `main` branch from the bread-crumb menu at the top of the console. Your `employees` table will have both schema and data, as shown here:
 
-   ![main branch with schema and data](/docs/guides/schema-data-branch.png)
+   ![production branch with schema and data](/docs/guides/schema-data-branch.png)
 
 3. Create a schema-only branch following the instructions above. See [Creating schema-only branches](#creating-schema-only-branches). In this example, we've named the branch `employees_schema_only`.
 
@@ -139,7 +135,7 @@ Unlike other branches, schema-only branches do not have a parent branch, as you 
 
 ![schema-only branch](/docs/guides/schema_only_no_parent.png)
 
-Schema-only branches are independent [root branches](/docs/reference/glossary#root-branch), just like the `main` branch in your Neon project. When you create a schema-only branch, you’re creating a new **root branch**.
+Schema-only branches are independent [root branches](/docs/reference/glossary#root-branch), just like the `production` branch in your Neon project. When you create a schema-only branch, you're creating a new **root branch**.
 
 ### Key points about schema-only branches
 

@@ -10,7 +10,7 @@ redirectFrom:
 
 <InfoBlock>
 <DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/workos-drizzle-sveltekit-neon-rls-authorize">WorkOS + Neon RLS</a>
+  <a href="https://github.com/neondatabase-labs/workos-drizzle-sveltekit-neon-rls">WorkOS + Neon RLS</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">

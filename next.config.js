@@ -141,6 +141,21 @@ const defaultConfig = {
 
     return [
       {
+        source: '/msbuild',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/bm',
+        destination: '/?ref=tbm-p',
+        permanent: true,
+      },
+      {
+        source: '/burningmonk',
+        destination: '/?ref=tbm-p',
+        permanent: true,
+      },
+      {
         source: '/yc-startups',
         destination: '/startups',
         permanent: true,
@@ -262,11 +277,11 @@ const defaultConfig = {
         destination: 'https://console.neon.tech/signup',
         permanent: true,
       },
-      {
-        source: '/ai',
-        destination: '/docs/ai/ai-intro',
-        permanent: true,
-      },
+      // {
+      //   source: '/ai',
+      //   destination: '/docs/ai/ai-intro',
+      //   permanent: true,
+      // },
       {
         source: '/deploy',
         destination: '/stage',
@@ -285,6 +300,11 @@ const defaultConfig = {
       {
         source: '/early-access-program',
         destination: '/docs/introduction/roadmap#join-the-neon-early-access-program',
+        permanent: true,
+      },
+      {
+        source: '/hipaa-compliance-guide',
+        destination: '/docs/security/hipaa',
         permanent: true,
       },
       ...docsRedirects,

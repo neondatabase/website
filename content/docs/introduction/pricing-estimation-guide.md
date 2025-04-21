@@ -38,7 +38,7 @@ Estimate your monthly usage to see if any "extra usage" is required beyond the s
 
 - **Storage (GB-month)**: How much storage do you expect to use? This includes:
   - The logical data size of your data
-  - The size of your history, determined by your [history retention](/docs/introduction/point-in-time-restore#history-retention) setting in Neon and the volume of insert, update, and delete operations written to your history. See [Storage](/docs/introduction/usage-metrics#storage).
+  - The size of your history, determined by your [restore window](/docs/introduction/branching#restore-window) setting in Neon and the volume of insert, update, and delete operations written to your history. See [Storage](/docs/introduction/usage-metrics#storage).
 - **Archive Storage (GB-month)**: How much archive storage do you expect to use?
   - Branches **older than 14 days** and **not accessed for the past 24 hours** are moved to cost-efficient archive storage automatically. For more, see [Branch archiving](/docs/guides/branch-archiving).
   - This will only apply if you have branches that are not accessed regularly.
@@ -145,6 +145,6 @@ For more examples, see [Extra usage](/docs/introduction/extra-usage).
 
 ## Feedback
 
-We’re always looking for ways to improve our pricing model to make it as developer-friendly as possible. If you have feedback for us, let us know via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord. We read and consider every submission.
+We're always looking for ways to improve our pricing model to make it as developer-friendly as possible. If you have feedback for us, let us know via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord. We read and consider every submission.
 
 <NeedHelp/>

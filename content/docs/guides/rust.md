@@ -1,16 +1,16 @@
 ---
 title: Connect a Rust application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Rust application
+enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/rust
   - /docs/integrations/rust
-updatedOn: '2025-02-03T20:41:57.336Z'
+updatedOn: '2025-04-20T15:44:26.055Z'
 ---
 
 This guide describes how to create a Neon project and connect to it from a Rust application.
 
-1. [Create a Neon project](#create-a-neon-project)
-2. [Configure the connection](#configure-the-connection)
+<Steps>
 
 ## Create a Neon project
 
@@ -52,5 +52,7 @@ fn main() -> Result<(), Box<dyn error::Error>> {
 ```
 
 You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+
+</Steps>
 
 <NeedHelp/>

@@ -2,7 +2,7 @@
 title: Neon for Database-per-user
 subtitle: How to configure Neon for multi-tenancy - plus a few design tips
 enableTableOfContents: true
-updatedOn: '2025-02-25T18:52:09.458Z'
+updatedOn: '2025-04-17T16:06:46.411Z'
 ---
 
 With its serverless and API-first nature, Neon is an excellent choice for building database-per-user applications (or apps where each user/customer has their own Postgres database). Neon is particularly well-suited for architectures that prioritize maximum database isolation, achieving the equivalent of instance-level isolation.
@@ -103,9 +103,9 @@ To handle [dev/test](https://neon.tech/use-cases/dev-test) in a project-per-user
 
 The methodology:
 
-- **Within the non-prod project, load your testing data into the main branch.** This main branch will serve as the primary source for all dev/test environments.
-- **Create ephemeral environments via child branches.** For each ephemeral environment, create a child branch from the main branch. These branches are fully isolated in terms of resources and come with an up-to-date copy of your testing dataset.
-- **Automate the process.** Use CI/CD and automations to streamline your workflow. You can reset child branches with one click to keep them in sync with the main branch as needed, maintaining data consistency across your dev/test environments.
+- **Within the non-prod project, load your testing data into the production branch.** This production branch will serve as the primary source for all dev/test environments.
+- **Create ephemeral environments via child branches.** For each ephemeral environment, create a child branch from the production branch. These branches are fully isolated in terms of resources and come with an up-to-date copy of your testing dataset.
+- **Automate the process.** Use CI/CD and automations to streamline your workflow. You can reset child branches with one click to keep them in sync with the production branch as needed, maintaining data consistency across your dev/test environments.
 
 ## Designing a Control Plane
 
@@ -210,7 +210,7 @@ If you decide to implement isolated environments, here’s some advice to consid
 
 ## Migrating Schemas
 
-Is database-per-user design, it is common to have the same schema for all users/databases. Any changes to the user schema will most likely be rolled out to all individual databases simultaneously. In this section, we teach you how to use DrizzleORM, GitHub Actions, the Neon API, and a couple of custom template scripts to manage many databases using the same database schema.
+In a database-per-user design, it is common to have the same schema for all users/databases. Any changes to the user schema will most likely be rolled out to all individual databases simultaneously. In this section, we teach you how to use DrizzleORM, GitHub Actions, the Neon API, and a couple of custom template scripts to manage many databases using the same database schema.
 
 ### Example app
 
@@ -504,13 +504,13 @@ The source code for this migration script is located at: `src/scripts/migrate.js
 
 Here’s an overview of the workflow:
 
-- We used a script to automate the creation of DrizzleORM configuration files (`drizzle.config.ts`) and securely store database connection strings as GitHub secrets.management.
+- We used a script to automate the creation of DrizzleORM configuration files (`drizzle.config.ts`) and securely store database connection strings as GitHub secrets.
 - We used a migration script to iterate through the configs directory and apply schema changes to all databases via `drizzle-kit migrate`.
 - The GitHub Actions workflow triggers migrations automatically when a PR is merged. Environment variables for each project are explicitly injected into the workflow, giving DrizzleORM access to the connection strings needed for schema updates.
 
 ## Backing up Projects to Your Own S3
 
-As a manage database, Neon already takes care of securing your data, always keeping a full copy of your dataset in object storage. But if your use case or company demands that you also keep a copy of your data in your own S3, this section covers how to automate the process via a scheduled GitHub Action. A more extensive explanation can be found in this two-part blog post series: [Part 1](https://neon.tech/blog/how-to-create-an-aws-s3-bucket-for-postgres-backups), [Part 2](https://neon.tech/blog/nightly-backups-for-multiple-neon-projects).
+As a managed database, Neon already takes care of securing your data, always keeping a full copy of your dataset in object storage. But if your use case or company demands that you also keep a copy of your data in your own S3, this section covers how to automate the process via a scheduled GitHub Action. A more extensive explanation can be found in this two-part blog post series: [Part 1](https://neon.tech/blog/how-to-create-an-aws-s3-bucket-for-postgres-backups), [Part 2](https://neon.tech/blog/nightly-backups-for-multiple-neon-projects).
 
 ### AWS IAM configuration
 
@@ -581,7 +581,7 @@ Create the following GitHub Secrets to hold various values that you likely won�
 
 ### Scheduled pg_dump/restore GitHub Action
 
-Before diving into the code, here’s a look at this example in the Neon console dashboard. These are three databases set up for three fictional customers, all running Postgres 16 and all are deployed to us-east-1. We will be backing up each database into its own folder within an S3 bucket, with different schedules and retention periods. All the code in this example lives [in this repository](https://github.com/neondatabase-labs/neon-multiple-db-s3-backups).
+Before diving into the code, here’s a look at this example in the Neon console dashboard. There are three databases set up for three fictional customers, all running Postgres 16 and all are deployed to us-east-1. We will be backing up each database into its own folder within an S3 bucket, with different schedules and retention periods. All the code in this example lives [in this repository](https://github.com/neondatabase-labs/neon-multiple-db-s3-backups).
 
 ![S3 backup three databases](/docs/use-cases/s3_backup_three_databases.png)
 
@@ -778,5 +778,5 @@ This step creates a new folder (if one doesn’t already exist) inside the S3 bu
 You can create as many of these Actions as you need. Just be careful to double check the `DATABASE_URL` to avoid backing up a database to the wrong folder.
 
 <Admonition type="important">
-GitHub Actions will timeout after ~6 hours. The size of your database is and how you’ve configured it will determine how long the `pg_dump` step takes. If you do experience timeout issues, you can self host [GitHub Action runners](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners). 
+GitHub Actions will timeout after ~6 hours. The size of your database and how you’ve configured it will determine how long the `pg_dump` step takes. If you do experience timeout issues, you can self host [GitHub Action runners](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners). 
 </Admonition>
