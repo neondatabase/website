@@ -12,7 +12,9 @@ updatedOn: '2024-12-01T21:48:07.693Z'
 Neon combines the power of Postgres with a modern serverless architecture to help you scale fast and ship confidently.
 
 - **Serverless Postgres** – Instant autoscaling of CPU, memory, and connections
-- **10,000+ connections** – Built-in connection pooling
+- **10,000+ concurrent connections** – Built-in connection pooling
+- **Multi-TB Postgres workloads** — Support for large enterprise workloads
+- **Autoscaling for large workloads** — Autoscaling of compute and storage for large workloads 
 - **Database branching & instant provisioning** – Create production-grade environments on the fly
 - **Multi-tenancy** – Project-level isolation for tenant data and resources
 - **High availability and disaster recovery** – PITR, branching, and multi-AZ durability
@@ -27,7 +29,7 @@ Neon combines the power of Postgres with a modern serverless architecture to hel
 
 Accelerate development workflows with branching, preview environments, and database automation. Move faster without managing Postgres infrastructure.
 
-### SaaS platforms embedding Postgres
+### Embedded Postgres
 
 Offer Postgres to your users with built-in scalability, fast provisioning, and API-level control.
 
@@ -110,7 +112,7 @@ Use this checklist to evaluate Neon for your team:
 
 - [ ] Postgres compatibility — [support for Postgres 14, 15, 16, 17](/docs/postgresql/postgres-version-policy#neon-version-support-policy) and [70+ Postgres extensions](/docs/extensions/pg-extensions)
 - [ ] [High availability](/docs/introduction/high-availability) with automated failover
-- [ ] [Point-in-time restore (PITR)](/docs/introduction/branch-restore)
+- [ ] [Instant Point-in-time restore (PITR)](/docs/introduction/branch-restore)
 - [ ] [Read replicas](/docs/introduction/read-replicas) for horizontal scaling
 - [ ] Performance at scale ([connection pooling](/docs/connect/connection-pooling), [low-latency serverles driver](/docs/serverless/serverless-driver), [autoscaling compute](/docs/introduction/autoscaling))
 - [ ] Monitoring and observability ([monitoring dashboard](/docs/introduction/monitoring-page), [query monitoring](/docs/introduction/monitor-active-queries), and [metrics export](/docs/guides/datadog))
