@@ -12,7 +12,7 @@ Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary
 
 ## Prerequisites
 
-- Ensure that pg_dump and pg_restore are installed (verify by running: `pg_dump -V`). For optimal performance, we recommend using the latest versions of these tools and ensure that the client version matches your Neon project's Postgres version (14, 15, 16, or 17).
+- Make sure `pg_dump` and `pg_restore` are installed. You can verify by running `pg_dump -V`. We recommend using the latest versions of these tools, and ensuring that the client version matches your Neon project's Postgres version (14–17).
 
 ## Install `pg_dump` and `pg_restore` 
 
@@ -47,7 +47,7 @@ If you don't have the `pg_dump` and `pg_restore` utilities installed locally, yo
 
 Following this procedure will create a database backup locally, where you're running the `pg_dump` command.  
 
-1. Retrieve the connection string for your Neon database by navigate to your Neon **Project Dashboard** and clicking the **Connect** button to open the **Connect to your database** modal.
+1. Retrieve the connection string for your Neon database by navigating to your Neon **Project Dashboard** and clicking the **Connect** button to open the **Connect to your database** modal.
 
 2. Deselect the **Connection pooling** option. You need a direct connection string, not a pooled one.
 
@@ -63,7 +63,7 @@ Following this procedure will create a database backup locally, where you're run
     pg_dump --no-owner --no-privileges --no-publications --no-subscriptions -Fc -v -d "<neon_database_connection_string>" -f <dump_file_name>
     ```
 
-    When you add your Neon database connection string and a dump file name, you command will look something like this:
+    After adding your Neon database connection string and a dump file name, your command will look like this:
 
     ```bash shouldWrap
     pg_dump --no-owner --no-privileges --no-publications --no-subscriptions -Fc -v -d "postgresql://neondb_owner:npg_AbC123dEf@ep-dry-morning-a8vn5za2.eastus2.azure.neon.tech/neondb?sslmode=require" -f mydatabase.bak
@@ -87,7 +87,7 @@ Following this procedure will create a database backup locally, where you're run
 This procedure shows how to restore a database using the `pg_restore` utility from a backup file created using `pg_dump`, as described above.
 
 1. Create a new Neon project.
-2. Create a database with the same name as database you dumped. The `pg_dump` instructions above created a backup of a database named `neondb`. Your database name is likely different.
+2. Create a database with the same name as the one you backed up. The `pg_dump` instructions above created a backup of a database named `neondb`. Your database name is likely different.
 3. Retrieve the connection string for your Neon database:
 
     Go to your Neon project and click the **Connect** button to open the **Connect to your database** modal.
@@ -123,8 +123,9 @@ This procedure shows how to restore a database using the `pg_restore` utility fr
 The following example shows how data is dumped from source database named `neondb` in one Neon project and restored to a `neondb` database in another Neon project using the commands described in the previous sections. (A database named `neondb` was created in the source Neon project prior to running the restore operation.)
 
 Before performing this procedure:
-- A new Neon project was created for the destination database, and a database with the same name as the source database was created (neondb`)
-- Connection strings for for the source and destination databases were collected:
+
+- A new Neon project was created for the destination database, and a database with the same name as the source database was created (`neondb`)
+- Connection strings for the source and destination databases were collected:
     - source: `postgresql://neondb_owner:npg_AbC123dEf@ep-dry-morning-a8vn5za2.eastus2.azure.neon.tech/neondb?sslmode=require`
     - destination: `postgresql://neondb_owner:npg_AbC123dEf@ep-dry-morning-a8vn5za2.eastus2.azure.neon.tech/neondb?sslmode=require`
 
