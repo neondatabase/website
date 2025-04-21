@@ -8,13 +8,12 @@ updatedOn: '2025-03-27T00:00:00.000Z'
 
 <InfoBlock>
 <DocsList title="What you will learn">
-  <li>Why use pgcopydb for data migration</li>
-  <li>Setting up environment variables for migration</li>
-  <li>Running and monitoring the migration process</li>
-  <li>Advanced usage options for optimizing migrations</li>
+  <p>Why use pgcopydb</p>
+  <p>Setting up environment variables for migration</p>
+  <p>Monitoring the migration process</p>
+  <p>Advanced usage options</p>
 </DocsList>
 
-<div>
 <DocsList title="Repo" theme="repo">
   <a href="https://github.com/dimitri/pgcopydb">pgcopydb GitHub repository</a>
 </DocsList>
@@ -22,7 +21,6 @@ updatedOn: '2025-03-27T00:00:00.000Z'
 <DocsList title="Related docs" theme="docs">
   <a href="https://pgcopydb.readthedocs.io/">pgcopydb documentation</a>
 </DocsList>
-</div>
 
 </InfoBlock>
 
