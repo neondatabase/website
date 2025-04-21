@@ -46,6 +46,8 @@ If you're planning to migrate a production workload to Neon, let us know&#8212;w
 
 <a href="/docs/import/migrate-from-supabase" description="MIgrate data from Supabase to Neon Postgres with pg_dump and pg_restore" icon="sql">Migrate from Supabase</a>
 
+<a href="/docs/guides/pgcopydb" description="Migrate data from another Postgres database using pgcopydb for parallel processing" icon="postgres">Migrate with pgcopydb</a>
+
 </DetailIconCards>
 
 ## Use logical replication for near-zero downtime data migrations
