@@ -8,8 +8,7 @@ updatedOn: '2025-02-22T14:55:35.232Z'
 In this guide, you'll learn how to configure nightly Postgres backups using a scheduled GitHub Action and `pg_dump`.
 
 <Admonition type="note">
-This is part two of a two-part guide.
-Go back to part one [here](/docs/manage/backups-aws-s3-backup-part-1).
+This is part two of a two-part guide. Make sure you've completed [part 1](/docs/manage/backups-aws-s3-backup-part-1) first.
 </Admonition>
 
 ## Prerequisites

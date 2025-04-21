@@ -86,6 +86,18 @@ Learn how Neon secures your projects and data, and explore the security features
 
 </DetailIconCards>
 
+## Backups
+
+<DetailIconCards>
+
+<a href="/docs/manage/backups" description="An overview of backup strategies for Neon Postgres" icon="database">About backups</a>
+
+<a href="/docs/manage/backup-pg-dump" description="Learn how to create a backup of your Neon database using pg_dump" icon="database">Backups with pg_dump</a>
+
+<a href="/docs/manage/backup-pg-dump-automate" description="Automate backups of your Neon database to S3 with pg_dump and GitHub Actions" icon="stopwatch">Automate pg_dump backups</a>
+
+</DetailIconCards>
+
 ## Maintenance & updates
 
 <DetailIconCards>

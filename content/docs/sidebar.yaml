@@ -368,15 +368,18 @@
               tag: beta
         - section: Backups
           items:
-            - title: Backups
+            - title: Overview
               slug: manage/backups
-            - title: Part 1 - Create an S3 bucket
-              slug: manage/backups-aws-s3-backup-part-1
-              tag: new
-            - title: Part 2 - Automate nightly backups
-              slug: manage/backups-aws-s3-backup-part-2
-              tag: new
-        - section: Maintenance & updates
+            - title: Backup with pg_dump
+              slug: manage/backup-pg-dump
+            - title: Automate pg_dump backups
+              slug: manage/backup-pg-dump-automate
+              items:
+                - title: Part 1 - Create an S3 bucket
+                  slug: manage/backups-aws-s3-backup-part-1
+                - title: Part 2 - Automate nightly backups
+                  slug: manage/backups-aws-s3-backup-part-2
+        - section: Updates
           items:
             - title: Overview
               slug: manage/maintenance-updates-overview              
