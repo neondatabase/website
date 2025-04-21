@@ -3,7 +3,7 @@ title: Migrate data to Neon Postgres using pgcopydb
 subtitle: Streamline your Postgres data migration to Neon using pgcopydb
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-04-21T15:18:50.031Z'
+updatedOn: '2025-04-21T15:23:27.912Z'
 ---
 
 <InfoBlock>
