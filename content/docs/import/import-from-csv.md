@@ -44,15 +44,15 @@ CREATE TABLE customer (
 You can also create tables using the **SQL Editor** in the Neon Console. See [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
 </Admonition>
 
-## Prepare the CSV file 
+## Prepare the CSV file
 
 Prepare a `customer.csv` file with the following data — note that the columns in the CSV file match the columns in the table you created in the previous step.
 
-   ```text
-   First Name,Last Name,Email
-   1,Casey,Smith,casey.smith@example.com
-   2,Sally,Jones,sally.jones@example.com
-   ```
+```text
+First Name,Last Name,Email
+1,Casey,Smith,casey.smith@example.com
+2,Sally,Jones,sally.jones@example.com
+```
 
 ## Load the data
 

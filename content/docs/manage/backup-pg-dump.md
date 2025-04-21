@@ -13,7 +13,7 @@ Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary
 
 ## Prerequisites
 
-- Make sure `pg_dump` and `pg_restore` are installed. You can verify by running `pg_dump -V`. 
+- Make sure `pg_dump` and `pg_restore` are installed. You can verify by running `pg_dump -V`.
 - We recommend using the latest versions of `pg_dump` and `pg_restore`, and ensuring that the client version matches your Neon project's Postgres version (14–17).
 
 ## Install `pg_dump` and `pg_restore`
@@ -61,22 +61,22 @@ Following this procedure will create a database backup locally, where you're run
 
 3. Create a backup of your Neon database by running the following `pg_dump` command with your Neon database connection string.
 
-    ```bash shouldWrap
-    pg_dump -Fc -v -d "<neon_database_connection_string>" -f <dump_file_name>
-    ```
+   ```bash shouldWrap
+   pg_dump -Fc -v -d "<neon_database_connection_string>" -f <dump_file_name>
+   ```
 
-    After adding your Neon database connection string and a dump file name, your command will look something like this:
+   After adding your Neon database connection string and a dump file name, your command will look something like this:
 
-    ```bash shouldWrap
-    pg_dump -Fc -v -d "postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require" -f mydatabase.bak
-    ```
+   ```bash shouldWrap
+   pg_dump -Fc -v -d "postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require" -f mydatabase.bak
+   ```
 
    The `pg_dump` command above includes these arguments:
 
-    - `-Fc`: Sends the output to a custom-format archive suitable for input into `pg_restore`.
-    - `-v`: Runs `pg_dump` in verbose mode, allowing you to monitor what happens during the dump operation.
-    - `-d`: Specifies the [connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING) for your Neon database.
-    - `-f <dump_file_name>`: The dump file name. It can be any name you choose (`mydumpfile.bak`, for example).
+   - `-Fc`: Sends the output to a custom-format archive suitable for input into `pg_restore`.
+   - `-v`: Runs `pg_dump` in verbose mode, allowing you to monitor what happens during the dump operation.
+   - `-d`: Specifies the [connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING) for your Neon database.
+   - `-f <dump_file_name>`: The dump file name. It can be any name you choose (`mydumpfile.bak`, for example).
 
    For more command options, see [Advanced pg_dump and pg_restore options](#advanced-pgdump-and-pgrestore-options).
 
@@ -94,9 +94,9 @@ This procedure shows how to restore a database using the `pg_restore` utility fr
 
    Your connection string should look something like this:
 
-    ```bash shouldWrap
-    postgresql://alex:AbC123dEf@ep-dry-morning-a8vn5za2.us-east-2.aws.neon.tech/neondb?sslmode=require
-    ```
+   ```bash shouldWrap
+   postgresql://alex:AbC123dEf@ep-dry-morning-a8vn5za2.us-east-2.aws.neon.tech/neondb?sslmode=require
+   ```
 
 4. Restore your data to the target database in Neon with `pg_restore`.
 
@@ -104,12 +104,11 @@ This procedure shows how to restore a database using the `pg_restore` utility fr
    pg_restore -v -d "<neon_database_connection_string>" <dump_file_name>
    ```
 
-    After adding your Neon database connection string and the dump file name, your command will look something like this:
+   After adding your Neon database connection string and the dump file name, your command will look something like this:
 
-
-    ```bash shouldWrap
-    pg_restore -v -d "postgresql://alex:AbC123dEf@ep-dry-morning-a8vn5za2.us-east-2.aws.neon.tech/neondb?sslmode=require" mydatabase.bak
-    ```
+   ```bash shouldWrap
+   pg_restore -v -d "postgresql://alex:AbC123dEf@ep-dry-morning-a8vn5za2.us-east-2.aws.neon.tech/neondb?sslmode=require" mydatabase.bak
+   ```
 
    The example above includes these arguments:
 
@@ -127,8 +126,8 @@ Before performing this procedure:
 
 - A new Neon project was created for the destination database, and a database with the same name as the source database was created (`neondb`)
 - Connection strings for the source and destination databases were collected:
-    - source: `postgresql://neondb_owner:npg_AbC123dEf@ep-dry-morning-a8vn5za2.us-east-2.aws.neon.tech/neondb?sslmode=require`
-    - destination: `postgresql://neondb_owner:npg_AbC123dEf@ep-dry-morning-a8vn5za2.us-east-2.aws.neon.tech/neondb?sslmode=require`
+  - source: `postgresql://neondb_owner:npg_AbC123dEf@ep-dry-morning-a8vn5za2.us-east-2.aws.neon.tech/neondb?sslmode=require`
+  - destination: `postgresql://neondb_owner:npg_AbC123dEf@ep-dry-morning-a8vn5za2.us-east-2.aws.neon.tech/neondb?sslmode=require`
 
 ```bash shouldWrap
 ~$ cd mydump

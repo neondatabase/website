@@ -24,20 +24,20 @@ Neon supports different backup strategies, which you can use separately or in co
 
 ## Instant restore
 
-  With Neon's instant restore capability, also known as point-in-time restore or PITR, you can automatically retain a "history" of changes—ranging from 1 day up to 30 days, depending on your Neon plan. This feature lets you restore your database to any specific moment without the need for traditional database backups or separate backup automation. It's ideal if your primary concern is fast recovery after an unexpected event.
+With Neon's instant restore capability, also known as point-in-time restore or PITR, you can automatically retain a "history" of changes—ranging from 1 day up to 30 days, depending on your Neon plan. This feature lets you restore your database to any specific moment without the need for traditional database backups or separate backup automation. It's ideal if your primary concern is fast recovery after an unexpected event.
 
-  By default, Neon projects retain **1 day** of history. You can increase your restore window on Neon as follows:
+By default, Neon projects retain **1 day** of history. You can increase your restore window on Neon as follows:
 
-  | Plan                                                   | Restore window limit  |
-  | :----------------------------------------------------- | :----------------------- |
-  | [Free](/docs/introduction/plans#free-plan)             | 1 day                    |
-  | [Launch](/docs/introduction/plans#launch)              | 7 days                   |
-  | [Scale](/docs/introduction/plans#scale)                | 14 days                  |
-  | [Business](/docs/introduction/plans#business)          | 30 days                  |
+| Plan                                          | Restore window limit |
+| :-------------------------------------------- | :------------------- |
+| [Free](/docs/introduction/plans#free-plan)    | 1 day                |
+| [Launch](/docs/introduction/plans#launch)     | 7 days               |
+| [Scale](/docs/introduction/plans#scale)       | 14 days              |
+| [Business](/docs/introduction/plans#business) | 30 days              |
 
-  With this strategy, the only required action is setting your desired restore window. Please keep in mind that increasing your restore window also increases storage, as changes to your data are retained for a longer period.
+With this strategy, the only required action is setting your desired restore window. Please keep in mind that increasing your restore window also increases storage, as changes to your data are retained for a longer period.
 
-  ![Restore window](/docs/manage/history_retention.png)
+![Restore window](/docs/manage/history_retention.png)
 
     To get started, see [Instant restore](/docs/introduction/branch-restore).
 
