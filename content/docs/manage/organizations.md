@@ -20,7 +20,7 @@ Organizations have two member roles:
 - **Admin** — Administrators have full control over the organization and all its projects. They manage permissions, billing, members, and organization settings. Only Admins can delete organization projects.
 - **Members** — Members have access to all organization projects and can perform most project operations, but cannot modify organization settings or delete projects.
 
-Additionally, individual projects can be shared with **Project Collaborators** — external users who are granted access to specific projects only. Unlike organization members who can access all projects, collaborators can only work with projects they are explicitly invited to.
+Additionally, projects can be shared with **Project Collaborators**. These are external users with no organization-level access, but who can work with specific projects they're invited to.
 
 The following table shows what actions each role can perform in the organization and in organization-owned projects:
 
