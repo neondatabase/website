@@ -13,8 +13,8 @@ Neon combines the power of Postgres with a modern serverless architecture to hel
 
 - **Serverless Postgres** – Instant autoscaling of CPU, memory, and connections
 - **10,000+ concurrent connections** – Built-in connection pooling
-- **Multi-TB Postgres workloads** — Support for large enterprise workloads
-- **Autoscaling for large workloads** — Autoscaling of compute and storage for large workloads 
+- **Multi-TB Postgres workloads** — Support for enterprise workloads
+- **Autoscaling** — Autoscaling of compute and storage for large workloads 
 - **Database branching & instant provisioning** – Create production-grade environments on the fly
 - **Multi-tenancy** – Project-level isolation for tenant data and resources
 - **High availability and disaster recovery** – PITR, branching, and multi-AZ durability
@@ -31,19 +31,19 @@ Accelerate development workflows with branching, preview environments, and datab
 
 ### Embedded Postgres
 
-Offer Postgres to your users with built-in scalability, fast provisioning, and API-level control.
+Offer Postgres to your users with built-in scalability, fast provisioning, and API-level control. Provision and manage thousands of databases with API-driven workflows. Use branching and autoscaling to reduce operational overhead and control costs.
 
-### Teams managing database fleets
-
-Provision and manage thousands of databases with API-driven workflows. Use branching and autoscaling to reduce operational overhead and control costs.
-
-### AI platforms and agentic apps
+### AI Agents
 
 Spin up Postgres instances instantly for agent workloads, data processing, or long-lived sessions. Ideal for real-time inference and rapid prototyping.
 
 ### Multi-tenant applications
 
 Isolate customer data and resources into separate Neon projects for efficient management and to meet compliance requirements.
+
+### Compliance-heavy SaaS
+
+Companies with a strong security focus due to their industry
 
 ## Enterprise features
 
