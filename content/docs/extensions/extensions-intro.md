@@ -1,7 +1,7 @@
 ---
 title: Postgres extensions
 enableTableOfContents: true
-updatedOn: '2025-02-12T10:58:29.258Z'
+updatedOn: '2025-03-18T00:26:27.344Z'
 ---
 
 Explore supported Postgres extensions by category. Also see:
@@ -10,7 +10,7 @@ Explore supported Postgres extensions by category. Also see:
 - [Install an extension](/docs/extensions/pg-extensions#install-an-extension)
 - [Update an extension](/docs/extensions/pg-extensions#update-an-extension-version)
 
-**Need an extension we don't have?** 📩 [Request an extension](/docs/extensions/pg-extensions#request-extension-support)
+**Need an extension we don't have?** 📩 [Request an extension](/docs/extensions/pg-extensions#request-an-extension)
 
 ## AI / Machine Learning
 
@@ -72,7 +72,7 @@ Explore supported Postgres extensions by category. Also see:
 
 <a href="https://www.postgresql.org/docs/16/isn.html" description="Implements data types for international product numbering standards: EAN13, UPC, ISBN (books), ISMN (music), and ISSN (serials)" icon="data">isn</a>
 
-<a href="https://www.postgresql.org/docs/16/ltree.html" description="Provides data types for representing labels of data stored in a hierarchical tree-like structure and facilities for searching through label trees" icon="data">ltree</a>
+<a href="/docs/extensions/ltree" description="Provides data types for representing labels of data stored in a hierarchical tree-like structure and facilities for searching through label trees" icon="data">ltree</a>
 
 <a href="https://github.com/supabase/pg_graphql" description="Adds GraphQL support to Postgres, allowing you to query your database via GraphQL" icon="data">pg_graphql</a>
 
@@ -90,11 +90,11 @@ Explore supported Postgres extensions by category. Also see:
 
 <a href="https://www.postgresql.org/docs/16/tablefunc.html" description="Contains functions that return tables (multiple rows), including crosstab, which can pivot row data into columns dynamically" icon="data">tablefunc</a>
 
-<a href="https://www.postgresql.org/docs/16/unaccent.html" description="A text search dictionary that removes accents from characters, simplifying text search in Postgres" icon="data">unaccent</a>
+<a href="/docs/extensions/unaccent" description="A text search dictionary that removes accents from characters, simplifying text search in Postgres" icon="data">unaccent</a>
 
 <a href="https://github.com/df7cb/postgresql-unit" description="Implements a data type for SI units, plus byte, for storage, manipulation, and calculation of scientific units" icon="data">unit</a>
 
-<a href="https://www.postgresql.org/docs/16/uuid-ossp.html" description="Provides functions to generate universally unique identifiers (UUIDs) in Postgres, supporting various UUID standards" icon="data">uuid-ossp</a>
+<a href="/docs/extensions/uuid-ossp" description="Provides functions to generate universally unique identifiers (UUIDs) in Postgres, supporting various UUID standards" icon="data">uuid-ossp</a>
 
 <a href="/docs/extensions/wal2json" description="A Postgres logical decoding plugin that converts Write-Ahead Log (WAL) changes into JSON objects" icon="data">wal2json</a>
 
@@ -242,11 +242,13 @@ Explore supported Postgres extensions by category. Also see:
 
 <a href="https://www.postgresql.org/docs/16/fuzzystrmatch.html" description="Provides several functions to determine similarities and distance between strings in Postgres" icon="search">fuzzystrmatch</a>
 
+<a href="/docs/extensions/pg_search" description="An Elasticsearch alternative for full-text search and analytics on Postgres" icon="search">pg_search</a>
+
 <a href="/docs/extensions/pg_trgm" description="Provides functions and operators for determining the similarity of alphanumeric text based on trigram matching, and index operator classes for fast string similarity search" icon="search">pg_trgm</a>
 
 <a href="https://github.com/dimitri/prefix" description="A prefix range module that supports efficient queries on text columns with prefix-based searching and matching capabilities" icon="search">prefix</a>
 
-<a href="https://www.postgresql.org/docs/16/unaccent.html" description="A text search dictionary that removes accents from characters, simplifying text search in Postgres" icon="search">unaccent</a>
+<a href="/docs/extensions/unaccent" description="A text search dictionary that removes accents from characters, simplifying text search in Postgres" icon="search">unaccent</a>
 
 </DetailIconCards>
 
@@ -256,7 +258,7 @@ Explore supported Postgres extensions by category. Also see:
 
 <a href="/docs/guides/neon-authorize#how-the-pgsessionjwt-extension-works" description="Enables RLS policies to verify user identity directly within SQL queries" icon="check">pg_session_jwt</a>
 
-<a href="https://www.postgresql.org/docs/16/pgcrypto.html" description="Offers cryptographic functions, allowing for encryption and hashing of data within Postgres" icon="check">pgcrypto</a>
+<a href="/docs/extensions/pgcrypto" description="Offers cryptographic functions, allowing for encryption and hashing of data within Postgres" icon="check">pgcrypto</a>
 
 <a href="https://github.com/michelp/pgjwt" description="Implements JSON Web Tokens (JWT) in Postgres, allowing for secure token creation and verification" icon="check">pgjwt</a>
 

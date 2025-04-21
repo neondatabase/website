@@ -77,10 +77,6 @@ Specify the maximum concurrent connections to the new database. The default is \
 
 The `allow_connections` parameter is a boolean value. If it is `false`, you cannot connect to the database.
 
-**TABLESPACE**
-
-Specify the [tablespace](postgresql-create-tablespace) that the new database will use. It defaults to the tablespace of the template database.
-
 **IS_TEMPLATE**
 
 If the `IS_TEMPLATE` is true, any user with the `CREATEDB` privilege can clone it. If false, only superusers or the database owner can clone it.

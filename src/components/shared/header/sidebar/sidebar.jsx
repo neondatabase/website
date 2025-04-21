@@ -1,30 +1,37 @@
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { Suspense } from 'react';
 
 import Button from 'components/shared/button';
-import GithubStarCounter from 'components/shared/github-star-counter';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
-import { getGithubStars } from 'utils/get-github-data';
+import DiscordIcon from 'icons/discord.inline.svg';
 
 const themePropTypes = {
   isDarkTheme: PropTypes.bool,
 };
 
-const GithubStars = async ({ isDarkTheme }) => {
-  const starsCount = await getGithubStars();
-  return (
-    <Suspense>
-      <GithubStarCounter isDarkTheme={isDarkTheme} starsCount={starsCount} />
-    </Suspense>
-  );
-};
+const DiscordLink = ({ isDarkTheme }) => (
+  <Link
+    className={clsx(
+      'transition-colors duration-200',
+      isDarkTheme
+        ? 'text-white hover:text-green-45'
+        : 'text-gray-new-40 hover:text-green-45 dark:text-white dark:hover:text-green-45'
+    )}
+    to={LINKS.discord}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <DiscordIcon width={20} height={20} />
+    <span className="sr-only">Discord</span>
+  </Link>
+);
 
-GithubStars.propTypes = themePropTypes;
+DiscordLink.propTypes = themePropTypes;
 
-const Sidebar = ({ isDarkTheme, isClient }) => (
+const Sidebar = ({ isDarkTheme }) => (
   <div className="flex items-center gap-x-6 lg:hidden">
-    {!isClient && <GithubStars isDarkTheme={isDarkTheme} />}
+    <DiscordLink isDarkTheme={isDarkTheme} />
     <Link
       className="whitespace-nowrap text-[13px] leading-none tracking-extra-tight lg:hidden"
       to={LINKS.login}
@@ -37,7 +44,7 @@ const Sidebar = ({ isDarkTheme, isClient }) => (
       className="h-8 whitespace-nowrap px-6 text-[13px] font-semibold leading-none tracking-extra-tight transition-colors duration-200 lg:hidden"
       to={LINKS.signup}
       theme="primary"
-      tag_name="Header"
+      tagName="Header"
       analyticsEvent="header_sign_up_clicked"
     >
       Sign Up

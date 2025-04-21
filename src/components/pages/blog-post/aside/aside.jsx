@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
+import ChangelogForm from 'components/shared/changelog-form';
 import Link from 'components/shared/link/link';
 import LINKS from 'constants/links';
 
@@ -9,10 +10,10 @@ import SocialShare from '../social-share';
 
 const Aside = ({ className, title, slug, authors, posts }) => (
   <aside className={clsx('aside ml-auto max-w-[298px] lg:ml-0 lg:max-w-full', className)}>
-    <div className="sticky top-24">
+    <div className="no-scrollbars sticky top-24 max-h-[calc(100vh-100px)] overflow-y-auto pb-5">
       {Array.isArray(authors) && authors.length > 0 && (
         <>
-          <h3 className="mb-5 text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-blue-80 lg:hidden">
+          <h3 className="mb-5 text-[12px] font-semibold uppercase leading-none -tracking-extra-tight text-blue-80 lg:hidden">
             Posted by
           </h3>
           <div className="flex flex-col space-y-4">
@@ -40,13 +41,13 @@ const Aside = ({ className, title, slug, authors, posts }) => (
                     <span
                       className={clsx(
                         index === 0 && 'post-author',
-                        'font-semibold leading-dense tracking-[-0.02em] transition-colors duration-200',
+                        'font-semibold leading-dense tracking-extra-tight transition-colors duration-200',
                         { 'group-hover:text-green-45': author.postAuthor?.url }
                       )}
                     >
                       {author.title}
                     </span>
-                    <span className="mt-1 text-sm leading-dense tracking-[-0.02em] text-gray-new-70">
+                    <span className="mt-1 text-sm leading-dense tracking-extra-tight text-gray-new-70">
                       {author.postAuthor?.role}
                     </span>
                   </div>
@@ -58,7 +59,7 @@ const Aside = ({ className, title, slug, authors, posts }) => (
       )}
       <h3
         className={clsx(
-          'text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-blue-80 lg:hidden',
+          'text-[12px] font-semibold uppercase leading-none -tracking-extra-tight text-blue-80 lg:hidden',
           {
             'mt-16': Array.isArray(authors) && authors.length > 0,
           }
@@ -72,10 +73,10 @@ const Aside = ({ className, title, slug, authors, posts }) => (
             <Link className="group" to={`${LINKS.blog}/${slug}`}>
               <article className="flex items-center space-x-3">
                 <div>
-                  <h1 className="line-clamp-2 font-title font-medium leading-tight tracking-[-0.02em] transition-colors duration-200 group-hover:text-green-45">
+                  <h1 className="line-clamp-2 font-title font-medium leading-tight tracking-extra-tight transition-colors duration-200 group-hover:text-green-45">
                     {title}
                   </h1>
-                  <span className="mt-1.5 text-sm leading-none tracking-[-0.02em] text-gray-new-80">
+                  <span className="mt-1.5 text-sm leading-none tracking-extra-tight text-gray-new-80">
                     {authors[0]?.author?.title}
                   </span>
                 </div>
@@ -97,6 +98,7 @@ const Aside = ({ className, title, slug, authors, posts }) => (
         ))}
       </ul>
       <SocialShare className="mt-16 lg:hidden" title={title} slug={slug} withTopBorder />
+      <ChangelogForm isSidebar />
     </div>
   </aside>
 );

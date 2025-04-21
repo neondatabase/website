@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2025-02-18T19:59:08.876Z'
+updatedOn: '2025-04-17T16:06:46.410Z'
 ---
 
 ## access token
@@ -41,10 +41,6 @@ A Neon Control Plane operation that applies a new configuration to a Neon object
 
 Cost-efficient storage where Neon archives inactive branches after a defined threshold. For Neon projects created in AWS regions, inactive branches are archived in Amazon S3 storage. For Neon projects created in Azure regions, branches are archived in Azure Blob storage.
 
-## Scale to Zero
-
-A Neon feature that suspends a compute after a specified period of inactivity (5 minutes) to minimize compute usage. When suspended, a compute is placed into an idle state. Otherwise, the compute is in an `Active` state. Users on paid plans can disable the _Scale to Zero_ feature for an "always-active" compute. For more information, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
-
 ## autoscaler-agent
 
 A control mechanism in the Neon autoscaling system that collects metrics from VMs, makes scaling decisions, and performs checks and requests to implement those decisions.
@@ -63,13 +59,16 @@ A mechanism that manages the lag between the Pageserver and compute node or the 
 
 ## backup branch
 
-A branch created by a [point-in-time restore](#point-in-time-restore) operation. When you restore a branch from a particular point in time, the current branch is saved as a backup branch.
+A branch created by a [instant restore](#branch-restore) operation. When you restore a branch from a particular point in time, the current branch is saved as a backup branch.
 
 ## branch
 
 An isolated copy of data, similar to a Git branch. Data includes databases, schemas, tables, records, indexes, roles — everything that comprises data in a Postgres instance. Just as a Git branch allows developers to work on separate features or fixes without impacting their main line of code, a Neon branch enables users to modify a copy of their data in isolation from their main line of data. This approach facilitates parallel database development, testing, and other features, similar to Git's code branching system.
 
-Each Neon project is created with a main line of data referred to as the [root branch](#root-branch). A branch created from the root branch or another branch is a [copy-on-write](#copy-on-write) clone.
+Each Neon project is created with two branches by default:
+
+- **production** - The default branch. This main line of data is referred to as [root branch](#root-branch).
+- **development** - A child branch of production. A branch created from the root branch or another branch is a [copy-on-write](#copy-on-write) clone.
 
 You can create a branch from the current or past state of another branch. A branch created from the current state of another branch includes the data that existed on that branch at the time of branch creation. A branch created from a past state of another branch includes the data that existed in the past state.
 
@@ -109,13 +108,17 @@ A role in Neon with limited access to specific projects shared with them. Shared
 
 ## Compute
 
-A service that provides virtualized computing resources, including CPU, memory, and storage, for running applications. In the context of Neon, a compute runs Postgres.
+A service that provides virtualized computing resources, equipped with an operating system, a specified number of virtual CPUs (vCPUs), and a defined amount of RAM. It provides the processing power and resources for running applications. In the context of Neon, a compute runs Postgres and includes supporting components and extensions.
 
-Neon creates a primary read-write compute for the project's default branch. Neon supports both read-write and [read replica](/docs/introduction/read-replicas) computes. A branch can have a single primary (read-write) compute but supports multiple read replica computes. The compute hostname is required to connect to a Neon Postgres database from a client or application. A [compute endpoint](#compute-endpoint) is the access point through which users connect to a Neon compute.
+A [compute endpoint](#compute-endpoint) is the access point for connecting to a Neon compute.
+
+Neon creates a primary read-write compute for the project's default branch. Neon supports both read-write and [read replica](/docs/introduction/read-replicas) computes. A branch can have a single primary (read-write) compute but supports multiple read replica computes. The compute hostname is required to connect to a Neon Postgres database from a client or application.
 
 ## compute endpoint
 
-The access point through which users connect to a Neon compute. In the context of Neon, the compute endpoint is represented by a connection string, which includes necessary credentials and connection parameters. This connection string enables clients, such as applications or users, to securely connect to a Postgres database running on a Neon compute. See [connection string](#connection-string).
+The network access point for connecting to a [Neon compute](#compute).
+
+In Neon, a compute endpoint is represented by a hostname, such as `ep-aged-math-668285.us-east-2.aws.neon.tech`, which directs traffic to the appropriate Neon compute. Additional attributes further define a compute endpoint, including `project_id`, `region_id`, `branch_id`, and `type`. These attributes specify the associated Neon project, branch, cloud service region, and whether the endpoint is read-write or read-only. For additional endpoint attributes, refer to the [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint).
 
 ## compute size
 
@@ -181,7 +184,7 @@ A method of storing inactive data that converts plaintext data into a coded form
 
 ## Data transfer
 
-A usage metric that measures the total volume of data transferred out of Neon (known as "egress") during a given billing period. Neon does not charge for egress data, but we limit the amount of egress available on Free Plan projects to 5 GB per month. See [Data tranfser](/docs/introduction/usage-metrics#data-transfer).
+A usage metric that measures the total volume of data transferred out of Neon (egress) during a billing period. Egress also includes data transferred from Neon via Postgres logical replication to any destination, including Neon itself. Neon does not charge for data transfer, but Free Plan projects are limited to 5 GB per month. See [Data transfer](/docs/introduction/usage-metrics#data-transfer).
 
 ## Database
 
@@ -209,7 +212,7 @@ A Neon Control Plane operation that deletes stored data when a Neon project is d
 
 ## Endpoint ID
 
-A string that identifies a Neon compute. Neon Endpoint IDs are generated Heroku-like memorable random names, similar to `ep-calm-flower-a5b75h79`. These names are always prefixed by `ep` for "endpoint". You can find your Endpoint ID by navigating to your project in the Neon Console, selecting **Branches** from the sidebar, and clicking on a branch. The Endpoint ID is shown in the table under the **Computes** heading.
+A string that identifies a Neon compute endpoint. Neon Endpoint IDs are generated Heroku-like memorable random names, similar to `ep-calm-flower-a5b75h79`. These names are always prefixed by `ep` for "endpoint". You can find your Endpoint ID by navigating to your project in the Neon Console, selecting **Branches** from the sidebar, and clicking on a branch. The **Endpoint ID** is shown in the table under the **Computes** heading.
 
 ## Egress
 
@@ -223,9 +226,25 @@ A custom volume-based paid plan offered by Neon. See [Neon plans](/docs/introduc
 
 See [Neon Free Plan](#neon-free-plan).
 
+## GB-month
+
+In Neon, **GB-month** is a unit of measure representing the storage of 1 gigabyte (GB) of data for one month. A gigabyte is defined as 10^9 bytes (1,000,000,000 bytes). Storage usage is measured periodically and accumulated over the billing period. At the start of each billing period, GB-month usage resets to zero.
+
+GB-month usage reflects both the amount of storage used and how long it was used. For example, storing 10 GB for an entire month results in **10 GB-months**, while storing 10 GB for half a month results in **5 GB-months**.
+
+Deleting data will reduce the rate at which GB-month usage increases from that point forward, but it does not decrease the GB-month usage accrued up to that point.
+
 ## History
 
-The history of data changes for all branches in your Neon project. A history is maintained to support _point-in-time restore_. For more information, see [Storage details](/docs/introduction/usage-metrics#storage-details).
+The history of data changes for all branches in your Neon project. A history is maintained to support _instant restore_. For more information, see [Storage details](/docs/introduction/usage-metrics#storage-details).
+
+## Instant restore
+
+Restoration of data to a state that existed at an earlier time. Neon retains a history of changes in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to an earlier point. A instant restore is performed by creating a branch using the **Time** or **LSN** option.
+
+By default, Neon retains a history of changes for **1 day** across all plans to help avoid unexpected storage costs. You can increase the retention window to 24 hours for [Neon Free Plan](/docs/introduction/plans#free-plan) users, 7 days for [Launch](/docs/introduction/plans#launch), 14 days for [Scale](/docs/introduction/plans#scale), and 30 days for [Business](/docs/introduction/plans#business) plan users. Keep in mind that this will increase your storage usage and may lead to higher costs, especially if you have many active branches.
+
+For more information about this feature, see [Branching — Instant restore](/docs/introduction/branch-restore).
 
 ## IP Allow
 
@@ -265,7 +284,7 @@ A feature provided by some hypervisors, such as QEMU, that allows the transfer o
 
 ## Local File Cache
 
-The Local File Cache (LFC) is a layer of caching that stores frequently accessed data from the storage layer in the local memory of the compute. This cache helps to reduce latency and improve query performance by minimizing the need to fetch data from the storage layer repeatedly. The LFC acts as an add-on or extension of Postgres [shared buffers](#shared-buffers). In Neon the `shared_buffers` parameter [scales with compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size). The LFC extends cache memory up to 75% of your compute's RAM.
+The Local File Cache (LFC) is a layer of caching that stores frequently accessed data from the storage layer in the local memory of the compute. This cache helps to reduce latency and improve query performance by minimizing the need to fetch data from the storage layer repeatedly. The LFC acts as an add-on or extension of Postgres [shared buffers](#shared-buffers). In Neon the `shared_buffers` parameter [scales with compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size). The LFC extends cache memory up to 75 % of your compute's RAM.
 
 ### logical data size
 
@@ -293,7 +312,7 @@ An [Organizations](#organization) role in Neon with access to all projects withi
 
 ## Neon
 
-A serverless Postgres platform designed to help developers build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as autoscaling, branching, point-in-time restore, and more. For more information, see [Why Neon?](/docs/introduction).
+A serverless Postgres platform designed to help developers build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as autoscaling, branching, instant restore, and more. For more information, see [Why Neon?](/docs/introduction).
 
 ## Neon API
 
@@ -345,7 +364,7 @@ A paid Neon service plan. See [Neon plans](/docs/introduction/plans).
 
 ## Pageserver
 
-A Neon architecture component that reads WAL records from Safekeepers to identify modified pages. The Pageserver accumulates and indexes incoming WAL records in memory and writes them to disk in batches. Each batch is written to an immutable file that is never modified after creation. Using these files, the Pageserver can quickly reconstruct any version of a page dating back to the defined history retention period. Neon retains a history for all branches.
+A Neon architecture component that reads WAL records from Safekeepers to identify modified pages. The Pageserver accumulates and indexes incoming WAL records in memory and writes them to disk in batches. Each batch is written to an immutable file that is never modified after creation. Using these files, the Pageserver can quickly reconstruct any version of a page dating back to the defined restore window. Neon retains a history for all branches.
 
 The Pageserver uploads immutable files to cloud storage, which is the final, highly durable destination for data. After a file is successfully uploaded to cloud storage, the corresponding WAL records can be removed from the Safekeepers.
 
@@ -357,13 +376,9 @@ The ability to authenticate without providing a password. Neon’s [Passwordless
 
 Peak usage is the highest amount of a resource (like storage or projects) you’ve used during the current billing period. If you go over your plan’s limit, extra charges are added in set increments. You’re charged for these extra units from the date you went over the limit, with the charges prorated for the rest of the month.
 
-## point-in-time restore
+## point-in-time restore (PITR)
 
-Restoration of data to a state that existed at an earlier time. Neon retains a history of changes in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to an earlier point. A point-in-time restore is performed by creating a branch using the **Time** or **LSN** option.
-
-By default, Neon retains a history of changes for **1 day** across all plans to help avoid unexpected storage costs. You can increase the retention window to 24 hours for [Neon Free Plan](/docs/introduction/plans#free-plan) users, 7 days for [Launch](/docs/introduction/plans#launch), 14 days for [Scale](/docs/introduction/plans#scale), and 30 days for [Business](/docs/introduction/plans#business) plan users. Keep in mind that this will increase your storage usage and may lead to higher costs, especially if you have many active branches.
-
-For more information about this feature, see [Branching — Point-in-time restore](/docs/introduction/point-in-time-restore).
+A database recovery capability that allows restoring data to a specific moment in the past using Write-Ahead Log (WAL) records. In Neon, this capability is implemented through the instant restore feature, which performs point-in-time restores with near-zero delay.
 
 ## pooled connection string
 
@@ -393,7 +408,7 @@ A feature in Neon that allows secure connections to Neon databases through AWS P
 
 ## default branch
 
-A designation that is given to a [branch](#branch) in a Neon project. Each Neon project is initially created with a [root branch](#root-branch) called `main`, which carries the _default branch_ designation by default.
+A designation that is given to a [branch](#branch) in a Neon project. Each Neon project is initially created with a [root branch](#root-branch) called `production`, which carries the _default branch_ designation by default.
 
 The default branch has a larger compute hour allowance on the Free Plan. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available.
 
@@ -465,11 +480,11 @@ Selling the Neon service as part of another service offering. Neon's Platform Pa
 
 ## root branch
 
-A branch with no parent. Each Neon project starts with a root branch named `main`, which cannot be deleted and is set as the [default branch](#default-branch) for the project.
+A branch with no parent. Each Neon project starts with a root branch named `production`, which cannot be deleted and is set as the [default branch](#default-branch) for the project.
 
 Neon also supports two other types of root branches that have no parent but _can_ be deleted:
 
-- [Backup branches](#backup-branch), created by point-in-time restore operations on other root branches.
+- [Backup branches](#backup-branch), created by instant restore operations on other root branches.
 - [Schema-only branches](#schema-only-branch).
 
 The number of root branches allowed in a project depends on your Neon plan.
@@ -481,6 +496,10 @@ A Neon architecture component responsible for the durability of database changes
 ## Scale plan
 
 A paid plan offered by Neon that provides full platform and support access. It's designed for scaling production workloads. See [Neon plans](/docs/introduction/plans).
+
+## Scale to Zero
+
+A Neon feature that suspends a compute after a specified period of inactivity (5 minutes by default) to minimize compute usage. When suspended, a compute is placed into an idle state. Otherwise, the compute is in an `Active` state. Users on paid plans can disable the _Scale to Zero_ feature for an "always-active" compute. For more information, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
 
 ## schema-only branch
 
@@ -500,7 +519,7 @@ A cloud-based development model that enables developing and running applications
 
 ## shared buffers
 
-A memory area in Postgres for caching blocks of data from storage (disk on standalone Postgres or Pageservers in Neon). This cache enhances the performance of database operations by reducing the need to access the slower storage for frequently accessed data. Neon uses a [Local File Cache (LFC)](#local-file-cache), which acts as an add-on or extension of shared buffers. In Neon the `shared_buffers` parameter [scales with compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size). The LFC extends cache memory up to 80% of your compute's RAM. For additional information about shared buffers in Postgres, see [Resource Consumption](https://www.postgresql.org/docs/current/runtime-config-resource.html), in the Postgres documentation.
+A memory area in Postgres for caching blocks of data from storage (disk on standalone Postgres or Pageservers in Neon). This cache enhances the performance of database operations by reducing the need to access the slower storage for frequently accessed data. Neon uses a [Local File Cache (LFC)](#local-file-cache), which acts as an add-on or extension of shared buffers. In Neon the `shared_buffers` parameter [scales with compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size). The LFC extends cache memory up to 75 % of your compute's RAM. For additional information about shared buffers in Postgres, see [Resource Consumption](https://www.postgresql.org/docs/current/runtime-config-resource.html), in the Postgres documentation.
 
 ## SNI
 
@@ -564,7 +583,7 @@ You can obtain an unpooled connection string for your database by clicking the *
 
 ## Time Travel
 
-A Neon feature that lets you connect to any selected point in time within your history retention window and run queries against that connection. See [Time Travel](/docs/guides/time-travel-assist).
+A Neon feature that lets you connect to any selected point in time within your restore window and run queries against that connection. See [Time Travel](/docs/guides/time-travel-assist).
 
 ## user
 
@@ -604,7 +623,7 @@ A subset of frequently accessed or recently used data and indexes that ideally r
 
 ## Write-Ahead Logging (WAL)
 
-A standard mechanism that ensures the durability of your data. Neon relies on WAL to separate storage and compute, and to support features such as branching and point-in-time restore.
+A standard mechanism that ensures the durability of your data. Neon relies on WAL to separate storage and compute, and to support features such as branching and instant restore.
 
 In logical replication, the WAL records all changes to the data, serving as the source for data that needs to be replicated.
 

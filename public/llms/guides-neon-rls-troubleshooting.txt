@@ -1,0 +1,52 @@
+# Troubleshooting Neon RLS
+
+Common issues and solutions when using Neon RLS
+
+This page covers common errors you might encounter when implementing Row-Level Security (RLS) policies with Neon RLS and your authentication provider.
+
+Errors:
+
+- [`NeonDbError: password authentication failed for user 'jwk not found'`](#password-authentication-error)
+- [`NeonDbError: permission denied for table X`](#permission-denied-error)
+- [`invalid RSA Signing Algorithm`](#invalid-rsa-signing-algorithm)
+
+
+
+
+```bash
+NeonDbError: permission denied for table X
+```
+
+This error typically indicates that you haven't yet granted the necessary permissions to the `authenticated` and `anonymous` roles.
+
+**Solution:**\
+Run the following commands to grant permissions:
+
+For existing tables:
+
+```sql
+GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES
+IN SCHEMA public
+TO authenticated;
+
+GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES
+IN SCHEMA public
+TO anonymous;
+```
+
+For future tables:
+
+```sql
+ALTER DEFAULT PRIVILEGES
+IN SCHEMA public
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLES
+TO authenticated;
+
+ALTER DEFAULT PRIVILEGES
+IN SCHEMA public
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLES
+TO anonymous;
+```
+
+
+Neon RLS prompts you to run these commands when you first set up your authentication provider on the Neon RLS drawer in the Neon Console. If you're using a different database, you will have to run these commands manually.

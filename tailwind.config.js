@@ -195,6 +195,9 @@ module.exports = {
           'radial-gradient(18.96% 17.96% at 13% -1%, #C7D3FF 0%, #7995F7 8.96%, #4E5F9C 26.83%, rgba(78, 95, 156, 0) 100%),' +
           'radial-gradient(57.03% 30.65% at 100% 36.84%, #191C27 0%, rgba(25, 28, 39, 0) 100%),' +
           'linear-gradient(0deg, #141416, #141416)',
+        'subscribe-form-dark':
+          'radial-gradient(98.19% 94.16% at 96.13% 96.15%, rgba(21, 40, 40, 0.90) 0%, rgba(16, 30, 30, 0.00) 100%),' +
+          'linear-gradient(0deg, #101013, #101013)',
         'blog-subscribe-form':
           'linear-gradient(160deg, rgba(173, 224, 235, 0) 23%, rgba(173, 224, 235, 0.45) 50%, rgba(173, 224, 235, 0) 77%);',
         'pricing-table-featured-column':
@@ -222,6 +225,22 @@ module.exports = {
           'linear-gradient(100deg, rgba(33, 39, 58, 0.80) -6.09%, rgba(24, 25, 27, 0.80) 27.66%)',
         'azure-form-input-3':
           'linear-gradient(276deg, rgba(32, 48, 55, 0.80) 2.61%, rgba(24, 25, 27, 0.80) 32.96%)',
+        'serverless-apps-hero-border':
+          'linear-gradient(27deg, transparent 76%, #1B9A86 90%, #5AADBB),' +
+          'linear-gradient(0deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.10))',
+        'security-card-bg':
+          'radial-gradient(111.21% 103.81% at 1.9% 0%, rgba(19, 20, 21, 0.60) 0%, rgba(19, 20, 21, 0.00) 100%),' +
+          'linear-gradient(0deg, #0C0C0D, #0C0C0D)',
+        'security-card-link-bg':
+          'radial-gradient(43.67% 34.97% at 0.71% 0%, rgba(35, 54, 50, 0.80) 0%, rgba(19, 20, 21, 0.00) 100%),' +
+          'radial-gradient(94.73% 89.93% at 1.9% 0%, rgba(21, 33, 30, 0.80) 0%, rgba(19, 20, 21, 0.00) 100%),' +
+          'radial-gradient(111.21% 103.81% at 1.9% 0%, rgba(19, 20, 21, 0.60) 0%, rgba(19, 20, 21, 0.00) 100%),' +
+          'linear-gradient(0deg, #0C0C0D, #0C0C0D)',
+        'security-slide-icon-bg':
+          'radial-gradient(50% 50% at 50% 100%, rgba(0, 229, 153, 0.15) 0%, rgba(0, 229, 153, 0.00) 100%),' +
+          'radial-gradient(78.12% 78.13% at 50% 0%, rgba(226, 230, 235, 0.06) 0%, rgba(226, 230, 235, 0.00) 100%),' +
+          'linear-gradient(0deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.02)),' +
+          'linear-gradient(0deg, #0C0C0D, #0C0C0D)',
         // for deploy page
         'color-picker-variant-1': 'linear-gradient(225deg, #4CFFFF 31.6%, #00E660 74.65%);',
         'color-picker-variant-2': 'linear-gradient(225deg, #BDF471 35.94%, #00CC33 100%);',

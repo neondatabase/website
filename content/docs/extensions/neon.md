@@ -3,7 +3,7 @@ title: The neon extension
 subtitle: An extension for Neon-specific statistics including the Local File Cache hit
   ratio
 enableTableOfContents: true
-updatedOn: '2025-02-18T19:59:08.870Z'
+updatedOn: '2025-04-17T15:17:12.822Z'
 ---
 
 The `neon` extension provides functions and views designed to gather Neon-specific metrics.
@@ -51,16 +51,10 @@ To install the extension on a database:
 CREATE EXTENSION neon;
 ```
 
-To connect to your database. You can find a connection string for yoru database on the Neon Dashboard.
+To connect to your database. You can find a connection string for your database on the Neon Dashboard.
 
 ```bash shouldWrap
 psql postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
-```
-
-If you are already connected via `psql`, you can simply switch to the `postgres` database using the `\c` command:
-
-```shell
-\c dbname
 ```
 
 Issue the following query to view LFC usage data for your compute:
@@ -80,9 +74,9 @@ Remember that Postgres checks shared buffers first before it checks your compute
 
 ## View LFC metrics with EXPLAIN ANALYZE
 
-You can also use `EXPLAIN ANALYZE` with the `FILECACHE` option to view LFC cache hit and miss data. Installing the `neon` extension is not required. For example:
+You can also use `EXPLAIN ANALYZE` with the `FILECACHE` and `PREFETCH` options to view LFC cache hit and miss data, as well as prefetch statistics. Installing the `neon` extension is not required. For example:
 
-```sql {6,12,16,22}
+```sql {5,6,11,12,15,16,20,21}
 EXPLAIN (ANALYZE,BUFFERS,PREFETCH,FILECACHE) SELECT COUNT(*) FROM pgbench_accounts;
 
  Finalize Aggregate  (cost=214486.94..214486.95 rows=1 width=8) (actual time=5195.378..5196.034 rows=1 loops=1)
@@ -106,8 +100,56 @@ EXPLAIN (ANALYZE,BUFFERS,PREFETCH,FILECACHE) SELECT COUNT(*) FROM pgbench_accoun
                      File cache: hits=141826 misses=1865
 ```
 
+### PREFETCH option
+
+The `PREFETCH` option provides information about Neon's prefetching mechanism, which predicts which pages will be needed soon and sends prefetch requests to the page server before the page is actually requested by the executor. This helps reduce latency by having data ready when it's needed. The PREFETCH option includes the following metrics:
+
+- `hits` - Number of pages received from the page server before actually requested by the executor. Prefetch distance is controlled by the `effective_io_concurrency` parameter. The larger this value, the more likely the page server will complete the request before it's needed. However, it should not be larger than `neon.prefetch_buffer_size`.
+- `misses` - Number of accessed pages that were not prefetched. Prefetch is not implemented for all plan nodes, and even for supported nodes (like sequential scan), some mispredictions can occur.
+- `expired` - Pages that were updated since the prefetch request was sent, or results that weren't used because the executor didn't need the page (for example, due to a `LIMIT` clause in the query).
+- `duplicates` - Multiple prefetch requests for the same page. For some nodes like sequential scan, predicting next pages is straightforward. However, for index scans that prefetch referenced heap pages, index entries can have multiple references to the same heap page, resulting in duplicate prefetch requests.
+
+### FILECACHE option
+
+The `FILECACHE` option provides information about the Local File Cache (LFC) usage during query execution:
+
+- `hits` - Number of accessed pages found in the LFC.
+- `misses` - Number of accessed pages not found in the LFC.
+
 ## Views for Neon internal use
 
 The `neon` extension is installed by default to a system-owned `postgres` database in each Neon project. The `postgres` database includes functions and views owned by the Neon system role (`cloud_admin`) that are used to collect statistics. This data helps the Neon team enhance the Neon service.
+
+**Views**:
+
+```sql
+postgres=> \dv
+                    List of relations
+ Schema |            Name            | Type |    Owner
+--------+----------------------------+------+-------------
+ public | local_cache                | view | cloud_admin
+ public | neon_backend_perf_counters | view | cloud_admin
+ public | neon_lfc_stats             | view | cloud_admin
+ public | neon_perf_counters         | view | cloud_admin
+ public | neon_stat_file_cache       | view | cloud_admin
+```
+
+**Functions**:
+
+```sql
+postgres=> \df
+                                                                          List of functions
+ Schema |                 Name                 | Result data type |                                    Argument data types                                    | Type
+--------+--------------------------------------+------------------+-------------------------------------------------------------------------------------------+------
+ public | approximate_working_set_size         | integer          | reset boolean                                                                             | func
+ public | approximate_working_set_size_seconds | integer          | duration integer DEFAULT NULL::integer                                                    | func
+ public | backpressure_lsns                    | record           | OUT received_lsn pg_lsn, OUT disk_consistent_lsn pg_lsn, OUT remote_consistent_lsn pg_lsn | func
+ public | backpressure_throttling_time         | bigint           |                                                                                           | func
+ public | get_backend_perf_counters            | SETOF record     |                                                                                           | func
+ public | get_perf_counters                    | SETOF record     |                                                                                           | func
+ public | local_cache_pages                    | SETOF record     |                                                                                           | func
+ public | neon_get_lfc_stats                   | SETOF record     |                                                                                           | func
+ public | pg_cluster_size                      | bigint           |                                                                                           | func
+```
 
 <NeedHelp/>

@@ -9,7 +9,7 @@ import LINKS from 'constants/links';
 const Cta = ({
   title = 'Features of tomorrow.<br /> Available today.',
   titleClassName,
-  className = 'pb-[307px] pt-[445px] xl:py-[230px] lg:pb-[156px] lg:pt-[179px] sm:pb-[110px] sm:pt-[116px]',
+  className = 'pb-[320px] pt-[390px] xl:pt-[250px] xl:pb-[220px] lg:pb-[156px] lg:pt-[200px] sm:pb-[100px] sm:pt-[140px]',
   description = null,
   descriptionClassName,
   buttonText = 'Get Started',
@@ -58,7 +58,7 @@ const Cta = ({
           to={buttonUrl}
           target={isExternal ? '_blank' : null}
           rel={isExternal ? 'noopener noreferrer' : null}
-          tag_name="Footer"
+          tagName="Footer"
         >
           {buttonText}
         </Button>

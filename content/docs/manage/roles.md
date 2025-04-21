@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/manage/users
-updatedOn: '2025-02-07T19:29:48.918Z'
+updatedOn: '2025-04-17T16:06:46.408Z'
 ---
 
 In Neon, roles are Postgres roles. Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`. This role owns the database that is created in your Neon project's default branch.
@@ -17,7 +17,7 @@ Neon is a managed Postgres service, so you cannot access the host operating syst
 
 You can create roles in a project's default branch or child branches. While there is no strict limit on the number of roles you can create, we recommend keeping it under 500 per branch.
 
-In Neon, roles belong to a branch, which could be your main branch or a child branch. When you create a child branch, roles in the parent branch are duplicated in the child branch. For example, if role `alex` exists in the parent branch, role `alex` is copied to the child branch when the child branch is created. The only time this does not occur is when you create a branch that only includes data up to a particular point in time. If the role was created in the parent branch after that point in time, it is not duplicated in the child branch.
+In Neon, roles belong to a branch, which could be your production branch or a child branch. When you create a child branch, roles in the parent branch are duplicated in the child branch. For example, if role `alex` exists in the parent branch, role `alex` is copied to the child branch when the child branch is created. The only time this does not occur is when you create a branch that only includes data up to a particular point in time. If the role was created in the parent branch after that point in time, it is not duplicated in the child branch.
 
 Neon supports creating and managing roles from the following interfaces:
 
@@ -66,7 +66,7 @@ To create a role:
 7. Click **Create**. The role is created and you are provided with the password for the role.
 
 <Admonition type="note">
-Role names cannot exceed 63 characters, and some names are not permitted. See [Protected role names](#protected-role-names).
+Role names cannot exceed 63 characters, and some names are not permitted. See [Reserved role names](#reserved-role-names).
 </Admonition>
 
 ### Delete a role
@@ -135,7 +135,7 @@ POST /projects/{project_id}/branches/{branch_id}/roles
 ```
 
 <Admonition type="note">
-Role names cannot exceed 63 characters, and some role names are not permitted. See [Protected role names](#protected-role-names).
+Role names cannot exceed 63 characters, and some role names are not permitted. See [Reserved role names](#reserved-role-names).
 </Admonition>
 
 The API method appears as follows when specified in a cURL command. The `project_id` and `branch_id` are required parameters, and the role `name` is a required attribute. The length of a role name is limited to 63 bytes.
@@ -406,9 +406,9 @@ The Neon API and CLI also support creating `NOLOGIN` roles:
 - The Neon API [Create role](https://api-docs.neon.tech/reference/createprojectbranchrole) endpoint supports a `no_login` attribute.
 - The Neon CLI [`neon roles create`](/docs/reference/cli-roles#create) command supports a `--no-login` option.
 
-## Protected role names
+## Reserved role names
 
-The following names are protected and cannot be given to a role:
+The following names are reserved and cannot be given to a role:
 
 - Any name starting with `pg_`
 - `neon_superuser`

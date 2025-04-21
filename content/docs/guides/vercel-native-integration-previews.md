@@ -4,7 +4,7 @@ subtitle: Create a database branch for every preview deployment with Neon's nati
   Vercel integration
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-21T20:49:03.649Z'
+updatedOn: '2025-03-06T12:39:04.895Z'
 ---
 
 <InfoBlock>
@@ -19,6 +19,10 @@ updatedOn: '2025-02-21T20:49:03.649Z'
 </InfoBlock>
 
 The [Neon Postgres Native Integration](https://vercel.com/marketplace/neon), available on the Vercel Marketplace, allows you to add a Postgres database to your Vercel project. You can optionally configure the integration to create a database branch for each Vercel preview deployment. This guide explains how to set up that configuration.
+
+<Admonition type="note">
+The database branching preview feature is only supported for users on a Neon plan. If you are on a Vercel Postgres legacy plan, you will need to [change your plan](https://neon.tech/docs/guides/vercel-native-integration#changing-your-plan).
+</Admonition>
 
 <details>
 <summary>Why create a database branch with each preview deployment?</summary>
@@ -138,7 +142,7 @@ To disconnect a Neon database from a Vercel project:
 3. In the left-hand navigation on your database page, select **Projects**.
 4. Under **Projects**, select your project, and select **Remove Project Connection** from the menu.
 
-This will disconnect the database from your Vercel project by removing all of the Neon database environment variables from your Vercel project. After disconnecting a database, branches will no longer be created with each preview deployment. However, any previously created database branches will not not deleted. You have to remove those branches manually if you no longer want them.
+This will disconnect the database from your Vercel project by removing all of the Neon database environment variables from your Vercel project. After disconnecting a database, branches will no longer be created with each preview deployment. However, any previously created database branches will not be deleted. You have to remove those branches manually if you no longer want them.
 
 ## Manage branches created by the integration
 

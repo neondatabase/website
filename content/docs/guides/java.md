@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/java
   - /docs/integrations/java
-updatedOn: '2025-02-03T20:41:57.315Z'
+updatedOn: '2025-04-20T15:44:26.049Z'
 ---
 
 This guide describes how to create a Neon project and connect to it with Java Database Connectivity (JDBC) or from a Spring Data project that uses JDBC.
@@ -16,8 +16,7 @@ For additional information about JDBC, refer to the JDBC API documentation, and 
 
 To connect to Neon with JDBC or from a Spring Data project:
 
-1. [Create a Neon project](#create-a-neon-project)
-2. [Connect with JDBC](#connect-with-jdbc) or [Connect from Spring Data](#connect-from-spring-data)
+<Steps>
 
 ## Create a Neon project
 
@@ -29,7 +28,9 @@ To create a Neon project:
 2. Click **New Project**.
 3. Specify your project settings and click **Create Project**.
 
-## Connect with JDBC
+## Connect
+
+### Connect with JDBC
 
 For a JDBC connection URL, replace the variables in the following URL string with your Neon project ID, database name, user, and password:
 
@@ -39,7 +40,7 @@ jdbc:postgresql://[neon_hostname]/[dbname]?user=[user]&password=[password]&sslmo
 
 You can find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
-## Connect from Spring Data
+### Connect from Spring Data
 
 Spring Data relies on JDBC and Postgres drivers to connect to Postgres databases, such as Neon. If you are starting your project with Spring Initializr or connecting from an existing Spring Data project, ensure that the `PostgreSQL database driver` dependency is installed.
 
@@ -50,5 +51,7 @@ spring.datasource.url=jdbc:postgresql://[neon_hostname]/[dbname]?user=[user]&pas
 ```
 
 Refer to the [Connect with JDBC](#connect-with-jdbc) section above for information about obtaining connection details for your Neon database.
+
+</Steps>
 
 <NeedHelp/>

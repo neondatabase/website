@@ -107,7 +107,7 @@ const Sidebar = ({ className = null, sidebar, slug, basePath, customType, docPag
               className="no-scrollbars z-10 h-[calc(100vh-166px)] overflow-y-scroll py-8"
               ref={menuWrapperRef}
             >
-              <div className="relative w-full" style={{ height: menuHeight }}>
+              <div className="relative w-full overflow-hidden" style={{ height: menuHeight }}>
                 <Menu
                   depth={0}
                   basePath={basePath}

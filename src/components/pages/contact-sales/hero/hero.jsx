@@ -119,7 +119,7 @@ const Hero = () => (
             <Link
               className="mt-7 text-lg font-medium leading-none tracking-tight sm:text-base"
               theme="green"
-              to="https://calendly.com/d/ckxx-b4h-69y/neon-solutions-engineering"
+              to={LINKS.bookMeeting}
               rel="noopener noreferrer"
               target="_blank"
               withArrow

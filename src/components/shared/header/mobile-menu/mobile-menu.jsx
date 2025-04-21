@@ -2,7 +2,6 @@
 
 import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
-import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
@@ -16,10 +15,6 @@ import ChevronIcon from 'icons/chevron-down.inline.svg';
 
 import Burger from '../burger';
 import MenuBanner from '../menu-banner';
-
-const AlgoliaSearch = dynamic(() => import('components/shared/algolia-search'), {
-  ssr: false,
-});
 
 const ANIMATION_DURATION = 0.2;
 
@@ -196,34 +191,18 @@ MobileMenuItem.propTypes = {
 const mobileMenuItems = [
   ...MENUS.header,
   {
-    text: 'GitHub',
-    to: LINKS.github,
+    text: 'Discord',
+    to: LINKS.discord,
   },
 ];
 
-// TODO: need to refactor this component
-const MobileMenu = ({
-  isDarkTheme,
-  showSearchInput = false,
-  isDocPage = false,
-  docPageType = null,
-  searchIndexName = null,
-}) => {
+const MobileMenu = ({ isDarkTheme, isDocPage = false, docPageType = null }) => {
   const { isMobileMenuOpen, toggleMobileMenu } = useMobileMenu();
 
   return (
     <>
       <div className="absolute right-8 top-5 z-40 hidden gap-x-3 lg:flex lg:gap-x-4 md:right-4">
-        {showSearchInput &&
-          (isDocPage ? (
-            <InkeepTrigger className="mobile-search" docPageType={docPageType} />
-          ) : (
-            <AlgoliaSearch
-              className="mobile-search"
-              isDarkTheme={isDarkTheme}
-              indexName={searchIndexName}
-            />
-          ))}
+        {isDocPage && <InkeepTrigger className="mobile-search" docPageType={docPageType} />}
         <Burger
           className={clsx(
             'relative flex',
@@ -273,7 +252,7 @@ const MobileMenu = ({
                     className="h-11 items-center text-[15px] !font-semibold tracking-tight"
                     to={LINKS.signup}
                     theme="primary"
-                    tag_name="MobileMenu"
+                    tagName="MobileMenu"
                   >
                     Sign Up
                   </Button>
@@ -289,10 +268,8 @@ const MobileMenu = ({
 
 MobileMenu.propTypes = {
   isDarkTheme: PropTypes.bool,
-  showSearchInput: PropTypes.bool,
   isDocPage: PropTypes.bool,
   docPageType: PropTypes.string,
-  searchIndexName: PropTypes.string,
 };
 
 export default MobileMenu;

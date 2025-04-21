@@ -2,18 +2,14 @@
 title: Connect Nuxt to Postgres on Neon
 subtitle: Learn how to make server-side queries to Postgres using Nitro API routes
 enableTableOfContents: true
-tag: new
-updatedOn: '2025-02-03T20:41:57.332Z'
+updatedOn: '2025-04-20T15:44:26.052Z'
 ---
 
 [Nuxt](https://nuxt.com/) is an open-source full-stack meta framework that enables Vue-based web applications. This topic describes how to connect a Nuxt application to a Postgres database on Neon.
 
 To create a Neon project and access it from a Nuxt.js application:
 
-1. [Create a Neon project](#create-a-neon-project)
-2. [Create a Nuxt project and add dependencies](#create-a-nuxt-project-and-add-dependencies)
-3. [Configure a Postgres client](#configure-the-postgres-client)
-4. [Run the app](#run-the-app)
+<Steps>
 
 ## Create a Neon project
 
@@ -98,6 +94,8 @@ When you run `npm run dev` you can expect to see the following on [localhost:300
 ```shell shouldWrap
 PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
 ```
+
+</Steps>
 
 ## Source code
 

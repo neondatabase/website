@@ -52,7 +52,7 @@ const Button = ({
   to = null,
   size = null,
   theme = null,
-  tag_name = null,
+  tagName = null,
   analyticsEvent = null,
   children,
   ...otherProps
@@ -70,7 +70,7 @@ const Button = ({
         sendGtagEvent('Button Clicked', {
           style: theme,
           text: getNodeText(children),
-          tag_name,
+          tag_name: tagName,
         });
         if (analyticsEvent) {
           posthog.capture('ui_interaction', {
@@ -91,7 +91,7 @@ Button.propTypes = {
   size: PropTypes.oneOf(Object.keys(styles.size)),
   theme: PropTypes.oneOf(Object.keys(styles.theme)),
   children: PropTypes.node.isRequired,
-  tag_name: PropTypes.string,
+  tagName: PropTypes.string,
   analyticsEvent: PropTypes.string,
 };
 

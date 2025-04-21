@@ -6,10 +6,21 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-identity
 tag: beta
-updatedOn: '2025-02-21T13:30:24.358Z'
+updatedOn: '2025-04-17T13:11:55.870Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth" />
+
+<InfoBlock>
+  <DocsList title="Related docs" theme="docs">
+    <a href="/docs/guides/neon-auth-tutorial">Neon Auth Tutorial</a>
+    <a href="/docs/guides/neon-auth-api">Manage Neon Auth using the API</a>
+  </DocsList>
+
+  <DocsList title="Sample project" theme="repo">
+    <a href="https://github.com/neondatabase-labs/neon-auth-demo-app">Neon Auth Demo App</a>
+  </DocsList>
+</InfoBlock>
 
 **Neon Auth** connects your authentication provider to your Neon database, automatically synchronizing user profiles so that you own your auth data. Access your user data directly in your database environment, with no custom integration code needed.
 
@@ -61,9 +72,9 @@ The following columns are included in the `neon_auth.users_sync` table:
 
 - `raw_json`: Complete user profile as JSON
 - `id`: The unique ID of the user
-- `name`: The user's display name (nullable)
-- `email`: The user's primary email (nullable)
-- `created_at`: When the user signed up (nullable)
+- `name`: The user's display name
+- `email`: The user's primary email
+- `created_at`: When the user signed up
 - `deleted_at`: When the user was deleted, if applicable (nullable)
 - `updated_at`: When the user was last updated, if applicable (nullable)
 
@@ -75,60 +86,140 @@ Do not try to change the `neon_auth.users_sync` table name. It's needed for the 
 
 ## Before and after Neon Auth
 
-Let's take a look at how Neon Auth can help simplify the code in a typical todos application:
+Let's take a look at how Neon Auth simplifies database operations in a typical todos application, specifically when associating todos with users.
 
 ### Before Neon Auth
 
-Without Neon Auth, keeping user data in sync often involves:
+Without Neon Auth, you would typically need to:
 
-1. Using additional services (like Inngest) for background jobs
-2. Writing and maintaining sync logic
+1. **Create and manage your own `users` table** to store user information in your database.
+2. **Implement synchronization logic** to keep this `users` table in sync with your authentication provider. This includes handling user creation and, crucially, **user updates** and deletions.
+3. **Create a `todos` table** that references your `users` table using a foreign key.
 
-Here's how you'd typically sync user data _without_ Neon Auth:
+Here's how you would structure your database and perform insert operations _without_ Neon Auth:
+
+#### 1. Create a `users` table:
+
+```sql
+CREATE TABLE users (
+    id TEXT PRIMARY KEY, -- User ID from your auth provider (TEXT type)
+    email VARCHAR(255) UNIQUE NOT NULL,
+    name VARCHAR(255),
+    -- ... other user fields
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMPTZ
+);
+```
+
+#### 2. Insert a user into the `users` table:
+
+To insert this user into your database when a new user is created in your auth provider, you might set up a webhook endpoint. Here’s an example of a simplified webhook handler that would receive a `user.created` event from your auth provider and insert the user into your `users` table:
 
 ```typescript
-import { AuthProvider } from '@auth/sdk';
-import { BackgroundJobs } from '@jobs/sdk';
+// Webhook handler to insert a user into the 'users' table for a 'user.created' event
+
 import { db } from '@/db';
 
-// Set up sync handling
-const jobs = new BackgroundJobs();
+export async function POST(request: Request) {
+  await checkIfRequestIsFromAuthProvider(request); // Validate request authenticity using headers, etc.
+  const payload = await request.json(); // Auth Provider webhook payload
 
-jobs.on('user.updated', async (event) => {
-  const { userId } = event;
+  // Extract user data from the webhook payload
+  const userId = payload.user_id;
+  const email = payload.email_address;
+  const name = payload.name;
 
-  // Fetch user data from auth provider
-  const auth = new AuthProvider();
-  const user = await auth.getUser(userId);
+  try {
+    await db.query(
+      `INSERT INTO users (id, email, name)
+       VALUES ($1, $2, $3)`,
+      [userId, email, name]
+    );
+    return new Response('User added successfully', { status: 200 });
+  } catch (error) {
+    console.error('Database error inserting user:', error);
 
-  // Update database
-  await db.query(
-    `
-    INSERT INTO users (id, email, name)
-    VALUES ($1, $2, $3)
-    ON CONFLICT (id) DO UPDATE 
-    SET email = $2, name = $3
-  `,
-    [user.id, user.email, user.name]
-  );
-});
+    // Retry logic, error handling, etc. as needed
+    // Send notification to on-call team, etc to check why the insert operation failed
+
+    return new Response('Error inserting user into database', { status: 500 });
+  }
+}
+```
+
+<Admonition type="note">
+- This code snippet only handles the `user.created` event. To achieve complete synchronization, you would need to write separate webhook handlers for `user.updated`, `user.deleted`, and potentially other event types. Each handler adds complexity and requires careful error handling, security considerations, and ongoing maintenance.
+- The provided webhook example is a simplified illustration, and a production-ready solution would necessitate more robust error handling, security measures, and potentially queueing mechanisms to ensure reliable synchronization.
+</Admonition>
+
+#### 3. Create a `todos` table with a foreign key to the `users` table:
+
+```sql
+CREATE TABLE todos (
+    id SERIAL PRIMARY KEY,
+    task TEXT NOT NULL,
+    user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+#### 4. Insert a todo, referencing the `users` table:
+
+```sql
+INSERT INTO todos (task, user_id)
+VALUES ('Buy groceries', 'user-id-123');
 ```
 
 ### After Neon Auth
 
-With Neon Auth, much of this complexity is eliminated. Since user data is automatically synced to `neon_auth.users_sync`, you can just create the todo:
+With Neon Auth, Neon automatically creates and manages the `neon_auth.users_sync` table, keeping it synchronized with your connected authentication provider. You can directly rely on this table for user data, significantly simplifying your database operations.
 
-```typescript
-async function createTodo(userId: string, task: string) {
-  return db.query(
-    `INSERT INTO todos (task, user_id) 
-     VALUES ($1, $2)`,
-    [task, userId]
-  );
-}
+Here's how you would structure your `todos` table and perform insert operations _with_ Neon Auth:
+
+#### Users table
+
+`neon_auth.users_sync` table is automatically created and kept in sync by Neon Auth (no action needed from you) and is available for direct use in your schema and queries. Here is the table structure as [discussed above](#table-structure):
+
+```sql
+-- schema of neon_auth.users_sync table ( automatically created by Neon Auth )
+id TEXT PRIMARY KEY,
+raw_json JSONB,
+name TEXT,
+email TEXT,
+created_at TIMESTAMPTZ,
+deleted_at TIMESTAMPTZ,
+updated_at TIMESTAMPTZ
 ```
 
+#### 1. Create a `todos` table with a foreign key to the `neon_auth.users_sync` table:
+
+```sql
+CREATE TABLE todos (
+    id SERIAL PRIMARY KEY,
+    task TEXT NOT NULL,
+    user_id TEXT NOT NULL REFERENCES neon_auth.users_sync(id) ON DELETE CASCADE,
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+#### 2. Insert a todo, referencing the `neon_auth.users_sync` table:
+
+```sql
+INSERT INTO todos (task, user_id)
+VALUES ('Buy groceries', 'user-id-123');
+```
+
+<Admonition type="tip" title="Simplified operations">
+With Neon Auth, you skip the complexities of creating and synchronizing your own `users` table and implementing webhook handlers. Neon Auth handles the synchronization for you, making it much easier to build applications that rely on user data. This means you can directly reference the `neon_auth.users_sync` table in your schema and queries, and **updates to user profiles are automatically reflected** without you writing any synchronization code.  This significantly reduces development and maintenance overhead.
+</Admonition>
+
+For a more detailed walkthrough, see the [Neon Auth Tutorial](/docs/guides/neon-auth-tutorial).
+
 ## Getting started
+
+<Admonition type="note">
+Currently, Neon Auth is available for use with Stack Auth, with support for additional authentication providers coming soon.
+</Admonition>
 
 Neon Auth offers two ways to connect your authentication provider:
 
@@ -144,6 +235,10 @@ Neon Auth offers two ways to connect your authentication provider:
    - Provide your Stack Auth project details during setup
 
 Choose your setup option in the Neon Console under the **Auth** page.
+
+<Admonition type="note">
+Only [organization admins](/docs/manage/organizations#user-roles-and-permissions) can install or remove Neon Auth. Organization members and [project collaborators](/docs/guides/project-collaboration-guide) do not have permission to modify Neon Auth settings.
+</Admonition>
 
 ## Transfer ownership
 
@@ -184,6 +279,16 @@ Then open the returned URL in a browser to complete the transfer. See [Transfer 
 After transfer, you'll still be able to access your project from the Neon Console, but you'll also have direct access from the Stack Auth dashboard.
 </Admonition>
 
+## Creating users
+
+You can create new users directly from the Neon Console, whether you're using a Neon-managed auth project or your own auth provider. This can be useful during development and testing.
+
+![Create user in Neon Auth](/docs/guides/neon_auth_create_user.png)
+
+The user will be created in your `neon_auth.users_sync` table and automatically propagated to your auth project (Neon-managed or provider-owned).
+
+You can also create users from the API. See the next section for details.
+
 ## Using the API
 
 You can manage your Neon Auth integration programmatically using the API. This includes creating integrations, managing users, and transferring ownership.
@@ -195,7 +300,23 @@ Key operations:
 - Create users in your auth provider
 - Transfer ownership to your auth provider
 
-See [Manage Neon Auth using the API](/docs/guides/neon-auth-api) for details.
+See [Manage Neon Auth using the API](/docs/guides/neon-auth-api) for more information.
+
+## Permissions
+
+For organization-owned projects, only organization admins can manage Neon Auth settings. Organization members and project collaborators can use Neon Auth features once configured — like adding users — but they cannot modify the integration settings.
+
+The following table shows which actions each user can perform:
+
+| Actions            | Admin | Members | Collaborator |
+| ------------------ | :---: | :-----: | :----------: |
+| Install Neon Auth  |  ✅   |   ❌    |      ❌      |
+| Remove Neon Auth   |  ✅   |   ❌    |      ❌      |
+| Transfer ownership |  ✅   |   ❌    |      ❌      |
+| Generate SDK Keys  |  ✅   |   ❌    |      ❌      |
+| Create users       |  ✅   |   ✅    |      ✅      |
+
+For more information about organization roles and permissions, see [User roles and permissions](/docs/manage/organizations#user-roles-and-permissions).
 
 ## Best practices
 
@@ -239,3 +360,9 @@ FROM posts
 LEFT JOIN neon_auth.users_sync ON posts.author_id = neon_auth.users_sync.id
 WHERE neon_auth.users_sync.deleted_at IS NULL;
 ```
+
+## Limitations
+
+<Admonition type="important">
+Neon Auth is not compatible with Private Link (Neon Private Networking). If you have Private Link enabled for your Neon project, Neon Auth will not work. This is because Neon Auth requires internet access to connect to third-party authentication providers, while Private Link restricts connections to private AWS networks.
+</Admonition>

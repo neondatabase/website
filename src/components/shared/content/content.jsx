@@ -6,10 +6,14 @@ import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 import remarkGfm from 'remark-gfm';
 
+import ChatOptions from 'components/pages/doc/chat-options';
+import CheckItem from 'components/pages/doc/check-item';
+import CheckList from 'components/pages/doc/check-list';
 import CodeTabs from 'components/pages/doc/code-tabs';
 import CommunityBanner from 'components/pages/doc/community-banner';
 import DefinitionList from 'components/pages/doc/definition-list';
 import DetailIconCards from 'components/pages/doc/detail-icon-cards';
+import DocsLink from 'components/pages/doc/docs-link';
 import DocsList from 'components/pages/doc/docs-list';
 // eslint-disable-next-line import/no-cycle
 import IncludeBlock from 'components/pages/doc/include-block';
@@ -18,7 +22,7 @@ import LinkPreview from 'components/pages/doc/link-preview';
 import Steps from 'components/pages/doc/steps';
 import Tabs from 'components/pages/doc/tabs';
 import TabItem from 'components/pages/doc/tabs/tab-item';
-import TechnologyNavigation from 'components/pages/doc/technology-navigation';
+import TechCards from 'components/pages/doc/tech-cards';
 import Video from 'components/pages/doc/video';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
 import SubscriptionForm from 'components/pages/use-case/subscription-form';
@@ -28,21 +32,19 @@ import UseCaseContext from 'components/pages/use-case/use-case-context';
 import UseCaseList from 'components/pages/use-case/use-case-list';
 import Admonition from 'components/shared/admonition';
 import AnchorHeading from 'components/shared/anchor-heading';
+import Button from 'components/shared/button';
 import CodeBlock from 'components/shared/code-block';
 import ComputeCalculator from 'components/shared/compute-calculator';
 import CtaBlock from 'components/shared/cta-block';
+import DeployPostgresButton from 'components/shared/deploy-postgres-button';
 import DocCta from 'components/shared/doc-cta';
-import ExtensionRequest from 'components/shared/extension-request';
 import ImageZoom from 'components/shared/image-zoom';
 import InkeepEmbedded from 'components/shared/inkeep-embedded';
 import LatencyCalculator from 'components/shared/latency-calculator';
-import Link from 'components/shared/link';
-import RegionRequest from 'components/shared/region-request';
+import RequestForm from 'components/shared/request-form';
 import getCodeProps from 'lib/rehype-code-props';
-import getGlossaryItem from 'utils/get-glossary-item';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
-import DeployPostgresButton from '../deploy-postgres-button';
 
 const sharedComponents = Object.keys(sharedMdxComponents).reduce((acc, key) => {
   acc[key] = (props) => IncludeBlock({ url: sharedMdxComponents[key], ...props });
@@ -68,45 +70,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   // eslint-disable-next-line react/jsx-no-useless-fragment
   undefined: (props) => <Fragment {...props} />,
   pre: (props) => <CodeBlock {...props} />,
-  a: (props) => {
-    const { href, children, ...otherProps } = props;
-    const baseUrl = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
-    const isExternal = href?.startsWith('http') && !href?.startsWith(baseUrl);
-    const isGlossary =
-      href?.startsWith('/docs/reference/glossary') ||
-      href?.startsWith(`${baseUrl}/docs/reference/glossary`);
-    const icon = (isExternal && 'external') || (isGlossary && 'glossary') || null;
-
-    if (children === '#id') {
-      const id = href?.startsWith('#') ? href.replace('#', '') : undefined;
-      return <span id={id} />;
-    }
-
-    // Automatically generate previews for glossary links
-    if (isGlossary) {
-      const glossaryItem = getGlossaryItem(href);
-      if (glossaryItem) {
-        const { title, preview } = glossaryItem;
-        return (
-          <LinkPreview href={href} title={title} preview={preview} {...otherProps}>
-            {children}
-          </LinkPreview>
-        );
-      }
-    }
-
-    return (
-      <Link
-        to={href}
-        target={isExternal ? '_blank' : undefined}
-        rel={isExternal ? 'noopener noreferrer' : undefined}
-        icon={icon}
-        {...otherProps}
-      >
-        {children}
-      </Link>
-    );
-  },
+  a: (props) => <DocsLink {...props} />,
   img: (props) => {
     const { className, title, src, ...rest } = props;
 
@@ -158,20 +122,20 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
       />
     );
   },
+  Button,
   YoutubeIframe,
   DefinitionList,
   Admonition,
   CodeTabs,
   DetailIconCards,
-  TechnologyNavigation,
+  TechCards,
   CommunityBanner,
   Tabs,
   TabItem,
   InfoBlock,
   LinkPreview,
   DocsList,
-  RegionRequest,
-  ExtensionRequest,
+  RequestForm,
   LatencyCalculator,
   CTA: isUseCase ? CtaBlock : DocCta,
   Testimonial,
@@ -184,6 +148,9 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   Video,
   Steps,
   DeployPostgresButton,
+  ChatOptions,
+  CheckList,
+  CheckItem,
   ...sharedComponents,
 });
 

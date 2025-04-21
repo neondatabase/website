@@ -24,6 +24,7 @@ const logos = [
   'vercel',
   'bcg',
   'wordware',
+  'commure',
 ];
 
 const PricingPage = () => (

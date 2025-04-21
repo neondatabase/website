@@ -23,7 +23,8 @@
             "text": "compute hours",
             "href": "#compute-hour"
           }
-        ]
+        ],
+        "info": "For main branch. Additional branches limited to 5 compute hours"
       },
       {
         "icon": "autoscale",
@@ -48,7 +49,6 @@
     "highlighted": true,
     "price": 19,
     "priceFrom": true,
-    "headerLinks": "Pay via <a href='https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa' target='_blank' rel='noopener noreferrer'>AWS</a>",
     "description": "The resources, features, and support you need to launch.",
     "features": [
       {
@@ -97,7 +97,7 @@
     "type": "Scale",
     "price": 69,
     "priceFrom": true,
-    "headerLinks": "Pay via <a href='https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa' target='_blank' rel='noopener noreferrer'>AWS</a> or <a href='https://azuremarketplace.microsoft.com/en-us/marketplace/apps/neon1722366567200.neon_serverless_postgres_azure_prod?tab=PlansAndPrice' target='_blank' rel='noopener noreferrer'>Azure</a>",
+    "headerLinks": "Pay via <a href='https://azuremarketplace.microsoft.com/en-us/marketplace/apps/neon1722366567200.neon_serverless_postgres_azure_prod?tab=PlansAndPrice' target='_blank' rel='noopener noreferrer'>Azure</a>",
     "description": "More capacity and functionality for scaling production workloads.",
     "features": [
       {
@@ -181,12 +181,12 @@
     "otherFeatures": {
       "title": "Everything in Scale, plus...",
       "features": [
-        { "title": "Compliance (SOC 2, ISO)" },
-        { "title": "99.95% SLA" },
-        { "title": "Priority Support" },
+        { "title": "SOC 2, HIPAA (upon request)" },
+        { "title": "0-downtime migrations" },
         { "title": "Private Link" },
+        { "title": "Priority Support" },
         {
-          "title": "Migration assistance"
+          "title": "99.95% SLA"
         },
         { "title": "PITR (30 days)" }
       ]

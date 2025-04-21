@@ -15,8 +15,10 @@ Database branching is a game-changer for dev/test environments: there's no need 
   - You "move" your non-prod environments to Neon (i.e. by syncing a subset of data daily)
   - To build / test / debug in Neon
   - Once the changes are tested, you apply them back to prod
-Try this workflow in Neon right away ([we have a Free plan](https://console.neon.tech/signup)). Follow the steps [in this guide](https://neon.tech/docs/use-cases/dev-test) to set things up.
+Try this workflow in Neon right away. You can follow the steps [in this guide](https://neon.tech/docs/use-cases/dev-test) to set things up.
 </Admonition>
+
+<CTA title="Get $100 in credits" description="Sign up now and get $100 in credits when you upgrade." buttonText="Claim the offer" buttonUrl="https://fyi.neon.tech/credits" />
 
 ## Ephemeral Environments Are Inefficient in Traditional Postgres
 
@@ -112,8 +114,8 @@ Neon is a Postgres provider that offers a much more modern developer experience 
 Here's how you'll go about it:
 
 1. **Set up a single Neon Project for dev/test**. Many non-prod instances can be substituted by a single Neon project.
-2. **Sync testing data to the main branch**. Load data from your staging database / testing data into the main branch within the Neon project. This main branch acts as the primary source for all dev/test environments, and it's the only place you need to update with new data or schema changes.
-3. **Creating ephemeral environments as child branches**. To instantly create ephemeral environments, derive child branches from the main branch. These branches are fully isolated resource-wise and provide you a full copy of the testing dataset. They can then be synced with the main branch with just one click, ensuring they always have the latest data while saving you the work of loading testing datasets to every single environment.
+2. **Sync testing data to the production branch**. Load data from your staging database / testing data into the production branch within the Neon project. This production branch acts as the primary source for all dev/test environments, and it's the only place you need to update with new data or schema changes.
+3. **Creating ephemeral environments as child branches**. To instantly create ephemeral environments, derive child branches from the production branch. These branches are fully isolated resource-wise and provide you a full copy of the testing dataset. They can then be synced with the production branch with just one click, ensuring they always have the latest data while saving you the work of loading testing datasets to every single environment.
 4. **Automatic branch cleanup and scale to zero**. After development or testing is complete, ephemeral branches can be deleted automatically via the API. Neon's scale to zero automatically pauses these environments when unused, so you don't have to worry too much about them.
 
 ### How much cost savings have you seen vs RDS/Aurora?
@@ -241,7 +243,7 @@ url="/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-
 ---
 
 <Admonition type="note" title="Get $100 in credits">
-Neon offers a Free Plan, and we’ll discount up to $100 off your first invoice when you upgrade. Claim the offer by signing up through [this link](https://fyi.neon.tech/credits).
+Neon offers a Free Plan, and we’ll give you $100 in credits when you first upgrade. Claim the offer by signing up through [this link](https://fyi.neon.tech/credits).
 </Admonition>
 
 ---

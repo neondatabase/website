@@ -4,7 +4,7 @@ subtitle: Add Neon Postgres storage to your Vercel project as a first-party nati
   integration
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-20T02:00:36.060Z'
+updatedOn: '2025-03-19T10:43:30.032Z'
 ---
 
 <InfoBlock>
@@ -121,6 +121,9 @@ To connect your Vercel project to your Neon database:
 4. Optionally, under **Advanced Options**, you can:
 
    - Specify an **Environment Variables Prefix** for the database environment variables that will be added to your Vercel project. A prefix is not required but may help you track and identify variables later.
+     <Admonition type="note">
+     Please be aware that database environment variables are already prefixed by `DATABASE`, `PG`, or `POSTGRES` — see [Environment variables set by the integration](#environment-variables-set-by-the-integration). Any prefix you add is applied in addition the existing prefix. If necessary, you can change your prefix later by navigating to **Storage** > **Projects**, and selecting **Update Project Connection** from the project's menu.
+     </Admonition>
    - Under **Deployments Configuration**, you can toggle the **Required** option and select **Preview** to create a Neon branch with every preview deployment (the **Development** and **Production** options here do not do anything — you can ignore them). Enabling the **Required** option means that a database branch must be created for each preview deployment.
 
    <Admonition type="note" title="A database branch for every preview deployment">
@@ -188,10 +191,18 @@ To monitor usage in Vercel:
 
 When you install the Neon Postgres Native Integration from the Vercel Marketplace, you have access to all the same Neon plans that are available to anyone signing up for Neon directly. Changing your plan (upgrading or downgrading) is performed in Vercel.
 
-1. On the Vercel Dashboard, navigate to **Storage** tab.
-2. Select **Settings**.
-3. In the **Update configuration** section, select **Change Configuration**.
-4. Select the desired **Installation plan**, and click **Save**.
+1. On the Vercel Dashboard, navigate to the **Storage** tab.
+2. Select your Neon Database.
+3. Select **Settings** from the sidebar.
+
+   ![Vercel settings](/docs/guides/vercel_settings.png)
+
+4. In the **Update configuration** section, select **Change Configuration**.
+
+   ![Vercel update configuration modal](/docs/guides/vercel_update_configuration.png)
+
+5. Select the desired **Installation plan**, and click **Save**.
+6. Follow the prompts to complete the plan change, providing your payment method if necessary.
 
 For an overview of Neon's plans, please visit our [Pricing](https://neon.tech/pricing) page.
 
@@ -203,7 +214,8 @@ To delete your database:
 
 1. On the Vercel Dashboard, navigate to **Storage** tab.
 2. Select **Settings**.
-3. Navigate to the Delete Database section and follow the instructions.
+3. Select your Database, if you have more than one.
+4. Navigate to the **Delete Database** section and follow the instructions.
 
 This action is not reversible, so please proceed with caution.
 

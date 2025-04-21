@@ -1,0 +1,174 @@
+<svg width="640" height="320" viewBox="0 0 640 320" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="none">
+  <style>
+    .join { mix-blend-mode: multiply; opacity:0.5; }
+
+    #t1_text {
+        fill:#aa99ffaa;
+        cursor: pointer;
+    }
+    #t1_text:hover {
+        fill:#aa99ff;
+    }
+    #t1_rect:hover .outline, svg:has(#t1_text:hover) #t1_rect .outline {
+        stroke-width: 4;
+    }
+    svg:has(#t1_rect:hover) #t1_text {
+        fill:#aa99ff;
+    }
+
+    #t1_id_text {
+        fill:#aa99ffaa;
+        cursor: pointer;
+    }
+    #t1_id_text:hover {
+        fill:#aa99ff;
+    }
+    #t1_id_label {
+        cursor: pointer;
+    }
+    #t1_id_column {
+        opacity: 0;
+    }
+    #t1_id_label:hover, svg:has(#t1_id_text:hover) #t1_id_label {
+        opacity: 1;
+    }
+    svg:has(#t1_id_label:hover) #t1_id_text {
+        fill:#aa99ff;
+    }
+    svg:has(#t1_id_label:hover) #t1_id_column, svg:has(#t1_id_text:hover) #t1_id_column {
+        opacity: 0.5;
+    }
+
+    #t2_text {
+        fill:#ffa64caa;
+        cursor: pointer;
+    }
+    #t2_text:hover {
+        fill:#ffa64c;
+    }
+    #t2_rect:hover .outline, svg:has(#t2_text:hover) #t2_rect .outline {
+        stroke-width: 4;
+    }
+    svg:has(#t2_rect:hover) #t2_text {
+        fill:#ffa64c;
+    }
+
+    #t2_t1_id_text {
+        fill:#ffa64caa;
+        cursor: pointer;
+    }
+    #t2_t1_id_text:hover {
+        fill:#ffa64c;
+    }
+    #t2_t1_id_label {
+        cursor: pointer;
+    }
+    
+    #t2_t1_id_column {
+        opacity: 0;
+    }
+    #t2_t1_id_label:hover, svg:has(#t2_t1_id_text:hover) #t2_t1_id_label {
+        opacity: 1;
+    }
+    svg:has(#t2_t1_id_label:hover) #t2_t1_id_text {
+        fill:#ffa64c;
+    }
+    svg:has(#t2_t1_id_label:hover) #t2_t1_id_column, svg:has(#t2_t1_id_text:hover) #t2_t1_id_column {
+        opacity:0.5;
+    }
+  </style>
+  <rect width="100%" height="100%" fill="#f9f9f9"/>
+  <text x="50%" dominant-baseline="middle" text-anchor="middle" y="24" fill="#333" font-size="18" font-family="Arial" font-weight="bold">Left Join</text>
+  <text x="50%" dominant-baseline="middle" text-anchor="middle" y="50" fill="#333" font-size="14" font-family="Arial" font-style="italic" opacity="0.5">Also known as Left Outer Join</text>
+  <g transform="translate(0, 90)">
+    <!-- Left Box (LHS) -->
+    <g id="t1_rect" transform="translate(80, 80)">
+        <rect x="-1" y="-1" width="142" height="102" fill="#aa99ff" opacity="0.05" />
+
+        <rect width="40" height="20" fill="#ccc" opacity="0.1"/>
+        <rect x="40" width="30" height="20" fill="#ccc" opacity="0.2"/>
+        <rect x="70" width="30" height="20" fill="#ccc" opacity="0.05"/>
+        <rect x="100" width="40" height="20" fill="#ccc" opacity="0.25"/>
+
+
+        <rect y="20" width="40" height="20" fill="#ccc" opacity="0.05"/>
+        <rect x="40" y="20" width="30" height="20" fill="#ccc" opacity="0.1"/>
+        <rect x="70" y="20" width="30" height="20" fill="#ccc" opacity="0.15"/>
+        <rect x="100" y="20" width="40" height="20" fill="#ccc" opacity="0.1"/>
+
+
+        <rect  y="40" width="40" height="20" fill="#ccc" opacity="0.025"/>
+        <rect x="40" y="40" width="30" height="20" fill="#ccc" opacity="0.2"/>
+        <rect x="70" y="40" width="30" height="20" fill="#ccc" opacity="0.05"/>
+        <rect x="100" y="40" width="40" height="20" fill="#ccc" opacity="0.15"/>
+
+
+        <rect y="60" width="40" height="20" fill="#ccc" opacity="0.1"/>
+        <rect x="40" y="60" width="30" height="20" fill="#ccc" opacity="0.2"/>
+        <rect x="70" y="60" width="30" height="20" fill="#ccc" opacity="0.05"/>
+        <rect x="100" y="60" width="40" height="20" fill="#ccc" opacity="0.25"/>
+
+
+        <rect y="80" width="40" height="20" fill="#ccc" opacity="0.05"/>
+        <rect x="40" y="80" width="30" height="20" fill="#ccc" opacity="0.1"/>
+        <rect x="70" y="80" width="30" height="20" fill="#ccc" opacity="0.15"/>
+        <rect x="100" y="80" width="40" height="20" fill="#ccc" opacity="0.05"/>
+
+        <rect class="join" x="-1" y="-1" width="142" height="102" fill="#aa99ff" />
+        <text x="-45" y="56" fill="#8e86b4" font-size="16" font-family="Arial">T1</text>
+        <text id="t1_id_label" x="112" y="120" fill="#8e86b4" font-size="12" font-family="monospace" opacity="0.5" font-style="italic">id</text>
+        <rect id="t1_id_column" x="100" y="0" width="40" height="100" fill="#8e86b4" />
+        <rect class="outline" width="140" height="100" stroke="#8e86b4" stroke-width="2"/>
+    </g>
+
+    <!-- Right Box (RHS) -->
+    
+    <g id="t2_rect" transform="translate(180, 20)">
+        <rect x="-1" y="-1" width="142" height="102" fill="#ffa64c" opacity="0.05" />
+
+        <rect width="40" height="20" fill="#ccc" opacity="0.1"/>
+        <rect x="40" width="30" height="20" fill="#ccc" opacity="0.2"/>
+        <rect x="70" width="30" height="20" fill="#ccc" opacity="0.05"/>
+        <rect x="100" width="40" height="20" fill="#ccc" opacity="0.25"/>
+
+
+        <rect y="20" width="40" height="20" fill="#ccc" opacity="0.05"/>
+        <rect x="40" y="20" width="30" height="20" fill="#ccc" opacity="0.1"/>
+        <rect x="70" y="20" width="30" height="20" fill="#ccc" opacity="0.15"/>
+        <rect x="100" y="20" width="40" height="20" fill="#ccc" opacity="0.1"/>
+
+
+        <rect  y="40" width="40" height="20" fill="#ccc" opacity="0.025"/>
+        <rect x="40" y="40" width="30" height="20" fill="#ccc" opacity="0.2"/>
+        <rect x="70" y="40" width="30" height="20" fill="#ccc" opacity="0.05"/>
+        <rect x="100" y="40" width="40" height="20" fill="#ccc" opacity="0.15"/>
+
+
+        <rect y="60" width="40" height="20" fill="#ccc" opacity="0.1"/>
+        <rect x="40" y="60" width="30" height="20" fill="#ccc" opacity="0.2"/>
+        <rect x="70" y="60" width="30" height="20" fill="#ccc" opacity="0.05"/>
+        <rect x="100" y="60" width="40" height="20" fill="#ccc" opacity="0.25"/>
+
+
+        <rect y="80" width="40" height="20" fill="#ccc" opacity="0.05"/>
+        <rect x="40" y="80" width="30" height="20" fill="#ccc" opacity="0.1"/>
+        <rect x="70" y="80" width="30" height="20" fill="#ccc" opacity="0.15"/>
+        <rect x="100" y="80" width="40" height="20" fill="#ccc" opacity="0.05"/>
+
+        <rect class="join" x="-1" y="59" width="142" height="42" fill="#ffa64c" />
+        <text x="160" y="56" fill="#b08253" font-size="16" font-family="Arial">T2</text>
+        <text x="4" y="-12" fill="#b08253" font-size="12" font-family="monospace" opacity="0.5" font-style="italic" id="t2_t1_id_label">t1_id</text>
+        <rect width="140" height="100" stroke="#b08253" stroke-width="2" class="outline"/>
+        <rect id="t2_t1_id_column" x="0" y="0" width="40" height="100" fill="#b08253" />
+    </g>
+    <path d="M 220 180 L 320 180 L 320 120" stroke="#aaa" stroke-width="2" stroke-dasharray="2 2" />
+    <text x="245" y="155" fill="#ccc" font-size="16" font-family="Arial" font-style="italic">NULL&apos;s</text>
+    </g>
+    <g transform="translate(415, 160)" font-size="14" font-family="monospace" fill="#333">
+        <rect x="-15" y="-30" width="200" height="100" fill="#fff" stroke="#ccc" stroke-width="2" opacity="0.5"/>
+        <text y="-5" opacity="0.5">SELECT * </text>
+        <text y="15"><tspan opacity="0.5">FROM</tspan> <tspan id="t1_text">t1</tspan></text>
+        <text y="35">LEFT JOIN <tspan fill="#ffa64c" id="t2_text">t2</tspan></text>
+        <text y="55"><tspan opacity="0.5">ON</tspan> <tspan opacity="0.5" fill="#aa99ff">t1</tspan>.<tspan id="t1_id_text">id</tspan> = <tspan opacity="0.5" fill="#ffa64c">t2</tspan>.<tspan id="t2_t1_id_text">t1_id</tspan>;</text>
+        </g>
+</svg>

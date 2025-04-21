@@ -141,6 +141,31 @@ const defaultConfig = {
 
     return [
       {
+        source: '/msbuild',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/bm',
+        destination: '/?ref=tbm-p',
+        permanent: true,
+      },
+      {
+        source: '/burningmonk',
+        destination: '/?ref=tbm-p',
+        permanent: true,
+      },
+      {
+        source: '/yc-startups',
+        destination: '/startups',
+        permanent: true,
+      },
+      {
+        source: '/yc-deal-terms',
+        destination: '/startups-deal-terms',
+        permanent: true,
+      },
+      {
         source: '/postgresql',
         destination: '/postgresql/tutorial',
         permanent: true,
@@ -189,6 +214,11 @@ const defaultConfig = {
       {
         source: '/early-access',
         destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/docs/import/migration-assistant',
+        destination: '/docs/import/import-data-assistant',
         permanent: true,
       },
       {
@@ -247,11 +277,11 @@ const defaultConfig = {
         destination: 'https://console.neon.tech/signup',
         permanent: true,
       },
-      {
-        source: '/ai',
-        destination: '/docs/ai/ai-intro',
-        permanent: true,
-      },
+      // {
+      //   source: '/ai',
+      //   destination: '/docs/ai/ai-intro',
+      //   permanent: true,
+      // },
       {
         source: '/deploy',
         destination: '/stage',
@@ -270,6 +300,11 @@ const defaultConfig = {
       {
         source: '/early-access-program',
         destination: '/docs/introduction/roadmap#join-the-neon-early-access-program',
+        permanent: true,
+      },
+      {
+        source: '/hipaa-compliance-guide',
+        destination: '/docs/security/hipaa',
         permanent: true,
       },
       ...docsRedirects,

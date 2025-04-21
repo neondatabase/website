@@ -23,7 +23,7 @@ const Features = ({ title, items }) => (
                   alt=""
                   loading="lazy"
                 />
-                <h3 className="text-[22px] font-medium leading-tight -tracking-[0.02em] lg:text-lg">
+                <h3 className="text-[22px] font-medium leading-tight tracking-extra-tight lg:text-lg">
                   {title}
                 </h3>
               </div>

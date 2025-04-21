@@ -16,7 +16,7 @@ nextLink:
 
 **Summary**: in this tutorial, you will learn how to insert data into a table in the PostgreSQL database from a C\# program.
 
-This tutorial begins where the [Creating Tables in PostgreSQL database from a C\# program tutorial](postgresql-csharp-create-table) left off.
+This tutorial begins where the [Creating Tables in PostgreSQL database from a C\# program tutorial](postgresql-csharp-create-table) left off.
 
 ## How to insert data into PostgreSQL database using C\#
 
@@ -57,7 +57,7 @@ The following C\# program inserts a row into the `students` table in the `elearn
 ```cs
 using Npgsql;
 
-var student = new Student("John", "Doe", "[[email protected]](../cdn-cgi/l/email-protection.html)", new DateOnly(2024, 5, 20));
+var student = new Student("John", "Doe", "john.doe@example.com", new DateOnly(2024, 5, 20));
 
 
 // Construct INSERT statement
@@ -107,7 +107,7 @@ public record Student(string FirstName, string LastName, string Email, DateOnly 
 Second, define a new instance of the `Student` record for insertion into the `students` table:
 
 ```cs
-var student = new Student("John", "Doe", "[[email protected]](../cdn-cgi/l/email-protection.html)", new DateOnly(2024,5,20));
+var student = new Student("John", "Doe", "john.doe@example.com", new DateOnly(2024,5,20));
 ```
 
 Third, construct an [`INSERT`](../postgresql-tutorial/postgresql-insert) statement that inserts a new row into the `students` table:
@@ -162,7 +162,7 @@ First, open a terminal and connect to the `elearning` database using the `ed` us
 psql -U ed -d elearning
 ```
 
-It’ll prompt you to enter a password for the `ed` user. Input the valid password and press Enter to connect to the PostgreSQL.
+It'll prompt you to enter a password for the `ed` user. Input the valid password and press Enter to connect to the PostgreSQL.
 
 Second, query data from the `students` table:
 
@@ -175,7 +175,7 @@ Output:
 ```cs
  id | first_name | last_name |       email        | registration_date
 ----+------------+-----------+--------------------+-------------------
-  1 | John       | Doe       | [[email protected]](../cdn-cgi/l/email-protection.html) | 2024-05-20
+  1 | John       | Doe       | john.doe@example.com | 2024-05-20
 (1 row)
 ```
 
