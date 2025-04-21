@@ -117,10 +117,9 @@ Switch your application to Neon and validate the migration after `pgcopydb clone
 
 1.  **Stop writes to source database**: Halt write operations to your source database.
 2.  **Validate migration**: Use `pgcopydb compare schema` and `pgcopydb compare data` for validation.
-3. **Update application connection string**: Point your application to your Neon database.
+3.  **Update application connection string**: Point your application to your Neon database.
 
 </Steps>
-
 
 ## Advanced usage
 
