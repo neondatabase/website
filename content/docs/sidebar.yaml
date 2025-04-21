@@ -916,6 +916,8 @@
               slug: guides/neon-twin-full-pg-dump-restore
             - title: Partial Twin
               slug: guides/neon-twin-partial-pg-dump-restore
+            - title: pgcopydb
+              slug: guides/pgcopydb
 - section: Postgres
   items:
     - title: PostgreSQL Tutorial
