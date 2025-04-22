@@ -46,11 +46,11 @@ CREATE SCHEMA api;
 
 CREATE TABLE api.students (
   id SERIAL PRIMARY KEY,
-  firstName TEXT NOT NULL,
-  lastName TEXT NOT NULL
+  first_name TEXT NOT NULL,
+  last_name TEXT NOT NULL
 );
 
-INSERT INTO api.students (firstName, lastName) VALUES
+INSERT INTO api.students (first_name, last_name) VALUES
 ('Ada', 'Lovelace'),
 ('Alan', 'Turing');
 
@@ -58,13 +58,14 @@ CREATE ROLE anonymous NOLOGIN;
 GRANT anonymous TO neondb_owner;
 GRANT USAGE ON SCHEMA api TO anonymous;
 GRANT SELECT ON ALL TABLES IN SCHEMA api TO anonymous;
+ALTER DEFAULT PRIVILEGES IN SCHEMA api GRANT SELECT ON TABLES TO anonymous;
 ```
 
 ## Run PostgREST
 
 Use Docker to run PostgREST locally:
 
-```bash shouldWrap
+```bash
 docker run --rm --net=host \
   -e PGRST_DB_URI="<non-pooled-connection-string-from-neon-console>" \
   -e PGRST_DB_SCHEMA="api" \
@@ -73,7 +74,9 @@ docker run --rm --net=host \
   postgrest/postgrest
 ```
 
-You can find the non-pooled connection string in the Neon Console.
+<Admonition type="note">
+PostgREST requires a direct connection to your database, so make sure you're using the **non-pooled** connection string from the Neon Console.
+</Admonition>
 
 Once running, visit http://localhost:3000/students to confirm the API is working.
 
@@ -81,7 +84,7 @@ Once running, visit http://localhost:3000/students to confirm the API is working
 
 To support full CRUD operations, create a role for authenticated users:
 
-```sql shouldWrap
+```sql
 CREATE ROLE authenticated NOLOGIN;
 GRANT authenticated TO neondb_owner;
 GRANT USAGE ON SCHEMA api TO authenticated;
@@ -91,15 +94,19 @@ GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA api TO authenticated;
 
 Run PostgREST again, this time with a JWT secret:
 
-```bash shouldWrap
+```bash
 docker run --rm --net=host \
   -e PGRST_DB_URI="<non-pooled-connection-string-from-neon-console>" \
   -e PGRST_DB_SCHEMA="api" \
-  -e PGRST_JWT_SECRET="your_jwt_secret" \
+  -e PGRST_JWT_SECRET="<your_jwt_secret>" \
   -e PGRST_DB_ANON_ROLE="anonymous" \
   -p 3434:3000 \
   postgrest/postgrest
 ```
+
+<Admonition type="important">
+In production, do not hardcode secrets in your Docker commands.
+</Admonition>
 
 ## Authenticate requests using JWT
 
@@ -115,22 +122,22 @@ Attach the token in the `Authorization` header as a bearer token. Here are a few
 
 Insert a student:
 
-```bash shouldWrap
+```bash
 curl http://localhost:3000/students \
   -X POST \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer <your_jwt_token>" \
-  -d '{"firstname": "Grace", "lastname": "Hopper"}'
+  -d '{"first_name": "Grace", "last_name": "Hopper"}'
 ```
 
 Update a student:
 
-```bash shouldWrap
+```bash
 curl "http://localhost:3000/students?id=eq.1" \
   -X PATCH \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer <your_jwt_token>" \
-  -d '{"firstname": "Ada I.", "lastname": "Lovelace"}'
+  -d '{"first_name": "Ada I.", "last_name": "Lovelace"}'
 ```
 
 Delete a student:
@@ -145,14 +152,14 @@ curl "http://localhost:3000/students?id=eq.3" \
 
 PostgREST supports Postgres RLS for fine-grained access control. Here's an example policy to restrict access to a user's own records:
 
-```sql shouldWrap
+```sql
 ALTER TABLE api.students ENABLE ROW LEVEL SECURITY;
 
 CREATE POLICY students_policy ON api.students
     FOR ALL
     TO authenticated
-    USING (id = (current_setting('request.jwt.claims', true)::json->>'sub')::integer)
-    WITH CHECK (id = (current_setting('request.jwt.claims', true)::json->>'sub')::integer);
+    USING (id = (SELECT current_setting('request.jwt.claims', true)::json->>'sub')::integer)
+    WITH CHECK (id = (SELECT current_setting('request.jwt.claims', true)::json->>'sub')::integer);
 ```
 
 Example JWT payload for RLS:
@@ -178,34 +185,14 @@ This setup is ideal for:
 - Building internal tools
 - Reducing boilerplate in production apps
 
-## Next Steps
+## Next steps
 
-Now that you have a basic PostgREST API running with Neon, here are some ways to expand your implementation:
-
-### Enhance Your API
+Now that you have a basic PostgREST API running with Neon, here are some things you can look at next:
 
 - **Explore advanced querying**: Implement [filtering](https://docs.postgrest.org/en/v12/api.html#horizontal-filtering-rows), [ordering](https://docs.postgrest.org/en/v12/api.html#ordering), and [pagination](https://docs.postgrest.org/en/v12/api.html#limits-and-pagination) in your API requests
 - **Add resource embedding**: Use [resource embedding](https://docs.postgrest.org/en/v12/api.html#resource-embedding) to fetch related data in a single request
 - **Implement stored procedures**: Expose [PostgreSQL functions](https://docs.postgrest.org/en/v12/api.html#stored-procedures) as API endpoints for complex operations
-
-### Integrate with Frontend Frameworks
-
-- Connect your API to frontend frameworks using client libraries:
-  - [postgrest-js](https://github.com/supabase/postgrest-js) for TypeScript/JavaScript applications
-  - [postgrest-py](https://github.com/supabase/postgrest-py) for Python applications
-  - [vue-postgrest](https://github.com/technowledgy/vue-postgrest) for Vue.js applications
-  - [Other client libraries](https://docs.postgrest.org/en/v12/ecosystem.html#client-side-libraries) for various languages
-
-### Move to Production
-
-- **Deploy to cloud platforms**: Set up PostgREST on [Kubernetes](https://github.com/cloudstark/helm-charts), [Cloud Run](https://github.com/cyril-sabourault/postgrest-cloud-run), or other cloud services
-- **Add a reverse proxy**: Configure Nginx as a reverse proxy for caching, SSL termination, and load balancing
-- **Implement monitoring**: Set up [observability](https://docs.postgrest.org/en/v12/references/observability.html) for your PostgREST service
-- **Secure your deployment**: Review the [security checklist](https://docs.postgrest.org/en/v12/explanations/security.html) before going to production
-
-### Explore Example Applications
-
-- Browse [example applications](https://docs.postgrest.org/en/v12/ecosystem.html#example-apps) built with PostgREST to get inspiration for your own projects
-- Try out [templates](https://docs.postgrest.org/en/v12/ecosystem.html#templates) that combine PostgREST with various frontend technologies
+- **Example applications**: Explore [example applications](https://docs.postgrest.org/en/v12/ecosystem.html#example-apps)  built with PostgREST to get inspiration for your own projects
+- **Try out templates**: These [templates](https://docs.postgrest.org/en/v12/ecosystem.html#templates) combine PostgREST with various frontend technologies
 
 <NeedHelp/>
