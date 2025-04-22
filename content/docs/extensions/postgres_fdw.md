@@ -48,7 +48,7 @@ OPTIONS (host '<remote_host>', port '<remote_port>', dbname '<remote_database>')
 ```
 
 <Admonition type="important">
-When setting up `postgres_fdw` with a Neon database as the foreign server, make sure to use a unpooled ([direct connection string](/docs/reference/glossary#unpooled-connection-string)). Pooled connection strings will result in connection errors. You can find the unpooled connection string in your project dashboard by clicking the **Connect** button and ensuring the **Connection pooling** toggle is disabled.
+When setting up `postgres_fdw` with a Neon database as the foreign server, make sure to use the hostname from an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string). Pooled connection strings will result in connection errors. You can find the unpooled connection string in your project dashboard by clicking the **Connect** button and ensuring the **Connection pooling** toggle is disabled.
 </Admonition>
 
 Replace the placeholders with the actual details of your remote Postgres server:
