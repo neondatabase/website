@@ -59,14 +59,6 @@ Azure provides an Azure-native CLI and SDKs for working with the Neon platform. 
 - [Connect with Azure Service Connector](https://neon.tech/guides/azure-service-connector) - Connect Azure services to Neon
 - [Integrate Neon Serverless Postgres with Service Connector](https://learn.microsoft.com/en-us/azure/service-connector/how-to-integrate-neon-postgres?tabs=dotnet) — Azure documentation for Service Connector
 
-## Functions & serverless
-
-- [Query Postgres from Azure Functions](https://neon.tech/guides/query-postgres-azure-functions) - Connect from Azure Functions to Neon
-- [Building a serverless referral system](https://neon.tech/guides/azure-functions-referral-system) - Create a referral system with Neon and Azure Functions
-- [Building a robust JSON API with TypeScript](https://neon.tech/guides/azure-functions-hono-api) - Build APIs with TypeScript, Postgres, and Azure Functions
-- [Azure Static Web Apps with Neon](https://neon.tech/guides/azure-todo-static-web-app) - Building Azure Static Web Apps with Neon
-- [Azure Logic Apps with Neon](https://neon.tech/guides/azure-logic-apps) — Integrate Neon with Azure Logic Apps
-
 ## AI
 
 - [Multitenant RAG with Neon on Azure](https://neon.tech/blog/multitenant-private-ai-chat-with-neon-on-azure) - Build a tenant AI chat solution with Neon on Azure
@@ -79,6 +71,16 @@ Azure provides an Azure-native CLI and SDKs for working with the Neon platform. 
 - [Build your first AI agent for Postgres on Azure](https://neon.tech/guides/azure-ai-agent-service) — Build an AI agent for Postgres using Azure AI Agent Service
 - [Semantic Kernel](/docs/ai/semantic-kernel) — Build AI RAG and agentic workflows with Semantic Kernel and Neon
 
+### Live AI demos
+
+<DetailIconCards>
+
+<a href="https://multiuser-rag-g0e0g3h6ekhtf7cg.germanywestcentral-01.azurewebsites.net/" description="Creates one Neon project with a vector storage per user, each user's data will be completely isolated" icon="enable">Multi-user RAG in Azure</a>
+
+<a href="https://rag-vrjtpx5tgrsnm-ca.wittyriver-637b2279.eastus2.azurecontainerapps.io/" description="Ask questions about data in a Neon database using React and FastAPI in Python." icon="enable">AI-Powered Neon Database Q&A Chatbot in Azure</a>
+
+</DetailIconCards>
+
 ## Frameworks & languages
 
 - [.NET with Neon](https://neon.tech/docs/guides/dotnet-npgsql) - Connect a .NET (C#) application to Neon
@@ -88,6 +90,14 @@ Azure provides an Azure-native CLI and SDKs for working with the Neon platform. 
 - [ASP.NET with Neon and Entity Framework](https://neon.tech/guides/dotnet-neon-entity-framework) - Build ASP.NET Core applications with Neon and Entity Framework
 - [RESTful API with ASP.NET Core and Swagger](https://neon.tech/guides/aspnet-core-api-neon) - Build APIs with ASP.NET Core, Swagger, and Neon
 - [Neon read replicas with Entity Framework](https://neon.tech/guides/read-replica-entity-framework) - Scale .NET applications with Entity Framework and Neon read replicas
+
+## Functions & serverless
+
+- [Query Postgres from Azure Functions](https://neon.tech/guides/query-postgres-azure-functions) - Connect from Azure Functions to Neon
+- [Building a serverless referral system](https://neon.tech/guides/azure-functions-referral-system) - Create a referral system with Neon and Azure Functions
+- [Building a robust JSON API with TypeScript](https://neon.tech/guides/azure-functions-hono-api) - Build APIs with TypeScript, Postgres, and Azure Functions
+- [Azure Static Web Apps with Neon](https://neon.tech/guides/azure-todo-static-web-app) - Building Azure Static Web Apps with Neon
+- [Azure Logic Apps with Neon](https://neon.tech/guides/azure-logic-apps) — Integrate Neon with Azure Logic Apps
 
 ## Security & access control
 
