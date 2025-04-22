@@ -40,7 +40,7 @@ const CheckItem = ({ title, href, children, checklist = [], onToggle, ...otherPr
           </Tag>
         </h3>
       </label>
-      <div className="mt-2 pl-[30px] leading-snug tracking-tight text-gray-new-20 dark:text-gray-new-80 md:mt-1.5 [&_p]:m-0">
+      <div className="mt-2 pl-[30px] text-gray-new-20 dark:text-gray-new-80 md:mt-1.5 [&_p]:m-0 [&_p]:leading-snug [&_p]:tracking-tight">
         {children}
       </div>
     </li>
