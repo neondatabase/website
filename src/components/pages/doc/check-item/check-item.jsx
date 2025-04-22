@@ -27,7 +27,7 @@ const CheckItem = ({ title, href, children, checklist = [], onToggle, ...otherPr
             'dark:border-gray-new-20 dark:hover:bg-white/5',
             'before:absolute before:inset-0 before:z-10 before:bg-[url(/images/checklist.svg)] before:bg-center before:bg-no-repeat',
             'before:opacity-0 before:transition-opacity before:duration-200 checked:before:opacity-100',
-            'dark:before:invert dark:checked:border-gray-new-20 dark:checked:!bg-white/5'
+            'dark:before:invert dark:checked:border-gray-new-20'
           )}
           type="checkbox"
           id={id}
