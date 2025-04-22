@@ -108,7 +108,7 @@ WHERE title @@@ 'database';
 -- Handling typos with fuzzy matching
 SELECT title
 FROM articles
-WHERE id @@@ paradedb.match('title', 'databse', distance => 1);
+WHERE id @@@ paradedb.match('title', 'database', distance => 1);
 
 -- Sorting by relevance score
 SELECT title, paradedb.score(id) AS relevance
