@@ -790,7 +790,7 @@ To begin, let's create a Dockerfile for the backend API. This file will define t
    CMD ["node", "server.js"]
    ```
 
-This Dockerfile uses the official Node.js image, sets up the working directory, installs dependencies, and exposes port 3000 (the port the API will listen on).
+    This Dockerfile uses the official Node.js image, sets up the working directory, installs dependencies, and exposes port 3000 (the port the API will listen on).
 
 2. Create a `.dockerignore` file to avoid copying unnecessary files to the Docker image:
 
@@ -828,10 +828,10 @@ Next, we'll dockerize the frontend React application. We'll create a separate `D
    CMD ["nginx", "-g", "daemon off;"]
    ```
 
-This Dockerfile does the following:
+    This Dockerfile does the following:
 
-- It first builds the React app using the Node.js image.
-- Then, it uses an Nginx image to serve the build files, ensuring that the app is ready for production.
+    - It first builds the React app using the Node.js image.
+    - Then, it uses an Nginx image to serve the build files, ensuring that the app is ready for production.
 
 #### Docker Compose Setup
 
@@ -868,10 +868,10 @@ Now, we'll use Docker Compose to run both the backend API and the frontend toget
      driver: bridge
    ```
 
-This file defines three services:
+    This file defines three services:
 
-- **`api`**: The backend service, built from the `snippet-search-api` directory. It expects the `DATABASE_URL` environment variable to connect to the Neon database. You should replace `[username]`, `[password]`, and `[endpoint]` with your actual Neon database credentials or use a `.env` file to manage these variables securely.
-- **`frontend`**: The React frontend service, built from the `snippet-search-ui` directory. It will serve the static build files via Nginx.
+    - **`api`**: The backend service, built from the `snippet-search-api` directory. It expects the `DATABASE_URL` environment variable to connect to the Neon database. You should replace `[username]`, `[password]`, and `[endpoint]` with your actual Neon database credentials or use a `.env` file to manage these variables securely.
+    - **`frontend`**: The React frontend service, built from the `snippet-search-ui` directory. It will serve the static build files via Nginx.
 
 #### Building and Running the Application
 
@@ -883,10 +883,10 @@ With the Dockerfiles and `compose.yml` file in place, we can now build and start
    docker compose up --build
    ```
 
-This command will:
+    This command will:
 
-- Build the Docker images for the backend API and the frontend.
-- Create and start the containers for the backend API, frontend, and Postgres database.
+    - Build the Docker images for the backend API and the frontend.
+    - Create and start the containers for the backend API, frontend, and Postgres database.
 
 2. Access the application:
 
@@ -895,11 +895,11 @@ This command will:
 
 3. Shut down the application:
 
-If you want to stop the containers, run:
+    If you want to stop the containers, run:
 
-```bash
-docker compose down
-```
+    ```bash
+    docker compose down
+    ```
 
 ## Performance optimization tips
 
