@@ -18,31 +18,32 @@ const CheckItem = ({ title, href, children, checklist = [], onToggle, ...otherPr
   const Tag = href ? Link : 'div';
 
   return (
-    <div className="mt-3">
-      <label className="relative flex cursor-pointer items-start gap-x-2.5 pl-6" htmlFor={id}>
+    <li className="!m-0 before:hidden">
+      <label className="relative block cursor-pointer pl-[30px]" htmlFor={id}>
         <input
           className={clsx(
             'remove-autocomplete-styles pointer-events-none appearance-none',
-            'absolute left-0 top-0.5 z-10 h-4 w-4 rounded border border-black/10 bg-black/5 transition-colors duration-200 hover:bg-black/10',
-            'dark:border-gray-new-20 dark:bg-white/5 dark:hover:bg-white/10',
-            'before:absolute before:inset-0 before:z-10 before:bg-[url(/images/checklist.svg)] before:bg-center before:bg-no-repeat before:invert',
-            'before:opacity-0 before:transition-opacity before:duration-200',
-            'checked:border-secondary-8/50 checked:!bg-secondary-8/70 checked:before:opacity-100',
-            'dark:checked:border-gray-new-20 dark:checked:!bg-white/5'
+            'absolute left-0 top-0.5 z-10 size-4 rounded-sm border border-gray-new-80 transition-colors duration-200 hover:bg-gray-new-95',
+            'dark:border-gray-new-20 dark:hover:bg-white/5',
+            'before:absolute before:inset-0 before:z-10 before:bg-[url(/images/checklist.svg)] before:bg-center before:bg-no-repeat',
+            'before:opacity-0 before:transition-opacity before:duration-200 checked:before:opacity-100',
+            'dark:before:invert dark:checked:border-gray-new-20 dark:checked:!bg-white/5'
           )}
           type="checkbox"
           id={id}
           checked={isChecked}
           onChange={() => onToggle(id)}
         />
-        <h3 className="m-0 text-lg font-medium leading-tight tracking-extra-tight">
+        <h3 className="m-0 text-lg font-medium leading-tight tracking-normal">
           <Tag className="" href={href || null} {...otherProps}>
             {title}
           </Tag>
         </h3>
       </label>
-      <div className="mt-3 pl-6 [&_p]:mb-0">{children}</div>
-    </div>
+      <div className="mt-2 pl-[30px] leading-snug tracking-tight text-gray-new-20 dark:text-gray-new-80 md:mt-1.5 [&_p]:m-0">
+        {children}
+      </div>
+    </li>
   );
 };
 
