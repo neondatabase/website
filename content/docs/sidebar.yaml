@@ -96,6 +96,9 @@
           slug: connect/connect-from-any-app
         - title: Neon serverless driver
           slug: serverless/serverless-driver
+        - title: Neon Local
+          tag: new
+          slug: local/neon-local
         - title: Neon SQL Editor
           slug: get-started-with-neon/query-with-neon-sql-editor
         - title: Passwordless auth
@@ -384,10 +387,10 @@
         - section: Updates
           items:
             - title: Overview
-              slug: manage/maintenance-updates-overview              
+              slug: manage/maintenance-updates-overview
               tag: new
             - title: Platform maintenance
-              slug: manage/platform-maintenance              
+              slug: manage/platform-maintenance
               tag: new
             - title: Updates
               slug: manage/updates
