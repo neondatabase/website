@@ -41,32 +41,7 @@ The integration exports [a comprehensive set of metrics](#available-metrics) inc
 
 <FeatureBetaProps feature_name="Datadog logs export" />
 
-The Neon Datadog integration can forward PostgreSQL logs to your Datadog account. This includes:
-
-- Error messages and warnings
-- Database connection events
-- System notifications
-- General PostgreSQL logs
-
-#### Working with Logs in Datadog
-
-Logs in Datadog include the following labels for filtering and organization:
-
-- `project_id`: Your Neon project identifier
-- `endpoint_id`: The specific compute endpoint
-- Standard PostgreSQL log fields (timestamp, log level, etc.)
-
-<Admonition type="note">
-Neon computes only send logs when they are active. If the [Scale to Zero](/docs/introduction/scale-to-zero) feature is enabled and a compute is suspended due to inactivity, no logs will be sent during the suspension.
-</Admonition>
-
-### Performance impact
-
-Log forwarding is designed to have minimal impact on your database performance. However, enabling this feature may result in:
-
-- Slight increase in compute resource usage for log processing
-- Additional network egress for log transmission (Neon does not charge for data transfer on paid plans)
-- Associated costs based on log volume in Datadog
+The Neon Datadog integration can forward Postgres logs to your Datadog account. These logs provide visibility into database activity, errors, and performance. See [Export Postgres logs to Datadog](#export-postgres-logs-to-datadog) for configuration options and details.
 
 ## Prerequisites
 
@@ -99,7 +74,7 @@ Once set up, Neon will start sending metrics to Datadog, and you can use these m
 <Admonition type="note">
 Neon computes only send metrics when they are active. If the [Scale to Zero](/docs/introduction/scale-to-zero) feature is enabled and a compute is suspended due to inactivity, no metrics will be sent during the suspension. This may result in gaps in your Datadog metrics. If you notice missing data in Datadog, check if your compute is suspended. You can verify a compute's status as `Idle` or `Active` on the **Branches** page in the Neon console, and review **Suspend compute** events on the **System operations** tab of the **Monitoring** page.
 
-Additionally, if you are setting up Neon’s Datadog integration for a project with an inactive compute, you'll need to activate the compute before it can send metrics to Datadog. To activate it, simply run a query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any connected client on the branch associated with the compute.
+Additionally, if you are setting up Neon's Datadog integration for a project with an inactive compute, you'll need to activate the compute before it can send metrics to Datadog. To activate it, simply run a query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any connected client on the branch associated with the compute.
 </Admonition>
 
 ## Example usage in Datadog
@@ -746,18 +721,41 @@ In Datadog, metric labels are referred to as `tags.` See [Getting Started with T
 | host_memory_total_bytes                       | compute-host-metrics | The total number of bytes of main memory.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | host_memory_used_bytes                        | compute-host-metrics | The number of bytes of main memory used by programs or caches.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 
-## Log forwarding
+## Export Postgres logs to Datadog
 
-When log forwarding is enabled, Neon sends Postgres logs to your Datadog account in real-time.
+You can export your Postgres logs from your Neon compute to your Datadog account. These logs help you monitor database activity, troubleshoot issues, and track performance.
 
-### Available logs
+### Log configuration
 
-- Error messages and warnings
-- Database connection events
-- System notifications
-- General PostgreSQL logs
+Postgres provides various logging options to control what information is captured. For details about available options, see the [PostgreSQL documentation on error reporting and logging](https://www.postgresql.org/docs/current/runtime-config-logging.html). You can configure these options using the `pg_settings` object when creating or updating a project via the Neon API. The API validates all settings to ensure they are supported in Neon's managed environment. For example, `log_destination` cannot be modified, as Neon manages the log delivery infrastructure.
 
-For detailed information about PostgreSQL log formats and message types, see the [PostgreSQL documentation on error reporting and logging](https://www.postgresql.org/docs/current/runtime-config-logging.html).
+One important setting is `log_statement`, which controls SQL statement logging:
+- `none`: No statement logging (default)
+- `ddl`: Logs all data definition statements
+- `mod`: Logs all DDL statements, plus data-modifying statements
+- `all`: Logs all statements. Note that this can generate high log volumes and may impact performance.
+
+Example API request:
+
+```bash shouldWrap
+curl --request POST \
+     --url https://console.neon.tech/api/v2/projects \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $BEARER_TOKEN' \
+     --header 'content-type: application/json' \
+     --data '
+{
+  "project": {
+    "default_endpoint_settings": {
+      "pg_settings": {
+        "log_statement": "ddl"
+      }
+    },
+    "pg_version": 17
+  }
+}
+'
+```
 
 ### Working with logs in Datadog
 
@@ -766,24 +764,25 @@ Logs in Datadog include the following labels for filtering and organization:
 - `endpoint_id`: The specific compute endpoint
 - Standard PostgreSQL log fields (timestamp, log level, etc.)
 
-### Log retention and volume
-
-- Logs are forwarded in real-time
-- Log retention in Datadog follows your Datadog account settings
-- Log volume depends on:
-  - Database activity level
-  - Postgres log settings
+<Admonition type="note">
+During the beta phase, you may see some Neon-specific system logs included. These will be filtered out before general availability (GA).
+</Admonition>
 
 ### Performance impact
 
-Log forwarding is designed to have minimal impact on your database performance. However, enabling this feature may result in:
-- Slight increase in compute resource usage for log processing
-- Additional network egress for log transmission
+Enabling this feature may result in:
+
+- An increase in compute resource usage for log processing; the more verbose your log setting, the more compute you can expect to consume
+- Additional network egress for log transmission (Neon does not charge for data transfer on paid plans)
 - Associated costs based on log volume in Datadog
 
 <Admonition type="note">
-If your compute instance is suspended due to [Scale to Zero](/docs/introduction/scale-to-zero), log forwarding will pause until the compute becomes active again.
+Neon computes only send logs when they are active. If the [Scale to Zero](/docs/introduction/scale-to-zero) feature is enabled and a compute is suspended due to inactivity, no logs will be sent during the suspension.
 </Admonition>
+
+### Technical details
+
+Neon uses [rsyslogd](https://www.rsyslog.com/doc/index.html), an open source system utility for log processing and forwarding to remote destinations.
 
 ## Feedback and future improvements
 
