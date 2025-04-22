@@ -6,9 +6,7 @@ enableTableOfContents: true
 updatedOn: '2025-04-18T19:08:17.175Z'
 ---
 
-<CheckList id="production-checklist">
-
-## Production checklist
+<CheckList title="Production checklist">
 
 <CheckItem title="1. Set minimum compute to at least 1 vCPU" href="#set-minimum-compute-to-at-least-1-cu">
   Make sure your default branch can handle production traffic. A higher minimum compute helps you avoid performance bottlenecks.
