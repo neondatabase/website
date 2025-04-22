@@ -494,6 +494,8 @@
               slug: https://neon.tech/guides/agentstack-neon
             - title: AutoGen
               slug: https://neon.tech/guides/autogen-neon
+            - title: Azure AI Agent Service
+              slug: https://neon.tech/guides/azure-ai-agent-service 
             - title: Composio + CrewAI
               slug: https://neon.tech/guides/composio-crewai-neon
             - title: LangGraph
