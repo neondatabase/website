@@ -75,9 +75,9 @@ Azure provides an Azure-native CLI and SDKs for working with the Neon platform. 
 
 <DetailIconCards>
 
-<a href="https://multiuser-rag-g0e0g3h6ekhtf7cg.germanywestcentral-01.azurewebsites.net/" description="Creates one Neon project with a vector storage per user, each user's data will be completely isolated" icon="enable">Multi-user RAG in Azure</a>
+<a href="https://multiuser-rag-g0e0g3h6ekhtf7cg.germanywestcentral-01.azurewebsites.net/" description="Creates a Neon project with a vector storage per user—each user's data is completely isolated" icon="enable">Multi-user RAG in Azure</a>
 
-<a href="https://rag-vrjtpx5tgrsnm-ca.wittyriver-637b2279.eastus2.azurecontainerapps.io/" description="Ask questions about data in a Neon database using React and FastAPI in Python." icon="enable">AI-Powered Neon Database Q&A Chatbot in Azure</a>
+<a href="https://rag-vrjtpx5tgrsnm-ca.wittyriver-637b2279.eastus2.azurecontainerapps.io/" description="Ask questions about data in a Neon database using React and FastAPI in Python" icon="enable">AI-Powered Neon Database Q&A Chatbot in Azure</a>
 
 </DetailIconCards>
 
