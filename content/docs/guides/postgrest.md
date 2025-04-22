@@ -65,20 +65,51 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA api GRANT SELECT ON TABLES TO anonymous;
 
 Use Docker to run PostgREST locally:
 
+<Tabs labels={["Linux", "macOS", "Windows"]}>
+
+<TabItem>
 ```bash
 docker run --rm --net=host \
   -e PGRST_DB_URI="<non-pooled-connection-string-from-neon-console>" \
   -e PGRST_DB_SCHEMA="api" \
   -e PGRST_DB_ANON_ROLE="anonymous" \
-  -p 3434:3000 \
   postgrest/postgrest
 ```
+
+Once running, visit http://localhost:3000/students to confirm the API is working.
+</TabItem>
+
+<TabItem>
+```bash
+docker run --rm \
+  -e PGRST_DB_URI="<non-pooled-connection-string-from-neon-console>" \
+  -e PGRST_DB_SCHEMA="api" \
+  -e PGRST_DB_ANON_ROLE="anonymous" \
+  -p 3000:3000 \
+  postgrest/postgrest
+```
+
+Once running, visit http://localhost:3000/students to confirm the API is working.
+</TabItem>
+
+<TabItem>
+```bash
+docker run --rm \
+  -e PGRST_DB_URI="<non-pooled-connection-string-from-neon-console>" \
+  -e PGRST_DB_SCHEMA="api" \
+  -e PGRST_DB_ANON_ROLE="anonymous" \
+  -p 3000:3000 \
+  postgrest/postgrest
+```
+
+Once running, visit http://localhost:3000/students to confirm the API is working.
+</TabItem>
+
+</Tabs>
 
 <Admonition type="note">
 PostgREST requires a direct connection to your database, so make sure you're using the **non-pooled** connection string from the Neon Console.
 </Admonition>
-
-Once running, visit http://localhost:3000/students to confirm the API is working.
 
 ## Add authenticated access
 
@@ -94,15 +125,44 @@ GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA api TO authenticated;
 
 Run PostgREST again, this time with a JWT secret:
 
+<Tabs labels={["Linux", "macOS", "Windows"]}>
+
+<TabItem>
 ```bash
 docker run --rm --net=host \
   -e PGRST_DB_URI="<non-pooled-connection-string-from-neon-console>" \
   -e PGRST_DB_SCHEMA="api" \
   -e PGRST_JWT_SECRET="<your_jwt_secret>" \
   -e PGRST_DB_ANON_ROLE="anonymous" \
-  -p 3434:3000 \
   postgrest/postgrest
 ```
+</TabItem>
+
+<TabItem>
+```bash
+docker run --rm \
+  -e PGRST_DB_URI="<non-pooled-connection-string-from-neon-console>" \
+  -e PGRST_DB_SCHEMA="api" \
+  -e PGRST_JWT_SECRET="<your_jwt_secret>" \
+  -e PGRST_DB_ANON_ROLE="anonymous" \
+  -p 3000:3000 \
+  postgrest/postgrest
+```
+</TabItem>
+
+<TabItem>
+```bash
+docker run --rm \
+  -e PGRST_DB_URI="<non-pooled-connection-string-from-neon-console>" \
+  -e PGRST_DB_SCHEMA="api" \
+  -e PGRST_JWT_SECRET="<your_jwt_secret>" \
+  -e PGRST_DB_ANON_ROLE="anonymous" \
+  -p 3000:3000 \
+  postgrest/postgrest
+```
+</TabItem>
+
+</Tabs>
 
 <Admonition type="important">
 In production, do not hardcode secrets in your Docker commands.
