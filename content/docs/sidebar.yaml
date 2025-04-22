@@ -413,7 +413,7 @@
       icon: regions
     - title: Support
       slug: introduction/support
-      icon: support
+      icon: status
     - title: Status
       slug: introduction/status
       icon: status

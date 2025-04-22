@@ -30,11 +30,11 @@ Accelerate development workflows with branching, preview environments, and datab
 
 ### Embedded Postgres
 
-Offer Postgres to your users with built-in scalability, fast provisioning, and API-level control. Provision and manage thousands of databases with API-driven workflows. Use branching and autoscaling to reduce operational overhead and control costs.
+Offer Postgres to your users with built-in scalability, fast provisioning, and API-level control. Provision and manage thousands of databases with API-driven workflows. Use branching and autoscaling to reduce operational overhead and control costs. [Partner with Neon](https://neon.tech/partners)
 
 ### AI Agents
 
-Spin up Postgres instances instantly for agent workloads, data processing, or long-lived sessions. Ideal for real-time inference and rapid prototyping.
+Spin up Postgres instances instantly for agent workloads, data processing, or long-lived sessions. Ideal for real-time inference and rapid prototyping. [Learn more](https://neon.tech/use-cases/ai-agents)
 
 ### Compliance-heavy SaaS
 
