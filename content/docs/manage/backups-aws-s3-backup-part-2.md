@@ -277,3 +277,7 @@ This step uploads the `.gz` file created by the `pg_dump` step and uploads it to
 ## Finished
 
 After committing and pushing the workflow to your GitHub repository, the Action will automatically run on the specified schedule, ensuring your Postgres backups are performed regularly.
+
+## Restoring from a backup
+
+Restoring a `pg_dump` backup requires downloading the file from S3 and restoring it using `pg_restore`. For instructions, see [Restoring a backup with pg_restore](/docs/manage/backup-pg-dump#restoring-a-backup-with-pgrestore).
