@@ -16,17 +16,62 @@ In this guide, you'll learn how to enable `pg_search` on Neon, understand the fu
 
 <Admonition type="note" title="pg_search on Neon">
 
-`pg_search` is currently only available on Neon projects using Postgres 17 and created in an [AWS region](/docs/introduction/regions#aws-regions).
+`pg_search` is currently only available on Neon projects created in an [AWS region](/docs/introduction/regions#aws-regions).
 
 </Admonition>
 
 ## Enable the `pg_search` extension
 
-You can install the `pg_search` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+<Tabs labels={["Postgres 17", "Postgres 14—16"]}>
+
+<TabItem>
+
+Install the `pg_search` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_search;
 ```
+
+</TabItem>
+
+<TabItem>
+
+1. **Load the required pg_search libraries**
+
+    Load the required `pg_search` libraries into your Neon project by running this [Update project](https://api-docs.neon.tech/reference/updateproject) API call from your terminal. You will need to specify your [Neon project ID](/docs/reference/glossary#project-id) and your [Neon API key](/docs/manage/api-keys).
+
+    ```bash
+    curl --request PATCH \
+    --url https://console.neon.tech/api/v2/projects/<project_id> \
+    --header 'accept: application/json' \
+    --header 'authorization: Bearer $NEON_API_KEY' \
+    --header 'content-type: application/json' \
+    --data '
+    {
+      "project": {
+        "settings": {
+          "preload_libraries": {
+            "enabled_libraries": [
+              "pg_search"
+            ]
+          }
+        }
+      }
+    }
+    '
+    ```
+
+2. **Install the pg_search extension**
+
+    Install the `pg_search` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+
+    ```sql
+    CREATE EXTENSION IF NOT EXISTS pg_search;
+    ```
+
+</TabItem>
+
+</Tabs>
 
 ## Understanding text search with `pg_search`
 
