@@ -2,7 +2,7 @@
 title: Set up a GitHub Action to perform nightly Postgres backups
 enableTableOfContents: true
 tag: new
-updatedOn: '2025-04-21T13:34:15.083Z'
+updatedOn: '2025-04-22T13:00:29.177Z'
 ---
 
 In this guide, you'll learn how to configure nightly Postgres backups using a scheduled GitHub Action and `pg_dump`.
