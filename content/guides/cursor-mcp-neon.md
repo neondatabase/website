@@ -249,18 +249,18 @@ Cursor: I'll help you add a created_at column to the playing_with_neon table. I'
 > Called MCP Tool (prepare_database_migration)
 > Let me verify the change in the temporary branch to make sure it was applied correctly.
 > Called MCP Tool (run_sql)
-> I've added the created_at column to the playing_with_neon table in a temporary branch. Would you like to commit this migration to the main branch?
+> I've added the created_at column to the playing_with_neon table in a temporary branch. Would you like to commit this migration to the production branch?
 > Migration Details:
 > Migration ID: a65babcd-d1cc-401f-89b5-762570570102
 > Temporary Branch Name: br-silent-cherry-a1eqrl6i
 > Temporary Branch ID: br-silent-cherry-a1eqrl6i
 > Migration Result: Success
-> Please let me know if you'd like to proceed with applying this change to the main branch.
+> Please let me know if you'd like to proceed with applying this change to the production branch.
 
 User: yeah do it
-Cursor: I'll complete the migration and apply the changes to the main branch.
+Cursor: I'll complete the migration and apply the changes to the production branch.
 > Called MCP Tool (complete_database_migration)
-> The migration has been successfully completed! The created_at column has been added to your table in the main branch, and the temporary branch has been cleaned up.
+> The migration has been successfully completed! The created_at column has been added to your table in the production branch, and the temporary branch has been cleaned up.
 ```
 
 **Key takeaways:**
@@ -268,7 +268,7 @@ Cursor: I'll complete the migration and apply the changes to the main branch.
 - **Natural language interaction:** You can use simple, conversational English to interact with your database.
 - **Step-by-step guidance:** Cursor (Claude) confirms each step and provides details like branch names and migration IDs.
 - **MCP Tools in Action:** The underlying MCP tools (`get_database_tables`, `run_sql`, `prepare_database_migration`, `complete_database_migration`) illustrate the automated process.
-- **Branching for safety:** The agent automatically creates a temporary branch for schema changes. The user will be prompted to confirm the migration before applying it to the main branch.
+- **Branching for safety:** The agent automatically creates a temporary branch for schema changes. The user will be prompted to confirm the migration before applying it to the production branch.
 
 You can verify the changes in your Neon Console or by querying the database directly.
 

@@ -381,7 +381,7 @@ There has been a feature request to add support for transactions in the golang-m
 
 Always test migrations in a non-production environment first. Ideally, have a staging environment that mirrors production as closely as possible.
 
-You can achieve this by setting up a separate Neon branch to test migrations before applying them to your main branch. You can learn more about Neon branches in the [Neon documentation](https://neon.tech/docs/introduction/branching).
+You can achieve this by setting up a separate Neon branch to test migrations before applying them to your production branch. You can learn more about Neon branches in the [Neon documentation](https://neon.tech/docs/introduction/branching).
 
 ### 5. Version Control Your Migrations
 

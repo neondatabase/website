@@ -3,7 +3,7 @@ title: Neon MCP Server
 subtitle: Manage your Neon Postgres databases using natural language commands with the
   Neon MCP Server.
 enableTableOfContents: true
-updatedOn: '2025-04-13T12:26:57.410Z'
+updatedOn: '2025-04-17T16:06:46.395Z'
 ---
 
 The **Neon MCP Server** is an open-source tool that lets you interact with your Neon Postgres databases in **natural language**.
@@ -225,8 +225,8 @@ The Neon MCP Server provides the following actions, which are exposed as "tools"
 
 **Database migrations (schema changes):**
 
-- **`prepare_database_migration`**: Initiates a database migration process. Critically, it creates a temporary branch to apply and test the migration safely before affecting the main branch.
-- **`complete_database_migration`**: Finalizes and applies a prepared database migration to the main branch. This action merges changes from the temporary migration branch and cleans up temporary resources.
+- **`prepare_database_migration`**: Initiates a database migration process. Critically, it creates a temporary branch to apply and test the migration safely before affecting the production branch.
+- **`complete_database_migration`**: Finalizes and applies a prepared database migration to the production branch. This action merges changes from the temporary migration branch and cleans up temporary resources.
 
 ## Usage examples
 

@@ -1,5 +1,5 @@
 ---
-updatedOn: '2025-02-20T17:29:13.754Z'
+updatedOn: '2025-04-22T15:37:58.327Z'
 ---
 
 # Docs
@@ -448,6 +448,38 @@ Create a new development branch off of `main`. This branch will be an exact, iso
 <summary>Example</summary>
 
 ![Steps example](images/steps-example.jpg)
+
+</details>
+
+## Checklist
+
+To display a checklist, use the `CheckList` component with `CheckItem` items inside.
+
+```md
+<CheckList title="Checklist title">
+
+<CheckItem title="Check item 1" href="#check-item-1">
+  Check item 1 description
+</CheckItem>
+
+<CheckItem title="Check item 2" href="#check-item-2">
+  Check item 2 description
+</CheckItem>
+
+</CheckList>
+```
+
+### Notes
+
+- Checklist options saved in the browser local storage.
+- Checklists with the same `title` will use the same local storage between pages.
+- If you don't pass `title`, the id will be generated from the page `slug`.
+- The best practice is to use `CheckList` with the `Steps` component on the page.
+
+<details>
+<summary>Example</summary>
+
+![Checklist example](images/checklist-example.jpg)
 
 </details>
 
