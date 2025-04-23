@@ -3,7 +3,7 @@ title: Platform overview
 enableTableOfContents: true
 subtitle: Find information about managing all aspects of your database using the Neon
   platform
-updatedOn: '2025-03-05T21:09:38.755Z'
+updatedOn: '2025-04-21T13:34:15.084Z'
 ---
 
 ## Access control
@@ -83,6 +83,18 @@ Learn how Neon secures your projects and data, and explore the security features
 <a href="/docs/security/soc2-compliance" description="Learn how Neon complies with various standards" icon="check">Compliance</a>
 
 <a href="/docs/security/acceptable-use-policy" description="Read about Neon's acceptable use policies" icon="privacy">Acceptable Use Policy</a>
+
+</DetailIconCards>
+
+## Backups
+
+<DetailIconCards>
+
+<a href="/docs/manage/backups" description="An overview of backup strategies for Neon Postgres" icon="database">About backups</a>
+
+<a href="/docs/manage/backup-pg-dump" description="Learn how to create a backup of your Neon database using pg_dump" icon="database">Backups with pg_dump</a>
+
+<a href="/docs/manage/backup-pg-dump-automate" description="Automate backups of your Neon database to S3 with pg_dump and GitHub Actions" icon="stopwatch">Automate pg_dump backups</a>
 
 </DetailIconCards>
 

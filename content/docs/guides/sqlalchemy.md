@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/sqlalchemy
   - /docs/integrations/sqlalchemy
-updatedOn: '2025-02-03T20:41:57.338Z'
+updatedOn: '2025-04-20T15:44:26.056Z'
 ---
 
 SQLAlchemy is a Python SQL toolkit and Object Relational Mapper (ORM) that provides application developers with the full power and flexibility of SQL. This guide describes how to create a Neon project and connect to it from SQLAlchemy.
@@ -16,10 +16,7 @@ To complete the steps in this topic, ensure that you have an SQLAlchemy installa
 
 To connect to Neon from SQLAlchemy:
 
-1. [Create a Neon project](#create-a-neon-project)
-1. [Install psycopg2](#install-psycopg2)
-1. [Create the "hello neon" program](#create-the-hello-neon-program)
-1. [Create an SQLAlchemy engine for your Neon project](#create-an-sqlalchemy-engine-for-your-neon-project)
+<Steps>
 
 ## Create a Neon project
 
@@ -96,6 +93,8 @@ For additional information about connecting from SQLAlchemy, refer to the follow
 
 - [Establishing Connectivity - the Engine](https://docs.sqlalchemy.org/en/14/tutorial/engine.html)
 - [Connecting to PostgreSQL with SQLAlchemy](https://docs.sqlalchemy.org/en/14/core/engines.html#postgresql)
+
+</Steps>
 
 ## SQLAlchemy connection errors
 

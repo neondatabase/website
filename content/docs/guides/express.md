@@ -2,18 +2,14 @@
 title: Connect an Express application to Neon
 subtitle: Set up a Neon project in seconds and connect from an Express application
 enableTableOfContents: true
-updatedOn: '2025-02-03T20:41:57.312Z'
+updatedOn: '2025-04-20T15:44:26.048Z'
 ---
 
 This guide describes how to create a Neon project and connect to it from an Express application. Examples are provided for using the [Neon serverless driver](https://npmjs.com/package/@neondatabase/serverless), [node-postgres](https://www.npmjs.com/package/pg) and [Postgres.js](https://www.npmjs.com/package/postgres) clients. Use the client you prefer.
 
 To connect to Neon from an Express application:
 
-1. [Create a Neon Project](#create-a-neon-project)
-2. [Create an Express project and add dependencies](#create-an-express-project-and-add-dependencies)
-3. [Store your Neon credentials](#store-your-neon-credentials)
-4. [Configure the Postgres client](#configure-the-postgres-client)
-5. [Run app.js](#run-appjs)
+<Steps>
 
 ## Create a Neon project
 
@@ -146,6 +142,8 @@ Run `node index.js` to view the result on [localhost:4242](localhost:4242) as fo
 ```shell
 { version: 'PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit' }
 ```
+
+</Steps>
 
 ## Source code
 

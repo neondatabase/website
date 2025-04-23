@@ -3,17 +3,14 @@ title: Connect Astro to Postgres on Neon
 subtitle: Learn how to make server-side queries to Postgres from .astro files or API
   routes.
 enableTableOfContents: true
-updatedOn: '2025-02-03T20:41:57.304Z'
+updatedOn: '2025-04-20T15:47:24.439Z'
 ---
 
 Astro builds fast content sites, powerful web applications, dynamic server APIs, and everything in-between. This guide describes how to create a Neon Postgres database and access it from an Astro site or application.
 
 To create a Neon project and access it from an Astro site or application:
 
-1. [Create a Neon project](#create-a-neon-project)
-2. [Create an Astro project and add dependencies](#create-an-astro-project-and-add-dependencies)
-3. [Configure a Postgres client](#configure-the-postgres-client)
-4. [Run the app](#run-the-app)
+<Steps>
 
 ## Create a Neon project
 
@@ -55,9 +52,9 @@ DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port
 
 ## Configure the Postgres client
 
-There a multiple ways to make server side requests with Astro. See below for the different implementations.
+There a multiple ways to make server side requests with Astro. See below for two of those options: **astro files** and **Server Endpoints (API Routes)**.
 
-### .astro files
+### astro files
 
 In your `.astro` files, use the following code snippet to connect to your Neon database:
 
@@ -189,6 +186,8 @@ When you run `npm run dev` you can expect to see the following when you visit th
 ```shell shouldWrap
 { version: 'PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit' }
 ```
+
+</Steps>
 
 ## Source code
 
