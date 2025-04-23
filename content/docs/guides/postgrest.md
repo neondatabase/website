@@ -259,9 +259,8 @@ Now, let's generate a new JWT that has the following payload defining the studen
 
 ```
 {
-  role: "authenticated",
-  sub: "1"
-}
+  "role": "authenticated",
+  "sub": "1"
 ```
 
 Here's the new token:
