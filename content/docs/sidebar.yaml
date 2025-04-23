@@ -90,16 +90,10 @@
           items:
             - title: File Storage
               slug: guides/file-storage
-            - title: File Storage with AWS S3
-              slug: guides/file-storage-aws-s3
             - title: File Storage with Cloudflare R2
-              slug: guides/file-storage-cloudflare-r2
-            - title: Media Storage with Cloudinary
-              slug: guides/file-storage-cloudinary
+              slug: guides/cloudflare-r2
             - title: Media Storage with Uploadcare
-              slug: guides/file-storage-uploadcare
-            - title: Media Storage with ImageKit
-              slug: guides/file-storage-imagekit
+              slug: guides/uploadcare
     - title: Connect
       slug: connect/connect-intro
       icon: connect

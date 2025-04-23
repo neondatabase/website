@@ -1,11 +1,11 @@
 ---
-title: File storage with Uploadcare
+title: Media storage with Uploadcare
 subtitle: Store files via Uploadcare and track metadata in Neon
 enableTableOfContents: true
 updatedOn: '2024-05-23T00:00:00.000Z'
 ---
 
-Uploadcare provides an end-to-end cloud platform designed to simplify file uploading, processing, storage, and delivery via a fast CDN. It offers developer-friendly tools and helps efficiently manage and optimize media like images, videos, and documents for your applications.
+[Uploadcare](https://uploadcare.com/) provides an end-to-end cloud platform designed to simplify file uploading, processing, storage, and delivery via a fast CDN. It offers developer-friendly tools and helps efficiently manage and optimize media like images, videos, and documents for your applications.
 
 This guide demonstrates how to integrate Uploadcare with Neon by storing file metadata in your Neon database while leveraging Uploadcare for file uploads and storage. This approach allows you to take advantage of Uploadcare's specialized capabilities for handling files while using Neon for managing the structured metadata associated with those files.
 
@@ -30,7 +30,7 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 ## Create a table in Neon for file metadata
 
-We will create a table in Neon to store metadata about the files uploaded to Uploadcare. This table will include fields for the file's unique identifier, URL, upload timestamp, and any other relevant metadata you want to track.
+We need to create a table in Neon to store metadata about the files uploaded to Uploadcare. This table will include fields for the file's unique identifier, URL, upload timestamp, and any other relevant metadata you want to track.
 
 1. You can run the create table statement using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database. Here is an example SQL statement to create a simple table for file metadata which includes a file ID, URL, user ID, and upload timestamp:
 
@@ -44,11 +44,10 @@ We will create a table in Neon to store metadata about the files uploaded to Upl
    );
    ```
 
-2. Run the SQL statement to create the table.
-3. You can also add additional columns to the table as needed to store more metadata about the files, such as file size, type, or any other relevant information.
+2. Run the SQL statement. You can add other relevant columns (file size, content type, etc.) depending on your application needs.
 
 <Admonition type="note" title="Securing metadata with RLS">
-If you use [Neon's Row Level Security (RLS)](https://neon.tech/blog/introducing-neon-authorize), remember to apply appropriate access policies to the table where you store file metadata (like URLs or UUIDs). This ensures consistent data protection by controlling who can view or modify these references based on your RLS rules.
+If you use [Neon's Row Level Security (RLS)](https://neon.tech/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `files` table. This controls who can view or modify the object references stored in Neon based on your RLS rules.
 
 Note that these policies apply _only_ to the metadata stored in Neon. Access to the actual files is managed by Uploadcare's access controls and settings.
 </Admonition>
@@ -90,7 +89,7 @@ const app = new Hono();
 
 // Replace this with your actual user authentication logic, by validating JWTs/Headers, etc.
 const authMiddleware = async (c, next) => {
-  c.set('userId', 'user123'); // Example: Get user ID after validation
+  c.set('userId', 'user_123'); // Example: Get user ID after validation
   await next();
 };
 
@@ -234,8 +233,8 @@ if __name__ == "__main__":
 
 **Explanation**
 
-1.  **Setup:** It initializes the Neon database client and the Flask web framework. It relies on environment variables (`DATABASE_URL`, `UPLOADCARE_PUBLIC_KEY`, `UPLOADCARE_SECRET_KEY`) being set, via a `.env` file.
-2.  **Authentication:** A placeholder `get_authenticated_user_id` function is included. **Crucially, this needs to be replaced with real authentication logic.** It currently just returns a static `user_id` for demonstration.
+1.  **Setup:** Initializes the Flask web framework, Uploadcare client, and the PostgreSQL client (`psycopg2`) using environment variables.
+2.  **Authentication:** A placeholder `get_authenticated_user_id` function is included. **Replace this with real authentication logic.**
 3.  **Upload Endpoint (`/upload`):**
     - It expects a `POST` request with `multipart/form-data`.
     - It retrieves the user ID set by the authentication function.
@@ -256,10 +255,7 @@ Once your server (Node.js or Python example) is running, you can test the `/uplo
 
 You'll need to send a `POST` request with `multipart/form-data` containing a field named `file`.
 
-**Using cURL:**
-
 Open your terminal and run a command similar to this, replacing `/path/to/your/image.jpg` with the actual path to a file you want to upload:
-
     ```bash
     curl -X POST http://localhost:3000/upload \
         -F "file=@/path/to/your/image.jpg" \
@@ -312,7 +308,7 @@ WHERE
 - The crucial piece of information is the `file_url`. This is the direct link (CDN URL) to the file stored on Uploadcare.
 - You can use this `file_url` in your application (e.g., in frontend `<img>` tags, API responses, download links) wherever you need to display or provide access to the file.
 
-This pattern allows you to manage file references and associated application data efficiently within Neon, while leveraging Uploadcare's specialized infrastructure for file storage and delivery.
+This pattern effectively separates file storage and delivery concerns (handled by Uploadcare) from structured metadata management (handled by Neon), leveraging the strengths of both services.
 
 </Steps>
 
