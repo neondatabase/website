@@ -186,9 +186,9 @@ The integration supports automatic deletion of obsolete preview branches when th
 
 1. In the Neon Console, select your project.
 2. Select the **Integrations** page.
-3. Find the Vercel integration under the **Manage** heading, and click **Manage**.
+3. Find the Vercel integration and click **Manage**.
 4. In the **Vercel integration** drawer, select the **Branches** tab.
-5. Check **Automatically delete obsolete Neon branches**.
+5. Toggle **Automatically delete obsolete Neon branches**.
 
 When a branch is deleted, environment variables associated with the deleted branch are also removed from your Vercel project.
 
