@@ -199,11 +199,11 @@ curl --request GET \
      --header 'authorization: Bearer napi_a6xffgea7zx98aw3z1esjxe2ce3b577a3whsptl07qes52did2pzro9lzwp8mv8u'
 ```
 
-The response body lists extensions with preloaded libraries and whether the libraries for those extensions are preloaded into memory by default. The response body attributes include:
+The response body lists extensions with preloaded libraries and whether the libraries are preloaded by default. Response body attributes include:
 
-- `library_name` - library name name, typically named for the associated extension
-- `description` - extension description
-- `is_default` - whether the shared libraries are preloaded into memory by default
+- `library_name` - library name, typically named for the associated extension
+- `description` - a description of the extension
+- `is_default` - whether shared libraries are preloaded into memory by default
 - `is_experimental` - whether the extensions is [experimental](#experimental-extensions)
 - `version` — the extension version
 
@@ -264,11 +264,11 @@ The response body lists extensions with preloaded libraries and whether the libr
 Important notes about preloaded libraries for Postgres extensions:
 
 - The libraries that Neon preloads may differ by Postgres version
-- Neon does not not preload libraries for all extensions that them
+- Neon does not preload libraries for all extensions that have them
 
 ### Preloading libraries
 
-You can preload available libraries using the `preloaded_libraries` object in a [Create project](https://api-docs.neon.tech/reference/createproject) or  [Update project](https://api-docs.neon.tech/reference/updateproject) API call. For example, this `Update project` call preloads the libraries for the `pg_search` extension. When runnign this call, you have to provide your project ID a Neon API key.
+You can preload available libraries using the `preloaded_libraries` object in a [Create project](https://api-docs.neon.tech/reference/createproject) or [Update project](https://api-docs.neon.tech/reference/updateproject) API call. For example, this `Update project` call preloads libraries for the `pg_search` extension. When running this call, you have to provide a project ID a Neon API key.
 
 <Admonition type="important">
 Set `use_defaults` to `true` to preserve the libraries that Neon preloads by default.
@@ -296,7 +296,7 @@ Set `use_defaults` to `true` to preserve the libraries that Neon preloads by def
       '
       ```
 
-After preloading libraries, a compute restart is required. You can do this using the [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API. Specify the same `project_id` used above. The `endpoint_id` should be for the compute attached to your database branch. **Please note that restarting your compute endpoint will drop current connections to your database.**
+After preloading libraries, a compute restart is required to aply the new configuration. You can do this using the [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API. Specify the same `project_id` used above. The `endpoint_id` should be for the compute attached to your database branch. **Please note that restarting your compute endpoint will drop current connections to your database.**
 
 ```bash
 curl --request POST \
