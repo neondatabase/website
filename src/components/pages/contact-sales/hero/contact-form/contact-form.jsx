@@ -31,7 +31,6 @@ const schema = yup
   .required();
 
 const labelClassName = 'text-sm text-gray-new-90';
-const errorClassName = '!top-0';
 
 const ContactForm = () => {
   const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
@@ -130,7 +129,6 @@ const ContactForm = () => {
         placeholder="Marques Hansen"
         theme="transparent"
         labelClassName={labelClassName}
-        errorClassName={errorClassName}
         error={errors.name?.message}
         isDisabled={isDisabled}
         {...register('name')}
@@ -143,7 +141,6 @@ const ContactForm = () => {
         placeholder="info@acme.com"
         theme="transparent"
         labelClassName={labelClassName}
-        errorClassName={errorClassName}
         isDisabled={isDisabled}
         error={errors.email?.message}
         {...register('email')}
@@ -155,7 +152,6 @@ const ContactForm = () => {
           label="Company Website"
           theme="transparent"
           labelClassName={labelClassName}
-          errorClassName={errorClassName}
           isDisabled={isDisabled}
           {...register('companyWebsite')}
         />
@@ -167,7 +163,6 @@ const ContactForm = () => {
           defaultValue="hidden"
           theme="transparent"
           labelClassName={labelClassName}
-          errorClassName={errorClassName}
           isDisabled={isDisabled}
           error={errors.companySize?.message}
           {...register('companySize')}
@@ -190,7 +185,6 @@ const ContactForm = () => {
         theme="transparent"
         labelClassName={labelClassName}
         textareaClassName="min-h-[170px] xl:min-h-[148px]"
-        errorClassName={errorClassName}
         isDisabled={isDisabled}
         error={errors.message?.message}
         {...register('message')}

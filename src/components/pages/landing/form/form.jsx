@@ -185,7 +185,7 @@ const Form = ({
               placeholder={simpleField.placeholder}
               isDisabled={state === FORM_STATES.LOADING || state === FORM_STATES.SUCCESS}
               error={errors[simpleField.name]?.message}
-              errorClassName="ml-7"
+              errorClassName="bottom-auto top-full !text-center w-full max-w-full translate-y-2"
               {...register(simpleField.name)}
             />
             <SubmitButton formState={state} text={submitText} simpleMode />
