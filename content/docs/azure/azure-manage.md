@@ -44,7 +44,7 @@ To create branches in the Azure Portal:
 1. Navigate to your Neon resource and select the **Projects** page.
 1. Select your Neon project. You should see your existing branches. 
 1. To create a new branch, select **Create branch** to open the **Create new branch** drawer.
-1. Specify a branch name, select the parent branch, and select an **Include data up to** option. You can include current data or data as it existing at a specified time.
+1. Specify a branch name, select the parent branch, and select an **Include data up to** option. You can include current data or data as it existed at a specified time.
 1. After making your selections, click **Create**.
 
 You now have an independent and isolated copy of your database with its own compute resources. For how to integrate branching into your developer workflow, see our [Database branching workflow primer](https://neon.tech/docs/get-started-with-neon/workflow-primer).
