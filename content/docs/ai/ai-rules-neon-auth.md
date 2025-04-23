@@ -22,25 +22,11 @@ updatedOn: '2025-04-08T22:55:27.440Z'
 
 ## Rules
 
-Demo: `<ExternalCode>` with error
-
-<ExternalCode
-  url="https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/neon-auth.md"
-  language="md"
-  shouldWrap
-/>
-
-Successful `<ExternalCode>`
-
 <ExternalCode
   url="https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/neon-auth.mdc"
   language="md"
   shouldWrap
 />
-
-Old `<CodeBlock>` copy
-
-````markdown shouldWrap
 ---
 description: Use these rules to relate your database data with your Auth users information
 globs: *.tsx, *.ts
