@@ -27,7 +27,7 @@ const themeClassNames = {
     title: 'text-[15px] lg:shrink-0 lg:text-lg',
     input: 'pr-20 lg:pr-32',
     sendText: 'hidden lg:block',
-    errorMessage: 'mt-5',
+    errorMessage: 'mt-5 sm:mt-6',
   },
   default: {
     block: 'items-center gap-[72px] px-6 py-[18px]',
@@ -120,7 +120,7 @@ const ChangelogForm = ({ isSidebar = false, className }) => {
         'changelog-form safe-paddings relative flex scroll-mt-20 rounded-lg bg-gray-new-94',
         classNames.block,
         className,
-        'lg:scroll-mt-10 md:gap-10 sm:flex-col sm:items-start sm:gap-2.5 sm:p-[18px] sm:pt-3.5',
+        'lg:scroll-mt-10 md:gap-10 sm:flex-col sm:items-start sm:gap-2.5 sm:p-[18px] sm:py-5',
         'dark:bg-subscribe-form-dark dark:shadow-[0px_2px_10px_0px_rgba(0,0,0,.4),0px_2px_30px_0px_rgba(0,0,0,.5)]'
       )}
       id="changelog-form"
@@ -231,7 +231,6 @@ const ChangelogForm = ({ isSidebar = false, className }) => {
             className={clsx(
               'absolute left-1/2 top-full -translate-x-1/2 whitespace-nowrap',
               'text-xs leading-none tracking-extra-tight text-secondary-1',
-              'xl:left-4 xl:translate-x-0 sm:left-1/2 sm:-translate-x-1/2',
               classNames.errorMessage
             )}
             data-test="error-message"

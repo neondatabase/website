@@ -3,7 +3,7 @@ title: Neon on Azure
 subtitle: Use Neon on Azure as a Native ISV Service
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-04-20T14:00:23.878Z'
+updatedOn: '2025-04-22T18:19:49.143Z'
 ---
 
 <PublicPreview/>
@@ -33,6 +33,6 @@ Deploying Neon natively on Azure lets you manage your Neon organization alongsid
 
 <a href="/docs/azure/azure-manage" description="How to manage your Neon Native ISV Service on Azure" icon="cli">Manage Neon on Azure</a>
 
-<a href="/docs/azure/azure-develop" description="Resource for developing with Neon on Azure" icon="code">Develop with Neon on Azure</a>
+<a href="/docs/azure/azure-develop" description="Resources for developing with Neon on Azure, including live AI demos" icon="code">Develop with Neon on Azure</a>
 
 </DetailIconCards>
