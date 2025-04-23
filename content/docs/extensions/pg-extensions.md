@@ -177,11 +177,11 @@ SET neon.allow_unstable_extensions = 'true';
 
 If you're experimenting with an extension and run into trouble, we recommend checking with the extension’s maintainers or community for support.
 
-## Extensions requiring preloaded libraries
+## Extensions with preloaded libraries
 
-A preloaded library in Postgres is a shared library that must be loaded into memory when the Postgres server starts. These libraries are specified in a Postgres server's startup configuration using the `shared_preload_libraries` parameter and cannot be added dynamically after the server has started.
+A preloaded library in Postgres is a shared library that must be loaded into memory when the Postgres server starts. These libraries are specified in your Postgres server's startup configuration using the `shared_preload_libraries` parameter and cannot be added dynamically after the server has started.
 
-Some Postgres extensions require preloaded libraries but most do not. Neon Postgres instances preload libraries for certain Postgres extensions by default. You can view preloaded libraries by running the following command. 
+Some Postgres extensions require preloaded libraries but most do not. Neon Postgres servers preload libraries for certain extensions by default. You can view currently loaded libraries by running the following command. 
 
 ```sql shouldWrap
 SHOW shared_preload_libraries;
