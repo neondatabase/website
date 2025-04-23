@@ -72,7 +72,7 @@ Create a `.env` file in your project root and add your Uploadcare and Neon conne
 
 ```env
 UPLOADCARE_PUBLIC_KEY=your_uploadcare_public_key
-NEON_DATABASE_URL=your_neon_database_connection_string
+DATABASE_URL=your_neon_database_connection_string
 ```
 
 The following code snippet demonstrates this workflow:
@@ -161,7 +161,7 @@ Create a `.env` file in your project root and add your Uploadcare and Neon conne
 ```env
 UPLOADCARE_PUBLIC_KEY=your_uploadcare_public_key
 UPLOADCARE_SECRET_KEY=your_uploadcare_secret_key
-NEON_DATABASE_URL=your_neon_database_connection_string
+DATABASE_URL=your_neon_database_connection_string
 ```
 
 The following code snippet demonstrates this workflow:
@@ -256,11 +256,12 @@ Once your server (Node.js or Python example) is running, you can test the `/uplo
 You'll need to send a `POST` request with `multipart/form-data` containing a field named `file`.
 
 Open your terminal and run a command similar to this, replacing `/path/to/your/image.jpg` with the actual path to a file you want to upload:
-    ```bash
-    curl -X POST http://localhost:3000/upload \
-        -F "file=@/path/to/your/image.jpg" \
-        -F "fileName=my-test-image.jpg"
-    ```
+
+```bash
+curl -X POST http://localhost:3000/upload
+    -F "file=@/path/to/your/image.jpg"
+    -F "fileName=my-test-image.jpg"
+```
 
 - `-X POST`: Specifies the HTTP method.
 - `http://localhost:3000/upload`: The URL of your running server's endpoint.
@@ -281,13 +282,13 @@ You can now integrate calls to this `/upload` endpoint from various parts of you
 
 ## Accessing File Metadata and Files
 
-Storing this metadata in Neon allows your application to easily retrieve and manage references to the files hosted by Uploadcare later on. The `files` table you created holds this information, with the `file_url` being the key piece needed to access the actual content via Uploadcare's CDN.
+Storing metadata in Neon allows your application to easily retrieve references to the files uploaded to Uploadcare.
 
-Typically, you'll query this table from your application's backend whenever you need to retrieve file details – for example, to display a user's uploaded images or provide download links.
+Query the `files` table from your application's backend when needed.
 
 **Example SQL Query:**
 
-To retrieve all files associated with the user ID used in the example ('user_123'):
+Retrieve files for user 'user_123':
 
 ```sql
 SELECT
@@ -295,11 +296,11 @@ SELECT
     file_id,         -- Uploadcare UUID
     file_url,        -- Uploadcare CDN URL
     user_id,         -- The user associated with the file
-    upload_timestamp -- When the metadata was recorded
+    upload_timestamp
 FROM
     files
 WHERE
-    user_id = 'user_123'; -- Replace with the actual authenticated user's ID in your app
+    user_id = 'user_123'; -- Use actual authenticated user ID
 ```
 
 **Using the Data:**
