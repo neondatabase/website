@@ -24,46 +24,49 @@ const GithubStars = async ({ isDarkTheme }) => {
 
 GithubStars.propTypes = themePropTypes;
 
-const DiscordLink = ({ isDarkTheme }) => (
-  <Link
-    className={clsx(
-      'transition-colors duration-200',
-      isDarkTheme
-        ? 'text-white hover:text-green-45'
-        : 'text-gray-new-40 hover:text-green-45 dark:text-white dark:hover:text-green-45'
-    )}
-    to={LINKS.discord}
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <DiscordIcon width={20} height={20} />
-    <span className="sr-only">Discord</span>
-  </Link>
-);
-
-DiscordLink.propTypes = themePropTypes;
-
 const Sidebar = ({ isDarkTheme, isClient }) => (
   <div className="flex items-center gap-x-6 lg:hidden">
-    {!isClient && <GithubStars isDarkTheme={isDarkTheme} />}
-    <DiscordLink isDarkTheme={isDarkTheme} />
     <Link
-      className="whitespace-nowrap text-[13px] leading-none tracking-extra-tight lg:hidden"
-      to={LINKS.login}
-      theme={isDarkTheme ? 'white' : 'black'}
+      className={clsx(
+        'flex items-center gap-1.5 transition-colors duration-200',
+        isDarkTheme
+          ? 'text-gray-new-90 hover:text-green-45'
+          : 'text-gray-new-8 hover:text-green-45 dark:text-gray-new-90 dark:hover:text-green-45'
+      )}
+      to={LINKS.discord}
+      target="_blank"
+      rel="noopener noreferrer"
     >
-      Log In
+      <DiscordIcon width={18} height={18} />
+      <span className="text-sm leading-none tracking-extra-tight">Discord</span>
     </Link>
-
-    <Button
-      className="h-8 whitespace-nowrap px-6 text-[13px] font-semibold leading-none tracking-extra-tight transition-colors duration-200 lg:hidden"
-      to={LINKS.signup}
-      theme="primary"
-      tagName="Header"
-      analyticsEvent="header_sign_up_clicked"
-    >
-      Sign Up
-    </Button>
+    {!isClient && <GithubStars isDarkTheme={isDarkTheme} />}
+    <div className="flex gap-2.5 lg:hidden">
+      <Button
+        className={clsx(
+          'px-4.5 whitespace-nowrap border font-semibold',
+          isDarkTheme
+            ? 'border-gray-new-30 hover:border-gray-new-40'
+            : 'border-gray-new-70 hover:border-gray-new-50 dark:border-gray-new-30 dark:hover:border-gray-new-40'
+        )}
+        to={LINKS.login}
+        size="xxs"
+        tagName="Header"
+        analyticsEvent="header_sign_up_clicked"
+      >
+        Log In
+      </Button>
+      <Button
+        className="px-4.5 whitespace-nowrap font-semibold"
+        to={LINKS.signup}
+        theme="primary"
+        size="xxs"
+        tagName="Header"
+        analyticsEvent="header_sign_up_clicked"
+      >
+        Sign Up
+      </Button>
+    </div>
   </div>
 );
 
