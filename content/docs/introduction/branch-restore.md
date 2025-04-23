@@ -9,7 +9,7 @@ redirectFrom:
   - /docs/guides/branch-promote
   - /docs/guides/branch-restore
   - /docs/guides/instant-restore
-updatedOn: '2025-02-28T11:10:41.825Z'
+updatedOn: '2025-04-17T16:06:46.408Z'
 ---
 
 <InfoBlock>
@@ -142,37 +142,37 @@ Using the CLI, you can restore a branch to an earlier point in its history or an
 neon branches restore <target id|name> <source id|name @ timestamp|lsn>
 ```
 
-In the `target id|name` field, specify the ID or name of the branch you want to restore. In the `source id|name timestamp|lsn` field, specify the source branch you want to restore from (mandatory), along with the point-in-time identifier (optional), which can be either an ISO 8601-formatted timestamp or the LSN. If you omit the point-in-time identifier, the operation defaults to the latest data (HEAD) for the source branch. Concatenate the source identifier and time identifier with `@`: for example, `dev/jordan@2023-12-12T12:00:00Z`.
+In the `target id|name` field, specify the ID or name of the branch you want to restore. In the `source id|name timestamp|lsn` field, specify the source branch you want to restore from (mandatory), along with the point-in-time identifier (optional), which can be either an ISO 8601-formatted timestamp or the LSN. If you omit the point-in-time identifier, the operation defaults to the latest data (HEAD) for the source branch. Concatenate the source identifier and time identifier with `@`: for example, `development@2023-12-12T12:00:00Z`.
 
 #### Restore a branch to its own history
 
 If you want to restore a branch to an earlier point in time, use the syntax `^self` in the `<source id|name>` field. For example:
 
 ```bash shouldWrap
-neon branches restore dev/alex ^self@2024-01-01T00:00:00Z --preserve-under-name alex_old
+neon branches restore development ^self@2024-01-01T00:00:00Z --preserve-under-name development_old
 ```
 
-This command resets the target branch `dev/alex` to its state at the start of 2024. The command also preserves the original state of the branch in a backup file called `alex_old` using the `preserve-under-name` parameter (mandatory when resetting to self).
+This command resets the target branch `development` to its state at the start of 2024. The command also preserves the original state of the branch in a backup file called `development_old` using the `preserve-under-name` parameter (mandatory when resetting to self).
 
 #### Restore from parent
 
 If you want to restore a target branch from its parent, you can use the special syntax `^parent` in the `<source id|name>` field. For example:
 
 ```bash
-neon branches restore dev/alex ^parent
+neon branches restore development ^parent
 ```
 
-This command will restore the target branch `dev/alex` to the latest data (HEAD) of its parent branch.
+This command will restore the target branch `development` to the latest data (HEAD) of its parent branch.
 
 #### Restore to another branch's history
 
 Here is an example of a command that restores a target branch to an earlier point in time of another branch's history:
 
 ```bash shouldWrap
-neon branches restore dev/alex dev/jordan@0/12345
+neon branches restore development production@0/12345
 ```
 
-This command will restore the target branch `dev/alex` to an earlier point in time from the source branch `dev/jordan`, using the LSN `0/12345` to specify the point in time. If you left out the point-in-time identifier, the command would default to the latest data (HEAD) for the source branch `dev/jordan`.
+This command will restore the target branch `development` to an earlier point in time from the source branch `production`, using the LSN `0/12345` to specify the point in time. If you left out the point-in-time identifier, the command would default to the latest data (HEAD) for the source branch `production`.
 
 For full CLI documentation for `branches restore`, see [branches restore](/docs/reference/cli-branches#restore).
 </TabItem>
@@ -254,12 +254,12 @@ If you do need to revert your changes, you can [Reset from parent](/docs/manage/
 
 ## Deleting backup branches
 
-You can delete a backup branch created by a restore operation on your project's root branch. Your project's root branch is typically named `main` unless you've renamed it. However, removing a backup branch created by a restore operation on a non-root branch (a child branch of `main`) is not yet supported.
+You can delete a backup branch created by a restore operation on your project's root branch. Your project's root branch is typically named `production` unless you've renamed it. However, removing a backup branch created by a restore operation on a non-root branch (a child branch of `production`) is not yet supported.
 
 To delete a backup branch:
 
 1. Navigate to the **Branches** page.
-2. Find the backup branch you want to delete. It will have a name with the following format, where `branch_name` is typically `main`.
+2. Find the backup branch you want to delete. It will have a name with the following format, where `branch_name` is typically `production`.
 
    ```
    {branch_name}_old_{head_timestamp}
@@ -283,4 +283,4 @@ There are minimal impacts to billing from the instant restore and Time Travel As
 - Deleting backup branches is only supported for backups created by restore operations on root branches. See [Deleting backup branches](#deleting-backup-branches) for details.
 - [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent) restores from the parent branch, which may be a backup branch if you performed a restore operation on the parent branch.
 
-  For example, let's say you have a `main` branch with a child development branch `dev/alex`. You are working on `dev/alex` and decide to restore to an earlier point in time to fix something during development. At this point, `dev/alex`'s parent switches from `main` to the backup `dev/alex_old_timestamp`. A day later, you want to refresh `dev/alex` with the latest data from `main`. You can't use **Reset from parent**, since the backup is now the parent. Instead, use **Instant restore** and select the original parent `main` as the source.
+  For example, let's say you have a `production` branch with a child development branch `development`. You are working on `development` and decide to restore to an earlier point in time to fix something during development. At this point, `development`'s parent switches from `production` to the backup `development_old_timestamp`. A day later, you want to refresh `development` with the latest data from `production`. You can't use **Reset from parent**, since the backup is now the parent. Instead, use **Instant restore** and select the original parent `production` as the source.

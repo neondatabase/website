@@ -2,17 +2,14 @@
 title: Connect a NestJS application to Neon
 subtitle: Set up a Neon project in seconds and connect from a NestJS application
 enableTableOfContents: true
-updatedOn: '2025-02-03T20:41:57.330Z'
+updatedOn: '2025-04-20T15:44:26.050Z'
 ---
 
 NestJS is a framework for building efficient, scalable Node.js server-side applications<sup><a target="_blank" href="https://docs.nestjs.com/">1</a></sup>. This guide explains how to connect NestJS with Neon using a secure server-side request.
 
 To create a Neon project and access it from a NestJS application:
 
-1. [Create a Neon project](#create-a-neon-project)
-2. [Create a NestJS project and add dependencies](#create-a-nestjs-project-and-add-dependencies)
-3. [Configure a Postgres client](#configure-the-postgres-client)
-4. [Run the app](#run-the-app)
+<Steps>
 
 ## Create a Neon project
 
@@ -227,6 +224,8 @@ When you run `npm run start` you can expect to see output similar to the followi
 ```shell shouldWrap
 [{"id":1,"name":"c4ca4238a0","value":0.39330545},{"id":2,"name":"c81e728d9d","value":0.14468245}]
 ```
+
+</Steps>
 
 ## Source code
 

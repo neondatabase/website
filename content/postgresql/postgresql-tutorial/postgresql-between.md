@@ -119,6 +119,7 @@ The following example uses the `BETWEEN` operator to find payments whose payment
 
 ```
 SELECT
+  customer_id,
   payment_id,
   amount,
   payment_date
