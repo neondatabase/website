@@ -727,7 +727,7 @@ You can export your Postgres logs from your Neon compute to your Datadog account
 
 ### Log configuration
 
-Postgres provides various logging options to control what information is captured. For details about available options, see the [PostgreSQL documentation on error reporting and logging](https://www.postgresql.org/docs/current/runtime-config-logging.html). You can configure these options using the `pg_settings` object when creating or updating a project via the Neon API. The API validates all settings to ensure they are supported in Neon's managed environment. For example, `log_destination` cannot be modified, as Neon manages the log delivery infrastructure.
+Postgres provides various logging options to control what information is captured. For details about available options, see the [PostgreSQL documentation on error reporting and logging](https://www.postgresql.org/docs/current/runtime-config-logging.html). You can configure these options using the `pg_settings` object when creating or updating projects or endpoints via the Neon API. The API validates all settings to ensure they are supported in Neon's managed environment. For example, `log_destination` cannot be modified, as Neon manages the log delivery infrastructure.
 
 One important setting is `log_statement`, which controls SQL statement logging:
 - `none`: No statement logging (default)
@@ -782,7 +782,7 @@ Neon computes only send logs when they are active. If the [Scale to Zero](/docs/
 
 ### Technical details
 
-Neon uses [rsyslogd](https://www.rsyslog.com/doc/index.html), an open source system utility for log processing and forwarding to remote destinations.
+Neon processes logs directly on each compute instance using [rsyslogd](https://www.rsyslog.com/doc/index.html), an industry-standard open source logging utility. This compute-level processing means that log collection contributes to your compute's resource usage.
 
 ## Feedback and future improvements
 
