@@ -15,7 +15,7 @@ Use the **Backup & Restore** page in the Neon Console to restore a branch to a p
 ## What you can do
 
 - Instantly restore a branch to any point in time within your restore window
-- Preview data from the selected point in time before your restore 
+- Preview data from the selected point in time before your restore
 - Create manual snapshots
 - Restore from a snapshot
 
@@ -120,4 +120,3 @@ Want to learn how this is implemented under the hood? [See technical details](#)
 - [Configure restore window](./configure-restore-window.md)
 - [Schema Diff](./schema-diff.md)
 - [Time Travel Assist](./time-travel-assist.md)
-
