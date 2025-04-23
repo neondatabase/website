@@ -196,7 +196,7 @@ You can also view libraries by running [List preloaded libraries](https://api-do
 curl --request GET \
      --url https://console.neon.tech/api/v2/projects/your_project_id/available_preload_libraries \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer napi_a6xffgea7zx98aw3z1esjxe2ce3b577a3whsptl07qes52did2pzro9lzwp8mv8u'
+     --header 'authorization: Bearer $NEON_API_KEY'
 ```
 
 The response body lists available libraries and whether the libraries are preloaded by default. Response body attributes include:
