@@ -136,17 +136,17 @@ To reset or clear the current context, you have two options:
 
 1. Run the `set-context` command with no options:
 
-```bash
-neon set-context
-```
+   ```bash
+   neon set-context
+   ```
 
 2. Delete the `.neon` file (or your custom `--context-file`):
 
-```bash
-rm .neon
-# Or for a custom context file:
-rm your_context_file
-```
+   ```bash
+   rm .neon
+   # Or for a custom context file:
+   rm your_context_file
+   ```
 
 <Admonition type="note">
 Neon does not save any confidential information to the context file (for example, auth tokens). You can safely commit this file to your repository or share with others.
