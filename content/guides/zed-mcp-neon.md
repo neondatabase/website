@@ -205,7 +205,7 @@ Neon MCP server exposes the following actions, which primarily map to **Neon API
 - `prepare_database_migration`: Initiates a database migration process, utilizing a temporary branch for safety. Begins the process of altering your database schema, safely using Neon's branching feature.
 - `complete_database_migration`: Completes a migration process, applying changes to your main database and cleaning up temporary resources.
 
-These actions enable any MCP client like Zed to interact with various functionalities of the **Neon platform via the Neon API.** Certain tools, especially database migration ones, are tailored for AI agent and LLM usage, leveraging Neon’s branching for safe preview and commit.
+These actions enable any MCP client like Zed to interact with various functionalities of the **Neon platform via the Neon API.** Certain tools, especially database migration ones, are tailored for AI agent and LLM usage, leveraging Neon's branching for safe preview and commit.
 
 ## Development Workflow: Adding a Column with Zed and Neon MCP
 
@@ -267,12 +267,12 @@ Zed: I'll use the prepare_database_migration tool to add a created_at column to 
 > - Temporary Branch Name: br-royal-mode-a1nfvzag
 > - Temporary Branch ID: br-royal-mode-a1nfvzag
 > - Migration Result: Success
-> Would you like to commit this migration to the main branch?
+> Would you like to commit this migration to the production branch?
 
 User: yes do it
 Zed: I'll complete the migration using the provided migration ID:
 > Run MCP tool `complete_database_migration`
-> The migration has been successfully completed. The `created_at` column has been added to the `playing_with_neon` table in the main branch, and the temporary branch has been deleted.
+> The migration has been successfully completed. The `created_at` column has been added to the `playing_with_neon` table in the production branch, and the temporary branch has been deleted.
 ```
 
 ![Zed completing migration](/docs/guides/zed/mcp-neon-adding-column-3.png)
@@ -282,7 +282,7 @@ Zed: I'll complete the migration using the provided migration ID:
 - **Natural language interaction:** You can use simple, conversational English to interact with your database.
 - **Step-by-step guidance:** Zed (Claude) confirms each step and provides details like branch names and migration IDs.
 - **MCP Tools in action:** The underlying MCP tools (`get_database_tables`, `run_sql`, `prepare_database_migration`, `complete_database_migration`) illustrate the automated process.
-- **Branching for safety:** The agent automatically creates a temporary branch for schema changes. The user will be prompted to confirm the migration before applying it to the main branch.
+- **Branching for safety:** The agent automatically creates a temporary branch for schema changes. The user will be prompted to confirm the migration before applying it to the production branch.
 
 You can verify the changes in your Neon Console or by querying the database directly.
 

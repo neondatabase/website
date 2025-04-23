@@ -2,17 +2,14 @@
 title: Connect a Sveltekit application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Sveltekit application
 enableTableOfContents: true
-updatedOn: '2025-03-05T21:09:38.752Z'
+updatedOn: '2025-04-20T15:44:26.056Z'
 ---
 
 Sveltekit is a modern JavaScript framework that compiles your code to tiny, framework-less vanilla JS. This guide explains how to connect Sveltekit with Neon using a secure server-side request.
 
 To create a Neon project and access it from a Sveltekit application:
 
-1. [Create a Neon project](#create-a-neon-project)
-2. [Create a Sveltekit project and add dependencies](#create-a-sveltekit-project-and-add-dependencies)
-3. [Configure a Postgres client](#configure-the-postgres-client)
-4. [Run the app](#run-the-app)
+<Steps>
 
 ## Create a Neon project
 
@@ -174,6 +171,8 @@ When you run `npm run dev` you can expect to see the following on [localhost:517
 Database Version
 PostgreSQL 17.2 on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
 ```
+
+</Steps>
 
 ## Source code
 

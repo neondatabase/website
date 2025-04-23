@@ -390,7 +390,7 @@ This workflow does the following:
 Using Neon's branching feature in your CI pipeline offers several advantages:
 
 - You can test your migrations and schema changes in a separate branch without affecting your production or staging databases.
-- Catch migration issues before they reach your main branch or production environment.
+- Catch migration issues before they reach your production branch or production environment.
 - Ensures that your database schema changes are always tested alongside your application code changes.
 - Allows you to run your full test suite against the updated schema without risk to existing data.
 

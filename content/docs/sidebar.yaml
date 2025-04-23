@@ -127,6 +127,8 @@
               slug: import/import-data-assistant
             - title: Migrate from Postgres with pg_dump and pg_restore
               slug: import/migrate-from-postgres
+            - title: Migrate with pgcopydb
+              slug: import/pgcopydb
             - title: Migrate from a Neon project
               slug: import/migrate-from-neon
             - title: Migrate schema only
@@ -368,15 +370,18 @@
               tag: beta
         - section: Backups
           items:
-            - title: Backups
+            - title: Overview
               slug: manage/backups
-            - title: Part 1 - Create an S3 bucket
-              slug: manage/backups-aws-s3-backup-part-1
-              tag: new
-            - title: Part 2 - Automate nightly backups
-              slug: manage/backups-aws-s3-backup-part-2
-              tag: new
-        - section: Maintenance & updates
+            - title: Backup with pg_dump
+              slug: manage/backup-pg-dump
+            - title: Automate pg_dump backups
+              slug: manage/backup-pg-dump-automate
+              items:
+                - title: Part 1 - Create an S3 bucket
+                  slug: manage/backups-aws-s3-backup-part-1
+                - title: Part 2 - Automate nightly backups
+                  slug: manage/backups-aws-s3-backup-part-2
+        - section: Updates
           items:
             - title: Overview
               slug: manage/maintenance-updates-overview              
@@ -439,6 +444,13 @@
     - title: Neon on Azure
       slug: manage/azure
       icon: azure
+      items:
+        - title: Deploy Neon on Azure
+          slug: azure/azure-deploy
+        - title: Manage Neon on Azure
+          slug: azure/azure-manage
+        - title: Develop with Neon on Azure
+          slug: azure/azure-develop
 - section: AI with Neon
   icon: ai
   items:
@@ -482,6 +494,8 @@
               slug: https://neon.tech/guides/agentstack-neon
             - title: AutoGen
               slug: https://neon.tech/guides/autogen-neon
+            - title: Azure AI Agent Service
+              slug: https://neon.tech/guides/azure-ai-agent-service 
             - title: Composio + CrewAI
               slug: https://neon.tech/guides/composio-crewai-neon
             - title: LangGraph
@@ -520,6 +534,8 @@
       icon: cli
       slug: reference/neon-cli
       items:
+        - title: Quickstart
+          slug: reference/cli-quickstart
         - title: Install and connect
           slug: reference/cli-install
         - title: auth
@@ -707,6 +723,8 @@
           items:
             - title: Exograph
               slug: guides/exograph
+            - title: PostgREST
+              slug: guides/postgrest
             - title: FerretDB
               slug: guides/ferretdb
             - title: Grafbase

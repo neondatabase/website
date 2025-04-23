@@ -2,7 +2,7 @@
 title: Schema diff
 subtitle: Learn how to use Neon's Schema Diff tool to compare branches of your database
 enableTableOfContents: true
-updatedOn: '2025-01-09T14:34:13.460Z'
+updatedOn: '2025-04-17T16:06:46.407Z'
 ---
 
 Neon's Schema Diff tool lets you compare an SQL script of the schemas for two selected branches in a side-by-side view (or line-by-line on mobile devices).
@@ -69,23 +69,23 @@ Use the `schema-diff` subcommand from the `branches` command:
 neon branches schema-diff [base-branch] [compare-source[@(timestamp|lsn)]]
 ```
 
-The operation will compare a selected branch (`[compare-source]`) against the latest (head) of your base branch (`[base-branch]`). For example, if you want to compare recent changes you made to your development branch `dev/alex` against your production branch `main`, identify `main` as your base branch and `dev/alex` as your compare-source.
+The operation will compare a selected branch (`[compare-source]`) against the latest (head) of your base branch (`[base-branch]`). For example, if you want to compare recent changes you made to your development branch `development` against your production branch `production`, identify `production` as your base branch and `development` as your compare-source.
 
 ```bash
-neon branches schema-diff main dev/alex
+neon branches schema-diff production development
 ```
 
 You have a few options here:
 
-- Append a timestamp or LSN to compare to a specific point in `dev/alex` branch's history.
-- If you are regularly comparing development branches against `main`, include `main` in your `set-context` file. You can then leave out the [base-branch] from the command.
+- Append a timestamp or LSN to compare to a specific point in `development` branch's history.
+- If you are regularly comparing development branches against `production`, include `production` in your `set-context` file. You can then leave out the [base-branch] from the command.
 - Use aliases to shorten the command.
 - Include `--database` to reduce the diff to a single database. If you don't specify a database, the diff will include all databases on the branch.
 
-Here is the same command using aliases, with `main` included in `set-context`, pointing to an LSN from `dev/alex` branch's history, and limiting the diff to the database `people`:
+Here is the same command using aliases, with `production` included in `set-context`, pointing to an LSN from `development` branch's history, and limiting the diff to the database `people`:
 
 ```bash
-neon branch sd dev/alex@0/123456 --db people
+neon branch sd development@0/123456 --db people
 ```
 
 To find out what other comparisons you can make, see [Neon CLI commands — branches](/docs/reference/cli-branches#schema-diff) for full documentation of the command.
