@@ -1,5 +1,5 @@
 ---
-updatedOn: '2025-04-18T17:31:33.338Z'
+updatedOn: '2025-04-22T15:37:58.327Z'
 ---
 
 # Docs
@@ -456,7 +456,7 @@ Create a new development branch off of `main`. This branch will be an exact, iso
 To display a checklist, use the `CheckList` component with `CheckItem` items inside.
 
 ```md
-<CheckList id="checklist-id">
+<CheckList title="Checklist title">
 
 <CheckItem title="Check item 1" href="#check-item-1">
   Check item 1 description
@@ -471,10 +471,9 @@ To display a checklist, use the `CheckList` component with `CheckItem` items ins
 
 ### Notes
 
-- You can use `id` prop to set the id of the checklist.
 - Checklist options saved in the browser local storage.
-- Checklists with the same `id` will use the same local storage between pages.
-- If you don't pass `id`, the id will be generated from the page `slug`.
+- Checklists with the same `title` will use the same local storage between pages.
+- If you don't pass `title`, the id will be generated from the page `slug`.
 - The best practice is to use `CheckList` with the `Steps` component on the page.
 
 <details>
