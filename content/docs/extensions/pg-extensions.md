@@ -177,6 +177,138 @@ SET neon.allow_unstable_extensions = 'true';
 
 If you're experimenting with an extension and run into trouble, we recommend checking with the extension’s maintainers or community for support.
 
+## Extensions with preloaded libraries
+
+A preloaded library in Postgres is a shared library that must be loaded into memory when the Postgres server starts. These libraries are specified in a Postgres server's startup configuration using the `shared_preload_libraries` parameter and cannot be added dynamically after the server has started.
+
+Some Postgres extensions require preloaded libraries but most do not. Neon Postgres instances preload libraries for certain Postgres extensions by default. You can view preloaded libraries by running the following command. 
+
+```sql shouldWrap
+SHOW shared_preload_libraries;
+neon,pg_stat_statements,timescaledb,pg_cron,pg_partman_bgw,rag_bge_small_en_v15,rag_jina_reranker_v1_tiny_en
+```
+
+### Viewing preloaded libraries
+
+You can also view preloaded libraries by running [List preloaded libraries](https://api-docs.neon.tech/reference/getavailablepreloadlibraries) API:
+
+```bash
+curl --request GET \
+     --url https://console.neon.tech/api/v2/projects/your_project_id/available_preload_libraries \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer napi_a6xffgea7zx98aw3z1esjxe2ce3b577a3whsptl07qes52did2pzro9lzwp8mv8u'
+```
+
+The response body lists extensions with preloaded libraries and whether the libraries for those extensions are preloaded into memory by default. The response body attributes include:
+
+- `library_name` - library name name, typically named for the associated extension
+- `description` - extension description
+- `is_default` - whether the shared libraries are preloaded into memory by default
+- `is_experimental` - whether the extensions is [experimental](#experimental-extensions)
+- `version` — the extension version
+
+<details>
+<summary>Response body example</summary>
+
+```json
+{
+  "libraries": [
+    {
+      "library_name": "timescaledb",
+      "description": "Enables scalable inserts and complex queries for time-series data.",
+      "is_default": true,
+      "is_experimental": false,
+      "version": "2.13.0"
+    },
+    {
+      "library_name": "pg_cron",
+      "description": "pg_cron is a cron-like job scheduler for PostgreSQL.",
+      "is_default": true,
+      "is_experimental": false,
+      "version": "1.6.4"
+    },
+    {
+      "library_name": "pg_partman_bgw",
+      "description": "pg_partman_bgw is a background worker for pg_partman.",
+      "is_default": true,
+      "is_experimental": false,
+      "version": "5.1.0"
+    },
+    {
+      "library_name": "rag_bge_small_en_v15,rag_jina_reranker_v1_tiny_en",
+      "description": "Shared libraries for pgrag extensions",
+      "is_default": true,
+      "is_experimental": true,
+      "version": "0.0.0"
+    },
+    {
+      "library_name": "ulid",
+      "description": "pgx_ulid is a PostgreSQL extension for ULID generation.",
+      "is_default": false,
+      "is_experimental": false,
+      "version": "0.1.5"
+    },
+    {
+      "library_name": "pg_search",
+      "description": "pg_search: Full text search for PostgreSQL using BM25",
+      "is_default": false,
+      "is_experimental": false,
+      "version": "0.15.12"
+    }
+  ]
+}
+```
+
+</details>
+
+Important notes about preloaded libraries for Postgres extensions:
+
+- The libraries that Neon preloads may differ by Postgres version
+- Neon does not not preload libraries for all extensions that them
+
+### Preloading libraries
+
+You can preload available libraries using the `preloaded_libraries` object in a [Create project](https://api-docs.neon.tech/reference/createproject) or  [Update project](https://api-docs.neon.tech/reference/updateproject) API call. For example, this `Update project` call preloads the libraries for the `pg_search` extension. When runnign this call, you have to provide your project ID a Neon API key.
+
+<Admonition type="important">
+Set `use_defaults` to `true` to preserve the libraries that Neon preloads by default.
+</Admonition>
+
+      ```bash
+      curl --request PATCH \
+          --url https://console.neon.tech/api/v2/projects/<your_project_id> \
+          --header 'accept: application/json' \
+          --header 'authorization: Bearer $NEON_API_KEY$' \
+          --header 'content-type: application/json' \
+          --data '
+      {
+        "project": {
+          "settings": {
+            "preload_libraries": {
+              "use_defaults": true,
+              "enabled_libraries": [
+                "pg_search"
+              ]
+            }
+          }
+        }
+      }
+      '
+      ```
+
+After preloading libraries, a compute restart is required. You can do this using the [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API. Specify the same `project_id` used above. The `endpoint_id` should be for the compute attached to your database branch. **Please note that restarting your compute endpoint will drop current connections to your database.**
+
+```bash
+curl --request POST \
+    --url https://console.neon.tech/api/v2/projects/<project_id>/endpoints/<endpoint_id>/restart \
+    --header 'accept: application/json' \
+    --header 'authorization: Bearer $NEON_API_KEY'
+```
+
+<Admonition type="note">
+The [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API only works on an active compute. If your compute is idle, you can start it by running a query to wake it up or running the [Start compute endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API. For more information and other compute restart options, see [Restart a compute](/docs/manage/endpoints#restart-a-compute).
+</Admonition>
+
 ## Extension notes
 
 - Neon supports the `uuid-ossp` extension for generating UUIDs instead of the `uuid` extension.

@@ -40,26 +40,27 @@ CREATE EXTENSION IF NOT EXISTS pg_search;
 
     Load the required `pg_search` libraries into your Neon project by running this [Update project](https://api-docs.neon.tech/reference/updateproject) API call from your terminal. You will need to specify your [Neon project ID](/docs/reference/glossary#project-id) and your [Neon API key](/docs/manage/api-keys).
 
-    ```bash
-    curl --request PATCH \
-    --url https://console.neon.tech/api/v2/projects/<project_id> \
-    --header 'accept: application/json' \
-    --header 'authorization: Bearer $NEON_API_KEY' \
-    --header 'content-type: application/json' \
-    --data '
-    {
-      "project": {
-        "settings": {
-          "preload_libraries": {
-            "enabled_libraries": [
-              "pg_search"
-            ]
+      ```bash
+      curl --request PATCH \
+          --url https://console.neon.tech/api/v2/projects/bitter-thunder-51282381 \
+          --header 'accept: application/json' \
+          --header 'authorization: Bearer $NEON_API_KEY' \
+          --header 'content-type: application/json' \
+          --data '
+      {
+        "project": {
+          "settings": {
+            "preload_libraries": {
+              "use_defaults": true,
+              "enabled_libraries": [
+                "pg_search"
+              ]
+            }
           }
         }
       }
-    }
-    '
-    ```
+      '
+      ```
 
 2. Restart your compute to apply the new setting. You can do this using the [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API. Specify the same `project_id` used above. The `endpoint_id` should be for the compute attached to your database branch. **Please note that restarting your compute endpoint will drop current connections to your database.**
 
