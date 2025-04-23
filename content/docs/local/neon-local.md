@@ -83,7 +83,7 @@ const sql = neon('postgres://neon:npg@db:5432/neondb');
 ```javascript
 import pg from 'pg';
 const { Pool } = pg;
-const connectionString = 'postgres://neon:npg@db:5432/neondb';
+const connectionString = 'postgres://neon:npg@db:5432/neondb?sslmode=no-verify';
 
 const pool = new Pool({ connectionString });
 ```
