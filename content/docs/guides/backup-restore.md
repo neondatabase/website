@@ -66,13 +66,6 @@ You can also restore a branch from a snapshot. Snapshots are point-in-time copie
 
 #### Snapshot info panel
 
-The panel shows details about upcoming scheduled snapshots:
-
-- **Next snapshot**: When the next snapshot will be created
-- **Schedule**: Snapshot frequency and retention policy (e.g., auto-deletion after 3 days)
-
-> Note: The "Edit schedule" option will not be available in the initial release.
-
 To restore from a snapshot:
 
 1. Select a branch.
@@ -100,20 +93,6 @@ These backup branches:
 - Backup branches from restores on the **root branch** (e.g., `main`) can be deleted.
 - Backup branches from restores on **non-root branches** can't be deleted yet, but you can free up space by dropping databases/tables manually.
 
----
-
-## Billing considerations
-
-- **Restore operations**: Backups count toward your branch quota but do not add to compute costs unless you activate them.
-- **Time Travel Assist**: Minimal impact; queries are lightweight.
-
----
-
-## Technical details
-
-Want to learn how this is implemented under the hood? [See technical details](#).
-
----
 
 ## Related docs
 
