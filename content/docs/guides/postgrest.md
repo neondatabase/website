@@ -187,7 +187,7 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXV0aGVudGljYXRlZCJ9.XOGSeHS8us
 
 <Admonition type="tip">
 You can use [jwt.io](https://jwt.io/) to generate your own JWT. Make sure to use the **HS256** algorithm.
-</Admonition> 
+</Admonition>
 
 Now let's test different CRUD operations using standard HTTP methods. Notice that we've attached the JWT in the `Authorization` header as a bearer token.
 
@@ -291,7 +291,7 @@ Now that you have a basic PostgREST API running with Neon, here are some things 
 - **Explore advanced querying**: Implement [filtering](https://docs.postgrest.org/en/v12/api.html#horizontal-filtering-rows), [ordering](https://docs.postgrest.org/en/v12/api.html#ordering), and [pagination](https://docs.postgrest.org/en/v12/api.html#limits-and-pagination) in your API requests
 - **Add resource embedding**: Use [resource embedding](https://docs.postgrest.org/en/v12/api.html#resource-embedding) to fetch related data in a single request
 - **Implement stored procedures**: Expose [PostgreSQL functions](https://docs.postgrest.org/en/v12/api.html#stored-procedures) as API endpoints for complex operations
-- **Example applications**: Explore [example applications](https://docs.postgrest.org/en/v12/ecosystem.html#example-apps)  built with PostgREST to get inspiration for your own projects
+- **Example applications**: Explore [example applications](https://docs.postgrest.org/en/v12/ecosystem.html#example-apps) built with PostgREST to get inspiration for your own projects
 - **Try out templates**: These [templates](https://docs.postgrest.org/en/v12/ecosystem.html#templates) combine PostgREST with various frontend technologies
 
 <NeedHelp/>
