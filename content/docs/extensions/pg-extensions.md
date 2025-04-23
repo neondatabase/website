@@ -201,10 +201,10 @@ curl --request GET \
 
 The response body lists available libraries and whether the libraries are preloaded by default. Response body attributes include:
 
-- `library_name` - library name, typically named for the associated extension
-- `description` - a description of the extension
-- `is_default` - whether shared libraries are preloaded by default
-- `is_experimental` - whether the extensions is [experimental](#experimental-extensions)
+- `library_name` — library name, typically named for the associated extension
+- `description` — a description of the extension
+- `is_default` — whether shared libraries are preloaded by default
+- `is_experimental` — whether the extensions is [experimental](#experimental-extensions)
 - `version` — the extension version
 
 <details>
