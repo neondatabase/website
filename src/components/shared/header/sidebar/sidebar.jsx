@@ -1,14 +1,28 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
+import { Suspense } from 'react';
 
 import Button from 'components/shared/button';
+import GithubStarCounter from 'components/shared/github-star-counter';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import DiscordIcon from 'icons/discord.inline.svg';
+import { getGithubStars } from 'utils/get-github-data';
 
 const themePropTypes = {
   isDarkTheme: PropTypes.bool,
 };
+
+const GithubStars = async ({ isDarkTheme }) => {
+  const starsCount = await getGithubStars();
+  return (
+    <Suspense>
+      <GithubStarCounter isDarkTheme={isDarkTheme} starsCount={starsCount} />
+    </Suspense>
+  );
+};
+
+GithubStars.propTypes = themePropTypes;
 
 const DiscordLink = ({ isDarkTheme }) => (
   <Link
@@ -29,8 +43,9 @@ const DiscordLink = ({ isDarkTheme }) => (
 
 DiscordLink.propTypes = themePropTypes;
 
-const Sidebar = ({ isDarkTheme }) => (
+const Sidebar = ({ isDarkTheme, isClient }) => (
   <div className="flex items-center gap-x-6 lg:hidden">
+    {!isClient && <GithubStars isDarkTheme={isDarkTheme} />}
     <DiscordLink isDarkTheme={isDarkTheme} />
     <Link
       className="whitespace-nowrap text-[13px] leading-none tracking-extra-tight lg:hidden"

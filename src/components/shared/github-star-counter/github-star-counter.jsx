@@ -34,7 +34,7 @@ const GithubStarCounter = ({ className = '', isDarkTheme = false, starsCount }) 
     }}
   >
     <GitHubIcon width={20} height={20} />
-    <span className="w-8 whitespace-nowrap" aria-label={`Star us on GitHub (${starsCount})`}>
+    <span className="whitespace-nowrap" aria-label={`Star us on GitHub (${starsCount})`}>
       {formatStars(starsCount)}
     </span>
   </Link>
