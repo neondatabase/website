@@ -180,12 +180,12 @@ FROM
       ROW_NUMBER () OVER (
         ORDER BY
           product_name
-      )
+      ) as rn
     FROM
       products
   ) x
 WHERE
-  ROW_NUMBER BETWEEN 6 AND 10;
+  rn BETWEEN 6 AND 10;
 ```
 
 ![PostgreSQL ROW_NUMBER with pagination](/postgresqltutorial/PostgreSQL-ROW_NUMBER-with-pagination.png)
