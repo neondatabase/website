@@ -64,6 +64,10 @@ GRANT SELECT ON ALL TABLES IN SCHEMA api TO anonymous;
 ALTER DEFAULT PRIVILEGES IN SCHEMA api GRANT SELECT ON TABLES TO anonymous;
 ```
 
+<Admonition type="tip">
+While this example uses SERIAL for simplicity, consider using UUID as a primary key in production systems—especially in distributed environments, when exposing identifiers in URLs, or when avoiding predictable sequences is important.
+</Admonition>
+
 ## Copy your database connection string
 
 Retrieve an unpooled database connection string — PostgREST requires a direct connection to your database.
