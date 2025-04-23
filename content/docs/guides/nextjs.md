@@ -405,6 +405,10 @@ PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1
 
 </Steps>
 
+### Where to upload and serve files?
+
+Neon does not provide a built-in file storage service. For managing binary file data (blobs), we recommend a pattern that leverages dedicated, specialized storage services. Follow our guide on [File Storage](/docs/guides/file-storage) to learn more about how to store files in external object storage and file management services and track metadata in Neon.
+
 ## Source code
 
 You can find the source code for the applications described in this guide on GitHub.
