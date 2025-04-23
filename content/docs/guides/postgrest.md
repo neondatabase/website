@@ -154,7 +154,7 @@ docker run --rm --net=host \
 <TabItem>
 ```bash
 docker run --rm \
-  -e PGRST_DB_URI="postgresql://neondb_owner:npg_jpbYuDT5SvI3@ep-dark-butterfly-a4p8zdvu.us-east-1.aws.neon.tech/neondb?sslmode=require" \
+  -e PGRST_DB_URI="<non-pooled-connection-string-from-neon-console>" \
   -e PGRST_DB_SCHEMA="api" \
   -e PGRST_JWT_SECRET="reallyreallyreallyreallyverysafe" \
   -e PGRST_DB_ANON_ROLE="anonymous" \
