@@ -61,7 +61,20 @@ CREATE EXTENSION IF NOT EXISTS pg_search;
     '
     ```
 
-2. **Install the pg_search extension**
+2. Restart your compute to apply the new setting. You can do this using the [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API. Specify the same `project_id` used above. The `endpoint_id` should be for the compute attached to your database branch. **Please note that restarting your compute endpoint will drop current connections to your database.**
+
+    ```bash
+    curl --request POST \
+        --url https://console.neon.tech/api/v2/projects/<project_id>/endpoints/<endpoint_id>/restart \
+        --header 'accept: application/json' \
+        --header 'authorization: Bearer $NEON_API_KEY'
+    ```
+
+    <Admonition type="note">
+    The [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API only works on an active compute. If your compute is idle, you can start it by running a query to wake it up or running the [Start compute endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API. For more information and other compute restart options, see [Restart a compute](/docs/manage/endpoints#restart-a-compute).
+    </Admonition>
+
+3. **Install the pg_search extension**
 
     Install the `pg_search` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
