@@ -42,7 +42,7 @@ CREATE EXTENSION IF NOT EXISTS pg_search;
 
       ```bash
       curl --request PATCH \
-          --url https://console.neon.tech/api/v2/projects/bitter-thunder-51282381 \
+          --url https://console.neon.tech/api/v2/projects/<your_project_id> \
           --header 'accept: application/json' \
           --header 'authorization: Bearer $NEON_API_KEY' \
           --header 'content-type: application/json' \
@@ -62,7 +62,7 @@ CREATE EXTENSION IF NOT EXISTS pg_search;
       '
       ```
 
-2. Restart your compute to apply the new setting. You can do this using the [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API. Specify the same `project_id` used above. The `endpoint_id` should be for the compute attached to your database branch. **Please note that restarting your compute endpoint will drop current connections to your database.**
+2. Restart your compute to apply the new setting. You can do this using the [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API. Use the same `project_id` as above and provide the `endpoint_id` for the compute associated with your database branch. **Please note that restarting your compute endpoint will drop current connections to your database.**
 
     ```bash
     curl --request POST \
