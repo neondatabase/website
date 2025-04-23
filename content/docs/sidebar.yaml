@@ -731,6 +731,8 @@
           items:
             - title: Exograph
               slug: guides/exograph
+            - title: PostgREST
+              slug: guides/postgrest
             - title: FerretDB
               slug: guides/ferretdb
             - title: Grafbase

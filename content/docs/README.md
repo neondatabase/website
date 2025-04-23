@@ -1,5 +1,5 @@
 ---
-updatedOn: '2025-04-18T17:31:33.338Z'
+updatedOn: '2025-04-23T16:22:55.901Z'
 ---
 
 # Docs
@@ -296,6 +296,44 @@ class GFG {
 
 </details>
 
+## External Code
+
+The `ExternalCode` component allows embedding code content from external sources with syntax highlighting.
+
+### Usage
+
+```markdown
+<ExternalCode
+  url="https://raw.githubusercontent.com/neondatabase/neon/main/README.md"
+/>
+```
+
+### Props
+
+| Prop            | Type    | Default    | Description                                                   |
+| --------------- | ------- | ---------- | ------------------------------------------------------------- |
+| url             | string  | (required) | URL to the raw file                                           |
+| language        | string  | (optional) | Language for syntax highlighting (defaults to file extension) |
+| shouldWrap      | boolean | false      | Enables code wrapping in the code block                       |
+| showLineNumbers | boolean | false      | Shows line numbers in the code block                          |
+| className       | string  | ''         | Additional CSS classes to apply to the component              |
+
+### Examples
+
+```markdown
+<ExternalCode
+  url="https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/neon-auth.mdc"
+  language="markdown"
+  shouldWrap
+  showLineNumbers
+/>
+```
+
+### Best Practices
+
+1. Always use raw URLs from the GitHub repository (e.g., `https://raw.githubusercontent.com/...`).
+2. Use the `language` prop when the file extension doesn't match the actual content type.
+
 ## Tabs
 
 To display the tabs with content as image, video, code block, .etc, wrap the `TabItem` with `Tabs`
@@ -456,7 +494,7 @@ Create a new development branch off of `main`. This branch will be an exact, iso
 To display a checklist, use the `CheckList` component with `CheckItem` items inside.
 
 ```md
-<CheckList id="checklist-id">
+<CheckList title="Checklist title">
 
 <CheckItem title="Check item 1" href="#check-item-1">
   Check item 1 description
@@ -471,10 +509,9 @@ To display a checklist, use the `CheckList` component with `CheckItem` items ins
 
 ### Notes
 
-- You can use `id` prop to set the id of the checklist.
 - Checklist options saved in the browser local storage.
-- Checklists with the same `id` will use the same local storage between pages.
-- If you don't pass `id`, the id will be generated from the page `slug`.
+- Checklists with the same `title` will use the same local storage between pages.
+- If you don't pass `title`, the id will be generated from the page `slug`.
 - The best practice is to use `CheckList` with the `Steps` component on the page.
 
 <details>
