@@ -15,12 +15,10 @@ This guide demonstrates how to integrate AWS S3 with Neon by storing file metada
 
 ## Create a Neon project
 
-If you do not have one already, create a Neon project. Save your connection details including your password. They are required when defining connection settings.
-
 1.  Navigate to [pg.new](https://pg.new) to create a new Neon project.
 2.  Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
-## Create an AWS Account and S3 Bucket
+## Create an AWS account and S3 bucket
 
 1.  Sign up for or log in to your [AWS Account](https://aws.amazon.com/).
 2.  Navigate to the **S3** service in the AWS Management Console.
@@ -37,7 +35,7 @@ If you do not have one already, create a Neon project. Save your connection deta
      This guide uses public access for simplicity, but you should implement secure access controls in production.
     </Admonition>
 
-5.  **Create IAM User for Programmatic Access:**
+5.  **Create IAM user for programmatic access:**
     - Navigate to the **IAM** service in the AWS Console.
     - Go to **Users** and click **Add users**.
     - Enter a username (e.g., `neon-app-s3-user`). Select **Access key - Programmatic access** as the credential type. Click **Next: Permissions**.
@@ -72,7 +70,7 @@ If you use [Neon's Row Level Security (RLS)](https://neon.tech/blog/introducing-
 Note that these policies apply _only_ to the metadata in Neon. Access control for the objects within the S3 bucket itself is managed via S3 bucket policies, IAM permissions, and object ACLs.
 </Admonition>
 
-## Upload Files to S3 using Presigned URLs and store metadata in Neon
+## Upload files to S3 and store metadata in Neon
 
 The recommended pattern for client-side uploads to S3 involves **presigned upload URLs**. Your backend generates a temporary URL that the client uses to upload the file directly to S3. Afterwards, your backend saves the file's metadata to Neon.
 
@@ -186,7 +184,7 @@ serve({ fetch: app.fetch, port }, (info) => {
 **Explanation**
 
 1.  **Setup:** Initializes the Neon database client (`sql`), Hono (`app`), and the AWS S3 client (`s3`) configured with region and credentials.
-2.  **Authentication:** A placeholder `authMiddleware` is included. **Crucially, this needs to be replaced with real authentication logic.** It currently just sets a static `userId` for demonstration.
+2.  **Authentication:** A placeholder `authMiddleware` is included. **Crucially**, this needs to be replaced with real authentication logic. It currently just sets a static `userId` for demonstration.
 3.  **Upload endpoints:**
     - **`/presign-upload`:** Generates a temporary secure URL (`presignedUrl`) using `@aws-sdk/s3-request-presigner` that allows uploading a file directly to S3. It returns the URL, the generated `objectKey`, and the standard S3 public URL.
     - **`/save-metadata`:** Called by the client _after_ successful upload. Saves the `objectKey`, `file_url`, and `userId` into the `s3_files` table in Neon using `@neondatabase/serverless`.
@@ -240,7 +238,7 @@ s3_client = boto3.client(
 
 app = Flask(__name__)
 
-# Use a global postgreSQL connection instead of creating a new one for each request in production
+# Use a global PostgreSQL connection instead of creating a new one for each request in production
 def get_db_connection():
     return psycopg2.connect(os.getenv("DATABASE_URL"))
 
@@ -331,11 +329,11 @@ if __name__ == "__main__":
 
 </Tabs>
 
-## Testing the Upload Workflow
+## Testing the upload workflow
 
 Testing the presigned URL flow involves multiple steps:
 
-1.  **Get Presigned URL:** Send a `POST` request to your `/presign-upload` endpoint with a JSON body containing `fileName` and `contentType`.
+1.  **Get presigned URL:** Send a `POST` request to your `/presign-upload` endpoint with a JSON body containing `fileName` and `contentType`.
     **Using cURL:**
 
     ```bash
@@ -346,7 +344,7 @@ Testing the presigned URL flow involves multiple steps:
 
     Note the `presignedUrl`, `objectKey`, and `publicFileUrl` from the response.
 
-2.  **Upload File to S3:** Use the received `presignedUrl` to upload the actual file using an HTTP `PUT` request.
+2.  **Upload file to S3:** Use the received `presignedUrl` to upload the actual file using an HTTP `PUT` request.
     **Using cURL:**
 
     ```bash
@@ -355,9 +353,9 @@ Testing the presigned URL flow involves multiple steps:
          -H "Content-Type: text/plain"
     ```
 
-    A successful upload typically returns HTTP `200 OK`.
+    A successful upload typically returns HTTP `200 OK` with no body.
 
-3.  **Save Metadata:** Send a `POST` request to your `/save-metadata` endpoint with the `objectKey` and `publicFileUrl` from step 1.
+3.  **Save metadata:** Send a `POST` request to your `/save-metadata` endpoint with the `objectKey` and `publicFileUrl` obtained in step 1.
     **Using cURL:**
     ```bash
     curl -X POST http://localhost:3000/save-metadata \
@@ -366,20 +364,20 @@ Testing the presigned URL flow involves multiple steps:
     ```
     You should receive `{"success": true}`.
 
-**Expected Outcome:**
+**Expected outcome:**
 
 - The file appears in your S3 bucket (check the AWS Console).
-- A new row appears in your `s3_files` table in Neon.
+- A new row appears in your `s3_files` table in Neon containing the `object_key` and `file_url`.
 
-You can now integrate API calls to these endpoints from various parts of your application (e.g., web clients, mobile apps, backend services) to handle file uploads.
+You can now integrate API calls to these endpoints from various parts of your application (e.g., web clients using JavaScript's `fetch` API, mobile apps, backend services) to handle file uploads.
 
-## Accessing File Metadata and Files
+## Accessing file metadata and files
 
 Storing metadata in Neon allows your application to easily retrieve references to the files hosted on S3.
 
 Query the `s3_files` table from your application's backend when needed.
 
-**Example SQL Query:**
+**Example SQL query:**
 
 Retrieve files for user 'user_123':
 
@@ -396,13 +394,13 @@ WHERE
     user_id = 'user_123'; -- Use actual authenticated user ID
 ```
 
-**Using the Data:**
+**Using the data:**
 
 - The query returns metadata stored in Neon.
-- The `file_url` column contains the direct link to access the file via S3 (if the object ACL is public-read and the bucket allows public access).
-- Use this `file_url` in your application (e.g., `<img>` tags, download links).
+- The `file_url` column contains the direct link to access the file via S3.
+- Use this `file_url` in your application (e.g., `<img>` tags, download links)
 
-  <Admonition type="note" title="Private Buckets">
+  <Admonition type="note" title="Private buckets">
   For private S3 buckets, store only the `object_key` and generate presigned *read* URLs on demand using a similar backend process.
   </Admonition>
 
@@ -412,7 +410,7 @@ This pattern effectively separates file storage and delivery concerns (handled b
 
 ## Resources
 
-- [AWS S3 Documentation](https://docs.aws.amazon.com/s3/index.html)
+- [AWS S3 documentation](https://docs.aws.amazon.com/s3/index.html)
 - [AWS Sharing objects with presigned URLs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html)
 - [Neon Documentation](/docs/introduction)
 - [Neon RLS](/docs/guides/neon-rls)

@@ -27,6 +27,8 @@ You can follow our guides on how to integrate with these services into your data
 
 <TechCards>
 
+<a href="/docs/guides/aws-s3" title="AWS S3" description="Upload files to AWS S3 and store metadata in Neon" icon="aws-s3-bucket"></a>
+
 <a href="/docs/guides/cloudflare-r2" title="Cloudflare R2" description="Upload files to Cloudflare R2 and store metadata in Neon" icon="cloudflare"></a>
 
 <a href="/docs/guides/uploadcare" title="Uploadcare" description="Upload files to Uploadcare and store metadata in Neon" icon="uploadcare"></a>

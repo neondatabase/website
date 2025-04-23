@@ -90,6 +90,8 @@
           items:
             - title: File Storage
               slug: guides/file-storage
+            - title: File Storage with AWS S3
+              slug: guides/aws-s3
             - title: File Storage with Cloudflare R2
               slug: guides/cloudflare-r2
             - title: Media Storage with Uploadcare

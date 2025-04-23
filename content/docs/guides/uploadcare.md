@@ -15,12 +15,10 @@ This guide demonstrates how to integrate Uploadcare with Neon by storing file me
 
 ## Create a Neon project
 
-If you do not have one already, create a Neon project. Save your connection details including your password. They are required when defining connection settings.
-
 1. Navigate to [pg.new](https://pg.new) to create a new Neon project.
 2. Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
-## Create an Uploadcare Account and Project
+## Create an Uploadcare account and project
 
 1.  Sign up for an account at [Uploadcare.com](https://uploadcare.com/).
 2.  Create a new project within your Uploadcare dashboard.
@@ -134,14 +132,14 @@ serve({ fetch: app.fetch, port }, (info) => {
 **Explanation**
 
 1.  **Setup:** It initializes the Neon database client and the Hono web framework. It relies on environment variables (`DATABASE_URL`, `UPLOADCARE_PUBLIC_KEY`) being set, via a `.env` file.
-2.  **Authentication:** A placeholder `authMiddleware` is included. **Crucially, this needs to be replaced with real authentication logic.** It currently just sets a static `userId` for demonstration.
+2.  **Authentication:** A placeholder `authMiddleware` is included. **Crucially**, this needs to be replaced with real authentication logic. It currently just sets a static `userId` for demonstration.
 3.  **Upload Endpoint (`/upload`):**
     - It expects a `POST` request with `multipart/form-data`.
     - It retrieves the user ID set by the middleware.
     - It extracts the `file` data and `fileName` from the form data.
     - It uploads the file content directly to Uploadcare.
     - Upon successful upload, Uploadcare returns details including a unique `uuid` and a `cdnUrl`.
-    - It executes an `INSERT` statement using the Neon serverless driver to save the `uuid`, `cdnUrl`, and the `userId` into a `files` table in your database
+    - It executes an `INSERT` statement using the Neon serverless driver to save the `uuid`, `cdnUrl`, and the `userId` into a `files` table in your database.
     - It sends a JSON response back to the client containing the `fileUrl` from Uploadcare.
 
 </TabItem>
@@ -177,7 +175,7 @@ from pyuploadcare import Uploadcare
 load_dotenv()
 
 
-# Use a global postgreSQL connection instead of creating a new one for each request in production
+# Use a global PostgreSQL connection instead of creating a new one for each request in production
 def get_database():
     return psycopg2.connect(os.getenv("DATABASE_URL"))
 
@@ -241,7 +239,7 @@ if __name__ == "__main__":
     - It extracts the `file` data from the form data.
     - It uploads the file content directly to Uploadcare.
     - Upon successful upload, Uploadcare returns details including a unique `uuid` and a `cdnUrl`.
-    - It executes an `INSERT` statement using `psycopg2` to save the `uuid`, `cdnUrl`, and the `userId` into a `files` table in your database
+    - It executes an `INSERT` statement using `psycopg2` to save the `uuid`, `cdnUrl`, and the `userId` into a `files` table in your database.
     - It sends a JSON response back to the client containing the `fileUrl` from Uploadcare.
 4.  In production, you should use a global PostgreSQL connection instead of creating a new one for each request. This is important for performance and resource management.
 
@@ -249,7 +247,7 @@ if __name__ == "__main__":
 
 </Tabs>
 
-## Testing the Upload Endpoint
+## Testing the upload endpoint
 
 Once your server (Node.js or Python example) is running, you can test the `/upload` endpoint to ensure files are correctly sent to Uploadcare and their metadata is stored in Neon.
 
@@ -258,8 +256,8 @@ You'll need to send a `POST` request with `multipart/form-data` containing a fie
 Open your terminal and run a command similar to this, replacing `/path/to/your/image.jpg` with the actual path to a file you want to upload:
 
 ```bash
-curl -X POST http://localhost:3000/upload
-    -F "file=@/path/to/your/image.jpg"
+curl -X POST http://localhost:3000/upload \
+    -F "file=@/path/to/your/image.jpg" \
     -F "fileName=my-test-image.jpg"
 ```
 
@@ -268,7 +266,7 @@ curl -X POST http://localhost:3000/upload
 - `-F "file=@/path/to/your/image.jpg"`: Specifies a form field named `file`. The `@` symbol tells cURL to read the content from the specified file path.
 - `-F "fileName=my-test-image.jpg"`: Sends an additional form field `fileName`.
 
-**Expected Outcome:**
+**Expected outcome:**
 
 - You should receive a JSON response similar to:
   ```json
@@ -280,13 +278,13 @@ curl -X POST http://localhost:3000/upload
 
 You can now integrate calls to this `/upload` endpoint from various parts of your application (e.g., web clients, mobile apps, backend services) to handle file uploads.
 
-## Accessing File Metadata and Files
+## Accessing file metadata and files
 
 Storing metadata in Neon allows your application to easily retrieve references to the files uploaded to Uploadcare.
 
 Query the `files` table from your application's backend when needed.
 
-**Example SQL Query:**
+**Example SQL query:**
 
 Retrieve files for user 'user_123':
 
@@ -303,7 +301,7 @@ WHERE
     user_id = 'user_123'; -- Use actual authenticated user ID
 ```
 
-**Using the Data:**
+**Using the data:**
 
 - The query returns rows containing the file metadata stored in Neon.
 - The crucial piece of information is the `file_url`. This is the direct link (CDN URL) to the file stored on Uploadcare.
@@ -316,7 +314,7 @@ This pattern effectively separates file storage and delivery concerns (handled b
 ## Resources
 
 - [Uploadcare Documentation](https://uploadcare.com/docs/)
-- [Uploadcare Access control with signed URLs](https://uploadcare.com/docs/security/secure-delivery/)
+- [Uploadcare access control with signed URLs](https://uploadcare.com/docs/security/secure-delivery/)
 - [Neon Documentation](/docs/introduction)
 - [Neon RLS](/docs/guides/neon-rls)
 
