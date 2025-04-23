@@ -296,6 +296,44 @@ class GFG {
 
 </details>
 
+## External Code
+
+The `ExternalCode` component allows embedding code content from external sources with syntax highlighting.
+
+### Usage
+
+```markdown
+<ExternalCode
+  url="https://raw.githubusercontent.com/neondatabase/neon/main/README.md"
+/>
+```
+
+### Props
+
+| Prop            | Type    | Default    | Description                                                   |
+| --------------- | ------- | ---------- | ------------------------------------------------------------- |
+| url             | string  | (required) | URL to the raw file                                           |
+| language        | string  | (optional) | Language for syntax highlighting (defaults to file extension) |
+| shouldWrap      | boolean | false      | Enables code wrapping in the code block                       |
+| showLineNumbers | boolean | false      | Shows line numbers in the code block                          |
+| className       | string  | ''         | Additional CSS classes to apply to the component              |
+
+### Examples
+
+```markdown
+<ExternalCode
+  url="https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/neon-auth.mdc"
+  language="markdown"
+  shouldWrap
+  showLineNumbers
+/>
+```
+
+### Best Practices
+
+1. Always use raw URLs from the GitHub repository (e.g., `https://raw.githubusercontent.com/...`).
+2. Use the `language` prop when the file extension doesn't match the actual content type.
+
 ## Tabs
 
 To display the tabs with content as image, video, code block, .etc, wrap the `TabItem` with `Tabs`
