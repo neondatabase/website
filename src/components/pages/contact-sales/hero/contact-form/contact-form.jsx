@@ -3,7 +3,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import useCookie from 'react-use/lib/useCookie';
 import useLocation from 'react-use/lib/useLocation';
@@ -52,6 +52,12 @@ const ContactForm = () => {
     hutk: hubspotutk,
     pageUri: href,
   };
+
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      setFormState(FORM_STATES.ERROR);
+    }
+  }, [errors]);
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
@@ -207,7 +213,10 @@ const ContactForm = () => {
           .
         </p>
         <Button
-          className="min-w-[176px] py-[15px] font-medium 2xl:text-base xl:min-w-[138px] lg:min-w-[180px] sm:w-full sm:py-[13px]"
+          className={clsx(
+            'min-w-[176px] py-[15px] font-medium 2xl:text-base xl:min-w-[138px] lg:min-w-[180px] sm:w-full sm:py-[13px]',
+            formState === FORM_STATES.ERROR && '!bg-secondary-1/50'
+          )}
           type="submit"
           theme="primary"
           size="xs"
