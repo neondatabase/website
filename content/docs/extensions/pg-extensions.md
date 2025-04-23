@@ -177,7 +177,7 @@ SET neon.allow_unstable_extensions = 'true';
 
 If you're experimenting with an extension and run into trouble, we recommend checking with the extension’s maintainers or community for support.
 
-## Extensions with preloaded libraries
+## Extensions requiring preloaded libraries
 
 A preloaded library in Postgres is a shared library that must be loaded into memory when the Postgres server starts. These libraries are specified in a Postgres server's startup configuration using the `shared_preload_libraries` parameter and cannot be added dynamically after the server has started.
 
@@ -188,9 +188,9 @@ SHOW shared_preload_libraries;
 neon,pg_stat_statements,timescaledb,pg_cron,pg_partman_bgw,rag_bge_small_en_v15,rag_jina_reranker_v1_tiny_en
 ```
 
-### Viewing preloaded libraries
+### Viewing libraries
 
-You can also view preloaded libraries by running [List preloaded libraries](https://api-docs.neon.tech/reference/getavailablepreloadlibraries) API:
+You can also view libraries by running [List preloaded libraries](https://api-docs.neon.tech/reference/getavailablepreloadlibraries) API:
 
 ```bash
 curl --request GET \
@@ -199,11 +199,11 @@ curl --request GET \
      --header 'authorization: Bearer napi_a6xffgea7zx98aw3z1esjxe2ce3b577a3whsptl07qes52did2pzro9lzwp8mv8u'
 ```
 
-The response body lists extensions with preloaded libraries and whether the libraries are preloaded by default. Response body attributes include:
+The response body lists available libraries and whether the libraries are preloaded by default. Response body attributes include:
 
 - `library_name` - library name, typically named for the associated extension
 - `description` - a description of the extension
-- `is_default` - whether shared libraries are preloaded into memory by default
+- `is_default` - whether shared libraries are preloaded by default
 - `is_experimental` - whether the extensions is [experimental](#experimental-extensions)
 - `version` — the extension version
 
@@ -296,7 +296,7 @@ Set `use_defaults` to `true` to preserve the libraries that Neon preloads by def
       '
       ```
 
-After preloading libraries, a compute restart is required to aply the new configuration. You can do this using the [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API. Specify the same `project_id` used above. The `endpoint_id` should be for the compute attached to your database branch. **Please note that restarting your compute endpoint will drop current connections to your database.**
+After preloading libraries, a compute restart is required to apply the new configuration. You can do this using the [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API. Specify the same `project_id` used above. The `endpoint_id` should be for the compute attached to your database branch. **Please note that restarting your compute endpoint will drop current connections to your database.**
 
 ```bash
 curl --request POST \
