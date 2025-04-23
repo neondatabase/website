@@ -114,7 +114,7 @@ curl --request POST \
 {
   "project": {
     "settings": {
-      "audit_log_level": "hipaa"
+      "hipaa": true
     },
     "pg_version": 17
   }
