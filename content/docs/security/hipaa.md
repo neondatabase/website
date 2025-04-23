@@ -1,7 +1,7 @@
 ---
 title: HIPAA Compliance
 enableTableOfContents: true
-updatedOn: '2025-04-16T19:06:16.948Z'
+updatedOn: '2025-04-23T22:46:58.383Z'
 ---
 
 Neon offers HIPAA compliance as part of our Business and Enterprise plans, available upon request.
