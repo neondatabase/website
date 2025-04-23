@@ -182,9 +182,9 @@ docker run --rm \
 Now that we have defined our JWT secret above (`reallyreallyreallyreallyverysafe`), we'll create a sample JWT that's signed with this secret. If you didn't change the secret used above, you can use this JWT:
 
 ```text shouldWrap
- eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXV0aGVudGljYXRlZCJ9.XOGSeHS8usEzEELkUl8SWOrsOLP7xWmHckRSTgpyP3o
- ``` 
- 
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXV0aGVudGljYXRlZCJ9.XOGSeHS8usEzEELkUl8SWOrsOLP7xWmHckRSTgpyP3o
+```
+
 <Admonition type="tip">
 You can use [jwt.io](https://jwt.io/) to generate your own JWT. Make sure to use the **HS256** algorithm.
 </Admonition> 
@@ -217,7 +217,7 @@ curl "http://localhost:3000/students?id=eq.1" \
 
 Refresh your browser to see the updated records:
 
-![local host students](/docs/guides/postgrest_local_host_students_insert.png)
+![local host students](/docs/guides/postgrest_local_host_students_update.png)
 
 **Delete a student:**
 
@@ -233,7 +233,7 @@ You should now see these records:
 
 ## Use Row-Level Security (RLS)
 
-PostgREST supports Postgres RLS for fine-grained access control. Here's an example policy to restrict access to a user's own records:. Run these statements on your database in the Neon SQL Editor or an SQL client.
+PostgREST supports Postgres RLS for fine-grained access control. Here's an example policy to restrict access to a user's own records. Run these statements on your database in the Neon SQL Editor or an SQL client.
 
 ```sql
 ALTER TABLE api.students ENABLE ROW LEVEL SECURITY;
@@ -245,7 +245,7 @@ CREATE POLICY students_policy ON api.students
     WITH CHECK (id = (SELECT current_setting('request.jwt.claims', true)::json->>'sub')::integer);
 ```
 
-The JWT token used in the CRUD examples above contain a payload with `{"role": "authenticated"}`, which tells PostgREST to use the `authenticated` role for those requests.
+The JWT token used in the CRUD examples above contains a payload with `{"role": "authenticated"}`, which tells PostgREST to use the `authenticated` role for those requests.
 
 In a real application, you would want to:
 
@@ -253,43 +253,28 @@ In a real application, you would want to:
 - Include user-specific claims in the JWT (most likely, a "sub" field which corresponds to users' IDs)
 - Implement a proper authentication server/service (or use a third-party managed auth provider)
 
-## Using Row-Level Security (RLS)
-
-You can also use Row-Level Security (RLS) policies in Postgres for more granular access control. Here's an example RLS policy that only allows users to see and edit their own records based on their student/user ID. Run this from the Neon SQL Editor or client.
-
-```sql
--- Enable RLS on the students table
-ALTER TABLE api.students ENABLE ROW LEVEL SECURITY;
-
--- Create a policy that only allows users to view/edit their own records
--- This uses the 'sub' claim from the JWT as the user identifier
-CREATE POLICY students_policy ON api.students
-    FOR ALL
-    TO authenticated
-    USING (id = (SELECT current_setting('request.jwt.claims', true)::json->>'sub')::integer)
-    WITH CHECK (id = (SELECT current_setting('request.jwt.claims', true)::json->>'sub')::integer);
-```
+Now let's test this with a JWT that includes a user ID. We'll create a new JWT with a payload that includes a user ID in the "sub" claim:
 
 Now, let's generate a new JWT that has the following payload defining the student ID (and sign it with the same JWT secret from above):
 
 ```
 {
   role: "authenticated",
-  sub: "1",
+  sub: "1"
 }
 ```
 
-Here's the new secret:
+Here's the new token:
 
-```text shouldWarp
+```text shouldWrap
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXV0aGVudGljYXRlZCIsInN1YiI6IjEifQ.U_EgeU0y0pAM5cTsMXndJe_cR1vG5Vf9dq4DkqfMAxs
 ```
 
-Now, run this command with the new secret:
+Now, run this command with the new token:
 
 ```bash
 $ curl "http://localhost:3000/students" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYXV0aGVudGljYXRlZCIsInN1YiI6IjEifQ.U_EgeU0y0pAM5cTsMXndJe_cR1vG5Vf9dq4DkqfMAxs"
-[{"id":1,"firstname":"Ada I.","lastname":"Lovelace"}]
+[{"id":1,"first_name":"Ada I.","last_name":"Lovelace"}]
 ```
 
 Because the `students` table has a RLS policy attached to the student's ID, the student can only view their own records.
