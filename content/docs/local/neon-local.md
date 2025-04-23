@@ -43,14 +43,29 @@ You can add the Neon Local by adding the following to your `docker-compose.yml` 
 
 You can also run the Neon Local container with the following Docker run command.
 
+<CodeTabs labels={["Neon serverless driver", "node-postgres"]}>
+
 ```shell
-$ docker run \
-    -name db
-    -p 5432:5432
-    -e NEON_API_KEY: <neon_api_key>
-    -e NEON_PROJECT_ID: <neon_project_id>
-    neondatabase/neon_local:latest
+docker run \
+  --name db \
+  -p 5432:5432 \
+  -e NEON_API_KEY= <neon_api_key> \
+  -e NEON_PROJECT_ID=<neon_project_id> \
+  -e DRIVER=serverless \
+  neondatabase/neon_local:latest
 ```
+
+```shell
+docker run \
+  --name db \
+  -p 5432:5432 \
+  -e NEON_API_KEY= <neon_api_key> \
+  -e NEON_PROJECT_ID=<neon_project_id> \
+  -e DRIVER=postgres \
+  neondatabase/neon_local:latest
+```
+
+</CodeTabs>
 
 ## Connect
 
