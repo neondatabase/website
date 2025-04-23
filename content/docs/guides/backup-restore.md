@@ -16,14 +16,14 @@ Use the **Backup & Restore** page in the Neon Console to restore a branch to a p
 
 - Instantly restore a branch to any point in time within your restore window
 - Preview data from the selected point in time before your restore 
-- Create manual snapshots
+- Create snapshots
 - Restore from a snapshot
 
 ---
 
 ## Restore options
 
-### Instant point-in-time restore
+### Instantly restore a branch
 
 Use this option to revert your branch to a specific time in its history. You can choose a timestamp within your configured [restore window](/docs/manage/projects#configure-your-restore-window) and preview data before committing to the restore.
 
@@ -38,40 +38,38 @@ Use this option to revert your branch to a specific time in its history. You can
 
 ## Preview the data
 
-![Backup and restore preview data](/docs/guides/backup_restore_select_time.png)
-
-## Restore
-
-![Restore the data](/docs/guides/backup_restore_select_time.png)
-
-</Steps>
-
-#### Restore preview tools
-
 When you preview a historical state using Time Travel Assist, you can:
 
 - **Browse data** using the Tables page
 - **Query data** directly from the restore page
 - **Compare schemas** using Neon’s Schema Diff
 
+![Backup and restore preview data](/docs/guides/backup_restore_select_time.png)
+
+## Restore
+
 If you're confident, click **Restore** to complete the operation.
 
-> Restoring overwrites all databases on the branch and interrupts connections briefly. A backup is created automatically so you can roll back.
+> A backup is created automatically so you can roll back.
 
----
+![Restore the data](/docs/guides/backup_restore_select_time.png)
 
-### Restore from a snapshot
+## Switch over to your restored branch
 
-You can also restore a branch from a snapshot. Snapshots are point-in-time copies of your branch that you can create manually or on a schedule.
+</Steps>
 
-#### Snapshot info panel
+
+
+## Create snapshots
+
+Snapshots are point-in-time copies of your branch that you can create manually.
+
+## Restore from a snapshot
 
 To restore from a snapshot:
 
-1. Select a branch.
-2. Choose a snapshot from the list.
-3. Review the snapshot metadata.
-4. Click **Restore**.
+1. Choose a snapshot from the list.
+1. Click **Restore**.
 
 A confirmation modal appears before applying changes.
 
@@ -87,11 +85,6 @@ These backup branches:
 - Can be reset from using **Reset from parent**
 - Do not consume compute unless you attach compute
 - Can be renamed for better organization
-
-### Deleting backup branches
-
-- Backup branches from restores on the **root branch** (e.g., `main`) can be deleted.
-- Backup branches from restores on **non-root branches** can't be deleted yet, but you can free up space by dropping databases/tables manually.
 
 
 ## Related docs
