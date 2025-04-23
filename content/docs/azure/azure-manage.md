@@ -35,6 +35,44 @@ In Azure, navigate to the **Projects** page and select **Create Project**.
 
 See [Create a project](/docs/manage/projects#create-a-project) for how to create a project from the Neon Console.
 
+## Creating branches
+
+In Neon, you can branch your database. A branch is an independent copy of your database that you can use for development or testing. It will not increase storage until you modify data or the branch falls out of your project's restore window. Changes made on a branch do not affect the parent database. To learn more, see [Branching](/docs/introduction/branching).
+
+You can create branches in the Azure Portal or the Neon Console. We'll cover branch creation in the Azure portal below. For Neon Console instructions, see [Create a branch](/docs/manage/branches#create-a-branch). 
+
+To create branches in the Azure Portal:
+
+1. Navigate to your Neon resource and select the **Projects** page.
+1. Select your Neon project. You should see your existing branches. 
+1. To create a new branch, select **Create branch** to open the **Create new branch** drawer.
+1. Specify a branch name, select the parent branch, and select an **Include data up to** option. You can include current data or data as it existing at a specified time.
+1. After making your selections, click **Create**.
+
+You now have an independent and isolated copy of your database with its own compute resources. For how to integrate branching into your developer workflow, see our [Database branching workflow primer](https://neon.tech/docs/get-started-with-neon/workflow-primer).
+
+
+## Deleting branches
+
+You can delete branches in the Azure Portal or the Neon Console. We'll cover branch deletion in the Azure Portal below. For Neon Console instructions, see [Delete a branch](/docs/manage/branches#delete-a-branch).
+
+Important points about branch deletion:
+- A branch deletion action cannot be undone.
+- You cannot delete a branch that has children. You need to delete any child branches first.
+
+To delete branches in the Azure Portal:
+
+1. Navigate to your Neon resource and select the **Projects** page.
+1. Select your Neon project. You should see your existing branches.
+1. Select the branch you want to delete.
+1. Select **Delete branch** to open the **Delete a branch** drawer. You'll need to type the branch name to confirm the deletion.
+1. Click **Delete** and confirm.
+
+## Connect to a database
+
+To connect to a database in Neon, you can use a Postgres database connection URL. You can find your database connection URL by navigating to 
+
+
 ## Transfer existing Neon projects to an Azure-created Neon organization
 
 You can transfer existing Neon projects to an Azure-created organization, but note these restrictions:
