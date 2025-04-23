@@ -22,6 +22,70 @@ import FormField from './form-field';
 import FormFooter from './form-footer';
 import SubmitButton from './submit-button';
 
+const emailValidationSchema = (field) => {
+  let schema = yup
+    .string()
+    .email('Please enter a valid email')
+    .required('Email address is a required field');
+
+  // Business email checking
+  if (field.validation?.useDefaultBlockList || field.validation?.data) {
+    schema = schema.test(checkBlacklistEmails(field));
+  }
+
+  return schema;
+};
+
+const fieldValidationSchema = (field) => {
+  // Handle email fields first
+  if (field.name.includes('email')) {
+    return { schema: emailValidationSchema(field) };
+  }
+
+  // Handle other field types
+  switch (field.fieldType) {
+    case 'radio':
+      return { schema: yup.string().notOneOf(['hidden'], 'Please choose an option') };
+
+    case 'checkbox':
+      return {
+        schema: yup
+          .array()
+          .min(1, 'Please choose at least one option')
+          .required('This field is required'),
+        defaultValue: [],
+      };
+
+    case 'text':
+      return { schema: yup.string().required('Please complete this required field.') };
+
+    default:
+      return { schema: yup.string().required('Please complete this required field.') };
+  }
+};
+
+const validationSchema = (fieldGroups) => {
+  const yupObject = {};
+  const defaultValues = {};
+
+  fieldGroups.forEach((group) => {
+    group.fields.forEach((field) => {
+      if (!field.required && !field.name.includes('email')) return;
+
+      const { schema, defaultValue } = fieldValidationSchema(field);
+      yupObject[field.name] = schema;
+      if (defaultValue !== undefined) {
+        defaultValues[field.name] = defaultValue;
+      }
+    });
+  });
+
+  return {
+    schema: yup.object(yupObject).required(),
+    defaultValues,
+  };
+};
+
 const Form = ({
   title,
   simpleField,
@@ -43,45 +107,7 @@ const Form = ({
     pageUri: href,
   };
 
-  const yupObject = {};
-  const defaultValues = {};
-  fieldGroups.forEach((group) => {
-    group.fields.forEach((field) => {
-      if (field.required || field.name.includes('email')) {
-        let yupField = yup;
-
-        if (field.fieldType === 'text') {
-          yupField = yupField.string();
-
-          if (field.name.includes('email')) {
-            yupField = yupField.email('Please enter a valid email');
-
-            // Business email checking
-            if (field.validation.useDefaultBlockList || field.validation.data) {
-              yupField = yupField.test(checkBlacklistEmails(field));
-            }
-          }
-        }
-
-        if (field.required) {
-          if (field.name.includes('email'))
-            yupField = yupField.required('Email address is a required field');
-          else if (field.fieldType === 'radio')
-            yupField = yupField.string().notOneOf(['hidden'], 'Please choose an option');
-          else if (field.fieldType === 'checkbox') {
-            defaultValues[field.name] = [];
-            yupField = yupField
-              .array()
-              .min(1, 'Please choose at least one option')
-              .required('This field is required');
-          } else yupField = yupField.required('Please complete this required field.');
-        }
-
-        yupObject[field.name] = yupField;
-      }
-    });
-  });
-  const yupSchema = yup.object(yupObject).required();
+  const { schema, defaultValues } = validationSchema(fieldGroups);
 
   const {
     register,
@@ -89,7 +115,7 @@ const Form = ({
     handleSubmit,
     formState: { isValid, errors },
   } = useForm({
-    resolver: yupResolver(yupSchema),
+    resolver: yupResolver(schema),
     defaultValues,
   });
 
