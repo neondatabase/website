@@ -62,7 +62,7 @@ CREATE EXTENSION IF NOT EXISTS pg_search;
 
     ```bash
     curl --request PATCH \
-        --url https://console.neon.tech/api/v2/projects/tight-sun-03508585 \
+        --url https://console.neon.tech/api/v2/projects/<your_project_id>> \
         --header 'accept: application/json' \
         --header 'authorization: Bearer $NEON_API_KEY' \
         --header 'content-type: application/json' \
