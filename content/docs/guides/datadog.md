@@ -41,7 +41,7 @@ The integration exports [a comprehensive set of metrics](#available-metrics) inc
 
 <FeatureBetaProps feature_name="Datadog logs export" />
 
-The Neon Datadog integration can forward Postgres logs to your Datadog account. These logs provide visibility into database activity, errors, and performance. See [Export Postgres logs to Datadog](#export-postgres-logs-to-datadog) for configuration options and details.
+The Neon Datadog integration can forward Postgres logs to your Datadog account. These logs provide visibility into database activity, errors, and performance. See [Export Postgres logs to Datadog](#export-postgres-logs-to-datadog) for details.
 
 ## Prerequisites
 
