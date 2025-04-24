@@ -181,16 +181,16 @@ If you're experimenting with an extension and run into trouble, we recommend che
 
 A preloaded library in Postgres is a shared library that must be loaded into memory when the Postgres server starts. These libraries are specified in your Postgres server's startup configuration using the `shared_preload_libraries` parameter and cannot be added dynamically after the server has started.
 
-Some Postgres extensions require preloaded libraries but most do not. Neon Postgres servers preload libraries for certain extensions by default. You can view currently loaded libraries by running the following command. 
+Some Postgres extensions require preloaded libraries but most do not. Neon Postgres servers preload libraries for certain extensions by default. You can view **currently enabled** libraries by running the following command. 
 
 ```sql shouldWrap
 SHOW shared_preload_libraries;
 neon,pg_stat_statements,timescaledb,pg_cron,pg_partman_bgw,rag_bge_small_en_v15,rag_jina_reranker_v1_tiny_en
 ```
 
-### Viewing libraries
+### Viewing available libraries
 
-You can also view libraries by running [List preloaded libraries](https://api-docs.neon.tech/reference/getavailablepreloadlibraries) API:
+You can view **available** libraries by running [List preloaded libraries](https://api-docs.neon.tech/reference/getavailablepreloadlibraries) API:
 
 ```bash
 curl --request GET \
@@ -203,7 +203,7 @@ The response body lists available libraries and whether the libraries are preloa
 
 - `library_name` — library name, typically named for the associated extension
 - `description` — a description of the extension
-- `is_default` — whether shared libraries are preloaded by default
+- `is_default` — whether shared libraries are enabled by default
 - `is_experimental` — whether the extensions is [experimental](#experimental-extensions)
 - `version` — the extension version
 
@@ -263,51 +263,41 @@ The response body lists available libraries and whether the libraries are preloa
 
 Important notes about preloaded libraries for Postgres extensions:
 
-- The libraries that Neon preloads may differ by Postgres version
-- Neon does not preload libraries for all extensions that have them
+- Available libraries and the ones Neon enables by default may differ by Postgres version
+- Neon does not enable libraries for all extensions that have them
 
-### Preloading libraries
+### Enabling preloaded libraries
 
-You can preload available libraries using the `preloaded_libraries` object in a [Create project](https://api-docs.neon.tech/reference/createproject) or [Update project](https://api-docs.neon.tech/reference/updateproject) API call. For example, this `Update project` call preloads libraries for the `pg_search` extension. When running this call, you have to provide a project ID a Neon API key.
-
-<Admonition type="important">
-Set `use_defaults` to `true` to preserve the libraries that Neon preloads by default.
-</Admonition>
-
-      ```bash
-      curl --request PATCH \
-          --url https://console.neon.tech/api/v2/projects/<your_project_id> \
-          --header 'accept: application/json' \
-          --header 'authorization: Bearer $NEON_API_KEY' \
-          --header 'content-type: application/json' \
-          --data '
-      {
-        "project": {
-          "settings": {
-            "preload_libraries": {
-              "use_defaults": true,
-              "enabled_libraries": [
-                "pg_search"
-              ]
-            }
-          }
-        }
-      }
-      '
-      ```
-
-After preloading libraries, a compute restart is required to apply the new configuration. You can do this using the [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API. Specify the same `project_id` used above. The `endpoint_id` should be for the compute attached to your database branch. **Please note that restarting your compute endpoint will drop current connections to your database.**
+You can enable preload available libraries using the `preloaded_libraries` object in a [Create project](https://api-docs.neon.tech/reference/createproject) or [Update project](https://api-docs.neon.tech/reference/updateproject) API call. For example, this `Update project` call enables the library for the `pg_search` extension, adding it to the list of currently enabled libraries. When running this call, you have to provide a [Neon project ID](/docs/reference/glossary#project-id) and a [Neon API key](/docs/manage/api-keys).
 
 ```bash
-curl --request POST \
-    --url https://console.neon.tech/api/v2/projects/<project_id>/endpoints/<endpoint_id>/restart \
+curl --request PATCH \
+    --url https://console.neon.tech/api/v2/projects/tight-sun-03508585 \
     --header 'accept: application/json' \
-    --header 'authorization: Bearer $NEON_API_KEY'
+    --header 'authorization: Bearer $NEON_API_KEY' \
+    --header 'content-type: application/json' \
+    --data '
+{
+  "project": {
+    "settings": {
+      "preload_libraries": {
+        "enabled_libraries": [
+          "neon","pg_stat_statements","timescaledb","pg_cron","pg_partman_bgw","rag_bge_small_en_v15,rag_jina_reranker_v1_tiny_en","pg_search"
+        ]
+      }
+    }
+  }
+}
+'
 ```
 
-<Admonition type="note">
-The [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API only works on an active compute. If your compute is idle, you can start it by running a query to wake it up or running the [Start compute endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API. For more information and other compute restart options, see [Restart a compute](/docs/manage/endpoints#restart-a-compute).
-</Admonition>
+When running a `Create project` or `Update project` API:
+    
+  - Library names must be quoted, comma-separated, and specified in a single string.
+  - Specify all libraries that should be enabled. If a library is not included in the API call, it will not remain enabled
+  - The `use_defaults": true` option overrides the `"enabled_libraries"` option, enabling only default libraries
+  - The `neon` and `pg_stat_statements` libraries will remain enabled whether you include them in your command or not — they're used by a Neon system-managed database.
+  - If you do not use one of the currently enabled libraries, you can exclude it from your API call. For example, if you do not use the `pgrag` extension, you can exclude `"rag_bge_small_en_v15,rag_jina_reranker_v1_tiny_en"` from your API call. 
 
 ## Extension notes
 

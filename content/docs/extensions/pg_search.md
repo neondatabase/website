@@ -36,13 +36,33 @@ CREATE EXTENSION IF NOT EXISTS pg_search;
 
 <TabItem>
 
-1. **Load the required pg_search libraries**
+1. **Enable the required pg_search libraries**
 
-    Load the required `pg_search` libraries into your Neon project by running this [Update project](https://api-docs.neon.tech/reference/updateproject) API call from your terminal. You will need to specify your [Neon project ID](/docs/reference/glossary#project-id) and your [Neon API key](/docs/manage/api-keys).
+    Enable the required `pg_search` library in your Neon project using the [Update project](https://api-docs.neon.tech/reference/updateproject) API. You will need your [Neon project ID](/docs/reference/glossary#project-id) and your [Neon API key](/docs/manage/api-keys). 
+
+    <Admonition type="important">
+    When you enable a library using the `Update project` command, you must specify **all libraries** that should remain enabled. To get a list of currently enabled libraries, run `SHOW shared_preload_libraries;` from an SQL client. The result should look something like this:
+
+        ```sql shouldWrap
+        SHOW shared_preload_libraries;
+        neon,pg_stat_statements,timescaledb,pg_cron,pg_partman_bgw,rag_bge_small_en_v15,rag_jina_reranker_v1_tiny_en
+        ```
+
+    You need to add `pg_search` to the list. 
+    
+    When running the `Update project` API:
+    
+    - Library names must be quoted, comma-separated, and specified in a single string, as in the example below.
+    - Specify all libraries that should be enabled. If a library is not included in the `Update project` API call, it will not remain enabled
+    - The `neon` and `pg_stat_statements` libraries will remain enabled whether you include them in your command or not — they're used by a Neon system-managed database.
+    - If you do not use one of the currently enabled libraries, you can exclude it from your API call. For example, if you do not use the `pgrag` extension, you can exclude `"rag_bge_small_en_v15,rag_jina_reranker_v1_tiny_en"` from your API call. 
+    </Admonition>
+
+    This API call adds the `pg_search` library to the list of currently enabled libraries.
 
       ```bash
       curl --request PATCH \
-          --url https://console.neon.tech/api/v2/projects/<your_project_id> \
+          --url https://console.neon.tech/api/v2/projects/tight-sun-03508585 \
           --header 'accept: application/json' \
           --header 'authorization: Bearer $NEON_API_KEY' \
           --header 'content-type: application/json' \
@@ -51,9 +71,8 @@ CREATE EXTENSION IF NOT EXISTS pg_search;
         "project": {
           "settings": {
             "preload_libraries": {
-              "use_defaults": true,
               "enabled_libraries": [
-                "pg_search"
+                "neon","pg_stat_statements","timescaledb","pg_cron","pg_partman_bgw","rag_bge_small_en_v15,rag_jina_reranker_v1_tiny_en","pg_search"
               ]
             }
           }
@@ -62,20 +81,16 @@ CREATE EXTENSION IF NOT EXISTS pg_search;
       '
       ```
 
-2. Restart your compute to apply the new setting. You can do this using the [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API. Use the same `project_id` as above and provide the `endpoint_id` for the compute associated with your database branch. **Please note that restarting your compute endpoint will drop current connections to your database.**
+1. **Check to make sure the `pg_search` extension is enabled**
 
-    ```bash
-    curl --request POST \
-        --url https://console.neon.tech/api/v2/projects/<project_id>/endpoints/<endpoint_id>/restart \
-        --header 'accept: application/json' \
-        --header 'authorization: Bearer $NEON_API_KEY'
+    Run the following command to make sure `pg_search` was added to the list of enabled libraries.
+
+    ```sql shouldWrap
+    SHOW shared_preload_libraries;
+    neon,pg_stat_statements,timescaledb,pg_cron,pg_partman_bgw,rag_bge_small_en_v15,rag_jina_reranker_v1_tiny_en,pg_search
     ```
 
-    <Admonition type="note">
-    The [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API only works on an active compute. If your compute is idle, you can start it by running a query to wake it up or running the [Start compute endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API. For more information and other compute restart options, see [Restart a compute](/docs/manage/endpoints#restart-a-compute).
-    </Admonition>
-
-3. **Install the pg_search extension**
+1. **Install the `pg_search` extension**
 
     Install the `pg_search` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
