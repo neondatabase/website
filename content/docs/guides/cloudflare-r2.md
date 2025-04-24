@@ -32,6 +32,26 @@ This guide demonstrates how to integrate Cloudflare R2 with Neon by storing file
     Public access makes all objects readable via URL; consider private buckets and signed URLs for sensitive data in production.
     </Admonition>
 
+## Configure CORS for client-side uploads
+
+If your application involves uploading files **directly from a web browser** using the generated presigned URLs, you must configure Cross-Origin Resource Sharing (CORS) on your R2 bucket. CORS rules tell R2 which web domains are allowed to make requests (like `PUT` requests for uploads) to your bucket. Without proper CORS rules, browser security restrictions will block these direct uploads.
+
+Follow Cloudflare's guide to [Configure CORS](https://developers.cloudflare.com/r2/buckets/cors/) for your bucket. You can add rules via R2 Bucket settings in the Cloudflare dashboard.
+
+Here’s an example CORS configuration allowing `PUT` uploads and `GET` requests from your deployed frontend application and your local development environment:
+
+```json
+[
+  {
+    "AllowedOrigins": [
+      "https://your-production-app.com", // Replace with your actual frontend domain
+      "http://localhost:3000" // For local development
+    ],
+    "AllowedMethods": ["PUT", "GET"]
+  }
+]
+```
+
 ## Create a table in Neon for file metadata
 
 We need a table in Neon to store metadata about the objects uploaded to R2.
@@ -55,26 +75,6 @@ If you use [Neon's Row Level Security (RLS)](https://neon.tech/blog/introducing-
 
 Note that these policies apply _only_ to the metadata in Neon. Access control for the objects within the R2 bucket itself is managed via R2 permissions, API tokens, and presigned URL settings if used.
 </Admonition>
-
-## Configure CORS for client-side uploads
-
-If your application involves uploading files **directly from a web browser** using the generated presigned URLs, you must configure Cross-Origin Resource Sharing (CORS) on your R2 bucket. CORS rules tell R2 which web domains are allowed to make requests (like `PUT` requests for uploads) to your bucket. Without proper CORS rules, browser security restrictions will block these direct uploads.
-
-Follow Cloudflare's guide to [Configure CORS](https://developers.cloudflare.com/r2/buckets/cors/) for your bucket. You can add rules via R2 Bucket settings in the Cloudflare dashboard.
-
-Here’s an example CORS configuration allowing `PUT` uploads and `GET` requests from your deployed frontend application and your local development environment:
-
-```json
-[
-  {
-    "AllowedOrigins": [
-      "https://your-production-app.com", // Replace with your actual frontend domain
-      "http://localhost:3000" // For local development
-    ],
-    "AllowedMethods": ["PUT", "GET"]
-  }
-]
-```
 
 ## Upload files to R2 and store metadata in Neon
 
@@ -261,10 +261,10 @@ app = Flask(__name__)
 def get_db_connection():
     return psycopg2.connect(DATABASE_URL)
 
-# Replace this with your actual user authentication logic, by validating JWTs/Headers, etc.
+# Replace this with your actual user authentication logic
 def get_authenticated_user_id(request):
-    print("[Auth Placeholder] Using mock User ID: user_123")
-    return "user_123" # Example: Get user ID after validation
+    # Example: Validate Authorization header, session cookie, etc.
+    return "user_123"  # Static ID for demonstration
 
 # 1. Generate Presigned URL for Upload
 @app.route("/presign-upload", methods=["POST"])

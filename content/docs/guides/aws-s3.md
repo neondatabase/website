@@ -31,11 +31,29 @@ This guide demonstrates how to integrate AWS S3 with Neon by storing file metada
      Making buckets or objects publicly readable carries security risks. For production applications, it's strongly recommended to:
      1. Keep buckets **private** (Block all public access enabled).
      2. Use **presigned URLs** not only for uploads but also for *downloads* (temporary read access).
-     3. Alternatively, serve private S3 content through a CDN like **Amazon CloudFront** with Origin Access Control (OAC).
      This guide uses public access for simplicity, but you should implement secure access controls in production.
     </Admonition>
 
-5.  **Create IAM user for programmatic access:**
+5.  After the bucket is created, navigate to the **Permissions** tab. Under **Bucket Policy**, you can set up a policy to allow public read access to objects. For example:
+
+    ```json
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "PublicReadGetObject",
+          "Effect": "Allow",
+          "Principal": "*",
+          "Action": "s3:GetObject",
+          "Resource": "arn:aws:s3:::my-neon-app-s3-uploads/*"
+        }
+      ]
+    }
+    ```
+
+    Replace `my-neon-app-s3-uploads` with your actual bucket name.
+
+6.  **Create IAM user for programmatic access:**
     - Navigate to the **IAM** service in the AWS Console.
     - Go to **Users** and click **Add users**.
     - Enter a username (e.g., `neon-app-s3-user`). Select **Access key - Programmatic access** as the credential type. Click **Next: Permissions**.
@@ -45,6 +63,26 @@ This guide demonstrates how to integrate AWS S3 with Neon by storing file metada
     - Click on **Create access key**.
       ![Create Access Key](/docs/guides/aws-s3-create-access-key.png)
     - Click **Other** >> **Create access key**. Copy the **Access key ID** and **Secret access key**. These will be used in your application to authenticate with AWS S3.
+
+## Configure CORS for client-side uploads
+
+If your application involves uploading files **directly from a web browser** using the generated presigned URLs, you must configure Cross-Origin Resource Sharing (CORS) on your S3 bucket. CORS rules tell S3 which web domains are allowed to make requests (like `PUT` requests for uploads) to your bucket. Without proper CORS rules, browser security restrictions will block these direct uploads.
+
+In your S3 bucket settings, navigate to the **Permissions** tab and find the **CORS configuration** section. Add the following CORS rules:
+
+```json
+[
+  {
+    "AllowedHeaders": ["*"],
+    "AllowedMethods": ["GET", "PUT"],
+    "AllowedOrigins": ["*"],
+    "ExposeHeaders": [],
+    "MaxAgeSeconds": 9000
+  }
+]
+```
+
+This configuration allows any origin (`*`) to perform `GET` and `PUT` requests. In a production environment, you should restrict `AllowedOrigins` to your application's domain(s) for security.
 
 ## Create a table in Neon for file metadata
 
@@ -219,6 +257,7 @@ The following code snippet demonstrates this workflow:
 ```python
 import os
 import uuid
+
 import boto3
 import psycopg2
 from botocore.exceptions import ClientError
@@ -230,22 +269,23 @@ load_dotenv()
 S3_BUCKET_NAME = os.getenv("S3_BUCKET_NAME")
 AWS_REGION = os.getenv("AWS_REGION")
 s3_client = boto3.client(
-    service_name='s3',
+    service_name="s3",
     region_name=AWS_REGION,
     aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"),
-    aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY")
+    aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY"),
 )
 
 app = Flask(__name__)
+
 
 # Use a global PostgreSQL connection instead of creating a new one for each request in production
 def get_db_connection():
     return psycopg2.connect(os.getenv("DATABASE_URL"))
 
-# Replace this with your actual user authentication logic, by validating JWTs/Headers, etc.
+# Replace this with your actual user authentication logic
 def get_authenticated_user_id(request):
-    print("[Auth Placeholder] Using mock User ID: user_123")
-    return "user_123"
+    # Example: Validate Authorization header, session cookie, etc.
+    return "user_123"  # Static ID for demonstration
 
 # 1. Generate Presigned URL for Upload
 @app.route("/presign-upload", methods=["POST"])
@@ -253,28 +293,39 @@ def presign_upload_route():
     try:
         user_id = get_authenticated_user_id(request)
         data = request.get_json()
-        file_name = data.get('fileName')
-        content_type = data.get('contentType')
+        file_name = data.get("fileName")
+        content_type = data.get("contentType")
         if not file_name or not content_type:
-             raise ValueError("fileName and contentType required")
+            raise ValueError("fileName and contentType required")
 
         object_key = f"{uuid.uuid4()}-{file_name}"
-        public_file_url = f"https://{S3_BUCKET_NAME}.s3.{AWS_REGION}.amazonaws.com/{object_key}"
+        public_file_url = (
+            f"https://{S3_BUCKET_NAME}.s3.{AWS_REGION}.amazonaws.com/{object_key}"
+        )
 
         presigned_url = s3_client.generate_presigned_url(
-            'put_object',
+            "put_object",
             Params={
-                'Bucket': S3_BUCKET_NAME,
-                'Key': object_key,
-                'ContentType': content_type
+                "Bucket": S3_BUCKET_NAME,
+                "Key": object_key,
+                "ContentType": content_type,
             },
-            ExpiresIn=300
+            ExpiresIn=300,
         )
-        return jsonify({ "success": True, "presignedUrl": presigned_url, "objectKey": object_key, "publicFileUrl": public_file_url }), 200
+        return jsonify(
+            {
+                "success": True,
+                "presignedUrl": presigned_url,
+                "objectKey": object_key,
+                "publicFileUrl": public_file_url,
+            }
+        ), 200
 
     except (ClientError, ValueError) as e:
         print(f"Presign Error: {e}")
-        return jsonify({"success": False, "error": f"Failed to prepare upload: {e}"}), 500
+        return jsonify(
+            {"success": False, "error": f"Failed to prepare upload: {e}"}
+        ), 500
     except Exception as e:
         print(f"Unexpected Presign Error: {e}")
         return jsonify({"success": False, "error": "Server error"}), 500
@@ -288,9 +339,10 @@ def save_metadata_route():
     try:
         user_id = get_authenticated_user_id(request)
         data = request.get_json()
-        object_key = data.get('objectKey')
-        public_file_url = data.get('publicFileUrl')
-        if not object_key: raise ValueError("objectKey required")
+        object_key = data.get("objectKey")
+        public_file_url = data.get("publicFileUrl")
+        if not object_key:
+            raise ValueError("objectKey required")
 
         conn = get_db_connection()
         cursor = conn.cursor()
@@ -303,7 +355,9 @@ def save_metadata_route():
         return jsonify({"success": True}), 201
     except (psycopg2.Error, ValueError) as e:
         print(f"Metadata Save Error: {e}")
-        return jsonify({"success": False, "error": f"Failed to save metadata: {e}"}), 500
+        return jsonify(
+            {"success": False, "error": f"Failed to save metadata: {e}"}
+        ), 500
     except Exception as e:
         print(f"Unexpected Metadata Save Error: {e}")
         return jsonify({"success": False, "error": "Server error"}), 500
@@ -311,9 +365,10 @@ def save_metadata_route():
         if cursor: cursor.close()
         if conn: conn.close()
 
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 3000))
-    app.run(host='0.0.0.0', port=port, debug=True)
+    app.run(host="0.0.0.0", port=port, debug=True)
 ```
 
 **Explanation**
@@ -342,7 +397,18 @@ Testing the presigned URL flow involves multiple steps:
          -d '{"fileName": "test-s3.txt", "contentType": "text/plain"}'
     ```
 
-    Note the `presignedUrl`, `objectKey`, and `publicFileUrl` from the response.
+    You should receive a JSON response with a `presignedUrl`, `objectKey`, and `publicFileUrl`:
+
+    ```json
+    {
+      "success": true,
+      "presignedUrl": "https://<BUCKET_NAME>.s3.us-east-1.amazonaws.com/.....&x-id=PutObject",
+      "objectKey": "<OBJECT_KEY>",
+      "publicFileUrl": "https://<BUCKET_NAME>.s3.us-east-1.amazonaws.com/<OBJECT_KEY>"
+    }
+    ```
+
+    Note the `presignedUrl`, `objectKey`, and `publicFileUrl` from the response. You will use these in the next steps.
 
 2.  **Upload file to S3:** Use the received `presignedUrl` to upload the actual file using an HTTP `PUT` request.
     **Using cURL:**
@@ -362,7 +428,10 @@ Testing the presigned URL flow involves multiple steps:
          -H "Content-Type: application/json" \
          -d '{"objectKey": "<OBJECT_KEY>", "publicFileUrl": "<PUBLIC_URL>"}'
     ```
-    You should receive `{"success": true}`.
+    You should receive a JSON response indicating success:
+    ```json
+    { "success": true }
+    ```
 
 **Expected outcome:**
 

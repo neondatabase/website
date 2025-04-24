@@ -115,7 +115,7 @@ const authMiddleware = async (c, next) => {
   await next();
 };
 
-// 1. Generate Signature for Client-Side Upload
+// 1. Generate signature for client-side upload
 app.get('/generate-signature', authMiddleware, (c) => {
   try {
     const timestamp = Math.round(new Date().getTime() / 1000);
@@ -138,21 +138,21 @@ app.get('/generate-signature', authMiddleware, (c) => {
   }
 });
 
-// 2. Save Metadata after Client confirms successful upload to Cloudinary
+// 2. Save metadata after client confirms successful upload to Cloudinary
 app.post('/save-metadata', authMiddleware, async (c) => {
   try {
     const userId = c.get('userId');
     // Client sends metadata received from Cloudinary after upload
-    const { public_id, media_url, resource_type } = await c.req.json();
+    const { public_id, secure_url, resource_type } = await c.req.json();
 
-    if (!public_id || !media_url || !resource_type) {
-      throw new Error('public_id, media_url, and resource_type are required');
+    if (!public_id || !secure_url || !resource_type) {
+      throw new Error('public_id, secure_url, and resource_type are required');
     }
 
     // Insert metadata into Neon database
     await sql`
       INSERT INTO cloudinary_files (public_id, media_url, resource_type, user_id)
-      VALUES (${public_id}, ${media_url}, ${resource_type}, ${userId})
+      VALUES (${public_id}, ${secure_url}, ${resource_type}, ${userId})
     `;
 
     console.log(`Metadata saved for Cloudinary asset: ${public_id}`);
@@ -173,9 +173,9 @@ serve({ fetch: app.fetch, port }, (info) => {
 
 1.  **Setup:** Initializes the Neon client (`sql`), Hono (`app`), and configures the Cloudinary Node.js SDK using environment variables.
 2.  **Authentication:** Includes a placeholder `authMiddleware`. **Replace this with your actual user authentication logic.**
-3.  **API Endpoints:**
+3.  **API endpoints:**
     - **`/generate-signature` (GET):** Creates a current `timestamp`. Uses `cloudinary.utils.api_sign_request` with the parameters to sign (at minimum, the timestamp) and your `API Secret` to generate a `signature`. It returns the `signature`, `timestamp`, and your `API Key` to the client. These are needed for the client's direct upload request to Cloudinary.
-    - **`/save-metadata` (POST):** Called by the client _after_ a successful direct upload to Cloudinary. The client sends the relevant asset metadata received from Cloudinary (`public_id`, `media_url`, `resource_type`). The endpoint saves this information, along with the `userId`, into the `cloudinary_files` table in Neon.
+    - **`/save-metadata` (POST):** Called by the client _after_ a successful direct upload to Cloudinary. The client sends the relevant asset metadata received from Cloudinary (`public_id`, `secure_url`, `resource_type`). The endpoint saves this information, along with the `userId`, into the `cloudinary_files` table in Neon.
 
 </TabItem>
 
@@ -236,7 +236,7 @@ def get_authenticated_user_id(request):
     return "user_123"  # Static ID for demonstration
 
 
-# 1. Generate Signature for Client-Side Upload
+# 1. Generate signature for client-side upload
 @app.route("/generate-signature", methods=["GET"])
 def generate_signature_route():
     try:
@@ -268,7 +268,7 @@ def generate_signature_route():
         return jsonify({"success": False, "error": "Failed to generate signature"}), 500
 
 
-# 2. Save Metadata after Client confirms successful upload to Cloudinary
+# 2. Save metadata after client confirms successful upload to Cloudinary
 @app.route("/save-metadata", methods=["POST"])
 def save_metadata_route():
     conn = None
@@ -281,11 +281,11 @@ def save_metadata_route():
         # Client sends metadata received from Cloudinary after upload
         data = request.get_json()
         public_id = data.get("public_id")
-        media_url = data.get("media_url")
+        secure_url = data.get("secure_url")
         resource_type = data.get("resource_type")
 
-        if not public_id or not media_url or not resource_type:
-            raise ValueError("public_id, media_url, and resource_type are required")
+        if not public_id or not secure_url or not resource_type:
+            raise ValueError("public_id, secure_url, and resource_type are required")
 
         # Insert metadata into Neon database
         conn = get_db_connection()
@@ -295,11 +295,11 @@ def save_metadata_route():
             INSERT INTO cloudinary_files (public_id, media_url, resource_type, user_id)
             VALUES (%s, %s, %s, %s)
             """,
-            (public_id, media_url, resource_type, user_id),
+            (public_id, secure_url, resource_type, user_id),
         )
         conn.commit()
         print(f"Metadata saved for Cloudinary asset: {public_id}")
-        return jsonify({"success": True}), 201  # 201 Created
+        return jsonify({"success": True}), 201
 
     except (psycopg2.Error, ValueError) as e:
         print(f"Metadata Save Error: {e}")
@@ -325,9 +325,9 @@ if __name__ == "__main__":
 
 1.  **Setup:** Initializes Flask (`app`), the database connection function, and configures the Cloudinary Python SDK using environment variables.
 2.  **Authentication:** Includes a placeholder `get_authenticated_user_id` function. **Replace this with your actual user authentication logic.**
-3.  **API Endpoints:**
+3.  **API endpoints:**
     - **`/generate-signature` (GET):** Gets the current `timestamp`. Uses `cloudinary.utils.api_sign_request` with the parameters to sign and your `API Secret` to generate the `signature`. Returns the `signature`, `timestamp`, and `API Key` to the client.
-    - **`/save-metadata` (POST):** Called by the client _after_ a successful direct upload to Cloudinary. It receives asset metadata from the client, validates required fields (`public_id`, `media_url`, `resource_type`), and saves this along with the `userId` into the `cloudinary_files` table using `psycopg2`.
+    - **`/save-metadata` (POST):** Called by the client _after_ a successful direct upload to Cloudinary. It receives asset metadata from the client, validates required fields (`public_id`, `secure_url`, `resource_type`), and saves this along with the `userId` into the `cloudinary_files` table using `psycopg2`.
 4.  **Database Connection:** The example shows creating a new connection per request. In production, use a global connection pool for better performance.
 
 </TabItem>
@@ -344,18 +344,18 @@ This workflow involves getting a signature from your backend, using it to upload
     curl -X GET http://localhost:3000/generate-signature
     ```
 
-    **Expected response:** A JSON object with the `signature`, `timestamp`, and `api_key`. This is used for the upload.
+    **Expected response:** A JSON object with the `signature`, `timestamp`, and `api_key`.
 
     ```json
     {
       "success": true,
-      "signature": "SIGNATURE_FROM_SERVER",
-      "timestamp": 1678886500,
-      "api_key": "YOUR_API_KEY"
+      "signature": "a1b2c3d4e5f6...",
+      "timestamp": 1713999600,
+      "api_key": "YOUR_CLOUDINARY_API_KEY"
     }
     ```
 
-2.  **Upload file directly to Cloudinary:** Use the obtained `signature`, `timestamp`, `api_key`, and the file path to send a `POST` request with `multipart/form-data` directly to the Cloudinary Upload API. The URL includes your Cloud Name.
+2.  **Upload file directly to Cloudinary:** Use the obtained `signature`, `timestamp`, `api_key`, and the file path to send a `POST` request with `multipart/form-data` directly to the Cloudinary Upload API. The URL includes your **Cloud Name**.
 
     ```bash
     curl -X POST https://api.cloudinary.com/v1_1/<YOUR_CLOUD_NAME>/image/upload \
@@ -369,27 +369,26 @@ This workflow involves getting a signature from your backend, using it to upload
 
     ```json
     {
-      "asset_id": "<ASSET_ID>",
+      "asset_id": "...",
       "public_id": "<PUBLIC_ID>",
-      "version": 1745473026,
-      "version_id": "<VERSION_ID>",
-      "signature": "<SIGNATURE>",
-      "width": 1024,
-      "height": 1024,
+      "version": 1713999601,
+      "version_id": "...",
+      "signature": "...",
+      "width": 800,
+      "height": 600,
       "format": "jpg",
       "resource_type": "image",
       "created_at": "2025-04-24T05:37:06Z",
       "tags": [],
-      "bytes": 377253,
+      "bytes": 123456,
       "type": "upload",
-      "etag": "<ETAG>",
+      "etag": "...",
       "placeholder": false,
-      "url": "<HTTP_VERSIONED_URL_OF_THE_UPLOADED_FILE>",
-      "secure_url": "<SECURE_URL_OF_THE_UPLOADED_FILE>",
+      "url": "http://res.cloudinary.com/<YOUR_CLOUD_NAME>/image/upload/v1713999601/sample_image_123.jpg",
+      "secure_url": "https://res.cloudinary.com/<YOUR_CLOUD_NAME>/image/upload/v1713999601/sample_image_123.jpg",
       "folder": "",
-      "original_filename": "<YOUR_FILE_NAME>",
-      "original_extension": "jpeg",
-      "api_key": "114767291214483"
+      "original_filename": "test-image",
+      "api_key": "YOUR_CLOUDINARY_API_KEY"
     }
     ```
 
@@ -402,7 +401,7 @@ This workflow involves getting a signature from your backend, using it to upload
          -H "Content-Type: application/json" \
          -d '{
               "public_id": "<PUBLIC_ID_FROM_STEP_2>",
-              "media_url": "<secure_url_FROM_STEP_2>",
+              "secure_url": "<SECURE_URL_FROM_STEP_2>",
               "resource_type": "<RESOURCE_TYPE_FROM_STEP_2>"
             }'
     ```
@@ -415,7 +414,7 @@ This workflow involves getting a signature from your backend, using it to upload
 
 **Expected outcome:**
 
-- The file is successfully uploaded to your Cloudinary account.
+- The file is successfully uploaded to your Cloudinary account (visible in the Media Library).
 - A new row corresponding to the uploaded asset exists in your `cloudinary_files` table in Neon.
 
 ## Accessing file metadata and files
@@ -426,13 +425,13 @@ Query the `cloudinary_files` table from your application's backend whenever you 
 
 **Example SQL query:**
 
-Retrieve files associated with a specific user:
+Retrieve media files associated with a specific user:
 
 ```sql
 SELECT
     id,
     public_id,      -- Cloudinary Public ID
-    media_url,     -- HTTPS URL for the asset
+    media_url,      -- HTTPS URL for the asset
     resource_type,
     user_id,
     upload_timestamp
@@ -446,7 +445,7 @@ WHERE
 
 - The query returns metadata stored in Neon.
 - The `media_url` is the direct CDN link to the asset.
-- **Cloudinary Transformations:** Cloudinary excels at on-the-fly transformations. You can manipulate the asset by modifying the `media_url`. Parameters are inserted between the `/upload/` part and the version/public_id part. For example, to get a 300px wide, cropped version: `https://res.cloudinary.com/<CLOUD_NAME>/image/upload/w_300,c_fill/v<VERSION>/<PUBLIC_ID>.<FORMAT>`. Explore the extensive [Cloudinary transformation documentation](https://cloudinary.com/documentation/image_transformations).
+- **Cloudinary transformations:** Cloudinary excels at on-the-fly transformations. You can manipulate the asset by modifying the `media_url`. Parameters are inserted between the `/upload/` part and the version/public_id part of the URL. For example, to get a 300px wide, cropped version: `https://res.cloudinary.com/<CLOUD_NAME>/image/upload/w_300,c_fill/v<VERSION>/<PUBLIC_ID>.<FORMAT>`. Explore the extensive [Cloudinary transformation documentation](https://cloudinary.com/documentation/image_transformations).
 
 This pattern effectively separates media storage, processing, and delivery (handled by Cloudinary) from structured metadata management (handled by Neon), leveraging the strengths of both services.
 
@@ -454,8 +453,8 @@ This pattern effectively separates media storage, processing, and delivery (hand
 
 ## Resources
 
-- [Cloudinary Documentation](https://cloudinary.com/documentation)
-- [Cloudinary Upload Docs](https://cloudinary.com/documentation/upload_images)
+- [Cloudinary documentation](https://cloudinary.com/documentation)
+- [Cloudinary Upload API reference](https://cloudinary.com/documentation/image_upload_api_reference)
 - [Neon Documentation](/docs/introduction)
 - [Neon RLS](/docs/guides/neon-rls)
 
