@@ -108,7 +108,7 @@ const authMiddleware = async (c, next) => {
   await next();
 };
 
-// 1. Generate Authentication Parameters for Client-Side Upload
+// 1. Generate authentication parameters for client-side upload
 app.get('/generate-auth-params', authMiddleware, (c) => {
   try {
     const authParams = imagekit.getAuthenticationParameters();
@@ -121,7 +121,7 @@ app.get('/generate-auth-params', authMiddleware, (c) => {
   }
 });
 
-// 2. Save Metadata after Client confirms successful upload to ImageKit
+// 2. Save metadata after client confirms successful upload to ImageKit
 app.post('/save-metadata', authMiddleware, async (c) => {
   try {
     const userId = c.get('userId');
@@ -155,7 +155,7 @@ serve({ fetch: app.fetch, port }, (info) => {
 
 1.  **Setup:** Initializes the Neon database client (`sql`), the Hono web framework (`app`), and the ImageKit Node.js SDK (`imagekit`) using credentials from environment variables.
 2.  **Authentication:** Includes a placeholder `authMiddleware`. **Replace this with your actual user authentication logic** to ensure only authenticated users can generate upload parameters and save metadata.
-3.  **API Endpoints:**
+3.  **API endpoints:**
     - **`/generate-auth-params` (GET):** Uses the ImageKit SDK's `getAuthenticationParameters()` method to create a short-lived `token`, `expire` timestamp, and `signature`. These are returned to the client.
     - **`/save-metadata` (POST):** This endpoint is called by the client _after_ it has successfully uploaded a file directly to ImageKit's Upload API. The client sends the relevant metadata returned by ImageKit (like `fileId`, `url`, `thumbnailUrl`, etc.). The endpoint then inserts this metadata, along with the authenticated `userId`, into the `imagekit_files` table in Neon.
 
@@ -216,7 +216,7 @@ def get_authenticated_user_id(request):
     return "user_123"  # Static ID for demonstration
 
 
-# 1. Generate Authentication Parameters for Client-Side Upload
+# 1. Generate authentication parameters for client-side upload
 @app.route("/generate-auth-params", methods=["GET"])
 def generate_auth_params_route():
     try:
@@ -231,7 +231,7 @@ def generate_auth_params_route():
                 "success": True,
                 "token": auth_params["token"],
                 "expire": auth_params["expire"],
-                "signature": auth_params["signature"],
+                "signature": auth_params["signature"]
             }
         ), 200
 
@@ -243,7 +243,7 @@ def generate_auth_params_route():
         )
 
 
-# 2. Save Metadata after Client confirms successful upload to ImageKit
+# 2. Save metadata after client confirms successful upload to ImageKit
 @app.route("/save-metadata", methods=["POST"])
 def save_metadata_route():
     conn = None
@@ -298,7 +298,7 @@ if __name__ == "__main__":
 
 1.  **Setup:** Initializes the Flask web framework (`app`), the PostgreSQL client function (`get_db_connection`), and the ImageKit Python SDK (`imagekit`) using environment variables.
 2.  **Authentication:** Includes a placeholder `get_authenticated_user_id` function. **Replace this with your actual user authentication logic.**
-3.  **API Endpoints:**
+3.  **API endpoints:**
     - **`/generate-auth-params` (GET):** Uses the ImageKit SDK's `get_authentication_parameters()` method to create `token`, `expire`, and `signature`. These are returned to the client, usually as JSON.
     - **`/save-metadata` (POST):** Called by the client _after_ it has successfully uploaded a file directly to ImageKit. The client provides the metadata returned by ImageKit. The backend validates the required fields and inserts the data along with the `userId` into the `imagekit_files` table in Neon using `psycopg2`.
 4.  **Database Connection:** The example shows creating a new connection per request. In production, use a connection pool (like `psycopg2.pool`) for better performance.
@@ -311,13 +311,13 @@ if __name__ == "__main__":
 
 This workflow involves getting authentication parameters from your backend, using those parameters to upload the file directly to ImageKit via `curl`, and then notifying your backend to save the metadata.
 
-1.  **Get Authentication Parameters:** Send a `GET` request to your backend's `/generate-auth-params` endpoint.
+1.  **Get authentication parameters:** Send a `GET` request to your backend's `/generate-auth-params` endpoint.
 
     ```bash
     curl -X GET http://localhost:3000/generate-auth-params
     ```
 
-    **Expected Response:** A JSON object containing the necessary parameters. For example:
+    **Expected response:** A JSON object containing the necessary parameters. For example:
 
     ```json
     {
@@ -328,7 +328,7 @@ This workflow involves getting authentication parameters from your backend, usin
     }
     ```
 
-2.  **Upload File Directly to ImageKit:** Use the parameters obtained in Step 1, your **ImageKit Public Key**, and the file path to send a `POST` request with `multipart/form-data` directly to the ImageKit Upload API.
+2.  **Upload file directly to ImageKit:** Use the parameters obtained in Step 1, your **ImageKit Public Key**, and the file path to send a `POST` request with `multipart/form-data` directly to the ImageKit Upload API.
 
     ```bash
     curl -X POST https://upload.imagekit.io/api/v1/files/upload \
@@ -341,7 +341,7 @@ This workflow involves getting authentication parameters from your backend, usin
          -F "useUniqueFileName=true"
     ```
 
-    **Expected Response (from ImageKit):** A successful upload returns a JSON object with details about the uploaded file. Note the `fileId`, `url`, etc.
+    **Expected response (from ImageKit):** A successful upload returns a JSON object with details about the uploaded file. Note the `fileId`, `url`, etc.
 
     ```json
     {
@@ -362,7 +362,7 @@ This workflow involves getting authentication parameters from your backend, usin
     }
     ```
 
-3.  **Save Metadata:** Send a `POST` request to your backend's `/save-metadata` endpoint, providing the key details (like `fileId`, `url`) received from ImageKit in Step 2.
+3.  **Save metadata:** Send a `POST` request to your backend's `/save-metadata` endpoint, providing the key details (like `fileId`, `url`) received from ImageKit in Step 2.
 
     ```bash
     curl -X POST http://localhost:3000/save-metadata \
@@ -373,7 +373,7 @@ This workflow involves getting authentication parameters from your backend, usin
             }'
     ```
 
-    **Expected Response (from your backend):**
+    **Expected response (from your backend):**
 
     ```json
     {
@@ -381,15 +381,12 @@ This workflow involves getting authentication parameters from your backend, usin
     }
     ```
 
-**Expected Outcome (End-to-End with `curl`):**
+**Expected outcome:**
 
-- The call to `/generate-auth-params` succeeds.
-- The direct `POST` call to ImageKit using the obtained parameters and file uploads the file successfully and returns its details.
-- The call to `/save-metadata` with the details from ImageKit succeeds.
-- You can verify the file exists in your ImageKit Media Library.
+- The file gets uploaded to your ImageKit Media Library.
 - You can verify a new row corresponding to the uploaded file exists in your `imagekit_files` table in Neon.
 
-## Accessing File Metadata and Files
+## Accessing file metadata and files
 
 With metadata stored in Neon, your application can easily retrieve references to the media hosted on ImageKit.io.
 
@@ -416,7 +413,7 @@ WHERE
 
 - The query returns rows containing the file metadata stored in Neon.
 - The `file_url` is the direct link to the file on ImageKit's CDN. You can use this directly in `<img>` tags, video players, or links.
-- **ImageKit Transformations:** A key benefit of ImageKit is real-time manipulation. You can append transformation parameters directly to the `file_url` to resize, crop, format, or optimize the media on-the-fly. For example, `file_url + '?tr=w-300,h-200'` would resize an image to 300x200 pixels. Learn more on [ImageKit transformation docs](https://imagekit.io/docs/image-transformation) for possibilities.
+- **ImageKit transformations:** A key benefit of ImageKit is real-time manipulation. You can append transformation parameters directly to the `file_url` to resize, crop, format, or optimize the media on-the-fly. For example, `file_url + '?tr=w-300,h-200'` would resize an image to 300x200 pixels. Learn more on [ImageKit transformation docs](https://imagekit.io/docs/image-transformation) for possibilities.
 
 This pattern effectively separates media storage, optimization, and delivery (handled by ImageKit.io) from structured metadata management (handled by Neon), leveraging the strengths of both services.
 
@@ -424,7 +421,7 @@ This pattern effectively separates media storage, optimization, and delivery (ha
 
 ## Resources
 
-- [ImageKit.io Documentation](https://imagekit.io/docs)
+- [ImageKit.io documentation](https://imagekit.io/docs)
 - [ImageKit.io Upload API](https://imagekit.io/docs/api-reference/upload-file/upload-file)
 - [Neon Documentation](/docs/introduction)
 - [Neon RLS](/docs/guides/neon-rls)
