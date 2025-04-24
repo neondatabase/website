@@ -56,7 +56,7 @@ CREATE EXTENSION IF NOT EXISTS pg_search;
     - Specify all libraries that should be enabled. If a library is not included in the `Update project` API call, it will not be enabled.
     - The `neon` and `pg_stat_statements` libraries will remain enabled whether you include them in your API call or not — they're used by a Neon system-managed database.
     - If you do not use one of the libraries enabled by default, you can exclude it from your API call. For example, if you do not use the `pgrag` extension, you can exclude its libraries (`"rag_bge_small_en_v15,rag_jina_reranker_v1_tiny_en"`).
-      </Admonition>
+    </Admonition>
 
     This API call adds the `pg_search` library to the list of currently enabled libraries.
 
