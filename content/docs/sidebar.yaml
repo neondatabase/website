@@ -96,9 +96,6 @@
           slug: connect/connect-from-any-app
         - title: Neon serverless driver
           slug: serverless/serverless-driver
-        - title: Neon Local
-          tag: new
-          slug: local/neon-local
         - title: Neon SQL Editor
           slug: get-started-with-neon/query-with-neon-sql-editor
         - title: Passwordless auth
@@ -921,6 +918,10 @@
               slug: guides/neon-twin-full-pg-dump-restore
             - title: Partial Twin
               slug: guides/neon-twin-partial-pg-dump-restore
+    - title: Neon Local
+      icon: container
+      tag: new
+      slug: local/neon-local
 - section: Postgres
   items:
     - title: PostgreSQL Tutorial
