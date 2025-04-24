@@ -261,7 +261,7 @@ The response body lists available libraries and whether the libraries are enable
 
 </details>
 
-Important notes about preloaded libraries for Postgres extensions:
+Important notes about libraries for Postgres extensions:
 
 - Available libraries and those enabled by default may differ by Postgres version
 - Neon does not enable libraries for all extensions that have them
