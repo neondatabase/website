@@ -245,6 +245,7 @@ const MobileMenu = ({ isDarkTheme, isDocPage = false, docPageType = null }) => {
                     )}
                     to={LINKS.login}
                     theme="gray-15-outline"
+                    tagName="MobileMenu"
                   >
                     Log In
                   </Button>

@@ -1,4 +1,5 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
+'use client';
+
 import clsx from 'clsx';
 import NextLink from 'next/link';
 import PropTypes from 'prop-types';
@@ -7,6 +8,8 @@ import React, { forwardRef } from 'react';
 import ArrowRightIcon from 'icons/arrow-right.inline.svg';
 import ExternalIcon from 'icons/external.inline.svg';
 import GlossaryIcon from 'icons/glossary.inline.svg';
+import getNodeText from 'utils/get-node-text';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 const underlineCommonStyles =
   'relative transition-colors duration-500 before:absolute before:-bottom-1.5 before:left-0 before:h-1.5 before:w-full before:transition-all before:duration-500 hover:before:bottom-full hover:before:opacity-0 before:pointer-events-none';
@@ -61,6 +64,7 @@ const Link = forwardRef(
       to = null,
       withArrow = false,
       icon = null,
+      tagName = null,
       children,
       prefetch = undefined,
       ...props
@@ -77,6 +81,15 @@ const Link = forwardRef(
 
     const Icon = icons[icon];
 
+    const handleClick = () => {
+      if (!tagName) return;
+      sendGtagEvent('Link Clicked', {
+        style: theme,
+        text: getNodeText(children),
+        tag_name: tagName,
+      });
+    };
+
     const content = (
       <>
         {withArrow ? <span>{children}</span> : children}
@@ -86,10 +99,11 @@ const Link = forwardRef(
         {Icon && <Icon className="-mb-px shrink-0" />}
       </>
     );
+
     // TODO: remove this when we upgrade to latest version of Next.js
     if (to?.includes('#')) {
       return (
-        <a className={className} href={to} ref={ref} {...props}>
+        <a className={className} href={to} ref={ref} onClick={handleClick} {...props}>
           {content}
         </a>
       );
@@ -97,14 +111,21 @@ const Link = forwardRef(
 
     if (to?.startsWith('/')) {
       return (
-        <NextLink className={className} href={to} ref={ref} prefetch={prefetch} {...props}>
+        <NextLink
+          className={className}
+          href={to}
+          ref={ref}
+          prefetch={prefetch}
+          onClick={handleClick}
+          {...props}
+        >
           {content}
         </NextLink>
       );
     }
 
     return (
-      <a className={className} href={to} ref={ref} {...props}>
+      <a className={className} href={to} ref={ref} onClick={handleClick} {...props}>
         {content}
       </a>
     );
@@ -120,6 +141,7 @@ Link.propTypes = {
   withArrow: PropTypes.bool,
   icon: PropTypes.oneOf(Object.keys(icons)),
   prefetch: PropTypes.bool,
+  tagName: PropTypes.string,
 };
 
 export default Link;
