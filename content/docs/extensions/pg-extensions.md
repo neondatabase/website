@@ -199,7 +199,7 @@ curl --request GET \
      --header 'authorization: Bearer $NEON_API_KEY'
 ```
 
-The response body lists available libraries and whether the libraries are preloaded by default. Response body attributes include:
+The response body lists available libraries and whether the libraries are enabled by default. Response body attributes include:
 
 - `library_name` — library name, typically named for the associated extension
 - `description` — a description of the extension
