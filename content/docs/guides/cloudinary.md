@@ -365,6 +365,8 @@ This workflow involves getting a signature from your backend, using it to upload
          -F "signature=<SIGNATURE_FROM_STEP_1>"
     ```
 
+    Note: If uploading a video, change the endpoint in the URL from `/image/upload` to `/video/upload`.
+
     **Expected response (from Cloudinary):** A successful upload returns a JSON object with metadata about the uploaded asset.
 
     ```json

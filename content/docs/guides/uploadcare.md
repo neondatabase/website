@@ -33,7 +33,7 @@ We need to create a table in Neon to store metadata about the files uploaded to 
 1. You can run the create table statement using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database. Here is an example SQL statement to create a simple table for file metadata which includes a file ID, URL, user ID, and upload timestamp:
 
    ```sql
-   CREATE TABLE IF NOT EXISTS files (
+   CREATE TABLE IF NOT EXISTS uploadcare_files (
        id SERIAL PRIMARY KEY,
        file_id TEXT NOT NULL UNIQUE,
        file_url TEXT NOT NULL,
@@ -45,7 +45,7 @@ We need to create a table in Neon to store metadata about the files uploaded to 
 2. Run the SQL statement. You can add other relevant columns (file size, content type, etc.) depending on your application needs.
 
 <Admonition type="note" title="Securing metadata with RLS">
-If you use [Neon's Row Level Security (RLS)](https://neon.tech/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `files` table. This controls who can view or modify the object references stored in Neon based on your RLS rules.
+If you use [Neon's Row Level Security (RLS)](https://neon.tech/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `uploadcare_files` table. This controls who can view or modify the object references stored in Neon based on your RLS rules.
 
 Note that these policies apply _only_ to the metadata stored in Neon. Access to the actual files is managed by Uploadcare's access controls and settings.
 </Admonition>
@@ -110,7 +110,7 @@ app.post('/upload', authMiddleware, async (c) => {
     // 3. Save Metadata to Neon
     // Uses file_id (Uploadcare UUID), file_url (CDN URL), and user_id
     await sql`
-            INSERT INTO files (file_id, file_url, user_id)
+            INSERT INTO uploadcare_files (file_id, file_url, user_id)
             VALUES (${result.uuid}, ${result.cdnUrl}, ${userId})
         `;
 
@@ -139,7 +139,7 @@ serve({ fetch: app.fetch, port }, (info) => {
     - It extracts the `file` data and `fileName` from the form data.
     - It uploads the file content directly to Uploadcare.
     - Upon successful upload, Uploadcare returns details including a unique `uuid` and a `cdnUrl`.
-    - It executes an `INSERT` statement using the Neon serverless driver to save the `uuid`, `cdnUrl`, and the `userId` into a `files` table in your database.
+    - It executes an `INSERT` statement using the Neon serverless driver to save the `uuid`, `cdnUrl`, and the `userId` into a `uploadcare_files` table in your database.
     - It sends a JSON response back to the client containing the `fileUrl` from Uploadcare.
 
 </TabItem>
@@ -210,7 +210,7 @@ def upload_file():
             conn = get_database()
             cursor = conn.cursor()
             cursor.execute(
-                "INSERT INTO files (file_id, file_url, user_id) VALUES (%s, %s, %s)",
+                "INSERT INTO uploadcare_files (file_id, file_url, user_id) VALUES (%s, %s, %s)",
                 (response.uuid, file_url, user_id),
             )
             conn.commit()
@@ -239,7 +239,7 @@ if __name__ == "__main__":
     - It extracts the `file` data from the form data.
     - It uploads the file content directly to Uploadcare.
     - Upon successful upload, Uploadcare returns details including a unique `uuid` and a `cdnUrl`.
-    - It executes an `INSERT` statement using `psycopg2` to save the `uuid`, `cdnUrl`, and the `userId` into a `files` table in your database.
+    - It executes an `INSERT` statement using `psycopg2` to save the `uuid`, `cdnUrl`, and the `userId` into a `uploadcare_files` table in your database.
     - It sends a JSON response back to the client containing the `fileUrl` from Uploadcare.
 4.  In production, you should use a global PostgreSQL connection instead of creating a new one for each request. This is important for performance and resource management.
 
@@ -282,7 +282,7 @@ You can now integrate calls to this `/upload` endpoint from various parts of you
 
 Storing metadata in Neon allows your application to easily retrieve references to the files uploaded to Uploadcare.
 
-Query the `files` table from your application's backend when needed.
+Query the `uploadcare_files` table from your application's backend when needed.
 
 **Example SQL query:**
 
@@ -296,7 +296,7 @@ SELECT
     user_id,         -- The user associated with the file
     upload_timestamp
 FROM
-    files
+    uploadcare_files
 WHERE
     user_id = 'user_123'; -- Use actual authenticated user ID
 ```
