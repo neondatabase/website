@@ -1,7 +1,7 @@
 ---
 title: Neon Local
 enableTableOfContents: true
-subtitle: Connect to Neon using Docker containers
+subtitle: Use Docker environments to connect to Neon and manage branches automatically
 updatedOn: '2025-04-22T22:55:27.453Z'
 ---
 
