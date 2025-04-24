@@ -86,15 +86,19 @@
               slug: guides/sveltekit
             - title: Symfony
               slug: guides/symfony
-        - section: File and Media Storage
+        - section: File and media storage
           items:
-            - title: File Storage
+            - title: File storage
               slug: guides/file-storage
-            - title: File Storage with AWS S3
+            - title: File storage with AWS S3
               slug: guides/aws-s3
-            - title: File Storage with Cloudflare R2
+            - title: File storage with Cloudflare R2
               slug: guides/cloudflare-r2
-            - title: Media Storage with Uploadcare
+            - title: Media storage with Cloudinary
+              slug: guides/cloudinary
+            - title: Media storage with ImageKit
+              slug: guides/imagekit
+            - title: Media storage with Uploadcare
               slug: guides/uploadcare
     - title: Connect
       slug: connect/connect-intro

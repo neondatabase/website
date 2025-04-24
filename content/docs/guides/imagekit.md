@@ -132,6 +132,7 @@ app.post('/save-metadata', authMiddleware, async (c) => {
       throw new Error('fileId and url are required from ImageKit response');
     }
 
+    // Insert metadata into Neon database
     await sql`
       INSERT INTO imagekit_files (file_id, file_url, user_id)
       VALUES (${fileId}, ${url}, ${userId})
@@ -212,7 +213,6 @@ def get_db_connection():
 # Replace this with your actual user authentication logic
 def get_authenticated_user_id(request):
     # Example: Validate Authorization header, session cookie, etc.
-    print("[Auth Placeholder] Assuming User ID: user_123")
     return "user_123"  # Static ID for demonstration
 
 
@@ -301,7 +301,7 @@ if __name__ == "__main__":
 3.  **API endpoints:**
     - **`/generate-auth-params` (GET):** Uses the ImageKit SDK's `get_authentication_parameters()` method to create `token`, `expire`, and `signature`. These are returned to the client, usually as JSON.
     - **`/save-metadata` (POST):** Called by the client _after_ it has successfully uploaded a file directly to ImageKit. The client provides the metadata returned by ImageKit. The backend validates the required fields and inserts the data along with the `userId` into the `imagekit_files` table in Neon using `psycopg2`.
-4.  **Database Connection:** The example shows creating a new connection per request. In production, use a connection pool (like `psycopg2.pool`) for better performance.
+4.  **Database Connection:** The example shows creating a new connection per request. In production, use a global connection pool for better performance.
 
 </TabItem>
 
@@ -376,14 +376,12 @@ This workflow involves getting authentication parameters from your backend, usin
     **Expected response (from your backend):**
 
     ```json
-    {
-      "success": true
-    }
+    { "success": true }
     ```
 
 **Expected outcome:**
 
-- The file gets uploaded to your ImageKit Media Library.
+- The file is successfully uploaded to your ImageKit Media Library.
 - You can verify a new row corresponding to the uploaded file exists in your `imagekit_files` table in Neon.
 
 ## Accessing file metadata and files

@@ -31,6 +31,10 @@ You can follow our guides on how to integrate with these services into your data
 
 <a href="/docs/guides/cloudflare-r2" title="Cloudflare R2" description="Upload files to Cloudflare R2 and store metadata in Neon" icon="cloudflare"></a>
 
+<a href="/docs/guides/cloudinary" title="Cloudinary" description="Upload files to Cloudinary and store metadata in Neon" icon="cloudinary"></a>
+
+<a href="/docs/guides/imagekit" title="ImageKit" description="Upload files to ImageKit and store metadata in Neon" icon="imagekit"></a>
+
 <a href="/docs/guides/uploadcare" title="Uploadcare" description="Upload files to Uploadcare and store metadata in Neon" icon="uploadcare"></a>
 
 </TechCards>
