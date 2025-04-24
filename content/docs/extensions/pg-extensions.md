@@ -294,7 +294,7 @@ curl --request PATCH \
 When running a `Create project` or `Update project` API:
     
   - Library names must be quoted, comma-separated, and specified in a single string.
-  - Specify all libraries that should be enabled. If a library is not included in the API call, it will not remain enabled
+  - Specify all libraries that should be enabled. If a library is not included in the API call, it will not be enabled
   - The "use_defaults": true` option overrides the `"enabled_libraries"` option, enabling only default libraries
   - The `neon` and `pg_stat_statements` libraries will remain enabled whether you include them in your command or not — they're used by a Neon system-managed database.
   - If you do not use one of the currently enabled libraries, you can exclude it from your API call. For example, if you do not use the `pgrag` extension, you can exclude `"rag_bge_small_en_v15,rag_jina_reranker_v1_tiny_en"` from your API call. 
