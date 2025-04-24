@@ -65,8 +65,8 @@ Neon supports the Postgres extensions shown in the following table. The supporte
 | [pgrowlocks](https://www.postgresql.org/docs/16/pgrowlocks.html)                                 |    1.2 |    1.2 |    1.2 |    1.2 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [pgstattuple](https://www.postgresql.org/docs/16/pgstattuple.html)                               |    1.5 |    1.5 |    1.5 |    1.5 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [pgtap](https://pgtap.org/documentation.html)                                                    |  1.3.3 |  1.3.3 |  1.3.3 |  1.3.3 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| [pgvector](/docs/extensions/pgvector)                                                            |  0.8.0 |  0.8.0 |  0.8.0 |  0.8.0 | Install with `CREATE EXTENSION vector;`                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| [pg_search](/docs/extensions/pg_search)                                                          |      - |      - |      - | 0.15.8 | Install with `CREATE EXTENSION pg_search;` on Postgres 17.                                                                                                                                                                                                                                                                                                                                                                                                    |
+| [pgvector](/docs/extensions/pgvector)                                                            |  0.8.0 | 0.8.0 |  0.8.0 |  0.8.0 | Install with `CREATE EXTENSION vector;`                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| [pg_search](/docs/extensions/pg_search)                                                          |  0.15.14 | 0.15.14 | 0.15.14 | 0.15.14 | Install with `CREATE EXTENSION pg_search;` on Postgres 17.                                                                                                                                                                                                                                                                                                                                                                                                    |
 | [pgx_ulid](https://github.com/pksunkara/pgx_ulid)                                                |  0.1.5 |  0.1.5 |  0.1.5 |  0.2.0 | Install with `CREATE EXTENSION ulid;` on Postgres 14, 15, 16. Install with `CREATE EXTENSION pgx_ulid; ` on Postgres 17.                                                                                                                                                                                                                                                                                                                                      |
 | [plcoffee](https://coffeescript.org/)                                                            |  3.1.5 |  3.1.5 |  3.1.8 |      - |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [plls](https://livescript.net/)                                                                  |  3.1.5 |  3.1.5 |  3.1.8 |      - |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
@@ -176,6 +176,128 @@ SET neon.allow_unstable_extensions = 'true';
 - **Subject to change or removal:** Experimental extensions may be updated at any time, including breaking changes. They can also be removed—especially if they pose security or operational risks.
 
 If you're experimenting with an extension and run into trouble, we recommend checking with the extension’s maintainers or community for support.
+
+## Extensions with preloaded libraries
+
+A preloaded library in Postgres is a shared library that must be loaded into memory when the Postgres server starts. These libraries are specified in your Postgres server's startup configuration using the `shared_preload_libraries` parameter and cannot be added dynamically after the server has started.
+
+Some Postgres extensions require preloaded libraries but most do not. Neon Postgres servers preload libraries for certain extensions by default. You can view **currently enabled** libraries by running the following command. 
+
+```sql shouldWrap
+SHOW shared_preload_libraries;
+neon,pg_stat_statements,timescaledb,pg_cron,pg_partman_bgw,rag_bge_small_en_v15,rag_jina_reranker_v1_tiny_en
+```
+
+### Viewing available libraries
+
+You can view **available** libraries by running [List preloaded libraries](https://api-docs.neon.tech/reference/getavailablepreloadlibraries) API:
+
+```bash
+curl --request GET \
+     --url https://console.neon.tech/api/v2/projects/your_project_id/available_preload_libraries \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY'
+```
+
+The response body lists available libraries and whether the libraries are enabled by default. Response body attributes include:
+
+- `library_name` — library name, typically named for the associated extension
+- `description` — a description of the extension
+- `is_default` — whether the library is enabled by default
+- `is_experimental` — whether the extensions is [experimental](#experimental-extensions)
+- `version` — the extension version
+
+<details>
+<summary>Response body example</summary>
+
+```json
+{
+  "libraries": [
+    {
+      "library_name": "timescaledb",
+      "description": "Enables scalable inserts and complex queries for time-series data.",
+      "is_default": true,
+      "is_experimental": false,
+      "version": "2.13.0"
+    },
+    {
+      "library_name": "pg_cron",
+      "description": "pg_cron is a cron-like job scheduler for PostgreSQL.",
+      "is_default": true,
+      "is_experimental": false,
+      "version": "1.6.4"
+    },
+    {
+      "library_name": "pg_partman_bgw",
+      "description": "pg_partman_bgw is a background worker for pg_partman.",
+      "is_default": true,
+      "is_experimental": false,
+      "version": "5.1.0"
+    },
+    {
+      "library_name": "rag_bge_small_en_v15,rag_jina_reranker_v1_tiny_en",
+      "description": "Shared libraries for pgrag extensions",
+      "is_default": true,
+      "is_experimental": true,
+      "version": "0.0.0"
+    },
+    {
+      "library_name": "ulid",
+      "description": "pgx_ulid is a PostgreSQL extension for ULID generation.",
+      "is_default": false,
+      "is_experimental": false,
+      "version": "0.1.5"
+    },
+    {
+      "library_name": "pg_search",
+      "description": "pg_search: Full text search for PostgreSQL using BM25",
+      "is_default": false,
+      "is_experimental": false,
+      "version": "0.15.12"
+    }
+  ]
+}
+```
+
+</details>
+
+Important notes about libraries for Postgres extensions:
+
+- Available libraries and those enabled by default may differ by Postgres version
+- Neon does not enable libraries for all extensions that have them
+
+### Enabling preloaded libraries
+
+You can enable available libraries using the `preloaded_libraries` object in a [Create project](https://api-docs.neon.tech/reference/createproject) or [Update project](https://api-docs.neon.tech/reference/updateproject) API call. For example, this `Update project` call enables the specified libraries for the Neon project. When running this call, you have to provide a [Neon project ID](/docs/reference/glossary#project-id) and a [Neon API key](/docs/manage/api-keys).
+
+```bash
+curl --request PATCH \
+    --url https://console.neon.tech/api/v2/projects/tight-sun-03508585 \
+    --header 'accept: application/json' \
+    --header 'authorization: Bearer $NEON_API_KEY' \
+    --header 'content-type: application/json' \
+    --data '
+{
+  "project": {
+    "settings": {
+      "preload_libraries": {
+        "enabled_libraries": [
+          "neon","pg_stat_statements","timescaledb","pg_cron","pg_partman_bgw","rag_bge_small_en_v15,rag_jina_reranker_v1_tiny_en","pg_search"
+        ]
+      }
+    }
+  }
+}
+'
+```
+
+When running a `Create project` or `Update project` API call to enable libraries:
+    
+  - Library names must be quoted, comma-separated, and specified in a single string.
+  - Specify all libraries that should be enabled. If a library is not included in the API call, it will not be enabled.
+  - The "use_defaults": true` option overrides the `"enabled_libraries"` option, enabling only default libraries
+  - The `neon` and `pg_stat_statements` libraries will remain enabled whether you include them in your API call or not — they're used by a Neon system-managed database.
+  - If you do not use one of the libraries enabled by default, you can exclude it from your API call. For example, if you do not use the `pgrag` extension, you can exclude its libraries (`"rag_bge_small_en_v15,rag_jina_reranker_v1_tiny_en"`). 
 
 ## Extension notes
 
