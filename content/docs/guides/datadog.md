@@ -62,7 +62,6 @@ Before getting started, ensure the following:
    - **Postgres logs**: Error messages, warnings, connection events, and system notifications
 1. Click **Confirm** to complete the integration.
 
-
 <Admonition type="note">
 You can change these settings later by editing your integration configuration.
 </Admonition>
