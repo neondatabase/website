@@ -268,7 +268,7 @@ Important notes about preloaded libraries for Postgres extensions:
 
 ### Enabling preloaded libraries
 
-You can enable available libraries using the `preloaded_libraries` object in a [Create project](https://api-docs.neon.tech/reference/createproject) or [Update project](https://api-docs.neon.tech/reference/updateproject) API call. For example, this `Update project` call enables the library for the `pg_search` extension, adding it to the list of currently enabled libraries. When running this call, you have to provide a [Neon project ID](/docs/reference/glossary#project-id) and a [Neon API key](/docs/manage/api-keys).
+You can enable available libraries using the `preloaded_libraries` object in a [Create project](https://api-docs.neon.tech/reference/createproject) or [Update project](https://api-docs.neon.tech/reference/updateproject) API call. For example, this `Update project` call enables the  `pg_search` extension library. When running this call, you have to provide a [Neon project ID](/docs/reference/glossary#project-id) and a [Neon API key](/docs/manage/api-keys).
 
 ```bash
 curl --request PATCH \
