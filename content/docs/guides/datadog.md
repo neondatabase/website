@@ -723,46 +723,19 @@ In Datadog, metric labels are referred to as `tags.` See [Getting Started with T
 
 ## Export Postgres logs to Datadog
 
-You can export your Postgres logs from your Neon compute to your Datadog account. These logs help you monitor database activity, troubleshoot issues, and track performance.
+You can export your Postgres logs from your Neon compute to your Datadog account. These logs provide visibility into database activity and system events that Postgres generates, such as:
 
-### Log configuration
+- Error messages and warnings
+- Connection events
+- System notifications
 
-Postgres provides various logging options to control what information is captured. For details about available options, see the [PostgreSQL documentation on error reporting and logging](https://www.postgresql.org/docs/current/runtime-config-logging.html). You can configure these options using the `pg_settings` object when creating or updating projects or endpoints via the Neon API. The API validates all settings to ensure they are supported in Neon's managed environment. For example, `log_destination` cannot be modified, as Neon manages the log delivery infrastructure.
+Logs in Datadog include the following labels and metadata for filtering and organization:
 
-One important setting is `log_statement`, which controls SQL statement logging:
-- `none`: No statement logging (default)
-- `ddl`: Logs all data definition statements
-- `mod`: Logs all DDL statements, plus data-modifying statements
-- `all`: Logs all statements. Note that this can generate high log volumes and may impact performance.
-
-Example API request:
-
-```bash shouldWrap
-curl --request POST \
-     --url https://console.neon.tech/api/v2/projects \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $BEARER_TOKEN' \
-     --header 'content-type: application/json' \
-     --data '
-{
-  "project": {
-    "default_endpoint_settings": {
-      "pg_settings": {
-        "log_statement": "ddl"
-      }
-    },
-    "pg_version": 17
-  }
-}
-'
-```
-
-### Working with logs in Datadog
-
-Logs in Datadog include the following labels for filtering and organization:
-- `project_id`: Your Neon project identifier
-- `endpoint_id`: The specific compute endpoint
-- Standard PostgreSQL log fields (timestamp, log level, etc.)
+- `project_id`
+- `endpoint_id`
+- Timestamp
+- Log level
+- And other standard PostgreSQL log fields
 
 <Admonition type="note">
 During the beta phase, you may see some Neon-specific system logs included. These will be filtered out before general availability (GA).
@@ -772,7 +745,7 @@ During the beta phase, you may see some Neon-specific system logs included. Thes
 
 Enabling this feature may result in:
 
-- An increase in compute resource usage for log processing; the more verbose your log setting, the more compute you can expect to consume
+- An increase in compute resource usage for log processing
 - Additional network egress for log transmission (Neon does not charge for data transfer on paid plans)
 - Associated costs based on log volume in Datadog
 
