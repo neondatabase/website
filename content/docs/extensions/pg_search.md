@@ -38,7 +38,7 @@ CREATE EXTENSION IF NOT EXISTS pg_search;
 
 1.  **Enable the required pg_search libraries**
 
-    Enable the required `pg_search` library in your Neon project using the [Update project](https://api-docs.neon.tech/reference/updateproject) API. You will need your [Neon project ID](/docs/reference/glossary#project-id) and your [Neon API key](/docs/manage/api-keys).
+    Enable the required `pg_search` library in your Neon project using the [Update project](https://api-docs.neon.tech/reference/updateproject) API. You will need your [Neon project ID](/docs/reference/glossary#project-id) and your [Neon API key](/docs/manage/api-keys). **Running this API restarts your project's computes**.
 
     <Admonition type="important">
     When you enable a library using the `Update project` command, you must specify **all libraries** that should remain enabled. To get a list of currently enabled libraries, run `SHOW shared_preload_libraries;` from an SQL client. The result should look something like this:
