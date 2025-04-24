@@ -24,8 +24,8 @@ const GithubStars = async ({ isDarkTheme }) => {
 
 GithubStars.propTypes = themePropTypes;
 
-const Sidebar = ({ isDarkTheme, isClient }) => (
-  <div className="flex items-center gap-x-6 lg:hidden">
+const Sidebar = ({ isDarkTheme, isClient, className }) => (
+  <div className={clsx('flex items-center gap-x-6 lg:hidden', className)}>
     <Link
       className={clsx(
         'flex items-center gap-1.5 transition-colors duration-200',
@@ -73,6 +73,7 @@ const Sidebar = ({ isDarkTheme, isClient }) => (
 Sidebar.propTypes = {
   ...themePropTypes,
   isClient: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 export default Sidebar;
