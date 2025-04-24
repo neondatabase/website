@@ -361,7 +361,9 @@
               slug: introduction/monitor-active-queries
             - title: Query history
               slug: introduction/monitor-query-history
-            - title: External tools
+            - title: Datadog integration
+              slug: guides/datadog
+            - title: Datbase monitoring tools
               slug: introduction/monitor-external-tools
         - section: Team Tools
           items:
