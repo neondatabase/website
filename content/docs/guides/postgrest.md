@@ -2,7 +2,7 @@
 title: Create a REST API from Postgres with PostgREST
 subtitle: Generate a REST API automatically from your Neon Postgres database schema
 enableTableOfContents: true
-updatedOn: '2025-04-23T12:31:01.175Z'
+updatedOn: '2025-04-23T13:23:40.025Z'
 ---
 
 <InfoBlock>
@@ -63,6 +63,10 @@ GRANT USAGE ON SCHEMA api TO anonymous;
 GRANT SELECT ON ALL TABLES IN SCHEMA api TO anonymous;
 ALTER DEFAULT PRIVILEGES IN SCHEMA api GRANT SELECT ON TABLES TO anonymous;
 ```
+
+<Admonition type="tip">
+While this example uses SERIAL for simplicity, consider using UUID as a primary key in production systems—especially in distributed environments, when exposing identifiers in URLs, or when avoiding predictable sequences is important.
+</Admonition>
 
 ## Copy your database connection string
 
