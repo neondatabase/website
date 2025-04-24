@@ -81,7 +81,7 @@ CREATE EXTENSION IF NOT EXISTS pg_search;
       '
       ```
 
-1. **Check to make sure the `pg_search` extension is enabled**
+1. **Check to make sure the `pg_search` library is enabled**
 
     Run the following command to make sure `pg_search` was added to the list of enabled libraries.
 
