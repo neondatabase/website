@@ -10,15 +10,16 @@ import debounce from 'utils/debounce';
 import SearchInput from './search-input';
 import SearchResults from './search-results';
 
-const searchClient = algoliasearch(
-  process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
-  process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY
-);
-
 const debouncedSetUiState = debounce((uiState, setUiState) => setUiState(uiState), 100);
 
 const AlgoliaSearch = ({ indexName, children, posts, searchInputClassName }) => {
   const [mounted, setMounted] = useState(false);
+
+  // Initialize searchClient only if environment variables are available
+  const algoliaAppId = process.env.NEXT_PUBLIC_ALGOLIA_APP_ID;
+  const algoliaApiKey = process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY;
+  const areAlgoliaCredsAvailable = algoliaAppId && algoliaApiKey;
+  const searchClient = areAlgoliaCredsAvailable ? algoliasearch(algoliaAppId, algoliaApiKey) : null;
 
   useEffect(() => setMounted(true), []);
 
@@ -34,7 +35,8 @@ const AlgoliaSearch = ({ indexName, children, posts, searchInputClassName }) => 
     debouncedSetUiState(uiState, setUiState);
   };
 
-  if (!mounted)
+  // Preloader and fallback for missing Algolia credentials
+  if (!mounted || !areAlgoliaCredsAvailable)
     return (
       <>
         <SearchInput className={searchInputClassName} asPlaceholder />
