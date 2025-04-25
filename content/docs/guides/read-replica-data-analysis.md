@@ -48,6 +48,10 @@ With this setup, your read replica only wakes up when Metabase connects, scales 
 
 Creating a read replica involves adding a read replica compute to a branch.
 
+<Admonition type="note">
+The Free Plan is limited to a maximum of 3 read replica computes per project.
+</Admonition>
+
 You can add a read replica compute- to any branch in your Neon project by following these steps:
 
 1. In the Neon Console, select **Branches**.

@@ -65,6 +65,7 @@ The Free Plan includes the following usage allowances:
 - All supported regions
 - Project collaboration
 - Advanced Postgres features such as connection pooling, logical replication, and 60+ Postgres extensions
+- Read replicas (limit of 3 read replica computes per project)
 - Neon features such as branching, instant restore up to **24 hours** in the past, time travel connections, and more
 - [Community support](/docs/introduction/support)
 
