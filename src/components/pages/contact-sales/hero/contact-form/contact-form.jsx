@@ -3,7 +3,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import useCookie from 'react-use/lib/useCookie';
 import useLocation from 'react-use/lib/useLocation';
@@ -31,7 +31,6 @@ const schema = yup
   .required();
 
 const labelClassName = 'text-sm text-gray-new-90';
-const errorClassName = '!top-0';
 
 const ContactForm = () => {
   const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
@@ -53,6 +52,12 @@ const ContactForm = () => {
     hutk: hubspotutk,
     pageUri: href,
   };
+
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      setFormState(FORM_STATES.ERROR);
+    }
+  }, [errors]);
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
@@ -130,7 +135,6 @@ const ContactForm = () => {
         placeholder="Marques Hansen"
         theme="transparent"
         labelClassName={labelClassName}
-        errorClassName={errorClassName}
         error={errors.name?.message}
         isDisabled={isDisabled}
         {...register('name')}
@@ -143,7 +147,6 @@ const ContactForm = () => {
         placeholder="info@acme.com"
         theme="transparent"
         labelClassName={labelClassName}
-        errorClassName={errorClassName}
         isDisabled={isDisabled}
         error={errors.email?.message}
         {...register('email')}
@@ -155,7 +158,6 @@ const ContactForm = () => {
           label="Company Website"
           theme="transparent"
           labelClassName={labelClassName}
-          errorClassName={errorClassName}
           isDisabled={isDisabled}
           {...register('companyWebsite')}
         />
@@ -167,7 +169,6 @@ const ContactForm = () => {
           defaultValue="hidden"
           theme="transparent"
           labelClassName={labelClassName}
-          errorClassName={errorClassName}
           isDisabled={isDisabled}
           error={errors.companySize?.message}
           {...register('companySize')}
@@ -190,7 +191,6 @@ const ContactForm = () => {
         theme="transparent"
         labelClassName={labelClassName}
         textareaClassName="min-h-[170px] xl:min-h-[148px]"
-        errorClassName={errorClassName}
         isDisabled={isDisabled}
         error={errors.message?.message}
         {...register('message')}
@@ -213,7 +213,10 @@ const ContactForm = () => {
           .
         </p>
         <Button
-          className="min-w-[176px] py-[15px] font-medium 2xl:text-base xl:min-w-[138px] lg:min-w-[180px] sm:w-full sm:py-[13px]"
+          className={clsx(
+            'min-w-[176px] py-[15px] font-medium 2xl:text-base xl:min-w-[138px] lg:min-w-[180px] sm:w-full sm:py-[13px]',
+            formState === FORM_STATES.ERROR && '!bg-secondary-1/50'
+          )}
           type="submit"
           theme="primary"
           size="xs"

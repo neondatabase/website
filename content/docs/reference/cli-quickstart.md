@@ -1,8 +1,8 @@
 ---
 title: Neon CLI Quickstart
-subtitle: Learn how to use the Neon CLI to manage your Neon resources
+subtitle: Get set up with the Neon CLI in just a few steps
 enableTableOfContents: true
-updatedOn: '2025-04-19T00:14:19.027Z'
+updatedOn: '2025-04-20T22:48:22.682Z'
 ---
 
 The Neon CLI is a command-line interface that lets you manage Neon directly from the terminal. This guide will help you quickly set up and start using the Neon CLI.
@@ -95,7 +95,7 @@ This will open a browser window where you can authorize the CLI to access your N
 
 **API Key Authentication**
 
-Alternatively, you can use a Neon API key. You can create one in the Neon Console. See [Create a personal API key](https://neon.tech/docs/manage/api-keys#create-a-personal-api-key).
+Alternatively, you can use a personal Neon API key. You can create one in the Neon Console. See [Create a personal API key](https://neon.tech/docs/manage/api-keys#create-a-personal-api-key).
 
 ```bash
 neon projects list --api-key <your-api-key>
@@ -111,7 +111,7 @@ For more about authenticating, see [Neon CLI commands — auth](/docs/reference/
 
 ## Set up your context file
 
-Context files allow you to use CLI commands without specifying your project or organization IDs every time.
+Context files allow you to use CLI commands without specifying your project ID or organization ID with each command.
 
 To set the context for your Neon project:
 
@@ -119,34 +119,37 @@ To set the context for your Neon project:
 neon set-context --project-id <your-project-id>
 ```
 
-You can find your Neon project ID by opening your project in the Neon Console and navigating to **Settings** > **General**.
+To set the context for your both your Neon organization and a Neon project:
 
-Th the `set-context` command creates a `.neon` file in your current directory with your project context.
+```bash
+neon set-context --org-id <your-org-id> --project-id <your-project-id>
+```
+
+<Admonition type="info">
+You can find your organization ID in the Neon Console by selecting your organization and navigating to **Settings**. You can find your Neon project ID by opening your project in the Neon Console and navigating to **Settings** > **General**.
+</Admonition>
+
+The `set-context` command creates a `.neon` file in your current directory with your project context.
 
 ```bash
 $ cat .neon
 
 {
-  "projectId": "cool-darkness-12345678"
+  "projectId": "broad-surf-52155946",
+  "orgId": "org-solid-base-83603457"
 }%
 ```
 
-You can also create named context files for different projects:
+You can also create named context files for different organization and project contexts:
 
 ```bash
-neon set-context --project-id <your-project-id> --context-file my-project-context
-```
-
-For organization-level operations, you can create named organization context file:
-
-```bash
-neon set-context --org-id <your-org-id> --context-file my-org-context
+neon set-context --org-id <your-org-id> --project-id <your-project-id> --context-file dev_project
 ```
 
 To switch contexts, add the `--context-file` option to any command, specifying your context file:
 
 ```bash
-neon branches list --context-file Documents/my-org-context
+neon branches list --context-file Documents/dev_project
 ```
 
 For more about the `set-context` command, see [Neon CLI commands — set-context](/docs/reference/cli-set-context).
@@ -177,7 +180,7 @@ source ~/.zshrc
 
 </Tabs>
 
-Now you can press **Tab** to complete commands and options. For further details, see [Neon CLI commands — completion](/docs/reference/cli-completion).
+Now you can press **Tab** to complete Neon CLI commands and options. For further details, see [Neon CLI commands — completion](/docs/reference/cli-completion).
 
 ## Common operations
 
@@ -225,8 +228,8 @@ Now that you're set up with the Neon CLI, you can:
 
 - Create more Neon projects with `neon projects create`
 - Manage your branches with various `neon branches` commands such as `reset`, `restore`, `rename`, `schema-diff`, and more
-- Create and manage databases with `neon databases create`
-- Create and manage roles with `neon roles create`
+- Create and manage databases with `neon databases` commands
+- Create and manage roles with `neon roles` commands
 - View the full set of Neon CLI commands available to you with `neon --help`
 
 For more details on all available commands, see the [CLI Reference](/docs/reference/neon-cli).
