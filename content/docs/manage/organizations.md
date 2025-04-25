@@ -34,13 +34,13 @@ The following table shows what actions each role can perform in the organization
 | [Delete organization](/docs/manage/orgs-manage#delete-an-organization)                                                       |  ✅   |   ❌   |      ❌      |
 | [Enable organization Early Access Program](/docs/introduction/roadmap#join-the-neon-early-access-program)                    |  ✅   |   ❌   |      ❌      |
 | **Project operations**                                                                                                       |       |        |              |
-| *Project creation and modification*                                                                                          |       |        |              |
-| [Create new projects](/docs/manage/orgs-manage#create-and-delete-projects)                                                  |  ✅   |   ✅   |      ❌      |
+| _Project creation and modification_                                                                                          |       |        |              |
+| [Create new projects](/docs/manage/orgs-manage#create-and-delete-projects)                                                   |  ✅   |   ✅   |      ❌      |
 | [Rename projects](/docs/manage/projects)                                                                                     |  ✅   |   ✅   |      ✅      |
 | [Transfer projects into organization](/docs/manage/orgs-project-transfer)                                                   |  ✅   |   ✅   |      ❌      |
 | [Transfer projects out of organization](/docs/manage/orgs-project-transfer#transfer-projects-between-organizations)         |  ✅   |   ❌   |      ❌      |
 | [Delete projects](/docs/manage/orgs-manage#create-and-delete-projects)                                                       |  ✅   |   ❌   |      ❌      |
-| *Project configuration*                                                                                                      |       |        |              |
+| _Project configuration_                                                                                                      |       |        |              |
 | [Manage project databases](/docs/manage/databases)                                                                           |  ✅   |   ✅   |      ✅      |
 | [Configure project computes](/docs/manage/endpoints)                                                                         |  ✅   |   ✅   |      ✅      |
 | [Manage project roles](/docs/manage/users)                                                                                   |  ✅   |   ✅   |      ✅      |
@@ -48,7 +48,7 @@ The following table shows what actions each role can perform in the organization
 | **Integration management**                                                                                                   |       |        |              |
 | [Install GitHub integration](/docs/guides/neon-github-integration#install-the-github-app-and-connect-your-neon-project)      |  ✅   |   ❌   |      ❌      |
 | [Install Neon Auth](/docs/guides/neon-auth#permissions)                                                                      |  ✅   |   ❌   |      ❌      |
-| [Install the Neon Postgres Previews Integration on Vercel\*](/docs/guides/vercel-previews-integration#how-to-install)          |  ✅   |   ❌   |      ❌      |
+| [Install the Neon Postgres Previews Integration on Vercel\*](/docs/guides/vercel-previews-integration#how-to-install)        |  ✅   |   ❌   |      ❌      |
 | [Connect project to GitHub integration](/docs/guides/neon-github-integration#connect-more-neon-projects-with-the-github-app) |  ✅   |   ✅   |      ❌      |
 | [Connect project (Neon Postgres Previews Integration)](/docs/guides/vercel-previews-integration#how-to-install)              |  ✅   |   ✅   |      ❌      |
 
