@@ -38,7 +38,7 @@ CREATE EXTENSION IF NOT EXISTS pg_search;
 
 1.  **Enable the required pg_search libraries**
 
-    Enable the required `pg_search` library in your Neon project using the [Update project](https://api-docs.neon.tech/reference/updateproject) API. You will need your [Neon project ID](/docs/reference/glossary#project-id) and your [Neon API key](/docs/manage/api-keys).
+    Enable the required `pg_search` library in your Neon project using the [Update project](https://api-docs.neon.tech/reference/updateproject) API. You will need your [Neon project ID](/docs/reference/glossary#project-id) and your [Neon API key](/docs/manage/api-keys). **Running this API restarts your project's computes**.
 
     <Admonition type="important">
     When you enable a library using the `Update project` command, you must specify **all libraries** that should remain enabled. To get a list of currently enabled libraries, run `SHOW shared_preload_libraries;` from an SQL client. The result should look something like this:
@@ -56,13 +56,13 @@ CREATE EXTENSION IF NOT EXISTS pg_search;
     - Specify all libraries that should be enabled. If a library is not included in the `Update project` API call, it will not be enabled.
     - The `neon` and `pg_stat_statements` libraries will remain enabled whether you include them in your API call or not — they're used by a Neon system-managed database.
     - If you do not use one of the libraries enabled by default, you can exclude it from your API call. For example, if you do not use the `pgrag` extension, you can exclude its libraries (`"rag_bge_small_en_v15,rag_jina_reranker_v1_tiny_en"`).
-      </Admonition>
+    </Admonition>
 
     This API call adds the `pg_search` library to the list of currently enabled libraries.
 
     ```bash
     curl --request PATCH \
-        --url https://console.neon.tech/api/v2/projects/tight-sun-03508585 \
+        --url https://console.neon.tech/api/v2/projects/<your_project_id> \
         --header 'accept: application/json' \
         --header 'authorization: Bearer $NEON_API_KEY' \
         --header 'content-type: application/json' \
