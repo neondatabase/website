@@ -89,11 +89,11 @@ If your branch has multiple databases, use the database selector (top left) to c
 
 ## Restore
 
-Click **Restore** to complete the restore operation, or **Cancel** to back out. You can also restore directly from any of **Preview data** pages.
+Click **Restore** to complete the restore operation, or **Cancel** to back out. You can also restore directly from any of the **Preview data** pages.
 
 ![Restore the data](/docs/guides/backup_restore_preview_modal.png)
 
-When you restore, a backup branch is automatically created (named `<branch_name>_old_<timestamp>`) in case you need to go back. You can find this branch on the **Branches** page.
+When you restore, a backup branch is automatically created (named `<branch_name>_old_<timestamp>`) in case you need to revert back. You can find this branch on the **Branches** page.
 
 ![Backup branch on the Branches page](/docs/guides/backup_restore_backup_branch.png)
 
@@ -140,7 +140,7 @@ Click **Restore** to continue. You'll be redirected to the new branch created fr
 
 ## Add a compute to the restore branch
 
-Click **Add compute** to connect to the branch.
+Click **Add compute** to add a compute to the new branch.
 
 ![Restore branch add compute](/docs/guides/backup_restore_add_compute.png)
 
@@ -156,19 +156,19 @@ With a compute added, you can now access to your restore branch and connect to i
 
 With a compute added, you can:
 
-- Use the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor)
-- Browse tables on the [Tables page](/docs/guides/tables)
+- Access the branch from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor)
+- Browse tables on the branch from the [Tables page](/docs/guides/tables)
 - Connect from your app or Postgres client using the restore branch connection string
 
 Click the **Connect** button to get the connection string.
 
 ![Restore branch connect modal](/docs/guides/backup_restore_connect_modal.png)
 
-> The restore branch connection string differs from the original branch. It has a different hostname because each Neon branch is a separate Postgres instance.
+> The restore branch connection string differs from the snapshot's source branch. It has a different hostname because each Neon branch is a separate Postgres instance.
 
 ## Switch your app to the restore branch
 
-If you want to use the restore branch with your application, update your app to use the new connection string. Before switching, pause write operations, then resume them after switching to avoid data inconsistencies. Since Neon doesn't support read-only mode at the branch level, you'll need disable writes in your application.
+If you want to use the restore branch with your application, update your app to use the restore branch connection string. Before switching, pause write operations on the branch you are replacing, then resume them after switching to avoid data inconsistencies. Since Neon doesn't support read-only mode at the branch or database level, you'll need disable writes in your application.
 
 > The restore branch name includes a timestamp and may be long. You can rename it. See [Rename a branch](/docs/manage/branches#rename-a-branch) for instructions.
 
