@@ -18,8 +18,8 @@ const AlgoliaSearch = ({ indexName, children, posts, searchInputClassName }) => 
   // Initialize searchClient only if environment variables are available
   const algoliaAppId = process.env.NEXT_PUBLIC_ALGOLIA_APP_ID;
   const algoliaApiKey = process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY;
-  const areAlgoliaCredsAvailable = algoliaAppId && algoliaApiKey;
-  const searchClient = areAlgoliaCredsAvailable ? algoliasearch(algoliaAppId, algoliaApiKey) : null;
+  const algoliaCredsAvailable = algoliaAppId && algoliaApiKey;
+  const searchClient = algoliaCredsAvailable ? algoliasearch(algoliaAppId, algoliaApiKey) : null;
 
   useEffect(() => setMounted(true), []);
 
@@ -36,10 +36,10 @@ const AlgoliaSearch = ({ indexName, children, posts, searchInputClassName }) => 
   };
 
   // Preloader and fallback for missing Algolia credentials
-  if (!mounted || !areAlgoliaCredsAvailable)
+  if (!mounted || !algoliaCredsAvailable)
     return (
       <>
-        <SearchInput className={searchInputClassName} asPlaceholder />
+        {algoliaCredsAvailable && <SearchInput className={searchInputClassName} asPlaceholder />}
         {children}
       </>
     );
