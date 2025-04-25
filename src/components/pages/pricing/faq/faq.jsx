@@ -5,10 +5,15 @@ import Item from './item';
 
 const items = [
   {
+    question: 'Do you offer discounts and credits for Startups?',
+    answer: `Yes! Startups that have received venture funding can apply for up to $100K in credits to help them get started with Neon. <a href="https://neon.tech/startups">Learn more and apply here</a>.`,
+    id: 'startup-discounts',
+    initialState: 'open',
+  },
+  {
     question: 'What is a compute hour?',
     answer: `Compute hour is the metric for compute usage in Neon. The quick math: [compute hours] = [compute size] x [hours your compute runs]. Each pricing plan includes a certain number of compute hours; how quickly you consume these hours depends on the size of your compute and how long it runs. Once you exceed the allocated amount of compute hours, you'll be billed for overages in a given month.`,
     id: 'compute-hour',
-    initialState: 'open',
   },
   {
     question: 'How does billing work?',
