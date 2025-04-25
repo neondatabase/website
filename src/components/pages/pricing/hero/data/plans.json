@@ -38,7 +38,6 @@
     "button": {
       "url": "https://console.neon.tech/signup",
       "text": "Start for free",
-      "theme": "white-outline",
       "event": "Hero Free Tier Panel",
       "analyticsEvent": "pricing_page_get_started_with_free_plan_clicked"
     }
@@ -136,7 +135,6 @@
     "button": {
       "url": "https://console.neon.tech/app/billing#plans",
       "text": "Get started",
-      "theme": "white-outline",
       "event": "Hero Scale Panel",
       "analyticsEvent": "pricing_page_get_started_with_scale_plan_clicked"
     }
@@ -194,7 +192,7 @@
     "button": {
       "url": "https://console.neon.tech/app/billing#plans",
       "text": "Get started",
-      "theme": "white-outline",
+
       "event": "Hero Enterprise Panel",
       "analyticsEvent": "pricing_page_get_started_with_business_plan_clicked"
     }

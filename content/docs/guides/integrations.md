@@ -5,7 +5,7 @@ subtitle: Find detailed instructions for integration across various platforms an
 enableTableOfContents: true
 redirectFrom:
   - /docs/integrations/integrations-list/
-updatedOn: '2025-02-24T15:53:13.357Z'
+updatedOn: '2025-04-23T12:26:38.333Z'
 ---
 
 ## Monitor
@@ -57,6 +57,8 @@ updatedOn: '2025-02-24T15:53:13.357Z'
 <TechCards>
 
 <a href="/docs/guides/exograph" title="Exograph" description="Use Exograph with Neon" icon="exograph"></a>
+
+<a href="/docs/guides/postgrest" title="PostgREST" description="Create a REST API from your Neon database" icon="postgresql"></a>
 
 <a href="/docs/guides/ferretdb" title="FerretDB" description="Use FerretDB with Neon" icon="ferret"></a>
 
