@@ -20,11 +20,11 @@ const formatStars = (starsCount) => {
 const GithubStarCounter = ({ className = '', isDarkTheme = false, starsCount }) => (
   <Link
     className={clsx(
-      'flex items-center gap-x-1.5 text-[13px] leading-none tracking-extra-tight transition-colors duration-200',
+      'flex items-center gap-x-1.5 text-sm leading-none tracking-extra-tight transition-colors duration-200',
       className,
       isDarkTheme
-        ? 'text-white hover:text-green-45'
-        : 'text-gray-new-8 hover:text-green-45 dark:text-white dark:hover:text-green-45'
+        ? 'text-gray-new-90 hover:text-green-45'
+        : 'text-gray-new-8 hover:text-green-45 dark:text-gray-new-90 dark:hover:text-green-45'
     )}
     to={LINKS.github}
     target="_blank"
@@ -33,8 +33,8 @@ const GithubStarCounter = ({ className = '', isDarkTheme = false, starsCount }) 
       sendGtagEvent('click_star_us_button');
     }}
   >
-    <GitHubIcon width={20} height={20} />
-    <span className="w-8 whitespace-nowrap" aria-label={`Star us on GitHub (${starsCount})`}>
+    <GitHubIcon width={18} height={18} />
+    <span className="whitespace-nowrap" aria-label={`Star us on GitHub (${starsCount})`}>
       {formatStars(starsCount)}
     </span>
   </Link>

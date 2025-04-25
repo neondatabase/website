@@ -25,6 +25,7 @@ const Navigation = ({ isDarkTheme }) => (
               )}
               to={to}
               {...theme}
+              tagName={Tag === Link ? 'Navigation' : undefined}
             >
               {text}
               {hasSubmenu && (
@@ -97,6 +98,7 @@ const Navigation = ({ isDarkTheme }) => (
                                       : 'before:bg-[#f5f5f5] dark:before:bg-[#16181D]'
                                   )}
                                   to={to}
+                                  tagName="Navigation"
                                 >
                                   {isExtended && IconGradient && (
                                     <div

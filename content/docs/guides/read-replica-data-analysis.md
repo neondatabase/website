@@ -2,7 +2,7 @@
 title: Run analytics queries with Read Replicas
 subtitle: Leverage read replicas for running data-intensive analytics queries
 enableTableOfContents: true
-updatedOn: '2025-02-03T20:41:57.334Z'
+updatedOn: '2025-04-25T12:49:01.716Z'
 ---
 
 With Neon's read replica feature, you can instantly create a dedicated read replica for running data-intensive analytics or reporting queries. This allows you to avoid disruption or performance degradation on your production database.
@@ -47,6 +47,10 @@ With this setup, your read replica only wakes up when Metabase connects, scales 
 ## Create a read replica
 
 Creating a read replica involves adding a read replica compute to a branch.
+
+<Admonition type="note">
+The Free Plan is limited to a maximum of 3 read replica computes per project.
+</Admonition>
 
 You can add a read replica compute- to any branch in your Neon project by following these steps:
 

@@ -217,6 +217,9 @@
               slug: guides/scale-to-zero-guide
         - title: Instant restore
           slug: introduction/branch-restore
+        - title: Backup & restore
+          slug: guides/backup-restore
+          tag: early access
         - title: Branching
           slug: guides/branching-intro
           items:
@@ -361,7 +364,9 @@
               slug: introduction/monitor-active-queries
             - title: Query history
               slug: introduction/monitor-query-history
-            - title: External tools
+            - title: Datadog integration
+              slug: guides/datadog
+            - title: Datbase monitoring tools
               slug: introduction/monitor-external-tools
         - section: Team Tools
           items:
@@ -494,6 +499,8 @@
               slug: https://neon.tech/guides/agentstack-neon
             - title: AutoGen
               slug: https://neon.tech/guides/autogen-neon
+            - title: Azure AI Agent Service
+              slug: https://neon.tech/guides/azure-ai-agent-service 
             - title: Composio + CrewAI
               slug: https://neon.tech/guides/composio-crewai-neon
             - title: LangGraph
@@ -721,6 +728,8 @@
           items:
             - title: Exograph
               slug: guides/exograph
+            - title: PostgREST
+              slug: guides/postgrest
             - title: FerretDB
               slug: guides/ferretdb
             - title: Grafbase
