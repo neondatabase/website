@@ -21,7 +21,7 @@ const StartupPricing = ({ className }) => (
         and venture backed companies. Let us worry about scaling your database, so you can focus on
         growing your business.
       </p>
-      <Link className="mt-5 md:mt-4" to="https://neon.tech/startups" size="lg" theme="blue-green">
+      <Link className="mt-5 md:mt-4" to="https://neon.tech/startups" theme="blue-green">
         Neon for Startups
       </Link>
     </Container>
