@@ -37,7 +37,8 @@ The following table shows what actions each role can perform in the organization
 | *Project creation and modification*                                                                                          |       |        |              |
 | [Create new projects](/docs/manage/orgs-manage#create-and-delete-projects)                                                  |  ✅   |   ✅   |      ❌      |
 | [Rename projects](/docs/manage/projects)                                                                                     |  ✅   |   ✅   |      ✅      |
-| [Transfer projects](/docs/manage/orgs-project-transfer)                                                                      |  ✅   |   ✅   |      ❌      |
+| [Transfer projects into organization](/docs/manage/orgs-project-transfer)                                                   |  ✅   |   ✅   |      ❌      |
+| [Transfer projects out of organization](/docs/manage/orgs-project-transfer)                                                 |  ✅   |   ❌   |      ❌      |
 | [Delete projects](/docs/manage/orgs-manage#create-and-delete-projects)                                                       |  ✅   |   ❌   |      ❌      |
 | *Project configuration*                                                                                                      |       |        |              |
 | [Manage project databases](/docs/manage/databases)                                                                           |  ✅   |   ✅   |      ✅      |
