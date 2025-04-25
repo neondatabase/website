@@ -168,9 +168,9 @@ Click the **Connect** button to get the connection string.
 
 ## Switch your app to the restore branch
 
-If you want to use the restored branch in your application, update your app to use the new connection string. Before switching, pause write operations, then resume them after switching to avoid data inconsistencies. Since Neon doesn't support read-only mode at the branch level, you'll need disable writes in your application.
+If you want to use the restore branch with your application, update your app to use the new connection string. Before switching, pause write operations, then resume them after switching to avoid data inconsistencies. Since Neon doesn't support read-only mode at the branch level, you'll need disable writes in your application.
 
-> The restored branch name includes a timestamp and may be long. You can rename it. See [Rename a branch](/docs/manage/branches#rename-a-branch) for instructions.
+> The restore branch name includes a timestamp and may be long. You can rename it. See [Rename a branch](/docs/manage/branches#rename-a-branch) for instructions.
 
 </Steps>
 
