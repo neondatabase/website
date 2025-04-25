@@ -1,6 +1,7 @@
 import Faq from 'components/pages/pricing/faq';
 import Hero from 'components/pages/pricing/hero';
 import Plans from 'components/pages/pricing/plans';
+import StartupPricing from 'components/pages/pricing/startup-pricing';
 import CTA from 'components/shared/cta';
 import Layout from 'components/shared/layout';
 import Logos from 'components/shared/logos';
@@ -31,6 +32,7 @@ const PricingPage = () => (
   <Layout>
     <Hero />
     <Logos className="mt-[136px] xl:mt-28 lg:mt-24 lg:pt-0 md:mt-20" logos={logos} />
+    <StartupPricing className="mt-24 xl:mt-20 lg:mt-16 md:mt-14" />
     <Plans className="my-[184px] scroll-mt-5 px-safe xl:my-40 lg:mt-32 md:my-20" />
     <Faq />
     <CTA
