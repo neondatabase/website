@@ -8,13 +8,6 @@ import { useState } from 'react';
 import InfoIcon from 'components/shared/info-icon';
 import Link from 'components/shared/link';
 
-const icons = {
-  projects: 'pricing-projects-icon',
-  storage: 'pricing-storage-icon',
-  clock: 'pricing-clock-icon',
-  autoscale: 'pricing-autoscale-icon',
-};
-
 const variantsAnimation = {
   open: {
     height: 'auto',
@@ -24,21 +17,29 @@ const variantsAnimation = {
   },
 };
 
-const Feature = ({ icon, title, info, type, highlighted, index }) => (
+const getIdByTitle = (title) => {
+  const titleText = Array.isArray(title)
+    ? title.map((part) => (typeof part === 'string' ? part : part.text)).join(' ')
+    : title;
+  return titleText.toLowerCase().replace(/ /g, '-');
+};
+
+const Feature = ({ title, info, disabled, highlighted }) => (
   <li className="flex gap-x-2">
     <span
-      className={clsx(
-        icon ? icons[icon] : 'pricing-check-icon',
-        'mt-px size-3.5',
-        highlighted ? 'bg-green-45' : 'bg-gray-new-70'
-      )}
+      className={clsx(disabled ? 'pricing-minus-icon' : 'pricing-check-icon', 'h-[15px] w-3.5', {
+        'bg-green-45': highlighted,
+        'bg-gray-new-30': disabled,
+        'bg-gray-new-60': !highlighted && !disabled,
+      })}
       aria-hidden
     />
     <p
-      className={clsx(
-        'text-[15px] leading-none tracking-extra-tight',
-        highlighted ? 'text-white' : 'text-gray-new-80'
-      )}
+      className={clsx('text-[15px] leading-none tracking-extra-tight', {
+        'text-gray-new-98': highlighted,
+        'text-gray-new-30': disabled,
+        'text-gray-new-80': !highlighted && !disabled,
+      })}
     >
       <span className="with-link-primary">
         {Array.isArray(title)
@@ -59,7 +60,7 @@ const Feature = ({ icon, title, info, type, highlighted, index }) => (
           <InfoIcon
             className="relative top-0.5 ml-0.5 inline-block"
             tooltip={info}
-            tooltipId={`${type}_tooltip_${index}`}
+            tooltipId={getIdByTitle(title)}
           />
         </span>
       )}
@@ -68,16 +69,25 @@ const Feature = ({ icon, title, info, type, highlighted, index }) => (
 );
 
 Feature.propTypes = {
-  icon: PropTypes.oneOf(Object.keys(icons)),
-  title: PropTypes.string.isRequired,
+  title: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(
+      PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+          text: PropTypes.string,
+          info: PropTypes.string,
+        }),
+      ])
+    ),
+  ]),
   info: PropTypes.string,
-  type: PropTypes.string,
+  disabled: PropTypes.bool,
   highlighted: PropTypes.bool,
-  index: PropTypes.number,
 };
 
-const Features = ({ title, features, type, highlighted, hasToggler }) => {
-  const hasHiddenItems = features.length > 3;
+const Features = ({ title, items, disabled, highlighted, hasToggler }) => {
+  const hasHiddenItems = items.length > 3;
   const [isOpen, setIsOpen] = useState(!hasHiddenItems);
 
   const handleOpen = () => {
@@ -93,7 +103,19 @@ const Features = ({ title, features, type, highlighted, hasToggler }) => {
       )}
     >
       {title && (
-        <p className="text-[15px] font-medium leading-none tracking-extra-tight">{title}</p>
+        <p className="text-[15px] font-medium leading-none tracking-extra-tight">
+          {title.text}
+          {title.info && (
+            <span className="whitespace-nowrap">
+              &nbsp;
+              <InfoIcon
+                className="relative top-0.5 ml-0.5 inline-block"
+                tooltip={title.info}
+                tooltipId={getIdByTitle(title.text)}
+              />
+            </span>
+          )}
+        </p>
       )}
       <LazyMotion features={domAnimation}>
         <m.ul
@@ -101,10 +123,10 @@ const Features = ({ title, features, type, highlighted, hasToggler }) => {
           animate={hasToggler && !isOpen ? 'closed' : 'open'}
           variants={variantsAnimation}
           transition={{ duration: 0.5 }}
-          className={clsx('space-y-3 pb-0.5', hasToggler && 'overflow-hidden')}
+          className={clsx('space-y-3.5 pb-0.5', hasToggler && 'overflow-hidden')}
         >
-          {features.map((feature, index) => (
-            <Feature {...feature} type={type} highlighted={highlighted} index={index} key={index} />
+          {items.map((item, index) => (
+            <Feature {...item} disabled={disabled} highlighted={highlighted} key={index} />
           ))}
         </m.ul>
       </LazyMotion>
@@ -125,9 +147,9 @@ const Features = ({ title, features, type, highlighted, hasToggler }) => {
 };
 
 Features.propTypes = {
-  title: PropTypes.string,
-  features: PropTypes.arrayOf(Feature.propTypes).isRequired,
-  type: PropTypes.string.isRequired,
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  items: PropTypes.arrayOf(Feature.propTypes).isRequired,
+  disabled: PropTypes.bool,
   highlighted: PropTypes.bool,
   hasToggler: PropTypes.bool,
 };

@@ -2,17 +2,15 @@
 
 import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
-import { useFeatureFlagVariantKey, usePostHog } from 'posthog-js/react';
-import { useMemo } from 'react';
+import { usePostHog } from 'posthog-js/react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import CtaBlock from 'components/shared/cta-block';
-import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 
-import plansOriginal from './data/plans.json';
+import PLANS from './data/plans.json';
 import Features from './features';
 
 const scaleCardBorderVariants = {
@@ -33,45 +31,23 @@ const scaleCardBorderVariants = {
 
 const Hero = () => {
   const posthog = usePostHog();
-  const isComputePriceRaised =
-    useFeatureFlagVariantKey('website_growth_compute_price_rising') === 'show_0_24' && false;
-
-  const plans = useMemo(() => {
-    if (isComputePriceRaised) {
-      return plansOriginal.map((plan) => ({
-        ...plan,
-        features: plan.features.map((feature) => {
-          if (feature.id === 'compute_time') {
-            return {
-              ...feature,
-              info: 'Additional at $0.24 per compute hour',
-            };
-          }
-          return feature;
-        }),
-      }));
-    }
-
-    return plansOriginal;
-  }, [isComputePriceRaised]);
 
   return (
-    <section className="hero safe-paddings overflow-hidden pt-36 2xl:pt-[150px] xl:pt-[120px] lg:pt-[52px] md:pt-10">
-      <Container className="flex flex-col items-center" size="1344">
-        <Heading
-          className="text-center font-medium !leading-none tracking-tighter xl:text-6xl lg:text-[56px] md:!text-4xl"
-          tag="h1"
-          size="lg"
-        >
-          <span>Neon Pricing</span>
-        </Heading>
-        <p className="mx-auto mt-3 max-w-[680px] text-center text-xl font-light leading-snug tracking-extra-tight text-gray-new-80 xl:max-w-[560px] lg:text-lg md:text-base">
+    <section className="hero safe-paddings overflow-hidden pt-[158px] xl:pt-[134px] lg:pt-14 md:pt-12">
+      <Container
+        className="flex flex-col items-center xl:max-w-[704px] lg:!max-w-3xl md:px-5"
+        size="1344"
+      >
+        <h1 className="text-center font-title text-[72px] font-medium leading-none tracking-tighter xl:text-6xl lg:text-[56px] md:text-5xl">
+          Neon Pricing
+        </h1>
+        <p className="mx-auto mt-4 max-w-[680px] text-center text-xl font-light leading-snug tracking-extra-tight text-gray-new-80 lg:text-lg md:mt-3 md:text-base">
           Pricing plans that grow with you. From prototype to Enterprise.
         </p>
-        <div className="relative mx-auto mt-16 xl:mt-14 xl:max-w-[644px] lg:mt-11 md:mt-9">
+        <div className="relative mx-auto mt-16 xl:mt-14 lg:mt-12 md:mt-10">
           <h2 className="sr-only">Neon pricing plans</h2>
-          <ul className="grid-gap relative z-10 grid grid-cols-4 gap-x-8 2xl:gap-x-6 xl:grid-cols-2 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
-            {plans.map(
+          <ul className="grid-gap relative z-10 grid grid-cols-4 gap-8 xl:grid-cols-2 lg:gap-7 md:grid-cols-1 md:gap-4">
+            {PLANS.map(
               (
                 {
                   planId,
@@ -79,19 +55,16 @@ const Hero = () => {
                   highlighted = false,
                   price,
                   priceFrom = false,
+                  customPrice = false,
                   headerLinks,
                   description,
                   features,
-                  otherFeatures,
                   button,
                 },
                 index
               ) => (
                 <li
-                  className={clsx(
-                    'group relative flex min-h-full flex-col rounded-[10px] p-6 pt-5',
-                    !highlighted && 'bg-black-new'
-                  )}
+                  className="group relative flex min-h-full flex-col rounded-[10px] bg-black-new p-6 pt-5"
                   key={index}
                 >
                   <div className="flex items-center justify-between">
@@ -121,18 +94,24 @@ const Hero = () => {
                       </em>
                     )}
                     <span className="text-[40px] font-medium leading-none tracking-tighter">
-                      ${price}
-                    </span>{' '}
-                    <span className="text-sm font-light tracking-extra-tight text-gray-new-50">
-                      /month
+                      {customPrice ? (
+                        'Custom'
+                      ) : (
+                        <>
+                          ${price}{' '}
+                          <span className="text-sm font-light tracking-extra-tight text-gray-new-50">
+                            /month
+                          </span>
+                        </>
+                      )}
                     </span>
                   </p>
                   <Button
                     className={clsx(
-                      'mt-6 w-full !py-4 !text-base !font-medium leading-none tracking-tighter transition-colors duration-300 sm:max-w-none',
+                      'mt-6 w-full !py-4 !text-base leading-none tracking-tighter transition-colors duration-300 sm:max-w-none',
                       highlighted
-                        ? 'bg-green-45 text-black hover:bg-[#00ffaa]'
-                        : 'bg-gray-new-20 hover:bg-gray-new-30'
+                        ? 'bg-green-45 font-semibold text-black hover:bg-[#00ffaa]'
+                        : 'bg-gray-new-20 font-medium hover:bg-gray-new-30'
                     )}
                     size="sm"
                     to={button.url}
@@ -149,7 +128,7 @@ const Hero = () => {
                   </Button>
                   <p
                     className={clsx(
-                      'mt-5 leading-snug tracking-extra-tight text-gray-new-60',
+                      'mt-5 text-[15px] leading-snug tracking-extra-tight text-gray-new-60 lg:text-base',
                       '[&_a]:text-white [&_a]:underline [&_a]:decoration-1 [&_a]:underline-offset-4 [&_a]:transition-colors [&_a]:duration-200 hover:[&_a]:decoration-transparent'
                     )}
                   >
@@ -165,16 +144,9 @@ const Hero = () => {
                         )
                       : description}
                   </p>
-                  <Features features={features} type={type} highlighted={highlighted} />
-                  {otherFeatures && (
-                    <Features
-                      title={otherFeatures.title}
-                      features={otherFeatures.features}
-                      type={type}
-                      highlighted={highlighted}
-                      hasToggler
-                    />
-                  )}
+                  {features.map((featureBlock, index) => (
+                    <Features {...featureBlock} key={index} highlighted={highlighted} />
+                  ))}
                   {highlighted && (
                     <LazyMotion features={domAnimation}>
                       <m.span
@@ -193,11 +165,13 @@ const Hero = () => {
           </ul>
         </div>
         <CtaBlock
-          className="max-w-[656px]"
-          title="Custom Plans"
-          description="Connect with our team for HIPAA compliance, annual contracts, higher resource limits, and more."
-          buttonText="Talk to Sales"
+          className="max-w-[656px] xl:mt-8 lg:mt-7 lg:max-w-full md:mt-4 md:max-w-[552px] sm:!p-6"
+          contentClassName="!text-left sm:!max-w-full"
+          title="Personalized migration plans: Switch to Neon without downtime"
+          description="Our experienced Solutions Engineers will help you migrate your production application to Neon with minimal disruption."
+          buttonText="Book a meeting"
           buttonUrl={LINKS.contactSales}
+          buttonClassName="sm:w-full"
           size="sm"
           hasDecor={false}
         />
