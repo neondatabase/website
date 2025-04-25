@@ -15,11 +15,6 @@ const items = [
     answer: `In Neon, you are charged a monthly fee plus any additional compute and/or storage usage over what's included in your plan. For example, the Launch plan includes 300 compute-hours of compute usage;  if you consume 320 compute-hours in a month, your will see extra 20 compute-hours in your monthly bill.`,
   },
   {
-    question: 'Do you offer discounts and credits for Startups?',
-    answer: `Yes! Startups that have received venture funding can apply for up to $100K in credits to help them get started with Neon. <a href="https://neon.tech/startups">Learn more and apply here</a>.`,
-    id: 'startup-discounts',
-  },
-  {
     question: 'When will I be billed?',
     answer: `Neon bills for the past month's usage at the beginning of each calendar month. For more information, see <a href="/docs/introduction/manage-billing">Manage billing</a>.`,
   },
@@ -30,6 +25,11 @@ const items = [
   {
     question: 'How can I control my costs?',
     answer: `When enabling <a href="/docs/introduction/autoscaling">autoscaling</a>, you will set a maximum autoscaling limit (e.g. 2 CU) that will act as a de-facto cost limit.`,
+  },
+  {
+    question: 'Do you offer discounts and credits for Startups?',
+    answer: `Yes! Startups that have received venture funding can apply for up to $100K in credits to help them get started with Neon. <a href="https://neon.tech/startups">Learn more and apply here</a>.`,
+    id: 'startup-discounts',
   },
   {
     question: 'How is storage charged in Neon?',
