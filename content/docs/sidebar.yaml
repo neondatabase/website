@@ -217,6 +217,9 @@
               slug: guides/scale-to-zero-guide
         - title: Instant restore
           slug: introduction/branch-restore
+        - title: Backup & restore
+          slug: guides/backup-restore
+          tag: early access 
         - title: Branching
           slug: guides/branching-intro
           items:
