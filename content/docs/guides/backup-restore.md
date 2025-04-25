@@ -17,8 +17,8 @@ Use the **Backup & Restore** page in the Neon Console to restore a branch to a p
 ## What you can do
 
 - ✅ Instantly restore a branch
-- ✅ Preview data before restoring  
-- ✅ Create snapshots  
+- ✅ Preview data before restoring
+- ✅ Create snapshots
 - ✅ Restore from a snapshot
 
 ---
