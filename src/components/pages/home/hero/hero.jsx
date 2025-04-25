@@ -111,8 +111,8 @@ const Hero = () => {
             Ship faster with Postgres
           </h1>
           <p className="mt-2.5 max-w-xl text-lg font-light leading-snug tracking-tighter text-gray-new-80 lg:mt-2.5 lg:text-base">
-            The database you love, on a serverless platform designed to help you build reliable and
-            scalable applications faster.
+            The database developers trust, on a serverless platform designed to help you build
+            reliable and scalable applications faster.
           </p>
           <div className="mt-8 flex items-center gap-6">
             <Button

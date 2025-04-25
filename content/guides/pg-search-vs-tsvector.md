@@ -78,7 +78,7 @@ With `pg_search`, you get features such as:
 
 <Admonition type="note" title="pg_search on Neon">
 
-`pg_search` is currently only available on Neon projects using Postgres 17 and created in an [AWS region](/docs/introduction/regions#aws-regions).
+`pg_search` is currently only available on Neon projects created in an [AWS region](/docs/introduction/regions#aws-regions).
 
 </Admonition>
 
