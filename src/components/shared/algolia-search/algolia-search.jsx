@@ -35,11 +35,14 @@ const AlgoliaSearch = ({ indexName, children, posts, searchInputClassName }) => 
     debouncedSetUiState(uiState, setUiState);
   };
 
-  // Preloader and fallback for missing Algolia credentials
-  if (!mounted || !algoliaCredsAvailable)
+  // Fallback for missing Algolia credentials
+  if (!algoliaCredsAvailable) return children;
+
+  // Preloader
+  if (!mounted)
     return (
       <>
-        {algoliaCredsAvailable && <SearchInput className={searchInputClassName} asPlaceholder />}
+        <SearchInput className={searchInputClassName} asPlaceholder />
         {children}
       </>
     );
