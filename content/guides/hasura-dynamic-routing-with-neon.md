@@ -57,7 +57,7 @@ The template must resolve to one of the predefined connection identifiers:
 
 Here's a high-level overview of how to set up dynamic routing with Neon and Hasura:
 
-1.  **Create Neon branches:** For each environment you need (e.g., `dev`, `staging`, `feature-x` ), create a corresponding branch in your Neon project. Obtain the connection string for each branch.
+1.  **Create Neon branches:** For each environment you need (e.g., `dev`, `staging`, `feature-x`), create a corresponding branch in your Neon project. Obtain the connection string for each branch.
 2.  **Configure Hasura data source:** Add your _primary_ Neon database as a data source in Hasura.
 3.  **Define connection set:** In the Hasura data source configuration, add the connection strings of your Neon branches to the Connection set, giving each a unique, descriptive name (e.g., `dev_branch`, `staging_branch`, `feature_x_branch`).
 4.  **Implement connection template:** Write a Kriti template that inspects the incoming GraphQL request (e.g., checks for a specific header like `x-hasura-branch-name`) and resolves to the appropriate member name in the Connection set (e.g., `$.connection_set.dev_branch`).
