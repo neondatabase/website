@@ -40,7 +40,7 @@ Third, select the components that you want to install, uncheck the Stack Builder
 Fourth, specify a directory where PostgreSQL stores the data and click the Next button:
 
 ![](/postgresqltutorial/Install-PostgreSQL-macOS-step-4.png)
-Fifth, enter the password for the **postgres** user account. You should note down this password for logging in to the PostgreSQL database server later. After that, click the Next button.
+Fifth, enter the password for the **postgres** user account. You should note this password for logging in to the PostgreSQL database server later. After that, click the Next button.
 
 ![](/postgresqltutorial/Install-PostgreSQL-macOS-step-5.png)
 Sixth, specify the port number on which the PostgreSQL server will listen. By default, PostgreSQL uses port number 5432\.

@@ -7,9 +7,9 @@ updatedOn: '2025-04-23T00:00:00.000Z'
 
 [Cloudflare R2](https://www.cloudflare.com/en-in/developer-platform/products/r2/) is S3-compatible object storage offering zero egress fees, designed for storing and serving large amounts of unstructured data like images, videos, and documents globally.
 
-This guide demonstrates how to integrate Cloudflare R2 with Neon by storing file metadata in your Neon database, while leveraging R2 for the actual file storage. This approach uses R2's scalable, S3-compatible storage combined with Neon's capabilities for managing structured metadata.
+This guide demonstrates how to integrate Cloudflare R2 with Neon by storing file metadata in your Neon database, while using R2 for file storage.
 
-## Prerequisites
+## Setup steps
 
 <Steps>
 
@@ -435,7 +435,7 @@ WHERE
     For private R2 buckets, store only the `object_key` and generate presigned *read* URLs on demand using a similar backend process.
     </Admonition>
 
-This pattern effectively separates file storage and delivery concerns (handled by R2) from structured metadata management (handled by Neon), leveraging the strengths of both services.
+This pattern separates file storage and delivery (handled by R2) from structured metadata management (handled by Neon).
 
 </Steps>
 
@@ -443,7 +443,6 @@ This pattern effectively separates file storage and delivery concerns (handled b
 
 - [Cloudflare R2 documentation](https://developers.cloudflare.com/r2/)
 - [Cloudflare presigned URLs](https://developers.cloudflare.com/r2/api/s3/presigned-urls/)
-- [Neon Documentation](/docs/introduction)
 - [Neon RLS](/docs/guides/neon-rls)
 
 <NeedHelp/>

@@ -5,11 +5,11 @@ enableTableOfContents: true
 updatedOn: '2025-04-23T00:00:00.000Z'
 ---
 
-[Amazon Simple Storage Service (AWS S3)](https://aws.amazon.com/s3/) is a highly scalable object storage service widely used for storing and retrieving large amounts of data, such as images, videos, backups, and application assets.
+[Amazon Simple Storage Service (AWS S3)](https://aws.amazon.com/s3/) is an object storage service widely used for storing and retrieving large amounts of data, such as images, videos, backups, and application assets.
 
-This guide demonstrates how to integrate AWS S3 with Neon by storing file metadata (like the object key and URL) in your Neon database, while leveraging S3 for the actual file storage and delivery. This approach uses S3's robust, scalable storage combined with Neon's capabilities for managing structured metadata.
+This guide demonstrates how to integrate AWS S3 with Neon by storing file metadata (like the object key and URL) in your Neon database, while using S3 for file storage.
 
-## Prerequisites
+## Setup steps
 
 <Steps>
 
@@ -62,7 +62,7 @@ This guide demonstrates how to integrate AWS S3 with Neon by storing file metada
     - Click **Next**, then **Create user**.
     - Click on **Create access key**.
       ![Create Access Key](/docs/guides/aws-s3-create-access-key.png)
-    - Click **Other** >> **Create access key**. Copy the **Access key ID** and **Secret access key**. These will be used in your application to authenticate with AWS S3.
+    - Click **Other** > **Create access key**. Copy the **Access key ID** and **Secret access key**. These will be used in your application to authenticate with AWS S3.
 
 ## Configure CORS for client-side uploads
 
@@ -82,7 +82,7 @@ In your S3 bucket settings, navigate to the **Permissions** tab and find the **C
 ]
 ```
 
-This configuration allows any origin (`*`) to perform `GET` and `PUT` requests. In a production environment, you should restrict `AllowedOrigins` to your application's domain(s) for security.
+> This configuration allows any origin (`*`) to perform `GET` and `PUT` requests. In a production environment, you should restrict `AllowedOrigins` to your application's domain(s) for security.
 
 ## Create a table in Neon for file metadata
 
@@ -480,8 +480,7 @@ This pattern effectively separates file storage and delivery concerns (handled b
 ## Resources
 
 - [AWS S3 documentation](https://docs.aws.amazon.com/s3/index.html)
-- [AWS Sharing objects with presigned URLs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html)
-- [Neon Documentation](/docs/introduction)
+- [AWS — Sharing objects with presigned URLs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html)
 - [Neon RLS](/docs/guides/neon-rls)
 
 <NeedHelp/>

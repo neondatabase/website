@@ -7,9 +7,9 @@ updatedOn: '2025-04-23T00:00:00.000Z'
 
 [ImageKit.io](https://imagekit.io/) is a cloud-based image and video optimization and delivery platform. It provides real-time manipulation, storage, and delivery via a global CDN, simplifying media management for web and mobile applications.
 
-This guide demonstrates how to integrate ImageKit.io with Neon. You'll learn how to upload files directly from the client-side to ImageKit.io using securely generated authentication parameters from your backend, and then store the resulting file metadata (like the ImageKit File ID and URL) in your Neon database. This leverages ImageKit's specialized media handling while using Neon for structured metadata management.
+This guide demonstrates how to integrate ImageKit.io with Neon. You'll learn how to upload files directly from the client-side to ImageKit.io using securely generated authentication parameters from your backend, and then store the resulting file metadata (like the ImageKit File ID and URL) in your Neon database.
 
-## Prerequisites
+## Setup steps
 
 <Steps>
 
@@ -22,7 +22,7 @@ This guide demonstrates how to integrate ImageKit.io with Neon. You'll learn how
 
 1.  Sign up for a free or paid account at [ImageKit.io](https://imagekit.io/registration).
 2.  Once logged in, navigate to the **Developer options** section in the dashboard sidebar.
-3.  Under **API Keys**, note down your **Public Key**, **Private Key**, and **URL Endpoint**. These are essential for interacting with the ImageKit API and SDKs.
+3.  Under **API Keys**, note your **Public Key**, **Private Key**, and **URL Endpoint**. These are essential for interacting with the ImageKit API and SDKs.
     ![ImageKit API Keys](/docs/guides/imagekit-api-keys.png)
 
 ## Create a table in Neon for file metadata
@@ -413,7 +413,7 @@ WHERE
 - The `file_url` is the direct link to the file on ImageKit's CDN. You can use this directly in `<img>` tags, video players, or links.
 - **ImageKit transformations:** A key benefit of ImageKit is real-time manipulation. You can append transformation parameters directly to the `file_url` to resize, crop, format, or optimize the media on-the-fly. For example, `file_url + '?tr=w-300,h-200'` would resize an image to 300x200 pixels. Learn more on [ImageKit transformation docs](https://imagekit.io/docs/image-transformation) for possibilities.
 
-This pattern effectively separates media storage, optimization, and delivery (handled by ImageKit.io) from structured metadata management (handled by Neon), leveraging the strengths of both services.
+This pattern separates media storage, optimization, and delivery (handled by ImageKit.io) from structured metadata management (handled by Neon).
 
 </Steps>
 
@@ -421,7 +421,6 @@ This pattern effectively separates media storage, optimization, and delivery (ha
 
 - [ImageKit.io documentation](https://imagekit.io/docs)
 - [ImageKit.io Upload API](https://imagekit.io/docs/api-reference/upload-file/upload-file)
-- [Neon Documentation](/docs/introduction)
 - [Neon RLS](/docs/guides/neon-rls)
 
 <NeedHelp/>
