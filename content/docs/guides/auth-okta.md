@@ -88,7 +88,7 @@ DATABASE_URL=NEON_DB_CONNECTION_STRING
 
 ### Retrieve your Okta configuration
 
-From the application's **General** tab, find the **Client ID** and **Client SECRET**. Also note down your Okta **Issuer URI**, which is the first part of your Okta account's URL, e.g., `https://dev-12345.okta.com`. If it isn't clear, visit the **Security > API** section from the sidebar in the console to find the **Issuer URI** and remove `/oauth2/default` from the end.
+From the application's **General** tab, find the **Client ID** and **Client SECRET**. Also note your Okta **Issuer URI**, which is the first part of your Okta account's URL, e.g., `https://dev-12345.okta.com`. If it isn't clear, visit the **Security > API** section from the sidebar in the console to find the **Issuer URI** and remove `/oauth2/default` from the end.
 
 Add these as environment variables to the `.env.local` file in your Next.js project:
 
