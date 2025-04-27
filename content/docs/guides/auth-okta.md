@@ -3,7 +3,7 @@ title: Authenticate Neon Postgres application users with Okta
 subtitle: Learn how to add authentication to a Neon Postgres database application with
   Okta
 enableTableOfContents: true
-updatedOn: '2025-02-03T20:41:57.307Z'
+updatedOn: '2025-04-27T11:08:17.419Z'
 ---
 
 User authentication is critical for web applications, especially for apps internal to an organization. [Okta Workforce Indentity Cloud](https://www.okta.com/workforce-identity/) is an identity and access management platform for organizations, that provides authentication, authorization, and user management capabilities.

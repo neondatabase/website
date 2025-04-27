@@ -2,7 +2,7 @@
 title: File storage with AWS S3
 subtitle: Store files via AWS S3 and track metadata in Neon
 enableTableOfContents: true
-updatedOn: '2025-04-23T00:00:00.000Z'
+updatedOn: '2025-04-27T11:08:17.422Z'
 ---
 
 [Amazon Simple Storage Service (AWS S3)](https://aws.amazon.com/s3/) is an object storage service widely used for storing and retrieving large amounts of data, such as images, videos, backups, and application assets.

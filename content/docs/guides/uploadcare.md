@@ -2,7 +2,7 @@
 title: Media storage with Uploadcare
 subtitle: Store files via Uploadcare and track metadata in Neon
 enableTableOfContents: true
-updatedOn: '2024-05-23T00:00:00.000Z'
+updatedOn: '2025-04-27T11:08:17.427Z'
 ---
 
 [Uploadcare](https://uploadcare.com/) provides an cloud platform designed to simplify file uploading, processing, storage, and delivery via a fast CDN. It offers tools that manage and optimize media like images, videos, and documents for your applications.
