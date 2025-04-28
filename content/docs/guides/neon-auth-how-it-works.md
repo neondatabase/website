@@ -188,7 +188,6 @@ CREATE TABLE todos (
 
 ```sql
 INSERT INTO todos (task, user_id)
-VALUES ('Buy groceries', 'user-id-123');
 ```
 
 ## Creating users
