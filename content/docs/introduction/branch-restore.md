@@ -121,7 +121,7 @@ First, select the **Branch to restore**. This is the target branch for the resto
 #### To restore from another branch:
 
 1.  Switch to the **From another branch** tab.
-1.  Select the source branch that that you want to restore data from.
+1.  Select the source branch that you want to restore data from.
 1.  By default, the operation pulls the latest data from the source branch. If you want to pull from an earlier point in time, disable **Restore from latest data (head)**.
 
     The timestamp selector will appear.

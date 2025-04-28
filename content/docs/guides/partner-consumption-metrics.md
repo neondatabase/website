@@ -237,7 +237,7 @@ As an Neon partner or paid plan customer, you may have questions related to poll
 
 Neon's consumption data is updated approximately every 15 minutes, so a minimum interval of 15 minutes between calls to our consumption APIs is recommended.
 
-### What is the the rate limit for Neon's consumption APIs?
+### What is the rate limit for Neon's consumption APIs?
 
 Neon's consumption APIs, [Get account consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount) and [Get consumption metrics for each project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject), are rate-limited to about 30 requests per minute per account. Both APIs share the same rate limiter, so requests to either endpoint count toward the limit.
 
