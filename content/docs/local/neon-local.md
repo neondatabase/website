@@ -126,6 +126,6 @@ db:
 
 ## Git integration using Docker on Mac
 
-If using Docker Desktop for Mac, ensure that your Virtual Machine is set to use gRPC FUSE, not VirtioFS this allows Neon Local to detect git branch changes. There is currently a bug with VirtioFS which can prevent containers from being properly updated when local files change while the container is running.
+If using Docker Desktop for Mac, make sure that your Virtual Machine is set to use gRPC FUSE, not VirtioFS. This allows Neon Local to detect git branch changes. There is currently a bug with VirtioFS that can prevent containers from being properly updated when local files change while the container is running.
 
 ![Docker Desktop are set to gRPC FUSE](/docs/local/neon-local-docker-settings.jpg)
