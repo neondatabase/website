@@ -12,12 +12,11 @@ Neon Auth lets you add authentication to your app in seconds — user data is sy
 
 <FeatureBetaProps feature_name="Neon Auth" />
 
-
 <Steps>
 
 ## Add Neon Auth to a project
 
-Go to [pg.new](https://pg.new) to create a new Neon project.  
+Go to [pg.new](https://pg.new) to create a new Neon project.
 
 Once your project is ready, open your project's **Auth** page. Neon Auth is ready for you to get started.
 
@@ -82,9 +81,9 @@ Query your users table in the SQL Editor to see your new user:
 SELECT * FROM neon_auth.users_sync;
 ```
 
-| id          | name        | email            | created_at           | updated_at           | deleted_at | raw_json                          |
-|-------------|-------------|------------------|----------------------|----------------------|------------|-----------------------------------|
-| 51e491df... | Sam Patel   | sam@startup.dev  | 2025-02-12 19:43...  | 2025-02-12 19:46...  | null       | `{"id": "51e491df...", ...}`      |
+| id          | name      | email           | created_at          | updated_at          | deleted_at | raw_json                     |
+| ----------- | --------- | --------------- | ------------------- | ------------------- | ---------- | ---------------------------- |
+| 51e491df... | Sam Patel | sam@startup.dev | 2025-02-12 19:43... | 2025-02-12 19:46... | null       | `{"id": "51e491df...", ...}` |
 
 </Steps>
 
