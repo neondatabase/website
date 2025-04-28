@@ -1,3 +1,4 @@
+import AiAgentsGradientIcon from 'icons/header/ai-agent-gradient.inline.svg';
 import AiAgentsIcon from 'icons/header/ai-agent.inline.svg';
 import ApiGradientIcon from 'icons/header/api-gradient.inline.svg';
 import ApiIcon from 'icons/header/api.inline.svg';
@@ -16,14 +17,17 @@ import FlowGradientIcon from 'icons/header/flow-gradient.inline.svg';
 import FlowIcon from 'icons/header/flow.inline.svg';
 import FolderGradientIcon from 'icons/header/folder-gradient.inline.svg';
 import FolderIcon from 'icons/header/folder.inline.svg';
+import GearGradientIcon from 'icons/header/gear-gradient.inline.svg';
 import GearIcon from 'icons/header/gear.inline.svg';
 import MigrationGradientIcon from 'icons/header/migration-gradient.inline.svg';
 import MigrationIcon from 'icons/header/migration.inline.svg';
 import PeopleIcon from 'icons/header/people.inline.svg';
 import PrivacyGradientIcon from 'icons/header/privacy-gradient.inline.svg';
 import PrivacyIcon from 'icons/header/privacy.inline.svg';
+import SaasGradientIcon from 'icons/header/saas-gradient.inline.svg';
 import SaasIcon from 'icons/header/saas.inline.svg';
 import SecurityIcon from 'icons/header/security.inline.svg';
+import ServerlessGradientIcon from 'icons/header/serverless-gradient.inline.svg';
 import ServerlessIcon from 'icons/header/serverless.inline.svg';
 import StarGradientIcon from 'icons/header/star-gradient.inline.svg';
 import StarIcon from 'icons/header/star.inline.svg';
@@ -119,30 +123,41 @@ export default {
           items: [
             {
               icon: SaasIcon,
+              iconGradient: SaasGradientIcon,
               title: 'SaaS Apps',
+              description: 'Build faster with Neon',
               to: `${LINKS.useCases}/postgres-for-saas`,
             },
             {
               icon: ServerlessIcon,
+              iconGradient: ServerlessGradientIcon,
               title: 'Serverless Apps',
+              description: 'Autoscale with traffic',
               to: `${LINKS.useCases}/serverless-apps`,
             },
             {
               icon: DatabaseIcon,
+              iconGradient: DatabaseGradientIcon,
               title: 'Database per Tenant',
+              description: 'Data isolation without overhead',
               to: `${LINKS.useCases}/database-per-tenant`,
             },
             {
               icon: GearIcon,
+              iconGradient: GearGradientIcon,
               title: 'Dev/Test',
+              description: 'Production-like environments',
               to: `${LINKS.useCases}/dev-test`,
             },
             {
               icon: AiAgentsIcon,
+              iconGradient: AiAgentsGradientIcon,
               title: 'Agents',
+              description: 'Deploy Postgres via AI agents',
               to: `${LINKS.useCases}/ai-agents`,
             },
           ],
+          isExtended: true,
         },
         {
           title: 'For teams',

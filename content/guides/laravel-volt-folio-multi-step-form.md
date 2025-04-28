@@ -337,7 +337,7 @@ class WorkExperience extends Model
 }
 ```
 
-Let's quickly note down the most important parts in these model definitions:
+Let's quickly note the most important parts in these model definitions:
 
 - We've used the `$fillable` property to specify which attributes can be mass-assigned. This is a security feature to prevent unintended mass assignment vulnerabilities.
 - We've defined relationships between models. An `Applicant` has many `Education` and `WorkExperience` records, while `Education` and `WorkExperience` belong to an `Applicant`.

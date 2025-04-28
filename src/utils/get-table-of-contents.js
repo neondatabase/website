@@ -10,12 +10,13 @@ const buildNestedToc = (headings, currentLevel, currentIndex = 0) => {
   const toc = [];
   let numberedStep = 0;
   let localIndex = currentIndex;
+  let currentStepsIndex = -1;
 
   while (headings.length > 0) {
     const currentHeading = headings[0];
 
     // Handle object format
-    const { isNumbered } = currentHeading;
+    const { isNumbered, stepsIndex } = currentHeading;
     const depthMatch = currentHeading.title.match(/^#+/);
     const depth = (depthMatch ? depthMatch[0].length : 1) - 1;
     const title = currentHeading.title.replace(/(#+)\s/, '');
@@ -23,6 +24,11 @@ const buildNestedToc = (headings, currentLevel, currentIndex = 0) => {
     const titleWithInlineCode = title.replace(/`([^`]+)`/g, '<code>$1</code>');
 
     if (depth === currentLevel) {
+      if (isNumbered && stepsIndex !== currentStepsIndex) {
+        numberedStep = 0;
+        currentStepsIndex = stepsIndex;
+      }
+
       const tocItem = {
         title: titleWithInlineCode,
         id: slugify(title, { lower: true, strict: true, remove: /[*+~.()'"!:@]/g }),
@@ -93,14 +99,20 @@ const getTableOfContents = (content) => {
   // Convert headings to objects while preserving order
   const arr = allHeadings.map((heading) => {
     // Check if this heading is inside any Steps section and is h2
-    const isInSteps = stepsMatches.some((match) => {
+    let stepsIndex = -1;
+    const isInSteps = stepsMatches.some((match, index) => {
       const stepsContent = match[0];
-      return stepsContent.includes(heading) && /^##\s(.*)$/gm.test(heading);
+      if (stepsContent.includes(heading) && /^##\s(.*)$/gm.test(heading)) {
+        stepsIndex = index;
+        return true;
+      }
+      return false;
     });
 
     return {
       title: heading,
       isNumbered: isInSteps,
+      stepsIndex: isInSteps ? stepsIndex : -1,
     };
   });
 

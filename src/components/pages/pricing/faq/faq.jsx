@@ -27,6 +27,11 @@ const items = [
     answer: `When enabling <a href="/docs/introduction/autoscaling">autoscaling</a>, you will set a maximum autoscaling limit (e.g. 2 CU) that will act as a de-facto cost limit.`,
   },
   {
+    question: 'Do you offer discounts and credits for Startups?',
+    answer: `Yes! Startups that have received venture funding can apply for up to $100K in credits to help them get started with Neon. <a href="https://neon.tech/startups">Learn more and apply here</a>.`,
+    id: 'startup-discounts',
+  },
+  {
     question: 'How is storage charged in Neon?',
     answer: `Neon implements a unique storage engine that enables database branching on copy-on-write, without duplicate storage. You can create instant database copies (database branches) without adding to the storage bill. <a href="/docs/introduction/usage-metrics">Read more in our docs</a>.`,
   },

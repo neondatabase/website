@@ -2,7 +2,7 @@
 title: Using Custom JWTs with Neon RLS
 subtitle: A step-by-step guide for using custom JWTs with Neon RLS
 enableTableOfContents: true
-updatedOn: '2025-03-10T18:26:02.765Z'
+updatedOn: '2025-04-27T11:08:17.426Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-custom-jwt
   - /docs/guides/neon-authorize-custom-jwt
@@ -173,7 +173,7 @@ This makes the public key available at `https://your-app.com/.well-known/jwks.js
    ![Custom JWT JWKS url in Neon](/docs/guides/custom_jwt_jwks_url_in_neon.png)
 4. Click **Set Up**
 5. Follow the steps in the UI to set up roles for Neon RLS. You can ignore the schema-related steps for this guide.
-6. Note down the connection strings for the `neondb_owner` and `authenticated, passwordless` roles. You'll need both:
+6. Note the connection strings for the `neondb_owner` and `authenticated, passwordless` roles. You'll need both:
    - **`neondb_owner`:** Full privileges, used for migrations.
    - **`authenticated`:** Used by your application, access restricted by RLS.
      ![Connection strings in Neon](/docs/guides/neon_authorize_env_values_example.png)

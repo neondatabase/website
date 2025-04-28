@@ -11,7 +11,7 @@ redirectFrom:
   - /docs/introduction/pro-plan
   - /docs/introduction/custom-plan
   - /docs/reference/technical-preview-free-tier
-updatedOn: '2025-03-13T20:13:21.746Z'
+updatedOn: '2025-04-25T12:49:01.719Z'
 ---
 
 Neon's plans are designed to meet different user requirements, ranging from hobby projects to enterprise-level production workloads. We also offer custom enterprise plans with volume-based discounts for large teams or database fleets. Refer to our [Pricing](https://neon.tech/pricing) page for fees and a detailed plan comparison.
@@ -65,6 +65,7 @@ The Free Plan includes the following usage allowances:
 - All supported regions
 - Project collaboration
 - Advanced Postgres features such as connection pooling, logical replication, and 60+ Postgres extensions
+- Read replicas (limit of 3 read replica computes per project)
 - Neon features such as branching, instant restore up to **24 hours** in the past, time travel connections, and more
 - [Community support](/docs/introduction/support)
 
