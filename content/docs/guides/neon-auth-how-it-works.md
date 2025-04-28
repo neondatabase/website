@@ -224,9 +224,9 @@ The new user will be created in your auth provider and automatically synchronize
 
 For more details, see [Manage Neon Auth using the API](/docs/guides/neon-auth-api#create-users).
 
-## Claiming Your Stack Auth Project
+## Claiming your Neon Auth project
 
-By default, when you use Neon Auth's Quick Start, Neon manages your Stack Auth project for you. If you want to take direct ownership of the Stack Auth project (for advanced configuration or direct management), you can "claim" the project at any time.
+By default, Neon creates and manages the Stack Auth project for you behind the scenes. If you want to take direct ownership of the Stack Auth project (for advanced configuration or direct management), you can "claim" the project at any time.
 
 ### Claim via the Neon Console
 
@@ -259,7 +259,7 @@ See [Manage Neon Auth using the API](/docs/guides/neon-auth-api#transfer-to-your
 After claiming, you'll still be able to access your project from the Neon Console, but you'll also have direct access from the Stack Auth dashboard.
 </Admonition>
 
-## Permissions and Roles
+## Permissions and roles
 
 For organization-owned projects, only organization admins can manage Neon Auth settings. Members and project collaborators can use Neon Auth features once configured, but cannot modify the integration settings.
 
