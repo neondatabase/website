@@ -189,4 +189,86 @@ CREATE TABLE todos (
 ```sql
 INSERT INTO todos (task, user_id)
 VALUES ('Buy groceries', 'user-id-123');
-``` 
+```
+
+## Creating users
+
+You can create users in Neon Auth using either the Neon Console or the API:
+
+### Creating users in the Console
+
+You can create users directly from the Neon Console—no app integration or API required. This is especially useful for development and testing, as it lets you quickly add test users and see their profiles synced to your `neon_auth.users_sync` table.
+
+1. Go to your project's **Auth** page in the Neon Console.
+2. Click **Create user** and fill in the required details.
+3. The new user will appear in your auth provider and be automatically synchronized to your database.
+
+### Creating users via the API
+
+You can also create users programmatically using the Neon API:
+
+```bash
+curl --request POST \
+     --url 'https://console.neon.tech/api/v2/projects/auth/user' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '{
+       "project_id": "project-id",
+       "auth_provider": "stack",
+       "email": "user@example.com",
+       "name": "Example User"
+     }'
+```
+
+The new user will be created in your auth provider and automatically synchronized to your `neon_auth.users_sync` table.
+
+For more details, see [Manage Neon Auth using the API](/docs/guides/neon-auth-api#create-users).
+
+## Claiming Your Stack Auth Project
+
+By default, when you use Neon Auth's Quick Start, Neon manages your Stack Auth project for you. If you want to take direct ownership of the Stack Auth project (for advanced configuration or direct management), you can "claim" the project at any time.
+
+### Claim via the Neon Console
+
+1. Go to your project's **Auth** page in the Neon Console.
+2. Click **Transfer ownership**.
+3. Follow the prompts to select the Stack Auth account that should receive ownership.
+
+![The Claim project button appears when your integration is Neon managed](/docs/guides/auth-transfer-ownership.png)
+
+After claiming, you'll have direct access to manage your project in the Stack Auth dashboard, while maintaining the integration with your Neon database.
+
+### Claim via the API
+
+You can also claim your project programmatically:
+
+```bash
+curl --request POST \
+     --url 'https://console.neon.tech/api/v2/projects/auth/transfer_ownership' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --data '{
+       "project_id": "project-id",
+       "auth_provider": "stack"
+     }'
+```
+
+Open the returned URL in your browser to complete the claim process.  
+See [Manage Neon Auth using the API](/docs/guides/neon-auth-api#transfer-to-your-auth-provider) for more details.
+
+<Admonition type="note">
+After claiming, you'll still be able to access your project from the Neon Console, but you'll also have direct access from the Stack Auth dashboard.
+</Admonition>
+
+## Permissions and Roles
+
+For organization-owned projects, only organization admins can manage Neon Auth settings. Members and project collaborators can use Neon Auth features once configured, but cannot modify the integration settings.
+
+| Action                | Admin | Member | Collaborator |
+|-----------------------|:-----:|:------:|:-----------:|
+| Install Neon Auth     |  ✅   |   ❌   |      ❌     |
+| Remove Neon Auth      |  ✅   |   ❌   |      ❌     |
+| Claim project         |  ✅   |   ❌   |      ❌     |
+| Generate SDK Keys     |  ✅   |   ❌   |      ❌     |
+| Create users          |  ✅   |   ✅   |      ✅     |
+
+For more information about organization roles and permissions, see [User roles and permissions](/docs/manage/organizations#user-roles-and-permissions). 
