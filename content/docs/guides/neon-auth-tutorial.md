@@ -1,5 +1,5 @@
 ---
-title: Neon Auth Tutorial
+title: Neon Auth tutorial
 subtitle: See how Neon Auth eliminates the complexity of manual user data
   synchronization, making your development faster and your applications more
   robust.

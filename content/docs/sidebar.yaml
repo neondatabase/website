@@ -862,12 +862,24 @@
       icon: auth
       tag: beta
       items:
-        - title: About
-          slug: guides/neon-auth
-        - title: Tutorial
-          slug: guides/neon-auth-tutorial
-        - title: API
-          slug: guides/neon-auth-api
+        - section: Get started
+          items:
+            - title: Get started
+              slug: guides/neon-auth
+        - section: Guides
+          items:
+            - title: Tutorial
+              slug: guides/neon-auth-tutorial
+        - section: Concepts
+          items:
+            - title: How Neon Auth works
+              slug: guides/neon-auth-how-it-works
+            - title: Best practices & FAQ
+              slug: guides/neon-auth-best-practices
+        - section: REFERENCE
+          items:
+            - title: Neon Auth API Reference
+              slug: guides/neon-auth-api
     - title: Neon RLS
       icon: lock
       slug: guides/neon-rls
