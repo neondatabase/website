@@ -403,10 +403,10 @@
         - section: Updates
           items:
             - title: Overview
-              slug: manage/maintenance-updates-overview              
+              slug: manage/maintenance-updates-overview
               tag: new
             - title: Platform maintenance
-              slug: manage/platform-maintenance              
+              slug: manage/platform-maintenance
               tag: new
             - title: Updates
               slug: manage/updates
@@ -941,6 +941,10 @@
               slug: guides/neon-twin-full-pg-dump-restore
             - title: Partial Twin
               slug: guides/neon-twin-partial-pg-dump-restore
+    - title: Neon Local
+      icon: container
+      tag: new
+      slug: local/neon-local
 - section: Postgres
   items:
     - title: PostgreSQL Tutorial
