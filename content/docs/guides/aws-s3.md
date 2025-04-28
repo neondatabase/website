@@ -277,7 +277,6 @@ s3_client = boto3.client(
 
 app = Flask(__name__)
 
-
 # Use a global PostgreSQL connection instead of creating a new one for each request in production
 def get_db_connection():
     return psycopg2.connect(os.getenv("DATABASE_URL"))
