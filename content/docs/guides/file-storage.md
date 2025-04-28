@@ -28,6 +28,8 @@ You can integrate Neon with a variety of storage solutions:
 
 <a href="/docs/guides/azure-blob-storage" title="Azure Blob Storage" description="Upload files to Azure Blob Storage and store metadata in Neon" icon="azure"></a>
 
+<a href="/docs/guides/backblaze-b2" title="Backblaze B2" description="Upload files to Backblaze B2 and store metadata in Neon" icon="backblaze"></a>
+
 <a href="/docs/guides/cloudflare-r2" title="Cloudflare R2" description="Upload files to Cloudflare R2 and store metadata in Neon" icon="cloudflare"></a>
 
 <a href="/docs/guides/cloudinary" title="Cloudinary" description="Upload files to Cloudinary and store metadata in Neon" icon="cloudinary"></a>

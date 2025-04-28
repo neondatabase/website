@@ -36,7 +36,7 @@ This guide demonstrates how to integrate Azure Blob Storage with Neon by storing
 7.  **Get connection string:**
     - In your storage account menu, under **Security + networking**, click **Access keys**.
     - Copy one of the **Connection strings**. This will be used by your backend application to authenticate with Azure Blob Storage. Store it securely.
-    ![Azure Storage Account Access Keys](/docs/guides/azure-blob-storage-access-keys.png)
+      ![Azure Storage Account Access Keys](/docs/guides/azure-blob-storage-access-keys.png)
 
 ## Configure CORS for client-side uploads
 
@@ -46,14 +46,13 @@ Follow Azure's guide to [Configure CORS for Azure Storage](https://docs.microsof
 
 Here’s an example CORS configuration allowing `PUT` uploads and `GET` requests from your deployed frontend application and your local development environment:
 
--   **Allowed origins:** `https://your-production-app.com`, `http://localhost:3000` (Replace with your actual domains/ports)
--   **Allowed methods:** `PUT`, `GET`
--   **Allowed headers:** `*` (Or be more specific, e.g., `Content-Type`, `x-ms-blob-type`)
--   **Exposed headers:** `*`
--   **Max age (seconds):** `3600` (Example: 1 hour)
+- **Allowed origins:** `https://your-production-app.com`, `http://localhost:3000` (Replace with your actual domains/ports)
+- **Allowed methods:** `PUT`, `GET`
+- **Allowed headers:** `*` (Or be more specific, e.g., `Content-Type`, `x-ms-blob-type`)
+- **Exposed headers:** `*`
+- **Max age (seconds):** `3600` (Example: 1 hour)
 
-    ![Azure Storage CORS Configuration](/docs/guides/azure-blob-storage-cors.png)
-
+  ![Azure Storage CORS Configuration](/docs/guides/azure-blob-storage-cors.png)
 
 ## Create a table in Neon for file metadata
 
@@ -157,10 +156,13 @@ app.post('/generate-upload-sas', authMiddleware, async (c) => {
       expiresOn: new Date(new Date().valueOf() + 300 * 1000), // 5 minutes expiry
       permissions: BlobSASPermissions.parse('w'), // Write permission
       protocol: SASProtocol.Https,
-      contentType: contentType
+      contentType: contentType,
     };
 
-    const sasToken = generateBlobSASQueryParameters(sasOptions, blobServiceClient.credential).toString();
+    const sasToken = generateBlobSASQueryParameters(
+      sasOptions,
+      blobServiceClient.credential
+    ).toString();
     const sasUrl = `${fileUrl}?${sasToken}`;
 
     return c.json({ success: true, sasUrl, blobName, fileUrl });
@@ -378,6 +380,7 @@ Testing the SAS URL flow involves multiple steps:
          -H "Content-Type: application/json" \
          -d '{"fileName": "test-azure.txt", "contentType": "text/plain"}'
     ```
+
     You should receive a JSON response with a `sasUrl`, `blobName`, and `fileUrl`:
 
     ```json
@@ -399,16 +402,19 @@ Testing the SAS URL flow involves multiple steps:
          --upload-file /path/to/your/test-azure.txt \
          -H "Content-Type: text/plain" \
          -H "x-ms-blob-type: BlockBlob"
-    ```    
+    ```
+
     A successful upload returns HTTP `201 Created`.
 
 3.  **Save metadata:** Send a `POST` request to your `/save-metadata` endpoint with the `blobName` and base `fileUrl` from step 1.
     **Using cURL:**
+
     ```bash
     curl -X POST http://localhost:3000/save-metadata \
          -H "Content-Type: application/json" \
          -d '{"blobName": "<BLOB_NAME_FROM_STEP_1>", "fileUrl": "<FILE_URL_FROM_STEP_1>"}'
     ```
+
     You should receive a JSON response indicating success:
 
     ```json
@@ -450,87 +456,96 @@ WHERE
 - The query returns metadata stored in Neon.
 - The `file_url` column contains the base URL of the blob.
 - **Accessing the file:**
-    - If your container allows public `Blob` access, this `file_url` might be directly usable.
-    - If your container is **private** (recommended), you need to generate a **read-only SAS token** for the specific `blob_name` on demand using your backend (similar to the upload SAS generation, but with `BlobSASPermissions.parse("r")` or `BlobSasPermissions(read=True)`) and append it to the `file_url`. This provides secure, temporary read access.
-    - Use the resulting URL (base URL or URL with read SAS token) in your application (e.g., `<img>` tags, download links).
 
-    For example here's how to generate a read SAS URL:
-    <CodeTabs labels={["JavaScript", "Python"]}>
-    ```javascript
-    import { BlobServiceClient, generateBlobSASQueryParameters, BlobSASPermissions, SASProtocol } from '@azure/storage-blob';
-    const AZURE_CONTAINER_NAME = process.env.AZURE_STORAGE_CONTAINER_NAME;
+  - If your container allows public `Blob` access, this `file_url` might be directly usable.
+  - If your container is **private** (recommended), you need to generate a **read-only SAS token** for the specific `blob_name` on demand using your backend (similar to the upload SAS generation, but with `BlobSASPermissions.parse("r")` or `BlobSasPermissions(read=True)`) and append it to the `file_url`. This provides secure, temporary read access.
+  - Use the resulting URL (base URL or URL with read SAS token) in your application (e.g., `<img>` tags, download links).
 
-    const blobServiceClient = BlobServiceClient.fromConnectionString(
-        process.env.AZURE_STORAGE_CONNECTION_STRING
-    );
+  For example here's how to generate a read SAS URL:
+  <CodeTabs labels={["JavaScript", "Python"]}>
 
-    async function generateReadOnlySasUrl(blobName, expiryMinutes = 15) {
-        const containerClient = blobServiceClient.getContainerClient(AZURE_CONTAINER_NAME);
-        const blobClient = containerClient.getBlobClient(blobName);
+  ```javascript
+  import {
+    BlobServiceClient,
+    generateBlobSASQueryParameters,
+    BlobSASPermissions,
+    SASProtocol,
+  } from '@azure/storage-blob';
+  const AZURE_CONTAINER_NAME = process.env.AZURE_STORAGE_CONTAINER_NAME;
 
-        const sasOptions = {
-            containerName: AZURE_CONTAINER_NAME,
-            blobName: blobName,
-            startsOn: new Date(),
-            expiresOn: new Date(new Date().valueOf() + expiryMinutes * 60 * 1000),
-            permissions: BlobSASPermissions.parse('r'), // Read ('r') permission
-            protocol: SASProtocol.Https,
-        };
+  const blobServiceClient = BlobServiceClient.fromConnectionString(
+    process.env.AZURE_STORAGE_CONNECTION_STRING
+  );
 
-        const sasToken = generateBlobSASQueryParameters(
-            sasOptions,
-            blobServiceClient.credential
-        ).toString();
+  async function generateReadOnlySasUrl(blobName, expiryMinutes = 15) {
+    const containerClient = blobServiceClient.getContainerClient(AZURE_CONTAINER_NAME);
+    const blobClient = containerClient.getBlobClient(blobName);
 
-        const sasUrl = `${blobClient.url}?${sasToken}`;
-        return sasUrl;
-    }
+    const sasOptions = {
+      containerName: AZURE_CONTAINER_NAME,
+      blobName: blobName,
+      startsOn: new Date(),
+      expiresOn: new Date(new Date().valueOf() + expiryMinutes * 60 * 1000),
+      permissions: BlobSASPermissions.parse('r'), // Read ('r') permission
+      protocol: SASProtocol.Https,
+    };
 
-    // Replace '<BLOB_NAME_FROM_DB>' with the actual blob name
-    generateReadOnlySasUrl('<BLOB_NAME_FROM_DB>').then((url) => {
-        console.log("Read-only SAS URL:", url);
-    }).catch((error) => {
-        console.error("Error generating read SAS URL:", error);
+    const sasToken = generateBlobSASQueryParameters(
+      sasOptions,
+      blobServiceClient.credential
+    ).toString();
+
+    const sasUrl = `${blobClient.url}?${sasToken}`;
+    return sasUrl;
+  }
+
+  // Replace '<BLOB_NAME_FROM_DB>' with the actual blob name
+  generateReadOnlySasUrl('<BLOB_NAME_FROM_DB>')
+    .then((url) => {
+      console.log('Read-only SAS URL:', url);
+    })
+    .catch((error) => {
+      console.error('Error generating read SAS URL:', error);
     });
-    ```
+  ```
 
-    ```python
-    import os
-    from datetime import datetime, timedelta, timezone
-    from azure.storage.blob import BlobSasPermissions, BlobServiceClient, generate_blob_sas
+  ```python
+  import os
+  from datetime import datetime, timedelta, timezone
+  from azure.storage.blob import BlobSasPermissions, BlobServiceClient, generate_blob_sas
 
-    AZURE_CONTAINER_NAME = os.getenv("AZURE_STORAGE_CONTAINER_NAME")
+  AZURE_CONTAINER_NAME = os.getenv("AZURE_STORAGE_CONTAINER_NAME")
 
-    blob_service_client = BlobServiceClient.from_connection_string(
-        os.getenv("AZURE_STORAGE_CONNECTION_STRING")
-    )
+  blob_service_client = BlobServiceClient.from_connection_string(
+      os.getenv("AZURE_STORAGE_CONNECTION_STRING")
+  )
 
-    def generate_read_only_sas_url(blob_name, expiry_minutes=15):
-        blob_client = blob_service_client.get_blob_client(
-            container=AZURE_CONTAINER_NAME, blob=blob_name
-        )
+  def generate_read_only_sas_url(blob_name, expiry_minutes=15):
+      blob_client = blob_service_client.get_blob_client(
+          container=AZURE_CONTAINER_NAME, blob=blob_name
+      )
 
-        start_time = datetime.now(timezone.utc)
-        expiry_time = start_time + timedelta(minutes=expiry_minutes)
-        sas_token = generate_blob_sas(
-            account_name=blob_service_client.account_name,
-            container_name=AZURE_CONTAINER_NAME,
-            blob_name=blob_name,
-            account_key=blob_service_client.credential.account_key,
-            permission=BlobSasPermissions(read=True), # Read permission
-            expiry=expiry_time,
-            start=start_time,
-        )
+      start_time = datetime.now(timezone.utc)
+      expiry_time = start_time + timedelta(minutes=expiry_minutes)
+      sas_token = generate_blob_sas(
+          account_name=blob_service_client.account_name,
+          container_name=AZURE_CONTAINER_NAME,
+          blob_name=blob_name,
+          account_key=blob_service_client.credential.account_key,
+          permission=BlobSasPermissions(read=True), # Read permission
+          expiry=expiry_time,
+          start=start_time,
+      )
 
-        sas_url = f"{blob_client.url}?{sas_token}"
-        return sas_url
+      sas_url = f"{blob_client.url}?{sas_token}"
+      return sas_url
 
-    if __name__ == "__main__":
-        # Replace '<BLOB_NAME_FROM_DB>' with the actual blob name
-        test_blob_name = "<BLOB_NAME_FROM_DB>"
-        read_url = generate_read_only_sas_url(test_blob_name)
-        print(f"Read-only SAS URL: {read_url}")
-    ```
+  if __name__ == "__main__":
+      # Replace '<BLOB_NAME_FROM_DB>' with the actual blob name
+      test_blob_name = "<BLOB_NAME_FROM_DB>"
+      read_url = generate_read_only_sas_url(test_blob_name)
+      print(f"Read-only SAS URL: {read_url}")
+  ```
 
     </CodeTabs>
 

@@ -355,7 +355,7 @@ def save_metadata_route():
     except (psycopg2.Error, ValueError) as e:
         print(f"Metadata Save Error: {e}")
         return jsonify(
-            {"success": False, "error": f"Failed to save metadata: {e}"}
+            {"success": False, "error": "Failed to save metadata"}
         ), 500
     except Exception as e:
         print(f"Unexpected Metadata Save Error: {e}")

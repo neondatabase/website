@@ -92,6 +92,10 @@
               slug: guides/file-storage
             - title: File storage with AWS S3
               slug: guides/aws-s3
+            - title: File storage with Azure Blob Storage
+              slug: guides/azure-blob-storage
+            - title: File storage with Backblaze B2
+              slug: guides/backblaze-b2
             - title: File storage with Cloudflare R2
               slug: guides/cloudflare-r2
             - title: Media storage with Cloudinary
