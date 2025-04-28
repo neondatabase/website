@@ -7,13 +7,13 @@ title: How to set up Neon Local with Docker Compose and JavaScript Postgres clie
 subtitle: A practical guide to Neon Local with JavaScript and Docker Compose for local and production setups
 ---
 
-ICYMI we recently launched [Neon Local](https://neon.tech/blog).
+ICYMI we recently launched [Neon Local](https://neon.tech/blog/make-yourself-at-home-with-neon-local/).
 
 ## What is Neon Local?
 
 Neon Local is a proxy service that creates a local interface to your Neon cloud database. By default, it automatically creates a new database branch when your container starts and deletes it when the container stops. Your app connects to a local Postgres endpoint while Neon Local handles routing and authentication to the correct project and branch. This means you don’t have to update connection strings across branches.
 
-Our [docs](https://neon.tech/docs/) cover how to use Neon Local with both the [serverless driver](https://neon.tech/docs/serverless/serverless-driver) and [pg](https://github.com/brianc/node-postgres), but one area that might cause some confusion is how to switch between Neon Local in **development** and your Neon cloud database in **production**.
+Our [docs](/docs/local/neon-local) cover how to use Neon Local with both the [serverless driver](https://neon.tech/docs/serverless/serverless-driver) and [pg](https://github.com/brianc/node-postgres), but one area that might cause some confusion is how to switch between Neon Local in **development** and your Neon cloud database in **production**.
 
 In this guide, I’ll show you how to set up your project to work in both development and production environments.
 
@@ -41,9 +41,9 @@ You’ll need to configure the following environment variables. Which are also l
 
 If you need help finding up any of these variables, refer to the following resources:
 
-- [Connection examples](https://neon.tech/docs/manage/projects#project-settings)
-- [Creating API keys](https://neon.tech/docs/manage/api-keys#creating-api-keys)
-- [Project settings](https://neon.tech/docs/manage/projects#project-settings)
+- [Connection examples](/docs/manage/projects#project-settings)
+- [Creating API keys](/docs/manage/api-keys#creating-api-keys)
+- [Project settings](/docs/manage/projects#project-settings)
 
 ### Docker for Mac
 
@@ -128,7 +128,7 @@ You can view the `src` of this file in the repository: [docker-compose.yml](http
 
 ### Serverless Driver
 
-The database connection is established using our [serverless driver](https://neon.tech/docs/serverless/serverless-driver). It uses a ternary operation to determine whether to connect to Neon Local or the `DATABASE_URL`, depending on the mode the application is running in.
+The database connection is established using our [serverless driver](/docs/serverless/serverless-driver). It uses a ternary operation to determine whether to connect to Neon Local or the `DATABASE_URL`, depending on the mode the application is running in.
 
 ```javascript
 import 'dotenv/config';
@@ -178,7 +178,7 @@ environment:
 
 ## Wrapping up
 
-And that’s it. By default, Neon Local handles creating and deleting a branch whenever you start or stop the container. If you want more control, such as setting a parent branch or disabling branch deletion, check out the [configuration options in the docs](https://neon.tech/docs/introduction).
+And that’s it. By default, Neon Local handles creating and deleting a branch whenever you start or stop the container. If you want more control, such as setting a parent branch or disabling branch deletion, check out the [configuration options in the docs](/docs/local/neon-local).
 
 Neon Local simplifies the management of temporary database environments, making it easier to work with isolated instances for testing or short-term use. While it’s not a fully "local" database, it streamlines the workflow, especially for CI/CD pipelines where short-lived environments are needed to run tests but don’t need to stick around.
 
