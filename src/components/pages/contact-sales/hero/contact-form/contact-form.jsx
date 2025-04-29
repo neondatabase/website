@@ -14,6 +14,7 @@ import Field from 'components/shared/field';
 import Link from 'components/shared/link';
 import { FORM_STATES, HUBSPOT_CONTACT_SALES_FORM_ID } from 'constants/forms';
 import LINKS from 'constants/links';
+import CloseIcon from 'icons/close.inline.svg';
 import { checkBlacklistEmails } from 'utils/check-blacklist-emails';
 import { doNowOrAfterSomeTime, sendHubspotFormData } from 'utils/forms';
 
@@ -34,6 +35,14 @@ const labelClassName = 'text-sm text-gray-new-90';
 
 const ContactForm = () => {
   const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
+  const [isBroken, setIsBroken] = useState(false);
+  const [hubspotutk] = useCookie('hubspotutk');
+  const { href } = useLocation();
+
+  const context = {
+    hutk: hubspotutk,
+    pageUri: href,
+  };
 
   const {
     register,
@@ -52,20 +61,11 @@ const ContactForm = () => {
     }
   }, [errors, isValid, formState]);
 
-  const [hubspotutk] = useCookie('hubspotutk');
-  const { href } = useLocation();
-  const [formError, setFormError] = useState('');
-
-  const context = {
-    hutk: hubspotutk,
-    pageUri: href,
-  };
-
   const onSubmit = async (data, e) => {
     e.preventDefault();
     const { name, email, companyWebsite, companySize, message } = data;
     const loadingAnimationStartedTime = Date.now();
-    setFormError('');
+    setIsBroken(false);
     setFormState(FORM_STATES.LOADING);
 
     try {
@@ -104,7 +104,7 @@ const ContactForm = () => {
         doNowOrAfterSomeTime(() => {
           setFormState(FORM_STATES.SUCCESS);
           reset();
-          setFormError('');
+          setIsBroken(false);
         }, loadingAnimationStartedTime);
       } else {
         throw new Error('Something went wrong. Please reload the page and try again.');
@@ -112,8 +112,8 @@ const ContactForm = () => {
     } catch (error) {
       if (error.name !== 'AbortError') {
         doNowOrAfterSomeTime(() => {
-          setFormState(FORM_STATES.ERROR);
-          setFormError(error?.message ?? error);
+          setFormState(FORM_STATES.BROKEN);
+          setIsBroken(true);
         }, 2000);
       }
     }
@@ -217,8 +217,7 @@ const ContactForm = () => {
         <Button
           className={clsx(
             'min-w-[176px] py-[15px] font-medium 2xl:text-base xl:min-w-[138px] lg:min-w-[180px] sm:w-full sm:py-[13px]',
-            (formState === FORM_STATES.LOADING || formState === FORM_STATES.ERROR) &&
-              'pointer-events-none !bg-secondary-1/50'
+            formState === FORM_STATES.ERROR && 'pointer-events-none !bg-secondary-1/50'
           )}
           type="submit"
           theme="primary"
@@ -226,15 +225,38 @@ const ContactForm = () => {
         >
           {formState === FORM_STATES.SUCCESS ? 'Sent!' : 'Submit'}
         </Button>
-        {formError && (
-          <span
-            className="absolute left-1/2 top-[calc(100%+1rem)] w-full -translate-x-1/2 text-sm leading-none text-secondary-1"
-            data-test="error-message"
-          >
-            {formError}
-          </span>
-        )}
       </div>
+      {isBroken && (
+        <div
+          className="absolute inset-0 flex items-center justify-center p-5"
+          data-test="error-message"
+        >
+          <div className="relative z-10 flex max-w-sm flex-col items-center text-center">
+            <h3 className="font-title text-[32px] font-medium leading-none tracking-extra-tight sm:text-[28px]">
+              Oops, look like there's a technical problem
+            </h3>
+            <p className="mt-3.5 max-w-[236px] leading-tight tracking-extra-tight text-gray-new-70">
+              Please reach out to us directly at{' '}
+              <Link
+                className="border-b border-green-45/40 hover:border-green-45"
+                theme="green"
+                to="mailto:atli@neon.tech"
+              >
+                atli@neon.tech
+              </Link>
+            </p>
+          </div>
+          <button
+            className="absolute right-4 top-4 z-20"
+            type="button"
+            onClick={() => setIsBroken(false)}
+          >
+            <CloseIcon className="size-4 text-white opacity-50 transition-opacity duration-300 hover:opacity-100" />
+            <span className="sr-only">Close error message</span>
+          </button>
+          <span className="absolute inset-0 bg-[#0E0E11]/40 backdrop-blur-md" />
+        </div>
+      )}
     </form>
   );
 };
