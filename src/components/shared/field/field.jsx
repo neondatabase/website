@@ -72,7 +72,7 @@ const Field = forwardRef(
           ref={ref}
           id={theme === 'checkbox' ? value : name}
           name={name}
-          value={theme === 'checkbox' ? value : null}
+          value={theme === 'checkbox' ? value : ''}
           type={type}
           disabled={isDisabled}
           {...otherProps}

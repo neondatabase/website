@@ -43,6 +43,9 @@ const ContactForm = () => {
     formState: { isValid, errors },
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: {
+      companySize: 'hidden',
+    },
   });
 
   useEffect(() => {
@@ -184,7 +187,6 @@ const ContactForm = () => {
           name="companySize"
           label="Company Size *"
           tag="select"
-          defaultValue="hidden"
           theme="transparent"
           labelClassName={labelClassName}
           isDisabled={isDisabled}
