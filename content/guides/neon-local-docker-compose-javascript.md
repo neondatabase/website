@@ -29,7 +29,7 @@ You can find the project here:
 
 ### Environment variables
 
-You’ll need to configure the following environment variables. Which are also listed in the example application's repository [README](https://github.com/neondatabase-labs/neon-local-example-react-express-application).
+You’ll need to configure the following environment variables. They are also listed in the example application's repository [README](https://github.com/neondatabase-labs/neon-local-example-react-express-application).
 
 | Variable          | Description                    | Example / Value               |
 | ----------------- | ------------------------------ | ----------------------------- |
@@ -70,7 +70,7 @@ Once the app is running, go to [http://localhost:8080/](http://localhost:8080/) 
 
 ## 4. Ephemeral branches
 
-If you started the app in **development** mode, go to the Neon console, and you’ll see a new branch has been created using the `main` branch as a base.
+If you started the app in **development** mode, go to the Neon console, and you’ll see a new branch has been created using the `main`, or `production` branch as a base.
 
 If you started the app in **production** mode, the app will connect to the database defined by the `DATABASE_URL`, and no new branch will be created.
 
