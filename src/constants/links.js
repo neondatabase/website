@@ -28,6 +28,7 @@ export default {
   scaleTrial: '/scale-trial',
   security: '/security',
   stage: '/stage',
+  startups: '/startups',
   templates: '/templates',
   thankYou: '/thank-you',
   useCases: '/use-cases',
