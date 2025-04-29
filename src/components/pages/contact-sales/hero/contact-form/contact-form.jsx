@@ -20,6 +20,7 @@ import { doNowOrAfterSomeTime, sendHubspotFormData } from 'utils/forms';
 const schema = yup
   .object({
     name: yup.string().required('Your name is a required field'),
+    surname: yup.string().required('Your surname is a required field'),
     email: yup
       .string()
       .email('Please enter a valid email')
@@ -63,7 +64,7 @@ const ContactForm = () => {
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
-    const { name, email, companyWebsite, companySize, message } = data;
+    const { name, surname, email, companyWebsite, companySize, message } = data;
     const loadingAnimationStartedTime = Date.now();
     setFormError('');
     setFormState(FORM_STATES.LOADING);
@@ -74,8 +75,12 @@ const ContactForm = () => {
         context,
         values: [
           {
-            name: 'full_name',
+            name: 'name',
             value: name,
+          },
+          {
+            name: 'surname',
+            value: surname,
           },
           {
             name: 'email',
@@ -132,14 +137,25 @@ const ContactForm = () => {
     >
       <Field
         name="name"
-        label="Your Name *"
+        label="Name *"
         autoComplete="name"
-        placeholder="Marques Hansen"
+        placeholder="Marques"
         theme="transparent"
         labelClassName={labelClassName}
         error={errors.name?.message}
         isDisabled={isDisabled}
         {...register('name')}
+      />
+      <Field
+        name="surname"
+        label="Surname *"
+        autoComplete="name"
+        placeholder="Hansen"
+        theme="transparent"
+        labelClassName={labelClassName}
+        error={errors.surname?.message}
+        isDisabled={isDisabled}
+        {...register('surname')}
       />
       <Field
         name="email"
