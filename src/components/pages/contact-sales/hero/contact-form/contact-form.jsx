@@ -233,12 +233,12 @@ const ContactForm = () => {
         <Button
           className={clsx(
             'min-w-[176px] py-[15px] font-medium 2xl:text-base xl:min-w-[138px] lg:min-w-[180px] sm:w-full sm:py-[13px]',
-            (formState === FORM_STATES.LOADING || formState === FORM_STATES.ERROR) &&
-              'pointer-events-none !bg-secondary-1/50'
+            formState === FORM_STATES.ERROR && 'pointer-events-none !bg-secondary-1/50'
           )}
           type="submit"
           theme="primary"
           size="xs"
+          disabled={formState === FORM_STATES.LOADING}
         >
           {formState === FORM_STATES.SUCCESS ? 'Sent!' : 'Submit'}
         </Button>
