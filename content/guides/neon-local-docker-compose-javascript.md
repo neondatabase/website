@@ -11,7 +11,7 @@ ICYMI we recently launched [Neon Local](https://neon.tech/blog/make-yourself-at-
 
 ## What is Neon Local?
 
-Neon Local is a proxy service that creates a local interface to your Neon cloud database. By default, it automatically creates a new database branch when your container starts and deletes it when the container stops. Your app connects to a local Postgres endpoint while Neon Local handles routing and authentication to the correct project and branch. This means you don’t have to update connection strings across branches.
+Neon Local is a proxy service that creates a local interface to your Neon cloud database. By default, it automatically creates a new database branch when your container starts and deletes it when the container stops. Your app connects to a local Postgres endpoint while Neon Local handles routing and authentication to the correct project and branch. _This means you don’t have to update connection strings across branches._
 
 Our [docs](/docs/local/neon-local) cover how to use Neon Local with both the [serverless driver](https://neon.tech/docs/serverless/serverless-driver) and [pg](https://github.com/brianc/node-postgres), but one area that might cause some confusion is how to switch between Neon Local in **development** and your Neon cloud database in **production**.
 
