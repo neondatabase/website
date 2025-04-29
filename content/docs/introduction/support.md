@@ -178,7 +178,7 @@ Examples:
 1. Partial outage of the service provided by Neon: service usable, but key feature unusable, e.g.:
    - Cannot create a new branch
    - Cannot execute a branch [restore](/docs/guides/branch-restore)
-   - Cannot peform PITR
+   - Cannot perform point-in-time recovery (PITR)
    - Etc.
 2. Any use case that would require a high load of manual work on the customer side to mitigate an issue on our end
 3. Any use case which massively and negatively affects the customer's business
