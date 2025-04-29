@@ -19,7 +19,8 @@ import { doNowOrAfterSomeTime, sendHubspotFormData } from 'utils/forms';
 
 const schema = yup
   .object({
-    name: yup.string().required('Your name is a required field'),
+    firstname: yup.string().required('Your first name is a required field'),
+    lastname: yup.string().required('Your last name is a required field'),
     email: yup
       .string()
       .email('Please enter a valid email')
@@ -42,6 +43,9 @@ const ContactForm = () => {
     formState: { isValid, errors },
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: {
+      companySize: 'hidden',
+    },
   });
 
   useEffect(() => {
@@ -63,7 +67,7 @@ const ContactForm = () => {
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
-    const { name, email, companyWebsite, companySize, message } = data;
+    const { firstname, lastname, email, companyWebsite, companySize, message } = data;
     const loadingAnimationStartedTime = Date.now();
     setFormError('');
     setFormState(FORM_STATES.LOADING);
@@ -74,8 +78,12 @@ const ContactForm = () => {
         context,
         values: [
           {
-            name: 'full_name',
-            value: name,
+            name: 'firstname',
+            value: firstname,
+          },
+          {
+            name: 'lastname',
+            value: lastname,
           },
           {
             name: 'email',
@@ -131,15 +139,26 @@ const ContactForm = () => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <Field
-        name="name"
-        label="Your Name *"
+        name="firstname"
+        label="First Name *"
         autoComplete="name"
-        placeholder="Marques Hansen"
+        placeholder="Marques"
         theme="transparent"
         labelClassName={labelClassName}
-        error={errors.name?.message}
+        error={errors.firstname?.message}
         isDisabled={isDisabled}
-        {...register('name')}
+        {...register('firstname')}
+      />
+      <Field
+        name="lastname"
+        label="Last Name *"
+        autoComplete="name"
+        placeholder="Hansen"
+        theme="transparent"
+        labelClassName={labelClassName}
+        error={errors.lastname?.message}
+        isDisabled={isDisabled}
+        {...register('lastname')}
       />
       <Field
         name="email"
@@ -168,7 +187,6 @@ const ContactForm = () => {
           name="companySize"
           label="Company Size *"
           tag="select"
-          defaultValue="hidden"
           theme="transparent"
           labelClassName={labelClassName}
           isDisabled={isDisabled}
@@ -217,12 +235,12 @@ const ContactForm = () => {
         <Button
           className={clsx(
             'min-w-[176px] py-[15px] font-medium 2xl:text-base xl:min-w-[138px] lg:min-w-[180px] sm:w-full sm:py-[13px]',
-            (formState === FORM_STATES.LOADING || formState === FORM_STATES.ERROR) &&
-              'pointer-events-none !bg-secondary-1/50'
+            formState === FORM_STATES.ERROR && 'pointer-events-none !bg-secondary-1/50'
           )}
           type="submit"
           theme="primary"
           size="xs"
+          disabled={formState === FORM_STATES.LOADING}
         >
           {formState === FORM_STATES.SUCCESS ? 'Sent!' : 'Submit'}
         </Button>
