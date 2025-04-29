@@ -19,8 +19,8 @@ import { doNowOrAfterSomeTime, sendHubspotFormData } from 'utils/forms';
 
 const schema = yup
   .object({
-    name: yup.string().required('Your name is a required field'),
-    surname: yup.string().required('Your surname is a required field'),
+    firstname: yup.string().required('Your first name is a required field'),
+    lastname: yup.string().required('Your last name is a required field'),
     email: yup
       .string()
       .email('Please enter a valid email')
@@ -67,7 +67,7 @@ const ContactForm = () => {
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
-    const { name, surname, email, companyWebsite, companySize, message } = data;
+    const { firstname, lastname, email, companyWebsite, companySize, message } = data;
     const loadingAnimationStartedTime = Date.now();
     setFormError('');
     setFormState(FORM_STATES.LOADING);
@@ -78,12 +78,12 @@ const ContactForm = () => {
         context,
         values: [
           {
-            name: 'name',
-            value: name,
+            name: 'firstname',
+            value: firstname,
           },
           {
-            name: 'surname',
-            value: surname,
+            name: 'lastname',
+            value: lastname,
           },
           {
             name: 'email',
@@ -139,26 +139,26 @@ const ContactForm = () => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <Field
-        name="name"
-        label="Name *"
+        name="firstname"
+        label="First Name *"
         autoComplete="name"
         placeholder="Marques"
         theme="transparent"
         labelClassName={labelClassName}
-        error={errors.name?.message}
+        error={errors.firstname?.message}
         isDisabled={isDisabled}
-        {...register('name')}
+        {...register('firstname')}
       />
       <Field
-        name="surname"
-        label="Surname *"
+        name="lastname"
+        label="Last Name *"
         autoComplete="name"
         placeholder="Hansen"
         theme="transparent"
         labelClassName={labelClassName}
-        error={errors.surname?.message}
+        error={errors.lastname?.message}
         isDisabled={isDisabled}
-        {...register('surname')}
+        {...register('lastname')}
       />
       <Field
         name="email"
