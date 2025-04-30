@@ -3,7 +3,7 @@ name: Format Markdown
 on:
   push:
     branches:
-      - 'main'
+      - '**'
     paths:
       - 'content/**/*.md'
       

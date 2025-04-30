@@ -12,6 +12,7 @@ import ChangelogIcon from 'icons/docs/sidebar/changelog.inline.svg';
 import CliIcon from 'icons/docs/sidebar/cli.inline.svg';
 import CommunityIcon from 'icons/docs/sidebar/community.inline.svg';
 import ConnectIcon from 'icons/docs/sidebar/connect.inline.svg';
+import ContainerIcon from 'icons/docs/sidebar/container.inline.svg';
 import DocsIcon from 'icons/docs/sidebar/docs.inline.svg';
 import ExtensionIcon from 'icons/docs/sidebar/extension.inline.svg';
 import FeaturesIcon from 'icons/docs/sidebar/features.inline.svg';
@@ -61,6 +62,7 @@ const icons = {
   cli: CliIcon,
   community: CommunityIcon,
   connect: ConnectIcon,
+  container: ContainerIcon,
   docs: DocsIcon,
   extension: ExtensionIcon,
   features: FeaturesIcon,

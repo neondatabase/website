@@ -213,7 +213,16 @@ You can use fenced code blocks with three backticks (```) on the lines before an
   export function foo() {
     // [!code word:Hello]
     const msg = 'Hello World';
-    console.log(msg); // prints Hello World
+    console.log(msg);
+  }
+  ```
+
+- use `[!code --]` and `[!code ++]` to highlight a code diff.
+
+  ```ts
+  export function foo() {
+    const msg = 'Hello Word'; // [!code --]
+    const msg = 'Hello World'; // [!code ++]
   }
   ```
 
