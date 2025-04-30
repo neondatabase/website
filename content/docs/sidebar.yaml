@@ -872,9 +872,9 @@
 - section: Auth & access
   items:
     - title: Neon Auth
-      slug: guides/neon-auth
       icon: auth
       tag: beta
+      slug: guides/neon-auth
       items:
         - section: Get started
           items:
@@ -883,11 +883,13 @@
         - section: Guides
           items:
             - title: Tutorial
-              slug: guides/neon-auth-tutorial
+              slug: guides/neon-auth-demo
         - section: Concepts
           items:
             - title: How Neon Auth works
               slug: guides/neon-auth-how-it-works
+            - title: Concepts
+              slug: guides/neon-auth-tutorial
             - title: Best practices & FAQ
               slug: guides/neon-auth-best-practices
         - section: REFERENCE

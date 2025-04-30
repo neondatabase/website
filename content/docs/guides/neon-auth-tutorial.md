@@ -1,5 +1,5 @@
 ---
-title: Neon Auth tutorial
+title: Neon Auth concepts
 subtitle: See how Neon Auth eliminates the complexity of manual user data
   synchronization, making your development faster and your applications more
   robust.
@@ -8,7 +8,6 @@ tag: beta
 updatedOn: '2025-04-11T20:01:29.102Z'
 ---
 
-<FeatureBetaProps feature_name="Neon Auth" />
 
 <InfoBlock>
   <DocsList title="Related docs" theme="docs">
