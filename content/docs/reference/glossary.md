@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2025-04-17T16:06:46.410Z'
+updatedOn: '2025-04-30T02:26:54.989Z'
 ---
 
 ## access token
@@ -557,7 +557,7 @@ An early version of a feature or changes released for testing and feedback purpo
 
 ## tenant_attach
 
-A Neon Control Plane operation that attaches a Neon project to storage. For example, this operation occurs when when you create a new Neon project. See [System operations](/docs/manage/operations) for more information.
+A Neon Control Plane operation that attaches a Neon project to storage. For example, this operation occurs when you create a new Neon project. See [System operations](/docs/manage/operations) for more information.
 
 ## tenant_detach
 

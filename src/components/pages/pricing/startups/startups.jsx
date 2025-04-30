@@ -1,13 +1,13 @@
-'use client';
-
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
+import LINKS from 'constants/links';
 
-const StartupPricing = ({ className }) => (
-  <section className={`startup-pricing safe-paddings py-14 md:py-10 ${className || ''}`}>
+const Startups = ({ className }) => (
+  <section className={clsx('startup-pricing safe-paddings py-14 md:py-10', className)}>
     <Container className="flex flex-col items-center text-center" size="1344">
       <Heading
         className="text-center font-medium !leading-none tracking-tighter xl:text-4xl lg:text-[40px] md:!text-3xl"
@@ -21,15 +21,15 @@ const StartupPricing = ({ className }) => (
         and venture backed companies. Let us worry about scaling your database, so you can focus on
         growing your business.
       </p>
-      <Link className="mt-5 md:mt-4" to="https://neon.tech/startups" theme="blue-green">
+      <Link className="mt-5 md:mt-4" to={LINKS.startups} theme="green">
         Neon for Startups
       </Link>
     </Container>
   </section>
 );
 
-StartupPricing.propTypes = {
+Startups.propTypes = {
   className: PropTypes.string,
 };
 
-export default StartupPricing;
+export default Startups;

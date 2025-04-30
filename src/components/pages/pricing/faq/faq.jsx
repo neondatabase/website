@@ -1,5 +1,6 @@
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
+import LINKS from 'constants/links';
 
 import Item from './item';
 
@@ -16,7 +17,7 @@ const items = [
   },
   {
     question: 'When will I be billed?',
-    answer: `Neon bills for the past month's usage at the beginning of each calendar month. For more information, see <a href="/docs/introduction/manage-billing">Manage billing</a>.`,
+    answer: `Neon bills for the past month's usage at the beginning of each calendar month. For more information, see <a href="${LINKS.manageBilling}">Manage billing</a>.`,
   },
   {
     question: 'How many compute hours will it take to run my workload?',
@@ -28,7 +29,7 @@ const items = [
   },
   {
     question: 'Do you offer discounts and credits for Startups?',
-    answer: `Yes! Startups that have received venture funding can apply for up to $100K in credits to help them get started with Neon. <a href="https://neon.tech/startups">Learn more and apply here</a>.`,
+    answer: `Yes! Startups that have received venture funding can apply for up to $100K in credits to help them get started with Neon. <a href="${LINKS.startups}">Learn more and apply here</a>.`,
     id: 'startup-discounts',
   },
   {
@@ -41,11 +42,11 @@ const items = [
   },
   {
     question: 'Can I use Neon for database-per-user architectures?',
-    answer: `Yes, Neon is a great option for designs demanding one database per user. Our recommendation is to follow a project-per-user (or project-per-tenant) pattern, taking advantage of the thousands of projects included in our pricing plans. <a href="https://neon.tech/use-cases/database-per-tenant">Read more</a>.`,
+    answer: `Yes, Neon is a great option for designs demanding one database per user. Our recommendation is to follow a project-per-user (or project-per-tenant) pattern, taking advantage of the thousands of projects included in our pricing plans. <a href="${LINKS.useCases}/database-per-tenant">Read more</a>.`,
   },
   {
     question: 'Is Neon compliant?',
-    answer: `Yes, Neon adheres to SOC 2, ISO 27001, ISO 27701 standards and complies with GDPR and CCPA regulations. HIPAA compliance is also available upcon contract—if you need HIPAA, <a href="https://neon.tech/contact sales">contact us</a> and we'll walk you through it`,
+    answer: `Yes, Neon adheres to SOC 2, ISO 27001, ISO 27701 standards and complies with GDPR and CCPA regulations. HIPAA compliance is also available upcon contract—if you need HIPAA, <a href="${LINKS.contactSales}">contact us</a> and we'll walk you through it`,
   },
   {
     question: 'Which level of uptime can I expect with Neon?',
@@ -53,7 +54,7 @@ const items = [
   },
   {
     question: 'Can Neon help with migrations?',
-    answer: `Absolutely. Our expert team assists Business and Enterprise clients throughout the migration process. <a href="https://neon.tech/migration-assistance">Tell us here</a> if you're considering migrating to Neon. `,
+    answer: `Absolutely. Our expert team assists Business and Enterprise clients throughout the migration process. <a href="${LINKS.migrationAssistance}">Tell us here</a> if you're considering migrating to Neon. `,
   },
 ];
 

@@ -2,7 +2,7 @@
 title: Scale your application with Read Replicas
 subtitle: Scale your app with read replicas using built-in framework support
 enableTableOfContents: true
-updatedOn: '2025-04-25T12:49:01.718Z'
+updatedOn: '2025-04-30T02:26:54.984Z'
 ---
 
 In Neon, a read replica is an independent read-only compute that performs read operations on the same data as your primary read-write compute, which means adding a read replica to a Neon project requires no additional storage.
@@ -121,7 +121,7 @@ For example, in your `config/database.php`, you can configure read and write con
 
 ## Django
 
-In Django, you can use the `DATABASES` setting to to tell Django about the primary and read replica databases you’ll be using:
+In Django, you can use the `DATABASES` setting to tell Django about the primary and read replica databases you’ll be using:
 
 ```python
 DATABASES = {
