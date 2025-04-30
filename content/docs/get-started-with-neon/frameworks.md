@@ -17,6 +17,8 @@ updatedOn: '2025-02-24T15:53:13.354Z'
 
 <a href="/docs/guides/dotnet-entity-framework" title="Entity Framework" description="Connect a Dotnet Entity Framework application to Neon" icon="dotnet"></a>
 
+<a href="/docs/guides/hono" title="Hono" description="Connect a Hono application to Neon" icon="hono"></a>
+
 <a href="/docs/guides/nuxt" title="Nuxt" description="Connect a Nuxt application to Neon" icon="nuxt"></a>
 
 <a href="/docs/guides/oauth-integration" title="OAuth" description="Integrate with Neon using OAuth" icon="oauth"></a>
