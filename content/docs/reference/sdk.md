@@ -26,7 +26,7 @@ Community SDKs are not maintained or officially supported by Neon. Some features
 
 <DetailIconCards>
 
-<a href="https://github.com/kislerdm/neon-sdk-go" description="A Go SDK for for the Neon API" icon="github">Go SDK for the Neon API</a>
+<a href="https://github.com/kislerdm/neon-sdk-go" description="A Go SDK for the Neon API" icon="github">Go SDK for the Neon API</a>
 
 <a href="https://github.com/paambaati/neon-js-sdk" description="A Node.js and Deno SDK for the Neon API" icon="github">Node.js and Deno SDK for the Neon API</a>
 

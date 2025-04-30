@@ -30,7 +30,7 @@ SELECT version();
 
 Start by creating a new Neon project with the desired Postgres version. For instructions, see [creating a new Neon project](/docs/manage/projects#create-a-project).
 
-At this time, you may also also want to apply any specific configurations to your new Neon project that exist in your current Neon project. For example, you may have configured settings for the following Neon features that you want to implement in your new Neon project:
+At this time, you may also want to apply any specific configurations to your new Neon project that exist in your current Neon project. For example, you may have configured settings for the following Neon features that you want to implement in your new Neon project:
 
 - [Compute size](/docs/manage/endpoints#edit-a-compute)
 - [Autoscaling](/docs/guides/autoscaling-guide)

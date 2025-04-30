@@ -167,7 +167,7 @@ MAX_HISTORY_TOKENS = 4096 – 6 – 90 = 4000
 
 ## Conclusion
 
-In conclusion, the `pg_tiktoken` extension is a valuable tool for tokenizing text data and managing tokens within Postgres databases. By leveraging OpenAI's tiktoken library, it simplifies the process of tokenization and working with token limits, enabling you to integrate more easily with with OpenAI's language models.
+In conclusion, the `pg_tiktoken` extension is a valuable tool for tokenizing text data and managing tokens within Postgres databases. By leveraging OpenAI's tiktoken library, it simplifies the process of tokenization and working with token limits, enabling you to integrate more easily with OpenAI's language models.
 
 As you explore the capabilities of the `pg_tiktoken extension`, we encourage you to provide feedback and suggest features you'd like to see added in future updates. We look forward to seeing the innovative natural language processing applications you create using `pg_tiktoken`.
 

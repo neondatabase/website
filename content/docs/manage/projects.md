@@ -263,7 +263,7 @@ You can define an allowlist with individual IP addresses, IP ranges, or [CIDR no
 - **Use IPv6 addresses**: Neon projects provisioned on AWS also support specifying IPv6 addresses. For example:
 
   <Admonition type="note">
-  IPv6 is not yet supported for projects provisioned on on Azure.
+  IPv6 is not yet supported for projects provisioned on Azure.
   </Admonition>
 
   ```text

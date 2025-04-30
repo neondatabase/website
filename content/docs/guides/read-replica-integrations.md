@@ -121,7 +121,7 @@ For example, in your `config/database.php`, you can configure read and write con
 
 ## Django
 
-In Django, you can use the `DATABASES` setting to to tell Django about the primary and read replica databases you’ll be using:
+In Django, you can use the `DATABASES` setting to tell Django about the primary and read replica databases you’ll be using:
 
 ```python
 DATABASES = {
