@@ -2,7 +2,7 @@
 title: Connect a Hono application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Hono application
 enableTableOfContents: true
-updatedOn: '2025-04-29T00:00:00.000Z'
+updatedOn: '2025-04-30T14:50:57.892Z'
 ---
 
 [Hono](https://hono.dev/) is a lightweight, multi-runtime web framework for the Edge, Node.js, Deno, Bun, and other runtimes. This topic describes how to create a Neon project and access it from a Hono application.
