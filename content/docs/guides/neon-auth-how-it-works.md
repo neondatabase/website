@@ -262,12 +262,12 @@ After claiming, you'll still be able to access your project from the Neon Consol
 
 For organization-owned projects, only organization admins can manage Neon Auth settings. Members and project collaborators can use Neon Auth features once configured, but cannot modify the integration settings.
 
-| Action                | Admin | Member | Collaborator |
-|-----------------------|:-----:|:------:|:-----------:|
-| Install Neon Auth     |  ✅   |   ❌   |      ❌     |
-| Remove Neon Auth      |  ✅   |   ❌   |      ❌     |
-| Claim project         |  ✅   |   ❌   |      ❌     |
-| Generate SDK Keys     |  ✅   |   ❌   |      ❌     |
-| Create users          |  ✅   |   ✅   |      ✅     |
+| Action            | Admin | Member | Collaborator |
+| ----------------- | :---: | :----: | :----------: |
+| Install Neon Auth |  ✅   |   ❌   |      ❌      |
+| Remove Neon Auth  |  ✅   |   ❌   |      ❌      |
+| Claim project     |  ✅   |   ❌   |      ❌      |
+| Generate SDK Keys |  ✅   |   ❌   |      ❌      |
+| Create users      |  ✅   |   ✅   |      ✅      |
 
-For more information about organization roles and permissions, see [User roles and permissions](/docs/manage/organizations#user-roles-and-permissions). 
+For more information about organization roles and permissions, see [User roles and permissions](/docs/manage/organizations#user-roles-and-permissions).
