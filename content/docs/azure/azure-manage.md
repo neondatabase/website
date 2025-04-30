@@ -50,6 +50,7 @@ To create branches in the Azure Portal:
 You now have an independent and isolated copy of your database with its own compute resources. For how to integrate branching into your developer workflow, see our [Database branching workflow primer](https://neon.tech/docs/get-started-with-neon/workflow-primer).
 
 You can also create branches in the Neon Console. See [Create a branch](/docs/manage/branches#create-a-branch) for instructions.
+
 ## Delete branches
 
 You can delete branches in the Azure Portal or the Neon Console. We'll cover branch deletion in the Azure Portal below. For Neon Console instructions, see [Delete a branch](/docs/manage/branches#delete-a-branch).
