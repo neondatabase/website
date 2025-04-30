@@ -269,7 +269,7 @@ const ContactForm = () => {
           type="submit"
           theme="primary"
           size="xs"
-          disabled={formState === FORM_STATES.LOADING}
+          disabled={formState === FORM_STATES.LOADING || formState === FORM_STATES.SUCCESS}
         >
           {formState === FORM_STATES.SUCCESS ? 'Sent!' : 'Submit'}
         </Button>
