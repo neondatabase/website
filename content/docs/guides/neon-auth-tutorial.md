@@ -8,7 +8,6 @@ tag: beta
 updatedOn: '2025-04-11T20:01:29.102Z'
 ---
 
-
 <InfoBlock>
   <DocsList title="Related docs" theme="docs">
     <a href="/docs/guides/neon-auth">About Neon Auth</a>
