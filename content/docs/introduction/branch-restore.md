@@ -9,7 +9,7 @@ redirectFrom:
   - /docs/guides/branch-promote
   - /docs/guides/branch-restore
   - /docs/guides/instant-restore
-updatedOn: '2025-04-17T16:06:46.408Z'
+updatedOn: '2025-04-30T02:26:54.985Z'
 ---
 
 <InfoBlock>
@@ -121,7 +121,7 @@ First, select the **Branch to restore**. This is the target branch for the resto
 #### To restore from another branch:
 
 1.  Switch to the **From another branch** tab.
-1.  Select the source branch that that you want to restore data from.
+1.  Select the source branch that you want to restore data from.
 1.  By default, the operation pulls the latest data from the source branch. If you want to pull from an earlier point in time, disable **Restore from latest data (head)**.
 
     The timestamp selector will appear.
