@@ -1,19 +1,19 @@
 ---
 author: paul-scanlon
 enableTableOfContents: true
-createdAt: '2025-04-24T00:00:00.000Z'
-updatedOn: '2025-04-24T00:00:00.000Z'
+createdAt: '2025-04-30T00:00:00.000Z'
+updatedOn: '2025-04-30T00:00:00.000Z'
 title: How to set up Neon Local with Docker Compose and JavaScript Postgres clients
 subtitle: A practical guide to Neon Local with JavaScript and Docker Compose for local and production setups
 ---
 
-ICYMI we recently launched [Neon Local](https://neon.tech/blog/make-yourself-at-home-with-neon-local/).
+ICYMI we recently launched [Neon Local](https://neon.tech/blog/make-yourself-at-home-with-neon-local).
 
 ## What is Neon Local?
 
 Neon Local is a proxy service that creates a local interface to your Neon cloud database. By default, it automatically creates a new database branch when your container starts and deletes it when the container stops. Your app connects to a local Postgres endpoint while Neon Local handles routing and authentication to the correct project and branch. _This means you don’t have to update connection strings across branches._
 
-Our [docs](/docs/local/neon-local) cover how to use Neon Local with both the [serverless driver](https://neon.tech/docs/serverless/serverless-driver) and [pg](https://github.com/brianc/node-postgres), but one area that might cause some confusion is how to switch between Neon Local in **development** and your Neon cloud database in **production**.
+Our [docs](/docs/local/neon-local) cover how to use Neon Local with both our [serverless driver](/docs/serverless/serverless-driver) and [pg](https://github.com/brianc/node-postgres), but one area that might cause some confusion is how to switch between Neon Local in **development** and your Neon cloud database in **production**.
 
 In this guide, I’ll show you how to set up your project to work in both development and production environments.
 
@@ -64,13 +64,13 @@ If you've cloned the repo, and followed the install instructions, run the app wi
 
 Once the app is running, go to [http://localhost:8080/](http://localhost:8080/) in your browser.
 
-<video autoPlay playsInline muted loop controls width="800" height="600">
-  <source type="video/mp4" src="/videos/guides/neon-local-docker-compose-javascript/docker-compose-up-watch.mp4"/>
-</video>
-
 ## 4. Ephemeral branches
 
 If you started the app in **development** mode, go to the Neon console, and you’ll see a new branch has been created using the `main`, or `production` branch as a base.
+
+<video autoPlay playsInline muted loop controls width="800" height="600">
+  <source type="video/mp4" src="/videos/guides/neon-local-docker-compose-javascript/docker-compose-up-watch.mp4"/>
+</video>
 
 If you started the app in **production** mode, the app will connect to the database defined by the `DATABASE_URL`, and no new branch will be created.
 
@@ -149,7 +149,7 @@ You can view the `src` of this file in the repository: [src/db.js](https://githu
 
 ### node-postgres
 
-Alternatively, if you prefer to use `pg`, here's how the connection is configured. Note that you'll need to add `?sslmode=no-verify` to the end of the connection string.
+Alternatively, if you prefer to use `pg`, here's how the connection is configured. Note that you'll need to add `?sslmode=no-verify` to the end of the Neon Local connection string.
 
 ```javascript
 import 'dotenv/config';
@@ -180,6 +180,6 @@ environment:
 
 And that’s it. By default, Neon Local handles creating and deleting a branch whenever you start or stop the container. If you want more control, such as setting a parent branch or disabling branch deletion, check out the [configuration options in the docs](/docs/local/neon-local).
 
-Neon Local simplifies the management of temporary database environments, making it easier to work with isolated instances for testing or short-term use. While it’s not a fully "local" database, it streamlines the workflow, especially for CI/CD pipelines where short-lived environments are needed to run tests but don’t need to stick around.
+Neon Local simplifies the management of temporary database environments, making it easier to work with isolated instances for testing or short-term use. While it’s **not** a fully "local" database, it streamlines the workflow, especially for CI/CD pipelines where short-lived environments are needed to run tests but don’t need to stick around.
 
 Neon Local is still in its early stages, with several improvements on the way. But for now, it could be exactly what you need to streamline your workflows. Give it a try today and [share your feedback with us](https://github.com/neondatabase-labs/neon_local).
