@@ -4,6 +4,17 @@ enableTableOfContents: true
 tag: beta
 ---
 
+<InfoBlock>
+  <DocsList title="Related docs" theme="docs">
+    <a href="/docs/guides/neon-auth">Get started</a>
+    <a href="/docs/guides/neon-auth-demo">Tutorial</a>
+  </DocsList>
+
+  <DocsList title="Sample project" theme="repo">
+    <a href="https://github.com/neondatabase-labs/neon-auth-demo-app">Neon Auth Demo App</a>
+  </DocsList>
+</InfoBlock>
+
 <FeatureBetaProps feature_name="Neon Auth" />
 
 ## Why Use Neon Auth?

@@ -6,6 +6,18 @@ tag: beta
 
 <FeatureBetaProps feature_name="Neon Auth" />
 
+<InfoBlock>
+  <DocsList title="Related docs" theme="docs">
+    <a href="/docs/guides/neon-auth">Get started</a>
+    <a href="/docs/guides/neon-auth-demo">Tutorial</a>
+    <a href="/docs/guides/neon-auth-how-it-works">How it works</a>
+  </DocsList>
+
+  <DocsList title="Sample project" theme="repo">
+    <a href="https://github.com/neondatabase-labs/neon-auth-demo-app">Neon Auth Demo App</a>
+  </DocsList>
+</InfoBlock>
+
 ## Foreign keys and the users_sync table
 
 Since the `neon_auth.users_sync` table is updated asynchronously, there may be a brief delay (usually less than 1 second) before a user's data appears in the table. Consider this possible delay when deciding whether to use foreign keys in your schema.

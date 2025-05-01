@@ -2,13 +2,28 @@
 title: Neon Auth Demo
 subtitle: Learn how automatic user profile sync can simplify your auth workflow
 enableTableOfContents: true
+tag: beta
 ---
+<InfoBlock>
+  <DocsList title="Related docs" theme="docs">
+    <a href="/docs/guides/neon-auth">Get started</a>
+  </DocsList>
+
+  <DocsList title="Sample project" theme="repo">
+    <a href="https://github.com/neondatabase-labs/neon-auth-demo-app">Neon Auth Demo App</a>
+  </DocsList>
+</InfoBlock>
 
 In this tutorial, we'll walk through some user authentication flows using our [demo todos](https://github.com/neondatabase-labs/neon-auth-demo-app) application, showing how Neon Auth automatically syncs user profiles to your database, and how that can simplify your code.
+
+<FeatureBetaProps feature_name="Neon Auth" />
+
 
 ## Prerequisites
 
 Follow the readme to set up the [Neon Auth Demo App](https://github.com/neondatabase-labs/neon-auth-demo-app): Next.js + Drizzle + Stack Auth
+
+> *Use the keys provided by Neon Auth in your project's **Auth** page rather than creating a separate Stack Auth project.*
 
 ```bash
 git clone https://github.com/neondatabase-labs/neon-auth-demo-app.git
@@ -34,7 +49,7 @@ Add a few todos as each user.
 
 ![Todo list showing todos with user attribution](/docs/guides/neon_auth_demo_todos.png)
 
-Here's the code that powers the todo list:
+Here's the code that builds the todo list:
 
 ```ts {7-11,14,15} showLineNumbers
 // app/actions.tsx
@@ -71,7 +86,7 @@ Switch between Bob and Doug's accounts to mark some todos complete - the dashboa
 
 ![Team progress dashboard showing real-time task completion](/docs/guides/neon_auth_demo_progress.png)
 
-Here's the code needed to populate this live dashboard:
+Here's the code that populates this live dashboard:
 
 ```ts showLineNumbers
 // app/users-stats.tsx
@@ -114,11 +129,11 @@ To test this, delete Doug's profile directly from the database:
 DELETE FROM neon_auth.users_sync WHERE email LIKE '%doug%';
 ```
 
-Refresh the todo list, and - ugh, ghost todos! Doug is gone, but his todos aren't.
+Refresh the todo list, and... ugh, _ghost todos!_ Doug may be gone, but his todos aren't.
 
 ![Todo list showing orphaned todos with no owner](/docs/guides/neon_auth_demo_ghosts.png)
 
-*In production, this would happen automatically when a user is deleted from your auth provider. Either way, their todos become orphaned - no owner, but still in your database.*
+*In production, this could happen automatically when a user is deleted from your auth provider. Either way, their todos become orphaned - no owner, but still in your database.*
 
 **Why?**
 
@@ -128,18 +143,17 @@ The starter schema does not include `ON DELETE CASCADE`, so when a user profile 
 
 _Let's prevent ghost todos with proper database constraints._
 
+Adding foreign key contraints is a best practice we explain in more detail [here](/docs/guides/neon-auth-best-practices#foreign-keys-and-the-users_sync-table).
+
 **Step 1: Clean up your demo**  
-Orphaned todos will block adding a foreign key. Use Neon's [instant restore](/docs/guides/branching-neon-cli#restoring-a-branch-to-its-own-or-another-branchs-history) to go back before you deleted Doug:
+Orphaned todos will block adding a foreign key. Use Neon's instant restore to roll back your branch:
 
-```sql
-SELECT NOW(); -- Note the current time
-```
+Go to the **Restore** page in the Neon Console and roll back to a few minutes ago, before we deleted Doug.
 
-```bash
-neon branches restore main ^self@2024-03-14T15:25:00Z
-```
-
-<small>Or use instant restore in the Neon Console's to roll back to a few minutes ago.</small>
+> If you have the Neon CLI installed, you can also use:
+```bash shouldWrap
+> neon branches restore production ^self@<timestamp> --preserve-under-name production_backup
+> ```
 
 **Step 2: Add the foreign key constraint**
 
@@ -170,11 +184,14 @@ Refresh the todo list. This time Doug's todos are automatically cleaned up!
 
 With Neon Auth, you get:
 
-- ✅ Real-time team analytics
+- ✅ Synchronized user profiles
 - ✅ Efficient data queries
-- ✅ Automatic cleanup
-- ✅ Always up-to-date user data
+- ✅ Automated data cleanup (with foreign key constraints)
+- ✅ Simple user data integration
 
 Neon Auth handles user-profile synchronization, and a single foreign key takes care of cleanup.
 
-Ready to use Neon Auth in your own project? See the [Neon Auth API docs](/docs/guides/neon-auth-api) to get started.
+Read more about Neon Auth in:
+
+- [How it works](/docs/guides/neon-auth-tutorial)
+- [Concepts](/docs/guides/neon-auth-how-it-works)
