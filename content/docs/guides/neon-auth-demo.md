@@ -4,6 +4,7 @@ subtitle: Learn how automatic user profile sync can simplify your auth workflow
 enableTableOfContents: true
 tag: beta
 ---
+
 <InfoBlock>
   <DocsList title="Related docs" theme="docs">
     <a href="/docs/guides/neon-auth">Get started</a>
@@ -18,12 +19,11 @@ In this tutorial, we'll walk through some user authentication flows using our [d
 
 <FeatureBetaProps feature_name="Neon Auth" />
 
-
 ## Prerequisites
 
 Follow the readme to set up the [Neon Auth Demo App](https://github.com/neondatabase-labs/neon-auth-demo-app): Next.js + Drizzle + Stack Auth
 
-> *Use the keys provided by Neon Auth in your project's **Auth** page rather than creating a separate Stack Auth project.*
+> _Use the keys provided by Neon Auth in your project's **Auth** page rather than creating a separate Stack Auth project._
 
 ```bash
 git clone https://github.com/neondatabase-labs/neon-auth-demo-app.git
@@ -130,7 +130,7 @@ Refresh the todo list, and... ugh, _ghost todos!_ Doug may be gone, but his todo
 
 ![Todo list showing orphaned todos with no owner](/docs/guides/neon_auth_demo_ghosts.png)
 
-*In production, this could happen automatically when a user is deleted from your auth provider. Either way, their todos become orphaned - no owner, but still in your database.*
+_In production, this could happen automatically when a user is deleted from your auth provider. Either way, their todos become orphaned - no owner, but still in your database._
 
 **Why?**
 
@@ -148,7 +148,8 @@ Orphaned todos will block adding a foreign key. Use Neon's instant restore to ro
 Go to the **Restore** page in the Neon Console and roll back to a few minutes ago, before we deleted Doug.
 
 > If you have the Neon CLI installed, you can also use:
-```bash shouldWrap
+
+````bash shouldWrap
 > neon branches restore production ^self@<timestamp> --preserve-under-name production_backup
 > ```
 
@@ -160,7 +161,7 @@ ADD CONSTRAINT todos_owner_id_fk
   FOREIGN KEY (owner_id)
   REFERENCES neon_auth.users_sync(id)
   ON DELETE CASCADE;
-```
+````
 
 **Step 3: Test it**
 
