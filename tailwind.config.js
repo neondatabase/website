@@ -128,6 +128,7 @@ module.exports = {
         tighter: '-0.04em',
         'extra-tight': '-0.02em',
         snug: '-0.01em',
+        wide: '0.02em',
         wider: '0.04em',
       },
       boxShadow: {
