@@ -41,7 +41,7 @@ Open the Neon Console to see their profiles automatically synced:
 
 ![Users sync table showing automatically synced profiles](/docs/guides/neon_auth_users_sync.png)
 
-*No custom sync logic required; profiles are always up-to-date in Postgres.*
+_No custom sync logic required; profiles are always up-to-date in Postgres._
 
 ## Easy user-data joins
 
@@ -78,7 +78,7 @@ Highlighted code shows:
 - User email and ID included in each todo response
 - Automatic join between todos and the `users_sync` table
 
-*User data is always available for joins and queries; no extra API calls or sync logic needed.*
+_User data is always available for joins and queries; no extra API calls or sync logic needed._
 
 ## Collaboration and analytics
 
@@ -96,16 +96,13 @@ async function getUserStats() {
       .select({
         email: users.email, // [!code highlight]
         name: users.name, // [!code highlight]
-        complete: db.$count(
-          todos,
-          and(eq(todos.isComplete, true), eq(todos.ownerId, users.id)),
-        ),
+        complete: db.$count(todos, and(eq(todos.isComplete, true), eq(todos.ownerId, users.id))),
         total: db.$count(todos, eq(todos.ownerId, users.id)),
       })
       .from(users) // [!code highlight]
       .innerJoin(todos, eq(todos.ownerId, users.id)) // [!code highlight]
       .where(isNull(users.deletedAt))
-      .groupBy(users.email, users.name, users.id),
+      .groupBy(users.email, users.name, users.id)
   );
 
   return stats;
@@ -117,7 +114,7 @@ Highlighted code shows:
 - Direct access to synced user profiles
 - Simple joins between app data and user data
 
-*Build multi-user features without writing complex sync code; user data is always available and up-to-date in your database.*
+_Build multi-user features without writing complex sync code; user data is always available and up-to-date in your database._
 
 ## Safe user deletion and data cleanup
 
@@ -168,6 +165,7 @@ ADD CONSTRAINT todos_owner_id_fk
 **Step 3: Test it**
 
 Delete Doug's profile again:
+
 ```sql
 DELETE FROM neon_auth.users_sync WHERE email LIKE '%doug%';
 ```
@@ -176,7 +174,7 @@ Refresh the todo list. This time Doug's todos are automatically cleaned up!
 
 ![Todo list showing clean state after user deletion](/docs/guides/neon_auth_demo_no_ghosts.png)
 
-*With this constraint in place, when Neon Auth syncs a user deletion, all their todos will be cleaned up automatically.*
+_With this constraint in place, when Neon Auth syncs a user deletion, all their todos will be cleaned up automatically._
 
 </Steps>
 
