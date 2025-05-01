@@ -15,6 +15,7 @@ const MigrationPage = () => (
     <TestimonialNew
       className="mt-[200px] xl:mt-[176px] lg:mt-[152px] md:mt-[104px]"
       quote="Neon worked out of the box, handling hundreds of Lambdas without any of the connection issues we saw in Aurora Serverless v2. On top of that, Neon costs us 1/6 of what we were paying with AWS."
+      quoteClassName="max-w-[720px] lg:max-w-[620px] md:max-w-[520px]"
       author={{
         name: 'Cody Jenkins',
         position: 'Head of Engineering at Invenco',
