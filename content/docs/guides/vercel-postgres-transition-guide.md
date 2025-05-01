@@ -3,7 +3,7 @@ title: Vercel Postgres Transition Guide
 subtitle: Everything you need to know about transitioning from Vercel Postgres to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-27T14:57:44.627Z'
+updatedOn: '2025-04-30T02:26:54.985Z'
 ---
 
 <Admonition type="note">
@@ -106,7 +106,7 @@ Neon is working with the Vercel team to transition Enterprise customers. If you 
 After moving to a Neon plan, you will be able to access a variety of advanced Neon features that were not available in Vercel Postgres (subject to your plan limits).
 
 <Admonition type="note">
-If you were a Vercel Postgres user on the Vercel Pro Plan, you remain subject to the limits of that [plan](#vercel-pro-plan-vs-neon-launch-plan) until you move to a Neon Plan. There's no requirement for you to move to a Neon plan, but doing so provides access to higher limits and additional features. For example, the the Vercel plan does not support branching or instant restore. For a full overview of Neon plans, features, and limits, refer to our [Pricing](https://neon.tech/pricing) page. If you change to a Neon plan, you will still be billed through Vercel.
+If you were a Vercel Postgres user on the Vercel Pro Plan, you remain subject to the limits of that [plan](#vercel-pro-plan-vs-neon-launch-plan) until you move to a Neon Plan. There's no requirement for you to move to a Neon plan, but doing so provides access to higher limits and additional features. For example, the Vercel plan does not support branching or instant restore. For a full overview of Neon plans, features, and limits, refer to our [Pricing](https://neon.tech/pricing) page. If you change to a Neon plan, you will still be billed through Vercel.
 </Admonition>
 
 Neon features:

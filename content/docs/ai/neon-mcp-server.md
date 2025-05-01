@@ -3,7 +3,7 @@ title: Neon MCP Server
 subtitle: Manage your Neon Postgres databases using natural language commands with the
   Neon MCP Server.
 enableTableOfContents: true
-updatedOn: '2025-04-17T16:06:46.395Z'
+updatedOn: '2025-04-23T18:54:35.409Z'
 ---
 
 The **Neon MCP Server** is an open-source tool that lets you interact with your Neon Postgres databases in **natural language**.
@@ -58,14 +58,6 @@ The remote hosted MCP server is currently in its preview phase. As the [OAuth sp
 - A Neon account.
 
 #### Setup steps:
-
-You can watch the video below for a quick overview of the setup process.
-
-<video playsInline loop width="800" height="600" controls>
-  <source type="video/mp4" src="https://neondatabase.wpengine.com/wp-content/uploads/2025/04/neon-hosted-mcp-server.mp4"/>
-</video>
-
-Steps:
 
 1.  Go to your MCP Client's settings where you configure MCP Servers (this varies by client)
 2.  Register a new MCP Server. Add a configuration block for "Neon" under 'mcpServers' key. The configuration should look like this:

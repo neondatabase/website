@@ -2,56 +2,57 @@
 title: Organizations
 subtitle: Invite Members to your Organization and collaborate on projects
 enableTableOfContents: true
-updatedOn: '2025-04-08T22:55:27.451Z'
+updatedOn: '2025-04-25T20:26:32.193Z'
 ---
 
 Build your team in Neon with Organizations. Manage all of your team's projects under a single account — with billing, role management, and project collaboration capabilities in one accessible location.
 
 ## About Neon Organizations
 
-In the Neon Console, the Organizations page provides a centralized view of all your team's projects. From there, you can create new projects, manage existing ones, as well as oversee your organization's members, your billing information, and access to preview features through the Early Access Program.
+In the Neon Console, the Organizations page provides a centralized view of all your team's projects. From there, you can create new projects, manage existing ones, as well as oversee your organization's members and collaborators, your billing information, and access to preview features through the Early Access Program.
 
 ![organizations projects tab](/docs/manage/org_projects.png)
 
 ## User roles and permissions
 
-Each organization is made up of three types of users:
+Organizations have two member roles:
 
 - **Admin** — Administrators have full control over the organization and all its projects. They manage permissions, billing, members, and organization settings. Only Admins can delete organization projects.
 - **Members** — Members have access to all organization projects and can perform most project operations, but cannot modify organization settings or delete projects.
-- **Collaborators** — Collaborators can only access specific projects they're invited to. Within those projects, they can perform most operations (like managing databases and compute settings) but cannot delete projects or configure integrations.
+
+Additionally, projects can be shared with **Project Collaborators**. These are external users with no organization-level access, but who can work with specific projects they're invited to.
 
 The following table shows what actions each role can perform in the organization and in organization-owned projects:
 
 | Action                                                                                                                       | Admin | Member | Collaborator |
 | ---------------------------------------------------------------------------------------------------------------------------- | :---: | :----: | :----------: |
-| **Organization-wide actions**                                                                                                |       |        |              |
-| [Create organization projects](/docs/manage/orgs-manage#create-and-delete-projects)                                          |  ✅   |   ✅   |      ❌      |
-| [Invite members](/docs/manage/orgs-manage#invite-members)                                                                    |  ✅   |   ❌   |      ❌      |
-| [Set permissions](/docs/manage/orgs-manage#set-permissions)                                                                  |  ✅   |   ❌   |      ❌      |
-| [Manage billing](/docs/manage/orgs-manage#billing)                                                                           |  ✅   |   ❌   |      ❌      |
-| [Delete organization](/docs/manage/orgs-manage#delete-an-organization)                                                       |  ✅   |   ❌   |      ❌      |
+| **Organization management**                                                                                                  |       |        |              |
+| [Invite organization members](/docs/manage/orgs-manage#invite-members)                                                       |  ✅   |   ❌   |      ❌      |
+| [Set organization permissions](/docs/manage/orgs-manage#set-permissions)                                                     |  ✅   |   ❌   |      ❌      |
+| [Manage organization billing](/docs/manage/orgs-manage#billing)                                                              |  ✅   |   ❌   |      ❌      |
 | [Rename organization](/docs/manage/orgs-manage#rename-an-organization)                                                       |  ✅   |   ❌   |      ❌      |
-| [Enable Early Access Program](/docs/introduction/roadmap#join-the-neon-early-access-program)                                 |  ✅   |   ❌   |      ❌      |
-| **Project management actions**                                                                                               |       |        |              |
-| [Manage databases](/docs/manage/databases)                                                                                   |  ✅   |   ✅   |      ✅      |
-| [Configure computes](/docs/manage/endpoints)                                                                                 |  ✅   |   ✅   |      ✅      |
-| [Manage roles](/docs/manage/users)                                                                                           |  ✅   |   ✅   |      ✅      |
-| [Invite collaborators](/docs/guides/project-collaboration-guide#invite-collaborators)                                        |  ✅   |   ✅   |      ✅      |
-| [Transfer projects](/docs/manage/orgs-project-transfer)                                                                      |  ✅   |   ✅   |      ❌      |
-| [Delete project](/docs/manage/orgs-manage#create-and-delete-projects)                                                        |  ✅   |   ❌   |      ❌      |
-| **Integrations**                                                                                                             |       |        |              |
+| [Delete organization](/docs/manage/orgs-manage#delete-an-organization)                                                       |  ✅   |   ❌   |      ❌      |
+| [Enable organization Early Access Program](/docs/introduction/roadmap#join-the-neon-early-access-program)                    |  ✅   |   ❌   |      ❌      |
+| **Project operations**                                                                                                       |       |        |              |
+| _Project creation and modification_                                                                                          |       |        |              |
+| [Create new projects](/docs/manage/orgs-manage#create-and-delete-projects)                                                   |  ✅   |   ✅   |      ❌      |
+| [Rename projects](/docs/manage/projects)                                                                                     |  ✅   |   ✅   |      ✅      |
+| [Transfer projects into organization](/docs/manage/orgs-project-transfer)                                                    |  ✅   |   ✅   |      ❌      |
+| [Transfer projects out of organization](/docs/manage/orgs-project-transfer#transfer-projects-between-organizations)          |  ✅   |   ❌   |      ❌      |
+| [Delete projects](/docs/manage/orgs-manage#create-and-delete-projects)                                                       |  ✅   |   ❌   |      ❌      |
+| _Project configuration_                                                                                                      |       |        |              |
+| [Manage project databases](/docs/manage/databases)                                                                           |  ✅   |   ✅   |      ✅      |
+| [Configure project computes](/docs/manage/endpoints)                                                                         |  ✅   |   ✅   |      ✅      |
+| [Manage project roles](/docs/manage/users)                                                                                   |  ✅   |   ✅   |      ✅      |
+| [Invite/remove project collaborators](/docs/guides/project-collaboration-guide#invite-collaborators)                         |  ✅   |   ✅   |      ✅      |
+| **Integration management**                                                                                                   |       |        |              |
 | [Install GitHub integration](/docs/guides/neon-github-integration#install-the-github-app-and-connect-your-neon-project)      |  ✅   |   ❌   |      ❌      |
 | [Install Neon Auth](/docs/guides/neon-auth#permissions)                                                                      |  ✅   |   ❌   |      ❌      |
 | [Install the Neon Postgres Previews Integration on Vercel\*](/docs/guides/vercel-previews-integration#how-to-install)        |  ✅   |   ❌   |      ❌      |
 | [Connect project to GitHub integration](/docs/guides/neon-github-integration#connect-more-neon-projects-with-the-github-app) |  ✅   |   ✅   |      ❌      |
 | [Connect project (Neon Postgres Previews Integration)](/docs/guides/vercel-previews-integration#how-to-install)              |  ✅   |   ✅   |      ❌      |
 
-\* The Vercel Native Integrations are managed entirely in Vercel and use Vercel's permission system (see [Vercel Team Roles](https://vercel.com/docs/rbac/access-roles/team-level-roles)). For the Neon Postgres Previews Integration, projects must first be made available in Vercel before they can be connected to Neon.
-
-<Admonition type="note">
-Collaborators have the same restrictions in both organization and personal projects: they cannot delete projects or configure integrations.
-</Admonition>
+\* The Vercel Native Integration is managed entirely in Vercel and uses Vercel's permission system (see [Vercel Team Roles](https://vercel.com/docs/rbac/access-roles/team-level-roles)). For the Neon Postgres Previews Integration, projects must first be made available in Vercel before they can be connected to Neon.
 
 ## Create an organization
 

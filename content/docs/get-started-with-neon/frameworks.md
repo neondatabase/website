@@ -2,7 +2,7 @@
 title: Neon framework guides
 subtitle: Find detailed instructions for connecting to Neon from various frameworks
 enableTableOfContents: false
-updatedOn: '2025-02-24T15:53:13.354Z'
+updatedOn: '2025-04-30T14:50:57.889Z'
 ---
 
 <TechCards>
@@ -16,6 +16,8 @@ updatedOn: '2025-02-24T15:53:13.354Z'
 <a href="/docs/guides/astro" title="Astro" description="Connect an Astro site or app to Neon" icon="astro"></a>
 
 <a href="/docs/guides/dotnet-entity-framework" title="Entity Framework" description="Connect a Dotnet Entity Framework application to Neon" icon="dotnet"></a>
+
+<a href="/docs/guides/hono" title="Hono" description="Connect a Hono application to Neon" icon="hono"></a>
 
 <a href="/docs/guides/nuxt" title="Nuxt" description="Connect a Nuxt application to Neon" icon="nuxt"></a>
 

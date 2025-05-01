@@ -4,7 +4,7 @@ subtitle: Learn how connection pooling works in Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/connection-pooling
-updatedOn: '2025-03-09T18:17:39.113Z'
+updatedOn: '2025-04-30T02:26:54.981Z'
 ---
 
 Neon uses [PgBouncer](https://www.pgbouncer.org/) to support connection pooling, enabling up to 10,000 concurrent connections. PgBouncer is a lightweight connection pooler for Postgres.
@@ -95,9 +95,9 @@ Connection pooling, however, is not a magic bullet: As the name implies, connect
 
 To ensure that direct access to Postgres is still possible for administrative tasks or similar, the pooler is configured to only open up a certain number of direct Postgres connections for each user to each database. This number of direct Postgres connections is determined by the PgBouncer [`default_pool_size`](#neon-pgbouncer-configuration-settings) setting, which is in turn determined by your compute's `max_connections` setting. For example, if `default_pool_size` is _100_, there can be only _100_ active connections from role `alex` to any particular database through the pooler. All other connections by `alex` to that database will have to wait for one of those _100_ active connections to complete their transactions before the next connection's work is started.
 
-At the same time, role `dana` will also be able to connect to the same database database through the pooler and have up to _100_ concurrent active transactions across the same number of connections.
+At the same time, role `dana` will also be able to connect to the same database through the pooler and have up to _100_ concurrent active transactions across the same number of connections.
 
-Similarly, even if role `alex` has _100_ concurrently active transactions through the pooler to the same database database, that role can still start up to _100_ concurrent transactions to a different database when connected through the pooler.
+Similarly, even if role `alex` has _100_ concurrently active transactions through the pooler to the same database, that role can still start up to _100_ concurrent transactions to a different database when connected through the pooler.
 
 The `max_connections` setting still applies for direct Postgres connections.
 

@@ -56,6 +56,8 @@
               slug: guides/django
             - title: Express
               slug: guides/express
+            - title: Hono
+              slug: guides/hono
             - title: Laravel
               slug: guides/laravel
             - title: NestJS
@@ -86,6 +88,20 @@
               slug: guides/sveltekit
             - title: Symfony
               slug: guides/symfony
+        - section: File and media storage
+          items:
+            - title: File storage
+              slug: guides/file-storage
+            - title: File storage with AWS S3
+              slug: guides/aws-s3
+            - title: File storage with Cloudflare R2
+              slug: guides/cloudflare-r2
+            - title: Media storage with Cloudinary
+              slug: guides/cloudinary
+            - title: Media storage with ImageKit
+              slug: guides/imagekit
+            - title: Media storage with Uploadcare
+              slug: guides/uploadcare
     - title: Connect
       slug: connect/connect-intro
       icon: connect
@@ -217,6 +233,9 @@
               slug: guides/scale-to-zero-guide
         - title: Instant restore
           slug: introduction/branch-restore
+        - title: Backup & restore
+          slug: guides/backup-restore
+          tag: early access
         - title: Branching
           slug: guides/branching-intro
           items:
@@ -361,7 +380,9 @@
               slug: introduction/monitor-active-queries
             - title: Query history
               slug: introduction/monitor-query-history
-            - title: External tools
+            - title: Datadog integration
+              slug: guides/datadog
+            - title: Datbase monitoring tools
               slug: introduction/monitor-external-tools
         - section: Team Tools
           items:
@@ -384,10 +405,10 @@
         - section: Updates
           items:
             - title: Overview
-              slug: manage/maintenance-updates-overview              
+              slug: manage/maintenance-updates-overview
               tag: new
             - title: Platform maintenance
-              slug: manage/platform-maintenance              
+              slug: manage/platform-maintenance
               tag: new
             - title: Updates
               slug: manage/updates
@@ -494,6 +515,8 @@
               slug: https://neon.tech/guides/agentstack-neon
             - title: AutoGen
               slug: https://neon.tech/guides/autogen-neon
+            - title: Azure AI Agent Service
+              slug: https://neon.tech/guides/azure-ai-agent-service 
             - title: Composio + CrewAI
               slug: https://neon.tech/guides/composio-crewai-neon
             - title: LangGraph
@@ -721,6 +744,8 @@
           items:
             - title: Exograph
               slug: guides/exograph
+            - title: PostgREST
+              slug: guides/postgrest
             - title: FerretDB
               slug: guides/ferretdb
             - title: Grafbase
@@ -918,6 +943,10 @@
               slug: guides/neon-twin-full-pg-dump-restore
             - title: Partial Twin
               slug: guides/neon-twin-partial-pg-dump-restore
+    - title: Neon Local
+      icon: container
+      tag: new
+      slug: local/neon-local
 - section: Postgres
   items:
     - title: PostgreSQL Tutorial

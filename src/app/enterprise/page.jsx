@@ -253,7 +253,7 @@ const faqItems = [
   },
   {
     question: 'Is Neon compliant?',
-    answer: `Yes. Neon adheres to SOC 2, ISO 27001, ISO 27701 standards and complies with GDPR, CCPA, and HIPAA. <a href="/docs/security/compliance">Read more.</a>.`,
+    answer: `Yes. Neon adheres to SOC 2, ISO 27001, ISO 27701 standards and complies with GDPR, CCPA, and HIPAA. <a href="/docs/security/compliance">Read more.</a>`,
   },
   {
     question: 'How secure is Neon’s platform?',
