@@ -3,7 +3,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useCookie from 'react-use/lib/useCookie';
 import useLocation from 'react-use/lib/useLocation';
@@ -14,12 +14,43 @@ import Field from 'components/shared/field';
 import Link from 'components/shared/link';
 import { FORM_STATES, HUBSPOT_CONTACT_SALES_FORM_ID } from 'constants/forms';
 import LINKS from 'constants/links';
+import CloseIcon from 'icons/close.inline.svg';
 import { checkBlacklistEmails } from 'utils/check-blacklist-emails';
 import { doNowOrAfterSomeTime, sendHubspotFormData } from 'utils/forms';
 
+const ErrorMessage = ({ onClose }) => (
+  <div className="absolute inset-0 flex items-center justify-center p-5" data-test="error-message">
+    <div className="relative z-10 flex max-w-sm flex-col items-center text-center">
+      <h3 className="font-title text-[32px] font-medium leading-none tracking-extra-tight sm:text-[28px]">
+        Oops, looks like there's a technical problem
+      </h3>
+      <p className="mt-3.5 max-w-[236px] leading-tight tracking-extra-tight text-gray-new-70">
+        Please reach out to us directly at{' '}
+        <Link
+          className="border-b border-green-45/40 hover:border-green-45"
+          theme="green"
+          to="mailto:atli@neon.tech"
+        >
+          atli@neon.tech
+        </Link>
+      </p>
+    </div>
+    <button className="absolute right-4 top-4 z-20" type="button" onClick={onClose}>
+      <CloseIcon className="size-4 text-white opacity-50 transition-opacity duration-300 hover:opacity-100" />
+      <span className="sr-only">Close error message</span>
+    </button>
+    <span className="absolute inset-0 bg-[#0E0E11]/40 backdrop-blur-md" />
+  </div>
+);
+
+ErrorMessage.propTypes = {
+  onClose: PropTypes.func.isRequired,
+};
+
 const schema = yup
   .object({
-    name: yup.string().required('Your name is a required field'),
+    firstname: yup.string().required('Your first name is a required field'),
+    lastname: yup.string().required('Your last name is a required field'),
     email: yup
       .string()
       .email('Please enter a valid email')
@@ -31,34 +62,43 @@ const schema = yup
   .required();
 
 const labelClassName = 'text-sm text-gray-new-90';
-const errorClassName = '!top-0';
 
 const ContactForm = () => {
   const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
-
-  const {
-    register,
-    reset,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
-
+  const [isBroken, setIsBroken] = useState(false);
   const [hubspotutk] = useCookie('hubspotutk');
   const { href } = useLocation();
-  const [formError, setFormError] = useState('');
 
   const context = {
     hutk: hubspotutk,
     pageUri: href,
   };
 
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { isValid, errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      companySize: 'hidden',
+    },
+  });
+
+  useEffect(() => {
+    const hasErrors = Object.keys(errors).length > 0;
+    if (formState !== FORM_STATES.LOADING && formState !== FORM_STATES.SUCCESS) {
+      if (hasErrors) setFormState(FORM_STATES.ERROR);
+      else setFormState(FORM_STATES.DEFAULT);
+    }
+  }, [errors, isValid, formState]);
+
   const onSubmit = async (data, e) => {
     e.preventDefault();
-    const { name, email, companyWebsite, companySize, message } = data;
+    const { firstname, lastname, email, companyWebsite, companySize, message } = data;
     const loadingAnimationStartedTime = Date.now();
-    setFormError('');
+    setIsBroken(false);
     setFormState(FORM_STATES.LOADING);
 
     try {
@@ -67,8 +107,12 @@ const ContactForm = () => {
         context,
         values: [
           {
-            name: 'full_name',
-            value: name,
+            name: 'firstname',
+            value: firstname,
+          },
+          {
+            name: 'lastname',
+            value: lastname,
           },
           {
             name: 'email',
@@ -97,7 +141,7 @@ const ContactForm = () => {
         doNowOrAfterSomeTime(() => {
           setFormState(FORM_STATES.SUCCESS);
           reset();
-          setFormError('');
+          setIsBroken(false);
         }, loadingAnimationStartedTime);
       } else {
         throw new Error('Something went wrong. Please reload the page and try again.');
@@ -105,8 +149,8 @@ const ContactForm = () => {
     } catch (error) {
       if (error.name !== 'AbortError') {
         doNowOrAfterSomeTime(() => {
-          setFormState(FORM_STATES.ERROR);
-          setFormError(error?.message ?? error);
+          setFormState(FORM_STATES.BROKEN);
+          setIsBroken(true);
         }, 2000);
       }
     }
@@ -117,23 +161,33 @@ const ContactForm = () => {
   return (
     <form
       className={clsx(
-        'relative z-10 grid gap-y-6 rounded-xl border border-gray-new-10 bg-[#020203] p-8 shadow-contact xl:gap-y-5 xl:p-[30px] lg:gap-y-6 sm:p-5',
+        'relative z-10 grid gap-y-6 overflow-hidden rounded-xl border border-gray-new-10 bg-[#020203] p-8 shadow-contact xl:gap-y-5 xl:p-[30px] lg:gap-y-6 sm:p-5',
         'bg-[radial-gradient(131.75%_102.44%_at_16.67%_0%,_rgba(20,24,31,.5),_rgba(20,24,31,0.30)_47.96%,_rgba(20,24,31,0))]'
       )}
       method="POST"
       onSubmit={handleSubmit(onSubmit)}
     >
       <Field
-        name="name"
-        label="Your Name *"
+        name="firstname"
+        label="First Name *"
         autoComplete="name"
-        placeholder="Marques Hansen"
+        placeholder="Marques"
         theme="transparent"
         labelClassName={labelClassName}
-        errorClassName={errorClassName}
-        error={errors.name?.message}
+        error={errors.firstname?.message}
         isDisabled={isDisabled}
-        {...register('name')}
+        {...register('firstname')}
+      />
+      <Field
+        name="lastname"
+        label="Last Name *"
+        autoComplete="name"
+        placeholder="Hansen"
+        theme="transparent"
+        labelClassName={labelClassName}
+        error={errors.lastname?.message}
+        isDisabled={isDisabled}
+        {...register('lastname')}
       />
       <Field
         name="email"
@@ -143,7 +197,6 @@ const ContactForm = () => {
         placeholder="info@acme.com"
         theme="transparent"
         labelClassName={labelClassName}
-        errorClassName={errorClassName}
         isDisabled={isDisabled}
         error={errors.email?.message}
         {...register('email')}
@@ -155,7 +208,6 @@ const ContactForm = () => {
           label="Company Website"
           theme="transparent"
           labelClassName={labelClassName}
-          errorClassName={errorClassName}
           isDisabled={isDisabled}
           {...register('companyWebsite')}
         />
@@ -164,10 +216,8 @@ const ContactForm = () => {
           name="companySize"
           label="Company Size *"
           tag="select"
-          defaultValue="hidden"
           theme="transparent"
           labelClassName={labelClassName}
-          errorClassName={errorClassName}
           isDisabled={isDisabled}
           error={errors.companySize?.message}
           {...register('companySize')}
@@ -190,7 +240,6 @@ const ContactForm = () => {
         theme="transparent"
         labelClassName={labelClassName}
         textareaClassName="min-h-[170px] xl:min-h-[148px]"
-        errorClassName={errorClassName}
         isDisabled={isDisabled}
         error={errors.message?.message}
         {...register('message')}
@@ -213,7 +262,10 @@ const ContactForm = () => {
           .
         </p>
         <Button
-          className="min-w-[176px] py-[15px] font-medium 2xl:text-base xl:min-w-[138px] lg:min-w-[180px] sm:w-full sm:py-[13px]"
+          className={clsx(
+            'min-w-[176px] py-[15px] font-medium 2xl:text-base xl:min-w-[138px] lg:min-w-[180px] sm:w-full sm:py-[13px]',
+            formState === FORM_STATES.ERROR && 'pointer-events-none !bg-secondary-1/50'
+          )}
           type="submit"
           theme="primary"
           size="xs"
@@ -221,15 +273,8 @@ const ContactForm = () => {
         >
           {formState === FORM_STATES.SUCCESS ? 'Sent!' : 'Submit'}
         </Button>
-        {formError && (
-          <span
-            className="absolute left-1/2 top-[calc(100%+1rem)] w-full -translate-x-1/2 text-sm leading-none text-secondary-1"
-            data-test="error-message"
-          >
-            {formError}
-          </span>
-        )}
       </div>
+      {isBroken && <ErrorMessage onClose={() => setIsBroken(false)} />}
     </form>
   );
 };

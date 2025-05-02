@@ -38,7 +38,6 @@
     "button": {
       "url": "https://console.neon.tech/signup",
       "text": "Start for free",
-      "theme": "white-outline",
       "event": "Hero Free Tier Panel",
       "analyticsEvent": "pricing_page_get_started_with_free_plan_clicked"
     }
@@ -49,7 +48,6 @@
     "highlighted": true,
     "price": 19,
     "priceFrom": true,
-    "headerLinks": "Pay via <a href='https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa' target='_blank' rel='noopener noreferrer'>AWS</a>",
     "description": "The resources, features, and support you need to launch.",
     "features": [
       {
@@ -98,7 +96,7 @@
     "type": "Scale",
     "price": 69,
     "priceFrom": true,
-    "headerLinks": "Pay via <a href='https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa' target='_blank' rel='noopener noreferrer'>AWS</a> or <a href='https://azuremarketplace.microsoft.com/en-us/marketplace/apps/neon1722366567200.neon_serverless_postgres_azure_prod?tab=PlansAndPrice' target='_blank' rel='noopener noreferrer'>Azure</a>",
+    "headerLinks": "Pay via <a href='https://azuremarketplace.microsoft.com/en-us/marketplace/apps/neon1722366567200.neon_serverless_postgres_azure_prod?tab=PlansAndPrice' target='_blank' rel='noopener noreferrer'>Azure</a>",
     "description": "More capacity and functionality for scaling production workloads.",
     "features": [
       {
@@ -137,7 +135,6 @@
     "button": {
       "url": "https://console.neon.tech/app/billing#plans",
       "text": "Get started",
-      "theme": "white-outline",
       "event": "Hero Scale Panel",
       "analyticsEvent": "pricing_page_get_started_with_scale_plan_clicked"
     }
@@ -195,7 +192,7 @@
     "button": {
       "url": "https://console.neon.tech/app/billing#plans",
       "text": "Get started",
-      "theme": "white-outline",
+
       "event": "Hero Enterprise Panel",
       "analyticsEvent": "pricing_page_get_started_with_business_plan_clicked"
     }

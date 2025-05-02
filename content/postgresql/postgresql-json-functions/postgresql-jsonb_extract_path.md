@@ -20,7 +20,7 @@ nextLink:
 
 The `jsonb_extract_path()` function allows you to extract a JSON sub\-object from a JSONB value at a specified path.
 
-Here’s the basic syntax of the `jsonb_extract_path()` function:
+Here's the basic syntax of the `jsonb_extract_path()` function:
 
 ```sql
 jsonb_extract_path(target jsonb, VARIADIC path_elems text[])
@@ -34,7 +34,7 @@ In this syntax:
 Note that the path is not a JSON path. The syntax for the `path_elems` parameter is as follows:
 
 - `'key'`: Access a specific key in the JSON object.
-- ‘`array_index`‘: Access an element in a JSON array using its index.
+- '`array_index`': Access an element in a JSON array using its index.
 
 To navigate through the nested objects or array, you can chain these path components together.
 
@@ -46,7 +46,7 @@ Suppose you have the following JSON object:
     "name": "John Doe",
     "age": 22,
     "contacts": [
-      {"type": "email", "value": "[[email protected]](../cdn-cgi/l/email-protection.html)"},
+      {"type": "email", "value": "john.doe@example.com"},
       {"type": "phone", "value": "408-123-456"}
     ]
   }
@@ -57,11 +57,11 @@ Here are some examples of the path expressions:
 
 - `'employee'` returns the entire `employee` object.
 - `['employee', 'name']` returns the name within the employee object, which is `"John Doe"`.
-- `['employee', 'contacts', '0', 'value']` returns the value in the first element of the contacts array, which is `[[email protected]](../cdn-cgi/l/email-protection.html)`
+- `['employee', 'contacts', '0', 'value']` returns the value in the first element of the contacts array, which is `john.doe@example.com`
 
 ## PostgreSQL jsonb_extract_path() function examples
 
-Let’s take some examples of using the `jsonb_extract_path()` function.
+Let's take some examples of using the `jsonb_extract_path()` function.
 
 ### Setting up a sample table
 
@@ -79,8 +79,8 @@ Second, [insert two rows](../postgresql-tutorial/postgresql-insert) into the `do
 ```sql
 INSERT INTO documents(data)
 VALUES
-  ('{"employee":{"name":"John Doe","age":22,"contacts":[{"type":"email","value":"[[email protected]](../cdn-cgi/l/email-protection.html)"},{"type":"phone","value":"408-123-456"}]}}'),
-  ('{"employee":{"name":"Jane Doe","age":21,"contacts":[{"type":"email","value":"[[email protected]](../cdn-cgi/l/email-protection.html)"},{"type":"phone","value":"408-123-789"}]}}');
+  ('{"employee":{"name":"John Doe","age":22,"contacts":[{"type":"email","value":"john.doe@example.com"},{"type":"phone","value":"408-123-456"}]}}'),
+  ('{"employee":{"name":"Jane Doe","age":21,"contacts":[{"type":"email","value":"jane.doe@example.com"},{"type":"phone","value":"408-123-789"}]}}');
 ```
 
 ### Basic jsonb_extract_path() function examples
@@ -99,8 +99,8 @@ Output:
 ```text
                                                                  employee
 -------------------------------------------------------------------------------------------------------------------------------------------
- {"age": 22, "name": "John Doe", "contacts": [{"type": "email", "value": "[[email protected]](../cdn-cgi/l/email-protection.html)"}, {"type": "phone", "value": "408-123-456"}]}
- {"age": 21, "name": "Jane Doe", "contacts": [{"type": "email", "value": "[[email protected]](../cdn-cgi/l/email-protection.html)"}, {"type": "phone", "value": "408-123-789"}]}
+ {"age": 22, "name": "John Doe", "contacts": [{"type": "email", "value": "john.doe@example.com"}, {"type": "phone", "value": "408-123-456"}]}
+ {"age": 21, "name": "Jane Doe", "contacts": [{"type": "email", "value": "jane.doe@example.com"}, {"type": "phone", "value": "408-123-789"}]}
 (2 rows)
 ```
 
@@ -140,8 +140,8 @@ Output:
 ```text
         email
 ---------------------
- "[[email protected]](../cdn-cgi/l/email-protection.html)"
- "[[email protected]](../cdn-cgi/l/email-protection.html)"
+ "john.doe@example.com"
+ "jane.doe@example.com"
 (2 rows)
 ```
 

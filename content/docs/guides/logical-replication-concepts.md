@@ -40,7 +40,7 @@ SHOW wal_level;
  logical
 ```
 
-Enabling logical replication turns on detailed logging, which is required to support the replication process. This increases the amount of data written to the Write-Ahead Log (WAL). Typically, you can expect a 10% to 30% increase in the amount of data written to the WAL, depending on the extent of write activity.
+Enabling logical replication turns on detailed logging, which is required to support the replication process.
 
 ## Publications
 

@@ -2,7 +2,7 @@
 title: Neon serverless driver
 enableTableOfContents: true
 subtitle: Connect to Neon from serverless environments over HTTP or WebSockets
-updatedOn: '2025-03-17T20:41:57.345Z'
+updatedOn: '2025-04-30T02:26:54.990Z'
 ---
 
 The [Neon serverless driver](https://github.com/neondatabase/serverless) is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over **HTTP** or **WebSockets** in place of TCP. The driver's low-latency capability is due to [message pipelining and other optimizations](https://neon.tech/blog/quicker-serverless-postgres).
@@ -213,7 +213,9 @@ You can customize the return format using the configuration options `fullResults
 
   ```javascript
   const sql = neon(process.env.DATABASE_URL);
-  const results = await sql.query('SELECT * FROM posts WHERE id = $1', [postId], { fullResults: true });
+  const results = await sql.query('SELECT * FROM posts WHERE id = $1', [postId], {
+    fullResults: true,
+  });
   // -> { ... same as above ... }
   ```
 
@@ -436,8 +438,8 @@ There are different implementations of the application to choose from.
 <a href="https://github.com/neondatabase/serverless-cfworker-demo" description="Demonstrates using the Neon serverless driver on Cloudflare Workers and employs caching for high performance." icon="github">Raw SQL + Cloudflare Workers</a>
 <a href="https://github.com/neondatabase/neon-vercel-kysely" description="Demonstrates using kysely and kysely-codegen with Neon's serverless driver on Vercel Edge Functions" icon="github">Kysely + Vercel Edge Functions</a>
 <a href="https://github.com/neondatabase/neon-vercel-zapatos" description="Demonstrates using Zapatos with Neon's serverless driver on Vercel Edge Functions" icon="github">Zapatos + Vercel Edge Functions</a>
-<a href="https://github.com/neondatabase/neon-vercel-pgtyped" description="Demonstrates using using pgTyped with Neon's serverless driver on Vercel Edge Functions" icon="github">Neon + pgTyped on Vercel Edge Functions</a>
-<a href="https://github.com/neondatabase/neon-vercel-knex" description="Demonstrates using using Knex with Neon's serverless driver on Vercel Edge Functions" icon="github">Neon + Knex on Vercel Edge Functions</a>
+<a href="https://github.com/neondatabase/neon-vercel-pgtyped" description="Demonstrates using pgTyped with Neon's serverless driver on Vercel Edge Functions" icon="github">Neon + pgTyped on Vercel Edge Functions</a>
+<a href="https://github.com/neondatabase/neon-vercel-knex" description="Demonstrates using Knex with Neon's serverless driver on Vercel Edge Functions" icon="github">Neon + Knex on Vercel Edge Functions</a>
 </DetailIconCards>
 
 ### Ping Thing

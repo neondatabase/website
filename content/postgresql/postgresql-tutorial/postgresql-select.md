@@ -16,7 +16,7 @@ nextLink:
 
 **Summary**: in this tutorial, you are going to learn how to use the basic **PostgreSQL SELECT** statement to query data from a table.
 
-Note that if you don’t know how to execute a query against the PostgreSQL database using the **psql** command\-line tool or **pgAdmin** GUI tool, you can check [the connection to the PostgreSQL database tutorial](../postgresql-getting-started/connect-to-postgresql-database).
+Note that if you don't know how to execute a query against the PostgreSQL database using the **psql** command\-line tool or **pgAdmin** GUI tool, you can check [the connection to the PostgreSQL database tutorial](../postgresql-getting-started/connect-to-postgresql-database).
 
 One of the most common tasks, when you work with the database, is to retrieve data from tables using the `SELECT` statement.
 
@@ -35,11 +35,11 @@ The `SELECT` statement has the following clauses:
 - Join with other tables using [joins](postgresql-joins) such as [`INNER JOIN`](postgresql-inner-join), [`LEFT JOIN`](postgresql-left-join), [`FULL OUTER JOIN`](postgresql-full-outer-join), [`CROSS JOIN`](postgresql-cross-join) clauses.
 - Perform set operations using [`UNION`](postgresql-union), [`INTERSECT`](postgresql-intersect), and [`EXCEPT`](https://neon.tech/postgresql/postgresql-tutorial/postgresql-tutorial/postgresql-except/).
 
-In this tutorial, you are going to focus on the `SELECT`and `FROM` clauses.
+In this tutorial, you are going to focus on the `SELECT`and `FROM` clauses.
 
 ## PostgreSQL SELECT statement syntax
 
-Let’s start with the basic form of the `SELECT` statement that retrieves data from a single table.
+Let's start with the basic form of the `SELECT` statement that retrieves data from a single table.
 
 The following illustrates the syntax of the `SELECT` statement:
 
@@ -60,13 +60,13 @@ The `FROM` clause is optional. If you are not querying data from any table, you 
 PostgreSQL evaluates the `FROM` clause before the `SELECT` clause in the `SELECT` statement:
 
 ![](/postgresqltutorial/PostgreSQL-Select.png)
-Note that the SQL keywords are case\-insensitive. It means that `SELECT` is equivalent to `select` or `Select`. By convention, we will use all the SQL keywords in uppercase to make the queries easier to read.
+Note that the SQL keywords are case\-insensitive. It means that `SELECT` is equivalent to `select` or `Select`. By convention, we will use all the SQL keywords in uppercase to make the queries easier to read.
 
 ## PostgreSQL SELECT examples
 
-Let’s explore some examples of using the `SELECT` statement.
+Let's explore some examples of using the `SELECT` statement.
 
-We will use the following `customer` table in the `dvdrental` [sampledatabase](../postgresql-getting-started/postgresql-sample-database 'PostgreSQL Sample Database') for the demonstration.
+We will use the following `customer` table in the `dvdrental` [sampledatabase](../postgresql-getting-started/postgresql-sample-database 'PostgreSQL Sample Database') for the demonstration.
 
 ![customer table](/postgresqltutorial/customer.png)First, [connect to the PostgreSQL server](../postgresql-getting-started/connect-to-postgresql-database) using the `postgres` user:
 
@@ -74,7 +74,7 @@ We will use the following `customer` table in the `dvdrental` [sampledatabase]
 psql -U postgres
 ```
 
-You’ll be prompted to enter a password for the `postgres` user. After entering the password correctly, you will be connected to the PostgreSQL server:
+You'll be prompted to enter a password for the `postgres` user. After entering the password correctly, you will be connected to the PostgreSQL server:
 
 ```
 postgres=#
@@ -129,9 +129,9 @@ Partial output:
 ```text
  first_name  |  last_name   |                  email
 -------------+--------------+------------------------------------------
- Jared       | Ely          | [[email protected]](../cdn-cgi/l/email-protection.html)
- Mary        | Smith        | [[email protected]](../cdn-cgi/l/email-protection.html)
- Patricia    | Johnson      | [[email protected]](../cdn-cgi/l/email-protection.html)
+ Jared       | Ely          | jared.ely@example.com
+ Mary        | Smith        | mary.smith@example.com
+ Patricia    | Johnson      | patricia.johnson@example.com
 ...
 ```
 
@@ -150,9 +150,9 @@ Partial output:
 ```text
  customer_id | store_id | first_name  |  last_name   |                  email                   | address_id | activebool | create_date |       last_update       | active
 -------------+----------+-------------+--------------+------------------------------------------+------------+------------+-------------+-------------------------+--------
-         524 |        1 | Jared       | Ely          | [[email protected]](../cdn-cgi/l/email-protection.html)             |        530 | t          | 2006-02-14  | 2013-05-26 14:49:45.738 |      1
-           1 |        1 | Mary        | Smith        | [[email protected]](../cdn-cgi/l/email-protection.html)            |          5 | t          | 2006-02-14  | 2013-05-26 14:49:45.738 |      1
-           2 |        1 | Patricia    | Johnson      | [[email protected]](../cdn-cgi/l/email-protection.html)      |          6 | t          | 2006-02-14  | 2013-05-26 14:49:45.738 |      1
+         524 |        1 | Jared       | Ely          | jared.ely@example.com             |        530 | t          | 2006-02-14  | 2013-05-26 14:49:45.738 |      1
+           1 |        1 | Mary        | Smith        | mary.smith@example.com            |          5 | t          | 2006-02-14  | 2013-05-26 14:49:45.738 |      1
+           2 |        1 | Patricia    | Johnson      | patricia.johnson@example.com      |          6 | t          | 2006-02-14  | 2013-05-26 14:49:45.738 |      1
 ...
 ```
 
@@ -185,16 +185,16 @@ Output:
 
 ```
        ?column?        |                  email
------------------------+------------------------------------------
- Jared Ely             | [[email protected]](../cdn-cgi/l/email-protection.html)
- Mary Smith            | [[email protected]](../cdn-cgi/l/email-protection.html)
- Patricia Johnson      | [[email protected]](../cdn-cgi/l/email-protection.html)
+------------------------+------------------------------------------
+ Jared Ely             | jared.ely@example.com
+ Mary Smith            | mary.smith@example.com
+ Patricia Johnson      | patricia.johnson@example.com
 ...
 ```
 
 In this example, we used the [concatenation operator](../postgresql-string-functions/postgresql-concat-function) `||` to concatenate the first name, space, and last name of every customer.
 
-Notice the first column of the output doesn’t have a name but `?column?`. To assign a name to a column temporarily in the query, you can use a [column alias](postgresql-column-alias):
+Notice the first column of the output doesn't have a name but `?column?`. To assign a name to a column temporarily in the query, you can use a [column alias](postgresql-column-alias):
 
 ```
 expression AS column_lias
@@ -220,10 +220,10 @@ Output:
 
 ```
        full_name       |                  email
------------------------+------------------------------------------
- Jared Ely             | [[email protected]](../cdn-cgi/l/email-protection.html)
- Mary Smith            | [[email protected]](../cdn-cgi/l/email-protection.html)
- Patricia Johnson      | [[email protected]](../cdn-cgi/l/email-protection.html)
+------------------------+------------------------------------------
+ Jared Ely             | jared.ely@example.com
+ Mary Smith            | mary.smith@example.com
+ Patricia Johnson      | patricia.johnson@example.com
 ...
 ```
 
@@ -237,7 +237,7 @@ Typically, you use the `SELECT` clause with a function to retrieve the function 
 SELECT NOW();
 ```
 
-In this example, we use the [`NOW()`](../postgresql-date-functions/postgresql-now) function in the `SELECT` statement. It’ll return the current date and time of the PostgreSQL server.
+In this example, we use the [`NOW()`](../postgresql-date-functions/postgresql-now) function in the `SELECT` statement. It'll return the current date and time of the PostgreSQL server.
 
 ## Summary
 

@@ -4,7 +4,7 @@ subtitle: Learn about Neon as a managed Postgres service
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2025-03-18T15:50:56.626Z'
+updatedOn: '2025-04-24T15:21:53.177Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
@@ -42,7 +42,7 @@ Because Neon is a managed Postgres service, Postgres parameters are not user-con
 | `client_connection_check_interval`    | 60000         |                                                                                                                                                                                                                                                                                |
 | `dynamic_shared_memory_type`          | mmap          |                                                                                                                                                                                                                                                                                |
 | `effective_io_concurrency`            | 20            |                                                                                                                                                                                                                                                                                |
-| `effective_cache_size    `            |               | Set based on the [Local File Cache (LFC)](/docs/reference/glossary#local-file-cache) size of your maximum Neon compute size                                                                                                                                                   |
+| `effective_cache_size    `            |               | Set based on the [Local File Cache (LFC)](/docs/reference/glossary#local-file-cache) size of your maximum Neon compute size                                                                                                                                                    |
 | `fsync`                               | off           | Neon syncs data to the Neon Storage Engine to store your data safely and reliably                                                                                                                                                                                              |
 | `hot_standby`                         | off           |                                                                                                                                                                                                                                                                                |
 | `idle_in_transaction_session_timeout` | 300000        |                                                                                                                                                                                                                                                                                |
@@ -83,7 +83,7 @@ Of the parameter settings listed above, the `max_connections`, `maintenance_work
   For example, if you have a fixed compute size of 4 CU, that size is both your `max_compute_size` and `min_compute_size`. Inputting that value into the formula gives you a `max_connections` setting of 1802. For an autoscaling configuration with a `min_compute_size` of 0.25 CU and a `max_compute_size` of 2 CU, the `max_connections` setting would be 901.
 
     <Admonition type="note">
-    It's important to note that `max_connections` does not scale dynamically in an autoscaling configuration. It’s a static setting determined by your minimum and maximum compute size.
+    It's important to note that `max_connections` does not scale dynamically in an autoscaling configuration. It's a static setting determined by your minimum and maximum compute size.
     </Admonition>
 
   You can also check your `max_connections` setting in the Neon Console. Go to **Branches**, select your branch, then go to the **Compute** tab and select **Edit**. Your `max_connections` setting is the "direct connections" value. You can adjust the compute configuration to see how it impacts the number of direct connections.
@@ -192,9 +192,9 @@ ALTER DATABASE neondb SET maintenance_work_mem='1 GB';
 ALTER USER neondb_owner SET maintenance_work_mem='1 GB';
 ```
 
-## Postgres server logs
+## Postgres logs
 
-Currently, Postgres server logs can only be accessed Neon Support team. Should you require information from the Postgres server logs for troubleshooting purposes, please contact [Neon Support](/docs/introduction/support).
+PostgreSQL logs can be accessed through the [Datadog integration](/docs/guides/datadog) on Scale tier and higher plans. The integration forwards logs including error messages, database connection events, system notifications, and general PostgreSQL logs. For other plans or if you need specific log information for troubleshooting purposes, please contact [Neon Support](/docs/introduction/support).
 
 ## Unlogged tables
 

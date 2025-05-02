@@ -2,7 +2,7 @@
 title: Neon for Database-per-user
 subtitle: How to configure Neon for multi-tenancy - plus a few design tips
 enableTableOfContents: true
-updatedOn: '2025-02-25T18:52:09.458Z'
+updatedOn: '2025-04-17T16:06:46.411Z'
 ---
 
 With its serverless and API-first nature, Neon is an excellent choice for building database-per-user applications (or apps where each user/customer has their own Postgres database). Neon is particularly well-suited for architectures that prioritize maximum database isolation, achieving the equivalent of instance-level isolation.
@@ -103,9 +103,9 @@ To handle [dev/test](https://neon.tech/use-cases/dev-test) in a project-per-user
 
 The methodology:
 
-- **Within the non-prod project, load your testing data into the main branch.** This main branch will serve as the primary source for all dev/test environments.
-- **Create ephemeral environments via child branches.** For each ephemeral environment, create a child branch from the main branch. These branches are fully isolated in terms of resources and come with an up-to-date copy of your testing dataset.
-- **Automate the process.** Use CI/CD and automations to streamline your workflow. You can reset child branches with one click to keep them in sync with the main branch as needed, maintaining data consistency across your dev/test environments.
+- **Within the non-prod project, load your testing data into the production branch.** This production branch will serve as the primary source for all dev/test environments.
+- **Create ephemeral environments via child branches.** For each ephemeral environment, create a child branch from the production branch. These branches are fully isolated in terms of resources and come with an up-to-date copy of your testing dataset.
+- **Automate the process.** Use CI/CD and automations to streamline your workflow. You can reset child branches with one click to keep them in sync with the production branch as needed, maintaining data consistency across your dev/test environments.
 
 ## Designing a Control Plane
 

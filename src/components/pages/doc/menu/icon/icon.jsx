@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 
+import AiAgentIcon from 'icons/docs/sidebar/ai-agent.inline.svg';
 import AiIcon from 'icons/docs/sidebar/ai.inline.svg';
 import ApiIcon from 'icons/docs/sidebar/api.inline.svg';
 import ArchitectureIcon from 'icons/docs/sidebar/architecture.inline.svg';
@@ -11,6 +12,7 @@ import ChangelogIcon from 'icons/docs/sidebar/changelog.inline.svg';
 import CliIcon from 'icons/docs/sidebar/cli.inline.svg';
 import CommunityIcon from 'icons/docs/sidebar/community.inline.svg';
 import ConnectIcon from 'icons/docs/sidebar/connect.inline.svg';
+import ContainerIcon from 'icons/docs/sidebar/container.inline.svg';
 import DocsIcon from 'icons/docs/sidebar/docs.inline.svg';
 import ExtensionIcon from 'icons/docs/sidebar/extension.inline.svg';
 import FeaturesIcon from 'icons/docs/sidebar/features.inline.svg';
@@ -35,6 +37,7 @@ import RoadmapIcon from 'icons/docs/sidebar/roadmap.inline.svg';
 import SdkIcon from 'icons/docs/sidebar/sdk.inline.svg';
 import SearchIcon from 'icons/docs/sidebar/search.inline.svg';
 import SecurityIcon from 'icons/docs/sidebar/security.inline.svg';
+import SparksIcon from 'icons/docs/sidebar/sparks.inline.svg';
 import StatusIcon from 'icons/docs/sidebar/status.inline.svg';
 import SupportIcon from 'icons/docs/sidebar/support.inline.svg';
 import TemplateIcon from 'icons/docs/sidebar/template.inline.svg';
@@ -47,6 +50,7 @@ import WhyNeonIcon from 'icons/docs/sidebar/why-neon.inline.svg';
 import WorkflowsIcon from 'icons/docs/sidebar/workflows.inline.svg';
 
 const icons = {
+  'ai-agent': AiAgentIcon,
   ai: AiIcon,
   api: ApiIcon,
   architecture: ArchitectureIcon,
@@ -58,6 +62,7 @@ const icons = {
   cli: CliIcon,
   community: CommunityIcon,
   connect: ConnectIcon,
+  container: ContainerIcon,
   docs: DocsIcon,
   extension: ExtensionIcon,
   features: FeaturesIcon,
@@ -82,6 +87,7 @@ const icons = {
   sdk: SdkIcon,
   search: SearchIcon,
   security: SecurityIcon,
+  sparks: SparksIcon,
   status: StatusIcon,
   support: SupportIcon,
   template: TemplateIcon,

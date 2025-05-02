@@ -9,6 +9,13 @@ export default {
       'The database you love, on a serverless platform designed to help you build reliable and scalable applications faster.',
     pathname: '',
   },
+  ai: {
+    title: 'Postgres for AI — Neon',
+    description:
+      'Build AI agents faster with Neon, the serverless Postgres optimized for vectors, scale, and speed.',
+    imagePath: '/images/social-previews/ai.jpg',
+    pathname: LINKS.ai,
+  },
   aiChat: {
     title: 'Neon AI Chat',
     description: 'AI assistant trained on documentation, help articles, and other content',
@@ -119,6 +126,13 @@ export default {
       'Neon brings serverless architecture to Postgres, which allows us to offer you flexible usage and volume-based plans.',
     imagePath: '/images/social-previews/pricing.jpg',
     pathname: LINKS.pricing,
+  },
+  report: {
+    title: 'Impact of Postgres restores survey',
+    description:
+      'We asked 50 developers managing production Postgres about recovery times and their business impact.',
+    pathname: LINKS.report,
+    imagePath: '/images/social-previews/report.jpg',
   },
   thankYou: {
     title: 'Thank you for subscribing — Neon',

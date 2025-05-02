@@ -23,7 +23,11 @@ Let's break down the key components in this setup:
 
 ## Setting up Neon MCP Server in Cline
 
-The following steps show how to set up Neon MCP Server in Cline.
+You have two options for connecting Cline to the Neon MCP Server:
+
+1. **Remote MCP Server (Preview):** Connect to Neon's managed MCP server using OAuth for authentication. This method is more convenient as it eliminates the need to manage API keys in Cline. Additionally, you will automatically receive the latest features and improvements as soon as they are released.
+
+2. **Local MCP Server:** Run the Neon MCP server locally on your machine, authenticating with a Neon API key.
 
 ### Prerequisites
 
@@ -33,83 +37,104 @@ Before you begin, ensure you have the following:
     - Download and install the Cline VS Code extension from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev).
     - Set up Cline by following the [Getting Started guide](https://docs.cline.bot/getting-started/getting-started-new-coders#setting-up-openrouter-api-key) which involves obtaining an [OpenRouter API key](https://openrouter.ai) to work with Cline.
 2.  **A Neon Account and Project:** You'll need a Neon account and a project. You can quickly create a new Neon project here [pg.new](https://pg.new)
-3.  **Neon API Key:** After signing up, get your Neon API Key from the [Neon console](https://console.neon.tech/app/settings/profile). This API key is needed to authenticate your application with Neon. For instructions, see [Manage API keys](https://neon.tech/docs/manage/api-keys).
+3.  **Neon API Key (for Local MCP server):** After signing up, get your Neon API Key from the [Neon console](https://console.neon.tech/app/settings/profile). This API key is needed to authenticate your application with Neon. For instructions, see [Manage API keys](https://neon.tech/docs/manage/api-keys).
     <Admonition type="warning" title="Neon API Key Security">
     Keep your Neon API key secure, and never share it publicly. It provides access to your Neon projects.
     </Admonition>
 4.  **Node.js (>= v18) and npm:** Ensure Node.js (version 18 or later) and npm are installed. Download them from [nodejs.org](https://nodejs.org).
 
-### Installation and Configuration
+### Option 1: Setting up the remote hosted Neon MCP Server
 
-**Configure Neon MCP Server in Cline:**
+This method uses Neon's managed server and OAuth authentication.
+
+### Installation and configuration
 
 1. Open Cline by clicking on the Cline icon in the VS Code sidebar.
 2. To configure MCP Servers in Cline, you need to modify the `cline_mcp_settings.json` file.
    ![Cline Add MCP Tool](/docs/guides/cline-add-mcp.gif)
 3. This will open the `cline_mcp_settings.json` file.
 4. In the `cline_mcp_settings.json` file, you need to specify a list of MCP servers.
-
-<Tabs labels={["MacOS/Linux", "Windows", "Windows (WSL)"]}>
-
-<TabItem>
-Use the following JSON structure as a template, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key that you obtained from the [Prerequisites](#prerequisites) section.
+5. Paste the following JSON configuration into it:
 
    ```json
    {
      "mcpServers": {
-       "neon": {
+       "Neon": {
          "command": "npx",
-         "args": ["-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+         "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
        }
      }
    }
    ```
-</TabItem>
 
-<TabItem>
-Use the following JSON structure as a template, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key that you obtained from the [Prerequisites](#prerequisites) section.
+   If you have other MCP servers configured, you can copy just the `Neon` part.
 
-   ```json
-   {
-     "mcpServers": {
-       "neon": {
-         "command": "cmd",
-         "args": ["/c", "npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
-       }
-     }
-   }
-   ```
-</TabItem>
+6. **Save** the `cline_mcp_settings.json` file.
+7. You should see a notification in VS Code that says: "MCP servers updated".
+   ![Cline MCP Server Updated](/docs/guides/cline-mcp-config-update.png)
+8. An OAuth window will open in your browser. Follow the prompts to authorize Cline to access your Neon account. Once authorized, Cline will be connected to Neon's remote MCP server.
+   ![Neon OAuth window](/docs/guides/neon-oauth-window.png)
 
-<TabItem>
-Use the following JSON structure as a template, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key that you obtained from the [Prerequisites](#prerequisites) section.
+<Admonition type="note">
+  The remote hosted MCP server is in preview due to the [new OAuth MCP specification](https://spec.modelcontextprotocol.io/specification/2025-03-26/basic/authorization/), expect potential changes as we continue to refine the OAuth integration.
+</Admonition>
 
-   ```json
-   {
-     "mcpServers": {
-       "neon": {
-         "command": "wsl",
-         "args": ["npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
-       }
-     }
-   }
-   ```
-</TabItem>
+### Option 2: Setting up the Local Neon MCP Server
 
-</Tabs>
+This method runs the Neon MCP server locally on your machine, using a Neon API key for authentication.
 
-   - **`neon`**: This is a name you choose for your MCP server connection.
-   - **`command`**: This is the command Cline will execute to start the Neon MCP server.
-     - For **MacOS/Linux**, it uses `npx` directly.
-     - For **Windows**, it uses `cmd /c` to execute the `npx` command in the command prompt.
-     - For **Windows (WSL)**, it uses `wsl /c` to execute the `npx` command within the WSL environment.
-     - The `npx` command runs the `@neondatabase/mcp-server-neon` package and passes your Neon API key as an argument.
-   - Replace `<YOUR_NEON_API_KEY>` with your actual Neon API key that you obtained from the [Prerequisites](#prerequisites) section.
+1. Open Cline by clicking on the Cline icon in the VS Code sidebar.
+2. To configure MCP Servers in Cline, you need to modify the `cline_mcp_settings.json` file.
+   ![Cline Add MCP Tool](/docs/guides/cline-add-mcp.gif)
+3. This will open the `cline_mcp_settings.json` file.
+4. In the `cline_mcp_settings.json` file, you need to specify a list of MCP servers.
+5. Paste the following JSON configuration into it. Replace `<YOUR_NEON_API_KEY>` with your actual Neon API key which you obtained from the [prerequisites](#prerequisites) section:
 
-   - Replace `<YOUR_NEON_API_KEY>` with your actual Neon API key that you obtained from the [Prerequisites](#prerequisites) section.
+<CodeTabs labels={["MacOS/Linux", "Windows", "Windows (WSL)"]}>
+
+```json
+{
+  "mcpServers": {
+    "neon": {
+      "command": "npx",
+      "args": ["-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+    }
+  }
+}
+```
+
+```json
+{
+  "mcpServers": {
+    "neon": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+    }
+  }
+}
+```
+
+```json
+{
+  "mcpServers": {
+    "neon": {
+      "command": "wsl",
+      "args": ["npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+    }
+  }
+}
+```
+
+</CodeTabs>
 
 5. **Save** the `cline_mcp_settings.json` file.
-6. If the integration is successful, you should see the Neon MCP server listed in the Cline MCP Servers Installed section.
+6. You should see a notification in VS Code that says: "MCP servers updated".
+   ![Cline MCP Server Updated](/docs/guides/cline-mcp-config-update.png)
+7. Cline is now connected to Neon's remote MCP server.
+
+### Verifying the Integration
+
+Now that you have the Neon MCP server set up either remotely or locally, you can verify the connection and test the available tools. If the integration is successful, you should see the Neon MCP server listed in the Cline MCP Servers Installed section.
 
 ![Cline Available MCP Tools](/docs/guides/cline-available-mcp-tools.png)
 
@@ -134,7 +159,7 @@ Neon MCP server exposes the following actions, which primarily map to **Neon API
 - `prepare_database_migration`: Initiates a database migration process, utilizing a temporary branch for safety. Begins the process of altering your database schema, safely using Neon's branching feature.
 - `complete_database_migration`: Completes a migration process, applying changes to your main database and cleaning up temporary resources.
 
-These actions enable any MCP client like Cline to interact with various functionalities of the **Neon platform via the Neon API.** Certain tools, especially database migration ones, are tailored for AI agent and LLM usage, leveraging Neon’s branching for safe preview and commit.
+These actions enable any MCP client like Cline to interact with various functionalities of the **Neon platform via the Neon API.** Certain tools, especially database migration ones, are tailored for AI agent and LLM usage, leveraging Neon's branching for safe preview and commit.
 
 ## Development Workflow: Adding a Column with Cline and Neon MCP
 
@@ -142,17 +167,11 @@ Let's walk through a typical development scenario: Quickly adding a column for p
 
 **Scenario:** During development, you decide to track timestamps for entries in your `playing_with_neon` table. You want to quickly add a `created_at` column.
 
-Check out the video below to see how Cline and Neon MCP Server can help you add a new column to your database table using natural language commands.
-
-<video autoPlay playsInline muted loop width="800" height="600" controls>
-  <source type="video/mp4" src="/videos/pages/doc/cline-neon-mcp.mp4"/>
-</video>
-
 <Admonition type="tip" title="Security Reminder">
 For your security, review the tool's purpose before permitting the operation to proceed. Remember that LLMs can sometimes produce unexpected results, so careful monitoring is always recommended.
 </Admonition>
 
-Here's the conversation log between the user and Cline:
+Following is a sample interaction with Cline where you can see how it uses the Neon MCP server to add a column to your table:
 
 ```text shouldWrap
 User: in my neon project id: fancy-bush-59303206, list all my tables
@@ -183,9 +202,9 @@ Cline: I'll use the prepare_database_migration tool to add a created_at column t
 > Cline wants to use a tool on the neon MCP server: run_sql
 > The created_at column has been successfully added to the table in the temporary branch with the correct data type and default value. Let me verify the data by selecting a few rows to ensure everything looks correct.
 > Cline wants to use a tool on the neon MCP server: run_sql
-> The migration looks good - the created_at column has been added successfully and is populated with timestamps. Now I can complete the migration to apply these changes to the main branch.
+> The migration looks good - the created_at column has been added successfully and is populated with timestamps. Now I can complete the migration to apply these changes to the production branch.
 > Cline wants to use a tool on the neon MCP server: complete_database_migration
-> The migration has been successfully completed and the temporary branch has been deleted. Let me verify the changes in the main branch and show the updated table structure.
+> The migration has been successfully completed and the temporary branch has been deleted. Let me verify the changes in the production branch and show the updated table structure.
 > Cline wants to use a tool on the neon MCP server: run_sql
 > The migration has been successfully completed. The created_at column has been added to the table and is populated with timestamps.
 ```
@@ -195,7 +214,7 @@ Cline: I'll use the prepare_database_migration tool to add a created_at column t
 - **Natural language interaction:** You can use simple, conversational English to interact with your database through Cline.
 - **Step-by-step guidance:** Cline confirms each step and provides details like branch names and migration IDs.
 - **MCP Tools in Action:** The underlying MCP tools (`get_database_tables`, `run_sql`, `prepare_database_migration`, `complete_database_migration`) illustrate the automated process.
-- **Branching for safety:** The agent automatically creates a temporary branch for schema changes. The user will be prompted to confirm the migration before applying it to the main branch.
+- **Branching for safety:** The agent automatically creates a temporary branch for schema changes. The user will be prompted to confirm the migration before applying it to the production branch.
 
 You can verify the changes in your Neon Console or by querying the database directly.
 

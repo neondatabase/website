@@ -253,7 +253,7 @@ const faqItems = [
   },
   {
     question: 'Is Neon compliant?',
-    answer: `Yes. Neon adheres to SOC 2, ISO 27001, ISO 27701 standards and complies with GDPR, CCPA, and HIPAA. <a href="/docs/security/compliance">Read more.</a>.`,
+    answer: `Yes. Neon adheres to SOC 2, ISO 27001, ISO 27701 standards and complies with GDPR, CCPA, and HIPAA. <a href="/docs/security/compliance">Read more.</a>`,
   },
   {
     question: 'How secure is Neon’s platform?',
@@ -292,9 +292,11 @@ const EnterprisePage = () => (
     <TestimonialNew
       className="mt-[118px] xl:mt-[80px] lg:mt-[76px]"
       quote="Neon worked out of the box, handling hundreds of Lambdas without any of the connection issues we saw in Aurora v2. On top of that, it costs us 1/6 of what we were paying with AWS."
-      name="Cody Jenkins"
-      position="Head of Engineering at Invenco"
-      avatar={authorCodyJenkins}
+      author={{
+        name: 'Cody Jenkins',
+        position: 'Head of Engineering at Invenco',
+        avatar: authorCodyJenkins,
+      }}
       isPriority
     />
     <Features title="Hundreds of Enterprises are switching to Neon. Here’s why" items={features} />
@@ -304,17 +306,21 @@ const EnterprisePage = () => (
     <TestimonialNew
       className="mt-[126px] xl:mt-[106px] lg:mt-[70px] md:mt-[58px]"
       quote="Time to launch is crucial for us: when we tried Neon and saw that spinning up a new ephemeral environment takes seconds, we were blown away."
-      name="Alex Co"
-      position="Head of Platform Engineering at Mindvalley"
-      avatar={authorAlexCo}
+      author={{
+        name: 'Alex Co',
+        position: 'Head of Platform Engineering at Mindvalley',
+        avatar: authorAlexCo,
+      }}
     />
     <Bento cards={bentoCards} />
     <TestimonialNew
       className="mt-[130px] xl:mt-[106px] lg:mt-[48px] md:mt-[62px]"
       quote="With Neon’s preview branches, we can catch issues early and fix them before they hit production."
-      name="Robert Chandler"
-      position="CTO at Wordware.ai"
-      avatar={authorRobertChandler}
+      author={{
+        name: 'Robert Chandler',
+        position: 'CTO at Wordware.ai',
+        avatar: authorRobertChandler,
+      }}
     />
     <Faq items={faqItems} />
     <CTA

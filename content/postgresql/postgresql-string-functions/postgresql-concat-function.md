@@ -54,7 +54,7 @@ It returns `NULL`.
 
 Since version 9\.1, PostgreSQL has introduced a built\-in string function called `CONCAT()` to concatenate two or more strings into one.
 
-Here’s the basic syntax of the `CONCAT()` function:
+Here's the basic syntax of the `CONCAT()` function:
 
 ```sql
 CONCAT(string1, string2, ...)
@@ -64,17 +64,17 @@ The `CONCAT` function accepts a list of input strings, which can be any string t
 
 The `CONCAT()` function returns a new string that results from concatenating the input strings.
 
-Unlike the concatenation operator `||`, the `CONCAT` function ignores  `NULL` arguments.
+Unlike the concatenation operator `||`, the `CONCAT` function ignores `NULL` arguments.
 
 To concatenate two or more strings into one using a specified separator, you can use the [CONCAT_WS()](postgresql-concat_ws) function.
 
 ## PostgreSQL CONCAT() function examples
 
-Let’s take some examples of using the PostgreSQL `CONCAT()` function.
+Let's take some examples of using the PostgreSQL `CONCAT()` function.
 
 ### 1\) Basic PostgreSQL CONCAT() function example
 
-The following example uses the `CONCAT()` function to concatenate three literal strings into one:
+The following example uses the `CONCAT()` function to concatenate three literal strings into one:
 
 ```sql
 SELECT
@@ -92,7 +92,7 @@ Output:
 
 ### 2\) Using the CONCAT() function with table data example
 
-We’ll use the `customer` table from the [sample database](https://neon.tech/postgresql/download/dvd-rental-sample-database/):
+We'll use the `customer` table from the [sample database](https://neon.tech/postgresql/download/dvd-rental-sample-database/):
 
 ![customer table](/postgresqltutorial/customer.png)The following statement uses the `CONCAT()` function to concatenate values in the `first_name`, a space, and values in the `last_name` columns of the `customer` table into a single string:
 
@@ -132,11 +132,11 @@ CREATE TABLE contacts (
 
 INSERT INTO contacts (name, email, phone)
 VALUES
-    ('John Doe', '[[email protected]](../cdn-cgi/l/email-protection.html)', '123-456-7890'),
-    ('Jane Smith', '[[email protected]](../cdn-cgi/l/email-protection.html)', NULL),
-    ('Bob Johnson', '[[email protected]](../cdn-cgi/l/email-protection.html)', '555-1234'),
-    ('Alice Brown', '[[email protected]](../cdn-cgi/l/email-protection.html)', NULL),
-    ('Charlie Davis', '[[email protected]](../cdn-cgi/l/email-protection.html)', '987-654-3210')
+    ('John Doe', 'john.doe@example.com', '123-456-7890'),
+    ('Jane Smith', 'jane.smith@example.com', NULL),
+    ('Bob Johnson', 'bob.johnson@example.com', '555-1234'),
+    ('Alice Brown', 'alice.brown@example.com', NULL),
+    ('Charlie Davis', 'charlie.davis@example.com', '987-654-3210')
 RETURNING *;
 ```
 
@@ -145,11 +145,11 @@ Output:
 ```text
  id |     name      |        email        |    phone
 ----+---------------+---------------------+--------------
-  1 | John Doe      | [[email protected]](../cdn-cgi/l/email-protection.html)      | 123-456-7890
-  2 | Jane Smith    | [[email protected]](../cdn-cgi/l/email-protection.html)    | null
-  3 | Bob Johnson   | [[email protected]](../cdn-cgi/l/email-protection.html)     | 555-1234
-  4 | Alice Brown   | [[email protected]](../cdn-cgi/l/email-protection.html)   | null
-  5 | Charlie Davis | [[email protected]](../cdn-cgi/l/email-protection.html) | 987-654-3210
+  1 | John Doe      | john.doe@example.com      | 123-456-7890
+  2 | Jane Smith    | jane.smith@example.com    | null
+  3 | Bob Johnson   | bob.johnson@example.com     | 555-1234
+  4 | Alice Brown   | alice.brown@example.com   | null
+  5 | Charlie Davis | charlie.davis@example.com | 987-654-3210
 (5 rows)
 
 
@@ -170,11 +170,11 @@ Output:
 ```
                      contact
 --------------------------------------------------
- John Doe (john@gmail.com) 123-456-7890
- Jane Smith ([[email protected]](../cdn-cgi/l/email-protection.html))
- Bob Johnson ([[email protected]](../cdn-cgi/l/email-protection.html)) 555-1234
- Alice Brown ([[email protected]](../cdn-cgi/l/email-protection.html))
- Charlie Davis ([[email protected]](../cdn-cgi/l/email-protection.html)) 987-654-3210
+ John Doe (john.doe@example.com) 123-456-7890
+ Jane Smith (jane.smith@example.com)
+ Bob Johnson (bob.johnson@example.com) 555-1234
+ Alice Brown (alice.brown@example.com)
+ Charlie Davis (charlie.davis@example.com) 987-654-3210
 (5 rows)
 ```
 

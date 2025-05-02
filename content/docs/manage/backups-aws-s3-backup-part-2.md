@@ -2,14 +2,13 @@
 title: Set up a GitHub Action to perform nightly Postgres backups
 enableTableOfContents: true
 tag: new
-updatedOn: '2025-02-22T14:55:35.232Z'
+updatedOn: '2025-04-22T13:00:29.177Z'
 ---
 
 In this guide, you'll learn how to configure nightly Postgres backups using a scheduled GitHub Action and `pg_dump`.
 
 <Admonition type="note">
-This is part two of a two-part guide.
-Go back to part one [here](/docs/manage/backups-aws-s3-backup-part-1).
+This is part two of a two-part guide. Make sure you've completed [part 1](/docs/manage/backups-aws-s3-backup-part-1) first.
 </Admonition>
 
 ## Prerequisites
@@ -99,7 +98,7 @@ jobs:
 
       - name: Set file, folder and path variables
         run: |
-          GZIP_NAME="$(date +'%B-%d-%Y@%H:%M:%S').gz"
+          GZIP_NAME="$(date +'%B-%d-%Y@%H:%M:%S').sql.gz"
           FOLDER_NAME="${{ github.workflow }}"
           UPLOAD_PATH="s3://${{ env.S3_BUCKET_NAME }}/${FOLDER_NAME}/${GZIP_NAME}"
 
@@ -278,3 +277,7 @@ This step uploads the `.gz` file created by the `pg_dump` step and uploads it to
 ## Finished
 
 After committing and pushing the workflow to your GitHub repository, the Action will automatically run on the specified schedule, ensuring your Postgres backups are performed regularly.
+
+## Restoring from a backup
+
+Restoring a `pg_dump` backup requires downloading the file from S3 and restoring it using `pg_restore`. For instructions, see [Restoring a backup with pg_restore](/docs/manage/backup-pg-dump#restoring-a-backup-with-pgrestore).

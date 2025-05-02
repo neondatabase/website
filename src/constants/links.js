@@ -1,5 +1,6 @@
 export default {
   aboutUs: '/about-us',
+  ai: '/ai',
   aiChat: '/ai-chat',
   blog: '/blog',
   branching: '/branching',
@@ -22,17 +23,19 @@ export default {
   migrationAssistance: '/migration-assistance',
   postgresqltutorial: '/postgresql/tutorial',
   pricing: '/pricing',
+  report: '/restores-survey',
   scalableArchitecture: '/scalable-architecture',
   scaleTrial: '/scale-trial',
   security: '/security',
   stage: '/stage',
+  startups: '/startups',
   templates: '/templates',
   thankYou: '/thank-you',
   useCases: '/use-cases',
   // Docs
   docs: '/docs',
   docsHome: '/docs/introduction',
-  ai: '/docs/ai/ai-intro',
+  docsAi: '/docs/ai/ai-intro',
   api: '/docs/reference/api-reference',
   auth: '/docs/guides/neon-auth',
   autoscaling: '/docs/introduction/autoscaling',
@@ -44,6 +47,7 @@ export default {
   connectionPooling: '/docs/connect/connection-pooling',
   docsBranching: '/docs/introduction/branching',
   migration: '/docs/import/import-data-assistant',
+  manageBilling: '/docs/introduction/manage-billing',
   rlsAuthorize: '/docs/guides/neon-rls',
   serverless: '/docs/introduction/serverless',
   support: '/docs/introduction/support',
@@ -89,4 +93,5 @@ export default {
   // Other
   apiReference: 'https://api-docs.neon.tech/reference/getting-started-with-neon-api',
   bugBounty: 'https://hackerone.com/neon_bbp',
+  bookMeeting: 'https://calendly.com/d/cm8j-8yw-fq8',
 };

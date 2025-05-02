@@ -4,7 +4,7 @@ subtitle: Query your database from the Neon Console using the Neon SQL Editor
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/tutorials
-updatedOn: '2024-10-22T09:52:49.715Z'
+updatedOn: '2025-04-08T22:55:27.447Z'
 ---
 
 The Neon SQL Editor allows you to run queries on your Neon databases directly from the Neon Console. In addition, the editor keeps a query history, permits saving queries, and provides [**Explain**](https://www.postgresql.org/docs/current/sql-explain.html) and [**Analyze**](https://www.postgresql.org/docs/current/using-explain.html#USING-EXPLAIN-ANALYZE) features.
@@ -196,6 +196,8 @@ The Neon SQL Editor offers three AI-driven features:
 
 <Admonition type="important">
 To enhance your experience with the Neon SQL Editor's AI features, we share your database schema with the AI agent. No actual data is shared. We currently use AWS Bedrock as our LLM provider, ensuring all requests remain within AWS's secure infrastructure where other Neon resources are also managed.
+
+_There is a maximum limit of 5 AI requests every 60 seconds._
 </Admonition>
 
 <NeedHelp/>

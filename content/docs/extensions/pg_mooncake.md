@@ -3,7 +3,7 @@ title: The pg_mooncake extension
 subtitle: Fast analytics in Postgres with columnstore tables and DuckDB execution
 tag: new
 enableTableOfContents: true
-updatedOn: '2025-02-07T19:29:48.914Z'
+updatedOn: '2025-04-08T22:55:27.444Z'
 ---
 
 The [pg_mooncake](https://github.com/Mooncake-Labs/pg_mooncake) extension enables fast analytic workloads in Postgres by adding native columnstore tables and vectorized execution (DuckDB).
@@ -13,6 +13,8 @@ Columnstore tables improve analytical queries by storing data vertically, enabli
 `pg_mooncake` columnstore tables are designed so that only metadata is stored in Postgres, while data is stored in an object store as Parquet files with [Iceberg](https://iceberg.apache.org/)or [Delta Lake](https://delta.io/) metadata.
 
 Queries on `pg_mooncake` columnstore tables are executed by DuckDB.
+
+The extension is maintained by [Mooncake Labs](https://www.mooncake.dev/).
 
 <CTA />
 
@@ -68,9 +70,7 @@ CREATE EXTENSION pg_mooncake;
 
 Run the commands outlined in the following steps on your Neon database to setup your object store.
 
-<Admonition type="tip">
-If you don't have an object storage bucket, you can get a free S3 express bucket [here](https://s3.pgmooncake.com/). When using the free s3 bucket, the `SELECT` and `SET` statements defined below are generated for you, which you can copy and run.
-</Admonition>
+_If you don't have an object storage bucket, you can get a free S3 express bucket [here](https://s3.pgmooncake.com/). When using the free s3 bucket, the `SELECT` and `SET` statements defined below are generated for you, which you can copy and run._
 
 Add your object storage credentials. In this case, S3:
 
@@ -85,8 +85,10 @@ Set your default bucket:
 SET mooncake.default_bucket = 's3://<bucket>';
 ```
 
-<Admonition type="note">
-In the future, you will not have to bring your own bucket to use `pg_mooncake` with Neon. 
+<Admonition type="note" title="R2 and GCP buckets also supported">
+The `pg_mooncake` extension also supports R2 and GCP buckets. For set up instructions, refer to **pg_mooncake's** [cloud storage docs](https://pgmooncake.com/docs/cloud-storage).
+
+In the future, you will not have to bring your own bucket to use `pg_mooncake` with Neon.
 </Admonition>
 
 ## Create a columnstore table with `USING columnstore`

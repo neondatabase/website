@@ -50,7 +50,7 @@ The ability to define a query allow-list would help increase the safety of SQL q
 
 ## Investigate React/TanStack query hooks for SQL queries
 
-We're exploring the generation of React Query hooks for SQL queries, simplifying the process of building applications that leverage SQL from the frontend, or that use React Server Components.
+We're exploring the generation of React Query hooks for SQL queries, simplifying the process of building applications that use React Server Components.
 
 ## Simplified OAuth flow for JWKS endpoint
 

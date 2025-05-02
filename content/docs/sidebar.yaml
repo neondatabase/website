@@ -56,6 +56,8 @@
               slug: guides/django
             - title: Express
               slug: guides/express
+            - title: Hono
+              slug: guides/hono
             - title: Laravel
               slug: guides/laravel
             - title: NestJS
@@ -86,6 +88,20 @@
               slug: guides/sveltekit
             - title: Symfony
               slug: guides/symfony
+        - section: File and media storage
+          items:
+            - title: File storage
+              slug: guides/file-storage
+            - title: File storage with AWS S3
+              slug: guides/aws-s3
+            - title: File storage with Cloudflare R2
+              slug: guides/cloudflare-r2
+            - title: Media storage with Cloudinary
+              slug: guides/cloudinary
+            - title: Media storage with ImageKit
+              slug: guides/imagekit
+            - title: Media storage with Uploadcare
+              slug: guides/uploadcare
     - title: Connect
       slug: connect/connect-intro
       icon: connect
@@ -127,6 +143,8 @@
               slug: import/import-data-assistant
             - title: Migrate from Postgres with pg_dump and pg_restore
               slug: import/migrate-from-postgres
+            - title: Migrate with pgcopydb
+              slug: import/pgcopydb
             - title: Migrate from a Neon project
               slug: import/migrate-from-neon
             - title: Migrate schema only
@@ -215,6 +233,9 @@
               slug: guides/scale-to-zero-guide
         - title: Instant restore
           slug: introduction/branch-restore
+        - title: Backup & restore
+          slug: guides/backup-restore
+          tag: early access
         - title: Branching
           slug: guides/branching-intro
           items:
@@ -359,7 +380,9 @@
               slug: introduction/monitor-active-queries
             - title: Query history
               slug: introduction/monitor-query-history
-            - title: External tools
+            - title: Datadog integration
+              slug: guides/datadog
+            - title: Datbase monitoring tools
               slug: introduction/monitor-external-tools
         - section: Team Tools
           items:
@@ -368,21 +391,24 @@
               tag: beta
         - section: Backups
           items:
-            - title: Backups
+            - title: Overview
               slug: manage/backups
-            - title: Part 1 - Create an S3 bucket
-              slug: manage/backups-aws-s3-backup-part-1
-              tag: new
-            - title: Part 2 - Automate nightly backups
-              slug: manage/backups-aws-s3-backup-part-2
-              tag: new
-        - section: Maintenance & updates
+            - title: Backup with pg_dump
+              slug: manage/backup-pg-dump
+            - title: Automate pg_dump backups
+              slug: manage/backup-pg-dump-automate
+              items:
+                - title: Part 1 - Create an S3 bucket
+                  slug: manage/backups-aws-s3-backup-part-1
+                - title: Part 2 - Automate nightly backups
+                  slug: manage/backups-aws-s3-backup-part-2
+        - section: Updates
           items:
             - title: Overview
-              slug: manage/maintenance-updates-overview              
+              slug: manage/maintenance-updates-overview
               tag: new
             - title: Platform maintenance
-              slug: manage/platform-maintenance              
+              slug: manage/platform-maintenance
               tag: new
             - title: Updates
               slug: manage/updates
@@ -439,11 +465,19 @@
     - title: Neon on Azure
       slug: manage/azure
       icon: azure
+      items:
+        - title: Deploy Neon on Azure
+          slug: azure/azure-deploy
+        - title: Manage Neon on Azure
+          slug: azure/azure-manage
+        - title: Develop with Neon on Azure
+          slug: azure/azure-develop
 - section: AI with Neon
   icon: ai
   items:
     - title: AI for agents
       slug: ai/ai-agents-tools
+      icon: ai-agent
       items:
         - title: Overview
           slug: ai/ai-agents-tools
@@ -473,16 +507,23 @@
               slug: https://neon.tech/guides/cline-mcp-neon
             - title: Windsurf
               slug: https://neon.tech/guides/windsurf-mcp-neon
+            - title: Zed
+              slug: https://neon.tech/guides/zed-mcp-neon
         - section: Agent Frameworks
           items:
             - title: AgentStack
               slug: https://neon.tech/guides/agentstack-neon
+            - title: AutoGen
+              slug: https://neon.tech/guides/autogen-neon
+            - title: Azure AI Agent Service
+              slug: https://neon.tech/guides/azure-ai-agent-service 
             - title: Composio + CrewAI
               slug: https://neon.tech/guides/composio-crewai-neon
             - title: LangGraph
               slug: https://neon.tech/guides/langgraph-neon
     - title: AI Starter Kit
       slug: ai/ai-intro
+      icon: sparks
       items:
         - section: Core concepts
           items:
@@ -514,6 +555,8 @@
       icon: cli
       slug: reference/neon-cli
       items:
+        - title: Quickstart
+          slug: reference/cli-quickstart
         - title: Install and connect
           slug: reference/cli-install
         - title: auth
@@ -701,6 +744,8 @@
           items:
             - title: Exograph
               slug: guides/exograph
+            - title: PostgREST
+              slug: guides/postgrest
             - title: FerretDB
               slug: guides/ferretdb
             - title: Grafbase
@@ -898,6 +943,10 @@
               slug: guides/neon-twin-full-pg-dump-restore
             - title: Partial Twin
               slug: guides/neon-twin-partial-pg-dump-restore
+    - title: Neon Local
+      icon: container
+      tag: new
+      slug: local/neon-local
 - section: Postgres
   items:
     - title: PostgreSQL Tutorial

@@ -19,17 +19,21 @@ const ServerlessAppsPage = () => (
     <TestimonialNew
       className="pt-40 xl:pt-[136px] lg:pt-[104px] md:pt-20"
       quote="Neon worked out of the box, handling hundreds of Lambdas without any of the connection issues we saw in Aurora v2. On top of that, it costs us 1/6 of what we were paying with AWS."
-      name="Cody Jenkins"
-      position="Head of Engineering at Invenco"
-      avatar={authorCodyJenkins}
+      author={{
+        name: 'Cody Jenkins',
+        position: 'Head of Engineering at Invenco',
+        avatar: authorCodyJenkins,
+      }}
     />
     <Features />
     <TestimonialNew
       className="pt-40 xl:pt-[136px] lg:pt-[104px] md:pt-20"
       quote="Instead of having to overprovision our servers to handle peak loads, which leads to inefficiencies and higher costs, Neon’s autoscaling handles it. We get more performance when we need it."
-      name="Julian Benegas"
-      position="CEO of BaseHub"
-      avatar={authorJulianBenegas}
+      author={{
+        name: 'Julian Benegas',
+        position: 'CEO of BaseHub',
+        avatar: authorJulianBenegas,
+      }}
     />
     <CTA
       className="pb-[260px] pt-[386px] xl:pb-[222px] xl:pt-[282px] lg:pb-[270px] lg:pt-[288px] md:pb-20 md:pt-[160px]"
