@@ -54,7 +54,6 @@ Enter your database connection string and we'll verify:
 - Postgres version compatibility (Postgres 14 to 17)
 - Extension compatibility
 - Region availability
-- Event triggers and other unsupported features
 
 ## Import Your Data
 
