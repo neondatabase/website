@@ -22,7 +22,7 @@ const TaskStepSimple = () => (
             </p>
           </div>
         </div>
-        <div className="relative flex-1 overflow-hidden rounded-xl sm:w-full">
+        <div className="relative flex-1 overflow-hidden rounded-xl lg:flex-initial sm:w-full">
           <Image
             className="sm:w-full"
             src={importDatabase}

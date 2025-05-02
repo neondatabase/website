@@ -1,5 +1,6 @@
 import Hero from 'components/pages/migration/hero';
 import TaskStepSimple from 'components/pages/migration/task-step-simple';
+import TaskStep from 'components/pages/migration/tasks-steps';
 import CTA from 'components/shared/cta';
 import Layout from 'components/shared/layout';
 import TestimonialNew from 'components/shared/testimonial-new';
@@ -14,6 +15,7 @@ const MigrationPage = () => (
   <Layout>
     <Hero />
     <TaskStepSimple />
+    <TaskStep />
     <TestimonialNew
       className="mt-[200px] xl:mt-[176px] lg:mt-[152px] md:mt-[104px]"
       quote="Neon worked out of the box, handling hundreds of Lambdas without any of the connection issues we saw in Aurora Serverless v2. On top of that, Neon costs us 1/6 of what we were paying with AWS."
