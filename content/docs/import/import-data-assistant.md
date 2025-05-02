@@ -59,10 +59,9 @@ Enter your database connection string and we'll verify:
 
 Once checks pass, we'll:
 
-1. Create a new project (if you started from the Projects page) or use your existing project (if you started from the dashboard)
-2. Create a new branch for your imported data
-3. Copy your data automatically
-4. Verify the import completed successfully
+- Create a new branch for your imported data.
+- Copy your data automatically using `pg_dump` and `pg_restore`.
+- Verify that the import completed successfully.
 
 <Admonition type="note">
 During import, your source database remains untouched — we only read from it to create a copy in Neon.
@@ -85,12 +84,12 @@ After a successful import:
 
 ## Known Limitations
 
-- Currently limited to databases **smaller than 10GB** — but support for larger sizes is in progress.
-- The feature is supported in **all AWS regions** only.
-- Databases that use **event triggers are not supported**; you'll be notified during the checks phase if this is the reason for failure.
+- Currently limited to databases **smaller than 10GB**. We are actively working on supporrting bigger workloads. In the meantime, conctact support of you are looking to migrate bigger databases.
+- The feature is supported in **AWS regions** only.
+- Databases that use **event triggers are not supported**.
 - Supabase and Heroku databases are not supported, as both use proprietary event triggers.
-- Databases running on **IPv6 are not supported**.
-- **AWS RDS is fully supported**, while support for other providers may vary.
+- Databases running on **IPv6 are not supported yet**.
+- AWS RDS is generally supported, though some incompatibilities may exist. Support for other providers may vary.
 
 ## Need Help?
 
@@ -98,4 +97,4 @@ After a successful import:
 - For **technical issues**: [Contact support](https://neon.tech/contact-support)
 - For **provider-specific questions**: Let us know what database provider you're using when you contact us
 
-If your database migration failed because of an incompatibility, size limitation, or another issue, please [contact our support team](https://neon.tech/migration-assistance). We're here to help you get up and running, including assistance with databases larger than 10GB.
+If your database import failed for any reason, please [contact our support team](https://neon.tech/migration-assistance). We're here to help you get up and running, including assistance with databases larger than 10GB.
