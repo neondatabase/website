@@ -95,7 +95,7 @@ With your Neon database prepared, let's set up the `hello-zero` example applicat
     This command starts the `zero-cache` process. It connects to your Neon database, applies necessary [permissions](https://zero.rocicorp.dev/docs/permissions) required for the `hello-zero` application, and starts the replication process. The terminal will display logs indicating the connection status and replication progress. Keep this terminal window open as it runs the `zero-cache` service.
 
     <Admonition type="tip" title="Topology">
-    To optimize performance, deploy your `zero-cache` service in close proximity to your Neon database to minimize latency in production. During local development, you might notice logs indicating a higher ping time if your `zero-cache` service and Neon database are not in the same region. This is expected and can be disregarded in a development environment. However, for production, it is crucial to deploy the `zero-cache` service in the same region as your Neon database to achieve minimal latency.
+    To optimize performance, deploy your `zero-cache` service in close proximity to your Neon database to minimize latency in production. During local development, you might notice logs indicating a higher ping time if your `zero-cache` service and Neon database are not in the same region. This is expected and can be disregarded in a development environment. However, for production, it is crucial to deploy the `zero-cache` service in the same region as your Neon database to achieve minimal latency. For more information on deployment, refer to [Deploying Zero](https://zero.rocicorp.dev/docs/deployment).
     </Admonition>
 
 5.  **Run the `hello-zero` UI:**
@@ -103,7 +103,7 @@ With your Neon database prepared, let's set up the `hello-zero` example applicat
     ```bash
     npm run dev:ui
     ```
-    This command starts the Vite development server, typically making the application available at `http://localhost:5173`. Open this URL in your browser.
+    This command starts the Vite development server, making the application available at `http://localhost:5173`. Open this URL in your browser.
 
 ## Using the chat application
 
@@ -113,7 +113,7 @@ You should now have the `hello-zero` application running in your browser. It con
 2.  **Test functionality:** Try the features described in the [Zero Quickstart Overview](https://zero.rocicorp.dev/docs/quickstart#quick-overview):
     *   Click **Add Messages**. New messages should appear instantly.
     *   Open the app in a second browser tab or window. Changes made in one window should appear nearly instantaneously in the other.
-    *   Click **Login**. You'll be logged in as a random user (using the hardcoded `ZERO_AUTH_SECRET`).
+    *   Click **Login**. You'll be logged in as a random user.
     *   Try **Remove Messages**. This should work now that you are logged in.
         ![Demo of the hello-zero app](/docs/guides/hello-zero-demo.gif)
     *   Try editing a message (pencil icon). You should only be able to edit messages created by the user you are logged in as.
@@ -122,6 +122,14 @@ You should now have the `hello-zero` application running in your browser. It con
     ![Neon messages table](/docs/guides/zero-message-table.png)
 
 Congratulations! You have successfully set up Rocicorp Zero with Neon Postgres using the `hello-zero` example application. Check out [Canvas](https://github.com/neondatabase-labs/canvas), a collaborative drawing app built with Zero and Neon, for a more complex example of Zero in action.
+
+<Admonition type="note" title="Schema Changes">
+Zero uses Postgres event triggers for efficient schema migration handling. However, Neon currently does not support event triggers for tracking DDL (schema) changes due to limitations around superuser privileges.
+
+Without event triggers, Zero ensures correctness by performing a **full reset of the `zero-cache` and all connected client states** whenever *any* schema change is detected.
+
+While this reset mechanism works, it can be inefficient for larger databases (e.g., > 1GB) or applications undergoing frequent schema evolution. For smaller databases or projects with stable schemas, the impact might be acceptable. Please consider this limitation when managing schema changes for your Zero application on Neon, especially for larger projects.
+</Admonition>
 
 ## Resources
 
