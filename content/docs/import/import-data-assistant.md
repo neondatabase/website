@@ -67,6 +67,15 @@ Once checks pass, we'll:
 During import, your source database remains untouched — we only read from it to create a copy in Neon.
 </Admonition>
 
+### Known Limitations
+
+- Currently limited to databases **smaller than 10GB**. We are actively working on supporrting bigger workloads. In the meantime, conctact support if you are looking to migrate bigger databases.
+- The feature is supported in **AWS regions** only.
+- Databases that use **event triggers are not supported**.
+- Supabase and Heroku databases are not supported, as both use proprietary event triggers.
+- Databases running on **IPv6 are not supported yet**.
+- AWS RDS is generally supported, though some incompatibilities may exist. Support for other providers may vary.
+
 ## Next Steps
 
 After a successful import:
@@ -81,15 +90,6 @@ After a successful import:
 3. Switch your connection string to point to your new Neon database.
 
 </Steps>
-
-## Known Limitations
-
-- Currently limited to databases **smaller than 10GB**. We are actively working on supporrting bigger workloads. In the meantime, conctact support if you are looking to migrate bigger databases.
-- The feature is supported in **AWS regions** only.
-- Databases that use **event triggers are not supported**.
-- Supabase and Heroku databases are not supported, as both use proprietary event triggers.
-- Databases running on **IPv6 are not supported yet**.
-- AWS RDS is generally supported, though some incompatibilities may exist. Support for other providers may vary.
 
 ## Need Help?
 
