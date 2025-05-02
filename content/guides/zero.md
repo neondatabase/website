@@ -95,7 +95,7 @@ With your Neon database prepared, let's set up the `hello-zero` example applicat
     This command starts the `zero-cache` process. It connects to your Neon database, applies necessary [permissions](https://zero.rocicorp.dev/docs/permissions) required for the `hello-zero` application, and starts the replication process. The terminal will display logs indicating the connection status and replication progress. Keep this terminal window open as it runs the `zero-cache` service.
 
     <Admonition type="tip" title="Topology">
-    To optimize performance, deploy your `zero-cache` service in close proximity to your Neon database to minimize latency in production. During local development, you might notice logs indicating a higher ping time if your `zero-cache` service and Neon database are not in the same region. This is expected and can be disregarded in a development environment. However, for production, it is crucial to deploy the `zero-cache` service in the same region as your Neon database to achieve minimal latency. For more information on deployment, refer to [Deploying Zero](https://zero.rocicorp.dev/docs/deployment).
+    To optimize performance, deploy your `zero-cache` service in close proximity to your Neon database to minimize latency in production. During local development, you might notice logs indicating a higher ping time if your `zero-cache` service and Neon database are not in the same region. This is expected and can be disregarded in a development environment. However, for production, it is crucial to deploy the `zero-cache` service in the same region as your Neon database to achieve minimal latency. For more information on deployment, refer to [Deploying Zero](https://zero.rocicorp.dev/docs/deployment#topology).
     </Admonition>
 
 5.  **Run the `hello-zero` UI:**
@@ -105,7 +105,7 @@ With your Neon database prepared, let's set up the `hello-zero` example applicat
     ```
     This command starts the Vite development server, making the application available at `http://localhost:5173`. Open this URL in your browser.
 
-## Using the chat application
+## Using the demo application
 
 You should now have the `hello-zero` application running in your browser. It connects to the `zero-cache` process running in your first terminal window, which synchronizes data with your Neon Postgres database.
 
