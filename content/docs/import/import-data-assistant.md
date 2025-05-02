@@ -84,7 +84,7 @@ After a successful import:
 
 ## Known Limitations
 
-- Currently limited to databases **smaller than 10GB**. We are actively working on supporrting bigger workloads. In the meantime, conctact support of you are looking to migrate bigger databases.
+- Currently limited to databases **smaller than 10GB**. We are actively working on supporrting bigger workloads. In the meantime, conctact support if you are looking to migrate bigger databases.
 - The feature is supported in **AWS regions** only.
 - Databases that use **event triggers are not supported**.
 - Supabase and Heroku databases are not supported, as both use proprietary event triggers.
