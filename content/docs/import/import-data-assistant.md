@@ -77,7 +77,7 @@ After a successful import:
 
    ![Branches page showing imported branch](/docs/import/import_data_assistant_branch.png)
 
-   *Imported branches are typically named with a timestamp, as shown here.*
+   _Imported branches are typically named with a timestamp, as shown here._
 
 2. Run some test queries to ensure everything imported correctly.
 3. Switch your connection string to point to your new Neon database.
