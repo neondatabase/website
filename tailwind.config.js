@@ -24,6 +24,7 @@ module.exports = {
         DEFAULT: '#1a1a1a',
         new: '#0c0d0d',
         pure: '#000000',
+        fog: '#0d0e12',
       },
       white: '#ffffff',
       primary: {
@@ -242,6 +243,12 @@ module.exports = {
           'radial-gradient(78.12% 78.13% at 50% 0%, rgba(226, 230, 235, 0.06) 0%, rgba(226, 230, 235, 0.00) 100%),' +
           'linear-gradient(0deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.02)),' +
           'linear-gradient(0deg, #0C0C0D, #0C0C0D)',
+        'migration-card-left-bg':
+          'radial-gradient(77.42% 74.82% at 75.59% -18.04%, rgba(38, 66, 89, 0.80) 0%, rgba(8, 20, 25, 0.00) 100%),' +
+          'radial-gradient(86.92% 83.32% at 26.62% 128.01%, rgba(1, 119, 119, 0.17) 0%, rgba(1, 119, 119, 0.00) 100%),' +
+          'linear-gradient(0deg, #0D0E12, #0D0E12)',
+        'migration-card-right-bg':
+          'radial-gradient(70.46% 67.03% at 0% -10.6%, rgba(19, 33, 45, 0.80) 14.53%, rgba(22, 33, 42, 0.00) 85.73%), linear-gradient(147deg, rgba(1, 119, 99, 0.00) 52.96%, rgba(1, 119, 99, 0.20) 138.77%)',
         // for deploy page
         'color-picker-variant-1': 'linear-gradient(225deg, #4CFFFF 31.6%, #00E660 74.65%);',
         'color-picker-variant-2': 'linear-gradient(225deg, #BDF471 35.94%, #00CC33 100%);',

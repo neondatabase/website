@@ -45,6 +45,8 @@ const styles = {
     'gray-50': 'text-gray-new-50 transition-colors duration-200 hover:text-green-45',
     'gray-70':
       'text-gray-new-70 dark:text-gray-new-70 transition-colors duration-200 hover:text-green-45',
+    'grey-70-underlined':
+      'underline underline-offset-4 decoration-gray-new-70/40 hover:decoration-gray-new-70/100 text-gray-new-70 transition-colors duration-500',
     'gray-80': 'text-gray-new-80 transition-colors duration-200 hover:text-green-45',
     'gray-90': 'text-gray-new-90 transition-colors duration-200 hover:text-green-45',
   },
