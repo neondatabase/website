@@ -206,7 +206,7 @@ neon vpc project restrict vpce-1234567890abcdef0 --project-id orange-credit-1234
 
 You will need to provide the VPC endpoint ID and your Neon project ID. You can find your Neon project ID under your project's settings in the Neon Console, or by running this Neon CLI command: `neon projects list`
 
-After adding a restriction, you can check the status of the VPC endpoint to view the restricted project using the [vpc endpoint status` command](/docs/reference/cli-vpc#the-vpc-endpoint-subcommand). You will need to provide your VPC endpoint ID, region ID, and Neon organization ID.
+After adding a restriction, you can check the status of the VPC endpoint to view the restricted project using the [vpc endpoint status command](/docs/reference/cli-vpc#the-vpc-endpoint-subcommand). You will need to provide your VPC endpoint ID, region ID, and Neon organization ID.
 
 ```bash
 neonctl vpc endpoint status vpce-1234567890abcdef0 --region-id=aws-eu-central-1 --org-id=org-nameless-block-72040075
