@@ -170,6 +170,7 @@ const EXTENSIONS = {
     { name: 'pgSphere' },
     { name: 'pg_surgery' },
     { name: 'pg_transport' },
+    { name: 'PGVectorStore' },
     { name: 'pg_visibility' },
     { name: 'pg_walinspect' },
     { name: 'pg_bulkload' },
