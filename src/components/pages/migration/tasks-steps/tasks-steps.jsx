@@ -32,7 +32,7 @@ const ITEMS = [
   {
     title: 'Transfer data',
     description:
-      'Assistant generates pre-populated <mark>pg_dump</mark> and <mark>pg_restore</mark> commands and verify your migration.',
+      'Assistant generates pre-populated <code>pg_dump</code> and <code>pg_restore</code> commands and verify your migration.',
     image: {
       src: stepThree,
       alt: 'Transfer data',
@@ -47,23 +47,19 @@ const ITEMS = [
 ];
 
 const TasksSteps = () => (
-  <section className="task-step-simple safe-paddings relative pt-[182px] xl:pt-[136px] lg:pt-[104px]">
-    <Container className="relative z-10" size="768">
-      <header className="">
+  <section className="task-step-simple safe-paddings relative pt-[175px] xl:pt-[136px] lg:pt-[104px]">
+    <Container className="relative" size="768">
+      <header className="max-w-[616px]">
         <p className="mb-4 text-base font-medium uppercase tracking-wide text-gray-new-50">
           Tasks for Assistant
         </p>
         <h2 className="font-title text-5xl font-medium leading-none tracking-tighter xl:text-4xl lg:text-[36px] md:text-[32px]">
           The Import Data Assistant takes care of data transfer
         </h2>
-        <div className="mt-3 text-pretty text-lg leading-snug tracking-extra-tight text-gray-new-70 lg:text-[15px] sm:text-sm sm:font-light">
-          <p>
-            The only thing you have to do is click on Import database in the Neon Console and
-            provide the connection string for your existing Postgres database.
-          </p>
-        </div>
       </header>
-      <StepsSlider items={ITEMS} className="py-12" />
+    </Container>
+    <Container className="relative" size="960">
+      <StepsSlider items={ITEMS} />
     </Container>
   </section>
 );

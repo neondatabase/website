@@ -21,13 +21,20 @@ const StepsSlider = ({ items, className }) => {
       const item = items[index];
       const bulletContent = (
         <div className={className}>
-          <span className="number">{index + 1}</span>
-          <div className="content">
-            <h3 className="title">{item.title}</h3>
-            <p className="description" dangerouslySetInnerHTML={{ __html: item.description }} />
+          <div className="step-number-wrapper">
+            <span className="step-number">{index + 1}</span>
+          </div>
+          <div className="step-content flex flex-col items-start gap-2.5 text-left">
+            <h3 className="text-xl font-medium leading-dense tracking-tighter text-white">
+              {item.title}
+            </h3>
+            <p
+              className="text-16 font-regular leading-normal tracking-extra-tight text-gray-new-60"
+              dangerouslySetInnerHTML={{ __html: item.description }}
+            />
             {item.link && (
               <Link
-                className="mt-4 text-lg leading-none tracking-[-0.03em] lg:text-base"
+                className="text-sm leading-none tracking-[-0.03em]"
                 to={item.link.url}
                 theme="white"
                 withArrow
