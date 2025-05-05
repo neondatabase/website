@@ -235,7 +235,7 @@
           slug: introduction/branch-restore
         - title: Backup & restore
           slug: guides/backup-restore
-          tag: early access
+          tag: new
         - title: Branching
           slug: guides/branching-intro
           items:
