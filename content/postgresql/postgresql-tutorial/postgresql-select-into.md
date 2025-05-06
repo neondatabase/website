@@ -28,7 +28,7 @@ Here’s the basic syntax of the PostgreSQL `SELECT INTO` statement:
 
 ```sql
 SELECT
-  select_list I
+  select_list
 INTO [ TEMPORARY | TEMP ] [ TABLE ] new_table_name
 FROM
   table_name
