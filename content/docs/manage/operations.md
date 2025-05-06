@@ -322,6 +322,6 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations/05
 
 </details>
 
-The possible operation `status` values are `scheduling`, `running`, `finished`, `failed`, `cancelling`, `cancelled` and `skipped`. The only terminal statuses are `finished`, `skipped` and `cancelled`. The `failed` state is **not** terminal as an operation with that status can still be retried.
+Possible operation `status` values include: `scheduling`, `running`, `finished`, `failed`, `cancelling`, `cancelled`, and `skipped`. Only `finished`, `skipped`, and `cancelled` are **terminal statuses**, meaning the operation will not proceed further from these states. Note that `failed` is **not** terminal, as an operation in a `failed` state can still be retried.
 
 <NeedHelp/>
