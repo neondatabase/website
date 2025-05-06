@@ -5,12 +5,12 @@ import Container from 'components/shared/container/container';
 import GradientBorder from 'components/shared/gradient-border/index';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
-import configurationTuning from 'icons/migration/configuration-tuning.svg';
-import dualWriteModel from 'icons/migration/dual-write-model.svg';
-import logicalReplication from 'icons/migration/logical-replication.svg';
-import phasedCutover from 'icons/migration/phased-cutover.svg';
-import schemaAdjustments from 'icons/migration/schema-adjustments.svg';
-import versionMigrations from 'icons/migration/version-migrations.svg';
+import configurationTuning from 'icons/migration/cards-support/configuration-tuning.svg';
+import dualWriteModel from 'icons/migration/cards-support/dual-write-model.svg';
+import logicalReplication from 'icons/migration/cards-support/logical-replication.svg';
+import phasedCutover from 'icons/migration/cards-support/phased-cutover.svg';
+import schemaAdjustments from 'icons/migration/cards-support/schema-adjustments.svg';
+import versionMigrations from 'icons/migration/cards-support/version-migrations.svg';
 
 const ITEMS = [
   {
@@ -59,7 +59,7 @@ const CardsSupport = () => (
   <section className="cards-support safe-paddings mt-[125px] xl:mt-[106px] lg:mt-[80px] md:mt-[60px]">
     <Container size="768">
       <header className="mx-auto flex flex-col items-center text-center">
-        <h2 className="max-w-md font-title text-5xl font-medium leading-none tracking-extra-tight lg:text-4xl md:text-[32px]">
+        <h2 className="max-w-md font-title text-5xl font-medium leading-none tracking-extra-tight lg:max-w-[380px] lg:text-4xl md:max-w-[280px] md:text-[32px]">
           Multi-TB migrations? Get expert support
         </h2>
         <p className="mt-3 text-lg leading-snug tracking-extra-tight text-gray-new-70 lg:text-base">
