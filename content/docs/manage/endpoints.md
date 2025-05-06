@@ -204,6 +204,9 @@ Autoscaling is most effective when your data (either your full dataset or your w
 
 Consider this scenario: If your data size is approximately 6 GB, starting with a compute size of .25 CU can lead to suboptimal performance because your data cannot be adequately cached. While your compute _will_ scale up from .25 CU on demand, you may experience poor query performance until your compute scales up and fully caches your working set. You can avoid this issue if your minimum compute size can hold your working set in memory.
 
+> When a compute scales down, the Local File Cache (LFC) is cleared. This can temporarily reduce performance for cache-sensitive workloads.  
+> For mitigation strategies and more details, see [Cache loss on scale down in the Autoscaling Guide](/docs/guides/autoscaling-guide#best-practices--important-considerations).
+
 As mentioned above, your `max_connections` setting is based on both your minimum and maximum compute size settings. To avoid any `max_connections` constraints, you can use a pooled connection for your application. See [Connection pooling](/docs/connect/connection-pooling).
 
 ### Scale to zero configuration

@@ -42,6 +42,21 @@ To edit a compute:
 
 1. Click **Save**.
 
+## Best practices & important considerations
+
+For best performance, set your minimum compute size high enough to keep your working set (or entire dataset) in memory. This helps ensure frequently accessed data is cached and reduces query latency.
+
+However, be aware that when a compute scales down, the Local File Cache (LFC) is cleared. This means any data that was pre-warmed or cached in memory will be lost, and subsequent queries may experience higher latency until the cache is repopulated.
+
+**To minimize the impact of cache loss on scale down:**
+
+- Set your minimum compute size high enough to keep your working set in cache, especially for workloads that are sensitive to cache warmup times.
+- For best results, consider using a fixed-size compute if persistent cache is critical for your workload.
+- If you use autoscaling, a good rule of thumb is to set the minimum compute size to at least the size of your working set, or 1.25x your dataset size.
+- You can use the `pg_prewarm` extension to manually warm up tables, indexes, and TOAST tables after a scale-up or restart, but note that this cache will be lost again if the compute scales down.
+
+_An automatic pre-warming feature is planned for the future, but is not yet available._
+
 ## Configure autoscaling defaults for your project
 
 You can configure autoscaling configuration defaults for your project so that **newly created computes** (including those created when you create a new branch or add read replica) are created with the same autoscaling configuration. This saves you from having to configure autoscaling settings with each new compute. See [Change your project's default compute settings](/docs/manage/projects#change-your-projects-default-compute-settings) for more detail.
