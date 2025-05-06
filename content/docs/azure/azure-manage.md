@@ -44,23 +44,23 @@ To create branches in the Azure Portal:
 1. Navigate to your Neon resource and select the **Projects** page.
 1. Select your Neon project. You should see your existing branches.
 1. To create a new branch, select **Create branch** to open the **Create new Branch** drawer.
-    ![create branch drawer](/docs/azure/azure_create_branch_drawer.png)
+   ![create branch drawer](/docs/azure/azure_create_branch_drawer.png)
 
 1. Specify a branch name and select a parent branch, and click **Create**.
 
-You now have an independent and isolated copy of your parent branch with its own compute resources. 
+You now have an independent and isolated copy of your parent branch with its own compute resources.
 
 The branch page shows the following information for each branch:
 
 ![Branch page](/docs/azure/azure_branch_page.png)
 
-| **Column**         | **Description**                                                                 |
-|--------------------|---------------------------------------------------------------------------------|
-| **Branch**         | The name of the database branch.                                                |
-| **Parent**         | The parent branch from which the branch was created.                            |
-| **Compute hours**  | Total [compute hours](/docs/reference/glossary#compute-hours) used by the branch's primary compute. |
-| **Primary Compute**| The allocated autoscaling range, in [Compute Units (CU)](/docs/reference/glossary#compute-unit-cu), for the branch's primary compute. |
-| **Data size**      | The [logical size](/docs/reference/glossary#logical-data-size) of the data stored in the branch. |
+| **Column**          | **Description**                                                                                                                       |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| **Branch**          | The name of the database branch.                                                                                                      |
+| **Parent**          | The parent branch from which the branch was created.                                                                                  |
+| **Compute hours**   | Total [compute hours](/docs/reference/glossary#compute-hours) used by the branch's primary compute.                                   |
+| **Primary Compute** | The allocated autoscaling range, in [Compute Units (CU)](/docs/reference/glossary#compute-unit-cu), for the branch's primary compute. |
+| **Data size**       | The [logical size](/docs/reference/glossary#logical-data-size) of the data stored in the branch.                                      |
 
 To learn about integrating branching into your developer workflow, see our [Database branching workflow primer](https://neon.tech/docs/get-started-with-neon/workflow-primer).
 
@@ -91,19 +91,19 @@ To retrieve a connection URL for your Neon database:
 
 1. Navigate to your Neon resource.
 1. Select **Settings** > **Connect**.
-1. On the **Connect** page, use the drop-down menus to select a Neon **Project**, **Branch**, **Database**, **Role**, and **Compute**. 
+1. On the **Connect** page, use the drop-down menus to select a Neon **Project**, **Branch**, **Database**, **Role**, and **Compute**.
 
-    ![Connection string UI](/docs/azure/azure_connection_page.png)
+   ![Connection string UI](/docs/azure/azure_connection_page.png)
 
-    The values you select define the connection string for your database:
+   The values you select define the connection string for your database:
 
-    | Value      | Description                                                                 |
-    |------------|-----------------------------------------------------------------------------|
-    | **Project** | The [Neon project](/docs/reference/glossary#project) you want to connect to. A Neon project includes databases and branches. |
-    | **Branch**  | A [branch](/docs/reference/glossary#branch) within your Neon project where your database resides. |
-    | **Database** | The name of the [Postgres database](/docs/reference/glossary#database) you want to connect to. |
-    | **Role**    | The [Postgres role](/docs/reference/glossary#postgres-role) (user) you want to connect with. |
-    | **Compute** | The compute that runs Postgres. Usually "Primary"—this is the read-write compute for the branch, but you may also have [read replica](/docs/reference/glossary#read-replica) computes. |
+   | Value        | Description                                                                                                                                                                            |
+   | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | **Project**  | The [Neon project](/docs/reference/glossary#project) you want to connect to. A Neon project includes databases and branches.                                                           |
+   | **Branch**   | A [branch](/docs/reference/glossary#branch) within your Neon project where your database resides.                                                                                      |
+   | **Database** | The name of the [Postgres database](/docs/reference/glossary#database) you want to connect to.                                                                                         |
+   | **Role**     | The [Postgres role](/docs/reference/glossary#postgres-role) (user) you want to connect with.                                                                                           |
+   | **Compute**  | The compute that runs Postgres. Usually "Primary"—this is the read-write compute for the branch, but you may also have [read replica](/docs/reference/glossary#read-replica) computes. |
 
 You can toggle the **Connection pooling** option to use a pooled connection string, which supports up to 10,000 concurrent connections. A pooled connection string is recommended for most use cases. Use a direct connection for `pg_dump`, session-dependent features, or schema migrations. For more about pooled connections, see [Connection pooling](docs/connect/connection-pooling).
 
