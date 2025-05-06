@@ -43,44 +43,69 @@ To create branches in the Azure Portal:
 
 1. Navigate to your Neon resource and select the **Projects** page.
 1. Select your Neon project. You should see your existing branches.
-1. To create a new branch, select **Create branch** to open the **Create new branch** drawer.
-1. Specify a branch name, select the parent branch, and select an **Include data up to** option. You can include current data or data as it existed at a specified time.
-1. After making your selections, click **Create**.
+1. To create a new branch, select **Create branch** to open the **Create new Branch** drawer.
+    ![create branch drawer](/docs/azure/azure_create_branch_drawer.png)
 
-You now have an independent and isolated copy of your database with its own compute resources. For how to integrate branching into your developer workflow, see our [Database branching workflow primer](https://neon.tech/docs/get-started-with-neon/workflow-primer).
+1. Specify a branch name and select a parent branch, and click **Create**.
+
+You now have an independent and isolated copy of your parent branch with its own compute resources. 
+
+The branch page shows the following information for each branch:
+
+![Branch page](/docs/azure/azure_branch_page.png)
+
+| **Column**         | **Description**                                                                 |
+|--------------------|---------------------------------------------------------------------------------|
+| **Branch**         | The name of the database branch.                                                |
+| **Parent**         | The parent branch from which the branch was created.                            |
+| **Compute hours**  | Total [compute hours](/docs/reference/glossary#compute-hours) used by the branch's primary compute. |
+| **Primary Compute**| The allocated autoscaling range, in [Compute Units (CU)](/docs/reference/glossary#compute-unit-cu), for the branch's primary compute. |
+| **Data size**      | The [logical size](/docs/reference/glossary#logical-data-size) of the data stored in the branch. |
+
+To learn about integrating branching into your developer workflow, see our [Database branching workflow primer](https://neon.tech/docs/get-started-with-neon/workflow-primer).
 
 You can also create branches in the Neon Console. See [Create a branch](/docs/manage/branches#create-a-branch) for instructions.
 
 ## Delete branches
 
-You can delete branches in the Azure Portal or the Neon Console. We'll cover branch deletion in the Azure Portal below. For Neon Console instructions, see [Delete a branch](/docs/manage/branches#delete-a-branch).
-
 Important points about branch deletion:
 
 - A branch deletion action cannot be undone.
-- You cannot delete a branch that has children. You need to delete any child branches first.
+- You cannot delete a branch that has children. You need to delete the child branches first.
 
 To delete a branch in the Azure Portal:
 
-1. Navigate to your Neon resource,
+1. Navigate to your Neon resource.
 1. Select your Neon project. You should see your existing branches.
 1. Select the branch you want to delete.
-1. Select **Delete branch** to open the **Delete a branch** drawer. You'll need to type the branch name to confirm the deletion.
+1. Select **Delete Neon branch** to open the **Delete Branch** drawer. You'll need to type the branch name to enable the **Delete** button.
 1. Click **Delete** and confirm.
+
+You can also delete branches in the Neon Console. For instructions, see [Delete a branch](/docs/manage/branches#delete-a-branch).
 
 ## Connect to a database
 
 You can connect to your Neon database using a Postgres database connection URL.
 
-To find a connection URL:
+To retrieve a connection URL for your Neon database:
 
 1. Navigate to your Neon resource.
-1. Select **Projects** > **Settings** > **Connect**.
-1. On the **Connect** page, use the drop-down menus to select a Neon project and branch.
+1. Select **Settings** > **Connect**.
+1. On the **Connect** page, use the drop-down menus to select a Neon **Project**, **Branch**, **Database**, **Role**, and **Compute**. 
 
-A connection string is provided. By default, the connection string uses the first database and role created on the branch. To connect with a different database and role, you can modify the connection string manually or copy one from the Neon Console.
+    ![Connection string UI](/docs/azure/azure_connection_page.png)
 
-You can toggle **Connection pooling** to use a pooled connection string, which supports up to 10,000 concurrent connections. A pooled connection string is recommended for most use cases. Use a direct connection for `pg_dump`, session-dependent features, or schema migrations. For more about pooled connections, see [Connection pooling](docs/connect/connection-pooling).
+    The values you select define the connection string for your database:
+
+    | Value      | Description                                                                 |
+    |------------|-----------------------------------------------------------------------------|
+    | **Project** | The [Neon project](/docs/reference/glossary#project) you want to connect to. A Neon project includes databases and branches. |
+    | **Branch**  | A [branch](/docs/reference/glossary#branch) within your Neon project where your database resides. |
+    | **Database** | The name of the [Postgres database](/docs/reference/glossary#database) you want to connect to. |
+    | **Role**    | The [Postgres role](/docs/reference/glossary#postgres-role) (user) you want to connect with. |
+    | **Compute** | The compute that runs Postgres. Usually "Primary"—this is the read-write compute for the branch, but you may also have [read replica](/docs/reference/glossary#read-replica) computes. |
+
+You can toggle the **Connection pooling** option to use a pooled connection string, which supports up to 10,000 concurrent connections. A pooled connection string is recommended for most use cases. Use a direct connection for `pg_dump`, session-dependent features, or schema migrations. For more about pooled connections, see [Connection pooling](docs/connect/connection-pooling).
 
 For more about connecting to your Neon database, see [Connect from any app](/connect/connect-from-any-app).
 
