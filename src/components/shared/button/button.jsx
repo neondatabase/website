@@ -54,6 +54,8 @@ const Button = ({
   theme = null,
   tagName = null,
   analyticsEvent = null,
+  analyticsOnHover = false,
+  handleClick = null,
   children,
   ...otherProps
 }) => {
@@ -62,22 +64,31 @@ const Button = ({
 
   const Tag = to ? Link : 'button';
 
+  const handleAnalytics = (eventType = 'clicked') => {
+    if (!tagName) return;
+
+    sendGtagEvent(`Button ${eventType}`, {
+      style: theme,
+      text: getNodeText(children),
+      tag_name: tagName,
+    });
+
+    if (analyticsEvent) {
+      posthog.capture('ui_interaction', {
+        action: analyticsEvent,
+      });
+    }
+  };
+
   return (
     <Tag
       className={className}
       to={to}
       onClick={() => {
-        sendGtagEvent('Button Clicked', {
-          style: theme,
-          text: getNodeText(children),
-          tag_name: tagName,
-        });
-        if (analyticsEvent) {
-          posthog.capture('ui_interaction', {
-            action: analyticsEvent,
-          });
-        }
+        handleClick();
+        handleAnalytics('clicked');
       }}
+      onMouseEnter={analyticsOnHover ? () => handleAnalytics('hovered') : undefined}
       {...otherProps}
     >
       {children}
@@ -93,6 +104,8 @@ Button.propTypes = {
   children: PropTypes.node.isRequired,
   tagName: PropTypes.string,
   analyticsEvent: PropTypes.string,
+  analyticsOnHover: PropTypes.bool,
+  handleClick: PropTypes.func,
 };
 
 export default Button;

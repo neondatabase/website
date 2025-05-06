@@ -39,9 +39,9 @@ const variants = {
   },
 };
 
-const MobileMenuItem = ({ text, to, sections, isDarkTheme }) => {
+const MobileMenuItem = ({ text, to, sections, isDarkTheme, ...otherProps }) => {
   const [isMenuItemOpen, setIsMenuItemOpen] = useState();
-  const Tag = sections ? 'button' : Link;
+  const Tag = sections ? Button : Link;
   const hasSubmenu = sections?.length > 0;
 
   const handleMenuItemClick = () => {
@@ -59,7 +59,7 @@ const MobileMenuItem = ({ text, to, sections, isDarkTheme }) => {
     >
       <Tag
         className={clsx(
-          'relative flex w-full items-center py-4 leading-none tracking-snug transition-colors duration-200',
+          'relative flex w-full items-center py-4 font-normal leading-none tracking-snug transition-colors duration-200',
           isMenuItemOpen && 'font-medium',
           {
             'text-white': isMenuItemOpen && isDarkTheme,
@@ -69,7 +69,9 @@ const MobileMenuItem = ({ text, to, sections, isDarkTheme }) => {
           }
         )}
         to={to}
-        onClick={handleMenuItemClick}
+        tagName="Mobile Menu"
+        handleClick={handleMenuItemClick}
+        {...otherProps}
       >
         <span>{text}</span>
         {sections && (
@@ -116,6 +118,7 @@ const MobileMenuItem = ({ text, to, sections, isDarkTheme }) => {
                               'before:absolute before:-inset-2 before:rounded-lg before:opacity-0'
                             )}
                             to={to}
+                            tagName="MobileMenu"
                           >
                             {Icon && (
                               <Icon
@@ -193,6 +196,8 @@ const mobileMenuItems = [
   {
     text: 'Discord',
     to: LINKS.discord,
+    target: '_blank',
+    rel: 'noopener noreferrer',
   },
 ];
 
