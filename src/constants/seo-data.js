@@ -108,6 +108,7 @@ export default {
     title: 'Postgres Migration — Neon',
     description: 'Learn how to migrate your Postgres database to Neon.',
     pathname: LINKS.migration,
+    imagePath: '/images/social-previews/migration.jpg',
   },
   serverlessApps: {
     title: 'Postgres for serverless apps — Neon',
