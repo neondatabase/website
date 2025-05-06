@@ -44,7 +44,7 @@ Operation details include:
 - **Duration**: The duration of the operation.
 - **Date**: The date and time the operation occurred.
 
-Possible **Status** values are `scheduling`, `running`, `finished`, `failed`, `cancelling`, `cancelled` and `skipped`. The only terminal statuses are `finished`, `skipped` and `cancelled`. The `failed` state is **not** terminal as it can be retried still.
+Possible **Status** values are `OK`, `Scheduling`, `In progress`, and `Error`.
 
 </TabItem>
 
@@ -322,8 +322,6 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations/05
 
 </details>
 
-Possible operation `status` values include `running`, `finished`, `failed`, `scheduling`. Initially, the status of an operation might be `scheduling`. Before issuing the next API request, you would poll the operation until the status changes to `finished`. You could also add logic to handle a `failed` status.
-
-Notice, however, that the above values might be displayed differently in the Neon UI.
+The possible operation `status` values are `scheduling`, `running`, `finished`, `failed`, `cancelling`, `cancelled` and `skipped`. The only terminal statuses are `finished`, `skipped` and `cancelled`. The `failed` state is **not** terminal as an operation with that status can still be retried.
 
 <NeedHelp/>
