@@ -322,6 +322,6 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations/05
 
 </details>
 
-Possible operation `status` values include `running`, `finished`, `failed`, `scheduling`. Initially, the status of an operation might be `scheduling`. Before issuing the next API request, you would poll the operation until the status changes to `finished`. You could also add logic to handle a `failed` status.
+Possible operation `status` values include: `scheduling`, `running`, `finished`, `failed`, `cancelling`, `cancelled`, and `skipped`. Only `finished`, `skipped`, and `cancelled` are **terminal statuses**, meaning the operation will not proceed further from these states. Note that `failed` is **not** terminal, as an operation in a `failed` state can still be retried.
 
 <NeedHelp/>
