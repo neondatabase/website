@@ -35,7 +35,7 @@ In Azure, navigate to the **Projects** page and select **Create Project**.
 
 See [Create a project](/docs/manage/projects#create-a-project) for how to create a project from the Neon Console.
 
-## Create branches
+## Create branches in Neon projects on Azure
 
 A branch is an independent copy of your database that you can use for development or testing. It will not increase storage until you modify data or the branch falls out of your project's [restore window](/docs/manage/projects#configure-your-restore-window). Changes made on a branch do not affect the parent database. To learn more, see [Branching](/docs/introduction/branching).
 
