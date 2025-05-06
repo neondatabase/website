@@ -85,7 +85,7 @@ const Button = ({
       className={className}
       to={to}
       onClick={() => {
-        handleClick();
+        if (handleClick) handleClick();
         handleAnalytics('clicked');
       }}
       onMouseEnter={analyticsOnHover ? () => handleAnalytics('hovered') : undefined}

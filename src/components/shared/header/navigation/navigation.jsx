@@ -27,7 +27,7 @@ const Navigation = ({ isDarkTheme }) => (
               to={to}
               {...theme}
               tagName="Navigation"
-              analyticsOnHover
+              analyticsOnHover={!to || undefined}
             >
               {text}
               {hasSubmenu && (
