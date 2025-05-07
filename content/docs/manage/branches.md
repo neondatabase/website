@@ -171,6 +171,7 @@ You can use the Neon Console, CLI, or API. For more details, see [Instant restor
 Deleting a branch is a permanent action. This removes the branch's databases, roles, and any associated compute resources.
 
 You **cannot** delete a branch if:
+
 - It has child branches. You must delete all child branches first.
 - It is a [protected branch](/docs/guides/protected-branches). You must disable branch protection first.
 
