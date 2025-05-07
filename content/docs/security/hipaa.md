@@ -66,9 +66,12 @@ HIPAA is a federal law that sets national standards for the protection of health
 
 Audit events may not be logged if database endpoints experience exceptionally heavy load, as we prioritize database availability over capturing log events.
 
-## Non-HIPAA-compliant Neon features
+## Non-HIPAA-compliant features
 
-Neon’s **Data API** feature is hosted outside of Neon’s HIPAA-compliant infrastructure and should not be used with HIPAA-enabled Neon projects.
+The following Neon features are not part of our HIPAA-compliant infrastructure and should not be used with HIPAA-enabled projects:
+
+- **Neon Auth** – Integrates an Auth provider that is not currently HIPAA-compliant.
+- **Neon's Data API feature** – Hosted outside of Neon’s HIPAA-compliant environment.
 
 ## Enabling HIPAA for a Neon project
 
