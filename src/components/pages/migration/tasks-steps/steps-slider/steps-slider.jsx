@@ -20,6 +20,8 @@ const StepsSlider = ({ items }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const progressBarRef = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
+  const swiperContainerRef = useRef(null);
+  const [autoplayEnabled, setAutoplayEnabled] = useState(false);
 
   useEffect(() => {
     const update = () => {
@@ -29,6 +31,24 @@ const StepsSlider = ({ items }) => {
     window.addEventListener('resize', update);
     return () => window.removeEventListener('resize', update);
   }, []);
+
+  useEffect(() => {
+    const observer = new window.IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !autoplayEnabled) {
+          mainSwiperRef.current.autoplay?.start();
+          setAutoplayEnabled(true);
+        }
+      },
+      { threshold: 1 }
+    );
+
+    if (swiperContainerRef.current) {
+      observer.observe(swiperContainerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [autoplayEnabled]);
 
   const pagination = {
     clickable: true,
@@ -78,7 +98,7 @@ const StepsSlider = ({ items }) => {
 
   return (
     <>
-      <div className="relative">
+      <div ref={swiperContainerRef} className="relative">
         <Swiper
           autoplay={{
             delay: 5000,
@@ -95,6 +115,7 @@ const StepsSlider = ({ items }) => {
           onAutoplayTimeLeft={onAutoplayTimeLeft}
           onSlideChange={handleSlideChange}
           onSwiper={(swiper) => {
+            swiper.autoplay?.stop();
             mainSwiperRef.current = swiper;
             if (progressBarRef.current) {
               progressBarRef.current.style.width = '0%';
