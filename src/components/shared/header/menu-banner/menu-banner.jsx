@@ -11,7 +11,12 @@ import bannerTablet from './images/banner-tablet.jpg';
 
 const MenuBanner = ({ title, description, to }) => (
   <li className="mt-1 lg:-order-1 lg:mt-0">
-    <Link className="group/banner relative block w-fit rounded-lg xs:w-full" to={to}>
+    <Link
+      className="group/banner relative block w-fit rounded-lg xs:w-full"
+      to={to}
+      tagName="Menu Banner"
+      tagText={title}
+    >
       <Image className="rounded-lg lg:hidden" src={bannerDesktop} width={232} height={145} alt="" />
       <Image
         className="hidden rounded-lg lg:block xs:hidden"

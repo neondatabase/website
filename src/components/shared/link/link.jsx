@@ -65,6 +65,7 @@ const Link = forwardRef(
       withArrow = false,
       icon = null,
       tagName = null,
+      tagText = null,
       children,
       prefetch = undefined,
       ...props
@@ -83,9 +84,9 @@ const Link = forwardRef(
 
     const handleClick = () => {
       if (!tagName) return;
-      sendGtagEvent('Link Clicked', {
+      sendGtagEvent('Link clicked', {
         style: theme,
-        text: getNodeText(children),
+        text: tagText || getNodeText(children),
         tag_name: tagName,
       });
     };
@@ -142,6 +143,7 @@ Link.propTypes = {
   icon: PropTypes.oneOf(Object.keys(icons)),
   prefetch: PropTypes.bool,
   tagName: PropTypes.string,
+  tagText: PropTypes.string,
 };
 
 export default Link;
