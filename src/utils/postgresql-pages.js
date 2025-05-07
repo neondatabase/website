@@ -3,9 +3,9 @@ const fs = require('fs');
 const { glob } = require('glob');
 const matter = require('gray-matter');
 
-const getExcerpt = require('./get-excerpt');
+const POSTGRESQL_DIR_PATH = require('../constants/content');
 
-const POSTGRESQL_DIR_PATH = 'content/postgresql';
+const getExcerpt = require('./get-excerpt');
 
 const getPostSlugs = async (pathname) => {
   const files = await glob.sync(`${pathname}/**/*.md`, {

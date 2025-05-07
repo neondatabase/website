@@ -1,7 +1,6 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
-import EditOnGithub from 'components/pages/doc/edit-on-github';
+import Links from 'components/pages/doc/aside/links';
 import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
 import NavigationLinks from 'components/shared/navigation-links';
@@ -17,7 +16,7 @@ const Post = ({
   content,
   navigationLinks: { previousLink, nextLink },
   slug,
-  fileOriginPath,
+  githubPath,
   tableOfContents,
 }) => (
   <>
@@ -48,14 +47,7 @@ const Post = ({
     <div className="col-start-11 col-end-13 -ml-11 h-full max-w-[256px] xl:col-start-10 lg:hidden">
       <div className="sticky top-[148px] flex max-h-[calc(100vh-150px)] flex-col pb-5">
         {enableTableOfContents && <TableOfContents items={tableOfContents} />}
-        <div
-          className={clsx(
-            enableTableOfContents &&
-              'mt-2.5 w-56 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70'
-          )}
-        >
-          <EditOnGithub fileOriginPath={fileOriginPath} />
-        </div>
+        <Links githubPath={githubPath} withBorder={enableTableOfContents} />
         {author && (
           <div className="mt-4 w-56 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70 lg:hidden">
             <Author data={author} />
@@ -89,7 +81,7 @@ Post.propTypes = {
     nextLink: PropTypes.shape({}),
   }).isRequired,
   slug: PropTypes.string.isRequired,
-  fileOriginPath: PropTypes.string.isRequired,
+  githubPath: PropTypes.string.isRequired,
   tableOfContents: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
