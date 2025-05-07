@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/sqlalchemy
   - /docs/integrations/sqlalchemy
-updatedOn: '2024-09-24T08:34:04.216Z'
+updatedOn: '2025-04-20T15:44:26.056Z'
 ---
 
 SQLAlchemy is a Python SQL toolkit and Object Relational Mapper (ORM) that provides application developers with the full power and flexibility of SQL. This guide describes how to create a Neon project and connect to it from SQLAlchemy.
@@ -16,10 +16,7 @@ To complete the steps in this topic, ensure that you have an SQLAlchemy installa
 
 To connect to Neon from SQLAlchemy:
 
-1. [Create a Neon project](#create-a-neon-project)
-1. [Install psycopg2](#install-psycopg2)
-1. [Create the "hello neon" program](#create-the-hello-neon-program)
-1. [Create an SQLAlchemy engine for your Neon project](#create-an-sqlalchemy-engine-for-your-neon-project)
+<Steps>
 
 ## Create a Neon project
 
@@ -65,7 +62,7 @@ with conn.cursor() as cur:
  print(cur.fetchall())
 ```
 
-You can find all of the connection details mentioned above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 <Admonition type="note">
 This example was tested with Python 3 and psycopg2 version 2.9.3.
@@ -90,12 +87,14 @@ conn_str = f'postgresql://{USERNAME}:{PASSWORD}@{HOST}/{DATABASE}?sslmode=requir
 engine = create_engine(conn_str)
 ```
 
-You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 For additional information about connecting from SQLAlchemy, refer to the following topics in the SQLAlchemy documentation:
 
 - [Establishing Connectivity - the Engine](https://docs.sqlalchemy.org/en/14/tutorial/engine.html)
 - [Connecting to PostgreSQL with SQLAlchemy](https://docs.sqlalchemy.org/en/14/core/engines.html#postgresql)
+
+</Steps>
 
 ## SQLAlchemy connection errors
 

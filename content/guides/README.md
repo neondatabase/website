@@ -307,13 +307,13 @@ Example file structure:
 To display images using Markdown syntax, use the following syntax: `![alt text](image url)`. Example content in `architecture-overview.md`:
 
 ```md
-![Neon architecture diagram](/guides/conceptual-guides/neon_architecture_2.png)
+![Neon architecture diagram](/guides/images/conceptual-guides/neon_architecture_2.png)
 ```
 
 If you need an image without border to show an annotated piece of UI, use the `"no-border"` attribute as in the example below:
 
 ```md
-![Neon architecture diagram](/guides/conceptual-guides/neon_architecture_2.png 'no-border')
+![Neon architecture diagram](/guides/images/conceptual-guides/neon_architecture_2.png 'no-border')
 ```
 
 With this approach, all images on your guide pages will be displayed both on the production and GitHub preview.
@@ -398,8 +398,8 @@ Create a [markdown file](https://github.com/neondatabase/website/blob/main/conte
 
 ```js
 const sharedMdxComponents = {
-  // name of component: path to component
-  NeedHelp: '../docs/shared-content/need-help',
+  // ConponentName: 'shared-content/component-filename'
+  NeedHelp: 'shared-content/need-help',
 };
 
 export default sharedMdxComponents;
@@ -414,6 +414,20 @@ Insert a shared markdown and render inline.
 - [pg_tiktoken source code on GitHub](https://github.com/kelvich/pg_tiktoken)
 
 <NeedHelp/>
+```
+
+You can pass props to the shared component:
+
+```md
+<ComponentWithProps text="The pgvector extension" />
+```
+
+`component-with-props.md`
+
+```md
+<Admonition type="note" title="Test component with props">
+  {text}
+</Admonition>
 ```
 
 ## Author data
@@ -462,10 +476,7 @@ author: rishi-raj-jain
     "name": "Rishi Raj Jain",
     "position": "Software Engineer",
     "bio": "Technical Writer",
-    "link": {
-      "title": "GitHub",
-      "url": "https://github.com/rishi-raj-jain"
-    }
+    "link": { "title": "GitHub", "url": "https://github.com/rishi-raj-jain" }
   }
 }
 ```

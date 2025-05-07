@@ -150,7 +150,7 @@
     }
 
     .hs-button {
-      @apply flex h-12 w-full items-center justify-center whitespace-nowrap rounded-[60px] bg-green-45 px-10 text-center text-lg font-medium leading-none tracking-[-0.02em] text-black transition-[color,background-image] duration-200 hover:cursor-pointer hover:bg-[#00e5bf] disabled:pointer-events-none disabled:bg-gray-3 disabled:text-white disabled:hover:bg-primary-1 md:h-[54px] sm:w-full;
+      @apply flex h-12 w-full items-center justify-center whitespace-nowrap rounded-[60px] bg-green-45 px-10 text-center text-lg font-medium leading-none tracking-extra-tight text-black transition-[color,background-image] duration-200 hover:cursor-pointer hover:bg-[#00e5bf] disabled:pointer-events-none disabled:bg-gray-3 disabled:text-white disabled:hover:bg-primary-1 md:h-[54px] sm:w-full;
     }
   }
 }

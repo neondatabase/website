@@ -37,6 +37,18 @@ If you don’t use a `timeout`, the function returns `true` indicating that it h
 
 If you use a `timeout`, the function returns true if the process is terminated or `false` on timeout.
 
+<Admonition type="tip" title="Neon Note">
+On the Neon platform, superuser privileges are not available, so you can only cancel or terminate your own connections. You cannot stop other users' connections directly. As a workaround, you can identify the user that owns the connection and request that the user terminate the connection. To identify the user:
+
+```sql
+SELECT pid, usename, client_addr, application_name, state, query, now() - query_start AS duration
+FROM pg_stat_activity
+WHERE state <> 'idle'
+ORDER BY duration DESC;
+```
+
+</Admonition>
+
 ## PostgreSQL pg_terminate_backend() function example
 
 The steps for killing a process by the process `ID` are as follows:

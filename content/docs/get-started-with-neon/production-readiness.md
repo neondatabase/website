@@ -2,10 +2,12 @@
 title: Production readiness with Neon
 subtitle: Neon features for real-world workloads
 enableTableOfContents: true
-updatedOn: '2025-01-07T20:03:22.702Z'
+updatedOn: '2025-04-18T17:31:33.342Z'
 ---
 
 Learn how autoscaling, scale to zero, Neon's storage architecture, change data capture, read replicas, and support for thousands of connections can improve performance, reliability, and efficiency for your production environments.
+
+<CTA title="Production checklist" description="Ready to move to production? Use our checklist to ensure your database is optimized with all recommended settings and features." buttonText="View checklist" buttonUrl="/docs/get-started-with-neon/production-checklist" />
 
 ## Autoscaling
 
@@ -50,6 +52,8 @@ The entire Neon storage framework is developed in Rust for maximum performance a
 **Stream your data to external data platforms and services.**
 
 Neon's Logical Replication feature enables replicating data from your Neon database to external destinations, allowing for Change Data Capture (CDC) and real-time analytics. Stream your data to data warehouses, analytical database services, messaging platforms, event-streaming platforms, external Postgres databases, and more. To learn more, see [Get started with logical replication](/docs/guides/logical-replication-guide).
+
+You can also replicate data to Neon from other Postgres platforms and instances. See our [logical replication migration guides](/docs/guides/logical-replication-guide#replicate-data-to-neon) to get started.
 
 ## Scale with read replicas
 

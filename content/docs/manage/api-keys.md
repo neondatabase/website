@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/using-api-keys
   - /docs/get-started-with-neon/api-keys
-updatedOn: '2025-01-07T00:14:34.997Z'
+updatedOn: '2025-01-31T18:46:00.172Z'
 ---
 
 Most actions performed in the Neon Console can also be performed using the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). You'll need an API key to validate your requests. Each key is a randomly-generated 64-bit token that you must include when calling Neon API methods. All keys remain valid until deliberately revoked.
@@ -120,6 +120,16 @@ Project-scoped API keys have [member-level access](/docs/manage/organizations#us
 - Cannot perform organization-related actions or create new projects
 - Will stop working if the project is transferred out of the organization
 
+<Tabs labels={["Console", "API"]}>
+
+<TabItem>
+In your organization's **Settings** > **API keys**, click **Create new** and select **Project-scoped** to create a key for your chosen project.
+
+![Project-scoped API keys from the Console](/docs/manage/project_scoped_select.png)
+
+</TabItem>
+
+<TabItem>
 Any organization member can create an API key for any organization-owned project using the following command:
 
 ```bash shouldWrap
@@ -148,6 +158,10 @@ curl --request POST \
   "project_id": "project-id-123"
 }
 ```
+
+</TabItem>
+
+</Tabs>
 
 ## Make an API call
 

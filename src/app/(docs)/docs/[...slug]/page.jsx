@@ -2,12 +2,12 @@
 import { notFound } from 'next/navigation';
 
 import Post from 'components/pages/doc/post';
-import { VERCEL_URL } from 'constants/docs';
+import VERCEL_URL from 'constants/base';
+import { DOCS_DIR_PATH } from 'constants/content';
 import LINKS from 'constants/links';
 import {
-  DOCS_DIR_PATH,
   getAllPosts,
-  getAllChangelogPosts,
+  getAllChangelogs,
   getNavigationLinks,
   getPostBySlug,
   getSidebar,
@@ -78,8 +78,9 @@ const DocPost = async ({ params }) => {
   const sidebar = getSidebar();
   const flatSidebar = await getFlatSidebar(sidebar);
 
+  const isDocsIndex = currentSlug === 'introduction';
   const isChangelogIndex = !!currentSlug.match('changelog')?.length;
-  const allChangelogPosts = await getAllChangelogPosts();
+  const allChangelogPosts = await getAllChangelogs();
 
   const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar, getSidebar());
   const navigationLinks = getNavigationLinks(currentSlug, flatSidebar);
@@ -133,6 +134,7 @@ const DocPost = async ({ params }) => {
         currentSlug={currentSlug}
         fileOriginPath={fileOriginPath}
         tableOfContents={tableOfContents}
+        isDocsIndex={isDocsIndex}
       />
     </>
   );

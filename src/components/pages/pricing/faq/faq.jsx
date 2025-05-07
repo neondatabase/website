@@ -1,5 +1,6 @@
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
+import LINKS from 'constants/links';
 
 import Item from './item';
 
@@ -16,27 +17,24 @@ const items = [
   },
   {
     question: 'When will I be billed?',
-    answer: `Neon bills for the past month's usage at the beginning of each calendar month. For more information, see <a href="/docs/introduction/manage-billing">Manage billing</a>.`,
+    answer: `Neon bills for the past month's usage at the beginning of each calendar month. For more information, see <a href="${LINKS.manageBilling}">Manage billing</a>.`,
   },
   {
     question: 'How many compute hours will it take to run my workload?',
     answer: `You can get a good idea by estimating how many hours your databases run, and at which compute size. For example: imagine you’re running a 2 CPU, 8 GB RAM database for 2 hours a day (or 62 hours per month). This equals [2 CU * 62 hours] = 124 compute hours per month.`,
   },
   {
-    question: 'How can I control my costs with autoscaling?',
+    question: 'How can I control my costs?',
     answer: `When enabling <a href="/docs/introduction/autoscaling">autoscaling</a>, you will set a maximum autoscaling limit (e.g. 2 CU) that will act as a de-facto cost limit.`,
+  },
+  {
+    question: 'Do you offer discounts and credits for Startups?',
+    answer: `Yes! Startups that have received venture funding can apply for up to $100K in credits to help them get started with Neon. <a href="${LINKS.startups}">Learn more and apply here</a>.`,
+    id: 'startup-discounts',
   },
   {
     question: 'How is storage charged in Neon?',
     answer: `Neon implements a unique storage engine that enables database branching on copy-on-write, without duplicate storage. You can create instant database copies (database branches) without adding to the storage bill. <a href="/docs/introduction/usage-metrics">Read more in our docs</a>.`,
-  },
-  {
-    question: 'What do I get for the "regular" cost per-GB in Neon?',
-    answer: `Neon's storage model is unique: our "per-GB" metric truly stretches. You can create hundreds of database copies (via branching) or replicas without increasing storage costs. High availability is also included in this price. For maximum storage scalability, consider the Business plan—our most cost-efficient option.`,
-  },
-  {
-    question: 'What is "archive storage"?',
-    answer: `To save you costs, branches that are idle for at least a day and that are older than 2 weeks are considered archived storage, and billed at a reduced rate. This has no implications for you, it happens automatically. <a href="https://neon.tech/blog/cutting-storage-costs">More context here.</a> `,
   },
   {
     question: 'Do I get a notification if I am approaching my usage limits?',
@@ -44,11 +42,11 @@ const items = [
   },
   {
     question: 'Can I use Neon for database-per-user architectures?',
-    answer: `Yes, Neon is a great option for designs demanding one database per user. Our recommendation is to follow a project-per-user (or project-per-tenant) pattern, taking advantage of the thousands of projects included in our pricing plans. <a href="https://neon.tech/use-cases/database-per-tenant">Read more</a>.`,
+    answer: `Yes, Neon is a great option for designs demanding one database per user. Our recommendation is to follow a project-per-user (or project-per-tenant) pattern, taking advantage of the thousands of projects included in our pricing plans. <a href="${LINKS.useCases}/database-per-tenant">Read more</a>.`,
   },
   {
     question: 'Is Neon compliant?',
-    answer: `Yes, Neon adheres to SOC 2, ISO 27001, ISO 27701 standards and complies with GDPR and CCPA regulations. HIPAA compliance will come very soon.`,
+    answer: `Yes, Neon adheres to SOC 2, ISO 27001, ISO 27701 standards and complies with GDPR and CCPA regulations. HIPAA compliance is also available upcon contract—if you need HIPAA, <a href="${LINKS.contactSales}">contact us</a> and we'll walk you through it`,
   },
   {
     question: 'Which level of uptime can I expect with Neon?',
@@ -56,7 +54,7 @@ const items = [
   },
   {
     question: 'Can Neon help with migrations?',
-    answer: `Absolutely. Our expert team assists Business and Enterprise clients throughout the migration process. <a href="https://neon.tech/migration-assistance">Tell us here</a> if you're considering migrating to Neon. `,
+    answer: `Absolutely. Our expert team assists Business and Enterprise clients throughout the migration process. <a href="${LINKS.migrationAssistance}">Tell us here</a> if you're considering migrating to Neon. `,
   },
 ];
 

@@ -244,7 +244,7 @@ const DynamicTicket = ({
                   </p>
                   <time
                     dateTime="2023-11-02T10:00"
-                    className="whitespace-nowrap text-sm uppercase leading-dense tracking-[0.01em] text-white lg:text-[12px] md:text-[12px]"
+                    className="whitespace-nowrap text-sm uppercase leading-dense -tracking-snug text-white lg:text-[12px] md:text-[12px]"
                   >
                     10 AM PT,
                     <br />
@@ -272,7 +272,7 @@ const DynamicTicket = ({
 
       {withColorPicker && (
         <div className="pointer-events-none relative z-10 mt-9 flex items-center gap-6 2xl:mt-8 xl:justify-center lg:mt-7 lg:gap-4 md:mb-7 md:mt-0">
-          <p className="text-sm tracking-[0.04em] text-white opacity-80">Pick a color:</p>
+          <p className="text-sm -tracking-tighter text-white opacity-80">Pick a color:</p>
           <div className="pointer-events-auto flex gap-5 lg:gap-6">
             {colorVariants.map((item, i) => {
               const { id, title, buttonColorClass } = item;

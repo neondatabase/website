@@ -1,7 +1,7 @@
-const fs = require('fs');
+import fs from 'fs';
 
-const { glob } = require('glob');
-const matter = require('gray-matter');
+import { glob } from 'glob';
+import matter from 'gray-matter';
 
 const GUIDES_DIR_PATH = 'content/guides';
 
@@ -17,13 +17,14 @@ const getPostSlugs = async (pathname) => {
   return files.map((file) => file.replace(pathname, '').replace('.md', ''));
 };
 
+export const getAuthors = () => {
+  const authors = fs.readFileSync(`${process.cwd()}/${GUIDES_DIR_PATH}/authors/data.json`, 'utf8');
+  return JSON.parse(authors);
+};
+
 const getAuthor = (id) => {
   try {
-    const authors = fs.readFileSync(
-      `${process.cwd()}/${GUIDES_DIR_PATH}/authors/data.json`,
-      'utf8'
-    );
-    const authorsData = JSON.parse(authors);
+    const authorsData = getAuthors();
     const authorData = authorsData[id];
     const authorPhoto = `/guides/authors/${id}.jpg`;
     const author = {
@@ -54,7 +55,7 @@ const getPostBySlug = (slug, pathname) => {
   }
 };
 
-const getAllPosts = async () => {
+const getAllGuides = async () => {
   const slugs = await getPostSlugs(GUIDES_DIR_PATH);
   return slugs
     .map((slug) => {
@@ -67,15 +68,19 @@ const getAllPosts = async () => {
         content,
         author,
       } = data;
+
+      // eslint-disable-next-line consistent-return
       return {
-        slug: slugWithoutFirstSlash,
         title,
         subtitle,
+        slug: slugWithoutFirstSlash,
+        category: 'guides',
         author,
         createdAt,
         updatedOn,
-        isDraft,
+        date: createdAt,
         content,
+        isDraft,
         redirectFrom,
       };
     })
@@ -95,10 +100,4 @@ const getNavigationLinks = (slug, posts) => {
   };
 };
 
-module.exports = {
-  getPostSlugs,
-  getPostBySlug,
-  getNavigationLinks,
-  getAllPosts,
-  GUIDES_DIR_PATH,
-};
+export { getPostSlugs, getPostBySlug, getNavigationLinks, getAllGuides, GUIDES_DIR_PATH };

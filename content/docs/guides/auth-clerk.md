@@ -3,13 +3,13 @@ title: Authenticate Neon Postgres application users with Clerk
 subtitle: Learn how to add authentication to a Neon Postgres database application using
   Clerk
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.056Z'
+updatedOn: '2025-03-07T12:49:26.102Z'
 ---
 
 User authentication is a critical requirement for web applications. Modern applications require advanced features like social login and multi-factor authentication besides the regular login flow. Additionally, managing personally identifiable information (PII) requires a secure solution compliant with data protection regulations.
 
 <Admonition type="comingSoon">
-Looking to manage **authorization** along with authentication? Currently in Early Access for select users, [Neon Authorize](/docs/guides/neon-authorize) brings JSON Web Token (JWT) authorization directly to Postgres, where you can use Row-level Security (RLS) policies to manage access at the database level.
+Looking to manage **authorization** along with authentication? Currently in Early Access for select users, [Neon RLS](/docs/guides/neon-authorize) brings JSON Web Token (JWT) authorization directly to Postgres, where you can use Row-level Security (RLS) policies to manage access at the database level.
 </Admonition>
 
 [Clerk](https://clerk.com/) is a user authentication and identity management platform that provides these features out of the box. It comes with adapters for popular web frameworks, making it easy to integrate with an application backed by a Neon Postgres database.
@@ -65,7 +65,7 @@ Make sure to add an entry for `.env` to your `.gitignore` file, so that it's not
 
 ### Retrieve your Neon database connection string
 
-Navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
+You can find your database connection string by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
 
 ```bash
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
@@ -244,7 +244,7 @@ Create a new file at `app/actions.ts` with the following content:
 ```typescript
 'use server';
 
-import { currentUser } from '@clerk/nextjs';
+import { currentUser } from '@clerk/nextjs/server';
 import { UserMessages } from './db/schema';
 import { db } from './db';
 import { redirect } from 'next/navigation';
@@ -271,7 +271,7 @@ export async function deleteUserMessage() {
 }
 ```
 
-The `addUserMessage` function inserts a new message into the `user_messages` table, while `deleteUserMessage` removes the message associated with the current user.
+The `createUserMessage` function inserts a new message into the `user_messages` table, while `deleteUserMessage` removes the message associated with the current user.
 
 Next, we implement a minimal UI to interact with these functions. Replace the contents of the `app/page.tsx` file with the following:
 

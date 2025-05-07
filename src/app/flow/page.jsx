@@ -1,6 +1,7 @@
 import Post from 'components/pages/doc/post';
+import { FLOW_DIR_PATH } from 'constants/content';
 import SEO_DATA from 'constants/seo-data';
-import { FLOW_DIR_PATH, getPostBySlug } from 'utils/api-docs';
+import { getPostBySlug } from 'utils/api-docs';
 import getMetadata from 'utils/get-metadata';
 import getTableOfContents from 'utils/get-table-of-contents';
 

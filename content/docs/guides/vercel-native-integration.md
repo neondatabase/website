@@ -4,7 +4,7 @@ subtitle: Add Neon Postgres storage to your Vercel project as a first-party nati
   integration
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-01-20T20:22:35.264Z'
+updatedOn: '2025-03-19T10:43:30.032Z'
 ---
 
 <InfoBlock>
@@ -34,32 +34,23 @@ The [Vercel Marketplace](https://vercel.com/marketplace) allows you to add Neon 
 The **Neon Postgres Native Integration** is intended for Vercel users who want to add Neon Postgres to their Vercel project as a first-party native integration.
 - You cannot install this integration if you currently have Vercel Postgres installed. Please see [Transitioning from Vercel Postgres](/docs/guides/vercel-overview#transitioning-from-vercel-postgres) for details about when Vercel will transition Vercel Postgres users to Neon.
 - If you are an existing Neon user, installing the integration will add a new Neon organization named **Vercel: `<vercel_team_name>`** to your existing Neon account, assuming your Neon and Vercel accounts use the same email address.
-- If you are an existing Neon user and want create a database branch for each preview deployment in Vercel, use the [Neon Postgres Previews Integration](/docs/guides/vercel-previews-integration) instead. The native integration does not support automatic database branches for Vercel preview deployments.
+- If you are an existing Neon user and want create a database branch for each preview deployment in Vercel, use the [Neon Postgres Previews Integration](/docs/guides/vercel-previews-integration) instead. The native integration does not yet support automatic database branches for Vercel preview deployments.
 </Admonition>
 
 ## How to install
 
 To install the **Neon Postgres Native Integration** from the Vercel Marketplace:
 
-1. Navigate to the [Vercel Marketplace](https://vercel.com/marketplace) or to the [Integrations Console](https://vercel.com/neondatabase/~/integrations/console) on your Vercel Dashboard.
+1. Navigate to the [Vercel Marketplace](https://vercel.com/marketplace).
 2. Locate the **Neon** integration.
 3. Click **Install**.
 4. On the **Install Neon** modal, you are presented with two options. Select **Create New Neon Account**, and click **Continue**.
    ![Select the native integration option](/docs/guides/vercel_select_native.png)
 
 5. On the **Create New Neon Account** modal, accept the terms and conditions, and click **Create New Neon Account**.
-6. On the **Create Database** modal, select a region, specify your compute size and scale to zero settings, and choose a plan. To enable autoscaling, specify a compute size range (e.g., 0.25—2 VCPU).
+6. On the **Create Database** modal, select a region, choose a Neon plan, and click **Continue**.
 
    <Admonition type="note">
-     **The settings you choose must be supported by the plan you select**. The supported settings by plan are:
-
-   | Plan     | Compute Size    | [Scale to Zero](/docs/introduction/scale-to-zero) After |
-   | :------- | :-------------- | :------------------------------------------------------ |
-   | Free     | 0.25 - 2 vCPUs  | 5 minutes (Default)                                     |
-   | Launch   | 0.25 - 4 vCPUs  | 5 minutes or more (Default, Never, Custom)              |
-   | Scale    | 0.25 - 8 vCPUs  | 1 minute or more (Default, Never, Custom)               |
-   | Business | 0.25 - 56 vCPUs | 1 minute or more (Default, Never, Custom)               |
-
    For an overview of what comes with each Neon Plan, please refer to the Neon [Pricing](https://neon.tech/pricing) page.
    </Admonition>
 
@@ -77,18 +68,18 @@ To install the **Neon Postgres Native Integration** from the Vercel Marketplace:
    - Period Total (billing)
    - Your database connection string
 
-   From the sidebar, you can view your **Neon Projects**, **Settings**, **Getting Started**, and **Usage**. There's also a link to **Neon Support**.
+   From the sidebar, you can view your **Projects** (Vercel projects connected to the database), **Settings**, **Getting Started**, and **Usage**. There are also links to various resources including, including **Neon Support**.
 
 ## Open your Database / Neon Project in the Neon Console
 
 To open your Database / Neon Project in the Neon Console:
 
 1. From the **Storage** tab in the Vercel Dashboard, select your Database.
-2. On your Database page, select **Open in Neon Postgres**.
-3. In the Neon Console, you are directed the projects page for your Organization. It will be named **Vercel: `<organization_name>`**. If you're a new Neon user, you will have a single Neon Project, and your Organization name in Neon will be the name of your Vercel account. For example, if your Vercel account name is **Alex's projects**, your Neon Organization name will be **Vercel: Alex's projects**.
+2. On your Database page, select **Open in Neon**.
+3. In the Neon Console, you are directed the your project Dashboard. Your project exists within an "Organization" in Neon, which will be named **Vercel: `<organization_name>`**. If you're a new Neon user, you will have a single Neon Project, and your Organization name in Neon will be the name of your Vercel account. For example, if your Vercel account name is **Alex's projects**, your Neon Organization name will be **Vercel: Alex's projects**.
 
 <Admonition type="note">
-All Neon Plans, including the Free Plan, support multiple Neon Projects (a.k.a "Databases" in Vercel). Creating additional projects is performed from the Vercel Dashboard. See [Adding more Databases](#adding-more-databases) for instructions.
+All Neon Plans, including the Free Plan, support multiple Neon Projects (a.k.a "Databases" in Vercel). Creating additional "Databases/Projects" is performed from the Vercel Dashboard. See [Adding more Databases](#adding-more-databases) for instructions.
 </Admonition>
 
 ### Actions supported only from the Vercel Dashboard
@@ -118,6 +109,33 @@ As a user of the Neon Postgres Native Integration, you have access to all Neon f
 - **Billing & Payments**:
   - Invoices, payments, and plan changes (upgrades/downgrades) are managed in Vercel.
 
+## Connect a Vercel project to a Neon database
+
+You can connect your a Vercel project to a Neon database and optionally create a database branch for each Vercel preview deployment.
+
+To connect your Vercel project to your Neon database:
+
+1. From the **Storage** tab in the Vercel Dashboard, select your Database.
+2. On your Database page, select **Connect Project**.
+3. Select the Vercel project you want to connect and the environments you want to add database environment variables to (**Development**, **Preview**, **Production**).
+4. Optionally, under **Advanced Options**, you can:
+
+   - Specify an **Environment Variables Prefix** for the database environment variables that will be added to your Vercel project. A prefix is not required but may help you track and identify variables later.
+     <Admonition type="note">
+     Please be aware that database environment variables are already prefixed by `DATABASE`, `PG`, or `POSTGRES` — see [Environment variables set by the integration](#environment-variables-set-by-the-integration). Any prefix you add is applied in addition the existing prefix. If necessary, you can change your prefix later by navigating to **Storage** > **Projects**, and selecting **Update Project Connection** from the project's menu.
+     </Admonition>
+   - Under **Deployments Configuration**, you can toggle the **Required** option and select **Preview** to create a Neon branch with every preview deployment (the **Development** and **Production** options here do not do anything — you can ignore them). Enabling the **Required** option means that a database branch must be created for each preview deployment.
+
+   <Admonition type="note" title="A database branch for every preview deployment">
+   A Neon branch with every Vercel preview deployment creates an isolated copy of your database that you can modify without affecting your production database. This means you can preview both application and database changes together.
+   </Admonition>
+
+5. Click **Connect** to finish the setup.
+
+   If you enabled database branching for preview deployments, each commit to a new branch in GitHub creates a database branch in Neon.
+
+   For more about this database branching setup, refer to our detailed guide: [Vercel Native Integration Previews](/docs/guides/vercel-native-integration-previews).
+
 ## Changing your Database configuration
 
 Configuration changes you can make include:
@@ -143,7 +161,7 @@ To create another Database / Neon Project:
 1. On the Vercel Dashboard, navigate to your **Integrations** tab.
 2. Locate the **Neon Postgres** integration, and click **Manage**.
 3. Find the **More Products** card, and click **Install**.
-4. Make your selections for region, compute size settings, and plan on the **Create Database** modal, and click **Continue**.
+4. Make your selections for the region, scale to zero suspend time, and plan on the **Create Database** modal, and click **Continue**. For more about scale to zero, see [Scale to zero](/docs/introduction/scale-to-zero). Only the **Default** suspend setting is supported on the Free Plan.
 
    <Admonition type="note">
    Remember, if you're adding another "Database", you're' already on a Neon Plan, which will be identified on the modal by a **Current** tag. Select a different plan will change your Neon Plan for all of your "Databases". So, don't select a different plan unless you actually want to change your plan for all of your "Databases".
@@ -173,10 +191,18 @@ To monitor usage in Vercel:
 
 When you install the Neon Postgres Native Integration from the Vercel Marketplace, you have access to all the same Neon plans that are available to anyone signing up for Neon directly. Changing your plan (upgrading or downgrading) is performed in Vercel.
 
-1. On the Vercel Dashboard, navigate to **Storage** tab.
-2. Select **Settings**.
-3. In the **Update configuration** section, select **Change Configuration**.
-4. Select the desired **Installation plan**, and click **Save**.
+1. On the Vercel Dashboard, navigate to the **Storage** tab.
+2. Select your Neon Database.
+3. Select **Settings** from the sidebar.
+
+   ![Vercel settings](/docs/guides/vercel_settings.png)
+
+4. In the **Update configuration** section, select **Change Configuration**.
+
+   ![Vercel update configuration modal](/docs/guides/vercel_update_configuration.png)
+
+5. Select the desired **Installation plan**, and click **Save**.
+6. Follow the prompts to complete the plan change, providing your payment method if necessary.
 
 For an overview of Neon's plans, please visit our [Pricing](https://neon.tech/pricing) page.
 
@@ -188,7 +214,8 @@ To delete your database:
 
 1. On the Vercel Dashboard, navigate to **Storage** tab.
 2. Select **Settings**.
-3. Navigate to the Delete Database section and follow the instructions.
+3. Select your Database, if you have more than one.
+4. Navigate to the **Delete Database** section and follow the instructions.
 
 This action is not reversible, so please proceed with caution.
 
@@ -228,6 +255,8 @@ POSTGRES_PRISMA_URL
 
 ## Limitations
 
-When using the Neon Postgres Native Integration, installing the [Neon Postgres Previews Integration](/docs/guides/vercel-previews-integration) on the same Vercel Project is not supported.
+- When using the Neon Postgres Native Integration, installing the [Neon Postgres Previews Integration](/docs/guides/vercel-previews-integration) on the same Vercel Project is not supported. However, the Neon Postgres Native Integration also supports database branches for preview deployments. See [Vercel Native Integration Previews](/docs/guides/vercel-native-integration-previews).
+
+- To use the Neon CLI with the Neon Postgres Native Integration, you must authenticate connections from the CLI client using a Neon API key. Please see [Neon CLI — API keys](/docs/reference/cli-install#api-key). The `neon auth` command requires an account registered through Neon rather than Vercel.
 
 <NeedHelp/>

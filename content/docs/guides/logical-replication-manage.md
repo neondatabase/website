@@ -3,7 +3,7 @@ title: Logical replication commands
 subtitle: Commands for managing your logical replication configuration
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-09-27T18:08:38.284Z'
+updatedOn: '2025-02-03T20:41:57.322Z'
 ---
 
 This topic provides commands for managing publications, subscriptions, and replication slots.
@@ -89,7 +89,7 @@ PUBLICATION my_publication;
 
 A subscription requires a unique name, a database connection string, the name and password of your replication role, and the name of the publication that it subscribes to.
 
-In the example above, `my_subscription` is the name of the subscription that connects to a publication named `my_publication`. In the example above, you would replace the connection details with your Neon database connection string, which you'll find in the **Connection Details** widget on the **Neon Dashboard**.
+In the example above, `my_subscription` is the name of the subscription that connects to a publication named `my_publication`. In the example above, you would replace the connection details with your Neon database connection string. You can find your Neon connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
 
 ### Create a subscription with two publications
 

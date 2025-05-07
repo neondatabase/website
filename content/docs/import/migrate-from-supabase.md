@@ -5,12 +5,16 @@ subtitle: Learn how to migrate your database from Supabase to Neon Postgres usin
 redirectFrom:
   - /docs/import/import-from-supabase
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.069Z'
+updatedOn: '2025-02-11T15:10:57.064Z'
 ---
 
 This guide describes how to migrate a database from Supabase to Neon Postgres.
 
 We use the `pg_dump` and `pg_restore` utilities, which are part of the Postgres client toolset. `pg_dump` works by dumping both the schema and data in a custom format that is compressed and suitable for input into `pg_restore` to rebuild the database.
+
+<Admonition type="note">
+You can also replicate data from Supabase for a near-zero downtime migration. See [Replicate data from Supabase](/docs/guides/logical-replication-supabase-to-neon).
+</Admonition>
 
 ## Prerequisites
 
@@ -25,6 +29,8 @@ We use the `pg_dump` and `pg_restore` utilities, which are part of the Postgres 
   We recommended that you use the `pg_dump` and `pg_restore` programs from the latest version of Postgres, to take advantage of enhancements that might have been made in these programs. To check the version of `pg_dump` or `pg_restore`, use the `-V` option. For example: `pg_dump -V`.
 
 - Review our guide on [Migrating data from Postgres](/docs/import/migrate-from-postgres) for more comprehensive information on using `pg_dump` and `pg_restore`.
+
+<Steps>
 
 ## Prepare your Supabase database
 
@@ -109,7 +115,7 @@ For more information, see [Create a database](/docs/manage/databases#create-a-da
 ### Retrieve Neon connection details
 
 1. In the Neon Console, go to your project dashboard.
-2. Find the **Connection Details** widget.
+2. Select **Connect** to open the **Connect to your database** modal.
 3. Copy the connection string. It will look similar to this:
 
    ```
@@ -174,6 +180,8 @@ After the restore process completes, you should verify that your data has been s
 ## Clean up
 
 After successfully migrating and verifying your data on Neon, you can update your application's connection strings to point to your new Neon database. We recommend that you keep your Supabase dump file (`supabase_dump.bak`) as a backup until you've verified that the migration was successful.
+
+</Steps>
 
 ## Other migration options
 

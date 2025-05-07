@@ -4,19 +4,17 @@ subtitle: Learn how to get a variety of consumption metrics using the Neon API
 redirectFrom:
   - /docs/guides/metrics-api
 enableTableOfContents: true
-updatedOn: '2024-12-17T13:59:40.781Z'
+updatedOn: '2025-04-30T02:26:54.983Z'
 ---
 
-Using the Neon API, you can query a range of account-level and project-level metrics to help gauge your resource consumption.
-
-To learn more about which metrics you can get reports on, see [Available metrics](/docs/guides/partner-consumption-limits#available-metrics) on the [Configure consumption limits](/docs/guides/partner-consumption-limits) page.
+Using the Neon API, you can query a range of account and project metrics to help gauge your resource consumption.
 
 Here are the different ways to retrieve these metrics, depending on how you want them aggregated or broken down:
 
-| Endpoint                                                                                                 | Description                                                                                                              | Plan Availability            |
-| -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ---------------------------- |
-| [Account-level cumulative metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount) | Aggregates all metrics from all projects in an account into a single cumulative number for each metric                   | Scale and Business plan only |
-| [Granular project-level metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject)   | Provides detailed metrics for each project in an account at a specified granularity level (e.g., hourly, daily, monthly) | Scale and Business plan only |
+| Endpoint                                                                                                         | Description                                                                                                              | Plan availability                          |
+| ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------ |
+| [Get account consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)          | Aggregates all metrics from all projects in an account into a single cumulative number for each metric                   | Scale, Business, and Enterprise plans only |
+| [Get consumption metrics for each project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) | Provides detailed metrics for each project in an account at a specified granularity level (e.g., hourly, daily, monthly) | Scale, Business, and Enterprise plans only |
 
 ## Get account-level aggregated metrics
 
@@ -238,6 +236,12 @@ As an Neon partner or paid plan customer, you may have questions related to poll
 ### How often can you poll consumption data for usage reporting and billing?
 
 Neon's consumption data is updated approximately every 15 minutes, so a minimum interval of 15 minutes between calls to our consumption APIs is recommended.
+
+### What is the rate limit for Neon's consumption APIs?
+
+Neon's consumption APIs, [Get account consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount) and [Get consumption metrics for each project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject), are rate-limited to about 30 requests per minute per account. Both APIs share the same rate limiter, so requests to either endpoint count toward the limit.
+
+Neon's consumption APIs use a **token bucket** rate-limiting approach, which refills at a steady rate while allowing short bursts within the bucket size. This behaves more like a sliding window rather than a fixed reset every minute. For more details about this approach, see [Token bucket](https://en.wikipedia.org/wiki/Token_bucket).
 
 ### How often should consumption data be polled to report usage to customers?
 

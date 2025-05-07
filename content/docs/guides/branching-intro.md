@@ -2,7 +2,7 @@
 title: Get started with branching
 subtitle: Everything you need to get started with Neon's branching feature
 enableTableOfContents: true
-updatedOn: '2025-01-10T00:37:35.161Z'
+updatedOn: '2025-01-31T16:41:54.392Z'
 ---
 
 Find detailed information and instructions about Neon's branching feature and how you can integrate branching with your development workflows.
@@ -18,6 +18,8 @@ Learn about branching and how you can apply it in your development workflows.
 <a href="https://neon.tech/blog/database-branching-for-postgres-with-neon" description="Blog: Read about how Neon's branching feature works and what it means for your workflows" icon="split-branch">Database branching for Postgres</a>
 
 <a href="/docs/guides/branch-archiving" description="Learn how Neon automatically archives inactive branches to cost-effective storage" icon="split-branch">Branch archiving</a>
+
+<a href="/docs/guides/branching-schema-only" description="Learn how you can protect sensitive data with schema-only branches" icon="split-branch">Schema-only branches</a>
 
 </DetailIconCards>
 
@@ -67,7 +69,7 @@ Recover lost data or track down issues by restoring a branch to its history, or 
 
 <DetailIconCards>
 
-<a href="/docs/guides/branch-restore" description="Learn how to revert changes or recover lost data using Neon Branch Restore with Time Travel Assist" icon="invert">Branch Restore with Time Travel Assist</a>
+<a href="/docs/guides/branch-restore" description="Learn how to instantly recover your database to any point in time within your restore window" icon="invert">Instant restore with Time Travel Assist</a>
 
 <a href="/docs/guides/time-travel-assist" description="Query point-in-time connections with Time Travel " icon="invert">Time Travel</a>
 

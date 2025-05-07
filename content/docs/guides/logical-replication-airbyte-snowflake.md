@@ -3,7 +3,7 @@ title: Replicate data to Snowflake with Airbyte
 subtitle: Learn how to replicate data from Neon to Snowflake with Airbyte
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-23T17:19:28.785Z'
+updatedOn: '2025-02-11T11:32:44.535Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations. In this guide, you will learn how to define your Neon Postgres database as a data source in Airbyte so that you can stream data to Snowflake.
@@ -146,13 +146,7 @@ Perform the following steps for each table you want to replicate data from:
 2. Create the Postgres publication. Include all tables you want to replicate as part of the publication:
 
    ```sql
-   CREATE PUBLICATION airbyte_publication FOR TABLE <table_name, table_name, table_name>;
-   ```
-
-   Alternatively, you can create a publication for all tables:
-
-   ```sql
-   CREATE PUBLICATION airbyte_publication FOR ALL TABLES;
+   CREATE PUBLICATION airbyte_publication FOR TABLE <tbl1, tbl2, tbl3>;
    ```
 
    The publication name is customizable. Refer to the [Postgres docs](https://www.postgresql.org/docs/current/logical-replication-publication.html) if you need to add or remove tables from your publication.
@@ -164,7 +158,7 @@ The Airbyte UI currently allows selecting any table for Change Data Capture (CDC
 ## Create a Postgres source in Airbyte
 
 1. From your Airbyte Cloud account, select **Sources** from the left navigation bar, search for **Postgres**, and then create a new Postgres source.
-2. Enter the connection details for your Neon database. You can get these details from your Neon connection string, which you'll find in the **Connection Details** widget on the **Dashboard** of your Neon project.
+2. Enter the connection details for your Neon database. You can find your database connection details by clicking the **Connect** button on your **Project Dashboard**.
    For example, given a connection string like this:
 
    ```bash shouldWrap

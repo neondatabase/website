@@ -2,7 +2,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
-const { getAllPosts, getAllChangelogPosts } = require('./src/utils/api-docs');
+const { getAllPosts, getAllChangelogs } = require('./src/utils/api-docs');
 const generateChangelogPath = require('./src/utils/generate-changelog-path');
 const generateDocPagePath = require('./src/utils/generate-doc-page-path');
 
@@ -109,7 +109,7 @@ const defaultConfig = {
   },
   async redirects() {
     const docPosts = await getAllPosts();
-    const changelogPosts = await getAllChangelogPosts();
+    const changelogPosts = await getAllChangelogs();
     const docsRedirects = docPosts.reduce((acc, post) => {
       const { slug, redirectFrom: postRedirects } = post;
       if (!postRedirects || !postRedirects.length) {
@@ -141,6 +141,26 @@ const defaultConfig = {
 
     return [
       {
+        source: '/bm',
+        destination: '/?ref=tbm-p',
+        permanent: true,
+      },
+      {
+        source: '/burningmonk',
+        destination: '/?ref=tbm-p',
+        permanent: true,
+      },
+      {
+        source: '/yc-startups',
+        destination: '/startups',
+        permanent: true,
+      },
+      {
+        source: '/yc-deal-terms',
+        destination: '/startups-deal-terms',
+        permanent: true,
+      },
+      {
         source: '/postgresql',
         destination: '/postgresql/tutorial',
         permanent: true,
@@ -153,11 +173,6 @@ const defaultConfig = {
       {
         source: '/2024-plan-updates',
         destination: '/pricing',
-        permanent: true,
-      },
-      {
-        source: '/blog/category/case-study',
-        destination: '/case-studies',
         permanent: true,
       },
       {
@@ -194,6 +209,11 @@ const defaultConfig = {
       {
         source: '/early-access',
         destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/docs/import/migration-assistant',
+        destination: '/docs/import/import-data-assistant',
         permanent: true,
       },
       {
@@ -252,11 +272,11 @@ const defaultConfig = {
         destination: 'https://console.neon.tech/signup',
         permanent: true,
       },
-      {
-        source: '/ai',
-        destination: '/docs/ai/ai-intro',
-        permanent: true,
-      },
+      // {
+      //   source: '/ai',
+      //   destination: '/docs/ai/ai-intro',
+      //   permanent: true,
+      // },
       {
         source: '/deploy',
         destination: '/stage',
@@ -271,6 +291,16 @@ const defaultConfig = {
         source: '/changelog',
         destination: '/docs/changelog',
         permanent: false,
+      },
+      {
+        source: '/early-access-program',
+        destination: '/docs/introduction/roadmap#join-the-neon-early-access-program',
+        permanent: true,
+      },
+      {
+        source: '/hipaa-compliance-guide',
+        destination: '/docs/security/hipaa',
+        permanent: true,
       },
       ...docsRedirects,
       ...changelogRedirects,

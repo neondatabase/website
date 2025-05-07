@@ -15,6 +15,14 @@
       "url": "https://github.com/bobbyiliev"
     }
   },
+  "boburmirzo": {
+    "name": "Bobur Umurzokov",
+    "position": "Developer Advocate",
+    "link": {
+      "title": "GitHub",
+      "url": "https://github.com/Boburmirzo"
+    }
+  },
   "vkarpov15": {
     "name": "Valeri Karpov",
     "position": "Independent Software Engineer",
@@ -45,6 +53,22 @@
     "link": {
       "title": "GitHub",
       "url": "https://github.com/AdalbertPungu"
+    }
+  },
+  "jess-chadwick": {
+    "name": "Jess Chadwick",
+    "position": "Principal Software Engineer",
+    "link": {
+      "title": "GitHub",
+      "url": "https://github.com/jchadwick"
+    }
+  },
+  "paul-scanlon": {
+    "name": "Paul Scanlon",
+    "position": "Technical Product Marketing Manager",
+    "link": {
+      "title": "GitHub",
+      "url": "https://github.com/PaulieScanlon"
     }
   }
 }

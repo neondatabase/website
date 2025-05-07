@@ -4,7 +4,7 @@ subtitle: Create a database branch for each preview deployment in Vercel
 redirectFrom:
   - /docs/guides/vercel
 enableTableOfContents: true
-updatedOn: '2024-11-15T15:55:44.077Z'
+updatedOn: '2025-04-23T23:57:53.122Z'
 ---
 
 <InfoBlock>
@@ -37,7 +37,7 @@ However, when databases are involved, teams often use a single database containi
 
 Neon’s database branching feature addresses these challenges. A branch is an isolated clone of your database, so creating it only takes a few seconds. This makes it an effective solution for preview deployments, enabling you to create a full database copy for each pull request that includes your database schema changes, which you can apply automatically by adding migrate command to your Vercel deployment configuration.
 
-When you push changes to your application repository, triggering a preview deployment in Vercel, the integration automatically creates a database branch in Neon and connects it to your preview deployment by setting Vercel preview environment variables.
+When you push changes to your application repository, triggering a preview deployment in Vercel, the integration automatically creates a database branch in Neon and connects it to your preview deployment by setting Vercel preview environment variables. Like any new branch, it inherits your project's default compute settings, which determine the compute resources allocated to the branch — like compute size and autoscaling configuration (see [configure default compute](/docs/manage/projects#change-your-projects-default-compute-settings) for more info).
 
 <Admonition type="tip" title="Postgres Previews video introduction">
 For a video introduction to the integration, see [Video: A Postgres database for Every Preview Deployment](/docs/guides/vercel#video-a-postgres-database-for-every-preview-deployment).
@@ -161,6 +161,21 @@ After you add the integration to a Vercel project, Neon creates a database branc
    - The integration sets Vercel preview environment variables to connect the preview deployment to the new branch.
      ![Vercel preview settings](/docs/guides/vercel_preview_settings.png)
 
+## Applying schema changes to database branches
+
+If you're managing your database schema in code using a tool like Prisma Migrate or Drizzle ORM, you can add build commands including a schema migration command to your Vercel deployment configuration to apply schema changes to your database branch. This way, you can deploy application and database changes together in your preview.
+
+To add build commands to your Vercel project previews:
+
+1. On the Vercel Dashboard, open your Vercel project.
+2. Navigate to the **Settings** tab.
+3. On the **General** page, navigate to the **Build & Development Settings** section.
+4. Enable the **Override** option and enter your build commands, including your schema migration command. For example, if you're using Prisma, you might enter the following commands to apply database migrations, generate your Prisma Client, and run your build:
+
+![Vercel build commands](/docs/guides/vercel_build_command.png)
+
+This setup apply any schema changes in your commits to the database branch created for your preview deployment.
+
 ## Manage branches created by the integration
 
 The Neon Postgres Previews Integration creates a branch for each preview deployment. To avoid using up your storage allowances or hitting branch limits, you should delete branches that are no longer required. Different options are supported for branch deletion.
@@ -171,9 +186,9 @@ The integration supports automatic deletion of obsolete preview branches when th
 
 1. In the Neon Console, select your project.
 2. Select the **Integrations** page.
-3. Find the Vercel integration under the **Manage** heading, and click **Manage**.
+3. Find the Vercel integration and click **Manage**.
 4. In the **Vercel integration** drawer, select the **Branches** tab.
-5. Check **Automatically delete obsolete Neon branches**.
+5. Toggle **Automatically delete obsolete Neon branches**.
 
 When a branch is deleted, environment variables associated with the deleted branch are also removed from your Vercel project.
 
@@ -298,6 +313,10 @@ To view permissions, manage which Vercel projects your integration has access to
    <Admonition type="note">
    Removing the Neon Postgres Previews Integration removes the Vercel environment variables set by the integration. It does not remove Neon branches created by the integration. To remove Neon branches, see [Delete a branch](/docs/manage/branches#delete-a-branch).
    </Admonition>
+
+## Custom environment support
+
+The integration supports deployments to [Vercel custom environments](https://vercel.com/docs/deployments/custom-environments). However, [automated branch deletion](#automatic-deletion) does not remove environment variables created by the Neon integration in custom environments. These variables must be deleted manually in the Vercel dashboard.
 
 ## Troubleshoot connection issues
 

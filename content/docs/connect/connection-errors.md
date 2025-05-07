@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/connectivity-issues
   - /docs/connect/connectivity-issues
-updatedOn: '2025-01-20T21:19:45.974Z'
+updatedOn: '2025-04-13T12:01:55.973Z'
 ---
 
 This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered include:
@@ -20,9 +20,11 @@ This topic describes how to resolve connection errors you may encounter when usi
 - [You have exceeded the limit of concurrently active endpoints](#you-have-exceeded-the-limit-of-concurrently-active-endpoints)
 - [Remaining connection slots are reserved for roles with the SUPERUSER attribute](#remaining-connection-slots-are-reserved-for-roles-with-the-superuser-attribute)
 - [Relation not found](#relation-not-found)
+- [Postgrex: DBConnection ConnectionError ssl send: closed](#postgrex-dbconnection-connectionerror-ssl-send-closed)
 - [query_wait_timeout SSL connection has been closed unexpectedly](#querywaittimeout-ssl-connection-has-been-closed-unexpectedly)
 - [The request could not be authorized due to an internal error](#the-request-could-not-be-authorized-due-to-an-internal-error)
 - [Terminating connection due to idle-in-transaction timeout](#terminating-connection-due-to-idle-in-transaction-timeout)
+- [DNS resolution issues](#dns-resolution-issues)
 
 <Admonition type="info">
 Connection problems are sometimes related to a system issue. To check for system issues, please refer to the [Neon status page](https://neonstatus.com/).  
@@ -106,8 +108,8 @@ Neon has tested the following drivers for SNI support:
 | ----------------- | ---------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
 | npgsql            | C#         | &check;     |                                                                                                                                                   |
 | Postgrex          | Elixir     | &check;     | [Requires ssl_opts with server_name_indication](/docs/guides/elixir-ecto#configure-ecto)                                                          |
-| github.com/lib/pq | Go         | &check;     | Supported with macOS Build 436, Windows Build 202, and Ubuntu 20, 21 and 22                                                                       |
-| pgx               | Go         | &check;     | SNI support merged with v5.0.0-beta.3 yet                                                                                                         |
+| github.com/lib/pq | Go         | &check;     | Supported with macOS Build 436, Windows Build 202, and Ubuntu 20, 21 and 22 (Deprecated, use pgx instead)                                         |
+| pgx               | Go         | &check;     | Recommended driver for Go. SNI support available in v5.0.0-beta.3 and later                                                                       |
 | go-pg             | Go         | &check;     | requires `verify-full` mode                                                                                                                       |
 | JDBC              | Java       | &check;     |                                                                                                                                                   |
 | node-postgres     | JavaScript | &check;     | Requires the `ssl: {'sslmode': 'require'}` option                                                                                                 |
@@ -126,7 +128,7 @@ The following error is often the result of an incorrectly defined connection inf
 ERROR:  password authentication failed for user '<user_name>' connection to server at "ep-billowing-fun-123456.us-west-2.aws.neon.tech" (12.345.67.89), port 5432 failed: ERROR:  connection is insecure (try using `sslmode=require`)
 ```
 
-Check your connection to see if it is defined correctly. Your Neon connection string can be obtained from the **Connection Details** widget on the Neon **Dashboard**. It appears similar to this:
+Check your connection to see if it is defined correctly. Your Neon connection string can be obtained by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. It appears similar to this:
 
 ```text shouldWrap
 postgresql://[user]:[password]@[neon_hostname]/[dbname]
@@ -222,6 +224,20 @@ If you are already using connection pooling, you may need to reach out to Neon S
 
 This error is often encountered when attempting to set the Postgres `search_path` session variable using a `SET search_path` statement over a pooled connection. For more information and workarounds, please see [Connection pooling in transaction mode](/docs/connect/connection-pooling#connection-pooling-in-transaction-mode).
 
+## Postgrex: DBConnection ConnectionError ssl send: closed
+
+Postgrex has an `:idle_interval` connection parameter that defines an interval for pinging connections after a period of inactivity. The default setting is `1000ms`. If you rely on Neon's [autosuspend](https://neon.tech/docs/introduction/auto-suspend) feature to scale your compute to zero when your database is not active, this setting will prevent that and you may encounter a `(DBConnection.ConnectionError) ssl send: closed (ecto_sql 3.12.0)` error as a result. As a workaround, you can set the interval to a higher value to allow your Neon compute to suspend. For example:
+
+```elixir
+config :app_name, AppName.Repo
+  # normal connection options
+  ...
+  idle_interval:
+:timer.hours(24)
+```
+
+For additional details, refer to this discussion on our Discord server: [Compute not suspended due to Postgrex idle_interval setting](https://discord.com/channels/1176467419317940276/1295401751574351923/1295419826319265903)
+
 ## query_wait_timeout SSL connection has been closed unexpectedly
 
 The `query_wait_timeout` setting is a PgBouncer configuration option that determines the maximum time a query can wait in the queue before being executed. Neon’s default value for this setting is **120 seconds**. If a query exceeds this timeout while in the queue, it will not be executed. For more details about this setting, refer to [Neon PgBouncer configuration settings](/docs/connect/connection-pooling#neon-pgbouncer-configuration-settings).
@@ -247,5 +263,90 @@ If you encounter this error, you can adjust the `idle_in_transaction_session_tim
 3. Change at the role level: `ALTER ROLE <role> SET idle_in_transaction_session_timeout = 0;` (replace `<role>` with the name of the user role)
 
 Be aware that leaving transactions idle for extended periods can prevent vacuuming and increase the number of open connections. Please use caution and consider only changing the value temporarily, as needed.
+
+## DNS resolution issues
+
+Some users encounter DNS resolution failures when connecting to their Neon database. These issues are often reported when using the **Tables** page in the Neon Console. In such cases, users may see an **Unexpected error happened** message like the one below:
+
+![Unexpected error happened on Tables page](/docs/guides/tables_error.png)
+
+To check for a DNS resolution issue, you can run `nslookup` on your Neon hostname, which is the part of your Neon database [connection string](/docs/reference/glossary#connection-string) starting with your endpoint ID (e.g., `ep-cool-darkness-a1b2c3d4`) and ending with `neon.tech`. For example:
+
+```bash shouldWrap
+nslookup ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech
+```
+
+If the Neon hostname resolves correctly, you'll see output similar to this:
+
+```bash
+nslookup ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech
+Server:		192.168.2.1
+Address:	192.168.2.1#53
+
+Non-authoritative answer:
+p-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech	canonical name = ap-southeast-1.aws.neon.tech.
+Name:	ap-southeast-1.aws.neon.tech
+Address: 203.0.113.10
+Name:	ap-southeast-1.aws.neon.tech
+Address: 203.0.113.20
+Name:	ap-southeast-1.aws.neon.tech
+Address: 203.0.113.30
+```
+
+If the hostname does not resolve, you might see an error like this, where the DNS query is refused:
+
+```bash shouldWrap
+** server can't find ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech: REFUSED
+```
+
+To verify that it's a DNS resolution issue, run the following test using a public DNS resolver, such as Google DNS:
+
+```bash
+nslookup ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech 8.8.8.8
+```
+
+If this succeeds, it's very likely a DNS resolution issue.
+
+**Cause**
+
+Failure to resolve the Neon hostname can happen for different reasons:
+
+- Regional DNS caching or propagation delays
+- Restrictive or misconfigured DNS resolvers (such as those provided by your ISP)
+- System-wide web proxy settings that interfere with DNS resolution
+
+**Workarounds**
+
+1. **Using a Public DNS Resolver**
+
+   - Google DNS: 8.8.8.8, 8.8.4.4
+   - Cloudflare DNS: 1.1.1.1, 1.0.0.1
+
+   These can be changed at:
+
+   - OS level (macOS, Windows, Linux)
+   - Router level
+   - Mobile device network settings
+   - Android Private DNS (configure a trusted provider such as `dns.google` or `1dot1dot1dot1.cloudflare-dns.com`)
+
+   To change your DNS configuration at the OS level:
+
+   - **macOS**: System Settings → Network → Wi-Fi → Details → DNS
+   - **Windows**: Control Panel → Network and Internet → Network Connections → Right-click your connection → Properties → Internet Protocol Version 4 (TCP/IPv4)
+   - **Linux**: Edit `/etc/resolv.conf` or configure your network manager (e.g., NetworkManager, Netplan)
+
+   This article provides detailed instructions: [How to Turn on Private DNS Mode](https://news.trendmicro.com/2023/03/21/how-to-turn-on-private-dns-mode/)
+
+2. **Disable system-wide web proxies**
+
+   If you’re using a proxy configured at the OS level, it may interfere with DNS lookups. To check and disable system proxy settings:
+
+   - **macOS**: System Settings → Network → Wi-Fi → Details → Proxies. Uncheck any active proxy options (e.g., "Web Proxy (HTTP)", "Secure Web Proxy (HTTPS)")
+   - **Windows**: Settings → Network & Internet → Proxy. Turn off "Use a proxy server" if it's enabled
+   - **Linux**: Check your environment variables (e.g., `http_proxy`, `https_proxy`) and system settings under Network/Proxy.
+
+3. **Using a VPN**
+
+   Using a VPN routes DNS queries through a different resolver and often bypasses the issue entirely.
 
 <NeedHelp/>

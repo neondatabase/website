@@ -69,8 +69,8 @@ Second, [insert](postgresql-insert) some rows into the `contacts` table:
 
 ```sql
 INSERT INTO contacts(first_name, last_name, email)
-VALUES('John','Doe','[[email protected]](../cdn-cgi/l/email-protection.html)'),
-      ('David','William','[[email protected]](../cdn-cgi/l/email-protection.html)')
+VALUES('John','Doe','john.doe@example.com'),
+      ('David','William','david.william@example.com')
 RETURNING *;
 ```
 
@@ -79,12 +79,12 @@ Output:
 ```text
  id | first_name | last_name |                email
 ----+------------+-----------+--------------------------------------
-  1 | John       | Doe       | [[email protected]](../cdn-cgi/l/email-protection.html)
-  2 | David      | William   | [[email protected]](../cdn-cgi/l/email-protection.html)
+  1 | John       | Doe       | john.doe@example.com
+  2 | David      | William   | david.william@example.com
 (2 rows)
 ```
 
-Third, create a copy the `contacts` to a new table such as `contacts_backup` table using the following statement:
+Third, create a copy the `contacts` to a new table such as `contacts_backup` table using the following statement:
 
 ```
 CREATE TABLE contact_backup
@@ -104,8 +104,8 @@ Output:
 ```
 id | first_name | last_name |                email
 ----+------------+-----------+--------------------------------------
-  1 | John       | Doe       | [[email protected]](../cdn-cgi/l/email-protection.html)
-  2 | David      | William   | [[email protected]](../cdn-cgi/l/email-protection.html)
+  1 | John       | Doe       | john.doe@example.com
+  2 | David      | William   | david.william@example.com
 (2 rows)
 ```
 
@@ -131,7 +131,7 @@ Output:
 
 The output indicates that the structure of the `contact_backup` table is the same as the `contacts` table except for the indexes.
 
-Sixth, add the primary key and `UNIQUE` constraints to the `contact_backup` table using the following [`ALTER TABLE`](postgresql-alter-table) statements:
+Sixth, add the primary key and `UNIQUE` constraints to the `contact_backup` table using the following [`ALTER TABLE`](postgresql-alter-table) statements:
 
 ```sql
 ALTER TABLE contact_backup ADD PRIMARY KEY(id);

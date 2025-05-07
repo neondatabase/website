@@ -2,7 +2,7 @@
 title: Postgres sample data
 subtitle: 'Import sample data for learning, testing, and exploring Neon'
 enableTableOfContents: true
-updatedOn: '2024-10-26T08:44:49.114Z'
+updatedOn: '2025-02-05T22:33:33.743Z'
 ---
 
 This guide describes how to download and install sample data for use with Neon.
@@ -12,7 +12,7 @@ This guide describes how to download and install sample data for use with Neon.
 - [wget](https://www.gnu.org/software/wget/) for downloading datasets, unless otherwise instructed. If your system does not support `wget`, you can paste the source file address in your browser's address bar.
 - A `psql` client for connecting to your Neon database and loading data. This client is included with a standalone PostgreSQL installation. See [PostgreSQL Downloads](https://www.postgresql.org/download/).
 - A `pg_restore` client if you are loading the [employees](#employees-database) or [postgres_air](#postgres-air-database) database. The `pg_restore` client is included with a standalone PostgreSQL installation. See [PostgreSQL Downloads](https://www.postgresql.org/download/).
-- A Neon database connection string. After creating a database, you can obtain the connection string from the **Connection Details** widget on the Neon **Dashboard**. In the instructions that follow, replace `postgresql://[user]:[password]@[neon_hostname]/[dbname]` with your connection string.
+- A Neon database connection string. After creating a database, you can find the connection details by clicking the **Connect** button on your **Project Dashboard**. In the instructions that follow, replace `postgresql://[user]:[password]@[neon_hostname]/[dbname]` with your connection string.
 - A Neon [Pro](/docs/introduction/pro-plan) account if you intend to install a dataset larger than 3 GB.
 - Instructions for each dataset require that you create a database. You can do so from a client such as `psql` or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
 
@@ -462,7 +462,7 @@ An OpenAI example dataset containing pre-computed vector embeddings for 25000 Wi
    ```
 
 <Admonition type="note">
-If you encounter a memory error related to the `maintenance_work_mem` setting, refer to [Indexing vectors](/docs/extensions/pgvector#indexing-vectors) for how to increase this setting.
+If you encounter a memory error related to the `maintenance_work_mem` setting, refer to [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size) for how to increase this setting.
 </Admonition>
 
 - Source: [OpenAI](https://github.com/openai/openai-cookbook/tree/main/examples/vector_databases)

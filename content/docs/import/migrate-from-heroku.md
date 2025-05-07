@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/how-to-guides/hasura-heroku-migration
   - /docs/how-to-guides/import-from-heroku
   - /docs/import/import-from-heroku
-updatedOn: '2024-11-15T20:32:35.030Z'
+updatedOn: '2025-02-03T20:41:57.341Z'
 ---
 
 This guide describes how to import your data from Heroku Postgres to Neon.
@@ -14,19 +14,14 @@ This guide describes how to import your data from Heroku Postgres to Neon.
 
 The instructions assume that you have installed the Heroku CLI, which is used to transfer data from Heroku. For installation instructions, see [The Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).
 
-To migrate your data from Heroku to Neon:
-
-1. [Create a Neon project and copy the connection string](#create-a-neon-project-and-copy-the-connection-string)
-2. [Retrieve your Heroku app name and database name](#retrieve-your-heroku-app-name-and-database-name)
-3. [Import your data](#import-your-data)
-4. [Verify that your data was imported](#verify-that-your-data-was-imported)
+<Steps>
 
 ## Create a Neon project and copy the connection string
 
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click **New Project**.
 3. Specify your project settings and click **Create Project**.
-4. After creating a project, you are directed to the Neon **Dashboard**, where a connection string with your password is provided under **Connection Details**. Copy the connection string. It is required to import your data from Heroku.
+4. After creating a project, you are directed to the Neon **Dashboard**, where you can click **Connect** to find your database connection details. Copy the connection string. It is required to import your data from Heroku.
 
    The example connection string used the instructions that follow is:
 
@@ -154,4 +149,4 @@ heroku-cli: Pulling complete.
 3. Select the **Tables** tab.
 4. In the sidebar, verify that your database tables appear under the **Tables** heading.
 
-<NeedHelp/>
+</Steps>

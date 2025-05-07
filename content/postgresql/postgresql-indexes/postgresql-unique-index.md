@@ -44,11 +44,11 @@ When you define a [primary key](../postgresql-tutorial/postgresql-primary-key) o
 
 ## PostgreSQL UNIQUE index examples
 
-Let’s explore some examples of using the PostgreSQL unique indexes.
+Let's explore some examples of using the PostgreSQL unique indexes.
 
 ### 1\) Unique indexes for a primary key column and a column with a unique constraint
 
-First, [create a table](../postgresql-tutorial/postgresql-create-table) called `employees` :
+First, [create a table](../postgresql-tutorial/postgresql-create-table) called `employees` :
 
 ```sql
 CREATE TABLE employees (
@@ -106,14 +106,14 @@ Third, [insert a new row](../postgresql-tutorial/postgresql-insert) into the `em
 
 ```sql
 INSERT INTO employees(first_name, last_name, email, mobile_phone)
-VALUES ('John','Doe','[[email protected]](../cdn-cgi/l/email-protection.html)', '(408)-555-1234');
+VALUES ('John','Doe','john.doe@example.com', '(408)-555-1234');
 ```
 
 Fourth, attempt to insert another row with the same phone number:
 
 ```sql
 INSERT INTO employees(first_name, last_name, email, mobile_phone)
-VALUES ('Jane','Doe','[[email protected]](../cdn-cgi/l/email-protection.html)', '(408)-555-1234');
+VALUES ('Jane','Doe','jane.doe@example.com', '(408)-555-1234');
 ```
 
 PostgreSQL issues the following error due to the duplicate mobile phone number:

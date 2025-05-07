@@ -7,7 +7,7 @@ redirectFrom:
   - /docs/integrations/prisma
   - /docs/guides/prisma-guide
   - /docs/guides/prisma-migrate
-updatedOn: '2024-11-26T11:42:06.487Z'
+updatedOn: '2025-04-24T23:10:11.388Z'
 ---
 
 Prisma is an open-source, next-generation ORM that lets you to manage and interact with your database. This guide covers the following topics:
@@ -23,8 +23,8 @@ Prisma is an open-source, next-generation ORM that lets you to manage and intera
 
 To establish a basic connection from Prisma to Neon, perform the following steps:
 
-1. Retrieve your Neon connection string. In the **Connection Details** widget on the Neon **Dashboard**, select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
-   ![Connection details widget](/docs/connect/connection_details.png)
+1. Retrieve your Neon connection string. You can find it by clicking the **Connect** button on your **Project Dashboard**. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
+   ![Connection details modal](/docs/connect/connection_details.png)
    The connection string includes the user name, password, hostname, and database name.
 
 2. Add the following lines to your `prisma/schema.prisma` file to identify the data source and database URL:
@@ -57,7 +57,7 @@ Serverless functions can require a large number of database connections as deman
 DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require"
 ```
 
-A pooled Neon connection string adds `-pooler` to the endpoint ID, which tells Neon to use a pooled connection. You can add `-pooler` to your connection string manually or copy a pooled connection string from the **Connection Details** widget on the Neon **Dashboard**. Enable the **Connection pooling** toggle to add the `-pooler` option to the connection string.
+A pooled Neon connection string adds `-pooler` to the endpoint ID, which tells Neon to use a pooled connection. You can add `-pooler` to your connection string manually or copy a pooled connection string from **Connect to your database** modal — click **Connect** on your Project Dashboard to open the modal.
 
 ### Connection pooling with Prisma Migrate
 
@@ -163,7 +163,7 @@ Update your Prisma Client instance:
 import 'dotenv/config';
 import { PrismaClient } from '@prisma/client';
 import { PrismaNeon } from '@prisma/adapter-neon';
-import { Pool, neonConfig } from '@neondatabase/serverless';
+import { neonConfig } from '@neondatabase/serverless';
 
 import ws from 'ws';
 neonConfig.webSocketConstructor = ws;
@@ -178,8 +178,7 @@ neonConfig.webSocketConstructor = ws;
 
 const connectionString = `${process.env.DATABASE_URL}`;
 
-const pool = new Pool({ connectionString });
-const adapter = new PrismaNeon(pool);
+const adapter = new PrismaNeon({ connectionString });
 const prisma = global.prisma || new PrismaClient({ adapter });
 
 if (process.env.NODE_ENV === 'development') global.prisma = prisma;

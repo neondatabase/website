@@ -5,20 +5,20 @@ subtitle: Find detailed instructions for integration across various platforms an
 enableTableOfContents: true
 redirectFrom:
   - /docs/integrations/integrations-list/
-updatedOn: '2024-12-26T17:57:49.401Z'
+updatedOn: '2025-04-23T12:26:38.333Z'
 ---
 
 ## Monitor
 
-<TechnologyNavigation open>
+<TechCards>
 
 <a href="/docs/guides/datadog" title="Datadog" description="Send metrics and events from Neon Postgres to Datadog" icon="datadog"></a>
 
-</TechnologyNavigation>
+</TechCards>
 
 ## Deploy
 
-<TechnologyNavigation open>
+<TechCards>
 
 <a href="/docs/guides/vercel-overview" title="Vercel" description="Learn how to integrate Neon with Vercel" icon="vercel"></a>
 
@@ -38,25 +38,27 @@ updatedOn: '2024-12-26T17:57:49.401Z'
 
 <a href="/docs/guides/render" title="Render" description="Use Neon Postgres with Render" icon="render"></a>
 
-</TechnologyNavigation>
+</TechCards>
 
 ## Serverless
 
-<TechnologyNavigation open>
+<TechCards>
 
 <a href="/docs/serverless/serverless-driver" title="Neon" description="Connect with the Neon serverless driver" icon="neon"></a>
 
 <a href="/docs/guides/aws-lambda" title="AWS Lambda" description="Connect from AWS Lambda to Neon" icon="aws-lambda"></a>
 
-<a href="https://neon.tech/guides/query-postgres-azure-functions" title="Azure Functions" description="Connect from Azure Functions to Neon" icon="azure"></a>
+<a href="/guides/query-postgres-azure-functions" title="Azure Functions" description="Connect from Azure Functions to Neon" icon="azure"></a>
 
-</TechnologyNavigation>
+</TechCards>
 
 ## Query
 
-<TechnologyNavigation open>
+<TechCards>
 
 <a href="/docs/guides/exograph" title="Exograph" description="Use Exograph with Neon" icon="exograph"></a>
+
+<a href="/docs/guides/postgrest" title="PostgREST" description="Create a REST API from your Neon database" icon="postgresql"></a>
 
 <a href="/docs/guides/ferretdb" title="FerretDB" description="Use FerretDB with Neon" icon="ferret"></a>
 
@@ -74,11 +76,11 @@ updatedOn: '2024-12-26T17:57:49.401Z'
 
 <a href="/docs/guides/outerbase" title="Outerbase" description="Connect Outerbase to Neon" icon="outerbase"></a>
 
-</TechnologyNavigation>
+</TechCards>
 
 ## Develop
 
-<TechnologyNavigation open>
+<TechCards>
 
 <a href="/docs/guides/neon-github-app" title="GitHub integration" description="Use the Neon GitHub integration" icon="github"></a>
 
@@ -92,11 +94,13 @@ updatedOn: '2024-12-26T17:57:49.401Z'
 
 <a href="/docs/guides/knex" title="Knex" description="Connect from Knex to Neon" icon="knex"></a>
 
-</TechnologyNavigation>
+<a href="/guides/convex-neon" title="Convex" description="Integrate Convex with Neon Postgres" icon="convex"></a>
+
+</TechCards>
 
 ## Replicate data from Neon
 
-<TechnologyNavigation open>
+<TechCards>
 
 <a href="/docs/guides/logical-replication-airbyte" title="Airbyte" description="Replicate data from Neon with Airbyte" icon="airbyte"></a>
 
@@ -126,11 +130,11 @@ updatedOn: '2024-12-26T17:57:49.401Z'
 
 <a href="/docs/guides/logical-replication-inngest" title="Inngest" description="Replicate data from Neon to Inngest" icon="inngest"></a>
 
-</TechnologyNavigation>
+</TechCards>
 
 ## Replicate data to Neon
 
-<TechnologyNavigation open>
+<TechCards>
 
 <a href="/docs/guides/logical-replication-alloydb" title="AlloyDB" description="Replicate data from AlloyDB to Neon" icon="alloydb"></a>
 
@@ -144,11 +148,11 @@ updatedOn: '2024-12-26T17:57:49.401Z'
 
 <a href="/docs/guides/logical-replication-rds-to-neon" title="RDS" description="Replicate data from AWS RDS PostgreSQL to Neon" icon="aws-rds"></a>
 
-</TechnologyNavigation>
+</TechCards>
 
 ## Schema Migration
 
-<TechnologyNavigation open>
+<TechCards>
 
 <a href="/docs/guides/django-migrations" title="Django" description="Connect a Django application to Neon" icon="django"></a>
 
@@ -170,11 +174,11 @@ updatedOn: '2024-12-26T17:57:49.401Z'
 
 <a href="/docs/guides/sqlalchemy" title="SQLAlchemy" description="Connect an SQLAlchemy application to Neon" icon="sqlalchemy"></a>
 
-</TechnologyNavigation>
+</TechCards>
 
 ## Authenticate
 
-<TechnologyNavigation open>
+<TechCards>
 
 <a href="/docs/guides/auth-auth0" title="Auth0" description="Authenticate Neon Postgres application users with Auth0" icon="auth0"></a>
 
@@ -184,4 +188,4 @@ updatedOn: '2024-12-26T17:57:49.401Z'
 
 <a href="/docs/guides/auth-okta" title="Okta" description="Authenticate Neon Postgres application users with Okta" icon="okta"></a>
 
-</TechnologyNavigation>
+</TechCards>

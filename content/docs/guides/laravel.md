@@ -2,15 +2,14 @@
 title: Connect from Laravel to Neon
 subtitle: Set up a Neon project in seconds and connect from a Laravel application
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.061Z'
+updatedOn: '2025-04-20T15:44:26.050Z'
 ---
 
 Laravel is a web application framework with expressive, elegant syntax. Connecting to Neon from Laravel is the same as connecting to a standalone Postgres installation from Laravel. Only the connection details differ.
 
 To connect to Neon from Laravel:
 
-1. [Create a Neon Project](#create-a-neon-project)
-2. [Configure the connection](#configure-the-connection)
+<Steps>
 
 ## Create a Neon project
 
@@ -33,7 +32,9 @@ DB_USERNAME=[user]
 DB_PASSWORD=[password]
 ```
 
-You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find your database connection details by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+
+</Steps>
 
 ## Connection issues
 

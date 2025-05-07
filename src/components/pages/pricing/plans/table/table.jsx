@@ -61,7 +61,7 @@ const TableHeading = ({
         size="xs"
         theme={isFeaturedPlan ? 'primary' : 'gray-15'}
         to={buttonUrl}
-        tag_name={`Details Table Top > ${label}`}
+        tagName={`Details Table Top > ${label}`}
         onClick={() => {
           posthog.capture('ui_interaction', {
             action: 'pricing_page_get_started_clicked',
@@ -241,7 +241,12 @@ const Table = () => {
                             </span>
                             {item[key]?.subtitle && (
                               <span
-                                className="mt-1 text-sm font-light leading-snug tracking-tight text-gray-new-70"
+                                className={clsx(
+                                  'mt-1 text-sm font-light leading-snug tracking-tight text-gray-new-70',
+                                  '[&_a]:border-b [&_a]:border-gray-new-70',
+                                  '[&_a]:transition-colors [&_a]:duration-200',
+                                  '[&_a:hover]:border-transparent [&_a:hover]:text-green-45'
+                                )}
                                 dangerouslySetInnerHTML={{ __html: item[key].subtitle }}
                               />
                             )}
@@ -338,7 +343,7 @@ const Table = () => {
                   size="xs"
                   theme={isHighlightedColumn ? 'primary' : 'gray-15'}
                   to={labelList[key].buttonUrl}
-                  tag_name={`Details Table Bottom > ${labelList[key].label}`}
+                  tagName={`Details Table Bottom > ${labelList[key].label}`}
                   onClick={() => {
                     posthog.capture('ui_interaction', {
                       action: 'pricing_page_get_started_clicked',

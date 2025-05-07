@@ -9,6 +9,13 @@ export default {
       'The database you love, on a serverless platform designed to help you build reliable and scalable applications faster.',
     pathname: '',
   },
+  ai: {
+    title: 'Postgres for AI — Neon',
+    description:
+      'Build AI agents faster with Neon, the serverless Postgres optimized for vectors, scale, and speed.',
+    imagePath: '/images/social-previews/ai.jpg',
+    pathname: LINKS.ai,
+  },
   aiChat: {
     title: 'Neon AI Chat',
     description: 'AI assistant trained on documentation, help articles, and other content',
@@ -26,6 +33,11 @@ export default {
       'Learn about Neon and how it can help you build better with Serverless Postgres by reading our blog posts.',
     imagePath: '/images/social-previews/blog.jpg',
     pathname: LINKS.blog,
+  },
+  guides: {
+    title: 'Guides — Neon',
+    description: 'Learn how to use Neon with our guides.',
+    pathname: LINKS.guides,
   },
   branching: {
     title: 'Instant branching for Postgres — Neon',
@@ -53,6 +65,13 @@ export default {
     pathname: LINKS.cli,
     imagePath: '/images/social-previews/cli.jpg',
   },
+  faster: {
+    title: 'Faster is what we help you ship - Neon',
+    description: 'A page dedicated to teams shipping faster experiences faster on Neon.',
+    imagePath: '/images/social-previews/faster.jpg',
+    pathname: LINKS.faster,
+    type: 'article',
+  },
   contactSales: {
     title: 'Contact Sales — Neon',
     description: 'Interested in learning more about our plans and pricing? Contact our sales team.',
@@ -79,17 +98,18 @@ export default {
     pathname: LINKS.developerDays1,
   },
   enterprise: {
-    title: 'Neon for Enterprises: Postgres Fleets - Neon',
+    title: 'Neon for Enterprise - Neon',
     description:
-      'Enterprises use Neon to deliver a Postgres layer that is automated, instantly scalable and cost efficient.',
+      'Switch to Neon for improved scalability, reliability, and engineering efficiency. For developers and AI Agents.',
     pathname: LINKS.enterprise,
     imagePath: '/images/social-previews/enterprise.jpg',
   },
-  generateTicket: {
-    title: 'Grab the ticket for Neon Deploy',
+  serverlessApps: {
+    title: 'Postgres for serverless apps — Neon',
     description:
-      "Generate a unique ticket image with your GitHub profile and participate in Neon's right after the conference.",
-    pathname: LINKS.generateTicket,
+      'Scale your app effortlessly with Neon’s serverless Postgres. With automatic scaling, pooler built on pgBouncer, and usage-based pricing.',
+    pathname: `${LINKS.useCases}/serverless-apps`,
+    imagePath: '/images/social-previews/serverless-apps.jpg',
   },
   partners: {
     title: 'Accelerate your business with Neon partnership — Neon',
@@ -106,6 +126,13 @@ export default {
       'Neon brings serverless architecture to Postgres, which allows us to offer you flexible usage and volume-based plans.',
     imagePath: '/images/social-previews/pricing.jpg',
     pathname: LINKS.pricing,
+  },
+  report: {
+    title: 'Impact of Postgres restores survey',
+    description:
+      'We asked 50 developers managing production Postgres about recovery times and their business impact.',
+    pathname: LINKS.report,
+    imagePath: '/images/social-previews/report.jpg',
   },
   thankYou: {
     title: 'Thank you for subscribing — Neon',
@@ -133,12 +160,10 @@ export default {
     pathname: LINKS.flow,
     type: 'article',
   },
-  // TODO: Add REAL SEO data for scalable architecture page
   scalableArchitecture: {
     title: 'Neon Scalable Architecture — Neon',
     description:
       'Neon is a distributed team building open-source, cloud-native Postgres. We are a well-funded startup with deep knowledge of Postgres internals and decades of experience building databases.',
-    // imagePath: '',
     pathname: LINKS.scalableArchitecture,
   },
   stage: {
@@ -147,15 +172,18 @@ export default {
       'Join us online on October 30th at 10:00 AM PT to learn how Neon empowers developers to ship faster with Postgres.',
     pathname: LINKS.stage,
   },
-  error: {
-    title: 'Page Is Broken — Neon',
+  security: {
+    title: 'Security — Neon',
+    description:
+      "Discover Neon's security & compliance standards, including SOC 2, GDPR, and HIPAA, with encryption and access controls to protect your data.",
+    imagePath: '/images/social-previews/security.jpg',
+    pathname: LINKS.security,
   },
-  404: {
-    title: 'Page Not Found — Neon',
-  },
-  '404-ticket': {
-    title: 'Ticket Not Found - Neon',
-    imagePath: '/images/social-previews/no-name-ticket.jpg',
+  generateTicket: {
+    title: 'Grab the ticket for Neon Deploy',
+    description:
+      "Generate a unique ticket image with your GitHub profile and participate in Neon's right after the conference.",
+    pathname: LINKS.generateTicket,
   },
   ticket({ name, login: githubHandle }) {
     const userName = name || githubHandle;
@@ -164,6 +192,16 @@ export default {
       title: `${userName}'s ticket for Neon Deploy - Neon`,
       description: `Join ${userName} virtually at Deploy on October 30th to learn how Neon empowers developers to ship faster with Postgres.`,
     };
+  },
+  '404-ticket': {
+    title: 'Ticket Not Found - Neon',
+    imagePath: '/images/social-previews/no-name-ticket.jpg',
+  },
+  error: {
+    title: 'Page Is Broken — Neon',
+  },
+  404: {
+    title: 'Page Not Found — Neon',
   },
 };
 
@@ -175,8 +213,6 @@ export const getBlogCategoryDescription = (category) => {
       return 'Dive into the technical depths of Neon serverless Postgres. Optimize performance, scalability, and reliability. Explore our cutting-edge approach.';
     case 'community':
       return 'Join the vibrant serverless Postgres community. Engage in discussions, tutorials, and success stories. Connect with developers and industry experts.';
-    case 'all-posts':
-      return 'Get a complete overview of the Neon blog posts history in chronological order.';
     default:
       return 'Learn about Neon and how it can help you build better with Serverless Postgres by reading our blog posts.';
   }
