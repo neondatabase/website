@@ -277,7 +277,6 @@ s3_client = boto3.client(
 
 app = Flask(__name__)
 
-
 # Use a global PostgreSQL connection instead of creating a new one for each request in production
 def get_db_connection():
     return psycopg2.connect(os.getenv("DATABASE_URL"))
@@ -356,7 +355,7 @@ def save_metadata_route():
     except (psycopg2.Error, ValueError) as e:
         print(f"Metadata Save Error: {e}")
         return jsonify(
-            {"success": False, "error": f"Failed to save metadata: {e}"}
+            {"success": False, "error": "Failed to save metadata"}
         ), 500
     except Exception as e:
         print(f"Unexpected Metadata Save Error: {e}")
