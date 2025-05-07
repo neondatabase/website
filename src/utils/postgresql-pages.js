@@ -3,7 +3,7 @@ const fs = require('fs');
 const { glob } = require('glob');
 const matter = require('gray-matter');
 
-const POSTGRESQL_DIR_PATH = require('../constants/content');
+const { POSTGRESQL_DIR_PATH } = require('../constants/content');
 
 const getExcerpt = require('./get-excerpt');
 

@@ -40,28 +40,36 @@ ActionItem.propTypes = {
 };
 
 const CopyMarkdownButton = ({ rawFileLink }) => {
-  const [copied, setCopied] = useState(false);
+  const [status, setStatus] = useState('default'); // 'default' | 'copied' | 'failed'
+
+  const getButtonText = () => {
+    if (status === 'failed') return 'Failed to copy';
+    if (status === 'copied') return 'Copied!';
+    return 'Copy page as markdown';
+  };
 
   const copyPageToClipboard = async () => {
     try {
       const response = await fetch(rawFileLink);
       const content = await response.text();
       copyToClipboard(content);
-      setCopied(true);
+      setStatus('copied');
       setTimeout(() => {
-        setCopied(false);
+        setStatus('default');
       }, 2000);
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('Failed to copy file content:', error);
+      setStatus('failed');
+      setTimeout(() => {
+        setStatus('default');
+      }, 2000);
     }
   };
 
   return (
     <ActionItem
       icon={MarkdownIcon}
-      text={copied ? 'Copied!' : 'Copy page as markdown'}
-      onClick={copied ? undefined : copyPageToClipboard}
+      text={getButtonText()}
+      onClick={status === 'copied' ? undefined : copyPageToClipboard}
     />
   );
 };
