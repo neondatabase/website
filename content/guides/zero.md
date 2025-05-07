@@ -58,6 +58,7 @@ With your Neon database prepared, let's set up the `hello-zero` example applicat
     cd hello-zero
     npm install
     ```
+
     This clones the `hello-zero` repository and installs the necessary Node.js dependencies.
 
     <Admonition type="note" title="Using non-npm package managers?">
@@ -84,6 +85,7 @@ With your Neon database prepared, let's set up the `hello-zero` example applicat
     # other environment variables...
     ZERO_UPSTREAM_DB="YOUR_NEON_CONNECTION_STRING"
     ```
+
     > Replace `YOUR_NEON_CONNECTION_STRING` with the actual connection string from your Neon project dashboard which you copied earlier.
 
 4.  **Run the `zero-cache` service:**
@@ -92,6 +94,7 @@ With your Neon database prepared, let's set up the `hello-zero` example applicat
     ```bash
     npm run dev:zero-cache
     ```
+
     This command starts the `zero-cache` process. It connects to your Neon database, applies necessary [permissions](https://zero.rocicorp.dev/docs/permissions) required for the `hello-zero` application, and starts the replication process. The terminal will display logs indicating the connection status and replication progress. Keep this terminal window open as it runs the `zero-cache` service.
 
     <Admonition type="tip" title="Topology">
@@ -99,7 +102,7 @@ With your Neon database prepared, let's set up the `hello-zero` example applicat
     </Admonition>
 
 5.  **Run the `hello-zero` UI:**
-    Open a *new* terminal window, navigate back to the `hello-zero` directory, and run the following command to start the frontend application:
+    Open a _new_ terminal window, navigate back to the `hello-zero` directory, and run the following command to start the frontend application:
     ```bash
     npm run dev:ui
     ```
@@ -111,13 +114,13 @@ You should now have the `hello-zero` application running in your browser. It con
 
 1.  **Access the application:** Open `http://localhost:5173` in your browser.
 2.  **Test functionality:** Try the features described in the [Zero Quickstart Overview](https://zero.rocicorp.dev/docs/quickstart#quick-overview):
-    *   Click **Add Messages**. New messages should appear instantly.
-    *   Open the app in a second browser tab or window. Changes made in one window should appear nearly instantaneously in the other.
-    *   Click **Login**. You'll be logged in as a random user.
-    *   Try **Remove Messages**. This should work now that you are logged in.
-        ![Demo of the hello-zero app](/docs/guides/hello-zero-demo.gif)
-    *   Try editing a message (pencil icon). You should only be able to edit messages created by the user you are logged in as.
-    *   Use the **From** or **Contains** filters.
+    - Click **Add Messages**. New messages should appear instantly.
+    - Open the app in a second browser tab or window. Changes made in one window should appear nearly instantaneously in the other.
+    - Click **Login**. You'll be logged in as a random user.
+    - Try **Remove Messages**. This should work now that you are logged in.
+      ![Demo of the hello-zero app](/docs/guides/hello-zero-demo.gif)
+    - Try editing a message (pencil icon). You should only be able to edit messages created by the user you are logged in as.
+    - Use the **From** or **Contains** filters.
 3.  **Verify data in Neon (Optional):** In the Neon Console, navigate to **Tables** and select the `message` table. You should see the messages you added in the application. This confirms that data is being synchronized correctly between the application, `zero-cache`, and Neon.
     ![Neon messages table](/docs/guides/zero-message-table.png)
 
@@ -126,7 +129,7 @@ Congratulations! You have successfully set up Rocicorp Zero with Neon Postgres u
 <Admonition type="note" title="Schema Changes">
 Zero uses Postgres event triggers for efficient schema migration handling. However, Neon currently does not support event triggers for tracking DDL (schema) changes due to limitations around superuser privileges.
 
-Without event triggers, Zero ensures correctness by performing a **full reset of the `zero-cache` and all connected client states** whenever *any* schema change is detected.
+Without event triggers, Zero ensures correctness by performing a **full reset of the `zero-cache` and all connected client states** whenever _any_ schema change is detected.
 
 While this reset mechanism works, it can be inefficient for larger databases (e.g., > 1GB) or applications undergoing frequent schema evolution. For smaller databases or projects with stable schemas, the impact might be acceptable. Please consider this limitation when managing schema changes for your Zero application on Neon, especially for larger projects.
 </Admonition>
