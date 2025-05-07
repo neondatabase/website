@@ -68,10 +68,7 @@ You can also create branches in the Neon Console. See [Create a branch](/docs/ma
 
 ## Delete branches
 
-Important points about branch deletion:
-
-- A branch deletion action cannot be undone.
-- You cannot delete a branch that has children. You need to delete the child branches first.
+For branch deletion restrictions, see the [Delete a branch](/docs/manage/branches#delete-a-branch).
 
 To delete a branch in the Azure Portal:
 
