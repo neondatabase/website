@@ -7,11 +7,7 @@ createdAt: '2025-05-08T00:00:00.000Z'
 updatedOn: '2025-05-08T00:00:00.000Z'
 ---
 
-With [Tembo.io](https://legacy.tembo.io/cloud) sunsetting its managed Postgres service, you're likely seeking a new database solution. Neon offers a modern, serverless platform that is 100% pure Postgres with [extra features](https://neon.tech/docs/guides/neon-features). It provides the power and familiarity of Postgres within a fully managed, developer-friendly environment.
-
-<Admonition type="note">
-If you have questions or require help with migrating large or complex production datasets from Tembo.io, please [contact Neon for migration assistance](/migration-assistance).
-</Admonition>
+[Tembo.io](https://legacy.tembo.io/cloud) recently announced that it's sunsetting its managed Postgres service. If you've decided to migrate your serviced from Tembio.io to Neon, follow the steps in this guide. If you're facing a production migration requiring minimal downtime, [reach out to us](/migration-assistance).
 
 <Admonition type="warning" title="Tembo Shutdown Timeline">
 Please be aware of Tembo's [official shutdown timeline](https://tembo-io.notion.site/Tembo-Cloud-Migration-Guide-1de7c9367d6a80349570e7469ba7f17b):
@@ -25,15 +21,15 @@ Please be aware of Tembo's [official shutdown timeline](https://tembo-io.notion.
 Plan your migration accordingly to avoid any disruption to your services.
 </Admonition>
 
-## Tembo vs. Neon Postgres
+## Tembo—Neon feature comparison
 
-While both Tembo and Neon provide managed Postgres, Neon's architecture offers distinct advantages. Here’s a quick comparison of key features:
+While both Tembo and Neon provide managed Postgres, Neon's architecture offers some advantages. Here’s a quick comparison of key features:
 
 | Feature                   | Tembo                                | Neon Postgres|
 | ------------------------- | ------------------------------------ | ------------ |
 | **Compute**               | Manual scaling                       | Autoscaling, scale-to-zero  |
 | **Branching**             | NA                                   | Instant data branching for dev, test, and CI/CD workflows ("branch per feature") |
-| **Storage**               | Manual scaling of storage            | Bottomless, auto-scaling storage     |
+| **Storage**               | Manual scaling of storage            | Auto-scaling storage     |
 | **Point-in-Time Restore** | Standard backup/restore capabilities | Instant PITR to any point within your history retention window |
 
 ## Migration options overview
