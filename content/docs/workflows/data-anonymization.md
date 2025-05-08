@@ -141,10 +141,9 @@ You should see that the sensitive data has been replaced with fake values.
 - Test the anonymization process on a small subset of data before applying it to the entire database.
 - Consider using different anonymization strategies for different columns based on their sensitivity.
 - Regularly review and update your masking strategies to ensure you cover all sensitive data.
-- You can enable the `anon` extension on your parent branch and set masking rules there, so you don't have to do it every time when creating a child branch, **but be careful not to init and run the anonymization process on the parent branch. Only do this on your child branch.** 
+- You can enable the `anon` extension on your parent branch and set masking rules there, so you don't have to do it every time when creating a child branch, **but be careful not to init and run the anonymization process on the parent branch. Only do this on your child branch.**
 
 </Steps>
-
 
 ## Automate data anonymization
 
@@ -185,7 +184,7 @@ The masking rules are the same as in the manual anonymization steps above.
 
 <Admonition type="note">
 This is a simplified example. In a production environment, you should consider adding error handling, security measures, and other best practices.
-</Admonition> 
+</Admonition>
 
 ```yaml
 name: PR Open - Create Branch, Run Static Anonymization
