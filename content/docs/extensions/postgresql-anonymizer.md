@@ -12,7 +12,7 @@ This guide introduces the `anon` extension and demonstrates how to implement mas
 
 <CTA />
 
-## Enable the Extension
+## Enable the extension
 
 <Admonition type="note">
 The `anon` extension is currently [experimental](/docs/pg-extensions#experimental-extensions) and may change in future releases.
@@ -24,21 +24,21 @@ Enable the `anon` extension in your Neon database by following these steps:
 
 2. Enable experimental extensions:
 
-```sql
-SET neon.allow_unstable_extensions='true';
-```
+    ```sql
+    SET neon.allow_unstable_extensions='true';
+    ```
 
 3. Install the extension:
 
-```sql
-CREATE EXTENSION IF NOT EXISTS anon;
-```
+    ```sql
+    CREATE EXTENSION IF NOT EXISTS anon;
+    ```
 
-## Masking Rules
+## Masking rules
 
 Masking rules define which data to mask and how to mask it using SQL syntax. These rules are applied using `SECURITY LABEL` SQL commands and stored within the database schema to implement the privacy by design principle.
 
-## Masking Functions
+## Masking functions
 
 The `anon` extension provides [built-in functions](https://postgresql-anonymizer.readthedocs.io/en/latest/masking_functions/) for different anonymization requirements, including but not limited to:
 
@@ -52,7 +52,7 @@ The `anon` extension provides [built-in functions](https://postgresql-anonymizer
 | Noise addition | Alter numerical values while maintaining distribution | `anon.noise(salary, 0.1)` adds `+/- 10%` noise to the `salary` column |
 | Generalization | Replace specific values with broader categories | `anon.generalize_int4range(age, 10)` would change `54` to `[50,60)` |
 
-## Static Masking
+## Static masking
 
 Static masking permanently modifies the original data in your tables. This approach is useful for creating anonymized copies of data when:
 
@@ -61,11 +61,11 @@ Static masking permanently modifies the original data in your tables. This appro
 - Archiving data with sensitive information removed
 - Distributing data to third parties
 
-## Implementation Example
+## Implementation example
 
 <Steps>
 
-## Create a Sample Table
+## Create a sample table
 
 Create a sample `users` table with sensitive information:
 
@@ -84,7 +84,7 @@ INSERT INTO users (username, email, phone_number, city) VALUES
     ('peter_jones', 'peter.jones@example.com', '555-555-1111', 'Chicago');
 ```
 
-## Define Masking Rules
+## Define masking rules
 
 Apply masking rules to specific columns using `SECURITY LABEL`:
 
@@ -98,7 +98,7 @@ SECURITY LABEL FOR anon ON COLUMN users.phone_number
 IS 'MASKED WITH FUNCTION anon.partial(phone_number, 1, ''XXX-XXX-'', 2)';
 ```
 
-## Initialize and Apply Masking
+## Initialize and apply masking
 
 The `anon.init()` function initializes the `anon` extension by loading default fake data sets and setting up the masking environment. This required step prepares the database for anonymization operations and must be executed before applying any masking functions.
 
@@ -116,7 +116,7 @@ Static masking irreversibly modifies your data. The original values cannot be re
 SELECT anon.anonymize_table('users');
 ```
 
-## Verify Results
+## Verify results
 
 After applying the masking, your data will be anonymized according to the defined rules:
 
