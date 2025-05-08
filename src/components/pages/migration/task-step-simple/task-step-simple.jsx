@@ -5,24 +5,24 @@ import GradientBorder from 'components/shared/gradient-border/index';
 import importDatabase from 'images/pages/migration/import-database.jpg';
 
 const TaskStepSimple = () => (
-  <section className="task-step-simple safe-paddings relative pt-[182px] xl:pt-[136px] lg:pt-[104px]">
-    <Container className="relative z-10" size="768">
-      <div className="flex items-start gap-16 lg:justify-center lg:gap-6 sm:flex-col sm:gap-8">
-        <div className="flex-1 sm:w-full sm:text-center">
-          <p className="mb-4 text-base font-medium uppercase tracking-wide text-gray-new-50">
+  <section className="task-step-simple safe-paddings relative pt-[185px] xl:pt-[160px] lg:pt-[135px] md:pt-[96px]">
+    <Container className="relative lg:px-16 md:px-5" size="768">
+      <div className="flex items-start gap-16 lg:justify-start lg:gap-16 sm:flex-col sm:gap-8">
+        <div className="flex-1 xl:mt-1.5 lg:mt-0 sm:w-full">
+          <p className="mb-4 text-base font-medium uppercase tracking-wide text-gray-new-50 xl:mb-3 lg:text-sm md:text-[13px]">
             Your only task
           </p>
-          <h2 className="font-title text-5xl font-medium leading-none tracking-tighter xl:text-4xl lg:text-[36px] md:text-[32px]">
+          <h2 className="font-title text-5xl font-medium leading-none tracking-tighter xl:text-[44px] lg:text-[40px] md:text-[32px]">
             Enter connection URL for database
           </h2>
-          <div className="mt-3 text-pretty text-lg leading-snug tracking-extra-tight text-gray-new-70 lg:text-[15px] sm:text-sm sm:font-light">
+          <div className="mt-3 text-pretty text-lg leading-snug tracking-extra-tight text-gray-new-70 xl:mt-[14px] lg:text-[15px] md:mt-3 md:text-base md:font-light">
             <p>
               The only thing you have to do is click on Import database in the Neon Console and
               provide the connection string for your existing Postgres database.
             </p>
           </div>
         </div>
-        <div className="relative flex-1 overflow-hidden rounded-xl lg:flex-initial sm:w-full">
+        <div className="relative flex-1 overflow-hidden rounded-xl md:flex-initial sm:w-full">
           <Image
             className="sm:w-full"
             src={importDatabase}

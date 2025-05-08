@@ -47,13 +47,13 @@ const ITEMS = [
 ];
 
 const TasksSteps = () => (
-  <section className="task-step-simple safe-paddings relative pt-[175px] xl:pt-[136px] lg:pt-[104px]">
-    <Container className="relative" size="768">
+  <section className="task-step-simple safe-paddings relative pt-[180px] xl:pt-[157px] lg:pt-[131px] md:pt-[90px]">
+    <Container className="relative lg:px-16 md:px-5" size="768">
       <header className="max-w-[616px]">
-        <p className="mb-4 text-base font-medium uppercase tracking-wide text-gray-new-50">
+        <p className="mb-4 text-base font-medium uppercase tracking-wide text-gray-new-50 lg:text-sm md:mb-3 md:text-[13px]">
           Tasks for Assistant
         </p>
-        <h2 className="font-title text-5xl font-medium leading-none tracking-tighter xl:text-4xl lg:text-[36px] md:text-[32px]">
+        <h2 className="font-title text-5xl font-medium leading-none tracking-tighter xl:text-balance xl:text-[44px] lg:text-[40px] md:text-pretty md:text-[32px]">
           The Import Data Assistant takes care of data transfer
         </h2>
       </header>

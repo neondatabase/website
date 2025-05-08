@@ -98,7 +98,7 @@ const StepsSlider = ({ items }) => {
 
   return (
     <>
-      <div ref={swiperContainerRef} className="relative">
+      <div ref={swiperContainerRef} className="relative mt-12 lg:mt-10 lg:mt-8">
         <Swiper
           autoplay={{
             delay: 5000,
@@ -148,7 +148,7 @@ const StepsSlider = ({ items }) => {
       </div>
 
       <Swiper
-        className="captions-swiper mb-12 mt-4"
+        className="captions-swiper relative mb-12 mt-6 lg:mt-4"
         key={isMobile ? 'mobile' : 'desktop'}
         effect={isMobile ? 'fade' : 'slide'} // effect won't work using breakpoints
         slidesPerView={isMobile ? 1 : 3}
@@ -156,6 +156,14 @@ const StepsSlider = ({ items }) => {
         modules={[EffectFade, Thumbs]}
         wrapperTag="ul"
         watchSlidesProgress={false}
+        breakpoints={{
+          360: {
+            spaceBetween: 8,
+          },
+          768: {
+            spaceBetween: 0,
+          },
+        }}
         watchOverflow
         onSwiper={setThumbsSwiper}
         onSlideChange={(swiper) => {
@@ -175,12 +183,12 @@ const StepsSlider = ({ items }) => {
       >
         {items.map(({ title, description, link }, index) => (
           <SwiperSlide tag="li" key={index} className="bg-black-pure">
-            <div className="caption-content mx-8 flex flex-col items-start gap-2.5 text-left lg:mr-0 md:mx-auto md:max-w-md md:items-center md:text-center">
+            <div className="caption-content mx-8 flex flex-col items-start gap-2.5 text-left lg:mr-0 lg:gap-2 md:mx-auto md:max-w-md md:items-center md:text-center">
               <h3 className="text-xl font-medium leading-dense tracking-tighter text-white lg:text-lg">
                 {title}
               </h3>
               <p
-                className="text-16 font-regular text-pretty leading-normal tracking-extra-tight text-gray-new-60"
+                className="text-16 font-regular text-pretty leading-normal tracking-extra-tight text-gray-new-60 md:mx-2.5"
                 dangerouslySetInnerHTML={{ __html: description }}
               />
               {link && (

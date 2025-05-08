@@ -1,5 +1,5 @@
 .steps-swiper {
-  @apply relative mx-16 mt-12 flex flex-col lg:mx-0;
+  @apply relative mx-16 flex flex-col lg:mx-0;
 }
 
 .swiper-slide {
@@ -40,8 +40,7 @@
 }
 
 .captions-swiper {
-  @apply flex flex-col;
-  @apply relative mx-16 mb-12 lg:mx-0;
+  @apply mx-16 flex flex-col lg:mx-0;
 
   .caption-content {
     code {

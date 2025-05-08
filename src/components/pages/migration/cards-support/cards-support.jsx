@@ -56,35 +56,38 @@ const ITEMS = [
 ];
 
 const CardsSupport = () => (
-  <section className="cards-support safe-paddings mt-[125px] xl:mt-[106px] lg:mt-[80px] md:mt-[60px]">
-    <Container size="768">
+  <section className="cards-support safe-paddings pt-[137px] xl:pt-[113px] lg:pt-[90px] md:pt-[26px]">
+    <Container className="md:px-5" size="768">
       <header className="mx-auto flex flex-col items-center text-center">
-        <h2 className="max-w-md font-title text-5xl font-medium leading-none tracking-extra-tight lg:max-w-[380px] lg:text-4xl md:max-w-[280px] md:text-[32px]">
+        <h2 className="max-w-md font-title text-5xl font-medium leading-none tracking-extra-tight xl:text-[44px] lg:max-w-[380px] lg:text-4xl md:max-w-[280px] md:text-[32px] md:tracking-tighter">
           Multi-TB migrations? Get expert support
         </h2>
         <p className="mt-3 text-lg leading-snug tracking-extra-tight text-gray-new-70 lg:text-base">
           Our team is here to guide you through even the most complex scenarios.
         </p>
       </header>
-      <ul className="mt-12 grid grid-cols-2 gap-5 sm:grid-cols-1 xs:gap-3">
+      <ul className="mt-12 grid grid-cols-2 gap-5 lg:mt-10 md:mt-8 sm:grid-cols-1 xs:gap-3">
         {ITEMS.map(({ title, description, list, className }) => (
           <li
             key={title}
-            className={clsx('relative rounded-xl bg-black-fog p-7 md:p-6', className)}
+            className={clsx('relative rounded-xl bg-black-fog p-7 lg:p-6 md:p-5', className)}
           >
-            <h3 className="mb-2.5 text-balance text-xl font-medium leading-tight tracking-tighter text-white">
+            <h3 className="mb-2.5 text-balance text-xl font-medium leading-snug tracking-tight text-white lg:text-lg md:tracking-extra-tight">
               {title}
             </h3>
             <p
-              className="text-pretty text-base font-normal leading-normal tracking-extra-tight text-gray-new-60"
+              className="text-pretty text-base font-normal leading-normal tracking-extra-tight text-gray-new-60 lg:text-[15px]"
               dangerouslySetInnerHTML={{ __html: description }}
             />
-            <div className="my-6 h-px w-full bg-white mix-blend-overlay" aria-hidden />
+            <div
+              className="my-6 h-px w-full bg-white mix-blend-overlay lg:my-5 md:my-[18px]"
+              aria-hidden
+            />
             <ul className="flex flex-col gap-[18px]">
               {list.map(({ icon, text }) => (
                 <li key={text} className="flex items-center gap-2.5">
                   <Image src={icon} alt="" width={20} height={20} quality={100} />
-                  <p className="text-base font-medium leading-none tracking-snug text-white">
+                  <p className="text-base font-medium leading-none tracking-snug text-white lg:text-[15px]">
                     {text}
                   </p>
                 </li>
@@ -94,8 +97,8 @@ const CardsSupport = () => (
           </li>
         ))}
       </ul>
-      <footer className="mt-9">
-        <p className="text-center text-base font-normal leading-snug tracking-extra-tight text-gray-new-70">
+      <footer className="mt-[30px] xl:mt-[26px] md:mt-[18px]">
+        <p className="text-center text-base font-normal leading-snug tracking-extra-tight text-gray-new-70 lg:text-[15px]">
           Migrating a multi-TB workload?{' '}
           <Link to={LINKS.migrationAssistance} theme="grey-70-underlined">
             Let us know
