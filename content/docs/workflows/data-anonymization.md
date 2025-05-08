@@ -1,20 +1,19 @@
 ---
 title: Data anonymization
-subtitle: Learn how to create anonymized Neon branches using the PostgreSQL Anonymizer extension
+subtitle: Anonymize data in Neon branches using the PostgreSQL Anonymizer extension
 enableTableOfContents: true
 updatedOn: '2025-03-07T21:44:32.257Z'
 ---
 
 When working with production data, it's crucial to ensure that sensitive user information remains protected — especially in development or testing environments. With Neon, creating branches is fast, but how do you safely clone a production branch without exposing personal data?
 
-The [`anon`](https://postgresql-anonymizer.readthedocs.io) extension is ready to help: it's a PostgreSQL extension for data anonymization. It allows you to mask, randomize, or obfuscate personal data, making it easy to create safe, anonymized branches.
+The [PostgreSQL Anonymizer extension (`anon`)](https://postgresql-anonymizer.readthedocs.io) is ready to help. This Postgres extension allows you to mask, randomize, or obfuscate personal data, making it easy to create safe, anonymized branches.
 
 <Admonition type="note" type="important">
-Neon currently only supports **static masking** — not dynamic anonymization. Additionally, the `anon` extension is currently **experimental** in Neon, so you must explicitly enable it on your project — we show how to do this below.
+Neon currently only supports **static masking** — not dynamic anonymization, which means you are modifying data. Additionally, the `anon` extension is currently **experimental** in Neon, so you must explicitly enable it on your project — we show how to do this below.
 </Admonition>
 
-In this guide, we'll demonstrate how to anonymize data on a Neon branch — we'll look at how to do this manually and then we'll go over how to automate this process using a GutHub Actions workflow.
-
+In this guide, we demonstrate how to anonymize data on a Neon branch — we'll look at how to do this manually, and then we'll show how to automate this process using a GutHub Actions workflow.
 
 ## Anonymize branch data manually
 
@@ -64,7 +63,7 @@ SELECT * FROM users LIMIT 10;
 
 ## Create a new branch
 
-Start by creating a branch from the branch you want to anonymize. For example, if you have a `production` branch, you can create a new branch called `anonymized-dev`:
+Start by creating a branch from your `production` branch to anonymize. For example, you can create a new branch called `anonymized-dev`:
 
 ```bash
 neonctl branch create --project-id <my-project-id> --name anonymized-dev --parent production --psql
@@ -80,7 +79,7 @@ Get a connection string for your new branch:
 neonctl cs anonymized-dev --project-id <my-project-id>
 ```
 
-To use the `anon` extension, you need to enable it on your branch. Connect to your branch using `psql`:
+Connect to your branch using `psql`:
 
 ```bash
 psql <connection_string>
@@ -149,8 +148,6 @@ You should see that the sensitive data has been replaced with fake values.
 
 ## Automate data anonymization
 
-<Steps>
-
 Creating anonymized database copies for development, testing, or preview environments is critical to protecting sensitive data. With [Neon](https://neon.tech) and the [`anon`](https://postgresql-anonymizer.readthedocs.io/) extension, you can mask sensitive data — but doing it manually every time can be tedious.
 
 The following example shows how to **automate the creation of anonymized Neon branches** using **GitHub Actions**, triggered each time a pull request is opened or updated.
@@ -165,6 +162,8 @@ Each time a PR is opened:
 - The `anon` PostgreSQL extension is initialized
 - Masking rules are applied to sensitive fields
 - A fully anonymized version of your parent's branch dataset is ready for use in CI, preview environments, or manual testing
+
+<Steps>
 
 ## Prerequisites
 
@@ -181,8 +180,8 @@ The Neon GitHub integration can set these secrets for your Neon project automati
 
 ## Set up the GitHub Action Workflow
 
-Here’s an example of a YAML file describing Anonymization workflow (e.g. to be stored as `.github/workflows/create-anon-branch.yml`),
-the masking rules are the same as in the article above.
+Here’s an example of a YAML file describing Anonymization workflow (e.g. to be stored as `.github/workflows/create-anon-branch.yml`).
+The masking rules are the same as in the manual anonymization steps above.
 
 <Admonition type="note">
 This is a simplified example. In a production environment, you should consider adding error handling, security measures, and other best practices.
@@ -246,9 +245,9 @@ jobs:
           echo "Database anonymization completed successfully."
 ```
 
-## Testing the Workflow
+## Testing the workflow
 
-To test:
+To test the workflow:
 
 1. Adjust the workflow file to your needs — define the right branch name, security labels, and ensure anonymization is run on the right branch.
 2. Push the changes to your repository.
@@ -264,7 +263,7 @@ Don't forget to clean up the anonymized branches after you're done testing. You 
 
 ## Conclusion
 
-With Neon, the `anon` extension, and GitHub Actions, you can easily create anonymized branches for development and testing. This ensures that sensitive user data is protected while still allowing your team to work with realistic datasets.
+With Neon, the PostgreSQL Anonymizer extension, you can easily create anonymized branches for development and testing — and with GitHub Actions, you can automate a Neon branch anonymization workflow. This ensures that sensitive user data is protected while still allowing your team to work with realistic datasets.
 
 ## Additional Resources
 
