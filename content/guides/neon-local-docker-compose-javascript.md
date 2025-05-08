@@ -69,7 +69,7 @@ Once the app is running, go to [http://localhost:8080/](http://localhost:8080/) 
 If you started the app in **development** mode, go to the Neon console, and you’ll see a new branch has been created using the `main`, or `production` branch as a base.
 
 <video autoPlay playsInline muted loop controls width="800" height="600">
-  <source type="video/mp4" src="/videos/guides/neon-local-docker-compose-javascript/docker-compose-up-watch.mp4"/>
+  <source type="video/mp4" src="https://neondatabase.wpengine.com/wp-content/uploads/2025/04/docker-compose-up-watch.mp4"/>
 </video>
 
 If you started the app in **production** mode, the app will connect to the database defined by the `DATABASE_URL`, and no new branch will be created.

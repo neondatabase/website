@@ -182,11 +182,9 @@ Neon MCP server lets you manage Neon via **Neon API calls**
 
 Imagine you want to add a column to a table in your Neon project. Instead of writing SQL migrations and directly calling the Neon API, with Neon MCP server and Claude, you can say: `"In my social network Neon project, edit the posts table and add a deleted_at column."`
 
-<Video  
-sources={[{src: "/videos/pages/doc/neon-mcp.mp4",type: "video/mp4",}]}
-width={960}
-height={1080}
-/>
+<video autoPlay playsInline muted loop controls width="704" height="792">
+  <source type="video/mp4" src="/videos/pages/doc/neon-mcp.mp4"/>
+</video>
 
 Using Neon MCP server, Claude will:
 

@@ -232,11 +232,9 @@ After setting up either the remote or local server and connecting your MCP clien
 - **Add a column to a table:** `"Add a column 'email' of type VARCHAR to the 'users' table in database 'main' of project 'my-project'"`
 - **Run a query:** `"Show me the first 10 rows from the 'users' table in database 'my-database'"`
 
-<Video  
-sources={[{src: "/videos/pages/doc/neon-mcp.mp4",type: "video/mp4",}]}
-width={960}
-height={1080}
-/>
+<video autoPlay playsInline muted loop controls width="832" height="936">
+  <source type="video/mp4" src="/videos/pages/doc/neon-mcp.mp4"/>
+</video>
 
 You can also refer to our individual guides for detailed examples on using the Neon MCP Server with specific MCP clients:
 

@@ -28,7 +28,7 @@ This app allows users to create MCQ quizzes from uploaded PDF documents. Users c
 
 You can also follow along with the video below to see the step-by-step process:
 
-<video autoPlay playsInline muted loop width="800" height="600" controls>
+<video autoPlay playsInline muted loop width="704" height="396" controls>
   <source type="video/mp4" src="/videos/pages/doc/replit-agent.mp4"/>
 </video>
 
