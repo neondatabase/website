@@ -45,7 +45,7 @@ To delete a Neon project:
 2. Click **Delete Neon Project**.
 3. In the **Delete Project** drawer, confirm the deletion by typing the project name, then click **Delete**.
 
-Projects can also be deleted via the Neon Console. See [Delete a project](). 
+Projects can also be deleted via the Neon Console. See [Delete a project]().
 
 ## Create branches
 
