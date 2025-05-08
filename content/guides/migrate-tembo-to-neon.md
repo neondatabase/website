@@ -27,7 +27,7 @@ Plan your migration accordingly to avoid any disruption to your services.
 
 ## Tembo vs. Neon Postgres
 
-While both Tembo and Neon provide managed Postgres, Neon's architecture offers distinct advantages. Here’s a quick comparison of [key features](/docs/guides/neon-features):
+While both Tembo and Neon provide managed Postgres, Neon's architecture offers distinct advantages. Here’s a quick comparison of key features:
 
 | Feature                   | Tembo                                | Neon Postgres|
 | ------------------------- | ------------------------------------ | ------------ |
@@ -42,7 +42,7 @@ There are several ways to migrate your Tembo Postgres database to Neon. The best
 
 1.  Neon Import Data Assistant (easiest, for smaller databases \<10GB)
 2.  `pg_dump` and `pg_restore`
-3.  Logical Replication (Near-zero downtime, for live production databases)
+3.  Logical replication (Near-zero downtime, for live production databases)
 
 ## Pre-migration preparation (common steps)
 
@@ -158,7 +158,7 @@ Run the following command to restore the dump to your Neon database:
 
 For more detailed usage, refer to [Migrate data from Postgres with pg_dump and pg_restore](/docs/import/migrate-from-postgres).
 
-## Option 3: Logical Replication
+## Option 3: Logical replication
 
 Logical replication allows for near-zero downtime migration by continuously streaming data changes from your Tembo database (publisher) to your Neon database (subscriber).
 
@@ -276,7 +276,7 @@ Once Neon is fully synchronized and replication lag is minimal:
 - Neon Docs:
   - [Import Data Assistant](/docs/import/import-data-assistant)
   - [Migrate data from Postgres with `pg_dump` and `pg_restore`](/docs/import/migrate-from-postgres)
-  - [Replicate data from Postgres to Neon (Logical Replication)](/docs/guides/logical-replication-postgres-to-neon)
+  - [Replicate data from Postgres to Neon (Logical replication)](/docs/guides/logical-replication-postgres-to-neon)
   - [Connect to Neon](/docs/connect/connect-from-any-app)
   - [Supported Postgres extensions in Neon](/docs/extensions/pg-extensions)
 - PostgreSQL Documentation:
