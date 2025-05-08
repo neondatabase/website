@@ -12,11 +12,11 @@ updatedOn: '2025-05-08T00:00:00.000Z'
 <Admonition type="warning" title="Tembo Shutdown Timeline">
 Please be aware of Tembo's [official shutdown timeline](https://tembo-io.notion.site/Tembo-Cloud-Migration-Guide-1de7c9367d6a80349570e7469ba7f17b)
 
-| Date       | Action                                      |
-|------------|---------------------------------------------|
-| May 5, 2025 | Instance creation disabled                 |
-| May 30, 2025 | Free instance migration deadline          |
-| June 27, 2025 | Paid instance migration deadline         |
+| Date          | Action                           |
+| ------------- | -------------------------------- |
+| May 5, 2025   | Instance creation disabled       |
+| May 30, 2025  | Free instance migration deadline |
+| June 27, 2025 | Paid instance migration deadline |
 
 Plan your migration accordingly to avoid any disruption to your services.
 </Admonition>
@@ -25,12 +25,12 @@ Plan your migration accordingly to avoid any disruption to your services.
 
 While both Tembo and Neon provide managed Postgres, Neon's architecture offers some advantages. Here’s a quick comparison of key features:
 
-| Feature                   | Tembo                                | Neon Postgres|
-| ------------------------- | ------------------------------------ | ------------ |
-| **Compute**               | Manual scaling                       | Autoscaling, scale-to-zero  |
+| Feature                   | Tembo                                | Neon Postgres                                                                    |
+| ------------------------- | ------------------------------------ | -------------------------------------------------------------------------------- |
+| **Compute**               | Manual scaling                       | Autoscaling, scale-to-zero                                                       |
 | **Branching**             | NA                                   | Instant data branching for dev, test, and CI/CD workflows ("branch per feature") |
-| **Storage**               | Manual scaling of storage            | Auto-scaling storage     |
-| **Point-in-Time Restore** | Standard backup/restore capabilities | Instant PITR to any point within your history retention window |
+| **Storage**               | Manual scaling of storage            | Auto-scaling storage                                                             |
+| **Point-in-Time Restore** | Standard backup/restore capabilities | Instant PITR to any point within your history retention window                   |
 
 ## Migration options overview
 
@@ -140,17 +140,17 @@ The command options used are:
 
 Run the following command to restore the dump to your Neon database:
 
-  ```bash
-  pg_restore -v --no-owner -d "postgresql://neon_user:neon_pass@neon_host:port/target_db" your_tembo_dump.dump
-  ```
+```bash
+pg_restore -v --no-owner -d "postgresql://neon_user:neon_pass@neon_host:port/target_db" your_tembo_dump.dump
+```
 
-  > Replace the connection string with your actual Neon database connection string.
+> Replace the connection string with your actual Neon database connection string.
 
-  The command options used are:
+The command options used are:
 
-  - `-v`: Verbose mode.
-  - `--no-owner`: Ignores original ownership, objects owned by `neon_user`.
-  - `-d`: Target Neon database connection string.
+- `-v`: Verbose mode.
+- `--no-owner`: Ignores original ownership, objects owned by `neon_user`.
+- `-d`: Target Neon database connection string.
 
 For more detailed usage, refer to [Migrate data from Postgres with pg_dump and pg_restore](/docs/import/migrate-from-postgres).
 
@@ -196,6 +196,7 @@ Logical replication allows for near-zero downtime migration by continuously stre
       > schema.sql
   ```
 - Restoring schema to Neon:
+
   ```bash
   psql \
       "postgresql://neon_user:neon_pass@neon_host:port/target_db" \
