@@ -6,10 +6,10 @@ import importDatabase from 'images/pages/migration/import-database.jpg';
 
 const TaskStepSimple = () => (
   <section className="task-step-simple safe-paddings relative pt-[185px] xl:pt-[160px] lg:pt-[135px] md:pt-[96px]">
-    <Container className="relative lg:px-16 md:px-5" size="768">
+    <Container className="relative lg:mx-8 md:mx-1" size="768">
       <div className="flex items-start gap-16 lg:justify-start lg:gap-16 sm:flex-col sm:gap-8">
         <div className="flex-1 xl:mt-1.5 lg:mt-0 sm:w-full">
-          <p className="mb-4 text-base font-medium uppercase tracking-wide text-gray-new-50 xl:mb-3 lg:text-sm md:text-[13px]">
+          <p className="mb-4 text-base font-medium uppercase tracking-wide text-gray-new-50 xl:mb-3 lg:mb-4 lg:text-sm md:mb-3  md:text-[13px]">
             Your only task
           </p>
           <h2 className="font-title text-5xl font-medium leading-none tracking-tighter xl:text-[44px] lg:text-[40px] md:text-[32px]">

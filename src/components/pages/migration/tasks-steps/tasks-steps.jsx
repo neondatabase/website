@@ -48,7 +48,7 @@ const ITEMS = [
 
 const TasksSteps = () => (
   <section className="task-step-simple safe-paddings relative pt-[180px] xl:pt-[157px] lg:pt-[131px] md:pt-[90px]">
-    <Container className="relative lg:px-16 md:px-5" size="768">
+    <Container className="relative lg:mx-8 md:mx-1" size="768">
       <header className="max-w-[616px]">
         <p className="mb-4 text-base font-medium uppercase tracking-wide text-gray-new-50 lg:text-sm md:mb-3 md:text-[13px]">
           Tasks for Assistant

@@ -8,7 +8,7 @@ import claude from './images/claude.png';
 
 const Hero = () => (
   <section className="hero safe-paddings relative pt-[134px] lg:pt-16 md:pt-12">
-    <Container className="lg:px-16 md:px-5" size="768">
+    <Container className="lg:mx-8 md:mx-1" size="768">
       <div className="relative mb-10 size-[72px] lg:mb-8 lg:size-16 lg:rounded-[14px] md:mb-7 md:size-14">
         <Image
           className="relative z-10 size-full rounded-2xl shadow-[0px_5px_14px_0px_rgba(0,0,0,0.6)] md:rounded-xl"

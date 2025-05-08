@@ -98,7 +98,7 @@ const StepsSlider = ({ items }) => {
 
   return (
     <>
-      <div ref={swiperContainerRef} className="relative mt-12 lg:mt-10 lg:mt-8">
+      <div ref={swiperContainerRef} className="relative mt-12 lg:mt-10 md:mt-8">
         <Swiper
           autoplay={{
             delay: 5000,
