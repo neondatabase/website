@@ -91,7 +91,7 @@ Once connected, run the following command to enable the experimental extensions:
 SET neon.allow_unstable_extensions = 'true';
 ```
 
-Now you can enable the  `anon` extension:
+Now you can enable the `anon` extension:
 
 ```sql
 CREATE EXTENSION anon;
