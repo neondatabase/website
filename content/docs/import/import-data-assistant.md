@@ -87,7 +87,11 @@ After a successful import:
    _Imported branches are typically named with a timestamp, as shown here._
 
 2. Run some test queries to ensure everything imported correctly.
-3. Switch your connection string to point to your new Neon database.
+3. Click on the three dots next to the branch name and select **Set as default** to make it your default branch.
+4. Optional cleanup:
+   - Delete the old branches (`production` and `development`) if they are no longer needed.
+   - Rename the new branch to `production` for clarity and consistency.
+5. Switch your connection string to point to your new Neon database.
 
 </Steps>
 
