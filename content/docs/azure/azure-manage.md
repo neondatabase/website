@@ -35,6 +35,18 @@ In Azure, navigate to the **Projects** page and select **Create Project**.
 
 See [Create a project](/docs/manage/projects#create-a-project) for how to create a project from the Neon Console.
 
+## Delete a project
+
+Deleting a project is a permanent action, which also deletes any computes, branches, databases, and roles that belong to the project. Please note that if your project is HIPAA-enabled, you'll need to open a support request to delete the project. See [Disabling HIPAA](/docs/security/hipaa#disabling-hipaa) for details.
+
+To delete a Neon project:
+
+1. Navigate to the Projects page and select a project.
+2. Click **Delete Neon Project**.
+3. In the **Delete Project** drawer, confirm the deletion by typing the project name, then click **Delete**.
+
+Projects can also be deleted via the Neon Console. See [Delete a project](). 
+
 ## Create branches
 
 A branch is an independent copy of your database that you can use for development or testing. It will not increase storage until you modify data or the branch falls out of your project's [restore window](/docs/manage/projects#configure-your-restore-window). Changes made on a branch do not affect the parent database. To learn more, see [Branching](/docs/introduction/branching).
