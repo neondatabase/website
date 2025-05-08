@@ -367,7 +367,7 @@ After enabling logical replication, the next steps involve creating publications
 
 ### Delete a project
 
-Deleting a project is a permanent action, which also deletes any computes, branches, databases, and roles that belong to the project.
+Deleting a project is a permanent action, which also deletes any computes, branches, databases, and roles that belong to the project. Please note that if your project is HIPAA-enabled, you'll need to open a support request to delete the project. See [Disabling HIPAA](/docs/security/hipaa#disabling-hipaa) for details.
 
 To delete a project:
 
@@ -379,7 +379,7 @@ To delete a project:
 6. On the confirmation dialog, click **Delete**.
 
 <Admonition type="important">
-If you are any of Neon's paid plans, such as our Launch or Scale plan, deleting all your Neon projects won't stop monthly billing. To avoid charges, you also need to downgrade to the Free plan. You can do so from the [Billing](https://console.neon.tech/app/billing#change_plan) page in the Neon Console.
+If you are any of Neon's paid plans, deleting all your Neon projects won't stop monthly billing. To avoid charges, you also need to downgrade to the Free plan. You can do so from the [Billing](https://console.neon.tech/app/billing#change_plan) page in the Neon Console.
 </Admonition>
 
 ## Manage projects with the Neon API
