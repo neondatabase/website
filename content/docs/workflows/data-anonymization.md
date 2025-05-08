@@ -10,21 +10,22 @@ When working with production data, it's crucial to ensure that sensitive user in
 The [`anon`](https://postgresql-anonymizer.readthedocs.io) extension is ready to help: it's a PostgreSQL extension for data anonymization. It allows you to mask, randomize, or obfuscate personal data, making it easy to create safe, anonymized branches.
 
 <Admonition type="note" type="important">
-Neon currently only supports **static masking** — not dynamic anonymization.
-It is also an **experimental extension**, so you must explicitly enable it on your project,
-see the docs [here](https://neon.tech/docs/extensions/pg-extensions#experimental-extensions).
+Neon currently only supports **static masking** — not dynamic anonymization. Additionally, the `anon` extension is currently **experimental** in Neon, so you must explicitly enable it on your project — we show how to do this below.
 </Admonition>
 
----
+In this guide, we'll demonstrate how to anonymize data on a Neon branch — we'll look at how to do this manually and then we'll go over how to automate this process using a GutHub Actions workflow.
+
+
+## Anonymize branch data manually
+
+<Steps>
 
 ## Prerequisites
 
-- You have a **Neon project** with a populated parent branch
-- `psql` or any PostgreSQL client, such as psql, pgAdmin, or Neon's SQL editor
+Before you begin, make sure you have the following:
 
----
-
-<Steps>
+- A **Neon project** with a populated parent branch
+- `psql` or any Postgres client, such as `psql`, pgAdmin, or Neon's SQL Editor
 
 ## Create sample data
 
@@ -69,9 +70,9 @@ Start by creating a branch from the branch you want to anonymize. For example, i
 neonctl branch create --project-id <my-project-id> --name anonymized-dev --parent production --psql
 ```
 
-This gives you a new branch with a snapshot of your data, but without anonymization... yet.
+This gives you a new branch with a snapshot of your data — not yet anonymized.
 
-## Enable the `anon` Extension
+## Enable the `anon` extension
 
 Get a connection string for your new branch:
 
@@ -99,7 +100,7 @@ CREATE EXTENSION anon;
 
 ## Choose a masking strategy
 
-In this example, we will use the faking strategy to anonymize our `users` table. The faking strategy replaces sensitive data with random values that look similar to the original data but are not real:
+In this example, we will use the faking strategy to anonymize columns in our `users` table. The faking strategy replaces sensitive data with random values that look similar to the original data but are not real:
 
 ```sql
 SECURITY LABEL FOR anon ON COLUMN users.first_name IS 'MASKED WITH FUNCTION anon.fake_first_name()';
@@ -110,7 +111,7 @@ SECURITY LABEL FOR anon ON COLUMN users.email IS 'MASKED WITH FUNCTION anon.fake
 
 You can read the [anon documentation](https://postgresql-anonymizer.readthedocs.io/en/latest/masking_functions/) for more details on the available strategies.
 
-### Anonymize the data
+## Anonymize the data
 
 After setting the security labels, you need to initialize the `anon` extension. This step is crucial as it prepares the extension for the anonymization process:
 
@@ -118,13 +119,13 @@ After setting the security labels, you need to initialize the `anon` extension. 
 SELECT anon.init();
 ```
 
-Now that we have set up the masking strategy, we can run the anonymization process, by executiny `anonymize_database()` function, we can anonymize all the data in the database according to the masking strategy defined in the previous step:
+Now that you have set up the masking strategy, you can run the anonymization process. By executing `anonymize_database()` function, you can anonymize all the data in the database according to the masking strategy defined in the previous step:
 
 ```sql
 SELECT anon.anonymize_database();
 ```
 
-### Check the results
+## Check the results
 
 To verify that the data has been anonymized, you can run a simple `SELECT` query on the `users` table:
 
@@ -134,43 +135,38 @@ SELECT * FROM users LIMIT 10;
 
 You should see that the sensitive data has been replaced with fake values.
 
-</Steps>
-
----
-
-### Tips for safely anonymizing data
+## Tips for safely anonymizing data
 
 - Double-check that you are on the correct branch before running the anonymization process.
-- Always back up your data before making any changes. With Neon, it's easy to restore a branch to a previous state.
+- Generally, you should always back up your data before making any changes. With Neon, you can quickly restore a branch to a previous state. See [Instant restore](/docs/introduction/branch-restore).
 - Test the anonymization process on a small subset of data before applying it to the entire database.
 - Consider using different anonymization strategies for different columns based on their sensitivity.
 - Regularly review and update your masking strategies to ensure you cover all sensitive data.
-- You can enable the `anon` extension on your parent branch and set masking rules there, so you don't have to do it every time when creating a child branch. But be careful not to init and run the anonymization process on the parent branch!
+- You can enable the `anon` extension on your parent branch and set masking rules there, so you don't have to do it every time when creating a child branch, **but be careful not to init and run the anonymization process on the parent branch. Only do this on your child branch.** 
 
----
+</Steps>
 
-## Automate anonymized branch creation in Neon using GitHub Actions
 
-Creating anonymized database copies for development, testing, or preview environments is critical to protecting user data. With [Neon](https://neon.tech) and the [`anon`](https://postgresql-anonymizer.readthedocs.io/) extension, you can mask sensitive data — but doing it manually every time can be tedious.
+## Automate data anonymization
 
-In this post, we’ll show you how to **automate the creation of anonymized Neon branches** using **GitHub Actions**, triggered every time a pull request is opened or updated.
+<Steps>
+
+Creating anonymized database copies for development, testing, or preview environments is critical to protecting sensitive data. With [Neon](https://neon.tech) and the [`anon`](https://postgresql-anonymizer.readthedocs.io/) extension, you can mask sensitive data — but doing it manually every time can be tedious.
+
+The following example shows how to **automate the creation of anonymized Neon branches** using **GitHub Actions**, triggered each time a pull request is opened or updated.
 
 In this example, we will use static masking to anonymize our `users` table. The faking strategy replaces sensitive data with random values that look similar to the original data but are not real.
 
----
-
-### What you’ll achieve
+**What you’ll achieve**
 
 Each time a PR is opened:
 
-- A **new Neon branch** is created (e.g. `anon-pr-42`).
-- The `anon` PostgreSQL extension is initialized.
-- Masking rules are applied to sensitive fields.
-- A fully anonymized version of your parent's branch dataset is ready for use in CI, preview environments, or manual testing.
+- A **new Neon branch** is created
+- The `anon` PostgreSQL extension is initialized
+- Masking rules are applied to sensitive fields
+- A fully anonymized version of your parent's branch dataset is ready for use in CI, preview environments, or manual testing
 
----
-
-### Prerequisites
+## Prerequisites
 
 Before setting up the GitHub Action:
 
@@ -179,15 +175,18 @@ Before setting up the GitHub Action:
   - `NEON_PROJECT_ID`
   - `NEON_API_KEY`
 
----
+<Admonition type="tip">
+The Neon GitHub integration can set these secrets for your Neon project automatically. See [Neon GitHub integration](/docs/guides/neon-github-integration).
+</Admonition>
 
-### �� GitHub Action Workflow
+## Set up the GitHub Action Workflow
 
 Here’s an example of a YAML file describing Anonymization workflow (e.g. to be stored as `.github/workflows/create-anon-branch.yml`),
 the masking rules are the same as in the article above.
 
-> ⚠️ **Important Note**:
-> This is a simplified example. In a production environment, you should consider adding error handling, security measures, and other best practices.
+<Admonition type="note">
+This is a simplified example. In a production environment, you should consider adding error handling, security measures, and other best practices.
+</Admonition> 
 
 ```yaml
 name: PR Open - Create Branch, Run Static Anonymization
@@ -251,19 +250,21 @@ jobs:
 
 To test:
 
-1. Adjust the workflow file to your needs (set the right branch name, security labels, ensure anonymization is run on the right branch, etc).
+1. Adjust the workflow file to your needs — define the right branch name, security labels, and ensure anonymization is run on the right branch.
 2. Push the changes to your repository.
 3. Open a new pull request.
-4. Check the Actions tab in your GitHub repository to see the workflow run.
-5. Verify that the anonymized branch has been created and that the data has been anonymized.
+4. Check the **Actions** tab in your GitHub repository to see the workflow run.
+5. Verify that the anonymized Neon branch was created and that the data has been anonymized. You can quickly do so by connecting to the new branch or by viewing the table on the **Tables** page in the Neon Console.
 
-## Cleaning Up
+## Cleaning up
 
 Don't forget to clean up the anonymized branches after you're done testing. You can do this manually or automate it with[delete-branch-action](https://github.com/neondatabase/delete-branch-action) GitHub Action that you can run on PR close.
 
+</Steps>
+
 ## Conclusion
 
-With Neon, anon extension, and GitHub Actions, you can easily create anonymized branches for development and testing. This ensures that sensitive user data is protected while still allowing your team to work with realistic datasets.
+With Neon, the `anon` extension, and GitHub Actions, you can easily create anonymized branches for development and testing. This ensures that sensitive user data is protected while still allowing your team to work with realistic datasets.
 
 ## Additional Resources
 
