@@ -15,6 +15,7 @@ Neon currently only supports **static masking** with the `anon` extension. Stati
 </Admonition>
 
 This guide demonstrates two approaches to anonymize data on a Neon branch:
+
 1. A manual procedure using SQL commands
 2. An automated process using GitHub Actions workflows
 
@@ -65,11 +66,11 @@ SELECT * FROM users LIMIT 3;
 
 The output:
 
-| id | first_name    | last_name    | email               | iban   |
-|----|---------------|--------------|---------------------|--------|
-| 1  | First Name 1  | Last Name 1  | user1@example.com   | IBAN1  |
-| 2  | First Name 2  | Last Name 2  | user2@example.com   | IBAN2  |
-| 3  | First Name 3  | Last Name 3  | user3@example.com   | IBAN3  |
+| id  | first_name   | last_name   | email             | iban  |
+| --- | ------------ | ----------- | ----------------- | ----- |
+| 1   | First Name 1 | Last Name 1 | user1@example.com | IBAN1 |
+| 2   | First Name 2 | Last Name 2 | user2@example.com | IBAN2 |
+| 3   | First Name 3 | Last Name 3 | user3@example.com | IBAN3 |
 
 ## Create a new branch
 
@@ -149,11 +150,11 @@ SELECT * FROM users LIMIT 3;
 
 You should see the sensitive columns replaced with fake but realistic-looking values, similar to:
 
-| id | first_name | last_name | email                 | iban                    |
-|----|------------|-----------|----------------------|-------------------------|
-| 1  | Rhonda     | Alvarado  | bryanalan@example.net | GB34QDZL89198122631902 |
-| 2  | Darius     | Reyes     | brandon57@example.com | GB96LBQE53732061681569 |
-| 3  | Stefanie   | Byrd      | barbara40@example.com | GB67CAZQ75813049489060 |
+| id  | first_name | last_name | email                 | iban                   |
+| --- | ---------- | --------- | --------------------- | ---------------------- |
+| 1   | Rhonda     | Alvarado  | bryanalan@example.net | GB34QDZL89198122631902 |
+| 2   | Darius     | Reyes     | brandon57@example.com | GB96LBQE53732061681569 |
+| 3   | Stefanie   | Byrd      | barbara40@example.com | GB67CAZQ75813049489060 |
 
 ## Tips for safely anonymizing data
 
@@ -272,7 +273,7 @@ jobs:
 
 To test this automation workflow:
 
-1. Customize the workflow for your environment by adjusting the branch naming convention and  security labels
+1. Customize the workflow for your environment by adjusting the branch naming convention and security labels
 2. Push the changes to your repository
 3. Open a new pull request
 4. Check the **Actions** tab in your GitHub repository to monitor the workflow execution
