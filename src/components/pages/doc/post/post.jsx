@@ -3,16 +3,14 @@ import PropTypes from 'prop-types';
 
 import ChangelogList from 'components/pages/changelog/changelog-list';
 import Hero from 'components/pages/changelog/hero';
+import Aside from 'components/pages/doc/aside';
 import Breadcrumbs from 'components/pages/doc/breadcrumbs';
-import ChatOptions from 'components/pages/doc/chat-options';
-import EditOnGithub from 'components/pages/doc/edit-on-github';
 import Modal from 'components/pages/doc/modal';
 import MODALS from 'components/pages/doc/modal/data';
 import ChangelogForm from 'components/shared/changelog-form';
 import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
 import NavigationLinks from 'components/shared/navigation-links';
-import TableOfContents from 'components/shared/table-of-contents';
 import { DOCS_BASE_PATH } from 'constants/docs';
 
 import Tag from '../tag';
@@ -41,7 +39,7 @@ const Post = ({
   isDocsIndex = false,
   changelogPosts = [],
   currentSlug,
-  fileOriginPath,
+  githubPath,
   tableOfContents,
 }) => {
   const modal = MODALS.find(
@@ -107,40 +105,14 @@ const Post = ({
         <DocFooter updatedOn={updatedOn} slug={currentSlug} />
       </div>
 
-      <div
-        className={clsx(
-          'relative col-span-2 -ml-12 max-w-64 xl:hidden',
-          isUseCase
-            ? 'col-start-11 2xl:col-span-3 2xl:col-start-10 2xl:ml-auto 2xl:max-w-[238px]'
-            : 'col-start-10 3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6'
-        )}
-      >
-        <div
-          className={clsx(
-            'sticky flex flex-col pb-5',
-            isUseCase
-              ? 'top-[188px] max-h-[calc(100vh-188px)]'
-              : 'top-[136px] max-h-[calc(100vh-136px)]'
-          )}
-        >
-          {enableTableOfContents && (
-            <TableOfContents items={tableOfContents} isUseCase={isUseCase} />
-          )}
-          {!isUseCase && (
-            <div
-              className={clsx(
-                enableTableOfContents &&
-                  'mt-2.5 shrink-0 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70'
-              )}
-            >
-              <EditOnGithub fileOriginPath={fileOriginPath} />
-            </div>
-          )}
-          {isDocsIndex && <ChatOptions isSidebar />}
-          {isChangelog && <ChangelogForm isSidebar />}
-        </div>
-      </div>
-
+      <Aside
+        isUseCase={isUseCase}
+        isDocsIndex={isDocsIndex}
+        isChangelog={isChangelog}
+        enableTableOfContents={enableTableOfContents}
+        tableOfContents={tableOfContents}
+        githubPath={githubPath}
+      />
       {modal && <Modal {...modal} />}
     </>
   );
@@ -172,7 +144,7 @@ Post.propTypes = {
     })
   ),
   currentSlug: PropTypes.string.isRequired,
-  fileOriginPath: PropTypes.string.isRequired,
+  githubPath: PropTypes.string.isRequired,
   tableOfContents: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
