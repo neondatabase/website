@@ -3,6 +3,7 @@ title: Data anonymization
 subtitle: Anonymize data in Neon branches using the PostgreSQL Anonymizer extension
 enableTableOfContents: true
 updatedOn: '2025-03-07T21:44:32.257Z'
+tag: new
 ---
 
 When working with production data, it's crucial to ensure that sensitive user information remains protected — especially in development or testing environments. With Neon, creating branches is fast, but how do you safely clone a production branch without exposing personal data?
