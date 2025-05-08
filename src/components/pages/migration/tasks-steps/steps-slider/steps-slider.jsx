@@ -138,7 +138,7 @@ const StepsSlider = ({ items }) => {
         </Swiper>
         <div className="pointer-events-none absolute inset-x-0 bottom-0 mx-16 h-8 lg:mx-0">
           <div className="absolute inset-x-0 top-1/2 -z-30 h-px w-full bg-migration-steps-slider-progress-bg" />
-          <div className="absolute inset-x-0 top-1/2 -z-10 h-px overflow-hidden px-12 [mask-image:linear-gradient(to_right,#494B50_0%,#494B50_80%,transparent_100%)] lg:px-12 md:mx-6 md:px-0">
+          <div className="absolute inset-x-0 top-1/2 -z-10 h-px overflow-hidden px-12 [mask-image:linear-gradient(to_right,#494B50_0%,#494B50_72%,transparent_100%)] lg:px-12 md:mx-6 md:px-0 md:[mask-image:none]">
             <div
               ref={progressBarRef}
               className="absolute top-0 h-px w-0 bg-gray-new-30 transition-all duration-300 ease-linear"
