@@ -53,10 +53,11 @@ Explore supported Postgres extensions by category. Also see:
 ## Data / Transformations
 
 <DetailIconCards>
-
 <a href="https://postgis.net/docs/Extras.html#Address_Standardizer" description="A single-line address parser that takes an input address and normalizes it based on a set of rules" icon="data">address_standardizer</a>
 
 <a href="https://postgis.net/docs/Extras.html#Address_Standardizer_Tables" description="Provides data for standardizing US addresses, for use with the address_standardizer extension" icon="data">address_standardizer_data_us</a>
+
+<a href="/docs/extensions/postgresql-anonymizer" description="Provides data masking and anonymization capabilities for protecting personally identifiable information (PII) and sensitive data in Postgres databases" icon="data">anon</a>
 
 <a href="/docs/extensions/citext" description="Provides a case-insensitive character string type that internally calls lower when comparing values in Postgres" icon="data">citext</a>
 
@@ -257,6 +258,8 @@ Explore supported Postgres extensions by category. Also see:
 ## Security
 
 <DetailIconCards>
+
+<a href="/docs/extensions/postgresql-anonymizer" description="Provides data masking and anonymization capabilities for protecting personally identifiable information (PII) and sensitive data in Postgres databases" icon="data">anon</a>
 
 <a href="/docs/guides/neon-authorize#how-the-pgsessionjwt-extension-works" description="Enables RLS policies to verify user identity directly within SQL queries" icon="check">pg_session_jwt</a>
 

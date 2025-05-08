@@ -988,6 +988,9 @@
           items:
             - title: Supported extensions
               slug: extensions/pg-extensions
+            - title: anon
+              slug: extensions/postgresql-anonymizer
+              tag: new
             - title: dblink
               slug: extensions/dblink
             - title: citext
@@ -1045,9 +1048,6 @@
               slug: extensions/wal2json
             - title: pg_cron
               slug: extensions/pg_cron
-              tag: new
-            - title: PostgreSQL Anonymizer
-              slug: extensions/postgresql-anonymizer
               tag: new
         - title: Functions
           slug: functions/introduction
