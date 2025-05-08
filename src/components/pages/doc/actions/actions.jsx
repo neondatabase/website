@@ -79,8 +79,20 @@ CopyMarkdownButton.propTypes = {
 };
 
 const Actions = ({ githubPath, withBorder = false }) => {
-  const gitHubLink = `${process.env.NEXT_PUBLIC_GITHUB_PATH}${githubPath}`;
-  const rawFileLink = `${process.env.NEXT_PUBLIC_GITHUB_RAW_PATH}${githubPath}`;
+  const githubBase = process.env.NEXT_PUBLIC_GITHUB_PATH;
+  const githubRawBase = process.env.NEXT_PUBLIC_GITHUB_RAW_PATH;
+
+  // TODO: remove later once everyone has the new env variables
+  if (!githubBase || !githubRawBase) {
+    if (process.env.NODE_ENV === 'development') {
+      // eslint-disable-next-line no-console
+      console.log('Missing NEXT_PUBLIC_GITHUB_PATH or NEXT_PUBLIC_GITHUB_RAW_PATH env variable.');
+    }
+    return null;
+  }
+
+  const gitHubLink = `${githubBase}${githubPath}`;
+  const rawFileLink = `${githubRawBase}${githubPath}`;
   const chatGptLink = `https://chatgpt.com/?hints=search&q=Read+${rawFileLink}`;
 
   return (
