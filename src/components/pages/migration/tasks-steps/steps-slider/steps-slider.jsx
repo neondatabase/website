@@ -71,7 +71,7 @@ const StepsSlider = ({ items }) => {
         const currentSlide = s.activeIndex;
         const slideProgress = 1 - progress;
         const totalProgress = ((currentSlide + slideProgress) / totalSlides) * 100;
-        width = Math.min(totalProgress, 68); // limit max progress on 3rd slide
+        width = Math.min(totalProgress, 100);
       }
       progressBarRef.current.style.width = `${width}%`;
     }
@@ -90,7 +90,7 @@ const StepsSlider = ({ items }) => {
         const totalSlides = items.length;
         const currentSlide = swiper.activeIndex;
         const progress = (currentSlide / totalSlides) * 100;
-        width = Math.min(progress, 68); // limit max progress on 3rd slide
+        width = Math.min(progress, 100);
       }
       progressBarRef.current.style.width = `${width}%`;
     }
@@ -138,7 +138,7 @@ const StepsSlider = ({ items }) => {
         </Swiper>
         <div className="pointer-events-none absolute inset-x-0 bottom-0 mx-16 h-8 lg:mx-0">
           <div className="absolute inset-x-0 top-1/2 -z-30 h-px w-full bg-migration-steps-slider-progress-bg" />
-          <div className="absolute inset-x-0 top-1/2 -z-10 h-px overflow-hidden px-12 lg:px-12 md:mx-6 md:px-0">
+          <div className="absolute inset-x-0 top-1/2 -z-10 h-px overflow-hidden px-12 [mask-image:linear-gradient(to_right,#494B50_0%,#494B50_80%,transparent_100%)] lg:px-12 md:mx-6 md:px-0">
             <div
               ref={progressBarRef}
               className="absolute top-0 h-px w-0 bg-gray-new-30 transition-all duration-300 ease-linear"
@@ -184,16 +184,16 @@ const StepsSlider = ({ items }) => {
         {items.map(({ title, description, link }, index) => (
           <SwiperSlide tag="li" key={index} className="bg-black-pure">
             <div className="caption-content mx-8 flex flex-col items-start gap-2.5 text-left lg:mr-0 lg:gap-2 md:mx-auto md:max-w-md md:items-center md:text-center">
-              <h3 className="text-xl font-medium leading-dense tracking-tighter text-white lg:text-lg">
+              <h3 className="swiper-no-swiping text-xl font-medium leading-dense tracking-tighter text-white lg:text-lg">
                 {title}
               </h3>
               <p
-                className="text-16 font-regular text-pretty leading-normal tracking-extra-tight text-gray-new-60 md:mx-2.5"
+                className="text-16 font-regular swiper-no-swiping text-pretty leading-normal tracking-extra-tight text-gray-new-60 md:mx-2.5"
                 dangerouslySetInnerHTML={{ __html: description }}
               />
               {link && (
                 <Link
-                  className="text-sm leading-none tracking-[-0.03em]"
+                  className="swiper-no-swiping text-sm leading-none tracking-[-0.03em]"
                   to={link.url}
                   theme="white"
                   withArrow
