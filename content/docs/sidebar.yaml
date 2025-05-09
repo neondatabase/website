@@ -938,7 +938,7 @@
   items:
     - title: Data anonymization
       slug: workflows/data-anonymization
-      icon: auth
+      icon: anonymize
       tag: new
     - title: Neon Twin
       slug: guides/neon-twin-intro
