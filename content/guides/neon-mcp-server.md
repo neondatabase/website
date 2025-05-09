@@ -53,16 +53,21 @@ The Neon MCP server's ability to execute arbitrary commands from natural languag
 
 Neon MCP server exposes the following actions, which primarily map to **Neon API endpoints**:
 
-- `list_projects`: Action to list all your Neon projects. This uses the Neon API to retrieve a summary of all projects associated with your Neon account.
+- `list_projects`: Action to list all your Neon projects. This uses the Neon API to retrieve a summary of all projects associated with your Neon account. Enhanced with better hints and a default limit of 10 projects for more manageable output.
 - `describe_project`: Action to get detailed information about a specific Neon project. Provides comprehensive details about a chosen project, such as its ID, name, and associated branches.
 - `create_project`: Action to create a new Neon project — a container in Neon for branches, databases, roles, and computes.
 - `delete_project`: Action to delete an existing Neon project.
 - `create_branch`: Action to create a new branch within a Neon project. Leverages Neon's branching feature, allowing you to create new branches for development or migrations.
 - `delete_branch`: Action to delete an existing branch in a Neon project.
 - `describe_branch`: Action to get details about a specific branch. Retrieves information about a particular branch, such as its name and ID.
+- `list_branch_computes`: Action to retrieve information about your branch computes, including compute ID, type, size, and autoscaling details. Helps with branch compute management.
 - `get_connection_string`: Action to retrieve a connection string for a specific database in a Neon project. Returns a formatted connection string that can be used to connect to the database.
 - `run_sql`: Action to execute a single SQL query against a Neon database. Allows you to run read or write SQL queries.
 - `run_sql_transaction`: Action to execute a series of SQL queries within a transaction against a Neon database. Enables running multiple SQL statements as a single atomic transaction, ensuring data consistency.
+- `list_slow_queries`: Action to identify performance bottlenecks by finding the slowest queries in your database. Helps you optimize application performance.
+- `explain_sql_statement`: Action to analyze query execution plans. Part of the query performance tuning system that helps understand how your queries are executed.
+- `prepare_query_tuning`: Action to suggest performance optimizations for your queries. Part of the query performance tuning system that provides recommendations for improving query performance.
+- `complete_query_tuning`: Action to apply or discard optimizations after testing. Part of the query performance tuning system that finalizes the optimization process.
 - `get_database_tables`: Action to list all tables in a specified Neon database. Provides a list of tables.
 - `describe_table_schema`: Action to retrieve the schema definition of a specific table. Details the structure of a table, including columns and data types.
 - `prepare_database_migration`: Action to initiate a database migration process, utilizing a temporary branch for safety. Begins the process of altering your database schema, safely using Neon's branching feature.
