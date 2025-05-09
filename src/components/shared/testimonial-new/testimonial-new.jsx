@@ -26,7 +26,6 @@ CompanyLogo.propTypes = {
 const TestimonialNew = ({
   className = '',
   quoteClassName = '',
-  citeClassName = '',
   quote,
   author,
   company,
@@ -78,12 +77,7 @@ const TestimonialNew = ({
                   priority={isPriority}
                 />
               )}
-              <span
-                className={clsx(
-                  'text-lg font-light leading-tight tracking-extra-tight text-gray-new-70 lg:text-base md:mx-auto md:mt-2 md:max-w-[70%] md:text-center md:text-sm',
-                  citeClassName
-                )}
-              >
+              <span className="text-lg font-light leading-tight tracking-extra-tight text-gray-new-70 lg:text-base md:mx-auto md:mt-2 md:text-center md:text-sm">
                 {author.name}
                 <cite className="ml-1.5 not-italic text-gray-new-50 before:mr-1.5 before:inline-flex before:h-px before:w-4 before:bg-gray-new-50 before:align-middle">
                   {author.position}
@@ -102,7 +96,6 @@ const TestimonialNew = ({
 TestimonialNew.propTypes = {
   className: PropTypes.string,
   quoteClassName: PropTypes.string,
-  citeClassName: PropTypes.string,
   quote: PropTypes.string.isRequired,
   author: PropTypes.shape({
     name: PropTypes.string.isRequired,

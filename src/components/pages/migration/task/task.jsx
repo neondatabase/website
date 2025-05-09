@@ -4,8 +4,8 @@ import Container from 'components/shared/container/container';
 import GradientBorder from 'components/shared/gradient-border/index';
 import importDatabase from 'images/pages/migration/import-database.jpg';
 
-const TaskStepSimple = () => (
-  <section className="task-step-simple safe-paddings relative pt-[185px] xl:pt-[160px] lg:pt-[135px] md:pt-[96px]">
+const Task = () => (
+  <section className="task safe-paddings relative pt-[185px] xl:pt-[160px] lg:pt-[135px] md:pt-[96px]">
     <Container className="relative lg:mx-8 md:mx-1" size="768">
       <div className="flex items-start gap-16 lg:justify-start lg:gap-16 sm:flex-col sm:gap-8">
         <div className="flex-1 xl:mt-1.5 lg:mt-0 sm:w-full">
@@ -38,4 +38,4 @@ const TaskStepSimple = () => (
   </section>
 );
 
-export default TaskStepSimple;
+export default Task;

@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 import { Autoplay, EffectFade, Pagination, Thumbs } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -20,8 +21,11 @@ const StepsSlider = ({ items }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const progressBarRef = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
-  const swiperContainerRef = useRef(null);
   const [autoplayEnabled, setAutoplayEnabled] = useState(false);
+  const [swiperContainerRef, isInView] = useInView({
+    threshold: 1,
+    triggerOnce: true,
+  });
 
   useEffect(() => {
     const update = () => {
@@ -33,22 +37,11 @@ const StepsSlider = ({ items }) => {
   }, []);
 
   useEffect(() => {
-    const observer = new window.IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !autoplayEnabled) {
-          mainSwiperRef.current.autoplay?.start();
-          setAutoplayEnabled(true);
-        }
-      },
-      { threshold: 1 }
-    );
-
-    if (swiperContainerRef.current) {
-      observer.observe(swiperContainerRef.current);
+    if (isInView && !autoplayEnabled) {
+      mainSwiperRef.current?.autoplay?.start();
+      setAutoplayEnabled(true);
     }
-
-    return () => observer.disconnect();
-  }, [autoplayEnabled]);
+  }, [isInView, autoplayEnabled]);
 
   const pagination = {
     clickable: true,
@@ -59,21 +52,21 @@ const StepsSlider = ({ items }) => {
     },
   };
 
-  const onAutoplayTimeLeft = (s, time, progress) => {
+  const calculateProgress = (swiper, progress = 0) => {
+    const totalSlides = items.length;
+    if (isMobile) {
+      const start = (swiper.activeIndex / (totalSlides - 1)) * 100;
+      const end = ((swiper.activeIndex + 1) / (totalSlides - 1)) * 100;
+      return start + (end - start) * (1 - progress);
+    }
+    const currentSlide = swiper.activeIndex;
+    const slideProgress = 1 - progress;
+    return Math.min(((currentSlide + slideProgress) / totalSlides) * 100, 100);
+  };
+
+  const handleAutoplayTimeLeft = (swiper, time, progress) => {
     if (progressBarRef.current) {
-      let width = 0;
-      const totalSlides = items.length;
-      if (isMobile) {
-        const start = (s.activeIndex / (totalSlides - 1)) * 100;
-        const end = ((s.activeIndex + 1) / (totalSlides - 1)) * 100;
-        width = start + (end - start) * (1 - progress);
-      } else {
-        const currentSlide = s.activeIndex;
-        const slideProgress = 1 - progress;
-        const totalProgress = ((currentSlide + slideProgress) / totalSlides) * 100;
-        width = Math.min(totalProgress, 100);
-      }
-      progressBarRef.current.style.width = `${width}%`;
+      progressBarRef.current.style.width = `${calculateProgress(swiper, progress)}%`;
     }
   };
 
@@ -82,17 +75,7 @@ const StepsSlider = ({ items }) => {
       thumbsSwiper.slideTo(swiper.activeIndex);
     }
     if (progressBarRef.current) {
-      let width = 0;
-      if (isMobile) {
-        const totalSlides = items.length;
-        width = (swiper.activeIndex / (totalSlides - 1)) * 100;
-      } else {
-        const totalSlides = items.length;
-        const currentSlide = swiper.activeIndex;
-        const progress = (currentSlide / totalSlides) * 100;
-        width = Math.min(progress, 100);
-      }
-      progressBarRef.current.style.width = `${width}%`;
+      progressBarRef.current.style.width = `${calculateProgress(swiper)}%`;
     }
   };
 
@@ -112,7 +95,7 @@ const StepsSlider = ({ items }) => {
           spaceBetween={0}
           thumbs={thumbsSwiper ? { swiper: thumbsSwiper } : false}
           wrapperTag="ul"
-          onAutoplayTimeLeft={onAutoplayTimeLeft}
+          onAutoplayTimeLeft={handleAutoplayTimeLeft}
           onSlideChange={handleSlideChange}
           onSwiper={(swiper) => {
             swiper.autoplay?.stop();

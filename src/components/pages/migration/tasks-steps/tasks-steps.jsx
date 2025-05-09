@@ -41,13 +41,13 @@ const ITEMS = [
     },
     link: {
       text: 'See the docs',
-      url: LINKS.migration,
+      url: LINKS.docsMigration,
     },
   },
 ];
 
 const TasksSteps = () => (
-  <section className="task-step-simple safe-paddings relative pt-[180px] xl:pt-[157px] lg:pt-[131px] md:pt-[90px]">
+  <section className="tasks-steps safe-paddings relative pt-[180px] xl:pt-[157px] lg:pt-[131px] md:pt-[90px]">
     <Container className="relative lg:mx-8 md:mx-1" size="768">
       <header className="max-w-[616px]">
         <p className="mb-4 text-base font-medium uppercase tracking-wide text-gray-new-50 lg:text-sm md:mb-3 md:text-[13px]">
