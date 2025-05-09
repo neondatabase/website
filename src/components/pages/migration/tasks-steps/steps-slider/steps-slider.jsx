@@ -59,7 +59,7 @@ const StepsSlider = ({ items }) => {
       const end = ((swiper.activeIndex + 1) / (totalSlides - 1)) * 100;
       return start + (end - start) * (1 - progress);
     }
-    const currentSlide = swiper.activeIndex;
+    const currentSlide = swiper.realIndex !== undefined ? swiper.realIndex : swiper.activeIndex;
     const slideProgress = 1 - progress;
     return Math.min(((currentSlide + slideProgress) / totalSlides) * 100, 100);
   };
@@ -95,6 +95,8 @@ const StepsSlider = ({ items }) => {
           spaceBetween={0}
           thumbs={thumbsSwiper ? { swiper: thumbsSwiper } : false}
           wrapperTag="ul"
+          loop={!isMobile}
+          touchReleaseOnEdges
           onAutoplayTimeLeft={handleAutoplayTimeLeft}
           onSlideChange={handleSlideChange}
           onSwiper={(swiper) => {
