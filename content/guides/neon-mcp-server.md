@@ -53,7 +53,7 @@ The Neon MCP server's ability to execute arbitrary commands from natural languag
 
 Neon MCP server exposes the following actions, which primarily map to **Neon API endpoints**:
 
-- `list_projects`: Action to list all your Neon projects. This uses the Neon API to retrieve a summary of all projects associated with your Neon account. Enhanced with better hints and a default limit of 10 projects for more manageable output.
+- `list_projects`: Retrieves a list of your Neon projects, providing a summary of each project associated with your Neon account. Supports limiting the number of projects returned (default: 10).
 - `describe_project`: Action to get detailed information about a specific Neon project. Provides comprehensive details about a chosen project, such as its ID, name, and associated branches.
 - `create_project`: Action to create a new Neon project — a container in Neon for branches, databases, roles, and computes.
 - `delete_project`: Action to delete an existing Neon project.
