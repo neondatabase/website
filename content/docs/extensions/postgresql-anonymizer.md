@@ -24,15 +24,15 @@ Enable the `anon` extension in your Neon database by following these steps:
 
 2. Enable experimental extensions:
 
-    ```sql
-    SET neon.allow_unstable_extensions='true';
-    ```
+   ```sql
+   SET neon.allow_unstable_extensions='true';
+   ```
 
 3. Install the extension:
 
-    ```sql
-    CREATE EXTENSION IF NOT EXISTS anon;
-    ```
+   ```sql
+   CREATE EXTENSION IF NOT EXISTS anon;
+   ```
 
 ## Masking rules
 
@@ -42,15 +42,15 @@ Masking rules define which data to mask and how to mask it using SQL syntax. The
 
 The `anon` extension provides [built-in functions](https://postgresql-anonymizer.readthedocs.io/en/latest/masking_functions/) for different anonymization requirements, including but not limited to:
 
-| Function Type | Description | Example |
-|---------------|-------------|---------|
-| Faking | Generate realistic data | `anon.fake_first_name()` and `anon.lorem_ipsum()` |
-| Pseudonymization | Create consistent and reversible fake data | `anon.pseudo_email(seed)` |
-| Randomization | Generate random values | `anon.random_int_between(10, 100)` and `anon.random_in_enum(enum_column)` |
-| Partial scrambling | Hide portions of strings | `anon.partial(ip_address, 8, ''XXX.XXX'', 0)` would change `192.168.1.100` to `192.168.XXX.XXX` |
-| Nullification | Replace with static values or `NULL` | `MASKED WITH VALUE 'CONFIDENTIAL'` |
-| Noise addition | Alter numerical values while maintaining distribution | `anon.noise(salary, 0.1)` adds `+/- 10%` noise to the `salary` column |
-| Generalization | Replace specific values with broader categories | `anon.generalize_int4range(age, 10)` would change `54` to `[50,60)` |
+| Function Type      | Description                                           | Example                                                                                         |
+| ------------------ | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Faking             | Generate realistic data                               | `anon.fake_first_name()` and `anon.lorem_ipsum()`                                               |
+| Pseudonymization   | Create consistent and reversible fake data            | `anon.pseudo_email(seed)`                                                                       |
+| Randomization      | Generate random values                                | `anon.random_int_between(10, 100)` and `anon.random_in_enum(enum_column)`                       |
+| Partial scrambling | Hide portions of strings                              | `anon.partial(ip_address, 8, ''XXX.XXX'', 0)` would change `192.168.1.100` to `192.168.XXX.XXX` |
+| Nullification      | Replace with static values or `NULL`                  | `MASKED WITH VALUE 'CONFIDENTIAL'`                                                              |
+| Noise addition     | Alter numerical values while maintaining distribution | `anon.noise(salary, 0.1)` adds `+/- 10%` noise to the `salary` column                           |
+| Generalization     | Replace specific values with broader categories       | `anon.generalize_int4range(age, 10)` would change `54` to `[50,60)`                             |
 
 ## Static masking
 
@@ -131,6 +131,7 @@ SELECT * FROM users;
 | 3   | peter_jones | michael33@example.org     | 5XXX-XXX-11  | Chicago     |
 
 Note how:
+
 - Email addresses were replaced with fictional but valid looking addresses
 - Phone numbers only show the first digit and last two digits
 - The `username` and `city` columns remain unchanged as no masking rules were defined for them
@@ -141,10 +142,10 @@ Note how:
 
 - Neon currently only supports static masking with the `anon` extension
 - Additional `pg_catalog` functions cannot be declared as `TRUSTED` in Neon's implementation
-  
+
 ## Conclusion
 
-The `anon` extension provides a toolkit for protecting sensitive data in Postgres databases. 
+The `anon` extension provides a toolkit for protecting sensitive data in Postgres databases.
 By defining appropriate masking rules, you can create anonymized datasets that maintain usability while protecting individual privacy.
 
 ## Reference
