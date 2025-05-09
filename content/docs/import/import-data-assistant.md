@@ -3,7 +3,7 @@ title: Import Data Assistant
 subtitle: Move your existing database to Neon using our automated import tool
 enableTableOfContents: true
 tag: beta
-updatedOn: '2025-05-02T15:53:30.975Z'
+updatedOn: '2025-05-09T09:25:03.623Z'
 redirectFrom:
   - /docs/import/migration-assistant
 ---
@@ -38,7 +38,7 @@ You'll need:
   postgresql://username:password@host:port/database?sslmode=require
   ```
 - **Admin privileges** on your source database. We recommend using a superuser or a user with the necessary `CREATE`, `SELECT`, `INSERT`, and `REPLICATION` privileges.
-- A database **smaller than 10GB** in size for automated import
+- A database **smaller than 10 GB** in size for automated import
 
 <Admonition type="important">
 If your database is larger than 10 GB and you need help, [contact us](https://neon.tech/migration-assistance).
@@ -50,7 +50,7 @@ If your database is larger than 10 GB and you need help, [contact us](https://ne
 
 Enter your database connection string and we'll verify:
 
-- Database size is within the current 10GB limit
+- Database size is within the current 10 GB limit
 - Postgres version compatibility (Postgres 14 to 17)
 - Extension compatibility
 - Region availability
@@ -69,7 +69,7 @@ During import, your source database remains untouched — we only read from it t
 
 ### Known Limitations
 
-- Currently limited to databases **smaller than 10GB**. We are actively working on supporrting bigger workloads. In the meantime, conctact support if you are looking to migrate bigger databases.
+- Currently limited to databases **smaller than 10GB**. We are actively working on supporting bigger workloads. In the meantime, conctact support if you are looking to migrate bigger databases.
 - The feature is supported in **AWS regions** only.
 - Databases that use **event triggers are not supported**.
 - Supabase and Heroku databases are not supported, as both use proprietary event triggers.
@@ -87,7 +87,11 @@ After a successful import:
    _Imported branches are typically named with a timestamp, as shown here._
 
 2. Run some test queries to ensure everything imported correctly.
-3. Switch your connection string to point to your new Neon database.
+3. Click on the three dots next to the branch name and select **Set as default** to make it your default branch.
+4. Optional cleanup:
+   - Delete the old branches (`production` and `development`) if they are no longer needed.
+   - Rename the new branch to `production` for clarity and consistency.
+5. Switch your connection string to point to your new Neon database.
 
 </Steps>
 

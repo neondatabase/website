@@ -17,7 +17,7 @@ const GithubStars = async ({ isDarkTheme }) => {
   const starsCount = await getGithubStars();
   return (
     <Suspense>
-      <GithubStarCounter isDarkTheme={isDarkTheme} starsCount={starsCount} />
+      <GithubStarCounter isDarkTheme={isDarkTheme} starsCount={starsCount} tagName="Header" />
     </Suspense>
   );
 };
@@ -36,6 +36,7 @@ const Sidebar = ({ isDarkTheme, isClient, className }) => (
       to={LINKS.discord}
       target="_blank"
       rel="noopener noreferrer"
+      tagName="Header"
     >
       <DiscordIcon width={18} height={18} />
       <span className="text-sm leading-none tracking-extra-tight">Discord</span>
@@ -46,7 +47,7 @@ const Sidebar = ({ isDarkTheme, isClient, className }) => (
         className={clsx(
           'px-4.5 whitespace-nowrap border font-semibold',
           isDarkTheme
-            ? 'border-gray-new-30 hover:border-gray-new-40'
+            ? 'border-gray-new-30 text-white hover:border-gray-new-40'
             : 'border-gray-new-70 hover:border-gray-new-50 dark:border-gray-new-30 dark:hover:border-gray-new-40'
         )}
         to={LINKS.login}

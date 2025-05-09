@@ -22,8 +22,7 @@ const appearAndExitAnimationVariants = {
 
 const themeClassNames = {
   sidebar: {
-    block:
-      'mt-12 flex-col gap-3 p-3.5 lg:flex-row lg:items-center lg:gap-[72px] lg:px-6 lg:py-[18px]',
+    block: 'flex-col gap-3 p-3.5 lg:flex-row lg:items-center lg:gap-[72px] lg:px-6 lg:py-[18px]',
     title: 'text-[15px] lg:shrink-0 lg:text-lg',
     input: 'pr-20 lg:pr-32',
     sendText: 'hidden lg:block',

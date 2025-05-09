@@ -37,7 +37,6 @@ const ITEMS = [
 
 const themeClassNames = {
   sidebar: {
-    block: 'mt-[60px] max-w-[184px]',
     title: 'mb-4 text-sm font-semibold leading-tight tracking-extra-tight',
     list: 'flex flex-wrap gap-2',
     item: 'block',

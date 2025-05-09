@@ -10,7 +10,7 @@ export default function getNodeText(node) {
       return '';
 
     case 'object': {
-      if (node instanceof Array) return node.map(getNodeText).join('');
+      if (node instanceof Array) return node.map(getNodeText).join(' ').trim();
 
       if ('props' in node) return getNodeText(node.props.children);
     }
