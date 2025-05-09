@@ -41,6 +41,7 @@ You can also transfer projects from one org to another using the Neon API:
 `POST /organizations/{source_org_id}/projects/transfer`
 
 **You'll need:**
+
 <div style={{ display: 'flex', alignItems: 'start', marginBottom: '0.5em' }}>
   <span style={{ marginRight: '0.5em' }}>✅</span>
   <span>
@@ -81,12 +82,15 @@ curl --request POST \
 ```
 
 Where:
+
 - `source_org_id` (in URL path) is the organization where projects currently reside
 - `destination_org_id` is the organization receiving the projects
 - `project_ids` is an array of up to 400 project IDs to transfer
 
 ### Response behavior
+
 A successful transfer returns a 200 status code with an empty JSON object:
+
 ```json
 {}
 ```
@@ -94,9 +98,11 @@ A successful transfer returns a 200 status code with an empty JSON object:
 You can verify the transfer in the Neon Console or by listing the projects in the destination organization via API.
 
 ### Error responses
+
 The API may return these errors:
+
 - **`406`** – Transfer failed - the target organization has too many projects or its plan is incompatible with the source organization. Reduce projects or upgrade the organization.
 - **`422`** – One or more of the provided project IDs have GitHub or Vercel integrations installed. Transferring integration projects is currently not supported.
-</Steps>
+  </Steps>
 
 <NeedHelp/>

@@ -80,7 +80,7 @@ Once you have no orgs left, you can then click **Delete**.
 - You'll receive a confirmation email.
 - If you change your mind, you can reactivate your account by logging in again within 30 days. Your personal info will be restored, though not your API keys.
 - After 30 days, your account and all related data will be permanently deleted.
-</Steps>
+  </Steps>
 
 ## Need to recover access to an account?
 
