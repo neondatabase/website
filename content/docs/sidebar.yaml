@@ -652,6 +652,8 @@
           slug: guides/reflex
         - title: Remix
           slug: guides/remix
+        - title: Micronaut Kotlin
+          slug: guides/micronaut-kotlin
         - title: SolidStart
           slug: guides/solid-start
         - title: Sveltekit
