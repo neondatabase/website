@@ -936,6 +936,10 @@
               slug: guides/neon-rls-custom-jwt
 - section: Workflows
   items:
+    - title: Data anonymization
+      slug: workflows/data-anonymization
+      icon: auth
+      tag: new
     - title: Neon Twin
       slug: guides/neon-twin-intro
       icon: neon-twin
