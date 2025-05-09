@@ -217,7 +217,8 @@ Here is a non-exhaustive list of authentication providers. The table shows which
 | **SuperTokens**                           | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://{YOUR_SUPER_TOKENS_CORE_CONNECTION_URI}/.well-known/jwks.json`</span>                     | [docs](https://supertokens.com/docs/quickstart/integrations/aws-lambda/session-verification/using-jwt-authorizer)             |
 | **WorkOS**                                | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://api.workos.com/sso/jwks/{YOUR_CLIENT_ID}`</span>                                          | [docs](https://workos.com/docs/reference/user-management/session-tokens/jwks)                                                 |
 
-<small>\* If your Auth0 account/project is very old, you might bump into [this issue](https://community.auth0.com/t/certificate-thumbprint-is-longer-than-20-bytes/7794/9) which will result in a 'jwk not found' error when using Neon RLS. To resolve it, you can rotate your signing keys in the Auth0 tenant settings under the "Signing Keys" tab.</small>
+<small>\* If you're using an older Auth0 project, you might encounter [this issue](https://community.auth0.com/t/certificate-thumbprint-is-longer-than-20-bytes/7794/9), resulting in a `jwk not found` error when working with Neon RLS. To fix this, go to your Auth0 tenant settings and rotate your signing keys under the **Signing Keys** tab.
+.</small>
 
 ### JWT Audience Checks
 
