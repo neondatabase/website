@@ -72,6 +72,7 @@ The following features are not yet HIPAA compliant, so cannot be used in project
 
 - **Neon Auth** – Integrates an Auth provider that is not currently HIPAA-compliant.
 - **Neon's Data API feature** – Hosted outside of Neon’s HIPAA-compliant environment.
+
 If you would like an update on when these features will be HIPAA-compliant, please contact [hipaa@neon.tech](mailto:hipaa@neon.tech).
 
 ## Enabling HIPAA for a Neon project
