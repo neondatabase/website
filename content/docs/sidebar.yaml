@@ -94,6 +94,10 @@
               slug: guides/file-storage
             - title: File storage with AWS S3
               slug: guides/aws-s3
+            - title: File storage with Azure Blob Storage
+              slug: guides/azure-blob-storage
+            - title: File storage with Backblaze B2
+              slug: guides/backblaze-b2
             - title: File storage with Cloudflare R2
               slug: guides/cloudflare-r2
             - title: Media storage with Cloudinary
@@ -235,7 +239,7 @@
           slug: introduction/branch-restore
         - title: Backup & restore
           slug: guides/backup-restore
-          tag: early access
+          tag: new
         - title: Branching
           slug: guides/branching-intro
           items:
@@ -946,6 +950,10 @@
               slug: guides/neon-rls-custom-jwt
 - section: Workflows
   items:
+    - title: Data anonymization
+      slug: workflows/data-anonymization
+      icon: anonymize
+      tag: new
     - title: Neon Twin
       slug: guides/neon-twin-intro
       icon: neon-twin
@@ -998,6 +1006,9 @@
           items:
             - title: Supported extensions
               slug: extensions/pg-extensions
+            - title: anon
+              slug: extensions/postgresql-anonymizer
+              tag: new
             - title: dblink
               slug: extensions/dblink
             - title: citext
@@ -1053,6 +1064,9 @@
               tag: new
             - title: wal2json
               slug: extensions/wal2json
+            - title: pg_cron
+              slug: extensions/pg_cron
+              tag: new
         - title: Functions
           slug: functions/introduction
           items:

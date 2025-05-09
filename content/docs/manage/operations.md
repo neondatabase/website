@@ -2,7 +2,7 @@
 title: System operations
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-11-30T11:53:56.075Z'
+updatedOn: '2025-05-06T12:14:06.260Z'
 ---
 
 An operation is an action performed by the Neon Control Plane on a Neon object or resource. Operations are typically initiated by user actions, such as creating a branch or deleting a database. Other operations may be initiated by the Neon Control Plane, such as suspending a [compute](/docs/reference/glossary#compute) after a period of inactivity or checking its availability. You can monitor operations to keep an eye on the overall health of your Neon project or to check the status of specific operations. When working with the Neon API, you can poll the status of operations to ensure that an API request is completed before issuing the next API request. For more information, see [Poll operation status](#poll-operation-status).
@@ -322,6 +322,6 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations/05
 
 </details>
 
-Possible operation `status` values include `running`, `finished`, `failed`, `scheduling`. Initially, the status of an operation might be `scheduling`. Before issuing the next API request, you would poll the operation until the status changes to `finished`. You could also add logic to handle a `failed` status.
+Possible operation `status` values include: `scheduling`, `running`, `finished`, `failed`, `cancelling`, `cancelled`, and `skipped`. Only `finished`, `skipped`, and `cancelled` are **terminal statuses**, meaning the operation will not proceed further from these states. Note that `failed` is **not** terminal, as an operation in a `failed` state can still be retried.
 
 <NeedHelp/>

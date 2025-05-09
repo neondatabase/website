@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2025-04-30T02:26:54.989Z'
+updatedOn: '2025-05-06T23:15:17.273Z'
 ---
 
 ## access token
@@ -398,7 +398,9 @@ An open-source relational database management system (RDBMS) emphasizing extensi
 
 ## Postgres role
 
-A Postgres role named for the registered Neon account is created with each Neon project. This role and any additional role created in the Neon Console, API, or CLI is assigned the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which allows creating databases, roles, and reading and writing data in all tables, views, sequences. Roles created with SQL are created with the same basic [public schema privileges](/docs/manage/database-access#public-schema-privileges) granted to newly created roles in a standalone Postgres installation. These users are not assigned the `neon_superuser` role. They must be selectively granted permissions for each database object. For more information, see [Manage database access](/docs/manage/database-access).
+A Postgres role is an entity that can own database objects and has privileges to perform database actions.
+
+A Postgres role named `neondb_owner` is created with each Neon project by default. This role owns the ready-to-use `neondb` database, also created by default with each new Neon project. This role and any additional role created in the Neon Console, API, or CLI is assigned the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which allows creating databases, roles, and reading and writing data in all tables, views, sequences. Roles created with SQL are created with the same basic [public schema privileges](/docs/manage/database-access#public-schema-privileges) granted to newly created roles in a standalone Postgres installation. These users are not assigned the `neon_superuser` role. They must be selectively granted permissions for each database object. For more information, see [Manage database access](/docs/manage/database-access).
 
 Older projects may have a `web-access` system role, used by the [SQL Editor](#sql-editor) and Neon’s [Passwordless auth](#passwordless-auth). The `web-access` role is system-managed. It cannot be modified, removed, or used in other authentication scenarios.
 
@@ -418,7 +420,7 @@ For more information, see [default branch](/docs/manage/branches#default-branch)
 
 ## Project
 
-A collection of branches, databases, roles, and other project resources and settings. A project contains a compute with a Postgres server and storage for the project data.
+A collection of branches, databases, roles, and other project resources and settings. A project contains a primary [compute](#compute) that runs Postgres. It may also include [read replicas](#read-replica). A Neon account may have multiple projects.
 
 ## Project ID
 
@@ -465,6 +467,10 @@ A free and open-source emulator and virtualizer that performs hardware virtualiz
 ## RAM
 
 Random Access Memory, a type of computer memory used to store data that is being actively processed.
+
+## read replica
+
+A read replica in Neon is a compute instance that connects to the same underlying storage as the primary compute but operates in read-only mode. It lets you offload read queries from your primary compute to improve performance and scalability, especially for analytical or reporting workloads. Read replica computes can be added or removed without affecting the primary compute.
 
 ## region
 

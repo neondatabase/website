@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 
 import AiAgentIcon from 'icons/docs/sidebar/ai-agent.inline.svg';
 import AiIcon from 'icons/docs/sidebar/ai.inline.svg';
+import AnonymizeIcon from 'icons/docs/sidebar/anonymize.inline.svg';
 import ApiIcon from 'icons/docs/sidebar/api.inline.svg';
 import ArchitectureIcon from 'icons/docs/sidebar/architecture.inline.svg';
 import AuthIcon from 'icons/docs/sidebar/auth.inline.svg';
@@ -51,6 +52,7 @@ import WorkflowsIcon from 'icons/docs/sidebar/workflows.inline.svg';
 
 const icons = {
   'ai-agent': AiAgentIcon,
+  anonymize: AnonymizeIcon,
   ai: AiIcon,
   api: ApiIcon,
   architecture: ArchitectureIcon,

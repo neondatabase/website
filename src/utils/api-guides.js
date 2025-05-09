@@ -3,7 +3,7 @@ import fs from 'fs';
 import { glob } from 'glob';
 import matter from 'gray-matter';
 
-const GUIDES_DIR_PATH = 'content/guides';
+const { GUIDES_DIR_PATH } = require('../constants/content');
 
 const getPostSlugs = async (pathname) => {
   const files = await glob.sync(`${pathname}/**/*.md`, {
