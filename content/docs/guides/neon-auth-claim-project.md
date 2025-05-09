@@ -35,7 +35,7 @@ See [Neon Auth API Reference](/docs/guides/neon-auth-api#transfer-to-your-auth-p
 
 <Admonition type="note">
 After claiming, you'll still be able to access your project from the Neon Console, but you'll also have direct access from the Stack Auth dashboard.
-</Admonition> 
+</Admonition>
 
 </Steps>
 

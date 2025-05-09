@@ -19,7 +19,6 @@ tag: beta
 
 <FeatureBetaProps feature_name="Neon Auth" />
 
-
 ## How it works
 
 When you set up Neon Auth, we create a `neon_auth` schema in your database. As users authenticate and manage their profiles in Neon Auth, you'll see them appear in your list of users on the **Auth** page.
@@ -34,10 +33,10 @@ User data is available in the `neon_auth.users_sync` table shortly after the Neo
 SELECT * FROM neon_auth.users_sync;
 ```
 
-| id          | name           | email              | created_at           | updated_at           | deleted_at | raw_json                                 |
-| ----------- | -------------- | ------------------ | -------------------- | -------------------- | ---------- | ----------------------------------------- |
-| d37b6a30... | Jordan Rivera  | jordan@company.co  | 2025-05-09 16:15:00  | null                 | null       | `{\"id\": \"d37b6a30...\", ...}`            |
-| 51e491df... | Sam Patel      | sam@startup.dev    | 2025-02-27 18:36:00  | 2025-02-27 18:36:00  | null       | `{\"id\": \"51e491df...\", ...}`            |
+| id          | name          | email             | created_at          | updated_at          | deleted_at | raw_json                         |
+| ----------- | ------------- | ----------------- | ------------------- | ------------------- | ---------- | -------------------------------- |
+| d37b6a30... | Jordan Rivera | jordan@company.co | 2025-05-09 16:15:00 | null                | null       | `{\"id\": \"d37b6a30...\", ...}` |
+| 51e491df... | Sam Patel     | sam@startup.dev   | 2025-02-27 18:36:00 | 2025-02-27 18:36:00 | null       | `{\"id\": \"51e491df...\", ...}` |
 
 The following columns are included in the `neon_auth.users_sync` table:
 
