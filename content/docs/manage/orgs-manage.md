@@ -4,20 +4,19 @@ enableTableOfContents: true
 updatedOn: '2025-03-14T18:29:25.736Z'
 ---
 
-Learn how to manage your organization's projects, invite Members and Collaborators, revise permissions, and oversee billing details. This section explains which specific actions each Member can take based on their assigned roles and permissions.
+Learn how to manage your organization's projects, invite Members, revise permissions, and oversee billing details. This section explains which specific actions each Member can take based on their assigned roles and permissions.
 
 <div style={{ display: 'flex' }}>
   <div style={{ flex: 1, paddingRight: '20px' }}>
     <ul>
-      <li><a href="#switch-to-your-organization-account">Switch to your org</a></li>
-      <li><a href="#invite-members">Invite Member</a></li>
+      <li><a href="#invite-members">Invite Members</a></li>
       <li><a href="#invite-collaborators">Invite Collaborators</a></li>
       <li><a href="#set-permissions" style={{ cursor: 'pointer' }} >Set permissions</a></li>
+      <li><a href="#create-and-delete-projects">Create and delete projects</a></li>
     </ul>
   </div>
   <div style={{ flex: 1 }}>
     <ul>
-      <li><a href="#create-and-delete-projects">Create and delete projects</a></li>
       <li><a href="#passwordless-authentication">Passwordless authentication</a></li>
       <li><a href="#rename-an-organization">Rename an organization</a></li>
       <li><a href="#delete-an-organization">Delete an organization</a></li>
@@ -25,12 +24,6 @@ Learn how to manage your organization's projects, invite Members and Collaborato
     </ul>
   </div>
 </div>
-
-## Switch to your Organization account
-
-Easily switch between your personal account and any organization you are a Member of using the navigation breadcrumb.
-
-![Switch between personal and organization](/docs/manage/switch_to_org.png 'no-border')
 
 ## Invite Members
 
@@ -56,7 +49,7 @@ Permissions within the organization are exclusively managed by Admins. As an Adm
 - You can demote any admin to a regular Member.
 - You cannot leave the organization if you are the only Admin. Promote a Member to Admin before you try to leave the org.
 
-  ![organization members](/docs/manage/orgs_members_kebab.png 'no-border')
+![organization members](/docs/manage/orgs_members_kebab.png 'no-border')
 
 ## Rename an organization
 
@@ -93,11 +86,8 @@ Click the More Options menu next to the row in the **Collaborators** table to ma
 
 All Members can create new projects from the Organization's **Projects** page; however, the organization itself retains ownership of these projects, not the individual user.
 
-Members have different capabilities based on their roles:
-
 - Any Member can create a project under the organization's ownership.
-- Members cannot delete projects owned by the organization. They can only delete personal projects from their personal account (switch to personal account via breadcrumb).
-- Admins can delete any project within the organization.
+- Only Admins can delete projects owned by the organization.
 
 ## Passwordless authentication
 
@@ -129,7 +119,7 @@ alexlopez=>
 
 Only Admins can delete an Organization. Before doing so, make sure all projects within the Organization are removed.
 
-In your Organization's **Settings** page, you'll find the **Delete** section. It will list any actions you need to take before deletion is allowed. For example, if you still have outstanding projects that need to be remove, you'll see:
+In your Organization's **Settings** page, you'll find the **Delete** section. It will list any actions you need to take before deletion is allowed. For example, if you still have outstanding projects that need to be removed, you'll see:
 
 ![delete organization](/docs/manage/orgs_delete.png)
 
@@ -149,13 +139,12 @@ For detailed information on pricing and plans, refer to [Neon plans](/docs/intro
 
 ### Downgrade to Free Plan
 
-Admins can downgrade an organization from a paid plan (Launch, Scale, or Enterprise) to the Free plan, with certain limitations:
+You can only have one Free organization per account, and Free orgs are just for solo use (no team members). If you already have a Free org, you can't downgrade another org to Free—you'll see an error if you try.
 
-- The organization must operate within Free plan limits (including storage, project counts, and branch limits)
-- The organization cannot have more than 1 member (Free organizations can only have a single member)
+To downgrade, your org must:
+- Have only one member (just you)
+- Stay within Free plan limits (storage, projects, branches, etc.)
 
-When you start a downgrade (via **Billing** > **Billing summary** > **Change plan**), Neon automatically checks if your organization meets these requirements. If needed, you'll see a notification explaining what needs to be addressed before downgrading.
+If you need help or think you should be able to downgrade, use the **Request support** option during the downgrade process.
 
-If you can't meet these requirements but still wish to downgrade, use the **Request support** option during the downgrade process.
-
-For detailed information on pricing and plans, refer to [Neon plans](/docs/introduction/plans).
+[See Neon plans for details.](/docs/introduction/plans)

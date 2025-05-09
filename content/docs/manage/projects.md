@@ -45,7 +45,7 @@ Similar to **docs.new** for instantly creating Google Docs or **repo.new** for a
 To view your projects:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
-1. From the breadcrumb navigation menu at the top-left of the console, select your personal or organization account.
+1. From the breadcrumb navigation menu at the top-left of the console, select your organization.
 1. The **Projects** page lists your projects, including any projects that have been shared with you.
 
 ## Project settings
@@ -63,7 +63,7 @@ The **Settings** page includes these sub-pages:
 - **Collaborators** — Let other users access your project's databases.
 - **Network Security** — Configure Neon's IP and Private Networking features for secure access.
 - **Logical Replication** — Enable logical replication to replicate data from your Neon project to external data services and platforms.
-- **Transfer** — Transfer your project from a personal account to a Neon organization you are a member of.
+- **Transfer** — Transfer your project from the current organization to another organization you are a member of.
 - **Delete** — Use with care! This action deletes your entire project and all its objects, and is irreversible.
 
 ### General project settings

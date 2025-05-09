@@ -66,7 +66,7 @@ There are two types of organization API keys:
 
 The key token is only displayed once at creation time. Copy it immediately and store it securely. If lost, you’ll need to revoke the key and create a new one. For detailed instructions, see [Manage API Keys](/docs/manage/api-keys#create-an-organization-api-key).
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/createorgapikey)
+[Try in API Reference](https://api-docs.neon.tech/reference/createorgapikey)
 
 ## List API keys
 
@@ -97,7 +97,7 @@ Example response:
 ]
 ```
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/listorgapikeys)
+[Try in API Reference](https://api-docs.neon.tech/reference/listorgapikeys)
 
 ## Revoke an API key
 
@@ -124,7 +124,7 @@ Example response:
 }
 ```
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/revokeorgapikey)
+[Try in API Reference](https://api-docs.neon.tech/reference/revokeorgapikey)
 
 ## Get organization details
 
@@ -150,7 +150,7 @@ Example response:
 }
 ```
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/getorganization)
+[Try in API Reference](https://api-docs.neon.tech/reference/getorganization)
 
 ## List members
 
@@ -189,7 +189,7 @@ Example response:
 }
 ```
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/getorganizationmembers)
+[Try in API Reference](https://api-docs.neon.tech/reference/getorganizationmembers)
 
 <Admonition type="note">The member ID (`id`) from this response is needed for operations like updating roles or removing members.</Admonition>
 
@@ -216,7 +216,7 @@ Example response:
 }
 ```
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/getorganizationmember)
+[Try in API Reference](https://api-docs.neon.tech/reference/getorganizationmember)
 
 ## Update member role
 
@@ -243,7 +243,7 @@ Example response:
 }
 ```
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/updateorganizationmember)
+[Try in API Reference](https://api-docs.neon.tech/reference/updateorganizationmember)
 
 ## Remove member
 
@@ -256,7 +256,7 @@ curl --request DELETE \
      --header 'authorization: Bearer $PERSONAL_API_KEY'
 ```
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/removeorganizationmember)
+[Try in API Reference](https://api-docs.neon.tech/reference/removeorganizationmember)
 
 ## List invitations
 
@@ -286,7 +286,7 @@ Example response:
 }
 ```
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/getorganizationinvitations)
+[Try in API Reference](https://api-docs.neon.tech/reference/getorganizationinvitations)
 
 ## Create invitations
 
@@ -314,7 +314,7 @@ curl --request POST \
      }' | jq
 ```
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/createorganizationinvitations)
+[Try in API Reference](https://api-docs.neon.tech/reference/createorganizationinvitations)
 
 ## Transfer projects between organizations
 
@@ -325,4 +325,4 @@ Key requirements:
 - Must use a personal API key
 - Requires admin permissions in the source organization and at least member permissions in the target
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/transferproject)
+[Try in API Reference](https://api-docs.neon.tech/reference/transferproject)
