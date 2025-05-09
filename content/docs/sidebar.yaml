@@ -890,6 +890,10 @@
           items:
             - title: Tutorial
               slug: guides/neon-auth-demo
+            - title: Creating users
+              slug: guides/neon-auth-create-users
+            - title: Claiming a project
+              slug: guides/neon-auth-claim-project
         - section: Concepts
           items:
             - title: How Neon Auth works
@@ -898,8 +902,10 @@
               slug: guides/neon-auth-tutorial
             - title: Best practices & FAQ
               slug: guides/neon-auth-best-practices
-        - section: REFERENCE
+        - section: Reference
           items:
+            - title: Permissions & roles
+              slug: guides/neon-auth-permissions-roles
             - title: Neon Auth API Reference
               slug: guides/neon-auth-api
     - title: Neon RLS

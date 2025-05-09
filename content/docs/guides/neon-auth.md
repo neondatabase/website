@@ -26,7 +26,7 @@ Click **Setup instructions** to continue.
 
 ## Set up your app
 
-You have two easy options to get started with Neon Auth in your app, both using Next.js: use our template with Neon-managed Stack Auth already included, or add Stack Auth to an existing project.
+You have two easy options to get started with Neon Auth in your app: use our template (built with Next.js), or add Neon Auth to your existing project. Neon Auth works with any framework that supports JWT-based authentication.
 
 **Clone our template**
 
@@ -34,7 +34,9 @@ You have two easy options to get started with Neon Auth in your app, both using 
 git clone https://github.com/neondatabase-labs/neon-auth-nextjs-template.git
 ```
 
-**Add Stack Auth to your existing Next.js project**
+**Add Neon Auth to your existing project**
+
+If you're using Next.js, you can run (this uses Stack Auth tooling under the hood):
 
 ```bash
 npx @stackframe/init-stack@latest
@@ -51,7 +53,7 @@ Neon handles all the setup and gives you the keys you need to add authentication
 You can use these keys right away to integrate auth, or skip ahead to try out user creation in the Console.
 
 ```bash shouldWrap
-# Stack Auth (provided by Neon)
+# Neon Auth environment variables (these keys are provided by Neon Auth)
 NEXT_PUBLIC_STACK_PROJECT_ID='<neon_provided_stack_project_id>'
 NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY='<neon_provided_stack_publishable_client_key>'
 STACK_SECRET_SERVER_KEY='<neon_provided_stack_secret_server_key>'
