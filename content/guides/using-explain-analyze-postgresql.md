@@ -301,6 +301,106 @@ In general, when you have a slow query, follow this process:
 
 To practice, you can take some slow query in your database (or a sample large dataset) and go through this process. It's a bit of an art that gets easier with experience. Plan-reading can be daunting at first, but the core principles we covered – understanding scans, looking at rows and cost, and zeroing in on the big numbers – will get you pretty far.
 
+## Neon-specific EXPLAIN Options
+
+In Neon, a serverless PostgreSQL service, there are additional EXPLAIN options that can provide valuable insights specific to Neon's architecture. One particularly useful option is `EXPLAIN (ANALYZE, FILECACHE)`, which provides information about the Local File Cache (LFC) usage during query execution.
+
+### Understanding EXPLAIN (ANALYZE, FILECACHE)
+
+The FILECACHE option shows how Neon's Local File Cache is being utilized during query execution. This is especially important in a serverless environment where efficient cache usage directly impacts performance. Here's an example of how to use it:
+
+```sql
+EXPLAIN (ANALYZE, FILECACHE) SELECT * FROM large_table WHERE id = 123;
+```
+
+The output will include additional information about cache hits and misses:
+
+```pgsql
+QUERY PLAN
+--------------------------------------------------------------------------------------------------
+Index Scan using large_table_pkey on large_table  (cost=0.42..8.44 rows=1 width=42) (actual time=0.035..0.036 rows=1 loops=1)
+  Index Cond: (id = 123)
+  LFC: blocks cached: 2  blocks not cached: 0  cache hit rate: 100.00%
+Planning Time: 0.214 ms
+Execution Time: 0.074 ms
+```
+
+The key information to look for is:
+- `blocks cached`: Number of blocks found in the Local File Cache
+- `blocks not cached`: Number of blocks that had to be fetched from storage
+- `cache hit rate`: Percentage of blocks that were found in the cache
+
+### Importance of LFC Size and Cache Misses
+
+When you observe a high number of cache misses (low cache hit rate) in your EXPLAIN output, it may indicate that your LFC size is insufficient for your workload. The Local File Cache in Neon acts as a buffer between your compute instance and the storage layer, and its size directly impacts query performance.
+
+If you're seeing many cache misses, consider:
+
+1. Increasing your compute instance size, which also increases the LFC size
+2. Optimizing your queries to touch fewer data blocks
+3. Ensuring your most frequently accessed data fits within the LFC
+
+For more information about Neon's architecture and the Local File Cache, refer to the [Neon extensions documentation](https://neon.tech/docs/extensions/neon).
+
+## The Importance of Up-to-date Statistics and VACUUM
+
+While understanding query plans is crucial, ensuring that PostgreSQL has accurate information to create those plans is equally important. Two maintenance operations play a vital role in this: ANALYZE and VACUUM.
+
+### ANALYZE and Statistics Collection
+
+The PostgreSQL query planner relies on statistics about your tables to make good decisions. These statistics include:
+- Table size (number of rows)
+- Column value distributions
+- Correlation between columns
+
+When these statistics are outdated, the planner might make poor decisions, leading to suboptimal query plans. For example, if a table has grown significantly but statistics haven't been updated, the planner might underestimate the cost of a sequential scan.
+
+You can manually update statistics with:
+
+```sql
+ANALYZE table_name;
+```
+
+Or for a specific column:
+
+```sql
+ANALYZE table_name(column_name);
+```
+
+When examining EXPLAIN output, if you notice large discrepancies between estimated and actual row counts, it's often a sign that you need to run ANALYZE.
+
+### VACUUM and Dead Tuples
+
+In PostgreSQL, when you update or delete rows, the old versions aren't immediately removed—they become "dead tuples" that still occupy space. Over time, these dead tuples can:
+- Bloat your tables, increasing disk usage
+- Slow down sequential scans (more data to read)
+- Make indexes less efficient
+- Cause statistics to become inaccurate
+
+The VACUUM process reclaims space from dead tuples and updates statistics. You can run it manually:
+
+```sql
+VACUUM table_name;
+```
+
+Or with ANALYZE to update statistics in one operation:
+
+```sql
+VACUUM ANALYZE table_name;
+```
+
+Most PostgreSQL installations, including Neon, have autovacuum enabled, which automatically runs VACUUM when needed. However, for tables with high update/delete rates, you might need to adjust autovacuum settings or run manual VACUUMs.
+
+### Impact on Query Performance
+
+When investigating slow queries with EXPLAIN ANALYZE, consider whether outdated statistics or table bloat might be contributing factors:
+
+1. If estimated rows are far off from actual rows, run ANALYZE
+2. If sequential scans are slower than expected, check for table bloat and run VACUUM
+3. If index scans aren't being chosen when they should be, ensure statistics are up-to-date
+
+For more detailed information on PostgreSQL maintenance, refer to the [PostgreSQL tutorial on Neon's website](https://neon.tech/postgresql/tutorial).
+
 ## Conclusion
 
 PostgreSQL's `EXPLAIN` and `EXPLAIN ANALYZE` are powerful tools for any developer or DBA looking to optimize queries. They pull back the curtain on the query planner and show you exactly _how_ a query is executed, which is invaluable for diagnosing performance issues. In this tutorial, we introduced the basic syntax and concepts, learned how to read the output (in particular identifying sequential scans, index usage, row estimates vs. actuals, and execution time), and walked through examples where we improved slow queries by adding indexes and making the database do less work.
@@ -310,6 +410,8 @@ With this knowledge, you should be able to tackle many common slow-query scenari
 - Use `EXPLAIN ANALYZE` to find the bottlenecks in the plan (be it a full table scan, a heavy join, or a sort).
 - Apply basic optimizations like indexing the appropriate columns or slightly rewriting the query.
 - Verify the improvement by comparing the new plan and execution time to the old one.
+- For Neon users, leverage the FILECACHE option to understand cache performance.
+- Ensure statistics are up-to-date and tables are properly vacuumed for optimal performance.
 
 Keep in mind that performance tuning can get very deep, and there are cases where you might need to adjust PostgreSQL configuration, redesign your schema, or use more advanced features (like partitioning or query hints via `enable_seqscan` toggling for testing). But for a beginner, mastering `EXPLAIN ANALYZE` is the first step to becoming self-sufficient in investigating and resolving query performance issues.
 
