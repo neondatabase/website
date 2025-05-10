@@ -70,5 +70,9 @@
       "title": "GitHub",
       "url": "https://github.com/PaulieScanlon"
     }
+  },
+  "neon": {
+    "name": "Neon",
+    "position": "Developed by the Neon team"
   }
 }
