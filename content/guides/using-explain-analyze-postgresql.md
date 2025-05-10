@@ -318,6 +318,7 @@ The LFC is a memory-resident cache on the compute node that stores recently acce
 The size of the LFC is directly proportional to your compute instance size - larger compute instances have larger LFCs, allowing more data to be cached in memory. This is why query performance can improve significantly when you have a properly sized LFC for your workload.
 
 In a serverless environment like Neon, understanding LFC performance is crucial because:
+
 - Remote storage access is slower than local memory access
 - A high cache hit rate means better performance
 - Workloads that exceed the LFC size will experience more cache misses and slower performance
