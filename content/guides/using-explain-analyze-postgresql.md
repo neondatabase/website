@@ -326,6 +326,7 @@ Execution Time: 0.074 ms
 ```
 
 The key information to look for is:
+
 - `blocks cached`: Number of blocks found in the Local File Cache
 - `blocks not cached`: Number of blocks that had to be fetched from storage
 - `cache hit rate`: Percentage of blocks that were found in the cache
@@ -349,6 +350,7 @@ While understanding query plans is crucial, ensuring that PostgreSQL has accurat
 ### ANALYZE and Statistics Collection
 
 The PostgreSQL query planner relies on statistics about your tables to make good decisions. These statistics include:
+
 - Table size (number of rows)
 - Column value distributions
 - Correlation between columns
@@ -372,6 +374,7 @@ When examining EXPLAIN output, if you notice large discrepancies between estimat
 ### VACUUM and Dead Tuples
 
 In PostgreSQL, when you update or delete rows, the old versions aren't immediately removed—they become "dead tuples" that still occupy space. Over time, these dead tuples can:
+
 - Bloat your tables, increasing disk usage
 - Slow down sequential scans (more data to read)
 - Make indexes less efficient
