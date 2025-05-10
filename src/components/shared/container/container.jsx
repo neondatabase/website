@@ -15,10 +15,10 @@ const styles = {
     1344: 'max-w-[1408px] px-8',
     1220: 'max-w-[1220px] xl:px-8',
     1216: 'max-w-[1216px] xl:px-8',
-    1152: 'max-w-[1152px]',
+    1152: 'max-w-6xl',
     1100: 'max-w-[1100px]',
     960: 'max-w-[960px] md:px-5',
-    768: 'max-w-[768px]',
+    768: 'max-w-3xl',
   },
 };
 
