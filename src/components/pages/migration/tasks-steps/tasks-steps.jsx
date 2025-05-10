@@ -54,7 +54,7 @@ const TasksSteps = () => (
           Postgres migrations, automated
         </p>
         <h2 className="font-title text-5xl font-medium leading-none tracking-tighter xl:text-balance xl:text-[44px] lg:text-[40px] md:text-pretty md:text-[32px]">
-          No manual steps, no stress
+          No manual steps, no migration stress
         </h2>
       </header>
     </Container>
