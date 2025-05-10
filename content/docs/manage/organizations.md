@@ -42,7 +42,7 @@ The following table shows what actions each role can perform in the organization
 | [Delete projects](/docs/manage/orgs-manage#create-and-delete-projects)                                                       |  ✅   |   ❌   |      ❌      |
 | _Project configuration_                                                                                                      |       |        |              |
 | [Manage project databases](/docs/manage/databases)                                                                           |  ✅   |   ✅   |      ✅      |
-| [Configure project computes](/docs/manage/computes)                                                                         |  ✅   |   ✅   |      ✅      |
+| [Configure project computes](/docs/manage/computes)                                                                          |  ✅   |   ✅   |      ✅      |
 | [Manage project roles](/docs/manage/users)                                                                                   |  ✅   |   ✅   |      ✅      |
 | [Invite/remove project collaborators](/docs/guides/project-collaboration-guide#invite-collaborators)                         |  ✅   |   ✅   |      ✅      |
 | **Integration management**                                                                                                   |       |        |              |
