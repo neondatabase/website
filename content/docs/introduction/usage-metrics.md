@@ -237,7 +237,7 @@ Compute hour usage is calculated by multiplying compute size by _active hours_.
 
 ### How Neon compute features affect usage
 
-Compute-hour usage in Neon is affected by [scale to zero](/docs/guides/scale-to-zero-guide), [autoscaling](/docs/guides/autoscaling-guide), and your minimum and maximum [compute size](/docs/manage/endpoints#compute-size-and-autoscaling-configuration) configuration. With these features enabled, you can get a sense of how your compute hour usage might accrue in the following graph.
+Compute-hour usage in Neon is affected by [scale to zero](/docs/guides/scale-to-zero-guide), [autoscaling](/docs/guides/autoscaling-guide), and your minimum and maximum [compute size](/docs/manage/computes#compute-size-and-autoscaling-configuration) configuration. With these features enabled, you can get a sense of how your compute hour usage might accrue in the following graph.
 
 ![Compute metrics graph](/docs/introduction/compute-usage-graph.jpg)
 

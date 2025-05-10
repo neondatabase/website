@@ -543,7 +543,7 @@ Keeping indexes in memory improves query performance by reducing disk access. In
 
 In addition to `shared_buffers`, **Neon’s Local File Cache (LFC)** extends memory up to 75% of your compute’s RAM. This allows frequently accessed indexes and data to remain in memory, improving performance.
 
-Both `shared_buffers` and the LFC size depend on your compute size. For details, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+Both `shared_buffers` and the LFC size depend on your compute size. For details, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 
 To further optimize performance, you can use the Postgres `pg_prewarm` extension to preload indexes into memory. This ensures fast query response times by warming up the cache after index creation or a restart of your Neon compute.
 

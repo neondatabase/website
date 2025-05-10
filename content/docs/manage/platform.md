@@ -38,7 +38,7 @@ Learn how to manage all aspects of your Neon projects. These topics cover the ba
 
 <a href="/docs/manage/branches" description="Learn about database branching in Neon" icon="branching">Branches</a>
 
-<a href="/docs/manage/endpoints" description="Configure and optimimze compute resources for your Neon projects" icon="laptop">Computes</a>
+<a href="/docs/manage/computes" description="Configure and optimimze compute resources for your Neon projects" icon="laptop">Computes</a>
 
 <a href="/docs/manage/roles" description="Manage roles within projects and assign permissions" icon="user">Roles</a>
 

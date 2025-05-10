@@ -81,7 +81,7 @@ To view the branches in a Neon project:
 
    The branch details page also includes details about the **Computes**, **Roles & Databases**, and **Child branches** that belong to the branch. All of these objects are associated with a particular branch. For information about these objects, see:
 
-   - [Manage computes](/docs/manage/endpoints#view-a-compute).
+   - [Manage computes](/docs/manage/computes#view-a-compute).
    - [Manage roles](/docs/manage/roles)
    - [Manage databases](/docs/manage/databases)
    - [View branches](#view-branches)

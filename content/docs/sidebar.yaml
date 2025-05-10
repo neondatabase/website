@@ -363,7 +363,7 @@
             - title: Branches
               slug: manage/branches
             - title: Computes
-              slug: manage/endpoints
+              slug: manage/computes
             - title: Roles
               slug: manage/roles
             - title: Databases
