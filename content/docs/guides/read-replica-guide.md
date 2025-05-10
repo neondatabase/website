@@ -131,7 +131,7 @@ In the response body for this method, read replica computes are identified by th
 
 ## Edit a read replica
 
-You can edit a read replica using the Neon Console or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) to change the [Compute size](/docs/manage/endpoints#compute-size-and-autoscaling-configuration) or [Scale to Zero](/docs/manage/endpoints#scale-to-zero-configuration) configuration.
+You can edit a read replica using the Neon Console or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) to change the [Compute size](/docs/manage/computes#compute-size-and-autoscaling-configuration) or [Scale to Zero](/docs/manage/computes#scale-to-zero-configuration) configuration.
 
 <Tabs labels={["Console", "API"]}>
 

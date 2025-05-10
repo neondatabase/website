@@ -284,7 +284,7 @@ Like other index types, it’s faster to create an index after loading your init
   HINT:  Increase maintenance_work_mem to speed up builds.
   ```
 
-  In Postgres, the `maintenance_work_mem` setting determines the maximum memory allocation for tasks such as `CREATE INDEX`. The default `maintenance_work_mem` value in Neon is set according to your Neon [compute size](/docs/manage/endpoints#how-to-size-your-compute).
+  In Postgres, the `maintenance_work_mem` setting determines the maximum memory allocation for tasks such as `CREATE INDEX`. The default `maintenance_work_mem` value in Neon is set according to your Neon [compute size](/docs/manage/computes#how-to-size-your-compute).
 
   To optimize `pgvector` index build time, you can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
 
@@ -412,7 +412,7 @@ Like other index types, it’s faster to create an index after loading your init
 
 - `maintenance_work_mem`
 
-  In Postgres, the `maintenance_work_mem` setting determines the maximum memory allocation for tasks such as `CREATE INDEX`. The default `maintenance_work_mem` value in Neon is set according to your Neon [compute size](/docs/manage/endpoints#how-to-size-your-compute). For a table that shows the `maintenance_work_mem` setting by compute size, see [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
+  In Postgres, the `maintenance_work_mem` setting determines the maximum memory allocation for tasks such as `CREATE INDEX`. The default `maintenance_work_mem` value in Neon is set according to your Neon [compute size](/docs/manage/computes#how-to-size-your-compute). For a table that shows the `maintenance_work_mem` setting by compute size, see [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
 
   To optimize `pgvector` index build time, you can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
 

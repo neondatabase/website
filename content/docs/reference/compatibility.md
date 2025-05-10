@@ -162,7 +162,7 @@ Of the parameter settings listed above, the `max_connections`, `maintenance_work
   shared_buffers_mb = max(128, (1023 + backends * 256) / 1024)
   ```
 
-- The `effective_cache_size` parameter is set based on the [Local File Cache (LFC)](/docs/reference/glossary#local-file-cache) size of your maximum Neon compute size. This helps the Postgres query planner make smarter decisions, which can improve query performance. For details on LFC size by compute size, see the table in [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+- The `effective_cache_size` parameter is set based on the [Local File Cache (LFC)](/docs/reference/glossary#local-file-cache) size of your maximum Neon compute size. This helps the Postgres query planner make smarter decisions, which can improve query performance. For details on LFC size by compute size, see the table in [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 
 ### Configuring Postgres parameters for a session, database, or role
 
