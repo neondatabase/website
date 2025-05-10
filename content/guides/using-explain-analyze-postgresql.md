@@ -305,6 +305,25 @@ To practice, you can take some slow query in your database (or a sample large da
 
 In Neon, a serverless PostgreSQL service, there are additional EXPLAIN options that can provide valuable insights specific to Neon's architecture. One particularly useful option is `EXPLAIN (ANALYZE, FILECACHE)`, which provides information about the Local File Cache (LFC) usage during query execution.
 
+### What is Neon's Local File Cache (LFC)?
+
+Neon's architecture separates compute and storage, which is different from traditional PostgreSQL deployments where compute and storage are tightly coupled. In this serverless architecture, Neon uses a Local File Cache (LFC) as an essential component that bridges the gap between compute and storage.
+
+The LFC is a memory-resident cache on the compute node that stores recently accessed data pages from your database. When your query needs to read data:
+
+1. Neon first checks if the required data pages are already in the LFC
+2. If found (a cache hit), the data is read directly from memory, which is very fast
+3. If not found (a cache miss), Neon fetches the data from the remote storage layer, which takes longer
+
+The size of the LFC is directly proportional to your compute instance size - larger compute instances have larger LFCs, allowing more data to be cached in memory. This is why query performance can improve significantly when you have a properly sized LFC for your workload.
+
+In a serverless environment like Neon, understanding LFC performance is crucial because:
+- Remote storage access is slower than local memory access
+- A high cache hit rate means better performance
+- Workloads that exceed the LFC size will experience more cache misses and slower performance
+
+The `FILECACHE` option in EXPLAIN helps you understand how effectively your queries are utilizing this cache.
+
 ### Understanding EXPLAIN (ANALYZE, FILECACHE)
 
 The FILECACHE option shows how Neon's Local File Cache is being utilized during query execution. This is especially important in a serverless environment where efficient cache usage directly impacts performance. Here's an example of how to use it:
