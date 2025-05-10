@@ -71,8 +71,8 @@
       "url": "https://github.com/PaulieScanlon"
     }
   },
-  "neon-guide": {
-    "name": "Neon Guide",
+  "neon": {
+    "name": "Neon",
     "position": "Developed by the Neon team"
   }
 }

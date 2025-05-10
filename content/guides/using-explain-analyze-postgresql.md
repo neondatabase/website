@@ -1,7 +1,7 @@
 ---
 title: Using EXPLAIN ANALYZE in PostgreSQL to Diagnose Slow Queries
 subtitle: A beginner's tutorial on understanding and optimizing query performance
-author: neon-guide
+author: neon
 enableTableOfContents: true
 createdAt: '2025-05-08T00:00:00.000Z'
 updatedOn: '2025-05-08T00:00:00.000Z'
