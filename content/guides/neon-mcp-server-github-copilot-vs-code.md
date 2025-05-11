@@ -17,7 +17,7 @@ In this guide, you'll learn how to use the [**Neon Serverless Postgres MCP serve
 
 AI agents are no longer just helping write code—they’re creating and managing databases. When a chatbot logs a customer conversation, or a new region spins up in the Azure cloud, or a new user signs up, an AI agent can automatically create a database in seconds. No need to open a dashboard or call an API. This is the next evolution of software development: **infrastructure as intent**. With tools like database MCP servers, agents can now generate real backend services as easily as they generate code.
 
-GitHub Copilot becomes your full-stack teammate. It can answer database-related questions, fetch your database connection string, update environment variables in your Azure Function, generate SQL queries to populate tables with mock data, and even help you create new databases or tables on the fly. All directly from your editor, with natural language prompts. Neon has a dedicated [MCP server](https://github.com/neondatabase-labs/mcp-server-neon) that makes it possible for Copilot to directly understand the structure of your Postgres database. 
+GitHub Copilot becomes your full-stack teammate. It can answer database-related questions, fetch your database connection string, update environment variables in your Azure Function, generate SQL queries to populate tables with mock data, and even help you create new databases or tables on the fly. All directly from your editor, with natural language prompts. Neon has a dedicated [MCP server](https://github.com/neondatabase-labs/mcp-server-neon) that makes it possible for Copilot to directly understand the structure of your Postgres database.
 
 Let's get started with using the Neon MCP server and GitHub Copilot.
 
@@ -26,8 +26,8 @@ Let's get started with using the Neon MCP server and GitHub Copilot.
 - Node.js (>= v18.0.0) and npm: Download from [nodejs.org](https://nodejs.org/).
 - An Azure subscription ([create one](https://azure.microsoft.com/free/cognitive-services) for free)
 - Install either the stable or Insiders release of VS Code:
-    - [Stable release](https://code.visualstudio.com/download)
-    - [Insiders release](https://code.visualstudio.com/insiders)
+  - [Stable release](https://code.visualstudio.com/download)
+  - [Insiders release](https://code.visualstudio.com/insiders)
 - Install the [GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot), [GitHub Copilot for Azure](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azure-github-copilot), and [GitHub Copilot Chat](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat) extensions for VS Code
 - [Azure Functions Core Tools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=macos%2Cisolated-process%2Cnode-v4%2Cpython-v2%2Chttp-trigger%2Ccontainer-apps&pivots=programming-language-csharp)  (for local testing)
 
@@ -45,22 +45,18 @@ Add the following Neon MCP server configuration to your [user settings](https://
 
 ```json
 {
-   "mcp":{
-      "servers":{
-         "Neon":{
-            "command":"npx",
-            "args":[
-               "-y",
-               "mcp-remote",
-               "https://mcp.neon.tech/sse"
-            ]
-         }
+  "mcp": {
+    "servers": {
+      "Neon": {
+        "command": "npx",
+        "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
       }
-   }
+    }
+  }
 }
 ```
 
-Click on `Start` on the MCP server. A browser window will open with an OAuth prompt. Just follow the steps to give your VS Code MCP client access to your Neon account. 
+Click on `Start` on the MCP server. A browser window will open with an OAuth prompt. Just follow the steps to give your VS Code MCP client access to your Neon account.
 
 ![Start Neon MCP Server in GitHub Copilot](/docs/guides/github-copilot-neon-mcp-server/github-copilot-start-neon-mcp-server.png)
 
@@ -72,7 +68,7 @@ Click on `Start` on the MCP server. A browser window will open with an OAuth pro
 
 ![List Neon MCP Server tools in GitHub Copilot](/docs/guides/github-copilot-neon-mcp-server/github-copilot-neon-mcp-server-tools.png)
 
-**Step 3:** Ask Copilot something like "*Create an Azure function with an HTTP trigger*”:
+**Step 3:** Ask Copilot something like "_Create an Azure function with an HTTP trigger_”:
 
 ![Create an Azure function in GitHub Copilot](/docs/guides/github-copilot-neon-mcp-server/github-copilot-create-azure-functions.png)
 
@@ -105,7 +101,7 @@ Copilot pulls context from both MCP servers, which means smarter code suggestion
 
 ## Final Thoughts
 
-With GitHub Copilot, Neon MCP server, and Azure Functions, you're no longer writing backend code line by line. It is so fast to build APIs. You're *orchestrating* services with intent. This is not the future—it’s something you can use today.
+With GitHub Copilot, Neon MCP server, and Azure Functions, you're no longer writing backend code line by line. It is so fast to build APIs. You're _orchestrating_ services with intent. This is not the future—it’s something you can use today.
 
 ## Resources
 
