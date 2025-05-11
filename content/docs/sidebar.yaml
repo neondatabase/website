@@ -1228,6 +1228,8 @@
           slug: guides/partner-consumption-limits
         - title: Query consumption metrics
           slug: guides/partner-consumption-metrics
+        - title: Agentic platforms integration
+          slug: guides/agentic-platforms-integration
     - title: Glossary
       slug: reference/glossary
       icon: glossary
