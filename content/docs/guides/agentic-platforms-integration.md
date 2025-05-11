@@ -49,6 +49,7 @@ POST /projects/{project_id}/branches/{branch_id}/snapshots
 This captures the current state of the branch. Each snapshot is immutable and read-only.
 
 **Snapshot creation notes:**
+
 - Only incremental changes are stored, reducing storage costs.
 - You can query snapshots, but they cannot be modified unless restored.
 
@@ -75,6 +76,7 @@ Request body:
 Use the returned connection string to point your preview application or queries to the new branch.
 
 **Best practices:**
+
 - Set a TTL to automatically clean up unused preview branches.
 - Label the preview branch clearly for tracking.
 
@@ -111,6 +113,7 @@ DELETE /projects/{project_id}/snapshots/{snapshot_id}
 ```
 
 Notes:
+
 - Deleting a snapshot removes the flat fee.
 - If other snapshots depend on it, storage usage may not decrease.
 
@@ -126,6 +129,7 @@ In this model, the agentic platform creates Neon resources on behalf of users:
 - Users do not need a Neon account.
 
 **Pros:**
+
 - Seamless experience
 - More control over project lifecycle
 
@@ -139,6 +143,7 @@ In this model, users connect their Neon accounts to your platform via OAuth:
 - The agent interacts with Neon on the user's behalf.
 
 **Pros:**
+
 - Greater flexibility
 - Easy support for multi-provider strategies
 
@@ -151,6 +156,7 @@ In this model, users connect their Neon accounts to your platform via OAuth:
 ![Agent Checkpoints Diagram](/docs/images/agent_checkpoints.png)
 
 The diagram illustrates the Active Branch Pattern workflow:
+
 1. Agent sessions create snapshots as checkpoints
 2. Users can preview a checkpoint by creating a temporary branch from a snapshot
 3. Users can roll back to a previous checkpoint by restoring the active branch from a snapshot
@@ -172,9 +178,9 @@ Need help or want to partner with us? Contact [partners@neon.tech](mailto:partne
 
 ## API Summary
 
-| Operation            | Endpoint                                                           | Notes                                       |
-|----------------------|--------------------------------------------------------------------|---------------------------------------------|
-| Create snapshot      | POST /projects/{project_id}/branches/{branch_id}/snapshots         | Checkpoint current branch state             |
-| Restore to preview   | POST /projects/{project_id}/snapshots/{snapshot_id}/restore        | Use restore_to_new_branch: true             |
-| Restore to active    | POST /projects/{project_id}/snapshots/{snapshot_id}/restore        | Use restore_to_existing_branch: \"dev\"     |
-| Delete snapshot      | DELETE /projects/{project_id}/snapshots/{snapshot_id}              | Optional cleanup to reduce flat costs       |
+| Operation          | Endpoint                                                    | Notes                                   |
+| ------------------ | ----------------------------------------------------------- | --------------------------------------- |
+| Create snapshot    | POST /projects/{project_id}/branches/{branch_id}/snapshots  | Checkpoint current branch state         |
+| Restore to preview | POST /projects/{project_id}/snapshots/{snapshot_id}/restore | Use restore_to_new_branch: true         |
+| Restore to active  | POST /projects/{project_id}/snapshots/{snapshot_id}/restore | Use restore_to_existing_branch: \"dev\" |
+| Delete snapshot    | DELETE /projects/{project_id}/snapshots/{snapshot_id}       | Optional cleanup to reduce flat costs   |
