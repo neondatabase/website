@@ -81,6 +81,14 @@ Azure provides an Azure-native CLI and SDKs for working with the Neon platform. 
 
 </DetailIconCards>
 
+### Online course
+
+<DetailIconCards>
+
+<a href="https://www.udemy.com/course/aspnet-core-development-with-neon-postgresql-azure" description="Build a Full-Stack CRM with ASP.NET Core, EF Core, PostgreSQL, and Deploy to Azure Cloud Step-by-Step" icon="enable">ASP.NET Core Development with Neon Serverless Postgres & Azure</a>
+
+</DetailIconCards>
+
 ## Frameworks & languages
 
 - [.NET with Neon](https://neon.tech/docs/guides/dotnet-npgsql) - Connect a .NET (C#) application to Neon
