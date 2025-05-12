@@ -2,7 +2,7 @@
 title: Neon framework guides
 subtitle: Find detailed instructions for connecting to Neon from various frameworks
 enableTableOfContents: false
-updatedOn: '2025-04-30T14:50:57.889Z'
+updatedOn: '2025-05-09T22:50:52.061Z'
 ---
 
 <TechCards>
@@ -28,6 +28,8 @@ updatedOn: '2025-04-30T14:50:57.889Z'
 <a href="/docs/guides/quarkus-jdbc" title="Quarkus" description="Connect Quarkus (JDBC) to Neon" icon="quarkus"></a>
 
 <a href="/docs/guides/quarkus-reactive" title="Quarkus" description="Connect Quarkus (Reactive) to Neon" icon="quarkus"></a>
+
+<a href="/docs/guides/micronaut-kotlin" title="Micronaut Kotlin" description="Connect a Micronaut Kotlin application to Neon" icon="micronaut"></a>
 
 <a href="/docs/guides/react" title="React" description="Connect a React application to Neon" icon="react"></a>
 

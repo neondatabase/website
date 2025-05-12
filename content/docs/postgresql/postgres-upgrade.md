@@ -2,7 +2,7 @@
 title: Upgrading your Postgres version
 subtitle: Learn how upgrade to a new major Postgres version in Neon
 enableTableOfContents: true
-updatedOn: '2025-04-30T02:26:54.988Z'
+updatedOn: '2025-05-11T11:23:50.627Z'
 ---
 
 This topic describes how to upgrade your Neon project from one **major** Postgres version to a newer one.
@@ -32,7 +32,7 @@ Start by creating a new Neon project with the desired Postgres version. For inst
 
 At this time, you may also want to apply any specific configurations to your new Neon project that exist in your current Neon project. For example, you may have configured settings for the following Neon features that you want to implement in your new Neon project:
 
-- [Compute size](/docs/manage/endpoints#edit-a-compute)
+- [Compute size](/docs/manage/computes#edit-a-compute)
 - [Autoscaling](/docs/guides/autoscaling-guide)
 - [Scale to Zero](/docs/guides/scale-to-zero-guide)
 - [Protected branches](/docs/guides/protected-branches)
