@@ -39,7 +39,7 @@ const Hero = () => (
       <Button
         className="mt-9 h-12 min-w-40 px-[38px] font-semibold tracking-tighter lg:mt-7 lg:h-11 lg:px-8 lg:text-sm md:mt-6"
         theme="primary"
-        to={LINKS.signup}
+        to={LINKS.docsMigration}
         target="_blank"
         tagName="Migration Page Hero"
       >
