@@ -11,7 +11,7 @@ updatedOn: '2025-05-09T22:43:28.155Z'
 
 Our development teams are focused on helping you ship faster with Postgres. This roadmap describes committed features we're working on right now, what we delivered recently, and a peek at what's on the horizon.
 
-## What we're working on now
+## What we're working on now 🛠️
 
 Here's a snapshot of what we're working on now:
 
@@ -24,7 +24,7 @@ Here's a snapshot of what we're working on now:
 
 Other features you would like to see? [Let us know](#share-your-thoughts).
 
-## What's on the horizon
+## What's on the horizon 🌅
 
 And here's an overview of what we're looking at next:
 
