@@ -120,7 +120,7 @@ const ChangelogForm = ({ isSidebar = false, className }) => {
         classNames.block,
         className,
         'lg:scroll-mt-10 md:gap-10 sm:flex-col sm:items-start sm:gap-2.5 sm:p-[18px] sm:py-5',
-        'dark:bg-subscribe-form-dark dark:shadow-[0px_2px_10px_0px_rgba(0,0,0,.4),0px_2px_30px_0px_rgba(0,0,0,.5)]'
+        'dark:bg-transparent dark:bg-subscribe-form-dark dark:shadow-[0px_2px_10px_0px_rgba(0,0,0,.4),0px_2px_30px_0px_rgba(0,0,0,.5)]'
       )}
       id="changelog-form"
     >
@@ -238,7 +238,7 @@ const ChangelogForm = ({ isSidebar = false, className }) => {
           </span>
         )}
       </form>
-      <GradientBorder className="hidden !rounded-[10px] dark:block" withBlend />
+      <GradientBorder className="hidden dark:block" withBlend />
     </div>
   );
 };
