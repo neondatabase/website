@@ -37,7 +37,7 @@ To illustrate the benefits of Neon Auth, let’s consider a common scenario wher
 
 ### Scenario overview
 
-*This scenario uses Clerk as an example of a typical third-party auth provider. With Neon Auth, you don’t need to worry about manual sync or provider integration — Neon Auth handles it for you.*
+_This scenario uses Clerk as an example of a typical third-party auth provider. With Neon Auth, you don’t need to worry about manual sync or provider integration — Neon Auth handles it for you._
 
 You are building a social media platform where users can create profiles, post content, and interact with others. You use Clerk as your authentication provider to handle user registration, login, and password management. Your application’s database stores user profiles, posts, comments, and other social data.
 
