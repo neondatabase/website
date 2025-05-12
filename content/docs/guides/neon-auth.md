@@ -57,6 +57,7 @@ STACK_SECRET_SERVER_KEY=YOUR_NEON_AUTH_SECRET_KEY
 # Your Neon connection string
 DATABASE_URL=YOUR_NEON_CONNECTION_STRING
 ```
+
 > If you're using Create React App, use the `REACT_APP_` prefix instead of `VITE_`.
 
 </TabItem>
@@ -78,7 +79,7 @@ DATABASE_URL=YOUR_NEON_CONNECTION_STRING
 
 ## Set up your app
 
-Neon Auth works with any framework or language that supports JWTs — Next.js, React, and JavaScript/Node, for example. *Next.js (App Router) is the more batteries-included option.*
+Neon Auth works with any framework or language that supports JWTs — Next.js, React, and JavaScript/Node, for example. _Next.js (App Router) is the more batteries-included option._
 
 Here are two options to quickly get started with Neon Auth in your app: **clone our template** or **add Neon Auth** to your existing project.
 
@@ -135,14 +136,14 @@ Here are two options to quickly get started with Neon Auth in your app: **clone 
   A basic example of how to set up the Neon Auth client in `stack.ts` in your `src` directory:
 
   ```tsx shouldWrap
-  import { StackClientApp } from "@stackframe/react";
-  import { useNavigate } from "react-router-dom";
+  import { StackClientApp } from '@stackframe/react';
+  import { useNavigate } from 'react-router-dom';
 
   export const stackClientApp = new StackClientApp({
     projectId: import.meta.env.VITE_STACK_PROJECT_ID,
     publishableClientKey: import.meta.env.VITE_STACK_PUBLISHABLE_CLIENT_KEY,
-    tokenStore: "cookie",
-    redirectMethod: { useNavigate }
+    tokenStore: 'cookie',
+    redirectMethod: { useNavigate },
   });
   ```
 
@@ -151,16 +152,14 @@ Here are two options to quickly get started with Neon Auth in your app: **clone 
   In your `src/App.tsx`:
 
   ```tsx shouldWrap
-  import { StackHandler, StackProvider, StackTheme } from "@stackframe/react";
-  import { Suspense } from "react";
-  import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
-  import { stackClientApp } from "./stack";
+  import { StackHandler, StackProvider, StackTheme } from '@stackframe/react';
+  import { Suspense } from 'react';
+  import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
+  import { stackClientApp } from './stack';
 
   function HandlerRoutes() {
     const location = useLocation();
-    return (
-      <StackHandler app={stackClientApp} location={location.pathname} fullPage />
-    );
+    return <StackHandler app={stackClientApp} location={location.pathname} fullPage />;
   }
 
   export default function App() {
@@ -179,7 +178,6 @@ Here are two options to quickly get started with Neon Auth in your app: **clone 
       </Suspense>
     );
   }
-
   ```
 
   ### Start your dev server
@@ -212,33 +210,32 @@ Here are two options to quickly get started with Neon Auth in your app: **clone 
 
   ```js
   // stack/server.js
-  import { StackServerApp } from "@stackframe/js";
+  import { StackServerApp } from '@stackframe/js';
 
   export const stackServerApp = new StackServerApp({
     projectId: process.env.STACK_PROJECT_ID,
     publishableClientKey: process.env.STACK_PUBLISHABLE_CLIENT_KEY,
     secretServerKey: process.env.STACK_SECRET_SERVER_KEY,
-    tokenStore: "memory"
+    tokenStore: 'memory',
   });
   ```
 
   ### Test your integration
 
   1. Create a test user in the Console (see [Step 4](#create-users-in-the-console-optional)) and copy its ID.
-  
   2. Create `src/test.ts`:
 
      ```ts
-      import "dotenv/config";
-      import { stackServerApp } from "./stack/server.js";
+     import 'dotenv/config';
+     import { stackServerApp } from './stack/server.js';
 
-      async function main() {
-        const user = await stackServerApp.getUser("YOUR_USER_ID_HERE");
-        console.log(user);
-      }
+     async function main() {
+       const user = await stackServerApp.getUser('YOUR_USER_ID_HERE');
+       console.log(user);
+     }
 
-      main().catch(console.error);
-      ```
+     main().catch(console.error);
+     ```
 
   3. Run your test script however you like:
 
@@ -278,7 +275,6 @@ SELECT * FROM neon_auth.users_sync;
 | ----------- | --------- | --------------- | ------------------- | ------------------- | ---------- | ---------------------------- |
 | 51e491df... | Sam Patel | sam@startup.dev | 2025-02-12 19:43... | 2025-02-12 19:46... | null       | `{"id": "51e491df...", ...}` |
 
-
 </Steps>
 
 ## Next steps
@@ -289,4 +285,3 @@ Want to learn more or go deeper?
 - [Neon Auth tutorial](/docs/guides/neon-auth-demo) — Walk through our demo app for more examples of how Neon Auth can simplify your code
 - [Best Practices & FAQ](/docs/guides/neon-auth-best-practices) — Tips, patterns, and troubleshooting.
 - [Neon Auth API Reference](/docs/guides/neon-auth-api) — Automate and manage Neon Auth via the API.
-

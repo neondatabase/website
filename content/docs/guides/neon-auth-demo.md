@@ -128,7 +128,7 @@ DELETE FROM neon_auth.users_sync WHERE email LIKE '%doug%';
 
 Refresh the todo list, and... ugh, _ghost todos!_ 👻👻
 
-*(Doug may be gone, but his todos aren't.)*
+_(Doug may be gone, but his todos aren't.)_
 
 ![Todo list showing orphaned todos with no owner](/docs/guides/neon_auth_demo_ghosts.png)
 
