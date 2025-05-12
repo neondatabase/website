@@ -1,6 +1,7 @@
 ---
 updatedOn: '2025-05-12T21:34:29.459Z'
 ---
+
 ## Supported actions (tools)
 
 The Neon MCP Server provides the following actions, which are exposed as "tools" to MCP Clients. You can use these tools to interact with your Neon projects and databases using natural language commands.
