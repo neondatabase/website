@@ -35,7 +35,7 @@ Let's get started with using the Neon MCP server and GitHub Copilot.
 
 ### **Create Neon Database**
 
-Visit the [Neon on Azure Marketplace](https://portal.azure.com/#view/Azure_Marketplace_Neon/NeonCreateResource.ReactView) page and follow the [Create a Neon resource](https://neon.tech/docs/azure/azure-deploy#create-a-neon-resource) guide to deploy Neon on Azure for your subscription. Neon has free plan is more than enough to build proof of concept or kick off a new startup project.
+Visit the [Neon on Azure Marketplace](https://portal.azure.com/#view/Azure_Marketplace_Neon/NeonCreateResource.ReactView) page and follow the [Create a Neon resource](https://neon.tech/docs/azure/azure-deploy#create-a-neon-resource) guide to deploy Neon on Azure for your subscription. Neon offers a [Free plan](https://neon.tech/pricing) that provides more than enough resources to build a proof of concept or kick off a new startup project.
 
 ### Install the Neon MCP Server for VS Code
 
