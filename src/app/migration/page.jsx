@@ -22,7 +22,7 @@ const MigrationPage = () => (
     <TestimonialNew
       className="pt-[185px] xl:pt-[161px] lg:pt-[136px] md:pt-[97px]"
       quote="Database migrations are always a headache, but the Neon team made it a smooth process. Their support helped us troubleshoot performance issues and get everything running fast"
-      quoteClassName="max-w-[670px] lg:max-w-[620px] md:max-w-[520px]"
+      quoteClassName="max-w-[670px] lg:max-w-[620px] md:max-w-[570px] sm:max-w-[300px] sm:mx-auto"
       author={{
         name: 'Tejas Siripurapu',
         position: 'Founding Engineer at Vapi.ai',
@@ -36,7 +36,7 @@ const MigrationPage = () => (
       titleClassName="max-w-[560px] leading-none xl:max-w-[500px] lg:max-w-[400px] md:max-w-[320px] xl:text-[56px] xl:leading-[90%] xl:tracking-[-0.03em] lg:text-[48px] lg:leading-[90%] md:text-balance md:text-[40px]"
       buttonText="Meet with our team"
       buttonUrl={LINKS.contactSales}
-      buttonClassName="mt-[32px] h-12 px-12 min-w-[144px] text-[16px] xl:mt-8 xl:px-11 lg:mt-7 md:mt-6 md:h-12 md:px-10 md:min-w-auto"
+      buttonClassName="mt-[32px] h-12 px-6 min-w-[144px] text-[16px] xl:mt-8 xl:px-11 lg:mt-7 md:mt-6 md:h-12 md:px-10 md:min-w-auto"
     />
   </Layout>
 );
