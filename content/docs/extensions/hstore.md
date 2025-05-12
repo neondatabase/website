@@ -19,8 +19,6 @@ This guide covers the basics of the `hstore` extension - how to enable it, how t
 
 Please refer to the [list of all extensions](/docs/extensions/pg-extensions) available in Neon for up-to-date information.
 
-Currently, Neon uses version `1.8` of the `hstore` extension for all Postgres versions.
-
 ## Enable the `hstore` extension
 
 Enable the extension by running the following SQL statement in your Postgres client:
