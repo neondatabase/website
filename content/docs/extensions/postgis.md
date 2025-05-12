@@ -21,8 +21,6 @@ This guide introduces you to the `postgis` extension - how to enable it, store a
 
 Please refer to the [list of all extensions](/docs/extensions/pg-extensions) available in Neon for up-to-date information.
 
-Currently, Neon uses version `3.3.3` of the `postgis` extension for all Postgres versions.
-
 ## Enable the `postgis` extension
 
 You can enable the extension by running the following `CREATE EXTENSION` statement in the Neon **SQL Editor** or from a client such as `psql` that is connected to Neon.
