@@ -238,7 +238,7 @@ const ChangelogForm = ({ isSidebar = false, className }) => {
           </span>
         )}
       </form>
-      <GradientBorder className="hidden dark:block" withBlend />
+      <GradientBorder className="hidden !rounded-[10px] dark:block" withBlend />
     </div>
   );
 };
