@@ -57,6 +57,7 @@ STACK_SECRET_SERVER_KEY=YOUR_NEON_AUTH_SECRET_KEY
 # Your Neon connection string
 DATABASE_URL=YOUR_NEON_CONNECTION_STRING
 ```
+
 > If you're using Create React App, use the `REACT_APP_` prefix instead of `VITE_`.
 
 </TabItem>
@@ -272,7 +273,6 @@ SELECT * FROM neon_auth.users_sync;
 | ----------- | --------- | --------------- | ------------------- | ------------------- | ---------- | ---------------------------- |
 | 51e491df... | Sam Patel | sam@startup.dev | 2025-02-12 19:43... | 2025-02-12 19:46... | null       | `{"id": "51e491df...", ...}` |
 
-
 </Steps>
 
 ## Next steps
@@ -283,4 +283,3 @@ Want to learn more or go deeper?
 - [Neon Auth tutorial](/docs/guides/neon-auth-demo) — Walk through our demo app for more examples of how Neon Auth can simplify your code
 - [Best Practices & FAQ](/docs/guides/neon-auth-best-practices) — Tips, patterns, and troubleshooting.
 - [Neon Auth API Reference](/docs/guides/neon-auth-api) — Automate and manage Neon Auth via the API.
-
