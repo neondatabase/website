@@ -126,7 +126,9 @@ To test this, delete Doug's profile directly from the database:
 DELETE FROM neon_auth.users_sync WHERE email LIKE '%doug%';
 ```
 
-Refresh the todo list, and... ugh, _ghost todos!_ Doug may be gone, but his todos aren't.
+Refresh the todo list, and... ugh, _ghost todos!_ 👻👻
+
+*(Doug may be gone, but his todos aren't.)*
 
 ![Todo list showing orphaned todos with no owner](/docs/guides/neon_auth_demo_ghosts.png)
 
@@ -192,5 +194,5 @@ Neon Auth handles user-profile synchronization, and a single foreign key takes c
 
 Read more about Neon Auth in:
 
-- [How it works](/docs/guides/neon-auth-tutorial)
-- [Concepts](/docs/guides/neon-auth-how-it-works)
+- [How it works](/docs/guides/neon-auth-how-it-works)
+- [Get started](/docs/guides/neon-auth)
