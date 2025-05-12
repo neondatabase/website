@@ -59,6 +59,7 @@ And here's an overview of what we're looking at next:
 - Autoscaling up to 60 CUs
 
 ### Account security
+
 - Role-based access control (RBAC) in the Neon Console
 - RBAC roles extended into the database
 - Audit logging of all database access
