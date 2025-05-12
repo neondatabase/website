@@ -109,7 +109,7 @@ Then `npm run dev` to start your dev server.
 
 #### Test your integration
 
-Go to [http://localhost:3000/handler/sign-up](http://localhost:3000/handler/sign-up)  in your browser. Create a user or two, and you can them [show up immediately](#see-your-users-in-the-database) in your database.
+Go to [http://localhost:3000/handler/sign-up](http://localhost:3000/handler/sign-up) in your browser. Create a user or two, and you can them [show up immediately](#see-your-users-in-the-database) in your database.
 
 </TabItem>
 
@@ -132,14 +132,14 @@ Paste the Neon Auth environment variables from [Step 2](#get-your-neon-auth-keys
 A basic example of how to set up the Neon Auth client in `stack.ts` in your `src` directory:
 
 ```tsx shouldWrap
-import { StackClientApp } from "@stackframe/react";
-import { useNavigate } from "react-router-dom";
+import { StackClientApp } from '@stackframe/react';
+import { useNavigate } from 'react-router-dom';
 
 export const stackClientApp = new StackClientApp({
   projectId: import.meta.env.VITE_STACK_PROJECT_ID,
   publishableClientKey: import.meta.env.VITE_STACK_PUBLISHABLE_CLIENT_KEY,
-  tokenStore: "cookie",
-  redirectMethod: { useNavigate }
+  tokenStore: 'cookie',
+  redirectMethod: { useNavigate },
 });
 ```
 
@@ -148,16 +148,14 @@ export const stackClientApp = new StackClientApp({
 In your `src/App.tsx`:
 
 ```tsx shouldWrap
-import { StackHandler, StackProvider, StackTheme } from "@stackframe/react";
-import { Suspense } from "react";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
-import { stackClientApp } from "./stack";
+import { StackHandler, StackProvider, StackTheme } from '@stackframe/react';
+import { Suspense } from 'react';
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
+import { stackClientApp } from './stack';
 
 function HandlerRoutes() {
   const location = useLocation();
-  return (
-    <StackHandler app={stackClientApp} location={location.pathname} fullPage />
-  );
+  return <StackHandler app={stackClientApp} location={location.pathname} fullPage />;
 }
 
 export default function App() {
@@ -176,7 +174,6 @@ export default function App() {
     </Suspense>
   );
 }
-
 ```
 
 #### Start your dev server
@@ -207,13 +204,13 @@ Paste the Neon Auth environment variables from [Step 2](#get-your-neon-auth-keys
 
 ```js
 // stack/server.js
-import { StackServerApp } from "@stackframe/js";
+import { StackServerApp } from '@stackframe/js';
 
 export const stackServerApp = new StackServerApp({
   projectId: process.env.STACK_PROJECT_ID,
   publishableClientKey: process.env.STACK_PUBLISHABLE_CLIENT_KEY,
   secretServerKey: process.env.STACK_SECRET_SERVER_KEY,
-  tokenStore: "memory"
+  tokenStore: 'memory',
 });
 ```
 
@@ -223,27 +220,27 @@ export const stackServerApp = new StackServerApp({
 
 2. Create `src/test.ts`:
 
-    ```ts
-    import "dotenv/config";
-    import { stackServerApp } from "./stack/server.js";
+   ```ts
+   import 'dotenv/config';
+   import { stackServerApp } from './stack/server.js';
 
-    async function main() {
-      const user = await stackServerApp.getUser("YOUR_USER_ID_HERE");
-      console.log(user);
-    }
+   async function main() {
+     const user = await stackServerApp.getUser('YOUR_USER_ID_HERE');
+     console.log(user);
+   }
 
-    main().catch(console.error);
-    ```
+   main().catch(console.error);
+   ```
 
 3. Run your test script however you like:
 
-    ```bash shouldWrap
-    # if you have a dev/test script in package.json
-    npm run dev
+   ```bash shouldWrap
+   # if you have a dev/test script in package.json
+   npm run dev
 
-    # or directly:
-    npx dotenv -e .env.local -- tsx src/test.ts
-    ```
+   # or directly:
+   npx dotenv -e .env.local -- tsx src/test.ts
+   ```
 
 You should see your test user's record printed in the console.
 
