@@ -71,7 +71,7 @@ Audit events may not be logged if database endpoints experience exceptionally he
 The following features are not currently HIPAA-compliant and should not be used in projects containing HIPAA-protected data:
 
 - **Neon Auth** – Uses an authentication provider that is not covered under Neon’s HIPAA compliance.
-- **Data API** – Hosted outside Neon’s HIPAA-compliant infrastructure.
+- **Data API (currently in private preview)** – Hosted outside Neon’s HIPAA-compliant infrastructure.
 
 For updates on HIPAA support for these features, contact [hipaa@neon.tech](mailto:hipaa@neon.tech).
 
