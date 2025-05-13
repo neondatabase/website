@@ -87,6 +87,16 @@ You can either watch the video below or follow the steps to set up the Neon MCP 
 The remote hosted MCP server is in preview due to the [new OAuth MCP specification](https://spec.modelcontextprotocol.io/specification/2025-03-26/basic/authorization/), expect potential changes as we continue to refine the OAuth integration.
 </Admonition>
 
+<Admonition type="tip" title="Troubleshooting OAuth Errors">
+If you encounter an error message like `{"code":"invalid_request","error":"invalid redirect uri"}` when starting Windsurf with the remote MCP server, this is typically due to cached OAuth credentials. To fix this issue:
+
+1. Remove the MCP authentication cache by running: `rm -rf ~/.mcp-auth`
+2. Restart Windsurf
+3. The OAuth flow will start fresh, allowing you to properly authenticate
+
+This error commonly occurs when there are changes to the OAuth configuration or when cached credentials become invalid.
+</Admonition>
+
 ### Option 2: Setting up the Local Neon MCP Server
 
 This method runs the Neon MCP server locally on your machine, using a Neon API
