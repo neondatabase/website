@@ -111,7 +111,7 @@ In your Organization's **Settings** page, you'll find the **Delete** section. It
 
 ![delete organization](/docs/manage/orgs_delete.png)
 
-Complete any necessary steps. Once cleared, you can go ahead and delete. This action will permanently remove the organization and cancel its associated billing. *It can't be reversed.*
+Complete any necessary steps. Once cleared, you can go ahead and delete. This action will permanently remove the organization and cancel its associated billing. _It can't be reversed._
 
 </Steps>
 
