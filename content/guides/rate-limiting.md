@@ -15,7 +15,7 @@ You can rate limit a certain Postgres query using a combination of advisory lock
 
 * Use advisory locks to synchronize access
 * Create a counter table for rate tracking
-* Upsert into the rate_limits table
+* Upsert into the `rate_limits` table
 * Implement a basic rate limiter with SQL
 * Wrap rate limiting in an SQL function
 
