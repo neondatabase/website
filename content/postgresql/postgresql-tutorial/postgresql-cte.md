@@ -182,3 +182,56 @@ The following are some advantages of using common table expressions or CTEs:
 
 - Use a common table expression (CTE) to create a temporary result set within a query.
 - Leverage CTEs to simplify complex queries and make them more readable.
+
+## Frequently Asked Questions (FAQ)
+
+<DefinitionList>
+What is a Common Table Expression (CTE) in PostgreSQL?
+: A Common Table Expression (CTE) is a temporary named result set defined within a SQL statement using the WITH clause. It allows you to structure complex queries into simpler, more readable parts. CTEs can be used in SELECT, INSERT, UPDATE, DELETE, and MERGE statements. [Learn more](https://www.postgresql.org/docs/current/queries-with.html)
+
+How do I write a CTE?
+: You define a CTE using the WITH keyword, followed by a name and an AS clause containing a subquery. Here's a basic example:
+: 
+: ```sql
+: WITH recent_orders AS (
+:   SELECT * FROM orders WHERE order_date >= '2025-01-01'
+: )
+: SELECT customer_id, COUNT(*) AS order_count
+: FROM recent_orders
+: GROUP BY customer_id;
+: ```
+: 
+: In this example, recent_orders is the CTE that simplifies the main query.
+
+Can I define multiple CTEs in a single query?
+: Yes. You can define multiple CTEs by separating them with commas:
+: 
+: ```sql
+: WITH
+:   sales_sum AS (
+:     SELECT product_id, SUM(amount) AS total_sales
+:     FROM orders
+:     GROUP BY product_id
+:   ),
+:   top_products AS (
+:     SELECT product_id
+:     FROM sales_sum
+:     WHERE total_sales > 1000
+:   )
+: SELECT p.product_id, p.name, s.total_sales
+: FROM products p
+: JOIN sales_sum s ON p.product_id = s.product_id
+: WHERE p.product_id IN (SELECT product_id FROM top_products);
+: ```
+: 
+: Each CTE can reference CTEs defined earlier in the same WITH clause.
+
+What are common mistakes to avoid when using CTEs?
+: - Missing a semicolon before WITH if another statement precedes it.
+: - Forgetting parentheses around the subquery in the AS clause.
+: - Not using the CTE immediately—it's only valid for the next SQL statement.
+: - Assuming CTEs are stored—they're temporary and exist only during query execution.
+
+Are there performance considerations when using CTEs?
+: Yes. Before PostgreSQL 12, CTEs were always materialized, which could negatively impact performance. From PostgreSQL 12 onward, simple CTEs can be inlined by the query planner, allowing for more optimizations. However, materialization still occurs in some cases, so it's worth testing performance when using CTEs.
+</DefinitionList>
