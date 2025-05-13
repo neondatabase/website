@@ -191,22 +191,22 @@ What is a Common Table Expression (CTE) in PostgreSQL?
 
 How do I write a CTE?
 : You define a CTE using the WITH keyword, followed by a name and an AS clause containing a subquery. Here's a basic example:
-: 
-: ```sql
+:
+: `sql
 : WITH recent_orders AS (
 :   SELECT * FROM orders WHERE order_date >= '2025-01-01'
 : )
 : SELECT customer_id, COUNT(*) AS order_count
 : FROM recent_orders
 : GROUP BY customer_id;
-: ```
-: 
+: `
+:
 : In this example, recent_orders is the CTE that simplifies the main query.
 
 Can I define multiple CTEs in a single query?
 : Yes. You can define multiple CTEs by separating them with commas:
-: 
-: ```sql
+:
+: `sql
 : WITH
 :   sales_sum AS (
 :     SELECT product_id, SUM(amount) AS total_sales
@@ -222,8 +222,8 @@ Can I define multiple CTEs in a single query?
 : FROM products p
 : JOIN sales_sum s ON p.product_id = s.product_id
 : WHERE p.product_id IN (SELECT product_id FROM top_products);
-: ```
-: 
+: `
+:
 : Each CTE can reference CTEs defined earlier in the same WITH clause.
 
 What are common mistakes to avoid when using CTEs?
