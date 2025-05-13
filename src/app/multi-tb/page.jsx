@@ -1,3 +1,4 @@
+import Branching from 'components/pages/multi-tb/branching';
 import Hero from 'components/pages/multi-tb/hero';
 import SubHero from 'components/pages/multi-tb/sub-hero';
 import CTA from 'components/shared/cta';
@@ -12,6 +13,7 @@ const MultiTBPage = () => (
   <Layout>
     <Hero />
     <SubHero />
+    <Branching />
     <CTA
       className="pb-[298px] pt-[296px] xl:pb-[259px] xl:pt-[250px] lg:pb-[186px] lg:pt-[182px] md:pb-[171px] md:pt-[157px]"
       title="The Postgres of tomorrow, available today"
