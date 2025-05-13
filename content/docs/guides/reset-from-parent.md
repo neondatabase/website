@@ -79,7 +79,7 @@ Read more about performing branching actions from the CLI in [CLI - branches](/d
 </TabItem>
 
 <TabItem>
-To reset a branch to its parent using the API, use the Restore branch endpoint, specifying the parent branch ID as the `source_branch_id`:
+To reset a branch to its parent using the API, use the [Restore branch](https://api-docs.neon.tech/reference/restoreprojectbranch) endpoint, specifying the parent branch ID as the `source_branch_id`:
 
 ```bash
 curl --request POST \
