@@ -16,7 +16,7 @@ If there are no active queries for 5 minutes, which is the scale to zero setting
 
 ![Scale to zero configuration dialog](/docs/introduction/autosuspend_config.png)
 
-For information about configuring this setting, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
+For information about configuring this setting, see [Edit a compute](/docs/manage/computes#edit-a-compute).
 
 <Admonition type="note">
 Neon's _Scale to Zero_ feature is conservative. It treats an "idle-in-transaction" connection as active to avoid breaking application logic that involves long-running transactions. Only the truly inactive connections are closed after the defined period of inactivity.
