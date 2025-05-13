@@ -1,6 +1,10 @@
 # Connection errors
 
-Learn how to resolve connection errors
+> This guide provides troubleshooting information for common Neon connection errors, including SNI-related issues, authentication problems, compute activation delays, connection limits, and DNS resolution problems, with detailed explanations and solutions for each error type.
+
+## Source
+
+- [Connection errors HTML](https://neon.tech/docs/connect/connection-errors): The original HTML version of this documentation
 
 This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered include:
 

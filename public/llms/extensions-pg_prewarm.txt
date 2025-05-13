@@ -1,9 +1,14 @@
 # The pg_prewarm extension
 
-Load data into your Postgres buffer cache with the pg_prewarm extension
+> This guide explains how to use the pg_prewarm extension to preload data into the Postgres buffer cache after a restart, improving query response times by ensuring data is readily available in memory rather than loading from disk on-demand.
+
+## Source
+
+- [The pg_prewarm extension HTML](https://neon.tech/docs/extensions/pg_prewarm): The original HTML version of this documentation
+
+## Overview
 
 You can use the `pg_prewarm` extension to preload data into the Postgres buffer cache after a restart. Doing so improves query response times by ensuring that your data is readily available in memory. Otherwise, data must be loaded into the buffer cache from disk on-demand, which can result in slower query response times.
-
 
 
 In this guide, we'll explore the `pg_prewarm` extension, how to enable it, and how to use it to prewarm your Postgres buffer cache.

@@ -1,17 +1,16 @@
 # Secure your data with AWS Cognito and Neon RLS
 
-Implement Row-level Security policies in Postgres using AWS Cognito and Neon
+> This guide explains how to implement Row-level Security policies in Postgres using AWS Cognito and Neon RLS, covering integration setup, policy creation, and authenticated query examples.
 
+## Source
 
+- [Secure your data with AWS Cognito and Neon RLS HTML](https://neon.tech/docs/guides/neon-rls-aws-cognito): The original HTML version of this documentation
 
-  AWS Cognito + Neon RLS
+### Sample projects and related docs
 
-
-
-  Neon RLS Tutorial
-  Simplify RLS with Drizzle
-
-
+- [AWS Cognito + Neon RLS](https://github.com/neondatabase-labs/aws-cognito-express-htmx-neon-rls): Sample project demonstrating integration
+- [Neon RLS Tutorial](https://neon.tech/docs/guides/neon-rls-tutorial): General tutorial for Neon RLS
+- [Simplify RLS with Drizzle](https://neon.tech/docs/guides/neon-rls-drizzle): Using Drizzle ORM with Neon RLS
 
 Use AWS Cognito with Neon RLS to add secure, database-level authorization to your application. This guide assumes you already have an application using AWS Cognito for user authentication. It shows you how to integrate AWS Cognito with Neon RLS, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 
@@ -42,7 +41,7 @@ https://cognito-idp.{YOUR_AWS_COGNITO_REGION}.amazonaws.com/{YOUR_AWS_COGNITO_US
 
 You can locate your JWKS URL in the AWS Cognito console under User pools, labeled as Token signing key URL.
 
-![Find your AWS Cognito JWKS URL](/docs/guides/aws_cognito_user_pool.png)
+![Find your AWS Cognito JWKS URL](https://neon.tech/docs/guides/aws_cognito_user_pool.png)
 
 Replace `{YOUR_AWS_COGNITO_REGION}` and `{YOUR_AWS_COGNITO_USER_POOL_ID}` with your actual AWS Cognito region and user pool ID. For example, if your region is `us-east-1` and your user pool ID is `us-east-1_XXXXXXXXX`, your JWKS URL would be:
 
@@ -53,10 +52,6 @@ https://cognito-idp.us-east-1.amazonaws.com/us-east-1_XXXXXXXXX/.well-known/jwks
 ### 2. Add AWS Cognito as an authorization provider in the Neon Console
 
 Once you have the JWKS URL, go to the **Neon Console**, navigate to **Settings** > **RLS**, and add AWS Cognito as an authentication provider. Paste your copied URL and AWS Cognito will be automatically recognized and selected.
-
-
-  
-
 
 At this point, you can use the **Get Started** setup steps from RLS in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
 
@@ -113,7 +108,7 @@ Install it using the following command:
 npm install @neondatabase/serverless
 ```
 
-To learn more about the driver, see [Neon Serverless Driver](/docs/serverless/serverless-driver).
+To learn more about the driver, see [Neon Serverless Driver](https://neon.tech/docs/serverless/serverless-driver).
 
 ### 6. Set up environment variables
 
@@ -144,10 +139,6 @@ Now that you've integrated AWS Cognito with Neon RLS, you can securely pass JWTs
 
 Here are examples of implementing RLS policies for a **todos** table – the Drizzle example leverages the simplified `crudPolicy` function, while the SQL example demonstrates the use of individual RLS policies.
 
-
-
-
-
 ```typescript shouldWrap
 import { InferSelectModel, sql } from 'drizzle-orm';
 import { bigint, boolean, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
@@ -177,10 +168,6 @@ export const todos = pgTable(
 
 export type Todo = InferSelectModel;
 ```
-
-
-
-
 
 ```sql shouldWrap
 -- schema for TODOs table
@@ -214,18 +201,11 @@ TO authenticated
 USING ((select auth.user_id()) = user_id);
 ```
 
-
-
-
 The `crudPolicy` function simplifies policy creation by generating all necessary CRUD policies with a single declaration.
 
 ### 2. Run your first authorized query
 
 With RLS policies in place, you can now query the database using JWTs from AWS Cognito, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from both the backend and the frontend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
-
-
-
-
 
 ```typescript shouldWrap
 "use server";
@@ -269,18 +249,14 @@ export default async function TodoList() {
   const todos = await sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
 
   return (
-    
+    <div>
       {todos.map((todo) => (
-        {todo.task}
+        <div>{todo.task}</div>
       ))}
-    
+    </div>
   );
 }
 ```
-
-
-
-
 
 ```typescript shouldWrap
 'use client';
@@ -296,7 +272,7 @@ const getDb = (token: string) =>
   });
 
 export default function TodoList() {
-  const [todos, setTodos] = useState>();
+  const [todos, setTodos] = useState<Todo[]>();
 
   useEffect(() => {
     async function fetchTodos() {
@@ -315,27 +291,23 @@ export default function TodoList() {
       const todosResponse = await
         sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
 
-      setTodos(todosResponse as Array);
+      setTodos(todosResponse as Todo[]);
     }
 
     fetchTodos();
   }, []);
 
   return (
-    
+    <div>
       {todos?.map((todo) => (
-        
+        <div>
           {todo.task}
-        
+        </div>
       ))}
-    
+    </div>
   );
 }
 ```
-
-
-
-
 
 ```bash shouldWrap
 # Used for database migrations

@@ -1,8 +1,12 @@
 # Migrate from Microsoft SQL Server to Neon Postgres
 
-Learn how to migrate a Microsoft SQL Server database to Neon Postgres using
+> This guide provides step-by-step instructions for migrating a Microsoft SQL Server database to Neon Postgres using pgloader, covering the entire process from setting up the source and destination databases to verifying the migrated data.
 
 This guide describes how to migrate your database from a Microsoft SQL Server (MSSQL) database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).
+
+## Source
+
+- [Migrate from Microsoft SQL Server to Neon Postgres HTML](https://neon.tech/docs/import/migrate-mssql): The original HTML version of this documentation
 
 The `pgloader` utility transforms data to a Postgres-compatible format as it reads from your MSSQL database. It uses the Postgres `COPY` protocol to stream the data into your Postgres database.
 
@@ -69,18 +73,17 @@ CREATE DATABASE "Northwind";
 
 Log in to the Neon Console. Find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
 
-```bash shouldWrap
+```bash
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
 Now, modify the connection string as follows to pass your **endpoint ID** (`ep-cool-darkness-123456` in this example) to Neon with your password using the `endpoint` keyword, as shown here:
 
-```bash shouldWrap
+```bash
 postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
-
-Passing the `endpoint ID` with your password is a required workaround for some Postgres drivers, including the one used by `pgloader`. For more information about this workaround and why it's required, refer to our [connection workaround](/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field) documentation. 
+**Note**: Passing the `endpoint ID` with your password is a required workaround for some Postgres drivers, including the one used by `pgloader`. For more information about this workaround and why it's required, refer to our [connection workaround](/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field) documentation. 
 
 
 Keep your Neon connection string handy for later use.
@@ -222,9 +225,11 @@ For complex migrations or when you need more control over the migration process,
   database = ...
   ```
 
-## Reference
+## Resources
 
 For more information on `pgloader` and database migration, refer to the following resources:
 
 - [pgloader documentation - MSSQL to Postgres](https://pgloader.readthedocs.io/en/latest/ref/mssql.html)
 - [Neon documentation](/docs/introduction)
+- [Microsoft SQL Server documentation](https://learn.microsoft.com/en-us/sql/sql-server)
+- [PostgreSQL documentation](https://www.postgresql.org/docs/)

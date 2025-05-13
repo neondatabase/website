@@ -1,0 +1,109 @@
+# Query with Neon's SQL Editor
+
+> This guide explains how to use Neon's SQL Editor to run queries directly from the Neon Console, covering features like saving queries, viewing query history, using Explain and Analyze tools, Time Travel functionality, exporting data, and using meta-commands and AI features.
+
+## Source
+
+- [Query with Neon's SQL Editor HTML](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor): The original HTML version of this documentation
+
+## Overview
+
+The Neon SQL Editor allows you to run queries on your Neon databases directly from the Neon Console. The editor provides several features to enhance your database interaction experience, including query history, saved queries, and Explain/Analyze functionality.
+
+## Using the SQL Editor
+
+To use the SQL Editor:
+
+1. Navigate to the Neon Console
+2. Select your project
+3. Select **SQL Editor**
+4. Select a branch and database
+5. Enter a query into the editor and click **Run** to view the results
+
+When running multiple query statements at once, the SQL Editor returns a separate result set for each statement, displayed in separate tabs numbered in order of execution.
+
+To clear the editor, click **New Query**.
+
+### Example Query
+
+You can use the following query to try the SQL Editor:
+
+```sql
+CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
+INSERT INTO playing_with_neon(name, value)
+SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i);
+SELECT * FROM playing_with_neon;
+```
+
+### Working with Identifiers
+
+When querying objects with upper case letters in their name, enclose the identifier name in quotes. For example: `SELECT * FROM "Company"`. Postgres changes identifier names to lower case unless they are quoted. The same applies when creating objects in Postgres.
+
+## Save Your Queries
+
+To save a query:
+
+1. Enter the query into the editor
+2. Click **Save** to open the **SAVE QUERY** dialog
+3. Enter a name for the query and click **Save**
+
+The query is added to the **Saved** list in the left pane of the SQL Editor. You can rerun a saved query by selecting it from the list.
+
+You can rename or delete a saved query by selecting **Rename** or **Delete** from the more options menu associated with the saved query.
+
+## View the Query History
+
+The SQL Editor maintains a query history for the project. To view your query history, select **History** in the left pane of the SQL Editor. You can click an item in the **History** list to view the query that was run.
+
+Note that queries saved to **History** are limited to 9 KB in length. Longer queries will be truncated when saved, with a `-- QUERY TRUNCATED` comment added at the beginning.
+
+## Explain and Analyze
+
+The SQL Editor provides **Explain** and **Analyze** features:
+
+- **Explain**: Runs the query with the Postgres `EXPLAIN` command, returning the execution plan without executing the query
+- **Analyze**: Runs the query with `EXPLAIN ANALYZE`, executing the query and returning actual row counts and run times along with estimates
+
+Understanding these features requires familiarity with the Postgres `EXPLAIN` command and its `ANALYZE` parameter.
+
+## Time Travel
+
+You can toggle Time Travel in the SQL Editor to query against a selected point within your restore window instead of your current data.
+
+For more details about using Time Travel queries, see:
+- Time Travel documentation
+- Time Travel tutorial
+
+## Export Data
+
+The Neon SQL Editor supports exporting your data to `JSON`, `CSV`, and `XLSX` formats. The download button appears in the bottom right corner of the SQL Editor page when there is a result set to download.
+
+## Expand Results Section
+
+You can expand the results section of the SQL Editor window by selecting the expand window button from the bottom right corner of the page. There must be query results to display, otherwise the expanded results section will appear blank.
+
+## Meta-commands
+
+The Neon SQL Editor supports using Postgres meta-commands, which act like shortcuts for interacting with your database. These commands can significantly speed up your workflow by providing quick access to database schemas and other information without writing full SQL queries.
+
+Some available meta-commands include:
+
+- `\dt` — List all tables in the current database
+- `\d [table_name]` — Describe a table's structure
+- `\l` — List all databases
+- `\?` - A cheat sheet of available meta-commands
+- `\h [NAME]` - Get help for any Postgres command
+
+Note that not all meta-commands are supported in the SQL Editor. To get a list of supported commands, use `\?`.
+
+## AI Features
+
+The Neon SQL Editor offers three AI-driven features:
+
+1. **SQL generation**: Convert natural language requests to SQL by pressing the ✨ button or **Cmd/Ctrl+Shift+M**. The AI assistant is schema-aware, meaning you can reference any table names, functions, or other objects in your schema.
+
+2. **Fix with AI**: If your query returns an error, click **Fix with AI** next to the error message. The AI assistant will analyze the error, suggest a fix, and update the SQL Editor.
+
+3. **AI-generated query names**: Descriptive names are automatically assigned to your queries in the History, helping you quickly identify and reuse previously executed queries.
+
+Note: To enhance your experience with these AI features, Neon shares your database schema with the AI agent. No actual data is shared. Neon currently uses AWS Bedrock as the LLM provider, ensuring all requests remain within AWS's secure infrastructure. There is a maximum limit of 5 AI requests every 60 seconds.
