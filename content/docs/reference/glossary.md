@@ -206,6 +206,10 @@ Utilized in PostgreSQL replication architecture to decode WAL entries into a for
 
 Resources including compute and storage dedicated to a single Neon account.
 
+## default organization
+
+The organization that is automatically created for a user upon signing up for Neon. This organization is used as the default context for project management when no specific organization ID is provided in commands or API calls. It allows users to manage projects without needing to specify an organization ID each time.
+
 ## delete_tenant
 
 A Neon Control Plane operation that deletes stored data when a Neon project is deleted. See [System operations](/docs/manage/operations) for more information.

@@ -48,7 +48,7 @@ Permissions within the organization are exclusively managed by Admins. As an Adm
 
 ## Invite Collaborators
 
-All members can invite external users to [collaborate](/docs/guides/project-collaboration-guide) on specific projects. Collaborators will not have access to the organization Dashboard but can access any projects shared with them from the **Projects** page of their personal account, under **Shared with you**. Collaborators can invite additional Collaborators to the project and remove existing Collaborators from the project.
+All members can invite external users to [collaborate](/docs/guides/project-collaboration-guide) on specific projects. Collaborators will not have access to the organization Dashboard but can access any projects shared with them from the **Projects shared with me** section, which appears in the org switcher in the top navbar of the Neon Console. Collaborators can invite additional Collaborators to the project and remove existing Collaborators from the project.
 
 <Admonition type="note">
 Organization members don't need Collaborator invites as they already have full project access. When projects are transferred to an organization, existing collaborator permissions for organization members are automatically removed.

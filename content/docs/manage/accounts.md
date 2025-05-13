@@ -57,7 +57,7 @@ Personal API keys let you securely access Neon from the command line, scripts, o
 
 ## Early access
 
-Enable Early Access for your personal account to preview new features before they go live.
+Enable Early Access for your Neon account to preview new features before they go live.
 
 [Learn more and join the Neon Early Access Program.](/docs/introduction/roadmap#join-the-neon-early-access-program)
 

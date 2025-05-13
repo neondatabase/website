@@ -15,7 +15,7 @@ Neon supports three types of API keys:
 
 | Key Type               | Who Can Create              | Scope                                                                          | Validity                                                                 |
 | ---------------------- | --------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| Personal API Key       | Any user                    | User's personal projects and any organization projects where they are a member | Valid until revoked; org project access ends if user leaves organization |
+| Personal API Key       | Any user                    | All organization projects where the user is a member                          | Valid until revoked; org project access ends if user leaves organization |
 | Organization API Key   | Organization administrators | All projects within the organization                                           | Valid until revoked                                                      |
 | Project-scoped API Key | Any organization member     | Single specified project                                                       | Valid until revoked or project leaves organization                       |
 
