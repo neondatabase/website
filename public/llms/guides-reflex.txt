@@ -1,6 +1,10 @@
 # Build a Python App with Reflex and Neon
 
-Learn how to build a Python Full Stack application with Reflex and Neon
+> This guide demonstrates how to build a full-stack Python application with Reflex and Neon Postgres, covering project setup, database connection configuration, data modeling, and CRUD operations.
+
+## Source
+
+- [Build a Python App with Reflex and Neon HTML](https://neon.tech/docs/guides/reflex): The original HTML version of this documentation
 
 [Reflex](https://reflex.dev/) is a Python web framework that allows you to build full-stack applications with Python.
 
@@ -30,19 +34,19 @@ It's recommended to use a virtual environment to manage your project dependencie
 
 To create a virtual environment, run the following command in your project directory:
 
+### MacOS
 
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
 
-    ```bash
-    python3 -m venv .venv
-    source .venv/bin/activate
-    ```
+### Windows
 
-    ```
-    py -3 -m venv .venv
-    .venv\Scripts\activate
-    ```
-
-
+```
+py -3 -m venv .venv
+.venv\Scripts\activate
+```
 
 ### Install the Reflex CLI
 
@@ -70,12 +74,12 @@ reflex init
 When a project is initialized, the Reflex CLI creates a project directory. This directory will contain the following files and directories:
 
 ```
-
+<new_project>
 ├── .web
 ├── assets
-├── 
+├── <new_project>
 │   ├── __init__.py
-│   └── .py
+│   └── <new_project>.py
 └── rxconfig.py
 ```
 
@@ -108,28 +112,24 @@ To configure the connection settings:
    config = rx.Config(
        app_name="new_project",
        # Connect to your own database.
-       db_url="",
+       db_url="<connection-string-from-neon>",
    )
    ```
 
-   Replace `` with your Neon connection string. You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+   Replace `<connection-string-from-neon>` with your Neon connection string. You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](https://neon.tech/docs/connect/connect-from-any-app).
 
-   
-
-   Replace the value for `db_url` with an environment variable or the connection string from Neon. For example, after creating an environment variable named `NEON_DATABASE_URL`, you can use it as follows:
-
-   ```python
-   import os
-
-   DATABASE_URL = os.getenv("NEON_DATABASE_URL")
-
-   config = rx.Config(
-       app_name="new_project",
-       db_url=DATABASE_URL,
-   )
-   ```
-
-   
+   > **Note**: Replace the value for `db_url` with an environment variable or the connection string from Neon. For example, after creating an environment variable named `NEON_DATABASE_URL`, you can use it as follows:
+   >
+   > ```python
+   > import os
+   >
+   > DATABASE_URL = os.getenv("NEON_DATABASE_URL")
+   >
+   > config = rx.Config(
+   >     app_name="new_project",
+   >     db_url=DATABASE_URL,
+   > )
+   > ```
 
 3. Save the changes to the `rxconfig.py` file.
 
@@ -137,12 +137,12 @@ To configure the connection settings:
 
 ## Creating a data model
 
-To create a data model in Reflex, you can define a Python class that represents the data structure. Reflex uses [sqlmodel](https://sqlmodel.tiangolo.com/) to provide a built-in ORM wrapping [SQLAlchemy](/docs/guides/sqlalchemy).
+To create a data model in Reflex, you can define a Python class that represents the data structure. Reflex uses [sqlmodel](https://sqlmodel.tiangolo.com/) to provide a built-in ORM wrapping [SQLAlchemy](https://neon.tech/docs/guides/sqlalchemy).
 
 For example, you can create a `Customer` model as follows:
 
 ```python
-# /models.py
+# <new_project>/models.py
 
 import reflex as rx
 
@@ -188,7 +188,7 @@ with rx.session() as session:
 This code creates a new `Customer` object and adds it to the database using a session. The `session.commit()` method saves the changes to the database. If you change the table schema, you can run the following command to update the database:
 
 ```bash
-reflex db makemigrations --message ''
+reflex db makemigrations --message '<describe what changed>'
 ```
 
 This command generates a new migration file that describes the changes to the database schema. You can then apply the migration to the database with the following command:
@@ -203,8 +203,6 @@ This command applies the migration to the database, updating the schema to match
 
 Learn how to use Reflex with Neon Postgres to create an interactive Customer Data App. The app demonstrates how to edit tabular data from a live application connected to a Postgres database. You can find a live version of the application [here](https://customer-data-app.reflex.run/).
 
-![Reflex Customer Data App](/docs/guides/reflex_customer_data_app.png)
+![Reflex Customer Data App](https://neon.tech/docs/guides/reflex_customer_data_app.png)
 
-
-
-Customer Data App
+[Customer Data App](https://github.com/reflex-dev/templates/tree/main/customer_data_app) - GitHub repository for the Reflex Customer Data App built with Neon Postgres

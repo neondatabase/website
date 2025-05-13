@@ -1,0 +1,45 @@
+# AI Rules and Prompts
+
+> This guide explains how to enhance AI development with Neon-specific context rules for tools like Cursor, covering available rules for Neon Auth, Neon Serverless, and Neon+Drizzle integration, with instructions for adding these rules to your project.
+
+## Source
+
+- [AI Rules and Prompts HTML](https://neon.tech/docs/ai/ai-rules): The original HTML version of this documentation
+
+## Overview
+
+Boost your productivity with AI context rules for Neon. These rules help AI tools like [Cursor](https://www.cursor.so/) understand Neon's features, leading to more accurate code suggestions and fewer common mistakes.
+
+## Available rules
+
+Neon provides several specialized AI context rules:
+
+- **Neon Auth**: Stack Auth integration, database syncing, and authentication patterns
+- **Neon Serverless**: Efficient queries, connection pooling, and serverless best practices
+- **Neon + Drizzle**: ORM setup, schema management, and usage patterns with Drizzle
+
+## How it works
+
+AI rules are `.mdc` files that specify which types of files they apply to (such as `*.tsx` or `schema.sql`). When you're working with a matching file, your AI tool automatically applies the relevant rules to provide better suggestions.
+
+### Example: AI rules in action
+
+Here's a practical example using [Cursor](https://www.cursor.so). A developer has implemented authentication in their server-rendered page and wants to confirm best practices:
+
+**Developer query**: _"Using the neon-auth.mdc rule, how do I secure a server-rendered page?"_
+
+The AI confirms that using `stackServerApp.getUser({ or: "redirect" })` is the correct approach for server-side authentication, providing additional context and explanation.
+
+## Add rules to your project
+
+Add these files to your project's `.cursor/rules` folder:
+
+```text
+.cursor/
+  rules/
+    neon-auth.mdc
+    neon-serverless.mdc
+    neon-drizzle.mdc
+```
+
+Most AI tools will automatically apply these rules when you're working with Neon-related code. You can also reference them explicitly in prompts for more targeted assistance.

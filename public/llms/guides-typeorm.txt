@@ -1,6 +1,12 @@
 # Connect from TypeORM to Neon
 
-Learn how to connect to Neon from TypeORM
+> This guide explains how to connect to Neon from TypeORM, covering basic connection setup, connection pooling configuration, and troubleshooting connection timeouts when working with idle computes.
+
+## Source
+
+- [Connect from TypeORM to Neon HTML](https://neon.tech/docs/guides/typeorm): The original HTML version of this documentation
+
+## Overview
 
 TypeORM is an open-source ORM that lets you to manage and interact with your database. This guide covers the following topics:
 

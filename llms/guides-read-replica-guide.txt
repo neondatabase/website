@@ -1,6 +1,12 @@
 # Create and manage Read Replicas
 
-Learn how to create and manage read replicas in Neon
+> This guide explains how to create and manage read replicas in Neon, covering creation through Console/CLI/API, connection methods, monitoring replication delay, and troubleshooting configuration issues to ensure optimal performance.
+
+## Source
+
+- [Create and manage Read Replicas HTML](https://neon.tech/docs/guides/read-replica-guide): The original HTML version of this documentation
+
+## Overview
 
 [Read replicas](/docs/introduction/read-replicas) are supported with all Neon plans. This guide steps you through the process of creating and managing read replicas.
 

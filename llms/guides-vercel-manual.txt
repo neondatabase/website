@@ -1,11 +1,18 @@
 # Connect Vercel and Neon manually
 
-Learn how to connect a Vercel project to a Neon database manually
+> This guide explains how to manually connect a Vercel project to a Neon database, covering how to gather Neon connection details and configure Vercel environment variables for your application.
+
+## Source
+
+- [Connect Vercel and Neon manually HTML](https://neon.tech/docs/guides/vercel-manual): The original HTML version of this documentation
+
+## Overview
 
 This guide describes how to manually connect a Vercel project to a Neon database.
 
-
-For other Vercel integration options, refer to the [Neon and Vercel integration overview](/docs/guides/vercel-overview).
+<Admonition type="note">
+For other Vercel integration options, refer to the [Neon and Vercel integration overview](https://neon.tech/docs/guides/vercel-overview).
+</Admonition>
 
 
 ## Prerequisites
@@ -25,7 +32,7 @@ The connection string includes the role name, hostname, and database name. For e
 ```text
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
            ^              ^                                               ^
-           |-       |-                                    |- 
+           |- <role>      |- <hostname>                                   |- <database>
 ```
 
 - role name: `alex`
@@ -50,15 +57,15 @@ PGPASSWORD=AbC123dEf
 PGPORT=5432
 ```
 
-
+<Admonition type="note">
 Neon uses the default Postgres port, `5432`.
-
+</Admonition>
 
 To configure the environment variables required by your application:
 
-
+<Admonition type="note">
 Vercel environment variables can also be configured when you first deploy an application to Vercel.
-
+</Admonition>
 
 1. Navigate to the [Vercel dashboard](https://vercel.com/).
 1. Select your Vercel project.

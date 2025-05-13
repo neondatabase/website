@@ -1,6 +1,10 @@
 # The neon_utils extension
 
-Monitor how Neon's Autoscaling feature allocates compute resources
+> This guide explains how to use the neon_utils extension to monitor Neon's Autoscaling feature, covering installation, usage of the num_cpus() function to track vCPU allocation, limitations, and a practical example using pgbench to observe autoscaling behavior.
+
+## Source
+
+- [The neon_utils extension HTML](https://neon.tech/docs/extensions/neon-utils): The original HTML version of this documentation
 
 The `neon_utils` extension provides a `num_cpus()` function you can use to monitor how Neon's _Autoscaling_ feature allocates vCPU in response to workload. The function returns the current number of allocated vCPUs.
 

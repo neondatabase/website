@@ -1,6 +1,12 @@
 # Use Neon with Cloudflare Pages
 
-Connect a Neon Postgres database to your Cloudflare Pages web application
+> This guide demonstrates how to connect a Neon Postgres database to a Cloudflare Pages application, covering project setup, database initialization, implementing React frontend and serverless functions with the Neon serverless driver, and deployment steps.
+
+## Source
+
+- [Use Neon with Cloudflare Pages HTML](https://neon.tech/docs/guides/cloudflare-pages): The original HTML version of this documentation
+
+## Overview
 
 `Cloudflare Pages` is a modern web application hosting platform that allows you to build, deploy, and scale your web applications. While it is typically used to host static websites, you can also use it to host interactive web applications by leveraging `functions` to run server-side code. Internally, Cloudflare functions are powered by `Cloudflare Workers`, a serverless platform that allows you to run JavaScript code on Cloudflare's edge network.
 
@@ -140,29 +146,29 @@ function App() {
   };
 
   return (
-    
-      Book List
-      
+    <div className="App">
+      <h1>Book List</h1>
+      <ul>
         {books.map((book, index) => (
-          
+          <li key={index}>
             {book.title} by {book.author}
-          
+          </li>
         ))}
-      
+      </ul>
 
-      Add a Book
-      
-        
+      <h2>Add a Book</h2>
+      <form onSubmit={handleSubmit}>
+        <label>
           Book Name:
-           setBookName(e.target.value)} />
-        
-        
+          <input type="text" value={bookName} onChange={(e) => setBookName(e.target.value)} />
+        </label>
+        <label>
           Author Name:
-           setAuthorName(e.target.value)} />
-        
-        Add Book
-      
-    
+          <input type="text" value={authorName} onChange={(e) => setAuthorName(e.target.value)} />
+        </label>
+        <button type="submit">Add Book</button>
+      </form>
+    </div>
   );
 }
 
@@ -297,7 +303,7 @@ Now, you can deploy your application to `Cloudflare Pages` by running the follow
 
 ```bash
 npm run build
-npx wrangler pages deploy dist --project-name 
+npx wrangler pages deploy dist --project-name <YOUR_PROJECT_NAME>
 ```
 
 Give a unique name to your `Cloudflare Pages` project above. The Wrangler CLI will output the URL of your application hosted on the Cloudflare platform. Visit this URL in your browser to interact with it.
@@ -321,7 +327,7 @@ Navigate to the dashboard and select the `Settings` section in your project. Go 
 To make sure the environment variable is available to the serverless functions, go back to the terminal and redeploy the project using the `wrangler` CLI:
 
 ```bash
-npx wrangler pages deploy dist --project-name 
+npx wrangler pages deploy dist --project-name <YOUR_PROJECT_NAME>
 ```
 
 Now, visit the URL of your `Cloudflare Pages` application to interact with it. You should see the list of books fetched from the Neon database and a form to add new books.

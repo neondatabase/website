@@ -1,19 +1,21 @@
 # Secure Your Data with Neon RLS and Firebase or GCP Identity Platform
 
-Implement Row-Level Security in Postgres using Firebase or GCP Identity
+> This guide explains how to implement Row-Level Security in Postgres using Firebase or GCP Identity Platform, covering JWT authentication setup, integration with Neon RLS, and sample security policies for database-level authorization.
 
+## Source
 
+- [Secure Your Data with Neon RLS and Firebase or GCP Identity Platform HTML](https://neon.tech/docs/guides/neon-rls-google-identity): The original HTML version of this documentation
 
-  Google Identity integration
-  JWT authentication setup
-  Row-Level Security policies
+## What You'll Learn
 
+- Google Identity integration
+- JWT authentication setup
+- Row-Level Security policies
 
+## Related docs
 
-  Neon RLS Tutorial
-  Google Identity Quickstart
-
-
+- [Neon RLS Tutorial](https://neon.tech/docs/guides/neon-rls-tutorial)
+- [Google Identity Quickstart](https://developers.google.com/identity/openid-connect/openid-connect)
 
 Use Google Identity with Neon RLS to add secure, database-level authorization to your application. This guide assumes you already have an application using Google Identity for user authentication. It shows you how to integrate Google Identity with Neon RLS, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 
@@ -29,14 +31,11 @@ To follow along with this guide, you will need:
 - To use Google Cloud Platform services, you'll need OAuth credentials. If you haven't set them up, follow the [quickstart](https://developers.google.com/identity/gsi/web/guides/get-google-api-clientid) or these steps:
   1. Go to [Google Cloud Console](https://console.cloud.google.com/) and create a new project if needed
   2. Navigate to **APIs & Services > Credentials**
-    
-    
-  
   3. Click **Create Credentials** and select **OAuth 2.0 Client ID**
   4. Set application type to **Web application**
   5. Add `http://localhost:3000/api/auth/callback/google` to **Authorized redirect URIs**
      
-     Replace the redirect URI with your application's callback URL, depending on your framework and environment.
+     Note: Replace the redirect URI with your application's callback URL, depending on your framework and environment.
      
   6. Save your `Client ID` and `Client Secret` for later use
 
@@ -54,17 +53,11 @@ The Google Identity JWKS URL is:
 https://www.googleapis.com/oauth2/v3/certs
 ```
 
-
-For the JWT Audience value required by Neon RLS, you'll use the **OAuth 2.0 Client ID** which was saved earlier.
-
+Note: For the JWT Audience value required by Neon RLS, you'll use the **OAuth 2.0 Client ID** which was saved earlier.
 
 ### 2. Add Google Identity as an authorization provider in the Neon Console
 
 Once you have the JWKS URL, go to the **Neon Console** and add Google Identity as an authentication provider under the **Authorize** page. Paste the JWKS URL and Google Identity will be automatically recognized and selected. Add your **OAuth 2.0 Client ID** as the JWT Audience value and click **Set Up**.
-
-
-  
-
 
 At this point, you can use the **Get Started** setup steps from RLS in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
 
@@ -82,7 +75,7 @@ CREATE EXTENSION IF NOT EXISTS pg_session_jwt;
 
 The integration creates the `authenticated` and `anonymous` roles for you. Let's define table-level permissions for these roles. To allow both roles to read and write to tables in your public schema, run:
 
-```sql shouldWrap
+```sql
 -- For existing tables
 GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES
   IN SCHEMA public
@@ -121,7 +114,7 @@ Install it using the following command:
 npm install @neondatabase/serverless
 ```
 
-To learn more about the driver, see [Neon Serverless Driver](/docs/serverless/serverless-driver).
+To learn more about the driver, see [Neon Serverless Driver](https://neon.tech/docs/serverless/serverless-driver).
 
 ### 6. Set up environment variables
 
@@ -134,16 +127,16 @@ neon connection-string --role-name authenticated
 
 Add these to your `.env` file along with your Google OAuth credentials:
 
-```bash shouldWrap
+```bash
 # Database owner connection string
-DATABASE_URL=''
+DATABASE_URL='<DB_OWNER_CONNECTION_STRING>'
 
 # Neon "authenticated" role connection string
-DATABASE_AUTHENTICATED_URL=''
+DATABASE_AUTHENTICATED_URL='<AUTHENTICATED_CONNECTION_STRING>'
 
 # Google OAuth credentials
-GOOGLE_CLIENT_ID=''
-GOOGLE_CLIENT_SECRET=''
+GOOGLE_CLIENT_ID='<YOUR_GOOGLE_CLIENT_ID>'
+GOOGLE_CLIENT_SECRET='<YOUR_GOOGLE_CLIENT_SECRET>'
 ```
 
 The `DATABASE_URL` is intended for admin tasks and can run any query while the `DATABASE_AUTHENTICATED_URL` should be used for connections from authorized users, where you pass the required authorization token.
@@ -156,11 +149,9 @@ Now that you've integrated Google Identity with Neon RLS, you can securely pass 
 
 Here are examples of implementing RLS policies for a **todos** table – the Drizzle example leverages the simplified `crudPolicy` function, while the SQL example demonstrates the use of individual RLS policies.
 
+#### Drizzle
 
-
-
-
-```typescript shouldWrap
+```typescript
 import { InferSelectModel, sql } from 'drizzle-orm';
 import { bigint, boolean, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
 import { authenticatedRole, authUid, crudPolicy } from 'drizzle-orm/neon';
@@ -187,14 +178,12 @@ export const todos = pgTable(
   ]
 );
 
-export type Todo = InferSelectModel;
+export type Todo = InferSelectModel<typeof todos>;
 ```
 
+#### SQL
 
-
-
-
-```sql shouldWrap
+```sql
 -- schema for TODOs table
 CREATE TABLE todos (
   id bigint generated by default as identity primary key,
@@ -226,18 +215,13 @@ TO authenticated
 USING ((select auth.user_id()) = user_id);
 ```
 
-
-
-
 The `crudPolicy` function simplifies policy creation by generating all necessary CRUD policies with a single declaration.
 
 ### 2. Run your first authorized query
 
 With RLS policies in place, you can now query the database using JWTs from Google Identity, restricting access based on the user's identity. Here's how to run authenticated queries from both the backend and the frontend of our application using Google Identity Tokens. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
 
-
-
-
+#### Server Component
 
 ```typescript
 'use server';
@@ -267,18 +251,16 @@ export default async function TodoList() {
     sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
 
   return (
-    
+    <ul>
       {todos.map((todo) => (
-        {todo.task}
+        <li key={todo.id}>{todo.task}</li>
       ))}
-    
+    </ul>
   );
 }
 ```
 
-
-
-
+#### Client Component
 
 ```typescript
 'use client';
@@ -290,8 +272,8 @@ import type { Todo } from '@/app/schema';
 
 export default function Dashboard() {
     const { data: session } = useSession();
-    const [token, setToken] = useState();
-    const [todos, setTodos] = useState>();
+    const [token, setToken] = useState<string>();
+    const [todos, setTodos] = useState<Array<Todo>>();
 
     const getDb = (token: string) =>
         neon(process.env.NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL!, {
@@ -311,36 +293,34 @@ export default function Dashboard() {
                 // WHERE filter is optional because of RLS.
                 // But we send it anyway for performance reasons.
                 const todosResponse = await sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
-                setTodos(todosResponse as Array);
+                setTodos(todosResponse as Array<Todo>);
             })();
         }
     }, [token]);
 
     return (
-        
+        <ul>
             {todos?.map((todo) => (
-                {todo.task}
+                <li key={todo.id}>{todo.task}</li>
             ))}
-        
+        </ul>
     );
 }
 ```
 
+#### Environment Variables
 
-
-
-
-```bash shouldWrap
+```bash
 # Used for database migrations
-DATABASE_URL=''
+DATABASE_URL='<DB_OWNER_CONNECTION_STRING>'
 
 # Used for server-side fetching
-DATABASE_AUTHENTICATED_URL=''
+DATABASE_AUTHENTICATED_URL='<AUTHENTICATED_CONNECTION_STRING>'
 
 # Used for client-side fetching
-NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL=''
+NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL='<AUTHENTICATED_CONNECTION_STRING>'
 
 # Google OAuth credentials
-GOOGLE_CLIENT_ID=''
-GOOGLE_CLIENT_SECRET=''
+GOOGLE_CLIENT_ID='<YOUR_GOOGLE_CLIENT_ID>'
+GOOGLE_CLIENT_SECRET='<YOUR_GOOGLE_CLIENT_SECRET>'
 ```

@@ -1,8 +1,16 @@
 # Supported Postgres extensions
 
+> This comprehensive reference lists all Postgres extensions supported by Neon across different Postgres versions, including installation instructions, version update procedures, and information about experimental extensions and preloaded libraries.
+
+## Source
+
+- [Supported Postgres extensions HTML](https://neon.tech/docs/extensions/pg-extensions): The original HTML version of this documentation
+
+## Overview
+
 Neon supports the Postgres extensions shown in the following table. The supported version of the extension sometimes differs by Postgres version. A dash (`-`) indicates that an extension is not yet supported.
 
-**Need an extension we don't have?** 📩 [Request an extension](/docs/extensions/pg-extensions#request-an-extension)
+**Need an extension we don't have?** 📩 [Request an extension](https://neon.tech/docs/extensions/pg-extensions#request-an-extension)
 
 
 
@@ -94,36 +102,40 @@ Neon supports the Postgres extensions shown in the following table. The supporte
 Unless otherwise noted, supported extensions can be installed using [CREATE EXTENSION](https://www.postgresql.org/docs/16/sql-createextension.html) syntax.
 
 ```sql
-CREATE EXTENSION ;
+CREATE EXTENSION <extension_name>;
 ```
 
-You can install extensions from the Neon SQL Editor or from a client such as `psql` that permits running SQL queries. For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
+You can install extensions from the Neon SQL Editor or from a client such as `psql` that permits running SQL queries. For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](https://neon.tech/docs/connect/query-with-psql-editor).
 
 ## Update an extension version
 
-Neon updates supported extensions as new versions become available. Version updates are communicated in the [Changelog](/docs/changelog). To check the current version of extensions you have installed, query the `pg_extension` table:
+Neon updates supported extensions as new versions become available. Version updates are communicated in the [Changelog](https://neon.tech/docs/changelog). To check the current version of extensions you have installed, query the `pg_extension` table:
 
 ```bash
 SELECT * FROM pg_extension;
 ```
 
-You can update an extension to the latest version using `ALTER EXTENSION  UPDATE TO ` syntax. For example:
+You can update an extension to the latest version using `ALTER EXTENSION <extension_name> UPDATE TO <new_version>` syntax. For example:
 
 ```sql
 ALTER EXTENSION vector UPDATE TO '0.7.0';
 ```
 
 
-When Neon releases a new extension or new extension version, a compute restart is required to make the new extension or extension version available for installation or update. A compute restart may occur on its own due to Neon's default [scale to zero](/docs/introduction/scale-to-zero) behavior. However, if your compute never restarts because you disabled scale to zero or because your compute is constantly active, you may need to force a restart. To force a restart, you can issue [Restart endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API call. Please be aware that restarting a compute temporarily interrupts any connections currently using the compute.
+<Admonition type="important">
+When Neon releases a new extension or new extension version, a compute restart is required to make the new extension or extension version available for installation or update. A compute restart may occur on its own due to Neon's default [scale to zero](https://neon.tech/docs/introduction/scale-to-zero) behavior. However, if your compute never restarts because you disabled scale to zero or because your compute is constantly active, you may need to force a restart. To force a restart, you can issue [Restart endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API call. Please be aware that restarting a compute temporarily interrupts any connections currently using the compute.
 
 Extensions installations and updates are automatically applied to any read replica computes on the same branch as your primary compute the next time the read replica compute restarts.  
+</Admonition>
 
 
 ## Extension support notes
 
+<Admonition type="note">
 - Neon supports the `uuid-ossp` extension for generating UUIDs instead of the `uuid` extension.
 - The `sslinfo` extension is not supported. Neon handles connections via a proxy that checks SSL.
 - The `file_fdw` extension is not supported. Files would not remain accessible when Neon scales to zero.
+</Admonition>
 
 ## Request extension support
 
@@ -133,7 +145,7 @@ _We appreciate all extension requests. While we can’t guarantee support, we re
 
 ### Custom-built extensions
 
-For [Enterprise](/docs/introduction/plans#enterprise) plan customers, Neon supports custom-built Postgres extensions for exclusive use with your Neon account. If you developed your own Postgres extension and want to use it with Neon, please reach out to us as described above. Please include the following information in your request:
+For [Enterprise](https://neon.tech/docs/introduction/plans#enterprise) plan customers, Neon supports custom-built Postgres extensions for exclusive use with your Neon account. If you developed your own Postgres extension and want to use it with Neon, please reach out to us as described above. Please include the following information in your request:
 
 - A repository link or archive file containing the source code for your extension
 - A description of what the extension does, instructions for compiling it, and any prerequisites
