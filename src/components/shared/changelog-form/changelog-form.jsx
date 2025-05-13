@@ -22,7 +22,7 @@ const appearAndExitAnimationVariants = {
 
 const themeClassNames = {
   sidebar: {
-    block: 'flex-col gap-3 p-3.5 lg:flex-row lg:items-center lg:gap-[72px] lg:px-6 lg:py-[18px]',
+    block: 'flex-col gap-3 p-3.5 lg:flex-row lg:items-center lg:gap-[72px]',
     title: 'text-[15px] lg:shrink-0 lg:text-lg',
     input: 'pr-20 lg:pr-32',
     sendText: 'hidden lg:block',
@@ -119,7 +119,7 @@ const ChangelogForm = ({ isSidebar = false, className }) => {
         'changelog-form safe-paddings relative flex scroll-mt-20 rounded-lg bg-gray-new-94',
         classNames.block,
         className,
-        'lg:scroll-mt-10 md:gap-10 sm:flex-col sm:items-start sm:gap-2.5 sm:p-[18px] sm:py-5',
+        'lg:scroll-mt-10 lg:p-[18px] lg:pt-[14px] md:gap-10 sm:flex-col sm:items-start sm:gap-2.5',
         'dark:bg-transparent dark:bg-subscribe-form-dark dark:shadow-[0px_2px_10px_0px_rgba(0,0,0,.4),0px_2px_30px_0px_rgba(0,0,0,.5)]'
       )}
       id="changelog-form"
