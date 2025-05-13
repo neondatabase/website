@@ -1,6 +1,10 @@
 # Connect a Ruby on Rails application to Neon Postgres
 
-Set up a Neon project in seconds and connect from a Ruby on Rails application
+> This guide explains how to connect a Ruby on Rails application to a Neon Postgres database, covering project setup, database configuration, controller creation, and testing the connection with a sample application.
+
+## Source
+
+- [Connect a Ruby on Rails application to Neon Postgres HTML](https://neon.tech/docs/guides/ruby-on-rails): The original HTML version of this documentation
 
 [Ruby on Rails](https://rubyonrails.org/), also known simply as Rails, is an open-source web application framework written in Ruby. It uses a model-view-controller architecture, making it a good choice for developing database-backed web applications. This guide shows how to connect to a Ruby on Rails application to a Neon Postgres database.
 
@@ -42,11 +46,12 @@ DATABASE_URL=postgresql://[user]:[password]@[neon_hostname]/
 ```
 
 
-You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](https://neon.tech/docs/connect/connect-from-any-app).
 
 
-
-The role you specified in the `DATABASE_URL` must have **CREATEDB** privileges. Roles created in the Neon Console, CLI, or API, including the default role created with a Neon project, are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the `CREATEDB` privilege. Alternatively, you can create roles with SQL to grant specific privileges. See [Manage database access](/docs/manage/database-access).
+<Admonition type="note">
+The role you specified in the `DATABASE_URL` must have **CREATEDB** privileges. Roles created in the Neon Console, CLI, or API, including the default role created with a Neon project, are granted membership in the [neon_superuser](https://neon.tech/docs/manage/roles#the-neonsuperuser-role) role, which has the `CREATEDB` privilege. Alternatively, you can create roles with SQL to grant specific privileges. See [Manage database access](https://neon.tech/docs/manage/database-access).
+</Admonition>
 
 
 Create the development database by issuing the following commands from the root of your project directory:
@@ -113,7 +118,6 @@ PostgreSQL 15.5 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1
 ## Schema migration with Ruby on Rails
 
 For schema migration with Ruby on Rails, see our guide:
-
 
 
 Ruby on Rails Migrations

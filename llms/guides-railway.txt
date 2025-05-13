@@ -1,6 +1,10 @@
 # Use Neon Postgres with Railway
 
-Connect a Neon Postgres database to your Node application deployed with
+> This guide demonstrates how to deploy a simple Node.js application connected to a Neon Postgres database on Railway, covering database setup, application implementation, and deployment configuration.
+
+## Source
+
+- [Use Neon Postgres with Railway HTML](https://neon.tech/docs/guides/railway): The original HTML version of this documentation
 
 [Railway](https://railway.app) is an application deployment platform that allows users to develop web applications locally, provision infrastructure and then deploy to the cloud. Railway integrates with GitHub for continuous deployment and supports a variety of programming languages and frameworks.
 
@@ -151,15 +155,11 @@ Whenever you update your code and push it to your GitHub repository, Railway wil
 
 To remove your application from Railway, select the project and navigate to the `Settings` tab. Scroll down to the end to find the "Delete Service" option.
 
-To delete your Neon project, follow the steps outlined in the Neon documentation under [Delete a project](/docs/manage/projects#delete-a-project).
+To delete your Neon project, follow the steps outlined in the Neon documentation under [Delete a project](https://neon.tech/docs/manage/projects#delete-a-project).
 
 ## Source code
 
 You can find the source code for the application described in this guide on GitHub.
-
-
-Use Neon Postgres with Railway
-
 
 ## Resources
 

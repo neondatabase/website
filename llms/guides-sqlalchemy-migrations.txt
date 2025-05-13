@@ -1,6 +1,10 @@
 # Schema migration with Neon Postgres and SQLAlchemy
 
-Manage database migrations in your Python project with SQLAlchemy and Alembic
+> This guide demonstrates how to use SQLAlchemy and Alembic to manage schema migrations for a Neon Postgres database, covering project setup, model definition, migration generation, and schema evolution with a FastAPI application example.
+
+## Source
+
+- [Schema migration with Neon Postgres and SQLAlchemy HTML](https://neon.tech/docs/guides/sqlalchemy-migrations): The original HTML version of this documentation
 
 [SQLAlchemy](https://www.sqlalchemy.org/) is a popular SQL toolkit and Object-Relational Mapping (ORM) library for Python. SQLAlchemy provides a powerful way to interact with databases and manage database schema changes using [Alembic](https://alembic.sqlalchemy.org/), a lightweight database migration tool.
 
@@ -31,7 +35,7 @@ postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbna
 Keep your connection string handy for later use.
 
 
-Neon supports both direct and pooled database connection strings. You can find a connection string for your database by clicking the **Connect** button on your **Project Dashboard**. A pooled connection string connects your application to the database via a PgBouncer connection pool, allowing for a higher number of concurrent connections. However, using a pooled connection string for migrations can be prone to errors. For this reason, we recommend using a direct (non-pooled) connection when performing migrations. For more information about direct and pooled connections, see [Connection pooling](/docs/connect/connection-pooling).
+> Note: Neon supports both direct and pooled database connection strings. You can find a connection string for your database by clicking the **Connect** button on your **Project Dashboard**. A pooled connection string connects your application to the database via a PgBouncer connection pool, allowing for a higher number of concurrent connections. However, using a pooled connection string for migrations can be prone to errors. For this reason, we recommend using a direct (non-pooled) connection when performing migrations. For more information about direct and pooled connections, see [Connection pooling](https://neon.tech/docs/connect/connection-pooling).
 
 
 ## Setting up the Web application
@@ -359,8 +363,7 @@ In this guide, we demonstrated how to set up a FastAPI project with `Neon` Postg
 
 You can find the source code for the application described in this guide on GitHub.
 
-
-Migrations with Neon and SQLAlchemy
+[Migrations with Neon and SQLAlchemy](https://github.com/neondatabase/guide-neon-sqlalchemy)
 
 
 ## Resources
@@ -370,4 +373,4 @@ For more information on the tools and concepts used in this guide, refer to the 
 - [FastAPI Documentation](https://fastapi.tiangolo.com/)
 - [SQLAlchemy Documentation](https://docs.sqlalchemy.org/)
 - [Alembic Documentation](https://alembic.sqlalchemy.org/)
-- [Neon Postgres](/docs/introduction)
+- [Neon Postgres](https://neon.tech/docs/introduction)
