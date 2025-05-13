@@ -3,7 +3,7 @@ title: Platform overview
 enableTableOfContents: true
 subtitle: Find information about managing all aspects of your database using the Neon
   platform
-updatedOn: '2025-04-21T13:34:15.084Z'
+updatedOn: '2025-05-11T11:23:50.625Z'
 ---
 
 ## Access control
@@ -38,7 +38,7 @@ Learn how to manage all aspects of your Neon projects. These topics cover the ba
 
 <a href="/docs/manage/branches" description="Learn about database branching in Neon" icon="branching">Branches</a>
 
-<a href="/docs/manage/endpoints" description="Configure and optimimze compute resources for your Neon projects" icon="laptop">Computes</a>
+<a href="/docs/manage/computes" description="Configure and optimimze compute resources for your Neon projects" icon="laptop">Computes</a>
 
 <a href="/docs/manage/roles" description="Manage roles within projects and assign permissions" icon="user">Roles</a>
 

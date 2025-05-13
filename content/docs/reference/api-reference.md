@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/reference/about
   - /docs/api/about
-updatedOn: '2024-10-05T09:31:59.750Z'
+updatedOn: '2025-05-11T11:23:50.628Z'
 ---
 
 The Neon API allows you to manage your Neon projects programmatically.
@@ -51,7 +51,7 @@ For additional Neon API examples, refer to the following topics:
 - [Manage API keys with the Neon API](/docs/manage/api-keys#manage-api-keys-with-the-neon-api)
 - [Manage projects with the Neon API](/docs/manage/projects#manage-projects-with-the-neon-api)
 - [Manage branches with the Neon API](/docs/manage/branches#branching-with-the-neon-api)
-- [Manage computes with the Neon API](/docs/manage/endpoints#manage-computes-with-the-neon-api)
+- [Manage computes with the Neon API](/docs/manage/computes#manage-computes-with-the-neon-api)
 - [Manage roles with the Neon API](/docs/manage/users#manage-roles-with-the-neon-api)
 - [Manage databases with the Neon API](/docs/manage/databases#manage-databases-with-the-neon-api)
 - [View operations with the Neon API](/docs/manage/operations#operations-and-the-neon-api)

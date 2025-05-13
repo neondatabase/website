@@ -30,7 +30,7 @@ const ITEMS = [
 
 const Usage = () => (
   <section className="usage safe-paddings relative mt-[200px] xl:mt-[176px] lg:mt-[152px] md:mt-[104px]">
-    <Container className="!max-w-3xl md:!max-w-sm md:px-5">
+    <Container className="md:max-w-sm md:px-5" size="768">
       <h2 className="font-title text-[52px] font-medium leading-none tracking-extra-tight xl:text-5xl lg:text-4xl md:text-[32px]">
         Neon lets you ship faster with AI
       </h2>

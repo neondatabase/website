@@ -49,24 +49,7 @@ Neon MCP server, combined with Neon, offers:
 The Neon MCP server's ability to execute arbitrary commands from natural language requests requires careful attention to security.  Always review and approve actions before they are committed.  Grant access only to authorized users and applications.
 </Admonition>
 
-**Key Actions available via Neon MCP server (powered by Neon API):**
-
-Neon MCP server exposes the following actions, which primarily map to **Neon API endpoints**:
-
-- `list_projects`: Action to list all your Neon projects. This uses the Neon API to retrieve a summary of all projects associated with your Neon account.
-- `describe_project`: Action to get detailed information about a specific Neon project. Provides comprehensive details about a chosen project, such as its ID, name, and associated branches.
-- `create_project`: Action to create a new Neon project — a container in Neon for branches, databases, roles, and computes.
-- `delete_project`: Action to delete an existing Neon project.
-- `create_branch`: Action to create a new branch within a Neon project. Leverages Neon's branching feature, allowing you to create new branches for development or migrations.
-- `delete_branch`: Action to delete an existing branch in a Neon project.
-- `describe_branch`: Action to get details about a specific branch. Retrieves information about a particular branch, such as its name and ID.
-- `get_connection_string`: Action to retrieve a connection string for a specific database in a Neon project. Returns a formatted connection string that can be used to connect to the database.
-- `run_sql`: Action to execute a single SQL query against a Neon database. Allows you to run read or write SQL queries.
-- `run_sql_transaction`: Action to execute a series of SQL queries within a transaction against a Neon database. Enables running multiple SQL statements as a single atomic transaction, ensuring data consistency.
-- `get_database_tables`: Action to list all tables in a specified Neon database. Provides a list of tables.
-- `describe_table_schema`: Action to retrieve the schema definition of a specific table. Details the structure of a table, including columns and data types.
-- `prepare_database_migration`: Action to initiate a database migration process, utilizing a temporary branch for safety. Begins the process of altering your database schema, safely using Neon's branching feature.
-- `complete_database_migration`: Action to apply and finalize a prepared database migration to the production branch. Completes a migration process, applying changes to your main database and cleaning up temporary resources.
+<MCPTools />
 
 These actions enable any MCP Host to interact with various functionalities of the **Neon platform via the Neon API.** Certain tools, especially database migration ones, are tailored for AI agent and LLM usage, leveraging Neon’s branching for safe preview and commit.
 

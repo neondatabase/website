@@ -3,7 +3,7 @@ title: Develop with Neon on Azure
 subtitle: Find the resources you need to start developing with Neon on Azure
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-04-22T18:19:49.140Z'
+updatedOn: '2025-05-12T10:59:00.325Z'
 ---
 
 <PublicPreview/>
@@ -90,6 +90,14 @@ Azure provides an Azure-native CLI and SDKs for working with the Neon platform. 
 - [ASP.NET with Neon and Entity Framework](https://neon.tech/guides/dotnet-neon-entity-framework) - Build ASP.NET Core applications with Neon and Entity Framework
 - [RESTful API with ASP.NET Core and Swagger](https://neon.tech/guides/aspnet-core-api-neon) - Build APIs with ASP.NET Core, Swagger, and Neon
 - [Neon read replicas with Entity Framework](https://neon.tech/guides/read-replica-entity-framework) - Scale .NET applications with Entity Framework and Neon read replicas
+
+### Online course
+
+<DetailIconCards>
+
+<a href="https://www.udemy.com/course/aspnet-core-development-with-neon-postgresql-azure" description="Build a Full-Stack CRM with ASP.NET Core, EF Core, PostgreSQL, and Deploy to Azure Cloud Step-by-Step" icon="enable">ASP.NET Core Development with Neon Serverless Postgres & Azure</a>
+
+</DetailIconCards>
 
 ## Functions & serverless
 

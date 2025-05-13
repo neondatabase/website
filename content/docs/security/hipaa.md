@@ -1,7 +1,7 @@
 ---
 title: HIPAA Compliance
 enableTableOfContents: true
-updatedOn: '2025-04-23T22:46:58.383Z'
+updatedOn: '2025-05-13T11:54:30.907Z'
 ---
 
 Neon offers HIPAA compliance as part of our Business and Enterprise plans, available upon request.
@@ -65,6 +65,15 @@ HIPAA is a federal law that sets national standards for the protection of health
 ## Availability of audit events
 
 Audit events may not be logged if database endpoints experience exceptionally heavy load, as we prioritize database availability over capturing log events.
+
+## Non-HIPAA-compliant features
+
+The following features are not currently HIPAA-compliant and should not be used in projects containing HIPAA-protected data:
+
+- **Neon Auth** – Uses an authentication provider that is not covered under Neon’s HIPAA compliance.
+- **Data API (currently in private preview)** – Hosted outside Neon’s HIPAA-compliant infrastructure.
+
+For updates on HIPAA support for these features, contact [hipaa@neon.tech](mailto:hipaa@neon.tech).
 
 ## Enabling HIPAA for a Neon project
 

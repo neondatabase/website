@@ -2,7 +2,7 @@
 title: The neon_utils extension
 subtitle: Monitor how Neon's Autoscaling feature allocates compute resources
 enableTableOfContents: true
-updatedOn: '2025-02-03T20:41:57.302Z'
+updatedOn: '2025-05-11T11:23:50.613Z'
 ---
 
 The `neon_utils` extension provides a `num_cpus()` function you can use to monitor how Neon's _Autoscaling_ feature allocates vCPU in response to workload. The function returns the current number of allocated vCPUs.
@@ -33,7 +33,7 @@ As your workload changes, computing capacity scales dynamically between the mini
 SELECT num_cpus();
 ```
 
-For autoscaling configuration instructions, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
+For autoscaling configuration instructions, see [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration).
 
 ## Limitations
 
@@ -48,7 +48,7 @@ The following instructions demonstrate how you can use the `num_cpus()` function
 
 ### Prerequisites
 
-- Ensure that autoscaling is enabled for your compute. For instructions, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration). The following example uses a minimum setting of 0.25 Compute Units (CU) and a maximum of 4.
+- Ensure that autoscaling is enabled for your compute. For instructions, see [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration). The following example uses a minimum setting of 0.25 Compute Units (CU) and a maximum of 4.
 - The [pgbench](https://www.postgresql.org/docs/current/pgbench.html) utility.
 
 ### Run the test

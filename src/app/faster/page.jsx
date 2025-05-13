@@ -11,7 +11,7 @@ const FasterPage = () => {
   const currentSlug = 'index';
   const { data, content } = getPostBySlug(currentSlug, FASTER_DIR_PATH);
   const tableOfContents = getTableOfContents(content);
-  const fileOriginPath = `${process.env.NEXT_PUBLIC_FASTER_GITHUB_PATH}${currentSlug}.md`;
+  const githubPath = `${FASTER_DIR_PATH}/${currentSlug}.md`;
 
   return (
     <Post
@@ -20,7 +20,7 @@ const FasterPage = () => {
       breadcrumbs={[]}
       navigationLinks={{ previousLink: null, nextLink: null }}
       currentSlug={currentSlug}
-      fileOriginPath={fileOriginPath}
+      githubPath={githubPath}
       tableOfContents={tableOfContents}
       isFasterPage
     />

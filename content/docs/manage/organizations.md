@@ -2,7 +2,7 @@
 title: Organizations
 subtitle: Manage your projects and collaborate with team members
 enableTableOfContents: true
-updatedOn: '2025-04-25T20:26:32.193Z'
+updatedOn: '2025-05-11T11:23:50.624Z'
 ---
 
 In Neon, all projects live within organizations. When you sign up, you automatically get a free organization for your first project. Organizations provide a central place to manage your projects, collaborate with team members, and — for paid plans — handle your billing.
