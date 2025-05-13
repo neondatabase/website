@@ -17,24 +17,16 @@ In the Neon Console, the Organizations page provides a centralized view of all y
 
 Organizations have two main member roles:
 
-- **Admin** — Administrators have full control over the organization and all its projects. They manage permissions, billing, members, and organization settings. Only Admins can delete organization projects.
-- **Member** — Members have access to all organization projects and can perform most project operations, but cannot modify organization settings or delete projects.
+- **Admin** — Full control over the organization and all its projects.
+- **Member** — Access to all organization projects, but cannot modify org settings or delete projects.
 
-Additionally, projects can be shared with **Project Collaborators**. These are external users with no organization-level access, but who can work with specific projects they're invited to.
+Projects can also be shared with **Project Collaborators**. These are external users with no organization-level access, but who can work with specific projects they're invited to.
 
 For a full breakdown of what each role can do, see the [User Permissions](/docs/manage/user-permissions) page.
 
-### Creating a new organization
+## Creating a new organization
 
-To create a new org, use the **Create organzation** button in the org switcher you can find in the top navbar.
-
-![create organization button](/docs/manage/orgs_create_button.png)
-
-Other than the free org you signed up with, organizations are always on paid plans. When creating a new organization, you'll need to select a paid plan and enter billing details.
-
-![create organization with billing](/docs/manage/orgs_create_with_billing.png)
-
-After confirming, you'll be directed to your new organization's **Projects** page, where you can get started creating projects and inviting [members](/docs/manage/orgs-manage#invite-members).
+You can create additional organizations at any time. [See how to create an organization.](/docs/manage/orgs-manage#create-an-organization)
 
 ## Limitations
 

@@ -14,35 +14,52 @@ For an overview of organizations, see the [Organizations](/docs/manage/organizat
 - **Member** — Access to all organization projects and can perform most project operations, but cannot modify organization settings or delete projects.
 - **Collaborator** — External users invited to specific projects. Collaborators have no organization-level access, but can work on projects they've been invited to.
 
-## Permissions matrix
+<Steps>
 
-| Action                                                     | Admin | Member | Collaborator |
-| ---------------------------------------------------------- | :---: | :----: | :----------: |
-| **Organization management**                                |       |        |              |
-| Invite organization members                                |  ✅   |   ❌   |      ❌      |
-| Set organization permissions                               |  ✅   |   ❌   |      ❌      |
-| Manage organization billing                                |  ✅   |   ❌   |      ❌      |
-| Rename organization                                        |  ✅   |   ❌   |      ❌      |
-| Delete organization                                        |  ✅   |   ❌   |      ❌      |
-| Enable organization Early Access Program                   |  ✅   |   ❌   |      ❌      |
-| **Project operations**                                     |       |        |              |
-| Create new projects                                        |  ✅   |   ✅   |      ❌      |
-| Rename projects                                            |  ✅   |   ✅   |      ✅      |
-| Transfer projects into organization                        |  ✅   |   ✅   |      ❌      |
-| Transfer projects out of organization                      |  ✅   |   ❌   |      ❌      |
-| Delete projects                                            |  ✅   |   ❌   |      ❌      |
-| Manage project databases                                   |  ✅   |   ✅   |      ✅      |
-| Configure project computes                                 |  ✅   |   ✅   |      ✅      |
-| Manage project roles                                       |  ✅   |   ✅   |      ✅      |
-| Invite/remove project collaborators                        |  ✅   |   ✅   |      ✅      |
-| **Integration management**                                 |       |        |              |
-| Install GitHub integration                                 |  ✅   |   ❌   |      ❌      |
-| Install Neon Auth                                          |  ✅   |   ❌   |      ❌      |
-| Install the Neon Postgres Previews Integration on Vercel\* |  ✅   |   ❌   |      ❌      |
-| Connect project to GitHub integration                      |  ✅   |   ✅   |      ❌      |
-| Connect project (Neon Postgres Previews Integration)       |  ✅   |   ✅   |      ❌      |
+## Organization management
 
-\*The Vercel Native Integration is managed entirely in Vercel and uses Vercel's permission system. For the Neon Postgres Previews Integration, projects must first be made available in Vercel before they can be connected to Neon.
+The following table shows what each role can do at the organization level:
+
+| Action                                  | Admin | Member | Collaborator |
+|------------------------------------------|:-----:|:------:|:-----------:|
+| Invite organization members              |  ✅   |   ❌   |      ❌      |
+| Set organization permissions             |  ✅   |   ❌   |      ❌      |
+| Manage organization billing              |  ✅   |   ❌   |      ❌      |
+| Rename organization                      |  ✅   |   ❌   |      ❌      |
+| Delete organization                      |  ✅   |   ❌   |      ❌      |
+| Enable organization Early Access Program |  ✅   |   ❌   |      ❌      |
+
+## Project management
+
+The following table shows what each role can do at the project level:
+
+| Action                        | Admin | Member | Collaborator |
+|-------------------------------|:-----:|:------:|:-----------:|
+| Create new projects           |  ✅   |   ✅   |      ❌      |
+| Rename projects               |  ✅   |   ✅   |      ✅      |
+| Transfer projects into org    |  ✅   |   ✅   |      ❌      |
+| Transfer projects out of org  |  ✅   |   ❌   |      ❌      |
+| Delete projects               |  ✅   |   ❌   |      ❌      |
+| Manage project databases      |  ✅   |   ✅   |      ✅      |
+| Configure project computes    |  ✅   |   ✅   |      ✅      |
+| Manage project roles          |  ✅   |   ✅   |      ✅      |
+| Invite/remove collaborators   |  ✅   |   ✅   |      ✅      |
+
+## Integration management
+
+The following table shows what each role can do regarding integrations:
+
+| Action                                             | Admin | Member | Collaborator |
+|----------------------------------------------------|:-----:|:------:|:-----------:|
+| Install GitHub integration                         |  ✅   |   ❌   |      ❌      |
+| Install Neon Auth                                  |  ✅   |   ❌   |      ❌      |
+| Install the Neon Postgres Previews Integration on Vercel* |  ✅   |   ❌   |      ❌      |
+| Connect project to GitHub integration              |  ✅   |   ✅   |      ❌      |
+| Connect project (Neon Postgres Previews Integration)| ✅   |   ✅   |      ❌      |
+
+*The Vercel Native Integration is managed entirely in Vercel and uses Vercel's permission system. For the Neon Postgres Previews Integration, projects must first be made available in Vercel before they can be connected to Neon.
+
+</Steps>
 
 ## Notes and limitations
 

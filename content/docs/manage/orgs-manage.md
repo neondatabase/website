@@ -6,24 +6,19 @@ updatedOn: '2025-03-14T18:29:25.736Z'
 
 Learn how to manage your organization's projects, invite Members, revise permissions, and oversee billing details. This section explains which specific actions each Member can take based on their assigned roles and permissions.
 
-<div style={{ display: 'flex' }}>
-  <div style={{ flex: 1, paddingRight: '20px' }}>
-    <ul>
-      <li><a href="#invite-members">Invite Members</a></li>
-      <li><a href="#invite-collaborators">Invite Collaborators</a></li>
-      <li><a href="#set-permissions" style={{ cursor: 'pointer' }} >Set permissions</a></li>
-      <li><a href="#create-and-delete-projects">Create and delete projects</a></li>
-    </ul>
-  </div>
-  <div style={{ flex: 1 }}>
-    <ul>
-      <li><a href="#passwordless-authentication">Passwordless authentication</a></li>
-      <li><a href="#rename-an-organization">Rename an organization</a></li>
-      <li><a href="#delete-an-organization">Delete an organization</a></li>
-      <li><a href="#billing">Billing</a></li>
-    </ul>
-  </div>
-</div>
+<Steps>
+
+## Create an organization
+
+To create a new org, use the **Create organization** button in the org switcher in the top navbar. Select a plan and enter billing details.
+
+![create organization button](/docs/manage/orgs_create_button.png)
+
+Other than the free org you signed up with, organizations are always on paid plans. When creating a new organization, you'll need to select a paid plan and enter billing details.
+
+![create organization with billing](/docs/manage/orgs_create_with_billing.png)
+
+After confirming, you'll be directed to your new organization's **Projects** page, where you can get started creating projects and inviting [members](/docs/manage/orgs-manage#invite-members).
 
 ## Invite Members
 
@@ -50,12 +45,6 @@ Permissions within the organization are exclusively managed by Admins. As an Adm
 - You cannot leave the organization if you are the only Admin. Promote a Member to Admin before you try to leave the org.
 
 ![organization members](/docs/manage/orgs_members_kebab.png 'no-border')
-
-## Rename an organization
-
-Only Admins can rename an organization. Go to the **Settings** page under **General information**. Changing the organization name applies globally—the new name will appear for everyone in the organization.
-
-![organization settings](/docs/manage/orgs_id.png 'no-border')
 
 ## Invite Collaborators
 
@@ -89,7 +78,48 @@ All Members can create new projects from the Organization's **Projects** page; h
 - Any Member can create a project under the organization's ownership.
 - Only Admins can delete projects owned by the organization.
 
-## Passwordless authentication
+## Manage billing
+
+When you create a new organization, you'll choose a plan (Launch, Scale, or Enterprise) for that organization. Each organization manages its own billing and plan.
+
+As the Admin for the organization account:
+
+- You have full access to edit all billing information.
+- Promote a Member to Admin if you want to delegate billing management; however, all Admins will have the capability to edit billing details.
+- While all Members can view the **Billing** page, only admins can make changes.
+
+For detailed information on pricing and plans, refer to [Neon plans](/docs/introduction/plans).
+
+### Downgrade to Free Plan
+
+You can only have one Free organization per account, and Free orgs are just for solo use (no team members). If you already have a Free org, you can't downgrade another org to Free—you'll see an error if you try.
+
+To downgrade, your org must:
+
+- Have only one member (just you)
+- Stay within Free plan limits (storage, projects, branches, etc.)
+
+If you need help or think you should be able to downgrade, use the **Request support** option during the downgrade process.
+
+[See Neon plans for details.](/docs/introduction/plans)
+
+## Delete an organization
+
+Only Admins can delete an Organization. Before doing so, make sure all projects within the Organization are removed.
+
+In your Organization's **Settings** page, you'll find the **Delete** section. It will list any actions you need to take before deletion is allowed. For example, if you still have outstanding projects that need to be removed, you'll see:
+
+![delete organization](/docs/manage/orgs_delete.png)
+
+Complete any necessary steps. Once cleared, you can go ahead and delete. This action will permanently remove the organization and cancel its associated billing. *It can't be reversed.*
+
+</Steps>
+
+## More actions
+
+Here are a couple additional things you can do with your organization: **passwordless authentication** and **renaming an organization**.
+
+### Passwordless authentication
 
 If you want the simplest way to connect to your database from the command line, passwordless authentication using `pg.neon.tech` lets you directly start a `psql` connection with any of your organization's databases. This saves you time versus logging in to the Console and copying your connection string manually.
 
@@ -115,37 +145,10 @@ Type "help" for help.
 alexlopez=>
 ```
 
-## Delete an organization
+### Rename an organization
 
-Only Admins can delete an Organization. Before doing so, make sure all projects within the Organization are removed.
+Only Admins can rename an organization. Go to the **Settings** page under **General information**. Changing the organization name applies globally—the new name will appear for everyone in the organization.
 
-In your Organization's **Settings** page, you'll find the **Delete** section. It will list any actions you need to take before deletion is allowed. For example, if you still have outstanding projects that need to be removed, you'll see:
+![organization settings](/docs/manage/orgs_id.png 'no-border')
 
-![delete organization](/docs/manage/orgs_delete.png)
-
-Complete any necessary steps. Once cleared, you can go ahead and delete. This action will permanently remove the organization and cancel its associated billing. It can't be reversed.
-
-## Billing
-
-On creating an organization, your existing paid plan (Launch, Scale, or Enterprise) will be transferred to the new organization account. Following the conversion, your personal account will switch to the Free Plan, letting you manage any new personal projects separately.
-
-As the Admin for the organization account:
-
-- You have full access to edit all billing information.
-- Promote a Member to Admin if you want to delegate billing management; however, all Admins will have the capability to edit billing details.
-- While all Members can view the **Billing** page, only admins can make changes.
-
-For detailed information on pricing and plans, refer to [Neon plans](/docs/introduction/plans).
-
-### Downgrade to Free Plan
-
-You can only have one Free organization per account, and Free orgs are just for solo use (no team members). If you already have a Free org, you can't downgrade another org to Free—you'll see an error if you try.
-
-To downgrade, your org must:
-
-- Have only one member (just you)
-- Stay within Free plan limits (storage, projects, branches, etc.)
-
-If you need help or think you should be able to downgrade, use the **Request support** option during the downgrade process.
-
-[See Neon plans for details.](/docs/introduction/plans)
+<NeedHelp />

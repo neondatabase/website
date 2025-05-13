@@ -103,6 +103,7 @@ The API may return these errors:
 
 - **`406`** – Transfer failed - the target organization has too many projects or its plan is incompatible with the source organization. Reduce projects or upgrade the organization.
 - **`422`** – One or more of the provided project IDs have GitHub or Vercel integrations installed. Transferring integration projects is currently not supported.
-  </Steps>
+
+</Steps>
 
 <NeedHelp/>
