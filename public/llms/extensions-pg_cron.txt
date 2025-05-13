@@ -54,11 +54,9 @@ curl --request POST \
      --header 'authorization: Bearer <NEON_API_KEY>'
 ```
 
-
 <Admonition type="note">
 The [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API only works on an active compute. If your compute is idle, you can start it by running a query to wake it up or running the [Start compute endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API. For more information and other compute restart options, see [Restart a compute](https://neon.tech/docs/manage/endpoints#restart-a-compute).
 </Admonition>
-
 
 You can then install the `pg_cron` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](https://neon.tech/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
@@ -265,8 +263,6 @@ Here are a few key `pg_cron` settings and their descriptions:
 <Admonition type="important">
 It's important to note that because `pg_cron` is managed by Neon, modifying these settings requires superuser privileges. Therefore, you cannot directly alter these `pg_cron` configuration parameters yourself. If you have a specific need to adjust any of these settings, please [open a support ticket](https://console.neon.tech/app/projects?modal=support). **After Neon support implements the requested configuration change, you will need to [restart your Neon compute](https://neon.tech/docs/manage/endpoints#restart-a-compute) for the new settings to take effect.**
 </Admonition>
-
-
 
 ## Conclusion
 

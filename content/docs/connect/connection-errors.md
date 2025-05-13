@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/connectivity-issues
   - /docs/connect/connectivity-issues
-updatedOn: '2025-04-13T12:01:55.973Z'
+updatedOn: '2025-05-11T11:23:50.611Z'
 ---
 
 This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered include:
@@ -215,7 +215,7 @@ This error occurs when the maximum number of simultaneous database connections, 
 To resolve this issue, you have several options:
 
 - Find and remove long-running or idle connections. See [Find long-running or idle connections](/docs/postgresql/query-reference#find-long-running-or-idle-connections).
-- Use a larger compute, with a higher `max_connections` configuration. See [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+- Use a larger compute, with a higher `max_connections` configuration. See [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 - Enable [connection pooling](/docs/connect/connection-pooling).
 
 If you are already using connection pooling, you may need to reach out to Neon Support to request a higher `default_pool_size` setting for PgBouncer. See [Neon PgBouncer configuration settings for more information](/docs/connect/connection-pooling#neon-pgbouncer-configuration-settings).

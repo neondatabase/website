@@ -6,31 +6,72 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2025-05-09T22:43:28.155Z'
+updatedOn: '2025-05-12T21:06:51.826Z'
 ---
 
 Our development teams are focused on helping you ship faster with Postgres. This roadmap describes committed features we're working on right now, what we delivered recently, and a peek at what's on the horizon.
 
-## What we're working on now
+## What we're working on now 🛠️
 
 Here's a snapshot of what we're working on now:
 
 - **Postgres for AI agents**: [Replit partnered with Neon to back Replit Agents](https://neon.tech/blog/looking-at-how-replit-agent-handles-databases), creating thousands of Postgres databases. If you're building AI agents and would like to integrate agent-ready Postgres, [connect with us](https://neon.tech/agent-design-partner). See [Postgres for AI Agents](https://neon.tech/use-cases/ai-agents) for more.
-- **Backup & restore**: We'll start with scheduled snapshots with instant point-in-time recovery, eventually expanding this feature with more traditional automated backup capabilities.
-- **Data API**: We're working on a Data API feature, powered by PostgREST.
+- **Snapshots**: Scheduled snapshots with instant restore.
+- **Data API**: A Data API feature, powered by PostgREST.
 - **Monitoring platform support**: After adding [Datadog integration](/docs/guides/datadog#steps-to-integrate-datadog-with-neon) in 2024, we're planning support for additional monitoring platforms.
-- **Larger computes GA**: Autoscaling up to 16 vCPUs and fixed compute sizes up to 56 vCPUs are currently in Beta; GA support is planned for 2025.
-- **Console navigation improvements**: Enhancing navigation for multi-project organizations, branch clarity, and better SQL Editor and Tables page interactions.
+- **Console navigation enhancements**: Enhancing navigation for multi-project organizations, branch clarity, and better SQL Editor and Tables page interactions.
 - **Claimable Databases**: A new way for SaaS vendors to partner with Neon to offer instant Postgres databases. Let your users create Postgres databases — no registration required.
 
 Other features you would like to see? [Let us know](#share-your-thoughts).
 
-## What's on the horizon
+## What's on the horizon 🌅
 
-And here's a quick list of what we'll be taking on in the near future:
+And here's an overview of what we're looking at next:
 
-- **Private Networking on Azure**: Following on [AWS PrivateLink support](/docs/guides/neon-private-networking), Azure Private Link is next.
-- **More Auth provider support for Neon Auth**: This feature lets you sync user profiles from your auth provider to your database automatically. See [Neon Auth](/docs/guides/neon-identity) for details.
+### Backups & restore
+
+- Externally exported backups
+- Integration with external backup systems
+- Cross-region branch snapshots and exported backups
+- Cross-cloud branch snapshots and exported backups
+
+### Security
+
+- Custom key support for encryption at rest
+- Customer-managed key (CMK) support for application-level encryption
+- Kerberos and LDAP authentication support
+- Mutual TLS connections
+
+### Clouds & regions
+
+- AWS and Azure region expansion — let us know where you want to see Neon next: [Request a region](https://neon.tech/docs/introduction/regions)
+- Private Networking on Azure
+- Google Cloud Platform (GCP) support (targeting late 2025)
+
+### Storage
+
+- Increased ingestion speeds
+- Storage limits up to 200 TB per project
+
+### Compute
+
+- Fixed compute sizes up to 128 CUs
+- Autoscaling up to 60 CUs
+
+### Account security
+
+- Role-based access control (RBAC) in the Neon Console
+- RBAC roles extended into the database
+- Audit logging of all database access
+
+### Compliance
+
+- PCI compliance
+
+### High availability
+
+- Cross-availability zone (AZ) highly available compute
+- Cross-AZ, cross-region, and cross-cloud disaster recovery
 
 ## What we've shipped recently 🚢
 
