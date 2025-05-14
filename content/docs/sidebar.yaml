@@ -74,6 +74,8 @@
               slug: guides/quarkus-reactive
             - title: React
               slug: guides/react
+            - title: RedwoodSDK
+              slug: guides/redwoodsdk
             - title: Reflex
               slug: guides/reflex
             - title: Remix
@@ -88,6 +90,8 @@
               slug: guides/sveltekit
             - title: Symfony
               slug: guides/symfony
+            - title: Vue
+              slug: guides/vue
         - section: File and media storage
           items:
             - title: File storage

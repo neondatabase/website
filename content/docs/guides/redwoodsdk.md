@@ -2,7 +2,7 @@
 title: Connect a RedwoodSDK application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Redwood application
 enableTableOfContents: true
-updatedOn: '2025-05-13T10:00:00.000Z'
+updatedOn: '2025-05-14T10:00:00.000Z'
 ---
 
 [RedwoodSDK](https://rwsdk.com/) is a framework for building full-stack applications on Cloudflare. This guide describes how to create a Neon project and access it from a RedwoodSDK application.
@@ -22,29 +22,31 @@ If you do not have one already, create a Neon project. Save your connection deta
 ## Create a RedwoodSDK project and add dependencies
 
 1.  Create a RedwoodSDK project if you do not have one. For instructions, see [RedwoodSDK Minimal Starter](https://github.com/redwoodjs/sdk/tree/main/starters/minimal). To create a new project, run the following command:
+
     ```bash
     npx degit redwoodjs/sdk/starters/minimal my-redwood-app
     ```
 
 2.  Navigate into your new project directory and install the RedwoodSDK dependencies:
+
     ```bash
     cd my-redwood-app
     npm install
     ```
 
-4. Add project dependencies using one of the following commands:
+3.  Add project dependencies using one of the following commands:
 
-   <CodeTabs reverse={true} labels={["postgres.js", "Neon serverless driver"]}>
+    <CodeTabs reverse={true} labels={["postgres.js", "Neon serverless driver"]}>
 
-   ```shell
-   npm install postgres
-   ```
+    ```shell
+    npm install postgres
+    ```
 
-   ```shell
-   npm install @neondatabase/serverless
-   ```
+    ```shell
+    npm install @neondatabase/serverless
+    ```
 
-   </CodeTabs>
+    </CodeTabs>
 
 ## Store your Neon credentials
 
@@ -98,10 +100,10 @@ export async function Home({ ctx }: RequestInfo) {
 
 </CodeTabs>
 
-
 ## Run your RedwoodSDK application
 
-Start the development server (RedwoodSDK docs use `pnpm`):
+Start the development server:
+
 ```bash
 npm dev
 ```
@@ -111,7 +113,8 @@ Navigate to your application's URL ([localhost:5173](http://localhost:5173)) in 
 ```text
 PostgreSQL 17.4 on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
 ```
-> The specific version may vary depending on the PostgreSQL version you are using.
+
+> The specific version may vary depending on the PostgreSQL version of your Neon project.
 
 </Steps>
 
