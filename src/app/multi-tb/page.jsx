@@ -1,5 +1,6 @@
 import Branching from 'components/pages/multi-tb/branching';
 import Hero from 'components/pages/multi-tb/hero';
+import HighAvailability from 'components/pages/multi-tb/high-availability';
 import PeakDemand from 'components/pages/multi-tb/peak-demand';
 import SubHero from 'components/pages/multi-tb/sub-hero';
 import TestReliably from 'components/pages/multi-tb/test-reliably';
@@ -18,8 +19,9 @@ const MultiTBPage = () => (
     <Branching />
     <PeakDemand />
     <TestReliably />
+    <HighAvailability />
     <CTA
-      className="pb-[298px] pt-[296px] xl:pb-[259px] xl:pt-[250px] lg:pb-[186px] lg:pt-[182px] md:pb-[171px] md:pt-[157px]"
+      className="pb-[298px] pt-[398px] xl:pb-[259px] xl:pt-[250px] lg:pb-[186px] lg:pt-[182px] md:pb-[171px] md:pt-[157px]"
       title="The Postgres of tomorrow, available today"
       titleClassName="max-w-[760px] leading-none xl:max-w-[640px] lg:max-w-[550px] md:max-w-[320px] xl:text-[56px] xl:leading-[90%] xl:tracking-[-0.03em] lg:text-[48px] lg:leading-[90%] md:text-balance md:text-[40px]"
       buttonText="Book a meeting with our team"

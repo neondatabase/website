@@ -22,6 +22,7 @@ const PeakDemand = () => (
             width={544}
             height={392}
             quality={100}
+            placeholder="blur"
             alt=""
           />
           <GradientBorder withBlend />

@@ -30,7 +30,7 @@ const TAGS = [
 ];
 
 const TestReliably = () => (
-  <section className="test-relaibly mt-[188px] lg:mt-24 md:mt-14">
+  <section className="test-reliably mt-[188px] lg:mt-24 md:mt-14">
     <Container className="lg:mx-8 md:mx-1 " size="960">
       <div className="flex items-start gap-16 lg:justify-start lg:gap-16 sm:flex-col sm:gap-8">
         <div className="flex-1 xl:mt-1.5 lg:mt-0 sm:w-full">
