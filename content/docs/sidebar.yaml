@@ -363,7 +363,7 @@
             - title: Branches
               slug: manage/branches
             - title: Computes
-              slug: manage/endpoints
+              slug: manage/computes
             - title: Roles
               slug: manage/roles
             - title: Databases
@@ -652,6 +652,8 @@
           slug: guides/reflex
         - title: Remix
           slug: guides/remix
+        - title: Micronaut Kotlin
+          slug: guides/micronaut-kotlin
         - title: SolidStart
           slug: guides/solid-start
         - title: Sveltekit
@@ -936,6 +938,10 @@
               slug: guides/neon-rls-custom-jwt
 - section: Workflows
   items:
+    - title: Data anonymization
+      slug: workflows/data-anonymization
+      icon: anonymize
+      tag: new
     - title: Neon Twin
       slug: guides/neon-twin-intro
       icon: neon-twin
@@ -988,6 +994,9 @@
           items:
             - title: Supported extensions
               slug: extensions/pg-extensions
+            - title: anon
+              slug: extensions/postgresql-anonymizer
+              tag: new
             - title: dblink
               slug: extensions/dblink
             - title: citext
@@ -1043,6 +1052,9 @@
               tag: new
             - title: wal2json
               slug: extensions/wal2json
+            - title: pg_cron
+              slug: extensions/pg_cron
+              tag: new
         - title: Functions
           slug: functions/introduction
           items:

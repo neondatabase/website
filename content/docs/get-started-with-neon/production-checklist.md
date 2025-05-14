@@ -3,7 +3,7 @@ title: Getting ready for production
 subtitle: A checklist of recommended settings to optimize performance, security, and
   reliability
 enableTableOfContents: true
-updatedOn: '2025-04-22T15:37:58.330Z'
+updatedOn: '2025-05-11T11:23:50.618Z'
 ---
 
 <CheckList title="Production checklist">
@@ -44,14 +44,14 @@ updatedOn: '2025-04-22T15:37:58.330Z'
 
 ## Set minimum compute to at least 1 CU
 
-Before your application goes to prodution, make sure your database has enough vCPU and memory to handle expected production load. See [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+Before your application goes to prodution, make sure your database has enough vCPU and memory to handle expected production load. See [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 
 **Recommendation**
 
 We recommend that you **fit your data in memory** and use Neon **autoscaling**:
 
 - Start with a compute size that can hold all your data in memory. Or try to fit at least your most frequently accessed data (your [working set](/docs/reference/glossary#working-set)).
-- Once you determine the [right size](/docs/manage/endpoints#how-to-size-your-compute) for your compute, use that as the **minimum compute size** for [Autoscaling](#set-maximum-compute-to-highest-cu)).
+- Once you determine the [right size](/docs/manage/computes#how-to-size-your-compute) for your compute, use that as the **minimum compute size** for [Autoscaling](#set-maximum-compute-to-highest-cu)).
 
 **About compute size**
 
@@ -71,7 +71,7 @@ Use Neon's [autoscaling](/docs/guides/autoscaling-algorithm) feature to dynamica
 To get started with Autoscaling, read:
 
 - [Enable Autoscaling in Neon](/docs/guides/autoscaling-guide)
-- [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute), including the [Autoscaling considerations](/docs/manage/endpoints#autoscaling-considerations) section.
+- [How to size your compute](/docs/manage/computes#how-to-size-your-compute), including the [Autoscaling considerations](/docs/manage/computes#autoscaling-considerations) section.
 
 ## Disable scale to zero
 

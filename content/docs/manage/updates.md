@@ -3,7 +3,7 @@ title: Updates
 enableTableOfContents: true
 isDraft: false
 tag: new
-updatedOn: '2025-03-05T21:09:38.756Z'
+updatedOn: '2025-05-11T11:23:50.627Z'
 ---
 
 To keep your Neon [computes](/docs/reference/glossary#compute) and Postgres instances up to date with the latest patches and features, Neon applies updates to your project's computes. We notify you of updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can select an update window — a specific day and hour for updates.
@@ -144,7 +144,7 @@ Computes receive available updates immediately upon restart. For example, if Neo
 
 If a compute regularly scales to zero, it will receive updates when it starts up again. In such cases, you may not need to pay much attention to update notifications, as updates will be applied naturally through your compute's stop/start cycles.
 
-For compute restart instructions, see [Restart a compute](/docs/manage/endpoints#restart-a-compute).
+For compute restart instructions, see [Restart a compute](/docs/manage/computes#restart-a-compute).
 
 ## Updating large computes
 
@@ -152,7 +152,7 @@ Computes larger than 8 CU or set to scale beyond 8 CU are not updated automatica
 
 Neon typically releases compute updates weekly, so we recommend scheduling weekly compute restarts.
 
-For restart instructions, see [Restart a compute](/docs/manage/endpoints#restart-a-compute).
+For restart instructions, see [Restart a compute](/docs/manage/computes#restart-a-compute).
 
 ## Handling connection disruptions during compute updates
 

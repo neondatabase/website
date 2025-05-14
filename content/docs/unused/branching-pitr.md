@@ -6,7 +6,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/tutorial/data-recovery
   - /docs/guides/branching-data-recovery
-updatedOn: '2025-02-20T17:29:13.760Z'
+updatedOn: '2025-05-11T11:23:50.631Z'
 ---
 
 <Admonition type="comingSoon" title="New feature: Branch restore">
@@ -109,11 +109,11 @@ To avoid changing connection details in your application, you can reassign the c
 
 1. **Remove the compute from the new branch**
 
-   For instructions, see [Delete a compute](/docs/manage/endpoints#delete-a-compute).
+   For instructions, see [Delete a compute](/docs/manage/computes#delete-a-compute).
 
 2. **Move the compute from the old default branch to the new branch**
 
-   This action is currently only supported in the Neon API. See [Update a compute with the CLI](/docs/manage/endpoints#update-a-compute-with-the-api) for instructions.
+   This action is currently only supported in the Neon API. See [Update a compute with the CLI](/docs/manage/computes#update-a-compute-with-the-api) for instructions.
 
 ## Examples
 

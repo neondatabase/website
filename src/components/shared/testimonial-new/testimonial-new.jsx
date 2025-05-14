@@ -77,7 +77,7 @@ const TestimonialNew = ({
                   priority={isPriority}
                 />
               )}
-              <span className="text-lg font-light leading-tight tracking-extra-tight text-gray-new-70 lg:text-base md:mx-auto md:mt-2 md:max-w-[70%] md:text-center md:text-sm">
+              <span className="text-lg font-light leading-tight tracking-extra-tight text-gray-new-70 lg:text-base md:mx-auto md:mt-2 md:text-center md:text-sm">
                 {author.name}
                 <cite className="ml-1.5 not-italic text-gray-new-50 before:mr-1.5 before:inline-flex before:h-px before:w-4 before:bg-gray-new-50 before:align-middle">
                   {author.position}

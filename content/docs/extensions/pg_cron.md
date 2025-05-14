@@ -2,7 +2,7 @@
 title: The pg_cron extension
 subtitle: Schedule and manage cron jobs directly within your Neon Postgres database
 enableTableOfContents: true
-updatedOn: '2025-04-18T10:39:37.514Z'
+updatedOn: '2025-05-11T11:23:50.614Z'
 ---
 
 The `pg_cron` extension provides a simple, cron-based job scheduler for Postgres. It operates directly within your database, allowing you to schedule standard SQL commands or calls to stored procedures using familiar cron syntax. This eliminates the need for external cron utilities for many database maintenance and automation tasks.
@@ -52,7 +52,7 @@ curl --request POST \
 ```
 
 <Admonition type="note">
-The [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API only works on an active compute. If your compute is idle, you can start it by running a query to wake it up or running the [Start compute endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API. For more information and other compute restart options, see [Restart a compute](/docs/manage/endpoints#restart-a-compute).
+The [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API only works on an active compute. If your compute is idle, you can start it by running a query to wake it up or running the [Start compute endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API. For more information and other compute restart options, see [Restart a compute](/docs/manage/computes#restart-a-compute).
 </Admonition>
 
 You can then install the `pg_cron` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
@@ -261,7 +261,7 @@ Here are a few key `pg_cron` settings and their descriptions:
 | `cron.use_background_workers` | `off`     | When enabled (`on`), `pg_cron` uses background workers instead of direct client connections to execute jobs. This may require adjustments to the `max_worker_processes` PostgreSQL setting.                                                      |
 
 <Admonition type="note" title="Important: Setting Modifications in Neon">
-It's important to note that because `pg_cron` is managed by Neon, modifying these settings requires superuser privileges. Therefore, you cannot directly alter these `pg_cron` configuration parameters yourself. If you have a specific need to adjust any of these settings, please [open a support ticket](https://console.neon.tech/app/projects?modal=support). **After Neon support implements the requested configuration change, you will need to [restart your Neon compute](/docs/manage/endpoints#restart-a-compute) for the new settings to take effect.**
+It's important to note that because `pg_cron` is managed by Neon, modifying these settings requires superuser privileges. Therefore, you cannot directly alter these `pg_cron` configuration parameters yourself. If you have a specific need to adjust any of these settings, please [open a support ticket](https://console.neon.tech/app/projects?modal=support). **After Neon support implements the requested configuration change, you will need to [restart your Neon compute](/docs/manage/computes#restart-a-compute) for the new settings to take effect.**
 
 </Admonition>
 

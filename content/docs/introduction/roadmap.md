@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2025-04-25T17:13:29.712Z'
+updatedOn: '2025-05-09T22:43:28.155Z'
 ---
 
 Our development teams are focused on helping you ship faster with Postgres. This roadmap describes committed features we're working on right now, what we delivered recently, and a peek at what's on the horizon.
@@ -15,12 +15,13 @@ Our development teams are focused on helping you ship faster with Postgres. This
 
 Here's a snapshot of what we're working on now:
 
-- **Data anonymization**: We're simplifying PII data anonymization to make Neon an ideal staging environment for your team's app development.
-- **Improved migration assistance**: The [Import Data Assistant](/docs/import/import-data-assistant) was introduced in Q4 2024. More improvements are coming in 2025 to make data import easier and faster.
+- **Postgres for AI agents**: [Replit partnered with Neon to back Replit Agents](https://neon.tech/blog/looking-at-how-replit-agent-handles-databases), creating thousands of Postgres databases. If you're building AI agents and would like to integrate agent-ready Postgres, [connect with us](https://neon.tech/agent-design-partner). See [Postgres for AI Agents](https://neon.tech/use-cases/ai-agents) for more.
 - **Backup & restore**: We'll start with scheduled snapshots with instant point-in-time recovery, eventually expanding this feature with more traditional automated backup capabilities.
-- **Branch protection enhancements**: We're enhancing safeguards for [protected branches](/docs/guides/protected-branches) to strengthen their security and prevent accidental actions.
-- **Neon on Azure GA**: We're working toward a GA release with deeper Azure integration.
-- **Inbound logical replication GA**: Neon supports Postgres logical replication for inbound and outbound data. Outbound replication (replicating data from Neon) is GA. In 2025, inbound replication (replicating data to Neon) will also reach GA.
+- **Data API**: We're working on a Data API feature, powered by PostgREST.
+- **Monitoring platform support**: After adding [Datadog integration](/docs/guides/datadog#steps-to-integrate-datadog-with-neon) in 2024, we're planning support for additional monitoring platforms.
+- **Larger computes GA**: Autoscaling up to 16 vCPUs and fixed compute sizes up to 56 vCPUs are currently in Beta; GA support is planned for 2025.
+- **Console navigation improvements**: Enhancing navigation for multi-project organizations, branch clarity, and better SQL Editor and Tables page interactions.
+- **Claimable Databases**: A new way for SaaS vendors to partner with Neon to offer instant Postgres databases. Let your users create Postgres databases — no registration required.
 
 Other features you would like to see? [Let us know](#share-your-thoughts).
 
@@ -28,17 +29,17 @@ Other features you would like to see? [Let us know](#share-your-thoughts).
 
 And here's a quick list of what we'll be taking on in the near future:
 
-- **Postgres for AI agents**: [Replit partnered with Neon to back Replit Agents](https://neon.tech/blog/looking-at-how-replit-agent-handles-databases), creating thousands of Postgres databases. If you're building AI agents and would like to integrate agent-ready Postgres, [connect with us](https://neon.tech/agent-design-partner). See [Postgres for AI Agents](https://neon.tech/use-cases/ai-agents) for more.
-- **Monitoring platform support**: After adding [Datadog integration](/docs/guides/datadog#steps-to-integrate-datadog-with-neon) in 2024, we're planning support for additional monitoring platforms.
-- **Larger computes GA**: Autoscaling up to 16 vCPUs and fixed compute sizes up to 56 vCPUs are currently in Beta; GA support is planned for 2025.
 - **Private Networking on Azure**: Following on [AWS PrivateLink support](/docs/guides/neon-private-networking), Azure Private Link is next.
-- **Console navigation improvements**: Enhancing navigation for multi-project organizations, branch clarity, and better SQL Editor and Tables page interactions.
 - **More Auth provider support for Neon Auth**: This feature lets you sync user profiles from your auth provider to your database automatically. See [Neon Auth](/docs/guides/neon-identity) for details.
 
 ## What we've shipped recently 🚢
 
+- **Neon on Azure GA**: We've announced our general availability release on Azure with deeper Azure integration. [Read the announcement](https://neon.tech/blog/azure-native-integration-ga).
+- **Improved migration assistance**: The [Import Data Assistant](/docs/import/import-data-assistant) makes data import easier and faster.
+- **Data anonymization**: We've added support for the PostgreSQL Anonymizer extension (`anon`). [Learn more](/docs/guides/neon-auth).
 - **Neon serverless driver GA**: Our JavaScript/TypeScript serverless driver has reached version 1.0.0, bringing stronger SQL injection safeguards and better performance for serverless environments.
 - **Neon Snapshots (Early Access)**: Create and manage point-in-time copies of your database with our new unified Backup & Restore experience.
+- **Inbound logical replication GA**: Neon now fully supports Postgres logical replication for inbound data (replicating data to Neon).
 - **Postgres logs in Datadog (Beta)**: Stream and analyze your Postgres logs directly in your Datadog dashboard for better observability. Available on Scale and Business plans.
 - **Support for [pg_search](https://neon.tech/docs/extensions/pg_search)**: We partnered with [ParadeDB](https://www.paradedb.com/) to bring `pg_search` to Neon, delivering up to 1,000x faster full-text search inside Postgres on versions 14, 15, and 16. [Read the announcement](https://neon.tech/blog/pgsearch-on-neon).
 - **MACC-eligibility on Azure**: Neon Postgres purchases made through the Azure Marketplace are now counted toward your Microsoft Azure Consumption Commitment (MACC). [Learn more](https://neon.tech/docs/introduction/billing-azure-marketplace#microsoft-azure-consumption-commitment-macc).

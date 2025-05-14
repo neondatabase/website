@@ -104,6 +104,12 @@ export default {
     pathname: LINKS.enterprise,
     imagePath: '/images/social-previews/enterprise.jpg',
   },
+  migration: {
+    title: 'Postgres Migration — Neon',
+    description: 'Learn how to migrate your Postgres database to Neon.',
+    pathname: LINKS.migration,
+    imagePath: '/images/social-previews/migration.jpg',
+  },
   multiTB: {
     title: 'Neon for Multi-TB Migrations - Neon',
     description: 'Migrating a multi-TB workload? We can help.',

@@ -3,7 +3,7 @@ title: Compute lifecycle
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compute-lifecycle
-updatedOn: '2024-12-13T20:52:57.586Z'
+updatedOn: '2025-05-11T11:23:50.622Z'
 ---
 
 A compute in Neon is a stateless Postgres process due to the separation of storage and compute. It has two main states: `Idle` and `Active`.
@@ -16,7 +16,7 @@ If there are no active queries for 5 minutes, which is the scale to zero setting
 
 ![Scale to zero configuration dialog](/docs/introduction/autosuspend_config.png)
 
-For information about configuring this setting, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
+For information about configuring this setting, see [Edit a compute](/docs/manage/computes#edit-a-compute).
 
 <Admonition type="note">
 Neon's _Scale to Zero_ feature is conservative. It treats an "idle-in-transaction" connection as active to avoid breaking application logic that involves long-running transactions. Only the truly inactive connections are closed after the defined period of inactivity.

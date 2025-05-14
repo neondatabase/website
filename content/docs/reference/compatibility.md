@@ -4,7 +4,7 @@ subtitle: Learn about Neon as a managed Postgres service
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2025-04-24T15:21:53.177Z'
+updatedOn: '2025-05-11T11:23:50.629Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
@@ -162,7 +162,7 @@ Of the parameter settings listed above, the `max_connections`, `maintenance_work
   shared_buffers_mb = max(128, (1023 + backends * 256) / 1024)
   ```
 
-- The `effective_cache_size` parameter is set based on the [Local File Cache (LFC)](/docs/reference/glossary#local-file-cache) size of your maximum Neon compute size. This helps the Postgres query planner make smarter decisions, which can improve query performance. For details on LFC size by compute size, see the table in [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+- The `effective_cache_size` parameter is set based on the [Local File Cache (LFC)](/docs/reference/glossary#local-file-cache) size of your maximum Neon compute size. This helps the Postgres query planner make smarter decisions, which can improve query performance. For details on LFC size by compute size, see the table in [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 
 ### Configuring Postgres parameters for a session, database, or role
 
