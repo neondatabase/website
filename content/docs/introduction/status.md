@@ -42,6 +42,7 @@ To retrieve a summary of all regions and their current status:
 - **Endpoint**: https://neonstatus.com/api/v1/summary
 
 The response includes a list of regions, each with:
+
 - `page_title`
 - `page_url`
 - `ongoing_incidents`
@@ -52,20 +53,20 @@ The response includes a list of regions, each with:
 
 You can also retrieve status details for a specific region. Each region has its own summary endpoint.
 
-| Region                          | Endpoint |
-|---------------------------------|----------|
-| Console                         | https://neonstatus.com/console/api/v1/summary |
-| AWS - Asia Pacific (Singapore) | https://neonstatus.com/aws-asia-pacific-singapore/api/v1/summary |
-| AWS - Asia Pacific (Sydney)    | https://neonstatus.com/aws-asia-pacific-sydney/api/v1/summary |
-| AWS - Europe (Frankfurt)       | https://neonstatus.com/aws-europe-frankfurt/api/v1/summary |
-| AWS - Europe (London)          | https://neonstatus.com/aws-europe-london/api/v1/summary |
-| AWS - South America (São Paulo) | https://neonstatus.com/aws-south-america-sao-paulo/api/v1/summary |
-| AWS - US East (N. Virginia)    | https://neonstatus.com/aws-us-east-n-virginia/api/v1/summary |
-| AWS - US East (Ohio)           | https://neonstatus.com/aws-us-east-ohio/api/v1/summary |
-| AWS - US West (Oregon)         | https://neonstatus.com/aws-us-west-oregon/api/v1/summary |
+| Region                                   | Endpoint                                                                 |
+| ---------------------------------------- | ------------------------------------------------------------------------ |
+| Console                                  | https://neonstatus.com/console/api/v1/summary                            |
+| AWS - Asia Pacific (Singapore)           | https://neonstatus.com/aws-asia-pacific-singapore/api/v1/summary         |
+| AWS - Asia Pacific (Sydney)              | https://neonstatus.com/aws-asia-pacific-sydney/api/v1/summary            |
+| AWS - Europe (Frankfurt)                 | https://neonstatus.com/aws-europe-frankfurt/api/v1/summary               |
+| AWS - Europe (London)                    | https://neonstatus.com/aws-europe-london/api/v1/summary                  |
+| AWS - South America (São Paulo)          | https://neonstatus.com/aws-south-america-sao-paulo/api/v1/summary        |
+| AWS - US East (N. Virginia)              | https://neonstatus.com/aws-us-east-n-virginia/api/v1/summary             |
+| AWS - US East (Ohio)                     | https://neonstatus.com/aws-us-east-ohio/api/v1/summary                   |
+| AWS - US West (Oregon)                   | https://neonstatus.com/aws-us-west-oregon/api/v1/summary                 |
 | Azure - Germany West Central (Frankfurt) | https://neonstatus.com/azure-germanywestcentral-frankfurt/api/v1/summary |
-| Azure East US 2 (Virginia)     | https://neonstatus.com/azure-eastus-2/api/v1/summary |
-| Azure West US 3 (Arizona)      | https://neonstatus.com/azure-westus3-arizona/api/v1/summary |
+| Azure East US 2 (Virginia)               | https://neonstatus.com/azure-eastus-2/api/v1/summary                     |
+| Azure West US 3 (Arizona)                | https://neonstatus.com/azure-westus3-arizona/api/v1/summary              |
 
 These endpoints return real-time structured JSON with zero or more incidents or maintenance events.
 
