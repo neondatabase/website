@@ -33,7 +33,7 @@ Follow the instructions from the **Subscribe to updates** link on a regional sta
 
 ## Access Neon status via API
 
-The [Neon status page](https://neonstatus.com) is also accessible via API. You can use these endpoints to check Neon status for all regions or the region specific to your Neon project.
+The [Neon status page](https://neonstatus.com) is also accessible via API. You can use these endpoints to check Neon status of the Neon Console and all Neon-supported regions.
 
 Endpoint responses include the following attributes:
 
@@ -51,7 +51,8 @@ Endpoint responses include the following attributes:
 
 | Region                                   | Endpoint                                                                 |
 | ---------------------------------------- | ------------------------------------------------------------------------ |
-| All regions                              | https://neonstatus.com/console/api/v1/summary                            |
+| Neon Console                             | https://neonstatus.com/console/api/v1/summary                            |
+| Neon Console and all regions             | https://neonstatus.com/api/v1/summary                                    |
 | AWS - Asia Pacific (Singapore)           | https://neonstatus.com/aws-asia-pacific-singapore/api/v1/summary         |
 | AWS - Asia Pacific (Sydney)              | https://neonstatus.com/aws-asia-pacific-sydney/api/v1/summary            |
 | AWS - Europe (Frankfurt)                 | https://neonstatus.com/aws-europe-frankfurt/api/v1/summary               |
