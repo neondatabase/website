@@ -48,7 +48,7 @@ const Hero = () => (
         Every minute waiting for that AWS RDS instance to restore is costing your company anywhere
         {` `}
         <Link
-          className="text-green-45 underline decoration-primary-1 decoration-1 underline-offset-[8px]"
+          className="text-green-45 underline decoration-primary-1 decoration-1 underline-offset-[8px] transition-colors duration-200 hover:text-white hover:decoration-gray-new-60"
           to="/"
         >
           from $427 to $9,000
