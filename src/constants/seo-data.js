@@ -108,7 +108,6 @@ export default {
     title: 'Neon for Multi-TB Migrations - Neon',
     description: 'Migrating a multi-TB workload? We can help.',
     pathname: LINKS.multiTB,
-    imagePath: '/images/social-previews/multi-tb.jpg',
   },
   serverlessApps: {
     title: 'Postgres for serverless apps — Neon',
