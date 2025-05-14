@@ -33,7 +33,7 @@ Follow the instructions from the **Subscribe to updates** link on a regional sta
 
 ## Access Neon status via API
 
-The [Neon status page](https://neonstatus.com) is also accessible via API. You can use these endpoints to check Neon status of the Neon Console and all Neon-supported regions.
+The [Neon status page](https://neonstatus.com) is also accessible via API. You can use these endpoints to check the status of the Neon Console (hosted in AWS - US East (Ohio)) and Neon-supported regions.
 
 Endpoint responses include the following attributes:
 
