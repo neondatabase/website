@@ -3,7 +3,7 @@ title: Neon MCP Server
 subtitle: Manage your Neon Postgres databases using natural language commands with the
   Neon MCP Server.
 enableTableOfContents: true
-updatedOn: '2025-04-23T18:54:35.409Z'
+updatedOn: '2025-05-12T21:34:29.456Z'
 ---
 
 The **Neon MCP Server** is an open-source tool that lets you interact with your Neon Postgres databases in **natural language**.
@@ -190,35 +190,7 @@ If your client does not use `JSON` for configuration of MCP servers (such as old
 npx -y @neondatabase/mcp-server-neon start <YOUR_NEON_API_KEY>
 ```
 
-## Supported actions (tools)
-
-The Neon MCP Server provides the following actions, which are exposed as "tools" to MCP Clients. You can use these tools to interact with your Neon projects and databases using natural language commands.
-
-**Project management:**
-
-- **`list_projects`**: Retrieves a list of your Neon projects, providing a summary of each project associated with your Neon account.
-- **`describe_project`**: Fetches detailed information about a specific Neon project, including its ID, name, and associated branches and databases.
-- **`create_project`**: Creates a new Neon project in your Neon account. A project acts as a container for branches, databases, roles, and computes.
-- **`delete_project`**: Deletes an existing Neon project and all its associated resources.
-
-**Branch management:**
-
-- **`create_branch`**: Creates a new branch within a specified Neon project. Leverages [Neon's branching](/docs/introduction/branching) feature for development, testing, or migrations.
-- **`delete_branch`**: Deletes an existing branch from a Neon project.
-- **`describe_branch`**: Retrieves details about a specific branch, such as its name, ID, and parent branch.
-
-**SQL query execution:**
-
-- **`get_connection_string`**: Returns your database connection string.
-- **`run_sql`**: Executes a single SQL query against a specified Neon database. Supports both read and write operations.
-- **`run_sql_transaction`**: Executes a series of SQL queries within a single transaction against a Neon database.
-- **`get_database_tables`**: Lists all tables within a specified Neon database.
-- **`describe_table_schema`**: Retrieves the schema definition of a specific table, detailing columns, data types, and constraints.
-
-**Database migrations (schema changes):**
-
-- **`prepare_database_migration`**: Initiates a database migration process. Critically, it creates a temporary branch to apply and test the migration safely before affecting the production branch.
-- **`complete_database_migration`**: Finalizes and applies a prepared database migration to the production branch. This action merges changes from the temporary migration branch and cleans up temporary resources.
+<MCPTools />
 
 ## Usage examples
 

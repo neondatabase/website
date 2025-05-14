@@ -1,6 +1,10 @@
 # Use Exograph with Neon
 
-Build GraphQL backends in minutes with Exograph and Neon
+> This guide demonstrates how to build GraphQL backends with Exograph and Neon Postgres, covering project setup, schema creation, and backend deployment for a simple todo application.
+
+## Source
+
+- [Use Exograph with Neon HTML](https://neon.tech/docs/guides/exograph): The original HTML version of this documentation
 
 _This guide was contributed by the Exograph team_
 
@@ -11,7 +15,7 @@ Exograph supports Postgres for data persistence, which makes it a great fit to u
 ## Prerequisites
 
 - Exograph CLI. See [Install Exograph](https://exograph.dev/docs/getting-started).
-- A Neon project. See [Create a Neon project](/docs/manage/projects#create-a-project).
+- A Neon project. See [Create a Neon project](https://neon.tech/docs/manage/projects#create-a-project).
 
 ## Create a backend with Exograph
 
@@ -32,13 +36,13 @@ Next, let's set up the Neon database.
 2. Create schema in Neon using Exograph CLI:
 
 ```bash
-exo schema create | psql 
+exo schema create | psql <the connection string>
 ```
 
 ## Launch the backend
 
 ```bash
-EXO_POSTGRES_URL= exo dev
+EXO_POSTGRES_URL=<the connection string> exo dev
 ```
 
 It will print the necessary information for connecting to the backend.

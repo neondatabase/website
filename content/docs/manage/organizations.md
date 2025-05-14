@@ -2,7 +2,7 @@
 title: Organizations
 subtitle: Invite Members to your Organization and collaborate on projects
 enableTableOfContents: true
-updatedOn: '2025-04-25T20:26:32.193Z'
+updatedOn: '2025-05-11T11:23:50.624Z'
 ---
 
 Build your team in Neon with Organizations. Manage all of your team's projects under a single account — with billing, role management, and project collaboration capabilities in one accessible location.
@@ -42,7 +42,7 @@ The following table shows what actions each role can perform in the organization
 | [Delete projects](/docs/manage/orgs-manage#create-and-delete-projects)                                                       |  ✅   |   ❌   |      ❌      |
 | _Project configuration_                                                                                                      |       |        |              |
 | [Manage project databases](/docs/manage/databases)                                                                           |  ✅   |   ✅   |      ✅      |
-| [Configure project computes](/docs/manage/endpoints)                                                                         |  ✅   |   ✅   |      ✅      |
+| [Configure project computes](/docs/manage/computes)                                                                          |  ✅   |   ✅   |      ✅      |
 | [Manage project roles](/docs/manage/users)                                                                                   |  ✅   |   ✅   |      ✅      |
 | [Invite/remove project collaborators](/docs/guides/project-collaboration-guide#invite-collaborators)                         |  ✅   |   ✅   |      ✅      |
 | **Integration management**                                                                                                   |       |        |              |

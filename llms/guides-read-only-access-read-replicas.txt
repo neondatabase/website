@@ -1,12 +1,18 @@
 # Provide read-only access with Read Replicas
 
-Leverage read replicas to provide read-only access to your data
+> This guide explains how to leverage Neon's read replicas to provide read-only access to your data for users, partners, or third-party applications that need to run queries for analysis, reporting, or auditing purposes.
+
+## Source
+
+- [Provide read-only access with Read Replicas HTML](https://neon.tech/docs/guides/read-only-access-read-replicas): The original HTML version of this documentation
 
 When you create a read replica in Neon, you gain the ability to provide read-only access to your data. This is particularly useful when you want to grant access to users, partners, or third-party applications that only need to run queries to analyze data, generate reports, or audit your database. Since no write operations are permitted on read replicas, it ensures the integrity of your data while allowing others to work with up-to-date information.
 
-Suppose you need to give a partner read-only access to your sales data so they can generate custom reports for your business. Here’s how you would go about doing that:
+Suppose you need to give a partner read-only access to your sales data so they can generate custom reports for your business. Here's how you would go about doing that:
 
 1. **Create a read replica**
+
+   > Note: The Free Plan is limited to a maximum of 3 read replica computes per project.
 
    Follow these steps to create a read replica for your database branch:
 

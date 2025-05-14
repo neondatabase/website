@@ -268,6 +268,11 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/docs/manage/endpoints',
+        destination: '/docs/manage/computes',
+        permanent: true,
+      },
+      {
         source: '/sign_in',
         destination: 'https://console.neon.tech/signup',
         permanent: true,

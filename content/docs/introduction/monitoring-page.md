@@ -1,7 +1,7 @@
 ---
 title: Monitoring dashboard
 enableTableOfContents: true
-updatedOn: '2025-02-22T21:54:33.849Z'
+updatedOn: '2025-05-11T11:23:50.622Z'
 ---
 
 The **Monitoring** dashboard in the Neon console provides several graphs for monitoring system and database metrics. You can access the **Monitoring** dashboard from the sidebar in the Neon Console. Observable metrics include:
@@ -50,7 +50,7 @@ RAM is allocated according to the size of your compute or your [autoscaling](/do
 
 **Used**: The amount of RAM used.
 
-The graph plots a line showing the amount of RAM used. If the line regularly reaches the maximum amount of allocated RAM, consider increasing your compute size to increase the amount of allocated RAM. To see the amount of RAM allocated for each Neon compute size, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
+The graph plots a line showing the amount of RAM used. If the line regularly reaches the maximum amount of allocated RAM, consider increasing your compute size to increase the amount of allocated RAM. To see the amount of RAM allocated for each Neon compute size, see [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration).
 
 **Cached**: The amount of data cached in memory.
 
@@ -66,7 +66,7 @@ CPU is allocated according to the size of your compute or your [autoscaling](/do
 
 **Used**: The amount of CPU used, in [Compute Units (CU)](/docs/reference/glossary#compute-unit-cu).
 
-If the plotted line regularly reaches the maximum amount of allocated CPU, consider increasing your compute size. To see the compute sizes available with Neon, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
+If the plotted line regularly reaches the maximum amount of allocated CPU, consider increasing your compute size. To see the compute sizes available with Neon, see [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration).
 
 ### Connections count
 
@@ -92,7 +92,7 @@ The MAX line helps you visualize how close you are to reaching your connection l
 - Implementing [connection pooling](/docs/connect/connection-pooling), which supports up to 10,000 simultaneous connections
 - Optimizing your application's connection management
 
-The connection limit (defined by the Postgres `max_connections` setting) is set according to your Neon compute size configuration. For the connection limit for each Neon compute size, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+The connection limit (defined by the Postgres `max_connections` setting) is set according to your Neon compute size configuration. For the connection limit for each Neon compute size, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 
 ### Database size
 
@@ -154,7 +154,7 @@ The **Working set size** graph provides a visual representation of how much data
 - **5m** (5 minutes): This line shows how much data has been accessed in the last 5 minutes.
 - **15m** (15 minutes): Similar to the 5-minute window, this metric tracks data accessed over the last 15 minutes.
 - **1h** (1 hour): This line represents the amount of data accessed in the last hour.
-- **Local file cache size**: This is the size of the LFC, which is determined by the size of your compute. Larger computes have larger caches. For cache sizes, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+- **Local file cache size**: This is the size of the LFC, which is determined by the size of your compute. Larger computes have larger caches. For cache sizes, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 For optimal performance the local file cache should be larger than your working set size for a given time interval.
 If your working set size is larger than the LFC size it is recommended to increase the maximum size of the compute to improve the LFC hit rate and achieve good performance.
 

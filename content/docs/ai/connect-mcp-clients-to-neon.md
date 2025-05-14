@@ -3,7 +3,7 @@ title: Connect MCP Clients to Neon
 subtitle: Learn how to connect MCP clients such as Cursor, Claude Desktop, Cline,
   Windsurf and Zed to your Neon Postgres database.
 enableTableOfContents: true
-updatedOn: '2025-04-13T12:26:57.407Z'
+updatedOn: '2025-05-13T08:19:38.922Z'
 ---
 
 The **Neon MCP Server** allows you to connect various [**Model Context Protocol (MCP)**](https://modelcontextprotocol.org) compatible AI tools to your Neon Postgres databases. This guide provides instructions for connecting popular MCP clients to the Neon MCP Server, enabling natural language interaction with your Neon projects.
@@ -331,6 +331,8 @@ After successful configuration, you should see the Neon MCP Server listed as act
 
 ## Troubleshooting
 
+### Configuration Issues
+
 If your client does not use `JSON` for configuration of MCP servers (such as older versions of Cursor), you can use the following command when prompted:
 
 ```bash
@@ -340,6 +342,25 @@ npx -y mcp-remote https://mcp.neon.tech/sse
 # For Local MCP server
 npx -y @neondatabase/mcp-server-neon start <YOUR_NEON_API_KEY>
 ```
+
+### OAuth Authentication Errors
+
+When using the remote MCP server with OAuth authentication, you might encounter the following error:
+
+```
+{"code":"invalid_request","error":"invalid redirect uri"}
+```
+
+This typically occurs when there are issues with cached OAuth credentials. To resolve this:
+
+1. Remove the MCP authentication cache directory:
+   ```bash
+   rm -rf ~/.mcp-auth
+   ```
+2. Restart your MCP client application
+3. The OAuth flow will start fresh, allowing you to properly authenticate
+
+This error is most common when using the remote MCP server option and can occur after OAuth configuration changes or when cached credentials become invalid.
 
 ## Next steps
 

@@ -1,6 +1,10 @@
 # Connect a Node.js application to Neon
 
-Set up a Neon project in seconds and connect from a Node.js application
+> This guide explains how to create a Neon project and connect to it from a Node.js application, with examples for using node-postgres, Postgres.js, and the Neon serverless driver.
+
+## Source
+
+- [Connect a Node.js application to Neon HTML](https://neon.tech/docs/guides/node): The original HTML version of this documentation
 
 This guide describes how to create a Neon project and connect to it from a Node.js application. Examples are provided for using the [node-postgres](https://www.npmjs.com/package/pg) and [Postgres.js](https://www.npmjs.com/package/postgres) clients. Use the client you prefer.
 

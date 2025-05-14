@@ -1,6 +1,10 @@
 # Connection errors
 
-Learn how to resolve connection errors
+> This guide provides troubleshooting information for common Neon connection errors, including SNI-related issues, authentication problems, compute activation delays, connection limits, and DNS resolution problems, with detailed explanations and solutions for each error type.
+
+## Source
+
+- [Connection errors HTML](https://neon.tech/docs/connect/connection-errors): The original HTML version of this documentation
 
 This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered include:
 
@@ -208,7 +212,7 @@ This error occurs when the maximum number of simultaneous database connections, 
 To resolve this issue, you have several options:
 
 - Find and remove long-running or idle connections. See [Find long-running or idle connections](/docs/postgresql/query-reference#find-long-running-or-idle-connections).
-- Use a larger compute, with a higher `max_connections` configuration. See [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+- Use a larger compute, with a higher `max_connections` configuration. See [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 - Enable [connection pooling](/docs/connect/connection-pooling).
 
 If you are already using connection pooling, you may need to reach out to Neon Support to request a higher `default_pool_size` setting for PgBouncer. See [Neon PgBouncer configuration settings for more information](/docs/connect/connection-pooling#neon-pgbouncer-configuration-settings).
