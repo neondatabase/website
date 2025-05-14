@@ -126,6 +126,7 @@ module.exports = {
       },
       letterSpacing: {
         tighter: '-0.04em',
+        'semi-tighter': '-0.03em',
         'extra-tight': '-0.02em',
         snug: '-0.01em',
         wider: '0.04em',

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 const TagCloud = ({ items, className, titleClassName, iconClassName }) => (
-  <ul className={clsx('mt-6 flex flex-wrap gap-4 lg:mt-4 lg:gap-x-2', className)}>
+  <ul className={clsx('mt-6 flex flex-wrap lg:mt-4 lg:gap-x-2', className)}>
     {items.map(({ title, icon }) => (
       <li
         className="flex h-10 items-center gap-2.5 rounded-full border border-gray-new-15 px-[18px] lg:h-[34px] lg:px-3 md:h-[30px]"
@@ -18,7 +18,7 @@ const TagCloud = ({ items, className, titleClassName, iconClassName }) => (
         />
         <span
           className={clsx(
-            'text-[16px] font-normal leading-none tracking-extra-tight text-gray-new-90 lg:text-sm',
+            'font-normal leading-none tracking-extra-tight text-gray-new-90 lg:text-sm',
             titleClassName
           )}
         >

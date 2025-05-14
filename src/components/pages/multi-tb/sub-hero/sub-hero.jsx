@@ -70,7 +70,7 @@ const Hero = () => (
         </p>
       </div>
 
-      <TagCloud items={TAGS} />
+      <TagCloud items={TAGS} className="gap-4" titleClassName="text-[16px]" />
       <RelatedArticle
         title="The real impact of slow Postgres restores for businesses: lost revenue and customer trust."
         date={new Date('2025-03-27')}

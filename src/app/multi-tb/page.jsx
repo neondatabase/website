@@ -2,6 +2,7 @@ import Branching from 'components/pages/multi-tb/branching';
 import Hero from 'components/pages/multi-tb/hero';
 import PeakDemand from 'components/pages/multi-tb/peak-demand';
 import SubHero from 'components/pages/multi-tb/sub-hero';
+import TestReliably from 'components/pages/multi-tb/test-reliably';
 import CTA from 'components/shared/cta';
 import Layout from 'components/shared/layout';
 import LINKS from 'constants/links';
@@ -16,6 +17,7 @@ const MultiTBPage = () => (
     <SubHero />
     <Branching />
     <PeakDemand />
+    <TestReliably />
     <CTA
       className="pb-[298px] pt-[296px] xl:pb-[259px] xl:pt-[250px] lg:pb-[186px] lg:pt-[182px] md:pb-[171px] md:pt-[157px]"
       title="The Postgres of tomorrow, available today"
