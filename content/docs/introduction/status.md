@@ -31,4 +31,38 @@ Follow the instructions from the **Subscribe to updates** link on a regional sta
 
 ![Neon status page](/docs/introduction/neon_status_subscribe.png)
 
+## Access Neon status via API
+
+The [Neon status page](https://neonstatus.com) is also accessible via API. You can use these endpoints to check the status of the Neon Console and Neon-supported regions.
+
+Endpoint responses include the following attributes:
+
+```json
+{
+  "page_title": "AWS - Europe (Frankfurt) - eu-central-1",
+  "page_url": "https://neonstatus.com/aws-europe-frankfurt",
+  "ongoing_incidents": [],
+  "in_progress_maintenances": [],
+  "scheduled_maintenances": []
+}
+```
+
+### Neon status endpoints
+
+| Region                                   | Endpoint                                                                 |
+| ---------------------------------------- | ------------------------------------------------------------------------ |
+| Neon Console                             | https://neonstatus.com/console/api/v1/summary                            |
+| Neon Console and all regions             | https://neonstatus.com/api/v1/summary                                    |
+| AWS - Asia Pacific (Singapore)           | https://neonstatus.com/aws-asia-pacific-singapore/api/v1/summary         |
+| AWS - Asia Pacific (Sydney)              | https://neonstatus.com/aws-asia-pacific-sydney/api/v1/summary            |
+| AWS - Europe (Frankfurt)                 | https://neonstatus.com/aws-europe-frankfurt/api/v1/summary               |
+| AWS - Europe (London)                    | https://neonstatus.com/aws-europe-london/api/v1/summary                  |
+| AWS - South America (São Paulo)          | https://neonstatus.com/aws-south-america-sao-paulo/api/v1/summary        |
+| AWS - US East (N. Virginia)              | https://neonstatus.com/aws-us-east-n-virginia/api/v1/summary             |
+| AWS - US East (Ohio)                     | https://neonstatus.com/aws-us-east-ohio/api/v1/summary                   |
+| AWS - US West (Oregon)                   | https://neonstatus.com/aws-us-west-oregon/api/v1/summary                 |
+| Azure - Germany West Central (Frankfurt) | https://neonstatus.com/azure-germanywestcentral-frankfurt/api/v1/summary |
+| Azure East US 2 (Virginia)               | https://neonstatus.com/azure-eastus-2/api/v1/summary                     |
+| Azure West US 3 (Arizona)                | https://neonstatus.com/azure-westus3-arizona/api/v1/summary              |
+
 <NeedHelp/>
