@@ -33,7 +33,9 @@ Follow the instructions from the **Subscribe to updates** link on a regional sta
 
 ## Access Neon status via API
 
-The [Neon status page](https://neonstatus.com) is also accessible via API. You can use these endpoints to check the status of the Neon Console and Neon-supported regions.
+The [Neon status page](https://neonstatus.com), powered by [incident.io](https://incident.io/), is also accessible via API. You can use these endpoints to check the status of the Neon Console and Neon-supported regions.
+
+> For more about the incident.io API that supports the Neon status API, including incident.io API rate limits, refer to the [incident.io API docs](https://api-docs.incident.io/).
 
 Endpoint responses include the following attributes:
 
