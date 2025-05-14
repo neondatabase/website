@@ -98,7 +98,7 @@ const Aside = ({ className, title, slug, authors, posts }) => (
         ))}
       </ul>
       <SocialShare className="mt-16 lg:hidden" title={title} slug={slug} withTopBorder />
-      <ChangelogForm isSidebar />
+      <ChangelogForm className="mt-10" isSidebar />
     </div>
   </aside>
 );
