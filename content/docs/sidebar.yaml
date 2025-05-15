@@ -936,6 +936,11 @@
               slug: guides/neon-rls-workos
             - title: Custom JWT
               slug: guides/neon-rls-custom-jwt
+- section: Data API
+  items:
+    - title: Data API
+      slug: data-api/get-started
+      icon: api
 - section: Workflows
   items:
     - title: Data anonymization
