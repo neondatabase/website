@@ -160,7 +160,7 @@ Verify its content:
 DATABASE_URL="postgresql://neondb_owner:..."
 ```
 
-If you didn't use the CLI for setup, copy `.dev.vars.example` to `.dev.vars`. Then, manually add your Neon project's `DATABASE_URL` to the `.dev.vars` file. You can find your connection string in the Neon console. Learn more: [Connect from any application](https://www.google.com/search?q=/docs/connect/connect-from-any-app)
+If you didn't use the CLI for setup, copy `.dev.vars.example` to `.dev.vars`. Then, manually add your Neon project's `DATABASE_URL` to the `.dev.vars` file. You can find your connection string in the Neon console. Learn more: [Connect from any application](/docs/connect/connect-from-any-app)
 
 
 ## Define database schema with Drizzle
@@ -641,13 +641,13 @@ Run your HONC application locally using Wrangler:
     - **Update a task (replace `TASK_ID`):**
 
       ```bash
-      curl -X PUT -H "Content-Type: application/json" -d '{"title":"Learn HONC Stack", "completed":true}' http://localhost:8787/api/tasks/TASK_ID
+      curl -X PUT -H "Content-Type: application/json" -d '{"completed":true}' http://localhost:8787/api/tasks/TASK_ID
       ```
 
       For example, if the ID is `1`:
 
       ```bash
-      curl -X PUT -H "Content-Type: application/json" -d '{"title":"Learn HONC Stack", "completed":true}' http://localhost:8787/api/tasks/1
+      curl -X PUT -H "Content-Type: application/json" -d '{"completed":true}' http://localhost:8787/api/tasks/1
       ```
 
       A successful response should return the updated task.
