@@ -67,9 +67,9 @@ deno run -A neondb
 Integrate into Vite-based projects using the [@neondatabase/vite-plugin-postgres](https://www.npmjs.com/package/@neondatabase/vite-plugin-postgres) plugin:
 
 ```javascript
-import postgresPlugin from "@neondatabase/vite-plugin-postgres";
-import react from "@vitejs/plugin-react";
-import { defineConfig } from "vite";
+import postgresPlugin from '@neondatabase/vite-plugin-postgres';
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [postgresPlugin(), react()],
@@ -80,11 +80,11 @@ export default defineConfig({
 
 The service uses the following default settings:
 
-| Parameter | Value |
-|-----------|-------|
-| Provider | AWS |
-| Region | eu-central-1 |
-| Postgres version | 17 |
+| Parameter        | Value        |
+| ---------------- | ------------ |
+| Provider         | AWS          |
+| Region           | eu-central-1 |
+| Postgres version | 17           |
 
 Custom configurations are available through the CLI, for example:
 
@@ -112,5 +112,6 @@ To persist a database beyond the 72-hour expiration period:
 3. Follow the on-screen instructions to complete the claim process
 
 The claim URL is available:
+
 - On the Neon Launchpad interface where the connection string was displayed
 - As a comment in environment files (e.g., `.env`) when using the CLI
