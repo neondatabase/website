@@ -620,6 +620,9 @@
             - title: Node.js / Deno SDK
               slug: https://github.com/paambaati/neon-js-sdk
               tag: community
+    - title: Neon Launchpad
+      slug: reference/neon-launchpad
+      icon: integrations
     - title: Terraform
       slug: reference/terraform
       tag: community
