@@ -18,10 +18,7 @@ enableTableOfContents: true
 The Neon Data API is a ready-to-use REST API for your Neon database, powered by [PostgREST](https://docs.postgrest.org/en/v13/), a trusted project in the PostgreSQL community. It lets you work with every table, view, or function in a database's schema using standard HTTP verbs. More importantly, this means you can use a nice SDK like `Postgrest.js` to run queries from the client, like this:
 
 ```javascript
-const { data } = await client
-  .from('playing_with_neon')
-  .select('*')
-  .gte('value', 0.5);
+const { data } = await client.from('playing_with_neon').select('*').gte('value', 0.5);
 ```
 
 <Steps>
@@ -101,8 +98,8 @@ Example table from our SQL editor:
 
 ```sql
 CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
-INSERT INTO playing_with_neon(name, value) 
-  SELECT LEFT(md5(i::TEXT), 10), random() 
+INSERT INTO playing_with_neon(name, value)
+  SELECT LEFT(md5(i::TEXT), 10), random()
   FROM generate_series(1, 10) s(i);
 SELECT * FROM playing_with_neon;
 ```
@@ -143,15 +140,11 @@ As the Data API is built on **PostgREST**, it follows PostgREST query and data m
 import { PostgrestClient } from '@supabase/postgrest-js';
 
 // https://github.com/supabase/postgrest-js/blob/master/src/PostgrestClient.ts#L41
-const client = new PostgrestClient(
-  'https://app-restless-salad-23184734.dpl.myneon.app',
-  { "Authorization": "Bearer <jwt> "}
-);
+const client = new PostgrestClient('https://app-restless-salad-23184734.dpl.myneon.app', {
+  Authorization: 'Bearer <jwt> ',
+});
 
-const { data } = await client
-  .from('playing_with_neon')
-  .select('*')
-  .gte('value', 0.5);
+const { data } = await client.from('playing_with_neon').select('*').gte('value', 0.5);
 
 console.table(data);
 ```
