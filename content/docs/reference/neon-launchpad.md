@@ -103,8 +103,6 @@ The service uses the following default settings:
 | Region           | eu-central-1 |
 | Postgres version | 17           |
 
-```
-
 ## Use cases
 
 Neon Launchpad is designed for scenarios requiring rapid database provisioning:
@@ -128,4 +126,3 @@ The claim URL is available:
 
 - On the Neon Launchpad interface where the connection string was displayed
 - As a comment in environment files (e.g., `.env`) when using the CLI
-```
