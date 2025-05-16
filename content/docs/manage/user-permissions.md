@@ -53,7 +53,7 @@ The following table shows what each role can do regarding integrations:
 | ---------------------------------------------------------- | :---: | :----: | :----------: |
 | Install GitHub integration                                 |  ✅   |   ❌   |      ❌      |
 | Install Neon Auth                                          |  ✅   |   ❌   |      ❌      |
-| Install the Neon Postgres Previews Integration on Vercel\* |  ✅   |   ❌   |      ❌      |
+| Install the Neon Native Integration on Vercel\* |  ✅   |   ❌   |      ❌      |
 | Connect project to GitHub integration                      |  ✅   |   ✅   |      ❌      |
 | Connect project (Neon Postgres Previews Integration)       |  ✅   |   ✅   |      ❌      |
 
