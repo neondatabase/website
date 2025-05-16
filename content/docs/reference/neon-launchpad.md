@@ -74,10 +74,10 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   plugins: [
     postgresPlugin({
-      env: '.env',           // Path to environment file
-      envKey: 'DATABASE_URL' // Environment variable to check
+      env: '.env', // Path to environment file
+      envKey: 'DATABASE_URL', // Environment variable to check
     }),
-    react()
+    react(),
   ],
 });
 ```
@@ -102,6 +102,7 @@ The service uses the following default settings:
 | Provider         | AWS          |
 | Region           | eu-central-1 |
 | Postgres version | 17           |
+
 ```
 
 ## Use cases
@@ -127,3 +128,4 @@ The claim URL is available:
 
 - On the Neon Launchpad interface where the connection string was displayed
 - As a comment in environment files (e.g., `.env`) when using the CLI
+```
