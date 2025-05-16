@@ -49,7 +49,7 @@ No surprises here — just enter your current password, then your new one (twice
 
 ## Create personal API keys
 
-Personal API keys let you securely access Neon from the command line, scripts, or third-party tools. Your personal API key works for any organization you belong to — so you can manage projects, automate tasks, or use integrations across all your orgs with a single key. The actions you can perform with your key depend on your role in each org (admin, member, or collaborator). You can create, view, and revoke your personal API keys here in your account settings.
+Personal API keys let you securely interact with the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), including through command-line tools, scripts, or third-party integrations that use the API.. Your personal API key works for any organization you belong to — so you can manage projects, automate tasks, or use integrations across all your orgs with a single key. The actions you can perform with your key depend on your role in each org (admin, member, or collaborator). You can create, view, and revoke your personal API keys here in your account settings.
 
 [Learn more about API keys](/docs/manage/api-keys)
 

@@ -19,7 +19,7 @@ You can transfer your projects to any organization you are a member of. You can 
 
 Navigate to the **Settings** page of the project you want to transfer, and select **Transfer** from the sidebar. Then use the dialog to select the organization you want to transfer this project into.
 
-Since this removes the project from your current org, you need **Admin** rights in this org to move the project (like if you wanted to delete the project). You only need **Member** access to the destination org.
+Since this removes the project from your current org, you need **Admin** rights in this org to move the project (like if you wanted to delete the project). You only need **Member** access in the destination org.
 
 ![transfer single project to another org](/docs/manage/transfer_project.png)
 
