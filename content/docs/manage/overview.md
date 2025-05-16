@@ -5,19 +5,19 @@ isDraft: false
 updatedOn: '2025-05-11T11:23:50.625Z'
 ---
 
-Managing your Neon project requires an understanding of the Neon object hierarchy. The following diagram shows how objects in Neon are related. See below for a description of each object.
+Managing your Neon environment requires an understanding of the Neon object hierarchy. At the top level, an **Organization** contains one or more **Projects**. Each Project contains **Branches**, which in turn contain **Computes**, **Roles**, and **Databases**. The diagram below illustrates this hierarchy.
 
 ![Neon object hierarchy](/docs/manage/neon_object_hierarchy.jpg)
 
 ## Neon account
 
-This is the Neon account you signed up with. Neon supports signing up with an email, GitHub, Google, or partner account.
+Your Neon account represents your user profile and is used for authentication, personal settings, and managing personal API keys. You can sign up for a Neon account with an email, GitHub, Google, or partner account. A single Neon account can belong to multiple organizations.
 
-**API keys** are global and belong to the Neon account. API keys are used with the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) to create and manage Neon projects or objects within a Neon project. While there is no strict limit on the number of API keys you can create, we recommend keeping it under 10,000 per Neon account. For more about API keys, see [Manage API keys](/docs/manage/api-keys).
+**API keys** can be personal (global to your account) or scoped to an organization or project. For more details, see [Manage API keys](/docs/manage/api-keys).
 
 ## Organizations
 
-Neon's Organizations feature allows you organize and manage a team's projects under a single Neon account — with billing, role management, and project transfer capabilities all in one accessible location in the Neon Console.
+Organizations are the top-level containers for projects and resources in Neon. They allow you to organize and manage a team's projects under a single Neon account — with billing, role management, and project transfer capabilities all in one accessible location in the Neon Console.
 
 ## Projects
 
