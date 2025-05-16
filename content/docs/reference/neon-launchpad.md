@@ -25,7 +25,7 @@ The service provides the following capabilities:
 ### Browser access
 
 1. Navigate to [https://neon.new](https://neon.new/)
-2. Select `Try in your browser`, which redirects to `launchpad.neon.tech/db`
+2. Select `Try in your browser`, which redirects to [https://neon.new/db](https://neon.new/db)
 3. Receive an automatically generated connection string
 4. Save the provided `Claim URL` to add this database to a Neon account later, or claim now
 
@@ -64,7 +64,7 @@ deno run -A neondb
 
 ### Integration with development tools
 
-Integrate into Vite-based projects using the [@neondatabase/vite-plugin-postgres](https://www.npmjs.com/package/@neondatabase/vite-plugin-postgres) plugin:
+Add Postgres support to Vite projects using the [@neondatabase/vite-plugin-postgres](https://www.npmjs.com/package/@neondatabase/vite-plugin-postgres) plugin:
 
 ```javascript
 import postgresPlugin from '@neondatabase/vite-plugin-postgres';
@@ -72,9 +72,26 @@ import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  plugins: [postgresPlugin(), react()],
+  plugins: [
+    postgresPlugin({
+      env: '.env',           // Path to environment file
+      envKey: 'DATABASE_URL' // Environment variable to check
+    }),
+    react()
+  ],
 });
 ```
+
+**How the plugin works:**
+
+1. When running `vite dev` or `vite build`, the plugin checks if the `envKey` (default: `DATABASE_URL`) exists in your environment (default: `.env`) file
+2. If the environment variable exists, the plugin takes no action
+3. If the environment variable is missing, the plugin:
+   - Automatically creates a new Neon claimable database
+   - Adds two connection strings to your environment file:
+     - `DATABASE_URL` - Standard connection string
+     - `DATABASE_URL_POOLER` - Connection pooler string
+   - Includes the claimable URL as a comment in the environment file
 
 ## Default configuration
 
@@ -85,11 +102,6 @@ The service uses the following default settings:
 | Provider         | AWS          |
 | Region           | eu-central-1 |
 | Postgres version | 17           |
-
-Custom configurations are available through the CLI, for example:
-
-```bash
-npx neondb --provider azure --region azure-eastus2
 ```
 
 ## Use cases
