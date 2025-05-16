@@ -57,7 +57,7 @@ The following table shows what each role can do regarding integrations:
 | Connect project to GitHub integration                      |  ✅   |   ✅   |      ❌      |
 | Connect project (Neon Postgres Previews Integration)       |  ✅   |   ✅   |      ❌      |
 
-\*The Vercel Native Integration is managed entirely in Vercel and uses Vercel's permission system. For the Neon Postgres Previews Integration, projects must first be made available in Vercel before they can be connected to Neon.
+\*Neon's native Integration is managed entirely in Vercel and uses Vercel's permission system. For the Neon Postgres Previews Integration, projects must first be made available in Vercel before they can be connected to Neon.
 
 </Steps>
 
