@@ -20,8 +20,6 @@ Organizations have two main member roles:
 - **Admin** — Full control over the organization and all its projects.
 - **Member** — Access to all organization projects, but cannot modify org settings or delete projects.
 
-Projects can also be shared with **Project Collaborators**. These are external users with no organization-level access, but who can work with specific projects they're invited to.
-
 For a full breakdown of what each role can do, see the [User Permissions](/docs/manage/user-permissions) page.
 
 ## Creating a new organization

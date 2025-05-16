@@ -30,7 +30,7 @@ To invite Members:
 
 - Navigate to the **People** page in your Organization.
 - Click **Invite member** and enter the email addresses in a comma-separated list.
-- Monitor the status of sent invites on the **Pending Invites** page; from here, you can resend or cancel invitations as needed.
+- Monitor the status of sent invites on the **Pending Invites** section; from here, you can resend or cancel invitations as needed.
 
 <Admonition type="note" title="Invites not received?">
 If invite emails aren't received, they may be in spam or quarantined. Recipients should check these folders and mark Neon emails as safe.
@@ -48,7 +48,11 @@ Permissions within the organization are exclusively managed by Admins. As an Adm
 
 ## Invite Collaborators
 
-All members can invite external users to [collaborate](/docs/guides/project-collaboration-guide) on specific projects. Collaborators will not have access to the organization Dashboard but can access any projects shared with them from the **Projects shared with me** section, which appears in the org switcher in the top navbar of the Neon Console. Collaborators can invite additional Collaborators to the project and remove existing Collaborators from the project.
+Any member can invite external users to [collaborate](/docs/guides/project-collaboration-guide) on specific projects. For example, if you want to give limited access to a contractor.
+
+Members can invite collaborators from a project's **Settings** page. If any project in your organization has collaborators, you'll also see the option to invite and manage collaborators from the organization'e **People** page.
+
+Collaborators _do not_ have access to the organization. They access their shared projects by selecting the **Projects shared with me** option in the org switcher.
 
 <Admonition type="note">
 Organization members don't need Collaborator invites as they already have full project access. When projects are transferred to an organization, existing collaborator permissions for organization members are automatically removed.
