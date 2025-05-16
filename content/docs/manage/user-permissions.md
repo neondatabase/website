@@ -49,13 +49,13 @@ The following table shows what each role can do at the project level:
 
 The following table shows what each role can do regarding integrations:
 
-| Action                                                     | Admin | Member | Collaborator |
-| ---------------------------------------------------------- | :---: | :----: | :----------: |
-| Install GitHub integration                                 |  ✅   |   ❌   |      ❌      |
-| Install Neon Auth                                          |  ✅   |   ❌   |      ❌      |
-| Install the Neon Native Integration on Vercel\* |  ✅   |   ❌   |      ❌      |
-| Connect project to GitHub integration                      |  ✅   |   ✅   |      ❌      |
-| Connect project (Neon Postgres Previews Integration)       |  ✅   |   ✅   |      ❌      |
+| Action                                               | Admin | Member | Collaborator |
+| ---------------------------------------------------- | :---: | :----: | :----------: |
+| Install GitHub integration                           |  ✅   |   ❌   |      ❌      |
+| Install Neon Auth                                    |  ✅   |   ❌   |      ❌      |
+| Install the Neon Native Integration on Vercel\*      |  ✅   |   ❌   |      ❌      |
+| Connect project to GitHub integration                |  ✅   |   ✅   |      ❌      |
+| Connect project (Neon Postgres Previews Integration) |  ✅   |   ✅   |      ❌      |
 
 \*Neon's native Integration is managed entirely in Vercel and uses Vercel's permission system. For the Neon Postgres Previews Integration, projects must first be made available in Vercel before they can be connected to Neon.
 
