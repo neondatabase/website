@@ -56,7 +56,7 @@ const Hero = () => {
   }, [isComputePriceRaised]);
 
   return (
-    <section className="hero safe-paddings overflow-hidden pt-36 2xl:pt-[150px] xl:pt-[120px] lg:pt-[52px] md:pt-10">
+    <section className="hero safe-paddings overflow-hidden bg-[#FF0000] pt-36 2xl:pt-[150px] xl:pt-[120px] lg:pt-[52px] md:pt-10">
       <Container className="flex flex-col items-center" size="1344">
         <Heading
           className="text-center font-medium !leading-none tracking-tighter xl:text-6xl lg:text-[56px] md:!text-4xl"
