@@ -15,7 +15,7 @@ enableTableOfContents: true
   </DocsList>
 </InfoBlock>
 
-The Neon Data API is a ready-to-use REST API for your Neon database, powered by [PostgREST](https://docs.postgrest.org/en/v13/), a trusted project in the PostgreSQL community. It lets you work with every table, view, or function in a database's schema using standard HTTP verbs (GET, POST, PATCH, DELETE). Even better, you can use a handy SDK like [`postgrest-js`](https://github.com/supabase/postgrest-js), [`postgrest-py`](https://github.com/supabase-community/postgrest-py), or [`postgrest-go`](https://github.com/supabase-community/postgrest-go) to run queries from your client:
+The Neon Data API is a ready-to-use REST API for your Neon database, powered by [PostgREST](https://docs.postgrest.org/en/v13/), a trusted project in the PostgreSQL community. It lets you work with every table, view, or function in a database's schema using standard HTTP verbs (`GET`, `POST`, `PATCH`, `DELETE`). Even better, you can use a handy SDK like [`postgrest-js`](https://github.com/supabase/postgrest-js), [`postgrest-py`](https://github.com/supabase-community/postgrest-py), or [`postgrest-go`](https://github.com/supabase-community/postgrest-go) to run queries from your client:
 
 ```javascript shouldWrap
 const { data } = await client.from('playing_with_neon').select('*').gte('value', 0.5);
