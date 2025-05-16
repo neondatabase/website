@@ -103,17 +103,6 @@ The service uses the following default settings:
 | Region           | eu-central-1 |
 | Postgres version | 17           |
 
-## Use cases
-
-Neon Launchpad is designed for scenarios requiring rapid database provisioning:
-
-- Development and testing environments
-- Evaluation of Neon's capabilities before committing to an account
-- AI agent integration without authentication overhead
-- Quick prototyping sessions
-
-Note that provisioned databases expire after 72 hours unless claimed through the generated claim URL.
-
 ## Claiming a database
 
 To persist a database beyond the 72-hour expiration period:
@@ -126,3 +115,14 @@ The claim URL is available:
 
 - On the Neon Launchpad interface where the connection string was displayed
 - As a comment in environment files (e.g., `.env`) when using the CLI
+
+## Use cases
+
+Neon Launchpad is designed for scenarios requiring rapid database provisioning:
+
+- Development and testing environments
+- Evaluation of Neon's capabilities before committing to an account
+- AI agent integration without authentication overhead
+- Quick prototyping sessions
+
+Note that provisioned databases expire after 72 hours unless claimed as described in the previous section.
