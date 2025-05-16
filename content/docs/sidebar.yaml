@@ -54,20 +54,28 @@
               slug: guides/astro
             - title: Django
               slug: guides/django
+            - title: Entity Framework
+              slug: guides/dotnet-entity-framework
             - title: Express
               slug: guides/express
             - title: Hono
               slug: guides/hono
             - title: Laravel
               slug: guides/laravel
+            - title: Micronaut Kotlin
+              slug: guides/micronaut-kotlin
             - title: NestJS
               slug: guides/nestjs
             - title: Next.js
               slug: guides/nextjs
-            - title: Nuxt
-              slug: guides/nuxt
             - title: Node.js
               slug: guides/node
+            - title: Nuxt
+              slug: guides/nuxt
+            - title: OAuth
+              slug: guides/oauth-integration
+            - title: Phoenix
+              slug: guides/phoenix
             - title: Quarkus (JDBC)
               slug: guides/quarkus-jdbc
             - title: Quarkus (Reactive)
