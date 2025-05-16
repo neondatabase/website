@@ -1,11 +1,12 @@
 ---
 title: Neon Auth
-subtitle: Add authentication to your project. Access user data directly in your Postgres database.
+subtitle: Add authentication to your project. Access user data directly in your Postgres
+  database.
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-identity
 tag: beta
-updatedOn: '2025-04-17T13:11:55.870Z'
+updatedOn: '2025-05-16T19:06:06.843Z'
 ---
 
 Neon Auth lets you add authentication to your app in seconds — user data is synced directly to your Neon Postgres database, so you can query and join it just like any other table.

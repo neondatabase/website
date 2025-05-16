@@ -5,7 +5,7 @@ subtitle: See how Neon Auth eliminates the complexity of manual user data
   robust.
 enableTableOfContents: true
 tag: beta
-updatedOn: '2025-04-11T20:01:29.102Z'
+updatedOn: '2025-05-16T19:06:06.842Z'
 ---
 
 <InfoBlock>
