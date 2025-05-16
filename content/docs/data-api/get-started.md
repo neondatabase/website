@@ -1,7 +1,10 @@
 ---
 title: Getting started with Neon Data API
-description: Learn how to use the Neon Data API, a ready-to-use REST API built on top of your Neon database
+description: >-
+  Learn how to use the Neon Data API, a ready-to-use REST API built on top of
+  your Neon database
 enableTableOfContents: true
+updatedOn: '2025-05-16T18:44:09.379Z'
 ---
 
 <PrivatePreviewEnquire />
