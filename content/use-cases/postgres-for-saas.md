@@ -34,7 +34,7 @@ author={{
 }}
 />
 
-<CTA title="Get $100 in credits" description="Sign up now and get $100 in credits when you upgrade." buttonText="Claim offer" buttonUrl="https://fyi.neon.tech/credits" />
+<CTA title="Get $100 in credits" description="Sign up now and get $100 in credits when you upgrade." buttonText="Claim offer" buttonUrl="https://console.neon.tech/app/?promo=credits" />
 
 ## Key features
 
@@ -165,4 +165,4 @@ Pay via AWS/Azure Marketplace
 
 </DefinitionList>
 
-<CTA title="Next Steps" description="Start in our Free Plan and get $100 in credits when you upgrade." buttonText="Claim offer" buttonUrl="https://fyi.neon.tech/credits" />
+<CTA title="Next Steps" description="Sign up today and get $100 in credits." buttonText="Claim offer" buttonUrl="https://console.neon.tech/app/?promo=credits" />
