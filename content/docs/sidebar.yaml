@@ -528,7 +528,7 @@
             - title: AutoGen
               slug: https://neon.tech/guides/autogen-neon
             - title: Azure AI Agent Service
-              slug: https://neon.tech/guides/azure-ai-agent-service 
+              slug: https://neon.tech/guides/azure-ai-agent-service
             - title: Composio + CrewAI
               slug: https://neon.tech/guides/composio-crewai-neon
             - title: LangGraph
@@ -622,7 +622,7 @@
               tag: community
     - title: Neon Launchpad
       slug: reference/neon-launchpad
-      icon: integrations
+      icon: rocket
     - title: Terraform
       slug: reference/terraform
       tag: community
