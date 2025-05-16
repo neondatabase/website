@@ -17,7 +17,7 @@ enableTableOfContents: true
 
 The Neon Data API is a ready-to-use REST API for your Neon database, powered by [PostgREST](https://docs.postgrest.org/en/v13/), a trusted project in the PostgreSQL community. It lets you work with every table, view, or function in a database's schema using standard HTTP verbs (GET, POST, PATCH, DELETE). Even better, you can use a handy SDK like [`postgrest-js`](https://github.com/supabase/postgrest-js), [`postgrest-py`](https://github.com/supabase-community/postgrest-py), or [`postgrest-go`](https://github.com/supabase-community/postgrest-go) to run queries from your client:
 
-```javascript
+```javascript shouldWrap
 const { data } = await client.from('playing_with_neon').select('*').gte('value', 0.5);
 ```
 
@@ -26,10 +26,7 @@ const { data } = await client.from('playing_with_neon').select('*').gte('value',
 <Steps>
 ## Enabling the Data API
 
-You enable the Data API at the branch level for a single database. This can be done in the Console or programmatically via the Neon API.
-
-<Tabs labels={["Console", "API"]}>
-<TabItem>
+You enable the Data API at the branch level for a single database.
 
 Go to the **Data API** tab for your branch and click the button to enable the Data API.
 
@@ -41,37 +38,6 @@ Once enabled, you'll see your Data API Project URL here. Use this endpoint in yo
 
 **Next step:**  
 To secure your Data API, create Row-Level Security (RLS) policies for your tables. Using [Drizzle RLS](/docs/guides/neon-rls-drizzle) makes this much easier.
-
-</TabItem>
-
-<TabItem>
-You can enable the Neon Data API for your project by sending a `POST` request to our `/data-api` endpoint.
-
-Typically, you can call `/data-api` with no parameters at all. If your branch only has one database, we'll select it automatically. If there are multiple databases, you'll need to specify which one you want to use, as shown below:
-
-Example `curl` request:
-
-```bash shouldWrap
-curl --location 'https://console.neon.tech/api/v2/projects/<project_id>/branches/<branch_id>/data-api' \
-  --header 'Content-Type: application/json' \
-  --header 'Authorization: Bearer <token>' \
-  --data '{
-       "database_name": "only-needed-if-you-want-to-expose-more-than-one-database"
-  }'
-```
-
-Sample response:
-
-```json shouldWrap
-{
-  "url": "https://app-restless-salad-23184734.dpl.myneon.app"
-}
-```
-
-</TabItem>
-</Tabs>
-
-Once enabled, your Data API instance usually takes about **15 seconds** to boot up (the endpoint URL is returned instantly). The instance will automatically scale down to zero when your database is idle, and scale back up on demand — aligning with your serverless database.
 
 ## API Authentication
 
@@ -100,8 +66,9 @@ By default, all tables in your database are accessible via the API with `SELECT`
 
 <Admonition type="warning">
 We strongly recommend enabling Row Level Security (RLS) on _all_ tables as soon as you enable the Data API. You can do this with:
-  
+
 ```sql
+-- for every table, on every schema
 ALTER TABLE <schema_name>.<table_name> ENABLE ROW LEVEL SECURITY;
 ```
 
@@ -111,10 +78,24 @@ Review and test your RLS policies to ensure your data is protected.
 Here’s an example of how you might set up and query a table:
 
 ```sql shouldWrap
-CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
+CREATE TABLE IF NOT EXISTS playing_with_neon(
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  value REAL
+);
+
+-- Enable Row Level Security
+ALTER TABLE playing_with_neon ENABLE ROW LEVEL SECURITY;
+
+-- (Optional) Example permissive policy for demo/testing:
+CREATE POLICY "Allow read access" ON playing_with_neon
+  FOR SELECT
+  USING (true);
+
 INSERT INTO playing_with_neon(name, value)
   SELECT LEFT(md5(i::TEXT), 10), random()
   FROM generate_series(1, 10) s(i);
+
 SELECT * FROM playing_with_neon;
 ```
 
@@ -155,7 +136,7 @@ import { PostgrestClient } from '@supabase/postgrest-js';
 
 // https://github.com/supabase/postgrest-js/blob/master/src/PostgrestClient.ts#L41
 const client = new PostgrestClient('https://app-restless-salad-23184734.dpl.myneon.app', {
-  Authorization: 'Bearer <jwt> ',
+  Authorization: 'Bearer <jwt>',
 });
 
 const { data } = await client.from('playing_with_neon').select('*').gte('value', 0.5);
