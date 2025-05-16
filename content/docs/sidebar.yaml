@@ -949,6 +949,7 @@
     - title: Data API
       slug: data-api/get-started
       icon: api
+      tag: new
 - section: Workflows
   items:
     - title: Data anonymization

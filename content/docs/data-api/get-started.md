@@ -4,7 +4,7 @@ description: Learn how to use the Neon Data API, a ready-to-use REST API built o
 enableTableOfContents: true
 ---
 
-<PrivatePreview />
+<PrivatePreviewEnquire />
 
 <InfoBlock>
   <DocsList title="Related docs" theme="docs">
@@ -15,11 +15,13 @@ enableTableOfContents: true
   </DocsList>
 </InfoBlock>
 
-The Neon Data API is a ready-to-use REST API for your Neon database, powered by [PostgREST](https://docs.postgrest.org/en/v13/), a trusted project in the PostgreSQL community. It lets you work with every table, view, or function in a database's schema using standard HTTP verbs. More importantly, this means you can use a nice SDK like `Postgrest.js` to run queries from the client, like this:
+The Neon Data API is a ready-to-use REST API for your Neon database, powered by [PostgREST](https://docs.postgrest.org/en/v13/), a trusted project in the PostgreSQL community. It lets you work with every table, view, or function in a database's schema using standard HTTP verbs (GET, POST, PATCH, DELETE). Even better, you can use a handy SDK like [`postgrest-js`](https://github.com/supabase/postgrest-js), [`postgrest-py`](https://github.com/supabase-community/postgrest-py), or [`postgrest-go`](https://github.com/supabase-community/postgrest-go) to run queries from your client:
 
 ```javascript
 const { data } = await client.from('playing_with_neon').select('*').gte('value', 0.5);
 ```
+
+> When using the Data API, it is essential to set up RLS policies so that you can safely expose your databases to clients such as web apps. Make sure that _all_ of your tables have RLS policies, and that you have carefully reviewed each policy.
 
 <Steps>
 ## Enabling the Data API
@@ -38,7 +40,7 @@ Once enabled, you'll see your Data API Project URL here. Use this endpoint in yo
 ![Data API enabled view with Project URL](/docs/data-api/data-api-enabled.png)
 
 **Next step:**  
-To read and write data securely with the Data API, set up [Neon Auth](/docs/guides/neon-auth) as well as Row-Level Security (RLS) policies. [Drizzle RLS](/docs/guides/neon-rls-drizzle) makes that easier.
+To secure your Data API, create Row-Level Security (RLS) policies for your tables. Using [Drizzle RLS](/docs/guides/neon-rls-drizzle) makes this much easier.
 
 </TabItem>
 
@@ -49,18 +51,18 @@ Typically, you can call `/data-api` with no parameters at all. If your branch on
 
 Example `curl` request:
 
-```bash
+```bash shouldWrap
 curl --location 'https://console.neon.tech/api/v2/projects/<project_id>/branches/<branch_id>/data-api' \
   --header 'Content-Type: application/json' \
   --header 'Authorization: Bearer <token>' \
   --data '{
-       "database_name": "only-when-more-than-one-database"
+       "database_name": "only-needed-if-you-want-to-expose-more-than-one-database"
   }'
 ```
 
 Sample response:
 
-```json
+```json shouldWrap
 {
   "url": "https://app-restless-salad-23184734.dpl.myneon.app"
 }
@@ -75,13 +77,15 @@ Once enabled, your Data API instance usually takes about **15 seconds** to boot 
 
 When you call the `/data-api` endpoint described above, we automatically provision [**Neon Auth**](/docs/guides/neon-auth) for that project. We set up the Data API's authentication to match this instance of Neon Auth.
 
+When you enable the Data API — either by calling the `/data-api` endpoint or from the Console — we automatically provision [**Neon Auth**](/docs/guides/neon-auth) for your project if it isn't already set up. If your project already has Neon Auth enabled, the Data API will re-use your existing configuration.
+
 This means you need to send a valid JWT from Neon Auth with every Data API request that is protected by RLS policies.
 
-### Custom JWKS
+### Third-party auth
 
 You can also bring your own **JWKS** from a third-party provider (like Clerk, Keycloak, Auth0, or Better Auth), adding more auth flexibility. Just include `jwks_url` (and optionally `jwks_audience`) in your request:
 
-```bash
+```bash shouldWrap
 curl --location 'https://console.neon.tech/api/v2/projects/<project_id>/branches/<branch_id>/data-api' \
   --header 'Content-Type: application/json' \
   --header 'Authorization: Bearer <token>' \
@@ -94,9 +98,19 @@ curl --location 'https://console.neon.tech/api/v2/projects/<project_id>/branches
 
 By default, all tables in your database are accessible via the API with `SELECT` permissions granted to **unauthenticated requests**. This lets you directly interact with the API without requiring additional authorization headers.
 
-Example table from our SQL editor:
-
+<Admonition type="warning">
+We strongly recommend enabling Row Level Security (RLS) on _all_ tables as soon as you enable the Data API. You can do this with:
+  
 ```sql
+ALTER TABLE <schema_name>.<table_name> ENABLE ROW LEVEL SECURITY;
+```
+
+Review and test your RLS policies to ensure your data is protected.
+</Admonition>
+
+Here’s an example of how you might set up and query a table:
+
+```sql shouldWrap
 CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
 INSERT INTO playing_with_neon(name, value)
   SELECT LEFT(md5(i::TEXT), 10), random()
@@ -106,7 +120,7 @@ SELECT * FROM playing_with_neon;
 
 Example `curl` request:
 
-```bash
+```bash shouldWrap
 curl --location --request GET 'https://app-restless-salad-23184734.dpl.myneon.app/playing_with_neon' \
      --header 'Accept: application/json' \
      --header 'Bearer: <jwt>'
@@ -136,7 +150,7 @@ Content-Type: application/json
 
 As the Data API is built on **PostgREST**, it follows PostgREST query and data manipulation formats. You can also use popular wrapper libraries such as **postgrest-js** [https://github.com/supabase/postgrest-js](https://github.com/supabase/postgrest-js) for more advanced integration.
 
-```javascript
+```javascript shouldWrap
 import { PostgrestClient } from '@supabase/postgrest-js';
 
 // https://github.com/supabase/postgrest-js/blob/master/src/PostgrestClient.ts#L41
@@ -148,6 +162,15 @@ const { data } = await client.from('playing_with_neon').select('*').gte('value',
 
 console.table(data);
 ```
+
+## Try our demo app!
+
+See how the Neon Data API works in a demo project:
+
+- [Demo app repo](https://github.com/neondatabase-labs/neon-data-api-neon-auth)
+- [Live demo](https://neon-data-api-neon-auth.vercel.app/handler/sign-in?after_auth_return_to=%2F)
+
+This project shows how to build a modern web app using direct-to-database queries (no backend required) with the Neon Data API and Neon Auth for authentication.
 
 </Steps>
 

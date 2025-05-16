@@ -15,6 +15,7 @@ const sharedMdxComponents = {
   AIRule: 'shared-content/ai-rule-usage',
   NextSteps: 'shared-content/next-steps',
   MCPTools: 'shared-content/mcp-tools',
+  PrivatePreviewEnquire: 'shared-content/private-preview-enquire',
 };
 
 module.exports = sharedMdxComponents;
