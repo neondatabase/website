@@ -101,7 +101,7 @@ const Navigation = ({ isDarkTheme }) => (
                                   )}
                                   to={to}
                                   tagName="Navigation"
-                                  // tagText={title}
+                                  tagText={title}
                                 >
                                   {isExtended && IconGradient && (
                                     <div
