@@ -446,7 +446,7 @@
       icon: regions
     - title: Support
       slug: introduction/support
-      icon: support
+      icon: status
     - title: Status
       slug: introduction/status
       icon: status
@@ -472,6 +472,8 @@
           slug: introduction/billing-aws-marketplace
         - title: Azure Marketplace
           slug: introduction/billing-azure-marketplace
+        - title: Neon for Enterprise
+          slug: introduction/neon-enterprise
         - title: Enterprise sales process
           slug: introduction/enterprise-sales-process
     - title: Neon on Azure
