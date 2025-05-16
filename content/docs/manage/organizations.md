@@ -9,7 +9,7 @@ In Neon, all projects live within organizations. When you sign up, you automatic
 
 ## About Neon Organizations
 
-In the Neon Console, the Organizations page provides a centralized view of all your projects. From there, you can create new projects, manage existing ones, as well as oversee your members, billing information, and access to preview features through the Early Access Program.
+In the Neon Console, the Organizations page gives you a centralized view of all your projects. From there, you can create new projects, manage existing ones, and oversee your members, billing information, and access to preview features through the [Early Access Program](/docs/introduction/roadmap#organization-early-access).
 
 ![organizations projects tab](/docs/manage/org_projects.png)
 
