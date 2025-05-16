@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started-with-neon/get-started-branching
-updatedOn: '2025-02-03T20:41:57.343Z'
+updatedOn: '2025-05-11T11:23:50.623Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `main`, which is also designated as your [default branch](#default-branch). You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](/docs/introduction/plans) define the number of branches you can create.
@@ -68,7 +68,7 @@ To view the branches in a Neon project:
 
    Branch details shown on the branch page may include:
 
-   - **Archive status**: This only appears if the branch branch was archived. For more, see [Branch archiving](/docs/guides/branch-archiving).
+   - **Archive status**: This only appears if the branch was archived. For more, see [Branch archiving](/docs/guides/branch-archiving).
    - **ID**: The branch ID. Branch IDs have a `br-` prefix.
    - **Created on**: The date and time the branch was created.
    - **Default compute hours**: The compute hours used by the default branch in the current billing period.
@@ -81,7 +81,7 @@ To view the branches in a Neon project:
 
    The branch details page also includes details about the **Computes**, **Roles & Databases**, and **Child branches** that belong to the branch. All of these objects are associated with a particular branch. For information about these objects, see:
 
-   - [Manage computes](/docs/manage/endpoints#view-a-compute).
+   - [Manage computes](/docs/manage/computes#view-a-compute).
    - [Manage roles](/docs/manage/roles)
    - [Manage databases](/docs/manage/databases)
    - [View branches](#view-branches)

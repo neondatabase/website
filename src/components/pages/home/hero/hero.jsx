@@ -111,20 +111,32 @@ const Hero = () => {
             Ship faster with Postgres
           </h1>
           <p className="mt-2.5 max-w-xl text-lg font-light leading-snug tracking-tighter text-gray-new-80 lg:mt-2.5 lg:text-base">
-            The database you love, on a serverless platform designed to help you build reliable and
-            scalable applications faster.
+            The database developers trust, on a serverless platform designed to help you build
+            reliable and scalable applications faster.
           </p>
-          <Button
-            className="pointer-events-auto relative mt-7 px-9 font-semibold xl:mt-6 md:px-7"
-            theme="primary"
-            size="md-new"
-            to={LINKS.signup}
-            target="_blank"
-            tagName="Hero"
-            analyticsEvent="home_hero_get_started_clicked"
-          >
-            Get Started
-          </Button>
+          <div className="mt-8 flex items-center gap-6">
+            <Button
+              className="!px-8 font-semibold md:!px-7"
+              theme="primary"
+              size="md-new"
+              to={LINKS.signup}
+              target="_blank"
+              tagName="Hero"
+              analyticsEvent="home_hero_start_for_free_clicked"
+            >
+              Start for Free
+            </Button>
+            <Button
+              className="text-[15px] font-medium"
+              theme="white"
+              to={LINKS.contactSales}
+              tagName="Hero"
+              analyticsEvent="home_hero_talk_to_us_clicked"
+              withArrow
+            >
+              Talk to Us
+            </Button>
+          </div>
         </div>
 
         <div className="mt-[74px] flex gap-x-2.5 xl:mt-16 lg:mt-14 sm:mt-9 sm:flex-col sm:gap-y-9">

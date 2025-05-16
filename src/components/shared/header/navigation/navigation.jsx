@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
+import Button from 'components/shared/button';
 import Link from 'components/shared/link';
 import MENUS from 'constants/menus.js';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
@@ -9,9 +10,9 @@ import MenuBanner from '../menu-banner';
 
 const Navigation = ({ isDarkTheme }) => (
   <nav>
-    <ul className="flex gap-x-10 xl:gap-x-8 lg:hidden [@media(max-width:1070px)]:gap-x-6">
+    <ul className="flex items-center gap-x-10 xl:gap-x-8 lg:hidden [@media(max-width:1070px)]:gap-x-6">
       {MENUS.header.map(({ to, text, sections }, index) => {
-        const Tag = to ? Link : 'button';
+        const Tag = to ? Link : Button;
         const hasSubmenu = sections?.length > 0;
         const gridSubmenu = sections?.length > 1;
         const theme = to ? { theme: isDarkTheme ? 'white' : 'black' } : {};
@@ -20,17 +21,19 @@ const Navigation = ({ isDarkTheme }) => (
           <li className={clsx('relative [perspective:2000px]', hasSubmenu && 'group')} key={index}>
             <Tag
               className={clsx(
-                'flex items-center gap-x-1 whitespace-pre text-sm',
+                'flex items-center gap-x-1 whitespace-pre text-sm font-normal',
                 isDarkTheme ? 'text-white' : 'text-black dark:text-white'
               )}
               to={to}
               {...theme}
+              tagName="Navigation"
+              analyticsOnHover={!to || undefined}
             >
               {text}
               {hasSubmenu && (
                 <ChevronIcon
                   className={clsx(
-                    '-mb-px w-2.5 opacity-60 [&_path]:stroke-2',
+                    'w-2.5 opacity-60 [&_path]:stroke-2',
                     isDarkTheme ? 'text-white' : 'text-black-new dark:text-white'
                   )}
                 />
@@ -97,6 +100,8 @@ const Navigation = ({ isDarkTheme }) => (
                                       : 'before:bg-[#f5f5f5] dark:before:bg-[#16181D]'
                                   )}
                                   to={to}
+                                  tagName="Navigation"
+                                  // tagText={title}
                                 >
                                   {isExtended && IconGradient && (
                                     <div

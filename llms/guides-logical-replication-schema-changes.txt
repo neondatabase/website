@@ -1,6 +1,10 @@
 # Managing schema changes in a logical replication setup
 
-Learn about managing schema changes in a logical replication setup
+> This guide explains how to manage schema changes in a Postgres logical replication setup, covering best practices for applying additive and non-additive schema changes, monitoring replication, and using schema migration tools.
+
+## Source
+
+- [Managing schema changes in a logical replication setup HTML](https://neon.tech/docs/guides/logical-replication-schema-changes): The original HTML version of this documentation
 
 When working with Postgres logical replication, managing schema changes is a task that requires careful planning. As stated in the [PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication-restrictions.html):
 
@@ -71,8 +75,8 @@ Tools like [Flyway](https://flywaydb.org/) and [Liquibase](https://www.liquibase
 
 If you're unfamiliar with these tools, check out the following guides to get started with Neon:
 
-- [Get started with Flyway and Neon](/docs/guides/flyway)
-- [Get started with Liquibase and Neon](/docs/guides/liquibase)
+- [Get started with Flyway and Neon](https://neon.tech/docs/guides/flyway)
+- [Get started with Liquibase and Neon](https://neon.tech/docs/guides/liquibase)
 
 For guidance on managing schemas across multiple databases using Flyway or Liquibase, see:
 
@@ -88,4 +92,4 @@ If you have suggestions, tips, or requests regarding schema management in a repl
 ## References
 
 - [PostgreSQL logical replication restrictions](https://www.postgresql.org/docs/current/logical-replication-restrictions.html)
-- [Import a database schema](/docs/import/import-schema-only)
+- [Import a database schema](https://neon.tech/docs/import/import-schema-only)

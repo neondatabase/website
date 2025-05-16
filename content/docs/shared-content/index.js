@@ -13,6 +13,8 @@ const sharedMdxComponents = {
   MigrationAssistant: 'shared-content/migration-assistant',
   LinkAPIKey: 'shared-content/manage-api-keys',
   AIRule: 'shared-content/ai-rule-usage',
+  NextSteps: 'shared-content/next-steps',
+  MCPTools: 'shared-content/mcp-tools',
 };
 
 module.exports = sharedMdxComponents;

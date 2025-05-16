@@ -8,8 +8,9 @@ const BlogGridItem = ({ className, post, category, isPriority, isFeatured }) => 
     className={clsx(
       'py-8 last:pb-0 md:py-6',
       isFeatured
-        ? 'pt-0 md:pt-0'
+        ? '!pt-0'
         : 'col-span-full border-t border-gray-new-15 py-8 first:border-0 first:pt-0',
+      '[&:nth-child(-n+2)]:-order-1 [&:nth-child(3)]:border-0',
       className
     )}
     category={category}

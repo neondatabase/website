@@ -7,6 +7,8 @@ import { Fragment } from 'react';
 import remarkGfm from 'remark-gfm';
 
 import ChatOptions from 'components/pages/doc/chat-options';
+import CheckItem from 'components/pages/doc/check-item';
+import CheckList from 'components/pages/doc/check-list';
 import CodeTabs from 'components/pages/doc/code-tabs';
 import CommunityBanner from 'components/pages/doc/community-banner';
 import DefinitionList from 'components/pages/doc/definition-list';
@@ -28,14 +30,15 @@ import Testimonial from 'components/pages/use-case/testimonial';
 import TestimonialsWrapper from 'components/pages/use-case/testimonials-wrapper';
 import UseCaseContext from 'components/pages/use-case/use-case-context';
 import UseCaseList from 'components/pages/use-case/use-case-list';
-import DeployPostgresButton from 'components/shared//deploy-postgres-button';
 import Admonition from 'components/shared/admonition';
 import AnchorHeading from 'components/shared/anchor-heading';
 import Button from 'components/shared/button';
 import CodeBlock from 'components/shared/code-block';
 import ComputeCalculator from 'components/shared/compute-calculator';
 import CtaBlock from 'components/shared/cta-block';
+import DeployPostgresButton from 'components/shared/deploy-postgres-button';
 import DocCta from 'components/shared/doc-cta';
+import ExternalCode from 'components/shared/external-code';
 import ImageZoom from 'components/shared/image-zoom';
 import InkeepEmbedded from 'components/shared/inkeep-embedded';
 import LatencyCalculator from 'components/shared/latency-calculator';
@@ -147,6 +150,9 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   Steps,
   DeployPostgresButton,
   ChatOptions,
+  CheckList,
+  CheckItem,
+  ExternalCode: (props) => <ExternalCode {...props} />,
   ...sharedComponents,
 });
 

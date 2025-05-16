@@ -2,7 +2,7 @@
 title: Neon CLI commands — set-context
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-10-07T13:55:51.301Z'
+updatedOn: '2025-04-23T16:49:30.288Z'
 ---
 
 ## Before you begin
@@ -129,6 +129,24 @@ This creates a hidden `.neon` file by default with the following context:
 ```
 
 You can now use any command that would normally require an additional `--project-id` parameter and the command will default to this context.
+
+## Reset or remove context
+
+To reset or clear the current context, you have two options:
+
+1. Run the `set-context` command with no options:
+
+   ```bash
+   neon set-context
+   ```
+
+2. Delete the `.neon` file (or your custom `--context-file`):
+
+   ```bash
+   rm .neon
+   # Or for a custom context file:
+   rm your_context_file
+   ```
 
 <Admonition type="note">
 Neon does not save any confidential information to the context file (for example, auth tokens). You can safely commit this file to your repository or share with others.

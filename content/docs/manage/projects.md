@@ -5,7 +5,7 @@ isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 redirectFrom:
   - /docs/get-started-with-neon/projects
-updatedOn: '2025-02-04T16:35:21.905Z'
+updatedOn: '2025-05-11T11:23:50.626Z'
 ---
 
 With Neon, everything starts with the project. It is the top-level object in the [Neon object hierarchy](/docs/manage/overview). A project can hold as many branches, databases, and roles as your application or workflow needs. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and resource limits within those projects.
@@ -15,7 +15,7 @@ With Neon, everything starts with the project. It is the top-level object in the
 When you add a new project, Neon creates the following resources by default:
 
 - A default branch called `main`. You can create child branches from the default branch or from any previously created branch. For more information, see [Manage branches](/docs/manage/branches).
-- A single primary read-write compute. This is the compute associated with the branch. For more information, see [Manage computes](/docs/manage/endpoints).
+- A single primary read-write compute. This is the compute associated with the branch. For more information, see [Manage computes](/docs/manage/computes).
 - A Postgres database that resides on the project's default branch. If you did not specify your own database name when creating the project, the database created is named `neondb`.
 - A Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a default role named `neondb_owner`.
 
@@ -29,8 +29,8 @@ To create a Neon project:
 2. Click **New Project**.
 3. Specify values for **Project Name**, **Postgres version**, **Cloud Service Provider**, and **Region**. Project names are limited to 64 characters. You can also specify **Compute size** settings when creating a project. The settings you specify become the default settings for computes that you add to your project when creating [branches](/docs/manage/branches#create-a-branch) or [read replicas](/docs/guides/read-replica-guide).
 
-   - Neon supports fixed-size computes and autoscaling. For more information, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
-   - The scale to zero setting determines whether a compute is automatically suspended after a period of inactivity. For more information, see [Scale to zero configuration](/docs/manage/endpoints#scale-to-zero-configuration).
+   - Neon supports fixed-size computes and autoscaling. For more information, see [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration).
+   - The scale to zero setting determines whether a compute is automatically suspended after a period of inactivity. For more information, see [Scale to zero configuration](/docs/manage/computes#scale-to-zero-configuration).
 
 4. Click **Create Project**.
 
@@ -263,7 +263,7 @@ You can define an allowlist with individual IP addresses, IP ranges, or [CIDR no
 - **Use IPv6 addresses**: Neon projects provisioned on AWS also support specifying IPv6 addresses. For example:
 
   <Admonition type="note">
-  IPv6 is not yet supported for projects provisioned on on Azure.
+  IPv6 is not yet supported for projects provisioned on Azure.
   </Admonition>
 
   ```text

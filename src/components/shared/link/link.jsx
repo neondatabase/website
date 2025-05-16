@@ -1,4 +1,5 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
+'use client';
+
 import clsx from 'clsx';
 import NextLink from 'next/link';
 import PropTypes from 'prop-types';
@@ -7,6 +8,8 @@ import React, { forwardRef } from 'react';
 import ArrowRightIcon from 'icons/arrow-right.inline.svg';
 import ExternalIcon from 'icons/external.inline.svg';
 import GlossaryIcon from 'icons/glossary.inline.svg';
+import getNodeText from 'utils/get-node-text';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 const underlineCommonStyles =
   'relative transition-colors duration-500 before:absolute before:-bottom-1.5 before:left-0 before:h-1.5 before:w-full before:transition-all before:duration-500 hover:before:bottom-full hover:before:opacity-0 before:pointer-events-none';
@@ -42,6 +45,8 @@ const styles = {
     'gray-50': 'text-gray-new-50 transition-colors duration-200 hover:text-green-45',
     'gray-70':
       'text-gray-new-70 dark:text-gray-new-70 transition-colors duration-200 hover:text-green-45',
+    'grey-70-underlined':
+      'underline underline-offset-4 decoration-gray-new-70/40 hover:decoration-gray-new-70/100 text-gray-new-70 transition-colors duration-500',
     'gray-80': 'text-gray-new-80 transition-colors duration-200 hover:text-green-45',
     'gray-90': 'text-gray-new-90 transition-colors duration-200 hover:text-green-45',
   },
@@ -61,6 +66,8 @@ const Link = forwardRef(
       to = null,
       withArrow = false,
       icon = null,
+      tagName = null,
+      tagText = null,
       children,
       prefetch = undefined,
       ...props
@@ -77,6 +84,15 @@ const Link = forwardRef(
 
     const Icon = icons[icon];
 
+    const handleClick = () => {
+      if (!tagName) return;
+      sendGtagEvent('Link clicked', {
+        style: theme,
+        text: tagText || getNodeText(children),
+        tag_name: tagName,
+      });
+    };
+
     const content = (
       <>
         {withArrow ? <span>{children}</span> : children}
@@ -86,10 +102,11 @@ const Link = forwardRef(
         {Icon && <Icon className="-mb-px shrink-0" />}
       </>
     );
+
     // TODO: remove this when we upgrade to latest version of Next.js
     if (to?.includes('#')) {
       return (
-        <a className={className} href={to} ref={ref} {...props}>
+        <a className={className} href={to} ref={ref} onClick={handleClick} {...props}>
           {content}
         </a>
       );
@@ -97,14 +114,21 @@ const Link = forwardRef(
 
     if (to?.startsWith('/')) {
       return (
-        <NextLink className={className} href={to} ref={ref} prefetch={prefetch} {...props}>
+        <NextLink
+          className={className}
+          href={to}
+          ref={ref}
+          prefetch={prefetch}
+          onClick={handleClick}
+          {...props}
+        >
           {content}
         </NextLink>
       );
     }
 
     return (
-      <a className={className} href={to} ref={ref} {...props}>
+      <a className={className} href={to} ref={ref} onClick={handleClick} {...props}>
         {content}
       </a>
     );
@@ -120,6 +144,8 @@ Link.propTypes = {
   withArrow: PropTypes.bool,
   icon: PropTypes.oneOf(Object.keys(icons)),
   prefetch: PropTypes.bool,
+  tagName: PropTypes.string,
+  tagText: PropTypes.string,
 };
 
 export default Link;

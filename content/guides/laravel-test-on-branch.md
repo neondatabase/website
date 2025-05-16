@@ -28,7 +28,7 @@ Some key benefits of Neon branching include:
 - **Isolation:** Branches are completely isolated from the original database and other branches, ensuring that the operations performed on one do not affect others.
 - **Efficiency:** Branching is quick and does not burden the parent database, as it uses a copy-on-write mechanism. This means the original database's performance remains unaffected, even when multiple branches are in use.
 - **Flexibility:** You can modify or delete branches without impacting the original data. Changes to a branch are independent and only record the differences from the point of branch creation.
-- **Simplicity:** Every Neon project starts with a main branch, and new branches can be created from this root or from any other branch. This structure simplifies managing different versions of your database.
+- **Simplicity:** Every Neon project starts with a production branch, and new branches can be created from this root or from any other branch. This structure simplifies managing different versions of your database.
 
 Neon's branching is particularly useful in continuous integration and delivery pipelines, enhancing developer productivity by reducing the setup time needed for test environments.
 

@@ -57,7 +57,7 @@ const Item = ({ question, answer, id = null, initialState = 'closed', index }) =
               height: { duration: 0.3 },
             }}
           >
-            <p
+            <div
               className="with-link-primary with-list-style pt-4 text-base leading-normal text-gray-new-80 lg:pt-5"
               dangerouslySetInnerHTML={{ __html: answer }}
             />

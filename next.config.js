@@ -141,11 +141,6 @@ const defaultConfig = {
 
     return [
       {
-        source: '/msbuild',
-        destination: '/',
-        permanent: true,
-      },
-      {
         source: '/bm',
         destination: '/?ref=tbm-p',
         permanent: true,
@@ -270,6 +265,11 @@ const defaultConfig = {
       {
         source: '/docs/postgres/:path*.html',
         destination: '/docs/postgres/:path*',
+        permanent: true,
+      },
+      {
+        source: '/docs/manage/endpoints',
+        destination: '/docs/manage/computes',
         permanent: true,
       },
       {

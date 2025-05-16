@@ -3,7 +3,7 @@ title: The neon extension
 subtitle: An extension for Neon-specific statistics including the Local File Cache hit
   ratio
 enableTableOfContents: true
-updatedOn: '2025-03-07T10:23:07.151Z'
+updatedOn: '2025-05-11T11:23:50.613Z'
 ---
 
 The `neon` extension provides functions and views designed to gather Neon-specific metrics.
@@ -17,7 +17,7 @@ The `neon_stat_file_cache` view provides insights into how effectively your Neon
 
 ## What is the Local File Cache?
 
-Neon computes have a Local File Cache (LFC), which is a layer of caching that stores frequently accessed data in the local memory of the Neon compute. Like Postgres [shared buffers](/docs/reference/glossary#shared-buffers), the LFC reduces latency and improves query performance by minimizing the need to fetch data from Neon storage. The LFC acts as an add-on or extension of Postgres shared buffers. In Neon computes, the `shared_buffers` parameter [scales with compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size). The LFC extends the cache memory to approximately 75% of your compute's RAM. To view the LFC size for each Neon compute size, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+Neon computes have a Local File Cache (LFC), which is a layer of caching that stores frequently accessed data in the local memory of the Neon compute. Like Postgres [shared buffers](/docs/reference/glossary#shared-buffers), the LFC reduces latency and improves query performance by minimizing the need to fetch data from Neon storage. The LFC acts as an add-on or extension of Postgres shared buffers. In Neon computes, the `shared_buffers` parameter [scales with compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size). The LFC extends the cache memory to approximately 75% of your compute's RAM. To view the LFC size for each Neon compute size, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 
 When data is requested, Postgres checks shared buffers first, then the LFC. If the requested data is not found in the LFC, it is read from Neon storage. Shared buffers and the LFC both cache your most recently accessed data, but they may not cache exactly the same data due to different cache eviction patterns. The LFC is also much larger than shared buffers, so it stores significantly more data.
 
@@ -74,9 +74,9 @@ Remember that Postgres checks shared buffers first before it checks your compute
 
 ## View LFC metrics with EXPLAIN ANALYZE
 
-You can also use `EXPLAIN ANALYZE` with the `FILECACHE` option to view LFC cache hit and miss data. Installing the `neon` extension is not required. For example:
+You can also use `EXPLAIN ANALYZE` with the `FILECACHE` and `PREFETCH` options to view LFC cache hit and miss data, as well as prefetch statistics. Installing the `neon` extension is not required. For example:
 
-```sql {6,12,16,22}
+```sql {5,6,11,12,15,16,20,21}
 EXPLAIN (ANALYZE,BUFFERS,PREFETCH,FILECACHE) SELECT COUNT(*) FROM pgbench_accounts;
 
  Finalize Aggregate  (cost=214486.94..214486.95 rows=1 width=8) (actual time=5195.378..5196.034 rows=1 loops=1)
@@ -99,6 +99,22 @@ EXPLAIN (ANALYZE,BUFFERS,PREFETCH,FILECACHE) SELECT COUNT(*) FROM pgbench_accoun
                      Prefetch: hits=0 misses=1865 expired=0 duplicates=0
                      File cache: hits=141826 misses=1865
 ```
+
+### PREFETCH option
+
+The `PREFETCH` option provides information about Neon's prefetching mechanism, which predicts which pages will be needed soon and sends prefetch requests to the page server before the page is actually requested by the executor. This helps reduce latency by having data ready when it's needed. The PREFETCH option includes the following metrics:
+
+- `hits` - Number of pages received from the page server before actually requested by the executor. Prefetch distance is controlled by the `effective_io_concurrency` parameter. The larger this value, the more likely the page server will complete the request before it's needed. However, it should not be larger than `neon.prefetch_buffer_size`.
+- `misses` - Number of accessed pages that were not prefetched. Prefetch is not implemented for all plan nodes, and even for supported nodes (like sequential scan), some mispredictions can occur.
+- `expired` - Pages that were updated since the prefetch request was sent, or results that weren't used because the executor didn't need the page (for example, due to a `LIMIT` clause in the query).
+- `duplicates` - Multiple prefetch requests for the same page. For some nodes like sequential scan, predicting next pages is straightforward. However, for index scans that prefetch referenced heap pages, index entries can have multiple references to the same heap page, resulting in duplicate prefetch requests.
+
+### FILECACHE option
+
+The `FILECACHE` option provides information about the Local File Cache (LFC) usage during query execution:
+
+- `hits` - Number of accessed pages found in the LFC.
+- `misses` - Number of accessed pages not found in the LFC.
 
 ## Views for Neon internal use
 

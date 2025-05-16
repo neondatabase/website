@@ -2,7 +2,7 @@
 title: Time Travel
 subtitle: Learn how to query point-in-time connections against your data's history
 enableTableOfContents: true
-updatedOn: '2025-04-08T22:55:27.448Z'
+updatedOn: '2025-05-11T11:23:50.621Z'
 ---
 
 To help review your data's history, Time Travel lets you connect to any selected point in time within your restore window and then run queries against that connection. This capability is part of Neon's instant restore feature, which maintains a history of changes through Write-Ahead Log (WAL) records.
@@ -184,4 +184,4 @@ The ephemeral endpoints used to run your Time Travel queries do contribute to yo
 A couple of details to note:
 
 - The endpoints are shortlived. They are suspended 30 seconds after you stop querying.
-- Ephemeral endpoints are created with a .50 CU compute size, which has 0.50 vCPU size with 2 GB of RAM. This is Neon's second smallest compute size. For more about compute sizes in Neon, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute). For more about compute usage and billing, see [Usage metrics — Compute](/docs/introduction/usage-metrics#compute).
+- Ephemeral endpoints are created with a .50 CU compute size, which has 0.50 vCPU size with 2 GB of RAM. This is Neon's second smallest compute size. For more about compute sizes in Neon, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute). For more about compute usage and billing, see [Usage metrics — Compute](/docs/introduction/usage-metrics#compute).

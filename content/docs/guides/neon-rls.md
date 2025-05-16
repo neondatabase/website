@@ -3,7 +3,7 @@ title: About Neon RLS
 subtitle: Secure your application at the database level using Postgres's Row-Level
   Security
 enableTableOfContents: true
-updatedOn: '2025-03-06T15:24:01.906Z'
+updatedOn: '2025-05-09T22:54:03.218Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize
   - /docs/guides/neon-authorize
@@ -204,7 +204,7 @@ Here is a non-exhaustive list of authentication providers. The table shows which
 | ----------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
 | **Clerk**                                 | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://{yourClerkDomain}/.well-known/jwks.json`</span>                                           | [docs](https://clerk.com/docs/backend-requests/making/jwt-templates#create-a-jwt-template)                                    |
 | **Stack Auth**                            | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://api.stack-auth.com/api/v1/projects/{project_id}/.well-known/jwks.json`</span>             | [docs](https://sage.storia.ai/stack-auth)                                                                                     |
-| **Auth0**                                 | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://{yourDomain}/.well-known/jwks.json`</span>                                                | [docs](https://auth0.com/docs/security/tokens/json-web-tokens/json-web-key-sets)                                              |
+| **Auth0\***                               | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://{yourDomain}/.well-known/jwks.json`</span>                                                | [docs](https://auth0.com/docs/security/tokens/json-web-tokens/json-web-key-sets)                                              |
 | **Firebase Auth / GCP Identity Platform** | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com`</span> | [docs](https://cloud.google.com/api-gateway/docs/authenticating-users-firebase)                                               |
 | **Stytch**                                | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://{live_or_test}.stytch.com/v1/sessions/jwks/{project-id}`</span>                           | [docs](https://stytch.com/docs/api/jwks-get)                                                                                  |
 | **Keycloak**                              | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://{your-keycloak-domain}/auth/realms/{realm-name}/protocol/openid-connect/certs`</span>     | [docs](https://documentation.cloud-iam.com/how-to-guides/configure-remote-jkws.html)                                          |
@@ -216,6 +216,8 @@ Here is a non-exhaustive list of authentication providers. The table shows which
 | **PropelAuth**                            | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://{PROPEL_AUTH_URL}/.well-known/jwks.json`</span>                                           | [docs](https://docs.propelauth.com/guides-and-examples/guides/access-tokens)                                                  |
 | **SuperTokens**                           | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://{YOUR_SUPER_TOKENS_CORE_CONNECTION_URI}/.well-known/jwks.json`</span>                     | [docs](https://supertokens.com/docs/quickstart/integrations/aws-lambda/session-verification/using-jwt-authorizer)             |
 | **WorkOS**                                | ✅         | <span style={{ whiteSpace: "normal", wordBreak: "break-word" }}>`https://api.workos.com/sso/jwks/{YOUR_CLIENT_ID}`</span>                                          | [docs](https://workos.com/docs/reference/user-management/session-tokens/jwks)                                                 |
+
+<small>\* If you're using an older Auth0 project, you might encounter [this issue](https://community.auth0.com/t/certificate-thumbprint-is-longer-than-20-bytes/7794/9), resulting in a `jwk not found` error when working with Neon RLS. To fix this, go to your Auth0 tenant settings and rotate your signing keys under the **Signing Keys** tab.</small>
 
 ### JWT Audience Checks
 
