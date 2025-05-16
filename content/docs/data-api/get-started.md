@@ -46,8 +46,6 @@ To secure your Data API, create Row-Level Security (RLS) policies for your table
 
 When you call the `/data-api` endpoint described above, we automatically provision [**Neon Auth**](/docs/guides/neon-auth) for that project. We set up the Data API's authentication to match this instance of Neon Auth.
 
-When you enable the Data API — either by calling the `/data-api` endpoint or from the Console — we automatically provision [**Neon Auth**](/docs/guides/neon-auth) for your project if it isn't already set up. If your project already has Neon Auth enabled, the Data API will re-use your existing configuration.
-
 This means you need to send a valid JWT from Neon Auth with every Data API request that is protected by RLS policies.
 
 ### Third-party auth
