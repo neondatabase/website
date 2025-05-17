@@ -39,6 +39,8 @@ updatedOn: '2025-05-14T18:45:10.645Z'
 
 <a href="/docs/guides/react" title="React" description="Connect a React application to Neon" icon="react"></a>
 
+<a href="/docs/guides/redwoodsdk" title="RedwoodSDK" description="Connect a RedwoodSDK application to Neon" icon="redwoodsdk"></a>
+
 <a href="/docs/guides/reflex" title="Reflex" description="Build Python Apps with Reflex and Neon" icon="reflex"></a>
 
 <a href="/docs/guides/remix" title="Remix" description="Connect a Remix application to Neon" icon="remix"></a>
@@ -52,5 +54,7 @@ updatedOn: '2025-05-14T18:45:10.645Z'
 <a href="/docs/guides/sqlalchemy" title="SQLAlchemy" description="Connect a SQLAlchemy application to Neon" icon="sqlalchemy"></a>
 
 <a href="/docs/guides/sveltekit" title="Sveltekit" description="Connect a Sveltekit application to Neon" icon="svelte"></a>
+
+<a href="/docs/guides/vue" title="Vue" description="Connect a Vue.js application to Neon" icon="vue"></a>
 
 </TechCards>
