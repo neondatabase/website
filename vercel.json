@@ -2,7 +2,7 @@
   "crons": [
     {
       "path": "/api/clean-up-postgres",
-      "schedule": "0 * * * *"
+      "schedule": "0 0 * * *"
     }
   ]
 }
