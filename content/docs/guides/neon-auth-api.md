@@ -1,7 +1,7 @@
 ---
 title: Manage Neon Auth using the API
 enableTableOfContents: true
-updatedOn: '2025-04-17T16:06:46.405Z'
+updatedOn: '2025-05-16T19:06:06.836Z'
 tag: beta
 ---
 
@@ -9,8 +9,9 @@ tag: beta
 
 <InfoBlock>
   <DocsList title="Related docs" theme="docs">
-    <a href="/docs/guides/neon-auth">About Neon Auth</a>
-    <a href="/docs/guides/neon-auth-tutorial">Neon Auth Tutorial</a>
+    <a href="/docs/guides/neon-auth">Get started</a>
+    <a href="/docs/guides/neon-auth-demo">Tutorial</a>
+    <a href="/docs/guides/neon-auth-how-it-works">How it works</a>
   </DocsList>
 
   <DocsList title="Sample project" theme="repo">

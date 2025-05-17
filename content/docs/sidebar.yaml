@@ -888,16 +888,36 @@
 - section: Auth & access
   items:
     - title: Neon Auth
-      slug: guides/neon-auth
       icon: auth
       tag: beta
+      slug: guides/neon-auth
       items:
-        - title: About
-          slug: guides/neon-auth
-        - title: Tutorial
-          slug: guides/neon-auth-tutorial
-        - title: API
-          slug: guides/neon-auth-api
+        - section: Get started
+          items:
+            - title: Get started
+              slug: guides/neon-auth
+        - section: Guides
+          items:
+            - title: Tutorial
+              slug: guides/neon-auth-demo
+            - title: Creating users
+              slug: guides/neon-auth-create-users
+            - title: Claiming a project
+              slug: guides/neon-auth-claim-project
+        - section: Concepts
+          items:
+            - title: How Neon Auth works
+              slug: guides/neon-auth-how-it-works
+            - title: Concepts
+              slug: guides/neon-auth-tutorial
+            - title: Best practices & FAQ
+              slug: guides/neon-auth-best-practices
+        - section: Reference
+          items:
+            - title: Permissions & roles
+              slug: guides/neon-auth-permissions-roles
+            - title: Neon Auth API Reference
+              slug: guides/neon-auth-api
     - title: Neon RLS
       icon: lock
       slug: guides/neon-rls
@@ -944,6 +964,12 @@
               slug: guides/neon-rls-workos
             - title: Custom JWT
               slug: guides/neon-rls-custom-jwt
+- section: Data API
+  items:
+    - title: Data API
+      slug: data-api/get-started
+      icon: api
+      tag: new
 - section: Workflows
   items:
     - title: Data anonymization
