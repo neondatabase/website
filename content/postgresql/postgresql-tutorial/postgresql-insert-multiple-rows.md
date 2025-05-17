@@ -71,7 +71,7 @@ CREATE TABLE contacts (
 
 ### 1\) Basic inserting multiple rows example
 
-The following statement uses the `INSERT` statement to insert three rows into the `links` table:
+The following statement uses the `INSERT` statement to insert three rows into the `contacts` table:
 
 ```sql
 INSERT INTO contacts (first_name, last_name, email)
