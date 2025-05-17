@@ -88,7 +88,7 @@ You can try this optimization yourself by downloading our [Get started with Knex
 
 <DetailIconCards>
 
-<a href="https://github.com/neondatabase/examples/tree/main/with-knex" description="Get started with Knex and Neon" icon="github">Get started with Knex and Neon</a>
+<a href="https://github.com/crialabs/examples/tree/main/with-knex" description="Get started with Knex and Neon" icon="github">Get started with Knex and Neon</a>
 
 </DetailIconCards>
 

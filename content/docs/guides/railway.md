@@ -162,7 +162,7 @@ To delete your Neon project, follow the steps outlined in the Neon documentation
 You can find the source code for the application described in this guide on GitHub.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/examples/tree/main/deploy-with-railway" description="Connect a Neon Postgres database to your Node application deployed with Railway" icon="github">Use Neon Postgres with Railway</a>
+<a href="https://github.com/crialabs/examples/tree/main/deploy-with-railway" description="Connect a Neon Postgres database to your Node application deployed with Railway" icon="github">Use Neon Postgres with Railway</a>
 </DetailIconCards>
 
 ## Resources

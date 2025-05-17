@@ -5,16 +5,14 @@ import { gql, graphQLClient } from 'lib/graphQLClient';
 // eslint-disable-next-line import/prefer-default-export
 export async function GET() {
   const topbarQuery = gql`
-    query GlobalFields {
-      globalFields {
-        globalFields {
-          topbar {
-            text
-            link {
-              title
-              target
-              url
-            }
+    query TopBar {
+      acfOptionsTopBar {
+        topbar {
+          text
+          link {
+            title
+            target
+            url
           }
         }
       }
@@ -23,7 +21,7 @@ export async function GET() {
 
   try {
     const data = await graphQLClient.request(topbarQuery);
-    const topbarData = data?.globalFields?.globalFields?.topbar || { text: '', link: null };
+    const topbarData = data?.acfOptionsTopBar?.topbar || { text: '', link: null };
     const response = NextResponse.json(topbarData, { status: 200 });
     return response;
   } catch (error) {

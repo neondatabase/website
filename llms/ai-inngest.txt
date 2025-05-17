@@ -99,8 +99,8 @@ Configure the Inngests Neon integration to trigger AI workflows from your Neon d
 
 ## Starter apps
 
-Hackable, fully-featured, pre-built [starter apps](https://github.com/neondatabase/examples/tree/main/ai/inngest) to get you up and running with Inngest and Postgres.
+Hackable, fully-featured, pre-built [starter apps](https://github.com/crialabs/examples/tree/main/ai/inngest) to get you up and running with Inngest and Postgres.
 
-- [RAG starter (OpenAI + Inngest)](https://github.com/neondatabase/examples/tree/main/ai/inngest/rag-starter-nextjs): A Next.js RAG starter app built with OpenAI and Inngest
+- [RAG starter (OpenAI + Inngest)](https://github.com/crialabs/examples/tree/main/ai/inngest/rag-starter-nextjs): A Next.js RAG starter app built with OpenAI and Inngest
 - [multi-tenant RAG (OpenAI + Inngest)](https://github.com/inngest/multi-tenant-rag-example): A Next.js contacts importer multi-tenant RAG built with OpenAI and Inngest
-- [Auto-embedding (OpenAI + Inngest)](https://github.com/neondatabase/examples/tree/main/ai/inngest/auto-embeddings-nextjs): A Next.js app example of auto-embedding with Inngest
+- [Auto-embedding (OpenAI + Inngest)](https://github.com/crialabs/examples/tree/main/ai/inngest/auto-embeddings-nextjs): A Next.js app example of auto-embedding with Inngest

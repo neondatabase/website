@@ -58,7 +58,7 @@ For now, if you need to implement public access in your application, we recommen
 
 ### Using Neon RLS with custom JWTs
 
-If you don't want to use a third-party authentication provider, you can build your application to generate and sign its own JWTs. Here's a sample application that demonstrates this approach: [See demo](https://github.com/neondatabase/authorize-demo-custom-jwt)
+If you don't want to use a third-party authentication provider, you can build your application to generate and sign its own JWTs. Here's a sample application that demonstrates this approach: [See demo](https://github.com/crialabs/authorize-demo-custom-jwt)
 
 ## Before and after Neon RLS
 
@@ -220,16 +220,16 @@ The configuration of the expected audience can be done via the Neon RLS UI or vi
 You can use these sample ToDo applications to get started using Neon RLS with popular authentication providers.
 
 
-- [Clerk (Frontend) + Neon RLS](https://github.com/neondatabase/examples/tree/main/with-clerk-auth)
-- [Stack Auth + Neon RLS](https://github.com/neondatabase/examples/tree/main/with-stack-auth)
-- [Auth0 + Neon RLS](https://github.com/neondatabase/examples/tree/main/with-auth0)
-- [Stytch + Neon RLS](https://github.com/neondatabase/examples/tree/main/with-stytch)
-- [Azure AD B2C + Neon RLS](https://github.com/neondatabase/examples/tree/main/with-azure-ad-b2c)
-- [Descope + Neon RLS](https://github.com/neondatabase/examples/tree/main/with-descope)
-- [PropelAuth + Neon RLS](https://github.com/neondatabase/examples/tree/main/with-propelauth)
-- [SuperTokens + Neon RLS](https://github.com/neondatabase/examples/tree/main/with-supertokens)
-- [WorkOS + Neon RLS](https://github.com/neondatabase/examples/tree/main/with-workos)
-- [Neon RLS with custom JWTs](https://github.com/neondatabase/authorize-demo-custom-jwt)
+- [Clerk (Frontend) + Neon RLS](https://github.com/crialabs/examples/tree/main/with-clerk-auth)
+- [Stack Auth + Neon RLS](https://github.com/crialabs/examples/tree/main/with-stack-auth)
+- [Auth0 + Neon RLS](https://github.com/crialabs/examples/tree/main/with-auth0)
+- [Stytch + Neon RLS](https://github.com/crialabs/examples/tree/main/with-stytch)
+- [Azure AD B2C + Neon RLS](https://github.com/crialabs/examples/tree/main/with-azure-ad-b2c)
+- [Descope + Neon RLS](https://github.com/crialabs/examples/tree/main/with-descope)
+- [PropelAuth + Neon RLS](https://github.com/crialabs/examples/tree/main/with-propelauth)
+- [SuperTokens + Neon RLS](https://github.com/crialabs/examples/tree/main/with-supertokens)
+- [WorkOS + Neon RLS](https://github.com/crialabs/examples/tree/main/with-workos)
+- [Neon RLS with custom JWTs](https://github.com/crialabs/authorize-demo-custom-jwt)
 
 
 ## Current limitations

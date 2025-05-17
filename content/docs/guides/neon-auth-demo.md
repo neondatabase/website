@@ -12,22 +12,22 @@ updatedOn: '2025-05-16T19:06:06.841Z'
   </DocsList>
 
   <DocsList title="Sample project" theme="repo">
-    <a href="https://github.com/neondatabase-labs/neon-auth-demo-app">Neon Auth Demo App</a>
+    <a href="https://github.com/crialabs-labs/neon-auth-demo-app">Neon Auth Demo App</a>
   </DocsList>
 </InfoBlock>
 
-In this tutorial, we'll walk through some user authentication flows using our [demo todos](https://github.com/neondatabase-labs/neon-auth-demo-app) application, showing how Neon Auth automatically syncs user profiles to your database, and how that can simplify your code.
+In this tutorial, we'll walk through some user authentication flows using our [demo todos](https://github.com/crialabs-labs/neon-auth-demo-app) application, showing how Neon Auth automatically syncs user profiles to your database, and how that can simplify your code.
 
 <FeatureBetaProps feature_name="Neon Auth" />
 
 ## Prerequisites
 
-Follow the readme to set up the [Neon Auth Demo App](https://github.com/neondatabase-labs/neon-auth-demo-app): Next.js + Drizzle + Stack Auth
+Follow the readme to set up the [Neon Auth Demo App](https://github.com/crialabs-labs/neon-auth-demo-app): Next.js + Drizzle + Stack Auth
 
 > _Use the keys provided by Neon Auth in your project's **Auth** page rather than creating a separate Stack Auth project._
 
 ```bash
-git clone https://github.com/neondatabase-labs/neon-auth-demo-app.git
+git clone https://github.com/crialabs-labs/neon-auth-demo-app.git
 ```
 
 <Steps>

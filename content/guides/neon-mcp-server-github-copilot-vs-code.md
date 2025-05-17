@@ -9,7 +9,7 @@ updatedOn: '2025-05-10T00:00:00.000Z'
 
 GitHub Copilot has changed how developers write code, but when combined with an [MCP](https://modelcontextprotocol.io/) (Model Copilot Protocol) server, it also connects your services. With MCP, Copilot can create database tables, understand your database schema and generate relevant code for your API, data models, or business logic.
 
-In this guide, you'll learn how to use the [**Neon Serverless Postgres MCP server**](https://github.com/neondatabase-labs/mcp-server-neon) with **GitHub Copilot in VS Code** to build a sample REST API quickly. We'll walk through how to create an **Azure Function** that fetches data from a **Neon database**, all without writing a single line of code manually.
+In this guide, you'll learn how to use the [**Neon Serverless Postgres MCP server**](https://github.com/crialabs-labs/mcp-server-neon) with **GitHub Copilot in VS Code** to build a sample REST API quickly. We'll walk through how to create an **Azure Function** that fetches data from a **Neon database**, all without writing a single line of code manually.
 
 ![GitHub Copilot with Neon MCP Server in VS Code demo](/docs/guides/github-copilot-neon-mcp-server/github-copilot-with-neon-mcp-server-demo.gif)
 
@@ -17,7 +17,7 @@ In this guide, you'll learn how to use the [**Neon Serverless Postgres MCP serve
 
 AI agents are no longer just helping write code—they’re creating and managing databases. When a chatbot logs a customer conversation, or a new region spins up in the Azure cloud, or a new user signs up, an AI agent can automatically create a database in seconds. No need to open a dashboard or call an API. This is the next evolution of software development: **infrastructure as intent**. With tools like database MCP servers, agents can now generate real backend services as easily as they generate code.
 
-GitHub Copilot becomes your full-stack teammate. It can answer database-related questions, fetch your database connection string, update environment variables in your Azure Function, generate SQL queries to populate tables with mock data, and even help you create new databases or tables on the fly. All directly from your editor, with natural language prompts. Neon has a dedicated [MCP server](https://github.com/neondatabase-labs/mcp-server-neon) that makes it possible for Copilot to directly understand the structure of your Postgres database.
+GitHub Copilot becomes your full-stack teammate. It can answer database-related questions, fetch your database connection string, update environment variables in your Azure Function, generate SQL queries to populate tables with mock data, and even help you create new databases or tables on the fly. All directly from your editor, with natural language prompts. Neon has a dedicated [MCP server](https://github.com/crialabs-labs/mcp-server-neon) that makes it possible for Copilot to directly understand the structure of your Postgres database.
 
 Let's get started with using the Neon MCP server and GitHub Copilot.
 
@@ -39,7 +39,7 @@ Visit the [Neon on Azure Marketplace](https://portal.azure.com/#view/Azure_Mark
 
 ### Install the Neon MCP Server for VS Code
 
-Neon MCP Server offers two options for connecting your VS Code MCP client to Neon. We will use the [Remote Hosted MCP Server option](https://github.com/neondatabase-labs/mcp-server-neon?tab=readme-ov-file#option-1-remote-hosted-mcp-server-preview). This is the simplest setup—no need to install anything locally or configure a Neon API key in your client.
+Neon MCP Server offers two options for connecting your VS Code MCP client to Neon. We will use the [Remote Hosted MCP Server option](https://github.com/crialabs-labs/mcp-server-neon?tab=readme-ov-file#option-1-remote-hosted-mcp-server-preview). This is the simplest setup—no need to install anything locally or configure a Neon API key in your client.
 
 Add the following Neon MCP server configuration to your [user settings](https://code.visualstudio.com/docs/copilot/chat/mcp-servers#_add-an-mcp-server-to-your-user-settings) in VS Code:
 

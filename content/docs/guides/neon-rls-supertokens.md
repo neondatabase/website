@@ -11,7 +11,7 @@ redirectFrom:
 
 <InfoBlock>
 <DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/supertokens-nestjs-solidjs-drizzle-neon-rls">SuperTokens + Neon RLS</a>
+  <a href="https://github.com/crialabs-labs/supertokens-nestjs-solidjs-drizzle-neon-rls">SuperTokens + Neon RLS</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
@@ -24,7 +24,7 @@ Use SuperTokens with Neon RLS to add secure, database-level authorization to you
 
 ## How it works
 
-SuperTokens handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon RLS. Neon RLS validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
+SuperTokens handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon RLS. Neon RLS validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/crialabs/pg_session_jwt), which you'll install as part of this guide.
 
 ## Prerequisites
 
@@ -69,7 +69,7 @@ At this point, you can use the **Get Started** setup steps from RLS in Neon to c
 
 ### 3. Install the pg_session_jwt extension in your database
 
-Neon RLS uses the [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt) extension to handle authenticated sessions through JSON Web Tokens (JWTs). This extension allows secure transmission of authentication data from your application to Postgres, where you can enforce Row-Level Security (RLS) policies based on the user's identity.
+Neon RLS uses the [pg_session_jwt](https://github.com/crialabs/pg_session_jwt) extension to handle authenticated sessions through JSON Web Tokens (JWTs). This extension allows secure transmission of authentication data from your application to Postgres, where you can enforce Row-Level Security (RLS) policies based on the user's identity.
 
 To install the extension in the `neondb` database, run:
 

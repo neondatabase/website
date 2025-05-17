@@ -6,7 +6,7 @@
 
 - [Neon serverless driver HTML](https://neon.tech/docs/serverless/serverless-driver): The original HTML version of this documentation
 
-The [Neon serverless driver](https://github.com/neondatabase/serverless) is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over **HTTP** or **WebSockets** in place of TCP. The driver's low-latency capability is due to [message pipelining and other optimizations](https://neon.tech/blog/quicker-serverless-postgres).
+The [Neon serverless driver](https://github.com/crialabs/serverless) is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over **HTTP** or **WebSockets** in place of TCP. The driver's low-latency capability is due to [message pipelining and other optimizations](https://neon.tech/blog/quicker-serverless-postgres).
 
 When to query over HTTP vs WebSockets:
 
@@ -37,7 +37,7 @@ The examples that follow assume that your database connection string is assigned
 
 ## Use the driver over HTTP
 
-The Neon serverless driver uses the [neon](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#neon-function) function for queries over HTTP.
+The Neon serverless driver uses the [neon](https://github.com/crialabs/serverless/blob/main/CONFIG.md#neon-function) function for queries over HTTP.
 
 You can use raw SQL queries or tools such as [Drizzle-ORM](https://orm.drizzle.team/docs/quick-postgresql/neon), [kysely](https://github.com/kysely-org/kysely), [Zapatos](https://jawj.github.io/zapatos/), and others for type safety.
 

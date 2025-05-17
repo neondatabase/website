@@ -233,7 +233,7 @@ You can find the source code for the application described in this guide on GitH
 
 <DetailIconCards>
 
-<a href="https://github.com/neondatabase/examples/tree/main/with-nestjs" description="Get started with NestJS and Neon" icon="github">Get started with NestJS and Neon</a>
+<a href="https://github.com/crialabs/examples/tree/main/with-nestjs" description="Get started with NestJS and Neon" icon="github">Get started with NestJS and Neon</a>
 
 </DetailIconCards>
 

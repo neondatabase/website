@@ -62,7 +62,7 @@ You only need the **Project connection string** and **Model Deployment Name** fr
 
 Once you have all three values on hand: **Neon connection string**, **Project connection string,** and **Model Deployment Name,** you are ready to set up the Python project to create an Agent.
 
-All the code and sample data are available in this [GitHub repository](https://github.com/neondatabase-labs/neon-azure-ai-agent-service-get-started). You can clone or download the project.
+All the code and sample data are available in this [GitHub repository](https://github.com/crialabs-labs/neon-azure-ai-agent-service-get-started). You can clone or download the project.
 
 ## Project Environment Setup
 
@@ -111,7 +111,7 @@ tenant_456	2025-03-31	950	         24.8
 tenant_456	2025-03-30	2200	     26.0
 ```
 
-Run `python load_usage_data.py` [Python script](https://github.com/neondatabase-labs/neon-azure-ai-agent-service-get-started/blob/main/load_usage_data.py) to create and populate the `usage_data` table in your Neon Serverless Postgres instance:
+Run `python load_usage_data.py` [Python script](https://github.com/crialabs-labs/neon-azure-ai-agent-service-get-started/blob/main/load_usage_data.py) to create and populate the `usage_data` table in your Neon Serverless Postgres instance:
 
 ```python
 # load_usage_data.py file
@@ -200,7 +200,7 @@ print("✅ usage_data table created and mock data inserted.")
 
 ## Create a Postgres Tool for the Agent
 
-Next, we configure an AI agent tool to retrieve data from Postgres. The Python script [`billing_agent_tools.py`](https://github.com/neondatabase-labs/neon-azure-ai-agent-service-get-started/blob/main/billing_agent_tools.py) contains:
+Next, we configure an AI agent tool to retrieve data from Postgres. The Python script [`billing_agent_tools.py`](https://github.com/crialabs-labs/neon-azure-ai-agent-service-get-started/blob/main/billing_agent_tools.py) contains:
 
 - The function `billing_anomaly_summary()` that:
   - Pulls usage data from Neon.
@@ -272,7 +272,7 @@ user_functions = [billing_anomaly_summary]
 
 ## Create and Configure the AI Agent
 
-Now we'll set up the AI agent and integrate it with our Neon Postgres tool using the **Azure AI Agent Service SDK.** The [Python script](https://github.com/neondatabase-labs/neon-azure-ai-agent-service-get-started/blob/main/billing_anomaly_agent.py) does the following:
+Now we'll set up the AI agent and integrate it with our Neon Postgres tool using the **Azure AI Agent Service SDK.** The [Python script](https://github.com/crialabs-labs/neon-azure-ai-agent-service-get-started/blob/main/billing_anomaly_agent.py) does the following:
 
 - **Creates the agent**
   Instantiates an AI agent using the selected model (`gpt-4o`, for example), adds tool access, and sets instructions that tell the agent how to behave (e.g., “You are a helpful SaaS assistant…”).

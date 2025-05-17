@@ -64,7 +64,7 @@ Being a fully managed service means that Neon provides high availability without
 
 Neon is not the first to offer separation of storage and compute for Postgres. AWS Aurora is probably the most famous example — but it's proprietary and tied to AWS’s internal infrastructure.
 
-We believe we have an opportunity to define the standard for cloud Postgres. We carefully designed our storage, focusing on cloud independence, performance, manageability, DevX, and cost. We chose the most permissive open-source license, Apache 2.0, and invited the world to participate. You can already build and run your own self-hosted instance of Neon. Check out our [neon GitHub repository](https://github.com/neondatabase) and the [#self-hosted](https://discord.com/channels/1176467419317940276/1184894814769127464) channel on our Discord server.
+We believe we have an opportunity to define the standard for cloud Postgres. We carefully designed our storage, focusing on cloud independence, performance, manageability, DevX, and cost. We chose the most permissive open-source license, Apache 2.0, and invited the world to participate. You can already build and run your own self-hosted instance of Neon. Check out our [neon GitHub repository](https://github.com/crialabs) and the [#self-hosted](https://discord.com/channels/1176467419317940276/1184894814769127464) channel on our Discord server.
 
 ## Neon doesn't lock you in
 

@@ -227,6 +227,6 @@ The Neon MCP Server enables natural language interaction with Neon Postgres data
 - [MCP Protocol](https://modelcontextprotocol.org)
 - [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api)
 - [Neon API Keys](/docs/manage/api-keys#creating-api-keys)
-- [Neon MCP server GitHub](https://github.com/neondatabase/mcp-server-neon)
+- [Neon MCP server GitHub](https://github.com/crialabs/mcp-server-neon)
 
 <NeedHelp/>

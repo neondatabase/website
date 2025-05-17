@@ -15,7 +15,7 @@ tag: beta
   </DocsList>
 
   <DocsList title="Sample project" theme="repo">
-    <a href="https://github.com/neondatabase-labs/neon-auth-demo-app">Neon Auth Demo App</a>
+    <a href="https://github.com/crialabs-labs/neon-auth-demo-app">Neon Auth Demo App</a>
   </DocsList>
 </InfoBlock>
 

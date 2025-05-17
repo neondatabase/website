@@ -138,4 +138,4 @@ class Program
 
 Explore examples and sample code for using SemanticKernel with Neon Serverless Postgres:
 
-- [RAG .NET console app (Azure OpenAI + Semantic Kernel)](https://github.com/neondatabase-labs/neon-semantic-kernel-examples): A .NET RAG example app built with Azure OpenAI and Semantic Kernel
+- [RAG .NET console app (Azure OpenAI + Semantic Kernel)](https://github.com/crialabs-labs/neon-semantic-kernel-examples): A .NET RAG example app built with Azure OpenAI and Semantic Kernel

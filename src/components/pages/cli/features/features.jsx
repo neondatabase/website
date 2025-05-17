@@ -26,7 +26,7 @@ const items = [
     title: 'Contribute',
     description: 'Neon CLI is open source. Contribute&nbsp;to our GitHub&nbsp;repo.',
     linkText: 'Contribute to Neon CLI',
-    url: 'https://github.com/neondatabase/neonctl',
+    url: 'https://github.com/crialabs/neonctl',
   },
 ];
 

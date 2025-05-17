@@ -16,7 +16,7 @@ const items = [
     imageHeight: 548,
     title: 'Postgres in under a second: Instantly provison a Postgres database on Neon',
     demoLink: '/demos/instant-postgres',
-    sourceLink: 'https://github.com/neondatabase/instant-postgres',
+    sourceLink: 'https://github.com/crialabs/instant-postgres',
   },
   {
     image: trackingLatencyIllustration,
@@ -25,7 +25,7 @@ const items = [
     title:
       "Tracking the latency between cloud hosting platforms and Neon's Postgres database regions",
     demoLink: '/demos/regional-latency',
-    sourceLink: 'https://github.com/neondatabase/regional-latency',
+    sourceLink: 'https://github.com/crialabs/regional-latency',
   },
   {
     image: databaseCopyIllustration,
@@ -34,7 +34,7 @@ const items = [
     title:
       'Create a copy of your database, make changes to it, and restore it to the original state in milliseconds',
     demoLink: 'https://neon-demos-branching.vercel.app/',
-    sourceLink: 'https://github.com/neondatabase/branching-demo',
+    sourceLink: 'https://github.com/crialabs/branching-demo',
   },
 ];
 

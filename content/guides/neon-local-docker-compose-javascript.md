@@ -23,13 +23,13 @@ To demonstrate, I’ve built a simple React + Vite + Express app. It has one rou
 
 You can find the project here:
 
-- [neon-local-example-application](https://github.com/neondatabase-labs/neon-local-example-react-express-application)
+- [neon-local-example-application](https://github.com/crialabs-labs/neon-local-example-react-express-application)
 
 ## 2. Setup
 
 ### Environment variables
 
-You’ll need to configure the following environment variables. They are also listed in the example application's repository [README](https://github.com/neondatabase-labs/neon-local-example-react-express-application).
+You’ll need to configure the following environment variables. They are also listed in the example application's repository [README](https://github.com/crialabs-labs/neon-local-example-react-express-application).
 
 | Variable          | Description                    | Example / Value               |
 | ----------------- | ------------------------------ | ----------------------------- |
@@ -122,7 +122,7 @@ services:
       - dev
 ```
 
-You can view the `src` of this file in the repository: [docker-compose.yml](https://github.com/neondatabase-labs/neon-local-example-react-express-application/blob/main/docker-compose.yml)
+You can view the `src` of this file in the repository: [docker-compose.yml](https://github.com/crialabs-labs/neon-local-example-react-express-application/blob/main/docker-compose.yml)
 
 ## 6. Connecting to the database
 
@@ -145,7 +145,7 @@ const connectionString =
 export const sql = neon(connectionString);
 ```
 
-You can view the `src` of this file in the repository: [src/db.js](https://github.com/neondatabase-labs/neon-local-example-react-express-application/blob/main/src/db.js):
+You can view the `src` of this file in the repository: [src/db.js](https://github.com/crialabs-labs/neon-local-example-react-express-application/blob/main/src/db.js):
 
 ### node-postgres
 
@@ -182,4 +182,4 @@ And that’s it. By default, Neon Local handles creating and deleting a branch w
 
 Neon Local simplifies the management of temporary database environments, making it easier to work with isolated instances for testing or short-term use. While it’s **not** a fully "local" database, it streamlines the workflow, especially for CI/CD pipelines where short-lived environments are needed to run tests but don’t need to stick around.
 
-Neon Local is still in its early stages, with several improvements on the way. But for now, it could be exactly what you need to streamline your workflows. Give it a try today and [share your feedback with us](https://github.com/neondatabase-labs/neon_local).
+Neon Local is still in its early stages, with several improvements on the way. But for now, it could be exactly what you need to streamline your workflows. Give it a try today and [share your feedback with us](https://github.com/crialabs-labs/neon_local).

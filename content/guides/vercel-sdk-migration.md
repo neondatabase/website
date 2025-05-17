@@ -7,7 +7,7 @@ createdAt: '2024-10-28T00:00:00.000Z'
 updatedAt: '2024-10-28T00:00:00.000Z'
 ---
 
-With Vercel Postgres transitioning to Neon's native integration in the [Vercel Marketplace](https://vercel.com/blog/introducing-the-vercel-marketplace), now is the perfect time to migrate from the Vercel Postgres SDK [(@vercel/postgres)](https://vercel.com/docs/storage/vercel-postgres/sdk) to the [Neon serverless driver](https://github.com/neondatabase/serverless).
+With Vercel Postgres transitioning to Neon's native integration in the [Vercel Marketplace](https://vercel.com/blog/introducing-the-vercel-marketplace), now is the perfect time to migrate from the Vercel Postgres SDK [(@vercel/postgres)](https://vercel.com/docs/storage/vercel-postgres/sdk) to the [Neon serverless driver](https://github.com/crialabs/serverless).
 
 ## Why migrate?
 
@@ -169,6 +169,6 @@ For most cases, using neon serverless driver is straightforward without needing 
 
 - **wsProxy**: This option is for connecting via a WebSocket proxy deployed in front of your your own Postgres instance, which allows you to use the Neon serverless driver with a local development environment.
 
-For more information about these options, see [Advanced configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#advanced-configuration).
+For more information about these options, see [Advanced configuration](https://github.com/crialabs/serverless/blob/main/CONFIG.md#advanced-configuration).
 
 <NeedHelp/>

@@ -395,7 +395,7 @@ As a next step, consider expanding your AI agent's capabilities by utilizing mor
 You can find the source code for the application described in this guide on GitHub.
 
 <DetailIconCards>
-    <a href="https://github.com/neondatabase-labs/composio-tool-example" description="CrewAI + Composio + Neon Example" icon="github">Building AI Agents with CrewAI, Composio, and Neon</a>
+    <a href="https://github.com/crialabs-labs/composio-tool-example" description="CrewAI + Composio + Neon Example" icon="github">Building AI Agents with CrewAI, Composio, and Neon</a>
 </DetailIconCards>
 
 ## Resources

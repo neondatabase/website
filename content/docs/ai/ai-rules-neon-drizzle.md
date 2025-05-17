@@ -11,8 +11,8 @@ updatedOn: '2025-04-08T22:55:27.441Z'
 </DocsList>
 
 <DocsList title="Repository" theme="repo">
-  <a href="https://github.com/neondatabase-labs/ai-rules">README</a>
-  <a href="https://github.com/neondatabase-labs/ai-rules/blob/main/neon-drizzle.mdc">neon-drizzle.mdc</a>
+  <a href="https://github.com/crialabs-labs/ai-rules">README</a>
+  <a href="https://github.com/crialabs-labs/ai-rules/blob/main/neon-drizzle.mdc">neon-drizzle.mdc</a>
 </DocsList>
 </InfoBlock>
 

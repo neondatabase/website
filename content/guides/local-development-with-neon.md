@@ -191,7 +191,7 @@ However, this solution requires an internet connection. To work offline, you'll 
 
 For instructions on editing your hosts file on different operating systems, see [this guide](https://www.hostinger.in/tutorials/how-to-edit-hosts-file).
 
-[dnsmask](https://help.ubuntu.com/community/Dnsmasq) is another option [suggested by a Neon user](https://github.com/neondatabase/website/issues/2690) for resolving domain names when there is no internet connection.
+[dnsmask](https://help.ubuntu.com/community/Dnsmasq) is another option [suggested by a Neon user](https://github.com/crialabs/website/issues/2690) for resolving domain names when there is no internet connection.
 </Admonition>
 
 ### Connect your app

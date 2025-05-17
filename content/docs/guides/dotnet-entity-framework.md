@@ -196,7 +196,7 @@ If you do not have one already, create a Neon project.
 You can find the source code for the application described in this guide on GitHub.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/examples/tree/main/with-dotnet-entity-framework" description="Get started with Entity Framework and Neon" icon="github">Get started with Entity Framework and Neon</a>
+<a href="https://github.com/crialabs/examples/tree/main/with-dotnet-entity-framework" description="Get started with Entity Framework and Neon" icon="github">Get started with Entity Framework and Neon</a>
 </DetailIconCards>
 
 ## Resources

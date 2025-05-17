@@ -14,7 +14,7 @@ updatedOn: '2025-05-16T22:28:33.076Z'
     <a href="/docs/guides/neon-auth">Neon Auth</a>
   </DocsList>
   <DocsList title="Demo app" theme="repo">
-    <a href="https://github.com/neondatabase-labs/neon-data-api-neon-auth">Neon Data API Demo App</a>
+    <a href="https://github.com/crialabs-labs/neon-data-api-neon-auth">Neon Data API Demo App</a>
   </DocsList>
 </InfoBlock>
 
@@ -149,7 +149,7 @@ console.table(data);
 
 See how the Neon Data API works in a demo project:
 
-- [Demo app repo](https://github.com/neondatabase-labs/neon-data-api-neon-auth)
+- [Demo app repo](https://github.com/crialabs-labs/neon-data-api-neon-auth)
 - [Live demo](https://neon-data-api-neon-auth.vercel.app/handler/sign-in?after_auth_return_to=%2F)
 
 This project shows how to build a modern web app using direct-to-database queries (no backend required) with the Neon Data API and Neon Auth for authentication.

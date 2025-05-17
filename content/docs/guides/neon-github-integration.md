@@ -128,7 +128,7 @@ jobs:
   #   contents: read
   #   pull-requests: write
   #
-  # You can also check out https://github.com/neondatabase/schema-diff-action for more
+  # You can also check out https://github.com/crialabs/schema-diff-action for more
   # information on how to use the schema diff action.
   # You can uncomment the lines below to enable the schema diff action.
   #      - name: Post Schema Diff Comment to PR
@@ -180,11 +180,11 @@ To view workflow results in GitHub, follow the instructions in [Viewing your wor
 
 The sample workflow provided by the GitHub integration serves as a template, which you can expand on or customize. The workflow uses Neon's create branch, delete branch, and schema diff GitHub Actions, which you can find here:
 
-- [Create a Neon Branch](https://github.com/neondatabase/create-branch-action)
-- [Delete a Neon Branch](https://github.com/neondatabase/delete-branch-action)
-- [Schema Diff](https://github.com/neondatabase/schema-diff-action)
+- [Create a Neon Branch](https://github.com/crialabs/create-branch-action)
+- [Delete a Neon Branch](https://github.com/crialabs/delete-branch-action)
+- [Schema Diff](https://github.com/crialabs/schema-diff-action)
 
-Neon also offers a [Reset a Neon Branch](https://github.com/neondatabase/reset-branch-action) action that allows you to reset a database branch to match the current state of its parent branch. This action is useful in a feature-development workflow, where you may need to reset a development branch to the current state of your production branch before beginning work on a new feature.
+Neon also offers a [Reset a Neon Branch](https://github.com/crialabs/reset-branch-action) action that allows you to reset a database branch to match the current state of its parent branch. This action is useful in a feature-development workflow, where you may need to reset a development branch to the current state of your production branch before beginning work on a new feature.
 
 To incorporate the reset action into your workflow, you can use code like this, tailored to your specific requirements:
 
@@ -226,13 +226,13 @@ The Neon GitHub integration configures a `NEON_API_KEY` secret and a `PROJECT_ID
 
 <a href="https://neon.tech/guides/neon-github-actions-authomated-branching" description="Learn how to automate database branching for your application using Neon and GitHub Actions" icon="github">Automated Database Branching with GitHub Actions</a>
 
-<a href="https://github.com/neondatabase/preview-branches-with-cloudflare" description="Demonstrates using GitHub Actions workflows to create a Neon branch for every Cloudflare Pages preview deployment" icon="github">Preview branches with Cloudflare Pages</a>
+<a href="https://github.com/crialabs/preview-branches-with-cloudflare" description="Demonstrates using GitHub Actions workflows to create a Neon branch for every Cloudflare Pages preview deployment" icon="github">Preview branches with Cloudflare Pages</a>
 
-<a href="https://github.com/neondatabase/preview-branches-with-vercel" description="Demonstrates using GitHub Actions workflows to create a Neon branch for every Vercel preview deployment" icon="github">Preview branches with Vercel</a>
+<a href="https://github.com/crialabs/preview-branches-with-vercel" description="Demonstrates using GitHub Actions workflows to create a Neon branch for every Vercel preview deployment" icon="github">Preview branches with Vercel</a>
 
-<a href="https://github.com/neondatabase/preview-branches-with-fly" description="Demonstrates using GitHub Actions workflows to create a Neon branch for every Fly.io preview deployment" icon="github">Preview branches with Fly.io</a>
+<a href="https://github.com/crialabs/preview-branches-with-fly" description="Demonstrates using GitHub Actions workflows to create a Neon branch for every Fly.io preview deployment" icon="github">Preview branches with Fly.io</a>
 
-<a href="https://github.com/neondatabase/neon_twitter" description="Demonstrates using GitHub Actions workflows to create a Neon branch for schema validation and perform migrations" icon="github">Neon Twitter app</a>
+<a href="https://github.com/crialabs/neon_twitter" description="Demonstrates using GitHub Actions workflows to create a Neon branch for schema validation and perform migrations" icon="github">Neon Twitter app</a>
 
 </DetailIconCards>
 

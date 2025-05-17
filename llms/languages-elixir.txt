@@ -182,7 +182,7 @@ You can use the **Tables** feature in the Neon Console to view the table that wa
 ## Application code
 
 You can find the application code for the example above on GitHub:
-[Neon Ecto Getting Started App](https://github.com/neondatabase/neon-ecto-getting-started-app)
+[Neon Ecto Getting Started App](https://github.com/crialabs/neon-ecto-getting-started-app)
 
 ## Next steps
 

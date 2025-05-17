@@ -223,7 +223,7 @@ In this guide, you learned how to receive and send real-time notifications using
 You can find the source code for the application described in this guide on GitHub.
 
 <DetailIconCards>
-<a href='https://github.com/neondatabase/examples/tree/main/with-nodejs-pg-notify' description='pg_notify with Node.js and Neon' icon='github'>Set up notifications using pg_notify with Node.js and Neon</a>
+<a href='https://github.com/crialabs/examples/tree/main/with-nodejs-pg-notify' description='pg_notify with Node.js and Neon' icon='github'>Set up notifications using pg_notify with Node.js and Neon</a>
 </DetailIconCards>
 
 <NeedHelp />

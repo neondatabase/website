@@ -170,4 +170,4 @@ PostgreSQL 17.2 on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.
 ## Source code
 
 You can find the source code for the application described in this guide on GitHub:
-[Get started with Sveltekit and Neon](https://github.com/neondatabase/examples/tree/main/with-sveltekit)
+[Get started with Sveltekit and Neon](https://github.com/crialabs/examples/tree/main/with-sveltekit)

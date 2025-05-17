@@ -340,7 +340,7 @@ A named organization entity in Neon that groups multiple Neon users under a shar
 
 ## NeonVM
 
-A QEMU-based tool used by Neon to create and manage VMs within a Kubernetes cluster, allowing for the allocation and deallocation of vCPU and RAM. For more information, refer to the NeonVM source in the [neondatabase/autoscaling](https://github.com/neondatabase/autoscaling/tree/main/neonvm) repository.
+A QEMU-based tool used by Neon to create and manage VMs within a Kubernetes cluster, allowing for the allocation and deallocation of vCPU and RAM. For more information, refer to the NeonVM source in the [neondatabase/autoscaling](https://github.com/crialabs/autoscaling/tree/main/neonvm) repository.
 
 ## non-default branch
 

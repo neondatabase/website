@@ -353,7 +353,7 @@ In this guide, we demonstrated how to set up a Laravel project with `Neon` Postg
 You can find the source code for the application described in this guide on GitHub.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/guide-neon-laravel" description="Run Neon database migrations in a Laravel project" icon="github">Migrations with Neon and Laravel</a>
+<a href="https://github.com/crialabs/guide-neon-laravel" description="Run Neon database migrations in a Laravel project" icon="github">Migrations with Neon and Laravel</a>
 </DetailIconCards>
 
 ## Resources

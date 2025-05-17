@@ -395,9 +395,9 @@ PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1
 
 You can find the source code for the applications described in this guide on GitHub:
 
-- [Get started with Next.js Edge Functions and Neon](https://github.com/neondatabase/examples/tree/main/with-nextjs-edge-functions)
-- [Get started with Next.js Serverless Functions and Neon](https://github.com/neondatabase/examples/tree/main/with-nextjs-serverless-functions)
-- [Get started with Next.js getServerSideProps and Neon](https://github.com/neondatabase/examples/tree/main/with-nextjs-get-server-side-props)
-- [Get started with Next.js getStaticProps and Neon](https://github.com/neondatabase/examples/tree/main/with-nextjs-get-static-props)
-- [Get started with Next.js Server Actions and Neon](https://github.com/neondatabase/examples/tree/main/with-nextjs-server-actions)
-- [Get started with Next.js Server Components and Neon](https://github.com/neondatabase/examples/tree/main/with-nextjs-server-components)
+- [Get started with Next.js Edge Functions and Neon](https://github.com/crialabs/examples/tree/main/with-nextjs-edge-functions)
+- [Get started with Next.js Serverless Functions and Neon](https://github.com/crialabs/examples/tree/main/with-nextjs-serverless-functions)
+- [Get started with Next.js getServerSideProps and Neon](https://github.com/crialabs/examples/tree/main/with-nextjs-get-server-side-props)
+- [Get started with Next.js getStaticProps and Neon](https://github.com/crialabs/examples/tree/main/with-nextjs-get-static-props)
+- [Get started with Next.js Server Actions and Neon](https://github.com/crialabs/examples/tree/main/with-nextjs-server-actions)
+- [Get started with Next.js Server Components and Neon](https://github.com/crialabs/examples/tree/main/with-nextjs-server-components)

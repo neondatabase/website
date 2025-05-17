@@ -42,7 +42,7 @@ bun install -g neonctl
 Download the binary. No installation required.
 
 ```bash shouldWrap
-curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-macos -o neonctl
+curl -sL https://github.com/crialabs/neonctl/releases/latest/download/neonctl-macos -o neonctl
 ```
 
 Run the CLI from the download directory:
@@ -74,7 +74,7 @@ Requires [Node.js 18.0](https://nodejs.org/en/download/) or higher.
 Download the binary. No installation required.
 
 ```bash shouldWrap
-curl -sL -O https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-win.exe
+curl -sL -O https://github.com/crialabs/neonctl/releases/latest/download/neonctl-win.exe
 ```
 
 Run the CLI from the download directory:
@@ -106,13 +106,13 @@ Download the x64 or ARM64 binary, depending on your processor type. No installat
 x64:
 
 ```bash shouldWrap
-curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux-x64 -o neonctl
+curl -sL https://github.com/crialabs/neonctl/releases/latest/download/neonctl-linux-x64 -o neonctl
 ```
 
 ARM64:
 
 ```bash shouldWrap
- curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux-arm64 -o neonctl
+ curl -sL https://github.com/crialabs/neonctl/releases/latest/download/neonctl-linux-arm64 -o neonctl
 ```
 
 Run the CLI from the download directory:
@@ -292,4 +292,4 @@ Global options are supported with any Neon CLI command.
 
 ## GitHub repository
 
-The GitHub repository for the Neon CLI is found [here](https://github.com/neondatabase/neonctl).
+The GitHub repository for the Neon CLI is found [here](https://github.com/crialabs/neonctl).

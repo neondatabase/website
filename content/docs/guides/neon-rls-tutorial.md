@@ -10,7 +10,7 @@ redirectFrom:
 
 <InfoBlock>
 <DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/clerk-nextjs-neon-rls">Clerk + Neon RLS</a>
+  <a href="https://github.com/crialabs-labs/clerk-nextjs-neon-rls">Clerk + Neon RLS</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
@@ -31,10 +31,10 @@ To get started, you'll need:
 
 - **Neon account**: Sign up at [Neon](https://neon.tech) and create your first project in **AWS** (note: [Azure](/docs/guides/neon-rls#current-limitations) regions are not currently supported).
 - **Clerk account**: Sign up for a [Clerk](https://clerk.com/) account and application. Clerk provides a free plan to get you started.
-- **Neon RLS + Clerk example application**: Clone the sample [Clerk + Neon RLS repository](https://github.com/neondatabase-labs/clerk-nextjs-neon-rls):
+- **Neon RLS + Clerk example application**: Clone the sample [Clerk + Neon RLS repository](https://github.com/crialabs-labs/clerk-nextjs-neon-rls):
 
   ```bash
-  git clone https://github.com/neondatabase-labs/clerk-nextjs-neon-rls.git
+  git clone https://github.com/crialabs-labs/clerk-nextjs-neon-rls.git
   ```
 
   Follow the instructions in the readme to set up Clerk, configure environment variables, and start the application. You can also find more info in our [Clerk and Neon RLS Quickstart](/docs/guides/neon-rls-clerk).

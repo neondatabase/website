@@ -10,7 +10,7 @@ redirectFrom:
 
 <InfoBlock>
 <DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/clerk-nextjs-neon-rls">Clerk + Neon RLS</a>
+  <a href="https://github.com/crialabs-labs/clerk-nextjs-neon-rls">Clerk + Neon RLS</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
@@ -24,14 +24,14 @@ Use Clerk with Neon RLS to add secure, database-level authorization to your appl
 
 ## How it works
 
-Clerk handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon RLS. Neon RLS validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
+Clerk handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon RLS. Neon RLS validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/crialabs/pg_session_jwt), which you'll install as part of this guide.
 
 ## Prerequisites
 
 To follow along with this guide, you will need:
 
 - A Neon account. If you do not have one, sign up at [Neon](https://neon.tech).
-- A [Clerk](https://clerk.com/) account and an existing application (e.g., a **todos** app) that uses Clerk for user authentication. If you don't have an app, check our [demo](https://github.com/neondatabase-labs/clerk-nextjs-neon-rls) for similar schema and policies in action.
+- A [Clerk](https://clerk.com/) account and an existing application (e.g., a **todos** app) that uses Clerk for user authentication. If you don't have an app, check our [demo](https://github.com/crialabs-labs/clerk-nextjs-neon-rls) for similar schema and policies in action.
 
 ## Integrate Clerk with Neon RLS
 
@@ -67,7 +67,7 @@ At this point, you can use the **Get Started** setup steps from RLS in Neon to c
 
 ### 3. Install the pg_session_jwt extension in your database
 
-Neon RLS uses the [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt) extension to handle authenticated sessions through JSON Web Tokens (JWTs). This extension allows secure transmission of authentication data from your application to Postgres, where you can enforce Row-Level Security (RLS) policies based on the user's identity.
+Neon RLS uses the [pg_session_jwt](https://github.com/crialabs/pg_session_jwt) extension to handle authenticated sessions through JSON Web Tokens (JWTs). This extension allows secure transmission of authentication data from your application to Postgres, where you can enforce Row-Level Security (RLS) policies based on the user's identity.
 
 To install the extension in the `neondb` database, run:
 

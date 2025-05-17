@@ -5,7 +5,7 @@
 ## Source
 
 - [AI Rules: Neon Auth HTML](https://neon.tech/docs/ai/ai-rules-neon-auth): The original HTML version of this documentation
-- [GitHub Repository](https://github.com/neondatabase-labs/ai-rules): Source repository containing the rules
+- [GitHub Repository](https://github.com/crialabs-labs/ai-rules): Source repository containing the rules
 - [Raw Content File](https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/neon-auth.mdc): Direct link to the rules content
 
 ## Overview
@@ -14,7 +14,7 @@ This document contains rules and guidelines for AI tools to help implement authe
 
 ## External Content
 
-The rules content is maintained in the GitHub repository and imported into the documentation. For the most up-to-date rules, please refer to the [neon-auth.mdc](https://github.com/neondatabase-labs/ai-rules/blob/main/neon-auth.mdc) file in the repository.
+The rules content is maintained in the GitHub repository and imported into the documentation. For the most up-to-date rules, please refer to the [neon-auth.mdc](https://github.com/crialabs-labs/ai-rules/blob/main/neon-auth.mdc) file in the repository.
 
 ## Related Documentation
 

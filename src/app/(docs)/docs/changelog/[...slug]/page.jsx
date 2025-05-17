@@ -15,7 +15,10 @@ import getMetadata from 'utils/get-metadata';
 export async function generateStaticParams() {
   const changelogPosts = await getAllChangelogs();
 
-  return changelogPosts.map(({ slug }) => {
+  // Filtra os posts undefined antes de fazer o map
+  const validChangelogPosts = changelogPosts.filter((post) => post && post.slug);
+
+  return validChangelogPosts.map(({ slug }) => {
     const slugsArray = slug.split('/');
 
     return {

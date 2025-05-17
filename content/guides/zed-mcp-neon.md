@@ -7,7 +7,7 @@ createdAt: '2025-04-10T00:00:00.000Z'
 updatedOn: '2025-04-10T00:00:00.000Z'
 ---
 
-Imagine you could interact with your database using plain English, whether you're asking for specific data or changing its schema. That's what the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon) allows you to do. It lets you manage your Neon Postgres databases using everyday language, simplifying tasks like running queries and performing database migrations.
+Imagine you could interact with your database using plain English, whether you're asking for specific data or changing its schema. That's what the [Neon MCP Server](https://github.com/crialabs/mcp-server-neon) allows you to do. It lets you manage your Neon Postgres databases using everyday language, simplifying tasks like running queries and performing database migrations.
 
 In this guide, we'll explore how to set up the Neon MCP Server within [Zed](https://zed.dev), a next-generation AI-powered code editor, to handle various database operations. These include creating projects, managing database branches, running SQL queries, and performing safe database migrations.
 
@@ -328,6 +328,6 @@ database ideas and making schema changes during development.
 - [Context Servers in Zed](https://zed.dev/docs/assistant/context-servers)
 - [Neon Docs](https://neon.tech/docs)
 - [Neon API Keys](https://neon.tech/docs/manage/api-keys#creating-api-keys)
-- [Neon MCP server GitHub](https://github.com/neondatabase/mcp-server-neon)
+- [Neon MCP server GitHub](https://github.com/crialabs/mcp-server-neon)
 
 <NeedHelp/>

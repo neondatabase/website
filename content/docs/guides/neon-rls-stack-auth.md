@@ -11,7 +11,7 @@ redirectFrom:
 
 <InfoBlock>
 <DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/stack-nextjs-neon-rls">Stack Auth + Neon RLS</a>
+  <a href="https://github.com/crialabs-labs/stack-nextjs-neon-rls">Stack Auth + Neon RLS</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
@@ -24,14 +24,14 @@ Use Stack Auth with Neon RLS to add secure, database-level authorization to your
 
 ## How it works
 
-Stack Auth handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon RLS. Neon RLS validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
+Stack Auth handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon RLS. Neon RLS validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/crialabs/pg_session_jwt), which you'll install as part of this guide.
 
 ## Prerequisites
 
 To follow along with this guide, you will need:
 
 - A Neon account. Sign up at [Neon](https://neon.tech) if you don't have one.
-- A [Stack Auth](https://stack-auth.com/) account with an existing application (e.g., a **todos** app) that uses Stack Auth for user authentication. If you don't have an app, check our [demo](https://github.com/neondatabase-labs/stack-nextjs-neon-rls) for similar schema and policies in action.
+- A [Stack Auth](https://stack-auth.com/) account with an existing application (e.g., a **todos** app) that uses Stack Auth for user authentication. If you don't have an app, check our [demo](https://github.com/crialabs-labs/stack-nextjs-neon-rls) for similar schema and policies in action.
 
 ## Integrate Stack Auth with Neon RLS
 
@@ -65,7 +65,7 @@ At this point, you can use the **Get Started** setup steps from RLS in Neon to c
 
 ### 3. Install the pg_session_jwt extension in your database
 
-Neon RLS uses the [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt) extension to handle authenticated sessions through JSON Web Tokens (JWTs). This extension allows secure transmission of authentication data from your application to Postgres, where you can enforce Row-Level Security (RLS) policies based on the user's identity.
+Neon RLS uses the [pg_session_jwt](https://github.com/crialabs/pg_session_jwt) extension to handle authenticated sessions through JSON Web Tokens (JWTs). This extension allows secure transmission of authentication data from your application to Postgres, where you can enforce Row-Level Security (RLS) policies based on the user's identity.
 
 To install the extension in the `neondb` database, run:
 

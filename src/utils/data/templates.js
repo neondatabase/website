@@ -8,7 +8,7 @@ export default [
     type: ['Starter'],
     css: ['TailwindCSS'],
     cms: [],
-    githubUrl: 'https://github.com/neondatabase/examples/tree/main/ai/hybrid-search-nextjs',
+    githubUrl: 'https://github.com/crialabs/examples/tree/main/ai/hybrid-search-nextjs',
   },
   {
     name: 'Chat with PDF (OpenAI + LlamaIndex)',
@@ -21,7 +21,7 @@ export default [
     css: ['TailwindCSS'],
     cms: [],
     githubUrl:
-      'https://github.com/neondatabase/examples/tree/main/ai/llamaindex/chat-with-pdf-nextjs',
+      'https://github.com/crialabs/examples/tree/main/ai/llamaindex/chat-with-pdf-nextjs',
   },
   {
     name: 'AI Chatbot (OpenAI + LlamaIndex)',
@@ -32,7 +32,7 @@ export default [
     type: ['Starter', 'Chatbot'],
     css: ['TailwindCSS'],
     cms: [],
-    githubUrl: 'https://github.com/neondatabase/examples/tree/main/ai/llamaindex/chatbot-nextjs',
+    githubUrl: 'https://github.com/crialabs/examples/tree/main/ai/llamaindex/chatbot-nextjs',
   },
   {
     name: 'RAG Chatbot (OpenAI + LlamaIndex)',
@@ -43,7 +43,7 @@ export default [
     type: ['Starter', 'Chatbot'],
     css: ['TailwindCSS'],
     cms: [],
-    githubUrl: 'https://github.com/neondatabase/examples/tree/main/ai/llamaindex/rag-nextjs',
+    githubUrl: 'https://github.com/crialabs/examples/tree/main/ai/llamaindex/rag-nextjs',
   },
   {
     name: 'Semantic Search Chatbot (OpenAI + LlamaIndex)',
@@ -56,7 +56,7 @@ export default [
     css: ['TailwindCSS'],
     cms: [],
     githubUrl:
-      'https://github.com/neondatabase/examples/tree/main/ai/llamaindex/semantic-search-nextjs',
+      'https://github.com/crialabs/examples/tree/main/ai/llamaindex/semantic-search-nextjs',
   },
   {
     name: 'Reverse Image Search (OpenAI + LlamaIndex)',
@@ -69,7 +69,7 @@ export default [
     css: ['TailwindCSS'],
     cms: [],
     githubUrl:
-      'https://github.com/neondatabase/examples/tree/main/ai/llamaindex/reverse-image-search-nextjs',
+      'https://github.com/crialabs/examples/tree/main/ai/llamaindex/reverse-image-search-nextjs',
   },
   {
     name: 'Chat with PDF (OpenAI + LangChain)',
@@ -82,7 +82,7 @@ export default [
     css: ['TailwindCSS'],
     cms: [],
     githubUrl:
-      'https://github.com/neondatabase/examples/tree/main/ai/langchain/chat-with-pdf-nextjs',
+      'https://github.com/crialabs/examples/tree/main/ai/langchain/chat-with-pdf-nextjs',
   },
   {
     name: 'AI Chatbot (OpenAI + LangChain)',
@@ -93,7 +93,7 @@ export default [
     type: ['Starter', 'Chatbot'],
     css: ['TailwindCSS'],
     cms: [],
-    githubUrl: 'https://github.com/neondatabase/examples/tree/main/ai/langchain/chatbot-nextjs',
+    githubUrl: 'https://github.com/crialabs/examples/tree/main/ai/langchain/chatbot-nextjs',
   },
   {
     name: 'RAG Chatbot (OpenAI + LangChain)',
@@ -104,7 +104,7 @@ export default [
     type: ['Starter', 'Chatbot'],
     css: ['TailwindCSS'],
     cms: [],
-    githubUrl: 'https://github.com/neondatabase/examples/tree/main/ai/langchain/rag-nextjs',
+    githubUrl: 'https://github.com/crialabs/examples/tree/main/ai/langchain/rag-nextjs',
   },
   {
     name: 'Semantic Search Chatbot (OpenAI + LangChain)',
@@ -117,7 +117,7 @@ export default [
     css: ['TailwindCSS'],
     cms: [],
     githubUrl:
-      'https://github.com/neondatabase/examples/tree/main/ai/langchain/semantic-search-nextjs',
+      'https://github.com/crialabs/examples/tree/main/ai/langchain/semantic-search-nextjs',
   },
   {
     name: 'Reverse Image Search (OpenAI + LangChain)',
@@ -130,7 +130,7 @@ export default [
     css: ['TailwindCSS'],
     cms: [],
     githubUrl:
-      'https://github.com/neondatabase/examples/tree/main/ai/langchain/reverse-image-search-nextjs',
+      'https://github.com/crialabs/examples/tree/main/ai/langchain/reverse-image-search-nextjs',
   },
   {
     name: 'Astro Boilerplate',
@@ -141,7 +141,7 @@ export default [
     type: ['Starter'],
     css: [],
     cms: [],
-    githubUrl: 'https://github.com/neondatabase/examples/tree/main/with-astro',
+    githubUrl: 'https://github.com/crialabs/examples/tree/main/with-astro',
   },
   {
     name: 'Express Boilerplate',
@@ -152,7 +152,7 @@ export default [
     type: ['Starter'],
     css: [],
     cms: [],
-    githubUrl: 'https://github.com/neondatabase/examples/tree/main/with-express',
+    githubUrl: 'https://github.com/crialabs/examples/tree/main/with-express',
   },
   {
     name: 'Fastify Boilerplate',
@@ -163,7 +163,7 @@ export default [
     type: ['Starter'],
     css: [],
     cms: [],
-    githubUrl: 'https://github.com/neondatabase/examples/tree/main/with-fastify',
+    githubUrl: 'https://github.com/crialabs/examples/tree/main/with-fastify',
   },
   {
     name: 'Hono Boilerplate',
@@ -174,7 +174,7 @@ export default [
     type: ['Starter'],
     css: [],
     cms: [],
-    githubUrl: 'https://github.com/neondatabase/examples/tree/main/with-hono',
+    githubUrl: 'https://github.com/crialabs/examples/tree/main/with-hono',
   },
   {
     name: 'Nest.js Boilerplate',
@@ -185,7 +185,7 @@ export default [
     type: ['Starter'],
     css: [],
     cms: [],
-    githubUrl: 'https://github.com/neondatabase/examples/tree/main/with-nestjs',
+    githubUrl: 'https://github.com/crialabs/examples/tree/main/with-nestjs',
   },
   {
     name: 'Next.js Boilerplate',
@@ -197,7 +197,7 @@ export default [
     css: ['TailwindCSS'],
     cms: [],
     githubUrl:
-      'https://github.com/neondatabase/examples/tree/main/with-nextjs-get-server-side-props',
+      'https://github.com/crialabs/examples/tree/main/with-nextjs-get-server-side-props',
   },
   {
     name: 'Node.js Boilerplate',
@@ -208,7 +208,7 @@ export default [
     type: ['Starter'],
     css: [],
     cms: [],
-    githubUrl: 'https://github.com/neondatabase/examples/tree/main/with-nodejs',
+    githubUrl: 'https://github.com/crialabs/examples/tree/main/with-nodejs',
   },
   {
     name: 'Python asyncpg Boilerplate',
@@ -219,7 +219,7 @@ export default [
     type: ['Starter'],
     css: [],
     cms: [],
-    githubUrl: 'https://github.com/neondatabase/examples/tree/main/with-python-asyncpg',
+    githubUrl: 'https://github.com/crialabs/examples/tree/main/with-python-asyncpg',
   },
   {
     name: 'Python psycopg2 Boilerplate',
@@ -230,7 +230,7 @@ export default [
     type: ['Starter'],
     css: [],
     cms: [],
-    githubUrl: 'https://github.com/neondatabase/examples/tree/main/with-python-psycopg2',
+    githubUrl: 'https://github.com/crialabs/examples/tree/main/with-python-psycopg2',
   },
   {
     name: 'Remix Boilerplate',
@@ -241,7 +241,7 @@ export default [
     type: ['Starter'],
     css: [],
     cms: [],
-    githubUrl: 'https://github.com/neondatabase/examples/tree/main/with-remix',
+    githubUrl: 'https://github.com/crialabs/examples/tree/main/with-remix',
   },
   {
     name: 'Solid Start Boilerplate',
@@ -252,7 +252,7 @@ export default [
     type: ['Starter'],
     css: [],
     cms: [],
-    githubUrl: 'https://github.com/neondatabase/examples/tree/main/with-solid-start',
+    githubUrl: 'https://github.com/crialabs/examples/tree/main/with-solid-start',
   },
   {
     name: 'SvelteKit Boilerplate',
@@ -263,7 +263,7 @@ export default [
     type: ['Starter'],
     css: ['TailwindCSS'],
     cms: [],
-    githubUrl: 'https://github.com/neondatabase/examples/tree/main/with-sveltekit',
+    githubUrl: 'https://github.com/crialabs/examples/tree/main/with-sveltekit',
   },
   {
     name: 'Waku Boilerplate',
@@ -274,7 +274,7 @@ export default [
     type: ['Starter'],
     css: ['TailwindCSS'],
     cms: [],
-    githubUrl: 'https://github.com/neondatabase/examples/tree/main/with-waku',
+    githubUrl: 'https://github.com/crialabs/examples/tree/main/with-waku',
   },
   {
     name: 'Angular Boilerplate',
@@ -285,7 +285,7 @@ export default [
     type: ['Starter'],
     css: [],
     cms: [],
-    githubUrl: 'https://github.com/neondatabase/examples/tree/main/with-angular',
+    githubUrl: 'https://github.com/crialabs/examples/tree/main/with-angular',
   },
   {
     name: 'Wasp Boilerplate',
@@ -296,7 +296,7 @@ export default [
     type: ['Starter'],
     css: [],
     cms: [],
-    githubUrl: 'https://github.com/neondatabase/examples/tree/main/with-wasp',
+    githubUrl: 'https://github.com/crialabs/examples/tree/main/with-wasp',
   },
   {
     name: 'Analog Boilerplate',
@@ -307,6 +307,6 @@ export default [
     type: ['Starter'],
     css: [],
     cms: [],
-    githubUrl: 'https://github.com/neondatabase/examples/tree/main/with-analog',
+    githubUrl: 'https://github.com/crialabs/examples/tree/main/with-analog',
   },
 ];

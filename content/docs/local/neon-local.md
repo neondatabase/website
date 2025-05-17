@@ -5,7 +5,7 @@ subtitle: Use Docker environments to connect to Neon and manage branches automat
 updatedOn: '2025-04-29T13:55:59.260Z'
 ---
 
-[Neon Local](https://github.com/neondatabase-labs/neon_local) is a proxy service that creates a local interface to your Neon cloud database. By default, it automatically creates a new database branch when the container starts and deletes it when the container stops.
+[Neon Local](https://github.com/crialabs-labs/neon_local) is a proxy service that creates a local interface to your Neon cloud database. By default, it automatically creates a new database branch when the container starts and deletes it when the container stops.
 
 Your application connects to a local Postgres endpoint, while Neon Local handles routing and authentication to the correct project and branch. This removes the need to update connection strings when working across database branches.
 

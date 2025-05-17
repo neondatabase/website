@@ -5,10 +5,10 @@ subtitle: Connect to Neon from serverless environments over HTTP or WebSockets
 updatedOn: '2025-04-30T02:26:54.990Z'
 ---
 
-The [Neon serverless driver](https://github.com/neondatabase/serverless) is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over **HTTP** or **WebSockets** in place of TCP. The driver's low-latency capability is due to [message pipelining and other optimizations](https://neon.tech/blog/quicker-serverless-postgres).
+The [Neon serverless driver](https://github.com/crialabs/serverless) is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over **HTTP** or **WebSockets** in place of TCP. The driver's low-latency capability is due to [message pipelining and other optimizations](https://neon.tech/blog/quicker-serverless-postgres).
 
 <Admonition type="important" title="The Neon serverless driver is now generally available (GA)">
-The GA version of the Neon serverless driver, v1.0.0 and higher, requires Node.js version 19 or higher. It also includes a **breaking change** but only if you're calling the HTTP query template function as a conventional function. For details, please see the [1.0.0 release notes](https://github.com/neondatabase/serverless/pull/149) or read the [blog post](https://neon.tech/blog/serverless-driver-ga).
+The GA version of the Neon serverless driver, v1.0.0 and higher, requires Node.js version 19 or higher. It also includes a **breaking change** but only if you're calling the HTTP query template function as a conventional function. For details, please see the [1.0.0 release notes](https://github.com/crialabs/serverless/pull/149) or read the [blog post](https://neon.tech/blog/serverless-driver-ga).
 </Admonition>
 
 When to query over HTTP vs WebSockets:
@@ -42,7 +42,7 @@ The examples that follow assume that your database connection string is assigned
 
 ## Use the driver over HTTP
 
-The Neon serverless driver uses the [neon](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#neon-function) function for queries over HTTP. The function returns a query function that can only be used as a template function for improved safety against SQL injection vulnerabilities.
+The Neon serverless driver uses the [neon](https://github.com/crialabs/serverless/blob/main/CONFIG.md#neon-function) function for queries over HTTP. The function returns a query function that can only be used as a template function for improved safety against SQL injection vulnerabilities.
 
 For example:
 
@@ -244,7 +244,7 @@ You can customize the return format using the configuration options `fullResults
   clearTimeout(timeout);
   ```
 
-For additional details, see [Options and configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#options-and-configuration).
+For additional details, see [Options and configuration](https://github.com/crialabs/serverless/blob/main/CONFIG.md#options-and-configuration).
 
 ### Issue multiple queries with the transaction() function
 
@@ -293,11 +293,11 @@ Note that options **cannot** be supplied for individual queries within a transac
 
   If `true` (and if `readOnly` is also `true`, and `isolationMode` is `Serializable`), this option ensures that a `DEFERRABLE` transaction is used to execute the queries passed. This is a boolean option. The default value is `false`.
 
-For additional details, see [transaction(...) function](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#transaction-function).
+For additional details, see [transaction(...) function](https://github.com/crialabs/serverless/blob/main/CONFIG.md#transaction-function).
 
 ## Use the driver over WebSockets
 
-The Neon serverless driver supports the [Pool and Client](https://github.com/neondatabase/serverless?tab=readme-ov-file#pool-and-client) constructors for querying over WebSockets.
+The Neon serverless driver supports the [Pool and Client](https://github.com/crialabs/serverless?tab=readme-ov-file#pool-and-client) constructors for querying over WebSockets.
 
 The `Pool` and `Client` constructors, provide session and transaction support, as well as `node-postgres` compatibility. You can find the API guide for the `Pool` and `Client` constructors in the [node-postgres](https://node-postgres.com/) documentation.
 
@@ -408,11 +408,11 @@ export default async function handler(request: NextApiRequest, res: NextApiRespo
 
 - In serverless environments such as Vercel Edge Functions or Cloudflare Workers, WebSocket connections can't outlive a single request. That means `Pool` or `Client` objects must be connected, used and closed within a single request handler. Don't create them outside a request handler; don't create them in one handler and try to reuse them in another; and to avoid exhausting available connections, don't forget to close them.
 
-For examples that demonstrate these points, see [Pool and Client](https://github.com/neondatabase/serverless?tab=readme-ov-file#pool-and-client).
+For examples that demonstrate these points, see [Pool and Client](https://github.com/crialabs/serverless?tab=readme-ov-file#pool-and-client).
 
 ### Advanced configuration options
 
-For advanced configuration options, see [neonConfig configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#neonconfig-configuration), in the Neon serverless driver GitHub readme.
+For advanced configuration options, see [neonConfig configuration](https://github.com/crialabs/serverless/blob/main/CONFIG.md#neonconfig-configuration), in the Neon serverless driver GitHub readme.
 
 ## Developing locally with the Neon serverless driver
 
@@ -433,13 +433,13 @@ Neon provides an example application to help you get started with the Neon serve
 There are different implementations of the application to choose from.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/neon-vercel-rawsql" description="Demonstrates using raw SQL with Neon's serverless driver on Vercel Edge Functions" icon="github">Raw SQL + Vercel Edge Functions</a>
-<a href="https://github.com/neondatabase/neon-vercel-http" description="Demonstrates Neon's serverless driver over HTTP on Vercel Edge Functions" icon="github">Raw SQL via https + Vercel Edge Functions</a>
-<a href="https://github.com/neondatabase/serverless-cfworker-demo" description="Demonstrates using the Neon serverless driver on Cloudflare Workers and employs caching for high performance." icon="github">Raw SQL + Cloudflare Workers</a>
-<a href="https://github.com/neondatabase/neon-vercel-kysely" description="Demonstrates using kysely and kysely-codegen with Neon's serverless driver on Vercel Edge Functions" icon="github">Kysely + Vercel Edge Functions</a>
-<a href="https://github.com/neondatabase/neon-vercel-zapatos" description="Demonstrates using Zapatos with Neon's serverless driver on Vercel Edge Functions" icon="github">Zapatos + Vercel Edge Functions</a>
-<a href="https://github.com/neondatabase/neon-vercel-pgtyped" description="Demonstrates using pgTyped with Neon's serverless driver on Vercel Edge Functions" icon="github">Neon + pgTyped on Vercel Edge Functions</a>
-<a href="https://github.com/neondatabase/neon-vercel-knex" description="Demonstrates using Knex with Neon's serverless driver on Vercel Edge Functions" icon="github">Neon + Knex on Vercel Edge Functions</a>
+<a href="https://github.com/crialabs/neon-vercel-rawsql" description="Demonstrates using raw SQL with Neon's serverless driver on Vercel Edge Functions" icon="github">Raw SQL + Vercel Edge Functions</a>
+<a href="https://github.com/crialabs/neon-vercel-http" description="Demonstrates Neon's serverless driver over HTTP on Vercel Edge Functions" icon="github">Raw SQL via https + Vercel Edge Functions</a>
+<a href="https://github.com/crialabs/serverless-cfworker-demo" description="Demonstrates using the Neon serverless driver on Cloudflare Workers and employs caching for high performance." icon="github">Raw SQL + Cloudflare Workers</a>
+<a href="https://github.com/crialabs/neon-vercel-kysely" description="Demonstrates using kysely and kysely-codegen with Neon's serverless driver on Vercel Edge Functions" icon="github">Kysely + Vercel Edge Functions</a>
+<a href="https://github.com/crialabs/neon-vercel-zapatos" description="Demonstrates using Zapatos with Neon's serverless driver on Vercel Edge Functions" icon="github">Zapatos + Vercel Edge Functions</a>
+<a href="https://github.com/crialabs/neon-vercel-pgtyped" description="Demonstrates using pgTyped with Neon's serverless driver on Vercel Edge Functions" icon="github">Neon + pgTyped on Vercel Edge Functions</a>
+<a href="https://github.com/crialabs/neon-vercel-knex" description="Demonstrates using Knex with Neon's serverless driver on Vercel Edge Functions" icon="github">Neon + Knex on Vercel Edge Functions</a>
 </DetailIconCards>
 
 ### Ping Thing
@@ -447,12 +447,12 @@ There are different implementations of the application to choose from.
 The Ping Thing application pings a Neon Serverless Postgres database using a Vercel Edge Function and shows the journey your request makes. You can read more about this application in the accompanying blog post: [How to use Postgres at the Edge](https://neon.tech/blog/how-to-use-postgres-at-the-edge)
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/ping-thing" description="Ping a Neon Serverless Postgres database using a Vercel Edge Function to see the journey your request makes" icon="github">Ping Thing</a>
+<a href="https://github.com/crialabs/ping-thing" description="Ping a Neon Serverless Postgres database using a Vercel Edge Function to see the journey your request makes" icon="github">Ping Thing</a>
 </DetailIconCards>
 
 ## Neon serverless driver GitHub repository and changelog
 
-The GitHub repository and [changelog](https://github.com/neondatabase/serverless/blob/main/CHANGELOG.md) for the Neon serverless driver are found [here](https://github.com/neondatabase/serverless).
+The GitHub repository and [changelog](https://github.com/crialabs/serverless/blob/main/CHANGELOG.md) for the Neon serverless driver are found [here](https://github.com/crialabs/serverless).
 
 ## References
 

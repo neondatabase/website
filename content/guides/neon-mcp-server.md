@@ -9,7 +9,7 @@ updatedOn: '2025-02-06T00:00:00.000Z'
 
 Imagine managing your database with natural language. Instead of complex SQL, you can simply ask your AI assistant to "create a new table for customer orders" or "show me last quarter's sales figures." This is the power of the [Model Context Protocol (MCP)](https://github.com/modelcontextprotocol), an open standard for AI interaction with external systems.
 
-This guide will introduce you to [Neon's MCP server](https://github.com/neondatabase/mcp-server-neon), which allows you to use Large Language Models (LLMs) for intuitive database management. At its core, Neon MCP server allows tools like Claude to easily communicate with the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+This guide will introduce you to [Neon's MCP server](https://github.com/crialabs/mcp-server-neon), which allows you to use Large Language Models (LLMs) for intuitive database management. At its core, Neon MCP server allows tools like Claude to easily communicate with the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 With Neon's MCP server and an LLM like Claude, you can simplify workflows, improve productivity, and manage your Postgres databases more naturally. Let’s explore how this approach can make database management easier and more efficient.
 
@@ -209,6 +209,6 @@ Neon MCP server makes database management conversational and easier by enabling 
 - [Neon Docs](/docs)
 - [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api)
 - [Neon API Keys](/docs/manage/api-keys#creating-api-keys)
-- [Neon MCP server GitHub](https://github.com/neondatabase/mcp-server-neon)
+- [Neon MCP server GitHub](https://github.com/crialabs/mcp-server-neon)
 
 <NeedHelp/>

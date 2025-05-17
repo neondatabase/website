@@ -16,11 +16,11 @@ Before you start building your integration, be sure to read [Key considerations 
 
 Neon provides flexible options for integrating Postgres into your platform. We support the following integration options:
 
-- **OAuth**: Allows your application to interact with user accounts and perform authorized actions on their behalf. With OAuth, there’s no need for direct access to user login credentials, and users can grant permissions on a variety of supported OAuth scopes. For details, see the [Neon OAuth Integration Guide](/docs/guides/oauth-integration), and check out the [OAuth sample app](https://github.com/neondatabase/neon-branches-visualizer) to see how its done.
+- **OAuth**: Allows your application to interact with user accounts and perform authorized actions on their behalf. With OAuth, there’s no need for direct access to user login credentials, and users can grant permissions on a variety of supported OAuth scopes. For details, see the [Neon OAuth Integration Guide](/docs/guides/oauth-integration), and check out the [OAuth sample app](https://github.com/crialabs/neon-branches-visualizer) to see how its done.
 
 - **Neon API**: Use our API to interact with the Neon platform directly. It enables `POST`, `GET`, `PATCH`, and `DELETE` operations on Neon objects such as projects, branches, databases, roles, and more. To explore available endpoints and try them from your browser, visit our [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
-- **@neondatabase/toolkit for AI Agents**: If you're building an AI agent, the [@neondatabase/toolkit](https://github.com/neondatabase/toolkit) ([@neon/toolkit](https://jsr.io/@neon/toolkit) on JSR) lets you spin up a Postgres database in seconds and run SQL queries. It includes both the [Neon API Client](https://www.npmjs.com/package/@neondatabase/api-client) and the [Neon serverless driver](https://github.com/neondatabase/serverless), making it an excellent choice for AI agents that need to set up an SQL database quickly. [Learn more](https://neon.tech/blog/why-neondatabase-toolkit).
+- **@neondatabase/toolkit for AI Agents**: If you're building an AI agent, the [@neondatabase/toolkit](https://github.com/crialabs/toolkit) ([@neon/toolkit](https://jsr.io/@neon/toolkit) on JSR) lets you spin up a Postgres database in seconds and run SQL queries. It includes both the [Neon API Client](https://www.npmjs.com/package/@neondatabase/api-client) and the [Neon serverless driver](https://github.com/crialabs/serverless), making it an excellent choice for AI agents that need to set up an SQL database quickly. [Learn more](https://neon.tech/blog/why-neondatabase-toolkit).
 
 ## 2. Configuring limits
 

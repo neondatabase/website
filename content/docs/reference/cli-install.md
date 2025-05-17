@@ -36,7 +36,7 @@ bun install -g neonctl
 Download the binary. No installation required.
 
 ```bash shouldWrap
-curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-macos -o neonctl
+curl -sL https://github.com/crialabs/neonctl/releases/latest/download/neonctl-macos -o neonctl
 ```
 
 Run the CLI from the download directory:
@@ -68,7 +68,7 @@ bun install -g neonctl
 Download the binary. No installation required.
 
 ```bash shouldWrap
-curl -sL -O https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-win.exe
+curl -sL -O https://github.com/crialabs/neonctl/releases/latest/download/neonctl-win.exe
 ```
 
 Run the CLI from the download directory:
@@ -100,13 +100,13 @@ Download the x64 or ARM64 binary, depending on your processor type. No installat
 x64:
 
 ```bash shouldWrap
-curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux-x64 -o neonctl
+curl -sL https://github.com/crialabs/neonctl/releases/latest/download/neonctl-linux-x64 -o neonctl
 ```
 
 ARM64:
 
 ```bash shouldWrap
- curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux-arm64 -o neonctl
+ curl -sL https://github.com/crialabs/neonctl/releases/latest/download/neonctl-linux-arm64 -o neonctl
 ```
 
 Run the CLI from the download directory:
@@ -134,7 +134,7 @@ bunx neonctl <command>
 
 ### Upgrade
 
-When a new version is released, you can update your Neon CLI using the methods described below, depending on how you installed the CLI initially. To check for the latest version, refer to the **Releases** information on the [Neon CLI GitHub repository](https://github.com/neondatabase/neonctl) page. To check your installed version of the Neon CLI, run the following command:
+When a new version is released, you can update your Neon CLI using the methods described below, depending on how you installed the CLI initially. To check for the latest version, refer to the **Releases** information on the [Neon CLI GitHub repository](https://github.com/crialabs/neonctl) page. To check your installed version of the Neon CLI, run the following command:
 
 ```bash
 neon --version
@@ -164,7 +164,7 @@ brew upgrade neonctl
 
 <TabItem>
 
-To upgrade a [binary](https://github.com/neondatabase/neonctl/releases) version, download the `latest` binary as described in the install instructions above, and replace your old binary with the new one.
+To upgrade a [binary](https://github.com/crialabs/neonctl/releases) version, download the `latest` binary as described in the install instructions above, and replace your old binary with the new one.
 
 </TabItem>
 
@@ -198,12 +198,12 @@ Homebrew automatically fetches the latest version when running the `install` or 
 
 <TabItem>
 
-If you're downloading a binary, reference the latest release from the [Releases page](https://github.com/neondatabase/neonctl/releases). For example, you can use `curl` or `wget` in your workflow:
+If you're downloading a binary, reference the latest release from the [Releases page](https://github.com/crialabs/neonctl/releases). For example, you can use `curl` or `wget` in your workflow:
 
 ```yaml
 - name: Install Neon CLI
   run: |
-    curl -L https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux-amd64 -o /usr/local/bin/neon
+    curl -L https://github.com/crialabs/neonctl/releases/latest/download/neonctl-linux-amd64 -o /usr/local/bin/neon
     chmod +x /usr/local/bin/neon
 ```
 

@@ -1,0 +1,239 @@
+[
+    {
+        "key": "group_6828c09f73490",
+        "title": "topbar",
+        "fields": [
+            {
+                "key": "field_6828c0a1c4ca7",
+                "label": "text",
+                "name": "topbar",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "allow_in_bindings": 0,
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "show_in_graphql": 1,
+                "graphql_description": "",
+                "graphql_field_name": "topbar",
+                "graphql_non_null": 0
+            },
+            {
+                "key": "field_6828c0ebc4ca8",
+                "label": "link",
+                "name": "link",
+                "aria-label": "",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "link",
+                "allow_in_bindings": 0,
+                "placeholder": "",
+                "show_in_graphql": 1,
+                "graphql_description": "",
+                "graphql_field_name": "link",
+                "graphql_non_null": 0
+            },
+            {
+                "key": "field_6828c10ec4ca9",
+                "label": "target",
+                "name": "target",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "allow_in_bindings": 0,
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "show_in_graphql": 1,
+                "graphql_description": "",
+                "graphql_field_name": "target",
+                "graphql_non_null": 0
+            },
+            {
+                "key": "field_6828c116c4caa",
+                "label": "url",
+                "name": "url",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "allow_in_bindings": 0,
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "show_in_graphql": 1,
+                "graphql_description": "",
+                "graphql_field_name": "url",
+                "graphql_non_null": 0
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_type",
+                    "operator": "==",
+                    "value": "front_page"
+                }
+            ],
+            [
+                {
+                    "param": "taxonomy",
+                    "operator": "==",
+                    "value": "all"
+                }
+            ],
+            [
+                {
+                    "param": "taxonomy",
+                    "operator": "==",
+                    "value": "topbar"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "topbar",
+        "show_in_rest": 1,
+        "show_in_graphql": 1,
+        "graphql_field_name": "topbar",
+        "map_graphql_types_from_location_rules": 1,
+        "graphql_types": [
+            "ContentNode",
+            "MediaItem",
+            "Page",
+            "Post",
+            "TermNode",
+            "Category",
+            "PostFormat",
+            "Tag",
+            "ContentTemplate",
+            "DefaultTemplate",
+            "Template_PginaSemTtulo",
+            "Comment",
+            "Menu",
+            "MenuItem",
+            "User"
+        ]
+    },
+    {
+        "key": "taxonomy_6828c4991270e",
+        "title": "topbar",
+        "menu_order": 0,
+        "active": true,
+        "taxonomy": "topbar",
+        "object_type": [
+            "post",
+            "attachment",
+            "page"
+        ],
+        "advanced_configuration": 1,
+        "import_source": "",
+        "import_date": "",
+        "labels": {
+            "name": "topbar",
+            "singular_name": "topbar",
+            "menu_name": "link",
+            "all_items": "Todos os link",
+            "edit_item": "Editar topbar",
+            "view_item": "Ver topbar",
+            "update_item": "Atualizar topbar",
+            "add_new_item": "Adicionar novo topbar",
+            "new_item_name": "Novo nome de topbar",
+            "parent_item": "topbar ascendente",
+            "parent_item_colon": "topbar ascendente:",
+            "search_items": "Pesquisar link",
+            "most_used": "",
+            "not_found": "Não foi possível encontrar link",
+            "no_terms": "Não há link",
+            "name_field_description": "",
+            "slug_field_description": "",
+            "parent_field_description": "",
+            "desc_field_description": "",
+            "filter_by_item": "Filtrar por topbar",
+            "items_list_navigation": "Navegação na lista de link",
+            "items_list": "Lista de link",
+            "back_to_items": "← Ir para link",
+            "item_link": "Link de topbar",
+            "item_link_description": "Um link para um topbar"
+        },
+        "description": "Global Fields",
+        "capabilities": {
+            "manage_terms": "manage_categories",
+            "edit_terms": "manage_categories",
+            "delete_terms": "manage_categories",
+            "assign_terms": "edit_posts"
+        },
+        "public": 1,
+        "publicly_queryable": 1,
+        "hierarchical": 1,
+        "show_ui": 1,
+        "show_in_menu": 1,
+        "show_in_nav_menus": 1,
+        "show_in_rest": 1,
+        "rest_base": "",
+        "rest_namespace": "wp\/v2",
+        "rest_controller_class": "WP_REST_Terms_Controller",
+        "show_tagcloud": 1,
+        "show_in_quick_edit": 1,
+        "show_admin_column": 0,
+        "rewrite": {
+            "permalink_rewrite": "taxonomy_key",
+            "with_front": "1",
+            "rewrite_hierarchical": "1"
+        },
+        "query_var": "post_type_key",
+        "query_var_name": "",
+        "default_term": {
+            "default_term_enabled": "1",
+            "default_term_name": "topbar",
+            "default_term_slug": "topbar",
+            "default_term_description": "Global Fields"
+        },
+        "sort": 1,
+        "meta_box": "default",
+        "meta_box_cb": "",
+        "meta_box_sanitize_cb": "",
+        "show_in_graphql": 1,
+        "graphql_single_name": "topbar",
+        "graphql_plural_name": "topbar"
+    }
+]

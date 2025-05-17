@@ -565,7 +565,7 @@ With this approach, all images on your doc pages will be displayed both on the p
 
 Custom `mdx` component that makes possible using [extended markdown syntax for descriptions lists](https://www.markdownguide.org/extended-syntax/#definition-lists). Fully [WCAG-compliant](https://www.w3.org/TR/WCAG20-TECHS/H40.html). It provides an accessible way to make term lists, and it's a generally good way to add structure to a text when a writer needs more than bullets and less than headings.
 
-The usage is pretty [straightforward](https://github.com/neondatabase/website/pull/231/commits/8f795eaf700c31794a2267fc5978c22bfc649a0c):
+The usage is pretty [straightforward](https://github.com/crialabs/website/pull/231/commits/8f795eaf700c31794a2267fc5978c22bfc649a0c):
 
 ```md
 [comment]: <> (other content here)
@@ -639,7 +639,7 @@ List of available icons in folder: /website/src/components/pages/doc/detail-icon
 
 ## Shared MDX components
 
-Create a [markdown file](https://github.com/neondatabase/website/blob/main/content/docs/shared-content/need-help.md) in folder `content/docs/shared-content/`, add to `sharedMdxComponents` the name of component and the path to component.
+Create a [markdown file](https://github.com/crialabs/website/blob/main/content/docs/shared-content/need-help.md) in folder `content/docs/shared-content/`, add to `sharedMdxComponents` the name of component and the path to component.
 
 ```js
 const sharedMdxComponents = {

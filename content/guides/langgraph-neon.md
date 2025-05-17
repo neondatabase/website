@@ -92,7 +92,7 @@ langchain-google-genai
 ```
 
 <Admonition type="note">
-`neon-api` is the [Python wrapper for Neon's API](https://github.com/neondatabase/neon-api-python).
+`neon-api` is the [Python wrapper for Neon's API](https://github.com/crialabs/neon-api-python).
 </Admonition>
 
 Install these libraries using pip:
@@ -465,7 +465,7 @@ You can verify the successful completion of the task by checking the [Neon Conso
 You can find the source code for the application described in this guide on GitHub.
 
 <DetailIconCards>
-    <a href="https://github.com/neondatabase-labs/langgraph-neon-example" description="LangGraph + Neon AI agent example" icon="github">AI Agent with LangGraph and Neon</a>
+    <a href="https://github.com/crialabs-labs/langgraph-neon-example" description="LangGraph + Neon AI agent example" icon="github">AI Agent with LangGraph and Neon</a>
 </DetailIconCards>
 
 ## Conclusion

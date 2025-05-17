@@ -74,7 +74,7 @@ In addition to managing data, you can manage your database schema directly from 
 
 ## Tables page updates
 
-The **Tables** page in the Neon Console is powered by a Drizzle Studio integration. You can check the Drizzle Studio integration version in your browser by inspecting the Tables page. For example, in Chrome, right-click, select **Inspect**, and go to the **Console** tab to view the current `Tables version`. You can cross-reference this version with the [Neon Drizzle Studio Integration Changelog](https://github.com/neondatabase/neon-drizzle-studio-changelog/blob/main/CHANGELOG.md) to track updates.
+The **Tables** page in the Neon Console is powered by a Drizzle Studio integration. You can check the Drizzle Studio integration version in your browser by inspecting the Tables page. For example, in Chrome, right-click, select **Inspect**, and go to the **Console** tab to view the current `Tables version`. You can cross-reference this version with the [Neon Drizzle Studio Integration Changelog](https://github.com/crialabs/neon-drizzle-studio-changelog/blob/main/CHANGELOG.md) to track updates.
 
 ## Reporting errors
 

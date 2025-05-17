@@ -22,10 +22,10 @@ After contacting us, we'll email you to gather more information about your requi
 - Security and compliance requirements.
 - Your desired outcome and timeline.
 
-We may also ask you to run our [pg-prechecks script](https://github.com/neondatabase-labs/pg-prechecks) to gather details about your Postgres server and send the results back to us. These details help us understand your needs and prepare pricing and migration proposals.
+We may also ask you to run our [pg-prechecks script](https://github.com/crialabs-labs/pg-prechecks) to gather details about your Postgres server and send the results back to us. These details help us understand your needs and prepare pricing and migration proposals.
 
 <Admonition type="note" title="about pg-prechecks">
-The `pg-prechecks` script provides a summary of a Postgres database server’s status and configuration. It's a modified version of `pt-pg-summary`, which is part of the Percona Toolkit. To learn more about this tool, refer to the [pg-prechecks README](https://github.com/neondatabase-labs/pg-prechecks?tab=readme-ov-file#pg-prechecks).
+The `pg-prechecks` script provides a summary of a Postgres database server’s status and configuration. It's a modified version of `pt-pg-summary`, which is part of the Percona Toolkit. To learn more about this tool, refer to the [pg-prechecks README](https://github.com/crialabs-labs/pg-prechecks?tab=readme-ov-file#pg-prechecks).
 </Admonition>
 
 ## Call with the Neon Solutions team

@@ -404,7 +404,7 @@ In this guide, you learned how to add feature flags in your SvelteKit apps using
 You can find the source code for the application described in this guide on GitHub.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/examples/tree/main/with-sveltekit-feature-flags" description="Feature flags with SvelteKit and Neon" icon="github">Feature flags with SvelteKit and Neon</a>
+<a href="https://github.com/crialabs/examples/tree/main/with-sveltekit-feature-flags" description="Feature flags with SvelteKit and Neon" icon="github">Feature flags with SvelteKit and Neon</a>
 </DetailIconCards>
 
 <NeedHelp />

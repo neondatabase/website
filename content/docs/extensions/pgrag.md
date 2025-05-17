@@ -19,7 +19,7 @@ updatedOn: '2024-11-30T11:53:56.051Z'
 </DocsList>
 
 <DocsList title="Source code" theme="repo">
-  <a href="https://github.com/neondatabase-labs/pgrag">pgrag GitHub repository</a>
+  <a href="https://github.com/crialabs-labs/pgrag">pgrag GitHub repository</a>
 </DocsList>
 
 </InfoBlock>
@@ -106,7 +106,7 @@ The first extension is the `pgrag` extension. The other two extensions are the m
 
 ## pgrag functions
 
-This section lists the functions provided by `pgrag`. For function usage examples, refer to the [end-to-end RAG example](#end-to-end-rag-example) below or the [pgrag GitHub repository](https://github.com/neondatabase-labs/pgrag).
+This section lists the functions provided by `pgrag`. For function usage examples, refer to the [end-to-end RAG example](#end-to-end-rag-example) below or the [pgrag GitHub repository](https://github.com/crialabs-labs/pgrag).
 
 - **Text extraction**
 

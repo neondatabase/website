@@ -195,9 +195,9 @@ You can find the source code for the applications described in this guide on Git
 
 <DetailIconCards>
 
-<a href="https://github.com/neondatabase/examples/tree/main/with-astro" description="Get started with Astro and Neon" icon="github">Get started with Astro and Neon</a>
+<a href="https://github.com/crialabs/examples/tree/main/with-astro" description="Get started with Astro and Neon" icon="github">Get started with Astro and Neon</a>
 
-<a href="https://github.com/neondatabase/examples/tree/main/with-astro-api-routes" description="Get started with Astro API Routes and Neon" icon="github">Get started with Astro API Routes and Neon</a>
+<a href="https://github.com/crialabs/examples/tree/main/with-astro-api-routes" description="Get started with Astro API Routes and Neon" icon="github">Get started with Astro API Routes and Neon</a>
 
 </DetailIconCards>
 

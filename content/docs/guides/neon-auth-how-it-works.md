@@ -12,7 +12,7 @@ updatedOn: '2025-05-16T19:06:06.841Z'
   </DocsList>
 
   <DocsList title="Sample project" theme="repo">
-    <a href="https://github.com/neondatabase-labs/neon-auth-demo-app">Neon Auth Demo App</a>
+    <a href="https://github.com/crialabs-labs/neon-auth-demo-app">Neon Auth Demo App</a>
   </DocsList>
 </InfoBlock>
 

@@ -213,7 +213,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"title":"The Great Gatsby"
 You can find the source code for the applications described in this guide on GitHub.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/examples/tree/main/with-micronaut-kotlin" description="Get started with Micronaut Kotlin and Neon" icon="github">Get started with Micronaut Kotlin and Neon</a>
+<a href="https://github.com/crialabs/examples/tree/main/with-micronaut-kotlin" description="Get started with Micronaut Kotlin and Neon" icon="github">Get started with Micronaut Kotlin and Neon</a>
 </DetailIconCards>
 </Steps>
 

@@ -188,7 +188,7 @@ You can use the **Tables** feature in the Neon Console to view the table that wa
 You can find the application code for the example above on GitHub.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/neon-ecto-getting-started-app" description="Learn how to connect from Elixir with Ecto to Neon" icon="github">Neon Ecto Getting Started App</a>
+<a href="https://github.com/crialabs/neon-ecto-getting-started-app" description="Learn how to connect from Elixir with Ecto to Neon" icon="github">Neon Ecto Getting Started App</a>
 </DetailIconCards>
 
 ## Next steps

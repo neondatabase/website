@@ -197,7 +197,7 @@ When working with Neon and .NET:
 ## Source code
 
 You can find the source code for the application described in this guide on GitHub:
-[Get started with .NET (C#) and Neon](https://github.com/neondatabase/examples/tree/main/with-dotnet-npgsql)
+[Get started with .NET (C#) and Neon](https://github.com/crialabs/examples/tree/main/with-dotnet-npgsql)
 
 ## Resources
 

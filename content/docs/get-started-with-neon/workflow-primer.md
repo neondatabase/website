@@ -115,13 +115,13 @@ You can find these GitHub Actions here:
 
 <DetailIconCards>
 
-<a href="https://github.com/neondatabase/create-branch-action" description="Create Neon Branch GitHub Action" icon="github">Create branch Action</a>
+<a href="https://github.com/crialabs/create-branch-action" description="Create Neon Branch GitHub Action" icon="github">Create branch Action</a>
 
-<a href="https://github.com/neondatabase/delete-branch-action" description="Delete Neon Branch GitHub Action" icon="github">Delete Branch Action</a>
+<a href="https://github.com/crialabs/delete-branch-action" description="Delete Neon Branch GitHub Action" icon="github">Delete Branch Action</a>
 
-<a href="https://github.com/neondatabase/reset-branch-action" description="Reset Neon Branch GitHub Action" icon="github">Reset Branch Action</a>
+<a href="https://github.com/crialabs/reset-branch-action" description="Reset Neon Branch GitHub Action" icon="github">Reset Branch Action</a>
 
-<a href="https://github.com/neondatabase/schema-diff-action" description="Neon Schema Diff GitHub Action" icon="github">Schema Diff Action</a>
+<a href="https://github.com/crialabs/schema-diff-action" description="Neon Schema Diff GitHub Action" icon="github">Schema Diff Action</a>
 
 </DetailIconCards>
 
@@ -169,9 +169,9 @@ You can also automate branch creation for every preview. These example applicati
 
 <DetailIconCards>
 
-<a href="https://github.com/neondatabase/preview-branches-with-fly" description="Sample project showing you how to create a branch for every Fly.io preview deployment" icon="github">Preview branches with Fly.io</a>
+<a href="https://github.com/crialabs/preview-branches-with-fly" description="Sample project showing you how to create a branch for every Fly.io preview deployment" icon="github">Preview branches with Fly.io</a>
 
-<a href="https://github.com/neondatabase/preview-branches-with-vercel" description="Sample project showing you how to create a branch for every Vercel preview deployment" icon="github">Preview branches with Vercel</a>
+<a href="https://github.com/crialabs/preview-branches-with-vercel" description="Sample project showing you how to create a branch for every Vercel preview deployment" icon="github">Preview branches with Vercel</a>
 
 </DetailIconCards>
 

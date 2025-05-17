@@ -61,7 +61,7 @@ For now, if you need to implement public access in your application, we recommen
 
 ### Using Neon RLS with custom JWTs
 
-If you don't want to use a third-party authentication provider, you can build your application to generate and sign its own JWTs. Here's a sample application that demonstrates this approach: [See demo](https://github.com/neondatabase/authorize-demo-custom-jwt)
+If you don't want to use a third-party authentication provider, you can build your application to generate and sign its own JWTs. Here's a sample application that demonstrates this approach: [See demo](https://github.com/crialabs/authorize-demo-custom-jwt)
 
 ## Before and after Neon RLS
 
@@ -232,14 +232,14 @@ The configuration of the expected audience can be done via the Neon RLS UI or vi
 You can use these sample ToDo applications to get started using Neon RLS with popular authentication providers.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase-labs/stack-nextjs-neon-rls" description="A Todo List built with Stack Auth, Next.js, and Neon RLS" icon="github">Stack Auth + Neon RLS</a>
-<a href="https://github.com/neondatabase-labs/auth0-nextjs-neon-rls" description="A Todo List built with Auth0, Next.js, and Neon RLS" icon="github">Auth0 + Neon RLS</a>
-<a href="https://github.com/neondatabase-labs/stytch-nextjs-neon-rls" description="A Todo List built with Stytch, Next.js, and Neon RLS" icon="github">Stytch + Neon RLS</a>
-<a href="https://github.com/neondatabase-labs/azure-ad-b2c-nextjs-neon-rls" description="A Todo List built with Azure AD B2C, Next.js, and Neon RLS" icon="github">Azure AD B2C + Neon RLS</a>
-<a href="https://github.com/neondatabase-labs/propelauth-nextjs-neon-rls" description="A Todo list built with PropelAuth, Next.js, and Neon RLS" icon="github">PropelAuth + Neon RLS</a>
-<a href="https://github.com/neondatabase-labs/supertokens-nestjs-solidjs-drizzle-neon-rls" description="A Demo app built with SuperTokens, Nest.js, Solid.js, Drizzle, and Neon RLS" icon="github">SuperTokens + Neon RLS</a>
-<a href="https://github.com/neondatabase-labs/workos-drizzle-sveltekit-neon-rls" description="A Demo Post App built with WorkOS, SvelteKit, Neon RLS" icon="github">WorkOS + Neon RLS</a>
-<a href="https://github.com/neondatabase-labs/authorize-demo-custom-jwt" description="A demo of Neon RLS with custom generated JWTs" icon="github">Neon RLS with custom JWTs</a>
+<a href="https://github.com/crialabs-labs/stack-nextjs-neon-rls" description="A Todo List built with Stack Auth, Next.js, and Neon RLS" icon="github">Stack Auth + Neon RLS</a>
+<a href="https://github.com/crialabs-labs/auth0-nextjs-neon-rls" description="A Todo List built with Auth0, Next.js, and Neon RLS" icon="github">Auth0 + Neon RLS</a>
+<a href="https://github.com/crialabs-labs/stytch-nextjs-neon-rls" description="A Todo List built with Stytch, Next.js, and Neon RLS" icon="github">Stytch + Neon RLS</a>
+<a href="https://github.com/crialabs-labs/azure-ad-b2c-nextjs-neon-rls" description="A Todo List built with Azure AD B2C, Next.js, and Neon RLS" icon="github">Azure AD B2C + Neon RLS</a>
+<a href="https://github.com/crialabs-labs/propelauth-nextjs-neon-rls" description="A Todo list built with PropelAuth, Next.js, and Neon RLS" icon="github">PropelAuth + Neon RLS</a>
+<a href="https://github.com/crialabs-labs/supertokens-nestjs-solidjs-drizzle-neon-rls" description="A Demo app built with SuperTokens, Nest.js, Solid.js, Drizzle, and Neon RLS" icon="github">SuperTokens + Neon RLS</a>
+<a href="https://github.com/crialabs-labs/workos-drizzle-sveltekit-neon-rls" description="A Demo Post App built with WorkOS, SvelteKit, Neon RLS" icon="github">WorkOS + Neon RLS</a>
+<a href="https://github.com/crialabs-labs/authorize-demo-custom-jwt" description="A demo of Neon RLS with custom generated JWTs" icon="github">Neon RLS with custom JWTs</a>
 </DetailIconCards>
 
 ## Current limitations

@@ -110,7 +110,7 @@ psycopg2-binary
 ```
 
 <Admonition type="note">
-`neon-api` is the [Python wrapper for Neon's API](https://github.com/neondatabase/neon-api-python).
+`neon-api` is the [Python wrapper for Neon's API](https://github.com/crialabs/neon-api-python).
 </Admonition>
 
 Install these libraries using pip:
@@ -531,14 +531,14 @@ You can verify the successful completion of the task by checking the [Neon Conso
 You can find the source code for the application described in this guide on GitHub.
 
 <DetailIconCards>
-    <a href="https://github.com/neondatabase-labs/autogen-neon-example" description="AutoGen + Neon AI agent example" icon="github">AI Agent with AutoGen and Neon</a>
+    <a href="https://github.com/crialabs-labs/autogen-neon-example" description="AutoGen + Neon AI agent example" icon="github">AI Agent with AutoGen and Neon</a>
 </DetailIconCards>
 
 ## Resources
 
 - [AutoGen documentation](https://microsoft.github.io/autogen/stable/)
 - [Neon documentation](/docs)
-- [neon_api: Python API wrapper for the Neon API](https://github.com/neondatabase/neon-api-python)
+- [neon_api: Python API wrapper for the Neon API](https://github.com/crialabs/neon-api-python)
 - [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api)
 - [Neon API keys](/docs/manage/api-keys#creating-api-keys)
 - [Postgres for AI Agents](/use-cases/ai-agents)

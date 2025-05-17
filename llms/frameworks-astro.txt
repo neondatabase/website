@@ -184,5 +184,5 @@ When you run `npm run dev` you can expect to see the following when you visit th
 ## Source code
 
 You can find the source code for the applications described in this guide on GitHub:
-- [Get started with Astro and Neon](https://github.com/neondatabase/examples/tree/main/with-astro)
-- [Get started with Astro API Routes and Neon](https://github.com/neondatabase/examples/tree/main/with-astro-api-routes)
+- [Get started with Astro and Neon](https://github.com/crialabs/examples/tree/main/with-astro)
+- [Get started with Astro API Routes and Neon](https://github.com/crialabs/examples/tree/main/with-astro-api-routes)

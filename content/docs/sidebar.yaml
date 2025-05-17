@@ -429,6 +429,8 @@
       slug: use-cases/use-cases-overview
       icon: use-case
       items:
+        - title: Landing Pages
+          slug: use-cases/landing-page
         - title: SaaS apps
           slug: use-cases/saas-apps
         - title: Variable traffic
@@ -628,7 +630,7 @@
       slug: /templates
       icon: template
     - title: Examples repo
-      slug: https://github.com/neondatabase/examples
+      slug: https://github.com/crialabs/examples
       icon: search
 - section: Frameworks & integrations
   items:

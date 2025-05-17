@@ -77,7 +77,7 @@ Verify the installation by checking the CLI version:
 neon --version
 ```
 
-For the latest version, refer to the [Neon CLI GitHub repository](https://github.com/neondatabase/neonctl)
+For the latest version, refer to the [Neon CLI GitHub repository](https://github.com/crialabs/neonctl)
 
 ## Authenticate
 

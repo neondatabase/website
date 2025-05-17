@@ -404,7 +404,7 @@ In this guide, we set up a new TypeScript project using `Hono.js` and `Drizzle` 
 You can find the source code for the application described in this guide on GitHub.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/guide-neon-drizzle" description="Run Neon database migrations using Drizzle" icon="github">Migrations with Neon and Drizzle</a>
+<a href="https://github.com/crialabs/guide-neon-drizzle" description="Run Neon database migrations using Drizzle" icon="github">Migrations with Neon and Drizzle</a>
 </DetailIconCards>
 
 ## Resources

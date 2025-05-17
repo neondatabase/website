@@ -43,7 +43,7 @@ Accelerate your development with context rules that help AI tools write better c
 Create autonomous agents that can manage and interact with your Neon databases programmatically.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/toolkit" description="A terse client for spinning up Postgres databases and running SQL queries" icon="github">@neondatabase/toolkit</a>
+<a href="https://github.com/crialabs/toolkit" description="A terse client for spinning up Postgres databases and running SQL queries" icon="github">@neondatabase/toolkit</a>
 </DetailIconCards>
 
 ## Scale with Agent frameworks

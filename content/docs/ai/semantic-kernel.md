@@ -138,6 +138,6 @@ Explore examples and sample code for using SemanticKernel with Neon Serverless P
 
 <DetailIconCards>
 
-<a href="https://github.com/neondatabase-labs/neon-semantic-kernel-examples" description="A .NET RAG example app built with Azure OpenAI and Semantic Kernel" icon="github">RAG .NET console app (Azure OpenAI + Semantic Kernel)</a>
+<a href="https://github.com/crialabs-labs/neon-semantic-kernel-examples" description="A .NET RAG example app built with Azure OpenAI and Semantic Kernel" icon="github">RAG .NET console app (Azure OpenAI + Semantic Kernel)</a>
 
 </DetailIconCards>

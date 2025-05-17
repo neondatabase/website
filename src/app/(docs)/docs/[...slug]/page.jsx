@@ -29,7 +29,10 @@ export async function generateStaticParams() {
 
   if (!posts) return notFound();
 
-  return posts.map(({ slug }) => {
+  // Filtra os posts undefined antes de fazer o map
+  const validPosts = posts.filter((post) => post && post.slug);
+
+  return validPosts.map(({ slug }) => {
     const slugsArray = slug.split('/');
 
     return {

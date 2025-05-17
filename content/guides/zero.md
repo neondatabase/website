@@ -124,7 +124,7 @@ You should now have the `hello-zero` application running in your browser. It con
 3.  **Verify data in Neon (Optional):** In the Neon Console, navigate to **Tables** and select the `message` table. You should see the messages you added in the application. This confirms that data is being synchronized correctly between the application, `zero-cache`, and Neon.
     ![Neon messages table](/docs/guides/zero-message-table.png)
 
-Congratulations! You have successfully set up Rocicorp Zero with Neon Postgres using the `hello-zero` example application. Check out [Canvas](https://github.com/neondatabase-labs/canvas), a collaborative drawing app built with Zero and Neon, for a more complex example of Zero in action.
+Congratulations! You have successfully set up Rocicorp Zero with Neon Postgres using the `hello-zero` example application. Check out [Canvas](https://github.com/crialabs-labs/canvas), a collaborative drawing app built with Zero and Neon, for a more complex example of Zero in action.
 
 <Admonition type="note" title="Schema Changes">
 Zero uses Postgres event triggers for efficient schema migration handling. However, Neon currently does not support event triggers for tracking DDL (schema) changes due to limitations around superuser privileges.
@@ -141,6 +141,6 @@ While this reset mechanism works, it can be inefficient for larger databases (e.
 - [Zero Deployment Guide](https://zero.rocicorp.dev/docs/deployment)
 - [`hello-zero` Repository](https://github.com/rocicorp/hello-zero)
 - [Neon Documentation](/docs)
-- [Canvas - A collaborative drawing app built with Zero and Neon](https://github.com/neondatabase-labs/canvas)
+- [Canvas - A collaborative drawing app built with Zero and Neon](https://github.com/crialabs-labs/canvas)
 
 <NeedHelp/>

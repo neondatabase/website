@@ -21,8 +21,8 @@ Arrays in Postgres are declared by specifying the element type followed by squar
 
 Array literals in Postgres are written within curly braces `{}` and separated by commas. For instance,
 
-- An array of integers might look like `{1, 2, 3}`.
-- Multidimensional arrays use nested curly braces, like `{{1, 2, 3}, {4, 5, 6}}`.
+- An array of integers might look like {% raw %}{1, 2, 3}{% endraw %}.
+- Multidimensional arrays use nested curly braces, like {% raw %}{{1, 2, 3}, {4, 5, 6}}{% endraw %}.
 
 The `ARRAY` constructor syntax can also be used to create arrays. For example,
 

@@ -180,9 +180,9 @@ You can find the source code for the applications described in this guide on Git
 
 <DetailIconCards>
 
-<a href="https://github.com/neondatabase/examples/tree/main/with-python-asyncpg" description="Get started with Python and Neon using asyncpg" icon="github">Get started with Python and Neon using asyncpg</a>
+<a href="https://github.com/crialabs/examples/tree/main/with-python-asyncpg" description="Get started with Python and Neon using asyncpg" icon="github">Get started with Python and Neon using asyncpg</a>
 
-<a href="https://github.com/neondatabase/examples/tree/main/with-python-psycopg2" description="Get started with Python and Neon using psycopg2" icon="github">Get started with Python and Neon using psycopg2</a>
+<a href="https://github.com/crialabs/examples/tree/main/with-python-psycopg2" description="Get started with Python and Neon using psycopg2" icon="github">Get started with Python and Neon using psycopg2</a>
 
 </DetailIconCards>
 

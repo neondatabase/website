@@ -408,7 +408,7 @@ comment_url:
   description: The url of the comment containing the schema diff
 ```
 
-The schema diff SQL patch is posted as a **Neon Schema Diff summary** comment in the pull request, similar to [this example](https://github.com/neondatabase/schema-diff-action/blob/main/docs/pr_comment.md).
+The schema diff SQL patch is posted as a **Neon Schema Diff summary** comment in the pull request, similar to [this example](https://github.com/crialabs/schema-diff-action/blob/main/docs/pr_comment.md).
 
 The `comment_url` allows you to easily share the schema diff for review. It also allows developers or scripts to access the comment programmatically for use in other automations.
 
@@ -442,13 +442,13 @@ The following example applications use GitHub Actions workflows to create and de
 
 <DetailIconCards>
 
-<a href="https://github.com/neondatabase/preview-branches-with-cloudflare" description="Demonstrates using GitHub Actions workflows to create a Neon branch for every Cloudflare Pages preview deployment" icon="github">Preview branches with Cloudflare Pages</a>
+<a href="https://github.com/crialabs/preview-branches-with-cloudflare" description="Demonstrates using GitHub Actions workflows to create a Neon branch for every Cloudflare Pages preview deployment" icon="github">Preview branches with Cloudflare Pages</a>
 
-<a href="https://github.com/neondatabase/preview-branches-with-vercel" description="Demonstrates using GitHub Actions workflows to create a Neon branch for every Vercel preview deployment" icon="github">Preview branches with Vercel</a>
+<a href="https://github.com/crialabs/preview-branches-with-vercel" description="Demonstrates using GitHub Actions workflows to create a Neon branch for every Vercel preview deployment" icon="github">Preview branches with Vercel</a>
 
-<a href="https://github.com/neondatabase/preview-branches-with-fly" description="Demonstrates using GitHub Actions workflows to create a Neon branch for every Fly.io preview deployment" icon="github">Preview branches with Fly.io</a>
+<a href="https://github.com/crialabs/preview-branches-with-fly" description="Demonstrates using GitHub Actions workflows to create a Neon branch for every Fly.io preview deployment" icon="github">Preview branches with Fly.io</a>
 
-<a href="https://github.com/neondatabase/neon_twitter" description="Demonstrates using GitHub Actions workflows to create a Neon branch for schema validation and perform migrations" icon="github">Neon Twitter app</a>
+<a href="https://github.com/crialabs/neon_twitter" description="Demonstrates using GitHub Actions workflows to create a Neon branch for schema validation and perform migrations" icon="github">Neon Twitter app</a>
 
 </DetailIconCards>
 

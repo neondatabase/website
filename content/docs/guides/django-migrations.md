@@ -363,7 +363,7 @@ In this guide, we demonstrated how to set up a Django project with Neon Postgres
 You can find the source code for the application described in this guide on GitHub.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/guide-neon-django" description="Run migrations in a Neon-Django project" icon="github">Migrations with Neon and Django</a>
+<a href="https://github.com/crialabs/guide-neon-django" description="Run migrations in a Neon-Django project" icon="github">Migrations with Neon and Django</a>
 </DetailIconCards>
 
 ## Resources

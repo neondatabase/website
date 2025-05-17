@@ -164,7 +164,7 @@ You can find the source code for the application described in this guide on GitH
 
 <DetailIconCards>
 
-<a href="https://github.com/neondatabase/examples/tree/main/with-nextjs-drizzle-local-vercel" description="Drizzle with Local and Serverless Postgres" icon="github">Drizzle with Local and Serverless Postgres</a>
+<a href="https://github.com/crialabs/examples/tree/main/with-nextjs-drizzle-local-vercel" description="Drizzle with Local and Serverless Postgres" icon="github">Drizzle with Local and Serverless Postgres</a>
 
 </DetailIconCards>
 

@@ -34,9 +34,9 @@ Find out how you can integrate with Neon.
 
 <a href="/docs/guides/oauth-integration" description="Integrate with Neon using OAuth" icon="check">OAuth</a>
 
-<a href="https://github.com/neondatabase/neon-branches-visualizer" description="Check out a sample OAuth application" icon="lock-landscape">Sample OAuth app</a>
+<a href="https://github.com/crialabs/neon-branches-visualizer" description="Check out a sample OAuth application" icon="lock-landscape">Sample OAuth app</a>
 
-<a href="https://github.com/neondatabase/toolkit" description="Spin up a Postgres database in seconds" icon="openai">Toolkit for AI Agents</a>
+<a href="https://github.com/crialabs/toolkit" description="Spin up a Postgres database in seconds" icon="openai">Toolkit for AI Agents</a>
 
 </DetailIconCards>
 

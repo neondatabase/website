@@ -386,7 +386,7 @@ With a total run cost of only $0.01 in OpenAI credits (as seen in the AgentOps d
 You can find the source code for the application described in this guide on GitHub.
 
 <DetailIconCards>
-    <a href="https://github.com/neondatabase-labs/neon-agenstack-example" description="AgentStack + Neon Example" icon="github">Building AI Agents with AgentStack and Neon</a>
+    <a href="https://github.com/crialabs-labs/neon-agenstack-example" description="AgentStack + Neon Example" icon="github">Building AI Agents with AgentStack and Neon</a>
 </DetailIconCards>
 
 ## Resources

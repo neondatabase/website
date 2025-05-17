@@ -259,7 +259,7 @@ getPgVersion();
 You can find the source code for the application described in this guide on GitHub.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/examples/tree/main/with-nodejs" description="Get started with Node.js and Neon" icon="github">Get started with Node.js and Neon</a>
+<a href="https://github.com/crialabs/examples/tree/main/with-nodejs" description="Get started with Node.js and Neon" icon="github">Get started with Node.js and Neon</a>
 </DetailIconCards>
 
 ## Community resources

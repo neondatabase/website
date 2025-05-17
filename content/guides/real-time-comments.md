@@ -23,7 +23,7 @@ To follow this guide, you’ll need the following:
 Let’s get started by cloning the Next.js project with the following command:
 
 ```shell shouldWrap
-git clone https://github.com/neondatabase-labs/ably-livesync-neon
+git clone https://github.com/crialabs-labs/ably-livesync-neon
 ```
 
 Once that is done, move into the project directory and install the necessary dependencies with the following command:
@@ -641,7 +641,7 @@ The repository is now ready to deploy to Vercel. Use the following steps to depl
 
 <DetailIconCards>
 
-<a target="_blank" href="https://github.com/neondatabase-labs/ably-livesync-neon" description="A Real-Time Comments Application" icon="github">Real-Time Comments Application</a>
+<a target="_blank" href="https://github.com/crialabs-labs/ably-livesync-neon" description="A Real-Time Comments Application" icon="github">Real-Time Comments Application</a>
 
 </DetailIconCards>
 

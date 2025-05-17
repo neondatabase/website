@@ -97,10 +97,10 @@ jobs:
 
 You can find these GitHub Actions here:
 
-- [Create branch Action](https://github.com/neondatabase/create-branch-action)
-- [Delete Branch Action](https://github.com/neondatabase/delete-branch-action)
-- [Reset Branch Action](https://github.com/neondatabase/reset-branch-action)
-- [Schema Diff Action](https://github.com/neondatabase/schema-diff-action)
+- [Create branch Action](https://github.com/crialabs/create-branch-action)
+- [Delete Branch Action](https://github.com/crialabs/delete-branch-action)
+- [Reset Branch Action](https://github.com/crialabs/reset-branch-action)
+- [Schema Diff Action](https://github.com/crialabs/schema-diff-action)
 
 For more detailed documentation, see [Automate branching with GitHub Actions](https://neon.tech/docs/guides/branching-github-actions).
 
@@ -138,8 +138,8 @@ preview/pr-123-feat/new-login-screen
 
 You can also automate branch creation for every preview. These example applications show how to create Neon branches with GitHub Actions for every preview environment.
 
-- [Preview branches with Fly.io](https://github.com/neondatabase/preview-branches-with-fly)
-- [Preview branches with Vercel](https://github.com/neondatabase/preview-branches-with-vercel)
+- [Preview branches with Fly.io](https://github.com/crialabs/preview-branches-with-fly)
+- [Preview branches with Vercel](https://github.com/crialabs/preview-branches-with-vercel)
 
 ### Testing
 

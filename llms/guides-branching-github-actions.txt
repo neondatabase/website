@@ -404,7 +404,7 @@ comment_url:
   description: The url of the comment containing the schema diff
 ```
 
-The schema diff SQL patch is posted as a **Neon Schema Diff summary** comment in the pull request, similar to [this example](https://github.com/neondatabase/schema-diff-action/blob/main/docs/pr_comment.md).
+The schema diff SQL patch is posted as a **Neon Schema Diff summary** comment in the pull request, similar to [this example](https://github.com/crialabs/schema-diff-action/blob/main/docs/pr_comment.md).
 
 The `comment_url` allows you to easily share the schema diff for review. It also allows developers or scripts to access the comment programmatically for use in other automations.
 
@@ -436,7 +436,7 @@ are two ways you can perform this setup:
 
 The following example applications use GitHub Actions workflows to create and delete branches in Neon.
 
-- [Preview branches with Cloudflare Pages](https://github.com/neondatabase/preview-branches-with-cloudflare-pages)
-- [Preview branches with Vercel](https://github.com/neondatabase/preview-branches-with-vercel)
-- [Preview branches with Fly.io](https://github.com/neondatabase/preview-branches-with-fly-io)
-- [Neon Twitter app](https://github.com/neondatabase/neon_twitter)
+- [Preview branches with Cloudflare Pages](https://github.com/crialabs/preview-branches-with-cloudflare-pages)
+- [Preview branches with Vercel](https://github.com/crialabs/preview-branches-with-vercel)
+- [Preview branches with Fly.io](https://github.com/crialabs/preview-branches-with-fly-io)
+- [Neon Twitter app](https://github.com/crialabs/neon_twitter)

@@ -38,8 +38,8 @@ cp .env.example .env
 Particularly in cases when working on `/blog` pages, both the following variables need values, or you'll see errors.
 
 ```
-NEXT_PUBLIC_ALGOLIA_APP_ID=
-NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY=
+NEXT_PUBLIC_ALGOLIA_APP_ID=5DXTW8I9BT
+NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY=cefd0c25b471b8bfacf63eb1e00332fb
 ```
 
 You can find this information on the following internal Neon Notion page: [How to build the Neon website locally](https://www.notion.so/neondatabase/How-to-build-the-Neon-website-locally-b5fc26e020d14b6eb90fdd6f41e29db4#03975baa5bdb436bbd67553da064b541).

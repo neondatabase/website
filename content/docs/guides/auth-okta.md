@@ -433,7 +433,7 @@ To view and manage the users who authenticated with your application, you can na
 You can find the source code for the application described in this guide on GitHub.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/guide-neon-next-okta" description="Authenticate Neon application users with Okta" icon="github">Authentication flow with Okta</a>
+<a href="https://github.com/crialabs/guide-neon-next-okta" description="Authenticate Neon application users with Okta" icon="github">Authentication flow with Okta</a>
 </DetailIconCards>
 
 ## Resources

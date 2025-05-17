@@ -24,8 +24,8 @@ Find out how you can integrate with Neon.
 - **Get started**: Learn the essentials for integrating with Neon - [https://neon.tech/docs/guides/partner-get-started](https://neon.tech/docs/guides/partner-get-started)
 - **Neon API**: Integrate using the Neon API - [https://neon.tech/docs/reference/api-reference](https://neon.tech/docs/reference/api-reference)
 - **OAuth**: Integrate with Neon using OAuth - [https://neon.tech/docs/guides/oauth-integration](https://neon.tech/docs/guides/oauth-integration)
-- **Sample OAuth app**: Check out a sample OAuth application - [https://github.com/neondatabase/neon-branches-visualizer](https://github.com/neondatabase/neon-branches-visualizer)
-- **Toolkit for AI Agents**: Spin up a Postgres database in seconds - [https://github.com/neondatabase/toolkit](https://github.com/neondatabase/toolkit)
+- **Sample OAuth app**: Check out a sample OAuth application - [https://github.com/crialabs/neon-branches-visualizer](https://github.com/crialabs/neon-branches-visualizer)
+- **Toolkit for AI Agents**: Spin up a Postgres database in seconds - [https://github.com/crialabs/toolkit](https://github.com/crialabs/toolkit)
 
 
 

@@ -146,8 +146,8 @@ Yes, all regions supported by Vercel Postgres are also supported by Neon Postgre
 
 Yes, the [Vercel Postgres SDK (@vercel/postgres)](https://vercel.com/docs/storage/vercel-postgres/sdk) will continue to work. No immediate action is required. However, `@vercel/postgres` will no longer be actively maintained by Vercel, and it is expected to be deprecated after the transition. The good news is that **the Vercel SDK is a wrapper around the Neon serverless driver**, making it highly compatible with Neon. Here's what you can do:
 
-- For a version of `@vercel/postgres` managed by Neon in maintenance mode (maintained but no new features), you can replace `@vercel/postgres` with Neon's fully compatible version: [@neondatabase/vercel-postgres-compat](https://github.com/neondatabase/vercel-postgres-compat). Neon will maintain this version for the foreseeable future to support users transitioning from Vercel Postgres.
-- If you're building new apps, we recommend using the **Neon serverless driver** ([@neondatabase/serverless](https://github.com/neondatabase/serverless)). This driver is actively maintained and developed by Neon.
+- For a version of `@vercel/postgres` managed by Neon in maintenance mode (maintained but no new features), you can replace `@vercel/postgres` with Neon's fully compatible version: [@neondatabase/vercel-postgres-compat](https://github.com/crialabs/vercel-postgres-compat). Neon will maintain this version for the foreseeable future to support users transitioning from Vercel Postgres.
+- If you're building new apps, we recommend using the **Neon serverless driver** ([@neondatabase/serverless](https://github.com/crialabs/serverless)). This driver is actively maintained and developed by Neon.
 - If you want to migrate an existing app from `@vercel/postgres` to the **Neon serverless driver**, refer to our [Vercel SDK to Neon serverless driver migration guide](https://neon.tech/guides/vercel-sdk-migration) for detailed instructions.
 
 ### Is Neon compatible with the same ORMs as Vercel Postgres?

@@ -85,7 +85,7 @@ Neon Auth works with any framework or language that supports JWTs — Next.js, R
 **Clone our template** for the fastest way to see Neon Auth in action (Next.js).
 
 ```bash shouldWrap
-git clone https://github.com/neondatabase-labs/neon-auth-nextjs-template.git
+git clone https://github.com/crialabs-labs/neon-auth-nextjs-template.git
 ```
 
 Or **add Neon Auth** to an existing project.

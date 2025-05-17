@@ -42,7 +42,7 @@ Available rule sets:
 Create autonomous agents that can manage and interact with your Neon databases programmatically.
 
 Available tools:
-- [@neondatabase/toolkit](https://github.com/neondatabase/toolkit): A terse client for spinning up Postgres databases and running SQL queries
+- [@neondatabase/toolkit](https://github.com/crialabs/toolkit): A terse client for spinning up Postgres databases and running SQL queries
 
 ## Scale with Agent frameworks
 

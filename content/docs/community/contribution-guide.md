@@ -8,8 +8,8 @@ updatedOn: '2024-11-30T11:53:56.046Z'
 This page provides guidelines for contributing to the Neon documentation. Our goal is to create an environment where our community has the information and knowledge required to confidently participate in improving the Neon documentation.
 
 <Admonition type="note" title="TL;DR: Contributing to the Neon Docs">
-- You can edit files on GitHub via the **Edit this page** link on our documentation pages or by forking the [neondatabase/website](https://github.com/neondatabase/website) repository and submitting a pull request.
-- If you want to contribute a guide, we provide a [template](https://github.com/neondatabase/website/blob/main/content/docs/guides/GUIDE_TEMPLATE.md) to help you get started. See [How to contribute](#how-to-contribute) for details.
+- You can edit files on GitHub via the **Edit this page** link on our documentation pages or by forking the [neondatabase/website](https://github.com/crialabs/website) repository and submitting a pull request.
+- If you want to contribute a guide, we provide a [template](https://github.com/crialabs/website/blob/main/content/docs/guides/GUIDE_TEMPLATE.md) to help you get started. See [How to contribute](#how-to-contribute) for details.
 - Reference this contribution guide as needed for Markdown and style guidelines.
 </Admonition>
 
@@ -21,10 +21,10 @@ By contributing to the Neon docs, you're helping us create a stronger learning r
 
 ## How to contribute
 
-Documentation source files are located in the [neondatabase/website](https://github.com/neondatabase/website) repository, in the `/content/docs` directory. To contribute, you have two options:
+Documentation source files are located in the [neondatabase/website](https://github.com/crialabs/website) repository, in the `/content/docs` directory. To contribute, you have two options:
 
 1. Edit files directly on GitHub.
-2. Fork the [neondatabase/website](https://github.com/neondatabase/website) repository, create a branch for your changes, and submit a pull request.
+2. Fork the [neondatabase/website](https://github.com/crialabs/website) repository, create a branch for your changes, and submit a pull request.
 
 If you prefer the first option, which is great for edits and small updates, there is an **Edit this page** link at the bottom of each Neon documentation page.
 
@@ -32,7 +32,7 @@ If you prefer the first option, which is great for edits and small updates, ther
 
 Clicking the link takes you to the Markdown file in GitHub, where you can click the **Edit this page** icon to make a change. When you finish editing, commit your changes to create a pull request.
 
-If you would rather fork the [neondatabase/website](https://github.com/neondatabase/website) repository and submit a pull request, but you're not familiar with the process, we suggest going through the [GitHub Open Source Guide](https://opensource.guide/how-to-contribute/#opening-a-pull-request). This guide describes how to fork a repository, create a branch, and submit a pull request. To help you get started, we provide a [GUIDE_TEMPLATE.md](https://github.com/neondatabase/website/blob/main/content/docs/guides/GUIDE_TEMPLATE.md) file, which you can find in the [neondatabase/website](https://github.com/neondatabase/website) repository, under the `/content/docs/guides` directory. After you create a branch, copy the template file and rename it. Don't forget to add your guide to the sidebar. See [Add a new page](#add-a-new-page).
+If you would rather fork the [neondatabase/website](https://github.com/crialabs/website) repository and submit a pull request, but you're not familiar with the process, we suggest going through the [GitHub Open Source Guide](https://opensource.guide/how-to-contribute/#opening-a-pull-request). This guide describes how to fork a repository, create a branch, and submit a pull request. To help you get started, we provide a [GUIDE_TEMPLATE.md](https://github.com/crialabs/website/blob/main/content/docs/guides/GUIDE_TEMPLATE.md) file, which you can find in the [neondatabase/website](https://github.com/crialabs/website) repository, under the `/content/docs/guides` directory. After you create a branch, copy the template file and rename it. Don't forget to add your guide to the sidebar. See [Add a new page](#add-a-new-page).
 
 ## Markdown
 
@@ -212,7 +212,7 @@ content
 */}
 ```
 
-Unfortunately, JSX-style comments have problems with Prettier, so in case of using them you should add your file to [.prettierignore](https://github.com/neondatabase/website/blob/main/.prettierignore).
+Unfortunately, JSX-style comments have problems with Prettier, so in case of using them you should add your file to [.prettierignore](https://github.com/crialabs/website/blob/main/.prettierignore).
 
 ## Code blocks
 

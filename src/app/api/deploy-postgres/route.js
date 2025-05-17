@@ -1,3 +1,8 @@
+export const runtime = 'edge';
+
+// Disable static optimization since this is a dynamic route
+export const dynamic = 'force-dynamic';
+
 import { createApiClient } from '@neondatabase/api-client';
 import { neon } from '@neondatabase/serverless';
 import { Ratelimit } from '@upstash/ratelimit';
@@ -21,9 +26,9 @@ const neonApiClient = createApiClient({
   apiKey: process.env.DEPLOY_POSTGRES_NEON_API_KEY,
 });
 
-const ratelimit = new Ratelimit({
+const ratelimit = new Ratelimit({ 
   redis: new Redis({
-    url: process.env.DEPLOY_POSTGRES_UPSTASH_REDIS_REST_URL,
+    url: process.env.DEPLOY_POSTGRES_UPSTASH_REDIS_REST_URL.replace('rediss://', 'https://'),
     token: process.env.DEPLOY_POSTGRES_UPSTASH_REDIS_REST_TOKEN,
   }),
   limiter: Ratelimit.slidingWindow(RATE_LIMIT_REQUESTS, RATE_LIMIT_WINDOW),

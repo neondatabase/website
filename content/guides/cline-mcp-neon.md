@@ -7,7 +7,7 @@ createdAt: '2025-02-22T00:00:00.000Z'
 updatedOn: '2025-02-22T00:00:00.000Z'
 ---
 
-Imagine adjusting your database schema simply by describing the change in plain English. This is possible by combining [Cline](https://cline.bot) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon).
+Imagine adjusting your database schema simply by describing the change in plain English. This is possible by combining [Cline](https://cline.bot) with the [Neon MCP Server](https://github.com/crialabs/mcp-server-neon).
 
 This guide demonstrates how to use [Cline](https://docs.cline.bot/mcp-servers/mcp) and Neon's MCP server to perform database migrations in your Neon project.
 
@@ -259,6 +259,6 @@ Cline with Neon MCP Server lets you use natural language to interact with your d
 - [Cline Documentation](https://docs.cline.bot)
 - [Neon Docs](/docs)
 - [Neon API Keys](/docs/manage/api-keys#creating-api-keys)
-- [Neon MCP server GitHub](https://github.com/neondatabase/mcp-server-neon)
+- [Neon MCP server GitHub](https://github.com/crialabs/mcp-server-neon)
 
 <NeedHelp/>

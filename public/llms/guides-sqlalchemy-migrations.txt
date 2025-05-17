@@ -363,7 +363,7 @@ In this guide, we demonstrated how to set up a FastAPI project with `Neon` Postg
 
 You can find the source code for the application described in this guide on GitHub.
 
-[Migrations with Neon and SQLAlchemy](https://github.com/neondatabase/guide-neon-sqlalchemy)
+[Migrations with Neon and SQLAlchemy](https://github.com/crialabs/guide-neon-sqlalchemy)
 
 
 ## Resources

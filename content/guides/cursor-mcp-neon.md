@@ -7,7 +7,7 @@ createdAt: '2025-02-20T00:00:00.000Z'
 updatedOn: '2025-02-20T00:00:00.000Z'
 ---
 
-Imagine adjusting your database schema simply by describing the change in plain English. This is possible by combining [Cursor](https://cursor.com) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon).
+Imagine adjusting your database schema simply by describing the change in plain English. This is possible by combining [Cursor](https://cursor.com) with the [Neon MCP Server](https://github.com/crialabs/mcp-server-neon).
 
 This guide demonstrates how to use [Cursor's Composer](https://docs.cursor.com/composer) and Neon's MCP server to perform database migrations in your Neon project.
 
@@ -312,6 +312,6 @@ database ideas and making schema changes during development.
 - [Adding an MCP Server to Cursor](https://docs.cursor.com/context/model-context-protocol)
 - [Neon Docs](https://neon.tech/docs)
 - [Neon API Keys](https://neon.tech/docs/manage/api-keys#creating-api-keys)
-- [Neon MCP server GitHub](https://github.com/neondatabase/mcp-server-neon)
+- [Neon MCP server GitHub](https://github.com/crialabs/mcp-server-neon)
 
 <NeedHelp/>

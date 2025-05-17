@@ -1,0 +1,103 @@
+[
+    {
+        "key": "group_6828c09f73490",
+        "title": "Topbar",
+        "fields": [
+            {
+                "key": "field_6828c0a1c4ca7",
+                "label": "Texto",
+                "name": "topbar",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "show_in_graphql": 1,
+                "graphql_field_name": "topbar"
+            },
+            {
+                "key": "field_6828c0ebc4ca8",
+                "label": "Link",
+                "name": "link",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "show_in_graphql": 1,
+                "graphql_field_name": "link"
+            },
+            {
+                "key": "field_6828c10ec4ca9",
+                "label": "Target",
+                "name": "target",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "_blank",
+                "placeholder": "",
+                "show_in_graphql": 1,
+                "graphql_field_name": "target"
+            },
+            {
+                "key": "field_6828c116c4caa", 
+                "label": "URL",
+                "name": "url",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "show_in_graphql": 1,
+                "graphql_field_name": "url"
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "options_page",
+                    "operator": "==",
+                    "value": "global-fields"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "Configurações globais do topbar",
+        "show_in_rest": 1,
+        "show_in_graphql": 1,
+        "graphql_field_name": "globalFields"
+    }
+]

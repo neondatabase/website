@@ -187,7 +187,7 @@ To delete your Neon project, follow the steps outlined in the Neon documentation
 You can find the source code for the application described in this guide on GitHub.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/examples/tree/main/deploy-with-heroku" description="Deploying a Node application with a Neon Postgres database on Heroku" icon="github">Use Neon with Heroku</a>
+<a href="https://github.com/crialabs/examples/tree/main/deploy-with-heroku" description="Deploying a Node application with a Neon Postgres database on Heroku" icon="github">Use Neon with Heroku</a>
 </DetailIconCards>
 
 ## Resources

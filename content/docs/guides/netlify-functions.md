@@ -226,7 +226,7 @@ To remove your Neon project, follow the deletion steps in Neon's documentation u
 You can find the source code for the application described in this guide on GitHub.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/examples/tree/main/deploy-with-netlify-functions" description="Connect a Neon Postgres database to your Netlify Functions application" icon="github">Use Neon with Netlify Functions</a>
+<a href="https://github.com/crialabs/examples/tree/main/deploy-with-netlify-functions" description="Connect a Neon Postgres database to your Netlify Functions application" icon="github">Use Neon with Netlify Functions</a>
 </DetailIconCards>
 
 ## Resources

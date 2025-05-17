@@ -223,4 +223,4 @@ When you run `npm run start` you can expect to see output similar to the followi
 ## Source code
 
 You can find the source code for the application described in this guide on GitHub:
-[Get started with NestJS and Neon](https://github.com/neondatabase/examples/tree/main/with-nestjs)
+[Get started with NestJS and Neon](https://github.com/crialabs/examples/tree/main/with-nestjs)

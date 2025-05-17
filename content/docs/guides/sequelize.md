@@ -345,7 +345,7 @@ In this guide, we set up a new Javascript project using `Express.js` and the `Se
 You can find the source code for the application described in this guide on GitHub.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/guide-neon-sequelize" description="Run Neon database migrations using Sequelize" icon="github">Migrations with Neon and Sequelize</a>
+<a href="https://github.com/crialabs/guide-neon-sequelize" description="Run Neon database migrations using Sequelize" icon="github">Migrations with Neon and Sequelize</a>
 </DetailIconCards>
 
 ## Resources

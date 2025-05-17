@@ -13,8 +13,8 @@ updatedOn: '2025-04-23T16:22:55.904Z'
 </DocsList>
 
 <DocsList title="Repository" theme="repo">
-  <a href="https://github.com/neondatabase-labs/ai-rules">READ ME</a>
-  <a href="https://github.com/neondatabase-labs/ai-rules/blob/main/neon-auth.mdc">neon-auth.mdc</a>
+  <a href="https://github.com/crialabs-labs/ai-rules">READ ME</a>
+  <a href="https://github.com/crialabs-labs/ai-rules/blob/main/neon-auth.mdc">neon-auth.mdc</a>
 </DocsList>
 </InfoBlock>
 

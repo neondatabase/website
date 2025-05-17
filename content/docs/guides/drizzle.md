@@ -17,7 +17,7 @@ updatedOn: '2025-02-03T20:41:57.311Z'
 </DocsList>
 
 <DocsList title="Source code" theme="repo">
-  <a href="https://github.com/neondatabase/examples/tree/main/with-nextjs-drizzle-edge">Next.js Edge Functions with Drizzle</a>
+  <a href="https://github.com/crialabs/examples/tree/main/with-nextjs-drizzle-edge">Next.js Edge Functions with Drizzle</a>
 </DocsList>
 
 </InfoBlock>

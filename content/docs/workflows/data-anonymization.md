@@ -284,7 +284,7 @@ To test this automation workflow:
 
 ## Cleaning up
 
-Remember to clean up anonymized branches when they're no longer needed. You can delete them manually or automate cleanup with the [delete-branch-action](https://github.com/neondatabase/delete-branch-action) GitHub Action when PRs are closed.
+Remember to clean up anonymized branches when they're no longer needed. You can delete them manually or automate cleanup with the [delete-branch-action](https://github.com/crialabs/delete-branch-action) GitHub Action when PRs are closed.
 
 </Steps>
 
@@ -303,5 +303,5 @@ While only static masking is currently supported in Neon, this approach offers a
 - [PostgreSQL Anonymizer extension documentation](/docs/extensions/postgresql-anonymizer)
 - [PostgreSQL Anonymizer masking functions](https://postgresql-anonymizer.readthedocs.io/en/latest/masking_functions/)
 - [PostgreSQL extensions supported by Neon](/docs/extensions/pg-extensions)
-- [GitHub Action for Creating Neon Branches](https://github.com/neondatabase/create-branch-action)
-- [GitHub Action for Deleting Neon Branches](https://github.com/neondatabase/delete-branch-action)
+- [GitHub Action for Creating Neon Branches](https://github.com/crialabs/create-branch-action)
+- [GitHub Action for Deleting Neon Branches](https://github.com/crialabs/delete-branch-action)

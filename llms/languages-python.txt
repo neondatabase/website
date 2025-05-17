@@ -172,5 +172,5 @@ PostgreSQL version: PostgreSQL 15.2 on x86_64-pc-linux-gnu, compiled by gcc (Deb
 
 You can find the source code for the applications described in this guide on GitHub:
 
-- [Get started with Python and Neon using asyncpg](https://github.com/neondatabase/examples/tree/main/with-python-asyncpg)
-- [Get started with Python and Neon using psycopg2](https://github.com/neondatabase/examples/tree/main/with-python-psycopg2)
+- [Get started with Python and Neon using asyncpg](https://github.com/crialabs/examples/tree/main/with-python-asyncpg)
+- [Get started with Python and Neon using psycopg2](https://github.com/crialabs/examples/tree/main/with-python-psycopg2)

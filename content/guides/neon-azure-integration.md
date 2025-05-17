@@ -136,7 +136,7 @@ For more about connecting your application to Neon, see [Connect to Neon](https:
 
 - [Neon framework guides](https://neon.tech/docs/get-started-with-neon/frameworks)
 - [Neon language guides](https://neon.tech/docs/get-started-with-neon/languages)
-- [Connection examples repo](https://github.com/neondatabase/examples)
+- [Connection examples repo](https://github.com/crialabs/examples)
 - [Application templates repo](https://neon.tech/templates)
 
 ## Platform-Specific Management: Azure Portal vs. Neon Console

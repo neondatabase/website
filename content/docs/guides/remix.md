@@ -165,7 +165,7 @@ You can find the source code for the application described in this guide on GitH
 
 <DetailIconCards>
 
-<a href="https://github.com/neondatabase/examples/tree/main/with-remix" description="Get started with Remix and Neon" icon="github">Get started with Remix and Neon</a>
+<a href="https://github.com/crialabs/examples/tree/main/with-remix" description="Get started with Remix and Neon" icon="github">Get started with Remix and Neon</a>
 
 </DetailIconCards>
 

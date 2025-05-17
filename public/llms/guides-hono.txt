@@ -149,4 +149,4 @@ Navigate to your application's URL ([localhost:3000](http://localhost:3000)). Yo
 
 You can find a sample Hono application configured for Neon on GitHub:
 
-[Get started with Hono and Neon](https://github.com/neondatabase/examples/tree/main/with-hono): Get started with Hono and Neon
+[Get started with Hono and Neon](https://github.com/crialabs/examples/tree/main/with-hono): Get started with Hono and Neon

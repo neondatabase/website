@@ -581,7 +581,7 @@ Create the following GitHub Secrets to hold various values that you likely won�
 
 ### Scheduled pg_dump/restore GitHub Action
 
-Before diving into the code, here’s a look at this example in the Neon console dashboard. There are three databases set up for three fictional customers, all running Postgres 16 and all are deployed to us-east-1. We will be backing up each database into its own folder within an S3 bucket, with different schedules and retention periods. All the code in this example lives [in this repository](https://github.com/neondatabase-labs/neon-multiple-db-s3-backups).
+Before diving into the code, here’s a look at this example in the Neon console dashboard. There are three databases set up for three fictional customers, all running Postgres 16 and all are deployed to us-east-1. We will be backing up each database into its own folder within an S3 bucket, with different schedules and retention periods. All the code in this example lives [in this repository](https://github.com/crialabs-labs/neon-multiple-db-s3-backups).
 
 ![S3 backup three databases](/docs/use-cases/s3_backup_three_databases.png)
 

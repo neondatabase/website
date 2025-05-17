@@ -111,7 +111,7 @@ $ bun run index.ts
 You can find the source code for the application described in this guide on GitHub.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/examples/tree/main/with-bun" description="Get started with Bun and Neon" icon="github">Get started with Bun and Neon</a>
+<a href="https://github.com/crialabs/examples/tree/main/with-bun" description="Get started with Bun and Neon" icon="github">Get started with Bun and Neon</a>
 </DetailIconCards>
 
 ## References

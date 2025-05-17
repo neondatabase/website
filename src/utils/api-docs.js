@@ -71,7 +71,7 @@ const getNavigationLinks = (slug, flatSidebar) => {
 const getAllChangelogs = async () => {
   const slugs = await getPostSlugs(CHANGELOG_DIR_PATH);
 
-  return slugs
+  const changelogs = slugs
     .map((slug) => {
       if (!getPostBySlug(slug, CHANGELOG_DIR_PATH)) return;
       const {
@@ -81,7 +81,6 @@ const getAllChangelogs = async () => {
       const slugWithoutFirstSlash = slug.slice(1);
       const date = slugWithoutFirstSlash;
 
-      // eslint-disable-next-line consistent-return
       return {
         title: title || content.match(/# (.*)/)?.[1],
         slug: slugWithoutFirstSlash,
@@ -92,7 +91,9 @@ const getAllChangelogs = async () => {
         redirectFrom,
       };
     })
-    .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft);
+    .filter((item) => item && item.slug && (process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft));
+
+  return changelogs;
 };
 
 module.exports = {

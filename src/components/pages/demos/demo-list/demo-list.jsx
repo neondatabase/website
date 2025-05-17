@@ -14,7 +14,7 @@ const items = [
         description:
           "An AI app where each user gets it's own database instance. Uses Neon + pgvector.",
         demoLink: 'https://db-per-tenant.up.railway.app/',
-        sourceLink: 'https://github.com/neondatabase/ai-vector-db-per-tenant',
+        sourceLink: 'https://github.com/crialabs/ai-vector-db-per-tenant',
       },
     ],
   },
@@ -27,13 +27,13 @@ const items = [
         description:
           "RAG Chat example on Azure creates one Neon project per customer, each customer's data will be completely isolated",
         demoLink: 'https://multiuser-rag-g0e0g3h6ekhtf7cg.germanywestcentral-01.azurewebsites.net',
-        sourceLink: 'https://github.com/neondatabase-labs/azure-tenant-ai-chat',
+        sourceLink: 'https://github.com/crialabs-labs/azure-tenant-ai-chat',
       },
       {
         title: 'AI-Powered Neon Database Q&A Chatbot in Azure',
         description: 'Ask questions about data in Neon database using React and FastAPI in Python.',
         demoLink: 'https://rag-vrjtpx5tgrsnm-ca.wittyriver-637b2279.eastus2.azurecontainerapps.io',
-        sourceLink: 'https://github.com/neondatabase-labs/rag-neon-postgres-openai-azure-python',
+        sourceLink: 'https://github.com/crialabs-labs/rag-neon-postgres-openai-azure-python',
       },
     ],
   },
@@ -46,14 +46,14 @@ const items = [
         description:
           "A microblogging application designed to demonstrate the database branching capability of Neon Serverless Postgres with Neon's GitHub Actions.",
         demoLink: 'https://neon-twitter.vercel.app/',
-        sourceLink: 'https://github.com/neondatabase/neon_twitter',
+        sourceLink: 'https://github.com/crialabs/neon_twitter',
       },
       {
         title: 'Preview Branches',
         description:
           'An example project showing how you can create a branch for every preview deployment on Vercel. If you want to use this project as a playground, you can set it up locally.',
         demoLink: '#',
-        sourceLink: 'https://github.com/neondatabase/preview-branches-with-vercel',
+        sourceLink: 'https://github.com/crialabs/preview-branches-with-vercel',
       },
       {
         title: 'Neon Discord bot',
@@ -66,14 +66,14 @@ const items = [
         description:
           'This example shows how to execute a bash script and pass environment variables to other services within the same environment with Qovery Lifecycle Job.',
         demoLink: '#',
-        sourceLink: 'https://github.com/neondatabase/qovery-lifecycle-job',
+        sourceLink: 'https://github.com/crialabs/qovery-lifecycle-job',
       },
       {
         title: 'Preview branches with Fly.io, Neon, and Github Actions',
         description:
           'An example repo showing how to create one database branch per PR to automate your dev workflows, using Fly.io, Github Actions, and Drizzle for migrations.',
         demoLink: '#',
-        sourceLink: 'https://github.com/neondatabase/preview-branches-with-fly?tab=readme-ov-file',
+        sourceLink: 'https://github.com/crialabs/preview-branches-with-fly?tab=readme-ov-file',
       },
     ],
   },
@@ -111,20 +111,20 @@ const items = [
         title: 'Neon Ecto Getting Started',
         description: 'This repository shows how to connect to Neon from Elixir.',
         demoLink: '#',
-        sourceLink: 'https://github.com/neondatabase/neon-ecto-getting-started-app',
+        sourceLink: 'https://github.com/crialabs/neon-ecto-getting-started-app',
       },
       {
         title: 'Neon Edge Analytics Astro Sample',
         description: 'A sample repository showing how to use Edge Analytics with Astro.',
         demoLink: '#',
-        sourceLink: 'https://github.com/neondatabase/neon-edge-analytics-astro-sample',
+        sourceLink: 'https://github.com/crialabs/neon-edge-analytics-astro-sample',
       },
       {
         title: 'Neon with Next.js and Prisma',
         description:
           'Example code using Next.js as the full stack framework, Prisma as the ORM, and Neon as the Postgres database.',
         demoLink: '#',
-        sourceLink: 'https://github.com/neondatabase/examples/tree/main/with-nextjs-prisma',
+        sourceLink: 'https://github.com/crialabs/examples/tree/main/with-nextjs-prisma',
       },
     ],
   },
@@ -137,14 +137,14 @@ const items = [
         description:
           'Ping a Neon Serverless Postgres database using a Vercel Edge Function to see the journey your request makes.',
         demoLink: '/demos/ping-thing',
-        sourceLink: 'https://github.com/neondatabase/ping-thing',
+        sourceLink: 'https://github.com/crialabs/ping-thing',
       },
       {
         title: 'Neon serverless driver UNESCO World Heritage Sites App',
         description:
           "This application demonstrates how to use raw SQL with Neon's serverless driver on Vercel Edge Functions.",
         demoLink: '#',
-        sourceLink: 'https://github.com/neondatabase/neon-vercel-rawsql',
+        sourceLink: 'https://github.com/crialabs/neon-vercel-rawsql',
       },
     ],
   },
@@ -157,7 +157,7 @@ const items = [
         description:
           'This project enables you to visualize Neon branches and how they are connected to each other, showcasing how to build an OAuth integration with Neon.',
         demoLink: '#',
-        sourceLink: 'https://github.com/neondatabase/neon-branches-visualizer',
+        sourceLink: 'https://github.com/crialabs/neon-branches-visualizer',
       },
     ],
   },
@@ -194,7 +194,7 @@ const items = [
           'A starter application for an AI-powered Semantic Search chatbot with Next.js, pgvector, OpenAI, and LangChain.',
         demoLink: '#',
         sourceLink:
-          'https://github.com/neondatabase/examples/tree/main/ai/langchain/semantic-search-nextjs',
+          'https://github.com/crialabs/examples/tree/main/ai/langchain/semantic-search-nextjs',
       },
       {
         title: 'AI Chatbot (OpenAI + LangChain)',
@@ -202,7 +202,7 @@ const items = [
           'A starter application for an AI-powered chatbot with Next.js, pgvector, OpenAI, and LangChain',
         demoLink: '#',
         sourceLink:
-          'https://github.com/neondatabase/examples/tree/main/ai/langchain/chatbot-nextjs',
+          'https://github.com/crialabs/examples/tree/main/ai/langchain/chatbot-nextjs',
       },
     ],
   },

@@ -415,17 +415,17 @@ You can find the source code for the applications described in this guide on Git
 
 <DetailIconCards>
 
-<a href="https://github.com/neondatabase/examples/tree/main/with-nextjs-edge-functions" description="Get started with Next.js Edge Functions and Neon" icon="github">Get started with Next.js Edge Functions and Neon</a>
+<a href="https://github.com/crialabs/examples/tree/main/with-nextjs-edge-functions" description="Get started with Next.js Edge Functions and Neon" icon="github">Get started with Next.js Edge Functions and Neon</a>
 
-<a href="https://github.com/neondatabase/examples/tree/main/with-nextjs-serverless-functions" description="Get started with Next.js Serverless Functions and Neon" icon="github">Get started with Next.js Serverless Functions and Neon</a>
+<a href="https://github.com/crialabs/examples/tree/main/with-nextjs-serverless-functions" description="Get started with Next.js Serverless Functions and Neon" icon="github">Get started with Next.js Serverless Functions and Neon</a>
 
-<a href="https://github.com/neondatabase/examples/tree/main/with-nextjs-get-server-side-props" description="Get started with Next.js getServerSideProps and Neon" icon="github">Get started with Next.js getServerSideProps and Neon</a>
+<a href="https://github.com/crialabs/examples/tree/main/with-nextjs-get-server-side-props" description="Get started with Next.js getServerSideProps and Neon" icon="github">Get started with Next.js getServerSideProps and Neon</a>
 
-<a href="https://github.com/neondatabase/examples/tree/main/with-nextjs-get-static-props" description="Get started with Next.js getStaticProps and Neon" icon="github">Get started with Next.js getStaticProps and Neon</a>
+<a href="https://github.com/crialabs/examples/tree/main/with-nextjs-get-static-props" description="Get started with Next.js getStaticProps and Neon" icon="github">Get started with Next.js getStaticProps and Neon</a>
 
-<a href="https://github.com/neondatabase/examples/tree/main/with-nextjs-server-actions" description="Get started with Next.js Server Actions and Neon" icon="github">Get started with Next.js Server Actions and Neon</a>
+<a href="https://github.com/crialabs/examples/tree/main/with-nextjs-server-actions" description="Get started with Next.js Server Actions and Neon" icon="github">Get started with Next.js Server Actions and Neon</a>
 
-<a href="https://github.com/neondatabase/examples/tree/main/with-nextjs-server-components" description="Get started with Next.js Server Components and Neon" icon="github">Get started with Next.js Server Components and Neon</a>
+<a href="https://github.com/crialabs/examples/tree/main/with-nextjs-server-components" description="Get started with Next.js Server Components and Neon" icon="github">Get started with Next.js Server Components and Neon</a>
 
 </DetailIconCards>
 

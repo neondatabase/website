@@ -433,7 +433,7 @@ To view and manage the users who authenticated with your application, you can na
 You can find the source code for the application described in this guide on GitHub.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/guide-neon-next-auth0" description="Authenticate users of your Neon application with Auth0" icon="github">Authentication flow with Auth0</a>
+<a href="https://github.com/crialabs/guide-neon-next-auth0" description="Authenticate users of your Neon application with Auth0" icon="github">Authentication flow with Auth0</a>
 </DetailIconCards>
 
 ## Resources

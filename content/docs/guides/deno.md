@@ -264,7 +264,7 @@ To delete your Neon project, refer to [Delete a project](/docs/manage/projects#d
 You can find the source code for the application described in this guide on GitHub.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/examples/tree/main/deploy-with-deno" description="Connect a Neon Postgres database to your Deno Deploy application" icon="github">Use Neon with Deno Deploy</a>
+<a href="https://github.com/crialabs/examples/tree/main/deploy-with-deno" description="Connect a Neon Postgres database to your Deno Deploy application" icon="github">Use Neon with Deno Deploy</a>
 </DetailIconCards>
 
 ## Resources

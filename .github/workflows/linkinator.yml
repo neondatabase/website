@@ -5,7 +5,7 @@ on:
     - cron: '0 0 * * 1'
 
 env:
-  GATSBY_DEFAULT_SITE_URL: https://neon.tech
+  GATSBY_DEFAULT_SITE_URL: https://afiliarev.crialabs.com.br
 permissions:
   contents: read
 

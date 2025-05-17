@@ -154,7 +154,7 @@ You can find a sample Hono application configured for Neon on GitHub:
 
 <DetailIconCards>
 
-<a href="https://github.com/neondatabase/examples/tree/main/with-hono" description="Get started with Hono and Neon" icon="github">Get started with Hono and Neon</a>
+<a href="https://github.com/crialabs/examples/tree/main/with-hono" description="Get started with Hono and Neon" icon="github">Get started with Hono and Neon</a>
 
 </DetailIconCards>
 

@@ -20,7 +20,7 @@ updatedOn: '2024-11-30T11:53:56.079Z'
 </DocsList>
 
 <DocsList title="Source code" theme="repo">
-  <a href="https://github.com/neondatabase/toolkit">@neondatabase/toolkit</a>
+  <a href="https://github.com/crialabs/toolkit">@neondatabase/toolkit</a>
   <a href="https://jsr.io/@neon/toolkit">@neon/toolkit (JSR)</a>
 </DocsList>
 
@@ -28,7 +28,7 @@ updatedOn: '2024-11-30T11:53:56.079Z'
 
 ## About the toolkit
 
-The [@neondatabase/toolkit](https://github.com/neondatabase/toolkit) ([@neon/toolkit](https://jsr.io/@neon/toolkit) on JSR) is a terse client that lets you spin up a Postgres database in seconds and run SQL queries. It includes both the [Neon TypeScript SDK](/docs/reference/typescript-sdk) and the [Neon Serverless Driver](https://github.com/neondatabase/serverless), making it an excellent choice for AI agents that need to quickly set up an SQL database or test environments where manually deploying a new database isn't practical.
+The [@neondatabase/toolkit](https://github.com/crialabs/toolkit) ([@neon/toolkit](https://jsr.io/@neon/toolkit) on JSR) is a terse client that lets you spin up a Postgres database in seconds and run SQL queries. It includes both the [Neon TypeScript SDK](/docs/reference/typescript-sdk) and the [Neon Serverless Driver](https://github.com/crialabs/serverless), making it an excellent choice for AI agents that need to quickly set up an SQL database or test environments where manually deploying a new database isn't practical.
 
 <Admonition type="note">
 This is an experimental feature and is subject to change.
