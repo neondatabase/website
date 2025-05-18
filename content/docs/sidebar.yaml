@@ -528,7 +528,7 @@
             - title: AutoGen
               slug: https://neon.tech/guides/autogen-neon
             - title: Azure AI Agent Service
-              slug: https://neon.tech/guides/azure-ai-agent-service 
+              slug: https://neon.tech/guides/azure-ai-agent-service
             - title: Composio + CrewAI
               slug: https://neon.tech/guides/composio-crewai-neon
             - title: LangGraph
@@ -1005,12 +1005,24 @@
             - title: anon
               slug: extensions/postgresql-anonymizer
               tag: new
-            - title: dblink
-              slug: extensions/dblink
             - title: citext
               slug: extensions/citext
+            - title: cube
+              slug: extensions/cube
+              tag: new
+            - title: dblink
+              slug: extensions/dblink
+            - title: earthdistance
+              slug: extensions/earthdistance
+              tag: new
+            - title: fuzzystrmatch
+              slug: extensions/fuzzystrmatch
+              tag: new
             - title: hstore
               slug: extensions/hstore
+            - title: intarray
+              slug: extensions/intarray
+              tag: new
             - title: ltree
               slug: extensions/ltree
             - title: neon
@@ -1044,12 +1056,24 @@
               slug: extensions/pg_tiktoken
             - title: pg_trgm
               slug: extensions/pg_trgm
+            - title: pg_uuidv7
+              slug: extensions/pg_uuidv7
+              tag: new
+            - title: pgrowlocks
+              slug: extensions/pgrowlocks
+              tag: new
+            - title: pgstattuple
+              slug: extensions/pgstattuple
+              tag: new
             - title: postgis
               slug: extensions/postgis
             - title: postgis-related
               slug: extensions/postgis-related-extensions
             - title: postgres_fdw
               slug: extensions/postgres_fdw
+            - title: tablefunc
+              slug: extensions/tablefunc
+              tag: new
             - title: timescaledb
               slug: extensions/timescaledb
             - title: unaccent
@@ -1060,9 +1084,6 @@
               tag: new
             - title: wal2json
               slug: extensions/wal2json
-            - title: pg_cron
-              slug: extensions/pg_cron
-              tag: new
         - title: Functions
           slug: functions/introduction
           items:
