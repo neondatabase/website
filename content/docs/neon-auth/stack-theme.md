@@ -5,8 +5,6 @@ enableTableOfContents: true
 tag: beta
 ---
 
-# `<StackTheme />`
-
 A component that applies a theme to its children.
 
 For more information, see the [color and styles guide](/docs/neon-auth/customization/custom-styles).

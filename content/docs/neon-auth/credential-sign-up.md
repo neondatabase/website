@@ -5,8 +5,6 @@ enableTableOfContents: true
 tag: beta
 ---
 
-# `<CredentialSignUp />`
-
 A component that renders a sign-up form with email and password fields.
 
 ![CredentialSignUp](/docs/neon-auth/images/credential-sign-up.png)

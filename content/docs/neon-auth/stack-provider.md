@@ -5,8 +5,6 @@ enableTableOfContents: true
 tag: beta
 ---
 
-# `<StackProvider />`
-
 A React component that provides Neon Auth context to its children.
 
 For detailed usage instructions, see the manual section of the [setup guide](/docs/neon-auth).

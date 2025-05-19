@@ -5,8 +5,6 @@ enableTableOfContents: true
 tag: beta
 ---
 
-# `<OAuthButtonGroup />`
-
 Renders all the `<OAuthButton />`s enabled for your Neon Auth project.
 
 ![OAuthButtonGroup](/docs/neon-auth/images/oauth-button-group.png)

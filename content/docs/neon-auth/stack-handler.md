@@ -5,8 +5,6 @@ enableTableOfContents: true
 tag: beta
 ---
 
-# `<StackHandler />`
-
 Renders the appropriate authentication or account-related component based on the current route.
 
 For detailed usage instructions, see the manual section of the [setup guide](/docs/neon-auth).

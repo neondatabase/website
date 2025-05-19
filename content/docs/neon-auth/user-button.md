@@ -5,8 +5,6 @@ enableTableOfContents: true
 tag: beta
 ---
 
-# `<UserButton />`
-
 Renders a `<UserButton />` component with optional user information, color mode toggle, and extra menu items.
 
 ![UserButton](/docs/neon-auth/images/user-button.png)

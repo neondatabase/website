@@ -5,8 +5,6 @@ enableTableOfContents: true
 tag: beta
 ---
 
-# `<SelectedTeamSwitcher />`
-
 A React component for switching between teams. It displays a dropdown of teams and allows the user to select a team.
 
 ![SelectedTeamSwitcher](/docs/neon-auth/images/selected-team-switcher.png)

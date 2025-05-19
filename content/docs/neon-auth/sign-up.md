@@ -6,8 +6,6 @@ tag: beta
 updatedOn: '2025-05-17T00:00:00.000Z'
 ---
 
-# `<SignUp />`
-
 A component that renders a sign-up page with various customization options.
 
 ![SignUp](/docs/neon-auth/images/sign-up.png)

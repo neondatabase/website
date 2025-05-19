@@ -6,8 +6,6 @@ tag: beta
 updatedOn: '2025-05-17T00:00:00.000Z'
 ---
 
-# `<OAuthButton />`
-
 Renders a customized `<OAuthButton />` for various providers to initiate sign-in or sign-up processes.
 
 ![OAuthButton](/docs/neon-auth/images/oauth-button.png)
