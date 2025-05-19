@@ -918,6 +918,32 @@
               slug: guides/neon-auth-permissions-roles
             - title: Neon Auth API Reference
               slug: guides/neon-auth-api
+        - section: Components
+          items:
+            - title: SignIn
+              slug: neon-auth/sign-in
+            - title: SignUp
+              slug: neon-auth/sign-up
+            - title: CredentialSignIn
+              slug: neon-auth/credential-sign-in
+            - title: CredentialSignUp
+              slug: neon-auth/credential-sign-up
+            - title: OAuthButton
+              slug: neon-auth/oauth-button
+            - title: OAuthButtonGroup
+              slug: neon-auth/oauth-button-group
+            - title: UserButton
+              slug: neon-auth/user-button
+            - title: AccountSettings
+              slug: neon-auth/account-settings
+            - title: SelectedTeamSwitcher
+              slug: neon-auth/selected-team-switcher
+            - title: StackHandler
+              slug: neon-auth/stack-handler
+            - title: StackProvider
+              slug: neon-auth/stack-provider
+            - title: StackTheme
+              slug: neon-auth/stack-theme
     - title: Neon RLS
       icon: lock
       slug: guides/neon-rls
