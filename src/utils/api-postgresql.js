@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 
 const { glob } = require('glob');
 const matter = require('gray-matter');
@@ -18,14 +19,10 @@ const getPostSlugs = async (pathname) => {
       '**/GUIDE_TEMPLATE.md',
     ],
   });
-  const isWindows = process.platform === 'win32';
-  const winSeparator = '\\';
-  const unixSeparator = '/';
   return files.map((file) => {
-    const newPathName = isWindows
-      ? file.split(winSeparator).join(unixSeparator).replace(pathname, '')
-      : file.replace(pathname, '');
-    return newPathName.replace('.md', '');
+    const relativePath = path.relative(pathname, file);
+    const normalizedPath = path.posix.normalize(relativePath);
+    return normalizedPath.replace('.md', '');
   });
 };
 
