@@ -17,7 +17,16 @@ const getPostSlugs = async (pathname) => {
       '**/GUIDE_TEMPLATE.md',
     ],
   });
-  return files.map((file) => file.replace(pathname, '').replace('.md', ''));
+
+  const isWindows = process.platform === 'win32';
+  const winSeparator = '\\';
+  const unixSeparator = '/';
+  return files.map((file) => {
+    const newPathName = isWindows
+      ? file.split(winSeparator).join(unixSeparator).replace(pathname, '')
+      : file.replace(pathname, '');
+    return newPathName.replace('.md', '');
+  });
 };
 
 const getPostBySlug = (slug, pathname) => {
