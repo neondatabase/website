@@ -8,7 +8,7 @@ updatedOn: '2025-05-11T11:23:50.618Z'
 
 <CheckList title="Production checklist">
 
-<CheckItem title="1. Set a compute size that can handle production traffic" href="#set-a-compute-size-that-can handle-production-traffic">
+<CheckItem title="1. Set a compute size that can handle production traffic" href="#set-a-compute-size-that-can-handle-production-traffic">
   Make sure your default branch can handle production traffic. A higher minimum compute can help you avoid performance bottlenecks.
 </CheckItem>
 <CheckItem title="2. Enable autoscaling to handle usage spikes" href="#enable-autoscaling-to-handle-usage-spikes">
