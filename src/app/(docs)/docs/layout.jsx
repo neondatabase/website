@@ -4,10 +4,9 @@ import ModeToggler from 'components/pages/doc/mode-toggler';
 import Sidebar from 'components/pages/doc/sidebar';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
+import { UserDataProvider } from 'components/shared/user-data-provider/UserDataProvider';
 import { DOCS_BASE_PATH } from 'constants/docs';
 import { getSidebar } from 'utils/api-docs';
-
-import { UserDataProvider } from './user-data-provider';
 
 const NeonDocsLayout = async ({ children }) => {
   const sidebar = await getSidebar();

@@ -67,7 +67,7 @@
   font-weight: 500;
   color: var(--shiki-foreground, #ffffff);
   background: transparent;
-  padding: 0.7rem 1rem 1rem 1.2rem;
+  padding: 0.85rem 1rem;
   margin: 0;
   border: none;
   border-radius: 0 0 8px 8px;

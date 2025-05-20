@@ -1,9 +1,11 @@
 'use client';
 
+import Mustache from 'mustache';
 import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import CustomChevronIcon from 'components/shared/footer/images/chevrons.inline.svg';
+import { useUserData } from 'components/shared/user-data-provider/UserDataProvider';
 import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
 
 import CheckIcon from '../code-block-wrapper/images/check.inline.svg';
@@ -11,124 +13,40 @@ import CopyIcon from '../code-block-wrapper/images/copy.inline.svg';
 
 import styles from './NeonConnectionSnippet.module.css';
 
-// Dummy data for preview/demo
-const demoProjects = [
-  {
-    id: 'proj1',
-    name: 'My Project',
-    branches: [
-      { id: 'production', name: 'production' },
-      { id: 'development', name: 'development' },
-    ],
-  },
-  {
-    id: 'proj2',
-    name: 'Another Project',
-    branches: [{ id: 'main', name: 'main' }],
-  },
-];
-
-// Simulate fetching connection details
-const fetchConnectionDetails = async (projectId, branchId) =>
-  // Replace with your real API call
-  ({
-    PGHOST: `host-for-${projectId}-${branchId}`,
-    PGDATABASE: `db-${projectId}`,
-    PGUSER: 'user123',
-    PGPASSWORD: 'secret',
-    ENDPOINT_ID: 'endpoint-xyz',
-  });
-// For clipboard (plain text)
-const getCodeStringPlain = (vars) =>
-  `PGHOST='${vars?.PGHOST || '[neon_hostname]'}'\n` +
-  `PGDATABASE='${vars?.PGDATABASE || '[dbname]'}'\n` +
-  `PGUSER='${vars?.PGUSER || '[user]'}'\n` +
-  `PGPASSWORD='${vars?.PGPASSWORD || '[password]'}'\n` +
-  `ENDPOINT_ID='${vars?.ENDPOINT_ID || '[endpoint_id]'}'`;
-
-const RenderCodeBlock = ({ rows }) => (
-  <pre className={styles.codeBlock}>
-    {rows.map(([key, value]) => (
-      <div key={key}>
-        {key}=<span className={styles.glow}>&apos;{value}&apos;</span>
-      </div>
-    ))}
-  </pre>
-);
+const RenderCodeBlock = ({ children }) => <pre className={styles.codeBlock}>{children}</pre>;
 RenderCodeBlock.propTypes = {
-  rows: PropTypes.arrayOf(PropTypes.array).isRequired,
+  children: PropTypes.string.isRequired,
 };
 
-const NeonConnectionSnippet = ({
-  projects = demoProjects,
-  getConnectionDetails = fetchConnectionDetails,
-  isLoggedIn = true,
-}) => {
-  const [selectedProject, setSelectedProject] = useState(null);
-  const [selectedBranch, setSelectedBranch] = useState(null);
-  const [connVars, setConnVars] = useState(null);
-
+const NeonConnectionSnippet = () => {
+  const { loggedIn, data, selection, setSelection } = useUserData();
   const { isCopied, handleCopy } = useCopyToClipboard(3000);
-  const codeStringPlain = getCodeStringPlain(connVars);
-
-  // Handle project change and branch loading
-  useEffect(() => {
-    if (!selectedProject) return;
-    setTimeout(() => {
-      setSelectedBranch(selectedProject.branches[0] || null);
-    }, 300);
-  }, [selectedProject]);
-
-  // Fetch connection details
-  useEffect(() => {
-    if (!selectedProject || !selectedBranch) {
-      setConnVars(null);
-      return;
-    }
-    getConnectionDetails(selectedProject.id, selectedBranch.id).then(setConnVars);
-  }, [selectedProject, selectedBranch, getConnectionDetails]);
-
-  // Only use regular bracketed placeholders for the code block when not logged in or when no project/branch is selected
-  const codeBlockPlaceholders = [
-    ['PGHOST', '[neon_hostname]'],
-    ['PGDATABASE', '[dbname]'],
-    ['PGUSER', '[user]'],
-    ['PGPASSWORD', '[password]'],
-    ['ENDPOINT_ID', '[endpoint_id]'],
-  ];
-
-  // Auto-select first project/branch if logged in and not already selected
-  useEffect(() => {
-    if (isLoggedIn && projects.length > 0 && !selectedProject) {
-      setSelectedProject(projects[0]);
-      setSelectedBranch(projects[0].branches[0] || null);
-    }
-  }, [isLoggedIn, projects, selectedProject]);
+  const { orgs, org_projects: projects } = data;
 
   // Empty state: no projects
-  if (!isLoggedIn || !projects.length) {
+  if (!loggedIn) {
     return (
-      <>
-        <div className={styles.controls}>
-          <div className={styles.selectorRow}>
-            <span className={styles.emptyState}>
-              To view with your credentials,{' '}
-              <a href="https://console.neon.tech/login" target="_blank" rel="noopener noreferrer">
-                log in
-              </a>
-              .
-            </span>
-          </div>
+      <div className={styles.controls}>
+        <div className={styles.selectorRow}>
+          <span className={styles.emptyState}>
+            To view with your credentials,{' '}
+            <a href="https://console.neon.tech/login" target="_blank" rel="noopener noreferrer">
+              log in
+            </a>
+            .
+          </span>
         </div>
-        <div className={styles.codeBlockWrapper}>
-          <div className={styles.codeArea}>
-            <RenderCodeBlock rows={codeBlockPlaceholders} />
-          </div>
-        </div>
-      </>
+      </div>
     );
   }
 
+  if (projects.length === 0) {
+    return null;
+  }
+
+  const connectionSnippet = Mustache.render(`DATABASE_URL={{{DATABASE_URL}}}`, {
+    DATABASE_URL: data.connection_uri,
+  });
   return (
     <>
       <div className={styles.controls}>
@@ -139,21 +57,19 @@ const NeonConnectionSnippet = ({
               <select
                 id="project-select"
                 className={styles.styledSelect}
-                value={selectedProject?.id || ''}
-                defaultValue=""
+                value={selection.org_id || ''}
                 required
                 onChange={(e) => {
-                  const proj = projects.find((p) => p.id === e.target.value);
-                  setSelectedProject(proj);
-                  setSelectedBranch(null);
+                  const org = orgs.find((p) => p.id === e.target.value);
+                  setSelection({ org_id: org.id });
                 }}
               >
                 <option value="" className={styles.placeholderOption} disabled>
                   project
                 </option>
-                {projects.map((p) => (
-                  <option key={p.id} value={p.id}>
-                    {p.name}
+                {orgs.map((org) => (
+                  <option key={org.id} value={org.id}>
+                    {org.name}
                   </option>
                 ))}
               </select>
@@ -164,19 +80,16 @@ const NeonConnectionSnippet = ({
             <div className={styles.selectWrapper}>
               <select
                 className={styles.styledSelect}
-                value={selectedBranch?.id || ''}
-                disabled={!selectedProject}
+                value={selection.project_id || ''}
+                disabled={!selection.org_id}
                 onChange={(e) => {
-                  const branch = selectedProject.branches.find((b) => b.id === e.target.value);
-                  setSelectedBranch(branch);
+                  const project = projects.find((b) => b.id === e.target.value);
+                  setSelection({ org_id: project.org_id, project_id: project.id });
                 }}
               >
-                <option value="" className={styles.placeholderOption} disabled>
-                  branch
-                </option>
-                {selectedProject?.branches.map((b) => (
-                  <option key={b.id} value={b.id}>
-                    {b.name}
+                {projects?.map((project) => (
+                  <option key={project.id} value={project.id}>
+                    {project.name}
                   </option>
                 ))}
               </select>
@@ -194,7 +107,7 @@ const NeonConnectionSnippet = ({
             disabled={isCopied}
             tabIndex={0}
             title={isCopied ? 'Copied!' : 'Copy to clipboard'}
-            onClick={() => handleCopy(codeStringPlain)}
+            onClick={() => handleCopy(connectionSnippet)}
           >
             {isCopied ? (
               <CheckIcon className={styles.copyIcon} />
@@ -202,25 +115,11 @@ const NeonConnectionSnippet = ({
               <CopyIcon className={styles.copyIcon} />
             )}
           </button>
-          <RenderCodeBlock
-            rows={[
-              ['PGHOST', connVars?.PGHOST || '[neon_hostname]'],
-              ['PGDATABASE', connVars?.PGDATABASE || '[dbname]'],
-              ['PGUSER', connVars?.PGUSER || '[user]'],
-              ['PGPASSWORD', connVars?.PGPASSWORD || '[password]'],
-              ['ENDPOINT_ID', connVars?.ENDPOINT_ID || '[endpoint_id]'],
-            ]}
-          />
+          <RenderCodeBlock>{connectionSnippet}</RenderCodeBlock>
         </div>
       </div>
     </>
   );
-};
-
-NeonConnectionSnippet.propTypes = {
-  projects: PropTypes.array,
-  getConnectionDetails: PropTypes.func,
-  isLoggedIn: PropTypes.bool,
 };
 
 export default NeonConnectionSnippet;

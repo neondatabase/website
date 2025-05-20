@@ -1,18 +1,18 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import { createContext, useContext, useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, createContext, useContext } from 'react';
 
+const ALLOWED_ORIGINS = ['https://console.neon.tech', 'http://localhost:30000'];
 const UserDataContext = createContext({
   loggedIn: false,
-  selection: null,
+  selection: {},
   setSelection: () => {},
   data: {},
 });
 
-export const UserDataProvider = ({ children }) => {
+const UserDataProvider = ({ children }) => {
   const iframeRef = useRef(null);
-
   const [userData, setUserData] = useState({});
   const [selection, setSelection] = useState({
     org_id: null,
@@ -22,10 +22,8 @@ export const UserDataProvider = ({ children }) => {
   useEffect(() => {
     const handleEvent = (event) => {
       const { data, origin } = event;
-      if (origin === 'https://console.neon.tech' || origin === 'http://localhost:30000') {
+      if (ALLOWED_ORIGINS.includes(origin)) {
         setUserData(data);
-      } else {
-        console.log('ignoring message from untrusted origin', origin);
       }
     };
 
@@ -33,7 +31,7 @@ export const UserDataProvider = ({ children }) => {
     return () => window.removeEventListener('message', handleEvent);
   }, []);
 
-  const getDataUrl = () => {
+  const dataUrl = useMemo(() => {
     const params = new URLSearchParams();
     if (selection.org_id) {
       params.append('org_id', selection.org_id);
@@ -42,21 +40,28 @@ export const UserDataProvider = ({ children }) => {
       params.append('project_id', selection.project_id);
     }
     return `http://localhost:30000/docs_data?${params.toString()}`;
-  };
+  }, [selection]);
+
+  const contextValue = useMemo(
+    () => ({
+      loggedIn: !!userData.id,
+      selection: {
+        org_id: userData.selected_org_id,
+        project_id: userData.selected_project_id,
+      },
+      setSelection,
+      data: userData,
+    }),
+    [userData]
+  );
 
   return (
-    <UserDataContext.Provider
-      value={{
-        loggedIn: !!userData.id,
-        selection,
-        setSelection,
-        data: userData,
-      }}
-    >
+    <UserDataContext.Provider value={contextValue}>
       <iframe
         ref={iframeRef}
-        src={getDataUrl()}
+        src={dataUrl}
         style={{ display: 'none' }}
+        title="user-data-iframe"
         hidden
         onLoad={() => {
           iframeRef.current.contentWindow.postMessage('user-data-request', '*');
@@ -71,4 +76,11 @@ UserDataProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export const useUserData = () => useContext(UserDataContext);
+export { UserDataProvider };
+export const useUserData = () => {
+  const context = useContext(UserDataContext);
+  if (context === undefined) {
+    throw new Error('useUserData must be used within a UserDataProvider');
+  }
+  return context;
+};
