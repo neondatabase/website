@@ -4,7 +4,7 @@ import Mustache from 'mustache';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import CustomChevronIcon from 'components/shared/footer/images/chevrons.inline.svg';
+import Combobox from 'components/shared/combo-box/Combobox';
 import { useUserData } from 'components/shared/user-data-provider/UserDataProvider';
 import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
 
@@ -51,51 +51,29 @@ const NeonConnectionSnippet = () => {
     <>
       <div className={styles.controls}>
         <div className={styles.selectorRow}>
-          <span className={styles.liveContext}>Credentials for:</span>
-          <div className={styles.selectorGroup}>
-            <div className={styles.selectWrapper}>
-              <select
-                id="project-select"
-                className={styles.styledSelect}
-                value={selection.org_id || ''}
-                required
-                onChange={(e) => {
-                  const org = orgs.find((p) => p.id === e.target.value);
-                  setSelection({ org_id: org.id });
-                }}
-              >
-                <option value="" className={styles.placeholderOption} disabled>
-                  project
-                </option>
-                {orgs.map((org) => (
-                  <option key={org.id} value={org.id}>
-                    {org.name}
-                  </option>
-                ))}
-              </select>
-              <CustomChevronIcon className={styles.selectChevron} />
-            </div>
-          </div>
-          <div className={styles.selectorGroup}>
-            <div className={styles.selectWrapper}>
-              <select
-                className={styles.styledSelect}
-                value={selection.project_id || ''}
-                disabled={!selection.org_id}
-                onChange={(e) => {
-                  const project = projects.find((b) => b.id === e.target.value);
-                  setSelection({ org_id: project.org_id, project_id: project.id });
-                }}
-              >
-                {projects?.map((project) => (
-                  <option key={project.id} value={project.id}>
-                    {project.name}
-                  </option>
-                ))}
-              </select>
-              <CustomChevronIcon className={styles.selectChevron} />
-            </div>
-          </div>
+          <Combobox
+            label="Organization:"
+            value={selection.org_id || ''}
+            placeholder="Select an organization"
+            options={orgs}
+            onChange={(value) => {
+              const org = orgs.find((p) => p.id === value);
+              setSelection({ org_id: org?.id });
+            }}
+          />
+          <Combobox
+            label="Project:"
+            value={selection.project_id || ''}
+            placeholder="Select a project"
+            options={projects}
+            onChange={(value) => {
+              const project = projects.find((p) => p.id === value);
+              setSelection({
+                org_id: project?.org_id,
+                project_id: project?.id,
+              });
+            }}
+          />
         </div>
       </div>
       <div className={styles.codeBlockWrapper}>

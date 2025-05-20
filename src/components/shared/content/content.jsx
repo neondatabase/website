@@ -34,6 +34,7 @@ import Admonition from 'components/shared/admonition';
 import AnchorHeading from 'components/shared/anchor-heading';
 import Button from 'components/shared/button';
 import CodeBlock from 'components/shared/code-block';
+import Combobox from 'components/shared/combo-box/Combobox';
 import ComputeCalculator from 'components/shared/compute-calculator';
 import CtaBlock from 'components/shared/cta-block';
 import DeployPostgresButton from 'components/shared/deploy-postgres-button';
@@ -153,6 +154,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   ChatOptions,
   CheckList,
   CheckItem,
+  Combobox,
   ExternalCode: (props) => <ExternalCode {...props} />,
   NeonConnectionSnippet,
   ...sharedComponents,
