@@ -1005,6 +1005,12 @@
             - title: anon
               slug: extensions/postgresql-anonymizer
               tag: new
+            - title: btree_gin
+              slug: extensions/btree_gin
+              tag: new
+            - title: btree_gist
+              slug: extensions/btree_gist
+              tag: new
             - title: citext
               slug: extensions/citext
             - title: cube

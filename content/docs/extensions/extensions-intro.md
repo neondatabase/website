@@ -149,9 +149,9 @@ Explore supported Postgres extensions by category. Also see:
 
 <a href="https://www.postgresql.org/docs/16/bloom.html" description="Provides an index access method for Postgres based on Bloom filters" icon="table">bloom</a>
 
-<a href="https://www.postgresql.org/docs/16/btree-gin.html" description="Provides GIN operator classes that implement B-tree equivalent behavior" icon="table">btree_gin</a>
+<a href="/docs/extensions/btree_gin" description="Provides GIN operator classes that implement B-tree equivalent behavior" icon="table">btree_gin</a>
 
-<a href="https://www.postgresql.org/docs/16/btree-gist.html" description="Provides GiST index operator classes that implement B-tree equivalent behavior" icon="table">btree_gist</a>
+<a href="/docs/extensions/btree_gist" description="Provides GiST index operator classes that implement B-tree equivalent behavior" icon="table">btree_gist</a>
 
 <a href="https://github.com/RhodiumToad/ip4r" description="Provides a range index type and functions for efficiently storing and querying IPv4 and IPv6 ranges and addresses in Postgres" icon="table">ip4r</a>
 
