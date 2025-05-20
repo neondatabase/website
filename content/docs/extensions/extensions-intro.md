@@ -239,7 +239,7 @@ Explore supported Postgres extensions by category. Also see:
 
 <a href="/docs/extensions/citext" description="Provides a case-insensitive character string type that internally calls lower when comparing values in Postgres" icon="search">citext</a>
 
-<a href="https://www.postgresql.org/docs/16/dict-int.html" description="Provides a text search dictionary template for indexing integer data in Postgres" icon="search">dict_int</a>
+<a href="/docs/extensions/dict_int" description="Provides a text search dictionary template for indexing integer data in Postgres" icon="search">dict_int</a>
 
 <a href="/docs/extensions/fuzzystrmatch" description="Provides several functions to determine similarities and distance between strings in Postgres" icon="search">fuzzystrmatch</a>
 

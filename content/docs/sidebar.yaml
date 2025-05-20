@@ -1018,6 +1018,9 @@
               tag: new
             - title: dblink
               slug: extensions/dblink
+            - title: dict_int
+              slug: extensions/dict_int
+              tag: new
             - title: earthdistance
               slug: extensions/earthdistance
               tag: new
@@ -1090,6 +1093,9 @@
               tag: new
             - title: wal2json
               slug: extensions/wal2json
+            - title: xml2
+              slug: extensions/xml2
+              tag: new
         - title: Functions
           slug: functions/introduction
           items:
