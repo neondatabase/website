@@ -6,13 +6,10 @@ import React, { useState, useEffect } from 'react';
 import CustomChevronIcon from 'components/shared/footer/images/chevrons.inline.svg';
 import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
 
-
-
 import CheckIcon from '../code-block-wrapper/images/check.inline.svg';
 import CopyIcon from '../code-block-wrapper/images/copy.inline.svg';
 
 import styles from './NeonConnectionSnippet.module.css';
-
 
 // Dummy data for preview/demo
 const demoProjects = [
@@ -32,17 +29,15 @@ const demoProjects = [
 ];
 
 // Simulate fetching connection details
-const fetchConnectionDetails = async (projectId, branchId) => 
+const fetchConnectionDetails = async (projectId, branchId) =>
   // Replace with your real API call
-   ({
+  ({
     PGHOST: `host-for-${projectId}-${branchId}`,
     PGDATABASE: `db-${projectId}`,
     PGUSER: 'user123',
     PGPASSWORD: 'secret',
     ENDPOINT_ID: 'endpoint-xyz',
-  })
-;
-
+  });
 // For clipboard (plain text)
 const getCodeStringPlain = (vars) =>
   `PGHOST='${vars?.PGHOST || '[neon_hostname]'}'\n` +

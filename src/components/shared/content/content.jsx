@@ -34,7 +34,6 @@ import Admonition from 'components/shared/admonition';
 import AnchorHeading from 'components/shared/anchor-heading';
 import Button from 'components/shared/button';
 import CodeBlock from 'components/shared/code-block';
-import NeonConnectionSnippet from 'components/shared/code-block/NeonConnectionSnippet';
 import ComputeCalculator from 'components/shared/compute-calculator';
 import CtaBlock from 'components/shared/cta-block';
 import DeployPostgresButton from 'components/shared/deploy-postgres-button';
@@ -43,6 +42,7 @@ import ExternalCode from 'components/shared/external-code';
 import ImageZoom from 'components/shared/image-zoom';
 import InkeepEmbedded from 'components/shared/inkeep-embedded';
 import LatencyCalculator from 'components/shared/latency-calculator';
+import NeonConnectionSnippet from 'components/shared/neon-connection-snippet/NeonConnectionSnippet';
 import RequestForm from 'components/shared/request-form';
 import getCodeProps from 'lib/rehype-code-props';
 
