@@ -8,7 +8,7 @@ updatedOn: '2025-05-11T11:23:50.618Z'
 
 <CheckList title="Production checklist">
 
-<CheckItem title="1. Configure a minimum compute size that can handle production traffic" href="#configure-a-minimum-compute-size-that-can handle-production-traffic">
+<CheckItem title="1. Set a compute size that can handle production traffic" href="#set-a-compute-size-that-can handle-production-traffic">
   Make sure your default branch can handle production traffic. A higher minimum compute can help you avoid performance bottlenecks.
 </CheckItem>
 <CheckItem title="2. Enable autoscaling to handle usage spikes" href="#enable-autoscaling-to-handle-usage-spikes">
@@ -38,7 +38,7 @@ updatedOn: '2025-05-11T11:23:50.618Z'
 <CheckItem title="10. Upgrade to get priority support" href="#upgrade-to-a-neon-business-plan-for-priority-support">
   Get faster support and priority handling for your production database with a Business plan.
 </CheckItem>
-<CheckItem title="11. Advanced: Set up cross-region replication" href="advanced-set-up-cross-region-replication">
+<CheckItem title="11. Advanced: Set up cross-region replication" href="#advanced-set-up-cross-region-replication">
   For added resilience, replicate your data to a Neon project in another region. This helps prepare for regional outages, making it possible to failover to a copy of your database in a different region, if necessary.
 </CheckItem>
 
@@ -46,7 +46,7 @@ updatedOn: '2025-05-11T11:23:50.618Z'
 
 <Steps>
 
-## Configure a minimum compute size that can handle production traffic
+## Set a compute size that can handle production traffic
 
 Before your application goes to production, make sure your database has enough vCPU and memory to handle expected production load. See [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 
