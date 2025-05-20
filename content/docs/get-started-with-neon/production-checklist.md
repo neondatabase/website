@@ -39,7 +39,7 @@ updatedOn: '2025-05-11T11:23:50.618Z'
   Get faster support and priority handling for your production database with a Business plan.
 </CheckItem>
 <CheckItem title="11. Advanced: Set up cross-region replication" href="/docs/guides/logical-replication-neon-to-neon">
-  For added resilience, replicate your data to a Neon project in another region. This helps prepare for unlikely regional outages and can support failover strategies.
+  For added resilience, replicate your data to a Neon project in another region. This helps prepare for regional outages, making it possible to failover to a copy of your database in a different region, if necessary.
 </CheckItem>
 
 </CheckList>
