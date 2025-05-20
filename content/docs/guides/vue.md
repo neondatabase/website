@@ -2,7 +2,7 @@
 title: Connect a Vue.js application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Vue.js application
 enableTableOfContents: true
-updatedOn: '2025-05-14T10:00:00.000Z'
+updatedOn: '2025-05-20T14:57:22.322Z'
 ---
 
 Vue.js is a progressive JavaScript framework for building user interfaces.
