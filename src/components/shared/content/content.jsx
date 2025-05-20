@@ -42,6 +42,7 @@ import ExternalCode from 'components/shared/external-code';
 import ImageZoom from 'components/shared/image-zoom';
 import InkeepEmbedded from 'components/shared/inkeep-embedded';
 import LatencyCalculator from 'components/shared/latency-calculator';
+import NeonConnectionSnippet from 'components/shared/neon-connection-snippet/NeonConnectionSnippet';
 import RequestForm from 'components/shared/request-form';
 import getCodeProps from 'lib/rehype-code-props';
 
@@ -155,6 +156,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   CheckItem,
   UserDataExample,
   ExternalCode: (props) => <ExternalCode {...props} />,
+  NeonConnectionSnippet,
   ...sharedComponents,
 });
 
