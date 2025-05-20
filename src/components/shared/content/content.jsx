@@ -46,6 +46,7 @@ import RequestForm from 'components/shared/request-form';
 import getCodeProps from 'lib/rehype-code-props';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
+import UserDataExample from '../../pages/doc/user-data-example';
 
 const sharedComponents = Object.keys(sharedMdxComponents).reduce((acc, key) => {
   acc[key] = (props) => IncludeBlock({ url: sharedMdxComponents[key], ...props });
@@ -152,6 +153,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   ChatOptions,
   CheckList,
   CheckItem,
+  UserDataExample,
   ExternalCode: (props) => <ExternalCode {...props} />,
   ...sharedComponents,
 });
