@@ -1,9 +1,10 @@
 ---
 title: Replicate data from one Neon project to another
-subtitle: Replicate data to a different Neon project for cross-region replication, version migration, or region migration
+subtitle: Replicate data to a different Neon project for cross-region replication,
+  version migration, or region migration
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-14T17:05:10.000Z'
+updatedOn: '2025-05-20T17:00:38.662Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from one Neon project to another. This enables different usage scenarios, including:
