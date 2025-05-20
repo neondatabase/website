@@ -217,7 +217,7 @@ For more information, see the [Support documentation](/docs/introduction/support
 
 ## Advanced: Set up cross-region replication
 
-While not required for most applications, cross-region replication can provide an added layer of resilience for production environments. It allows you to replicate data from one Neon project to another in a different region — helping you prepare for unlikely regional outages or implement failover strategies.
+Cross-region replication can provide an added layer of resilience for production environments. It allows you to replicate data from one Neon project to another in a different region — helping you prepare for unlikely regional outages or implement failover strategies.
 
 **Recommendation**
 
