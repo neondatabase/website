@@ -8,10 +8,10 @@ updatedOn: '2025-05-11T11:23:50.618Z'
 
 <CheckList title="Production checklist">
 
-<CheckItem title="1. Set minimum compute to at least 1 vCPU" href="#set-minimum-compute-to-at-least-1-cu">
-  Make sure your default branch can handle production traffic. A higher minimum compute helps you avoid performance bottlenecks.
+<CheckItem title="1. Configure a minimum compute size that can handle production traffic" href="#configure-a-minimum-compute-size-that-can handle-production-traffic">
+  Make sure your default branch can handle production traffic. A higher minimum compute can help you avoid performance bottlenecks.
 </CheckItem>
-<CheckItem title="2. Set max compute to the highest CU available for your plan" href="#set-max-compute-to-the-highest-cu-available-for-your-plan">
+<CheckItem title="2. Enable autoscaling to handle usage spikes" href="#enable-autoscaling-to-handle-usage-spikes">
   Set your compute to automatically scale up, allowing your app to handle traffic surges and stay performant without manual scaling.
 </CheckItem>
 <CheckItem title="3. Disable scale to zero" href="#disable-scale-to-zero">
@@ -38,13 +38,17 @@ updatedOn: '2025-05-11T11:23:50.618Z'
 <CheckItem title="10. Upgrade to get priority support" href="#upgrade-to-a-neon-business-plan-for-priority-support">
   Get faster support and priority handling for your production database with a Business plan.
 </CheckItem>
+<CheckItem title="11. Advanced: Set up cross-region replication" href="/docs/guides/logical-replication-neon-to-neon">
+  For added resilience, replicate your data to a Neon project in another region. This helps prepare for unlikely regional outages and can support failover strategies.
+</CheckItem>
+
 </CheckList>
 
 <Steps>
 
-## Set minimum compute to at least 1 CU
+## Configure a minimum compute size that can handle production traffic
 
-Before your application goes to prodution, make sure your database has enough vCPU and memory to handle expected production load. See [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
+Before your application goes to production, make sure your database has enough vCPU and memory to handle expected production load. See [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 
 **Recommendation**
 
@@ -57,7 +61,7 @@ We recommend that you **fit your data in memory** and use Neon **autoscaling**:
 
 A Compute Unit (CU) in Neon measures the processing power or "size" of a Neon compute. One CU includes 1 vCPU and 4 GB of RAM. Neon computes can range from **0.25** CUs to **56** CUs, depending on your [Neon plan](/docs/introduction/plans).
 
-## Set max compute to the highest CU available for your plan
+## Enable autoscaling to handle usage spikes
 
 Use Neon's [autoscaling](/docs/guides/autoscaling-algorithm) feature to dynamically adjust your compute resources based on your current workload. This means you don't need to scale manually during traffic surges.
 
@@ -210,6 +214,27 @@ Support tickets opened by Business and Enterprise support plan customers are giv
 Upgrade to a [Business plan](/docs/introduction/plans#business) to get both [Priority support](/docs/introduction/support#prioritized-support-tickets) and acccess to the [Business SLA](https://neon.tech/neon-business-sla).
 
 For more information, see the [Support documentation](/docs/introduction/support).
+
+## Advanced: Set up cross-region replication
+
+While not required for most applications, cross-region replication can provide an added layer of resilience for production environments. It allows you to replicate data from one Neon project to another in a different region — helping you prepare for unlikely regional outages or implement failover strategies.
+
+**Recommendation**
+
+Set up cross-region replication if your app requires high availability across regions or if you're building a disaster recovery plan.
+
+**How it works**
+
+Neon uses [logical replication](/docs/guides/logical-replication-neon-to-neon) to replicate data between Neon projects. You can replicate from a source project in one region to a destination project in another region, creating a near real-time copy of your data.
+
+**Steps to get started**
+
+- Follow the [guide to replicate data between Neon projects](/docs/guides/logical-replication-neon-to-neon)
+- Set up a publication on your source database
+- Create matching tables and a subscription on your destination database
+- Test the replication and monitor for consistency
+
+For full details, see [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
 
 </Steps>
 
