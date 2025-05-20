@@ -58,13 +58,7 @@ If you do not have one already, create a Neon project.
 
 Add a `.env` file to your project directory and add your Neon connection details to it. You can find your Neon database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Please select Node.js from the **Connection string** dropdown. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
-```shell shouldWrap
-PGHOST='[neon_hostname]'
-PGDATABASE='[dbname]'
-PGUSER='[user]'
-PGPASSWORD='[password]'
-ENDPOINT_ID='[endpoint_id]'
-```
+<NeonConnectionSnippet />
 
 <Admonition type="note">
 A special `ENDPOINT_ID` variable is included in the `.env` file above. This variable can be used with older Postgres clients that do not support Server Name Indication (SNI), which Neon relies on to route incoming connections. If you are using a newer [node-postgres](https://node-postgres.com/) or [postgres.js](https://github.com/porsager/postgres) client, you won't need it. For more information, see [Endpoint ID variable](#endpoint-id-variable).

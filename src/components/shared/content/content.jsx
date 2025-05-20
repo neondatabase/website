@@ -34,6 +34,7 @@ import Admonition from 'components/shared/admonition';
 import AnchorHeading from 'components/shared/anchor-heading';
 import Button from 'components/shared/button';
 import CodeBlock from 'components/shared/code-block';
+import NeonConnectionSnippet from 'components/shared/code-block/NeonConnectionSnippet';
 import ComputeCalculator from 'components/shared/compute-calculator';
 import CtaBlock from 'components/shared/cta-block';
 import DeployPostgresButton from 'components/shared/deploy-postgres-button';
@@ -153,6 +154,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   CheckList,
   CheckItem,
   ExternalCode: (props) => <ExternalCode {...props} />,
+  NeonConnectionSnippet,
   ...sharedComponents,
 });
 
