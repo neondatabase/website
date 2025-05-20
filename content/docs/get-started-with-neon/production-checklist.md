@@ -38,7 +38,7 @@ updatedOn: '2025-05-11T11:23:50.618Z'
 <CheckItem title="10. Upgrade to get priority support" href="#upgrade-to-a-neon-business-plan-for-priority-support">
   Get faster support and priority handling for your production database with a Business plan.
 </CheckItem>
-<CheckItem title="11. Advanced: Set up cross-region replication" href="/docs/guides/logical-replication-neon-to-neon">
+<CheckItem title="11. Advanced: Set up cross-region replication" href="advanced-set-up-cross-region-replication">
   For added resilience, replicate your data to a Neon project in another region. This helps prepare for regional outages, making it possible to failover to a copy of your database in a different region, if necessary.
 </CheckItem>
 
@@ -229,7 +229,6 @@ Neon uses [logical replication](/docs/guides/logical-replication-neon-to-neon) t
 
 **Steps to get started**
 
-- Follow the [guide to replicate data between Neon projects](/docs/guides/logical-replication-neon-to-neon)
 - Set up a publication on your source database
 - Create matching tables and a subscription on your destination database
 - Test the replication and monitor for consistency
