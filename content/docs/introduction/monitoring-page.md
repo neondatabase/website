@@ -30,12 +30,14 @@ You can select different periods or a custom period within the permitted range f
 
 The dashboard displays metrics for the selected **Branch** and **Compute**. Use the drop-down menus to view metrics for a different branch or compute. Use the **Refresh** button to update the displayed metrics.
 
-If your compute was idle or there has not been much activity, graphs may display this message: `There is no data to display. Try a different time period or check back later`. In this case, try selecting a different time period or returning later after more usage data has been collected.
+If your compute was idle or there has not been much activity, graphs may display this message: `There is no data to display at the moment`. In this case, try selecting a different time period or returning later after more usage data has been collected.
 
 All time values displayed in graphs are in [Coordinated Universal Time (UTC)](https://en.wikipedia.org/wiki/Coordinated_Universal_Time).
 
 <Admonition type="note" title="Endpoint Inactive: What does it mean?">
-The values and plotted lines in your graphs will drop to `0` when your compute is inactive because a compute must be active to report data. These inactive periods are also shown as a diagonal line pattern in the graph.
+The values and plotted lines in your graphs will drop to `0` when your compute is inactive because a compute must be active to report data. These inactive periods are also shown as a diagonal line pattern in the graph, as shown here:
+
+![monitoring graph diagonal pattern for inactive compute](/docs/introduction/monitor_inactive.png)
 </Admonition>
 
 ### RAM
