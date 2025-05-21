@@ -157,7 +157,10 @@ Build it using the format above, where:
 
 - `p={project_id}` is the project ID being transferred
 - `tr={transfer_request_id}` is the transfer request `id` from the "Create a transfer request" response
-- `ru={redirect_url}` (optional) is a URL-encoded destination where the user is redirected after successfully claiming the project
+- `ru={redirect_url}` (optional) is:
+  - A URL-encoded destination where the user is redirected after successfully claiming the project
+  - Without this parameter, users remain on the Neon project page after claiming
+  - Allows your application to detect successful claims when users return to your site, enabling you to trigger next steps in your onboarding flow
 
 When sharing the claim URL, inform your user that:
 
