@@ -6,12 +6,13 @@ import Combobox from 'components/shared/combo-box';
 import Link from 'components/shared/link';
 import { useUserData } from 'components/shared/user-data-provider';
 
+import { useConsoleUrl } from '../user-data-provider/user-data-provider';
+
 const UserDataSelector = () => {
   const { loggedIn, data, selection, setSelection } = useUserData();
   const { orgs, org_projects: projects } = data;
 
-  const consoleUrl =
-    origin === 'http://localhost:3000' ? 'http://localhost:30000' : 'https://console.neon.tech';
+  const consoleUrl = useConsoleUrl();
 
   return (
     <div

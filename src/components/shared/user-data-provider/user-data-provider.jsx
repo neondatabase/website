@@ -4,7 +4,11 @@ import PropTypes from 'prop-types';
 import { useEffect, useMemo, useRef, useState, createContext, useContext } from 'react';
 import { useLocation } from 'react-use';
 
-const ALLOWED_ORIGINS = ['https://console.neon.tech', 'http://localhost:30000'];
+const ALLOWED_ORIGINS = [
+  'https://console.neon.tech',
+  'http://localhost:30000',
+  'https://console.hydrogen.aws.neon.build', // TODO temporary for testing, delete later
+];
 
 const UserDataContext = createContext({
   loggedIn: false,
@@ -33,7 +37,7 @@ const UserDataProvider = ({ children }) => {
     return () => window.removeEventListener('message', handleEvent);
   }, []);
 
-  const { origin } = useLocation();
+  const consoleUrl = useConsoleUrl();
 
   const dataUrl = useMemo(() => {
     const params = new URLSearchParams();
@@ -43,12 +47,8 @@ const UserDataProvider = ({ children }) => {
     if (selection.project_id) {
       params.append('project_id', selection.project_id);
     }
-
-    const consoleUrl =
-      origin === 'http://localhost:3000' ? 'http://localhost:30000' : 'https://console.neon.tech';
-
     return `${consoleUrl}/docs_data?${params.toString()}`;
-  }, [selection.org_id, selection.project_id, origin]);
+  }, [selection.org_id, selection.project_id, consoleUrl]);
 
   const contextValue = useMemo(
     () => ({
@@ -92,4 +92,17 @@ export const useUserData = () => {
     throw new Error('useUserData must be used within a UserDataProvider');
   }
   return context;
+};
+
+export const useConsoleUrl = () => {
+  const { origin } = useLocation();
+
+  // TODO temporary for testing, delete later
+  if (1 === 1) {
+    return 'https://console.hydrogen.aws.neon.build';
+  }
+
+  return origin === 'http://localhost:3000'
+    ? 'http://localhost:30000'
+    : 'https://console.neon.tech';
 };
