@@ -149,7 +149,7 @@ Queries not served from either Postgres shared buffers or the Local File Cache r
 
 Your working set is the size of the distinct set of Postgres pages (relation data and indexes) accessed in a given time interval - to optimize for performance and consistent latency it is recommended to size your compute so that the working set fits into Neon's [Local File Cache (LFC)](/docs/extensions/neon#what-is-the-local-file-cache) for quick access.
 
-The **Working set size** graph provides a visual representation of the data (the number of unique pages accessed multiplied by page size) accessed within a given time interval. Here's how to interpret the graph:
+The **Working set size** graph visualizes the amount of data accessed—calculated as unique pages accessed × page size—over a given interval. Here's how to interpret the graph:
 
 - **5m** (5 minutes): This line shows the data accessed in the last 5 minutes.
 - **15m** (15 minutes): Similar to the 5-minute window, this metric tracks the data accessed in the last 15 minutes.
