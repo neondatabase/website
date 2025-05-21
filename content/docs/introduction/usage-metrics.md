@@ -163,6 +163,7 @@ In short, `VACUUM FULL` can help reduce your data size and future storage costs,
 <summary>**What is the maximum data size that Neon supports?**</summary>
 
 Each [Neon plan](https://neon.tech/docs/introduction/plans) comes with a specific storage allowance. Beyond this allowance on paid plans, extra usage costs apply. Billing-related allowances aside, Neon projects can support data sizes up to 4 TiB. To increase this limit, [contact the Neon Sales team](https://neon.tech/contact-sales).
+
 </details>
 
 ## Archive storage
