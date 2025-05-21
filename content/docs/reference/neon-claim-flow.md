@@ -14,15 +14,18 @@ The project transfer functionality enables you to provision fully-configured Pos
 ## Simplified workflow
 
 1. **Create a Neon project** on behalf of your user in your account or organization
+
    - This gives them a Postgres connection string for their application immediately
 
 2. **Create a transfer request** for the project
+
    - This generates a unique, time-limited transfer request ID
 
 3. **Share a claim URL** with your user
+
    - This URL contains the project ID and transfer request ID
 
-4. **User claims the project** 
+4. **User claims the project**
    - When they click the URL, Neon transfers the project to their account
 
 ## Step-by-step guide
@@ -31,8 +34,8 @@ The project transfer functionality enables you to provision fully-configured Pos
 
 ## Create a Neon project
 
-Use the Neon [create project API](https://api-docs.neon.tech/reference/createproject) to create 
-a new project that you intend to transfer to your user. 
+Use the Neon [create project API](https://api-docs.neon.tech/reference/createproject) to create
+a new project that you intend to transfer to your user.
 
 The minimum data value is `project: {}` as all settings are optional.
 
@@ -130,7 +133,7 @@ This example sets a one-week expiration, adjust it to your needs. The default is
 }
 ```
 
-Example response if transfer requests are not enabled for the account: 
+Example response if transfer requests are not enabled for the account:
 
 ```json
 {
@@ -151,10 +154,12 @@ https://console.neon.tech/app/claim?p={project_id}&tr={transfer_request_id}
 ```
 
 Build it using the format above, where:
+
 - `{project_id}` is the project ID being transferred
 - `{transfer_request_id}` is the transfer request `id` from the "Create a transfer request" response
 
 When sharing the claim URL, inform your user that:
+
 - They'll need a Neon account to claim the project, or they can follow the prompt to create a new Neon account
 - They should click the link to claim ownership of the project
 - After claiming, they'll see the project in their Neon account
@@ -220,13 +225,13 @@ Neon transfers the project to the user's personal account if the `org_id` parame
 
 ## Troubleshooting
 
-| Issue | Solution |
-|-------|----------|
-| Claim URL expired | Create a new transfer request and generate a new claim URL |
-| User gets an error when claiming | Verify the project still exists and the transfer request hasn't been used |
-| Project doesn't appear in user's account | Refresh the Neon Console or try logging out and back in |
-| "Transfer requests not enabled" error | [Contact Neon](https://neon.tech/partners#partners-apply) to request access to this private preview feature |
-| Organization transfer fails | Verify the user is a member of the specified organization and the `org_id` is correct |
+| Issue                                    | Solution                                                                                                    |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Claim URL expired                        | Create a new transfer request and generate a new claim URL                                                  |
+| User gets an error when claiming         | Verify the project still exists and the transfer request hasn't been used                                   |
+| Project doesn't appear in user's account | Refresh the Neon Console or try logging out and back in                                                     |
+| "Transfer requests not enabled" error    | [Contact Neon](https://neon.tech/partners#partners-apply) to request access to this private preview feature |
+| Organization transfer fails              | Verify the user is a member of the specified organization and the `org_id` is correct                       |
 
 ## Further resources
 
