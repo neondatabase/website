@@ -90,6 +90,10 @@ Some applications require an Server Name Indication (SNI) workaround. Neon uses 
 | [Skyvia](https://skyvia.com/)                                                                                                 | Requires setting the **SSL Mode** option to `Require`, and **SSL TLS Protocol** to 1.2. The other SSL fields are not required for **SSL Mode**: `Require`.                                                                                                                                                                                                              |
 | [Zoho Analytics](https://www.zoho.com/analytics/)                                                                             | Requires selecting **Other Cloud Services** as the Cloud Service Provider, and the **Connect directly using IP address** and **Use SSL** options when configuring a PostgreSQL connection.                                                                                                                                                                              |
 
+## Connecting from Business Intelligence (BI) tools
+
+When connecting from BI tools like Metabase, Tableau, or Power BI, we recommend using a **read replica** instead of your main database compute. BI tools often run long or resource-intensive queries, which can impact performance on your primary branch. Read replicas can scale independently and handle these workloads without affecting your main production traffic. To learn more, see [Neon read replicas](/docs/introduction/read-replicas). 
+
 ## Connection issues
 
 Applications that use older client libraries or drivers that do not support Server Name Indication (SNI) may not permit connecting to Neon. If you encounter the following error, refer to [Connection errors](/docs/connect/connection-errors) for possible workarounds.
