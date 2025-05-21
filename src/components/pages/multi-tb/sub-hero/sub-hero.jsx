@@ -27,11 +27,11 @@ const TAGS = [
 ];
 
 const Hero = () => (
-  <section className="sub-hero safe-paddings relative pt-[120px] lg:pt-16 md:pt-12">
-    <Container className="lg:mx-8 md:mx-1" size="576">
-      <div className="relative mb-4 size-[46px] lg:mb-8 lg:size-16 lg:rounded-[14px] md:mb-7 md:size-14">
+  <section className="sub-hero safe-paddings relative pt-[120px] xl:pt-[112px] lg:pt-24 md:pt-16">
+    <Container className="lg:mx-24 md:mx-1" size="576">
+      <div className="relative mb-4 size-[46px] lg:mb-4 lg:size-10 lg:rounded-[10px] md:mb-0 md:size-14">
         <Image
-          className="relative z-10 xl:size-10 lg:size-8 md:size-7"
+          className="relative z-10 lg:size-10"
           src={clockCoins}
           alt=""
           width={46}
@@ -44,9 +44,10 @@ const Hero = () => (
           aria-hidden
         />
       </div>
-      <p className="text-[28px] font-medium leading-snug tracking-tighter text-white">
+      <p className="text-[28px] font-medium leading-snug tracking-tighter text-white lg:max-w-[476px] lg:text-[24px] md:max-w-[320px] md:text-[20px]">
         Every minute waiting for that AWS RDS instance to restore is costing your company anywhere
         {` `}
+        <br className="hidden md:block" />
         <Link
           className="text-green-45 underline decoration-primary-1 decoration-1 underline-offset-[8px] transition-colors duration-200 hover:text-white hover:decoration-gray-new-60"
           to="/"
@@ -55,22 +56,22 @@ const Hero = () => (
         </Link>
         .
       </p>
-      <h2 className="mt-[136px] font-title text-[60px] font-medium leading-none tracking-extra-tight xl:mt-24 xl:text-[56px] lg:mt-20 lg:max-w-xl lg:text-5xl md:mt-14 md:max-w-full md:text-4xl">
+      <h2 className="mt-[136px] font-title text-[60px] font-medium leading-none tracking-extra-tight xl:mt-[128px] xl:text-[52px] lg:mt-[112px] lg:text-[44px] md:mt-[74px] md:text-[36px]">
         Break the RDS cycle.
       </h2>
-      <div className="mb-7 mt-10 flex flex-col gap-[18px]">
-        <p className="text-xl font-normal leading-normal tracking-extra-tight text-gray-new-60">
+      <div className="mb-7 mt-10 flex flex-col gap-[18px] text-xl font-normal leading-normal tracking-extra-tight text-gray-new-60 lg:mb-6 lg:mt-7 lg:text-[18px] md:mb-[22px] md:mt-6 md:text-base">
+        <p>
           <span className="text-white">With AWS RDS</span>, backups and recovery take hours,
           replication lag adds uncertainty, and anticipating workloads feels like a constant gamble.
         </p>
-        <p className="text-xl font-normal leading-normal tracking-extra-tight text-gray-new-60">
+        <p>
           <span className="text-white">Neon eliminates the guesswork</span> — fast, automated
           recovery, real-time replication with minimal lag, and built-in instant autoscaling. With
           Neon, you get:
         </p>
       </div>
 
-      <TagCloud items={TAGS} className="gap-4" titleClassName="text-[16px]" />
+      <TagCloud items={TAGS} className="gap-4 lg:mt-4" titleClassName="text-[16px]" />
       <RelatedArticle
         title="The real impact of slow Postgres restores for businesses: lost revenue and customer trust."
         date={new Date('2025-03-27')}

@@ -30,20 +30,20 @@ const TAGS = [
 ];
 
 const TestReliably = () => (
-  <section className="test-reliably mt-[188px] lg:mt-24 md:mt-14">
-    <Container className="lg:mx-8 md:mx-1 " size="960">
+  <section className="test-reliably mt-[188px] xl:mt-[168px] lg:mt-[100px] md:mt-[61px]">
+    <Container className="lg:mx-0" size="960">
       <div className="flex items-start gap-16 lg:justify-start lg:gap-16 sm:flex-col sm:gap-8">
         <div className="flex-1 xl:mt-1.5 lg:mt-0 sm:w-full">
-          <p className="mb-3 text-base font-medium uppercase tracking-wide text-gray-new-50 xl:mb-3 lg:mb-4 lg:text-sm md:mb-3  md:text-[13px]">
+          <p className="mb-3 text-base font-medium uppercase tracking-wide text-gray-new-50 xl:mb-3 lg:mb-4 lg:text-sm md:mb-[9px] md:text-[12px]">
             Test reliably
           </p>
-          <h2 className="text-5xl font-medium leading-tight tracking-semi-tighter text-gray-new-60 xl:text-[44px] lg:text-4xl md:text-[32px] md:leading-dense">
+          <h2 className="text-5xl font-medium leading-tight tracking-[-0.03em] text-gray-new-60 xl:max-w-[860px] xl:text-[44px] lg:text-[36px] md:text-[24px] md:leading-snug md:tracking-tighter">
             Most production issues originate from unreliable tests.{' '}
             <span className="text-white">
               Branch your{' '}
-              <span className="relative mx-0.5 -mb-2.5 inline-block xl:-mb-1.5 lg:mx-1 lg:-mb-1">
+              <span className="relative mx-0.5 -mb-2.5 inline-block xl:mx-0 lg:mx-1 md:-mt-0.5">
                 <Image
-                  className="relative z-10 xl:size-10 lg:size-8 md:size-7"
+                  className="relative z-10 lg:size-11 md:top-[3px] md:size-8"
                   src={database}
                   alt=""
                   width={52}
@@ -58,7 +58,11 @@ const TestReliably = () => (
               database and test on real data.
             </span>
           </h2>
-          <TagCloud items={TAGS} className="gap-3" titleClassName="text-[15px]" />
+          <TagCloud
+            items={TAGS}
+            className="gap-3 lg:mt-[18px] lg:gap-3.5 md:gap-3"
+            titleClassName="text-[15px] md:text-sm"
+          />
         </div>
       </div>
     </Container>

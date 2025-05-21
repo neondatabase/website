@@ -7,15 +7,15 @@ import LINKS from 'constants/links';
 import automaticScaling from 'images/pages/multi-tb/peak-demand/automatic-scaling.jpg';
 
 const PeakDemand = () => (
-  <section className="peak-demand mt-[244px] lg:mt-24 md:mt-14">
-    <Container className="lg:mx-8 md:mx-1 " size="768" as="header">
-      <h2 className="max-w-[560px] text-balance font-title text-6xl font-medium leading-none tracking-extra-tight text-white">
+  <section className="peak-demand mt-[257px] xl:mt-[241px] lg:mt-[177px] md:mt-[112px]">
+    <Container className="lg:mx-8 md:mx-1" size="768" as="header">
+      <h2 className="max-w-[560px] text-balance font-title text-6xl font-medium leading-none tracking-extra-tight text-white xl:max-w-[500px] xl:text-[56px] lg:text-5xl md:text-[36px]">
         Peak demand? Bring it on.
       </h2>
     </Container>
-    <Container className="mb-12 mt-14 lg:mx-8 md:mx-1" size="1100">
-      <div className="mx-[38px] flex flex-row items-center gap-16 lg:mx-0 lg:gap-10 md:flex-col md:gap-8">
-        <div className="relative shrink-0 overflow-hidden rounded-xl md:flex-initial sm:w-full">
+    <Container className="mb-12 mt-14 xl:mt-[47px] lg:mx-0 lg:mt-12 md:mx-1 md:mt-8" size="1100">
+      <div className="mx-[38px] flex flex-row items-center gap-16 xl:mx-8 xl:gap-8 lg:mx-0 lg:gap-8 md:flex-col">
+        <div className="relative shrink-0 overflow-hidden rounded-xl lg:w-[384px] sm:w-full">
           <Image
             className="sm:w-full"
             src={automaticScaling}
@@ -27,22 +27,22 @@ const PeakDemand = () => (
           />
           <GradientBorder withBlend />
         </div>
-        <div className="flex flex-1 flex-col gap-6">
-          <ul className="flex flex-col gap-6 pr-10 lg:gap-4 md:gap-3">
+        <div className="flex flex-1 flex-col gap-6 lg:gap-5 md:gap-[18px]">
+          <ul className="flex flex-col gap-6 pr-10 text-xl leading-snug tracking-extra-tight text-gray-new-60 xl:pr-0 lg:gap-5 lg:text-base md:gap-[18px]">
             <li>
-              <p className="text-xl leading-snug tracking-extra-tight text-gray-new-60">
+              <p>
                 <span className="text-white">Never hit a full-disk error.</span> Neon&apos;s storage
                 scales automatically so your database never runs out of space.
               </p>
             </li>
             <li>
-              <p className="text-xl leading-snug tracking-extra-tight text-gray-new-60">
+              <p>
                 <span className="text-white">No performance degradation.</span> Neon scales CPU,
                 memory, and connections dynamically with your workload.
               </p>
             </li>
             <li>
-              <p className="text-xl leading-snug tracking-extra-tight text-gray-new-60">
+              <p>
                 <span className="text-white">Instant replicas for an extra boost.</span> Neon’s
                 serverless read replicas scale compute horizontally.
               </p>

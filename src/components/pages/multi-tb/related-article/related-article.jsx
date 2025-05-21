@@ -10,31 +10,31 @@ const RelatedArticle = ({ title, date, link, className }) => (
   <article
     className={clsx(
       'related-article-card',
-      'my-16 p-5',
+      'my-16 p-5 xl:my-14 lg:my-12 md:my-10',
       'rounded-[10px] bg-black-new ring-1 ring-gray-new-20',
       className
     )}
   >
-    <Link className={clsx('group flex flex-row gap-8')} to={link}>
+    <Link className={clsx('group flex flex-row gap-8 md:gap-5')} to={link}>
       <div className="flex flex-1 flex-col gap-3.5">
-        <div className="flex gap-6">
+        <div className="flex gap-6 md:gap-4">
           <div className="flex items-center justify-start gap-2">
             <span className="h-2.5 w-2.5 rounded-full bg-green-45" aria-hidden />
-            <span className="justify-start text-base font-medium leading-none tracking-extra-tight text-gray-new-70">
+            <span className="justify-start text-base font-medium leading-none tracking-extra-tight text-gray-new-70 md:text-sm">
               Read more
             </span>
           </div>
           <time
             dateTime={date}
-            className="text-base font-medium leading-none tracking-extra-tight text-gray-new-40"
+            className="text-base font-medium leading-none tracking-extra-tight text-gray-new-40 md:text-sm"
           >
             {getFormattedDate(date)}
           </time>
         </div>
 
-        <h4 className="text-xl font-medium leading-snug tracking-extra-tight text-white">
+        <h3 className="text-xl font-medium leading-snug tracking-extra-tight text-white lg:text-[18px] md:text-base">
           {title}
-        </h4>
+        </h3>
       </div>
       <div className="flex shrink-0 items-center justify-center">
         <Image
