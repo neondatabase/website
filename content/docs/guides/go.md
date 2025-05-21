@@ -10,13 +10,15 @@ updatedOn: '2025-04-20T15:44:26.049Z'
 
 To connect to Neon from a Go application:
 
-<ConnectionSnippet />
-
 <Steps>
 
 ## Create a Neon project
 
+<UserData selector="false">
+The name of your selected project is: @@@selected_project_id:unknown@@@
+
 If you do not have one already, create a Neon project. Save your connection details including your password. They are required when defining connection settings.
+</UserData>
 
 To create a Neon project:
 
@@ -28,11 +30,15 @@ To create a Neon project:
 
 Connecting to Neon requires configuring connection settings in your Go project's `.go` file.
 
+<UserData>
 <Admonition type="note">
-Neon is fully compatible with the `sql/db` package and common Postgres drivers, such as `pgx`.
+Hello @@@selected_org.name:there@@@! Did you know that Neon is fully compatible with the `sql/db` package and common Postgres drivers, such as `pgx`?
 </Admonition>
+</UserData>
 
 Specify the connection settings in your `.go` file, as shown in the following example:
+
+<UserData>
 
 ```go
 package main
@@ -46,7 +52,7 @@ import (
 )
 
 func main() {
-    connStr := "postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
+    connStr := "@@@connection_uri:postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require@@@"
     db, err := sql.Open("postgres", connStr)
     if err != nil {
         panic(err)
@@ -61,6 +67,8 @@ func main() {
     fmt.Printf("version=%s\n", version)
 }
 ```
+
+</UserData>
 
 Alternatively, you can use the native pgx driver without the database/sql abstraction:
 

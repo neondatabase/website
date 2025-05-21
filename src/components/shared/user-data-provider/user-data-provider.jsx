@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef, useState, createContext, useContext } from 
 import { useLocation } from 'react-use';
 
 const ALLOWED_ORIGINS = ['https://console.neon.tech', 'http://localhost:30000'];
+
 const UserDataContext = createContext({
   loggedIn: false,
   selection: {},
@@ -84,6 +85,7 @@ UserDataProvider.propTypes = {
 };
 
 export { UserDataProvider };
+
 export const useUserData = () => {
   const context = useContext(UserDataContext);
   if (context === undefined) {

@@ -46,6 +46,7 @@ const Combobox = ({ value, onChange, placeholder, options }) => {
           displayValue={(option) => options.find((o) => o.id === option)?.name}
           autoComplete="off"
           placeholder={placeholder}
+          readOnly
           onChange={(event) => setQuery(event.target.value)}
         />
         <ComboboxButton className="group absolute inset-y-0 right-0 px-2.5">

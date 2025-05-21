@@ -4,7 +4,7 @@ import ModeToggler from 'components/pages/doc/mode-toggler';
 import Sidebar from 'components/pages/doc/sidebar';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
-import { UserDataProvider } from 'components/shared/user-data-provider/UserDataProvider';
+import { UserDataProvider } from 'components/shared/user-data-provider/user-data-provider';
 import { DOCS_BASE_PATH } from 'constants/docs';
 import { getSidebar } from 'utils/api-docs';
 
