@@ -1047,6 +1047,9 @@
               slug: extensions/pgrag
             - title: pg_cron
               slug: extensions/pg_cron
+            - title: pg_graphql
+              slug: extensions/pg_graphql
+              tag: new
             - title: pg_mooncake
               slug: extensions/pg_mooncake
               tag: new

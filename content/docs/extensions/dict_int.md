@@ -73,7 +73,7 @@ You can create new dictionaries from the `intdict_template` and specify your des
 
 #### Example:
 
-Creating a dictionary named `my_custom_intdict` with `maxlen` set to `4`, `rejectlong` to `true`, and `absval` to `true`:
+Create dictionary named `my_custom_intdict` with `maxlen` set to `4`, `rejectlong` to `true`, and `absval` to `true`:
 
 ```sql
 CREATE TEXT SEARCH DICTIONARY my_custom_intdict (
@@ -96,9 +96,9 @@ ALTER TEXT SEARCH DICTIONARY my_custom_intdict (
 
 ### Utilizing with `ts_lexize`
 
-The `ts_lexize` function is used for testing how a dictionary processes input tokens. It shows you what lexemes (if any) are produced.
+The `ts_lexize` function is used for testing how a dictionary processes input tokens. It shows what lexemes (if any) are produced.
 
-To test the behavior of your custom dictionary, you can use `ts_lexize` with the dictionary name and an integer string.
+To test the behavior of custom dictionary, use `ts_lexize` with the dictionary name and an integer string.
 
 ```sql
 CREATE TEXT SEARCH DICTIONARY intdict_for_testing (
@@ -134,7 +134,7 @@ SELECT ts_lexize('intdict_for_testing', '987');       -- Result: {987} (within l
 For a custom integer dictionary to be used during indexing and searching, it must be associated with specific token types in a text search configuration.
 
 <Admonition type="important" title="Modifying default text search configurations on Neon">
-Altering default text search configurations (like `english`) requires superuser privileges. If you encounter an "ERROR: must be owner of text search configuration english", you will need to first **create a copy of an existing configuration** (e.g., `english`) and then modify your own copy.
+Altering default text search configurations (like `english`) requires superuser privileges on Neon. If you encounter an "ERROR: must be owner of text search configuration english", you will need to first **create a copy of an existing configuration** (e.g., `english`) and then modify your own copy.
 </Admonition>
 
 Here's the recommended approach:
@@ -164,7 +164,7 @@ Here's the recommended approach:
         ALTER MAPPING FOR int, uint WITH my_custom_intdict;
     ```
 
-Now, `public.my_app_search_config` is set up to use `my_custom_intdict` for processing integers. You can use `public.my_app_search_config` in your `to_tsvector` and `to_tsquery` functions.
+Now, `public.my_app_search_config` is set up to use `my_custom_intdict` for processing integers. `public.my_app_search_config` can now be used in `to_tsvector` and `to_tsquery` functions to process integer tokens according to the rules defined in `my_custom_intdict`.
 
 ## Example
 
@@ -177,14 +177,14 @@ CREATE TABLE documents (
     id SERIAL PRIMARY KEY,
     title TEXT,
     content TEXT,
-    version_code TEXT -- Contains codes like '1001', '005', 'ver42b'
+    version_code TEXT
 );
 
 INSERT INTO documents (title, content, version_code) VALUES
 ('Intro Guide', 'Content of version 1...', '1'),
 ('Advanced Manual', 'More content...', '0042'),
-('Internal Spec', 'Spec details...', '7654321'), -- A long version number
-('Internal Spec v2', 'Updated spec...', '+7654321'), -- Signed long version
+('Internal Spec', 'Spec details...', '7654321'),
+('Internal Spec v2', 'Updated spec...', '+7654321'),
 ('Draft Notes', 'Preliminary ideas...', 'ver003');
 ```
 
@@ -243,7 +243,7 @@ id  |      title       | version_code | version_tsv
 (5 rows)
 ```
 
-We can see that:
+In this example:
 
 - The `version_code` "1" is indexed as `'1':1`.
 - The `version_code` "0042" is indexed as `'0042':1`.
