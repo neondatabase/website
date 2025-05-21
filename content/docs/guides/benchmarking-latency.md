@@ -12,7 +12,6 @@ Benchmarking latency in Neon's serverless Postgres environment presents unique c
 When benchmarking Neon databases, you'll encounter two distinct types of queries:
 
 - **Cold queries**: Occur when a previously suspended compute resource is activated to process a request. By default, free-tier Neon databases suspend after 5 minutes of inactivity. A cold query typically adds several hundred milliseconds of latency.
-  
 - **Hot queries**: Execute on already-active database instances, providing a more consistent performance baseline with normal low latency.
 
 On paid plans, you can configure or disable the auto-suspend timeout to customize your testing approach or eliminate cold starts entirely. See [Compute Lifecycle](/docs/introduction/compute-lifecycle) and [Auto-suspend Configuration](/docs/introduction/auto-suspend) for more details.
@@ -21,7 +20,8 @@ On paid plans, you can configure or disable the auto-suspend timeout to customiz
 
 For accurate benchmarking, always measure cold and hot queries separately:
 
-1. **Cold query testing**: 
+1. **Cold query testing**:
+
    - Ensure your database is in a suspended state (idle for at least five minutes on free tier)
    - Make a request to trigger compute activation
    - Measure this connection time, which will include the startup overhead
@@ -56,6 +56,7 @@ Avoid testing over an arbitrarily long distance that doesn't represent your prod
 Neon supports two connection protocols with distinctly different performance profiles. Understanding these differences is crucial for accurate benchmarking. For a comprehensive comparison, see [Choosing Connection Types](/docs/connect/choose-connection):
 
 ### HTTP connections
+
 - **Performance profile**: Optimized for single-shot queries with minimal connection overhead
 - **Use cases**: Ideal for serverless functions that execute a single query per invocation
 - **Limitations**: Doesn't support sessions, interactive transactions, NOTIFY, or COPY protocol
@@ -63,6 +64,7 @@ Neon supports two connection protocols with distinctly different performance pro
 - **Optimization technique**: Connection caching can further reduce latency for HTTP connections
 
 ### WebSocket connections
+
 - **Performance profile**: Higher initial connection overhead but significantly faster for subsequent queries
 - **Use cases**: Optimal for applications that execute multiple queries over a maintained connection
 - **Features**: Supports full PostgreSQL functionality including sessions, transactions, and all Postgres protocols
@@ -92,7 +94,7 @@ For examples of different connection patterns and their implementation, see [Con
 For additional insight, Neon provides a [Latency Benchmarks Dashboard](https://latency-benchmarks-dashboard.vercel.app) that visualizes:
 
 - Connection times
-- Query latencies 
+- Query latencies
 - Cold start impacts
 - Regions
 
