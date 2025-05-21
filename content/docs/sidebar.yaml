@@ -894,8 +894,12 @@
       items:
         - section: Get started
           items:
-            - title: Get started
+            - title: Neon Auth
               slug: guides/neon-auth
+            - title: Components
+              slug: neon-auth/get-started/components-overview
+            - title: Users
+              slug: neon-auth/get-started/accessing-user-data
         - section: Guides
           items:
             - title: Tutorial
@@ -908,7 +912,23 @@
           items:
             - title: How Neon Auth works
               slug: guides/neon-auth-how-it-works
-            - title: Concepts
+            - title: Organizations and Teams
+              slug: neon-auth/concepts/orgs-and-teams
+            - title: Team Selection
+              slug: neon-auth/concepts/team-selection
+            - title: Permissions
+              slug: neon-auth/concepts/permissions
+            - title: Backend Integration
+              slug: neon-auth/concepts/backend-integration
+            - title: User Onboarding
+              slug: neon-auth/concepts/user-onboarding
+            - title: OAuth
+              slug: neon-auth/concepts/oauth
+            - title: Custom User Data
+              slug: neon-auth/concepts/custom-user-data
+            - title: Stack App
+              slug: neon-auth/concepts/stack-app
+            - title: Guidance
               slug: guides/neon-auth-tutorial
             - title: Best practices & FAQ
               slug: guides/neon-auth-best-practices
@@ -916,34 +936,43 @@
           items:
             - title: Permissions & roles
               slug: guides/neon-auth-permissions-roles
-            - title: Neon Auth API Reference
+            - title: API Reference
               slug: guides/neon-auth-api
-        - section: Components
-          items:
-            - title: SignIn
-              slug: neon-auth/sign-in
-            - title: SignUp
-              slug: neon-auth/sign-up
-            - title: CredentialSignIn
-              slug: neon-auth/credential-sign-in
-            - title: CredentialSignUp
-              slug: neon-auth/credential-sign-up
-            - title: OAuthButton
-              slug: neon-auth/oauth-button
-            - title: OAuthButtonGroup
-              slug: neon-auth/oauth-button-group
-            - title: UserButton
-              slug: neon-auth/user-button
-            - title: AccountSettings
-              slug: neon-auth/account-settings
-            - title: SelectedTeamSwitcher
-              slug: neon-auth/selected-team-switcher
-            - title: StackHandler
-              slug: neon-auth/stack-handler
-            - title: StackProvider
-              slug: neon-auth/stack-provider
-            - title: StackTheme
-              slug: neon-auth/stack-theme
+            - title: Components
+              slug: neon-auth/components/components
+              items:
+              - section: Overview
+                items:
+                - title: All components
+                  slug: neon-auth/components/components
+              - section: Components
+                items:
+                - title: AccountSettings
+                  slug: neon-auth/components/account-settings
+                - title: UserButton
+                  slug: neon-auth/components/user-button
+                - title: SignIn
+                  slug: neon-auth/components/sign-in
+                - title: SignUp
+                  slug: neon-auth/components/sign-up
+                - title: CredentialSignIn
+                  slug: neon-auth/components/credential-sign-in
+                - title: CredentialSignUp
+                  slug: neon-auth/components/credential-sign-up
+                - title: OAuthButton
+                  slug: neon-auth/components/oauth-button
+                - title: OAuthButtonGroup
+                  slug: neon-auth/components/oauth-button-group
+              - section: Utilities
+                items:
+                  - title: SelectedTeamSwitcher
+                    slug: neon-auth/components/selected-team-switcher
+                  - title: StackHandler
+                    slug: neon-auth/components/stack-handler
+                  - title: StackProvider
+                slug: neon-auth/components/stack-provider
+              - title: StackTheme
+                slug: neon-auth/components/stack-theme
     - title: Neon RLS
       icon: lock
       slug: guides/neon-rls

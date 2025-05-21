@@ -1,11 +1,9 @@
 ---
-title: Components Overview
-subtitle: Pre-built authentication components for your Next.js and React apps
+title: Neon Auth Components
+subtitle: Pre-built Neon Auth components for your Next.js and React apps
 enableTableOfContents: true
 tag: beta
 ---
-
-# Neon Auth Components
 
 Neon Auth provides a set of components for Next.js applications.
 
