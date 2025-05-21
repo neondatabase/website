@@ -152,7 +152,7 @@ Your working set is the size of the distinct set of Postgres pages (relation dat
 The **Working set size** graph provides a visual representation of the data (the number of unique pages accessed multiplied by page size) accessed within a given time interval. Here's how to interpret the graph:
 
 - **5m** (5 minutes): This line shows the data accessed in the last 5 minutes.
-- **15m** (15 minutes): Similar to the 5-minute window, this metric tracks the data accessed in last 15 minutes.
+- **15m** (15 minutes): Similar to the 5-minute window, this metric tracks the data accessed in the last 15 minutes.
 - **1h** (1 hour): This line represents the data accessed in the last hour.
 - **Local file cache size**: This is the size of the LFC, which is determined by the size of your compute. Larger computes have larger caches. For cache sizes, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 For optimal performance the local file cache should be larger than your working set size for a given time interval.
