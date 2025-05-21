@@ -150,13 +150,14 @@ Construct a claim URL to share with your user.
 ### Claim URL format
 
 ```http
-https://console.neon.tech/app/claim?p={project_id}&tr={transfer_request_id}
+https://console.neon.tech/app/claim?p={project_id}&tr={transfer_request_id}&ru={redirect_url}
 ```
 
 Build it using the format above, where:
 
-- `{project_id}` is the project ID being transferred
-- `{transfer_request_id}` is the transfer request `id` from the "Create a transfer request" response
+- `p={project_id}` is the project ID being transferred
+- `tr={transfer_request_id}` is the transfer request `id` from the "Create a transfer request" response
+- `ru={redirect_url}` (optional) is a URL-encoded destination where the user is redirected after successfully claiming the project
 
 When sharing the claim URL, inform your user that:
 
@@ -164,6 +165,7 @@ When sharing the claim URL, inform your user that:
 - They should click the link to claim ownership of the project
 - After claiming, they'll see the project in their Neon account
 - The database connection string will remain the same (though they should update the password)
+- After a successful claim, they'll be automatically redirected to your application (if you included a redirect URL)
 
 ## User claims the project
 
@@ -201,7 +203,7 @@ curl -X PUT 'https://console.neon.tech/api/v2/projects/{project_id}/transfer_req
   }'
 ```
 
-Neon transfers the project to the user's personal account if the `org_id` parameter is not set. If provided, Neon transfers the project to the specified organization, assuming the user has membership in that organization.
+Without the `org_id` parameter, the project transfers to the user's personal account. With it, the project transfers to the specified organization where the user has membership.
 
 </Steps>
 
