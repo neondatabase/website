@@ -161,5 +161,3 @@ For optimal performance the local file cache should be larger than your working 
 If your working set size is larger than the LFC size it is recommended to increase the maximum size of the compute to improve the LFC hit rate and achieve good performance.
 
 If your workload pattern doesn't change much over time it is recommended to compare the 1h time interval working set size with the LFC size and make sure that working set size is smaller than LFC size.
-
-Note that this recommendation only applies to workloads with a working set larger than 128 MiB, because workloads with a working set smaller than 128 MiB can be completely served out the Postgres shared buffer and the compute size is irrelevant in this case for the cache hit rate.
