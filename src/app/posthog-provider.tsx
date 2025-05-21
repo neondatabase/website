@@ -2,13 +2,16 @@
 
 import posthog from 'posthog-js';
 import { PostHogProvider as PostHogProviderBase } from 'posthog-js/react';
-import PropTypes from 'prop-types';
-import { useEffect } from 'react';
+import { ReactNode, useEffect } from 'react';
+
+interface PostHogProviderProps {
+  children: ReactNode;
+}
 
 // Provider configured based by the official Posthog documentation:
 // https://posthog.com/docs/libraries/next-js
 
-const PostHogProvider = ({ children }) => {
+const PostHogProvider = ({ children }: PostHogProviderProps) => {
   useEffect(() => {
     const key = process.env.NEXT_PUBLIC_POSTHOG_KEY;
 
@@ -22,10 +25,6 @@ const PostHogProvider = ({ children }) => {
   }, []);
 
   return <PostHogProviderBase client={posthog}>{children}</PostHogProviderBase>;
-};
-
-PostHogProvider.propTypes = {
-  children: PropTypes.node.isRequired,
 };
 
 export default PostHogProvider;

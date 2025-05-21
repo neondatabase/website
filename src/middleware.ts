@@ -13,11 +13,11 @@ const SITE_URL =
 
 const ticketsProtectedRoutes = ['/generate-ticket', '/tickets'];
 
-const extractHandleFromPath = (pathname) => pathname.split('/').slice(-2)[0];
+const extractHandleFromPath = (pathname: string): string => pathname.split('/').slice(-2)[0];
 
-const generateEditPageURL = (handle) => `${SITE_URL}/tickets/${handle}/edit`;
+const generateEditPageURL = (handle: string): string => `${SITE_URL}/tickets/${handle}/edit`;
 
-export async function middleware(req) {
+export async function middleware(req: any) {
   try {
     const { pathname } = req.nextUrl;
 

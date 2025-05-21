@@ -6,7 +6,7 @@ import { injectScript } from 'utils/inject-script';
 const FORM_JS_SRC = 'https://js.hsforms.net/forms/v2.js';
 const PORTAL_ID = '26233105';
 
-export const initForm = async (element, onFormHandles) => {
+export const initForm = async (element: HTMLElement, onFormHandles: any) => {
   await injectScript(FORM_JS_SRC);
   const formId = element.getAttribute('data-form-id');
 
@@ -19,11 +19,11 @@ export const initForm = async (element, onFormHandles) => {
   });
 };
 
-export default function useHubspotForm(blockSelector, onFormHandles = null) {
+export default function useHubspotForm(blockSelector: string, onFormHandles: any = null) {
   useEffect(() => {
     const elements = document.getElementsByClassName(blockSelector);
     Array.from(elements).forEach((element) => {
-      initForm(element, onFormHandles);
+      initForm(element as HTMLElement, onFormHandles);
     });
   }, [blockSelector, onFormHandles]);
 }

@@ -2,10 +2,10 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-console */
 
-const fs = require('fs').promises;
-const path = require('path');
+import { promises as fs } from 'fs';
+import path from 'path';
 
-const copyMarkdownFiles = async (src, dest) => {
+const copyMarkdownFiles = async (src: string, dest: string): Promise<void> => {
   // Create destination directory if it doesn't exist
   await fs.mkdir(dest, { recursive: true });
 

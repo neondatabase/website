@@ -2,7 +2,20 @@ import LINKS from './links';
 
 export const DEFAULT_IMAGE_PATH = '/images/social-previews/index.jpg';
 
-export default {
+interface SeoData {
+  title?: string;
+  description?: string;
+  pathname?: string;
+  imagePath?: string;
+  robotsNoindex?: string;
+  type?: string;
+}
+
+interface BlogCategoryDescription {
+  [key: string]: string;
+}
+
+const seoData: { [key: string]: SeoData | ((params: { name: string; login: string }) => SeoData) } = {
   index: {
     title: 'Neon Serverless Postgres — Ship faster',
     description:
@@ -211,15 +224,20 @@ export default {
   },
 };
 
-export const getBlogCategoryDescription = (category) => {
-  switch (category) {
-    case 'company':
-      return 'Stay updated on the latest Neon company new and partnership announcements. Explore our blog posts for valuable insights and stay ahead in the world of serverless Postgres.';
-    case 'engineering':
-      return 'Dive into the technical depths of Neon serverless Postgres. Optimize performance, scalability, and reliability. Explore our cutting-edge approach.';
-    case 'community':
-      return 'Join the vibrant serverless Postgres community. Engage in discussions, tutorials, and success stories. Connect with developers and industry experts.';
-    default:
-      return 'Learn about Neon and how it can help you build better with Serverless Postgres by reading our blog posts.';
-  }
+export const getBlogCategoryDescription = (category: string): string => {
+  const descriptions: BlogCategoryDescription = {
+    company:
+      'Stay updated on the latest Neon company new and partnership announcements. Explore our blog posts for valuable insights and stay ahead in the world of serverless Postgres.',
+    engineering:
+      'Dive into the technical depths of Neon serverless Postgres. Optimize performance, scalability, and reliability. Explore our cutting-edge approach.',
+    community:
+      'Join the vibrant serverless Postgres community. Engage in discussions, tutorials, and success stories. Connect with developers and industry experts.',
+  };
+
+  return (
+    descriptions[category] ||
+    'Learn about Neon and how it can help you build better with Serverless Postgres by reading our blog posts.'
+  );
 };
+
+export default seoData;

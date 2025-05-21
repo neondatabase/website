@@ -2,13 +2,16 @@
 
 // TODO: try to find alternative solution to check whether user has visited homepage or not without using context
 import { usePathname } from 'next/navigation';
-import PropTypes from 'prop-types';
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 
-const HomepageVisitContext = createContext();
+interface HomepageVisitProviderProps {
+  children: ReactNode;
+}
 
-export const HomepageVisitProvider = ({ children }) => {
-  const [hasVisitedHomepage, setHasVisitedHomepage] = useState(false);
+const HomepageVisitContext = createContext<boolean>(false);
+
+export const HomepageVisitProvider: React.FC<HomepageVisitProviderProps> = ({ children }) => {
+  const [hasVisitedHomepage, setHasVisitedHomepage] = useState<boolean>(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -24,8 +27,4 @@ export const HomepageVisitProvider = ({ children }) => {
   );
 };
 
-HomepageVisitProvider.propTypes = {
-  children: PropTypes.node,
-};
-
-export const useHomepageVisit = () => useContext(HomepageVisitContext);
+export const useHomepageVisit = (): boolean => useContext(HomepageVisitContext);

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const useBodyLockScroll = (isOpen) => {
+const useBodyLockScroll = (isOpen: boolean): void => {
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : '';
   }, [isOpen]);

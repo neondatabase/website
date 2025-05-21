@@ -1,14 +1,44 @@
-import lottie from 'lottie-web';
-import { useEffect, useRef, useState } from 'react';
-import { useInView } from 'react-intersection-observer';
+import lottie, { AnimationItem } from 'lottie-web';
+import { useEffect, useRef, useState, MutableRefObject } from 'react';
+import { useInView, IntersectionObserverEntry } from 'react-intersection-observer';
 
-export default function useLottie({ lottieOptions, useInViewOptions = {}, events = {}, isInView }) {
+interface LottieOptions {
+  animationData: {
+    assets: Array<{ p?: string }>;
+  };
+  autoplay: boolean;
+  loop: boolean;
+}
+
+interface UseLottieOptions {
+  lottieOptions: LottieOptions;
+  useInViewOptions?: IntersectionObserverInit;
+  events?: { [key: string]: (e: any) => void };
+  isInView?: boolean;
+}
+
+interface UseLottieReturn {
+  animation: AnimationItem | null;
+  isAnimationReady: boolean;
+  isAnimationPlaying: boolean;
+  isAnimationFinished: boolean;
+  animationRef: MutableRefObject<HTMLDivElement | null>;
+  animationVisibilityRef: (node?: Element | null) => void;
+  animationEntry: IntersectionObserverEntry | undefined;
+}
+
+export default function useLottie({
+  lottieOptions,
+  useInViewOptions = {},
+  events = {},
+  isInView,
+}: UseLottieOptions): UseLottieReturn {
   const shouldWaitForImagesToLoad = !!lottieOptions.animationData.assets.find(
     (asset) => asset.p?.includes('.png') || asset.p?.includes('.jpg')
   );
 
-  const animationRef = useRef();
-  const [animation, setAnimation] = useState(lottieOptions.autoplay);
+  const animationRef = useRef<HTMLDivElement | null>(null);
+  const [animation, setAnimation] = useState<AnimationItem | null>(null);
   const [isAnimationReady, setIsAnimationReady] = useState(!shouldWaitForImagesToLoad);
   const [isAnimationPlaying, setIsAnimationPlaying] = useState(false);
   const [isAnimationFinished, setIsAnimationFinished] = useState(false);

@@ -34,7 +34,46 @@ import StarIcon from 'icons/header/star.inline.svg';
 
 import LINKS from './links';
 
-export default {
+interface MenuItem {
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  iconGradient?: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  title: string;
+  description?: string;
+  to: string;
+  links?: { text: string; to: string }[];
+}
+
+interface MenuSection {
+  title?: string;
+  items: MenuItem[];
+  isExtended?: boolean;
+  banner?: {
+    title: string;
+    description: string;
+    to: string;
+  };
+}
+
+interface Menu {
+  text: string;
+  to?: string;
+  sections?: MenuSection[];
+}
+
+interface FooterItem {
+  text: string;
+  to: string;
+  description?: string;
+  icon?: string;
+  links?: { text: string; to: string }[];
+}
+
+interface FooterSection {
+  heading: string;
+  items: FooterItem[];
+}
+
+const menus: { header: Menu[]; footer: FooterSection[] } = {
   header: [
     {
       text: 'Product',
@@ -414,3 +453,5 @@ export default {
     },
   ],
 };
+
+export default menus;

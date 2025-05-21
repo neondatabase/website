@@ -7,7 +7,7 @@ const USE_CASES_DIR_PATH = `${CONTENT_DIR_PATH}/use-cases`;
 const CHANGELOG_DIR_PATH = `${CONTENT_DIR_PATH}/changelog`;
 const POSTGRESQL_DIR_PATH = `${CONTENT_DIR_PATH}/postgresql`;
 
-module.exports = {
+export {
   DOCS_DIR_PATH,
   FLOW_DIR_PATH,
   GUIDES_DIR_PATH,

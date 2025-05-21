@@ -1,10 +1,10 @@
 import retry from 'async-retry';
-import { GraphQLClient } from 'graphql-request';
+import { GraphQLClient, gql } from 'graphql-request';
 
-export { gql } from 'graphql-request';
+export { gql };
 
 // Create a base client for regular queries using GET
-export const graphQLClient = new GraphQLClient(process.env.WP_GRAPHQL_URL, {
+export const graphQLClient = new GraphQLClient(process.env.WP_GRAPHQL_URL!, {
   method: 'GET', // Use GET for regular queries
   headers: {
     'Content-Type': 'application/json',
@@ -12,8 +12,8 @@ export const graphQLClient = new GraphQLClient(process.env.WP_GRAPHQL_URL, {
 });
 
 // Keep POST for admin operations that need to modify data
-export const graphQLClientAdmin = (authToken) =>
-  new GraphQLClient(process.env.WP_GRAPHQL_URL, {
+export const graphQLClientAdmin = (authToken: string) =>
+  new GraphQLClient(process.env.WP_GRAPHQL_URL!, {
     method: 'POST', // Keep POST for admin operations
     headers: {
       Authorization: `Bearer ${authToken}`,
@@ -21,8 +21,8 @@ export const graphQLClientAdmin = (authToken) =>
   });
 
 // Add caching to the fetch function
-export const fetchGraphQL = (client, retries = 3) => {
-  const request = async (query, variables = {}) =>
+export const fetchGraphQL = (client: GraphQLClient, retries = 3) => {
+  const request = async (query: string, variables: Record<string, any> = {}) =>
     retry(async () => await client.request(query, variables), {
       retries,
       factor: 2,

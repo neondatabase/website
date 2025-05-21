@@ -2,6 +2,7 @@ import 'styles/globals.css';
 
 import dynamic from 'next/dynamic';
 import Script from 'next/script';
+import { ReactNode } from 'react';
 
 import { ActiveLabelProvider } from 'components/pages/doc/code-tabs/CodeTabsContext';
 
@@ -24,8 +25,11 @@ export const viewport = {
   themeColor: '#000000',
 };
 
-// eslint-disable-next-line react/prop-types
-const RootLayout = ({ children }) => (
+interface RootLayoutProps {
+  children: ReactNode;
+}
+
+const RootLayout = ({ children }: RootLayoutProps) => (
   <html lang="en" className={`${inter.variable} ${esbuild.variable} dark`}>
     <head>
       {process.env.NODE_ENV === 'production' && (
