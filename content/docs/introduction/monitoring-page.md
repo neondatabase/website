@@ -23,8 +23,8 @@ Your Neon plan defines the range of data you can view.
 | ----------------------------------------------- | ------------------------ |
 | [Free Plan](/docs/introduction/plans#free-plan) | Last day (24 hours)      |
 | [Launch](/docs/introduction/plans#launch)       | Last 7 days (168 hours)  |
-| [Scale](/docs/introduction/plans#scale)         | Last 7 days (168 hours) |
-| [Business](/docs/introduction/plans#business)         | Last 14 days (336 hours) |
+| [Scale](/docs/introduction/plans#scale)         | Last 7 days (336 hours)  |
+| [Business](/docs/introduction/plans#business)   | Last 14 days (336 hours) |
 
 You can select different periods or a custom period within the permitted range from the menu on the dashboard.
 
@@ -140,8 +140,8 @@ The **Replication delay seconds** graph shows the time delay, in seconds, betwee
 
 ![local file cache hit rate graph](/docs/introduction/local_file_cache_hit_rate.png)
 
-The **Local file cache hit rate** graph shows the percentage of read requests served from memory &#8212; from Neon's Local File Cache (LFC). 
-Queries not served from either Postgres shared buffers (128 MB on all Neon computes) or the Local File Cache retrieve data from storage, which is more costly and can result in slower query performance. To learn more about how Neon caches data and how the LFC works with Postgres shared buffers, see [What is the Local File Cache?](/docs/extensions/neon#what-is-the-local-file-cache)
+The **Local file cache hit rate** graph shows the percentage of read requests served from Neon's Local File Cache (LFC). 
+Queries not served from either Postgres shared buffers or the Local File Cache retrieve data from storage, which is more costly and can result in slower query performance. To learn more about how Neon caches data and how the LFC works with Postgres shared buffers, see [What is the Local File Cache?](/docs/extensions/neon#what-is-the-local-file-cache)
 
 ### Working set size
 
@@ -149,11 +149,11 @@ Queries not served from either Postgres shared buffers (128 MB on all Neon compu
 
 Your working set is the size of the distinct set of Postgres pages (relation data and indexes) accessed in a given time interval - to optimize for performance and consistent latency it is recommended to size your compute so that the working set fits into Neon's [Local File Cache (LFC)](/docs/extensions/neon#what-is-the-local-file-cache) for quick access.
 
-The **Working set size** graph provides a visual representation of how much data has being accessed over different time intervals. Here's how to interpret the graph:
+The **Working set size** graph provides a visual representation of the data (the number of unique pages accessed multiplied by page size) accessed within a given time interval. Here's how to interpret the graph:
 
-- **5m** (5 minutes): This line shows how much data has been accessed in the last 5 minutes.
-- **15m** (15 minutes): Similar to the 5-minute window, this metric tracks data accessed over the last 15 minutes.
-- **1h** (1 hour): This line represents the amount of data accessed in the last hour.
+- **5m** (5 minutes): This line shows the data accessed in the last 5 minutes.
+- **15m** (15 minutes): Similar to the 5-minute window, this metric tracks the data accessed in last 15 minutes.
+- **1h** (1 hour): This line represents the data accessed in the last hour.
 - **Local file cache size**: This is the size of the LFC, which is determined by the size of your compute. Larger computes have larger caches. For cache sizes, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 For optimal performance the local file cache should be larger than your working set size for a given time interval.
 If your working set size is larger than the LFC size it is recommended to increase the maximum size of the compute to improve the LFC hit rate and achieve good performance.
