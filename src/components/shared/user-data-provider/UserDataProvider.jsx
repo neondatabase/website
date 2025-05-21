@@ -2,6 +2,7 @@
 
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useRef, useState, createContext, useContext } from 'react';
+import { useLocation } from 'react-use';
 
 const ALLOWED_ORIGINS = ['https://console.neon.tech', 'http://localhost:30000'];
 const UserDataContext = createContext({
@@ -31,6 +32,8 @@ const UserDataProvider = ({ children }) => {
     return () => window.removeEventListener('message', handleEvent);
   }, []);
 
+  const { origin } = useLocation();
+
   const dataUrl = useMemo(() => {
     const params = new URLSearchParams();
     if (selection.org_id) {
@@ -39,8 +42,12 @@ const UserDataProvider = ({ children }) => {
     if (selection.project_id) {
       params.append('project_id', selection.project_id);
     }
-    return `http://localhost:30000/docs_data?${params.toString()}`;
-  }, [selection]);
+
+    const consoleUrl =
+      origin === 'http://localhost:3000' ? 'http://localhost:30000' : 'https://console.neon.tech';
+
+    return `${consoleUrl}/docs_data?${params.toString()}`;
+  }, [selection.org_id, selection.project_id, origin]);
 
   const contextValue = useMemo(
     () => ({
