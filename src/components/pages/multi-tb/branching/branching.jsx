@@ -21,21 +21,14 @@ const Branching = () => (
         Learn more
       </Link>
     </Container>
-    <Container className="mb-12 mt-14 lg:mx-8 md:mx-1" size="960">
-      <div className="relative flex h-[486px] flex-col gap-4 rounded-[10px] bg-black-new p-8">
-        <div className="branching-demo-embed z-10">
-          {/* TODO: Embed Brancing Demo component */}
-          <h3 className="text-2xl font-medium leading-none tracking-extra-tight text-white">
-            Copy your database in milliseconds - regardless of size
-          </h3>
-          <p className="text-lg leading-snug tracking-extra-tight text-gray-new-60">
-            In this demo, you will create a copy of your database, make changes to it, and restore
-            it to the original state in milliseconds. Behind the scenes, you are leveraging
-            Neon&apos;s instant branching.
-          </p>
-        </div>
-        <div className="absolute inset-0" aria-hidden>
-          {/* TODO: add glass effect */}
+    <Container className="mb-14 mt-[50px] lg:mx-8 md:mx-1" size="960">
+      <div className="relative min-h-[486px] rounded-[10px] bg-black-new">
+        {/* TODO: Embed Brancing Demo component */}
+        <div
+          className="branching-demo-glass absolute -left-[8px] -top-[8px] -z-20 h-[calc(100%+16px)] w-[calc(100%+16px)] overflow-hidden rounded-[14px]"
+          aria-hidden
+        >
+          <div className="absolute inset-0 bg-black-pure blur" />
         </div>
         <span className="absolute right-[-241px] top-[-224px] -z-30 size-[600px] bg-[radial-gradient(50%_50%_at_50%_50%,_rgba(92,129,182,0.24)_0%,_rgba(92,129,182,0.00)_100%)] opacity-30" />
         <span className="absolute bottom-[-193px] left-[-218px] -z-30 size-[550px] bg-[radial-gradient(50%_50%_at_50%_50%,_rgba(7,125,148,0.25)_0%,_rgba(7,125,148,0.00)_100%)] opacity-30" />
