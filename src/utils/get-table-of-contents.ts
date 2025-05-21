@@ -1,13 +1,25 @@
-const fs = require('fs');
+import fs from 'fs';
+import slugify from 'slugify';
+import sharedMdxComponents from '../../content/docs/shared-content';
+import parseMDXHeading from './parse-mdx-heading';
 
-const slugify = require('slugify');
+interface Heading {
+  title: string;
+  isNumbered: boolean;
+  stepsIndex: number;
+}
 
-const sharedMdxComponents = require('../../content/docs/shared-content');
+interface TocItem {
+  title: string;
+  id: string;
+  level: number;
+  numberedStep: number | null;
+  index: number;
+  items?: TocItem[];
+}
 
-const parseMDXHeading = require('./parse-mdx-heading');
-
-const buildNestedToc = (headings, currentLevel, currentIndex = 0) => {
-  const toc = [];
+const buildNestedToc = (headings: Heading[], currentLevel: number, currentIndex = 0): TocItem[] => {
+  const toc: TocItem[] = [];
   let numberedStep = 0;
   let localIndex = currentIndex;
   let currentStepsIndex = -1;
@@ -29,7 +41,7 @@ const buildNestedToc = (headings, currentLevel, currentIndex = 0) => {
         currentStepsIndex = stepsIndex;
       }
 
-      const tocItem = {
+      const tocItem: TocItem = {
         title: titleWithInlineCode,
         id: slugify(title, { lower: true, strict: true, remove: /[*+~.()'"!:@]/g }),
         level: depth,
@@ -68,7 +80,7 @@ const buildNestedToc = (headings, currentLevel, currentIndex = 0) => {
   return toc;
 };
 
-const getTableOfContents = (content) => {
+const getTableOfContents = (content: string): TocItem[] => {
   const mdxComponentRegex = /<(\w+)\/>/g;
   let match;
   // check if the content has any mdx shared components
@@ -97,7 +109,7 @@ const getTableOfContents = (content) => {
   const stepsMatches = [...content.matchAll(stepsRegex)];
 
   // Convert headings to objects while preserving order
-  const arr = allHeadings.map((heading) => {
+  const arr: Heading[] = allHeadings.map((heading) => {
     // Check if this heading is inside any Steps section and is h2
     let stepsIndex = -1;
     const isInSteps = stepsMatches.some((match, index) => {

@@ -1,12 +1,14 @@
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
+import withBundleAnalyzer from '@next/bundle-analyzer';
+import { getAllPosts, getAllChangelogs } from './src/utils/api-docs';
+import generateChangelogPath from './src/utils/generate-changelog-path';
+import generateDocPagePath from './src/utils/generate-doc-page-path';
+import { NextConfig } from 'next';
+
+const withBundleAnalyzerConfig = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
-const { getAllPosts, getAllChangelogs } = require('./src/utils/api-docs');
-const generateChangelogPath = require('./src/utils/generate-changelog-path');
-const generateDocPagePath = require('./src/utils/generate-doc-page-path');
-
-const defaultConfig = {
+const defaultConfig: NextConfig = {
   poweredByHeader: false,
   images: {
     formats: ['image/avif', 'image/webp'],
@@ -424,4 +426,4 @@ const defaultConfig = {
   },
 };
 
-module.exports = withBundleAnalyzer(defaultConfig);
+export default withBundleAnalyzerConfig(defaultConfig);

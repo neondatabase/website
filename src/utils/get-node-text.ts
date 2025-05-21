@@ -1,4 +1,4 @@
-export default function getNodeText(node) {
+export default function getNodeText(node: any): string {
   if (node == null) return '';
 
   switch (typeof node) {

@@ -1,6 +1,5 @@
-const fs = require('fs');
-
-const slugify = require('slugify');
+import fs from 'fs';
+import slugify from 'slugify';
 
 /**
  * Get a glossary item preview by heading ID.
@@ -9,7 +8,12 @@ const slugify = require('slugify');
  * @returns {string} item.title - The title of the glossary item.
  * @returns {string} item.preview - The preview text of the glossary item.
  */
-const getGlossaryItem = (href) => {
+interface GlossaryItem {
+  title: string;
+  preview: string;
+}
+
+const getGlossaryItem = (href: string): GlossaryItem | null => {
   const glossaryFilePath = 'content/docs/reference/glossary.md';
 
   if (!fs.existsSync(glossaryFilePath)) {
@@ -23,7 +27,7 @@ const getGlossaryItem = (href) => {
   const sections = glossaryContent.split('## ').slice(1);
 
   // Find the matching section by heading ID and return title and preview
-  let result = null;
+  let result: GlossaryItem | null = null;
   sections.some((section) => {
     const lines = section.split('\n');
     const title = lines[0].trim();

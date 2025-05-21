@@ -11,11 +11,15 @@ import Link from 'components/shared/link';
 import AnchorHeading from '../components/shared/anchor-heading';
 import ImageZoom from '../components/shared/image-zoom';
 
-function isBooleanString(string) {
+interface SharedComponents {
+  [key: string]: React.ComponentType<any>;
+}
+
+function isBooleanString(string: string): boolean {
   return string === 'true' || string === 'false';
 }
 
-function isJSON(string) {
+function isJSON(string: string): boolean {
   if (typeof string !== 'string') return false;
   if (isBooleanString(string)) return false;
 
@@ -28,13 +32,13 @@ function isJSON(string) {
   return true;
 }
 
-function toCamelCase(string) {
+function toCamelCase(string: string): string {
   return string.replace(/([-_][a-z])/g, (group) =>
     group.toUpperCase().replace('-', '').replace('_', '')
   );
 }
 
-function transformValue(value) {
+function transformValue(value: any): any {
   if (isJSON(value)) {
     const parsedJSON = JSON.parse(value);
 
@@ -52,8 +56,8 @@ function transformValue(value) {
   return value;
 }
 
-function transformProps(props) {
-  const transformedProps = {};
+function transformProps(props: any): any {
+  const transformedProps: any = {};
 
   Object.keys(props).forEach((propName) => {
     const transformedValue = transformValue(props[propName]);
@@ -64,7 +68,7 @@ function transformProps(props) {
   return transformedProps;
 }
 
-const sharedComponents = {
+const sharedComponents: SharedComponents = {
   h2: AnchorHeading('h2'),
   img: (props) => {
     const { src, className, width, height, alt, isPriority } = props;
@@ -91,7 +95,11 @@ const sharedComponents = {
   },
 };
 
-export default function getReactContentWithLazyBlocks(content, pageComponents, includeBaseTags) {
+export default function getReactContentWithLazyBlocks(
+  content: string,
+  pageComponents: SharedComponents,
+  includeBaseTags: boolean
+): JSX.Element | null {
   if (content === null || content === undefined) {
     return null;
   }

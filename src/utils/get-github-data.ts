@@ -1,6 +1,6 @@
 const API_URL = 'https://api.github.com/repos/neondatabase/neon';
 
-const getGithubStars = async () => {
+const getGithubStars = async (): Promise<number> => {
   if (process.env.NODE_ENV === 'production') {
     const response = await fetch(API_URL, { next: { revalidate: 60 * 60 * 12 } });
     const json = await response.json();
@@ -12,7 +12,7 @@ const getGithubStars = async () => {
   return 16000;
 };
 
-const getGithubContributors = async () => {
+const getGithubContributors = async (): Promise<number> => {
   const response = await fetch(`${API_URL}/contributors?per_page=1`, {
     next: { revalidate: 60 * 60 * 12 },
   });

@@ -3,6 +3,22 @@ import SEO_DATA, { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
 const DEFAULT_TITLE = SEO_DATA.index.title;
 const DEFAULT_DESCRIPTION = SEO_DATA.index.description;
 
+interface MetadataParams {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  robotsNoindex?: string;
+  rssPathname?: string | null;
+  pathname: string;
+  category?: string | null;
+  type?: string;
+  publishedTime?: string | null;
+  authors?: string[];
+  imagePath?: string;
+  isPostgres?: boolean;
+  currentSlug?: string | null;
+}
+
 export default function getMetadata({
   title,
   description,
@@ -17,7 +33,7 @@ export default function getMetadata({
   imagePath = DEFAULT_IMAGE_PATH,
   isPostgres = false,
   currentSlug = null,
-}) {
+}: MetadataParams) {
   const SITE_URL =
     process.env.VERCEL_ENV === 'preview'
       ? `https://${process.env.VERCEL_BRANCH_URL}`
