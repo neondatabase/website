@@ -4,21 +4,21 @@ import Mustache from 'mustache';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Combobox from 'components/shared/combo-box/Combobox';
+import Combobox from 'components/shared/combo-box';
 import { useUserData } from 'components/shared/user-data-provider/UserDataProvider';
 import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
 
 import CheckIcon from '../code-block-wrapper/images/check.inline.svg';
 import CopyIcon from '../code-block-wrapper/images/copy.inline.svg';
 
-import styles from './NeonConnectionSnippet.module.css';
+import styles from './connection-snippet.module.css';
 
 const RenderCodeBlock = ({ children }) => <pre className={styles.codeBlock}>{children}</pre>;
 RenderCodeBlock.propTypes = {
   children: PropTypes.string.isRequired,
 };
 
-const NeonConnectionSnippet = () => {
+const ConnectionSnippet = () => {
   const { loggedIn, data, selection, setSelection } = useUserData();
   const { isCopied, handleCopy } = useCopyToClipboard(3000);
   const { orgs, org_projects: projects } = data;
@@ -27,15 +27,13 @@ const NeonConnectionSnippet = () => {
   if (!loggedIn) {
     return (
       <div className={styles.controls}>
-        <div className={styles.selectorRow}>
-          <span className={styles.emptyState}>
-            To view with your credentials,{' '}
-            <a href="https://console.neon.tech/login" target="_blank" rel="noopener noreferrer">
-              log in
-            </a>
-            .
-          </span>
-        </div>
+        <span className={styles.emptyState}>
+          To view with your credentials,{' '}
+          <a href="https://console.neon.tech/login" target="_blank" rel="noopener noreferrer">
+            log in
+          </a>
+          .
+        </span>
       </div>
     );
   }
@@ -50,31 +48,27 @@ const NeonConnectionSnippet = () => {
   return (
     <>
       <div className={styles.controls}>
-        <div className={styles.selectorRow}>
-          <Combobox
-            label="Organization:"
-            value={selection.org_id || ''}
-            placeholder="Select an organization"
-            options={orgs}
-            onChange={(value) => {
-              const org = orgs.find((p) => p.id === value);
-              setSelection({ org_id: org?.id });
-            }}
-          />
-          <Combobox
-            label="Project:"
-            value={selection.project_id || ''}
-            placeholder="Select a project"
-            options={projects}
-            onChange={(value) => {
-              const project = projects.find((p) => p.id === value);
-              setSelection({
-                org_id: project?.org_id,
-                project_id: project?.id,
-              });
-            }}
-          />
-        </div>
+        <Combobox
+          value={selection.org_id || ''}
+          placeholder="Select an organization"
+          options={orgs}
+          onChange={(value) => {
+            const org = orgs.find((p) => p.id === value);
+            setSelection({ org_id: org?.id });
+          }}
+        />
+        <Combobox
+          value={selection.project_id || ''}
+          placeholder="Select a project"
+          options={projects}
+          onChange={(value) => {
+            const project = projects.find((p) => p.id === value);
+            setSelection({
+              org_id: project?.org_id,
+              project_id: project?.id,
+            });
+          }}
+        />
       </div>
       <div className={styles.codeBlockWrapper}>
         <div className={styles.codeArea}>
@@ -100,4 +94,4 @@ const NeonConnectionSnippet = () => {
   );
 };
 
-export default NeonConnectionSnippet;
+export default ConnectionSnippet;

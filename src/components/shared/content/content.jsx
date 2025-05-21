@@ -34,8 +34,9 @@ import Admonition from 'components/shared/admonition';
 import AnchorHeading from 'components/shared/anchor-heading';
 import Button from 'components/shared/button';
 import CodeBlock from 'components/shared/code-block';
-import Combobox from 'components/shared/combo-box/Combobox';
+import Combobox from 'components/shared/combo-box';
 import ComputeCalculator from 'components/shared/compute-calculator';
+import ConnectionSnippet from 'components/shared/connection-snippet';
 import CtaBlock from 'components/shared/cta-block';
 import DeployPostgresButton from 'components/shared/deploy-postgres-button';
 import DocCta from 'components/shared/doc-cta';
@@ -43,7 +44,6 @@ import ExternalCode from 'components/shared/external-code';
 import ImageZoom from 'components/shared/image-zoom';
 import InkeepEmbedded from 'components/shared/inkeep-embedded';
 import LatencyCalculator from 'components/shared/latency-calculator';
-import NeonConnectionSnippet from 'components/shared/neon-connection-snippet/NeonConnectionSnippet';
 import RequestForm from 'components/shared/request-form';
 import getCodeProps from 'lib/rehype-code-props';
 
@@ -156,7 +156,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   CheckItem,
   Combobox,
   ExternalCode: (props) => <ExternalCode {...props} />,
-  NeonConnectionSnippet,
+  ConnectionSnippet,
   ...sharedComponents,
 });
 

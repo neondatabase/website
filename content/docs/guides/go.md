@@ -10,7 +10,7 @@ updatedOn: '2025-04-20T15:44:26.049Z'
 
 To connect to Neon from a Go application:
 
-<NeonConnectionSnippet />
+<ConnectionSnippet />
 
 <Steps>
 
