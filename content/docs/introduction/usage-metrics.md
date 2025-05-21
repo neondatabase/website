@@ -163,6 +163,7 @@ In short, `VACUUM FULL` can help reduce your data size and future storage costs,
 <summary>**What is the maximum data size that Neon supports?**</summary>
 
 Each Neon project has a default data size limit of 2 TiB. To increase this limit, [contact the Neon Sales team](https://neon.tech/contact-sales).
+
 </details>
 
 ## Archive storage
