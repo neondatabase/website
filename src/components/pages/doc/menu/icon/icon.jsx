@@ -35,6 +35,7 @@ import RegionsIcon from 'icons/docs/sidebar/regions.inline.svg';
 import ReplicationsIcon from 'icons/docs/sidebar/replications.inline.svg';
 import ReportIcon from 'icons/docs/sidebar/report.inline.svg';
 import RoadmapIcon from 'icons/docs/sidebar/roadmap.inline.svg';
+import RocketIcon from 'icons/docs/sidebar/rocket.inline.svg';
 import SdkIcon from 'icons/docs/sidebar/sdk.inline.svg';
 import SearchIcon from 'icons/docs/sidebar/search.inline.svg';
 import SecurityIcon from 'icons/docs/sidebar/security.inline.svg';
@@ -86,6 +87,7 @@ const icons = {
   replications: ReplicationsIcon,
   report: ReportIcon,
   roadmap: RoadmapIcon,
+  rocket: RocketIcon,
   sdk: SdkIcon,
   search: SearchIcon,
   security: SecurityIcon,
