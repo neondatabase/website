@@ -67,7 +67,7 @@ Neon supports two connection protocols with distinctly different performance pro
 
 - **Performance profile**: Higher initial connection overhead but significantly faster for subsequent queries
 - **Use cases**: Optimal for applications that execute multiple queries over a maintained connection
-- **Features**: Supports full PostgreSQL functionality including sessions, transactions, and all Postgres protocols
+- **Features**: Supports full Postgres functionality including sessions, transactions, and all Postgres protocols
 - **When to benchmark**: Measure both connection establishment time AND subsequent query execution separately
 - **Initialization**: Requires multiple round-trips between client and server to establish
 
