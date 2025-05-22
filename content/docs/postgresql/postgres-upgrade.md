@@ -50,6 +50,12 @@ When upgrading to **Postgres 17**, you may encounter issues with certain command
 
 ### 3. Migrate your data using one of the following methods
 
+**Import Data Assistant**
+
+- [Import Data Assistant](/docs/import/import-data-assistant)
+
+  For databases under 10GB, the Import Data Assistant provides the simplest way to migrate between Neon projects with different Postgres versions. Just create a new project with your desired Postgres version, then use the connection string from your existing Neon project to import the data.
+
 **Dump and Restore**
 
 Neon supports the following dump and restore options:
