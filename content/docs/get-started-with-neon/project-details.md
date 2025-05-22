@@ -25,6 +25,15 @@ subtitle: All your Neon project details and copy-paste commands in one place
 @@@db.connection_uri:your-default-uri@@@
 ```
 
+Here’s how your connection string is built:
+
+- User: `@@@db.role:your-user@@@`
+- Password: `@@@db.password:your-password@@@`
+- Host: `@@@db.host:your-host@@@`
+- Port: `@@@db.port:5432@@@`
+- Database: `@@@db.database:your-db@@@`
+- Pooler: pooled connection by default
+
 ## Environment variables
 
 ```bash shouldWrap
@@ -59,6 +68,12 @@ neon context set --project-id @@@selected_project_id:project-id@@@
 neon branches list
 ```
 
+**View details for your default branch `@@@branch.name:your-branch-id@@@`**
+
+```bash
+neon branches get @@@branch.id:your-branch-id@@@
+```
+
 **Create a new branch**
 
 ```bash
@@ -67,8 +82,8 @@ neon branches create my-feature-branch
 
 ## Useful links
 
-- [Project dashboard](https://console.neon.tech/app/projects/@@@selected_project_id:project-id@@@)
-- [Production checklist](/docs/get-started-with-neon/production-checklist)
-- [Branching guide](/docs/guides/branching-intro)
+- [Next.js](/docs/guides/nextjs#store-your-neon-credentials)
+- [Node.js](/docs/guides/node#store-your-neon-credentials)
+- [Go](/docs/guides/go#configure-go-application-connection-settings)
 
 </UserData>
