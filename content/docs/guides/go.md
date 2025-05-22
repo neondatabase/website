@@ -52,7 +52,7 @@ import (
 )
 
 func main() {
-    connStr := "@@@connection_uri:postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require@@@"
+    connStr := "@@@db.connection_uri:postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require@@@"
     db, err := sql.Open("postgres", connStr)
     if err != nil {
         panic(err)

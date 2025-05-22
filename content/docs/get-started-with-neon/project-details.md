@@ -22,14 +22,14 @@ subtitle: All your Neon project details and copy-paste commands in one place
 **Connect to your default branch**
 
 ```bash shouldWrap
-@@@connection_uri:your-default-uri@@@
+@@@db.connection_uri:your-default-uri@@@
 ```
 
 ## Environment variables
 
 ```bash shouldWrap
 NEON_PROJECT_ID=@@@selected_project_id:project-id@@@
-NEON_DATABASE_URL="@@@connection_uri:your-production-uri@@@"
+NEON_DATABASE_URL="@@@db.connection_uri:your-production-uri@@@"
 NEON_PROJECT_NAME="@@@selected_project.name:Your Project@@@"
 ```
 
