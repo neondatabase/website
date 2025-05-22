@@ -15,8 +15,6 @@ Learn how to replicate data from a Neon Postgres database into Databricks Delta 
 - A [Neon account](https://console.neon.tech/) with logical replication enabled
 - An [Airbyte account](https://airbyte.com/)
 - A running [Databricks workspace](https://databricks.com/)
-- Access to a [Databricks SQL Warehouse](https://docs.databricks.com/en/sql/admin/sql-endpoints.html) or cluster with write access to Delta tables
-- A configured [Delta Lake destination connector](https://docs.airbyte.com/integrations/destinations/delta-lake/) in Airbyte
 
 ---
 
@@ -34,13 +32,13 @@ Follow the steps in the [Replicate data with Airbyte](/docs/guides/logical-repli
 
 ## Step 2: Configure Databricks as a destination
 
-To set up Databricks as a destination in Airbyte:
+To set up Databricks as a destination in Airbyte following these instructions: [Databricks Lakehouse](https://docs.airbyte.com/integrations/destinations/databricks)
 
 1. In Airbyte, go to **Destinations** and add a new one.
 2. Select **Delta Lake on Databricks** as the destination type.
 3. Provide the following required values:
    - **Databricks workspace URL**
-   - **Personal access token**
+   - **Personal access token** See [Databricks personal access tokens for workspace users](https://docs.databricks.com/aws/en/dev-tools/auth/pat)
    - **Database/schema name**
    - **Target path in DBFS or S3 (for staging)**
    - **Cluster ID** or SQL Warehouse ID
@@ -64,7 +62,4 @@ For details, see [Airbyte: Delta Lake on Databricks](https://docs.airbyte.com/in
 1. Trigger the initial sync to populate data from Neon into Delta Lake.
 2. Airbyte will continuously read WAL logs from Neon via logical replication and deliver inserts, updates, and deletes into Delta tables.
 
----
-
-## Example architecture
 
