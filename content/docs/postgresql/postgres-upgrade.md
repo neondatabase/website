@@ -42,33 +42,31 @@ Alternatively, you can apply these configurations after migrating your data.
 
 ### 2. Migrate your data using one of the following methods
 
-**Import Data Assistant**
+- **Import Data Assistant**
 
-- [Import Data Assistant](/docs/import/import-data-assistant)
+    For databases under 10GB, Neon's [Import Data Assistant](/docs/import/import-data-assistant) provides the simplest way to migrate between Neon projects with different Postgres versions. Just create a new project with your desired Postgres version, then use the database connection string from your existing Neon project to import the data.
 
-  For databases under 10GB, the Import Data Assistant provides the simplest way to migrate between Neon projects with different Postgres versions. Just create a new project with your desired Postgres version, then use the connection string from your existing Neon project to import the data.
+- **Dump and restore**
 
-**Dump and Restore**
+    Neon supports the following dump and restore options:
 
-Neon supports the following dump and restore options:
+    - [Migrate data with pg_dump and pg_restore](/docs/import/migrate-from-postgres)
 
-- [Migrate data with pg_dump and pg_restore](/docs/import/migrate-from-postgres)
+      This method requires dumping data from your current Neon project with `pg_dump` and loading the data into the new Neon project using `pg_restore`. Some downtime will be required between the dump and restore operations.
 
-  This method requires dumping data from your current Neon project with `pg_dump` and loading the data into the new Neon project using `pg_restore`. Some downtime will be required between the dump and restore operations.
+    - [Migrate data from one Neon project to another by piping data from pg_dump to pg_restore](/docs/import/migrate-from-neon)
 
-- [Migrate data from one Neon project to another by piping data from pg_dump to pg_restore](/docs/import/migrate-from-neon)
+      If your database is small, you can use this method to pipe `pg_dump` output directly to `pg_restore` to save time. While this method is a bit simpler, we recommend it only for small databases, as it is susceptible to failures during lengthy data migrations.
 
-  If your database is small, you can use this method to pipe `pg_dump` output directly to `pg_restore` to save time. While this method is a bit simpler, we recommend it only for small databases, as it is susceptible to failures during lengthy data migrations.
+- **Logical replication**
 
-**Logical Replication**
+    The logical replication method can be used to achieve a near-zero downtime migration. Once the data in the new Neon project is synced with the data in the Neon project running the older version of Postgres, you can quickly switch your applications to the database. This method is recommended for active databases that cannot afford much downtime. For instructions, see [Logical Replication](/docs/guides/logical-replication-neon-to-neon).
 
-The logical replication method can be used to achieve a near-zero downtime migration. Once the data in the new Neon project is synced with the data in the Neon project running the older version of Postgres, you can quickly switch your applications to the database. This method is recommended for active databases that cannot afford much downtime. For instructions, see [Logical Replication](/docs/guides/logical-replication-neon-to-neon).
-
-<Admonition type="note" title="Notes">
-- Neon does not support the `pg_dumpall` utility. If upgrading via dump and restore, dumps must be performed one database at a time using `pg_dump`.
-- Neon does not yet support upgrading using `pg_upgrade`. Support for this utility is being considered for a future release.
-- If you choose a dump and restore method, it is recommended that you use `pg_dump` and `pg_store` programs from the newer version of Postgres, to take advantage of any enhancements introduced in the newer version. Current releases of the these programs can read data from all previous Postgres versions supported by Neon.
-</Admonition>
+    <Admonition type="note" title="Notes">
+    - Neon does not support the `pg_dumpall` utility. If upgrading via dump and restore, dumps must be performed one database at a time using `pg_dump`.
+    - Neon does not yet support upgrading using `pg_upgrade`. Support for this utility is being considered for a future release.
+    - If you choose a dump and restore method, it is recommended that you use `pg_dump` and `pg_store` programs from the newer version of Postgres, to take advantage of any enhancements introduced in the newer version. Current releases of the these programs can read data from all previous Postgres versions supported by Neon.
+    </Admonition>
 
 ### 3. Switch over your applications
 
