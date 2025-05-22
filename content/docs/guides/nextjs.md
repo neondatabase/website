@@ -49,11 +49,9 @@ If you do not have one already, create a Neon project. Save your connection deta
 Add a `.env` file to your project directory and add your Neon connection string to it. You can find your Neon database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 <UserData>
-<figure style={{ marginTop: -30 , marginLeft: 10 }}>
 ```shell shouldWrap
-  DATABASE_URL="@@@connection_uri:your-uri@@@"
+DATABASE_URL="@@@db.connection_uri:your-uri@@@"
 ```
-</figure>
 </UserData>
 ## Configure the Postgres client
 
