@@ -152,6 +152,7 @@ https://console.neon.tech/app/claim?p={project_id}&tr={transfer_request_id}&ru={
 ```
 
 Where:
+
 - `p={project_id}` - The project ID being transferred
 - `tr={transfer_request_id}` - The transfer request `id` from the previous step
 - `ru={redirect_url}` (optional) - A URL-encoded destination where the user is redirected after successfully claiming the project
@@ -161,6 +162,7 @@ Where:
 ### User communication
 
 When sharing the claim URL, inform your user that:
+
 - They'll need a Neon account to claim the project (they can create one during the claim process)
 - The link will expire at the time shown in the `expires_at` field
 - After claiming, they'll have full ownership of the project
@@ -211,16 +213,19 @@ Without the `org_id` parameter, the project transfers to the user's personal acc
 ## Important notes
 
 ### Transfer request behavior
+
 - **Expiration**: Requests expire after the specified `ttl_seconds` (default: 24 hours). Once expired, you must create a new transfer request
 - **One-time use**: Each transfer request can only be used once
 - **Already claimed**: If a project has already been claimed, subsequent attempts will fail with an error
 
 ### Security considerations
+
 - **URL security**: Share claim URLs through secure channels as anyone with the URL can claim the project
 - **Password rotation**: Instruct users to change their database password immediately after claiming
 - **Access revocation**: Once transferred, you lose all access to the project unless the new owner grants permissions
 
 ### Technical details
+
 - **Connection persistence**: Database connection strings remain valid after transfer
 - **Organization transfers**: Users must be members of the target organization
 - **Organization ID format**: `org-[descriptive-term]-[numeric-id]` (e.g., `org-cool-breeze-12345678`)
@@ -235,14 +240,14 @@ Without the `org_id` parameter, the project transfers to the user's personal acc
 
 ## Troubleshooting
 
-| Issue                                    | Solution                                                                                                      |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| Claim URL expired | Create a new transfer request and generate a new claim URL                                                                           |
-| User receives error when claiming | Verify the project exists and the transfer request hasn't been used                                                  |
+| Issue                                 | Solution                                                                                                         |
+| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Claim URL expired                     | Create a new transfer request and generate a new claim URL                                                       |
+| User receives error when claiming     | Verify the project exists and the transfer request hasn't been used                                              |
 | Project doesn't appear after claiming | Refresh the Neon Console or log out and back in                                                                  |
 | "Transfer requests not enabled" error | [Contact our partnership team](https://neon.tech/partners#partners-apply) to enable this private preview feature |
-| Organization transfer fails | Verify user membership in the target organization and correct `org_id` format                                              |
-| Already claimed error | The transfer request has been used; create a new one if needed                                                                   |
+| Organization transfer fails           | Verify user membership in the target organization and correct `org_id` format                                    |
+| Already claimed error                 | The transfer request has been used; create a new one if needed                                                   |
 
 ## Further resources
 
