@@ -22,6 +22,7 @@ Free-tier Neon databases automatically suspend after 5 minutes of inactivity. Pa
 For accurate benchmarking, always measure cold and hot queries separately:
 
 1. **Cold query testing**:
+
    - Ensure your database is in a suspended state
    - Make a request to trigger compute activation
    - Measure this connection time, which includes the startup overhead
@@ -94,7 +95,7 @@ Design your benchmarks to simulate how your application actually interacts with 
 
 - **Avoid one-query-per-process testing**: While useful for understanding cold starts, simplistic tests that connect, query, and disconnect don't reflect long-running application performance.
 
-- **Match your application pattern**: 
+- **Match your application pattern**:
   - If your app keeps connections alive, focus on post-connection query latency
   - If your app is serverless and frequently creates new connections, measure both scenarios but analyze them separately
 
