@@ -17,8 +17,8 @@ const UserDataSelector = () => {
   return (
     <div
       className={clsx(
-        'items-cente flex flex-wrap gap-0.5 border-b-0 bg-transparent',
-        'ml-0 mt-6 px-0 py-1.5 sm:flex-col sm:items-start sm:gap-1'
+        'user-data-selector flex flex-wrap gap-2 border-b-0 bg-transparent',
+        'ml-0 mt-6 px-0 py-2 sm:flex-col sm:items-start sm:gap-1'
       )}
     >
       {!loggedIn ? (

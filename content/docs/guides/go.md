@@ -30,7 +30,7 @@ To create a Neon project:
 
 Connecting to Neon requires configuring connection settings in your Go project's `.go` file.
 
-<UserData>
+<UserData selector="false">
 <Admonition type="note">
 Hello @@@selected_org.name:there@@@! Did you know that Neon is fully compatible with the `sql/db` package and common Postgres drivers, such as `pgx`?
 </Admonition>

@@ -310,4 +310,8 @@
       @apply text-green-45 transition-colors duration-200 hover:text-[#47ffc2];
     }
   }
+
+  .user-data-selector + * {
+    margin-top: 0 !important;
+  }
 }
