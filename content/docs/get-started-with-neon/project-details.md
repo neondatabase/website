@@ -3,8 +3,7 @@ title: Project reference
 subtitle: All your Neon project details and copy-paste commands in one place
 ---
 
-> ℹ️ **This page is personalized to your current project and org.**<br/>
-> <UserData>
+> ℹ️ **This page is personalized to your current project and org.**<br/> > <UserData>
 
 👋 Hello, <strong>@@@name:developer@@@</strong>! Here's everything you need for working with `@@@selected_project.name:your Neon project@@@`.
 
