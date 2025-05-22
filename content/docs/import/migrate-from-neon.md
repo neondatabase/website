@@ -22,7 +22,7 @@ You can also use these alternative methods to migrate data between Neon projects
 
 - **Import Data Assistant**: A simpler option for databases under 10GB. See [Import Data Assistant](/docs/import/import-data-assistant).
 - **Logical replication**: Move your data from one Neon project to another. See [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
-</Admonition>
+  </Admonition>
 
 ## Important considerations
 
