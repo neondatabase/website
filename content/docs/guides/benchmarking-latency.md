@@ -11,7 +11,7 @@ Benchmarking latency in Neon's serverless Postgres environment presents unique c
 
 When benchmarking Neon databases, you'll encounter two distinct types of queries:
 
-- **Cold queries**: Occur when a previously suspended compute resource is activated to process a request. By default, free-tier Neon databases suspend after 5 minutes of inactivity. A cold query typically adds several hundred milliseconds of latency.
+- **Cold queries**: Occur when a previously suspended compute resource is activated to process a request. This typically happens in development or test environments where databases aren’t running continuously. By default, free-tier Neon databases suspend after 5 minutes of inactivity. A cold query typically adds a few hundred milliseconds of latency.
 - **Hot queries**: Execute on an already-active database instance, delivering consistent low latency. These are typical in production environments where the database runs 24/7 or remains active most of the time.
 
 On paid plans, you can configure or disable the auto-suspend timeout to customize your testing approach or eliminate cold starts entirely. See [Compute Lifecycle](/docs/introduction/compute-lifecycle) and [Auto-suspend Configuration](/docs/introduction/auto-suspend) for more details.
