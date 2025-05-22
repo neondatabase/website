@@ -12,6 +12,10 @@ When you're ready to move your data to Neon, our Import Data Assistant can help 
 
 <FeatureBetaProps feature_name="Import Data Assistant"/>
 
+<Admonition type="tip" title="Migrate between Neon projects">
+You can also use the Import Data Assistant to migrate data between Neon projects. This is useful if you want to upgrade to a newer Postgres version (for example, from Postgres 16 to 17), or move your database to a different region. Just create a new project with the desired Postgres version or region, then use the connection string from your existing Neon project to import the data into the new one.
+</Admonition>
+
 ## Ways to import
 
 The Import Data Assistant always creates a **new branch** for your imported data. There are two ways to launch the import:
@@ -65,10 +69,6 @@ Once checks pass, we'll:
 
 <Admonition type="note">
 During import, your source database remains untouched — we only read from it to create a copy in Neon.
-</Admonition>
-
-<Admonition type="tip" title="Migrate between Neon projects">
-You can also use the Import Data Assistant to migrate data between Neon projects. This is useful if you want to upgrade to a newer Postgres version (for example, from Postgres 16 to 17), or move your database to a different region. Just create a new project with the desired Postgres version or region, then use the connection string from your existing Neon project to import the data into the new one.
 </Admonition>
 
 ### Known Limitations
