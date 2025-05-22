@@ -18,11 +18,10 @@ Use these instructions to:
 - Import a database from a Neon project created with one Postgres version to a Neon project created with another Postgres version.
 
 <Admonition type="tip">
-You can also use the **Import Data Assistant** to easily migrate data between Neon projects. This is a simpler option for databases under 10GB. See [Import Data Assistant](/docs/import/import-data-assistant).
-</Admonition>
+You can also use these alternative methods to migrate data between Neon projects:
 
-<Admonition type="tip">
-Another option is to use **logical replication** to move your data from one Neon project to another. See [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
+- **Import Data Assistant**: A simpler option for databases under 10GB. See [Import Data Assistant](/docs/import/import-data-assistant).
+- **Logical replication**: Move your data from one Neon project to another. See [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
 </Admonition>
 
 ## Important considerations
