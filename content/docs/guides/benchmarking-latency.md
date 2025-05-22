@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2025-05-21T00:00:00.000Z'
 ---
 
-Benchmarking latency in Neon's serverless Postgres environment presents unique challenges due to compute auto-suspension, connection protocol differences, and geographic distribution. This guide provides detailed methodologies for separating cold-start costs from operational latency, selecting optimal connection types, and designing tests that accurately reflect production conditions.
+Benchmarking database query latency is inherently complex, requiring careful consideration of numerous variables and testing methodologies. Neon's serverless Postgres environment adds additional layers to this complexity due to compute auto-suspension, connection protocol differences, and geographic distribution. This guide provides detailed methodologies for separating cold-start costs from operational latency, selecting optimal connection types, and designing tests that accurately reflect production conditions.
 
 ## Understanding cold vs. hot queries
 
@@ -22,7 +22,6 @@ Free-tier Neon databases automatically suspend after 5 minutes of inactivity. Pa
 For accurate benchmarking, always measure cold and hot queries separately:
 
 1. **Cold query testing**:
-
    - Ensure your database is in a suspended state
    - Make a request to trigger compute activation
    - Measure this connection time, which includes the startup overhead
@@ -52,14 +51,17 @@ Avoid testing across unrealistic distances that don't represent your production 
 
 ## Connection types and their impact
 
-Neon supports two connection protocols with distinctly different performance profiles. Understanding these differences is crucial for accurate benchmarking. For a comprehensive comparison, see [Choosing Connection Types](/docs/connect/choose-connection).
+Neon supports two connection protocols: HTTP and WebSocket, each with distinctly different performance profiles. While some modern edge platforms now support direct TCP connections, many serverless environments still have limitations around persistent connections or TCP support. Neon's HTTP and WebSocket methods work across all serverless platforms, with each protocol having different latency characteristics and feature trade-offs depending on your query patterns. Understanding these differences is crucial for accurate benchmarking. For a comprehensive comparison, see [Choosing Connection Types](/docs/connect/choose-connection).
 
 ### HTTP connections
 
-- **Performance profile**: Optimized for single-shot queries with minimal connection overhead
-- **Use cases**: Ideal for serverless functions that execute a single query per invocation
+- **Performance profile**: Optimized for queries with minimal connection overhead
+- **Use cases**: 
+  - Serverless functions that need low-latency query execution
+  - Applications running multiple queries in parallel (HTTP can outperform WebSockets for parallel execution)
+  - Scenarios where queries don't depend on each other
 - **Limitations**: Doesn't support sessions, interactive transactions, NOTIFY, or COPY protocol
-- **When to benchmark**: Use for measuring performance of stateless, individual query operations
+- **When to benchmark**: Use for measuring performance of stateless query operations, both individual and parallel
 - **Optimization**: Connection caching can further reduce latency
 
 ### WebSocket connections
@@ -74,16 +76,21 @@ Neon supports two connection protocols with distinctly different performance pro
 
 When comparing HTTP vs WebSocket connections, you'll typically observe different latency patterns:
 
-- **HTTP connections**: Show consistent performance for individual queries
-- **WebSocket connections**: Show higher initial latency followed by very low latency for subsequent operations
+- **HTTP connections**: Show consistent low latency for individual queries and excel at parallel query execution
+- **WebSocket connections**: Show higher initial connection latency (about 3-5x slower than HTTP) but very low latency for subsequent sequential queries
+
+Consider your query patterns when choosing a connection type:
+- For parallel queries or independent operations, HTTP often performs better
+- For sequential queries where each depends on the previous result, WebSockets can be more efficient after the initial connection
+- The break-even point typically occurs around 2-3 sequential queries, though this varies by region and workload
 
 The runtime environment (Edge vs traditional serverless) can also impact connection performance characteristics.
 
 **Testing approach:**
 
-For WebSockets: Establish the connection first, then measure query execution time separately. This reflects real-world usage where connections are reused.
+- For WebSockets: Establish the connection first, then measure query execution time separately. This reflects real-world usage where connections are reused.
 
-For HTTP: Measure individual query execution time including any per-query connection overhead.
+- For HTTP: Measure individual query execution time including any per-query connection overhead.
 
 For implementation details on both connection methods, refer to the [Serverless Driver Documentation](/docs/serverless/serverless-driver).
 
@@ -95,7 +102,7 @@ Design your benchmarks to simulate how your application actually interacts with 
 
 - **Avoid one-query-per-process testing**: While useful for understanding cold starts, simplistic tests that connect, query, and disconnect don't reflect long-running application performance.
 
-- **Match your application pattern**:
+- **Match your application pattern**: 
   - If your app keeps connections alive, focus on post-connection query latency
   - If your app is serverless and frequently creates new connections, measure both scenarios but analyze them separately
 
