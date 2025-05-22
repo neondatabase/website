@@ -22,6 +22,7 @@ Free-tier Neon databases automatically suspend after 5 minutes of inactivity. Pa
 For accurate benchmarking, always measure cold and hot queries separately:
 
 1. **Cold query testing**:
+
    - Ensure your database is in a suspended state
    - Make a request to trigger compute activation
    - Measure this connection time, which includes the startup overhead
@@ -56,7 +57,7 @@ Neon supports two connection protocols: HTTP and WebSocket, each with distinctly
 ### HTTP connections
 
 - **Performance profile**: Optimized for queries with minimal connection overhead
-- **Use cases**: 
+- **Use cases**:
   - Serverless functions that need low-latency query execution
   - Applications running multiple queries in parallel (HTTP can outperform WebSockets for parallel execution)
   - Scenarios where queries don't depend on each other
@@ -80,6 +81,7 @@ When comparing HTTP vs WebSocket connections, you'll typically observe different
 - **WebSocket connections**: Show higher initial connection latency (about 3-5x slower than HTTP) but very low latency for subsequent sequential queries
 
 Consider your query patterns when choosing a connection type:
+
 - For parallel queries or independent operations, HTTP often performs better
 - For sequential queries where each depends on the previous result, WebSockets can be more efficient after the initial connection
 - The break-even point typically occurs around 2-3 sequential queries, though this varies by region and workload
@@ -102,7 +104,7 @@ Design your benchmarks to simulate how your application actually interacts with 
 
 - **Avoid one-query-per-process testing**: While useful for understanding cold starts, simplistic tests that connect, query, and disconnect don't reflect long-running application performance.
 
-- **Match your application pattern**: 
+- **Match your application pattern**:
   - If your app keeps connections alive, focus on post-connection query latency
   - If your app is serverless and frequently creates new connections, measure both scenarios but analyze them separately
 
