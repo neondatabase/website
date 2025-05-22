@@ -4,7 +4,7 @@ subtitle: All your Neon project details and copy-paste commands in one place
 ---
 
 > ℹ️ **This page is personalized to your current project and org.**<br/>
-<UserData>
+> <UserData>
 
 👋 Hello, <strong>@@@name:developer@@@</strong>! Here's everything you need for working with `@@@selected_project.name:your Neon project@@@`.
 
@@ -46,7 +46,7 @@ curl -X GET 'https://console.neon.tech/api/v2/projects/@@@selected_project_id:pr
 
 > After setting context, all commands below will use your selected project: `@@@selected_project.name:Your Project@@@`.
 
-**Set CLI context to this project**  
+**Set CLI context to this project**
 
 ```bash
 neon context set --project-id @@@selected_project_id:project-id@@@
@@ -69,4 +69,4 @@ neon branches create my-feature-branch
 - [Project dashboard](https://console.neon.tech/app/projects/@@@selected_project_id:project-id@@@)
 - [Production checklist](/docs/get-started-with-neon/production-checklist)
 - [Branching guide](/docs/guides/branching-intro)
-</UserData>
+  </UserData>
