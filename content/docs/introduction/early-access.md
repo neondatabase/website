@@ -26,4 +26,4 @@ To enable Early Access for your organization, go to your organization **Settings
 
 ## Opting Out
 
-If you need to opt out of Early Access later, [contact our Support team](https://console.neon.tech/app/projects?modal=support)  about Early Access changes to ensure there's no disruption to features you may be using.
+If you need to opt out of Early Access later, [contact our Support team](https://console.neon.tech/app/projects?modal=support) about Early Access changes to ensure there's no disruption to features you may be using.

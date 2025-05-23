@@ -32,7 +32,7 @@ The following table shows what actions each role can perform in the organization
 | [Manage organization billing](/docs/manage/orgs-manage#billing)                                                              |  ✅   |   ❌   |      ❌      |
 | [Rename organization](/docs/manage/orgs-manage#rename-an-organization)                                                       |  ✅   |   ❌   |      ❌      |
 | [Delete organization](/docs/manage/orgs-manage#delete-an-organization)                                                       |  ✅   |   ❌   |      ❌      |
-| [Enable organization Early Access Program](/docs/introduction/early-access)                    |  ✅   |   ❌   |      ❌      |
+| [Enable organization Early Access Program](/docs/introduction/early-access)                                                  |  ✅   |   ❌   |      ❌      |
 | **Project operations**                                                                                                       |       |        |              |
 | _Project creation and modification_                                                                                          |       |        |              |
 | [Create new projects](/docs/manage/orgs-manage#create-and-delete-projects)                                                   |  ✅   |   ✅   |      ❌      |
