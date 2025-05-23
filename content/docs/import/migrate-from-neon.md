@@ -3,7 +3,7 @@ title: Migrate data from another Neon project
 enableTableOfContents: true
 redirectFrom:
   - /docs/import/import-from-neon
-updatedOn: '2025-02-03T20:41:57.341Z'
+updatedOn: '2025-05-23T13:10:29.207Z'
 ---
 
 This guide describes how to migrate a database from one Neon project to another by piping data from `pg_dump` to `pg_restore`.
@@ -18,7 +18,12 @@ Use these instructions to:
 - Import a database from a Neon project created with one Postgres version to a Neon project created with another Postgres version.
 
 <Admonition type="tip">
-You can also use **logical replication** to move your data from one Neon project to another. See [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
+
+You can also use these alternative methods to migrate data between Neon projects:
+
+- **Import Data Assistant**: A fast and simple option for databases under 10 GB. See [Import Data Assistant](/docs/import/import-data-assistant).
+- **Logical replication**: Move your data from one Neon project to another. Consider this option for large databases requiring near-zero downtime. See [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
+
 </Admonition>
 
 ## Important considerations
