@@ -110,6 +110,7 @@ useOnboarding();
 const user = useUser();
 
 return (
+
 <div>Welcome to the app, {user.displayName}</div>
 );
 }

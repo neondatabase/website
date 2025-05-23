@@ -44,6 +44,7 @@ const permission = user.usePermission(team, 'read');
 
 // Don't rely on client-side permission checks for business logic.
 return (
+
 <div>
 {permission ? 'You have the read permission' : 'You shall not pass'}
 </div>
@@ -92,6 +93,7 @@ const user = useUser({ or: 'redirect' });
 const permissions = user.usePermissions();
 
 return (
+
 <div>
 {permissions.map(permission => (
 <div key={permission.id}>{permission.id}</div>
@@ -165,6 +167,7 @@ const user = useUser({ or: 'redirect' });
 const permission = user.usePermission('access_admin_dashboard');
 
 return (
+
 <div>
 {permission ? 'You can access the admin dashboard' : 'Access denied'}
 </div>
@@ -210,6 +213,7 @@ const user = useUser({ or: 'redirect' });
 const permissions = user.usePermissions();
 
 return (
+
 <div>
 {permissions.map(permission => (
 <div key={permission.id}>{permission.id}</div>
