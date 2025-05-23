@@ -7,7 +7,7 @@ updatedOn: '2025-05-05T21:19:37.865Z'
 ---
 
 <Admonition type="comingSoon" title="Snapshots in Early Access">
-The new **Backup & Restore** page in the Neon Console, which introduces the new **snapshots** feature, is available for members of our Early Access Program. Read more about joining up [here](/docs/introduction/roadmap#join-the-neon-early-access-program).
+The new **Backup & Restore** page in the Neon Console, which introduces the new **snapshots** feature, is available for members of our Early Access Program. Read more about joining up [here](/docs/introduction/early-access).
 </Admonition>
 
 Use the **Backup & Restore** page in the Neon Console to restore a branch to a previous state or create snapshots of your data. This feature combines **instant point-in-time restore** and **snapshots** to help you recover from accidental changes, data loss, or schema issues.
