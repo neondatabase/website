@@ -61,6 +61,14 @@ Static masking permanently modifies the original data in your tables. This appro
 - Archiving data with sensitive information removed
 - Distributing data to third parties
 
+### Branch operations and static masking
+
+When using Neon's branch features with static masking:
+
+- Creating a child branch copies all data as-is from the parent
+- Resetting a branch from the parent replaces all branch data with the parent's current state
+- In both cases, any previous anonymization is lost and must be reapplied
+
 ## Implementation example
 
 <Steps>
@@ -141,6 +149,7 @@ Note how:
 ## Limitations
 
 - Neon currently only supports static masking with the `anon` extension
+- With static masking, branch reset operations restore original data, requiring anonymization to be run again
 - Additional `pg_catalog` functions cannot be declared as `TRUSTED` in Neon's implementation
 
 ## Conclusion
