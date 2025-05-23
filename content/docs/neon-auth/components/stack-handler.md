@@ -20,17 +20,21 @@ For detailed usage instructions, see the manual section of the [setup guide](/do
 
 ```tsx title="app/handler/[...stack].tsx"
 import { StackHandler } from '@stackframe/stack';
-import { stackServerApp } from "@/stack";
+import { stackServerApp } from '@/stack';
 
-export default function Handler(props: { params: any, searchParams: any }) {
+export default function Handler(props: { params: any; searchParams: any }) {
   return (
     <StackHandler
       app={stackServerApp}
       routeProps={props}
       fullPage={true}
       componentProps={{
-        SignIn: { /* SignIn component props */ },
-        SignUp: { /* SignUp component props */ },
+        SignIn: {
+          /* SignIn component props */
+        },
+        SignUp: {
+          /* SignUp component props */
+        },
         // ... other component props
       }}
     />

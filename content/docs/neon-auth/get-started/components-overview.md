@@ -21,9 +21,7 @@ The `UserButton` component shows the user's avatar and opens a dropdown with var
 import { UserButton } from '@stackframe/stack';
 
 export default function Page() {
-  return (
-    <UserButton />
-  );
+  return <UserButton />;
 }
 ```
 
@@ -37,9 +35,7 @@ These components show a sign-in and sign-up form, respectively.
 import { SignIn } from '@stackframe/stack';
 
 export default function Page() {
-  return (
-    <SignIn />
-  );
+  return <SignIn />;
 }
 ```
 

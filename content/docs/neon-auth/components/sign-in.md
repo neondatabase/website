@@ -30,8 +30,12 @@ export default function Page() {
       <SignIn
         fullPage={true}
         automaticRedirect={true}
-        firstTab='password'
-        extraInfo={<>When signing in, you agree to our <a href="/terms">Terms</a></>}
+        firstTab="password"
+        extraInfo={
+          <>
+            When signing in, you agree to our <a href="/terms">Terms</a>
+          </>
+        }
       />
     </div>
   );

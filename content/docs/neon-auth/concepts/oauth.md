@@ -18,13 +18,13 @@ You can access a user's connected account using the `useConnectedAccount` hook:
 ```tsx shouldWrap
 'use client';
 
-import { useUser } from "@stackframe/stack";
+import { useUser } from '@stackframe/stack';
 
 export default function Page() {
   const user = useUser({ or: 'redirect' });
   // Redirects to provider authorization if not already connected
   const account = user.useConnectedAccount('google', { or: 'redirect' });
-  
+
   return <div>Google account connected</div>;
 }
 ```
@@ -36,12 +36,15 @@ Most providers have access control in the form of OAuth scopes. These are the pe
 ```tsx shouldWrap
 'use client';
 
-import { useUser } from "@stackframe/stack";
+import { useUser } from '@stackframe/stack';
 
 export default function Page() {
   const user = useUser({ or: 'redirect' });
   // Redirects to the Google authorization page, requesting access to Google Drive
-  const account = user.useConnectedAccount('google', { or: 'redirect', scopes: ['https://www.googleapis.com/auth/drive.readonly'] });
+  const account = user.useConnectedAccount('google', {
+    or: 'redirect',
+    scopes: ['https://www.googleapis.com/auth/drive.readonly'],
+  });
   // Account is always defined because of the redirect
   return <div>Google Drive connected</div>;
 }
@@ -57,17 +60,20 @@ Once connected with an OAuth provider, obtain the access token with the `account
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useUser } from "@stackframe/stack";
+import { useUser } from '@stackframe/stack';
 
 export default function Page() {
   const user = useUser({ or: 'redirect' });
-  const account = user.useConnectedAccount('google', { or: 'redirect', scopes: ['https://www.googleapis.com/auth/drive.readonly'] });
+  const account = user.useConnectedAccount('google', {
+    or: 'redirect',
+    scopes: ['https://www.googleapis.com/auth/drive.readonly'],
+  });
   const { accessToken } = account.useAccessToken();
   const [response, setResponse] = useState<any>();
 
   useEffect(() => {
     fetch('https://www.googleapis.com/drive/v3/files', {
-      headers: { Authorization: `Bearer ${accessToken}` }
+      headers: { Authorization: `Bearer ${accessToken}` },
     })
       .then((res) => res.json())
       .then((data) => setResponse(data))

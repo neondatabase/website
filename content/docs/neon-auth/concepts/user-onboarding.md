@@ -28,10 +28,10 @@ export default function OnboardingPage() {
 
 
   return <>
-    <input 
-      type="text" 
-      value={address} 
-      onChange={(e) => setAddress(e.target.value)} 
+    <input
+      type="text"
+      value={address}
+      onChange={(e) => setAddress(e.target.value)}
     />
 
     <button onClick={async () => {
@@ -66,16 +66,17 @@ import { useUser } from '@stackframe/stack';
 import { useRouter } from 'next/navigation';
 
 export function useOnboarded() {
-  const user = useUser();
-  const router = useRouter();
+const user = useUser();
+const router = useRouter();
 
-  useEffect(() => {
-    if (!user.clientMetadata.onboarded) {
-      router.push('/onboarding');
-    }
-  }, [user]);
+useEffect(() => {
+if (!user.clientMetadata.onboarded) {
+router.push('/onboarding');
 }
-```
+}, [user]);
+}
+
+````
 </TabItem>
 
 <TabItem>
@@ -89,7 +90,8 @@ export async function ensureOnboarded() {
     redirect('/onboarding');
   }
 }
-```
+````
+
 </TabItem>
 
 </Tabs>
@@ -104,14 +106,16 @@ import { useOnboarding } from '@/app/onboarding-hooks';
 import { useUser } from '@stackframe/stack';
 
 export default function HomePage() {
-  useOnboarding();
-  const user = useUser();
+useOnboarding();
+const user = useUser();
 
-  return (
-    <div>Welcome to the app, {user.displayName}</div>
-  );
+return (
+
+<div>Welcome to the app, {user.displayName}</div>
+);
 }
-```
+
+````
 </TabItem>
 
 <TabItem>
@@ -127,7 +131,8 @@ export default async function HomePage() {
     <div>Welcome to the app, {user.displayName}</div>
   );
 }
-```
+````
+
 </TabItem>
 
 </Tabs>

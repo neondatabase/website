@@ -7,8 +7,8 @@ tag: beta
 
 A user can be a member of multiple teams, so most websites using teams will need a way to select a "current team" that the user is working on. There are two primary methods to accomplish this:
 
-* **Deep Link**: Each team has a unique URL, for example, `your-website.com/team/<team-id>`. When a team is selected, it redirects to a page with that team's URL.
-* **Current Team**: When a user selects a team, the app stores the team as a global "current team" state. In this way, the URL of the current team might be something like `your-website.com/current-team`, and the URL won't change after switching teams.
+- **Deep Link**: Each team has a unique URL, for example, `your-website.com/team/<team-id>`. When a team is selected, it redirects to a page with that team's URL.
+- **Current Team**: When a user selects a team, the app stores the team as a global "current team" state. In this way, the URL of the current team might be something like `your-website.com/current-team`, and the URL won't change after switching teams.
 
 ## Deep Link Method
 
@@ -27,12 +27,12 @@ To facilitate team selection, Neon Auth provides a component that looks like thi
 You can import and use the `SelectedTeamSwitcher` component for the "current team" method. It updates the `selectedTeam` when a user selects a team:
 
 ```tsx shouldWrap
-import { SelectedTeamSwitcher } from "@stackframe/stack";
+import { SelectedTeamSwitcher } from '@stackframe/stack';
 
 export function MyPage() {
   return (
     <div>
-      <SelectedTeamSwitcher/>
+      <SelectedTeamSwitcher />
     </div>
   );
 }
@@ -41,18 +41,15 @@ export function MyPage() {
 To combine the switcher with the deep link method, you can pass in `urlMap` and `selectedTeam`. The `urlMap` is a function to generate a URL based on the team information, and `selectedTeam` is the team that the user is currently working on. This lets you implement "deep link" + "most recent team". The component will update the `user.selectedTeam` with the `selectedTeam` prop:
 
 ```tsx shouldWrap
-<SelectedTeamSwitcher 
-  urlMap={team => `/team/${team.id}`} 
-  selectedTeam={team}
-/>
+<SelectedTeamSwitcher urlMap={(team) => `/team/${team.id}`} selectedTeam={team} />
 ```
 
 To implement the "deep link" + "default team" method, where you update the `selectedTeam` only when the user clicks "set to default team" or similar, pass `noUpdateSelectedTeam`:
 
 ```tsx shouldWrap
-<SelectedTeamSwitcher 
-  urlMap={team => `/team/${team.id}`} 
-  selectedTeam={team} 
+<SelectedTeamSwitcher
+  urlMap={(team) => `/team/${team.id}`}
+  selectedTeam={team}
   noUpdateSelectedTeam
 />
 ```
@@ -61,10 +58,10 @@ To implement the "deep link" + "default team" method, where you update the `sele
 
 First, create a page at `/app/team/[teamId]/page.tsx` to display information about a specific team:
 
-```tsx shouldWrap title="/app/team/[teamId]/page.tsx" 
-"use client";
+```tsx shouldWrap title="/app/team/[teamId]/page.tsx"
+'use client';
 
-import { useUser, SelectedTeamSwitcher } from "@stackframe/stack";
+import { useUser, SelectedTeamSwitcher } from '@stackframe/stack';
 
 export default function TeamPage({ params }: { params: { teamId: string } }) {
   const user = useUser({ or: 'redirect' });
@@ -76,11 +73,8 @@ export default function TeamPage({ params }: { params: { teamId: string } }) {
 
   return (
     <div>
-      <SelectedTeamSwitcher 
-        urlMap={team => `/team/${team.id}`} 
-        selectedTeam={team}
-      />
-      
+      <SelectedTeamSwitcher urlMap={(team) => `/team/${team.id}`} selectedTeam={team} />
+
       <p>Team Name: {team.displayName}</p>
       <p>You are a member of this team.</p>
     </div>
@@ -91,10 +85,10 @@ export default function TeamPage({ params }: { params: { teamId: string } }) {
 Next, create a page to display all teams at `/app/team/page.tsx`:
 
 ```tsx shouldWrap title="/app/team/page.tsx"
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
-import { useUser } from "@stackframe/stack";
+import { useRouter } from 'next/navigation';
+import { useUser } from '@stackframe/stack';
 
 export default function TeamsPage() {
   const user = useUser({ or: 'redirect' });
@@ -104,13 +98,12 @@ export default function TeamsPage() {
 
   return (
     <div>
-      {selectedTeam && 
-        <button onClick={() => router.push(`/team/${selectedTeam.id}`)}>
-          Most recent team
-        </button>}
+      {selectedTeam && (
+        <button onClick={() => router.push(`/team/${selectedTeam.id}`)}>Most recent team</button>
+      )}
 
       <h2>All Teams</h2>
-      {teams.map(team => (
+      {teams.map((team) => (
         <button key={team.id} onClick={() => router.push(`/team/${team.id}`)}>
           Open {team.displayName}
         </button>
@@ -120,4 +113,4 @@ export default function TeamsPage() {
 }
 ```
 
-Now, if you navigate to `http://localhost:3000/team`, you should be able to see and interact with the teams. 
+Now, if you navigate to `http://localhost:3000/team`, you should be able to see and interact with the teams.
