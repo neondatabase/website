@@ -46,6 +46,10 @@ STACK_SECRET_SERVER_KEY=YOUR_NEON_AUTH_SECRET_KEY
 DATABASE_URL=YOUR_NEON_CONNECTION_STRING
 ```
 
+<Admonition type="note" title="Are you a Vercel user?">
+If you're using the [Neon native integration on Vercel](https://vercel.com/marketplace/neon), the integration automatically sets these environment variables for you in Vercel when you connect a Vercel project to a Neon database. [Learn more](/docs/guides/vercel-native-integration#environment-variables-set-by-the-integration).
+</Admonition>
+
 </TabItem>
 
 <TabItem>
