@@ -50,7 +50,6 @@ DATABASE_URL=YOUR_NEON_CONNECTION_STRING
 If you're using the [Neon native integration on Vercel](https://vercel.com/marketplace/neon), the integration automatically sets these environment variables for you in Vercel when you connect a Vercel project to a Neon database. [Learn more](/docs/guides/vercel-native-integration#environment-variables-set-by-the-integration).
 </Admonition>
 
-
 </TabItem>
 
 <TabItem>
