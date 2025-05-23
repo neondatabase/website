@@ -2,6 +2,7 @@
 title: Join the Early Access Program
 subtitle: Help shape the future of Neon
 enableTableOfContents: true
+updatedOn: '2025-05-23T18:48:33.109Z'
 ---
 
 Sign up for the **Early Access Program** and get:
