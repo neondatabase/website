@@ -7,7 +7,7 @@ enableTableOfContents: true
 updatedOn: '2025-05-16T22:28:33.076Z'
 ---
 
-<PrivatePreviewEnquire />
+<EarlyAccessProps feature_name="Neon Data API" />
 
 <InfoBlock>
   <DocsList title="Related docs" theme="docs">
