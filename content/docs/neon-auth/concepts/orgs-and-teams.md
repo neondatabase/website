@@ -53,6 +53,7 @@ const allTeams = user.useTeams();
 const someTeam = user.useTeam('some-team-id'); // May be null if the user is not a member of this team
 
 return (
+
   <div>
     {allTeams.map(team => (
       <div key={team.id}>{team.displayName}</div>
@@ -72,6 +73,7 @@ const allTeams = await user.listTeams();
 const someTeam = await user.getTeam('some-team-id'); // May be null if the user is not a member of this team
 
 return (
+
   <div>
     {allTeams.map(team => (
       <div key={team.id}>{team.displayName}</div>
@@ -120,9 +122,9 @@ await team.update({
 
 You can store custom metadata on a team object, similar to the user object. The metadata can be any JSON object.
 
-* `clientMetadata`: Can be read and updated on both the client and server sides.
-* `serverMetadata`: Can only be read and updated on the server side.
-* `clientReadOnlyMetadata`: Can be read on both the client and server sides, but can only be updated on the server side.
+- `clientMetadata`: Can be read and updated on both the client and server sides.
+- `serverMetadata`: Can only be read and updated on the server side.
+- `clientReadOnlyMetadata`: Can be read on both the client and server sides, but can only be updated on the server side.
 
 ```tsx shouldWrap
 await team.update({
@@ -149,6 +151,7 @@ On the client, the current user must have the `$read_members` permission in the 
 const users = team.useUsers();
 
 return (
+
   <div>
     {users.map(user => (
       <div key={user.id}>{user.teamProfile.displayName}</div>
@@ -165,6 +168,7 @@ return (
 const users = await team.listUsers();
 
 return (
+
   <div>
     {users.map(user => (
       <div key={user.id}>{user.teamProfile.displayName}</div>

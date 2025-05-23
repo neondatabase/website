@@ -38,18 +38,19 @@ To check whether a user has a specific permission, use the `getPermission` metho
 import { useUser } from "@stackframe/stack";
 
 export function CheckUserPermission() {
-  const user = useUser({ or: 'redirect' });
-  const team = user.useTeam('some-team-id');
-  const permission = user.usePermission(team, 'read');
+const user = useUser({ or: 'redirect' });
+const team = user.useTeam('some-team-id');
+const permission = user.usePermission(team, 'read');
 
-  // Don't rely on client-side permission checks for business logic.
-  return (
-    <div>
-      {permission ? 'You have the read permission' : 'You shall not pass'}
-    </div>
-  );
+// Don't rely on client-side permission checks for business logic.
+return (
+<div>
+{permission ? 'You have the read permission' : 'You shall not pass'}
+</div>
+);
 }
-```
+
+````
 
 </TabItem>
 
@@ -69,7 +70,8 @@ export default async function CheckUserPermission() {
     </div>
   );
 }
-```
+````
+
 </TabItem>
 
 </Tabs>
@@ -86,18 +88,19 @@ To get a list of all permissions a user has, use the `listPermissions` method or
 import { useUser } from "@stackframe/stack";
 
 export function DisplayUserPermissions() {
-  const user = useUser({ or: 'redirect' });
-  const permissions = user.usePermissions();
+const user = useUser({ or: 'redirect' });
+const permissions = user.usePermissions();
 
-  return (
-    <div>
-      {permissions.map(permission => (
-        <div key={permission.id}>{permission.id}</div>
-      ))}
-    </div>
-  );
+return (
+<div>
+{permissions.map(permission => (
+<div key={permission.id}>{permission.id}</div>
+))}
+</div>
+);
 }
-```
+
+````
 </TabItem>
 
 <TabItem>
@@ -116,7 +119,8 @@ export default async function DisplayUserPermissions() {
     </div>
   );
 }
-```
+````
+
 </TabItem>
 
 </Tabs>
@@ -157,16 +161,17 @@ To check whether a user has a specific project permission, use the `getPermissio
 import { useUser } from "@stackframe/stack";
 
 export function CheckGlobalPermission() {
-  const user = useUser({ or: 'redirect' });
-  const permission = user.usePermission('access_admin_dashboard');
+const user = useUser({ or: 'redirect' });
+const permission = user.usePermission('access_admin_dashboard');
 
-  return (
-    <div>
-      {permission ? 'You can access the admin dashboard' : 'Access denied'}
-    </div>
-  );
+return (
+<div>
+{permission ? 'You can access the admin dashboard' : 'Access denied'}
+</div>
+);
 }
-```
+
+````
 </TabItem>
 
 <TabItem>
@@ -183,7 +188,8 @@ export default async function CheckGlobalPermission() {
     </div>
   );
 }
-```
+````
+
 </TabItem>
 
 </Tabs>
@@ -200,18 +206,19 @@ To get a list of all global permissions a user has, use the `listPermissions` me
 import { useUser } from "@stackframe/stack";
 
 export function DisplayGlobalPermissions() {
-  const user = useUser({ or: 'redirect' });
-  const permissions = user.usePermissions();
+const user = useUser({ or: 'redirect' });
+const permissions = user.usePermissions();
 
-  return (
-    <div>
-      {permissions.map(permission => (
-        <div key={permission.id}>{permission.id}</div>
-      ))}
-    </div>
-  );
+return (
+<div>
+{permissions.map(permission => (
+<div key={permission.id}>{permission.id}</div>
+))}
+</div>
+);
 }
-```
+
+````
 </TabItem>
 
 <TabItem>
@@ -230,7 +237,8 @@ export default async function DisplayGlobalPermissions() {
     </div>
   );
 }
-```
+````
+
 </TabItem>
 
 </Tabs>

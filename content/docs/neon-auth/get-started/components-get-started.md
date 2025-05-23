@@ -19,9 +19,7 @@ The `<UserButton />` component shows the user's avatar that opens a dropdown wit
 import { UserButton } from '@stackframe/stack';
 
 export default function Page() {
-  return (
-    <UserButton />
-  );
+  return <UserButton />;
 }
 ```
 
@@ -35,9 +33,7 @@ These components show a sign-in and sign-up form, respectively.
 import { SignIn } from '@stackframe/stack';
 
 export default function Page() {
-  return (
-    <SignIn />
-  );
+  return <SignIn />;
 }
 ```
 
@@ -57,4 +53,4 @@ Neon Auth has many more components available. For a comprehensive list, see the 
 
 ## Next steps
 
-In the next guide, we will do a deep-dive into retrieving and modifying user objects, as well as how to protect a page. 
+In the next guide, we will do a deep-dive into retrieving and modifying user objects, as well as how to protect a page.

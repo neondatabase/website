@@ -32,8 +32,12 @@ export default function Page() {
       <SignUp
         fullPage={true}
         automaticRedirect={true}
-        firstTab='password'
-        extraInfo={<>By signing up, you agree to our <a href="/terms">Terms</a></>}
+        firstTab="password"
+        extraInfo={
+          <>
+            By signing up, you agree to our <a href="/terms">Terms</a>
+          </>
+        }
       />
     </div>
   );

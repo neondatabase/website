@@ -28,8 +28,8 @@ function App() {
       app={stackServerApp}
       lang="de-DE"
       translationOverrides={{
-        "Sign in": "Einloggen",
-        "Sign In": "Einloggen",
+        'Sign in': 'Einloggen',
+        'Sign In': 'Einloggen',
       }}
     >
       {/* Your app content */}

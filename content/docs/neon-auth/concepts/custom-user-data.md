@@ -20,7 +20,7 @@ You can use the `clientMetadata` field to store non-sensitive information that b
 ```tsx shouldWrap
 await user.update({
   clientMetadata: {
-    mailingAddress: "123 Main St",
+    mailingAddress: '123 Main St',
   },
 });
 
@@ -37,7 +37,7 @@ For sensitive information, use the `serverMetadata` field. This ensures the data
 const user = await stackServerApp.getUser();
 await user.update({
   serverMetadata: {
-    secretInfo: "This is a secret",
+    secretInfo: 'This is a secret',
   },
 });
 
@@ -55,7 +55,7 @@ Use `clientReadOnlyMetadata` for data that clients need to read but never modify
 const user = await stackServerApp.getUser();
 await user.update({
   clientReadOnlyMetadata: {
-    subscriptionPlan: "premium",
+    subscriptionPlan: 'premium',
   },
 });
 

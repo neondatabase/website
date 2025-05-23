@@ -27,12 +27,16 @@ export default function Page() {
       <h1>User Button</h1>
       <UserButton
         showUserInfo={true}
-        colorModeToggle={() => { console.log("color mode toggle clicked") }}
-        extraItems={[{
-          text: 'Custom Action',
-          icon: <CustomIcon />,
-          onClick: () => console.log('Custom action clicked')
-        }]}
+        colorModeToggle={() => {
+          console.log('color mode toggle clicked');
+        }}
+        extraItems={[
+          {
+            text: 'Custom Action',
+            icon: <CustomIcon />,
+            onClick: () => console.log('Custom action clicked'),
+          },
+        ]}
       />
     </div>
   );

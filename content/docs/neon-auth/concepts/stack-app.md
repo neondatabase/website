@@ -28,7 +28,7 @@ async function ServerComponent() {
 }
 
 // client-component.tsx
-"use client";
+('use client');
 function ClientComponent() {
   const app = useStackApp();
   // returns the value directly
@@ -46,4 +46,4 @@ function ClientComponent() {
 
 <Admonition type="note">
 Some of the functions have different return types; for example, `StackClientApp.getUser()` returns a `Promise<User>` while `StackServerApp.getUser()` returns a `Promise<ServerUser>`. The `Server` prefix indicates that the object contains server-only functionality.
-</Admonition> 
+</Admonition>
