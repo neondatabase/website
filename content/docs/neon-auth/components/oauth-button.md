@@ -8,7 +8,7 @@ updatedOn: '2025-05-17T00:00:00.000Z'
 
 Renders a customized `<OAuthButton />` for various providers to initiate sign-in or sign-up processes.
 
-![OAuthButton](/docs/neon-auth/images/oauth-button.png)
+<img src="/docs/neon-auth/oauth-button.png" alt="OAuthButton" width="240" />
 
 For more information, see the [custom pages guide](/docs/neon-auth/customization/custom-pages).
 

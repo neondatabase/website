@@ -15,7 +15,7 @@ For the full documentation of all available components, see the [components refe
 
 The `UserButton` component shows the user's avatar and opens a dropdown with various user settings on click.
 
-![UserButton](/docs/neon-auth/images/user-button.png)
+<img src="/docs/neon-auth/user-button.png" alt="UserButton" width="240" />
 
 ```tsx
 import { UserButton } from '@stackframe/stack';
@@ -31,7 +31,7 @@ export default function Page() {
 
 These components show a sign-in and sign-up form, respectively.
 
-![SignIn](/docs/neon-auth/images/sign-in.png)
+<img src="/docs/neon-auth/sign-in.png" alt="SignIn" width="240" />
 
 ```tsx
 import { SignIn } from '@stackframe/stack';
@@ -55,4 +55,4 @@ To change the default sign-in URL to your own, see the documentation on [custom 
 
 ## More Components
 
-Neon Auth has many more components available. For a comprehensive list, see the [components reference](/docs/neon-auth/components). 
+Neon Auth has many more components available. For a comprehensive list, see the [components reference](/docs/neon-auth/components).

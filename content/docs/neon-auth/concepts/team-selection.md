@@ -22,7 +22,7 @@ While the current team method can be simpler to implement, it has a downside. If
 
 To facilitate team selection, Neon Auth provides a component that looks like this:
 
-![TeamSwitcher](/docs/neon-auth/concepts/team-switcher.png)
+<img src="/docs/neon-auth/team-switcher.png" alt="TeamSwitcher" width="240" />
 
 You can import and use the `SelectedTeamSwitcher` component for the "current team" method. It updates the `selectedTeam` when a user selects a team:
 

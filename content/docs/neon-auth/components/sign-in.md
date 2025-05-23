@@ -7,7 +7,7 @@ tag: beta
 
 Renders a sign-in component with customizable options.
 
-![SignIn](/docs/neon-auth/images/sign-in.png)
+<img src="/docs/neon-auth/sign-in.png" alt="SignIn" width="400" />
 
 For more information, see the [custom pages guide](/docs/neon-auth/customization/custom-pages).
 

@@ -7,7 +7,7 @@ tag: beta
 
 Renders an `<AccountSettings />` page with customizable sidebar items and optional full-page layout.
 
-![AccountSettings](/docs/neon-auth/images/account-settings.png)
+![AccountSettings](/docs/neon-auth/account-settings.png)
 
 ## Props
 

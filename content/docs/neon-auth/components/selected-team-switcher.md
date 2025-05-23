@@ -7,7 +7,7 @@ tag: beta
 
 A React component for switching between teams. It displays a dropdown of teams and allows the user to select a team.
 
-![SelectedTeamSwitcher](/docs/neon-auth/images/selected-team-switcher.png)
+<img src="/docs/neon-auth/selected-team-switcher.png" alt="SelectedTeamSwitcher" width="240" />
 
 For a comprehensive guide on using this component, see the [Team Selection documentation](/docs/neon-auth/concepts/team-selection).
 

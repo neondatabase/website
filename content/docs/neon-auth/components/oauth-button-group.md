@@ -7,7 +7,7 @@ tag: beta
 
 Renders all the `<OAuthButton />`s enabled for your Neon Auth project.
 
-![OAuthButtonGroup](/docs/neon-auth/images/oauth-button-group.png)
+<img src="/docs/neon-auth/oauth-button-group.png" alt="OAuthButtonGroup" width="240" />
 
 <Admonition type="note">
 If there are no OAuth providers enabled, this component will be empty.

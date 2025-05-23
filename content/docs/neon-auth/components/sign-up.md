@@ -8,7 +8,7 @@ updatedOn: '2025-05-17T00:00:00.000Z'
 
 A component that renders a sign-up page with various customization options.
 
-![SignUp](/docs/neon-auth/images/sign-up.png)
+<img src="/docs/neon-auth/sign-up.png" alt="SignUp" width="400" />
 
 For more information, see the [custom pages guide](/docs/neon-auth/customization/custom-pages).
 

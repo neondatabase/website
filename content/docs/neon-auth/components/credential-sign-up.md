@@ -7,7 +7,7 @@ tag: beta
 
 A component that renders a sign-up form with email and password fields.
 
-![CredentialSignUp](/docs/neon-auth/images/credential-sign-up.png)
+<img src="/docs/neon-auth/credential-sign-up.png" alt="CredentialSignUp" width="400" />
 
 For more information, see the [custom pages guide](/docs/neon-auth/customization/custom-pages).
 

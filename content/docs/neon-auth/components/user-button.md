@@ -7,7 +7,7 @@ tag: beta
 
 Renders a `<UserButton />` component with optional user information, color mode toggle, and extra menu items.
 
-![UserButton](/docs/neon-auth/images/user-button.png)
+<img src="/docs/neon-auth/user-button.png" alt="UserButton" width="240" />
 
 ## Props
 

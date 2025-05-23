@@ -7,7 +7,7 @@ tag: beta
 
 Neon Auth provides a set of components for Next.js applications.
 
-To get started with Neon Auth in your Next.js application, follow the [setup guide](/docs/guides/neon-auth). To see the hooks and objects in the Next.js SDK, see the [SDK reference](/docs/neon-auth/sdk).
+To get started with Neon Auth in your Next.js application, follow the [setup guide](/docs/guides/neon-auth).
 
 ## Sign In and Sign Up
 

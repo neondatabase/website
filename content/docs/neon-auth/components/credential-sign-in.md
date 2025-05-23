@@ -7,7 +7,7 @@ tag: beta
 
 A component that renders a sign-in form with email and password fields.
 
-![CredentialSignIn](/docs/neon-auth/images/credential-sign-in.png)
+<img src="/docs/neon-auth/credential-sign-in.png" alt="CredentialSignIn" width="400" />
 
 For more information, see the [custom pages guide](/docs/neon-auth/customization/custom-pages).
 
