@@ -53,8 +53,8 @@ console.log('Authenticated user with ID:', payload.sub);
 console.error(error);
 console.log('Invalid user');
 }
+```
 
-````
 </TabItem>
 
 </Tabs>
@@ -79,7 +79,7 @@ if (response.status === 200) {
 } else {
   console.log('User is not authenticated', response.status, await response.text());
 }
-````
+```
 
 </TabItem>
 
@@ -105,4 +105,4 @@ print('User is not authenticated', response.status_code, response.text)
 </TabItem>
 
 </Tabs>
-```
+
