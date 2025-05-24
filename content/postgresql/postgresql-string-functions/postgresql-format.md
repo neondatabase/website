@@ -45,7 +45,7 @@ The following shows the syntax of the format specifier:
 %[position][flags][width]type
 ```
 
-A format specifier starts with `%` character and include three optional components `position`, `flags`, `with` and a required component `type`.
+A format specifier starts with `%` character and include three optional components `position`, `flags`, `width` and a required component `type`.
 
 **position**
 
@@ -142,7 +142,7 @@ In this example, we used two format specifiers `%s %s` which are then replaced b
 
 ### 3\) Using FORMAT() function with the flags component
 
-The following statement uses the FORMAT() function with the `flags` and `with` components in the format specifier:
+The following statement uses the FORMAT() function with the `flags` and `width` components in the format specifier:
 
 ```
 SELECT FORMAT('|%10s|', 'one');
