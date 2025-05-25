@@ -6,6 +6,7 @@ tag: beta
 ---
 
 On this page:
+
 - [`TeamUser`](#teamuser)
 - [`ServerTeamUser`](#serverteamuser)
 
@@ -25,6 +26,7 @@ type TeamUser = {
 ```
 
 ### `teamUser.id`
+
 The ID of the user.
 
 ```typescript
@@ -32,6 +34,7 @@ declare const id: string;
 ```
 
 ### `teamUser.teamProfile`
+
 The team profile of the user as a `TeamProfile` object.
 
 ```typescript
@@ -49,17 +52,17 @@ It is usually obtained by calling `serverTeam.listUsers()` on a [`ServerTeam` ob
 ```typescript
 type ServerTeamUser =
   // Inherits all functionality from TeamUser
-  & TeamUser
-  // Inherits all functionality from ServerUser
-  & ServerUser
-  & {
-    teamProfile: ServerTeamProfile;
-  };
+  TeamUser &
+    // Inherits all functionality from ServerUser
+    ServerUser & {
+      teamProfile: ServerTeamProfile;
+    };
 ```
 
 ### `serverTeamUser.teamProfile`
+
 The team profile of the user as a `ServerTeamProfile` object.
 
 ```typescript
 declare const teamProfile: ServerTeamProfile;
-``` 
+```

@@ -10,6 +10,7 @@ This is the SDK reference for the Neon Auth Next.js SDK.
 For a list of components, see the [Components](/docs/neon-auth/components/components) page. For instructions on how to get started and how to use the SDK, see the [Setup & Installation](/docs/neon-auth/get-started/setup) page. If you are using a framework or programming language other than Next.js, you can use the [REST API](/docs/neon-auth/backend-integration).
 
 ## General
+
 <div style={{ display: 'flex', gap: '2rem' }}>
   <ul style={{ flex: 1 }}>
     <li><a href="/docs/neon-auth/sdk/nextjs/objects/stack-app#stackclientapp">StackClientApp</a></li>
@@ -21,6 +22,7 @@ For a list of components, see the [Components](/docs/neon-auth/components/compon
 </div>
 
 ## Users & User Data
+
 <div style={{ display: 'flex', gap: '2rem' }}>
   <ul style={{ flex: 1 }}>
     <li><a href="/docs/neon-auth/sdk/nextjs/types/user#currentuser">CurrentUser</a></li>
@@ -34,6 +36,7 @@ For a list of components, see the [Components](/docs/neon-auth/components/compon
 </div>
 
 ## Teams
+
 <div style={{ display: 'flex', gap: '2rem' }}>
   <ul style={{ flex: 1}}>
     <li><a href="/docs/neon-auth/sdk/nextjs/types/team#team">Team</a></li>
@@ -50,6 +53,7 @@ For a list of components, see the [Components](/docs/neon-auth/components/compon
 </div>
 
 ## Hooks
+
 <div style={{ display: 'flex', gap: '2rem' }}>
   <ul style={{ flex: 1 }}>
     <li><a href="/docs/neon-auth/sdk/nextjs/hooks/use-stack-app">useStackApp</a></li>

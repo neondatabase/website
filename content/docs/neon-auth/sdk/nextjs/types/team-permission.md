@@ -18,8 +18,9 @@ type TeamPermission = {
 ```
 
 ### `teamPermission.id`
+
 The identifier of the permission as a `string`.
 
 ```typescript
 declare const id: string;
-``` 
+```

@@ -8,6 +8,7 @@ tag: beta
 This is a detailed reference for the `StackApp` object. If you're looking for a more high-level overview, please read the [respective page in the Concepts section](/docs/neon-auth/concepts/stack-app).
 
 On this page:
+
 - [StackClientApp](#stackclientapp)
 - [StackServerApp](#stackserverapp)
 
@@ -47,7 +48,6 @@ Most commonly you get an instance of `StackClientApp` by calling `useStackApp()`
   <span><span style={{ display: "inline-block", width: "2ch" }}></span><a href="#stackclientappsendmagiclinkemailemail" style={{ color: "#f59e42", textDecoration: "none" }}>sendMagicLinkEmail</a><span style={{ color: "#60a5fa" }}>(</span><span style={{ color: "#fff" }}>email</span><span style={{ color: "#60a5fa" }}>)</span><span style={{ color: "#60a5fa" }}>: </span><span style={{ color: "#facc15" }}>Promise</span><span style={{ color: "#60a5fa" }}>&lt;...&gt;;</span></span><br />
   <span><span style={{ color: "#60a5fa" }}>{"};"}</span></span>
 </div>
-
 
 ## Constructor
 
@@ -102,14 +102,14 @@ declare new(options: {
 ```typescript
 // Create a StackClientApp with a custom sign-in page
 const stackClientApp = new StackClientApp({
-  tokenStore: "nextjs-cookie",
+  tokenStore: 'nextjs-cookie',
   urls: {
     signIn: '/my-custom-sign-in-page',
   },
 });
 
 // Retrieving an app with useStackApp
-"use client";
+('use client');
 
 function MyReactComponent() {
   const stackClientApp = useStackApp();
@@ -135,11 +135,9 @@ Gets the current user.
 ### Signature
 
 ```typescript shouldWrap
-declare function getUser(
-  options: {
-    or?: "return-null" | "redirect" | "throw"
-  }
-): Promise<CurrentUser | null>;
+declare function getUser(options: {
+  or?: 'return-null' | 'redirect' | 'throw';
+}): Promise<CurrentUser | null>;
 ```
 
 ### Examples
@@ -149,7 +147,7 @@ declare function getUser(
 const userOrNull = await stackClientApp.getUser();
 console.log(userOrNull); // null if not signed in
 
-const user = await stackClientApp.getUser({ or: "redirect" });
+const user = await stackClientApp.getUser({ or: 'redirect' });
 console.log(user); // always defined; redirects to sign-in page if not signed in
 ```
 
@@ -174,42 +172,39 @@ Equivalent to the `useUser()` standalone hook (which is an alias for `useStackAp
 ### Signature
 
 ```typescript shouldWrap
-declare function useUser(
-  options: {
-    or?: "return-null" | "redirect" | "throw"
-  }
-): CurrentUser | null;
+declare function useUser(options: {
+  or?: 'return-null' | 'redirect' | 'throw';
+}): CurrentUser | null;
 ```
 
 ### Examples
 
 ```jsx
 // Displaying the current user's username
-"use client";
+'use client';
 
 function MyReactComponent() {
   // useUser(...) is an alias for useStackApp().useUser(...)
   const user = useUser();
-  return user ? <div>Hello, {user.name}</div>
-              : <div>Not signed in</div>;
+  return user ? <div>Hello, {user.name}</div> : <div>Not signed in</div>;
 }
 
 // Redirecting vs. not redirecting
-"use client";
+('use client');
 
 function MyReactComponent() {
   const user = useUser();
   console.log(user); // null if not signed in
 
-  const user = useUser({ or: "redirect" });  // redirects to sign-in page if necessary
+  const user = useUser({ or: 'redirect' }); // redirects to sign-in page if necessary
   console.log(user); // always defined
 
-  const user = useUser({ or: "throw" });  // throws an error if not signed in
+  const user = useUser({ or: 'throw' }); // throws an error if not signed in
   console.log(user); // always defined
 }
 
 // Protecting a page client-side
-"use client";
+('use client');
 
 function MyProtectedComponent() {
   // Note: This component is protected on the client-side.
@@ -226,7 +221,7 @@ function MyProtectedComponent() {
   // the Stack Auth documentation:
   // https://docs.stack-auth.com/getting-started/users#protecting-a-page
 
-  useUser({ or: "redirect" });
+  useUser({ or: 'redirect' });
   return <div>You can only see this if you are authenticated</div>;
 }
 ```
@@ -271,16 +266,18 @@ Sign in with an OAuth provider.
 ### Signature
 
 ```typescript shouldWrap
-declare function signInWithOAuth(provider: string): Promise<Result<undefined, KnownErrors["RedirectUrlNotWhitelisted"]>>;
+declare function signInWithOAuth(
+  provider: string
+): Promise<Result<undefined, KnownErrors['RedirectUrlNotWhitelisted']>>;
 ```
 
 ### Examples
 
 ```typescript
-const result = await stackClientApp.signInWithOAuth("google");
+const result = await stackClientApp.signInWithOAuth('google');
 
-if (result.status === "error") {
-  console.error("Sign in failed", result.error.message);
+if (result.status === 'error') {
+  console.error('Sign in failed', result.error.message);
 }
 ```
 
@@ -304,19 +301,19 @@ Sign in with email and password.
 declare function signInWithCredential(options: {
   email: string;
   password: string;
-}): Promise<Result<undefined, KnownErrors["InvalidCredentials"]>>;
+}): Promise<Result<undefined, KnownErrors['InvalidCredentials']>>;
 ```
 
 ### Examples
 
 ```typescript
 const result = await stackClientApp.signInWithCredential({
-  email: "test@example.com",
-  password: "password",
+  email: 'test@example.com',
+  password: 'password',
 });
 
-if (result.status === "error") {
-  console.error("Sign in failed", result.error.message);
+if (result.status === 'error') {
+  console.error('Sign in failed', result.error.message);
 }
 ```
 
@@ -340,19 +337,24 @@ Sign up with email and password.
 declare function signUpWithCredential(options: {
   email: string;
   password: string;
-}): Promise<Result<undefined, KnownErrors["UserWithEmailAlreadyExists"] | KnownErrors["PasswordRequirementsNotMet"]>>;
+}): Promise<
+  Result<
+    undefined,
+    KnownErrors['UserWithEmailAlreadyExists'] | KnownErrors['PasswordRequirementsNotMet']
+  >
+>;
 ```
 
 ### Examples
 
 ```typescript
 const result = await stackClientApp.signUpWithCredential({
-  email: "test@example.com",
-  password: "password",
+  email: 'test@example.com',
+  password: 'password',
 });
 
-if (result.status === "error") {
-  console.error("Sign up failed", result.error.message);
+if (result.status === 'error') {
+  console.error('Sign up failed', result.error.message);
 }
 ```
 
@@ -371,18 +373,20 @@ Send a forgot password email to an email address.
 ### Signature
 
 ```typescript shouldWrap
-declare function sendForgotPasswordEmail(email: string): Promise<Result<undefined, KnownErrors["UserNotFound"]>>;
+declare function sendForgotPasswordEmail(
+  email: string
+): Promise<Result<undefined, KnownErrors['UserNotFound']>>;
 ```
 
 ### Examples
 
 ```typescript
-const result = await stackClientApp.sendForgotPasswordEmail("test@example.com");
+const result = await stackClientApp.sendForgotPasswordEmail('test@example.com');
 
-if (result.status === "success") {
-  console.log("Forgot password email sent");
+if (result.status === 'success') {
+  console.log('Forgot password email sent');
 } else {
-  console.error("Failed to send forgot password email", result.error.message);
+  console.error('Failed to send forgot password email', result.error.message);
 }
 ```
 
@@ -401,13 +405,15 @@ Send a magic link/OTP sign-in email to an email address.
 ### Signature
 
 ```typescript shouldWrap
-declare function sendMagicLinkEmail(email: string): Promise<Result<{ nonce: string }, KnownErrors["RedirectUrlNotWhitelisted"]>>;
+declare function sendMagicLinkEmail(
+  email: string
+): Promise<Result<{ nonce: string }, KnownErrors['RedirectUrlNotWhitelisted']>>;
 ```
 
 ### Examples
 
 ```typescript
-const result = await stackClientApp.sendMagicLinkEmail("test@example.com");
+const result = await stackClientApp.sendMagicLinkEmail('test@example.com');
 ```
 
 # `StackServerApp`
