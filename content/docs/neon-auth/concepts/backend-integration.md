@@ -53,8 +53,7 @@ console.log('Authenticated user with ID:', payload.sub);
 console.error(error);
 console.log('Invalid user');
 }
-
-````
+```
 
 </TabItem>
 
@@ -80,7 +79,7 @@ if (response.status === 200) {
 } else {
   console.log('User is not authenticated', response.status, await response.text());
 }
-````
+```
 
 </TabItem>
 
@@ -90,21 +89,19 @@ import requests
 
 url = 'https://api.stack-auth.com/api/v1/users/me'
 headers = {
-'x-stack-access-type': 'server',
-'x-stack-project-id': 'your Neon Auth project ID',
-'x-stack-secret-server-key': 'your Neon Auth server key',
-'x-stack-access-token': 'access token from the headers',
+    'x-stack-access-type': 'server',
+    'x-stack-project-id': 'your Neon Auth project ID',
+    'x-stack-secret-server-key': 'your Neon Auth server key',
+    'x-stack-access-token': 'access token from the headers',
 }
 
 response = requests.get(url, headers=headers)
 if response.status_code == 200:
-print('User is authenticated', response.json())
+    print('User is authenticated', response.json())
 else:
-print('User is not authenticated', response.status_code, response.text)
-
+    print('User is not authenticated', response.status_code, response.text)
 ```
+
 </TabItem>
 
 </Tabs>
-
-```
