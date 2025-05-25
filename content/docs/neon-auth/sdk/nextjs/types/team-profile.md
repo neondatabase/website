@@ -8,6 +8,7 @@ tag: beta
 This is a detailed reference for the `TeamProfile` and `ServerTeamProfile` objects.
 
 On this page:
+
 - [`TeamProfile`](#teamprofile)
 - [`ServerTeamProfile`](#serverteamprofile)
 
@@ -25,6 +26,7 @@ type TeamProfile = {
 ```
 
 ### `teamProfile.displayName`
+
 The display name of the user within the team context as a `string` or `null` if no display name is set.
 
 ```typescript
@@ -32,6 +34,7 @@ declare const displayName: string | null;
 ```
 
 ### `teamProfile.profileImageUrl`
+
 The profile image URL of the user within the team context as a `string`, or `null` if no profile image is set.
 
 ```typescript
@@ -47,5 +50,5 @@ The `ServerTeamProfile` object is currently the same as `TeamProfile`.
 ```typescript
 type ServerTeamProfile =
   // Inherits all functionality from TeamProfile
-  & TeamProfile;
-``` 
+  TeamProfile;
+```

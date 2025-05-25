@@ -37,6 +37,7 @@ type ContactChannel = {
 ```
 
 ### `contactChannel.id`
+
 The id of the contact channel as a `string`.
 
 ```typescript
@@ -44,6 +45,7 @@ declare const id: string;
 ```
 
 ### `contactChannel.value`
+
 The value of the contact channel. If type is `"email"`, this is an email address.
 
 ```typescript
@@ -51,6 +53,7 @@ declare const value: string;
 ```
 
 ### `contactChannel.type`
+
 The type of the contact channel. Currently always `"email"`.
 
 ```typescript
@@ -58,6 +61,7 @@ declare const type: 'email';
 ```
 
 ### `contactChannel.isPrimary`
+
 Indicates whether the contact channel is the user's primary contact channel. If an email is set to primary, it will be the value on the `user.primaryEmail` field.
 
 ```typescript
@@ -65,6 +69,7 @@ declare const isPrimary: boolean;
 ```
 
 ### `contactChannel.isVerified`
+
 Indicates whether the contact channel is verified.
 
 ```typescript
@@ -72,6 +77,7 @@ declare const isVerified: boolean;
 ```
 
 ### `contactChannel.usedForAuth`
+
 Indicates whether the contact channel is used for authentication. If set to `true`, the user can use this contact channel with OTP or password to sign in.
 
 ```typescript
@@ -79,12 +85,15 @@ declare const usedForAuth: boolean;
 ```
 
 ### `contactChannel.sendVerificationEmail()`
+
 Sends a verification email to this contact channel. Once the user clicks the verification link in the email, the contact channel will be marked as verified.
 
 #### Parameters
+
 None.
 
 #### Returns
+
 `Promise<void>`
 
 ```typescript
@@ -92,14 +101,17 @@ declare function sendVerificationEmail(): Promise<void>;
 ```
 
 #### Example
+
 ```typescript
 await contactChannel.sendVerificationEmail();
 ```
 
 ### `contactChannel.update(options)`
+
 Updates the contact channel. After updating the value, the contact channel will be marked as unverified.
 
 #### Parameters
+
 - `options`: An object containing properties for updating.
   - `value`: The new value of the contact channel.
   - `type`: The new type of the contact channel. Currently always `"email"`.
@@ -107,6 +119,7 @@ Updates the contact channel. After updating the value, the contact channel will 
   - `isPrimary`: Indicates whether the contact channel is the user's primary contact channel.
 
 #### Returns
+
 `Promise<void>`
 
 ```typescript
@@ -119,17 +132,21 @@ declare function update(options: {
 ```
 
 #### Example
+
 ```typescript
 await contactChannel.update({ value: 'new-email@example.com' });
 ```
 
 ### `contactChannel.delete()`
+
 Deletes the contact channel.
 
 #### Parameters
+
 None.
 
 #### Returns
+
 `Promise<void>`
 
 ```typescript
@@ -137,6 +154,7 @@ declare function delete(): Promise<void>;
 ```
 
 #### Example
+
 ```typescript
 await contactChannel.delete();
-``` 
+```

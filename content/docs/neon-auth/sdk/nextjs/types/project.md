@@ -13,20 +13,21 @@ or [`stackApp.useProject()`](/docs/neon-auth/sdk/nextjs/objects/stack-app#stacka
 ## Type Definition
 
 ```typescript
- type Project = {
-   id: string;
-   displayName: string;
-   config: {
-     signUpEnabled: boolean;
-     credentialEnabled: boolean;
-     magicLinkEnabled: boolean;
-     clientTeamCreationEnabled: boolean;
-     clientUserDeletionEnabled: boolean;
-   };
- };
+type Project = {
+  id: string;
+  displayName: string;
+  config: {
+    signUpEnabled: boolean;
+    credentialEnabled: boolean;
+    magicLinkEnabled: boolean;
+    clientTeamCreationEnabled: boolean;
+    clientUserDeletionEnabled: boolean;
+  };
+};
 ```
 
 ### `project.id`
+
 The unique ID of the project as a `string`.
 
 ```typescript
@@ -34,6 +35,7 @@ declare const id: string;
 ```
 
 ### `project.displayName`
+
 The display name of the project as a `string`.
 
 ```typescript
@@ -41,6 +43,7 @@ declare const displayName: string;
 ```
 
 ### `project.config`
+
 The configuration settings for the project.
 
 - `signUpEnabled`: Indicates if sign-up is enabled for the project.
@@ -57,4 +60,4 @@ declare const config: {
   clientTeamCreationEnabled: boolean;
   clientUserDeletionEnabled: boolean;
 };
-``` 
+```
