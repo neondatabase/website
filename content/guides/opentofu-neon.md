@@ -13,7 +13,7 @@ This guide will show you how to use **OpenTofu to manage your Neon projects**, i
 
 Neon can be managed using the following community-developed tofu provider, which is compatible with OpenTofu:
 
-**tofu Provider Neon - Maintainer: Dmitry Kisler**
+**Terraform Provider Neon - Maintainer: Dmitry Kisler**
 
 - [GitHub repository](https://github.com/kislerdm/terraform-provider-neon)
 
