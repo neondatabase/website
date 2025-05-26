@@ -66,9 +66,9 @@ Before getting started, ensure the following:
 You can change these settings later by editing your integration configuration.
 </Admonition>
 
-Optionally, you can import the Neon-provided JSON configuration file into Datadog, which creates a pre-built dashboard from **Neon metrics**, similar to the charts available on our Monitoring page. See [Import Neon dashboard](#import-neon-dashboard). 
+Optionally, you can import the Neon-provided JSON configuration file into Datadog, which creates a pre-built dashboard from **Neon metrics**, similar to the charts available on our Monitoring page. See [Import Neon dashboard](#import-neon-dashboard).
 
-> We do not yet provide a pre-built dashboard for **Postgres logs**, but it's coming soon. 
+> We do not yet provide a pre-built dashboard for **Postgres logs**, but it's coming soon.
 
 Once the integration is set up, Neon will start sending Neon metrics to Datadog, and you can use these metrics to create custom dashboards and alerts in Datadog.
 
