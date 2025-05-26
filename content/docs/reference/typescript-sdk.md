@@ -78,7 +78,7 @@ For this quick start, we'll set the API key as an environment variable:
 export NEON_API_KEY="YOUR_API_KEY_FROM_NEON_CONSOLE"
 ```
 
-Replace "YOUR_API_KEY_FROM_NEON_CONSOLE" with the API key you copied from the Neon Console.
+Replace `YOUR_API_KEY_FROM_NEON_CONSOLE` with the API key you copied from the Neon Console.
 
 ## Examples
 
