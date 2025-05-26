@@ -7,18 +7,18 @@ createdAt: '2025-05-26T00:00:00.000Z'
 updatedOn: '2025-05-26T00:00:00.000Z'
 ---
 
-[OpenTofu](https://opentofu.org) is an open-source infrastructure as code (IaC) tool, forked from tofu, that allows you to define and provision cloud resources in a declarative configuration language. By codifying infrastructure, OpenTofu enables consistent, repeatable, and automated deployments, significantly reducing manual errors. It is a community-driven alternative governed by the Linux Foundation.
+[OpenTofu](https://opentofu.org) is an open-source infrastructure as code (IaC) tool, forked from Terraform, that allows you to define and provision cloud resources in a declarative configuration language. By codifying infrastructure, OpenTofu enables consistent, repeatable, and automated deployments, significantly reducing manual errors. It is a community-driven alternative governed by the Linux Foundation.
 
 This guide will show you how to use **OpenTofu to manage your Neon projects**, including your branches, databases, and compute endpoints. By using OpenTofu with Neon, you get better control, can track changes, and automate your database setup.
 
-Neon can be managed using the following community-developed tofu provider, which is compatible with OpenTofu:
+Neon can be managed using the following community-developed Terraform provider, which is compatible with OpenTofu:
 
 **Terraform Provider Neon - Maintainer: Dmitry Kisler**
 
 - [GitHub repository](https://github.com/kislerdm/terraform-provider-neon)
 
 <Admonition type="note">
-This provider is a tofu provider compatible with OpenTofu. It is not maintained or officially supported by Neon. Use at your own discretion. If you have questions about the provider, please contact the project maintainer.
+This provider is a Terraform provider compatible with OpenTofu. It is not maintained or officially supported by Neon. Use at your own discretion. If you have questions about the provider, please contact the project maintainer.
 </Admonition>
 
 ## Provider usage notes
@@ -30,7 +30,7 @@ This provider is a tofu provider compatible with OpenTofu. It is not maintained 
   - Review the provider’s changelog for any breaking changes that might affect your resources before upgrading to a new version.
   - For CI pipelines and auto-approved pull requests, only use `tofu init`. Running `tofu init -upgrade` should be done manually followed by plan reviews.
   - Run `tofu plan` before applying any changes to detect potential differences and review the behavior of resource updates.
-  - Use [lifecycle protections](https://opentofu.org/docs/language/meta-arguments/lifecycle/#prevent_destroy) on critical resources to ensure they're not recreated unintentionally.
+  - Use [lifecycle protections](https://opentofu.org/docs/language/meta-arguments/lifecycle/) on critical resources to ensure they're not recreated unintentionally.
   - Explicitly define all critical resource parameters in your OpenTofu configurations, even if they had defaults previously.
   - On Neon paid plans, you can enable branch protection to prevent unintended deletion of branches and projects. To learn more, see [Protected branches](/docs/guides/protected-branches).
 
@@ -412,7 +412,7 @@ Ensure your OpenTofu environment is configured for the Neon provider as describe
 
 ### Neon resource IDs for import
 
-When importing Neon resources, you need to know the specific ID format for each resource type. Always refer to the "Import" section of the specific resource's documentation page on the [Provider's GitHub: `kislerdm/tofu-provider-neon`](https://github.com/kislerdm/terraform-provider-neon/tree/master/docs/resources) for the exact ID format.
+When importing Neon resources, you need to know the specific ID format for each resource type. Always refer to the "Import" section of the specific resource's documentation page on the [Provider's GitHub: `kislerdm/terraform-provider-neon`](https://github.com/kislerdm/terraform-provider-neon/tree/master/docs/resources) for the exact ID format.
 
 Common formats:
 
