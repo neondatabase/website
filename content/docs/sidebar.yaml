@@ -984,22 +984,22 @@
               slug: guides/neon-auth-best-practices
         - section: Concepts
           items:
-            - title: Organizations and Teams
+            - title: The StackApp object
+              slug: neon-auth/concepts/stack-app
+            - title: Custom User Data
+              slug: neon-auth/concepts/custom-user-data
+            - title: User Onboarding
+              slug: neon-auth/concepts/user-onboarding
+            - title: Connect OAuth accounts
+              slug: neon-auth/concepts/oauth
+            - title: Teams
               slug: neon-auth/concepts/orgs-and-teams
-            - title: Team Selection
+            - title: Selecting a team
               slug: neon-auth/concepts/team-selection
-            - title: Permissions
+            - title: Permissions & RBAC
               slug: neon-auth/concepts/permissions
             - title: Backend Integration
               slug: neon-auth/concepts/backend-integration
-            - title: User Onboarding
-              slug: neon-auth/concepts/user-onboarding
-            - title: OAuth
-              slug: neon-auth/concepts/oauth
-            - title: Custom User Data
-              slug: neon-auth/concepts/custom-user-data
-            - title: Stack App
-              slug: neon-auth/concepts/stack-app
         - section: Reference
           items:
             - title: Permissions & roles
