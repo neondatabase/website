@@ -152,7 +152,7 @@ The PGVector Store node has inputs for "Document" and "Embeddings". We will add 
 2. Search for and select "Embeddings Google Gemini".
 3. **Configure Gemini credentials:**
    - **Credential to connect with:** Click "Create new credential". A dialog will open prompting you to enter your Google Gemini API key.
-   - Paste your Google Gemini API Key obtained from Google AI Studio in the [Prequisites](#prerequisites) section.
+   - Paste your Google Gemini API Key obtained from Google AI Studio in the [Prerequisites](#prerequisites) section.
    - Click "Save". It should show "Connection tested successfully".
 4. Choose an embedding model. In this guide, `models/text-embedding-004` is used. You can select a different embedding model based on your requirements.
 
