@@ -62,7 +62,7 @@ This feature is very useful when the sign of a number isn't relevant for your se
 The `dict_int` extension provides a template for creating custom integer dictionaries. This allows you to define how integers are processed during full-text search indexing and querying. A default dictionary named `intdict` is provided, which has default parameters set to `maxlen = 6`, `rejectlong = false`, and `absval = false`.
 
 <Admonition type="important" title="Modifying the default intdict dictionary on Neon">
-The default `intdict` dictionary is owned by superuser. On Neon, you donot have permissions to directly `ALTER` this default dictionary, which can result in an "ERROR: must be owner of text search dictionary intdict".
+The default `intdict` dictionary is owned by superuser. On Neon, you do not have permissions to directly `ALTER` this default dictionary, which can result in an "ERROR: must be owner of text search dictionary intdict".
 
 The recommended approach is to **create your own custom dictionary** from the `intdict_template`. This gives you full control over its parameters
 </Admonition>
