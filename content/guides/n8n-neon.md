@@ -1,5 +1,5 @@
 ---
-title: Build an AI knowledge base chatbot grounded on your docs with n8n and Neon
+title: Build an AI-powered knowledge base chatbot using n8n and Neon Postgres
 subtitle: A step-by-step guide to creating an AI-powered internal knowledge base chatbot using n8n, Google Drive, and Neon Postgres.
 author: dhanush-reddy
 enableTableOfContents: true
