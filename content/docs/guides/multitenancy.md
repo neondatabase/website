@@ -331,10 +331,7 @@ let secrets = [];
 
       // Create a drizzle config file for each project
       const configFileName = `${project.name.toLowerCase().replace(/\s+/g, '-')}.config.ts`;
-      writeFileSync(
-        `./configs/${configFileName}`,
-        drizzleConfig(connection_string, project.name)
-      );
+      writeFileSync(`./configs/${configFileName}`, drizzleConfig(connection_string, project.name));
 
       // Create a GitHub workflow file for each project
       const workflowFileName = `${project.name.toLowerCase().replace(/\s+/g, '-')}.yml`;
@@ -353,10 +350,7 @@ let secrets = [];
       );
 
       const secretName = `${project.name.toUpperCase().replace(/\s+/g, '_')}_CONNECTION_STRING`;
-      const encryptedValue = await encryptSecret(
-        connection_string,
-        publicKey.data.key
-      );
+      const encryptedValue = await encryptSecret(connection_string, publicKey.data.key);
 
       secrets.push({
         secret_name: secretName,
