@@ -1,14 +1,12 @@
 ---
-title: Neon Auth Tutorial
+title: Neon Auth concepts
 subtitle: See how Neon Auth eliminates the complexity of manual user data
   synchronization, making your development faster and your applications more
   robust.
 enableTableOfContents: true
 tag: beta
-updatedOn: '2025-04-11T20:01:29.102Z'
+updatedOn: '2025-05-16T19:06:06.842Z'
 ---
-
-<FeatureBetaProps feature_name="Neon Auth" />
 
 <InfoBlock>
   <DocsList title="Related docs" theme="docs">
@@ -31,17 +29,15 @@ Profile updates, role changes, and user deletions in your authentication service
 
 While these methods partially mitigate the problem, they often require writing custom synchronization scripts, implementing brittle listeners, and manually reconciling data discrepancies – turning a theoretical time-saver into an ongoing maintenance burden.
 
-Neon Auth offers a streamlined solution to this common challenge. Instead of grappling with complex synchronization methods, Neon Auth automatically synchronizes user profiles directly from your authentication provider to your Neon Postgres database. This eliminates the need for manual updates, ensuring accurate, real-time data. You gain the benefits of efficient, automated user data management while retaining complete control over your core application information
-
-<Admonition type="note">
-Currently, Neon Auth is available for use with Stack Auth, with support for additional authentication providers coming soon.
-</Admonition>
+Neon Auth offers a streamlined solution to this common challenge. Instead of grappling with complex synchronization methods, Neon Auth automatically synchronizes user profiles directly to your Neon Postgres database. This eliminates the need for manual updates, ensuring accurate, real-time data. You gain the benefits of efficient, automated user data management while retaining complete control over your core application information
 
 ## A typical user data synchronization scenario
 
 To illustrate the benefits of Neon Auth, let’s consider a common scenario where you need to synchronize user data between your authentication provider and your application’s database.
 
 ### Scenario overview
+
+_This scenario uses Clerk as an example of a typical third-party auth provider. With Neon Auth, you don’t need to worry about manual sync or provider integration — Neon Auth handles it for you._
 
 You are building a social media platform where users can create profiles, post content, and interact with others. You use Clerk as your authentication provider to handle user registration, login, and password management. Your application’s database stores user profiles, posts, comments, and other social data.
 
@@ -114,7 +110,7 @@ Neon Auth offers a streamlined solution to these challenges by automating user d
 
 ### Simplified Architecture
 
-Neon Auth introduces a simplified architecture that removes the need for webhooks, polling, and custom synchronization scripts. As shown in the diagram below, Neon Auth acts as an intermediary layer that automatically synchronizes user data from your authentication provider to your Neon Postgres database.
+Neon Auth introduces a simplified architecture that removes the need for webhooks, polling, and custom synchronization scripts. As shown in the diagram below, Neon Auth acts as an intermediary layer that automatically synchronizes user data to your Neon Postgres database.
 
 ![How Neon Auth Simplifies User Data Synchronization](/docs/guides/sync-via-neon-auth.svg)
 
@@ -127,7 +123,7 @@ With Neon Auth, the architecture is significantly cleaner and more efficient:
 
 ### Enhanced data consistency
 
-Neon Auth ensures enhanced data consistency by providing a reliable and automated synchronization mechanism. Neon Auth continuously monitors for user data changes in your authentication provider and automatically synchronizes these changes to your Neon Postgres database.
+Neon Auth ensures enhanced data consistency by providing a reliable and automated synchronization mechanism. Neon Auth continuously monitors for user data changes and automatically synchronizes these changes to your Neon Postgres database.
 
 ## Get started with Neon Auth
 

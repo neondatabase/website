@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2025-05-12T21:06:51.826Z'
+updatedOn: '2025-05-23T18:48:33.110Z'
 ---
 
 Our development teams are focused on helping you ship faster with Postgres. This roadmap describes committed features we're working on right now, what we delivered recently, and a peek at what's on the horizon.
@@ -146,21 +146,9 @@ For more of the latest features and fixes, check our [Changelog](/docs/changelog
 
 ## Join the Neon Early Access Program
 
-Help shape the future of Neon. Sign up for the **Early Access Program** and get:
+Want to try upcoming Neon features before they go live? Join our Early Access Program to preview new features, connect with the Neon team, and help shape the platform's future.
 
-- **Exclusive early access**: Get a first look at upcoming features before they go live
-- **Private community**: Gain access to a dedicated Discord channel to connect with the Neon team and provide feedback to help shape what comes next
-- **Weekly insights**: Receive updates on Neon's latest developments and future plans
-
-Enable Early Access for your organization to preview new features. When an organization admin enables Early Access, everyone in your organization gets access to preview features across all projects belonging to that organization.
-
-To enable Early Access for your organization, go to your organization **Settings** page in the Neon Console and **Join early access**.
-
-> If you need to opt out of Early Access later, [contact our Support team about Early Access changes](https://console.neon.tech/app/projects?modal=support) to ensure there's no disruption to features you may be using.
-
-### Personal Early Access (legacy)
-
-Personal Early Access is only available for users with a legacy personal (non-org) account. Early Access features under this program level will only apply to projects under your personal account. [Sign up now](https://console.neon.tech/app/settings/early-access) for your personal account to get started.
+Learn more and sign up on the [Early Access Program page](/docs/introduction/early-access).
 
 ## A note about timing
 

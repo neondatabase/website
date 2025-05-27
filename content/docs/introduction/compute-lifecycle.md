@@ -3,7 +3,7 @@ title: Compute lifecycle
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compute-lifecycle
-updatedOn: '2025-05-11T11:23:50.622Z'
+updatedOn: '2025-05-21T14:06:24.800Z'
 ---
 
 A compute in Neon is a stateless Postgres process due to the separation of storage and compute. It has two main states: `Idle` and `Active`.
@@ -24,7 +24,7 @@ Neon's _Scale to Zero_ feature is conservative. It treats an "idle-in-transactio
 
 ## Compute activation
 
-When you connect to an idle compute, Neon automatically activates it. Activation generally takes a few hundred milliseconds.
+When you connect to an idle compute, Neon automatically activates it. Activation generally takes a few hundred milliseconds. However, if your Neon project has been idle for more than 7 days, you may experience a slightly longer activation time.
 
 Considering this activation time, your first connection may have a slightly higher latency than subsequent connections to an already-active compute. Also, Postgres memory buffers are cold after a compute wakes up from the idle state, which means that initial queries may take longer until the memory buffers are warmed.
 
