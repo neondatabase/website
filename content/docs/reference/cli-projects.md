@@ -47,7 +47,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | Option           | Description                                                                                                                                                         | Type   | Required |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | :------: |
 | `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                                                                       | string |          |
-| `--org-id`       | List all projects belonging to the specified organization. If unspecified, your [default organization](/docs/reference/glossary#default-organization) will be used. | string |          |
+| `--org-id`       | List all projects belonging to the specified organization. | string |          |
 
 #### Examples
 
