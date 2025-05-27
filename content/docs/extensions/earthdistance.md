@@ -38,13 +38,13 @@ The `earthdistance` extension offers two main ways to represent geographic point
 
 ### The `earth` data type and associated functions
 
-- **`earth` data type:**
+- `earth` data type:
   This type represents a point on the Earth's surface. It's internally a `cube` point representing a 3D Cartesian coordinate. You don't usually interact with its internal representation directly but use helper functions.
 
-- **`ll_to_earth(latitude double precision, longitude double precision) returns earth`**
+- `ll_to_earth(latitude double precision, longitude double precision)` returns `earth`
   Converts latitude and longitude (in degrees) to an `earth` data type value.
 
-- **`earth_distance(p1 earth, p2 earth) returns double precision`**
+- `earth_distance(p1 earth, p2 earth)` returns double precision
   Calculates the great-circle distance in **meters** between two `earth` points.
 
   ```sql
@@ -56,7 +56,7 @@ The `earthdistance` extension offers two main ways to represent geographic point
   -- Output: 343942.5946120387
   ```
 
-- **`earth_box(location earth, radius_meters double precision) returns cube`**
+- `earth_box(location earth, radius_meters double precision)` returns `cube`
   Computes a bounding box (as a `cube` type) that encloses all points within the specified `radius_meters` from the given `location`. This is primarily used for optimizing radius searches with [GiST indexes](/postgresql/postgresql-indexes/postgresql-index-types#gist-indexes).
 
   ```sql
