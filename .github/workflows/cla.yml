@@ -22,8 +22,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         with:
           path-to-signatures: 'signatures/cla.json'
-          # Update this URL to the relative path 
-          path-to-document: 'https://gist.githubusercontent.com/saimonkat/cdc874d23bbf87d9deb7a08957b9121e/raw/3fd53ab835c07107ae92d44d7b1670abcabc0265/Neon_CLA'
+          path-to-document: 'https://raw.githubusercontent.com/neondatabase/website/refs/heads/main/Neon_CLA'
           allowlist: |
             # Bot accounts
             actions-user
