@@ -38,13 +38,16 @@ The `earthdistance` extension offers two main ways to represent geographic point
 
 ### The `earth` data type and associated functions
 
-- `earth` data type:
-  This type represents a point on the Earth's surface. It's internally a `cube` point representing a 3D Cartesian coordinate. You don't usually interact with its internal representation directly but use helper functions.
+- `earth` data type
+
+  Represents a point on the Earth's surface. It's internally a `cube` point representing a 3D Cartesian coordinate. You don't usually interact with its internal representation directly but use helper functions.
 
 - `ll_to_earth(latitude double precision, longitude double precision)` returns `earth`
+
   Converts latitude and longitude (in degrees) to an `earth` data type value.
 
 - `earth_distance(p1 earth, p2 earth)` returns double precision
+
   Calculates the great-circle distance in **meters** between two `earth` points.
 
   ```sql
@@ -57,6 +60,7 @@ The `earthdistance` extension offers two main ways to represent geographic point
   ```
 
 - `earth_box(location earth, radius_meters double precision)` returns `cube`
+
   Computes a bounding box (as a `cube` type) that encloses all points within the specified `radius_meters` from the given `location`. This is primarily used for optimizing radius searches with [GiST indexes](/postgresql/postgresql-indexes/postgresql-index-types#gist-indexes).
 
   ```sql
@@ -77,11 +81,14 @@ The `earthdistance` extension offers two main ways to represent geographic point
 
 ### Using the `point` data type
 
-- **`point` data type:**
-  `point` is a built-in Postgres type representing a 2D point in Cartesian coordinates. In the context of `earthdistance`, the first component is longitude and the second is latitude.
+- `point` data type
 
-- **`point1 <@> point2 returns double precision`**
+  A built-in Postgres type representing a 2D point in Cartesian coordinates. In the context of `earthdistance`, the first component is longitude and the second is latitude.
+
+- `point1 <@> point2` returns double precision
+
   Calculates the great-circle distance in **statute miles** between two points.
+
   ```sql
   -- Distance between San Francisco (-122.4194 lon, 37.7749 lat)
   -- and New York (-74.0060 lon, 40.7128 lat)

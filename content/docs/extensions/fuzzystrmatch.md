@@ -34,8 +34,8 @@ The Soundex system is a phonetic algorithm for indexing names by sound, as prono
 
 **Functions:**
 
-- `soundex(text) returns text`: Computes the Soundex code of a string.
-- `difference(text, text) returns int`: Computes the difference between the Soundex codes of two strings. The result ranges from 0 (no match) to 4 (exact match on Soundex codes).
+- `soundex(text)` returns `text`: Computes the Soundex code of a string.
+- `difference(text, text)` returns `int`: Computes the difference between the Soundex codes of two strings. The result ranges from 0 (no match) to 4 (exact match on Soundex codes).
 
 **Examples:**
 
@@ -76,10 +76,10 @@ The Levenshtein distance measures the similarity between two strings by counting
 
 **Functions:**
 
-- `levenshtein(source text, target text) returns int`: Calculates Levenshtein distance with a cost of 1 for each insertion, deletion, or substitution.
-- `levenshtein(source text, target text, ins_cost int, del_cost int, sub_cost int) returns int`: Calculates Levenshtein distance with specified costs for operations.
-- `levenshtein_less_equal(source text, target text, max_d int) returns int`: An accelerated version. If the actual distance is less than or equal to `max_d`, it returns the correct distance; otherwise, it returns a value greater than `max_d`. This is faster if you only care about small distances.
-- `levenshtein_less_equal(source text, target text, ins_cost int, del_cost int, sub_cost int, max_d int) returns int`: Accelerated version with custom costs.
+- `levenshtein(source text, target text)` returns `int`: Calculates Levenshtein distance with a cost of 1 for each insertion, deletion, or substitution.
+- `levenshtein(source text, target text, ins_cost int, del_cost int, sub_cost int)` returns `int`: Calculates Levenshtein distance with specified costs for operations.
+- `levenshtein_less_equal(source text, target text, max_d int)` returns `int`: An accelerated version. If the actual distance is less than or equal to `max_d`, it returns the correct distance; otherwise, it returns a value greater than `max_d`. This is faster if you only care about small distances.
+- `levenshtein_less_equal(source text, target text, ins_cost int, del_cost int, sub_cost int, max_d int)` returns `int`: Accelerated version with custom costs.
 
 Both `source` and `target` strings can be any non-null strings and be up to 255 characters long.
 
@@ -150,9 +150,9 @@ Metaphone algorithms, like Soundex, generate phonetic codes for strings. They ar
 
 **Functions:**
 
-- `metaphone(text, max_output_length int) returns text`: Computes the metaphone code for a string, up to a specified maximum length.
-- `dmetaphone(text) returns text`: Computes the primary Double metaphone code.
-- `dmetaphone_alt(text) returns text`: Computes the alternate Double metaphone code (returns `NULL` if no alternate exists).
+- `metaphone(text, max_output_length int)` returns `text`: Computes the metaphone code for a string, up to a specified maximum length.
+- `dmetaphone(text)` returns `text`: Computes the primary Double metaphone code.
+- `dmetaphone_alt(text)` returns `text`: Computes the alternate Double metaphone code (returns `NULL` if no alternate exists).
 
 **Examples:**
 
