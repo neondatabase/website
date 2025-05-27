@@ -201,7 +201,7 @@ This workflow will provide the user interface to interact with your AI knowledge
 1. Click on the "Chat Model" input anchor of the AI Agent node.
 2. Search for and select "Google Gemini Chat Model".
 3. Select your existing "Gemini" API account for the credential.
-4. Chose a chat model that suits your needs. In this guide, we use `models/gemini-2.5-flash-preview-05-20`, which is a good balance of performance and cost for most use cases.
+4. Choose a chat model that suits your needs. In this guide, we use `models/gemini-2.5-flash-preview-05-20`, which is a good balance of performance and cost for most use cases.
 
 ![Configuring Google Gemini Chat Model node](/docs/guides/n8n/n8n-gemini-chat-model-node.gif)
 
