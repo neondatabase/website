@@ -23,7 +23,7 @@ To better situate our use case, let’s briefly outline the differences between 
 
 ### Database-per-user
 
-![Database-per-user](/docs/guides/database_per_user.png)
+![Database-per-user](/docs/use-cases/database_per_user.png)
 
 In a database-per-user design, each user’s data is fully isolated in its own database, eliminating any risk of data overlap. This setup is straightforward to design and highly secure. However, implementing this in managed Postgres databases has traditionally been challenging. For users of AWS RDS, Amazon Aurora, or similar services, two primary options have existed for achieving a database-per-user design:
 
@@ -35,7 +35,7 @@ As we’ll see later throughout this guide, Neon offers a third alternative by p
 
 ### Schema-per-user
 
-![Schema-per-user](/docs/guides/schema_per_user.png)
+![Schema-per-user](/docs/use-cases/schema_per_user.png)
 
 But before focusing on database-per-user, let’s briefly cover another multi-tenancy approach in Postgres: the schema-per-user model. Instead of isolating data by database, this design places all users in a single database, with a unique schema for each.
 
@@ -43,7 +43,7 @@ In Neon, we generally don’t recommend this approach for SaaS applications, unl
 
 ### Shared schema
 
-![Shared schema](/docs/guides/shared_schema.png)
+![Shared schema](/docs/use-cases/shared_schema.png)
 
 Lastly, Postgres’s robustness actually makes it possible to ensure tenant isolation within a shared schema. In this model, all users' data resides within the same tables, with isolation enforced through foreign keys and row-level security.
 
@@ -57,7 +57,7 @@ Now that we’ve reviewed your options, let’s focus on the design choice we re
 
 ### Database-per-user = Project-per-user
 
-![Project per user](/docs/guides/project_per_user.png)
+![Project per user](/docs/use-cases/project_per_user.png)
 
 We recommend setting up one project per user, rather than, for example, using a branch per customer. A Neon [project](/docs/manage/overview) serves as the logical equivalent of an "instance" but without the management overhead. Here’s why we suggest this design:
 
@@ -113,7 +113,7 @@ Once you have everything set up, as your number of projects grows, you might wan
 
 ### The catalog database
 
-![catalog database](/docs/guides/catalog_database.png)
+![catalog database](/docs/use-cases/catalog_database.png)
 
 The catalog database is a centralized repository that tracks and manages all Neon projects and databases. It holds records for every Neon project your system creates. You can also use it to keep track of tenant-specific configurations, such as database names, regions, schema versions, and so on.
 
@@ -150,7 +150,7 @@ Both approaches are viable, each with its own pros and cons.
 
 ### Shared application environments
 
-![shared application environments](/docs/guides/shared_application_environments.png)
+![shared application environments](/docs/use-cases/shared_application_environments.png)
 
 #### Pros of shared environments
 
@@ -184,7 +184,7 @@ Both approaches are viable, each with its own pros and cons.
 
 ### Isolated application environments
 
-![isolated application environments](/docs/guides/isolated_application_environments.png)
+![isolated application environments](/docs/use-cases/isolated_application_environments.png)
 
 In this architecture, each customer has instead a dedicated application environment alongside their own database. Similar to the shared environment option, this design has pros and cons:
 
@@ -516,7 +516,7 @@ As a managed database, Neon already takes care of securing your data, always kee
 
 First, GitHub must be added as an identity provider to allow the Action to use your AWS credentials. To create a new Identity Provider, navigate to IAM > Access Management > Identity Providers, and click Add provider.
 
-![S3 backup IAM configuration](/docs/guides/s3_backup_iam_config.png)
+![S3 backup IAM configuration](/docs/use-cases/s3_backup_iam_config.png)
 
 On the next screen select OpenID Connect and add the following to the Provider URL and Audience fields.
 
@@ -529,11 +529,11 @@ Now, you must create a role, which is an identity that you can assume to obtain 
 
 On the next screen you can create a Trusted Identity for the Role. Select **Trusted Identity**. On the next screen, select **Web Identity**, then select `token.actions.githubusercontent.com` from the **Identity Provider** dropdown menu.
 
-![S3 backup select trusted entity](/docs/guides/s3_select_trusted_entity.png)
+![S3 backup select trusted entity](/docs/use-cases/s3_select_trusted_entity.png)
 
 Once you select the Identity Provider, you’ll be shown a number of fields to fill out. Select `sts.amazonaws.com` from the **Audience** dropdown menu, then fill out the GitHub repository details as per your requirements. When you’re ready, click **Next**. For reference, the options shown in the image below are for this repository.
 
-![S3 backup web identity](/docs/guides/s3_web_identity.png)
+![S3 backup web identity](/docs/use-cases/s3_web_identity.png)
 
 You can skip selecting anything from the Add Permissions screen and click **Next** to continue.
 
