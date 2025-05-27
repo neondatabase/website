@@ -319,7 +319,7 @@ const defaultConfig = {
       },
       {
         source: '/docs/use-cases/database-per-user',
-        destination: '/docs/guides/database-per-user',
+        destination: '/docs/guides/multitenancy',
         permanent: true,
       },
       {

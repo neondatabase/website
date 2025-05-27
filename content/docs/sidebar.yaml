@@ -1256,8 +1256,8 @@
           slug: guides/partner-consumption-limits
         - title: Query consumption metrics
           slug: guides/partner-consumption-metrics
-    - title: Database-per-user guide
-      slug: guides/database-per-user
+    - title: Multitenancy
+      slug: guides/multitenancy
       icon: platform
     - title: Glossary
       slug: reference/glossary

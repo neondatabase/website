@@ -102,7 +102,7 @@ If your SaaS project could benefit from multitenancy, Neon makes it simple to cr
 - **No pre-provisioning**: You can scale your architecture progressively, from a few tenants to thousands.
 - **Pay per usage**: You only pay for the tenants that are actively running.
 
-[Learn how to build this](/docs/guides/database-per-user)
+[Learn how to build this](/docs/guides/multitenancy)
 
 <Testimonial
 text="The ability to spawn databases that can scale down to zero is incredibly helpful and a model fits well with our one database per customer architecture"
