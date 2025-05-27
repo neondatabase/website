@@ -162,11 +162,11 @@ If you have trouble enabling HIPAA, contact `hipaa@neon.tech`.
 
 ## Disabling HIPAA
 
-Once HIPAA compliance is enabled for a Neon project, it cannot be turned off.
+Once HIPAA compliance is enabled for a Neon project, it cannot be disabled.
 
-To delete a HIPAA-compliant project, submit a [support request](https://console.neon.tech/app/projects?modal=support). Before doing so, make sure to export any audit logs or data you may need. Neon retains audit logs for the duration specified in your Business Associate Agreement (BAA).
+If you want to disable HIPAA for your Neon account entirely, you need to [submit a support request](https://console.neon.tech/app/projects?modal=support). This can only be done after all HIPAA-enabled projects have been deleted.
 
-If you want to disable HIPAA for your Neon account entirely, you’ll also need to [submit a support request](https://console.neon.tech/app/projects?modal=support). This can only be done after all HIPAA-enabled projects have been removed.
+To delete a HIPAA-compliant project, submit a [support request](https://console.neon.tech/app/projects?modal=support). Before deleting a HIPAA project, make sure to export any audit logs or data you may need. Neon retains audit logs for the duration specified in your Business Associate Agreement (BAA).
 
 ## Security incidents
 
