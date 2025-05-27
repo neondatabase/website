@@ -24,10 +24,6 @@
               slug: get-started-with-neon/workflow-primer
             - title: 4 - Getting ready for production
               slug: get-started-with-neon/production-checklist
-        - section: Personalized
-          items:
-            - title: Project details
-              slug: get-started-with-neon/project-details
         - section: Language quickstarts
           items:
             - title: Quick list
