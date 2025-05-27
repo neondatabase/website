@@ -432,19 +432,6 @@
     - title: Use cases
       slug: use-cases/use-cases-overview
       icon: use-case
-      items:
-        - title: SaaS apps
-          slug: use-cases/saas-apps
-        - title: Variable traffic
-          slug: use-cases/variable-traffic
-        - title: Database-per-user
-          slug: use-cases/database-per-user
-        - title: AI Agents
-          slug: use-cases/ai-agents
-        - title: Platforms
-          slug: use-cases/platforms
-        - title: Dev/Test
-          slug: use-cases/dev-test
     - title: Regions
       slug: introduction/regions
       icon: regions
@@ -1269,6 +1256,9 @@
           slug: guides/partner-consumption-limits
         - title: Query consumption metrics
           slug: guides/partner-consumption-metrics
+    - title: Multitenancy
+      slug: guides/multitenancy
+      icon: platform
     - title: Glossary
       slug: reference/glossary
       icon: glossary

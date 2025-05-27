@@ -287,4 +287,4 @@ Once the Action completes successfully, your target database will have a fresh t
 
 This Action is part of our [Dev/Test use case](/use-cases/dev-test), widely used by Neon customers who face limitations with traditional databases for testing. By leveraging a dedicated Neon database, while leaving production environments where they are, developers gain access to Neon's full suite of features, including the [built-in SQL editor](/docs/get-started-with-neon/query-with-neon-sql-editor), [table explorer](/docs/guides/tables), and [branching](/docs/introduction/branching).
 
-If you'd like to learn more about using Neon for testing, check out our [docs](/docs/use-cases/dev-test) or contact our [sales team](/contact-sales).
+If you'd like to learn more about using Neon for testing, check out our [dev/test use case](/use-cases/dev-test) or contact our [sales team](/contact-sales).
