@@ -2,7 +2,7 @@
 title: The pg_graphql extension
 subtitle: Instantly create a GraphQL API for your Postgres database
 enableTableOfContents: true
-updatedOn: '2025-05-19T00:00:00.000Z'
+updatedOn: '2025-05-27T19:40:34.754Z'
 tag: new
 ---
 

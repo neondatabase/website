@@ -2,7 +2,7 @@
 title: The cube extension
 subtitle: Store and query multidimensional points and cubes in Postgres
 enableTableOfContents: true
-updatedOn: '2025-05-19T00:00:00.000Z'
+updatedOn: '2025-05-27T19:40:34.749Z'
 tag: new
 ---
 

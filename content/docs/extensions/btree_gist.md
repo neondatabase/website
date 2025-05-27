@@ -1,8 +1,9 @@
 ---
 title: The btree_gist extension
-subtitle: Combine GiST and B-tree indexing capabilities for efficient multi-column queries and constraints
+subtitle: Combine GiST and B-tree indexing capabilities for efficient multi-column
+  queries and constraints
 enableTableOfContents: true
-updatedOn: '2025-05-19T00:00:00.000Z'
+updatedOn: '2025-05-27T19:40:34.748Z'
 tag: new
 ---
 

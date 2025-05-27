@@ -2,7 +2,7 @@
 title: The intarray extension
 subtitle: Efficiently manipulate and query integer arrays in Postgres
 enableTableOfContents: true
-updatedOn: '2025-05-19T00:00:00.000Z'
+updatedOn: '2025-05-27T19:40:34.752Z'
 tag: new
 ---
 

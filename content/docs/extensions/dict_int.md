@@ -1,8 +1,9 @@
 ---
 title: The dict_int extension
-subtitle: Control how integers are indexed in Postgres Full-Text Search to improve performance and relevance.
+subtitle: Control how integers are indexed in Postgres Full-Text Search to improve
+  performance and relevance.
 enableTableOfContents: true
-updatedOn: '2025-05-21T00:00:00.000Z'
+updatedOn: '2025-05-27T19:40:34.750Z'
 tag: new
 ---
 

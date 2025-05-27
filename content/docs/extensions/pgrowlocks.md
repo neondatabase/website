@@ -2,7 +2,7 @@
 title: The pgrowlocks extension
 subtitle: Display row-level locking information for a specific table in Postgres
 enableTableOfContents: true
-updatedOn: '2025-05-19T00:00:00.000Z'
+updatedOn: '2025-05-27T19:40:34.755Z'
 tag: new
 ---
 

@@ -1,8 +1,9 @@
 ---
 title: The fuzzystrmatch extension
-subtitle: Perform fuzzy string matching for names, typos, and similar-sounding words in Postgres
+subtitle: Perform fuzzy string matching for names, typos, and similar-sounding words in
+  Postgres
 enableTableOfContents: true
-updatedOn: '2025-05-19T00:00:00.000Z'
+updatedOn: '2025-05-27T19:40:34.752Z'
 tag: new
 ---
 

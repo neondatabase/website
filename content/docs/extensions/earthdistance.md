@@ -2,7 +2,7 @@
 title: The earthdistance extension
 subtitle: Calculate great-circle distances between points on Earth in Postgres
 enableTableOfContents: true
-updatedOn: '2025-05-19T00:00:00.000Z'
+updatedOn: '2025-05-27T19:40:34.750Z'
 tag: new
 ---
 
