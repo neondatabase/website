@@ -52,7 +52,7 @@ export default {
   rlsAuthorize: '/docs/guides/neon-rls',
   serverless: '/docs/introduction/serverless',
   support: '/docs/introduction/support',
-  variableTraffic: '/docs/use-cases/variable-traffic',
+  variableTraffic: '/use-cases/serverless-apps',
   whyNeon: '/docs/get-started-with-neon/why-neon',
   // Legal
   dpa: '/dpa',

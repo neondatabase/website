@@ -307,6 +307,36 @@ const defaultConfig = {
         destination: '/docs/security/hipaa',
         permanent: true,
       },
+      {
+        source: '/docs/use-cases/saas-apps',
+        destination: '/use-cases/postgres-for-saas',
+        permanent: true,
+      },
+      {
+        source: '/docs/use-cases/variable-traffic',
+        destination: '/use-cases/serverless-apps',
+        permanent: true,
+      },
+      {
+        source: '/docs/use-cases/database-per-user',
+        destination: '/use-cases/database-per-tenant',
+        permanent: true,
+      },
+      {
+        source: '/docs/use-cases/ai-agents',
+        destination: '/use-cases/ai-agents',
+        permanent: true,
+      },
+      {
+        source: '/docs/use-cases/platforms',
+        destination: '/use-cases/database-per-tenant',
+        permanent: true,
+      },
+      {
+        source: '/docs/use-cases/dev-test',
+        destination: '/use-cases/dev-test',
+        permanent: true,
+      },
       ...docsRedirects,
       ...changelogRedirects,
     ];
