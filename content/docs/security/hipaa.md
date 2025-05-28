@@ -81,14 +81,14 @@ For more on pgAudit, see the [pgAudit documentation](https://github.com/pgaudit/
 
 When HIPAA audit logging is enabled for a compute, Neon configures pgAudit with the following settings:
 
-| Setting                        | Value         | Description                                                                 |
-|--------------------------------|---------------|-----------------------------------------------------------------------------|
-| `pgaudit.log`                  | `all, -misc`  | Logs all classes of SQL statements except low-risk miscellaneous commands. |
-| `pgaudit.log_parameter`        | `off`         | Parameters passed to SQL statements are not logged to avoid capturing sensitive values. |
-| `pgaudit.log_catalog`          | `off`         | Queries on system catalog tables (e.g., `pg_catalog`) are excluded from logs to reduce noise. |
-| `pgaudit.log_statement`        | `on`          | The full SQL statement text is included in the log.                         |
-| `pgaudit.log_relation`         | `off`         | Only a single log entry is generated per statement, not per table or view.  |
-| `pgaudit.log_statement_once`   | `off`         | SQL statements are logged with every entry, not just once per session.      |
+| Setting                      | Value        | Description                                                                                   |
+| ---------------------------- | ------------ | --------------------------------------------------------------------------------------------- |
+| `pgaudit.log`                | `all, -misc` | Logs all classes of SQL statements except low-risk miscellaneous commands.                    |
+| `pgaudit.log_parameter`      | `off`        | Parameters passed to SQL statements are not logged to avoid capturing sensitive values.       |
+| `pgaudit.log_catalog`        | `off`        | Queries on system catalog tables (e.g., `pg_catalog`) are excluded from logs to reduce noise. |
+| `pgaudit.log_statement`      | `on`         | The full SQL statement text is included in the log.                                           |
+| `pgaudit.log_relation`       | `off`        | Only a single log entry is generated per statement, not per table or view.                    |
+| `pgaudit.log_statement_once` | `off`        | SQL statements are logged with every entry, not just once per session.                        |
 
 #### What does `pgaudit.log = 'all, -misc'` include?
 
