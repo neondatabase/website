@@ -66,6 +66,104 @@ HIPAA is a federal law that sets national standards for the protection of health
 
 Audit events may not be logged if database endpoints experience exceptionally heavy load, as we prioritize database availability over capturing log events.
 
+## Logged events
+
+Neon maintains a comprehensive audit trail to support HIPAA compliance. This includes two categories of logged events:
+
+1. **SQL activity**, logged using the [pgAudit](https://www.pgaudit.org/) extension (`pgaudit`) for PostgreSQL.
+2. **User and administrative actions** performed via the Neon Console, logged at the API request level.
+
+To persist database logs securely, Neon also uses the pgAudit companion extension, `pgauditlogtofile`. This extension writes audit logs directly to disk, ensuring logs are safely captured. Logs are then forwarded to a secure collector off-node for long-term retention and compliance analysis.
+
+For more on pgAudit, see the [pgAudit documentation](https://github.com/pgaudit/pgaudit/blob/main/README.md).
+
+### pgAudit settings in Neon (HIPAA mode)
+
+When HIPAA audit logging is enabled for a compute, Neon configures pgAudit with the following settings:
+
+| Setting                    | Value        | Description |
+|----------------------------|--------------|-------------|
+| pgaudit.log                | all, -misc   | Logs all classes of SQL statements except low-risk miscellaneous commands. |
+| pgaudit.log_parameter      | off          | Parameters passed to SQL statements are not logged to avoid capturing sensitive values. |
+| pgaudit.log_catalog        | off          | Queries on system catalog tables (e.g., `pg_catalog`) are excluded from logs to reduce noise. |
+| pgaudit.log_statement      | on           | The full SQL statement text is included in the log. |
+| pgaudit.log_relation       | off          | Only a single log entry is generated per statement, not per table or view. |
+| pgaudit.log_statement_once | off          | SQL statements are logged with every entry, not just once per session. |
+
+#### What does `pgaudit.log = 'all, -misc'` include?
+
+This configuration enables logging for all major classes of SQL activity while excluding less relevant statements in the `misc` category. Specifically, it includes:
+
+- **READ**: `SELECT` statements and `COPY` commands that read from tables or views.
+- **WRITE**: `INSERT`, `UPDATE`, `DELETE`, `TRUNCATE`, and `COPY` commands that write to tables.
+- **FUNCTION**: Function calls and `DO` blocks.
+- **ROLE**: Role and permission changes, including `GRANT`, `REVOKE`, `CREATE ROLE`, `ALTER ROLE`, and `DROP ROLE`.
+- **DDL**: Schema and object changes like `CREATE TABLE`, `ALTER INDEX`, `DROP VIEW` — all DDL operations not included in the ``ROLE` class.
+- **MISC_SET**: Miscellaneous `SET` commands, e.g. `SET ROLE`.
+
+Excluded:
+
+- **MISC**: Low-impact commands such as `DISCARD`, `FETCH`, `CHECKPOINT`, `VACUUM`, and `SET`.
+
+For more details, see the [pgAudit documentation](https://github.com/pgaudit/pgaudit).
+
+### Audit log storage and forwarding
+
+- Logs are written using the standard [PostgreSQL logging facility](https://www.postgresql.org/docs/current/runtime-config-logging.html).
+- Logs are sent to a dedicated Neon audit collector endpoint.
+- Each log entry includes metadata such as the Neon compute ID (`endpoint_id`) and project ID (`project_id`).
+
+### Log rotation and retention
+
+- Logs are **rotated every 5 minutes**, meaning a new log file is created at 5-minute intervals. This keeps individual log files smaller and easier to manage.
+- Logs are **retained for 15 minutes** before being automatically deleted by a background process. This ensures that logs are forwarded quickly to Neon's secure collector and do not accumulate on disk.
+- The total **audit log directory size is monitored**, allowing the system to alert or take action if disk usage grows unexpectedly.
+
+This short retention period reflects Neon's real-time forwarding model—logs are not stored long term on the compute but are moved off-node for secure storage.
+
+### Extension configuration
+
+- The `pgaudit` and `pgauditlogtofile` extensions are preloaded on HIPAA-enabled Neon projects.
+- Supported PostgreSQL versions and corresponding `pgaudit` versions:
+  - Postgres 14: pgAudit 1.6.2
+  - Postgres 15: pgAudit 1.7.0
+  - Postgres 16: pgAudit 16.0
+  - Postgres 17: pgAudit 17.0
+- For `pgauditlogtofile`, Neon uses version 1.6.4 across all Postgres versions (14-17).
+
+### Console operation logging
+
+Neon logs operations performed via the Neon Console interface. These actions are initiated through the UI and correspond to API requests made to the Neon backend. Examples of logged operations include:
+
+- **Project management**: creating, deleting, renaming projects; changing project settings such as region or Postgres version.
+- **Branch management**: creating, deleting, renaming branches; restoring from backups; promoting or archiving branches.
+- **Compute management**: starting, stopping, scaling compute instances; viewing compute usage.
+- **Database and role management**: creating or deleting databases; resetting Postgres role passwords.
+- **Connection setup**: viewing or copying connection strings.
+- **Organization and access**: inviting users, assigning roles, or removing users from an organization.
+- **Billing**: updating payment methods, changing plans, viewing invoices or usage history.
+
+To protect sensitive information, Neon filters data in audit logs using the following approach:
+
+- **Sensitive fields** (such as `connection_uri` and `password`) are excluded from logs. These are identified using `x-sensitive` tags in the OpenAPI specification.
+- **GET requests**: Only query parameters are logged; response payloads are not recorded.
+- **Mutation requests** (`PATCH`, `PUT`, `POST`, `DELETE`): Request and response bodies are logged with sensitive fields redacted.
+- Logged data is stored in an `audit_logs` table with columns for request and response bodies.
+- Audit logs are queryable by `org_id`, which may be present in resource IDs, account fields, request payloads, or responses.
+
+This logging approach ensures that all meaningful Neon Console activity is auditable while safeguarding user credentials and other sensitive data.
+
+### Compliance assurance
+
+This logging configuration supports HIPAA compliance by:
+
+- Capturing a comprehensive audit trail of database and console activity.
+- Avoiding inclusion of sensitive data in logs unless explicitly configured.
+- Implementing structured log forwarding and secure log handling practices.
+- Limiting retention to the minimum required for alerting and forensics.
+
+If you need to request access to audit logs associated with your organization, contact [Neon support](https://neon.tech/contact-support).
+
 ## Non-HIPAA-compliant features
 
 The following features are not currently HIPAA-compliant and should not be used in projects containing HIPAA-protected data:
