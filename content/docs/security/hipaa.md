@@ -113,23 +113,9 @@ For more details, see the [pgAudit documentation](https://github.com/pgaudit/pga
 - Logs are sent to a dedicated Neon audit collector endpoint.
 - Each log entry includes metadata such as the Neon compute ID (`endpoint_id`) and project ID (`project_id`).
 
-### Log rotation and retention
-
-- Logs are **rotated every 5 minutes**, meaning a new log file is created at 5-minute intervals. This keeps individual log files smaller and easier to manage.
-- Logs are **retained for 15 minutes** before being automatically deleted by a background process. This ensures that logs are forwarded quickly to Neon's secure collector and do not accumulate on disk.
-- The total **audit log directory size is monitored**, allowing the system to alert or take action if disk usage grows unexpectedly.
-
-This short retention period reflects Neon's real-time forwarding model—logs are are quickly moved off-node for secure storage.
-
 ### Extension configuration
 
-- The `pgaudit` and `pgauditlogtofile` extensions are preloaded on HIPAA-enabled Neon projects.
-- Supported PostgreSQL versions and corresponding `pgaudit` versions:
-  - Postgres 14: pgAudit 1.6.2
-  - Postgres 15: pgAudit 1.7.0
-  - Postgres 16: pgAudit 16.0
-  - Postgres 17: pgAudit 17.0
-- For `pgauditlogtofile`, Neon uses version 1.6.4 across all Postgres versions (14-17).
+- The `pgaudit` and `pgauditlogtofile` extensions are preloaded on HIPAA-enabled Neon projects. For extension version information, see [Supported Postgres extensions](/docs/extensions/pg-extensions).
 
 ### Console operation logging
 
@@ -147,8 +133,6 @@ To protect sensitive information, Neon filters data in audit logs using the foll
 - Sensitive fields (such as `connection_uri` and `password`) are excluded from logs. These are identified using `x-sensitive` tags in the OpenAPI specification.
 - `GET` requests: Only query parameters are logged; response payloads are not recorded.
 - Mutation requests (`PATCH`, `PUT`, `POST`, `DELETE`): Request and response bodies are logged with sensitive fields redacted.
-- Logged data is stored in an `audit_logs` table with columns for request and response bodies.
-- Audit logs are queryable by `org_id`, which may be present in resource IDs, account fields, request payloads, or responses.
 
 This logging approach ensures that all meaningful Neon Console activity is auditable while safeguarding user credentials and other sensitive data.
 
@@ -158,10 +142,8 @@ This logging configuration supports HIPAA compliance by:
 
 - Capturing a comprehensive audit trail of database and console activity.
 - Avoiding inclusion of sensitive data in logs unless explicitly configured.
-- Implementing structured log forwarding and secure log handling practices.
-- Limiting retention to the minimum required for alerting and forensics.
 
-If you need to request access to audit logs associated with your organization, contact [Neon support](https://neon.tech/contact-support).
+If you need to request access to audit logs, contact [Neon support](https://neon.tech/contact-support).
 
 ## Non-HIPAA-compliant features
 
