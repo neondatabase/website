@@ -15,7 +15,7 @@ Neon makes it easy to isolate each tenant in their own Postgres database with in
 - **Instant per-customer recovery** - If there’s an issue (or a customer request), you can instantly roll back any tenant’s database without affecting the rest of your fleet.
 - **API-first management** - Provision, scale, and manage all your Neon projects programmatically—one engineer can manage thousands of tenants.
 
-Sign up [using this link](http://fyi.neon.tech/credits) to claim $100 off your first invoice, and [follow this guide](https://neon.tech/docs/use-cases/database-per-user) to get started.
+Sign up [using this link](http://fyi.neon.tech/credits) to claim $100 off your first invoice, and follow this guide to get started.
 </Admonition>
 
 ## Why database-per-user?

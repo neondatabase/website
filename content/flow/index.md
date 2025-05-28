@@ -123,7 +123,7 @@ To implement this workflow, follow the steps [in this guide.](https://neon.tech/
 
 ## Dev/Test Workflow (Neon Twin)
 
-[This guide](https://neon.tech/docs/use-cases/dev-test) will give you information on how to implement the Dev/Test workflow. The process changes slightly from team to team, but it looks like this:
+[This guide](https://neon.tech/use-cases/dev-test) will give you information on how to implement the Dev/Test workflow. The process changes slightly from team to team, but it looks like this:
 
 1. Set up a Neon Project for your dev/test environments
    - Create a new project in the Neon Console, and name it appropriately (e.g., "Dev/Test Environments")

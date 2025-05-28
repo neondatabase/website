@@ -3,7 +3,7 @@ title: The pg_search extension
 subtitle: An Elasticsearch alternative for full-text search and analytics on Postgres
 tag: new
 enableTableOfContents: true
-updatedOn: '2025-05-11T11:23:50.616Z'
+updatedOn: '2025-05-28T18:56:54.894Z'
 ---
 
 The `pg_search` extension by [ParadeDB](https://www.paradedb.com/) adds functions and operators to Postgres that use [BM25 (Best Matching 25)](https://en.wikipedia.org/wiki/Okapi_BM25) indexes for efficient, high-relevance text searches. It supports standard SQL syntax and JSON query objects, offering features similar to those in Elasticsearch.
@@ -65,7 +65,7 @@ CREATE EXTENSION IF NOT EXISTS pg_search;
     curl --request PATCH \
         --url https://console.neon.tech/api/v2/projects/<your_project_id> \
         --header 'accept: application/json' \
-        --header 'authorization: Bearer $NEON_API_KEY' \
+        --header "authorization: Bearer $NEON_API_KEY" \
         --header 'content-type: application/json' \
         --data '
     {
