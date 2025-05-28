@@ -111,11 +111,25 @@ For more details, see the [pgAudit documentation](https://github.com/pgaudit/pga
 
 - Logs are written using the standard [PostgreSQL logging facility](https://www.postgresql.org/docs/current/runtime-config-logging.html).
 - Logs are sent to a dedicated Neon audit collector endpoint.
-- Each log entry includes metadata such as the Neon compute ID (`endpoint_id`) and project ID (`project_id`).
+- Each log entry includes metadata such as the timestamp of the activity, the Neon compute ID (`endpoint_id`), Neon project ID (`project_id`), the Postgres role, the database accessed, and the method of access (e.g.,`neon-internal-sql-editor`), as shown in the following example:
+
+    **Query:**
+
+    ```sql
+    CREATE SCHEMA IF NOT EXISTS healthcare;
+    ```
+
+    **Log entry:**
+
+    ```ini
+    2025-05-05 20:23:01.277	
+    <134>May  6 00:23:01 vm-compute-shy-waterfall-w2cn1o4y-b6vnm young-recipe-29421455/ep-calm-da 2025-05-06 00:23:01.277 GMT,neondb_owner,neondb,1405,10.6.42.155:13702,68195665.57d,1,CREATE SCHEMA,
+    2025-05-06 00:23:01 GMT,16/2,767,00000,SESSION,1,1,DDL,CREATE SCHEMA,,,CREATE SCHEMA IF NOT EXISTS healthcare,<not logged>,,,,,,,,,neon-internal-sql-editor
+    ```
 
 ### Extension configuration
 
-- The `pgaudit` and `pgauditlogtofile` extensions are preloaded on HIPAA-enabled Neon projects. For extension version information, see [Supported Postgres extensions](/docs/extensions/pg-extensions).
+The `pgaudit` and `pgauditlogtofile` extensions are preloaded on HIPAA-enabled Neon projects. For extension version information, see [Supported Postgres extensions](/docs/extensions/pg-extensions).
 
 ### Console operation logging
 
