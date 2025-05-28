@@ -276,7 +276,6 @@ Hyperdrive → Neon Database (SSL enabled)
 This setup works in production. But for local development, libraries like Postgres.js may still reject the connection due to the local `sslmode=disable`.
 
 ✅ **To avoid this issue locally**, use `wrangler dev --remote`. This runs your Worker in Cloudflare’s infrastructure, where the connection string works as expected.
-</Admonition>
 
 ## Resources
 
