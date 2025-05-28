@@ -98,7 +98,7 @@ This configuration enables logging for all major classes of SQL activity while e
 - **WRITE**: `INSERT`, `UPDATE`, `DELETE`, `TRUNCATE`, and `COPY` commands that write to tables.
 - **FUNCTION**: Function calls and `DO` blocks.
 - **ROLE**: Role and permission changes, including `GRANT`, `REVOKE`, `CREATE ROLE`, `ALTER ROLE`, and `DROP ROLE`.
-- **DDL**: Schema and object changes like `CREATE TABLE`, `ALTER INDEX`, `DROP VIEW` — all DDL operations not included in the ``ROLE` class.
+- **DDL**: Schema and object changes like `CREATE TABLE`, `ALTER INDEX`, `DROP VIEW` — all DDL operations not included in the `ROLE` class.
 - **MISC_SET**: Miscellaneous `SET` commands, e.g. `SET ROLE`.
 
 Excluded:
