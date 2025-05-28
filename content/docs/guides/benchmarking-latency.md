@@ -52,7 +52,7 @@ Avoid testing across unrealistic distances that don't represent your production 
 
 ## Connection types and their impact
 
-Neon supports two connection protocols: HTTP and WebSocket, each with distinctly different performance profiles. While some modern edge platforms now support direct TCP connections, many serverless environments still have limitations around persistent connections or TCP support. Neon's HTTP and WebSocket methods work across all serverless platforms, with each protocol having different latency characteristics and feature trade-offs depending on your query patterns. Understanding these differences is crucial for accurate benchmarking. For a comprehensive comparison, see [Choosing Connection Types](/docs/connect/choose-connection).
+[Neon's serverless driver](/docs/serverless/serverless-driver) supports two connection protocols: HTTP and WebSocket, each with distinctly different performance profiles. While some modern edge platforms now support direct TCP connections, many serverless environments still have limitations around persistent connections or TCP support. Neon's HTTP and WebSocket methods work across all serverless platforms, with each protocol having different latency characteristics and feature trade-offs depending on your query patterns. Understanding these differences is crucial for accurate benchmarking. For a comprehensive comparison, see [Choosing Connection Types](/docs/connect/choose-connection).
 
 ### HTTP connections
 
