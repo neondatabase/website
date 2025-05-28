@@ -79,7 +79,7 @@ For more on pgAudit, see the [pgAudit documentation](https://github.com/pgaudit/
 
 ### pgAudit settings in Neon (HIPAA mode)
 
-When HIPAA audit logging is enabled for a compute, Neon configures pgAudit with the following settings:
+When HIPAA audit logging is enabled for a Neon project, Neon configures pgAudit with the following settings by default:
 
 | Setting                      | Value        | Description                                                                                   |
 | ---------------------------- | ------------ | --------------------------------------------------------------------------------------------- |
@@ -119,7 +119,7 @@ For more details, see the [pgAudit documentation](https://github.com/pgaudit/pga
 - Logs are **retained for 15 minutes** before being automatically deleted by a background process. This ensures that logs are forwarded quickly to Neon's secure collector and do not accumulate on disk.
 - The total **audit log directory size is monitored**, allowing the system to alert or take action if disk usage grows unexpectedly.
 
-This short retention period reflects Neon's real-time forwarding model—logs are not stored long term on the compute but are moved off-node for secure storage.
+This short retention period reflects Neon's real-time forwarding model—logs are are quickly moved off-node for secure storage.
 
 ### Extension configuration
 
@@ -135,18 +135,17 @@ This short retention period reflects Neon's real-time forwarding model—logs ar
 
 Neon logs operations performed via the Neon Console interface. These actions are initiated through the UI and correspond to API requests made to the Neon backend. Examples of logged operations include:
 
-- **Project management**: creating, deleting, renaming projects; changing project settings such as region or Postgres version.
-- **Branch management**: creating, deleting, renaming branches; restoring from backups; promoting or archiving branches.
-- **Compute management**: starting, stopping, scaling compute instances; viewing compute usage.
+- **Project management**: creating, deleting, renaming projects
+- **Branch management**: creating, deleting, renaming branches; restoring from backups
+- **Compute management**: starting, stopping, scaling compute instances
 - **Database and role management**: creating or deleting databases; resetting Postgres role passwords.
 - **Connection setup**: viewing or copying connection strings.
 - **Organization and access**: inviting users, assigning roles, or removing users from an organization.
-- **Billing**: updating payment methods, changing plans, viewing invoices or usage history.
 
 To protect sensitive information, Neon filters data in audit logs using the following approach:
 
 - Sensitive fields (such as `connection_uri` and `password`) are excluded from logs. These are identified using `x-sensitive` tags in the OpenAPI specification.
-- GET requests: Only query parameters are logged; response payloads are not recorded.
+- `GET` requests: Only query parameters are logged; response payloads are not recorded.
 - Mutation requests (`PATCH`, `PUT`, `POST`, `DELETE`): Request and response bodies are logged with sensitive fields redacted.
 - Logged data is stored in an `audit_logs` table with columns for request and response bodies.
 - Audit logs are queryable by `org_id`, which may be present in resource IDs, account fields, request payloads, or responses.
