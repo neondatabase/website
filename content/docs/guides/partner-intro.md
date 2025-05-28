@@ -38,6 +38,8 @@ Find out how you can integrate with Neon.
 
 <a href="https://github.com/neondatabase/toolkit" description="Spin up a Postgres database in seconds" icon="openai">Toolkit for AI Agents</a>
 
+<a href="/docs/workflows/claimable-database-integration.md" description="Manage Neon projects for users with the database claim API" icon="transactions">Claimable database</a>
+
 </DetailIconCards>
 
 ## Billing
