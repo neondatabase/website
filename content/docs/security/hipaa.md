@@ -73,8 +73,6 @@ Neon maintains a comprehensive audit trail to support HIPAA compliance. This inc
 1. **SQL activity**, logged using the [pgAudit](https://www.pgaudit.org/) extension (`pgaudit`) for PostgreSQL.
 2. **User and administrative actions** performed via the Neon Console, logged at the API request level.
 
-To persist database logs securely, Neon also uses the pgAudit companion extension, `pgauditlogtofile`. This extension writes audit logs directly to disk, ensuring logs are safely captured. Logs are then forwarded to a secure collector off-node for long-term retention and compliance analysis.
-
 For more on pgAudit, see the [pgAudit documentation](https://github.com/pgaudit/pgaudit/blob/main/README.md).
 
 ### pgAudit settings in Neon (HIPAA mode)
@@ -110,12 +108,12 @@ For more details, see the [pgAudit documentation](https://github.com/pgaudit/pga
 ### Audit log storage and forwarding
 
 - Logs are written using the standard [PostgreSQL logging facility](https://www.postgresql.org/docs/current/runtime-config-logging.html).
-- Logs are sent to a dedicated Neon audit collector endpoint.
+- Logs are sent to a dedicated Neon audit collector endpoint and securely stored.
 - Each log entry includes metadata such as the timestamp of the activity, the Neon compute ID (`endpoint_id`), Neon project ID (`project_id`), the Postgres role, the database accessed, and the method of access (e.g.,`neon-internal-sql-editor`).
 
 ### Extension configuration
 
-The `pgaudit` and `pgauditlogtofile` extensions are preloaded on HIPAA-enabled Neon projects. For extension version information, see [Supported Postgres extensions](/docs/extensions/pg-extensions).
+The `pgaudit` extension is preloaded on HIPAA-enabled Neon projects. For extension version information, see [Supported Postgres extensions](/docs/extensions/pg-extensions).
 
 ### Console operation logging
 
