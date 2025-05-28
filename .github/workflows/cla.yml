@@ -22,26 +22,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         with:
           path-to-signatures: 'signatures/cla.json'
-          path-to-document: 'NEON_CLA.md'
-          allowlist: |
-            # Bot accounts
-            actions-user
-            dependabot[bot]
-            devin-ai-integration[bot]
-            # User accounts
-            danieltprice
-            bgrenon
-            rishi-raj-jain
-            carlotas19
-            saimonkat
-            americano98
-            yasell
-            vburlak
-            vannyle
-            andrewgolovanov
-            bobbyiliev
-            PaulieScanlon
-            andrelandgraf
-            dhanushreddy291
-            davidgomes
-            Boburmirzo
+          path-to-document: 'https://github.com/neondatabase/website/blob/main/CLA.md'
+          allowlist: actions-user,dependabot[bot],devin-ai-integration[bot],danieltprice,bgrenon,rishi-raj-jain,carlotas19,saimonkat,americano98,yasell,vburlak,vannyle,andrewgolovanov,bobbyiliev,PaulieScanlon,andrelandgraf,dhanushreddy291,davidgomes,Boburmirzo
