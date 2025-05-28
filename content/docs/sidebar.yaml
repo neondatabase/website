@@ -432,19 +432,6 @@
     - title: Use cases
       slug: use-cases/use-cases-overview
       icon: use-case
-      items:
-        - title: SaaS apps
-          slug: use-cases/saas-apps
-        - title: Variable traffic
-          slug: use-cases/variable-traffic
-        - title: Database-per-user
-          slug: use-cases/database-per-user
-        - title: AI Agents
-          slug: use-cases/ai-agents
-        - title: Platforms
-          slug: use-cases/platforms
-        - title: Dev/Test
-          slug: use-cases/dev-test
     - title: Regions
       slug: introduction/regions
       icon: regions
@@ -1038,12 +1025,33 @@
             - title: anon
               slug: extensions/postgresql-anonymizer
               tag: new
-            - title: dblink
-              slug: extensions/dblink
+            - title: btree_gin
+              slug: extensions/btree_gin
+              tag: new
+            - title: btree_gist
+              slug: extensions/btree_gist
+              tag: new
             - title: citext
               slug: extensions/citext
+            - title: cube
+              slug: extensions/cube
+              tag: new
+            - title: dblink
+              slug: extensions/dblink
+            - title: dict_int
+              slug: extensions/dict_int
+              tag: new
+            - title: earthdistance
+              slug: extensions/earthdistance
+              tag: new
+            - title: fuzzystrmatch
+              slug: extensions/fuzzystrmatch
+              tag: new
             - title: hstore
               slug: extensions/hstore
+            - title: intarray
+              slug: extensions/intarray
+              tag: new
             - title: ltree
               slug: extensions/ltree
             - title: neon
@@ -1059,6 +1067,9 @@
               slug: extensions/pgrag
             - title: pg_cron
               slug: extensions/pg_cron
+            - title: pg_graphql
+              slug: extensions/pg_graphql
+              tag: new
             - title: pg_mooncake
               slug: extensions/pg_mooncake
               tag: new
@@ -1077,12 +1088,24 @@
               slug: extensions/pg_tiktoken
             - title: pg_trgm
               slug: extensions/pg_trgm
+            - title: pg_uuidv7
+              slug: extensions/pg_uuidv7
+              tag: new
+            - title: pgrowlocks
+              slug: extensions/pgrowlocks
+              tag: new
+            - title: pgstattuple
+              slug: extensions/pgstattuple
+              tag: new
             - title: postgis
               slug: extensions/postgis
             - title: postgis-related
               slug: extensions/postgis-related-extensions
             - title: postgres_fdw
               slug: extensions/postgres_fdw
+            - title: tablefunc
+              slug: extensions/tablefunc
+              tag: new
             - title: timescaledb
               slug: extensions/timescaledb
             - title: unaccent
@@ -1093,8 +1116,8 @@
               tag: new
             - title: wal2json
               slug: extensions/wal2json
-            - title: pg_cron
-              slug: extensions/pg_cron
+            - title: xml2
+              slug: extensions/xml2
               tag: new
         - title: Functions
           slug: functions/introduction
@@ -1269,6 +1292,9 @@
           slug: guides/partner-consumption-limits
         - title: Query consumption metrics
           slug: guides/partner-consumption-metrics
+    - title: Multitenancy
+      slug: guides/multitenancy
+      icon: platform
     - title: Glossary
       slug: reference/glossary
       icon: glossary
@@ -1279,6 +1305,9 @@
       slug: introduction/roadmap
       icon: roadmap
       tag: updated
+    - title: Early access
+      slug: introduction/early-access
+      icon: award
 - section: noname
   items:
     - title: Community

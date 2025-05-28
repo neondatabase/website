@@ -2,7 +2,7 @@
 title: Data anonymization
 subtitle: Anonymize data in Neon branches using the PostgreSQL Anonymizer extension
 enableTableOfContents: true
-updatedOn: '2025-05-09T14:18:14.456Z'
+updatedOn: '2025-05-23T22:52:47.859Z'
 tag: new
 ---
 
@@ -80,7 +80,9 @@ Create a branch from your `production` branch that you'll anonymize, called `ano
 neonctl branch create --project-id <my-project-id> --name anonymized-dev --parent production --psql
 ```
 
-This creates a branch with an exact copy (snapshot) of your production data, ready for anonymization.
+<Admonition type="important">
+This creates a branch with an exact copy of your production data. The data is not yet anonymized until you run the anonymization commands below.
+</Admonition>
 
 ## Enable the `anon` extension
 
@@ -162,6 +164,8 @@ You should see the sensitive columns replaced with fake but realistic-looking va
 Always double-check that you are on the correct branch before running anonymization.
 
 Never run `anon.init()` and `anon.anonymize_database()` on your parent branch. These functions should only be executed on child branches intended for anonymization. Running them on a parent branch will permanently modify your source data.
+
+If you reset a branch from its parent, all data returns to its original non-anonymized state and you must re-run the entire anonymization process.
 </Admonition>
 
 - Generally, you should always back up your data before making any changes. With Neon, you can quickly restore a branch to a previous state using [Instant restore](/docs/introduction/branch-restore) if needed.
