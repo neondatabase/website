@@ -145,9 +145,9 @@ Neon logs operations performed via the Neon Console interface. These actions are
 
 To protect sensitive information, Neon filters data in audit logs using the following approach:
 
-- **Sensitive fields** (such as `connection_uri` and `password`) are excluded from logs. These are identified using `x-sensitive` tags in the OpenAPI specification.
-- **GET requests**: Only query parameters are logged; response payloads are not recorded.
-- **Mutation requests** (`PATCH`, `PUT`, `POST`, `DELETE`): Request and response bodies are logged with sensitive fields redacted.
+- Sensitive fields (such as `connection_uri` and `password`) are excluded from logs. These are identified using `x-sensitive` tags in the OpenAPI specification.
+- GET requests: Only query parameters are logged; response payloads are not recorded.
+- Mutation requests (`PATCH`, `PUT`, `POST`, `DELETE`): Request and response bodies are logged with sensitive fields redacted.
 - Logged data is stored in an `audit_logs` table with columns for request and response bodies.
 - Audit logs are queryable by `org_id`, which may be present in resource IDs, account fields, request payloads, or responses.
 
