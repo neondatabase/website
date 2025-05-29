@@ -238,6 +238,8 @@ Without the `org_id` parameter, the project transfers to the user's personal acc
 - **Demo environments** - Create ready-to-use demo databases that prospects can claim
 - **Team environments** - Provision project databases for team members to claim into their organization
 
+For a working implementation of claimable databases, try [Neon Launchpad](https://neon.new/). This service demonstrates the complete flow: users receive a Postgres connection string immediately without creating an account, and databases remain active for 72 hours. To retain the database beyond this period, users claim it by creating a Neon account using the provided transfer URL. See the [Neon Launchpad documentation](/docs/reference/neon-launchpad) for implementation details. This same pattern enables SaaS providers to offer instant database provisioning while allowing users to take ownership when ready.
+
 ## Troubleshooting
 
 | Issue                                 | Solution                                                                                                         |
