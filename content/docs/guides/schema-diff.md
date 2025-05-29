@@ -117,7 +117,7 @@ The `compare_schema` endpoint supports the following parameters:
 | `timestamp`        | The point in time on the target branch for which the schema is retrieved.                 | No       | `2022-11-30T20:09:48Z`     |
 | `base_lsn`         | The LSN for the base branch schema.                                                       | No       | `0/2FC6321`                |
 | `base_timestamp`   | The point in time for the base branch schema.                                             | No       | `2022-11-30T20:09:48Z`     |
-| `Authorization`    | Bearer token for API access (your [Neon API key](https://neon.tech/docs/manage/api-keys)) | Yes      | `$NEON_API_KEY`            |
+| `Authorization`    | Bearer token for API access (your [Neon API key](/docs/manage/api-keys)) | Yes      | `$NEON_API_KEY`            |
 
 <Admonition type="note" title="notes">
 - The optional `jq -r '.diff'` command appended to the example above extracts the diff field from the JSON response and outputs it as plain text to make it easier to read. This command is not  necessary when using the endpoint programmatically.

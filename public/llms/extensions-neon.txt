@@ -4,7 +4,7 @@
 
 ## Source
 
-- [The neon extension HTML](https://neon.tech/docs/extensions/neon): The original HTML version of this documentation
+- [The neon extension HTML](https://neon.com/docs/extensions/neon): The original HTML version of this documentation
 
 ## Overview
 

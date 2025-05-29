@@ -4,7 +4,7 @@
 
 ## Source
 
-- [About Neon RLS HTML](https://neon.tech/docs/guides/neon-rls): The original HTML version of this documentation
+- [About Neon RLS HTML](https://neon.com/docs/guides/neon-rls): The original HTML version of this documentation
 
 
 **What you will learn:**
@@ -13,9 +13,9 @@
 - How Neon RLS works
 
 **Related docs:**
-- [Neon RLS Tutorial](https://neon.tech/docs/guides/neon-rls-tutorial)
-- [Postgres Row-Level Security tutorial](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security)
-- [Simplify RLS with Drizzle](https://neon.tech/docs/guides/neon-rls-drizzle)
+- [Neon RLS Tutorial](https://neon.com/docs/guides/neon-rls-tutorial)
+- [Postgres Row-Level Security tutorial](https://neon.com/postgresql/postgresql-administration/postgresql-row-level-security)
+- [Simplify RLS with Drizzle](https://neon.com/docs/guides/neon-rls-drizzle)
 
 
 
@@ -39,9 +39,9 @@ const sql = neon(process.env.DATABASE_AUTHENTICATED_URL, { authToken: myAuthProv
 await sql(`select * from todos`);
 ```
 
-Behind the scenes, the [Neon Proxy](#the-role-of-the-neon-proxy) performs the validation, while Neon's open source [pg_session_jwt](https://neon.tech/docs/guides/neon-rls#how-the-pgsessionjwt-extension-works) extension makes the extracted `user_id` available to Postgres. You can then use **Row-Level Security (RLS)** policies in Postgres to enforce access control at the row level, ensuring that users can only access or modify data according to the defined rules. Since these rules are implemented directly in the database, they can offer a secure fallback — or even a primary authorization solution — in case security in other layers of your application fail. See [when to rely on RLS](#when-to-rely-on-rls) for more information.
+Behind the scenes, the [Neon Proxy](#the-role-of-the-neon-proxy) performs the validation, while Neon's open source [pg_session_jwt](https://neon.com/docs/guides/neon-rls#how-the-pgsessionjwt-extension-works) extension makes the extracted `user_id` available to Postgres. You can then use **Row-Level Security (RLS)** policies in Postgres to enforce access control at the row level, ensuring that users can only access or modify data according to the defined rules. Since these rules are implemented directly in the database, they can offer a secure fallback — or even a primary authorization solution — in case security in other layers of your application fail. See [when to rely on RLS](#when-to-rely-on-rls) for more information.
 
-![Neon RLS architecture](https://neon.tech/docs/guides/neon_authorize_architecture.png)
+![Neon RLS architecture](https://neon.com/docs/guides/neon_authorize_architecture.png)
 
 ## Database roles
 
@@ -239,7 +239,7 @@ While this feature is in its early-access phase, there are some limitations to b
 - **Authentication provider requirements**:
   - Your authentication provider must support **Asymmetric Keys**. For example, **Supabase Auth** will not be compatible until asymetric key support is added. You can track progress on this item [here](https://github.com/orgs/supabase/discussions/29289).
   - The provider must generate a unique set of public keys for each project and expose those keys via a unique URL for each project.
-- **Connection type**: Your application must use **HTTP** to connect to Neon. At this time, **TCP** and **WebSockets** connections are not supported. This means you need to use the [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver) over HTTP as your Postgres driver.
+- **Connection type**: Your application must use **HTTP** to connect to Neon. At this time, **TCP** and **WebSockets** connections are not supported. This means you need to use the [Neon serverless driver](https://neon.com/docs/serverless/serverless-driver) over HTTP as your Postgres driver.
 - **JWT expiration delay**: After removing an authentication provider from your project, it may take a few minutes for JWTs signed by that provider to stop working.
 - **Algorithm support**: Only JWTs signed with the **ES256** and **RS256** algorithms are supported.
 

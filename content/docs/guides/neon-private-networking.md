@@ -100,7 +100,7 @@ To configure Neon Private Networking, perform the following steps:
 
     <TabItem>
 
-    You can use the [Assign or update a VPC endpoint](https://api-docs.neon.tech/reference/assignorganizationvpcendpoint) API to assign a VCP endpoint ID to a Neon organization. You will need to provide your Neon organization ID, region ID, VPC endpoint ID, Neon project ID, and a [Neon API key](https://neon.tech/docs/manage/api-keys).
+    You can use the [Assign or update a VPC endpoint](https://api-docs.neon.tech/reference/assignorganizationvpcendpoint) API to assign a VCP endpoint ID to a Neon organization. You will need to provide your Neon organization ID, region ID, VPC endpoint ID, Neon project ID, and a [Neon API key](/docs/manage/api-keys).
 
     ```bash
     curl --request POST \
@@ -221,7 +221,7 @@ neonctl vpc endpoint status vpce-1234567890abcdef0 --region-id=aws-eu-central-1 
 
 <TabItem>
 
-The Neon API supports managing project restrictions using the [Assign or update a VPC endpoint restriction](https://api-docs.neon.tech/reference/assignprojectvpcendpoint) endpoint. You will need to provide your VPC endpoint ID, Neon project ID, and a [Neon API key](https://neon.tech/docs/manage/api-keys).
+The Neon API supports managing project restrictions using the [Assign or update a VPC endpoint restriction](https://api-docs.neon.tech/reference/assignprojectvpcendpoint) endpoint. You will need to provide your VPC endpoint ID, Neon project ID, and a [Neon API key](/docs/manage/api-keys).
 
 ```bash
 curl --request POST \

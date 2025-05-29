@@ -15,7 +15,7 @@ Learn about branching and how you can apply it in your development workflows.
 
 <a href="/docs/introduction/branching" description="Learn about Neon's branching feature and how to use it in your development workflows" icon="branching">Learn about branching</a>
 
-<a href="https://neon.tech/blog/database-branching-for-postgres-with-neon" description="Blog: Read about how Neon's branching feature works and what it means for your workflows" icon="split-branch">Database branching for Postgres</a>
+<a href="/blog/database-branching-for-postgres-with-neon" description="Blog: Read about how Neon's branching feature works and what it means for your workflows" icon="split-branch">Database branching for Postgres</a>
 
 <a href="/docs/guides/branch-archiving" description="Learn how Neon automatically archives inactive branches to cost-effective storage" icon="split-branch">Branch archiving</a>
 
@@ -35,7 +35,7 @@ Integrate branching into your CI/CD pipelines and workflows with the Neon API, C
 
 <a href="/docs/guides/branching-github-actions" description="Automate branching with Neon's GitHub Actions for branching" icon="filter">Branching with GitHub Actions</a>
 
-<a href="https://neon.tech/blog/automating-neon-branch-creation-with-githooks" description="Blog: Learn how to automating branch creation with Githooks" icon="hook">Branching with Githooks</a>
+<a href="/blog/automating-neon-branch-creation-with-githooks" description="Blog: Learn how to automating branch creation with Githooks" icon="hook">Branching with Githooks</a>
 
 </DetailIconCards>
 
@@ -47,9 +47,9 @@ Create a branch for each preview deployment with the Neon Postgres Previews Inte
 
 <a href="/docs/guides/vercel-previews-integration" description="Connect your Vercel project and create a branch for each preview deployment" icon="vercel">The Neon Postgres Previews Integration</a>
 
-<a href="https://neon.tech/blog/neon-vercel-integration" description="Blog: Read about full-stack preview deployments using the Neon Vercel Integration" icon="vercel">Preview deployments with Vercel</a>
+<a href="/blog/neon-vercel-integration" description="Blog: Read about full-stack preview deployments using the Neon Vercel Integration" icon="vercel">Preview deployments with Vercel</a>
 
-<a href="https://neon.tech/blog/branching-with-preview-environments" description="Blog: A database for every preview environment with GitHub Actions and Vercel" icon="database">A database for every preview</a>
+<a href="/blog/branching-with-preview-environments" description="Blog: A database for every preview environment with GitHub Actions and Vercel" icon="database">A database for every preview</a>
 
 </DetailIconCards>
 

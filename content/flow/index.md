@@ -19,7 +19,7 @@ To fix this broken system, we propose rethinking database workflows. Instead of 
 
 These ephemeral environments replicate an exact copy of both the schema and data from a parent environment. This allows teams to focus on maintaining a single parent environment while spinning up as many ephemeral environments as needed, without manual maintenance.
 
-How do you do it? With [Neon branches](https://neon.tech/docs/introduction/branching).
+How do you do it? With [Neon branches](/docs/introduction/branching).
 
 ## Turning Neon branches into ephemeral environments
 
@@ -106,7 +106,7 @@ Why it’s better than the traditional workflow:
 
 ## Preview Environment Workflow
 
-To implement this workflow, follow the steps [in this guide.](https://neon.tech/docs/guides/vercel-previews-integration) The process looks like this:
+To implement this workflow, follow the steps [in this guide.](/docs/guides/vercel-previews-integration) The process looks like this:
 
 1. Install the `Neon <> Vercel` integration
    - In the Neon Console, navigate to the Integrations section and select the Vercel integration
@@ -123,7 +123,7 @@ To implement this workflow, follow the steps [in this guide.](https://neon.tech/
 
 ## Dev/Test Workflow (Neon Twin)
 
-[This guide](https://neon.tech/use-cases/dev-test) will give you information on how to implement the Dev/Test workflow. The process changes slightly from team to team, but it looks like this:
+[This guide](/use-cases/dev-test) will give you information on how to implement the Dev/Test workflow. The process changes slightly from team to team, but it looks like this:
 
 1. Set up a Neon Project for your dev/test environments
    - Create a new project in the Neon Console, and name it appropriately (e.g., "Dev/Test Environments")
@@ -168,6 +168,6 @@ To implement a local development workflow with a database branch per developer, 
 
 ## This is only the beginning
 
-The workflows described here are examples already popular among our users. We have ambitious plans to expand on them, such as incorporating anonymization of Personally Identifiable Information (PII). If you’d like to participate by providing feedback or testing a prototype, [reach out to us](https://neon.tech/contact-sales).
+The workflows described here are examples already popular among our users. We have ambitious plans to expand on them, such as incorporating anonymization of Personally Identifiable Information (PII). If you’d like to participate by providing feedback or testing a prototype, [reach out to us](/contact-sales).
 
-[See more branching workflows in the wild →](https://neon.tech/case-studies)
+[See more branching workflows in the wild →](/case-studies)

@@ -56,7 +56,7 @@ You can also create Neon projects in Azure regions without the native service in
    | **Resource Name**          | Enter a name for the Azure resource representing your Neon organization. This name is used only in Azure.                                                                                                                                                                                                                                                                                                    |
    | **Region**                 | Select a region to deploy your Azure resource. This is the region for your Azure resource, not for your Neon projects and data. You will select from [Azure-supported regions](/docs/introduction/regions#azure-regions) when you create the Neon project in a later step. For example, you can create a Neon resource in the (US) West US 3 region and create a Neon project (Europe) Germany West Central. |
    | **Neon Organization name** | Provide a name for your [Neon Organization](/docs/reference/glossary#organization), such as a team name or company name. The name you specify will be your [Organization](/docs/reference/glossary#organization) name in the Neon Console. Your Neon projects will reside in this named organization.                                                                                                        |
-   | **Plan**                   | Select a plan. You have three to choose from: **Free**, **Scale**, and **Business**. Select **Change Plan** to view details about each plan. For more information about Neon's plans, please refer to the [Neon Pricing](https://neon.tech/home) page. The Neon **Launch Plan** is currently not available in the Azure Marketplace.                                                                         |
+   | **Plan**                   | Select a plan. You have three to choose from: **Free**, **Scale**, and **Business**. Select **Change Plan** to view details about each plan. For more information about Neon's plans, please refer to the [Neon Pricing](/pricing) page. The Neon **Launch Plan** is currently not available in the Azure Marketplace.                                                                         |
    | **Billing term**           | Select a billing term for the selected plan. You can choose from a **1-Month** or a **1-Year** billing term (monthly or yearly billing).                                                                                                                                                                                                                                                                     |
 
    ![Create a resource group](/docs/introduction/azure_create_resource_group.png)
@@ -72,7 +72,7 @@ You can also create Neon projects in Azure regions without the native service in
 
 1. Click **Next**.
 1. Optionally specify tags for your resource, then click **Next**. For more about tags, see [Use tags to organize your Azure resources](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources).
-1. On the **Review + Create** page, review your selections, the [Azure Marketplace Terms](https://learn.microsoft.com/en-us/legal/marketplace/marketplace-terms), and the Neon [Terms of Use](https://neon.tech/terms-of-service) and [Privacy Policy](https://neon.tech/privacy-policy).
+1. On the **Review + Create** page, review your selections, the [Azure Marketplace Terms](https://learn.microsoft.com/en-us/legal/marketplace/marketplace-terms), and the Neon [Terms of Use](/terms-of-service) and [Privacy Policy](/privacy-policy).
 1. Select **Create** to initiate the resource deployment, which may take a few moments.
 1. When your deployment is complete, click the **Go to resource** button under **Next steps** to view your new Neon resource.
 
@@ -106,7 +106,7 @@ Creating a Neon project in an Azure region without using the **Azure Native ISV 
 
 <TabItem>
 
-To create a Neon project from the console, follow the [Create project](https://neon.tech/docs/manage/projects#create-a-project) steps. Select **Azure** as the **Cloud Service Provider**, and choose one of the available [Azure regions](/docs/introduction/regions).
+To create a Neon project from the console, follow the [Create project](/docs/manage/projects#create-a-project) steps. Select **Azure** as the **Cloud Service Provider**, and choose one of the available [Azure regions](/docs/introduction/regions).
 
 </TabItem>
 

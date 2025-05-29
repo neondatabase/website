@@ -22,7 +22,7 @@ updatedOn: '2025-04-08T22:55:27.452Z'
   </Button>
 </figure>
 
-The Neon App for Slack allows you to monitor your Neon usage and manage organization membership directly from Slack. Get quick access to project information and resource usage metrics without leaving your workspace. The app is available to all Neon users on both free and paid plans — check out our [pricing page](https://neon.tech/pricing) for more details.
+The Neon App for Slack allows you to monitor your Neon usage and manage organization membership directly from Slack. Get quick access to project information and resource usage metrics without leaving your workspace. The app is available to all Neon users on both free and paid plans — check out our [pricing page](/pricing) for more details.
 
 ![Neon App for Slack commands](/docs/manage/slack_app_overview.png)
 
@@ -97,7 +97,7 @@ Use `/neon disconnect` to remove your Neon account connection and unsubscribe fr
 
 ## Data deletion
 
-Neon respects your right to request deletion of your personal data at any time. To do so, email us at privacy@neon.tech or submit a support ticket via the Neon Console. Once we verify your identity, we will delete your data within 30 days, unless a legal or contractual obligation requires us to retain it. For more details, see our [Privacy Policy](https://neon.tech/privacy-policy).
+Neon respects your right to request deletion of your personal data at any time. To do so, email us at privacy@neon.tech or submit a support ticket via the Neon Console. Once we verify your identity, we will delete your data within 30 days, unless a legal or contractual obligation requires us to retain it. For more details, see our [Privacy Policy](/privacy-policy).
 
 ## Support
 

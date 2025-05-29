@@ -62,7 +62,7 @@ The branch page shows the following information for each branch:
 | **Primary Compute** | The allocated autoscaling range, in [Compute Units (CU)](/docs/reference/glossary#compute-unit-cu), for the branch's primary compute. |
 | **Data size**       | The [logical size](/docs/reference/glossary#logical-data-size) of the data stored in the branch.                                      |
 
-To learn about integrating branching into your developer workflow, see our [Database branching workflow primer](https://neon.tech/docs/get-started-with-neon/workflow-primer).
+To learn about integrating branching into your developer workflow, see our [Database branching workflow primer](/docs/get-started-with-neon/workflow-primer).
 
 You can also create branches in the Neon Console. See [Create a branch](/docs/manage/branches#create-a-branch) for instructions.
 

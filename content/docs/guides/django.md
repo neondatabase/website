@@ -103,7 +103,7 @@ For schema migration with Django, see our guide:
 Learn how to use Django with Neon Postgres with this blog post and the accompanying sample application.
 
 <DetailIconCards>
-<a href="https://neon.tech/blog/python-django-and-neons-serverless-postgres" description="Learn how to build a Django application with Neon Postgres" icon="import">Blog Post: Using Django with Neon</a>
+<a href="/blog/python-django-and-neons-serverless-postgres" description="Learn how to build a Django application with Neon Postgres" icon="import">Blog Post: Using Django with Neon</a>
 
 <a href="https://github.com/evanshortiss/django-neon-quickstart" description="Django with Neon Postgres" icon="github">Django sample application</a>
 </DetailIconCards>

@@ -32,7 +32,7 @@ Some of the incredible businesses delivering better experiences for their custom
 - **[Cedalio](https://cedalio.com)** – One-database-per-client model with auto-suspend. [Details](/blog/how-cedalio-uses-neon-for-an-efficient-development-workflow)
 - **[BaseHub](https://basehub.com)** – Uses autoscaling to handle peak loads with zero manual tuning. [Details](/blog/meet-basehub-developer-velocity-and-efficiency-right-down-to-the-database)
 - **[Create.xyz](https://create.xyz)** – Spins up Postgres backends instantly for AI-generated apps. [Details](/blog/from-idea-to-full-stack-app-in-one-conversation-with-create)
-- **[OpusFlow](https://opusflow.io)** – DB-per-tenant delivers a fast, no-noisy-neighbor experience for energy customers. [Details](https://neon.tech/blog/how-opusflow-achieves-tenant-isolation-in-postgres-without-managing-servers)
+- **[OpusFlow](https://opusflow.io)** – DB-per-tenant delivers a fast, no-noisy-neighbor experience for energy customers. [Details](/blog/how-opusflow-achieves-tenant-isolation-in-postgres-without-managing-servers)
 - **[222](https://222.place)** – Autoscales for heavy traffic surges without manual ops. [Details](/blog/how-222-uses-neon-to-handle-their-frequent-spikes-in-demand)
 - **[Recrowd](https://recrowd.com)** – Scales up for crowdfunding spikes, down when idle. [Details](/blog/how-recrowd-uses-neon-autoscaling-to-meet-fluctuating-demand)
 - **[BeatGig](https://beatgig.com)** – Uses instant read replicas for fast analytics. [Details](/blog/neon-read-replicas-in-the-wild-how-beatgig-uses-them)
@@ -86,7 +86,7 @@ You can visualize the way each factor contributes like this:
 
 <LatencyCalculator />
 
-**What about cold starts?** Databases on Neon can scale to zero when there are no active queries for a certain amount of time. We kept this topic separate below in [Cold Starts](#cold-starts) because _across the more than one million active databases on our platform, they occur very seldomly — there are fewer than 5 cold starts per second._ Cold starts don't factor in to your real-world experience often enough to become an important consideration. For use cases where cold starts must be avoided, you can disable scale-to-zero with a single click. This option is available starting with our [Launch plan](https://neon.tech/pricing).
+**What about cold starts?** Databases on Neon can scale to zero when there are no active queries for a certain amount of time. We kept this topic separate below in [Cold Starts](#cold-starts) because _across the more than one million active databases on our platform, they occur very seldomly — there are fewer than 5 cold starts per second._ Cold starts don't factor in to your real-world experience often enough to become an important consideration. For use cases where cold starts must be avoided, you can disable scale-to-zero with a single click. This option is available starting with our [Launch plan](/pricing).
 
 ### Establishing a connection
 
@@ -120,8 +120,8 @@ Client-database proximity plays a major role in real-world database latency. Her
 | Architecture                                                                                                                   | Roundtrip | Connect         | On Neon                                                                                                                                                         |
 | ------------------------------------------------------------------------------------------------------------------------------ | --------- | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Same Machine**<br/>When you put your database and your app on the exact same machine, latency is measured in microseconds.   | >1ms      | ~1ms            | Not applicable                                                                                                                                                  |
-| **Same Region**<br/>Place the client (App) and Database in the same datacenter and region for lowest-possible latency.         | ~1ms      | ~3ms            | Same [Region](https://neon.tech/docs/introduction/regions) for Client and DB, see [Private Link](https://neon.tech/docs/guides/neon-private-networking) for VPC |
-| **Different Region**<br/>When client and database are in different regions, your latency varies based on geographic proximity. | Varies    | 4x-8x Roundtrip | Different/varying [Region](https://neon.tech/docs/introduction/regions) for Client and DB                                                                       |
+| **Same Region**<br/>Place the client (App) and Database in the same datacenter and region for lowest-possible latency.         | ~1ms      | ~3ms            | Same [Region](/docs/introduction/regions) for Client and DB, see [Private Link](/docs/guides/neon-private-networking) for VPC |
+| **Different Region**<br/>When client and database are in different regions, your latency varies based on geographic proximity. | Varies    | 4x-8x Roundtrip | Different/varying [Region](/docs/introduction/regions) for Client and DB                                                                       |
 
 ### Minimizing database time spent answering the query
 

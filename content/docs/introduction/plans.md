@@ -14,7 +14,7 @@ redirectFrom:
 updatedOn: '2025-04-25T12:49:01.719Z'
 ---
 
-Neon's plans are designed to meet different user requirements, ranging from hobby projects to enterprise-level production workloads. We also offer custom enterprise plans with volume-based discounts for large teams or database fleets. Refer to our [Pricing](https://neon.tech/pricing) page for fees and a detailed plan comparison.
+Neon's plans are designed to meet different user requirements, ranging from hobby projects to enterprise-level production workloads. We also offer custom enterprise plans with volume-based discounts for large teams or database fleets. Refer to our [Pricing](/pricing) page for fees and a detailed plan comparison.
 
 Neon offers four plans:
 
@@ -69,7 +69,7 @@ The Free Plan includes the following usage allowances:
 - Neon features such as branching, instant restore up to **24 hours** in the past, time travel connections, and more
 - [Community support](/docs/introduction/support)
 
-For a complete list of features, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
+For a complete list of features, refer to the **detailed plan comparison** on the [Neon pricing](/pricing) page.
 
 <Admonition type="tip" title="Free Plan Compute Allowances">
 On the Free Plan, you have 191.9 compute hours/month&#8212;enough to run a primary 0.25 CU compute 24/7. Up to 5 of those compute hours can be used for non-default branch computes. Autoscaling up to 2 vCPU with 8 GB RAM is available for extra performance during peak times, but please be aware that autoscaling can consume your compute hours more quickly, potentially impacting the ability to run a primary 0.25 CU compute 24/7. If you use Autoscaling or Read Replicas, you'll need to monitor your compute hours to ensure you don't run out before the end of the month.
@@ -114,7 +114,7 @@ Launch plan users have access to [extra compute and storage](/docs/introduction/
 - Neon features such as branching, instant restore up to **7 days** in the past, time travel connections, and more
 - [Standard support](/docs/introduction/support)
 
-For a complete list of features, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
+For a complete list of features, refer to the **detailed plan comparison** on the [Neon pricing](/pricing) page.
 
 ## Scale
 
@@ -155,7 +155,7 @@ Scale plan users have access to [extra compute, storage, and projects](/docs/int
 - Neon features such as branching, instant restore up to **14 days** in the past, time travel connections, and more
 - [Standard support](/docs/introduction/support)
 
-For a complete list of features, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
+For a complete list of features, refer to the **detailed plan comparison** on the [Neon pricing](/pricing) page.
 
 ## Business
 
@@ -195,10 +195,10 @@ Business plan users have access to [extra compute, storage, and projects](/docs/
 - Neon features such as branching, instant restore up to **30 days** in the past, time travel connections, and more
 - Enhanced security features including SOC 2 compliance, branch protection, and allowed IP configurations
 - [Priority support](/docs/introduction/support)
-- [Service SLA of 99.95% uptime](https://neon.tech/neon-business-sla)
+- [Service SLA of 99.95% uptime](/neon-business-sla)
 - HIPAA Compliance (separately billed add-on)
 
-For a complete list of features and comparisons with other plans, refer to the **detailed plan comparison** on the [Neon pricing](https://neon.tech/pricing) page.
+For a complete list of features and comparisons with other plans, refer to the **detailed plan comparison** on the [Neon pricing](/pricing) page.
 
 ## Enterprise
 

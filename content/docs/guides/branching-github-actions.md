@@ -156,7 +156,7 @@ inputs:
     description: 'The Neon branch id'
     deprecationMessage: 'The `branch_id` input is deprecated in favor of `branch`'
   api_key:
-    description: 'The Neon API key, read more at https://neon.tech/docs/manage/api-keys'
+    description: 'The Neon API key, read more at https://neon.com/docs/manage/api-keys'
     required: true
   branch:
     description: 'The Neon branch name or id'

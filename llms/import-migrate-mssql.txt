@@ -6,7 +6,7 @@ This guide describes how to migrate your database from a Microsoft SQL Server (M
 
 ## Source
 
-- [Migrate from Microsoft SQL Server to Neon Postgres HTML](https://neon.tech/docs/import/migrate-mssql): The original HTML version of this documentation
+- [Migrate from Microsoft SQL Server to Neon Postgres HTML](https://neon.com/docs/import/migrate-mssql): The original HTML version of this documentation
 
 The `pgloader` utility transforms data to a Postgres-compatible format as it reads from your MSSQL database. It uses the Postgres `COPY` protocol to stream the data into your Postgres database.
 

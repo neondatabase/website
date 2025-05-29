@@ -211,7 +211,7 @@ Support tickets opened by Business and Enterprise support plan customers are giv
 
 **Recommendation**
 
-Upgrade to a [Business plan](/docs/introduction/plans#business) to get both [Priority support](/docs/introduction/support#prioritized-support-tickets) and acccess to the [Business SLA](https://neon.tech/neon-business-sla).
+Upgrade to a [Business plan](/docs/introduction/plans#business) to get both [Priority support](/docs/introduction/support#prioritized-support-tickets) and acccess to the [Business SLA](/neon-business-sla).
 
 For more information, see the [Support documentation](/docs/introduction/support).
 

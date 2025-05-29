@@ -78,7 +78,7 @@ We recommend setting up one project per user, rather than, for example, using a 
 
 ## Managing many projects
 
-As you scale, following a project-per-user design means eventually managing thousands of Neon projects. This might sound overwhelming, but it's much simpler in practice than it seems—some Neon users [manage hundreds of thousands of projects](https://neon.tech/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases) with just one engineer. Here's why that's possible:
+As you scale, following a project-per-user design means eventually managing thousands of Neon projects. This might sound overwhelming, but it's much simpler in practice than it seems—some Neon users [manage hundreds of thousands of projects](/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases) with just one engineer. Here's why that's possible:
 
 - **You can manage everything with the Neon API**  
   The API allows you to automate every step of project management, including setting resource limits per customer and configuring resources.
@@ -99,7 +99,7 @@ As you scale, following a project-per-user design means eventually managing thou
 
 In Neon, [database branching](/docs/introduction/branching) is a powerful feature that enables you to create fast, isolated copies of your data for development and testing. You can use child branches as ephemeral environments that mirror your main testing database but operate independently, without adding to storage costs. This feature is a game-changer for dev/test workflows, as it reduces the complexity of managing multiple test databases while lowering non-prod costs significantly.
 
-To handle [dev/test](https://neon.tech/use-cases/dev-test) in a project-per-user design, consider creating a dedicated Neon project as your non-prod environment. This Neon project can serve as a substitute for the numerous non-prod instances you might maintain in RDS/Aurora.
+To handle [dev/test](/use-cases/dev-test) in a project-per-user design, consider creating a dedicated Neon project as your non-prod environment. This Neon project can serve as a substitute for the numerous non-prod instances you might maintain in RDS/Aurora.
 
 The methodology:
 
@@ -140,7 +140,7 @@ To effectively scale a multitenant architecture, leveraging automation tools is 
   By combining Neon branching into your CI/CD, you can simplify your dev/test workflows by creating and deleting ephemeral environments automatically as child branches.
 
 - **Automated backups to your own S3**  
-  If you must keep your own data copy, you can [schedule regular backups](https://neon.tech/blog/nightly-backups-for-multiple-neon-projects) using tools like `pg_dump` in conjunction with GitHub Actions.
+  If you must keep your own data copy, you can [schedule regular backups](/blogfor-multiple-neon-projects) using tools like `pg_dump` in conjunction with GitHub Actions.
 
 ## The Application Layer
 

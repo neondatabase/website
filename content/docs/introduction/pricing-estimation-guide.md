@@ -16,7 +16,7 @@ You can use this guide to estimate your monthly bill with Neon based on your sel
 
 ## Step 1: Select a plan and note the monthly fee
 
-First, select a plan that best fits your requirements. Look closely at monthly fees, plan allowances, and the features that come with each plan. You can refer to our [Plans](/docs/introduction/plans) page or the Neon [Pricing](https://neon.tech/pricing) page, which provides fees and a detailed plan comparison.
+First, select a plan that best fits your requirements. Look closely at monthly fees, plan allowances, and the features that come with each plan. You can refer to our [Plans](/docs/introduction/plans) page or the Neon [Pricing](/pricing) page, which provides fees and a detailed plan comparison.
 
 This table provides an overview of plan fees with allowances for storage, archive storage, compute, and projects:
 

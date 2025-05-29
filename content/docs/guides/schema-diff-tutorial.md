@@ -438,7 +438,7 @@ curl --request GET \
 | `<branch_id>`      | The ID of the target branch to compare.                                                   | Yes      | `br-mute-dew-a5930esi`    |
 | `<base_branch_id>` | The ID of the base branch for comparison — the parent branch in this case.                | Yes      | `br-bitter-bird-a56n6lh4` |
 | `<db_name>`        | The name of the database in the target branch.                                            | Yes      | `people`                  |
-| `Authorization`    | Bearer token for API access (your [Neon API key](https://neon.tech/docs/manage/api-keys)) | Yes      | `$NEON_API_KEY`           |
+| `Authorization`    | Bearer token for API access (your [Neon API key](/docs/manage/api-keys)) | Yes      | `$NEON_API_KEY`           |
 
 <Admonition type="note">
 The optional `jq -r '.diff'` command extracts the diff field from the JSON response and outputs it as plain text to make it easier to read. This command would not be necessary when using the endpoint programmatically.

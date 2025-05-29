@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Logical replication in Neon HTML](https://neon.tech/docs/guides/logical-replication-neon): The original HTML version of this documentation
+- [Logical replication in Neon HTML](https://neon.com/docs/guides/logical-replication-neon): The original HTML version of this documentation
 
 This topic outlines information about logical replication specific to Neon, including important notices.
 
@@ -16,9 +16,9 @@ To avoid potential issues, please review the following notices carefully before 
 
 These notices apply when replicating data from Neon:
 
-- **Scale to zero**: Neon does not scale to zero a compute that has an active connection from a logical replication subscriber. In other words, a Neon Postgres instance with an active subscriber will not scale to zero, which may result in increased compute usage. For more information, see [Logical replication and scale to zero](https://neon.tech/docs/guides/logical-replication-neon#logical-replication-and-scale-to-zero).
-- **Removal of inactive replication slots**: To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after approximately 40 hours if there are other _active_ replication slots**. If you plan to have more than one subscriber, please read [Unused replication slots](https://neon.tech/docs/guides/logical-replication-neon#unused-replication-slots) before you begin.
-- **Branch restore removes replication slots**: [Restoring a branch](https://neon.tech/docs/guides/branch-restore) will delete all replication slots on that branch. Replication slots are not automatically re-created during the restore process.
+- **Scale to zero**: Neon does not scale to zero a compute that has an active connection from a logical replication subscriber. In other words, a Neon Postgres instance with an active subscriber will not scale to zero, which may result in increased compute usage. For more information, see [Logical replication and scale to zero](https://neon.com/docs/guides/logical-replication-neon#logical-replication-and-scale-to-zero).
+- **Removal of inactive replication slots**: To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after approximately 40 hours if there are other _active_ replication slots**. If you plan to have more than one subscriber, please read [Unused replication slots](https://neon.com/docs/guides/logical-replication-neon#unused-replication-slots) before you begin.
+- **Branch restore removes replication slots**: [Restoring a branch](https://neon.com/docs/guides/branch-restore) will delete all replication slots on that branch. Replication slots are not automatically re-created during the restore process.
 
 ### Neon as a subscriber
 

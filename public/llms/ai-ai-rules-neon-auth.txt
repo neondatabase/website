@@ -4,7 +4,7 @@
 
 ## Source
 
-- [AI Rules: Neon Auth HTML](https://neon.tech/docs/ai/ai-rules-neon-auth): The original HTML version of this documentation
+- [AI Rules: Neon Auth HTML](https://neon.com/docs/ai/ai-rules-neon-auth): The original HTML version of this documentation
 - [GitHub Repository](https://github.com/neondatabase-labs/ai-rules): Source repository containing the rules
 - [Raw Content File](https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/neon-auth.mdc): Direct link to the rules content
 
@@ -18,4 +18,4 @@ The rules content is maintained in the GitHub repository and imported into the d
 
 ## Related Documentation
 
-For more information about Neon Auth, see the [Neon Auth guide](https://neon.tech/docs/guides/neon-auth).
+For more information about Neon Auth, see the [Neon Auth guide](https://neon.com/docs/guides/neon-auth).

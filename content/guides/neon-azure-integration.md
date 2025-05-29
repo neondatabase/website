@@ -23,7 +23,7 @@ The Azure Native integration delivers significant advantages that enhance both d
 - **Unified Billing**: Track and manage Neon expenses alongside other Azure services in one consolidated bill
 - **Cost Optimization**: Optimize your cloud spend by applying Neon usage toward your [Microsoft Azure Consumption Commitment](https://learn.microsoft.com/en-us/marketplace/azure-consumption-commitment-benefit).
 
-The Neon integration is available through the [Azure Marketplace](https://neon.tech/docs/introduction/billing-azure-marketplace).
+The Neon integration is available through the [Azure Marketplace](/docs/introduction/billing-azure-marketplace).
 
 ## Creating your Neon organization
 
@@ -43,7 +43,7 @@ While starting with the Free Plan is an excellent way to explore Neon's capabili
 
 ### Free plan: Perfect for getting started
 
-The Free Plan provides an excellent entry point for developers and small projects. With 10 projects, 0.5 GB-month storage, and 190 compute hours, you can build and test applications while experiencing Neon's core features like [database branching](/docs/introduction/branching), [read replicas](/docs/introduction/read-replicas) and [Postgres extensions](https://neon.tech/docs/extensions/pg-extensions)
+The Free Plan provides an excellent entry point for developers and small projects. With 10 projects, 0.5 GB-month storage, and 190 compute hours, you can build and test applications while experiencing Neon's core features like [database branching](/docs/introduction/branching), [read replicas](/docs/introduction/read-replicas) and [Postgres extensions](/docs/extensions/pg-extensions)
 
 ### Scale plan: Growing with your application
 
@@ -73,7 +73,7 @@ For organizations requiring enterprise-grade features, the Business Plan provide
 - Private Link support for secure connectivity
 
 <Admonition type="note" title="Note">
-For custom enterprise requirements beyond the Business Plan, [you can reach out to Neon's sales team](https://neon.tech/contact-sales).
+For custom enterprise requirements beyond the Business Plan, [you can reach out to Neon's sales team](/contact-sales).
 </Admonition>
 
 ## Configuring your resource
@@ -132,12 +132,12 @@ Here are some key features you'll find:
 
 To connect your application to the Neon database, copy the connection URL from the project dashboard and use it in your application stack. This URL contains the necessary credentials and connection details to establish a connection to your Neon database.
 
-For more about connecting your application to Neon, see [Connect to Neon](https://neon.tech/docs/connect/connect-intro). Neon also provides the following resources to help get you up and running:
+For more about connecting your application to Neon, see [Connect to Neon](/docs/connect/connect-intro). Neon also provides the following resources to help get you up and running:
 
-- [Neon framework guides](https://neon.tech/docs/get-started-with-neon/frameworks)
-- [Neon language guides](https://neon.tech/docs/get-started-with-neon/languages)
+- [Neon framework guides](/docs/get-started-with-neon/frameworks)
+- [Neon language guides](/docs/get-started-with-neon/languages)
 - [Connection examples repo](https://github.com/neondatabase/examples)
-- [Application templates repo](https://neon.tech/templates)
+- [Application templates repo](/templates)
 
 ## Platform-Specific Management: Azure Portal vs. Neon Console
 

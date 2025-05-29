@@ -6,7 +6,7 @@ updatedOn: '2025-03-06T17:12:06.384Z'
 
 You can integrate your application or service with Neon using OAuth. The Neon OAuth integration enables your application to interact with Neon user accounts, carrying out permitted actions on their behalf. Our integration does not require direct access to user login credentials and is conducted with their approval, ensuring data privacy and security.
 
-To set up the integration and create a Neon OAuth application, you can apply on our [Partners page](https://neon.tech/partners). You will need to provide the following information:
+To set up the integration and create a Neon OAuth application, you can apply on our [Partners page](/partners). You will need to provide the following information:
 
 - Your name and email address (this should be an individual email address, not a shared inbox address)
 - Your company name

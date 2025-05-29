@@ -224,7 +224,7 @@ The Neon GitHub integration configures a `NEON_API_KEY` secret and a `PROJECT_ID
 
 <DetailIconCards>
 
-<a href="https://neon.tech/guides/neon-github-actions-authomated-branching" description="Learn how to automate database branching for your application using Neon and GitHub Actions" icon="github">Automated Database Branching with GitHub Actions</a>
+<a href="/guides/neon-github-actions-authomated-branching" description="Learn how to automate database branching for your application using Neon and GitHub Actions" icon="github">Automated Database Branching with GitHub Actions</a>
 
 <a href="https://github.com/neondatabase/preview-branches-with-cloudflare" description="Demonstrates using GitHub Actions workflows to create a Neon branch for every Cloudflare Pages preview deployment" icon="github">Preview branches with Cloudflare Pages</a>
 
@@ -328,8 +328,8 @@ To remove the GitHub integration:
 
 - [Creating GitHub Actions](https://docs.github.com/en/actions/creating-actions)
 - [Quickstart for GitHub Actions](https://docs.github.com/en/actions/quickstart)
-- [Database Branching Workflows](https://neon.tech/flow)
-- [Database branching workflow guide for developers](https://neon.tech/blog/database-branching-workflows-a-guide-for-developers)
+- [Database Branching Workflows](/flow)
+- [Database branching workflow guide for developers](/blog/database-branching-workflows-a-guide-for-developers)
 
 ## Feedback and future improvements
 

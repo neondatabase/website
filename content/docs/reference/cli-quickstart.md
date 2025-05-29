@@ -95,7 +95,7 @@ This will open a browser window where you can authorize the CLI to access your N
 
 **API Key Authentication**
 
-Alternatively, you can use a personal Neon API key. You can create one in the Neon Console. See [Create a personal API key](https://neon.tech/docs/manage/api-keys#create-a-personal-api-key).
+Alternatively, you can use a personal Neon API key. You can create one in the Neon Console. See [Create a personal API key](/docs/manage/api-keys#create-a-personal-api-key).
 
 ```bash
 neon projects list --api-key <your-api-key>

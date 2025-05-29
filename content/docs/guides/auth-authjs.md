@@ -438,7 +438,7 @@ You can find the source code for the application described in this guide on GitH
 
 For more information about the tools and libraries used in this guide, refer to the following documentation:
 
-- [Neon Documentation](https://neon.tech/docs)
+- [Neon Documentation](/docs)
 - [Auth.js Documentation](https://authjs.dev/)
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Resend Documentation](https://resend.com/docs)

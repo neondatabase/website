@@ -20,7 +20,7 @@ Neon provides flexible options for integrating Postgres into your platform. We s
 
 - **Neon API**: Use our API to interact with the Neon platform directly. It enables `POST`, `GET`, `PATCH`, and `DELETE` operations on Neon objects such as projects, branches, databases, roles, and more. To explore available endpoints and try them from your browser, visit our [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
-- **@neondatabase/toolkit for AI Agents**: If you're building an AI agent, the [@neondatabase/toolkit](https://github.com/neondatabase/toolkit) ([@neon/toolkit](https://jsr.io/@neon/toolkit) on JSR) lets you spin up a Postgres database in seconds and run SQL queries. It includes both the [Neon API Client](https://www.npmjs.com/package/@neondatabase/api-client) and the [Neon serverless driver](https://github.com/neondatabase/serverless), making it an excellent choice for AI agents that need to set up an SQL database quickly. [Learn more](https://neon.tech/blog/why-neondatabase-toolkit).
+- **@neondatabase/toolkit for AI Agents**: If you're building an AI agent, the [@neondatabase/toolkit](https://github.com/neondatabase/toolkit) ([@neon/toolkit](https://jsr.io/@neon/toolkit) on JSR) lets you spin up a Postgres database in seconds and run SQL queries. It includes both the [Neon API Client](https://www.npmjs.com/package/@neondatabase/api-client) and the [Neon serverless driver](https://github.com/neondatabase/serverless), making it an excellent choice for AI agents that need to set up an SQL database quickly. [Learn more](/blog/why-neondatabase-toolkit).
 
 ## 2. Configuring limits
 
@@ -75,8 +75,8 @@ To learn how, see [Querying consumption metrics with the API](/docs/guides/partn
 - **Staying up to date with changes to the Neon platform**: We make every effort to proactively and directly inform our partners about updates and changes that could impact their business. In addition, Partners can monitor the following sources for information about the latest updates from Neon:
   - The [Neon Roadmap](/docs/introduction/roadmap) to see recent deliveries and upcoming features.
   - The [Neon Changelog](/docs/changelog) for the latest product updates.
-  - The [Neon Newsletter](https://neon.tech/blog#subscribe-form), sent weekly.
-  - The [Neon Blog](https://neon.tech/blog).
+  - The [Neon Newsletter](/blog sent weekly.
+  - The [Neon Blog](/blog
   - The [Neon Status Page](https://neonstatus.com/) for platform status across regions.
   - [RSS Feeds](/docs/reference/feeds) for all of the above, which can be added to your Slack channels.
 

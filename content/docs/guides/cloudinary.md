@@ -51,7 +51,7 @@ We need a table in Neon to store metadata about the assets uploaded to Cloudinar
 2.  Run the SQL statement. You can customize this table by adding other useful columns returned by Cloudinary (e.g., `version`, `format`, `width`, `height`, `tags`).
 
 <Admonition type="note" title="Securing metadata with RLS">
-If you use [Neon's Row Level Security (RLS)](https://neon.tech/blog/introducing-neon-authorize), apply appropriate policies to the `cloudinary_files` table to control access to the metadata stored in Neon based on your rules.
+If you use [Neon's Row Level Security (RLS)](/blog/introducing-neon-authorize), apply appropriate policies to the `cloudinary_files` table to control access to the metadata stored in Neon based on your rules.
 
 Note that these policies apply _only_ to the metadata in Neon. Access control for the assets themselves is managed within Cloudinary (e.g., via asset types, delivery types). By default, uploaded assets are typically accessible via their CDN URL.
 </Admonition>

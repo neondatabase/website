@@ -44,7 +44,7 @@ We need a table in Neon to store metadata about the files uploaded to ImageKit.i
 2.  Run the SQL statement. You can customize this table by adding or removing columns (like `width`, `height`, `tags`, etc.) based on the information you need from ImageKit and your application's requirements.
 
 <Admonition type="note" title="Securing metadata with RLS">
-If you use [Neon's Row Level Security (RLS)](https://neon.tech/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `imagekit_files` table. This controls who can view or modify the object references stored in Neon based on your RLS rules.
+If you use [Neon's Row Level Security (RLS)](/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `imagekit_files` table. This controls who can view or modify the object references stored in Neon based on your RLS rules.
 
 Note that these policies apply _only_ to the metadata in Neon. Access control for the actual files on ImageKit is managed via ImageKit features (like private files or signed URLs, if needed). The default setup makes files publicly accessible via their URL.
 </Admonition>

@@ -6,7 +6,7 @@ Postgres decimal data types provide exact numerical representation for applicati
 
 ## Source
 
-- [Postgres Decimal data types HTML](https://neon.tech/docs/data-types/decimal): The original HTML version of this documentation
+- [Postgres Decimal data types HTML](https://neon.com/docs/data-types/decimal): The original HTML version of this documentation
 
 ## Storage and syntax
 

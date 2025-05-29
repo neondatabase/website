@@ -61,7 +61,7 @@ Ensure the integrity and security of your connections to Neon.
 
 <a href="/docs/connect/connect-securely" description="Learn how to connect to Neon securely using SSL/TLS encrypted connections" icon="privacy">Connect to Neon securely</a>
 
-<a href="https://neon.tech/blog/avoid-mitm-attacks-with-psql-postgres-16" description="Learn how the psql client in Postgres 16 makes it simple to connect securely" icon="lock-landscape">Avoid MME attacks in Postgres 16</a>
+<a href="/blog/avoid-mitm-attacks-with-psql-postgres-16" description="Learn how the psql client in Postgres 16 makes it simple to connect securely" icon="lock-landscape">Avoid MME attacks in Postgres 16</a>
 
 </DetailIconCards>
 
