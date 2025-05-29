@@ -190,7 +190,7 @@ const defaultConfig = {
         destination: '/docs/changelog/:path*',
         permanent: true,
       },
-      // Proxy has an error message, that suggests to read `https://neon.tech/sni` for more details.
+      // Proxy has an error message, that suggests to read `https://neon.com/sni` for more details.
       {
         source: '/sni',
         destination: '/docs/connect/connection-errors',

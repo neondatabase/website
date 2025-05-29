@@ -71,10 +71,10 @@ npm run start
 ### Checks broken links
 
 ```bash
-npm run check:broken-links -- https://neon.tech
+npm run check:broken-links -- https://neon.com
 ```
 
-_The command may take time, be patient. You can also specify which part of the website you want to check by passing a specific URL, for example `https://neon.tech/docs` for checking the Docs_
+_The command may take time, be patient. You can also specify which part of the website you want to check by passing a specific URL, for example `https://neon.com/docs` for checking the Docs_
 
 > N.B. The automatic check is done every Monday at midnight by GitHub CI. You can find the reports on the "Actions" tab
 
