@@ -117,11 +117,11 @@ Serverless functions may be executing independently in short-lived environments,
 
 Client-database proximity plays a major role in real-world database latency. Here are the different scenarios laid out from lowest to highest latency.
 
-| Architecture                                                                                                                   | Roundtrip | Connect         | On Neon                                                                                                                                                         |
-| ------------------------------------------------------------------------------------------------------------------------------ | --------- | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Same Machine**<br/>When you put your database and your app on the exact same machine, latency is measured in microseconds.   | >1ms      | ~1ms            | Not applicable                                                                                                                                                  |
+| Architecture                                                                                                                   | Roundtrip | Connect         | On Neon                                                                                                                       |
+| ------------------------------------------------------------------------------------------------------------------------------ | --------- | --------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| **Same Machine**<br/>When you put your database and your app on the exact same machine, latency is measured in microseconds.   | >1ms      | ~1ms            | Not applicable                                                                                                                |
 | **Same Region**<br/>Place the client (App) and Database in the same datacenter and region for lowest-possible latency.         | ~1ms      | ~3ms            | Same [Region](/docs/introduction/regions) for Client and DB, see [Private Link](/docs/guides/neon-private-networking) for VPC |
-| **Different Region**<br/>When client and database are in different regions, your latency varies based on geographic proximity. | Varies    | 4x-8x Roundtrip | Different/varying [Region](/docs/introduction/regions) for Client and DB                                                                       |
+| **Different Region**<br/>When client and database are in different regions, your latency varies based on geographic proximity. | Varies    | 4x-8x Roundtrip | Different/varying [Region](/docs/introduction/regions) for Client and DB                                                      |
 
 ### Minimizing database time spent answering the query
 

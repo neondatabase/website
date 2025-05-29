@@ -240,14 +240,14 @@ Without the `org_id` parameter, the project transfers to the user's personal acc
 
 ## Troubleshooting
 
-| Issue                                 | Solution                                                                                                         |
-| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| Claim URL expired                     | Create a new transfer request and generate a new claim URL                                                       |
-| User receives error when claiming     | Verify the project exists and the transfer request hasn't been used                                              |
-| Project doesn't appear after claiming | Refresh the Neon Console or log out and back in                                                                  |
+| Issue                                 | Solution                                                                                        |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Claim URL expired                     | Create a new transfer request and generate a new claim URL                                      |
+| User receives error when claiming     | Verify the project exists and the transfer request hasn't been used                             |
+| Project doesn't appear after claiming | Refresh the Neon Console or log out and back in                                                 |
 | "Transfer requests not enabled" error | [Contact our partnership team](/partners#partners-apply) to enable this private preview feature |
-| Organization transfer fails           | Verify user membership in the target organization and correct `org_id` format                                    |
-| Already claimed error                 | The transfer request has been used; create a new one if needed                                                   |
+| Organization transfer fails           | Verify user membership in the target organization and correct `org_id` format                   |
+| Already claimed error                 | The transfer request has been used; create a new one if needed                                  |
 
 ## Further resources
 
