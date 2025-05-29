@@ -130,7 +130,7 @@ The following example shows how a simple SQL command—`CREATE SCHEMA IF NOT EXI
 | **Field position** | **Example value**                                               | **Description** |
 |--------------------|------------------------------------------------------------------|-----------------|
 | 1                  | 2025-05-05 20:23:01.277                                          | Timestamp when the log was received by the logging system. |
-| 2                  | `<134>`                                                           | Syslog priority code (facility + severity). |
+| 2                  | `<134>`                                                          | Syslog priority code (facility + severity). |
 | 3                  | May 6 00:23:01                                                   | Syslog timestamp (when the message was generated on the source host). |
 | 4                  | vm-compute-shy-waterfall-w2cn1o3t-b6vmn                          | Hostname or compute instance where the event occurred. |
 | 5                  | young-recipe-29421150/ep-calm-da                                 | Project and endpoint name in the format `<project>/<endpoint>`. |
@@ -153,7 +153,7 @@ The following example shows how a simple SQL command—`CREATE SCHEMA IF NOT EXI
 | 22                 | CREATE SCHEMA                                                    | Statement tag/type. |
 | 23–26              | *(empty)*                                                        | Reserved/unused fields. |
 | 27                 | CREATE SCHEMA IF NOT EXISTS healthcare                           | Full SQL text of the statement. |
-| 28                 | `<not logged>`                                                    | Parameter values (redacted or disabled by settings like `pgaudit.log_parameter`). |
+| 28                 | `<not logged>`                                                   | Parameter values (redacted or disabled by settings like `pgaudit.log_parameter`). |
 | 29–35              | *(empty)*                                                        | Reserved/unused fields. |
 | 36                 | neon-internal-sql-editor                                         | Application name or source of the query (e.g., SQL Editor in the Neon Console). |
 
