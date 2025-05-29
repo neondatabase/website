@@ -137,16 +137,6 @@ module.exports = {
         contact: '0px 4px 10px 0px rgba(0, 0, 0, .5), 0px 4px 30px 0px rgba(0, 0, 0, .5)',
       },
       backgroundImage: ({ theme }) => ({
-        'header-menu-banner':
-          'radial-gradient(69.47% 49.51% at 29.09% 0%, #131D3E 0%, rgba(25, 39, 82, 0.00) 100%),' +
-          'radial-gradient(14.22% 14.24% at 82.11% 0%, #A3F0E9 0%, rgba(163, 240, 233, 0.00) 100%),' +
-          'radial-gradient(46.71% 50% at 80.6% 0%, rgba(86, 198, 189, 0.60) 0%, rgba(33, 80, 91, 0.00) 100%),' +
-          'linear-gradient(0deg, #18191B, #18191B)',
-        'header-menu-banner-mobile':
-          'radial-gradient(16.35% 46.44% at 99.06% 3.75%, rgba(86, 198, 189, 0.60) 13.19%, rgba(33, 80, 91, 0.00) 100%),' +
-          'radial-gradient(30.11% 65.43% at 71.03% 0%, #131D3E 0%, rgba(25, 39, 82, 0.00) 100%),' +
-          'radial-gradient(43.11% 44.64% at 99.53% 4.38%, #A3F0E9 0%, rgba(163, 240, 233, 0.00) 100%),' +
-          'linear-gradient(0deg, #18191B, #18191B)',
         'header-docs-button-border':
           'radial-gradient(78.71% 83.93% at 50% 3.57%, rgba(255, 255, 255, 0.78), transparent),' +
           'linear-gradient(0deg, #BCBEC2, #BCBEC2)',
