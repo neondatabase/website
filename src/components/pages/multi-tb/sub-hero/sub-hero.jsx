@@ -6,8 +6,8 @@ import autoScaling from 'icons/multi-tb/sub-hero/tag-cloud/autoscaling.svg';
 import highAvailability from 'icons/multi-tb/sub-hero/tag-cloud/high-availability.svg';
 import instantRecovery from 'icons/multi-tb/sub-hero/tag-cloud/instant-recovery.svg';
 
+import TagCloud from '../../use-case/tag-cloud';
 import RelatedArticle from '../related-article';
-import TagCloud from '../tag-cloud';
 
 import clockCoins from './images/clock-coins.png';
 
@@ -50,7 +50,8 @@ const Hero = () => (
         <br className="hidden md:block" />
         <Link
           className="text-green-45 underline decoration-primary-1 decoration-1 underline-offset-[8px] transition-colors duration-200 hover:text-white hover:decoration-gray-new-60"
-          to="/"
+          to="https://www.atlassian.com/incident-management/kpis/cost-of-downtime#:~:text=In%20March%202015%2C%20a%2012,also%20the%20financial%20grim%20reaper"
+          target="_blank"
         >
           from $427 to $9,000
         </Link>

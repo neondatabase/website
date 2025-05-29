@@ -50,7 +50,8 @@ const PeakDemand = () => (
           </ul>
           <Link
             to={LINKS.docsBranching}
-            className="text-[15px] leading-none tracking-extra-tight text-white"
+            className="text-[15px] leading-none tracking-extra-tight"
+            theme="white"
             withArrow
           >
             Learn more

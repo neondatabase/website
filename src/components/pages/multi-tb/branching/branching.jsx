@@ -15,7 +15,8 @@ const Branching = () => (
       </p>
       <Link
         to={LINKS.docsBranching}
-        className="text-[15px] leading-none tracking-tight text-white"
+        className="text-[15px] leading-none tracking-tight"
+        theme="white"
         withArrow
       >
         Learn more
