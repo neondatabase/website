@@ -115,7 +115,7 @@ For more details, see the [pgAudit documentation](https://github.com/pgaudit/pga
 
 The following example shows how a simple SQL command—`CREATE SCHEMA IF NOT EXISTS healthcare`—is captured in Neon’s audit logs. The table provides a description of the log record's parts.
 
-**Query:** 
+**Query:**
 
 `CREATE SCHEMA IF NOT EXISTS healthcare;`
 
