@@ -6,8 +6,6 @@ isDraft: false
 updatedOn: '2025-05-12T10:59:00.325Z'
 ---
 
-<PublicPreview/>
-
 <InfoBlock>
 
 <DocsList title="What you will find on this page:">

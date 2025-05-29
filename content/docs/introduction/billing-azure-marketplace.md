@@ -6,8 +6,6 @@ subtitle: Neon as an Azure Native Service offers unified billing through Azure
 updatedOn: '2025-04-20T13:56:04.996Z'
 ---
 
-<PublicPreview/>
-
 <InfoBlock>
 
 <DocsList title="What you will learn:">

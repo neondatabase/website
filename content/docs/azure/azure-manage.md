@@ -6,8 +6,6 @@ isDraft: false
 updatedOn: '2025-05-06T23:15:17.270Z'
 ---
 
-<PublicPreview/>
-
 <InfoBlock>
 <DocsList title="What you will learn:">
 <p>How to create additional Neon projects on Azure</p>
