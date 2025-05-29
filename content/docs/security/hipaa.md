@@ -109,7 +109,53 @@ For more details, see the [pgAudit documentation](https://github.com/pgaudit/pga
 
 - Logs are written using the standard [PostgreSQL logging facility](https://www.postgresql.org/docs/current/runtime-config-logging.html).
 - Logs are sent to a dedicated Neon audit collector endpoint and securely stored.
-- Each log entry includes metadata such as the timestamp of the activity, the Neon compute ID (`endpoint_id`), Neon project ID (`project_id`), the Postgres role, the database accessed, and the method of access (e.g.,`neon-internal-sql-editor`).
+- Each log entry includes metadata such as the timestamp of the activity, the Neon compute ID (`endpoint_id`), Neon project ID (`project_id`), the Postgres role, the database accessed, and the method of access (e.g.,`neon-internal-sql-editor`), etc. See the following log record example and field descriptions:
+
+### SQL audit log record example
+
+The following example shows how a simple SQL command—`CREATE SCHEMA IF NOT EXISTS healthcare`—is captured in Neon’s audit logs. The table provides a description of the log record's parts.
+
+**Query:** 
+
+`CREATE SCHEMA IF NOT EXISTS healthcare;`
+
+**Audit log record:**
+
+```ini shouldWrap
+2025-05-05 20:23:01.277	 <134>May 6 00:23:01 vm-compute-shy-waterfall-w2cn1o3t-b6vmn young-recipe-29421150/ep-calm-da 2025-05-06 00:23:01.277 GMT,neondb_owner,neondb,1405,10.6.42.155:13702,68195665.57d,1,CREATE SCHEMA, 2025-05-06 00:23:01 GMT,16/2,767,00000,SESSION,1,1,DDL,CREATE SCHEMA,,,CREATE SCHEMA IF NOT EXISTS healthcare,<not logged>,,,,,,,,,neon-internal-sql-editor
+```
+
+**Field descriptions:**
+
+| **Field position** | **Example value**                                               | **Description** |
+|--------------------|------------------------------------------------------------------|-----------------|
+| 1                  | 2025-05-05 20:23:01.277                                          | Timestamp when the log was received by the logging system. |
+| 2                  | `<134>`                                                           | Syslog priority code (facility + severity). |
+| 3                  | May 6 00:23:01                                                   | Syslog timestamp (when the message was generated on the source host). |
+| 4                  | vm-compute-shy-waterfall-w2cn1o3t-b6vmn                          | Hostname or compute instance where the event occurred. |
+| 5                  | young-recipe-29421150/ep-calm-da                                 | Project and endpoint name in the format `<project>/<endpoint>`. |
+| 6                  | 2025-05-06 00:23:01.277 GMT                                      | Timestamp of the database event in UTC. |
+| 7                  | neondb_owner                                                     | Database role (user) that executed the statement. |
+| 8                  | neondb                                                           | Database name. |
+| 9                  | 1405                                                             | Process ID (PID) of the PostgreSQL backend. |
+| 10                 | 10.6.42.155:13702                                                | Client IP address and port that issued the query. |
+| 11                 | 68195665.57d                                                     | PostgreSQL virtual transaction ID. |
+| 12                 | 1                                                                | Backend process number. |
+| 13                 | CREATE SCHEMA                                                    | Command tag. |
+| 14                 | 2025-05-06 00:23:01 GMT                                          | Statement start timestamp. |
+| 15                 | 16/2                                                             | Log sequence number (LSN). |
+| 16                 | 767                                                              | Statement duration in milliseconds. |
+| 17                 | 00000                                                            | SQLSTATE error code (00000 = success). |
+| 18                 | SESSION                                                          | Log message level. |
+| 19                 | 1                                                                | Session ID. |
+| 20                 | 1                                                                | Subsession or transaction ID. |
+| 21                 | DDL                                                              | Statement type: Data Definition Language. |
+| 22                 | CREATE SCHEMA                                                    | Statement tag/type. |
+| 23–26              | *(empty)*                                                        | Reserved/unused fields. |
+| 27                 | CREATE SCHEMA IF NOT EXISTS healthcare                           | Full SQL text of the statement. |
+| 28                 | `<not logged>`                                                    | Parameter values (redacted or disabled by settings like `pgaudit.log_parameter`). |
+| 29–35              | *(empty)*                                                        | Reserved/unused fields. |
+| 36                 | neon-internal-sql-editor                                         | Application name or source of the query (e.g., SQL Editor in the Neon Console). |
 
 ### Extension configuration
 
