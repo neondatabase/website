@@ -2,7 +2,7 @@
 title: Neon use cases
 subtitle: Explore popular Neon use cases
 enableTableOfContents: true
-updatedOn: '2025-02-11T18:04:21.936Z'
+updatedOn: '2025-05-29T18:14:43.689Z'
 ---
 
 <DetailIconCards>
