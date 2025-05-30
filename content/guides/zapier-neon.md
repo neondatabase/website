@@ -24,32 +24,33 @@ Before you begin, ensure you have the following:
 
 * **Neon Account and Project:** A Neon account and a project with a running Postgres database. You can create a free Neon account and project at [pg.new](https://pg.new).
 * **Database tables (for examples):** For the examples in this guide, we'll be using the following tables to demonstrate the functionality. Create these tables in your Neon database if you intend to follow along:
+
   - A table named `users` to demonstrate triggering actions from new rows.
   - A table named `form_submissions` to demonstrate adding data from an external source.
 
-You can create these tables using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any Postgres client such as [`psql`](/docs/connect/query-with-psql-editor)
+    You can create these tables using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any Postgres client such as [`psql`](/docs/connect/query-with-psql-editor)
 
-**Example SQL for `users` table:**
+    **Example SQL for `users` table:**
 
-    ```sql
-    CREATE TABLE users (
-        id SERIAL PRIMARY KEY,
-        name VARCHAR(255),
-        email VARCHAR(255) UNIQUE,
-        signed_up_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-    );
-    ```
+        ```sql
+        CREATE TABLE users (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(255),
+            email VARCHAR(255) UNIQUE,
+            signed_up_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+        );
+        ```
 
-**Example SQL for `form_submissions` table:**
+    **Example SQL for `form_submissions` table:**
 
-    ```sql
-    CREATE TABLE form_submissions (
-        id SERIAL PRIMARY KEY,
-        submitter_email VARCHAR(255),
-        feedback_text TEXT,
-        submitted_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-    );
-    ```
+        ```sql
+        CREATE TABLE form_submissions (
+            id SERIAL PRIMARY KEY,
+            submitter_email VARCHAR(255),
+            feedback_text TEXT,
+            submitted_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+        );
+        ```
 
 <Admonition type="important">
 For Zapier's "New Row" trigger to reliably detect new entries in Neon, your table should have an auto-incrementing `PRIMARY KEY` (like `SERIAL` or `BIGSERIAL`) or a column that strictly orders new rows (like a `created_at` timestamp). Zapier uses this "Ordering Column" to check for new entries.
@@ -162,7 +163,7 @@ Zapier uses a polling system for its "New Row" trigger, checking Postgres for ne
 
 Let's create a Zap that adds a new row to our `form_submissions` table in Neon whenever a Google Form is submitted.
 
-### Step 1: Setting up the Trigger (New Google Form Response)
+### Step 1: Setting up the Trigger (New Google Form response)
 
 1.  In Zapier, click "**Create Zap**".
 2.  Search for and select "**Google Forms**" as the trigger app.
@@ -173,7 +174,7 @@ Let's create a Zap that adds a new row to our `form_submissions` table in Neon w
 7.  Make a test submission in your Google Form to ensure there is data for Zapier to work with. You can do this by filling out the form and submitting it.
 8.  **Test trigger:** Click "**Test trigger**". Zapier will attempt to find a recent form submission. Click "**Continue with selected record**".
 
-### Step 2: Setting up the Action (Create Row in Neon)
+### Step 2: Setting up the Action (Create row in Neon)
 
 1.  **Action Setup:**
     - Search for and select "**PostgreSQL**" as the action app.
