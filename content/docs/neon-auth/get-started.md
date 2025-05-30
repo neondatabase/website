@@ -4,7 +4,7 @@ subtitle: Add authentication to your project. Access user data directly in your 
   database.
 enableTableOfContents: true
 redirectFrom:
-  - /docs/guides/neon-identity
+  - /docs/guides/neon-auth
 tag: beta
 updatedOn: '2025-05-23T13:20:56.227Z'
 ---

@@ -1,5 +1,5 @@
 ---
-title: AccountSettings Component
+title: "<AccountSettings />"
 subtitle: Neon Auth account settings component
 enableTableOfContents: true
 tag: beta

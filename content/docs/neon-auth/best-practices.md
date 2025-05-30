@@ -3,6 +3,8 @@ title: Neon Auth best practices & FAQ
 enableTableOfContents: true
 tag: beta
 updatedOn: '2025-05-16T19:06:06.839Z'
+redirectFrom:
+  - /docs/guides/neon-auth-best-practices
 ---
 
 <FeatureBetaProps feature_name="Neon Auth" />

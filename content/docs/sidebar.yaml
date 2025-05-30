@@ -896,116 +896,145 @@
     - title: Neon Auth
       icon: auth
       tag: beta
-      slug: guides/neon-auth
+      slug: neon-auth/overview
       items:
-        - title: Components
-          slug: neon-auth/components/components
+        - section: Overview
           items:
-            - section: Overview
-              items:
-                - title: All components
-                  slug: neon-auth/components/components
-            - section: Components
-              items:
-                - title: UserButton
-                  slug: neon-auth/components/user-button
-                - title: SelectedTeamSwitcher
-                  slug: neon-auth/components/selected-team-switcher
-                - title: AccountSettings
-                  slug: neon-auth/components/account-settings
-                - title: SignIn
-                  slug: neon-auth/components/sign-in
-                - title: SignUp
-                  slug: neon-auth/components/sign-up
-                - title: CredentialSignIn
-                  slug: neon-auth/components/credential-sign-in
-                - title: CredentialSignUp
-                  slug: neon-auth/components/credential-sign-up
-                - title: OAuthButton
-                  slug: neon-auth/components/oauth-button
-                - title: OAuthButtonGroup
-                  slug: neon-auth/components/oauth-button-group
-            - section: Utilities
-              items:
-                - title: StackHandler
-                  slug: neon-auth/components/stack-handler
-                - title: StackProvider
-                  slug: neon-auth/components/stack-provider
-                - title: StackTheme
-                  slug: neon-auth/components/stack-theme
-        - title: SDK
-          slug: neon-auth/sdk/nextjs/overview
+            - title: Overview
+              slug: neon-auth/overview
+        - section: Get Started
           items:
-            - section: Overview
-              items:
-                - title: SDK Overview
-                  slug: neon-auth/sdk/nextjs/overview
-            - section: Objects
-              items:
-                - title: StackApp
-                  slug: neon-auth/sdk/nextjs/objects/stack-app
-            - section: Types
-              items:
-                - title: User
-                  slug: neon-auth/sdk/nextjs/types/user
-                - title: Team
-                  slug: neon-auth/sdk/nextjs/types/team
-                - title: Project
-                  slug: neon-auth/sdk/nextjs/types/project
-            - section: Hooks
-              items:
-                - title: useStackApp
-                  slug: neon-auth/sdk/nextjs/hooks/use-stack-app
-                - title: useUser
-                  slug: neon-auth/sdk/nextjs/hooks/use-user
-        - section: Get started
-          items:
-            - title: Set up
-              slug: guides/neon-auth
-            - title: Components
-              slug: neon-auth/get-started/components-get-started
-            - title: Users
-              slug: neon-auth/get-started/accessing-user-data
-        - section: Guides
-          items:
-            - title: Tutorial
-              slug: guides/neon-auth-demo
-            - title: Creating users
-              slug: guides/neon-auth-create-users
-            - title: Claiming a project
-              slug: guides/neon-auth-claim-project
-        - section: How Neon Auth works
+            - title: Quickstart
+              slug: neon-auth/get-started
+        - section: How Neon Auth Works
           items:
             - title: How Neon Auth works
-              slug: guides/neon-auth-how-it-works
-            - title: Guidance
-              slug: guides/neon-auth-tutorial
+              slug: neon-auth/how-it-works
+            - title: Guidance (deep dive)
+              slug: neon-auth/tutorial
+        - section: Practical Usage
+          items:
+            - title: Demo
+              slug: neon-auth/demo
             - title: Best practices & FAQ
-              slug: guides/neon-auth-best-practices
-        - section: Concepts
+              slug: neon-auth/best-practices
+        - section: SDK and API Reference
           items:
-            - title: The StackApp object
-              slug: neon-auth/concepts/stack-app
-            - title: Custom User Data
-              slug: neon-auth/concepts/custom-user-data
-            - title: User Onboarding
-              slug: neon-auth/concepts/user-onboarding
-            - title: Connect OAuth accounts
-              slug: neon-auth/concepts/oauth
-            - title: Teams
-              slug: neon-auth/concepts/orgs-and-teams
-            - title: Selecting a team
-              slug: neon-auth/concepts/team-selection
-            - title: Permissions & RBAC
-              slug: neon-auth/concepts/permissions
-            - title: Backend Integration
-              slug: neon-auth/concepts/backend-integration
-        - section: Reference
-          items:
-            - title: Permissions & roles
-              slug: guides/neon-auth-permissions-roles
+            - title: Next.js SDK
+              slug: neon-auth/sdk/nextjs/overview
+              items:
+                - section: Overview
+                  items:
+                    - title: SDK Overview
+                      slug: neon-auth/sdk/nextjs/overview
+                - section: Objects
+                  items:
+                    - title: StackClientApp
+                      slug: neon-auth/sdk/nextjs/objects/stack-app
+                    - title: StackServerApp
+                      slug: neon-auth/sdk/nextjs/objects/stack-server-app
+                - section: Types
+                  items:
+                    - title: ContactChannel
+                      slug: neon-auth/sdk/nextjs/types/contact-channel
+                    - title: API Key
+                      slug: neon-auth/sdk/nextjs/types/api-key
+                    - title: Project
+                      slug: neon-auth/sdk/nextjs/types/project
+                    - title: Team
+                      slug: neon-auth/sdk/nextjs/types/team
+                    - title: TeamPermission
+                      slug: neon-auth/sdk/nextjs/types/team-permission
+                    - title: TeamProfile
+                      slug: neon-auth/sdk/nextjs/types/team-profile
+                    - title: TeamUser
+                      slug: neon-auth/sdk/nextjs/types/team-user
+                    - title: User
+                      slug: neon-auth/sdk/nextjs/types/user
+                - section: Hooks
+                  items:
+                    - title: useStackApp
+                      slug: neon-auth/sdk/nextjs/hooks/use-stack-app
+                    - title: useUser
+                      slug: neon-auth/sdk/nextjs/hooks/use-user
+            - title: React SDK
+              slug: neon-auth/sdk/react/overview
+              items:
+                - section: Overview
+                  items:
+                    - title: SDK Overview
+                      slug: neon-auth/sdk/react/overview
+                - section: Objects
+                  items:
+                    - title: StackClientApp
+                      slug: neon-auth/sdk/react/objects/stack-app
+                - section: Types
+                  items:
+                    - title: User
+                      slug: neon-auth/sdk/react/types/user
+                    - title: Team
+                      slug: neon-auth/sdk/react/types/team
+                    - title: Project
+                      slug: neon-auth/sdk/react/types/project
+                - section: Hooks
+                  items:
+                    - title: useStackApp
+                      slug: neon-auth/sdk/react/hooks/use-stack-app
+                    - title: useUser
+                      slug: neon-auth/sdk/react/hooks/use-user
+            - title: Components
+              slug: neon-auth/components/components
+              items:
+                - section: Overview
+                  items:
+                    - title: All components
+                      slug: neon-auth/components/components
+                - section: Components
+                  items:
+                    - title: UserButton
+                      slug: neon-auth/components/user-button
+                    - title: SelectedTeamSwitcher
+                      slug: neon-auth/components/selected-team-switcher
+                    - title: AccountSettings
+                      slug: neon-auth/components/account-settings
+                    - title: SignIn
+                      slug: neon-auth/components/sign-in
+                    - title: SignUp
+                      slug: neon-auth/components/sign-up
+                    - title: CredentialSignIn
+                      slug: neon-auth/components/credential-sign-in
+                    - title: CredentialSignUp
+                      slug: neon-auth/components/credential-sign-up
+                    - title: OAuthButton
+                      slug: neon-auth/components/oauth-button
+                    - title: OAuthButtonGroup
+                      slug: neon-auth/components/oauth-button-group
+                - section: Utilities
+                  items:
+                    - title: StackHandler
+                      slug: neon-auth/components/stack-handler
+                    - title: StackProvider
+                      slug: neon-auth/components/stack-provider
+                    - title: StackTheme
+                      slug: neon-auth/components/stack-theme
             - title: Admin API
-              slug: guides/neon-auth-api
+              slug: neon-auth/api
+        - section: Guides
+          items:
+            - title: Creating users
+              slug: neon-auth/create-users
+            - title: Claiming a project
+              slug: neon-auth/claim-project
+        - section: Customization
+          items:
+            - title: Colors and styles
+              slug: neon-auth/customization/custom-styles
+            - title: Dark/light mode
+              slug: neon-auth/customization/dark-mode
+            - title: Internationalization
+              slug: neon-auth/customization/internationalization
+            - title: Custom pages
+              slug: neon-auth/customization/custom-pages
     - title: Neon RLS
       icon: lock
       slug: guides/neon-rls

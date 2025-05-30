@@ -1,5 +1,5 @@
 ---
-title: StackHandler Component
+title: "<StackHandler />"
 subtitle: Neon Auth handler component for authentication routes
 enableTableOfContents: true
 tag: beta

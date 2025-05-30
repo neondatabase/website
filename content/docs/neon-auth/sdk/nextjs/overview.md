@@ -7,7 +7,7 @@ tag: beta
 
 This is the SDK reference for the Neon Auth Next.js SDK.
 
-For a list of components, see the [Components](/docs/neon-auth/components/components) page. For instructions on how to get started and how to use the SDK, see the [Setup & Installation](/docs/neon-auth/get-started/setup) page. If you are using a framework or programming language other than Next.js, you can use the [REST API](/docs/neon-auth/backend-integration).
+For a list of components, see the [Components](/docs/neon-auth/components/components) page. For instructions on how to get started and how to use the SDK, see [Getting started](/docs/guides/get-started) page.
 
 ## General
 

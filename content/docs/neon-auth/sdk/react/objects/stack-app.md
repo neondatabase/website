@@ -5,4 +5,4 @@ enableTableOfContents: true
 tag: beta
 ---
 
-<SdkStackApp sdkName="Next.js" />
+<SdkStackApp sdkName="React" /> 

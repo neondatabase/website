@@ -3,6 +3,8 @@ title: How Neon Auth works
 enableTableOfContents: true
 tag: beta
 updatedOn: '2025-05-16T19:06:06.841Z'
+redirectFrom:
+  - /docs/guides/neon-auth-how-it-works
 ---
 
 <InfoBlock>

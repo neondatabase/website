@@ -1,18 +1,11 @@
----
-title: Project
-subtitle: Reference for the Project type
-enableTableOfContents: true
-tag: beta
----
-
-<SdkProject sdkName="Next.js" />
+This is a reference for the `Project` type in the {sdkName} SDK.
 
 The `Project` object contains the information and configuration of a project, such as the name, description, and enabled authentication methods.
 
-Each [Stack app](/docs/neon-auth/concepts/stack-app) corresponds to a project. You can obtain its `Project` object by calling [`stackApp.getProject()`](/docs/neon-auth/sdk/nextjs/objects/stack-app#stackappgetproject)
-or [`stackApp.useProject()`](/docs/neon-auth/sdk/nextjs/objects/stack-app#stackappuseproject).
+Each [Stack app](/docs/neon-auth/concepts/stack-app) corresponds to a project. You can obtain its `Project` object by calling [`stackApp.getProject()`](../objects/stack-app#stackappgetproject)
+or [`stackApp.useProject()`](../objects/stack-app#stackappuseproject).
 
-## Type Definition
+### Table of Contents
 
 ```typescript
 type Project = {

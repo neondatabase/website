@@ -1,5 +1,5 @@
 ---
-title: CredentialSignUp Component
+title: "<CredentialSignUp />"
 subtitle: Neon Auth credential sign-up component
 enableTableOfContents: true
 tag: beta
