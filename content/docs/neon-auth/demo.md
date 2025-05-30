@@ -4,6 +4,8 @@ subtitle: Learn how automatic user profile sync can simplify your auth workflow
 enableTableOfContents: true
 tag: beta
 updatedOn: '2025-05-16T19:06:06.841Z'
+redirectFrom:
+  - /docs/guides/neon-auth-demo
 ---
 
 <InfoBlock>

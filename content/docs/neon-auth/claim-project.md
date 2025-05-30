@@ -3,6 +3,8 @@ title: Claiming a Neon Auth project
 enableTableOfContents: true
 tag: beta
 updatedOn: '2025-05-16T19:06:06.840Z'
+redirectFrom:
+  - /docs/guides/neon-auth-claim-project
 ---
 
 Neon Auth is powered by Stack Auth under the hood. By default, Neon manages your authentication for you, so you never need to interact with Stack Auth directly. If you want to "eject" and manage your authentication project directly in Stack Auth (for advanced configuration or direct provider control), you can claim ownership of the project.

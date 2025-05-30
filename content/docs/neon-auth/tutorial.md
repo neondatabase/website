@@ -6,6 +6,8 @@ subtitle: See how Neon Auth eliminates the complexity of manual user data
 enableTableOfContents: true
 tag: beta
 updatedOn: '2025-05-16T19:06:06.842Z'
+redirectFrom:
+  - /docs/guides/neon-auth-tutorial
 ---
 
 <InfoBlock>
@@ -21,10 +23,10 @@ updatedOn: '2025-05-16T19:06:06.842Z'
 
 Modern application development is becoming increasingly reliant on third-party authentication providers like [Clerk](https://clerk.com), [Stack Auth](https://stack-auth.com), etc., to handle secure user management. While these platforms excel at streamlining login workflows and protecting sensitive data, developers frequently encounter a hidden challenge: maintaining parity between external identity records and their application's database.
 
-Profile updates, role changes, and user deletions in your authentication service don’t automatically reflect in your application’s data layer. Today, developers typically address this gap through several approaches:
+Profile updates, role changes, and user deletions in your authentication service don't automatically reflect in your application's data layer. Today, developers typically address this gap through several approaches:
 
 - **Webhooks**: Many providers offer real-time event notifications (e.g., `user.updated`) to trigger immediate updates in your system.
-- **Polling**: Periodically querying the auth provider’s API checks for changes, but this approach introduces latency and risks hitting rate limits.
+- **Polling**: Periodically querying the auth provider's API checks for changes, but this approach introduces latency and risks hitting rate limits.
 - **Login-time sync**: Fetching fresh profile data during authentication ensures accuracy for active users at the expense of increased latency while also leaving stale data for inactive accounts.
 
 While these methods partially mitigate the problem, they often require writing custom synchronization scripts, implementing brittle listeners, and manually reconciling data discrepancies – turning a theoretical time-saver into an ongoing maintenance burden.
@@ -33,21 +35,21 @@ Neon Auth offers a streamlined solution to this common challenge. Instead of gra
 
 ## A typical user data synchronization scenario
 
-To illustrate the benefits of Neon Auth, let’s consider a common scenario where you need to synchronize user data between your authentication provider and your application’s database.
+To illustrate the benefits of Neon Auth, let's consider a common scenario where you need to synchronize user data between your authentication provider and your application's database.
 
 ### Scenario overview
 
-_This scenario uses Clerk as an example of a typical third-party auth provider. With Neon Auth, you don’t need to worry about manual sync or provider integration — Neon Auth handles it for you._
+_This scenario uses Clerk as an example of a typical third-party auth provider. With Neon Auth, you don't need to worry about manual sync or provider integration — Neon Auth handles it for you._
 
-You are building a social media platform where users can create profiles, post content, and interact with others. You use Clerk as your authentication provider to handle user registration, login, and password management. Your application’s database stores user profiles, posts, comments, and other social data.
+You are building a social media platform where users can create profiles, post content, and interact with others. You use Clerk as your authentication provider to handle user registration, login, and password management. Your application's database stores user profiles, posts, comments, and other social data.
 
 ### Data synchronization requirements
 
-- **User profiles**: When a user registers or updates their profile on Clerk, you need to synchronize their profile data to your application’s database. This includes user ID, name, email, profile picture, and other relevant information.
+- **User profiles**: When a user registers or updates their profile on Clerk, you need to synchronize their profile data to your application's database. This includes user ID, name, email, profile picture, and other relevant information.
 
-- **User deletion**: If a user deletes their account, you must remove their profile and associated data from your application’s database.
+- **User deletion**: If a user deletes their account, you must remove their profile and associated data from your application's database.
 
-- **Data consistency**: Ensure that user data in your application’s database remains consistent with the latest information from Clerk. Any changes to user profiles should reflect immediately in your database.
+- **Data consistency**: Ensure that user data in your application's database remains consistent with the latest information from Clerk. Any changes to user profiles should reflect immediately in your database.
 
 ### Challenges with manual synchronization
 
@@ -106,7 +108,7 @@ Without Neon Auth, you would typically address these requirements using manual s
 
 ## Streamlining user data sync
 
-Neon Auth offers a streamlined solution to these challenges by automating user data synchronization. Let’s examine how Neon Auth simplifies the process and eliminates the complexities associated with manual methods.
+Neon Auth offers a streamlined solution to these challenges by automating user data synchronization. Let's examine how Neon Auth simplifies the process and eliminates the complexities associated with manual methods.
 
 ### Simplified Architecture
 
