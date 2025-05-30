@@ -8,15 +8,12 @@ const parseMDXHeading = require('./parse-mdx-heading');
 
 const buildNestedToc = (headings, currentLevel, currentIndex = 0) => {
   const toc = [];
-  let numberedStep = 0;
   let localIndex = currentIndex;
-  let currentStepsIndex = -1;
 
   while (headings.length > 0) {
     const currentHeading = headings[0];
 
-    // Handle object format
-    const { isNumbered, stepsIndex } = currentHeading;
+    const { numberedStep } = currentHeading;
     const depthMatch = currentHeading.title.match(/^#+/);
     const depth = (depthMatch ? depthMatch[0].length : 1) - 1;
     const title = currentHeading.title.replace(/(#+)\s/, '');
@@ -24,24 +21,15 @@ const buildNestedToc = (headings, currentLevel, currentIndex = 0) => {
     const titleWithInlineCode = title.replace(/`([^`]+)`/g, '<code>$1</code>');
 
     if (depth === currentLevel) {
-      if (isNumbered && stepsIndex !== currentStepsIndex) {
-        numberedStep = 0;
-        currentStepsIndex = stepsIndex;
-      }
-
       const tocItem = {
         title: titleWithInlineCode,
         id: slugify(title, { lower: true, strict: true, remove: /[*+~.()'"!:@]/g }),
         level: depth,
-        numberedStep: isNumbered ? numberedStep + 1 : null,
+        numberedStep,
         index: localIndex,
       };
 
       localIndex += 1;
-
-      if (isNumbered) {
-        numberedStep += 1;
-      }
 
       headings.shift();
 
@@ -71,6 +59,7 @@ const buildNestedToc = (headings, currentLevel, currentIndex = 0) => {
 const getTableOfContents = (content) => {
   const mdxComponentRegex = /<(\w+)\/>/g;
   let match;
+  let newContent = content;
   // check if the content has any mdx shared components
   while ((match = mdxComponentRegex.exec(content)) !== null) {
     const componentName = match[1];
@@ -81,29 +70,44 @@ const getTableOfContents = (content) => {
     // Check if the MD file exists
     if (fs.existsSync(mdFilePath)) {
       const mdContent = fs.readFileSync(mdFilePath, 'utf8');
-      content = content.replace(new RegExp(`<${componentName}\/>`, 'g'), mdContent);
+      newContent = newContent.replace(new RegExp(`<${componentName}\/>`, 'g'), mdContent);
     }
   }
 
   const codeBlockRegex = /```[\s\S]*?```/g;
   const headingRegex = /^(#+)\s(.*)$/gm;
-  const contentWithoutCodeBlocks = content.replace(codeBlockRegex, '');
+  const contentWithoutCodeBlocks = newContent.replace(codeBlockRegex, '');
 
   // Get all headings first
   const allHeadings = contentWithoutCodeBlocks.match(headingRegex) || [];
 
-  // Find steps sections
+  // Find steps sections and headings
   const stepsRegex = /<Steps>([\s\S]*?)<\/Steps>/g;
   const stepsMatches = [...content.matchAll(stepsRegex)];
+  const stepsHeadings = stepsMatches.map((match) => {
+    const stepsContent = match[0];
+    const stepsHeading = stepsContent.match(/^##\s(.*)$/gm);
+    return stepsHeading;
+  });
+
+  let stepsIndex = 0;
+  let numberedStep = 0;
 
   // Convert headings to objects while preserving order
   const arr = allHeadings.map((heading) => {
     // Check if this heading is inside any Steps section and is h2
-    let stepsIndex = -1;
-    const isInSteps = stepsMatches.some((match, index) => {
-      const stepsContent = match[0];
-      if (stepsContent.includes(heading) && /^##\s(.*)$/gm.test(heading)) {
-        stepsIndex = index;
+    const isInSteps = stepsHeadings.some((matchArray, index) => {
+      const headingIndex = matchArray ? matchArray.indexOf(heading) : -1;
+      if (headingIndex !== -1) {
+        // Remove only this specific heading from the array
+        matchArray.splice(headingIndex, 1);
+
+        if (stepsIndex === index) {
+          numberedStep += 1;
+        } else {
+          stepsIndex = index;
+          numberedStep = 1;
+        }
         return true;
       }
       return false;
@@ -111,8 +115,7 @@ const getTableOfContents = (content) => {
 
     return {
       title: heading,
-      isNumbered: isInSteps,
-      stepsIndex: isInSteps ? stepsIndex : -1,
+      numberedStep: isInSteps ? numberedStep : null,
     };
   });
 
