@@ -10,6 +10,7 @@ const GIF = Buffer.from('R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==', 'bas
 
 const actions = ['set', 'clear'] as const;
 type Action = (typeof actions)[number];
+const COOKIE_NAME = '__Secure-neon_login_indicator';
 
 export async function GET(req: NextRequest) {
   if (!SECRET) {
@@ -49,12 +50,12 @@ export async function GET(req: NextRequest) {
   if (action === 'set') {
     res.cookies.set({
       ...cookieBase,
-      name: '__Secure-neon_login_indicator',
+      name: COOKIE_NAME,
       value: '1',
       maxAge: 60 * 60 * 24 * 7,
     });
   } else {
-    res.cookies.set({ ...cookieBase, name: '__Secure-neon_login_indicator', value: '', maxAge: 0 });
+    res.cookies.set({ ...cookieBase, name: COOKIE_NAME, value: '', maxAge: 0 });
   }
 
   return res;
