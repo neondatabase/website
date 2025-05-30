@@ -2,7 +2,7 @@
 title: Neon Launchpad
 subtitle: Launch an instant Neon Postgres database with zero configuration
 enableTableOfContents: true
-updatedOn: '2025-05-19T13:27:32.587Z'
+updatedOn: '2025-05-30T01:25:55.806Z'
 ---
 
 Neon Launchpad enables instant provisioning of a Postgres database without configuration or account creation.
