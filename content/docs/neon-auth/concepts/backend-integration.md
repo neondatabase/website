@@ -37,6 +37,7 @@ Neon Auth provides two methods for authenticating users on your server endpoints
 <Tabs labels={["Node.js"]}>
 
 <TabItem>
+
 ```javascript shouldWrap
 // you need to install the jose library if it's not already installed
 import * as jose from 'jose';
@@ -53,8 +54,7 @@ console.log('Authenticated user with ID:', payload.sub);
 console.error(error);
 console.log('Invalid user');
 }
-
-````
+```
 
 </TabItem>
 
@@ -65,6 +65,7 @@ console.log('Invalid user');
 <Tabs labels={["Node.js", "Python"]}>
 
 <TabItem>
+
 ```javascript shouldWrap
 const url = 'https://api.stack-auth.com/api/v1/users/me';
 const headers = {
@@ -80,11 +81,12 @@ if (response.status === 200) {
 } else {
   console.log('User is not authenticated', response.status, await response.text());
 }
-````
+```
 
 </TabItem>
 
 <TabItem>
+
 ```python shouldWrap
 import requests
 
@@ -101,10 +103,8 @@ if response.status_code == 200:
 print('User is authenticated', response.json())
 else:
 print('User is not authenticated', response.status_code, response.text)
-
 ```
 
 </TabItem>
 
 </Tabs>
-```

@@ -905,6 +905,24 @@
               slug: neon-auth/demo
             - title: Best practices & FAQ
               slug: neon-auth/best-practices
+        - section: Concepts
+          items:
+            - title: The StackApp Object
+              slug: neon-auth/concepts/stack-app
+            - title: OAuth Authentication
+              slug: neon-auth/concepts/oauth
+            - title: Custom User Data
+              slug: neon-auth/concepts/custom-user-data
+            - title: Permissions & RBAC
+              slug: neon-auth/concepts/permissions
+            - title: Organizations and Teams
+              slug: neon-auth/concepts/orgs-and-teams
+            - title: Selecting a Team
+              slug: neon-auth/concepts/team-selection
+            - title: User Onboarding
+              slug: neon-auth/concepts/user-onboarding
+            - title: Backend integration
+              slug: neon-auth/concepts/backend-integration
         - section: SDK and API Reference
           items:
             - title: Next.js SDK
