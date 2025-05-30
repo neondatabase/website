@@ -223,9 +223,7 @@ Signs out the user.
 `Promise<void>`
 
 ```typescript
-declare function signOut(options?: {
-  everywhere?: boolean;
-}): Promise<void>;
+declare function signOut(options?: { everywhere?: boolean }): Promise<void>;
 ```
 
 ### `currentUser.delete()`

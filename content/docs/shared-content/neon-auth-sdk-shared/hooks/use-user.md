@@ -22,15 +22,19 @@ function MyComponent() {
 - `CurrentUser | null`: The current user, or `null` if not signed in.
 
 ### tokenStore `union` **required**
+
 Where to store the user's session tokens.
 
 #### Next.js
+
 In Next.js apps, use `"nextjs-cookie"` to store tokens in Next.js cookies.
 
 #### React
+
 In React apps, use `"cookie"` to store tokens in browser cookies.
 
 #### Possible values
+
 - `"nextjs-cookie"`: Uses Next.js cookies (Next.js only)
 - `"cookie"`: Uses browser cookies (both React and Next.js)
 - `"memory"`: Uses in-memory storage (both React and Next.js)

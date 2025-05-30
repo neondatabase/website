@@ -5,4 +5,4 @@ enableTableOfContents: true
 tag: beta
 ---
 
-<SdkApiKey sdkName="React" slug="react" /> 
+<SdkApiKey sdkName="React" slug="react" />

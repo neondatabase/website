@@ -14,7 +14,7 @@ By default, `StackHandler` creates all authentication pages you need, however, y
 For example, if you want to create a custom sign-in page with a customized title on the top, you can create a file at `app/signin/page.tsx`:
 
 ```tsx title="app/signin/page.tsx"
-import { SignIn } from "@stackframe/stack";
+import { SignIn } from '@stackframe/stack';
 
 export default function CustomSignInPage() {
   return (
@@ -34,7 +34,7 @@ export const stackServerApp = new StackServerApp({
   // add these three lines
   urls: {
     signIn: '/signin',
-  }
+  },
 });
 ```
 
@@ -50,7 +50,7 @@ We also provide the low-level functions powering our components, so that you can
 
 ```tsx title="app/signin/page.tsx"
 'use client';
-import { useStackApp } from "@stackframe/stack";
+import { useStackApp } from '@stackframe/stack';
 
 export default function CustomOAuthSignIn() {
   const app = useStackApp();
@@ -58,10 +58,12 @@ export default function CustomOAuthSignIn() {
   return (
     <div>
       <h1>My Custom Sign In page</h1>
-      <button onClick={async () => {
-        // This will redirect to the OAuth provider's login page.
-        await app.signInWithOAuth('google');
-      }}>
+      <button
+        onClick={async () => {
+          // This will redirect to the OAuth provider's login page.
+          await app.signInWithOAuth('google');
+        }}
+      >
         Sign In with Google
       </button>
     </div>
@@ -77,7 +79,7 @@ export const stackServerApp = new StackServerApp({
   // add these three lines
   urls: {
     signIn: '/signin',
-  }
+  },
 });
 ```
 

@@ -254,5 +254,5 @@ The `CurrentServerUser` object is used on the server side to represent the curre
 ```typescript
 type CurrentServerUser =
   // Inherits all functionality from ServerUser
-  & ServerUser;
+  ServerUser;
 ```

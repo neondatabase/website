@@ -1,5 +1,5 @@
 ---
-title: "<SelectedTeamSwitcher />"
+title: '<SelectedTeamSwitcher />'
 subtitle: Neon Auth team switcher component
 enableTableOfContents: true
 tag: beta

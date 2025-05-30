@@ -73,9 +73,9 @@ declare new(options: {
 
 ```typescript
 const stackServerApp = new StackServerApp({
-  tokenStore: "nextjs-cookie",
+  tokenStore: 'nextjs-cookie',
   secretServerKey: process.env.SECRET_SERVER_KEY,
-  urls: { signIn: "/my-custom-sign-in-page" },
+  urls: { signIn: '/my-custom-sign-in-page' },
 });
 ```
 
@@ -86,6 +86,7 @@ const stackServerApp = new StackServerApp({
 Returns a `ServerUser` by ID, or the current user if no ID is provided.
 
 **Parameters:**
+
 - `id` (string, optional): The user ID.
 - `options` (object, optional): `{ or?: "return-null" | "redirect" | "throw" }`
 
@@ -93,16 +94,17 @@ Returns a `ServerUser` by ID, or the current user if no ID is provided.
 `Promise<ServerUser | null>`
 
 **Example:**
-```typescript
-const user = await stackServerApp.getUser("user_id");
-```
 
+```typescript
+const user = await stackServerApp.getUser('user_id');
+```
 
 ## `stackServerApp.useUser([id], [options])`
 
 Functionally equivalent to `getUser([id], [options])`, but as a React hook.
 
 **Parameters:**
+
 - `id` (string, optional): The user ID.
 - `options` (object, optional): `{ or?: "return-null" | "redirect" | "throw" }`
 
@@ -110,8 +112,9 @@ Functionally equivalent to `getUser([id], [options])`, but as a React hook.
 `ServerUser`
 
 **Example:**
+
 ```typescript
-const user = await stackServerApp.useUser("user_id");
+const user = await stackServerApp.useUser('user_id');
 ```
 
 ## `stackServerApp.listUsers([options])`
@@ -119,6 +122,7 @@ const user = await stackServerApp.useUser("user_id");
 Lists all users on the project.
 
 **Parameters:**
+
 - `options` (object, optional):
   - `cursor` (string): The cursor to start from.
   - `limit` (number): Max number of users to return.
@@ -130,16 +134,17 @@ Lists all users on the project.
 `Promise<ServerUser[]>` (with `nextCursor` property)
 
 **Example:**
+
 ```typescript
 const users = await stackServerApp.listUsers({ limit: 20 });
 ```
-
 
 ## `stackServerApp.useUsers([options])`
 
 Functionally equivalent to `listUsers([options])`, but as a React hook.
 
 **Parameters:**
+
 - `options` (object, optional):
   - `cursor` (string): The cursor to start from.
   - `limit` (number): Max number of users to return.
@@ -151,6 +156,7 @@ Functionally equivalent to `listUsers([options])`, but as a React hook.
 `ServerUser[]`
 
 **Example:**
+
 ```typescript
 const users = await stackServerApp.useUsers({ limit: 20 });
 ```
@@ -160,6 +166,7 @@ const users = await stackServerApp.useUsers({ limit: 20 });
 Creates a new user from the server.
 
 **Parameters:**
+
 - `options` (object):
   - `primaryEmail` (string)
   - `primaryEmailVerified` (boolean)
@@ -172,11 +179,12 @@ Creates a new user from the server.
 `Promise<ServerUser>`
 
 **Example:**
+
 ```typescript
 const user = await stackServerApp.createUser({
-  primaryEmail: "test@example.com",
+  primaryEmail: 'test@example.com',
   primaryEmailAuthEnabled: true,
-  password: "password123",
+  password: 'password123',
 });
 ```
 
@@ -185,32 +193,34 @@ const user = await stackServerApp.createUser({
 Gets a team by its ID.
 
 **Parameters:**
+
 - `id` (string): The team ID.
 
 **Returns:**  
 `Promise<ServerTeam | null>`
 
 **Example:**
-```typescript
-const team = await stackServerApp.getTeam("team_id");
-```
 
+```typescript
+const team = await stackServerApp.getTeam('team_id');
+```
 
 ## `stackServerApp.useTeam(id)`
 
 Functionally equivalent to `getTeam(id)`, but as a React hook.
 
 **Parameters:**
+
 - `id` (string): The team ID.
 
 **Returns:**  
 `ServerTeam`
 
 **Example:**
-```typescript
-const team = stackServerApp.useTeam("team_id");
-```
 
+```typescript
+const team = stackServerApp.useTeam('team_id');
+```
 
 ## `stackServerApp.listTeams()`
 
@@ -220,10 +230,10 @@ Lists all teams on the current project.
 `Promise<ServerTeam[]>`
 
 **Example:**
+
 ```typescript
 const teams = await stackServerApp.listTeams();
 ```
-
 
 ## `stackServerApp.useTeams()`
 
@@ -233,16 +243,17 @@ Functionally equivalent to `listTeams()`, but as a React hook.
 `ServerTeam[]`
 
 **Example:**
+
 ```typescript
 const teams = stackServerApp.useTeams();
 ```
-
 
 ## `stackServerApp.createTeam([options])`
 
 Creates a team.
 
 **Parameters:**
+
 - `options` (object):
   - `displayName` (string): The display name for the team.
   - `profileImageUrl` (string | null): The URL of the team's profile image, or null to remove.
@@ -251,10 +262,11 @@ Creates a team.
 `Promise<ServerTeam>`
 
 **Example:**
+
 ```typescript
 const team = await stackServerApp.createTeam({
-  displayName: "New Team",
-  profileImageUrl: "https://example.com/profile.jpg",
+  displayName: 'New Team',
+  profileImageUrl: 'https://example.com/profile.jpg',
 });
 ```
 

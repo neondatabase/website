@@ -5,7 +5,7 @@ The `useStackApp` hook returns a `StackClientApp` object from the one that you p
 Example:
 
 ```jsx
-import { useStackApp } from "@stackframe/stack";
+import { useStackApp } from '@stackframe/stack';
 
 function MyComponent() {
   const stackApp = useStackApp();

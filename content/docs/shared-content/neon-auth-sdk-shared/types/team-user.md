@@ -1,6 +1,7 @@
 This is a detailed reference for the `TeamUser` and `ServerTeamUser` objects in the {sdkName} SDK.
 
 On this page:
+
 - [TeamUser](#teamuser)
 - [ServerTeamUser](#serverteamuser)
 
@@ -46,12 +47,11 @@ It is usually obtained by calling `serverTeam.listUsers()` on a [`ServerTeam` ob
 ```typescript
 type ServerTeamUser =
   // Inherits all functionality from TeamUser
-  & TeamUser
-  // Inherits all functionality from ServerUser
-  & ServerUser
-  & {
-    teamProfile: ServerTeamProfile;
-  };
+  TeamUser &
+    // Inherits all functionality from ServerUser
+    ServerUser & {
+      teamProfile: ServerTeamProfile;
+    };
 ```
 
 ### `serverTeamUser.teamProfile`

@@ -1,5 +1,5 @@
 ---
-title: "<SignUp />"
+title: '<SignUp />'
 subtitle: Neon Auth sign-up component for your app
 enableTableOfContents: true
 tag: beta

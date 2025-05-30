@@ -1,5 +1,5 @@
 ---
-title: "<StackTheme />"
+title: '<StackTheme />'
 subtitle: Neon Auth theme provider component
 enableTableOfContents: true
 tag: beta
