@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Use Neon with Cloudflare Pages HTML](https://neon.tech/docs/guides/cloudflare-pages): The original HTML version of this documentation
+- [Use Neon with Cloudflare Pages HTML](https://neon.com/docs/guides/cloudflare-pages): The original HTML version of this documentation
 
 ## Overview
 

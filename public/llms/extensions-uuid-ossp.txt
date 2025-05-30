@@ -4,7 +4,7 @@
 
 ## Source
 
-- [The uuid-ossp extension HTML](https://neon.tech/docs/extensions/uuid-ossp): The original HTML version of this documentation
+- [The uuid-ossp extension HTML](https://neon.com/docs/extensions/uuid-ossp): The original HTML version of this documentation
 
 ## Overview
 
@@ -16,7 +16,7 @@ This guide provides an introduction to the `uuid-ossp` extension. You'll learn h
 
 ## Enable the `uuid-ossp` extension
 
-You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](https://neon.tech/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](https://neon.com/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
@@ -24,7 +24,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 **Version availability:**
 
-Please refer to the [list of all extensions](https://neon.tech/docs/extensions/pg-extensions) available in Neon for up-to-date extension version information.
+Please refer to the [list of all extensions](https://neon.com/docs/extensions/pg-extensions) available in Neon for up-to-date extension version information.
 
 ## UUID Functions
 
@@ -86,7 +86,7 @@ The version 1 UUID generation functions in `uuid-ossp` are based on the time of 
 
 - `uuid_generate_v4()`:
 
-  The `uuid_generate_v4()` function generates version 4 UUIDs, which are derived entirely from random numbers. These are the most common type of UUIDs due to their simplicity and strong guarantee of uniqueness. Postgres also provides the built-in function [`gen_random_uuid()`](https://neon.tech/postgresql/postgresql-tutorial/postgresql-uuid#generating-uuid-values) which is functionally equivalent to `uuid_generate_v4()`.
+  The `uuid_generate_v4()` function generates version 4 UUIDs, which are derived entirely from random numbers. These are the most common type of UUIDs due to their simplicity and strong guarantee of uniqueness. Postgres also provides the built-in function [`gen_random_uuid()`](https://neon.com/postgresql/postgresql-tutorial/postgresql-uuid#generating-uuid-values) which is functionally equivalent to `uuid_generate_v4()`.
 
   ```sql
   SELECT uuid_generate_v4();

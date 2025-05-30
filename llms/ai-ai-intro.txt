@@ -4,7 +4,7 @@
 
 ## Source
 
-- [AI Starter Kit HTML](https://neon.tech/docs/ai/ai-intro): The original HTML version of this documentation
+- [AI Starter Kit HTML](https://neon.com/docs/ai/ai-intro): The original HTML version of this documentation
 
 ## Overview
 
@@ -14,17 +14,17 @@ This guide collects resources for building AI applications with Neon Postgres. Y
 
 Learn the fundamentals of building AI applications with Neon:
 
-- [AI concepts](https://neon.tech/docs/ai/ai-concepts): Learn the fundamentals of embeddings and vector search for AI applications
-- [pgvector extension](https://neon.tech/docs/extensions/pgvector): Get started with pgvector for storing and querying vector embeddings
+- [AI concepts](https://neon.com/docs/ai/ai-concepts): Learn the fundamentals of embeddings and vector search for AI applications
+- [pgvector extension](https://neon.com/docs/extensions/pgvector): Get started with pgvector for storing and querying vector embeddings
 
 ## AI frameworks and integrations
 
 Build AI applications faster with these popular frameworks, tools, and services:
 
-- [LangChain](https://neon.tech/docs/ai/langchain): Create AI applications using LangChain with OpenAI and Neon
-- [LlamaIndex](https://neon.tech/docs/ai/llamaindex): Build RAG applications using LlamaIndex with OpenAI and Neon
-- [Semantic Kernel](https://neon.tech/docs/ai/semantic-kernel): Develop AI applications using Semantic Kernel with Azure OpenAI
-- [Inngest](https://neon.tech/docs/ai/inngest): Build reliable AI workflows with Inngest and Neon
+- [LangChain](https://neon.com/docs/ai/langchain): Create AI applications using LangChain with OpenAI and Neon
+- [LlamaIndex](https://neon.com/docs/ai/llamaindex): Build RAG applications using LlamaIndex with OpenAI and Neon
+- [Semantic Kernel](https://neon.com/docs/ai/semantic-kernel): Develop AI applications using Semantic Kernel with Azure OpenAI
+- [Inngest](https://neon.com/docs/ai/inngest): Build reliable AI workflows with Inngest and Neon
 
 ## Starter applications
 
@@ -43,16 +43,16 @@ Hackable, fully-featured, pre-built starter apps to get you up and running:
 
 ## Scale your AI application
 
-- [Scale with Neon](https://neon.tech/docs/ai/ai-scale-with-neon): Learn how to scale your AI application with Autoscaling and Read Replicas
-- [Optimize vector search](https://neon.tech/docs/ai/ai-vector-search-optimization): Best practices for optimizing vector search performance
+- [Scale with Neon](https://neon.com/docs/ai/ai-scale-with-neon): Learn how to scale your AI application with Autoscaling and Read Replicas
+- [Optimize vector search](https://neon.com/docs/ai/ai-vector-search-optimization): Best practices for optimizing vector search performance
 
 ## Featured examples
 
 Real-world AI applications built with Neon that you can reference as code examples or inspiration.
 
 - [AI vector database per tenant](https://github.com/neondatabase/ai-vector-db-per-tenant): Deploy an AI vector database per-tenant architecture with Neon
-- [Guide: Build a RAG chatbot](https://neon.tech/guides/chatbot-astro-postgres-llamaindex): Build a RAG chatbot in an Astro application with LlamaIndex and Postgres
-- [Guide: Build a Reverse Image Search Engine](https://neon.tech/guides/llamaindex-postgres-search-images): Using LlamaIndex with Postgres to Build your own Reverse Image Search Engine
+- [Guide: Build a RAG chatbot](https://neon.com/guides/chatbot-astro-postgres-llamaindex): Build a RAG chatbot in an Astro application with LlamaIndex and Postgres
+- [Guide: Build a Reverse Image Search Engine](https://neon.com/guides/llamaindex-postgres-search-images): Using LlamaIndex with Postgres to Build your own Reverse Image Search Engine
 - [Ask Neon Chatbot](https://github.com/neondatabase/ask-neon): An Ask Neon AI-powered chatbot built with pgvector
 - [Vercel Postgres pgvector Starter](https://vercel.com/templates/next.js/postgres-pgvector): Enable vector similarity search with Vercel Postgres powered by Neon
 - [YCombinator Semantic Search App](https://github.com/neondatabase/yc-idea-matcher): YCombinator semantic search application
@@ -60,13 +60,13 @@ Real-world AI applications built with Neon that you can reference as code exampl
 - [Jupyter Notebook for vector search with Neon](https://github.com/neondatabase/neon-vector-search-openai-notebooks): Jupyter Notebook for vector search with Neon, pgvector, and OpenAI
 - [Image search with Neon and Vertex AI](https://github.com/ItzCrazyKns/Neon-Image-Search): Community: An image search app built with Neon and Vertex AI
 - [Text-to-SQL conversion with Mistral + LangChain](https://github.com/mistralai/cookbook/blob/main/third_party/Neon/neon_text_to_sql.ipynb): A Text-to-SQL conversion app built with Mistral AI, Neon, and LangChain
-- [Postgres GPT Expert](https://neon.tech/blog/openais-gpt-store-is-live-create-and-publish-a-custom-postgres-gpt-expert): Blog + repo: Create and publish a custom Postgres GPT Expert using OpenAI's GPT
+- [Postgres GPT Expert](https://neon.com/blog/openais-gpt-store-is-live-create-and-publish-a-custom-postgres-gpt-expert): Blog + repo: Create and publish a custom Postgres GPT Expert using OpenAI's GPT
 
 ## Vector search tools and notebooks
 
 Optimize your vector search implementation and experiment with different approaches:
 
-- [Vector search optimization](https://neon.tech/docs/ai/ai-vector-search-optimization): Best practices for optimizing vector search performance
+- [Vector search optimization](https://neon.com/docs/ai/ai-vector-search-optimization): Best practices for optimizing vector search performance
 - [Vector search notebooks](https://github.com/neondatabase/neon-vector-search-openai-notebooks): Interactive notebooks for vector search with OpenAI
-- [Google Colab guide](https://neon.tech/docs/ai/ai-google-colab): Use Neon with Google Colab for ML experiments
-- [Azure Data Studio Notebooks](https://neon.tech/docs/ai/ai-azure-notebooks): A cloud-based Jupyter notebook service integrated with Azure Data Studio
+- [Google Colab guide](https://neon.com/docs/ai/ai-google-colab): Use Neon with Google Colab for ML experiments
+- [Azure Data Studio Notebooks](https://neon.com/docs/ai/ai-azure-notebooks): A cloud-based Jupyter notebook service integrated with Azure Data Studio

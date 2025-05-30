@@ -4,7 +4,7 @@ updatedOn: '2025-04-23T16:22:55.901Z'
 
 # Docs
 
-Welcome to Neon docs! This folder contains the source code of the [Neon docs](https://neon.tech/docs/).
+Welcome to Neon docs! This folder contains the source code of the [Neon docs](/docs/).
 
 ## Basic information
 

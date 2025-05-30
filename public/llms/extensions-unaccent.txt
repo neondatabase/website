@@ -4,7 +4,7 @@
 
 ## Source
 
-- [The unaccent extension HTML](https://neon.tech/docs/extensions/unaccent): The original HTML version of this documentation
+- [The unaccent extension HTML](https://neon.com/docs/extensions/unaccent): The original HTML version of this documentation
 
 The `unaccent` extension for Postgres enables handling of text data in a more user-friendly and language-tolerant way. It allows you to remove [accents/stress](https://en.wikipedia.org/wiki/Stress_(linguistics)) ([diacritic signs](https://en.wikipedia.org/wiki/Diacritic)) from text strings, making it easier to perform searches and comparisons that are insensitive to accents. This is particularly useful in multilingual applications where users might not consistently use accents when typing search queries.
 
@@ -14,7 +14,7 @@ This guide will walk you through the essentials of using the `unaccent` extensio
 
 ## Enable the `unaccent` extension
 
-You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](https://neon.tech/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](https://neon.com/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS unaccent;
@@ -22,7 +22,7 @@ CREATE EXTENSION IF NOT EXISTS unaccent;
 
 **Version availability:**
 
-Please refer to the [list of all extensions](https://neon.tech/docs/extensions/pg-extensions) available in Neon for up-to-date extension version information.
+Please refer to the [list of all extensions](https://neon.com/docs/extensions/pg-extensions) available in Neon for up-to-date extension version information.
 
 ## Removing accents with `unaccent()`
 
@@ -109,7 +109,7 @@ id | name
 
 ### Case-insensitive and accent-insensitive searching with `ILIKE`
 
-For even more flexible searching, you can combine `unaccent()` with the [`ILIKE`](https://neon.tech/postgresql/postgresql-tutorial/postgresql-like#postgresql-extensions-of-the-like-operator) operator for case-insensitive and accent-insensitive searches. This is particularly useful for free-text search scenarios.
+For even more flexible searching, you can combine `unaccent()` with the [`ILIKE`](https://neon.com/postgresql/postgresql-tutorial/postgresql-like#postgresql-extensions-of-the-like-operator) operator for case-insensitive and accent-insensitive searches. This is particularly useful for free-text search scenarios.
 
 ```sql
 SELECT * FROM product WHERE unaccent(name) ILIKE unaccent('%cafe%');

@@ -78,7 +78,7 @@ We recommend setting up one project per user, rather than, for example, using a 
 
 ## Managing many projects
 
-As you scale, following a project-per-user design means eventually managing thousands of Neon projects. This might sound overwhelming, but it’s much simpler in practice than it seems—some Neon users [manage hundreds of thousands of projects](https://neon.tech/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases) with just one engineer. Here’s why that’s possible:
+As you scale, following a project-per-user design means eventually managing thousands of Neon projects. This might sound overwhelming, but it’s much simpler in practice than it seems—some Neon users [manage hundreds of thousands of projects](/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases) with just one engineer. Here’s why that’s possible:
 
 - **You can manage everything with the Neon API**  
   The API allows you to automate every step of project management, including setting resource limits per customer and configuring resources.
@@ -99,7 +99,7 @@ As you scale, following a project-per-user design means eventually managing thou
 
 In Neon, [database branching](/docs/introduction/branching) is a powerful feature that enables you to create fast, isolated copies of your data for development and testing. You can use child branches as ephemeral environments that mirror your main testing database but operate independently, without adding to storage costs. This feature is a game-changer for dev/test workflows, as it reduces the complexity of managing multiple test databases while lowering non-prod costs significantly.
 
-To handle [dev/test](https://neon.tech/use-cases/dev-test) in a project-per-user design, consider creating a dedicated Neon project as your non-prod environment. This Neon project can serve as a substitute for the numerous non-prod instances you might maintain in RDS/Aurora.
+To handle [dev/test](/use-cases/dev-test) in a project-per-user design, consider creating a dedicated Neon project as your non-prod environment. This Neon project can serve as a substitute for the numerous non-prod instances you might maintain in RDS/Aurora.
 
 The methodology:
 
@@ -140,7 +140,7 @@ To effectively scale a multi-tenant architecture, leveraging automation tools is
   By combining Neon branching into your CI/CD, you can simplify your dev/test workflows by creating and deleting ephemeral environments automatically as child branches.
 
 - **Automated backups to your own S3**  
-  If you must keep your own data copy, you can [schedule regular backups](https://neon.tech/blog/nightly-backups-for-multiple-neon-projects) using tools like `pg_dump` in conjunction with GitHub Actions.
+  If you must keep your own data copy, you can [schedule regular backups](/blogfor-multiple-neon-projects) using tools like `pg_dump` in conjunction with GitHub Actions.
 
 ## The Application Layer
 
@@ -510,7 +510,7 @@ Here’s an overview of the workflow:
 
 ## Backing up Projects to Your Own S3
 
-As a managed database, Neon already takes care of securing your data, always keeping a full copy of your dataset in object storage. But if your use case or company demands that you also keep a copy of your data in your own S3, this section covers how to automate the process via a scheduled GitHub Action. A more extensive explanation can be found in this two-part blog post series: [Part 1](https://neon.tech/blog/how-to-create-an-aws-s3-bucket-for-postgres-backups), [Part 2](https://neon.tech/blog/nightly-backups-for-multiple-neon-projects).
+As a managed database, Neon already takes care of securing your data, always keeping a full copy of your dataset in object storage. But if your use case or company demands that you also keep a copy of your data in your own S3, this section covers how to automate the process via a scheduled GitHub Action. A more extensive explanation can be found in this two-part blog post series: [Part 1](/blog-aws-s3-bucket-for-postgres-backups), [Part 2](/blog/nightly-ba(/blog-projects).
 
 ### AWS IAM configuration
 
@@ -541,7 +541,7 @@ On this screen give the **Role** a name and description. You’ll use the Role n
 
 ### S3 bucket policy
 
-This section assumes you already have an S3 bucket. If you need instructions on how to create a bucket, refer to [this blog post](https://neon.tech/blog/how-to-create-an-aws-s3-bucket-for-postgres-backups).
+This section assumes you already have an S3 bucket. If you need instructions on how to create a bucket, refer to [this blog post](/blog-aws-s3-bucket-for-postgres-backups).
 
 To ensure the Role being used in the GitHub Action can perform actions on the S3 bucket, you’ll need to update the bucket policy. Select your bucket then select the Permissions tab and click **Edit**.
 

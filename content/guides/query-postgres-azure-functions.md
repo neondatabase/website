@@ -45,7 +45,7 @@ The application's features will include:
 
 **Sign up and create the database**
 
-Sign up on [Neon](https://neon.tech/) and follow the steps to create a Postgres database. The database will be named **neondb**.
+Sign up on [Neon](https://neon.com/) and follow the steps to create a Postgres database. The database will be named **neondb**.
 
 After creating the database, make sure to copy the connection details (such as **host**, **user**, **password**, **database**) somewhere safe, as they will be used to configure **Azure Functions** to connect to **Neon**.
 

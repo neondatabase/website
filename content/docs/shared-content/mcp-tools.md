@@ -15,7 +15,7 @@ The Neon MCP Server provides the following actions, which are exposed as "tools"
 
 **Branch management:**
 
-- `create_branch`: Creates a new branch within a specified Neon project. Leverages [Neon's branching](https://neon.tech/docs/introduction/branching) feature for development, testing, or migrations.
+- `create_branch`: Creates a new branch within a specified Neon project. Leverages [Neon's branching](/docs/introduction/branching) feature for development, testing, or migrations.
 - `delete_branch`: Deletes an existing branch from a Neon project.
 - `describe_branch`: Retrieves details about a specific branch, such as its name, ID, and parent branch.
 - `list_branch_computes`: Lists compute endpoints for a project or specific branch, including compute ID, type, size, and autoscaling information.

@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Connect a Hono application to Neon HTML](https://neon.tech/docs/guides/hono): The original HTML version of this documentation
+- [Connect a Hono application to Neon HTML](https://neon.com/docs/guides/hono): The original HTML version of this documentation
 
 ## Overview
 
@@ -43,7 +43,7 @@ npm install @neondatabase/serverless
 
 ## Store your Neon credentials
 
-Add a `.env` file to your project directory and add your Neon connection string to it. You can find your connection details by clicking **Connect** on the Neon **Project Dashboard**. For more information, see [Connect from any application](https://neon.tech/docs/connect/connect-from-any-app).
+Add a `.env` file to your project directory and add your Neon connection string to it. You can find your connection details by clicking **Connect** on the Neon **Project Dashboard**. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).
 
 ```shell
 DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require"

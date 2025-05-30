@@ -21,7 +21,7 @@ updatedOn: '2025-03-06T12:39:04.895Z'
 The [Neon Postgres Native Integration](https://vercel.com/marketplace/neon), available on the Vercel Marketplace, allows you to add a Postgres database to your Vercel project. You can optionally configure the integration to create a database branch for each Vercel preview deployment. This guide explains how to set up that configuration.
 
 <Admonition type="note">
-The database branching preview feature is only supported for users on a Neon plan. If you are on a Vercel Postgres legacy plan, you will need to [change your plan](https://neon.tech/docs/guides/vercel-native-integration#changing-your-plan).
+The database branching preview feature is only supported for users on a Neon plan. If you are on a Vercel Postgres legacy plan, you will need to [change your plan](/docs/guides/vercel-native-integration#changing-your-plan).
 </Admonition>
 
 <details>
@@ -146,7 +146,7 @@ This will disconnect the database from your Vercel project by removing all of th
 
 ## Manage branches created by the integration
 
-The integration creates a database branch for each preview deployment. To avoid using up your storage allowances or hitting branch limits, you should delete database branches that are no longer required. Branches can be deleted via the [Neon Console](/docs/manage/branches#delete-a-branch), [CLI](/docs/reference/cli-branches#delete), or [API](https://neon.tech/docs/manage/branches#delete-a-branch-with-the-api).
+The integration creates a database branch for each preview deployment. To avoid using up your storage allowances or hitting branch limits, you should delete database branches that are no longer required. Branches can be deleted via the [Neon Console](/docs/manage/branches#delete-a-branch), [CLI](/docs/reference/cli-branches#delete), or [API](/docs/manage/branches#delete-a-branch-with-the-api).
 
 <Admonition type="note" title="What happens to branches if you don't remove them?">
 Unused branches are eventually archived, consuming space in archive storage. For more information, see [Branch archiving](/docs/guides/branch-archiving).

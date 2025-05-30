@@ -6,7 +6,7 @@ This guide describes how to migrate data from Firebase Firestore to Neon Postgre
 
 ## Source
 
-- [Migrate from Firebase Firestore to Neon Postgres HTML](https://neon.tech/docs/import/migrate-from-firebase): The original HTML version of this documentation
+- [Migrate from Firebase Firestore to Neon Postgres HTML](https://neon.com/docs/import/migrate-from-firebase): The original HTML version of this documentation
 
 We'll use a custom Python script to export data from Firestore to a local file, and then import the data into Neon Postgres. This approach allows us to handle Firestore's document-based structure and convert it into the relational database format suitable for Postgres.
 

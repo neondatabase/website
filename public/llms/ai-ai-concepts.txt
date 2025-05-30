@@ -4,7 +4,7 @@
 
 ## Source
 
-- [AI Concepts HTML](https://neon.tech/docs/ai/ai-concepts): The original HTML version of this documentation
+- [AI Concepts HTML](https://neon.com/docs/ai/ai-concepts): The original HTML version of this documentation
 
 ## Overview
 

@@ -6,7 +6,7 @@ Postgres date and time data types provide comprehensive support for temporal dat
 
 ## Source
 
-- [Postgres Date and Time data types HTML](https://neon.tech/docs/data-types/date-and-time): The original HTML version of this documentation
+- [Postgres Date and Time data types HTML](https://neon.com/docs/data-types/date-and-time): The original HTML version of this documentation
 
 ## Storage and syntax
 

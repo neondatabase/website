@@ -6,7 +6,7 @@ Postgres UUID data type provides a reliable way to generate globally unique iden
 
 ## Source
 
-- [Postgres UUID data type HTML](https://neon.tech/docs/data-types/uuid): The original HTML version of this documentation
+- [Postgres UUID data type HTML](https://neon.com/docs/data-types/uuid): The original HTML version of this documentation
 
 ## Storage and syntax
 

@@ -12,7 +12,7 @@ The `pg_cron` extension provides a simple, cron-based job scheduler for Postgres
 This guide provides an introduction to the `pg_cron` extension. You'll learn how to enable the extension, schedule jobs, understand the cron syntax, manage and monitor your scheduled tasks, and about considerations specific to the Neon environment.
 
 <Admonition type="warning" title="Key details about using pg_cron with Neon">
-Please note that `pg_cron` jobs will only run when your compute is active. We therefore recommend only using `pg_cron` on computes that run 24/7 or where you have disabled [scale to zero](https://neon.tech/docs/introduction/scale-to-zero).
+Please note that `pg_cron` jobs will only run when your compute is active. We therefore recommend only using `pg_cron` on computes that run 24/7 or where you have disabled [scale to zero](/docs/introduction/scale-to-zero).
 </Admonition>
 
 ## Enable the `pg_cron` extension

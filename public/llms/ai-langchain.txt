@@ -4,7 +4,7 @@
 
 ## Source
 
-- [LangChain HTML](https://neon.tech/docs/ai/langchain): The original HTML version of this documentation
+- [LangChain HTML](https://neon.com/docs/ai/langchain): The original HTML version of this documentation
 
 ## Overview
 

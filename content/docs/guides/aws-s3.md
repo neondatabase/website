@@ -103,7 +103,7 @@ We need a table in Neon to store metadata about the objects uploaded to S3.
 2.  Run the SQL statement. Add other relevant columns as needed (e.g., `content_type`, `size`).
 
 <Admonition type="note" title="Securing metadata with RLS">
-If you use [Neon's Row Level Security (RLS)](https://neon.tech/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `s3_files` table. This controls who can view or modify the object references stored in Neon based on your RLS rules.
+If you use [Neon's Row Level Security (RLS)](/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `s3_files` table. This controls who can view or modify the object references stored in Neon based on your RLS rules.
 
 Note that these policies apply _only_ to the metadata in Neon. Access control for the objects within the S3 bucket itself is managed via S3 bucket policies, IAM permissions, and object ACLs.
 </Admonition>

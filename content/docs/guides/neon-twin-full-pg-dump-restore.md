@@ -164,5 +164,5 @@ If your dump/restore process takes longer, consider using [self-hosted runners](
 
 ## Further reading
 
-- [Neon Twin: Move Dev/Test/Staging to Neon, Keep Production on RDS](https://neon.tech/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon)
-- [Neon Twin: How to deploy a change tested in Neon to prod in RDS](https://neon.tech/blog/neon-twin-deploy-workflow)
+- [Neon Twin: Move Dev/Test/Staging to Neon, Keep Production on RDS](/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon)
+- [Neon Twin: How to deploy a change tested in Neon to prod in RDS](/blog-workflow)

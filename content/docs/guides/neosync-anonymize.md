@@ -132,5 +132,5 @@ This was a small test with only 1000 rows of data, but you can follow the same p
 - [Anonymization in Neosync](https://docs.neosync.dev/core-features#anonymization)
 - [Synthetic data generation](https://docs.neosync.dev/core-features#synthetic-data-generation)
 - [How to Anonymize Sensitive Data in Neon](https://www.neosync.dev/blog/neosync-neon-sync-job)
-- [How to use Synthetic Data to catch more bugs with Neosync](https://neon.tech/blog/how-to-use-synthetic-data-to-catch-more-bugs-with-neosync)
+- [How to use Synthetic Data to catch more bugs with Neosync](/blog/how-to-use-synthetic-data-to-catch-more-bugs-with-neosync)
 - [How to seed your Neon DB with Synthetic Data](https://www.neosync.dev/blog/neosync-neon-data-gen-job)

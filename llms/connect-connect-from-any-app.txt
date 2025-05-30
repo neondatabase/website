@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Connect from any application HTML](https://neon.tech/docs/connect/connect-from-any-app): The original HTML version of this documentation
+- [Connect from any application HTML](https://neon.com/docs/connect/connect-from-any-app): The original HTML version of this documentation
 
 
 Where to find database connections details

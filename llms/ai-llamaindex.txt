@@ -4,7 +4,7 @@
 
 ## Source
 
-- [LlamaIndex HTML](https://neon.tech/docs/ai/llamaindex): The original HTML version of this documentation
+- [LlamaIndex HTML](https://neon.com/docs/ai/llamaindex): The original HTML version of this documentation
 
 ## Overview
 

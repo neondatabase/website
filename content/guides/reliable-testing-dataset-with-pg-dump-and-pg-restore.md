@@ -13,7 +13,7 @@ There are several ways to do this, but here's a straightforward approach using `
 
 ## Running partial data dumps inside GitHub Actions
 
-You can run `pg_dump`, `pg_restore`, and `psql` from the command line, but sometimes, an automated, reproducible approach is more convenient. To better control when data dumps occur, I use a [scheduled GitHub Action](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#schedule) to export data from my production database and restore it to a testing database. This method works across different Postgres database providers, but if you're looking for a cost-effective testing environment, consider trying Neon. Check out our [getting started guide](https://neon.tech/docs/get-started-with-neon/signing-up#sign-up) to see how easy it is to set up.
+You can run `pg_dump`, `pg_restore`, and `psql` from the command line, but sometimes, an automated, reproducible approach is more convenient. To better control when data dumps occur, I use a [scheduled GitHub Action](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#schedule) to export data from my production database and restore it to a testing database. This method works across different Postgres database providers, but if you're looking for a cost-effective testing environment, consider trying Neon. Check out our [getting started guide](/docs/get-started-with-neon/signing-up#sign-up) to see how easy it is to set up.
 
 ## What is a scheduled GitHub Action?
 
@@ -81,7 +81,7 @@ To do this, navigate to **Settings** > **Settings and variables** > **Actions** 
 
 ![Screenshot of GitHub repository secrets](/guides/images/reliable-testing-dataset-with-pg-dump-and-pg-restore/screenshot-of-github-respository-secrets.jpg)
 
-The last variable defines the Postgres version to install in the Action environment. Since `pg_dump`, `pg_restore`, and `psql` depend on Postgres, you'll need to install it within the Action—I’ll cover this in more detail later. It’s also worth noting the version of Postgres you install here should be the same version used by both your source and target database. In my example, all use [Postgres 17](https://neon.tech/blog/postgres-17).
+The last variable defines the Postgres version to install in the Action environment. Since `pg_dump`, `pg_restore`, and `psql` depend on Postgres, you'll need to install it within the Action—I’ll cover this in more detail later. It’s also worth noting the version of Postgres you install here should be the same version used by both your source and target database. In my example, all use [Postgres 17](/blog/postgres-17).
 
 ### jobs/steps
 

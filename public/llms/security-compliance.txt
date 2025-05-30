@@ -6,7 +6,7 @@ At Neon, we prioritize data security and privacy, and we have achieved several k
 
 ## Source
 
-- [Compliance HTML](https://neon.tech/docs/security/compliance): The original HTML version of this documentation
+- [Compliance HTML](https://neon.com/docs/security/compliance): The original HTML version of this documentation
 
 ## SOC 2
 
@@ -38,7 +38,7 @@ Neon offers HIPAA compliance as part of our Business and Enterprise plans, enabl
 
 A copy of Neon's HIPAA compliance report can be requested through our [Trust Center](https://trust.neon.tech/).
 
-To request a draft Business Associate Agreement (BAA), please [contact the Neon Sales team](https://neon.tech/contact-sales). Once a BAA is signed, the Neon Sales team can assist you with enabling HIPAA for your Neon account.
+To request a draft Business Associate Agreement (BAA), please [contact the Neon Sales team](https://neon.com/contact-sales). Once a BAA is signed, the Neon Sales team can assist you with enabling HIPAA for your Neon account.
 
 HIPAA-enabled accounts can request access to HIPAA audit logs by [opening a support request](https://console.neon.tech/app/projects?modal=support).
 
@@ -50,4 +50,4 @@ To learn more about how we protect your data and uphold the highest standards of
 
 - For security inquiries, contact us at [security@neon.tech](mailto:security@neon.tech).
 - For privacy-related questions, reach out to [privacy@neon.tech](mailto:privacy@neon.tech).
-- For sales information, please [contact our sales team](https://neon.tech/contact-sales).
+- For sales information, please [contact our sales team](https://neon.com/contact-sales).

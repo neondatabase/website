@@ -194,7 +194,7 @@ You can find the source code for the application described in this guide on GitH
 
 - [Heroku Documentation](https://devcenter.heroku.com/)
 - [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
-- [Neon](https://neon.tech/docs)
+- [Neon](/docs)
 - [Import data from Heroku Postgres to Neon](/docs/import/migrate-from-heroku)
 
 <NeedHelp/>

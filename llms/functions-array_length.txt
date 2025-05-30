@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Postgres array_length() function HTML](https://neon.tech/docs/functions/array_length): The original HTML version of this documentation
+- [Postgres array_length() function HTML](https://neon.com/docs/functions/array_length): The original HTML version of this documentation
 
 The Postgres `array_length()` function is used to determine the length of an array along a specified dimension.
 

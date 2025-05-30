@@ -9,7 +9,7 @@ updatedOn: '2025-05-30T01:25:55.809Z'
 
 The project transfer functionality enables you to provision fully-configured Postgres databases on behalf of your users and seamlessly transition ownership. This capability eliminates the technical overhead of database setup while ensuring your users maintain complete control of their database resources.
 
-<CTA title="Availability Status" description="This feature is available in private preview only. To enable this functionality for your account, <a href='https://neon.tech/partners#partners-apply'>contact our partnership team</a>." isIntro></CTA>
+<CTA title="Availability Status" description="This feature is available in private preview only. To enable this functionality for your account, <a href='https://neon.com/partners#partners-apply'>contact our partnership team</a>." isIntro></CTA>
 
 ## Simplified workflow
 
@@ -242,21 +242,21 @@ For a working implementation of claimable databases, try [Neon Launchpad](https:
 
 ## Troubleshooting
 
-| Issue                                 | Solution                                                                                                         |
-| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| Claim URL expired                     | Create a new transfer request and generate a new claim URL                                                       |
-| User receives error when claiming     | Verify the project exists and the transfer request hasn't been used                                              |
-| Project doesn't appear after claiming | Refresh the Neon Console or log out and back in                                                                  |
-| "Transfer requests not enabled" error | [Contact our partnership team](https://neon.tech/partners#partners-apply) to enable this private preview feature |
-| Organization transfer fails           | Verify user membership in the target organization and correct `org_id` format                                    |
-| Already claimed error                 | The transfer request has been used; create a new one if needed                                                   |
+| Issue                                 | Solution                                                                                        |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Claim URL expired                     | Create a new transfer request and generate a new claim URL                                      |
+| User receives error when claiming     | Verify the project exists and the transfer request hasn't been used                             |
+| Project doesn't appear after claiming | Refresh the Neon Console or log out and back in                                                 |
+| "Transfer requests not enabled" error | [Contact our partnership team](/partners#partners-apply) to enable this private preview feature |
+| Organization transfer fails           | Verify user membership in the target organization and correct `org_id` format                   |
+| Already claimed error                 | The transfer request has been used; create a new one if needed                                  |
 
 ## Further resources
 
 - [Create project API reference](https://api-docs.neon.tech/reference/createproject)
 - [Create project transfer request API reference](https://api-docs.neon.tech/reference/createprojecttransferrequest)
 - [Accept project transfer request API reference](https://api-docs.neon.tech/reference/acceptprojecttransferrequest)
-- [Neon API documentation](https://neon.tech/docs/reference/api-reference)
-- [Managing projects](https://neon.tech/docs/manage/projects)
-- [Managing API keys](https://neon.tech/docs/manage/api-keys)
-- [Managing organizations](https://neon.tech/docs/manage/organizations)
+- [Neon API documentation](/docs/reference/api-reference)
+- [Managing projects](/docs/manage/projects)
+- [Managing API keys](/docs/manage/api-keys)
+- [Managing organizations](/docs/manage/organizations)

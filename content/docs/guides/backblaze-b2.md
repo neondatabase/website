@@ -71,7 +71,7 @@ We need a table in Neon to store metadata about the objects uploaded to B2.
 2.  Run the SQL statement. Add other relevant columns as needed (e.g., `content_type`, `size` if needed).
 
 <Admonition type="note" title="Securing metadata with RLS">
-If you use [Neon's Row Level Security (RLS)](https://neon.tech/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `b2_files` table. This controls who can view or modify the object references stored in Neon based on your RLS rules.
+If you use [Neon's Row Level Security (RLS)](/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `b2_files` table. This controls who can view or modify the object references stored in Neon based on your RLS rules.
 
 Note that these policies apply _only_ to the metadata in Neon. Access control for the objects within the B2 bucket itself is managed via B2 bucket settings (public/private), Application Key permissions, and presigned URL settings.
 </Admonition>

@@ -31,7 +31,7 @@ Neon pricing plans include allowances for compute, storage, and projects. For de
 
 ## Enterprise plan support on Azure
 
-Neon's **Enterprise Plan** is designed for large teams with unique requirements that aren't covered by Neon's self-serve plans. For details, see the [Enterprise Plan](/docs/introduction/plans#enterprise). To explore this option, contact our [Sales](https://neon.tech/contact-sales) team to discuss a custom private offer available through the Azure Marketplace.
+Neon's **Enterprise Plan** is designed for large teams with unique requirements that aren't covered by Neon's self-serve plans. For details, see the [Enterprise Plan](/docs/introduction/plans#enterprise). To explore this option, contact our [Sales](/contact-sales) team to discuss a custom private offer available through the Azure Marketplace.
 
 ## Microsoft Azure Consumption Commitment (MACC)
 
@@ -52,7 +52,7 @@ Changing the Neon pricing plan for an Azure subscription involves the following 
 1. Navigate to the [Azure portal](https://portal.azure.com/) and sign in.
 2. Locate your Neon Serverless Postgres resource by searching for it at the top of the page or locating it under **Resources** or **Navigate** > **All resources**.
 3. Select your Neon resource to open the **Overview** page.
-4. Select the **Change Plan** tab. This will open the **Change Plan** drawer where you can select from available Neon plans. A description of what's included in each plan is provided in the **Description** column in the drawer, but for more information about Neon plans, please visit our [Pricing](https://neon.tech/pricing) page.
+4. Select the **Change Plan** tab. This will open the **Change Plan** drawer where you can select from available Neon plans. A description of what's included in each plan is provided in the **Description** column in the drawer, but for more information about Neon plans, please visit our [Pricing](/pricing) page.
 
    ![Azure change plan](/docs/introduction/azure_change_plan.png)
 
@@ -64,4 +64,4 @@ To stop billing for Neon on Azure, you can remove your Neon resource. For instru
 
 ## Questions?
 
-If you have questions or need further guidance regarding billing through Azure Marketplace, please [reach out to us](https://neon.tech/contact-sales).
+If you have questions or need further guidance regarding billing through Azure Marketplace, please [reach out to us](/contact-sales).

@@ -8,7 +8,7 @@ We use the `pg_dump` and `pg_restore` utilities, which are part of the Postgres 
 
 ## Source
 
-- [Migrate from Render to Neon Postgres HTML](https://neon.tech/docs/import/migrate-from-render): The original HTML version of this documentation
+- [Migrate from Render to Neon Postgres HTML](https://neon.com/docs/import/migrate-from-render): The original HTML version of this documentation
 
 ## Prerequisites
 

@@ -275,6 +275,6 @@ While `pg_repack` generally works seamlessly with Neon, here are a few things to
 
 - [pg_repack GitHub Repository](https://github.com/reorg/pg_repack)
 - [pg_repack Documentation on PGXN](https://pgxn.org/dist/pg_repack/)
-- [Investigating Postgres Query Performance](https://neon.tech/blog/postgres-support-recap-investigating-postgres-query-performance)
+- [Investigating Postgres Query Performance](/blog/postgres-support-recap-investigating-postgres-query-performance)
 
 <NeedHelp/>

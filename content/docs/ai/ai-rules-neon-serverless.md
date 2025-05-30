@@ -187,7 +187,7 @@ export const config = {
 };
 
 // For Cloudflare Workers, consider using Hyperdrive instead
-// https://neon.tech/blog/hyperdrive-neon-faq
+// https://neon.com/blog/hyperdrive-neon-faq
 ```
 
 ## Error Handling

@@ -503,27 +503,27 @@
         - section: IDE & Tool Integration
           items:
             - title: Claude Desktop
-              slug: https://neon.tech/guides/neon-mcp-server
+              slug: https://neon.com/guides/neon-mcp-server
             - title: Cursor IDE
-              slug: https://neon.tech/guides/cursor-mcp-neon
+              slug: https://neon.com/guides/cursor-mcp-neon
             - title: Cline
-              slug: https://neon.tech/guides/cline-mcp-neon
+              slug: https://neon.com/guides/cline-mcp-neon
             - title: Windsurf
-              slug: https://neon.tech/guides/windsurf-mcp-neon
+              slug: https://neon.com/guides/windsurf-mcp-neon
             - title: Zed
-              slug: https://neon.tech/guides/zed-mcp-neon
+              slug: https://neon.com/guides/zed-mcp-neon
         - section: Agent Frameworks
           items:
             - title: AgentStack
-              slug: https://neon.tech/guides/agentstack-neon
+              slug: https://neon.com/guides/agentstack-neon
             - title: AutoGen
-              slug: https://neon.tech/guides/autogen-neon
+              slug: https://neon.com/guides/autogen-neon
             - title: Azure AI Agent Service
-              slug: https://neon.tech/guides/azure-ai-agent-service
+              slug: https://neon.com/guides/azure-ai-agent-service
             - title: Composio + CrewAI
-              slug: https://neon.tech/guides/composio-crewai-neon
+              slug: https://neon.com/guides/composio-crewai-neon
             - title: LangGraph
-              slug: https://neon.tech/guides/langgraph-neon
+              slug: https://neon.com/guides/langgraph-neon
     - title: AI Starter Kit
       slug: ai/ai-intro
       icon: sparks
