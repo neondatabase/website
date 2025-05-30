@@ -223,6 +223,19 @@ The process for building these Zaps will be very similar:
 4.  Configure the trigger and action, mapping data fields between the services.
 5.  Test and publish your Zap.
 
+## Troubleshooting
+
+If you encounter issues connecting Neon to Zapier or if your Zaps involving Neon are not working as expected, consider the following:
+
+- **Verify password format:** Ensure you are using the correct password format when connecting Neon to Zapier, which includes the `endpoint=[endpoint_id]$` prefix before your actual password. Refer to the details in the [Connecting Neon Postgres to Zapier](#connecting-neon-postgres-to-zapier) section for the exact structure. An incorrect password format is a common reason for connection failures.
+
+- **Specific Errors:**
+
+  If you encounter an error message stating: "**Your Zap could not be turned on - AppVersions using SQL Zero require static-ip pool types**" when trying to activate or run a Zap involving the PostgreSQL connection.
+
+  - **Observation:** This issue appears to be related to the Zapier platform's handling of PostgreSQL connections and can sometimes occur without any changes made to your Zap configuration. It has been [reported by users in the Zapier community](https://community.zapier.com/troubleshooting-99/your-zap-could-not-be-turned-on-appversions-using-sql-zero-require-static-ip-pool-types-47107).
+  - **Recommended Action:** If you encounter this specific error, and you've confirmed your connection details (including the password format) are correct, the most effective course of action is to **contact Zapier Support directly** as described in the above community post. You can contact them through the [Zapier Support page](https://zapier.com/app/get-help).
+
 ## Conclusion
 
 Zapier provides a user-friendly way to connect your Neon Postgres database to the wider ecosystem of cloud applications, enabling powerful automations without writing code. By understanding the trigger and action model, you can streamline workflows, synchronize data, and save significant time.
