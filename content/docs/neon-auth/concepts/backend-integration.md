@@ -43,16 +43,18 @@ Neon Auth provides two methods for authenticating users on your server endpoints
 import * as jose from 'jose';
 
 // you can cache this and refresh it with a low frequency
-const jwks = jose.createRemoteJWKSet(new URL("https://api.stack-auth.com/api/v1/projects/<your-project-id>/.well-known/jwks.json"));
+const jwks = jose.createRemoteJWKSet(
+  new URL('https://api.stack-auth.com/api/v1/projects/<your-project-id>/.well-known/jwks.json')
+);
 
 const accessToken = 'access token from the headers';
 
 try {
-const { payload } = await jose.jwtVerify(accessToken, jwks);
-console.log('Authenticated user with ID:', payload.sub);
+  const { payload } = await jose.jwtVerify(accessToken, jwks);
+  console.log('Authenticated user with ID:', payload.sub);
 } catch (error) {
-console.error(error);
-console.log('Invalid user');
+  console.error(error);
+  console.log('Invalid user');
 }
 ```
 
