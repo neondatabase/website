@@ -7,11 +7,11 @@ ogImage: '/postgresqltutorial/PostgreSQL-ROLLUP-example.png'
 updatedOn: '2024-07-01T01:04:08+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL GROUPING SETS'
-  slug: 'postgresql-tutorial/postgresql-grouping-sets'
-nextLink:
   title: 'PostgreSQL CUBE'
   slug: 'postgresql-tutorial/postgresql-cube'
+nextLink:
+  title: 'PostgreSQL Subquery'
+  slug: 'postgresql-tutorial/postgresql-subquery'
 ---
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `ROLLUP` to generate multiple grouping sets.
