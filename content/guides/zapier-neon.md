@@ -74,7 +74,7 @@ Before creating Zaps, you need to connect your Neon database to Zapier. Zapier u
     - **Password:** **This is where the special format is needed.** See the important note below.
 
     <Admonition type="important" title="Password Format for Neon Postgres in Zapier">
-    To connect Zapier to Neon successfully, you must include your Neon **Endpoint ID** within the password field. This is because Neon uses SNI to route connections, and some clients like Zapier's PostgreSQL connector donot pass SNI information in a way that Neon can use directly without this workaround.
+    To connect Zapier to Neon successfully, you must include your Neon **Endpoint ID** within the password field. This is because Neon uses SNI to route connections, and some clients like Zapier's PostgreSQL connector do not pass SNI information in a way that Neon can use directly without this workaround.
 
     1.  Find your **Endpoint ID**. It's the first part of your Neon hostname (e.g., if your host is `ep-tight-boat-a6aplura-pooler.us-west-2.aws.neon.tech`, your endpoint ID is `ep-tight-boat-a6aplura`).
     2.  In Zapier's **Password** field, enter the following string, replacing `[endpoint_id]` with your actual endpoint ID and `[your_actual_password]` with your database user's password:
