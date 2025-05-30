@@ -903,7 +903,7 @@
           items:
             - title: Demo
               slug: neon-auth/demo
-            - title: Best practices & FAQ
+            - title: Best practices
               slug: neon-auth/best-practices
         - section: Concepts
           items:
