@@ -1,7 +1,7 @@
 ---
 title: Usage metrics
 enableTableOfContents: true
-updatedOn: '2025-05-21T13:43:18.040Z'
+updatedOn: '2025-05-30T16:54:40.489Z'
 ---
 
 This topic describes [Storage](#storage), [Archive storage](#archive-storage), [Compute](#compute), [Data transfer](#data-transfer) and [Project](#projects) usage metrics in detail so that you can better manage your [plan](/docs/introduction/plans) allowances and extra usage.

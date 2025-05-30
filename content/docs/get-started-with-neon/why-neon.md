@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/about
   - /docs/introduction/about
-updatedOn: '2025-02-08T16:44:52.276Z'
+updatedOn: '2025-05-30T16:54:40.456Z'
 ---
 
 Looking back at Neon's debut blog post, [SELECT ’Hello, World’](/blog/hello-world), the fundamental reasons for **Why Neon** remain the same:

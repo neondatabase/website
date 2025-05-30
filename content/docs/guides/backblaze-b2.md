@@ -2,7 +2,7 @@
 title: File storage with Backblaze B2
 subtitle: Store files via Backblaze B2 and track metadata in Neon
 enableTableOfContents: true
-updatedOn: '2025-04-27T00:00:00.000Z'
+updatedOn: '2025-05-30T16:54:40.459Z'
 ---
 
 [Backblaze B2 Cloud Storage](https://www.backblaze.com/cloud-storage) is an S3-compatible object storage service known for its affordability and ease of use. It's suitable for storing large amounts of unstructured data like backups, archives, images, videos, and application assets.

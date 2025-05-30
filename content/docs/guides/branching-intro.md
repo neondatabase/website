@@ -2,7 +2,7 @@
 title: Get started with branching
 subtitle: Everything you need to get started with Neon's branching feature
 enableTableOfContents: true
-updatedOn: '2025-01-31T16:41:54.392Z'
+updatedOn: '2025-05-30T16:54:40.460Z'
 ---
 
 Find detailed information and instructions about Neon's branching feature and how you can integrate branching with your development workflows.

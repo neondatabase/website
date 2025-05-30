@@ -3,7 +3,7 @@ title: Secure your data with PropelAuth and Neon RLS
 subtitle: Implement Row-level Security policies in Postgres using PropelAuth and Neon
   RLS
 enableTableOfContents: true
-updatedOn: '2025-03-10T18:26:02.768Z'
+updatedOn: '2025-05-30T16:54:40.472Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-propelauth
   - /docs/guides/neon-authorize-propelauth

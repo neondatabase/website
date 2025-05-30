@@ -2,7 +2,7 @@
 title: The pg_repack extension
 subtitle: Remove bloat from your tables and indexes with minimal locking
 enableTableOfContents: true
-updatedOn: '2025-05-11T11:23:50.615Z'
+updatedOn: '2025-05-30T16:54:40.454Z'
 ---
 
 Postgres, like any database system, can accumulate bloat over time due to frequent updates and deletes. Bloat refers to wasted space within your tables and indexes, which can lead to decreased query performance and increased storage usage. `pg_repack` is a powerful Postgres extension that allows you to efficiently remove this bloat by rewriting tables and indexes online, with minimal locking. Unlike `VACUUM FULL` or `CLUSTER`, `pg_repack` avoids exclusive locks, ensuring your applications remain available during the reorganization process.

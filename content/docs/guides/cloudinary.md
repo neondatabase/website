@@ -2,7 +2,7 @@
 title: Media storage with Cloudinary
 subtitle: Store files via Cloudinary and track metadata in Neon
 enableTableOfContents: true
-updatedOn: '2025-04-27T11:08:17.424Z'
+updatedOn: '2025-05-30T16:54:40.461Z'
 ---
 
 [Cloudinary](https://cloudinary.com/) is a cloud-based platform for image and video management, offering upload, storage, real-time manipulation, optimization, and delivery via CDN.

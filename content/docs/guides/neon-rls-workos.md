@@ -2,7 +2,7 @@
 title: Secure your data with WorkOS and Neon RLS
 subtitle: Implement Row-level Security policies in Postgres using WorkOS and Neon RLS
 enableTableOfContents: true
-updatedOn: '2025-03-10T18:26:02.771Z'
+updatedOn: '2025-05-30T16:54:40.474Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-workos
   - /docs/guides/neon-authorize-workos

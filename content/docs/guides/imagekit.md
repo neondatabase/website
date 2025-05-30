@@ -2,7 +2,7 @@
 title: Media storage with ImageKit.io
 subtitle: Store files via ImageKit.io and track metadata in Neon
 enableTableOfContents: true
-updatedOn: '2025-04-27T11:08:17.425Z'
+updatedOn: '2025-05-30T16:54:40.464Z'
 ---
 
 [ImageKit.io](https://imagekit.io/) is a cloud-based image and video optimization and delivery platform. It provides real-time manipulation, storage, and delivery via a global CDN, simplifying media management for web and mobile applications.

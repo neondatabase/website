@@ -3,7 +3,7 @@ title: Full Twin
 subtitle: Create a full Twin of your production database
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-03-03T16:46:05.777Z'
+updatedOn: '2025-05-30T16:54:40.475Z'
 ---
 
 This workflow will create a full Neon Twin using `pg_dump` and `pg_restore`.

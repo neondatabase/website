@@ -3,7 +3,7 @@ title: Getting ready for production
 subtitle: A checklist of recommended settings to optimize performance, security, and
   reliability
 enableTableOfContents: true
-updatedOn: '2025-05-20T17:00:38.659Z'
+updatedOn: '2025-05-30T16:54:40.455Z'
 ---
 
 <CheckList title="Production checklist">

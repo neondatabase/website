@@ -3,7 +3,7 @@ title: Secure Your Data with Neon RLS and Firebase or GCP Identity Platform
 subtitle: Implement Row-Level Security in Postgres using Firebase or GCP Identity
   Platform
 enableTableOfContents: true
-updatedOn: '2025-03-10T18:26:02.767Z'
+updatedOn: '2025-05-30T16:54:40.471Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-google-identity
   - /docs/guides/neon-authorize-google-identity

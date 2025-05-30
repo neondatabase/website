@@ -1,5 +1,5 @@
 ---
-updatedOn: '2025-02-20T17:29:13.759Z'
+updatedOn: '2025-05-30T16:54:40.495Z'
 ---
 
 <Admonition type="comingSoon" title="New pricing plans">
