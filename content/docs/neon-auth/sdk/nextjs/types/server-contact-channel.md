@@ -14,8 +14,7 @@ The `ServerContactChannel` object is used on the server side to represent a cont
 ```typescript
 type ServerContactChannel =
   // Inherits all functionality from ContactChannel
-  & ContactChannel
-  & {
+  ContactChannel & {
     serverMetadata: Json;
     serverReadOnlyMetadata: Json;
   };
@@ -35,4 +34,4 @@ The server read-only metadata of the contact channel as a `Json` object. This ca
 
 ```typescript
 declare const serverReadOnlyMetadata: Json;
-``` 
+```

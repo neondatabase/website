@@ -61,18 +61,22 @@ An object containing multiple properties.
 <summary>Show properties</summary>
 
 ### tokenStore `union` **required**
+
 Where to store the user's session tokens.
 
 <details>
 <summary>Show details</summary>
 
 #### Next.js
+
 In Next.js apps, use `"nextjs-cookie"` to store tokens in Next.js cookies.
 
 #### React
+
 In React apps, use `"cookie"` to store tokens in browser cookies.
 
 #### Possible values
+
 - `"nextjs-cookie"`: Uses Next.js cookies (Next.js only)
 - `"cookie"`: Uses browser cookies (both React and Next.js)
 - `"memory"`: Uses in-memory storage (both React and Next.js)
@@ -81,15 +85,19 @@ In React apps, use `"cookie"` to store tokens in browser cookies.
 </details>
 
 ## baseUrl `string`
+
 The base URL for {sdkName}'s API. Only override this if you are self-hosting. Defaults to `https://api.stack-auth.com`, unless overridden by the `NEXT_PUBLIC_STACK_API_URL` environment variable.
 
 ### projectId `string`
+
 The ID of the project that the app is associated with, as found on the dashboard. Defaults to the value of the `NEXT_PUBLIC_STACK_PROJECT_ID` environment variable.
 
 ### publishableClientKey `string`
+
 The publishable client key of the app, as found on the dashboard. Defaults to the value of the `NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY` environment variable.
 
 ### urls (object)
+
 The URLs that {sdkName} uses to route and redirect.
 
 <details>
@@ -100,6 +108,7 @@ The URLs that {sdkName} uses to route and redirect.
 </details>
 
 ### noAutomaticPrefetch `boolean`
+
 Whether to disable automatic prefetching of user data. Defaults to `false`.
 
 </details>
@@ -123,18 +132,18 @@ declare new(options: {
 
 ```typescript
 const stackClientApp = new StackClientApp({
-  tokenStore: "nextjs-cookie",
-  baseUrl: "https://api.stack-auth.com",
-  projectId: "123",
-  publishableClientKey: "123",
+  tokenStore: 'nextjs-cookie',
+  baseUrl: 'https://api.stack-auth.com',
+  projectId: '123',
+  publishableClientKey: '123',
   urls: {
-    home: "/",
+    home: '/',
   },
 });
 ```
 
 ```typescript
-"use client";
+'use client';
 
 function MyReactComponent() {
   const stackClientApp = useStackApp();
@@ -215,7 +224,7 @@ function MyReactComponent() {
 }
 
 // Redirecting vs. not redirecting
-'use client';
+('use client');
 
 function MyReactComponent() {
   const user = useUser();
@@ -229,7 +238,7 @@ function MyReactComponent() {
 }
 
 // Protecting a page client-side
-'use client';
+('use client');
 
 function MyProtectedComponent() {
   // Note: This component is protected on the client-side.

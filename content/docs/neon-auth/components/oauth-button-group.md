@@ -1,5 +1,5 @@
 ---
-title: "<OAuthButtonGroup />"
+title: '<OAuthButtonGroup />'
 subtitle: Neon Auth OAuth button group component
 enableTableOfContents: true
 tag: beta

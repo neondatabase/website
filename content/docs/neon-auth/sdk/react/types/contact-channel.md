@@ -5,4 +5,4 @@ enableTableOfContents: true
 tag: beta
 ---
 
-<SdkContactChannel sdkName="React" /> 
+<SdkContactChannel sdkName="React" />

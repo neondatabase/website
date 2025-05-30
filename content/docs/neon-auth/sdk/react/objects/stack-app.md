@@ -5,4 +5,4 @@ enableTableOfContents: true
 tag: beta
 ---
 
-<SdkStackApp sdkName="React" /> 
+<SdkStackApp sdkName="React" />

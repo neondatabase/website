@@ -1,5 +1,5 @@
 ---
-title: "<StackProvider />"
+title: '<StackProvider />'
 subtitle: Neon Auth provider component for React context
 enableTableOfContents: true
 tag: beta

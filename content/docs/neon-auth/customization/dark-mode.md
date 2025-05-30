@@ -25,7 +25,7 @@ import { ThemeProvider } from 'next-themes'
 
 export default function Layout({ children }) {
 return (
-    {/* 
+    {/*
     ThemeProvider enables theme switching throughout the application.
     defaultTheme="system" uses the user's system preference as the default.
     attribute="class" applies the theme by changing the class on the html element.
@@ -44,23 +44,24 @@ return (
 
 ```jsx
 'use client';
-import { useTheme } from 'next-themes'
+import { useTheme } from 'next-themes';
 
 export default function ColorModeSwitcher() {
-// useTheme hook provides the current theme and a function to change it
-const { theme, setTheme } = useTheme()
+  // useTheme hook provides the current theme and a function to change it
+  const { theme, setTheme } = useTheme();
 
-return (
-    <button 
-    onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-    aria-label="Toggle dark mode"
+  return (
+    <button
+      onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+      aria-label="Toggle dark mode"
     >
-    {/* Display different text based on current theme */}
-    {theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+      {/* Display different text based on current theme */}
+      {theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
     </button>
-)
+  );
 }
 ```
+
 </Steps>
 
 Now if you put the `ColorModeSwitcher` component in your app, you should be able to switch between light and dark mode. There should be no flickering or re-rendering of the page after reloading.

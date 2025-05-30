@@ -1,6 +1,7 @@
 This is a detailed reference for the `TeamProfile` and `ServerTeamProfile` objects in the {sdkName} SDK.
 
 On this page:
+
 - [TeamProfile](#teamprofile)
 - [ServerTeamProfile](#serverteamprofile)
 
@@ -42,5 +43,5 @@ The `ServerTeamProfile` object is currently the same as `TeamProfile`.
 ```typescript
 type ServerTeamProfile =
   // Inherits all functionality from TeamProfile
-  & TeamProfile;
+  TeamProfile;
 ```

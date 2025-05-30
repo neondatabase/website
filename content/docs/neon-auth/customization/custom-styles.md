@@ -52,4 +52,4 @@ const theme = {
 <StackTheme theme={theme}>
   {/* children */}
 </StackTheme>
-``` 
+```
