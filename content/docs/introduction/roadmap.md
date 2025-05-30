@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2025-05-23T18:48:33.110Z'
+updatedOn: '2025-05-29T23:18:12.808Z'
 ---
 
 Our development teams are focused on helping you ship faster with Postgres. This roadmap describes committed features we're working on right now, what we delivered recently, and a peek at what's on the horizon.
@@ -82,7 +82,7 @@ And here's an overview of what we're looking at next:
 - **Neon Snapshots (Early Access)**: Create and manage point-in-time copies of your database with our new unified Backup & Restore experience.
 - **Inbound logical replication GA**: Neon now fully supports Postgres logical replication for inbound data (replicating data to Neon).
 - **Postgres logs in Datadog (Beta)**: Stream and analyze your Postgres logs directly in your Datadog dashboard for better observability. Available on Scale and Business plans.
-- **Support for [pg_search](/docs/extensions/pg_search)**: We partnered with [ParadeDB](https://www.paradedb.com/) to bring `pg_search` to Neon, delivering up to 1,000x faster full-text search inside Postgres on versions 14, 15, and 16. [Read the announcement](/blog).
+- **Support for [pg_search](/docs/extensions/pg_search)**: We partnered with [ParadeDB](https://www.paradedb.com/) to bring `pg_search` to Neon, delivering up to 1,000x faster full-text search inside Postgres on version 17. [Read the announcement](/blog/pgsearch-on-neon).
 - **MACC-eligibility on Azure**: Neon Postgres purchases made through the Azure Marketplace are now counted toward your Microsoft Azure Consumption Commitment (MACC). [Learn more](/docs/introduction/billing-azure-marketplace#microsoft-azure-consumption-commitment-macc).
 - **GitHub Secret Scanning**: Neon joined GitHub's Secret Scanning Partner Program to automatically detect and protect against exposed database credentials in public repositories.
 - **HIPAA compliance**: We have achieved HIPAA compliance. Learn more about Neon's compliance milestones on our [Compliance page](/docs/security/compliance).
