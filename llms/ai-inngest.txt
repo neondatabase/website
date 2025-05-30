@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Inngest HTML](https://neon.tech/docs/ai/inngest): The original HTML version of this documentation
+- [Inngest HTML](https://neon.com/docs/ai/inngest): The original HTML version of this documentation
 
 ## Overview
 

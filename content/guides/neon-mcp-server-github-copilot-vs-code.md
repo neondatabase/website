@@ -35,7 +35,7 @@ Let's get started with using the Neon MCP server and GitHub Copilot.
 
 ### **Create Neon Database**
 
-Visit the [Neon on Azure Marketplace](https://portal.azure.com/#view/Azure_Marketplace_Neon/NeonCreateResource.ReactView) page and follow the [Create a Neon resource](https://neon.tech/docs/azure/azure-deploy#create-a-neon-resource) guide to deploy Neon on Azure for your subscription. Neon offers a [Free plan](https://neon.tech/pricing) that provides more than enough resources to build a proof of concept or kick off a new startup project.
+Visit the [Neon on Azure Marketplace](https://portal.azure.com/#view/Azure_Marketplace_Neon/NeonCreateResource.ReactView) page and follow the [Create a Neon resource](/docs/azure/azure-deploy#create-a-neon-resource) guide to deploy Neon on Azure for your subscription. Neon offers a [Free plan](/pricing) that provides more than enough resources to build a proof of concept or kick off a new startup project.
 
 ### Install the Neon MCP Server for VS Code
 
@@ -78,7 +78,7 @@ Copilot will generate a REST API using Azure Functions in JavaScript with a basi
 
 ![list existing Neon projects in GitHub Copilot](/docs/guides/github-copilot-neon-mcp-server/github-copilot-list-neon-mcp-server-tools.png)
 
-**Step 5:** Try out different prompts to fetch the connection string for the chosen database and set it to the Azure Functions settings. Then ask to create a sample Customer table and so on. Or you can even prompt to create a new [database branch](https://neon.tech/docs/introduction/branching) on Neon.
+**Step 5:** Try out different prompts to fetch the connection string for the chosen database and set it to the Azure Functions settings. Then ask to create a sample Customer table and so on. Or you can even prompt to create a new [database branch](/docs/introduction/branching) on Neon.
 
 ![Fetch data from Neon in GitHub Copilot](/docs/guides/github-copilot-neon-mcp-server/github-copilot-fetch-neon-connection-string.png)
 
@@ -105,7 +105,7 @@ With GitHub Copilot, Neon MCP server, and Azure Functions, you're no longer writ
 
 ## Resources
 
-- [Neon on Azure](https://neon.tech/docs/manage/azure)
-- [Neon MCP Server](https://neon.tech/docs/ai/neon-mcp-server)
+- [Neon on Azure](/docs/manage/azure)
+- [Neon MCP Server](/docs/ai/neon-mcp-server)
 
 <NeedHelp />

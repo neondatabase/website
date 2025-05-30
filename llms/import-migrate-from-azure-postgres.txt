@@ -8,7 +8,7 @@ Logical replication for Postgres transfers data from a source Postgres database 
 
 ## Source
 
-- [Migrate from Azure PostgreSQL to Neon HTML](https://neon.tech/docs/import/migrate-from-azure-postgres): The original HTML version of this documentation
+- [Migrate from Azure PostgreSQL to Neon HTML](https://neon.com/docs/import/migrate-from-azure-postgres): The original HTML version of this documentation
 
 ## Prerequisites
 

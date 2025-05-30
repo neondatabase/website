@@ -6,9 +6,9 @@ Find instructions for migrating data from Postgres, CSV, other Neon projects, an
 
 ## Source
 
-- [Neon data migration guides HTML](https://neon.tech/docs/import/migrate-intro): The original HTML version of this documentation
+- [Neon data migration guides HTML](https://neon.com/docs/import/migrate-intro): The original HTML version of this documentation
 
-**Note**: If you're planning to migrate a production workload to Neon, let us know&#8212;we'll connect you with an expert from our team. You can reach out to us [here](https://neon.tech/migration-assistance).
+**Note**: If you're planning to migrate a production workload to Neon, let us know&#8212;we'll connect you with an expert from our team. You can reach out to us [here](https://neon.com/migration-assistance).
 
 
 ## Data migration guides

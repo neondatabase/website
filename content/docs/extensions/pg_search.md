@@ -3,7 +3,7 @@ title: The pg_search extension
 subtitle: An Elasticsearch alternative for full-text search and analytics on Postgres
 tag: new
 enableTableOfContents: true
-updatedOn: '2025-05-11T11:23:50.616Z'
+updatedOn: '2025-05-29T23:18:12.807Z'
 ---
 
 The `pg_search` extension by [ParadeDB](https://www.paradedb.com/) adds functions and operators to Postgres that use [BM25 (Best Matching 25)](https://en.wikipedia.org/wiki/Okapi_BM25) indexes for efficient, high-relevance text searches. It supports standard SQL syntax and JSON query objects, offering features similar to those in Elasticsearch.
@@ -22,7 +22,7 @@ In this guide, you'll learn how to enable `pg_search` on Neon, understand the fu
 
 ## Enable the `pg_search` extension
 
-<Tabs labels={["Postgres 17", "Postgres 14—16"]}>
+<Tabs labels={["Postgres 17"]}>
 
 <TabItem>
 
@@ -31,73 +31,6 @@ Install the `pg_search` extension by running the following `CREATE EXTENSION` st
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_search;
 ```
-
-</TabItem>
-
-<TabItem>
-
-1.  **Enable the required pg_search libraries**
-
-    Enable the required `pg_search` library in your Neon project using the [Update project](https://api-docs.neon.tech/reference/updateproject) API. You will need your [Neon project ID](/docs/reference/glossary#project-id) and your [Neon API key](/docs/manage/api-keys). **Running this API restarts your project's computes**.
-
-    <Admonition type="important">
-    When you enable a library using the `Update project` command, you must specify **all libraries** that should remain enabled. To get a list of currently enabled libraries, run `SHOW shared_preload_libraries;` from an SQL client. The result should look something like this:
-
-        ```sql shouldWrap
-        SHOW shared_preload_libraries;
-        neon,pg_stat_statements,timescaledb,pg_cron,pg_partman_bgw,rag_bge_small_en_v15,rag_jina_reranker_v1_tiny_en
-        ```
-
-    You need to add `pg_search` to the list.
-
-    When running the `Update project` API:
-
-    - Library names must be quoted, comma-separated, and specified in a single string, as in the example below.
-    - Specify all libraries that should be enabled. If a library is not included in the `Update project` API call, it will not be enabled.
-    - The `neon` and `pg_stat_statements` libraries will remain enabled whether you include them in your API call or not — they're used by a Neon system-managed database.
-    - If you do not use one of the libraries enabled by default, you can exclude it from your API call. For example, if you do not use the `pgrag` extension, you can exclude its libraries (`"rag_bge_small_en_v15,rag_jina_reranker_v1_tiny_en"`).
-
-    </Admonition>
-
-    This API call adds the `pg_search` library to the list of currently enabled libraries.
-
-    ```bash
-    curl --request PATCH \
-        --url https://console.neon.tech/api/v2/projects/<your_project_id> \
-        --header 'accept: application/json' \
-        --header 'authorization: Bearer $NEON_API_KEY' \
-        --header 'content-type: application/json' \
-        --data '
-    {
-      "project": {
-        "settings": {
-          "preload_libraries": {
-            "enabled_libraries": [
-              "neon","pg_stat_statements","timescaledb","pg_cron","pg_partman_bgw","rag_bge_small_en_v15,rag_jina_reranker_v1_tiny_en","pg_search"
-            ]
-          }
-        }
-      }
-    }
-    '
-    ```
-
-1.  **Check to make sure the `pg_search` library is enabled**
-
-    Run the following command to make sure `pg_search` was added to the list of enabled libraries.
-
-    ```sql shouldWrap
-    SHOW shared_preload_libraries;
-    neon,pg_stat_statements,timescaledb,pg_cron,pg_partman_bgw,rag_bge_small_en_v15,rag_jina_reranker_v1_tiny_en,pg_search
-    ```
-
-1.  **Install the `pg_search` extension**
-
-    Install the `pg_search` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
-
-    ```sql
-    CREATE EXTENSION IF NOT EXISTS pg_search;
-    ```
 
 </TabItem>
 

@@ -4,7 +4,7 @@
 
 ## Source
 
-- [The hstore extension HTML](https://neon.tech/docs/extensions/hstore): The original HTML version of this documentation
+- [The hstore extension HTML](https://neon.com/docs/extensions/hstore): The original HTML version of this documentation
 
 The `hstore` extension is a flexible way to store and manipulate sets of key-value pairs within a single Postgres value. It is particularly useful for semi-structured data or data that does not have a rigid schema.
 
@@ -15,7 +15,7 @@ This guide covers the basics of the `hstore` extension - how to enable it, how t
 
 **Version availability**
 
-Please refer to the [list of all extensions](https://neon.tech/docs/extensions/pg-extensions) available in Neon for up-to-date information.
+Please refer to the [list of all extensions](https://neon.com/docs/extensions/pg-extensions) available in Neon for up-to-date information.
 
 Currently, Neon uses version `1.8` of the `hstore` extension for all Postgres versions.
 
@@ -27,7 +27,7 @@ Enable the extension by running the following SQL statement in your Postgres cli
 CREATE EXTENSION IF NOT EXISTS hstore;
 ```
 
-For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](https://neon.tech/docs/connect/query-with-psql-editor).
+For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](https://neon.com/docs/connect/query-with-psql-editor).
 
 ## Example usage
 

@@ -6,7 +6,7 @@ Postgres Boolean data type provides an efficient way to store and manipulate tru
 
 ## Source
 
-- [Postgres Boolean data type HTML](https://neon.tech/docs/data-types/boolean): The original HTML version of this documentation
+- [Postgres Boolean data type HTML](https://neon.com/docs/data-types/boolean): The original HTML version of this documentation
 
 ## Storage and syntax
 

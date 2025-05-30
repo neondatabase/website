@@ -3,7 +3,7 @@ title: Deploy Your Node.js App with Neon Postgres on Heroku
 subtitle: A step-by-step guide to deploying a Node application with a Neon Postgres
   database on Heroku
 enableTableOfContents: true
-updatedOn: '2025-02-03T20:41:57.315Z'
+updatedOn: '2025-05-30T16:54:40.463Z'
 ---
 
 [Heroku](https://heroku.com) is a popular platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud. It simplifies the deployment process, making it a favorite among developers for its ease of use and integration capabilities.
@@ -194,7 +194,7 @@ You can find the source code for the application described in this guide on GitH
 
 - [Heroku Documentation](https://devcenter.heroku.com/)
 - [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
-- [Neon](https://neon.tech/docs)
+- [Neon](/docs)
 - [Import data from Heroku Postgres to Neon](/docs/import/migrate-from-heroku)
 
 <NeedHelp/>

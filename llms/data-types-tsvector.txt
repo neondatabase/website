@@ -6,7 +6,7 @@ Postgres tsvector data type provides powerful full-text search capabilities for 
 
 ## Source
 
-- [Postgres tsvector data type HTML](https://neon.tech/docs/data-types/tsvector): The original HTML version of this documentation
+- [Postgres tsvector data type HTML](https://neon.com/docs/data-types/tsvector): The original HTML version of this documentation
 
 ## Storage and syntax
 

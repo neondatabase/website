@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Database branching workflow primer HTML](https://neon.tech/docs/get-started-with-neon/workflow-primer): The original HTML version of this documentation
+- [Database branching workflow primer HTML](https://neon.com/docs/get-started-with-neon/workflow-primer): The original HTML version of this documentation
 
 ## Overview
 
@@ -52,8 +52,8 @@ neon branches delete <id|name> [options]
 
 For more information, see:
 
-- [Branching with the Neon CLI](https://neon.tech/docs/guides/branching-neon-cli)
-- [Neon CLI Reference](https://neon.tech/docs/reference/neon-cli)
+- [Branching with the Neon CLI](https://neon.com/docs/guides/branching-neon-cli)
+- [Neon CLI Reference](https://neon.com/docs/reference/neon-cli)
 
 ### GitHub Actions
 
@@ -102,7 +102,7 @@ You can find these GitHub Actions here:
 - [Reset Branch Action](https://github.com/neondatabase/reset-branch-action)
 - [Schema Diff Action](https://github.com/neondatabase/schema-diff-action)
 
-For more detailed documentation, see [Automate branching with GitHub Actions](https://neon.tech/docs/guides/branching-github-actions).
+For more detailed documentation, see [Automate branching with GitHub Actions](https://neon.com/docs/guides/branching-github-actions).
 
 ## A branch for every environment
 

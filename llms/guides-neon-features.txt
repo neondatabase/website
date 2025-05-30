@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Neon feature guides HTML](https://neon.tech/docs/guides/neon-features): The original HTML version of this documentation
+- [Neon feature guides HTML](https://neon.com/docs/guides/neon-features): The original HTML version of this documentation
 
 Explore Neon's capabilities with our feature guides
 
@@ -12,9 +12,9 @@ Explore Neon's capabilities with our feature guides
 
 Automatically scale compute resources up and down based on demand.
 
-Learn about autoscaling: https://neon.tech/docs/introduction/autoscaling
+Learn about autoscaling: https://neon.com/docs/introduction/autoscaling
 
-Enable autoscaling: https://neon.tech/docs/guides/autoscaling-guide
+Enable autoscaling: https://neon.com/docs/guides/autoscaling-guide
 
 
 
@@ -22,9 +22,9 @@ Enable autoscaling: https://neon.tech/docs/guides/autoscaling-guide
 
 Enable or disable scale to zero for your Neon computes.
 
-Learn about scale to zero: https://neon.tech/docs/introduction/scale-to-zero
+Learn about scale to zero: https://neon.com/docs/introduction/scale-to-zero
 
-Configure scale to zero: https://neon.tech/docs/guides/scale-to-zero-guide
+Configure scale to zero: https://neon.com/docs/guides/scale-to-zero-guide
 
 
 
@@ -32,19 +32,19 @@ Configure scale to zero: https://neon.tech/docs/guides/scale-to-zero-guide
 
 Branch data the same way you branch your code.
 
-Learn about branching: https://neon.tech/docs/introduction/branching
+Learn about branching: https://neon.com/docs/introduction/branching
 
-Point-in-time restore: https://neon.tech/docs/guides/branching-pitr
+Point-in-time restore: https://neon.com/docs/guides/branching-pitr
 
-Test queries on a branch: https://neon.tech/docs/guides/branching-test-queries
+Test queries on a branch: https://neon.com/docs/guides/branching-test-queries
 
-Branching with the CLI: https://neon.tech/docs/guides/branching-neon-cli
+Branching with the CLI: https://neon.com/docs/guides/branching-neon-cli
 
-Branching with the API: https://neon.tech/docs/guides/branching-neon-api
+Branching with the API: https://neon.com/docs/guides/branching-neon-api
 
-Branching with GitHub Actions: https://neon.tech/docs/guides/branching-github-actions
+Branching with GitHub Actions: https://neon.com/docs/guides/branching-github-actions
 
-Refresh a branch: https://neon.tech/docs/guides/branch-refresh
+Refresh a branch: https://neon.com/docs/guides/branch-refresh
 
 
 
@@ -52,13 +52,13 @@ Refresh a branch: https://neon.tech/docs/guides/branch-refresh
 
 Replicate data from Neon to external data platforms and services.
 
-Logical replication guide: https://neon.tech/docs/guides/logical-replication-guide
+Logical replication guide: https://neon.com/docs/guides/logical-replication-guide
 
-Logical replication concepts: https://neon.tech/docs/guides/logical-replication-concepts
+Logical replication concepts: https://neon.com/docs/guides/logical-replication-concepts
 
-Logical replication commands: https://neon.tech/docs/guides/logical-replication-manage
+Logical replication commands: https://neon.com/docs/guides/logical-replication-manage
 
-Logical replication in Neon: https://neon.tech/docs/guides/logical-replication-neon
+Logical replication in Neon: https://neon.com/docs/guides/logical-replication-neon
 
 
 
@@ -66,17 +66,17 @@ Logical replication in Neon: https://neon.tech/docs/guides/logical-replication-n
 
 Learn how Neon read replicas can help you scale and manage read-only workloads.
 
-Learn about read replicas: https://neon.tech/docs/introduction/read-replicas
+Learn about read replicas: https://neon.com/docs/introduction/read-replicas
 
-Create and manage Read Replicas: https://neon.tech/docs/guides/read-replica-guide
+Create and manage Read Replicas: https://neon.com/docs/guides/read-replica-guide
 
-Scale your app with Read Replicas: https://neon.tech/docs/guides/read-replica-integrations
+Scale your app with Read Replicas: https://neon.com/docs/guides/read-replica-integrations
 
-Run analytics queries with Read Replicas: https://neon.tech/docs/guides/read-replica-data-analysis
+Run analytics queries with Read Replicas: https://neon.com/docs/guides/read-replica-data-analysis
 
-Run ad-hoc queries with Read Replicas: https://neon.tech/docs/guides/read-replica-adhoc-queries
+Run ad-hoc queries with Read Replicas: https://neon.com/docs/guides/read-replica-adhoc-queries
 
-Provide read-only access with Read Replicas: https://neon.tech/docs/guides/read-only-access-read-replicas
+Provide read-only access with Read Replicas: https://neon.com/docs/guides/read-only-access-read-replicas
 
 
 
@@ -84,9 +84,9 @@ Provide read-only access with Read Replicas: https://neon.tech/docs/guides/read-
 
 Travel back in time to view your database's history.
 
-Learn about Time Travel: https://neon.tech/docs/guides/time-travel-assist
+Learn about Time Travel: https://neon.com/docs/guides/time-travel-assist
 
-Time Travel tutorial: https://neon.tech/docs/guides/time-travel-tutorial
+Time Travel tutorial: https://neon.com/docs/guides/time-travel-tutorial
 
 
 
@@ -94,9 +94,9 @@ Time Travel tutorial: https://neon.tech/docs/guides/time-travel-tutorial
 
 Compare your database branches.
 
-Learn about Schema Diff: https://neon.tech/docs/guides/schema-diff
+Learn about Schema Diff: https://neon.com/docs/guides/schema-diff
 
-Schema Diff tutorial: https://neon.tech/docs/guides/schema-diff-tutorial
+Schema Diff tutorial: https://neon.com/docs/guides/schema-diff-tutorial
 
 
 
@@ -104,7 +104,7 @@ Schema Diff tutorial: https://neon.tech/docs/guides/schema-diff-tutorial
 
 Invite other users to collaborate on your Neon project.
 
-Collaborate on your Neon project: https://neon.tech/docs/guides/project-collaboration-guide
+Collaborate on your Neon project: https://neon.com/docs/guides/project-collaboration-guide
 
 
 
@@ -112,7 +112,7 @@ Collaborate on your Neon project: https://neon.tech/docs/guides/project-collabor
 
 Limit access to trusted IP addresses.
 
-Define your IP allowlist: https://neon.tech/docs/introduction/ip-allow
+Define your IP allowlist: https://neon.com/docs/introduction/ip-allow
 
 
 
@@ -120,7 +120,7 @@ Define your IP allowlist: https://neon.tech/docs/introduction/ip-allow
 
 Protect your production or sensitive data.
 
-Configure protected branches: https://neon.tech/docs/guides/protected-branches
+Configure protected branches: https://neon.com/docs/guides/protected-branches
 
 
 
@@ -128,4 +128,4 @@ Configure protected branches: https://neon.tech/docs/guides/protected-branches
 
 Secure your database connections with private access.
 
-Private Networking: https://neon.tech/docs/guides/neon-private-networking
+Private Networking: https://neon.com/docs/guides/neon-private-networking

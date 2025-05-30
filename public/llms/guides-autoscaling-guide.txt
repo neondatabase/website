@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Enable Autoscaling in Neon HTML](https://neon.tech/docs/guides/autoscaling-guide): The original HTML version of this documentation
+- [Enable Autoscaling in Neon HTML](https://neon.com/docs/guides/autoscaling-guide): The original HTML version of this documentation
 
 ## What you will learn:
 
@@ -13,8 +13,8 @@
 
 ## Related topics
 
-- [About autoscaling](https://neon.tech/docs/introduction/autoscaling)
-- [How the algorithm works](https://neon.tech/docs/guides/autoscaling-algorithm)
+- [About autoscaling](https://neon.com/docs/introduction/autoscaling)
+- [How the algorithm works](https://neon.com/docs/guides/autoscaling-algorithm)
 
 This guide demonstrates how to enable autoscaling in your Neon project and how to [visualize](#monitor-autoscaling) your usage.
 
@@ -29,18 +29,18 @@ To edit a compute:
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
 1. On the **Computes** tab, identify the compute you want to configure and click **Edit**.
-   ![Edit compute menu](https://neon.tech/docs/guides/autoscaling_edit.png)
+   ![Edit compute menu](https://neon.com/docs/guides/autoscaling_edit.png)
 1. On the **Edit compute** drawer, select **Autoscale** and use the slider to specify a minimum and maximum compute size.
 
-   Neon scales the compute size up and down within the specified range to meet workload demand. Autoscaling currently supports a range of 1/4 (.25) to 16 vCPUs. One vCPU has 4 GB of RAM, 2 vCPUs have 8 GB of RAM, and so on. The amount of RAM in GB is always 4 times the number of vCPUs. For an overview of available compute sizes, see [Compute size and autoscaling configuration](https://neon.tech/docs/manage/computes#compute-size-and-autoscaling-configuration). Please note that when the autoscaling maximum is > 10, the autoscaling minimum must be ≥ (max / 8).
+   Neon scales the compute size up and down within the specified range to meet workload demand. Autoscaling currently supports a range of 1/4 (.25) to 16 vCPUs. One vCPU has 4 GB of RAM, 2 vCPUs have 8 GB of RAM, and so on. The amount of RAM in GB is always 4 times the number of vCPUs. For an overview of available compute sizes, see [Compute size and autoscaling configuration](https://neon.com/docs/manage/computes#compute-size-and-autoscaling-configuration). Please note that when the autoscaling maximum is > 10, the autoscaling minimum must be ≥ (max / 8).
 
-   > You can configure the scale to zero setting for your compute at the same time. For more, see [Scale to Zero](https://neon.tech/docs/introduction/scale-to-zero).
+   > You can configure the scale to zero setting for your compute at the same time. For more, see [Scale to Zero](https://neon.com/docs/introduction/scale-to-zero).
 
 1. Click **Save**.
 
 ## Configure autoscaling defaults for your project
 
-You can configure autoscaling configuration defaults for your project so that **newly created computes** (including those created when you create a new branch or add read replica) are created with the same autoscaling configuration. This saves you from having to configure autoscaling settings with each new compute. See [Change your project's default compute settings](https://neon.tech/docs/manage/projects#change-your-projects-default-compute-settings) for more detail.
+You can configure autoscaling configuration defaults for your project so that **newly created computes** (including those created when you create a new branch or add read replica) are created with the same autoscaling configuration. This saves you from having to configure autoscaling settings with each new compute. See [Change your project's default compute settings](https://neon.com/docs/manage/projects#change-your-projects-default-compute-settings) for more detail.
 
 > Changing your autoscaling default settings does not alter the autoscaling configuration for existing computes.
 
@@ -81,7 +81,7 @@ See below for some rules of thumb on actions you might want to take based on tre
 
 ### Start with a good minimum
 
-Ideally, for smaller datasets, you want to keep as much of your dataset in memory (RAM) as possible. This improves performance by minimizing I/O operations. We recommend setting a large enough minimum limit to fit your full dataset in memory. For larger datasets and more sizing advice, see [how to size your compute](https://neon.tech/docs/manage/computes#how-to-size-your-compute).
+Ideally, for smaller datasets, you want to keep as much of your dataset in memory (RAM) as possible. This improves performance by minimizing I/O operations. We recommend setting a large enough minimum limit to fit your full dataset in memory. For larger datasets and more sizing advice, see [how to size your compute](https://neon.com/docs/manage/computes#how-to-size-your-compute).
 
 ### Setting your maximum
 
@@ -91,4 +91,4 @@ Another approach is to set a higher threshold than you need and monitor usage sp
 
 ### The neon_utils extension
 
-Another tool for understanding usage, the `neon_utils` extension provides a `num_cpus()` function that helps you monitor how the _Autoscaling_ feature allocates compute resources in response to workload. For more information, see [The neon_utils extension](https://neon.tech/docs/extensions/neon-utils).
+Another tool for understanding usage, the `neon_utils` extension provides a `num_cpus()` function that helps you monitor how the _Autoscaling_ feature allocates compute resources in response to workload. For more information, see [The neon_utils extension](https://neon.com/docs/extensions/neon-utils).

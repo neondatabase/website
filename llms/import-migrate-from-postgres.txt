@@ -6,7 +6,7 @@ This topic describes migrating data from one Postgres database to another using 
 
 ## Source
 
-- [Migrate data from Postgres with pg_dump and pg_restore HTML](https://neon.tech/docs/import/migrate-from-postgres): The original HTML version of this documentation
+- [Migrate data from Postgres with pg_dump and pg_restore HTML](https://neon.com/docs/import/migrate-from-postgres): The original HTML version of this documentation
 
 **Important note**: Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary#pooled-connection-string) (see PgBouncer issues [452](https://github.com/pgbouncer/pgbouncer/issues/452) & [976](https://github.com/pgbouncer/pgbouncer/issues/976) for details). Use an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string) instead.
 

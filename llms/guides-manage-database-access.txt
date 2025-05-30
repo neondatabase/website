@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Manage database access HTML](https://neon.tech/docs/guides/manage-database-access): The original HTML version of this documentation
+- [Manage database access HTML](https://neon.com/docs/guides/manage-database-access): The original HTML version of this documentation
 
 ## Note
 

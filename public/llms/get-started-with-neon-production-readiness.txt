@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Production readiness with Neon HTML](https://neon.tech/docs/get-started-with-neon/production-readiness): The original HTML version of this documentation
+- [Production readiness with Neon HTML](https://neon.com/docs/get-started-with-neon/production-readiness): The original HTML version of this documentation
 
 ## Overview
 
@@ -34,7 +34,7 @@ Neon's _Scale to zero_ feature automatically transitions a Neon compute (where P
 - **Internal apps**: These apps often experience downtime during off-hours or holidays. Scale to zero ensures that supporting databases pause during inactivity, cutting costs without affecting usage during active periods.
 - **Small projects**: Implementing scale to zero for these projects' databases enhances cost efficiency without significantly impacting user experience.
 
-Learn more about [why you want a database that scales to zero](https://neon.tech/blog/why-you-want-a-database-that-scales-to-zero).
+Learn more about [why you want a database that scales to zero](https://neon.com/blog/why-you-want-a-database-that-scales-to-zero).
 
 ## A storage architecture built for the cloud
 
@@ -46,7 +46,7 @@ Neon storage is architected to integrate storage, backups, and archiving into on
 
 Neon uses cloud-based object storage solutions, such as Amazon S3, to relocate less frequently accessed data to the most cost-efficient storage option. For your most frequently accessed data, which requires rapid access and high throughput, Neon uses locally attached SSDs to ensure high performance and low latency.
 
-The entire Neon storage framework is developed in Rust for maximum performance and usability. Read about [how we scale an open source, multi-tenant storage engine for Postgres written in Rust](https://neon.tech/blog/how-we-scale-an-open-source-multi-tenant-storage-engine-for-postgres-written-rust), or [take a deep dive into the Neon storage engine](https://neon.tech/blog/get-page-at-lsn) with Neon Co-Founder, Heikki Linnakangas.
+The entire Neon storage framework is developed in Rust for maximum performance and usability. Read about [how we scale an open source, multi-tenant storage engine for Postgres written in Rust](https://neon.com/blog/how-we-scale-an-open-source-multi-tenant-storage-engine-for-postgres-written-rust), or [take a deep dive into the Neon storage engine](https://neon.com/blog/get-page-at-lsn) with Neon Co-Founder, Heikki Linnakangas.
 
 ## Change Data Capture (CDC) with Logical Replication
 
@@ -82,4 +82,4 @@ postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.te
 
 ## More Neon features
 
-For an overview of all the features that Neon supports, including security features, visit [Detailed Plan Comparison](https://neon.tech/pricing#plans) on the [Neon Pricing](https://neon.tech/pricing) page.
+For an overview of all the features that Neon supports, including security features, visit [Detailed Plan Comparison](https://neon.com/pricing#plans) on the [Neon Pricing](https://neon.com/pricing) page.

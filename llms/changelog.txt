@@ -6,7 +6,7 @@ This page is intended to provide a record of changes and updates to the Neon pla
 
 ## Source
 
-- [Changelog HTML](https://neon.tech/docs/changelog): The original HTML version of this documentation
+- [Changelog HTML](https://neon.com/docs/changelog): The original HTML version of this documentation
 
 ## Changelog
 

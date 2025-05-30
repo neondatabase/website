@@ -2,7 +2,7 @@
 title: Neon CLI commands — projects
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2025-02-20T17:57:40.910Z'
+updatedOn: '2025-05-30T16:54:40.491Z'
 ---
 
 ## Before you begin
@@ -116,7 +116,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--cu`           | The compute size for the default branch's primary compute. Could be a fixed size (e.g., "2") or a range delimited by a dash (e.g., "0.5-3").                                                                      | string  |          |
 
 <Admonition type="note">
-Neon projects created using the CLI use the default Postgres version, which is Postgres 17. To create a project with a different Postgres version, you can use the [Neon Console](https://neon.tech/docs/manage/projects#create-a-project) or [Neon API](https://api-docs.neon.tech/reference/createproject). 
+Neon projects created using the CLI use the default Postgres version, which is Postgres 17. To create a project with a different Postgres version, you can use the [Neon Console](/docs/manage/projects#create-a-project) or [Neon API](https://api-docs.neon.tech/reference/createproject). 
 </Admonition>
 
 #### Examples

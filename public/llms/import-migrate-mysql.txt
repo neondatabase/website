@@ -6,7 +6,7 @@ This topic describes how to migrate your MySQL database to Neon Postgres using [
 
 ## Source
 
-- [Migrate from MySQL to Neon Postgres HTML](https://neon.tech/docs/import/migrate-mysql): The original HTML version of this documentation
+- [Migrate from MySQL to Neon Postgres HTML](https://neon.com/docs/import/migrate-mysql): The original HTML version of this documentation
 
 ## How pgloader works
 

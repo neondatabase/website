@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Use Prisma with Neon HTML](https://neon.tech/docs/unused/prisma-guide): The original HTML version of this documentation
+- [Use Prisma with Neon HTML](https://neon.com/docs/unused/prisma-guide): The original HTML version of this documentation
 
 Prisma is an open source next-generation ORM that consists of the following parts:
 

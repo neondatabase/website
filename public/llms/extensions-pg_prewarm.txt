@@ -4,7 +4,7 @@
 
 ## Source
 
-- [The pg_prewarm extension HTML](https://neon.tech/docs/extensions/pg_prewarm): The original HTML version of this documentation
+- [The pg_prewarm extension HTML](https://neon.com/docs/extensions/pg_prewarm): The original HTML version of this documentation
 
 ## Overview
 

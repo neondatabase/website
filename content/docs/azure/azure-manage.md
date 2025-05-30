@@ -3,10 +3,8 @@ title: Manage Neon on Azure
 subtitle: Instructions for managing your Neon resource on Azure
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-05-06T23:15:17.270Z'
+updatedOn: '2025-05-30T17:15:06.967Z'
 ---
-
-<PublicPreview/>
 
 <InfoBlock>
 <DocsList title="What you will learn:">
@@ -62,7 +60,7 @@ The branch page shows the following information for each branch:
 | **Primary Compute** | The allocated autoscaling range, in [Compute Units (CU)](/docs/reference/glossary#compute-unit-cu), for the branch's primary compute. |
 | **Data size**       | The [logical size](/docs/reference/glossary#logical-data-size) of the data stored in the branch.                                      |
 
-To learn about integrating branching into your developer workflow, see our [Database branching workflow primer](https://neon.tech/docs/get-started-with-neon/workflow-primer).
+To learn about integrating branching into your developer workflow, see our [Database branching workflow primer](/docs/get-started-with-neon/workflow-primer).
 
 You can also create branches in the Neon Console. See [Create a branch](/docs/manage/branches#create-a-branch) for instructions.
 
@@ -105,7 +103,7 @@ To retrieve a connection URL for your Neon database:
    | **Role**     | The [Postgres role](/docs/reference/glossary#postgres-role) (user) you want to connect with.                                                                                           |
    | **Compute**  | The compute that runs Postgres. Usually "Primary"—this is the read-write compute for the branch, but you may also have [read replica](/docs/reference/glossary#read-replica) computes. |
 
-You can toggle the **Connection pooling** option to use a pooled connection string, which supports up to 10,000 concurrent connections. A pooled connection string is recommended for most use cases. Use a direct connection for `pg_dump`, session-dependent features, or schema migrations. For more about pooled connections, see [Connection pooling](docs/connect/connection-pooling).
+You can toggle the **Connection pooling** option to use a pooled connection string, which supports up to 10,000 concurrent connections. A pooled connection string is recommended for most use cases. Use a direct connection for `pg_dump`, session-dependent features, or schema migrations. For more about pooled connections, see [Connection pooling](/docs/connect/connection-pooling).
 
 For more about connecting to your Neon database, see [Connect from any app](/connect/connect-from-any-app).
 

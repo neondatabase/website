@@ -4,7 +4,7 @@
 
 ## Source
 
-- [AI Rules Neon Serverless HTML](https://neon.tech/docs/ai/ai-rules-neon-serverless): The original HTML version of this documentation
+- [AI Rules Neon Serverless HTML](https://neon.com/docs/ai/ai-rules-neon-serverless): The original HTML version of this documentation
 
 ## Rules
 
@@ -166,7 +166,7 @@ export const config = {
 };
 
 // For Cloudflare Workers, consider using Hyperdrive instead
-// https://neon.tech/blog/hyperdrive-neon-faq
+// https://neon.com/blog/hyperdrive-neon-faq
 ```
 
 ### Error Handling

@@ -6,7 +6,7 @@ This guide describes how to migrate a database from one Neon project to another 
 
 ## Source
 
-- [Migrate data from another Neon project HTML](https://neon.tech/docs/import/migrate-from-neon): The original HTML version of this documentation
+- [Migrate data from another Neon project HTML](https://neon.com/docs/import/migrate-from-neon): The original HTML version of this documentation
 
 ## Important warning
 

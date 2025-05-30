@@ -4,7 +4,7 @@ subtitle: Add Neon Postgres storage to your Vercel project as a first-party nati
   integration
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-05-23T13:20:56.230Z'
+updatedOn: '2025-05-30T16:54:40.481Z'
 ---
 
 <InfoBlock>
@@ -51,7 +51,7 @@ To install the **Neon Postgres Native Integration** from the Vercel Marketplace:
 6. On the **Create Database** modal, select a region, choose a Neon plan, and click **Continue**.
 
    <Admonition type="note">
-   For an overview of what comes with each Neon Plan, please refer to the Neon [Pricing](https://neon.tech/pricing) page.
+   For an overview of what comes with each Neon Plan, please refer to the Neon [Pricing](/pricing) page.
    </Admonition>
 
 7. Specify a **Database Name**, and click **Create**.
@@ -204,7 +204,7 @@ When you install the Neon Postgres Native Integration from the Vercel Marketplac
 5. Select the desired **Installation plan**, and click **Save**.
 6. Follow the prompts to complete the plan change, providing your payment method if necessary.
 
-For an overview of Neon's plans, please visit our [Pricing](https://neon.tech/pricing) page.
+For an overview of Neon's plans, please visit our [Pricing](/pricing) page.
 
 ## Deleting your Database
 

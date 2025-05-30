@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Use Exograph with Neon HTML](https://neon.tech/docs/guides/exograph): The original HTML version of this documentation
+- [Use Exograph with Neon HTML](https://neon.com/docs/guides/exograph): The original HTML version of this documentation
 
 _This guide was contributed by the Exograph team_
 
@@ -15,7 +15,7 @@ Exograph supports Postgres for data persistence, which makes it a great fit to u
 ## Prerequisites
 
 - Exograph CLI. See [Install Exograph](https://exograph.dev/docs/getting-started).
-- A Neon project. See [Create a Neon project](https://neon.tech/docs/manage/projects#create-a-project).
+- A Neon project. See [Create a Neon project](https://neon.com/docs/manage/projects#create-a-project).
 
 ## Create a backend with Exograph
 

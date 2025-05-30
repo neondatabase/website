@@ -3,7 +3,7 @@ title: Connection latency and timeouts
 subtitle: Learn about strategies to manage connection latencies and timeouts
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-05-11T11:23:50.612Z'
+updatedOn: '2025-05-30T16:54:40.451Z'
 ---
 
 Neon's _Scale to zero_ feature is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. A characteristic of this feature is the concept of a "cold start". During this process, a compute transitions from an idle state to an active state to process requests. Currently, activating a Neon compute from an idle state typically takes a few hundred milliseconds not counting other factors that can add to latencies such as the physical distance between your application and database or startup times of other services that participate in your connection process.
@@ -170,7 +170,7 @@ However, this example is a simplification. In a production application, you migh
 #### Connection retry references
 
 - [SQL Alchemy: Dealing with disconnects](https://arc.net/l/quote/nojcaewr)
-- [Fast API blog post: Recycling connections for Neon's scale to zero](https://neon.tech/blog/deploy-a-serverless-fastapi-app-with-neon-postgres-and-aws-app-runner-at-any-scale)
+- [Fast API blog post: Recycling connections for Neon's scale to zero](/blog/deploy-a-serverless-fastapi-app-with-neon-postgres-and-aws-app-runner-at-any-scale)
 
 ### Use application-level caching
 
@@ -221,3 +221,11 @@ postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=verify-full&ssln
 ## Conclusion
 
 With the right strategies, you can optimize your system to handle connection latencies and timeouts, ensuring your application delivers a consistently high level of performance. The best solution often involves a combination of strategies, so experiment and find the right configuration for your specific use case.
+
+## Related resources
+
+- [Benchmarking latency in Neon's serverless Postgres](/docs/guides/benchmarking-latency) - Learn how to measure and optimize query latency in your Neon database
+- [Neon latency benchmarks dashboard](https://latency-benchmarks-dashboard.vercel.app) - Interactive dashboard showing real-world latency measurements across different regions and workloads ([source code](https://github.com/neondatabase-labs/latency-benchmarks))
+- [Connection pooling guide](/docs/connect/connection-pooling) - Reduce latency with efficient connection management
+- [Regional deployment options](/docs/introduction/regions) - Choose the optimal region for lowest latency
+- [Ship faster with Postgres](https://neon.tech/faster) - Explore examples and case studies demonstrating rapid development workflows

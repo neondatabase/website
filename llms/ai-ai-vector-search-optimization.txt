@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Optimize pgvector search HTML](https://neon.tech/docs/ai/ai-vector-search-optimization): The original HTML version of this documentation
+- [Optimize pgvector search HTML](https://neon.com/docs/ai/ai-vector-search-optimization): The original HTML version of this documentation
 
 ## Overview
 
