@@ -5,15 +5,15 @@ enableTableOfContents: true
 tag: beta
 ---
 
-Neon Auth connects authentication and user management directly to your Neon Postgres database. Your user data is always available right from Postgres, no need for custom sync code or webhooks.
+Neon Auth brings authentication and user management natively to your Neon Postgres database.
 
 <FeatureBetaProps feature_name="Neon Auth" />
 
 ## Why Neon Auth?
 
-Neon Auth helps you move faster by handling the auth stack for you — from login to user data sync:
+Neon Auth helps you move faster by handling the auth stack for you:
 
-- **Add auth to your app in minutes** — with SDKs for Next.js, React, and Node.js. REST API available for any backend.
+- **Add auth to your app in minutes** — SDKs for Next.js and React
 - **No more custom sync code** — user profiles are always up-to-date in your database, ready for SQL joins and analytics.
 - **Built-in support for teams, roles, and permissions**.
 
@@ -25,7 +25,7 @@ Neon Auth helps you move faster by handling the auth stack for you — from logi
 <a href="/docs/neon-auth/get-started" description="Step-by-step setup for Next.js, React, and Javascript" icon="sparkle">Quickstart</a>
 <a href="/docs/guides/neon-auth-how-it-works" description="How Neon Auth keeps your user data in sync" icon="sql">How it Works</a>
 <a href="/docs/neon-auth/demo" description="See Neon Auth in action" icon="screen">Demo & Tutorial</a>
-<a href="/docs/neon-auth/best-practices" description="Tips, patterns, and troubleshooting" icon="warning">Best Practices & FAQ</a>
+<a href="/docs/neon-auth/best-practices" description="Tips, patterns, and troubleshooting" icon="warning">Best Practices</a>
 </DetailIconCards>
 
 ## Build with Neon Auth

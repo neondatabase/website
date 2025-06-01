@@ -891,7 +891,7 @@
               slug: neon-auth/overview
         - section: Get Started
           items:
-            - title: Quickstart
+            - title: Get started
               slug: neon-auth/get-started
         - section: How Neon Auth Works
           items:
