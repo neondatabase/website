@@ -102,7 +102,7 @@ After a successful import:
 ## Need Help?
 
 - For databases **larger than 10GB**: [Contact our migration team](/migration-assistance)
-- For **technical issues**: [Contact support](/contact-support)
+- For **technical issues**: [Contact support](/docs/introduction/support)
 - For **provider-specific questions**: Let us know what database provider you're using when you contact us
 
 If your database import failed for any reason, please [contact our support team](/migration-assistance). We're here to help you get up and running, including assistance with databases larger than 10GB.

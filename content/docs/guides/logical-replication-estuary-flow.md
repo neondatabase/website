@@ -118,7 +118,7 @@ Upon startup, the Estuary Flow connector for Postgres will automatically create 
 ## Allow Inbound Traffic
 
 If you are using Neon's **IP Allow** feature to limit the IP addresses that can connect to Neon, you will need to allow inbound traffic from Estuary Flow's IP addresses.
-Refer to the [Estuary Flow documentation](https://docs.estuary.dev/reference/regions-and-ip-addresses) for the list of IPs that need to be allowlisted for the Estuary Flow region of your account.
+Refer to the [Estuary Flow documentation](https://docs.estuary.dev/reference/allow-ip-addresses/#ip-addresses-to-allowlist) for the list of IPs that need to be allowlisted for the Estuary Flow region of your account.
 For information about configuring allowed IPs in Neon, see [Configure IP Allow](https://docs.neon.tech/docs/manage/projects#configure-ip-allow).
 
 ## Create a Postgres Source Connector in Estuary Flow

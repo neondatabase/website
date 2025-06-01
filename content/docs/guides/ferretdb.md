@@ -30,7 +30,7 @@ The benefits of using FerretDB include:
 
   FerretDB currently supports Postgres and SQLite backends, with many ongoing efforts to support other backends. Many databases built on Postgres can serve as a backend for FerretDB, including Neon. That means you can take advantage of all the features available in the backend of your choice to scale and manage your database infrastructure without fear of vendor lock-in.
 
-To learn more, see [Understanding FerretDB](https://docs.ferretdb.io/understanding-ferretdb/).
+To learn more, see [the FerretDB documentation](https://docs.ferretdb.io/).
 
 ## Prerequisites
 

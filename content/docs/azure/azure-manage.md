@@ -105,7 +105,7 @@ To retrieve a connection URL for your Neon database:
 
 You can toggle the **Connection pooling** option to use a pooled connection string, which supports up to 10,000 concurrent connections. A pooled connection string is recommended for most use cases. Use a direct connection for `pg_dump`, session-dependent features, or schema migrations. For more about pooled connections, see [Connection pooling](/docs/connect/connection-pooling).
 
-For more about connecting to your Neon database, see [Connect from any app](/connect/connect-from-any-app).
+For more about connecting to your Neon database, see [Connect from any app](/docs/connect/connect-from-any-app).
 
 ## Transfer projects to an Azure-created Neon organization
 
