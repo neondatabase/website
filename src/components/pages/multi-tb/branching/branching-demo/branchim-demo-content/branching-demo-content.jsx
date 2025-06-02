@@ -12,7 +12,7 @@ const BranchingDemoContent = ({
   step,
 }) => (
   <div className={clsx('z-20 flex flex-col items-start', step === 0 ? 'w-[400px]' : 'w-[312px]')}>
-    <h3 className="mt-[45px] text-balance text-[28px] font-medium leading-tight tracking-tighter text-white lg:mt-[25px]">
+    <h3 className="mt-[67px] text-balance text-[28px] font-medium leading-tight tracking-tighter text-white lg:mt-[25px]">
       {title}
     </h3>
     <p className="mt-2.5 text-[15px] leading-snug tracking-extra-tight text-gray-new-70">
