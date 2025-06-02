@@ -17,6 +17,7 @@ const sharedMdxComponents = {
   MCPTools: 'shared-content/mcp-tools',
   PrivatePreviewEnquire: 'shared-content/private-preview-enquire',
   EarlyAccessProps: 'shared-content/early-access-props',
+  SdkStackApp: 'shared-content/stack-app',
 };
 
 module.exports = sharedMdxComponents;
