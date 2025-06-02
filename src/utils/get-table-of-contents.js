@@ -6,6 +6,14 @@ const sharedMdxComponents = require('../../content/docs/shared-content');
 
 const parseMDXHeading = require('./parse-mdx-heading');
 
+const extractCustomId = (text) => {
+  const match = text.match(/\(#([^)]+)\)$/);
+  if (match) {
+    return match[1];
+  }
+  return null;
+};
+
 const buildNestedToc = (headings, currentLevel, currentIndex = 0) => {
   const toc = [];
   let localIndex = currentIndex;
@@ -17,13 +25,16 @@ const buildNestedToc = (headings, currentLevel, currentIndex = 0) => {
     const depthMatch = currentHeading.title.match(/^#+/);
     const depth = (depthMatch ? depthMatch[0].length : 1) - 1;
     const title = currentHeading.title.replace(/(#+)\s/, '');
-
-    const titleWithInlineCode = title.replace(/`([^`]+)`/g, '<code>$1</code>');
+    const customId = extractCustomId(title);
+    const cleanedTitle = title.replace(/\(#[^)]+\)$/, '');
+    const titleWithInlineCode = cleanedTitle.replace(/`([^`]+)`/g, '<code>$1</code>');
 
     if (depth === currentLevel) {
       const tocItem = {
         title: titleWithInlineCode,
-        id: slugify(title, { lower: true, strict: true, remove: /[*+~.()'"!:@]/g }),
+        id:
+          customId ||
+          slugify(cleanedTitle, { lower: true, strict: true, remove: /[*+~.()'"!:@]/g }),
         level: depth,
         numberedStep,
         index: localIndex,
