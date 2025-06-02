@@ -16,13 +16,13 @@ In this guide, you'll learn how to enable `pg_search` on Neon, understand the fu
 
 <Admonition type="note" title="pg_search on Neon">
 
-`pg_search` is currently only available on Neon projects created in an [AWS region](/docs/introduction/regions#aws-regions).
+`pg_search` is currently only available on Neon projects created in an [AWS region](/docs/introduction/regions#aws-regions). It is not yet supported on Neon projects created in Azure regions.
 
 </Admonition>
 
 ## Enable the `pg_search` extension
 
-<Tabs labels={["Postgres 17"]}>
+<Tabs labels={["Postgres 17", "Postgres 14 - 16"]}>
 
 <TabItem>
 
@@ -31,6 +31,12 @@ Install the `pg_search` extension by running the following `CREATE EXTENSION` st
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_search;
 ```
+
+</TabItem>
+
+<TabItem>
+
+The `pg_search` extension is supported on Postgres 14–16 for Neon projects in AWS regions. Contact Neon support to enable it for your project.
 
 </TabItem>
 
