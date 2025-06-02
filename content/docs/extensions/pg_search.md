@@ -36,7 +36,7 @@ CREATE EXTENSION IF NOT EXISTS pg_search;
 
 <TabItem>
 
-The `pg_search` extension is supported on Postgres 14 - 16 on Neon projects created in AWS regions. Please contact Neon support for setup instructions.
+The `pg_search` extension is supported on Postgres 14–16 for Neon projects in AWS regions. Contact Neon support to enable it for your project.
 
 </TabItem>
 
