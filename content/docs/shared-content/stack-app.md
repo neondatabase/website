@@ -6,7 +6,7 @@ The main object for interacting with Stack Auth on the client. It provides metho
 
 Most commonly you get an instance of `StackClientApp` by calling [`useStackApp()`](../hooks/use-stack-app) in a Client Component.
 
-### Table of Contents
+## Table of Contents
 
 <div
   style={{
@@ -51,7 +51,7 @@ The setup wizard does these steps for you, so you don't need to worry about it u
 If you're building a client-only app and don't have a `SECRET_SERVER_KEY`, you can construct a `StackClientApp` directly.
 </Admonition>
 
-### Parameters
+## Parameters
 
 **options** (object)
 
@@ -84,7 +84,7 @@ In React apps, use `"cookie"` to store tokens in browser cookies.
 - `Request`: Uses the provided request object (server-side only)
 </details>
 
-## baseUrl `string`
+### baseUrl `string`
 
 The base URL for {sdkName}'s API. Only override this if you are self-hosting. Defaults to `https://api.stack-auth.com`, unless overridden by the `NEXT_PUBLIC_STACK_API_URL` environment variable.
 
@@ -113,7 +113,7 @@ Whether to disable automatic prefetching of user data. Defaults to `false`.
 
 </details>
 
-### Signature
+## Signature
 
 ```typescript shouldWrap
 declare new(options: {
@@ -150,11 +150,13 @@ function MyReactComponent() {
 }
 ```
 
-## `stackClientApp.getUser([options])`
+## Methods
+
+### `stackClientApp.getUser([options])` (#getuser)
 
 Gets the current user.
 
-### Parameters
+#### Parameters (#getuser-params)
 
 - `options`: An object containing multiple properties:
   - `or`: What to do if the user is not found:
@@ -162,11 +164,11 @@ Gets the current user.
     - `"redirect"`: Redirect to the sign-in page
     - `"throw"`: Throw an error
 
-### Returns
+#### Returns (#getuser-returns)
 
 `Promise<CurrentUser | null>`: The current user, or `null` if not signed in. If `or` is `"redirect"` or `"throw"`, never returns `null`.
 
-### Signature
+#### Signature (#getuser-signature)
 
 ```typescript shouldWrap
 declare function getUser(options: {
@@ -174,7 +176,7 @@ declare function getUser(options: {
 }): Promise<CurrentUser | null>;
 ```
 
-### Examples
+#### Examples (#getuser-examples)
 
 ```typescript
 // Getting the current user
@@ -185,13 +187,13 @@ const user = await stackClientApp.getUser({ or: 'redirect' });
 console.log(user); // always defined; redirects to sign-in page if not signed in
 ```
 
-## `stackClientApp.useUser([options])`
+### `stackClientApp.useUser([options])` (#useuser)
 
 Functionally equivalent to `getUser()`, but as a React hook.
 
 Equivalent to the `useUser()` standalone hook (which is an alias for `useStackApp().useUser()`).
 
-### Parameters
+#### Parameters (#useuser-params)
 
 - `options`: An object containing multiple properties:
   - `or`: What to do if the user is not found:
@@ -199,11 +201,11 @@ Equivalent to the `useUser()` standalone hook (which is an alias for `useStackAp
     - "redirect": Redirect to the sign-in page
     - "throw": Throw an error
 
-### Returns
+#### Returns (#useuser-returns)
 
 `CurrentUser | null`: The current user, or `null` if not signed in. If `or` is "redirect" or "throw", never returns `null`.
 
-### Signature
+#### Signature (#useuser-signature)
 
 ```typescript shouldWrap
 declare function useUser(options: {
@@ -211,7 +213,7 @@ declare function useUser(options: {
 }): CurrentUser | null;
 ```
 
-### Examples
+#### Examples (#useuser-examples)
 
 ```jsx
 // Displaying the current user's username
@@ -260,44 +262,44 @@ function MyProtectedComponent() {
 }
 ```
 
-## `stackClientApp.getProject()`
+### `stackClientApp.getProject()` (#getproject)
 
 Get the current project.
 
-### Returns
+#### Returns (#getproject-returns)
 
 `Promise<Project>`: The current project.
 
-### Signature
+#### Signature (#getproject-signature)
 
 ```typescript shouldWrap
 declare function getProject(): Promise<Project>;
 ```
 
-### Examples
+#### Examples (#getproject-examples)
 
 ```typescript
 const project = await stackClientApp.getProject();
 console.log(project);
 ```
 
-## `stackClientApp.useProject()`
+### `stackClientApp.useProject()`
 
 Functionally equivalent to `getProject()`, but as a React hook.
 
-## `stackClientApp.signInWithOAuth(provider)`
+### `stackClientApp.signInWithOAuth(provider)` (#signinwithoauth)
 
 Sign in with an OAuth provider.
 
-### Parameters
+#### Parameters (#signinwithoauth-params)
 
 - `provider`: The OAuth provider to use.
 
-### Returns
+#### Returns (#signinwithoauth-returns)
 
 `Promise<Result<undefined, KnownErrors["RedirectUrlNotWhitelisted"]>>`: A promise that resolves to a `Result` object.
 
-### Signature
+#### Signature (#signinwithoauth-signature)
 
 ```typescript shouldWrap
 declare function signInWithOAuth(
@@ -305,7 +307,7 @@ declare function signInWithOAuth(
 ): Promise<Result<undefined, KnownErrors['RedirectUrlNotWhitelisted']>>;
 ```
 
-### Examples
+#### Examples (#signinwithoauth-examples)
 
 ```typescript
 const result = await stackClientApp.signInWithOAuth('google');
@@ -315,21 +317,21 @@ if (result.status === 'error') {
 }
 ```
 
-## `stackClientApp.signInWithCredential(options)`
+### `stackClientApp.signInWithCredential(options)` (#signinwithcredential)
 
 Sign in with email and password.
 
-### Parameters
+#### Parameters (#signinwithcredential-params)
 
 - `options`: An object containing multiple properties:
   - `email`: The email of the user to sign in as
   - `password`: The password of the user to sign in as
 
-### Returns
+#### Returns (#signinwithcredential-returns)
 
 `Promise<Result<undefined, KnownErrors["InvalidCredentials"]>>`: A promise that resolves to a `Result` object.
 
-### Signature
+#### Signature (#signinwithcredential-signature)
 
 ```typescript shouldWrap
 declare function signInWithCredential(options: {
@@ -338,7 +340,7 @@ declare function signInWithCredential(options: {
 }): Promise<Result<undefined, KnownErrors['InvalidCredentials']>>;
 ```
 
-### Examples
+#### Examples (#signinwithcredential-examples)
 
 ```typescript
 const result = await stackClientApp.signInWithCredential({
@@ -351,21 +353,21 @@ if (result.status === 'error') {
 }
 ```
 
-## `stackClientApp.signUpWithCredential(options)`
+### `stackClientApp.signUpWithCredential(options)` (#signupwithcredential)
 
 Sign up with email and password.
 
-### Parameters
+#### Parameters (#signupwithcredential-params)
 
 - `options`: An object containing multiple properties:
   - `email`: The email of the user to sign up as
   - `password`: The password of the user to sign up as
 
-### Returns
+#### Returns (#signupwithcredential-returns)
 
 `Promise<Result<undefined, KnownErrors["UserWithEmailAlreadyExists"] | KnownErrors["PasswordRequirementsNotMet"]>>`: A promise that resolves to a `Result` object.
 
-### Signature
+#### Signature (#signupwithcredential-signature)
 
 ```typescript shouldWrap
 declare function signUpWithCredential(options: {
@@ -379,7 +381,7 @@ declare function signUpWithCredential(options: {
 >;
 ```
 
-### Examples
+#### Examples (#signupwithcredential-examples)
 
 ```typescript
 const result = await stackClientApp.signUpWithCredential({
@@ -392,19 +394,19 @@ if (result.status === 'error') {
 }
 ```
 
-## `stackClientApp.sendForgotPasswordEmail(email)`
+### `stackClientApp.sendForgotPasswordEmail(email)` (#sendforgotpasswordemail)
 
 Send a forgot password email to an email address.
 
-### Parameters
+#### Parameters (#sendforgotpasswordemail-params)
 
 - `email`: The email of the user to send the forgot password email to.
 
-### Returns
+#### Returns (#sendforgotpasswordemail-returns)
 
 `Promise<Result<undefined, KnownErrors["UserNotFound"]>>`: A promise that resolves to a `Result` object.
 
-### Signature
+#### Signature (#sendforgotpasswordemail-signature)
 
 ```typescript shouldWrap
 declare function sendForgotPasswordEmail(
@@ -412,7 +414,7 @@ declare function sendForgotPasswordEmail(
 ): Promise<Result<undefined, KnownErrors['UserNotFound']>>;
 ```
 
-### Examples
+#### Examples (#sendforgotpasswordemail-examples)
 
 ```typescript
 const result = await stackClientApp.sendForgotPasswordEmail('test@example.com');
@@ -424,19 +426,19 @@ if (result.status === 'success') {
 }
 ```
 
-## `stackClientApp.sendMagicLinkEmail(email)`
+### `stackClientApp.sendMagicLinkEmail(email)` (#sendmagiclinkeemail)
 
 Send a magic link/OTP sign-in email to an email address.
 
-### Parameters
+#### Parameters (#sendmagiclinkeemail-params)
 
 - `email`: The email of the user to send the magic link email to.
 
-### Returns
+#### Returns (#sendmagiclinkeemail-returns)
 
 `Promise<Result<{ nonce: string }, KnownErrors["RedirectUrlNotWhitelisted"]>>`: A promise that resolves to a `Result` object.
 
-### Signature
+#### Signature (#sendmagiclinkeemail-signature)
 
 ```typescript shouldWrap
 declare function sendMagicLinkEmail(
@@ -444,7 +446,7 @@ declare function sendMagicLinkEmail(
 ): Promise<Result<{ nonce: string }, KnownErrors['RedirectUrlNotWhitelisted']>>;
 ```
 
-### Examples
+#### Examples (#sendmagiclinkeemail-examples)
 
 ```typescript
 const result = await stackClientApp.sendMagicLinkEmail('test@example.com');
