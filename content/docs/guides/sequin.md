@@ -115,6 +115,3 @@ You're now using Sequin with Neon to capture and stream changes from your databa
 - Use Sequin to trigger workflows in tools like Inngest or trigger.dev, activate side-effects in your app, setup audit logs, or generate denormalized views.
 - Tailor your consumer's [filtering](https://sequinstream.com/docs/core-concepts#filtering) and settings to meet your requirements.
 - Try a [pull consumer](https://sequinstream.com/docs/core-concepts#pull-consumers) with [our SDKs](https://sequinstream.com/docs/sdks) to completely manage how you retrieve changes at scale.
-- Use Sequins [observability and monitoring](https://console.sequinstream.com/consumers) to debug and keep production humming.
-
-Learn more in our [docs](https://sequinstream.com/docs/introduction). And if you need anything, Sequin is open source - just open an issue or reach out to us: <a href="mailto:founders@sequinstream.com">founders@sequinstream.com</a>.

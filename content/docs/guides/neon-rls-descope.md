@@ -9,10 +9,6 @@ redirectFrom:
 ---
 
 <InfoBlock>
-<DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/descope-react-frontend-neon-rls">Descope + Neon RLS</a>
-</DocsList>
-
 <DocsList title="Related docs" theme="docs">
   <a href="/docs/guides/neon-rls-tutorial">Neon RLS Tutorial</a>
   <a href="/docs/guides/neon-rls-drizzle">Simplify RLS with Drizzle</a>

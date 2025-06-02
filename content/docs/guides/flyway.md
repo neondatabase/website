@@ -17,7 +17,7 @@ This guide steps you through installing the Flyway command-line tool, configurin
 
 ## Download and extract Flyway
 
-1. Download the latest version of the [Flyway command-line tool](https://documentation.red-gate.com/fd/command-line-184127404.html).
+1. Download the latest version of the [Flyway command-line tool](https://documentation.red-gate.com/fd/command-line-277579359.html).
 
 2. Extract the Flyway files. For example:
 
@@ -140,7 +140,7 @@ You can verify that the data was added by viewing the table on the **Tables** pa
 
 ## View your schema migration history
 
-When you run the `flyway migrate` command, Flyway registers the schema changes in the `flyway_schema_history` table, which Flyway automatically creates in your database. You can view the table by running the [flyway info](https://documentation.red-gate.com/fd/command-line-info-184127413.html) command.
+When you run the `flyway migrate` command, Flyway registers the schema changes in the `flyway_schema_history` table, which Flyway automatically creates in your database. You can view the table by running the [flyway info](https://documentation.red-gate.com/fd/info-277578881.html) command.
 
 ```bash
 flyway info
