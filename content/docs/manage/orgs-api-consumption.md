@@ -6,10 +6,10 @@ updatedOn: '2024-12-18T18:37:32.360Z'
 
 You can use the Neon API to retrieve two types of consumption history metrics for your organization:
 
-| Metric                                                                                           | Description                                                                              | Plan Availability |
-| ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- | ----------------- |
-| [Account-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)            | Total usage across all projects in your organization                                     | Scale, Business, and Enterprise   |
-| [Project-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) (granular) | Project-level metrics available at hourly, daily, or monthly level of granularity        | Scale, Business, and Enterprise   |
+| Metric                                                                                           | Description                                                                       | Plan Availability               |
+| ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------- | ------------------------------- |
+| [Account-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)            | Total usage across all projects in your organization                              | Scale, Business, and Enterprise |
+| [Project-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) (granular) | Project-level metrics available at hourly, daily, or monthly level of granularity | Scale, Business, and Enterprise |
 
 ## Finding organizations for consumption queries
 
@@ -78,7 +78,7 @@ The response will provide aggregated hourly consumption metrics, including activ
       "period_id": "random-period-abcdef",
       "period_plan": "scale",
       "period_start": "2024-06-01T00:00:00Z",
-       "consumption": [
+      "consumption": [
         {
           "timeframe_start": "2024-06-30T15:00:00Z",
           "timeframe_end": "2024-06-30T16:00:00Z",
