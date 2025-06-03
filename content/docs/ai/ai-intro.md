@@ -35,6 +35,8 @@ Build AI applications faster with these popular frameworks, tools, and services:
 
 <a href="/docs/ai/inngest" description="Build reliable AI workflows with Inngest and Neon" icon="openai">Inngest</a>
 
+<a href="/docs/ai/ai-app-build" description="Generate and deploy web applications using the open-source app.build agent" icon="gear">app.build</a>
+
 </DetailIconCards>
 
 ## Starter applications
