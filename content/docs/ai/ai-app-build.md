@@ -83,7 +83,7 @@ The codebase is structured to support:
 
 ## Contributing
 
-- Repositories: 
+- Repositories:
   - [github.com/appdotbuild/agent](https://github.com/appdotbuild/agent) (agent logic and generation)
   - [github.com/appdotbuild/platform](https://github.com/appdotbuild/platform) (backend infrastructure)
 - Issues: Bug reports, feature requests, and discussions
