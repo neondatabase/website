@@ -3,7 +3,7 @@ title: Develop with Neon on Azure
 subtitle: Find the resources you need to start developing with Neon on Azure
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-05-30T16:54:40.448Z'
+updatedOn: '2025-06-03T18:04:26.397Z'
 ---
 
 <InfoBlock>
