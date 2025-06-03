@@ -52,6 +52,7 @@ To configure a custom scale to zero setting, modify `suspend_timeout_seconds` us
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/{project_id}/endpoints/{endpoint_id} \
      --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
      --header 'content-type: application/json' \
      --data '
 {
