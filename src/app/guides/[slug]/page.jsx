@@ -47,7 +47,7 @@ const GuidePost = async ({ params }) => {
   const { slug } = params;
   const posts = await getAllGuides();
   const navigationLinks = getNavigationLinks(slug, posts);
-  const githubPath = `${GUIDES_DIR_PATH}/${slug}.md`;
+  const gitHubPath = `${GUIDES_DIR_PATH}/${slug}.md`;
   const postBySlug = getPostBySlug(slug, GUIDES_DIR_PATH);
   if (!postBySlug) return notFound();
   const { data, content, author } = postBySlug;
@@ -80,7 +80,7 @@ const GuidePost = async ({ params }) => {
               content={content}
               navigationLinks={navigationLinks}
               slug={slug}
-              githubPath={githubPath}
+              gitHubPath={gitHubPath}
               tableOfContents={tableOfContents}
             />
           </Container>
