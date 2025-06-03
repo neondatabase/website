@@ -45,7 +45,7 @@ Neon storage is architected to integrate storage, backups, and archiving into on
 
 Neon uses cloud-based object storage solutions, such as Amazon S3, to relocate less frequently accessed data to the most cost-efficient storage option. For your most frequently accessed data, which requires rapid access and high throughput, Neon uses locally attached SSDs to ensure high performance and low latency.
 
-The entire Neon storage framework is developed in Rust for maximum performance and usability. Read about [how we scale an open source, multi-tenant storage engine for Postgres written in Rust](/blogopen-source-multi-tenant-storage-engine-for-postgres-written-rust), or [take a deep dive into the Neon storage engine](/blog/get-page-a(/blognder, Heikki Linnakangas.
+The entire Neon storage framework is developed in Rust for maximum performance and usability. Read about [how we scale an open source, multi-tenant storage engine for Postgres written in Rust](/blog/how-we-scale-an-open-source-multi-tenant-storage-engine-for-postgres-written-rust), or [take a deep dive into the Neon storage engine](/blog/get-page-a(/blognder, Heikki Linnakangas.
 
 ## Change Data Capture (CDC) with Logical Replication
 
