@@ -41,6 +41,7 @@ For a detailed feature and pricing breakdown, visit the [Neon pricing page](http
 For developers exploring Neon or building side projects.
 
 **What you get on the Free plan:**
+
 - 10 projects per organization
 - 10 branches per project
 - 3 schema-only branches
@@ -62,6 +63,7 @@ Need more compute hours, branching flexibility, or data transfer? Serverless off
 For startups and projects that need flexible usage and room to scale.
 
 **What you get with the flat monthly fee:**
+
 - 100 projects per organization
 - 100 branches per project
 - 5 schema-only branches
@@ -72,6 +74,7 @@ For startups and projects that need flexible usage and room to scale.
 - 24-hour instant restore window
 
 **Usage-based pricing if you need extra**
+
 - Additional projects: $5 each
 - Storage (per GB-month):
   - 1–10 GB: $0.39
@@ -84,6 +87,7 @@ For startups and projects that need flexible usage and room to scale.
 - Data transfer: $10 per GB
 
 **Optional add-ons:**
+
 - Larger compute sizes (up to 16 vCPU / 64 GB RAM): $100
 - Priority support: $250
 - Restore window extensions:
@@ -105,6 +109,7 @@ Need HIPAA compliance, private networking, or included add-ons? The Business pla
 For production teams needing security, compliance, and advanced support.
 
 **What you get with the flat monthly fee:**
+
 - 100 projects per organization
 - 100 branches per project
 - 25 schema-only branches
@@ -115,6 +120,7 @@ For production teams needing security, compliance, and advanced support.
 - 24-hour instant restore window
 
 **Usage-based pricing if you need extra**
+
 - Additional projects: $5 each
 - Storage (per GB-month):
   - 1–10 GB: $0.39
@@ -127,6 +133,7 @@ For production teams needing security, compliance, and advanced support.
 - Data transfer: $10 per GB
 
 **Add-ons (most included):**
+
 - Larger compute sizes: **Included**
 - Priority support: **Included**
 - 7-day and 30-day restore windows: **Included**
@@ -147,6 +154,7 @@ Need higher limits, custom pricing, or dedicated support for mission-critical wo
 For large teams, SaaS vendors, or orgs with strict compliance and migration requirements.
 
 **What you get:**
+
 - Custom project, branch, and storage limits
 - Custom compute limits and configurations
 - Tailored pricing and resource allocation
@@ -154,6 +162,7 @@ For large teams, SaaS vendors, or orgs with strict compliance and migration requ
 - Highest level of support
 
 **Enterprise benefits:**
+
 - Invoice billing and annual commitments
 - Security reviews and compliance questionnaires
 - Dedicated Slack channel
