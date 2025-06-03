@@ -1,5 +1,5 @@
 ---
-title: Rate Limiting in Postgres 
+title: Rate Limiting in Postgres
 subtitle: A step-by-step guide describing how to implement rate limiting in Postgres using advisory locks and counters
 author: vkarpov15
 enableTableOfContents: true
@@ -13,15 +13,15 @@ You can rate limit a certain Postgres query using a combination of advisory lock
 
 ## Steps
 
-* Use advisory locks to synchronize access
-* Create a counter table for rate tracking
-* Upsert into the `rate_limits` table
-* Implement a basic rate limiter with SQL
-* Wrap rate limiting in an SQL function
+- Use advisory locks to synchronize access
+- Create a counter table for rate tracking
+- Upsert into the `rate_limits` table
+- Implement a basic rate limiter with SQL
+- Wrap rate limiting in an SQL function
 
 ### Use advisory locks to synchronize access
 
-Advisory locks in Postgres are application-level, user-defined locks that help coordinate access to shared resources without blocking unrelated operations. 
+Advisory locks in Postgres are application-level, user-defined locks that help coordinate access to shared resources without blocking unrelated operations.
 The advantage of using advisory locks over transactions for rate limiting is that they allow you to synchronize access to a shared key (like a user's counter) without locking rows.
 
 You can grab an exclusive lock on a given key like this:
