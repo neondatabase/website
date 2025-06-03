@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/connectivity-issues
   - /docs/connect/connectivity-issues
-updatedOn: '2025-05-11T11:23:50.611Z'
+updatedOn: '2025-05-30T16:54:40.450Z'
 ---
 
 This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered include:
@@ -35,7 +35,7 @@ Connection problems are sometimes related to a system issue. To check for system
 With older clients and some native Postgres clients, you may receive the following error when attempting to connect to Neon:
 
 ```txt shouldWrap
-ERROR: The endpoint ID is not specified. Either upgrade the Postgres client library (libpq) for SNI support or pass the endpoint ID (the first part of the domain name) as a parameter: '&options=endpoint%3D'. See [https://neon.tech/sni](https://neon.tech/sni) for more information.
+ERROR: The endpoint ID is not specified. Either upgrade the Postgres client library (libpq) for SNI support or pass the endpoint ID (the first part of the domain name) as a parameter: '&options=endpoint%3D'. See [https://neon.com/sni](/sni) for more information.
 ```
 
 This error occurs if your client library or application does not support the **Server Name Indication (SNI)** mechanism in TLS.
@@ -226,7 +226,7 @@ This error is often encountered when attempting to set the Postgres `search_path
 
 ## Postgrex: DBConnection ConnectionError ssl send: closed
 
-Postgrex has an `:idle_interval` connection parameter that defines an interval for pinging connections after a period of inactivity. The default setting is `1000ms`. If you rely on Neon's [autosuspend](https://neon.tech/docs/introduction/auto-suspend) feature to scale your compute to zero when your database is not active, this setting will prevent that and you may encounter a `(DBConnection.ConnectionError) ssl send: closed (ecto_sql 3.12.0)` error as a result. As a workaround, you can set the interval to a higher value to allow your Neon compute to suspend. For example:
+Postgrex has an `:idle_interval` connection parameter that defines an interval for pinging connections after a period of inactivity. The default setting is `1000ms`. If you rely on Neon's [autosuspend](/docs/introduction/auto-suspend) feature to scale your compute to zero when your database is not active, this setting will prevent that and you may encounter a `(DBConnection.ConnectionError) ssl send: closed (ecto_sql 3.12.0)` error as a result. As a workaround, you can set the interval to a higher value to allow your Neon compute to suspend. For example:
 
 ```elixir
 config :app_name, AppName.Repo

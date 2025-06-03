@@ -4,7 +4,7 @@
 
 ## Source
 
-- [The pg_mooncake extension HTML](https://neon.tech/docs/extensions/pg_mooncake): The original HTML version of this documentation
+- [The pg_mooncake extension HTML](https://neon.com/docs/extensions/pg_mooncake): The original HTML version of this documentation
 
 The [pg_mooncake](https://github.com/Mooncake-Labs/pg_mooncake) extension enables fast analytic workloads in Postgres by adding native columnstore tables and vectorized execution (DuckDB).
 

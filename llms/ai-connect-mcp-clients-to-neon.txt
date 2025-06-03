@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Connect MCP Clients to Neon HTML](https://neon.tech/docs/ai/connect-mcp-clients-to-neon): The original HTML version of this documentation
+- [Connect MCP Clients to Neon HTML](https://neon.com/docs/ai/connect-mcp-clients-to-neon): The original HTML version of this documentation
 
 ## Overview
 

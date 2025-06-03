@@ -19,7 +19,7 @@ API keys allow users to access Neon application programming interface.
 
 An API key provides access to any action available to the user. Currently, API keys cannot be scoped to the specific Projects. Neon users can provision multiple API keys. An API key that is no longer needed can be revoked; this action cannot be reverted. Any issued API key is valid forever until it is revoked.
 
-Check out the [API Reference](https://neon.tech/api-reference) for more information about using the API keys and available API methods.
+Check out the [API Reference](/api-reference) for more information about using the API keys and available API methods.
 
 ## Project
 

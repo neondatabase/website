@@ -4,15 +4,15 @@
 
 ## Source
 
-- [Postgres extensions HTML](https://neon.tech/docs/extensions/extensions-intro): The original HTML version of this documentation
+- [Postgres extensions HTML](https://neon.com/docs/extensions/extensions-intro): The original HTML version of this documentation
 
 Explore supported Postgres extensions by category. Also see:
 
-- [List view](https://neon.tech/docs/extensions/pg-extensions)
-- [Install an extension](https://neon.tech/docs/extensions/pg-extensions#install-an-extension)
-- [Update an extension](https://neon.tech/docs/extensions/pg-extensions#update-an-extension-version)
+- [List view](https://neon.com/docs/extensions/pg-extensions)
+- [Install an extension](https://neon.com/docs/extensions/pg-extensions#install-an-extension)
+- [Update an extension](https://neon.com/docs/extensions/pg-extensions#update-an-extension-version)
 
-**Need an extension we don't have?** 📩 [Request an extension](https://neon.tech/docs/extensions/pg-extensions#request-an-extension)
+**Need an extension we don't have?** 📩 [Request an extension](https://neon.com/docs/extensions/pg-extensions#request-an-extension)
 
 ## AI / Machine Learning
 

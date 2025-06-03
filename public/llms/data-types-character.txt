@@ -6,7 +6,7 @@ Postgres character data types provide flexible options for storing string data o
 
 ## Source
 
-- [Postgres Character data types HTML](https://neon.tech/docs/data-types/character): The original HTML version of this documentation
+- [Postgres Character data types HTML](https://neon.com/docs/data-types/character): The original HTML version of this documentation
 
 ## Storage and syntax
 

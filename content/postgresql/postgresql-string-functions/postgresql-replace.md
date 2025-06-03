@@ -129,9 +129,9 @@ Output:
 ```
  id |           title           |                              url
 ----+---------------------------+---------------------------------------------------------------
-  1 | PostgreSQL Tutorial       | https://neon.tech/postgresql
-  2 | PL/pgSQL                  | https://neon.tech/postgresql/postgresql-plpgsql/
-  3 | PostgreSQL Administration+| https://neon.tech/postgresql/postgresql-administration/
+  1 | PostgreSQL Tutorial       | https://neon.com/postgresql
+  2 | PL/pgSQL                  | https://neon.com/postgresql/postgresql-plpgsql/
+  3 | PostgreSQL Administration+| https://neon.com/postgresql/postgresql-administration/
     |                           |
 (3 rows)
 ```

@@ -2,7 +2,7 @@
 title: Scale your application with Read Replicas
 subtitle: Scale your app with read replicas using built-in framework support
 enableTableOfContents: true
-updatedOn: '2025-04-30T02:26:54.984Z'
+updatedOn: '2025-05-30T16:54:40.479Z'
 ---
 
 In Neon, a read replica is an independent read-only compute that performs read operations on the same data as your primary read-write compute, which means adding a read replica to a Neon project requires no additional storage.
@@ -87,7 +87,7 @@ await db.delete(usersTable).where(eq(usersTable.id, 1))
 
 For more, refer to [Read Replicas](https://orm.drizzle.team/docs/read-replicas) in the Drizzle documentation.
 
-**Example application**: For a full example, refer to this Neon community guide: [Scale your Next.js application with Drizzle ORM and Neon Postgres Read Replicas](https://neon.tech/guides/read-replica-drizzle).
+**Example application**: For a full example, refer to this Neon community guide: [Scale your Next.js application with Drizzle ORM and Neon Postgres Read Replicas](/guides/read-replica-drizzle).
 
 ## Laravel
 
@@ -117,7 +117,7 @@ For example, in your `config/database.php`, you can configure read and write con
 ],
 ```
 
-**Example application**: For a full setup, refer to this Neon community guide: [Scale your Laravel application with Neon Postgres Read Replicas](https://neon.tech/guides/read-replica-laravel).
+**Example application**: For a full setup, refer to this Neon community guide: [Scale your Laravel application with Neon Postgres Read Replicas](/guides/read-replica-laravel).
 
 ## Django
 
@@ -161,7 +161,7 @@ class PrimaryReplicaRouter:
 
 For more, see [Multiple databases](https://docs.djangoproject.com/en/5.1/topics/db/multi-db/) in the Django documentation.
 
-**Example application**: For a complete setup, refer to this Neon community guide: [Scale your Django application with Neon Postgres Read Replicas](https://neon.tech/guides/read-replica-django).
+**Example application**: For a complete setup, refer to this Neon community guide: [Scale your Django application with Neon Postgres Read Replicas](/guides/read-replica-django).
 
 ## Entity Framework Core
 
@@ -187,6 +187,6 @@ namespace TodoApi.Data
 }
 ```
 
-**Example application**: For a complete setup, refer to this Neon community guide: [Scale your .NET application with Entity Framework and Neon Postgres Read Replicas](https://neon.tech/guides/read-replica-entity-framework).
+**Example application**: For a complete setup, refer to this Neon community guide: [Scale your .NET application with Entity Framework and Neon Postgres Read Replicas](/guides/read-replica-entity-framework).
 
 <NeedHelp/>

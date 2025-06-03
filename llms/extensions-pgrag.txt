@@ -4,7 +4,7 @@
 
 ## Source
 
-- [The pgrag extension HTML](https://neon.tech/docs/extensions/pgrag): The original HTML version of this documentation
+- [The pgrag extension HTML](https://neon.com/docs/extensions/pgrag): The original HTML version of this documentation
 
 ## Overview
 

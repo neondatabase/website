@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Neon RLS tutorial HTML](https://neon.tech/docs/guides/neon-rls-tutorial): The original HTML version of this documentation
+- [Neon RLS tutorial HTML](https://neon.com/docs/guides/neon-rls-tutorial): The original HTML version of this documentation
 
 In this tutorial, you'll set up a sample `todos` application to learn how Postgres Row-Level Security (RLS) policies can protect user data, adding an extra layer of security beyond application logic.
 
@@ -16,7 +16,7 @@ This `todos` app is built with Next.js and Drizzle ORM, using Clerk for user aut
 
 To get started, you'll need:
 
-- **Neon account**: Sign up at [Neon](https://neon.tech) and create your first project in **AWS** (note: [Azure](https://neon.tech/docs/guides/neon-rls#current-limitations) regions are not currently supported).
+- **Neon account**: Sign up at [Neon](https://neon.tech) and create your first project in **AWS** (note: [Azure](https://neon.com/docs/guides/neon-rls#current-limitations) regions are not currently supported).
 - **Clerk account**: Sign up for a [Clerk](https://clerk.com/) account and application. Clerk provides a free plan to get you started.
 - **Neon RLS + Clerk example application**: Clone the sample [Clerk + Neon RLS repository](https://github.com/neondatabase-labs/clerk-nextjs-neon-rls):
 
@@ -24,7 +24,7 @@ To get started, you'll need:
   git clone https://github.com/neondatabase-labs/clerk-nextjs-neon-rls.git
   ```
 
-  Follow the instructions in the readme to set up Clerk, configure environment variables, and start the application. You can also find more info in our [Clerk and Neon RLS Quickstart](https://neon.tech/docs/guides/neon-rls-clerk).
+  Follow the instructions in the readme to set up Clerk, configure environment variables, and start the application. You can also find more info in our [Clerk and Neon RLS Quickstart](https://neon.com/docs/guides/neon-rls-clerk).
 
 
 
@@ -44,7 +44,7 @@ Create your `Alice` user using Google. Then, using a private browser session, tr
 
 Side by side, here's the empty state for both users:
 
-![empty state two users in clerk demo](https://neon.tech/docs/guides/authorize_tutorial_empty_state.png)
+![empty state two users in clerk demo](https://neon.com/docs/guides/authorize_tutorial_empty_state.png)
 
 When each user creates a todo, it's securely linked to their `userId` in the database schema. Here's the structure of the `todos` table:
 
@@ -70,7 +70,7 @@ The `userId` column is populated directly from the authenticated `(auth.user_id(
 
 Let's create some sample Todos for both Alice and Bob.
 
-![isolated todo lists](https://neon.tech/docs/guides/authorize_tutorial_isolated_todos.png)
+![isolated todo lists](https://neon.com/docs/guides/authorize_tutorial_isolated_todos.png)
 
 ### Todos are isolated
 
@@ -137,7 +137,7 @@ export async function getTodos(): Promise> {
 
 Check your two open Todo users, reload the page, and see what happens:
 
-![isolated todo lists](https://neon.tech/docs/guides/authorize_tutorial_isolated_todos.png)
+![isolated todo lists](https://neon.com/docs/guides/authorize_tutorial_isolated_todos.png)
 
 Nothing happens. RLS is still in place, and isolation is maintained: no data leaks. 💪
 
@@ -149,7 +149,7 @@ Let's see what happens when we disable RLS on our todos table. Go to your Clerk 
 ALTER TABLE public.todos DISABLE ROW LEVEL SECURITY;
 ```
 
-![data leak](https://neon.tech/docs/guides/authorize_tutorial_data_leak.png)
+![data leak](https://neon.com/docs/guides/authorize_tutorial_data_leak.png)
 
 Bob sees all of Alice's todos, and Alice now knows about her birthday party. Disabling RLS removed all RLS policies, including the `view todos` policy on `SELECT` queries that helped enforce data isolation. Birthday surprise is _ruined_.
 
@@ -186,7 +186,7 @@ Now, let's re-enable RLS from Neon:
 ALTER TABLE public.todos ENABLE ROW LEVEL SECURITY;
 ```
 
-![isolated todo lists](https://neon.tech/docs/guides/authorize_tutorial_isolated_todos.png)
+![isolated todo lists](https://neon.com/docs/guides/authorize_tutorial_isolated_todos.png)
 
 With RLS back on, there are no more data leaks, despite the incorrect check on the application side. In this case, RLS acts as a backstop, preventing unintended data exposure due to application-side mistakes.
 
@@ -288,4 +288,4 @@ Here is the output, showing columns `policyname, cmd, qual, with_check` only:
 (4 rows)
 ```
 
-To get an understanding of `auth.user_id()` and the role it plays in these policies, see this [explanation](https://neon.tech/docs/guides/neon-rls#how-neon-rls-gets-authuserid-from-the-jwt).
+To get an understanding of `auth.user_id()` and the role it plays in these policies, see this [explanation](https://neon.com/docs/guides/neon-rls#how-neon-rls-gets-authuserid-from-the-jwt).

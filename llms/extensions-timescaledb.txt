@@ -4,7 +4,7 @@
 
 ## Source
 
-- [The timescaledb extension HTML](https://neon.tech/docs/extensions/timescaledb): The original HTML version of this documentation
+- [The timescaledb extension HTML](https://neon.com/docs/extensions/timescaledb): The original HTML version of this documentation
 
 `timescaledb` enables the efficient storage and retrieval of time-series data. Time-series data is a sequential collection of observations or measurements recorded over time. For example, IoT devices continuously generate data points with timestamps, representing measurements or events. `timescaledb` is designed to handle large volumes of time-stamped data and provides SQL capabilities on top of a time-oriented data model such as IoT data, sensor readings, financial market data, and other time-series datasets.
 
@@ -36,7 +36,7 @@ You can enable the extension by running the following `CREATE EXTENSION` stateme
 CREATE EXTENSION IF NOT EXISTS timescaledb;
 ```
 
-For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](https://neon.tech/docs/connect/query-with-psql-editor).
+For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](https://neon.com/docs/connect/query-with-psql-editor).
 
 ## Create a hypertable
 
@@ -97,7 +97,7 @@ You should receive the following output:
 
 ## Load weather data
 
-You can use the [sample weather dataset from TimescaleDB](https://assets.timescale.com/docs/downloads/weather_small.tar.gz) and load it into your Neon database using [psql](https://neon.tech/docs/connect/query-with-psql-editor).
+You can use the [sample weather dataset from TimescaleDB](https://assets.timescale.com/docs/downloads/weather_small.tar.gz) and load it into your Neon database using [psql](https://neon.com/docs/connect/query-with-psql-editor).
 
 Download the weather data:
 
@@ -342,7 +342,7 @@ To automatically run this deletion periodically, you can setup a cron task. For 
 
 
 <Admonition type="note">
-Please be aware that Neon's [Scale to Zero](https://neon.tech/docs/guides/scale-to-zero-guide) feature may affect the running of scheduled jobs. It may be necessary to start the compute before running a job.
+Please be aware that Neon's [Scale to Zero](https://neon.com/docs/guides/scale-to-zero-guide) feature may affect the running of scheduled jobs. It may be necessary to start the compute before running a job.
 </Admonition>
 
 

@@ -2,17 +2,13 @@
 title: Secure your data with Descope and Neon RLS
 subtitle: Implement Row-level Security policies in Postgres using Descope and Neon RLS
 enableTableOfContents: true
-updatedOn: '2025-03-10T18:26:02.766Z'
+updatedOn: '2025-06-02T15:04:05.572Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-descope
   - /docs/guides/neon-authorize-descope
 ---
 
 <InfoBlock>
-<DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/descope-react-frontend-neon-rls">Descope + Neon RLS</a>
-</DocsList>
-
 <DocsList title="Related docs" theme="docs">
   <a href="/docs/guides/neon-rls-tutorial">Neon RLS Tutorial</a>
   <a href="/docs/guides/neon-rls-drizzle">Simplify RLS with Drizzle</a>
@@ -23,7 +19,7 @@ Use Descope with Neon RLS to add secure, database-level authorization to your ap
 
 ## How it works
 
-Descope handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon RLS. Neon RLS validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
+Descope handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon RLS. Neon RLS validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
 
 ## Prerequisites
 

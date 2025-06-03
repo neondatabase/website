@@ -3,7 +3,7 @@ title: Use Exograph with Neon
 subtitle: Build GraphQL backends in minutes with Exograph and Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-07T21:36:52.651Z'
+updatedOn: '2025-06-02T15:04:05.567Z'
 ---
 
 _This guide was contributed by the Exograph team_
@@ -87,7 +87,7 @@ And you should see the todo you just added. Please follow Exograph's [guide to c
 
 ## Learn more
 
-In this guide, we have created a basic todo backend using Exograph and Neon. You can extend this further by establishing relationships between types, implementing access control rules, and integrating custom business logic. Check out Exograph's [application tutorial](https://exograph.dev/docs/application-tutorial/overview) for more details.
+In this guide, we have created a basic todo backend using Exograph and Neon. You can extend this further by establishing relationships between types, implementing access control rules, and integrating custom business logic. Check out Exograph's [application tutorial](https://exograph.dev/docs/application-tutorial) for more details.
 
 To deploy Exograph in the cloud and connect it to Neon, follow the guide below (select the "External Database" tab for Neon-specific instructions in each case):
 

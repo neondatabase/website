@@ -6,7 +6,7 @@ This guide describes how to migrate a database from Supabase to Neon Postgres us
 
 ## Source
 
-- [Migrate from Supabase to Neon Postgres HTML](https://neon.tech/docs/import/migrate-from-supabase): The original HTML version of this documentation
+- [Migrate from Supabase to Neon Postgres HTML](https://neon.com/docs/import/migrate-from-supabase): The original HTML version of this documentation
 
 ## Alternative approaches
 

@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Semantic Kernel HTML](https://neon.tech/docs/ai/semantic-kernel): The original HTML version of this documentation
+- [Semantic Kernel HTML](https://neon.com/docs/ai/semantic-kernel): The original HTML version of this documentation
 
 ## Overview
 

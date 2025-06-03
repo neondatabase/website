@@ -4,7 +4,7 @@
 
 ## Source
 
-- [File storage HTML](https://neon.tech/docs/guides/file-storage): The original HTML version of this documentation
+- [File storage HTML](https://neon.com/docs/guides/file-storage): The original HTML version of this documentation
 
 Applications often need to handle file uploads and storage, from user avatars and documents to images and other media. Neon does not yet provide a native file storage solution. Instead, we recommend combining Neon with a specialized storage service.
 
@@ -24,10 +24,10 @@ You can integrate Neon with a variety of storage solutions:
 
 ## Integration guides
 
-- [AWS S3](https://neon.tech/docs/guides/aws-s3): Upload files to AWS S3 and store metadata in Neon
-- [Azure Blob Storage](https://neon.tech/docs/guides/azure-blob-storage): Upload files to Azure Blob Storage and store metadata in Neon
-- [Backblaze B2](https://neon.tech/docs/guides/backblaze-b2): Upload files to Backblaze B2 and store metadata in Neon
-- [Cloudflare R2](https://neon.tech/docs/guides/cloudflare-r2): Upload files to Cloudflare R2 and store metadata in Neon
-- [Cloudinary](https://neon.tech/docs/guides/cloudinary): Upload files to Cloudinary and store metadata in Neon
-- [ImageKit](https://neon.tech/docs/guides/imagekit): Upload files to ImageKit and store metadata in Neon
-- [Uploadcare](https://neon.tech/docs/guides/uploadcare): Upload files to Uploadcare and store metadata in Neon
+- [AWS S3](https://neon.com/docs/guides/aws-s3): Upload files to AWS S3 and store metadata in Neon
+- [Azure Blob Storage](https://neon.com/docs/guides/azure-blob-storage): Upload files to Azure Blob Storage and store metadata in Neon
+- [Backblaze B2](https://neon.com/docs/guides/backblaze-b2): Upload files to Backblaze B2 and store metadata in Neon
+- [Cloudflare R2](https://neon.com/docs/guides/cloudflare-r2): Upload files to Cloudflare R2 and store metadata in Neon
+- [Cloudinary](https://neon.com/docs/guides/cloudinary): Upload files to Cloudinary and store metadata in Neon
+- [ImageKit](https://neon.com/docs/guides/imagekit): Upload files to ImageKit and store metadata in Neon
+- [Uploadcare](https://neon.com/docs/guides/uploadcare): Upload files to Uploadcare and store metadata in Neon

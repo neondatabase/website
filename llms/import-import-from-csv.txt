@@ -6,7 +6,7 @@ This topic shows how to import data into a Neon database table from a CSV file u
 
 ## Source
 
-- [Import data from CSV HTML](https://neon.tech/docs/import/import-from-csv): The original HTML version of this documentation
+- [Import data from CSV HTML](https://neon.com/docs/import/import-from-csv): The original HTML version of this documentation
 
 ## Overview
 

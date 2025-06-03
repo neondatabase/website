@@ -85,7 +85,7 @@ export async function GET(request) {
                 whiteSpace: 'pre-wrap',
               }}
             >
-              neon.tech
+              neon.com
             </div>
           </div>
         </div>

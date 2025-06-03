@@ -4,7 +4,7 @@
 
 ## Source
 
-- [File storage with Cloudflare R2 HTML](https://neon.tech/docs/guides/cloudflare-r2): The original HTML version of this documentation
+- [File storage with Cloudflare R2 HTML](https://neon.com/docs/guides/cloudflare-r2): The original HTML version of this documentation
 
 [Cloudflare R2](https://www.cloudflare.com/en-in/developer-platform/products/r2/) is S3-compatible object storage offering zero egress fees, designed for storing and serving large amounts of unstructured data like images, videos, and documents globally.
 
@@ -15,14 +15,14 @@ This guide demonstrates how to integrate Cloudflare R2 with Neon by storing file
 ### Create a Neon project
 
 1.  Navigate to [pg.new](https://pg.new) to create a new Neon project.
-2.  Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](https://neon.tech/docs/connect/connect-from-any-app).
+2.  Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).
 
 ### Create a Cloudflare account and R2 bucket
 
 1.  Sign up for or log in to your [Cloudflare account](https://dash.cloudflare.com/sign-up/r2).
 2.  Navigate to **R2** in the Cloudflare dashboard sidebar.
 3.  Click **Create bucket**, provide a unique bucket name (e.g., `my-neon-app-files`), and click **Create bucket**.
-    ![Create R2 Bucket](https://neon.tech/docs/guides/cloudflare-r2-create-bucket.png)
+    ![Create R2 Bucket](https://neon.com/docs/guides/cloudflare-r2-create-bucket.png)
 4.  Generate R2 API credentials (**Access Key ID** and **Secret Access Key**) by following [Create an R2 API Token](https://developers.cloudflare.com/r2/api/tokens/). Select **Object Read & Write** permissions. Copy these credentials securely.
 5.  Obtain your Cloudflare **Account ID** by following [Find your Account ID](https://developers.cloudflare.com/fundamentals/setup/find-account-and-zone-ids/#find-your-account-id).
 6.  For this example, enable public access to your bucket URL by following [Allow public access to your bucket](https://developers.cloudflare.com/r2/buckets/public-buckets/#enable-managed-public-access). Note your bucket's public URL (e.g., `https://pub-xxxxxxxx.r2.dev`).
@@ -53,7 +53,7 @@ Here's an example CORS configuration allowing `PUT` uploads and `GET` requests f
 
 We need a table in Neon to store metadata about the objects uploaded to R2.
 
-1.  Connect to your Neon database using the [Neon SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor) or a client like [psql](https://neon.tech/docs/connect/query-with-psql-editor). Here is an example SQL statement to create a simple table including the object key, URL, user ID, and timestamp:
+1.  Connect to your Neon database using the [Neon SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor) or a client like [psql](https://neon.com/docs/connect/query-with-psql-editor). Here is an example SQL statement to create a simple table including the object key, URL, user ID, and timestamp:
 
     ```sql
     CREATE TABLE IF NOT EXISTS r2_files (
@@ -68,7 +68,7 @@ We need a table in Neon to store metadata about the objects uploaded to R2.
 2.  Run the SQL statement. You can add other relevant columns (file size, content type, etc.) depending on your application needs.
 
 > **Note: Securing metadata with RLS**
-> If you use [Neon's Row Level Security (RLS)](https://neon.tech/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `r2_files` table. This controls who can view or modify the object references stored in Neon based on your RLS rules.
+> If you use [Neon's Row Level Security (RLS)](https://neon.com/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `r2_files` table. This controls who can view or modify the object references stored in Neon based on your RLS rules.
 >
 > Note that these policies apply _only_ to the metadata in Neon. Access control for the objects within the R2 bucket itself is managed via R2 permissions, API tokens, and presigned URL settings if used.
 

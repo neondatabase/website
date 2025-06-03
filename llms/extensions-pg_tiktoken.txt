@@ -4,7 +4,7 @@
 
 ## Source
 
-- [The pg_tiktoken extension HTML](https://neon.tech/docs/extensions/pg_tiktoken): The original HTML version of this documentation
+- [The pg_tiktoken extension HTML](https://neon.com/docs/extensions/pg_tiktoken): The original HTML version of this documentation
 
 ## Overview
 
@@ -35,7 +35,7 @@ You can install the `pg_tiktoken` extension by running the following `CREATE EXT
 CREATE EXTENSION pg_tiktoken
 ```
 
-For information about using the Neon **SQL Editor**, see [Query with Neon's SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](https://neon.tech/docs/connect/query-with-psql-editor).
+For information about using the Neon **SQL Editor**, see [Query with Neon's SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](https://neon.com/docs/connect/query-with-psql-editor).
 
 ## Use the `tiktoken_encode` function
 

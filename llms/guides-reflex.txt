@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Build a Python App with Reflex and Neon HTML](https://neon.tech/docs/guides/reflex): The original HTML version of this documentation
+- [Build a Python App with Reflex and Neon HTML](https://neon.com/docs/guides/reflex): The original HTML version of this documentation
 
 [Reflex](https://reflex.dev/) is a Python web framework that allows you to build full-stack applications with Python.
 
@@ -116,7 +116,7 @@ To configure the connection settings:
    )
    ```
 
-   Replace `<connection-string-from-neon>` with your Neon connection string. You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](https://neon.tech/docs/connect/connect-from-any-app).
+   Replace `<connection-string-from-neon>` with your Neon connection string. You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).
 
    > **Note**: Replace the value for `db_url` with an environment variable or the connection string from Neon. For example, after creating an environment variable named `NEON_DATABASE_URL`, you can use it as follows:
    >
@@ -137,7 +137,7 @@ To configure the connection settings:
 
 ## Creating a data model
 
-To create a data model in Reflex, you can define a Python class that represents the data structure. Reflex uses [sqlmodel](https://sqlmodel.tiangolo.com/) to provide a built-in ORM wrapping [SQLAlchemy](https://neon.tech/docs/guides/sqlalchemy).
+To create a data model in Reflex, you can define a Python class that represents the data structure. Reflex uses [sqlmodel](https://sqlmodel.tiangolo.com/) to provide a built-in ORM wrapping [SQLAlchemy](https://neon.com/docs/guides/sqlalchemy).
 
 For example, you can create a `Customer` model as follows:
 
@@ -203,6 +203,6 @@ This command applies the migration to the database, updating the schema to match
 
 Learn how to use Reflex with Neon Postgres to create an interactive Customer Data App. The app demonstrates how to edit tabular data from a live application connected to a Postgres database. You can find a live version of the application [here](https://customer-data-app.reflex.run/).
 
-![Reflex Customer Data App](https://neon.tech/docs/guides/reflex_customer_data_app.png)
+![Reflex Customer Data App](https://neon.com/docs/guides/reflex_customer_data_app.png)
 
 [Customer Data App](https://github.com/reflex-dev/templates/tree/main/customer_data_app) - GitHub repository for the Reflex Customer Data App built with Neon Postgres

@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Connection latency and timeouts HTML](https://neon.tech/docs/connect/connection-latency): The original HTML version of this documentation
+- [Connection latency and timeouts HTML](https://neon.com/docs/connect/connection-latency): The original HTML version of this documentation
 
 Neon's _Scale to zero_ feature is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. A characteristic of this feature is the concept of a "cold start". During this process, a compute transitions from an idle state to an active state to process requests. Currently, activating a Neon compute from an idle state typically takes a few hundred milliseconds not counting other factors that can add to latencies such as the physical distance between your application and database or startup times of other services that participate in your connection process.
 
@@ -170,7 +170,7 @@ However, this example is a simplification. In a production application, you migh
 #### Connection retry references
 
 - [SQL Alchemy: Dealing with disconnects](https://arc.net/l/quote/nojcaewr)
-- [Fast API blog post: Recycling connections for Neon's scale to zero](https://neon.tech/blog/deploy-a-serverless-fastapi-app-with-neon-postgres-and-aws-app-runner-at-any-scale)
+- [Fast API blog post: Recycling connections for Neon's scale to zero](https://neon.com/blog/deploy-a-serverless-fastapi-app-with-neon-postgres-and-aws-app-runner-at-any-scale)
 
 ### Use application-level caching
 

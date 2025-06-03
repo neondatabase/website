@@ -3,7 +3,7 @@ title: Manage billing
 subtitle: Invoices, payment methods, changing your plan, and other actions around
   managing your bill
 enableTableOfContents: true
-updatedOn: '2024-12-01T21:48:07.694Z'
+updatedOn: '2025-05-30T16:54:40.484Z'
 ---
 
 <InfoBlock>
@@ -52,7 +52,7 @@ If you are unable to update your payment method, please [contact support](/docs/
 
 ### Missed payments
 
-If an auto-debit payment transaction fails, Neon sends a request to update your payment method. Late fees and payment policies are described in [Neon’s Terms of Service](https://neon.tech/terms-of-service).
+If an auto-debit payment transaction fails, Neon sends a request to update your payment method. Late fees and payment policies are described in [Neon’s Terms of Service](/terms-of-service).
 
 ### Failing payments for Indian customers
 
@@ -111,7 +111,7 @@ Changing your plan to one with lower usage allowances may affect the performance
 
 If you are downgrading your plan, you will be required to remove any projects, branches, or data that exceed your new plan allowances.
 
-To downgrade from an [Enterprise](/docs/introduction/plans#enterprise) plan, please contact [Sales](https://neon.tech/contact-sales). Cancellation of an Enterprise plan is handled according to the Master Subscription Agreement (MSA) outlined in the customer agreement.
+To downgrade from an [Enterprise](/docs/introduction/plans#enterprise) plan, please contact [Sales](/contact-sales). Cancellation of an Enterprise plan is handled according to the Master Subscription Agreement (MSA) outlined in the customer agreement.
 
 ## How to prevent further monthly charges to your account
 

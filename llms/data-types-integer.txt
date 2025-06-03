@@ -6,7 +6,7 @@ Postgres integer data types provide efficient storage options for whole numbers,
 
 ## Source
 
-- [Postgres Integer data types HTML](https://neon.tech/docs/data-types/integer): The original HTML version of this documentation
+- [Postgres Integer data types HTML](https://neon.com/docs/data-types/integer): The original HTML version of this documentation
 
 ## Storage and syntax
 
