@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import React from 'react';
 import slugify from 'slugify';
 
 import HashIcon from './images/hash.inline.svg';
@@ -24,14 +25,35 @@ const extractText = (children) => {
   return '';
 };
 
+const extractCustomId = (text) => {
+  const match = text.match(/\(#([^)]+)\)$/);
+  if (match) {
+    return match[1];
+  }
+  return null;
+};
+
 const AnchorHeading = (Tag) => {
   // eslint-disable-next-line react/prop-types
   const Component = ({ children, className = null }) => {
-    const id = slugify(extractText(children), {
-      lower: true,
-      strict: true,
-      remove: /[*+~.()'"!:@]/g,
-    }).replace(/_/g, '');
+    const text = extractText(children);
+    const customId = extractCustomId(text);
+
+    const id =
+      customId ||
+      slugify(text.replace(/\(#[^)]+\)$/, ''), {
+        lower: true,
+        strict: true,
+        remove: /[*+~.()'"!:@]/g,
+      }).replace(/_/g, '');
+
+    // Remove the custom ID from children if it exists
+    const cleanedChildren = React.Children.map(children, (child) => {
+      if (typeof child === 'string') {
+        return child.replace(/\(#[^)]+\)$/, '');
+      }
+      return child;
+    });
 
     return (
       <Tag
@@ -51,7 +73,7 @@ const AnchorHeading = (Tag) => {
             className={clsx(Tag === 'h2' && 'w-3.5', Tag === 'h3' && 'w-3', 'text-green-45')}
           />
         </a>
-        {children}
+        {cleanedChildren}
       </Tag>
     );
   };

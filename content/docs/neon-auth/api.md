@@ -1,7 +1,7 @@
 ---
 title: Manage Neon Auth using the API
 enableTableOfContents: true
-updatedOn: '2025-05-16T19:06:06.836Z'
+updatedOn: '2025-06-02T15:04:05.572Z'
 tag: beta
 redirectFrom:
   - /docs/guides/neon-auth-api
@@ -81,7 +81,7 @@ Example response:
 }
 ```
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/createProjectIdentityIntegration)
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/createneonauthintegration)
 
 ## List integrations
 
@@ -111,7 +111,7 @@ Example response:
 }
 ```
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/listProjectIdentityIntegrations)
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/listneonauthintegrations)
 
 ## Generate SDK keys
 
@@ -147,7 +147,7 @@ Example response:
 }
 ```
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/createProjectIdentityAuthProviderSDKKeys)
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/createneonauthprovidersdkkeys)
 
 ## Create users
 
@@ -194,7 +194,7 @@ psql postgres://[user]:[password]@[hostname]/[database]
 SELECT id, email, name, created_at FROM neon_auth.users_sync;
 ```
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/createProjectIdentityNewUser)
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/createneonauthnewuser)
 
 ## Transfer to your auth provider
 
@@ -237,4 +237,4 @@ curl --request DELETE \
      --header 'authorization: Bearer $NEON_API_KEY' | jq
 ```
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/deleteProjectIdentityIntegration)
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/deleteneonauthintegration)
