@@ -1,6 +1,6 @@
 ---
 title: app.build
-subtitle: Open-Source AI agent for full-stack application generation
+subtitle: Open-source AI agent for full-stack application generation
 enableTableOfContents: true
 updatedOn: '2025-06-02T16:54:40.445Z'
 ---
@@ -9,7 +9,7 @@ app.build is an open-source agent that generates and deploys full-stack web appl
 
 ## Why app.build
 
-- **Transparency**: Open source codebase lets you see exactly how the agent makes decisions and generates code
+- **Transparency**: Open-source codebase lets you see exactly how the agent makes decisions and generates code
 - **Extensibility**: Add your own templates, models, or deployment targets
 - **Learning**: Understand agent architectures by examining a working implementation
 - **Best practices built-in**: Every app includes testing, CI/CD, and proper project structure
@@ -84,8 +84,8 @@ The codebase is structured to support:
 ## Contributing
 
 - Repositories:
-  - [github.com/appdotbuild/agent](https://github.com/appdotbuild/agent) (agent logic and generation)
-  - [github.com/appdotbuild/platform](https://github.com/appdotbuild/platform) (backend infrastructure)
+    - [github.com/appdotbuild/agent](https://github.com/appdotbuild/agent) (agent logic and generation)
+    - [github.com/appdotbuild/platform](https://github.com/appdotbuild/platform) (backend infrastructure)
 - Issues: Bug reports, feature requests, and discussions
 - PRs: Code contributions, documentation, templates
 
