@@ -11,223 +11,156 @@ redirectFrom:
   - /docs/introduction/pro-plan
   - /docs/introduction/custom-plan
   - /docs/reference/technical-preview-free-tier
+  - /docs/reference/pricing-estimation-guide
+  - /docs/reference/billing-sample
 updatedOn: '2025-05-30T16:54:40.485Z'
 ---
 
-Neon's plans are designed to meet different user requirements, ranging from hobby projects to enterprise-level production workloads. We also offer custom enterprise plans with volume-based discounts for large teams or database fleets. Refer to our [Pricing](/pricing) page for fees and a detailed plan comparison.
+Neon's pricing combines flat-rate plans with usage-based pricing. Each plan includes a bundle of resources — like compute hours, storage, and data transfer — and you only pay extra if you exceed those included amounts. This lets you start small and scale gradually, with predictable base costs and flexible overages that grow with your usage.
 
-Neon offers four plans:
+On paid plans, you can also enable optional add-ons like extended restore windows, larger compute sizes, metrics export, and compliance features. These are billed monthly and can be added or removed as your needs change.
 
-- [Free Plan](#free-plan)
-- [Launch](#launch)
-- [Scale](#scale)
-- [Business](#business)
-- [Enterprise](#enterprise)
+## Choosing the right plan
 
-<Admonition type="tip" title="Plan Allowances and Extra Usage">
-Neon plans are structured around **Allowances** and **Extra usage**. Allowances are included in your plan. With Neon's paid plans, you can purchase [extra usage](/docs/introduction/extra-usage) in set increments for when you need to go over your allowance.
+Neon’s usage-based pricing makes it easy to grow your project without switching platforms. You only pay for what you use beyond your included resources — no need to upgrade early or over-provision.
+
+Here’s a quick overview to help you decide which plan is right for you:
+
+- **Free**: Great for learning, testing, and personal projects. Usage is capped — no surprise charges or billing.
+- **Serverless**: For growing apps that need more compute or storage. Starts at $5/month and includes **bundled resources**, **usage-based pricing** for extra resources, and **optional add-ons**. The Serverless plan lets you scale up without hitting a wall.
+- **Business**: Ideal for production teams with performance, compliance, and support requirements. Includes **higher bundled resource limits**, **all usage-based pricing options** found in the Serverless plan, and most **add-ons** are included.
+- **Enterprise**: This is our custom plan — designed for teams with complex or large-scale needs. Supports custom pricing, predictable billing, and dedicated support — while still offering **scalable usage-based pricing**.
+
+For a detailed feature and pricing breakdown, visit the [Neon pricing page](https://neon.tech/pricing).
+
+---
+
+## Free plan
+
+**$0/month** — Start for free  
+For developers exploring Neon or building side projects.
+
+**What you get on the Free plan:**
+- 10 projects per organization
+- 10 branches per project
+- 3 schema-only branches
+- 0.5 GB storage per project
+- Up to 2 CU compute size
+- 50 compute hours per project/month
+- 5 GB data transfer
+- 6-hour instant restore window
+
+<Admonition type="info" title="Why upgrade from Free to Serverless?">
+Need more compute hours, branching flexibility, or data transfer? Serverless offers 2x the compute, 10x the branches, and support for usage-based scaling — starting at $5/month.
 </Admonition>
 
-## Free Plan
+---
 
-Neon's Free Plan plan is best for hobby projects, prototypes, and learning Neon.
+## Serverless
 
-### Free Plan allowances
+**From $5/month**
+For startups and projects that need flexible usage and room to scale.
 
-The Free Plan includes the following usage allowances:
+**What you get with the flat monthly fee:**
+- 100 projects per organization
+- 100 branches per project
+- 5 schema-only branches
+- 1 GB storage per project
+- Up to 8 CU compute size
+- 100 compute hours per project/month
+- 100 GB data transfer
+- 24-hour instant restore window
 
-| Usage type                 | Plan allowance                                                                                                                                           |
-| :------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Projects**               | 10 Neon projects                                                                                                                                         |
-| **Branches**               | 10 branches per project                                                                                                                                  |
-| **Databases**              | 500 per branch                                                                                                                                           |
-| **Storage**                | 0.5 GB-month (regular and archive storage combined)                                                                                                      |
-| **Compute**                | 191.9 compute hours/month&#8212;enough to run a primary 0.25 CU compute 24/7; up to 5 of those compute hours can be used for non-default branch computes |
-| **Data transfer (Egress)** | 5 GB per month                                                                                                                                           |
+**Usage-based pricing if you need extra**
+- Additional projects: $5 each
+- Storage (per GB-month):
+  - 1–10 GB: $0.39
+  - 10–100 GB: $0.34
+  - 100+ GB: $0.29
+- Compute (per active hour):
+  - 100–1,000 hours: $0.22
+  - 1,000–10,000 hours: $0.20
+  - 10,000+ hours: $0.18
+- Data transfer: $10 per GB
 
-<Admonition type="tip" title="What is a compute hour?">
+**Optional add-ons:**
+- Larger compute sizes (up to 16 vCPU / 64 GB RAM): $100
+- Priority support: $250
+- Restore window extensions:
+  - 7 days: $50
+  - 30 days: $950
+- Metrics export to Datadog: $50
+- IP allowlist: $50
+- SOC 2 certification: $100
 
-- A **compute hour** is one _active hour_ for a compute with 1 vCPU. For a compute with .25 vCPU, it takes 4 _active hours_ to use 1 compute hour. On the other hand, if your compute has 4 vCPUs, it takes only 15 minutes to use 1 compute hour.
-- An **active hour** is a measure of the amount of time a compute is active. The time your compute is idle when suspended due to inactivity is not counted.
-- **Compute hours formula**
-
-  ```
-  compute hours = compute size * active hours
-  ```
-
+<Admonition type="info" title="Why upgrade from Serverless to Business?">
+Need HIPAA compliance, private networking, or included add-ons? The Business plan includes all Serverless capabilities plus enhanced support and security features.
 </Admonition>
 
-### Free Plan features
-
-- Autoscaling up to 2 vCPU
-- Scale to zero
-- Monitoring with 1 day of historical data
-- All supported regions
-- Project collaboration
-- Advanced Postgres features such as connection pooling, logical replication, and 60+ Postgres extensions
-- Read replicas (limit of 3 read replica computes per project)
-- Neon features such as branching, instant restore up to **24 hours** in the past, time travel connections, and more
-- [Community support](/docs/introduction/support)
-
-For a complete list of features, refer to the **detailed plan comparison** on the [Neon pricing](/pricing) page.
-
-<Admonition type="tip" title="Free Plan Compute Allowances">
-On the Free Plan, you have 191.9 compute hours/month&#8212;enough to run a primary 0.25 CU compute 24/7. Up to 5 of those compute hours can be used for non-default branch computes. Autoscaling up to 2 vCPU with 8 GB RAM is available for extra performance during peak times, but please be aware that autoscaling can consume your compute hours more quickly, potentially impacting the ability to run a primary 0.25 CU compute 24/7. If you use Autoscaling or Read Replicas, you'll need to monitor your compute hours to ensure you don't run out before the end of the month.
-
-If you go over the 5 compute hour allowance for non-default branch computes, those computes are suspended until the allowance resets at the beginning of the month. If you go over the 191.9 compute hour allowance, all computes are suspended until the beginning of the month.
-</Admonition>
-
-## Launch
-
-The Launch plan provides all of the resources, features, and support you need to launch your application. It's ideal for startups and growing businesses or applications.
-
-### Launch plan allowances
-
-The Launch plan includes the following usage allowances:
-
-| Usage type          | Plan allowance                                                   |
-| :------------------ | :--------------------------------------------------------------- |
-| **Projects**        | 100 Neon projects                                                |
-| **Branches**        | 5000 per project                                                 |
-| **Databases**       | 500 per branch                                                   |
-| **Storage**         | 10 GB-month                                                      |
-| **Archive Storage** | 50 GB-month                                                      |
-| **Compute**         | 300 compute hours per month for all computes across all projects |
-
-### Launch plan extra usage
-
-Launch plan users have access to [extra compute and storage](/docs/introduction/extra-usage), which is allocated and billed automatically when plan allowances are exceeded.
-
-| Extra usage type          | Cost                   |
-| :------------------------ | :--------------------- |
-| **Extra Storage**         | $1.75 per GB-month     |
-| **Extra Archive Storage** | $0.10 per GB-month     |
-| **Extra Compute**         | $0.16 per compute hour |
-
-### Launch plan features
-
-- Autoscaling compute size up to 4 vCPUs and 16 GB RAM
-- Scale to zero
-- Monitoring with 7 days of historical data
-- Advanced Postgres features, including connection pooling, logical replication, and 60+ Postgres extensions
-- Branch protection (up to 2 branches)
-- Neon features such as branching, instant restore up to **7 days** in the past, time travel connections, and more
-- [Standard support](/docs/introduction/support)
-
-For a complete list of features, refer to the **detailed plan comparison** on the [Neon pricing](/pricing) page.
-
-## Scale
-
-The Scale plan provides full platform and support access and is designed for scaling production workloads.
-
-### Scale plan allowances
-
-The Scale plan includes the following usage allowances:
-
-| Usage type          | Plan allowance                                                   |
-| :------------------ | :--------------------------------------------------------------- |
-| **Projects**        | 1000 Neon projects                                               |
-| **Branches**        | 5000 per project                                                 |
-| **Databases**       | 500 per branch                                                   |
-| **Storage**         | 50 GB-month                                                      |
-| **Archive Storage** | 250 GB-month                                                     |
-| **Compute**         | 750 compute hours per month for all computes across all projects |
-
-### Scale plan extra usage
-
-Scale plan users have access to [extra compute, storage, and projects](/docs/introduction/extra-usage), which is allocated and billed automatically when plan allowances are exceeded.
-
-| Extra usage type          | Cost                   |
-| :------------------------ | :--------------------- |
-| **Extra Storage**         | $1.50 per GB-month     |
-| **Extra Archive Storage** | $0.10 per GB-month     |
-| **Extra Compute**         | $0.16 per compute hour |
-| **Extra Projects**        | $50 per 1000           |
-
-### Scale plan features
-
-- Autoscaling compute up to 8 vCPUs and 32 GB RAM
-- Scale to zero
-- Monitoring with 14 days of historical data
-- Advanced Postgres features, including connection pooling, logical replication, 60+ Postgres extensions, and customer-provided custom extensions (on AWS-provisioned projects only)
-- Branch protection (up to 5 branches)
-- Monitoring with 7 days of historical data
-- Neon features such as branching, instant restore up to **14 days** in the past, time travel connections, and more
-- [Standard support](/docs/introduction/support)
-
-For a complete list of features, refer to the **detailed plan comparison** on the [Neon pricing](/pricing) page.
+---
 
 ## Business
 
-The Business plan is designed for mid-to-large enterprises requiring higher compute capacity and advanced security and compliance features.
+**From $700/month (pay via Azure)**
+For production teams needing security, compliance, and advanced support.
 
-### Business plan allowances
+**What you get with the flat monthly fee:**
+- 100 projects per organization
+- 100 branches per project
+- 25 schema-only branches
+- 1 GB storage per project
+- Up to 56 CU compute size
+- 100 compute hours per project/month
+- 100 GB data transfer
+- 24-hour instant restore window
 
-The Business plan includes the following usage allowances:
+**Usage-based pricing if you need extra**
+- Additional projects: $5 each
+- Storage (per GB-month):
+  - 1–10 GB: $0.39
+  - 10–100 GB: $0.34
+  - 100+ GB: $0.29
+- Compute (per active hour):
+  - 100–1,000 hours: $0.22
+  - 1,000–10,000 hours: $0.20
+  - 10,000+ hours: $0.18
+- Data transfer: $10 per GB
 
-| Usage type          | Plan allowance                                                    |
-| ------------------- | ----------------------------------------------------------------- |
-| **Projects**        | 5000 Neon projects                                                |
-| **Branches**        | 5000 per project                                                  |
-| **Databases**       | 500 per branch                                                    |
-| **Storage**         | 500 GB-month                                                      |
-| **Archive Storage** | 2500 GB-month                                                     |
-| **Compute**         | 1000 compute hours per month for all computes across all projects |
+**Add-ons (most included):**
+- Larger compute sizes: **Included**
+- Priority support: **Included**
+- 7-day and 30-day restore windows: **Included**
+- Metrics export to Datadog: **Included**
+- IP allowlist: **Included**
+- SOC 2 certification: **Included**
+- HIPAA certification: $500
 
-### Business plan extra usage
+<Admonition type="info" title="Why upgrade to Enterprise?">
+Need higher limits, custom pricing, or dedicated support for mission-critical workloads? The Enterprise plan gives you full control over resources, compliance, and support — plus hands-on help with migrations and security reviews.
+</Admonition>
 
-Business plan users have access to [extra compute, storage, and projects](/docs/introduction/extra-usage), which are allocated and billed automatically when plan allowances are exceeded.
-
-| Extra usage type          | Cost                   |
-| :------------------------ | :--------------------- |
-| **Extra Storage**         | $0.50 per GB-month     |
-| **Extra Archive Storage** | $0.10 per GB-month     |
-| **Extra Compute**         | $0.16 per compute hour |
-| **Extra Projects**        | $50.00 per 5000        |
-
-### Business plan features
-
-- Autoscaling compute up to 16 vCPUs and 56 GB RAM
-- Fixed compute sizes up to 56 vCPUs and 224 GB RAM
-- Scale to zero
-- Monitoring with 14 days of historical data
-- Advanced Postgres features, including connection pooling, logical replication, and 60+ Postgres extensions
-- Neon features such as branching, instant restore up to **30 days** in the past, time travel connections, and more
-- Enhanced security features including SOC 2 compliance, branch protection, and allowed IP configurations
-- [Priority support](/docs/introduction/support)
-- [Service SLA of 99.95% uptime](/neon-business-sla)
-- HIPAA Compliance (separately billed add-on)
-
-For a complete list of features and comparisons with other plans, refer to the **detailed plan comparison** on the [Neon pricing](/pricing) page.
+---
 
 ## Enterprise
 
-The Enterprise plan is a custom plan intended for large teams, enterprises requiring database fleets, or SaaS vendors interested in reselling Neon or integrating Neon into their service.
+**Custom pricing**
+For large teams, SaaS vendors, or orgs with strict compliance and migration requirements.
 
-Enterprise plan usage is entirely customizable and can support large data sizes.
+**What you get:**
+- Custom project, branch, and storage limits
+- Custom compute limits and configurations
+- Tailored pricing and resource allocation
+- Zero-downtime migrations
+- Highest level of support
 
-| Usage type          | Plan allowance                       |
-| :------------------ | :----------------------------------- |
-| **Projects**        | Custom                               |
-| **Branches**        | Custom                               |
-| **Databases**       | Custom                               |
-| **Storage**         | Custom (larger data sizes available) |
-| **Archive Storage** | Custom                               |
-| **Compute**         | Custom                               |
+**Enterprise benefits:**
+- Invoice billing and annual commitments
+- Security reviews and compliance questionnaires
+- Dedicated Slack channel
+- Assigned solution engineer
+- Custom domain proxy
+- HIPAA and SOC 2 included (as needed)
 
-Additionally, the _Enterprise_ plan can be tailored to your specific requirements with:
-
-- Custom pricing with discounts
-- Higher resource allowances for projects, branches, storage, archive storage, and compute
-- Scale to zero
-- HIPAA Compliance (separately billed add-on)
-
-Enterprise plan users have access to **Enterprise** support, which includes everything offered with the **Priority** plan plus Enterprise-level SLAs. For more information, Neon support plans are outlined on our [Support](/docs/introduction/support) page.
-
-If you are interested in exploring an _Enterprise_ plan with Neon, you can [request an enterprise trial](/enterprise#request-trial) or [get in touch with our sales team](/contact-sales).
-
-## Feedback
-
-We’re always looking for ways to improve our pricing model to make it as developer-friendly as possible. If you have feedback for us, let us know via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord. We read and consider every submission.
+To learn more, [contact our sales team](https://neon.tech/contact-sales) or [request an enterprise trial](https://neon.tech/enterprise#request-trial).
 
 <NeedHelp/>
