@@ -325,6 +325,4 @@ Key requirements:
 - Must use a personal API key
 - Requires admin permissions in the source organization and at least member permissions in the target
 
-
 [Try in API Reference](https://api-docs.neon.tech/reference/transferproject)
-
