@@ -72,11 +72,12 @@ const parseProps = (propsString) => {
 
   const props = {};
   const propRegex = /(\w+)="([^"]+)"/g;
-  let match;
 
-  while ((match = propRegex.exec(propsString)) !== null) {
+  let match = propRegex.exec(propsString);
+  while (match !== null) {
     const [, key, value] = match;
     props[key] = value;
+    match = propRegex.exec(propsString);
   }
 
   return props;
