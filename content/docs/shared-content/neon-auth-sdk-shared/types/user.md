@@ -2,7 +2,7 @@ This is a detailed reference for the `CurrentUser` object in the {sdkName} SDK.
 
 You can call `useUser()` or `stackServerApp.getUser()` to get the `CurrentUser` object.
 
-### Table of Contents
+## Table of Contents
 
 <div
   style={{
@@ -61,7 +61,7 @@ You can call `useUser()` or `stackServerApp.getUser()` to get the `CurrentUser` 
   <span><span style={{ color: "#60a5fa" }}>{"};"}</span></span>
 </div>
 
-### `currentUser.id`
+## `currentUser.id`
 
 The user ID as a `string`. This is the unique identifier of the user.
 
@@ -69,7 +69,7 @@ The user ID as a `string`. This is the unique identifier of the user.
 declare const id: string;
 ```
 
-### `currentUser.displayName`
+## `currentUser.displayName`
 
 The display name of the user as a `string` or `null` if not set. The user can modify this value.
 
@@ -77,7 +77,7 @@ The display name of the user as a `string` or `null` if not set. The user can mo
 declare const displayName: string | null;
 ```
 
-### `currentUser.primaryEmail`
+## `currentUser.primaryEmail`
 
 The primary email of the user as a `string` or `null`. Note that this is not necessarily unique.
 
@@ -85,7 +85,7 @@ The primary email of the user as a `string` or `null`. Note that this is not nec
 declare const primaryEmail: string | null;
 ```
 
-### `currentUser.primaryEmailVerified`
+## `currentUser.primaryEmailVerified`
 
 A `boolean` indicating whether the primary email of the user is verified.
 
@@ -93,7 +93,7 @@ A `boolean` indicating whether the primary email of the user is verified.
 declare const primaryEmailVerified: boolean;
 ```
 
-### `currentUser.profileImageUrl`
+## `currentUser.profileImageUrl`
 
 The profile image URL of the user as a `string` or `null` if no profile image is set.
 
@@ -101,7 +101,7 @@ The profile image URL of the user as a `string` or `null` if no profile image is
 declare const profileImageUrl: string | null;
 ```
 
-### `currentUser.signedUpAt`
+## `currentUser.signedUpAt`
 
 The date and time when the user signed up, as a `Date`.
 
@@ -109,7 +109,7 @@ The date and time when the user signed up, as a `Date`.
 declare const signedUpAt: Date;
 ```
 
-### `currentUser.hasPassword`
+## `currentUser.hasPassword`
 
 A `boolean` indicating whether the user has a password set.
 
@@ -117,7 +117,7 @@ A `boolean` indicating whether the user has a password set.
 declare const hasPassword: boolean;
 ```
 
-### `currentUser.clientMetadata`
+## `currentUser.clientMetadata`
 
 The client metadata of the user as a `Json` object. This can be modified by the user.
 
@@ -125,7 +125,7 @@ The client metadata of the user as a `Json` object. This can be modified by the 
 declare const clientMetadata: Json;
 ```
 
-### `currentUser.clientReadOnlyMetadata`
+## `currentUser.clientReadOnlyMetadata`
 
 The client read-only metadata of the user as a `Json` object. This cannot be modified by the user.
 
@@ -133,7 +133,7 @@ The client read-only metadata of the user as a `Json` object. This cannot be mod
 declare const clientReadOnlyMetadata: Json;
 ```
 
-### `currentUser.selectedTeam`
+## `currentUser.selectedTeam`
 
 The currently selected team of the user as a `Team` object or `null` if no team is selected.
 
@@ -141,18 +141,18 @@ The currently selected team of the user as a `Team` object or `null` if no team 
 declare const selectedTeam: Team | null;
 ```
 
-### `currentUser.update(data)`
+## `currentUser.update(data)`
 
 Updates the user's profile.
 
-#### Parameters
+### Parameters (#update-parameters)
 
 - `data`: An object containing properties to update:
   - `displayName`: The new display name
   - `profileImageUrl`: The new profile image URL
   - `clientMetadata`: The new client metadata
 
-#### Returns
+### Returns (#update-returns)
 
 `Promise<void>`
 
@@ -164,17 +164,17 @@ declare function update(data: {
 }): Promise<void>;
 ```
 
-### `currentUser.updatePassword(data)`
+## `currentUser.updatePassword(data)`
 
 Updates the user's password.
 
-#### Parameters
+### Parameters (#updatepassword-parameters)
 
 - `data`: An object containing properties to update:
   - `currentPassword`: The current password
   - `newPassword`: The new password
 
-#### Returns
+### Returns (#updatepassword-returns)
 
 `Promise<void>`
 
@@ -185,11 +185,11 @@ declare function updatePassword(data: {
 }): Promise<void>;
 ```
 
-### `currentUser.getAuthHeaders()`
+## `currentUser.getAuthHeaders()`
 
 Gets the authentication headers for the user.
 
-#### Returns
+### Returns (#getauthheaders-returns)
 
 `Promise<Record<string, string>>`: The authentication headers.
 
@@ -197,11 +197,11 @@ Gets the authentication headers for the user.
 declare function getAuthHeaders(): Promise<Record<string, string>>;
 ```
 
-### `currentUser.getAuthJson()`
+## `currentUser.getAuthJson()`
 
 Gets the authentication JSON for the user.
 
-#### Returns
+### Returns (#getauthjson-returns)
 
 `Promise<{ accessToken: string | null }>`: The authentication JSON.
 
@@ -209,16 +209,16 @@ Gets the authentication JSON for the user.
 declare function getAuthJson(): Promise<{ accessToken: string | null }>;
 ```
 
-### `currentUser.signOut([options])`
+## `currentUser.signOut([options])`
 
 Signs out the user.
 
-#### Parameters
+### Parameters (#signout-parameters)
 
 - `options`: An object containing options:
   - `everywhere`: Whether to sign out from all devices
 
-#### Returns
+### Returns (#signout-returns)
 
 `Promise<void>`
 
@@ -226,11 +226,11 @@ Signs out the user.
 declare function signOut(options?: { everywhere?: boolean }): Promise<void>;
 ```
 
-### `currentUser.delete()`
+## `currentUser.delete()`
 
 Deletes the user.
 
-#### Returns
+### Returns (#delete-returns)
 
 `Promise<void>`
 
@@ -238,15 +238,15 @@ Deletes the user.
 declare function delete(): Promise<void>;
 ```
 
-### `currentUser.getTeam(id)`
+## `currentUser.getTeam(id)`
 
 Gets a team by ID.
 
-#### Parameters
+### Parameters (#getteam-parameters)
 
 - `id`: The ID of the team
 
-#### Returns
+### Returns (#getteam-returns)
 
 `Promise<Team | null>`: The team, or `null` if not found
 
@@ -254,15 +254,15 @@ Gets a team by ID.
 declare function getTeam(id: string): Promise<Team | null>;
 ```
 
-### `currentUser.useTeam(id)`
+## `currentUser.useTeam(id)`
 
 Gets a team by ID as a React hook.
 
-#### Parameters
+### Parameters (#useteam-parameters)
 
 - `id`: The ID of the team
 
-#### Returns
+### Returns (#useteam-returns)
 
 `Team | null`: The team, or `null` if not found
 
@@ -270,11 +270,11 @@ Gets a team by ID as a React hook.
 declare function useTeam(id: string): Team | null;
 ```
 
-### `currentUser.listTeams()`
+## `currentUser.listTeams()`
 
 Lists all teams the user is a member of.
 
-#### Returns
+### Returns (#listteams-returns)
 
 `Promise<Team[]>`: The list of teams
 
@@ -282,11 +282,11 @@ Lists all teams the user is a member of.
 declare function listTeams(): Promise<Team[]>;
 ```
 
-### `currentUser.useTeams()`
+## `currentUser.useTeams()`
 
 Lists all teams the user is a member of as a React hook.
 
-#### Returns
+### Returns (#useteams-returns)
 
 `Team[]`: The list of teams
 
@@ -294,15 +294,15 @@ Lists all teams the user is a member of as a React hook.
 declare function useTeams(): Team[];
 ```
 
-### `currentUser.setSelectedTeam(team)`
+## `currentUser.setSelectedTeam(team)`
 
 Sets the selected team.
 
-#### Parameters
+### Parameters (#setselectedteam-parameters)
 
 - `team`: The team to select
 
-#### Returns
+### Returns (#setselectedteam-returns)
 
 `Promise<void>`
 
@@ -310,18 +310,18 @@ Sets the selected team.
 declare function setSelectedTeam(team: Team): Promise<void>;
 ```
 
-### `currentUser.createTeam(data)`
+## `currentUser.createTeam(data)`
 
 Creates a new team.
 
-#### Parameters
+### Parameters (#createteam-parameters)
 
 - `data`: An object containing team data:
   - `name`: The name of the team
   - `displayName`: The display name of the team
   - `profileImageUrl`: The profile image URL of the team
 
-#### Returns
+### Returns (#createteam-returns)
 
 `Promise<Team>`: The created team
 
@@ -333,15 +333,15 @@ declare function createTeam(data: {
 }): Promise<Team>;
 ```
 
-### `currentUser.leaveTeam(team)`
+## `currentUser.leaveTeam(team)`
 
 Leaves a team.
 
-#### Parameters
+### Parameters (#leaveteam-parameters)
 
 - `team`: The team to leave
 
-#### Returns
+### Returns (#leaveteam-returns)
 
 `Promise<void>`
 
@@ -349,15 +349,15 @@ Leaves a team.
 declare function leaveTeam(team: Team): Promise<void>;
 ```
 
-### `currentUser.getTeamProfile(team)`
+## `currentUser.getTeamProfile(team)`
 
 Gets the team profile for a team.
 
-#### Parameters
+### Parameters (#getteamprofile-parameters)
 
 - `team`: The team
 
-#### Returns
+### Returns (#getteamprofile-returns)
 
 `Promise<EditableTeamMemberProfile>`: The team profile
 
@@ -365,15 +365,15 @@ Gets the team profile for a team.
 declare function getTeamProfile(team: Team): Promise<EditableTeamMemberProfile>;
 ```
 
-### `currentUser.useTeamProfile(team)`
+## `currentUser.useTeamProfile(team)`
 
 Gets the team profile for a team as a React hook.
 
-#### Parameters
+### Parameters (#useteamprofile-parameters)
 
 - `team`: The team
 
-#### Returns
+### Returns (#useteamprofile-returns)
 
 `EditableTeamMemberProfile`: The team profile
 
@@ -381,16 +381,16 @@ Gets the team profile for a team as a React hook.
 declare function useTeamProfile(team: Team): EditableTeamMemberProfile;
 ```
 
-### `currentUser.hasPermission(scope, permissionId)`
+## `currentUser.hasPermission(scope, permissionId)`
 
 Checks if the user has a permission.
 
-#### Parameters
+### Parameters (#haspermission-parameters)
 
 - `scope`: The scope of the permission
 - `permissionId`: The ID of the permission
 
-#### Returns
+### Returns (#haspermission-returns)
 
 `Promise<boolean>`: Whether the user has the permission
 
@@ -398,11 +398,11 @@ Checks if the user has a permission.
 declare function hasPermission(scope: string, permissionId: string): Promise<boolean>;
 ```
 
-### `currentUser.getPermission(scope, permissionId[, options])`
+## `currentUser.getPermission(scope, permissionId[, options])`
 
 Gets a permission.
 
-#### Parameters
+### Parameters (#getpermission-parameters)
 
 - `scope`: The scope of the permission
 - `permissionId`: The ID of the permission
@@ -411,7 +411,7 @@ Gets a permission.
     - `"return-null"`: Return null (default)
     - `"throw"`: Throw an error
 
-#### Returns
+### Returns (#getpermission-returns)
 
 `Promise<TeamPermission | null>`: The permission, or `null` if not found
 
@@ -425,11 +425,11 @@ declare function getPermission(
 ): Promise<TeamPermission | null>;
 ```
 
-### `currentUser.usePermission(scope, permissionId[, options])`
+## `currentUser.usePermission(scope, permissionId[, options])`
 
 Gets a permission as a React hook.
 
-#### Parameters
+### Parameters (#usepermission-parameters)
 
 - `scope`: The scope of the permission
 - `permissionId`: The ID of the permission
@@ -438,7 +438,7 @@ Gets a permission as a React hook.
     - `"return-null"`: Return null (default)
     - `"throw"`: Throw an error
 
-#### Returns
+### Returns (#usepermission-returns)
 
 `TeamPermission | null`: The permission, or `null` if not found
 
@@ -452,11 +452,11 @@ declare function usePermission(
 ): TeamPermission | null;
 ```
 
-### `currentUser.listPermissions(scope[, options])`
+## `currentUser.listPermissions(scope[, options])`
 
 Lists all permissions in a scope.
 
-#### Parameters
+### Parameters (#listpermissions-parameters)
 
 - `scope`: The scope of the permissions
 - `options`: An object containing options:
@@ -464,7 +464,7 @@ Lists all permissions in a scope.
     - `"return-empty"`: Return an empty array (default)
     - `"throw"`: Throw an error
 
-#### Returns
+### Returns (#listpermissions-returns)
 
 `Promise<TeamPermission[]>`: The list of permissions
 
@@ -477,11 +477,11 @@ declare function listPermissions(
 ): Promise<TeamPermission[]>;
 ```
 
-### `currentUser.usePermissions(scope[, options])`
+## `currentUser.usePermissions(scope[, options])`
 
 Lists all permissions in a scope as a React hook.
 
-#### Parameters
+### Parameters (#usepermissions-parameters)
 
 - `scope`: The scope of the permissions
 - `options`: An object containing options:
@@ -489,7 +489,7 @@ Lists all permissions in a scope as a React hook.
     - `"return-empty"`: Return an empty array (default)
     - `"throw"`: Throw an error
 
-#### Returns
+### Returns (#usepermissions-returns)
 
 `TeamPermission[]`: The list of permissions
 
@@ -502,11 +502,11 @@ declare function usePermissions(
 ): TeamPermission[];
 ```
 
-### `currentUser.listContactChannels()`
+## `currentUser.listContactChannels()`
 
 Lists all contact channels for the user.
 
-#### Returns
+### Returns (#listcontactchannels-returns)
 
 `Promise<ContactChannel[]>`: The list of contact channels
 
@@ -514,11 +514,11 @@ Lists all contact channels for the user.
 declare function listContactChannels(): Promise<ContactChannel[]>;
 ```
 
-### `currentUser.useContactChannels()`
+## `currentUser.useContactChannels()`
 
 Lists all contact channels for the user as a React hook.
 
-#### Returns
+### Returns (#usecontactchannels-returns)
 
 `ContactChannel[]`: The list of contact channels
 
@@ -526,17 +526,17 @@ Lists all contact channels for the user as a React hook.
 declare function useContactChannels(): ContactChannel[];
 ```
 
-### `currentUser.createApiKey(options)`
+## `currentUser.createApiKey(options)`
 
 Creates a new API key for the user.
 
-#### Parameters
+### Parameters (#createapikey-parameters)
 
 - `options`: An object containing options:
   - `name`: The name of the API key
   - `expiresAt`: The expiration date of the API key
 
-#### Returns
+### Returns (#createapikey-returns)
 
 `Promise<UserApiKeyFirstView>`: The created API key
 
@@ -547,11 +547,11 @@ declare function createApiKey(options: {
 }): Promise<UserApiKeyFirstView>;
 ```
 
-### `currentUser.listApiKeys()`
+## `currentUser.listApiKeys()`
 
 Lists all API keys for the user.
 
-#### Returns
+### Returns (#listapikeys-returns)
 
 `Promise<UserApiKey[]>`: The list of API keys
 
@@ -559,11 +559,11 @@ Lists all API keys for the user.
 declare function listApiKeys(): Promise<UserApiKey[]>;
 ```
 
-### `currentUser.useApiKeys()`
+## `currentUser.useApiKeys()`
 
 Lists all API keys for the user as a React hook.
 
-#### Returns
+### Returns (#useapikeys-returns)
 
 `UserApiKey[]`: The list of API keys
 

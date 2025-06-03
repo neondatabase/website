@@ -9,7 +9,7 @@ tag: beta
 
 > **Note:** Only use `StackServerApp` in trusted server environments. It requires your `SECRET_SERVER_KEY`.
 
-### Table of Contents
+## Table of Contents
 
 <div
   style={{
@@ -81,47 +81,49 @@ const stackServerApp = new StackServerApp({
 
 ## Methods
 
-## `stackServerApp.getUser([id], [options])`
+## `stackServerApp.getUser([id], [options])` (#getuser)
 
 Returns a `ServerUser` by ID, or the current user if no ID is provided.
 
-**Parameters:**
+### Parameters (#getuser-parameters)
 
 - `id` (string, optional): The user ID.
 - `options` (object, optional): `{ or?: "return-null" | "redirect" | "throw" }`
 
-**Returns:**  
+### Returns (#getuser-returns)
+
 `Promise<ServerUser | null>`
 
-**Example:**
+### Example (#getuser-example)
 
 ```typescript
 const user = await stackServerApp.getUser('user_id');
 ```
 
-## `stackServerApp.useUser([id], [options])`
+## `stackServerApp.useUser([id], [options])` (#useuser)
 
 Functionally equivalent to `getUser([id], [options])`, but as a React hook.
 
-**Parameters:**
+### Parameters (#useuser-parameters)
 
 - `id` (string, optional): The user ID.
 - `options` (object, optional): `{ or?: "return-null" | "redirect" | "throw" }`
 
-**Returns:**  
+### Returns (#useuser-returns)
+
 `ServerUser`
 
-**Example:**
+### Example (#useuser-example)
 
 ```typescript
 const user = await stackServerApp.useUser('user_id');
 ```
 
-## `stackServerApp.listUsers([options])`
+## `stackServerApp.listUsers([options])` (#listusers)
 
 Lists all users on the project.
 
-**Parameters:**
+### Parameters (#listusers-parameters)
 
 - `options` (object, optional):
   - `cursor` (string): The cursor to start from.
@@ -130,20 +132,21 @@ Lists all users on the project.
   - `desc` (boolean): Sort descending.
   - `query` (string): Free-text search.
 
-**Returns:**  
+### Returns (#listusers-returns)
+
 `Promise<ServerUser[]>` (with `nextCursor` property)
 
-**Example:**
+### Example (#listusers-example)
 
 ```typescript
 const users = await stackServerApp.listUsers({ limit: 20 });
 ```
 
-## `stackServerApp.useUsers([options])`
+## `stackServerApp.useUsers([options])` (#useusers)
 
 Functionally equivalent to `listUsers([options])`, but as a React hook.
 
-**Parameters:**
+### Parameters (#useusers-parameters)
 
 - `options` (object, optional):
   - `cursor` (string): The cursor to start from.
@@ -152,20 +155,21 @@ Functionally equivalent to `listUsers([options])`, but as a React hook.
   - `desc` (boolean): Sort descending.
   - `query` (string): Free-text search.
 
-**Returns:**  
+### Returns (#useusers-returns)
+
 `ServerUser[]`
 
-**Example:**
+### Example (#useusers-example)
 
 ```typescript
 const users = await stackServerApp.useUsers({ limit: 20 });
 ```
 
-## `stackServerApp.createUser([options])`
+## `stackServerApp.createUser([options])` (#createuser)
 
 Creates a new user from the server.
 
-**Parameters:**
+### Parameters (#createuser-parameters)
 
 - `options` (object):
   - `primaryEmail` (string)
@@ -175,10 +179,11 @@ Creates a new user from the server.
   - `otpAuthEnabled` (boolean)
   - `displayName` (string)
 
-**Returns:**  
+### Returns (#createuser-returns)
+
 `Promise<ServerUser>`
 
-**Example:**
+### Example (#createuser-example)
 
 ```typescript
 const user = await stackServerApp.createUser({
@@ -188,80 +193,85 @@ const user = await stackServerApp.createUser({
 });
 ```
 
-## `stackServerApp.getTeam(id)`
+## `stackServerApp.getTeam(id)` (#getteam)
 
 Gets a team by its ID.
 
-**Parameters:**
+### Parameters (#getteam-parameters)
 
 - `id` (string): The team ID.
 
-**Returns:**  
+### Returns (#getteam-returns)
+
 `Promise<ServerTeam | null>`
 
-**Example:**
+### Example (#getteam-example)
 
 ```typescript
 const team = await stackServerApp.getTeam('team_id');
 ```
 
-## `stackServerApp.useTeam(id)`
+## `stackServerApp.useTeam(id)` (#useteam)
 
 Functionally equivalent to `getTeam(id)`, but as a React hook.
 
-**Parameters:**
+### Parameters (#useteam-parameters)
 
 - `id` (string): The team ID.
 
-**Returns:**  
+### Returns (#useteam-returns)
+
 `ServerTeam`
 
-**Example:**
+### Example (#useteam-example)
 
 ```typescript
 const team = stackServerApp.useTeam('team_id');
 ```
 
-## `stackServerApp.listTeams()`
+## `stackServerApp.listTeams()` (#listteams)
 
 Lists all teams on the current project.
 
-**Returns:**  
+### Returns (#listteams-returns)
+
 `Promise<ServerTeam[]>`
 
-**Example:**
+### Example (#listteams-example)
 
 ```typescript
 const teams = await stackServerApp.listTeams();
 ```
 
-## `stackServerApp.useTeams()`
+## `stackServerApp.useTeams()` (#useteams)
 
 Functionally equivalent to `listTeams()`, but as a React hook.
 
-**Returns:**  
+### Returns (#useteams-returns)
+
 `ServerTeam[]`
 
-**Example:**
+### Example (#useteams-example)
 
 ```typescript
 const teams = stackServerApp.useTeams();
 ```
 
-## `stackServerApp.createTeam([options])`
+## `stackServerApp.createTeam([options])` (#createteam)
 
 Creates a team.
 
-**Parameters:**
+### Parameters (#createteam-parameters)
 
 - `options` (object):
   - `displayName` (string): The display name for the team.
   - `profileImageUrl` (string | null): The URL of the team's profile image, or null to remove.
 
-**Returns:**  
+### Returns (#createteam-returns)
+
 `Promise<ServerTeam>`
 
-**Example:**
+### Example (#createteam-example)
 
 ```typescript
 const team = await stackServerApp.createTeam({
@@ -269,9 +279,3 @@ const team = await stackServerApp.createTeam({
   profileImageUrl: 'https://example.com/profile.jpg',
 });
 ```
-
-## See also
-
-- [StackClientApp](./stack-client-app.md)
-- [User object reference](../types/user.md)
-- [Team object reference](../types/team.md)

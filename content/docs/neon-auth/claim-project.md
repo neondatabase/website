@@ -7,7 +7,21 @@ redirectFrom:
   - /docs/guides/neon-auth-claim-project
 ---
 
-Neon Auth is powered by Stack Auth under the hood. By default, Neon manages your authentication for you, so you never need to interact with Stack Auth directly. If you want to "eject" and manage your authentication project directly in Stack Auth (for advanced configuration or direct provider control), you can claim ownership of the project.
+Neon Auth is powered by Stack Auth under the hood. By default, Neon manages your authentication for you, so you do not typically need to interact with Stack Auth directly. However, there are cases where you may want to take direct control of your authentication project in the Stack Auth dashboard.
+
+## Why claim a project?
+
+Most Neon Auth features can be built using the SDKs, without claiming your project.
+
+You only need to claim your project if you want to:
+
+- Add or manage OAuth providers (register client IDs/secrets, set callback URLs)
+- Whitelist domains or configure allowed callback URLs
+- Use your own SMTP server for auth emails
+- Enable production mode and enforce production security settings
+- Manage handler/admin accounts or project-level roles
+- Self-host Stack Auth or access dashboard-only features
+- Manage multiple projects or separate production and development environments directly in Stack Auth
 
 <Steps>
 
