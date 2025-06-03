@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Playing with Neon HTML](https://neon.tech/docs/get-started-with-neon/signing-up): The original HTML version of this documentation
+- [Playing with Neon HTML](https://neon.com/docs/get-started-with-neon/signing-up): The original HTML version of this documentation
 
 ## Getting Started with Neon
 

@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Replicate data to Materialize HTML](https://neon.tech/docs/guides/logical-replication-materialize): The original HTML version of this documentation
+- [Replicate data to Materialize HTML](https://neon.com/docs/guides/logical-replication-materialize): The original HTML version of this documentation
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
 
@@ -16,8 +16,8 @@ In this guide, you will learn how to stream data from your Neon Postgres databas
 
 - A [Materialize account](https://materialize.com/register/).
 - A [Neon account](https://console.neon.tech/).
-- Optionally, you can install the [psql](https://www.postgresql.org/docs/current/logical-replication.html) command line utility for running commands in both Neon and Materialize. Alternatively, you can run commands from the [Neon SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor) and Materialize **SQL Shell**, which require no installation or setup.
-- Read the [important notices about logical replication in Neon](https://neon.tech/docs/guides/logical-replication-neon#important-notices) before you begin.
+- Optionally, you can install the [psql](https://www.postgresql.org/docs/current/logical-replication.html) command line utility for running commands in both Neon and Materialize. Alternatively, you can run commands from the [Neon SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor) and Materialize **SQL Shell**, which require no installation or setup.
+- Read the [important notices about logical replication in Neon](https://neon.com/docs/guides/logical-replication-neon#important-notices) before you begin.
 
 ## Enable logical replication
 
@@ -68,7 +68,7 @@ After logical replication is enabled in Neon, the next step is to create a publi
 
 ## Create a Postgres role for replication
 
-It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon CLI, Console, or API are granted membership in the [neon_superuser](https://neon.tech/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
+It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon CLI, Console, or API are granted membership in the [neon_superuser](https://neon.com/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
 
 
 
@@ -99,7 +99,7 @@ To create a role in the Neon Console:
 
 
 
-The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/docs/reference/cli-roles).
+The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](https://neon.com/docs/reference/cli-roles).
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/roles' \
@@ -139,7 +139,7 @@ If you use Neon's **IP Allow** feature to limit IP addresses that can connect to
    SELECT * FROM mz_egress_ips;
    ```
 
-2. In your Neon project, add the IPs to your **IP Allow** list, which you can find in your project's settings. For instructions, see [Configure IP Allow](https://neon.tech/docs/manage/projects#configure-ip-allow).
+2. In your Neon project, add the IPs to your **IP Allow** list, which you can find in your project's settings. For instructions, see [Configure IP Allow](https://neon.com/docs/manage/projects#configure-ip-allow).
 
 ## Create an ingestion cluster
 

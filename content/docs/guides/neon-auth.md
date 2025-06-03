@@ -6,7 +6,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-identity
 tag: beta
-updatedOn: '2025-05-16T19:06:06.843Z'
+updatedOn: '2025-05-23T13:20:56.227Z'
 ---
 
 Neon Auth lets you add authentication to your app in seconds — user data is synced directly to your Neon Postgres database, so you can query and join it just like any other table.
@@ -45,6 +45,10 @@ STACK_SECRET_SERVER_KEY=YOUR_NEON_AUTH_SECRET_KEY
 # Your Neon connection string
 DATABASE_URL=YOUR_NEON_CONNECTION_STRING
 ```
+
+<Admonition type="note" title="Are you a Vercel user?">
+If you're using the [Neon native integration on Vercel](https://vercel.com/marketplace/neon), the integration automatically sets these environment variables for you in Vercel when you connect a Vercel project to a Neon database. [Learn more](/docs/guides/vercel-native-integration#environment-variables-set-by-the-integration).
+</Admonition>
 
 </TabItem>
 

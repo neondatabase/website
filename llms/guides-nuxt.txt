@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Connect Nuxt to Postgres on Neon HTML](https://neon.tech/docs/guides/nuxt): The original HTML version of this documentation
+- [Connect Nuxt to Postgres on Neon HTML](https://neon.com/docs/guides/nuxt): The original HTML version of this documentation
 
 [Nuxt](https://nuxt.com/) is an open-source full-stack meta framework that enables Vue-based web applications. This topic describes how to connect a Nuxt application to a Postgres database on Neon.
 
@@ -47,7 +47,7 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 ## Store your Neon credentials
 
-Add a `.env` file to your project directory and add your Neon connection string to it. You can find your connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For more information, see [Connect from any application](https://neon.tech/docs/connect/connect-from-any-app).
+Add a `.env` file to your project directory and add your Neon connection string to it. You can find your connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).
 
 ```shell shouldWrap
 NUXT_DATABASE_URL="postgresql://:@.neon.tech:/?sslmode=require"

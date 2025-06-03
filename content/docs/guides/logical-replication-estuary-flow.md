@@ -3,7 +3,7 @@ title: Replicate Data with Estuary Flow
 subtitle: Learn how to replicate data from Neon with Estuary Flow
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-11T11:32:44.538Z'
+updatedOn: '2025-06-02T15:04:05.571Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -118,7 +118,7 @@ Upon startup, the Estuary Flow connector for Postgres will automatically create 
 ## Allow Inbound Traffic
 
 If you are using Neon's **IP Allow** feature to limit the IP addresses that can connect to Neon, you will need to allow inbound traffic from Estuary Flow's IP addresses.
-Refer to the [Estuary Flow documentation](https://docs.estuary.dev/reference/regions-and-ip-addresses) for the list of IPs that need to be allowlisted for the Estuary Flow region of your account.
+Refer to the [Estuary Flow documentation](https://docs.estuary.dev/reference/allow-ip-addresses/#ip-addresses-to-allowlist) for the list of IPs that need to be allowlisted for the Estuary Flow region of your account.
 For information about configuring allowed IPs in Neon, see [Configure IP Allow](https://docs.neon.tech/docs/manage/projects#configure-ip-allow).
 
 ## Create a Postgres Source Connector in Estuary Flow

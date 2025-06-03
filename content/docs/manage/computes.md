@@ -2,7 +2,7 @@
 title: Manage computes
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-05-11T11:23:50.624Z'
+updatedOn: '2025-05-30T16:54:40.489Z'
 ---
 
 A compute is a virtualized service that runs applications. In Neon, a compute runs Postgres.
@@ -146,7 +146,7 @@ The Postgres `max_connections` setting defines your compute's maximum simultaneo
 The following table outlines the vCPU, RAM, LFC size (75% of RAM), and the `max_connections` limit for each compute size that Neon supports. To understand how `max_connections` is determined for an autoscaling configuration, see [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
 
 <Admonition type="note">
-Compute size support differs by [Neon plan](https://neon.tech/docs/introduction/plans). Autoscaling is supported up to 16 CU. Neon supports fixed compute sizes (no autoscaling) for computes sizes larger than 16 CU.
+Compute size support differs by [Neon plan](/docs/introduction/plans). Autoscaling is supported up to 16 CU. Neon supports fixed compute sizes (no autoscaling) for computes sizes larger than 16 CU.
 </Admonition>
 
 | Compute Size (CU) | vCPU | RAM (GB) | LFC size (GB) | max_connections |

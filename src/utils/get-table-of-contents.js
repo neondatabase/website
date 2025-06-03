@@ -67,13 +67,30 @@ const buildNestedToc = (headings, currentLevel, currentIndex = 0) => {
   return toc;
 };
 
-const getTableOfContents = (content) => {
-  const mdxComponentRegex = /<(\w+)\/>/g;
+const parseProps = (propsString) => {
+  if (!propsString) return {};
+
+  const props = {};
+  const propRegex = /(\w+)="([^"]+)"/g;
   let match;
+
+  while ((match = propRegex.exec(propsString)) !== null) {
+    const [, key, value] = match;
+    props[key] = value;
+  }
+
+  return props;
+};
+
+const getTableOfContents = (content) => {
+  const mdxComponentRegex = /<(\w+)(?:\s+([^>]*))?\/>/g;
+  let match = mdxComponentRegex.exec(content);
   let newContent = content;
   // check if the content has any mdx shared components
-  while ((match = mdxComponentRegex.exec(content)) !== null) {
+  while (match !== null) {
     const componentName = match[1];
+    const propsString = match[2] || '';
+    const props = parseProps(propsString);
 
     const fileName = sharedMdxComponents[componentName];
     const mdFilePath = `content/docs/${fileName}.md`;
@@ -81,8 +98,17 @@ const getTableOfContents = (content) => {
     // Check if the MD file exists
     if (fs.existsSync(mdFilePath)) {
       const mdContent = fs.readFileSync(mdFilePath, 'utf8');
-      newContent = newContent.replace(new RegExp(`<${componentName}\/>`, 'g'), mdContent);
+      // Replace any {propName} placeholders with their values
+      const processedContent = Object.entries(props).reduce(
+        (content, [key, value]) => content.replace(new RegExp(`{${key}}`, 'g'), value),
+        mdContent
+      );
+      newContent = newContent.replace(
+        new RegExp(`<${componentName}\\s*${propsString}\\/>`, 'g'),
+        processedContent
+      );
     }
+    match = mdxComponentRegex.exec(content);
   }
 
   const codeBlockRegex = /```[\s\S]*?```/g;

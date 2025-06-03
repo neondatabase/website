@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Choosing your driver and connection type HTML](https://neon.tech/docs/connect/choose-connection): The original HTML version of this documentation
+- [Choosing your driver and connection type HTML](https://neon.com/docs/connect/choose-connection): The original HTML version of this documentation
 
 When setting up your application’s connection to your Neon Postgres database, you need to make two main choices:
 

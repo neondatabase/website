@@ -4,16 +4,16 @@
 
 ## Source
 
-- [Neon language guides HTML](https://neon.tech/docs/get-started-with-neon/languages): The original HTML version of this documentation
+- [Neon language guides HTML](https://neon.com/docs/get-started-with-neon/languages): The original HTML version of this documentation
 
 ## Overview
 
 Find detailed instructions for connecting to Neon from various programming languages:
 
-- [.NET](https://neon.tech/docs/guides/dotnet-npgsql): Connect a .NET (C#) application to Neon
-- [Elixir](https://neon.tech/docs/guides/elixir-ecto): Connect from Elixir with Ecto to Neon
-- [Go](https://neon.tech/docs/guides/go): Connect a Go application to Neon
-- [Java](https://neon.tech/docs/guides/java): Connect a Java application to Neon
-- [JavaScript](https://neon.tech/docs/guides/javascript): Connect a JavaScript application to Neon
-- [Python](https://neon.tech/docs/guides/python): Connect a Python application to Neon
-- [Rust](https://neon.tech/docs/guides/rust): Connect a Rust application to Neon
+- [.NET](https://neon.com/docs/guides/dotnet-npgsql): Connect a .NET (C#) application to Neon
+- [Elixir](https://neon.com/docs/guides/elixir-ecto): Connect from Elixir with Ecto to Neon
+- [Go](https://neon.com/docs/guides/go): Connect a Go application to Neon
+- [Java](https://neon.com/docs/guides/java): Connect a Java application to Neon
+- [JavaScript](https://neon.com/docs/guides/javascript): Connect a JavaScript application to Neon
+- [Python](https://neon.com/docs/guides/python): Connect a Python application to Neon
+- [Rust](https://neon.com/docs/guides/rust): Connect a Rust application to Neon

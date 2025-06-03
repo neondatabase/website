@@ -4,14 +4,14 @@
 
 ## Source
 
-- [Connect Vercel and Neon manually HTML](https://neon.tech/docs/guides/vercel-manual): The original HTML version of this documentation
+- [Connect Vercel and Neon manually HTML](https://neon.com/docs/guides/vercel-manual): The original HTML version of this documentation
 
 ## Overview
 
 This guide describes how to manually connect a Vercel project to a Neon database.
 
 <Admonition type="note">
-For other Vercel integration options, refer to the [Neon and Vercel integration overview](https://neon.tech/docs/guides/vercel-overview).
+For other Vercel integration options, refer to the [Neon and Vercel integration overview](https://neon.com/docs/guides/vercel-overview).
 </Admonition>
 
 

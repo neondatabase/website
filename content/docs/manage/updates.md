@@ -3,7 +3,7 @@ title: Updates
 enableTableOfContents: true
 isDraft: false
 tag: new
-updatedOn: '2025-05-11T11:23:50.627Z'
+updatedOn: '2025-05-30T16:54:40.491Z'
 ---
 
 To keep your Neon [computes](/docs/reference/glossary#compute) and Postgres instances up to date with the latest patches and features, Neon applies updates to your project's computes. We notify you of updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can select an update window — a specific day and hour for updates.
@@ -160,6 +160,6 @@ Most Postgres connection drivers include built-in retry mechanisms that automati
 
 However, if your application has strict availability requirements, you may want to ensure that your connection settings are configured to allow for retries. Check your driver's documentation for options like connection timeouts, retry intervals, and connection pooling strategies. Your configuration should account for the few seconds it takes to apply updates to your Neon compute. For related information, see [Build connection timeout handling into your application](/docs/connect/connection-latency#build-connection-timeout-handling-into-your-application).
 
-If your application or integration uses the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) or [SDKs](https://neon.tech/docs/reference/sdk) that wrap the Neon API, we recommend building in the same type of retry logic.
+If your application or integration uses the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) or [SDKs](/docs/reference/sdk) that wrap the Neon API, we recommend building in the same type of retry logic.
 
 <NeedHelp/>

@@ -4,9 +4,9 @@
 
 ## Source
 
-- [Replicate data from Postgres to Neon HTML](https://neon.tech/docs/guides/logical-replication-postgres-to-neon): The original HTML version of this documentation
+- [Replicate data from Postgres to Neon HTML](https://neon.com/docs/guides/logical-replication-postgres-to-neon): The original HTML version of this documentation
 
-Neon's logical replication feature allows you to replicate data from a local Postgres instance or another Postgres provider to Neon. If you're looking to replicate data from one Neon Postgres instance to another, see [Replicate data from one Neon project to another](https://neon.tech/docs/guides/logical-replication-neon-to-neon).
+Neon's logical replication feature allows you to replicate data from a local Postgres instance or another Postgres provider to Neon. If you're looking to replicate data from one Neon Postgres instance to another, see [Replicate data from one Neon project to another](https://neon.com/docs/guides/logical-replication-neon-to-neon).
 
 ## Prerequisites
 
@@ -18,9 +18,9 @@ Neon's logical replication feature allows you to replicate data from a local Pos
   SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i);
   ```
 
-- A destination Neon project. For information about creating a Neon project, see [Create a project](https://neon.tech/docs/manage/projects#create-a-project).
-- Read the [important notices about logical replication in Neon](https://neon.tech/docs/guides/logical-replication-neon#important-notices) before you begin.
-- Review our [logical replication tips](https://neon.tech/docs/guides/logical-replication-tips), based on real-world customer data migration experiences.
+- A destination Neon project. For information about creating a Neon project, see [Create a project](https://neon.com/docs/manage/projects#create-a-project).
+- Read the [important notices about logical replication in Neon](https://neon.com/docs/guides/logical-replication-neon#important-notices) before you begin.
+- Review our [logical replication tips](https://neon.com/docs/guides/logical-replication-tips), based on real-world customer data migration experiences.
 
 
 
@@ -105,7 +105,7 @@ This section describes how to prepare your destination Neon Postgres database (t
 
 ### Prepare your database schema
 
-When configuring logical replication in Postgres, the tables in the source database you are replicating from must also exist in the destination database, and they must have the same table names and columns. You can create the tables manually in your destination database or use utilities like `pg_dump` and `pg_restore` to dump the schema from your source database and load it to your destination database. See [Import a database schema](https://neon.tech/docs/import/import-schema-only) for instructions.
+When configuring logical replication in Postgres, the tables in the source database you are replicating from must also exist in the destination database, and they must have the same table names and columns. You can create the tables manually in your destination database or use utilities like `pg_dump` and `pg_restore` to dump the schema from your source database and load it to your destination database. See [Import a database schema](https://neon.com/docs/import/import-schema-only) for instructions.
 
 If you're using the sample `playing_with_neon` table, you can create the same table on the destination database with the following statement:
 
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NO
 
 After creating a publication on the source database, you need to create a subscription on the destination database.
 
-1. Use the [Neon SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor), `psql`, or another SQL client to connect to your destination database.
+1. Use the [Neon SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor), `psql`, or another SQL client to connect to your destination database.
 2. Create the subscription using the using a `CREATE SUBSCRIPTION` statement.
 
    ```sql
@@ -170,4 +170,4 @@ SELECT subname, received_lsn, latest_end_lsn, last_msg_receipt_time FROM pg_cata
 
 After the replication operation is complete, you can switch your application over to the destination database by swapping out your source database connection details for your destination database connection details.
 
-You can find your Neon database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. See [Connect from any application](https://neon.tech/docs/connect/connect-from-any-app).
+You can find your Neon database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. See [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).

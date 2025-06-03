@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Neon Local HTML](https://neon.tech/docs/local/neon-local): The original HTML version of this documentation
+- [Neon Local HTML](https://neon.com/docs/local/neon-local): The original HTML version of this documentation
 
 ## Overview
 
@@ -72,7 +72,7 @@ docker run \
 
 ## Connect
 
-Connect using either the Neon [serverless driver](https://neon.tech/docs/serverless/serverless-driver) or any other Postgres client.
+Connect using either the Neon [serverless driver](https://neon.com/docs/serverless/serverless-driver) or any other Postgres client.
 
 ### Neon serverless driver
 
@@ -97,7 +97,7 @@ const pool = new Pool({ connectionString });
 
 | Key | Configuration | Required | Default |
 | ------------------ | ---------------------------------------------------------------------------------------------- | -------- | --------------------- |
-| `NEON_API_KEY` | Generate a Neon API key by following instructions at: [Manage API Keys](https://neon.tech/docs/manage/api-keys) | Yes | n/a |
+| `NEON_API_KEY` | Generate a Neon API key by following instructions at: [Manage API Keys](https://neon.com/docs/manage/api-keys) | Yes | n/a |
 | `NEON_PROJECT_ID` | Your project ID, found in the Neon console under **Settings** > **General** | Yes | n/a |
 | `DRIVER` | The type of database driver. Options: `serverless` or `postgres` | No | `postgres` |
 | `PARENT_BRANCH_ID` | The parent branch to use when creating a local child branch. | No | `main` / `production` |

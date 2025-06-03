@@ -154,4 +154,4 @@ Most Postgres connection drivers include built-in retry mechanisms that automati
 
 However, if your application has strict availability requirements, you may want to ensure that your connection settings are configured to allow for retries. Check your driver's documentation for options like connection timeouts, retry intervals, and connection pooling strategies. Your configuration should account for the few seconds it takes to apply updates to your Neon compute. For related information, see [Build connection timeout handling into your application](/docs/connect/connection-latency#build-connection-timeout-handling-into-your-application).
 
-If your application or integration uses the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) or [SDKs](https://neon.tech/docs/reference/sdk) that wrap the Neon API, we recommend building in the same type of retry logic.
+If your application or integration uses the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) or [SDKs](https://neon.com/docs/reference/sdk) that wrap the Neon API, we recommend building in the same type of retry logic.

@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Query with Neon's SQL Editor HTML](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor): The original HTML version of this documentation
+- [Query with Neon's SQL Editor HTML](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor): The original HTML version of this documentation
 
 ## Overview
 

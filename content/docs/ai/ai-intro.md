@@ -2,7 +2,7 @@
 title: AI Starter Kit
 subtitle: Resources for building AI applications with Neon Postgres
 enableTableOfContents: true
-updatedOn: '2025-03-07T21:44:32.252Z'
+updatedOn: '2025-05-30T16:54:40.445Z'
 ---
 
 ## First Issue
@@ -119,9 +119,9 @@ Share your AI app on our [#showcase](https://discord.gg/neon) channel on Discord
 
 <a href="https://github.com/neondatabase/ai-vector-db-per-tenant" description="Deploy an AI vector database per-tenant architecture with Neon" icon="github">AI vector database per tenant</a>
 
-<a href="https://neon.tech/guides/chatbot-astro-postgres-llamaindex" description="Build a RAG chatbot in an Astro application with LlamaIndex and Postgres" icon="openai">Guide: Build a RAG chatbot</a>
+<a href="/guides/chatbot-astro-postgres-llamaindex" description="Build a RAG chatbot in an Astro application with LlamaIndex and Postgres" icon="openai">Guide: Build a RAG chatbot</a>
 
-<a href="https://neon.tech/guides/llamaindex-postgres-search-images" description="Using LlamaIndex with Postgres to Build your own Reverse Image Search Engine" icon="openai">Guide: Build a Reverse Image Search Engine</a>
+<a href="/guides/llamaindex-postgres-search-images" description="Using LlamaIndex with Postgres to Build your own Reverse Image Search Engine" icon="openai">Guide: Build a Reverse Image Search Engine</a>
 
 <a href="https://github.com/neondatabase/ask-neon" description="An Ask Neon AI-powered chatbot built with pgvector" icon="github">Ask Neon Chatbot</a>
 
@@ -137,7 +137,7 @@ Share your AI app on our [#showcase](https://discord.gg/neon) channel on Discord
 
 <a href="https://github.com/mistralai/cookbook/blob/main/third_party/Neon/neon_text_to_sql.ipynb" description="A Text-to-SQL conversion app built with Mistral AI, Neon, and LangChain" icon="github">Text-to-SQL conversion with Mistral + LangChain</a>
 
-<a href="https://neon.tech/blog/openais-gpt-store-is-live-create-and-publish-a-custom-postgres-gpt-expert" description="Blog + repo: Create and publish a custom Postgres GPT Expert using OpenAI's GPT" icon="openai">Postgres GPT Expert</a>
+<a href="/blog/openais-gpt-store-is-live-create-and-publish-a-custom-postgres-gpt-expert" description="Blog + repo: Create and publish a custom Postgres GPT Expert using OpenAI's GPT" icon="openai">Postgres GPT Expert</a>
 
 </DetailIconCards>
 

@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Schema diff tutorial HTML](https://neon.tech/docs/guides/schema-diff-tutorial): The original HTML version of this documentation
+- [Schema diff tutorial HTML](https://neon.com/docs/guides/schema-diff-tutorial): The original HTML version of this documentation
 
 In this guide we will create an initial schema on a new database called `people` on our `production` branch. We'll then create a development branch called `feature/address`, following one possible convention for naming feature branches. After making schema changes on `feature/address`, we'll use the **Schema Diff** tool on the **Branches** page to get a side-by-side, GitHub-style visual comparison between the `feature/address` development branch and `production`.
 
@@ -12,10 +12,10 @@ In this guide we will create an initial schema on a new database called `people`
 
 To complete this tutorial, you'll need:
 
-- A Neon account. Sign up [here](https://neon.tech/docs/get-started-with-neon/signing-up).
+- A Neon account. Sign up [here](https://neon.com/docs/get-started-with-neon/signing-up).
 - To interact with your Neon database from the command line:
 
-  - Install the [Neon CLI](https://neon.tech/docs/reference/cli-install)
+  - Install the [Neon CLI](https://neon.com/docs/reference/cli-install)
   - Download and install the [psql](https://www.postgresql.org/download/) client
 
 
@@ -151,7 +151,7 @@ For the purposes of this tutorial, name the branch `feature/address`, which coul
 
    From the **SQL Editor**, use the meta-command `\d person` to inspect the schema of the `person` table. Make sure that the `people` database on the branch `feature/address` is selected.
 
-   ![use metacommand to inspect schema](https://neon.tech/docs/guides/schema_diff_d_metacommand.png)
+   ![use metacommand to inspect schema](https://neon.com/docs/guides/schema_diff_d_metacommand.png)
 
 ### CLI
 
@@ -335,15 +335,15 @@ Now that you have some differences between your branches, you can view the schem
 
 1. Click on `feature/address` to open the detailed view, then click **Schema diff**.
 
-   ![select branches for schema diff](https://neon.tech/docs/guides/schema_diff_make_selection.png)
+   ![select branches for schema diff](https://neon.com/docs/guides/schema_diff_make_selection.png)
 
 1. Make sure you select `people` as the database and then click **Compare**.
 
-   ![schema diff results](https://neon.tech/docs/guides/schema_diff_result.png)
+   ![schema diff results](https://neon.com/docs/guides/schema_diff_result.png)
 
 You will see the schema differences between `feature/address` and its parent `production`, including the new address table that we added to the `feature/address` branch.
 
-You can also launch Schema Diff from the **Restore** page, usually as part of verifying schemas before you restore a branch to its own or another branch's history. See [Instant restore](https://neon.tech/docs/guides/branch-restore) for more info.
+You can also launch Schema Diff from the **Restore** page, usually as part of verifying schemas before you restore a branch to its own or another branch's history. See [Instant restore](https://neon.com/docs/guides/branch-restore) for more info.
 
 ### CLI
 
@@ -398,7 +398,7 @@ curl --request GET \
 | `<branch_id>`      | The ID of the target branch to compare.                                                   | Yes      | `br-mute-dew-a5930esi`    |
 | `<base_branch_id>` | The ID of the base branch for comparison — the parent branch in this case.                | Yes      | `br-bitter-bird-a56n6lh4` |
 | `<db_name>`        | The name of the database in the target branch.                                            | Yes      | `people`                  |
-| `Authorization`    | Bearer token for API access (your [Neon API key](https://neon.tech/docs/manage/api-keys)) | Yes      | `$NEON_API_KEY`           |
+| `Authorization`    | Bearer token for API access (your [Neon API key](https://neon.com/docs/manage/api-keys)) | Yes      | `$NEON_API_KEY`           |
 
 The optional `jq -r '.diff'` command extracts the diff field from the JSON response and outputs it as plain text to make it easier to read. This command would not be necessary when using the endpoint programmatically.
 

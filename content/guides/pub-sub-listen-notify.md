@@ -92,5 +92,5 @@ While the memory overhead of `LISTEN` is minimal, `LISTEN` can cause performance
 There is also no way to ensure that a message was delivered to a listener.
 If you need message persistence or guarantees that a message was processed, you should look at dedicated message queues like RabbitMQ or Kafka.
 
-If you are using `LISTEN` and `NOTIFY`, you should disable Neon's [Scale to Zero feature](https://neon.tech/docs/introduction/scale-to-zero).
-If Neon scales your compute to 0, [it will terminate all listeners](https://neon.tech/docs/reference/compatibility#session-context), which may lead to lost messages when your database reactivates.
+If you are using `LISTEN` and `NOTIFY`, you should disable Neon's [Scale to Zero feature](/docs/introduction/scale-to-zero).
+If Neon scales your compute to 0, [it will terminate all listeners](/docs/reference/compatibility#session-context), which may lead to lost messages when your database reactivates.

@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/security/security
   - /docs/security
-updatedOn: '2025-03-21T10:30:14.622Z'
+updatedOn: '2025-05-30T16:54:40.494Z'
 ---
 
 At Neon, security is our highest priority. We are committed to implementing best practices and earning the trust of our users. A key aspect of earning this trust is by ensuring that every touchpoint in our system, from connections, to data storage, to our internal processes, adheres to the highest security standards.
@@ -117,7 +117,7 @@ If you have questions about this integration or need help securing your credenti
 
 ## Security reporting
 
-Neon adheres to the [securitytxt.org](https://securitytxt.org/) standard for transparent and efficient security reporting. For details on how to report potential vulnerabilities, please visit our [Security reporting](/docs/security/security-reporting) page or refer to our [security.txt](https://neon.tech/security.txt) file.
+Neon adheres to the [securitytxt.org](https://securitytxt.org/) standard for transparent and efficient security reporting. For details on how to report potential vulnerabilities, please visit our [Security reporting](/docs/security/security-reporting) page or refer to our [security.txt](/security.txt) file.
 
 Neon also has a [private bug bounty program with Hackerone](/docs/security/security-reporting#bug-bounty-program-with-hackerone).
 

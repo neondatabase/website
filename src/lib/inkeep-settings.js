@@ -16,14 +16,14 @@ const baseSettings = {
           {
             UrlMatch: {
               ruleType: 'PartialUrl',
-              partialUrl: 'https://neon.tech/docs',
+              partialUrl: 'https://neon.com/docs',
             },
           },
           {
             NOT: {
               UrlMatch: {
                 ruleType: 'PartialUrl',
-                partialUrl: 'https://neon.tech/docs/changelog',
+                partialUrl: 'https://neon.com/docs/changelog',
               },
             },
           },
@@ -35,7 +35,7 @@ const baseSettings = {
       filters: {
         UrlMatch: {
           ruleType: 'PartialUrl',
-          partialUrl: 'https://neon.tech/postgresql',
+          partialUrl: 'https://neon.com/postgresql',
         },
       },
       searchTabLabel: 'PostgreSQL Tutorial',
@@ -44,7 +44,7 @@ const baseSettings = {
       filters: {
         UrlMatch: {
           ruleType: 'PartialUrl',
-          partialUrl: 'https://neon.tech/docs/changelog',
+          partialUrl: 'https://neon.com/docs/changelog',
         },
       },
       searchTabLabel: 'Changelog',
@@ -71,7 +71,7 @@ const aiChatSettings = {
   userAvatarSrcUrl: '/inkeep/images/user.svg',
   userAvatarDarkSrcUrl: '/inkeep/images/user-dark.svg',
   isChatSharingEnabled: true,
-  shareChatUrlBasePath: 'https://neon.tech/ai-chat',
+  shareChatUrlBasePath: 'https://neon.com/ai-chat',
   getHelpCallToActions: [
     {
       type: 'OPEN_LINK',
@@ -83,7 +83,7 @@ const aiChatSettings = {
       type: 'OPEN_LINK',
       icon: { builtIn: 'IoChatbubblesOutline' },
       name: 'Neon Support',
-      url: 'https://console.neon.tech/app/projects?modal=support',
+      url: 'https://console.neon.com/app/projects?modal=support',
     },
   ],
 };

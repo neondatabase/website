@@ -3,14 +3,14 @@ title: Serverless
 subtitle: Postgres with instant provisioning, no server management, and pay-per-usage
   billing
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.073Z'
+updatedOn: '2025-05-30T16:54:40.488Z'
 ---
 
 Neon takes the world's most loved database &#8212; Postgres &#8212; and delivers it as a serverless platform, enabling teams to ship reliable and scalable applications faster.
 
-Enabling serverless Postgres begins with Neon's [native decoupling of storage and compute](https://neon.tech/blog/architecture-decisions-in-neon). By separating these components, Neon can dynamically scale up during periods of high activity and down to zero when idle. Developers can be hands-off instead of sizing infrastructure manually.
+Enabling serverless Postgres begins with Neon's [native decoupling of storage and compute](/blog/architecture-decisions-in-neon). By separating these components, Neon can dynamically scale up during periods of high activity and down to zero when idle. Developers can be hands-off instead of sizing infrastructure manually.
 
-This serverless character also makes Neon databases highly agile and well-suited for use cases that require automatic creation, management, and deletion of a high number of Postgres databases, like [database-per-user architectures with thousands of tenants](https://neon.tech/use-cases/database-per-tenant), as well as [database branching workflows](https://neon.tech/flow) that accelerate development by enabling the management of dev/testing databases via CI/CD.
+This serverless character also makes Neon databases highly agile and well-suited for use cases that require automatic creation, management, and deletion of a high number of Postgres databases, like [database-per-user architectures with thousands of tenants](/use-cases/database-per-tenant), as well as [database branching workflows](/flow) that accelerate development by enabling the management of dev/testing databases via CI/CD.
 
 ![Multi-tenant storage](/docs/introduction/multi_tenant_storage.png)
 
@@ -42,6 +42,6 @@ _That you’ll get unpredictable costs due to traffic spikes_. We provide transp
 - [Autoscaling](/docs/introduction/autoscaling)
 - [Scale to Zero](/docs/introduction/scale-to-zero)
 - [Plans and billing](/docs/introduction/about-billing)
-- [Database-per-tenant use cases](https://neon.tech/use-cases/database-per-tenant)
-- [Variable workload use cases](https://neon.tech/variable-load)
-- [Postgres for SaaS use cases](https://neon.tech/use-cases/postgres-for-saas)
+- [Database-per-tenant use cases](/use-cases/database-per-tenant)
+- [Variable workload use cases](/variable-load)
+- [Postgres for SaaS use cases](/use-cases/postgres-for-saas)

@@ -6,7 +6,7 @@ pgcopydb provides an efficient way to migrate your Postgres databases to Neon. T
 
 ## Source
 
-- [Migrate data to Neon Postgres using pgcopydb HTML](https://neon.tech/docs/import/pgcopydb): The original HTML version of this documentation
+- [Migrate data to Neon Postgres using pgcopydb HTML](https://neon.com/docs/import/pgcopydb): The original HTML version of this documentation
 
 ## Why use pgcopydb for data migration?
 

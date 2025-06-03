@@ -6,7 +6,7 @@ Postgres JSON data types provide a flexible way to store and manipulate semi-str
 
 ## Source
 
-- [Postgres JSON data types HTML](https://neon.tech/docs/data-types/json): The original HTML version of this documentation
+- [Postgres JSON data types HTML](https://neon.com/docs/data-types/json): The original HTML version of this documentation
 
 ## Storage and syntax
 

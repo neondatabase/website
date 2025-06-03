@@ -92,7 +92,7 @@ Output:
 
 ### 2\) Using the CONCAT() function with table data example
 
-We'll use the `customer` table from the [sample database](https://neon.tech/postgresql/download/dvd-rental-sample-database/):
+We'll use the `customer` table from the [sample database](/postgresql/download/dvd-rental-sample-database/):
 
 ![customer table](/postgresqltutorial/customer.png)The following statement uses the `CONCAT()` function to concatenate values in the `first_name`, a space, and values in the `last_name` columns of the `customer` table into a single string:
 

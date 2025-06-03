@@ -2,7 +2,7 @@
 title: Automate branching with GitHub Actions
 subtitle: Create and delete branches with GitHub Actions
 enableTableOfContents: true
-updatedOn: '2025-05-11T11:23:50.619Z'
+updatedOn: '2025-05-30T16:54:40.459Z'
 ---
 
 Neon provides the following GitHub Actions for working with Neon branches, which you can add to your CI workflows:
@@ -156,7 +156,7 @@ inputs:
     description: 'The Neon branch id'
     deprecationMessage: 'The `branch_id` input is deprecated in favor of `branch`'
   api_key:
-    description: 'The Neon API key, read more at https://neon.tech/docs/manage/api-keys'
+    description: 'The Neon API key, read more at https://neon.com/docs/manage/api-keys'
     required: true
   branch:
     description: 'The Neon branch name or id'

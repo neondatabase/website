@@ -6,7 +6,7 @@ This page serves as an index to Neon's comprehensive guides on Postgres data typ
 
 ## Source
 
-- [Postgres data types HTML](https://neon.tech/docs/data-types/introduction): The original HTML version of this documentation
+- [Postgres data types HTML](https://neon.com/docs/data-types/introduction): The original HTML version of this documentation
 
 ## Available data type guides
 

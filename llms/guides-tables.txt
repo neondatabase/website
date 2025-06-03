@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Managing your data and schemas in the Neon Console HTML](https://neon.tech/docs/guides/tables): The original HTML version of this documentation
+- [Managing your data and schemas in the Neon Console HTML](https://neon.com/docs/guides/tables): The original HTML version of this documentation
 
 ## Overview
 
@@ -85,7 +85,7 @@ If you see an **Unexpected error happened** message on the **Tables** page, this
 
 ![Unexpected error happened on Tables page](/docs/guides/tables_error.png)
 
-Please refer to [DNS resolution issues](https://neon.tech/docs/connect/connection-errors#dns-resolution-issues) for workarounds.
+Please refer to [DNS resolution issues](https://neon.com/docs/connect/connection-errors#dns-resolution-issues) for workarounds.
 
 If it's not a DNS resolution issue, other troubleshooting steps you can try include:
 

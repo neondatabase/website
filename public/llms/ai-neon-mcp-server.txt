@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Neon MCP Server HTML](https://neon.tech/docs/ai/neon-mcp-server): The original HTML version of this documentation
+- [Neon MCP Server HTML](https://neon.com/docs/ai/neon-mcp-server): The original HTML version of this documentation
 
 The **Neon MCP Server** is an open-source tool that lets you interact with your Neon Postgres databases in **natural language**.
 

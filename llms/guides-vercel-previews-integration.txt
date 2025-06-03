@@ -357,4 +357,4 @@ Watch this video from the Neon DevRel team for an overview of the Neon Postgres 
 
 
 
-If you have an existing CI pipeline, this blog post shows how to build the same developer workflow using GitHub Actions and the Vercel CLI: [A database for every preview environment using Neon, GitHub Actions, and Vercel](https://neon.tech/blog/branching-with-preview-environments).
+If you have an existing CI pipeline, this blog post shows how to build the same developer workflow using GitHub Actions and the Vercel CLI: [A database for every preview environment using Neon, GitHub Actions, and Vercel](https://neon.com/blog/branching-with-preview-environments).

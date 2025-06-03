@@ -2,7 +2,7 @@
 title: Neon RSS feeds
 subtitle: Stay updated with the latest news from Neon
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.078Z'
+updatedOn: '2025-05-30T16:54:40.492Z'
 ---
 
 Stay updated with the latest information and announcements from Neon by subscribing to our RSS feeds. You can monitor the Neon Changelog, and blog posts, and Neon status updates through your preferred RSS reader or [Slack channel](#subscribe-to-feeds-in-slack).
@@ -12,23 +12,23 @@ Stay updated with the latest information and announcements from Neon by subscrib
 Keep track of new features, improvements, and fixes by subscribing to the [Neon Changelog](/docs/changelog) RSS feed.
 
 ```bash
-https://neon.tech/docs/changelog/rss.xml
+https://neon.com/docs/changelog/rss.xml
 ```
 
 ## Blog
 
-Stay informed on the latest articles and news by following the [Neon Blog](https://neon.tech/blog) RSS feed.
+Stay informed on the latest articles and news by following the [Neon Blog](/blog) RSS feed.
 
 ```bash
-https://neon.tech/blog/rss.xml
+https://neon.com/blog/rss.xml
 ```
 
 ## Community Guides
 
-Get the latest tips, tutorials, and best practices by subscribing to the [Neon Community Guides](https://neon.tech/guides) RSS feed.
+Get the latest tips, tutorials, and best practices by subscribing to the [Neon Community Guides](/guides) RSS feed.
 
 ```bash
-https://neon.tech/guides/rss.xml
+https://neon.com/guides/rss.xml
 ```
 
 ## Status
@@ -76,7 +76,7 @@ Monitor the operational status of Neon across different regions by subscribing t
 To receive updates in Slack, enter the `/feed subscribe` command with the desired RSS feed into your Slack channel:
 
 ```bash
-/feed subscribe https://neon.tech/docs/changelog/rss.xml
+/feed subscribe https://neon.com/docs/changelog/rss.xml
 ```
 
 ## Remove feeds from Slack
