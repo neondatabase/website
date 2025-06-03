@@ -2,23 +2,24 @@ import { clsx } from 'clsx';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const CustomCheckbox = ({ checked, onChange, id, label }) => (
+const CustomCheckbox = ({ checked, onChange, id, label, tabIndex }) => (
   <>
     <input
       type="checkbox"
       checked={checked}
       id={id}
-      className="peer absolute inset-0 h-full w-full cursor-pointer opacity-0"
+      className="peer pointer-events-none absolute inset-0 h-full w-full opacity-0"
       aria-label={`Select ${label}`}
+      tabIndex={tabIndex}
       onChange={onChange}
     />
     <div
       className={clsx(
         'flex size-3 items-center justify-center rounded-full',
-        'border border-white border-opacity-30 mix-blend-overlay transition-colors',
+        'border border-white mix-blend-overlay transition-colors',
         'peer-checked:border-0 peer-checked:bg-white peer-checked:mix-blend-normal',
         'peer-hover:border-white peer-hover:mix-blend-normal',
-        'peer-focus:ring peer-focus:ring-white peer-focus:ring-opacity-50'
+        'group-focus:ring group-focus:ring-white group-focus:ring-opacity-50'
       )}
       role="presentation"
     >
@@ -44,6 +45,7 @@ CustomCheckbox.propTypes = {
   onChange: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
+  tabIndex: PropTypes.number,
 };
 
 export default CustomCheckbox;

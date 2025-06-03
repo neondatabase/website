@@ -53,20 +53,32 @@ const BranchingDemoTable = ({
             <li
               key={row.id}
               className={clsx(
-                'relative flex h-full px-3 before:pointer-events-none before:absolute before:inset-0 before:mix-blend-overlay hover:before:bg-white hover:before:opacity-50',
-                row.id === tableData.length
-                  ? 'rounded-b-[10px] pb-[18px] pt-4 before:rounded-b-[10px]'
-                  : 'py-4 after:pointer-events-none after:absolute after:inset-0 after:-bottom-px after:mx-3 after:border-b after:border-white after:mix-blend-overlay'
+                'group relative flex h-full cursor-pointer px-3 py-4',
+                'before:pointer-events-none before:absolute before:inset-0 before:mix-blend-overlay before:last:rounded-b-[10px]',
+                'after:pointer-events-none after:absolute after:inset-0 after:-bottom-px after:mx-3 after:border-b after:border-white after:mix-blend-overlay after:last:hidden',
+                'hover:before:bg-white hover:before:opacity-50 focus:outline-none focus:before:bg-white focus:before:opacity-50',
+                'last:rounded-b-[10px] last:pb-[18px] last:pt-4'
               )}
+              role="option"
+              tabIndex={0}
+              aria-selected={selectedRows.includes(row.id)}
+              onClick={(e) => handleRowSelection(row.id, e.currentTarget)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handleRowSelection(row.id, e.currentTarget);
+                }
+              }}
             >
-              <span className="relative mr-3">
+              <div className="relative mr-3 w-3">
                 <Checkbox
                   checked={selectedRows.includes(row.id)}
                   id={`row-${row.id}`}
                   label={`Row ${row.id}`}
+                  tabIndex={-1}
                   onChange={() => handleRowSelection(row.id)}
                 />
-              </span>
+              </div>
               {TABLE_COLUMNS.map((column) => (
                 <span
                   key={column.id}

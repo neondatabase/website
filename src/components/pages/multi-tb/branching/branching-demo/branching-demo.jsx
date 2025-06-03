@@ -50,7 +50,8 @@ const BranchingDemo = ({ steps, className }) => {
     }
   };
 
-  const handleRowSelection = (rowId) => {
+  const handleRowSelection = (rowId, element) => {
+    element?.blur();
     setSelectedRows((prev) => {
       if (prev.includes(rowId)) {
         return prev.filter((id) => id !== rowId);
