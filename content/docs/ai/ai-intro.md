@@ -11,11 +11,11 @@ First Issue
 
 <Steps>
 
-## Requirements
+## Requirements (#first-issue-requirements)
 
 Requirements
 
-## Solution
+## Solution (#first-issue-solution)
 
 Solution
 
@@ -27,11 +27,11 @@ Second Issue
 
 <Steps>
 
-## Requirements
+## Requirements (#second-issue-requirements)
 
 Requirements
 
-## Solution
+## Solution (#second-issue-solution)
 
 Solution
 
