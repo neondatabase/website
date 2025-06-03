@@ -339,10 +339,12 @@
           items:
             - title: Accounts
               slug: manage/accounts
+            - title: User permissions
+              slug: manage/user-permissions
             - title: Organizations
               slug: manage/organizations
               items:
-                - title: Getting started
+                - title: Overview
                   slug: manage/organizations
                 - title: Manage Organizations
                   slug: manage/orgs-manage
@@ -362,10 +364,10 @@
               slug: guides/project-collaboration-guide
             - title: Database access
               slug: manage/database-access
-            - title: E-mail signup
-              slug: manage/email-signup
             - title: API keys
               slug: manage/api-keys
+            - title: Account recovery
+              slug: manage/account-recovery
         - section: Projects
           items:
             - title: Object hierarchy
