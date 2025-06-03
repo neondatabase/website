@@ -22,13 +22,13 @@ Available for Scale and Business Plan users, the Neon Datadog integration lets y
 
 ## How it works
 
-The integration enables secure, reliable export of metrics and logs to Datadog. By configuring the integration with your Datadog API key, Neon automatically sends data from your project to your selected Datadog site.
+The integration enables secure, reliable export of Neon metrics and Postgres logs to Datadog. By configuring the integration with your Datadog API key, Neon automatically sends data from your project to your selected Datadog site.
 
 <Admonition type="note">
 Data is sent for all computes in your Neon project. For example, if you have multiple branches, each with an attached compute, both metrics and logs will be collected and sent for each compute.
 </Admonition>
 
-### Metrics
+### Neon metrics
 
 The integration exports [a comprehensive set of metrics](#available-metrics) including:
 
@@ -37,9 +37,9 @@ The integration exports [a comprehensive set of metrics](#available-metrics) inc
 - **Replication delay** &#8212; Measures replication lag in bytes and seconds.
 - **Compute metrics** &#8212; Includes CPU and memory usage statistics for your compute.
 
-### Logs
+### Postgres logs
 
-<FeatureBetaProps feature_name="Datadog logs export" />
+<FeatureBetaProps feature_name="Postgres logs export" />
 
 The Neon Datadog integration can forward Postgres logs to your Datadog account. These logs provide visibility into database activity, errors, and performance. See [Export Postgres logs to Datadog](#export-postgres-logs-to-datadog) for details.
 
@@ -55,7 +55,7 @@ Before getting started, ensure the following:
 
 1. In the Neon Console, navigate to the **Integrations** page in your Neon project.
 1. Locate the **Datadog** card and click **Add**.
-1. Enter your **Datadog API key**. You can generate or retrieve [Datadog API Keys](https://app.datadoghq.com/organization-settings/api-keys) from your Datadog organization.
+1. Enter your **Datadog API key**. You can generate or retrieve [Datadog API Keys](https://app.datadoghq.com/organization-settings/api-keys) from your Datadog organization. For instructions, see [Datadog API and Application Keys](https://docs.datadoghq.com/account_management/api-app-keys/).
 1. Select the Datadog **site** that you used when setting up your Datadog account.
 1. Select what you want to export. You can enable either or both:
    - **Metrics**: System metrics and database statistics (CPU, memory, connections, etc.)
@@ -66,14 +66,16 @@ Before getting started, ensure the following:
 You can change these settings later by editing your integration configuration.
 </Admonition>
 
-Optionally, you can import the Neon-provided JSON configuration file into Datadog, which creates a pre-built dashboard from Neon metrics, similar to the charts available on our Monitoring page. See [Import Neon dashboard](#import-neon-dashboard)
+Optionally, you can import the Neon-provided JSON configuration file into Datadog, which creates a pre-built dashboard from **Neon metrics**, similar to the charts available on our Monitoring page. See [Import Neon dashboard](#import-neon-dashboard).
 
-Once set up, Neon will start sending metrics to Datadog, and you can use these metrics to create custom dashboards and alerts in Datadog.
+> We do not yet provide a pre-built dashboard for **Postgres logs**, but it's coming soon.
+
+Once the integration is set up, Neon will start sending Neon metrics to Datadog, and you can use these metrics to create custom dashboards and alerts in Datadog.
 
 <Admonition type="note">
-Neon computes only send metrics when they are active. If the [Scale to Zero](/docs/introduction/scale-to-zero) feature is enabled and a compute is suspended due to inactivity, no metrics will be sent during the suspension. This may result in gaps in your Datadog metrics. If you notice missing data in Datadog, check if your compute is suspended. You can verify a compute's status as `Idle` or `Active` on the **Branches** page in the Neon console, and review **Suspend compute** events on the **System operations** tab of the **Monitoring** page.
+Neon computes only send logs and metrics when they are active. If the [Scale to Zero](/docs/introduction/scale-to-zero) feature is enabled and a compute is suspended due to inactivity, no logs or metrics will be sent during the suspension. This may result in gaps in your Neon logs and metrics in Datadog. If you notice missing data in Datadog, check if your compute is suspended. You can verify a compute's status as `Idle` or `Active` on the **Branches** page in the Neon console, and review **Suspend compute** events on the **System operations** tab of the **Monitoring** page.
 
-Additionally, if you are setting up Neon's Datadog integration for a project with an inactive compute, you'll need to activate the compute before it can send metrics to Datadog. To activate it, simply run a query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any connected client on the branch associated with the compute.
+Additionally, if you are setting up Neon's Datadog integration for a project with an inactive compute, you'll need to activate the compute before it can send metrics and logs to Datadog. To activate it, simply run a query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any connected client on the branch associated with the compute.
 </Admonition>
 
 ## Example usage in Datadog
