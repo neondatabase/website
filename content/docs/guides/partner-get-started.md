@@ -75,8 +75,8 @@ To learn how, see [Querying consumption metrics with the API](/docs/guides/partn
 - **Staying up to date with changes to the Neon platform**: We make every effort to proactively and directly inform our partners about updates and changes that could impact their business. In addition, Partners can monitor the following sources for information about the latest updates from Neon:
   - The [Neon Roadmap](/docs/introduction/roadmap) to see recent deliveries and upcoming features.
   - The [Neon Changelog](/docs/changelog) for the latest product updates.
-  - The [Neon Newsletter](/blog sent weekly.
-  - The [Neon Blog](/blog
+  - The [Neon Newsletter](/blog#subscribe-form) sent weekly.
+  - The [Neon Blog](/blog)
   - The [Neon Status Page](https://neonstatus.com/) for platform status across regions.
   - [RSS Feeds](/docs/reference/feeds) for all of the above, which can be added to your Slack channels.
 
