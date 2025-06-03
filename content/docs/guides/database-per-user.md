@@ -140,7 +140,7 @@ To effectively scale a multi-tenant architecture, leveraging automation tools is
   By combining Neon branching into your CI/CD, you can simplify your dev/test workflows by creating and deleting ephemeral environments automatically as child branches.
 
 - **Automated backups to your own S3**  
-  If you must keep your own data copy, you can [schedule regular backups](/blogfor-multiple-neon-projects) using tools like `pg_dump` in conjunction with GitHub Actions.
+  If you must keep your own data copy, you can [schedule regular backups](/docs/manage/backups-aws-s3-backup-part-2) using tools like `pg_dump` in conjunction with GitHub Actions.
 
 ## The Application Layer
 
@@ -510,7 +510,7 @@ Here’s an overview of the workflow:
 
 ## Backing up Projects to Your Own S3
 
-As a managed database, Neon already takes care of securing your data, always keeping a full copy of your dataset in object storage. But if your use case or company demands that you also keep a copy of your data in your own S3, this section covers how to automate the process via a scheduled GitHub Action. A more extensive explanation can be found in this two-part blog post series: [Part 1](/blog-aws-s3-bucket-for-postgres-backups), [Part 2](/blog/nightly-ba(/blog-projects).
+As a managed database, Neon already takes care of securing your data, always keeping a full copy of your dataset in object storage. But if your use case or company demands that you also keep a copy of your data in your own S3, this section covers how to automate the process via a scheduled GitHub Action. A more extensive explanation can be found in this two-part series: [Part 1](/docs/manage/backups-aws-s3-backup-part-1), [Part 2](/docs/manage/backups-aws-s3-backup-part-2).
 
 ### AWS IAM configuration
 
@@ -541,7 +541,7 @@ On this screen give the **Role** a name and description. You’ll use the Role n
 
 ### S3 bucket policy
 
-This section assumes you already have an S3 bucket. If you need instructions on how to create a bucket, refer to [this blog post](/blog-aws-s3-bucket-for-postgres-backups).
+This section assumes you already have an S3 bucket. If you need instructions on how to create a bucket, refer to the [create an S3 bucket](/docs/manage/backups-aws-s3-backup-part-1) documentation.
 
 To ensure the Role being used in the GitHub Action can perform actions on the S3 bucket, you’ll need to update the bucket policy. Select your bucket then select the Permissions tab and click **Edit**.
 

@@ -140,7 +140,7 @@ To effectively scale a multitenant architecture, leveraging automation tools is 
   By combining Neon branching into your CI/CD, you can simplify your dev/test workflows by creating and deleting ephemeral environments automatically as child branches.
 
 - **Automated backups to your own S3**  
-  If you must keep your own data copy, you can [schedule regular backups](/blogfor-multiple-neon-projects) using tools like `pg_dump` in conjunction with GitHub Actions.
+  If you must keep your own data copy, you can [schedule regular backups](/docs/manage/backups-aws-s3-backup-part-2) using tools like `pg_dump` in conjunction with GitHub Actions.
 
 ## The Application Layer
 
