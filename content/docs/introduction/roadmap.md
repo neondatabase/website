@@ -179,4 +179,3 @@ The Neon **Limited Preview** started in February 2022 and was made available to 
 - On April 15th, 2024, Neon announced [General Availability](/blog/neon-ga).
 
 For everything post-GA, please refer to our [Changelog](/docs/changelog) and the [Neon Blog](/blog). You can also stay updated with the latest information and announcements by subscribing to our [RSS feeds](/docs/reference/feeds) or [newsletter](/blog#subscribe-form).
-
