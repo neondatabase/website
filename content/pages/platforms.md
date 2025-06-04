@@ -18,7 +18,7 @@ Neon is the best Postgres provider for deploying one-database-per-user fleets at
 - Dedicated connection strings for every user or project - every user gets their own secure, isolated Postgres [project](/docs/manage/projects)
 - High connection capacity - pooled endpoints support up to 10,000 connections
 - Full Postgres compatibility - no proprietary query layer
-- Custom branching and PITR -  instant copies and rollbacks, no manual backups
+- Custom branching and PITR - instant copies and rollbacks, no manual backups
 - All of this is available across multiple regions, with autoscaling and high availability
 
 <Testimonial
@@ -53,7 +53,6 @@ Neon’s API is purpose-built to help platforms manage large fleets of Postgres 
 - Update quotas and configurations without downtime
 - …and more
 
-
 #### Retool uses the Neon API to manage over 300,000 databases with just one engineer—handling everything from provisioning to quota enforcement.
 
 ## Built-in quotas and billing controls
@@ -87,6 +86,7 @@ Detailed metrics and quota info for an individual project
 All plans
 
 You can use these to:
+
 - Monitor total usage across all projects for a billing period
 - Break down metrics by project or time range (hourly, daily, monthly)
 - Power usage-based billing or internal dashboards
