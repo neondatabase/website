@@ -37,7 +37,7 @@ const MenuBanner = ({ title, description, to }) => (
         </p>
       </div>
 
-      <GradientBorder className="rounded-[11px]" withBlend />
+      <GradientBorder className="!rounded-[11px]" withBlend />
     </Link>
   </li>
 );

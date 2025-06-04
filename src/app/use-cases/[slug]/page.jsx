@@ -44,7 +44,7 @@ const UseCasePage = ({ params }) => {
       currentSlug={currentSlug}
       githubPath={githubPath}
       tableOfContents={tableOfContents}
-      isUseCase
+      isTemplate
     />
   );
 };
