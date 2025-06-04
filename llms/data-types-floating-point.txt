@@ -6,7 +6,7 @@ Postgres floating-point data types are crucial for applications requiring numeri
 
 ## Source
 
-- [Postgres Floating-point data types HTML](https://neon.tech/docs/data-types/floating-point): The original HTML version of this documentation
+- [Postgres Floating-point data types HTML](https://neon.com/docs/data-types/floating-point): The original HTML version of this documentation
 
 ## Storage and syntax
 

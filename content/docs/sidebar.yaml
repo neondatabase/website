@@ -339,10 +339,12 @@
           items:
             - title: Accounts
               slug: manage/accounts
+            - title: User permissions
+              slug: manage/user-permissions
             - title: Organizations
               slug: manage/organizations
               items:
-                - title: Getting started
+                - title: Overview
                   slug: manage/organizations
                 - title: Manage Organizations
                   slug: manage/orgs-manage
@@ -362,10 +364,10 @@
               slug: guides/project-collaboration-guide
             - title: Database access
               slug: manage/database-access
-            - title: E-mail signup
-              slug: manage/email-signup
             - title: API keys
               slug: manage/api-keys
+            - title: Account recovery
+              slug: manage/account-recovery
         - section: Projects
           items:
             - title: Object hierarchy
@@ -503,27 +505,27 @@
         - section: IDE & Tool Integration
           items:
             - title: Claude Desktop
-              slug: https://neon.tech/guides/neon-mcp-server
+              slug: https://neon.com/guides/neon-mcp-server
             - title: Cursor IDE
-              slug: https://neon.tech/guides/cursor-mcp-neon
+              slug: https://neon.com/guides/cursor-mcp-neon
             - title: Cline
-              slug: https://neon.tech/guides/cline-mcp-neon
+              slug: https://neon.com/guides/cline-mcp-neon
             - title: Windsurf
-              slug: https://neon.tech/guides/windsurf-mcp-neon
+              slug: https://neon.com/guides/windsurf-mcp-neon
             - title: Zed
-              slug: https://neon.tech/guides/zed-mcp-neon
+              slug: https://neon.com/guides/zed-mcp-neon
         - section: Agent Frameworks
           items:
             - title: AgentStack
-              slug: https://neon.tech/guides/agentstack-neon
+              slug: https://neon.com/guides/agentstack-neon
             - title: AutoGen
-              slug: https://neon.tech/guides/autogen-neon
+              slug: https://neon.com/guides/autogen-neon
             - title: Azure AI Agent Service
-              slug: https://neon.tech/guides/azure-ai-agent-service
+              slug: https://neon.com/guides/azure-ai-agent-service
             - title: Composio + CrewAI
-              slug: https://neon.tech/guides/composio-crewai-neon
+              slug: https://neon.com/guides/composio-crewai-neon
             - title: LangGraph
-              slug: https://neon.tech/guides/langgraph-neon
+              slug: https://neon.com/guides/langgraph-neon
     - title: AI Starter Kit
       slug: ai/ai-intro
       icon: sparks

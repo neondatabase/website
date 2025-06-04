@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Azure Data Studio Notebooks HTML](https://neon.tech/docs/ai/ai-azure-notebooks): The original HTML version of this documentation
+- [Azure Data Studio Notebooks HTML](https://neon.com/docs/ai/ai-azure-notebooks): The original HTML version of this documentation
 
 ## Overview
 

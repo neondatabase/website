@@ -2,7 +2,7 @@
 title: Secure your data with Firebase and Neon RLS
 subtitle: Implement Row-level Security policies in Postgres using Firebase and Neon RLS
 enableTableOfContents: true
-updatedOn: '2025-03-10T18:26:02.766Z'
+updatedOn: '2025-05-30T16:54:40.470Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-firebase-gcp
   - /docs/guides/neon-authorize-firebase-gcp
@@ -33,7 +33,7 @@ Firebase and Google Cloud Identity Platform share the same underlying authentica
 
 Both services generate JSON Web Tokens (JWTs) for user authentication, which are passed to Neon RLS. Unlike some other authentication providers that issue a dedicated JWKS URL per project, Firebase and GCP Identity Platform use a common JWKS URL and rely on the Project ID in the JWT's Audience claim to identify specific projects.
 
-When you make a database request, Neon RLS validates these JWTs and uses the embedded user identity metadata to enforce [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) (RLS) policies in Postgres, securing database queries based on user identity. This flow is enabled by the [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt) extension.
+When you make a database request, Neon RLS validates these JWTs and uses the embedded user identity metadata to enforce [Row-Level Security](/postgresql/postgresql-administration/postgresql-row-level-security) (RLS) policies in Postgres, securing database queries based on user identity. This flow is enabled by the [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt) extension.
 
 ## Prerequisites
 

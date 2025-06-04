@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Google Colab HTML](https://neon.tech/docs/ai/ai-google-colab): The original HTML version of this documentation
+- [Google Colab HTML](https://neon.com/docs/ai/ai-google-colab): The original HTML version of this documentation
 
 ## Overview
 
@@ -15,7 +15,7 @@ This guide shows how to create a notebook in Colab, connect to a Neon database, 
 
 ## Prerequisites
 
-To perform the steps in this guide, you require a Neon database for storing vectors. You can use the ready-to-use `neondb` database or create your own. See [Create a database](https://neon.tech/docs/manage/databases#create-a-database) for instructions.
+To perform the steps in this guide, you require a Neon database for storing vectors. You can use the ready-to-use `neondb` database or create your own. See [Create a database](https://neon.com/docs/manage/databases#create-a-database) for instructions.
 
 ## Retrieve your database connection string
 
@@ -115,4 +115,4 @@ Alternatively, you can open a predefined Google Colab notebook for this guide by
 
 ## Next steps
 
-For more information about using Neon with `pgvector`, see [The pgvector extension](https://neon.tech/docs/extensions/pgvector).
+For more information about using Neon with `pgvector`, see [The pgvector extension](https://neon.com/docs/extensions/pgvector).

@@ -2,7 +2,7 @@
 title: Neon Enterprise Sales Process
 enableTableOfContents: true
 subtitle: A guide to Neon's Enterprise sales process
-updatedOn: '2025-03-11T12:53:58.440Z'
+updatedOn: '2025-05-30T16:54:40.484Z'
 ---
 
 Our goal at Neon is to make the sales process as easy and efficient as possible. Below, we've outlined our typical process so you'll know what to expect when you contact us. Depending on your needs, additional discussions and consultations may be required. We'll be happy to arrange those as needed.
@@ -11,7 +11,7 @@ Our goal at Neon is to make the sales process as easy and efficient as possible.
 
 ## Reach out to us
 
-Start by filling out our [contact form](https://neon.tech/contact-sales) to let us know how we can help. If you’re looking for specific plans or pricing, sharing details about your feature requirements and workload will get the ball rolling immediately and speed up the overall process.
+Start by filling out our [contact form](/contact-sales) to let us know how we can help. If you’re looking for specific plans or pricing, sharing details about your feature requirements and workload will get the ball rolling immediately and speed up the overall process.
 
 ## Information gathering
 
@@ -67,4 +67,4 @@ At any time during the process, we’ll be happy to support your security team o
 
 </Steps>
 
-We’ve laid out our typical process above, but we're flexible and ready to adjust the process to fit your specific requirements. [Contact us](https://neon.tech/contact-sales) to get started.
+We’ve laid out our typical process above, but we're flexible and ready to adjust the process to fit your specific requirements. [Contact us](/contact-sales) to get started.

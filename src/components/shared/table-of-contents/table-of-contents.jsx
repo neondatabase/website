@@ -37,6 +37,11 @@ const TableOfContents = ({ items, isUseCase }) => {
     const currentTitleIdx = titles.current.findIndex((anchor) => {
       const { top } = anchor.getBoundingClientRect();
 
+      // Check if the anchor is inside a collapsed details element
+      if (anchor.closest('details:not([open])')) {
+        return false;
+      }
+
       return top - CURRENT_ANCHOR_GAP_PX >= 0;
     });
 

@@ -6,7 +6,7 @@ This guide describes how to download and install sample data for use with Neon.
 
 ## Source
 
-- [Postgres sample data HTML](https://neon.tech/docs/import/import-sample-data): The original HTML version of this documentation
+- [Postgres sample data HTML](https://neon.com/docs/import/import-sample-data): The original HTML version of this documentation
 
 ## Prerequisites
 

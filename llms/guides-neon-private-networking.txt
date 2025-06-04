@@ -4,9 +4,9 @@
 
 ## Source
 
-- [Neon Private Networking HTML](https://neon.tech/docs/guides/neon-private-networking): The original HTML version of this documentation
+- [Neon Private Networking HTML](https://neon.com/docs/guides/neon-private-networking): The original HTML version of this documentation
 
-Private Networking is available on Neon's [Business](https://neon.tech/docs/introduction/plans#business) and [Enterprise](https://neon.tech/docs/introduction/plans#enterprise) plans. If you're on a different plan, you can request a trial from the **Network Security** page in your project's settings.
+Private Networking is available on Neon's [Business](https://neon.com/docs/introduction/plans#business) and [Enterprise](https://neon.com/docs/introduction/plans#enterprise) plans. If you're on a different plan, you can request a trial from the **Network Security** page in your project's settings.
 
 The **Neon Private Networking** feature enables secure connections to your Neon databases via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html), bypassing the open internet for enhanced security.
 
@@ -16,14 +16,14 @@ In a standard setup, the client application connects to a Neon database over the
 
 With **Neon Private Networking**, you can connect to your database via AWS PrivateLink instead of the open internet. In this setup, the client application connects through an [AWS endpoint service](https://docs.aws.amazon.com/vpc/latest/privatelink/configure-endpoint-service.html) (provided by Neon) to a Neon proxy instance that is not accessible from the public internet. This endpoint service is available only within the same AWS region as your client application. With **Neon Private Networking**, all traffic between the client application and the Neon database stays within AWS's private network, rather than crossing the public internet.
 
-![Neon Private Networking diagram](https://neon.tech/docs/guides/neon_private_access.jpg)
+![Neon Private Networking diagram](https://neon.com/docs/guides/neon_private_access.jpg)
 
 ## Prerequisites
 
-- You must be a Neon [Business](https://neon.tech/docs/introduction/plans#business) and [Enterprise](https://neon.tech/docs/introduction/plans#enterprise) account user, and your user account must be [Neon organization](https://neon.tech/docs/manage/organizations) Admin account. You'll encounter an access error if you attempt the setup from a personal Neon account or on a Neon plan that does not offer Private Networking.
-- **Ensure that your client application is deployed on AWS in the same region as the Neon database you plan to connect to.** The Private Networking feature is available in all [Neon-supported AWS regions](https://neon.tech/docs/introduction/regions#aws-regions). Both your private access client application and Neon database must be in one of these regions.
+- You must be a Neon [Business](https://neon.com/docs/introduction/plans#business) and [Enterprise](https://neon.com/docs/introduction/plans#enterprise) account user, and your user account must be [Neon organization](https://neon.com/docs/manage/organizations) Admin account. You'll encounter an access error if you attempt the setup from a personal Neon account or on a Neon plan that does not offer Private Networking.
+- **Ensure that your client application is deployed on AWS in the same region as the Neon database you plan to connect to.** The Private Networking feature is available in all [Neon-supported AWS regions](https://neon.com/docs/introduction/regions#aws-regions). Both your private access client application and Neon database must be in one of these regions.
 - The Neon Private Networking feature currently supports [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4) addresses. [IPv6](https://en.wikipedia.org/wiki/IPv6) is not supported at this time.
-- Install the Neon CLI. You will use it to add your VPC endpoint ID to your Neon organization. For installation instructions, see [Neon CLI — Install and connect](https://neon.tech/docs/reference/cli-install).
+- Install the Neon CLI. You will use it to add your VPC endpoint ID to your Neon organization. For installation instructions, see [Neon CLI — Install and connect](https://neon.com/docs/reference/cli-install).
 
 ## Configuration steps
 
@@ -31,16 +31,16 @@ To configure Neon Private Networking, perform the following steps:
 
 ## Create an AWS VPC endpoint
 
-Do not enable **private DNS names** for the VPC endpoint until [Step 3](https://neon.tech/docs/guides/neon-private-networking#enable-private-dns). You must add the VPC endpoint to your Neon organization first, as described in [Step 2](https://neon.tech/docs/guides/neon-private-networking#add-your-vpc-endpoint-id-to-your-neon-organization).
+Do not enable **private DNS names** for the VPC endpoint until [Step 3](https://neon.com/docs/guides/neon-private-networking#enable-private-dns). You must add the VPC endpoint to your Neon organization first, as described in [Step 2](https://neon.com/docs/guides/neon-private-networking#add-your-vpc-endpoint-id-to-your-neon-organization).
 
 1. Go to the AWS **VPC > Endpoints** dashboard and select **Create endpoint**. Make sure you create the endpoint in the same VPC as your client application.
 
-   ![VPC Dashboard](https://neon.tech/docs/guides/pl_vpc_dashboard.png)
+   ![VPC Dashboard](https://neon.com/docs/guides/pl_vpc_dashboard.png)
 
 1. Optionally, enter a **Name tag** for the endpoint (e.g., `My Neon Private Networking`).
 1. For **Type**, select the **Endpoint services that use NLBs and GWLBs** category.
 
-   ![VPC Create endpoint](https://neon.tech/docs/guides/pl_vpc_create_endpoint.png)
+   ![VPC Create endpoint](https://neon.com/docs/guides/pl_vpc_create_endpoint.png)
 
 1. Under **Service settings**, specify the **Service name**. It must be one of the following service names, depending on your region:
 
@@ -55,7 +55,7 @@ Do not enable **private DNS names** for the VPC endpoint until [Step 3](https://
 
 1. Click **Verify service**. If successful, you should see a `Service name verified` message.
 
-    ![VPC Create endpoint](https://neon.tech/docs/guides/pl_vpc_service_name_verified.png)
+    ![VPC Create endpoint](https://neon.com/docs/guides/pl_vpc_service_name_verified.png)
 
     If not successful, ensure that your service name matches the region where you're creating the VPC endpoint.
 
@@ -63,11 +63,11 @@ Do not enable **private DNS names** for the VPC endpoint until [Step 3](https://
 1. Add the availability zones and associated subnets you want to support.
 1. Click **Create endpoint** to complete the setup of the endpoint service.
 
-    ![VPC Create endpoint](https://neon.tech/docs/guides/pl_vpc_network_settings.png)
+    ![VPC Create endpoint](https://neon.com/docs/guides/pl_vpc_network_settings.png)
 
 1. Note your **VPC Endpoint ID**. You will need it in the next step.
 
-    ![VPC Create endpoint](https://neon.tech/docs/guides/pl_vpc_endpoint_id.png)
+    ![VPC Create endpoint](https://neon.com/docs/guides/pl_vpc_endpoint_id.png)
 
 ## Add your VPC Endpoint ID to your Neon organization
 
@@ -75,7 +75,7 @@ Assign your **VPC Endpoint ID** to your Neon organization. You can do this using
 
 Please note that you must assign the **VPC Endpoint ID**, not the VPC ID.
 
-In the following example, the VCP endpoint ID is assigned to a Neon organization in the specified AWS region using the [neon vpc endpoint](https://neon.tech/docs/reference/cli-vpc#the-vpc-endpoint-subcommand) command.
+In the following example, the VCP endpoint ID is assigned to a Neon organization in the specified AWS region using the [neon vpc endpoint](https://neon.com/docs/reference/cli-vpc#the-vpc-endpoint-subcommand) command.
 
 ```bash shouldWrap
 neon vpc endpoint assign vpce-1234567890abcdef0 --org-id org-bold-bonus-12345678 --region-id aws-us-east-2
@@ -83,7 +83,7 @@ neon vpc endpoint assign vpce-1234567890abcdef0 --org-id org-bold-bonus-12345678
 
 You can find your Neon organization ID in your Neon organization settings, or you can run this Neon CLI command: `neon orgs list`
 
-You can use the [Assign or update a VPC endpoint](https://api-docs.neon.tech/reference/assignorganizationvpcendpoint) API to assign a VCP endpoint ID to a Neon organization. You will need to provide your Neon organization ID, region ID, VPC endpoint ID, Neon project ID, and a [Neon API key](https://neon.tech/docs/manage/api-keys).
+You can use the [Assign or update a VPC endpoint](https://api-docs.neon.tech/reference/assignorganizationvpcendpoint) API to assign a VCP endpoint ID to a Neon organization. You will need to provide your Neon organization ID, region ID, VPC endpoint ID, Neon project ID, and a [Neon API key](https://neon.com/docs/manage/api-keys).
 
 ```bash
 curl --request POST \
@@ -103,7 +103,7 @@ After adding your VPC endpoint ID to your Neon organization, enable private DNS 
 1. Choose **Modify private DNS name**.
 1. Select **Enable for this endpoint**.
 1. Save your changes.
-   ![Enable private DNS](https://neon.tech/docs/guides/pl_enable_private_dns.png)
+   ![Enable private DNS](https://neon.com/docs/guides/pl_enable_private_dns.png)
 
 ## Check your database connection string
 
@@ -129,7 +129,7 @@ At this point, it's still possible to connect to a database in your Neon project
 
 You can restrict public internet access to your Neon project via the Neon CLI or API.
 
-To block access via the Neon CLI, use the [neon projects update](https://neon.tech/docs/reference/cli-projects#update) command with the `--block-public-connections` option.
+To block access via the Neon CLI, use the [neon projects update](https://neon.com/docs/reference/cli-projects#update) command with the `--block-public-connections` option.
 
 ```bash
 neon projects update orange-credit-12345678 --block-public-connections true
@@ -168,7 +168,7 @@ neon vpc project restrict vpce-1234567890abcdef0 --project-id orange-credit-1234
 
 You will need to provide the VPC endpoint ID and your Neon project ID. You can find your Neon project ID under your project's settings in the Neon Console, or by running this Neon CLI command: `neon projects list`
 
-After adding a restriction, you can check the status of the VPC endpoint to view the restricted project using the [vpc endpoint status](https://neon.tech/docs/reference/cli-vpc#the-vpc-endpoint-subcommand) command. You will need to provide your VPC endpoint ID, region ID, and Neon organization ID.
+After adding a restriction, you can check the status of the VPC endpoint to view the restricted project using the [vpc endpoint status](https://neon.com/docs/reference/cli-vpc#the-vpc-endpoint-subcommand) command. You will need to provide your VPC endpoint ID, region ID, and Neon organization ID.
 
 ```bash
 neonctl vpc endpoint status vpce-1234567890abcdef0 --region-id=aws-eu-central-1 --org-id=org-nameless-block-72040075
@@ -179,7 +179,7 @@ neonctl vpc endpoint status vpce-1234567890abcdef0 --region-id=aws-eu-central-1 
 └────────────────────────┴───────┴─────────────────────────┴─────────────────────────────┘
 ```
 
-The Neon API supports managing project restrictions using the [Assign or update a VPC endpoint restriction](https://api-docs.neon.tech/reference/assignprojectvpcendpoint) endpoint. You will need to provide your VPC endpoint ID, Neon project ID, and a [Neon API key](https://neon.tech/docs/manage/api-keys).
+The Neon API supports managing project restrictions using the [Assign or update a VPC endpoint restriction](https://api-docs.neon.tech/reference/assignprojectvpcendpoint) endpoint. You will need to provide your VPC endpoint ID, Neon project ID, and a [Neon API key](https://neon.com/docs/manage/api-keys).
 
 ```bash
 curl --request POST \
@@ -208,7 +208,7 @@ The `vpc` command includes `endpoint` and `project` subcommands for managing VPC
 - **`vpc endpoint`** – List, assign, remove, and retrieve the status of VPC endpoints for a Neon organization.
 - **`vpc project`** – List, configure, or remove VPC endpoint restrictions for specific Neon projects.
 
-For more details and examples, see [Neon CLI commands — vpc](https://neon.tech/docs/reference/cli-vpc).
+For more details and examples, see [Neon CLI commands — vpc](https://neon.com/docs/reference/cli-vpc).
 
 ## Managing Private Networking using the Neon API
 

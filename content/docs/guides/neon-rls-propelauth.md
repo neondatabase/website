@@ -3,7 +3,7 @@ title: Secure your data with PropelAuth and Neon RLS
 subtitle: Implement Row-level Security policies in Postgres using PropelAuth and Neon
   RLS
 enableTableOfContents: true
-updatedOn: '2025-03-10T18:26:02.768Z'
+updatedOn: '2025-05-30T16:54:40.472Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-propelauth
   - /docs/guides/neon-authorize-propelauth
@@ -24,7 +24,7 @@ Use PropelAuth with Neon RLS to add secure, database-level authorization to your
 
 ## How it works
 
-PropelAuth handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon RLS. Neon RLS validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
+PropelAuth handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon RLS. Neon RLS validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
 
 ## Prerequisites
 

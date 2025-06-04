@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Integrations HTML](https://neon.tech/docs/unused/integrations-list): The original HTML version of this documentation
+- [Integrations HTML](https://neon.com/docs/unused/integrations-list): The original HTML version of this documentation
 
 ## Overview
 

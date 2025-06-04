@@ -6,7 +6,7 @@ This guide outlines the steps for using the AWS Database Migration Service (DMS)
 
 ## Source
 
-- [Migrate with AWS Database Migration Service HTML](https://neon.tech/docs/import/migrate-aws-dms): The original HTML version of this documentation
+- [Migrate with AWS Database Migration Service HTML](https://neon.com/docs/import/migrate-aws-dms): The original HTML version of this documentation
 
 ## Overview
 

@@ -4,7 +4,7 @@
 
 ## Source
 
-- [The postgis extension HTML](https://neon.tech/docs/extensions/postgis): The original HTML version of this documentation
+- [The postgis extension HTML](https://neon.com/docs/extensions/postgis): The original HTML version of this documentation
 
 ## Overview
 

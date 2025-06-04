@@ -784,7 +784,7 @@ You can find the source code for the application described in this guide on GitH
 - **Fiberplane API Playground:** [Hono-native API Playground, powered by OpenAPI](https://fiberplane.com/blog/hono-native-playground/), [Features](https://fiberplane.com/docs/features/playground/)
 - **Hono:** [hono.dev](https://hono.dev)
 - **Drizzle ORM:** [orm.drizzle.team](https://orm.drizzle.team)
-- **Neon:** [neon.tech/docs](https://neon.tech/docs)
+- **Neon:** [neon.tech/docs](/docs)
 - **Cloudflare Workers:** [developers.cloudflare.com/workers](https://developers.cloudflare.com/workers/)
 
 <NeedHelp/>

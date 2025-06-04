@@ -2,7 +2,7 @@
 title: Ship faster with AI tools
 subtitle: AI-powered tools for development and database management
 enableTableOfContents: true
-updatedOn: '2025-04-08T22:55:27.438Z'
+updatedOn: '2025-05-30T16:54:40.444Z'
 ---
 
 Neon provides several ways to integrate with AI tools and agents, from natural language database control to autonomous agent frameworks. Choose the tools that fit your workflow.
@@ -22,10 +22,10 @@ These tools leverage the Neon MCP server to provide natural language interfaces 
 AI-enhanced database management capabilities within your preferred development environment.
 
 <DetailIconCards>
-<a href="https://neon.tech/guides/neon-mcp-server" description="Use natural language to manage your databases with Claude Desktop and Neon MCP server" icon="openai">Claude Desktop</a>
-<a href="https://neon.tech/guides/cursor-mcp-neon" description="AI-enhanced database management in Cursor IDE" icon="openai">Cursor</a>
-<a href="https://neon.tech/guides/cline-mcp-neon" description="AI-enhanced database management with Cline" icon="openai">Cline</a>
-<a href="https://neon.tech/guides/windsurf-mcp-neon" description="AI-enhanced database management in Windsurf Editor" icon="openai">Windsurf</a>
+<a href="/guides/neon-mcp-server" description="Use natural language to manage your databases with Claude Desktop and Neon MCP server" icon="openai">Claude Desktop</a>
+<a href="/guides/cursor-mcp-neon" description="AI-enhanced database management in Cursor IDE" icon="openai">Cursor</a>
+<a href="/guides/cline-mcp-neon" description="AI-enhanced database management with Cline" icon="openai">Cline</a>
+<a href="/guides/windsurf-mcp-neon" description="AI-enhanced database management in Windsurf Editor" icon="openai">Windsurf</a>
 </DetailIconCards>
 
 ## Ship faster with AI rules
@@ -51,7 +51,7 @@ Create autonomous agents that can manage and interact with your Neon databases p
 Build AI agents using popular frameworks that integrate with Neon.
 
 <DetailIconCards>
-<a href="https://neon.tech/guides/agentstack-neon" description="Build and deploy AI agents with AgentStack's CLI and Neon integration" icon="openai">AgentStack Integration</a>
-<a href="https://neon.tech/guides/composio-crewai-neon" description="Create multi-agent systems with CrewAI and Neon" icon="openai">Composio + CrewAI</a>
-<a href="https://neon.tech/guides/langgraph-neon" description="Build stateful, multi-actor applications with LangGraph and Neon" icon="openai">LangGraph Integration</a>
+<a href="/guides/agentstack-neon" description="Build and deploy AI agents with AgentStack's CLI and Neon integration" icon="openai">AgentStack Integration</a>
+<a href="/guides/composio-crewai-neon" description="Create multi-agent systems with CrewAI and Neon" icon="openai">Composio + CrewAI</a>
+<a href="/guides/langgraph-neon" description="Build stateful, multi-actor applications with LangGraph and Neon" icon="openai">LangGraph Integration</a>
 </DetailIconCards>

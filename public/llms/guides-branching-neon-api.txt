@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Branching with the Neon API HTML](https://neon.tech/docs/guides/branching-neon-api): The original HTML version of this documentation
+- [Branching with the Neon API HTML](https://neon.com/docs/guides/branching-neon-api): The original HTML version of this documentation
 
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon API. For other branch-related API methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 

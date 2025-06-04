@@ -6,7 +6,7 @@ This document describes Neon's established security reporting procedure to addre
 
 ## Source
 
-- [Security reporting HTML](https://neon.tech/docs/security/security-reporting): The original HTML version of this documentation
+- [Security reporting HTML](https://neon.com/docs/security/security-reporting): The original HTML version of this documentation
 
 ## Reporting security vulnerabilities
 

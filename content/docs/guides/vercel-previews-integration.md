@@ -4,7 +4,7 @@ subtitle: Create a database branch for each preview deployment in Vercel
 redirectFrom:
   - /docs/guides/vercel
 enableTableOfContents: true
-updatedOn: '2025-04-23T23:57:53.122Z'
+updatedOn: '2025-05-30T16:54:40.482Z'
 ---
 
 <InfoBlock>
@@ -362,7 +362,7 @@ Watch this video from the Neon DevRel team for an overview of the Neon Postgres 
 <YoutubeIframe embedId="s4vIMI9rXeg?si=LVJqSMCDKJu4NZiH" />
 
 <Admonition type="note">
-If you have an existing CI pipeline, this blog post shows how to build the same developer workflow using GitHub Actions and the Vercel CLI: [A database for every preview environment using Neon, GitHub Actions, and Vercel](https://neon.tech/blog/branching-with-preview-environments).
+If you have an existing CI pipeline, this blog post shows how to build the same developer workflow using GitHub Actions and the Vercel CLI: [A database for every preview environment using Neon, GitHub Actions, and Vercel](/blog/branching-with-preview-environments).
 </Admonition>
 
 <NeedHelp/>

@@ -15,7 +15,7 @@ Database branching is a game-changer for dev/test environments: there's no need 
   - You "move" your non-prod environments to Neon (i.e. by syncing a subset of data daily)
   - To build / test / debug in Neon
   - Once the changes are tested, you apply them back to prod
-Try this workflow in Neon right away. You can follow the steps [in this guide](https://neon.tech/docs/use-cases/dev-test) to set things up.
+Try this workflow in Neon right away. You can follow the steps [in this guide](/docs/use-cases/dev-test) to set things up.
 </Admonition>
 
 <CTA title="Get $100 in credits" description="Sign up now and get $100 in credits when you upgrade." buttonText="Claim the offer" buttonUrl="https://fyi.neon.tech/credits" />
@@ -238,7 +238,7 @@ url="/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-
 ## Get Started in Two Steps
 
 - **1. Create a Neon account**. Sign up for our Free Plan [here](https://console.neon.tech/signup) (no credit card required).
-- **2. Explore our guide in docs.** [Follow these steps](https://neon.tech/docs/use-cases/dev-test) help you get started.
+- **2. Explore our guide in docs.** [Follow these steps](/docs/use-cases/dev-test) help you get started.
 
 ---
 

@@ -2,7 +2,7 @@
 title: Neon CLI commands — projects
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2025-02-20T17:57:40.910Z'
+updatedOn: '2025-05-30T16:54:40.491Z'
 ---
 
 ## Before you begin
@@ -44,10 +44,10 @@ neon projects list [options]
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `projects` subcommand supports this option:
 
-| Option           | Description                                                                                                              | Type   | Required |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------ | ------ | :------: |
-| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                            | string |          |
-| `--org-id`       | List all projects belonging to the specified organization. If unspecified, personal account projects are listed instead. | string |          |
+| Option           | Description                                                                                   | Type   | Required |
+| ---------------- | --------------------------------------------------------------------------------------------- | ------ | :------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string |          |
+| `--org-id`       | List all projects belonging to the specified organization.                                    | string |          |
 
 #### Examples
 
@@ -108,7 +108,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name.                                                                                                                    | string  |          |
 | `--name`         | The project name. The project ID is used if a name is not specified.                                                                                                                                              | string  |          |
 | `--region-id`    | The region ID. Possible values: `aws-us-west-2`, `aws-ap-southeast-1`, `aws-ap-southeast-2`, `aws-eu-central-1`, `aws-us-east-1`, `aws-us-east-2`, `azure-eastus2`. Defaults to `aws-us-east-2` if not specified. | string  |          |
-| `--org-id`       | The organization ID where you want this project to be created. If unspecified, the project is created in your personal account.                                                                                   | string  |          |
+| `--org-id`       | The organization ID where you want this project to be created. If unspecified, your [default organization](/docs/reference/glossary#default-organization) will be used.                                           | string  |          |
 | `--psql`         | Connect to your new project's database via `psql` immediately on project creation.                                                                                                                                | boolean |          |
 | `--database`     | The database name. If not specified, the default database name will be used.                                                                                                                                      | string  |          |
 | `--role`         | The role name. If not specified, the default role name will be used.                                                                                                                                              | string  |          |
@@ -116,7 +116,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--cu`           | The compute size for the default branch's primary compute. Could be a fixed size (e.g., "2") or a range delimited by a dash (e.g., "0.5-3").                                                                      | string  |          |
 
 <Admonition type="note">
-Neon projects created using the CLI use the default Postgres version, which is Postgres 17. To create a project with a different Postgres version, you can use the [Neon Console](https://neon.tech/docs/manage/projects#create-a-project) or [Neon API](https://api-docs.neon.tech/reference/createproject). 
+Neon projects created using the CLI use the default Postgres version, which is Postgres 17. To create a project with a different Postgres version, you can use the [Neon Console](/docs/manage/projects#create-a-project) or [Neon API](https://api-docs.neon.tech/reference/createproject). 
 </Admonition>
 
 #### Examples

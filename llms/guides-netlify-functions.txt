@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Use Neon with Netlify Functions HTML](https://neon.tech/docs/guides/netlify-functions): The original HTML version of this documentation
+- [Use Neon with Netlify Functions HTML](https://neon.com/docs/guides/netlify-functions): The original HTML version of this documentation
 
 ## Overview
 

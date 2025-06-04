@@ -6,7 +6,7 @@ Postgres array data type provides a flexible way to store and manipulate collect
 
 ## Source
 
-- [Postgres Array data type HTML](https://neon.tech/docs/data-types/array): The original HTML version of this documentation
+- [Postgres Array data type HTML](https://neon.com/docs/data-types/array): The original HTML version of this documentation
 
 ## Storage and syntax
 

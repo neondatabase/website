@@ -20,7 +20,7 @@ nextLink:
 
 The `continue` statement prematurely skips the current iteration of the loop and starts the next one.
 
-In practice, you can use the `continue` statement within the loops including [unconditional loops,](plpgsql-loop-statements) [while loops](https://neon.tech/postgresql/plpgsql-while-loop/), and [for loops](plpgsql-for-loop).
+In practice, you can use the `continue` statement within the loops including [unconditional loops,](plpgsql-loop-statements) [while loops](/postgresql/plpgsql-while-loop/), and [for loops](plpgsql-for-loop).
 
 Here’s the syntax of the `continue` statement:
 

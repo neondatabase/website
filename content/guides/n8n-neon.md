@@ -289,7 +289,7 @@ Here, you can see the input message, the AI Agent's response, and the tool (**Po
 ## Resources
 
 - [n8n Documentation](https://docs.n8n.io/)
-- [Neon Documentation](https://neon.tech/docs)
+- [Neon Documentation](/docs)
 - [`pgvector` extension documentation](/docs/extensions/pgvector)
 - [Build a RAG chatbot with Astro, Postgres, and LlamaIndex](/guides/chatbot-astro-postgres-llamaindex)
 - [RAG Chatbot (OpenAI + LangChain)](/templates/rag-chatbot-langchain)

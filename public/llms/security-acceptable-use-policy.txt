@@ -6,7 +6,7 @@
 
 ## Source
 
-- [Acceptable Use Policy HTML](https://neon.tech/docs/security/acceptable-use-policy): The original HTML version of this documentation
+- [Acceptable Use Policy HTML](https://neon.com/docs/security/acceptable-use-policy): The original HTML version of this documentation
 
 ## Overview
 

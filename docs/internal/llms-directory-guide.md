@@ -23,6 +23,7 @@ When adding new framework or language guides to the llms.txt system, follow thes
 4. Ensure all connection strings use placeholders like `[username]`, `[password]`, and `[neon_hostname]` instead of real or example credentials
 
 Example:
+
 ```markdown
 # Connect a [Framework/Language] application to Neon
 
@@ -52,7 +53,7 @@ This guide describes how to create a Neon project and connect to it from a [Fram
 2. Add a new entry in the appropriate section (Frameworks or Languages)
 3. Follow the existing format:
    ```
-   - [Neon Frameworks - {Framework Name}](https://neon.tech/llms/frameworks-{framework-name}.txt): Brief description
+   - [Neon Frameworks - {Framework Name}](https://neon.com/llms/frameworks-{framework-name}.txt): Brief description
    ```
 4. Copy the updated `llms.txt` file to the public directory: `cp llms.txt public/`
 
@@ -74,10 +75,11 @@ This guide describes how to create a Neon project and connect to it from a [Fram
 ## Testing
 
 After deployment, verify that the new files are accessible at:
-- https://neon.tech/llms/frameworks-{framework-name}.txt
-- https://neon.tech/llms/languages-{language-name}.txt
 
-Also verify that the links in the root llms.txt file (https://neon.tech/llms.txt) correctly point to the new files.
+- https://neon.com/llms/frameworks-{framework-name}.txt
+- https://neon.com/llms/languages-{language-name}.txt
+
+Also verify that the links in the root llms.txt file (https://neon.com/llms.txt) correctly point to the new files.
 
 ## Security Considerations
 

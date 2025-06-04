@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Control Plane HTML](https://neon.tech/docs/unused/control-plane): The original HTML version of this documentation
+- [Control Plane HTML](https://neon.com/docs/unused/control-plane): The original HTML version of this documentation
 
 ## Overview
 

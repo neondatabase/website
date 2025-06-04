@@ -4,7 +4,7 @@
 
 ## Source
 
-- [AI Rules and Prompts HTML](https://neon.tech/docs/ai/ai-rules): The original HTML version of this documentation
+- [AI Rules and Prompts HTML](https://neon.com/docs/ai/ai-rules): The original HTML version of this documentation
 
 ## Overview
 
