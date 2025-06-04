@@ -40,11 +40,28 @@ Given the potential impact on application responsiveness, it's important to have
 
 ### Adjust your scale to zero configuration
 
-Users on paid plans can configure the length of time that the system remains in an inactive state before Neon scales your compute down to zero. This lets you set the balance between performance (never scaling down) and cost (scaling to zero at reasonable intervals). The scale to zero setting is set to 5 minutes by default. You can set a custom period of up to a maximum of 7 days, or disable scale to zero entirely. Limiting or disabling scale to zero can eliminate or reduce startup times, but it also increases compute usage. For configuration instructions, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
+Users on paid plans can configure the length of time that the system remains in an inactive state before Neon scales your compute down to zero. This lets you set the balance between performance (never scaling down) and cost (scaling to zero at reasonable intervals). The scale to zero setting is set to 5 minutes by default. You can set a custom period of up to a maximum of 7 days, or disable scale to zero entirely. To disable scale to zero, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
 
 <Admonition type="important">
 If you disable scale to zero entirely or your compute is never idle long enough to be automatically suspended, you will have to manually restart your compute to pick up the latest updates to Neon's compute images. Neon typically releases compute-related updates weekly. Not all releases contain critical updates, but a weekly compute restart is recommended to ensure that you do not miss anything important. For how to restart a compute, see [Restart a compute](/docs/manage/endpoints#restart-a-compute). 
 </Admonition>
+
+To configure a custom scale to zero setting, modify `suspend_timeout_seconds` using the [Update compute endpoint API](https://api-docs.neon.tech/reference/updateprojectendpoint) API, as shown below. To use this API, you need to specify your project ID and compute endpoint ID. You can find your project ID in your project's settings. You can find the compute endpoint ID on your branch page.
+
+```bash
+curl --request PATCH \
+     --url https://console.neon.tech/api/v2/projects/{project_id}/endpoints/{endpoint_id} \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '
+{
+  "endpoint": {
+    "suspend_timeout_seconds": 300
+  }
+}
+'
+```
 
 Consider combining this strategy with Neon's _Autoscaling_ feature, which allows you to run a compute with minimal resources and scale up on demand. For example, with autoscaling, you can configure a minimum compute size to reduce costs during off-peak times. In the image shown below, the scale to zero setting is set to 1 hour so that your compute only suspends after an hour of inactivity, and autoscaling is configured with a minimum compute size that keep costs low during periods of light usage.
 
