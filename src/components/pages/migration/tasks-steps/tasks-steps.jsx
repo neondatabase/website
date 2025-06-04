@@ -19,7 +19,7 @@ const ITEMS = [
     },
   },
   {
-    title: 'Create a project',
+    title: 'Match configurations',
     description:
       'Then, the Assistant will generate a Neon branch within your source project, matching your source environment.',
     image: {
