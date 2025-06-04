@@ -166,6 +166,12 @@ export default {
     pathname: LINKS.flow,
     type: 'article',
   },
+  platforms: {
+    title: 'Embedded Postgres for Platforms - Neon',
+    description: 'Offer Postgres to your users',
+    pathname: LINKS.platforms,
+    type: 'article',
+  },
   scalableArchitecture: {
     title: 'Neon Scalable Architecture — Neon',
     description:

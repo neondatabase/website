@@ -27,6 +27,8 @@ import GearGradientIcon from 'icons/header/gear-gradient.inline.svg';
 import GearIcon from 'icons/header/gear.inline.svg';
 import MigrationGradientIcon from 'icons/header/migration-gradient.inline.svg';
 import MigrationIcon from 'icons/header/migration.inline.svg';
+import PatternGradientIcon from 'icons/header/pattern-gradient.inline.svg';
+import PatternIcon from 'icons/header/pattern.inline.svg';
 import PeopleIcon from 'icons/header/people.inline.svg';
 import RestoreGradientIcon from 'icons/header/restore-gradient.inline.svg';
 import RestoreIcon from 'icons/header/restore.inline.svg';
@@ -162,6 +164,13 @@ export default {
               title: 'Database per Tenant',
               description: 'Data isolation without overhead',
               to: `${LINKS.useCases}/database-per-tenant`,
+            },
+            {
+              icon: PatternIcon,
+              iconGradient: PatternGradientIcon,
+              title: 'Platforms',
+              description: 'Offer Postgres to your users',
+              to: LINKS.platforms,
             },
             {
               icon: GearIcon,
