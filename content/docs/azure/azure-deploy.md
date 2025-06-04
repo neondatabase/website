@@ -15,7 +15,7 @@ updatedOn: '2025-05-30T16:54:40.447Z'
 
 <DocsList title="Related resources" theme="docs">
   <a href="/docs/manage/azure">Neon on Azure</a>
-  <a href="/docs/manage/azure-develop">Developing with Neon on Azure</a>
+  <a href="/docs/azure/azure-develop">Developing with Neon on Azure</a>
 </DocsList>
 
 </InfoBlock>

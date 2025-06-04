@@ -64,7 +64,7 @@ Endpoint responses include the following attributes:
 | AWS - US East (Ohio)                     | https://neonstatus.com/aws-us-east-ohio/api/v1/summary                   |
 | AWS - US West (Oregon)                   | https://neonstatus.com/aws-us-west-oregon/api/v1/summary                 |
 | Azure - Germany West Central (Frankfurt) | https://neonstatus.com/azure-germanywestcentral-frankfurt/api/v1/summary |
-| Azure East US 2 (Virginia)               | https://neonstatus.com/azure-eastus-2/api/v1/summary                     |
+| Azure East US 2 (Virginia)               | https://neonstatus.com/azure-east-us-2-virginia-eastus-2/api/v1/summary  |
 | Azure West US 3 (Arizona)                | https://neonstatus.com/azure-westus3-arizona/api/v1/summary              |
 
 <NeedHelp/>

@@ -37,7 +37,7 @@ const index = await VectorStoreIndex.fromVectorStore(vectorStore);
 
 ## Generate Embeddings with OpenAI
 
-LlamaIndex handles embedding generation internally while adding vectors to the Postgres database, simplifying the process for users. For more detailed control over embeddings, refer to the respective [JavaScript](https://ts.llamaindex.ai/modules/embeddings/available_embeddings/openai) and [Python](https://docs.llamaindex.ai/en/stable/examples/embeddings/OpenAI) documentation.
+LlamaIndex handles embedding generation internally while adding vectors to the Postgres database, simplifying the process for users. For more detailed control over embeddings, refer to the respective [JavaScript](https://ts.llamaindex.ai/docs/llamaindex/modules/models/embeddings/openai) and [Python](https://docs.llamaindex.ai/en/stable/examples/embeddings/OpenAI) documentation.
 
 ## Stream Chat Completions with OpenAI
 
