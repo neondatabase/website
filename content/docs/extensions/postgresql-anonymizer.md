@@ -15,7 +15,7 @@ This guide introduces the `anon` extension and demonstrates how to implement mas
 ## Enable the extension
 
 <Admonition type="note">
-The `anon` extension is currently [experimental](/docs/pg-extensions#experimental-extensions) and may change in future releases.
+The `anon` extension is currently [experimental](/docs/extensions/pg-extensions#experimental-extensions) and may change in future releases.
 </Admonition>
 
 Enable the `anon` extension in your Neon database by following these steps:

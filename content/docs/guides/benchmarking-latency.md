@@ -109,7 +109,7 @@ Design your benchmarks to simulate how your application actually interacts with 
   - If your app keeps connections alive, focus on post-connection query latency
   - If your app is serverless and frequently creates new connections, measure both scenarios but analyze them separately
 
-For examples of different connection patterns and their implementation, see [Connection Examples](/docs/connect/connection-examples).
+For examples of different connection patterns and their implementation, see [Connection Examples](/docs/connect/choose-connection).
 
 ## Neon latency benchmarks dashboard
 
@@ -123,7 +123,7 @@ Neon provides a [Latency Benchmarks Dashboard](https://latency-benchmarks-dashbo
 
 This data helps you understand expected latencies based on your specific region and connection method. The dashboard is open source and [available on GitHub](https://github.com/neondatabase-labs/latency-benchmarks).
 
-If you encounter unexpected results during your benchmarking, consult the [Connection Troubleshooting](/docs/connect/connection-troubleshooting) documentation to identify potential issues.
+If you encounter unexpected results during your benchmarking, consult the [Connection Troubleshooting](/docs/connect/connect-intro#troubleshoot-connection-issues) documentation to identify potential issues.
 
 ## Conclusion
 

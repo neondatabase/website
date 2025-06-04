@@ -98,7 +98,7 @@ This integration allows you to trigger AI workflows based on database changes, s
 
 <br />
 
-Configure the Inngests Neon integration to trigger AI workflows from your Neon database changes [by following this guide](/guides/trigger-serverless-functions).
+Configure the Inngests Neon integration to trigger AI workflows from your Neon database changes [by following this guide](/docs/guides/trigger-serverless-functions).
 
 ## Starter apps
 

@@ -69,7 +69,7 @@ docker run \
 
 ## Connect
 
-Connect using either the Neon [serverless driver](/serverless/serverless-driver) or any other Postgres client.
+Connect using either the Neon [serverless driver](/docs/serverless/serverless-driver) or any other Postgres client.
 
 <CodeTabs labels={["Neon serverless driver", "node-postgres"]}>
 

@@ -12,7 +12,7 @@ The `dblink` extension provides the ability to connect to other Postgres databas
 This guide will walk you through the fundamentals of using the `dblink` extension in your Neon project. You'll learn how to enable the extension, establish connections to remote Postgres databases, execute queries against them, and retrieve the results. We'll explore different connection methods and discuss important considerations for using `dblink` effectively.
 
 <Admonition type="note">
-`dblink` is a core Postgres extension and can be enabled on any Neon project. It allows direct connections to other Postgres databases. For a more structured and potentially more secure way to access data in external data sources (including non-Postgres databases), consider using [Foreign Data Wrappers](/docs/extensions/postgres-fdw).
+`dblink` is a core Postgres extension and can be enabled on any Neon project. It allows direct connections to other Postgres databases. For a more structured and potentially more secure way to access data in external data sources (including non-Postgres databases), consider using [Foreign Data Wrappers](/docs/extensions/postgres_fdw).
 </Admonition>
 
 **Version availability:**
