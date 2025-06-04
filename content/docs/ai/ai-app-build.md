@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2025-06-02T16:54:40.445Z'
 ---
 
-app.build is an open-source agent that generates and deploys full-stack web applications. Unlike LLMs that produce isolated code snippets, this agent creates complete, functional applications by iterating on code, running tests, and making decisions based on technical feedback like compilation errors, linter output, and test results.
+app.build is our exploration of what AI agents can do with a complete backend stack. We built it after working with partners like Replit and other agent-driven platforms, learning what it takes to automate not just code generation, but the entire development workflow. This open-source project creates and deploys full-stack applications from scratch. It handles everything: database provisioning, authentication, testing, CI/CD, and deployment. The agent breaks down app creation into discrete tasks, validates each piece, and assembles them into working applications. Think of it as a blueprint you can use, fork, or extend to build your own agent infrastructure.
 
 ## Why app.build
 
@@ -13,6 +13,7 @@ app.build is an open-source agent that generates and deploys full-stack web appl
 - **Extensibility**: Add your own templates, models, or deployment targets
 - **Learning**: Understand agent architectures by examining a working implementation
 - **Best practices built-in**: Every app includes testing, CI/CD, and proper project structure
+- **Reference architecture**: Use as a starting point for your own agent infrastructure
 - **Community-driven**: Contribute improvements that benefit everyone using the platform
 
 ## Getting started
@@ -51,7 +52,17 @@ The agent works by:
 - Breaking work into small, independent tasks that can be solved reliably
 - Running quality checks on every piece of generated code
 
-The modular design means you can trace exactly what the agent is doing at each step, making it straightforward to debug issues or add new capabilities.
+These patterns emerged from working with production agent platforms where reliability and validation are critical. The modular design means you can trace exactly what the agent is doing at each step, making it straightforward to debug issues or add new capabilities.
+
+## Extending app.build
+
+As a blueprint for agent infrastructure, app.build is designed to be forked and modified:
+
+- **Custom templates**: Replace the default web app template with your own
+- **Alternative models**: Swap Anthropic (default) for OpenAI, Llama, or other LLMs
+- **Different providers**: Change database, hosting, or auth providers
+- **New validations**: Add your own code quality checks
+- **Modified workflows**: Adjust the generation pipeline to your needs
 
 ## Local development
 
@@ -64,17 +75,9 @@ Everything can run locally with your choice of LLM provider:
 
 Setup instructions are in the app.build source repositories, with guides for local CLI, custom models, and agent setup in development.
 
-## Extending app.build
-
-The codebase is structured to support:
-
-- **Custom templates**: Replace the default web app template with your own
-- **Alternative models**: Swap Anthropic (default) for OpenAI, Llama, or other LLMs
-- **Different providers**: Change database, hosting, or auth providers
-- **New validations**: Add your own code quality checks
-- **Modified workflows**: Adjust the generation pipeline to your needs
-
 ## Current limitations
+
+As a reference implementation, we've made specific choices to keep the codebase clear and extensible:
 
 - Single template for web applications with a fixed tech stack
 - Limited customization options in managed mode
@@ -89,7 +92,7 @@ The codebase is structured to support:
 - Issues: Bug reports, feature requests, and discussions
 - PRs: Code contributions, documentation, templates
 
-The project welcomes contributions at all levels, from fixing typos to adding new generation strategies.
+The project welcomes contributions at all levels, from fixing typos to exploring new generation strategies.
 
 ## Latest information
 
