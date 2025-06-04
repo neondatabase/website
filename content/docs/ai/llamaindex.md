@@ -2,7 +2,7 @@
 title: LlamaIndex
 subtitle: Build AI applications faster with LlamaIndex and Postgres
 enableTableOfContents: true
-updatedOn: '2024-12-11T08:48:36.317Z'
+updatedOn: '2025-06-04T16:43:36.529Z'
 ---
 
 LlamaIndex is a popular framework for working with AI, Vectors, and embeddings. LlamaIndex supports using Neon as a vector store, using the `pgvector` extension.
