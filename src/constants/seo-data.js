@@ -185,12 +185,6 @@ export default {
     imagePath: '/images/social-previews/security.jpg',
     pathname: LINKS.security,
   },
-  storage: {
-    title: 'Neon Storage: Bottomless, Branchable',
-    description:
-      'The foundation for scalable, copy-on-write Postgres with usage-based pricing and zero storage management.',
-    pathname: LINKS.storage,
-  },
   generateTicket: {
     title: 'Grab the ticket for Neon Deploy',
     description:
