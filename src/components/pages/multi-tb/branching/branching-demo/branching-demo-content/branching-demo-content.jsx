@@ -15,9 +15,10 @@ const BranchingDemoContent = ({
     <h3 className="mt-[67px] text-balance text-[28px] font-medium leading-tight tracking-tighter text-white lg:mt-[25px]">
       {title}
     </h3>
-    <p className="mt-2.5 text-[15px] leading-snug tracking-extra-tight text-gray-new-70">
-      {description}
-    </p>
+    <p
+      className="mt-2.5 text-[15px] leading-snug tracking-extra-tight text-gray-new-70"
+      dangerouslySetInnerHTML={{ __html: description }}
+    />
     <Button
       className={clsx(
         'mt-[23px] h-8 px-4 text-[13px] font-medium leading-none tracking-extra-tight',
@@ -34,7 +35,7 @@ const BranchingDemoContent = ({
 
 BranchingDemoContent.propTypes = {
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
   button: PropTypes.shape({
     text: PropTypes.string.isRequired,
     theme: PropTypes.string.isRequired,
