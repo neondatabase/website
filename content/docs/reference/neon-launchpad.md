@@ -62,6 +62,8 @@ deno run -A neondb
 </TabItem>
 </Tabs>
 
+> The source code for the CLI is open source. You can find it on GitHub: [neondb-cli](https://github.com/neondatabase/neondb-cli)
+
 ### Integration with development tools
 
 Add Postgres support to Vite projects using the [@neondatabase/vite-plugin-postgres](https://www.npmjs.com/package/@neondatabase/vite-plugin-postgres) plugin:
