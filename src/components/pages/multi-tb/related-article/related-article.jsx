@@ -15,7 +15,7 @@ const RelatedArticle = ({ title, date, link, className }) => (
       className
     )}
   >
-    <Link className={clsx('group flex flex-row gap-8 md:gap-5')} to={link}>
+    <Link className="group flex flex-row gap-8 md:gap-5" to={link}>
       <div className="flex flex-1 flex-col gap-3.5">
         <div className="flex gap-6 md:gap-4">
           <div className="flex items-center justify-start gap-2">
@@ -25,7 +25,7 @@ const RelatedArticle = ({ title, date, link, className }) => (
             </span>
           </div>
           <time
-            dateTime={date}
+            dateTime={date.toISOString()}
             className="text-base font-medium leading-none tracking-extra-tight text-gray-new-40 md:text-sm"
           >
             {getFormattedDate(date)}

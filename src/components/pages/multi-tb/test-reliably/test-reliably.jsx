@@ -2,11 +2,11 @@ import Image from 'next/image';
 
 import Container from 'components/shared/container';
 import loadTesting from 'icons/multi-tb/test-reliably/tag-cloud/load-testing.svg';
-import optimize from 'icons/multi-tb/test-reliably/tag-cloud/oprimize.svg';
+import optimize from 'icons/multi-tb/test-reliably/tag-cloud/optimize.svg';
 import reproduceBugs from 'icons/multi-tb/test-reliably/tag-cloud/reproduce-bugs.svg';
 import testUpgrades from 'icons/multi-tb/test-reliably/tag-cloud/test-upgrades.svg';
 
-import TagCloud from '../tag-cloud';
+import TagCloud from '../../use-case/tag-cloud';
 
 import database from './images/database.png';
 
@@ -43,7 +43,7 @@ const TestReliably = () => (
               Branch your{' '}
               <span className="relative mx-0.5 -mb-2.5 inline-block xl:mx-0 lg:mx-1 md:-mt-0.5">
                 <Image
-                  className="relative z-10 lg:size-11 md:top-[3px] md:size-8"
+                  className="relative z-10 lg:size-11 md:-top-[3px] md:size-8"
                   src={database}
                   alt=""
                   width={52}
