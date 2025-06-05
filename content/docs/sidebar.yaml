@@ -447,14 +447,10 @@
       items:
         - title: Plans
           slug: introduction/plans
-        - title: Pricing estimation guide
-          slug: introduction/pricing-estimation-guide
-        - title: Extra usage
-          slug: introduction/extra-usage
+        - title: Pricing FAQ
+          slug: introduction/pricing-faq
         - title: Usage metrics
           slug: introduction/usage-metrics
-        - title: Sample project billing
-          slug: introduction/billing-sample
         - title: Monitor billing and usage
           slug: introduction/monitor-usage
         - title: Manage billing
