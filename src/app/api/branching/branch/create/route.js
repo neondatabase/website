@@ -5,6 +5,7 @@ import { handleInsertBranchConnection, scheduleBranchDeletion } from '../../util
 // eslint-disable-next-line import/prefer-default-export
 export async function POST() {
   try {
+    const start = performance.now();
     const response = await fetch(
       `https://console.neon.tech/api/v2/projects/${process.env.NEON_BRANCHIND_DEMO_PROJECT_ID}/branches`,
       {
@@ -35,6 +36,9 @@ export async function POST() {
       throw new Error(`Failed to create branch: ${errorText}`);
     }
 
+    const end = performance.now();
+    const executionTime = (end - start).toFixed(2);
+
     const data = await response.json();
     const { branch, endpoints } = data;
 
@@ -51,6 +55,7 @@ export async function POST() {
         id: branch.id,
         name: branch.name,
       },
+      executionTime,
     });
   } catch (error) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });

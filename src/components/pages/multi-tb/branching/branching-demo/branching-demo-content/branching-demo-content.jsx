@@ -9,6 +9,7 @@ const BranchingDemoContent = ({
   button,
   handleNextStep,
   disabled = false,
+  isLoading = false,
   step,
 }) => (
   <div className={clsx('z-20 flex flex-col items-start', step === 0 ? 'w-[400px]' : 'w-[312px]')}>
@@ -22,7 +23,8 @@ const BranchingDemoContent = ({
     <Button
       className={clsx(
         'mt-[23px] h-8 px-4 text-[13px] font-medium leading-none tracking-extra-tight',
-        disabled && 'cursor-not-allowed'
+        disabled && 'cursor-not-allowed',
+        isLoading && 'cursor-progress'
       )}
       theme={button.theme}
       disabled={disabled}
@@ -42,6 +44,7 @@ BranchingDemoContent.propTypes = {
   }).isRequired,
   handleNextStep: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
+  isLoading: PropTypes.bool,
   step: PropTypes.number.isRequired,
 };
 

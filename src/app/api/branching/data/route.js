@@ -21,12 +21,16 @@ export async function POST(request) {
       : await getBranchConnectionString(branchId);
 
     const sql = neon(connectionString);
+    const start = performance.now();
     const rows = await sql`SELECT * FROM playing_with_neon ORDER BY id DESC LIMIT 5;`;
+    const end = performance.now();
+    const executionTime = (end - start).toFixed(2);
 
     const response = NextResponse.json({
       success: true,
       branch: isMainBranch ? 'main' : branchId,
       data: rows,
+      executionTime,
     });
 
     response.headers.set('Cache-Control', 'private, max-age=0, no-cache');

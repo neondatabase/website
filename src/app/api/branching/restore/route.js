@@ -11,6 +11,7 @@ export async function POST(request) {
     const body = await request.json();
     const { branchId } = await requestSchema.validate(body);
 
+    const start = performance.now();
     const response = await fetch(
       `https://console.neon.tech/api/v2/projects/${process.env.NEON_BRANCHIND_DEMO_PROJECT_ID}/branches/${branchId}/restore`,
       {
@@ -30,9 +31,12 @@ export async function POST(request) {
       const errorText = await response.text();
       throw new Error(`Failed to restore branch: ${errorText}`);
     }
+    const end = performance.now();
+    const executionTime = (end - start).toFixed(2);
 
     return NextResponse.json({
       success: true,
+      executionTime,
     });
   } catch (error) {
     if (error instanceof yup.ValidationError) {

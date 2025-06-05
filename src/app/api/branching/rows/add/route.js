@@ -17,17 +17,21 @@ export async function POST(request) {
 
     const connectionString = await getBranchConnectionString(branchId);
     const sql = neon(connectionString);
+
+    const start = performance.now();
     const [newRow] = await sql`
       INSERT INTO playing_with_neon (id, singer, song) 
       VALUES (${Math.floor(Math.random() * 90000) + 50000}, ${generateUsername()}, 'new-song-name')
       RETURNING *
     `;
+    const end = performance.now();
+    const executionTime = (end - start).toFixed(2);
 
     if (!newRow) {
       throw new Error('Failed to generate unique ID');
     }
 
-    return NextResponse.json({ success: true, newRow });
+    return NextResponse.json({ success: true, newRow, executionTime });
   } catch (error) {
     if (error instanceof yup.ValidationError) {
       return NextResponse.json({ success: false, error: error.message }, { status: 400 });

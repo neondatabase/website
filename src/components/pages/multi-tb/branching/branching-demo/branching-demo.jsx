@@ -22,65 +22,16 @@ const schema = yup
   })
   .required();
 
-const STEPS = {
-  0: {
-    action: async ({ fetchData, showToast, setCurrentStep }) => {
-      setCurrentStep(1);
-      showToast('Loading data from main database...', 'info');
-      await fetchData();
-      showToast('Data from main database loaded.', 'success');
-    },
-  },
-  1: {
-    action: async ({ createBranch, checkoutBranch, showToast }) => {
-      showToast('Creating a copy of data in main database...', 'info');
-      const result = await createBranch();
-
-      if (!result?.branch?.id) {
-        throw new Error('Failed to create branch');
-      }
-
-      showToast('Fetching data in the copied database...', 'info');
-      const checkoutResult = await checkoutBranch(result.branch.id);
-
-      if (!checkoutResult?.success) {
-        throw new Error('Failed to fetch data from new branch');
-      }
-
-      showToast(`Successfully switched to branch: ${result.branch.id}`, 'success');
-    },
-  },
-  2: {
-    action: async ({ removeSelectedRows, showToast }) => {
-      showToast('Dropping a row from the copied database...', 'info');
-      await removeSelectedRows();
-      showToast('Selected rows removed successfully.', 'success');
-    },
-  },
-  3: {
-    action: async ({ addRandomRow, showToast }) => {
-      showToast('Adding a row to the copied database...', 'info');
-      await addRandomRow();
-      showToast('Random row added successfully.', 'success');
-    },
-  },
-  4: {
-    action: async ({ restoreBranch, fetchData, showToast }) => {
-      showToast('Requesting database restore...', 'info');
-      await restoreBranch();
-      showToast('Fetching data of the restored database...', 'info');
-      await fetchData();
-    },
-  },
-};
-
-const BranchingDemo = ({ steps, className }) => {
+const BranchingDemo = ({ className }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const {
     tableData,
     selectedRows,
     isLoading,
     currentBranch,
+    databaseSize,
+    isSizeLoading,
+    executionTime,
     fetchData,
     handleRowSelection,
     createBranch,
@@ -89,6 +40,7 @@ const BranchingDemo = ({ steps, className }) => {
     restoreBranch,
     checkoutBranch,
     lastAddedRowId,
+    fetchDatabaseSize,
   } = useBranchingDemo();
   const { showToast, open, message, type, hideToast } = useToast();
 
@@ -99,9 +51,108 @@ const BranchingDemo = ({ steps, className }) => {
     },
   });
 
+  const STEPS = {
+    0: {
+      title: 'Copy your database in milliseconds - regardless of size',
+      description:
+        "In this demo, you will create a copy of your database, make changes to it, and restore it to the original state in milliseconds. Behind the scenes, you are leveraging Neon's instant branching.",
+      button: {
+        text: "Let's begin",
+        theme: 'primary',
+      },
+      iconClassName: 'branching-demo-speedometer-icon',
+      action: async ({ fetchData, showToast, setCurrentStep }) => {
+        setCurrentStep(1);
+        showToast('Loading data from main database...', 'info');
+        fetchData();
+        fetchDatabaseSize('main');
+        showToast('Data from main database loaded.', 'success');
+      },
+    },
+    1: {
+      title: 'Create your own Postgres database',
+      description: `A Neon database is created in under a second. For now, we have prepared a database for you to copy. Currently, the size of this database is about <span class="text-white">${isSizeLoading ? '......' : databaseSize}</span>.`,
+      button: {
+        text: 'Create a copy',
+        theme: 'primary',
+      },
+      iconClassName: 'branching-demo-database-icon',
+      action: async ({ createBranch, checkoutBranch, showToast, fetchDatabaseSize }) => {
+        showToast('Creating a copy of data in main database...', 'info');
+        const result = await createBranch();
+        if (!result?.branch?.id) {
+          throw new Error('Failed to create branch');
+        }
+        showToast('Fetching data in the copied database...', 'info');
+        const checkoutResult = await checkoutBranch(result.branch.id);
+        if (!checkoutResult?.success) {
+          throw new Error('Failed to fetch data from new branch');
+        }
+        fetchDatabaseSize(result.branch.id);
+        showToast(`Successfully switched to branch: ${result.branch.id}`, 'success');
+      },
+    },
+    2: {
+      title: 'I want to make changes in the copy',
+      description: `In about <span class="text-white">${executionTime ? `${executionTime} ms` : '......'}</span>, your copy of <span class="text-white">${isSizeLoading ? '......' : databaseSize}</span> was created. Now, let's make a change to make sure that it is an isolated copy of your original database.`,
+      button: {
+        text: 'Remove selected rows',
+        theme: 'red-filled',
+      },
+      iconClassName: 'branching-demo-clone-icon',
+      action: async ({ removeSelectedRows, showToast, fetchDatabaseSize }) => {
+        showToast('Dropping a row from the copied database...', 'info');
+        await removeSelectedRows();
+        fetchDatabaseSize();
+        showToast('Selected rows removed successfully.', 'success');
+      },
+    },
+    3: {
+      title: 'I want to make more changes in the copy',
+      description: `In about <span class="text-white">${executionTime ? `${executionTime} ms` : '......'}</span>, you dropped a row in your copied database. Now, let's make one more change to make sure that your data is quite different from the original database.`,
+      button: {
+        text: 'Add a random row',
+        theme: 'primary',
+      },
+      iconClassName: 'branching-demo-circle-minus-icon',
+      action: async ({ addRandomRow, showToast, fetchDatabaseSize }) => {
+        showToast('Adding a row to the copied database...', 'info');
+        await addRandomRow();
+        fetchDatabaseSize();
+        showToast('Random row added successfully.', 'success');
+      },
+    },
+    4: {
+      title: 'But... I messed it up!',
+      description: `In about <span class="text-white">${executionTime ? `${executionTime} ms` : '......'}</span>, you inserted a row in your copied database. But what if you wanted to restore the initial state?`,
+      button: {
+        text: 'Restore the database',
+        theme: 'primary',
+      },
+      iconClassName: 'branching-demo-circle-plus-icon',
+      action: async ({ restoreBranch, fetchData, showToast, fetchDatabaseSize }) => {
+        showToast('Requesting database restore...', 'info');
+        await restoreBranch();
+        showToast('Fetching data of the restored database...', 'info');
+        await fetchData();
+        fetchDatabaseSize();
+      },
+    },
+    5: {
+      title: "Yay, it's back!",
+      description: `In about <span class="text-white">${executionTime ? `${executionTime} ms` : '......'}</span>, you restored your copied database of <span class="text-white">${isSizeLoading ? '......' : databaseSize}</span> to its original state. Try this on your own data, sign up for Neon.`,
+      button: {
+        text: 'Restart the demo',
+        theme: 'gray-20',
+      },
+      iconClassName: 'branching-demo-restore-icon',
+    },
+  };
+
   const handleNextStep = async () => {
     try {
       if (currentStep === 5) {
+        // Reset the demo
         setCurrentStep(0);
         showToast('Demo reset successfully.', 'success');
         return;
@@ -121,8 +172,10 @@ const BranchingDemo = ({ steps, className }) => {
         restoreBranch,
         showToast,
         setCurrentStep,
+        fetchDatabaseSize,
       });
 
+      // Increment step for all steps except step 0
       if (currentStep !== 0) {
         setCurrentStep(currentStep + 1);
       }
@@ -131,7 +184,7 @@ const BranchingDemo = ({ steps, className }) => {
     }
   };
 
-  const currentStepData = steps[currentStep];
+  const currentStepData = STEPS[currentStep];
 
   return (
     <div
@@ -142,12 +195,15 @@ const BranchingDemo = ({ steps, className }) => {
     >
       <form className="flex flex-1 flex-col gap-8" onSubmit={handleSubmit(handleNextStep)}>
         <ul className="relative flex items-center justify-center gap-1">
-          {steps.map(({ id, iconClassName }, index) => (
-            <React.Fragment key={id}>
+          {Object.values(STEPS).map(({ iconClassName }, index) => (
+            <React.Fragment key={index}>
               <li
                 className={clsx(
-                  'flex size-7 items-center justify-center rounded-full ring-1 transition-colors',
-                  index <= currentStep ? 'text-green-45 ring-green-45' : 'ring-gray-new-15'
+                  'relative flex size-7 items-center justify-center rounded-full transition-colors',
+                  'after:pointer-events-none after:absolute after:inset-0 after:rounded-full after:border',
+                  index <= currentStep
+                    ? 'bg-[radial-gradient(112.79%_117.86%_at_50%_100%,#087D69_0%,#0B2D29_47.12%)] text-green-45 after:border-white after:mix-blend-overlay'
+                    : 'after:border-gray-new-15'
                 )}
               >
                 <span
@@ -158,7 +214,7 @@ const BranchingDemo = ({ steps, className }) => {
                   )}
                 />
               </li>
-              {index < steps.length - 1 && (
+              {index < Object.keys(STEPS).length - 1 && (
                 <li className="h-px w-[60px] bg-gray-new-15" aria-hidden />
               )}
             </React.Fragment>
@@ -170,6 +226,7 @@ const BranchingDemo = ({ steps, className }) => {
             description={currentStepData.description}
             button={currentStepData.button}
             disabled={currentStep === 2 && selectedRows.length === 0}
+            isLoading={isLoading}
             handleNextStep={handleNextStep}
             step={currentStep}
           />
@@ -204,19 +261,6 @@ const BranchingDemo = ({ steps, className }) => {
 };
 
 BranchingDemo.propTypes = {
-  steps: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      button: PropTypes.shape({
-        text: PropTypes.string.isRequired,
-        theme: PropTypes.string.isRequired,
-      }).isRequired,
-      iconClassName: PropTypes.string.isRequired,
-    })
-  ).isRequired,
   className: PropTypes.string,
 };
 

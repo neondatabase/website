@@ -21,13 +21,17 @@ export async function POST(request) {
     const MAX_ROWS_TO_DELETE = 100;
     const limitedRowIds = rowIds.slice(0, MAX_ROWS_TO_DELETE);
 
+    const start = performance.now();
     await sql`DELETE FROM playing_with_neon WHERE id = ANY(${limitedRowIds})`;
+    const end = performance.now();
+    const executionTime = (end - start).toFixed(2);
 
     return NextResponse.json({
       success: true,
       deletedCount: limitedRowIds.length,
       totalRequested: rowIds.length,
       limited: rowIds.length > MAX_ROWS_TO_DELETE,
+      executionTime,
     });
   } catch (error) {
     if (error instanceof yup.ValidationError) {

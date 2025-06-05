@@ -22,6 +22,22 @@ export default function useBranchingDemo() {
   const [error, setError] = useState(null);
   const [currentBranch, setCurrentBranch] = useState('main');
   const [lastAddedRowId, setLastAddedRowId] = useState(null);
+  const [databaseSize, setDatabaseSize] = useState(null);
+  const [isSizeLoading, setIsSizeLoading] = useState(false);
+  const [executionTime, setExecutionTime] = useState(null);
+
+  const fetchDatabaseSize = async (branchId = currentBranch) => {
+    try {
+      setIsSizeLoading(true);
+      const result = await apiCall('size', { branchId });
+      setDatabaseSize(result.size);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('[Database Size] Error:', error);
+    } finally {
+      setIsSizeLoading(false);
+    }
+  };
 
   const withLoading = async (fn) => {
     try {
@@ -43,7 +59,12 @@ export default function useBranchingDemo() {
       setCurrentBranch(branchId);
     });
 
-  const createBranch = async () => withLoading(async () => apiCall('branch/create'));
+  const createBranch = async () =>
+    withLoading(async () => {
+      const result = await apiCall('branch/create');
+      setExecutionTime(result.executionTime);
+      return result;
+    });
 
   const checkoutBranch = async (branchId) =>
     withLoading(async () => {
@@ -61,10 +82,11 @@ export default function useBranchingDemo() {
 
   const removeSelectedRows = async () =>
     withLoading(async () => {
-      await apiCall('rows/delete', {
+      const result = await apiCall('rows/delete', {
         rowIds: selectedRows,
         branchId: currentBranch,
       });
+      setExecutionTime(result.executionTime);
       await fetchData(currentBranch);
       setSelectedRows([]);
     });
@@ -72,13 +94,15 @@ export default function useBranchingDemo() {
   const addRandomRow = async () =>
     withLoading(async () => {
       const result = await apiCall('rows/add', { branchId: currentBranch });
+      setExecutionTime(result.executionTime);
       await fetchData(currentBranch);
       setLastAddedRowId(result.newRow.id);
     });
 
   const restoreBranch = async () =>
     withLoading(async () => {
-      await apiCall('restore', { branchId: currentBranch });
+      const result = await apiCall('restore', { branchId: currentBranch });
+      setExecutionTime(result.executionTime);
       await fetchData(currentBranch);
     });
 
@@ -89,6 +113,9 @@ export default function useBranchingDemo() {
     error,
     currentBranch,
     lastAddedRowId,
+    databaseSize,
+    isSizeLoading,
+    executionTime,
     fetchData,
     handleRowSelection,
     createBranch,
@@ -96,5 +123,6 @@ export default function useBranchingDemo() {
     removeSelectedRows,
     addRandomRow,
     restoreBranch,
+    fetchDatabaseSize,
   };
 }
