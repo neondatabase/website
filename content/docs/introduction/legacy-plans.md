@@ -27,14 +27,14 @@ The legacy Free plan is best suited for hobby projects, prototypes, and learning
 
 ### Included allowances
 
-| Usage type                 | Plan allowance                                                                                                                                           |
-| :------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Projects**               | 10 Neon projects                                                                                                                                         |
-| **Branches**               | 10 branches per project                                                                                                                                  |
-| **Databases**              | 500 per branch                                                                                                                                           |
-| **Storage**                | 0.5 GB-month (regular and archive storage combined)                                                                                                      |
-| **Compute**                | 191.9 compute hours/month (enough to run a primary 0.25 CU compute 24/7)                                                                                 |
-| **Data transfer (Egress)** | 5 GB per month                                                                                                                                           |
+| Usage type                 | Plan allowance                                                           |
+| :------------------------- | :----------------------------------------------------------------------- |
+| **Projects**               | 10 Neon projects                                                         |
+| **Branches**               | 10 branches per project                                                  |
+| **Databases**              | 500 per branch                                                           |
+| **Storage**                | 0.5 GB-month (regular and archive storage combined)                      |
+| **Compute**                | 191.9 compute hours/month (enough to run a primary 0.25 CU compute 24/7) |
+| **Data transfer (Egress)** | 5 GB per month                                                           |
 
 <Admonition type="tip" title="What is a compute hour?">
 - A compute hour is one _active hour_ for a compute with 1 vCPU.  
@@ -44,6 +44,7 @@ Idle (suspended) time does not count as active time.
 </Admonition>
 
 ### Features
+
 - Autoscaling up to 2 vCPU
 - Scale to zero
 - Monitoring (1-day history)
@@ -63,23 +64,24 @@ Ideal for early-stage projects and startups preparing for growth.
 ### Included allowances
 
 | Usage type          | Plan allowance                    |
-|---------------------|------------------------------------|
-| **Projects**        | 100 Neon projects                  |
-| **Branches**        | 5000 per project                   |
-| **Databases**       | 500 per branch                     |
-| **Storage**         | 10 GB-month                        |
-| **Archive Storage** | 50 GB-month                        |
-| **Compute**         | 300 compute hours per month total  |
+| ------------------- | --------------------------------- |
+| **Projects**        | 100 Neon projects                 |
+| **Branches**        | 5000 per project                  |
+| **Databases**       | 500 per branch                    |
+| **Storage**         | 10 GB-month                       |
+| **Archive Storage** | 50 GB-month                       |
+| **Compute**         | 300 compute hours per month total |
 
 ### Extra usage
 
 | Extra usage type          | Cost                   |
-|---------------------------|------------------------|
+| ------------------------- | ---------------------- |
 | **Extra Storage**         | $1.75 per GB-month     |
 | **Extra Archive Storage** | $0.10 per GB-month     |
 | **Extra Compute**         | $0.16 per compute hour |
 
 ### Features
+
 - Autoscaling up to 4 vCPUs / 16 GB RAM
 - Scale to zero
 - Monitoring (7-day history)
@@ -97,7 +99,7 @@ Designed for teams scaling production workloads and needing higher resource limi
 ### Included allowances
 
 | Usage type          | Plan allowance                    |
-|---------------------|------------------------------------|
+| ------------------- | --------------------------------- |
 | **Projects**        | 1000 Neon projects                |
 | **Branches**        | 5000 per project                  |
 | **Databases**       | 500 per branch                    |
@@ -108,13 +110,14 @@ Designed for teams scaling production workloads and needing higher resource limi
 ### Extra usage
 
 | Extra usage type          | Cost                   |
-|---------------------------|------------------------|
+| ------------------------- | ---------------------- |
 | **Extra Storage**         | $1.50 per GB-month     |
 | **Extra Archive Storage** | $0.10 per GB-month     |
 | **Extra Compute**         | $0.16 per compute hour |
 | **Extra Projects**        | $50 per 1000 projects  |
 
 ### Features
+
 - Autoscaling up to 8 vCPUs / 32 GB RAM
 - Scale to zero
 - Monitoring (14-day history)
@@ -131,25 +134,26 @@ A high-capacity plan for production teams with security and compliance requireme
 
 ### Included allowances
 
-| Usage type          | Plan allowance                    |
-|---------------------|------------------------------------|
-| **Projects**        | 5000 Neon projects                |
-| **Branches**        | 5000 per project                  |
-| **Databases**       | 500 per branch                    |
-| **Storage**         | 500 GB-month                      |
-| **Archive Storage** | 2500 GB-month                     |
-| **Compute**         | 1000 compute hours per month total|
+| Usage type          | Plan allowance                     |
+| ------------------- | ---------------------------------- |
+| **Projects**        | 5000 Neon projects                 |
+| **Branches**        | 5000 per project                   |
+| **Databases**       | 500 per branch                     |
+| **Storage**         | 500 GB-month                       |
+| **Archive Storage** | 2500 GB-month                      |
+| **Compute**         | 1000 compute hours per month total |
 
 ### Extra usage
 
 | Extra usage type          | Cost                   |
-|---------------------------|------------------------|
+| ------------------------- | ---------------------- |
 | **Extra Storage**         | $0.50 per GB-month     |
 | **Extra Archive Storage** | $0.10 per GB-month     |
 | **Extra Compute**         | $0.16 per compute hour |
 | **Extra Projects**        | $50 per 5000 projects  |
 
 ### Features
+
 - Autoscaling up to 16 vCPUs / 56 GB RAM
 - Fixed compute sizes up to 56 vCPUs / 224 GB RAM
 - Scale to zero
@@ -169,16 +173,17 @@ Custom-tailored for large teams, SaaS vendors, and fleet-level deployments.
 
 ### Included allowances
 
-| Usage type          | Plan allowance                       |
-|---------------------|---------------------------------------|
-| **Projects**        | Custom                                |
-| **Branches**        | Custom                                |
-| **Databases**       | Custom                                |
-| **Storage**         | Custom                                |
-| **Archive Storage** | Custom                                |
-| **Compute**         | Custom                                |
+| Usage type          | Plan allowance |
+| ------------------- | -------------- |
+| **Projects**        | Custom         |
+| **Branches**        | Custom         |
+| **Databases**       | Custom         |
+| **Storage**         | Custom         |
+| **Archive Storage** | Custom         |
+| **Compute**         | Custom         |
 
 ### Enterprise features
+
 - Custom pricing and resource limits
 - 0-downtime migrations
 - Scale to zero
