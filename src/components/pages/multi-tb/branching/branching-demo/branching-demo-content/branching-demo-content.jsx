@@ -19,7 +19,10 @@ const BranchingDemoContent = ({
       {description}
     </p>
     <Button
-      className="mt-[23px] h-8 px-4 text-[13px] font-medium leading-none tracking-extra-tight"
+      className={clsx(
+        'mt-[23px] h-8 px-4 text-[13px] font-medium leading-none tracking-extra-tight',
+        disabled && 'cursor-not-allowed'
+      )}
       theme={button.theme}
       disabled={disabled}
       onClick={handleNextStep}
