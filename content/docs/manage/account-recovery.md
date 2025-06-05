@@ -28,7 +28,7 @@ If you have access to the former employee's company email account:
 
 Once signed in, you can:
 
-- [Update the email address](/docs/manage/email-signup#changing-your-email)
+- [Update the email address](/docs/manage/accounts#update-personal-information)
 - [Transfer project ownership](/docs/manage/orgs-project-transfer)
 - [Add an admin](/docs/manage/orgs-manage#set-permissions) to your projects or organization
 - [Update billing details](/docs/introduction/manage-billing)

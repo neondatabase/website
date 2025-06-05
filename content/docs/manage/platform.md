@@ -20,7 +20,7 @@ Manage your account, your team, and who can access your project's databases.
 
 <a href="/docs/manage/database-access" description="Learn how to manage user access to your databases using roles" icon="database">Database access</a>
 
-<a href="/docs/manage/email-signup" description="Change to an email-based account, or simply change your email" icon="cards">E-mail signup</a>
+<a href="/docs/manage/accounts#update-personal-information" description="Change to an email-based account, or simply change your email" icon="cards">E-mail signup</a>
 
 <a href="/docs/manage/api-keys" description="Generate and manage API keys" icon="network">API keys</a>
 
