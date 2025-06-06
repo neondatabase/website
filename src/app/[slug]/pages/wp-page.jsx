@@ -191,6 +191,4 @@ export async function generateMetadata({ params }) {
   });
 }
 
-export const revalidate = 60;
-
 export default WpPage;
