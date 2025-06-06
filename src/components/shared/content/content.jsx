@@ -202,6 +202,7 @@ Content.propTypes = {
   withoutAnchorHeading: PropTypes.bool,
   isReleaseNote: PropTypes.bool,
   isPostgres: PropTypes.bool,
+  isTemplate: PropTypes.bool,
 };
 
 export default Content;

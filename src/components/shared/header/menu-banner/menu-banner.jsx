@@ -11,7 +11,7 @@ import bannerMobile from './images/banner-mobile.jpg';
 const MenuBanner = ({ title, description, to }) => (
   <li className="mt-1 lg:-order-1 lg:mt-0">
     <Link
-      className="group/banner relative block w-fit rounded-lg lg:min-h-20 xs:w-full"
+      className="group/banner relative block w-fit rounded-lg lg:h-20 xs:h-auto xs:min-h-[70px] xs:w-full"
       to={to}
       tagName="Menu Banner"
       tagText={title}

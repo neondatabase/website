@@ -116,7 +116,7 @@ export default {
               iconGradient: AiGradientIcon,
               title: 'AI',
               description: 'Powered by pgvector',
-              to: LINKS.auth,
+              to: LINKS.ai,
             },
             {
               icon: MigrationIcon,
