@@ -26,9 +26,9 @@ The demo app creates a new note like this:
 
 ```typescript
 const { data, error } = await postgrest
-  .from("notes")
-  .insert({ title: "My Note" }) // [!code highlight]
-  .select("id, title, shared, owner_id, paragraphs (id, content, created_at, note_id)")
+  .from('notes')
+  .insert({ title: 'My Note' }) // [!code highlight]
+  .select('id, title, shared, owner_id, paragraphs (id, content, created_at, note_id)')
   .single();
 ```
 
