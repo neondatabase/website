@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2025-06-04T09:00:00.000Z'
 ---
 
-Neon implements a unique storage layer for Postgres that eliminates capacity planning and enables new workflows. Built on a copy-on-write engine backed by bottomless cloud storage, Neon’s architecture removes the constraints of traditional serverful setups, which require pre-provisioned storage volumes and limit scalability. At the same time, it lays the foundation for core Neon features like [instant branching](/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write) and [point-in-time restores](blog/recover-large-postgres-databases#neons-instant-point-in-time-recovery).
+Neon implements a unique storage layer for Postgres that eliminates capacity planning and enables new workflows. Built on a copy-on-write engine backed by bottomless cloud storage, Neon’s architecture removes the constraints of traditional serverful setups, which require pre-provisioned storage volumes and limit scalability. At the same time, it lays the foundation for core Neon features like [instant branching](/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write) and [point-in-time restores](/blog/recover-large-postgres-databases#neons-instant-point-in-time-recovery).
 
 ## Storage constraints in serverful Postgres architectures
 
@@ -39,7 +39,7 @@ Neon’s bottomless storage design means you never worry about disk size. The sy
 
 ### Built-in caching for performance.
 
-A concern with decoupling storage is performance, so [Neon’s architecture includes intelligent caching](blog/architecture-decisions-in-neon). The Pageserver acts as a high-speed cache on SSDs for recently used data, serving pages to the Postgres compute with minimal latency. In essence, Neon keeps hot data in a cache tier (and in memory) close to the compute, while cold data resides in S3. This means you enjoy the performance of local SSD on your active working set, even as your total data size scales far beyond what SSDs alone could hold.
+A concern with decoupling storage is performance, so [Neon’s architecture includes intelligent caching](/blog/architecture-decisions-in-neon). The Pageserver acts as a high-speed cache on SSDs for recently used data, serving pages to the Postgres compute with minimal latency. In essence, Neon keeps hot data in a cache tier (and in memory) close to the compute, while cold data resides in S3. This means you enjoy the performance of local SSD on your active working set, even as your total data size scales far beyond what SSDs alone could hold.
 
 ### Pay only for actual usage.
 
@@ -47,11 +47,11 @@ Neon charges based on the data you actually store, not on a pre-set capacity. Th
 
 ### Branching and instant restores.
 
-With a complete WAL history at its core, Neon enables powerful workflows like branching databases and point-in-time recovery with minimal effort. You can spin up a new logical copy of your database in seconds, without copying data, even for datasets with many TBs. Under the hood, Neon simply forks the page history via copy-on-write. Similarly, you can instantly rewind or **restore** a database to an earlier snapshot in time. The ability to clone or rollback a TB-sized Postgres in moments opens up development and disaster recovery capabilities [previously not feasible on managed Postgres](blog/postgres-snapshots-neon-vs-rds).
+With a complete WAL history at its core, Neon enables powerful workflows like branching databases and point-in-time recovery with minimal effort. You can spin up a new logical copy of your database in seconds, without copying data, even for datasets with many TBs. Under the hood, Neon simply forks the page history via copy-on-write. Similarly, you can instantly rewind or **restore** a database to an earlier snapshot in time. The ability to clone or rollback a TB-sized Postgres in moments opens up development and disaster recovery capabilities [previously not feasible on managed Postgres](/blog/postgres-snapshots-neon-vs-rds).
 
 ### Always durable and multi-AZ resilient.
 
-Neon’s storage layer was [built for high availability](blog/our-approach-to-high-availability). Every piece of data is redundantly stored across availability zones and in cloud storage. Incoming WAL records are replicated to multiple Safekeepers (each in a different AZ) for durability, then routinely uploaded to the object store (which offers 11 nines of durability). Your data is safe from single-AZ outages or disk failures by default.
+Neon’s storage layer was [built for high availability](/blog/our-approach-to-high-availability). Every piece of data is redundantly stored across availability zones and in cloud storage. Incoming WAL records are replicated to multiple Safekeepers (each in a different AZ) for durability, then routinely uploaded to the object store (which offers 11 nines of durability). Your data is safe from single-AZ outages or disk failures by default.
 
 ## Operational simplicity through architectural change
 
