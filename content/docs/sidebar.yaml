@@ -966,6 +966,15 @@
       slug: data-api/get-started
       icon: api
       tag: new
+      items:
+        - section: Get started
+          items:
+            - title: Get started
+              slug: data-api/get-started
+        - section: Tutorial
+          items:
+            - title: CRUD demo
+              slug: data-api/demo
 - section: Workflows
   items:
     - title: Data anonymization

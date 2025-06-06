@@ -27,7 +27,7 @@ The demo app creates a new note like this:
 const { data, error } = await postgrest
   .from("notes")
   .insert({ title: "My Note" }) // [!code highlight]
-  .select("id, title, shared, owner_id")
+  .select("id, title, shared, owner_id, paragraphs (id, content, created_at, note_id)")
   .single();
 ```
 
@@ -72,9 +72,11 @@ const { error } = await postgrest
 
 Now let's look at a more advanced pattern you can use with postgrest-js.
 
-## INSERT with relationship query
+## INSERT and fetch related data
 
-You may have noticed that our INSERT example above includes `.select("*")`. This is a great feature of postgrest-js - you can insert a record and immediately fetch it back in a single query. But it gets even better! You can also fetch related records at the same time:
+You may have noticed that our earlier `INSERT` example included `.select("*")`, which lets you insert a record and immediately fetch it back in a single query. This is a useful feature of postgrest-js (and PostgREST). And you can take it further: you can also fetch **related data** (from other tables linked by foreign keys) at the same time.
+
+For example, in our INSERT example from earlier, we immediately fetch the new note **and** any related paragraphs (if they exist):
 
 ```typescript
 const { data, error } = await postgrest
