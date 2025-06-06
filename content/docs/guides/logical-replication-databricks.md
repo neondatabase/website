@@ -61,5 +61,3 @@ For details, see [Airbyte: Delta Lake on Databricks](https://docs.airbyte.com/in
 
 1. Trigger the initial sync to populate data from Neon into Delta Lake.
 2. Airbyte will continuously read WAL logs from Neon via logical replication and deliver inserts, updates, and deletes into Delta tables.
-
-

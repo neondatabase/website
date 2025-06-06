@@ -28,8 +28,8 @@ This guide explains how to connect Databricks SQL to a Neon Postgres database us
    postgresql://myuser:password@ep-silent-wind-123456.us-east-1.aws.neon.tech/neondb?sslmode=require
    ```
 
-
 4. Extract the following values:
+
 - **Host**: `ep-silent-wind-123456.us-east-1.aws.neon.tech`
 - **Port**: `5432` (default)
 - **Database**: `neondb`
@@ -43,9 +43,10 @@ This guide explains how to connect Databricks SQL to a Neon Postgres database us
 
 1. In Databricks, go to **Catalog > Add Data > Create a connection**.
 2. Enter a **Connect name**.
-2. For **Connection type**, select **PostgreSQL**.
+3. For **Connection type**, select **PostgreSQL**.
 4. CLick **Next**.
-3. Fill in the connection form:
+5. Fill in the connection form:
+
 - **Host**: `ep-silent-wind-123456.us-east-1.aws.neon.tech`
 - **Port**: `5432`
 - **User**: `myuser`
