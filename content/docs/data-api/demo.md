@@ -15,7 +15,7 @@ These examples show how to use Neon's Data API and postgrest-js for basic databa
 
    Follow the readme, adding your Data API URL to the `.env` file.
 
-> The app uses `notes` and `paragraphs` tables. [See schema in the repo](https://github.com/neondatabase-labs/neon-data-api-neon-auth/blob/main/src/db/schema.ts). 
+> The app uses `notes` and `paragraphs` tables. [See schema in the repo](https://github.com/neondatabase-labs/neon-data-api-neon-auth/blob/main/src/db/schema.ts).
 > Make sure to enable Row-Level Security (RLS) for your tables. [See Example RLS for this demo app below.](#example-rls)
 
 <Steps>
@@ -23,6 +23,7 @@ These examples show how to use Neon's Data API and postgrest-js for basic databa
 ## INSERT
 
 The demo app creates a new note like this:
+
 ```typescript
 const { data, error } = await postgrest
   .from("notes")
@@ -39,9 +40,9 @@ To display all notes, ordered by creation date, the app uses:
 
 ```typescript
 const { data, error } = await postgrest
-  .from("notes")
-  .select("id, title, created_at, owner_id, shared") // [!code highlight]
-  .order("created_at", { ascending: false });
+  .from('notes')
+  .select('id, title, created_at, owner_id, shared') // [!code highlight]
+  .order('created_at', { ascending: false });
 ```
 
 See [src/routes/index.tsx](https://github.com/neondatabase-labs/neon-data-api-neon-auth/blob/main/src/routes/index.tsx)
@@ -52,9 +53,9 @@ When a user edits a note's title, the following query runs:
 
 ```typescript
 const { error } = await postgrest
-  .from("notes")
-  .update({ title: "Updated Title" }) // [!code highlight]
-  .eq("id", noteId);
+  .from('notes')
+  .update({ title: 'Updated Title' }) // [!code highlight]
+  .eq('id', noteId);
 ```
 
 See [src/components/app/note-title.tsx](https://github.com/neondatabase-labs/neon-data-api-neon-auth/blob/main/src/components/app/note-title.tsx)
@@ -65,9 +66,9 @@ The demo app doesn't include delete by default, but if you wanted to add it, you
 
 ```typescript
 const { error } = await postgrest
-  .from("notes")
+  .from('notes')
   .delete() // [!code highlight]
-  .eq("id", noteId);
+  .eq('id', noteId);
 ```
 
 Now let's look at a more advanced pattern you can use with postgrest-js.
@@ -80,9 +81,9 @@ For example, in our INSERT example from earlier, we immediately fetch the new no
 
 ```typescript
 const { data, error } = await postgrest
-  .from("notes")
+  .from('notes')
   .insert({ title: generateNameNote() })
-  .select("id, title, shared, owner_id, paragraphs (id, content, created_at, note_id)") // [!code highlight]
+  .select('id, title, shared, owner_id, paragraphs (id, content, created_at, note_id)') // [!code highlight]
   .single();
 ```
 
