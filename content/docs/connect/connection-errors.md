@@ -40,7 +40,7 @@ ERROR: The endpoint ID is not specified. Either upgrade the Postgres client libr
 
 This error occurs if your client library or application does not support the **Server Name Indication (SNI)** mechanism in TLS.
 
-Neon uses computet IDs (the first part of a Neon domain name) to route incoming connections. However, the Postgres wire protocol does not transfer domain name information, so Neon relies on the Server Name Indication (SNI) extension of the TLS protocol to do this.
+Neon uses compute IDs (the first part of a Neon domain name) to route incoming connections. However, the Postgres wire protocol does not transfer domain name information, so Neon relies on the Server Name Indication (SNI) extension of the TLS protocol to do this.
 
 SNI support was added to `libpq` (the official Postgres client library) in Postgres 14, which was released in September 2021. Clients that use your system's `libpq` library should work if your Postgres version is >= 14. On Linux and macOS, you can check Postgres version by running `pg_config --version`. On Windows, check the `libpq.dll` version in your Postgres installation's `bin` directory. Right-click on the file, select **Properties** > **Details**.
 
@@ -96,7 +96,7 @@ postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-12
 Using a dollar sign (`$`) character as a separator may be required if a semicolon (`;`) is not a permitted character in a password field. For example, the [AWS Database Migration Service (DMS)](https://aws.amazon.com/dms/) does not permit a semicolon character in the **Password** field when defining connection details for database endpoints.
 </Admonition>
 
-This approach causes the authentication method to be downgraded from `scram-sha-256` (never transfers a plain text password) to `password` (transfers a plain text password). However, the connection is still TLS-encrypted, so the level of security is equivalent to the security provided by `https` websites. We intend deprecate this option when most libraries and applications provide SNI support.
+This approach causes the authentication method to be downgraded from `scram-sha-256` (never transfers a plain text password) to `password` (transfers a plain text password). However, the connection is still TLS-encrypted, so the level of security is equivalent to the security provided by `https` websites as long as `sslmode=verify-full` or channel binding is used. We intend deprecate this option when most libraries and applications provide SNI support.
 
 ### Libraries
 
