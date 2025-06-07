@@ -25,6 +25,7 @@
             - title: 4 - Getting ready for production
               slug: get-started-with-neon/production-checklist
         - section: Language quickstarts
+          collapsible: true
           items:
             - title: Quick list
               slug: get-started-with-neon/languages
@@ -47,6 +48,7 @@
             - title: Rust
               slug: guides/rust
         - section: Framework quickstarts
+          collapsible: true
           items:
             - title: Quick list
               slug: get-started-with-neon/frameworks
@@ -101,6 +103,7 @@
             - title: Vue
               slug: guides/vue
         - section: File and media storage
+          collapsible: true
           items:
             - title: File storage
               slug: guides/file-storage
