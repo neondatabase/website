@@ -2,7 +2,7 @@
 title: Create and manage Read Replicas
 subtitle: Learn how to create and manage read replicas in Neon
 enableTableOfContents: true
-updatedOn: '2025-05-30T16:54:40.478Z'
+updatedOn: '2025-06-04T16:43:36.535Z'
 ---
 
 [Read replicas](/docs/introduction/read-replicas) are supported with all Neon plans. The Free Plan is limited to a maximum of 3 read replica computes per project. This guide steps you through the process of creating and managing read replicas.
@@ -237,7 +237,7 @@ No users action is required. The settings are synchronized automatically when yo
 If your read replicas are falling behind, follow these steps to diagnose and resolve the issue:
 
 1. **Check your replication lag metrics**  
-   Refer to [Monitoring Read Replicas](/docs/guides/read-replica) for detailed instructions on how to monitor replication lag.
+   Refer to [Monitoring Read Replicas](/docs/guides/read-replica-guide#monitoring-read-replicas) for instructions on how to monitor replication lag.
 
 2. **Verify configuration alignment**  
    If replication lag is detected, ensure that the configurations for the primary and read-replica computes are aligned. Specifically, confirm that the following parameters match between your primary compute and read-replica compute:

@@ -3,7 +3,7 @@ title: Develop with Neon on Azure
 subtitle: Find the resources you need to start developing with Neon on Azure
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-06-03T18:04:26.397Z'
+updatedOn: '2025-06-04T16:43:36.532Z'
 ---
 
 <InfoBlock>
@@ -17,7 +17,7 @@ updatedOn: '2025-06-03T18:04:26.397Z'
 
 <DocsList title="Related resources" theme="docs">
   <a href="/docs/manage/azure">Neon on Azure</a>
-  <a href="/docs/manage/azure-deploy">Deploy Neon on Azure</a>
+  <a href="/docs/azure/azure-deploy">Deploy Neon on Azure</a>
 </DocsList>
 
 </InfoBlock>

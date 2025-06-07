@@ -2,7 +2,7 @@
 title: Neon Launchpad
 subtitle: Launch an instant Neon Postgres database with zero configuration
 enableTableOfContents: true
-updatedOn: '2025-05-30T16:54:40.492Z'
+updatedOn: '2025-06-05T09:15:50.314Z'
 ---
 
 Neon Launchpad enables instant provisioning of a Postgres database without configuration or account creation.
@@ -61,6 +61,8 @@ deno run -A neondb
 ```
 </TabItem>
 </Tabs>
+
+> The source code for the CLI is open source. You can find it on GitHub: [neondb-cli](https://github.com/neondatabase/neondb-cli)
 
 ### Integration with development tools
 
