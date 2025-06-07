@@ -20,7 +20,7 @@ updatedOn: '2025-05-23T13:20:56.227Z'
 framework="JavaScript"
 envVars={`
 
-# Neon Auth environment variables for JavaScript
+# Neon Auth environment variables for JavaScript/Node
 
 STACK_PROJECT_ID=YOUR_NEON_AUTH_PROJECT_ID
 STACK_PUBLISHABLE_CLIENT_KEY=YOUR_NEON_AUTH_PUBLISHABLE_KEY
@@ -39,51 +39,51 @@ DATABASE_URL=YOUR_NEON_CONNECTION_STRING
 npm install @stackframe/js
 \`\`\`
 
-### Use your environment variables
+#### Use your environment variables
 
-Paste the Neon Auth environment variables from the [Get your Neon Auth keys](#get-your-neon-auth-keys) section into your \`.env\` or \`.env.local\` file.
+Paste the Neon Auth environment variables from [Step 2](#get-your-neon-auth-keys) into your \`.env\` or \`.env.local\` file.
 
 ## Configure Neon Auth client
 
-Create a file like \`stack/server.js\`:
-
 \`\`\`js
+// stack/server.js
 import { StackServerApp } from '@stackframe/js';
+
 export const stackServerApp = new StackServerApp({
-projectId: process.env.STACK_PROJECT_ID,
-publishableClientKey: process.env.STACK_PUBLISHABLE_CLIENT_KEY,
-secretServerKey: process.env.STACK_SECRET_SERVER_KEY,
-tokenStore: 'memory',
+  projectId: process.env.STACK_PROJECT_ID,
+  publishableClientKey: process.env.STACK_PUBLISHABLE_CLIENT_KEY,
+  secretServerKey: process.env.STACK_SECRET_SERVER_KEY,
+  tokenStore: 'memory',
 });
 \`\`\`
 
 ## Test your integration
 
-1. Create a test user in the Console and copy its ID.
+1. Create a test user in the Console (see [Step 4](#create-users-in-the-console-optional)) and copy its ID.
+
 2. Create \`src/test.ts\`:
 
-\`\`\`ts
-import 'dotenv/config';
-import { stackServerApp } from './stack/server.js';
-async function main() {
-const user = await stackServerApp.getUser('YOUR_USER_ID_HERE');
-console.log(user);
-}
-main().catch(console.error);
-\`\`\`
+   \`\`\`ts
+   import 'dotenv/config';
+   import { stackServerApp } from './stack/server.js';
 
-3. Run your test script:
+   async function main() {
+     const user = await stackServerApp.getUser('YOUR_USER_ID_HERE');
+     console.log(user);
+   }
 
-\`\`\`bash shouldWrap
+   main().catch(console.error);
+   \`\`\`
 
-# if you have a dev/test script in package.json
+3. Run your test script however you like:
 
-npm run dev
+   \`\`\`bash shouldWrap
+   # if you have a dev/test script in package.json
+   npm run dev
 
-# or directly:
-
-npx dotenv -e .env.local -- tsx src/test.ts
-\`\`\`
+   # or directly:
+   npx dotenv -e .env.local -- tsx src/test.ts
+   \`\`\`
 
 You should see your test user's record printed in the console.
 `}

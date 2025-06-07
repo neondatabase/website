@@ -17,30 +17,19 @@ updatedOn: '2025-05-23T13:20:56.227Z'
 </InfoBlock>
 
 <GetStarted
-framework="React"
-envVars={`
+  framework="React"
+  envVars={`
 
-# Neon Auth environment variables for React
-
-REACT_APP_STACK_PROJECT_ID=YOUR_NEON_AUTH_PROJECT_ID
-REACT_APP_STACK_PUBLISHABLE_CLIENT_KEY=YOUR_NEON_AUTH_PUBLISHABLE_KEY
+# Neon Auth environment variables for React (Vite)
+VITE_STACK_PROJECT_ID=YOUR_NEON_AUTH_PROJECT_ID
+VITE_STACK_PUBLISHABLE_CLIENT_KEY=YOUR_NEON_AUTH_PUBLISHABLE_KEY
 STACK_SECRET_SERVER_KEY=YOUR_NEON_AUTH_SECRET_KEY
 
 # Your Neon connection string
-
 DATABASE_URL=YOUR_NEON_CONNECTION_STRING
 `}
   templateRepo="neon-auth-react-template"
   setupSteps={`
-
-#### Run the setup wizard
-
-\`\`\`bash
-npx @stackframe/init-stack@latest
-\`\`\`
-
-This sets up auth routes, layout wrappers, and handlers automatically for React.
-
 ### Install the React SDK
 
 Make sure you have a [React project](https://react.dev/learn/creating-a-react-app) set up. We show an example here of a Vite React project with React Router.
@@ -57,15 +46,15 @@ Paste the Neon Auth environment variables from the [Get your Neon Auth keys](#ge
 
 A basic example of how to set up the Neon Auth client in \`stack.ts\` in your \`src\` directory:
 
-\`\`\`tsx shouldWrap
+\`\`\`tsx
 import { StackClientApp } from '@stackframe/react';
 import { useNavigate } from 'react-router-dom';
 
 export const stackClientApp = new StackClientApp({
-projectId: import.meta.env.VITE_STACK_PROJECT_ID,
-publishableClientKey: import.meta.env.VITE_STACK_PUBLISHABLE_CLIENT_KEY,
-tokenStore: 'cookie',
-redirectMethod: { useNavigate },
+  projectId: import.meta.env.VITE_STACK_PROJECT_ID,
+  publishableClientKey: import.meta.env.VITE_STACK_PUBLISHABLE_CLIENT_KEY,
+  tokenStore: 'cookie',
+  redirectMethod: { useNavigate },
 });
 \`\`\`
 
@@ -73,32 +62,35 @@ redirectMethod: { useNavigate },
 
 In your \`src/App.tsx\`:
 
-\`\`\`tsx shouldWrap
+\`\`\`tsx
 import { StackHandler, StackProvider, StackTheme } from '@stackframe/react';
 import { Suspense } from 'react';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { stackClientApp } from './stack';
 
 function HandlerRoutes() {
-const location = useLocation();
-return <StackHandler location={location} />;
+  const location = useLocation();
+  
+  return (
+    <StackHandler app={stackClientApp} location={location.pathname} fullPage /\>
+  );
 }
 
 export default function App() {
-return (
-<BrowserRouter>
-<StackProvider app={stackClientApp}>
-<StackTheme>
-<Suspense fallback={<div>Loading...</div>}>
-<Routes>
-<Route path="/handler/\*" element={<HandlerRoutes />} />
-<Route path="/" element={<div>hello world</div>} />
-</Routes>
-</Suspense>
-</StackTheme>
-</StackProvider>
-</BrowserRouter>
-);
+  return (
+    <Suspense fallback={null}>
+      <BrowserRouter>
+        <StackProvider app={stackClientApp}>
+          <StackTheme>
+            <Routes>
+              <Route path="/handler/\*" element={<HandlerRoutes />} />
+              <Route path="/" element={<div>hello world</div>} />
+            </Routes>
+          </StackTheme>
+        </StackProvider>
+      </BrowserRouter>
+    </Suspense>
+  );
 }
 \`\`\`
 
