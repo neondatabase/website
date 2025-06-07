@@ -19,7 +19,7 @@ Neon Auth helps you move faster by handling the auth stack for you:
 
 <CTA title="Get started with Neon Auth" description="Add authentication to your app and get real-time user data sync in your database." buttonText="Get started" buttonUrl="/docs/guides/neon-auth" />
 
-## Quick starts
+## Get started
 
 <DetailIconCards>
 <a href="/docs/neon-auth/quick-start/nextjs" description="Quickstart for Next.js" icon="sparkle">Next.js Quickstart</a>
