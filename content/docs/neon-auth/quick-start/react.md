@@ -17,19 +17,22 @@ updatedOn: '2025-05-23T13:20:56.227Z'
 </InfoBlock>
 
 <GetStarted
-  framework="React"
-  envVars={`
+framework="React"
+envVars={`
 
 # Neon Auth environment variables for React (Vite)
+
 VITE_STACK_PROJECT_ID=YOUR_NEON_AUTH_PROJECT_ID
 VITE_STACK_PUBLISHABLE_CLIENT_KEY=YOUR_NEON_AUTH_PUBLISHABLE_KEY
 STACK_SECRET_SERVER_KEY=YOUR_NEON_AUTH_SECRET_KEY
 
 # Your Neon connection string
+
 DATABASE_URL=YOUR_NEON_CONNECTION_STRING
 `}
   templateRepo="neon-auth-react-template"
   setupSteps={`
+
 ### Install the React SDK
 
 Make sure you have a [React project](https://react.dev/learn/creating-a-react-app) set up. We show an example here of a Vite React project with React Router.
@@ -51,10 +54,10 @@ import { StackClientApp } from '@stackframe/react';
 import { useNavigate } from 'react-router-dom';
 
 export const stackClientApp = new StackClientApp({
-  projectId: import.meta.env.VITE_STACK_PROJECT_ID,
-  publishableClientKey: import.meta.env.VITE_STACK_PUBLISHABLE_CLIENT_KEY,
-  tokenStore: 'cookie',
-  redirectMethod: { useNavigate },
+projectId: import.meta.env.VITE_STACK_PROJECT_ID,
+publishableClientKey: import.meta.env.VITE_STACK_PUBLISHABLE_CLIENT_KEY,
+tokenStore: 'cookie',
+redirectMethod: { useNavigate },
 });
 \`\`\`
 
@@ -69,28 +72,28 @@ import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { stackClientApp } from './stack';
 
 function HandlerRoutes() {
-  const location = useLocation();
-  
-  return (
-    <StackHandler app={stackClientApp} location={location.pathname} fullPage /\>
-  );
+const location = useLocation();
+
+return (
+<StackHandler app={stackClientApp} location={location.pathname} fullPage /\>
+);
 }
 
 export default function App() {
-  return (
-    <Suspense fallback={null}>
-      <BrowserRouter>
-        <StackProvider app={stackClientApp}>
-          <StackTheme>
-            <Routes>
-              <Route path="/handler/\*" element={<HandlerRoutes />} />
-              <Route path="/" element={<div>hello world</div>} />
-            </Routes>
-          </StackTheme>
-        </StackProvider>
-      </BrowserRouter>
-    </Suspense>
-  );
+return (
+<Suspense fallback={null}>
+<BrowserRouter>
+<StackProvider app={stackClientApp}>
+<StackTheme>
+<Routes>
+<Route path="/handler/\*" element={<HandlerRoutes />} />
+<Route path="/" element={<div>hello world</div>} />
+</Routes>
+</StackTheme>
+</StackProvider>
+</BrowserRouter>
+</Suspense>
+);
 }
 \`\`\`
 

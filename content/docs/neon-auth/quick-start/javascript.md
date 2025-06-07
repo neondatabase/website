@@ -50,10 +50,10 @@ Paste the Neon Auth environment variables from [Step 2](#get-your-neon-auth-keys
 import { StackServerApp } from '@stackframe/js';
 
 export const stackServerApp = new StackServerApp({
-  projectId: process.env.STACK_PROJECT_ID,
-  publishableClientKey: process.env.STACK_PUBLISHABLE_CLIENT_KEY,
-  secretServerKey: process.env.STACK_SECRET_SERVER_KEY,
-  tokenStore: 'memory',
+projectId: process.env.STACK_PROJECT_ID,
+publishableClientKey: process.env.STACK_PUBLISHABLE_CLIENT_KEY,
+secretServerKey: process.env.STACK_SECRET_SERVER_KEY,
+tokenStore: 'memory',
 });
 \`\`\`
 
@@ -68,8 +68,8 @@ export const stackServerApp = new StackServerApp({
    import { stackServerApp } from './stack/server.js';
 
    async function main() {
-     const user = await stackServerApp.getUser('YOUR_USER_ID_HERE');
-     console.log(user);
+   const user = await stackServerApp.getUser('YOUR_USER_ID_HERE');
+   console.log(user);
    }
 
    main().catch(console.error);
@@ -78,10 +78,13 @@ export const stackServerApp = new StackServerApp({
 3. Run your test script however you like:
 
    \`\`\`bash shouldWrap
+
    # if you have a dev/test script in package.json
+
    npm run dev
 
    # or directly:
+
    npx dotenv -e .env.local -- tsx src/test.ts
    \`\`\`
 
