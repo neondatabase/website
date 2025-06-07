@@ -59,7 +59,7 @@ const getHeadingComponent = (heading, withoutAnchorHeading) => {
   return AnchorHeading(heading);
 };
 
-const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCase) => ({
+const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTemplate) => ({
   h2: getHeadingComponent('h2', withoutAnchorHeading),
   h3: getHeadingComponent('h3', withoutAnchorHeading),
   h4: getHeadingComponent('h4', withoutAnchorHeading),
@@ -138,7 +138,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   DocsList,
   RequestForm,
   LatencyCalculator,
-  CTA: isUseCase ? CtaBlock : DocCta,
+  CTA: isTemplate ? CtaBlock : DocCta,
   Testimonial,
   TestimonialsWrapper,
   UseCaseList,
@@ -164,7 +164,7 @@ const Content = ({
   withoutAnchorHeading = false,
   isReleaseNote = false,
   isPostgres = false,
-  isUseCase = false,
+  isTemplate = false,
 }) => (
   <div
     className={clsx(
@@ -172,7 +172,7 @@ const Content = ({
       className,
       {
         'dark:prose-p:text-gray-new-70 dark:prose-strong:text-white dark:prose-li:text-gray-new-70 dark:prose-table:text-gray-new-70':
-          isUseCase,
+          isTemplate,
       }
     )}
   >
@@ -180,7 +180,7 @@ const Content = ({
       <div dangerouslySetInnerHTML={{ __html: content }} />
     ) : (
       <MDXRemote
-        components={getComponents(withoutAnchorHeading, isReleaseNote, isPostgres, isUseCase)}
+        components={getComponents(withoutAnchorHeading, isReleaseNote, isPostgres, isTemplate)}
         source={content}
         options={{
           mdxOptions: {
@@ -202,6 +202,7 @@ Content.propTypes = {
   withoutAnchorHeading: PropTypes.bool,
   isReleaseNote: PropTypes.bool,
   isPostgres: PropTypes.bool,
+  isTemplate: PropTypes.bool,
 };
 
 export default Content;

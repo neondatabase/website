@@ -14,13 +14,13 @@ const Item = ({
   currentAnchor,
   isUserScrolling,
   setIsUserScrolling,
-  isUseCase,
+  isTemplate,
   index,
   currentIndex,
 }) => {
   const href = `#${id}`;
   const isActive = currentAnchor === id || items?.some(({ id }) => currentAnchor === id);
-  const shouldRenderSubItems = !!items?.length && (isUseCase || (isActive && level < 2));
+  const shouldRenderSubItems = !!items?.length && (isTemplate || (isActive && level < 2));
 
   const handleAnchorClick = (e, anchor) => {
     e.preventDefault();
@@ -125,7 +125,7 @@ Item.propTypes = {
   currentAnchor: PropTypes.string,
   setIsUserScrolling: PropTypes.func.isRequired,
   isUserScrolling: PropTypes.bool.isRequired,
-  isUseCase: PropTypes.bool,
+  isTemplate: PropTypes.bool,
 };
 
 export default Item;
