@@ -383,16 +383,6 @@
     {
       "rows": "2",
       "feature": {
-        "title": "Migration Assistance"
-      },
-      "free": false,
-      "launch": false,
-      "scale": false,
-      "business": true
-    },
-    {
-      "rows": "2",
-      "feature": {
         "title": "Technical Support"
       },
       "free": "Community Support",
