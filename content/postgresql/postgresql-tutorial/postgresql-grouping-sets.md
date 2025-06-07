@@ -10,8 +10,8 @@ previousLink:
   title: 'PostgreSQL EXCEPT'
   slug: 'postgresql-tutorial/postgresql-except'
 nextLink:
-  title: 'PostgreSQL ROLLUP'
-  slug: 'postgresql-tutorial/postgresql-rollup'
+  title: 'PostgreSQL CUBE'
+  slug: 'postgresql-tutorial/postgresql-cube'
 ---
 
 **Summary**: in this tutorial, you will learn about grouping sets and how to use the PostgreSQL `GROUPING SETS` clause to generate multiple grouping sets in a query.
