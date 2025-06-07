@@ -17,17 +17,22 @@ updatedOn: '2025-05-23T13:20:56.227Z'
 </InfoBlock>
 
 <GetStarted
-  framework="React"
-  envVars={`
+framework="React"
+envVars={`
+
 # Neon Auth environment variables for React
+
 REACT_APP_STACK_PROJECT_ID=YOUR_NEON_AUTH_PROJECT_ID
 REACT_APP_STACK_PUBLISHABLE_CLIENT_KEY=YOUR_NEON_AUTH_PUBLISHABLE_KEY
 STACK_SECRET_SERVER_KEY=YOUR_NEON_AUTH_SECRET_KEY
+
 # Your Neon connection string
+
 DATABASE_URL=YOUR_NEON_CONNECTION_STRING
-  `}
+`}
   templateRepo="neon-auth-react-template"
   setupSteps={`
+
 #### Run the setup wizard
 
 \`\`\`bash
@@ -57,10 +62,10 @@ import { StackClientApp } from '@stackframe/react';
 import { useNavigate } from 'react-router-dom';
 
 export const stackClientApp = new StackClientApp({
-  projectId: import.meta.env.VITE_STACK_PROJECT_ID,
-  publishableClientKey: import.meta.env.VITE_STACK_PUBLISHABLE_CLIENT_KEY,
-  tokenStore: 'cookie',
-  redirectMethod: { useNavigate },
+projectId: import.meta.env.VITE_STACK_PROJECT_ID,
+publishableClientKey: import.meta.env.VITE_STACK_PUBLISHABLE_CLIENT_KEY,
+tokenStore: 'cookie',
+redirectMethod: { useNavigate },
 });
 \`\`\`
 
@@ -75,25 +80,25 @@ import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { stackClientApp } from './stack';
 
 function HandlerRoutes() {
-  const location = useLocation();
-  return <StackHandler location={location} />;
+const location = useLocation();
+return <StackHandler location={location} />;
 }
 
 export default function App() {
-  return (
-    <BrowserRouter>
-      <StackProvider app={stackClientApp}>
-        <StackTheme>
-          <Suspense fallback={<div>Loading...</div>}>
-            <Routes>
-              <Route path="/handler/*" element={<HandlerRoutes />} />
-              <Route path="/" element={<div>hello world</div>} />
-            </Routes>
-          </Suspense>
-        </StackTheme>
-      </StackProvider>
-    </BrowserRouter>
-  );
+return (
+<BrowserRouter>
+<StackProvider app={stackClientApp}>
+<StackTheme>
+<Suspense fallback={<div>Loading...</div>}>
+<Routes>
+<Route path="/handler/\*" element={<HandlerRoutes />} />
+<Route path="/" element={<div>hello world</div>} />
+</Routes>
+</Suspense>
+</StackTheme>
+</StackProvider>
+</BrowserRouter>
+);
 }
 \`\`\`
 
@@ -104,5 +109,5 @@ npm start
 \`\`\`
 
 Go to [http://localhost:3000/handler/sign-up](http://localhost:3000/handler/sign-up) in your browser. Create a user or two, and you can see them [show up immediately in the database](#see-your-users-in-the-database).
-  `}
+`}
 />
