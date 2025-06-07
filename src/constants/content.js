@@ -2,6 +2,7 @@ const CONTENT_DIR_PATH = 'content';
 const DOCS_DIR_PATH = `${CONTENT_DIR_PATH}/docs`;
 const GUIDES_DIR_PATH = `${CONTENT_DIR_PATH}/guides`;
 const FLOW_DIR_PATH = `${CONTENT_DIR_PATH}/flow`;
+const PLATFORMS_DIR_PATH = `${CONTENT_DIR_PATH}/pages`;
 const FASTER_DIR_PATH = `${CONTENT_DIR_PATH}/faster`;
 const USE_CASES_DIR_PATH = `${CONTENT_DIR_PATH}/use-cases`;
 const CHANGELOG_DIR_PATH = `${CONTENT_DIR_PATH}/changelog`;
@@ -10,6 +11,7 @@ const POSTGRESQL_DIR_PATH = `${CONTENT_DIR_PATH}/postgresql`;
 module.exports = {
   DOCS_DIR_PATH,
   FLOW_DIR_PATH,
+  PLATFORMS_DIR_PATH,
   GUIDES_DIR_PATH,
   USE_CASES_DIR_PATH,
   CHANGELOG_DIR_PATH,
