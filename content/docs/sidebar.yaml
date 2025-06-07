@@ -891,10 +891,14 @@
           items:
             - title: Overview
               slug: neon-auth/overview
-        - section: Get Started
+        - section: Quick Start
           items:
-            - title: Get started
-              slug: neon-auth/get-started
+            - title: Next.js
+              slug: neon-auth/quick-start/nextjs
+            - title: React
+              slug: neon-auth/quick-start/react
+            - title: JavaScript
+              slug: neon-auth/quick-start/javascript
         - section: How Neon Auth Works
           items:
             - title: How Neon Auth works

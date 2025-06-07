@@ -20,6 +20,8 @@ const sharedMdxComponents = {
   // neon-auth-sdk-shared
   SdkOverview: 'shared-content/neon-auth-sdk-shared/overview',
   SdkStackApp: 'shared-content/neon-auth-sdk-shared/objects/stack-app',
+  // Common Neon Auth content
+  GetStarted: 'shared-content/neon-auth-sdk-shared/get-started',
   // Types
   SdkUser: 'shared-content/neon-auth-sdk-shared/types/user',
   SdkTeam: 'shared-content/neon-auth-sdk-shared/types/team',
