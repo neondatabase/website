@@ -25,7 +25,7 @@ export const authOptions = {
       if (session?.user) {
         session.colorSchema = token.colorSchema;
         session.userId = token.uid;
-        session.githubHandle = token.githubHandle;
+        session.gitHubHandle = token.gitHubHandle;
       }
       return session;
     },
@@ -43,7 +43,7 @@ export const authOptions = {
         token.access_token = account.access_token;
       }
       if (profile) {
-        token.githubHandle = profile.login;
+        token.gitHubHandle = profile.login;
       }
 
       return token;
