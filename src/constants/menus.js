@@ -1,20 +1,26 @@
 import AiAgentsGradientIcon from 'icons/header/ai-agent-gradient.inline.svg';
 import AiAgentsIcon from 'icons/header/ai-agent.inline.svg';
+import AiGradientIcon from 'icons/header/ai-gradient.inline.svg';
+import AiIcon from 'icons/header/ai.inline.svg';
 import ApiGradientIcon from 'icons/header/api-gradient.inline.svg';
 import ApiIcon from 'icons/header/api.inline.svg';
+import AuthGradientIcon from 'icons/header/auth-gradient.inline.svg';
+import AuthIcon from 'icons/header/auth.inline.svg';
 import AutoscalingGradientIcon from 'icons/header/autoscaling-gradient.inline.svg';
 import AutoscalingIcon from 'icons/header/autoscaling.inline.svg';
 import BlogIcon from 'icons/header/blog.inline.svg';
+import BranchingGradientIcon from 'icons/header/branching-gradient.inline.svg';
+import BranchingIcon from 'icons/header/branching.inline.svg';
 import BuildingGradientIcon from 'icons/header/building-gradient.inline.svg';
 import BuildingIcon from 'icons/header/building.inline.svg';
 import CareerIcon from 'icons/header/career.inline.svg';
 import ChatIcon from 'icons/header/chat.inline.svg';
+import CloudGradientIcon from 'icons/header/cloud-gradient.inline.svg';
+import CloudIcon from 'icons/header/cloud.inline.svg';
 import ConnectionGradientIcon from 'icons/header/connection-gradient.inline.svg';
 import ConnectionIcon from 'icons/header/connection.inline.svg';
 import DatabaseGradientIcon from 'icons/header/database-gradient.inline.svg';
 import DatabaseIcon from 'icons/header/database.inline.svg';
-import FlowGradientIcon from 'icons/header/flow-gradient.inline.svg';
-import FlowIcon from 'icons/header/flow.inline.svg';
 import FolderGradientIcon from 'icons/header/folder-gradient.inline.svg';
 import FolderIcon from 'icons/header/folder.inline.svg';
 import GearGradientIcon from 'icons/header/gear-gradient.inline.svg';
@@ -22,10 +28,12 @@ import GearIcon from 'icons/header/gear.inline.svg';
 import MigrationGradientIcon from 'icons/header/migration-gradient.inline.svg';
 import MigrationIcon from 'icons/header/migration.inline.svg';
 import PeopleIcon from 'icons/header/people.inline.svg';
-import PrivacyGradientIcon from 'icons/header/privacy-gradient.inline.svg';
-import PrivacyIcon from 'icons/header/privacy.inline.svg';
+import RestoreGradientIcon from 'icons/header/restore-gradient.inline.svg';
+import RestoreIcon from 'icons/header/restore.inline.svg';
 import SaasGradientIcon from 'icons/header/saas-gradient.inline.svg';
 import SaasIcon from 'icons/header/saas.inline.svg';
+import SearchGradientIcon from 'icons/header/search-gradient.inline.svg';
+import SearchIcon from 'icons/header/search.inline.svg';
 import SecurityIcon from 'icons/header/security.inline.svg';
 import ServerlessGradientIcon from 'icons/header/serverless-gradient.inline.svg';
 import ServerlessIcon from 'icons/header/serverless.inline.svg';
@@ -57,14 +65,67 @@ export default {
               to: LINKS.connectionPooling,
             },
             {
-              icon: DatabaseIcon,
-              iconGradient: DatabaseGradientIcon,
-              title: 'Instant PITR',
+              icon: CloudIcon,
+              iconGradient: CloudGradientIcon,
+              title: 'Bottomless storage',
+              description: 'With copy-on-write',
+              to: LINKS.storage,
+            },
+            {
+              icon: BranchingIcon,
+              iconGradient: BranchingGradientIcon,
+              title: 'Branching',
+              description: '1-click environments',
+              to: LINKS.flow,
+            },
+            {
+              icon: RestoreIcon,
+              iconGradient: RestoreGradientIcon,
+              title: 'Instant restores',
               description: 'Copy-on-write storage',
               to: LINKS.branchRestore,
             },
           ],
-          isExtended: true,
+        },
+        {
+          title: 'Ecosystem',
+          items: [
+            {
+              icon: AuthIcon,
+              iconGradient: AuthGradientIcon,
+              title: 'Auth',
+              description: 'UI for data management',
+              to: LINKS.auth,
+            },
+            {
+              icon: SearchIcon,
+              iconGradient: SearchGradientIcon,
+              title: 'Search',
+              description: 'Faster with pg_search',
+              to: LINKS.pgSearch,
+            },
+            {
+              icon: ApiIcon,
+              iconGradient: ApiGradientIcon,
+              title: 'API',
+              description: 'Manage Neon at scale',
+              to: LINKS.api,
+            },
+            {
+              icon: AiIcon,
+              iconGradient: AiGradientIcon,
+              title: 'AI',
+              description: 'Powered by pgvector',
+              to: LINKS.ai,
+            },
+            {
+              icon: MigrationIcon,
+              iconGradient: MigrationGradientIcon,
+              title: 'Migrations',
+              description: 'Minimize downtime',
+              to: LINKS.migration,
+            },
+          ],
         },
         {
           banner: {
@@ -72,46 +133,6 @@ export default {
             description: 'Serverless Postgres',
             to: LINKS.whyNeon,
           },
-        },
-        {
-          title: 'Workflow',
-          items: [
-            {
-              icon: FlowIcon,
-              iconGradient: FlowGradientIcon,
-              title: 'Branching',
-              description: 'For ephemeral environments',
-              to: LINKS.flow,
-            },
-            {
-              icon: MigrationIcon,
-              iconGradient: MigrationGradientIcon,
-              title: 'Migration tool',
-              description: 'Move data to Neon',
-              to: LINKS.migration,
-            },
-          ],
-          isExtended: true,
-        },
-        {
-          title: 'Backend',
-          items: [
-            {
-              icon: ApiIcon,
-              iconGradient: ApiGradientIcon,
-              title: 'Auth',
-              description: 'Authenticate your users',
-              to: LINKS.auth,
-            },
-            {
-              icon: PrivacyIcon,
-              iconGradient: PrivacyGradientIcon,
-              title: 'RLS',
-              description: 'RLS made simple',
-              to: LINKS.rlsAuthorize,
-            },
-          ],
-          isExtended: true,
         },
       ],
     },
@@ -157,7 +178,6 @@ export default {
               to: `${LINKS.useCases}/ai-agents`,
             },
           ],
-          isExtended: true,
         },
         {
           title: 'For teams',
@@ -184,7 +204,6 @@ export default {
               to: LINKS.caseStudies,
             },
           ],
-          isExtended: true,
         },
       ],
     },
