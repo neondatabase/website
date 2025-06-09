@@ -9,7 +9,7 @@
         "items": [
           { "title": "10 projects" },
           { "title": "10 branches per project" },
-          { "title": "0.5 GiB per project" },
+          { "title": "0.5 GB per project" },
           {
             "title": [
               "50 ",
@@ -66,7 +66,7 @@
             "info": "Then $5 per project"
           },
           { "title": "100 branches" },
-          { "title": "0.5 GiB per project", "info": "Then $0.39-0.29 per GB" },
+          { "title": "0.5 GB per project", "info": "Then $0.39-0.29 per GB" },
           {
             "title": [
               "100 ",
