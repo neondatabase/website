@@ -38,7 +38,7 @@ const icons = {
   },
 };
 
-const DynamicPage = async ({ params }) => {
+const WpPage = async ({ params }) => {
   const page = await getWpPageBySlug(params.slug);
 
   if (!page) return notFound();
@@ -191,6 +191,4 @@ export async function generateMetadata({ params }) {
   });
 }
 
-export const revalidate = 60;
-
-export default DynamicPage;
+export default WpPage;
