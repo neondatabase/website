@@ -64,7 +64,7 @@ Follow these steps to set up your project and virtual environment:
     Next, add all the necessary dependencies for your project:
 
     ```bash
-    uv add python-dotenv asyncpg loguru fastapi uvicorn requests
+    uv add python-dotenv asyncpg loguru fastapi uvicorn
     ```
 
     Where each package does the following :
