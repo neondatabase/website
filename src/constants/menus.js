@@ -102,14 +102,14 @@ export default {
               iconGradient: SearchGradientIcon,
               title: 'Search',
               description: 'Faster with pg_search',
-              to: LINKS.auth,
+              to: LINKS.pgSearch,
             },
             {
               icon: ApiIcon,
               iconGradient: ApiGradientIcon,
               title: 'API',
               description: 'Manage Neon at scale',
-              to: LINKS.auth,
+              to: LINKS.api,
             },
             {
               icon: AiIcon,
