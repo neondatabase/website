@@ -801,6 +801,8 @@
               slug: https://docs.peerdb.io/mirror/cdc-neon-clickhouse
             - title: Confluent
               slug: guides/logical-replication-kafka-confluent
+            - title: Databricks
+              slug: guides/logical-replication-databricks
             - title: Decodable
               slug: guides/logical-replication-decodable
             - title: Estuary Flow
