@@ -10,6 +10,9 @@ import ArrowBackIcon from 'icons/docs/sidebar/arrow-back.inline.svg';
 
 import Item from './item';
 
+const sectionTitleClassName =
+  'py-1.5 text-[12px] font-medium uppercase leading-none tracking-tight text-gray-new-50';
+
 const Section = ({
   depth,
   title,
@@ -33,14 +36,14 @@ const Section = ({
   };
 
   return (
-    <li className="border-b border-gray-new-94 py-2.5 first:pt-0 last:border-0 dark:border-gray-new-10 lg:dark:border-gray-new-15/70 md:py-[11px]">
+    <li className="border-b border-gray-new-94 py-2.5 first:pt-0 last:border-0 dark:border-gray-new-10 lg:dark:border-gray-new-15/70">
       {section !== 'noname' &&
         (collapsible ? (
           <button
             className={clsx(
               'flex w-full items-center justify-between pr-1 text-sm',
-              'py-1.5 font-medium leading-tight text-gray-new-50 md:py-[7px]',
-              'transition-colors duration-200 hover:text-gray-new-20 dark:hover:text-gray-new-90'
+              sectionTitleClassName,
+              'transition-colors duration-200 hover:text-black-new dark:hover:text-white'
             )}
             type="button"
             onClick={handleToggle}
@@ -49,13 +52,11 @@ const Section = ({
             <Chevron className={clsx('w-1.5', !isCollapsed && 'rotate-90')} />
           </button>
         ) : (
-          <span className="block py-1.5 text-[10px] font-medium uppercase leading-tight text-gray-new-50 md:py-[7px]">
-            {section}
-          </span>
+          <span className={clsx('block', sectionTitleClassName)}>{section}</span>
         ))}
       {items && (
         <LazyMotion features={domAnimation}>
-          <m.ul
+          <m.div
             className="overflow-hidden"
             initial={collapsible ? 'collapsed' : 'expanded'}
             animate={collapsible && isCollapsed ? 'collapsed' : 'expanded'}
@@ -65,34 +66,36 @@ const Section = ({
             }}
             transition={{ duration: 0.2 }}
           >
-            {items.map((item, index) => (
-              <Item
-                {...item}
-                key={index}
-                basePath={basePath}
-                activeMenuList={activeMenuList}
-                setActiveMenuList={setActiveMenuList}
-                closeMobileMenu={closeMobileMenu}
-              >
-                {item.items && (
-                  <Menu
-                    depth={depth + 1}
-                    title={item.title}
-                    slug={item.slug}
-                    basePath={basePath}
-                    icon={item.icon}
-                    items={item.items}
-                    parentMenu={{ title, slug }}
-                    setMenuHeight={setMenuHeight}
-                    menuWrapperRef={menuWrapperRef}
-                    activeMenuList={activeMenuList}
-                    setActiveMenuList={setActiveMenuList}
-                    closeMobileMenu={closeMobileMenu}
-                  />
-                )}
-              </Item>
-            ))}
-          </m.ul>
+            <ul className={collapsible && 'mt-1'}>
+              {items.map((item, index) => (
+                <Item
+                  {...item}
+                  key={index}
+                  basePath={basePath}
+                  activeMenuList={activeMenuList}
+                  setActiveMenuList={setActiveMenuList}
+                  closeMobileMenu={closeMobileMenu}
+                >
+                  {item.items && (
+                    <Menu
+                      depth={depth + 1}
+                      title={item.title}
+                      slug={item.slug}
+                      basePath={basePath}
+                      icon={item.icon}
+                      items={item.items}
+                      parentMenu={{ title, slug }}
+                      setMenuHeight={setMenuHeight}
+                      menuWrapperRef={menuWrapperRef}
+                      activeMenuList={activeMenuList}
+                      setActiveMenuList={setActiveMenuList}
+                      closeMobileMenu={closeMobileMenu}
+                    />
+                  )}
+                </Item>
+              ))}
+            </ul>
+          </m.div>
         </LazyMotion>
       )}
     </li>
