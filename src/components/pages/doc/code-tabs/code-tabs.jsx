@@ -6,7 +6,7 @@ import React, { Fragment, useState, useMemo, useContext, useEffect } from 'react
 
 import { CodeTabsContext } from 'contexts/docs/code-tabs-context';
 
-const CodeTabs = ({ children = null, labels = [], reverse = false }) => {
+const CodeTabs = ({ labels = [], reverse = false, children }) => {
   const { activeTab, setActiveTab } = useContext(CodeTabsContext);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -61,12 +61,9 @@ const CodeTabs = ({ children = null, labels = [], reverse = false }) => {
 };
 
 CodeTabs.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.arrayOf(PropTypes.object),
-  ]),
   labels: PropTypes.arrayOf(PropTypes.string),
   reverse: PropTypes.bool,
+  children: PropTypes.node.isRequired,
 };
 
 export default CodeTabs;

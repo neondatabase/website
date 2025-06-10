@@ -16,10 +16,7 @@ const CodeTabsProvider = ({ children }) => {
 };
 
 CodeTabsProvider.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.arrayOf(PropTypes.object),
-  ]),
+  children: PropTypes.node.isRequired,
 };
 
 export { CodeTabsContext, CodeTabsProvider };
