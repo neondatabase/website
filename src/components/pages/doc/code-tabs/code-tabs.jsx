@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { Fragment, useState, useMemo, useContext, useEffect } from 'react';
 
-import { CodeTabsContext } from 'contexts/docs/code-tabs-context';
+import { CodeTabsContext } from 'contexts/code-tabs-context';
 
 const CodeTabs = ({ labels = [], reverse = false, children }) => {
   const { activeTab, setActiveTab } = useContext(CodeTabsContext);

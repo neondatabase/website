@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { Children, useState, useEffect, useContext } from 'react';
 
-import { TabsContext } from 'contexts/docs/tabs-context';
+import { TabsContext } from 'contexts/tabs-context';
 
 const Tabs = ({ labels = [], children }) => {
   const { activeTab, setActiveTab } = useContext(TabsContext);

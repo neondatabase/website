@@ -5,8 +5,6 @@ import Sidebar from 'components/pages/doc/sidebar';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
 import { DOCS_BASE_PATH } from 'constants/docs';
-import { CodeTabsProvider } from 'contexts/docs/code-tabs-context';
-import { TabsProvider } from 'contexts/docs/tabs-context';
 import { getSidebar } from 'utils/api-docs';
 
 const NeonDocsLayout = async ({ children }) => {
@@ -40,10 +38,7 @@ const NeonDocsLayout = async ({ children }) => {
           size="1408"
         >
           <ModeToggler className="mb-7 hidden md:flex" />
-
-          <TabsProvider>
-            <CodeTabsProvider>{children}</CodeTabsProvider>
-          </TabsProvider>
+          {children}
         </Container>
       </div>
     </Layout>

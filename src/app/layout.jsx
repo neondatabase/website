@@ -3,6 +3,9 @@ import 'styles/globals.css';
 import dynamic from 'next/dynamic';
 import Script from 'next/script';
 
+import { CodeTabsProvider } from 'contexts/code-tabs-context';
+import { TabsProvider } from 'contexts/tabs-context';
+
 import { inter, esbuild } from './fonts';
 import { HomepageVisitProvider } from './homepage-visit-context';
 import PostHogProvider from './posthog-provider';
@@ -36,7 +39,11 @@ const RootLayout = ({ children }) => (
         <PostHogProvider>
           <PostHogPageView />
           <ThemeProvider>
-            <HomepageVisitProvider>{children}</HomepageVisitProvider>
+            <HomepageVisitProvider>
+              <TabsProvider>
+                <CodeTabsProvider>{children}</CodeTabsProvider>
+              </TabsProvider>
+            </HomepageVisitProvider>
           </ThemeProvider>
         </PostHogProvider>
       </SessionProvider>
