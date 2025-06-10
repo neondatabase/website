@@ -2,10 +2,24 @@
 
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { Children, useState } from 'react';
+import { Children, useState, useEffect, useContext } from 'react';
+
+import { TabsContext } from 'contexts/docs/tabs-context';
 
 const Tabs = ({ labels = [], children }) => {
+  const { activeTab, setActiveTab } = useContext(TabsContext);
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const tmp = labels.indexOf(activeTab);
+    if (tmp !== -1) setCurrentIndex(tmp);
+  }, [activeTab, labels]);
+
+  const handleTabClick = (index) => {
+    const label = labels[index];
+    setCurrentIndex(index);
+    setActiveTab(label);
+  };
 
   return (
     <figure className="my-5 max-w-full overflow-hidden rounded-md bg-gray-new-98 dark:bg-gray-new-10">
@@ -20,8 +34,8 @@ const Tabs = ({ labels = [], children }) => {
             )}
             key={`lb-${index}`}
             type="button"
-            onClick={() => setCurrentIndex(index)}
-            onKeyDown={() => setCurrentIndex(index)}
+            onClick={() => handleTabClick(index)}
+            onKeyDown={() => handleTabClick(index)}
           >
             {label}
           </button>

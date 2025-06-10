@@ -4,16 +4,16 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { Fragment, useState, useMemo, useContext, useEffect } from 'react';
 
-import { ActiveLabelContext } from './CodeTabsContext';
+import { CodeTabsContext } from 'contexts/docs/code-tabs-context';
 
 const CodeTabs = ({ children = null, labels = [], reverse = false }) => {
-  const { activeLabel, setActiveLabel } = useContext(ActiveLabelContext);
+  const { activeTab, setActiveTab } = useContext(CodeTabsContext);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    const tmp = labels.indexOf(activeLabel);
+    const tmp = labels.indexOf(activeTab);
     if (tmp !== -1) setCurrentIndex(tmp);
-  }, [activeLabel, labels]);
+  }, [activeTab, labels]);
 
   const displayedLabels = useMemo(
     () => (reverse ? [...labels].reverse() : labels),
@@ -28,7 +28,7 @@ const CodeTabs = ({ children = null, labels = [], reverse = false }) => {
   const handleTabClick = (index) => {
     const label = labels[index];
     setCurrentIndex(index);
-    setActiveLabel(label);
+    setActiveTab(label);
   };
 
   return (
