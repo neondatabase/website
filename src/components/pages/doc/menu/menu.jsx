@@ -11,7 +11,7 @@ import ArrowBackIcon from 'icons/docs/sidebar/arrow-back.inline.svg';
 import Item from './item';
 
 const sectionTitleClassName =
-  'py-1.5 text-[12px] font-medium uppercase leading-none tracking-tight text-gray-new-50';
+  'py-1.5 text-xs font-medium uppercase leading-none tracking-tight text-gray-new-50';
 
 const Section = ({
   depth,
@@ -41,7 +41,7 @@ const Section = ({
         (collapsible ? (
           <button
             className={clsx(
-              'flex w-full items-center justify-between pr-1 text-sm',
+              'flex w-full items-center justify-between pr-1',
               sectionTitleClassName,
               'transition-colors duration-200 hover:text-black-new dark:hover:text-white'
             )}
