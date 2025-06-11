@@ -1,16 +1,26 @@
 'use client';
 
 import clsx from 'clsx';
+import Image from 'next/image';
 import { usePostHog } from 'posthog-js/react';
 import { useEffect, useState } from 'react';
 
 import Button from 'components/shared/button';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
+import checkIcon from 'icons/pricing/table/check.svg';
+import plusIcon from 'icons/pricing/table/plus.svg';
+import statsIcon from 'icons/pricing/table/stats.svg';
 
 import PLANS from '../data/plans.json';
 
 import TableCell from './table-cell';
 import TableHeading from './table-heading';
+
+const ICONS = {
+  plus: plusIcon,
+  check: checkIcon,
+  stats: statsIcon,
+};
 
 // Styles to set fixed height for table cells
 const rowHeight = {
@@ -101,6 +111,7 @@ const Table = () => {
                 {tableRows.map((item, index) => {
                   const { rows = 1, mobileRows, feature } = item;
                   const featureTitle = feature?.title || feature;
+                  const icon = feature?.icon && ICONS[feature.icon];
 
                   if (i === 0) {
                     const isGroupHeader = feature?.groupHeader;
@@ -126,6 +137,15 @@ const Table = () => {
                       >
                         {isGroupHeader ? (
                           <>
+                            {icon && (
+                              <Image
+                                className="mb-2"
+                                src={icon}
+                                width={18}
+                                height={18}
+                                alt={featureTitle}
+                              />
+                            )}
                             <span className="text-lg font-medium leading-none tracking-extra-tight">
                               {featureTitle}
                             </span>

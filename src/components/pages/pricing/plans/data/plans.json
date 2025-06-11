@@ -29,9 +29,10 @@
   },
   "cols": [
     {
-      "rows": "2",
+      "rows": "6",
       "feature": {
         "groupHeader": true,
+        "icon": "check",
         "title": "Resources included",
         "subtitle": "Within your monthly fee"
       }
@@ -109,9 +110,10 @@
       "enterprise": ""
     },
     {
-      "rows": "5",
+      "rows": "6",
       "feature": {
         "groupHeader": true,
+        "icon": "stats",
         "title": "Usage-based pricing",
         "subtitle": "Once you exceed your plan’s included resources, you start paying per usage"
       }
@@ -205,9 +207,10 @@
       "enterprise": ""
     },
     {
-      "rows": "4",
+      "rows": "6",
       "feature": {
         "groupHeader": true,
+        "icon": "plus",
         "title": "Add-ons",
         "subtitle": "Incur monthly charges added to your base fee"
       }
