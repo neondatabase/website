@@ -10,6 +10,8 @@ In the world of modern web development, scaling applications can introduce signi
 
 To overcome these challenges, many development teams are turning to microfrontends, which break down large frontend applications into smaller, independently deployable units. This shift not only accelerates development workflows but also enhances the end-user experience by optimizing performance.
 
+<MegaLink tag="Case Study" title="Retool uses the Neon API to manage over 300,000 databases with just one engineer — handling everything from provisioning to quota enforcement." url="/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases" />
+
 This article explores the benefits of adopting microfrontends, outlines the differences between vertical and horizontal approaches, and provides a migration guide.
 
 <CTA title="Start building" description="Sign up today and claim $100 in credits when you upgrade." buttonText="Claim offer" buttonUrl="https://fyi.neon.tech/credits" />

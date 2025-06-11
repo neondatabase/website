@@ -13,20 +13,19 @@ import greenGlow from './images/green-glow.png';
 const sizeClassNames = {
   sm: {
     block: 'px-6 py-5 sm:px-5 mt-8 xl:mt-5',
-    heading: 'text-xl sm:text-lg leading-none tracking-extra-tight',
-    description: 'leading-snug tracking-extra-tight',
+    heading: 'text-xl sm:text-lg leading-none tracking-extra-tight font-medium',
+    description: 'leading-snug tracking-extra-tight mt-2.5',
   },
   md: {
     block: 'px-7 py-6 lg:pr-10 sm:p-6 mt-10 xl:mt-9 lg:mt-8 sm:mt-6',
-    heading: 'text-2xl sm:text-xl leading-dense tracking-tighter',
-    description: 'text-14 leading-tight tracking-tight',
+    heading: 'text-2xl sm:text-xl leading-snug tracking-tighter font-semibold',
+    description: 'text-14 leading-tight tracking-tight mt-1.5',
   },
 };
 
 const themeClassNames = {
   row: {
     container: 'items-center justify-between',
-    content: 'max-w-sm',
   },
   column: {
     container: 'flex-col items-start',
@@ -58,12 +57,12 @@ const CtaBlock = ({
         themeClassNames[theme].container
       )}
     >
-      <div className={clsx('sm:text-center', themeClassNames[theme].content)}>
-        <h3 className={clsx('font-medium', sizeClassNames[size].heading)}>{title}</h3>
+      <div className="sm:text-center">
+        <h3 className={clsx(sizeClassNames[size].heading)}>{title}</h3>
         {description && (
           <p
             className={clsx(
-              'mt-2.5 text-pretty [&>a:hover]:underline [&>a]:text-primary-2',
+              'text-pretty [&>a:hover]:underline [&>a]:text-primary-2',
               sizeClassNames[size].description,
               hasDecor ? 'text-gray-new-70' : 'text-gray-new-60'
             )}
