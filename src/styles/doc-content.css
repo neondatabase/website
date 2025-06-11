@@ -312,8 +312,31 @@
   }
 
   .prose-template {
-    h2 {
+    @apply text-lg md:text-base;
+
+    > h2 {
       @apply text-[30px] md:text-2xl;
+
+      & + p {
+        @apply mt-4;
+      }
+    }
+
+    > h3 {
+      @apply text-xl;
+    }
+
+    > p {
+      @apply my-6 !text-gray-new-98;
+    }
+
+    > ul,
+    > ol {
+      @apply my-6 !text-gray-new-98;
+
+      > li {
+        @apply !text-gray-new-98;
+      }
     }
   }
 }
