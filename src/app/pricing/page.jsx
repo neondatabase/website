@@ -53,7 +53,7 @@ const faqItems = [
   },
   {
     question: 'How do I enable add-ons for my plans?',
-    answer: `Most of them can be enabled on a self-serve basis via the Neon console. If you need any assistance, <a href="https://neon.tech/contact sales">contact us</a>.`,
+    answer: `Most of them can be enabled on a self-serve basis via the Neon console. If you need any assistance, <a href="/contact-sales">contact us</a>.`,
   },
   {
     question: 'Is Neon compliant?',
@@ -65,7 +65,7 @@ const faqItems = [
   },
   {
     question: 'Can Neon help with migrations?',
-    answer: `Absolutely. Our expert team assists Business and Enterprise clients throughout the migration process. <a href="https://neon.tech/migration-assistance">Tell us here</a> if you're considering migrating to Neon. `,
+    answer: `Absolutely. Our expert team assists Business and Enterprise clients throughout the migration process. <a href="/migration-assistance">Tell us here</a> if you're considering migrating to Neon. `,
   },
 ];
 
