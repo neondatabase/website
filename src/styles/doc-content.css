@@ -310,4 +310,10 @@
       @apply text-green-45 transition-colors duration-200 hover:text-[#47ffc2];
     }
   }
+
+  .prose-template {
+    h2 {
+      @apply text-[30px] md:text-2xl;
+    }
+  }
 }
