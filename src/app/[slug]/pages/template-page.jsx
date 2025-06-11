@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { notFound } from 'next/navigation';
 
-import Post from 'components/pages/doc/post';
+import Post from 'components/pages/template/post';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
 import { TEMPLATE_PAGES_DIR_PATH } from 'constants/content';
@@ -47,11 +47,9 @@ const TemplatePage = ({ params }) => {
             content={content}
             data={data}
             breadcrumbs={[]}
-            navigationLinks={{ previousLink: null, nextLink: null }}
             currentSlug={slug}
             githubPath={githubPath}
             tableOfContents={tableOfContents}
-            isTemplate
           />
         </Container>
       </div>
