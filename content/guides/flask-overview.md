@@ -393,7 +393,7 @@ Besides the above steps, as your Flask application grows, you can consider a few
    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://user:password@pooler.address:5432/database'
    ```
 
-   Refer to the [Neon documentation on connection pooling](https://neon.tech/docs/connect/connection-pooling) for detailed instructions.
+   Refer to the [Neon documentation on connection pooling](/docs/connect/connection-pooling) for detailed instructions.
 
 2. For performance optimization, consider caching frequently accessed data. Caching reduces the load on your database and speeds up response times for users.
 

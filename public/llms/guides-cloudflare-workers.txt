@@ -1,10 +1,14 @@
 # Use Neon with Cloudflare Workers
 
-Connect a Neon Postgres database to your Cloudflare Workers application
+> This guide demonstrates how to connect a Neon Postgres database to a Cloudflare Workers application using the Neon serverless driver, covering setup, implementation, and deployment.
+
+## Source
+
+- [Use Neon with Cloudflare Workers HTML](https://neon.com/docs/guides/cloudflare-workers): The original HTML version of this documentation
 
 [Cloudflare Workers](https://workers.cloudflare.com/) is a serverless platform allowing you to deploy your applications globally across Cloudflare's network. It supports running JavaScript, TypeScript, and WebAssembly, making it a great choice for high-performance, low-latency web applications.
 
-This guide demonstrates how to connect to a Neon Postgres database from your Cloudflare Workers application. We'll use the [Neon serverless driver](/docs/serverless/serverless-driver) to connect to the database and make queries.
+This guide demonstrates how to connect to a Neon Postgres database from your Cloudflare Workers application. We'll use the [Neon serverless driver](https://neon.com/docs/serverless/serverless-driver) to connect to the database and make queries.
 
 ## Prerequisites
 
@@ -45,7 +49,7 @@ Log in to the Neon Console and navigate to the [Projects](https://console.neon.t
 
 ### Retrieve your Neon database connection string
 
-Navigate to your **Project Dashboard** in the Neon Console and click **Connect** to open the **Connect to your database** modal to find your database connection string. Enable the **Connection pooling** toggle to add the `-pooler` option to your connection string. A pooled connection is recommended for serverless environments. For more information, see [Connection pooling](/docs/connect/connection-pooling).
+Navigate to your **Project Dashboard** in the Neon Console and click **Connect** to open the **Connect to your database** modal to find your database connection string. Enable the **Connection pooling** toggle to add the `-pooler` option to your connection string. A pooled connection is recommended for serverless environments. For more information, see [Connection pooling](https://neon.com/docs/connect/connection-pooling).
 
 Your pooled connection string should look similar to this:
 
@@ -84,7 +88,7 @@ The `create-cloudflare` CLI installs the `Wrangler` tool to manage the full work
 
 ### Implement the Worker script
 
-We'll use the [Neon serverless driver](/docs/serverless/serverless-driver) to connect to the Neon database, so you need to install it as a dependency:
+We'll use the [Neon serverless driver](https://neon.com/docs/serverless/serverless-driver) to connect to the Neon database, so you need to install it as a dependency:
 
 ```bash
 npm install @neondatabase/serverless
@@ -188,15 +192,15 @@ Current Deployment ID: de8841dd-46e4-436d-b2c4-569e91f54c72
 
 To delete your Worker, you can use the Cloudflare dashboard or run `wrangler delete` from your project directory, specifying your project name. Refer to the [Wrangler documentation](https://developers.cloudflare.com/workers/wrangler/commands/#delete-3) for more details.
 
-To delete your Neon project, follow the steps outlined in the Neon documentation under [Delete a project](/docs/manage/projects#delete-a-project).
+To delete your Neon project, follow the steps outlined in the Neon documentation under [Delete a project](https://neon.com/docs/manage/projects#delete-a-project).
 
 ## Source code
 
 You can find the source code for the application described in this guide on GitHub.
 
-
-Use Neon with Cloudflare Workers
-
+<DetailIconCards>
+<a href="https://github.com/neondatabase/examples/tree/main/deploy-with-cloudflare-workers" description="Connect a Neon Postgres database to your Cloudflare Workers application" icon="github">Use Neon with Cloudflare Workers</a>
+</DetailIconCards>
 
 ## Resources
 

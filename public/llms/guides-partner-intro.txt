@@ -1,38 +1,31 @@
 # Partner guide
 
-Learn how to integrate your platform or service with Neon
+> This guide explains how to integrate your platform or service with Neon, covering partnership benefits, integration options, and usage limit configuration for offering managed Postgres databases to your users.
+
+## Source
+
+- [Partner guide HTML](https://neon.com/docs/guides/partner-intro): The original HTML version of this documentation
 
 Learn how you can offer instant, managed Postgres databases to your users with Neon. This guide covers how to become a Neon partner, integrate your platform or service with Neon, set usage limits for your users, and more.
-
-Vercel, Replit, Retool, and Koyeb have integrated Neon into their platforms." isIntro>
 
 ## Partnering with Neon
 
 Learn about the benefits of integrating with Neon and how to become a partner.
 
 
-
-Partner page
-
-Become a Partner
-
+- **Partner page**: Read about the benefits of partnering with Neon - [https://neon.com/partners](https://neon.com/partners)
+- **Become a Partner**: Request a meeting with our partnership team - [https://neon.com/partners#partners-apply](https://neon.com/partners#partners-apply)
 
 
 ## Integrate with Neon
 
 Find out how you can integrate with Neon.
 
-
-
-Get started
-
-Neon API
-
-OAuth
-
-Sample OAuth app
-
-Toolkit for AI Agents
+- **Get started**: Learn the essentials for integrating with Neon - [https://neon.com/docs/guides/partner-get-started](https://neon.com/docs/guides/partner-get-started)
+- **Neon API**: Integrate using the Neon API - [https://neon.com/docs/reference/api-reference](https://neon.com/docs/reference/api-reference)
+- **OAuth**: Integrate with Neon using OAuth - [https://neon.com/docs/guides/oauth-integration](https://neon.com/docs/guides/oauth-integration)
+- **Sample OAuth app**: Check out a sample OAuth application - [https://github.com/neondatabase/neon-branches-visualizer](https://github.com/neondatabase/neon-branches-visualizer)
+- **Toolkit for AI Agents**: Spin up a Postgres database in seconds - [https://github.com/neondatabase/toolkit](https://github.com/neondatabase/toolkit)
 
 
 
@@ -40,8 +33,5 @@ Toolkit for AI Agents
 
 Learn how to set limits for your customers and track usage.
 
-
-
-Configure consumption limits
-
-Query consumption metrics
+- **Configure consumption limits**: Use the Neon API to set consumption limits for your customers - [https://neon.com/docs/guides/partner-consumption-limits](https://neon.com/docs/guides/partner-consumption-limits)
+- **Query consumption metrics**: Track usage with Neon's consumption metrics APIs - [https://neon.com/docs/guides/partner-consumption-metrics](https://neon.com/docs/guides/partner-consumption-metrics)

@@ -3,10 +3,10 @@ title: Schema diff tutorial
 subtitle: Step-by-step guide showing you how to compare two development branches using
   Schema Diff
 enableTableOfContents: true
-updatedOn: '2025-01-06T23:39:35.456Z'
+updatedOn: '2025-05-30T16:54:40.479Z'
 ---
 
-In this guide we will create an initial schema on a new database called `people` on our `main` branch. We'll then create a development branch called `dev/jordan`, following our recommended convention for naming development branches. After making schema changes on `dev/jordan`, we'll use the **Schema Diff** tool on the **Branches** page to get a side-by-side, GitHub-style visual comparison between the `dev/jordan` development branch and `main`.
+In this guide we will create an initial schema on a new database called `people` on our `production` branch. We'll then create a development branch called `feature/address`, following one possible convention for naming feature branches. After making schema changes on `feature/address`, we'll use the **Schema Diff** tool on the **Branches** page to get a side-by-side, GitHub-style visual comparison between the `feature/address` development branch and `production`.
 
 ## Before you start
 
@@ -22,7 +22,7 @@ To complete this tutorial, you'll need:
 
 ## Create the Initial Schema
 
-First, create a new database called `people` on the `main` branch and add some sample data to it.
+First, create a new database called `people` on the `production` branch and add some sample data to it.
 
 <Tabs labels={["Console", "CLI", "API"]}>
 
@@ -30,7 +30,7 @@ First, create a new database called `people` on the `main` branch and add some s
 
 1. Create the database.
 
-   In the **Neon Console**, go to **Databases** &#8594; **New Database**. Make sure your `main` branch is selected, then create the new database called `people`.
+   In the **Neon Console**, go to **Databases** &#8594; **New Database**. Make sure your `production` branch is selected, then create the new database called `people`.
 
 2. Add the schema.
 
@@ -148,9 +148,9 @@ First, create a new database called `people` on the `main` branch and add some s
 
 ## Create a development branch
 
-Create a new development branch off of `main`. This branch will be an exact, isolated copy of `main`.
+Create a new development branch off of `production`. This branch will be an exact, isolated copy of `production`.
 
-For the purposes of this tutorial, name the branch `dev/jordan`, following our recommended convention of creating a long-lived development branch for each member of your team.
+For the purposes of this tutorial, name the branch `feature/address`, which could work as a good convention for creating isolated branches for working on specific features.
 
 <Tabs labels={["Console", "CLI", "API"]}>
 
@@ -160,12 +160,12 @@ For the purposes of this tutorial, name the branch `dev/jordan`, following our r
 
    On the **Branches** page, click **Create Branch**, making sure of the following:
 
-   - Select `main` as the default branch.
-   - Name the branch `dev/jordan`.
+   - Select `production` as the default branch.
+   - Name the branch `feature/address`.
 
 1. Verify the schema on your new branch
 
-   From the **SQL Editor**, use the meta-command `\d person` to inspect the schema of the `person` table. Make sure that the `people` database on the branch `dev/jordan` is selected.
+   From the **SQL Editor**, use the meta-command `\d person` to inspect the schema of the `person` table. Make sure that the `people` database on the branch `feature/address` is selected.
 
    ![use metacommand to inspect schema](/docs/guides/schema_diff_d_metacommand.png)
 
@@ -180,17 +180,17 @@ For the purposes of this tutorial, name the branch `dev/jordan`, following our r
    Using the Neon CLI, create the development branch. Include `--project-id` if you have multiple projects.
 
    ```bash
-   neon branches create --name dev/jordan --parent main
+   neon branches create --name feature/address --parent production
    ```
 
 1. Verify the schema
 
-   To verify that this branch includes the initial schema created on `main`, connect to `dev/jordan`, then view the `person` table.
+   To verify that this branch includes the initial schema created on `production`, connect to `feature/address`, then view the `person` table.
 
-   1. Get the connection string for the `people` database on branch `dev/jordan` using the CLI.
+   1. Get the connection string for the `people` database on branch `feature/address` using the CLI.
 
       ```bash
-      neon connection-string dev/jordan --database-name people
+      neon connection-string feature/address --database-name people
       ```
 
       This gives you the connection string which you can then copy.
@@ -225,13 +225,13 @@ For the purposes of this tutorial, name the branch `dev/jordan`, following our r
           "person_email_key" UNIQUE CONSTRAINT, btree (email)
       ```
 
-      You can do the same thing for your `main` branch and get identical results.
+      You can do the same thing for your `production` branch and get identical results.
 
 </TabItem>
 
 <TabItem>
 
-Using the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) API, create a development branch named `dev/jordan`. You'll need to specify the `project_id`, `parent_id`, branch `name`, and add a `read_write` compute endpoint — you need a compute endpoint to connection the branch.
+Using the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) API, create a development branch named `feature/address`. You'll need to specify the `project_id`, `parent_id`, branch `name`, and add a `read_write` compute (you need a compute to connect to the branch).
 
 ```bash
 curl --request POST \
@@ -241,7 +241,7 @@ curl --request POST \
 --header 'content-type: application/json' \
 --data '{
    "branch": {
-      "name": "dev/jordan",
+      "name": "feature/address",
       "parent_id": "br-bitter-bird-a56n6lh4"
    },
    "endpoints": [
@@ -258,12 +258,12 @@ curl --request POST \
 
 ## Update schema on a dev branch
 
-Let's introduce some differences between the two branches. Add a new table to store addresses on the `dev/jordan` branch.
+Let's introduce some differences between the two branches. Add a new table to store addresses on the `feature/address` branch.
 
 <Tabs labels={["Console","CLI", "API"]}>
 
 <TabItem>
-In the **SQL Editor**, make sure you select `dev/jordan` as the branch and `people` as the database.
+In the **SQL Editor**, make sure you select `feature/address` as the branch and `people` as the database.
 
 Enter this SQL statement to create a new `address` table.
 
@@ -283,12 +283,12 @@ CREATE TABLE address (
 
 <TabItem>
 
-1. Connect to your `dev/jordan` branch
+1. Connect to your `feature/address` branch
 
    By adding `--psql` to the CLI command, you can start the `psql` connection without having to enter the connection string directly:
 
    ```bash
-   neon connection-string dev/jordan --database-name people --psql
+   neon connection-string feature/address --database-name people --psql
    ```
 
    Response:
@@ -320,7 +320,7 @@ CREATE TABLE address (
 
 <TabItem>
 
-1. Retrieve the database connection string for the `dev/jordan` branch using [Get connection URI](https://api-docs.neon.tech/reference/getconnectionuri) endpoint:
+1. Retrieve the database connection string for the `feature/address` branch using [Get connection URI](https://api-docs.neon.tech/reference/getconnectionuri) endpoint:
 
    ```bash
    curl --request GET \
@@ -337,7 +337,7 @@ CREATE TABLE address (
    }
    ```
 
-1. Connect to the `people` database on the `dev/jordan` branch with `psql`:
+1. Connect to the `people` database on the `feature/address` branch with `psql`:
 
    ```bash shouldWrap
    psql 'postgresql://alex:*********@ep-hidden-sun-a5de9i5h-pooler.us-east-2.aws.neon.tech/people?sslmode=require'
@@ -369,7 +369,7 @@ Now that you have some differences between your branches, you can view the schem
 
 <TabItem>
 
-1. Click on `dev/jordan` to open the detailed view, then under **Compare to Parent** click **Open schema diff**.
+1. Click on `feature/address` to open the detailed view, then click **Schema diff**.
 
    ![select branches for schema diff](/docs/guides/schema_diff_make_selection.png)
 
@@ -377,7 +377,7 @@ Now that you have some differences between your branches, you can view the schem
 
    ![schema diff results](/docs/guides/schema_diff_result.png)
 
-You will see the schema differences between `dev/jordan` and its parent `main`, including the new address table that we added to the `dev/jordan` branch.
+You will see the schema differences between `feature/address` and its parent `production`, including the new address table that we added to the `feature/address` branch.
 
 You can also launch Schema Diff from the **Restore** page, usually as part of verifying schemas before you restore a branch to its own or another branch's history. See [Instant restore](/docs/guides/branch-restore) for more info.
 
@@ -385,13 +385,13 @@ You can also launch Schema Diff from the **Restore** page, usually as part of ve
 
 <TabItem>
 
-Compare the schema of `dev/jordan` to its parent branch using the `schema-diff` command.
+Compare the schema of `feature/address` to its parent branch using the `schema-diff` command.
 
 ```bash
-neon branches schema-diff main dev/jordan --database people
+neon branches schema-diff production feature/address --database people
 ```
 
-The result shows a comparison between the `dev/jordan` branch and its parent branch for the database `people`. The output indicates that the `address` table and its related sequences and constraints have been added in the `dev/jordan` branch but are not present in its parent branch `main`.
+The result shows a comparison between the `feature/address` branch and its parent branch for the database `people`. The output indicates that the `address` table and its related sequences and constraints have been added in the `feature/address` branch but are not present in its parent branch `production`.
 
 ```diff
 --- Database: people (Branch: br-falling-dust-a5bakdqt) // [!code --]
@@ -423,7 +423,7 @@ The result shows a comparison between the `dev/jordan` branch and its parent bra
 
 <TabItem>
 
-Compare the schema of the `dev/jordan` branch to its parent branch using the `compare-schema` API.
+Compare the schema of the `feature/address` branch to its parent branch using the `compare-schema` API.
 
 ```bash
 curl --request GET \
@@ -432,19 +432,19 @@ curl --request GET \
      --header 'authorization: Bearer $NEON_API_KEY' | jq -r '.diff'
 ```
 
-| Parameter          | Description                                                                               | Required | Example                   |
-| ------------------ | ----------------------------------------------------------------------------------------- | -------- | ------------------------- |
-| `<project_id>`     | The ID of your Neon project.                                                              | Yes      | `royal-band-06902338`     |
-| `<branch_id>`      | The ID of the target branch to compare.                                                   | Yes      | `br-mute-dew-a5930esi`    |
-| `<base_branch_id>` | The ID of the base branch for comparison — the parent branch in this case.                | Yes      | `br-bitter-bird-a56n6lh4` |
-| `<db_name>`        | The name of the database in the target branch.                                            | Yes      | `people`                  |
-| `Authorization`    | Bearer token for API access (your [Neon API key](https://neon.tech/docs/manage/api-keys)) | Yes      | `$NEON_API_KEY`           |
+| Parameter          | Description                                                                | Required | Example                   |
+| ------------------ | -------------------------------------------------------------------------- | -------- | ------------------------- |
+| `<project_id>`     | The ID of your Neon project.                                               | Yes      | `royal-band-06902338`     |
+| `<branch_id>`      | The ID of the target branch to compare.                                    | Yes      | `br-mute-dew-a5930esi`    |
+| `<base_branch_id>` | The ID of the base branch for comparison — the parent branch in this case. | Yes      | `br-bitter-bird-a56n6lh4` |
+| `<db_name>`        | The name of the database in the target branch.                             | Yes      | `people`                  |
+| `Authorization`    | Bearer token for API access (your [Neon API key](/docs/manage/api-keys))   | Yes      | `$NEON_API_KEY`           |
 
 <Admonition type="note">
 The optional `jq -r '.diff'` command extracts the diff field from the JSON response and outputs it as plain text to make it easier to read. This command would not be necessary when using the endpoint programmatically.
 </Admonition>
 
-The result shows a comparison between the `dev/jordan` branch and its parent branch for the database `people`. The output indicates that the `address` table and its related sequences and constraints have been added to the `dev/jordan` branch but are not present in its parent branch.
+The result shows a comparison between the `feature/address` branch and its parent branch for the database `people`. The output indicates that the `address` table and its related sequences and constraints have been added to the `feature/address` branch but are not present in its parent branch.
 
 ```diff
 --- a/people

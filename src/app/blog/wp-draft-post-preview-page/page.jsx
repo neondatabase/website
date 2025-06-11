@@ -10,7 +10,6 @@ import Hero from 'components/pages/blog-post/hero';
 import MoreArticles from 'components/pages/blog-post/more-articles';
 import PreviewWarning from 'components/pages/blog-post/preview-warning';
 import SocialShare from 'components/pages/blog-post/social-share';
-import SubscribeForm from 'components/pages/blog-post/subscribe-form';
 import Admonition from 'components/shared/admonition';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
@@ -102,11 +101,6 @@ const BlogDraft = async ({ searchParams }) => {
             className="col-span-full hidden lg:mt-14 lg:flex md:mt-12"
             title={title}
             slug={shareUrl}
-          />
-
-          <SubscribeForm
-            size="sm"
-            className="col-span-6 col-start-4 mt-16 xl:col-span-8 lg:col-span-full"
           />
           <MoreArticles
             className="col-span-10 col-start-2 mt-16 xl:col-span-full xl:mt-14 lg:mt-12 md:mt-11"

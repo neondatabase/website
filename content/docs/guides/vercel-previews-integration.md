@@ -4,7 +4,7 @@ subtitle: Create a database branch for each preview deployment in Vercel
 redirectFrom:
   - /docs/guides/vercel
 enableTableOfContents: true
-updatedOn: '2025-02-20T02:00:36.061Z'
+updatedOn: '2025-05-30T16:54:40.482Z'
 ---
 
 <InfoBlock>
@@ -186,9 +186,9 @@ The integration supports automatic deletion of obsolete preview branches when th
 
 1. In the Neon Console, select your project.
 2. Select the **Integrations** page.
-3. Find the Vercel integration under the **Manage** heading, and click **Manage**.
+3. Find the Vercel integration and click **Manage**.
 4. In the **Vercel integration** drawer, select the **Branches** tab.
-5. Check **Automatically delete obsolete Neon branches**.
+5. Toggle **Automatically delete obsolete Neon branches**.
 
 When a branch is deleted, environment variables associated with the deleted branch are also removed from your Vercel project.
 
@@ -362,7 +362,7 @@ Watch this video from the Neon DevRel team for an overview of the Neon Postgres 
 <YoutubeIframe embedId="s4vIMI9rXeg?si=LVJqSMCDKJu4NZiH" />
 
 <Admonition type="note">
-If you have an existing CI pipeline, this blog post shows how to build the same developer workflow using GitHub Actions and the Vercel CLI: [A database for every preview environment using Neon, GitHub Actions, and Vercel](https://neon.tech/blog/branching-with-preview-environments).
+If you have an existing CI pipeline, this blog post shows how to build the same developer workflow using GitHub Actions and the Vercel CLI: [A database for every preview environment using Neon, GitHub Actions, and Vercel](/blog/branching-with-preview-environments).
 </Admonition>
 
 <NeedHelp/>

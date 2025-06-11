@@ -1,6 +1,10 @@
 # About Connection pooling
 
-Learn how connection pooling works in Neon
+> This guide explains how connection pooling works in Neon, covering PgBouncer configuration, connection limits, transaction mode limitations, and best practices for using pooled connections with various tools and applications.
+
+## Source
+
+- [About Connection pooling HTML](https://neon.com/docs/connect/connection-pooling): The original HTML version of this documentation
 
 Neon uses [PgBouncer](https://www.pgbouncer.org/) to support connection pooling, enabling up to 10,000 concurrent connections. PgBouncer is a lightweight connection pooler for Postgres.
 
@@ -90,16 +94,12 @@ Connection pooling, however, is not a magic bullet: As the name implies, connect
 
 To ensure that direct access to Postgres is still possible for administrative tasks or similar, the pooler is configured to only open up a certain number of direct Postgres connections for each user to each database. This number of direct Postgres connections is determined by the PgBouncer [`default_pool_size`](#neon-pgbouncer-configuration-settings) setting, which is in turn determined by your compute's `max_connections` setting. For example, if `default_pool_size` is _100_, there can be only _100_ active connections from role `alex` to any particular database through the pooler. All other connections by `alex` to that database will have to wait for one of those _100_ active connections to complete their transactions before the next connection's work is started.
 
-At the same time, role `dana` will also be able to connect to the same database database through the pooler and have up to _100_ concurrent active transactions across the same number of connections.
+At the same time, role `dana` will also be able to connect to the same database through the pooler and have up to _100_ concurrent active transactions across the same number of connections.
 
-Similarly, even if role `alex` has _100_ concurrently active transactions through the pooler to the same database database, that role can still start up to _100_ concurrent transactions to a different database when connected through the pooler.
+Similarly, even if role `alex` has _100_ concurrently active transactions through the pooler to the same database, that role can still start up to _100_ concurrent transactions to a different database when connected through the pooler.
 
 The `max_connections` setting still applies for direct Postgres connections.
-
-
-You will not be able to get interactive results from all 10,000 connections at the same time. Connections to the pooler endpoint still consume connections on the main Postgres endpoint: PgBouncer forwards operations from a role's connections through its own pool of connections to Postgres, and adaptively adds more connections to Postgres as needed by other concurrently active role connections. The 10,000 connection limit is therefore most useful for "serverless" applications and application-side connection pools that have many open connections but infrequent and short [transactions](/docs/postgresql/query-reference#transactions).
-
-
+**Important**: You will not be able to get interactive results from all 10,000 connections at the same time. Connections to the pooler endpoint still consume connections on the main Postgres endpoint: PgBouncer forwards operations from a role's connections through its own pool of connections to Postgres, and adaptively adds more connections to Postgres as needed by other concurrently active role connections. The 10,000 connection limit is therefore most useful for "serverless" applications and application-side connection pools that have many open connections but infrequent and short [transactions](/docs/postgresql/query-reference#transactions).
 ## PgBouncer
 
 PgBouncer is an open-source connection pooler for Postgres. When an application needs to connect to a database, PgBouncer provides a connection from the pool. Connections in the pool are routed to a smaller number of actual Postgres connections. When a connection is no longer required, it is returned to the pool and is available to be used again. Maintaining a pool of available connections improves performance by reducing the number of connections that need to be created and torn down to service incoming requests. Connection pooling also helps avoid rejected connections. When all connections in the pool are being used, PgBouncer queues a new request until a connection from the pool becomes available.

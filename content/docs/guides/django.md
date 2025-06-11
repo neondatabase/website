@@ -6,13 +6,12 @@ redirectFrom:
   - /docs/integrations/
   - /docs/quickstart/django/
   - /docs/cloud/integrations/django/
-updatedOn: '2025-02-03T20:41:57.311Z'
+updatedOn: '2025-05-30T16:54:40.462Z'
 ---
 
 To connect to Neon from a Django application:
 
-1. [Create a Neon project](#create-a-neon-project)
-2. [Configure Django connection settings](#configure-django-connection-settings)
+<Steps>
 
 ## Create a Neon project
 
@@ -64,6 +63,8 @@ You can find all of the connection details listed above by clicking the **Connec
 
 For additional information about Django project settings, see [Django Settings: Databases](https://docs.djangoproject.com/en/4.0/ref/settings#databases), in the Django documentation.
 
+</Steps>
+
 ## Connection issues
 
 - Django uses the `psycopg2` driver as the default adapter for Postgres. If you have an older version of that driver, you may encounter an `Endpoint ID is not specified` error when connecting to Neon. This error occurs if the client library used by your driver does not support the Server Name Indication (SNI) mechanism in TLS, which Neon uses to route incoming connections. The `psycopg2` driver uses the `libpq` client library, which supports SNI as of v14. You can check your `psycopg2` and `libpq` versions by starting a Django shell in your Django project and running the following commands:
@@ -102,7 +103,7 @@ For schema migration with Django, see our guide:
 Learn how to use Django with Neon Postgres with this blog post and the accompanying sample application.
 
 <DetailIconCards>
-<a href="https://neon.tech/blog/python-django-and-neons-serverless-postgres" description="Learn how to build a Django application with Neon Postgres" icon="import">Blog Post: Using Django with Neon</a>
+<a href="/blog/python-django-and-neons-serverless-postgres" description="Learn how to build a Django application with Neon Postgres" icon="import">Blog Post: Using Django with Neon</a>
 
 <a href="https://github.com/evanshortiss/django-neon-quickstart" description="Django with Neon Postgres" icon="github">Django sample application</a>
 </DetailIconCards>

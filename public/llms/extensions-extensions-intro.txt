@@ -1,12 +1,18 @@
 # Postgres extensions
 
+> This guide provides a categorized directory of Postgres extensions supported by Neon, covering AI/ML, analytics, data transformations, security, and other specialized functionality.
+
+## Source
+
+- [Postgres extensions HTML](https://neon.com/docs/extensions/extensions-intro): The original HTML version of this documentation
+
 Explore supported Postgres extensions by category. Also see:
 
-- [List view](/docs/extensions/pg-extensions)
-- [Install an extension](/docs/extensions/pg-extensions#install-an-extension)
-- [Update an extension](/docs/extensions/pg-extensions#update-an-extension-version)
+- [List view](https://neon.com/docs/extensions/pg-extensions)
+- [Install an extension](https://neon.com/docs/extensions/pg-extensions#install-an-extension)
+- [Update an extension](https://neon.com/docs/extensions/pg-extensions#update-an-extension-version)
 
-**Need an extension we don't have?** 📩 [Request an extension](/docs/extensions/pg-extensions#request-an-extension)
+**Need an extension we don't have?** 📩 [Request an extension](https://neon.com/docs/extensions/pg-extensions#request-an-extension)
 
 ## AI / Machine Learning
 

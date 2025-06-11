@@ -1,9 +1,12 @@
 # Connect an Entity Framework application to Neon
 
-Set up a Neon project in seconds and connect from an Entity Framework
+> This guide explains how to create a Neon project and connect to it from an Entity Framework Core application, covering project setup, dependencies, configuration, and running a basic ASP.NET Core Web API with Npgsql.
+
+## Source
+
+- [Connect an Entity Framework application to Neon HTML](https://neon.com/docs/guides/dotnet-entity-framework): The original HTML version of this documentation
 
 This guide describes how to create a Neon project and connect to it from an Entity Framework Core application. The example demonstrates how to set up a basic ASP.NET Core Web API project with Entity Framework Core using Npgsql as the database provider.
-
 
 The same configuration steps can be used for any .NET application using Entity Framework Core, including ASP.NET Core MVC, Blazor, or console applications.
 
@@ -76,12 +79,12 @@ If you do not have one already, create a Neon project.
    {
        public class ApplicationDbContext : DbContext
        {
-           public ApplicationDbContext(DbContextOptions options)
+           public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
                : base(options)
            {
            }
 
-           public DbSet Todos => Set();
+           public DbSet<Todo> Todos => Set<Todo>();
        }
    }
    ```
@@ -120,13 +123,13 @@ If you do not have one already, create a Neon project.
            }
 
            [HttpGet]
-           public async Task>> GetTodos()
+           public async Task<ActionResult<IEnumerable<Todo>>> GetTodos()
            {
                return await _context.Todos.ToListAsync();
            }
 
            [HttpPost]
-           public async Task> PostTodo(Todo todo)
+           public async Task<ActionResult<Todo>> PostTodo(Todo todo)
            {
                _context.Todos.Add(todo);
                await _context.SaveChangesAsync();
@@ -146,7 +149,7 @@ If you do not have one already, create a Neon project.
 
    builder.Services.AddControllers();
 
-   builder.Services.AddDbContext(options =>
+   builder.Services.AddDbContext<ApplicationDbContext>(options =>
        options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
    builder.Services.AddEndpointsApiExplorer();

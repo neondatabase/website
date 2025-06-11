@@ -141,11 +141,6 @@ const defaultConfig = {
 
     return [
       {
-        source: '/msbuild',
-        destination: '/',
-        permanent: true,
-      },
-      {
         source: '/bm',
         destination: '/?ref=tbm-p',
         permanent: true,
@@ -195,7 +190,7 @@ const defaultConfig = {
         destination: '/docs/changelog/:path*',
         permanent: true,
       },
-      // Proxy has an error message, that suggests to read `https://neon.tech/sni` for more details.
+      // Proxy has an error message, that suggests to read `https://neon.com/sni` for more details.
       {
         source: '/sni',
         destination: '/docs/connect/connection-errors',
@@ -273,6 +268,11 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/docs/manage/endpoints',
+        destination: '/docs/manage/computes',
+        permanent: true,
+      },
+      {
         source: '/sign_in',
         destination: 'https://console.neon.tech/signup',
         permanent: true,
@@ -306,6 +306,41 @@ const defaultConfig = {
         source: '/hipaa-compliance-guide',
         destination: '/docs/security/hipaa',
         permanent: true,
+      },
+      {
+        source: '/docs/use-cases/saas-apps',
+        destination: '/use-cases/postgres-for-saas',
+        permanent: true,
+      },
+      {
+        source: '/docs/use-cases/variable-traffic',
+        destination: '/use-cases/serverless-apps',
+        permanent: true,
+      },
+      {
+        source: '/docs/use-cases/database-per-user',
+        destination: '/docs/guides/multitenancy',
+        permanent: true,
+      },
+      {
+        source: '/docs/use-cases/ai-agents',
+        destination: '/use-cases/ai-agents',
+        permanent: true,
+      },
+      {
+        source: '/docs/use-cases/platforms',
+        destination: '/use-cases/database-per-tenant',
+        permanent: true,
+      },
+      {
+        source: '/docs/use-cases/dev-test',
+        destination: '/use-cases/dev-test',
+        permanent: true,
+      },
+      {
+        source: '/launchpad',
+        destination: 'https://neon.new',
+        permanent: false,
       },
       ...docsRedirects,
       ...changelogRedirects,
@@ -347,11 +382,7 @@ const defaultConfig = {
       },
       {
         source: '/demos/regional-latency',
-        destination: 'https://latencies-ui.vercel.app/demos/regional-latency',
-      },
-      {
-        source: '/demos/regional-latency/:asset*',
-        destination: 'https://latencies-ui.vercel.app/demos/regional-latency/:asset*',
+        destination: 'https://latency-benchmarks-dashboard.vercel.app/',
       },
       {
         source: '/dev-for-rds',

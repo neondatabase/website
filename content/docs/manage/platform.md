@@ -3,7 +3,7 @@ title: Platform overview
 enableTableOfContents: true
 subtitle: Find information about managing all aspects of your database using the Neon
   platform
-updatedOn: '2025-03-05T21:09:38.755Z'
+updatedOn: '2025-06-05T19:57:28.189Z'
 ---
 
 ## Access control
@@ -20,7 +20,7 @@ Manage your account, your team, and who can access your project's databases.
 
 <a href="/docs/manage/database-access" description="Learn how to manage user access to your databases using roles" icon="database">Database access</a>
 
-<a href="/docs/manage/email-signup" description="Change to an email-based account, or simply change your email" icon="cards">E-mail signup</a>
+<a href="/docs/manage/accounts#update-personal-information" description="Change to an email-based account, or simply change your email" icon="cards">E-mail signup</a>
 
 <a href="/docs/manage/api-keys" description="Generate and manage API keys" icon="network">API keys</a>
 
@@ -38,7 +38,7 @@ Learn how to manage all aspects of your Neon projects. These topics cover the ba
 
 <a href="/docs/manage/branches" description="Learn about database branching in Neon" icon="branching">Branches</a>
 
-<a href="/docs/manage/endpoints" description="Configure and optimimze compute resources for your Neon projects" icon="laptop">Computes</a>
+<a href="/docs/manage/computes" description="Configure and optimimze compute resources for your Neon projects" icon="laptop">Computes</a>
 
 <a href="/docs/manage/roles" description="Manage roles within projects and assign permissions" icon="user">Roles</a>
 
@@ -83,6 +83,18 @@ Learn how Neon secures your projects and data, and explore the security features
 <a href="/docs/security/soc2-compliance" description="Learn how Neon complies with various standards" icon="check">Compliance</a>
 
 <a href="/docs/security/acceptable-use-policy" description="Read about Neon's acceptable use policies" icon="privacy">Acceptable Use Policy</a>
+
+</DetailIconCards>
+
+## Backups
+
+<DetailIconCards>
+
+<a href="/docs/manage/backups" description="An overview of backup strategies for Neon Postgres" icon="database">About backups</a>
+
+<a href="/docs/manage/backup-pg-dump" description="Learn how to create a backup of your Neon database using pg_dump" icon="database">Backups with pg_dump</a>
+
+<a href="/docs/manage/backup-pg-dump-automate" description="Automate backups of your Neon database to S3 with pg_dump and GitHub Actions" icon="stopwatch">Automate pg_dump backups</a>
 
 </DetailIconCards>
 

@@ -2,7 +2,7 @@
 title: The pg_prewarm extension
 subtitle: Load data into your Postgres buffer cache with the pg_prewarm extension
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.050Z'
+updatedOn: '2025-05-11T11:23:50.615Z'
 ---
 
 You can use the `pg_prewarm` extension to preload data into the Postgres buffer cache after a restart. Doing so improves query response times by ensuring that your data is readily available in memory. Otherwise, data must be loaded into the buffer cache from disk on-demand, which can result in slower query response times.
@@ -147,7 +147,7 @@ In this example, you create a table, check its data size, run `pg_prewarm`, and 
    <Admonition type="note">
    The values for the size of the table and the size of the data loaded into the buffer cache as shown in the example above match exactly, which is an ideal scenario. However, there are cases where these values might not match, indicating that not all the data was loaded into the buffer cache; for example, this can happen if `pg_prewarm` only partially loads the table into the buffer cache due to lack of memory availability. Concurrent data modifications could also cause sizes to differ.
 
-   To understand how much memory is available to your Postgres instance on Neon, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+   To understand how much memory is available to your Postgres instance on Neon, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
    </Admonition>
 
 ## Demonstrating the effect of pg_prewarm
@@ -184,7 +184,7 @@ This example shows how preloading data can improve query performance. We'll crea
    FROM generate_series('2010-01-01 00:00:00'::timestamptz, '2018-02-01 00:00:00'::timestamptz, '1 minutes'::interval) a(x);
    ```
 
-2. Restart your Postgres instance to clear the cache. On Neon, you can do this by [restarting your compute](/docs/manage/endpoints#restart-a-compute).
+2. Restart your Postgres instance to clear the cache. On Neon, you can do this by [restarting your compute](/docs/manage/computes#restart-a-compute).
 
 3. Prewarm the first sample table:
 
@@ -237,6 +237,6 @@ Prewarming your table data and indexes can help improve read performance, especi
 ## Resources
 
 - [PostgreSQL pg_prewarm documentation](https://www.postgresql.org/docs/current/pgprewarm.html)
-- [How to size your compute in Neon](/docs/manage/endpoints#how-to-size-your-compute)
+- [How to size your compute in Neon](/docs/manage/computes#how-to-size-your-compute)
 
 <NeedHelp/>

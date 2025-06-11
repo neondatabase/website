@@ -1,9 +1,14 @@
 # The postgis extension
 
-Work with geospatial data in Postgres using PostGIS
+> This guide explains how to use the PostGIS extension in Postgres for working with geospatial data, covering installation, spatial data types, querying, and performance optimization with practical examples for urban planning, transportation, and other location-based applications.
+
+## Source
+
+- [The postgis extension HTML](https://neon.com/docs/extensions/postgis): The original HTML version of this documentation
+
+## Overview
 
 The `postgis` extension provides support for spatial data - coordinates, maps and polygons, encompassing geographical and location-based information. It introduces new data types, functions, and operators to manage and analyze spatial data effectively.
-
 
 
 This guide introduces you to the `postgis` extension - how to enable it, store and query spatial data, and perform geospatial analysis with real-world examples. Geospatial data is crucial in fields like urban planning, environmental science, and logistics.
@@ -57,7 +62,7 @@ VALUES
     ('Elm St & 5th Ave', ST_Point(-73.991070, 40.730824));
 ```
 
-The `ST_Point` function is used to create a point from the specified latitude and longitude.
+The `ST_Point` function is used to create a point from the specified longitude and latitude.
 
 **Querying spatial data**
 

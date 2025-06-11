@@ -23,7 +23,7 @@ Before we begin, make sure you have:
 
 ## Creating Your Neon Project
 
-Neon is now available in Azure! You can create serverless Postgres databases that run on Azure infrastructure. To learn more about Neon's Azure launch, check out the [announcement post](https://neon.tech/blog/neon-is-coming-to-azure).
+Neon is now available in Azure! You can create serverless Postgres databases that run on Azure infrastructure. To learn more about Neon's Azure launch, check out the [announcement post](/blog/neon-is-coming-to-azure).
 
 To create your Neon project on Azure:
 
@@ -746,7 +746,7 @@ With your referral system deployed to Azure, you should consider some standard p
    CREATE INDEX idx_referrals_status ON referrals(status);
    ```
 
-   You can learn more about indexing in the [Neon documentation](https://neon.tech/postgresql/postgresql-indexes).
+   You can learn more about indexing in the [Neon documentation](/postgresql/postgresql-indexes).
 
 2. Implement connection pooling in your database utility:
 
@@ -760,7 +760,7 @@ With your referral system deployed to Azure, you should consider some standard p
    });
    ```
 
-   Alternatively, you can use the [Neon connection pool](https://neon.tech/docs/connect/connection-pooling) feature to manage connections efficiently.
+   Alternatively, you can use the [Neon connection pool](/docs/connect/connection-pooling) feature to manage connections efficiently.
 
 3. On the Azure Functions side, consider enabling [Azure Functions Premium Plan](https://azure.microsoft.com/en-us/pricing/details/functions/), which offers more control over scaling and performance.
 

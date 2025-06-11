@@ -1,8 +1,12 @@
 # Migrate from Firebase Firestore to Neon Postgres
 
-Learn how to migrate your data from Firebase Firestore to Neon Postgres using
+> This guide provides step-by-step instructions for migrating data from Firebase Firestore to Neon Postgres using custom Python scripts, covering the entire process from exporting document-based data to importing it into a relational database structure.
 
 This guide describes how to migrate data from Firebase Firestore to Neon Postgres.
+
+## Source
+
+- [Migrate from Firebase Firestore to Neon Postgres HTML](https://neon.com/docs/import/migrate-from-firebase): The original HTML version of this documentation
 
 We'll use a custom Python script to export data from Firestore to a local file, and then import the data into Neon Postgres. This approach allows us to handle Firestore's document-based structure and convert it into the relational database format suitable for Postgres.
 
@@ -129,7 +133,7 @@ if __name__ == "__main__":
 
 Save this script as `firebase-download.py`. To run the script, you need to provide the path to your Firebase credentials JSON file and the output directory for the downloaded data. Run the following command in your terminal:
 
-```bash shouldWrap
+```bash
 python firebase-download.py --credentials path/to/your/firebase-credentials.json --output firestore_data
 ```
 
@@ -273,8 +277,8 @@ if __name__ == "__main__":
 
 Save this script as `neon-import.py`. To run the script, you need to provide the path to the input directory containing the JSON files and the Neon connection string. Run the following command in your terminal:
 
-```bash shouldWrap
-python neon-import.py --input firestore_data --postgres ""
+```bash
+python neon-import.py --input firestore_data --postgres "<neon-connection-string>"
 ```
 
 This script iterates over each JSON file in the input directory, creates a table in the Neon database for each collection, and inserts the data into the table. It also handles conflicts by updating the existing data with the new data.
@@ -322,7 +326,7 @@ While this guide focuses on using a custom Python script, there are other migrat
 
   However, these utilities are not as robust as the managed export/import service. If your data size is not big, we recommend using the sample code provided above or adapting it to your specific needs.
 
-## Reference
+## Resources
 
 For more information on the tools and libraries used in this guide, refer to the following documentation:
 
@@ -330,3 +334,5 @@ For more information on the tools and libraries used in this guide, refer to the
 - [Firebase Admin SDK](https://firebase.google.com/docs/admin/setup)
 - [Cloud Firestore API](https://cloud.google.com/python/docs/reference/firestore/latest/index.html)
 - [psycopg](https://www.psycopg.org/docs/)
+- [Firebase Firestore documentation](https://firebase.google.com/docs/firestore)
+- [PostgreSQL JSONB documentation](https://www.postgresql.org/docs/current/datatype-json.html)

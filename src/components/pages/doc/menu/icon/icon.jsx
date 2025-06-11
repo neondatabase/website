@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 
 import AiAgentIcon from 'icons/docs/sidebar/ai-agent.inline.svg';
 import AiIcon from 'icons/docs/sidebar/ai.inline.svg';
+import AnonymizeIcon from 'icons/docs/sidebar/anonymize.inline.svg';
 import ApiIcon from 'icons/docs/sidebar/api.inline.svg';
 import ArchitectureIcon from 'icons/docs/sidebar/architecture.inline.svg';
 import AuthIcon from 'icons/docs/sidebar/auth.inline.svg';
@@ -12,6 +13,7 @@ import ChangelogIcon from 'icons/docs/sidebar/changelog.inline.svg';
 import CliIcon from 'icons/docs/sidebar/cli.inline.svg';
 import CommunityIcon from 'icons/docs/sidebar/community.inline.svg';
 import ConnectIcon from 'icons/docs/sidebar/connect.inline.svg';
+import ContainerIcon from 'icons/docs/sidebar/container.inline.svg';
 import DocsIcon from 'icons/docs/sidebar/docs.inline.svg';
 import ExtensionIcon from 'icons/docs/sidebar/extension.inline.svg';
 import FeaturesIcon from 'icons/docs/sidebar/features.inline.svg';
@@ -33,6 +35,7 @@ import RegionsIcon from 'icons/docs/sidebar/regions.inline.svg';
 import ReplicationsIcon from 'icons/docs/sidebar/replications.inline.svg';
 import ReportIcon from 'icons/docs/sidebar/report.inline.svg';
 import RoadmapIcon from 'icons/docs/sidebar/roadmap.inline.svg';
+import RocketIcon from 'icons/docs/sidebar/rocket.inline.svg';
 import SdkIcon from 'icons/docs/sidebar/sdk.inline.svg';
 import SearchIcon from 'icons/docs/sidebar/search.inline.svg';
 import SecurityIcon from 'icons/docs/sidebar/security.inline.svg';
@@ -50,6 +53,7 @@ import WorkflowsIcon from 'icons/docs/sidebar/workflows.inline.svg';
 
 const icons = {
   'ai-agent': AiAgentIcon,
+  anonymize: AnonymizeIcon,
   ai: AiIcon,
   api: ApiIcon,
   architecture: ArchitectureIcon,
@@ -61,6 +65,7 @@ const icons = {
   cli: CliIcon,
   community: CommunityIcon,
   connect: ConnectIcon,
+  container: ContainerIcon,
   docs: DocsIcon,
   extension: ExtensionIcon,
   features: FeaturesIcon,
@@ -82,6 +87,7 @@ const icons = {
   replications: ReplicationsIcon,
   report: ReportIcon,
   roadmap: RoadmapIcon,
+  rocket: RocketIcon,
   sdk: SdkIcon,
   search: SearchIcon,
   security: SecurityIcon,

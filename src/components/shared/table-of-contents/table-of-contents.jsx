@@ -9,7 +9,7 @@ import Item from './item';
 
 const CURRENT_ANCHOR_GAP_PX = 100;
 
-const TableOfContents = ({ items, isUseCase }) => {
+const TableOfContents = ({ items, isTemplate }) => {
   const titles = useRef([]);
   const [currentAnchor, setCurrentAnchor] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(null);
@@ -36,6 +36,11 @@ const TableOfContents = ({ items, isUseCase }) => {
   const updateCurrentAnchor = useCallback(() => {
     const currentTitleIdx = titles.current.findIndex((anchor) => {
       const { top } = anchor.getBoundingClientRect();
+
+      // Check if the anchor is inside a collapsed details element
+      if (anchor.closest('details:not([open])')) {
+        return false;
+      }
 
       return top - CURRENT_ANCHOR_GAP_PX >= 0;
     });
@@ -76,7 +81,7 @@ const TableOfContents = ({ items, isUseCase }) => {
               currentAnchor={currentAnchor}
               isUserScrolling={isUserScrolling}
               setIsUserScrolling={setIsUserScrolling}
-              isUseCase={isUseCase}
+              isTemplate={isTemplate}
               {...item}
             />
           </li>
@@ -95,7 +100,7 @@ TableOfContents.propTypes = {
       title: PropTypes.string.isRequired,
     })
   ).isRequired,
-  isUseCase: PropTypes.bool,
+  isTemplate: PropTypes.bool,
 };
 
 export default TableOfContents;

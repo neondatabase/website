@@ -4,7 +4,7 @@ subtitle: Learn how to connect to your Neon database via AWS PrivateLink
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
-updatedOn: '2025-04-09T10:37:44.428Z'
+updatedOn: '2025-05-30T16:54:40.467Z'
 ---
 
 <Admonition type="comingSoon" title="Private Networking availability">
@@ -25,6 +25,7 @@ With **Neon Private Networking**, you can connect to your database via AWS Priva
 
 - You must be a Neon [Business](/docs/introduction/plans#business) and [Enterprise](/docs/introduction/plans#enterprise) account user, and your user account must be [Neon organization](/docs/manage/organizations) Admin account. You'll encounter an access error if you attempt the setup from a personal Neon account or on a Neon plan that does not offer Private Networking.
 - **Ensure that your client application is deployed on AWS in the same region as the Neon database you plan to connect to.** The Private Networking feature is available in all [Neon-supported AWS regions](/docs/introduction/regions#aws-regions). Both your private access client application and Neon database must be in one of these regions.
+- The Neon Private Networking feature currently supports [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4) addresses. [IPv6](https://en.wikipedia.org/wiki/IPv6) is not supported at this time.
 - Install the Neon CLI. You will use it to add your VPC endpoint ID to your Neon organization. For installation instructions, see [Neon CLI — Install and connect](/docs/reference/cli-install).
 
 ## Configuration steps
@@ -99,7 +100,7 @@ To configure Neon Private Networking, perform the following steps:
 
     <TabItem>
 
-    You can use the [Assign or update a VPC endpoint](https://api-docs.neon.tech/reference/assignorganizationvpcendpoint) API to assign a VCP endpoint ID to a Neon organization. You will need to provide your Neon organization ID, region ID, VPC endpoint ID, Neon project ID, and a [Neon API key](https://neon.tech/docs/manage/api-keys).
+    You can use the [Assign or update a VPC endpoint](https://api-docs.neon.tech/reference/assignorganizationvpcendpoint) API to assign a VCP endpoint ID to a Neon organization. You will need to provide your Neon organization ID, region ID, VPC endpoint ID, Neon project ID, and a [Neon API key](/docs/manage/api-keys).
 
     ```bash
     curl --request POST \
@@ -205,7 +206,7 @@ neon vpc project restrict vpce-1234567890abcdef0 --project-id orange-credit-1234
 
 You will need to provide the VPC endpoint ID and your Neon project ID. You can find your Neon project ID under your project's settings in the Neon Console, or by running this Neon CLI command: `neon projects list`
 
-After adding a restriction, you can check the status of the VPC endpoint to view the restricted project using the [vpc endpoint status` command](/docs/reference/cli-vpc#the-vpc-endpoint-subcommand). You will need to provide your VPC endpoint ID, region ID, and Neon organization ID.
+After adding a restriction, you can check the status of the VPC endpoint to view the restricted project using the [vpc endpoint status command](/docs/reference/cli-vpc#the-vpc-endpoint-subcommand). You will need to provide your VPC endpoint ID, region ID, and Neon organization ID.
 
 ```bash
 neonctl vpc endpoint status vpce-1234567890abcdef0 --region-id=aws-eu-central-1 --org-id=org-nameless-block-72040075
@@ -220,7 +221,7 @@ neonctl vpc endpoint status vpce-1234567890abcdef0 --region-id=aws-eu-central-1 
 
 <TabItem>
 
-The Neon API supports managing project restrictions using the [Assign or update a VPC endpoint restriction](https://api-docs.neon.tech/reference/assignprojectvpcendpoint) endpoint. You will need to provide your VPC endpoint ID, Neon project ID, and a [Neon API key](https://neon.tech/docs/manage/api-keys).
+The Neon API supports managing project restrictions using the [Assign or update a VPC endpoint restriction](https://api-docs.neon.tech/reference/assignprojectvpcendpoint) endpoint. You will need to provide your VPC endpoint ID, Neon project ID, and a [Neon API key](/docs/manage/api-keys).
 
 ```bash
 curl --request POST \

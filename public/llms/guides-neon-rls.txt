@@ -1,19 +1,21 @@
 # About Neon RLS
 
-Secure your application at the database level using Postgres's Row-Level
+> This guide explains how to secure your application at the database level using Postgres's Row-Level Security (RLS) with Neon RLS, covering JWT-based authentication integration, policy creation, and authorization implementation.
+
+## Source
+
+- [About Neon RLS HTML](https://neon.com/docs/guides/neon-rls): The original HTML version of this documentation
 
 
+**What you will learn:**
+- JSON Web Tokens (JWT)
+- Row-level Security (RLS)
+- How Neon RLS works
 
-JSON Web Tokens (JWT)
-Row-level Security (RLS)
-How Neon RLS works
-
-
-
-  Neon RLS Tutorial
-  Postgres Row-Level Security tutorial
-  Simplify RLS with Drizzle
-
+**Related docs:**
+- [Neon RLS Tutorial](https://neon.com/docs/guides/neon-rls-tutorial)
+- [Postgres Row-Level Security tutorial](https://neon.com/postgresql/postgresql-administration/postgresql-row-level-security)
+- [Simplify RLS with Drizzle](https://neon.com/docs/guides/neon-rls-drizzle)
 
 
 
@@ -37,9 +39,9 @@ const sql = neon(process.env.DATABASE_AUTHENTICATED_URL, { authToken: myAuthProv
 await sql(`select * from todos`);
 ```
 
-Behind the scenes, the [Neon Proxy](#the-role-of-the-neon-proxy) performs the validation, while Neon's open source [pg_session_jwt](/docs/guides/neon-rls#how-the-pgsessionjwt-extension-works) extension makes the extracted `user_id` available to Postgres. You can then use **Row-Level Security (RLS)** policies in Postgres to enforce access control at the row level, ensuring that users can only access or modify data according to the defined rules. Since these rules are implemented directly in the database, they can offer a secure fallback — or even a primary authorization solution — in case security in other layers of your application fail. See [when to rely on RLS](#when-to-rely-on-rls) for more information.
+Behind the scenes, the [Neon Proxy](#the-role-of-the-neon-proxy) performs the validation, while Neon's open source [pg_session_jwt](https://neon.com/docs/guides/neon-rls#how-the-pgsessionjwt-extension-works) extension makes the extracted `user_id` available to Postgres. You can then use **Row-Level Security (RLS)** policies in Postgres to enforce access control at the row level, ensuring that users can only access or modify data according to the defined rules. Since these rules are implemented directly in the database, they can offer a secure fallback — or even a primary authorization solution — in case security in other layers of your application fail. See [when to rely on RLS](#when-to-rely-on-rls) for more information.
 
-![Neon RLS architecture](/docs/guides/neon_authorize_architecture.png)
+![Neon RLS architecture](https://neon.com/docs/guides/neon_authorize_architecture.png)
 
 ## Database roles
 
@@ -49,7 +51,9 @@ Neon RLS works with two database roles, identified by connection string prefixes
 - **Anonymous role** (`anonymous@`): Currently requires authentication similar to the authenticated role. This implementation is under review and may change in the future to better support unauthenticated access.
 
 
+<Admonition type="note">
 For now, if you need to implement public access in your application, we recommend creating a separate database role with a password. This provides a simpler alternative to using the anonymous role while we work on improving anonymous access support.
+</Admonition>
 
 
 ### Using Neon RLS with custom JWTs
@@ -139,9 +143,7 @@ This approach is flexible: you can manage RLS policies directly in SQL, or use a
 Let's break down the RLS policy controlling who can **view todos** to see what Neon RLS is actually doing:
 
 
-
-
-
+**Drizzle:**
 ```typescript
 pgPolicy('view todos', {
   for: 'select',
@@ -150,17 +152,12 @@ pgPolicy('view todos', {
 });
 ```
 
-
-
-
-
+**SQL:**
 ```sql
 CREATE POLICY "view todos" ON "todos" AS PERMISSIVE
   FOR SELECT TO authenticated
   USING ((select auth.user_id() = user_id));
 ```
-
-
 
 
 
@@ -223,16 +220,16 @@ The configuration of the expected audience can be done via the Neon RLS UI or vi
 You can use these sample ToDo applications to get started using Neon RLS with popular authentication providers.
 
 
-Clerk (Frontend) + Neon RLS
-Stack Auth + Neon RLS
-Auth0 + Neon RLS
-Stytch + Neon RLS
-Azure AD B2C + Neon RLS
-Descope + Neon RLS
-PropelAuth + Neon RLS
-SuperTokens + Neon RLS
-WorkOS + Neon RLS
-Neon RLS with custom JWTs
+- [Clerk (Frontend) + Neon RLS](https://github.com/neondatabase/examples/tree/main/with-clerk-auth)
+- [Stack Auth + Neon RLS](https://github.com/neondatabase/examples/tree/main/with-stack-auth)
+- [Auth0 + Neon RLS](https://github.com/neondatabase/examples/tree/main/with-auth0)
+- [Stytch + Neon RLS](https://github.com/neondatabase/examples/tree/main/with-stytch)
+- [Azure AD B2C + Neon RLS](https://github.com/neondatabase/examples/tree/main/with-azure-ad-b2c)
+- [Descope + Neon RLS](https://github.com/neondatabase/examples/tree/main/with-descope)
+- [PropelAuth + Neon RLS](https://github.com/neondatabase/examples/tree/main/with-propelauth)
+- [SuperTokens + Neon RLS](https://github.com/neondatabase/examples/tree/main/with-supertokens)
+- [WorkOS + Neon RLS](https://github.com/neondatabase/examples/tree/main/with-workos)
+- [Neon RLS with custom JWTs](https://github.com/neondatabase/authorize-demo-custom-jwt)
 
 
 ## Current limitations
@@ -242,7 +239,7 @@ While this feature is in its early-access phase, there are some limitations to b
 - **Authentication provider requirements**:
   - Your authentication provider must support **Asymmetric Keys**. For example, **Supabase Auth** will not be compatible until asymetric key support is added. You can track progress on this item [here](https://github.com/orgs/supabase/discussions/29289).
   - The provider must generate a unique set of public keys for each project and expose those keys via a unique URL for each project.
-- **Connection type**: Your application must use **HTTP** to connect to Neon. At this time, **TCP** and **WebSockets** connections are not supported. This means you need to use the [Neon serverless driver](/docs/serverless/serverless-driver) over HTTP as your Postgres driver.
+- **Connection type**: Your application must use **HTTP** to connect to Neon. At this time, **TCP** and **WebSockets** connections are not supported. This means you need to use the [Neon serverless driver](https://neon.com/docs/serverless/serverless-driver) over HTTP as your Postgres driver.
 - **JWT expiration delay**: After removing an authentication provider from your project, it may take a few minutes for JWTs signed by that provider to stop working.
 - **Algorithm support**: Only JWTs signed with the **ES256** and **RS256** algorithms are supported.
 

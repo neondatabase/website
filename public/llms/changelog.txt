@@ -1,0 +1,13 @@
+# Changelog
+
+> This document serves as a changelog for Neon, tracking updates and changes to the platform over time.
+
+This page is intended to provide a record of changes and updates to the Neon platform.
+
+## Source
+
+- [Changelog HTML](https://neon.com/docs/changelog): The original HTML version of this documentation
+
+## Changelog
+
+This page is currently a placeholder for future changelog entries. Check back later for updates on new features, improvements, and bug fixes for the Neon serverless Postgres platform.

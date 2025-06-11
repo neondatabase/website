@@ -1,8 +1,12 @@
 # Migrate from Digital Ocean Postgres to Neon
 
-Learn how to migrate your Postgres database from Digital Ocean to Neon using
+> This guide provides step-by-step instructions for migrating a Postgres database from Digital Ocean to Neon using pg_dump and pg_restore, covering the entire process from exporting data from Digital Ocean to importing it into Neon and verifying the migration.
 
 This guide describes how to migrate a Postgres database from Digital Ocean to Neon using the `pg_dump` and `pg_restore` utilities, which are part of the Postgres client toolset. `pg_dump` works by dumping both the schema and data in a custom format that is compressed and suitable for input into `pg_restore` to rebuild the database.
+
+## Source
+
+- [Migrate from Digital Ocean Postgres to Neon HTML](https://neon.com/docs/import/migrate-from-digital-ocean): The original HTML version of this documentation
 
 ## Prerequisites
 
@@ -40,7 +44,7 @@ You'll need these details to construct the connection string for `pg_dump`. Alte
 
 Now that you have the Digital Ocean connection details, you can export your data using `pg_dump`:
 
-```bash shouldWrap
+```bash
 pg_dump -Fc -v -d postgresql://[username]:[password]@[host]:[port]/[database] -f digitalocean_dump.bak
 ```
 
@@ -71,7 +75,7 @@ pg_dump: dumping contents of table "public.lego_themes"
 ```
 
 
-Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary#pooled-connection-string) (see PgBouncer issues [452](https://github.com/pgbouncer/pgbouncer/issues/452) & [976](https://github.com/pgbouncer/pgbouncer/issues/976) for details). Use an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string) instead.
+**Important note**: Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary#pooled-connection-string) (see PgBouncer issues [452](https://github.com/pgbouncer/pgbouncer/issues/452) & [976](https://github.com/pgbouncer/pgbouncer/issues/976) for details). Use an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string) instead.
 
 
 ## Prepare your Neon destination database
@@ -107,10 +111,10 @@ For more information, see [Create a database](/docs/manage/databases#create-a-da
 Now you can restore your data to the Neon database using `pg_restore`:
 
 ```bash
-pg_restore -d  -v --no-owner --no-acl digitalocean_dump.bak
+pg_restore -d <neon-connection-string> -v --no-owner --no-acl digitalocean_dump.bak
 ```
 
-Replace `` with your Neon connection details.
+Replace `<neon-connection-string>` with your Neon connection details.
 
 This command includes these arguments:
 
@@ -167,10 +171,11 @@ While this guide focuses on using `pg_dump` and `pg_restore`, there are other mi
 
   For smaller datasets or specific tables, you might consider exporting to CSV from Digital Ocean and then importing to Neon. See [Import data from CSV](/docs/import/import-from-csv) for more details on this method.
 
-## Reference
+## Resources
 
 For more information on the Postgres utilities used in this guide, refer to the following documentation:
 
-- [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html)
-- [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html)
+- [PostgreSQL pg_dump documentation](https://www.postgresql.org/docs/current/app-pgdump.html)
+- [PostgreSQL pg_restore documentation](https://www.postgresql.org/docs/current/app-pgrestore.html)
 - [Migrating data to Neon](/docs/import/migrate-from-postgres)
+- [Digital Ocean PostgreSQL documentation](https://docs.digitalocean.com/products/databases/postgresql/)

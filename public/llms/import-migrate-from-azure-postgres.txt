@@ -1,10 +1,14 @@
 # Migrate from Azure PostgreSQL to Neon
 
-Learn how to migrate your database from Azure PostgreSQL to Neon using logical
+> This guide provides step-by-step instructions for migrating a database from Azure PostgreSQL to Neon using logical replication, covering the entire process from configuring the source database to completing the migration with minimal downtime.
 
 This guide describes how to migrate your database from Azure Database for PostgreSQL to Neon, using logical replication.
 
 Logical replication for Postgres transfers data from a source Postgres database to another, as a stream of tuples (records) or SQL statements. This allows for minimal downtime during the migration process, since all the records don't need to be copied at once.
+
+## Source
+
+- [Migrate from Azure PostgreSQL to Neon HTML](https://neon.com/docs/import/migrate-from-azure-postgres): The original HTML version of this documentation
 
 ## Prerequisites
 
@@ -31,15 +35,13 @@ To illustrate the migration workflow, we set up the [AdventureWorks sample datab
 3. Search for the `wal_level` parameter and set its value to `LOGICAL`.
 4. Click **Save** to apply the changes.
 
-   
-   Changing the `wal_level` parameter on Azure requires a server restart. This may cause a brief interruption to your database service.
-   
+   **Note**: Changing the `wal_level` parameter on Azure requires a server restart. This may cause a brief interruption to your database service.
 
 ### Create a PostgreSQL role for replication
 
 It is recommended that you create a dedicated Postgres role for replicating data. Connect to your Azure PostgreSQL database using a tool like [psql](https://www.postgresql.org/docs/current/app-psql.html) or [Azure Data Studio](https://learn.microsoft.com/en-us/azure-data-studio/?view=sql-server-ver15), then create a new role with `REPLICATION` privileges:
 
-```sql shouldWrap
+```sql
 CREATE ROLE replication_user WITH REPLICATION LOGIN PASSWORD 'your_secure_password';
 ```
 
@@ -88,14 +90,14 @@ Publications are a fundamental part of logical replication in Postgres. They def
 
 To create a publication for a specific table:
 
-```sql shouldWrap
-CREATE PUBLICATION azure_publication FOR ;
+```sql
+CREATE PUBLICATION azure_publication FOR TABLE table_name;
 ```
 
 To create a publication for multiple tables, provide a comma-separated list of tables:
 
-```sql shouldWrap
-CREATE PUBLICATION azure_publication FOR TABLE ;
+```sql
+CREATE PUBLICATION azure_publication FOR TABLE table1, table2, table3;
 ```
 
 
@@ -142,14 +144,14 @@ To ensure that the Neon `AdventureWorks` database has the same schema as the Azu
 
 1. Export the schema from Azure PostgreSQL:
 
-   ```shell shouldWrap
-   pg_dump --schema-only --no-owner --no-privileges -h  -U  -d  > schema.sql
+   ```shell
+   pg_dump --schema-only --no-owner --no-privileges -h <azure-host> -U <azure-user> -d <azure-database> > schema.sql
    ```
 
 2. Import the schema into your Neon database:
 
    ```shell
-   psql  < schema.sql
+   psql <neon-connection-string> < schema.sql
    ```
 
 ### Create a subscription
@@ -162,7 +164,7 @@ After importing the schema, create a subscription on the Neon database:
 
    ```sql
    CREATE SUBSCRIPTION neon_subscription
-   CONNECTION 'host= port=5432 dbname= user=replication_user password=your_secure_password'
+   CONNECTION 'host=<azure-host> port=5432 dbname=<azure-database> user=replication_user password=your_secure_password'
    PUBLICATION azure_publication;
    ```
 
@@ -262,12 +264,13 @@ This section discusses migration options other than using logical replication.
 
   Table-level data migration (using CSV files, for example) does not preserve database schemas, constraints, indexes, types, or other database features. You will have to create these separately. Table-level migration is simple but could result in significant downtime depending on the size of your data and the number of tables. For instructions, see [Import data from CSV](/docs/import/import-from-csv).
 
-## Reference
+## Resources
 
 For more information about logical replication and Postgres client utilities, refer to the following topics in the Postgres and Neon documentation:
 
-- [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html)
-- [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html)
-- [psql](https://www.postgresql.org/docs/current/app-psql.html)
-- [Postgres - Logical replication](https://www.postgresql.org/docs/current/logical-replication.html)
+- [PostgreSQL pg_dump documentation](https://www.postgresql.org/docs/current/app-pgdump.html)
+- [PostgreSQL pg_restore documentation](https://www.postgresql.org/docs/current/app-pgrestore.html)
+- [PostgreSQL psql documentation](https://www.postgresql.org/docs/current/app-psql.html)
+- [PostgreSQL logical replication documentation](https://www.postgresql.org/docs/current/logical-replication.html)
 - [Neon logical replication guide](/docs/guides/logical-replication-guide)
+- [Azure Database for PostgreSQL documentation](https://learn.microsoft.com/en-us/azure/postgresql/)

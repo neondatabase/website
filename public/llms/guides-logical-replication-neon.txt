@@ -1,6 +1,10 @@
 # Logical replication in Neon
 
-Information about logical replication specific to Neon
+> This guide provides Neon-specific information about logical replication, covering important notices for publishers and subscribers, scale to zero behavior, replication slot management, role requirements, and decoder plugin support.
+
+## Source
+
+- [Logical replication in Neon HTML](https://neon.com/docs/guides/logical-replication-neon): The original HTML version of this documentation
 
 This topic outlines information about logical replication specific to Neon, including important notices.
 
@@ -12,9 +16,9 @@ To avoid potential issues, please review the following notices carefully before 
 
 These notices apply when replicating data from Neon:
 
-- **Scale to zero**: Neon does not scale to zero a compute that has an active connection from a logical replication subscriber. In other words, a Neon Postgres instance with an active subscriber will not scale to zero, which may result in increased compute usage. For more information, see [Logical replication and scale to zero](/docs/guides/logical-replication-neon#logical-replication-and-scale-to-zero).
-- **Removal of inactive replication slots**: To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after approximately 40 hours if there are other _active_ replication slots**. If you plan to have more than one subscriber, please read [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) before you begin.
-- **Branch restore removes replication slots**: [Restoring a branch](/docs/guides/branch-restore) will delete all replication slots on that branch. Replication slots are not automatically re-created during the restore process.
+- **Scale to zero**: Neon does not scale to zero a compute that has an active connection from a logical replication subscriber. In other words, a Neon Postgres instance with an active subscriber will not scale to zero, which may result in increased compute usage. For more information, see [Logical replication and scale to zero](https://neon.com/docs/guides/logical-replication-neon#logical-replication-and-scale-to-zero).
+- **Removal of inactive replication slots**: To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after approximately 40 hours if there are other _active_ replication slots**. If you plan to have more than one subscriber, please read [Unused replication slots](https://neon.com/docs/guides/logical-replication-neon#unused-replication-slots) before you begin.
+- **Branch restore removes replication slots**: [Restoring a branch](https://neon.com/docs/guides/branch-restore) will delete all replication slots on that branch. Replication slots are not automatically re-created during the restore process.
 
 ### Neon as a subscriber
 
@@ -64,7 +68,7 @@ You can verify that your role has the `REPLICATION` privilege by running the fol
 ```sql
 SELECT rolname, rolreplication
 FROM pg_roles
-WHERE rolname = '';
+WHERE rolname = '<role_name>';
 ```
 
 ## Subscriber access
@@ -126,7 +130,7 @@ Creating a subscription that connects to the same database cluster (for example,
 For example, on the publisher database, you would create the publication and the replication slot, as shown:
 
 ```sql
-CREATE PUBLICATION my_publication FOR TABLES , ;
+CREATE PUBLICATION my_publication FOR TABLES <tbl1>, <tbl2>;
 SELECT pg_create_logical_replication_slot('my_replication_slot', 'pgoutput');
 ```
 
@@ -134,6 +138,6 @@ Then, on the subscriber database, you would create a subscription that reference
 
 ```sql
 CREATE SUBSCRIPTION my_subscription
-    CONNECTION 'connection_string'
+    CONNECTION '<connection_string>'
     PUBLICATION my_publication with (create_slot = false, slot_name = 'my_replication_slot');
 ```

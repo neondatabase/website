@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2025-03-06T11:08:51.322Z'
+updatedOn: '2025-05-11T11:23:50.630Z'
 ---
 
 ## access token
@@ -65,7 +65,10 @@ A branch created by a [instant restore](#branch-restore) operation. When you res
 
 An isolated copy of data, similar to a Git branch. Data includes databases, schemas, tables, records, indexes, roles — everything that comprises data in a Postgres instance. Just as a Git branch allows developers to work on separate features or fixes without impacting their main line of code, a Neon branch enables users to modify a copy of their data in isolation from their main line of data. This approach facilitates parallel database development, testing, and other features, similar to Git's code branching system.
 
-Each Neon project is created with a main line of data referred to as the [root branch](#root-branch). A branch created from the root branch or another branch is a [copy-on-write](#copy-on-write) clone.
+Each Neon project is created with two branches by default:
+
+- **production** - The default branch. This main line of data is referred to as [root branch](#root-branch).
+- **development** - A child branch of production. A branch created from the root branch or another branch is a [copy-on-write](#copy-on-write) clone.
 
 You can create a branch from the current or past state of another branch. A branch created from the current state of another branch includes the data that existed on that branch at the time of branch creation. A branch created from a past state of another branch includes the data that existed in the past state.
 
@@ -123,7 +126,7 @@ The Compute Units (CU) that are allocated to a Neon compute. A Neon compute can 
 
 ## Compute Unit (CU)
 
-A unit that measures the processing power or "size" of a Neon compute. A Compute Unit (CU) includes vCPU and RAM. A Neon compute can have anywhere from .25 to 56 CUs. See [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
+A unit that measures the processing power or "size" of a Neon compute. A Compute Unit (CU) includes vCPU and RAM. A Neon compute can have anywhere from .25 to 56 CUs. See [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration).
 
 ## compute hours
 
@@ -225,7 +228,7 @@ See [Neon Free Plan](#neon-free-plan).
 
 ## GB-month
 
-In Neon, **GB-month** is a unit of measure representing the storage of 1 gigabyte (GB) of data for one month. Storage usage is measured periodically and accumulated over the billing period. At the start of each billing period, GB-month usage resets to zero.
+In Neon, **GB-month** is a unit of measure representing the storage of 1 gigabyte (GB) of data for one month. A gigabyte is defined as 10^9 bytes (1,000,000,000 bytes). Storage usage is measured periodically and accumulated over the billing period. At the start of each billing period, GB-month usage resets to zero.
 
 GB-month usage reflects both the amount of storage used and how long it was used. For example, storing 10 GB for an entire month results in **10 GB-months**, while storing 10 GB for half a month results in **5 GB-months**.
 
@@ -395,7 +398,9 @@ An open-source relational database management system (RDBMS) emphasizing extensi
 
 ## Postgres role
 
-A Postgres role named for the registered Neon account is created with each Neon project. This role and any additional role created in the Neon Console, API, or CLI is assigned the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which allows creating databases, roles, and reading and writing data in all tables, views, sequences. Roles created with SQL are created with the same basic [public schema privileges](/docs/manage/database-access#public-schema-privileges) granted to newly created roles in a standalone Postgres installation. These users are not assigned the `neon_superuser` role. They must be selectively granted permissions for each database object. For more information, see [Manage database access](/docs/manage/database-access).
+A Postgres role is an entity that can own database objects and has privileges to perform database actions.
+
+A Postgres role named `neondb_owner` is created with each Neon project by default. This role owns the ready-to-use `neondb` database, also created by default with each new Neon project. This role and any additional role created in the Neon Console, API, or CLI is assigned the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which allows creating databases, roles, and reading and writing data in all tables, views, sequences. Roles created with SQL are created with the same basic [public schema privileges](/docs/manage/database-access#public-schema-privileges) granted to newly created roles in a standalone Postgres installation. These users are not assigned the `neon_superuser` role. They must be selectively granted permissions for each database object. For more information, see [Manage database access](/docs/manage/database-access).
 
 Older projects may have a `web-access` system role, used by the [SQL Editor](#sql-editor) and Neon’s [Passwordless auth](#passwordless-auth). The `web-access` role is system-managed. It cannot be modified, removed, or used in other authentication scenarios.
 
@@ -405,7 +410,7 @@ A feature in Neon that allows secure connections to Neon databases through AWS P
 
 ## default branch
 
-A designation that is given to a [branch](#branch) in a Neon project. Each Neon project is initially created with a [root branch](#root-branch) called `main`, which carries the _default branch_ designation by default.
+A designation that is given to a [branch](#branch) in a Neon project. Each Neon project is initially created with a [root branch](#root-branch) called `production`, which carries the _default branch_ designation by default.
 
 The default branch has a larger compute hour allowance on the Free Plan. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available.
 
@@ -415,7 +420,7 @@ For more information, see [default branch](/docs/manage/branches#default-branch)
 
 ## Project
 
-A collection of branches, databases, roles, and other project resources and settings. A project contains a compute with a Postgres server and storage for the project data.
+A collection of branches, databases, roles, and other project resources and settings. A project contains a primary [compute](#compute) that runs Postgres. It may also include [read replicas](#read-replica). A Neon account may have multiple projects.
 
 ## Project ID
 
@@ -463,6 +468,10 @@ A free and open-source emulator and virtualizer that performs hardware virtualiz
 
 Random Access Memory, a type of computer memory used to store data that is being actively processed.
 
+## read replica
+
+A read replica in Neon is a compute instance that connects to the same underlying storage as the primary compute but operates in read-only mode. It lets you offload read queries from your primary compute to improve performance and scalability, especially for analytical or reporting workloads. Read replica computes can be added or removed without affecting the primary compute.
+
 ## region
 
 The geographic location where Neon project resources are located. Neon supports creating projects in Amazon Web Services (AWS) and Azure regions. For information about regions supported by Neon, see [Regions](/docs/introduction/regions).
@@ -477,7 +486,7 @@ Selling the Neon service as part of another service offering. Neon's Platform Pa
 
 ## root branch
 
-A branch with no parent. Each Neon project starts with a root branch named `main`, which cannot be deleted and is set as the [default branch](#default-branch) for the project.
+A branch with no parent. Each Neon project starts with a root branch named `production`, which cannot be deleted and is set as the [default branch](#default-branch) for the project.
 
 Neon also supports two other types of root branches that have no parent but _can_ be deleted:
 
@@ -554,7 +563,7 @@ An early version of a feature or changes released for testing and feedback purpo
 
 ## tenant_attach
 
-A Neon Control Plane operation that attaches a Neon project to storage. For example, this operation occurs when when you create a new Neon project. See [System operations](/docs/manage/operations) for more information.
+A Neon Control Plane operation that attaches a Neon project to storage. For example, this operation occurs when you create a new Neon project. See [System operations](/docs/manage/operations) for more information.
 
 ## tenant_detach
 

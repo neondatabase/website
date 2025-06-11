@@ -3,16 +3,14 @@ import PropTypes from 'prop-types';
 
 import ChangelogList from 'components/pages/changelog/changelog-list';
 import Hero from 'components/pages/changelog/hero';
+import Aside from 'components/pages/doc/aside';
 import Breadcrumbs from 'components/pages/doc/breadcrumbs';
-import ChatOptions from 'components/pages/doc/chat-options';
-import EditOnGithub from 'components/pages/doc/edit-on-github';
 import Modal from 'components/pages/doc/modal';
 import MODALS from 'components/pages/doc/modal/data';
 import ChangelogForm from 'components/shared/changelog-form';
 import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
 import NavigationLinks from 'components/shared/navigation-links';
-import TableOfContents from 'components/shared/table-of-contents';
 import { DOCS_BASE_PATH } from 'constants/docs';
 
 import Tag from '../tag';
@@ -20,7 +18,7 @@ import Tag from '../tag';
 const Changelog = ({ posts }) => (
   <>
     <Hero />
-    <ChangelogForm />
+    <ChangelogForm className="mb-5 hidden xl:flex" />
     <ChangelogList className="mt-4" posts={posts} />
   </>
 );
@@ -36,12 +34,12 @@ const Post = ({
   navigationLinks: { previousLink, nextLink },
   navigationLinksPrefix,
   isChangelog = false,
-  isUseCase = false,
+  isTemplate = false,
   isPostgres = false,
   isDocsIndex = false,
   changelogPosts = [],
   currentSlug,
-  fileOriginPath,
+  githubPath,
   tableOfContents,
 }) => {
   const modal = MODALS.find(
@@ -55,7 +53,7 @@ const Post = ({
       <div
         className={clsx(
           'flex flex-col lg:ml-0 lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8',
-          isUseCase
+          isTemplate
             ? 'col-span-6 col-start-4 -mx-10 2xl:col-span-7 2xl:col-start-3 2xl:mx-0 xl:col-span-10 xl:col-start-2'
             : 'col-span-7 col-start-2 -ml-6 max-w-[832px] 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 lg:max-w-full'
         )}
@@ -73,10 +71,8 @@ const Post = ({
           <article>
             <h1
               className={clsx(
-                'font-semibold leading-tight tracking-extra-tight',
-                isUseCase
-                  ? 'text-[56px] xl:text-5xl lg:text-4xl md:text-[28px] md:leading-tight'
-                  : 'text-[36px] xl:text-3xl',
+                'text-balance font-semibold leading-tight tracking-extra-tight',
+                isTemplate ? 'text-5xl md:text-[36px] sm:text-3xl' : 'text-[36px] xl:text-3xl',
                 tag && 'inline'
               )}
             >
@@ -84,14 +80,20 @@ const Post = ({
             </h1>
             {tag && <Tag className="relative -top-1.5 ml-3 inline" label={tag} />}
             {subtitle && (
-              <p className="my-2 text-xl leading-tight text-gray-new-40 dark:text-gray-new-80">
+              <p
+                className={clsx(
+                  isTemplate
+                    ? 'mt-4 text-2xl leading-snug text-[#A1A1AA] lg:text-xl md:text-lg'
+                    : 'my-2 text-xl leading-tight text-gray-new-40 dark:text-gray-new-80'
+                )}
+              >
                 {subtitle}
               </p>
             )}
             <Content
               className="mt-5"
               content={content}
-              isUseCase={isUseCase}
+              isTemplate={isTemplate}
               isPostgres={isPostgres}
             />
           </article>
@@ -107,40 +109,14 @@ const Post = ({
         <DocFooter updatedOn={updatedOn} slug={currentSlug} />
       </div>
 
-      <div
-        className={clsx(
-          'relative col-span-2 -ml-12 max-w-64 xl:hidden',
-          isUseCase
-            ? 'col-start-11 2xl:col-span-3 2xl:col-start-10 2xl:ml-auto 2xl:max-w-[238px]'
-            : 'col-start-10 3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6'
-        )}
-      >
-        <div
-          className={clsx(
-            'sticky flex flex-col pb-5',
-            isUseCase
-              ? 'top-[188px] max-h-[calc(100vh-188px)]'
-              : 'top-[136px] max-h-[calc(100vh-136px)]'
-          )}
-        >
-          {enableTableOfContents && (
-            <TableOfContents items={tableOfContents} isUseCase={isUseCase} />
-          )}
-          {!isUseCase && (
-            <div
-              className={
-                enableTableOfContents &&
-                'mt-2.5 shrink-0 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70'
-              }
-            >
-              <EditOnGithub fileOriginPath={fileOriginPath} />
-            </div>
-          )}
-          {isDocsIndex && <ChatOptions isSidebar />}
-          {isChangelog && <ChangelogForm isSidebar />}
-        </div>
-      </div>
-
+      <Aside
+        isTemplate={isTemplate}
+        isDocsIndex={isDocsIndex}
+        isChangelog={isChangelog}
+        enableTableOfContents={enableTableOfContents}
+        tableOfContents={tableOfContents}
+        githubPath={githubPath}
+      />
       {modal && <Modal {...modal} />}
     </>
   );
@@ -162,7 +138,7 @@ Post.propTypes = {
   }).isRequired,
   navigationLinksPrefix: PropTypes.string,
   isChangelog: PropTypes.bool,
-  isUseCase: PropTypes.bool,
+  isTemplate: PropTypes.bool,
   isPostgres: PropTypes.bool,
   isDocsIndex: PropTypes.bool,
   changelogPosts: PropTypes.arrayOf(
@@ -172,7 +148,7 @@ Post.propTypes = {
     })
   ),
   currentSlug: PropTypes.string.isRequired,
-  fileOriginPath: PropTypes.string.isRequired,
+  githubPath: PropTypes.string.isRequired,
   tableOfContents: PropTypes.arrayOf(PropTypes.shape({})),
 };
 

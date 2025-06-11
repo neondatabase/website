@@ -2,7 +2,7 @@
 title: Schema diff
 subtitle: Learn how to use Neon's Schema Diff tool to compare branches of your database
 enableTableOfContents: true
-updatedOn: '2025-01-09T14:34:13.460Z'
+updatedOn: '2025-05-30T16:54:40.480Z'
 ---
 
 Neon's Schema Diff tool lets you compare an SQL script of the schemas for two selected branches in a side-by-side view (or line-by-line on mobile devices).
@@ -69,23 +69,23 @@ Use the `schema-diff` subcommand from the `branches` command:
 neon branches schema-diff [base-branch] [compare-source[@(timestamp|lsn)]]
 ```
 
-The operation will compare a selected branch (`[compare-source]`) against the latest (head) of your base branch (`[base-branch]`). For example, if you want to compare recent changes you made to your development branch `dev/alex` against your production branch `main`, identify `main` as your base branch and `dev/alex` as your compare-source.
+The operation will compare a selected branch (`[compare-source]`) against the latest (head) of your base branch (`[base-branch]`). For example, if you want to compare recent changes you made to your development branch `development` against your production branch `production`, identify `production` as your base branch and `development` as your compare-source.
 
 ```bash
-neon branches schema-diff main dev/alex
+neon branches schema-diff production development
 ```
 
 You have a few options here:
 
-- Append a timestamp or LSN to compare to a specific point in `dev/alex` branch's history.
-- If you are regularly comparing development branches against `main`, include `main` in your `set-context` file. You can then leave out the [base-branch] from the command.
+- Append a timestamp or LSN to compare to a specific point in `development` branch's history.
+- If you are regularly comparing development branches against `production`, include `production` in your `set-context` file. You can then leave out the [base-branch] from the command.
 - Use aliases to shorten the command.
 - Include `--database` to reduce the diff to a single database. If you don't specify a database, the diff will include all databases on the branch.
 
-Here is the same command using aliases, with `main` included in `set-context`, pointing to an LSN from `dev/alex` branch's history, and limiting the diff to the database `people`:
+Here is the same command using aliases, with `production` included in `set-context`, pointing to an LSN from `development` branch's history, and limiting the diff to the database `people`:
 
 ```bash
-neon branch sd dev/alex@0/123456 --db people
+neon branch sd development@0/123456 --db people
 ```
 
 To find out what other comparisons you can make, see [Neon CLI commands — branches](/docs/reference/cli-branches#schema-diff) for full documentation of the command.
@@ -107,17 +107,17 @@ curl --request GET \
 
 The `compare_schema` endpoint supports the following parameters:
 
-| Parameter          | Description                                                                               | Required | Example                    |
-| ------------------ | ----------------------------------------------------------------------------------------- | -------- | -------------------------- |
-| `<project_id>`     | The ID of your Neon project.                                                              | Yes      | `wispy-butterfly-25042691` |
-| `<branch_id>`      | The ID of the target branch to compare — the branch with the modified schema.             | Yes      | `br-rough-boat-a54bs9yb`   |
-| `<base_branch_id>` | The ID of the base branch for comparison.                                                 | Yes      | `br-royal-star-a54kykl2`   |
-| `<db_name>`        | The name of the database in the target branch.                                            | Yes      | `neondb`                   |
-| `lsn`              | The LSN on the target branch for which the schema is retrieved.                           | No       | `0/1EC5378`                |
-| `timestamp`        | The point in time on the target branch for which the schema is retrieved.                 | No       | `2022-11-30T20:09:48Z`     |
-| `base_lsn`         | The LSN for the base branch schema.                                                       | No       | `0/2FC6321`                |
-| `base_timestamp`   | The point in time for the base branch schema.                                             | No       | `2022-11-30T20:09:48Z`     |
-| `Authorization`    | Bearer token for API access (your [Neon API key](https://neon.tech/docs/manage/api-keys)) | Yes      | `$NEON_API_KEY`            |
+| Parameter          | Description                                                                   | Required | Example                    |
+| ------------------ | ----------------------------------------------------------------------------- | -------- | -------------------------- |
+| `<project_id>`     | The ID of your Neon project.                                                  | Yes      | `wispy-butterfly-25042691` |
+| `<branch_id>`      | The ID of the target branch to compare — the branch with the modified schema. | Yes      | `br-rough-boat-a54bs9yb`   |
+| `<base_branch_id>` | The ID of the base branch for comparison.                                     | Yes      | `br-royal-star-a54kykl2`   |
+| `<db_name>`        | The name of the database in the target branch.                                | Yes      | `neondb`                   |
+| `lsn`              | The LSN on the target branch for which the schema is retrieved.               | No       | `0/1EC5378`                |
+| `timestamp`        | The point in time on the target branch for which the schema is retrieved.     | No       | `2022-11-30T20:09:48Z`     |
+| `base_lsn`         | The LSN for the base branch schema.                                           | No       | `0/2FC6321`                |
+| `base_timestamp`   | The point in time for the base branch schema.                                 | No       | `2022-11-30T20:09:48Z`     |
+| `Authorization`    | Bearer token for API access (your [Neon API key](/docs/manage/api-keys))      | Yes      | `$NEON_API_KEY`            |
 
 <Admonition type="note" title="notes">
 - The optional `jq -r '.diff'` command appended to the example above extracts the diff field from the JSON response and outputs it as plain text to make it easier to read. This command is not  necessary when using the endpoint programmatically.

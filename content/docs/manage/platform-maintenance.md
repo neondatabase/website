@@ -3,7 +3,7 @@ title: Platform maintenance
 enableTableOfContents: true
 isDraft: false
 tag: new
-updatedOn: '2025-03-06T17:12:06.387Z'
+updatedOn: '2025-05-30T16:54:40.490Z'
 ---
 
 Neon occasionally performs essential **platform maintenance** outside of [scheduled updates](/docs/manage/updates) performed on Neon computes. This means that you may experience brief disruptions from time to time for these important updates.
@@ -34,6 +34,6 @@ Most Postgres connection drivers include built-in retry mechanisms that automati
 
 However, if your application has strict availability requirements, you may want to ensure that your connection settings are configured to allow for connection retries. Check your driver's documentation for options like connection timeouts, retry intervals, and connection pooling strategies. Your configuration should account for occasional disruptions. For related information, see [Build connection timeout handling into your application](/docs/connect/connection-latency#build-connection-timeout-handling-into-your-application).
 
-If your application or integration uses the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) or [SDKs](https://neon.tech/docs/reference/sdk) that wrap the Neon API, we recommend building in the same type of retry logic.
+If your application or integration uses the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) or [SDKs](/docs/reference/sdk) that wrap the Neon API, we recommend building in the same type of retry logic.
 
 <NeedHelp/>

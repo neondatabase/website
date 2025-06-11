@@ -1,6 +1,10 @@
 # The pg_trgm extension
 
-Improve Postgres text searches with the pg_trgm extension
+> This guide explains how to use the pg_trgm extension to enhance Postgres text search capabilities with trigram matching, covering installation, similarity searches, and performance optimization techniques.
+
+## Source
+
+- [The pg_trgm extension HTML](https://neon.com/docs/extensions/pg_trgm): The original HTML version of this documentation
 
 The `pg_trgm` extension enhances Postgres' ability to perform text searches by using trigram matching. Trigrams are groups of three consecutive characters taken from a string. By breaking down text into trigrams, Postgres can perform more efficient and flexible searches, such as similarity and proximity searches.
 
@@ -11,7 +15,9 @@ This extension is particularly useful for applications requiring fuzzy string ma
 In this guide, we'll explore the `pg_trgm` extension, covering how to enable it, use it for text searches, and optimize queries. This extension has applications in data retrieval, text analysis, and anywhere robust text search capabilities are needed.
 
 
+<Admonition type="note">
     The `pg_trgm` extension is open-source and can be installed on any Postgres setup. Detailed information about the extension is available in the [PostgreSQL Documentation](https://www.postgresql.org/docs/current/pgtrgm.html).
+</Admonition>
 
 
 **Version availability**
@@ -159,7 +165,7 @@ In contrast, the `strict_word_similarity` function only considers a subset of su
 There are operators to calculate the `distance` between two strings, i.e., one minus the similarity score.
 
 ```sql
-SELECT similarity('Hello', 'Halo') AS similarity, 'Hello'  'Halo' AS distance;
+SELECT similarity('Hello', 'Halo') AS similarity, 'Hello' <-> 'Halo' AS distance;
 ```
 
 This query returns the following:

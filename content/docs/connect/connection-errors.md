@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/connectivity-issues
   - /docs/connect/connectivity-issues
-updatedOn: '2025-04-10T23:38:28.339Z'
+updatedOn: '2025-06-06T11:31:31.522Z'
 ---
 
 This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered include:
@@ -24,6 +24,7 @@ This topic describes how to resolve connection errors you may encounter when usi
 - [query_wait_timeout SSL connection has been closed unexpectedly](#querywaittimeout-ssl-connection-has-been-closed-unexpectedly)
 - [The request could not be authorized due to an internal error](#the-request-could-not-be-authorized-due-to-an-internal-error)
 - [Terminating connection due to idle-in-transaction timeout](#terminating-connection-due-to-idle-in-transaction-timeout)
+- [DNS resolution issues](#dns-resolution-issues)
 
 <Admonition type="info">
 Connection problems are sometimes related to a system issue. To check for system issues, please refer to the [Neon status page](https://neonstatus.com/).  
@@ -34,12 +35,12 @@ Connection problems are sometimes related to a system issue. To check for system
 With older clients and some native Postgres clients, you may receive the following error when attempting to connect to Neon:
 
 ```txt shouldWrap
-ERROR: The endpoint ID is not specified. Either upgrade the Postgres client library (libpq) for SNI support or pass the endpoint ID (the first part of the domain name) as a parameter: '&options=endpoint%3D'. See [https://neon.tech/sni](https://neon.tech/sni) for more information.
+ERROR: The endpoint ID is not specified. Either upgrade the Postgres client library (libpq) for SNI support or pass the endpoint ID (the first part of the domain name) as a parameter: '&options=endpoint%3D'. See [https://neon.com/sni](/sni) for more information.
 ```
 
 This error occurs if your client library or application does not support the **Server Name Indication (SNI)** mechanism in TLS.
 
-Neon uses computet IDs (the first part of a Neon domain name) to route incoming connections. However, the Postgres wire protocol does not transfer domain name information, so Neon relies on the Server Name Indication (SNI) extension of the TLS protocol to do this.
+Neon uses compute IDs (the first part of a Neon domain name) to route incoming connections. However, the Postgres wire protocol does not transfer domain name information, so Neon relies on the Server Name Indication (SNI) extension of the TLS protocol to do this.
 
 SNI support was added to `libpq` (the official Postgres client library) in Postgres 14, which was released in September 2021. Clients that use your system's `libpq` library should work if your Postgres version is >= 14. On Linux and macOS, you can check Postgres version by running `pg_config --version`. On Windows, check the `libpq.dll` version in your Postgres installation's `bin` directory. Right-click on the file, select **Properties** > **Details**.
 
@@ -95,7 +96,7 @@ postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-12
 Using a dollar sign (`$`) character as a separator may be required if a semicolon (`;`) is not a permitted character in a password field. For example, the [AWS Database Migration Service (DMS)](https://aws.amazon.com/dms/) does not permit a semicolon character in the **Password** field when defining connection details for database endpoints.
 </Admonition>
 
-This approach causes the authentication method to be downgraded from `scram-sha-256` (never transfers a plain text password) to `password` (transfers a plain text password). However, the connection is still TLS-encrypted, so the level of security is equivalent to the security provided by `https` websites. We intend deprecate this option when most libraries and applications provide SNI support.
+This approach causes the authentication method to be downgraded from `scram-sha-256` (never transfers a plain text password) to `password` (transfers a plain text password). However, the connection is still TLS-encrypted, so the level of security is equivalent to the security provided by `https` websites as long as `sslmode=verify-full` or channel binding is used. We intend deprecate this option when most libraries and applications provide SNI support.
 
 ### Libraries
 
@@ -214,7 +215,7 @@ This error occurs when the maximum number of simultaneous database connections, 
 To resolve this issue, you have several options:
 
 - Find and remove long-running or idle connections. See [Find long-running or idle connections](/docs/postgresql/query-reference#find-long-running-or-idle-connections).
-- Use a larger compute, with a higher `max_connections` configuration. See [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+- Use a larger compute, with a higher `max_connections` configuration. See [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 - Enable [connection pooling](/docs/connect/connection-pooling).
 
 If you are already using connection pooling, you may need to reach out to Neon Support to request a higher `default_pool_size` setting for PgBouncer. See [Neon PgBouncer configuration settings for more information](/docs/connect/connection-pooling#neon-pgbouncer-configuration-settings).
@@ -225,7 +226,7 @@ This error is often encountered when attempting to set the Postgres `search_path
 
 ## Postgrex: DBConnection ConnectionError ssl send: closed
 
-Postgrex has an `:idle_interval` connection parameter that defines an interval for pinging connections after a period of inactivity. The default setting is `1000ms`. If you rely on Neon's [autosuspend](https://neon.tech/docs/introduction/auto-suspend) feature to scale your compute to zero when your database is not active, this setting will prevent that and you may encounter a `(DBConnection.ConnectionError) ssl send: closed (ecto_sql 3.12.0)` error as a result. As a workaround, you can set the interval to a higher value to allow your Neon compute to suspend. For example:
+Postgrex has an `:idle_interval` connection parameter that defines an interval for pinging connections after a period of inactivity. The default setting is `1000ms`. If you rely on Neon's [autosuspend](/docs/introduction/auto-suspend) feature to scale your compute to zero when your database is not active, this setting will prevent that and you may encounter a `(DBConnection.ConnectionError) ssl send: closed (ecto_sql 3.12.0)` error as a result. As a workaround, you can set the interval to a higher value to allow your Neon compute to suspend. For example:
 
 ```elixir
 config :app_name, AppName.Repo
@@ -262,5 +263,90 @@ If you encounter this error, you can adjust the `idle_in_transaction_session_tim
 3. Change at the role level: `ALTER ROLE <role> SET idle_in_transaction_session_timeout = 0;` (replace `<role>` with the name of the user role)
 
 Be aware that leaving transactions idle for extended periods can prevent vacuuming and increase the number of open connections. Please use caution and consider only changing the value temporarily, as needed.
+
+## DNS resolution issues
+
+Some users encounter DNS resolution failures when connecting to their Neon database. These issues are often reported when using the **Tables** page in the Neon Console. In such cases, users may see an **Unexpected error happened** message like the one below:
+
+![Unexpected error happened on Tables page](/docs/guides/tables_error.png)
+
+To check for a DNS resolution issue, you can run `nslookup` on your Neon hostname, which is the part of your Neon database [connection string](/docs/reference/glossary#connection-string) starting with your endpoint ID (e.g., `ep-cool-darkness-a1b2c3d4`) and ending with `neon.tech`. For example:
+
+```bash shouldWrap
+nslookup ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech
+```
+
+If the Neon hostname resolves correctly, you'll see output similar to this:
+
+```bash
+nslookup ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech
+Server:		192.168.2.1
+Address:	192.168.2.1#53
+
+Non-authoritative answer:
+p-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech	canonical name = ap-southeast-1.aws.neon.tech.
+Name:	ap-southeast-1.aws.neon.tech
+Address: 203.0.113.10
+Name:	ap-southeast-1.aws.neon.tech
+Address: 203.0.113.20
+Name:	ap-southeast-1.aws.neon.tech
+Address: 203.0.113.30
+```
+
+If the hostname does not resolve, you might see an error like this, where the DNS query is refused:
+
+```bash shouldWrap
+** server can't find ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech: REFUSED
+```
+
+To verify that it's a DNS resolution issue, run the following test using a public DNS resolver, such as Google DNS:
+
+```bash
+nslookup ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech 8.8.8.8
+```
+
+If this succeeds, it's very likely a DNS resolution issue.
+
+**Cause**
+
+Failure to resolve the Neon hostname can happen for different reasons:
+
+- Regional DNS caching or propagation delays
+- Restrictive or misconfigured DNS resolvers (such as those provided by your ISP)
+- System-wide web proxy settings that interfere with DNS resolution
+
+**Workarounds**
+
+1. **Using a Public DNS Resolver**
+
+   - Google DNS: 8.8.8.8, 8.8.4.4
+   - Cloudflare DNS: 1.1.1.1, 1.0.0.1
+
+   These can be changed at:
+
+   - OS level (macOS, Windows, Linux)
+   - Router level
+   - Mobile device network settings
+   - Android Private DNS (configure a trusted provider such as `dns.google` or `1dot1dot1dot1.cloudflare-dns.com`)
+
+   To change your DNS configuration at the OS level:
+
+   - **macOS**: System Settings → Network → Wi-Fi → Details → DNS
+   - **Windows**: Control Panel → Network and Internet → Network Connections → Right-click your connection → Properties → Internet Protocol Version 4 (TCP/IPv4)
+   - **Linux**: Edit `/etc/resolv.conf` or configure your network manager (e.g., NetworkManager, Netplan)
+
+   This article provides detailed instructions: [How to Turn on Private DNS Mode](https://news.trendmicro.com/2023/03/21/how-to-turn-on-private-dns-mode/)
+
+2. **Disable system-wide web proxies**
+
+   If you’re using a proxy configured at the OS level, it may interfere with DNS lookups. To check and disable system proxy settings:
+
+   - **macOS**: System Settings → Network → Wi-Fi → Details → Proxies. Uncheck any active proxy options (e.g., "Web Proxy (HTTP)", "Secure Web Proxy (HTTPS)")
+   - **Windows**: Settings → Network & Internet → Proxy. Turn off "Use a proxy server" if it's enabled
+   - **Linux**: Check your environment variables (e.g., `http_proxy`, `https_proxy`) and system settings under Network/Proxy.
+
+3. **Using a VPN**
+
+   Using a VPN routes DNS queries through a different resolver and often bypasses the issue entirely.
 
 <NeedHelp/>

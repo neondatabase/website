@@ -24,6 +24,7 @@ module.exports = {
         DEFAULT: '#1a1a1a',
         new: '#0c0d0d',
         pure: '#000000',
+        fog: '#0d0e12',
       },
       white: '#ffffff',
       primary: {
@@ -128,6 +129,7 @@ module.exports = {
         tighter: '-0.04em',
         'extra-tight': '-0.02em',
         snug: '-0.01em',
+        wide: '0.02em',
         wider: '0.04em',
       },
       boxShadow: {
@@ -135,16 +137,6 @@ module.exports = {
         contact: '0px 4px 10px 0px rgba(0, 0, 0, .5), 0px 4px 30px 0px rgba(0, 0, 0, .5)',
       },
       backgroundImage: ({ theme }) => ({
-        'header-menu-banner':
-          'radial-gradient(69.47% 49.51% at 29.09% 0%, #131D3E 0%, rgba(25, 39, 82, 0.00) 100%),' +
-          'radial-gradient(14.22% 14.24% at 82.11% 0%, #A3F0E9 0%, rgba(163, 240, 233, 0.00) 100%),' +
-          'radial-gradient(46.71% 50% at 80.6% 0%, rgba(86, 198, 189, 0.60) 0%, rgba(33, 80, 91, 0.00) 100%),' +
-          'linear-gradient(0deg, #18191B, #18191B)',
-        'header-menu-banner-mobile':
-          'radial-gradient(16.35% 46.44% at 99.06% 3.75%, rgba(86, 198, 189, 0.60) 13.19%, rgba(33, 80, 91, 0.00) 100%),' +
-          'radial-gradient(30.11% 65.43% at 71.03% 0%, #131D3E 0%, rgba(25, 39, 82, 0.00) 100%),' +
-          'radial-gradient(43.11% 44.64% at 99.53% 4.38%, #A3F0E9 0%, rgba(163, 240, 233, 0.00) 100%),' +
-          'linear-gradient(0deg, #18191B, #18191B)',
         'header-docs-button-border':
           'radial-gradient(78.71% 83.93% at 50% 3.57%, rgba(255, 255, 255, 0.78), transparent),' +
           'linear-gradient(0deg, #BCBEC2, #BCBEC2)',
@@ -241,6 +233,14 @@ module.exports = {
           'radial-gradient(78.12% 78.13% at 50% 0%, rgba(226, 230, 235, 0.06) 0%, rgba(226, 230, 235, 0.00) 100%),' +
           'linear-gradient(0deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.02)),' +
           'linear-gradient(0deg, #0C0C0D, #0C0C0D)',
+        'migration-card-left-bg':
+          'radial-gradient(77.42% 74.82% at 75.59% -18.04%, rgba(38, 66, 89, 0.80) 0%, rgba(8, 20, 25, 0.00) 100%),' +
+          'radial-gradient(86.92% 83.32% at 26.62% 128.01%, rgba(1, 119, 119, 0.17) 0%, rgba(1, 119, 119, 0.00) 100%),' +
+          'linear-gradient(0deg, #0D0E12, #0D0E12)',
+        'migration-card-right-bg':
+          'radial-gradient(70.46% 67.03% at 0% -10.6%, rgba(19, 33, 45, 0.80) 14.53%, rgba(22, 33, 42, 0.00) 85.73%), linear-gradient(147deg, rgba(1, 119, 99, 0.00) 52.96%, rgba(1, 119, 99, 0.20) 138.77%)',
+        'migration-steps-slider-progress-bg':
+          'linear-gradient(90deg, rgba(36, 38, 40, 0) 0%, #242628 6.17%, #242628 78.58%, rgba(36, 38, 40, 0) 100%)',
         // for deploy page
         'color-picker-variant-1': 'linear-gradient(225deg, #4CFFFF 31.6%, #00E660 74.65%);',
         'color-picker-variant-2': 'linear-gradient(225deg, #BDF471 35.94%, #00CC33 100%);',

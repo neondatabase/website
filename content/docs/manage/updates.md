@@ -3,7 +3,7 @@ title: Updates
 enableTableOfContents: true
 isDraft: false
 tag: new
-updatedOn: '2025-03-05T21:09:38.756Z'
+updatedOn: '2025-05-30T16:54:40.491Z'
 ---
 
 To keep your Neon [computes](/docs/reference/glossary#compute) and Postgres instances up to date with the latest patches and features, Neon applies updates to your project's computes. We notify you of updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can select an update window — a specific day and hour for updates.
@@ -144,7 +144,7 @@ Computes receive available updates immediately upon restart. For example, if Neo
 
 If a compute regularly scales to zero, it will receive updates when it starts up again. In such cases, you may not need to pay much attention to update notifications, as updates will be applied naturally through your compute's stop/start cycles.
 
-For compute restart instructions, see [Restart a compute](/docs/manage/endpoints#restart-a-compute).
+For compute restart instructions, see [Restart a compute](/docs/manage/computes#restart-a-compute).
 
 ## Updating large computes
 
@@ -152,7 +152,7 @@ Computes larger than 8 CU or set to scale beyond 8 CU are not updated automatica
 
 Neon typically releases compute updates weekly, so we recommend scheduling weekly compute restarts.
 
-For restart instructions, see [Restart a compute](/docs/manage/endpoints#restart-a-compute).
+For restart instructions, see [Restart a compute](/docs/manage/computes#restart-a-compute).
 
 ## Handling connection disruptions during compute updates
 
@@ -160,6 +160,6 @@ Most Postgres connection drivers include built-in retry mechanisms that automati
 
 However, if your application has strict availability requirements, you may want to ensure that your connection settings are configured to allow for retries. Check your driver's documentation for options like connection timeouts, retry intervals, and connection pooling strategies. Your configuration should account for the few seconds it takes to apply updates to your Neon compute. For related information, see [Build connection timeout handling into your application](/docs/connect/connection-latency#build-connection-timeout-handling-into-your-application).
 
-If your application or integration uses the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) or [SDKs](https://neon.tech/docs/reference/sdk) that wrap the Neon API, we recommend building in the same type of retry logic.
+If your application or integration uses the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) or [SDKs](/docs/reference/sdk) that wrap the Neon API, we recommend building in the same type of retry logic.
 
 <NeedHelp/>

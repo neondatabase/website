@@ -3,7 +3,7 @@ title: Secure your data with SuperTokens and Neon RLS
 subtitle: Implement Row-level Security policies in Postgres using SuperTokens and Neon
   RLS
 enableTableOfContents: true
-updatedOn: '2025-03-10T18:26:02.770Z'
+updatedOn: '2025-05-30T16:54:40.474Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-supertokens
   - /docs/guides/neon-authorize-supertokens
@@ -24,7 +24,7 @@ Use SuperTokens with Neon RLS to add secure, database-level authorization to you
 
 ## How it works
 
-SuperTokens handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon RLS. Neon RLS validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
+SuperTokens handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon RLS. Neon RLS validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
 
 ## Prerequisites
 

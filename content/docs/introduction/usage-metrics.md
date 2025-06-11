@@ -1,7 +1,7 @@
 ---
 title: Usage metrics
 enableTableOfContents: true
-updatedOn: '2025-04-08T22:55:27.450Z'
+updatedOn: '2025-05-30T16:54:40.489Z'
 ---
 
 This topic describes [Storage](#storage), [Archive storage](#archive-storage), [Compute](#compute), [Data transfer](#data-transfer) and [Project](#projects) usage metrics in detail so that you can better manage your [plan](/docs/introduction/plans) allowances and extra usage.
@@ -159,6 +159,13 @@ In short, `VACUUM FULL` can help reduce your data size and future storage costs,
 
 </details>
 
+<details>
+<summary>**What is the maximum data size that Neon supports?**</summary>
+
+Each [Neon plan](/docs/introduction/plans) comes with a specific storage allowance. Beyond this allowance on paid plans, extra usage costs apply. Billing-related allowances aside, Neon projects can support data sizes up to 4 TiB. To increase this limit, [contact the Neon Sales team](/contact-sales).
+
+</details>
+
 ## Archive storage
 
 To minimize storage costs, Neon **automatically** archives branches that are **older than 14 days** and **have not been accessed for the past 24 hours**. Both conditions must be true for a branch to be archived.
@@ -237,7 +244,7 @@ Compute hour usage is calculated by multiplying compute size by _active hours_.
 
 ### How Neon compute features affect usage
 
-Compute-hour usage in Neon is affected by [scale to zero](/docs/guides/scale-to-zero-guide), [autoscaling](/docs/guides/autoscaling-guide), and your minimum and maximum [compute size](/docs/manage/endpoints#compute-size-and-autoscaling-configuration) configuration. With these features enabled, you can get a sense of how your compute hour usage might accrue in the following graph.
+Compute-hour usage in Neon is affected by [scale to zero](/docs/guides/scale-to-zero-guide), [autoscaling](/docs/guides/autoscaling-guide), and your minimum and maximum [compute size](/docs/manage/computes#compute-size-and-autoscaling-configuration) configuration. With these features enabled, you can get a sense of how your compute hour usage might accrue in the following graph.
 
 ![Compute metrics graph](/docs/introduction/compute-usage-graph.jpg)
 

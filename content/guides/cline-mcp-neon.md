@@ -37,7 +37,7 @@ Before you begin, ensure you have the following:
     - Download and install the Cline VS Code extension from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev).
     - Set up Cline by following the [Getting Started guide](https://docs.cline.bot/getting-started/getting-started-new-coders#setting-up-openrouter-api-key) which involves obtaining an [OpenRouter API key](https://openrouter.ai) to work with Cline.
 2.  **A Neon Account and Project:** You'll need a Neon account and a project. You can quickly create a new Neon project here [pg.new](https://pg.new)
-3.  **Neon API Key (for Local MCP server):** After signing up, get your Neon API Key from the [Neon console](https://console.neon.tech/app/settings/profile). This API key is needed to authenticate your application with Neon. For instructions, see [Manage API keys](https://neon.tech/docs/manage/api-keys).
+3.  **Neon API Key (for Local MCP server):** After signing up, get your Neon API Key from the [Neon console](https://console.neon.tech/app/settings/profile). This API key is needed to authenticate your application with Neon. For instructions, see [Manage API keys](/docs/manage/api-keys).
     <Admonition type="warning" title="Neon API Key Security">
     Keep your Neon API key secure, and never share it publicly. It provides access to your Neon projects.
     </Admonition>
@@ -72,7 +72,8 @@ This method uses Neon's managed server and OAuth authentication.
 6. **Save** the `cline_mcp_settings.json` file.
 7. You should see a notification in VS Code that says: "MCP servers updated".
    ![Cline MCP Server Updated](/docs/guides/cline-mcp-config-update.png)
-8. Cline is now connected to Neon's remote MCP server.
+8. An OAuth window will open in your browser. Follow the prompts to authorize Cline to access your Neon account. Once authorized, Cline will be connected to Neon's remote MCP server.
+   ![Neon OAuth window](/docs/guides/neon-oauth-window.png)
 
 <Admonition type="note">
   The remote hosted MCP server is in preview due to the [new OAuth MCP specification](https://spec.modelcontextprotocol.io/specification/2025-03-26/basic/authorization/), expect potential changes as we continue to refine the OAuth integration.
@@ -139,26 +140,9 @@ Now that you have the Neon MCP server set up either remotely or locally, you can
 
 You've now configured Neon MCP Server in Cline and can manage your Neon Postgres databases using AI.
 
-## Neon MCP Server Tools
+<MCPTools />
 
-Neon MCP server exposes the following actions, which primarily map to **Neon API endpoints**:
-
-- `list_projects`: Lists all your Neon projects. This uses the Neon API to retrieve a summary of all projects associated with your Neon account. _Note: This particular action is still under development. It's not yet returning results as expected._
-- `describe_project`: Retrieves detailed information about a specific Neon project. Provides comprehensive details about a chosen project, such as its ID, name, and associated branches.
-- `create_project`: Creates a new Neon project — a container in Neon for branches, databases, roles, and computes.
-- `delete_project`: Deletes an existing Neon project.
-- `create_branch`: Creates a new branch within a Neon project. Leverages Neon's branching feature, allowing you to create new branches for development or migrations.
-- `delete_branch`: Deletes an existing branch in a Neon project.
-- `describe_branch`: Retrieves details about a specific branch. Retrieves information about a particular branch, such as its name and ID.
-- `get_connection_string`: Retrieves a connection string for a specific database in a Neon project. Returns a formatted connection string that can be used to connect to the database.
-- `run_sql`: Runs a single SQL query against a Neon database. Allows you to run read or write SQL queries.
-- `run_sql_transaction`: Runs a series of SQL queries within a transaction against a Neon database. Enables running multiple SQL statements as a single atomic transaction, ensuring data consistency.
-- `get_database_tables`: Lists all tables in a specified Neon database. Provides a list of tables.
-- `describe_table_schema`: Retrieves the schema definition of a specific table. Details the structure of a table, including columns and data types.
-- `prepare_database_migration`: Initiates a database migration process, utilizing a temporary branch for safety. Begins the process of altering your database schema, safely using Neon's branching feature.
-- `complete_database_migration`: Completes a migration process, applying changes to your main database and cleaning up temporary resources.
-
-These actions enable any MCP client like Cline to interact with various functionalities of the **Neon platform via the Neon API.** Certain tools, especially database migration ones, are tailored for AI agent and LLM usage, leveraging Neon’s branching for safe preview and commit.
+These actions enable any MCP client like Cline to interact with various functionalities of the **Neon platform via the Neon API.** Certain tools, especially database migration ones, are tailored for AI agent and LLM usage, leveraging Neon's branching for safe preview and commit.
 
 ## Development Workflow: Adding a Column with Cline and Neon MCP
 
@@ -201,9 +185,9 @@ Cline: I'll use the prepare_database_migration tool to add a created_at column t
 > Cline wants to use a tool on the neon MCP server: run_sql
 > The created_at column has been successfully added to the table in the temporary branch with the correct data type and default value. Let me verify the data by selecting a few rows to ensure everything looks correct.
 > Cline wants to use a tool on the neon MCP server: run_sql
-> The migration looks good - the created_at column has been added successfully and is populated with timestamps. Now I can complete the migration to apply these changes to the main branch.
+> The migration looks good - the created_at column has been added successfully and is populated with timestamps. Now I can complete the migration to apply these changes to the production branch.
 > Cline wants to use a tool on the neon MCP server: complete_database_migration
-> The migration has been successfully completed and the temporary branch has been deleted. Let me verify the changes in the main branch and show the updated table structure.
+> The migration has been successfully completed and the temporary branch has been deleted. Let me verify the changes in the production branch and show the updated table structure.
 > Cline wants to use a tool on the neon MCP server: run_sql
 > The migration has been successfully completed. The created_at column has been added to the table and is populated with timestamps.
 ```
@@ -213,7 +197,7 @@ Cline: I'll use the prepare_database_migration tool to add a created_at column t
 - **Natural language interaction:** You can use simple, conversational English to interact with your database through Cline.
 - **Step-by-step guidance:** Cline confirms each step and provides details like branch names and migration IDs.
 - **MCP Tools in Action:** The underlying MCP tools (`get_database_tables`, `run_sql`, `prepare_database_migration`, `complete_database_migration`) illustrate the automated process.
-- **Branching for safety:** The agent automatically creates a temporary branch for schema changes. The user will be prompted to confirm the migration before applying it to the main branch.
+- **Branching for safety:** The agent automatically creates a temporary branch for schema changes. The user will be prompted to confirm the migration before applying it to the production branch.
 
 You can verify the changes in your Neon Console or by querying the database directly.
 

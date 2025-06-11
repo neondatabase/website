@@ -3,7 +3,7 @@ title: The pg_search extension
 subtitle: An Elasticsearch alternative for full-text search and analytics on Postgres
 tag: new
 enableTableOfContents: true
-updatedOn: '2025-03-18T16:32:50.751Z'
+updatedOn: '2025-06-02T11:29:18.476Z'
 ---
 
 The `pg_search` extension by [ParadeDB](https://www.paradedb.com/) adds functions and operators to Postgres that use [BM25 (Best Matching 25)](https://en.wikipedia.org/wiki/Okapi_BM25) indexes for efficient, high-relevance text searches. It supports standard SQL syntax and JSON query objects, offering features similar to those in Elasticsearch.
@@ -16,17 +16,31 @@ In this guide, you'll learn how to enable `pg_search` on Neon, understand the fu
 
 <Admonition type="note" title="pg_search on Neon">
 
-`pg_search` is currently only available on Neon projects using Postgres 17 and created in an [AWS region](/docs/introduction/regions#aws-regions).
+`pg_search` is currently only available on Neon projects created in an [AWS region](/docs/introduction/regions#aws-regions). It is not yet supported on Neon projects created in Azure regions.
 
 </Admonition>
 
 ## Enable the `pg_search` extension
 
-You can install the `pg_search` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+<Tabs labels={["Postgres 17", "Postgres 14 - 16"]}>
+
+<TabItem>
+
+Install the `pg_search` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_search;
 ```
+
+</TabItem>
+
+<TabItem>
+
+The `pg_search` extension is supported on Postgres 14–16 for Neon projects in AWS regions. Contact Neon support to enable it for your project.
+
+</TabItem>
+
+</Tabs>
 
 ## Understanding text search with `pg_search`
 
@@ -468,7 +482,7 @@ Keeping indexes in memory improves query performance by reducing disk access. In
 
 In addition to `shared_buffers`, **Neon’s Local File Cache (LFC)** extends memory up to 75% of your compute’s RAM. This allows frequently accessed indexes and data to remain in memory, improving performance.
 
-Both `shared_buffers` and the LFC size depend on your compute size. For details, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+Both `shared_buffers` and the LFC size depend on your compute size. For details, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 
 To further optimize performance, you can use the Postgres `pg_prewarm` extension to preload indexes into memory. This ensures fast query response times by warming up the cache after index creation or a restart of your Neon compute.
 

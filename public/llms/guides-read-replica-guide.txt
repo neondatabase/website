@@ -1,6 +1,12 @@
 # Create and manage Read Replicas
 
-Learn how to create and manage read replicas in Neon
+> This guide explains how to create and manage read replicas in Neon, covering creation through Console/CLI/API, connection methods, monitoring replication delay, and troubleshooting configuration issues to ensure optimal performance.
+
+## Source
+
+- [Create and manage Read Replicas HTML](https://neon.com/docs/guides/read-replica-guide): The original HTML version of this documentation
+
+## Overview
 
 [Read replicas](/docs/introduction/read-replicas) are supported with all Neon plans. This guide steps you through the process of creating and managing read replicas.
 
@@ -124,7 +130,7 @@ In the response body for this method, read replica computes are identified by th
 
 ## Edit a read replica
 
-You can edit a read replica using the Neon Console or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) to change the [Compute size](/docs/manage/endpoints#compute-size-and-autoscaling-configuration) or [Scale to Zero](/docs/manage/endpoints#scale-to-zero-configuration) configuration.
+You can edit a read replica using the Neon Console or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) to change the [Compute size](/docs/manage/computes#compute-size-and-autoscaling-configuration) or [Scale to Zero](/docs/manage/computes#scale-to-zero-configuration) configuration.
 
 
 
@@ -230,7 +236,7 @@ No users action is required. The settings are synchronized automatically when yo
 If your read replicas are falling behind, follow these steps to diagnose and resolve the issue:
 
 1. **Check your replication lag metrics**  
-   Refer to [Monitoring Read Replicas](https://neon.tech/docs/guides/read-replica) for detailed instructions on how to monitor replication lag.
+   Refer to [Monitoring Read Replicas](https://neon.com/docs/guides/read-replica) for detailed instructions on how to monitor replication lag.
 
 2. **Verify configuration alignment**  
    If replication lag is detected, ensure that the configurations for the primary and read-replica computes are aligned. Specifically, confirm that the following parameters match between your primary compute and read-replica compute:
@@ -242,7 +248,7 @@ If your read replicas are falling behind, follow these steps to diagnose and res
    - `max_worker_processes`
 
 3. **Restart read-replica computes if configurations are misaligned**  
-   If the configurations are not aligned, restart your read-replica computes to automatically update their settings. For instructions, see [Restart a Compute](https://neon.tech/docs/manage/endpoints#restart-a-compute).
+   If the configurations are not aligned, restart your read-replica computes to automatically update their settings. For instructions, see [Restart a Compute](https://neon.com/docs/manage/computes#restart-a-compute).
 
    
    When increasing the size of your primary read-write compute, always restart associated read replicas to ensure their configurations remain aligned.

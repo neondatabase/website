@@ -1,6 +1,10 @@
 # Replicate Data with Estuary Flow
 
-Learn how to replicate data from Neon with Estuary Flow
+> This guide explains how to configure a Postgres source connector in Estuary Flow for ingesting changes from your Neon database, enabling real-time data replication to various destinations with optional transformations.
+
+## Source
+
+- [Replicate Data with Estuary Flow HTML](https://neon.com/docs/guides/logical-replication-estuary-flow): The original HTML version of this documentation
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
 

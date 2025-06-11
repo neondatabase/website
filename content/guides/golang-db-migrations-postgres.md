@@ -381,7 +381,7 @@ There has been a feature request to add support for transactions in the golang-m
 
 Always test migrations in a non-production environment first. Ideally, have a staging environment that mirrors production as closely as possible.
 
-You can achieve this by setting up a separate Neon branch to test migrations before applying them to your main branch. You can learn more about Neon branches in the [Neon documentation](https://neon.tech/docs/introduction/branching).
+You can achieve this by setting up a separate Neon branch to test migrations before applying them to your production branch. You can learn more about Neon branches in the [Neon documentation](/docs/introduction/branching).
 
 ### 5. Version Control Your Migrations
 
@@ -449,7 +449,7 @@ Running your database migrations directly on your production database can be ris
 
 For a more robust approach, you can use Neon's branching capabilities to test migrations before applying them to your production database.
 
-Neon has a set of [GitHub Actions](https://neon.tech/docs/guides/branching-github-actions) that allow you to create, delete, and compare branches programmatically. Here's an extended GitHub Actions workflow that uses Neon's branching actions to spin up a temporary branch for testing migrations:
+Neon has a set of [GitHub Actions](/docs/guides/branching-github-actions) that allow you to create, delete, and compare branches programmatically. Here's an extended GitHub Actions workflow that uses Neon's branching actions to spin up a temporary branch for testing migrations:
 
 ```yaml
 name: Test and Deploy Migrations

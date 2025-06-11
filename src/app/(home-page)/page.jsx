@@ -21,7 +21,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: 'Neon Postgres',
-  url: 'https://neon.tech/',
+  url: 'https://neon.com/',
 };
 
 const Homepage = () => (

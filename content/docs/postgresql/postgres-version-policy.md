@@ -1,7 +1,7 @@
 ---
 title: Neon Postgres Version Support Policy
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.075Z'
+updatedOn: '2025-05-11T11:23:50.627Z'
 ---
 
 This topic outlines [Neon's Postgres Version Support Policy](#neon-version-support-policy).
@@ -47,7 +47,7 @@ Your Postgres major version is also displayed in the **Project settings** widget
 
 In Neon, an instance of Postgres runs on each compute in your Neon project. When the PostgreSQL Global Development Group releases a new minor version, Neon automatically updates your computes to the new minor version. Typically, no user action is required for minor version updates. While we aim to make the new minor version available at the same time as the official Postgres release, these updates may occur a few days later than the official release date.
 
-Once a new minor version is available on Neon, it is applied the next time your compute restarts (for any reason). For example, if your compute suspends due to inactivity, the compute will be updated to the new minor version the next time it restarts due to a user-initiated or control-plane initiated action that wakes the compute. If your compute is always active (i.e., it never stops due to regular database activity or because you disabled [scale to zero](/docs/introduction/scale-to-zero)), and you want to force a restart to pick up the latest update, see [Restart a compute](/docs/manage/endpoints#restart-a-compute).
+Once a new minor version is available on Neon, it is applied the next time your compute restarts (for any reason). For example, if your compute suspends due to inactivity, the compute will be updated to the new minor version the next time it restarts due to a user-initiated or control-plane initiated action that wakes the compute. If your compute is always active (i.e., it never stops due to regular database activity or because you disabled [scale to zero](/docs/introduction/scale-to-zero)), and you want to force a restart to pick up the latest update, see [Restart a compute](/docs/manage/computes#restart-a-compute).
 
 Neon only supports the latest minor release for each major Postgres version. For example, when 16.4 is the latest minor release of Postgres version 16, it is no longer possible run a Neon compute with version 16.3.
 

@@ -1,10 +1,14 @@
 # Migrate from Render to Neon Postgres
 
-Learn how to migrate your database from Render to Neon Postgres using pg_dump
+> This guide provides step-by-step instructions for migrating a database from Render to Neon Postgres using pg_dump and pg_restore, covering the entire process from exporting data from Render to importing it into Neon and verifying the migration.
 
 This guide describes how to migrate a database from Render to Neon Postgres.
 
 We use the `pg_dump` and `pg_restore` utilities, which are part of the Postgres client toolset. `pg_dump` works by dumping both the schema and data in a custom format that is compressed and suitable for input into `pg_restore` to rebuild the database.
+
+## Source
+
+- [Migrate from Render to Neon Postgres HTML](https://neon.com/docs/import/migrate-from-render): The original HTML version of this documentation
 
 ## Prerequisites
 
@@ -41,11 +45,11 @@ You'll need this connection string for `pg_dump` to connect to the Render databa
 
 Now that you have your Render connection details, you can export your data using `pg_dump`:
 
-```bash shouldWrap
-pg_dump -Fc -v -d  --schema=public -f render_dump.bak
+```bash
+pg_dump -Fc -v -d <render_external_database_url> --schema=public -f render_dump.bak
 ```
 
-Replace `` with your Render External Database URL.
+Replace `<render_external_database_url>` with your Render External Database URL.
 
 This command includes these arguments:
 
@@ -75,7 +79,7 @@ pg_dump: dumping contents of table "public.lego_themes"
 ```
 
 
-Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary#pooled-connection-string) (see PgBouncer issues [452](https://github.com/pgbouncer/pgbouncer/issues/452) & [976](https://github.com/pgbouncer/pgbouncer/issues/976) for details). Use an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string) instead.
+**Important note**: Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary#pooled-connection-string) (see PgBouncer issues [452](https://github.com/pgbouncer/pgbouncer/issues/452) & [976](https://github.com/pgbouncer/pgbouncer/issues/976) for details). Use an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string) instead.
 
 
 ## Prepare your Neon destination database
@@ -111,10 +115,10 @@ For more information, see [Create a database](/docs/manage/databases#create-a-da
 Now you can restore your data to the Neon database using `pg_restore`:
 
 ```bash
-pg_restore -d  -v --no-owner --no-acl render_dump.bak
+pg_restore -d <neon-connection-string> -v --no-owner --no-acl render_dump.bak
 ```
 
-Replace `` with your Neon connection string.
+Replace `<neon-connection-string>` with your Neon connection string.
 
 This command includes these arguments:
 
@@ -171,10 +175,11 @@ While this guide focuses on using `pg_dump` and `pg_restore`, there are other mi
 
   For smaller datasets or specific tables, you might consider exporting to CSV from Render and then importing to Neon. See [Import data from CSV](/docs/import/import-from-csv) for more details on this method.
 
-## Reference
+## Resources
 
 For more information on the Postgres utilities used in this guide, refer to the following documentation:
 
-- [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html)
-- [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html)
+- [PostgreSQL pg_dump documentation](https://www.postgresql.org/docs/current/app-pgdump.html)
+- [PostgreSQL pg_restore documentation](https://www.postgresql.org/docs/current/app-pgrestore.html)
 - [Migrating data to Neon](/docs/import/migrate-from-postgres)
+- [Render PostgreSQL documentation](https://render.com/docs/databases)

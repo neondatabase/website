@@ -1,6 +1,12 @@
 # Managing your data and schemas in the Neon Console
 
-Use the Tables page to easily view, edit, and manage your data and schemas
+> This guide explains how to use the Tables page in the Neon Console to manage your data and schemas, including editing records, adding filters, exporting data, and managing database schemas through a visual interface powered by Drizzle Studio.
+
+## Source
+
+- [Managing your data and schemas in the Neon Console HTML](https://neon.com/docs/guides/tables): The original HTML version of this documentation
+
+## Overview
 
 The **Tables** page in the Neon Console offers a dynamic, visual interface for managing data and schemas. Fully interactive, this view lets you add, update, and delete records, filter data, modify columns, drop or truncate tables, export data in both .json and .csv formats, and manage schemas, tables, views, and enums.
 
@@ -75,20 +81,22 @@ The **Tables** page in the Neon Console is powered by a Drizzle Studio integrati
 
 ## Reporting errors
 
-If you see an **Unexpected error happened** message on the **Tables** page, follow the steps below:
+If you see an **Unexpected error happened** message on the **Tables** page, this could be due to a DNS resolution issue.
 
 ![Unexpected error happened on Tables page](/docs/guides/tables_error.png)
 
+Please refer to [DNS resolution issues](https://neon.com/docs/connect/connection-errors#dns-resolution-issues) for workarounds.
+
+If it's not a DNS resolution issue, other troubleshooting steps you can try include:
+
+- **Refreshing the page** — This can resolve temporary glitches.
+- **Clearing browser cache** — Cached files might cause issues, so clearing the cache could help.
+- **Disabling browser extensions** — Extensions may interfere with the page's functionality.
+- **Using a different browser or device** — Check if the issue occurs on another browser or device.
+- **Trying incognito mode** — Using an incognito window can help bypass issues related to cookies or extensions.
+
+If the issue persists, please follow these steps to report the error:
+
 1. Click **Download Error Context** to download the error context file.
 2. [Open a support ticket](https://console.neon.tech/app/projects?modal=support) and provide a details description of what were doing when the error occurred. Please include any screen captures or files that will help us reproduce the issue. We'll work with our partners at Drizzle to investigate and resolve the issue.
-3. If you're on the Free Plan, you can report the issue with your context file on [Discord](https://discord.gg/92vNTzKDGp).
-
-If you encounter a **"Something went wrong"** error on the **Tables** page, try the following troubleshooting steps:
-
-- **Refresh the page** — This can resolve temporary glitches.
-- **Clear browser cache** — Cached files might cause issues, so clearing the cache could help.
-- **Disable browser extensions** — Extensions may interfere with the page’s functionality.
-- **Use a different browser or device** — Check if the issue occurs on another browser or device.
-- **Try incognito mode** — Using an incognito window can help bypass issues related to cookies or extensions.
-
-If the issue persists, please reach out to [Neon support](https://console.neon.tech/app/projects?modal=support) or on [Discord](https://discord.gg/92vNTzKDGp), and we’ll investigate further.
+3. If you're on the Free Plan, you can report the issue on [Discord](https://discord.gg/92vNTzKDGp).

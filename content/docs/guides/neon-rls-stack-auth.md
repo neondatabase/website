@@ -3,7 +3,7 @@ title: Secure your data with Stack Auth and Neon RLS
 subtitle: Implement Row-level Security policies in Postgres using Stack Auth and Neon
   RLS
 enableTableOfContents: true
-updatedOn: '2025-03-10T18:26:02.769Z'
+updatedOn: '2025-05-30T16:54:40.472Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-stack-auth
   - /docs/guides/neon-authorize-stack-auth
@@ -24,7 +24,7 @@ Use Stack Auth with Neon RLS to add secure, database-level authorization to your
 
 ## How it works
 
-Stack Auth handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon RLS. Neon RLS validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
+Stack Auth handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon RLS. Neon RLS validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
 
 ## Prerequisites
 

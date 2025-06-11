@@ -1,7 +1,7 @@
 ---
 title: Monitoring dashboard
 enableTableOfContents: true
-updatedOn: '2025-02-22T21:54:33.849Z'
+updatedOn: '2025-05-21T19:48:26.414Z'
 ---
 
 The **Monitoring** dashboard in the Neon console provides several graphs for monitoring system and database metrics. You can access the **Monitoring** dashboard from the sidebar in the Neon Console. Observable metrics include:
@@ -23,19 +23,21 @@ Your Neon plan defines the range of data you can view.
 | ----------------------------------------------- | ------------------------ |
 | [Free Plan](/docs/introduction/plans#free-plan) | Last day (24 hours)      |
 | [Launch](/docs/introduction/plans#launch)       | Last 7 days (168 hours)  |
-| [Scale](/docs/introduction/plans#scale)         | Last 7 days (168 hours) |
-| [Business](/docs/introduction/plans#business)         | Last 14 days (336 hours) |
+| [Scale](/docs/introduction/plans#scale)         | Last 7 days (336 hours)  |
+| [Business](/docs/introduction/plans#business)   | Last 14 days (336 hours) |
 
 You can select different periods or a custom period within the permitted range from the menu on the dashboard.
 
 The dashboard displays metrics for the selected **Branch** and **Compute**. Use the drop-down menus to view metrics for a different branch or compute. Use the **Refresh** button to update the displayed metrics.
 
-If your compute was idle or there has not been much activity, graphs may display this message: `There is no data to display. Try a different time period or check back later`. In this case, try selecting a different time period or returning later after more usage data has been collected.
+If your compute was idle or there has not been much activity, graphs may display this message: `There is no data to display at the moment`. In this case, try selecting a different time period or returning later after more usage data has been collected.
 
 All time values displayed in graphs are in [Coordinated Universal Time (UTC)](https://en.wikipedia.org/wiki/Coordinated_Universal_Time).
 
 <Admonition type="note" title="Endpoint Inactive: What does it mean?">
-The values and plotted lines in your graphs will drop to `0` when your compute is inactive because a compute must be active to report data. These inactive periods are also shown as a diagonal line pattern in the graph.
+The values and plotted lines in your graphs will drop to `0` when your compute is inactive because a compute must be active to report data. These inactive periods are also shown as a diagonal line pattern in the graph, as shown here:
+
+![monitoring graph diagonal pattern for inactive compute](/docs/introduction/monitor_inactive.png)
 </Admonition>
 
 ### RAM
@@ -50,7 +52,7 @@ RAM is allocated according to the size of your compute or your [autoscaling](/do
 
 **Used**: The amount of RAM used.
 
-The graph plots a line showing the amount of RAM used. If the line regularly reaches the maximum amount of allocated RAM, consider increasing your compute size to increase the amount of allocated RAM. To see the amount of RAM allocated for each Neon compute size, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
+The graph plots a line showing the amount of RAM used. If the line regularly reaches the maximum amount of allocated RAM, consider increasing your compute size to increase the amount of allocated RAM. To see the amount of RAM allocated for each Neon compute size, see [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration).
 
 **Cached**: The amount of data cached in memory.
 
@@ -66,7 +68,7 @@ CPU is allocated according to the size of your compute or your [autoscaling](/do
 
 **Used**: The amount of CPU used, in [Compute Units (CU)](/docs/reference/glossary#compute-unit-cu).
 
-If the plotted line regularly reaches the maximum amount of allocated CPU, consider increasing your compute size. To see the compute sizes available with Neon, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
+If the plotted line regularly reaches the maximum amount of allocated CPU, consider increasing your compute size. To see the compute sizes available with Neon, see [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration).
 
 ### Connections count
 
@@ -92,7 +94,7 @@ The MAX line helps you visualize how close you are to reaching your connection l
 - Implementing [connection pooling](/docs/connect/connection-pooling), which supports up to 10,000 simultaneous connections
 - Optimizing your application's connection management
 
-The connection limit (defined by the Postgres `max_connections` setting) is set according to your Neon compute size configuration. For the connection limit for each Neon compute size, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+The connection limit (defined by the Postgres `max_connections` setting) is set according to your Neon compute size configuration. For the connection limit for each Neon compute size, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 
 ### Database size
 
@@ -140,8 +142,8 @@ The **Replication delay seconds** graph shows the time delay, in seconds, betwee
 
 ![local file cache hit rate graph](/docs/introduction/local_file_cache_hit_rate.png)
 
-The **Local file cache hit rate** graph shows the percentage of read requests served from memory &#8212; from Neon's Local File Cache (LFC). 
-Queries not served from either Postgres shared buffers (128 MB on all Neon computes) or the Local File Cache retrieve data from storage, which is more costly and can result in slower query performance. To learn more about how Neon caches data and how the LFC works with Postgres shared buffers, see [What is the Local File Cache?](/docs/extensions/neon#what-is-the-local-file-cache)
+The **Local file cache hit rate** graph shows the percentage of read requests served from Neon's Local File Cache (LFC). 
+Queries not served from either Postgres shared buffers or the Local File Cache retrieve data from storage, which is more costly and can result in slower query performance. To learn more about how Neon caches data and how the LFC works with Postgres shared buffers, see [What is the Local File Cache?](/docs/extensions/neon#what-is-the-local-file-cache)
 
 ### Working set size
 
@@ -149,15 +151,13 @@ Queries not served from either Postgres shared buffers (128 MB on all Neon compu
 
 Your working set is the size of the distinct set of Postgres pages (relation data and indexes) accessed in a given time interval - to optimize for performance and consistent latency it is recommended to size your compute so that the working set fits into Neon's [Local File Cache (LFC)](/docs/extensions/neon#what-is-the-local-file-cache) for quick access.
 
-The **Working set size** graph provides a visual representation of how much data has being accessed over different time intervals. Here's how to interpret the graph:
+The **Working set size** graph visualizes the amount of data accessed—calculated as unique pages accessed × page size—over a given interval. Here's how to interpret the graph:
 
-- **5m** (5 minutes): This line shows how much data has been accessed in the last 5 minutes.
-- **15m** (15 minutes): Similar to the 5-minute window, this metric tracks data accessed over the last 15 minutes.
-- **1h** (1 hour): This line represents the amount of data accessed in the last hour.
-- **Local file cache size**: This is the size of the LFC, which is determined by the size of your compute. Larger computes have larger caches. For cache sizes, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+- **5m** (5 minutes): This line shows the data accessed in the last 5 minutes.
+- **15m** (15 minutes): Similar to the 5-minute window, this metric tracks the data accessed in the last 15 minutes.
+- **1h** (1 hour): This line represents the data accessed in the last hour.
+- **Local file cache size**: This is the size of the LFC, which is determined by the size of your compute. Larger computes have larger caches. For cache sizes, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 For optimal performance the local file cache should be larger than your working set size for a given time interval.
 If your working set size is larger than the LFC size it is recommended to increase the maximum size of the compute to improve the LFC hit rate and achieve good performance.
 
 If your workload pattern doesn't change much over time it is recommended to compare the 1h time interval working set size with the LFC size and make sure that working set size is smaller than LFC size.
-
-Note that this recommendation only applies to workloads with a working set larger than 128 MiB, because workloads with a working set smaller than 128 MiB can be completely served out the Postgres shared buffer and the compute size is irrelevant in this case for the cache hit rate.
