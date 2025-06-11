@@ -53,20 +53,26 @@ const Table = () => {
 
   useEffect(() => {
     const cells = document.querySelectorAll(`[data-row-id]`);
+    const handlersMap = new Map();
 
     cells.forEach((cell) => {
       const rowId = cell.getAttribute('data-row-id') || '';
+      const handleMouseEnter = () => setCurrentRow(rowId);
+      const handleMouseLeave = () => setCurrentRow('');
 
-      cell.addEventListener('mouseenter', () => setCurrentRow(rowId));
-      cell.addEventListener('mouseleave', () => setCurrentRow(''));
+      handlersMap.set(cell, { handleMouseEnter, handleMouseLeave });
+
+      cell.addEventListener('mouseenter', handleMouseEnter);
+      cell.addEventListener('mouseleave', handleMouseLeave);
     });
 
     return () => {
       cells.forEach((cell) => {
-        const rowId = cell.getAttribute('data-row-id') || '';
-
-        cell.removeEventListener('mouseenter', () => setCurrentRow(rowId));
-        cell.removeEventListener('mouseleave', () => setCurrentRow(''));
+        const handlers = handlersMap.get(cell);
+        if (handlers) {
+          cell.removeEventListener('mouseenter', handlers.handleMouseEnter);
+          cell.removeEventListener('mouseleave', handlers.handleMouseLeave);
+        }
       });
     };
   }, [tableRows]);

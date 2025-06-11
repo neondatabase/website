@@ -27,7 +27,6 @@ Faq.propTypes = {
       answer: PropTypes.string.isRequired,
       id: PropTypes.string,
       initialState: PropTypes.string,
-      index: PropTypes.number.isRequired,
     })
   ).isRequired,
 };
