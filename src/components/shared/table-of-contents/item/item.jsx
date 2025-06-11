@@ -2,9 +2,6 @@ import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
 
-const linkClassName =
-  'py-1.5 flex items-start gap-2.5 text-sm leading-tight transition-colors duration-200 text-gray-new-40 hover:text-black-new dark:text-gray-new-90 dark:hover:text-white [&_code]:rounded-sm [&_code]:leading-none [&_code]:py-px [&_code]:bg-gray-new-94 [&_code]:px-1.5 [&_code]:font-mono [&_code]:font-normal dark:[&_code]:bg-gray-new-15';
-
 const Item = ({
   title,
   level,
@@ -51,7 +48,14 @@ const Item = ({
   return (
     <LazyMotion features={domAnimation}>
       <a
-        className={clsx(linkClassName, isActive && 'font-medium text-black-new dark:text-white')}
+        className={clsx(
+          'flex items-start gap-2.5 py-1.5 text-sm leading-tight',
+          'transition-colors duration-200',
+          isActive
+            ? 'font-medium text-secondary-8 dark:text-primary-1'
+            : 'text-gray-new-40 hover:text-black-new dark:text-[#A1A1AA] dark:hover:text-white',
+          '[&_code]:rounded-sm [&_code]:bg-gray-new-94 [&_code]:px-1.5 [&_code]:py-px [&_code]:font-mono [&_code]:font-normal [&_code]:leading-none dark:[&_code]:bg-gray-new-15'
+        )}
         href={href}
         onClick={(e) => handleAnchorClick(e, href, id)}
       >
