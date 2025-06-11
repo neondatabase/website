@@ -210,7 +210,7 @@
       "rows": "6",
       "feature": {
         "groupHeader": true,
-        "icon": "plus",
+        "icon": "figures",
         "title": "Add-ons",
         "subtitle": "Incur monthly charges added to your base fee"
       }

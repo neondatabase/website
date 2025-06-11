@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import Button from 'components/shared/button';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import checkIcon from 'icons/pricing/table/check.svg';
-import plusIcon from 'icons/pricing/table/plus.svg';
+import figuresIcon from 'icons/pricing/table/figures.svg';
 import statsIcon from 'icons/pricing/table/stats.svg';
 
 import PLANS from '../data/plans.json';
@@ -17,7 +17,7 @@ import TableCell from './table-cell';
 import TableHeading from './table-heading';
 
 const ICONS = {
-  plus: plusIcon,
+  figures: figuresIcon,
   check: checkIcon,
   stats: statsIcon,
 };
