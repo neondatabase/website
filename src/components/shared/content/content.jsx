@@ -42,6 +42,7 @@ import ExternalCode from 'components/shared/external-code';
 import ImageZoom from 'components/shared/image-zoom';
 import InkeepEmbedded from 'components/shared/inkeep-embedded';
 import LatencyCalculator from 'components/shared/latency-calculator';
+import MegaLink from 'components/shared/mega-link';
 import RequestForm from 'components/shared/request-form';
 import getCodeProps from 'lib/rehype-code-props';
 
@@ -153,6 +154,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   CheckList,
   CheckItem,
   ExternalCode: (props) => <ExternalCode {...props} />,
+  MegaLink,
   ...sharedComponents,
 });
 
@@ -171,7 +173,7 @@ const Content = ({
       'prose-doc post-content prose dark:prose-invert xs:prose-code:break-words',
       className,
       {
-        'dark:prose-p:text-gray-new-70 dark:prose-strong:text-white dark:prose-li:text-gray-new-70 dark:prose-table:text-gray-new-70':
+        'prose-template dark:prose-p:text-gray-new-70 dark:prose-strong:text-white dark:prose-li:text-gray-new-70 dark:prose-table:text-gray-new-70':
           isTemplate,
       }
     )}
