@@ -88,7 +88,7 @@ const PricingPage = () => (
     <Hero />
     <Logos className="mt-[136px] xl:mt-28 lg:mt-24 lg:pt-0 md:mt-20" logos={logos} />
     <Startups className="mt-[184px] xl:mt-40 lg:mt-32 md:mt-20" />
-    <Plans className="my-[184px] scroll-mt-5 px-safe xl:my-40 lg:mt-32 md:my-20" />
+    <Plans className="mt-[184px] scroll-mt-5 px-safe xl:mt-40 lg:mt-32 md:mt-20" />
     <Features />
     <Faq items={faqItems} />
     <CTA

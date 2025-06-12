@@ -129,9 +129,8 @@ const Table = () => {
                           mobileRows && mobileRowHeight[mobileRows],
                           isHiddenItems &&
                             'last-of-type:border-b last-of-type:border-dashed last-of-type:border-gray-new-15',
-                          isGroupHeader
-                            ? 'justify-end pb-3.5 pr-3'
-                            : 'border-t border-dashed border-gray-new-15 py-3 lg:py-2.5',
+                          index !== 0 && 'border-t border-dashed border-gray-new-15',
+                          isGroupHeader ? 'justify-end pb-6 pr-3' : 'py-3 lg:py-2.5',
                           currentRow === index.toString() && !isGroupHeader
                             ? 'bg-gray-new-8 before:opacity-100 lg:bg-transparent'
                             : 'before:opacity-0',
@@ -149,10 +148,11 @@ const Table = () => {
                                 src={icon}
                                 width={18}
                                 height={18}
-                                alt={featureTitle}
+                                alt=""
+                                loading="lazy"
                               />
                             )}
-                            <span className="text-lg font-medium leading-none tracking-extra-tight">
+                            <span className="text-xl font-medium leading-snug tracking-extra-tight lg:text-lg">
                               {featureTitle}
                             </span>
                             {feature?.subtitle && (
@@ -193,8 +193,8 @@ const Table = () => {
                         mobileRows && mobileRowHeight[mobileRows],
                         isHiddenItems &&
                           'last-of-type:border-b last-of-type:border-dashed last-of-type:border-gray-new-15',
+                        index !== 0 && 'border-t border-dashed border-gray-new-15',
                         !rowsWithGroupHeader.includes(index) && 'py-3 lg:py-2.5',
-                        item[key] !== undefined && 'border-t border-dashed border-gray-new-15',
                         currentRow === index.toString() &&
                           !rowsWithGroupHeader.includes(index) &&
                           'bg-gray-new-8 before:opacity-100 lg:bg-transparent',

@@ -29,7 +29,7 @@
   },
   "cols": [
     {
-      "rows": "6",
+      "rows": "5",
       "feature": {
         "groupHeader": true,
         "icon": "check",
