@@ -26,7 +26,7 @@ const MenuBanner = ({ title, description, to }) => (
       />
 
       <div className="absolute inset-0 z-10 flex flex-col justify-end p-4 lg:justify-center xs:p-4">
-        <h3 className="text-sm leading-none tracking-snug text-white">{title}</h3>
+        <p className="text-sm leading-none tracking-snug text-white">{title}</p>
         <p
           className={clsx(
             'mt-1.5 text-xs font-light leading-none tracking-extra-tight text-gray-new-50',
