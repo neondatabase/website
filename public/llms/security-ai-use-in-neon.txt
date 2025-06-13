@@ -1,12 +1,12 @@
 # AI use in Neon
 
-> This document provides an overview of how Neon integrates AI into its platform, including AI-powered features in the SQL Editor and chat assistance, with details on data handling and security considerations.
-
-Neon integrates AI to enhance user experience across different parts of the platform. Below is an overview of where and how AI is used in Neon.
+> The document outlines the implementation and security considerations of AI technologies within the Neon platform, detailing how AI is integrated to enhance database management and user interactions.
 
 ## Source
 
 - [AI use in Neon HTML](https://neon.com/docs/security/ai-use-in-neon): The original HTML version of this documentation
+
+Neon integrates AI to enhance user experience across different parts of the platform. Below is an overview of where and how AI is used in Neon.
 
 ## AI in the Neon SQL Editor
 

@@ -1,6 +1,10 @@
 # Schema migration with Neon Postgres and Drizzle ORM
 
-Set up Neon Postgres and run migrations for your TypeScript project using
+> The document outlines the process for performing schema migrations in Neon Postgres using Drizzle ORM, detailing the steps to set up and execute migrations within this specific environment.
+
+## Source
+
+- [Schema migration with Neon Postgres and Drizzle ORM HTML](https://neon.com/docs/guides/drizzle-migrations): The original HTML version of this documentation
 
 [Drizzle](https://orm.drizzle.team/) is a TypeScript-first ORM that connects to all major databases and works across most Javascript runtimes. It provides a simple way to define database schemas and queries in an SQL-like dialect and tools to generate and run migrations.
 
@@ -30,9 +34,7 @@ postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbna
 
 Keep your connection string handy for later use.
 
-
-Neon supports both direct and pooled database connection strings, which you can find by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. A pooled connection string connects your application to the database via a PgBouncer connection pool, allowing for a higher number of concurrent connections. However, using a pooled connection string for migrations can lead to errors. For this reason, we recommend using a direct (non-pooled) connection when performing migrations. For more information about direct and pooled connections, see [Connection pooling](/docs/connect/connection-pooling).
-
+   **Note**: Neon supports both direct and pooled database connection strings, which you can find by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. A pooled connection string connects your application to the database via a PgBouncer connection pool, allowing for a higher number of concurrent connections. However, using a pooled connection string for migrations can lead to errors. For this reason, we recommend using a direct (non-pooled) connection when performing migrations. For more information about direct and pooled connections, see [Connection pooling](https://neon.com/docs/connect/connection-pooling).
 
 ## Setting up the TypeScript application
 
@@ -122,7 +124,7 @@ This command generates a new folder named `drizzle` containing the migration fil
 
 ### Run the migration
 
-The generated migration file is written in SQL and contains the necessary commands to create the tables in the database. To apply these migrations, we'll use the [Neon serverless driver](/docs/serverless/serverless-driver) and helper functions provided by the `drizzle-orm` library.
+The generated migration file is written in SQL and contains the necessary commands to create the tables in the database. To apply these migrations, we'll use the [Neon serverless driver](https://neon.com/docs/serverless/serverless-driver) and helper functions provided by the `drizzle-orm` library.
 
 Create a new `migrate.ts` in your `src` directory and add the following code:
 
@@ -294,7 +296,7 @@ app.get('/', (c) => {
 });
 
 app.get('/authors', async (c) => {
-  const { DATABASE_URL } = env(c);
+  const { DATABASE_URL } = env<{ DATABASE_URL: string }>(c);
   const sql = neon(DATABASE_URL);
   const db = drizzle(sql);
 
@@ -303,7 +305,7 @@ app.get('/authors', async (c) => {
 });
 
 app.get('/books/:authorId', async (c) => {
-  const { DATABASE_URL } = env(c);
+  const { DATABASE_URL } = env<{ DATABASE_URL: string }>(c);
   const sql = neon(DATABASE_URL);
   const db = drizzle(sql);
 
@@ -399,9 +401,7 @@ In this guide, we set up a new TypeScript project using `Hono.js` and `Drizzle` 
 
 You can find the source code for the application described in this guide on GitHub.
 
-
-Migrations with Neon and Drizzle
-
+- [Migrations with Neon and Drizzle](https://github.com/neondatabase/guide-neon-drizzle): Run Neon database migrations using Drizzle
 
 ## Resources
 

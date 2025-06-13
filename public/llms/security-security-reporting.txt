@@ -1,20 +1,16 @@
 # Security reporting
 
-> This guide outlines Neon's security reporting procedures, including how to report vulnerabilities, the company's commitment to addressing security issues, and information about their bug bounty program with HackerOne.
-
-This document describes Neon's established security reporting procedure to address security issues quickly and effectively.
+> The "Security reporting" document outlines the procedures for reporting security vulnerabilities in Neon, detailing how users can responsibly disclose issues to ensure the platform's security integrity.
 
 ## Source
 
 - [Security reporting HTML](https://neon.com/docs/security/security-reporting): The original HTML version of this documentation
 
-## Reporting security vulnerabilities
+We have established the following security reporting procedure to address security issues quickly.
 
-**Important**: If you have a security concern or believe you have found a vulnerability in any part of our infrastructure, please contact us at [security@neon.tech](mailto:security@neon.tech). If you need to share sensitive information, we can provide you with a security contact number through [Signal](https://signal.org/).
+   **Important**: If you have a security concern or believe you have found a vulnerability in any part of our infrastructure, please contact us at [security@neon.tech](mailto:security@neon.tech). If you need to share sensitive information, we can provide you with a security contact number through [Signal](https://signal.org/).
 
 ## Our commitment to solving security issues
-
-Neon is committed to addressing security concerns with the following promises:
 
 - We will respond to your report within three business days with an evaluation and expected resolution date.
 - We will handle your report with strict confidentiality and not share any personal details with third parties without your permission.

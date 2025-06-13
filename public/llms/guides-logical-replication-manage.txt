@@ -1,10 +1,14 @@
 # Logical replication commands
 
-Commands for managing your logical replication configuration
+> The document "Logical replication commands" details the commands and procedures for managing logical replication in Neon, enabling users to replicate data changes between databases using logical decoding and replication slots.
+
+## Source
+
+- [Logical replication commands HTML](https://neon.com/docs/guides/logical-replication-manage): The original HTML version of this documentation
 
 This topic provides commands for managing publications, subscriptions, and replication slots.
 
-For step-by-step setup instructions, refer to our [logical replication guides](/docs/guides/logical-replication-guide).
+For step-by-step setup instructions, refer to our [logical replication guides](https://neon.com/docs/guides/logical-replication-guide).
 
 ## Publications
 
@@ -75,7 +79,7 @@ This section outlines how to manage **subscriptions** in your replication setup.
 
 ### Create a subscription
 
-Building on the `my_publication` example in the preceding section, here’s how you can create a subscription:
+Building on the `my_publication` example in the preceding section, here's how you can create a subscription:
 
 ```sql
 CREATE SUBSCRIPTION my_subscription
@@ -146,9 +150,7 @@ DROP SUBSCRIPTION my_subscription;
 
 Replication slots are created on the publisher database to track replication progress, ensuring that no data in the WAL is purged before the subscriber has successfully replicated it. This mechanism serves to maintain data consistency and prevent data loss in cases of network interruption or subscriber downtime.
 
-
-To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after a period of time if there are other _active_ replication slots**. If you have or intend on having more than one replication slot, please see [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) to learn more.
-
+   **Important**: To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after a period of time if there are other _active_ replication slots**. If you have or intend on having more than one replication slot, please see [Unused replication slots](https://neon.com/docs/guides/logical-replication-neon#unused-replication-slots) to learn more.
 
 ### Create a replication slot
 
@@ -158,7 +160,7 @@ Replication slots are typically created automatically with new subscriptions, bu
 SELECT pg_create_logical_replication_slot('my_replication_slot', 'pgoutput');
 ```
 
-The first value, `my_replication_slot` is the name given to the replication slot. The second value is the [decoder plugin](#decoder-plugins) the slot should use.
+The first value, `my_replication_slot` is the name given to the replication slot. The second value is the [decoder plugin](https://neon.com/docs/guides/logical-replication-manage#decoder-plugins) the slot should use.
 
 The `max_replication_slots` configuration parameter defines the maximum number of replication slots that can be used to manage database replication connections. Each replication slot tracks changes in the publisher database to ensure that the connected subscriber stays up to date. You'll want a replication slot for each replication connection. For example, if you expect to have 10 separate subscribers replicating from your database, you would set `max_replication_slots` to 10 to accommodate each connection.
 

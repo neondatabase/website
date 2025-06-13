@@ -1,6 +1,6 @@
 # Postgres jsonb_to_record() function
 
-> This function converts a top-level JSONB object into a row with specified column types, useful for parsing JSON data from external sources into structured database formats for easier querying and analysis.
+> The document details the usage of the `jsonb_to_record()` function in Neon, explaining how to convert JSONB data into a PostgreSQL record, facilitating structured data manipulation within the database.
 
 ## Source
 
@@ -9,6 +9,8 @@
 You can use the `jsonb_to_record` function to convert a top-level `JSONB` object into a row, with the type specified by the `AS` clause.
 
 This function is useful when you need to parse `JSONB` data received from external sources, such as APIs or file uploads, and store it in a structured format. By using `jsonb_to_record`, you can easily extract values from `JSONB` and map them to the corresponding columns in your database table.
+
+
 
 ## Function signature
 

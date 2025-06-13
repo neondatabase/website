@@ -1,6 +1,10 @@
 # Schema migration with Neon Postgres and Entity Framework
 
-Set up Neon Postgres and run migrations for your Entity Framework project
+> The document outlines the process of performing schema migrations using Neon Postgres in conjunction with Entity Framework, detailing the steps necessary for Neon users to manage database schema changes effectively.
+
+## Source
+
+- [Schema migration with Neon Postgres and Entity Framework HTML](https://neon.com/docs/guides/entity-migrations): The original HTML version of this documentation
 
 [Entity Framework](https://learn.microsoft.com/en-us/ef/) is a popular Object-Relational Mapping (ORM) framework for .NET applications. It simplifies database access by allowing developers to work with domain-specific objects and properties without focusing on the underlying database tables and columns. Entity Framework also provides a powerful migration system that enables you to define and manage database schema changes over time.
 
@@ -36,9 +40,7 @@ Host=hostname;Port=5432;Database=dbname;Username=username;Password=password;SSLM
 
 Construct the connection string in this format using the correct values for your Neon connection URI. Keep it handy for later use.
 
-
-Neon supports both direct and pooled database connection strings, which you can find by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. A pooled connection string connects your application to the database via a PgBouncer connection pool, allowing for a higher number of concurrent connections. However, using a pooled connection string for migrations can be prone to errors. For this reason, we recommend using a direct (non-pooled) connection when performing migrations. For more information about direct and pooled connections, see [Connection pooling](/docs/connect/connection-pooling).
-
+   **Note**: Neon supports both direct and pooled database connection strings, which you can find by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. A pooled connection string connects your application to the database via a PgBouncer connection pool, allowing for a higher number of concurrent connections. However, using a pooled connection string for migrations can be prone to errors. For this reason, we recommend using a direct (non-pooled) connection when performing migrations. For more information about direct and pooled connections, see [Connection pooling](https://neon.com/docs/connect/connection-pooling).
 
 ## Setting up the Entity Framework project
 
@@ -139,18 +141,18 @@ namespace GuideNeonEF
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity()
+            modelBuilder.Entity<Author>()
                 .Property(a => a.CreatedAt)
                 .HasDefaultValueSql("Now()");
 
-            modelBuilder.Entity()
+            modelBuilder.Entity<Book>()
                 .Property(b => b.CreatedAt)
                 .HasDefaultValueSql("Now()");
 
             modelBuilder.Seed();
         }
-        public DbSet Authors { get; set; }
-        public DbSet Books { get; set; }
+        public DbSet<Author> Authors { get; set; }
+        public DbSet<Book> Books { get; set; }
     }
 }
 ```
@@ -179,7 +181,7 @@ namespace GuideNeonEF
                 new Author { Id = 2, Name = "George R.R. Martin", Bio = "The author of the epic fantasy series A Song of Ice and Fire.", Country = "United States"},
                 new Author { Id = 3, Name = "J.K. Rowling", Bio = "The creator of the Harry Potter series.", Country = "United Kingdom"}
             };
-            modelBuilder.Entity().HasData(authors);
+            modelBuilder.Entity<Author>().HasData(authors);
 
             var books = new[]
             {
@@ -191,7 +193,7 @@ namespace GuideNeonEF
                 new Book { Id = 6, Title = "Harry Potter and the Philosopher's Stone", AuthorId = 3 },
                 new Book { Id = 7, Title = "Harry Potter and the Chamber of Secrets", AuthorId = 3 }
             };
-            modelBuilder.Entity().HasData(books);
+            modelBuilder.Entity<Book>().HasData(books);
         }
     }
 }
@@ -234,7 +236,7 @@ using Microsoft.Extensions.DependencyInjection;
 using GuideNeonEF;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext();
+builder.Services.AddDbContext<ApplicationDbContext>();
 
 var app = builder.Build();
 
@@ -302,7 +304,7 @@ namespace GuideNeonEF
                 new Author { Id = 2, Name = "George R.R. Martin", Bio = "The author of the epic fantasy series A Song of Ice and Fire.", Country = "United States" },
                 new Author { Id = 3, Name = "J.K. Rowling", Bio = "The creator of the Harry Potter series.", Country = "United Kingdom" }
             };
-            modelBuilder.Entity().HasData(authors);
+            modelBuilder.Entity<Author>().HasData(authors);
             ...
         }
     }
@@ -343,9 +345,7 @@ curl http://localhost:5000/authors
 
 You can find the source code for the application described in this guide on GitHub.
 
-
-Migrations with Neon and Entity Framework
-
+- [Migrations with Neon and Entity Framework](https://github.com/neondatabase/guide-neon-entityframework): Run Neon database migrations in an Entity Framework project
 
 ## Conclusion
 
@@ -356,4 +356,4 @@ In this guide, we demonstrated how to set up an Entity Framework project with Ne
 For more information on the tools and concepts used in this guide, refer to the following resources:
 
 - [Entity Framework Core Documentation](https://learn.microsoft.com/en-us/ef/core/)
-- [Neon Postgres](/docs/introduction)
+- [Neon Postgres](https://neon.com/docs/introduction)
