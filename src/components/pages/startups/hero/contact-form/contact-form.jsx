@@ -12,8 +12,7 @@ import * as yup from 'yup';
 import Button from 'components/shared/button';
 import Field from 'components/shared/field';
 import Link from 'components/shared/link';
-import { FORM_STATES, HUBSPOT_CONTACT_SALES_FORM_ID } from 'constants/forms';
-import LINKS from 'constants/links';
+import { FORM_STATES, HUBSPOT_STARTUPS_FORM_ID } from 'constants/forms';
 import CloseIcon from 'icons/close.inline.svg';
 import { checkBlacklistEmails } from 'utils/check-blacklist-emails';
 import { doNowOrAfterSomeTime, sendHubspotFormData } from 'utils/forms';
@@ -49,15 +48,15 @@ ErrorMessage.propTypes = {
 
 const schema = yup
   .object({
-    firstname: yup.string().required('Your first name is a required field'),
-    lastname: yup.string().required('Your last name is a required field'),
+    firstname: yup.string().required('Reequired field'),
+    lastname: yup.string().required('Required field'),
     email: yup
       .string()
       .email('Please enter a valid email')
-      .required('Email address is a required field')
+      .required('Required field')
       .test(checkBlacklistEmails({ validation: { useDefaultBlockList: true } })),
-    companySize: yup.string().notOneOf(['hidden'], 'Required field'),
-    message: yup.string().required('Message is a required field'),
+    companyWebsite: yup.string().required('Required field'),
+    investor: yup.string().required('Required field'),
   })
   .required();
 
@@ -81,9 +80,6 @@ const ContactForm = () => {
     formState: { isValid, errors },
   } = useForm({
     resolver: yupResolver(schema),
-    defaultValues: {
-      companySize: 'hidden',
-    },
   });
 
   useEffect(() => {
@@ -96,14 +92,14 @@ const ContactForm = () => {
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
-    const { firstname, lastname, email, companyWebsite, companySize, message } = data;
+    const { firstname, lastname, email, companyWebsite, investor } = data;
     const loadingAnimationStartedTime = Date.now();
     setIsBroken(false);
     setFormState(FORM_STATES.LOADING);
 
     try {
       const response = await sendHubspotFormData({
-        formId: HUBSPOT_CONTACT_SALES_FORM_ID,
+        formId: HUBSPOT_STARTUPS_FORM_ID,
         context,
         values: [
           {
@@ -123,16 +119,8 @@ const ContactForm = () => {
             value: companyWebsite,
           },
           {
-            name: 'company_size',
-            value: companySize,
-          },
-          {
-            name: 'TICKET.subject',
-            value: 'Contact sales',
-          },
-          {
-            name: 'TICKET.content',
-            value: message,
+            name: 'accelerator_private_investor',
+            value: investor,
           },
         ],
       });
@@ -161,37 +149,40 @@ const ContactForm = () => {
   return (
     <form
       className={clsx(
-        'relative z-10 grid gap-y-6 overflow-hidden rounded-xl border border-gray-new-10 bg-[#020203] p-8 shadow-contact xl:gap-y-5 xl:p-[30px] lg:gap-y-6 sm:p-5',
+        'relative z-10 grid gap-y-6 overflow-hidden rounded-xl border border-gray-new-10 bg-[#020203] p-8 shadow-contact xl:p-6 lg:gap-y-5 md:gap-y-6',
         'bg-[radial-gradient(131.75%_102.44%_at_16.67%_0%,_rgba(20,24,31,.5),_rgba(20,24,31,0.30)_47.96%,_rgba(20,24,31,0))]'
       )}
       method="POST"
+      id="form"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <Field
-        name="firstname"
-        label="First Name *"
-        autoComplete="name"
-        placeholder="Marques"
-        theme="transparent"
-        labelClassName={labelClassName}
-        error={errors.firstname?.message}
-        isDisabled={isDisabled}
-        {...register('firstname')}
-      />
-      <Field
-        name="lastname"
-        label="Last Name *"
-        autoComplete="name"
-        placeholder="Hansen"
-        theme="transparent"
-        labelClassName={labelClassName}
-        error={errors.lastname?.message}
-        isDisabled={isDisabled}
-        {...register('lastname')}
-      />
+      <div className="grid grid-cols-2 gap-6 lg:gap-5 md:contents md:flex-col md:gap-6">
+        <Field
+          name="firstname"
+          label="First Name*"
+          autoComplete="name"
+          placeholder="Jane"
+          theme="transparent"
+          labelClassName={labelClassName}
+          error={errors.firstname?.message}
+          isDisabled={isDisabled}
+          {...register('firstname')}
+        />
+        <Field
+          name="lastname"
+          label="Last Name*"
+          autoComplete="name"
+          placeholder="Doe"
+          theme="transparent"
+          labelClassName={labelClassName}
+          error={errors.lastname?.message}
+          isDisabled={isDisabled}
+          {...register('lastname')}
+        />
+      </div>
       <Field
         name="email"
-        label="Work Email *"
+        label="Company Email Address*"
         type="email"
         autoComplete="email"
         placeholder="info@acme.com"
@@ -201,69 +192,31 @@ const ContactForm = () => {
         error={errors.email?.message}
         {...register('email')}
       />
-      <div className="flex gap-5 xl:gap-4 md:flex-col sm:contents sm:flex-col">
-        <Field
-          className="shrink-0 basis-[55%]"
-          name="companyWebsite"
-          label="Company Website"
-          theme="transparent"
-          labelClassName={labelClassName}
-          isDisabled={isDisabled}
-          {...register('companyWebsite')}
-        />
-        <Field
-          className="grow"
-          name="companySize"
-          label="Company Size *"
-          tag="select"
-          theme="transparent"
-          labelClassName={labelClassName}
-          isDisabled={isDisabled}
-          error={errors.companySize?.message}
-          {...register('companySize')}
-        >
-          <option value="hidden" disabled hidden>
-            &nbsp;
-          </option>
-          <option value="0_1">0-1 employees</option>
-          <option value="2_4">2-4 employees</option>
-          <option value="5_19">5-19 employees</option>
-          <option value="20_99">20-99 employees</option>
-          <option value="100_499">100-499 employees</option>
-          <option value="500">&ge; 500 employees</option>
-        </Field>
-      </div>
       <Field
-        name="message"
-        label="Message *"
-        tag="textarea"
+        name="companyWebsite"
+        label="Company Website*"
+        placeholder="your.company.com"
         theme="transparent"
         labelClassName={labelClassName}
-        textareaClassName="min-h-[170px] xl:min-h-[148px]"
         isDisabled={isDisabled}
-        error={errors.message?.message}
-        {...register('message')}
+        error={errors.companyWebsite?.message}
+        {...register('companyWebsite')}
+      />
+      <Field
+        name="investor"
+        label="Major Investor, Accelerator, etc.*"
+        placeholder="Y Combinator, Techstars, etc."
+        theme="transparent"
+        labelClassName={labelClassName}
+        isDisabled={isDisabled}
+        error={errors.investor?.message}
+        {...register('investor')}
       />
 
-      <div className="relative flex items-center justify-between gap-6 xl:gap-5 lg:gap-6 sm:flex-col sm:items-start sm:gap-5">
-        <p className="text-light text-sm leading-snug text-gray-new-70 xl:tracking-tighter">
-          By submitting you agree to the{' '}
-          <Link className="text-nowrap text-white" to={LINKS.terms} theme="white-underlined">
-            Terms Service
-          </Link>{' '}
-          and acknowledge the{' '}
-          <Link
-            className="text-nowrap text-white"
-            to={LINKS.privacyPolicy}
-            theme="white-underlined"
-          >
-            Privacy Policy
-          </Link>
-          .
-        </p>
+      <div className="relative">
         <Button
           className={clsx(
-            'min-w-[176px] py-[15px] font-medium 2xl:text-base xl:min-w-[138px] lg:min-w-[180px] sm:w-full sm:py-[13px]',
+            'mt-1 h-[46px] w-full font-semibold lg:h-10 sm:mt-0',
             formState === FORM_STATES.ERROR && 'pointer-events-none !bg-secondary-1/50'
           )}
           type="submit"
@@ -271,7 +224,7 @@ const ContactForm = () => {
           size="xs"
           disabled={formState === FORM_STATES.LOADING || formState === FORM_STATES.SUCCESS}
         >
-          {formState === FORM_STATES.SUCCESS ? 'Sent!' : 'Submit'}
+          {formState === FORM_STATES.SUCCESS ? 'Applied!' : 'Apply Now'}
         </Button>
       </div>
       {isBroken && <ErrorMessage onClose={() => setIsBroken(false)} />}

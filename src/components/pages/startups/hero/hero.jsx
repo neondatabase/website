@@ -1,5 +1,4 @@
 import Container from 'components/shared/container/container';
-import Heading from 'components/shared/heading';
 
 import ContactForm from './contact-form';
 import Quotes from './quotes';
@@ -38,31 +37,31 @@ const QUOTES = [
 ];
 
 const Hero = () => (
-  <section className="z-10 grow overflow-hidden bg-black-pure pb-36 pt-[168px] xl:pb-20 xl:pt-32 lg:py-28 md:py-[100px]">
-    <Container className="xl:max-w-5xl lg:max-w-3xl md:px-5" size="1216">
-      <div className="flex justify-between lg:mx-auto lg:max-w-xl lg:flex-col lg:gap-14">
-        <div className="flex max-w-xl flex-1 flex-col xl:max-w-[448px] lg:max-w-full lg:items-center lg:text-center">
-          <div className="flex max-w-[544px] flex-col xl:max-w-sm lg:max-w-full lg:items-center">
-            <span className="mb-[18px] text-sm uppercase leading-none tracking-tight text-gray-new-50">
+  <section className="hero overflow-hidden pt-[192px] xl:pt-[166px] lg:pt-16 md:pt-12">
+    <Container className="xl:max-w-5xl md:px-5" size="1216">
+      <div className="flex justify-between gap-16 xl:gap-12 lg:mx-auto lg:max-w-lg lg:flex-col lg:gap-10">
+        <div className="flex max-w-xl flex-1 flex-col gap-10 xl:max-w-[460px] lg:max-w-full md:gap-8">
+          <div className="flex flex-col lg:max-w-[448px]">
+            <span className="mb-[18px] text-sm uppercase leading-none tracking-wide text-gray-new-50 lg:mb-3.5 lg:text-xs">
               Neon Startup Program
             </span>
-            <Heading
-              className="w-fit font-title text-[56px] font-medium leading-none tracking-tight text-white xl:text-[48px] lg:text-[40px]"
-              tag="h1"
-              theme="white"
-            >
-              Launch faster with $100K in Neon Credits
-            </Heading>
-            <p className="mt-4 text-pretty text-xl leading-snug tracking-tight text-gray-new-80 xl:text-lg xl:leading-normal lg:mt-3 md:text-base">
+            <h1 className="w-fit font-title text-[56px] font-medium leading-none tracking-extra-tight xl:text-[48px] lg:text-[40px] md:text-[32px]">
+              Launch faster with
+              <br /> $100K in Neon Credits
+            </h1>
+            <p className="mt-4 text-pretty text-lg leading-snug tracking-extra-tight text-gray-new-80 lg:mt-3.5 lg:text-base md:mt-3 md:text-[15px]">
               Join our Startup Program and get the Postgres platform built for developers: fast,
               scalable, and serverless.
             </p>
           </div>
-          <div className="mt-auto lg:mt-14">
+          <div className="hidden lg:block">
+            <ContactForm />
+          </div>
+          <div className="mt-auto lg:mt-2">
             <Quotes items={QUOTES} />
           </div>
         </div>
-        <div className="max-w-xl shrink-0 xl:max-w-[512px] lg:max-w-full">
+        <div className="w-full max-w-xl shrink-0 xl:max-w-[448px] lg:hidden">
           <ContactForm />
         </div>
       </div>

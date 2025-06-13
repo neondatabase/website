@@ -169,7 +169,7 @@ const ContactForm = () => {
     >
       <Field
         name="firstname"
-        label="First Name *"
+        label="First Name*"
         autoComplete="name"
         placeholder="Marques"
         theme="transparent"
@@ -180,7 +180,7 @@ const ContactForm = () => {
       />
       <Field
         name="lastname"
-        label="Last Name *"
+        label="Last Name*"
         autoComplete="name"
         placeholder="Hansen"
         theme="transparent"
@@ -191,7 +191,7 @@ const ContactForm = () => {
       />
       <Field
         name="email"
-        label="Work Email *"
+        label="Work Email*"
         type="email"
         autoComplete="email"
         placeholder="info@acme.com"
@@ -214,7 +214,7 @@ const ContactForm = () => {
         <Field
           className="grow"
           name="companySize"
-          label="Company Size *"
+          label="Company Size*"
           tag="select"
           theme="transparent"
           labelClassName={labelClassName}
@@ -235,7 +235,7 @@ const ContactForm = () => {
       </div>
       <Field
         name="message"
-        label="Message *"
+        label="Message*"
         tag="textarea"
         theme="transparent"
         labelClassName={labelClassName}
