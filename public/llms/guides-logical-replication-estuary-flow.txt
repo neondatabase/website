@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Replicate Data with Estuary Flow HTML](https://neon.tech/docs/guides/logical-replication-estuary-flow): The original HTML version of this documentation
+- [Replicate Data with Estuary Flow HTML](https://neon.com/docs/guides/logical-replication-estuary-flow): The original HTML version of this documentation
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
 

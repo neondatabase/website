@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Connect a Node.js application to Neon HTML](https://neon.tech/docs/guides/node): The original HTML version of this documentation
+- [Connect a Node.js application to Neon HTML](https://neon.com/docs/guides/node): The original HTML version of this documentation
 
 This guide describes how to create a Neon project and connect to it from a Node.js application. Examples are provided for using the [node-postgres](https://www.npmjs.com/package/pg) and [Postgres.js](https://www.npmjs.com/package/postgres) clients. Use the client you prefer.
 

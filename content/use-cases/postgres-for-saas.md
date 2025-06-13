@@ -61,7 +61,7 @@ One Branch per PR
 Ephemeral Environments for Dev/Test
 : Deploy confidently by using branches to run your test suite on an exact copy of your production database. No handling of seed data, no manual work keeping environments in sync.
 : - [See guide in docs](/docs/use-cases/dev-test)
-: - [Read how others do it](https://neon.tech/blog/from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle)
+: - [Read how others do it](/blog/from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle)
 
 </DefinitionList>
 
@@ -158,7 +158,7 @@ Private Link, IP Allow
 
 <DefinitionList bulletType="check">
 Subscription plans
-: Paid plans start at $19, with compute and storage resources already included. [Review our pricing plans](https://neon.tech/pricing).
+: Paid plans start at $19, with compute and storage resources already included. [Review our pricing plans](/pricing).
 
 Pay via AWS/Azure Marketplace
 : You can subscribe to Neon via the marketplaces to consolidate billing. Click [here](https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa) for AWS, and [here](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/neon1722366567200.neon_serverless_postgres_azure_prod?tab=PlansAndPrice) for Azure.

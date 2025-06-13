@@ -4,13 +4,13 @@
 
 ## Source
 
-- [Supported Postgres extensions HTML](https://neon.tech/docs/extensions/pg-extensions): The original HTML version of this documentation
+- [Supported Postgres extensions HTML](https://neon.com/docs/extensions/pg-extensions): The original HTML version of this documentation
 
 ## Overview
 
 Neon supports the Postgres extensions shown in the following table. The supported version of the extension sometimes differs by Postgres version. A dash (`-`) indicates that an extension is not yet supported.
 
-**Need an extension we don't have?** 📩 [Request an extension](https://neon.tech/docs/extensions/pg-extensions#request-an-extension)
+**Need an extension we don't have?** 📩 [Request an extension](https://neon.com/docs/extensions/pg-extensions#request-an-extension)
 
 
 
@@ -43,7 +43,7 @@ Neon supports the Postgres extensions shown in the following table. The supporte
 | [moddatetime (spi)](https://www.postgresql.org/docs/current/contrib-spi.html)                    |    1.0 |    1.0 |    1.0 |    1.0 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [neon](/docs/extensions/neon)                                                                    |    1.5 |    1.5 |    1.5 |    1.5 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [neon_utils](/docs/extensions/neon-utils)                                                        |    1.0 |    1.0 |    1.0 |    1.0 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| [pg_cron](/docs/extensions/pg_cron)                                                              |    1.6 |    1.6 |    1.6 |    1.6 | To install `pg_cron`, it must first be enabled. See [Enable the pg_cron extension](/docs/extensions/pg_cron#enable-the-pgcron-extension) for instructions. Please note that `pg_cron` jobs will only run when your compute is active. We therefore recommend only using `pg_cron` on computes that run 24/7 or where you have disabled [scale to zero](https://neon.tech/docs/introduction/scale-to-zero).                                                    |
+| [pg_cron](/docs/extensions/pg_cron)                                                              |    1.6 |    1.6 |    1.6 |    1.6 | To install `pg_cron`, it must first be enabled. See [Enable the pg_cron extension](/docs/extensions/pg_cron#enable-the-pgcron-extension) for instructions. Please note that `pg_cron` jobs will only run when your compute is active. We therefore recommend only using `pg_cron` on computes that run 24/7 or where you have disabled [scale to zero](https://neon.com/docs/introduction/scale-to-zero).                                                    |
 |                                                                                                  |
 | [pg_graphql](https://github.com/supabase/pg_graphql)                                             |  1.5.9 |  1.5.9 |  1.5.9 |  1.5.9 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [pg_hashids](https://github.com/iCyberon/pg_hashids)                                             |  1.2.1 |  1.2.1 |  1.2.1 |  1.2.1 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
@@ -105,11 +105,11 @@ Unless otherwise noted, supported extensions can be installed using [CREATE EXTE
 CREATE EXTENSION <extension_name>;
 ```
 
-You can install extensions from the Neon SQL Editor or from a client such as `psql` that permits running SQL queries. For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](https://neon.tech/docs/connect/query-with-psql-editor).
+You can install extensions from the Neon SQL Editor or from a client such as `psql` that permits running SQL queries. For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](https://neon.com/docs/connect/query-with-psql-editor).
 
 ## Update an extension version
 
-Neon updates supported extensions as new versions become available. Version updates are communicated in the [Changelog](https://neon.tech/docs/changelog). To check the current version of extensions you have installed, query the `pg_extension` table:
+Neon updates supported extensions as new versions become available. Version updates are communicated in the [Changelog](https://neon.com/docs/changelog). To check the current version of extensions you have installed, query the `pg_extension` table:
 
 ```bash
 SELECT * FROM pg_extension;
@@ -123,7 +123,7 @@ ALTER EXTENSION vector UPDATE TO '0.7.0';
 
 
 <Admonition type="important">
-When Neon releases a new extension or new extension version, a compute restart is required to make the new extension or extension version available for installation or update. A compute restart may occur on its own due to Neon's default [scale to zero](https://neon.tech/docs/introduction/scale-to-zero) behavior. However, if your compute never restarts because you disabled scale to zero or because your compute is constantly active, you may need to force a restart. To force a restart, you can issue [Restart endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API call. Please be aware that restarting a compute temporarily interrupts any connections currently using the compute.
+When Neon releases a new extension or new extension version, a compute restart is required to make the new extension or extension version available for installation or update. A compute restart may occur on its own due to Neon's default [scale to zero](https://neon.com/docs/introduction/scale-to-zero) behavior. However, if your compute never restarts because you disabled scale to zero or because your compute is constantly active, you may need to force a restart. To force a restart, you can issue [Restart endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API call. Please be aware that restarting a compute temporarily interrupts any connections currently using the compute.
 
 Extensions installations and updates are automatically applied to any read replica computes on the same branch as your primary compute the next time the read replica compute restarts.  
 </Admonition>
@@ -145,7 +145,7 @@ _We appreciate all extension requests. While we can’t guarantee support, we re
 
 ### Custom-built extensions
 
-For [Enterprise](https://neon.tech/docs/introduction/plans#enterprise) plan customers, Neon supports custom-built Postgres extensions for exclusive use with your Neon account. If you developed your own Postgres extension and want to use it with Neon, please reach out to us as described above. Please include the following information in your request:
+For [Enterprise](https://neon.com/docs/introduction/plans#enterprise) plan customers, Neon supports custom-built Postgres extensions for exclusive use with your Neon account. If you developed your own Postgres extension and want to use it with Neon, please reach out to us as described above. Please include the following information in your request:
 
 - A repository link or archive file containing the source code for your extension
 - A description of what the extension does, instructions for compiling it, and any prerequisites

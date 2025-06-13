@@ -6,7 +6,7 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 
 ## Source
 
-- [Neon Docs HTML](https://neon.tech/docs/introduction): The original HTML version of this documentation
+- [Neon Docs HTML](https://neon.com/docs/introduction): The original HTML version of this documentation
 
 ## Get started
 

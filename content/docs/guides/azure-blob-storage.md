@@ -2,7 +2,7 @@
 title: File storage with Azure Blob Storage
 subtitle: Store files via Azure Blob Storage and track metadata in Neon
 enableTableOfContents: true
-updatedOn: '2025-04-27T00:00:00.000Z'
+updatedOn: '2025-05-30T16:54:40.458Z'
 ---
 
 [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/) is Microsoft's object storage solution for the cloud. It's optimized for storing massive amounts of unstructured data, such as text or binary data, including images, documents, streaming media, and archive data.
@@ -73,7 +73,7 @@ We need a table in Neon to store metadata about the blobs uploaded to Azure Stor
 2.  Run the SQL statement. Add other relevant columns as needed (e.g., `content_type`, `size`).
 
 <Admonition type="note" title="Securing metadata with RLS">
-If you use [Neon's Row Level Security (RLS)](https://neon.tech/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `azure_files` table. This controls who can view or modify the object references stored in Neon based on your RLS rules.
+If you use [Neon's Row Level Security (RLS)](/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `azure_files` table. This controls who can view or modify the object references stored in Neon based on your RLS rules.
 
 Note that these policies apply _only_ to the metadata in Neon. Access control for the blobs within the Azure container itself is managed via Azure RBAC, SAS tokens, and container access level settings.
 </Admonition>

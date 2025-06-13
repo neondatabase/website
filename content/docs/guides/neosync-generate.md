@@ -2,7 +2,7 @@
 title: Generate synthetic data with Neosync
 subtitle: Learn how to generate synthetic data in your Neon database with Neosync
 enableTableOfContents: true
-updatedOn: '2025-02-03T20:41:57.330Z'
+updatedOn: '2025-05-30T16:54:40.477Z'
 ---
 
 [Neosync](https://www.neosync.dev/) is an open-source synthetic data orchestration platform that can create synthetic data and sync it across all of your Neon database environments.
@@ -135,5 +135,5 @@ Neosync is also able to handle referential integrity in case you need to generat
 - [Neosync Quickstart](https://docs.neosync.dev/quickstart)
 - [Synthetic data generation](https://docs.neosync.dev/core-features#synthetic-data-generation)
 - [How to Anonymize Sensitive Data in Neon](https://www.neosync.dev/blog/neosync-neon-sync-job)
-- [How to use Synthetic Data to catch more bugs with Neosync](https://neon.tech/blog/how-to-use-synthetic-data-to-catch-more-bugs-with-neosync)
+- [How to use Synthetic Data to catch more bugs with Neosync](/blog/how-to-use-synthetic-data-to-catch-more-bugs-with-neosync)
 - [How to seed your Neon DB with Synthetic Data](https://www.neosync.dev/blog/neosync-neon-data-gen-job)

@@ -6,7 +6,7 @@ This guide describes how to migrate a Postgres database from Digital Ocean to Ne
 
 ## Source
 
-- [Migrate from Digital Ocean Postgres to Neon HTML](https://neon.tech/docs/import/migrate-from-digital-ocean): The original HTML version of this documentation
+- [Migrate from Digital Ocean Postgres to Neon HTML](https://neon.com/docs/import/migrate-from-digital-ocean): The original HTML version of this documentation
 
 ## Prerequisites
 

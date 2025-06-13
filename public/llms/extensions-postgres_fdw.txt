@@ -4,7 +4,7 @@
 
 ## Source
 
-- [The postgres_fdw extension HTML](https://neon.tech/docs/extensions/postgres_fdw): The original HTML version of this documentation
+- [The postgres_fdw extension HTML](https://neon.com/docs/extensions/postgres_fdw): The original HTML version of this documentation
 
 The `postgres_fdw` (Foreign Data Wrapper) extension provides a powerful and standards-compliant way to access data stored in external Postgres databases from your Neon project. For compliance or regulatory reasons, you might need to keep sensitive data on-premises or within a specific jurisdiction; `postgres_fdw` lets you query this data directly from your Neon database without migrating it, maintaining data residency. This enables you to leverage Neon's features while adhering to data storage policies. This simplifies data integration, enables cross-database querying, and allows you to build applications that seamlessly interact with data across different Postgres deployments.
 
@@ -18,11 +18,11 @@ This guide will walk you through the essentials of using the `postgres_fdw` exte
 
 **Version availability:**
 
-Please refer to the [list of all extensions](https://neon.tech/docs/extensions/pg-extensions) available in Neon for up-to-date extension version information.
+Please refer to the [list of all extensions](https://neon.com/docs/extensions/pg-extensions) available in Neon for up-to-date extension version information.
 
 ## Enable the `postgres_fdw` extension
 
-You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](https://neon.tech/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](https://neon.com/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS postgres_fdw;

@@ -388,7 +388,7 @@ composer require pestphp/pest-plugin-livewire --dev
 
 For this example, we will use an in-memory SQLite database for testing. This ensures that tests run quickly and do not affect your production database.
 
-However, to learn more about testing in Laravel along with Neon branding, check out the [Testing Laravel Applications with Neon's Database Branching](https://neon.tech/guides/laravel-test-on-branch). This guide will help you set up a separate database branch for testing, allowing you to test your application with real data rather than an in-memory database.
+However, to learn more about testing in Laravel along with Neon branding, check out the [Testing Laravel Applications with Neon's Database Branching](/guides/laravel-test-on-branch). This guide will help you set up a separate database branch for testing, allowing you to test your application with real data rather than an in-memory database.
 
 To get started, ensure your `.env.testing` file is configured to use an in-memory SQLite database for testing:
 

@@ -51,6 +51,7 @@ export default {
   docsBranching: '/docs/introduction/branching',
   docsMigration: '/docs/import/import-data-assistant',
   manageBilling: '/docs/introduction/manage-billing',
+  pgSearch: '/docs/extensions/pg_search',
   rlsAuthorize: '/docs/guides/neon-rls',
   serverless: '/docs/introduction/serverless',
   support: '/docs/introduction/support',

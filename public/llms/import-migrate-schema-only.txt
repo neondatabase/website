@@ -8,7 +8,7 @@ A schema-only migration may be necessary in certain scenarios. For example, when
 
 ## Source
 
-- [Migrate a database schema HTML](https://neon.tech/docs/import/migrate-schema-only): The original HTML version of this documentation
+- [Migrate a database schema HTML](https://neon.com/docs/import/migrate-schema-only): The original HTML version of this documentation
 
 
 

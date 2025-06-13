@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Connection errors HTML](https://neon.tech/docs/connect/connection-errors): The original HTML version of this documentation
+- [Connection errors HTML](https://neon.com/docs/connect/connection-errors): The original HTML version of this documentation
 
 This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered include:
 
@@ -32,12 +32,12 @@ Connection problems are sometimes related to a system issue. To check for system
 With older clients and some native Postgres clients, you may receive the following error when attempting to connect to Neon:
 
 ```txt shouldWrap
-ERROR: The endpoint ID is not specified. Either upgrade the Postgres client library (libpq) for SNI support or pass the endpoint ID (the first part of the domain name) as a parameter: '&options=endpoint%3D'. See [https://neon.tech/sni](https://neon.tech/sni) for more information.
+ERROR: The endpoint ID is not specified. Either upgrade the Postgres client library (libpq) for SNI support or pass the endpoint ID (the first part of the domain name) as a parameter: '&options=endpoint%3D'. See [https://neon.com/sni](https://neon.com/sni) for more information.
 ```
 
 This error occurs if your client library or application does not support the **Server Name Indication (SNI)** mechanism in TLS.
 
-Neon uses computet IDs (the first part of a Neon domain name) to route incoming connections. However, the Postgres wire protocol does not transfer domain name information, so Neon relies on the Server Name Indication (SNI) extension of the TLS protocol to do this.
+Neon uses compute IDs (the first part of a Neon domain name) to route incoming connections. However, the Postgres wire protocol does not transfer domain name information, so Neon relies on the Server Name Indication (SNI) extension of the TLS protocol to do this.
 
 SNI support was added to `libpq` (the official Postgres client library) in Postgres 14, which was released in September 2021. Clients that use your system's `libpq` library should work if your Postgres version is >= 14. On Linux and macOS, you can check Postgres version by running `pg_config --version`. On Windows, check the `libpq.dll` version in your Postgres installation's `bin` directory. Right-click on the file, select **Properties** > **Details**.
 
@@ -93,7 +93,7 @@ postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-12
 Using a dollar sign (`$`) character as a separator may be required if a semicolon (`;`) is not a permitted character in a password field. For example, the [AWS Database Migration Service (DMS)](https://aws.amazon.com/dms/) does not permit a semicolon character in the **Password** field when defining connection details for database endpoints.
 
 
-This approach causes the authentication method to be downgraded from `scram-sha-256` (never transfers a plain text password) to `password` (transfers a plain text password). However, the connection is still TLS-encrypted, so the level of security is equivalent to the security provided by `https` websites. We intend deprecate this option when most libraries and applications provide SNI support.
+This approach causes the authentication method to be downgraded from `scram-sha-256` (never transfers a plain text password) to `password` (transfers a plain text password). However, the connection is still TLS-encrypted, so the level of security is equivalent to the security provided by `https` websites as long as `sslmode=verify-full` or channel binding is used. We intend deprecate this option when most libraries and applications provide SNI support.
 
 ### Libraries
 
@@ -223,7 +223,7 @@ This error is often encountered when attempting to set the Postgres `search_path
 
 ## Postgrex: DBConnection ConnectionError ssl send: closed
 
-Postgrex has an `:idle_interval` connection parameter that defines an interval for pinging connections after a period of inactivity. The default setting is `1000ms`. If you rely on Neon's [autosuspend](https://neon.tech/docs/introduction/auto-suspend) feature to scale your compute to zero when your database is not active, this setting will prevent that and you may encounter a `(DBConnection.ConnectionError) ssl send: closed (ecto_sql 3.12.0)` error as a result. As a workaround, you can set the interval to a higher value to allow your Neon compute to suspend. For example:
+Postgrex has an `:idle_interval` connection parameter that defines an interval for pinging connections after a period of inactivity. The default setting is `1000ms`. If you rely on Neon's [autosuspend](https://neon.com/docs/introduction/auto-suspend) feature to scale your compute to zero when your database is not active, this setting will prevent that and you may encounter a `(DBConnection.ConnectionError) ssl send: closed (ecto_sql 3.12.0)` error as a result. As a workaround, you can set the interval to a higher value to allow your Neon compute to suspend. For example:
 
 ```elixir
 config :app_name, AppName.Repo

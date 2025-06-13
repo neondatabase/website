@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Connect from TypeORM to Neon HTML](https://neon.tech/docs/guides/typeorm): The original HTML version of this documentation
+- [Connect from TypeORM to Neon HTML](https://neon.com/docs/guides/typeorm): The original HTML version of this documentation
 
 ## Overview
 

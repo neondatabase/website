@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
+import LINKS from 'constants/links';
 import lineLg from 'images/pages/about/timeline/line-lg.svg';
 import lineMd from 'images/pages/about/timeline/line-md.svg';
 import lineXl from 'images/pages/about/timeline/line-xl.svg';
@@ -20,31 +21,31 @@ const ITEMS = [
     className: 'translate-x-3 lg:-translate-x-9',
     date: 'June 15th, 2022',
     title: 'Technical Preview',
-    link: 'https://neon.tech/blog/hello-world',
+    link: `${LINKS.blog}/hello-world`,
   },
   {
     className: '-translate-x-3 lg:translate-x-[-72px]',
     date: 'July, 2022',
     title: '$54MM Raised',
-    link: 'https://neon.tech/blog/funding-a1',
+    link: `${LINKS.blog}/funding-a1`,
   },
   {
     className: '-translate-x-3 lg:translate-x-[-85px]',
     date: 'December, 2022',
     title: 'Open Access',
-    link: 'https://neon.tech/blog/neon-serverless-postgres-is-live',
+    link: `${LINKS.blog}/neon-serverless-postgres-is-live`,
   },
   {
     className: 'translate-x-1 lg:translate-x-[-94px]',
     date: 'August, 2023',
     title: '$46MM Raised',
-    link: 'https://neon.tech/blog/series-b-funding',
+    link: `${LINKS.blog}/series-b-funding`,
   },
   {
     className: '2xl:-translate-x-1 lg:translate-x-[-115px]',
     date: 'April 15th, 2024',
     title: 'Neon is Generally Available',
-    link: 'https://neon.tech/blog/neon-ga',
+    link: `${LINKS.blog}/neon-ga`,
   },
 ];
 

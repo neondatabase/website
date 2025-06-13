@@ -190,7 +190,7 @@ const defaultConfig = {
         destination: '/docs/changelog/:path*',
         permanent: true,
       },
-      // Proxy has an error message, that suggests to read `https://neon.tech/sni` for more details.
+      // Proxy has an error message, that suggests to read `https://neon.com/sni` for more details.
       {
         source: '/sni',
         destination: '/docs/connect/connection-errors',
@@ -337,6 +337,11 @@ const defaultConfig = {
         destination: '/use-cases/dev-test',
         permanent: true,
       },
+      {
+        source: '/launchpad',
+        destination: 'https://neon.new',
+        permanent: false,
+      },
       ...docsRedirects,
       ...changelogRedirects,
     ];
@@ -377,11 +382,7 @@ const defaultConfig = {
       },
       {
         source: '/demos/regional-latency',
-        destination: 'https://latencies-ui.vercel.app/demos/regional-latency',
-      },
-      {
-        source: '/demos/regional-latency/:asset*',
-        destination: 'https://latencies-ui.vercel.app/demos/regional-latency/:asset*',
+        destination: 'https://latency-benchmarks-dashboard.vercel.app/',
       },
       {
         source: '/dev-for-rds',

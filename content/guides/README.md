@@ -4,7 +4,7 @@ updatedOn: '2024-05-13T13:24:36.612Z'
 
 # Guides
 
-Welcome to Neon guides! This folder contains the source code of the [Neon guides](https://neon.tech/guides/).
+Welcome to Neon guides! This folder contains the source code of the [Neon guides](/guides/).
 
 ## Basic information
 
