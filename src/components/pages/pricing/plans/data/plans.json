@@ -65,7 +65,7 @@
     {
       "rows": "2",
       "feature": {
-        "title": "Storage per project",
+        "title": "Storage per project (root branches)",
         "subtitle": "Billed per true usage (GB-month)"
       },
       "free": "0.5 GB-month",
@@ -96,7 +96,7 @@
       "enterprise": "Tailored to your needs"
     },
     {
-      "feature": "Data transfer",
+      "feature": "Data transfer (public outbound)",
       "free": "5 GB",
       "serverless": "100 GB",
       "business": "100 GB",
@@ -128,8 +128,45 @@
     {
       "rows": "6",
       "feature": {
-        "title": "Storage",
+        "title": "Storage (root branches)",
         "subtitle": "Tiered pricing. Pay less the more your store."
+      },
+      "free": "N/A",
+      "serverless": [
+        {
+          "title": "1-10 GB",
+          "subtitle": "$0.39 per GB-month"
+        },
+        {
+          "title": "10-100 GB",
+          "subtitle": "$0.34 per GB-month"
+        },
+        {
+          "title": ">100 GB",
+          "subtitle": "$0.29 per GB-month"
+        }
+      ],
+      "business": [
+        {
+          "title": "1-10 GB",
+          "subtitle": "$0.39 per GB-month"
+        },
+        {
+          "title": "10-100 GB",
+          "subtitle": "$0.34 per GB-month"
+        },
+        {
+          "title": ">100 GB",
+          "subtitle": "$0.29 per GB-month"
+        }
+      ],
+      "enterprise": "Tailored to your needs"
+    },
+    {
+      "rows": "6",
+      "feature": {
+        "title": "Storage delta (child branches)",
+        "subtitle": "Child branches only consume storage when diverging from parent"
       },
       "free": "N/A",
       "serverless": [
@@ -200,10 +237,10 @@
       "enterprise": "Tailored to your needs"
     },
     {
-      "feature": "Data transfer",
+      "feature": "Data transfer (public outbound)",
       "free": "N/A",
-      "serverless": "$10 per GB",
-      "business": "$10 per GB",
+      "serverless": "$0.10 per GB",
+      "business": "$0.10 per GB",
       "enterprise": "Tailored to your needs"
     },
     {
@@ -232,7 +269,7 @@
     },
     {
       "rows": "2",
-      "feature": "Longer restore windows",
+      "feature": "Longer restore windows (per project)",
       "free": "N/A",
       "serverless": [
         {
@@ -242,7 +279,14 @@
           "title": "30-day window: $950"
         }
       ],
-      "business": "Included",
+      "business": [
+        {
+          "title": "7-day window: $50"
+        },
+        {
+          "title": "30-day window: $950"
+        }
+      ],      
       "enterprise": "Included"
     },
     {
