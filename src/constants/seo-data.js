@@ -185,6 +185,12 @@ export default {
     imagePath: '/images/social-previews/security.jpg',
     pathname: LINKS.security,
   },
+  startups: {
+    title: 'Neon Startup Deal',
+    description:
+      'Apply to the Neon Startups deal and get up to $100k in Neon credits. For venture-funded startups enrolled in accelerators.',
+    pathname: LINKS.startups,
+  },
   generateTicket: {
     title: 'Grab the ticket for Neon Deploy',
     description:
