@@ -13,7 +13,7 @@ Neon makes it easy to embed Postgres into your platform with one-second provisio
 
 ## Uniquely built to scale Postgres fleets
 
-Neon is the best Postgres provider for deploying one-database-per-user fleets at scale. You don’t need a DevOps team to manage a large Neon fleet—the Neon API lets you track usage, enforce limits, and scale programmatically. With pay-per-use pricing and automatic scale-to-zero, [you’ll spend a fraction of what you'd pay on AWS](/cost-fleets). What you get:
+Neon is the best Postgres provider for deploying one-database-per-user fleets at scale. **You don’t need a DevOps team to manage a large Neon fleet** – the Neon API lets you track usage, enforce limits, and scale programmatically. With pay-per-use pricing and automatic scale-to-zero, [you’ll spend a fraction of what you'd pay on AWS](/cost-fleets). What you get:
 
 - Dedicated connection strings for every user or project - every user gets their own secure, isolated Postgres [project](/docs/manage/projects)
 - High connection capacity - pooled endpoints support up to 10,000 connections
@@ -53,7 +53,7 @@ Neon’s API is purpose-built to help platforms manage large fleets of Postgres 
 - Update quotas and configurations without downtime
 - …and more
 
-#### Retool uses the Neon API to manage over 300,000 databases with just one engineer—handling everything from provisioning to quota enforcement.
+<MegaLink tag="Case Study" title="Retool uses the Neon API to manage over 300,000 databases with just one engineer — handling everything from provisioning to quota enforcement." url="/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases" />
 
 ## Built-in quotas and billing controls
 
@@ -66,7 +66,7 @@ Neon allows you to easily **define usage limits per project to manage cost and e
 - Customize suspend timeouts for different tiers
 - …and more
 
-#### Koyeb’s Database Instance Types sets an example of how to use Neon’s quota controls to define compute, storage, write, and data transfer limits per plan.
+<MegaLink tag="Case Study" title="Koyeb’s Database Instance Types sets an example of how to use Neon’s quota controls to define compute, storage, write, and data transfer limits per plan." url="https://www.koyeb.com/docs/databases#database-instance-types" />
 
 ## Tracking usage at scale
 
@@ -98,7 +98,9 @@ company: 'co-founder and CPO at Koyeb',
 
 **We’re not trying to own your user experience—we’re here to power it.** You can integrate Neon invisibly behind the scenes, whether you want to use our [OAuth integration](/docs/guides/oauth-integration) or manage Neon projects directly via API. **You decide how the database shows up in your UI, we take care of the rest.**
 
-#### Let us help you launch. We’re happy to support proof-of-concepts, provide technical guidance, and share best practices from other platforms.
+## Let us help you launch.
+
+We’re happy to support proof-of-concepts, provide technical guidance, and share best practices from other platforms.
 
 [Talk to us about your Postgres roadmap](https://neon.com/contact-sales)
 
