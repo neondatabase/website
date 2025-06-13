@@ -24,6 +24,7 @@ export default {
   migrationAssistance: '/migration-assistance',
   postgresqltutorial: '/postgresql/tutorial',
   pricing: '/pricing',
+  platforms: '/platforms',
   report: '/restores-survey',
   scalableArchitecture: '/scalable-architecture',
   scaleTrial: '/scale-trial',
