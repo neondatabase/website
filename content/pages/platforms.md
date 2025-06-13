@@ -72,11 +72,11 @@ Neon allows you to easily **define usage limits per project to manage cost and e
 
 Neon also provides rich consumption APIs for observability at scale:
 
-| Endpoint                          | Description                                                  | Availability                                |
-|----------------------------------|--------------------------------------------------------------|---------------------------------------------|
-| Account-level cumulative metrics | Granular project-level metrics                               | Single project metrics                      |
+| Endpoint                                             | Description                                                        | Availability                                              |
+| ---------------------------------------------------- | ------------------------------------------------------------------ | --------------------------------------------------------- |
+| Account-level cumulative metrics                     | Granular project-level metrics                                     | Single project metrics                                    |
 | Aggregate metrics across all projects in the account | Usage metrics per project at hourly, daily, or monthly granularity | Detailed metrics and quota info for an individual project |
-| Scale and Business plans         | Scale and Business plans                                     | All plans                                   |
+| Scale and Business plans                             | Scale and Business plans                                           | All plans                                                 |
 
 You can use these to:
 
