@@ -25,8 +25,6 @@
             "title": "Scale to 2 CU",
             "info": "2 CU = 2 vCPU, 8 GB RAM"
           },
-          { "title": "5 GB data transfer" },
-          { "title": "Instant Restores", "info": "Within a 6-hour window" }
         ]
       },
       {
@@ -64,7 +62,7 @@
             "title": "10 projects",
             "info": "Then $5 per project"
           },
-          { "title": "100 branches" },
+          { "title": "100 branches per project" },
           { "title": "0.5 GB per project", "info": "Then $0.39-0.29 per GB" },
           {
             "title": [
@@ -82,8 +80,6 @@
             "title": "Scale to 8 CU",
             "info": "8 CU = 8 vCPU, 32 GB RAM"
           },
-          { "title": "100 GB data transfer", "info": "Then $10 per GB" },
-          { "title": "Instant Restores", "info": "Within a 24-hour window" },
           { "title": "Standard Support" }
         ]
       },
@@ -98,7 +94,7 @@
           { "title": "Metrics export" },
           { "title": "IP Allow" },
           { "title": "SOC2 certified" },
-          { "title": "Instant Restores", "info": "Within a 30-day window" }
+          { "title": "Longer restore windows" }
         ]
       }
     ],
@@ -138,7 +134,7 @@
         },
         "items": [
           { "title": "HIPAA certified" },
-          { "title": "Instant Restores", "info": "Within a 30-day window" }
+          { "title": "Longer restore windows" }
         ]
       }
     ],
