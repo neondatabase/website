@@ -36,6 +36,7 @@ import SaasGradientIcon from 'icons/header/saas-gradient.inline.svg';
 import SaasIcon from 'icons/header/saas.inline.svg';
 import SearchGradientIcon from 'icons/header/search-gradient.inline.svg';
 import SearchIcon from 'icons/header/search.inline.svg';
+import SecurityGradientIcon from 'icons/header/security-gradient.inline.svg';
 import SecurityIcon from 'icons/header/security.inline.svg';
 import ServerlessGradientIcon from 'icons/header/serverless-gradient.inline.svg';
 import ServerlessIcon from 'icons/header/serverless.inline.svg';
@@ -199,6 +200,13 @@ export default {
               to: LINKS.enterprise,
             },
             {
+              icon: SecurityIcon,
+              iconGradient: SecurityGradientIcon,
+              title: 'Security',
+              description: 'Compliance & privacy',
+              to: LINKS.security,
+            },
+            {
               icon: StarIcon,
               iconGradient: StarGradientIcon,
               title: 'Partners',
@@ -248,11 +256,6 @@ export default {
               icon: ChatIcon,
               title: 'Contact',
               to: LINKS.contactSales,
-            },
-            {
-              icon: SecurityIcon,
-              title: 'Security',
-              to: LINKS.security,
             },
           ],
         },
