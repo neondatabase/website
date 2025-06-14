@@ -56,5 +56,3 @@ const DeveloperDays1Page = () => (
 );
 
 export default DeveloperDays1Page;
-
-export const revalidate = 60;
