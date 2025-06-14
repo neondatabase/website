@@ -1,5 +1,11 @@
 # Manage Organizations using the Neon CLI
 
+> The document titled "Manage Organizations using the Neon CLI" details how Neon users can utilize the Neon Command Line Interface to manage organizational settings and configurations within their Neon environments.
+
+## Source
+
+- [Manage Organizations using the Neon CLI HTML](https://neon.com/docs/manage/orgs-cli): The original HTML version of this documentation
+
 Neon's CLI provides an expanding set of commands to manage your organizations.
 
 ## Authorization
@@ -8,7 +14,7 @@ Use the `auth` command to authenticate your Neon account from the CLI. This comm
 
 Note that authentication is tied to your personal account. Once authenticated, you can access and manage any Organizations that you belong to.
 
-See [Auth - CLI](/docs/reference/cli-auth) to learn more.
+See [Auth - CLI](https://neon.com/docs/reference/cli-auth) to learn more.
 
 ## List Organizations
 
@@ -26,7 +32,7 @@ Organizations
 └────────────────────────┴──────────────────┘
 ```
 
-See [Orgs - CLI](/docs/reference/cli-orgs) to learn more.
+See [Orgs - CLI](https://neon.com/docs/reference/cli-orgs) to learn more.
 
 ## Manage projects within an Organization
 
@@ -50,13 +56,13 @@ Projects
 
 You can include the `org-id` to apply the following subcommands specifically to your organization:
 
-- [List projects](/docs/reference/cli-projects#list)
-- [Create projects](/docs/reference/cli-projects#create)
+- [List projects](https://neon.com/docs/reference/cli-projects#list)
+- [Create projects](https://neon.com/docs/reference/cli-projects#create)
 
-See [Projects - CLI](/docs/reference/cli-projects) to learn more.
+See [Projects - CLI](https://neon.com/docs/reference/cli-projects) to learn more.
 
 ## Setting Organization Context
 
 To simplify your workflow, the Neon CLI `set-context` command supports setting an organization context. This means you don't have to specify an organization ID every time you run a CLI command.
 
-Sees [set-context - CLI](/docs/reference/cli-set-context) to learn more.
+Sees [set-context - CLI](https://neon.com/docs/reference/cli-set-context) to learn more.

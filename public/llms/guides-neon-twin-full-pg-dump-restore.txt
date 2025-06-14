@@ -1,12 +1,14 @@
 # Full Twin
 
-Create a full Twin of your production database
+> The "Full Twin" documentation guides Neon users on how to create a complete copy of a Neon database using the pg_dump and pg_restore tools.
+
+## Source
+
+- [Full Twin HTML](https://neon.com/docs/guides/neon-twin-full-pg-dump-restore): The original HTML version of this documentation
 
 This workflow will create a full Neon Twin using `pg_dump` and `pg_restore`.
 
-
-To use this workflow, you'll need the Postgres connection string for your Neon database. Follow our [Getting Started Guide](/docs/get-started-with-neon/signing-up#sign-up) to learn how.
-
+   **Note**: To use this workflow, you'll need the Postgres connection string for your Neon database. Follow our [Getting Started Guide](https://neon.com/docs/get-started-with-neon/signing-up#sign-up) to learn how.
 
 ## Create the workflow
 
@@ -106,13 +108,13 @@ Before running the Action, ensure that both `PROD_DATABASE_URL` and `DEV_DATABAS
 
 In your repository, go to **Settings** > **Secrets and variables** > **Actions** to add them.
 
-![github repository secrects](/docs/guides/twin_diagram_github_secrets.png)
+
 
 ## Testing the workflow
 
 To manually trigger your workflow go to **Actions** > **Create Neon Twin** then click **Run workflow**. From the dropdown, click the **Run workflow** button.
 
-![github actions run workflow](/docs/guides/twin_diagram_test_workflow.png)
+
 
 ## Syncing with migration changes
 
@@ -123,16 +125,14 @@ The GitHub Action runs on a recurring schedule, but you may also want it to trig
 Add a `pull_request` event and configure it to listen for merges into the main `branch`.
 
 ```diff
-
 on:
   schedule:
     - cron: '0 0 * * *' # Runs at midnight UTC
-  pull_request: // [!code ++]
-    types: [closed] // [!code ++]
-    branches: // [!code ++]
-      - main // [!code ++]
+  pull_request:
+    types: [closed]
+    branches:
+      - main
   workflow_dispatch:
-
 ```
 
 ### Add Concurrency and Conditions
@@ -140,23 +140,21 @@ on:
 To prevent conflicts between scheduled runs and runs triggered by a Pull Request, set `cancel-in-progress` to `true` under `concurrency`. Additionally, add an `if` statement to ensure the job only executes when specific conditions are met.
 
 ```diff
-
 jobs:
   dump-and-restore:
     runs-on: ubuntu-latest
-    concurrency: // [!code ++]
-      group: 'dump-and-restore' // [!code ++]
-      cancel-in-progress: true // [!code ++]
-    if: | // [!code ++]
-      github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true) // [!code ++]
-
+    concurrency:
+      group: 'dump-and-restore'
+      cancel-in-progress: true
+    if: |
+      github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
 ```
 
 ## Limitations
 
 Be aware of [usage limits](https://docs.github.com/en/actions/administering-github-actions/usage-limits-billing-and-administration#usage-limits): Each GitHub Action job can run for up to 6 hours. If a job exceeds this limit, it will be terminated and fail to complete.
 
-If your dump/restore process takes longer, consider using [self-hosted runners](/guides/gihub-actions-self-hosted-runners).
+If your dump/restore process takes longer, consider using [self-hosted runners](https://neon.com/guides/gihub-actions-self-hosted-runners).
 
 ## Further reading
 

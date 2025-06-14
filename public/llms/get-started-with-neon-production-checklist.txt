@@ -1,63 +1,52 @@
 # Getting ready for production
 
-> This guide provides a comprehensive checklist for preparing your Neon database for production use, covering compute sizing, autoscaling, connection pooling, security measures, monitoring, and support options to optimize performance, reliability, and security.
+> The "Getting ready for production" document outlines a checklist for Neon users to prepare their database environments for production deployment, covering aspects like security, performance, and monitoring configurations.
 
 ## Source
 
 - [Getting ready for production HTML](https://neon.com/docs/get-started-with-neon/production-checklist): The original HTML version of this documentation
 
-## Overview
-
-This checklist provides recommended settings to optimize performance, security, and reliability when preparing your Neon database for production use.
-
 ## Production checklist
 
-1. **Set minimum compute to at least 1 vCPU**
-   Make sure your default branch can handle production traffic. A higher minimum compute helps you avoid performance bottlenecks.
+- [ ] [1. Set a compute size that can handle production traffic](https://neon.com/#set-a-compute-size-that-can-handle-production-traffic)
+  Make sure your default branch can handle production traffic. A higher minimum compute can help you avoid performance bottlenecks.
+- [ ] [2. Enable autoscaling to handle usage spikes](https://neon.com/#enable-autoscaling-to-handle-usage-spikes)
+  Set your compute to automatically scale up, allowing your app to handle traffic surges and stay performant without manual scaling.
+- [ ] [3. Disable scale to zero](https://neon.com/#disable-scale-to-zero)
+  Scale to zero turns off your compute after a period of inactivity. Ideal for development or other environments with bursty usage.
+- [ ] [4. Use a pooled connection](https://neon.com/#use-a-pooled-connection)
+  Increase your database's ability to handle concurrent connections by using connection pooling.
+- [ ] [5. Increase your project's restore window to 7 days](https://neon.com/#increase-your-projects-restore-window-to-7-days)
+  Protect your production data from accidental loss. Keep at least a 7-day restore window for quick data recovery and analysis.
+- [ ] [6. Restrict database access to trusted IPs](https://neon.com/#restrict-database-access-to-trusted-ips)
+  Secure your database by limiting connections to trusted IP addresses.
+- [ ] [7. Set up metrics export to Datadog](https://neon.com/#set-up-metrics-export-to-datadog)
+  Export Neon metrics to Datadog and centralize your database monitoring with your existing observability stack.
+- [ ] [8. Install pg_stat_statements](https://neon.com/#install-pgstatstatements)
+  Enable query performance monitoring to track execution times and frequency.
+- [ ] [9. Ensure your app reconnects after your database restarts](https://neon.com/#ensure-your-app-reconnects-after-your-database-restarts)
+  Verify your application handles compute restarts gracefully.
+- [ ] [10. Upgrade to get priority support](https://neon.com/#upgrade-to-a-neon-business-plan-for-priority-support)
+  Get faster support and priority handling for your production database with a Business plan.
+- [ ] [11. Advanced: Set up cross-region replication](https://neon.com/#advanced-set-up-cross-region-replication)
+  For added resilience, replicate your data to a Neon project in another region. This helps prepare for regional outages, making it possible to failover to a copy of your database in a different region, if necessary.
 
-2. **Set max compute to the highest CU available for your plan**
-   Set your compute to automatically scale up, allowing your app to handle traffic surges and stay performant without manual scaling.
+## Set a compute size that can handle production traffic
 
-3. **Disable scale to zero**
-   Scale to zero turns off your compute after a period of inactivity. Ideal for development or other environments with bursty usage.
-
-4. **Use a pooled connection**
-   Increase your database's ability to handle concurrent connections by using connection pooling.
-
-5. **Increase your project's restore window to 7 days**
-   Protect your production data from accidental loss. Keep at least a 7-day restore window for quick data recovery and analysis.
-
-6. **Restrict database access to trusted IPs**
-   Secure your database by limiting connections to trusted IP addresses.
-
-7. **Set up metrics export to Datadog**
-   Export Neon metrics to Datadog and centralize your database monitoring with your existing observability stack.
-
-8. **Install pg_stat_statements**
-   Enable query performance monitoring to track execution times and frequency.
-
-9. **Ensure your app reconnects after your database restarts**
-   Verify your application handles compute restarts gracefully.
-
-10. **Upgrade to get priority support**
-    Get faster support and priority handling for your production database with a Business plan.
-
-## Set minimum compute to at least 1 CU
-
-Before your application goes to prodution, make sure your database has enough vCPU and memory to handle expected production load. See [How to size your compute](https://neon.com/docs/manage/endpoints#how-to-size-your-compute).
+Before your application goes to production, make sure your database has enough vCPU and memory to handle expected production load. See [How to size your compute](https://neon.com/docs/manage/computes#how-to-size-your-compute).
 
 **Recommendation**
 
 We recommend that you **fit your data in memory** and use Neon **autoscaling**:
 
 - Start with a compute size that can hold all your data in memory. Or try to fit at least your most frequently accessed data (your [working set](https://neon.com/docs/reference/glossary#working-set)).
-- Once you determine the [right size](https://neon.com/docs/manage/endpoints#how-to-size-your-compute) for your compute, use that as the **minimum compute size** for [Autoscaling](#set-maximum-compute-to-highest-cu)).
+- Once you determine the [right size](https://neon.com/docs/manage/computes#how-to-size-your-compute) for your compute, use that as the **minimum compute size** for [Autoscaling](https://neon.com/docs/get-started-with-neon/production-checklist#set-maximum-compute-to-highest-cu)).
 
 **About compute size**
 
 A Compute Unit (CU) in Neon measures the processing power or "size" of a Neon compute. One CU includes 1 vCPU and 4 GB of RAM. Neon computes can range from **0.25** CUs to **56** CUs, depending on your [Neon plan](https://neon.com/docs/introduction/plans).
 
-## Set max compute to the highest CU available for your plan
+## Enable autoscaling to handle usage spikes
 
 Use Neon's [autoscaling](https://neon.com/docs/guides/autoscaling-algorithm) feature to dynamically adjust your compute resources based on your current workload. This means you don't need to scale manually during traffic surges.
 
@@ -66,10 +55,12 @@ Use Neon's [autoscaling](https://neon.com/docs/guides/autoscaling-algorithm) fea
 - **Minimum compute size**: Autoscaling works best if your data can be fully cached in memory.
 - **Maximum compute size**: Set this to as a high a limit as your plan allows. You only pay for what you use.
 
+
+
 To get started with Autoscaling, read:
 
 - [Enable Autoscaling in Neon](https://neon.com/docs/guides/autoscaling-guide)
-- [How to size your compute](https://neon.com/docs/manage/endpoints#how-to-size-your-compute), including the [Autoscaling considerations](https://neon.com/docs/manage/endpoints#autoscaling-considerations) section.
+- [How to size your compute](https://neon.com/docs/manage/computes#how-to-size-your-compute), including the [Autoscaling considerations](https://neon.com/docs/manage/computes#autoscaling-considerations) section.
 
 ## Disable scale to zero
 
@@ -115,6 +106,8 @@ Set your restore window to 7 days to ensure data integrity and quick recovery.
 
 By default, Neon's restore window is set to **1 day**. Extending it to 7 days helps protect you against data loss, letting you recover from human or application errors that may go unnoticed for days. It can also help you comply with any industry regulations that need longer retention periods. While a longer restore window can increase storage costs, it provides exta security and recoverability for production data.
 
+
+
 For more info, see [Instant restore](https://neon.com/docs/introduction/branch-restore).
 
 ## Restrict database access to trusted IPs
@@ -131,6 +124,8 @@ Combine an allowlist with protected branches for enhanced security. This setup e
 - **Protected branch**: Safeguards critical data from accidental deletions or modifications by designating branches as protected.
 
 Available with the Neon [Scale](https://neon.com/docs/introduction/plans#scale) and [Business](https://neon.com/docs/introduction/plans#business) plans, you can configure **IP Allow** and protected branches in your Neon project's settings. For more information, see [Configure IP Allow](https://neon.com/docs/manage/projects#configure-ip-allow) and [Protected branches guide](https://neon.com/docs/guides/protected-branches).
+
+
 
 ## Set up metrics export to Datadog
 
@@ -191,6 +186,8 @@ The statistics gathered by this extension require little overhead and let you qu
 
 You can also use the **Monitoring Dashboard** in the Neon Console to view live graphs for system and database metrics like CPU, RAM, and connections.
 
+
+
 For more information, see [Query performance](https://neon.com/docs/postgresql/query-performance) and [Monitoring](https://neon.com/docs/introduction/monitoring).
 
 ## Upgrade to a Neon Business plan for priority support
@@ -202,3 +199,23 @@ Support tickets opened by Business and Enterprise support plan customers are giv
 Upgrade to a [Business plan](https://neon.com/docs/introduction/plans#business) to get both [Priority support](https://neon.com/docs/introduction/support#prioritized-support-tickets) and acccess to the [Business SLA](https://neon.com/neon-business-sla).
 
 For more information, see the [Support documentation](https://neon.com/docs/introduction/support).
+
+## Advanced: Set up cross-region replication
+
+Cross-region replication can provide an added layer of resilience for production environments. It allows you to replicate data from one Neon project to another in a different region — helping you prepare for unlikely regional outages or implement failover strategies.
+
+**Recommendation**
+
+Set up cross-region replication if your app requires high availability across regions or if you're building a disaster recovery plan.
+
+**How it works**
+
+Neon uses [logical replication](https://neon.com/docs/guides/logical-replication-neon-to-neon) to replicate data between Neon projects. You can replicate from a source project in one region to a destination project in another region, creating a near real-time copy of your data.
+
+**Steps to get started**
+
+- Set up a publication on your source database
+- Create matching tables and a subscription on your destination database
+- Test the replication and monitor for consistency
+
+For full details, see [Replicate data from one Neon project to another](https://neon.com/docs/guides/logical-replication-neon-to-neon).
