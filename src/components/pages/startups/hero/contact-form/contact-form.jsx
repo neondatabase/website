@@ -232,9 +232,4 @@ const ContactForm = () => {
   );
 };
 
-ContactForm.propTypes = {
-  formState: PropTypes.oneOf(Object.values(FORM_STATES)).isRequired,
-  setFormState: PropTypes.func.isRequired,
-};
-
 export default ContactForm;

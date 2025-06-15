@@ -38,7 +38,8 @@ const Quotes = ({ items }) => (
             {text}
           </p>
           <div className="swiper-no-swiping mt-[18px] font-light leading-tight tracking-extra-tight lg:mt-3.5 md:mt-3 md:text-sm">
-            {author} <span className="text-gray-new-50">— {post}</span>
+            {author}
+            {post && <span className="text-gray-new-50"> — {post}</span>}
           </div>
         </SwiperSlide>
       ))}

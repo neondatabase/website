@@ -20,7 +20,7 @@ const QUOTES = [
     post: 'Founder and CEO at Velocity',
   },
   {
-    text: 'Databases have always been such a pain. In Neon, everything feels easier and much safer to do” (Julian Benegas.',
+    text: 'Databases have always been such a pain. In Neon, everything feels easier and much safer to do.',
     author: 'Julian Benegas',
     post: 'CEO of BaseHub',
   },
