@@ -156,7 +156,7 @@ Go to the **Restore** page in the Neon Console and roll back to a few minutes ag
 
 ```bash shouldWrap
 > neon branches restore production ^self@<timestamp> --preserve-under-name production_backup
-> 
+>
 ```
 
 **Step 2: Add the foreign key constraint**

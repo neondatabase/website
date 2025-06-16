@@ -51,7 +51,7 @@ return (
 );
 }
 
-```
+````
 
 </TabItem>
 
@@ -71,7 +71,7 @@ export default async function CheckUserPermission() {
     </div>
   );
 }
-```
+````
 
 </TabItem>
 
@@ -102,7 +102,7 @@ return (
 );
 }
 
-```
+````
 </TabItem>
 
 <TabItem>
@@ -121,7 +121,7 @@ export default async function DisplayUserPermissions() {
     </div>
   );
 }
-```
+````
 
 </TabItem>
 
@@ -174,7 +174,7 @@ return (
 );
 }
 
-```
+````
 </TabItem>
 
 <TabItem>
@@ -191,7 +191,7 @@ export default async function CheckGlobalPermission() {
     </div>
   );
 }
-```
+````
 
 </TabItem>
 
@@ -222,7 +222,7 @@ return (
 );
 }
 
-```
+````
 </TabItem>
 
 <TabItem>
@@ -241,7 +241,7 @@ export default async function DisplayGlobalPermissions() {
     </div>
   );
 }
-```
+````
 
 </TabItem>
 
