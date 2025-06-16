@@ -49,20 +49,17 @@ const Hero = () => (
               Launch faster with
               <br /> $100K in Neon Credits
             </h1>
-            <p className="mt-4 text-balance text-lg leading-snug tracking-extra-tight text-gray-new-80 lg:mt-3.5 lg:text-base md:mt-3 md:text-[15px]">
+            <p className="mt-4 text-balance text-lg leading-snug tracking-extra-tight text-gray-new-80 xl:text-base lg:mt-3.5 md:mt-3 md:text-[15px]">
               Join the Startup Program and start building with the best database for developers:
               fast, scalable, and serverless.
             </p>
           </div>
-          <div className="hidden lg:block">
-            <ContactForm />
-          </div>
-          <div className="mt-auto lg:mt-2">
-            <Quotes items={QUOTES} />
-          </div>
         </div>
-        <div className="w-full max-w-xl shrink-0 xl:max-w-[448px] lg:hidden">
+        <div className="w-full max-w-xl shrink-0 xl:max-w-[448px] lg:max-w-full">
           <ContactForm />
+        </div>
+        <div className="absolute bottom-0 left-0 max-w-xl xl:max-w-[460px] lg:relative lg:mt-2 lg:max-w-full">
+          <Quotes items={QUOTES} />
         </div>
         <span className="absolute -right-[120px] top-1/2 -z-10 h-[917px] w-[614px] -translate-y-1/2 rounded-[100%] bg-[radial-gradient(50%_50%_at_50%_50%,rgba(30,52,62,.5),transparent)] lg:hidden" />
       </div>

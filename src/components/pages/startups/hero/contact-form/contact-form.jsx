@@ -150,7 +150,7 @@ const ContactForm = () => {
     <form
       className="relative z-10 grid gap-y-6 rounded-xl border border-gray-new-10 bg-[#020203]/70 bg-contact-form-bg p-8 shadow-contact xl:p-6 lg:gap-y-5 md:gap-y-6"
       method="POST"
-      id="form"
+      id="contact-form"
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="grid grid-cols-2 gap-6 lg:gap-5 md:contents md:flex-col md:gap-6">
