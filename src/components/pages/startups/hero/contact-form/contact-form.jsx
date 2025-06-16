@@ -148,7 +148,11 @@ const ContactForm = () => {
 
   return (
     <form
-      className="relative z-10 grid gap-y-6 rounded-xl border border-gray-new-10 bg-[#020203]/70 bg-contact-form-bg p-8 shadow-contact xl:p-6 lg:gap-y-5 md:gap-y-6"
+      className={clsx(
+        'relative z-10 grid scroll-mt-10 gap-y-6 p-8',
+        'rounded-xl border border-gray-new-10 bg-[#020203]/70 bg-contact-form-bg shadow-contact',
+        'xl:p-6 lg:gap-y-5 md:gap-y-6'
+      )}
       method="POST"
       id="contact-form"
       onSubmit={handleSubmit(onSubmit)}
