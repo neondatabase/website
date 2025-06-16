@@ -77,7 +77,7 @@ const CtaBlock = ({
       >
         <Button
           className={clsx(
-            'h-10 px-7 text-base !font-semibold tracking-tighter lg:text-sm sm:w-full sm:max-w-sm',
+            'h-10 px-7 text-base !font-semibold tracking-tighter sm:w-full sm:max-w-sm',
             buttonClassName
           )}
           theme="primary"
