@@ -186,9 +186,9 @@ export default {
     pathname: LINKS.security,
   },
   startups: {
-    title: 'Neon Startup Deal',
+    title: 'Neon Startup Program',
     description:
-      'Apply to the Neon Startups deal and get up to $100k in Neon credits. For venture-funded startups enrolled in accelerators.',
+      'Apply to the Neon Startup Program and get up to 100k in Neon credits. For venture-funded startups enrolled in accelerators.',
     pathname: LINKS.startups,
   },
   generateTicket: {
