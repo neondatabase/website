@@ -34,7 +34,7 @@ const FEATURES = [
 ];
 
 const Features = () => (
-  <section className="features mt-[200px] overflow-hidden xl:mt-[184px] lg:mt-36 md:mt-24">
+  <section className="features mb-60 mt-[200px] xl:mb-[200px] xl:mt-[184px] lg:mb-40 lg:mt-36 md:mb-32 md:mt-24">
     <Container
       className="flex flex-col items-center gap-14 lg:gap-12 md:gap-10 md:px-5"
       size="1216"

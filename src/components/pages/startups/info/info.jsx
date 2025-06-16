@@ -8,11 +8,10 @@ const CARDS = [
   {
     title: 'Who can apply?',
     description:
-      'Startups building early-stage products with less than $5M raised and accelerator support.',
+      'Venture-backed startups with at least $1M in funding that have launched in the past 12 months',
     features: [
       'You’ve raised less than $5M in total funding.',
       'You’re building an early-stage product or MVP.',
-      'You’re part of a recognized accelerator or incubator.',
     ],
   },
   {
@@ -38,12 +37,12 @@ const CARDS = [
 ];
 
 const Info = () => (
-  <section className="info mt-[200px] overflow-hidden xl:mt-[184px] lg:mt-36 md:mt-24">
+  <section className="info mt-[200px] xl:mt-[184px] lg:mt-36 md:mt-24">
     <Container className="flex max-w-[896px] flex-col items-center gap-12 px-8 md:px-5">
       <h2 className="text-center font-title text-5xl font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-[36px] md:text-[32px]">
         Who’s the Neon
         <br />
-        Startups Program for?
+        Startup Program for?
       </h2>
       <ul className="grid grid-cols-2 gap-5 lg:gap-6 md:gap-5 sm:grid-cols-1">
         {CARDS.map(({ title, description, features, button, isWide }, index) => (
