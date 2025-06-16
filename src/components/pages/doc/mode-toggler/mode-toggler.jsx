@@ -11,7 +11,7 @@ import useLocalStorage from 'hooks/use-local-storage';
 const ToggleButton = ({ src, title, isActive, onClick }) => (
   <Link
     className={clsx(
-      'relative flex h-7 min-w-[104px] items-center justify-center rounded-sm px-2 md:w-1/2',
+      'relative flex h-7 min-w-[104px] items-center justify-center rounded px-2 md:w-1/2',
       'text-center text-sm font-medium leading-none tracking-tight transition-colors duration-200',
       isActive
         ? 'bg-gray-new-90 font-medium text-black-new dark:bg-gray-new-20 dark:text-white'
@@ -38,7 +38,9 @@ const ModeToggler = ({ className, isAiChatPage }) => {
   return (
     <div
       className={clsx(
-        'relative z-10 flex h-9 items-center gap-1 overflow-hidden rounded border border-gray-new-90 p-[3px] dark:border-gray-new-20 md:w-full',
+        'relative z-10 flex h-9 items-center gap-1 overflow-hidden',
+        'rounded-md border border-gray-new-90 p-[3px]',
+        'dark:border-gray-new-20 md:w-full',
         className
       )}
     >
