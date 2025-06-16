@@ -49,7 +49,7 @@ const Hero = () => (
               Launch faster with
               <br /> $100K in Neon Credits
             </h1>
-            <p className="mt-4 text-pretty text-lg leading-snug tracking-extra-tight text-gray-new-80 lg:mt-3.5 lg:text-base md:mt-3 md:text-[15px]">
+            <p className="mt-4 text-balance text-lg leading-snug tracking-extra-tight text-gray-new-80 lg:mt-3.5 lg:text-base md:mt-3 md:text-[15px]">
               Join the Startup Program and start building with the best database for developers:
               fast, scalable, and serverless.
             </p>

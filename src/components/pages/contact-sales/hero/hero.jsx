@@ -102,7 +102,7 @@ const Hero = () => (
                 aria-hidden
               />
             </Heading>
-            <p className="mt-4 text-pretty text-xl leading-snug tracking-tight text-gray-new-80 xl:text-lg xl:leading-normal lg:mt-3 md:text-base">
+            <p className="mt-4 text-balance text-xl leading-snug tracking-tight text-gray-new-80 xl:text-lg xl:leading-normal lg:mt-3 md:text-base">
               We&apos;re happy to assist you with any questions about our technology, pricing plans,
               custom contract options, and&nbsp;migrations assistance.
             </p>

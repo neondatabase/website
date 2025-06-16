@@ -8,7 +8,7 @@ const CARDS = [
   {
     title: 'Who can apply?',
     description:
-      'Venture-backed startups with at least $1M in funding that have launched in the past 12 months',
+      'Venture-backed startups with at least $1M in funding that have launched in the past 12 months.',
     features: [
       'You’ve raised less than $5M in total funding.',
       'You’re building an early-stage product or MVP.',
@@ -49,9 +49,7 @@ const Info = () => (
           <li
             className={clsx(
               isWide && 'col-span-full flex items-center justify-between gap-5 sm:flex-col',
-              'relative p-7',
-              'rounded-xl bg-black-fog',
-              'lg:p-6 md:p-5'
+              'relative rounded-xl bg-black-fog px-6 py-7 lg:p-6 md:p-5'
             )}
             key={index}
           >
