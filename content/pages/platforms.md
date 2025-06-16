@@ -98,10 +98,4 @@ company: 'co-founder and CPO at Koyeb',
 
 **We’re not trying to own your user experience—we’re here to power it.** You can integrate Neon invisibly behind the scenes, whether you want to use our [OAuth integration](/docs/guides/oauth-integration) or manage Neon projects directly via API. **You decide how the database shows up in your UI, we take care of the rest.**
 
-## Let us help you launch.
-
-We’re happy to support proof-of-concepts, provide technical guidance, and share best practices from other platforms.
-
-[Talk to us about your Postgres roadmap](https://neon.com/contact-sales)
-
-[Explore the API to start building today](https://neon.com/docs/reference/api-reference)
+<CTA title="Let us help you launch" description="We’re happy to support proof-of-concepts, provide technical guidance, and share best practices from other platforms." theme="column" buttonText="Talk to us" buttonUrl="/contact-sales" linkText="Explore the API" linkUrl="/docs/reference/api-reference" />
