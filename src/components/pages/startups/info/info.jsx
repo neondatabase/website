@@ -13,6 +13,7 @@ const CARDS = [
       'You’ve raised less than $5M in total funding.',
       'You’re building an early-stage product or MVP.',
     ],
+    className: 'bg-startups-info-card-1',
   },
   {
     title: 'What do you get?',
@@ -23,6 +24,7 @@ const CARDS = [
       'Support from Neon engineers during onboarding and beyond.',
       'Early product access and co-marketing opportunities with Neon.',
     ],
+    className: 'bg-startups-info-card-2',
   },
   {
     title: 'How to apply?',
@@ -30,9 +32,10 @@ const CARDS = [
       'Just fill out a short form. We review applications on a rolling basis and typically respond within a few business days.',
     button: {
       text: 'Apply now',
-      href: '#form',
+      href: '#contact-form',
     },
     isWide: true,
+    className: 'bg-startups-info-card-3',
   },
 ];
 
@@ -45,11 +48,12 @@ const Info = () => (
         Startup Program for?
       </h2>
       <ul className="grid grid-cols-2 gap-5 lg:gap-6 md:gap-5 sm:grid-cols-1">
-        {CARDS.map(({ title, description, features, button, isWide }, index) => (
+        {CARDS.map(({ title, description, features, button, isWide, className }, index) => (
           <li
             className={clsx(
+              'relative rounded-xl bg-black-fog px-6 py-7 lg:p-6 md:p-5',
               isWide && 'col-span-full flex items-center justify-between gap-5 sm:flex-col',
-              'relative rounded-xl bg-black-fog px-6 py-7 lg:p-6 md:p-5'
+              className
             )}
             key={index}
           >
