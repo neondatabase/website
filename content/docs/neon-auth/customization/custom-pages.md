@@ -40,8 +40,6 @@ export const stackServerApp = new StackServerApp({
 
 You are now all set! If you visit the `/signin` page, you should see your custom sign in page. When users attempt to access a protected page or navigate to the default `/handler/sign-in` URL, they will automatically be redirected to your new custom sign-in page.
 
-For more examples, please refer to the [Examples](../customization/custom-pages.md).
-
 ## Building From Scratch
 
 While the simple approach above lets you customize the layout while using Stack's pre-built components, sometimes you need complete control over both the UI and authentication logic.

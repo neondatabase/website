@@ -76,7 +76,7 @@ router.push('/onboarding');
 }, [user]);
 }
 
-````
+```
 </TabItem>
 
 <TabItem>
@@ -90,7 +90,7 @@ export async function ensureOnboarded() {
     redirect('/onboarding');
   }
 }
-````
+```
 
 </TabItem>
 
@@ -115,7 +115,7 @@ return (
 );
 }
 
-````
+```
 </TabItem>
 
 <TabItem>
@@ -131,7 +131,7 @@ export default async function HomePage() {
     <div>Welcome to the app, {user.displayName}</div>
   );
 }
-````
+```
 
 </TabItem>
 

@@ -53,7 +53,7 @@ Creates a new `StackServerApp` instance.
   - `{ accessToken: string, refreshToken: string }`: Uses provided tokens
   - `Request`: Uses the provided request object
 - `secretServerKey`: The secret server key for your app.
-- `baseUrl`, `projectId`, `publishableClientKey`, `urls`, `noAutomaticPrefetch`: (see [StackClientApp](./stack-client-app.md) for details)
+- `baseUrl`, `projectId`, `publishableClientKey`, `urls`, `noAutomaticPrefetch`: (see [StackClientApp](/docs/neon-auth/sdk/nextjs/objects/stack-app#constructor) for details)
 
 ### Signature
 

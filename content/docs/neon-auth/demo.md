@@ -154,9 +154,10 @@ Go to the **Restore** page in the Neon Console and roll back to a few minutes ag
 
 > If you have the Neon CLI installed, you can also use:
 
-````bash shouldWrap
+```bash shouldWrap
 > neon branches restore production ^self@<timestamp> --preserve-under-name production_backup
-> ```
+> 
+```
 
 **Step 2: Add the foreign key constraint**
 
@@ -166,7 +167,7 @@ ADD CONSTRAINT todos_owner_id_fk
   FOREIGN KEY (owner_id)
   REFERENCES neon_auth.users_sync(id)
   ON DELETE CASCADE;
-````
+```
 
 **Step 3: Test it**
 

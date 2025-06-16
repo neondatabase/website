@@ -51,7 +51,7 @@ return (
 );
 }
 
-````
+```
 
 </TabItem>
 
@@ -71,7 +71,7 @@ export default async function CheckUserPermission() {
     </div>
   );
 }
-````
+```
 
 </TabItem>
 
@@ -102,7 +102,7 @@ return (
 );
 }
 
-````
+```
 </TabItem>
 
 <TabItem>
@@ -121,7 +121,7 @@ export default async function DisplayUserPermissions() {
     </div>
   );
 }
-````
+```
 
 </TabItem>
 
@@ -174,7 +174,7 @@ return (
 );
 }
 
-````
+```
 </TabItem>
 
 <TabItem>
@@ -191,7 +191,7 @@ export default async function CheckGlobalPermission() {
     </div>
   );
 }
-````
+```
 
 </TabItem>
 
@@ -222,7 +222,7 @@ return (
 );
 }
 
-````
+```
 </TabItem>
 
 <TabItem>
@@ -241,7 +241,7 @@ export default async function DisplayGlobalPermissions() {
     </div>
   );
 }
-````
+```
 
 </TabItem>
 
@@ -265,6 +265,4 @@ const user = await stackServerApp.getUser();
 await user.revokePermission('access_admin_dashboard');
 ```
 
-:::note
-Currently, Neon Auth does not support creating or modifying permissions through the Neon Console. All permissions are pre-configured and cannot be changed.
-:::
+> Currently, Neon Auth does not support creating or modifying permissions through the Neon Console. All permissions are pre-configured and cannot be changed.
