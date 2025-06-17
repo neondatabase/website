@@ -28,7 +28,7 @@ const TAGS = [
 
 const Hero = () => (
   <section className="sub-hero safe-paddings relative pt-[120px] xl:pt-[112px] lg:pt-24 md:pt-16">
-    <Container className="lg:mx-24 md:mx-1" size="576">
+    <Container className="lg:mx-24 md:mx-auto md:max-w-[640px]" size="576">
       <div className="relative mb-4 size-[46px] lg:mb-4 lg:size-10 lg:rounded-[10px] md:mb-0 md:size-14">
         <Image
           className="relative z-10 lg:size-10"

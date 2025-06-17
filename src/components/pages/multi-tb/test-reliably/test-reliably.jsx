@@ -31,7 +31,7 @@ const TAGS = [
 
 const TestReliably = () => (
   <section className="test-reliably mt-[188px] xl:mt-[168px] lg:mt-[100px] md:mt-[61px]">
-    <Container className="lg:mx-0" size="960">
+    <Container className="lg:mx-0 md:mx-auto md:max-w-[640px]" size="960">
       <div className="flex items-start gap-16 lg:justify-start lg:gap-16 sm:flex-col sm:gap-8">
         <div className="flex-1 xl:mt-1.5 lg:mt-0 sm:w-full">
           <p className="mb-3 text-base font-medium uppercase tracking-wide text-gray-new-50 xl:mb-3 lg:mb-4 lg:text-sm md:mb-[9px] md:text-[12px]">
