@@ -188,7 +188,7 @@ export default {
   startups: {
     title: 'Neon Startup Program',
     description:
-      'Apply to the Neon Startup Program and get up to 100k in Neon credits. For venture-funded startups enrolled in accelerators.',
+      'Apply to the Neon Startup Program and get up to 100k in Neon credits. For venture-backed companies and startup accelerator programs.',
     pathname: LINKS.startups,
   },
   generateTicket: {
