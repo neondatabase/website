@@ -11,7 +11,7 @@ const RelatedArticle = ({ title, date, link, className }) => (
     className={clsx(
       'related-article-card',
       'my-16 p-5 xl:my-14 lg:my-12 md:my-10',
-      'rounded-[10px] bg-black-new ring-1 ring-gray-new-20',
+      'rounded-[10px] bg-black-new ring-1 ring-gray-new-20 transition-colors hover:bg-gray-new-8',
       className
     )}
   >
