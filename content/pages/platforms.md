@@ -2,7 +2,7 @@
 title: 'Embedded Postgres for Platforms'
 subtitle: Provision dedicated Postgres databases for your users — instantly, affordably, and at scale
 enableTableOfContents: true
-updatedOn: '2025-04-19T09:00:00.000Z'
+updatedOn: '2025-06-17T09:00:00.000Z'
 ---
 
 Neon makes it easy to embed Postgres into your platform with one-second provisioning, autoscaling, and scale-to-zero—so each user gets an isolated database without the overhead. Databases are provisioned via API and fully integrated into your product, with no Neon signup or setup required.
