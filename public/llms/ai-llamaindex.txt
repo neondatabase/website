@@ -1,12 +1,10 @@
 # LlamaIndex
 
-> This guide explains how to use LlamaIndex with Neon's Postgres vector store capabilities, covering initialization, embedding generation, chat completions, and providing starter app examples for building AI applications with LlamaIndex and Neon.
+> The LlamaIndex documentation explains how to integrate LlamaIndex with Neon to enable efficient querying and indexing of large datasets using AI-driven techniques within the Neon database environment.
 
 ## Source
 
 - [LlamaIndex HTML](https://neon.com/docs/ai/llamaindex): The original HTML version of this documentation
-
-## Overview
 
 LlamaIndex is a popular framework for working with AI, Vectors, and embeddings. LlamaIndex supports using Neon as a vector store, using the `pgvector` extension.
 
@@ -40,7 +38,7 @@ const index = await VectorStoreIndex.fromVectorStore(vectorStore);
 
 ## Generate Embeddings with OpenAI
 
-LlamaIndex handles embedding generation internally while adding vectors to the Postgres database, simplifying the process for users. For more detailed control over embeddings, refer to the respective [JavaScript](https://ts.llamaindex.ai/modules/embeddings/available_embeddings/openai) and [Python](https://docs.llamaindex.ai/en/stable/examples/embeddings/OpenAI) documentation.
+LlamaIndex handles embedding generation internally while adding vectors to the Postgres database, simplifying the process for users. For more detailed control over embeddings, refer to the respective [JavaScript](https://ts.llamaindex.ai/docs/llamaindex/modules/models/embeddings/openai) and [Python](https://docs.llamaindex.ai/en/stable/examples/embeddings/OpenAI) documentation.
 
 ## Stream Chat Completions with OpenAI
 
@@ -88,7 +86,7 @@ export async function POST(request: Request) {
 
 ## Starter apps
 
-Hackable, fully-featured, pre-built starter apps to get you up and running with LlamaIndex and Postgres:
+Hackable, fully-featured, pre-built [starter apps](https://github.com/neondatabase/examples/tree/main/ai/llamaindex) to get you up and running with LlamaIndex and Postgres.
 
 - [AI chatbot (OpenAI + LllamIndex)](https://github.com/neondatabase/examples/tree/main/ai/llamaindex/chatbot-nextjs): A Next.js AI chatbot starter app built with OpenAI and LlamaIndex
 - [RAG chatbot (OpenAI + LlamaIndex)](https://github.com/neondatabase/examples/tree/main/ai/llamaindex/rag-nextjs): A Next.js RAG chatbot starter app built with OpenAI and LlamaIndex

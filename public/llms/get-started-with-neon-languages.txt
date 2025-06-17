@@ -1,14 +1,10 @@
 # Neon language guides
 
-> This page provides links to detailed instructions for connecting to Neon from various programming languages including .NET, Elixir, Go, Java, JavaScript, Python, and Rust.
+> The Neon language guides document outlines instructions for integrating various programming languages with the Neon database, facilitating seamless connectivity and interaction within Neon's environment.
 
 ## Source
 
 - [Neon language guides HTML](https://neon.com/docs/get-started-with-neon/languages): The original HTML version of this documentation
-
-## Overview
-
-Find detailed instructions for connecting to Neon from various programming languages:
 
 - [.NET](https://neon.com/docs/guides/dotnet-npgsql): Connect a .NET (C#) application to Neon
 - [Elixir](https://neon.com/docs/guides/elixir-ecto): Connect from Elixir with Ecto to Neon

@@ -1,6 +1,6 @@
 # Connect from Hasura Cloud to Neon
 
-> This guide explains how to connect a Hasura Cloud project to a new or existing Neon database, covering authentication methods, connection setup, template loading, and configuration considerations.
+> The document outlines the steps for connecting Hasura Cloud to a Neon database, detailing configuration settings and necessary adjustments within the Hasura Cloud console for seamless integration.
 
 ## Source
 
@@ -14,15 +14,21 @@ Use the following instructions to connect to a new Neon database. This connectio
 
 1. Navigate to [Hasura Cloud](https://cloud.hasura.io/projects) and sign up or log in.
 2. On the Hasura Cloud dashboard, click **Create a project** to create a new Hasura project.
+   
 3. After the project is initialized, click **Launch Console** to open the Hasura Console.
+   
 4. On the Hasura Console, Select **Data** from the top navigation bar.
 5. Click **Postgres** > **Connect Neon Database**.
+   
 6. When prompted to login or sign up for Neon, we recommend selecting **Hasura** for seamless authentication.
 7. You will be redirected to an Oauth page to authorize Hasura to access your Neon account. Click **Authorize** to allow Hasura to create a new Neon project and database.
+   
 
 After authenticating, a new Neon Postgres database is created and connected to your Hasura project, and the Neon project connection string is associated with the `PG_DATABASE_URL` environment variable.
 
-To start exploring Hasura's GraphQL API with data stored in Neon, see [Load a template in Hasura](#load-a-template-in-hasura-optional).
+
+
+To start exploring Hasura's GraphQL API with data stored in Neon, see [Load a template in Hasura](https://neon.com/docs/guides/hasura#load-a-template-in-hasura-optional).
 
 ## Connecting to an existing Neon database
 
@@ -48,12 +54,17 @@ The following steps describe how to navigate to Hasura Cloud and connect to your
 2. Click **Create Project** to create a Hasura Cloud project or click **Launch Console** to open an existing project.
 3. In the Hasura Console, select **Data** from the top navigation bar.
 4. Click **Postgres** > **Connect Existing Database**.
+   
+
 5. Paste your connection string into the **Database URL** field.
+
+      **Tip**: To enhance security and manageability, consider using environment variables in Hasura instead of hardcoding the connection string. To do this, navigate to **Hasura Project settings** > **Env vars** > **New env var** and create a new variable (e.g., `NEON_DATABASE_URL`) with your connection string as its value.  Then, in the connection tab, select **Connect database via Environment variable** and enter the variable name you created. This approach keeps your connection string secure and simplifies future updates.
+
 6. Enter a display name for your database in the **Database name** field, and click **Connect Database**.
 
 Hasura Cloud connects to your Neon project and automatically discovers the default `public` schema.
 
-To start exploring Hasura's GraphQL API with data stored in Neon, see [Load a template in Hasura](#load-a-template-in-hasura-optional).
+To start exploring Hasura's GraphQL API with data stored in Neon, see [Load a template in Hasura](https://neon.com/docs/guides/hasura#load-a-template-in-hasura-optional).
 
 ## Load a template in Hasura (optional)
 

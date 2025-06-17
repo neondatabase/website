@@ -1,6 +1,6 @@
 # Use Neon with Koyeb
 
-> This guide explains how to connect a Neon Postgres database to an application deployed with Koyeb, covering project setup, deployment options using both the control panel and CLI, and testing the connection with a sample application.
+> The document outlines the steps for integrating Neon with Koyeb, detailing how to deploy a Neon database on Koyeb's serverless platform using a step-by-step guide.
 
 ## Source
 
@@ -50,7 +50,7 @@ To deploy the application from the Koyeb [control panel](https://app.koyeb.com/)
 
 Koyeb builds the application. After the build and deployment have finished, you can access your application running on Koyeb by clicking the URL ending with `.koyeb.app`.
 
-The example application exposes a `/planets` endpoint that you can use to list planets from the database. After your deployment is live, you should see the following results when navigating to `https://.koyeb.app/planets`:
+The example application exposes a `/planets` endpoint that you can use to list planets from the database. After your deployment is live, you should see the following results when navigating to `https://<YOUR_APP_URL>.koyeb.app/planets`:
 
 ```json
 [
@@ -107,7 +107,7 @@ ID          NAME         STATUS         DOMAINS                                C
 b8611a1d    express-neon HEALTHY        ["express-neon-myorg.koyeb.app"]       16 Feb 23 18:13 UTC
 ```
 
-The example application exposes a `/planets` endpoint that you can use to list planets from the database. After your deployment is live, you should see the following results when navigating to `https://.koyeb.app/planets`:
+The example application exposes a `/planets` endpoint that you can use to list planets from the database. After your deployment is live, you should see the following results when navigating to `https://<YOUR_APP_URL>.koyeb.app/planets`:
 
 ```json
 [

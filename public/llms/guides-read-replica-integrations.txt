@@ -1,8 +1,14 @@
 # Scale your application with Read Replicas
 
-Scale your app with read replicas using built-in framework support
+> The document "Scale your application with Read Replicas" explains how Neon users can integrate and configure read replicas to enhance their application's scalability and performance by distributing read workloads across multiple database instances.
+
+## Source
+
+- [Scale your application with Read Replicas HTML](https://neon.com/docs/guides/read-replica-integrations): The original HTML version of this documentation
 
 In Neon, a read replica is an independent read-only compute that performs read operations on the same data as your primary read-write compute, which means adding a read replica to a Neon project requires no additional storage.
+
+   **Note**: The Free Plan is limited to a maximum of 3 read replica computes per project.
 
 A key benefit of read replicas is that you can distribute read requests to one or more read replicas, enabling you to easily scale your applications and achieve higher throughput for both read-write and read-only workloads.
 
@@ -45,7 +51,7 @@ All read operations, such as `findMany`, are executed against the read replica i
 
 For more, including configuring multiple read replicas, refer to [Read Replicas](https://www.prisma.io/docs/orm/prisma-client/setup-and-configuration/read-replicas) in the Prisma documentation.
 
-**Example**: For a full example, see [Use Read Replicas with Prisma](/docs/guides/read-replica-prisma).
+**Example**: For a full example, see [Use Read Replicas with Prisma](https://neon.com/docs/guides/read-replica-prisma).
 
 ## Drizzle ORM
 
@@ -59,7 +65,7 @@ const usersTable = pgTable('users', {
   id: serial('id' as string).primaryKey(),
   name: text('name').notNull(),
   verified: boolean('verified').notNull().default(false),
-  jsonb: jsonb('jsonb').$type(),
+  jsonb: jsonb('jsonb').$type<string[]>(),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 });
 const primaryDb = drizzle("postgres://user:password@host:port/primary_db");
@@ -84,7 +90,7 @@ For more, refer to [Read Replicas](https://orm.drizzle.team/docs/read-replicas) 
 
 ## Laravel
 
-To scale your Laravel application with Neon read replicas, you can configure Laravel’s database settings and use Eloquent ORM to route read operations to replicas and write operations to your primary compute.
+To scale your Laravel application with Neon read replicas, you can configure Laravel's database settings and use Eloquent ORM to route read operations to replicas and write operations to your primary compute.
 
 For example, in your `config/database.php`, you can configure read and write connection settings and then route traffic accordingly.
 
@@ -114,23 +120,23 @@ For example, in your `config/database.php`, you can configure read and write con
 
 ## Django
 
-In Django, you can use the `DATABASES` setting to to tell Django about the primary and read replica databases you’ll be using:
+In Django, you can use the `DATABASES` setting to tell Django about the primary and read replica databases you'll be using:
 
 ```python
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'your_database_name',
-        'USER': '[username]',
-        'PASSWORD': '[password]',
+        'USER': 'your_username',
+        'PASSWORD': 'your_password',
         'HOST': 'your_primary_host',
         'PORT': '5432',
     },
     'replica': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'your_database_name',
-        'USER': '[username]',
-        'PASSWORD': '[password]',
+        'USER': 'your_username',
+        'PASSWORD': 'your_password',
         'HOST': 'your_read_replica_host',
         'PORT': '5432',
     }
@@ -168,14 +174,14 @@ namespace TodoApi.Data
 {
     public class TodoDbContext : DbContext
     {
-        public TodoDbContext(DbContextOptions options) : base(options) { }
-        public DbSet Todos => Set();
+        public TodoDbContext(DbContextOptions<TodoDbContext> options) : base(options) { }
+        public DbSet<Todo> Todos => Set<Todo>();
     }
 
     public class TodoDbReadContext : DbContext
     {
-        public TodoDbReadContext(DbContextOptions options) : base(options) { }
-        public DbSet Todos => Set();
+        public TodoDbReadContext(DbContextOptions<TodoDbReadContext> options) : base(options) { }
+        public DbSet<Todo> Todos => Set<Todo>();
     }
 }
 ```

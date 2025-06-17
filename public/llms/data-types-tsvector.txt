@@ -1,12 +1,16 @@
 # Postgres tsvector data type
 
-> The tsvector data type in Postgres is specialized for full-text search, representing documents as sorted lists of normalized lexemes (word roots) with position and weight information. This optimized format enables efficient and flexible text search capabilities across large volumes of text data.
-
-Postgres tsvector data type provides powerful full-text search capabilities for your applications. This guide explains how to use tsvector in Postgres, including syntax, storage considerations, and practical examples for implementing efficient text search functionality.
+> The document explains the Postgres `tsvector` data type, detailing its use in Neon for storing preprocessed text data to facilitate efficient full-text search operations.
 
 ## Source
 
 - [Postgres tsvector data type HTML](https://neon.com/docs/data-types/tsvector): The original HTML version of this documentation
+
+`tsvector` is a specialized Postgres data type designed for full-text search operations. It represents a document in a form optimized for text search, where each word is reduced to its root form (lexeme) and stored with information about its position and importance.
+
+In Postgres, the `tsvector` data type is useful for implementing efficient full-text search capabilities, allowing for fast and flexible searching across large volumes of text data.
+
+
 
 ## Storage and syntax
 
@@ -36,19 +40,20 @@ SELECT
     to_tsvector('english', 'The quick brown fox jumps over the lazy dog.') as colB;
 ```
 
-This query produces the following output:
+This query produces the following output. The function `to_tsvector()` tokenizes the input document and computes the normalized lexemes based on the specified text search configuration (in this case, 'english'). The output is a `tsvector` with the normalized lexemes and their positions.
 
 ```text
                               cola                              |                         colb
 ----------------------------------------------------------------+-------------------------------------------------------
  'The' 'brown' 'dog.' 'fox' 'jumps' 'lazy' 'over' 'quick' 'the' | 'brown':3 'dog':9 'fox':4 'jump':5 'lazi':8 'quick':2
+(1 row)
 ```
-
-The function `to_tsvector()` tokenizes the input document and computes the normalized lexemes based on the specified text search configuration (in this case, 'english'). The output is a `tsvector` with the normalized lexemes and their positions.
 
 ## Example usage
 
-Consider a scenario where we're building a blog platform and want to implement full-text search for articles. We'll use `tsvector` to store the searchable content of each article:
+Consider a scenario where we're building a blog platform and want to implement full-text search for articles. We'll use `tsvector` to store the searchable content of each article.
+
+The query below creates a table and inserts some sample blog data:
 
 ```sql
 CREATE TABLE blog_posts (
@@ -78,7 +83,14 @@ FROM blog_posts
 WHERE search_vector @@ to_tsquery('english', 'database & performance');
 ```
 
-This query returns blog posts that contain both "database" and "performance" in their title or content.
+This query returns the following output:
+
+```text
+         title
+-----------------------
+ Indexing in Databases
+(1 row)
+```
 
 ## Other examples
 
@@ -108,7 +120,15 @@ FROM product_reviews
 WHERE search_vector @@ to_tsquery('spanish', 'batería & (excelente | dura)');
 ```
 
-This query returns products that mention "batería" and either "excelente" or "dura" in their name or review.
+This query returns the following output:
+
+```text
+  product_name
+----------------
+ Laptop XYZ
+ Smartphone ABC
+(2 rows)
+```
 
 ### Rank the search results from a `tsvector` column
 
@@ -137,7 +157,18 @@ WHERE search_vector @@ query
 ORDER BY rank DESC;
 ```
 
-This query returns articles related to "climate change" ordered by their relevance score, with the most relevant articles appearing first.
+This query returns the following output:
+
+```text
+               headline                |    rank
+---------------------------------------+------------
+ New Study on Climate Change           |  0.2532141
+ Climate Change Summit Concludes       | 0.10645772
+ Tech Giant Announces Green Initiative | 0.09910322
+(3 rows)
+```
+
+All the articles were related to climate change, but the first article was ranked higher due to the higher relevance for the search terms.
 
 ## Additional considerations
 

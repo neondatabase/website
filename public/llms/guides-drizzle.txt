@@ -1,48 +1,46 @@
 # Connect from Drizzle to Neon
 
-Learn how to connect to Neon from Drizzle
+> The document "Connect from Drizzle to Neon" outlines the steps for establishing a connection between the Drizzle ORM and Neon, detailing the configuration and code necessary for integration.
 
+## Source
 
+- [Connect from Drizzle to Neon HTML](https://neon.com/docs/guides/drizzle): The original HTML version of this documentation
 
-How to connect from Drizzle
-How to use the Neon serverless driver with Drizzle
+What you will learn:
+- How to connect from Drizzle
+- How to use the Neon serverless driver with Drizzle
 
+Related resources:
+- [Drizzle with Neon Postgres (Drizzle Docs)](https://orm.drizzle.team/docs/tutorials/drizzle-with-neon)
+- [Schema migration with Drizzle ORM](https://neon.com/docs/guides/drizzle-migrations)
 
-
-  Drizzle with Neon Postgres (Drizzle Docs)
-  Schema migration with Drizzle ORM
-
-
-
-  Next.js Edge Functions with Drizzle
-
-
-
+Source code:
+- [Next.js Edge Functions with Drizzle](https://github.com/neondatabase/examples/tree/main/with-nextjs-drizzle-edge)
 
 Drizzle is a modern ORM for TypeScript that provides a simple and type-safe way to interact with your database. This guide covers the following topics:
 
-- [Connect to Neon from Drizzle](#connect-to-neon-from-drizzle)
-- [Use the Neon serverless driver with Drizzle](#use-the-neon-serverless-driver-with-drizzle)
+- [Connect to Neon from Drizzle](https://neon.com/docs/guides/drizzle#connect-to-neon-from-drizzle)
+- [Use the Neon serverless driver with Drizzle](https://neon.com/docs/guides/drizzle#use-the-neon-serverless-driver-with-drizzle)
 
 ## Connect to Neon from Drizzle
 
 To establish a basic connection from Drizzle to Neon, perform the following steps:
 
 1. Find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
-   ![Connection details modal](/docs/connect/connection_details.png)
+   
    The connection string includes the user name, password, hostname, and database name.
 
-2. Add a `DATABASE_URL` variable to your `.env` file and set it to the Neon connection string that you copied in the previous step. We also recommend adding `?sslmode=require` to the end of the connection string to ensure a [secure connection](/docs/connect/connect-securely).
+2. Add a `DATABASE_URL` variable to your `.env` file and set it to the Neon connection string that you copied in the previous step. We also recommend adding `?sslmode=require` to the end of the connection string to ensure a [secure connection](https://neon.com/docs/connect/connect-securely).
 
    Your setting will appear similar to the following:
 
-   ```text shouldWrap
+   ```text
    DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
    ```
 
 ## Use the Neon serverless driver with Drizzle
 
-The Neon serverless driver is a low-latency Postgres driver for JavaScript (and TypeScript) that lets you query data from serverless and edge environments. For more information about the driver, see [Neon serverless driver](/docs/serverless/serverless-driver).
+The Neon serverless driver is a low-latency Postgres driver for JavaScript (and TypeScript) that lets you query data from serverless and edge environments. For more information about the driver, see [Neon serverless driver](https://neon.com/docs/serverless/serverless-driver).
 
 To set up Drizzle with the Neon serverless driver, use the Drizzle driver adapter. This adapter allows you to choose a different database driver than Drizzle's default driver for communicating with your database.
 

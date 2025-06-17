@@ -1,6 +1,10 @@
 # Schema migration with Neon Postgres and Prisma ORM
 
-Set up Neon Postgres and run migrations for your Javascript project using
+> The document outlines the process for performing schema migrations using Neon Postgres and Prisma ORM, detailing steps for setting up the environment, creating migrations, and applying them to a Neon database.
+
+## Source
+
+- [Schema migration with Neon Postgres and Prisma ORM HTML](https://neon.com/docs/guides/prisma-migrations): The original HTML version of this documentation
 
 [Prisma](https://www.prisma.io/) is an open-source ORM for Node.js and Typescript, known for its ease of use and focus on type safety. It supports many databases, including Postgres, and provides a robust system for managing database schemas and migrations.
 
@@ -250,7 +254,6 @@ To demonstrate how to execute a schema change, we'll add a new column to the `au
 Modify the `Author` model in the `prisma/schema.prisma` file to add the new `country` field:
 
 ```prisma
-
 model Author {
   @@map("authors")
 
@@ -291,9 +294,7 @@ In this guide, we set up a new Javascript project using `Express.js` and `Prisma
 
 You can find the source code for the application described in this guide on GitHub.
 
-
-Migrations with Neon and Prisma
-
+- [Migrations with Neon and Prisma](https://github.com/neondatabase/guide-neon-prisma): Run Neon database migrations using Prisma
 
 ## Resources
 

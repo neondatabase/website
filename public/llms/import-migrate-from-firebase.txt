@@ -1,12 +1,12 @@
 # Migrate from Firebase Firestore to Neon Postgres
 
-> This guide provides step-by-step instructions for migrating data from Firebase Firestore to Neon Postgres using custom Python scripts, covering the entire process from exporting document-based data to importing it into a relational database structure.
-
-This guide describes how to migrate data from Firebase Firestore to Neon Postgres.
+> The document outlines the process for migrating data from Firebase Firestore to Neon Postgres, detailing steps for exporting Firestore data, transforming it into a compatible format, and importing it into Neon.
 
 ## Source
 
 - [Migrate from Firebase Firestore to Neon Postgres HTML](https://neon.com/docs/import/migrate-from-firebase): The original HTML version of this documentation
+
+This guide describes how to migrate data from Firebase Firestore to Neon Postgres.
 
 We'll use a custom Python script to export data from Firestore to a local file, and then import the data into Neon Postgres. This approach allows us to handle Firestore's document-based structure and convert it into the relational database format suitable for Postgres.
 
@@ -16,7 +16,7 @@ We'll use a custom Python script to export data from Firestore to a local file, 
 
 - A Neon project to move the data to.
 
-  For detailed information on creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
+  For detailed information on creating a Neon project, see [Create a project](https://neon.com/docs/manage/projects#create-a-project).
 
 - Python 3.10 or later installed on your local machine. Additionally, add the following packages to your Python virtual environment: `firebase_admin`, which is Google's python SDK for Firebase and `psycopg`, which is used to connect to Neon Postgres database.
 
@@ -25,8 +25,6 @@ We'll use a custom Python script to export data from Firestore to a local file, 
   ```bash
   pip install firebase-admin "psycopg[binary,pool]"
   ```
-
-
 
 ## Retrieve Firebase credentials
 
@@ -185,7 +183,7 @@ This section describes how to prepare your destination Neon Postgres database to
 3. Click the **New Database** button.
 4. Enter a name for your database and click **Create**.
 
-For more information, see [Create a database](/docs/manage/databases#create-a-database).
+For more information, see [Create a database](https://neon.com/docs/manage/databases#create-a-database).
 
 ### Retrieve Neon connection details
 
@@ -287,7 +285,7 @@ This script iterates over each JSON file in the input directory, creates a table
 
 After running both the Firestore export and the Neon import scripts, you should verify that your data has been successfully migrated:
 
-1. Connect to your Neon database using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or `psql`.
+1. Connect to your Neon database using the [Neon SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor) or `psql`.
 
 2. List all tables in your database:
 
@@ -307,8 +305,6 @@ After running both the Firestore export and the Neon import scripts, you should 
 
    Compare the results with those from your Firestore database to ensure data integrity. Note that using the `parent_id` field, we can navigate through the hierarchical structure of the original data.
 
-
-
 ## Other migration options
 
 While this guide focuses on using a custom Python script, there are other migration options available:
@@ -326,13 +322,11 @@ While this guide focuses on using a custom Python script, there are other migrat
 
   However, these utilities are not as robust as the managed export/import service. If your data size is not big, we recommend using the sample code provided above or adapting it to your specific needs.
 
-## Resources
+## Reference
 
 For more information on the tools and libraries used in this guide, refer to the following documentation:
 
-- [Migrating data to Neon](/docs/import/migrate-intro)
+- [Migrating data to Neon](https://neon.com/docs/import/migrate-intro)
 - [Firebase Admin SDK](https://firebase.google.com/docs/admin/setup)
 - [Cloud Firestore API](https://cloud.google.com/python/docs/reference/firestore/latest/index.html)
 - [psycopg](https://www.psycopg.org/docs/)
-- [Firebase Firestore documentation](https://firebase.google.com/docs/firestore)
-- [PostgreSQL JSONB documentation](https://www.postgresql.org/docs/current/datatype-json.html)
