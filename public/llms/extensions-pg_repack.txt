@@ -1,6 +1,6 @@
 # The pg_repack extension
 
-> This guide explains how to use the pg_repack extension to remove bloat from Postgres tables and indexes with minimal locking, covering installation, syntax, use cases, and practical examples for improving database performance in Neon.
+> The document details the installation and usage of the pg_repack extension in Neon, enabling users to reorganize tables and indexes in PostgreSQL databases without significant downtime.
 
 ## Source
 
@@ -10,13 +10,13 @@ Postgres, like any database system, can accumulate bloat over time due to freque
 
 
 
-This guide provides an introduction to the `pg_repack` extension and how to leverage it within your Neon database. You’ll learn how to install and use `pg_repack` to reclaim disk space and improve database performance by removing bloat from your tables and indexes.
+This guide provides an introduction to the `pg_repack` extension and how to leverage it within your Neon database. You'll learn how to install and use `pg_repack` to reclaim disk space and improve database performance by removing bloat from your tables and indexes.
 
 ## Enable the `pg_repack` extension
 
-`pg_repack` is currently available only on paid Neon plans. To install `pg_repack`, it must first be enabled by Neon support. [Open a support ticket](https://console.neon.tech/app/projects?modal=support) with your endpoint ID and database name to request it. After it's enabled by Neon Support, you need to [restart your compute](/docs/manage/computes#restart-a-compute) to apply the changes.
+`pg_repack` is currently available only on paid Neon plans. To install `pg_repack`, it must first be enabled by Neon support. [Open a support ticket](https://console.neon.tech/app/projects?modal=support) with your endpoint ID and database name to request it. After it's enabled by Neon Support, you need to [restart your compute](https://neon.com/docs/manage/computes#restart-a-compute) to apply the changes.
 
-You can then enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+You can then enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](https://neon.com/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_repack;
@@ -24,7 +24,7 @@ CREATE EXTENSION IF NOT EXISTS pg_repack;
 
 **Version availability:**
 
-Please refer to the [list of all extensions](/docs/extensions/pg-extensions) available in Neon for up-to-date extension version information.
+Please refer to the [list of all extensions](https://neon.com/docs/extensions/pg-extensions) available in Neon for up-to-date extension version information.
 
 ## Understanding `pg_repack` and bloat
 
@@ -54,17 +54,13 @@ Key features of `pg_repack` include:
 - **Reordering options:** Allows you to optionally reorder table rows based on a clustered index or specified columns, further optimizing data access.
 - **Index repack:** You can repack indexes independently of the table, which can be useful for index-specific bloat issues.
 
-
-`pg_repack` requires the target table to have a `PRIMARY KEY` or at least a `UNIQUE` index on a `NOT NULL` column. Ensure your table meets this requirement before running `pg_repack`.
-
+   **Important**: `pg_repack` requires the target table to have a `PRIMARY KEY` or at least a `UNIQUE` index on a `NOT NULL` column. Ensure your table meets this requirement before running `pg_repack`.
 
 ## Understanding `pg_repack` Syntax
 
 While `psql` allows you to run commands directly within the SQL environment, `pg_repack` is a command-line tool that you execute from your terminal. If you haven't installed it yet, you'll find installation instructions on the [pg_repack GitHub repository](https://reorg.github.io/pg_repack/#download). The general syntax is as follows:
 
-
-Make sure to install the correct version of `pg_repack` that is being used in your Neon environment. Currently, Neon uses `pg_repack` version 1.5.2
-
+   **Note**: Make sure to install the correct version of `pg_repack` that is being used in your Neon environment. Currently, Neon uses `pg_repack` version 1.5.2
 
 ```bash
 pg_repack [OPTIONS]... [DBNAME]
@@ -148,26 +144,26 @@ Here are a few examples of how to use `pg_repack` with different options:
 
 ### Basic repack of a table
 
-    ```bash shouldWrap
-    pg_repack -k -h  -p 5432 -d  -U  --table your_table_name
+    ```bash
+    pg_repack -k -h <your_neon_host> -p 5432 -d <your_neon_database> -U <your_neon_username> --table your_table_name
     ```
 
 ### Reordering a table by a column
 
-    ```bash shouldWrap
-    pg_repack -k -h  -p 5432 -d  -U  --table your_table_name --order-by "indexed_column DESC"
+    ```bash
+    pg_repack -k -h <your_neon_host> -p 5432 -d <your_neon_database> -U <your_neon_username> --table your_table_name --order-by "indexed_column DESC"
     ```
 
 ### Repacking only indexes of a table
 
-    ```bash shouldWrap
-    pg_repack -k -h  -p 5432 -d  -U  --table your_table_name --only-indexes
+    ```bash
+    pg_repack -k -h <your_neon_host> -p 5432 -d <your_neon_database> -U <your_neon_username> --table your_table_name --only-indexes
     ```
 
 ### Dry run to preview repack operations
 
-    ```bash shouldWrap
-    pg_repack -k -N -h  -p 5432 -d  -U  --table your_table_name
+    ```bash
+    pg_repack -k -N -h <your_neon_host> -p 5432 -d <your_neon_database> -U <your_neon_username> --table your_table_name
     ```
 
 ## Using `pg_repack` to reorganize tables
@@ -176,7 +172,7 @@ Let's walk through a practical example of using `pg_repack` to reorganize a tabl
 
 ### Connect to your Neon Database
 
-Ensure you are connected to your Neon database using [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor). You can find your connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
+Ensure you are connected to your Neon database using [Neon SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](https://neon.com/docs/connect/query-with-psql-editor). You can find your connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
 
 ### Create a sample table with bloat (Optional)
 
@@ -219,16 +215,16 @@ Note the size of the table before repack.
 
 Now, execute the `pg_repack` command from your terminal
 
-```bash shouldWrap
-pg_repack -k -h  -p 5432 -d  -U  --table bloated_table
+```bash
+pg_repack -k -h <your_neon_host> -p 5432 -d <your_neon_database> -U <your_neon_username> --table bloated_table
 ```
 
 Replace the placeholders with your Neon connection details.
 
-- `-h `: Your Neon hostname.
+- `-h <your_neon_host>`: Your Neon hostname.
 - `-p 5432`: The port (always 5432 for Neon Postgres).
-- `-d `: Your Neon database name.
-- `-U `: Your Neon username.
+- `-d <your_neon_database>`: Your Neon database name.
+- `-U <your_neon_username>`: Your Neon username.
 - `--table bloated_table`: Specifies the table to repack.
 
 You will be prompted to enter your Neon password after running the command.

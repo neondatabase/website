@@ -1,6 +1,6 @@
 # Neon community
 
-> This guide explains how to get involved in the Neon community, covering contribution opportunities, discussion platforms, and the Neon Creator program for developers.
+> The "Neon community" document outlines the structure and resources available for Neon users to engage with the community, including forums, social media channels, and contribution guidelines.
 
 ## Source
 

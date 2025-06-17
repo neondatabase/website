@@ -1,12 +1,10 @@
 # Google Colab
 
-> This guide explains how to use Google Colab with Neon for vector similarity search, covering notebook creation, database connection, pgvector extension installation, and running vector search queries with step-by-step instructions and code examples.
+> The document outlines the steps for integrating Neon with Google Colab, enabling users to connect and interact with Neon databases directly from the Colab environment.
 
 ## Source
 
 - [Google Colab HTML](https://neon.com/docs/ai/ai-google-colab): The original HTML version of this documentation
-
-## Overview
 
 [Google Colab](https://colab.research.google.com/) is a hosted Jupyter Notebook service that requires no setup to use and provides free access to computing resources, including GPUs and TPUs.
 You can use Google Colab to run python code through the browser.
@@ -21,11 +19,17 @@ To perform the steps in this guide, you require a Neon database for storing vect
 
 Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal, and select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
 
+
+
 ## Create a notebook
 
 In your browser, navigate to [Google Colab](https://colab.research.google.com/), and click **New notebook**.
 
-Alternatively, you can open a predefined Google Colab notebook for this guide by clicking the **Open in Colab** button in the documentation.
+
+
+Alternatively, you can open a predefined Google Colab notebook for this guide by clicking the **Open in Colab** button below.
+
+
 
 ## Connect to your database
 

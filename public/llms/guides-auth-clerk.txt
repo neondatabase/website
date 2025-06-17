@@ -1,6 +1,6 @@
 # Authenticate Neon Postgres application users with Clerk
 
-> This guide explains how to add authentication to a Neon Postgres database application using Clerk, covering Next.js project setup, database configuration, and user data management with Drizzle ORM.
+> The document outlines the process for authenticating Neon Postgres application users using Clerk, detailing the integration steps and configuration required to enable secure user authentication within Neon's environment.
 
 ## Source
 
@@ -8,9 +8,7 @@
 
 User authentication is a critical requirement for web applications. Modern applications require advanced features like social login and multi-factor authentication besides the regular login flow. Additionally, managing personally identifiable information (PII) requires a secure solution compliant with data protection regulations.
 
-> **Coming Soon**
-> Looking to manage **authorization** along with authentication? Currently in Early Access for select users, [Neon RLS](https://neon.com/docs/guides/neon-authorize) brings JSON Web Token (JWT) authorization directly to Postgres, where you can use Row-level Security (RLS) policies to manage access at the database level.
-
+   **Comingsoon**: Looking to manage **authorization** along with authentication? Currently in Early Access for select users, [Neon RLS](https://neon.com/docs/guides/neon-authorize) brings JSON Web Token (JWT) authorization directly to Postgres, where you can use Row-level Security (RLS) policies to manage access at the database level.
 
 [Clerk](https://clerk.com/) is a user authentication and identity management platform that provides these features out of the box. It comes with adapters for popular web frameworks, making it easy to integrate with an application backed by a Neon Postgres database.
 
@@ -219,16 +217,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    
-      
-        
-          
-            
-          
+    <ClerkProvider>
+      <html lang="en">
+        <body className={inter.className}>
+          <div className="bg-white p-4">
+            <UserButton showName={true}></UserButton>
+          </div>
           {children}
-        
-      
-    
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
 ```
@@ -291,44 +289,44 @@ async function getUserMessage() {
 export default async function Home() {
   const existingMessage = await getUserMessage();
   const ui = existingMessage ? (
-    
-      {existingMessage.message}
-      
-        
+    <div className="w-2/3 text-center">
+      <h1 className="text-3xl">{existingMessage.message}</h1>
+      <form action={deleteUserMessage} className="mb-4 w-full rounded px-8 pb-8 pt-6">
+        <div className="w-full text-center">
           <input
             type="submit"
             value={'Delete Quote'}
             className="text-gray-800 cursor-pointer rounded bg-[#00E699] px-4 py-2 font-semibold transition-colors hover:bg-[#00e5BF] focus:outline-none"
           />
-        
-      
-    
+        </div>
+      </form>
+    </div>
   ) : (
-    
-      
+    <form action={createUserMessage} className="w-2/3 rounded px-8 shadow-md">
+      <div className="mb-6">
         <input
           type="text"
           name="message"
           placeholder="Mistakes are the portals of discovery - James Joyce"
           className="text-gray-700 w-full appearance-none rounded border p-3 text-center leading-tight focus:outline-none"
         />
-      
-      
+      </div>
+      <div className="w-full text-center">
         <input
           type="submit"
           value={'Save Quote'}
           className="text-gray-800 cursor-pointer rounded bg-[#00E699] px-4 py-2 font-semibold transition-colors hover:bg-[#00e5BF] focus:outline-none"
         />
-      
-    
+      </div>
+    </form>
   );
   return (
-    
-      
+    <main className="align-center -mt-16 flex min-h-screen flex-col items-center justify-center px-24">
+      <h2 className="text-gray-400 pb-6 text-2xl">
         {existingMessage ? 'Your quote is wonderful...' : 'Save an inspiring quote for yourself...'}
-      
+      </h2>
       {ui}
-    
+    </main>
   );
 }
 ```
@@ -359,9 +357,7 @@ To view and manage the users who authenticated with your application, you can na
 
 You can find the source code for the application described in this guide on GitHub.
 
-
-Authentication flow with Clerk
-
+- [Authentication flow with Clerk](https://github.com/neondatabase/guide-neon-next-clerk): Authenticate users of your Neon application with Clerk
 
 ## Resources
 

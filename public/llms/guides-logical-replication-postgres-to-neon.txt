@@ -1,6 +1,6 @@
 # Replicate data from Postgres to Neon
 
-> This guide explains how to set up logical replication from a local Postgres instance or another Postgres provider to Neon, covering configuration steps for the source database, destination setup, and testing the replication process.
+> The document "Replicate data from Postgres to Neon" outlines the steps for setting up logical replication from a PostgreSQL database to a Neon database, detailing the configuration of publication and subscription processes.
 
 ## Source
 
@@ -12,7 +12,7 @@ Neon's logical replication feature allows you to replicate data from a local Pos
 
 - A local Postgres instance or Postgres instance hosted on another provider containing the data you want to replicate. If you're just testing this out and need some data to play with, you can use the following statements to create a table with sample data:
 
-  ```sql shouldWrap
+  ```sql
   CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
   INSERT INTO playing_with_neon(name, value)
   SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i);
@@ -21,8 +21,6 @@ Neon's logical replication feature allows you to replicate data from a local Pos
 - A destination Neon project. For information about creating a Neon project, see [Create a project](https://neon.com/docs/manage/projects#create-a-project).
 - Read the [important notices about logical replication in Neon](https://neon.com/docs/guides/logical-replication-neon#important-notices) before you begin.
 - Review our [logical replication tips](https://neon.com/docs/guides/logical-replication-tips), based on real-world customer data migration experiences.
-
-
 
 ## Prepare your source Postgres database
 
@@ -83,19 +81,17 @@ Publications are a fundamental part of logical replication in Postgres. They def
 
 To create a publication for a specific table:
 
-```sql shouldWrap
+```sql
 CREATE PUBLICATION my_publication FOR TABLE playing_with_neon;
 ```
 
 To create a publication for multiple tables, provide a comma-separated list of tables:
 
-```sql shouldWrap
+```sql
 CREATE PUBLICATION my_publication FOR TABLE users, departments;
 ```
 
-
-Defining specific tables lets you add or remove tables from the publication later, which you cannot do when creating publications with `FOR ALL TABLES`.
-
+   **Note**: Defining specific tables lets you add or remove tables from the publication later, which you cannot do when creating publications with `FOR ALL TABLES`.
 
 For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
 
@@ -109,7 +105,7 @@ When configuring logical replication in Postgres, the tables in the source datab
 
 If you're using the sample `playing_with_neon` table, you can create the same table on the destination database with the following statement:
 
-```sql shouldWrap
+```sql
 CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
 ```
 
@@ -122,7 +118,7 @@ After creating a publication on the source database, you need to create a subscr
 
    ```sql
    CREATE SUBSCRIPTION my_subscription
-   CONNECTION 'host= port=5432 dbname=postgres user=replication_user password=replication_user_password'
+   CONNECTION 'host=<host-address-or-ip> port=5432 dbname=postgres user=replication_user password=replication_user_password'
    PUBLICATION my_publication;
    ```
 

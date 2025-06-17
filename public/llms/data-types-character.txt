@@ -1,12 +1,14 @@
 # Postgres Character data types
 
-> Postgres offers three primary character data types: CHAR(n) for fixed-length strings, VARCHAR(n) for variable-length strings with a limit, and TEXT for unlimited variable-length strings. These types are essential for storing text data like usernames, descriptions, and large content.
-
-Postgres character data types provide flexible options for storing string data of various lengths. This guide explains the differences between the available types, their storage characteristics, and how to effectively query and manipulate text data in Postgres.
+> The document "Postgres Character data types" details the character data types available in PostgreSQL, explaining their usage and constraints within the Neon database environment.
 
 ## Source
 
 - [Postgres Character data types HTML](https://neon.com/docs/data-types/character): The original HTML version of this documentation
+
+In Postgres, character data types are used to store strings. There are three primary character types: `CHAR(n)`, `VARCHAR(n)`, and `TEXT`. `CHAR(n)` and `VARCHAR(n)` types are suitable for strings with known or limited length; for example, usernames and email addresses. Whereas `TEXT` is ideal for storing large variable-length strings, such as blog posts or product descriptions.
+
+
 
 ## Storage and syntax
 
@@ -20,7 +22,9 @@ String values are represented as literals in single quotes. For example, `'hello
 
 ## Example usage
 
-Consider a database tracking data for a library. We have books with titles and optional descriptions. Titles are usually of a similar length, so they can be modeled with a `CHAR` type. However, descriptions can vary significantly in length, so they are assigned the `TEXT` type:
+Consider a database tracking data for a library. We have books with titles and optional descriptions. Titles are usually of a similar length, so they can be modeled with a `CHAR` type. However, descriptions can vary significantly in length, so they are assigned the `TEXT` type.
+
+The query below creates a `books` table and inserts some sample data:
 
 ```sql
 CREATE TABLE books (
@@ -44,20 +48,43 @@ FROM books
 WHERE description IS NOT NULL;
 ```
 
-## String functions and operators
+This query returns the following:
 
-Postgres provides various functions and operators for manipulating character data. For instance, the `||` operator concatenates strings:
+```text
+                       title
+----------------------------------------------------
+ Postgres Guide
+ SQL for Professionals
+```
+
+## Other examples
+
+### String functions and operators
+
+Postgres provides various functions and operators for manipulating character data. For instance, the `||` operator concatenates strings.
+
+The query below joins the title and description columns together:
 
 ```sql
 SELECT title || ' - ' || description AS full_description
 FROM books;
 ```
 
+This query returns the following:
+
+```text
+                           full_description
+----------------------------------------------------------------------
+ Postgres Guide - A comprehensive guide to PostgreSQL.
+
+ SQL for Professionals - An in-depth look at advanced SQL techniques.
+```
+
 For more string functions and operators, see [PostgreSQL String Functions and Operators](https://www.postgresql.org/docs/current/functions-string.html).
 
-## Pattern matching
+### Pattern matching
 
-With `VARCHAR` and `TEXT`, you can use pattern matching to find specific text. The `LIKE` operator is commonly used for this purpose:
+With `VARCHAR` and `TEXT`, you can use pattern matching to find specific text. The `LIKE` operator is commonly used for this purpose.
 
 ```sql
 SELECT id, title
@@ -66,6 +93,12 @@ WHERE title LIKE 'Data%';
 ```
 
 This returns books whose titles start with "Data".
+
+```text
+ id |                       title
+----+----------------------------------------------------
+  2 | Data Modeling Essentials
+```
 
 ## Additional considerations
 
