@@ -39,6 +39,7 @@ import CtaBlock from 'components/shared/cta-block';
 import DeployPostgresButton from 'components/shared/deploy-postgres-button';
 import DocCta from 'components/shared/doc-cta';
 import ExternalCode from 'components/shared/external-code';
+import GradientBorder from 'components/shared/gradient-border';
 import ImageZoom from 'components/shared/image-zoom';
 import InkeepEmbedded from 'components/shared/inkeep-embedded';
 import LatencyCalculator from 'components/shared/latency-calculator';
@@ -81,7 +82,11 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
       return (
         <ImageZoom src={src}>
           <Image
-            className={clsx(className, { 'no-border': title === 'no-border' })}
+            className={clsx(
+              className,
+              { 'no-border': title === 'no-border' },
+              isTemplate && 'rounded-lg'
+            )}
             src={src}
             width={isReleaseNote ? 762 : 796}
             height={isReleaseNote ? 428 : 447}
@@ -89,6 +94,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
             title={title !== 'no-border' ? title : undefined}
             {...rest}
           />
+          {isTemplate && <GradientBorder className="rounded-lg" withBlend />}
         </ImageZoom>
       );
     }

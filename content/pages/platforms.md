@@ -7,7 +7,7 @@ updatedOn: '2025-04-19T09:00:00.000Z'
 
 Neon makes it easy to embed Postgres into your platform with one-second provisioning, autoscaling, and scale-to-zero—so each user gets an isolated database without the overhead. Databases are provisioned via API and fully integrated into your product, with no Neon signup or setup required.
 
-![partners illustration](/images/pages/platforms/partners-illustration.png)
+![Partners](/images/pages/platforms/partners.jpg)
 
 <CTA title="" description="Our Solutions Engineers have helped platforms like yours embed Postgres at scale. Tell us about your use case—we’ll help you design the right approach." buttonText="Meet with us" buttonUrl="https://neon.tech/contact-sales" />
 
@@ -37,7 +37,7 @@ company: 'Software Engineer at Retool',
 - Suspend latency: configurable (default is 5 min)
 - Resume latency (cold start): ~500ms
 
-![architecture illustration](/images/pages/platforms/architecture-illustration.png)
+![Architecture](/images/pages/platforms/architecture.jpg)
 
 [Read about the benefits of database-per-user architectures for scalability](/docs/use-cases/database-per-user#database-per-user)
 
