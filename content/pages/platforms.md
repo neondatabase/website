@@ -31,7 +31,7 @@ company: 'Software Engineer at Retool',
 
 ## With instant provisioning and scale-to-zero
 
-[Neon databases provision in less than a second](https://github.com/neondatabase/instant-postgres?tab=readme-ov-file#instant-postgres) and automatically suspend when idle, with no compute cost until the next query. You can offer every user their own Postgres database without incurring he cost of idle infrastructure. This is what makes Neon ideal for platforms: dedicated Postgres per user, but with shared-infrastructure economics.
+[Neon databases provision in less than a second](https://github.com/neondatabase/instant-postgres?tab=readme-ov-file#instant-postgres) and automatically suspend when idle, with no compute cost until the next query. **You can offer every user their own Postgres database without incurring he cost of idle infrastructure.** This is what makes Neon ideal for platforms: dedicated Postgres per user, but with shared-infrastructure economics.
 
 - Provisioning time: ~1 second
 - Suspend latency: configurable (default is 5 min)
@@ -96,6 +96,6 @@ company: 'co-founder and CPO at Koyeb',
 
 ## Built for your platform, not ours
 
-**We’re not trying to own your user experience—we’re here to power it.** You can integrate Neon invisibly behind the scenes, whether you want to use our [OAuth integration](/docs/guides/oauth-integration) or manage Neon projects directly via API. **You decide how the database shows up in your UI, we take care of the rest.**
+**We’re not trying to own your user experience — we’re here to power it.** You can integrate Neon invisibly behind the scenes, whether you want to use our [OAuth integration](/docs/guides/oauth-integration) or manage Neon projects directly via API. **You decide how the database shows up in your UI, we take care of the rest.**
 
 <CTA title="Let us help you launch" description="We’re happy to support proof-of-concepts, provide technical guidance, and share best practices from other platforms." theme="column" buttonText="Talk to us" buttonUrl="/contact-sales" linkText="Explore the API" linkUrl="/docs/reference/api-reference" />
