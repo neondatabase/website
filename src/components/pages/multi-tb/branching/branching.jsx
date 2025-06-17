@@ -86,7 +86,7 @@ const STEPS = [
 
 const Branching = () => (
   <section className="branching mt-[168px] lg:mt-24 md:mt-[68px]">
-    <Container className="lg:mx-24 md:mx-1" size="576" as="header">
+    <Container className="lg:mx-24 md:mx-auto md:max-w-[640px]" size="576" as="header">
       <h2 className="pr-28 font-title text-[60px] font-medium leading-[90%] tracking-extra-tight text-white xl:max-w-[500px] xl:text-[52px] lg:max-w-[380px] lg:pr-20 lg:text-[40px] md:pr-10 md:text-[36px] md:leading-none">
         Recover multi-TB in seconds.
       </h2>
@@ -137,8 +137,8 @@ const Branching = () => (
         <span className="absolute -bottom-[181px] -left-[181px] -z-30 size-[565px] bg-[radial-gradient(50%_50%_at_50%_50%,_rgba(7,125,148,0.25)_0%,_rgba(7,125,148,0.00)_100%)] opacity-90" />
       </div>
     </Container>
-    <Container className="lg:mx-8 md:mx-1" size="768" as="footer">
-      <ul className="flex flex-row gap-16 text-balance text-2xl font-normal leading-snug tracking-extra-tight text-gray-new-60 lg:text-xl md:flex-col md:gap-6 md:text-pretty md:pr-10 md:text-lg">
+    <Container className="lg:mx-8 md:mx-auto md:max-w-[640px]" size="768" as="footer">
+      <ul className="flex flex-row gap-16 text-balance text-2xl font-normal leading-snug tracking-extra-tight text-gray-new-60 lg:text-xl md:text-pretty md:pr-10 md:text-lg sm:flex-col sm:gap-6">
         <li className="flex-1">
           <p>
             <span className="text-white">For teams.</span> You have a reliable safety net protecting

@@ -4,7 +4,7 @@ import LINKS from 'constants/links';
 
 const Hero = () => (
   <section className="hero safe-paddings relative pt-[160px] xl:pt-[150px] lg:pt-12 md:pt-10">
-    <Container className="lg:mx-24 md:mx-1" size="576" as="header">
+    <Container className="lg:mx-24 md:mx-auto md:max-w-[640px]" size="576" as="header">
       <h1 className="max-w-[646px] font-title text-[64px] font-medium leading-none tracking-extra-tight xl:max-w-[500px] xl:text-[56px] lg:max-w-[440px] lg:text-5xl md:max-w-full md:text-[36px]">
         Scale Postgres without losing sleep
       </h1>
