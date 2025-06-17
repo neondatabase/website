@@ -39,17 +39,14 @@ export const scheduleBranchDeletion = async (branchId) => {
 
   try {
     const baseUrl = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
-    const deleteUrl = baseUrl?.includes('localhost')
-      ? 'https://neon-next-delta.vercel.app/api/database/branch/delete'
-      : new URL('/api/database/branch/delete', baseUrl).toString();
 
     await qstash.publishJSON({
-      url: deleteUrl,
+      url: new URL('/api/branching/branch/delete', baseUrl).toString(),
       body: {
         branchId,
         retries: 0,
       },
-      delay: 3600, // 1 hour in seconds
+      delay: 360, // 6 minutes in seconds
     });
   } catch (error) {
     console.error(`[QStash] Failed to schedule deletion for branch ${branchId}:`, error);
