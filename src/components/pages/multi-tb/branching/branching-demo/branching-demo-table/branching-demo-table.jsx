@@ -66,25 +66,23 @@ const BranchingDemoTable = ({
       </div>
       <div className="relative mt-3.5 overflow-hidden rounded-[10px] border border-transparent">
         <div className="relative overflow-hidden bg-[#121417] bg-opacity-80 p-px">
-          {/* Header */}
           <div className="relative flex px-3 py-3.5 text-[15px] font-medium leading-snug tracking-extra-tight text-gray-new-60 after:pointer-events-none after:absolute after:inset-0 after:border-b after:border-white after:mix-blend-overlay">
             <div className="relative mr-3 w-3" aria-hidden="true">
               <span className="sr-only">Choose</span>
             </div>
             {TABLE_COLUMNS.map((column) => (
               <div
-                key={column.id}
                 className={clsx(
                   column.id === 'id' && 'min-w-[52px]',
                   column.id === 'singer' && 'min-w-[100px]',
                   column.id === 'song' ? 'mr-0 flex-1' : 'mr-10'
                 )}
+                key={column.id}
               >
                 <span>{column.name}</span>
               </div>
             ))}
           </div>
-          {/* Body */}
           <ul className="text-base leading-snug tracking-extra-tight drop-shadow-[0_4px_40px_0_rgba(0,0,0,0.25)]">
             {tableRows.map((row) => (
               <li
@@ -132,12 +130,12 @@ const BranchingDemoTable = ({
                 )}
                 {TABLE_COLUMNS.map((column) => (
                   <div
-                    key={column.id}
                     className={clsx(
                       getColumnWidth(column.id, isLoading),
                       column.id === 'id' ? 'mr-10 font-medium' : 'font-normal',
                       column.id === 'song' ? 'text-gray-new-80' : 'text-white'
                     )}
+                    key={column.id}
                   >
                     {isLoading ? (
                       <span

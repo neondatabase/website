@@ -152,7 +152,6 @@ const BranchingDemo = ({ className }) => {
   const handleNextStep = async () => {
     try {
       if (currentStep === 5) {
-        // Reset the demo
         setCurrentStep(0);
         showToast('Demo reset successfully.', 'success');
         return;
@@ -175,7 +174,6 @@ const BranchingDemo = ({ className }) => {
         fetchDatabaseSize,
       });
 
-      // Increment step for all steps except step 0
       if (currentStep !== 0) {
         setCurrentStep(currentStep + 1);
       }
