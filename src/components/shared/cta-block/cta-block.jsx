@@ -12,7 +12,7 @@ import greenGlow from './images/green-glow.png';
 
 const sizeClassNames = {
   sm: {
-    block: 'px-6 py-5 sm:px-5 mt-8 xl:mt-5',
+    block: 'mt-8 px-6 py-5 xl:mt-5 sm:px-5',
     heading: 'text-xl sm:text-lg leading-none tracking-extra-tight',
     description: 'leading-snug tracking-extra-tight',
   },
@@ -35,6 +35,7 @@ const themeClassNames = {
 
 const CtaBlock = ({
   className,
+  contentClassName,
   title,
   description,
   buttonText,
@@ -58,7 +59,7 @@ const CtaBlock = ({
         themeClassNames[theme].container
       )}
     >
-      <div className={clsx('sm:text-center', themeClassNames[theme].content)}>
+      <div className={clsx('sm:text-center', themeClassNames[theme].content, contentClassName)}>
         <h3 className={clsx('font-medium', sizeClassNames[size].heading)}>{title}</h3>
         {description && (
           <p
@@ -119,6 +120,7 @@ const CtaBlock = ({
 
 CtaBlock.propTypes = {
   className: PropTypes.string,
+  contentClassName: PropTypes.string,
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
   buttonText: PropTypes.string.isRequired,
