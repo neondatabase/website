@@ -1,25 +1,22 @@
 # The pg_prewarm extension
 
-> This guide explains how to use the pg_prewarm extension to preload data into the Postgres buffer cache after a restart, improving query response times by ensuring data is readily available in memory rather than loading from disk on-demand.
+> The document explains the pg_prewarm extension for Neon, detailing how it loads relation data into the PostgreSQL buffer cache to improve data access performance.
 
 ## Source
 
 - [The pg_prewarm extension HTML](https://neon.com/docs/extensions/pg_prewarm): The original HTML version of this documentation
 
-## Overview
-
 You can use the `pg_prewarm` extension to preload data into the Postgres buffer cache after a restart. Doing so improves query response times by ensuring that your data is readily available in memory. Otherwise, data must be loaded into the buffer cache from disk on-demand, which can result in slower query response times.
+
 
 
 In this guide, we'll explore the `pg_prewarm` extension, how to enable it, and how to use it to prewarm your Postgres buffer cache.
 
-
-The `pg_prewarm` extension is open-source and can be installed on any Postgres setup. Detailed information about the extension is available in the [PostgreSQL Documentation](https://www.postgresql.org/docs/current/pgprewarm.html).
-
+   **Note**: The `pg_prewarm` extension is open-source and can be installed on any Postgres setup. Detailed information about the extension is available in the [PostgreSQL Documentation](https://www.postgresql.org/docs/current/pgprewarm.html).
 
 **Version availability**
 
-Please refer to the [list of extensions](/docs/extensions/pg-extensions) available in Neon for information about the version of `pg_prewarm` that Neon supports.
+Please refer to the [list of extensions](https://neon.com/docs/extensions/pg-extensions) available in Neon for information about the version of `pg_prewarm` that Neon supports.
 
 ## Enable the `pg_prewarm` extension
 
@@ -29,7 +26,7 @@ Enable the `pg_prewarm` extension by running the `CREATE EXTENSION` statement in
 CREATE EXTENSION IF NOT EXISTS pg_prewarm;
 ```
 
-For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
+For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](https://neon.com/docs/connect/query-with-psql-editor).
 
 ## Basic usage
 
@@ -146,11 +143,7 @@ In this example, you create a table, check its data size, run `pg_prewarm`, and 
            36700160
    ```
 
-   
-   The values for the size of the table and the size of the data loaded into the buffer cache as shown in the example above match exactly, which is an ideal scenario. However, there are cases where these values might not match, indicating that not all the data was loaded into the buffer cache; for example, this can happen if `pg_prewarm` only partially loads the table into the buffer cache due to lack of memory availability. Concurrent data modifications could also cause sizes to differ.
-
-   To understand how much memory is available to your Postgres instance on Neon, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
-   
+      **Note**: The values for the size of the table and the size of the data loaded into the buffer cache as shown in the example above match exactly, which is an ideal scenario. However, there are cases where these values might not match, indicating that not all the data was loaded into the buffer cache; for example, this can happen if `pg_prewarm` only partially loads the table into the buffer cache due to lack of memory availability. Concurrent data modifications could also cause sizes to differ. To understand how much memory is available to your Postgres instance on Neon, see [How to size your compute](https://neon.com/docs/manage/computes#how-to-size-your-compute).
 
 ## Demonstrating the effect of pg_prewarm
 
@@ -186,7 +179,7 @@ This example shows how preloading data can improve query performance. We'll crea
    FROM generate_series('2010-01-01 00:00:00'::timestamptz, '2018-02-01 00:00:00'::timestamptz, '1 minutes'::interval) a(x);
    ```
 
-2. Restart your Postgres instance to clear the cache. On Neon, you can do this by [restarting your compute](/docs/manage/computes#restart-a-compute).
+2. Restart your Postgres instance to clear the cache. On Neon, you can do this by [restarting your compute](https://neon.com/docs/manage/computes#restart-a-compute).
 
 3. Prewarm the first sample table:
 
@@ -239,4 +232,4 @@ Prewarming your table data and indexes can help improve read performance, especi
 ## Resources
 
 - [PostgreSQL pg_prewarm documentation](https://www.postgresql.org/docs/current/pgprewarm.html)
-- [How to size your compute in Neon](/docs/manage/computes#how-to-size-your-compute)
+- [How to size your compute in Neon](https://neon.com/docs/manage/computes#how-to-size-your-compute)

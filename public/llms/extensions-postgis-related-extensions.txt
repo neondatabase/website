@@ -1,6 +1,6 @@
 # PostGIS-related extensions
 
-> This guide introduces PostGIS-related extensions supported by Neon, including pgrouting for geospatial routing, H3_PostGIS for hierarchical indexing, PostGIS SFCGAL for 3D operations, and PostGIS Tiger Geocoder for address normalization.
+> The document details the PostGIS-related extensions available in Neon, outlining how to enable and use these extensions to enhance spatial data capabilities within the Neon database environment.
 
 ## Source
 
@@ -8,20 +8,16 @@
 
 PostGIS adds support for geospatial data in PostgreSQL, providing both data types and functions to store and analyze it effectively. The Postgres ecosystem includes multiple extensions built on top of PostGIS, to further enhance its capabilities. This guide introduces you to some of these extensions supported by Neon:
 
-- [pgrouting](#pgrouting)
-- [H3_PostGIS](#h3-and-h3-postgis)
-- [PostGIS SFCGAL](#postgis-sfcgal)
-- [PostGIS Tiger Geocoder](#postgis-tiger-geocoder)
+- [pgrouting](https://neon.com/docs/extensions/postgis-related-extensions#pgrouting)
+- [H3_PostGIS](https://neon.com/docs/extensions/postgis-related-extensions#h3-and-h3-postgis)
+- [PostGIS SFCGAL](https://neon.com/docs/extensions/postgis-related-extensions#postgis-sfcgal)
+- [PostGIS Tiger Geocoder](https://neon.com/docs/extensions/postgis-related-extensions#postgis-tiger-geocoder)
 
 
 
 These extensions offer specialized functionality for routing, hierarchical geospatial indexing, advanced geometric operations, and geocoding. We'll explore how to enable these extensions and provide examples of common use cases.
 
-
-<Admonition type="note">
-    These extensions are open-source and can be installed on any Neon Project using the instructions below. For detailed installation instructions, please refer to the documentation for each extension. 
-</Admonition>
-
+   **Note**: These extensions are open-source and can be installed on any Neon Project using the instructions below. For detailed installation instructions, please refer to the documentation for each extension.
 
 **Version availability:**
 

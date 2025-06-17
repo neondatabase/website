@@ -1,22 +1,26 @@
 # Trigger serverless functions
 
-Use Inngest to trigger serverless functions from your Neon database changes
+> The document "Trigger serverless functions" guides Neon users on how to configure and execute serverless functions in response to database events, detailing the integration process with external services.
+
+## Source
+
+- [Trigger serverless functions HTML](https://neon.com/docs/guides/trigger-serverless-functions): The original HTML version of this documentation
 
 Combining your serverless Neon database with [Inngest](https://www.inngest.com/?utm_source=neon&utm_medium=trigger-serverless-functions-guide) enables you to **trigger serverless functions** running on Vercel, AWS, and Cloudflare Worker **based on database changes.**
 
 By enabling your serverless functions to react to database changes, you open the door to many use cases. From onboarding to ETL and AI workflows, the possibilities are endless.
 
-![trigger serverless functions with inngest](/docs/guides/inngest.jpg)
+
 
 This guide describes setting up a Neon database, configuring the Inngest integration, and connecting your Serverless functions to your Neon database with Inngest. It covers:
 
-- Creating a Neon project and enabling [Logical Replication](/docs/guides/logical-replication-guide).
+- Creating a Neon project and enabling [Logical Replication](https://neon.com/docs/guides/logical-replication-guide).
 - Configuring the Inngest integration on your Neon database.
 - Configure your Vercel, AWS, or Cloudflare functions to react to your Neon database changes using Inngest.
 
 ## Prerequisites
 
-- A Neon account. If you do not have one, see [Sign up](/docs/get-started-with-neon/signing-up) for instructions.
+- A Neon account. If you do not have one, see [Sign up](https://neon.com/docs/get-started-with-neon/signing-up) for instructions.
 - An Inngest account. You can create a free Inngest account by [signing up](https://app.inngest.com/sign-up?utm_source=neon&utm_medium=trigger-serverless-functions-guide).
 
 ## Create a Neon project
@@ -52,11 +56,11 @@ VALUES
 
 ## Enabling Logical Replication on your database
 
-The Inngest Integration relies on Neon’s Logical Replication feature to get notified upon database changes.
+The Inngest Integration relies on Neon's Logical Replication feature to get notified upon database changes.
 
 Navigate to your Neon Project using the Neon Console and open the **Settings** > **Logical Replication** page. From here, follow the instructions to enable Logical Replication:
 
-![Neon dashboard settings with option to enable logical replication](/docs/guides/neon-console-settings-logical-replication.png)
+
 
 ## Configuring the Inngest integration
 
@@ -64,15 +68,15 @@ Your Neon database is now ready to work with Inngest.
 
 To configure the Inngest Neon Integration, navigate to the Inngest Platform, open the [Integrations page](https://app.inngest.com/settings/integrations?utm_source=neon&utm_medium=trigger-serverless-functions-guide), and follow the instructions of the [Neon Integration installation wizard](https://app.inngest.com/settings/integrations/neon/connect?utm_source=neon&utm_medium=trigger-serverless-functions-guide):
 
-![Neon integration card inside the Inngest integrations page](/docs/guides/inngest-integrations-page.png)
+
 
 The Inngest Integration requires Postgres admin credentials to complete its setup. _These credentials are not stored and are only used during the installation process_.
 
-![Neon authorization step inside the Inngest integrations page](/docs/guides/inngest-integration-neon-authorize-step.png)
+
 
 You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**.
 
-![Connection modal](/docs/connect/connection-details.png)
+
 
 ## Triggering Serverless functions from database changes
 
@@ -170,7 +174,7 @@ export newUser = inngest.createFunction(
 
 To allow Inngest to run your Inngest Functions, add the following Serverless Function, which serves as a router:
 
-
+Tab: Vercel
 
 ```typescript
 // src/app/api/inngest/route.ts
@@ -184,6 +188,8 @@ export const { GET, POST, PUT } = serve({
 });
 ```
 
+Tab: AWS Lambda
+
 ```typescript
 import { serve } from 'inngest/lambda';
 import { inngest } from './client';
@@ -194,6 +200,8 @@ export const handler = serve({
   functions: [newUsers],
 });
 ```
+
+Tab: Cloudflare Workers
 
 ```js
 // /functions/api/inngest.js
@@ -209,11 +217,7 @@ export default {
 };
 ```
 
-
-
-
-You can find more information about serving Inngest Functions in [Inngest's documentation](https://www.inngest.com/docs/reference/serve?utm_source=neon&utm_medium=trigger-serverless-functions-guide#serve-client-functions-options).
-
+   **Note**: You can find more information about serving Inngest Functions in [Inngest's documentation](https://www.inngest.com/docs/reference/serve?utm_source=neon&utm_medium=trigger-serverless-functions-guide#serve-client-functions-options).
 
 ### 4. Configuring your Serverless application
 
@@ -229,11 +233,11 @@ We are now all set!
 
 Go to the **Tables** page in the Neon Console and add a new record to the `users` table:
 
-![You can add a new record to the users table directly from the Neon console](/docs/guides/inngest-integration-neon-console-users-table-add-new-record.png)
+
 
 You should see a new run of the `new-user` function appear on the [Inngest Platform](https://app.inngest.com/?utm_source=neon&utm_medium=trigger-serverless-functions-guide):
 
-![The Inngest Platform lists all the runs](/docs/guides/inngest-integrations-inngest-platform-new-runs.png)
+
 
 ## Going further
 

@@ -1,6 +1,6 @@
 # Stream database changes in real-time with Prisma Pulse
 
-> This guide explains how to set up Prisma Pulse with your Neon database to stream database changes in real-time, covering logical replication setup, Pulse configuration, and creating event-driven flows triggered by database changes.
+> The document explains how Neon users can utilize Prisma Pulse to stream database changes in real-time by setting up logical replication, detailing the necessary steps and configurations within the Neon environment.
 
 ## Source
 
@@ -12,13 +12,7 @@ Neon's Logical Replication feature enables you to subscribe to changes in your d
 
 In this guide, you will learn how to set up Prisma Pulse with your Neon database and create your first event stream.
 
-
-<Admonition type="tip">
-What can you make with database event-driven architecture?
-
-Set up real-time triggers for your Inngest workflows, re-index your TypeSense search whenever data changes, and much more.
-</Admonition>
-
+   **Tip**: What can you make with database event-driven architecture? Set up real-time triggers for your Inngest workflows, re-index your TypeSense search whenever data changes, and much more.
 
 ## Prerequisites
 
@@ -28,11 +22,7 @@ Set up real-time triggers for your Inngest workflows, re-index your TypeSense se
 
 ## Enable logical replication in Neon
 
-
-<Admonition type="important">
-Enabling logical replication modifies the Postgres `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, meaning active connections will be dropped and have to reconnect.
-</Admonition>
-
+   **Important**: Enabling logical replication modifies the Postgres `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, meaning active connections will be dropped and have to reconnect.
 
 To enable logical replication in Neon:
 
@@ -88,14 +78,10 @@ Add the following to extend your existing Prisma Client instance with the Prisma
 import { PrismaClient } from '@prisma/client';
 import { withPulse } from '@prisma/extension-pulse';
 
-const prisma = new PrismaClient().$extends(withPulse({ apiKey: '' }));
+const prisma = new PrismaClient().$extends(withPulse({ apiKey: '<your Pulse API key>' }));
 ```
 
-
-<Admonition type="note">
-For a real production use case, you should consider moving sensitive values like your API key into environment variables.
-</Admonition>
-
+   **Note**: For a real production use case, you should consider moving sensitive values like your API key into environment variables.
 
 ### Create your first Pulse stream
 
@@ -105,7 +91,7 @@ The code below subscribes to a `User` model in your Prisma schema. You can use a
 import { PrismaClient } from '@prisma/client';
 import { withPulse } from '@prisma/extension-pulse';
 
-const prisma = new PrismaClient().$extends(withPulse({ apiKey: '' }));
+const prisma = new PrismaClient().$extends(withPulse({ apiKey: '<your Pulse API key>' }));
 
 async function main() {
   // Create a stream from the 'User' model

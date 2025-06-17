@@ -1,6 +1,6 @@
 # Connect an SQLAlchemy application to Neon
 
-> This guide demonstrates how to create a Neon project and connect to it from an SQLAlchemy application, covering installation, connection setup, and troubleshooting common connection issues.
+> The document outlines the steps to connect an SQLAlchemy application to a Neon database, detailing the necessary configurations and code examples for establishing a successful connection.
 
 ## Source
 
@@ -13,11 +13,6 @@ SQLAlchemy is a Python SQL toolkit and Object Relational Mapper (ORM) that provi
 To complete the steps in this topic, ensure that you have an SQLAlchemy installation with a Postgres driver. The following instructions use `psycopg2`, the default driver for Postgres in SQLAlchemy. For SQLAlchemy installation instructions, refer to the [SQLAlchemy Installation Guide](https://docs.sqlalchemy.org/en/14/intro.html#installation). `psycopg2` installation instructions are provided below.
 
 To connect to Neon from SQLAlchemy:
-
-1. [Create a Neon project](#create-a-neon-project)
-1. [Install psycopg2](#install-psycopg2)
-1. [Create the "hello neon" program](#create-the-hello-neon-program)
-1. [Create an SQLAlchemy engine for your Neon project](#create-an-sqlalchemy-engine-for-your-neon-project)
 
 ## Create a Neon project
 
@@ -48,11 +43,11 @@ import psycopg2
 import psycopg2.extras; psycopg2.extensions.set_wait_callback(psycopg2.extras.wait_select)
 
 # You can set the password to None if it is specified in a ~/.pgpass file
-USERNAME = "<username>"
-PASSWORD = "<password>"
-HOST = "<hostname>"
+USERNAME = "alex"
+PASSWORD = "AbC123dEf"
+HOST = "@ep-cool-darkness-123456.us-east-2.aws.neon.tech"
 PORT = "5432"
-PROJECT = "<database>"
+PROJECT = "dbname"
 
 conn_str = f"dbname={PROJECT} user={USERNAME} password={PASSWORD} host={HOST} port={PORT} sslmode=require"
 
@@ -65,10 +60,7 @@ with conn.cursor() as cur:
 
 You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).
 
-<Admonition type="note">
-This example was tested with Python 3 and psycopg2 version 2.9.3.
-</Admonition>
-
+   **Note**: This example was tested with Python 3 and psycopg2 version 2.9.3.
 
 ## Create an SQLAlchemy engine for your Neon project
 
@@ -79,10 +71,10 @@ The following example creates an SQLAlchemy engine that points to your Neon bran
 ```python
 from sqlalchemy import create_engine
 
-USERNAME = "<username>"
-PASSWORD = "<password>"
-HOST = "<hostname>"
-DATABASE = "<database>"
+USERNAME = "alex"
+PASSWORD = "AbC123dEf"
+HOST = "ep-cool-darkness-123456.us-east-2.aws.neon.tech"
+DATABASE = "dbname"
 
 conn_str = f'postgresql://{USERNAME}:{PASSWORD}@{HOST}/{DATABASE}?sslmode=require'
 
@@ -110,4 +102,4 @@ For additional information about connecting from SQLAlchemy, refer to the follow
 
 For schema migration with SQLAlchemy, see our guide:
 
-[SQLAlchemy Migrations](https://neon.com/docs/guides/sqlalchemy-migrations)
+- [SQLAlchemy Migrations](https://neon.com/docs/guides/sqlalchemy-migrations): Schema migration with Neon Postgres and SQLAlchemy

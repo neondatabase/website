@@ -1,16 +1,18 @@
 # The Neon GitHub integration
 
-Connect Neon Postgres to a GitHub repository and build GitHub Actions
+> The document details the process for integrating Neon with GitHub, enabling users to automate workflows and manage Neon projects directly from GitHub repositories.
 
-The Neon GitHub integration connects your Neon project to a GitHub repository, streamlining database development within your overall application development workflow. For instance, you can configure GitHub Actions to create a database branch for each pull request and automatically apply schema changes to that database branch. To help you get started, we provide a [sample GitHub Actions workflow](#add-the-github-actions-workflow-to-your-repository).
+## Source
+
+- [The Neon GitHub integration HTML](https://neon.com/docs/guides/neon-github-integration): The original HTML version of this documentation
+
+The Neon GitHub integration connects your Neon project to a GitHub repository, streamlining database development within your overall application development workflow. For instance, you can configure GitHub Actions to create a database branch for each pull request and automatically apply schema changes to that database branch. To help you get started, we provide a [sample GitHub Actions workflow](https://neon.com/docs/guides/neon-github-integration#add-the-github-actions-workflow-to-your-repository).
 
 ## How it works
 
 The integration installs the GitHub App, letting you select which repositories you want to make accessible to Neon. When you connect a Neon project to a GitHub repository, the integration sets a Neon API key secret and Neon project ID variable in your repository, which are used by your GitHub Actions workflow to interact with your Neon project.
 
-
-The [sample GitHub Actions workflow](#add-the-github-actions-workflow-to-your-repository) we provide is intended as a basic template you can expand on or customize to build your own workflows.
-
+   **Note**: The [sample GitHub Actions workflow](https://neon.com/docs/guides/neon-github-integration#add-the-github-actions-workflow-to-your-repository) we provide is intended as a basic template you can expand on or customize to build your own workflows.
 
 This guide walks you through the following steps:
 
@@ -20,7 +22,7 @@ This guide walks you through the following steps:
 
 ## Prerequisites
 
-- You have a Neon account and project. If not, see [Sign up for a Neon account](/docs/get-started-with-neon/signing-up).
+- You have a Neon account and project. If not, see [Sign up for a Neon account](https://neon.com/docs/get-started-with-neon/signing-up).
 - You have a GitHub account with an application repository that you want to connect to your Neon project.
 
 ## Install the GitHub App and connect your Neon project
@@ -29,7 +31,7 @@ To get started:
 
 1. In the Neon Console, navigate to the **Integrations** page in your Neon project.
 2. Locate the **GitHub** card and click **Add**.
-   ![GitHub App card](/docs/guides/github_card.png)
+   
 3. On the **GitHub** drawer, click **Install GitHub App**.
 4. If you have more than one GitHub account, select the account where you want to install the GitHub app.
 5. Select whether to install and authorize the GitHub app for **All repositories** in your GitHub account or **Only select repositories**.
@@ -37,16 +39,16 @@ To get started:
    - Selecting **Only select repositories** authorizes the app on one or more repositories, meaning that you can only connect your Neon project to the selected repositories (you can authorize additional repositories later if you need to).
 6. If you authorized the app on **All repositories** or multiple repositories, select a GitHub repository to connect to the current Neon project, and click **Connect**. If you authorized the GitHub app on a single GitHub repository, you have already completed this step.
 
-   You are directed to the **Actions** tab on the final page of the setup, where a sample GitHub Actions workflow is provided. You can copy this workflow to your GitHub repository to establish a basic database branching process. For instructions, see [Add the GitHub Actions workflow to your repository](#add-the-github-actions-workflow-to-your-repository).
+   You are directed to the **Actions** tab on the final page of the setup, where a sample GitHub Actions workflow is provided. You can copy this workflow to your GitHub repository to establish a basic database branching process. For instructions, see [Add the GitHub Actions workflow to your repository](https://neon.com/docs/guides/neon-github-integration#add-the-github-actions-workflow-to-your-repository).
 
 ## Add the GitHub Actions workflow to your repository
 
 The sample GitHub Actions workflow includes:
 
-- A [Create branch action](/docs/guides/branching-github-actions#create-branch-action) that creates a new Neon branch in your Neon project when you open or reopen a pull request in the connected GitHub repository.
+- A [Create branch action](https://neon.com/docs/guides/branching-github-actions#create-branch-action) that creates a new Neon branch in your Neon project when you open or reopen a pull request in the connected GitHub repository.
 - Code that you can uncomment to add a database migration command to your workflow.
-- Code that you can uncomment to add a [Schema diff action](/docs/guides/branching-github-actions#schema-diff-action) that diffs database schemas and posts the diff as a comment in your pull request.
-- A [Delete branch action](/docs/guides/branching-github-actions#delete-branch-action) that deletes the Neon branch from your Neon project when you close the pull request.
+- Code that you can uncomment to add a [Schema diff action](https://neon.com/docs/guides/branching-github-actions#schema-diff-action) that diffs database schemas and posts the diff as a comment in your pull request.
+- A [Delete branch action](https://neon.com/docs/guides/branching-github-actions#delete-branch-action) that deletes the Neon branch from your Neon project when you close the pull request.
 
 ```yaml
 name: Create/Delete Branch for Pull Request
@@ -155,9 +157,7 @@ To add the workflow to your repository:
 
    If you need more help with this step, see [Creating your first workflow](https://docs.github.com/en/actions/quickstart#creating-your-first-workflow), in the _GitHub documentation_.
 
-   
-   For GitHub to discover GitHub Actions workflows, you must save the workflow files in a directory called `.github/workflows` in your repository. You can name the workflow file whatever you like, but you must use `.yml` or `.yaml` as the file name extension.
-   
+      **Note**: For GitHub to discover GitHub Actions workflows, you must save the workflow files in a directory called `.github/workflows` in your repository. You can name the workflow file whatever you like, but you must use `.yml` or `.yaml` as the file name extension.
 
 2. Copy the workflow code into your `neon-workflow.yml` file.
 3. Commit your changes.
@@ -212,23 +212,13 @@ If you're new to GitHub Actions and workflows, GitHub's [Quickstart for GitHub A
 
 The following example applications utilize GitHub Actions workflows to create and delete branches in Neon. These examples can serve as references when building your own workflows.
 
+   **Note**: The Neon GitHub integration configures a `NEON_API_KEY` secret and a `PROJECT_ID` variable in your GitHub repository. Depending on the specific example application, additional or different variables and secrets may have been used. As you develop your workflows, you might also need to incorporate various other variables and secrets.
 
-The Neon GitHub integration configures a `NEON_API_KEY` secret and a `PROJECT_ID` variable in your GitHub repository. Depending on the specific example application, additional or different variables and secrets may have been used. As you develop your workflows, you might also need to incorporate various other variables and secrets.
-
-
-
-
-Automated Database Branching with GitHub Actions
-
-Preview branches with Cloudflare Pages
-
-Preview branches with Vercel
-
-Preview branches with Fly.io
-
-Neon Twitter app
-
-
+- [Automated Database Branching with GitHub Actions](https://neon.com/guides/neon-github-actions-authomated-branching): Learn how to automate database branching for your application using Neon and GitHub Actions
+- [Preview branches with Cloudflare Pages](https://github.com/neondatabase/preview-branches-with-cloudflare): Demonstrates using GitHub Actions workflows to create a Neon branch for every Cloudflare Pages preview deployment
+- [Preview branches with Vercel](https://github.com/neondatabase/preview-branches-with-vercel): Demonstrates using GitHub Actions workflows to create a Neon branch for every Vercel preview deployment
+- [Preview branches with Fly.io](https://github.com/neondatabase/preview-branches-with-fly): Demonstrates using GitHub Actions workflows to create a Neon branch for every Fly.io preview deployment
+- [Neon Twitter app](https://github.com/neondatabase/neon_twitter): Demonstrates using GitHub Actions workflows to create a Neon branch for schema validation and perform migrations
 
 ## Connect more Neon projects with the GitHub App
 
@@ -238,12 +228,10 @@ To connect another Neon project to a GitHub repository:
 
 1. In the Neon Console, navigate to the **Integrations** page in your Neon project.
 2. Locate the **GitHub** integration and click **Add**.
-   ![GitHub App card](/docs/guides/github_card.png)
+   
 3. Select a GitHub repository to connect to your Neon project, and click **Connect**.
 
-
-Connecting to the same GitHub repository from different Neon projects is not supported.
-
+   **Note**: Connecting to the same GitHub repository from different Neon projects is not supported.
 
 ## Secret and variable set by the GitHub integration
 
@@ -253,15 +241,13 @@ When connecting a Neon project to a GitHub repository, the GitHub integration pe
 - Creates a `NEON_API_KEY` secret in your GitHub repository
 - Adds a `NEON_PROJECT_ID` variable to your GitHub repository
 
-The `NEON_API_KEY` allows you to run any [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) method or [Neon CLI](/docs/reference/neon-cli) command, which means you can develop actions and workflows that create, update, and delete various objects in Neon such as projects, branches, databases, roles, and computes.
+The `NEON_API_KEY` allows you to run any [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) method or [Neon CLI](https://neon.com/docs/reference/neon-cli) command, which means you can develop actions and workflows that create, update, and delete various objects in Neon such as projects, branches, databases, roles, and computes.
 
 The `NEON_PROJECT_ID` variable defines the Neon project that is connected to the repository. Operations run on Neon via the Neon API or CLI typically require specifying the Neon project ID, as a Neon account may have more than one Neon project.
 
 The sample GitHub Actions workflow provided by the Neon GitHub integration depends on these variables and secrets to perform actions in Neon.
 
-    
-    The variables and secrets are removed if you disconnect a Neon project from the associated GitHub repository. The items are removed for all Neon projects and associated repositories if you remove the Neon GitHub integration from your Neon account. See [Remove the GitHub integration](#remove-the-github-integration).
-    
+       **Note**: The variables and secrets are removed if you disconnect a Neon project from the associated GitHub repository. The items are removed for all Neon projects and associated repositories if you remove the Neon GitHub integration from your Neon account. See [Remove the GitHub integration](https://neon.com/docs/guides/neon-github-integration#remove-the-github-integration).
 
 ### Neon API key
 

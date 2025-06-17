@@ -1,6 +1,6 @@
 # Use Neon Postgres with Railway
 
-> This guide demonstrates how to deploy a simple Node.js application connected to a Neon Postgres database on Railway, covering database setup, application implementation, and deployment configuration.
+> The document "Use Neon Postgres with Railway" guides users on integrating Neon Postgres with Railway by detailing the steps to connect and configure the database within the Railway platform.
 
 ## Source
 
@@ -160,6 +160,8 @@ To delete your Neon project, follow the steps outlined in the Neon documentation
 ## Source code
 
 You can find the source code for the application described in this guide on GitHub.
+
+- [Use Neon Postgres with Railway](https://github.com/neondatabase/examples/tree/main/deploy-with-railway): Connect a Neon Postgres database to your Node application deployed with Railway
 
 ## Resources
 

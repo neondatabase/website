@@ -1,22 +1,18 @@
 # AI Rules and Prompts
 
-> This guide explains how to enhance AI development with Neon-specific context rules for tools like Cursor, covering available rules for Neon Auth, Neon Serverless, and Neon+Drizzle integration, with instructions for adding these rules to your project.
+> The "AI Rules and Prompts" document outlines guidelines and examples for creating effective AI prompts within the Neon platform, assisting users in leveraging AI capabilities for database management tasks.
 
 ## Source
 
 - [AI Rules and Prompts HTML](https://neon.com/docs/ai/ai-rules): The original HTML version of this documentation
 
-## Overview
-
 Boost your productivity with AI context rules for Neon. These rules help AI tools like [Cursor](https://www.cursor.so/) understand Neon's features, leading to more accurate code suggestions and fewer common mistakes.
 
 ## Available rules
 
-Neon provides several specialized AI context rules:
-
-- **Neon Auth**: Stack Auth integration, database syncing, and authentication patterns
-- **Neon Serverless**: Efficient queries, connection pooling, and serverless best practices
-- **Neon + Drizzle**: ORM setup, schema management, and usage patterns with Drizzle
+- [Neon Auth](https://neon.com/docs/ai/ai-rules-neon-auth): Stack Auth integration, database syncing, and authentication patterns
+- [Neon Serverless](https://neon.com/docs/ai/ai-rules-neon-serverless): Efficient queries, connection pooling, and serverless best practices
+- [Neon + Drizzle](https://neon.com/docs/ai/ai-rules-neon-drizzle): ORM setup, schema management, and usage patterns with Drizzle
 
 ## How it works
 
@@ -27,6 +23,8 @@ AI rules are `.mdc` files that specify which types of files they apply to (such 
 Here's a practical example using [Cursor](https://www.cursor.so). A developer has implemented authentication in their server-rendered page and wants to confirm best practices:
 
 **Developer query**: _"Using the neon-auth.mdc rule, how do I secure a server-rendered page?"_
+
+
 
 The AI confirms that using `stackServerApp.getUser({ or: "redirect" })` is the correct approach for server-side authentication, providing additional context and explanation.
 

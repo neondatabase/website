@@ -3,7 +3,7 @@ title: Import Data Assistant
 subtitle: Move your database to Neon using our automated import tool
 enableTableOfContents: true
 tag: beta
-updatedOn: '2025-05-30T16:54:40.482Z'
+updatedOn: '2025-06-02T15:04:05.574Z'
 redirectFrom:
   - /docs/import/migration-assistant
 ---
@@ -102,7 +102,7 @@ After a successful import:
 ## Need Help?
 
 - For databases **larger than 10GB**: [Contact our migration team](/migration-assistance)
-- For **technical issues**: [Contact support](/contact-support)
+- For **technical issues**: [Contact support](/docs/introduction/support)
 - For **provider-specific questions**: Let us know what database provider you're using when you contact us
 
 If your database import failed for any reason, please [contact our support team](/migration-assistance). We're here to help you get up and running, including assistance with databases larger than 10GB.

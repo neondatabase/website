@@ -3,7 +3,7 @@ title: Manage Neon on Azure
 subtitle: Instructions for managing your Neon resource on Azure
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-05-30T17:15:06.967Z'
+updatedOn: '2025-06-02T15:04:05.564Z'
 ---
 
 <InfoBlock>
@@ -105,15 +105,14 @@ To retrieve a connection URL for your Neon database:
 
 You can toggle the **Connection pooling** option to use a pooled connection string, which supports up to 10,000 concurrent connections. A pooled connection string is recommended for most use cases. Use a direct connection for `pg_dump`, session-dependent features, or schema migrations. For more about pooled connections, see [Connection pooling](/docs/connect/connection-pooling).
 
-For more about connecting to your Neon database, see [Connect from any app](/connect/connect-from-any-app).
+For more about connecting to your Neon database, see [Connect from any app](/docs/connect/connect-from-any-app).
 
 ## Transfer projects to an Azure-created Neon organization
 
 You can transfer existing Neon projects to an Azure-created organization, but note these restrictions:
 
-- The Neon project you are transferring must belong to a personal Neon account, not an organization.
 - The Neon project you are transferring must be in an [Azure region](/docs/introduction/regions#azure-regions). Azure-created Neon organizations do not support projects created in [AWS regions](/docs/introduction/regions#aws-regions).
-- The billing plan of the Azure-managed organization must match or exceed the billing plan of the personal Neon account you are transferring projects from. For example, attempting to transfer projects from a Neon paid plan personal account to a Free plan Azure-managed organization will result in an error.
+- The billing plan of the Azure-managed organization must match or exceed the billing plan of the organization you are transferring projects from. For example, attempting to transfer projects from a Neon paid plan organization to a Free plan Azure-managed organization will result in an error.
 
 For detailed transfer steps, see [Transfer projects to an organization](/docs/manage/orgs-project-transfer).
 
