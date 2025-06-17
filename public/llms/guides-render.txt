@@ -1,6 +1,10 @@
 # Use Neon Postgres with Render
 
-Connect a Neon Postgres database to your Node application deployed with Render
+> The document "Use Neon Postgres with Render" guides Neon users on integrating Neon Postgres with Render, detailing the steps to connect and configure the database within the Render platform.
+
+## Source
+
+- [Use Neon Postgres with Render HTML](https://neon.com/docs/guides/render): The original HTML version of this documentation
 
 [Render](https://render.com) is a comprehensive cloud service that provides hosting for web applications and static sites, with PR previews, zero-downtime deployments, and more. Render supports full-stack applications, offering both web services and background workers.
 
@@ -150,15 +154,13 @@ Whenever you update your code and push it to your GitHub repository, Render will
 
 To remove your application from Render, navigate to the dashboard, select `Settings` for the deployed application, and scroll down to find the "Delete Web Service" option.
 
-To delete your Neon project, follow the steps outlined in the Neon documentation under [Delete a project](/docs/manage/projects#delete-a-project).
+To delete your Neon project, follow the steps outlined in the Neon documentation under [Delete a project](https://neon.com/docs/manage/projects#delete-a-project).
 
 ## Source code
 
 You can find the source code for the application described in this guide on GitHub.
 
-
-Use Neon Postgres with Render
-
+- [Use Neon Postgres with Render](https://github.com/neondatabase/examples/tree/main/deploy-with-render): Connect a Neon Postgres database to your Node application deployed with Render
 
 ## Resources
 

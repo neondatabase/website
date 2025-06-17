@@ -1,15 +1,19 @@
 # Manage branches
 
-Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `main`, which is also designated as your [default branch](#default-branch). You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](/docs/introduction/plans) define the number of branches you can create.
+> The "Manage branches" document explains how Neon users can create, list, switch, and delete branches within their database projects, facilitating efficient database version control and management.
+
+## Source
+
+- [Manage branches HTML](https://neon.com/docs/manage/branches): The original HTML version of this documentation
+
+Data resides in a branch. Each Neon project is created with a [root branch](https://neon.com/docs/manage/branches#root-branch) called `main`, which is also designated as your [default branch](https://neon.com/docs/manage/branches#default-branch). You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](https://neon.com/docs/introduction/plans) define the number of branches you can create.
 
 A child branch is a copy-on-write clone of the parent branch. You can modify the data in a branch without affecting the data in the parent branch.
-For more information about branches and how you can use them in your development workflows, see [Branching](/docs/introduction/branching).
+For more information about branches and how you can use them in your development workflows, see [Branching](https://neon.com/docs/introduction/branching).
 
-You can create and manage branches using the Neon Console, [Neon CLI](/docs/reference/neon-cli), or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+You can create and manage branches using the Neon Console, [Neon CLI](https://neon.com/docs/reference/neon-cli), or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
-
-When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, which will add to your storage usage as they age out of your project's [history retention window](/docs/introduction/point-in-time-restore#history-retention).
-
+   **Important**: When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, which will add to your storage usage as they age out of your project's [restore window](https://neon.com/docs/introduction/branching#restore-window).
 
 ## Create a branch
 
@@ -18,23 +22,19 @@ To create a branch:
 1. In the Neon Console, select a project.
 2. Select **Branches**.
 3. Click **Create branch** to open the branch creation dialog.
-   ![Create branch dialog](/docs/manage/create_branch.png)
-4. Select the **Data and schema** option (the default) to create a branch with both schema and data. If you're interested in schema-only branches, see [Schema-only branches](/docs/guides/branching-schema-only).
+   
+4. Select the **Data and schema** option (the default) to create a branch with both schema and data. If you're interested in schema-only branches, see [Schema-only branches](https://neon.com/docs/guides/branching-schema-only).
 5. Enter a name for the branch.
 6. Select a parent branch — the branch you want to branch from.
 7. Select an **Include data up to** option to specify the data to be included in your branch.
 
-
-The **Specific date and time** and the **Specific Log Sequence Number Data** options do not include data changes that occurred after the specified date and time or LSN. You can only specify a date and time or LSN value that falls within your [history retention window](/docs/manage/projects#configure-history-retention).
-
+   **Note**: The **Specific date and time** and the **Specific Log Sequence Number Data** options do not include data changes that occurred after the specified date and time or LSN. You can only specify a date and time or LSN value that falls within your [restore window](https://neon.com/docs/manage/projects#configure-restore-window).
 
 8. Click **Create new branch**.
 
    You are presented with the connection details for your new branch and directed to the **Branch** overview page where you are shown the details for your new branch.
 
-   
-   When creating a new branch, the branch will have the same Postgres roles and passwords as the parent branch. If you want your branch created with new role passwords, you can enable [branch protection](/docs/guides/protected-branches).
-   
+      **Note** Postgres role passwords on branches: When creating a new branch, the branch will have the same Postgres roles and passwords as the parent branch. If you want your branch created with new role passwords, you can enable [branch protection](https://neon.com/docs/guides/protected-branches).
 
 ## View branches
 
@@ -43,7 +43,7 @@ To view the branches in a Neon project:
 1. In the Neon Console, select a project.
 1. Select **Branches** to view all current branches in the project.
 
-   ![all branches](/docs/manage/branches_all_list.png)
+   
 
    Branch details in this table view include:
 
@@ -57,11 +57,11 @@ To view the branches in a Neon project:
 
 1. Select a branch from the table to view details about the branch.
 
-   ![View branch details](/docs/manage/branch_details.png)
+   
 
    Branch details shown on the branch page may include:
 
-   - **Archive status**: This only appears if the branch branch was archived. For more, see [Branch archiving](/docs/guides/branch-archiving).
+   - **Archive status**: This only appears if the branch was archived. For more, see [Branch archiving](https://neon.com/docs/guides/branch-archiving).
    - **ID**: The branch ID. Branch IDs have a `br-` prefix.
    - **Created on**: The date and time the branch was created.
    - **Default compute hours**: The compute hours used by the default branch in the current billing period.
@@ -69,19 +69,19 @@ To view the branches in a Neon project:
    - **Data size**: The logical data size of the branch. Data size does not include history.
    - **Parent branch**: The branch from which this branch was created (only applicable to child branches).
    - **Branching point**: The point in time, in terms of data, from which the branch was created (only applicable to child branches).
-   - **Last data reset**: The last time the branch was reset from the parent branch (only applicable to child branches). For information about the **Reset from parent** option, see [Reset from parent](/docs/guides/reset-from-parent).
-   - **Compare to parent**: For information about the **Open schema diff** option, see [Schema diff](/docs/guides/schema-diff).
+   - **Last data reset**: The last time the branch was reset from the parent branch (only applicable to child branches). For information about the **Reset from parent** option, see [Reset from parent](https://neon.com/docs/guides/reset-from-parent).
+   - **Compare to parent**: For information about the **Open schema diff** option, see [Schema diff](https://neon.com/docs/guides/schema-diff).
 
    The branch details page also includes details about the **Computes**, **Roles & Databases**, and **Child branches** that belong to the branch. All of these objects are associated with a particular branch. For information about these objects, see:
 
-   - [Manage computes](/docs/manage/computes#view-a-compute).
-   - [Manage roles](/docs/manage/roles)
-   - [Manage databases](/docs/manage/databases)
-   - [View branches](#view-branches)
+   - [Manage computes](https://neon.com/docs/manage/computes#view-a-compute).
+   - [Manage roles](https://neon.com/docs/manage/roles)
+   - [Manage databases](https://neon.com/docs/manage/databases)
+   - [View branches](https://neon.com/docs/manage/branches#view-branches)
 
 ## Branch archiving
 
-On the Free Plan, Neon automatically archives inactive branches to cost-efficient archive storage after a defined threshold. For more, see [Branch archiving](/docs/guides/branch-archiving).
+On the Free Plan, Neon automatically archives inactive branches to cost-efficient archive storage after a defined threshold. For more, see [Branch archiving](https://neon.com/docs/guides/branch-archiving).
 
 ## Rename a branch
 
@@ -95,7 +95,7 @@ Neon permits renaming a branch, including your project's default branch. To rena
 
 ## Set a branch as default
 
-Each Neon project is created with a default branch called `main`, but you can designate any branch as your project's default branch. The advantage of the default branch is that it has a larger compute hour allowance on the Free Plan. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. For more information, see [Default branch](#default-branch).
+Each Neon project is created with a default branch called `main`, but you can designate any branch as your project's default branch. The advantage of the default branch is that it has a larger compute hour allowance on the Free Plan. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. For more information, see [Default branch](https://neon.com/docs/manage/branches#default-branch).
 
 To set a branch as the default branch:
 
@@ -117,47 +117,43 @@ To set a branch as protected:
 4. On the branch overview page, click the **Actions** drop-down menu and select **Set as protected**.
 5. In the **Set as protected** confirmation dialog, click **Set as protected** to confirm your selection.
 
-For details and configuration instructions, refer to our [Protected branches guide](/docs/guides/protected-branches).
+For details and configuration instructions, refer to our [Protected branches guide](https://neon.com/docs/guides/protected-branches).
 
 ## Connect to a branch
 
 Connecting to a database in a branch requires connecting via a compute associated with the branch. The following steps describe how to connect using `psql` and a connection string obtained from the Neon Console.
 
-
-You can also query the databases in a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
-
+   **Tip**: You can also query the databases in a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor).
 
 1. In the Neon Console, select a project.
 2. Find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. Select the branch, the database, and the role you want to connect with.
-   ![Connection details modal](/docs/connect/connection_details.png)
+   
 3. Copy the connection string. A connection string includes your role name, the compute hostname, and database name.
 4. Connect with `psql` as shown below.
 
-   ```bash shouldWrap
+   ```bash
    psql postgresql://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
-   
-   A compute hostname starts with an `ep-` prefix. You can also find a compute hostname on the **Branches** page in the Neon Console. See [View branches](#view-branches).
-   
+      **Tip**: A compute hostname starts with an `ep-` prefix. You can also find a compute hostname on the **Branches** page in the Neon Console. See [View branches](https://neon.com/docs/manage/branches#view-branches).
 
-   If you want to connect from an application, the **Connect to your database modal**, accessed by clicking **Connect** on the project **Dashboard**, and the [Frameworks](/docs/get-started-with-neon/frameworks) and [Languages](/docs/get-started-with-neon/languages) sections in the documentation provide various connection examples.
+   If you want to connect from an application, the **Connect to your database modal**, accessed by clicking **Connect** on the project **Dashboard**, and the [Frameworks](https://neon.com/docs/get-started-with-neon/frameworks) and [Languages](https://neon.com/docs/get-started-with-neon/languages) sections in the documentation provide various connection examples.
 
 ## Reset a branch from parent
 
 You can use Neon's **Reset from parent** feature to instantly update a branch with the latest schema and data from its parent. This feature can be an integral part of your CI/CD automation.
 
-You can use the Neon Console, CLI, or API. For details, see [Reset from parent](/docs/guides/reset-from-parent).
+You can use the Neon Console, CLI, or API. For details, see [Reset from parent](https://neon.com/docs/guides/reset-from-parent).
 
 ## Restore a branch to its own or another branch's history
 
-There are several restore operations available using Neon's Branch Restore feature:
+There are several restore operations available using Neon's instant restore feature:
 
 - Restore a branch to its own history
 - Restore a branch to the head of another branch
 - Restore a branch to the history of another branch
 
-You can use the Neon Console, CLI, or API. For more details, see [Branch Restore](/docs/guides/branch-restore).
+You can use the Neon Console, CLI, or API. For more details, see [Instant restore](https://neon.com/docs/guides/branch-restore).
 
 ## Delete a branch
 
@@ -173,7 +169,7 @@ To delete a branch:
 
 ## Check the data size
 
-You can check the logical data size for the databases on a branch by viewing the **Data size** value on the **Branches** page or page in the Neon Console. Alternatively, you can run the following query on your branch from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client connected to your database:
+You can check the logical data size for the databases on a branch by viewing the **Data size** value on the **Branches** page or page in the Neon Console. Alternatively, you can run the following query on your branch from the [Neon SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client connected to your database:
 
 ```sql
 SELECT pg_size_pretty(sum(pg_database_size(datname)))
@@ -182,7 +178,7 @@ FROM pg_database;
 
 The query value may differ slightly from the **Data size** reported in the Neon Console.
 
-Data size is your logical data size. It does not include the [history](/docs/reference/glossary#history) that Neon retains to support features like point-in-time restore.
+Data size is your logical data size. It does not include the [history](https://neon.com/docs/reference/glossary#history) that Neon retains to support features like instant restore.
 
 ## Branch types
 
@@ -190,12 +186,12 @@ Neon has different branch types with different characteristics.
 
 ### Root branch
 
-A root branch is a branch without a parent branch. Each Neon project starts with a root branch named `main`, which cannot be deleted and is set as the [default branch](#default-branch) for the project.
+A root branch is a branch without a parent branch. Each Neon project starts with a root branch named `main`, which cannot be deleted and is set as the [default branch](https://neon.com/docs/manage/branches#default-branch) for the project.
 
 Neon also supports two other types of root branches that have no parent but _can_ be deleted:
 
-- [Backup branches](#backup-branch), created by point-in-time restore operations on other root branches.
-- [Schema-only branches](#schema-only-branch).
+- [Backup branches](https://neon.com/docs/manage/branches#backup-branch), created by instant restore operations on other root branches.
+- [Schema-only branches](https://neon.com/docs/manage/branches#schema-only-branch).
 
 The number of root branches allowed in a project depends on your Neon plan.
 
@@ -224,45 +220,48 @@ Any branch not designated as the default branch is considered a non-default bran
 Neon's protected branches feature implements a series of protections:
 
 - Protected branches cannot be deleted.
-- Protected branches cannot be [reset](/docs/manage/branches#reset-a-branch-from-parent).
+- Protected branches cannot be [reset](https://neon.com/docs/manage/branches#reset-a-branch-from-parent).
 - Projects with protected branches cannot be deleted.
 - Computes associated with a protected branch cannot be deleted.
-- New passwords are automatically generated for Postgres roles on branches created from protected branches. [See below](#new-passwords-generated-for-postgres-roles-on-child-branches).
-- With additional configuration steps, you can apply IP Allow restrictions to protected branches only. The [IP Allow](/docs/introduction/ip-allow) feature is available on the Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans. See [below](#how-to-apply-ip-restrictions-to-protected-branches).
-- Protected branches are not [archived](/docs/guides/branch-archiving) due to inactivity.
+- New passwords are automatically generated for Postgres roles on branches created from protected branches. [See below](https://neon.com/docs/manage/branches#new-passwords-generated-for-postgres-roles-on-child-branches).
+- With additional configuration steps, you can apply IP Allow restrictions to protected branches only. The [IP Allow](https://neon.com/docs/introduction/ip-allow) feature is available on the Neon [Scale](https://neon.com/docs/introduction/plans#scale) and [Business](https://neon.com/docs/introduction/plans#business) plans. See [below](https://neon.com/docs/manage/branches#how-to-apply-ip-restrictions-to-protected-branches).
+- Protected branches are not [archived](https://neon.com/docs/guides/branch-archiving) due to inactivity.
 
-Typically, a protected status is given to a branch or branches that hold production data or sensitive data. The protected branch feature is only supported on Neon's paid plans. See [Set a branch as protected](#set-a-branch-as-protected).
+Typically, a protected status is given to a branch or branches that hold production data or sensitive data. The protected branch feature is only supported on Neon's paid plans. See [Set a branch as protected](https://neon.com/docs/manage/branches#set-a-branch-as-protected).
 
 ### Schema-only branch
 
 A branch that replicates only the database schema from a source branch, without copying any of the actual data. This feature is particularly valuable when working with sensitive information. Rather than creating branches that include confidential data, you can duplicate just the database structure and then populate it with your own data.
 
-Schema-only branches are [root branches](#root-branch), meaning they have no parent. As a root branch, each schema-only branch starts an independent line of data in a Neon project.
+Schema-only branches are [root branches](https://neon.com/docs/manage/branches#root-branch), meaning they have no parent. As a root branch, each schema-only branch starts an independent line of data in a Neon project.
 
-See [Schema-only branches](/docs/guides/branching-schema-only).
+See [Schema-only branches](https://neon.com/docs/guides/branching-schema-only).
 
 ### Backup branch
 
-A branch created by a [point-in-time restore](#point-in-time-restore) operation. When you restore a branch from a particular point in time, the current branch is saved as a backup branch. Performing a restore operation on a root branch, creates a backup branch without a parent branch (a root branch). See [Branch restore](/docs/guides/branch-restore).
+A branch created by an [instant restore](https://neon.com/docs/manage/branches#branch-restore) operation. When you restore a branch from a particular point in time, the current branch is saved as a backup branch. Performing a restore operation on a root branch, creates a backup branch without a parent branch (a root branch). See [Instant restore](https://neon.com/docs/guides/branch-restore).
 
 ## Branching with the Neon CLI
 
-The Neon CLI supports creating and managing branches. For instructions, see [Neon CLI commands — branches](/docs/reference/cli-branches). For a Neon CLI branching guide, see [Branching with the Neon CLI](/docs/reference/cli-branches).
+The Neon CLI supports creating and managing branches. For instructions, see [Neon CLI commands — branches](https://neon.com/docs/reference/cli-branches). For a Neon CLI branching guide, see [Branching with the Neon CLI](https://neon.com/docs/reference/cli-branches).
 
 ## Branching with the Neon API
 
 Branch actions performed in the Neon Console can also be performed using the Neon API. The following examples demonstrate how to create, view, and delete branches using the Neon API. For other branch-related API methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
-
-The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all of the attributes for a particular method, refer to the method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
-
+   **Note**: The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all of the attributes for a particular method, refer to the method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 The `jq` option specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
 
 ### Prerequisites
 
-A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key). In the examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
+A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](https://neon.com/docs/manage/api-keys#create-an-api-key). In the examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
+---
+updatedOn: '2024-12-13T21:17:10.768Z'
+---
+
+   **Note**: To learn more about the types of API keys you can create — personal, organization, or project-scoped — see [Manage API Keys](https://neon.com/docs/manage/api-keys).
 
 ### Create a branch with the API
 
@@ -274,9 +273,7 @@ POST /projects/{project_id}/branches
 
 The API method appears as follows when specified in a cURL command. The `endpoints` attribute creates a compute, which is required to connect to the branch. A branch can be created with or without a compute. The `branch` attribute specifies the parent branch.
 
-
-This method does not require a request body. Without a request body, the method creates a branch from the project's default branch, and a compute is not created.
-
+   **Note**: This method does not require a request body. Without a request body, the method creates a branch from the project's default branch, and a compute is not created.
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches' \
@@ -296,13 +293,11 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches' \
 ```
 
 - The `project_id` for a Neon project is found on the **Settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API.
-- The `parent_id` can be obtained by listing the branches for your project. See [List branches](#list-branches-with-the-api). The `` is the `id` of the branch you are branching from. A branch `id` has a `br-` prefix. You can branch from your Neon project's default branch or a previously created branch.
+- The `parent_id` can be obtained by listing the branches for your project. See [List branches](https://neon.com/docs/manage/branches#list-branches-with-the-api). The `<parent_id>` is the `id` of the branch you are branching from. A branch `id` has a `br-` prefix. You can branch from your Neon project's default branch or a previously created branch.
 
 The response body includes information about the branch, the branch's compute, and the `create_branch` and `start_compute` operations that were initiated.
 
-
-Response body
-
+Details: Response body
 ```json
 {
   "branch": {
@@ -367,8 +362,6 @@ Response body
 }
 ```
 
-
-
 ### List branches with the API
 
 The following Neon API method lists branches for the specified project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojectbranches).
@@ -389,9 +382,7 @@ The `project_id` for a Neon project is found on the **Settings** page in the Neo
 
 The response body lists the project's default branch and any child branches. The name of the default branch in this example is `main`.
 
-
-Response body
-
+Details: Response body
 ```json
 {
   "branches": [
@@ -420,8 +411,6 @@ Response body
 }
 ```
 
-
-
 ### Delete a branch with the API
 
 The following Neon API method deletes the specified branch. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteprojectbranch).
@@ -440,13 +429,11 @@ curl -X 'DELETE' \
 ```
 
 - The `project_id` for a Neon project is found on the **Settings** page in the Neon Console, or you can find it by listing the projects for your Neon account using the Neon API.
-- The `branch_id` can be found by listing the branches for your project. The `` is the `id` of a branch. A branch `id` has a `br-` prefix. See [List branches](#list-branches-with-the-api).
+- The `branch_id` can be found by listing the branches for your project. The `<branch_id>` is the `id` of a branch. A branch `id` has a `br-` prefix. See [List branches](https://neon.com/docs/manage/branches#list-branches-with-the-api).
 
 The response body shows information about the branch being deleted and the `suspend_compute` and `delete_timeline` operations that were initiated.
 
-
-Response body
-
+Details: Response body
 ```json
 {
   "branch": {
@@ -485,6 +472,4 @@ Response body
 }
 ```
 
-
-
-You can verify that a branch is deleted by listing the branches for your project. See [List branches](#list-branches-with-the-api). The deleted branch should no longer be listed.
+You can verify that a branch is deleted by listing the branches for your project. See [List branches](https://neon.com/docs/manage/branches#list-branches-with-the-api). The deleted branch should no longer be listed.

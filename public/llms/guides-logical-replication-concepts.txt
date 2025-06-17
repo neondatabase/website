@@ -1,20 +1,22 @@
 # Postgres logical replication concepts
 
-Learn about PostgreSQL logical replication concepts
+> The document "Postgres logical replication concepts" explains the principles of logical replication in PostgreSQL, detailing how Neon users can replicate data changes between databases using logical decoding and replication slots.
+
+## Source
+
+- [Postgres logical replication concepts HTML](https://neon.com/docs/guides/logical-replication-concepts): The original HTML version of this documentation
 
 Logical Replication is a method of replicating data between databases or between your database and other data services or platforms. It differs from physical replication in that it replicates transactional changes rather than copying the entire database byte-for-byte. This approach allows for selective replication, where users can choose specific tables or rows for replication. It works by capturing DML operations in the source database and applying these changes to the target, which could be another Postgres database or data platform.
 
 With logical replication, you can copy some or all of your data to a different location and continue sending updates from your source database in real-time, allowing you to maintain up-to-date copies of your data in different locations.
 
-
-For step-by-step setup instructions, refer to our [logical replication guides](/docs/guides/logical-replication-guide).
-
+   **Note**: For step-by-step setup instructions, refer to our [logical replication guides](https://neon.com/docs/guides/logical-replication-guide).
 
 ## Publisher subscriber model
 
 The Postgres logical replication architecture is very simple. It uses a _publisher and subscriber_ model for data replication. The primary data source is the _publisher_, and the database or platform receiving the data is the _subscriber_. On the initial connection from a subscriber, all the data is copied from the publisher to the subscriber. After the initial copy operation, any changes made on the publisher are sent to the subscriber. You can read more about this model in the [PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication.html).
 
-![Logical replication publisher subscriber architecture](/docs/guides/logical_replication_model.jpg)
+
 
 ## Enabling logical replication
 
@@ -58,7 +60,7 @@ A subscription represents the downstream side of logical replication. Data is re
 
 A single subscriber can maintain multiple subscriptions, including multiple subscriptions to the same publisher.
 
-You can create a subscription on a "susbcriber" database or platform using [CREATE SUBSCRIPTION](https://www.postgresql.org/docs/current/sql-createsubscription.html) syntax. Building on the `users_publication` example above, here’s how you would create a subscription:
+You can create a subscription on a "susbcriber" database or platform using [CREATE SUBSCRIPTION](https://www.postgresql.org/docs/current/sql-createsubscription.html) syntax. Building on the `users_publication` example above, here's how you would create a subscription:
 
 ```sql
 CREATE SUBSCRIPTION users_subscription
@@ -96,9 +98,7 @@ The `max_replication_slots` configuration parameter on Neon is set to `10` by de
 max_replication_slots = 10
 ```
 
-
-To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after a period of time if there are other _active_ replication slots**. If you have or intend on having more than one replication slot, please see [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) to learn more.
-
+   **Important**: To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after a period of time if there are other _active_ replication slots**. If you have or intend on having more than one replication slot, please see [Unused replication slots](https://neon.com/docs/guides/logical-replication-neon#unused-replication-slots) to learn more.
 
 ### Decoder plugins
 

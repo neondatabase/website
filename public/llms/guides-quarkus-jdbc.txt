@@ -1,16 +1,14 @@
 # Connect Quarkus (JDBC) to Neon
 
-Learn how to connect to Neon from Quarkus using JDBC
+> The document "Connect Quarkus (JDBC) to Neon" outlines the steps for configuring a Quarkus application to connect to a Neon database using JDBC, detailing necessary dependencies, configuration settings, and connection properties specific to Neon's environment.
+
+## Source
+
+- [Connect Quarkus (JDBC) to Neon HTML](https://neon.com/docs/guides/quarkus-jdbc): The original HTML version of this documentation
 
 [Quarkus](https://quarkus.io/) is a Java framework optimized for cloud environments. This guide shows how to connect to Neon from a Quarkus project using the PostgreSQL JDBC driver.
 
 To connect to Neon from a Quarkus application using the Postgres JDBC Driver:
-
-1. [Create a Neon Project](#create-a-neon-project)
-2. [Create a Quarkus project and add dependencies](#create-a-quarkus-project)
-3. [Configure a PostgreSQL data source](#configure-a-postgresql-data-source)
-4. [Use the PostgreSQL JDBC Driver](#use-the-postgresql-jdbc-driver)
-5. [Run the application](#run-the-application)
 
 ## Create a Neon project
 
@@ -37,7 +35,7 @@ You now have a Quarkus project in a folder named `neon-with-quarkus-jdbc` with t
 
 Create a `.env` file in the root of your Quarkus project directory. Configure a JDBC data source using the components of your Neon database connection string and specifying the database kind as shown:
 
-```shell shouldWrap
+```shell
 QUARKUS_DATASOURCE_DB_KIND=postgresql
 QUARKUS_DATASOURCE_USERNAME=[user]
 QUARKUS_DATASOURCE_PASSWORD=[password]
@@ -45,9 +43,7 @@ QUARKUS_DATASOURCE_PASSWORD=[password]
 QUARKUS_DATASOURCE_JDBC_URL=jdbc:postgresql://[neon_hostname]/[dbname]?sslmode=require
 ```
 
-
-You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
-
+   **Note**: You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).
 
 ## Use the PostgreSQL JDBC Driver
 

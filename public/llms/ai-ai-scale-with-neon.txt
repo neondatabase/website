@@ -1,12 +1,10 @@
 # Scale your AI application with Neon
 
-> This guide explains how to scale AI applications built with Neon and pgvector, covering vertical scaling with various compute sizes, autoscaling capabilities, storage options, and using read replicas to handle vector similarity search workloads efficiently.
+> The document "Scale your AI application with Neon" outlines steps for scaling AI applications using Neon's serverless Postgres database, focusing on optimizing performance and resource management specific to AI workloads.
 
 ## Source
 
 - [Scale your AI application with Neon HTML](https://neon.com/docs/ai/ai-scale-with-neon): The original HTML version of this documentation
-
-## Overview
 
 You can scale your AI application built on Postgres with `pgvector` in the same way you would any Postgres app: Vertically with added CPU, RAM, and storage, or horizontally with read replicas.
 
@@ -53,7 +51,7 @@ In Neon, scaling vertically is a matter of selecting the desired compute size. N
 | 54                 | 54   | 216 GB | 3620 MB              |
 | 56                 | 56   | 224 GB | 3754 MB              |
 
-See [Edit a compute](https://neon.com/docs/manage/endpoints#edit-a-compute) to learn how to configure your compute size. Available compute sizes differ according to your Neon plan. The Neon Free Plan supports computes starting at 0.25 CU, up to 2 CU with autoscaling enabled. The Launch plan offers compute sizes up to 4 CU. Larger computes are available on the Scale and Business plans. See [Neon plans](https://neon.com/docs/introduction/plans).
+See [Edit a compute](https://neon.com/docs/manage/computes#edit-a-compute) to learn how to configure your compute size. Available compute sizes differ according to your Neon plan. The Neon Free Plan supports computes starting at 0.25 CU, up to 2 CU with autoscaling enabled. The Launch plan offers compute sizes up to 4 CU. Larger computes are available on the Scale and Business plans. See [Neon plans](https://neon.com/docs/introduction/plans).
 
 To optimize `pgvector` index build time, you can increase the `maintenance_work_mem` setting for the current session beyond the preconfigured default shown in the table above with a command similar to this:
 
