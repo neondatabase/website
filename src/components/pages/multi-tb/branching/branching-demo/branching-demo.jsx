@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
@@ -44,12 +44,16 @@ const BranchingDemo = ({ className }) => {
   } = useBranchingDemo();
   const { showToast, open, message, type, hideToast } = useToast();
 
-  const { handleSubmit } = useForm({
+  const { handleSubmit, setValue } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
       selectedRows: [],
     },
   });
+
+  useEffect(() => {
+    setValue('selectedRows', selectedRows);
+  }, [selectedRows, setValue]);
 
   const STEPS = {
     0: {
