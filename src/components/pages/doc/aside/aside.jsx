@@ -13,23 +13,18 @@ const Aside = ({
   enableTableOfContents,
   tableOfContents,
   githubPath,
+  className,
 }) => (
   <div
     className={clsx(
       'relative col-span-2 -ml-12 max-w-64 xl:hidden',
       isTemplate
         ? 'col-start-11 2xl:col-span-3 2xl:col-start-10 2xl:ml-auto 2xl:max-w-[238px]'
-        : 'col-start-10 3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6'
+        : 'col-start-10 3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6',
+      className
     )}
   >
-    <div
-      className={clsx(
-        'sticky flex flex-col pb-5',
-        isTemplate
-          ? 'top-[188px] max-h-[calc(100vh-188px)]'
-          : 'top-[136px] max-h-[calc(100vh-136px)]'
-      )}
-    >
+    <div className="sticky top-[136px] flex max-h-[calc(100vh-136px)] flex-col pb-5">
       {enableTableOfContents && <TableOfContents items={tableOfContents} isTemplate={isTemplate} />}
       {isDocsIndex && <ChatOptions isSidebar />}
       {isChangelog && <ChangelogForm isSidebar />}
@@ -47,5 +42,6 @@ Aside.propTypes = {
   enableTableOfContents: PropTypes.bool,
   tableOfContents: PropTypes.array,
   githubPath: PropTypes.string,
+  className: PropTypes.string,
 };
 export default Aside;
