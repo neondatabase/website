@@ -49,7 +49,7 @@ export const scheduleBranchDeletion = async (branchId) => {
         branchId,
         retries: 0,
       },
-      delay: 360, // 6 minutes in seconds
+      delay: 3600, // 1 hour in seconds
     });
   } catch (error) {
     console.error(`[QStash] Failed to schedule deletion for branch ${branchId}:`, error);
