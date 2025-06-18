@@ -51,7 +51,8 @@ Neon’s API is purpose-built to help platforms manage large fleets of Postgres 
 - Automatically suspend inactive databases to reduce costs
 - Monitor usage across thousands of projects
 - Update quotas and configurations without downtime
-- …and more
+
+…and more
 
 <MegaLink tag="Case Study" title="Retool uses the Neon API to manage over 300,000 databases with just one engineer — handling everything from provisioning to quota enforcement." url="/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases" />
 
@@ -64,7 +65,8 @@ Neon allows you to easily **define usage limits per project to manage cost and e
 - Limit egress by plan
 - Track and cap monthly data written
 - Customize suspend timeouts for different tiers
-- …and more
+
+…and more
 
 <MegaLink tag="Case Study" title="Koyeb’s Database Instance Types sets an example of how to use Neon’s quota controls to define compute, storage, write, and data transfer limits per plan." url="https://www.koyeb.com/docs/databases#database-instance-types" />
 
