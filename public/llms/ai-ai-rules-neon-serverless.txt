@@ -1,21 +1,57 @@
 # AI Rules Neon Serverless Driver
 
-> This guide provides context rules for AI tools to help implement the Neon Serverless driver, covering installation, connection patterns, parameter interpolation, WebSocket configuration, lifecycle management, query functions, transactions, environment-specific optimizations, error handling, and library integration.
+> The document outlines the AI Rules for the Neon Serverless Driver, detailing how to configure and implement AI-driven rules within Neon's serverless database environment.
 
 ## Source
 
-- [AI Rules Neon Serverless HTML](https://neon.tech/docs/ai/ai-rules-neon-serverless): The original HTML version of this documentation
+- [AI Rules Neon Serverless Driver HTML](https://neon.com/docs/ai/ai-rules-neon-serverless): The original HTML version of this documentation
+
+Related docs:
+- [Neon Serverless Driver](https://neon.com/docs/serverless/serverless-driver)
+
+Repository:
+- [README](https://github.com/neondatabase-labs/ai-rules#readme)
+- [neon-serverless.mdc](https://github.com/neondatabase-labs/ai-rules/blob/main/neon-serverless.mdc)
+
+---
+updatedOn: '2025-04-08T22:55:27.453Z'
+---
+
+## How to use
+
+You can use these rules in two ways:
+
+## Option 1: Copy from this page
+
+With Cursor, save the [rules](https://docs.cursor.com/context/rules-for-ai#project-rules-recommended) to `.cursor/rules/neon-serverless.mdc` and they'll be automatically applied when working with matching files (`*.ts`, `*.tsx`).
+
+For other AI tools, you can include these rules as context when chatting with your AI assistant - check your tool's documentation for the specific method (like using "Include file" or context commands).
+
+## Option 2: Clone from repository
+
+If you prefer, you can clone or download the rules directly from our [AI Rules repository](https://github.com/neondatabase-labs/ai-rules).
+
+Once added to your project, AI tools will automatically use these rules when working with Neon Serverless code. You can also reference them explicitly in prompts.
+
 
 ## Rules
 
-### Overview
+````markdown
+---
+description: Use these rules to query your Neon database using the Neon Serverless driver
+globs: *.tsx, *.ts
+alwaysApply: false
+---
+
+# Neon Serverless Guidelines
+
+## Overview
 
 This guide provides specific patterns and best practices for connecting to Neon databases in serverless environments. Follow these guidelines to ensure efficient database connections, proper query handling, and optimal performance in functions with ephemeral runtimes.
 
-### Installation
+## Installation
 
 Install the Neon Serverless PostgreSQL driver with the correct package name:
-
 ```bash
 npm install @neondatabase/serverless
 ```
@@ -37,7 +73,7 @@ For projects that depend on pg but want to use Neon:
 
 Avoid incorrect package names like `neon-serverless` or `pg-neon`.
 
-### Connection String
+## Connection String
 
 Use environment variables for database connection strings:
 
@@ -53,7 +89,7 @@ Never hardcode credentials:
 const sql = neon('postgres://username:password@host.neon.tech/neondb');
 ```
 
-### Parameter Interpolation
+## Parameter Interpolation
 
 Use template literals with the SQL tag for safe parameter interpolation:
 
@@ -68,7 +104,7 @@ Don't concatenate strings directly (SQL injection risk):
 const [post] = await sql('SELECT * FROM posts WHERE id = ' + postId);
 ```
 
-### WebSocket Environments
+## WebSocket Environments
 
 Configure WebSocket support for Node.js v21 and earlier:
 
@@ -82,7 +118,7 @@ neonConfig.webSocketConstructor = ws;
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 ```
 
-### Serverless Lifecycle Management
+## Serverless Lifecycle Management
 
 In serverless environments, create, use, and close connections within a single request handler:
 
@@ -103,7 +139,7 @@ export default async (req, ctx) => {
 
 Avoid creating connections outside request handlers as they won't be properly closed.
 
-### Query Functions
+## Query Functions
 
 Choose the appropriate query function based on your needs:
 
@@ -124,7 +160,7 @@ const client = await pool.connect();
 
 Use `neon()` for simple queries rather than `Pool` when possible, and use `transaction()` for multiple related queries.
 
-### Transactions
+## Transactions
 
 Use proper transaction handling with error management:
 
@@ -154,7 +190,7 @@ try {
 
 Always include proper error handling and rollback mechanisms.
 
-### Environment-Specific Optimizations
+## Environment-Specific Optimizations
 
 Apply environment-specific optimizations for best performance:
 
@@ -166,10 +202,10 @@ export const config = {
 };
 
 // For Cloudflare Workers, consider using Hyperdrive instead
-// https://neon.tech/blog/hyperdrive-neon-faq
+// https://neon.com/blog/hyperdrive-neon-faq
 ```
 
-### Error Handling
+## Error Handling
 
 Implement proper error handling for database operations:
 
@@ -193,7 +229,7 @@ try {
 }
 ```
 
-### Library Integration
+## Library Integration
 
 Properly integrate with query builders and ORM libraries:
 
@@ -213,3 +249,4 @@ const db = new Kysely({
 ```
 
 Don't attempt to use the `neon()` function directly with ORMs that expect a Pool interface.
+````

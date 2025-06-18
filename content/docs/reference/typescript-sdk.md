@@ -1,7 +1,7 @@
 ---
 title: TypeScript SDK for the Neon API
 enableTableOfContents: true
-updatedOn: '2025-05-26T10:08:46.877Z'
+updatedOn: '2025-05-30T16:54:40.493Z'
 ---
 
 <InfoBlock>
@@ -190,7 +190,7 @@ createNeonProject('test-project').catch((error) => {
 
 #### Key points:
 
-- The `region_id` parameter specifies the cloud region where the project will be hosted. You can find the list of supported regions at [Neon Regions](https://neon.tech/docs/introduction/regions).
+- The `region_id` parameter specifies the cloud region where the project will be hosted. You can find the list of supported regions at [Neon Regions](/docs/introduction/regions).
 - The `pg_version` parameter specifies the major version of Postgres to use in the project. The currently supported versions are `14`, `15`, `16`, and `17`.
 
 ### Create a Branch

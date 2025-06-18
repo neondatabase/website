@@ -1,12 +1,16 @@
 # Postgres Boolean data type
 
-> The Postgres Boolean data type stores truth values as TRUE, FALSE, or NULL (unknown), using just one byte of storage. It supports flexible input formats like 't', 'yes', 'on', '1' for TRUE and 'f', 'no', 'off', '0' for FALSE, making it ideal for representing binary states in applications.
-
-Postgres Boolean data type provides an efficient way to store and manipulate truth values in your database. This guide explains how to use Boolean values in Postgres, including syntax, storage, and practical examples for common use cases.
+> The document titled "Postgres Boolean data type" explains how to use the Boolean data type in Neon, detailing its syntax, valid values, and usage within SQL queries specific to Neon's PostgreSQL environment.
 
 ## Source
 
-- [Postgres Boolean data type HTML](https://neon.tech/docs/data-types/boolean): The original HTML version of this documentation
+- [Postgres Boolean data type HTML](https://neon.com/docs/data-types/boolean): The original HTML version of this documentation
+
+In Postgres, the Boolean datatype is designed to store truth values. A Boolean column can hold one of three states: `true`, `false`, or `NULL` representing unknown or missing values.
+
+For instance, Boolean values can be used in a dataset to represent the status of an order, whether a user is active, or whether a product is in stock. A Boolean value could also be produced as a result of comparisons or logical operations.
+
+
 
 ## Storage and syntax
 
@@ -19,7 +23,9 @@ A boolean value is stored as a single byte.
 
 ## Example usage
 
-Consider a table of users for a web application. We can add a Boolean column to represent whether a user is active or not:
+Consider a table of users for a web application. We can add a Boolean column to represent whether a user is active or not.
+
+The query below creates a `users` table and inserts some sample data:
 
 ```sql
 CREATE TABLE users (
@@ -38,7 +44,7 @@ VALUES
     ('eve', FALSE, FALSE);
 ```
 
-To find all the users currently active on the website:
+Say we want to find all the users currently active on the website. The `WHERE` clause accepts a Boolean expression, so we can filter down to the rows where the `is_active` column is `TRUE`.
 
 ```sql
 SELECT *
@@ -46,9 +52,22 @@ FROM users
 WHERE is_active = TRUE;
 ```
 
-## Conditional logic
+This query returns the following:
 
-Boolean data types are commonly used in conditional statements like `WHERE`, `IF`, and `CASE`. For example, the `CASE` statement allows you to perform `IF-THEN-ELSE` logic in SQL:
+```text
+| id | username | is_active | has_paid_subscription |
+|----|----------|-----------|-----------------------|
+| 1  | alice    | t         | t                     |
+| 2  | bob      | t         | f                     |
+```
+
+## Other examples
+
+### Conditional logic
+
+Boolean data types are commonly used in conditional statements like `WHERE`, `IF`, and `CASE`. For example, the `CASE` statement is a control flow structure that allows you to perform `IF-THEN-ELSE` logic in SQL.
+
+In the query below, we categorize users based on their activity and account type.
 
 ```sql
 SELECT username,
@@ -62,9 +81,23 @@ SELECT username,
 FROM users;
 ```
 
-## Boolean expressions
+This query returns the following:
 
-Boolean expressions combine multiple boolean values using operators like `AND`, `OR`, and `NOT`. These expressions return boolean values and are crucial in complex SQL queries:
+```text
+| username | user_status   |
+|----------|---------------|
+| alice    | Active Paid   |
+| bob      | Active Free   |
+| charlie  | Inactive Paid |
+| david    | Unknown       |
+| eve      | Inactive Free |
+```
+
+### Boolean expressions
+
+Boolean expressions combine multiple boolean values using operators like `AND`, `OR`, and `NOT`. These expressions return boolean values and are crucial in complex SQL queries.
+
+For example, we can use a Boolean expression to find all the users who are active but don't have a paid subscription yet.
 
 ```sql
 SELECT id, username
@@ -72,9 +105,19 @@ FROM users
 WHERE is_active = TRUE AND has_paid_subscription = FALSE;
 ```
 
-## Boolean aggregations
+This query returns the following:
 
-Postgres supports aggregating over a set of Boolean values, using functions like `bool_and()` and `bool_or()`:
+```text
+| id | username |
+|----|----------|
+| 2  | bob      |
+```
+
+### Boolean aggregations
+
+Postgres also supports aggregating over a set of Boolean values, using functions like `bool_and()` and `bool_or()`.
+
+For example, we can query to check that no inactive users have a paid subscription.
 
 ```sql
 SELECT bool_or(has_paid_subscription) AS inactive_paid_users
@@ -82,9 +125,21 @@ FROM users
 WHERE is_active = FALSE;
 ```
 
-## Boolean in join conditions
+This query returns the following:
 
-Booleans can be effectively used in the `JOIN` clause to match rows across tables:
+```text
+| inactive_paid_users |
+|---------------------|
+| t                   |
+```
+
+This indicates there is at least one inactive user with an ongoing subscription. We should probably email them a reminder to log in.
+
+### Boolean in join conditions
+
+Booleans can be effectively used in the `JOIN` clause to match rows across tables.
+
+In the query below, we join the `users` table with the table containing contact information to send a promotional email to all active users.
 
 ```sql
 WITH contacts (user_id, email) AS (
@@ -98,6 +153,15 @@ WITH contacts (user_id, email) AS (
 SELECT u.id, u.username, c.email
 FROM users u
 JOIN contacts c ON u.id = c.user_id AND u.is_active = TRUE;
+```
+
+This query returns the following:
+
+```text
+| id | username | email           |
+|----|----------|-----------------|
+| 1  | alice    | alice@email.com |
+| 2  | bob      | bob@email.com   |
 ```
 
 ## Additional considerations

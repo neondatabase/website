@@ -149,7 +149,7 @@ If you [insert the new row](postgresql-insert) into the `links` table without sp
 
 ```sql
 INSERT INTO links (link_title, url)
-VALUES('PostgreSQL Tutorial','https://neon.tech/postgresql/');
+VALUES('PostgreSQL Tutorial','https://neon.com/postgresql/');
 ```
 
 The following statement selects data from the `links` table:
@@ -189,14 +189,14 @@ The following statement attempts to insert the url that already exists:
 
 ```sql
 INSERT INTO links(link_title,url)
-VALUES('PostgreSQL','https://neon.tech/postgresql/');
+VALUES('PostgreSQL','https://neon.com/postgresql/');
 ```
 
 It causes an error due to the unique_url constraint:
 
 ```sql
 ERROR:  duplicate key value violates unique constraint "unique_url"
-DETAIL:  Key (url)=(https://neon.tech/postgresql/) already exists.
+DETAIL:  Key (url)=(/postgresql/) already exists.
 ```
 
 The following statement changes the name of the `links` table to `urls`:

@@ -1,6 +1,10 @@
 # Authenticate Neon Postgres application users with Auth0
 
-Learn how to add authentication to a Neon Postgres database application using
+> The document "Authenticate Neon Postgres application users with Auth0" guides Neon users on integrating Auth0 for authenticating application users in a Neon Postgres environment.
+
+## Source
+
+- [Authenticate Neon Postgres application users with Auth0 HTML](https://neon.com/docs/guides/auth-auth0): The original HTML version of this documentation
 
 User authentication is an essential part of most web applications. Modern apps often require features like social login, multi-factor authentication, and secure user data management that complies with privacy regulations.
 
@@ -45,8 +49,7 @@ Also, add a `.env.local` file to the root of your project, which we'll use to st
 touch .env.local
 ```
 
-
-At the time of this post, the `@auth0/nextjs-auth0` package caused import errors related to one of its dependencies (`oauth4webapi`). To stop Next.js from raising the error, add the following to your `nextjs.config.mjs` file:
+   **Note**: At the time of this post, the `@auth0/nextjs-auth0` package caused import errors related to one of its dependencies (`oauth4webapi`). To stop Next.js from raising the error, add the following to your `nextjs.config.mjs` file: 
 
 ```js
 /** @type {import('next').NextConfig} */
@@ -56,8 +59,6 @@ const nextConfig = {
 
 export default nextConfig;
 ```
-
-
 
 Now, we can start building the application.
 
@@ -246,14 +247,14 @@ async function UserInfoBar() {
 
   const { user } = session;
   return (
-    
-      
+    <div className="bg-gray-100 px-4 py-2">
+      <span className="text-gray-800">
         Welcome, {user.name}!{' '}
-        
+        <a href="/api/auth/logout" className="text-blue-600 hover:underline">
           Logout
-        
-      
-    
+        </a>
+      </span>
+    </div>
   );
 }
 
@@ -263,14 +264,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    
-      
-        
-          
+    <UserProvider>
+      <html lang="en">
+        <body className={inter.className}>
+          <UserInfoBar />
           {children}
-        
-      
-    
+        </body>
+      </html>
+    </UserProvider>
   );
 }
 ```
@@ -337,14 +338,14 @@ async function getUserMessage() {
 
 function LoginBox() {
   return (
-    
+    <main className="flex min-h-screen flex-col items-center justify-center p-24">
       <a
         href="/api/auth/login"
         className="text-gray-800 rounded-md bg-[#00E699] px-3.5 py-2.5 text-sm font-semibold shadow-sm hover:bg-[#00e5BF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00E699]"
       >
         Log in
-      
-    
+      </a>
+    </main>
   );
 }
 
@@ -353,49 +354,49 @@ export default async function Home() {
   const existingMessage = await getUserMessage();
 
   if (!session) {
-    return ;
+    return <LoginBox />;
   }
 
   const ui = existingMessage ? (
-    
-      {existingMessage.message}
-      
-        
+    <div className="w-2/3 text-center">
+      <h1 className="text-3xl">{existingMessage.message}</h1>
+      <form action={deleteUserMessage} className="mb-4 w-full rounded px-8 pb-8 pt-6">
+        <div className="w-full text-center">
           <input
             type="submit"
             value={'Delete Quote'}
             className="text-gray-800 cursor-pointer rounded bg-[#00E699] px-4 py-2 font-semibold transition-colors hover:bg-[#00e5BF] focus:outline-none"
           />
-        
-      
-    
+        </div>
+      </form>
+    </div>
   ) : (
-    
-      
+    <form action={createUserMessage} className="w-2/3 rounded px-8 shadow-md">
+      <div className="mb-6">
         <input
           type="text"
           name="message"
           placeholder="Mistakes are the portals of discovery - James Joyce"
           className="text-gray-700 w-full appearance-none rounded border p-3 text-center leading-tight focus:outline-none"
         />
-      
-      
+      </div>
+      <div className="w-full text-center">
         <input
           type="submit"
           value={'Save Quote'}
           className="text-gray-800 cursor-pointer rounded bg-[#00E699] px-4 py-2 font-semibold transition-colors hover:bg-[#00e5BF] focus:outline-none"
         />
-      
-    
+      </div>
+    </form>
   );
 
   return (
-    
-      
+    <main className="align-center -mt-16 flex min-h-screen flex-col items-center justify-center px-24">
+      <h2 className="text-gray-400 pb-6 text-2xl">
         {existingMessage ? 'Your quote is wonderful...' : 'Save an inspiring quote for yourself...'}
-      
+      </h2>
       {ui}
-    
+    </main>
   );
 }
 ```
@@ -428,15 +429,13 @@ To view and manage the users who authenticated with your application, you can na
 
 You can find the source code for the application described in this guide on GitHub.
 
-
-Authentication flow with Auth0
-
+- [Authentication flow with Auth0](https://github.com/neondatabase/guide-neon-next-auth0): Authenticate users of your Neon application with Auth0
 
 ## Resources
 
 For more information on the tools used in this guide, refer to the following documentation:
 
-- [Neon Serverless Driver](/docs/serverless/serverless-driver)
+- [Neon Serverless Driver](https://neon.com/docs/serverless/serverless-driver)
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Drizzle ORM](https://orm.drizzle.team/)
 - [Auth0 Next.js SDK](https://auth0.com/docs/quickstart/webapp/nextjs)

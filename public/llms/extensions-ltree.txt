@@ -1,20 +1,22 @@
 # The ltree extension
 
-> This guide explains how to use the ltree extension in Postgres to store and query hierarchical tree-like structures, covering installation, data modeling, and advanced query operations for parent-child relationships.
+> The document details the ltree extension for Neon, which enables users to store and query data in a hierarchical tree-like structure within a PostgreSQL database.
 
 ## Source
 
-- [The ltree extension HTML](https://neon.tech/docs/extensions/ltree): The original HTML version of this documentation
+- [The ltree extension HTML](https://neon.com/docs/extensions/ltree): The original HTML version of this documentation
 
 The `ltree` extension provides a data type for representing labels of data stored in a hierarchical tree-like structure. It offers specialized functions and operators for efficiently traversing and searching through these tree structures, making it ideal for modeling hierarchical relationships in your data.
 
+
+
 This guide covers the basics of the `ltree` extension - how to enable it, create hierarchical data structures, and query tree data with examples. The `ltree` extension is valuable for scenarios like organizational charts, file systems, category hierarchies, or any data that naturally fits into a parent-child relationship model.
 
-> `ltree` is an open-source extension for Postgres that can be installed on any compatible Postgres instance. Detailed information about the extension is available in the [PostgreSQL Documentation](https://www.postgresql.org/docs/current/ltree.html).
+   **Note**: `ltree` is an open-source extension for Postgres that can be installed on any compatible Postgres instance. Detailed information about the extension is available in the [PostgreSQL Documentation](https://www.postgresql.org/docs/current/ltree.html).
 
 **Version availability**
 
-Please refer to the [list of all extensions](https://neon.tech/docs/extensions/pg-extensions) available in Neon for up-to-date information.
+Please refer to the [list of all extensions](https://neon.com/docs/extensions/pg-extensions) available in Neon for up-to-date information.
 
 ## Enable the `ltree` extension
 
@@ -24,7 +26,7 @@ Enable the extension by running the following SQL statement in your Postgres cli
 CREATE EXTENSION IF NOT EXISTS ltree;
 ```
 
-For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](https://neon.tech/docs/connect/query-with-psql-editor).
+For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](https://neon.com/docs/connect/query-with-psql-editor).
 
 ## Understanding ltree data
 
@@ -96,7 +98,7 @@ This query returns:
 
 ```text
 | id | name               | path                                   |
-|----|--------------------|-----------------------------------------|
+|----|--------------------|----------------------------------------|
 | 2  | Computers          | electronics.computers                  |
 | 3  | Laptops            | electronics.computers.laptops          |
 | 4  | Gaming Laptops     | electronics.computers.laptops.gaming   |

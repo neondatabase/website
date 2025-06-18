@@ -1,10 +1,10 @@
 # Provide read-only access with Read Replicas
 
-> This guide explains how to leverage Neon's read replicas to provide read-only access to your data for users, partners, or third-party applications that need to run queries for analysis, reporting, or auditing purposes.
+> The document "Provide read-only access with Read Replicas" explains how Neon users can configure read replicas to enable read-only access to their databases, facilitating load distribution and improved query performance.
 
 ## Source
 
-- [Provide read-only access with Read Replicas HTML](https://neon.tech/docs/guides/read-only-access-read-replicas): The original HTML version of this documentation
+- [Provide read-only access with Read Replicas HTML](https://neon.com/docs/guides/read-only-access-read-replicas): The original HTML version of this documentation
 
 When you create a read replica in Neon, you gain the ability to provide read-only access to your data. This is particularly useful when you want to grant access to users, partners, or third-party applications that only need to run queries to analyze data, generate reports, or audit your database. Since no write operations are permitted on read replicas, it ensures the integrity of your data while allowing others to work with up-to-date information.
 
@@ -12,7 +12,7 @@ Suppose you need to give a partner read-only access to your sales data so they c
 
 1. **Create a read replica**
 
-   > Note: The Free Plan is limited to a maximum of 3 read replica computes per project.
+      **Note**: The Free Plan is limited to a maximum of 3 read replica computes per project.
 
    Follow these steps to create a read replica for your database branch:
 
@@ -28,7 +28,7 @@ Suppose you need to give a partner read-only access to your sales data so they c
    - Choose **Replica** compute under the compute settings.
    - Copy the connection string and provide it to your partner. The connection string might look something like this:
 
-     ```bash shouldWrap
+     ```bash
      postgresql://partner:partner_password@ep-read-replica-12345.us-east-2.aws.neon.tech/sales_db?sslmode=require
      ```
 

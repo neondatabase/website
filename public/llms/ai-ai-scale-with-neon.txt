@@ -1,12 +1,10 @@
 # Scale your AI application with Neon
 
-> This guide explains how to scale AI applications built with Neon and pgvector, covering vertical scaling with various compute sizes, autoscaling capabilities, storage options, and using read replicas to handle vector similarity search workloads efficiently.
+> The document "Scale your AI application with Neon" outlines steps for scaling AI applications using Neon's serverless Postgres database, focusing on optimizing performance and resource management specific to AI workloads.
 
 ## Source
 
-- [Scale your AI application with Neon HTML](https://neon.tech/docs/ai/ai-scale-with-neon): The original HTML version of this documentation
-
-## Overview
+- [Scale your AI application with Neon HTML](https://neon.com/docs/ai/ai-scale-with-neon): The original HTML version of this documentation
 
 You can scale your AI application built on Postgres with `pgvector` in the same way you would any Postgres app: Vertically with added CPU, RAM, and storage, or horizontally with read replicas.
 
@@ -53,7 +51,7 @@ In Neon, scaling vertically is a matter of selecting the desired compute size. N
 | 54                 | 54   | 216 GB | 3620 MB              |
 | 56                 | 56   | 224 GB | 3754 MB              |
 
-See [Edit a compute](https://neon.tech/docs/manage/endpoints#edit-a-compute) to learn how to configure your compute size. Available compute sizes differ according to your Neon plan. The Neon Free Plan supports computes starting at 0.25 CU, up to 2 CU with autoscaling enabled. The Launch plan offers compute sizes up to 4 CU. Larger computes are available on the Scale and Business plans. See [Neon plans](https://neon.tech/docs/introduction/plans).
+See [Edit a compute](https://neon.com/docs/manage/computes#edit-a-compute) to learn how to configure your compute size. Available compute sizes differ according to your Neon plan. The Neon Free Plan supports computes starting at 0.25 CU, up to 2 CU with autoscaling enabled. The Launch plan offers compute sizes up to 4 CU. Larger computes are available on the Scale and Business plans. See [Neon plans](https://neon.com/docs/introduction/plans).
 
 To optimize `pgvector` index build time, you can increase the `maintenance_work_mem` setting for the current session beyond the preconfigured default shown in the table above with a command similar to this:
 
@@ -71,11 +69,11 @@ For example, if your AI application experiences heavy load during certain hours 
 
 Enabling autoscaling is also recommended for initial data loads and memory-intensive index builds to ensure sufficient compute resources for this phase of your AI application setup.
 
-To learn more about Neon's autoscaling feature and how to enable it, refer to our [Autoscaling guide](https://neon.tech/docs/introduction/autoscaling).
+To learn more about Neon's autoscaling feature and how to enable it, refer to our [Autoscaling guide](https://neon.com/docs/introduction/autoscaling).
 
 ## Storage
 
-Neon's data storage allowances differ by plan. The Free plan offers 512 MB of storage. The Launch, Scale, and Business plans support larger data sizes and purchasing additional units of storage. See [Neon plans](https://neon.tech/docs/introduction/plans).
+Neon's data storage allowances differ by plan. The Free plan offers 512 MB of storage. The Launch, Scale, and Business plans support larger data sizes and purchasing additional units of storage. See [Neon plans](https://neon.com/docs/introduction/plans).
 
 ## Read replicas
 
@@ -85,4 +83,4 @@ Since vector similarity search is a read-only workload, you can leverage read re
 
 Neon's read replicas support the same compute sizes outlined above. Read replicas also support autoscaling.
 
-To learn more about the Neon read replicas, see [read replicas](https://neon.tech/docs/introduction/read-replicas) and refer to our [Working with Neon read replicas](https://neon.tech/docs/guides/read-replica-guide) guide.
+To learn more about the Neon read replicas, see [read replicas](https://neon.com/docs/introduction/read-replicas) and refer to our [Working with Neon read replicas](https://neon.com/docs/guides/read-replica-guide) guide.

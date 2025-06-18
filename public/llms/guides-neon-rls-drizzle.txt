@@ -1,19 +1,18 @@
 # Simplify RLS with Drizzle
 
-Use Drizzle crudPolicy to manage Row-Level Security with Neon RLS
+> The document "Simplify RLS with Drizzle" guides Neon users on implementing Row-Level Security (RLS) using the Drizzle ORM, detailing the setup and configuration process specific to Neon's database environment.
 
+## Source
 
+- [Simplify RLS with Drizzle HTML](https://neon.com/docs/guides/neon-rls-drizzle): The original HTML version of this documentation
 
-How to simplify Row-Level Security using `crudPolicy`
-Common RLS patterns with Drizzle
+What you'll learn:
+- How to simplify Row-Level Security using `crudPolicy`
+- Common RLS patterns with Drizzle
 
-
-
-  About Neon RLS
-  RLS in Drizzle
-
-
-
+Related docs:
+- [About Neon RLS](https://neon.com/docs/guides/neon-rls)
+- [RLS in Drizzle](https://orm.drizzle.team/docs/rls)
 
 ## Why simplify RLS policies?
 
@@ -26,7 +25,7 @@ To illustrate, let's consider a simple **Todo** list app with RLS policies appli
 - `USING` clause — controls which existing rows can be accessed
 - `WITH CHECK` clause — controls what new or modified data can be written
 
-To get an understanding of `auth.user_id()` and the role it plays in these policies, see this [explanation](/docs/guides/neon-rls#how-neon-rls-gets-authuserid-from-the-jwt).
+   **Note**: To get an understanding of `auth.user_id()` and the role it plays in these policies, see this [explanation](https://neon.com/docs/guides/neon-rls#how-neon-rls-gets-authuserid-from-the-jwt).
 
 Here's how these clauses apply to each operation:
 
@@ -39,7 +38,7 @@ Here's how these clauses apply to each operation:
 
 And the SQL code would look like this:
 
-```sql shouldWrap
+```sql
 CREATE TABLE IF NOT EXISTS "todos" (
     "id" bigint PRIMARY KEY,
     "user_id" text DEFAULT (auth.user_id()) NOT NULL,
@@ -119,7 +118,7 @@ export const authUid = (userIdColumn: AnyPgColumn) =>
 
 This helper:
 
-1. Wraps Neon RLS's `auth.user_id()` function (from the [pg_session_jwt](/docs/guides/neon-rls#how-the-pgsessionjwt-extension-works) extension)
+1. Wraps Neon RLS's `auth.user_id()` function (from the [pg_session_jwt](https://neon.com/docs/guides/neon-rls#how-the-pgsessionjwt-extension-works) extension)
 2. Compares the authenticated user's ID with a table column
 3. Returns a SQL expression suitable for use in `read` and `modify` parameters
 

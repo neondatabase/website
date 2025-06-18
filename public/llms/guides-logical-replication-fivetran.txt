@@ -1,12 +1,10 @@
 # Replicate data with Fivetran
 
-> This guide demonstrates how to set up logical replication from a Neon Postgres database to Fivetran, covering database preparation, replication slot configuration, and Fivetran source setup for data centralization.
+> The document titled "Replicate data with Fivetran" guides Neon users on setting up logical replication of their databases using Fivetran, detailing the configuration steps and requirements for seamless data integration.
 
 ## Source
 
-- [Replicate data with Fivetran HTML](https://neon.tech/docs/guides/logical-replication-fivetran): The original HTML version of this documentation
-
-## Overview
+- [Replicate data with Fivetran HTML](https://neon.com/docs/guides/logical-replication-fivetran): The original HTML version of this documentation
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
 
@@ -18,15 +16,11 @@ In this guide, you will learn how to define a Neon Postgres database as a data s
 
 - A [Fivetran account](https://fivetran.com/)
 - A [Neon account](https://console.neon.tech/)
-- Read the [important notices about logical replication in Neon](https://neon.tech/docs/guides/logical-replication-neon#important-notices) before you begin
+- Read the [important notices about logical replication in Neon](https://neon.com/docs/guides/logical-replication-neon#important-notices) before you begin
 
 ## Enable logical replication in Neon
 
-
-<Admonition type="important">
-Enabling logical replication modifies the Postgres `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, meaning active connections will be temporarily dropped before automatically reconnecting.
-</Admonition>
-
+   **Important**: Enabling logical replication modifies the Postgres `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, meaning active connections will be temporarily dropped before automatically reconnecting.
 
 To enable logical replication in Neon:
 
@@ -35,7 +29,7 @@ To enable logical replication in Neon:
 3. Select **Logical Replication**.
 4. Click **Enable** to enable logical replication.
 
-You can verify that logical replication is enabled by running the following query from the [Neon SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor):
+You can verify that logical replication is enabled by running the following query from the [Neon SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor):
 
 ```sql
 SHOW wal_level;
@@ -46,11 +40,9 @@ SHOW wal_level;
 
 ## Create a Postgres role for replication
 
-It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon CLI, Console, or API are granted membership in the [neon_superuser](https://neon.tech/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
+It is recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon CLI, Console, or API are granted membership in the [neon_superuser](https://neon.com/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
 
-
-
-
+Tab: CLI
 
 The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole)
 
@@ -58,9 +50,7 @@ The following CLI command creates a role. To view the CLI documentation for this
 neon roles create --name replication_user
 ```
 
-
-
-
+Tab: Console
 
 To create a role in the Neon Console:
 
@@ -73,11 +63,9 @@ To create a role in the Neon Console:
 7. In the role creation dialog, specify a role name.
 8. Click **Create**. The role is created, and you are provided with the password for the role.
 
+Tab: API
 
-
-
-
-The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](https://neon.tech/docs/reference/cli-roles).
+The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](https://neon.com/docs/reference/cli-roles).
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/roles' \
@@ -90,10 +78,6 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
   }
 }' | jq
 ```
-
-
-
-
 
 ## Grant schema access to your Postgres role
 
@@ -112,7 +96,7 @@ Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables 
 Create the Postgres publication. Include all tables you want to replicate as part of the publication:
 
 ```sql
-CREATE PUBLICATION fivetran_pub FOR TABLE <table1, table2, ...>;
+CREATE PUBLICATION fivetran_pub FOR TABLE <tbl1, tbl2, tbl3>;
 ```
 
 The publication name is customizable. Refer to the [Postgres docs](https://www.postgresql.org/docs/current/logical-replication-publication.html) if you need to add or remove tables from your publication.
@@ -137,8 +121,8 @@ The name assigned to the replication slot is `fivetran_pgoutput_slot`. You will 
 1. Enter the connection details for your Neon database. You can find your Neon database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
    For example, let's say this is your connection string:
 
-   ```bash shouldWrap
-   postgresql://<username>:<password>@<hostname>/<database>?sslmode=require
+   ```bash
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
    ```
 
    From this string, the values in the Fivetran **Create a source** dialog would show as below. Your actual values will differ, with the exception of the port number.
@@ -151,13 +135,13 @@ The name assigned to the replication slot is `fivetran_pgoutput_slot`. You will 
 
 1. For **Connection Method**, select **Logical replication of the WAL using the pgoutput plugin** and enter values for the **Replication Slot** and **Publication Name**. You deifned these values earlier (`fivetran_pgoutput_slot` and `fivetran_pub`, respectively).
 
-   ![Fivetran connector setup](https://neon.tech/docs/guides/fivetran_connector_setup.png)
+   
 
 1. If you are using Neon's **IP Allow** feature to limit IP addresses that can connect to Neon, add Fivetran's IPs to your allowlist in Neon.
 
-   ![Fivetran IP addresses](https://neon.tech/docs/guides/fivetran_ips.png)
+   
 
-   For instructions, see [Configure IP Allow](https://neon.tech/docs/manage/projects#configure-ip-allow). You'll need to do this before you can validate your connection in the next step. If you are not using Neon's **IP Allow** feature, you can skip this step.
+   For instructions, see [Configure IP Allow](https://neon.com/docs/manage/projects#configure-ip-allow). You'll need to do this before you can validate your connection in the next step. If you are not using Neon's **IP Allow** feature, you can skip this step.
 
 1. Click **Save & Test**. Fivetran tests and validates the connection to your database. Upon successful completion of the setup tests, you can sync your data using Fivetran.
 
@@ -165,22 +149,22 @@ The name assigned to the replication slot is `fivetran_pgoutput_slot`. You will 
 
    When the connection test is completed, you should see an **All connection tests passed!** message in Fivetran, as shown below:
 
-   ![Fivetran all connections passed message](https://neon.tech/docs/guides/fivetran_connection_test.png)
+   
 
 1. Click **Continue**.
 1. On the **Select Data to Sync** page, review the connector schema and select any columns you want to block or hash.
 
-   ![Fivetran select data to sync page](https://neon.tech/docs/guides/fivetran_select_data.png)
+   
 
 1. Click **Save & Continue**.
 
 1. On the **How would you like to handle changes?** page, specify how you would like to handle future schema changes. For this example, we'll select **We will allow all new schemas, tables and columns**. Choose the option that best fits your organization's requirements.
 
-   ![Fivetran how to handle changes](https://neon.tech/docs/guides/fivetran_changes.png)
+   
 
 1. Click **Continue**. Your data is now ready to sync.
 
-   ![Fivetran data is ready to sync page](https://neon.tech/docs/guides/fivetran_ready_to_sync.png)
+   
 
 1. Click **Start Initial Sync** to enable syncing.
 

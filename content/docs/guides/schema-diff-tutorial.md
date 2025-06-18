@@ -3,7 +3,7 @@ title: Schema diff tutorial
 subtitle: Step-by-step guide showing you how to compare two development branches using
   Schema Diff
 enableTableOfContents: true
-updatedOn: '2025-04-17T16:06:46.406Z'
+updatedOn: '2025-05-30T16:54:40.479Z'
 ---
 
 In this guide we will create an initial schema on a new database called `people` on our `production` branch. We'll then create a development branch called `feature/address`, following one possible convention for naming feature branches. After making schema changes on `feature/address`, we'll use the **Schema Diff** tool on the **Branches** page to get a side-by-side, GitHub-style visual comparison between the `feature/address` development branch and `production`.
@@ -432,13 +432,13 @@ curl --request GET \
      --header 'authorization: Bearer $NEON_API_KEY' | jq -r '.diff'
 ```
 
-| Parameter          | Description                                                                               | Required | Example                   |
-| ------------------ | ----------------------------------------------------------------------------------------- | -------- | ------------------------- |
-| `<project_id>`     | The ID of your Neon project.                                                              | Yes      | `royal-band-06902338`     |
-| `<branch_id>`      | The ID of the target branch to compare.                                                   | Yes      | `br-mute-dew-a5930esi`    |
-| `<base_branch_id>` | The ID of the base branch for comparison — the parent branch in this case.                | Yes      | `br-bitter-bird-a56n6lh4` |
-| `<db_name>`        | The name of the database in the target branch.                                            | Yes      | `people`                  |
-| `Authorization`    | Bearer token for API access (your [Neon API key](https://neon.tech/docs/manage/api-keys)) | Yes      | `$NEON_API_KEY`           |
+| Parameter          | Description                                                                | Required | Example                   |
+| ------------------ | -------------------------------------------------------------------------- | -------- | ------------------------- |
+| `<project_id>`     | The ID of your Neon project.                                               | Yes      | `royal-band-06902338`     |
+| `<branch_id>`      | The ID of the target branch to compare.                                    | Yes      | `br-mute-dew-a5930esi`    |
+| `<base_branch_id>` | The ID of the base branch for comparison — the parent branch in this case. | Yes      | `br-bitter-bird-a56n6lh4` |
+| `<db_name>`        | The name of the database in the target branch.                             | Yes      | `people`                  |
+| `Authorization`    | Bearer token for API access (your [Neon API key](/docs/manage/api-keys))   | Yes      | `$NEON_API_KEY`           |
 
 <Admonition type="note">
 The optional `jq -r '.diff'` command extracts the diff field from the JSON response and outputs it as plain text to make it easier to read. This command would not be necessary when using the endpoint programmatically.

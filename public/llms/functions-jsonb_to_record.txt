@@ -1,14 +1,16 @@
 # Postgres jsonb_to_record() function
 
-> This function converts a top-level JSONB object into a row with specified column types, useful for parsing JSON data from external sources into structured database formats for easier querying and analysis.
+> The document details the usage of the `jsonb_to_record()` function in Neon, explaining how to convert JSONB data into a PostgreSQL record, facilitating structured data manipulation within the database.
 
 ## Source
 
-- [Postgres jsonb_to_record() function HTML](https://neon.tech/docs/functions/jsonb_to_record): The original HTML version of this documentation
+- [Postgres jsonb_to_record() function HTML](https://neon.com/docs/functions/jsonb_to_record): The original HTML version of this documentation
 
 You can use the `jsonb_to_record` function to convert a top-level `JSONB` object into a row, with the type specified by the `AS` clause.
 
 This function is useful when you need to parse `JSONB` data received from external sources, such as APIs or file uploads, and store it in a structured format. By using `jsonb_to_record`, you can easily extract values from `JSONB` and map them to the corresponding columns in your database table.
+
+
 
 ## Function signature
 
@@ -127,9 +129,9 @@ This query returns the following result:
 
 ### Alternative functions
 
-- [jsonb_populate_record](https://neon.tech/docs/functions/jsonb_populate_record): This function can also be used to create records using values from a `JSONB` object. The difference is that `jsonb_populate_record` requires the record type to be defined beforehand, while `jsonb_to_record` needs the type definition inline.
+- [jsonb_populate_record](https://neon.com/docs/functions/jsonb_populate_record): This function can also be used to create records using values from a `JSONB` object. The difference is that `jsonb_populate_record` requires the record type to be defined beforehand, while `jsonb_to_record` needs the type definition inline.
 - [jsonb_to_recordset](https://www.postgresql.org/docs/current/functions-json.html): This function can be used similarly to parse `JSONB`, the difference being that it returns a set of records instead of a single record. For example, if you have an array of `JSONB` objects, you can use `jsonb_to_recordset` to convert each object into a new row.
-- [json_to_record](https://neon.tech/docs/functions/json_to_record): This function provides the same functionality as `json_to_record`, but accepts `JSON` input instead of `JSONB`. In cases where the input payload type isn't exactly specified, either of the two functions can be used.
+- [json_to_record](https://neon.com/docs/functions/json_to_record): This function provides the same functionality as `json_to_record`, but accepts `JSON` input instead of `JSONB`. In cases where the input payload type isn't exactly specified, either of the two functions can be used.
 
   For example, take this `json_to_record` query:
 

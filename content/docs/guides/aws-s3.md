@@ -2,7 +2,7 @@
 title: File storage with AWS S3
 subtitle: Store files via AWS S3 and track metadata in Neon
 enableTableOfContents: true
-updatedOn: '2025-04-27T11:08:17.422Z'
+updatedOn: '2025-05-30T16:54:40.458Z'
 ---
 
 [Amazon Simple Storage Service (AWS S3)](https://aws.amazon.com/s3/) is an object storage service widely used for storing and retrieving large amounts of data, such as images, videos, backups, and application assets.
@@ -103,7 +103,7 @@ We need a table in Neon to store metadata about the objects uploaded to S3.
 2.  Run the SQL statement. Add other relevant columns as needed (e.g., `content_type`, `size`).
 
 <Admonition type="note" title="Securing metadata with RLS">
-If you use [Neon's Row Level Security (RLS)](https://neon.tech/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `s3_files` table. This controls who can view or modify the object references stored in Neon based on your RLS rules.
+If you use [Neon's Row Level Security (RLS)](/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `s3_files` table. This controls who can view or modify the object references stored in Neon based on your RLS rules.
 
 Note that these policies apply _only_ to the metadata in Neon. Access control for the objects within the S3 bucket itself is managed via S3 bucket policies, IAM permissions, and object ACLs.
 </Admonition>

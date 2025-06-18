@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/integrations/
   - /docs/quickstart/django/
   - /docs/cloud/integrations/django/
-updatedOn: '2025-04-20T15:44:26.046Z'
+updatedOn: '2025-05-30T16:54:40.462Z'
 ---
 
 To connect to Neon from a Django application:
@@ -103,7 +103,7 @@ For schema migration with Django, see our guide:
 Learn how to use Django with Neon Postgres with this blog post and the accompanying sample application.
 
 <DetailIconCards>
-<a href="https://neon.tech/blog/python-django-and-neons-serverless-postgres" description="Learn how to build a Django application with Neon Postgres" icon="import">Blog Post: Using Django with Neon</a>
+<a href="/blog/python-django-and-neons-serverless-postgres" description="Learn how to build a Django application with Neon Postgres" icon="import">Blog Post: Using Django with Neon</a>
 
 <a href="https://github.com/evanshortiss/django-neon-quickstart" description="Django with Neon Postgres" icon="github">Django sample application</a>
 </DetailIconCards>

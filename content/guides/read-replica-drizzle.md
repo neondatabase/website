@@ -7,7 +7,7 @@ createdAt: '2024-10-14T00:00:00.000Z'
 updatedOn: '2024-10-14T00:00:00.000Z'
 ---
 
-[Neon read replicas](https://neon.tech/docs/introduction/read-replicas) are independent read-only compute instances that can significantly enhance database performance and scalability. By distributing read operations across these replicas, you can reduce latency and improve overall system responsiveness, especially for read-heavy applications.
+[Neon read replicas](/docs/introduction/read-replicas) are independent read-only compute instances that can significantly enhance database performance and scalability. By distributing read operations across these replicas, you can reduce latency and improve overall system responsiveness, especially for read-heavy applications.
 
 A key advantage of Neon's architecture is that adding a read replica doesn't require additional storage, making it a highly efficient scaling solution. This cost-effective approach is ideal for businesses of all sizes that need to improve database performance without increasing storage costs.
 
@@ -15,7 +15,7 @@ This guide demonstrates how to leverage Neon read replicas to efficiently scale 
 
 ## Prerequisites
 
-- A Neon account and a Project. If you don't have one, you can sign up for a Neon account and create a project by following the [Getting Started guide](https://neon.tech/docs/get-started-with-neon/signing-up).
+- A Neon account and a Project. If you don't have one, you can sign up for a Neon account and create a project by following the [Getting Started guide](/docs/get-started-with-neon/signing-up).
 - Basic knowledge of [Next.js](https://nextjs.org/docs) and TypeScript
 - [Node.js](https://nodejs.org/en/download/package-manager) and npm installed on your local machine
 

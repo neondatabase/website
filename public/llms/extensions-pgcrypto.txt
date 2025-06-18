@@ -1,18 +1,20 @@
 # The pgcrypto extension
 
-> This guide explains how to use the pgcrypto extension in Postgres for cryptographic operations, covering hashing functions, password security, encryption, and practical applications with code examples.
+> The document explains how to use the pgcrypto extension in Neon, enabling users to perform cryptographic functions such as encryption, decryption, and hashing within their PostgreSQL databases.
 
 ## Source
 
-- [The pgcrypto extension HTML](https://neon.tech/docs/extensions/pgcrypto): The original HTML version of this documentation
+- [The pgcrypto extension HTML](https://neon.com/docs/extensions/pgcrypto): The original HTML version of this documentation
 
 The `pgcrypto` extension offers a range of cryptographic functions within Postgres. These functions enable encryption, decryption, and hashing operations through standard SQL queries. This can reduce reliance on external cryptographic tools for data security tasks in a Postgres environment.
+
+
 
 In this guide, you'll learn how to enable the `pgcrypto` extension on Neon, use its core cryptographic functions, explore practical applications for data security, and follow best practices for managing security considerations.
 
 ## Enable the `pgcrypto` extension
 
-You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](https://neon.tech/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](https://neon.com/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
@@ -20,7 +22,7 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
 **Version availability:**
 
-Please refer to the [list of all extensions](https://neon.tech/docs/extensions/pg-extensions) available in Neon for up-to-date extension version information.
+Please refer to the [list of all extensions](https://neon.com/docs/extensions/pg-extensions) available in Neon for up-to-date extension version information.
 
 ## Cryptographic functions
 
@@ -63,7 +65,7 @@ The `pgcrypto` extension provides a wide range of cryptographic functions that c
 
 - **`gen_salt(type text [, iter_count integer ])`**:
 
-  The `gen_salt` function generates new, random salt values for use with the `crypt()` function. The `type` parameter specifies the hashing algorithm (e.g., `bf` for Blowfish, `md5`, `xdes`, `des`). For algorithms like [Blowfish](https://en.wikipedia.org/wiki/Blowfish_(cipher)) and [Extended DES](https://en.wikipedia.org/wiki/Data_Encryption_Standard) (`xdes`), you can specify `iter_count` to control the number of iterations, increasing the computational cost and security.
+  The `gen_salt` function generates new, random salt values for use with the `crypt()` function. The `type` parameter specifies the hashing algorithm (e.g., `bf` for Blowfish, `md5`, `xdes`, `des`). For algorithms like [Blowfish](https://neon.com/<https://en.wikipedia.org/wiki/Blowfish_(cipher)>) and [Extended DES](https://en.wikipedia.org/wiki/Data_Encryption_Standard) (`xdes`), you can specify `iter_count` to control the number of iterations, increasing the computational cost and security.
 
   ```sql
   SELECT gen_salt('bf'); -- Generate a Blowfish salt
@@ -128,7 +130,7 @@ For general-purpose encryption needs, `pgcrypto` implements the encryption part 
 
 - **`gen_random_uuid()`**:
 
-  The `gen_random_uuid()` function generates a version 4 universally unique identifier (UUID) based on random numbers. This is functionally equivalent to PostgreSQL's built-in [`gen_random_uuid()`](https://neon.tech/postgresql/postgresql-tutorial/postgresql-uuid#generating-uuid-values).
+  The `gen_random_uuid()` function generates a version 4 universally unique identifier (UUID) based on random numbers. This is functionally equivalent to PostgreSQL's built-in [`gen_random_uuid()`](https://neon.com/postgresql/postgresql-tutorial/postgresql-uuid#generating-uuid-values).
 
   ```sql
   SELECT gen_random_uuid();

@@ -3,10 +3,8 @@ title: Neon on Azure
 subtitle: Use Neon on Azure as a Native ISV Service
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-04-22T18:19:49.143Z'
+updatedOn: '2025-05-29T14:30:43.778Z'
 ---
-
-<PublicPreview/>
 
 [Neon is available on the Azure Marketplace](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/neon1722366567200.neon_serverless_postgres_azure_prod?tab=Overview) as an [Azure Native ISV Service](https://learn.microsoft.com/en-us/azure/partner-solutions/partners), allowing you to work with Neon the same way you work with other native solutions from Microsoft. Billing is handled directly through Azure, and you can choose from Neon pricing plans when deploying the service.
 
@@ -20,7 +18,7 @@ Deploying Neon natively on Azure lets you manage your Neon organization alongsid
 - **Integrated workflows**: Use the Azure CLI and SDKs to manage Neon as part of your regular workflows, integrated with your existing Azure resources.
 
     <Admonition type="note">
-    Management of Neon projects, databases, and branches is supported through the Neon Console, CLI, and API. However, this public preview lays the groundwork for further deeper between Neon and Azure, including integration with other Azure native services.
+    Management of Neon organizations, projects, and branches is supported via the Azure portal, CLI, and SDK. We continue to enhance the integration between Neon and Azure, including with other Azure native services. Additional Neon features and advanced configurations remain accessible through the Neon Console.
     </Admonition>
 
 ### Getting started

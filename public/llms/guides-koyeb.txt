@@ -1,17 +1,17 @@
 # Use Neon with Koyeb
 
-> This guide explains how to connect a Neon Postgres database to an application deployed with Koyeb, covering project setup, deployment options using both the control panel and CLI, and testing the connection with a sample application.
+> The document outlines the steps for integrating Neon with Koyeb, detailing how to deploy a Neon database on Koyeb's serverless platform using a step-by-step guide.
 
 ## Source
 
-- [Use Neon with Koyeb HTML](https://neon.tech/docs/guides/koyeb): The original HTML version of this documentation
+- [Use Neon with Koyeb HTML](https://neon.com/docs/guides/koyeb): The original HTML version of this documentation
 
 [Koyeb](https://www.koyeb.com/) is a developer-friendly, serverless platform designed to easily deploy reliable and scalable applications globally. Koyeb offers native autoscaling, automatic HTTPS (SSL), auto-healing, and global load-balancing across their edge network with zero configuration.
 
 This guide describes how connect a Neon Postgres database to an application deployed with Koyeb. To follow the instructions in this guide, you require:
 
 - A [Koyeb account](https://app.koyeb.com/) to deploy the application. Alternatively, you can install the [Koyeb CLI](https://www.koyeb.com/docs/quickstart/koyeb-cli) if you prefer to deploy the application from your terminal.
-- A Neon account to deploy the Postgres database. If you do not have one, see [Sign up](https://neon.tech/docs/get-started-with-neon/signing-up).
+- A Neon account to deploy the Postgres database. If you do not have one, see [Sign up](https://neon.com/docs/get-started-with-neon/signing-up).
 
 The example application connects to your Neon Postgres database using [Prisma](https://www.prisma.io/) as an ORM. Prisma synchronizes the database schema with the Prisma schema included with the application and seeds the database.
 
@@ -50,7 +50,7 @@ To deploy the application from the Koyeb [control panel](https://app.koyeb.com/)
 
 Koyeb builds the application. After the build and deployment have finished, you can access your application running on Koyeb by clicking the URL ending with `.koyeb.app`.
 
-The example application exposes a `/planets` endpoint that you can use to list planets from the database. After your deployment is live, you should see the following results when navigating to `https://.koyeb.app/planets`:
+The example application exposes a `/planets` endpoint that you can use to list planets from the database. After your deployment is live, you should see the following results when navigating to `https://<YOUR_APP_URL>.koyeb.app/planets`:
 
 ```json
 [
@@ -107,7 +107,7 @@ ID          NAME         STATUS         DOMAINS                                C
 b8611a1d    express-neon HEALTHY        ["express-neon-myorg.koyeb.app"]       16 Feb 23 18:13 UTC
 ```
 
-The example application exposes a `/planets` endpoint that you can use to list planets from the database. After your deployment is live, you should see the following results when navigating to `https://.koyeb.app/planets`:
+The example application exposes a `/planets` endpoint that you can use to list planets from the database. After your deployment is live, you should see the following results when navigating to `https://<YOUR_APP_URL>.koyeb.app/planets`:
 
 ```json
 [
@@ -133,4 +133,4 @@ To delete the example application on Koyeb to avoid incurring any charges, follo
 1. From the Koyeb [control panel](https://app.koyeb.com/), select the **App** to delete.
 1. On the **Settings** tab, select **Danger Zone** and click **Delete**.
 
-To delete your Neon project, refer to [Delete a project](https://neon.tech/docs/manage/projects#delete-a-project).
+To delete your Neon project, refer to [Delete a project](https://neon.com/docs/manage/projects#delete-a-project).

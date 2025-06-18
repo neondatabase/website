@@ -1,10 +1,49 @@
 # AI Rules: Neon with Drizzle
 
-> This document provides context rules for AI tools to help implement Drizzle ORM with Neon databases, covering dependencies, connection configuration, schema considerations, query optimizations, and best practices for serverless environments.
+> The document "AI Rules: Neon with Drizzle" outlines the integration of AI-driven rules within the Neon database using the Drizzle ORM, detailing setup instructions and configuration steps specific to Neon's environment.
 
 ## Source
 
-- [AI Rules: Neon with Drizzle HTML](https://neon.tech/docs/ai/ai-rules-neon-drizzle): The original HTML version of this documentation
+- [AI Rules: Neon with Drizzle HTML](https://neon.com/docs/ai/ai-rules-neon-drizzle): The original HTML version of this documentation
+
+Related docs:
+- [Get started with Drizzle and Neon](https://orm.drizzle.team/docs/get-started/neon-new)
+
+Repository:
+- [README](https://github.com/neondatabase-labs/ai-rules)
+- [neon-drizzle.mdc](https://github.com/neondatabase-labs/ai-rules/blob/main/neon-drizzle.mdc)
+
+---
+updatedOn: '2025-04-08T22:55:27.453Z'
+---
+
+## How to use
+
+You can use these rules in two ways:
+
+## Option 1: Copy from this page
+
+With Cursor, save the [rules](https://docs.cursor.com/context/rules-for-ai#project-rules-recommended) to `.cursor/rules/neon-drizzle.mdc` and they'll be automatically applied when working with matching files (`*.ts`, `*.tsx`).
+
+For other AI tools, you can include these rules as context when chatting with your AI assistant - check your tool's documentation for the specific method (like using "Include file" or context commands).
+
+## Option 2: Clone from repository
+
+If you prefer, you can clone or download the rules directly from our [AI Rules repository](https://github.com/neondatabase-labs/ai-rules).
+
+Once added to your project, AI tools will automatically use these rules when working with Neon with Drizzle code. You can also reference them explicitly in prompts.
+
+
+## Rules
+
+````markdown
+---
+description: Use this rules when integrating Neon (serverless Postgres) with Drizzle ORM
+globs: *.ts, *.tsx
+alwaysApply: false
+---
+
+# Neon and Drizzle integration guidelines
 
 ## Overview
 
@@ -13,7 +52,6 @@ This guide covers the specific integration patterns and optimizations for using 
 ## Dependencies
 
 For Neon with Drizzle ORM integration, include these specific dependencies:
-
 ```bash
 npm install drizzle-orm @neondatabase/serverless dotenv
 npm install -D drizzle-kit
@@ -261,3 +299,4 @@ export async function getUserSafely(id: number) {
    - Leverage Postgres-specific features supported by Neon
    - Use appropriate indexes for your query patterns
    - Consider Neon's performance characteristics for large tables
+````
