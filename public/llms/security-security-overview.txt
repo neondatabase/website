@@ -1,12 +1,12 @@
 # Security overview
 
-> This document provides a comprehensive overview of Neon's security measures, including secure connections, IP allowlist support, protected branches, data encryption, compliance standards, and security reporting procedures.
-
-At Neon, security is our highest priority. We are committed to implementing best practices and earning the trust of our users. A key aspect of earning this trust is by ensuring that every touchpoint in our system, from connections, to data storage, to our internal processes, adheres to the highest security standards.
+> The "Security overview" document outlines Neon's security measures, including data encryption, access controls, and compliance standards, to ensure the protection and integrity of user data within the Neon platform.
 
 ## Source
 
 - [Security overview HTML](https://neon.com/docs/security/security-overview): The original HTML version of this documentation
+
+At Neon, security is our highest priority. We are committed to implementing best practices and earning the trust of our users. A key aspect of earning this trust is by ensuring that every touchpoint in our system, from connections, to data storage, to our internal processes, adheres to the highest security standards.
 
 ## Secure connections
 
@@ -14,37 +14,37 @@ Neon supports a variety of protections related to database connections:
 
 - **SSL/TLS encryption** — Neon requires that all connections use SSL/TLS encryption to ensure that data sent over the Internet cannot be viewed or manipulated by third parties.
 
-  Neon supports the `verify-full` SSL mode for client connections, which is the strictest SSL mode provided by PostgreSQL. When set to `verify-full`, a PostgreSQL client verifies that the server's certificate is issued by a trusted certificate authority (CA), and that the server host name matches the name stored in the certificate. This helps prevent man-in-the-middle attacks. For information about configuring `verify-full` SSL mode for your connections, see [Connect securely](/docs/connect/connect-securely).
+  Neon supports the `verify-full` SSL mode for client connections, which is the strictest SSL mode provided by PostgreSQL. When set to `verify-full`, a PostgreSQL client verifies that the server's certificate is issued by a trusted certificate authority (CA), and that the server host name matches the name stored in the certificate. This helps prevent man-in-the-middle attacks. For information about configuring `verify-full` SSL mode for your connections, see [Connect securely](https://neon.com/docs/connect/connect-securely).
 
 - **Secure password enforcement** — Neon requires a 60-bit entropy password for all Postgres roles. This degree of entropy ensures that passwords have a high level of randomness. Assuming a perfect distribution of choices for every bit of entropy, a password with 60 bits of entropy has 2^60 (or about 1.15 quintillion) possible combinations, which makes it computationally infeasible for attackers to guess the password through brute-force methods. For Postgres roles created via the Neon Console, API, and CLI, passwords are generated with 60-bit entropy. For Postgres roles created via SQL, user-defined passwords are validated at creation time to ensure 60-bit entropy.
 
-- **The Neon Proxy** — Neon places a proxy in front of your database, which helps safeguard it from unauthorized login attempts. For example, in Postgres, each login attempt spawns a new process, which can pose a security risk. The [Neon Proxy](/docs/reference/glossary#neon-proxy) mitigates this by monitoring connection attempts and preventing misuse. The Neon Proxy also allows us to authenticate connections before they ever reach your Postgres database.
+- **The Neon Proxy** — Neon places a proxy in front of your database, which helps safeguard it from unauthorized login attempts. For example, in Postgres, each login attempt spawns a new process, which can pose a security risk. The [Neon Proxy](https://neon.com/docs/reference/glossary#neon-proxy) mitigates this by monitoring connection attempts and preventing misuse. The Neon Proxy also allows us to authenticate connections before they ever reach your Postgres database.
 
-- **IP Allow** — For additional connection security, the Neon Scale and Business plans offer [IP allowlist support](#ip-allowlist-support), which lets you to limit access to trusted IPs.
+- **IP Allow** — For additional connection security, the Neon Scale and Business plans offer [IP allowlist support](https://neon.com/docs/security/security-overview#ip-allowlist-support), which lets you to limit access to trusted IPs.
 
-- **Private Networking** — This feature enables connections to your Neon databases via AWS PrivateLink, bypassing the open internet entirely. See [Private Networking](/docs/guides/neon-private-networking).
+- **Private Networking** — This feature enables connections to your Neon databases via AWS PrivateLink, bypassing the open internet entirely. See [Private Networking](https://neon.com/docs/guides/neon-private-networking).
 
 ## IP allowlist support
 
-Neon's [IP Allow](/docs/introduction/ip-allow) feature, available with the Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plan, ensures that only trusted IP addresses can connect to the project where your database resides, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation). To learn more, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
+Neon's [IP Allow](https://neon.com/docs/introduction/ip-allow) feature, available with the Neon [Scale](https://neon.com/docs/introduction/plans#scale) and [Business](https://neon.com/docs/introduction/plans#business) plan, ensures that only trusted IP addresses can connect to the project where your database resides, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](https://neon.com/docs/reference/glossary#cidr-notation). To learn more, see [Configure IP Allow](https://neon.com/docs/manage/projects#configure-ip-allow).
 
 ## Protected branches
 
 You can designate any branch as a "protected branch", which implements a series of protections:
 
 - Protected branches cannot be deleted.
-- Protected branches cannot be [reset](/docs/manage/branches#reset-a-branch-from-parent).
+- Protected branches cannot be [reset](https://neon.com/docs/manage/branches#reset-a-branch-from-parent).
 - Projects with protected branches cannot be deleted.
 - Computes associated with a protected branch cannot be deleted.
 - New passwords are automatically generated for Postgres roles on branches created from protected branches.
-- With additional configuration steps, you can apply IP Allow restrictions to protected branches only. The [IP Allow](/docs/introduction/ip-allow) feature is available on the Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans. See [below](#how-to-apply-ip-restrictions-to-protected-branches).
-- Protected branches are not [archived](/docs/guides/branch-archiving) due to inactivity.
+- With additional configuration steps, you can apply IP Allow restrictions to protected branches only. The [IP Allow](https://neon.com/docs/introduction/ip-allow) feature is available on the Neon [Scale](https://neon.com/docs/introduction/plans#scale) and [Business](https://neon.com/docs/introduction/plans#business) plans. See [below](https://neon.com/docs/security/security-overview#how-to-apply-ip-restrictions-to-protected-branches).
+- Protected branches are not [archived](https://neon.com/docs/guides/branch-archiving) due to inactivity.
 
-The protected branches feature is available on all Neon paid plans. Typically, the protected branch status is given to a branch or branches that hold production data or sensitive data. For information about how to configure a protected branch, refer to our [Protected branches guide](/docs/guides/protected-branches).
+The protected branches feature is available on all Neon paid plans. Typically, the protected branch status is given to a branch or branches that hold production data or sensitive data. For information about how to configure a protected branch, refer to our [Protected branches guide](https://neon.com/docs/guides/protected-branches).
 
 ## Private Networking
 
-The [Neon Private Networking](/docs/guides/neon-private-networking) feature enables secure connections to your Neon databases via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html), bypassing the open internet for enhanced security. This feature is available to Neon [Organization](/docs/manage/organizations) accounts. It's not accessible to Personal Neon accounts.
+The [Neon Private Networking](https://neon.com/docs/guides/neon-private-networking) feature enables secure connections to your Neon databases via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html), bypassing the open internet for enhanced security. This feature is available to Neon [Organization](https://neon.com/docs/manage/organizations) accounts. It's not accessible to Personal Neon accounts.
 
 ## Data-at-rest encryption
 
@@ -60,7 +60,7 @@ The Microsoft cloud data centers that power Azure focus on high reliability, ope
 
 ## Compliance-relevant security measures
 
-At Neon, we implement robust technical controls to secure customer and sensitive data in alignment with SOC2, ISO27001, ISO27701 standards and GDPR and CCPA regulations. To learn more about these standards and regulations, see [Compliance](/docs/security/compliance).
+At Neon, we implement robust technical controls to secure customer and sensitive data in alignment with SOC2, ISO27001, ISO27701 standards and GDPR and CCPA regulations. To learn more about these standards and regulations, see [Compliance](https://neon.com/docs/security/compliance).
 
 All systems are hosted on AWS and Azure, where we have implemented specific security measures to protect data. Below is a detailed breakdown of these compliance-relevant security measures for access control, encryption, network security, event logging, vulnerability management, backups, data deletion and retention:
 
@@ -116,9 +116,9 @@ If you have questions about this integration or need help securing your credenti
 
 ## Security reporting
 
-Neon adheres to the [securitytxt.org](https://securitytxt.org/) standard for transparent and efficient security reporting. For details on how to report potential vulnerabilities, please visit our [Security reporting](/docs/security/security-reporting) page or refer to our [security.txt](https://neon.com/security.txt) file.
+Neon adheres to the [securitytxt.org](https://securitytxt.org/) standard for transparent and efficient security reporting. For details on how to report potential vulnerabilities, please visit our [Security reporting](https://neon.com/docs/security/security-reporting) page or refer to our [security.txt](https://neon.com/security.txt) file.
 
-Neon also has a [private bug bounty program with Hackerone](/docs/security/security-reporting#bug-bounty-program-with-hackerone).
+Neon also has a [private bug bounty program with Hackerone](https://neon.com/docs/security/security-reporting#bug-bounty-program-with-hackerone).
 
 ## Questions about our security measures?
 

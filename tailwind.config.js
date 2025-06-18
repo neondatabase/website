@@ -241,6 +241,23 @@ module.exports = {
           'radial-gradient(70.46% 67.03% at 0% -10.6%, rgba(19, 33, 45, 0.80) 14.53%, rgba(22, 33, 42, 0.00) 85.73%), linear-gradient(147deg, rgba(1, 119, 99, 0.00) 52.96%, rgba(1, 119, 99, 0.20) 138.77%)',
         'migration-steps-slider-progress-bg':
           'linear-gradient(90deg, rgba(36, 38, 40, 0) 0%, #242628 6.17%, #242628 78.58%, rgba(36, 38, 40, 0) 100%)',
+        'template-cta':
+          'linear-gradient(95.19deg, rgba(26, 212, 150, 0) 65.7%, rgba(47, 128, 120, 0.2) 86.63%, rgba(12, 222, 201, 0.3) 99.73%)',
+        'contact-form-bg':
+          'radial-gradient(921.66% 127.87% at 79.08% -31.9%, rgba(20, 24, 31, 0.5), rgba(20, 24, 31, 0.3) 48%, transparent)',
+        'startups-info-card-1':
+          'radial-gradient(70.46% 67.03% at 100% -10.6%, rgba(19, 33, 45, 0.80) 14.53%, rgba(22, 33, 42, 0.00) 85.73%),' +
+          'linear-gradient(213deg, rgba(1, 119, 99, 0.00) 52.96%, rgba(1, 119, 99, 0.20) 138.77%),' +
+          'linear-gradient(0deg, #0D0E12, #0D0E12)',
+        'startups-info-card-2':
+          'radial-gradient(112.22% 99.2% at -18.6% -17.8%, rgba(19, 33, 45, 0.80) 14.53%, rgba(22, 33, 42, 0.00) 85.73%),' +
+          'linear-gradient(139deg, rgba(1, 119, 99, 0.00) 52.16%, rgba(1, 119, 99, 0.20) 126.56%),' +
+          'linear-gradient(0deg, #0D0E12, #0D0E12)',
+        'startups-info-card-3':
+          'linear-gradient(76deg, rgba(1, 119, 99, 0.00) 45.97%, rgba(1, 119, 99, 0.20) 111.02%),' +
+          'linear-gradient(293deg, rgba(1, 119, 99, 0.00) 58.47%, rgba(1, 119, 99, 0.15) 118.39%),' +
+          'radial-gradient(921.66% 127.87% at 79.08% -31.9%, rgba(20, 24, 31, 0.50) 0%, rgba(20, 24, 31, 0.30) 47.96%, rgba(20, 24, 31, 0.00) 100%),' +
+          'linear-gradient(0deg, #0D0E12, #0D0E12)',
         // for deploy page
         'color-picker-variant-1': 'linear-gradient(225deg, #4CFFFF 31.6%, #00E660 74.65%);',
         'color-picker-variant-2': 'linear-gradient(225deg, #BDF471 35.94%, #00CC33 100%);',

@@ -1,14 +1,10 @@
 # Neon ORM guides
 
-> This page provides links to detailed instructions for connecting to Neon from various ORMs including Django, Drizzle, Laravel, Prisma, Rails, and SQLAlchemy.
+> The Neon ORM guides document outlines the steps for integrating various Object-Relational Mappers (ORMs) with Neon, assisting users in setting up and managing database interactions within their applications.
 
 ## Source
 
 - [Neon ORM guides HTML](https://neon.com/docs/get-started-with-neon/orms): The original HTML version of this documentation
-
-## Overview
-
-Find detailed instructions for connecting to Neon from various ORMs:
 
 - [Django](https://neon.com/docs/guides/django): Connect a Django application to Neon
 - [Drizzle](https://neon.com/docs/guides/drizzle): Learn how to use Drizzle ORM with your Neon Postgres database (Drizzle docs)

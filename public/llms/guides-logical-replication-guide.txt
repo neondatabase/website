@@ -1,6 +1,6 @@
 # Get started with logical replication
 
-> This guide provides an overview of Neon's logical replication feature, explaining how to replicate data to and from Neon Postgres databases for Change Data Capture, live migrations, and cross-project replication.
+> The document titled "Get started with logical replication" guides Neon users through setting up logical replication to stream database changes to external systems, detailing configuration steps and necessary commands specific to Neon's environment.
 
 ## Source
 
@@ -8,11 +8,11 @@
 
 Neon's logical replication feature, available to all Neon users, allows you to replicate data to and from your Neon Postgres database:
 
-- Stream data from your Neon database to external destinations, enabling Change Data Capture (CDC) and real-time analytics. External sources might include data warehouses, analytical database services, real-time stream processing systems, messaging and event-streaming platforms, and external Postgres databases, among others. See [Replicate data from Neon](#replicate-data-from-neon).
-- Perform live migrations to Neon from external sources such as AWS RDS, Aurora, and Google Cloud SQL — or any platform that runs Postgres. See [Replicate data to Neon](#replicate-data-to-neon).
+- Stream data from your Neon database to external destinations, enabling Change Data Capture (CDC) and real-time analytics. External sources might include data warehouses, analytical database services, real-time stream processing systems, messaging and event-streaming platforms, and external Postgres databases, among others. See [Replicate data from Neon](https://neon.com/docs/guides/logical-replication-guide#replicate-data-from-neon).
+- Perform live migrations to Neon from external sources such as AWS RDS, Aurora, and Google Cloud SQL &#8212; or any platform that runs Postgres. See [Replicate data to Neon](https://neon.com/docs/guides/logical-replication-guide#replicate-data-to-neon).
 - Replicate data from one Neon project to another for Neon project, account, Postgres version, or region migration. See [Replicate data from one Neon project to another](https://neon.com/docs/guides/logical-replication-neon-to-neon).
 
-![Neon logical replication subscribers image](https://neon.com/docs/guides/logical_replication_publishers_subscribers.jpg)
+
 
 Logical replication in Neon works like it does on any standard Postgres installation. It uses a publisher-subscriber model to replicate data from the source database to the destination database. Neon can act as a publisher or subscriber.
 
@@ -22,37 +22,37 @@ To learn more about Postgres logical replication, see the following topics.
 
 ## Learn about logical replication
 
-- **Logical replication concepts**: Learn about Postgres logical replication concepts - [https://neon.com/docs/guides/logical-replication-concepts](https://neon.com/docs/guides/logical-replication-concepts)
-- **Logical replication commands**: Commands for managing your logical replication configuration - [https://neon.com/docs/guides/logical-replication-manage](https://neon.com/docs/guides/logical-replication-manage)
-- **Logical replication in Neon**: Information about logical replication specific to Neon - [https://neon.com/docs/guides/logical-replication-neon](https://neon.com/docs/guides/logical-replication-neon)
-- **Managing schema changes**: Learn about managing schema changes in a logical replication setup - [https://neon.com/docs/guides/logical-replication-schema-changes](https://neon.com/docs/guides/logical-replication-schema-changes)
+- [Logical replication concepts](https://neon.com/docs/guides/logical-replication-concepts): Learn about Postgres logical replication concepts
+- [Logical replication commands](https://neon.com/docs/guides/logical-replication-manage): Commands for managing your logical replication configuration
+- [Logical replication in Neon](https://neon.com/docs/guides/logical-replication-neon): Information about logical replication specific to Neon
+- [Managing schema changes](https://neon.com/docs/guides/logical-replication-schema-changes): Learn about managing schema changes in a logical replication setup
 
 To get started, jump into one of our step-by-step logical replication guides.
 
 ## Replicate data from Neon
 
-- **Airbyte**: Replicate data from Neon with Airbyte - [https://neon.com/docs/guides/logical-replication-airbyte](https://neon.com/docs/guides/logical-replication-airbyte)
-- **Bemi**: Create an automatic audit trail with Bemi - [https://neon.com/docs/guides/bemi](https://neon.com/docs/guides/bemi)
-- **ClickHouse**: Change Data Capture from Neon to ClickHouse with PeerDB (PeerDB docs) - [https://docs.peerdb.io/mirror/cdc-neon-clickhouse](https://docs.peerdb.io/mirror/cdc-neon-clickhouse)
-- **Confluent (Kafka)**: Replicate data from Neon with Confluent (Kafka) - [https://neon.com/docs/guides/logical-replication-kafka-confluent](https://neon.com/docs/guides/logical-replication-kafka-confluent)
-- **Decodable**: Replicate data from Neon with Decodable - [https://neon.com/docs/guides/logical-replication-decodable](https://neon.com/docs/guides/logical-replication-decodable)
-- **Estuary Flow**: Replicate data from Neon with Estuary Flow - [https://neon.com/docs/guides/logical-replication-estuary-flow](https://neon.com/docs/guides/logical-replication-estuary-flow)
-- **Fivetran**: Replicate data from Neon with Fivetran - [https://neon.com/docs/guides/logical-replication-fivetran](https://neon.com/docs/guides/logical-replication-fivetran)
-- **Materialize**: Replicate data from Neon to Materialize - [https://neon.com/docs/guides/logical-replication-materialize](https://neon.com/docs/guides/logical-replication-materialize)
-- **Neon to Neon**: Replicate data from Neon to Neon - [https://neon.com/docs/guides/logical-replication-neon-to-neon](https://neon.com/docs/guides/logical-replication-neon-to-neon)
-- **Neon to PostgreSQL**: Replicate data from Neon to PostgreSQL - [https://neon.com/docs/guides/logical-replication-postgres](https://neon.com/docs/guides/logical-replication-postgres)
-- **Prisma Pulse**: Stream database changes in real-time with Prisma Pulse - [https://neon.com/docs/guides/logical-replication-prisma-pulse](https://neon.com/docs/guides/logical-replication-prisma-pulse)
-- **Sequin**: Stream data from platforms like Stripe, Linear, and GitHub to Neon - [https://neon.com/docs/guides/sequin](https://neon.com/docs/guides/sequin)
-- **Snowflake**: Replicate data from Neon to Snowflake with Airbyte - [https://neon.com/docs/guides/logical-replication-airbyte-snowflake](https://neon.com/docs/guides/logical-replication-airbyte-snowflake)
-- **Inngest**: Replicate data from Neon to Inngest - [https://neon.com/docs/guides/logical-replication-inngest](https://neon.com/docs/guides/logical-replication-inngest)
+- [Airbyte](https://neon.com/docs/guides/logical-replication-airbyte): Replicate data from Neon with Airbyte
+- [Bemi](https://neon.com/docs/guides/bemi): Create an automatic audit trail with Bemi
+- [ClickHouse](https://docs.peerdb.io/mirror/cdc-neon-clickhouse): Change Data Capture from Neon to ClickHouse with PeerDB (PeerDB docs)
+- [Confluent (Kafka)](https://neon.com/docs/guides/logical-replication-kafka-confluent): Replicate data from Neon with Confluent (Kafka)
+- [Decodable](https://neon.com/docs/guides/logical-replication-decodable): Replicate data from Neon with Decodable
+- [Estuary Flow](https://neon.com/docs/guides/logical-replication-estuary-flow): Replicate data from Neon with Estuary Flow
+- [Fivetran](https://neon.com/docs/guides/logical-replication-fivetran): Replicate data from Neon with Fivetran
+- [Materialize](https://neon.com/docs/guides/logical-replication-materialize): Replicate data from Neon to Materialize
+- [Neon to Neon](https://neon.com/docs/guides/logical-replication-neon-to-neon): Replicate data from Neon to Neon
+- [Neon to PostgreSQL](https://neon.com/docs/guides/logical-replication-postgres): Replicate data from Neon to PostgreSQL
+- [Prisma Pulse](https://neon.com/docs/guides/logical-replication-prisma-pulse): Stream database changes in real-time with Prisma Pulse
+- [Sequin](https://neon.com/docs/guides/sequin): Stream data from platforms like Stripe, Linear, and GitHub to Neon
+- [Snowflake](https://neon.com/docs/guides/logical-replication-airbyte-snowflake): Replicate data from Neon to Snowflake with Airbyte
+- [Inngest](https://neon.com/docs/guides/logical-replication-inngest): Replicate data from Neon to Inngest
 
 ## Replicate data to Neon
 
-- **AlloyDB**: Replicate data from AlloyDB to Neon - [https://neon.com/docs/guides/logical-replication-alloydb](https://neon.com/docs/guides/logical-replication-alloydb)
-- **Aurora**: Replicate data from Aurora to Neon - [https://neon.com/docs/guides/logical-replication-aurora-to-neon](https://neon.com/docs/guides/logical-replication-aurora-to-neon)
-- **Azure PostgreSQL**: Replicate data from Azure PostgreSQL to Neon - [https://neon.com/docs/import/migrate-from-azure-postgres](https://neon.com/docs/import/migrate-from-azure-postgres)
-- **Cloud SQL**: Replicate data from Cloud SQL to Neon - [https://neon.com/docs/guides/logical-replication-cloud-sql](https://neon.com/docs/guides/logical-replication-cloud-sql)
-- **Neon to Neon**: Replicate data from Neon to Neon - [https://neon.com/docs/guides/logical-replication-neon-to-neon](https://neon.com/docs/guides/logical-replication-neon-to-neon)
-- **PostgreSQL to Neon**: Replicate data from PostgreSQL to Neon - [https://neon.com/docs/guides/logical-replication-postgres-to-neon](https://neon.com/docs/guides/logical-replication-postgres-to-neon)
-- **RDS**: Replicate data from AWS RDS PostgreSQL to Neon - [https://neon.com/docs/guides/logical-replication-rds-to-neon](https://neon.com/docs/guides/logical-replication-rds-to-neon)
-- **Supabase**: Replicate data from Supabase to Neon - [https://neon.com/docs/guides/logical-replication-supabase-to-neon](https://neon.com/docs/guides/logical-replication-supabase-to-neon)
+- [AlloyDB](https://neon.com/docs/guides/logical-replication-alloydb): Replicate data from AlloyDB to Neon
+- [Aurora](https://neon.com/docs/guides/logical-replication-aurora-to-neon): Replicate data from Aurora to Neon
+- [Azure PostgreSQL](https://neon.com/docs/import/migrate-from-azure-postgres): Replicate data from Azure PostgreSQL to Neon
+- [Cloud SQL](https://neon.com/docs/guides/logical-replication-cloud-sql): Replicate data from Cloud SQL to Neon
+- [Neon to Neon](https://neon.com/docs/guides/logical-replication-neon-to-neon): Replicate data from Neon to Neon
+- [PostgreSQL to Neon](https://neon.com/docs/guides/logical-replication-postgres-to-neon): Replicate data from PostgreSQL to Neon
+- [RDS](https://neon.com/docs/guides/logical-replication-rds-to-neon): Replicate data from AWS RDS PostgreSQL to Neon
+- [Supabase](https://neon.com/docs/guides/logical-replication-supabase-to-neon): Replicate data from Supabase to Neon

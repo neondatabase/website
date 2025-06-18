@@ -1,16 +1,14 @@
 # Connect a Python application to Neon using Psycopg
 
-Set up a Neon project in seconds and connect from a Python application using
+> The document outlines the steps for connecting a Python application to a Neon database using the Psycopg library, detailing the necessary configurations and code examples specific to Neon's environment.
+
+## Source
+
+- [Connect a Python application to Neon using Psycopg HTML](https://neon.com/docs/guides/python): The original HTML version of this documentation
 
 This guide describes how to create a Neon project and connect to it from a simple Python application using [Psycopg (psycopg2)](https://pypi.org/project/psycopg2/), a popular Postgres database adapter for the Python programming language. The application connects to Neon and retrieves the current time and Postgres version.
 
-To connect:
-
-1. [Create a Neon Project](#create-a-neon-project)
-2. [Create a Python project](#create-a-python-project)
-3. [Store your Neon credentials](#store-your-neon-credentials)
-4. [Configure your Python script](#configure-your-python-script)
-5. [Test your connection](#test-your-connection)
+To connect a Python application to Neon:
 
 ## Create a Neon project
 
@@ -61,11 +59,11 @@ The project is created with a ready-to-use `neondb` database, which you will con
 
 Add a `.env` file to your project's root directory and add your Neon connection string to it.
 
-You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).
 
 Your connection string will look something like this:
 
-```shell shouldWrap
+```shell
 DATABASE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
 ```
 
@@ -73,7 +71,7 @@ DATABASE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=req
 
 Add a `neon-connect.py` file to your project's root directory and add the following code. The script connects to your Neon database and retrieves the current time and Postgres version.
 
-
+Tab: synchronous
 
 ```python
 import os
@@ -122,6 +120,8 @@ print('Current time:', time)
 print('PostgreSQL version:', version)
 ```
 
+Tab: asynchronous
+
 ```python
 import os
 import asyncio
@@ -155,8 +155,6 @@ async def main():
 asyncio.run(main())
 ```
 
-
-
 ## Test your connection
 
 Run the `neon-connect.py` script to test your connection.
@@ -167,7 +165,7 @@ python3 neon-connect.py
 
 If the connection is successful, the script returns information similar to the following:
 
-```bash shouldWrap
+```bash
 Current time: 2023-05-24 08:53:10.403140+00:00
 PostgreSQL version: PostgreSQL 15.2 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
 ```
@@ -176,8 +174,5 @@ PostgreSQL version: PostgreSQL 15.2 on x86_64-pc-linux-gnu, compiled by gcc (Deb
 
 You can find the source code for the applications described in this guide on GitHub.
 
-
-
-Get started with Python and Neon using asyncpg
-
-Get started with Python and Neon using psycopg2
+- [Get started with Python and Neon using asyncpg](https://github.com/neondatabase/examples/tree/main/with-python-asyncpg)
+- [Get started with Python and Neon using psycopg2](https://github.com/neondatabase/examples/tree/main/with-python-psycopg2)

@@ -1,22 +1,26 @@
 # Connect from Prisma to Neon
 
-Learn how to connect to Neon from Prisma
+> The document "Connect from Prisma to Neon" guides users on configuring and establishing a connection between Prisma and Neon databases, detailing the necessary steps and configurations specific to Neon's environment.
+
+## Source
+
+- [Connect from Prisma to Neon HTML](https://neon.com/docs/guides/prisma): The original HTML version of this documentation
 
 Prisma is an open-source, next-generation ORM that lets you to manage and interact with your database. This guide covers the following topics:
 
-- [Connect to Neon from Prisma](#connect-to-neon-from-prisma)
-- [Use connection pooling with Prisma](#use-connection-pooling-with-prisma)
-- [Use the Neon serverless driver with Prisma](#use-the-neon-serverless-driver-with-prisma)
-- [Connection timeouts](#connection-timeouts)
-- [Connection pool timeouts](#connection-pool-timeouts)
-- [JSON protocol for large Prisma schemas](#json-protocol-for-large-prisma-schemas)
+- [Connect to Neon from Prisma](https://neon.com/docs/guides/prisma#connect-to-neon-from-prisma)
+- [Use connection pooling with Prisma](https://neon.com/docs/guides/prisma#use-connection-pooling-with-prisma)
+- [Use the Neon serverless driver with Prisma](https://neon.com/docs/guides/prisma#use-the-neon-serverless-driver-with-prisma)
+- [Connection timeouts](https://neon.com/docs/guides/prisma#connection-timeouts)
+- [Connection pool timeouts](https://neon.com/docs/guides/prisma#connection-pool-timeouts)
+- [JSON protocol for large Prisma schemas](https://neon.com/docs/guides/prisma#json-protocol-for-large-prisma-schemas)
 
 ## Connect to Neon from Prisma
 
 To establish a basic connection from Prisma to Neon, perform the following steps:
 
 1. Retrieve your Neon connection string. You can find it by clicking the **Connect** button on your **Project Dashboard**. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
-   ![Connection details modal](/docs/connect/connection_details.png)
+   
    The connection string includes the user name, password, hostname, and database name.
 
 2. Add the following lines to your `prisma/schema.prisma` file to identify the data source and database URL:
@@ -28,23 +32,21 @@ To establish a basic connection from Prisma to Neon, perform the following steps
    }
    ```
 
-3. Add a `DATABASE_URL` variable to your `.env` file and set it to the Neon connection string that you copied in the previous step. We also recommend adding `?sslmode=require` to the end of the connection string to ensure a [secure connection](/docs/connect/connect-securely).
+3. Add a `DATABASE_URL` variable to your `.env` file and set it to the Neon connection string that you copied in the previous step. We also recommend adding `?sslmode=require` to the end of the connection string to ensure a [secure connection](https://neon.com/docs/connect/connect-securely).
 
    Your setting will appear similar to the following:
 
-   ```text shouldWrap
+   ```text
    DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
    ```
 
-
-If you plan to use Prisma Client from a serverless function, see [Use connection pooling with Prisma](#use-connection-pooling-with-prisma) for additional configuration instructions. To adjust your connection string to avoid connection timeout issues, see [Connection timeouts](#connection-timeouts).
-
+   **Important**: If you plan to use Prisma Client from a serverless function, see [Use connection pooling with Prisma](https://neon.com/docs/guides/prisma#use-connection-pooling-with-prisma) for additional configuration instructions. To adjust your connection string to avoid connection timeout issues, see [Connection timeouts](https://neon.com/docs/guides/prisma#connection-timeouts).
 
 ## Use connection pooling with Prisma
 
 Serverless functions can require a large number of database connections as demand increases. If you use serverless functions in your application, we recommend that you use a pooled Neon connection string, as shown:
 
-```ini shouldWrap
+```ini
 # Pooled Neon connection string
 DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require"
 ```
@@ -75,9 +77,7 @@ datasource db {
 }
 ```
 
-
-The `directUrl` property is available in Prisma version [4.10.0](https://github.com/prisma/prisma/releases/tag/4.10.0) and higher. For more information about this property, refer to the [Prisma schema reference](https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#fields).
-
+   **Note**: The `directUrl` property is available in Prisma version [4.10.0](https://github.com/prisma/prisma/releases/tag/4.10.0) and higher. For more information about this property, refer to the [Prisma schema reference](https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#fields).
 
 After adding the `directUrl` property to your `schema.prisma` file, update the `DATABASE_URL` and `DIRECT_URL` variables settings in your `.env` file:
 
@@ -86,7 +86,7 @@ After adding the `directUrl` property to your `schema.prisma` file, update the `
 
 When you finish updating your `.env` file, your variable settings should appear similar to the following:
 
-```ini shouldWrap
+```ini
 # Pooled Neon connection string
 DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require"
 
@@ -116,7 +116,7 @@ DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east
 
 ## Use the Neon serverless driver with Prisma
 
-The Neon serverless driver is a low-latency Postgres driver for JavaScript and TypeScript that lets you query data from serverless and edge environments. For more information about the driver, see [Neon serverless driver](/docs/serverless/serverless-driver).
+The Neon serverless driver is a low-latency Postgres driver for JavaScript and TypeScript that lets you query data from serverless and edge environments. For more information about the driver, see [Neon serverless driver](https://neon.com/docs/serverless/serverless-driver).
 
 To set up Prisma with the Neon serverless driver, use the Prisma driver adapter. This adapter allows you to choose a different database driver than Prisma's default driver for communicating with your database.
 
@@ -155,7 +155,7 @@ Update your Prisma Client instance:
 import 'dotenv/config';
 import { PrismaClient } from '@prisma/client';
 import { PrismaNeon } from '@prisma/adapter-neon';
-import { Pool, neonConfig } from '@neondatabase/serverless';
+import { neonConfig } from '@neondatabase/serverless';
 
 import ws from 'ws';
 neonConfig.webSocketConstructor = ws;
@@ -170,8 +170,7 @@ neonConfig.webSocketConstructor = ws;
 
 const connectionString = `${process.env.DATABASE_URL}`;
 
-const pool = new Pool({ connectionString });
-const adapter = new PrismaNeon(pool);
+const adapter = new PrismaNeon({ connectionString });
 const prisma = global.prisma || new PrismaClient({ adapter });
 
 if (process.env.NODE_ENV === 'development') global.prisma = prisma;
@@ -181,20 +180,17 @@ export default prisma;
 
 You can now use Prisma Client as you normally would with full type-safety. Prisma Migrate, introspection, and Prisma Studio will continue working as before, using the Neon connection string defined by the `DATABASE_URL` variable in your `schema.prisma` file.
 
-
-If you encounter a `TypeError: bufferUtil.mask is not a function` error when building your application, this is likely due to a missing dependency that the `ws` module requires when using `Client` and `Pool` constructs. You can address this requirement by installing the `bufferutil` package:
+   **Note**: If you encounter a `TypeError: bufferUtil.mask is not a function` error when building your application, this is likely due to a missing dependency that the `ws` module requires when using `Client` and `Pool` constructs. You can address this requirement by installing the `bufferutil` package: 
 
 ```shell
 npm i -D bufferutil
 ```
 
-
-
 ## Connection timeouts
 
 A connection timeout that occurs when connecting from Prisma to Neon causes an error similar to the following:
 
-```text shouldWrap
+```text
 Error: P1001: Can't reach database server at `ep-white-thunder-826300.us-east-2.aws.neon.tech`:`5432`
 Please make sure your database server is running at `ep-white-thunder-826300.us-east-2.aws.neon.tech`:`5432`.
 ```
@@ -205,13 +201,11 @@ A Neon compute has two main states: _Active_ and _Idle_. Active means that the c
 
 When you connect to an idle compute from Prisma, Neon automatically activates it. Activation typically happens within a few seconds but added latency can result in a connection timeout. To address this issue, you can adjust your Neon connection string by adding a `connect_timeout` parameter. This parameter defines the maximum number of seconds to wait for a new connection to be opened. The default value is 5 seconds. A higher setting may provide the time required to avoid connection timeouts. For example:
 
-```text shouldWrap
+```text
 DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&connect_timeout=10"
 ```
 
-
-A `connect_timeout` setting of 0 means no timeout.
-
+   **Note**: A `connect_timeout` setting of 0 means no timeout.
 
 ## Connection pool timeouts
 
@@ -219,7 +213,7 @@ Another possible cause of timeouts is [Prisma's connection pool](https://www.pri
 
 The default size of the Prisma connection pool is determined by the following formula: `num_physical_cpus * 2 + 1`, where `num_physical_cpus` represents the number of physical CPUs on the machine where your application runs. For example, if your machine has four physical CPUs, your connection pool will contain nine connections (4 \* 2 + 1 = 9). As mentioned in the [Prisma documentation](https://www.prisma.io/docs/concepts/components/prisma-client/working-with-prismaclient/connection-pool#default-connection-pool-size), this formula is a good starting point, but the recommended connection limit also depends on your deployment paradigm — particularly if you are using serverless. You can specify the number of connections explicitly by setting the `connection_limit` parameter in your database connection URL. For example:
 
-```text shouldWrap
+```text
 DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&connect_timeout=15&connection_limit=20"
 ```
 
@@ -227,7 +221,7 @@ For configuration guidance, refer to Prisma's [Recommended connection pool size 
 
 In addition to pool size, you can configure a `pool_timeout` setting. This setting defines the amount of time the Prisma Client query engine has to process a query before it throws an exception and moves on to the next query in the queue. The default `pool_timeout` setting is 10 seconds. If you still experience timeouts after increasing `connection_limit` setting, you can try setting the `pool_timeout` parameter to a value larger than the default (10 seconds). For configuration guidance, refer to [Increasing the pool timeout](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management#increasing-the-pool-timeout), in the _Prisma documentation_.
 
-```text shouldWrap
+```text
 DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&connect_timeout=15&connection_limit=20&pool_timeout=15"
 ```
 
@@ -247,4 +241,4 @@ For additional information about connecting from Prisma, refer to the following 
 - [Database connection issues](https://www.prisma.io/dataguide/managing-databases/database-troubleshooting#database-connection-issues)
 - [PostgreSQL database connector](https://www.prisma.io/docs/concepts/database-connectors/postgresql)
 - [Increasing the pool timeout](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management#increasing-the-pool-timeout)
-- [Schema migration with Neon Postgres and Prisma ORM](/docs/guides/prisma-migrations)
+- [Schema migration with Neon Postgres and Prisma ORM](https://neon.com/docs/guides/prisma-migrations)

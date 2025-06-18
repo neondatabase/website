@@ -1,14 +1,14 @@
 # AI Starter Kit
 
-> This guide provides a comprehensive collection of resources for building AI applications with Neon Postgres, including core concepts, starter applications, framework integrations, and deployment guides for creating RAG chatbots, semantic search engines, and other AI tools.
+> The AI Starter Kit documentation introduces Neon users to setting up and utilizing AI capabilities within the Neon platform, detailing the necessary steps and configurations for integrating AI functionalities into their projects.
 
 ## Source
 
 - [AI Starter Kit HTML](https://neon.com/docs/ai/ai-intro): The original HTML version of this documentation
 
-## Overview
-
 This guide collects resources for building AI applications with Neon Postgres. You'll find core concepts, starter applications, framework integrations, and deployment guides. Use these resources to build applications like RAG chatbots, semantic search engines, or custom AI tools.
+
+
 
 ## Getting started
 
@@ -25,6 +25,7 @@ Build AI applications faster with these popular frameworks, tools, and services:
 - [LlamaIndex](https://neon.com/docs/ai/llamaindex): Build RAG applications using LlamaIndex with OpenAI and Neon
 - [Semantic Kernel](https://neon.com/docs/ai/semantic-kernel): Develop AI applications using Semantic Kernel with Azure OpenAI
 - [Inngest](https://neon.com/docs/ai/inngest): Build reliable AI workflows with Inngest and Neon
+- [app.build](https://neon.com/docs/ai/ai-app-build): Generate and deploy web applications using the open-source app.build agent
 
 ## Starter applications
 
@@ -49,6 +50,8 @@ Hackable, fully-featured, pre-built starter apps to get you up and running:
 ## Featured examples
 
 Real-world AI applications built with Neon that you can reference as code examples or inspiration.
+
+   **Tip** Built something cool?: Share your AI app on our [#showcase](https://discord.gg/neon) channel on Discord.
 
 - [AI vector database per tenant](https://github.com/neondatabase/ai-vector-db-per-tenant): Deploy an AI vector database per-tenant architecture with Neon
 - [Guide: Build a RAG chatbot](https://neon.com/guides/chatbot-astro-postgres-llamaindex): Build a RAG chatbot in an Astro application with LlamaIndex and Postgres

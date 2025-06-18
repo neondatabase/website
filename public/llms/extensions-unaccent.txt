@@ -1,14 +1,16 @@
 # The unaccent extension
 
-> This guide explains how to use the unaccent Postgres extension to remove accents and diacritics from text, covering installation, usage examples, accent-insensitive searching, and performance optimization techniques.
+> The document explains the use of the unaccent extension in Neon, detailing how to remove diacritical marks from text within the database.
 
 ## Source
 
 - [The unaccent extension HTML](https://neon.com/docs/extensions/unaccent): The original HTML version of this documentation
 
-The `unaccent` extension for Postgres enables handling of text data in a more user-friendly and language-tolerant way. It allows you to remove [accents/stress](https://en.wikipedia.org/wiki/Stress_(linguistics)) ([diacritic signs](https://en.wikipedia.org/wiki/Diacritic)) from text strings, making it easier to perform searches and comparisons that are insensitive to accents. This is particularly useful in multilingual applications where users might not consistently use accents when typing search queries.
+The `unaccent` extension for Postgres enables handling of text data in a more user-friendly and language-tolerant way. It allows you to remove [accents/stress](https://neon.com/<https://en.wikipedia.org/wiki/Stress_(linguistics)>) ([diacritic signs](https://en.wikipedia.org/wiki/Diacritic)) from text strings, making it easier to perform searches and comparisons that are insensitive to accents. This is particularly useful in multilingual applications where users might not consistently use accents when typing search queries.
 
 Imagine a user searching for "Hôtel" but only typing "Hotel". Without `unaccent`, the database might not find the intended results. With `unaccent`, you can ensure that searches are more forgiving and return relevant results regardless of accent variations.
+
+
 
 This guide will walk you through the essentials of using the `unaccent` extension. You'll learn how to enable the extension on Neon, understand its key concepts, use it in queries, optimize performance with indexing, and consider its limitations.
 
@@ -132,7 +134,7 @@ While `unaccent()` can be used directly in `WHERE` clauses, its true power for s
 
 This involves creating or modifying text search configurations to include the `unaccent` dictionary in the analysis process. When text is indexed and queried using such a configuration, accents are automatically stripped, leading to efficient and accent-insensitive full-text searches.
 
-> **Note**: It's important to note that because `unaccent` is managed by Neon, modifying the default `unaccent.rules` file or other configuration settings requires administrative privileges that are not available to Neon users. If you have specific needs for customized `unaccent` rules or configurations, please [open a support ticket](https://console.neon.tech/app/projects?modal=support) to discuss your requirements with Neon support.
+   **Note** Configuration Modifications in Neon: It's important to note that because `unaccent` is managed by Neon, modifying the default `unaccent.rules` file or other configuration settings requires administrative privileges that are not available to Neon users. If you have specific needs for customized `unaccent` rules or configurations, please [open a support ticket](https://console.neon.tech/app/projects?modal=support) to discuss your requirements with Neon support.
 
 ## Performance and Indexing Considerations
 

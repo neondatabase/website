@@ -1,18 +1,23 @@
 # Query organization usage metrics with the Neon API
 
-You can use the Neon API to retrieve three types of consumption metrics for your organization:
+> The document details how to use the Neon API to query and retrieve organization usage metrics, enabling users to monitor and manage resource consumption within their Neon accounts.
 
-| Metric                                                                                           | Description                                                                              | Plan Availability |
-| ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- | ----------------- |
-| [Account-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)            | Total usage across all projects in your organization                                     | Scale plan only   |
-| [Project-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) (granular) | Project-level metrics available at hourly, daily, or monthly level of granularity        | Scale plan only   |
-| [Project-level](https://api-docs.neon.tech/reference/listprojectsconsumption) (billing period)   | Consumption metrics for each project in your Organization for the current billing period | All plans         |
+## Source
+
+- [Query organization usage metrics with the Neon API HTML](https://neon.com/docs/manage/orgs-api-consumption): The original HTML version of this documentation
+
+You can use the Neon API to retrieve two types of consumption history metrics for your organization:
+
+| Metric                                                                                           | Description                                                                       | Plan Availability               |
+| ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------- | ------------------------------- |
+| [Account-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)            | Total usage across all projects in your organization                              | Scale, Business, and Enterprise |
+| [Project-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) (granular) | Project-level metrics available at hourly, daily, or monthly level of granularity | Scale, Business, and Enterprise |
 
 ## Finding organizations for consumption queries
 
 Before querying consumption metrics, you'll need the `org_id` values for organizations you want to query. Use your personal API key to list all organizations you have access to:
 
-```bash shouldWrap
+```bash
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/users/me/organizations' \
      --header 'accept: application/json' \
@@ -27,8 +32,20 @@ The response includes details about each organization, including the `org_id` yo
     {
       "id": "org-morning-bread-81040908",
       "name": "Morning Bread Organization",
-      "created_at": "2022-11-23T17:42:25Z",
-      "updated_at": "2022-12-04T02:39:25Z"
+      "handle": "morning-bread-organization-org-morning-bread-81040908",
+      "plan": "free_v2",
+      "created_at": "2025-04-30T14:43:00Z",
+      "managed_by": "console",
+      "updated_at": "2025-04-30T14:46:22Z"
+    },
+    {
+      "id": "org-super-grass-41324851",
+      "name": "Super Org Inc",
+      "handle": "super-org-inc-org-super-grass-41324851",
+      "plan": "scale_v2",
+      "created_at": "2025-06-02T16:56:18Z",
+      "managed_by": "console",
+      "updated_at": "2025-06-02T16:56:18Z"
     }
   ]
 }
@@ -44,7 +61,7 @@ To get global totals for all projects in the organization `org-ocean-art-1234567
 
 The following example requests hourly metrics between June 30th and July 2nd, 2024:
 
-```bash shouldWrap
+```bash
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/consumption_history/account?from=2024-06-30T15%3A30%3A00Z&to=2024-07-02T15%3A30%3A00Z&granularity=hourly&org_id=org-ocean-art-12345678' \
      --header 'accept: application/json' \
@@ -53,14 +70,14 @@ curl --request GET \
 
 The response will provide aggregated hourly consumption metrics, including active time, compute time, written data, and synthetic storage size, for each hour between June 30 and July 2.
 
-
-Response
-
+Details: Response
 ```json
 {
   "periods": [
     {
       "period_id": "random-period-abcdef",
+      "period_plan": "scale",
+      "period_start": "2024-06-01T00:00:00Z",
       "consumption": [
         {
           "timeframe_start": "2024-06-30T15:00:00Z",
@@ -108,25 +125,21 @@ Response
 }
 ```
 
-
-
 ### Project-level metrics (granular)
 
 You can also get similar daily, hourly, or monthly metrics across a selected time period, but broken out for each individual project that belongs to your organization.
 
 Using the endpoint `GET /consumption_history/projects`, let's use the same start date, end date, and level of granularity as our account-level request: hourly metrics between June 30th and July 2nd, 2024.
 
-```bash shouldWrap
+```bash
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/consumption_history/projects?limit=10&from=2024-06-30T00%3A00%3A00Z&to=2024-07-02T00%3A00%3A00Z&granularity=hourly&org_id=org-ocean-art-12345678' \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $ORG_API_KEY'
 ```
 
-
-Response
-
-```json shouldWrap
+Details: Response
+```json
 {
   "projects": [
     {
@@ -134,6 +147,8 @@ Response
       "periods": [
         {
           "period_id": "random-period-abcdef",
+          "period_plan": "scale",
+          "period_start": "2024-06-30T00:00:00Z",
           "consumption": [
             {
               "timeframe_start": "2024-06-30T00:00:00Z",
@@ -156,6 +171,8 @@ Response
         },
         {
           "period_id": "random-period-ghijkl",
+          "period_plan": "scale",
+          "period_start": "2024-07-01T09:00:00Z",
           "consumption": [
             {
               "timeframe_start": "2024-07-01T09:00:00Z",
@@ -176,17 +193,15 @@ Response
 }
 ```
 
-
-
 ### Project-level metrics (for the current billing period)
 
 To get basic billing period-based consumption metrics for each project in the organization `org-ocean-art-12345678`, include `org_id` in the `GET /projects` request for consumption metrics:
 
-```bash shouldWrap
+```bash
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/projects?org_id=org-ocean-art-12345678' \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $ORG_API_KEY'
 ```
 
-See more details about using this endpoint on the [Manage billing with consumption limits](/docs/guides/partner-consumption-limits#retrieving-metrics-for-all-projects) page in our Partner Guide.
+See more details about using this endpoint on the [Manage billing with consumption limits](https://neon.com/docs/guides/partner-consumption-limits#retrieving-metrics-for-all-projects) page in our Partner Guide.

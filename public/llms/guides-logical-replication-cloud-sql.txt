@@ -1,6 +1,6 @@
 # Replicate data from Cloud SQL Postgres
 
-> This guide explains how to replicate data from Google Cloud SQL PostgreSQL to Neon using native PostgreSQL logical replication, covering configuration steps for both source and destination databases, including enabling replication, creating publications and subscriptions.
+> The document outlines the process for setting up logical replication from a Cloud SQL PostgreSQL instance to a Neon database, detailing the necessary configurations and steps to enable data synchronization between the two systems.
 
 ## Source
 
@@ -12,7 +12,7 @@ This guide describes how to replicate data from Cloud SQL Postgres using native 
 
 - A Cloud SQL Postgres instance containing the data you want to replicate. If you're just testing this out and need some data to play with, you can use the following statements to create a table with sample data. Your database and schema may differ.
 
-  ```sql shouldWrap
+  ```sql
   CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
   INSERT INTO playing_with_neon(name, value)
   SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i);
@@ -41,11 +41,11 @@ To enable this flag:
 
 The change requires restarting the instance:
 
-![Clod SQL instance restart](https://neon.com/docs/guides/cloud_sql_restart.png)
+
 
 Afterward, you can verify that logical replication is enabled by running `SHOW wal_level;` from **Cloud SQL Studio** or your terminal.
 
-![show wal_level](https://neon.com/docs/guides/cloud_sql_show_wal_level.png)
+
 
 ### Allow connections from Neon
 
@@ -60,30 +60,30 @@ You need to allow connections to your Cloud SQL Postgres instance from Neon. To 
 1. Optionally, in the **Name** field, enter a name for this network.
 1. In the **Network** field, enter the IP address from which you want to allow connections. You will need to perform this step for each of the NAT gateway IP addresses associated with your Neon project's region. Neon uses 3 to 6 IP addresses per region for this outbound communication, corresponding to each availability zone in the region. See [NAT Gateway IP addresses](https://neon.com/docs/introduction/regions#nat-gateway-ip-addresses) for Neon's NAT gateway IP addresses.
 
-   > Cloud SQL requires addresses to be specified in CIDR notation. You can do so by appending `/32` to the NAT Gateway IP address; for example: `18.217.181.229/32`
+      **Note**: Cloud SQL requires addresses to be specified in CIDR notation. You can do so by appending `/32` to the NAT Gateway IP address; for example: `18.217.181.229/32`
 
    In the example shown below, you can see that three addresses were added, named `Neon1`, `Neon2`, and `Neon3`. You can name them whatever you like. The addresses were added in CIDR format by adding `/32`.
 
-   ![Cloud SQL network configuration](https://neon.com/docs/guides/cloud_sql_network_config.png)
+   
 
 1. Click **Done** after adding a Network entry.
 1. Click **Save** when you are finished adding Network entries for all of your Neon project's NAT Gateway IP addresses.
 
-> You can specify a single Network entry using `0.0.0.0/0` to allow traffic from any IP address. However, this configuration is not considered secure and will trigger a warning.
+   **Note**: You can specify a single Network entry using `0.0.0.0/0` to allow traffic from any IP address. However, this configuration is not considered secure and will trigger a warning.
 
 ### Note your public IP address
 
 Record the public IP address of your Cloud SQL Postgres instance. You'll need this value later when you set up a subscription from your Neon database. You can find the public IP address on your Cloud SQL instance's **Overview** page.
 
-> If you do not use a public IP address, you'll need to configure access via a private IP. Refer to the [Cloud SQL documentation](https://cloud.google.com/sql/docs/mysql/private-ip).
+   **Note**: If you do not use a public IP address, you'll need to configure access via a private IP. Refer to the [Cloud SQL documentation](https://cloud.google.com/sql/docs/mysql/private-ip).
 
-![Clould SQL public IP address](https://neon.com/docs/guides/cloud_sql_public_ip.png)
+
 
 ### Create a Postgres role for replication
 
 It is recommended that you create a dedicated Postgres role for replicating data from your Cloud SQL Postgres instance. The role must have the `REPLICATION` privilege. On your Cloud SQL Postgres instance, login in as your `postgres` user or an administrative user you use to create roles and run the following command to create a replication role. You can replace the name `replication_user` with whatever role name you want to use.
 
-```sql shouldWrap
+```sql
 CREATE USER replication_user WITH REPLICATION IN ROLE cloudsqlsuperuser LOGIN PASSWORD 'replication_user_password';
 ```
 
@@ -105,17 +105,17 @@ Publications are a fundamental part of logical replication in Postgres. They def
 
 To create a publication for a specific table:
 
-```sql shouldWrap
+```sql
 CREATE PUBLICATION my_publication FOR TABLE playing_with_neon;
 ```
 
 To create a publication for multiple tables, provide a comma-separated list of tables:
 
-```sql shouldWrap
+```sql
 CREATE PUBLICATION my_publication FOR TABLE users, departments;
 ```
 
-> Defining specific tables lets you add or remove tables from the publication later, which you cannot do when creating publications with `FOR ALL TABLES`.
+   **Note**: Defining specific tables lets you add or remove tables from the publication later, which you cannot do when creating publications with `FOR ALL TABLES`.
 
 For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
 
@@ -129,7 +129,7 @@ When configuring logical replication in Postgres, the tables in the source datab
 
 If you're using the sample `playing_with_neon` table, you can create the same table on the destination database with the following statement:
 
-```sql shouldWrap
+```sql
 CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
 ```
 

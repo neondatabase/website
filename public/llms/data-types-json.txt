@@ -1,12 +1,16 @@
 # Postgres JSON data types
 
-> Postgres supports JSON and JSONB data types for storing semi-structured data, with JSONB offering better query performance through binary storage and indexing capabilities. These types are ideal for flexible schemas and document-like data typically found in NoSQL databases.
-
-Postgres JSON data types provide a flexible way to store and manipulate semi-structured data that doesn't fit neatly into traditional relational models. This guide explains the differences between JSON and JSONB types, their storage characteristics, and how to effectively query and manipulate JSON data in Postgres.
+> The document "Postgres JSON data types" explains how Neon users can utilize JSON and JSONB data types in PostgreSQL to store and manipulate JSON data within their databases.
 
 ## Source
 
 - [Postgres JSON data types HTML](https://neon.com/docs/data-types/json): The original HTML version of this documentation
+
+Postgres supports JSON (JavaScript Object Notation) data types, providing a flexible way to store and manipulate semi-structured data. The two types are `JSON` and `JSONB`. The functions work similarly, but there are trade-offs related to data ingestion and querying performance.
+
+`JSON` and `JSONB` are ideal for storing data that doesn't fit neatly into a traditional relational model, since new fields can be added without altering the database schema. Additionally, they can also be used to model document-like data typically stored in NoSQL databases.
+
+
 
 ## Storage and syntax
 
@@ -22,7 +26,7 @@ Postgres JSON data types provide a flexible way to store and manipulate semi-str
 - Unlike `JSON`, `JSONB` does not preserve whitespace or the order of object keys. For duplicate keys, only the last value is stored.
 - `JSONB` is more efficient for querying, as it doesn't require re-parsing the `JSON` data every time it is accessed.
 
-JSON values can be created from string literals by casting:
+`JSON` values can be created from string literals by casting. For example:
 
 ```sql
 SELECT
@@ -30,9 +34,19 @@ SELECT
     '[1, 2, "foo", null]'::JSONB as col_jsonb;
 ```
 
+This query returns the following:
+
+```text
+           col_json           |      col_jsonb
+------------------------------+---------------------
+ {"name": "Alice", "age": 30} | [1, 2, "foo", null]
+```
+
 ## Example usage
 
-Consider the case of managing user profiles for a social media application. Profile data is semi-structured, with a set of fields common to all users, while other fields are optional and may vary across users. `JSONB` is a good fit for this use case:
+Consider the case of managing user profiles for a social media application. Profile data is semi-structured, with a set of fields common to all users, while other fields are optional and may vary across users. `JSONB` is a good fit for this use case.
+
+Using the query below, we can create a table to store user profiles:
 
 ```sql
 CREATE TABLE user_profiles (
@@ -47,7 +61,7 @@ VALUES
     ('{"name": "Charlie", "interests": ["music", "cooking"], "settings": {"privacy": "private", "notifications": true, "language": "English"}}');
 ```
 
-With `JSONB`, you can directly query and manipulate elements within the `JSON` structure:
+With `JSONB`, we can directly query and manipulate elements within the `JSON` structure. For example, to find all the users interested in music, we can run the query:
 
 ```sql
 SELECT
@@ -58,9 +72,18 @@ FROM user_profiles
 WHERE profile @> '{"interests":["music"]}'::JSONB;
 ```
 
-The `@>` operator checks if the left `JSONB` operand contains the right `JSONB` operand as a subset, while the `->` operator extracts the value of a `JSON` key as a `JSON` value.
+The `@>` operator checks if the left `JSONB` operand contains the right `JSONB` operand as a subset. While the `->` operator extracts the value of a `JSON` key as a `JSON` value.
 
-To extract values as text rather than JSON format, use the `->>` operator:
+This query returns the following:
+
+```text
+ id |   name    |      interests
+----+-----------+----------------------
+  1 | "Alice"   | ["music", "travel"]
+  3 | "Charlie" | ["music", "cooking"]
+```
+
+Note that the `name` values returned are still in `JSON` format. To extract the value as text, we can use the `->>` operator instead:
 
 ```sql
 SELECT
@@ -69,22 +92,37 @@ SELECT
 FROM user_profiles;
 ```
 
+This query returns the following:
+
+```text
+ id |  name
+----+---------
+  1 | Alice
+  2 | Bob
+  3 | Charlie
+```
+
 ## JSON functions and operators
 
-Postgres implements several functions and operators for querying and manipulating `JSON` data, including:
+Postgres implements several functions and operators for querying and manipulating `JSON` data, including these functions described in the Neon documentation:
 
-- `json_array_elements` / `jsonb_array_elements`: Expands a JSON array to a set of JSON values
-- `json_build_object`: Builds a JSON object from key-value pairs
-- `json_each`: Expands the outermost JSON object into a set of key-value pairs
-- `json_extract_path`: Extracts JSON sub-object at the specified path
-- `json_extract_path_text`: Extracts JSON sub-object at the specified path as text
-- `json_object`: Builds a JSON object from a text array
-- `json_populate_record`: Expands the object in from_json to a row
-- `json_to_record`: Builds an arbitrary record from a JSON object
+- [json_array_elements](https://neon.com/docs/functions/json_array_elements)
+- [jsonb_array_elements](https://neon.com/docs/functions/jsonb_array_elements)
+- [json_build_object](https://neon.com/docs/functions/json_build_object)
+- [json_each](https://neon.com/docs/functions/json_each)
+- [json_extract_path](https://neon.com/docs/functions/json_extract_path)
+- [json_extract_path_text](https://neon.com/docs/functions/json_extract_path_text)
+- [json_object](https://neon.com/docs/functions/json_object)
+- [json_populate_record](https://neon.com/docs/functions/json_populate_record)
+- [json_to_record](https://neon.com/docs/functions/json_to_record)
+
+For additional `JSON` operators and functions, refer to the [official PostgreSQL documentation](https://www.postgresql.org/docs/current/functions-json.html)
 
 ### Nested data
 
-Postgres supports storing nested `JSON` values. For example, in the user profile table, the `settings` field is a `JSON` object itself. The nested values can be extracted by chaining the `->` operator:
+Postgres supports storing nested `JSON` values. For example, in the user profile table, the `settings` field is a `JSON` object itself. The nested values can be extracted by chaining the `->` operator.
+
+For example, to access the `privacy` setting for all users, you can run the query:
 
 ```sql
 SELECT
@@ -94,9 +132,19 @@ SELECT
 FROM user_profiles;
 ```
 
+This query returns the following:
+
+```text
+ id |   name    | privacy
+----+-----------+---------
+  1 | "Alice"   | public
+  2 | "Bob"     | private
+  3 | "Charlie" | private
+```
+
 ### Modifying JSONB data
 
-The `JSONB` type supports updating individual fields:
+The `JSONB` type supports updating individual fields. For example, the query below sets the `privacy` setting for all public users to `friends-only`:
 
 ```sql
 UPDATE user_profiles
@@ -110,21 +158,27 @@ Field updates are not supported for the `JSON` type.
 
 ### Indexing JSONB data
 
-Postgres supports GIN (Generalized Inverted Index) indexes for `JSONB` data, which can improve query performance significantly:
+Postgres supports GIN (Generalized Inverted Index) indexes for `JSONB` data, which can improve query performance significantly.
 
 ```sql
 CREATE INDEX idxgin ON user_profiles USING GIN (profile);
 ```
 
-This makes evaluation of `key-exists (?)` and `containment (@>)` operators efficient.
+This makes evaluation of `key-exists (?)` and `containment (@>)` operators efficient. For example, the query to fetch all users who have music as an interest can leverage this index.
+
+```sql
+SELECT *
+FROM user_profiles
+WHERE profile @> '{"interests":["music"]}';
+```
 
 ## Additional considerations
 
 ### JSON vs JSONB
 
-`JSONB` is the recommended data type for storing `JSON` data in Postgres for a few reasons:
+`JSONB` is the recommended data type for storing `JSON` data in Postgres for a few reasons.
 
-- **Indexing**: `JSONB` allows for the creation of GIN indexes, which makes searching within `JSONB` columns faster.
+- **Indexing**: `JSONB` allows for the creation of GIN (Generalized Inverted Index) indexes, which makes searching within `JSONB` columns faster.
 - **Performance**: `JSONB` binary format is more efficient for querying and manipulating, as it doesn't require re-parsing the `JSON` data for each access. It also supports in-place updates to individual fields.
 - **Data integrity**: `JSONB` ensures that keys in an object are unique.
 

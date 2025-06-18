@@ -1,12 +1,10 @@
 # AI Concepts
 
-> This guide explains embeddings for AI applications, covering what embeddings are, how vector similarity search works with different distance metrics, methods for generating embeddings with LLM APIs, and storing vector embeddings in Postgres using the pgvector extension.
+> The "AI Concepts" document outlines foundational AI principles and terminologies relevant to Neon, facilitating understanding and implementation of AI-driven features within the Neon database environment.
 
 ## Source
 
 - [AI Concepts HTML](https://neon.com/docs/ai/ai-concepts): The original HTML version of this documentation
-
-## Overview
 
 Embeddings are an essential component in building AI applications. This topic describes embeddings and how they are used, generated, and stored in Postgres.
 
@@ -73,7 +71,7 @@ curl https://api.openai.com/v1/embeddings \
   }'
 ```
 
-Running the command above requires an OpenAI API key, which must be obtained from [OpenAI](https://platform.openai.com/).
+   **Note**: Running the command above requires an OpenAI API key, which must be obtained from [OpenAI](https://platform.openai.com/).
 
 Upon successful execution, you'll receive a response similar to the following:
 
@@ -107,7 +105,7 @@ There are many embedding models you can use, such as those provided by Mistral A
 
 ## Storing vector embeddings in Postgres
 
-Neon supports the [pgvector](/docs/extensions/pgvector) Postgres extension, which enables the storage and retrieval of vector embeddings directly within your Postgres database. When building AI applications, installing this extension eliminates the need to extend your architecture to include a separate vector store. Installing the `pgvector` extension simply requires running the following `CREATE EXTENSION` statement from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client connected to your Neon Postgres database.
+Neon supports the [pgvector](https://neon.com/docs/extensions/pgvector) Postgres extension, which enables the storage and retrieval of vector embeddings directly within your Postgres database. When building AI applications, installing this extension eliminates the need to extend your architecture to include a separate vector store. Installing the `pgvector` extension simply requires running the following `CREATE EXTENSION` statement from the [Neon SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client connected to your Neon Postgres database.
 
 ```sql
 CREATE EXTENSION vector;
@@ -131,4 +129,4 @@ INSERT INTO items(embedding) VALUES ('[
 ]');
 ```
 
-For detailed information about using `pgvector`, refer to our guide: [The pgvector extension](/docs/extensions/pgvector).
+For detailed information about using `pgvector`, refer to our guide: [The pgvector extension](https://neon.com/docs/extensions/pgvector).

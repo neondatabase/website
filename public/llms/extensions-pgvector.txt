@@ -1,6 +1,6 @@
 # The pgvector extension
 
-> This guide explains how to use the pgvector extension to store vector embeddings and perform vector similarity search in Postgres, covering installation, vector operations, indexing methods, and optimization techniques for AI applications.
+> The document details the pgvector extension for Neon, which enables users to store and perform similarity searches on vector data within a PostgreSQL database.
 
 ## Source
 
@@ -32,7 +32,7 @@ CREATE EXTENSION vector;
 
 Neon allows you to install the previous version of `pgvector`, which is one version behind the latest supported version.
 
-For example, if Neon’s latest supported `pgvector` version is 0.8.0, you can install the prior version, 0.7.4, by specifying the version number:
+For example, if Neon's latest supported `pgvector` version is 0.8.0, you can install the prior version, 0.7.4, by specifying the version number:
 
 ```sql
 CREATE EXTENSION vector VERSION '0.7.4';
@@ -53,17 +53,13 @@ CREATE TABLE items (
 );
 ```
 
-
-<Admonition type="note">
-The `pgvector` extension supports some specialized types other than `VECTOR` for storing embeddings. See [HNSW vector types](#hnsw-vector-types), and [IVFFlat vector types](#ivfflat-vector-types).
-</Admonition>
-
+   **Note**: The `pgvector` extension supports some specialized types other than `VECTOR` for storing embeddings. See [HNSW vector types](https://neon.com/docs/extensions/pgvector#hnsw-vector-types), and [IVFFlat vector types](https://neon.com/docs/extensions/pgvector#ivfflat-vector-types).
 
 This command generates a table named `items` with an `embedding` column capable of storing vectors with 3 dimensions. OpenAI's `text-embedding-3-small` model supports 1536 dimensions by default for each piece of text, which creates more accurate embeddings for natural language processing tasks. However, using larger embeddings generally costs more and consumes more compute, memory, and storage than using smaller embeddings. To learn more about embeddings and the cost-performance tradeoff, see [Embeddings](https://platform.openai.com/docs/guides/embeddings/what-are-embeddings), in the _OpenAI documentation_.
 
 ## Storing embeddings
 
-After generating embeddings using a service like [OpenAI’s Embeddings API](https://platform.openai.com/docs/api-reference/embeddings), you can store them in your database. Using a Postgres client library in your preferred programming language, you can execute an `INSERT` statement similar to the following to store embeddings.
+After generating embeddings using a service like [OpenAI's Embeddings API](https://platform.openai.com/docs/api-reference/embeddings), you can store them in your database. Using a Postgres client library in your preferred programming language, you can execute an `INSERT` statement similar to the following to store embeddings.
 
 - Insert two new rows into the `items` table with the provided embeddings.
 
@@ -77,9 +73,7 @@ After generating embeddings using a service like [OpenAI’s Embeddings API](htt
   COPY items (embedding) FROM STDIN WITH (FORMAT BINARY);
   ```
 
-   
-   For a Python script that loads embeddings in bulk, refer to this [Bulk loading with COPY](https://github.com/pgvector/pgvector-python/blob/master/examples/loading/example.py) example provided in the `pgvector` GitHub repository.
-   
+      **Tip**: For a Python script that loads embeddings in bulk, refer to this [Bulk loading with COPY](https://github.com/pgvector/pgvector-python/blob/master/examples/loading/example.py) example provided in the `pgvector` GitHub repository.
 
 - Upsert vectors:
 
@@ -122,9 +116,7 @@ To retrieve vectors and calculate similarity, use `SELECT` statements and the di
   SELECT * FROM items WHERE embedding <-> '[3,1,2]' < 5;
   ```
 
-<Admonition type="note">
-   To use an index with a query, include `ORDER BY` and `LIMIT` clauses, as shown in the second query example above.
-</Admonition>
+      **Note**: To use an index with a query, include `ORDER BY` and `LIMIT` clauses, as shown in the second query example above.
 
 ### Distance function operators
 
@@ -133,11 +125,7 @@ To retrieve vectors and calculate similarity, use `SELECT` statements and the di
 - `<=>` - cosine distance
 - `<+>` - L1 distance
 
-
-<Admonition type="note">
-The inner product operator (`<#>`) returns the negative inner product since Postgres only supports `ASC` order index scans on operators.
-</Admonition>
-
+   **Note**: The inner product operator (`<#>`) returns the negative inner product since Postgres only supports `ASC` order index scans on operators.
 
 ### Distance queries
 
@@ -179,12 +167,12 @@ By default, `pgvector` performs exact nearest neighbor search, providing perfect
 
 Supported index types include:
 
-- [HNSW](#hnsw)
-- [IVFFLAT](#ivfflat)
+- [HNSW](https://neon.com/docs/extensions/pgvector#hnsw)
+- [IVFFLAT](https://neon.com/docs/extensions/pgvector#ivfflat)
 
 ### HNSW
 
-An HNSW index creates a multilayer graph. It has better query performance than an IVFFlat index (in terms of speed-recall tradeoff), but has slower build times and uses more memory. Also, an HNSW index can be created without any data in the table since there isn’t a training step like there is for an IVFFlat index.
+An HNSW index creates a multilayer graph. It has better query performance than an IVFFlat index (in terms of speed-recall tradeoff), but has slower build times and uses more memory. Also, an HNSW index can be created without any data in the table since there isn't a training step like there is for an IVFFlat index.
 
 #### HNSW vector types
 
@@ -195,9 +183,7 @@ HNSW indexes are supported with the following vector types:
 - `bit` - up to 64,000 dimensions
 - `sparsevec` - up to 1,000 non-zero elements
 
-
-Notice how indexes are defined differently depending on the distance function being used. For example `vector_l2_ops` is specified for L2 distance, `vector_ip_ops` for inner product, and so on. Make sure you define your index according to the distance function you intend to use.
-
+   **Note**: Notice how indexes are defined differently depending on the distance function being used. For example `vector_l2_ops` is specified for L2 distance, `vector_ip_ops` for inner product, and so on. Make sure you define your index according to the distance function you intend to use.
 
 - L2 distance:
 
@@ -271,9 +257,7 @@ COMMIT;
 
 To optimize index build time, consider configuring the `maintenance_work_mem` and `max_parallel_maintenance_workers` session variables before building an index:
 
-
-Like other index types, it’s faster to create an index after loading your initial data.
-
+   **Note**: Like other index types, it's faster to create an index after loading your initial data.
 
 - `maintenance_work_mem`
 
@@ -287,7 +271,7 @@ Like other index types, it’s faster to create an index after loading your init
   HINT:  Increase maintenance_work_mem to speed up builds.
   ```
 
-  In Postgres, the `maintenance_work_mem` setting determines the maximum memory allocation for tasks such as `CREATE INDEX`. The default `maintenance_work_mem` value in Neon is set according to your Neon [compute size](/docs/manage/computes#how-to-size-your-compute).
+  In Postgres, the `maintenance_work_mem` setting determines the maximum memory allocation for tasks such as `CREATE INDEX`. The default `maintenance_work_mem` value in Neon is set according to your Neon [compute size](https://neon.com/docs/manage/computes#how-to-size-your-compute).
 
   To optimize `pgvector` index build time, you can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
 
@@ -317,7 +301,7 @@ Like other index types, it’s faster to create an index after loading your init
 
 You can check indexing progress with the following query:
 
-```sql shouldWrap
+```sql
 SELECT phase, round(100.0 * blocks_done / nullif(blocks_total, 0), 1) AS "%" FROM pg_stat_progress_create_index;
 ```
 
@@ -336,7 +320,7 @@ Keys to achieving good recall include:
 
 - Creating the index after the table has some data
 - Choosing an appropriate number of lists. A good starting point is rows/1000 for up to 1M rows and `sqrt(rows)` for over 1M rows.
-- Specifying an appropriate number of [probes](#hnsw-query-options) when querying. A higher number is better for recall, and a lower is better for speed. A good starting point is `sqrt(lists)`.
+- Specifying an appropriate number of [probes](https://neon.com/docs/extensions/pgvector#hnsw-query-options) when querying. A higher number is better for recall, and a lower is better for speed. A good starting point is `sqrt(lists)`.
 
 #### IVFFlat vector types
 
@@ -348,9 +332,7 @@ IVFFlat indexes are supported with the following vector types:
 
 The following examples show how to add an index for each distance function:
 
-
-Notice how indexes are defined differently depending on the distance function being used. For example `vector_l2_ops` is specified for L2 distance, `vector_cosine_ops` for cosine distance, and so on. 
-
+   **Note**: Notice how indexes are defined differently depending on the distance function being used. For example `vector_l2_ops` is specified for L2 distance, `vector_cosine_ops` for cosine distance, and so on.
 
 The following examples show how to add an index for each distance function:
 
@@ -360,9 +342,7 @@ The following examples show how to add an index for each distance function:
   CREATE INDEX ON items USING ivfflat (embedding vector_l2_ops) WITH (lists = 100);
   ```
 
-   
-   Use `halfvec_l2_ops` for halfvec (and similar with the other distance functions).
-   
+      **Note**: Use `halfvec_l2_ops` for halfvec (and similar with the other distance functions).
 
 - Inner product
 
@@ -390,7 +370,7 @@ You can specify the number of probes, which is `1` by default.
 SET ivfflat.probes = 10;
 ```
 
-A higher value provides better recall at the cost of speed. You can set the value to the number of lists for exact nearest neighbor search, at which point the planner won’t use the index.
+A higher value provides better recall at the cost of speed. You can set the value to the number of lists for exact nearest neighbor search, at which point the planner won't use the index.
 
 You can also use `SET LOCAL` inside a transaction to set the number of probes for a single query:
 
@@ -405,18 +385,13 @@ COMMIT;
 
 To optimize index build time, consider configuring the `maintenance_work_mem` and `max_parallel_maintenance_workers` session variables before building an index:
 
+   **Note**: Like other index types, it's faster to create an index after loading your initial data.
 
-Like other index types, it’s faster to create an index after loading your initial data.
-
-
-
-Like other index types, it’s faster to create an index after loading your initial data.
-
+   **Note**: Like other index types, it's faster to create an index after loading your initial data.
 
 - `maintenance_work_mem`
 
-  In Postgres, the `maintenance_work_mem` setting determines the maximum memory allocation for tasks such as `CREATE INDEX`. The default `maintenance_work_mem` value in Neon is set according to your Neon [compute size](https://neon.com/docs/manage/endpoints#how-to-size-your-compute). For a table that shows the `maintenance_work_mem` setting by compute size, see [Parameter settings that differ by compute size](https://neon.com/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
-
+  In Postgres, the `maintenance_work_mem` setting determines the maximum memory allocation for tasks such as `CREATE INDEX`. The default `maintenance_work_mem` value in Neon is set according to your Neon [compute size](https://neon.com/docs/manage/computes#how-to-size-your-compute). For a table that shows the `maintenance_work_mem` setting by compute size, see [Parameter settings that differ by compute size](https://neon.com/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
 
   To optimize `pgvector` index build time, you can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
 
@@ -446,7 +421,7 @@ Like other index types, it’s faster to create an index after loading your init
 
 You can check indexing progress with the following query:
 
-```sql shouldWrap
+```sql
 SELECT phase, round(100.0 * blocks_done / nullif(blocks_total, 0), 1) AS "%" FROM pg_stat_progress_create_index;
 ```
 
@@ -487,7 +462,7 @@ CREATE TABLE items (embedding vector(3), category_id int) PARTITION BY LIST(cate
 
 Half-precision vectors enable the storage of vector embeddings using 16-bit floating-point numbers, or half-precision, which reduces both storage size and memory usage by nearly half compared 32-bit floats. This efficiency comes with minimal loss in precision, making half-precision vectors beneficial for applications dealing with large datasets or facing memory constraints.
 
-When integrating OpenAI's embeddings, you can take advantage of half-precision vectors by storing embeddings in a compressed format. For instance, OpenAI’s high-dimensional embeddings can be effectively stored with half-precision vectors, achieving high levels of accuracy, such as a 98% rate. This approach optimizes memory usage while maintaining performance.
+When integrating OpenAI's embeddings, you can take advantage of half-precision vectors by storing embeddings in a compressed format. For instance, OpenAI's high-dimensional embeddings can be effectively stored with half-precision vectors, achieving high levels of accuracy, such as a 98% rate. This approach optimizes memory usage while maintaining performance.
 
 You can use the `halfvec` type to store half-precision vectors, as shown here:
 
@@ -513,7 +488,7 @@ INSERT INTO items (embedding) VALUES ('000'), ('111');
 Get the nearest neighbors by Hamming distance (added in 0.7.0)
 
 ```sql
-SELECT * FROM items ORDER BY embedding <-> '101' LIMIT 5;
+SELECT * FROM items ORDER BY embedding <~> '101' LIMIT 5;
 ```
 
 Or (before 0.7.0)
@@ -522,7 +497,7 @@ Or (before 0.7.0)
 SELECT * FROM items ORDER BY bit_count(embedding # '101') LIMIT 5;
 ```
 
-Jaccard distance (`<=>`) is also supported with binary vector embeddings.
+Jaccard distance (`<%>`) is also supported with binary vector embeddings.
 
 ## Binary quantization
 
@@ -537,15 +512,15 @@ CREATE INDEX ON items USING hnsw ((binary_quantize(embedding)::bit(3)) bit_hammi
 Get the nearest neighbors by Hamming distance:
 
 ```sql
-SELECT * FROM items ORDER BY binary_quantize(embedding)::bit(3) <-> binary_quantize('[1,-2,3]') LIMIT 5;
+SELECT * FROM items ORDER BY binary_quantize(embedding)::bit(3) <~> binary_quantize('[1,-2,3]') LIMIT 5;
 ```
 
 Re-rank by the original vectors for better recall:
 
 ```sql
 SELECT * FROM (
-    SELECT * FROM items ORDER BY binary_quantize(embedding)::bit(3) <-> binary_quantize('[1,-2,3]') LIMIT 20
-) ORDER BY embedding <-> '[1,-2,3]' LIMIT 5;
+    SELECT * FROM items ORDER BY binary_quantize(embedding)::bit(3) <~> binary_quantize('[1,-2,3]') LIMIT 20
+) ORDER BY embedding <=> '[1,-2,3]' LIMIT 5;
 ```
 
 ## Sparse vectors

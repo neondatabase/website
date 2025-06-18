@@ -1,5 +1,11 @@
 # Manage integrations
 
+> The "Manage integrations" document guides Neon users on configuring and managing third-party integrations to enhance their database functionality within the Neon platform.
+
+## Source
+
+- [Manage integrations HTML](https://neon.com/docs/manage/integrations): The original HTML version of this documentation
+
 The **Integrations** page in the Neon Console provides a hub for managing third-party integrations with your Neon project. You can use these supported integrations to optimize and extend Neon's functionality and streamline your workflow.
 
 When visiting the **Integrations** page, you'll notice different categories of integrations, which you can browse to find the one you need.
