@@ -9,7 +9,7 @@ Neon makes it easy to embed Postgres into your platform with one-second provisio
 
 ![Partners](/images/pages/platforms/partners.jpg)
 
-<CTA title="" description="Our Solutions Engineers have helped platforms like yours embed Postgres at scale. Tell us about your use case—we’ll help you design the right approach." buttonText="Meet with us" buttonUrl="https://neon.tech/contact-sales" />
+<CTA title="" description="Our Solutions Engineers have helped platforms like yours embed Postgres at scale. Tell us about your use case—we’ll help you design the right approach." buttonText="Meet with us" buttonUrl="/contact-sales" />
 
 ## Uniquely built to scale Postgres fleets
 
