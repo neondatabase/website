@@ -97,7 +97,7 @@ To protect sensitive information, Neon filters data in audit logs using the foll
 
 Neon logs operations performed via the Neon API, covering the same categories of actions available in the Neon Console—such as project, branch, compute, and role management—but triggered programmatically. API audit logs do not currently include request payloads.
 
-To protect sensitive information, audit logs for API activity follow the same data filtering approach used for Neon Console audit logs (described above). 
+To protect sensitive information, audit logs for API activity follow the same data filtering approach used for Neon Console audit logs (described above).
 
 ### Postgres audit logs (pgAudit)
 
