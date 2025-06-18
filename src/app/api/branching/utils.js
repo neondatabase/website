@@ -38,7 +38,10 @@ export const scheduleBranchDeletion = async (branchId) => {
   });
 
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
+    const baseUrl =
+      process.env.VERCEL_ENV === 'preview' && process.env.VERCEL_URL
+        ? `https://${process.env.VERCEL_URL}`
+        : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
 
     await qstash.publishJSON({
       url: new URL('/api/branching/branch/delete', baseUrl).toString(),
