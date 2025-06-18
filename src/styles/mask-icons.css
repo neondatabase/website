@@ -45,6 +45,10 @@
   /* Used in a /src/components/pages/multi-tb/branching/branching-demo/branching-demo.jsx  */
   .branching-demo-icon-size {
     -webkit-mask-size: 18px 18px;
+
+    @media screen(lg) {
+      -webkit-mask-size: 14px 14px;
+    }
   }
 
   .branching-demo-speedometer-icon {

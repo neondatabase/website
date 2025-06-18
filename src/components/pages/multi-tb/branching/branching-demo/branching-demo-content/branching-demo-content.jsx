@@ -12,17 +12,22 @@ const BranchingDemoContent = ({
   isLoading = false,
   step,
 }) => (
-  <div className={clsx('z-20 flex flex-col items-start', step === 0 ? 'w-[400px]' : 'w-[312px]')}>
-    <h3 className="mt-[67px] text-balance text-[28px] font-medium leading-tight tracking-tighter text-white lg:mt-[25px]">
+  <div
+    className={clsx(
+      'z-20 flex flex-col items-start',
+      step === 0 ? 'w-[400px] lg:w-[346px]' : 'w-[312px] lg:w-[270px]'
+    )}
+  >
+    <h3 className="mt-[67px] text-balance text-[28px] font-medium leading-tight tracking-tighter text-white lg:mt-8 lg:text-[24px]">
       {title}
     </h3>
     <p
-      className="mt-2.5 text-[15px] leading-snug tracking-extra-tight text-gray-new-70"
+      className="mt-2.5 text-[15px] leading-snug tracking-extra-tight text-gray-new-70 lg:text-[14px]"
       dangerouslySetInnerHTML={{ __html: description }}
     />
     <Button
       className={clsx(
-        'mt-[23px] h-8 px-4 text-[13px] font-medium leading-none tracking-extra-tight',
+        'mt-[23px] h-8 px-4 text-[13px] font-medium leading-none tracking-extra-tight lg:mt-[21px]',
         disabled && 'cursor-not-allowed',
         isLoading && 'cursor-progress'
       )}

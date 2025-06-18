@@ -31,13 +31,13 @@ const getSkeletonWidth = (columnId, rowId) => {
 
 const getColumnWidth = (columnId, isLoading) => {
   if (columnId === 'id') {
-    return isLoading ? 'w-[76px]' : 'w-[52px]';
+    return isLoading ? 'w-[76px] lg:w-[61px]' : 'w-[52px] lg:w-[43px] lg:mr-[29px]';
   }
   if (columnId === 'singer') {
-    return 'w-[100px] mr-10';
+    return 'w-[100px] mr-10 lg:w-[75px] lg:mr-[29px]';
   }
 
-  return 'mr-0 max-w-[137px] flex-1';
+  return 'mr-0 max-w-[137px] flex-1 lg:w-[100px]';
 };
 
 const BranchingDemoTable = ({
@@ -55,7 +55,7 @@ const BranchingDemoTable = ({
   return (
     <div className="branching-demo-table grow">
       <div className="mx-3">
-        <span className="flex flex-col gap-1 text-sm leading-snug tracking-extra-tight text-gray-new-50">
+        <span className="flex flex-col gap-1 text-sm leading-snug tracking-extra-tight text-gray-new-50 lg:text-[12px]">
           <span>
             Branch: <span className="text-white">{databaseBranchName}</span>
           </span>
@@ -66,16 +66,16 @@ const BranchingDemoTable = ({
       </div>
       <div className="relative mt-3.5 overflow-hidden rounded-[10px] border border-transparent">
         <div className="relative overflow-hidden bg-[#121417] bg-opacity-80 p-px">
-          <div className="relative flex px-3 py-3.5 text-[15px] font-medium leading-snug tracking-extra-tight text-gray-new-60 after:pointer-events-none after:absolute after:inset-0 after:border-b after:border-white after:mix-blend-overlay">
-            <div className="relative mr-3 w-3" aria-hidden="true">
+          <div className="relative flex px-3 py-3.5 text-[15px] font-medium leading-snug tracking-extra-tight text-gray-new-60 after:pointer-events-none after:absolute after:inset-0 after:border-b after:border-white after:mix-blend-overlay lg:px-2 lg:py-2 lg:text-[12px]">
+            <div className="relative mr-3 w-3 lg:mr-[9px] lg:w-[9px]" aria-hidden="true">
               <span className="sr-only">Choose</span>
             </div>
             {TABLE_COLUMNS.map((column) => (
               <div
                 className={clsx(
-                  column.id === 'id' && 'min-w-[52px]',
-                  column.id === 'singer' && 'min-w-[100px]',
-                  column.id === 'song' ? 'mr-0 flex-1' : 'mr-10'
+                  column.id === 'id' && 'w-[52px] lg:mr-[29px] lg:w-[43px]',
+                  column.id === 'singer' && 'w-[100px] lg:mr-[29px] lg:w-[75px]',
+                  column.id === 'song' ? 'mr-0 flex-1' : 'mr-10 lg:mr-7'
                 )}
                 key={column.id}
               >
@@ -83,18 +83,18 @@ const BranchingDemoTable = ({
               </div>
             ))}
           </div>
-          <ul className="text-base leading-snug tracking-extra-tight drop-shadow-[0_4px_40px_0_rgba(0,0,0,0.25)]">
+          <ul className="text-base leading-snug tracking-extra-tight drop-shadow-[0_4px_40px_0_rgba(0,0,0,0.25)] lg:text-[12px]">
             {tableRows.map((row) => (
               <li
                 key={row.id}
                 className={clsx(
-                  'group relative flex h-full px-3 py-[13px]',
+                  'group relative flex h-full px-3 py-[13px] lg:px-2 lg:pb-[9px] lg:pt-2.5',
                   'before:pointer-events-none before:absolute before:inset-0 before:mix-blend-overlay before:last:rounded-b-[10px]',
                   'after:pointer-events-none after:absolute after:inset-0 after:-bottom-px after:mx-3 after:border-b after:border-white after:mix-blend-overlay after:last:hidden',
                   !isLoading &&
                     isCheckboxInteractive &&
                     'cursor-pointer hover:before:bg-white hover:before:opacity-50 focus:outline-none focus:before:bg-white focus:before:opacity-50',
-                  'last:rounded-b-[10px] last:pb-[18px] last:pt-4',
+                  'last:rounded-b-[10px] last:pb-[18px] last:pt-4 lg:last:pb-3 lg:last:pt-2.5',
                   row.id === lastAddedRowId && 'bg-[rgba(0,229,153,0.08)]'
                 )}
                 role="option"
@@ -117,7 +117,7 @@ const BranchingDemoTable = ({
                 }
               >
                 {!isLoading && (
-                  <div className="relative mr-3 flex w-3 items-center">
+                  <div className="relative mr-3 flex w-3 items-center lg:mr-[9px] lg:w-[9px]">
                     <Checkbox
                       checked={selectedRows.includes(row.id)}
                       id={`row-${row.id}`}
@@ -132,14 +132,14 @@ const BranchingDemoTable = ({
                   <div
                     className={clsx(
                       getColumnWidth(column.id, isLoading),
-                      column.id === 'id' ? 'mr-10 font-medium' : 'font-normal',
+                      column.id === 'id' ? 'mr-10 font-medium lg:mr-[29px]' : 'font-normal',
                       column.id === 'song' ? 'text-gray-new-80' : 'text-white'
                     )}
                     key={column.id}
                   >
                     {isLoading ? (
                       <span
-                        className="my-1 block h-3.5 animate-pulse rounded-full bg-white mix-blend-overlay"
+                        className="my-1 block h-3.5 animate-pulse rounded-full bg-white mix-blend-overlay lg:my-0 lg:h-[1.375em]"
                         style={{ width: getSkeletonWidth(column.id, row.id) }}
                       />
                     ) : (

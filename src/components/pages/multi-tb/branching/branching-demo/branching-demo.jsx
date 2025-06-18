@@ -187,18 +187,18 @@ const BranchingDemo = ({ className }) => {
   return (
     <div
       className={clsx(
-        'relative flex flex-1 flex-col overflow-hidden px-24 py-8 pt-[18px]',
+        'relative flex flex-1 flex-col overflow-hidden px-24 py-8 pt-[18px] lg:px-12 lg:py-[76px] lg:pt-7',
         className
       )}
     >
       <form className="flex flex-1 flex-col gap-8" onSubmit={handleSubmit(handleNextStep)}>
-        <ul className="relative flex items-center justify-center gap-1">
+        <ul className="relative z-20 flex items-center justify-center gap-1">
           {Object.values(STEPS).map(({ iconClassName }, index) => (
             <React.Fragment key={index}>
               <li
                 className={clsx(
-                  'relative flex size-7 items-center justify-center rounded-full transition-colors',
-                  'after:pointer-events-none after:absolute after:inset-0 after:rounded-full after:border',
+                  'relative flex size-7 items-center justify-center rounded-full transition-colors lg:size-6',
+                  'after:pointer-events-none after:absolute after:inset-0 after:rounded-full after:border after:transition-colors',
                   index <= currentStep
                     ? 'bg-[radial-gradient(112.79%_117.86%_at_50%_100%,#087D69_0%,#0B2D29_47.12%)] text-green-45 after:border-white after:mix-blend-overlay'
                     : 'after:border-gray-new-15'
@@ -206,14 +206,21 @@ const BranchingDemo = ({ className }) => {
               >
                 <span
                   className={clsx(
-                    'size-[18px] transition-colors',
+                    'size-[18px] transition-colors lg:size-[14px]',
                     iconClassName,
                     index <= currentStep ? 'bg-white' : 'bg-gray-new-30'
                   )}
                 />
               </li>
               {index < Object.keys(STEPS).length - 1 && (
-                <li className="h-px w-[60px] bg-gray-new-15" aria-hidden />
+                <li
+                  className={clsx('h-px w-[60px] transition-colors duration-300 lg:w-[40px]', {
+                    'bg-[#0B4C43]': index < currentStep,
+                    'bg-gradient-to-r from-[#0B4C43] to-gray-new-15': index === currentStep,
+                    'bg-gray-new-15': index > currentStep,
+                  })}
+                  aria-hidden
+                />
               )}
             </React.Fragment>
           ))}
@@ -230,7 +237,7 @@ const BranchingDemo = ({ className }) => {
           />
           {currentStep === 0 ? (
             <Image
-              className="pointer-events-none absolute bottom-0 right-0 z-10 rounded-[10px]"
+              className="pointer-events-none absolute bottom-0 right-0 z-10 rounded-[10px] lg:bottom-[33px] lg:right-[-32px] lg:w-[410px]"
               src={branchingDemo}
               alt=""
               width={525}

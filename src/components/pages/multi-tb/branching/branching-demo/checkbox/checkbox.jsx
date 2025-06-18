@@ -16,7 +16,7 @@ const CustomCheckbox = ({ checked, onChange, id, label, tabIndex, disabled }) =>
     />
     <div
       className={clsx(
-        'flex size-3 items-center justify-center rounded-full',
+        'flex size-3 items-center justify-center rounded-full lg:size-[9px]',
         'border border-white mix-blend-overlay transition-colors',
         'peer-checked:border-0 peer-checked:bg-white peer-checked:mix-blend-normal',
         'peer-hover:border-white peer-hover:mix-blend-normal',
