@@ -71,21 +71,21 @@ Audit events may not be logged if database endpoints experience exceptionally he
 Neon maintains a comprehensive audit trail to support HIPAA compliance. This includes the following categories of logged events:
 
 1. [Neon Console audit logs](#neon-console-audit-logs): Captures user actions in the Neon Console.
-2. [API audit logs](#api-audit-logs): Logs API requests
+2. [API audit logs](#api-audit-logs): Logs API requests.
 3. [Postgres audit logs](#postgres-audit-logs-pgaudit): Logged using the [pgAudit](https://www.pgaudit.org/) extension (`pgaudit`) for Postgres.
 
 > Self-serve access to HIPAA audit logs is currently not supported. Access to audit logs can be requested by contacting `hipaa@neon.tech`.
 
 ### Neon Console audit logs
 
-Neon logs operations performed via the Neon Console interface. These actions are initiated through the UI and correspond to API requests made to the Neon backend. Examples of logged operations include:
+Neon logs operations performed via the Neon Console interface. These actions are initiated through the UI and correspond to API requests made to the Neon backend. Examples of logged operations may include:
 
 - **Project management**: creating, deleting, renaming projects
-- **Branch management**: creating, deleting, renaming branches; restoring from backups
-- **Compute management**: starting, stopping, scaling compute instances
-- **Database and role management**: creating or deleting databases; resetting Postgres role passwords.
-- **Connection setup**: viewing or copying connection strings.
-- **Organization and access**: inviting users, assigning roles, or removing users from an organization.
+- **Branch management**: creating, deleting, renaming branches
+- **Compute management**: starting and stopping of compute instances
+- **Database and role management**: creating or deleting databases and roles
+- **Connection setup**: copying connection strings
+- **Organization and access**: inviting or removing organization members and collaborators
 
 To protect sensitive information, Neon filters data in audit logs using the following approach:
 
