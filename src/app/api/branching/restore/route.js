@@ -13,16 +13,16 @@ export async function POST(request) {
 
     const start = performance.now();
     const response = await fetch(
-      `https://console.neon.tech/api/v2/projects/${process.env.NEON_BRANCHIND_DEMO_PROJECT_ID}/branches/${branchId}/restore`,
+      `https://console.neon.tech/api/v2/projects/${process.env.NEON_BRANCHING_DEMO_PROJECT_ID}/branches/${branchId}/restore`,
       {
         method: 'POST',
         headers: {
           accept: 'application/json',
           'content-type': 'application/json',
-          authorization: `Bearer ${process.env.NEON_BRANCHIND_DEMO_API_KEY}`,
+          authorization: `Bearer ${process.env.NEON_BRANCHING_DEMO_API_KEY}`,
         },
         body: JSON.stringify({
-          source_branch_id: process.env.NEON_BRANCHIND_DEMO_PARENT_ID,
+          source_branch_id: process.env.NEON_BRANCHING_DEMO_PARENT_ID,
         }),
       }
     );

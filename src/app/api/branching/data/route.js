@@ -17,7 +17,7 @@ export async function POST(request) {
     const isMainBranch = !branchId || branchId === 'main';
 
     const connectionString = isMainBranch
-      ? composeConnectionString(process.env.NEON_BRANCHIND_DEMO_DB_PGHOST_DEFAULT)
+      ? composeConnectionString(process.env.NEON_BRANCHING_DEMO_DB_PGHOST_DEFAULT)
       : await getBranchConnectionString(branchId);
 
     const sql = neon(connectionString);

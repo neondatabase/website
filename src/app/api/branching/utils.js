@@ -2,10 +2,10 @@ import { neon } from '@neondatabase/serverless';
 import { Client } from '@upstash/qstash';
 
 export const composeConnectionString = (host) =>
-  `postgresql://${process.env.NEON_BRANCHIND_DEMO_DB_PGUSER}:${process.env.NEON_BRANCHIND_DEMO_DB_PGPASSWORD}@${host}/${process.env.NEON_BRANCHIND_DEMO_DB_PGDATABASE}?sslmode=require`;
+  `postgresql://${process.env.NEON_BRANCHING_DEMO_DB_PGUSER}:${process.env.NEON_BRANCHING_DEMO_DB_PGPASSWORD}@${host}/${process.env.NEON_BRANCHING_DEMO_DB_PGDATABASE}?sslmode=require`;
 
 export const getBranchConnectionString = async (branchId) => {
-  const sql = neon(composeConnectionString(process.env.NEON_BRANCHIND_DEMO_DB_PGHOST_DEFAULT));
+  const sql = neon(composeConnectionString(process.env.NEON_BRANCHING_DEMO_DB_PGHOST_DEFAULT));
   const [branch] = await sql`
     SELECT connection_string 
     FROM branches 
@@ -22,7 +22,7 @@ export const getBranchConnectionString = async (branchId) => {
 
 export const handleInsertBranchConnection = async (branchId, host) => {
   try {
-    const sql = neon(composeConnectionString(process.env.NEON_BRANCHIND_DEMO_DB_PGHOST_DEFAULT));
+    const sql = neon(composeConnectionString(process.env.NEON_BRANCHING_DEMO_DB_PGHOST_DEFAULT));
     await sql`
       INSERT INTO branches (branch_name, connection_string)
       VALUES (${branchId}, ${host})
@@ -34,7 +34,7 @@ export const handleInsertBranchConnection = async (branchId, host) => {
 
 export const scheduleBranchDeletion = async (branchId) => {
   const qstash = new Client({
-    token: process.env.NEON_BRANCHIND_DEMO_QSTASH_TOKEN,
+    token: process.env.NEON_BRANCHING_DEMO_QSTASH_TOKEN,
   });
 
   try {

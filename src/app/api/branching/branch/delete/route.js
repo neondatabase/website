@@ -14,13 +14,13 @@ async function handler(request) {
     const { branchId } = await requestSchema.validate(body);
 
     const response = await fetch(
-      `https://console.neon.tech/api/v2/projects/${process.env.NEON_BRANCHIND_DEMO_PROJECT_ID}/branches/${branchId}`,
+      `https://console.neon.tech/api/v2/projects/${process.env.NEON_BRANCHING_DEMO_PROJECT_ID}/branches/${branchId}`,
       {
         method: 'DELETE',
         headers: {
           accept: 'application/json',
           'content-type': 'application/json',
-          authorization: `Bearer ${process.env.NEON_BRANCHIND_DEMO_API_KEY}`,
+          authorization: `Bearer ${process.env.NEON_BRANCHING_DEMO_API_KEY}`,
         },
       }
     );

@@ -7,13 +7,13 @@ export async function POST() {
   try {
     const start = performance.now();
     const response = await fetch(
-      `https://console.neon.tech/api/v2/projects/${process.env.NEON_BRANCHIND_DEMO_PROJECT_ID}/branches`,
+      `https://console.neon.tech/api/v2/projects/${process.env.NEON_BRANCHING_DEMO_PROJECT_ID}/branches`,
       {
         method: 'POST',
         headers: {
           accept: 'application/json',
           'content-type': 'application/json',
-          authorization: `Bearer ${process.env.NEON_BRANCHIND_DEMO_API_KEY}`,
+          authorization: `Bearer ${process.env.NEON_BRANCHING_DEMO_API_KEY}`,
         },
         body: JSON.stringify({
           endpoints: [
