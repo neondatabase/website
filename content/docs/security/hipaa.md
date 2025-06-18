@@ -25,34 +25,34 @@ HIPAA is a federal law that sets national standards for the protection of health
 
 ## How Neon protects your data
 
-1. Use and Disclosure of PHI
+1. Use and disclosure of PHI
 
    - We only use PHI to provide our agreed-upon services and to meet legal obligations.
    - PHI is disclosed only as required by law or with proper authorization.
 
-2. Safeguards in Place
+2. Safeguards
 
    - Administrative: Policies and training to ensure compliance.
    - Physical: Secure access controls to data storage areas.
    - Technical: Encryption and access controls for electronic PHI.
 
-3. Incident Reporting
+3. Incident reporting
 
    - We promptly report any unauthorized use or disclosure of PHI.
    - Breach notifications are provided within 30 days as per HIPAA requirements.
 
-4. Subcontractors and Agents
+4. Subcontractors and agents
 
    - Any third parties we work with are required to adhere to the same data protection standards.
    - We provide transparency by listing our subcontractors at [https://neon.com/hipaa-contractors](/hipaa-contractors) and notifying customers of any changes if you sign up to notifications [here](https://share-eu1.hsforms.com/1XjUD9QeKQw-RSAgQ...).
 
-5. Customer Responsibilities
+5. Customer responsibilities
 
    - Customers must ensure that PHI is only stored in data rows as intended for sensitive data and should never be included in metadata, column names, table names, schema descriptions, or system-generated logs such as audit trails, query logs, or error logs.
    - Customers have the responsibility to configure a session timeout.
    - Customers need to avoid including PHI in support tickets or metadata fields.
 
-6. PHI Access and Amendments
+6. PHI access and amendments
    - Customers can request access to audit logs by contacting `hipaa@neon.tech`.
    - Any updates or corrections to PHI need to be carried out by the customer.
 
@@ -68,14 +68,38 @@ Audit events may not be logged if database endpoints experience exceptionally he
 
 ## Logged events
 
-Neon maintains a comprehensive audit trail to support HIPAA compliance. This includes two categories of logged events:
+Neon maintains a comprehensive audit trail to support HIPAA compliance. This includes the following categories of logged events:
 
-1. **SQL activity**, logged using the [pgAudit](https://www.pgaudit.org/) extension (`pgaudit`) for PostgreSQL.
-2. **User and administrative actions** performed via the Neon Console, logged at the API request level.
+1. [Neon Console audit logs](#neon-console-audit-logs): Captures user actions in the Neon Console.
+2. [API audit logs](#api-audit-logs): Logs API requests
+3. [Postgres audit logs](#postgres-audit-logs-pgaudit): Logged using the [pgAudit](https://www.pgaudit.org/) extension (`pgaudit`) for Postgres.
 
-For more on pgAudit, see the [pgAudit documentation](https://github.com/pgaudit/pgaudit/blob/main/README.md).
+> Self-serve access to HIPAA audit logs is currently not supported. Access to audit logs can be requested by contacting `hipaa@neon.tech`.
 
-### pgAudit settings in Neon (HIPAA mode)
+### Neon Console audit logs
+
+Neon logs operations performed via the Neon Console interface. These actions are initiated through the UI and correspond to API requests made to the Neon backend. Examples of logged operations include:
+
+- **Project management**: creating, deleting, renaming projects
+- **Branch management**: creating, deleting, renaming branches; restoring from backups
+- **Compute management**: starting, stopping, scaling compute instances
+- **Database and role management**: creating or deleting databases; resetting Postgres role passwords.
+- **Connection setup**: viewing or copying connection strings.
+- **Organization and access**: inviting users, assigning roles, or removing users from an organization.
+
+To protect sensitive information, Neon filters data in audit logs using the following approach:
+
+- Sensitive fields (such as `connection_uri` and `password`) are excluded from logs whereever possible. These are identified using `x-sensitive` tags in the OpenAPI specification.
+- `GET` requests: Only query parameters are logged; response payloads are not recorded.
+- Mutation requests (`PATCH`, `PUT`, `POST`, `DELETE`): Request and response bodies are logged with sensitive fields redacted.
+
+### API audit logs
+
+Neon logs operations performed via the Neon API, covering the same categories of actions available in the Neon Console—such as project, branch, compute, and role management—but triggered programmatically. API audit logs do not currently include request payloads.
+
+To protect sensitive information, audit logs for API activity follow the same data filtering approach used for Neon Console audit logs (described above). 
+
+### Postgres audit logs (pgAudit)
 
 When HIPAA audit logging is enabled for a Neon project, Neon configures pgAudit with the following settings by default:
 
@@ -102,6 +126,12 @@ This configuration enables logging for all major classes of SQL activity while e
 Excluded:
 
 - **MISC**: Low-impact commands such as `DISCARD`, `FETCH`, `CHECKPOINT`, `VACUUM`, and `SET`.
+
+<Admonition type="note">
+In some cases, audit logs may include SQL statements that contain plain-text passwords—for example, in a `CREATE ROLE ... LOGIN PASSWORD` command. This is due to limitations in the Postgres `pgaudit` extension, which may log full statements without redacting sensitive values.
+
+This behavior is a known issue. We recommend avoiding the inclusion of raw credentials in SQL statements where possible.
+</admonition>
 
 For more details, see the [pgAudit documentation](https://github.com/pgaudit/pgaudit).
 
@@ -160,25 +190,6 @@ The following example shows how a simple SQL command—`CREATE SCHEMA IF NOT EXI
 ### Extension configuration
 
 The `pgaudit` extension is preloaded on HIPAA-enabled Neon projects. For extension version information, see [Supported Postgres extensions](/docs/extensions/pg-extensions).
-
-### Console operation logging
-
-Neon logs operations performed via the Neon Console interface. These actions are initiated through the UI and correspond to API requests made to the Neon backend. Examples of logged operations include:
-
-- **Project management**: creating, deleting, renaming projects
-- **Branch management**: creating, deleting, renaming branches; restoring from backups
-- **Compute management**: starting, stopping, scaling compute instances
-- **Database and role management**: creating or deleting databases; resetting Postgres role passwords.
-- **Connection setup**: viewing or copying connection strings.
-- **Organization and access**: inviting users, assigning roles, or removing users from an organization.
-
-To protect sensitive information, Neon filters data in audit logs using the following approach:
-
-- Sensitive fields (such as `connection_uri` and `password`) are excluded from logs. These are identified using `x-sensitive` tags in the OpenAPI specification.
-- `GET` requests: Only query parameters are logged; response payloads are not recorded.
-- Mutation requests (`PATCH`, `PUT`, `POST`, `DELETE`): Request and response bodies are logged with sensitive fields redacted.
-
-This logging approach ensures that all meaningful Neon Console activity is auditable while safeguarding user credentials and other sensitive data.
 
 ### Compliance assurance
 
