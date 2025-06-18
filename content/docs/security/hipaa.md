@@ -131,7 +131,7 @@ Excluded:
 In some cases, audit logs may include SQL statements that contain plain-text passwords—for example, in a `CREATE ROLE ... LOGIN PASSWORD` command. This is due to limitations in the Postgres `pgaudit` extension, which may log full statements without redacting sensitive values.
 
 This behavior is a known issue. We recommend avoiding the inclusion of raw credentials in SQL statements where possible.
-</admonition>
+</Admonition>
 
 For more details, see the [pgAudit documentation](https://github.com/pgaudit/pgaudit).
 
