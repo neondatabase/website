@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
 
 import BgDecor from 'components/pages/use-case/bg-decor';
 import Button from 'components/shared/button';

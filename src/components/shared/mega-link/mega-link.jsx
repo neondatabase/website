@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import NextLink from 'next/link';
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
 
 import Chevron from 'icons/chevron-right-lg.inline.svg';
 
