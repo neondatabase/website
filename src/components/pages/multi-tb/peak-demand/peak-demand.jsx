@@ -7,7 +7,7 @@ import LINKS from 'constants/links';
 import automaticScaling from 'images/pages/multi-tb/peak-demand/automatic-scaling.jpg';
 
 const PeakDemand = () => (
-  <section className="peak-demand mt-[257px] xl:mt-[241px] lg:mt-[177px] md:mt-[112px]">
+  <section className="peak-demand mt-[157px] xl:mt-[141px] lg:mt-[77px] md:mt-[12px]">
     <Container className="lg:mx-8 md:mx-auto md:max-w-sm" size="768" as="header">
       <h2 className="max-w-[560px] text-balance font-title text-6xl font-medium leading-none tracking-extra-tight text-white xl:max-w-[500px] xl:text-[56px] lg:text-5xl md:text-[36px]">
         Peak demand? Bring it on.
