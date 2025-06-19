@@ -118,7 +118,7 @@ Run the following command to apply the migration to your Neon database:
 dotnet ef database update
 ```
 
-To learn more about migrations in Entity Framework Core, refer to the [Neon documentation](https://neon.tech/docs/guides/entity-migrations) guide which provides a detailed explanation of the migration process.
+To learn more about migrations in Entity Framework Core, refer to the [Neon documentation](/docs/guides/entity-migrations) guide which provides a detailed explanation of the migration process.
 
 At this point, your database schema is set up. Next, we'll automate this process using Azure Pipelines.
 
@@ -209,14 +209,14 @@ When working in a team, conflicts may arise due to multiple migration files bein
 
 In addition, consider the following:
 
-- When applying migrations, use a direct Neon connection instead of a [pooled one](https://neon.tech/docs/connect/connection-pooling).
-- Before applying changes to production, test them in a staging environment or using a [Neon branch](https://neon.tech/docs/introduction/branching).
+- When applying migrations, use a direct Neon connection instead of a [pooled one](/docs/connect/connection-pooling).
+- Before applying changes to production, test them in a staging environment or using a [Neon branch](/docs/introduction/branching).
 
 ## Conclusion
 
 By integrating Entity Framework Core with Azure Pipelines, you can simplify database migrations and ensure schema changes are consistently applied to your Neon Postgres database. Automating migrations reduces the risk of human error and helps maintain database integrity across environments.
 
-As a next step, make sure to explore [Neon branches](https://neon.tech/docs/introduction/branching), so you can test your migrations in a staging environment before deploying to production.
+As a next step, make sure to explore [Neon branches](/docs/introduction/branching), so you can test your migrations in a staging environment before deploying to production.
 
 ## Additional Resources
 

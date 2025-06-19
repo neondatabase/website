@@ -35,7 +35,7 @@ Before you begin, ensure you have the following:
 
 1.  **Codeium Windsurf Editor:** Download and install Windsurf from [codeium.com/windsurf](https://codeium.com/windsurf).
 2.  **A Neon Account and Project:** You'll need a Neon account and a project. You can quickly create a new Neon project here [pg.new](https://pg.new)
-3.  **Neon API Key (for Local MCP server):** After signing up, get your Neon API Key from the [Neon console](https://console.neon.tech/app/settings/api-keys). This API key is needed to authenticate your application with Neon. For instructions, see [Manage API keys](https://neon.tech/docs/manage/api-keys).
+3.  **Neon API Key (for Local MCP server):** After signing up, get your Neon API Key from the [Neon console](https://console.neon.tech/app/settings/api-keys). This API key is needed to authenticate your application with Neon. For instructions, see [Manage API keys](/docs/manage/api-keys).
 
     <Admonition type="warning" title="Neon API Key Security">
     Keep your Neon API key secure, and never share it publicly. It provides access to your Neon projects.
@@ -85,6 +85,16 @@ You can either watch the video below or follow the steps to set up the Neon MCP 
 
 <Admonition type="note">
 The remote hosted MCP server is in preview due to the [new OAuth MCP specification](https://spec.modelcontextprotocol.io/specification/2025-03-26/basic/authorization/), expect potential changes as we continue to refine the OAuth integration.
+</Admonition>
+
+<Admonition type="tip" title="Troubleshooting OAuth Errors">
+If you encounter an error message like `{"code":"invalid_request","error":"invalid redirect uri"}` when starting Windsurf with the remote MCP server, this is typically due to cached OAuth credentials. To fix this issue:
+
+1. Remove the MCP authentication cache by running: `rm -rf ~/.mcp-auth`
+2. Restart Windsurf
+3. The OAuth flow will start fresh, allowing you to properly authenticate
+
+This error commonly occurs when there are changes to the OAuth configuration or when cached credentials become invalid.
 </Admonition>
 
 ### Option 2: Setting up the Local Neon MCP Server
@@ -152,24 +162,7 @@ key for authentication.
 
    You've now configured Neon MCP Server in Windsurf and can manage your Neon Postgres databases using AI.
 
-## Neon MCP Server Tools
-
-Neon MCP server exposes the following actions, which primarily map to **Neon API endpoints**:
-
-- `list_projects`: Lists all your Neon projects. This uses the Neon API to retrieve a summary of all projects associated with your Neon account. _Note: This particular action is still under development. It's not yet returning results as expected._
-- `describe_project`: Retrieves detailed information about a specific Neon project. Provides comprehensive details about a chosen project, such as its ID, name, and associated branches.
-- `create_project`: Creates a new Neon project — a container in Neon for branches, databases, roles, and computes.
-- `delete_project`: Deletes an existing Neon project.
-- `create_branch`: Creates a new branch within a Neon project. Leverages Neon's branching feature, allowing you to create new branches for development or migrations.
-- `delete_branch`: Deletes an existing branch in a Neon project.
-- `describe_branch`: Retrieves details about a specific branch. Retrieves information about a particular branch, such as its name and ID.
-- `get_connection_string`: Retrieves a connection string for a specific database in a Neon project. Returns a formatted connection string that can be used to connect to the database.
-- `run_sql`: Runs a single SQL query against a Neon database. Allows you to run read or write SQL queries.
-- `run_sql_transaction`: Runs a series of SQL queries within a transaction against a Neon database. Enables running multiple SQL statements as a single atomic transaction, ensuring data consistency.
-- `get_database_tables`: Lists all tables in a specified Neon database. Provides a list of tables.
-- `describe_table_schema`: Retrieves the schema definition of a specific table. Details the structure of a table, including columns and data types.
-- `prepare_database_migration`: Initiates a database migration process, utilizing a temporary branch for safety. Begins the process of altering your database schema, safely using Neon's branching feature.
-- `complete_database_migration`: Completes a migration process, applying changes to your main database and cleaning up temporary resources.
+<MCPTools />
 
 These actions enable any MCP client like Windsurf to interact with various functionalities of the **Neon platform via the Neon API.** Certain tools, especially database migration ones, are tailored for AI agent and LLM usage, leveraging Neon's branching for safe preview and commit.
 

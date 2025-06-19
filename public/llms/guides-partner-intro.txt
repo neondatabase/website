@@ -1,47 +1,36 @@
 # Partner guide
 
-Learn how to integrate your platform or service with Neon
+> The "Partner guide" document outlines the process for integrating and collaborating with Neon, detailing partnership requirements, steps for onboarding, and available resources for partners within the Neon ecosystem.
+
+## Source
+
+- [Partner guide HTML](https://neon.com/docs/guides/partner-intro): The original HTML version of this documentation
 
 Learn how you can offer instant, managed Postgres databases to your users with Neon. This guide covers how to become a Neon partner, integrate your platform or service with Neon, set usage limits for your users, and more.
 
-Vercel, Replit, Retool, and Koyeb have integrated Neon into their platforms." isIntro>
+
 
 ## Partnering with Neon
 
 Learn about the benefits of integrating with Neon and how to become a partner.
 
-
-
-Partner page
-
-Become a Partner
-
-
+- [Partner page](https://neon.com/partners): Read about the benefits of partnering with Neon
+- [Become a Partner](https://neon.com/partners#partners-apply): Request a meeting with our partnership team
 
 ## Integrate with Neon
 
 Find out how you can integrate with Neon.
 
-
-
-Get started
-
-Neon API
-
-OAuth
-
-Sample OAuth app
-
-Toolkit for AI Agents
-
-
+- [Get started](https://neon.com/docs/guides/partner-get-started): Learn the essentials for integrating with Neon
+- [Neon API](https://neon.com/docs/reference/api-reference): Integrate using the Neon API
+- [OAuth](https://neon.com/docs/guides/oauth-integration): Integrate with Neon using OAuth
+- [Sample OAuth app](https://github.com/neondatabase/neon-branches-visualizer): Check out a sample OAuth application
+- [Toolkit for AI Agents](https://github.com/neondatabase/toolkit): Spin up a Postgres database in seconds
+- [Claimable database](https://neon.com/docs/workflows/claimable-database-integration): Manage Neon projects for users with the database claim API
 
 ## Billing
 
 Learn how to set limits for your customers and track usage.
 
-
-
-Configure consumption limits
-
-Query consumption metrics
+- [Configure consumption limits](https://neon.com/docs/guides/partner-consumption-limits): Use the Neon API to set consumption limits for your customers
+- [Query consumption metrics](https://neon.com/docs/guides/partner-consumption-metrics): Track usage with Neon's consumption metrics APIs

@@ -1,30 +1,30 @@
 # Automate branching with GitHub Actions
 
-Create and delete branches with GitHub Actions
+> The document "Automate branching with GitHub Actions" guides Neon users on setting up GitHub Actions to automate the creation and management of database branches within the Neon platform.
+
+## Source
+
+- [Automate branching with GitHub Actions HTML](https://neon.com/docs/guides/branching-github-actions): The original HTML version of this documentation
 
 Neon provides the following GitHub Actions for working with Neon branches, which you can add to your CI workflows:
 
-- [Create branch action](#create-branch-action)
-- [Delete branch action](#delete-branch-action)
-- [Reset from parent action](#reset-from-parent-action)
-- [Schema Diff action](#schema-diff-action)
+- [Create branch action](https://neon.com/docs/guides/branching-github-actions#create-branch-action)
+- [Delete branch action](https://neon.com/docs/guides/branching-github-actions#delete-branch-action)
+- [Reset from parent action](https://neon.com/docs/guides/branching-github-actions#reset-from-parent-action)
+- [Schema Diff action](https://neon.com/docs/guides/branching-github-actions#schema-diff-action)
 
-
-Neon supports a GitHub integration that connects your Neon project to a GitHub repository. The integration automatically configures a `NEON_API_KEY` secret and `PROJECT_ID` variable in your GitHub repository and provides a sample GitHub Actions workflow that utilizes Neon's GitHub Actions. See [Neon GitHub integration](/docs/guides/neon-github-integration) for more.
-
+   **Tip**: Neon supports a GitHub integration that connects your Neon project to a GitHub repository. The integration automatically configures a `NEON_API_KEY` secret and `PROJECT_ID` variable in your GitHub repository and provides a sample GitHub Actions workflow that utilizes Neon's GitHub Actions. See [Neon GitHub integration](https://neon.com/docs/guides/neon-github-integration) for more.
 
 ## Create branch action
 
 This GitHub Action creates a new branch in your Neon project.
 
-
-You can find this action on the **GitHub Actions Marketplace**: [Neon Database Create Branch Action](https://github.com/marketplace/actions/neon-create-branch-github-action).
-
+   **Tip** GitHub Actions Marketplace: You can find this action on the **GitHub Actions Marketplace**: [Neon Database Create Branch Action](https://github.com/marketplace/actions/neon-create-branch-github-action).
 
 ### Prerequisites
 
-- A Neon API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
-- You will need to add your Neon API key to your GitHub repository secrets. See [Add a Neon API key to your GitHub repository secrets](#add-a-neon-api-key-to-your-github-repository-secrets) for instructions.
+- A Neon API key. For information about obtaining an API key, see [Create an API key](https://neon.com/docs/manage/api-keys#create-an-api-key).
+- You will need to add your Neon API key to your GitHub repository secrets. See [Add a Neon API key to your GitHub repository secrets](https://neon.com/docs/guides/branching-github-actions#add-a-neon-api-key-to-your-github-repository-secrets) for instructions.
 
 ### Example
 
@@ -115,14 +115,12 @@ outputs:
 
 This GitHub Action deletes a branch from your Neon project.
 
-
-You can find this action on the **GitHub Actions Marketplace**: [Neon Database Delete Branch](https://github.com/marketplace/actions/neon-database-delete-branch).
-
+   **Tip** GitHub Actions Marketplace: You can find this action on the **GitHub Actions Marketplace**: [Neon Database Delete Branch](https://github.com/marketplace/actions/neon-database-delete-branch).
 
 ### Prerequisites
 
-- A Neon API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
-- You will need to add your Neon API key to your GitHub repository secrets. See [Add a Neon API key to your GitHub repository secrets](#add-a-neon-api-key-to-your-github-repository-secrets) for instructions.
+- A Neon API key. For information about obtaining an API key, see [Create an API key](https://neon.com/docs/manage/api-keys#create-an-api-key).
+- You will need to add your Neon API key to your GitHub repository secrets. See [Add a Neon API key to your GitHub repository secrets](https://neon.com/docs/guides/branching-github-actions#add-a-neon-api-key-to-your-github-repository-secrets) for instructions.
 
 ### Example
 
@@ -153,7 +151,7 @@ inputs:
     description: 'The Neon branch id'
     deprecationMessage: 'The `branch_id` input is deprecated in favor of `branch`'
   api_key:
-    description: 'The Neon API key, read more at https://neon.tech/docs/manage/api-keys'
+    description: 'The Neon API key, read more at https://neon.com/docs/manage/api-keys'
     required: true
   branch:
     description: 'The Neon branch name or id'
@@ -167,14 +165,12 @@ This Action has no outputs.
 
 This GitHub Action resets a child branch with the latest data from its parent branch.
 
-
-You can find this action on the **GitHub Actions Marketplace**: [Neon Database Reset Branch Action](https://github.com/marketplace/actions/neon-database-reset-branch-action).
-
+   **Tip** GitHub Actions Marketplace: You can find this action on the **GitHub Actions Marketplace**: [Neon Database Reset Branch Action](https://github.com/marketplace/actions/neon-database-reset-branch-action).
 
 ### Prerequisites
 
-- A Neon API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
-- You will need to add your Neon API key to your GitHub repository secrets. See [Add a Neon API key to your GitHub repository secrets](#add-a-neon-api-key-to-your-github-repository-secrets) for instructions.
+- A Neon API key. For information about obtaining an API key, see [Create an API key](https://neon.com/docs/manage/api-keys#create-an-api-key).
+- You will need to add your Neon API key to your GitHub repository secrets. See [Add a Neon API key to your GitHub repository secrets](https://neon.com/docs/guides/branching-github-actions#add-a-neon-api-key-to-your-github-repository-secrets) for instructions.
 
 ### Example
 
@@ -278,16 +274,14 @@ This action performs a database schema diff on specified Neon branches for each 
 
 It supports workflows where schema changes are made on a branch. When you create or update a pull request containing schema changes, the action automatically generates a comment within the pull request. By including the schema diff as part of the comment, reviewers can easily assess the changes directly within the pull request.
 
-
-You can find this action on the **GitHub Actions Marketplace**: [Neon Schema Diff GitHub Action](https://github.com/marketplace/actions/neon-schema-diff-github-action).
-
+   **Tip** GitHub Actions Marketplace: You can find this action on the **GitHub Actions Marketplace**: [Neon Schema Diff GitHub Action](https://github.com/marketplace/actions/neon-schema-diff-github-action).
 
 ### Prerequisites
 
-- A Neon API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
-- You will need to add your Neon API key to your GitHub repository secrets. See [Add a Neon API key to your GitHub repository secrets](#add-a-neon-api-key-to-your-github-repository-secrets) for instructions.
+- A Neon API key. For information about obtaining an API key, see [Create an API key](https://neon.com/docs/manage/api-keys#create-an-api-key).
+- You will need to add your Neon API key to your GitHub repository secrets. See [Add a Neon API key to your GitHub repository secrets](https://neon.com/docs/guides/branching-github-actions#add-a-neon-api-key-to-your-github-repository-secrets) for instructions.
 
-You can easily set up the prerequisites mentioned above using our [GitHub integration](/docs/guides/neon-github-integration), which takes care of the entire process and automatically.
+You can easily set up the prerequisites mentioned above using our [GitHub integration](https://neon.com/docs/guides/neon-github-integration), which takes care of the entire process and automatically.
 
 ### Example
 
@@ -299,7 +293,7 @@ steps:
     with:
       project_id: ${{ vars.NEON_PROJECT_ID }}
       compare_branch: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
-      base_branch: main
+      base_branch: production
       api_key: ${{ secrets.NEON_API_KEY }}
       database: mydatabase
       username: myrole
@@ -328,7 +322,7 @@ jobs:
         with:
           project_id: ${{ vars.NEON_PROJECT_ID }}
           compare_branch: preview/pr-${{ github.event.number }}
-          base_branch: main
+          base_branch: production
           api_key: ${{ secrets.NEON_API_KEY }}
           database: mydatabase
           username: myrole
@@ -338,8 +332,8 @@ In this workflow, the action is triggered by pull request events such as `opened
 
 The branches to compare are specified by the `compare_branch` and `base_branch` inputs.
 
-- The `compare_branch` is the branch linked to the pull request — it's the "downstream" dev branch that contains your proposed schema changes, and is typically created by the [Create branch](#create-branch-action) action and defined by `preview/pr-${{ github.event.number }}` in the example above.
-- The `base_branch` is the branch you are merging into. It's the "upstream" branch used as the reference point for the comparison. If you don’t explicitly specify the `base_branch`, the action defaults to comparing the `compare_branch` with its parent branch. The `base_branch` branch is usually named `main`, which is default name of the root branch created with each Neon project.
+- The `compare_branch` is the branch linked to the pull request — it's the "downstream" dev branch that contains your proposed schema changes, and is typically created by the [Create branch](https://neon.com/docs/guides/branching-github-actions#create-branch-action) action and defined by `preview/pr-${{ github.event.number }}` in the example above.
+- The `base_branch` is the branch you are merging into. It's the "upstream" branch used as the reference point for the comparison. If you don't explicitly specify the `base_branch`, the action defaults to comparing the `compare_branch` with its parent branch. The `base_branch` branch is usually named `production`, which is default name of the root branch created with each Neon project.
 - The `database` is the name of the database containing the schema to be compared.
 - The `username` is the name of the Postgres role that owns the database.
 - `permissions` allows comments to be written on pull requests and repository contents to be read. These permissions are necessary if, for example, you need to check out your branch to run migrations.
@@ -417,14 +411,14 @@ are two ways you can perform this setup:
 - **Using the Neon GitHub Integration** (recommended) — this integration
   connects your Neon project to your GitHub repository, creates an API key, and
   sets the API key in your GitHub repository for you. See
-  [Neon GitHub Integration](/docs/guides/neon-github-integration) for
+  [Neon GitHub Integration](https://neon.com/docs/guides/neon-github-integration) for
   instructions.
 
 - **Manual setup** — this method requires obtaining a Neon API key and
   configuring it manually in your GitHub repository.
 
   1. Obtain a Neon API key. See
-     [Create an API key](/docs/manage/api-keys#create-an-api-key)
+     [Create an API key](https://neon.com/docs/manage/api-keys#create-an-api-key)
      for instructions.
   1. In your GitHub repository, go to **Project settings** and locate
      **Secrets** at the bottom of the left sidebar.
@@ -437,12 +431,7 @@ are two ways you can perform this setup:
 
 The following example applications use GitHub Actions workflows to create and delete branches in Neon.
 
-
-
-Preview branches with Cloudflare Pages
-
-Preview branches with Vercel
-
-Preview branches with Fly.io
-
-Neon Twitter app
+- [Preview branches with Cloudflare Pages](https://github.com/neondatabase/preview-branches-with-cloudflare): Demonstrates using GitHub Actions workflows to create a Neon branch for every Cloudflare Pages preview deployment
+- [Preview branches with Vercel](https://github.com/neondatabase/preview-branches-with-vercel): Demonstrates using GitHub Actions workflows to create a Neon branch for every Vercel preview deployment
+- [Preview branches with Fly.io](https://github.com/neondatabase/preview-branches-with-fly): Demonstrates using GitHub Actions workflows to create a Neon branch for every Fly.io preview deployment
+- [Neon Twitter app](https://github.com/neondatabase/neon_twitter): Demonstrates using GitHub Actions workflows to create a Neon branch for schema validation and perform migrations

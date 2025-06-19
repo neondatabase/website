@@ -1,12 +1,21 @@
 # Migrate from Heroku to Neon Postgres
 
+> The document "Migrate from Heroku to Neon Postgres" outlines the steps for transferring a PostgreSQL database from Heroku to Neon, detailing the necessary configurations and commands for a successful migration.
+
+## Source
+
+- [Migrate from Heroku to Neon Postgres HTML](https://neon.com/docs/import/migrate-from-heroku): The original HTML version of this documentation
+
 This guide describes how to import your data from Heroku Postgres to Neon.
 
+---
+updatedOn: '2024-11-15T20:32:35.032Z'
+---
+
+   **Note** New feature: If you are looking to migrate your database to Neon, you may want to try our new **Migration Assistant**, which can help. Read the [guide](https://neon.com/docs/import/migration-assistant) to learn more.
 
 
 The instructions assume that you have installed the Heroku CLI, which is used to transfer data from Heroku. For installation instructions, see [The Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).
-
-
 
 ## Create a Neon project and copy the connection string
 
@@ -17,7 +26,7 @@ The instructions assume that you have installed the Heroku CLI, which is used to
 
    The example connection string used the instructions that follow is:
 
-   ```text shouldWrap
+   ```text
    postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
    ```
 
@@ -27,15 +36,13 @@ The instructions assume that you have installed the Heroku CLI, which is used to
 1. Select **Overview** and copy the name of the Heroku Postgres database, which appears under **Installed add-ons**.
 1. Click **Settings** and copy your Heroku **App Name**.
 
-
-You can also retrieve the Heroku Postgres database name using the following Heroku CLI command:
-
+   **Note**: You can also retrieve the Heroku Postgres database name using the following Heroku CLI command:
 
 ```shell
-heroku pg:links --app 
+heroku pg:links --app <app>
 ```
 
-where `` is the Heroku App Name.
+where `<app>` is the Heroku App Name.
 
 For example:
 
@@ -60,7 +67,7 @@ where:
 
 For example:
 
-```shell shouldWrap
+```shell
 $ heroku pg:pull --app thawing-wave-57227 postgresql-trapezoidal-48645 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
 
 heroku-cli: Pulling postgresql-trapezoidal-48645 ---> postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname

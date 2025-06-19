@@ -4,7 +4,7 @@ subtitle: Add Neon Postgres storage to your Vercel project as a first-party nati
   integration
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-03-19T10:43:30.032Z'
+updatedOn: '2025-06-02T15:04:05.573Z'
 ---
 
 <InfoBlock>
@@ -51,7 +51,7 @@ To install the **Neon Postgres Native Integration** from the Vercel Marketplace:
 6. On the **Create Database** modal, select a region, choose a Neon plan, and click **Continue**.
 
    <Admonition type="note">
-   For an overview of what comes with each Neon Plan, please refer to the Neon [Pricing](https://neon.tech/pricing) page.
+   For an overview of what comes with each Neon Plan, please refer to the Neon [Pricing](/pricing) page.
    </Admonition>
 
 7. Specify a **Database Name**, and click **Create**.
@@ -204,7 +204,7 @@ When you install the Neon Postgres Native Integration from the Vercel Marketplac
 5. Select the desired **Installation plan**, and click **Save**.
 6. Follow the prompts to complete the plan change, providing your payment method if necessary.
 
-For an overview of Neon's plans, please visit our [Pricing](https://neon.tech/pricing) page.
+For an overview of Neon's plans, please visit our [Pricing](/pricing) page.
 
 ## Deleting your Database
 
@@ -221,12 +221,13 @@ This action is not reversible, so please proceed with caution.
 
 ## Environment variables set by the integration
 
-The environment variables listed below are set by the integration. Please note the following:
+The environment variables listed below are set in your Vercel project by the Neon integration. Please note the following:
 
 - The `DATABASE_URL` variable is a pooled Neon connection string. Connection pooling in Neon uses PgBouncer. For more, see [Connection pooling](/docs/connect/connection-pooling).
 - `DATABASE_URL_UNPOOLED` is an direct connection string for your database, often required by schema migration tools. For more, see [Connection pooling with schema migration tools](/docs/connect/connection-pooling#connection-pooling-with-schema-migration-tools).
 - There are several variables provided for constructing your own connection settings.
-- The integration sets variables that were previously used by Vercel Postgres. These variables support [Vercel Postgres Templates](https://vercel.com/templates/vercel-postgres), which you can now use with Neon Postgres.
+- The integration sets variables that were previously used by Vercel Postgres.
+- Neon Auth environment variables allow you to easily add authentication to your Vercel project. The Neon Auth feature automatically syncs user profiles to your Neon database, making them available in the `neon_auth.users_sync` table for querying. To try Neon Auth, you can quickly deploy the [Next.js template for Neon Auth](https://github.com/neondatabase-labs/neon-auth-nextjs-template), which is preconfigured to use these variables. Learn more in the [Neon Auth guide](/docs/guides/neon-auth).
 
 ```bash
 # Recommended for most uses
@@ -251,6 +252,11 @@ POSTGRES_PASSWORD
 POSTGRES_DATABASE
 POSTGRES_URL_NO_SSL
 POSTGRES_PRISMA_URL
+
+# Neon Auth environment variables for Next.js
+NEXT_PUBLIC_STACK_PROJECT_ID
+NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY
+STACK_SECRET_SERVER_KEY
 ```
 
 ## Limitations

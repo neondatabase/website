@@ -54,26 +54,36 @@
               slug: guides/astro
             - title: Django
               slug: guides/django
+            - title: Entity Framework
+              slug: guides/dotnet-entity-framework
             - title: Express
               slug: guides/express
             - title: Hono
               slug: guides/hono
             - title: Laravel
               slug: guides/laravel
+            - title: Micronaut Kotlin
+              slug: guides/micronaut-kotlin
             - title: NestJS
               slug: guides/nestjs
             - title: Next.js
               slug: guides/nextjs
-            - title: Nuxt
-              slug: guides/nuxt
             - title: Node.js
               slug: guides/node
+            - title: Nuxt
+              slug: guides/nuxt
+            - title: OAuth
+              slug: guides/oauth-integration
+            - title: Phoenix
+              slug: guides/phoenix
             - title: Quarkus (JDBC)
               slug: guides/quarkus-jdbc
             - title: Quarkus (Reactive)
               slug: guides/quarkus-reactive
             - title: React
               slug: guides/react
+            - title: RedwoodSDK
+              slug: guides/redwoodsdk
             - title: Reflex
               slug: guides/reflex
             - title: Remix
@@ -88,6 +98,8 @@
               slug: guides/sveltekit
             - title: Symfony
               slug: guides/symfony
+            - title: Vue
+              slug: guides/vue
         - section: File and media storage
           items:
             - title: File storage
@@ -327,10 +339,12 @@
           items:
             - title: Accounts
               slug: manage/accounts
+            - title: User permissions
+              slug: manage/user-permissions
             - title: Organizations
               slug: manage/organizations
               items:
-                - title: Getting started
+                - title: Overview
                   slug: manage/organizations
                 - title: Manage Organizations
                   slug: manage/orgs-manage
@@ -350,10 +364,10 @@
               slug: guides/project-collaboration-guide
             - title: Database access
               slug: manage/database-access
-            - title: E-mail signup
-              slug: manage/email-signup
             - title: API keys
               slug: manage/api-keys
+            - title: Account recovery
+              slug: manage/account-recovery
         - section: Projects
           items:
             - title: Object hierarchy
@@ -420,19 +434,6 @@
     - title: Use cases
       slug: use-cases/use-cases-overview
       icon: use-case
-      items:
-        - title: SaaS apps
-          slug: use-cases/saas-apps
-        - title: Variable traffic
-          slug: use-cases/variable-traffic
-        - title: Database-per-user
-          slug: use-cases/database-per-user
-        - title: AI Agents
-          slug: use-cases/ai-agents
-        - title: Platforms
-          slug: use-cases/platforms
-        - title: Dev/Test
-          slug: use-cases/dev-test
     - title: Regions
       slug: introduction/regions
       icon: regions
@@ -504,27 +505,27 @@
         - section: IDE & Tool Integration
           items:
             - title: Claude Desktop
-              slug: https://neon.tech/guides/neon-mcp-server
+              slug: https://neon.com/guides/neon-mcp-server
             - title: Cursor IDE
-              slug: https://neon.tech/guides/cursor-mcp-neon
+              slug: https://neon.com/guides/cursor-mcp-neon
             - title: Cline
-              slug: https://neon.tech/guides/cline-mcp-neon
+              slug: https://neon.com/guides/cline-mcp-neon
             - title: Windsurf
-              slug: https://neon.tech/guides/windsurf-mcp-neon
+              slug: https://neon.com/guides/windsurf-mcp-neon
             - title: Zed
-              slug: https://neon.tech/guides/zed-mcp-neon
+              slug: https://neon.com/guides/zed-mcp-neon
         - section: Agent Frameworks
           items:
             - title: AgentStack
-              slug: https://neon.tech/guides/agentstack-neon
+              slug: https://neon.com/guides/agentstack-neon
             - title: AutoGen
-              slug: https://neon.tech/guides/autogen-neon
+              slug: https://neon.com/guides/autogen-neon
             - title: Azure AI Agent Service
-              slug: https://neon.tech/guides/azure-ai-agent-service 
+              slug: https://neon.com/guides/azure-ai-agent-service
             - title: Composio + CrewAI
-              slug: https://neon.tech/guides/composio-crewai-neon
+              slug: https://neon.com/guides/composio-crewai-neon
             - title: LangGraph
-              slug: https://neon.tech/guides/langgraph-neon
+              slug: https://neon.com/guides/langgraph-neon
     - title: AI Starter Kit
       slug: ai/ai-intro
       icon: sparks
@@ -593,7 +594,6 @@
       slug: https://api-docs.neon.tech/reference/getting-started-with-neon-api
       icon: api
     - title: SDKs
-      slug: reference/sdk
       icon: sdk
       items:
         - section: Neon SDKs
@@ -612,6 +612,9 @@
             - title: Node.js / Deno SDK
               slug: https://github.com/paambaati/neon-js-sdk
               tag: community
+    - title: Neon Launchpad
+      slug: reference/neon-launchpad
+      icon: rocket
     - title: Terraform
       slug: reference/terraform
       tag: community
@@ -880,16 +883,169 @@
 - section: Auth & access
   items:
     - title: Neon Auth
-      slug: guides/neon-auth
       icon: auth
       tag: beta
+      slug: neon-auth/overview
       items:
-        - title: About
-          slug: guides/neon-auth
-        - title: Tutorial
-          slug: guides/neon-auth-tutorial
-        - title: API
-          slug: guides/neon-auth-api
+        - section: Overview
+          items:
+            - title: Overview
+              slug: neon-auth/overview
+        - section: Quick Start
+          items:
+            - title: Next.js
+              slug: neon-auth/quick-start/nextjs
+            - title: React
+              slug: neon-auth/quick-start/react
+            - title: JavaScript
+              slug: neon-auth/quick-start/javascript
+        - section: How Neon Auth Works
+          items:
+            - title: How Neon Auth works
+              slug: neon-auth/how-it-works
+            - title: Guidance (deep dive)
+              slug: neon-auth/tutorial
+        - section: Practical Usage
+          items:
+            - title: Demo
+              slug: neon-auth/demo
+            - title: Best practices
+              slug: neon-auth/best-practices
+        - section: Concepts
+          items:
+            - title: The StackApp Object
+              slug: neon-auth/concepts/stack-app
+            - title: OAuth Authentication
+              slug: neon-auth/concepts/oauth
+            - title: Custom User Data
+              slug: neon-auth/concepts/custom-user-data
+            - title: Permissions & RBAC
+              slug: neon-auth/concepts/permissions
+            - title: Organizations and Teams
+              slug: neon-auth/concepts/orgs-and-teams
+            - title: Selecting a Team
+              slug: neon-auth/concepts/team-selection
+            - title: User Onboarding
+              slug: neon-auth/concepts/user-onboarding
+            - title: Backend integration
+              slug: neon-auth/concepts/backend-integration
+        - section: SDK and API Reference
+          items:
+            - title: Next.js SDK
+              slug: neon-auth/sdk/nextjs/overview
+              items:
+                - section: Overview
+                  items:
+                    - title: SDK Overview
+                      slug: neon-auth/sdk/nextjs/overview
+                - section: Objects
+                  items:
+                    - title: StackClientApp
+                      slug: neon-auth/sdk/nextjs/objects/stack-app
+                    - title: StackServerApp
+                      slug: neon-auth/sdk/nextjs/objects/stack-server-app
+                - section: Types
+                  items:
+                    - title: ContactChannel
+                      slug: neon-auth/sdk/nextjs/types/contact-channel
+                    - title: API Key
+                      slug: neon-auth/sdk/nextjs/types/api-key
+                    - title: Project
+                      slug: neon-auth/sdk/nextjs/types/project
+                    - title: Team
+                      slug: neon-auth/sdk/nextjs/types/team
+                    - title: TeamPermission
+                      slug: neon-auth/sdk/nextjs/types/team-permission
+                    - title: TeamProfile
+                      slug: neon-auth/sdk/nextjs/types/team-profile
+                    - title: TeamUser
+                      slug: neon-auth/sdk/nextjs/types/team-user
+                    - title: User
+                      slug: neon-auth/sdk/nextjs/types/user
+                - section: Hooks
+                  items:
+                    - title: useStackApp
+                      slug: neon-auth/sdk/nextjs/hooks/use-stack-app
+                    - title: useUser
+                      slug: neon-auth/sdk/nextjs/hooks/use-user
+            - title: React SDK
+              slug: neon-auth/sdk/react/overview
+              items:
+                - section: Overview
+                  items:
+                    - title: SDK Overview
+                      slug: neon-auth/sdk/react/overview
+                - section: Objects
+                  items:
+                    - title: StackClientApp
+                      slug: neon-auth/sdk/react/objects/stack-app
+                - section: Types
+                  items:
+                    - title: User
+                      slug: neon-auth/sdk/react/types/user
+                    - title: Team
+                      slug: neon-auth/sdk/react/types/team
+                    - title: Project
+                      slug: neon-auth/sdk/react/types/project
+                - section: Hooks
+                  items:
+                    - title: useStackApp
+                      slug: neon-auth/sdk/react/hooks/use-stack-app
+                    - title: useUser
+                      slug: neon-auth/sdk/react/hooks/use-user
+            - title: Components
+              slug: neon-auth/components/components
+              items:
+                - section: Overview
+                  items:
+                    - title: All components
+                      slug: neon-auth/components/components
+                - section: Components
+                  items:
+                    - title: UserButton
+                      slug: neon-auth/components/user-button
+                    - title: SelectedTeamSwitcher
+                      slug: neon-auth/components/selected-team-switcher
+                    - title: AccountSettings
+                      slug: neon-auth/components/account-settings
+                    - title: SignIn
+                      slug: neon-auth/components/sign-in
+                    - title: SignUp
+                      slug: neon-auth/components/sign-up
+                    - title: CredentialSignIn
+                      slug: neon-auth/components/credential-sign-in
+                    - title: CredentialSignUp
+                      slug: neon-auth/components/credential-sign-up
+                    - title: OAuthButton
+                      slug: neon-auth/components/oauth-button
+                    - title: OAuthButtonGroup
+                      slug: neon-auth/components/oauth-button-group
+                - section: Utilities
+                  items:
+                    - title: StackHandler
+                      slug: neon-auth/components/stack-handler
+                    - title: StackProvider
+                      slug: neon-auth/components/stack-provider
+                    - title: StackTheme
+                      slug: neon-auth/components/stack-theme
+            - title: Admin API
+              slug: neon-auth/api
+        - section: Guides
+          items:
+            - title: Creating users
+              slug: neon-auth/create-users
+            - title: Claiming a project
+              slug: neon-auth/claim-project
+        - section: Customization
+          items:
+            - title: Colors and styles
+              slug: neon-auth/customization/custom-styles
+            - title: Dark/light mode
+              slug: neon-auth/customization/dark-mode
+            - title: Internationalization
+              slug: neon-auth/customization/internationalization
+            - title: Custom pages
+              slug: neon-auth/customization/custom-pages
     - title: Neon RLS
       icon: lock
       slug: guides/neon-rls
@@ -936,6 +1092,12 @@
               slug: guides/neon-rls-workos
             - title: Custom JWT
               slug: guides/neon-rls-custom-jwt
+- section: Data API
+  items:
+    - title: Data API
+      slug: data-api/get-started
+      icon: api
+      tag: new
 - section: Workflows
   items:
     - title: Data anonymization
@@ -997,12 +1159,33 @@
             - title: anon
               slug: extensions/postgresql-anonymizer
               tag: new
-            - title: dblink
-              slug: extensions/dblink
+            - title: btree_gin
+              slug: extensions/btree_gin
+              tag: new
+            - title: btree_gist
+              slug: extensions/btree_gist
+              tag: new
             - title: citext
               slug: extensions/citext
+            - title: cube
+              slug: extensions/cube
+              tag: new
+            - title: dblink
+              slug: extensions/dblink
+            - title: dict_int
+              slug: extensions/dict_int
+              tag: new
+            - title: earthdistance
+              slug: extensions/earthdistance
+              tag: new
+            - title: fuzzystrmatch
+              slug: extensions/fuzzystrmatch
+              tag: new
             - title: hstore
               slug: extensions/hstore
+            - title: intarray
+              slug: extensions/intarray
+              tag: new
             - title: ltree
               slug: extensions/ltree
             - title: neon
@@ -1018,6 +1201,9 @@
               slug: extensions/pgrag
             - title: pg_cron
               slug: extensions/pg_cron
+            - title: pg_graphql
+              slug: extensions/pg_graphql
+              tag: new
             - title: pg_mooncake
               slug: extensions/pg_mooncake
               tag: new
@@ -1036,12 +1222,24 @@
               slug: extensions/pg_tiktoken
             - title: pg_trgm
               slug: extensions/pg_trgm
+            - title: pg_uuidv7
+              slug: extensions/pg_uuidv7
+              tag: new
+            - title: pgrowlocks
+              slug: extensions/pgrowlocks
+              tag: new
+            - title: pgstattuple
+              slug: extensions/pgstattuple
+              tag: new
             - title: postgis
               slug: extensions/postgis
             - title: postgis-related
               slug: extensions/postgis-related-extensions
             - title: postgres_fdw
               slug: extensions/postgres_fdw
+            - title: tablefunc
+              slug: extensions/tablefunc
+              tag: new
             - title: timescaledb
               slug: extensions/timescaledb
             - title: unaccent
@@ -1052,8 +1250,8 @@
               tag: new
             - title: wal2json
               slug: extensions/wal2json
-            - title: pg_cron
-              slug: extensions/pg_cron
+            - title: xml2
+              slug: extensions/xml2
               tag: new
         - title: Functions
           slug: functions/introduction
@@ -1228,6 +1426,9 @@
           slug: guides/partner-consumption-limits
         - title: Query consumption metrics
           slug: guides/partner-consumption-metrics
+    - title: Multitenancy
+      slug: guides/multitenancy
+      icon: platform
     - title: Glossary
       slug: reference/glossary
       icon: glossary
@@ -1238,6 +1439,9 @@
       slug: introduction/roadmap
       icon: roadmap
       tag: updated
+    - title: Early access
+      slug: introduction/early-access
+      icon: award
 - section: noname
   items:
     - title: Community

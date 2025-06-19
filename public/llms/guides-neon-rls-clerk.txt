@@ -1,24 +1,24 @@
 # Secure your data with Clerk and Neon RLS
 
-Implement Row-level Security policies in Postgres using Clerk and Neon RLS
+> The document outlines how to implement Row-Level Security (RLS) in Neon using Clerk for user authentication, detailing the steps to secure data access at the row level within a Neon database.
 
+## Source
 
+- [Secure your data with Clerk and Neon RLS HTML](https://neon.com/docs/guides/neon-rls-clerk): The original HTML version of this documentation
 
-  Clerk + Neon RLS
+Sample project:
+- [Clerk + Neon RLS](https://github.com/neondatabase-labs/clerk-nextjs-neon-rls)
 
-
-
-  Neon RLS Tutorial
-  Manual JWT verification
-  Simplify RLS with Drizzle
-
-
+Related docs:
+- [Neon RLS Tutorial](https://neon.com/docs/guides/neon-rls-tutorial)
+- [Manual JWT verification](https://clerk.com/docs/backend-requests/handling/manual-jwt)
+- [Simplify RLS with Drizzle](https://neon.com/docs/guides/neon-rls-drizzle)
 
 Use Clerk with Neon RLS to add secure, database-level authorization to your application. This guide assumes you already have an application using Clerk for user authentication. It shows you how to integrate Clerk with Neon RLS, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 
 ## How it works
 
-Clerk handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon RLS. Neon RLS validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
+Clerk handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon RLS. Neon RLS validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.com/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
 
 ## Prerequisites
 
@@ -35,7 +35,7 @@ In this first set of steps, we'll integrate Clerk as an authorization provider i
 
 For a basic integration, the default JWT claims from Clerk, including the `user_id`, are all you need for Neon RLS. Use the following JWKS URL format:
 
-```bash shouldWrap
+```bash
 https://{YOUR_CLERK_DOMAIN}/.well-known/jwks.json
 ```
 
@@ -45,17 +45,17 @@ You can find your JWKS URL in the Clerk Dashboard under: **Configure → Develop
 
 For advanced JWT configuration, such as adding claims or setting token lifespans, use the dedicated Neon template under: **Configure > JWT Templates**
 
-
-  
-
+<div style={{ display: 'flex', justifyContent: 'center'}}>
+  <img src="/docs/guides/clerk_neon_jwt_template.png" alt="Neon-specific template option in Clerk templates" style={{ width: '40%', maxWidth: '600px', height: 'auto' }} />
+</div>
 
 ### 2. Add Clerk as an authorization provider in the Neon Console
 
 Once you have the JWKS URL, go to the **Neon Console**, navigate to **Settings** > **RLS**, and add Clerk as an authentication provider. Paste your copied URL and Clerk will be automatically recognized and selected.
 
-
-  
-
+<div style={{ display: 'flex', justifyContent: 'center'}}>
+  <img src="/docs/guides/clerk_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
+</div>
 
 At this point, you can use the **Get Started** setup steps from RLS in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
 
@@ -65,7 +65,7 @@ Neon RLS uses the [pg_session_jwt](https://github.com/neondatabase/pg_session_jw
 
 To install the extension in the `neondb` database, run:
 
-```sql shouldWrap
+```sql
 CREATE EXTENSION IF NOT EXISTS pg_session_jwt;
 ```
 
@@ -108,32 +108,32 @@ Neon's Serverless Driver manages the connection between your application and the
 
 Install it using the following command:
 
-```bash shouldWrap
+```bash
 npm install @neondatabase/serverless
 ```
 
-To learn more about the driver, see [Neon Serverless Driver](/docs/serverless/serverless-driver).
+To learn more about the driver, see [Neon Serverless Driver](https://neon.com/docs/serverless/serverless-driver).
 
 ### 6. Set up environment variables
 
 Here is an example of setting up administrative and authenticated database connections in your `.env` file. Copy the connection strings for both the `neondb_owner` and `authenticated` roles. You can find them by clicking **Connect** on the Neon **Project Dashboard**, or using the Neon CLI:
 
-```bash shouldWrap
+```bash
 neon connection-string --role-name neondb_owner
 neon connection-string --role-name authenticated
 ```
 
 Add these to your `.env` file.
 
-```bash shouldWrap
+```bash
 # Database owner connection string
-DATABASE_URL=''
+DATABASE_URL='<DB_OWNER_CONNECTION_STRING>'
 
 # Neon "authenticated" role connection string
-DATABASE_AUTHENTICATED_URL=''
+DATABASE_AUTHENTICATED_URL='<AUTHENTICATED_CONNECTION_STRING>'
 ```
 
-The `DATABASE_URL` is intended for admin tasks and can run any query, while the `DATABASE_AUTHENTICATED_URL` should be used for connections from authorized users, where you pass the required authorization token. You can see an example in [Run your first authorized query](#2-run-your-first-authorized-query) below.
+The `DATABASE_URL` is intended for admin tasks and can run any query, while the `DATABASE_AUTHENTICATED_URL` should be used for connections from authorized users, where you pass the required authorization token. You can see an example in [Run your first authorized query](https://neon.com/docs/guides/neon-rls-clerk#2-run-your-first-authorized-query) below.
 
 ## Add RLS policies
 
@@ -143,9 +143,7 @@ Now that you've integrated Clerk with Neon RLS, you can securely pass JWTs to yo
 
 Here are examples of implementing RLS policies for a **todos** table – the Drizzle example leverages the simplified `crudPolicy` function, while the SQL example demonstrates the use of individual RLS policies.
 
-
-
-
+Tab: Drizzle
 
 ```typescript
 import { InferSelectModel, sql } from 'drizzle-orm';
@@ -174,14 +172,12 @@ export const todos = pgTable(
   ]
 );
 
-export type Todo = InferSelectModel;
+export type Todo = InferSelectModel<typeof todos>;
 ```
 
+Tab: SQL
 
-
-
-
-```sql shouldWrap
+```sql
 -- schema for TODOs table
 CREATE TABLE todos (
   id bigint generated by default as identity primary key,
@@ -208,21 +204,15 @@ create policy "Individuals can delete their own todos." on todos for
   delete using (auth.user_id() = user_id);
 ```
 
-
-
-
-
 The `crudPolicy` function simplifies policy creation by generating all necessary CRUD policies with a single declaration.
 
 ### 2. Run your first authorized query
 
 With Row-Level Security (RLS) policies in place, you can securely query the database using JWTs from Clerk, restricting access based on each user's identity. Here are examples of running authenticated queries from both the backend and frontend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
 
+Tab: server-component.tsx
 
-
-
-
-```tsx shouldWrap
+```tsx
 'use server';
 
 import { neon } from '@neondatabase/serverless';
@@ -231,7 +221,7 @@ import { auth } from '@clerk/nextjs/server';
 export async function TodoList() {
   const sql = neon(process.env.DATABASE_AUTHENTICATED_URL!, {
     authToken: async () => {
-      const token = await auth().getToken(); // [!code highlight]
+      const token = await auth().getToken();
       if (!token) {
         throw new Error('No token');
       }
@@ -241,23 +231,20 @@ export async function TodoList() {
 
   // WHERE filter is optional because of RLS.
   // But we send it anyway for performance reasons.
-  const todos = await sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
-
+  const todos = await sql('select * from todos where user_id = auth.user_id()');
   return (
-    
+    <ul>
       {todos.map((todo) => (
-        {todo.task}
+        <li key={todo.id}>{todo.task}</li>
       ))}
-    
+    </ul>
   );
 }
 ```
 
+Tab: client-component.tsx
 
-
-
-
-```typescript shouldWrap
+```typescript
 'use client';
 
 import type { Todo } from '@/app/schema';
@@ -267,17 +254,16 @@ import { useEffect, useState } from 'react';
 
 const getDb = (token: string) =>
     neon(process.env.NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL!, {
-        authToken: token, // [!code highlight]
+        authToken: token,
     });
 
 export function TodoList() {
     const { getToken } = useAuth();
-    const [todos, setTodos] = useState>();
+    const [todos, setTodos] = useState<Array<Todo>>();
 
     useEffect(() => {
         async function loadTodos() {
-            const authToken = await getToken(); // [!code highlight]
-
+            const authToken = await getToken();
             if (!authToken) {
                 return;
             }
@@ -286,37 +272,34 @@ export function TodoList() {
 
             // WHERE filter is optional because of RLS.
             // But we send it anyway for performance reasons.
-            const todosResponse = await sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
-
-            setTodos(todosResponse as Array);
+            const todosResponse = await sql('select * from todos where user_id = auth.user_id()');
+            setTodos(todosResponse as Array<Todo>);
         }
 
         loadTodos();
     }, [getToken]);
 
     return (
-        
+        <ul>
             {todos?.map((todo) => (
-                
+                <li key={todo.id}>
                     {todo.task}
-                
+                </li>
             ))}
-        
+        </ul>
     );
 }
 ```
 
+Tab: .env
 
-
-
-
-```bash shouldWrap
+```bash
 # Used for database migrations
-DATABASE_URL=''
+DATABASE_URL='<DB_OWNER_CONNECTION_STRING>'
 
 # Used for server-side fetching
-DATABASE_AUTHENTICATED_URL=''
+DATABASE_AUTHENTICATED_URL='<AUTHENTICATED_CONNECTION_STRING>'
 
 # Used for client-side fetching
-NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL=''
+NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL='<AUTHENTICATED_CONNECTION_STRING>'
 ```

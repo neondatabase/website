@@ -1,18 +1,22 @@
 # Create a Neon Twin
 
-Learn how to Twin your production database with Neon
+> The "Create a Neon Twin" document guides users on how to set up a Neon Twin, enabling them to replicate their PostgreSQL databases for testing and development purposes within the Neon platform.
 
-Read more about our dev/test use case here." isIntro>
+## Source
+
+- [Create a Neon Twin HTML](https://neon.com/docs/guides/neon-twin-intro): The original HTML version of this documentation
+
+Read more about our dev/test use case <a href='/use-cases/dev-test'>here</a>." isIntro></CTA>
 
 ## What is a Neon Twin?
 
 A Neon Twin is a full or partial clone of your production or staging database, providing developers and teams with isolated, sandboxed environments that closely mirror production.
 
-![Dev/Test Twin Workflow](/use-cases/dev-test-twin-workflow.png)
+
 
 ## Designed for efficiency
 
-Creating a Neon Twin will streamline development workflows, enhance productivity, and help teams ship faster—all while being more [cost-effective](/docs/introduction/pricing-estimation-guide) and easier to manage than traditional development/testing environments.
+Creating a Neon Twin will streamline development workflows, enhance productivity, and help teams ship faster—all while being more [cost-effective](https://neon.com/docs/introduction/pricing-estimation-guide) and easier to manage than traditional development/testing environments.
 
 ## Automatically synced
 
@@ -20,6 +24,6 @@ The workflows in this section enable automatic synchronization between your prod
 
 ## Instant Branches
 
-With a Neon Twin created, [branches](/docs/introduction/branching) can be quickly spun up or torn down, enabling developers to build new features or debug issues—all within their own isolated environments with a dedicated compute resource.
+With a Neon Twin created, [branches](https://neon.com/docs/introduction/branching) can be quickly spun up or torn down, enabling developers to build new features or debug issues—all within their own isolated environments with a dedicated compute resource.
 
-Branches can be created and managed through the [Neon console](https://console.neon.tech/) or programmatically via the [API](/docs/reference/api-reference).
+Branches can be created and managed through the [Neon console](https://console.neon.tech/) or programmatically via the [API](https://neon.com/docs/reference/api-reference).

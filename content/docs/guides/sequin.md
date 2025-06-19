@@ -3,7 +3,7 @@ title: Stream changes from your Neon database to anywhere
 subtitle: Learn how to capture and stream changes and rows from your database to
   anywhere with Sequin
 enableTableOfContents: true
-updatedOn: '2025-02-11T11:32:44.541Z'
+updatedOn: '2025-06-02T15:04:05.573Z'
 ---
 
 Neon's Logical Replication features makes it possible to detect every change in your database. It can be used to power read-replicas and backups, but can also be used to add streaming characteristics to Neon.
@@ -115,6 +115,3 @@ You're now using Sequin with Neon to capture and stream changes from your databa
 - Use Sequin to trigger workflows in tools like Inngest or trigger.dev, activate side-effects in your app, setup audit logs, or generate denormalized views.
 - Tailor your consumer's [filtering](https://sequinstream.com/docs/core-concepts#filtering) and settings to meet your requirements.
 - Try a [pull consumer](https://sequinstream.com/docs/core-concepts#pull-consumers) with [our SDKs](https://sequinstream.com/docs/sdks) to completely manage how you retrieve changes at scale.
-- Use Sequins [observability and monitoring](https://console.sequinstream.com/consumers) to debug and keep production humming.
-
-Learn more in our [docs](https://sequinstream.com/docs/introduction). And if you need anything, Sequin is open source - just open an issue or reach out to us: <a href="mailto:founders@sequinstream.com">founders@sequinstream.com</a>.

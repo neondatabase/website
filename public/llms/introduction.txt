@@ -1,0 +1,61 @@
+# Neon Docs
+
+> The Neon Docs serve as a comprehensive guide for users to understand and utilize Neon's cloud-native, serverless Postgres database platform, detailing its architecture, features, and usage instructions.
+
+## Source
+
+- [Neon Docs HTML](https://neon.com/docs/introduction): The original HTML version of this documentation
+
+Neon is a serverless Postgres platform designed to help you build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as **autoscaling**, **branching**, **instant restore**, and more. Get started today with our [generous free plan](https://console.neon.tech)
+
+
+
+
+
+## Get started
+
+- [Playing with Neon](https://neon.com/docs/get-started-with-neon/signing-up): Sign up for free and learn the basics of database branching with Neon
+- [Connect Neon to your stack](https://neon.com/docs/get-started-with-neon/connect-neon): Connect Neon to the platform, language, ORM and other tools in your tech stack
+- [Branching workflows](https://neon.com/docs/get-started-with-neon/workflow-primer): Add branching to your CI/CD automation
+- [Get ready for production](https://neon.com/docs/get-started-with-neon/production-checklist): Key features to get you production ready
+
+## Quickstarts
+
+- [Drizzle](https://neon.com/docs/guides/drizzle): Learn how to use Drizzle ORM with your Neon Postgres database (Drizzle docs)
+- [React](https://neon.com/docs/guides/react): Build powerful and interactive user interfaces with React using Neon as your database
+- [Node.js](https://neon.com/docs/guides/node): Quickly add authentication and user management to your Node.js application
+- [Neon](https://neon.com/docs/serverless/serverless-driver): Connect with the Neon serverless driver
+- [.NET](https://neon.com/docs/guides/dotnet-npgsql): Connect a .NET (C#) application to Neon
+- [Next.js](https://neon.com/docs/guides/nextjs): Connect a Next.js application to Neon
+- [Nuxt](https://neon.com/docs/guides/nuxt): Connect a Nuxt application to Neon
+- [Astro](https://neon.com/docs/guides/astro): Connect an Astro site or app to Neon
+- [Django](https://neon.com/docs/guides/django): Connect a Django application to Neon
+- [Entity Framework](https://neon.com/docs/guides/dotnet-entity-framework): Connect a Dotnet Entity Framework application to Neon
+- [Elixir](https://neon.com/docs/guides/elixir-ecto): Connect from Elixir with Ecto to Neon
+- [Go](https://neon.com/docs/guides/go): Connect a Go application to Neon
+- [Java](https://neon.com/docs/guides/java): Connect a Java application to Neon
+- [Laravel](https://neon.com/docs/guides/laravel): Connect from Laravel to Neon
+- [Python](https://neon.com/docs/guides/python): Connect a Python application to Neon
+- [Quarkus](https://neon.com/docs/guides/quarkus-jdbc): Connect Quarkus (JDBC) to Neon
+- [Quarkus](https://neon.com/docs/guides/quarkus-reactive): Connect Quarkus (Reactive) to Neon
+- [Rails](https://neon.com/docs/guides/ruby-on-rails): Connect a Rails application to Neon
+- [Remix](https://neon.com/docs/guides/remix): Connect a Remix application to Neon
+- [Rust](https://neon.com/docs/guides/rust): Connect a Rust application to Neon
+- [SQLAlchemy](https://neon.com/docs/guides/sqlalchemy): Connect an SQLAlchemy application to Neon
+- [Svelte](https://neon.com/docs/guides/sveltekit): Connect a Sveltekit application to Neon
+- [Symfony](https://neon.com/docs/guides/symfony): Connect from Symfony with Doctrine to Neon
+
+## Explore the Neon Docs
+
+- [Connect](https://neon.com/docs/connect/connect-intro): Learn how to connect to a  Serverless Postgres database from any application
+- [Import data](https://neon.com/docs/import/import-intro): Load your data into a Postgres database hosted by Neon
+- [AI & embeddings](https://neon.com/docs/ai/ai-intro): Build and scale transformative LLM applications with vector storage and similarity search.
+- [Branching](https://neon.com/docs/guides/branching-intro): Learn to optimize development workflows with database branching
+- [Postgres extensions](https://neon.com/docs/extensions/extensions-intro): Level up your database with our many supported Postgres extensions
+- [Neon CLI Reference](https://neon.com/docs/reference/neon-cli): Manage Neon directly from the terminal with the Neon CLI
+
+## Join the community
+
+If you have questions about Neon or Postgres, reach out to Neon community members and developers on our [Discord Server](https://discord.com/invite/92vNTzKDGp).
+
+<CommunityBanner buttonText="Join server" buttonUrl="https://discord.gg/92vNTzKDGp" logo="discord">Welcome to the Neon Discord Server!</CommunityBanner>

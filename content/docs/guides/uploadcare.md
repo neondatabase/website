@@ -2,7 +2,7 @@
 title: Media storage with Uploadcare
 subtitle: Store files via Uploadcare and track metadata in Neon
 enableTableOfContents: true
-updatedOn: '2025-04-27T11:08:17.427Z'
+updatedOn: '2025-05-30T16:54:40.480Z'
 ---
 
 [Uploadcare](https://uploadcare.com/) provides an cloud platform designed to simplify file uploading, processing, storage, and delivery via a fast CDN. It offers tools that manage and optimize media like images, videos, and documents for your applications.
@@ -45,7 +45,7 @@ We need to create a table in Neon to store metadata about the files uploaded to 
 2. Run the SQL statement. You can add other relevant columns (file size, content type, etc.) depending on your application needs.
 
 <Admonition type="note" title="Securing metadata with RLS">
-If you use [Neon's Row Level Security (RLS)](https://neon.tech/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `uploadcare_files` table. This controls who can view or modify the object references stored in Neon based on your RLS rules.
+If you use [Neon's Row Level Security (RLS)](/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `uploadcare_files` table. This controls who can view or modify the object references stored in Neon based on your RLS rules.
 
 Note that these policies apply _only_ to the metadata stored in Neon. Access to the actual files is managed by Uploadcare's access controls and settings.
 </Admonition>

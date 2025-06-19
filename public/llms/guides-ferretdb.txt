@@ -1,6 +1,10 @@
 # Use FerretDB with Neon
 
-Add MongoDB compatibility to your Neon database with FerretDB
+> The document "Use FerretDB with Neon" guides users on integrating FerretDB, a MongoDB-compatible database, with Neon, detailing the setup process and configuration steps specific to Neon's environment.
+
+## Source
+
+- [Use FerretDB with Neon HTML](https://neon.com/docs/guides/ferretdb): The original HTML version of this documentation
 
 FerretDB is an open source document database that adds MongoDB compatibility to other databases, including Postgres. By using FerretDB, developers can access familiar MongoDB features and tools using the same syntax and commands for many of their use cases.
 
@@ -26,14 +30,14 @@ The benefits of using FerretDB include:
 
   FerretDB currently supports Postgres and SQLite backends, with many ongoing efforts to support other backends. Many databases built on Postgres can serve as a backend for FerretDB, including Neon. That means you can take advantage of all the features available in the backend of your choice to scale and manage your database infrastructure without fear of vendor lock-in.
 
-To learn more, see [Understanding FerretDB](https://docs.ferretdb.io/understanding-ferretdb/).
+To learn more, see [the FerretDB documentation](https://docs.ferretdb.io/).
 
 ## Prerequisites
 
 The prerequisites for this guide include the following:
 
-- A Neon account and project. See [Sign up](/docs/get-started-with-neon/signing-up).
-- A database. This guide uses a database named `ferretdb`. It's easy to create a database in Neon. See [Create a database](/docs/manage/databases#create-a-database) for instructions.
+- A Neon account and project. See [Sign up](https://neon.com/docs/get-started-with-neon/signing-up).
+- A database. This guide uses a database named `ferretdb`. It's easy to create a database in Neon. See [Create a database](https://neon.com/docs/manage/databases#create-a-database) for instructions.
 - Docker. For instructions, see [Get Docker](https://docs.docker.com/get-docker/). To verify your installation or check if you already have Docker installed, you can run `docker --version`.
 - The `mongosh` command-line tool. For installation instructions, see [Install mongosh](https://www.mongodb.com/docs/mongodb-shell/install/). If you are a macOS user, you can quickly install with Homebrew: `brew install mongosh`.
 
@@ -43,7 +47,7 @@ Find your database connection string by clicking the **Connect** button on your 
 
 Your database connection string will look something like this:
 
-```bash shouldWrap
+```bash
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/ferretdb
 ```
 
@@ -51,8 +55,8 @@ postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/ferr
 
 Execute the following command to run FerretDB in a Docker container and connect it to your Neon Postgres database (`NEON_DB_CONNECTION_STRING`):
 
-```bash shouldWrap
-docker run docker run -p 27017:27017 -e FERRETDB_POSTGRESQL_URL= ghcr.io/ferretdb/ferretdb
+```bash
+docker run docker run -p 27017:27017 -e FERRETDB_POSTGRESQL_URL=<NEON_DB_CONNECTION_STRING> ghcr.io/ferretdb/ferretdb
 ```
 
 ## Test via mongosh
@@ -61,16 +65,16 @@ From another terminal, test to see if the FerretDB instance is connected to your
 
 So in this case, the MongoDB connection string will be:
 
-```bash shouldWrap
-mongosh 'mongodb://:@127.0.0.1/ferretdb?authMechanism=PLAIN'
+```bash
+mongosh 'mongodb://<postgres-username>:<postgres-password>@127.0.0.1/ferretdb?authMechanism=PLAIN'
 ```
 
 This will connect you directly to the FerretDB instance where you can run MongoDB commands.
 
 ```bash
-~$ mongosh 'mongodb://:@127.0.0.1/ferretdb?authMechanism=PLAIN'
+~$ mongosh 'mongodb://<username>:<password>@127.0.0.1/ferretdb?authMechanism=PLAIN'
 Current Mongosh Log ID: 657c28296fda6bb93a0c0058
-Connecting to:      mongodb://@127.0.0.1/?authMechanism=PLAIN&directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.0.2
+Connecting to:      mongodb://<credentials>@127.0.0.1/?authMechanism=PLAIN&directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.0.2
 Using MongoDB:      6.0.42
 Using Mongosh:      2.0.2
 mongosh 2.1.1 is available for download: https://www.mongodb.com/try/download/shell
@@ -169,7 +173,6 @@ ferretdb> db.players.find()
     rebounding: 87
   }
 ]
-
 ```
 
 ## Update a record in FerretDB
@@ -215,9 +218,9 @@ In addition to a document database view of the collection in FerretDB, you can a
 
 To view your current documents, go to the Neon **Dashboard** and select **Tables** from the sidebar. Then, from the **Schema** menu, select `ferretdb`. FerretDB stores the documents in Postgres as [JSONB](https://www.postgresql.org/docs/current/datatype-json.html) data.
 
-![FerretDB table showing player data](/docs/guides/ferretdb_table.png)
 
-To query the data for a specific player via SQL, you can do so via the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor):
+
+To query the data for a specific player via SQL, you can do so via the [Neon SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client like [psql](https://neon.com/docs/connect/query-with-psql-editor):
 
 ```sql
 SELECT _jsonb
@@ -233,7 +236,7 @@ To get started with FerretDB, check out the [FerretDB Get Started](https://docs.
 
 ## References
 
-- [Sign up for Neon](/docs/get-started-with-neon/signing-up)
+- [Sign up for Neon](https://neon.com/docs/get-started-with-neon/signing-up)
 - [Get Docker](https://docs.docker.com/get-docker/)
 - [Install mongosh](https://www.mongodb.com/docs/mongodb-shell/install/)
 - [MongoDB Compatibility - What's Really Important?](https://blog.ferretdb.io/mongodb-compatibility-whats-really-important/)
@@ -241,7 +244,7 @@ To get started with FerretDB, check out the [FerretDB Get Started](https://docs.
 - [FerretDB on GitHub](https://github.com/FerretDB/FerretDB)
 - [FerretDB supported commands](https://docs.ferretdb.io/reference/supported-commands/)
 - [Postgres JSON Functions and Operators](https://www.postgresql.org/docs/current/functions-json.html)
-- [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor)
-- [Connect with psql](/docs/connect/query-with-psql-editor)
+- [Neon SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor)
+- [Connect with psql](https://neon.com/docs/connect/query-with-psql-editor)
 - [Understanding FerretDB](https://docs.ferretdb.io/understanding-ferretdb/)
 - [FerretDB Get Started](https://docs.ferretdb.io/quickstart-guide/)

@@ -5,10 +5,10 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/about
   - /docs/introduction/about
-updatedOn: '2025-02-08T16:44:52.276Z'
+updatedOn: '2025-05-30T16:54:40.456Z'
 ---
 
-Looking back at Neon's debut blog post, [SELECT ’Hello, World’](https://neon.tech/blog/hello-world), the fundamental reasons for **Why Neon** remain the same:
+Looking back at Neon's debut blog post, [SELECT ’Hello, World’](/blog/hello-world), the fundamental reasons for **Why Neon** remain the same:
 
 - **To build the best Postgres experience in the cloud**
 
@@ -46,7 +46,7 @@ Separating compute from storage refers to an architecture where the database com
 
 Separation of compute and storage allows these resources to be scaled independently. You can adjust for processing power or storage capacity as needed without affecting the other. This approach is also cost-efficient. The ability to scale resources independently means you can benefit from the lower cost of storage compared to compute or avoid paying for additional storage when you only require extra processing power. Decoupling compute and storage also improves availability and durability, as data remains accessible and safe, even if a compute fails.
 
-[Read more about the benefits of Neon's serverless architecture](/docs/introduction/serverless) and how it supports database-per-user architectures, variable workloads, database branching workflows, and [AI agents](https://neon.tech/use-cases/ai-agents).
+[Read more about the benefits of Neon's serverless architecture](/docs/introduction/serverless) and how it supports database-per-user architectures, variable workloads, database branching workflows, and [AI agents](/use-cases/ai-agents).
 
 <Admonition type="tip" title="Did you know?">
 Neon's autoscaling feature instantly scales your compute and memory resources. **No manual intervention or restarts are required.** 
@@ -88,7 +88,7 @@ Neon is designed for a wide range of users, from individual developers to enterp
 
 - **Teams and organizations** that aim to enhance their development workflows with the ability to create database branches for testing new features or updates, mirroring the branching process used in code version control.
 - **Enterprises** requiring scalable, high-performance database solutions with advanced features like autoscaling, scale to zero, instant restore, and logical replication. Enterprises can benefit from custom pricing, higher resource allowances, and enterprise-level support to meet their specific requirements.
-- **AI agents** that need to rapidly provision Postgres databases, execute SQL queries, and efficiently manage Neon infrastructure. With one-second provision times, scale-to-zero compute, and agent-friendly client interfaces, Neon enables AI agents to manage database fleets at scale while keeping costs low. AI agents are on track to surpass humans in the number of databases created on the Neon platform. [Learn more about this use case](https://neon.tech/use-cases/ai-agents).
+- **AI agents** that need to rapidly provision Postgres databases, execute SQL queries, and efficiently manage Neon infrastructure. With one-second provision times, scale-to-zero compute, and agent-friendly client interfaces, Neon enables AI agents to manage database fleets at scale while keeping costs low. AI agents are on track to surpass humans in the number of databases created on the Neon platform. [Learn more about this use case](/use-cases/ai-agents).
 
 In summary, Neon is built for anyone who requires a Postgres database and wants to benefit from the scalability, ease of use, cost savings, and advanced DevX capabilities provided by Neon's serverless architecture.
 

@@ -1,7 +1,7 @@
 ---
 title: Usage metrics
 enableTableOfContents: true
-updatedOn: '2025-05-11T11:23:50.623Z'
+updatedOn: '2025-05-30T16:54:40.489Z'
 ---
 
 This topic describes [Storage](#storage), [Archive storage](#archive-storage), [Compute](#compute), [Data transfer](#data-transfer) and [Project](#projects) usage metrics in detail so that you can better manage your [plan](/docs/introduction/plans) allowances and extra usage.
@@ -156,6 +156,13 @@ In short, `VACUUM FULL` can help reduce your data size and future storage costs,
   ```
 
   See [VACUUM and ANALYZE statistic](/docs/postgresql/query-reference#vacuum-and-analyze-statistics) for a query that shows the last time vacuum and analyze were run.
+
+</details>
+
+<details>
+<summary>**What is the maximum data size that Neon supports?**</summary>
+
+Each [Neon plan](/docs/introduction/plans) comes with a specific storage allowance. Beyond this allowance on paid plans, extra usage costs apply. Billing-related allowances aside, Neon projects can support data sizes up to 4 TiB. To increase this limit, [contact the Neon Sales team](/contact-sales).
 
 </details>
 

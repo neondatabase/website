@@ -1,6 +1,10 @@
 # The pg_tiktoken extension
 
-Efficiently tokenize data in your Postgres database using OpenAI's `tiktoken`
+> The document details the pg_tiktoken extension for Neon, which integrates OpenAI's tiktoken library into PostgreSQL, enabling tokenization of text data directly within the database.
+
+## Source
+
+- [The pg_tiktoken extension HTML](https://neon.com/docs/extensions/pg_tiktoken): The original HTML version of this documentation
 
 The `pg_tiktoken` extension enables fast and efficient tokenization of data in your Postgres database using OpenAI's [tiktoken](https://github.com/openai/tiktoken) library.
 
@@ -29,7 +33,7 @@ You can install the `pg_tiktoken` extension by running the following `CREATE EXT
 CREATE EXTENSION pg_tiktoken
 ```
 
-For information about using the Neon **SQL Editor**, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
+For information about using the Neon **SQL Editor**, see [Query with Neon's SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](https://neon.com/docs/connect/query-with-psql-editor).
 
 ## Use the `tiktoken_encode` function
 
@@ -64,7 +68,7 @@ neondb=> SELECT tiktoken_count('text-davinci-003', 'The universe is a vast and c
 The `tiktoken_count` and `tiktoken_encode` functions accept both encoding and OpenAI model names as the first argument:
 
 ```text
-tiktoken_count(,)
+tiktoken_count(<encoding or model>,<text>)
 ```
 
 The following models are supported:
@@ -130,10 +134,10 @@ WITH cte AS (
 
 SELECT role, content, created, n_tokens, cumulative_sum
 FROM cte
-WHERE cumulative_sum ;
+WHERE cumulative_sum <= <MAX_HISTORY_TOKENS>;
 ```
 
-`` represents the conversation history you want to keep for chat completion, following this formula:
+`<MAX_HISTORY_TOKENS>` represents the conversation history you want to keep for chat completion, following this formula:
 
 ```text
 MAX_HISTORY_TOKENS = MODEL_MAX_TOKENS – NUM_SYSTEM_TOKENS – NUM_COMPLETION_TOKENS
@@ -163,7 +167,7 @@ MAX_HISTORY_TOKENS = 4096 – 6 – 90 = 4000
 
 ## Conclusion
 
-In conclusion, the `pg_tiktoken` extension is a valuable tool for tokenizing text data and managing tokens within Postgres databases. By leveraging OpenAI's tiktoken library, it simplifies the process of tokenization and working with token limits, enabling you to integrate more easily with with OpenAI's language models.
+In conclusion, the `pg_tiktoken` extension is a valuable tool for tokenizing text data and managing tokens within Postgres databases. By leveraging OpenAI's tiktoken library, it simplifies the process of tokenization and working with token limits, enabling you to integrate more easily with OpenAI's language models.
 
 As you explore the capabilities of the `pg_tiktoken extension`, we encourage you to provide feedback and suggest features you'd like to see added in future updates. We look forward to seeing the innovative natural language processing applications you create using `pg_tiktoken`.
 

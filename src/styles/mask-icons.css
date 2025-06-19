@@ -127,6 +127,12 @@
     @apply mask-styles;
   }
 
+  .check-new-icon {
+    -webkit-mask-image: url('/images/check-new.svg');
+    -webkit-mask-size: 16px 16px;
+    @apply mask-styles;
+  }
+
   .wip-icon {
     -webkit-mask-image: url('/images/refresh.svg');
     -webkit-mask-size: 12px 12px;

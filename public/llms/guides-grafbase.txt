@@ -1,19 +1,23 @@
 # Use Grafbase Edge Resolvers with Neon
 
-Learn how to build and deploy serverless GraphQL backends with Grafbase and
+> The document explains how to integrate Grafbase Edge Resolvers with Neon, detailing the steps to configure and deploy a Neon database with Grafbase for efficient data querying and management.
+
+## Source
+
+- [Use Grafbase Edge Resolvers with Neon HTML](https://neon.com/docs/guides/grafbase): The original HTML version of this documentation
 
 _This guide was contributed by Josep Vidal from Grafbase_
 
 Grafbase allows you to combine your data sources into a centralized GraphQL endpoint and deploy a serverless GraphQL backend.
 
-This guide describes how to create a GraphQL API using Grafbase and use Grafbase [Edge Resolvers](https://grafbase.com/docs/edge-gateway/resolvers) with the [Neon serverless driver](/docs/serverless/serverless-driver) to interact with your Neon database at the edge.
+This guide describes how to create a GraphQL API using Grafbase and use Grafbase [Edge Resolvers](https://grafbase.com/docs/edge-gateway/resolvers) with the [Neon serverless driver](https://neon.com/docs/serverless/serverless-driver) to interact with your Neon database at the edge.
 
 The example project in this guide simulates a marketplace of products, where the product price is dynamically calculated based on data retrieved from your Neon database.
 
 ## Prerequisites
 
 - The [Grafbase CLI](https://grafbase.com/cli)
-- A Neon project. See [Create a Neon project](/docs/manage/projects#create-a-project).
+- A Neon project. See [Create a Neon project](https://neon.com/docs/manage/projects#create-a-project).
 
 ## Create a backend with Grafbase
 
@@ -86,13 +90,13 @@ A database connection string is required to forward queries to your Neon databas
 1. Navigate to the Neon **Project Dashboard**.
 2. Click **Connect** and copy the connection string for your database. The connection string should appear similar to the following:
 
-   ```text shouldWrap
+   ```text
    postgresql://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
 3. Add a `DATABASE_URL` environment variable to your `grafbase/.env` file and set the value to your connection string. For example:
 
-   ```text shouldWrap
+   ```text
    DATABASE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]
    ```
 

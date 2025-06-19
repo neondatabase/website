@@ -1,6 +1,10 @@
 # Connect an SQLAlchemy application to Neon
 
-Set up a Neon project in seconds and connect from an SQLAlchemy application
+> The document outlines the steps to connect an SQLAlchemy application to a Neon database, detailing the necessary configurations and code examples for establishing a successful connection.
+
+## Source
+
+- [Connect an SQLAlchemy application to Neon HTML](https://neon.com/docs/guides/sqlalchemy): The original HTML version of this documentation
 
 SQLAlchemy is a Python SQL toolkit and Object Relational Mapper (ORM) that provides application developers with the full power and flexibility of SQL. This guide describes how to create a Neon project and connect to it from SQLAlchemy.
 
@@ -9,11 +13,6 @@ SQLAlchemy is a Python SQL toolkit and Object Relational Mapper (ORM) that provi
 To complete the steps in this topic, ensure that you have an SQLAlchemy installation with a Postgres driver. The following instructions use `psycopg2`, the default driver for Postgres in SQLAlchemy. For SQLAlchemy installation instructions, refer to the [SQLAlchemy Installation Guide](https://docs.sqlalchemy.org/en/14/intro.html#installation). `psycopg2` installation instructions are provided below.
 
 To connect to Neon from SQLAlchemy:
-
-1. [Create a Neon project](#create-a-neon-project)
-1. [Install psycopg2](#install-psycopg2)
-1. [Create the "hello neon" program](#create-the-hello-neon-program)
-1. [Create an SQLAlchemy engine for your Neon project](#create-an-sqlalchemy-engine-for-your-neon-project)
 
 ## Create a Neon project
 
@@ -59,11 +58,9 @@ with conn.cursor() as cur:
  print(cur.fetchall())
 ```
 
-You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).
 
-
-This example was tested with Python 3 and psycopg2 version 2.9.3.
-
+   **Note**: This example was tested with Python 3 and psycopg2 version 2.9.3.
 
 ## Create an SQLAlchemy engine for your Neon project
 
@@ -84,7 +81,7 @@ conn_str = f'postgresql://{USERNAME}:{PASSWORD}@{HOST}/{DATABASE}?sslmode=requir
 engine = create_engine(conn_str)
 ```
 
-You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).
 
 For additional information about connecting from SQLAlchemy, refer to the following topics in the SQLAlchemy documentation:
 
@@ -99,12 +96,10 @@ For additional information about connecting from SQLAlchemy, refer to the follow
   - Set the SQLAlchemy `pool_recycle` parameter to a value less than or equal to the scale to zero setting configured for your compute.
   - Set the SQLAlchemy `pool_pre_ping` parameter to `true`. This ensures that your engine checks if the connection is alive before executing a query.
 
-  For more details on the `pool_recycle` and `pool_pre_ping` parameters, refer to [SQLAlchemy: Connection Pool Configuration](https://docs.sqlalchemy.org/en/20/core/pooling.html#connection-pool-configuration) and [Dealing with Disconnects](https://docs.sqlalchemy.org/en/20/core/pooling.html#connection-pool-configuration). For information on configuring Neon's scale to zero setting, see [Configuring Scale to Zero for Neon computes](/docs/guides/scale-to-zero-guide).
+  For more details on the `pool_recycle` and `pool_pre_ping` parameters, refer to [SQLAlchemy: Connection Pool Configuration](https://docs.sqlalchemy.org/en/20/core/pooling.html#connection-pool-configuration) and [Dealing with Disconnects](https://docs.sqlalchemy.org/en/20/core/pooling.html#connection-pool-configuration). For information on configuring Neon's scale to zero setting, see [Configuring Scale to Zero for Neon computes](https://neon.com/docs/guides/scale-to-zero-guide).
 
 ## Schema migration with SQLAlchemy
 
 For schema migration with SQLAlchemy, see our guide:
 
-
-
-SQLAlchemy Migrations
+- [SQLAlchemy Migrations](https://neon.com/docs/guides/sqlalchemy-migrations): Schema migration with Neon Postgres and SQLAlchemy

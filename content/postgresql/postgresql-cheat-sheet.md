@@ -67,7 +67,7 @@ List all schemas:
 \dn
 ```
 
-List all [stored procedures](https://neon.tech/postgresql/postgresql-stored-procedures/) and functions:
+List all [stored procedures](/postgresql/postgresql-stored-procedures/) and functions:
 
 ```text
 \df
@@ -97,7 +97,7 @@ Get detailed information on a table.
 \d+ table_name
 ```
 
-Show a [stored procedure](https://neon.tech/postgresql/postgresql-stored-procedures/) or function code:
+Show a [stored procedure](/postgresql/postgresql-stored-procedures/) or function code:
 
 ```
 \df+ function_name
@@ -426,7 +426,7 @@ UNION
 SELECT * FROM table2;
 ```
 
-Minus a result set using [`EXCEPT`](https://neon.tech/postgresql/postgresql-tutorial/postgresql-tutorial/postgresql-except/) operator:
+Minus a result set using [`EXCEPT`](/postgresql/postgresql-tutorial/postgresql-tutorial/postgresql-except/) operator:
 
 ```sql
 SELECT * FROM table1

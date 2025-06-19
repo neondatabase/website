@@ -158,7 +158,7 @@ Simple enough, right? Now let's prep our database to store this data.
 
 ### Creating a Postgres Database with Neon
 
-Postgres is my go-to database for most projects. And using a managed service like [Neon](https://neon.tech/) makes it even easier to get up and running Serverless Progres databases on Azure.
+Postgres is my go-to database for most projects. And using a managed service like [Neon](https://neon.com/) makes it even easier to get up and running Serverless Progres databases on Azure.
 So, I'm going to head over to my [Neon projects](https://console.neon.tech/app/projects) and create a new project with a Postgres database, then use the following schema to create a table to store my recipes:
 
 ```sql

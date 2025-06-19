@@ -1,17 +1,17 @@
 ---
 title: Replicate data from one Neon project to another
-subtitle: Use logical replication to migrate data to a different Neon project, account,
-  Postgres version, or region
+subtitle: Replicate data to a different Neon project for cross-region replication,
+  version migration, or region migration
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-14T17:05:10.000Z'
+updatedOn: '2025-05-20T17:00:38.662Z'
 ---
 
-Neon's logical replication feature allows you to replicate data from one Neon project to another. This enables different replication scenarios, including:
+Neon's logical replication feature allows you to replicate data from one Neon project to another. This enables different usage scenarios, including:
 
+- **Cross-region replication**: Replicating data from a Neon project in one region to a Neon project in another region to support regional failover scenarios.
 - **Postgres version migration**: Moving data from one Postgres version to another; for example, from a Neon project that runs Postgres 16 to one that runs Postgres 17.
 - **Region migration**: Moving data from one region to another; for example, from a Neon project in one region to a Neon project in a different region.
-- **Neon account migration**: Moving data from a Neon project owned by one account to a project owned by a different account; for example, from a personal Neon account to a business-owned Neon account.
 
 These are some common Neon-to-Neon replication scenarios. There may be others. You can follow the steps in this guide for any scenario that requires replicating data between different Neon projects.
 
@@ -88,7 +88,7 @@ For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/cur
 
 ## Prepare your Neon destination database
 
-This section describes how to prepare your destination Neon Postgres database (the subscriber) to receive replicated data.
+This section explains how to prepare your destination Neon Postgres database (the subscriber) to receive replicated data. For cross-region replication, be sure to create the destination Neon project in a different region than your source database.
 
 ### Prepare your database schema
 
@@ -155,7 +155,7 @@ SELECT subname, received_lsn, latest_end_lsn, last_msg_receipt_time FROM pg_cata
 
 ## Switch over your application
 
-After the replication operation is complete, you can switch your application over to the destination database by swapping out your source database connection details for your destination database connection details.
+After the replication operation is complete or in a failover situation, you can switch your application over to the destination database by swapping out your source database connection details for your destination database connection details.
 
 You can find your Neon database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. See [Connect from any application](/docs/connect/connect-from-any-app).
 

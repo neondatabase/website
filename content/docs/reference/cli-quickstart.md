@@ -2,7 +2,7 @@
 title: Neon CLI Quickstart
 subtitle: Get set up with the Neon CLI in just a few steps
 enableTableOfContents: true
-updatedOn: '2025-04-20T22:48:22.682Z'
+updatedOn: '2025-05-30T16:54:40.492Z'
 ---
 
 The Neon CLI is a command-line interface that lets you manage Neon directly from the terminal. This guide will help you quickly set up and start using the Neon CLI.
@@ -95,7 +95,7 @@ This will open a browser window where you can authorize the CLI to access your N
 
 **API Key Authentication**
 
-Alternatively, you can use a personal Neon API key. You can create one in the Neon Console. See [Create a personal API key](https://neon.tech/docs/manage/api-keys#create-a-personal-api-key).
+Alternatively, you can use a personal Neon API key. You can create one in the Neon Console. See [Create a personal API key](/docs/manage/api-keys#create-a-personal-api-key).
 
 ```bash
 neon projects list --api-key <your-api-key>

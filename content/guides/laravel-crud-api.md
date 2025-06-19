@@ -717,7 +717,7 @@ The end-user will still receive the same JSON response, but the validation logic
 
 To ensure our API works as expected, Laravel provides a powerful testing suite out of the box.
 
-To learn more about testing in Laravel along with Neon branding, check out the [Testing Laravel Applications with Neon's Database Branching](https://neon.tech/guides/laravel-test-on-branch).
+To learn more about testing in Laravel along with Neon branding, check out the [Testing Laravel Applications with Neon's Database Branching](/guides/laravel-test-on-branch).
 
 ## Adding API Documentation
 

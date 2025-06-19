@@ -1,23 +1,23 @@
 # Secure your data with AWS Cognito and Neon RLS
 
-Implement Row-level Security policies in Postgres using AWS Cognito and Neon
+> The document explains how to integrate AWS Cognito with Neon to implement Row-Level Security (RLS), enabling secure data access control within Neon databases.
 
+## Source
 
+- [Secure your data with AWS Cognito and Neon RLS HTML](https://neon.com/docs/guides/neon-rls-aws-cognito): The original HTML version of this documentation
 
-  AWS Cognito + Neon RLS
+Sample project:
+- [AWS Cognito + Neon RLS](https://github.com/neondatabase-labs/aws-cognito-express-htmx-neon-rls)
 
-
-
-  Neon RLS Tutorial
-  Simplify RLS with Drizzle
-
-
+Related docs:
+- [Neon RLS Tutorial](https://neon.com/docs/guides/neon-rls-tutorial)
+- [Simplify RLS with Drizzle](https://neon.com/docs/guides/neon-rls-drizzle)
 
 Use AWS Cognito with Neon RLS to add secure, database-level authorization to your application. This guide assumes you already have an application using AWS Cognito for user authentication. It shows you how to integrate AWS Cognito with Neon RLS, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 
 ## How it works
 
-AWS Cognito handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon RLS. Neon RLS validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
+AWS Cognito handles user authentication by generating JSON Web Tokens (JWTs), which are securely passed to Neon RLS. Neon RLS validates these tokens and uses the embedded user identity metadata to enforce the [Row-Level Security](https://neon.com/postgresql/postgresql-administration/postgresql-row-level-security) policies that you define directly in Postgres, securing database queries based on that user identity. This authorization flow is made possible using the Postgres extension [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt), which you'll install as part of this guide.
 
 ## Prerequisites
 
@@ -42,11 +42,11 @@ https://cognito-idp.{YOUR_AWS_COGNITO_REGION}.amazonaws.com/{YOUR_AWS_COGNITO_US
 
 You can locate your JWKS URL in the AWS Cognito console under User pools, labeled as Token signing key URL.
 
-![Find your AWS Cognito JWKS URL](/docs/guides/aws_cognito_user_pool.png)
+
 
 Replace `{YOUR_AWS_COGNITO_REGION}` and `{YOUR_AWS_COGNITO_USER_POOL_ID}` with your actual AWS Cognito region and user pool ID. For example, if your region is `us-east-1` and your user pool ID is `us-east-1_XXXXXXXXX`, your JWKS URL would be:
 
-```plaintext shouldWrap
+```plaintext
 https://cognito-idp.us-east-1.amazonaws.com/us-east-1_XXXXXXXXX/.well-known/jwks.json
 ```
 
@@ -54,9 +54,9 @@ https://cognito-idp.us-east-1.amazonaws.com/us-east-1_XXXXXXXXX/.well-known/jwks
 
 Once you have the JWKS URL, go to the **Neon Console**, navigate to **Settings** > **RLS**, and add AWS Cognito as an authentication provider. Paste your copied URL and AWS Cognito will be automatically recognized and selected.
 
-
-  
-
+<div style={{ display: 'flex', justifyContent: 'center'}}>
+  <img src="/docs/guides/aws_cognito_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
+</div>
 
 At this point, you can use the **Get Started** setup steps from RLS in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
 
@@ -74,7 +74,7 @@ CREATE EXTENSION IF NOT EXISTS pg_session_jwt;
 
 The integration creates the `authenticated` and `anonymous` roles for you. Let's define table-level permissions for these roles. To allow both roles to read and write to tables in your public schema, run:
 
-```sql shouldWrap
+```sql
 -- For existing tables
 GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES
   IN SCHEMA public
@@ -113,7 +113,7 @@ Install it using the following command:
 npm install @neondatabase/serverless
 ```
 
-To learn more about the driver, see [Neon Serverless Driver](/docs/serverless/serverless-driver).
+To learn more about the driver, see [Neon Serverless Driver](https://neon.com/docs/serverless/serverless-driver).
 
 ### 6. Set up environment variables
 
@@ -126,15 +126,15 @@ neon connection-string --role-name authenticated
 
 Add these to your `.env` file.
 
-```bash shouldWrap
+```bash
 # Database owner connection string
-DATABASE_URL=''
+DATABASE_URL='<DB_OWNER_CONNECTION_STRING>'
 
 # Neon "authenticated" role connection string
-DATABASE_AUTHENTICATED_URL=''
+DATABASE_AUTHENTICATED_URL='<AUTHENTICATED_CONNECTION_STRING>'
 ```
 
-The `DATABASE_URL` is intended for admin tasks and can run any query while the `DATABASE_AUTHENTICATED_URL` should be used for connections from authorized users, where you pass the required authorization token. You can see an example in [Run your first authorized query](#2-run-your-first-authorized-query) below.
+The `DATABASE_URL` is intended for admin tasks and can run any query while the `DATABASE_AUTHENTICATED_URL` should be used for connections from authorized users, where you pass the required authorization token. You can see an example in [Run your first authorized query](https://neon.com/docs/guides/neon-rls-aws-cognito#2-run-your-first-authorized-query) below.
 
 ## Add RLS policies
 
@@ -144,11 +144,9 @@ Now that you've integrated AWS Cognito with Neon RLS, you can securely pass JWTs
 
 Here are examples of implementing RLS policies for a **todos** table – the Drizzle example leverages the simplified `crudPolicy` function, while the SQL example demonstrates the use of individual RLS policies.
 
+Tab: Drizzle
 
-
-
-
-```typescript shouldWrap
+```typescript
 import { InferSelectModel, sql } from 'drizzle-orm';
 import { bigint, boolean, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
 import { authenticatedRole, authUid, crudPolicy } from 'drizzle-orm/neon';
@@ -175,14 +173,12 @@ export const todos = pgTable(
   ]
 );
 
-export type Todo = InferSelectModel;
+export type Todo = InferSelectModel<typeof todos>;
 ```
 
+Tab: SQL
 
-
-
-
-```sql shouldWrap
+```sql
 -- schema for TODOs table
 CREATE TABLE todos (
   id bigint generated by default as identity primary key,
@@ -214,20 +210,15 @@ TO authenticated
 USING ((select auth.user_id()) = user_id);
 ```
 
-
-
-
 The `crudPolicy` function simplifies policy creation by generating all necessary CRUD policies with a single declaration.
 
 ### 2. Run your first authorized query
 
 With RLS policies in place, you can now query the database using JWTs from AWS Cognito, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from both the backend and the frontend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
 
+Tab: server-component.tsx
 
-
-
-
-```typescript shouldWrap
+```typescript
 "use server";
 
 import { neon } from '@neondatabase/serverless';
@@ -256,7 +247,7 @@ async function getCognitoSession() {
 export default async function TodoList() {
   const sql = neon(process.env.DATABASE_AUTHENTICATED_URL!, {
     authToken: async () => {
-      const sessionToken = await getCognitoSession(); // [!code highlight]
+      const sessionToken = await getCognitoSession();
       if (!sessionToken) {
         throw new Error('No session token available');
       }
@@ -266,23 +257,20 @@ export default async function TodoList() {
 
   // WHERE filter is optional because of RLS.
   // But we send it anyway for performance reasons.
-  const todos = await sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
-
+  const todos = await sql('SELECT * FROM todos WHERE user_id = auth.user_id()');
   return (
-    
+    <ul>
       {todos.map((todo) => (
-        {todo.task}
+        <li key={todo.id}>{todo.task}</li>
       ))}
-    
+    </ul>
   );
 }
 ```
 
+Tab: client-component.tsx
 
-
-
-
-```typescript shouldWrap
+```typescript
 'use client';
 
 import type { Todo } from '@/app/schema';
@@ -292,15 +280,15 @@ import { useEffect, useState } from 'react';
 
 const getDb = (token: string) =>
   neon(process.env.NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL!, {
-    authToken: token, // [!code highlight]
+    authToken: token,
   });
 
 export default function TodoList() {
-  const [todos, setTodos] = useState>();
+  const [todos, setTodos] = useState<Array<Todo>>();
 
   useEffect(() => {
     async function fetchTodos() {
-      const session = await fetchAuthSession(); // [!code highlight]
+      const session = await fetchAuthSession();
       const user = await getCurrentUser();
 
       if (!session?.tokens?.accessToken || !user) {
@@ -313,37 +301,34 @@ export default function TodoList() {
       // WHERE filter is optional because of RLS.
       // But we send it anyway for performance reasons.
       const todosResponse = await
-        sql('SELECT * FROM todos WHERE user_id = auth.user_id()'); // [!code highlight]
-
-      setTodos(todosResponse as Array);
+        sql('SELECT * FROM todos WHERE user_id = auth.user_id()');
+      setTodos(todosResponse as Array<Todo>);
     }
 
     fetchTodos();
   }, []);
 
   return (
-    
+    <ul>
       {todos?.map((todo) => (
-        
+        <li key={todo.id}>
           {todo.task}
-        
+        </li>
       ))}
-    
+    </ul>
   );
 }
 ```
 
+Tab: .env
 
-
-
-
-```bash shouldWrap
+```bash
 # Used for database migrations
-DATABASE_URL=''
+DATABASE_URL='<DB_OWNER_CONNECTION_STRING>'
 
 # Used for server-side fetching
-DATABASE_AUTHENTICATED_URL=''
+DATABASE_AUTHENTICATED_URL='<AUTHENTICATED_CONNECTION_STRING>'
 
 # Used for client-side fetching
-NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL=''
+NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL='<AUTHENTICATED_CONNECTION_STRING>'
 ```

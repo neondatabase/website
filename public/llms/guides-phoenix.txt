@@ -1,6 +1,10 @@
 # Connect from Phoenix to Neon
 
-Set up a Neon project in seconds and connect from Phoenix
+> The document titled "Connect from Phoenix to Neon" outlines the steps required for establishing a connection between the Phoenix framework and Neon database, detailing configuration settings and necessary commands specific to Neon's environment.
+
+## Source
+
+- [Connect from Phoenix to Neon HTML](https://neon.com/docs/guides/phoenix): The original HTML version of this documentation
 
 This guide describes how to connect Neon in a [Phoenix](https://www.phoenixframework.org) application. [Ecto](https://hexdocs.pm/ecto/3.11.2/Ecto.html) provides an API and abstractions for interacting databases, enabling Elixir developers to query any database using similar constructs.
 
@@ -8,10 +12,10 @@ It is assumed that you have a working installation of [Elixir](https://elixir-la
 
 To connect to Neon from Phoenix with Ecto:
 
-- [Create a Neon project](#create-a-neon-project)
-- [Store your Neon credentials](#store-your-neon-credentials)
-- [Create a Phoenix project](#create-a-phoenix-project)
-- [Build and Run the Phoenix application](#build-and-run-the-phoenix-application)
+- [Create a Neon project](https://neon.com/docs/guides/phoenix#create-a-neon-project)
+- [Store your Neon credentials](https://neon.com/docs/guides/phoenix#store-your-neon-credentials)
+- [Create a Phoenix project](https://neon.com/docs/guides/phoenix#create-a-phoenix-project)
+- [Build and Run the Phoenix application](https://neon.com/docs/guides/phoenix#build-and-run-the-phoenix-application)
 
 ## Create a Neon project
 
@@ -23,10 +27,10 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 ## Store your Neon credentials
 
-Add a `.env` file to your project directory and add your Neon connection string to it. You can find your connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+Add a `.env` file to your project directory and add your Neon connection string to it. You can find your connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).
 
-```shell shouldWrap
-DATABASE_URL="postgresql://:@.neon.tech:/?sslmode=require"
+```shell
+DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require"
 ```
 
 You will need the connection string details later in the setup.
@@ -55,9 +59,7 @@ You will need the connection string details later in the setup.
       ssl: [cacerts: :public_key.cacerts_get()]
    ```
 
-      
-         The `:ssl` option is required to connect to Neon. Postgrex, since v0.18, verifies the server SSL certificate and you need to select CA trust store using `:cacerts` or `:cacertfile` options. You can use the OS-provided CA store by setting `cacerts: :public_key.cacerts_get()`. While not recommended, you can disable certificate verification by setting `ssl: [verify: :verify_none]`.
-      
+         **Note**: The `:ssl` option is required to connect to Neon. Postgrex, since v0.18, verifies the server SSL certificate and you need to select CA trust store using `:cacerts` or `:cacertfile` options. You can use the OS-provided CA store by setting `cacerts: :public_key.cacerts_get()`. While not recommended, you can disable certificate verification by setting `ssl: [verify: :verify_none]`.
 
 3. Update`config/runtime.exs` file's configuration with your Neon database connection details. Use the connection details from the Neon connection string you copied previously.
 
@@ -116,9 +118,9 @@ For each deployment, a secret key is required for encrypting and signing data. R
 mix phx.gen.secret
 ```
 
-When you run the following command, you can expect to see the Phoenix application on [localhost:4001](localhost:4001):
+When you run the following command, you can expect to see the Phoenix application on [localhost:4001](https://neon.com/localhost:4001):
 
-```bash shouldWrap
+```bash
 PORT=4001 \
 MIX_ENV=prod \
 DATABASE_URL="postgresql://...:...@...aws.neon.tech/neondb?sslmode=require" \
@@ -130,6 +132,4 @@ mix phx.server
 
 You can find the source code for the application described in this guide on GitHub.
 
-
-
-Get started with Phoenix and Neon
+- [Get started with Phoenix and Neon](https://github.com/neondatabase/examples/tree/main/with_phoenix)

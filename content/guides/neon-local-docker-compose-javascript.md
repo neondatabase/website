@@ -7,7 +7,7 @@ title: How to set up Neon Local with Docker Compose and JavaScript Postgres clie
 subtitle: A practical guide to Neon Local with JavaScript and Docker Compose for local and production setups
 ---
 
-ICYMI we recently launched [Neon Local](https://neon.tech/blog/make-yourself-at-home-with-neon-local).
+ICYMI we recently launched [Neon Local](/blog/make-yourself-at-home-with-neon-local).
 
 ## What is Neon Local?
 

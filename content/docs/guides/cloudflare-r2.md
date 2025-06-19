@@ -2,7 +2,7 @@
 title: File storage with Cloudflare R2
 subtitle: Store files via Cloudflare R2 and track metadata in Neon
 enableTableOfContents: true
-updatedOn: '2025-04-27T11:08:17.423Z'
+updatedOn: '2025-05-30T16:54:40.460Z'
 ---
 
 [Cloudflare R2](https://www.cloudflare.com/en-in/developer-platform/products/r2/) is S3-compatible object storage offering zero egress fees, designed for storing and serving large amounts of unstructured data like images, videos, and documents globally.
@@ -71,7 +71,7 @@ We need a table in Neon to store metadata about the objects uploaded to R2.
 2.  Run the SQL statement. You can add other relevant columns (file size, content type, etc.) depending on your application needs.
 
 <Admonition type="note" title="Securing metadata with RLS">
-If you use [Neon's Row Level Security (RLS)](https://neon.tech/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `r2_files` table. This controls who can view or modify the object references stored in Neon based on your RLS rules.
+If you use [Neon's Row Level Security (RLS)](/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `r2_files` table. This controls who can view or modify the object references stored in Neon based on your RLS rules.
 
 Note that these policies apply _only_ to the metadata in Neon. Access control for the objects within the R2 bucket itself is managed via R2 permissions, API tokens, and presigned URL settings if used.
 </Admonition>
