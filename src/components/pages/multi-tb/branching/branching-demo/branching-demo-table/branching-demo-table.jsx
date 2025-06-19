@@ -101,9 +101,7 @@ const BranchingDemoTable = ({
                 tabIndex={isLoading || !isCheckboxInteractive ? -1 : 0}
                 aria-selected={!isLoading && selectedRows.includes(row.id)}
                 onClick={
-                  isLoading || !isCheckboxInteractive
-                    ? undefined
-                    : (e) => handleRowSelection(row.id, e.currentTarget)
+                  isLoading || !isCheckboxInteractive ? undefined : () => handleRowSelection(row.id)
                 }
                 onKeyDown={
                   isLoading || !isCheckboxInteractive
@@ -111,7 +109,7 @@ const BranchingDemoTable = ({
                     : (e) => {
                         if (e.key === 'Enter' || e.key === ' ') {
                           e.preventDefault();
-                          handleRowSelection(row.id, e.currentTarget);
+                          handleRowSelection(row.id);
                         }
                       }
                 }
