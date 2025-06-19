@@ -272,10 +272,11 @@ Next, add the delete handler to your `NotesList` component:
 
 ```typescript
 // src/components/app/notes-list.tsx
-import { usePostgrest } from "@/lib/postgrest"; // [!code highlight]
+import { usePostgrest } from '@/lib/postgrest'; // [!code highlight]
 
-const handleDelete = async (id: string) => { // [!code highlight]
-  const { error } = await postgrest.from("notes").delete().eq("id", id); // [!code highlight]
+const handleDelete = async (id: string) => {
+  // [!code highlight]
+  const { error } = await postgrest.from('notes').delete().eq('id', id); // [!code highlight]
   if (!error) {
     window.location.reload(); // [!code highlight]
   }
@@ -331,5 +332,5 @@ Then, use the name you find (e.g. `paragraphs_note_id_notes_id_fk`) in the `DROP
 - [Getting started with Data API](/docs/data-api/get-started)
 - [Neon Auth documentation](/docs/guides/neon-auth)
 - [postgrest-js documentation](https://github.com/supabase/postgrest-js)
-- [PostgREST documentation]( https://docs.postgrest.org/en/v13/)
+- [PostgREST documentation](https://docs.postgrest.org/en/v13/)
 - [Simplify RLS with Drizzle](/docs/guides/neon-rls-drizzle)
