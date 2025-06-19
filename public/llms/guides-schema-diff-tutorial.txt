@@ -1,6 +1,6 @@
 # Schema diff tutorial
 
-> This guide demonstrates how to compare two development branches using Schema Diff, covering initial schema creation, branch creation, schema modifications, and visual comparison of database schema differences.
+> The "Schema diff tutorial" document guides Neon users through the process of comparing and synchronizing database schemas using Neon's schema diff tool.
 
 ## Source
 
@@ -18,12 +18,11 @@ To complete this tutorial, you'll need:
   - Install the [Neon CLI](https://neon.com/docs/reference/cli-install)
   - Download and install the [psql](https://www.postgresql.org/download/) client
 
-
 ## Create the Initial Schema
 
 First, create a new database called `people` on the `production` branch and add some sample data to it.
 
-### Console
+Tab: Console
 
 1. Create the database.
 
@@ -41,7 +40,7 @@ First, create a new database called `people` on the `production` branch and add 
    );
    ```
 
-### CLI
+Tab: CLI
 
 1. Create the database.
 
@@ -51,13 +50,13 @@ First, create a new database called `people` on the `production` branch and add 
    neon databases create --name people
    ```
 
-   If you have multiple projects, include `--project-id`. Or set the project context so you don't have to specify project id in every command. Example:
+      **Note**: If you have multiple projects, include `--project-id`. Or set the project context so you don't have to specify project id in every command. Example: 
 
-   ```bash
+```bash
    neon set-context --project-id empty-glade-66712572
    ```
 
-   You can find your project ID on the **Settings** page in the Neon Console.
+ You can find your project ID on the **Settings** page in the Neon Console.
 
 1. Copy your connection string:
 
@@ -67,7 +66,7 @@ First, create a new database called `people` on the `production` branch and add 
 
 1. Connect to the `people` database with psql:
 
-   ```bash
+   ```bash shouldWrap
    psql 'postgresql://neondb_owner:*********@ep-crimson-frost-a5i6p18z.us-east-2.aws.neon.tech/people?sslmode=require'
    ```
 
@@ -81,7 +80,7 @@ First, create a new database called `people` on the `production` branch and add 
    );
    ```
 
-### API
+Tab: API
 
 1. Use the [Create database](https://api-docs.neon.tech/reference/createprojectbranchdatabase) API to create the `people` database, specifying the `project_id`, `branch_id`, database `name`, and database `owner_name` in the API call.
 
@@ -118,7 +117,7 @@ First, create a new database called `people` on the `production` branch and add 
 
 3. Connect to the `people` database with `psql`:
 
-   ```bash
+   ```bash shouldWrap
    psql 'postgresql://alex:*********@ep-green-surf-a5yaumj3-pooler.us-east-2.aws.neon.tech/people?sslmode=require'
    ```
 
@@ -138,7 +137,7 @@ Create a new development branch off of `production`. This branch will be an exac
 
 For the purposes of this tutorial, name the branch `feature/address`, which could work as a good convention for creating isolated branches for working on specific features.
 
-### Console
+Tab: Console
 
 1. Create the development branch
 
@@ -151,9 +150,9 @@ For the purposes of this tutorial, name the branch `feature/address`, which coul
 
    From the **SQL Editor**, use the meta-command `\d person` to inspect the schema of the `person` table. Make sure that the `people` database on the branch `feature/address` is selected.
 
-   ![use metacommand to inspect schema](https://neon.com/docs/guides/schema_diff_d_metacommand.png)
+   ![use metacommand to inspect schema](/docs/guides/schema_diff_d_metacommand.png)
 
-### CLI
+Tab: CLI
 
 1. Create the branch
 
@@ -209,10 +208,9 @@ For the purposes of this tutorial, name the branch `feature/address`, which coul
 
       You can do the same thing for your `production` branch and get identical results.
 
-### API
+Tab: API
 
 Using the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) API, create a development branch named `feature/address`. You'll need to specify the `project_id`, `parent_id`, branch `name`, and add a `read_write` compute (you need a compute to connect to the branch).
-
 ```bash
 curl --request POST \
 --url https://console.neon.tech/api/v2/projects/royal-band-06902338/branches \
@@ -236,7 +234,8 @@ curl --request POST \
 
 Let's introduce some differences between the two branches. Add a new table to store addresses on the `feature/address` branch.
 
-### Console
+Tab: Console
+
 In the **SQL Editor**, make sure you select `feature/address` as the branch and `people` as the database.
 
 Enter this SQL statement to create a new `address` table.
@@ -253,7 +252,7 @@ CREATE TABLE address (
 );
 ```
 
-### CLI
+Tab: CLI
 
 1. Connect to your `feature/address` branch
 
@@ -288,7 +287,7 @@ CREATE TABLE address (
    );
    ```
 
-### API
+Tab: API
 
 1. Retrieve the database connection string for the `feature/address` branch using [Get connection URI](https://api-docs.neon.tech/reference/getconnectionuri) endpoint:
 
@@ -331,21 +330,21 @@ CREATE TABLE address (
 
 Now that you have some differences between your branches, you can view the schema differences.
 
-### Console
+Tab: Console
 
 1. Click on `feature/address` to open the detailed view, then click **Schema diff**.
 
-   ![select branches for schema diff](https://neon.com/docs/guides/schema_diff_make_selection.png)
+   
 
 1. Make sure you select `people` as the database and then click **Compare**.
 
-   ![schema diff results](https://neon.com/docs/guides/schema_diff_result.png)
+   
 
 You will see the schema differences between `feature/address` and its parent `production`, including the new address table that we added to the `feature/address` branch.
 
 You can also launch Schema Diff from the **Restore** page, usually as part of verifying schemas before you restore a branch to its own or another branch's history. See [Instant restore](https://neon.com/docs/guides/branch-restore) for more info.
 
-### CLI
+Tab: CLI
 
 Compare the schema of `feature/address` to its parent branch using the `schema-diff` command.
 
@@ -356,32 +355,32 @@ neon branches schema-diff production feature/address --database people
 The result shows a comparison between the `feature/address` branch and its parent branch for the database `people`. The output indicates that the `address` table and its related sequences and constraints have been added in the `feature/address` branch but are not present in its parent branch `production`.
 
 ```diff
---- Database: people (Branch: br-falling-dust-a5bakdqt) // [!code --]
-+++ Database: people (Branch: br-morning-heart-a5ltt10i) // [!code ++]
+--- Database: people (Branch: br-falling-dust-a5bakdqt)
++++ Database: people (Branch: br-morning-heart-a5ltt10i)
 @@ -20,8 +20,46 @@
 
  SET default_table_access_method = heap;
 
  --
-+-- Name: address; Type: TABLE; Schema: public; Owner: neondb_owner // [!code ++]
-+-- // [!code ++]
-+ // [!code ++]
-+CREATE TABLE public.address ( // [!code ++]
-+    id integer NOT NULL, // [!code ++]
-+    person_id integer NOT NULL, // [!code ++]
-+    street text NOT NULL, // [!code ++]
-+    city text NOT NULL, // [!code ++]
-+    state text NOT NULL, // [!code ++]
-+    zip_code text NOT NULL // [!code ++]
-+); // [!code ++]
-+ // [!code ++]
-+ // [!code ++]
-+ALTER TABLE public.address OWNER TO neondb_owner; // [!code ++]
-+ // [!code ++]
-+... // [!code ++]
++-- Name: address; Type: TABLE; Schema: public; Owner: neondb_owner
++--
++
++CREATE TABLE public.address (
++    id integer NOT NULL,
++    person_id integer NOT NULL,
++    street text NOT NULL,
++    city text NOT NULL,
++    state text NOT NULL,
++    zip_code text NOT NULL
++);
++
++
++ALTER TABLE public.address OWNER TO neondb_owner;
++
++...
 ```
 
-### API
+Tab: API
 
 Compare the schema of the `feature/address` branch to its parent branch using the `compare-schema` API.
 
@@ -392,15 +391,15 @@ curl --request GET \
      --header 'authorization: Bearer $NEON_API_KEY' | jq -r '.diff'
 ```
 
-| Parameter          | Description                                                                               | Required | Example                   |
-| ------------------ | ----------------------------------------------------------------------------------------- | -------- | ------------------------- |
-| `<project_id>`     | The ID of your Neon project.                                                              | Yes      | `royal-band-06902338`     |
-| `<branch_id>`      | The ID of the target branch to compare.                                                   | Yes      | `br-mute-dew-a5930esi`    |
-| `<base_branch_id>` | The ID of the base branch for comparison — the parent branch in this case.                | Yes      | `br-bitter-bird-a56n6lh4` |
-| `<db_name>`        | The name of the database in the target branch.                                            | Yes      | `people`                  |
-| `Authorization`    | Bearer token for API access (your [Neon API key](https://neon.com/docs/manage/api-keys)) | Yes      | `$NEON_API_KEY`           |
+| Parameter          | Description                                                                | Required | Example                   |
+| ------------------ | -------------------------------------------------------------------------- | -------- | ------------------------- |
+| `<project_id>`     | The ID of your Neon project.                                               | Yes      | `royal-band-06902338`     |
+| `<branch_id>`      | The ID of the target branch to compare.                                    | Yes      | `br-mute-dew-a5930esi`    |
+| `<base_branch_id>` | The ID of the base branch for comparison — the parent branch in this case. | Yes      | `br-bitter-bird-a56n6lh4` |
+| `<db_name>`        | The name of the database in the target branch.                             | Yes      | `people`                  |
+| `Authorization`    | Bearer token for API access (your [Neon API key](https://neon.com/docs/manage/api-keys))   | Yes      | `$NEON_API_KEY`           |
 
-The optional `jq -r '.diff'` command extracts the diff field from the JSON response and outputs it as plain text to make it easier to read. This command would not be necessary when using the endpoint programmatically.
+   **Note**: The optional `jq -r '.diff'` command extracts the diff field from the JSON response and outputs it as plain text to make it easier to read. This command would not be necessary when using the endpoint programmatically.
 
 The result shows a comparison between the `feature/address` branch and its parent branch for the database `people`. The output indicates that the `address` table and its related sequences and constraints have been added to the `feature/address` branch but are not present in its parent branch.
 
@@ -493,6 +492,6 @@ The result shows a comparison between the `feature/address` branch and its paren
 +
 +
 +--
- -- PostgreSQL database dump complete
+ -- Name: DEFAULT PRIVILEGES FOR SEQUENCES; Type: DEFAULT ACL; Schema: public; Owner: cloud_admin
  --
 ```

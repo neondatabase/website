@@ -166,6 +166,12 @@ export default {
     pathname: LINKS.flow,
     type: 'article',
   },
+  platforms: {
+    title: 'Embedded Postgres for Platforms - Neon',
+    description: 'Offer Postgres to your users',
+    pathname: LINKS.platforms,
+    type: 'article',
+  },
   scalableArchitecture: {
     title: 'Neon Scalable Architecture — Neon',
     description:
@@ -184,6 +190,12 @@ export default {
       "Discover Neon's security & compliance standards, including SOC 2, GDPR, and HIPAA, with encryption and access controls to protect your data.",
     imagePath: '/images/social-previews/security.jpg',
     pathname: LINKS.security,
+  },
+  startups: {
+    title: 'Neon Startup Program',
+    description:
+      'Apply to the Neon Startup Program and get up to 100k in Neon credits. For venture-backed companies and startup accelerator programs.',
+    pathname: LINKS.startups,
   },
   generateTicket: {
     title: 'Grab the ticket for Neon Deploy',

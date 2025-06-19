@@ -1,12 +1,10 @@
 # Neon Local
 
-> This guide explains how to use Neon Local, a Docker-based proxy service that creates a local interface to your Neon cloud database, covering setup with Docker Compose, connection methods, configuration options, and Git branch integration.
+> The "Neon Local" documentation outlines the process for setting up and using Neon Local, a tool that allows Neon users to run and test their PostgreSQL databases locally, facilitating development and testing workflows.
 
 ## Source
 
 - [Neon Local HTML](https://neon.com/docs/local/neon-local): The original HTML version of this documentation
-
-## Overview
 
 [Neon Local](https://github.com/neondatabase-labs/neon_local) is a proxy service that creates a local interface to your Neon cloud database. By default, it automatically creates a new database branch when the container starts and deletes it when the container stops.
 
@@ -16,7 +14,7 @@ Your application connects to a local Postgres endpoint, while Neon Local handles
 
 You can add the Neon Local by adding the following to your `docker-compose.yml` file.
 
-### Neon serverless driver
+Tab: Neon serverless driver
 
 ```shell
   db:
@@ -29,7 +27,7 @@ You can add the Neon Local by adding the following to your `docker-compose.yml` 
       DRIVER: serverless
 ```
 
-### node-postgres
+Tab: node-postgres
 
 ```shell
   db:
@@ -46,25 +44,25 @@ You can add the Neon Local by adding the following to your `docker-compose.yml` 
 
 You can also run the Neon Local container with the following Docker run command.
 
-### Neon serverless driver
+Tab: Neon serverless driver
 
 ```shell
 docker run \
   --name db \
   -p 5432:5432 \
-  -e NEON_API_KEY=<neon_api_key> \
+  -e NEON_API_KEY= <neon_api_key> \
   -e NEON_PROJECT_ID=<neon_project_id> \
   -e DRIVER=serverless \
   neondatabase/neon_local:latest
 ```
 
-### node-postgres
+Tab: node-postgres
 
 ```shell
 docker run \
   --name db \
   -p 5432:5432 \
-  -e NEON_API_KEY=<neon_api_key> \
+  -e NEON_API_KEY= <neon_api_key> \
   -e NEON_PROJECT_ID=<neon_project_id> \
   -e DRIVER=postgres \
   neondatabase/neon_local:latest
@@ -74,7 +72,7 @@ docker run \
 
 Connect using either the Neon [serverless driver](https://neon.com/docs/serverless/serverless-driver) or any other Postgres client.
 
-### Neon serverless driver
+Tab: Neon serverless driver
 
 ```javascript
 import { neon, neonConfig } from '@neondatabase/serverless';
@@ -83,7 +81,7 @@ neonConfig.fetchEndpoint = 'http://db:5432/sql';
 const sql = neon('postgres://neon:npg@db:5432/neondb');
 ```
 
-### node-postgres
+Tab: node-postgres
 
 ```javascript
 import pg from 'pg';
@@ -95,13 +93,13 @@ const pool = new Pool({ connectionString });
 
 ## Configuration options
 
-| Key | Configuration | Required | Default |
+| Key                | Configuration                                                                                  | Required | Default               |
 | ------------------ | ---------------------------------------------------------------------------------------------- | -------- | --------------------- |
-| `NEON_API_KEY` | Generate a Neon API key by following instructions at: [Manage API Keys](https://neon.com/docs/manage/api-keys) | Yes | n/a |
-| `NEON_PROJECT_ID` | Your project ID, found in the Neon console under **Settings** > **General** | Yes | n/a |
-| `DRIVER` | The type of database driver. Options: `serverless` or `postgres` | No | `postgres` |
-| `PARENT_BRANCH_ID` | The parent branch to use when creating a local child branch. | No | `main` / `production` |
-| `DELETE_BRANCH` | Whether to delete the branch when the container stops. Options: `true` or `false` | No | `true` |
+| `NEON_API_KEY`     | Generate a Neon API key by following instructions at: [Manage API Keys](https://neon.com/docs/manage/api-keys) | Yes      | n/a                   |
+| `NEON_PROJECT_ID`  | Your project ID, found in the Neon console under **Settings** > **General**                    | Yes      | n/a                   |
+| `DRIVER`           | The type of database driver. Options: `serverless` or `postgres`                               | No       | `postgres`            |
+| `PARENT_BRANCH_ID` | The parent branch to use when creating a local child branch.                                   | No       | `main` / `production` |
+| `DELETE_BRANCH`    | Whether to delete the branch when the container stops. Options: `true` or `false`              | No       | `true`                |
 
 ## Persistent Neon Branch per Git Branch
 
@@ -110,7 +108,7 @@ If you want Neon Local to create a branch that matches your Git branch, provide 
 1. A mount that persists Neon branch metadata within your project
 2. A mount that exposes the current Git branch name
 
-This will automatically create a `.neon_local` folder in your project to store branch metadata. Be sure to add this folder to your `.gitignore` to avoid committing database connection information to version control.
+   **Note**: This will automatically create a `.neon_local` folder in your project to store branch metadata. Be sure to add this folder to your `.gitignore` to avoid committing database connection information to version control.
 
 ```yml
 db:

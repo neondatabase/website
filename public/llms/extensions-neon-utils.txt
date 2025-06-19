@@ -1,6 +1,6 @@
 # The neon_utils extension
 
-> This guide explains how to use the neon_utils extension to monitor Neon's Autoscaling feature, covering installation, usage of the num_cpus() function to track vCPU allocation, limitations, and a practical example using pgbench to observe autoscaling behavior.
+> The document details the neon_utils extension for Neon, which facilitates the management of PostgreSQL databases by offering functions for logging, monitoring, and debugging within the Neon environment.
 
 ## Source
 
@@ -8,7 +8,7 @@
 
 The `neon_utils` extension provides a `num_cpus()` function you can use to monitor how Neon's _Autoscaling_ feature allocates vCPU in response to workload. The function returns the current number of allocated vCPUs.
 
-For information about Neon's _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
+For information about Neon's _Autoscaling_ feature, see [Autoscaling](https://neon.com/docs/introduction/autoscaling).
 
 ## Install the `neon_utils` extension
 
@@ -18,7 +18,7 @@ Install the `neon_utils` extension by running the following `CREATE EXTENSION` s
 CREATE EXTENSION neon_utils;
 ```
 
-For information about using the Neon **SQL Editor**, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
+For information about using the Neon **SQL Editor**, see [Query with Neon's SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](https://neon.com/docs/connect/query-with-psql-editor).
 
 ## Use the `num_cpus()` function
 
@@ -26,7 +26,7 @@ In Neon, computing capacity is measured in _Compute Units (CU)_. One CU is 1 vCP
 
 Defining a minimum and maximum compute size for your compute, as shown below, enables autoscaling.
 
-![Edit compute dialog showing an autoscaling configuration](/docs/extensions/edit_compute_endpoint.png)
+
 
 As your workload changes, computing capacity scales dynamically between the minimum and maximum settings defined in your compute configuration. To retrieve the number of allocated vCPU at any point in time, you can run the following query:
 
@@ -34,7 +34,7 @@ As your workload changes, computing capacity scales dynamically between the mini
 SELECT num_cpus();
 ```
 
-For autoscaling configuration instructions, see [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration).
+For autoscaling configuration instructions, see [Compute size and autoscaling configuration](https://neon.com/docs/manage/computes#compute-size-and-autoscaling-configuration).
 
 ## Limitations
 
@@ -49,7 +49,7 @@ The following instructions demonstrate how you can use the `num_cpus()` function
 
 ### Prerequisites
 
-- Ensure that autoscaling is enabled for your compute. For instructions, see [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration). The following example uses a minimum setting of 0.25 Compute Units (CU) and a maximum of 4.
+- Ensure that autoscaling is enabled for your compute. For instructions, see [Compute size and autoscaling configuration](https://neon.com/docs/manage/computes#compute-size-and-autoscaling-configuration). The following example uses a minimum setting of 0.25 Compute Units (CU) and a maximum of 4.
 - The [pgbench](https://www.postgresql.org/docs/current/pgbench.html) utility.
 
 ### Run the test
@@ -69,13 +69,13 @@ The following instructions demonstrate how you can use the `num_cpus()` function
 
 3. To avoid errors when running `pgbench`, initialize your database with the tables used by `pgbench`. This can be done using the `pgbench -i` command, specifying the connection string for your Neon database. You can obtain a connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
 
-   ```bash shouldWrap
+   ```bash
    pgbench -i postgresql://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
 4. Run a `pgbench` test with your `test.sql` file, specifying your connection string:
 
-   ```bash shouldWrap
+   ```bash
    pgbench -f test.sql -c 15 -T 1000 -P 1 postgresql://[user]:[password]@[neon_hostname]/[dbname]
    ```
 

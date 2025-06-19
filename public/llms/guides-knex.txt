@@ -1,19 +1,23 @@
 # Connect from Knex to Neon
 
-Learn how to connect to Neon from Knex
+> The document "Connect from Knex to Neon" outlines the steps for establishing a connection between the Knex.js query builder and the Neon database, detailing configuration and connection string setup specific to Neon's environment.
+
+## Source
+
+- [Connect from Knex to Neon HTML](https://neon.com/docs/guides/knex): The original HTML version of this documentation
 
 Knex is an open-source SQL query builder for Postgres. This guide covers the following topics:
 
-- [Connect to Neon from Knex](#connect-to-neon-from-knex)
-- [Use connection pooling with Knex](#use-connection-pooling-with-knex)
-- [Performance tips](#performance-tips)
+- [Connect to Neon from Knex](https://neon.com/docs/guides/knex#connect-to-neon-from-knex)
+- [Use connection pooling with Knex](https://neon.com/docs/guides/knex#use-connection-pooling-with-knex)
+- [Performance tips](https://neon.com/docs/guides/knex#performance-tips)
 
 ## Connect to Neon from Knex
 
 To establish a basic connection from Knex to Neon, perform the following steps:
 
 1. Find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
-   ![Connection details modal](/docs/connect/connection_details.png)
+   
    The connection string includes the user name, password, hostname, and database name.
 
 2. Update the Knex's initialization in your application to the following:
@@ -27,11 +31,11 @@ To establish a basic connection from Knex to Neon, perform the following steps:
    });
    ```
 
-3. Add a `DATABASE_URL` variable to your `.env` file and set it to the Neon connection string that you copied in the previous step. We also recommend adding `?sslmode=require` to the end of the connection string to ensure a [secure connection](/docs/connect/connect-securely).
+3. Add a `DATABASE_URL` variable to your `.env` file and set it to the Neon connection string that you copied in the previous step. We also recommend adding `?sslmode=require` to the end of the connection string to ensure a [secure connection](https://neon.com/docs/connect/connect-securely).
 
    Your setting will appear similar to the following:
 
-   ```text shouldWrap
+   ```text
    DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
    ```
 
@@ -39,7 +43,7 @@ To establish a basic connection from Knex to Neon, perform the following steps:
 
 Serverless functions can require a large number of database connections as demand increases. If you use serverless functions in your application, we recommend that you use a pooled Neon connection string, as shown:
 
-```ini shouldWrap
+```ini
 # Pooled Neon connection string
 DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require"
 ```
@@ -79,10 +83,8 @@ await client.raw(text, values);
 await client.raw(replaceQueryParams(text, values));
 ```
 
-You can try this optimization yourself by downloading our [Get started with Knex example](#examples) and running `npm run test`.
+You can try this optimization yourself by downloading our [Get started with Knex example](https://neon.com/docs/guides/knex#examples) and running `npm run test`.
 
 ## Examples
 
-
-
-Get started with Knex and Neon
+- [Get started with Knex and Neon](https://github.com/neondatabase/examples/tree/main/with-knex)

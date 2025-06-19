@@ -1,18 +1,16 @@
 # Why Neon?
 
-> This guide explains why Neon is the ideal serverless Postgres solution, highlighting its architecture that separates compute from storage, enabling features like autoscaling and branching, while maintaining full Postgres compatibility, open-source development, and ease of use for developers.
+> The "Why Neon?" document outlines the key features and advantages of using the Neon database platform, emphasizing its scalability, performance, and cost-effectiveness for managing cloud-native PostgreSQL databases.
 
 ## Source
 
 - [Why Neon? HTML](https://neon.com/docs/get-started-with-neon/why-neon): The original HTML version of this documentation
 
-## Overview
-
 Looking back at Neon's debut blog post, [SELECT 'Hello, World'](https://neon.com/blog/hello-world), the fundamental reasons for **Why Neon** remain the same:
 
 - **To build the best Postgres experience in the cloud**
 
-  This is still our core mission today. It was clear to us then, as it is now, that database workloads are shifting to the cloud — and no one wants to manage a database themselves.
+  This is still our core mission today. It was clear to us then, as it is now, that database workloads are shifting to the cloud &#8212; and no one wants to manage a database themselves.
 
 - **In an ever-changing technology stack, we believe Postgres is here to stay**
 
@@ -48,7 +46,7 @@ Separation of compute and storage allows these resources to be scaled independen
 
 [Read more about the benefits of Neon's serverless architecture](https://neon.com/docs/introduction/serverless) and how it supports database-per-user architectures, variable workloads, database branching workflows, and [AI agents](https://neon.com/use-cases/ai-agents).
 
-Neon's autoscaling feature instantly scales your compute and memory resources. **No manual intervention or restarts are required.**
+   **Tip** Did you know?: Neon's autoscaling feature instantly scales your compute and memory resources. **No manual intervention or restarts are required.**
 
 ## Neon is fully managed
 
@@ -80,7 +78,7 @@ Neon is designed for a wide range of users, from individual developers to enterp
 
 - **Individual developers** looking for a fast and easy way to set up a Postgres database without the hassle of installation or configuration. Neon's Free Plan makes it easy to get started. [Free Plan](https://neon.com/docs/introduction/plans#free-plan) users get access to all regions and features like connection pooling, project collaboration, and branching. When you are ready to scale, you can easily upgrade your account to a paid plan for more computing power, storage, and advanced features.
 
-  Neon's Free Plan is a fundamental part of our commitment to users. Our architecture, which separates storage and compute, enables a sustainable Free Plan. You can build your personal project or PoC with confidence, knowing that our Free Plan is here to stay. [Learn more about our Free Plan from Neon's CEO](https://twitter.com/nikitabase/status/1758639571414446415).
+     **Tip** Neon's Free Plan is here to stay: Neon's Free Plan is a fundamental part of our commitment to users. Our architecture, which separates storage and compute, enables a sustainable Free Plan. You can build your personal project or PoC with confidence, knowing that our Free Plan is here to stay. [Learn more about our Free Plan from Neon's CEO](https://twitter.com/nikitabase/status/1758639571414446415).
 
 - **Teams and organizations** that aim to enhance their development workflows with the ability to create database branches for testing new features or updates, mirroring the branching process used in code version control.
 - **Enterprises** requiring scalable, high-performance database solutions with advanced features like autoscaling, scale to zero, instant restore, and logical replication. Enterprises can benefit from custom pricing, higher resource allowances, and enterprise-level support to meet their specific requirements.
@@ -103,6 +101,8 @@ postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbna
 ```
 
 Additionally, after signing up, we land you on your project dashboard, where you'll find connection snippets for various frameworks, languages, and platforms.
+
+
 
 If you are not quite ready to hook up an application, you can explore Neon from the console. Create the `playing_with_neon` table using the Neon [SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor), run some queries, or create a database branch.
 

@@ -2,6 +2,7 @@
 title: Account Recovery
 subtitle: How to recvoer a lost account
 enableTableOfContents: true
+updatedOn: '2025-06-05T19:57:28.187Z'
 ---
 
 If a former employee owned a Neon account and didn’t shut it down or transfer access before leaving, you can follow the steps outlined below to recover the account.
@@ -28,7 +29,7 @@ If you have access to the former employee's company email account:
 
 Once signed in, you can:
 
-- [Update the email address](/docs/manage/email-signup#changing-your-email)
+- [Update the email address](/docs/manage/accounts#update-personal-information)
 - [Transfer project ownership](/docs/manage/orgs-project-transfer)
 - [Add an admin](/docs/manage/orgs-manage#set-permissions) to your projects or organization
 - [Update billing details](/docs/introduction/manage-billing)

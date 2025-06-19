@@ -1,6 +1,10 @@
 # Replicate data with Inngest
 
-Learn how to replicate data from Neon with Inngest
+> The document "Replicate data with Inngest" guides Neon users on setting up logical replication using Inngest to synchronize data between a Neon database and other systems.
+
+## Source
+
+- [Replicate data with Inngest HTML](https://neon.com/docs/guides/logical-replication-inngest): The original HTML version of this documentation
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
 
@@ -12,15 +16,15 @@ In this guide, you will learn how to configure your Inngest account for ingestin
 
 - A [Inngest account](https://www.inngest.com?utm_source=neon&utm_medium=logical-replication-guide)
 - A [Neon account](https://console.neon.tech/)
-- Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin
+- Read the [important notices about logical replication in Neon](https://neon.com/docs/guides/logical-replication-neon#important-notices) before you begin
 
 ## Enabling Logical Replication on your database
 
-The Inngest Integration relies on Neon’s Logical Replication feature to get notified upon database changes.
+The Inngest Integration relies on Neon's Logical Replication feature to get notified upon database changes.
 
 Navigate to your Neon Project using the Neon Console and open the **Settings** > **Logical Replication** page. From here, follow the instructions to enable Logical Replication:
 
-![Neon dashboard settings with option to enable logical replication](/docs/guides/neon-console-settings-logical-replication.png)
+
 
 ## Configuring the Inngest integration
 
@@ -28,13 +32,13 @@ Your Neon database is now ready to work with Inngest.
 
 To configure the Inngest Neon Integration, navigate to the Inngest Platform, open the [Integrations page](https://app.inngest.com/settings/integrations?utm_source=neon&utm_medium=trigger-serverless-functions-guide), and follow the instructions of the [Neon Integration installation wizard](https://app.inngest.com/settings/integrations/neon/connect?utm_source=neon&utm_medium=trigger-serverless-functions-guide):
 
-![Neon integration card inside the Inngest integrations page](/docs/guides/inngest-integrations-page.png)
+
 
 The Inngest Integration requires Postgres admin credentials to complete its setup. _These credentials are not stored and are only used during the installation process_.
 
-![Neon authorization step inside the Inngest integrations page](/docs/guides/inngest-integration-neon-authorize-step.png)
 
-You can find your admin Neon database connection credentials by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For details, see [Connect from any application](/docs/connect/connect-from-any-app).
+
+You can find your admin Neon database connection credentials by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For details, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).
 
 ## Example: Replicating data to Amplitude
 
