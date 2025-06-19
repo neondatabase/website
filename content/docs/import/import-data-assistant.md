@@ -43,6 +43,7 @@ You'll need:
   ```
 - **Admin privileges** on your source database. We recommend using a superuser or a user with the necessary `CREATE`, `SELECT`, `INSERT`, and `REPLICATION` privileges.
 - A database **smaller than 10 GB** in size for automated import
+- When migrating from another Postgres provider, we recommend migrating to a Neon project created in the same region as your current database. This helps ensure a faster import. Please note that there is a 1-hour time limit on import operations. Import operations that exceed this limit will fail. 
 
 <Admonition type="important">
 If your database is larger than 10 GB and you need help, [contact us](/migration-assistance).
@@ -73,10 +74,11 @@ During import, your source database remains untouched — we only read from it t
 
 ### Known Limitations
 
-- Currently limited to databases **smaller than 10GB**. We are actively working on supporting bigger workloads. In the meantime, conctact support if you are looking to migrate bigger databases.
+- Currently limited to databases **smaller than 10GB**. We are actively working on supporting bigger workloads. In the meantime, contact support if you are looking to migrate bigger databases.
+- There is a 1-hour limit on import operations. For faster imports, we recommend importing to a Neon project created in the same region as your source database.
 - The feature is supported in **AWS regions** only.
 - Databases that use **event triggers are not supported**.
-- Supabase and Heroku databases are not supported, as both use proprietary event triggers.
+- Supabase and Heroku databases are not supported, as both use event triggers or unsupported Postgres extensions.
 - Databases running on **IPv6 are not supported yet**.
 - AWS RDS is generally supported, though some incompatibilities may exist. Support for other providers may vary.
 
