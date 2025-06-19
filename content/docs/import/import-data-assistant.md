@@ -43,7 +43,7 @@ You'll need:
   ```
 - **Admin privileges** on your source database. We recommend using a superuser or a user with the necessary `CREATE`, `SELECT`, `INSERT`, and `REPLICATION` privileges.
 - A database **smaller than 10 GB** in size for automated import
-- When migrating from another Postgres provider, we recommend migrating to a Neon project created in the same region as your current database. This helps ensure a faster import. Please note that there is a 1-hour time limit on import operations. Import operations that exceed this limit will fail. 
+- When migrating from another Postgres provider, we recommend migrating to a Neon project created in the same region as your current database. This helps ensure a faster import. Please note that there is a 1-hour time limit on import operations. Import operations that exceed this limit will fail.
 
 <Admonition type="important">
 If your database is larger than 10 GB and you need help, [contact us](/migration-assistance).
