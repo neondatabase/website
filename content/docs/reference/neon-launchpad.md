@@ -132,3 +132,7 @@ Note that provisioned databases expire after 72 hours unless claimed as describe
 ## Technical implementation
 
 The Neon Launchpad service is built on Neon's [claimable database integration](/docs/workflows/claimable-database-integration), which provides APIs for creating projects and generating transfer requests. This allows the service to provision databases immediately while deferring account creation until users choose to claim their database. You can build similar experiences to Neon Launchpad in your own application using the APIs documented in the integration guide.
+
+## Resources
+
+- Blog post: [Neon Launchpad: A Tool For Instant Postgres, No Login Needed](https://neon.com/blog/neon-launchpad)
