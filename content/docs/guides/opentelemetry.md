@@ -1,15 +1,16 @@
 ---
-title: Export logs and metrics to OpenTelemetry-compatible destinations
+title: OpenTelemetry integration
 subtitle: Send Neon metrics and Postgres logs to any OTEL-compatible observability platform
 enableTableOfContents: true
 updatedOn: '2025-01-16T10:00:00.000Z'
 ---
 
+<FeatureBetaProps feature_name="OpenTelemetry integration" />
+
 <InfoBlock>
 <DocsList title="What you will learn:">
 <p>How to configure OpenTelemetry exports from Neon</p>
-<p>How to set up authentication for your OTEL endpoint</p>
-<p>How to export both metrics and Postgres logs</p>
+<p>Example config using New Relic</p>
 </DocsList>
 
 <DocsList title="External docs" theme="docs">
@@ -20,7 +21,7 @@ updatedOn: '2025-01-16T10:00:00.000Z'
 
 Available for Scale and Business Plan users, the Neon OpenTelemetry integration lets you export metrics and Postgres logs to any OpenTelemetry Protocol (OTLP) compatible observability platform. This gives you the flexibility to send your Neon data to your preferred monitoring solution, whether that's New Relic, Grafana Cloud, Honeycomb, or any other OTEL-compatible service.
 
-If you don't already have an OTEL-compatible platform set up, we'll walk you through the basic setup in New Relic so you can try out how Neon's metrics export works. The same configuration principles apply to any OTEL-compatible platform.
+If you don't already have an OTEL-compatible platform set up, we'll walk you through the basic setup in New Relic so you can try out how Neon's data export works. The same configuration principles apply to any OTEL-compatible platform.
 
 ## How it works
 
@@ -50,10 +51,7 @@ The Neon OpenTelemetry integration can forward Postgres logs to your destination
 Before getting started, ensure the following:
 
 - You have a Neon account and project. If not, see [Sign up for a Neon account](/docs/get-started-with-neon/signing-up).
-- You have an OpenTelemetry-compatible observability platform account and know your OTLP endpoint URL.
-- You have the necessary authentication credentials (API key, bearer token, or basic auth credentials) for your platform.
-
-## Configure OpenTelemetry export
+- You have an OpenTelemetry-compatible observability platform account and know your OTLP endpoint URL and authentication credentials (API key, bearer token, or basic auth).
 
 <Steps>
 
@@ -62,7 +60,15 @@ Before getting started, ensure the following:
 If you don't already have an OpenTelemetry-compatible observability platform, you'll need to sign up for one. For this example, we'll use New Relic:
 
 1. Sign up for a free account at [newrelic.com](https://newrelic.com) if you haven't already.
-2. Once signed in, you'll need your New Relic license key for authentication. If you're onboarding for the first time, copy the license key when it's offered to you (this is your **Original account** key). Otherwise, create a new **Ingest - License** key.
+2. Once signed in, you'll need your New Relic license key for authentication. 
+
+   If you're onboarding for the first time, copy the license key when it's offered to you (this is your **Original account** key).
+
+   <Admonition type="tip">
+   If you get stuck in New Relic's onboarding screens and don't see a way to proceed, try opening the Logs or Data Explorer pages in a new browser tab. This can sometimes let you access the main New Relic UI and continue with your setup.
+   </Admonition>
+
+   If you missed copying your license key during onboarding, you can create a new one: choose **Ingest - License** as the type.
 
    <details>
    <summary>Create New Relic license key</summary>
@@ -85,11 +91,26 @@ If you don't already have an OpenTelemetry-compatible observability platform, yo
 1. In the Neon Console, navigate to the **Integrations** page in your Neon project.
 2. Locate the **OpenTelemetry** card and click **Add**.
 
+   ![open telemetry integration card](/docs/guides/open_telemetry_card.png)
+
+   The sidebar form opens for you to enter your platform's details.
+
+   ![OpenTelemetry integration configuration form](/docs/guides/opentelemetry_config_form.png)
+
+## Select data to export
+
+Choose what data you want to export (at the top of the form):
+
+- **Metrics**: System metrics and database statistics (CPU, memory, connections, etc.)
+- **Postgres logs**: Error messages, warnings, connection events, and system notifications
+
+You can enable either or both options based on your monitoring needs.
+
 ## Configure the connection
 
 1. Select your connection protocol. For most platforms including New Relic, choose **HTTP** (recommended), which uses HTTP/2 for efficient data transmission. Some environments may require **gRPC** instead.
 
-2. Enter your **Endpoint** URL. This is the OTLP endpoint provided by your observability platform. 
+2. Enter your **Endpoint** URL. 
 
    For New Relic, enter: 
     - US: `https://otlp.nr-data.net`
@@ -97,7 +118,7 @@ If you don't already have an OpenTelemetry-compatible observability platform, yo
     
    See [this table](https://docs.newrelic.com/docs/opentelemetry/best-practices/opentelemetry-otlp/#configure-endpoint-port-protocol) for other options.
 
-3. Configure authentication by selecting one of the following methods:
+3. Configure authentication:
    - **Bearer**: Enter your bearer token or API key
    - **Basic**: Provide your username and password credentials  
    - **API Key**: Enter your API key
@@ -106,20 +127,11 @@ If you don't already have an OpenTelemetry-compatible observability platform, yo
 
 ## Configure resource attributes
 
-Neon automatically organizes your data into separate service entities for better organization: your configured service name will receive PostgreSQL logs, while metrics are split into `compute-host-metrics` (infrastructure metrics) and `sql-metrics` (database metrics).
+Neon automatically organizes your data into separate service entities: your configured service name will receive PostgreSQL logs, while metrics are split into `compute-host-metrics` (infrastructure metrics) and `sql-metrics` (database metrics).
 
-1. In the **Resource** section, configure the `service.name` attribute to identify your Neon project in your observability platform. For example, you might use "my-neon-project" or your actual project name.
+1. In the **Resource** section, configure the `service.name` attribute to identify your Neon project in your observability platform. For example, you might use "neon-postgres-test" or your actual project name.
 
 2. Optionally, you can add additional resource attributes by providing a value in the second field to further categorize or filter your data in your observability platform.
-
-## Select data to export
-
-Choose what data you want to export:
-
-- **Metrics**: System metrics and database statistics (CPU, memory, connections, etc.)
-- **Postgres logs**: Error messages, warnings, connection events, and system notifications
-
-You can enable either or both options based on your monitoring needs.
 
 ## Complete the setup
 
@@ -127,54 +139,28 @@ Click **Add** to save your configuration and start the data export.
 
 ## Verify your integration is working
 
-Your Neon data should start appearing in your observability platform within a few minutes. Here's how to verify that everything is working correctly.
+Your Neon data should start appearing in your observability platform within a few minutes.
 
-**For New Relic users**, you can use these simple NRQL queries to check if your Neon data is flowing:
+**For New Relic users**, use these queries to check if data is flowing:
 
-**Check for metrics:**
 ```sql
 FROM Metric SELECT * SINCE 1 hour ago
-```
-
-**Check for logs:** 
-```sql
 FROM Log SELECT * SINCE 1 hour ago
 ```
 
-When your integration is working, you should see data similar to these examples:
+**Success looks like this:**
 
-**Metrics in New Relic:**
+Metrics flowing into New Relic
 ![Neon metrics appearing in New Relic](/docs/guides/new_relic_metrics_success.png)
 
-**Logs in New Relic:**
+PostgreSQL logs
 ![Neon PostgreSQL logs appearing in New Relic](/docs/guides/new_relic_logs_success.png)
 
-**Finding Your Neon Data:**
+**Find your data under APM & Services**
+![Multiple Neon services in New Relic APM & Services](/docs/guides/new_relic_services.png)
 
-**Logs:**
-- Your PostgreSQL logs will appear under your configured service name (e.g., `neon-postgres-test`) in New Relic's APM & Services section
-- PostgreSQL log entries will show database activity and connections
-- Look for entries with process names like `postgres`
-- Logs include timestamps, connection details, and query information
-
-**Metrics:**
-- Your single Neon integration will automatically create multiple service entities in New Relic for better organization:
-  - **`compute-host-metrics`**: Infrastructure metrics (CPU, memory, disk)
-  - **`sql-metrics`**: Database-specific metrics (connections, query performance)
-- Use the Metrics Explorer or these NRQL queries to access different metric types:
-  ```sql
-  FROM Metric SELECT * WHERE service.name = 'compute-host-metrics' SINCE 1 hour ago
-  FROM Metric SELECT * WHERE service.name = 'sql-metrics' SINCE 1 hour ago
-  ```
-- Common Neon metric names include:
-  - `memory_available_bytes`, `memory_used_bytes`, `memory_total_bytes`
-  - `load1`, `load5`, `load15` (system load)
-  - `neon_connection_counts` (database connections)
-  - `neon_db_total_size` (database size)
-
-**Filtering by Endpoint:**
-- Use the `Endpoint Id` field (e.g., `ep-rapid-wind-a5lv4ajb`) to filter data for specific computes
-- This is especially useful if you have multiple branches/computes in your project
+- **Logs**: Check your configured service name in APM & Services (e.g., `neon-postgres-test`)
+- **Metrics**: Look for the auto-created `compute-host-metrics` and `sql-metrics` services 
 
 </Steps>
 
