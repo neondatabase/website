@@ -129,7 +129,7 @@ You can enable either or both options based on your monitoring needs.
 
 ## Configure resource attributes
 
-Neon automatically organizes your data into separate service entities: your configured service name will receive PostgreSQL logs, while metrics are split into `compute-host-metrics` (infrastructure metrics) and `sql-metrics` (database metrics).
+Neon automatically organizes your data into separate service entities: your configured service name will receive Postgres logs, while metrics are split into `compute-host-metrics` (infrastructure metrics) and `sql-metrics` (database metrics).
 
 1. In the **Resource** section, configure the `service.name` attribute to identify your Neon project in your observability platform. For example, you might use "neon-postgres-test" or your actual project name.
 
