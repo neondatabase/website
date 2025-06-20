@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
-import { clsx } from 'clsx';
+import clsx from 'clsx';
 import { notFound } from 'next/navigation';
 
 import PreviewWarning from 'components/pages/blog-post/preview-warning';
@@ -13,8 +13,6 @@ import SharedCTA from 'components/shared/cta';
 import CTAGasStation from 'components/shared/cta-gas-station';
 import Layout from 'components/shared/layout';
 import SplitViewGrid from 'components/shared/split-view-grid';
-import LINKS from 'constants/links';
-import SEO_DATA from 'constants/seo-data';
 import benefitsCommunityIcon from 'icons/landing/benefits/community.svg';
 import benefitsGrowthIcon from 'icons/landing/benefits/growth.svg';
 import benefitsPerksIcon from 'icons/landing/benefits/perks.svg';
@@ -163,16 +161,52 @@ const WpPageDraft = async ({ searchParams }) => {
   );
 };
 
-export async function generateMetadata() {
-  const { title, description, imagePath } = SEO_DATA.blog;
+export async function generateViewport({ searchParams }) {
+  if (!searchParams?.id || !searchParams?.status) {
+    return undefined;
+  }
+
+  const page = await getWpPreviewPageData(searchParams?.id, searchParams?.status);
+
+  if (!page) return undefined;
+
+  const {
+    template: { templateName },
+  } = page;
+
+  return {
+    themeColor: templateName === 'Landing' ? '#000000' : '#ffffff',
+  };
+}
+
+export async function generateMetadata({ searchParams }) {
+  if (!searchParams?.id || !searchParams?.status) {
+    return null;
+  }
+
+  const page = await getWpPreviewPageData(searchParams?.id, searchParams?.status);
+
+  if (!page) return null;
+
+  const {
+    seo: {
+      title,
+      metaDesc,
+      metaKeywords,
+      metaRobotsNoindex,
+      opengraphTitle,
+      opengraphDescription,
+      twitterImage,
+    },
+  } = page;
 
   return getMetadata({
-    title,
-    description,
-    keywords: '',
-    robotsNoindex: 'noindex',
-    pathname: `${LINKS.blog}/wp-draft-post-preview-page`,
-    imagePath,
+    title: opengraphTitle || title,
+    description: opengraphDescription || metaDesc,
+    keywords: metaKeywords,
+    robotsNoindex: metaRobotsNoindex || 'noindex',
+    pathname: `/${searchParams.slug || 'wp-draft-post-preview-page'}`,
+    imagePath: twitterImage?.mediaItemUrl,
   });
 }
 
