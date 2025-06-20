@@ -51,16 +51,31 @@ const icons = {
   You can't have a page in Wordpress with the "wp-draft-post-preview-page" slug. Please be careful.
 */
 const WpPageDraft = async ({ searchParams }) => {
+  console.log('=== WpPageDraft DEBUG ===');
+  console.log('searchParams:', searchParams);
+
   // TODO: this is a temporary fix for a known problem with accessing serachParams on the Vercel side - https://github.com/vercel/next.js/issues/54507
   await Promise.resolve(JSON.stringify(searchParams));
 
   if (!searchParams?.id || !searchParams?.status) {
+    console.log('Missing id or status, returning notFound');
     return notFound();
   }
 
+  console.log('Calling getWpPreviewPageData...');
   const page = await getWpPreviewPageData(searchParams?.id, searchParams?.status);
+  console.log('getWpPreviewPageData result:', { hasPage: !!page });
 
-  if (!page) return notFound();
+  if (!page) {
+    console.log('No page found, returning notFound');
+    return notFound();
+  }
+
+  console.log('Page data:', {
+    title: page.title,
+    hasContent: !!page.content,
+    templateName: page.template?.templateName,
+  });
 
   const isAzurePage = searchParams.slug === 'neon-on-azure';
 

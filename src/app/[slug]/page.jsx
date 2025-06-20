@@ -6,36 +6,59 @@ import { getPostBySlug, getPostSlugs } from 'utils/api-docs';
 import { getWpPageBySlug } from 'utils/api-pages';
 
 const getPageType = async (slug) => {
-  if (slug === 'wp-draft-post-preview-page') return 'wp-draft';
+  console.log('=== getPageType DEBUG ===');
+  console.log('slug:', slug);
+
+  if (slug === 'wp-draft-post-preview-page') {
+    console.log('Detected wp-draft type');
+    return 'wp-draft';
+  }
 
   const templatePage = getPostBySlug(slug, TEMPLATE_PAGES_DIR_PATH);
-  if (templatePage) return 'template';
+  if (templatePage) {
+    console.log('Detected template type');
+    return 'template';
+  }
 
   const wpPage = await getWpPageBySlug(slug);
-  if (wpPage) return 'wp';
+  if (wpPage) {
+    console.log('Detected wp type');
+    return 'wp';
+  }
 
+  console.log('No page type detected, returning null');
   return null;
 };
 
 const SinglePage = async ({ params, searchParams }) => {
+  console.log('=== SinglePage DEBUG ===');
+  console.log('params:', params);
+  console.log('searchParams:', searchParams);
+
   const { slug } = params;
   const pageType = await getPageType(slug);
 
+  console.log('pageType:', pageType);
+
   if (pageType === 'template') {
+    console.log('Loading template page...');
     const { default: TemplatePage } = await import('./pages/template-page');
     return <TemplatePage params={params} />;
   }
 
   if (pageType === 'wp') {
+    console.log('Loading wp page...');
     const { default: WpPage } = await import('./pages/wp-page');
     return <WpPage params={params} />;
   }
 
   if (pageType === 'wp-draft') {
+    console.log('Loading wp-draft page...');
     const { default: WpDraftPage } = await import('./pages/wp-draft-page');
     return <WpDraftPage searchParams={searchParams} />;
   }
 
+  console.log('No page type matched, returning notFound');
   return notFound();
 };
 
