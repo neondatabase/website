@@ -400,6 +400,9 @@
               slug: introduction/monitor-query-history
             - title: Datadog integration
               slug: guides/datadog
+            - title: OpenTelemetry integration
+              slug: guides/opentelemetry
+              tag: new
             - title: Datbase monitoring tools
               slug: introduction/monitor-external-tools
         - section: Team Tools
