@@ -52,6 +52,7 @@ const Hero = () => (
           className="text-green-45 underline decoration-primary-1 decoration-1 underline-offset-[8px] transition-colors duration-200 hover:text-white hover:decoration-gray-new-60"
           to="https://www.atlassian.com/incident-management/kpis/cost-of-downtime#:~:text=In%20March%202015%2C%20a%2012,also%20the%20financial%20grim%20reaper"
           target="_blank"
+          rel="noopener noreferrer"
         >
           from $427 to $9,000
         </Link>

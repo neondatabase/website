@@ -16,7 +16,6 @@ const Hero = () => (
         className="mt-8 h-12 px-[40px] font-semibold tracking-tighter lg:mt-7 lg:h-11 lg:px-11 lg:text-sm md:mt-6"
         theme="primary"
         to={LINKS.docsMigration}
-        target="_blank"
         tagName="Multi-TB Page Hero"
       >
         Get started
