@@ -47,6 +47,7 @@ You can connect to Neon MCP Server in two ways:
 1. Open Claude desktop and navigate to **Settings**.
 2. Under the **Developer** tab, click **Edit Config** (On Windows, it's under File -> Settings -> Developer -> Edit Config) to open the configuration file (`claude_desktop_config.json`).
 3. Add the "Neon" server entry within the `mcpServers` object:
+
    ```json
    {
      "mcpServers": {
@@ -91,6 +92,7 @@ For more, see [Get started with Neon MCP server with Claude Desktop](/guides/neo
 1.  Open Cursor. Create a `.cursor` directory in your project root if needed.
 2.  Create or open the `mcp.json` file in the `.cursor` directory.
 3.  Add the "Neon" server entry within the `mcpServers` object:
+
     ```json
     {
       "mcpServers": {
@@ -101,6 +103,7 @@ For more, see [Get started with Neon MCP server with Claude Desktop](/guides/neo
       }
     }
     ```
+
     > For streamable HTTP responses instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
 
 4.  Save the configuration file. Cursor may detect the change or require a restart.
@@ -139,6 +142,7 @@ For more, see [Get started with Cursor and Neon Postgres MCP Server](/guides/cur
 1.  Open Windsurf and navigate to the Cascade assistant sidebar.
 2.  Click the hammer (MCP) icon, then **Configure** to open the configuration file (`~/.codeium/windsurf/mcp_config.json`).
 3.  Add the "Neon" server entry within the `mcpServers` object:
+
     ```json
     {
       "mcpServers": {
@@ -194,7 +198,7 @@ For more, see [Get started with Windsurf and Neon Postgres MCP Server](/guides/w
    }
    ```
 
-  > For streamable HTTP responses instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
+> For streamable HTTP responses instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
 
 4. Save the file. Cline should reload the configuration automatically.
 5. An OAuth window will open in your browser. Follow the prompts to authorize Cline to access your Neon account.
@@ -230,6 +234,7 @@ MCP support in Zed is currently in **preview**. Ensure you're using the Preview 
 3. Click **Settings** in the top right panel of the Assistant.
 4. In the **Context Servers** section, click **+ Add Context Server**.
 5. Configure the Neon Server:
+
    - Enter **Neon** in the **Name** field.
    - In the **Command** field, enter:
      ```bash
@@ -237,7 +242,7 @@ MCP support in Zed is currently in **preview**. Ensure you're using the Preview 
      ```
    - Click **Add Server**.
 
-    > For streamable HTTP responses instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
+   > For streamable HTTP responses instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
 
 6. An OAuth window will open in your browser. Follow the prompts to authorize Zed to access your Neon account.
 7. Check the Context Servers section in Zed settings to ensure the connection is successful. "Neon" should be listed.
