@@ -35,12 +35,8 @@ Ensure you are using the latest version of your chosen MCP client as MCP integra
 
 You can connect to Neon MCP Server in two ways:
 
-1.  **Remote MCP Server (Preview):** Connect to Neon's managed remote MCP server using OAuth.
+1.  **Remote MCP Server (Preview):** Connect to Neon's managed remote MCP server using OAuth or a Neon API key.
 2.  **Local MCP Server:** Install and run the Neon MCP server locally, using a Neon API key.
-
-<Admonition type="note">
-The remote hosted MCP server is in preview due to the [new OAuth MCP specification](https://spec.modelcontextprotocol.io/specification/2025-03-26/basic/authorization/), expect potential changes as we continue to refine the OAuth integration.
-</Admonition>
 
 ## Claude Desktop
 
@@ -51,18 +47,24 @@ The remote hosted MCP server is in preview due to the [new OAuth MCP specificati
 1. Open Claude desktop and navigate to **Settings**.
 2. Under the **Developer** tab, click **Edit Config** (On Windows, it's under File -> Settings -> Developer -> Edit Config) to open the configuration file (`claude_desktop_config.json`).
 3. Add the "Neon" server entry within the `mcpServers` object:
+
    ```json
    {
      "mcpServers": {
        "Neon": {
          "command": "npx",
-         "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
+         "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/sse"]
        }
      }
    }
    ```
+
+   > For [streamable HTTP responses](#streamable-http-support) instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
+
 4. Save the configuration file and **restart** Claude Desktop.
 5. An OAuth window will open in your browser. Follow the prompts to authorize Claude Desktop to access your Neon account.
+
+> If you prefer to authenticate using a Neon API key, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
 
 </TabItem>
 
@@ -90,18 +92,24 @@ For more, see [Get started with Neon MCP server with Claude Desktop](/guides/neo
 1.  Open Cursor. Create a `.cursor` directory in your project root if needed.
 2.  Create or open the `mcp.json` file in the `.cursor` directory.
 3.  Add the "Neon" server entry within the `mcpServers` object:
+
     ```json
     {
       "mcpServers": {
         "Neon": {
           "command": "npx",
-          "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
+          "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/sse"]
         }
       }
     }
     ```
+
+    > For [streamable HTTP responses](#streamable-http-support) instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
+
 4.  Save the configuration file. Cursor may detect the change or require a restart.
 5.  An OAuth window will open in your browser. Follow the prompts to authorize Cursor to access your Neon account.
+
+> If you prefer to authenticate using a Neon API key, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
 
 </TabItem>
 <TabItem>
@@ -134,19 +142,25 @@ For more, see [Get started with Cursor and Neon Postgres MCP Server](/guides/cur
 1.  Open Windsurf and navigate to the Cascade assistant sidebar.
 2.  Click the hammer (MCP) icon, then **Configure** to open the configuration file (`~/.codeium/windsurf/mcp_config.json`).
 3.  Add the "Neon" server entry within the `mcpServers` object:
+
     ```json
     {
       "mcpServers": {
         "Neon": {
           "command": "npx",
-          "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
+          "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/sse"]
         }
       }
     }
     ```
+
+    > For [streamable HTTP responses](#streamable-http-support) instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
+
 4.  Save the file.
 5.  Click the **Refresh** button in the Cascade sidebar next to "available MCP servers".
 6.  An OAuth window will open in your browser. Follow the prompts to authorize Windsurf to access your Neon account.
+
+> If you prefer to authenticate using a Neon API key, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
 
 </TabItem>
 <TabItem>
@@ -178,13 +192,18 @@ For more, see [Get started with Windsurf and Neon Postgres MCP Server](/guides/w
      "mcpServers": {
        "Neon": {
          "command": "npx",
-         "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
+         "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/sse"]
        }
      }
    }
    ```
+
+> For [streamable HTTP responses](#streamable-http-support) instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
+
 4. Save the file. Cline should reload the configuration automatically.
 5. An OAuth window will open in your browser. Follow the prompts to authorize Cline to access your Neon account.
+
+> If you prefer to authenticate using a Neon API key, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
 
 </TabItem>
 <TabItem>
@@ -215,14 +234,20 @@ MCP support in Zed is currently in **preview**. Ensure you're using the Preview 
 3. Click **Settings** in the top right panel of the Assistant.
 4. In the **Context Servers** section, click **+ Add Context Server**.
 5. Configure the Neon Server:
+
    - Enter **Neon** in the **Name** field.
    - In the **Command** field, enter:
      ```bash
      npx -y mcp-remote https://mcp.neon.tech/sse
      ```
    - Click **Add Server**.
+
+   > For [streamable HTTP responses](#streamable-http-support) instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
+
 6. An OAuth window will open in your browser. Follow the prompts to authorize Zed to access your Neon account.
 7. Check the Context Servers section in Zed settings to ensure the connection is successful. "Neon" should be listed.
+
+> If you prefer to authenticate using a Neon API key, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
 
 </TabItem>
 
@@ -266,7 +291,7 @@ To use MCP servers with VS Code, you need [GitHub Copilot](https://marketplace.v
         "servers": {
           "Neon": {
             "command": "npx",
-            "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
+            "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/sse"]
           }
         }
       }
@@ -274,10 +299,14 @@ To use MCP servers with VS Code, you need [GitHub Copilot](https://marketplace.v
     }
     ```
 
+    > For [streamable HTTP responses](#streamable-http-support) instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
+
 4.  Save the `settings.json` file.
 5.  Click on Start on the MCP server.
 6.  An OAuth window will open in your browser. Follow the prompts to authorize VS Code (GitHub Copilot) to access your Neon account.
 7.  Once authorized, you can now open GitHub Copilot Chat in VS Code and [switch to Agent mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). You will see the Neon MCP Server listed among the available tools.
+
+> If you prefer to authenticate using a Neon API key, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
 
 </TabItem>
 
@@ -322,11 +351,15 @@ Adapt the instructions above for other clients:
   ```json
   "neon": {
     "command": "npx",
-    "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
+    "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/sse"]
   }
   ```
 
+  > For [streamable HTTP responses](#streamable-http-support) instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
+
   Then follow the OAuth flow on first connection.
+
+  > If you prefer to authenticate using a Neon API key, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
 
 - **Local MCP server:** Use the Smithery command:
 

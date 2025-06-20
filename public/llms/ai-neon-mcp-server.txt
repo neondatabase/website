@@ -63,7 +63,7 @@ You can use Neon's managed MCP server, available at `https://mcp.neon.tech`. Thi
       "mcpServers": {
         "Neon": {
           "command": "npx",
-          "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
+          "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/sse"]
         }
       }
     }
