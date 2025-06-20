@@ -59,7 +59,7 @@ You can connect to Neon MCP Server in two ways:
    }
    ```
 
-   > For streamable HTTP responses instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
+   > For [streamable HTTP responses](#streamable-http-support) instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
 
 4. Save the configuration file and **restart** Claude Desktop.
 5. An OAuth window will open in your browser. Follow the prompts to authorize Claude Desktop to access your Neon account.
@@ -104,7 +104,7 @@ For more, see [Get started with Neon MCP server with Claude Desktop](/guides/neo
     }
     ```
 
-    > For streamable HTTP responses instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
+    > For [streamable HTTP responses](#streamable-http-support) instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
 
 4.  Save the configuration file. Cursor may detect the change or require a restart.
 5.  An OAuth window will open in your browser. Follow the prompts to authorize Cursor to access your Neon account.
@@ -154,7 +154,7 @@ For more, see [Get started with Cursor and Neon Postgres MCP Server](/guides/cur
     }
     ```
 
-    > For streamable HTTP responses instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
+    > For [streamable HTTP responses](#streamable-http-support) instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
 
 4.  Save the file.
 5.  Click the **Refresh** button in the Cascade sidebar next to "available MCP servers".
@@ -198,7 +198,7 @@ For more, see [Get started with Windsurf and Neon Postgres MCP Server](/guides/w
    }
    ```
 
-> For streamable HTTP responses instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
+> For [streamable HTTP responses](#streamable-http-support) instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
 
 4. Save the file. Cline should reload the configuration automatically.
 5. An OAuth window will open in your browser. Follow the prompts to authorize Cline to access your Neon account.
@@ -242,7 +242,7 @@ MCP support in Zed is currently in **preview**. Ensure you're using the Preview 
      ```
    - Click **Add Server**.
 
-   > For streamable HTTP responses instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
+   > For [streamable HTTP responses](#streamable-http-support) instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
 
 6. An OAuth window will open in your browser. Follow the prompts to authorize Zed to access your Neon account.
 7. Check the Context Servers section in Zed settings to ensure the connection is successful. "Neon" should be listed.
@@ -299,7 +299,7 @@ To use MCP servers with VS Code, you need [GitHub Copilot](https://marketplace.v
     }
     ```
 
-    > For streamable HTTP responses instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
+    > For [streamable HTTP responses](#streamable-http-support) instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
 
 4.  Save the `settings.json` file.
 5.  Click on Start on the MCP server.
@@ -355,7 +355,7 @@ Adapt the instructions above for other clients:
   }
   ```
 
-  > For streamable HTTP responses instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
+  > For [streamable HTTP responses](#streamable-http-support) instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
 
   Then follow the OAuth flow on first connection.
 

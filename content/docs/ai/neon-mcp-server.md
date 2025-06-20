@@ -73,7 +73,9 @@ The remote hosted MCP server is currently in its preview phase. As the [OAuth sp
     }
     ```
 
-    This command uses `npx` to run a [small helper (`mcp-remote`)](https://github.com/geelen/mcp-remote) that connects to Neon's hosted server endpoint (`https://mcp.neon.tech/sse`). For streamable HTTP responses instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
+    This command uses `npx` to run a [small helper (`mcp-remote`)](https://github.com/geelen/mcp-remote) that connects to Neon's hosted server endpoint (`https://mcp.neon.tech/sse`). 
+    
+    For [streamable HTTP responses](#streamable-http-support) instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
 
 3.  Save the configuration and **restart or refresh** your MCP client application.
 4.  The first time the client initializes Neon's MCP server, it should trigger an **OAuth flow**:
@@ -220,9 +222,9 @@ You can also refer to our individual guides for detailed examples on using the N
 
 ## API key-based authentication
 
-The Neon MCP Server supports API key-based authentication for remote access, in addition to OAuth. This allows for simpler authentication using your [Neon API key (personal or organization)](/docs/manage/api-keys) for programmatic access. API key configuration is show below:
+The Neon MCP Server supports API key-based authentication for remote access, in addition to OAuth. This allows for simpler authentication using your [Neon API key (personal or organization)](/docs/manage/api-keys) for programmatic access. API key configuration is shown below:
 
-```bash
+```json
 {
   "mcpServers": {
     "Neon": {
@@ -241,7 +243,7 @@ The Neon MCP Server supports API key-based authentication for remote access, in 
 
 The Neon MCP Server supports streamable HTTP as an alternative to Server-Sent Events (SSE) for streaming responses. This makes it easier to consume streamed data in environments where SSE is not ideal — such as CLI tools, backend services, or AI agents. To use streamable HTTP, make sure to use the latest remote MCP server, and specify the `https://mcp.neon.tech/mcp` endpoint, as shown in the following configuration example:
 
-```bash
+```json
 {
   "mcpServers": {
     "sentry": {
