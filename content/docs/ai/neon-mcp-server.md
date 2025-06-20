@@ -73,8 +73,8 @@ The remote hosted MCP server is currently in its preview phase. As the [OAuth sp
     }
     ```
 
-    This command uses `npx` to run a [small helper (`mcp-remote`)](https://github.com/geelen/mcp-remote) that connects to Neon's hosted server endpoint (`https://mcp.neon.tech/sse`). 
-    
+    This command uses `npx` to run a [small helper (`mcp-remote`)](https://github.com/geelen/mcp-remote) that connects to Neon's hosted server endpoint (`https://mcp.neon.tech/sse`).
+
     For [streamable HTTP responses](#streamable-http-support) instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
 
 3.  Save the configuration and **restart or refresh** your MCP client application.
@@ -248,11 +248,7 @@ The Neon MCP Server supports streamable HTTP as an alternative to Server-Sent Ev
   "mcpServers": {
     "sentry": {
       "command": "npx",
-      "args": [
-        "-y",
-        "mcp-remote@latest",
-        "https://mcp.neon.tech/mcp"
-      ]
+      "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/mcp"]
     }
   }
 }
