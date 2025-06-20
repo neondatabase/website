@@ -60,7 +60,7 @@ Before getting started, ensure the following:
 If you don't already have an OpenTelemetry-compatible observability platform, you'll need to sign up for one. For this example, we'll use New Relic:
 
 1. Sign up for a free account at [newrelic.com](https://newrelic.com) if you haven't already.
-2. Once signed in, you'll need your New Relic license key for authentication. 
+2. Once signed in, you'll need your New Relic license key for authentication.
 
    If you're onboarding for the first time, copy the license key when it's offered to you (this is your **Original account** key).
 
@@ -76,11 +76,11 @@ If you don't already have an OpenTelemetry-compatible observability platform, yo
    1. Click on your user menu in the bottom left corner.
    2. Select **API Keys** from the menu.
 
-         ![New Relic profile menu showing API Keys option](/docs/guides/new_relic_api_keys.png)
+      ![New Relic profile menu showing API Keys option](/docs/guides/new_relic_api_keys.png)
 
    3. Click **Create a key** → choose **Ingest - License**. Copy the key immediately (you can't view it again later).
 
-         ![New Relic API Keys page showing license key types](/docs/guides/new_relic_copy_key.png)
+      ![New Relic API Keys page showing license key types](/docs/guides/new_relic_copy_key.png)
 
    Your license key will look something like `eu01xxaa1234567890abcdef1234567890NRAL` (the format varies by region).
 
@@ -110,17 +110,19 @@ You can enable either or both options based on your monitoring needs.
 
 1. Select your connection protocol. For most platforms including New Relic, choose **HTTP** (recommended), which uses HTTP/2 for efficient data transmission. Some environments may require **gRPC** instead.
 
-2. Enter your **Endpoint** URL. 
+2. Enter your **Endpoint** URL.
 
-   For New Relic, enter: 
-    - US: `https://otlp.nr-data.net`
-    - Europe: `https://otlp.eu01.nr-data.net`
-    
+   For New Relic, enter:
+
+   - US: `https://otlp.nr-data.net`
+   - Europe: `https://otlp.eu01.nr-data.net`
+
    See [this table](https://docs.newrelic.com/docs/opentelemetry/best-practices/opentelemetry-otlp/#configure-endpoint-port-protocol) for other options.
 
 3. Configure authentication:
+
    - **Bearer**: Enter your bearer token or API key
-   - **Basic**: Provide your username and password credentials  
+   - **Basic**: Provide your username and password credentials
    - **API Key**: Enter your API key
 
    For New Relic, you can use either **Bearer** or **API Key** authentication with your New Relic license key (both work the same way).
@@ -160,7 +162,7 @@ PostgreSQL logs
 ![Multiple Neon services in New Relic APM & Services](/docs/guides/new_relic_services.png)
 
 - **Logs**: Check your configured service name in APM & Services (e.g., `neon-postgres-test`)
-- **Metrics**: Look for the auto-created `compute-host-metrics` and `sql-metrics` services 
+- **Metrics**: Look for the auto-created `compute-host-metrics` and `sql-metrics` services
 
 </Steps>
 
@@ -187,4 +189,4 @@ If your data isn't appearing in your observability platform:
 
 For a complete list of metrics exported by Neon, see the [metrics reference in our Datadog integration guide](/docs/guides/datadog#available-metrics).
 
-<NeedHelp /> 
+<NeedHelp />
