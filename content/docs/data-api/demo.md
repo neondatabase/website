@@ -102,7 +102,7 @@ CREATE POLICY "shared_policy" ON "notes"
 
 The policies ensure:
 
-1. Users can only access their own notes (SELECT, INSERT, UPDATE, DELETE)
+1. Users can only access their own notes (`SELECT`, `INSERT`, `UPDATE`, `DELETE`)
 2. Shared notes are visible to authenticated users
 3. Data access is enforced at the database level
 
