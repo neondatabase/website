@@ -162,7 +162,7 @@ const { data, error } = await postgrest
   .order('created_at', { ascending: false });
 ```
 
-> `.eq('owner_id', user.id)` is a postgrest-js method that filters results, much like a SQL WHERE clause, to only include notes belonging to the current user.
+> `.eq('owner_id', user.id)` is a `postgrest-js` method that filters results, much like a SQL `WHERE` clause, to only include notes belonging to the current user.
 
 Here's what your notes list will look like after fetching all notes from the database.
 
