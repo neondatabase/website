@@ -84,7 +84,7 @@ pgPolicy("shared_policy", {
 }),
 ```
 
-These Drizzle policies generate the equivalent SQL policies for all CRUD operations (SELECT, INSERT, UPDATE, DELETE). For example:
+These Drizzle policies generate the equivalent SQL policies for all CRUD operations (`SELECT`, `INSERT`, `UPDATE`, `DELETE`). For example:
 
 ```sql
 -- SELECT
