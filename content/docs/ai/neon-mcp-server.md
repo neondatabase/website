@@ -67,13 +67,13 @@ The remote hosted MCP server is currently in its preview phase. As the [OAuth sp
       "mcpServers": {
         "Neon": {
           "command": "npx",
-          "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
+          "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/sse"]
         }
       }
     }
     ```
 
-    This command uses `npx` to run a [small helper (`mcp-remote`)](https://github.com/geelen/mcp-remote) that connects to Neon's hosted server endpoint (`https://mcp.neon.tech/sse`).
+    This command uses `npx` to run a [small helper (`mcp-remote`)](https://github.com/geelen/mcp-remote) that connects to Neon's hosted server endpoint (`https://mcp.neon.tech/sse`). For streamable HTTP responses instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
 
 3.  Save the configuration and **restart or refresh** your MCP client application.
 4.  The first time the client initializes Neon's MCP server, it should trigger an **OAuth flow**:

@@ -49,7 +49,7 @@ Tab: Remote MCP Server
      "mcpServers": {
        "Neon": {
          "command": "npx",
-         "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
+         "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/sse"]
        }
      }
    }
@@ -82,7 +82,7 @@ Tab: Remote MCP Server
       "mcpServers": {
         "Neon": {
           "command": "npx",
-          "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
+          "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/sse"]
         }
       }
     }
@@ -121,7 +121,7 @@ Tab: Remote MCP Server
       "mcpServers": {
         "Neon": {
           "command": "npx",
-          "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
+          "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/sse"]
         }
       }
     }
@@ -155,7 +155,7 @@ Tab: Remote MCP Server
      "mcpServers": {
        "Neon": {
          "command": "npx",
-         "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
+         "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/sse"]
        }
      }
    }
@@ -221,7 +221,7 @@ Adapt the instructions above for other clients:
   ```json
   "neon": {
     "command": "npx",
-    "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
+    "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/sse"]
   }
   ```
 
