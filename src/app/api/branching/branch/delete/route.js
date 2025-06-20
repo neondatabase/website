@@ -4,7 +4,6 @@ import * as yup from 'yup';
 
 const requestSchema = yup.object({
   branchId: yup.string().required('Branch ID is required'),
-  retries: yup.number().integer().min(0).max(3).default(0),
 });
 
 // eslint-disable-next-line import/prefer-default-export
