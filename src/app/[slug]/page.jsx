@@ -6,6 +6,8 @@ import { getPostBySlug, getPostSlugs } from 'utils/api-docs';
 import { getWpPageBySlug } from 'utils/api-pages';
 
 const getPageType = async (slug) => {
+  if (slug === 'wp-draft-post-preview-page') return 'wp-draft';
+
   const templatePage = getPostBySlug(slug, TEMPLATE_PAGES_DIR_PATH);
   if (templatePage) return 'template';
 
@@ -15,7 +17,7 @@ const getPageType = async (slug) => {
   return null;
 };
 
-const SinglePage = async ({ params }) => {
+const SinglePage = async ({ params, searchParams }) => {
   const { slug } = params;
   const pageType = await getPageType(slug);
 
@@ -29,10 +31,15 @@ const SinglePage = async ({ params }) => {
     return <WpPage params={params} />;
   }
 
+  if (pageType === 'wp-draft') {
+    const { default: WpDraftPage } = await import('./pages/wp-draft-page');
+    return <WpDraftPage searchParams={searchParams} />;
+  }
+
   return notFound();
 };
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata({ params, searchParams }) {
   const { slug } = params;
   const pageType = await getPageType(slug);
 
@@ -48,6 +55,14 @@ export async function generateMetadata({ params }) {
     const mod = await import('./pages/wp-page');
     if (mod.generateMetadata) {
       return mod.generateMetadata({ params });
+    }
+    return null;
+  }
+
+  if (pageType === 'wp-draft') {
+    const mod = await import('./pages/wp-draft-page');
+    if (mod.generateMetadata) {
+      return mod.generateMetadata({ searchParams });
     }
     return null;
   }
