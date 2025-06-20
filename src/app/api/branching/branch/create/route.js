@@ -47,8 +47,10 @@ export async function POST() {
       throw new Error('Invalid response from Neon API');
     }
 
-    await handleInsertBranchConnection(branch.id, endpoints[0].host);
-    await scheduleBranchDeletion(branch.id);
+    await Promise.all([
+      handleInsertBranchConnection(branch.id, endpoints[0].host),
+      scheduleBranchDeletion(branch.id),
+    ]);
 
     return NextResponse.json({
       success: true,
