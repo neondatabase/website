@@ -21,7 +21,7 @@ updatedOn: '2025-01-16T10:00:00.000Z'
 
 Available for Scale and Business Plan users, the Neon OpenTelemetry integration lets you export metrics and Postgres logs to any OpenTelemetry Protocol (OTLP) compatible observability platform. This gives you the flexibility to send your Neon data to your preferred monitoring solution, whether that's New Relic, Grafana Cloud, Honeycomb, or any other OTEL-compatible service.
 
-If you don't already have an OTEL-compatible platform set up, we'll walk you through the basic setup in New Relic so you can try out how Neon's data export works. The same configuration principles apply to any OTEL-compatible platform.
+If you don't already have an OTEL-compatible platform set up, we'll walk you through the basic setup in New Relic so you can see how Neon's data export works. The same configuration principles apply to any OTEL-compatible platform.
 
 ## How it works
 
