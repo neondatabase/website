@@ -2,7 +2,7 @@
 title: Neon Launchpad
 subtitle: Launch an instant Neon Postgres database with zero configuration
 enableTableOfContents: true
-updatedOn: '2025-06-05T09:15:50.314Z'
+updatedOn: '2025-06-19T23:03:16.354Z'
 ---
 
 Neon Launchpad enables instant provisioning of a Postgres database without configuration or account creation.
@@ -132,3 +132,7 @@ Note that provisioned databases expire after 72 hours unless claimed as describe
 ## Technical implementation
 
 The Neon Launchpad service is built on Neon's [claimable database integration](/docs/workflows/claimable-database-integration), which provides APIs for creating projects and generating transfer requests. This allows the service to provision databases immediately while deferring account creation until users choose to claim their database. You can build similar experiences to Neon Launchpad in your own application using the APIs documented in the integration guide.
+
+## Resources
+
+- Blog post: [Neon Launchpad: A Tool For Instant Postgres, No Login Needed](https://neon.com/blog/neon-launchpad)

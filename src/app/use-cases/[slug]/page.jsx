@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { notFound } from 'next/navigation';
 
-import Post from 'components/pages/doc/post';
+import Post from 'components/pages/template/post';
 import { USE_CASES_DIR_PATH } from 'constants/content';
 import LINKS from 'constants/links';
 import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
@@ -40,11 +40,9 @@ const UseCasePage = ({ params }) => {
       content={content}
       data={data}
       breadcrumbs={[]}
-      navigationLinks={{ previousLink: null, nextLink: null }}
       currentSlug={slug}
       githubPath={githubPath}
       tableOfContents={tableOfContents}
-      isTemplate
     />
   );
 };

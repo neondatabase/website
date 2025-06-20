@@ -1,7 +1,6 @@
 ---
 title: 'Neon Storage: Bottomless, Branchable'
 subtitle: The foundation for scalable, copy-on-write Postgres with usage-based pricing and zero storage management.
-enableTableOfContents: true
 updatedOn: '2025-06-04T09:00:00.000Z'
 ---
 

@@ -1,9 +1,9 @@
 ---
 title: Connect MCP Clients to Neon
 subtitle: Learn how to connect MCP clients such as Cursor, Claude Desktop, Cline,
-  Windsurf and Zed to your Neon Postgres database.
+  Windsurf, Zed, and VS Code to your Neon Postgres database.
 enableTableOfContents: true
-updatedOn: '2025-05-13T08:19:38.922Z'
+updatedOn: '2025-06-19T13:30:30.620Z'
 ---
 
 The **Neon MCP Server** allows you to connect various [**Model Context Protocol (MCP)**](https://modelcontextprotocol.org) compatible AI tools to your Neon Postgres databases. This guide provides instructions for connecting popular MCP clients to the Neon MCP Server, enabling natural language interaction with your Neon projects.
@@ -15,6 +15,7 @@ This guide covers the setup for the following MCP Clients:
 - [Windsurf (Codeium)](#windsurf-codeium)
 - [Cline (VS Code extension)](#cline-vs-code-extension)
 - [Zed](#zed)
+- [VS Code (with GitHub Copilot)](#vs-code-with-github-copilot)
 
 By connecting these tools to the Neon MCP Server, you can manage your Neon projects, databases, and schemas using natural language commands within the MCP client interface.
 
@@ -245,6 +246,72 @@ MCP support in Zed is currently in **preview**. Ensure you're using the Preview 
 
 For more details, including workflow examples and troubleshooting, see [Get started with Zed and Neon Postgres MCP Server](/guides/zed-mcp-neon).
 
+## VS Code (with GitHub Copilot)
+
+<Admonition type="note">
+To use MCP servers with VS Code, you need [GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot) and [GitHub Copilot Chat](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat) extensions installed
+</Admonition>
+
+<Tabs labels={["Remote MCP Server", "Local MCP Server"]}>
+<TabItem>
+
+1.  Open VS Code.
+2.  Open your [User Settings (JSON) file](https://code.visualstudio.com/docs/copilot/chat/mcp-servers#_add-an-mcp-server-to-your-user-settings): Use the command palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) and search for "Preferences: Open User Settings (JSON)".
+3.  Add the Neon MCP server configuration to your `settings.json` file. If the `"mcp.servers"` object doesn't exist, create it:
+
+    ```json
+    {
+      // ... your other settings ...
+      "mcp": {
+        "servers": {
+          "Neon": {
+            "command": "npx",
+            "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
+          }
+        }
+      }
+      // ...
+    }
+    ```
+
+4.  Save the `settings.json` file.
+5.  Click on Start on the MCP server.
+6.  An OAuth window will open in your browser. Follow the prompts to authorize VS Code (GitHub Copilot) to access your Neon account.
+7.  Once authorized, you can now open GitHub Copilot Chat in VS Code and [switch to Agent mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). You will see the Neon MCP Server listed among the available tools.
+
+</TabItem>
+
+<TabItem>
+
+1.  Open VS Code.
+2.  Open your [User Settings (JSON) file](https://code.visualstudio.com/docs/copilot/chat/mcp-servers#_add-an-mcp-server-to-your-user-settings): Use the command palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) and search for "Preferences: Open User Settings (JSON)".
+3.  Add the Neon MCP server configuration to your `settings.json` file. If the `"mcp.servers"` object doesn't exist, create it:
+
+    ```json
+    {
+      // ... your other settings ...
+      "mcp": {
+        "servers": {
+          "Neon": {
+            "command": "npx",
+            "args": ["-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+          }
+        }
+      }
+      // ...
+    }
+    ```
+
+4.  Save the `settings.json` file.
+5.  Click on Start on the MCP server.
+6.  You can now open GitHub Copilot Chat in VS Code and [switch to Agent mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). You will see the Neon MCP Server listed among the available tools.
+
+</TabItem>
+
+</Tabs>
+
+For detailed instructions on utilizing the Neon MCP server with GitHub Copilot in VS Code, including a step-by-step example on generating an Azure Function REST API, refer to [How to Use Neon MCP Server with GitHub Copilot in VS Code](/guides/neon-mcp-server-github-copilot-vs-code).
+
 ## Other MCP clients
 
 Adapt the instructions above for other clients:
@@ -372,5 +439,6 @@ Once connected, you can start interacting with your Neon Postgres databases usin
 - [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api)
 - [Neon API Keys](/docs/manage/api-keys#creating-api-keys)
 - [Neon MCP server GitHub](https://github.com/neondatabase/mcp-server-neon)
+- [VS Code MCP Server Documentation](https://code.visualstudio.com/docs/copilot/chat/mcp-servers)
 
 <NeedHelp/>

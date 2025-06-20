@@ -27,18 +27,17 @@ import GearGradientIcon from 'icons/header/gear-gradient.inline.svg';
 import GearIcon from 'icons/header/gear.inline.svg';
 import MigrationGradientIcon from 'icons/header/migration-gradient.inline.svg';
 import MigrationIcon from 'icons/header/migration.inline.svg';
+import PatternGradientIcon from 'icons/header/pattern-gradient.inline.svg';
+import PatternIcon from 'icons/header/pattern.inline.svg';
 import PeopleIcon from 'icons/header/people.inline.svg';
 import RestoreGradientIcon from 'icons/header/restore-gradient.inline.svg';
 import RestoreIcon from 'icons/header/restore.inline.svg';
-import SaasGradientIcon from 'icons/header/saas-gradient.inline.svg';
-import SaasIcon from 'icons/header/saas.inline.svg';
 import SearchGradientIcon from 'icons/header/search-gradient.inline.svg';
 import SearchIcon from 'icons/header/search.inline.svg';
+import SecurityGradientIcon from 'icons/header/security-gradient.inline.svg';
 import SecurityIcon from 'icons/header/security.inline.svg';
 import ServerlessGradientIcon from 'icons/header/serverless-gradient.inline.svg';
 import ServerlessIcon from 'icons/header/serverless.inline.svg';
-import StarGradientIcon from 'icons/header/star-gradient.inline.svg';
-import StarIcon from 'icons/header/star.inline.svg';
 
 import LINKS from './links';
 
@@ -143,13 +142,6 @@ export default {
           title: 'Use cases',
           items: [
             {
-              icon: SaasIcon,
-              iconGradient: SaasGradientIcon,
-              title: 'SaaS Apps',
-              description: 'Build faster with Neon',
-              to: `${LINKS.useCases}/postgres-for-saas`,
-            },
-            {
               icon: ServerlessIcon,
               iconGradient: ServerlessGradientIcon,
               title: 'Serverless Apps',
@@ -162,6 +154,13 @@ export default {
               title: 'Database per Tenant',
               description: 'Data isolation without overhead',
               to: `${LINKS.useCases}/database-per-tenant`,
+            },
+            {
+              icon: PatternIcon,
+              iconGradient: PatternGradientIcon,
+              title: 'Platforms',
+              description: 'Offer Postgres to your users',
+              to: LINKS.platforms,
             },
             {
               icon: GearIcon,
@@ -190,11 +189,11 @@ export default {
               to: LINKS.enterprise,
             },
             {
-              icon: StarIcon,
-              iconGradient: StarGradientIcon,
-              title: 'Partners',
-              description: 'Add Neon to your platform',
-              to: LINKS.partners,
+              icon: SecurityIcon,
+              iconGradient: SecurityGradientIcon,
+              title: 'Security',
+              description: 'Compliance & privacy',
+              to: LINKS.security,
             },
             {
               icon: FolderIcon,
@@ -239,11 +238,6 @@ export default {
               icon: ChatIcon,
               title: 'Contact',
               to: LINKS.contactSales,
-            },
-            {
-              icon: SecurityIcon,
-              title: 'Security',
-              to: LINKS.security,
             },
           ],
         },
