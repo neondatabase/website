@@ -2,7 +2,7 @@
 title: Inngest
 subtitle: Quickly build AI RAG and Agentic workflows that scale with Inngest and Neon
 enableTableOfContents: true
-updatedOn: '2025-06-04T16:43:36.527Z'
+updatedOn: '2025-06-20T22:07:37.255Z'
 ---
 
 Inngest is a popular framework for building AI RAG and Agentic workflows. [Inngest](https://www.inngest.com/?utm_source=neon&utm_medium=inngest-ai-integration) provides automatic retries, caching along with concurrency and throttling management and AI requests offloading.
