@@ -2,12 +2,12 @@ import Image from 'next/image';
 
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
+import MegaLink from 'components/shared/mega-link';
 import autoScaling from 'icons/multi-tb/sub-hero/tag-cloud/autoscaling.svg';
 import highAvailability from 'icons/multi-tb/sub-hero/tag-cloud/high-availability.svg';
 import instantRecovery from 'icons/multi-tb/sub-hero/tag-cloud/instant-recovery.svg';
 
 import TagCloud from '../../use-case/tag-cloud';
-import RelatedArticle from '../related-article';
 
 import clockCoins from './images/clock-coins.png';
 
@@ -73,10 +73,11 @@ const Hero = () => (
       </div>
 
       <TagCloud items={TAGS} className="gap-4 lg:mt-4" titleClassName="text-[16px]" />
-      <RelatedArticle
+      <MegaLink
+        className="!my-16 xl:!my-14 lg:!my-12 md:!my-10"
         title="The real impact of slow Postgres restores for businesses: lost revenue and customer trust."
-        date={new Date('2025-03-27')}
-        link="/blog/the-true-cost-of-slow-postgres-restores"
+        date={new Date('2025-04-11')}
+        url="/blog/the-true-cost-of-slow-postgres-restores"
       />
     </Container>
   </section>
