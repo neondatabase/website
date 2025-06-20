@@ -218,6 +218,44 @@ You can also refer to our individual guides for detailed examples on using the N
 - [Windsurf (Codium)](/guides/windsurf-mcp-neon)
 - [Zed](/guides/zed-mcp-neon)
 
+## API key-based authentication
+
+The Neon MCP Server supports API key-based authentication for remote access, in addition to OAuth. This allows for simpler authentication using your [Neon API key (personal or organization)](/docs/manage/api-keys) for programmatic access. API key configuration is show below:
+
+```bash
+{
+  "mcpServers": {
+    "Neon": {
+      "url": "https://mcp.neon.tech/mcp",
+      "headers": {
+        "Authorization": "Bearer <$NEON_API_KEY>"
+      }
+    }
+  }
+}
+```
+
+> Currently, only [streamable HTTP](#streamable-http-support) responses are supported with API-key based authentication. Server-Sent Events (SSE) responses are not yet supported for this authentication method.
+
+## Streamable HTTP support
+
+The Neon MCP Server supports streamable HTTP as an alternative to Server-Sent Events (SSE) for streaming responses. This makes it easier to consume streamed data in environments where SSE is not ideal — such as CLI tools, backend services, or AI agents. To use streamable HTTP, make sure to use the latest remote MCP server, and specify the `https://mcp.neon.tech/mcp` endpoint, as shown in the following configuration example:
+
+  ```bash
+  {
+    "mcpServers": {
+      "sentry": {
+        "command": "npx",
+        "args": [
+          "-y",
+          "mcp-remote@latest",
+          "https://mcp.neon.tech/mcp"
+        ]
+      }
+    }
+  }
+  ```
+
 ## Conclusion
 
 The Neon MCP Server enables natural language interaction with Neon Postgres databases, offering a simplified way to perform database management tasks. You can perform actions such as creating new Neon projects and databases, managing branches, executing SQL queries, and making schema changes, all through conversational requests. Features like branch-based migrations contribute to safer schema modifications. By connecting your preferred MCP client to the Neon MCP Server, you can streamline database administration and development workflows, making it easier for users with varying technical backgrounds to interact with Neon databases.
