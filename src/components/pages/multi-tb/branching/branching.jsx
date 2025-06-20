@@ -140,7 +140,7 @@ const Branching = () => (
       </div>
     </Container>
     <Container className="max-w-3xl lg:mx-8 md:mx-auto md:max-w-sm" size="768" as="footer">
-      <ul className="flex flex-row gap-16 text-balance text-2xl font-normal leading-snug tracking-extra-tight text-gray-new-60 lg:text-xl md:flex-col md:text-pretty md:pr-10 md:text-lg sm:gap-6">
+      <ul className="flex flex-row gap-16 text-balance text-2xl font-normal leading-snug tracking-extra-tight text-gray-new-60 lg:text-xl md:flex-col md:gap-6 md:text-pretty md:pr-10 md:text-lg">
         <li className="flex-1">
           <p>
             <span className="text-white">For teams.</span> You have a reliable safety net protecting

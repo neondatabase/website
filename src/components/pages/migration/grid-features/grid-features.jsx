@@ -43,7 +43,7 @@ const ITEMS = [
 
 const GridFeatures = () => (
   <section className="grid-features safe-paddings pt-[185px] xl:pt-[162px] lg:pt-[136px] md:pt-[96px]">
-    <Container className="!max-w-[640px] md:px-5 sm:!max-w-sm" size="960">
+    <Container className="md:px-5 sm:!max-w-sm" size="960">
       <header className="mx-auto flex max-w-[640px] flex-col items-center gap-3 text-center lg:max-w-[560px] md:max-w-[500px]">
         <h2 className="font-title text-5xl font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:text-balance md:text-[32px]">
           Why teams migrate to Neon

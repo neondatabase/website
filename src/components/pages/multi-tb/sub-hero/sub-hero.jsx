@@ -44,7 +44,7 @@ const Hero = () => (
           aria-hidden
         />
       </div>
-      <p className="text-[28px] font-medium leading-snug tracking-tighter text-white lg:max-w-[476px] lg:text-[24px] md:max-w-[320px] md:text-[20px]">
+      <p className="text-[28px] font-medium leading-snug tracking-tighter text-white lg:text-[24px] md:text-[20px]">
         Every minute waiting for that AWS RDS instance to restore is costing your company anywhere
         {` `}
         <br className="hidden md:block" />
