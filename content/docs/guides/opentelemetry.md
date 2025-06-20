@@ -155,7 +155,7 @@ FROM Log SELECT * SINCE 1 hour ago
 Metrics flowing into New Relic
 ![Neon metrics appearing in New Relic](/docs/guides/new_relic_metrics_success.png)
 
-PostgreSQL logs
+Postgres logs
 ![Neon PostgreSQL logs appearing in New Relic](/docs/guides/new_relic_logs_success.png)
 
 **Find your data under APM & Services**
