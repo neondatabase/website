@@ -138,7 +138,7 @@ You can create a Neon branch for every developer on your team. This ensures that
 <Admonition type="tip">
 To easily identify branches dedicated to development, we recommend prefixing the branch name with `dev/<developer-name>` or `dev/<feature-name>` if multiple developers collaborate on the same development branch.
 
-<br/>Examples:
+Examples:
 
 ```bash
 dev/alice             dev/new-onboarding

@@ -13,7 +13,7 @@ This guide steps you through installing the Liquibase CLI, configuring Liquibase
 
 - A Neon account. See [Sign up](/docs/get-started-with-neon/signing-up).
 - A Neon project. See [Create your first project](/docs/get-started-with-neon/setting-up-a-project).
-- Liquibase requires Java. For Liquibase Java requirements, see [Requirements](https://docs.liquibase.com/start/install/liquibase-requirements.html). To check if you have Java installed, run `java --version`, or `java -version` on macOS`.
+- Liquibase requires Java. For Liquibase Java requirements, see [Requirements](https://docs.liquibase.com/start/install/liquibase-requirements.html). To check if you have Java installed, run `java --version`, or `java -version` on macOS.
 
 ## Download and extract Liquibase
 

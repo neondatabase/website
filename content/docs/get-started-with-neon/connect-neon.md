@@ -91,7 +91,7 @@ with conn.cursor() as cur:
 conn.close()
 ```
 
-```.NET
+```csharp
 # .NET example
 
 ## Connection string
