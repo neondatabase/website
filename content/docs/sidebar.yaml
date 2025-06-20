@@ -400,6 +400,9 @@
               slug: introduction/monitor-query-history
             - title: Datadog integration
               slug: guides/datadog
+            - title: OpenTelemetry integration
+              slug: guides/opentelemetry
+              tag: new
             - title: Datbase monitoring tools
               slug: introduction/monitor-external-tools
         - section: Team Tools
@@ -1098,6 +1101,15 @@
       slug: data-api/get-started
       icon: api
       tag: new
+      items:
+        - section: Get started
+          items:
+            - title: Get started
+              slug: data-api/get-started
+        - section: Tutorial
+          items:
+            - title: Building a note-taking app
+              slug: data-api/demo
 - section: Workflows
   items:
     - title: Data anonymization
