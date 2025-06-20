@@ -563,7 +563,7 @@ Before diving into the code, here's a look at this example in the Neon console d
 
 ![S3 backup three databases](/docs/use-cases/s3_backup_three_databases.png)
 
-Using the same naming conventions, there are three new files in the ``.github/workflows` folder in the repository:
+Using the same naming conventions, there are three new files in the `.github/workflows` folder in the repository:
 
 1. `paycorp-payments-prod.yml`
 2. `acme-analytics-prod.yml`

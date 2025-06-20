@@ -84,8 +84,6 @@ export const ragWorkflow = client.createFunction(
 
 `step.ai.infer()`, combined with Neon's Scale-to-zero feature, allows you to build AI workflows that scale costs with its success!
 
-<br />
-
 Learn more about using `step.ai.infer()` in the following article: [step.ai: Build Serverless AI Applications That Won't Break the Bank](https://www.inngest.com/blog/step-ai-for-serverless-ai-applications?utm_source=neon&utm_medium=inngest-ai-integration).
 
 ## Trigger AI workflows based on database changes
@@ -95,8 +93,6 @@ Inngest also integrates with Neon Postgres to trigger AI workflows based on data
 ![Inngest integrates with Neon Postgres to trigger AI workflows based on database changes](/docs/guides/inngest.jpg)
 
 This integration allows you to trigger AI workflows based on database changes, such as generating embeddings as soon as a new row is inserted into a table (see example below).
-
-<br />
 
 Configure the Inngests Neon integration to trigger AI workflows from your Neon database changes [by following this guide](/docs/guides/trigger-serverless-functions).
 
