@@ -3,7 +3,7 @@ title: Connect MCP Clients to Neon
 subtitle: Learn how to connect MCP clients such as Cursor, Claude Desktop, Cline,
   Windsurf, Zed, and VS Code to your Neon Postgres database.
 enableTableOfContents: true
-updatedOn: '2025-06-19T13:30:30.620Z'
+updatedOn: '2025-06-20T20:31:35.334Z'
 ---
 
 The **Neon MCP Server** allows you to connect various [**Model Context Protocol (MCP)**](https://modelcontextprotocol.org) compatible AI tools to your Neon Postgres databases. This guide provides instructions for connecting popular MCP clients to the Neon MCP Server, enabling natural language interaction with your Neon projects.
