@@ -241,20 +241,20 @@ The Neon MCP Server supports API key-based authentication for remote access, in 
 
 The Neon MCP Server supports streamable HTTP as an alternative to Server-Sent Events (SSE) for streaming responses. This makes it easier to consume streamed data in environments where SSE is not ideal — such as CLI tools, backend services, or AI agents. To use streamable HTTP, make sure to use the latest remote MCP server, and specify the `https://mcp.neon.tech/mcp` endpoint, as shown in the following configuration example:
 
-  ```bash
-  {
-    "mcpServers": {
-      "sentry": {
-        "command": "npx",
-        "args": [
-          "-y",
-          "mcp-remote@latest",
-          "https://mcp.neon.tech/mcp"
-        ]
-      }
+```bash
+{
+  "mcpServers": {
+    "sentry": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote@latest",
+        "https://mcp.neon.tech/mcp"
+      ]
     }
   }
-  ```
+}
+```
 
 ## Conclusion
 
