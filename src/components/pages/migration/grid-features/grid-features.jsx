@@ -43,7 +43,7 @@ const ITEMS = [
 
 const GridFeatures = () => (
   <section className="grid-features safe-paddings pt-[185px] xl:pt-[162px] lg:pt-[136px] md:pt-[96px]">
-    <Container size="960">
+    <Container className="md:px-5 sm:!max-w-sm" size="960">
       <header className="mx-auto flex max-w-[640px] flex-col items-center gap-3 text-center lg:max-w-[560px] md:max-w-[500px]">
         <h2 className="font-title text-5xl font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:text-balance md:text-[32px]">
           Why teams migrate to Neon
@@ -53,7 +53,7 @@ const GridFeatures = () => (
           reliable, and cost-effective.
         </p>
       </header>
-      <ul className="mx-1 mt-[57px] grid grid-cols-3 gap-x-11 gap-y-10 xl:mx-auto xl:max-w-[832px] lg:mx-16 lg:mt-12 lg:grid-cols-2 lg:gap-x-16 lg:gap-y-10 md:mx-0 md:grid-cols-1">
+      <ul className="mx-1 mt-[57px] grid grid-cols-3 gap-x-11 gap-y-10 xl:mx-auto xl:max-w-[832px] lg:mx-16 lg:mt-12 lg:grid-cols-2 lg:gap-x-16 lg:gap-y-10 md:mx-0 sm:grid-cols-1">
         {ITEMS.map(({ title, description, icon }) => (
           <li key={title}>
             <Image
