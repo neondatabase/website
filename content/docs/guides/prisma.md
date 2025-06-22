@@ -27,14 +27,31 @@ To establish a basic connection from Prisma to Neon, perform the following steps
    ![Connection details modal](/docs/connect/connection_details.png)
    The connection string includes the user name, password, hostname, and database name.
 
-2. Add the following lines to your `prisma/schema.prisma` file to identify the data source and database URL:
+2. Add the following lines to your `prisma/schema.prisma` file to identify the data source and database URL, and account for the preinstalled [`anon` extension's types and tables](https://gitlab.com/dalibo/postgresql_anonymizer/-/blob/master/anon.sql):
 
-   ```typescript
-   datasource db {
-     provider = "postgresql"
-     url   = env("DATABASE_URL")
-   }
-   ```
+    ```typescript
+    datasource db {
+      provider = "postgresql"
+      url   = env("DATABASE_URL")
+    }
+
+    enum anon_fake_data_tables {
+      address
+      city
+      company
+      country
+      email
+      first_name
+      iban
+      last_name
+      lorem_ipsum
+      postcode
+      siret
+    }
+    ```
+<Admonition type="important">
+Failure to specify the `anon_fake_data_tables` will result in the error `cannot drop type anon_fake_data_tables because extension anon requires it` when pushing changes using Prisma. The `prisma db pull` command can be used to retrieve the latest version of the `anon_fake_data_tables` enum from your Postgres database on Neon.
+</Admonition>
 
 3. Add a `DATABASE_URL` variable to your `.env` file and set it to the Neon connection string that you copied in the previous step. We also recommend adding `?sslmode=require` to the end of the connection string to ensure a [secure connection](/docs/connect/connect-securely).
 
