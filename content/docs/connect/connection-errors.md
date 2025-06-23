@@ -318,19 +318,16 @@ Failure to resolve the Neon hostname can happen for different reasons:
 **Workarounds**
 
 1. **Using a Public DNS Resolver**
-
    - Google DNS: 8.8.8.8, 8.8.4.4
    - Cloudflare DNS: 1.1.1.1, 1.0.0.1
 
    These can be changed at:
-
    - OS level (macOS, Windows, Linux)
    - Router level
    - Mobile device network settings
    - Android Private DNS (configure a trusted provider such as `dns.google` or `1dot1dot1dot1.cloudflare-dns.com`)
 
    To change your DNS configuration at the OS level:
-
    - **macOS**: System Settings → Network → Wi-Fi → Details → DNS
    - **Windows**: Control Panel → Network and Internet → Network Connections → Right-click your connection → Properties → Internet Protocol Version 4 (TCP/IPv4)
    - **Linux**: Edit `/etc/resolv.conf` or configure your network manager (e.g., NetworkManager, Netplan)
@@ -340,7 +337,6 @@ Failure to resolve the Neon hostname can happen for different reasons:
 2. **Disable system-wide web proxies**
 
    If you’re using a proxy configured at the OS level, it may interfere with DNS lookups. To check and disable system proxy settings:
-
    - **macOS**: System Settings → Network → Wi-Fi → Details → Proxies. Uncheck any active proxy options (e.g., "Web Proxy (HTTP)", "Secure Web Proxy (HTTPS)")
    - **Windows**: Settings → Network & Internet → Proxy. Turn off "Use a proxy server" if it's enabled
    - **Linux**: Check your environment variables (e.g., `http_proxy`, `https_proxy`) and system settings under Network/Proxy.

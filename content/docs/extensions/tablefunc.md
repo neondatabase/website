@@ -127,7 +127,6 @@ FROM crosstab(
 1.  **`crosstab('source_sql_query_as_string')`**:
 
     The `source_sql_query_as_string` must return three columns:
-
     - **Row identifier**: Values in this column become distinct rows in the output (e.g., `product`).
     - **Category**: Values in this column become new column headers in the output (e.g., `quarter`).
     - **Value**: Values in this column populate the cells of the new pivot table (e.g., `sales`).
@@ -215,7 +214,6 @@ FROM crosstab(
 **How the `crosstab(source_sql, category_sql)` works:**
 
 1.  **`source_sql` (the first query string):**
-
     - This query fetches your raw data.
     - It must provide:
       1.  The column(s) that will identify each row in your final table (here, `student_name`).
@@ -224,7 +222,6 @@ FROM crosstab(
     - It's very important to `ORDER BY` the row identifier column(s) (e.g., `ORDER BY student_name` or `ORDER BY 1`).
 
 2.  **`category_sql` (the second query string):**
-
     - This query's job is to produce a single column containing the exact list of categories you want as your new column headers.
     - The order of categories returned by this query determines the order of your new columns in the final pivot table.
     - In our example, `$$SELECT s FROM unnest(ARRAY['Math', 'Science', 'English', 'History']) AS s$$` provides the list: 'Math', then 'Science', then 'English', then 'History'.
@@ -348,7 +345,6 @@ FROM connectby(
 **How `connectby()` works:**
 
 - **Parameters:**
-
   1.  `table_name TEXT`: Name of the table containing the hierarchy.
   2.  `key_field TEXT`: Name of the column storing the unique ID for each item.
   3.  `parent_key_field TEXT`: Name of the column storing the ID of the parent item.

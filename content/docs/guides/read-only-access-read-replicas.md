@@ -16,7 +16,6 @@ Suppose you need to give a partner read-only access to your sales data so they c
    </Admonition>
 
    Follow these steps to create a read replica for your database branch:
-
    - In the Neon Console, go to **Branches**.
    - Select the branch that contains your data.
    - Click **Add Read Replica** to create a dedicated compute instance for read operations.
@@ -24,7 +23,6 @@ Suppose you need to give a partner read-only access to your sales data so they c
 2. **Provide the connection string**
 
    Once the read replica is created, obtain the connection string from the Neon Console:
-
    - You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. Select the branch, the database, and the role.
    - Choose **Replica** compute under the compute settings.
    - Copy the connection string and provide it to your partner. The connection string might look something like this:

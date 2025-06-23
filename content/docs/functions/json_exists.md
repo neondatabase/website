@@ -213,13 +213,11 @@ WHERE JSON_EXISTS(
 ## Best practices
 
 1. Error handling:
-
    - Use appropriate `ON ERROR` clauses based on your requirements
    - Consider `UNKNOWN ON ERROR` for nullable conditions
    - Use `ERROR ON ERROR` when validation is critical
 
 2. Performance optimization:
-
    - Create _GIN_ indexes on `JSONB` columns for better performance
    - Use strict mode when path is guaranteed to exist
    - Combine with other `JSON` functions for complex operations

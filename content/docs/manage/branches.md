@@ -53,7 +53,6 @@ To view the branches in a Neon project:
    ![all branches](/docs/manage/branches_all_list.png)
 
    Branch details in this table view include:
-
    - **Branch**: The branch name, which is a generated name if no name was specified when created.
    - **Parent**: Indicates the parent from which this branch was created, helping you track your branch hierarchy.
    - **Compute hours**: Number of hours the branch's compute was active so far in the current billing period.
@@ -67,7 +66,6 @@ To view the branches in a Neon project:
    ![View branch details](/docs/manage/branch_details.png)
 
    Branch details shown on the branch page may include:
-
    - **Archive status**: This only appears if the branch was archived. For more, see [Branch archiving](/docs/guides/branch-archiving).
    - **ID**: The branch ID. Branch IDs have a `br-` prefix.
    - **Created on**: The date and time the branch was created.
@@ -80,7 +78,6 @@ To view the branches in a Neon project:
    - **Compare to parent**: For information about the **Open schema diff** option, see [Schema diff](/docs/guides/schema-diff).
 
    The branch details page also includes details about the **Computes**, **Roles & Databases**, and **Child branches** that belong to the branch. All of these objects are associated with a particular branch. For information about these objects, see:
-
    - [Manage computes](/docs/manage/computes#view-a-compute).
    - [Manage roles](/docs/manage/roles)
    - [Manage databases](/docs/manage/databases)

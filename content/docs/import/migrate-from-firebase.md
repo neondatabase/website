@@ -322,7 +322,6 @@ While this guide focuses on using a custom Python script, there are other migrat
 - **Open source utilities**
 
   There are also a number of open source utilities available that can help export data from Firestore to local files.
-
   - [firestore-import-export](https://github.com/dalenguyen/firestore-import-export)
   - [firestore-backup-restore](https://github.com/dalenguyen/firestore-backup-restore)
 

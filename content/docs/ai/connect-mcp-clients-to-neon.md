@@ -234,7 +234,6 @@ MCP support in Zed is currently in **preview**. Ensure you're using the Preview 
 3. Click **Settings** in the top right panel of the Assistant.
 4. In the **Context Servers** section, click **+ Add Context Server**.
 5. Configure the Neon Server:
-
    - Enter **Neon** in the **Name** field.
    - In the **Command** field, enter:
      ```bash
@@ -369,7 +368,6 @@ Adapt the instructions above for other clients:
 
   Replace `YOUR_NEON_API_KEY` with your actual Neon API key.
   Replace `<client_name>` with the name of your MCP client application. Supported client names include:
-
   - `claude` for [Claude Desktop](https://claude.ai/download)
   - `cursor` for [Cursor](https://cursor.com) (Installing via `smithery` makes the MCP server a global MCP server in Cursor)
   - `windsurf` for [Windsurf Editor](https://codeium.com/windsurf)

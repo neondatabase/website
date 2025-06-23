@@ -109,7 +109,6 @@ We recommend using Smithery for installation, as it streamlines the process and 
     ```
 
     Replace `<client_name>` with the name of your MCP client application. Supported client names include:
-
     - `claude` for [Claude Desktop](https://claude.ai/download)
     - `cursor` for [Cursor](https://cursor.com) (Installing via `smithery` makes the MCP server a global MCP server in Cursor)
     - `windsurf` for [Windsurf Editor](https://codeium.com/windsurf)

@@ -159,7 +159,6 @@ After creating a publication on the source database, you need to create a subscr
    CONNECTION 'postgresql://neondb_owner:<password>@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb'
    PUBLICATION my_publication;
    ```
-
    - `subscription_name`: A name you chose for the subscription.
    - `connection_string`: The connection string for the source Neon database where you defined the publication.
    - `publication_name`: The name of the publication you created on the source Neon database.

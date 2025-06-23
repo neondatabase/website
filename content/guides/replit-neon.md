@@ -129,7 +129,6 @@ Your AI MCQ Generator application should now be live and accessible to users. Sh
 To optimize your Replit Agent development experience and build applications effectively, consider these best practices:
 
 - **Prompt engineering:**
-
   - **Improve Prompt**: Use the "Improve Prompt" feature in Replit Agent to refine the prompt and provide additional context. This helps Replit Agent better understand your requirements and generate more accurate code.
     ![Replit Agent Improve Prompt](/docs/guides/replit-agent-improve-prompt.png)
   - **Contextual prompts:** Initiate prompts with clear and comprehensive context. For example, "Modify the MCQ display to show one question at a time."

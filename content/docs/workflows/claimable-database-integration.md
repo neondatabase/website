@@ -14,19 +14,15 @@ The project transfer functionality enables you to provision fully-configured Pos
 ## Simplified workflow
 
 1. **Create a Neon project** on behalf of your user in your account or organization
-
    - This provides them with a Postgres connection string for their application immediately
 
 2. **Create a transfer request** for the project
-
    - This generates a unique, time-limited transfer request ID
 
 3. **Share a claim URL** with your user
-
    - This URL contains the project ID and transfer request ID
 
 4. **User claims the project**
-
    - When they click the URL, Neon transfers the project to their account
 
 ## Step-by-step guide

@@ -221,7 +221,6 @@ VALUES (
 ## Additional considerations
 
 1. Use appropriate input validation:
-
    - Use `WITH UNIQUE` when duplicate keys should be prevented
    - Consider `FORMAT JSON` for explicit parsing requirements
 

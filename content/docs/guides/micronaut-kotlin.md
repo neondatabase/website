@@ -27,7 +27,6 @@ If you do not have one already, create a Neon project. Save your connection deta
 ## Create a Micronaut Kotlin project and add dependencies
 
 1. Create a Micronaut Kotlin project using the Micronaut CLI or the [Micronaut Launch](https://launch.micronaut.io/) website. Select Kotlin as the language and include the following features:
-
    - postgres
    - jdbc-hikari
 

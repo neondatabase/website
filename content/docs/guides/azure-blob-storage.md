@@ -456,7 +456,6 @@ WHERE
 - The query returns metadata stored in Neon.
 - The `file_url` column contains the base URL of the blob.
 - **Accessing the file:**
-
   - If your container allows public `Blob` access, this `file_url` might be directly usable.
   - If your container is **private** (recommended), you need to generate a **read-only SAS token** for the specific `blob_name` on demand using your backend (similar to the upload SAS generation, but with `BlobSASPermissions.parse("r")` or `BlobSasPermissions(read=True)`) and append it to the `file_url`. This provides secure, temporary read access.
   - Use the resulting URL (base URL or URL with read SAS token) in your application (e.g., `<img>` tags, download links).

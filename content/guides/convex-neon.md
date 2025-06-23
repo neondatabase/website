@@ -71,7 +71,6 @@ Now, you'll set up the self-hosted Convex backend using Docker Compose, configur
     This command uses [`npx degit`](https://www.npmjs.com/package/degit) to fetch the `docker-compose.yml` file from the [Convex GitHub repository](https://github.com/get-convex/convex-backend/blob/main/self-hosted/docker/docker-compose.yml).
 
 3.  **Set up Neon connection string:** Add your Neon connection string you copied earlier to a `.env` file to configure Convex.
-
     1.  Create a `.env` file in the same directory as `docker-compose.yml`.
     1.  Add this line:
         ```env
@@ -112,7 +111,6 @@ Now, you'll set up the self-hosted Convex backend using Docker Compose, configur
     ![Convex Dashboard](/docs/guides/convex-dashboard.png)
 
     **Login to the Convex Dashboard:**
-
     - When you access the dashboard for the first time, you will be prompted to log in.
     - For the password, you will use the `CONVEX_SELF_HOSTED_ADMIN_KEY` generated in the next step.
 
@@ -172,7 +170,6 @@ With the self-hosted Convex backend powered by Neon running, the next step is to
     CONVEX_SELF_HOSTED_URL='http://localhost:3210'
     CONVEX_SELF_HOSTED_ADMIN_KEY='<your_generated_admin_key>'
     ```
-
     - `VITE_CONVEX_URL`: Specifies the URL of your self-hosted Convex backend. In this case, it's set to `http://localhost:3210`, the default for local Convex backends.
     - `CONVEX_SELF_HOSTED_URL`: Also set to the same URL, `http://localhost:3210`.
     - `CONVEX_SELF_HOSTED_ADMIN_KEY`: This key is essential for authenticating development operations against your self-hosted Convex instance. Replace `<your_generated_admin_key>` with the admin key you generated in the previous step [Setting up self-hosted Convex with Docker Compose](#setting-up-self-hosted-convex-with-docker-compose).

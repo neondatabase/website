@@ -241,7 +241,6 @@ If your read replicas are falling behind, follow these steps to diagnose and res
 
 2. **Verify configuration alignment**  
    If replication lag is detected, ensure that the configurations for the primary and read-replica computes are aligned. Specifically, confirm that the following parameters match between your primary compute and read-replica compute:
-
    - `max_connections`
    - `max_prepared_transactions`
    - `max_locks_per_transaction`

@@ -89,17 +89,14 @@ Set up a consumer in Sequin to stream changes from your database.
 3. Define any filters for the changes you want to capture. For example, you might want to only process orders with a value greater than a certain amount, or accounts with a certain status.
 
 4. Choose whether you want your consumer to process [rows or changes](https://sequinstream.com/docs/core-concepts#rows-and-changes):
-
    - **Rows**: Captures the latest state of records when a row is inserted or updated.
    - **Changes**: Captures every `insert`, `update`, and `delete`, including `OLD` values for updates and deletes.
 
 5. Select your preferred method for [receiving changes](https://sequinstream.com/docs/core-concepts#consumption):
-
    - **HTTP Push** (Webhooks): Sequin sends changes to your specified endpoint.
    - **HTTP Pull** (similar to SQS): Your application pulls changes from Sequin.
 
 6. Enter the final details for your consumer:
-
    - Give your consumer a name (e.g., `neon-changes-consumer`).
    - If using HTTP Push, provide the endpoint URL where Sequin should send the changes. You can also provide encrypted headers.
    - Optionally, set a timeout and add an endpoint path.

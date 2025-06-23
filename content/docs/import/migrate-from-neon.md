@@ -64,7 +64,6 @@ To import your data from another Neon project:
    </Admonition>
 
    The command includes these arguments:
-
    - `-Fc`: Sends the output to a custom-format archive suitable for input into `pg_restore`.
    - `-v`: Runs commands in verbose mode, allowing you to monitor what happens during the operation.
    - `-d`: Specifies the database name or connection string.

@@ -52,7 +52,6 @@ Before you begin, ensure you have the following:
 To set up your testing environment with Neon and Laravel, follow these steps:
 
 1. **Configure Database Connection:**
-
    - After creating your Neon account and a new database branch, obtain the connection details from the Neon dashboard.
    - Open your Laravel project and update the `.env` file with the Neon database connection parameters:
 
@@ -66,7 +65,6 @@ To set up your testing environment with Neon and Laravel, follow these steps:
      ```
 
 2. **Install PEST PHP:**
-
    - PEST is a testing framework for PHP that works seamlessly with Laravel. Install PEST via Composer with the following command:
 
      ```
@@ -77,13 +75,11 @@ To set up your testing environment with Neon and Laravel, follow these steps:
 #### Creating a Migration and Seeder
 
 1. **Generate Migration and Model:**
-
    - Run the following command to create a new migration file for a `questions` table and its associated model:
 
    ```
    php artisan make:model Question -m
    ```
-
    - Open the generated migration file in the `database/migrations` directory and add fields to the `questions` table schema:
 
      ```php
@@ -96,7 +92,6 @@ To set up your testing environment with Neon and Laravel, follow these steps:
      ```
 
 2. **Create Seeder:**
-
    - Generate a seeder to populate the `questions` table:
 
      ```
@@ -137,7 +132,6 @@ To set up your testing environment with Neon and Laravel, follow these steps:
      ```
 
 3. **Run Migrations and Seeders:**
-
    - Migrate the database to create the `questions` table:
 
      ```
@@ -154,7 +148,6 @@ To set up your testing environment with Neon and Laravel, follow these steps:
 
 1. **Generate the Controller:**
    A controller is a PHP class that handles HTTP requests. You can create a controller to manage questions data in your Laravel application.
-
    - Use Artisan to create a new controller named `QuestionController`:
 
      ```
@@ -162,7 +155,6 @@ To set up your testing environment with Neon and Laravel, follow these steps:
      ```
 
 2. **Add a Method to Retrieve Questions:**
-
    - Open the newly created `QuestionController` in the `app/Http/Controllers` directory.
    - Add a method to fetch and return all questions:
 
@@ -174,7 +166,6 @@ To set up your testing environment with Neon and Laravel, follow these steps:
      ```
 
 3. **Update Routes:**
-
    - Open the `routes/web.php` file and add a route to handle GET requests for questions:
 
      ```php
@@ -194,7 +185,6 @@ Access the `/questions` endpoint in your browser or a tool like Postman to see t
 #### Writing a PEST Test for the `QuestionController`
 
 1. **Create the Test File:**
-
    - PEST allows you to write tests in a very expressive way. You can create a test file specifically for the `QuestionController`:
 
      ```
@@ -203,7 +193,6 @@ Access the `/questions` endpoint in your browser or a tool like Postman to see t
 
 2. **Write the Test:**
    Usually, you would write a test that uses the `RefreshDatabase` trait to migrate the database and then seed it with test data before each test. But in this case, we will use the Neon branch to test with real data instead.
-
    - Open the generated test file in `tests/Feature` and add a test to check the `/questions` endpoint:
 
      ```php
@@ -241,11 +230,9 @@ This can be particularly useful when testing complex features or changes that re
 ### Creating a Neon Branch
 
 1. **Log In to Neon Dashboard:**
-
    - Access your Neon dashboard by logging in at [Neon's official website](https://neon.tech).
 
 2. **Select Your Database:**
-
    - Navigate to the database project that you are using for your production environment.
 
 3. **Create a New Branch:**
@@ -259,7 +246,6 @@ This can be particularly useful when testing complex features or changes that re
 Go back to your Laravel project and integrate the Neon branch into your testing setup:
 
 1. **Update Environment Configuration:**
-
    - Once your branch is created, obtain the connection details (hostname, database name, username, and password) from the Neon dashboard.
    - Create a new environment file in your Laravel project, such as `.env.testing`, and configure it to use the Neon testing branch. This ensures that your testing environment uses its database configuration.
 
@@ -273,7 +259,6 @@ Go back to your Laravel project and integrate the Neon branch into your testing 
      ```
 
 1. **Update PHPUnit Configuration:**
-
    - Ensure that PHPUnit (used by PEST for running tests) is configured to use the `.env.testing` file. Update your `phpunit.xml` file to specify the environment file:
 
      ```xml
@@ -284,7 +269,6 @@ Go back to your Laravel project and integrate the Neon branch into your testing 
      ```
 
 1. **Run Tests:**
-
    - With the testing branch configured, you can write tests that interact with the database as if it were production data, without the risk of affecting real user data. Use PEST to run your tests:
 
      ```bash

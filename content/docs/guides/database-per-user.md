@@ -171,7 +171,6 @@ Both approaches are viable, each with its own pros and cons.
   Ensure secure access as all users share the same application environment.
 
 - **Define user authentication and data routing**
-
   - Users provide their organization details during login.
   - Users access the application via an organization-specific subdomain.
   - The system identifies the user's organization based on their credentials.

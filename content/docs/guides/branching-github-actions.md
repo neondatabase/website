@@ -425,7 +425,6 @@ are two ways you can perform this setup:
 
 - **Manual setup** — this method requires obtaining a Neon API key and
   configuring it manually in your GitHub repository.
-
   1. Obtain a Neon API key. See
      [Create an API key](/docs/manage/api-keys#create-an-api-key)
      for instructions.

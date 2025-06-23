@@ -102,7 +102,6 @@ To start building serverless applications with Azure Functions you need to set u
 If you don't have the required tools installed, you can follow these steps to set up your development environment:
 
 1. Install the **Azure Functions** extension for VS Code (if you haven't already):
-
    - Open VS Code
    - Click the Extensions icon or press `Ctrl+Shift+X` or `Cmd+Shift+X`
    - Search for "Azure Functions"
@@ -139,12 +138,10 @@ With the required Azure tools installed, you're ready to create your first Azure
    ```
 
    When prompted, select:
-
    - Node.js as the runtime
    - JavaScript as the language
 
    This might take a few moments to complete, and it creates a basic project structure with the following files:
-
    - `host.json`: Contains global configuration options
    - `local.settings.json`: Stores app settings and connection strings for local development
    - `package.json`: Manages project dependencies
@@ -156,7 +153,6 @@ With the required Azure tools installed, you're ready to create your first Azure
    ```
 
    We're using:
-
    - `pg` for Postgres connection to Neon
    - `uuid` for generating unique referral codes
    - `dotenv` for environment variables management
@@ -686,7 +682,6 @@ After creating the Function App, you need to configure it to connect to your Neo
    ```
 
 2. Alternative: Configure settings in the Azure Portal:
-
    - Go to your **Function App** in the Azure Portal.
    - Select **Configuration** under the **Settings** section.
    - Add a new application setting:
@@ -773,7 +768,6 @@ If you no longer need the Azure resources created for this project, you can dele
    ```bash
    az group delete --name referral-system --yes --no-wait
    ```
-
    - The `--yes` flag skips the confirmation prompt.
    - The `--no-wait` flag allows the command to run asynchronously.
 

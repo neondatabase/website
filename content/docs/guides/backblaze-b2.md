@@ -440,7 +440,6 @@ WHERE
 
 - The query returns metadata stored in Neon.
 - **Accessing the file:**
-
   - If your bucket is **Public**, you can use the `file_url` directly in your application (e.g., `<img>` tags, download links).
   - If your bucket is **Private**, the stored `file_url` is likely irrelevant. You **must** generate a **presigned download URL** (a GET URL) on demand using your backend. This involves a similar process to generating the upload URL but using `GetObjectCommand` (JS) or `generate_presigned_url('get_object', ...)` (Python) with read permissions. This provides secure, temporary read access.
 

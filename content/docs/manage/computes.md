@@ -599,7 +599,6 @@ Possible steps you can take to identify the issues include:
    Look for processes initiated by your users, applications, or integrations that may be keeping your compute active.
 
 2. **Review connection patterns**
-
    - Ensure that no applications are sending frequent, unnecessary connection requests.
    - Consider batching connections if possible, or use [connection pooling](/docs/connect/connection-pooling) to limit persistent connections.
 

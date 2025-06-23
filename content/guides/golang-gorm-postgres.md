@@ -184,7 +184,6 @@ Let's examine the key components of these models:
 1. **Basic Fields**: `ID`, `CreatedAt`, `UpdatedAt`, and `DeletedAt` are standard fields in GORM models. They handle primary keys, timestamps, and soft deletion.
 
 2. **Field Tags**: The struct tags like `gorm:"size:255;not null"` define constraints and properties for each field:
-
    - `primaryKey`: Designates a field as the table's primary key
    - `size:255`: Sets the column's maximum length
    - `not null`: Ensures the field cannot be empty

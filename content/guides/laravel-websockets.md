@@ -391,7 +391,6 @@ The majority of the code is HTML and JavaScript that creates the task board inte
        addTaskToColumn(e.task);
    });
    ```
-
    - `TaskCreated`: When a new task is created, we add it to the appropriate column.
    - `TaskUpdated`: When a task is updated, we remove the old task element and add the updated one.
 

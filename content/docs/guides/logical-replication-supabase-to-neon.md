@@ -126,7 +126,6 @@ After creating a publication on the source database, you need to create a subscr
    ```
 
    Replace the following placeholders in the statement:
-
    - `my_subscription`: A name you chose for the subscription.
    - `postgresql://<supabase_connection_string>`: The **direct connection string** for your Supabase database, obtained with the IPv4 add-on enabled.
    - `my_publication`: The name of the publication you created on the Supabase database.

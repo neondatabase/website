@@ -531,7 +531,6 @@ To load sample data:
    Alternatively, supply your own data file.
 
 2. Load the data using one of the following Neon CLI commands ([projects](/docs/reference/cli-projects), [branches](/docs/reference/cli-branches), or [connection-string](/docs/reference/cli-connection-string)):
-
    - Create a new Neon project, connect to it with `psql`, and run the `.sql` file.
 
      ```bash

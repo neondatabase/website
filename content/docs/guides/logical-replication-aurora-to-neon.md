@@ -53,7 +53,6 @@ This section describes how to prepare your source Aurora Postgres instance (the 
 8. Reboot the **Writer instance** of your Aurora PostgreSQL DB cluster to apply the changes. In the Amazon RDS console, select your Aurora PostgreSQL DB cluster, then select the **Writer instance** of the cluster and choose **Reboot** from the **Actions** menu.
 
 9. Once the instance is available again, you can verify that logical replication is enabled as follows:
-
    - Use `psql` to connect to the writer instance of your Aurora PostreSQL DB cluster.
 
      ```bash
@@ -143,7 +142,6 @@ After creating a publication on the source database, you need to create a subscr
    ```sql shouldWrap
    CREATE SUBSCRIPTION my_subscription CONNECTION 'postgresql://postgres:password@database-1.czmwaio8k05k.us-east-2.rds.amazonaws.com/postgres' PUBLICATION my_publication;
    ```
-
    - `subscription_name`: A name you chose for the subscription.
    - `connection_string`: The connection string for the source AWS Aurora Postgres database where you defined the publication.
    - `publication_name`: The name of the publication you created on the source Aurora Postgres database.

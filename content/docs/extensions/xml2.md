@@ -74,7 +74,6 @@ These functions evaluate an XPath expression on a given XML document.
 - **`xpath_nodeset(document text, query text, toptag text, itemtag text) → text`**
   Evaluates the query and wraps the resulting nodeset in the specified `toptag` and `itemtag` XML tags. If `toptag` or `itemtag` is an empty string, the respective tag is omitted.
   There are also two-argument and three-argument versions:
-
   - `xpath_nodeset(document text, query text)`: Omits both `toptag` and `itemtag`.
   - `xpath_nodeset(document text, query text, itemtag text)`: Omits `toptag`.
 

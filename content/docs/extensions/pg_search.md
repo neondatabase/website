@@ -433,7 +433,6 @@ Most users will not need to adjust these advanced throughput settings.
 Tune `INSERT/UPDATE/COPY` throughput for the BM25 index with these settings:
 
 - **`paradedb.statement_parallelism`**: Controls indexing threads during `INSERT/UPDATE/COPY`. Default is `0` (auto-detects parallelism).
-
   - Use `1` for single-row atomic inserts/updates to avoid unnecessary threading.
   - Use a higher value for bulk inserts and updates.
 
@@ -442,7 +441,6 @@ Tune `INSERT/UPDATE/COPY` throughput for the BM25 index with these settings:
     ```
 
 - **`paradedb.statement_memory_budget`**: Memory per indexing thread before writing to disk. Default is 1024 MB (1 GB). Higher values may improve indexing performance. See [ParadeDB — Statement Memory Budget](https://docs.paradedb.com/documentation/configuration/write#statement-memory-budget).
-
   - If set to `0`, `maintenance_work_mem / paradedb.statement_parallelism` is used.
   - For single-row updates, 15 MB prevents excess memory allocation.
   - For bulk inserts/updates, increase as needed.

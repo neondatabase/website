@@ -22,7 +22,6 @@ Take the following three sentences, for example:
 You can determine the most similar sentences by following these steps:
 
 1. Generate embeddings for each sentence. For illustrative purposes, assume these values represent actual embeddings:
-
    - Embedding for sentence 1 → [0.5, 0.3, 0.1]
    - Embedding for sentence 2 → [0.6, 0.29, 0.12]
    - Embedding for sentence 3 → [0.1, -0.2, 0.4]

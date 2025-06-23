@@ -206,7 +206,6 @@ VALUES (
 The function provides several ways to handle errors:
 
 1. Using `ON EMPTY`:
-
    - `ERROR`: Raises an error (default)
    - `NULL`: Returns `NULL`
    - `DEFAULT expression`: Returns specified value
@@ -267,12 +266,10 @@ SELECT
 ## Additional considerations
 
 1. Type safety:
-
    - Always use `RETURNING` when specific data types are expected
    - Implement appropriate error handling for type conversions
 
 2. Performance considerations:
-
    - Use indexes on frequently queried `JSON` paths
 
 ## Learn more

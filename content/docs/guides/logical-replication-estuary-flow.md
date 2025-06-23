@@ -134,7 +134,6 @@ For information about configuring allowed IPs in Neon, see [Configure IP Allow](
    ![Creating a Neon capture connector in Estuary Flow](/docs/guides/estuary_flow_create_neon_capture.png)
 
    Enter the details for **your connection string** into the source connector fields. Based on the sample connection string above, the values would be specified as shown below. Your values will differ.
-
    - **Name:**: Name of the Capture connector
    - **Server Address**: ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432
    - **User**: cdc_role

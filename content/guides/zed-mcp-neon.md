@@ -84,7 +84,6 @@ This method runs the Neon MCP server locally on your machine, using a Neon API k
 4.  In the **Context Servers** section, click **+ Add Context Server**.
     ![Zed add context server](/docs/guides/zed/add-context-server.png)
 5.  Configure Neon Server:
-
     - Enter **Neon** in the **Name** field.
     - In the **Command** field, enter:
       ```bash

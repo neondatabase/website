@@ -78,7 +78,6 @@ To add the integration:
 1.  Select the Vercel projects to add the integration to. You can select **All Projects** or **Specific Projects** but be aware that you can only connect one Vercel project to one Neon project and vice versa. By selecting **All projects**, you are simply [making the integration available to other Vercel projects](#make-the-integration-available-to-other-vercel-projects).
 1.  Review the permissions required by the integration, and click **Install**.
 1.  In the **Integrate Neon** dialog:
-
     1.  Select a Vercel project.
         ![Select a Vercel project](/docs/guides/vercel_select_project.png)
     1.  Select the Neon project that you want to connect to your Vercel project by selecting the Neon project, database, and role that Vercel will use to connect.
@@ -97,7 +96,6 @@ To add the integration:
            </Admonition>
 
             When you finish making selections, click **Continue**.
-
     1.  Confirm the integration settings. This allows the integration to:
         - Set environment variables for your Vercel project's production, development, and preview environments.
         - Create database branches for preview deployments.
@@ -117,7 +115,6 @@ To add the integration:
        You will see the default branch of your project (`main`). If you created a development branch, you will also see a `vercel-dev` branch.
        ![Neon branches](/docs/guides/vercel_neon_branches.png)
 1.  To view the results of the integration in Vercel:
-
     1. Navigate to [Vercel](https://vercel.com/).
     1. Select the Vercel project you added the integration to.
     1. Select **Settings** > **Environment Variables**.
@@ -153,7 +150,6 @@ After you add the integration to a Vercel project, Neon creates a database branc
    ```
 
    Pushing the commit triggers the following actions:
-
    - The commit triggers a preview deployment in Vercel, as would occur without the Neon integration.
      ![Neon preview deployment branch](/docs/guides/vercel_deployments.png)
    - The integration creates a branch in Neon. This branch is an isolated copy-on-write clone of your default branch, with its own dedicated compute. The branch is created with the same name as your `git` branch but includes a `preview/` prefix.

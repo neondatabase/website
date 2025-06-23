@@ -18,7 +18,6 @@ Before you begin, make sure you have the following prerequisites:
 - **Python 3.10 or higher:** This guide requires Python 3.10 or a later version. If you don't have it installed, download it from [python.org](https://www.python.org/downloads/).
 
 - **Neon account and API key:**
-
   - Sign up for a free Neon account at [neon.tech](https://console.neon.tech/signup).
   - After signing up, get your Neon API Key from the [Neon console](https://console.neon.tech/app/settings/profile). This API key is needed to authenticate your application with Neon.
 
@@ -358,13 +357,11 @@ The graph visually represents the cyclical workflow of the LangGraph agent. Let'
 - **`__start__` Node:** This is the entry point of the graph. Execution begins here when a task is initiated. It represents the starting point of the agent's workflow.
 
 - **`agent` Node:** This node represents the core reasoning component of the agent, powered by the Gemini model.
-
   - **Decision Point:** The `agent` node is responsible for processing user input and deciding the next course of action. It determines whether to:
     - **Engage tools:** If the task requires database operations (like creating a project or running SQL queries), the agent decides to use the available tools. This is represented by the dotted line leading to the `tools` node.
     - **Respond directly:** If the agent can directly answer the user or has completed the task without needing further tool use, it can proceed to the `__end__` node. This is represented by the dotted line leading directly to the `__end__` node.
 
 - **`tools` Node:** This node is activated when the `agent` node decides to use a tool.
-
   - **Tool execution:** Within the `tools` node, the appropriate tool (either `create_database` or `run_sql_query` in this example) is executed based on the agent's decision.
   - **Feedback loop:** After executing the tool and obtaining results, the workflow loops back to the `agent` node (solid line). This allows the agent to process the tool's output, reason further, and decide on the next step based on the new information. This loop is central to the ReAct (Reason and Act) pattern, enabling iterative problem-solving.
 

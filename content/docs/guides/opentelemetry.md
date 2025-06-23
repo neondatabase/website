@@ -73,7 +73,6 @@ If you don't already have an OpenTelemetry-compatible observability platform, yo
 
    <details>
    <summary>Create New Relic license key</summary>
-
    1. Click on your user menu in the bottom left corner.
    2. Select **API Keys** from the menu.
 
@@ -114,14 +113,12 @@ You can enable either or both options based on your monitoring needs.
 2. Enter your **Endpoint** URL.
 
    For New Relic, enter:
-
    - US: `https://otlp.nr-data.net`
    - Europe: `https://otlp.eu01.nr-data.net`
 
    See [this table](https://docs.newrelic.com/docs/opentelemetry/best-practices/opentelemetry-otlp/#configure-endpoint-port-protocol) for other options.
 
 3. Configure authentication:
-
    - **Bearer**: Enter your bearer token or API key
    - **Basic**: Provide your username and password credentials
    - **API Key**: Enter your API key

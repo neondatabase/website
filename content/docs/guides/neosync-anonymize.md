@@ -85,7 +85,6 @@ To generate anonymized data, we need to create a **Job** in Neosync.
    ![Define Neosync job definition](/docs/guides/neosync_anon_job_definition.png)
 
 3. Click **Next** to move to the **Connect** page.
-
    - Select the location of the source data set from the dropdown. In this example, the location is the `neon-neosync` connection to the database on your `main` branch.
    - Select the location of the destination database where the data should be synced. In this example, the destination location is the `neosync-destination` connection to the database on your destination branch.
    - We'll also enable the **Truncate Before Insert** option to truncate the table before inserting data. This will replace the data that was copied when you created the destination branch and refresh the data each time you run the job.
@@ -95,7 +94,6 @@ To generate anonymized data, we need to create a **Job** in Neosync.
    Click **Next**.
 
 4. On the **Schema** page:
-
    - Under **Table Selection**, select the schema and table (`public.users` in this example) and move it from the source to the destination table.
    - Under **Transformer Mapping**, select all of the columns and choose a **Transfomer** to define the type of data you want to generate for each column. For the `age` column, we used the `Generate Random Int64` to randomly generate ages between 18 and 40. You can configure the generator by clicking on the edit icon next to the transformer and setting min and max values.
 

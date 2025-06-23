@@ -41,7 +41,6 @@ Let's start by creating a new project directory and setting up a virtual environ
    Creating a virtual environment isolates your project dependencies from other Python installations on your system.
 
 3. Activate the virtual environment:
-
    - On Windows:
      ```bash
      venv\Scripts\activate
