@@ -7,10 +7,14 @@ import { getWpPageBySlug } from 'utils/api-pages';
 
 const getPageType = async (slug) => {
   const templatePage = getPostBySlug(slug, TEMPLATE_PAGES_DIR_PATH);
-  if (templatePage) return 'template';
+  if (templatePage) {
+    return 'template';
+  }
 
   const wpPage = await getWpPageBySlug(slug);
-  if (wpPage) return 'wp';
+  if (wpPage) {
+    return 'wp';
+  }
 
   return null;
 };
