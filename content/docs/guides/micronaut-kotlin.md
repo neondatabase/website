@@ -3,7 +3,7 @@ title: Connect Micronaut Kotlin to Postgres on Neon
 subtitle: Learn how to make server-side queries to Postgres from a Micronaut Kotlin
   application
 enableTableOfContents: true
-updatedOn: '2025-05-09T22:55:40.565Z'
+updatedOn: '2025-06-23T15:24:08.777Z'
 ---
 
 [Micronaut](https://micronaut.io/) is a modern, JVM-based, full-stack framework for building modular, easily testable microservice and serverless applications. This guide describes how to create a Neon Postgres database and connect to it from a Micronaut Kotlin application.

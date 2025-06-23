@@ -3,7 +3,7 @@ title: The tablefunc extension
 subtitle: Reshape data with pivot tables and navigate hierarchical structures in
   Postgres
 enableTableOfContents: true
-updatedOn: '2025-05-27T19:40:34.756Z'
+updatedOn: '2025-06-23T15:24:08.759Z'
 tag: new
 ---
 
