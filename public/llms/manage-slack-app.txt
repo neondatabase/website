@@ -17,7 +17,7 @@
 
   <Button
     className="border-none md:mt-4"
-    to="https://slack.com/oauth/v2/authorize?client_id=2231113872023.8135357564067&scope=chat:write,commands,im:history,team:read&user_scope="
+    to="https://slack.com/oauth/v2/authorize?client_id=2231113872023.8135357564067&scope=channels:read,chat:write,chat:write.public,commands,groups:read,im:history,im:read,mpim:read,team:read,users:read"
     target="_blank"
     rel="noopener noreferrer"
     tagName="Add to Slack"
@@ -38,7 +38,7 @@ The Neon App for Slack allows you to monitor your Neon usage and manage organiza
 Click the **Add to Slack** button and follow the prompts.
 <Button
 className="border-none"
-to="https://slack.com/oauth/v2/authorize?client_id=2231113872023.8135357564067&scope=chat:write,commands,im:history,team:read&user_scope="
+to="https://slack.com/oauth/v2/authorize?client_id=2231113872023.8135357564067&scope=channels:read,chat:write,chat:write.public,commands,groups:read,im:history,im:read,mpim:read,team:read,users:read"
 target="\_blank"
 rel="noopener noreferrer"
 tagName="Add to Slack"
