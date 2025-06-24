@@ -287,7 +287,7 @@ Enabling HIPAA on an existing project will force a restart of all computes to ap
 
 <TabItem>
 
-To create a new HIPAA-compliant Neon project via the Neon CLI, use the `--hipaa` option with the `neon projects create` command, as shown below.
+To create a new HIPAA-compliant Neon project via the [Neon CLI](/docs/reference/neon-cli), use the `--hipaa` option with the `neon projects create` command, as shown below.
 
 ```bash
 neon projects create --hipaa
