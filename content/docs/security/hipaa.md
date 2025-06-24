@@ -293,7 +293,7 @@ To create a new HIPAA-compliant Neon project via the [Neon CLI](/docs/reference/
 neon projects create --hipaa
 ```
 
-To enable HIPAA for an existing project, use the `--hippa` option with the `neon projects update` command, as shown below:
+To enable HIPAA for an existing project, use the `--hipaa` option with the `neon projects update` command, as shown below:
 
 ```bash
 neon projects update my-project --hipaa
