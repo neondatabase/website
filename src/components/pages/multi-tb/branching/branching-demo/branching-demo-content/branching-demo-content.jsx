@@ -2,7 +2,6 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Button from 'components/shared/button';
-import LINKS from 'constants/links';
 
 const BranchingDemoContent = ({
   title,
@@ -31,8 +30,8 @@ const BranchingDemoContent = ({
         <div className="flex gap-4">
           <Button
             className={clsx('h-8 px-4 text-[13px] font-medium leading-none tracking-extra-tight')}
-            to={LINKS.signup}
-            theme="primary"
+            to={button.to}
+            theme={button.theme}
           >
             {button.text}
           </Button>
@@ -42,7 +41,7 @@ const BranchingDemoContent = ({
             withArrow
             onClick={handleNextStep}
           >
-            {button.text}
+            Restart the demo
           </Button>
         </div>
       ) : (
@@ -68,6 +67,7 @@ BranchingDemoContent.propTypes = {
   description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
   button: PropTypes.shape({
     text: PropTypes.string.isRequired,
+    to: PropTypes.string,
     theme: PropTypes.string.isRequired,
   }).isRequired,
   handleNextStep: PropTypes.func.isRequired,

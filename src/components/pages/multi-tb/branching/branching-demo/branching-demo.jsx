@@ -8,6 +8,7 @@ import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
+import LINKS from 'constants/links';
 import useBranchingDemo from 'hooks/use-branching-demo';
 import useToast from 'hooks/use-toast';
 import branchingDemo from 'images/pages/multi-tb/branching-demo/branching-demo.jpg';
@@ -146,8 +147,9 @@ const BranchingDemo = ({ className }) => {
       title: "Yay, it's back!",
       description: `In about <span class="text-white">${executionTime ? `${executionTime} ms` : '......'}</span>, you restored your copied database of <span class="text-white">${isSizeLoading ? '......' : databaseSize}</span> to its original state. Try this on your own data, sign up for Neon.`,
       button: {
-        text: 'Restart the demo',
-        theme: 'gray-20',
+        text: 'Sign up',
+        to: LINKS.signup,
+        theme: 'primary',
       },
       iconClassName: 'branching-demo-restore-icon',
     },
