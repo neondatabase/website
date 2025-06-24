@@ -208,7 +208,7 @@ For updates on HIPAA support for these features, contact [hipaa@neon.tech](mailt
 
 Once a Business Associate Agreement (BAA) has been signed and you have the HIPAA add-on enabled, you can create a HIPAA-compliant project or enable HIPAA for an existing project.
 
-<Tabs labels={["New project", "Existing project", "API"]}>
+<Tabs labels={["New project", "Existing project", "API", "CLI"]}>
 
 <TabItem>
 
@@ -277,6 +277,26 @@ curl --request PATCH \
   }
 }
 '
+```
+
+<Admonition type="important">
+Enabling HIPAA on an existing project will force a restart of all computes to apply the new setting. This will temporarily interrupt database connections.
+</Admonition>
+
+</TabItem>
+
+<TabItem>
+
+To create a new HIPAA-compliant Neon project via the [Neon CLI](/docs/reference/neon-cli), use the `--hipaa` option with the `neon projects create` command, as shown below.
+
+```bash
+neon projects create --hipaa
+```
+
+To enable HIPAA for an existing project, use the `--hipaa` option with the `neon projects update` command, as shown below:
+
+```bash
+neon projects update my-project --hipaa
 ```
 
 <Admonition type="important">
