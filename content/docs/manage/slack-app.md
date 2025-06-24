@@ -2,7 +2,7 @@
 title: Neon App for Slack
 enableTableOfContents: true
 subtitle: Track your Neon projects and organizations from Slack
-updatedOn: '2025-06-24T17:04:09.242Z'
+updatedOn: '2025-06-24T19:53:10.944Z'
 ---
 
 <figure className="doc-cta not-prose rounded-[10px] my-5 flex items-end gap-x-16 px-7 py-6 md:flex-col md:items-start border border-gray-new-90 bg-[linear-gradient(to_right,#FAFAFA_0%,rgba(250,250,250,0)100%)] dark:border-gray-new-20 dark:bg-[linear-gradient(to_right,#18191B_28.86%,#131415_74.18%)]">
@@ -13,7 +13,7 @@ updatedOn: '2025-06-24T17:04:09.242Z'
   <Button
     className="border-none md:mt-4"
     to="https://slack.com/oauth/v2/authorize?client_id=2231113872023.8135357564067&scope=channels:read,chat:write,chat:write.public,commands,groups:read,im:history,im:read,mpim:read,team:read,users:read"
-    target="_blank"
+    target="\_blank"
     rel="noopener noreferrer"
     tagName="Add to Slack"
     analyticsEvent="click_add_to_slack_link">
