@@ -87,7 +87,7 @@ const Button = ({
     <Tag
       className={className}
       to={to}
-      withArrow={withArrow || undefined}
+      {...(withArrow ? { withArrow } : {})}
       onClick={() => {
         if (handleClick) handleClick();
         handleAnalytics('clicked');
