@@ -13,7 +13,7 @@ updatedOn: '2025-06-24T17:04:09.242Z'
   <Button
     className="border-none md:mt-4"
     to="https://slack.com/oauth/v2/authorize?client_id=2231113872023.8135357564067&scope=channels:read,chat:write,chat:write.public,commands,groups:read,im:history,im:read,mpim:read,team:read,users:read"
-    target="_blank"
+    target="\_blank"
     rel="noopener noreferrer"
     tagName="Add to Slack"
     analyticsEvent="click_add_to_slack_link">
@@ -97,7 +97,7 @@ Use `/neon disconnect` to remove your Neon account connection and unsubscribe fr
 
 ## Data deletion
 
-Neon respects your right to request deletion of your personal data at any time. To do so, email us at <privacy@neon.tech> or submit a support ticket via the Neon Console. Once we verify your identity, we will delete your data within 30 days, unless a legal or contractual obligation requires us to retain it. For more details, see our [Privacy Policy](/privacy-policy).
+Neon respects your right to request deletion of your personal data at any time. To do so, email us at privacy@neon.tech or submit a support ticket via the Neon Console. Once we verify your identity, we will delete your data within 30 days, unless a legal or contractual obligation requires us to retain it. For more details, see our [Privacy Policy](/privacy-policy).
 
 ## Support
 
