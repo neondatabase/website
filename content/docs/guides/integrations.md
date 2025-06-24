@@ -60,8 +60,6 @@ updatedOn: '2025-04-23T12:26:38.333Z'
 
 <a href="/docs/guides/postgrest" title="PostgREST" description="Create a REST API from your Neon database" icon="postgresql"></a>
 
-<a href="/docs/guides/ferretdb" title="FerretDB" description="Use FerretDB with Neon" icon="ferret"></a>
-
 <a href="/docs/guides/grafbase" title="Grafbase" description="Use Grafbase Edge Resolvers with Neon" icon="grafbase"></a>
 
 <a href="/docs/guides/hasura" title="Hasura" description="Connect from Hasura Cloud to Neon" icon="hasura"></a>
