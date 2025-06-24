@@ -9,81 +9,6 @@ import glass from 'images/pages/multi-tb/branching-demo/glass.jpg';
 
 import BranchingDemo from './branching-demo';
 
-const STEPS = [
-  {
-    id: 'step-1',
-    name: 'Step #1',
-    title: 'Copy your database in milliseconds - regardless of size',
-    description:
-      "In this demo, you will create a copy of your database, make changes to it, and restore it to the original state in milliseconds. Behind the scenes, you are leveraging Neon's instant branching.",
-    button: {
-      text: "Let's begin",
-      theme: 'primary',
-    },
-    iconClassName: 'branching-demo-speedometer-icon',
-  },
-  {
-    id: 'step-2',
-    name: 'Step #2',
-    title: 'Create your own Postgres database',
-    description:
-      'A Neon database is created in under a second. For now, we have prepared a database for you to copy. Currently, the size of this database is about 4101.57 GiB.',
-    button: {
-      text: 'Create a copy',
-      theme: 'primary',
-    },
-    iconClassName: 'branching-demo-database-icon',
-  },
-  {
-    id: 'step-3',
-    name: 'Step #3',
-    title: 'I want to make changes in the copy',
-    description:
-      "In about 308 ms, your copy of 4101.57 GiB was created. Now, let's make a change to make sure that it is an isolated copy of your original database.",
-    button: {
-      text: 'Remove selected rows',
-      theme: 'red-filled',
-    },
-    iconClassName: 'branching-demo-clone-icon',
-  },
-  {
-    id: 'step-4',
-    name: 'Step #4',
-    title: 'I want to make more changes in the copy',
-    description:
-      "In about 75.49 ms, you dropped a row in your copied database. Now, let's make one more change to make sure that your data is quite different from the original database.",
-    button: {
-      text: 'Add a random row',
-      theme: 'primary',
-    },
-    iconClassName: 'branching-demo-circle-minus-icon',
-  },
-  {
-    id: 'step-5',
-    name: 'Step #5',
-    title: 'But... I messed it up!',
-    description:
-      'In about 29.15 ms, you inserted a row in your copied database. But what if you wanted to restore the initial state?',
-    button: {
-      text: 'Restore the database',
-      theme: 'primary',
-    },
-    iconClassName: 'branching-demo-circle-plus-icon',
-  },
-  {
-    id: 'step-6',
-    name: 'Step #6',
-    title: "Yay, it's back!",
-    description:
-      'In about 964 ms, you restored your copied database of 4101.57 GiB to its original state. Try this on your own data, sign up for Neon.',
-    button: {
-      text: 'Restart the demo',
-      theme: 'gray-20',
-    },
-    iconClassName: 'branching-demo-restore-icon',
-  },
-];
-
 const Branching = () => (
   <section className="branching mt-[168px] overflow-hidden pb-[100px] lg:mt-24 md:mt-[68px]">
     <Container className="max-w-3xl lg:mx-24 md:mx-auto md:max-w-sm" size="576" as="header">
@@ -120,7 +45,7 @@ const Branching = () => (
           />
           <GradientBorder withBlend />
         </div>
-        <BranchingDemo className="md:hidden" steps={STEPS} />
+        <BranchingDemo className="md:hidden" />
         <div
           className="branching-demo-glass absolute -left-[8px] -top-[8px] -z-20 h-[calc(100%+16px)] w-[calc(100%+16px)] overflow-hidden rounded-[14px] md:hidden"
           aria-hidden
