@@ -758,8 +758,6 @@
               slug: guides/exograph
             - title: PostgREST
               slug: guides/postgrest
-            - title: FerretDB
-              slug: guides/ferretdb
             - title: Grafbase
               slug: guides/grafbase
             - title: Hasura
