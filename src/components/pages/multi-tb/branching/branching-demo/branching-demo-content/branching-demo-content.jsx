@@ -26,38 +26,40 @@ const BranchingDemoContent = ({
       className="mt-2.5 text-[15px] leading-snug tracking-extra-tight text-gray-new-70 lg:text-[14px]"
       dangerouslySetInnerHTML={{ __html: description }}
     />
-    {step === 5 ? (
-      <div className="mt-[23px] flex gap-4 lg:mt-[21px]">
+    <div className="mt-[23px] lg:mt-[21px]">
+      {step === 5 ? (
+        <div className="flex gap-4">
+          <Button
+            className={clsx('h-8 px-4 text-[13px] font-medium leading-none tracking-extra-tight')}
+            to={LINKS.signup}
+            theme="primary"
+          >
+            {button.text}
+          </Button>
+          <Button
+            className="text-[13px] font-medium"
+            theme="white"
+            withArrow
+            onClick={handleNextStep}
+          >
+            {button.text}
+          </Button>
+        </div>
+      ) : (
         <Button
-          className={clsx('h-8 px-4 text-[13px] font-medium leading-none tracking-extra-tight')}
-          to={LINKS.signup}
-          theme="primary"
-        >
-          {button.text}
-        </Button>
-        <Button
-          className="text-[13px] font-medium"
-          theme="white"
-          withArrow
+          className={clsx(
+            'h-8 px-4 text-[13px] font-medium leading-none tracking-extra-tight',
+            disabled && 'cursor-not-allowed',
+            isLoading && 'cursor-progress'
+          )}
+          theme={button.theme}
+          disabled={disabled}
           onClick={handleNextStep}
         >
           {button.text}
         </Button>
-      </div>
-    ) : (
-      <Button
-        className={clsx(
-          'mt-[23px] h-8 px-4 text-[13px] font-medium leading-none tracking-extra-tight lg:mt-[21px]',
-          disabled && 'cursor-not-allowed',
-          isLoading && 'cursor-progress'
-        )}
-        theme={button.theme}
-        disabled={disabled}
-        onClick={handleNextStep}
-      >
-        {button.text}
-      </Button>
-    )}
+      )}
+    </div>
   </div>
 );
 
