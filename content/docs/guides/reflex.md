@@ -38,7 +38,7 @@ To create a virtual environment, run the following command in your project direc
     source .venv/bin/activate
     ```
 
-    ```
+    ```shell
     py -3 -m venv .venv
     .venv\Scripts\activate
     ```
