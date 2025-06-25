@@ -27,6 +27,8 @@ import GearGradientIcon from 'icons/header/gear-gradient.inline.svg';
 import GearIcon from 'icons/header/gear.inline.svg';
 import MigrationGradientIcon from 'icons/header/migration-gradient.inline.svg';
 import MigrationIcon from 'icons/header/migration.inline.svg';
+import MultiTbgGradientIcon from 'icons/header/multi-tb-gradient.inline.svg';
+import MultiTbgIcon from 'icons/header/multi-tb.inline.svg';
 import PatternGradientIcon from 'icons/header/pattern-gradient.inline.svg';
 import PatternIcon from 'icons/header/pattern.inline.svg';
 import PeopleIcon from 'icons/header/people.inline.svg';
@@ -175,6 +177,13 @@ export default {
               title: 'Agents',
               description: 'Deploy Postgres via AI agents',
               to: `${LINKS.useCases}/ai-agents`,
+            },
+            {
+              icon: MultiTbgIcon,
+              iconGradient: MultiTbgGradientIcon,
+              title: 'Multi-TB',
+              description: 'Scale & restore instantly',
+              to: `${LINKS.useCases}/multi-tb`,
             },
           ],
         },
