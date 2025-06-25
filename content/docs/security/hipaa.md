@@ -71,7 +71,7 @@ Neon maintains a comprehensive audit trail to support HIPAA compliance. This inc
 
 > Self-serve access to HIPAA audit logs is currently not supported. Access to audit logs can be requested by contacting `hipaa@neon.tech`.
 
-### Neon Console audit logs
+### Neon console audit logs
 
 Neon logs operations performed via the Neon Console interface. These actions are initiated through the UI and correspond to API requests made to the Neon backend. Examples of logged operations may include:
 
@@ -90,7 +90,7 @@ To protect sensitive information, Neon filters data in audit logs using the foll
 
 ### API audit logs
 
-Neon logs operations performed via the Neon API, covering the same categories of actions available in the Neon Console—such as project, branch, compute, and role management—but triggered programmatically. API audit logs do not currently include request payloads.
+Neon logs operations performed via the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), covering the same categories of actions available in the Neon console—such as project, branch, compute, and role management—but triggered programmatically. API audit logs do not currently include request payloads.
 
 To protect sensitive information, audit logs for API activity follow the same data filtering approach used for Neon Console audit logs (described above).
 
@@ -199,8 +199,8 @@ If you need to request access to audit logs, contact [Neon support](https://neon
 
 The following features are not currently HIPAA-compliant and should not be used in projects containing HIPAA-protected data:
 
-- **Neon Auth** – Uses an authentication provider that is not covered under Neon’s HIPAA compliance.
-- **Data API (currently in private preview)** – Hosted outside Neon’s HIPAA-compliant infrastructure.
+- [Neon Auth](/docs/neon-auth/overview) – Uses an authentication provider that is not covered under Neon’s HIPAA compliance.
+- [Data API](/docs/data-api/get-started) – Hosted outside Neon’s HIPAA-compliant infrastructure.
 
 For updates on HIPAA support for these features, contact [hipaa@neon.tech](mailto:hipaa@neon.tech).
 
@@ -308,6 +308,10 @@ Enabling HIPAA on an existing project will force a restart of all computes to ap
 </Tabs>
 
 If you have trouble enabling HIPAA, contact `hipaa@neon.tech`.
+
+<Admonition type="important">
+To avoid potential log loss, you must ensure your computes are appropriately sized for your workload. Smaller compute (such as 0.5 CU computes) can become saturated by heavy audit logging, which may lead to unexpected behavior—such as the inability to capture and store all log events. It is the customer’s responsibility to provision sufficient compute resources to support logging. For how to change your compute size, see [Edit a compute](/docs/manage/computes#edit-a-compute). If you need assistance determining an appropriate compute size, please reach out to [Neon Support](https://console.neon.tech/app/projects?modal=support).
+</Admonition>
 
 ## Disabling HIPAA
 
