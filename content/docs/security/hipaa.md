@@ -309,10 +309,6 @@ Enabling HIPAA on an existing project will force a restart of all computes to ap
 
 If you have trouble enabling HIPAA, contact `hipaa@neon.tech`.
 
-<Admonition type="important">
-To avoid potential log loss, you must ensure your computes are appropriately sized for your workload. Smaller compute (such as 0.5 CU computes) can become saturated by heavy audit logging, which may lead to unexpected behavior—such as the inability to capture and store all log events. It is the customer’s responsibility to provision sufficient compute resources to support logging. For how to change your compute size, see [Edit a compute](/docs/manage/computes#edit-a-compute). If you need assistance determining an appropriate compute size, please reach out to [Neon Support](https://console.neon.tech/app/projects?modal=support).
-</Admonition>
-
 ## Disabling HIPAA
 
 Once HIPAA compliance is enabled for a Neon project, it cannot be disabled.
