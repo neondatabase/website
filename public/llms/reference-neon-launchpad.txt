@@ -88,7 +88,7 @@ export default defineConfig({
 
 **How the plugin works:**
 
-1. When running `vite dev` or `vite build`, the plugin checks if the `envKey` (default: `DATABASE_URL`) exists in your environment (default: `.env`) file
+1. When running `vite dev`, the plugin checks if the `envKey` (default: `DATABASE_URL`) exists in your environment (default: `.env`) file
 2. If the environment variable exists, the plugin takes no action
 3. If the environment variable is missing, the plugin:
    - Automatically creates a new Neon claimable database
