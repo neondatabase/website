@@ -57,6 +57,13 @@ The remote hosted MCP server is currently in its preview phase. As the [OAuth sp
 - An MCP Client application (e.g., Cursor, Windsurf, Claude Desktop, Cline, Zed).
 - A Neon account.
 
+<Admonition type="tip" title="Install in a single click for Cursor users">
+Click the button below to install the Neon MCP server in Cursor. When prompted, click **Install** within Cursor.
+
+<a href="https://cursor.com/install-mcp?name=Neon&config=eyJjb21tYW5kIjoibnB4IC15IG1jcC1yZW1vdGVAbGF0ZXN0IGh0dHBzOi8vbWNwLm5lb24udGVjaC9zc2UifQ%3D%3D"><img src="https://cursor.com/deeplink/mcp-install-dark.svg" alt="Add Neon MCP server to Cursor" height="32" /></a>
+
+</Admonition>
+
 #### Setup steps:
 
 1.  Go to your MCP Client's settings where you configure MCP Servers (this varies by client)

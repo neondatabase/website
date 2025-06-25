@@ -89,6 +89,14 @@ For more, see [Get started with Neon MCP server with Claude Desktop](/guides/neo
 <Tabs labels={["Remote MCP Server", "Local MCP Server"]}>
 <TabItem>
 
+### Quick Install (Recommended)
+
+Click the button below to install the Neon MCP server in Cursor. When prompted, click **Install** within Cursor.
+
+<a href="https://cursor.com/install-mcp?name=Neon&config=eyJjb21tYW5kIjoibnB4IC15IG1jcC1yZW1vdGVAbGF0ZXN0IGh0dHBzOi8vbWNwLm5lb24udGVjaC9zc2UifQ%3D%3D"><img src="https://cursor.com/deeplink/mcp-install-dark.svg" alt="Add Neon MCP server to Cursor" height="32" /></a>
+
+### Manual Setup
+
 1.  Open Cursor. Create a `.cursor` directory in your project root if needed.
 2.  Create or open the `mcp.json` file in the `.cursor` directory.
 3.  Add the "Neon" server entry within the `mcpServers` object:
