@@ -1,7 +1,7 @@
 ---
 title: Transfer projects
 enableTableOfContents: true
-updatedOn: '2025-02-28T20:32:00.526Z'
+updatedOn: '2025-06-25T02:56:37.087Z'
 ---
 
 You can transfer your projects to any organization you are a member of. You can do this individually from project **Settings**, in bulk from organization **Settings**, or via the Neon API.
