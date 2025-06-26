@@ -91,7 +91,7 @@ The following example shows how a `List project branches` operation is captured 
 
 **Audit log record:**
 
-```ini
+```ini shouldWrap
 fb7c2e2f-cb09-4405-b543-dbe1b88614b6 2025-05-25 10:18:45.340 +0000 `{ "changes": [], "sync_id": 57949 }` e640c32c-0387-4fc2-8ca5-f823f7ebc4b6 GET `{}` /projects/misty-breeze-49601234/branches a92b3088-7f92-4871-bf91-0aac64edc4b6 b8c58a4b-0a33-4d54-987e-4155e95a64b6 2025-05-24 15:42:39.088 +0000 misty-breeze-49601234 keycloak 200 `{}` ListProjectBranches 0
 ```
 
