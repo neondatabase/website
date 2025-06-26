@@ -65,7 +65,7 @@ Audit events may not be logged if database endpoints experience exceptionally he
 
 Neon maintains a comprehensive audit trail to support HIPAA compliance. This includes the following categories of logged events:
 
-1. [Neon Console and API audit logs](#neon-console-api-audit-logs): Captures user actions in the Neon Console and via the Neon API.
+1. [Neon Console and API audit logs](#neon-console-and-api-audit-logs): Captures user actions in the Neon Console and via the Neon API.
 2. [Postgres audit logs](#postgres-audit-logs-pgaudit): Logged using the [pgAudit](https://www.pgaudit.org/) extension (`pgaudit`) for Postgres.
 
 > Self-serve access to HIPAA audit logs is currently not supported. Access to audit logs can be requested by contacting `hipaa@neon.tech`.
