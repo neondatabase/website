@@ -65,34 +65,57 @@ Audit events may not be logged if database endpoints experience exceptionally he
 
 Neon maintains a comprehensive audit trail to support HIPAA compliance. This includes the following categories of logged events:
 
-1. [Neon Console audit logs](#neon-console-audit-logs): Captures user actions in the Neon Console.
-2. [API audit logs](#api-audit-logs): Logs API requests.
-3. [Postgres audit logs](#postgres-audit-logs-pgaudit): Logged using the [pgAudit](https://www.pgaudit.org/) extension (`pgaudit`) for Postgres.
+1. [Neon Console and API audit logs](#neon-console-api-audit-logs): Captures user actions in the Neon Console and via the Neon API.
+2. [Postgres audit logs](#postgres-audit-logs-pgaudit): Logged using the [pgAudit](https://www.pgaudit.org/) extension (`pgaudit`) for Postgres.
 
 > Self-serve access to HIPAA audit logs is currently not supported. Access to audit logs can be requested by contacting `hipaa@neon.tech`.
 
-### Neon console audit logs
+### Neon console and API audit logs
 
-Neon logs operations performed via the Neon Console interface. These actions are initiated through the UI and correspond to API requests made to the Neon backend. Examples of logged operations may include:
+Neon logs operations performed via the Neon Console interface and the Neon API. Examples of logged operations may include these, among other operations:
 
-- **Project management**: creating, deleting, renaming projects
-- **Branch management**: creating, deleting, renaming branches
+- **Project management**: creating, deleting, listing projects
+- **Branch management**: creating, deleting, listing branches
 - **Compute management**: starting and stopping of compute instances
 - **Database and role management**: creating or deleting databases and roles
-- **Connection setup**: copying connection strings
-- **Organization and access**: inviting or removing organization members and collaborators
 
 To protect sensitive information, Neon filters data in audit logs using the following approach:
 
-- Sensitive fields (such as `connection_uri` and `password`) are excluded from logs whereever possible. These are identified using `x-sensitive` tags in the OpenAPI specification.
+- Sensitive fields (such as `connection_uri` and `password`) are excluded from logs whereever possible.
 - `GET` requests: Only query parameters are logged; response payloads are not recorded.
 - Mutation requests (`PATCH`, `PUT`, `POST`, `DELETE`): Request and response bodies are logged with sensitive fields redacted.
 
-### API audit logs
+#### Neon console and API audit log example
 
-Neon logs operations performed via the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), covering the same categories of actions available in the Neon console—such as project, branch, compute, and role management—but triggered programmatically. API audit logs do not currently include request payloads.
+The following example shows how a `List project branches` operation is captured in Neon’s audit logs. The table provides a description of the log record's parts.
 
-To protect sensitive information, audit logs for API activity follow the same data filtering approach used for Neon Console audit logs (described above).
+**Audit log record:**
+
+```ini
+fb7c2e2f-cb09-4405-b543-dbe1b88614b6 2025-05-25 10:18:45.340 +0000 { "changes": [], "sync_id": 57949 } e640c32c-0387-4fc2-8ca5-f823f7ebc4b6 GET {} /projects/misty-breeze-49601234/branches a92b3088-7f92-4871-bf91-0aac64edc4b6 b8c58a4b-0a33-4d54-987e-4155e95a64b6 2025-05-24 15:42:39.088 +0000 misty-breeze-49601234 keycloak 200 {} ListProjectBranches 0
+```
+
+**Field descriptions:**
+
+| **Field position** | **Example value**                            | **Description**                                             |
+|--------------------|----------------------------------------------|-------------------------------------------------------------|
+| 1                  | fb7c2e2f-cb09-4405-b543-dbe1b88614b6         | Unique ID for the raw log event                             |
+| 2                  | 2025-05-25 10:18:45.340 +0000                | Timestamp when Airbyte extracted the record                 |
+| 3                  | { "changes": [], "sync_id": 57949 }          | Metadata from the ingestion tool                            |
+| 4                  | e640c32c-0387-4fc2-8ca5-f823f7ebc4b6         | Unique identifier for the API event                         |
+| 5                  | GET                                          | HTTP method used in the request                             |
+| 6                  | {}                                           | Request body payload (if present)                           |
+| 7                  |                                              | Reserved for future metadata fields (empty in this case)    |
+| 8                  | /projects/misty-breeze-49601234/branches     | URL path of the API call                                    |
+| 9                  | a92b3088-7f92-4871-bf91-0aac64edc4b6         | Internal ID for the response object                         |
+| 10                 | b8c58a4b-0a33-4d54-987e-4155e95a64b6         | Internal ID representing the auth/session context           |
+| 11                 | 2025-05-24 15:42:39.088 +0000                | Actual time when the API call was made                      |
+| 12                 | misty-breeze-49601234                        | Project identifier targeted by the API call                 |
+| 13                 | keycloak                                     | Authentication mechanism used                               |
+| 14                 | 200                                          | HTTP status code of the response                            |
+| 15                 | {}                                           | Resource identifiers returned (if any)                      |
+| 16                 | ListProjectBranches                          | Operation name associated with the endpoint                 |
+| 17                 | 0                                            | Internal sync batch identifier                              |
 
 ### Postgres audit logs (pgAudit)
 
@@ -130,13 +153,13 @@ This behavior is a known issue. We recommend avoiding the inclusion of raw crede
 
 For more details, see the [pgAudit documentation](https://github.com/pgaudit/pgaudit).
 
-### Audit log storage and forwarding
+#### Audit log storage and forwarding
 
 - Logs are written using the standard [PostgreSQL logging facility](https://www.postgresql.org/docs/current/runtime-config-logging.html).
 - Logs are sent to a dedicated Neon audit collector endpoint and securely stored.
 - Each log entry includes metadata such as the timestamp of the activity, the Neon compute ID (`endpoint_id`), Neon project ID (`project_id`), the Postgres role, the database accessed, and the method of access (e.g.,`neon-internal-sql-editor`), etc. See the following log record example and field descriptions:
 
-### SQL audit log record example
+#### Postgres audit log example
 
 The following example shows how a simple SQL command—`CREATE SCHEMA IF NOT EXISTS healthcare`—is captured in Neon’s audit logs. The table provides a description of the log record's parts.
 
@@ -182,18 +205,9 @@ The following example shows how a simple SQL command—`CREATE SCHEMA IF NOT EXI
 | 29–35              | _(empty)_                               | Reserved/unused fields.                                                           |
 | 36                 | neon-internal-sql-editor                | Application name or source of the query (e.g., SQL Editor in the Neon Console).   |
 
-### Extension configuration
+#### Extension configuration
 
 The `pgaudit` extension is preloaded on HIPAA-enabled Neon projects. For extension version information, see [Supported Postgres extensions](/docs/extensions/pg-extensions).
-
-### Compliance assurance
-
-This logging configuration supports HIPAA compliance by:
-
-- Capturing a comprehensive audit trail of database and console activity.
-- Avoiding inclusion of sensitive data in logs unless explicitly configured.
-
-If you need to request access to audit logs, contact [Neon support](https://neon.tech/contact-support).
 
 ## Non-HIPAA-compliant features
 
