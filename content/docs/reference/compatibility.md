@@ -277,5 +277,4 @@ ICU also supports creating custom collations. For more information, see [ICU Cus
 
 For more about collations in Postgres, see [Collation Support](https://www.postgresql.org/docs/current/collation.html#COLLATION).
 
-
 <NeedHelp/>

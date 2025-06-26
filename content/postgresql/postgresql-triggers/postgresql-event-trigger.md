@@ -14,7 +14,6 @@ nextLink:
   slug: 'postgresql-triggers/postgresql-trigger-when-condition'
 ---
 
-
 **Summary**: in this tutorial, you will learn about PostgreSQL event triggers and how to use the `CREATE EVENT TRIGGER` statement to define a new event trigger.
 
 ## Introduction to the PostgreSQL event trigger
