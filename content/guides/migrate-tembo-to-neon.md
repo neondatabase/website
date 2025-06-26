@@ -65,7 +65,7 @@ Neon's Import Data Assistant automates moving your existing database to Neon. It
 Before you start with the assistant, You'll need:
 
 - **Tembo connection string:** You'll need a direct connection string to your Tembo database in the format:
-  `postgresql://username:password@host:port/database?sslmode=require`
+  `postgresql://username:password@host:port/database?sslmode=require&channel_binding=require`
 - **Admin privileges:** Ensure the user in the connection string has `SUPERUSER` or sufficient privileges (`CREATE`, `SELECT`, `INSERT`, `REPLICATION`) on the source Tembo database.
 - **Database size:** Your Tembo database must be **smaller than 10GB**.
 - **Region:** The feature is currently supported only for Neon projects in AWS regions.

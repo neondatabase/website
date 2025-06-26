@@ -190,7 +190,7 @@ Next, let's set up a connection to Neon Postgres for storing user data.
 Create a `.env` file in your project root and add the following configuration:
 
 ```env
-DATABASE_URL=postgres://user:password@your-neon-hostname.neon.tech/dbname?sslmode=require
+DATABASE_URL=postgres://user:password@your-neon-hostname.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 Replace the placeholders with your actual Neon database credentials.

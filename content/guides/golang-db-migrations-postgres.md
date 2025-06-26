@@ -169,7 +169,7 @@ Notice how the down migration drops objects in reverse order compared to how the
 To run migrations against your Neon database, you'll need to construct a proper connection string. Neon provides a secure, TLS-enabled connection:
 
 ```
-postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
+postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
 ```
 
 Replace the placeholders with your actual Neon connection details, which you can find in the Neon Console under your project's connection settings.
@@ -177,7 +177,7 @@ Replace the placeholders with your actual Neon connection details, which you can
 For convenience, you might want to store this connection string in an environment variable:
 
 ```bash
-export NEON_DB_URL="postgresql://user:password@ep-example-123456.us-east-2.aws.neon.tech/neondb?sslmode=require"
+export NEON_DB_URL="postgresql://user:password@ep-example-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
 ```
 
 ## Running Migrations

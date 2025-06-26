@@ -145,7 +145,7 @@ First, add the Flyway Maven plugin to your `pom.xml` file:
             <artifactId>flyway-maven-plugin</artifactId>
             <version>8.0.0</version>
             <configuration>
-				<url>jdbc:postgresql://<your_neon_hostname>/neondb?sslmode=require</url>
+				<url>jdbc:postgresql://<your_neon_hostname>/neondb?sslmode=require&channel_binding=require</url>
                 <user>${spring.datasource.username}</user>
                 <password>${spring.datasource.password}</password>
                 <locations>

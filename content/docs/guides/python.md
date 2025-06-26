@@ -66,7 +66,7 @@ You can find the connection details for your database by clicking the **Connect*
 Your connection string will look something like this:
 
 ```shell shouldWrap
-DATABASE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
+DATABASE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
 ```
 
 ## Configure your python script
