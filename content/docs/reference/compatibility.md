@@ -277,17 +277,5 @@ ICU also supports creating custom collations. For more information, see [ICU Cus
 
 For more about collations in Postgres, see [Collation Support](https://www.postgresql.org/docs/current/collation.html#COLLATION).
 
-## Event triggers
-
-Postgres [event triggers](https://www.postgresql.org/docs/current/event-triggers.html), which require Postgres superuser privileges, are currently not supported. Unlike regular triggers, which are attached to a single table and capture only DML events, event triggers are global to a particular database and are capable of capturing DDL events.
-
-Attempting to create an event trigger will produce errors similar to these:
-
-```sql
-ERROR: permission denied to create event trigger "your_trigger_name" (SQLSTATE 42501)
-
-ERROR:  permission denied to create event trigger "your_trigger_name"
-HINT:  Must be superuser to create an event trigger.
-```
 
 <NeedHelp/>

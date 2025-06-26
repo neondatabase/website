@@ -65,8 +65,7 @@ Once checks pass, we'll:
 
 - Currently limited to databases **smaller than 10GB**. We are actively working on supporting bigger workloads. In the meantime, conctact support if you are looking to migrate bigger databases.
 - The feature is supported in **AWS regions** only.
-- Databases that use **event triggers are not supported**.
-- Supabase and Heroku databases are not supported, as both use proprietary event triggers.
+- Supabase and Heroku databases are not supported due to unsupported Postgres extensions.
 - Databases running on **IPv6 are not supported yet**.
 - AWS RDS is generally supported, though some incompatibilities may exist. Support for other providers may vary.
 

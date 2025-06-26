@@ -77,8 +77,7 @@ During import, your source database remains untouched — we only read from it t
 - Currently limited to databases **smaller than 10GB**. We are actively working on supporting bigger workloads. In the meantime, contact support if you are looking to migrate bigger databases.
 - There is a 1-hour limit on import operations. For faster imports, we recommend importing to a Neon project created in the same region as your source database.
 - The feature is supported in **AWS regions** only.
-- Databases that use **event triggers are not supported**.
-- Supabase and Heroku databases are not supported, as both use event triggers or unsupported Postgres extensions.
+- Supabase and Heroku databases are not supported due to unsupported Postgres extensions.
 - Databases running on **IPv6 are not supported yet**.
 - AWS RDS is generally supported, though some incompatibilities may exist. Support for other providers may vary.
 
