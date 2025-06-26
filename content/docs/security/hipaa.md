@@ -92,7 +92,7 @@ The following example shows how a `List project branches` operation is captured 
 **Audit log record:**
 
 ```ini
-fb7c2e2f-cb09-4405-b543-dbe1b88614b6 2025-05-25 10:18:45.340 +0000 { "changes": [], "sync_id": 57949 } e640c32c-0387-4fc2-8ca5-f823f7ebc4b6 GET {} /projects/misty-breeze-49601234/branches a92b3088-7f92-4871-bf91-0aac64edc4b6 b8c58a4b-0a33-4d54-987e-4155e95a64b6 2025-05-24 15:42:39.088 +0000 misty-breeze-49601234 keycloak 200 {} ListProjectBranches 0
+fb7c2e2f-cb09-4405-b543-dbe1b88614b6 2025-05-25 10:18:45.340 +0000 `{ "changes": [], "sync_id": 57949 }` e640c32c-0387-4fc2-8ca5-f823f7ebc4b6 GET `{}` /projects/misty-breeze-49601234/branches a92b3088-7f92-4871-bf91-0aac64edc4b6 b8c58a4b-0a33-4d54-987e-4155e95a64b6 2025-05-24 15:42:39.088 +0000 misty-breeze-49601234 keycloak 200 `{}` ListProjectBranches 0
 ```
 
 **Field descriptions:**
@@ -101,10 +101,10 @@ fb7c2e2f-cb09-4405-b543-dbe1b88614b6 2025-05-25 10:18:45.340 +0000 { "changes": 
 | ------------------ | ---------------------------------------- | -------------------------------------------------------- |
 | 1                  | fb7c2e2f-cb09-4405-b543-dbe1b88614b6     | Unique ID for the raw log event                          |
 | 2                  | 2025-05-25 10:18:45.340 +0000            | Timestamp when Airbyte extracted the record              |
-| 3                  | { "changes": [], "sync_id": 57949 }      | Metadata from the ingestion tool                         |
+| 3                  | `{ "changes": [], "sync_id": 57949 }`    | Metadata from the ingestion tool                         |
 | 4                  | e640c32c-0387-4fc2-8ca5-f823f7ebc4b6     | Unique identifier for the API event                      |
 | 5                  | GET                                      | HTTP method used in the request                          |
-| 6                  | {}                                       | Request body payload (if present)                        |
+| 6                  | `{}`                                     | Request body payload (if present)                        |
 | 7                  |                                          | Reserved for future metadata fields (empty in this case) |
 | 8                  | /projects/misty-breeze-49601234/branches | URL path of the API call                                 |
 | 9                  | a92b3088-7f92-4871-bf91-0aac64edc4b6     | Internal ID for the response object                      |
@@ -113,7 +113,7 @@ fb7c2e2f-cb09-4405-b543-dbe1b88614b6 2025-05-25 10:18:45.340 +0000 { "changes": 
 | 12                 | misty-breeze-49601234                    | Project identifier targeted by the API call              |
 | 13                 | keycloak                                 | Authentication mechanism used                            |
 | 14                 | 200                                      | HTTP status code of the response                         |
-| 15                 | {}                                       | Resource identifiers returned (if any)                   |
+| 15                 | `{}`                                     | Resource identifiers returned (if any)                   |
 | 16                 | ListProjectBranches                      | Operation name associated with the endpoint              |
 | 17                 | 0                                        | Internal sync batch identifier                           |
 
