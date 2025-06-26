@@ -128,7 +128,7 @@ Congratulations! You have successfully set up Rocicorp Zero with Neon Postgres u
 <Admonition type="note" title="Schema Changes">
 Zero uses Postgres event triggers for efficient schema migration handling. While Neon now supports event triggers, Zero may still perform a **full reset of the `zero-cache` and all connected client states** whenever schema changes are detected to ensure correctness.
 
-This reset mechanism can be inefficient for larger databases (e.g., > 1GB) or applications undergoing frequent schema evolution. For smaller databases or projects with stable schemas, the impact is typically acceptable. Consider this behavior when managing schema changes for your Zero application on Neon, especially for larger projects.
+This reset mechanism can be inefficient for larger databases (e.g., > 1GB) or applications undergoing frequent schema evolution. For smaller databases or projects with stable schemas, the impact is typically acceptable. Consider this behavior when managing schema changes for your Zero application, especially for larger projects.
 </Admonition>
 
 ## Resources
