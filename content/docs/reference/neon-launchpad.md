@@ -65,13 +65,13 @@ deno run -A neondb
 
 **CLI options:**
 
-| Option            | Alias | Description                                      | Default        |
-|-------------------|-------|--------------------------------------------------|----------------|
-| `--yes`           | `-y`  | Skip prompts and use defaults                    |                |
-| `--env <path>`    | `-e`  | Path to the .env file                            | `./.env`       |
-| `--key <string>`  | `-k`  | Env var for connection string                    | `DATABASE_URL` |
-| `--seed <path>`   | `-s`  | Path to SQL file to seed the database            | not set        |
-| `--help`          | `-h`  | Show help message                                |                |
+| Option           | Alias | Description                           | Default        |
+| ---------------- | ----- | ------------------------------------- | -------------- |
+| `--yes`          | `-y`  | Skip prompts and use defaults         |                |
+| `--env <path>`   | `-e`  | Path to the .env file                 | `./.env`       |
+| `--key <string>` | `-k`  | Env var for connection string         | `DATABASE_URL` |
+| `--seed <path>`  | `-s`  | Path to SQL file to seed the database | not set        |
+| `--help`         | `-h`  | Show help message                     |                |
 
 **Examples:**
 
@@ -99,18 +99,18 @@ Add Postgres support to Vite projects using the [@neondatabase/vite-plugin-postg
 
 **Configuration options:**
 
-| Option    | Type   | Description                                 | Default    |
-|-----------|--------|---------------------------------------------|------------|
-| `env`     | string | Path to the .env file                       | `.env`     |
-| `envKey`  | string | Name of the environment variable            | `DATABASE_URL` |
-| `seed`    | object | Seeding config (optional)                   | not set    |
+| Option   | Type   | Description                      | Default        |
+| -------- | ------ | -------------------------------- | -------------- |
+| `env`    | string | Path to the .env file            | `.env`         |
+| `envKey` | string | Name of the environment variable | `DATABASE_URL` |
+| `seed`   | object | Seeding config (optional)        | not set        |
 
 **`seed` object:**
 
-| Property | Type   | Description                    |
-|----------|--------|--------------------------------|
-| `type`   | string | Only `sql-script` supported    |
-| `path`   | string | Path to SQL file to execute    |
+| Property | Type   | Description                 |
+| -------- | ------ | --------------------------- |
+| `type`   | string | Only `sql-script` supported |
+| `path`   | string | Path to SQL file to execute |
 
 **Example config:**
 
@@ -122,7 +122,7 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   plugins: [
     postgresPlugin({
-      env: '.env.local',      // Custom .env file (default: '.env')
+      env: '.env.local', // Custom .env file (default: '.env')
       envKey: 'DATABASE_URL', // Env variable for connection string (default: 'DATABASE_URL')
       seed: {
         type: 'sql-script',
