@@ -80,6 +80,7 @@ To set up your testing environment with Neon and Laravel, follow these steps:
    ```
    php artisan make:model Question -m
    ```
+
    - Open the generated migration file in the `database/migrations` directory and add fields to the `questions` table schema:
 
      ```php

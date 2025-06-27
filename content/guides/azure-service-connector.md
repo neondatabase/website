@@ -66,6 +66,7 @@ Follow these steps to create a service connection from your Azure compute servic
           You can use database credentials for the first time connection to create a new Key Vault secret. For applications that already have a Key Vault secret, you can use the Key Vault option to reference the existing secret.
 
                   ![Select Authentication Tile](/docs/guides/azure-service-connector/authentication-type.png)
+
           - Select the **Database credentials** tile.
           - Enter your Neon database **Username**.
           - Enter your Neon database **Password**.

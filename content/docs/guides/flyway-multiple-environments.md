@@ -137,6 +137,7 @@ By default, Flyway loads its configuration from the default `conf/flyway.conf` f
 
    flyway.baselineOnMigrate=true
    ```
+
    - The `flyway.locations` setting tells Flyway where to look for your migration files. We'll create them in the `/sql` directory in a later step.
    - The `flyway.baselineOnMigrate=true` setting tells Flyway to perform a baseline action when you run the `migrate` command on a non-empty schema with no Flyway schema history table. The schema will then be initialized with the `baselineVersion` before executing migrations. Only migrations above the `baselineVersion` will then be applied. This is useful for initial Flyway deployments on projects with an existing database. You can disable this setting by commenting it out again or setting it to false after applying your first migration on the database.
 
