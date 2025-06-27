@@ -50,7 +50,7 @@ bun add @neondatabase/serverless
 Add a `.env.local` file to your project directory and add your Neon connection details to it. Bun automatically loads variables from `.env`, `.env.local`, and other `.env.*` files. You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select Bun from the **Connection string** dropdown. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ```shell shouldWrap
-POSTGRES_URL='postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require'
+POSTGRES_URL='postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require'
 ```
 
 <Admonition type="note">

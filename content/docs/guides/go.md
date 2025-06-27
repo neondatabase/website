@@ -44,7 +44,7 @@ import (
 )
 
 func main() {
-    connStr := "postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
+    connStr := "postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
     db, err := sql.Open("postgres", connStr)
     if err != nil {
         panic(err)
@@ -73,7 +73,7 @@ import (
 )
 
 func main() {
-    connStr := "postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
+    connStr := "postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
     conn, err := pgx.Connect(context.Background(), connStr)
     if err != nil {
         panic(err)

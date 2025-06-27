@@ -39,7 +39,7 @@ You'll need:
 - A **Neon account**. Sign up at [Neon](https://neon.tech) if you don't have one.
 - A **connection string** to your current database in this format:
   ```
-  postgresql://username:password@host:port/database?sslmode=require
+  postgresql://username:password@host:port/database?sslmode=require&channel_binding=require
   ```
 - **Admin privileges** on your source database. We recommend using a superuser or a user with the necessary `CREATE`, `SELECT`, `INSERT`, and `REPLICATION` privileges.
 - A database **smaller than 10 GB** in size for automated import
