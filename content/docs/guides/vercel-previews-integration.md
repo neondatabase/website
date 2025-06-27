@@ -96,6 +96,7 @@ To add the integration:
            </Admonition>
 
             When you finish making selections, click **Continue**.
+
     1.  Confirm the integration settings. This allows the integration to:
         - Set environment variables for your Vercel project's production, development, and preview environments.
         - Create database branches for preview deployments.
