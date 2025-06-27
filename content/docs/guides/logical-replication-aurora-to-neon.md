@@ -142,6 +142,7 @@ After creating a publication on the source database, you need to create a subscr
    ```sql shouldWrap
    CREATE SUBSCRIPTION my_subscription CONNECTION 'postgresql://postgres:password@database-1.czmwaio8k05k.us-east-2.rds.amazonaws.com/postgres' PUBLICATION my_publication;
    ```
+
    - `subscription_name`: A name you chose for the subscription.
    - `connection_string`: The connection string for the source AWS Aurora Postgres database where you defined the publication.
    - `publication_name`: The name of the publication you created on the source Aurora Postgres database.
