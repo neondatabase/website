@@ -57,18 +57,18 @@ To configure Neon Private Networking, perform the following steps:
        - **us-east-2**: Create two entries, one for each of the following:
          - `com.amazonaws.vpce.us-east-2.vpce-svc-010736480bcef5824`
          - `com.amazonaws.vpce.us-east-2.vpce-svc-0465c21ce8ba95fb2`
-       - **eu-central-1**: 
+       - **eu-central-1**:
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-05554c35009a5eccb`
-       - **aws-eu-west-2**: 
+       - **aws-eu-west-2**:
          - `com.amazonaws.vpce.eu-west-2.vpce-svc-0c6fedbe99fced2cd`
        - **us-west-2**: Create two entries, one for each of the following:
          - `com.amazonaws.vpce.us-west-2.vpce-svc-060e0d5f582365b8e`
          - `com.amazonaws.vpce.us-west-2.vpce-svc-07b750990c172f22f`
-       - **ap-southeast-1**: 
+       - **ap-southeast-1**:
          - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-07c68d307f9f05687`
-       - **ap-southeast-2**: 
+       - **ap-southeast-2**:
          - `com.amazonaws.vpce.ap-southeast-2.vpce-svc-031161490f5647f32`
-       - **aws-sa-east-1**: 
+       - **aws-sa-east-1**:
          - `com.amazonaws.vpce.sa-east-1.vpce-svc-061204a851dbd1a47`
 
     1. Click **Verify service**. If successful, you should see a `Service name verified` message.
