@@ -2,7 +2,7 @@
 title: Migrate from SQLite to Neon Postgres
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-06-26T10:00:00.000Z'
+updatedOn: '2025-06-27T09:31:11.052Z'
 ---
 
 This guide describes how to migrate your SQLite database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html)
