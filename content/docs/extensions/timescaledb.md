@@ -108,7 +108,7 @@ tar -xvzf weather_small.tar.gz
 Load the data into Neon database - enter the username, password, host and database name. You can find these details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
 
 ```shell shouldWrap
-psql 'postgresql://<username>:<password>@<host>/<database_name>?sslmode=require' -c "\COPY weather_conditions FROM weather_small_conditions.csv CSV"
+psql 'postgresql://<username>:<password>@<host>/<database_name>?sslmode=require&channel_binding=require' -c "\COPY weather_conditions FROM weather_small_conditions.csv CSV"
 ```
 
 You should receive the following output:

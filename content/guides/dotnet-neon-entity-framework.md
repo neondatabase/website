@@ -25,7 +25,7 @@ In this guide, we'll walk through setting up a Neon database with a .NET applica
 Your connection string will look similar to this:
 
 ```shell
-postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
+postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
 ```
 
 ## Creating a .NET Project with Neon Integration

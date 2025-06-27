@@ -268,7 +268,7 @@ Create a `.env` file in your project root with the following configuration:
 
 ```env
 # Database Configuration
-DATABASE_URL='postgresql://neondb_owner:<your_password>@<your_host>.eastus2.azure.neon.tech/neondb?sslmode=require'
+DATABASE_URL='postgresql://neondb_owner:<your_password>@<your_host>.eastus2.azure.neon.tech/neondb?sslmode=require&channel_binding=require'
 
 # Azure OpenAI Configuration
 AZURE_OPENAI_ENDPOINT=https://<your-resource-name>.openai.azure.com

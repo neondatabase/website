@@ -26,7 +26,7 @@ First, let's create a Neon database that we'll connect to from our .NET applicat
 3. Once created, you'll see your connection details. Your connection string will look like this:
 
 ```
-postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
+postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
 ```
 
 Save these details - you'll need them when setting up your .NET application.
@@ -96,7 +96,7 @@ There are two levels of connection pooling available when working with Neon: [Ne
 Neon uses PgBouncer to provide connection pooling at the infrastructure level, supporting up to 10,000 concurrent connections. To use Neon's pooled connections, select the "Pooled connection" option in your project's connection settings. Your connection string will look like this:
 
 ```
-postgres://[user]:[password]@[pooled-hostname].pool.[region].neon.tech/[dbname]?sslmode=require
+postgres://[user]:[password]@[pooled-hostname].pool.[region].neon.tech/[dbname]?sslmode=require&channel_binding=require
 ```
 
 However, using a pooled connection string for database migrations can be prone to errors. For this reason, it is recommended to use a direct (non-pooled) connection when performing database migrations. For more information about direct and pooled connections, see [Connection pooling](/docs/connect/connection-pooling).

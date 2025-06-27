@@ -74,7 +74,7 @@ touch .env
 5. Set up the environment variables by adding the following to the `.env` file:
 
 ```
-DATABASE_URL=postgres://[user]:[password]@[hostname]/[database]?sslmode=require
+DATABASE_URL=postgres://[user]:[password]@[hostname]/[database]?sslmode=require&channel_binding=require
 WEBHOOK_SECRET=your_webhook_secret  # We'll use this later for verification
 ```
 

@@ -659,7 +659,7 @@ Start by configuring the `local.settings.json` in your `api` directory with your
 {
   "Values": {
     ...
-    "DATABASE_URL": "postgresql://neondb_owner:<your_password>@<your_host>.neon.tech/neondb?sslmode=require"
+    "DATABASE_URL": "postgresql://neondb_owner:<your_password>@<your_host>.neon.tech/neondb?sslmode=require&channel_binding=require"
   }
 }
 ```

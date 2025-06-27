@@ -87,7 +87,7 @@ Now, you'll set up the self-hosted Convex backend using Docker Compose, configur
         **Neon default:**
 
         ```bash
-        postgresql://neondb_owner:password@ep-xxxxx.aws.neon.tech/convex_self_hosted?sslmode=require
+        postgresql://neondb_owner:password@ep-xxxxx.aws.neon.tech/convex_self_hosted?sslmode=require&channel_binding=require
         ```
 
         **For Convex:**

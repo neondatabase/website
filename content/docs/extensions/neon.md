@@ -54,7 +54,7 @@ CREATE EXTENSION neon;
 To connect to your database. You can find a connection string for your database on the Neon Dashboard.
 
 ```bash shouldWrap
-psql postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+psql postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 Issue the following query to view LFC usage data for your compute:

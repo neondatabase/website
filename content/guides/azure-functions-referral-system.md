@@ -678,7 +678,7 @@ After creating the Function App, you need to configure it to connect to your Neo
    az functionapp config appsettings set \
      --name referral-system \
      --resource-group referral-system \
-     --settings NEON_CONNECTION_STRING="postgres://user:password@ep-xyz.region.azure.neon.tech/neondb?sslmode=require"
+     --settings NEON_CONNECTION_STRING="postgres://user:password@ep-xyz.region.azure.neon.tech/neondb?sslmode=require&channel_binding=require"
    ```
 
 2. Alternative: Configure settings in the Azure Portal:

@@ -38,7 +38,7 @@ The most direct way to connect is by providing a connection string. This string 
 To establish a named connection using `dblink_connect`, use the following syntax:
 
 ```sql
-SELECT dblink_connect('my_remote_db', 'host=my_remote_host port=5432 dbname=my_remote_database user=my_remote_user password=my_remote_password sslmode=require');
+SELECT dblink_connect('my_remote_db', 'host=my_remote_host port=5432 dbname=my_remote_database user=my_remote_user password=my_remote_password sslmode=require&channel_binding=require');
 ```
 
 In this example:
@@ -61,7 +61,7 @@ You should receive a response like:
 You can also connect without naming the connection. This is useful for one-off queries or when you don't need to reference the connection in subsequent queries.
 
 ```sql
-SELECT dblink_connect('host=my_remote_host port=5432 dbname=my_remote_database user=my_remote_user password=my_remote_password sslmode=require');
+SELECT dblink_connect('host=my_remote_host port=5432 dbname=my_remote_database user=my_remote_user password=my_remote_password sslmode=require&channel_binding=require');
 ```
 
 <Admonition type="tip" title="Did you know?">
@@ -94,7 +94,7 @@ When using an unnamed connection, you can execute queries directly without refer
 
 ```sql
 SELECT *
-FROM dblink('host=my_remote_host port=5432 dbname=my_remote_database user=my_remote_user password=my_remote_password sslmode=require',
+FROM dblink('host=my_remote_host port=5432 dbname=my_remote_database user=my_remote_user password=my_remote_password sslmode=require&channel_binding=require',
             'SELECT table_name FROM information_schema.tables WHERE table_schema = ''public''')
 AS remote_tables(table_name TEXT);
 ```
@@ -140,7 +140,7 @@ Naming your connections with `dblink_connect` can simplify your queries, especia
 
 ```sql
 -- Connect with a name
-SELECT dblink_connect('production_db', 'host=prod_host port=5432 dbname=prod_data user=reporter password=securepass sslmode=require');
+SELECT dblink_connect('production_db', 'host=prod_host port=5432 dbname=prod_data user=reporter password=securepass sslmode=require&channel_binding=require');
 
 -- Execute queries using the named connection
 SELECT * FROM dblink('production_db', 'SELECT count(*) FROM orders') AS order_count(count int);
@@ -205,7 +205,7 @@ The `dblink` extension provides additional functions to help manage and interact
 
 - **Credentials:** Using `dblink` is inherently less secure than other methods of accessing remote data, as it requires storing credentials in the connection strings. For this reason, it may be preferable to use Foreign Data Wrappers or other secure methods.
 - **Network Security:** Ensure that network access is properly configured to allow connections between your Neon project and the remote database server. Firewalls and security groups might need adjustments.
-- **`sslmode`:** Always use `sslmode=require` in your connection strings to encrypt communication.
+- **`sslmode`:** Always use `sslmode=require&channel_binding=require` in your connection strings to encrypt communication and ensure enhanced security against man-in-the-middle attacks.
 - **Principle of Least Privilege:** Grant only the necessary permissions to the `dblink` connecting user on the remote database.
 
 ## Better alternatives: Foreign Data Wrappers

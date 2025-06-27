@@ -33,7 +33,7 @@ By the end of this guide, you'll have a system where database changes are as sea
    Your connection string will look similar to this:
 
    ```shell
-   postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
+   postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
    ```
 
 ## Set up the project
@@ -100,7 +100,7 @@ By the end of this guide, you'll have a system where database changes are as sea
 4. Create a `.env` file in your project root:
 
    ```bash shouldWrap
-   DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
+   DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
    ```
 
 5. Push your code to a Github repository.

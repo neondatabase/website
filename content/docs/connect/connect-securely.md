@@ -30,6 +30,10 @@ Neon supports the following `sslmode` settings, in order of least to most secure
 
 The choice of which mode to use depends on the specific security requirements of the application and the level of risk that you are willing to tolerate. Neon recommends that you always use `verify-full` mode, which ensures the highest level of security and protects against a wide range of attacks including man-in-the-middle attacks. The following sections describe how to configure connections using `verify-full` mode.
 
+## Channel binding for enhanced security
+
+`channel_binding=require` is a security parameter that ensures the client and server mutually authenticate each other using SCRAM-SHA-256-PLUS. This helps protect against man-in-the-middle attacks, even when using `sslmode=require` alone.
+
 The required configuration for your connection depends on the client you are using.
 
 ## Connect from the psql client

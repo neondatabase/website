@@ -64,7 +64,7 @@ Before proceeding, set the following environment variables for your source and t
 
 ```bash
 export PGCOPYDB_SOURCE_PGURI="postgresql://source_user:source_password@source_host:source_port/source_db"
-export PGCOPYDB_TARGET_PGURI="postgresql://neon_user:neon_user_password@xxxx.neon.tech/neondb?sslmode=require"
+export PGCOPYDB_TARGET_PGURI="postgresql://neon_user:neon_user_password@xxxx.neon.tech/neondb?sslmode=require&channel_binding=require"
 ```
 
 You can replace the placeholders with your actual connection details. You can get Neon database connection details from the Neon console. `pgcopydb` will automatically use these environment variables for the migration.

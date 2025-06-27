@@ -30,7 +30,7 @@ To create the database:
 Find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you. Your connection string should look something like this:
 
 ```bash shouldWrap
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/friends
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/friends?sslmode=require&channel_binding=require
 ```
 
 You will need the connection string details later in the setup.
