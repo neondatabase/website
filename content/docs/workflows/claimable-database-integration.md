@@ -81,7 +81,7 @@ Below is an abbreviated example of the response. For brevity, this documentation
   },
   "connection_uris": [
     {
-      "connection_uri": "postgresql://neondb_owner:{password}@ep-cool-shape-123456.us-east-1.aws.neon.tech/neondb?sslmode=require"
+      "connection_uri": "postgresql://neondb_owner:{password}@ep-cool-shape-123456.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
     }
   ],
   "branch": {},

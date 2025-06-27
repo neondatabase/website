@@ -82,7 +82,7 @@ PASSWORD = "AbC123dEf"
 HOST = "ep-cool-darkness-123456.us-east-2.aws.neon.tech"
 DATABASE = "dbname"
 
-conn_str = f'postgresql://{USERNAME}:{PASSWORD}@{HOST}/{DATABASE}?sslmode=require'
+conn_str = f'postgresql://{USERNAME}:{PASSWORD}@{HOST}/{DATABASE}?sslmode=require&channel_binding=require'
 
 engine = create_engine(conn_str)
 ```

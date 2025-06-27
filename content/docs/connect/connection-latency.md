@@ -204,7 +204,7 @@ Here's a comparison of connection times with and without the `sslnegotiation=dir
 **Without sslnegotiation=direct:**
 
 ```bash
-$ time psql "postgresql://neondb_owner@your-neon-endpoint/neondb?sslmode=require" -c "SELECT version();"
+$ time psql "postgresql://neondb_owner@your-neon-endpoint/neondb?sslmode=require&channel_binding=require" -c "SELECT version();"
                                                 version
 ---------------------------------------------------------------------------------------------------------
 PostgreSQL 16.4 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit

@@ -59,7 +59,7 @@ micronaut:
 
 datasources:
   default:
-    url: ${JDBC_DATABASE_URL:`postgresql://user:password@endpoint.neon.tech:5432/dbname?sslmode=require`}
+    url: ${JDBC_DATABASE_URL:`postgresql://user:password@endpoint.neon.tech:5432/dbname?sslmode=require&channel_binding=require`}
     driverClassName: org.postgresql.Driver
     username: ${JDBC_DATABASE_USERNAME:`user`}
     password: ${JDBC_DATABASE_PASSWORD:`password`}
@@ -69,7 +69,7 @@ datasources:
 For local development, you can create a `.env` file at the root of your project with your actual Neon credentials:
 
 ```shell
-JDBC_DATABASE_URL=jdbc:postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require
+JDBC_DATABASE_URL=jdbc:postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require
 JDBC_DATABASE_USERNAME=<user>
 JDBC_DATABASE_PASSWORD=<password>
 ```
