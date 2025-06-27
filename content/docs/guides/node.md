@@ -87,7 +87,9 @@ const { neon } = require('@neondatabase/serverless');
 
 const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
 
-const sql = neon(`postgresql://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?sslmode=require&channel_binding=require`);
+const sql = neon(
+  `postgresql://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?sslmode=require&channel_binding=require`
+);
 
 async function getPgVersion() {
   const result = await sql`SELECT version()`;
