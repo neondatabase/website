@@ -3,7 +3,7 @@ title: Replicate data with Airbyte
 subtitle: Learn how to replicate data from Neon with Airbyte
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-11T11:32:44.535Z'
+updatedOn: '2025-06-30T11:30:21.903Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -154,7 +154,7 @@ The Airbyte UI currently allows selecting any table for Change Data Capture (CDC
    For example, given a connection string like this:
 
    ```bash shouldWrap
-   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    ```
 
    Enter the details in the Airbyte **Create a source** dialog as shown below. Your values will differ.

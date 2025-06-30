@@ -1,6 +1,10 @@
 # Schema migration with Neon Postgres and Django
 
-Set up Neon Postgres and run migrations for your Django project
+> The document outlines the process for performing schema migrations in a Neon Postgres database using Django, detailing the steps to configure and execute migrations within this specific environment.
+
+## Source
+
+- [Schema migration with Neon Postgres and Django HTML](https://neon.com/docs/guides/django-migrations): The original HTML version of this documentation
 
 [Django](https://www.djangoproject.com/) is a high-level Python framework to make database-driven web applications. It provides an ORM (Object-Relational Mapping) layer that abstracts database operations, making it easy to interact with databases using Python code. Django also includes a powerful migration system that allows you to define and manage database schema changes over time.
 
@@ -30,9 +34,7 @@ postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbna
 
 Keep your connection string handy for later use.
 
-
-Neon supports both direct and pooled database connection strings, which you can find by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. A pooled connection string connects your application to the database via a PgBouncer connection pool, allowing for a higher number of concurrent connections. However, using a pooled connection string for migrations can be prone to errors. For this reason, we recommend using a direct (non-pooled) connection when performing migrations. For more information about direct and pooled connections, see [Connection pooling](/docs/connect/connection-pooling).
-
+   **Note**: Neon supports both direct and pooled database connection strings, which you can find by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. A pooled connection string connects your application to the database via a PgBouncer connection pool, allowing for a higher number of concurrent connections. However, using a pooled connection string for migrations can be prone to errors. For this reason, we recommend using a direct (non-pooled) connection when performing migrations. For more information about direct and pooled connections, see [Connection pooling](https://neon.com/docs/connect/connection-pooling).
 
 ## Setting up the Django project
 
@@ -274,7 +276,7 @@ from . import views
 
 urlpatterns = [
     path('authors/', views.list_authors, name='list_authors'),
-    path('books//', views.list_books_by_author, name='list_books_by_author'),
+    path('books/<int:author_id>/', views.list_books_by_author, name='list_books_by_author'),
 ]
 ```
 
@@ -304,7 +306,7 @@ To start the Django development server and test the application, run the followi
 python manage.py runserver
 ```
 
-Navigate to the url `http://localhost:8000/catalog/authors/` in your browser to view the list of authors. You can also view the books by a specific author by visiting `http://localhost:8000/catalog/books//`.
+Navigate to the url `http://localhost:8000/catalog/authors/` in your browser to view the list of authors. You can also view the books by a specific author by visiting `http://localhost:8000/catalog/books/<author_id>/`.
 
 ## Applying schema changes
 
@@ -359,13 +361,11 @@ In this guide, we demonstrated how to set up a Django project with Neon Postgres
 
 You can find the source code for the application described in this guide on GitHub.
 
-
-Migrations with Neon and Django
-
+- [Migrations with Neon and Django](https://github.com/neondatabase/guide-neon-django): Run migrations in a Neon-Django project
 
 ## Resources
 
 For more information on the tools and concepts used in this guide, refer to the following resources:
 
 - [Django Documentation](https://docs.djangoproject.com/)
-- [Neon Postgres](/docs/introduction)
+- [Neon Postgres](https://neon.com/docs/introduction)

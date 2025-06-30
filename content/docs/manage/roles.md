@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/manage/users
-updatedOn: '2025-04-17T16:06:46.408Z'
+updatedOn: '2025-06-26T15:28:44.805Z'
 ---
 
 In Neon, roles are Postgres roles. Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`. This role owns the database that is created in your Neon project's default branch.
@@ -42,6 +42,7 @@ Roles created in the Neon Console, CLI, or API, including the role created with 
 - `EXECUTE` privilege on the `pg_stat_statements_reset()` function that is part of the `pg_stat_statements` extension. This privilege was introduced with the January 12, 2024 release. If you installed the `pg_stat_statements` extension before this release, drop and recreate the `pg_stat_statements` extension to enable this privilege. See [Install an extension](/docs/extensions/pg-extensions#install-an-extension).
 - `GRANT ALL ON TABLES` and `WITH GRANT OPTION` on the `public` schema.
 - `GRANT ALL ON SEQUENCES` and `WITH GRANT OPTION` on the `public` schema.
+- `CREATE EVENT TRIGGER`, `ALTER EVENT TRIGGER`, `DROP EVENT TRIGGER`. The `ALTER EVENT TRIGGER` command does not allow changing the function associated with the event trigger.
 
 You can think of roles with `neon_superuser` privileges as administrator roles. If you require roles with limited privileges, such as a read-only role, you can create those roles from an SQL client. For more information, see [Manage database access](/docs/manage/database-access).
 

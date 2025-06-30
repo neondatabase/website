@@ -1,16 +1,14 @@
 # Connect an Express application to Neon
 
-Set up a Neon project in seconds and connect from an Express application
+> The document outlines the steps to connect an Express application to a Neon database, detailing the necessary configurations and code implementations specific to Neon's environment.
+
+## Source
+
+- [Connect an Express application to Neon HTML](https://neon.com/docs/guides/express): The original HTML version of this documentation
 
 This guide describes how to create a Neon project and connect to it from an Express application. Examples are provided for using the [Neon serverless driver](https://npmjs.com/package/@neondatabase/serverless), [node-postgres](https://www.npmjs.com/package/pg) and [Postgres.js](https://www.npmjs.com/package/postgres) clients. Use the client you prefer.
 
 To connect to Neon from an Express application:
-
-1. [Create a Neon Project](#create-a-neon-project)
-2. [Create an Express project and add dependencies](#create-an-express-project-and-add-dependencies)
-3. [Store your Neon credentials](#store-your-neon-credentials)
-4. [Configure the Postgres client](#configure-the-postgres-client)
-5. [Run app.js](#run-appjs)
 
 ## Create a Neon project
 
@@ -51,21 +49,19 @@ If you do not have one already, create a Neon project.
 
 ## Store your Neon credentials
 
-Add a `.env` file to your project directory and add your Neon connection details to it. Find your database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select Node.js from the **Connection string** dropdown. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+Add a `.env` file to your project directory and add your Neon connection details to it. Find your database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select Node.js from the **Connection string** dropdown. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).
 
-```shell shouldWrap
-DATABASE_URL="postgresql://:@.neon.tech:/?sslmode=require"
+```shell
+DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require"
 ```
 
-
-To ensure the security of your data, never expose your Neon credentials to the browser.
-
+   **Important**: To ensure the security of your data, never expose your Neon credentials to the browser.
 
 ## Configure the Postgres client
 
 Add an `index.js` file to your project directory and add the following code snippet to connect to your Neon database:
 
-
+Tab: Neon serverless driver
 
 ```javascript
 require('dotenv').config();
@@ -87,6 +83,8 @@ app.listen(PORT, () => {
   console.log(`Listening to http://localhost:${PORT}`);
 });
 ```
+
+Tab: node-postgres
 
 ```javascript
 require('dotenv').config();
@@ -113,6 +111,8 @@ app.listen(PORT, () => {
 });
 ```
 
+Tab: postgres.js
+
 ```javascript
 require('dotenv').config();
 
@@ -134,11 +134,9 @@ app.listen(PORT, () => {
 });
 ```
 
-
-
 ## Run index.js
 
-Run `node index.js` to view the result on [localhost:4242](localhost:4242) as follows:
+Run `node index.js` to view the result on [localhost:4242](https://neon.com/localhost:4242) as follows:
 
 ```shell
 { version: 'PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit' }
@@ -148,6 +146,4 @@ Run `node index.js` to view the result on [localhost:4242](localhost:4242) as fo
 
 You can find the source code for the application described in this guide on GitHub.
 
-
-
-Get started with Express and Neon
+- [Get started with Express and Neon](https://github.com/neondatabase/examples/tree/main/with-express)

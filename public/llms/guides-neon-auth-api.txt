@@ -1,10 +1,26 @@
 # Manage Neon Auth using the API
 
+> The document "Manage Neon Auth using the API" details how to use Neon's API to manage authentication processes, including creating, updating, and deleting API keys and managing user access within the Neon platform.
+
+## Source
+
+- [Manage Neon Auth using the API HTML](https://neon.com/docs/guides/neon-auth-api): The original HTML version of this documentation
+
+**Note**: **Neon Auth** is in beta and ready to use.
+
+Related docs:
+- [Get started](https://neon.com/docs/guides/neon-auth)
+- [Tutorial](https://neon.com/docs/guides/neon-auth-demo)
+- [How it works](https://neon.com/docs/guides/neon-auth-how-it-works)
+
+  Sample project:
+- [Neon Auth Demo App](https://github.com/neondatabase-labs/neon-auth-demo-app)
+
 Learn how to manage your Neon Auth integration using the Neon API. Create a new integration, generate SDK keys, add users, and claim ownership of your Neon-managed auth project to your auth provider.
 
 ## Prerequisites
 
-- A Neon API key (see [Create an API Key](/docs/manage/api-keys#create-an-organization-api-key))
+- A Neon API key (see [Create an API Key](https://neon.com/docs/manage/api-keys#create-an-organization-api-key))
 - A Neon project
 
 ## Common parameters
@@ -19,20 +35,16 @@ Several endpoints require these parameters:
 
 Creates a Neon-managed authentication project for your database (currently supporting Stack Auth). This endpoint performs the same action as using Quick Start in the Console, automatically provisioning and configuring a new auth provider project that Neon manages for you.
 
-
-To create an integration, you'll need:
-- Your main branch ID. Get it from the Neon Console on the **Branches** page, or use the [List Branches endpoint](https://api-docs.neon.tech/reference/listprojectbranches) (look for `"default": true`)
-- Your database name and role name. Get them by clicking on the **Connect** button on your **Project Dashboard** in the Neon Console, or use the [List Databases endpoint](https://api-docs.neon.tech/reference/listprojectbranches)
-
+   **Note**: To create an integration, you'll need: - Your production branch ID. Get it from the Neon Console on the **Branches** page, or use the [List Branches endpoint](https://api-docs.neon.tech/reference/listprojectbranches) (look for `"default": true`) - Your database name and role name. Get them by clicking on the **Connect** button on your **Project Dashboard** in the Neon Console, or use the [List Databases endpoint](https://api-docs.neon.tech/reference/listprojectbranches)
 
 Required parameters:
 
 - `project_id`: Your Neon project ID
-- `branch_id`: Your project's main branch ID
+- `branch_id`: Your project's production branch ID
 - `database_name`: Name of your database (defaults to `"neondb"`)
 - `role_name`: Database role for authenticated users (defaults to `"neondb_owner"`)
 
-```bash shouldWrap
+```bash
 curl --request POST \
      --url 'https://console.neon.tech/api/v2/projects/auth/create' \
      --header 'authorization: Bearer $NEON_API_KEY' \
@@ -48,7 +60,7 @@ curl --request POST \
 
 Example response:
 
-```json shouldWrap
+```json
 {
   "auth_provider": "stack",
   "auth_provider_project_id": "proj-example-123",
@@ -60,13 +72,13 @@ Example response:
 }
 ```
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/createProjectIdentityIntegration)
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/createneonauthintegration)
 
 ## List integrations
 
 Lists all active auth provider integrations for your project.
 
-```bash shouldWrap
+```bash
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/integrations' \
      --header 'authorization: Bearer $NEON_API_KEY' | jq
@@ -74,7 +86,7 @@ curl --request GET \
 
 Example response:
 
-```json shouldWrap
+```json
 {
   "data": [
     {
@@ -90,7 +102,7 @@ Example response:
 }
 ```
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/listProjectIdentityIntegrations)
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/listneonauthintegrations)
 
 ## Generate SDK keys
 
@@ -101,7 +113,7 @@ Required parameters:
 - `project_id`: Your Neon project ID
 - `auth_provider`: The authentication provider (currently `"stack"`)
 
-```bash shouldWrap
+```bash
 curl --request POST \
      --url 'https://console.neon.tech/api/v2/projects/auth/keys' \
      --header 'authorization: Bearer $NEON_API_KEY' \
@@ -114,7 +126,7 @@ curl --request POST \
 
 Example response:
 
-```json shouldWrap
+```json
 {
   "auth_provider": "stack",
   "auth_provider_project_id": "project-id-123",
@@ -126,7 +138,7 @@ Example response:
 }
 ```
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/createProjectIdentityAuthProviderSDKKeys)
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/createneonauthprovidersdkkeys)
 
 ## Create users
 
@@ -142,7 +154,7 @@ Optional parameters:
 
 - `name`: User's display name (1-255 characters)
 
-```bash shouldWrap
+```bash
 curl --request POST \
      --url 'https://console.neon.tech/api/v2/projects/auth/user' \
      --header 'authorization: Bearer $NEON_API_KEY' \
@@ -157,7 +169,7 @@ curl --request POST \
 
 Example response:
 
-```json shouldWrap
+```json
 {
   "id": "user-id-123"
 }
@@ -165,15 +177,15 @@ Example response:
 
 You can verify the user was synchronized to your database by connecting to your project and querying the `neon_auth.users_sync` table:
 
-```bash shouldWrap
+```bash
 psql postgres://[user]:[password]@[hostname]/[database]
 ```
 
-```sql shouldWrap
+```sql
 SELECT id, email, name, created_at FROM neon_auth.users_sync;
 ```
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/createProjectIdentityNewUser)
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/createneonauthnewuser)
 
 ## Transfer to your auth provider
 
@@ -181,7 +193,7 @@ Transfer ownership of your Neon-managed auth project to your own auth provider a
 
 1. Request a transfer URL:
 
-```bash shouldWrap
+```bash
 curl --request POST \
      --url 'https://console.neon.tech/api/v2/projects/auth/transfer_ownership' \
      --header 'authorization: Bearer $NEON_API_KEY' \
@@ -194,7 +206,7 @@ curl --request POST \
 
 Example response:
 
-```json shouldWrap
+```json
 {
   "url": "https://app.stack-auth.com/integrations/neon/projects/transfer/confirm?code=example123"
 }
@@ -202,18 +214,16 @@ Example response:
 
 2. Open the returned URL in a browser to complete the transfer. You'll be asked to confirm which Stack Auth account should receive ownership of the project.
 
-
-After the transfer, you'll still be able to access your project from the Neon dashboard, but you'll also have direct access from the Stack Auth dashboard.
-
+   **Note**: After the transfer, you'll still be able to access your project from the Neon dashboard, but you'll also have direct access from the Stack Auth dashboard.
 
 ## Delete integration
 
 Removes an integration with a specific auth provider.
 
-```bash shouldWrap
+```bash
 curl --request DELETE \
      --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/integration/{auth_provider}' \
      --header 'authorization: Bearer $NEON_API_KEY' | jq
 ```
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/deleteProjectIdentityIntegration)
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/deleteneonauthintegration)

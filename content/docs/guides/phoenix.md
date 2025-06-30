@@ -2,7 +2,7 @@
 title: Connect from Phoenix to Neon
 subtitle: Set up a Neon project in seconds and connect from Phoenix
 enableTableOfContents: true
-updatedOn: '2025-02-03T20:41:57.332Z'
+updatedOn: '2025-06-30T11:30:21.910Z'
 ---
 
 This guide describes how to connect Neon in a [Phoenix](https://www.phoenixframework.org) application. [Ecto](https://hexdocs.pm/ecto/3.11.2/Ecto.html) provides an API and abstractions for interacting databases, enabling Elixir developers to query any database using similar constructs.
@@ -29,7 +29,7 @@ If you do not have one already, create a Neon project. Save your connection deta
 Add a `.env` file to your project directory and add your Neon connection string to it. You can find your connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ```shell shouldWrap
-DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require"
+DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
 ```
 
 You will need the connection string details later in the setup.
@@ -124,7 +124,7 @@ When you run the following command, you can expect to see the Phoenix applicatio
 ```bash shouldWrap
 PORT=4001 \
 MIX_ENV=prod \
-DATABASE_URL="postgresql://...:...@...aws.neon.tech/neondb?sslmode=require" \
+DATABASE_URL="postgresql://...:...@...aws.neon.tech/neondb?sslmode=require&channel_binding=require" \
 SECRET_KEY_BASE=".../..." \
 mix phx.server
 ```

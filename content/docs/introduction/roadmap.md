@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2025-05-30T16:54:40.486Z'
+updatedOn: '2025-06-20T20:31:35.339Z'
 ---
 
 Our development teams are focused on helping you ship faster with Postgres. This roadmap describes committed features we're working on right now, what we delivered recently, and a peek at what's on the horizon.
@@ -17,10 +17,7 @@ Here's a snapshot of what we're working on now:
 
 - **Postgres for AI agents**: [Replit partnered with Neon to back Replit Agents](/blog/looking-at-how-replit-agent-handles-databases), creating thousands of Postgres databases. If you're building AI agents and would like to integrate agent-ready Postgres, [connect with us](/agent-design-partner). See [Postgres for AI Agents](/use-cases/ai-agents) for more.
 - **Snapshots**: Scheduled snapshots with instant restore.
-- **Data API**: A Data API feature, powered by PostgREST.
-- **Monitoring platform support**: After adding [Datadog integration](/docs/guides/datadog#steps-to-integrate-datadog-with-neon) in 2024, we're planning support for additional monitoring platforms.
 - **Console navigation enhancements**: Enhancing navigation for multi-project organizations, branch clarity, and better SQL Editor and Tables page interactions.
-- **Claimable Databases**: A new way for SaaS vendors to partner with Neon to offer instant Postgres databases. Let your users create Postgres databases — no registration required.
 
 Other features you would like to see? [Let us know](#share-your-thoughts).
 
@@ -75,7 +72,10 @@ And here's an overview of what we're looking at next:
 
 ## What we've shipped recently 🚢
 
-- **Neon on Azure GA**: We've announced our general availability release on Azure with deeper Azure integration. [Read the announcement](/blogegration-ga).
+- **Data API**: Neon's Data API feature, powered by PostgREST, is open to all Neon users. [Learn more](/docs/data-api/get-started).
+- **Monitoring platform support**: Neon supports exporting metrics and Postgres logs to any OpenTelemetry-compatible backend, like New Relic. For details, refer to our [OpenTelemetry docs](/docs/guides/opentelemetry).
+- **Claimable Databases & Neon Luanchpad**: A new way for SaaS vendors to partner with Neon to offer instant Postgres databases. Let your users create Postgres databases — no registration required. [Learn more about Neon Launchpad](/docs/reference/neon-launchpad), and see our [Claimable database integration guide](/docs/workflows/claimable-database-integration).
+- **Neon on Azure GA**: We've announced our general availability release on Azure with deeper Azure integration. [Read the announcement](/blog/azure-native-integration-ga).
 - **Improved migration assistance**: The [Import Data Assistant](/docs/import/import-data-assistant) makes data import easier and faster.
 - **Data anonymization**: We've added support for the PostgreSQL Anonymizer extension (`anon`). [Learn more](/docs/guides/neon-auth).
 - **Neon serverless driver GA**: Our JavaScript/TypeScript serverless driver has reached version 1.0.0, bringing stronger SQL injection safeguards and better performance for serverless environments.
@@ -115,8 +115,8 @@ And here's an overview of what we're looking at next:
 <summary>Shipped in 2024</summary>
 
 - **Larger computes**: Autoscaling now supports up to 16 vCPUs, and fixed compute sizes up to 56 vCPUs are available in Beta.
-- **A Model Context Protocol (MCP) server for Neon**: We released an open-source MCP server, enabling AI agents to interact with Neon's API using natural language for tasks like database creation, SQL queries, and migrations. Read the blog post: [Let Claude Manage Your Neon Databases: Our MCP Server is Here](/bloge-your-neon-databases-our-mcp-server-is-here).
-- **Neon in the Azure Marketplace**: Neon is now available as an [Azure Native Integration](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/neon1722366567200.neon_serverless_postgres_azure_prod?tab=Overview), enabling developers to deploy Neon Postgres databases directly from the Azure portal. [Read the announcement](/bloglable-as-an-azure-native-integration).
+- **A Model Context Protocol (MCP) server for Neon**: We released an open-source MCP server, enabling AI agents to interact with Neon's API using natural language for tasks like database creation, SQL queries, and migrations. Read the blog post: [Let Claude Manage Your Neon Databases: Our MCP Server is Here](/blog/let-claude-manage-your-neon-databases-our-mcp-server-is-here).
+- **Neon in the Azure Marketplace**: Neon is now available as an [Azure Native Integration](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/neon1722366567200.neon_serverless_postgres_azure_prod?tab=Overview), enabling developers to deploy Neon Postgres databases directly from the Azure portal. [Read the announcement](/blog/neon-is-now-available-as-an-azure-native-integration).
 - **Archive storage on paid plans**: To minimize storage costs on paid plans, we now support automatic archiving of inactive branches (snapshots of your data) in cost-efficient object storage. For more about this feature, see [Branch archiving](/docs/guides/branch-archiving).
 - **Organizations GA**: Organization Accounts are now generally available. Create a new organization, transfer over your projects, invite your team and get started collaborating. Refer to our [Organizations docs](/docs/manage/organizations) to learn more.
 - **Private Networking**: Private and secure network access to your compute resources without traversing public networks. Support for AWS PrivateLink is available in [Public Beta](/docs/guides/neon-private-networking).
@@ -125,17 +125,17 @@ And here's an overview of what we're looking at next:
 - **Python SDK**: Our new [Python SDK](https://pypi.org/project/neon-api/) wraps the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), allowing you to manage the Neon platform directly from your Python applications.
 - **Neon in the Vercel Marketplace**: Neon is now a first-party native integration in the Vercel Marketplace. This integration lets Vercel users add Postgres to their projects and manage billing directly through Vercel. For details, see [Install the Neon Postgres Native Integration on Vercel](/docs/guides/vercel-native-integration).
 - **Archive storage on the Free Plan**: Archive storage is now available on the Free Plan for automatically archiving inactive branches. This feature helps minimize storage costs, allowing us to expand the Free Plan even further. Learn more in [Branch Archiving](/docs/guides/branch-archiving).
-- **Neon RLS**: This feature integrates with third-party **authentication providers** like Auth0, Clerk, and Stack Auth to bring authorization to your code base by leveraging Postgres [Row-Level Security (RLS)](https://www.postgresql.org/docs/current/ddl-rowsecurity.html). [Read the announcement](/blog-authorize) and [check out the docs](/docs/guides/neon-rls).
-- **Neon on Azure**: You can deploy Neon databases on Azure, starting with the East US 2 region. This marks the first milestone on our Azure roadmap—many more exciting updates are on the way, including deeper integrations with the Azure ecosystem. [Read the announcement](/blogon-available-in-neon).
+- **Neon RLS**: This feature integrates with third-party **authentication providers** like Auth0, Clerk, and Stack Auth to bring authorization to your code base by leveraging Postgres [Row-Level Security (RLS)](https://www.postgresql.org/docs/current/ddl-rowsecurity.html). [Read the announcement](/blog/introducing-neon-authorize) and [check out the docs](/docs/guides/neon-rls).
+- **Neon on Azure**: You can deploy Neon databases on Azure, starting with the East US 2 region. This marks the first milestone on our Azure roadmap—many more exciting updates are on the way, including deeper integrations with the Azure ecosystem. [Read the announcement](/blog/first-azure-region-available-in-neon).
 - **End-to-end RAG pipelines in Postgres**: Our new and open source [pgrag](/docs/extensions/pgrag) extension lets you create end-to-end Retrieval-Augmented Generation (RAG) pipelines in Postgres. There's no need for additional programming languages or libraries. With the functions provided by `pgrag`, you can build a complete RAG pipeline directly within your SQL client.
 - **Support for Analytics with pg_mooncake**: This new extension, brought to the community by [mooncake.dev](https://mooncake.dev/), introduces native columnstore tables with DuckDB execution for _fast_ analytics directly in Postgres. [Read the announcement](https://www.mooncake.dev/blog/pgmooncake-neon).
 - **Datadog integration**: Scale and Business plan users can now export Neon metrics to Datadog.
 - **Deletion of backup branches created by restore operations**: To help minimize storage and keep your Neon project organized, we added support for deleting obsolete backup branches created by [restore](/docs/guides/branch-restore) operations. Previously, these backup branches could not be removed. [Learn more](/docs/guides/branch-restore#deleting-backup-branches).
-- **Read Replicas on the Free Plan**: Read Replicas are now available to all Neon users. [Read the announcement](/blogicas-in-the-free-plan)
+- **Read Replicas on the Free Plan**: Read Replicas are now available to all Neon users. [Read the announcement](/blog/create-read-replicas-in-the-free-plan)
 - **ISO27110 & ISO27701 compliance**: These new certifications add to our growing list of compliance achievements. For more about Neon's compliance milestones, see [Compliance](/docs/security/compliance).
-- **Increased limits for Neon projects**: We increased the number of projects included in all our paid plans: Launch (100 projects), Scale (1000 projects), and Business (5000 projects). More projects supports use cases such as database-per-tenant and AI agents. [Read the announcement](/blogn-projects-now-included-in-your-pricing-plan).
-- **A new Postgres toolkit for AI agents and test environments**: We recently announced an experimental release of the [@neondatabase/toolkit](https://github.com/neondatabase/toolkit). This toolkit lets you spin up a Postgres database in seconds and run SQL queries. It includes both the [Neon API Client](https://www.npmjs.com/package/@neondatabase/api-client) and the [Neon Serverless Driver](https://github.com/neondatabase/serverless), making it an excellent choice for AI agents that need to quickly set up an SQL database, or for test environments where manually deploying a new database isn't practical. To learn more, see [Why we built @neondatabase/toolkit](/blog-toolkit).
-- **Postgres 17**: You can now run the very latest version of Postgres on Neon. [Read the announcement](/blog
+- **Increased limits for Neon projects**: We increased the number of projects included in all our paid plans: Launch (100 projects), Scale (1000 projects), and Business (5000 projects). More projects supports use cases such as database-per-tenant and AI agents. [Read the announcement](/blog/thousands-of-neon-projects-now-included-in-your-pricing-plan).
+- **A new Postgres toolkit for AI agents and test environments**: We recently announced an experimental release of the [@neondatabase/toolkit](https://github.com/neondatabase/toolkit). This toolkit lets you spin up a Postgres database in seconds and run SQL queries. It includes both the [Neon API Client](https://www.npmjs.com/package/@neondatabase/api-client) and the [Neon Serverless Driver](https://github.com/neondatabase/serverless), making it an excellent choice for AI agents that need to quickly set up an SQL database, or for test environments where manually deploying a new database isn't practical. To learn more, see [Why we built @neondatabase/toolkit](/blog/why-neondatabase-toolkit).
+- **Postgres 17**: You can now run the very latest version of Postgres on Neon. [Read the announcement](/blog/postgres-17).
 - **SQL Editor AI features**: We added AI features to the Neon SQL Editor, including SQL generation, AI-generated query names, and an AI assistant that will fix your queries. [Learn more](/docs/get-started-with-neon/query-with-neon-sql-editor#ai-features).
 - **A new Business plan with more compute and storage**: This new plan provides higher storage and compute allowances (500 GB-month storage and 1,000 compute hours) in addition to all of Neon's advanced features. It also offers potential cost savings for customers requiring more storage than our Scale plan provides. To learn more, please refer to our [Pricing](/pricing) page and [Plans](/docs/introduction/plans) documentation.
 - **Data migration support with inbound logical replication**: We've introduced inbound logical replication as the first step toward enabling seamless, low-downtime migrations from your current database provider to Neon. This feature allows you to use Neon as your development environment, taking advantage of developer-friendly tools like branching and our [GitHub integration](/docs/guides/neon-github-integration), even if you keep production with your existing provider. To get started, explore our guides for replicating data from AlloyDB, Aurora, CloudSQL, and RDS. See [Replicate data to Neon](/docs/guides/logical-replication-guide#replicate-data-to-neon). Inbound logical replication also supports migrating data between Neon projects, useful for version, region, or account migrations. See [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
@@ -164,18 +164,18 @@ As always, we are listening. If you see something you like, something you disagr
 
 The Neon **Limited Preview** started in February 2022 and was made available to a small number of select users and friends.
 
-- On June 15th, 2022, the Neon team announced a [Technical Preview](/blogking Neon available to a wider audience. Thousands of users were able to try Neon's [Free Plan](/docs/introduction/#free-plan).
+- On June 15th, 2022, the Neon team announced a [Technical Preview](/blog/hello-world), making Neon available to a wider audience. Thousands of users were able to try Neon's [Free Plan](/docs/introduction/#free-plan).
 
 - On December 6th, 2022, Neon released its branching feature and dropped the invite gate, welcoming everyone to try Neon's Free Plan.
 
 - In the first quarter of 2023, Neon launched [paid plans](/pricing) with new features like [Project Collaboration](/docs/guides/project-collaboration-guide), [Autoscaling](/docs/introduction/autoscaling), and [Scale to Zero](/docs/introduction/scale-to-zero). We also added support for AWS US East (N. Virginia)
 
-- In the second quarter of 2023, we released the [Neon CLI](/docs/reference/neon-cli). Enhancements included a configurable [restore window](/docs/introduction/branch-restore) window, support for Postgres 16, and [SOC 2 Type 1](/blogjourney-to-soc2) compliance.
+- In the second quarter of 2023, we released the [Neon CLI](/docs/reference/neon-cli). Enhancements included a configurable [restore window](/docs/introduction/branch-restore) window, support for Postgres 16, and [SOC 2 Type 1](/blog/soc2-type-1#our-journey-to-soc2) compliance.
 
-- In the third quarter of 2023, we added [IP allowlisting](/docs/introduction/ip-allow), email signup, and [logical replication](/docs/introduction/logical-replication). We also announced [SOC 2 Type 2](/blogliance.
+- In the third quarter of 2023, we added [IP allowlisting](/docs/introduction/ip-allow), email signup, and [logical replication](/docs/introduction/logical-replication). We also announced [SOC 2 Type 2](/blog/soc2-type2) compliance.
 
 - In the fourth quarter of 2023, we added support for the AWS Asia Pacific (Sydney) region, [Instant restore](/docs/guides/branch-restore) with Time Travel Assist, and new [Pricing](/pricing) plans.
 
-- On April 15th, 2024, Neon announced [General Availability](/blog
+- On April 15th, 2024, Neon announced [General Availability](/blog/neon-ga).
 
-For everything post-GA, please refer to our [Changelog](/docs/changelog) and the [Neon Blog](/blogtay updated with the latest information and announcements by subscribing to our [RSS feeds](/docs/reference/feeds) or [newsletter](/blog#subscribe-(/blog
+For everything post-GA, please refer to our [Changelog](/docs/changelog) and the [Neon Blog](/blog). You can also stay updated with the latest information and announcements by subscribing to our [RSS feeds](/docs/reference/feeds) or [newsletter](/blog#subscribe-form).

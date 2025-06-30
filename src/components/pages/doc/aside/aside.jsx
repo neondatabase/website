@@ -7,33 +7,28 @@ import ChangelogForm from 'components/shared/changelog-form';
 import TableOfContents from 'components/shared/table-of-contents';
 
 const Aside = ({
-  isUseCase,
+  isTemplate,
   isDocsIndex,
   isChangelog,
   enableTableOfContents,
   tableOfContents,
   gitHubPath,
+  className,
 }) => (
   <div
     className={clsx(
       'relative col-span-2 -ml-12 max-w-64 xl:hidden',
-      isUseCase
+      isTemplate
         ? 'col-start-11 2xl:col-span-3 2xl:col-start-10 2xl:ml-auto 2xl:max-w-[238px]'
-        : 'col-start-10 3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6'
+        : 'col-start-10 3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6',
+      className
     )}
   >
-    <div
-      className={clsx(
-        'sticky flex flex-col pb-5',
-        isUseCase
-          ? 'top-[188px] max-h-[calc(100vh-188px)]'
-          : 'top-[136px] max-h-[calc(100vh-136px)]'
-      )}
-    >
-      {enableTableOfContents && <TableOfContents items={tableOfContents} isUseCase={isUseCase} />}
+    <div className="sticky top-[136px] flex max-h-[calc(100vh-136px)] flex-col pb-5">
+      {enableTableOfContents && <TableOfContents items={tableOfContents} isTemplate={isTemplate} />}
       {isDocsIndex && <ChatOptions isSidebar />}
       {isChangelog && <ChangelogForm isSidebar />}
-      {!isChangelog && !isUseCase && (
+      {!isChangelog && !isTemplate && (
         <Actions gitHubPath={gitHubPath} withBorder={enableTableOfContents} />
       )}
     </div>
@@ -41,11 +36,12 @@ const Aside = ({
 );
 
 Aside.propTypes = {
-  isUseCase: PropTypes.bool,
+  isTemplate: PropTypes.bool,
   isDocsIndex: PropTypes.bool,
   isChangelog: PropTypes.bool,
   enableTableOfContents: PropTypes.bool,
   tableOfContents: PropTypes.array,
   gitHubPath: PropTypes.string,
+  className: PropTypes.string,
 };
 export default Aside;

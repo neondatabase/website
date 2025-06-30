@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/go
   - /docs/integrations/go
-updatedOn: '2025-04-20T15:44:26.049Z'
+updatedOn: '2025-06-30T11:30:21.900Z'
 ---
 
 To connect to Neon from a Go application:
@@ -44,7 +44,7 @@ import (
 )
 
 func main() {
-    connStr := "postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
+    connStr := "postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
     db, err := sql.Open("postgres", connStr)
     if err != nil {
         panic(err)
@@ -73,7 +73,7 @@ import (
 )
 
 func main() {
-    connStr := "postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
+    connStr := "postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
     conn, err := pgx.Connect(context.Background(), connStr)
     if err != nil {
         panic(err)

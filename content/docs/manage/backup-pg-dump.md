@@ -2,7 +2,7 @@
 title: Backups with pg_dump
 subtitle: Learn how to create a backup of your Neon database using pg_dump
 enableTableOfContents: true
-updatedOn: '2025-04-21T13:38:49.809Z'
+updatedOn: '2025-06-30T11:30:21.920Z'
 ---
 
 This topic describes how to create a backup of your Neon database using the Postgres `pg_dump` utility and how to restore a backup using `pg_restore`.
@@ -56,7 +56,7 @@ Following this procedure will create a database backup locally, where you're run
    Your connection string should look something like this:
 
    ```bash shouldWrap
-   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
    ```
 
 3. Create a backup of your Neon database by running the following `pg_dump` command with your Neon database connection string.
@@ -68,7 +68,7 @@ Following this procedure will create a database backup locally, where you're run
    After adding your Neon database connection string and a dump file name, your command will look something like this:
 
    ```bash shouldWrap
-   pg_dump -Fc -v -d "postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require" -f mydatabase.bak
+   pg_dump -Fc -v -d "postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require" -f mydatabase.bak
    ```
 
    The `pg_dump` command above includes these arguments:
@@ -94,7 +94,7 @@ This procedure shows how to restore a database using the `pg_restore` utility fr
    Your connection string should look something like this:
 
    ```bash shouldWrap
-   postgresql://alex:AbC123dEf@ep-dry-morning-a8vn5za2.us-east-2.aws.neon.tech/neondb?sslmode=require
+   postgresql://alex:AbC123dEf@ep-dry-morning-a8vn5za2.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
    ```
 
 4. Restore your data to the target database in Neon with `pg_restore`.
@@ -106,7 +106,7 @@ This procedure shows how to restore a database using the `pg_restore` utility fr
    After adding your Neon database connection string and the dump file name, your command will look something like this:
 
    ```bash shouldWrap
-   pg_restore -v -d "postgresql://alex:AbC123dEf@ep-dry-morning-a8vn5za2.us-east-2.aws.neon.tech/neondb?sslmode=require" mydatabase.bak
+   pg_restore -v -d "postgresql://alex:AbC123dEf@ep-dry-morning-a8vn5za2.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require" mydatabase.bak
    ```
 
    The example above includes these arguments:
@@ -124,15 +124,15 @@ Before performing this procedure:
 
 - A new Neon project was created for the destination database, and a database with the same name as the source database was created (`neondb`)
 - Connection strings for the source and destination databases were collected:
-  - source: `postgresql://neondb_owner:npg_AbC123dEf@ep-dry-morning-a8vn5za2.us-east-2.aws.neon.tech/neondb?sslmode=require`
-  - destination: `postgresql://neondb_owner:npg_AbC123dEf@ep-dry-morning-a8vn5za2.us-east-2.aws.neon.tech/neondb?sslmode=require`
+  - source: `postgresql://neondb_owner:npg_AbC123dEf@ep-dry-morning-a8vn5za2.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require`
+  - destination: `postgresql://neondb_owner:npg_AbC123dEf@ep-dry-morning-a8vn5za2.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require`
 
 ```bash shouldWrap
 ~$ cd mydump
-~/mydump$ pg_dump -Fc -v -d "postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require" -f mydatabase.bak
+~/mydump$ pg_dump -Fc -v -d "postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require" -f mydatabase.bak
 
 ~/mydump$ ls
 mydatabase.bak
 
-~/mydump$ pg_restore -v -d "postgresql://alex:AbC123dEf@ep-dry-morning-a8vn5za2.us-east-2.aws.neon.tech/neondb?sslmode=require" mydatabase.bak
+~/mydump$ pg_restore -v -d "postgresql://alex:AbC123dEf@ep-dry-morning-a8vn5za2.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require" mydatabase.bak
 ```

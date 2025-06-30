@@ -3,7 +3,7 @@ title: Authenticate Neon Postgres application users with Clerk
 subtitle: Learn how to add authentication to a Neon Postgres database application using
   Clerk
 enableTableOfContents: true
-updatedOn: '2025-03-07T12:49:26.102Z'
+updatedOn: '2025-06-30T11:30:21.893Z'
 ---
 
 User authentication is a critical requirement for web applications. Modern applications require advanced features like social login and multi-factor authentication besides the regular login flow. Additionally, managing personally identifiable information (PII) requires a secure solution compliant with data protection regulations.
@@ -68,7 +68,7 @@ Make sure to add an entry for `.env` to your `.gitignore` file, so that it's not
 You can find your database connection string by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
 
 ```bash
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 Add this connection string to the `.env` file in your Next.js project.

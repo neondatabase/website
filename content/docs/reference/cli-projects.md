@@ -2,7 +2,7 @@
 title: Neon CLI commands — projects
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2025-05-30T16:54:40.491Z'
+updatedOn: '2025-06-24T21:13:47.200Z'
 ---
 
 ## Before you begin
@@ -44,10 +44,10 @@ neon projects list [options]
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `projects` subcommand supports this option:
 
-| Option           | Description                                                                                                              | Type   | Required |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------ | ------ | :------: |
-| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                            | string |          |
-| `--org-id`       | List all projects belonging to the specified organization. If unspecified, personal account projects are listed instead. | string |          |
+| Option           | Description                                                                                   | Type   | Required |
+| ---------------- | --------------------------------------------------------------------------------------------- | ------ | :------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string |          |
+| `--org-id`       | List all projects belonging to the specified organization.                                    | string |          |
 
 #### Examples
 
@@ -103,17 +103,20 @@ neon projects create [options]
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `create` subcommand supports these options:
 
-| Option           | Description                                                                                                                                                                                                       | Type    | Required |
-| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | :------: |
-| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name.                                                                                                                    | string  |          |
-| `--name`         | The project name. The project ID is used if a name is not specified.                                                                                                                                              | string  |          |
-| `--region-id`    | The region ID. Possible values: `aws-us-west-2`, `aws-ap-southeast-1`, `aws-ap-southeast-2`, `aws-eu-central-1`, `aws-us-east-1`, `aws-us-east-2`, `azure-eastus2`. Defaults to `aws-us-east-2` if not specified. | string  |          |
-| `--org-id`       | The organization ID where you want this project to be created. If unspecified, the project is created in your personal account.                                                                                   | string  |          |
-| `--psql`         | Connect to your new project's database via `psql` immediately on project creation.                                                                                                                                | boolean |          |
-| `--database`     | The database name. If not specified, the default database name will be used.                                                                                                                                      | string  |          |
-| `--role`         | The role name. If not specified, the default role name will be used.                                                                                                                                              | string  |          |
-| `--set-context`  | Set the current context to the new project.                                                                                                                                                                       | boolean |          |
-| `--cu`           | The compute size for the default branch's primary compute. Could be a fixed size (e.g., "2") or a range delimited by a dash (e.g., "0.5-3").                                                                      | string  |          |
+| Option                       | Description                                                                                                                                                                                                       | Type    | Required |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | :------: |
+| `--context-file`             | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name.                                                                                                                    | string  |          |
+| `--block-public-connections` | Blocks public internet connections. See [Private Networking](/docs/guides/neon-private-networking).                                                                                                               | boolean |          |
+| `--block-vpc-connections`    | Blocks connections using VPC. See [Private Networking](/docs/guides/neon-private-networking).                                                                                                                     | boolean |          |
+| `--hipaa`                    | Enable the project for HIPAA. See [HIPAA Compliance](/docs/security/hipaa).                                                                                                                                       | boolean |          |
+| `--name`                     | The project name. The project ID is used if a name is not specified.                                                                                                                                              | string  |          |
+| `--region-id`                | The region ID. Possible values: `aws-us-west-2`, `aws-ap-southeast-1`, `aws-ap-southeast-2`, `aws-eu-central-1`, `aws-us-east-1`, `aws-us-east-2`, `azure-eastus2`. Defaults to `aws-us-east-2` if not specified. | string  |          |
+| `--org-id`                   | The organization ID where you want this project to be created. If unspecified, your [default organization](/docs/reference/glossary#default-organization) will be used.                                           | string  |          |
+| `--psql`                     | Connect to your new project's database via `psql` immediately on project creation.                                                                                                                                | boolean |          |
+| `--database`                 | The database name. If not specified, the default database name will be used.                                                                                                                                      | string  |          |
+| `--role`                     | The role name. If not specified, the default role name will be used.                                                                                                                                              | string  |          |
+| `--set-context`              | Set the current context to the new project.                                                                                                                                                                       | boolean |          |
+| `--cu`                       | The compute size for the default branch's primary compute. Could be a fixed size (e.g., "2") or a range delimited by a dash (e.g., "0.5-3").                                                                      | string  |          |
 
 <Admonition type="note">
 Neon projects created using the CLI use the default Postgres version, which is Postgres 17. To create a project with a different Postgres version, you can use the [Neon Console](/docs/manage/projects#create-a-project) or [Neon API](https://api-docs.neon.tech/reference/createproject). 
@@ -243,6 +246,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--context-file`             | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                                                | string  |          |
 | `--block-vpc-connections`    | When set, connections using VPC endpoints are disallowed. Use `--block-vpc-connections=false` to set the value to false.                     | boolean |          |
 | `--block-public-connections` | When set, connections from the public internet are disallowed. Use `--block-public-connections=false` to set the value to false.             | boolean |          |
+| `--hipaa`                    | Enable the project for HIPAA. See [HIPAA Compliance](/docs/security/hipaa).                                                                  | boolean |          |
 | `--cu`                       | The compute size for the default branch's primary compute. Could be a fixed size (e.g., "2") or a range delimited by a dash (e.g., "0.5-3"). | string  |          |
 | `--name`                     | The project name. The value cannot be empty.                                                                                                 | string  | &check;  |
 

@@ -3,7 +3,7 @@ title: The neon extension
 subtitle: An extension for Neon-specific statistics including the Local File Cache hit
   ratio
 enableTableOfContents: true
-updatedOn: '2025-05-11T11:23:50.613Z'
+updatedOn: '2025-06-30T11:30:21.888Z'
 ---
 
 The `neon` extension provides functions and views designed to gather Neon-specific metrics.
@@ -54,7 +54,7 @@ CREATE EXTENSION neon;
 To connect to your database. You can find a connection string for your database on the Neon Dashboard.
 
 ```bash shouldWrap
-psql postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+psql postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 Issue the following query to view LFC usage data for your compute:

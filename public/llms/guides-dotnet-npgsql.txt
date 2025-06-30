@@ -1,19 +1,16 @@
 # Connect a .NET (C#) application to Neon
 
-Set up a Neon project in seconds and connect from a .NET (C#) application
+> The document outlines the steps for connecting a .NET (C#) application to a Neon database using the Npgsql library, detailing configuration and connection string setup specific to Neon's environment.
+
+## Source
+
+- [Connect a .NET (C#) application to Neon HTML](https://neon.com/docs/guides/dotnet-npgsql): The original HTML version of this documentation
 
 This guide describes how to create a Neon project and connect to it from a .NET (C#) application. We'll build a simple book library that demonstrates basic database operations using the Npgsql provider.
 
-
-The same configuration steps can be used for any .NET application type, including ASP.NET Core Web API, MVC, Blazor, or Windows Forms applications.
-
+   **Note**: The same configuration steps can be used for any .NET application type, including ASP.NET Core Web API, MVC, Blazor, or Windows Forms applications.
 
 To connect to Neon from a .NET application:
-
-1. [Create a Neon Project](#create-a-neon-project)
-2. [Create a .NET project and add dependencies](#create-a-net-project-and-add-dependencies)
-3. [Store your Neon credentials](#store-your-neon-credentials)
-4. [Perform database operations](#perform-database-operations)
 
 ## Create a Neon project
 
@@ -32,9 +29,7 @@ If you do not have one already, create a Neon project.
    cd NeonLibraryExample
    ```
 
-   
-    Ensure you install package versions that match your .NET version. You can verify your .NET version at any time by running `dotnet --version`.
-   
+      **Important** IMPORTANT: Ensure you install package versions that match your .NET version. You can verify your .NET version at any time by running `dotnet --version`.
 
 2. Add the Npgsql NuGet package:
 
@@ -60,13 +55,11 @@ If you do not have one already, create a Neon project.
    dotnet add package Microsoft.Extensions.Configuration.Json --version YOUR_DOTNET_VERSION
    ```
 
-
-To ensure the security of your data, never commit your credentials to version control. Consider using user secrets or environment variables for development, and secure vault solutions for production.
-
+   **Important**: To ensure the security of your data, never commit your credentials to version control. Consider using user secrets or environment variables for development, and secure vault solutions for production.
 
 ## Perform database operations
 
-### Step 1: Create table
+### Create table
 
 The following code gets the connection string from `appsettings.json`, establishes a connection to your Neon database, and creates a new table for storing books. We use the `NpgsqlConnection` to open a connection and then execute a `CREATE TABLE` statement using NpgsqlCommand's `ExecuteNonQuery()` method. The table includes columns for the book's ID (automatically generated), title, author, and publication year.
 
@@ -98,7 +91,7 @@ using (var conn = new NpgsqlConnection(connString))
 }
 ```
 
-### Step 2: Add books
+### Add books
 
 Next, we'll insert some books into our new table. We use an `INSERT` statement with parameters to safely add books to the database. The `ExecuteNonQuery()` method tells us how many books were added.
 
@@ -126,7 +119,7 @@ using (var conn = new NpgsqlConnection(connString))
 }
 ```
 
-### Step 3: List books
+### List books
 
 To retrieve our books, we'll use a `SELECT` statement and read the results using a DataReader. The reader allows us to iterate through the results row by row, accessing each column value with the appropriate Get method based on its data type.
 
@@ -150,7 +143,7 @@ using (var conn = new NpgsqlConnection(connString))
 }
 ```
 
-### Step 4: Update books
+### Update books
 
 To update books in our database, we use an `UPDATE` statement with parameters to ensure the operation is performed safely. The `ExecuteNonQuery()` method tells us how many books were updated.
 
@@ -174,7 +167,7 @@ using (var conn = new NpgsqlConnection(connString))
 }
 ```
 
-### Step 5: Remove books
+### Remove books
 
 To delete books from our database, we use a `DELETE` statement with parameters to ensure the operation is performed safely. The `ExecuteNonQuery()` method tells us how many books were deleted.
 
@@ -206,13 +199,11 @@ When working with Neon and .NET:
 
 You can find the source code for the application described in this guide on GitHub.
 
-
-Get started with .NET (C#) and Neon
-
+- [Get started with .NET (C#) and Neon](https://github.com/neondatabase/examples/tree/main/with-dotnet-npgsql)
 
 ## Community Guides
 
-- [Connect an Entity Framework application to Neon](/docs/guides/dotnet-entity-framework)
+- [Connect an Entity Framework application to Neon](https://neon.com/docs/guides/dotnet-entity-framework)
 
 ## Resources
 

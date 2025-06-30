@@ -1,8 +1,12 @@
 # Neon RLS roadmap
 
-Learn about upcoming features and improvements for Neon RLS
+> The "Neon RLS roadmap" document outlines the planned development and implementation stages of Row-Level Security (RLS) features for Neon, detailing the timeline and specific enhancements to be integrated into the platform.
 
-[Neon RLS](/docs/guides/neon-rls) is an exciting feature, and we want to build more capabilities on top of it.
+## Source
+
+- [Neon RLS roadmap HTML](https://neon.com/docs/guides/neon-rls-future): The original HTML version of this documentation
+
+[Neon RLS](https://neon.com/docs/guides/neon-rls) is an exciting feature, and we want to build more capabilities on top of it.
 
 Here are some ideas of things we could build next — in no particular order (unless stated otherwise). If you see something you like, or something you'd like to see but don't, let us know in [Discord](https://discord.com/channels/1176467419317940276/1176788564890112042)!
 
@@ -44,11 +48,11 @@ The ability to define a query allow-list would help increase the safety of SQL q
 
 ## Investigate React/TanStack query hooks for SQL queries
 
-We're exploring the generation of React Query hooks for SQL queries, simplifying the process of building applications that leverage SQL from the frontend, or that use React Server Components.
+We're exploring the generation of React Query hooks for SQL queries, simplifying the process of building applications that use React Server Components.
 
 ## Simplified OAuth flow for JWKS endpoint
 
-Instead of manually copying and pasting the JWKS endpoint from your authentication provider's console, we are interested in developing an OAuth flow that allows you to simply `Sign in with `, automatically populating the JWKS endpoint.
+Instead of manually copying and pasting the JWKS endpoint from your authentication provider's console, we are interested in developing an OAuth flow that allows you to simply `Sign in with <Provider>`, automatically populating the JWKS endpoint.
 
 ## User interface for RLS and user impersonation
 
