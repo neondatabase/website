@@ -3,7 +3,7 @@ title: Replicate data with Kafka (Confluent) and Debezium
 subtitle: Learn how to replicate data from Neon with Kafka (Confluent) and Debezium
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-03T20:41:57.321Z'
+updatedOn: '2025-06-30T11:30:21.905Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -171,7 +171,7 @@ To set up a Postgres CDC source connector for Confluent Cloud:
    - Add the connection details for your Neon database. You can find your admin Neon database connection credentials by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Your connection string will look something like this:
 
      ```text
-     postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+     postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
      ```
 
      Enter the details for **your connection string** into the source connector fields. Based on the sample connection string above, the values would be specified as shown below. Your values will differ.

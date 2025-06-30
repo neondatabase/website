@@ -61,7 +61,7 @@ This method uses Neon's managed server and OAuth authentication.
      "mcpServers": {
        "Neon": {
          "command": "npx",
-         "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
+         "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/sse"]
        }
      }
    }

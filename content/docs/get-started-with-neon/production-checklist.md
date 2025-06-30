@@ -3,7 +3,7 @@ title: Getting ready for production
 subtitle: A checklist of recommended settings to optimize performance, security, and
   reliability
 enableTableOfContents: true
-updatedOn: '2025-05-30T16:54:40.455Z'
+updatedOn: '2025-06-30T11:30:21.890Z'
 ---
 
 <CheckList title="Production checklist">
@@ -106,7 +106,7 @@ Use a pooled connection string by adding `-pooler` to your endpoint ID, or simpl
 Example connection string:
 
 ```bash shouldWrap
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 ## Increase your project's restore window to 7 days

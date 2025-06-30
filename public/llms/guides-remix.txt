@@ -1,15 +1,14 @@
 # Connect a Remix application to Neon
 
-Set up a Neon project in seconds and connect from a Remix application
+> The document titled "Connect a Remix application to Neon" guides users through the process of integrating a Remix application with a Neon database, detailing the necessary steps and configurations specific to Neon's environment.
+
+## Source
+
+- [Connect a Remix application to Neon HTML](https://neon.com/docs/guides/remix): The original HTML version of this documentation
 
 Remix is an open-source full stack JavaScript framework that lets you focus on building out the user interface using familiar web standards. This guide explains how to connect Remix with Neon using a secure server-side request.
 
 To create a Neon project and access it from a Remix application:
-
-1. [Create a Neon project](#create-a-neon-project)
-2. [Create a Remix project and add dependencies](#create-a-remix-project-and-add-dependencies)
-3. [Configure a Postgres client](#configure-the-postgres-client)
-4. [Run the app](#run-the-app)
 
 ## Create a Neon project
 
@@ -43,10 +42,10 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 ## Store your Neon credentials
 
-Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).
 
-```shell shouldWrap
-DATABASE_URL="postgresql://:@.neon.tech:/?sslmode=require"
+```shell
+DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require"
 ```
 
 ## Configure the Postgres client
@@ -57,7 +56,7 @@ There are two parts to connecting a Remix application to Neon. The first is `db.
 
 Create a `db.server.ts` file at the root of your `/app` directory and add the following code snippet to connect to your Neon database:
 
-
+Tab: node-postgres
 
 ```javascript
 import pg from 'pg';
@@ -70,6 +69,8 @@ const pool = new pg.Pool({
 export { pool };
 ```
 
+Tab: postgres.js
+
 ```javascript
 import postgres from 'postgres';
 
@@ -77,6 +78,8 @@ const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
 
 export { sql };
 ```
+
+Tab: Neon serverless driver
 
 ```javascript
 import { neon } from '@neondatabase/serverless';
@@ -86,13 +89,11 @@ const sql = neon(process.env.DATABASE_URL);
 export { sql };
 ```
 
-
-
 ### route
 
 Create a new route in your `app/routes` directory and import the `db.server` file.
 
-
+Tab: node-postgres
 
 ```javascript
 import { pool } from '~/db.server';
@@ -111,9 +112,11 @@ export const loader = async () => {
 
 export default function Page() {
   const data = useLoaderData();
-  return {data};
+  return <>{data}</>;
 }
 ```
+
+Tab: postgres.js
 
 ```javascript
 import { sql } from '~/db.server';
@@ -127,9 +130,11 @@ export const loader = async () => {
 
 export default function Page() {
   const data = useLoaderData();
-  return {data};
+  return <>{data}</>;
 }
 ```
+
+Tab: Neon serverless driver
 
 ```javascript
 import { sql } from '~/db.server';
@@ -143,17 +148,15 @@ export const loader = async () => {
 
 export default function Page() {
   const data = useLoaderData();
-  return {data};
+  return <>{data}</>;
 }
 ```
-
-
 
 ## Run the app
 
-When you run `npm run dev` you can expect to see the following on [localhost:3000](localhost:3000):
+When you run `npm run dev` you can expect to see the following on [localhost:3000](https://neon.com/localhost:3000):
 
-```shell shouldWrap
+```shell
 PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
 ```
 
@@ -161,6 +164,4 @@ PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1
 
 You can find the source code for the application described in this guide on GitHub.
 
-
-
-Get started with Remix and Neon
+- [Get started with Remix and Neon](https://github.com/neondatabase/examples/tree/main/with-remix)

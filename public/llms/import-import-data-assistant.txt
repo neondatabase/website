@@ -1,16 +1,16 @@
 # Import Data Assistant
 
-> The Import Data Assistant is an automated tool that helps you move your existing Postgres database to Neon with minimal effort. Simply provide a connection string to your source database, and the assistant handles compatibility checks, data transfer, and verification automatically.
-
-When you're ready to move your data to Neon, our Import Data Assistant can help you automatically copy your existing database to Neon. You only need to provide a connection string to get started.
+> The "Import Data Assistant" documentation guides Neon users through the process of importing data into their Neon database using the Import Data Assistant tool, detailing steps and requirements specific to Neon's platform.
 
 ## Source
 
 - [Import Data Assistant HTML](https://neon.com/docs/import/import-data-assistant): The original HTML version of this documentation
 
-## Feature status
+When you're ready to move your data to Neon, our Import Data Assistant can help you automatically copy your existing database to Neon. You only need to provide a connection string to get started.
 
-This feature is currently in beta.
+**Note**: **Import Data Assistant** is in beta and ready to use.
+
+   **Tip** Migrate between Neon projects: You can also use the **Import Data Assistant** to migrate data between Neon projects. This is useful if you want to upgrade to a newer Postgres version (for example, from Postgres 16 to 17), or move your database to a different region. Just create a new project with the desired Postgres version or region, then use the database connection string from your existing Neon project to import the data into the new one.
 
 ## Ways to import
 
@@ -19,8 +19,12 @@ The Import Data Assistant always creates a **new branch** for your imported data
 1. **From the Projects page:**  
    Start from the project list to create a new project and import your data into a new branch as part of the flow.
 
+   
+
 2. **From within a project:**  
    Use the Getting Started widget on a project dashboard to import your data into a new branch of the existing project.
+
+   
 
 Both options use the same automated import process — just provide your database connection string and we'll handle the rest.
 
@@ -36,11 +40,9 @@ You'll need:
 - **Admin privileges** on your source database. We recommend using a superuser or a user with the necessary `CREATE`, `SELECT`, `INSERT`, and `REPLICATION` privileges.
 - A database **smaller than 10 GB** in size for automated import
 
-If your database is larger than 10 GB and you need help, [contact us](https://neon.com/migration-assistance).
+   **Important**: If your database is larger than 10 GB and you need help, [contact us](https://neon.com/migration-assistance).
 
-## Import process
-
-### Check Compatibility
+## Check Compatibility
 
 Enter your database connection string and we'll verify:
 
@@ -49,7 +51,7 @@ Enter your database connection string and we'll verify:
 - Extension compatibility
 - Region availability
 
-### Import Your Data
+## Import Your Data
 
 Once checks pass, we'll:
 
@@ -57,14 +59,13 @@ Once checks pass, we'll:
 - Copy your data automatically using `pg_dump` and `pg_restore`.
 - Verify that the import completed successfully.
 
-During import, your source database remains untouched — we only read from it to create a copy in Neon.
+   **Note**: During import, your source database remains untouched — we only read from it to create a copy in Neon.
 
 ### Known Limitations
 
-- Currently limited to databases **smaller than 10GB**. We are actively working on supporting bigger workloads. In the meantime, contact support if you are looking to migrate bigger databases.
+- Currently limited to databases **smaller than 10GB**. We are actively working on supporting bigger workloads. In the meantime, conctact support if you are looking to migrate bigger databases.
 - The feature is supported in **AWS regions** only.
-- Databases that use **event triggers are not supported**.
-- Supabase and Heroku databases are not supported, as both use proprietary event triggers.
+- Supabase and Heroku databases are currently not supported due to unsupported Postgres extensions.
 - Databases running on **IPv6 are not supported yet**.
 - AWS RDS is generally supported, though some incompatibilities may exist. Support for other providers may vary.
 
@@ -73,8 +74,10 @@ During import, your source database remains untouched — we only read from it t
 After a successful import:
 
 1. Find your newly imported database branch on the **Branches** page of your project.
+
    
-   _Imported branches are typically named with a timestamp._
+
+   _Imported branches are typically named with a timestamp, as shown here._
 
 2. Run some test queries to ensure everything imported correctly.
 3. Click on the three dots next to the branch name and select **Set as default** to make it your default branch.
@@ -86,7 +89,7 @@ After a successful import:
 ## Need Help?
 
 - For databases **larger than 10GB**: [Contact our migration team](https://neon.com/migration-assistance)
-- For **technical issues**: [Contact support](https://neon.com/contact-support)
+- For **technical issues**: [Contact support](https://neon.com/docs/introduction/support)
 - For **provider-specific questions**: Let us know what database provider you're using when you contact us
 
 If your database import failed for any reason, please [contact our support team](https://neon.com/migration-assistance). We're here to help you get up and running, including assistance with databases larger than 10GB.

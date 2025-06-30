@@ -2,7 +2,7 @@
 title: The pgrag extension
 subtitle: Create end-to-end Retrieval-Augmented Generation (RAG) pipelines
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.051Z'
+updatedOn: '2025-06-23T15:24:08.758Z'
 ---
 
 <InfoBlock>

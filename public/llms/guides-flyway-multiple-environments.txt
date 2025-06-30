@@ -1,6 +1,6 @@
 # Manage multiple database environments
 
-> This guide explains how to manage schemas for multiple database environments with Flyway and Neon's branching feature, covering environment setup, configuration, and migration processes.
+> The document outlines how Neon users can manage multiple database environments using Flyway, detailing steps for setting up, configuring, and maintaining different environments for development, testing, and production.
 
 ## Source
 
@@ -37,6 +37,8 @@ Using Neon's branching feature, create your _development_ and _staging_ database
 
 Perform these steps twice, once for your _development_ branch and once for your _staging_ branch.
 
+Tab: Console
+
 1. In the Neon Console, select your project.
 2. Select **Branches**.
 3. Click **New Branch** to open the branch creation dialog.
@@ -44,9 +46,13 @@ Perform these steps twice, once for your _development_ branch and once for your 
 5. Select a parent branch. This should be the branch where you created the `person` table.
 6. Leave the other default settings and click **Create Branch**.
 
+Tab: CLI
+
 ```bash showLineNumbers
 neon branches create --name development
 ```
+
+Tab: API
 
 ```bash showLineNumbers
 curl --request POST \
@@ -78,19 +84,19 @@ Your connection strings should look something like the ones shown below. Note th
 
 - **main**
 
-  ```bash shouldWrap
+  ```bash
   jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
   ```
 
 - **development**
 
-  ```bash shouldWrap
+  ```bash
   jdbc:postgresql://ep-mute-night-47642501.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
   ```
 
 - **staging**
 
-  ```bash shouldWrap
+  ```bash
   jdbc:postgresql://ep-shrill-shape-27763949.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
   ```
 
@@ -98,8 +104,7 @@ Your connection strings should look something like the ones shown below. Note th
 
 To enable Flyway to connect to multiple environments, we'll create a configuration file for each environment and add the environment-specific connection details. When running Flyway, you'll specify the configuration file to be used.
 
-> **Note**
-> By default, Flyway loads its configuration from the default `conf/flyway.conf` file. This is true even if you specify another configuration file when running Flyway. You can take advantage of this behavior by defining non-environment specific configuration settings in the default `conf/flyway.conf` file, and placing your environment-specific settings in separate configuration files, as we'll do here.
+   **Note**: By default, Flyway loads its configuration from the default `conf/flyway.conf` file. This is true even if you specify another configuration file when running Flyway. You can take advantage of this behavior by defining non-environment specific configuration settings in the default `conf/flyway.conf` file, and placing your environment-specific settings in separate configuration files, as we'll do here.
 
 1. Switch to your Flyway `/conf` directory and create the following configuration files, one for each environment, by copying the default configuration file. For example:
 
@@ -112,7 +117,7 @@ To enable Flyway to connect to multiple environments, we'll create a configurati
 
 2. In each configuration file, update the following items with the correct connection details for that database environment. The `url` setting will differ for each environment (in `env_prod.conf`, the `url` will point to `main`). In this example, where you are the only user, the `user` and `password` settings should be the same for each of your three database environments.
 
-   ```bash shouldWrap
+   ```bash
    flyway.url=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/neondb
 
    flyway.user=alex
@@ -141,13 +146,19 @@ insert into person (ID, NAME) values (3, 'Ms. Smith');
 
 Run the migration on each environment in order by specifying the environment's configuration file in the `flyway migrate` command. You'll start with your `development` environment, then `staging`, and then finally, `production`.
 
+Tab: Development
+
 ```bash showLineNumbers
 flyway migrate -configFiles="conf/env_dev.conf"
 ```
 
+Tab: Staging
+
 ```bash showLineNumbers
 flyway migrate -configFiles="conf/env_staging.conf"
 ```
+
+Tab: Production
 
 ```bash showLineNumbers
 flyway migrate -configFiles="conf/env_prod.conf"

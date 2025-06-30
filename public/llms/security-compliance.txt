@@ -1,12 +1,12 @@
 # Compliance
 
-> This document outlines Neon's compliance certifications and standards, including SOC 2, SOC 3, ISO 27001, ISO 27701, GDPR, CCPA, and HIPAA, demonstrating our commitment to data security and privacy.
-
-At Neon, we prioritize data security and privacy, and we have achieved several key compliances that validate our efforts. We have completed audits for SOC 2 Type 1 and Type 2, SOC 3, ISO 27001, and ISO 27701, and we adhere to GDPR and CCPA regulations.
+> The "Compliance" document outlines Neon's adherence to industry standards and regulations, detailing its security certifications and practices to ensure data protection and compliance with legal requirements.
 
 ## Source
 
 - [Compliance HTML](https://neon.com/docs/security/compliance): The original HTML version of this documentation
+
+At Neon, we prioritize data security and privacy, and we have achieved several key compliances that validate our efforts. We have completed audits for SOC 2 Type 1 and Type 2, SOC 3, ISO 27001, and ISO 27701, and we adhere to GDPR and CCPA regulations.
 
 ## SOC 2
 
@@ -14,7 +14,7 @@ We have successfully attained SOC 2 Type 1 and Type 2 compliance. These complian
 
 ## SOC 3
 
-The SOC 3 report is a public-facing version of the SOC 2 report, providing assurance to external parties about our system's ability to meet the trust service criteria without disclosing sensitive details. Neon [Business](/docs/introduction/plans#business) plan users can request this audit report through our [Trust Center](https://trust.neon.tech/).
+The SOC 3 report is a public-facing version of the SOC 2 report, providing assurance to external parties about our system's ability to meet the trust service criteria without disclosing sensitive details. Neon [Business](https://neon.com/docs/introduction/plans#business) plan users can request this audit report through our [Trust Center](https://trust.neon.tech/).
 
 ## ISO 27001
 
@@ -42,7 +42,7 @@ To request a draft Business Associate Agreement (BAA), please [contact the Neon 
 
 HIPAA-enabled accounts can request access to HIPAA audit logs by [opening a support request](https://console.neon.tech/app/projects?modal=support).
 
-For additional information about HIPAA compliance and Neon, please refer to the [Neon HIPAA Compliance Guide](/docs/security/hipaa).
+For additional information about HIPAA compliance and Neon, please refer to the [Neon HIPAA Compliance Guide](https://neon.com/docs/security/hipaa).
 
 ## Questions?
 

@@ -1,11 +1,12 @@
 # Connect a Go application to Neon
 
-Set up a Neon project in seconds and connect from a Go application
+> The document outlines the steps required to connect a Go application to a Neon database, detailing the necessary configurations and code examples for seamless integration.
+
+## Source
+
+- [Connect a Go application to Neon HTML](https://neon.com/docs/guides/go): The original HTML version of this documentation
 
 To connect to Neon from a Go application:
-
-1. [Create a Neon project](#create-a-neon-project)
-2. [Configure Go project connection settings](#configure-go-application-connection-settings)
 
 ## Create a Neon project
 
@@ -21,9 +22,7 @@ To create a Neon project:
 
 Connecting to Neon requires configuring connection settings in your Go project's `.go` file.
 
-
-Neon is fully compatible with the `sql/db` package and common Postgres drivers, such as `lib/pq` and `pgx`.
-
+   **Note**: Neon is fully compatible with the `sql/db` package and common Postgres drivers, such as `pgx`.
 
 Specify the connection settings in your `.go` file, as shown in the following example:
 
@@ -31,10 +30,11 @@ Specify the connection settings in your `.go` file, as shown in the following ex
 package main
 
 import (
+    "context"
     "database/sql"
     "fmt"
 
-    _ "github.com/lib/pq"
+    _ "github.com/jackc/pgx/v5/stdlib"
 )
 
 func main() {
@@ -54,4 +54,34 @@ func main() {
 }
 ```
 
-You can find your database connection details by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+Alternatively, you can use the native pgx driver without the database/sql abstraction:
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/jackc/pgx/v5"
+)
+
+func main() {
+    connStr := "postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
+    conn, err := pgx.Connect(context.Background(), connStr)
+    if err != nil {
+        panic(err)
+    }
+    defer conn.Close(context.Background())
+
+    var version string
+    err = conn.QueryRow(context.Background(), "select version()").Scan(&version)
+    if err != nil {
+        panic(err)
+    }
+
+    fmt.Printf("version=%s\n", version)
+}
+```
+
+You can find your database connection details by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).

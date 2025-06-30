@@ -65,7 +65,7 @@ You can either watch the video below or follow the steps to set up the Neon MCP 
      "mcpServers": {
        "Neon": {
          "command": "npx",
-         "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
+         "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/sse"]
        }
      }
    }

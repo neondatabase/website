@@ -4,10 +4,10 @@ description: >-
   Learn how to use the Neon Data API, a ready-to-use REST API built on top of
   your Neon database
 enableTableOfContents: true
-updatedOn: '2025-05-23T18:48:33.105Z'
+updatedOn: '2025-06-20T15:34:40.024Z'
 ---
 
-<EarlyAccessProps feature_name="Neon Data API" />
+<FeatureBetaProps feature_name="Neon Data API" />
 
 <InfoBlock>
   <DocsList title="Related docs" theme="docs">

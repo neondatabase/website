@@ -1,6 +1,6 @@
 # Use Grafbase Edge Resolvers with Neon
 
-> This guide demonstrates how to create a GraphQL API using Grafbase and use Grafbase Edge Resolvers with the Neon serverless driver to interact with your Neon database at the edge, featuring a product marketplace example.
+> The document explains how to integrate Grafbase Edge Resolvers with Neon, detailing the steps to configure and deploy a Neon database with Grafbase for efficient data querying and management.
 
 ## Source
 
@@ -90,13 +90,13 @@ A database connection string is required to forward queries to your Neon databas
 1. Navigate to the Neon **Project Dashboard**.
 2. Click **Connect** and copy the connection string for your database. The connection string should appear similar to the following:
 
-   ```text shouldWrap
+   ```text
    postgresql://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
 3. Add a `DATABASE_URL` environment variable to your `grafbase/.env` file and set the value to your connection string. For example:
 
-   ```text shouldWrap
+   ```text
    DATABASE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]
    ```
 

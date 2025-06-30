@@ -2,7 +2,7 @@
 title: Provide read-only access with Read Replicas
 subtitle: Leverage read replicas to provide read-only access to your data
 enableTableOfContents: true
-updatedOn: '2025-04-25T12:49:01.713Z'
+updatedOn: '2025-06-30T11:30:21.913Z'
 ---
 
 When you create a read replica in Neon, you gain the ability to provide read-only access to your data. This is particularly useful when you want to grant access to users, partners, or third-party applications that only need to run queries to analyze data, generate reports, or audit your database. Since no write operations are permitted on read replicas, it ensures the integrity of your data while allowing others to work with up-to-date information.
@@ -28,7 +28,7 @@ Suppose you need to give a partner read-only access to your sales data so they c
    - Copy the connection string and provide it to your partner. The connection string might look something like this:
 
      ```bash shouldWrap
-     postgresql://partner:partner_password@ep-read-replica-12345.us-east-2.aws.neon.tech/sales_db?sslmode=require
+     postgresql://partner:partner_password@ep-read-replica-12345.us-east-2.aws.neon.tech/sales_db?sslmode=require&channel_binding=require
      ```
 
 3. **Read-only access for the partner**

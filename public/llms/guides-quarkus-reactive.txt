@@ -1,16 +1,14 @@
 # Connect Quarkus (Reactive) to Neon
 
-Learn how to connect to Neon from Quarkus using a Reactive SQL Client
+> The document outlines the steps to connect a Quarkus Reactive application to a Neon database, detailing the necessary configurations and dependencies required for seamless integration.
+
+## Source
+
+- [Connect Quarkus (Reactive) to Neon HTML](https://neon.com/docs/guides/quarkus-reactive): The original HTML version of this documentation
 
 [Quarkus](https://quarkus.io/) is a Java framework optimized for cloud environments. This guide shows how to connect to Neon from a Quarkus project using a Reactive SQL Client.
 
 To connect to Neon from a Quarkus application:
-
-1. [Create a Neon Project](#create-a-neon-project)
-2. [Create a Quarkus project and add dependencies](#create-a-quarkus-project)
-3. [Configure a PostgreSQL data source](#configure-a-postgresql-data-source)
-4. [Use the Reactive PostgreSQL client](#use-the-reactive-postgresql-client)
-5. [Run the application](#run-the-application)
 
 ## Create a Neon project
 
@@ -37,14 +35,12 @@ You now have a Quarkus project in a folder named `neon-with-quarkus` with the Re
 
 Create a `.env` file in the root of your Quarkus project directory. Configure a reactive data source using your Neon database connection string and specifying the database kind as shown:
 
-```shell shouldWrap
+```shell
 # Note that "?sslmode=require" is appended to the Neon connection string
 QUARKUS_DATASOURCE_REACTIVE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
 ```
 
-
-You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
-
+   **Note**: You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).
 
 ## Use the Reactive PostgreSQL client
 
@@ -70,13 +66,13 @@ public class PostgresResource {
     @GET
     @Path("/version")
     @Produces(MediaType.TEXT_PLAIN)
-    public Multi getVersion() {
+    public Multi<String> getVersion() {
         return client.query("SELECT version()")
                 .execute()
                 .onItem().transformToMulti(this::extractVersion);
     }
 
-    private Multi extractVersion(RowSet rowSet) {
+    private Multi<String> extractVersion(RowSet<Row> rowSet) {
         return Multi.createFrom().iterable(rowSet)
                 .map(r -> r.getValue(0).toString());
     }

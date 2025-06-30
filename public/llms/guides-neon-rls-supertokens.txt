@@ -1,17 +1,17 @@
 # Secure your data with SuperTokens and Neon RLS
 
-Implement Row-level Security policies in Postgres using SuperTokens and Neon
+> The document explains how to integrate SuperTokens with Neon Row-Level Security (RLS) to enhance data security by managing user authentication and access control within a Neon database.
 
+## Source
 
+- [Secure your data with SuperTokens and Neon RLS HTML](https://neon.com/docs/guides/neon-rls-supertokens): The original HTML version of this documentation
 
-  SuperTokens + Neon RLS
+Sample project:
+- [SuperTokens + Neon RLS](https://github.com/neondatabase-labs/supertokens-nestjs-solidjs-drizzle-neon-rls)
 
-
-
-  Neon RLS Tutorial
-  Simplify RLS with Drizzle
-
-
+Related docs:
+- [Neon RLS Tutorial](https://neon.com/docs/guides/neon-rls-tutorial)
+- [Simplify RLS with Drizzle](https://neon.com/docs/guides/neon-rls-drizzle)
 
 Use SuperTokens with Neon RLS to add secure, database-level authorization to your application. This guide assumes you already have an application using SuperTokens for user authentication. It shows you how to integrate SuperTokens with Neon RLS, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 
@@ -42,7 +42,7 @@ The SuperTokens JWKS URL follows this format:
 
 You can locate your SuperTokens Core connection URI in the SuperTokens Dashboard under **Core Management**.
 
-![SuperTokens Dashboard](/docs/guides/supertokens_dashboard.png)
+
 
 Replace `{YOUR_SUPER_TOKENS_CORE_CONNECTION_URI}` with your actual connection URI. For example, if your connection URI is `https://try.supertokens.io`, your JWKS URL would be:
 
@@ -54,9 +54,9 @@ https://try.supertokens.io/.well-known/jwks.json
 
 Once you have the JWKS URL, go to the **Neon Console**, navigate to **Settings** > **RLS**, and add SuperTokens as an authentication provider. Paste your copied URL and SuperTokens will be automatically recognized and selected.
 
-
-  
-
+<div style={{ display: 'flex', justifyContent: 'center'}}>
+  <img src="/docs/guides/supertokens_jwks_url_in_neon.png" alt="Add Authentication Provider" style={{ width: '60%', maxWidth: '600px', height: 'auto' }} />
+</div>
 
 At this point, you can use the **Get Started** setup steps from RLS in Neon to complete the setup — this guide is modeled on those steps. Or feel free to keep following along in this guide, where we'll give you a bit more context.
 
@@ -74,7 +74,7 @@ CREATE EXTENSION IF NOT EXISTS pg_session_jwt;
 
 The integration creates the `authenticated` and `anonymous` roles for you. Let's define table-level permissions for these roles. To allow both roles to read and write to tables in your public schema, run:
 
-```sql shouldWrap
+```sql
 -- For existing tables
 GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES
   IN SCHEMA public
@@ -113,7 +113,7 @@ Install it using the following command:
 npm install @neondatabase/serverless
 ```
 
-To learn more about the driver, see [Neon Serverless Driver](/docs/serverless/serverless-driver).
+To learn more about the driver, see [Neon Serverless Driver](https://neon.com/docs/serverless/serverless-driver).
 
 ### 6. Set up environment variables
 
@@ -126,15 +126,15 @@ neon connection-string --role-name authenticated
 
 Add these to your `.env` file.
 
-```bash shouldWrap
+```bash
 # Database owner connection string
-DATABASE_URL=''
+DATABASE_URL='<DB_OWNER_CONNECTION_STRING>'
 
 # Neon "authenticated" role connection string
-DATABASE_AUTHENTICATED_URL=''
+DATABASE_AUTHENTICATED_URL='<AUTHENTICATED_CONNECTION_STRING>'
 ```
 
-The `DATABASE_URL` is intended for admin tasks and can run any query while the `DATABASE_AUTHENTICATED_URL` should be used for connections from authorized users, where you pass the required authorization token. You can see an example in [Run your first authorized query](#2-run-your-first-authorized-query) below.
+The `DATABASE_URL` is intended for admin tasks and can run any query while the `DATABASE_AUTHENTICATED_URL` should be used for connections from authorized users, where you pass the required authorization token. You can see an example in [Run your first authorized query](https://neon.com/docs/guides/neon-rls-supertokens#2-run-your-first-authorized-query) below.
 
 ## Add RLS policies
 
@@ -144,11 +144,9 @@ Now that you've integrated SuperTokens with Neon RLS, you can securely pass JWTs
 
 Here are examples of implementing RLS policies for a **todos** table – the Drizzle example leverages the simplified `crudPolicy` function, while the SQL example demonstrates the use of individual RLS policies.
 
+Tab: Drizzle
 
-
-
-
-```typescript shouldWrap
+```typescript
 import { InferSelectModel, sql } from 'drizzle-orm';
 import { bigint, boolean, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
 import { authenticatedRole, authUid, crudPolicy } from 'drizzle-orm/neon';
@@ -175,14 +173,12 @@ export const todos = pgTable(
   ]
 );
 
-export type Todo = InferSelectModel;
+export type Todo = InferSelectModel<typeof todos>;
 ```
 
+Tab: SQL
 
-
-
-
-```sql shouldWrap
+```sql
 -- schema for TODOs table
 CREATE TABLE todos (
   id bigint generated by default as identity primary key,
@@ -214,20 +210,15 @@ TO authenticated
 USING ((select auth.user_id()) = user_id);
 ```
 
-
-
-
 The `crudPolicy` function simplifies policy creation by generating all necessary CRUD policies with a single declaration.
 
 ### 2. Run your first authorized query
 
 With RLS policies in place, you can now query the database using JWTs from SuperTokens, restricting access based on the user's identity. Here are examples of how you could run authenticated queries from the backend of our sample **todos** application. Highlighted lines in the code samples emphasize key actions related to authentication and querying.
 
+Tab: server-component.tsx
 
-
-
-
-```typescript shouldWrap
+```typescript
 'use server';
 
 import { neon } from '@neondatabase/serverless';
@@ -235,37 +226,34 @@ import { cookies } from "next/headers";
 
 export default async function TodoList() {
     const parsed_cookies = await cookies();
-    const accessToken = parsed_cookies.get("sAccessToken")?.value; // [!code highlight]
+    const accessToken = parsed_cookies.get("sAccessToken")?.value;
     const sql = neon(process.env.DATABASE_AUTHENTICATED_URL!, {
         authToken: async () => {
             const token = accessToken;
             if (!token) {
                 throw new Error('No token found');
             }
-            return token; // [!code highlight]
+            return token;
         },
     });
 
     // WHERE filter is optional because of RLS.
     // But we send it anyway for performance reasons.
     const todos = await
-      sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
-
+      sql('select * from todos where user_id = auth.user_id()');
     return (
-        
+        <ul>
             {todos.map((todo) => (
-                {todo.task}
+                <li key={todo.id}>{todo.task}</li>
             ))}
-        
+        </ul>
     );
 }
 ```
 
+Tab: client-component.tsx
 
-
-
-
-```typescript shouldWrap
+```typescript
 'use client';
 
 import type { Todo } from '@/app/schema';
@@ -275,16 +263,16 @@ import { useEffect, useState } from 'react';
 
 const getDb = (token: string) =>
     neon(process.env.NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL!, {
-        authToken: token, // [!code highlight]
+        authToken: token,
     });
 
 export default function TodoList() {
-    const [todos, setTodos] = useState>();
+    const [todos, setTodos] = useState<Array<Todo>>();
     const session = Session;
 
     useEffect(() => {
         async function loadTodos() {
-            const accessToken = await session.getAccessToken(); // [!code highlight]
+            const accessToken = await session.getAccessToken();
             if (!accessToken) {
                 console.error('No access token available');
                 return;
@@ -295,37 +283,34 @@ export default function TodoList() {
             // WHERE filter is optional because of RLS.
             // But we send it anyway for performance reasons.
             const todosResponse = await
-              sql('select * from todos where user_id = auth.user_id()'); // [!code highlight]
-
-            setTodos(todosResponse as Array);
+              sql('select * from todos where user_id = auth.user_id()');
+            setTodos(todosResponse as Array<Todo>);
         }
 
         loadTodos();
     }, [session]);
 
     return (
-        
+        <ul>
             {todos?.map((todo) => (
-                
+                <li key={todo.id}>
                     {todo.task}
-                
+                </li>
             ))}
-        
+        </ul>
     );
 }
 ```
 
+Tab: .env
 
-
-
-
-```bash shouldWrap
+```bash
 # Used for database migrations
-DATABASE_URL=''
+DATABASE_URL='<DB_OWNER_CONNECTION_STRING>'
 
 # Used for server-side fetching
-DATABASE_AUTHENTICATED_URL=''
+DATABASE_AUTHENTICATED_URL='<AUTHENTICATED_CONNECTION_STRING>'
 
 # Used for client-side fetching
-NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL=''
+NEXT_PUBLIC_DATABASE_AUTHENTICATED_URL='<AUTHENTICATED_CONNECTION_STRING>'
 ```
