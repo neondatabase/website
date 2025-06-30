@@ -24,11 +24,13 @@ Right now, you need to claim your project if you want to:
 
 ## Claim via the Neon Console
 
-1. Go to your project's **Auth** page in the Neon Console.
-2. Click **Transfer ownership**.
+1. Go to your project's **Auth** page, **Configuration** tab in the Neon Console.
+2. Click **Claim project** in the Claim project section.
 3. Follow the prompts to select the Stack Auth account that should receive ownership.
 
 After claiming, you'll have direct access to manage your project in the Stack Auth dashboard, while maintaining the integration with your Neon database.
+
+You can also find your current project ID here, as well as the JWKS URL you need to set up [RLS in your Neon Auth project](/docs/neon-auth/best-practices#enabling-row-level-security-rls).
 
 ## Claim via the API
 
