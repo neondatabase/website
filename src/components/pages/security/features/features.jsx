@@ -182,7 +182,7 @@ const DATA = [
         icon: circuitIcon,
       },
       {
-        title: 'Github Secret Scanning Partner Program',
+        title: 'GitHub Secret Scanning Partner Program',
         description:
           'Neon joined the GitHub Secret Scanning Partnership in to improve secret detection and remediation across repositories.',
         icon: radarIcon,
