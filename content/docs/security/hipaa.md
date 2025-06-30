@@ -26,28 +26,23 @@ HIPAA is a federal law that sets national standards for the protection of health
 ## How Neon protects your data
 
 1. Use and disclosure of PHI
-
    - We only use PHI to provide our agreed-upon services and to meet legal obligations.
    - PHI is disclosed only as required by law or with proper authorization.
 
 2. Safeguards
-
    - Administrative: Policies and training to ensure compliance.
    - Physical: Secure access controls to data storage areas.
    - Technical: Encryption and access controls for electronic PHI.
 
 3. Incident reporting
-
    - We promptly report any unauthorized use or disclosure of PHI.
    - Breach notifications are provided within 30 days as per HIPAA requirements.
 
 4. Subcontractors and agents
-
    - Any third parties we work with are required to adhere to the same data protection standards.
    - We provide transparency by listing our subcontractors at [https://neon.com/hipaa-contractors](/hipaa-contractors) and notifying customers of any changes if you sign up to notifications [here](https://share-eu1.hsforms.com/1XjUD9QeKQw-RSAgQ...).
 
 5. Customer responsibilities
-
    - Customers must ensure that PHI is only stored in data rows as intended for sensitive data and should never be included in metadata, column names, table names, schema descriptions, or system-generated logs such as audit trails, query logs, or error logs.
    - Customers have the responsibility to configure a session timeout.
    - Customers need to avoid including PHI in support tickets or metadata fields.
