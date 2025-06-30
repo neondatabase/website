@@ -21,7 +21,7 @@ export default function getMetadata({
   const SITE_URL =
     process.env.VERCEL_ENV === 'preview'
       ? `https://${process.env.VERCEL_BRANCH_URL}`
-      : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL || 'http://localhost:3000';
+      : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
   const canonicalUrl = SITE_URL + pathname;
   const imageUrl = imagePath?.startsWith('http') ? imagePath : SITE_URL + imagePath;
 
