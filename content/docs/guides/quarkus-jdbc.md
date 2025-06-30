@@ -40,8 +40,8 @@ Create a `.env` file in the root of your Quarkus project directory. Configure a 
 QUARKUS_DATASOURCE_DB_KIND=postgresql
 QUARKUS_DATASOURCE_USERNAME=[user]
 QUARKUS_DATASOURCE_PASSWORD=[password]
-# Note that "jdbc" is prepended, and that "?sslmode=require" is appended to the connection string
-QUARKUS_DATASOURCE_JDBC_URL=jdbc:postgresql://[neon_hostname]/[dbname]?sslmode=require
+# Note that "jdbc" is prepended, and that "?sslmode=require&channel_binding=require" is appended to the connection string
+QUARKUS_DATASOURCE_JDBC_URL=jdbc:postgresql://[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
 ```
 
 <Admonition type="note">
