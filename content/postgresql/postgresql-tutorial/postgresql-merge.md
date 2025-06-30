@@ -207,7 +207,6 @@ RETURNING
 ## Best Practices
 
 1. **Handle Source Data Carefully**:
-
    - Validate input data before the `MERGE`
    - Use subqueries to transform or clean data
    - Consider using CTEs for complex data preparation

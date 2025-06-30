@@ -59,7 +59,6 @@ You'll need two pieces of information:
    ```
 
 2. **Project ID** - This serves as your JWT Audience value:
-
    - Go to the [Firebase Console](https://console.firebase.google.com)
    - Navigate to **Settings** > **General** > **Project ID**
 

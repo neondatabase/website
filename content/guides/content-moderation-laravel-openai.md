@@ -1449,19 +1449,16 @@ You can test the moderation system with this command:
 Let's walk through how the content moderation system works in practice:
 
 1. Content Submission:
-
    - A user submits content through the `ContentSubmission` component
    - The content is saved to the database with status "pending"
    - The `ModerationService` immediately sends the content to OpenAI's moderation API
 
 2. AI Moderation:
-
    - OpenAI analyzes the content and returns categories, scores, and a flagged status
    - The `ModerationService` saves these results to the `ModerationResult` table in our Neon Postgres database
    - Based on settings, content may be auto-approved or auto-rejected
 
 3. Manual Review:
-
    - Content that isn't auto-approved or auto-rejected stays in the "pending" state
    - Moderators use the `ModerationQueue` component to review pending content
    - They can see which categories were flagged and why

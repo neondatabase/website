@@ -567,7 +567,6 @@ This approach provides several benefits:
 To use this workflow, you'll need to set up the following GitHub repository secrets and variables:
 
 - **Secrets**:
-
   - `NEON_API_KEY`: Your Neon API key
   - `NEON_PROD_DB_URL`: Production database connection string
 

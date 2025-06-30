@@ -14,7 +14,6 @@ To complete this tutorial, you'll need:
 
 - A Neon account. Sign up [here](/docs/get-started-with-neon/signing-up).
 - To interact with your Neon database from the command line:
-
   - Install the [Neon CLI](/docs/reference/cli-install)
   - Download and install the [psql](https://www.postgresql.org/download/) client
 
@@ -159,7 +158,6 @@ For the purposes of this tutorial, name the branch `feature/address`, which coul
 1. Create the development branch
 
    On the **Branches** page, click **Create Branch**, making sure of the following:
-
    - Select `production` as the default branch.
    - Name the branch `feature/address`.
 
@@ -186,7 +184,6 @@ For the purposes of this tutorial, name the branch `feature/address`, which coul
 1. Verify the schema
 
    To verify that this branch includes the initial schema created on `production`, connect to `feature/address`, then view the `person` table.
-
    1. Get the connection string for the `people` database on branch `feature/address` using the CLI.
 
       ```bash

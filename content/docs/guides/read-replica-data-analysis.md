@@ -110,7 +110,6 @@ Connecting to a read replica is the same as connecting to any branch, except you
    If you expect a high number of connections, enable the **Connection pooling** toggle to add the `-pooler` flag to the connection string.
 
    The information in your connection string corresponds to the following connection details:
-
    - role: `alex`
    - password:`AbC123dEf`
    - hostname: `ep-cool-darkness-123456.us-east-2.aws.neon.tech`

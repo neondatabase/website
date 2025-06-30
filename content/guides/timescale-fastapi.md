@@ -69,7 +69,6 @@ Follow these steps to set up your project and virtual environment:
     ```
 
     where each package does the following:
-
     - `FastAPI`: A Web / API framework
     - `AsyncPG`: An asynchronous PostgreSQL client
     - `Uvicorn`: An ASGI server for our app

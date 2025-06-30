@@ -31,14 +31,12 @@ updatedOn: '2025-04-21T15:23:27.912Z'
 `pgcopydb` builds on standard `pg_dump` and `pg_restore` but with extra features to make migrations both faster and more reliable:
 
 - **Parallel migration**: `pgcopydb` processes multiple migration phases concurrently:
-
   - **Data transfer:** Streams data in parallel from multiple tables and splits large tables into chunks. This distributes the load and reduces migration time for large datasets.
   - **Index creation:** Builds indexes concurrently after data loading
   - **Constraint application:** Applies constraints in parallel while maintaining data integrity
     This parallel processing reduces migration time and minimizes downtime.
 
 - **Dependency handling**: `pgcopydb` manages database object dependencies and migrates them in the correct order:
-
   - **Schema-first approach:** Creates schema objects (tables, functions, procedures) before data transfer begins
   - **Table copying precedes indexes and constraints:** Copies table data first, then creates indexes and applies constraints
 

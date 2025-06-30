@@ -142,7 +142,6 @@ For information about configuring allowed IPs in Neon, see [Configure IP Allow](
    ```
 
    Enter the details for **your connection string** into the source connector fields. Based on the sample connection string above, the values would be specified as shown below. Your values will differ.
-
    - **Connection Type**: Source (the default)
    - **Host**: ep-cool-darkness-123456.us-east-2.aws.neon.tech
    - **Port**: 5432

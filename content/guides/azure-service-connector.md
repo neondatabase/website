@@ -48,7 +48,6 @@ Follow these steps to create a service connection from your Azure compute servic
 
 3.  **Start connection creation:** Click the **+ Create** button on the Service Connector page.
 4.  **Configure basics:**
-
     - **Service type:** Search for and select `Neon Serverless Postgres`.
 
       ![Select Neon service type](/docs/guides/azure-service-connector/service-type-selection.png)
@@ -60,10 +59,8 @@ Follow these steps to create a service connection from your Azure compute servic
     - Click **Next: Authentication**.
 
 5.  **Configure authentication:**
-
     - The **Connection string** option will be pre-selected, as it's the only supported method for Neon.
     - You now need to provide your Neon **Username** and **Password**. Service Connector offers two ways to handle the _password_:
-
       1.  **Database credentials:**
 
           You can use database credentials for the first time connection to create a new Key Vault secret. For applications that already have a Key Vault secret, you can use the Key Vault option to reference the existing secret.
@@ -101,7 +98,6 @@ Follow these steps to create a service connection from your Azure compute servic
     - Click **Next: Networking**.
 
 6.  **Configure networking:**
-
     - For Neon connections via Service Connector in the portal, you can **skip** this step. Network access controls (like IP allow lists) are managed directly within your Neon project settings, not through Service Connector's network configuration options (Firewall, Service Endpoint, Private Endpoint) which apply primarily to Azure target services.
     - Refer to Neon's [IP Allow](/docs/introduction/ip-allow) documentation to configure network access if needed.
     - Click **Next: Review + Create**.

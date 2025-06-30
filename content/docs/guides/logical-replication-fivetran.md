@@ -138,7 +138,6 @@ The name assigned to the replication slot is `fivetran_pgoutput_slot`. You will 
    ```
 
    From this string, the values in the Fivetran **Create a source** dialog would show as below. Your actual values will differ, with the exception of the port number.
-
    - **Host**: ep-cool-darkness-123456.us-east-2.aws.neon.tech
    - **Port**: 5432
    - **Username**: alex

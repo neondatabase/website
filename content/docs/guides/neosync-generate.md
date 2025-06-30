@@ -108,7 +108,6 @@ To generate data, you need to create a **Job** in Neosync:
    ![Define Neosync job connection](/docs/guides/neosync_job_connect.png)
 
 4. On the **Schema** page:
-
    - Specify a value for **Number of Rows**. We'll create 1000 rows of data to use in this example.
    - Under **Table Selection**, select the schema and table (`public.users`) where you want to generate synthetic data and move it from the source to the destination table.
    - For each column in your table, select a **Transfomer** to define the type of data you want to generate for the column. For the `age` column, we used the `Generate Random Int64` to randomly generate ages between 18 and 40. You can configure the generator by clicking on the edit icon next to the transformer and setting min and max values.

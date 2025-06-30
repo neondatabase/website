@@ -72,7 +72,6 @@ Following this procedure will create a database backup locally, where you're run
    ```
 
    The `pg_dump` command above includes these arguments:
-
    - `-Fc`: Sends the output to a custom-format archive suitable for input into `pg_restore`.
    - `-v`: Runs `pg_dump` in verbose mode, allowing you to monitor what happens during the dump operation.
    - `-d`: Specifies the [connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING) for your Neon database.
@@ -111,7 +110,6 @@ This procedure shows how to restore a database using the `pg_restore` utility fr
    ```
 
    The example above includes these arguments:
-
    - `-v`: Runs `pg_restore` in verbose mode, allowing you to monitor what happens during the restore operation.
    - `-d`: Specifies the Neon database to connect to. The value is a Neon database connection string. See [Before you begin](#before-you-begin).
    - `<dump_file_name>` is the name of the dump file you created with `pg_dump`.

@@ -28,7 +28,6 @@ To ensure you have control over usage and costs, Neon's APIs let you configure l
 
 - **Usage limits**: Define limits on consumption metrics like **storage**, **compute time**, and **data transfer**.
 - **Pricing Plans**: Create different pricing plans for your platform or service. For example, you can set limits on consumption metrics to define your own Free, Pro, and Enterprise plans:
-
   - **storage**: Define maximum allowed storage for each plan.
   - **compute time**: Cap CPU usage based on the plan your customers choose.
   - **data transfer**: Set limits for data transfer (egress) on each usage plan.

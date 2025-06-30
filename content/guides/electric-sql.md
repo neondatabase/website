@@ -32,7 +32,6 @@ ElectricSQL requires a Postgres database with logical replication enabled. You'l
 
 1.  **Create a Neon Project:** If you haven't already, create a new Neon project. You can use the Neon Console or [pg.new](https://pg.new).
 2.  **Enable Logical Replication:** ElectricSQL uses Postgres logical replication (`wal_level = logical`) to receive changes from your database.
-
     - Navigate to your Neon Project in the [Neon Console](https://console.neon.tech/).
     - Open the **Settings** menu.
     - Click on **Logical Replication**.
@@ -41,7 +40,6 @@ ElectricSQL requires a Postgres database with logical replication enabled. You'l
       ![Neon dashboard settings with option to enable logical replication](/docs/guides/neon-console-settings-logical-replication.png)
 
 3.  **Retrieve connection string:**
-
     - Navigate to the **Dashboard** of your Neon project.
     - Click on the **Connect** button which opens a modal.
     - Select your database and branch, and copy the connection string with connection pooling disabled.
@@ -192,7 +190,6 @@ Your React application should now be running in your browser. It's actively conn
     ```
 
 2.  **Test real-time updates:**
-
     - Open the Neon SQL Editor or use `psql` to connect to your Neon database.
     - Insert a new row into the `scores` table:
 
@@ -213,7 +210,6 @@ Your React application should now be running in your browser. It's actively conn
 
 3.  **Understanding writes:**
     ElectricSQL handles the read-path synchronization (data from Postgres to client). To write data back to your Neon database (e.g., from user input in the React app), you would typically:
-
     - Implement an API endpoint in your backend application.
     - This API endpoint would receive write requests from your React app.
     - The API endpoint then performs these operations directly on your Neon Postgres database.
@@ -269,7 +265,6 @@ The read path (data syncing from Neon to your client via ElectricSQL) needs to b
     ```
 
 2.  **Authorization proxy:**
-
     - **Authentication:** The proxy validates the `Authorization` header (or other credentials) sent by the client. If authentication fails, it returns a `401 Unauthorized` or `403 Forbidden` error.
     - **Authorization & Dynamic Shape modification:** Upon successful authentication, the proxy determines the user's identity and permissions. It then _modifies_ the incoming shape request before forwarding it to Electric. This can be done by adding or augmenting `WHERE` clauses to the shape's `params`.
       For example, a user should only see projects belonging to their organization, the proxy would:

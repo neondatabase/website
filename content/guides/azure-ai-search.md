@@ -120,7 +120,6 @@ If you haven't already, create an Azure account and enable Azure AI Search. Also
    Alternatively, you can create the search service using the [Azure Portal](https://learn.microsoft.com/en-us/azure/search/search-create-service-portal).
 
 1. To get your service endpoint, you can the Azure portal and [find your search service](https://portal.azure.com/#view/Microsoft_Azure_ProjectOxford/CognitiveServicesHub/%7E/CognitiveSearch).
-
    - Under the Overview section, copy the URL and save it for a later step.
    - Also grab the API key of your Azure AI Search service from the Azure Portal. In the 'Settings' > 'Keys' section, copy and save an admin key for full rights to create and delete objects. There are two interchangeable primary and secondary keys. Choose either one.
 

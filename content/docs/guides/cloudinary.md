@@ -23,7 +23,6 @@ This guide demonstrates how to integrate Cloudinary with Neon. You'll learn how 
 1.  Sign up for a free or paid account at [Cloudinary.com](https://cloudinary.com/users/register/free).
 2.  Once logged in, navigate to your **Account settings**.
 3.  Find your **Product Environment Credentials** which include:
-
     - **Cloud Name**
     - **API Key**
     - **API Secret**

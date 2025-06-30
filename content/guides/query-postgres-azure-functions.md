@@ -127,7 +127,6 @@ After creating the database, make sure to copy the connection details (such as *
     We will initialize an Azure Functions project where we will create an **HTTP Trigger function** in Visual Studio Code (VS Code) using the **Azure Functions extension**.
 
 2.  **Install the Azure Functions extension**:
-
     - Open VS Code, or install [Visual Studio Code](https://code.visualstudio.com/) if it's not yet installed.
     - Go to the extensions tab or press `Ctrl+Shift+X`.
     - Search for "Azure Functions" and install the official extension.
@@ -135,7 +134,6 @@ After creating the database, make sure to copy the connection details (such as *
 3.  **Create an Azure Functions Project**
 
     Open the command palette or press `Ctrl+Shift+P` to open the command palette.
-
     - Type `Azure Functions: Create New Project...` and select that option.
     - Choose a directory where you want to create the project.
     - Select the programming language (`JavaScript` in our case).
@@ -521,7 +519,6 @@ After creating the database, make sure to copy the connection details (such as *
 ## Step 3: Test the Function Locally
 
 1. **Run the Function Locally**:
-
    - Open the integrated terminal in VS Code.
    - Run the following command `npm run start`, which will execute `func start` to start the project and launch the functions:
 
@@ -530,14 +527,12 @@ After creating the database, make sure to copy the connection details (such as *
      ```
 
 2. **Test with a Browser or Postman**:
-
    - Open a browser and navigate to `http://localhost:7071/api/manageClients` to test your function.
    - You can also use a tool like **Postman** to send **HTTP requests**.
 
 ## Step 4: Test and Deploy the Function to Azure
 
 1. **Deploy Your Function**:
-
    - Open the command palette with `Ctrl+Shift+P` and type `Azure Functions: Deploy to Function App...`.
    - Follow the instructions to select your Azure subscription and choose or create a Function App, then complete the deployment process.
 

@@ -265,17 +265,14 @@ export async function getUserSafely(id: number) {
 ## Best Practices for Neon with Drizzle
 
 1. **Connection Management**
-
    - Keep connection times short for serverless functions
    - Use connection pooling for high traffic applications
 
 2. **Neon Features**
-
    - Utilize Neon branching for development and testing
    - Consider Neon's auto-scaling for database design
 
 3. **Query Optimization**
-
    - Batch operations when possible
    - Use prepared statements for repeated queries
    - Optimize complex joins to minimize data transfer

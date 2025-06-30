@@ -325,7 +325,6 @@ FROM events;
 ## Performance considerations
 
 1. Use appropriate options:
-
    - Use `RETURNING TEXT` with `OMIT QUOTES` when JSON formatting is not required
    - Choose `CONDITIONAL WRAPPER` over `UNCONDITIONAL` when possible
    - Consider using `DEFAULT` expressions for better error recovery

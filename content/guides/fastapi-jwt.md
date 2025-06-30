@@ -101,36 +101,30 @@ This signature is then Base64Url encoded to form the third part of the JWT.
 The overall process of using JWTs for authentication and authorization typically involves the following steps:
 
 1. **User Authentication**:
-
    - The process begins when a user logs in with their credentials (e.g., username and password).
    - The server verifies these credentials against the stored user information.
 
 2. **JWT Creation**:
-
    - Upon successful authentication, the server creates a JWT.
    - It generates the header and payload, encoding the necessary information.
    - Using a secret key (kept secure on the server), it creates the signature.
    - The three parts (header, payload, signature) are combined to form the complete JWT.
 
 3. **Sending the Token**:
-
    - The server sends this token back to the client in the response.
    - The client stores this token, often in local storage or a secure cookie.
 
 4. **Subsequent Requests**:
-
    - For any subsequent requests to protected routes or resources, the client includes this token in the Authorization header.
    - The format is: `Authorization: Bearer <token>`
 
 5. **Server-side Token Validation**:
-
    - When the server receives a request with a JWT, it first splits the token into its three parts.
    - It base64 decodes the header and payload.
    - The server then recreates the signature using the header, payload, and its secret key.
    - If this newly created signature matches the signature in the token, the server knows the token is valid and hasn't been tampered with.
 
 6. **Accessing Protected Resources**:
-
    - If the token is valid, the server can use the information in the payload without needing to query the database.
    - This allows the server to authenticate the user and know their permissions for each request without needing to store session data.
 

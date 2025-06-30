@@ -27,7 +27,6 @@ Instead of Maven, you can use Gradle for dependency management. The steps will b
 ## Setting up the Project
 
 1. Let's create a new Spring Boot project using [Spring Initializr](https://start.spring.io/) with the following dependencies:
-
    - Spring Web
    - Spring Data JPA
    - PostgreSQL Driver

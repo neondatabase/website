@@ -45,7 +45,6 @@ There are several ways to migrate your Tembo Postgres database to Neon. The best
 Before you begin any migration method, complete these essential preparation steps:
 
 1.  **Assess your Tembo database:**
-
     - **Database size:** Determine the total size of your database. This will help you choose the right migration method.
     - **Postgres extensions:** Identify all custom Postgres extensions used in your Tembo instance. Run the following query on your Tembo database:
       ```sql
@@ -84,7 +83,6 @@ Before you start with the assistant, You'll need:
     - Extension compatibility.
     - Region availability.
 3.  **Import your data:** Once checks pass, Neon will:
-
     - Create a new branch for your imported data.
     - Copy your data automatically using `pg_dump` and `pg_restore`.
     - Verify the import.
@@ -171,7 +169,6 @@ Logical replication allows for near-zero downtime migration by continuously stre
 - Allow Connections from Neon to Tembo (IP Allow List):
 
   If you are having IP allow list restrictions on your Tembo database, you need to allow connections from Neon to Tembo. This is necessary for the logical replication process to work correctly.
-
   1.  **Obtain Neon NAT Gateway IP Addresses:**
       Refer to Neon's [NAT Gateway IP addresses](/docs/introduction/regions#nat-gateway-ip-addresses) to find the list of IP addresses for your Neon project's region. You will need to add these specific IP addresses to your Tembo project's allow list.
 
@@ -255,7 +252,6 @@ Once Neon is fully synchronized and replication lag is minimal:
 ## Post-migration (common steps)
 
 1.  **Verify data:**
-
     - Run checksums or row counts on key tables in both Tembo and Neon to ensure data integrity.
     - Perform functional testing of your application against Neon.
 

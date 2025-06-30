@@ -146,7 +146,6 @@ Your project comes with a `development` branch that's an isolated copy of your `
 1. **Install CLI with Brew or NPM**
 
    Depending on your system, you can install the Neon CLI using either Homebrew (for macOS) or NPM (for other platforms).
-
    - For macOS using Homebrew:
 
      ```bash
