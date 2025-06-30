@@ -2,7 +2,7 @@
 title: Connect Nuxt to Postgres on Neon
 subtitle: Learn how to make server-side queries to Postgres using Nitro API routes
 enableTableOfContents: true
-updatedOn: '2025-04-20T15:44:26.052Z'
+updatedOn: '2025-06-30T11:30:21.910Z'
 ---
 
 [Nuxt](https://nuxt.com/) is an open-source full-stack meta framework that enables Vue-based web applications. This topic describes how to connect a Nuxt application to a Postgres database on Neon.

@@ -2,7 +2,7 @@
 title: Backups with pg_dump
 subtitle: Learn how to create a backup of your Neon database using pg_dump
 enableTableOfContents: true
-updatedOn: '2025-06-23T15:24:08.788Z'
+updatedOn: '2025-06-30T11:30:21.920Z'
 ---
 
 This topic describes how to create a backup of your Neon database using the Postgres `pg_dump` utility and how to restore a backup using `pg_restore`.

@@ -2,7 +2,7 @@
 title: Connect a Sveltekit application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Sveltekit application
 enableTableOfContents: true
-updatedOn: '2025-04-20T15:44:26.056Z'
+updatedOn: '2025-06-30T11:30:21.918Z'
 ---
 
 Sveltekit is a modern JavaScript framework that compiles your code to tiny, framework-less vanilla JS. This guide explains how to connect Sveltekit with Neon using a secure server-side request.
