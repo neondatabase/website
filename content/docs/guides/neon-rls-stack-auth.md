@@ -20,6 +20,9 @@ redirectFrom:
 </DocsList>
 </InfoBlock>
 
+> **Note for Neon Auth users:**  
+> If you are using [Neon Auth](/docs/neon-auth/overview), you do **not** need to manually set up Stack Auth. Neon Auth provides the JWKS URL for you in the **Configuration** tab of your project. You can start from [Step 3](#3-install-the-pgsessionjwt-extension-in-your-database) below to complete your RLS setup.  
+
 Use Stack Auth with Neon RLS to add secure, database-level authorization to your application. This guide assumes you already have an application using Stack Auth for user authentication. It shows you how to integrate Stack Auth with Neon RLS, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 
 ## How it works

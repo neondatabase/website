@@ -62,6 +62,44 @@ LEFT JOIN neon_auth.users_sync ON posts.author_id = neon_auth.users_sync.id
 WHERE neon_auth.users_sync.deleted_at IS NULL;
 ```
 
+## Restricting redirect domains
+
+<Admonition type="warning">
+<strong>Important:</strong> Before going to production, you should restrict authentication redirect URIs to trusted domains only. This prevents malicious actors from hijacking authentication flows and protects your users.
+</Admonition>
+
+For production deployments, you should explicitly whitelist the domains your app will use for authentication redirects (for example, your main website, admin panel).
+
+Go to the **Domains** section in the Neon Auth **Configuration** tab for your project and
+add each trusted domain needed for your app. You can add as many as you need.
+
+Only the domains on this list will be allowed for authentication redirects. All others will be blocked.
+
+![Screenshot showing the Domains section in Neon Auth](/docs/relnotes/neon-auth-domains.png)
+
+## Enabling row-level security (RLS)
+
+Row-Level Security (RLS) lets you enforce access control directly in your database, providing an extra layer of security for your app's data.
+
+To get started adding RLS to your Neon Auth project:
+
+1. Go to the **Configuration** tab in your Neon Auth project.
+2. Copy the **JWKS URL** shown in the **Claim project** section.
+
+   ![jwks in claim project section](/docs/relnotes/neon_auth_jwks.png)
+
+   _This JWKS URL allows Neon RLS to validate authentication tokens issued by Neon Auth._
+
+3. In your Neon project, open **Settings > RLS** and paste the JWKS URL.
+4. Continue with the standard RLS setup:
+   - Install the `pg_session_jwt` extension in your database.
+   - Set up the `authenticated` and `anonymous` roles.
+   - Add RLS policies to your tables.
+
+   For these steps, you can follow the [Stack Auth + Neon RLS guide](/docs/guides/neon-rls-stack-auth) starting from [step 3](/docs/guides/neon-rls-stack-auth#3-install-the-pgsessionjwt-extension-in-your-database). Neon Auth uses Stack Auth under the hood, so the RLS integration process is the same from this point onward.
+
+For a full walkthrough, see [About Neon RLS](/docs/guides/neon-rls) and the [Neon RLS Tutorial](/docs/guides/neon-rls-tutorial).
+
 ## Limitations
 
 <Admonition type="important">
