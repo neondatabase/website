@@ -2,7 +2,7 @@
 title: Inngest
 subtitle: Quickly build AI RAG and Agentic workflows that scale with Inngest and Neon
 enableTableOfContents: true
-updatedOn: '2025-06-20T22:07:37.255Z'
+updatedOn: '2024-12-11T08:48:36.313Z'
 ---
 
 Inngest is a popular framework for building AI RAG and Agentic workflows. [Inngest](https://www.inngest.com/?utm_source=neon&utm_medium=inngest-ai-integration) provides automatic retries, caching along with concurrency and throttling management and AI requests offloading.
@@ -84,6 +84,8 @@ export const ragWorkflow = client.createFunction(
 
 `step.ai.infer()`, combined with Neon's Scale-to-zero feature, allows you to build AI workflows that scale costs with its success!
 
+<br />
+
 Learn more about using `step.ai.infer()` in the following article: [step.ai: Build Serverless AI Applications That Won't Break the Bank](https://www.inngest.com/blog/step-ai-for-serverless-ai-applications?utm_source=neon&utm_medium=inngest-ai-integration).
 
 ## Trigger AI workflows based on database changes
@@ -94,7 +96,9 @@ Inngest also integrates with Neon Postgres to trigger AI workflows based on data
 
 This integration allows you to trigger AI workflows based on database changes, such as generating embeddings as soon as a new row is inserted into a table (see example below).
 
-Configure the Inngests Neon integration to trigger AI workflows from your Neon database changes [by following this guide](/docs/guides/trigger-serverless-functions).
+<br />
+
+Configure the Inngests Neon integration to trigger AI workflows from your Neon database changes [by following this guide](/guides/trigger-serverless-functions).
 
 ## Starter apps
 

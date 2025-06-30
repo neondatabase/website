@@ -7,25 +7,33 @@ import Link from 'components/shared/link';
 
 import bannerDesktop from './images/banner-desktop.jpg';
 import bannerMobile from './images/banner-mobile.jpg';
+import bannerTablet from './images/banner-tablet.jpg';
 
 const MenuBanner = ({ title, description, to }) => (
   <li className="mt-1 lg:-order-1 lg:mt-0">
     <Link
-      className="group/banner relative block w-fit rounded-lg lg:h-20 xs:h-auto xs:min-h-[70px] xs:w-full"
+      className="group/banner relative block w-fit rounded-lg xs:w-full"
       to={to}
       tagName="Menu Banner"
       tagText={title}
     >
-      <Image className="rounded-xl lg:hidden" src={bannerDesktop} width={180} height={271} alt="" />
+      <Image className="rounded-lg lg:hidden" src={bannerDesktop} width={232} height={145} alt="" />
       <Image
-        className="hidden w-full rounded-lg object-cover lg:block"
+        className="hidden rounded-lg lg:block xs:hidden"
+        src={bannerTablet}
+        width={252}
+        height={80}
+        alt=""
+      />
+      <Image
+        className="hidden w-full rounded-lg object-cover xs:block"
         src={bannerMobile}
         width={320}
         height={80}
         alt=""
       />
 
-      <div className="absolute inset-0 z-10 flex flex-col justify-end p-4 lg:justify-center xs:p-4">
+      <div className="absolute inset-0 z-10 flex flex-col justify-end px-4 py-3.5 lg:justify-center lg:p-3 xs:p-4">
         <h3 className="text-sm leading-none tracking-snug text-white">{title}</h3>
         <p
           className={clsx(
@@ -37,7 +45,7 @@ const MenuBanner = ({ title, description, to }) => (
         </p>
       </div>
 
-      <GradientBorder className="!rounded-[11px]" withBlend />
+      <GradientBorder className="border-image-header-menu-banner lg:border-image-header-menu-banner-mobile" />
     </Link>
   </li>
 );

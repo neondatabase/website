@@ -18,3 +18,5 @@ const CareersPage = () => (
 );
 
 export default CareersPage;
+
+export const revalidate = 60;

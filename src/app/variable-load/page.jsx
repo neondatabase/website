@@ -75,3 +75,5 @@ const VariableLoadPage = async () => {
 };
 
 export default VariableLoadPage;
+
+export const revalidate = 60;

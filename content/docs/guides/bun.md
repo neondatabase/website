@@ -2,7 +2,7 @@
 title: Connect a Bun application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Bun application
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.895Z'
+updatedOn: '2025-02-03T20:41:57.309Z'
 ---
 
 This guide describes how to create a Neon project and connect to it from a Bun application. Examples are provided for using [Bun's built-in SQL client](https://bun.sh/docs/api/sql) and the [@neondatabase/serverless](/docs/serverless/serverless-driver) driver. Use the client you prefer.
@@ -50,7 +50,7 @@ bun add @neondatabase/serverless
 Add a `.env.local` file to your project directory and add your Neon connection details to it. Bun automatically loads variables from `.env`, `.env.local`, and other `.env.*` files. You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select Bun from the **Connection string** dropdown. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ```shell shouldWrap
-POSTGRES_URL='postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require'
+POSTGRES_URL='postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require'
 ```
 
 <Admonition type="note">

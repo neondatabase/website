@@ -3,7 +3,7 @@ title: Optimize pgvector search
 subtitle: Fine-tune parameters for efficient and accurate similarity searches in
   Postgres
 enableTableOfContents: true
-updatedOn: '2025-06-23T15:24:08.752Z'
+updatedOn: '2024-07-15T14:47:00.995Z'
 ---
 
 This guide explores how to effectively use `pgvector` for vector similarity searches in your AI applications. We'll address the following key questions:

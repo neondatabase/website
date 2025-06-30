@@ -2,7 +2,7 @@
 title: Choosing your driver and connection type
 subtitle: How to select the right driver and connection type for your application
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.882Z'
+updatedOn: '2025-05-11T11:23:50.610Z'
 ---
 
 When setting up your application’s connection to your Neon Postgres database, you need to make two main choices:
@@ -103,7 +103,7 @@ For example, to get a pooled connection string via CLI:
 ```bash shouldWrap
 neon connection-string --pooled true [branch_name]
 
-postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
 Notice the `-pooler` in the connection string — that's what differentiates a direct connection string from a pooled one.
@@ -113,7 +113,7 @@ Here's an example of getting a direct connection string from the Neon CLI:
 ```bash shouldWrap
 neon connection-string [branch_name]
 
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
 For more details, see [How to use connection pooling](/docs/connect/connection-pooling#how-to-use-connection-pooling).

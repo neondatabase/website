@@ -337,11 +337,6 @@ const defaultConfig = {
         destination: '/use-cases/dev-test',
         permanent: true,
       },
-      {
-        source: '/launchpad',
-        destination: 'https://neon.new',
-        permanent: false,
-      },
       ...docsRedirects,
       ...changelogRedirects,
     ];

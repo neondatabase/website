@@ -1,84 +1,122 @@
 ---
 title: Accounts
-subtitle: Manage your Neon account
+subtitle: Find out which account type is right for you
 enableTableOfContents: true
 updatedOn: '2025-04-17T08:58:53.655Z'
 ---
 
-Your **Neon account** is your personal identity for logging in, managing your profile, and authenticating actions across all organizations you belong to.
+Neon offers two account types for you to choose from:
 
-## Account settings
+- **Personal account**
+- **Organization account**
 
-You can access your Neon account settings from anywhere in the Console. Just click your profile avatar and select **Account settings** from the menu.
+## Personal accounts
 
-![Open the profile menu and select Account settings.](/docs/manage/profile_dropdown.png)
+When you first sign up with Neon, whether you're signing up on your own or you're invited to join, you start with a personal account. During your [onboarding](/docs/get-started-with-neon/signing-up#onboarding-in-the-neon-console), you are prompted to create your first personal project that you can get started with.
 
-Here's what you can do from **Account settings**.
+You can always access your personal account settings from your **Profile** dropdown.
 
-<Steps>
+![personal account settings](/docs/manage/personal_account.png)
 
-## Update personal information
+If you want to work with other people on this project, your options are:
 
-Change your name or email address.
+- [Invite collaborators](/docs/guides/project-collaboration-guide) (other Neon users) to the project
+- [Transfer](/docs/manage/orgs-project-transfer) the project from a personal to an Organization-level project, where you can then invite other users
 
-![Personal information section in Account settings](/docs/manage/personal_profile.png)
+## Organization accounts
 
-**If you signed up with email**
+Any Neon paid account user can [create an Organization account](/docs/manage/organizations#create-an-organization), which allows you to share projects with your team members. Whether you create an organization or are invited to join one, you still retain your personal account, letting you manage personal projects independently of any organizations you belong to. As an organization member, you'll have access to all projects within that organization.
 
-By default, your email will be used as your first name. You may want to add your first and last name here to complete your profile. Your email is your login and where we'll send all account communications.
+From the Neon Console, you can navigate to your Organization dashboard, where you'll find all the projects in the organization and can take any actions that your permissions allow.
 
-**If you signed up with Google, GitHub, or another provider**
+![organizations projects tab](/docs/manage/org_projects.png)
 
-Your name and email come from your social account. Feel free to change your name to whatever works for you. If you change your email, we'll unlink your social account and switch you to email sign-in. After that, you'll use your new email and password to log in.
+See [Organizations](/docs/manage/organizations) to learn more.
 
-**Changing your email**
+## Switching between accounts
 
-If you change your email (whether you started with email or social login), you'll get a verification email to confirm. Once confirmed, your new address becomes your login. If you're using a social login and change your email, we'll unlink your social account and switch you to email sign-in.
+Easily switch between your personal account and any organization you are a Member of using the navigation breadcrumb.
 
-[Change your email in the Neon Console](https://console.neon.tech/app/settings?modal=change_email)
+![Switch between personal and organization](/docs/manage/switch_to_org.png 'no-border')
 
-### Need to switch your login method?
+## Deleting your account
 
-**If you signed up with Google or GitHub**, you can switch to email login by changing your email and setting a password.
+After deleting your account, you'll have a brief window to reactivate it if you change your mind. Just log back in to restore your account. Once this window closes, however, your account and related information will be permanently purged and cannot be recovered.
 
-**If you signed up with email,** it's not currently possible to switch to a social login. [Contact Support](/docs/introduction/support) and we'll help you out.
+Before deleting your account, you must take deliberate steps to remove your resources. This includes deleting all projects, leaving any organizations, and, if you're on a paid plan, downgrading to the Free Plan.
 
-## Change password
+To protect your data, each resource must be removed individually &#8212; nothing is deleted in bulk. The **Delete** action will stay disabled until all conditions are met.
 
-No surprises here — just enter your current password, then your new one (twice). We'll enforce our current password rules for your security.
+![delete personal account](/docs/manage/delete_account.png)
 
-## Create personal API keys
+Here's where to go in the Neon Console to complete these actions:
 
-Personal API keys let you securely interact with the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), including through command-line tools, scripts, or third-party integrations that use the API.. Your personal API key works for any organization you belong to — so you can manage projects, automate tasks, or use integrations across all your orgs with a single key. The actions you can perform with your key depend on your role in each org (admin, member, or collaborator). You can create, view, and revoke your personal API keys here in your account settings.
+| **Action**                  | **Instructions**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Leave all organizations** | On the **People** page of each organization you belong to, find your name and select **Leave organization** from the more options menu. If you're the only Admin, promote another Member to Admin first &#8212; or delete the organization if it is no longer required. <br/> ![leave organization](/docs/manage/leave_org.png) <br/> When deleting an organization, you must first remove all its resources before you can delete the organization itself. See [Delete an organization](/docs/manage/orgs-manage#delete-an-organization) for more detail. |
+| **Delete all projects**     | Go to the **Projects** page and manually [delete](/docs/manage/projects#delete-a-project) each project from **Settings → Delete**.                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| **Downgrade your account**  | Go to **Billing → Change plan** and select **Downgrade to Free plan**. <br/> ![downgrade to free plan](/docs/manage/downgrade_to_free.png)                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
-[Learn more about API keys](/docs/manage/api-keys)
+Once all conditions are met and all your checkmarks show green, you can safely deactivate your account. You'll get a confirmation email soon afterwards. If you change your mind, just log back in within 30 days to reactivate your account with your personal info intact. API keys, however, will not be restored.
 
-![Personal API keys section in Account settings.](/docs/manage/personal_api_key.png)
+After 30 days, your account will be permanently removed.
 
-## Delete account
+## Recover access to a Neon account
 
-Delete your Neon account after leaving or deleting all orgs and projects.
+If a former employee owned a Neon account and didn’t shut it down or transfer access before leaving, you can follow the steps outlined below to recover the account.
 
-**Leaving an org**
+### Step 1: Regain access through the original login method
 
-If you're the only admin, promote another member to admin first. You can then leave the org.
+First, determine how the account was accessed.
 
-**Deleting an org**
+#### A. If the account used a third-party login
 
-Remove all members (so you're the only one left), delete all projects, and you can then delete the org.
+If the former employee signed up with a third-party identity provider (e.g., Google, GitHub, Microsoft, Hasura), you must recover access to that account through your organization’s identity provider. Neon cannot bypass third-party authentication.
 
-Once you have no orgs left, you can then click **Delete**.
+#### B. If the account used email and password
 
-### What happens after you delete your account
+If you have access to the former employee’s company email account:
 
-- You'll receive a confirmation email.
-- If you change your mind, you can reactivate your account by logging in again within 30 days. Your personal info will be restored, though not your API keys.
-- After 30 days, your account and all related data will be permanently deleted.
+1. Go to the [Neon login page](https://console.neon.tech/login)
+2. Click **Forgot Password**
+3. Enter the former employee’s email address
+4. Access the password reset link from their inbox
+5. Set a new password and sign in
 
-</Steps>
+Once signed in, you can:
 
-## Need to recover access to an account?
+- [Update the email address](/docs/manage/email-signup#changing-your-email)
+- [Transfer project ownership](/docs/manage/orgs-project-transfer)
+- [Add an admin](/docs/manage/orgs-manage#set-permissions) to your projects or organization
+- [Update billing details](/docs/introduction/manage-billing)
 
-See [Account Recovery](/docs/manage/account-recovery) for step-by-step instructions if you need to regain access to a Neon account.
+<Admonition type="note">
+For security reasons, we recommend immediately revoking access to company email accounts when employees leave your organization.
+</Admonition>
 
-<NeedHelp />
+### Step 2: If you cannot access the email or login method
+
+If the original login method is inaccessible, we can assist through a manual identity verification process.
+
+To begin:
+
+1. Open a [Neon Support ticket](https://console.neon.tech/app/projects?modal=support) from your Neon account.
+2. Provide:
+   - A signed statement on company letterhead explaining the situation
+   - Contact details for another employee at your company
+
+Neon will:
+
+- Notify the email address associated with the account and wait 24 business hours (Mon–Fri) for a response
+- Send you a document to sign electronically
+- Schedule a short video call to verify your identity (please have a government-issued ID ready)
+
+<Admonition type="info">
+Neon will not store or copy your ID. It’s used only to confirm that the person on the call is who they say they are.
+</Admonition>
+
+Once all steps are complete, we’ll grant access to the account or transfer project ownership as needed.
+
+<Admonition type="important">
+Neon Support may request additional information during or after the verification process. Manual account recovery is a sensitive procedure designed to protect your organization’s data and prevent unauthorized access.
+</Admonition>

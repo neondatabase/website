@@ -2,7 +2,7 @@
 title: Neon Local
 enableTableOfContents: true
 subtitle: Use Docker environments to connect to Neon and manage branches automatically
-updatedOn: '2025-06-04T16:43:36.537Z'
+updatedOn: '2025-04-29T13:55:59.260Z'
 ---
 
 [Neon Local](https://github.com/neondatabase-labs/neon_local) is a proxy service that creates a local interface to your Neon cloud database. By default, it automatically creates a new database branch when the container starts and deletes it when the container stops.
@@ -69,7 +69,7 @@ docker run \
 
 ## Connect
 
-Connect using either the Neon [serverless driver](/docs/serverless/serverless-driver) or any other Postgres client.
+Connect using either the Neon [serverless driver](/serverless/serverless-driver) or any other Postgres client.
 
 <CodeTabs labels={["Neon serverless driver", "node-postgres"]}>
 

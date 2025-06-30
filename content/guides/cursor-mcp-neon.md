@@ -45,14 +45,6 @@ Before you begin, ensure you have the following:
 
 ### Option 1: Setting up the Remote Hosted Neon MCP Server
 
-#### Quick Install (Recommended)
-
-Click the button below to install the Neon MCP server in Cursor. When prompted, click **Install** within Cursor.
-
-<a href="https://cursor.com/install-mcp?name=Neon&config=eyJjb21tYW5kIjoibnB4IC15IG1jcC1yZW1vdGVAbGF0ZXN0IGh0dHBzOi8vbWNwLm5lb24udGVjaC9zc2UifQ%3D%3D"><img src="https://cursor.com/deeplink/mcp-install-dark.svg" alt="Add Neon MCP server to Cursor" height="32" /></a>
-
-#### Manual Setup
-
 This method uses Neon's managed server and OAuth authentication.
 
 1. Open Cursor.
@@ -65,7 +57,7 @@ This method uses Neon's managed server and OAuth authentication.
      "mcpServers": {
        "Neon": {
          "command": "npx",
-         "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/sse"]
+         "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
        }
      }
    }

@@ -2,7 +2,7 @@
 title: Neon Terraform provider
 enableTableOfContents: true
 tag: community
-updatedOn: '2025-06-23T15:24:08.792Z'
+updatedOn: '2024-11-26T20:29:24.105Z'
 ---
 
 Neon sponsors the following community-developed Terraform provider for managing Neon Postgres platform resources:

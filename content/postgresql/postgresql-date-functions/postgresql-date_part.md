@@ -212,7 +212,7 @@ Output:
 (1 row)
 ```
 
-### 10\) Extracting day of the week, day of the year from a timestamp
+### 10\) Extracting hour, minute, and second from a timestamp
 
 To extract the day of the week and or day of the year from a time stamp, you use the `dow` and `doy` arguments:
 

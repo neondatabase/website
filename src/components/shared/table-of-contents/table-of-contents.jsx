@@ -4,11 +4,12 @@ import { useThrottleCallback } from '@react-hook/throttle';
 import PropTypes from 'prop-types';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
+import TOCIcon from './images/toc.inline.svg';
 import Item from './item';
 
 const CURRENT_ANCHOR_GAP_PX = 100;
 
-const TableOfContents = ({ items, isTemplate }) => {
+const TableOfContents = ({ items, isUseCase }) => {
   const titles = useRef([]);
   const [currentAnchor, setCurrentAnchor] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(null);
@@ -36,11 +37,6 @@ const TableOfContents = ({ items, isTemplate }) => {
     const currentTitleIdx = titles.current.findIndex((anchor) => {
       const { top } = anchor.getBoundingClientRect();
 
-      // Check if the anchor is inside a collapsed details element
-      if (anchor.closest('details:not([open])')) {
-        return false;
-      }
-
       return top - CURRENT_ANCHOR_GAP_PX >= 0;
     });
 
@@ -67,8 +63,9 @@ const TableOfContents = ({ items, isTemplate }) => {
 
   return (
     <>
-      <h3 className="mb-3.5 text-sm font-medium leading-tight tracking-extra-tight">
-        On this page
+      <h3 className="flex items-center space-x-2 py-2 text-sm font-semibold leading-tight">
+        <TOCIcon className="h-3.5 w-3.5 text-black dark:text-white" />
+        <span>On this page</span>
       </h3>
       <ul className="no-scrollbars overflow-y-auto">
         {items.map((item, index) => (
@@ -79,7 +76,7 @@ const TableOfContents = ({ items, isTemplate }) => {
               currentAnchor={currentAnchor}
               isUserScrolling={isUserScrolling}
               setIsUserScrolling={setIsUserScrolling}
-              isTemplate={isTemplate}
+              isUseCase={isUseCase}
               {...item}
             />
           </li>
@@ -98,7 +95,7 @@ TableOfContents.propTypes = {
       title: PropTypes.string.isRequired,
     })
   ).isRequired,
-  isTemplate: PropTypes.bool,
+  isUseCase: PropTypes.bool,
 };
 
 export default TableOfContents;

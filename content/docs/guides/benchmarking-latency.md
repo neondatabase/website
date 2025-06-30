@@ -3,7 +3,7 @@ title: Benchmarking latency in Neon's serverless Postgres
 subtitle: Techniques for obtaining meaningful latency data in serverless database
   environments
 enableTableOfContents: true
-updatedOn: '2025-06-23T15:24:08.764Z'
+updatedOn: '2025-05-28T18:47:27.793Z'
 ---
 
 Benchmarking database query latency is inherently complex, requiring careful consideration of numerous variables and testing methodologies. Neon's serverless Postgres environment adds additional layers to this complexity due to compute auto-suspension, connection protocol differences, and geographic distribution. This guide provides detailed methodologies for separating cold-start costs from operational latency, selecting optimal connection types, and designing tests that accurately reflect production conditions.
@@ -108,7 +108,7 @@ Design your benchmarks to simulate how your application actually interacts with 
   - If your app keeps connections alive, focus on post-connection query latency
   - If your app is serverless and frequently creates new connections, measure both scenarios but analyze them separately
 
-For examples of different connection patterns and their implementation, see [Connection Examples](/docs/connect/choose-connection).
+For examples of different connection patterns and their implementation, see [Connection Examples](/docs/connect/connection-examples).
 
 ## Neon latency benchmarks dashboard
 
@@ -122,7 +122,7 @@ Neon provides a [Latency Benchmarks Dashboard](https://latency-benchmarks-dashbo
 
 This data helps you understand expected latencies based on your specific region and connection method. The dashboard is open source and [available on GitHub](https://github.com/neondatabase-labs/latency-benchmarks).
 
-If you encounter unexpected results during your benchmarking, consult the [Connection Troubleshooting](/docs/connect/connect-intro#troubleshoot-connection-issues) documentation to identify potential issues.
+If you encounter unexpected results during your benchmarking, consult the [Connection Troubleshooting](/docs/connect/connection-troubleshooting) documentation to identify potential issues.
 
 ## Conclusion
 

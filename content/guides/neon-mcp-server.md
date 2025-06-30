@@ -86,7 +86,7 @@ You have two options for connecting Claude to the Neon MCP Server:
      "mcpServers": {
        "Neon": {
          "command": "npx",
-         "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/sse"]
+         "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
        }
      }
    }

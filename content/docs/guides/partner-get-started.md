@@ -3,7 +3,7 @@ title: Get started with your integration
 subtitle: Learn the essentials and key steps for integrating with Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-06-23T15:24:08.780Z'
+updatedOn: '2025-05-30T16:54:40.478Z'
 ---
 
 This guide outlines the steps to integrate Neon into your platform, enabling you to offer managed Postgres databases to your users. Whether you’re developing a SaaS product, AI agent, enterprise platform, or something else entirely, this guide walks you through what's involved in setting up, configuring, and managing your Neon integration.
@@ -74,8 +74,8 @@ To learn how, see [Querying consumption metrics with the API](/docs/guides/partn
 - **Staying up to date with changes to the Neon platform**: We make every effort to proactively and directly inform our partners about updates and changes that could impact their business. In addition, Partners can monitor the following sources for information about the latest updates from Neon:
   - The [Neon Roadmap](/docs/introduction/roadmap) to see recent deliveries and upcoming features.
   - The [Neon Changelog](/docs/changelog) for the latest product updates.
-  - The [Neon Newsletter](/blog#subscribe-form) sent weekly.
-  - The [Neon Blog](/blog)
+  - The [Neon Newsletter](/blog sent weekly.
+  - The [Neon Blog](/blog
   - The [Neon Status Page](https://neonstatus.com/) for platform status across regions.
   - [RSS Feeds](/docs/reference/feeds) for all of the above, which can be added to your Slack channels.
 

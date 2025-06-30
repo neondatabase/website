@@ -9,7 +9,7 @@ import getNodeText from 'utils/get-node-text';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 const styles = {
-  base: 'inline-flex cursor-pointer items-center justify-center font-bold !leading-none text-center whitespace-nowrap rounded-full transition-colors duration-200 outline-none',
+  base: 'inline-flex items-center justify-center font-bold !leading-none text-center whitespace-nowrap rounded-full transition-colors duration-200 outline-none',
   size: {
     lg: 'text-base h-12 px-[54px] lg:h-11 lg:px-11 lg:text-sm',
     md: 't-2xl py-7 px-11 2xl:py-[26px] xl:py-[21px] xl:px-9 md:py-5 md:px-8',
@@ -39,13 +39,11 @@ const styles = {
     blue: 'bg-blue-80 text-black hover:bg-[#C6EAF1]',
     'gray-10': 'bg-gray-new-10 text-white hover:bg-gray-new-20',
     'gray-15': 'bg-gray-new-15 text-white hover:bg-gray-new-20',
-    'gray-20': 'bg-gray-new-20 text-white hover:bg-gray-new-40',
     'gray-94-filled': 'bg-gray-new-94 text-black hover:bg-gray-6',
     'gray-15-outline':
       'border bg-transparent border-gray-new-15 text-white hover:border-gray-new-30',
     'with-icon':
       'pl-[4.1rem] xl:pl-[4.25rem] lg:pl-[4.25rem] bg-green-45 text-black hover:bg-[#00e5bf]',
-    'red-filled': 'bg-[#F18484] text-black hover:bg-[#FBA8A8]',
   },
 };
 
@@ -58,14 +56,13 @@ const Button = ({
   analyticsEvent = null,
   analyticsOnHover = false,
   handleClick = null,
-  withArrow = false,
   children,
   ...otherProps
 }) => {
   const posthog = usePostHog();
   const className = clsx(styles.base, styles.size[size], styles.theme[theme], additionalClassName);
 
-  const Tag = to || withArrow ? Link : 'button';
+  const Tag = to ? Link : 'button';
 
   const handleAnalytics = (eventType = 'clicked') => {
     if (!tagName) return;
@@ -87,7 +84,6 @@ const Button = ({
     <Tag
       className={className}
       to={to}
-      {...(withArrow ? { withArrow } : {})}
       onClick={() => {
         if (handleClick) handleClick();
         handleAnalytics('clicked');
@@ -110,7 +106,6 @@ Button.propTypes = {
   analyticsEvent: PropTypes.string,
   analyticsOnHover: PropTypes.bool,
   handleClick: PropTypes.func,
-  withArrow: PropTypes.bool,
 };
 
 export default Button;

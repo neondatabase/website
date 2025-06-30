@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { notFound } from 'next/navigation';
 
-import Post from 'components/pages/template/post';
+import Post from 'components/pages/doc/post';
 import { USE_CASES_DIR_PATH } from 'constants/content';
 import LINKS from 'constants/links';
 import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
@@ -10,39 +10,41 @@ import getMetadata from 'utils/get-metadata';
 import getTableOfContents from 'utils/get-table-of-contents';
 
 export async function generateMetadata({ params }) {
-  const { slug } = params;
+  const { slug: currentSlug } = params;
 
-  const post = getPostBySlug(slug, USE_CASES_DIR_PATH);
+  const post = getPostBySlug(currentSlug, USE_CASES_DIR_PATH);
 
   if (!post) return notFound();
 
   return getMetadata({
     title: post?.data?.title,
     description: post?.data?.subtitle,
-    pathname: `${LINKS.useCases}/${slug}`,
+    pathname: `${LINKS.useCases}/${currentSlug}`,
     type: 'article',
     imagePath: post?.data?.image || DEFAULT_IMAGE_PATH,
   });
 }
 
 const UseCasePage = ({ params }) => {
-  const { slug } = params;
+  const { slug: currentSlug } = params;
 
-  const post = getPostBySlug(slug, USE_CASES_DIR_PATH);
+  const post = getPostBySlug(currentSlug, USE_CASES_DIR_PATH);
   if (!post) return notFound();
 
   const { data, content } = post;
   const tableOfContents = getTableOfContents(content);
-  const gitHubPath = `${USE_CASES_DIR_PATH}/${slug}.md`;
+  const gitHubPath = `${USE_CASES_DIR_PATH}/${currentSlug}.md`;
 
   return (
     <Post
       content={content}
       data={data}
       breadcrumbs={[]}
-      currentSlug={slug}
+      navigationLinks={{ previousLink: null, nextLink: null }}
+      currentSlug={currentSlug}
       gitHubPath={gitHubPath}
       tableOfContents={tableOfContents}
+      isUseCase
     />
   );
 };

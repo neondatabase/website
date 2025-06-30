@@ -277,7 +277,7 @@
 - [Neon Manage - branches](https://neon.com/llms/manage-branches.txt): Guide for Manage branches
 - [Neon Manage - database-access](https://neon.com/llms/manage-database-access.txt): Learn how to manage user access to databases in your Neon project
 - [Neon Manage - databases](https://neon.com/llms/manage-databases.txt): Guide for Manage databases
-
+- [Neon Manage - email-signup](https://neon.com/llms/manage-email-signup.txt): How to change to an email-based account, or simply change your email
 - [Neon Manage - endpoints](https://neon.com/llms/manage-endpoints.txt): Guide for Manage computes
 - [Neon Manage - integrations](https://neon.com/llms/manage-integrations.txt): Guide for Manage integrations
 - [Neon Manage - maintenance-updates-overview](https://neon.com/llms/manage-maintenance-updates-overview.txt): Guide for Maintenance & updates overview

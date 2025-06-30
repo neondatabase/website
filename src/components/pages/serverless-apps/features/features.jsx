@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 
-import TagCloud from 'components/pages/use-case/tag-cloud';
 import Container from 'components/shared/container/container';
 import aiIcon from 'icons/serverless-apps/features/ai.svg';
 import autoScalingIcon from 'icons/serverless-apps/features/auto-scaling.svg';
@@ -171,12 +170,25 @@ const Features = () => (
                 )}
                 dangerouslySetInnerHTML={{ __html: desctiprion }}
               />
-              {/* // add tag cloud here */}
-              <TagCloud
-                items={features}
-                className="gap-3 lg:gap-x-2"
-                titleClassName="text-[15px]"
-              />
+              <ul className="mt-6 flex flex-wrap gap-3 lg:mt-4 lg:gap-x-2">
+                {features.map(({ title, icon }) => (
+                  <li
+                    className="flex h-10 items-center gap-2.5 rounded-full border border-gray-new-15 px-[18px] lg:h-[34px] lg:px-3 md:h-[30px]"
+                    key={title}
+                  >
+                    <Image
+                      className="md:size-[14px]"
+                      src={icon}
+                      width="16"
+                      height="16"
+                      alt={title}
+                    />
+                    <span className="text-[15px] font-medium leading-none tracking-extra-tight text-[#E3E4E9] lg:text-sm">
+                      {title}
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </li>
         ))}

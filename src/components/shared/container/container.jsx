@@ -19,7 +19,6 @@ const styles = {
     1100: 'max-w-[1100px]',
     960: 'max-w-[960px] md:px-5',
     768: 'max-w-3xl',
-    576: 'max-w-[576px]',
   },
 };
 

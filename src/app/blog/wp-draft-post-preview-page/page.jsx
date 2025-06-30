@@ -12,6 +12,7 @@ import PreviewWarning from 'components/pages/blog-post/preview-warning';
 import SocialShare from 'components/pages/blog-post/social-share';
 import Admonition from 'components/shared/admonition';
 import LINKS from 'constants/links';
+import SEO_DATA from 'constants/seo-data';
 import { getWpPreviewPostData } from 'utils/api-wp';
 import getFormattedDate from 'utils/get-formatted-date';
 import getMetadata from 'utils/get-metadata';
@@ -112,34 +113,16 @@ const BlogDraft = async ({ searchParams }) => {
   );
 };
 
-export async function generateMetadata({ searchParams }) {
-  if (!searchParams?.id || !searchParams?.status) {
-    return null;
-  }
-
-  const { post } = await getWpPreviewPostData(searchParams?.id, searchParams?.status);
-
-  if (!post) return null;
-
-  const {
-    seo: {
-      title,
-      metaDesc,
-      metaKeywords,
-      metaRobotsNoindex,
-      opengraphTitle,
-      opengraphDescription,
-      twitterImage,
-    },
-  } = post;
+export async function generateMetadata() {
+  const { title, description, imagePath } = SEO_DATA.blog;
 
   return getMetadata({
-    title: opengraphTitle || title,
-    description: opengraphDescription || metaDesc,
-    keywords: metaKeywords,
-    robotsNoindex: metaRobotsNoindex || 'noindex',
+    title,
+    description,
+    keywords: '',
+    robotsNoindex: 'noindex',
     pathname: `${LINKS.blog}/wp-draft-post-preview-page`,
-    imagePath: twitterImage?.mediaItemUrl,
+    imagePath,
   });
 }
 

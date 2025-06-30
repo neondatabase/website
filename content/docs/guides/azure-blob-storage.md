@@ -2,7 +2,7 @@
 title: File storage with Azure Blob Storage
 subtitle: Store files via Azure Blob Storage and track metadata in Neon
 enableTableOfContents: true
-updatedOn: '2025-06-23T15:24:08.763Z'
+updatedOn: '2025-05-30T16:54:40.458Z'
 ---
 
 [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/) is Microsoft's object storage solution for the cloud. It's optimized for storing massive amounts of unstructured data, such as text or binary data, including images, documents, streaming media, and archive data.

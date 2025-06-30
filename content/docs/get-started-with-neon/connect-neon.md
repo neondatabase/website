@@ -2,7 +2,7 @@
 title: Connecting Neon to your stack
 subtitle: Learn how to integrate Neon into your application
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.890Z'
+updatedOn: '2025-04-17T16:06:46.399Z'
 ---
 
 Using Neon as the serverless database in your tech stack means configuring connections. Whether it’s a direct connection string from your language or framework, setting environment variables for your deployment platform, connecting to ORMs like Prisma, or configuring deployment settings for CI/CD workflows, it starts with the connection.
@@ -15,7 +15,7 @@ This section provides connection string samples for various frameworks and langu
 
 ```bash
 # psql example connection string
-psql postgresql://username:password@hostname:5432/database?sslmode=require&channel_binding=require
+psql postgresql://username:password@hostname:5432/database?sslmode=require
 ```
 
 ```ini
@@ -91,7 +91,7 @@ with conn.cursor() as cur:
 conn.close()
 ```
 
-```csharp
+```.NET
 # .NET example
 
 ## Connection string
@@ -213,7 +213,7 @@ Neon supports pooled and direct connections to the database. Use a pooled connec
 A Neon connection string includes the role, password, hostname, and database name.
 
 ```text
-postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
              ^    ^         ^                         ^                              ^
        role -|    |         |- hostname               |- pooler option               |- database
                   |

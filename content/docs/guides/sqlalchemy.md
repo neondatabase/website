@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/sqlalchemy
   - /docs/integrations/sqlalchemy
-updatedOn: '2025-06-30T11:30:21.918Z'
+updatedOn: '2025-04-20T15:44:26.056Z'
 ---
 
 SQLAlchemy is a Python SQL toolkit and Object Relational Mapper (ORM) that provides application developers with the full power and flexibility of SQL. This guide describes how to create a Neon project and connect to it from SQLAlchemy.
@@ -82,7 +82,7 @@ PASSWORD = "AbC123dEf"
 HOST = "ep-cool-darkness-123456.us-east-2.aws.neon.tech"
 DATABASE = "dbname"
 
-conn_str = f'postgresql://{USERNAME}:{PASSWORD}@{HOST}/{DATABASE}?sslmode=require&channel_binding=require'
+conn_str = f'postgresql://{USERNAME}:{PASSWORD}@{HOST}/{DATABASE}?sslmode=require'
 
 engine = create_engine(conn_str)
 ```

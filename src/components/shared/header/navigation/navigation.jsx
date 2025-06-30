@@ -51,26 +51,34 @@ const Navigation = ({ isDarkTheme }) => (
               >
                 <ul
                   className={clsx(
-                    'relative w-max rounded-[14px] border',
-                    gridSubmenu ? 'flex gap-x-10 px-7 py-6' : 'p-4',
+                    'relative rounded-[14px] border',
+                    gridSubmenu
+                      ? 'grid w-max grid-cols-[repeat(2,minmax(0,auto));] gap-x-14 gap-y-9 px-7 py-6'
+                      : 'p-4',
                     isDarkTheme
                       ? 'border-[#16181D] bg-[#0B0C0F] shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]'
                       : 'border-gray-new-94 bg-white shadow-[0px_14px_20px_0px_rgba(0,0,0,.1)] dark:border-[#16181D] dark:bg-[#0B0C0F] dark:shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]'
                   )}
                 >
-                  {sections.map(({ title, items, banner }, index) => {
+                  {sections.map(({ title, items, banner, isExtended }, index) => {
                     if (banner) {
                       return <MenuBanner {...banner} key={index} />;
                     }
 
                     return (
-                      <li className={clsx(gridSubmenu ? 'min-w-48' : 'min-w-[94px]')} key={index}>
+                      <li
+                        className={clsx(
+                          'min-w-[94px]',
+                          gridSubmenu && [isExtended ? 'w-[216px]' : 'w-[196px]']
+                        )}
+                        key={index}
+                      >
                         {title && (
                           <span className="mb-5 block text-[11px] font-medium uppercase leading-none text-gray-new-40 dark:text-gray-new-50">
                             {title}
                           </span>
                         )}
-                        <ul className={clsx('flex flex-col', gridSubmenu ? 'gap-5' : 'gap-[18px]')}>
+                        <ul className={clsx('flex flex-col', isExtended ? 'gap-5' : 'gap-[18px]')}>
                           {items.map(
                             ({
                               icon: Icon,
@@ -83,7 +91,7 @@ const Navigation = ({ isDarkTheme }) => (
                                 <Link
                                   className={clsx(
                                     'relative flex items-center',
-                                    gridSubmenu
+                                    isExtended
                                       ? 'gap-3 before:rounded-[14px]'
                                       : 'gap-2.5 before:rounded-[10px]',
                                     'before:pointer-events-none before:absolute before:-inset-2.5 before:transform-gpu before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100',
@@ -93,9 +101,9 @@ const Navigation = ({ isDarkTheme }) => (
                                   )}
                                   to={to}
                                   tagName="Navigation"
-                                  tagText={title}
+                                  // tagText={title}
                                 >
-                                  {gridSubmenu && IconGradient && (
+                                  {isExtended && IconGradient && (
                                     <div
                                       className={clsx(
                                         'relative z-10 flex size-8 shrink-0 items-center justify-center rounded-lg border',
@@ -114,7 +122,7 @@ const Navigation = ({ isDarkTheme }) => (
                                       />
                                     </div>
                                   )}
-                                  {!gridSubmenu && Icon && (
+                                  {!isExtended && Icon && (
                                     <div className="relative z-10 shrink-0">
                                       <Icon
                                         className={clsx(

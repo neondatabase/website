@@ -2,7 +2,7 @@
 title: The xml2 extension
 subtitle: Perform XPath querying and XSLT transformations on XML data in Postgres.
 enableTableOfContents: true
-updatedOn: '2025-06-23T15:24:08.760Z'
+updatedOn: '2025-05-27T19:40:34.757Z'
 tag: new
 ---
 

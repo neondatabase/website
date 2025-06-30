@@ -3,7 +3,7 @@ title: Migrate data to Neon Postgres using pgcopydb
 subtitle: Streamline your Postgres data migration to Neon using pgcopydb
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-06-30T11:30:21.920Z'
+updatedOn: '2025-04-21T15:23:27.912Z'
 ---
 
 <InfoBlock>
@@ -64,7 +64,7 @@ Before proceeding, set the following environment variables for your source and t
 
 ```bash
 export PGCOPYDB_SOURCE_PGURI="postgresql://source_user:source_password@source_host:source_port/source_db"
-export PGCOPYDB_TARGET_PGURI="postgresql://neon_user:neon_user_password@xxxx.neon.tech/neondb?sslmode=require&channel_binding=require"
+export PGCOPYDB_TARGET_PGURI="postgresql://neon_user:neon_user_password@xxxx.neon.tech/neondb?sslmode=require"
 ```
 
 You can replace the placeholders with your actual connection details. You can get Neon database connection details from the Neon console. `pgcopydb` will automatically use these environment variables for the migration.

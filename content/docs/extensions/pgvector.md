@@ -4,7 +4,7 @@ subtitle: Enable Postgres as a vector store with the pgvector extension
 enableTableOfContents: true
 redirectFrom:
   - /docs/extensions/pg_embedding
-updatedOn: '2025-06-04T16:43:36.533Z'
+updatedOn: '2025-05-11T11:23:50.617Z'
 ---
 
 The `pgvector` extension enables you to store vector embeddings and perform vector similarity search in Postgres. It is particularly useful for applications involving natural language processing, such as those built on top of OpenAI's GPT models.
@@ -23,7 +23,7 @@ This topic describes how to enable the `pgvector` extension in Neon and how to c
 
 ## Enable the pgvector extension
 
-You can enable the `pgvector` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to Neon.
+You can enable the `pgvector` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](<(/docs/get-started-with-neon/query-with-neon-sql-editor)>) or from a client such as [psql](<(/docs/connect/query-with-psql-editor)>) that is connected to Neon.
 
 ```sql
 CREATE EXTENSION vector;

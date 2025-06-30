@@ -128,7 +128,7 @@ If you experience issues adding an MCP server from the Assistant panel, you can 
    "neon": {
       "command": {
          "path": "npx",
-         "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/sse"],
+         "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"],
          "env": null
       },
       "settings": {}

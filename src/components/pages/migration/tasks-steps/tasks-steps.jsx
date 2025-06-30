@@ -19,12 +19,12 @@ const ITEMS = [
     },
   },
   {
-    title: 'Match configurations',
+    title: 'Create a project',
     description:
-      'Then, the Assistant will generate a Neon branch within your source project, matching your source environment.',
+      'Then, the Assistant will generate a Neon project that matches your source database environment.',
     image: {
       src: stepTwo,
-      alt: 'Match configurations',
+      alt: 'Create a project',
       width: 832,
       height: 390,
     },

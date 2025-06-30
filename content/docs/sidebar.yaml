@@ -339,12 +339,10 @@
           items:
             - title: Accounts
               slug: manage/accounts
-            - title: User permissions
-              slug: manage/user-permissions
             - title: Organizations
               slug: manage/organizations
               items:
-                - title: Overview
+                - title: Getting started
                   slug: manage/organizations
                 - title: Manage Organizations
                   slug: manage/orgs-manage
@@ -364,10 +362,10 @@
               slug: guides/project-collaboration-guide
             - title: Database access
               slug: manage/database-access
+            - title: E-mail signup
+              slug: manage/email-signup
             - title: API keys
               slug: manage/api-keys
-            - title: Account recovery
-              slug: manage/account-recovery
         - section: Projects
           items:
             - title: Object hierarchy
@@ -400,9 +398,6 @@
               slug: introduction/monitor-query-history
             - title: Datadog integration
               slug: guides/datadog
-            - title: OpenTelemetry integration
-              slug: guides/opentelemetry
-              tag: new
             - title: Datbase monitoring tools
               slug: introduction/monitor-external-tools
         - section: Team Tools
@@ -597,6 +592,7 @@
       slug: https://api-docs.neon.tech/reference/getting-started-with-neon-api
       icon: api
     - title: SDKs
+      slug: reference/sdk
       icon: sdk
       items:
         - section: Neon SDKs
@@ -758,6 +754,8 @@
               slug: guides/exograph
             - title: PostgREST
               slug: guides/postgrest
+            - title: FerretDB
+              slug: guides/ferretdb
             - title: Grafbase
               slug: guides/grafbase
             - title: Hasura
@@ -886,167 +884,34 @@
     - title: Neon Auth
       icon: auth
       tag: beta
-      slug: neon-auth/overview
+      slug: guides/neon-auth
       items:
-        - section: Overview
+        - section: Get started
           items:
-            - title: Overview
-              slug: neon-auth/overview
-        - section: Quick Start
-          items:
-            - title: Next.js
-              slug: neon-auth/quick-start/nextjs
-            - title: React
-              slug: neon-auth/quick-start/react
-            - title: JavaScript
-              slug: neon-auth/quick-start/javascript
-        - section: How Neon Auth Works
-          items:
-            - title: How Neon Auth works
-              slug: neon-auth/how-it-works
-            - title: Guidance (deep dive)
-              slug: neon-auth/tutorial
-        - section: Practical Usage
-          items:
-            - title: Demo
-              slug: neon-auth/demo
-            - title: Best practices
-              slug: neon-auth/best-practices
-        - section: Concepts
-          items:
-            - title: The StackApp Object
-              slug: neon-auth/concepts/stack-app
-            - title: OAuth Authentication
-              slug: neon-auth/concepts/oauth
-            - title: Custom User Data
-              slug: neon-auth/concepts/custom-user-data
-            - title: Permissions & RBAC
-              slug: neon-auth/concepts/permissions
-            - title: Organizations and Teams
-              slug: neon-auth/concepts/orgs-and-teams
-            - title: Selecting a Team
-              slug: neon-auth/concepts/team-selection
-            - title: User Onboarding
-              slug: neon-auth/concepts/user-onboarding
-            - title: Backend integration
-              slug: neon-auth/concepts/backend-integration
-        - section: SDK and API Reference
-          items:
-            - title: Next.js SDK
-              slug: neon-auth/sdk/nextjs/overview
-              items:
-                - section: Overview
-                  items:
-                    - title: SDK Overview
-                      slug: neon-auth/sdk/nextjs/overview
-                - section: Objects
-                  items:
-                    - title: StackClientApp
-                      slug: neon-auth/sdk/nextjs/objects/stack-app
-                    - title: StackServerApp
-                      slug: neon-auth/sdk/nextjs/objects/stack-server-app
-                - section: Types
-                  items:
-                    - title: ContactChannel
-                      slug: neon-auth/sdk/nextjs/types/contact-channel
-                    - title: API Key
-                      slug: neon-auth/sdk/nextjs/types/api-key
-                    - title: Project
-                      slug: neon-auth/sdk/nextjs/types/project
-                    - title: Team
-                      slug: neon-auth/sdk/nextjs/types/team
-                    - title: TeamPermission
-                      slug: neon-auth/sdk/nextjs/types/team-permission
-                    - title: TeamProfile
-                      slug: neon-auth/sdk/nextjs/types/team-profile
-                    - title: TeamUser
-                      slug: neon-auth/sdk/nextjs/types/team-user
-                    - title: User
-                      slug: neon-auth/sdk/nextjs/types/user
-                - section: Hooks
-                  items:
-                    - title: useStackApp
-                      slug: neon-auth/sdk/nextjs/hooks/use-stack-app
-                    - title: useUser
-                      slug: neon-auth/sdk/nextjs/hooks/use-user
-            - title: React SDK
-              slug: neon-auth/sdk/react/overview
-              items:
-                - section: Overview
-                  items:
-                    - title: SDK Overview
-                      slug: neon-auth/sdk/react/overview
-                - section: Objects
-                  items:
-                    - title: StackClientApp
-                      slug: neon-auth/sdk/react/objects/stack-app
-                - section: Types
-                  items:
-                    - title: User
-                      slug: neon-auth/sdk/react/types/user
-                    - title: Team
-                      slug: neon-auth/sdk/react/types/team
-                    - title: Project
-                      slug: neon-auth/sdk/react/types/project
-                - section: Hooks
-                  items:
-                    - title: useStackApp
-                      slug: neon-auth/sdk/react/hooks/use-stack-app
-                    - title: useUser
-                      slug: neon-auth/sdk/react/hooks/use-user
-            - title: Components
-              slug: neon-auth/components/components
-              items:
-                - section: Overview
-                  items:
-                    - title: All components
-                      slug: neon-auth/components/components
-                - section: Components
-                  items:
-                    - title: UserButton
-                      slug: neon-auth/components/user-button
-                    - title: SelectedTeamSwitcher
-                      slug: neon-auth/components/selected-team-switcher
-                    - title: AccountSettings
-                      slug: neon-auth/components/account-settings
-                    - title: SignIn
-                      slug: neon-auth/components/sign-in
-                    - title: SignUp
-                      slug: neon-auth/components/sign-up
-                    - title: CredentialSignIn
-                      slug: neon-auth/components/credential-sign-in
-                    - title: CredentialSignUp
-                      slug: neon-auth/components/credential-sign-up
-                    - title: OAuthButton
-                      slug: neon-auth/components/oauth-button
-                    - title: OAuthButtonGroup
-                      slug: neon-auth/components/oauth-button-group
-                - section: Utilities
-                  items:
-                    - title: StackHandler
-                      slug: neon-auth/components/stack-handler
-                    - title: StackProvider
-                      slug: neon-auth/components/stack-provider
-                    - title: StackTheme
-                      slug: neon-auth/components/stack-theme
-            - title: Admin API
-              slug: neon-auth/api
+            - title: Get started
+              slug: guides/neon-auth
         - section: Guides
           items:
+            - title: Tutorial
+              slug: guides/neon-auth-demo
             - title: Creating users
-              slug: neon-auth/create-users
+              slug: guides/neon-auth-create-users
             - title: Claiming a project
-              slug: neon-auth/claim-project
-        - section: Customization
+              slug: guides/neon-auth-claim-project
+        - section: Concepts
           items:
-            - title: Colors and styles
-              slug: neon-auth/customization/custom-styles
-            - title: Dark/light mode
-              slug: neon-auth/customization/dark-mode
-            - title: Internationalization
-              slug: neon-auth/customization/internationalization
-            - title: Custom pages
-              slug: neon-auth/customization/custom-pages
+            - title: How Neon Auth works
+              slug: guides/neon-auth-how-it-works
+            - title: Concepts
+              slug: guides/neon-auth-tutorial
+            - title: Best practices & FAQ
+              slug: guides/neon-auth-best-practices
+        - section: Reference
+          items:
+            - title: Permissions & roles
+              slug: guides/neon-auth-permissions-roles
+            - title: Neon Auth API Reference
+              slug: guides/neon-auth-api
     - title: Neon RLS
       icon: lock
       slug: guides/neon-rls
@@ -1099,15 +964,6 @@
       slug: data-api/get-started
       icon: api
       tag: new
-      items:
-        - section: Get started
-          items:
-            - title: Get started
-              slug: data-api/get-started
-        - section: Tutorial
-          items:
-            - title: Building a note-taking app
-              slug: data-api/demo
 - section: Workflows
   items:
     - title: Data anonymization

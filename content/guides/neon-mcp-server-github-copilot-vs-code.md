@@ -49,7 +49,7 @@ Add the following Neon MCP server configuration to your [user settings](https://
     "servers": {
       "Neon": {
         "command": "npx",
-        "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/sse"]
+        "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
       }
     }
   }

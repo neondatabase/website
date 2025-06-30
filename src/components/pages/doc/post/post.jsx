@@ -34,6 +34,7 @@ const Post = ({
   navigationLinks: { previousLink, nextLink },
   navigationLinksPrefix,
   isChangelog = false,
+  isUseCase = false,
   isPostgres = false,
   isDocsIndex = false,
   changelogPosts = [],
@@ -51,7 +52,10 @@ const Post = ({
     <>
       <div
         className={clsx(
-          'col-span-7 col-start-2 -ml-6 flex max-w-[832px] flex-col 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 lg:ml-0 lg:max-w-full lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8'
+          'flex flex-col lg:ml-0 lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8',
+          isUseCase
+            ? 'col-span-6 col-start-4 -mx-10 2xl:col-span-7 2xl:col-start-3 2xl:mx-0 xl:col-span-10 xl:col-start-2'
+            : 'col-span-7 col-start-2 -ml-6 max-w-[832px] 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 lg:max-w-full'
         )}
       >
         {breadcrumbs.length > 0 && (
@@ -67,7 +71,10 @@ const Post = ({
           <article>
             <h1
               className={clsx(
-                'text-balance text-[36px] font-semibold leading-tight tracking-extra-tight xl:text-3xl',
+                'font-semibold leading-tight tracking-extra-tight',
+                isUseCase
+                  ? 'text-[56px] xl:text-5xl lg:text-4xl md:text-[28px] md:leading-tight'
+                  : 'text-[36px] xl:text-3xl',
                 tag && 'inline'
               )}
             >
@@ -79,7 +86,12 @@ const Post = ({
                 {subtitle}
               </p>
             )}
-            <Content className="mt-5" content={content} isPostgres={isPostgres} />
+            <Content
+              className="mt-5"
+              content={content}
+              isUseCase={isUseCase}
+              isPostgres={isPostgres}
+            />
           </article>
         )}
 
@@ -94,6 +106,7 @@ const Post = ({
       </div>
 
       <Aside
+        isUseCase={isUseCase}
         isDocsIndex={isDocsIndex}
         isChangelog={isChangelog}
         enableTableOfContents={enableTableOfContents}
@@ -121,6 +134,7 @@ Post.propTypes = {
   }).isRequired,
   navigationLinksPrefix: PropTypes.string,
   isChangelog: PropTypes.bool,
+  isUseCase: PropTypes.bool,
   isPostgres: PropTypes.bool,
   isDocsIndex: PropTypes.bool,
   changelogPosts: PropTypes.arrayOf(

@@ -7,7 +7,7 @@ redirectFrom:
   - /docs/conceptual-guides/branching
   - /docs/concepts/branching
   - /docs/introduction/point-in-time-restore
-updatedOn: '2025-06-04T16:43:36.536Z'
+updatedOn: '2025-04-10T19:06:52.166Z'
 ---
 
 With Neon, you can quickly and cost-effectively branch your data for development, testing, and various other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines.
@@ -103,6 +103,6 @@ Learn how to use these data recovery features:
 
 <a href="/docs/guides/reset-from-parent" description="Reset a branch to match its parent" icon="split-branch">Reset from parent</a>
 
-<a href="/docs/guides/time-travel-assist" description="Run SQL queries against your database's past state" icon="queries">Time Travel queries</a>
+<a href="/docs/manage/history/time-travel" description="Run SQL queries against your database's past state" icon="queries">Time Travel queries</a>
 
 </DetailIconCards>

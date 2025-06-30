@@ -22,3 +22,5 @@ const BranchingPage = () => (
 );
 
 export default BranchingPage;
+
+export const revalidate = 60;
