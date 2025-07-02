@@ -401,40 +401,47 @@ The key command is `pgroll convert`, which reads SQL statements and translates t
 
 #### Example: Drizzle ORM
 
-1.  Define your schema in Drizzle.
-2.  Generate a SQL migration file using Drizzle Kit:
-    ```bash shouldWrap
-    drizzle-kit generate --dialect postgresql --schema=./src/schema.ts
+A typical workflow with Drizzle ORM and `pgroll` involves the following steps:
+
+1.  **Modify your drizzle schema:** Start by making the desired changes to your schema definitions in your project's `db/schema.ts` file.
+
+2.  **Generate the SQL nigration:** Use the Drizzle Kit CLI to generate a standard SQL migration file from your schema changes.
+    ```shell
+    npx drizzle-kit generate
     ```
-3.  This creates a SQL file (e.g., `0000_init.sql`). Convert it with `pgroll`:
-    ```bash shouldWrap
-    pgroll convert 0000_init.sql > migrations/01_from_drizzle.yaml
+    This creates a new `.sql` file in your migrations folder.
+
+3.  **Convert to a `pgroll` nigration:** Use the `pgroll` CLI to convert the generated SQL file into `pgroll`'s declarative YAML format.
+    ```shell
+    pgroll convert <path-to-your-drizzle-generated.sql> > <path-to-your-new.yaml>
+    ```
+    **Crucially, review the output YAML.** For any breaking changes, you will likely need to manually provide the correct `up` and `down` SQL expression to handle data backfilling.
+
+    <Admonition type="important" title="Manual review required">
+    The `convert` command is a powerful starting point, but you may need to manually edit the output. For complex changes, `pgroll` often creates `TODO` markers for `up`/`down` expressions that it cannot infer automatically. Always review and complete the generated migration file.
+    </Admonition>
+
+4.  **Start the migration:** Apply the migration to your database using the `start` command. This creates the new schema version alongside the old one without causing downtime.
+    ```shell
+    pgroll start <path-to-your-new.yaml>
     ```
 
-Similarly, you can use `pgroll convert` with any other ORMs. The core idea is to generate the SQL migration file and then convert it to `pgroll`'s format.
+5.  **Test and deploy your new application:**
+    *   Fetch the new schema name using `pgroll latest schema`.
+    *   In your CI/CD pipeline, deploy the new version of your application, configuring it to use the new schema via an environment variable (e.g., `PGROLL_SCHEMA_VERSION`).
+    *   This is the ideal stage for phased rollouts (canary, blue-green), as the old application version continues to run unaffected on the previous schema.
 
-<Admonition type="note">
-The `convert` command is a powerful starting point, but you may need to manually edit the output. For complex changes, `pgroll` often creates `TODO` markers for `up`/`down` expressions that it cannot infer automatically. Always review and complete the generated migration file. For this reason, manually create the migration files for complex changes, especially those involving data transformations.
-</Admonition>
+6.  **Validate and Finalize:**
+    *   **If an issue is found,** you can instantly and safely revert the database changes with `pgroll rollback`. This will not affect the running (old) application.
+    *   **If the new application is stable,** proceed with a full rollout.
 
-### Typical CI/CD workflow
-
-`pgroll` is designed for automation. Here’s a typical CI/CD deployment workflow:
-
-1.  **Run Migrations:** In your pipeline, apply all outstanding migrations from your `migrations` directory. The `migrate` command applies all unapplied migrations sequentially and leaves the final one "in-progress."
-    ```bash shouldWrap
-    # This will start the latest unapplied migration
-    pgroll migrate ./migrations --postgres-url "postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
+7.  **Complete the Migration:** Once you are confident that no services are using the old schema, finalize the process by running:
+    ```shell
+    pgroll complete
     ```
-2.  **Get Latest Schema Version:** Fetch the name of the new schema version that your application needs to use.
-    ```bash shouldWrap
-    export LATEST_SCHEMA_VERSION=$(pgroll latest schema)
-    ```
-3.  **Deploy New Application:** Deploy your new application code, passing `LATEST_SCHEMA_VERSION` as an environment variable (e.g., `DB_SEARCH_PATH`). Your application should use this variable to set the `search_path` on its database connections.
-4.  **Complete the Migration:** After the new application is successfully deployed and stable, a subsequent pipeline job (or manual trigger) can finalize the migration.
-    ```bash shouldWrap
-    pgroll complete --postgres-url "postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
-    ```
+    This removes the old schema version and cleans up all temporary columns and triggers, leaving your database in its new, permanent state.
+
+In a similar way, you can integrate `pgroll` with other ORMs like Sequelize, TypeORM, or Prisma by generating SQL migrations and converting them to `pgroll` format
 
 ## Onboarding an existing database (`baseline`)
 
