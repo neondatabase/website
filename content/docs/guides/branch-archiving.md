@@ -113,7 +113,7 @@ The Neon CLI [branches list](/docs/reference/cli-branches#list) command shows a 
       ┌───────────────────────────┬──────┬─────────┬───────────────┬──────────────────────┐
       │ Id                        │ Name │ Default │ Current State │ Created At           │
       ├───────────────────────────┼──────┼─────────┼───────────────┼──────────────────────┤
-      │ br-muddy-firefly-a7kzf0d4 │ production │ true    │ ready         │ 2024-10-30T14:59:57Z │
+      │ br-muddy-firefly-a7kzf0d4 │ main │ true    │ ready         │ 2024-10-30T14:59:57Z │
       └───────────────────────────┴──────┴─────────┴───────────────┴──────────────────────┘
       ```
 
