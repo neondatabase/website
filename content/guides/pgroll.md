@@ -114,7 +114,7 @@ This abstracts the schema's structure. For example, when you rename a column, th
 
 ## Getting started
 
-Now that you understand the basics, let's dive into using `pgroll` for schema migrations in a Neon Postgres database. This guide will take you through installing and setting up `pgroll`, creating your first migration, and understanding how to manage schema changes safely and effectively.
+Now that you understand the basics, let's dive into using `pgroll` for schema migrations in a Neon Postgres database. This guide will take you through installing and setting up `pgroll`, creating your first migration, and understanding how to manage schema changes safely.
 
 ### Prerequisites
 
@@ -188,7 +188,7 @@ Let's quickly break down the file you just created:
 - `create_table`: This is a specific `pgroll` operation. It defines a new table and its properties.
 - `columns`: Inside `create_table`, this array defines each column's `name`, `type`, and any constraints like `pk` (primary key), `unique`, or `nullable`.
 
-This declarative approach is what empowers `pgroll` to analyze the changes, manage locks intelligently, and perform migrations without downtime. For a complete list of all supported actions, such as `alter_column` or `drop_index`, see the official **[pgroll operations reference](https://pgroll.com/docs/latest/operations/add_column)**.
+This declarative approach is what allows `pgroll` to analyze the changes, manage locks intelligently, and perform migrations without downtime. For a complete list of all supported actions, such as `alter_column` or `drop_index`, see the official **[pgroll operations reference](https://pgroll.com/docs/latest/operations)**.
 
 <Admonition type="note" title="Coming from an ORM or SQL Scripts?">
 You don't always have to write these YAML files by hand. `pgroll` can automatically generate migrations from standard SQL files. We'll cover how to use this feature with tools like Drizzle in the [Generating migrations from ORMs](#generating-migrations-with-orms) section.
@@ -451,11 +451,11 @@ A typical workflow with Drizzle ORM and `pgroll` involves the following steps:
     ```
     This removes the old schema version and cleans up all temporary columns and triggers, leaving your database in its new, permanent state.
 
-In a similar way, you can integrate `pgroll` with other ORMs like Sequelize, TypeORM, or Prisma by generating SQL migrations and converting them to `pgroll` format
+This workflow of generating and converting SQL can be adapted for other ORMs like Sequelize, TypeORM, or Prisma that can output schema changes as SQL files.
 
 ## Onboarding an existing database (`baseline`)
 
-To start using `pgroll` on a project with a pre-existing, complex schema, you don't need to recreate its entire history. The `baseline` command establishes a starting point.
+If you want to use `pgroll` on a project with an existing schema, you don't need to recreate its migration history. The `baseline` command establishes a starting point.
 
 ```bash shouldWrap
 pgroll baseline 01_initial_schema ./migrations
