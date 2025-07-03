@@ -528,7 +528,7 @@ operations:
       down: DROP TABLE users
 ```
 
-### Conclusion
+## Conclusion
 
 `pgroll` provides a practical solution for Postgres schema migrations by using a declarative, multi-version approach. This method automates complex updates, turning them into a safer and more predictable workflow.
 
