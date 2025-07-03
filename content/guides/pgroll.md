@@ -435,13 +435,11 @@ A typical workflow with Drizzle ORM and `pgroll` involves the following steps:
     ```
 
 5.  **Test and deploy your new application:**
-
     - Fetch the new schema name using `pgroll latest schema`.
     - In your CI/CD pipeline, deploy the new version of your application, configuring it to use the new schema via an environment variable (e.g., `PGROLL_SCHEMA_VERSION`).
     - This is the ideal stage for phased rollouts (canary, blue-green), as the old application version continues to run unaffected on the previous schema.
 
 6.  **Validate and finalize:**
-
     - **If an issue is found,** you can instantly and safely revert the database changes with `pgroll rollback`. This will not affect the running (old) application.
     - **If the new application is stable,** proceed with a full rollout.
 
