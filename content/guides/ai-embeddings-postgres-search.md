@@ -135,7 +135,7 @@ Create a `.env` file to securely store your API credentials:
 
 ```bash
 OPENAI_API_KEY=your_openai_api_key_here
-DATABASE_URL=postgresql://user:password@ep-abc123.region.aws.neon.tech/neondb
+DATABASE_URL=postgresql://user:password@ep-abc123.region.aws.neon.tech/neondb?sslmode=require&channel_binding=require
 ```
 
 Now let's create an embedding service that handles OpenAI API interactions. This service will preprocess text, generate embeddings, and handle errors gracefully:

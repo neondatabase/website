@@ -72,8 +72,8 @@ Here's how you can set up `pgloader` for your database migration:
 
    ```plaintext
    load database
-     from mysql://user:password@host/source_db?sslmode=require&channel_binding=require
-     into postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require;
+    from mysql://user:password@host/source_db?sslmode=require
+    into postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require;
    ```
 
 ## Run the migration with pgloader

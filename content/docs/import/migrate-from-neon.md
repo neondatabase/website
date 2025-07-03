@@ -56,7 +56,7 @@ To import your data from another Neon project:
    With actual source and destination connection details, your command will appear similar to this:
 
    ```bash shouldWrap
-   pg_dump -Fc -v -d postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/my_source_db | pg_restore -v -d postgresql://alex:AbC123dEf@square-shadow-654321.us-east-2.aws.neon.tech/my_destination_db
+   pg_dump -Fc -v -d postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/my_source_db?sslmode=require&channel_binding=require | pg_restore -v -d postgresql://alex:AbC123dEf@square-shadow-654321.us-east-2.aws.neon.tech/my_destination_db?sslmode=require&channel_binding=require
    ```
 
    <Admonition type="note">

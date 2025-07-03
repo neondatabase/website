@@ -335,7 +335,7 @@ export const NeonBranch = Resource<NeonBranchState, NeonBranchProps>(
     const projectResult = await projectResponse.json();
     const databaseName = 'neondb';
 
-    const connectionString = `postgres://${primaryEndpoint.host}/${databaseName}?sslmode=require&options=project%3D${projectId}`;
+    const connectionString = `postgres://${primaryEndpoint.host}/${databaseName}?sslmode=require&channel_binding=require&options=project%3D${projectId}`;
 
     return {
       ...props,

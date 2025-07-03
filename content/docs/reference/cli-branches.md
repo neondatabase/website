@@ -223,7 +223,7 @@ When creating a branch from a protected parent branch, role passwords on the chi
     ],
     "connection_uris": [
         {
-        "connection_uri": "postgresql://alex:AbC123dEf@@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname",
+        "connection_uri": "postgresql://alex:AbC123dEf@@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require",
         "connection_parameters": {
             "database": "dbname",
             "password": "AbC123dEf",

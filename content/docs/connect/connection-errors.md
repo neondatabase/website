@@ -125,7 +125,7 @@ Neon has tested the following drivers for SNI support:
 The following error is often the result of an incorrectly defined connection information, or the driver you are using does not support Server Name Indication (SNI).
 
 ```text shouldWrap
-ERROR:  password authentication failed for user '<user_name>' connection to server at "ep-billowing-fun-123456.us-west-2.aws.neon.tech" (12.345.67.89), port 5432 failed: ERROR:  connection is insecure (try using `sslmode=require`)
+ERROR:  password authentication failed for user '<user_name>' connection to server at "ep-billowing-fun-123456.us-west-2.aws.neon.tech" (12.345.67.89), port 5432 failed: ERROR:  connection is insecure (try using `sslmode=require&channel_binding=require`)
 ```
 
 Check your connection to see if it is defined correctly. Your Neon connection string can be obtained by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. It appears similar to this:

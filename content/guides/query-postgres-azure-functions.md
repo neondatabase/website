@@ -195,7 +195,7 @@ After creating the database, make sure to copy the connection details (such as *
     Here's an example of the connection string you'll copy:
 
     ```bash shouldWrap
-    DATABASE_URL='postgresql://neondb_owner:************@ep-quiet-leaf-a85k5wbg.eastus2.azure.neon.tech/neondb?sslmode=require'
+    DATABASE_URL='postgresql://neondb_owner:************@ep-quiet-leaf-a85k5wbg.eastus2.azure.neon.tech/neondb?sslmode=require&channel_binding=require'
     ```
 
 7.  **Modify the `local.settings.json` file**
@@ -210,7 +210,7 @@ After creating the database, make sure to copy the connection details (such as *
       "Values": {
         "AzureWebJobsStorage": "",
         "FUNCTIONS_WORKER_RUNTIME": "node",
-        "DATABASE_URL": "postgresql://neondb_owner:************@ep-quiet-leaf-a85k5wbg.eastus2.azure.neon.tech/neondb?sslmode=require"
+        "DATABASE_URL": "postgresql://neondb_owner:************@ep-quiet-leaf-a85k5wbg.eastus2.azure.neon.tech/neondb?sslmode=require&channel_binding=require"
       }
     }
     ```

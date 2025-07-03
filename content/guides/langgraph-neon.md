@@ -397,15 +397,15 @@ Tool Calls:
 ================================= Tool Message =================================
 Name: create_database
 
-Project/database created, connection URI: postgresql://neondb_owner:npg_HCFnoIvx5L9g@ep-broad-water-a53lox4z.us-east-2.aws.neon.tech/neondb?sslmode=require
+Project/database created, connection URI: postgresql://neondb_owner:npg_HCFnoIvx5L9g@ep-broad-water-a53lox4z.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
 ================================== Ai Message ==================================
 
-OK. I've created the project and the connection URI is postgresql://neondb_owner:npg_HCFnoIvx5L9g@ep-broad-water-a53lox4z.us-east-2.aws.neon.tech/neondb?sslmode=require. Now, I will create the table and add the records.
+OK. I've created the project and the connection URI is postgresql://neondb_owner:npg_HCFnoIvx5L9g@ep-broad-water-a53lox4z.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require. Now, I will create the table and add the records.
 Tool Calls:
   run_sql_query (c3346333-b024-4fc5-99ba-d745e0108bb8)
  Call ID: c3346333-b024-4fc5-99ba-d745e0108bb8
   Args:
-    connection_uri: postgresql://neondb_owner:npg_HCFnoIvx5L9g@ep-broad-water-a53lox4z.us-east-2.aws.neon.tech/neondb?sslmode=require
+    connection_uri: postgresql://neondb_owner:npg_HCFnoIvx5L9g@ep-broad-water-a53lox4z.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
     query: CREATE TABLE users (id INT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255));
 ================================= Tool Message =================================
 Name: run_sql_query
@@ -416,7 +416,7 @@ Tool Calls:
   run_sql_query (4be2ae12-adfe-45ed-bba3-d321073902ef)
  Call ID: 4be2ae12-adfe-45ed-bba3-d321073902ef
   Args:
-    connection_uri: postgresql://neondb_owner:npg_HCFnoIvx5L9g@ep-broad-water-a53lox4z.us-east-2.aws.neon.tech/neondb?sslmode=require
+    connection_uri: postgresql://neondb_owner:npg_HCFnoIvx5L9g@ep-broad-water-a53lox4z.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
     query: INSERT INTO users (id, name, email) VALUES (1, 'John Doe', 'john.doe@example.com'), (2, 'Jane Smith', 'jane.smith@example.com'), (3, 'Robert Jones', 'robert.jones@example.com'), (4, 'Emily Brown', 'emily.brown@example.com'), (5, 'Michael Davis', 'michael.davis@example.com'), (6, 'Jessica Wilson', 'jessica.wilson@example.com'), (7, 'Christopher Garcia', 'christopher.garcia@example.com'), (8, 'Ashley Rodriguez', 'ashley.rodriguez@example.com'), (9, 'Matthew Williams', 'matthew.williams@example.com'), (10, 'Brittany Miller', 'brittany.miller@example.com');
 ================================= Tool Message =================================
 Name: run_sql_query
@@ -427,7 +427,7 @@ Tool Calls:
   run_sql_query (f6484943-0dcc-4059-b794-2dc83ae31b1a)
  Call ID: f6484943-0dcc-4059-b794-2dc83ae31b1a
   Args:
-    connection_uri: postgresql://neondb_owner:npg_HCFnoIvx5L9g@ep-broad-water-a53lox4z.us-east-2.aws.neon.tech/neondb?sslmode=require
+    connection_uri: postgresql://neondb_owner:npg_HCFnoIvx5L9g@ep-broad-water-a53lox4z.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
     query: SELECT * FROM users;
 ================================= Tool Message =================================
 Name: run_sql_query

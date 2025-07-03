@@ -53,7 +53,7 @@ HOST = "@ep-cool-darkness-123456.us-east-2.aws.neon.tech"
 PORT = "5432"
 PROJECT = "dbname"
 
-conn_str = f"dbname={PROJECT} user={USERNAME} password={PASSWORD} host={HOST} port={PORT} sslmode=require"
+conn_str = f"dbname={PROJECT} user={USERNAME} password={PASSWORD} host={HOST} port={PORT} sslmode=require&channel_binding=require"
 
 conn = psycopg2.connect(conn_str)
 
