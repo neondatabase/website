@@ -151,6 +151,13 @@ export default {
               to: `${LINKS.useCases}/serverless-apps`,
             },
             {
+              icon: MultiTbgIcon,
+              iconGradient: MultiTbgGradientIcon,
+              title: 'Multi-TB',
+              description: 'Scale & restore instantly',
+              to: `${LINKS.useCases}/multi-tb`,
+            },
+            {
               icon: DatabaseIcon,
               iconGradient: DatabaseGradientIcon,
               title: 'Database per Tenant',
@@ -177,13 +184,6 @@ export default {
               title: 'Agents',
               description: 'Deploy Postgres via AI agents',
               to: `${LINKS.useCases}/ai-agents`,
-            },
-            {
-              icon: MultiTbgIcon,
-              iconGradient: MultiTbgGradientIcon,
-              title: 'Multi-TB',
-              description: 'Scale & restore instantly',
-              to: `${LINKS.useCases}/multi-tb`,
             },
           ],
         },

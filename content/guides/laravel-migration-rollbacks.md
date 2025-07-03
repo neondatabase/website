@@ -152,6 +152,7 @@ Smaller, manageable migrations make rollbacks simpler.
   php artisan make:migration add_status_to_users
   php artisan make:migration add_type_to_users
   ```
+
   2. Test each migration in isolation.
 
   ```bash

@@ -4,7 +4,7 @@ subtitle: Learn how to replicate data from a local Postgres instance or another 
   provider to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-06-23T15:24:08.775Z'
+updatedOn: '2025-06-27T09:35:48.804Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from a local Postgres instance or another Postgres provider to Neon. If you're looking to replicate data from one Neon Postgres instance to another, see [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
@@ -126,6 +126,7 @@ After creating a publication on the source database, you need to create a subscr
    CONNECTION 'host=<host-address-or-ip> port=5432 dbname=postgres user=replication_user password=replication_user_password'
    PUBLICATION my_publication;
    ```
+
    - `subscription_name`: A name you chose for the subscription.
    - `connection_string`: The connection string for the source Postgres database where you defined the publication.
    - `publication_name`: The name of the publication you created on the source Postgres database.

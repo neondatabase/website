@@ -8,17 +8,13 @@ Neon Auth lets you add authentication to your app in seconds — user data is sy
 
 Go to [pg.new](https://pg.new) to create a new Neon project.
 
-Once your project is ready, open your project's **Auth** page. Neon Auth is ready for you to get started.
+Once your project is ready, open your project's **Auth** page and click **Enable Neon Auth** to get started.
 
-Click **Setup instructions** to continue.
-
-![Neon Auth Console - Ready for users](/docs/guides/enable-neon-auth.png)
+![Neon Auth Console - Ready for users](/docs/neon-auth/enable-neon-auth.png)
 
 ## Get your Neon Auth keys
 
-In the **Setup instructions** tab, click **Set up Auth**.
-
-This gets you the Neon Auth environment variables and connection string you need to integrate Neon Auth and connect to your database.
+On the **Configuration** tab, select your framework to get the **Environment variables** you need to integrate Neon Auth and connect to your database.
 
 You can use these keys right away to get started, or [skip ahead](#create-users-in-the-console-optional) to try out **user creation** in the Neon Console.
 

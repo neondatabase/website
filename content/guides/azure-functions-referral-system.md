@@ -768,6 +768,7 @@ If you no longer need the Azure resources created for this project, you can dele
    ```bash
    az group delete --name referral-system --yes --no-wait
    ```
+
    - The `--yes` flag skips the confirmation prompt.
    - The `--no-wait` flag allows the command to run asynchronously.
 

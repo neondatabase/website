@@ -170,6 +170,7 @@ With the self-hosted Convex backend powered by Neon running, the next step is to
     CONVEX_SELF_HOSTED_URL='http://localhost:3210'
     CONVEX_SELF_HOSTED_ADMIN_KEY='<your_generated_admin_key>'
     ```
+
     - `VITE_CONVEX_URL`: Specifies the URL of your self-hosted Convex backend. In this case, it's set to `http://localhost:3210`, the default for local Convex backends.
     - `CONVEX_SELF_HOSTED_URL`: Also set to the same URL, `http://localhost:3210`.
     - `CONVEX_SELF_HOSTED_ADMIN_KEY`: This key is essential for authenticating development operations against your self-hosted Convex instance. Replace `<your_generated_admin_key>` with the admin key you generated in the previous step [Setting up self-hosted Convex with Docker Compose](#setting-up-self-hosted-convex-with-docker-compose).

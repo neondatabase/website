@@ -3,7 +3,7 @@ title: Replicate data from Amazon RDS Postgres
 subtitle: Learn how to replicate data from Amazon RDS Postgres to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-06-23T15:24:08.776Z'
+updatedOn: '2025-06-27T09:35:48.805Z'
 ---
 
 <MigrationAssistant/>
@@ -129,6 +129,7 @@ After creating a publication on the source database, you need to create a subscr
    ```sql shouldWrap
    CREATE SUBSCRIPTION my_subscription CONNECTION 'postgresql://postgres:password@database-1.czmwaio8k05k.us-east-2.rds.amazonaws.com/postgres' PUBLICATION my_publication;
    ```
+
    - `subscription_name`: A name you chose for the subscription.
    - `connection_string`: The connection string for the source AWS RDS Postgres database where you defined the publication.
    - `publication_name`: The name of the publication you created on the source AWS RDS Postgres database.

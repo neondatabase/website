@@ -3,7 +3,7 @@ title: Replicate data to Snowflake with Airbyte
 subtitle: Learn how to replicate data from Neon to Snowflake with Airbyte
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-06-23T15:24:08.768Z'
+updatedOn: '2025-06-30T11:30:21.902Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations. In this guide, you will learn how to define your Neon Postgres database as a data source in Airbyte so that you can stream data to Snowflake.

@@ -2,7 +2,7 @@
 title: Connect a RedwoodSDK application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Redwood application
 enableTableOfContents: true
-updatedOn: '2025-05-20T14:57:22.322Z'
+updatedOn: '2025-06-30T11:30:21.914Z'
 ---
 
 [RedwoodSDK](https://rwsdk.com/) is a framework for building full-stack applications on Cloudflare. This guide describes how to create a Neon project and access it from a RedwoodSDK application.

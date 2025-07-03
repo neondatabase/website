@@ -5,7 +5,7 @@ subtitle: Learn how to migrate your database from Azure PostgreSQL to Neon using
 redirectFrom:
   - /docs/import/import-from-azure-postgres
 enableTableOfContents: true
-updatedOn: '2025-06-23T15:24:08.786Z'
+updatedOn: '2025-06-27T09:35:48.807Z'
 ---
 
 This guide describes how to migrate your database from Azure Database for PostgreSQL to Neon, using logical replication.
@@ -196,6 +196,7 @@ To ensure that data is being replicated correctly:
     24576 | neon_subscription | 540 |            |       | 1/3D0020A8   | 2024-09-11 11:34:24.841807+00 | 2024-09-11 11:34:24.869991+00 | 1/3D0020A8     | 2024-09-11 11:34:24.841807+00
     (1 row)
    ```
+
    - An active `pid` indicates that the subscription is active and running.
    - The `received_lsn` and `latest_end_lsn` columns show the LSN (Log Sequence Number) of the last received (at Neon) and last written data (at Azure source), respectively.
    - In this example, they have the same value, which means that all the data has been successfully replicated from Azure to Neon.

@@ -4,7 +4,7 @@ subtitle: Create a database branch for each preview deployment in Vercel
 redirectFrom:
   - /docs/guides/vercel
 enableTableOfContents: true
-updatedOn: '2025-06-23T15:24:08.785Z'
+updatedOn: '2025-06-27T09:35:48.806Z'
 ---
 
 <InfoBlock>
@@ -96,6 +96,7 @@ To add the integration:
            </Admonition>
 
             When you finish making selections, click **Continue**.
+
     1.  Confirm the integration settings. This allows the integration to:
         - Set environment variables for your Vercel project's production, development, and preview environments.
         - Create database branches for preview deployments.
