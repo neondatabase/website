@@ -3,7 +3,7 @@ title: Use Exograph with Neon
 subtitle: Build GraphQL backends in minutes with Exograph and Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-06-02T15:04:05.567Z'
+updatedOn: '2025-07-03T12:36:49.560Z'
 ---
 
 _This guide was contributed by the Exograph team_

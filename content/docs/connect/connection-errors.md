@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/connectivity-issues
   - /docs/connect/connectivity-issues
-updatedOn: '2025-06-30T11:30:21.886Z'
+updatedOn: '2025-07-03T12:36:49.555Z'
 ---
 
 This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered include:

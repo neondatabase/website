@@ -2,7 +2,7 @@
 title: Neon CLI commands — connection-string
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.675Z'
+updatedOn: '2025-07-03T12:36:49.570Z'
 ---
 
 ## Before you begin

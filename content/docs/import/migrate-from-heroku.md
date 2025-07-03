@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/how-to-guides/hasura-heroku-migration
   - /docs/how-to-guides/import-from-heroku
   - /docs/import/import-from-heroku
-updatedOn: '2025-02-03T20:41:57.341Z'
+updatedOn: '2025-07-03T12:36:49.566Z'
 ---
 
 This guide describes how to import your data from Heroku Postgres to Neon.
