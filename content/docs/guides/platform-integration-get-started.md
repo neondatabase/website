@@ -3,6 +3,8 @@ title: Get started with your integration
 subtitle: Learn the essentials and key steps for integrating with Neon
 enableTableOfContents: true
 isDraft: false
+redirectFrom:
+  - /docs/guides/partner-get-started
 updatedOn: '2025-06-23T15:24:08.780Z'
 ---
 
@@ -38,7 +40,7 @@ To ensure you have control over usage and costs, Neon's APIs let you configure l
 
 As your users upgrade or change their plans, you can dynamically modify their limits using the Neon API. This allows for real-time updates without affecting database uptime or user experience.
 
-To learn more about setting limits, see [Configure consumption limits](#/docs/guides/partner-consumption-limits).
+To learn more about setting limits, see [Configure consumption limits](#/docs/guides/consumption-limits).
 
 ## 3. Monitoring usage
 
@@ -48,7 +50,7 @@ Using Neon's consumption APIs, you can query a range of account and project-leve
 - Get daily, hourly, or monthly metrics across a selected time period, broken out for each individual project.
 - Get usage metrics for individual projects.
 
-To learn how, see [Querying consumption metrics with the API](/docs/guides/partner-consumption-metrics).
+To learn how, see [Querying consumption metrics with the API](/docs/guides/consumption-metrics).
 
 ## Key considerations for a successful integration
 
@@ -65,9 +67,9 @@ To learn how, see [Querying consumption metrics with the API](/docs/guides/partn
         - In Neon, databases reside on a branch, and certain operations, such as instant restore, are performed at the branch level. In a user-per-database implementation, a restore operation would impact every database on that branch. However, in a project-based structure, branch-level actions like instant restore can be isolated to a single user.
 
 - **Carefully consider limits**: When setting limits for your users, aim to strike the right balance between cost management and user flexibility. For reference, you can review how Neon defines its [pricing plans](/docs/introduction/plans) or how platform integrations like Koyeb set [usage limits](https://www.koyeb.com/docs/databases#database-instance-types). Keep in mind that when users reach their defined limits, their compute resources may be suspended, preventing further interaction with the database. Consider what should happen when a user reaches these limits. Do you want to implement advanced notifications? Should there be an upgrade path?
-- **Autoscaling and Scale to Zero**: Consider [autoscaling](/docs/introduction/autoscaling) limits and [sale to zero](/docs/introduction/scale-to-zero) settings for the compute instances you create for customers. Do you want to allow compute resources to scale on demand? How quickly should computes scale to zero when inactive? For more details, see [Other consumption-related settings](/docs/guides/partner-consumption-limits#other-consumption-related-settings).
+- **Autoscaling and Scale to Zero**: Consider [autoscaling](/docs/introduction/autoscaling) limits and [sale to zero](/docs/introduction/scale-to-zero) settings for the compute instances you create for customers. Do you want to allow compute resources to scale on demand? How quickly should computes scale to zero when inactive? For more details, see [Other consumption-related settings](/docs/guides/consumption-limits#other-consumption-related-settings).
 - **Connection limits**: Be aware of the connection limits associated with each Neon compute size, and remember that connection pooling allows for more concurrent connections. For more information, see [Connection limits](/docs/connect/connection-pooling#connection-limits-without-connection-pooling).
-- **Polling consumption data for usage reporting and billing**: Refer to our [Consumption polling FAQ](/docs/guides/partner-consumption-metrics#consumption-polling-faq).
+- **Polling consumption data for usage reporting and billing**: Refer to our [Consumption polling FAQ](/docs/guides/consumption-metrics#consumption-polling-faq).
 - **Custom names for roles and databases**: When creating projects using the [Create project API](https://api-docs.neon.tech/reference/createproject), you can customize the default role and database names.
 - **Reserved names for roles and databases**: Neon reserves certain names for Postgres roles and databases. Users will not be able to use these reserved names when creating roles and databases. For more information, see [Reserved role names](/docs/manage/roles#reserved-role-names) and [Reserved database names](/docs/manage/databases#reserved-database-names).
 - **Postgres extension support**: We frequently receive questions about the Postgres extensions supported by Neon. See the list of [Supported Postgres extensions](/docs/extensions/pg-extensions) that Neon currently supports.

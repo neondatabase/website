@@ -3,6 +3,8 @@ title: Platform integration guide
 subtitle: Learn how to integrate your platform or service with Neon
 enableTableOfContents: true
 isDraft: false
+redirectFrom:
+  - /docs/guides/partner-intro
 updatedOn: '2025-05-30T16:54:40.478Z'
 ---
 
@@ -28,7 +30,7 @@ Find out how you can integrate with Neon.
 
 <DetailIconCards>
 
-<a href="/docs/guides/partner-get-started" description="Learn the essentials for integrating with Neon" icon="import">Get started</a>
+<a href="/docs/guides/platform-integration-get-started" description="Learn the essentials for integrating with Neon" icon="import">Get started</a>
 
 <a href="/docs/reference/api-reference" description="Integrate using the Neon API" icon="transactions">Neon API</a>
 
@@ -48,8 +50,8 @@ Learn how to set limits for your customers and track usage.
 
 <DetailIconCards>
 
-<a href="/docs/guides/partner-consumption-limits" description="Use the Neon API to set consumption limits for your customers" icon="cheque">Configure consumption limits</a>
+<a href="/docs/guides/consumption-limits" description="Use the Neon API to set consumption limits for your customers" icon="cheque">Configure consumption limits</a>
 
-<a href="/docs/guides/partner-consumption-metrics" description="Track usage with Neon's consumption metrics APIs" icon="queries">Query consumption metrics</a>
+<a href="/docs/guides/consumption-metrics" description="Track usage with Neon's consumption metrics APIs" icon="queries">Query consumption metrics</a>
 
 </DetailIconCards>

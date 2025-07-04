@@ -37,7 +37,7 @@ The Neon TypeScript SDK allows you to manage:
 - [**Roles:**](/docs/manage/roles) Create, list, update, and delete Postgres roles within your branches.
 - [**Operations:**](/docs/manage/operations) Monitor and track the status of asynchronous operations performed on your Neon resources.
 - [**Organizations:**](/docs/manage/orgs-api) Manage organization settings, API keys, and members (for Neon organizational accounts).
-- [**Consumption Metrics:**](/docs/guides/partner-consumption-metrics) Retrieve usage metrics for your account and projects to monitor resource consumption.
+- [**Consumption Metrics:**](/docs/guides/consumption-metrics) Retrieve usage metrics for your account and projects to monitor resource consumption.
 
 ## Quick Start
 

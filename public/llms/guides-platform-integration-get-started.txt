@@ -4,11 +4,11 @@
 
 ## Source
 
-- [Get started with your integration HTML](https://neon.com/docs/guides/partner-get-started): The original HTML version of this documentation
+- [Get started with your integration HTML](https://neon.com/docs/guides/platform-integration-get-started): The original HTML version of this documentation
 
 This guide outlines the steps to integrate Neon into your platform, enabling you to offer managed Postgres databases to your users. Whether you're developing a SaaS product, AI agent, enterprise platform, or something else entirely, this guide walks you through what's involved in setting up, configuring, and managing your Neon integration.
 
-   **Tip** key considerations for a successful integration: Before you start building your integration, be sure to read [Key considerations for a successful integration](https://neon.com/docs/guides/partner-get-started#key-considerations-for-a-successful-integration).
+   **Tip** key considerations for a successful integration: Before you start building your integration, be sure to read [Key considerations for a successful integration](https://neon.com/docs/guides/platform-integration-get-started#key-considerations-for-a-successful-integration).
 
 ## 1. Setting up your integration
 

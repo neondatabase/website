@@ -1,10 +1,12 @@
-# Querying consumption metrics
-
-> The document "Querying consumption metrics" guides Neon users on how to access and interpret consumption metrics through SQL queries, enabling them to monitor and analyze their database usage effectively.
-
-## Source
-
-- [Querying consumption metrics HTML](https://neon.com/docs/guides/partner-consumption-metrics): The original HTML version of this documentation
+---
+title: Querying consumption metrics
+subtitle: Learn how to get a variety of consumption metrics using the Neon API
+redirectFrom:
+  - /docs/guides/metrics-api
+  - /docs/guides/partner-consumption-metrics
+enableTableOfContents: true
+updatedOn: '2025-04-30T02:26:54.983Z'
+---
 
 Using the Neon API, you can query a range of account and project metrics to help gauge your resource consumption.
 
@@ -31,7 +33,7 @@ This API endpoint accepts the following query parameters: `from`, `to`, `granula
 
 Include the unique `org_id` for your organization to retrieve account metrics for that specific organization. If not specified, metrics for your personal account will be returned.
 
-For more information about this upcoming feature, see [Organizations](https://neon.com/docs/manage/organizations).
+For more information about this upcoming feature, see [Organizations](/docs/manage/organizations).
 
 ### Set a date range for granular results
 
@@ -43,7 +45,7 @@ You can set `from` and `to` query parameters, plus a level of granularity to def
 
 The response is organized by periods and consumption data within the specified time range.
 
-See [Details on setting a date range](https://neon.com/docs/guides/partner-consumption-metrics#details-on-setting-a-date-range) for more info.
+See [Details on setting a date range](#details-on-setting-a-date-range) for more info.
 
 ## Get granular project-level metrics for your account
 
@@ -58,7 +60,9 @@ curl --request GET \
      --header 'authorization: Bearer $NEON_API_KEY'
 ```
 
-Details: Response body
+<details>
+<summary>Response body</summary>
+
 ```shouldWrap
 {
   "projects": [
@@ -109,9 +113,11 @@ Details: Response body
 }
 ```
 
+</details>
+
 The response is organized by periods and consumption data within the specified time range.
 
-See [Details on setting a date range](https://neon.com/docs/guides/partner-consumption-metrics#details-on-setting-a-date-range) for more info.
+See [Details on setting a date range](#details-on-setting-a-date-range) for more info.
 
 ### Pagination
 
@@ -120,11 +126,11 @@ To control pagination (number of results per response), you can include these qu
 - `limit` — sets the number of project objects to be included in the response.
 - `cursor` — by default, the response uses the project `id` from the last project in the list as the `cursor` value (included in the `pagination` object at the end of the response). Generally, it is up to the application to collect and use this cursor value when setting up the next request.
 
-See [Details on pagination](https://neon.com/docs/guides/partner-consumption-metrics#details-on-pagination) for more info.
+See [Details on pagination](#details-on-pagination) for more info.
 
 ## Details on setting a date range
 
-This section applies to the following metrics output types: [Account-level aggregated metrics](https://neon.com/docs/guides/partner-consumption-metrics#get-account-level-aggregated-metrics), and [Granular project-level metrics for your account](https://neon.com/docs/guides/partner-consumption-metrics#get-granular-project-level-metrics-for-your-account).
+This section applies to the following metrics output types: [Account-level aggregated metrics](#get-account-level-aggregated-metrics), and [Granular project-level metrics for your account](#get-granular-project-level-metrics-for-your-account).
 
 You can set `from` and `to` query parameters, plus a level of granularity to define a time range that can span across multiple billing periods.
 
@@ -136,7 +142,7 @@ The response is organized by periods and consumption data within the specified t
 
 Here is an example query that returns metrics from June 30th to July 2nd, 2024. Time values must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/).
 
-```bash
+```bash shouldWrap
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/consumption_history/account?from=2024-06-30T15%3A30%3A00Z&to=2024-07-02T15%3A30%3A00Z&granularity=hourly&org_id=org-ocean-art-12345678' \
      --header 'accept: application/json' \
@@ -145,7 +151,9 @@ curl --request GET \
 
 And here is a sample response:
 
-Details: Response body
+<details>
+<summary>Response body</summary>
+
 ```json
 {
   "periods": [
@@ -198,9 +206,11 @@ Details: Response body
 }
 ```
 
+</details>
+
 ## Details on pagination
 
-This section applies to the following metrics output: [Granular project-level metrics for your account](https://neon.com/docs/guides/partner-consumption-metrics#get-granular-project-level-metrics-for-your-account).
+This section applies to the following metrics output: [Granular project-level metrics for your account](#get-granular-project-level-metrics-for-your-account).
 
 To control pagination (number of results per response), you can include these query parameters:
 
@@ -209,14 +219,16 @@ To control pagination (number of results per response), you can include these qu
 
 Here is an example `GET` request asking for the next 10 projects, starting with project id `divine-tree-77657175`:
 
-```bash
+```bash shouldWrap
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/consumption_history/projects?cursor=divine-tree-77657175&limit=100&granularity=daily' \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY' | jq
 ```
 
-   **Note**: To learn more about using pagination to control large response sizes, the [Keyset pagination](https://learn.microsoft.com/en-us/ef/core/querying/pagination#keyset-pagination) page in the Microsoft docs gives a helpful overview.
+<Admonition type="note">
+To learn more about using pagination to control large response sizes, the [Keyset pagination](https://learn.microsoft.com/en-us/ef/core/querying/pagination#keyset-pagination) page in the Microsoft docs gives a helpful overview.
+</Admonition>
 
 ## Consumption polling FAQ
 

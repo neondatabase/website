@@ -1399,17 +1399,17 @@
 - section: Resources
   items:
     - title: Platform integration guide
-      slug: guides/partner-intro
+      slug: guides/platform-integration-intro
       icon: partner-guide
       items:
         - title: Get started
-          slug: guides/partner-get-started
+          slug: guides/platform-integration-get-started
         - title: OAuth integration
           slug: guides/oauth-integration
         - title: Configure consumption limits
-          slug: guides/partner-consumption-limits
+          slug: guides/consumption-limits
         - title: Query consumption metrics
-          slug: guides/partner-consumption-metrics
+          slug: guides/consumption-metrics
     - title: Multitenancy
       slug: guides/multitenancy
       icon: platform
