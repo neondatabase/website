@@ -232,7 +232,7 @@ To learn more about using pagination to control large response sizes, the [Keyse
 
 ## Consumption polling FAQ
 
-As a platform integration or paid plan customer, you may have questions related to polling Neon's consumption APIs. We've provided answers to frequently asked questions here.
+As an integrator of Neon or paid plan customer, you may have questions related to polling Neon's consumption APIs. We've provided answers to frequently asked questions here.
 
 ### How often can you poll consumption data for usage reporting and billing?
 
