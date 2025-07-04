@@ -118,27 +118,33 @@ On the provider's website, create an OAuth app and set the callback URL to the c
 [Google OAuth Setup Guide](https://developers.google.com/identity/protocols/oauth2#1.-obtain-oauth-2.0-credentials-from-the-dynamic_data.setvar.console_name-)
 
 **Callback URL:**
+
 ```
 https://api.stack-auth.com/api/v1/auth/oauth/callback/google
 ```
+
 </TabItem>
 
 <TabItem>
 [GitHub OAuth Setup Guide](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app)
 
 **Callback URL:**
+
 ```
 https://api.stack-auth.com/api/v1/auth/oauth/callback/github
 ```
+
 </TabItem>
 
 <TabItem>
 [Microsoft Azure OAuth Setup Guide](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app)
 
 **Callback URL:**
+
 ```
 https://api.stack-auth.com/api/v1/auth/oauth/callback/microsoft
 ```
+
 </TabItem>
 
 </Tabs>

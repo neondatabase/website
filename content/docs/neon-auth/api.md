@@ -248,14 +248,17 @@ You can programmatically manage OAuth providers for your Neon Auth project using
 Lists the OAuth providers for the specified project.
 
 **Endpoint:**
+
 ```
 GET /projects/{project_id}/auth/oauth_providers
 ```
 
 **Path parameters:**
+
 - `project_id` (string, required): The Neon project ID
 
 **Example cURL:**
+
 ```bash
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/oauth_providers' \
@@ -263,6 +266,7 @@ curl --request GET \
 ```
 
 **Example response:**
+
 ```json
 {
   "providers": [
@@ -276,6 +280,7 @@ curl --request GET \
   ]
 }
 ```
+
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/listneonauthoauthproviders)
 
 ### Add an OAuth provider
@@ -283,20 +288,24 @@ curl --request GET \
 Adds an OAuth provider to the specified project.
 
 **Endpoint:**
+
 ```
 POST /projects/{project_id}/auth/oauth_providers
 ```
 
 **Path parameters:**
+
 - `project_id` (string, required): The Neon project ID
 
 **Request body:**
+
 - `provider` (string, required): The provider ID (e.g., `google`, `github`, `microsoft`)
 - `client_id` (string, required): The OAuth client ID
 - `client_secret` (string, required): The OAuth client secret
 - `scopes` (array of strings, optional): OAuth scopes to request
 
 **Example cURL:**
+
 ```bash
 curl --request POST \
      --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/oauth_providers' \
@@ -311,6 +320,7 @@ curl --request POST \
 ```
 
 **Example response:**
+
 ```json
 {
   "id": "google",
@@ -319,6 +329,7 @@ curl --request POST \
   "created_at": "2024-06-01T12:00:00Z"
 }
 ```
+
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/addneonauthoauthprovider)
 
 ### Update an OAuth provider
@@ -326,18 +337,22 @@ curl --request POST \
 Updates an OAuth provider for the specified project.
 
 **Endpoint:**
+
 ```
 PATCH /projects/{project_id}/auth/oauth_providers/{oauth_provider_id}
 ```
 
 **Path parameters:**
+
 - `project_id` (string, required): The Neon project ID
 - `oauth_provider_id` (string, required): The OAuth provider ID (e.g., `google`, `github`, `microsoft`)
 
 **Request body:**
+
 - Any updatable fields, such as `client_id`, `client_secret`, or `scopes`
 
 **Example cURL:**
+
 ```bash
 curl --request PATCH \
      --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/oauth_providers/google' \
@@ -351,6 +366,7 @@ curl --request PATCH \
 ```
 
 **Example response:**
+
 ```json
 {
   "id": "google",
@@ -359,6 +375,7 @@ curl --request PATCH \
   "created_at": "2024-06-01T12:00:00Z"
 }
 ```
+
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/updateneonauthoauthprovider)
 
 ### Delete an OAuth provider
@@ -366,15 +383,18 @@ curl --request PATCH \
 Deletes an OAuth provider from the specified project.
 
 **Endpoint:**
+
 ```
 DELETE /projects/{project_id}/auth/oauth_providers/{oauth_provider_id}
 ```
 
 **Path parameters:**
+
 - `project_id` (string, required): The Neon project ID
 - `oauth_provider_id` (string, required): The OAuth provider ID (e.g., `google`, `github`, `microsoft`)
 
 **Example cURL:**
+
 ```bash
 curl --request DELETE \
      --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/oauth_providers/google' \
@@ -382,10 +402,11 @@ curl --request DELETE \
 ```
 
 **Example response:**
+
 ```json
 {
   "message": "Deleted the OAuth provider from the project"
 }
 ```
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/deleteneonauthoauthprovider)
 
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/deleteneonauthoauthprovider)
