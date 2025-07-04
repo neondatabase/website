@@ -3,8 +3,6 @@ title: Platform integration guide
 subtitle: Learn how to integrate your platform or service with Neon
 enableTableOfContents: true
 isDraft: false
-redirectFrom:
-  - /docs/guides/partner-intro
 updatedOn: '2025-05-30T16:54:40.478Z'
 ---
 
