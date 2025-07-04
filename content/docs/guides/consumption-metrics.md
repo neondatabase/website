@@ -246,7 +246,7 @@ Neon's consumption APIs use a **token bucket** rate-limiting approach, which ref
 
 ### How often should consumption data be polled to report usage to customers?
 
-As mentioned above, usage data can be pulled every 15 minutes, but platform integrations are free to choose their own reporting interval based on their requirements.
+As mentioned above, usage data can be pulled every 15 minutes, but integrators of Neon are free to choose their own reporting interval based on their requirements.
 
 ### How often should consumption data be polled to invoice end users?
 
