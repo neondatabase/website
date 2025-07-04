@@ -43,7 +43,7 @@ You can set `from` and `to` query parameters, plus a level of granularity to def
 
 The response is organized by periods and consumption data within the specified time range.
 
-See [Details on setting a date range](https://neon.com/docs/guides/partner-consumption-metrics#details-on-setting-a-date-range) for more info.
+See [Details on setting a date range](https://neon.com/docs/guides/consumption-metrics#details-on-setting-a-date-range) for more info.
 
 ## Get granular project-level metrics for your account
 
@@ -111,7 +111,7 @@ Details: Response body
 
 The response is organized by periods and consumption data within the specified time range.
 
-See [Details on setting a date range](https://neon.com/docs/guides/partner-consumption-metrics#details-on-setting-a-date-range) for more info.
+See [Details on setting a date range](https://neon.com/docs/guides/consumption-metrics#details-on-setting-a-date-range) for more info.
 
 ### Pagination
 
@@ -120,11 +120,11 @@ To control pagination (number of results per response), you can include these qu
 - `limit` — sets the number of project objects to be included in the response.
 - `cursor` — by default, the response uses the project `id` from the last project in the list as the `cursor` value (included in the `pagination` object at the end of the response). Generally, it is up to the application to collect and use this cursor value when setting up the next request.
 
-See [Details on pagination](https://neon.com/docs/guides/partner-consumption-metrics#details-on-pagination) for more info.
+See [Details on pagination](https://neon.com/docs/guides/consumption-metrics#details-on-pagination) for more info.
 
 ## Details on setting a date range
 
-This section applies to the following metrics output types: [Account-level aggregated metrics](https://neon.com/docs/guides/partner-consumption-metrics#get-account-level-aggregated-metrics), and [Granular project-level metrics for your account](https://neon.com/docs/guides/partner-consumption-metrics#get-granular-project-level-metrics-for-your-account).
+This section applies to the following metrics output types: [Account-level aggregated metrics](https://neon.com/docs/guides/consumption-metrics#get-account-level-aggregated-metrics), and [Granular project-level metrics for your account](https://neon.com/docs/guides/consumption-metrics#get-granular-project-level-metrics-for-your-account).
 
 You can set `from` and `to` query parameters, plus a level of granularity to define a time range that can span across multiple billing periods.
 
@@ -200,7 +200,7 @@ Details: Response body
 
 ## Details on pagination
 
-This section applies to the following metrics output: [Granular project-level metrics for your account](https://neon.com/docs/guides/partner-consumption-metrics#get-granular-project-level-metrics-for-your-account).
+This section applies to the following metrics output: [Granular project-level metrics for your account](https://neon.com/docs/guides/consumption-metrics#get-granular-project-level-metrics-for-your-account).
 
 To control pagination (number of results per response), you can include these query parameters:
 

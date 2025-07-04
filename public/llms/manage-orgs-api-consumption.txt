@@ -204,4 +204,4 @@ curl --request GET \
      --header 'authorization: Bearer $ORG_API_KEY'
 ```
 
-See more details about using this endpoint on the [Manage billing with consumption limits](https://neon.com/docs/guides/partner-consumption-limits#retrieving-metrics-for-all-projects) page in our Partner Guide.
+See more details about using this endpoint on the [Manage billing with consumption limits](https://neon.com/docs/guides/consumption-limits#retrieving-metrics-for-all-projects) page in our Platform integration guide.

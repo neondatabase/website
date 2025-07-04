@@ -140,7 +140,7 @@
 - [Build a Python App with Reflex and Neon](https://neon.com/llms/guides-reflex.txt): Learn how to build a Python Full Stack application with Reflex and Neon
 - [Chat with Neon Postgres with AskYourDatabase](https://neon.com/llms/guides-askyourdatabase.txt): Chat with your Neon Postgres database without writing SQL
 - [Claiming a Neon Auth project](https://neon.com/llms/guides-neon-auth-claim-project.txt): Neon Auth Claim Project
-- [Configure consumption limits](https://neon.com/llms/guides-partner-consumption-limits.txt): Learn how to set consumption limits per project with the Neon API
+- [Configure consumption limits](https://neon.com/llms/guides-consumption-limits.txt): Learn how to set consumption limits per project with the Neon API
 - [Configuring Scale to Zero for Neon computes](https://neon.com/llms/guides-scale-to-zero-guide.txt): Learn how to configure Neon's Scale to Zero feature
 - [Connect Astro to Postgres on Neon](https://neon.com/llms/guides-astro.txt): Learn how to make server-side queries to Postgres from .astro files or API routes.
 - [Connect Micronaut Kotlin to Postgres on Neon](https://neon.com/llms/guides-micronaut-kotlin.txt): Learn how to make server-side queries to Postgres from a Micronaut Kotlin application
@@ -235,7 +235,7 @@
 - [Project collaboration](https://neon.com/llms/guides-project-collaboration-guide.txt): Learn how to invite people to collaborate on your Neon project
 - [Protected branches](https://neon.com/llms/guides-protected-branches.txt): Learn how to use Neon's protected branches feature to secure your critical data
 - [Provide read-only access with Read Replicas](https://neon.com/llms/guides-read-only-access-read-replicas.txt): Leverage read replicas to provide read-only access to your data
-- [Querying consumption metrics](https://neon.com/llms/guides-partner-consumption-metrics.txt): Learn how to get a variety of consumption metrics using the Neon API
+- [Querying consumption metrics](https://neon.com/llms/guides-consumption-metrics.txt): Learn how to get a variety of consumption metrics using the Neon API
 - [Replicate Data with Estuary Flow](https://neon.com/llms/guides-logical-replication-estuary-flow.txt): Learn how to replicate data from Neon with Estuary Flow
 - [Replicate data from AlloyDB](https://neon.com/llms/guides-logical-replication-alloydb.txt): Learn how to replicate data from AlloyDB to Neon
 - [Replicate data from Amazon RDS Postgres](https://neon.com/llms/guides-logical-replication-rds-to-neon.txt): Learn how to replicate data from Amazon RDS Postgres to Neon

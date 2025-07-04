@@ -31,7 +31,7 @@ There is an additional value that you also might want to track: `logical_size`, 
 
 Neon updates all metrics every 15 minutes but it could take up to 1 hour before they are reportable.
 
-To find the current usage level for any of these metrics, see [querying metrics](https://neon.com/docs/guides/partner-consumption-limits#querying-metrics-and-quotas). You can read more about these metrics and how they impact billing here: [Usage metrics](https://neon.com/docs/introduction/usage-metrics)
+To find the current usage level for any of these metrics, see [querying metrics](https://neon.com/docs/guides/consumption-limits#querying-metrics-and-quotas). You can read more about these metrics and how they impact billing here: [Usage metrics](https://neon.com/docs/introduction/usage-metrics)
 
 ### Corresponding quotas
 
@@ -71,7 +71,7 @@ Generally, the most effective quotas for controlling spend per project are those
 
 ### Neon default limits
 
-In addition to the configurable limits that you can set, Neon also sets certain branch size limits by default. You might notice these limits in a [Get Project](https://neon.com/docs/guides/partner-consumption-limits#retrieving-details-about-a-project) response:
+In addition to the configurable limits that you can set, Neon also sets certain branch size limits by default. You might notice these limits in a [Get Project](https://neon.com/docs/guides/consumption-limits#retrieving-details-about-a-project) response:
 
 - `branch_logical_size_limit` (MiB)
 - `branch_logical_size_limit_bytes`(Bytes)
@@ -84,16 +84,16 @@ _**What happens when a quota is met?**_
 
 When any configured metric reaches its quota limit, all active computes for that project are automatically suspended. It is important to understand, this suspension is persistent. It works differently than the inactivity-based [scale to zero](https://neon.com/docs/guides/scale-to-zero-guide), where computes restart at the next interaction: this suspend will _not_ restart at the next API call or incoming connection. If you don't take explicit action otherwise, the suspension remains in place until the end of the current billing period starts (`consumption_period_end`).
 
-See [Querying metrics and quotas](https://neon.com/docs/guides/partner-consumption-limits#querying-metrics-and-quotas) to find the reset date, billing period, and other values related to a project's consumption.
+See [Querying metrics and quotas](https://neon.com/docs/guides/consumption-limits#querying-metrics-and-quotas) to find the reset date, billing period, and other values related to a project's consumption.
 
-   **Note**: Neon tracks these consumption metrics on a monthly cycle. If you want to track metrics on a different cycle, you need to take snapshots of your metrics at the desired interval and store the data externally. You can also use the [Consumption API](https://neon.com/docs/guides/partner-consumption-limits#retrieving-metrics-for-all-projects) to collect metrics from across a range of billing periods.
+   **Note**: Neon tracks these consumption metrics on a monthly cycle. If you want to track metrics on a different cycle, you need to take snapshots of your metrics at the desired interval and store the data externally. You can also use the [Consumption API](https://neon.com/docs/guides/consumption-limits#retrieving-metrics-for-all-projects) to collect metrics from across a range of billing periods.
 
 ## Configuring quotas
 
 You can set quotas using the Neon API either in a `POST` when you create a project or a `PATCH` to update an existing project:
 
-- [Set quotas when you create the project](https://neon.com/docs/guides/partner-consumption-limits#set-quotas-when-you-create-the-project)
-- [Update an existing project](https://neon.com/docs/guides/partner-consumption-limits#update-an-existing-project)
+- [Set quotas when you create the project](https://neon.com/docs/guides/consumption-limits#set-quotas-when-you-create-the-project)
+- [Update an existing project](https://neon.com/docs/guides/consumption-limits#update-an-existing-project)
 
 ### Set quotas when you create the project
 
@@ -155,8 +155,8 @@ You can use the Neon API to retrieve consumption metrics for your organization a
 
 | Endpoint                                                                                             | Description                                                                                                              | Plan Availability            | Docs                                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| [Aggregated account metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)   | Aggregates the metrics from all projects in an account into a single cumulative number for each metric                   | Scale and Business plan only | [Get account-level aggregated metrics](https://neon.com/partner-consumption-metrics#get-account-level-aggregated-metrics)                              |
-| [Granular metrics per project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) | Provides detailed metrics for each project in an account at a specified granularity level (e.g., hourly, daily, monthly) | Scale and Business plan only | [Get granular project-level metrics for the account](https://neon.com/partner-consumption-metrics#get-granular-project-level-metrics-for-your-account) |
+| [Aggregated account metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)   | Aggregates the metrics from all projects in an account into a single cumulative number for each metric                   | Scale and Business plan only | [Get account-level aggregated metrics](https://neon.com/docs/guides/consumption-metrics#get-account-level-aggregated-metrics)                              |
+| [Granular metrics per project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) | Provides detailed metrics for each project in an account at a specified granularity level (e.g., hourly, daily, monthly) | Scale and Business plan only | [Get granular project-level metrics for the account](https://neon.com/docs/guides/consumption-metrics#get-granular-project-level-metrics-for-your-account) |
 
 ## Resetting a project after suspend
 
