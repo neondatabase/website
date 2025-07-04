@@ -38,7 +38,7 @@ const Post = ({
   isDocsIndex = false,
   changelogPosts = [],
   currentSlug,
-  githubPath,
+  gitHubPath,
   tableOfContents,
 }) => {
   const modal = MODALS.find(
@@ -98,7 +98,7 @@ const Post = ({
         isChangelog={isChangelog}
         enableTableOfContents={enableTableOfContents}
         tableOfContents={tableOfContents}
-        githubPath={githubPath}
+        gitHubPath={gitHubPath}
       />
       {modal && <Modal {...modal} />}
     </>
@@ -130,7 +130,7 @@ Post.propTypes = {
     })
   ),
   currentSlug: PropTypes.string.isRequired,
-  githubPath: PropTypes.string.isRequired,
+  gitHubPath: PropTypes.string.isRequired,
   tableOfContents: PropTypes.arrayOf(PropTypes.shape({})),
 };
 

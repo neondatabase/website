@@ -475,7 +475,7 @@ For optimizing application performance and user experience, LangGraph supports [
 
 ## Resources
 
-- [LangGraph Github](https://github.com/langchain-ai/langgraph)
+- [LangGraph GitHub](https://github.com/langchain-ai/langgraph)
 - [LangGraph Documentation](https://python.langchain.com/docs/langgraph)
 - [LangGraph Conceptual Guide](https://langchain-ai.github.io/langgraph/concepts)
 - [LangGraph Glossary](https://langchain-ai.github.io/langgraph/concepts/low_level/#langgraph-glossary)

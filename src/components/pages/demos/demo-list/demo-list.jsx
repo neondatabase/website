@@ -69,9 +69,9 @@ const items = [
         sourceLink: 'https://github.com/neondatabase/qovery-lifecycle-job',
       },
       {
-        title: 'Preview branches with Fly.io, Neon, and Github Actions',
+        title: 'Preview branches with Fly.io, Neon, and GitHub Actions',
         description:
-          'An example repo showing how to create one database branch per PR to automate your dev workflows, using Fly.io, Github Actions, and Drizzle for migrations.',
+          'An example repo showing how to create one database branch per PR to automate your dev workflows, using Fly.io, GitHub Actions, and Drizzle for migrations.',
         demoLink: '#',
         sourceLink: 'https://github.com/neondatabase/preview-branches-with-fly?tab=readme-ov-file',
       },

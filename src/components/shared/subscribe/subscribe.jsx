@@ -10,7 +10,7 @@ import linkedinIcon from 'icons/linkedin.svg';
 import xIcon from 'icons/x.svg';
 
 import discordIcon from './images/subscribe-discord.svg';
-import githubIcon from './images/subscribe-github.svg';
+import gitHubIcon from './images/subscribe-github.svg';
 import illustration from './images/subscribe-illustration.jpg';
 
 const links = [
@@ -30,7 +30,7 @@ const links = [
     name: 'Discord',
   },
   {
-    icon: githubIcon,
+    icon: gitHubIcon,
     to: LINKS.github,
     name: 'GitHub',
   },

@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 import Button from 'components/pages/deploy/button';
 import DynamicTicket from 'components/pages/deploy/dynamic-ticket';
-import GithubIcon from 'icons/github.inline.svg';
+import GitHubIcon from 'icons/github.inline.svg';
 
 const appearAndExitAnimationVariants = {
   initial: { opacity: 0 },
@@ -14,7 +14,7 @@ const appearAndExitAnimationVariants = {
   exit: { opacity: 0, transition: { duration: 0.2 } },
 };
 
-const GithubRegistrationStep = () => {
+const GitHubRegistrationStep = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   return (
@@ -75,7 +75,7 @@ const GithubRegistrationStep = () => {
                   </svg>
                 </motion.div>
               ) : (
-                <GithubIcon
+                <GitHubIcon
                   className="absolute left-3 top-1/2 -translate-y-1/2 text-black"
                   width={40}
                   height={40}
@@ -106,4 +106,4 @@ const GithubRegistrationStep = () => {
   );
 };
 
-export default GithubRegistrationStep;
+export default GitHubRegistrationStep;

@@ -11,7 +11,7 @@ const FlowPage = () => {
   const currentSlug = 'index';
   const { data, content } = getPostBySlug(currentSlug, FLOW_DIR_PATH);
   const tableOfContents = getTableOfContents(content);
-  const githubPath = `${FLOW_DIR_PATH}/${currentSlug}.md`;
+  const gitHubPath = `${FLOW_DIR_PATH}/${currentSlug}.md`;
 
   return (
     <Post
@@ -20,7 +20,7 @@ const FlowPage = () => {
       breadcrumbs={[]}
       navigationLinks={{ previousLink: null, nextLink: null }}
       currentSlug={currentSlug}
-      githubPath={githubPath}
+      gitHubPath={gitHubPath}
       tableOfContents={tableOfContents}
       isFlowPage
     />

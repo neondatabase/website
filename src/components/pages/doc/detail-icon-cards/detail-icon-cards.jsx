@@ -32,7 +32,7 @@ import Filter from './images/filter.inline.svg';
 import FindReplace from './images/find-replace.inline.svg';
 import Gamepad from './images/gamepad.inline.svg';
 import Gear from './images/gear.inline.svg';
-import Github from './images/github.inline.svg';
+import GitHub from './images/github.inline.svg';
 import Globe from './images/globe.inline.svg';
 import GUI from './images/gui.inline.svg';
 import Handshake from './images/handshake.inline.svg';
@@ -109,7 +109,7 @@ const icons = {
   'find-replace': FindReplace,
   gamepad: Gamepad,
   gear: Gear,
-  github: Github,
+  github: GitHub,
   globe: Globe,
   gui: GUI,
   handshake: Handshake,
