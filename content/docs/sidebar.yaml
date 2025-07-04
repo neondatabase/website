@@ -1037,6 +1037,8 @@
               slug: neon-auth/create-users
             - title: Claiming a project
               slug: neon-auth/claim-project
+            - title: Permsissions and roles
+              slug: neon-auth/permissions-roles
         - section: Customization
           items:
             - title: Colors and styles

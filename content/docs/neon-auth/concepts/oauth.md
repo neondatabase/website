@@ -7,7 +7,13 @@ tag: beta
 
 > Using OAuth providers for authentication and API access
 
-Neon Auth comes with GitHub and Google OAuth providers pre-configured for authentication. When users sign in with these providers, their accounts are automatically connected, allowing you to access their connected accounts and make API calls on their behalf.
+Neon Auth comes with Google and GitHub OAuth providers pre-configured for authentication. When users sign in with these providers, their accounts are automatically connected, allowing you to access their connected accounts and make API calls on their behalf.
+
+<Admonition type="info">
+  You cannot connect a user's accounts with shared OAuth keys. You must set up your own OAuth client ID and client secret in the Neon Auth dashboard. For more details, see [Production OAuth setup](/docs/neon-auth/best-practices#production-oauth-setup).
+</Admonition>
+
+Neon Auth currently supports Google, GitHub, and Microsoft as OAuth providers.
 
 ## Connected accounts
 
@@ -24,7 +30,7 @@ export default function Page() {
   const user = useUser({ or: 'redirect' });
   // Redirects to provider authorization if not already connected
   const account = user.useConnectedAccount('google', { or: 'redirect' });
-
+  
   return <div>Google account connected</div>;
 }
 ```
@@ -84,6 +90,21 @@ export default function Page() {
 }
 ```
 
+## Sign-in default scopes
+
+To avoid showing the authorization page twice, you can already request scopes during the sign-in flow. This approach is optional. Some applications may prefer to request extra permissions only when needed, while others might want to obtain all necessary permissions upfront.
+
+To do this, edit the `oauthScopesOnSignIn` setting of your `stackServerApp`:
+
+```tsx title='stack.ts'
+export const stackServerApp = new StackServerApp({
+  // ...your other settings...
+  oauthScopesOnSignIn: {
+    google: ['https://www.googleapis.com/auth/drive.readonly']
+  }
+});
+```
+
 ## Account merging strategies
 
 When a user attempts to sign in with an OAuth provider that matches an existing account, Neon Auth uses the following behavior:
@@ -95,3 +116,9 @@ When a user attempts to sign in with an OAuth provider that matches an existing 
 <Admonition type="note">
   The available OAuth providers and their scopes are pre-configured in Neon Auth. Currently, Neon Auth does not support adding or modifying OAuth providers.
 </Admonition>
+
+## Managing OAuth providers via the UI and API
+
+You can add, update, and remove OAuth providers directly in the Neon Auth dashboard UI. For advanced or automated workflows, you can also manage providers programmatically using the Neon Auth API.
+
+See [Manage OAuth providers via API](/docs/neon-auth/api#manage-oauth-providers-via-api) for detailed documentation and examples of all available endpoints.

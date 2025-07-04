@@ -100,6 +100,59 @@ To get started adding RLS to your Neon Auth project:
 
 For a full walkthrough, see [About Neon RLS](/docs/guides/neon-rls) and the [Neon RLS Tutorial](/docs/guides/neon-rls-tutorial).
 
+## Production OAuth setup
+
+To securely use OAuth in production, you must configure your own OAuth credentials for each provider. Shared keys are for development only and will display "Stack Development" on the provider's consent screen, which is not secure or branded for your app.
+
+Follow these steps for each provider you use:
+
+<Steps>
+
+### 1. Create an OAuth app
+
+On the provider's website, create an OAuth app and set the callback URL to the corresponding Neon Auth callback URL. Copy the client ID and client secret.
+
+<Tabs labels={["Google", "GitHub", "Microsoft"]}>
+
+<TabItem>
+[Google OAuth Setup Guide](https://developers.google.com/identity/protocols/oauth2#1.-obtain-oauth-2.0-credentials-from-the-dynamic_data.setvar.console_name-)
+
+**Callback URL:**
+```
+https://api.stack-auth.com/api/v1/auth/oauth/callback/google
+```
+</TabItem>
+
+<TabItem>
+[GitHub OAuth Setup Guide](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app)
+
+**Callback URL:**
+```
+https://api.stack-auth.com/api/v1/auth/oauth/callback/github
+```
+</TabItem>
+
+<TabItem>
+[Microsoft Azure OAuth Setup Guide](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app)
+
+**Callback URL:**
+```
+https://api.stack-auth.com/api/v1/auth/oauth/callback/microsoft
+```
+</TabItem>
+
+</Tabs>
+
+### 2. Enter OAuth credentials in Neon Auth
+
+Go to the **Auth Methods** section in the Neon Auth dashboard, click **Add OAuth Provider**, and select your provider:
+
+![Add OAuth Provider UI](/docs/relnotes/neon-auth-add-oauth-provider.png)
+
+Switch from shared keys to custom keys, and enter your client ID and client secret. Save your changes.
+
+</Steps>
+
 ## Limitations
 
 <Admonition type="important">

@@ -238,3 +238,154 @@ curl --request DELETE \
 ```
 
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/deleteneonauthintegration)
+
+## Manage OAuth providers via API
+
+You can programmatically manage OAuth providers for your Neon Auth project using the Neon API. The following endpoints allow you to add, list, update, and delete OAuth providers for a project.
+
+### List OAuth providers
+
+Lists the OAuth providers for the specified project.
+
+**Endpoint:**
+```
+GET /projects/{project_id}/auth/oauth_providers
+```
+
+**Path parameters:**
+- `project_id` (string, required): The Neon project ID
+
+**Example cURL:**
+```bash
+curl --request GET \
+     --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/oauth_providers' \
+     --header 'authorization: Bearer $NEON_API_KEY'
+```
+
+**Example response:**
+```json
+{
+  "providers": [
+    {
+      "id": "google",
+      "type": "oauth",
+      "client_id": "...",
+      "created_at": "2024-06-01T12:00:00Z"
+    },
+    ...
+  ]
+}
+```
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/listneonauthoauthproviders)
+
+### Add an OAuth provider
+
+Adds an OAuth provider to the specified project.
+
+**Endpoint:**
+```
+POST /projects/{project_id}/auth/oauth_providers
+```
+
+**Path parameters:**
+- `project_id` (string, required): The Neon project ID
+
+**Request body:**
+- `provider` (string, required): The provider ID (e.g., `google`, `github`, `microsoft`)
+- `client_id` (string, required): The OAuth client ID
+- `client_secret` (string, required): The OAuth client secret
+- `scopes` (array of strings, optional): OAuth scopes to request
+
+**Example cURL:**
+```bash
+curl --request POST \
+     --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/oauth_providers' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '{
+       "provider": "google",
+       "client_id": "your-client-id",
+       "client_secret": "your-client-secret",
+       "scopes": ["openid", "email", "profile"]
+     }'
+```
+
+**Example response:**
+```json
+{
+  "id": "google",
+  "type": "oauth",
+  "client_id": "...",
+  "created_at": "2024-06-01T12:00:00Z"
+}
+```
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/addneonauthoauthprovider)
+
+### Update an OAuth provider
+
+Updates an OAuth provider for the specified project.
+
+**Endpoint:**
+```
+PATCH /projects/{project_id}/auth/oauth_providers/{oauth_provider_id}
+```
+
+**Path parameters:**
+- `project_id` (string, required): The Neon project ID
+- `oauth_provider_id` (string, required): The OAuth provider ID (e.g., `google`, `github`, `microsoft`)
+
+**Request body:**
+- Any updatable fields, such as `client_id`, `client_secret`, or `scopes`
+
+**Example cURL:**
+```bash
+curl --request PATCH \
+     --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/oauth_providers/google' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '{
+       "client_id": "new-client-id",
+       "client_secret": "new-client-secret",
+       "scopes": ["openid", "email", "profile"]
+     }'
+```
+
+**Example response:**
+```json
+{
+  "id": "google",
+  "type": "oauth",
+  "client_id": "new-client-id",
+  "created_at": "2024-06-01T12:00:00Z"
+}
+```
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/updateneonauthoauthprovider)
+
+### Delete an OAuth provider
+
+Deletes an OAuth provider from the specified project.
+
+**Endpoint:**
+```
+DELETE /projects/{project_id}/auth/oauth_providers/{oauth_provider_id}
+```
+
+**Path parameters:**
+- `project_id` (string, required): The Neon project ID
+- `oauth_provider_id` (string, required): The OAuth provider ID (e.g., `google`, `github`, `microsoft`)
+
+**Example cURL:**
+```bash
+curl --request DELETE \
+     --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/oauth_providers/google' \
+     --header 'authorization: Bearer $NEON_API_KEY'
+```
+
+**Example response:**
+```json
+{
+  "message": "Deleted the OAuth provider from the project"
+}
+```
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/deleteneonauthoauthprovider)
+
