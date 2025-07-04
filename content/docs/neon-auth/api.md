@@ -271,6 +271,7 @@ Example response:
   ]
 }
 ```
+
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/listneonauthoauthproviders)
 
 ### Add an OAuth provider
@@ -309,6 +310,7 @@ Example response:
   "created_at": "2024-06-01T12:00:00Z"
 }
 ```
+
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/addneonauthoauthprovider)
 
 ### Update an OAuth provider
@@ -346,6 +348,7 @@ Example response:
   "created_at": "2024-06-01T12:00:00Z"
 }
 ```
+
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/updateneonauthoauthprovider)
 
 ### Delete an OAuth provider
@@ -369,5 +372,5 @@ Example response:
   "message": "Deleted the OAuth provider from the project"
 }
 ```
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/deleteneonauthoauthprovider)
 
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/deleteneonauthoauthprovider)

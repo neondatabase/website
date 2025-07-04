@@ -30,7 +30,7 @@ export default function Page() {
   const user = useUser({ or: 'redirect' });
   // Redirects to provider authorization if not already connected
   const account = user.useConnectedAccount('google', { or: 'redirect' });
-  
+
   return <div>Google account connected</div>;
 }
 ```
@@ -100,8 +100,8 @@ To do this, edit the `oauthScopesOnSignIn` setting of your `stackServerApp`:
 export const stackServerApp = new StackServerApp({
   // ...your other settings...
   oauthScopesOnSignIn: {
-    google: ['https://www.googleapis.com/auth/drive.readonly']
-  }
+    google: ['https://www.googleapis.com/auth/drive.readonly'],
+  },
 });
 ```
 
