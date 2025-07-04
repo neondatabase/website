@@ -20,7 +20,7 @@ Learn about the benefits of integrating with Neon and how to set up your platfor
 
 <a href="/platforms" description="Read about the benefits of integrating with Neon" icon="handshake">Platform integration page</a>
 
-<a href="https://neon.com/contact-sales" description="Request a meeting with our team" icon="todo">Get started with your integration</a>
+<a href="/contact-sales" description="Request a meeting with our team" icon="todo">Get started with your integration</a>
 
 </DetailIconCards>
 
