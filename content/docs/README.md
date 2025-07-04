@@ -85,7 +85,6 @@ In order to add a new page to the root level, add `slug` in the same level with 
        slug: page-2
 + - title: Root page 1
 +   slug: root-page-1
-+   tag: new
 +   items:
 +     - title: Page 1
 +       slug: page-1

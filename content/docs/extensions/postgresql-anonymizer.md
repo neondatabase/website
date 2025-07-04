@@ -2,7 +2,6 @@
 title: The anon extension
 subtitle: Protecting sensitive data in Postgres databases
 enableTableOfContents: true
-tag: new
 updatedOn: '2025-06-04T16:43:36.533Z'
 ---
 

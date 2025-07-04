@@ -1,7 +1,6 @@
 ---
 title: The pg_search extension
 subtitle: An Elasticsearch alternative for full-text search and analytics on Postgres
-tag: new
 enableTableOfContents: true
 updatedOn: '2025-06-23T15:24:08.757Z'
 ---

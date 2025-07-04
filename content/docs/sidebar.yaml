@@ -402,7 +402,6 @@
               slug: guides/datadog
             - title: OpenTelemetry integration
               slug: guides/opentelemetry
-              tag: new
             - title: Datbase monitoring tools
               slug: introduction/monitor-external-tools
         - section: Team Tools
@@ -427,13 +426,10 @@
           items:
             - title: Overview
               slug: manage/maintenance-updates-overview
-              tag: new
             - title: Platform maintenance
               slug: manage/platform-maintenance
-              tag: new
             - title: Updates
               slug: manage/updates
-              tag: new
     - title: Use cases
       slug: use-cases/use-cases-overview
       icon: use-case
@@ -790,7 +786,6 @@
               slug: guides/knex
             - title: Convex
               slug: /guides/convex-neon
-              tag: new
         - section: Replicate from Neon
           items:
             - title: Airbyte
@@ -1117,7 +1112,6 @@
     - title: Neon Twin
       slug: guides/neon-twin-intro
       icon: neon-twin
-      tag: new
       items:
         - section: pg_dump / pg_restore
           items:
@@ -1127,7 +1121,6 @@
               slug: guides/neon-twin-partial-pg-dump-restore
     - title: Neon Local
       icon: container
-      tag: new
       slug: local/neon-local
 - section: Postgres
   items:
@@ -1168,34 +1161,26 @@
               slug: extensions/pg-extensions
             - title: anon
               slug: extensions/postgresql-anonymizer
-              tag: new
             - title: btree_gin
               slug: extensions/btree_gin
-              tag: new
             - title: btree_gist
               slug: extensions/btree_gist
-              tag: new
             - title: citext
               slug: extensions/citext
             - title: cube
               slug: extensions/cube
-              tag: new
             - title: dblink
               slug: extensions/dblink
             - title: dict_int
               slug: extensions/dict_int
-              tag: new
             - title: earthdistance
               slug: extensions/earthdistance
-              tag: new
             - title: fuzzystrmatch
               slug: extensions/fuzzystrmatch
-              tag: new
             - title: hstore
               slug: extensions/hstore
             - title: intarray
               slug: extensions/intarray
-              tag: new
             - title: ltree
               slug: extensions/ltree
             - title: neon
@@ -1204,7 +1189,6 @@
               slug: extensions/neon-utils
             - title: pgcrypto
               slug: extensions/pgcrypto
-              tag: new
             - title: pgvector
               slug: extensions/pgvector
             - title: pgrag
@@ -1213,10 +1197,8 @@
               slug: extensions/pg_cron
             - title: pg_graphql
               slug: extensions/pg_graphql
-              tag: new
             - title: pg_mooncake
               slug: extensions/pg_mooncake
-              tag: new
             - title: pg_partman
               slug: extensions/pg_partman
             - title: pg_prewarm
@@ -1227,20 +1209,16 @@
               slug: extensions/pg_repack
             - title: pg_search
               slug: extensions/pg_search
-              tag: new
             - title: pg_tiktoken
               slug: extensions/pg_tiktoken
             - title: pg_trgm
               slug: extensions/pg_trgm
             - title: pg_uuidv7
               slug: extensions/pg_uuidv7
-              tag: new
             - title: pgrowlocks
               slug: extensions/pgrowlocks
-              tag: new
             - title: pgstattuple
               slug: extensions/pgstattuple
-              tag: new
             - title: postgis
               slug: extensions/postgis
             - title: postgis-related
@@ -1249,20 +1227,16 @@
               slug: extensions/postgres_fdw
             - title: tablefunc
               slug: extensions/tablefunc
-              tag: new
             - title: timescaledb
               slug: extensions/timescaledb
             - title: unaccent
               slug: extensions/unaccent
-              tag: new
             - title: uuid-ossp
               slug: extensions/uuid-ossp
-              tag: new
             - title: wal2json
               slug: extensions/wal2json
             - title: xml2
               slug: extensions/xml2
-              tag: new
         - title: Functions
           slug: functions/introduction
           items:

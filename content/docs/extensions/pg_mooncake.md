@@ -1,7 +1,6 @@
 ---
 title: The pg_mooncake extension
 subtitle: Fast analytics in Postgres with columnstore tables and DuckDB execution
-tag: new
 enableTableOfContents: true
 updatedOn: '2025-04-08T22:55:27.444Z'
 ---
