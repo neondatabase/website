@@ -1398,7 +1398,7 @@
       icon: ai
 - section: Resources
   items:
-    - title: Platform integration guide
+    - title: Platform integration
       slug: guides/platform-integration-intro
       icon: platform
       items:
