@@ -26,13 +26,13 @@ You can find the connection details for your database by clicking the **Connect*
 The connection string includes the role name, hostname, and database name. For example:
 
 ```text
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
            ^              ^                                               ^
            |- <role>      |- <hostname>                                   |- <database>
 ```
 
 - role name: `alex`
-- hostname: `ep-cool-darkness-123456.us-east-2.aws.neon.tech`
+- hostname: `ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech`
 - database name: `dbname`
 
 ## Configure project environment variables in Vercel
@@ -40,14 +40,14 @@ postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbna
 The environment variables required to connect your application to Neon depend on your application. Some applications use a `DATABASE_URL` environment variable with a database connection string:
 
 ```text
-DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require?sslmode=require&channel_binding=require"
+DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require?sslmode=require&channel_binding=require"
 ```
 
 Other applications may use `PG*` environment variables to define database connection details:
 
 ```text
 PGUSER=alex
-PGHOST=ep-cool-darkness-123456.us-east-2.aws.neon.tech
+PGHOST=ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech
 PGDATABASE=dbname
 PGPASSWORD=AbC123dEf
 PGPORT=5432

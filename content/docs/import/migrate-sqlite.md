@@ -111,7 +111,7 @@ Now that you have your Neon database and SQLite database ready, you can use `pgl
 Log in to the Neon Console. Find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
 
 ```bash shouldWrap
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
 <Admonition type="important">
@@ -121,7 +121,7 @@ You will need to remove `&channel_binding=require` from the connection string, a
 Now, modify this connection string to pass your **endpoint ID** (`ep-cool-darkness-123456` in this example) to Neon with your password using the `endpoint` keyword, as shown here:
 
 ```bash shouldWrap
-postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
 <Admonition type="note">
@@ -145,7 +145,7 @@ For other systems, see [Installing pgloader](https://pgloader.readthedocs.io/en/
 For a basic migration, you can run `pgloader` directly from the command line. This command uses `pgloader`'s default settings to migrate the `sample_library.db` schema and data.
 
 ```shell shouldWrap
-pgloader sqlite://sample_library.db "postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require"
+pgloader sqlite://sample_library.db "postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require"
 ```
 
 > Make sure to enclose the Postgres connection string in quotes to prevent shell interpretation issues.
@@ -194,7 +194,7 @@ Create a file named `sqlite_advanced.load` with the following content. Replace t
 ```sql title="sqlite_advanced.load"
 LOAD DATABASE
     FROM sqlite://sample_library.db
-    INTO postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+    INTO postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require
 
 WITH
     include drop,

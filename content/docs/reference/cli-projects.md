@@ -187,13 +187,13 @@ Neon projects created using the CLI use the default Postgres version, which is P
     },
     "connection_uris": [
         {
-        "connection_uri": "postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require",
+        "connection_uri": "postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require",
         "connection_parameters": {
             "database": "dbname",
             "password": "AbC123dEf",
             "role": "alex",
-            "host": "ep-cool-darkness-123456.us-east-2.aws.neon.tech",
-            "pooler_host": "ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech"
+            "host": "ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech",
+            "pooler_host": "ep-cool-darkness-123456-pooler.c-2.us-east-2.aws.neon.tech"
         }
         }
     ]

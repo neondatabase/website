@@ -81,13 +81,13 @@ The target database is the database on your `feature/blog-schema` branch where y
 1. Select the `feature/blog-schema` branch, the `blog` database, and copy the connection string.
 
    ```bash shouldWrap
-   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog?sslmode=require&channel_binding=require
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/blog?sslmode=require&channel_binding=require
    ```
 
 2. Select the `production` branch, the `blog` database, and copy the connection string.
 
    ```bash shouldWrap
-   postgresql://alex:AbC123dEf@ep-silent-hill-85675036.us-east-2.aws.neon.tech/blog?sslmode=require&channel_binding=require
+   postgresql://alex:AbC123dEf@ep-silent-hill-85675036.c-2.us-east-2.aws.neon.tech/blog?sslmode=require&channel_binding=require
    ```
 
 Be careful not to mix up your connection strings. You'll see that the hostname (the part starting with `ep-` and ending in `neon.tech`) differs. This is because the `feature/blog-schema` branch is a separate instance of Postgres, hosted on its own compute.
@@ -106,20 +106,20 @@ The `liquibase.properties` file defines the location of the Liquibase changelog 
 
    The [changelog file](https://docs.liquibase.com/parameters/changelog-file.html) is where you define database schema changes (changesets).
 
-3. Change the target database `url`, `username`, and `password` settings to the correct values for the `blog` database on your `feature/blog-schema` branch. You can obtain the required details from the connection string you copied previously. You will need to swap out the hostname (`ep-cool-darkness-123456.us-east-2.aws.neon.tech`), username, and password for your own.
+3. Change the target database `url`, `username`, and `password` settings to the correct values for the `blog` database on your `feature/blog-schema` branch. You can obtain the required details from the connection string you copied previously. You will need to swap out the hostname (`ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech`), username, and password for your own.
 
    ```bash shouldWrap
-   liquibase.command.url=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/blog
+   liquibase.command.url=jdbc:postgresql://ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech:5432/blog
 
    liquibase.command.username: alex
 
    liquibase.command.password: AbC123dEf
    ```
 
-4. Change the source database settings to the correct values for the `blog` database on your `production` branch. The username and password will be the same as your `feature/blog-schema` branch, but make sure to use the right hostname. Copy the snippet below and replace the hostname (`ep-silent-hill-85675036.us-east-2.aws.neon.tech`), username, and password for your own.
+4. Change the source database settings to the correct values for the `blog` database on your `production` branch. The username and password will be the same as your `feature/blog-schema` branch, but make sure to use the right hostname. Copy the snippet below and replace the hostname (`ep-silent-hill-85675036.c-2.us-east-2.aws.neon.tech`), username, and password for your own.
 
    ```bash shouldWrap
-   liquibase.command.referenceUrl: jdbc:postgresql://ep-silent-hill-85675036.us-east-2.aws.neon.tech:5432/blog
+   liquibase.command.referenceUrl: jdbc:postgresql://ep-silent-hill-85675036.c-2.us-east-2.aws.neon.tech:5432/blog
 
    liquibase.command.referenceUsername: alex
 
@@ -269,7 +269,7 @@ It is a best practice to review schema changes before saving and applying them t
 You can run the [status](https://docs.liquibase.com/commands/change-tracking/status.html) command to see if there are any changesets that haven't been applied to the source database. Notice that the command specifies the hostname of the source database:
 
 ```bash shouldWrap
-liquibase --url=jdbc:postgresql://ep-silent-hill-85675036.us-east-2.aws.neon.tech:5432/blog status --verbose
+liquibase --url=jdbc:postgresql://ep-silent-hill-85675036.c-2.us-east-2.aws.neon.tech:5432/blog status --verbose
 ```
 
 <details>
@@ -281,7 +281,7 @@ If the command was successful, you’ll see output similar to the following indi
 Starting Liquibase at 12:30:51 (version 4.24.0 #14062 built at 2023-09-28 12:18+0000)
 Liquibase Version: 4.24.0
 Liquibase Open Source 4.24.0 by Liquibase
-1 changesets have not been applied to alex@jdbc:postgresql://ep-silent-hill-85675036.us-east-2.aws.neon.tech:5432/blog
+1 changesets have not been applied to alex@jdbc:postgresql://ep-silent-hill-85675036.c-2.us-east-2.aws.neon.tech:5432/blog
      dbchangelog.xml::myIDNumber1234::alex
 Liquibase command 'status' was executed successfully.
 ```

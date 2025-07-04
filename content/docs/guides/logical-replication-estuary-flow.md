@@ -128,14 +128,14 @@ For information about configuring allowed IPs in Neon, see [Configure IP Allow](
 3. Enter the connection details for your Neon database. You can find your Neon database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Your connection string will look like this:
 
    ```bash shouldWrap
-   postgres://cdc_role:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+   postgres://cdc_role:AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    ```
 
    ![Creating a Neon capture connector in Estuary Flow](/docs/guides/estuary_flow_create_neon_capture.png)
 
    Enter the details for **your connection string** into the source connector fields. Based on the sample connection string above, the values would be specified as shown below. Your values will differ.
    - **Name:**: Name of the Capture connector
-   - **Server Address**: ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432
+   - **Server Address**: ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech:5432
    - **User**: cdc_role
    - **Password**: Click **Add a new secret...**, then specify a name for that secret and `AbC123dEf` as its value
    - **Database**: dbname

@@ -171,14 +171,14 @@ To set up a Postgres CDC source connector for Confluent Cloud:
    - Add the connection details for your Neon database. You can find your admin Neon database connection credentials by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Your connection string will look something like this:
 
      ```text
-     postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+     postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
      ```
 
      Enter the details for **your connection string** into the source connector fields. Based on the sample connection string above, the values would be specified as shown below. Your values will differ.
      - **Database name**: `dbname`
      - **Database server name**: `neon_server` (This is a user-specified value that will represent the logical name of your Postgres server. Confluent uses this name as a namespace in all Kafka topic and schema names. It is also used for Avro schema namespaces if the Avro data format is used. The Kafka topic will be created with the prefix `database.server.name`. Only alphanumeric characters, underscores, hyphens, and dots are allowed.)
      - **SSL mode**: `require`
-     - **Database hostname** `ep-cool-darkness-123456.us-east-2.aws.neon.tech` (this example shows the portion of a Neon connection string forms the database hostname)
+     - **Database hostname** `ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech` (this example shows the portion of a Neon connection string forms the database hostname)
      - **Database port**: `5432` (Neon uses port `5432`)
      - **Database username**: `alex`
      - **Database Password** `AbC123dEf`
@@ -212,7 +212,7 @@ To set up a Postgres CDC source connector for Confluent Cloud:
      "kafka.api.key": "2WY3UABFDN7DDFIV",
      "kafka.api.secret": "****************************************************************",
      "schema.context.name": "default",
-     "database.hostname": "ep-cool-darkness-123456.us-east-2.aws.neon.tech",
+     "database.hostname": "ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech",
      "database.port": "5432",
      "database.user": "alex",
      "database.password": "************",

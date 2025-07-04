@@ -44,7 +44,7 @@ Serverless functions can require a large number of database connections as deman
 
 ```ini shouldWrap
 # Pooled Neon connection string
-DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require"
+DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require"
 ```
 
 A pooled Neon connection string adds `-pooler` to the endpoint ID, which tells Neon to use a pooled connection. You can add `-pooler` to your connection string manually or copy a pooled connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Enable the **Connection pooling** toggle to add the `-pooler` suffix.

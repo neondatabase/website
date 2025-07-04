@@ -443,7 +443,7 @@ The response includes information about the role, the database, the default bran
   },
   "connection_uris": [
     {
-      "connection_uri": "postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require"
+      "connection_uri": "postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require"
     }
   ],
   "roles": [
@@ -507,7 +507,7 @@ The response includes information about the role, the database, the default bran
   },
   "endpoints": [
     {
-      "host": "ep-jolly-moon-631024.us-east-2.aws.neon.tech",
+      "host": "ep-jolly-moon-631024.c-2.us-east-2.aws.neon.tech",
       "id": "ep-jolly-moon-631024",
       "project_id": "ep-cool-darkness-123456",
       "branch_id": "br-falling-frost-286006",

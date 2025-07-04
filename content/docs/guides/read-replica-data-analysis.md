@@ -104,7 +104,7 @@ Connecting to a read replica is the same as connecting to any branch, except you
    The connection string appears similar to the following:
 
    ```bash shouldWrap
-   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    ```
 
    If you expect a high number of connections, enable the **Connection pooling** toggle to add the `-pooler` flag to the connection string.
@@ -112,7 +112,7 @@ Connecting to a read replica is the same as connecting to any branch, except you
    The information in your connection string corresponds to the following connection details:
    - role: `alex`
    - password:`AbC123dEf`
-   - hostname: `ep-cool-darkness-123456.us-east-2.aws.neon.tech`
+   - hostname: `ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech`
    - database name: `dbname`. Your database name may differ.
 
    When you connect to a read replica, no write operations are permitted on the connection.
@@ -120,7 +120,7 @@ Connecting to a read replica is the same as connecting to any branch, except you
 1. Connect to your application from a client such as `psql` or add the connection details to your application. For example, to connect using `psql`, issue the following command:
 
    ```bash shouldWrap
-   psql postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+   psql postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    ```
 
 ## Run the analytics query on the read replica

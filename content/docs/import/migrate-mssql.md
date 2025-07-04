@@ -74,13 +74,13 @@ CREATE DATABASE "Northwind";
 Log in to the Neon Console. Find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
 
 ```bash shouldWrap
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 Now, modify the connection string as follows to pass your **endpoint ID** (`ep-cool-darkness-123456` in this example) to Neon with your password using the `endpoint` keyword, as shown here:
 
 ```bash shouldWrap
-postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 <Admonition type="note">
@@ -104,7 +104,7 @@ Here's how you can set up `pgloader` for your database migration:
    ```plaintext
    LOAD DATABASE
         FROM mssql://migration_user:password@host:port/AdventureWorks
-        INTO postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+        INTO postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    ```
 
    Make sure to replace the connection string values with your own MSSQL and Neon credentials.

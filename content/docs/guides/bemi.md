@@ -52,12 +52,12 @@ To connect your database to Bemi:
 1. In Neon, retrieve your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. It will look similar to this:
 
    ```sql shouldWrap
-   postgresql://neondb_owner:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+   postgresql://neondb_owner:AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
    ```
 
 2. In Bemi, select **Databases** > **Add Database** to open the **Connect PostgreSQL Database** dialog.
 3. Enter the Neon database connection details from your connection string. For example, given the connection string shown above, enter the details in the **Connect PostgreSQL Database** dialog as shown below. Your values will differ except for the port number. Neon uses the default Postgres port, `5432`.
-   - **Host**: ep-cool-darkness-123456.us-east-2.aws.neon.tech
+   - **Host**: ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech
    - **Port**: 5432
    - **Database Name**: neondb
    - **Username**: neondb_owner

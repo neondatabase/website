@@ -182,10 +182,10 @@ Now that you’ve configured your database network and created an ingestion clus
    You can find the connection details for your replication role in the **Connect to your database** modal on your **Project Dashboard** — click the **Connect** button. A Neon connection string looks like this:
 
    ```text shouldWrap
-   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    ```
 
-   - Replace `<host>` with your Neon hostname (e.g., `ep-cool-darkness-123456.us-east-2.aws.neon.tech`)
+   - Replace `<host>` with your Neon hostname (e.g., `ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech`)
    - Replace `<role_name>` with the name of your Postgres role (e.g., `alex`)
    - Replace `<database>` with the name of the database containing the tables you want to replicate to Materialize (e.g., `dbname`)
 

@@ -109,7 +109,7 @@ After creating a publication on the source database, you need to create a subscr
 
    ```sql
    CREATE SUBSCRIPTION my_subscription
-   CONNECTION 'postgresql://neondb_owner:<password>@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
+   CONNECTION 'postgresql://neondb_owner:<password>@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
    PUBLICATION my_publication;
    ```
 

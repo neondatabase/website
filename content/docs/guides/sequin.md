@@ -51,7 +51,7 @@ After enabling logical replication on Neon, you'll now connect your Neon databas
 1. In Neon, copy your database connection string. You can find the it by clicking the **Connect** button on your **Project Dashboard**. It will look similar to this:
 
    ```sql shouldWrap
-   postgresql://neondb_owner:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+   postgresql://neondb_owner:AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
    ```
 
 2. In the Sequin Console, click on the **Connect Database** button, and then auto-complete your database credentials by clicking the **Autofill with URL** button and pasting in your database connection string.

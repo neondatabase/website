@@ -60,7 +60,7 @@ Find your database connection string by clicking the **Connect** button on your 
 Your Java connection string should look something like this:
 
 ```bash shouldWrap
-jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
+jdbc:postgresql://ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
 ```
 
 ## Configure flyway
@@ -68,7 +68,7 @@ jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?user=al
 To configure Flyway to connect to your Neon database, create a `flyway.conf` file in the /conf directory. Include the following items, modified to use the connection details you retrieved in the previous step.
 
 ```bash shouldWrap
-flyway.url=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/neondb
+flyway.url=jdbc:postgresql://ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech:5432/neondb
 
 flyway.user=alex
 
@@ -128,7 +128,7 @@ flyway migrate
 If the command was successful, you’ll see output similar to the following:
 
 ```bash
-Database: jdbc:postgresql://ep-red-credit-85617375.us-east-2.aws.neon.tech/neondb (PostgreSQL 15.4)
+Database: jdbc:postgresql://ep-red-credit-85617375.c-2.us-east-2.aws.neon.tech/neondb (PostgreSQL 15.4)
 Successfully validated 2 migrations (execution time 00:00.225s)
 Current version of schema "public": 1
 Migrating schema "public" to version "2 - Add people"
@@ -144,7 +144,7 @@ When you run the `flyway migrate` command, Flyway registers the schema changes i
 
 ```bash
 flyway info
-Database: jdbc:postgresql://ep-red-credit-85617375.us-east-2.aws.neon.tech/neondb (PostgreSQL 15.4)
+Database: jdbc:postgresql://ep-red-credit-85617375.c-2.us-east-2.aws.neon.tech/neondb (PostgreSQL 15.4)
 Schema version: 2
 +-----------+---------+---------------------+------+---------------------+---------+----------+
 | Category  | Version | Description         | Type | Installed On        | State   | Undoable |

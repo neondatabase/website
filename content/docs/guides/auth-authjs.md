@@ -67,7 +67,7 @@ touch .env
 You can find your database connection string by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
 
 ```bash shouldWrap
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 Add this connection string to your `.env` file:

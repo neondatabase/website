@@ -107,7 +107,7 @@ Find your database connection string by clicking the **Connect** button on your 
 Your Java connection string should look something like the one shown below.
 
 ```bash shouldWrap
-jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog?user=alex&password=AbC123dEf
+jdbc:postgresql://ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/blog?user=alex&password=AbC123dEf
 ```
 
 ## Connect from Liquibase to your Neon database
@@ -129,7 +129,7 @@ jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog?user=alex
 
    ```bash shouldWrap
    changeLogFile:dbchangelog.xml
-   url: jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog?user=alex&password=AbC123dEf&sslmode=require&channel_binding=require
+   url: jdbc:postgresql://ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/blog?user=alex&password=AbC123dEf&sslmode=require&channel_binding=require
    ```
 
 ## Take a snapshot of your database

@@ -33,15 +33,15 @@ Neon supports both pooled and direct connections to your database. Neon's connec
 A Neon connection string includes the role, password, hostname, and database name.
 
 ```text
-postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
-             ^    ^         ^                         ^                              ^
-       role -|    |         |- hostname               |- pooler option               |- database
-                  |
-                  |- password
+postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+             ^    ^         ^                         ^     ^                              ^
+       role -|    |         |- hostname               |     |- pooler option               |- database
+                  |                                   |
+                  |- password                         |- cell identifier (newer projects)
 ```
 
 <Admonition type="note">
-The hostname includes the ID of the compute, which has an `ep-` prefix: `ep-cool-darkness-123456`. For more information about Neon connection strings, see [connection string](/docs/reference/glossary#connection-string).
+The hostname includes the ID of the compute, which has an `ep-` prefix: `ep-cool-darkness-a1b2c3d4`. Newly created Neon projects in some AWS regions may include a cell identifier (e.g., `c-2`) in the hostname to support Neon's cell-based architecture for improved scalability. Existing projects are unaffected by this change. For more information about Neon connection strings, see [connection string](/docs/reference/glossary#connection-string).
 </Admonition>
 
 You can use the details from the **Connect to your database** modal to configure your database connection. For example, you might place the connection details in an `.env` file, assign the connection string to a variable, or pass the connection string on the command-line.
@@ -49,7 +49,7 @@ You can use the details from the **Connect to your database** modal to configure
 **.env file**
 
 ```text
-PGHOST=ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech
+PGHOST=ep-cool-darkness-a1b2c3d4-pooler.c-2.us-east-2.aws.neon.tech
 PGDATABASE=dbname
 PGUSER=alex
 PGPASSWORD=AbC123dEf
@@ -59,13 +59,13 @@ PGPORT=5432
 **Variable**
 
 ```text shouldWrap
-DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require"
+DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require"
 ```
 
 **Command-line**
 
 ```bash shouldWrap
-psql postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+psql postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 <Admonition type="note">

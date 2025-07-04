@@ -71,7 +71,7 @@ The response includes information about the branch, the branch's compute, and th
 
   "endpoints": [
     {
-      "host": "ep-small-bush-675287.us-east-2.aws.neon.tech",
+      "host": "ep-small-bush-675287.c-2.us-east-2.aws.neon.tech",
       "id": "ep-small-bush-675287",
       "project_id": "autumn-disk-484331",
       "branch_id": "br-dawn-scene-747675",

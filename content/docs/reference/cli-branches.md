@@ -198,7 +198,7 @@ When creating a branch from a protected parent branch, role passwords on the chi
     },
     "endpoints": [
         {
-        "host": "@ep-cool-darkness-123456.us-east-2.aws.neon.tech",
+        "host": "@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech",
         "id": "@ep-cool-darkness-123456",
         "project_id": "polished-shape-60485499",
         "branch_id": "br-frosty-art-30264288",
@@ -223,13 +223,13 @@ When creating a branch from a protected parent branch, role passwords on the chi
     ],
     "connection_uris": [
         {
-        "connection_uri": "postgresql://alex:AbC123dEf@@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require",
+        "connection_uri": "postgresql://alex:AbC123dEf@@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require",
         "connection_parameters": {
             "database": "dbname",
             "password": "AbC123dEf",
             "role": "alex",
-            "host": "@ep-cool-darkness-123456.us-east-2.aws.neon.tech",
-            "pooler_host": "@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech"
+            "host": "@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech",
+            "pooler_host": "@ep-cool-darkness-123456-pooler.c-2.us-east-2.aws.neon.tech"
         }
         }
     ]

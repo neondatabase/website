@@ -49,7 +49,7 @@ import psycopg2.extras; psycopg2.extensions.set_wait_callback(psycopg2.extras.wa
 # You can set the password to None if it is specified in a ~/.pgpass file
 USERNAME = "alex"
 PASSWORD = "AbC123dEf"
-HOST = "@ep-cool-darkness-123456.us-east-2.aws.neon.tech"
+HOST = "@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech"
 PORT = "5432"
 PROJECT = "dbname"
 
@@ -79,7 +79,7 @@ from sqlalchemy import create_engine
 
 USERNAME = "alex"
 PASSWORD = "AbC123dEf"
-HOST = "ep-cool-darkness-123456.us-east-2.aws.neon.tech"
+HOST = "ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech"
 DATABASE = "dbname"
 
 conn_str = f'postgresql://{USERNAME}:{PASSWORD}@{HOST}/{DATABASE}?sslmode=require&channel_binding=require'
