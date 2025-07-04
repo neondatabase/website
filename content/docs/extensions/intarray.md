@@ -2,7 +2,7 @@
 title: The intarray extension
 subtitle: Efficiently manipulate and query integer arrays in Postgres
 enableTableOfContents: true
-updatedOn: '2025-05-27T19:40:34.752Z'
+updatedOn: '2025-07-04T12:47:21.303Z'
 ---
 
 The `intarray` extension for Postgres provides functions and operators for handling arrays of integers. It's particularly optimized for arrays that do not contain any `NULL` values, offering significant performance advantages for certain operations compared to Postgres's built-in array functions.

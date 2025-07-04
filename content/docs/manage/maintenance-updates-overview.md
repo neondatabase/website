@@ -2,7 +2,7 @@
 title: Maintenance & updates overview
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-03-05T21:09:38.755Z'
+updatedOn: '2025-07-04T12:47:21.310Z'
 ---
 
 Neon performs two types of updates: **platform maintenance** and **updates** to your Neon [computes](/docs/reference/glossary#compute). While both are essential for maintaining a stable, secure, and optimized environment, they serve different purposes.

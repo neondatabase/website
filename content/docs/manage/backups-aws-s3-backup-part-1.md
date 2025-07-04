@@ -1,7 +1,7 @@
 ---
 title: Create an S3 bucket to store Postgres backups
 enableTableOfContents: true
-updatedOn: '2025-02-22T14:55:35.229Z'
+updatedOn: '2025-07-04T12:47:21.309Z'
 ---
 
 This guide will walk you through setting up an AWS S3 bucket to store your Postgres backups.
