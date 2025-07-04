@@ -1400,7 +1400,7 @@
   items:
     - title: Platform integration guide
       slug: guides/platform-integration-intro
-      icon: partner-guide
+      icon: platform
       items:
         - title: Get started
           slug: guides/platform-integration-get-started
