@@ -247,23 +247,18 @@ You can programmatically manage OAuth providers for your Neon Auth project using
 
 Lists the OAuth providers for the specified project.
 
-**Endpoint:**
-```
-GET /projects/{project_id}/auth/oauth_providers
-```
+Required parameters:
+- `project_id` (string): The Neon project ID
 
-**Path parameters:**
-- `project_id` (string, required): The Neon project ID
-
-**Example cURL:**
-```bash
+```bash shouldWrap
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/oauth_providers' \
      --header 'authorization: Bearer $NEON_API_KEY'
 ```
 
-**Example response:**
-```json
+Example response:
+
+```json shouldWrap
 {
   "providers": [
     {
@@ -282,22 +277,16 @@ curl --request GET \
 
 Adds an OAuth provider to the specified project.
 
-**Endpoint:**
-```
-POST /projects/{project_id}/auth/oauth_providers
-```
+Required parameters:
+- `project_id` (string): The Neon project ID
+- `provider` (string): The provider ID (e.g., `google`, `github`, `microsoft`)
+- `client_id` (string): The OAuth client ID
+- `client_secret` (string): The OAuth client secret
 
-**Path parameters:**
-- `project_id` (string, required): The Neon project ID
+Optional parameters:
+- `scopes` (array of strings): OAuth scopes to request
 
-**Request body:**
-- `provider` (string, required): The provider ID (e.g., `google`, `github`, `microsoft`)
-- `client_id` (string, required): The OAuth client ID
-- `client_secret` (string, required): The OAuth client secret
-- `scopes` (array of strings, optional): OAuth scopes to request
-
-**Example cURL:**
-```bash
+```bash shouldWrap
 curl --request POST \
      --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/oauth_providers' \
      --header 'authorization: Bearer $NEON_API_KEY' \
@@ -310,8 +299,9 @@ curl --request POST \
      }'
 ```
 
-**Example response:**
-```json
+Example response:
+
+```json shouldWrap
 {
   "id": "google",
   "type": "oauth",
@@ -325,20 +315,16 @@ curl --request POST \
 
 Updates an OAuth provider for the specified project.
 
-**Endpoint:**
-```
-PATCH /projects/{project_id}/auth/oauth_providers/{oauth_provider_id}
-```
+Required parameters:
+- `project_id` (string): The Neon project ID
+- `oauth_provider_id` (string): The OAuth provider ID (e.g., `google`, `github`, `microsoft`)
 
-**Path parameters:**
-- `project_id` (string, required): The Neon project ID
-- `oauth_provider_id` (string, required): The OAuth provider ID (e.g., `google`, `github`, `microsoft`)
+Optional parameters (request body):
+- `client_id` (string): The new OAuth client ID
+- `client_secret` (string): The new OAuth client secret
+- `scopes` (array of strings): OAuth scopes to request
 
-**Request body:**
-- Any updatable fields, such as `client_id`, `client_secret`, or `scopes`
-
-**Example cURL:**
-```bash
+```bash shouldWrap
 curl --request PATCH \
      --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/oauth_providers/google' \
      --header 'authorization: Bearer $NEON_API_KEY' \
@@ -350,8 +336,9 @@ curl --request PATCH \
      }'
 ```
 
-**Example response:**
-```json
+Example response:
+
+```json shouldWrap
 {
   "id": "google",
   "type": "oauth",
@@ -365,24 +352,19 @@ curl --request PATCH \
 
 Deletes an OAuth provider from the specified project.
 
-**Endpoint:**
-```
-DELETE /projects/{project_id}/auth/oauth_providers/{oauth_provider_id}
-```
+Required parameters:
+- `project_id` (string): The Neon project ID
+- `oauth_provider_id` (string): The OAuth provider ID (e.g., `google`, `github`, `microsoft`)
 
-**Path parameters:**
-- `project_id` (string, required): The Neon project ID
-- `oauth_provider_id` (string, required): The OAuth provider ID (e.g., `google`, `github`, `microsoft`)
-
-**Example cURL:**
-```bash
+```bash shouldWrap
 curl --request DELETE \
      --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/oauth_providers/google' \
      --header 'authorization: Bearer $NEON_API_KEY'
 ```
 
-**Example response:**
-```json
+Example response:
+
+```json shouldWrap
 {
   "message": "Deleted the OAuth provider from the project"
 }
