@@ -52,7 +52,7 @@ Serverless functions can require a large number of database connections as deman
 
 ```ini shouldWrap
 # Pooled Neon connection string
-DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require"
+DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require"
 ```
 
 A pooled Neon connection string adds `-pooler` to the endpoint ID, which tells Neon to use a pooled connection. You can add `-pooler` to your connection string manually or copy a pooled connection string from the **Connect to your database** modal, which you can access by clicking **Connect** on your **Project Dashboard**. Enable the **Connection pooling** toggle to add the `-pooler` suffix.
@@ -62,8 +62,8 @@ A pooled Neon connection string adds `-pooler` to the endpoint ID, which tells N
 A connection timeout that occurs when connecting from TypeORM to Neon causes an error similar to the following:
 
 ```text shouldWrap
-Error: P1001: Can't reach database server at `ep-white-thunder-826300.us-east-2.aws.neon.tech`:`5432`
-Please make sure your database server is running at `ep-white-thunder-826300.us-east-2.aws.neon.tech`:`5432`.
+Error: P1001: Can't reach database server at `ep-white-thunder-826300.c-2.us-east-2.aws.neon.tech`:`5432`
+Please make sure your database server is running at `ep-white-thunder-826300.c-2.us-east-2.aws.neon.tech`:`5432`.
 ```
 
 This error most likely means that the TypeORM query timed out before the Neon compute was activated.

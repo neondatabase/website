@@ -24,7 +24,7 @@ This guide steps you through how to connect from Prisma to Neon, how to use Pris
 The project is created and you are presented with a dialog that provides connection details. Copy the connection string, which looks similar to the following:
 
 ```text shouldWrap
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
 ```
 
 <Admonition type="info">
@@ -44,7 +44,7 @@ For cloud-hosted databases like Neon, you must create the shadow database manual
 The connection string for this database should be the same as the connection string for your `neondb` database except for the database name:
 
 ```text shouldWrap
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/shadow?sslmode=require&channel_binding=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/shadow?sslmode=require&channel_binding=require
 ```
 
 ## Set up your Prisma project
@@ -96,8 +96,8 @@ In this step, you will update your project's `.env` file with the connection str
 When you are finished, your `.env` file should have entries similar to the following:
 
 ```text shouldWrap
-DATABASE_URL=postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require?connect_timeout=10
-SHADOW_DATABASE_URL=postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/shadow?sslmode=require&channel_binding=require?connect_timeout=10
+DATABASE_URL=postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require?connect_timeout=10
+SHADOW_DATABASE_URL=postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/shadow?sslmode=require&channel_binding=require?connect_timeout=10
 ```
 
 <Admonition type="note">
@@ -167,7 +167,7 @@ The output of this command appears similar to the following:
 ```bash
 Environment variables loaded from ../.env
 Prisma schema loaded from schema.prisma
-Datasource "db": PostgreSQL database "neondb", schema "public" at "ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432"
+Datasource "db": PostgreSQL database "neondb", schema "public" at "ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech:5432"
 
 Applying migration `20230105222046_init`
 
@@ -225,7 +225,7 @@ model Elements {
    ```bash
    Environment variables loaded from .env
    Prisma schema loaded from prisma/schema.prisma
-   Datasource "db": PostgreSQL database "neondb", schema "public" at "ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432"
+   Datasource "db": PostgreSQL database "neondb", schema "public" at "ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech:5432"
 
    Applying migration `20230113120852_add_field`
 
@@ -476,7 +476,7 @@ To introspect the `Elements_ext` table to generate the data model, run the `pris
 $ npx prisma db pull
 Prisma schema loaded from prisma/schema.prisma
 Environment variables loaded from .env
-Datasource "db": PostgreSQL database "neondb", schema "public" at "ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432"
+Datasource "db": PostgreSQL database "neondb", schema "public" at "ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech:5432"
 
 ✔ Introspected 2 models and wrote them into prisma/schema.prisma in 1.78s
 ```

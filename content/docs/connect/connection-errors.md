@@ -89,7 +89,7 @@ endpoint=<endpoint_id>$<password>
 Example:
 
 ```txt
-postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 <Admonition type="note">
@@ -138,7 +138,7 @@ For clients or applications that require specifying connection parameters such a
 
 - **User**: `daniel`
 - **Password**: `f74wh99w398H`
-- **Hostname**: `ep-white-morning-123456.us-east-2.aws.neon.tech`
+- **Hostname**: `ep-white-morning-123456.c-2.us-east-2.aws.neon.tech`
 - **Port number**: `5432` (Neon uses default Postgres port, `5432`, and is therefore not included in the connection string)
 - **Database name**: `neondb` (`neondb` is the ready-to-use database created with each Neon project. Your database name may differ.)
 
@@ -162,8 +162,8 @@ If the connection issue persists, please reach out to [Support](/docs/introducti
 This error is sometimes encountered when using Prisma Client with Neon.
 
 ```text shouldWrap
-Error: P1001: Can't reach database server at `ep-white-thunder-826300.us-east-2.aws.neon.tech`:`5432`
-Please make sure your database server is running at `ep-white-thunder-826300.us-east-2.aws.neon.tech`:`5432`.
+Error: P1001: Can't reach database server at `ep-white-thunder-826300.c-2.us-east-2.aws.neon.tech`:`5432`
+Please make sure your database server is running at `ep-white-thunder-826300.c-2.us-east-2.aws.neon.tech`:`5432`.
 ```
 
 A compute in Neon has two main states: **Active** and **Idle**. Active means that Postgres is currently running. If there are no active queries for 5 minutes, the activity monitor gracefully places the compute into an idle state to reduce compute usage.

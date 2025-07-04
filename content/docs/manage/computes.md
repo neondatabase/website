@@ -304,7 +304,7 @@ curl -X 'POST' \
 ```json
 {
   "endpoint": {
-    "host": "ep-aged-math-668285.us-east-2.aws.neon.tech",
+    "host": "ep-aged-math-668285.c-2.us-east-2.aws.neon.tech",
     "id": "ep-aged-math-668285",
     "project_id": "hidden-cell-763301",
     "branch_id": "br-blue-tooth-671580",
@@ -367,7 +367,7 @@ curl -X 'GET' \
 {
   "endpoints": [
     {
-      "host": "ep-young-art-646685.us-east-2.aws.neon.tech",
+      "host": "ep-young-art-646685.c-2.us-east-2.aws.neon.tech",
       "id": "ep-young-art-646685",
       "project_id": "hidden-cell-763301",
       "branch_id": "br-shy-credit-899131",
@@ -389,7 +389,7 @@ curl -X 'GET' \
       "proxy_host": "us-east-2.aws.neon.tech"
     },
     {
-      "host": "ep-aged-math-668285.us-east-2.aws.neon.tech",
+      "host": "ep-aged-math-668285.c-2.us-east-2.aws.neon.tech",
       "id": "ep-aged-math-668285",
       "project_id": "hidden-cell-763301",
       "branch_id": "br-blue-tooth-671580",
@@ -445,7 +445,7 @@ curl -X 'PATCH' \
 ```json
 {
   "endpoint": {
-    "host": "ep-young-art-646685.us-east-2.aws.neon.tech",
+    "host": "ep-young-art-646685.c-2.us-east-2.aws.neon.tech",
     "id": "ep-young-art-646685",
     "project_id": "hidden-cell-763301",
     "branch_id": "br-green-lab-617946",
@@ -519,7 +519,7 @@ curl -X 'DELETE' \
 ```json
 {
   "endpoint": {
-    "host": "ep-young-art-646685.us-east-2.aws.neon.tech",
+    "host": "ep-young-art-646685.c-2.us-east-2.aws.neon.tech",
     "id": "ep-young-art-646685",
     "project_id": "hidden-cell-763301",
     "branch_id": "br-green-lab-617946",

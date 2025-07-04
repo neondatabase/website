@@ -46,21 +46,21 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
   ```bash shouldWrap
   neon connection-string mybranch
-  postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+  postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
   ```
 
 - Get a pooled connection string for the current project, branch, and database with the `--pooled` option. This option adds a `-pooler` flag to the host name which enables connection pooling for clients that use this connection string.
 
   ```bash shouldWrap
   neon connection-string --pooled
-  postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+  postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
   ```
 
 - Get a connection string for use with Prisma for the current project, branch, and database. The `--prisma` options adds `connect_timeout=30` option to the connection string to ensure that connections from Prisma Client do not timeout.
 
   ```bash shouldWrap
   neon connection-string --prisma
-  postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require&connect_timeout=30
+  postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require&connect_timeout=30
   ```
 
 - Get a connection string to a specific point in a branch's history by appending `@timestamp` or `@lsn`. Availability depends on your configured [restore window](/docs/manage/projects#configure-restore-window) window.

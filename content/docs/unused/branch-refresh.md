@@ -131,7 +131,7 @@ curl --request PATCH \
 ```json
 {
   "endpoint": {
-    "host": "ep-divine-violet-55990977.us-east-2.aws.neon.tech",
+    "host": "ep-divine-violet-55990977.c-2.us-east-2.aws.neon.tech",
     "id": "ep-divine-violet-55990977",
     "project_id": "dark-cell-12604300",
     "branch_id": "br-falling-flower-15986510",

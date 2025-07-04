@@ -154,11 +154,11 @@ The Airbyte UI currently allows selecting any table for Change Data Capture (CDC
    For example, given a connection string like this:
 
    ```bash shouldWrap
-   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    ```
 
    Enter the details in the Airbyte **Create a source** dialog as shown below. Your values will differ.
-   - **Host**: ep-cool-darkness-123456.us-east-2.aws.neon.tech
+   - **Host**: ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech
    - **Port**: 5432
    - **Database Name**: dbname
    - **Username**: replication_user

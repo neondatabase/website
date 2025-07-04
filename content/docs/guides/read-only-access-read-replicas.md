@@ -28,7 +28,7 @@ Suppose you need to give a partner read-only access to your sales data so they c
    - Copy the connection string and provide it to your partner. The connection string might look something like this:
 
      ```bash shouldWrap
-     postgresql://partner:partner_password@ep-read-replica-12345.us-east-2.aws.neon.tech/sales_db?sslmode=require&channel_binding=require
+     postgresql://partner:partner_password@ep-read-replica-12345.c-2.us-east-2.aws.neon.tech/sales_db?sslmode=require&channel_binding=require
      ```
 
 3. **Read-only access for the partner**

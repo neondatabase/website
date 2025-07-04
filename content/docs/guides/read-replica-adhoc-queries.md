@@ -88,7 +88,7 @@ curl --request POST \
    Your connection string will look something like this:
 
    ```bash
-   postgresql://user:password@ep-read-replica-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+   postgresql://user:password@ep-read-replica-123456.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    ```
 
 ### Running ad-hoc queries

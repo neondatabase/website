@@ -92,19 +92,19 @@ Your connection strings should look something like the ones shown below. Note th
 - **main**
 
   ```bash shouldWrap
-  jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
+  jdbc:postgresql://ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
   ```
 
 - **development**
 
   ```bash shouldWrap
-  jdbc:postgresql://ep-mute-night-47642501.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
+  jdbc:postgresql://ep-mute-night-47642501.c-2.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
   ```
 
 - **staging**
 
   ```bash shouldWrap
-  jdbc:postgresql://ep-shrill-shape-27763949.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
+  jdbc:postgresql://ep-shrill-shape-27763949.c-2.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
   ```
 
 ## Configure flyway to connect each environment
@@ -127,7 +127,7 @@ By default, Flyway loads its configuration from the default `conf/flyway.conf` f
 2. In each configuration file, update the following items with the correct connection details for that database environment. The `url` setting will differ for each environment (in `env_prod.conf`, the `url` will point to `main`). In this example, where you are the only user, the `user` and `password` settings should be the same for each of your three database environments.
 
    ```bash shouldWrap
-   flyway.url=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/neondb
+   flyway.url=jdbc:postgresql://ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech:5432/neondb
 
    flyway.user=alex
 
@@ -186,7 +186,7 @@ flyway migrate -configFiles="conf/env_prod.conf"
 A successful migration command returns output similar to the following:
 
 ```bash
-Database: jdbc:postgresql://ep-nameless-unit-49929920.us-east-2.aws.neon.tech/neondb (PostgreSQL 15.4)
+Database: jdbc:postgresql://ep-nameless-unit-49929920.c-2.us-east-2.aws.neon.tech/neondb (PostgreSQL 15.4)
 Schema history table "public"."flyway_schema_history" does not exist yet
 Successfully validated 1 migration (execution time 00:00.199s)
 Creating Schema History table "public"."flyway_schema_history" with baseline ...

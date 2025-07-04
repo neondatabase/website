@@ -77,7 +77,7 @@ Specify your data source with the `stepzen import` CLI. Answer the setup questio
 stepzen import postgresql
 
 ? What would you like your endpoint to be called? api/with-neon
-? What is your host? YOUR_NEON_HOST:5432 (e.g., `ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432`)
+? What is your host? YOUR_NEON_HOST:5432 (e.g., `ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech:5432`)
 ? What is your database name? YOUR_NEON_DATABASE (e.g., `dbname`)
 ? What is the username? YOUR_NEON_USERNAME (e.g., `alex`)
 ? What is the password? [hidden] YOUR_NEON_PASSWORD

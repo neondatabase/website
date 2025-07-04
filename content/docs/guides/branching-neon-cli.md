@@ -74,7 +74,7 @@ connection_uris
 ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 │ Connection Uri                                                                                               │
 ├──────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ postgresql://neondb_owner:123456@ep-orange-heart-a54grm9j.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require     │
+│ postgresql://neondb_owner:123456@ep-orange-heart-a54grm9j.c-2.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require     │
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 

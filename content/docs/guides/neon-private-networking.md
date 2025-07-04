@@ -145,13 +145,13 @@ To configure Neon Private Networking, perform the following steps:
     For example, if your Neon database connection string is:
 
     ```bash
-    postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+    postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
     ```
 
     You can run the following command from an EC2 instance inside your AWS VPC:
 
     ```bash
-    nslookup ep-cool-darkness-123456.us-east-2.aws.neon.tech
+    nslookup ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech
     ```
 
 ## Restrict public internet access

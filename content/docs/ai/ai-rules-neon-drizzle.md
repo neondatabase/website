@@ -47,7 +47,7 @@ npm install -D drizzle-kit
 - Always use the Neon connection string format:
 
 ```
-DATABASE_URL=postgres://username:password@ep-instance-id.region.aws.neon.tech/neondb
+DATABASE_URL=postgres://username:password@ep-instance-id.c-2.region.aws.neon.tech/neondb
 ```
 
 - Store this in `.env` or `.env.local` file
