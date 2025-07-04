@@ -83,4 +83,4 @@ To learn how, see [Querying consumption metrics with the API](/docs/guides/consu
 
 ## Integration support
 
-We're here to support you through every step of your integration. If you have any questions, feel free to reach out to our [Support team](/docs/introduction/support). If you've set up a platform integration arrangement with Neon, you can also contact your Neon platform integration representative.ive.
+We're here to support you through every step of your integration. If you have any questions, feel free to reach out to our [Support team](/docs/introduction/support). If you've set up an integration arrangement with Neon, you can also contact your Neon representative.
