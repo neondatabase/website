@@ -1,21 +1,21 @@
-# Partner guide
+# Platform integration guide
 
-> The "Partner guide" document outlines the process for integrating and collaborating with Neon, detailing partnership requirements, steps for onboarding, and available resources for partners within the Neon ecosystem.
+> The "Platform integration guide" document outlines the process for integrating and collaborating with Neon, detailing integration requirements, steps for onboarding, and available resources for platform integrations within the Neon ecosystem.
 
 ## Source
 
-- [Partner guide HTML](https://neon.com/docs/guides/partner-intro): The original HTML version of this documentation
+- [Platform integration guide HTML](https://neon.com/docs/guides/partner-intro): The original HTML version of this documentation
 
-Learn how you can offer instant, managed Postgres databases to your users with Neon. This guide covers how to become a Neon partner, integrate your platform or service with Neon, set usage limits for your users, and more.
+Learn how you can offer instant, managed Postgres databases to your users with Neon. This guide covers how to integrate your platform or service with Neon, set usage limits for your users, and more.
 
 
 
-## Partnering with Neon
+## Platform integration with Neon
 
-Learn about the benefits of integrating with Neon and how to become a partner.
+Learn about the benefits of integrating with Neon and how to set up your platform integration.
 
-- [Partner page](https://neon.com/partners): Read about the benefits of partnering with Neon
-- [Become a Partner](https://neon.com/partners#partners-apply): Request a meeting with our partnership team
+- [Platform integration page](https://neon.com/partners): Read about the benefits of integrating with Neon
+- [Get started with integration](https://neon.com/partners#partners-apply): Request a meeting with our platform integration team
 
 ## Integrate with Neon
 

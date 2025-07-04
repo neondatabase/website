@@ -1,24 +1,26 @@
 ---
-title: Partner guide
+title: Platform integration guide
 subtitle: Learn how to integrate your platform or service with Neon
 enableTableOfContents: true
 isDraft: false
+redirectFrom:
+  - /docs/guides/partner-intro
 updatedOn: '2025-05-30T16:54:40.478Z'
 ---
 
-Learn how you can offer instant, managed Postgres databases to your users with Neon. This guide covers how to become a Neon partner, integrate your platform or service with Neon, set usage limits for your users, and more.
+Learn how you can offer instant, managed Postgres databases to your users with Neon. This guide covers how to integrate your platform or service with Neon, set usage limits for your users, and more.
 
-<CTA title="Explore our partner success stories" description="Discover how partners like <a href='/blog/neon-postgres-on-vercel'>Vercel</a>, <a href='https://www.linkedin.com/posts/nikitashamgunov_heres-the-story-on-how-we-accidentally-created-activity-7242909460304699393-6mr2/'>Replit</a>, <a href='/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases'>Retool</a>, and <a href='https://www.koyeb.com/blog/serverless-postgres-public-preview'>Koyeb</a> have integrated Neon into their platforms." isIntro></CTA>
+<CTA title="Explore our platform integration success stories" description="Discover how platforms like <a href='/blog/neon-postgres-on-vercel'>Vercel</a>, <a href='https://www.linkedin.com/posts/nikitashamgunov_heres-the-story-on-how-we-accidentally-created-activity-7242909460304699393-6mr2/'>Replit</a>, <a href='/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases'>Retool</a>, and <a href='https://www.koyeb.com/blog/serverless-postgres-public-preview'>Koyeb</a> have integrated Neon into their platforms." isIntro></CTA>
 
-## Partnering with Neon
+## Platform integration with Neon
 
-Learn about the benefits of integrating with Neon and how to become a partner.
+Learn about the benefits of integrating with Neon and how to set up your platform integration.
 
 <DetailIconCards>
 
-<a href="/partners" description="Read about the benefits of partnering with Neon" icon="handshake">Partner page</a>
+<a href="/partners" description="Read about the benefits of integrating with Neon" icon="handshake">Platform integration page</a>
 
-<a href="/partners#partners-apply" description="Request a meeting with our partnership team" icon="todo">Become a Partner</a>
+<a href="/partners#partners-apply" description="Request a meeting with our platform integration team" icon="todo">Get started with integration</a>
 
 </DetailIconCards>
 

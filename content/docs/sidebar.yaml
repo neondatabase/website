@@ -1398,7 +1398,7 @@
       icon: ai
 - section: Resources
   items:
-    - title: Partner guide
+    - title: Platform integration guide
       slug: guides/partner-intro
       icon: partner-guide
       items:
