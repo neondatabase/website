@@ -9,7 +9,7 @@ Returns the current user object, or `null` if not signed in.
 ## Usage
 
 ```jsx
-import { useUser } from '@neondatabase/neon-auth-{sdkSlug}';
+import { useUser } from '@stackframe/stack';
 
 function MyComponent() {
   const user = useUser();
