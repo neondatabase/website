@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Querying consumption metrics HTML](https://neon.com/docs/guides/partner-consumption-metrics): The original HTML version of this documentation
+- [Querying consumption metrics HTML](https://neon.com/docs/guides/consumption-metrics): The original HTML version of this documentation
 
 Using the Neon API, you can query a range of account and project metrics to help gauge your resource consumption.
 
@@ -43,7 +43,7 @@ You can set `from` and `to` query parameters, plus a level of granularity to def
 
 The response is organized by periods and consumption data within the specified time range.
 
-See [Details on setting a date range](https://neon.com/docs/guides/partner-consumption-metrics#details-on-setting-a-date-range) for more info.
+See [Details on setting a date range](https://neon.com/docs/guides/consumption-metrics#details-on-setting-a-date-range) for more info.
 
 ## Get granular project-level metrics for your account
 
@@ -111,7 +111,7 @@ Details: Response body
 
 The response is organized by periods and consumption data within the specified time range.
 
-See [Details on setting a date range](https://neon.com/docs/guides/partner-consumption-metrics#details-on-setting-a-date-range) for more info.
+See [Details on setting a date range](https://neon.com/docs/guides/consumption-metrics#details-on-setting-a-date-range) for more info.
 
 ### Pagination
 
@@ -120,11 +120,11 @@ To control pagination (number of results per response), you can include these qu
 - `limit` — sets the number of project objects to be included in the response.
 - `cursor` — by default, the response uses the project `id` from the last project in the list as the `cursor` value (included in the `pagination` object at the end of the response). Generally, it is up to the application to collect and use this cursor value when setting up the next request.
 
-See [Details on pagination](https://neon.com/docs/guides/partner-consumption-metrics#details-on-pagination) for more info.
+See [Details on pagination](https://neon.com/docs/guides/consumption-metrics#details-on-pagination) for more info.
 
 ## Details on setting a date range
 
-This section applies to the following metrics output types: [Account-level aggregated metrics](https://neon.com/docs/guides/partner-consumption-metrics#get-account-level-aggregated-metrics), and [Granular project-level metrics for your account](https://neon.com/docs/guides/partner-consumption-metrics#get-granular-project-level-metrics-for-your-account).
+This section applies to the following metrics output types: [Account-level aggregated metrics](https://neon.com/docs/guides/consumption-metrics#get-account-level-aggregated-metrics), and [Granular project-level metrics for your account](https://neon.com/docs/guides/consumption-metrics#get-granular-project-level-metrics-for-your-account).
 
 You can set `from` and `to` query parameters, plus a level of granularity to define a time range that can span across multiple billing periods.
 
@@ -200,7 +200,7 @@ Details: Response body
 
 ## Details on pagination
 
-This section applies to the following metrics output: [Granular project-level metrics for your account](https://neon.com/docs/guides/partner-consumption-metrics#get-granular-project-level-metrics-for-your-account).
+This section applies to the following metrics output: [Granular project-level metrics for your account](https://neon.com/docs/guides/consumption-metrics#get-granular-project-level-metrics-for-your-account).
 
 To control pagination (number of results per response), you can include these query parameters:
 
@@ -220,7 +220,7 @@ curl --request GET \
 
 ## Consumption polling FAQ
 
-As an Neon partner or paid plan customer, you may have questions related to polling Neon's consumption APIs. We've provided answers to frequently asked questions here.
+As a platform integration or paid plan customer, you may have questions related to polling Neon's consumption APIs. We've provided answers to frequently asked questions here.
 
 ### How often can you poll consumption data for usage reporting and billing?
 
@@ -234,11 +234,11 @@ Neon's consumption APIs use a **token bucket** rate-limiting approach, which ref
 
 ### How often should consumption data be polled to report usage to customers?
 
-As mentioned above, usage data can be pulled every 15 minutes, but partners are free to choose their own reporting interval based on their requirements.
+As mentioned above, usage data can be pulled every 15 minutes, but integrators of Neon are free to choose their own reporting interval based on their requirements.
 
 ### How often should consumption data be polled to invoice end users?
 
-Neon does not dictate how partners bill their users. Partners can use the data retrieved from the consumption API to generate invoices according to their own billing cycles and preferences.
+Neon does not dictate how integrators of Neon bill their users. Platform integrations can use the data retrieved from the consumption API to generate invoices according to their own billing cycles and preferences.
 
 ### Does consumption polling wake up computes?
 
