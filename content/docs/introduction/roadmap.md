@@ -17,6 +17,7 @@ Here's a snapshot of what we're working on now:
 
 - **Postgres for AI agents**: [Replit partnered with Neon to back Replit Agents](/blog/looking-at-how-replit-agent-handles-databases), creating thousands of Postgres databases. If you're building AI agents and would like to integrate agent-ready Postgres, [connect with us](/agent-design-partner). See [Postgres for AI Agents](/use-cases/ai-agents) for more.
 - **Snapshots**: Scheduled snapshots with instant restore.
+- **Console navigation enhancements**: Enhancing navigation for multi-project organizations, branch clarity, and better SQL Editor and Tables page interactions.
 
 Other features you would like to see? [Let us know](#share-your-thoughts).
 
@@ -71,7 +72,6 @@ And here's an overview of what we're looking at next:
 
 ## What we've shipped recently 🚢
 
-- **Console navigation enhancements**: Enhanced navigation for multi-project organizations, branch clarity, and better SQL Editor and Tables page interactions. You can now assign custom names to your branch's computes directly in the Neon Console.
 - **TanStack integration & new open-source tools**: Neon is now the official database partner of TanStack, with new open-source tools including Create TanStack Add-on, Neon Launchpad, NeonDB CLI + SDK, and Vite Plugin for Neon to streamline fullstack development with TanStack, Vite, and Postgres.
 - **OpenTelemetry integration enhancement**: Improved the OpenTelemetry integration with non-blocking validation that checks connectivity to collector endpoints and provides immediate feedback while preserving control for advanced use cases.
 - **Data API**: Neon's Data API feature, powered by PostgREST, is open to all Neon users. [Learn more](/docs/data-api/get-started).
