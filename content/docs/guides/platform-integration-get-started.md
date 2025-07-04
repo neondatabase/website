@@ -35,7 +35,7 @@ To ensure you have control over usage and costs, Neon's APIs let you configure l
   - **data transfer**: Set limits for data transfer (egress) on each usage plan.
 
     <Admonition type="tip" title="platform integration example">
-    For an example of how a platform integration defined usage limits based on _database instance types_, see [Koyeb Database Instance Types](https://www.koyeb.com/docs/databases#database-instance-types). You will see limits defined on compute size, compute time, stored data, written data, and egress.
+    For an example of how one integrator of Neon defined usage limits based on _database instance types_, see [Koyeb Database Instance Types](https://www.koyeb.com/docs/databases#database-instance-types). You will see limits defined on compute size, compute time, stored data, written data, and egress.
     </Admonition>
 
 As your users upgrade or change their plans, you can dynamically modify their limits using the Neon API. This allows for real-time updates without affecting database uptime or user experience.
