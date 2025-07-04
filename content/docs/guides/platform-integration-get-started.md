@@ -73,7 +73,7 @@ To learn how, see [Querying consumption metrics with the API](/docs/guides/consu
 - **Custom names for roles and databases**: When creating projects using the [Create project API](https://api-docs.neon.tech/reference/createproject), you can customize the default role and database names.
 - **Reserved names for roles and databases**: Neon reserves certain names for Postgres roles and databases. Users will not be able to use these reserved names when creating roles and databases. For more information, see [Reserved role names](/docs/manage/roles#reserved-role-names) and [Reserved database names](/docs/manage/databases#reserved-database-names).
 - **Postgres extension support**: We frequently receive questions about the Postgres extensions supported by Neon. See the list of [Supported Postgres extensions](/docs/extensions/pg-extensions) that Neon currently supports.
-- **Staying up to date with changes to the Neon platform**: We make every effort to proactively and directly inform platform integrations about updates and changes that could impact their business. In addition, you can monitor the following sources for information about the latest updates from Neon:
+- **Staying up to date with changes to the Neon platform**: We make every effort to proactively and directly inform integrators of Neon about updates and changes that could impact their business. In addition, you can monitor the following sources for information about the latest updates from Neon:
   - The [Neon Roadmap](/docs/introduction/roadmap) to see recent deliveries and upcoming features.
   - The [Neon Changelog](/docs/changelog) for the latest product updates.
   - The [Neon Newsletter](/blog#subscribe-form) sent weekly.
