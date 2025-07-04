@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2025-06-20T20:31:35.339Z'
+updatedOn: '2025-07-04T12:26:28.000Z'
 ---
 
 Our development teams are focused on helping you ship faster with Postgres. This roadmap describes committed features we're working on right now, what we delivered recently, and a peek at what's on the horizon.
@@ -17,7 +17,6 @@ Here's a snapshot of what we're working on now:
 
 - **Postgres for AI agents**: [Replit partnered with Neon to back Replit Agents](/blog/looking-at-how-replit-agent-handles-databases), creating thousands of Postgres databases. If you're building AI agents and would like to integrate agent-ready Postgres, [connect with us](/agent-design-partner). See [Postgres for AI Agents](/use-cases/ai-agents) for more.
 - **Snapshots**: Scheduled snapshots with instant restore.
-- **Console navigation enhancements**: Enhancing navigation for multi-project organizations, branch clarity, and better SQL Editor and Tables page interactions.
 
 Other features you would like to see? [Let us know](#share-your-thoughts).
 
@@ -72,6 +71,9 @@ And here's an overview of what we're looking at next:
 
 ## What we've shipped recently 🚢
 
+- **Console navigation enhancements**: Enhanced navigation for multi-project organizations, branch clarity, and better SQL Editor and Tables page interactions. You can now assign custom names to your branch's computes directly in the Neon Console.
+- **TanStack integration & new open-source tools**: Neon is now the official database partner of TanStack, with new open-source tools including Create TanStack Add-on, Neon Launchpad, NeonDB CLI + SDK, and Vite Plugin for Neon to streamline fullstack development with TanStack, Vite, and Postgres.
+- **OpenTelemetry integration enhancement**: Improved the OpenTelemetry integration with non-blocking validation that checks connectivity to collector endpoints and provides immediate feedback while preserving control for advanced use cases.
 - **Data API**: Neon's Data API feature, powered by PostgREST, is open to all Neon users. [Learn more](/docs/data-api/get-started).
 - **Monitoring platform support**: Neon supports exporting metrics and Postgres logs to any OpenTelemetry-compatible backend, like New Relic. For details, refer to our [OpenTelemetry docs](/docs/guides/opentelemetry).
 - **Claimable Databases & Neon Luanchpad**: A new way for SaaS vendors to partner with Neon to offer instant Postgres databases. Let your users create Postgres databases — no registration required. [Learn more about Neon Launchpad](/docs/reference/neon-launchpad), and see our [Claimable database integration guide](/docs/workflows/claimable-database-integration).
@@ -102,7 +104,7 @@ And here's an overview of what we're looking at next:
 - **Neon Chat for Visual Studio Code**: This AI-powered assistant lets you chat with the latest Neon documentation without leaving your IDE. You can find it here: [Neon Postgres VS Code Extension](https://marketplace.visualstudio.com/items?itemName=buildwithlayer.neon-integration-expert-15j6N).
 - **A GitHub Copilot extension**: This extension provides chat-based access to the latest Neon documentation directly from your repository. You can find it here: [Neon Postgres Copilot Extension](https://github.com/marketplace/neon-database)
 - **Schema Diff API**: Neon now supports schema checks in agentic systems and deployment pipelines with the new schema diff API endpoint. Learn more about [Schema Diff](/docs/guides/schema-diff), which is also available via the console and CLI.
-- **Neon Auth (Early Access)**: Sync user profiles from your auth provider to your database automatically. Currently in Early Access. See [Neon Auth](/docs/guides/neon-auth) for details.
+- **Neon Auth (Early Access)**: Sync user profiles from your auth provider to your database automatically. Now includes OAuth provider management - enable or disable providers (Google, GitHub, Microsoft) and choose between shared Neon Auth credentials or custom client credentials. Currently in Early Access. See [Neon Auth](/docs/guides/neon-auth) for details.
 - **Postgres 17**: Now the default version for all newly created projects.
 - **Support for [pg_cron](/docs/extensions/pg_cron)**: Schedule and manage periodic jobs directly in your Postgres database with this extension.
 - **Neon on AgentStack**: Integrate Neon with AgentStack to enable AI agents to create ephemeral or long-lived Postgres instances for structured data storage. Explore the [Neon tool](https://github.com/AgentOps-AI/AgentStack/blob/main/agentstack/_tools/neon/__init__.py) in AgentStack's repo.
