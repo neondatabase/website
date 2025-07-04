@@ -251,6 +251,7 @@
           slug: introduction/branch-restore
         - title: Backup & restore
           slug: guides/backup-restore
+          tag: new
         - title: Branching
           slug: guides/branching-intro
           items:
@@ -1092,6 +1093,7 @@
     - title: Data API
       slug: data-api/get-started
       icon: api
+      tag: new
       items:
         - section: Get started
           items:
@@ -1106,6 +1108,7 @@
     - title: Data anonymization
       slug: workflows/data-anonymization
       icon: anonymize
+      tag: new
     - title: Neon Twin
       slug: guides/neon-twin-intro
       icon: neon-twin

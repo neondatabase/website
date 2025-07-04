@@ -1,6 +1,7 @@
 ---
 title: Backup & Restore
 subtitle: Restore your branch from a point in time or snapshot
+tag: new
 enableTableOfContents: true
 updatedOn: '2025-05-23T18:48:33.108Z'
 ---
