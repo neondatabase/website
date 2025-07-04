@@ -144,28 +144,22 @@ This schema defines a table `user_messages` to store a message for each user, wi
 We'll use the `drizzle-kit` CLI tool to generate migrations for the schema we defined. To configure how it connects to the database, add a `drizzle.config.ts` file at the project root.
 
 ```typescript
-/// drizzle.config.ts
-
-import type { Config } from 'drizzle-kit';
-import 'dotenv/config';
-
-if (!process.env.DATABASE_URL) throw new Error('DATABASE_URL not found in environment');
-
-export default {
-  schema: './app/db/schema.ts',
-  out: './drizzle',
-  driver: 'pg',
-  dbCredentials: {
-    connectionString: process.env.DATABASE_URL,
-  },
-  strict: true,
-} satisfies Config;
+// drizzle.config.ts
+import { defineConfig } from "drizzle-kit";
+if (!process.env.DATABASE_URL)
+  throw new Error("DATABASE_URL not found in environment");
+export default defineConfig({
+  dialect: "postgresql",
+  schema: "./app/db/schema.ts",
+  dbCredentials: { url: process.env.DATABASE_URL! },
+  out: "./drizzle",
+});
 ```
 
 Now, generate the migration files by running the following command:
 
 ```bash
-npx drizzle-kit generate:pg
+npx drizzle-kit generate
 ```
 
 This will create a `drizzle` folder at the project root with the migration files. To apply the migration to the database, run:
