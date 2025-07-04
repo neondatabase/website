@@ -73,7 +73,6 @@ And here's an overview of what we're looking at next:
 ## What we've shipped recently 🚢
 
 - **TanStack integration & new open-source tools**: Neon is now the official database partner of TanStack, with new open-source tools including Create TanStack Add-on, Neon Launchpad, NeonDB CLI + SDK, and Vite Plugin for Neon to streamline fullstack development with TanStack, Vite, and Postgres.
-- **OpenTelemetry integration enhancement**: Improved the OpenTelemetry integration with non-blocking validation that checks connectivity to collector endpoints and provides immediate feedback while preserving control for advanced use cases.
 - **Data API**: Neon's Data API feature, powered by PostgREST, is open to all Neon users. [Learn more](/docs/data-api/get-started).
 - **Monitoring platform support**: Neon supports exporting metrics and Postgres logs to any OpenTelemetry-compatible backend, like New Relic. For details, refer to our [OpenTelemetry docs](/docs/guides/opentelemetry).
 - **Claimable Databases & Neon Luanchpad**: A new way for SaaS vendors to partner with Neon to offer instant Postgres databases. Let your users create Postgres databases — no registration required. [Learn more about Neon Launchpad](/docs/reference/neon-launchpad), and see our [Claimable database integration guide](/docs/workflows/claimable-database-integration).
