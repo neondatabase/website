@@ -248,6 +248,7 @@ You can programmatically manage OAuth providers for your Neon Auth project using
 Lists the OAuth providers for the specified project.
 
 Required parameters:
+
 - `project_id` (string): The Neon project ID
 
 ```bash shouldWrap
@@ -279,12 +280,14 @@ Example response:
 Adds an OAuth provider to the specified project.
 
 Required parameters:
+
 - `project_id` (string): The Neon project ID
 - `provider` (string): The provider ID (e.g., `google`, `github`, `microsoft`)
 - `client_id` (string): The OAuth client ID
 - `client_secret` (string): The OAuth client secret
 
 Optional parameters:
+
 - `scopes` (array of strings): OAuth scopes to request
 
 ```bash shouldWrap
@@ -318,10 +321,12 @@ Example response:
 Updates an OAuth provider for the specified project.
 
 Required parameters:
+
 - `project_id` (string): The Neon project ID
 - `oauth_provider_id` (string): The OAuth provider ID (e.g., `google`, `github`, `microsoft`)
 
 Optional parameters (request body):
+
 - `client_id` (string): The new OAuth client ID
 - `client_secret` (string): The new OAuth client secret
 - `scopes` (array of strings): OAuth scopes to request
@@ -356,6 +361,7 @@ Example response:
 Deletes an OAuth provider from the specified project.
 
 Required parameters:
+
 - `project_id` (string): The Neon project ID
 - `oauth_provider_id` (string): The OAuth provider ID (e.g., `google`, `github`, `microsoft`)
 
