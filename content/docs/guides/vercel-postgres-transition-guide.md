@@ -68,7 +68,7 @@ In Neon, a "Database" in Vercel is called a "Project." Everything else works the
 | **Additional databases** | $1.00 each | Free (up to 100)       |
 
 <Admonition type="tip" title="Upgrade to unlock features">
-Pro Plan users can stay on legacy limits or upgrade to a Neon plan to access branching, instant restore, and higher limits. [See how to upgrade](/docs/guides/vercel-native-integration#changing-your-plan).
+Pro Plan users can stay on legacy limits or upgrade to a Neon plan to access branching, instant restore, and higher limits. [See how to upgrade](/docs/guides/vercel-managed-integration#changing-your-plan).
 </Admonition>
 
 ### Enterprise customers
