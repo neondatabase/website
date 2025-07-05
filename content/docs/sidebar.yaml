@@ -707,17 +707,15 @@
             - title: Vercel
               slug: guides/vercel-overview
               items:
-                - title: Overview
+                - title: Integration Overview
                   slug: guides/vercel-overview
-                - title: Vercel Native Integration
-                  slug: guides/vercel-native-integration
-                - title: Vercel Native Integration Previews
-                  slug: guides/vercel-native-integration-previews
-                - title: Neon Previews Integration
-                  slug: guides/vercel-previews-integration
-                - title: Connect manually
+                - title: Vercel-Managed (Native Integration)
+                  slug: guides/vercel-managed-integration
+                - title: Neon-Managed (Connectable Account)
+                  slug: guides/neon-managed-vercel-integration
+                - title: Manual Setup
                   slug: guides/vercel-manual
-                - title: Vercel Postgres Transition Guide
+                - title: Migrating from Vercel Postgres
                   slug: guides/vercel-postgres-transition-guide
             - title: Cloudflare
               slug: guides/cloudflare-pages
