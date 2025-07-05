@@ -4,7 +4,7 @@ subtitle: Choose the right connection path in seconds
 redirectFrom:
   - /docs/guides/vercel-postgres
 enableTableOfContents: true
-updatedOn: "2025-07-02T00:00:00.000Z"
+updatedOn: '2025-07-02T00:00:00.000Z'
 ---
 
 ## Overview
@@ -19,20 +19,20 @@ Most new users should start with the **Vercel-Managed Integration** for the simp
 
 ## Compare the options at a glance
 
-| Feature / Attribute | [Vercel-Managed Integration](/docs/guides/vercel-managed-integration) | [Neon-Managed Integration](/docs/guides/neon-managed-vercel-integration) | [Manual Connection](/docs/guides/vercel-manual) |
-| :--- | :--- | :--- | :--- |
-| **Ideal for** | New users, teams wanting a single Vercel bill | Existing Neon users, direct Neon billing | Power users with custom pipelines |
-| **Neon account** | Created automatically via Vercel | Pre-existing Neon account | Pre-existing Neon account |
-| **Billing** | Paid **through Vercel** | Paid **directly to Neon** | Paid **directly to Neon** |
-| **Setup method** | Vercel Marketplace → Native Integrations → "Neon Postgres" | Vercel Marketplace → Connectable Accounts → "Neon" | Manual env-vars or API/CLI scripts |
-| **Preview Branching** | ✅ (one-click in Vercel UI) | ✅ (one-click in Vercel UI) | ✅ (requires scripting) |
-| **Setup complexity** | Low | Medium | High |
-| **Implementation type** | [Native Integration](https://vercel.com/docs/integrations/install-an-integration/product-integration) | [Connectable Account](https://vercel.com/docs/integrations/install-an-integration/add-a-connectable-account) | N/A |
+| Feature / Attribute     | [Vercel-Managed Integration](/docs/guides/vercel-managed-integration)                                 | [Neon-Managed Integration](/docs/guides/neon-managed-vercel-integration)                                     | [Manual Connection](/docs/guides/vercel-manual) |
+| :---------------------- | :---------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------- | :---------------------------------------------- |
+| **Ideal for**           | New users, teams wanting a single Vercel bill                                                         | Existing Neon users, direct Neon billing                                                                     | Power users with custom pipelines               |
+| **Neon account**        | Created automatically via Vercel                                                                      | Pre-existing Neon account                                                                                    | Pre-existing Neon account                       |
+| **Billing**             | Paid **through Vercel**                                                                               | Paid **directly to Neon**                                                                                    | Paid **directly to Neon**                       |
+| **Setup method**        | Vercel Marketplace → Native Integrations → "Neon Postgres"                                            | Vercel Marketplace → Connectable Accounts → "Neon"                                                           | Manual env-vars or API/CLI scripts              |
+| **Preview Branching**   | ✅ (one-click in Vercel UI)                                                                           | ✅ (one-click in Vercel UI)                                                                                  | ✅ (requires scripting)                         |
+| **Setup complexity**    | Low                                                                                                   | Medium                                                                                                       | High                                            |
+| **Implementation type** | [Native Integration](https://vercel.com/docs/integrations/install-an-integration/product-integration) | [Connectable Account](https://vercel.com/docs/integrations/install-an-integration/add-a-connectable-account) | N/A                                             |
 
 ### Billing considerations
 
-- **Vercel-Managed**: Consolidated billing through Vercel, but you'll be on Vercel's Neon pricing tier.  
-- **Neon-Managed**: Direct access to all Neon plans and pricing, including free tier benefits.  
+- **Vercel-Managed**: Consolidated billing through Vercel, but you'll be on Vercel's Neon pricing tier.
+- **Neon-Managed**: Direct access to all Neon plans and pricing, including free tier benefits.
 - **Manual**: Full control but requires more setup and maintenance overhead.
 
 ---

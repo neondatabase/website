@@ -35,11 +35,13 @@ In Neon, a "Database" in Vercel is called a "Project." Everything else works the
 ## What changed for you
 
 ### Access and management
+
 - **Same login**: Access your databases from both Vercel's **Storage** tab and the Neon Console
 - **New management options**: Click **Open in Neon** to access advanced database features
 - **Unified billing**: Everything remains billed through Vercel (no separate Neon billing)
 
 ### Automatic plan transitions
+
 - **Hobby Plan users** → Neon Free Plan (better limits, more features)
 - **Pro Plan users** → Maintained existing limits with option to upgrade to Neon plans
 
@@ -49,21 +51,21 @@ In Neon, a "Database" in Vercel is called a "Project." Everything else works the
 
 ### Plan comparison
 
-| Plan Transition | Compute Hours | Storage | Databases | Key Changes |
-|:---|:---|:---|:---|:---|
-| **Hobby → Free** | 60 → 190 | 256 MB → 512 MB | 1 → 10 | Significant improvements |
-| **Pro → Legacy** | 100 (same) | 256 MB (same) | 1 (same) | No change until you upgrade |
+| Plan Transition  | Compute Hours | Storage         | Databases | Key Changes                 |
+| :--------------- | :------------ | :-------------- | :-------- | :-------------------------- |
+| **Hobby → Free** | 60 → 190      | 256 MB → 512 MB | 1 → 10    | Significant improvements    |
+| **Pro → Legacy** | 100 (same)    | 256 MB (same)   | 1 (same)  | No change until you upgrade |
 
 ### Cost comparison (Pro Plan)
 
-| Resource | Vercel Pro | Neon Launch ($19/mo) |
-|:---|:---|:---|
-| **Included compute** | 100 hours | 300 hours |
-| **Included storage** | 256 MB | 10 GB |
-| **Extra compute** | $0.10/hour | $0.16/hour |
-| **Extra storage** | $0.12/GB | $1.75/GB (after 10 GB) |
-| **Data transfer** | $0.10/GB | Free |
-| **Additional databases** | $1.00 each | Free (up to 100) |
+| Resource                 | Vercel Pro | Neon Launch ($19/mo)   |
+| :----------------------- | :--------- | :--------------------- |
+| **Included compute**     | 100 hours  | 300 hours              |
+| **Included storage**     | 256 MB     | 10 GB                  |
+| **Extra compute**        | $0.10/hour | $0.16/hour             |
+| **Extra storage**        | $0.12/GB   | $1.75/GB (after 10 GB) |
+| **Data transfer**        | $0.10/GB   | Free                   |
+| **Additional databases** | $1.00 each | Free (up to 100)       |
 
 <Admonition type="tip" title="Upgrade to unlock features">
 Pro Plan users can stay on legacy limits or upgrade to a Neon plan to access branching, instant restore, and higher limits. [See how to upgrade](/docs/guides/vercel-native-integration#changing-your-plan).
@@ -78,6 +80,7 @@ Neon is working with the Vercel team to transition Enterprise customers. If you 
 ## New features available
 
 ### Immediate access (all users)
+
 - **Neon Console** - Dedicated database management interface
 - **CLI support** - Full [Neon CLI](/docs/reference/neon-cli) (Vercel CLI didn't support Postgres)
 - **Terraform support** - [Neon Terraform provider](/docs/reference/terraform)
@@ -89,6 +92,7 @@ Neon is working with the Vercel team to transition Enterprise customers. If you 
 - **[Monitoring](/docs/introduction/monitoring-page)** - Database monitoring from Neon Console
 
 ### Advanced features (Neon plan required)
+
 - **[Database branching](/docs/guides/branching-intro)** - Branch your database like Git
 - **[Instant restore](/docs/guides/branch-restore)** - Point-in-time recovery (was disabled in Vercel Postgres)
 - **[Autoscaling](/docs/introduction/autoscaling)** - Automatic performance scaling
@@ -106,26 +110,33 @@ Neon is working with the Vercel team to transition Enterprise customers. If you 
 ## Compatibility notes
 
 ### SDKs and drivers
+
 **Current Vercel SDK** (`@vercel/postgres`):
+
 - ✅ **Still works** - No immediate action required
 - ⚠️ **Will be deprecated** - No longer actively maintained by Vercel
 
 **Migration options**:
+
 1. **Maintenance mode**: Switch to `@neondatabase/vercel-postgres-compat` (drop-in replacement)
 2. **New projects**: Use `@neondatabase/serverless` (actively developed)
 3. **Existing apps**: Follow our [migration guide](/guides/vercel-sdk-migration)
 
 ### ORMs and tools
+
 All existing integrations continue to work:
+
 - Drizzle, Prisma, Kysely
 - All Postgres-compatible tools
 - Existing environment variables
 
 ### Templates and environment variables
+
 - **Existing templates**: [Environment variables](/docs/guides/vercel-native-integration#environment-variables-set-by-the-integration) used by Vercel Postgres templates continue to work
 - **New templates**: Find updated [Neon templates](https://vercel.com/templates?database=neon) and [Postgres templates](https://vercel.com/templates?database=neon&database=postgres) on Vercel
 
 ### Regional support
+
 All Vercel Postgres regions are supported in Neon - no changes needed.
 
 ---

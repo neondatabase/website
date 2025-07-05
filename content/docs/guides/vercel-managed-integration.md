@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/guides/vercel-native-integration
   - /docs/guides/vercel-native-integration-previews
 enableTableOfContents: true
-updatedOn: "2025-07-02T00:00:00.000Z"
+updatedOn: '2025-07-02T00:00:00.000Z'
 ---
 
 <InfoBlock>
@@ -26,12 +26,12 @@ updatedOn: "2025-07-02T00:00:00.000Z"
 
 ## About this integration
 
-**Vercel-Managed Integration** (also known as *Neon Postgres Native Integration*) lets you add a Neon Postgres database to your Vercel project **with billing handled entirely inside Vercel**. Installing it:
+**Vercel-Managed Integration** (also known as _Neon Postgres Native Integration_) lets you add a Neon Postgres database to your Vercel project **with billing handled entirely inside Vercel**. Installing it:
 
-* Creates a Neon account + project for you (if you don't already have one)
-* For existing Neon users, adds a new organization named `Vercel: <team-name>` to your account
-* Injects the required database environment variables (`DATABASE_URL`, etc.) into your Vercel project
-* Optionally creates a dedicated database branch for every Preview Deployment so you can test schema changes safely
+- Creates a Neon account + project for you (if you don't already have one)
+- For existing Neon users, adds a new organization named `Vercel: <team-name>` to your account
+- Injects the required database environment variables (`DATABASE_URL`, etc.) into your Vercel project
+- Optionally creates a dedicated database branch for every Preview Deployment so you can test schema changes safely
 
 <Admonition type="note" title="Who should use this path?">
 Choose the Vercel-Managed Integration if you **do not already have a Neon account** *or* you prefer to consolidate payment for Neon inside your Vercel invoice.
@@ -58,7 +58,7 @@ From the Storage tab, click **Open in Neon** to jump straight to your new Neon p
 
    ![Connect a Vercel Project](/docs/guides/vercel_native_connect_project.png)
 
-2. (Optional) Under **Advanced Options → Deployments Configuration** enable **Preview** to turn on *Preview Branching* (see next section).
+2. (Optional) Under **Advanced Options → Deployments Configuration** enable **Preview** to turn on _Preview Branching_ (see next section).
 
    ![Vercel deployment configuration](/docs/guides/vercel_native_deployments_configuration.png)
 
@@ -103,14 +103,14 @@ To verify preview branching works:
 
 Because the database is owned by Vercel you must do these actions **in the Vercel dashboard**:
 
-* Change plan, billing tier, or scale settings (compute size, autoscaling, scale-to-zero)
-* View or modify database configuration via **Storage → Settings → Change Configuration**
-* Monitor usage via **Storage → Usage** (also available in Neon Console)
-* Create additional databases (each becomes a new Neon project)
-* Rename or delete a database (deleting removes the underlying Neon project permanently)
-* Manage members / collaborators (handled through Vercel "Members", not the Neon Console)
-* Delete the Neon organization (only happens automatically if you uninstall the integration)
-* Update connection-string environment variables (prefix changes, etc.)
+- Change plan, billing tier, or scale settings (compute size, autoscaling, scale-to-zero)
+- View or modify database configuration via **Storage → Settings → Change Configuration**
+- Monitor usage via **Storage → Usage** (also available in Neon Console)
+- Create additional databases (each becomes a new Neon project)
+- Rename or delete a database (deleting removes the underlying Neon project permanently)
+- Manage members / collaborators (handled through Vercel "Members", not the Neon Console)
+- Delete the Neon organization (only happens automatically if you uninstall the integration)
+- Update connection-string environment variables (prefix changes, etc.)
 
 Everything else (querying data, branching, monitoring usage) works exactly the same in the Neon Console.
 
@@ -130,7 +130,7 @@ Each new "Database" is a new Neon project. If you select a different plan during
 
 ### Change compute / scale settings
 
-**Storage → Settings → Change Configuration** lets you resize compute, adjust scale-to-zero, or switch Neon plan tiers. Changes apply to *all* databases in the installation.
+**Storage → Settings → Change Configuration** lets you resize compute, adjust scale-to-zero, or switch Neon plan tiers. Changes apply to _all_ databases in the installation.
 
 <Admonition type="important">
 Changing your plan affects **all databases** in this integration, not just the current one.
@@ -153,23 +153,22 @@ This removes database environment variables from your Vercel project but keeps t
 
 ## Environment variables set by the integration
 
-| Variable | Purpose |
-| :--- | :--- |
-| `DATABASE_URL` | Pooled connection string (PgBouncer) |
-| `DATABASE_URL_UNPOOLED` | Direct connection string |
-| `PGHOST`, `PGHOST_UNPOOLED`, `PGUSER`, `PGDATABASE`, `PGPASSWORD` | Raw pieces to build custom strings |
-| Legacy `POSTGRES_*` vars | Provided for backwards compatibility with Vercel Postgres templates |
-| `NEXT_PUBLIC_STACK_PROJECT_ID`, `STACK_SECRET_SERVER_KEY`, etc. | **Neon Auth variables** for drop-in authentication |
+| Variable                                                          | Purpose                                                             |
+| :---------------------------------------------------------------- | :------------------------------------------------------------------ |
+| `DATABASE_URL`                                                    | Pooled connection string (PgBouncer)                                |
+| `DATABASE_URL_UNPOOLED`                                           | Direct connection string                                            |
+| `PGHOST`, `PGHOST_UNPOOLED`, `PGUSER`, `PGDATABASE`, `PGPASSWORD` | Raw pieces to build custom strings                                  |
+| Legacy `POSTGRES_*` vars                                          | Provided for backwards compatibility with Vercel Postgres templates |
+| `NEXT_PUBLIC_STACK_PROJECT_ID`, `STACK_SECRET_SERVER_KEY`, etc.   | **Neon Auth variables** for drop-in authentication                  |
 
 **Neon Auth variables** automatically sync user profiles to your database in the `neon_auth.users_sync` table, enabling authentication without additional setup. Learn more in the [Neon Auth guide](/docs/guides/neon-auth).
-
 
 ---
 
 ## Limitations
 
-* You cannot mix this integration with the **Neon-Managed Integration** in the same Vercel project
-* **Neon CLI access**: Requires API key authentication (the `neon auth` command won't work since the account is Vercel-managed)
-* Cannot install if you currently have Vercel Postgres - contact Vercel about transitioning
+- You cannot mix this integration with the **Neon-Managed Integration** in the same Vercel project
+- **Neon CLI access**: Requires API key authentication (the `neon auth` command won't work since the account is Vercel-managed)
+- Cannot install if you currently have Vercel Postgres - contact Vercel about transitioning
 
 <NeedHelp/>
