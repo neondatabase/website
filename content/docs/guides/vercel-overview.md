@@ -1,59 +1,107 @@
 ---
-title: Neon and Vercel overview
-subtitle: Learn about different options for integrating Neon with Vercel
+title: Integrating Neon with Vercel
+subtitle: Choose the right connection path in seconds
 redirectFrom:
   - /docs/guides/vercel-postgres
 enableTableOfContents: true
-isDraft: false
-updatedOn: '2025-02-27T14:57:44.624Z'
+updatedOn: "2025-07-02T00:00:00.000Z"
 ---
 
-Neon supports different options for integrating Neon and Vercel, including a native integration that you can install from the Vercel Marketplace, a "previews integration" that creates a database branch with every pull request, and a manual setup option. If you're currently a Vercel Postgres user, you'll also find information below about the upcoming transition from Vercel Postgres to Neon.
+## Overview
 
-## Option 1: Vercel Native Integration
+This page helps you quickly choose the best Neon–Vercel integration for your project. Whether you're starting fresh or have existing infrastructure, we'll guide you to the right solution.
 
-This integration is intended for Vercel users who want to add Neon Postgres to their Vercel project as a [first-party native integration](https://vercel.com/docs/integrations/install-an-integration/product-integration). The integration creates a Neon Postgres account for you if you do not have one. You get access to Neon features and plans. **Billing is managed through Vercel**. The integration also supports automatic creation of a database branch with each Vercel preview deployment so that you can preview application and database changes together without impacting your production database.
-
-<DetailIconCards>
-
-<a href="/docs/guides/vercel-native-integration" description="Learn how to install the Neon Postgres Native Integration from the Vercel Marketplace" icon="vercel">Vercel Native Integration</a>
-
-<a href="/docs/guides/vercel-native-integration-previews" description="Create a database branch for every preview deployment with the Neon Postgres Native Integration" icon="vercel">Preview deployments</a>
-
-</DetailIconCards>
-
-## Option 2: Add the Postgres Previews Integration
-
-This integration is intended for users who are registered with Neon directly. The **Postgres Previews Integration** is a [connectable account integration](https://vercel.com/docs/integrations/install-an-integration/add-a-connectable-account#manage-connectable-accounts) that connects your Vercel project to a Neon database and creates a database branch with each Vercel preview deployment.
-
-<DetailIconCards>
-
-<a href="/docs/guides/vercel-previews-integration" description="Learn how to install the Neon Postgres Preview Integration for a database branch with each preview deployment" icon="vercel">Neon Previews Integration</a>
-
-</DetailIconCards>
-
-## Option 3: Connect your Vercel project to Neon manually (no integration)
-
-This setup simply involves setting environment variables in Vercel to connect your Vercel Project to your Neon database.
-
-<DetailIconCards>
-
-<a href="/docs/guides/vercel-manual" description="Connect your Vercel project to Neon manually (no integration)" icon="vercel">Connect Vercel and Neon manually</a>
-
-</DetailIconCards>
-
-## Transitioning from Vercel Postgres?
-
-<Admonition type="important">
-**Vercel has now completed transitioning almost all Vercel Postgres stores to the Native Vercel Integration for Neon Postgres.**
-
-You can now manage your databases via the Native Vercel Integration from the **Storage** tab on your Vercel Dashboard and in the Neon Console.
+<Admonition type="tip" title="Quick Start">
+Most new users should start with the **Vercel-Managed Integration** for the simplest setup and unified billing. Existing Neon users can seamlessly connect with the **Neon-Managed Integration**.
 </Admonition>
 
-For those who have transitioned from Vercel Postgres to Neon, welcome! We're glad you're here. We've prepared a **transition guide** to answer questions and help you get started.
+---
+
+## Compare the options at a glance
+
+| Feature / Attribute | [Vercel-Managed Integration](/docs/guides/vercel-managed-integration) | [Neon-Managed Integration](/docs/guides/neon-managed-vercel-integration) | [Manual Connection](/docs/guides/vercel-manual) |
+| :--- | :--- | :--- | :--- |
+| **Ideal for** | New users, teams wanting a single Vercel bill | Existing Neon users, direct Neon billing | Power users with custom pipelines |
+| **Neon account** | Created automatically via Vercel | Pre-existing Neon account | Pre-existing Neon account |
+| **Billing** | Paid **through Vercel** | Paid **directly to Neon** | Paid **directly to Neon** |
+| **Setup method** | Vercel Marketplace → Native Integrations → "Neon Postgres" | Vercel Marketplace → Connectable Accounts → "Neon" | Manual env-vars or API/CLI scripts |
+| **Preview Branching** | ✅ (one-click in Vercel UI) | ✅ (one-click in Vercel UI) | ✅ (requires scripting) |
+| **Setup complexity** | Low | Medium | High |
+| **Implementation type** | [Native Integration](https://vercel.com/docs/integrations/install-an-integration/product-integration) | [Connectable Account](https://vercel.com/docs/integrations/install-an-integration/add-a-connectable-account) | N/A |
+
+### Billing considerations
+
+- **Vercel-Managed**: Consolidated billing through Vercel, but you'll be on Vercel's Neon pricing tier.  
+- **Neon-Managed**: Direct access to all Neon plans and pricing, including free tier benefits.  
+- **Manual**: Full control but requires more setup and maintenance overhead.
+
+---
+
+## Choose your integration path
+
+<Admonition type="important" title="Do you need custom CI/CD control?">
+**If you need full control over preview branching in your own CI/CD pipelines (e.g., GitHub Actions)**, use **[Manual Connections](/docs/guides/vercel-manual)** instead of the automated integrations below.
+</Admonition>
+
+For automated integrations, follow this simple flow:
+
+<Steps>
+
+## Do you have an existing Neon account?
+
+**Do you already have a Neon account or project you want to keep using?**
+
+- **✅ Yes** → Use **[Neon-Managed Integration](/docs/guides/neon-managed-vercel-integration)**
+- **❌ No** → Continue below
+
+## Choose your billing preference
+
+**Where would you like to manage billing for Neon?**
+
+- **Through my Vercel account** → Use **[Vercel-Managed Integration](/docs/guides/vercel-managed-integration)**
+- **Directly with Neon** → Use **[Neon-Managed Integration](/docs/guides/neon-managed-vercel-integration)**
+
+</Steps>
+
+---
+
+## Integration options overview
 
 <DetailIconCards>
-
-<a href="/docs/guides/vercel-postgres-transition-guide" description="Everything you need to know about transitioning from Vercel Postgres to Neon" icon="vercel">Vercel Postgres Transition Guide</a>
-
+<a href="/docs/guides/vercel-managed-integration" title="Vercel-Managed Integration" 
+   description="Perfect for new users. Single billing through Vercel with automatic setup." icon="vercel">Vercel-Managed Integration</a>
+<a href="/docs/guides/neon-managed-vercel-integration" title="Neon-Managed Integration" 
+   description="Ideal for existing Neon users. Keep your current account and billing." icon="neon">Neon-Managed Integration</a>
+<a href="/docs/guides/vercel-manual" title="Manual Connections" 
+   description="Full control for power users. Custom CI/CD and advanced workflows." icon="gear">Manual Connections</a>
 </DetailIconCards>
+
+<Admonition type="info">
+All three options support preview branching, the main differences are in setup complexity and billing management.
+</Admonition>
+
+---
+
+## Next steps
+
+<CheckList title="Get Started Checklist">
+
+<CheckItem title="Choose your integration type">
+  Select Vercel-Managed, Neon-Managed, or Manual based on the decision flow above
+</CheckItem>
+
+<CheckItem title="Follow the setup guide">
+  Click through to your chosen integration's detailed documentation
+</CheckItem>
+
+<CheckItem title="Configure preview branching">
+  Set up database branching for your development workflow
+</CheckItem>
+
+<CheckItem title="Test your connection">
+  Verify your database connection works in both production and preview environments
+</CheckItem>
+
+</CheckList>
+
+<NeedHelp/>
