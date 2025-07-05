@@ -4,7 +4,7 @@ subtitle: Link an existing Neon project to Vercel and keep billing in Neon
 redirectFrom:
   - /docs/guides/vercel-previews-integration
 enableTableOfContents: true
-updatedOn: "2025-07-02T00:00:00.000Z"
+updatedOn: '2025-07-02T00:00:00.000Z'
 ---
 
 <InfoBlock>
@@ -28,6 +28,7 @@ updatedOn: "2025-07-02T00:00:00.000Z"
 The **Neon-Managed Integration** links your existing Neon project to a Vercel project while keeping billing in Neon. Instead of sharing a single database across all preview deployments (which can break when schema changes), this creates an isolated database branch for each preview deployment.
 
 **Key features:**
+
 - One-click connection from Vercel Marketplace
 - Automatic database branches for each preview deployment
 - Environment variable injection (`DATABASE_URL`, `DATABASE_URL_UNPOOLED`, `PG*` variables)
@@ -42,6 +43,7 @@ Choose the Neon-Managed Integration if you already have a Neon account/project o
 ## Prerequisites
 
 Before you begin, ensure you have:
+
 - A Neon account with at least one project and database role
 - A Vercel account with a project linked to GitHub, GitLab, or Bitbucket
 
@@ -73,24 +75,23 @@ Alternatively, if you're accessing this directly from the Vercel Marketplace, lo
 
 Choose which Vercel account and projects can use this integration. Each Neon project connects to exactly one Vercel project. Selecting **All projects** makes the integration available to other Vercel projects.
 
-   ![Connect Neon Account Projects](/docs/guides/vercel_connect_neon_account_projects.png)
-
+![Connect Neon Account Projects](/docs/guides/vercel_connect_neon_account_projects.png)
 
 ## Set up project integration
 
 In the **Integrate Neon** dialog:
 
 1. **Select your Vercel project**
-   
+
    ![Select a Vercel project](/docs/guides/vercel_select_project.png)
 
 2. **Choose your Neon project, database, and role**
-   
+
    ![Connect to Neon](/docs/guides/vercel_connect_neon.png)
 
 3. **Configure optional settings:**
    - Enable **Create a branch for your development environment** to create a persistent `vercel-dev` branch
-   and sets Vercel development environment variables for it. The `vercel-dev` branch is a clone of your project's default branch (`main`) that you can modify without affecting data on your default branch.
+     and sets Vercel development environment variables for it. The `vercel-dev` branch is a clone of your project's default branch (`main`) that you can modify without affecting data on your default branch.
    - Enable **Automatically delete obsolete Neon branches** (recommended) to clean up branches when git branches are deleted.
 
 4. Click **Connect**, then **Done**
@@ -106,12 +107,14 @@ In the **Integrate Neon** dialog:
 Once connected successfully, you'll see:
 
 **In Neon Console:**
+
 - A `vercel-dev` branch (if enabled) under **Branches**
 - Future preview branches will appear here automatically
 
 ![Neon branches](/docs/guides/vercel_neon_branches.png)
 
 **In Vercel:**
+
 - `DATABASE_URL` and other environment variables under **Settings → Environment Variables**
 
 ![Vercel environment variables](/docs/guides/vercel_env_variables.png)
@@ -182,6 +185,7 @@ Enable **Automatically delete obsolete Neon branches** during setup to remove pr
 
 **Manual cleanup:**
 If needed, you can delete branches manually:
+
 - **Individual branches:** Neon Console → Integrations → Manage → Branches → trash icon
 - **Bulk delete:** Use **Delete all** in the same interface
 - **API/CLI:** Use Neon CLI or API for programmatic cleanup

@@ -25,9 +25,9 @@ updatedOn: '2025-07-03T12:36:49.566Z'
 
 Choose manual connection if you prefer not to install a Marketplace integration. This approach is ideal when you:
 
-* Deploy via a custom pipeline (self-hosted CI, monorepo, etc.)
-* Need non-Vercel hosting (e.g. Cloudflare Workers + Vercel Functions hybrid)
-* Want full control over branch naming, seeding, migration, or teardown
+- Deploy via a custom pipeline (self-hosted CI, monorepo, etc.)
+- Need non-Vercel hosting (e.g. Cloudflare Workers + Vercel Functions hybrid)
+- Want full control over branch naming, seeding, migration, or teardown
 
 If you simply want Neon and Vercel with minimal setup, stick to the managed integrations. They're simpler and include UI support.
 
@@ -35,14 +35,14 @@ If you simply want Neon and Vercel with minimal setup, stick to the managed inte
 
 ## Prerequisites
 
-* Neon project with database (get a connection string via **Connect** in the Console)
-* Deployed Vercel project
+- Neon project with database (get a connection string via **Connect** in the Console)
+- Deployed Vercel project
 
 ---
 
 ## Connection steps
 
-1. Copy the connection string from the [Neon Console](https://console.neon.tech). Click **Connect** on your Project Dashboard, select the branch, role, and database you want, then copy the *Connection string*.
+1. Copy the connection string from the [Neon Console](https://console.neon.tech). Click **Connect** on your Project Dashboard, select the branch, role, and database you want, then copy the _Connection string_.
 
    ![Neon connection details modal](/docs/connect/connection_details.png)
 
@@ -63,7 +63,7 @@ If you simply want Neon and Vercel with minimal setup, stick to the managed inte
    Value: <your connection string>
    ```
 
-   *or* the granular `PG*` variables:
+   _or_ the granular `PG*` variables:
 
    ```text
    PGUSER=alex
