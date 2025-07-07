@@ -278,12 +278,14 @@ Required parameters:
 
 - `project_id` (string): The Neon project ID
 - `id` (string): The provider ID (e.g., `google`, `github`, `microsoft`)
-- `client_id` (string): The OAuth client ID
-- `client_secret` (string): The OAuth client secret
+
 
 Optional parameters:
 
-- `scopes` (array of strings): OAuth scopes to request
+- `client_id` (string): The OAuth client ID
+- `client_secret` (string): The OAuth client secret
+
+> If you do not provide `client_id` and `client_secret`, Neon will use shared keys for the provider. For production environments, you should always provide your own `client_id` and `client_secret` to ensure security and control. See [Production OAuth setup best practices](/docs/neon-auth/best-practices#production-oauth-setup) for details.
 
 ```bash shouldWrap
 curl --request POST \
@@ -294,7 +296,6 @@ curl --request POST \
        "id": "google",
        "client_id": "your-client-id",
        "client_secret": "your-client-secret",
-       "scopes": ["openid", "email", "profile"]
      }'
 ```
 
@@ -304,8 +305,8 @@ Example response:
 {
   "id": "google",
   "type": "standard",
-  "client_id": "...",
-  "created_at": "2024-06-01T12:00:00Z"
+  "client_id": "your-client-id",
+  "client_secret": "your-client-secret"
 }
 ```
 
@@ -324,7 +325,6 @@ Optional parameters (request body):
 
 - `client_id` (string): The new OAuth client ID
 - `client_secret` (string): The new OAuth client secret
-- `scopes` (array of strings): OAuth scopes to request
 
 ```bash shouldWrap
 curl --request PATCH \
@@ -333,8 +333,7 @@ curl --request PATCH \
      --header 'content-type: application/json' \
      --data '{
        "client_id": "new-client-id",
-       "client_secret": "new-client-secret",
-       "scopes": ["openid", "email", "profile"]
+       "client_secret": "new-client-secret"
      }'
 ```
 
