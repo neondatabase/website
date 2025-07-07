@@ -151,11 +151,11 @@ https://api.stack-auth.com/api/v1/auth/oauth/callback/microsoft
 
 ### 2. Enter OAuth credentials in Neon Auth
 
-Go to the **Auth Methods** section in the Neon Auth dashboard, click **Add OAuth Provider**, and select your provider:
+Go to the **OAuth providers** section in the Neon Auth dashboard.
 
-![Add OAuth Provider UI](/docs/relnotes/neon-auth-add-oauth-provider.png)
+Click **Add OAuth Provider**, choose your provider from the list, and enter the client ID and secret you copied from your provider’s developer portal.
 
-Switch from shared keys to custom keys, and enter your client ID and client secret. Save your changes.
+![Add OAuth Provider UI](/docs/neon-auth/neon-auth-add-oauth-provider.png)
 
 </Steps>
 
