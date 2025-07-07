@@ -43,7 +43,7 @@ All branches and databases created in a Neon project are created in the region s
 ![Select region image](/docs/introduction/project_creation_regions.png)
 
 <Admonition type="note">
-After you select a region for a Neon project, it cannot be changed for that project.
+After you select a region for a Neon project, it cannot be changed for that project. To use a different region, create a new project in your desired region and [move your data to the new project](/docs/introduction/regions#move-project-data-to-a-new-region).
 </Admonition>
 
 ## NAT Gateway IP addresses
