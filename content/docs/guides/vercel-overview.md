@@ -73,7 +73,7 @@ For automated integrations, follow this simple flow:
 <a href="/docs/guides/neon-managed-vercel-integration" title="Neon-Managed Integration" 
    description="Ideal for existing Neon users. Keep your current account and billing." icon="neon">Neon-Managed Integration</a>
 <a href="/docs/guides/vercel-manual" title="Manual Connections" 
-   description="Full control for power users. Custom CI/CD and advanced workflows." icon="gear">Manual Connections</a>
+   description="Connect your Vercel project to a Neon database manually." icon="gear">Manual Connections</a>
 </DetailIconCards>
 
 <Admonition type="info">
