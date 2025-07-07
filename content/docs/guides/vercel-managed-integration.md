@@ -68,7 +68,7 @@ From the **Storage** tab, click **Open in Neon** to jump straight to your new Ne
 
 ---
 
-## Enable automated Preview Branching (recommended)
+## Enable automated preview branching (recommended)
 
 Preview Branching creates an isolated Neon branch (copy-on-write) for every Vercel Preview Deployment so database schema changes can be tested safely.
 
