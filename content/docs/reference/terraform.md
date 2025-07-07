@@ -4,7 +4,7 @@ subtitle: Use Terraform to provision and manage your Neon projects, branches, en
   roles, databases, and other resources as code.
 enableTableOfContents: true
 tag: community
-updatedOn: '2025-07-07T19:17:45.280Z'
+updatedOn: '2025-07-07T19:22:23.743Z'
 ---
 
 Terraform is an open-source infrastructure as code (IaC) tool that allows you to define and provision cloud resources in a declarative configuration language. By codifying infrastructure, Terraform enables consistent, repeatable, and automated deployments, significantly reducing manual errors.
