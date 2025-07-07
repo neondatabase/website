@@ -40,7 +40,7 @@ Most new users should start with the **Vercel-Managed Integration** for the simp
 ## Choose your integration path
 
 <Admonition type="important" title="Do you need custom CI/CD control?">
-**If you need full control over preview branching in your own CI/CD pipelines (e.g., GitHub Actions)**, use **[Manual Connections](/docs/guides/vercel-manual)** instead of the automated integrations below.
+**If you want to build preview branching into your own CI/CD pipelines (e.g., via GitHub Actions)**, use **[Manual Connections](/docs/guides/vercel-manual)** instead of the automated integrations below.
 </Admonition>
 
 For automated integrations, follow this simple flow:
