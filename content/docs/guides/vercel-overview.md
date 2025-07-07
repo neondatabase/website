@@ -26,7 +26,6 @@ Most new users should start with the **Vercel-Managed Integration** for the simp
 | **Billing**             | Paid **through Vercel**                                                                               | Paid **through Neon**                                                                                        | Paid **through Neon**                           |
 | **Setup method**        | Vercel Marketplace → Native Integrations → "Neon Postgres"                                            | Vercel Marketplace → Connectable Accounts → "Neon"                                                           | Manual env-vars                                 |
 | **Preview Branching**   | ✅                                                                                                    | ✅                                                                                                           | ✖️                                              |
-| **Setup complexity**    | Low                                                                                                   | Medium                                                                                                       | High                                            |
 | **Implementation type** | [Native Integration](https://vercel.com/docs/integrations/install-an-integration/product-integration) | [Connectable Account](https://vercel.com/docs/integrations/install-an-integration/add-a-connectable-account) | N/A                                             |
 
 ### Billing considerations
