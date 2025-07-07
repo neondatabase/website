@@ -48,7 +48,7 @@ Choose the Vercel-Managed Integration if you **do not already have a Neon accoun
 
 ### Open the project in the Neon Console
 
-From the Storage tab, click **Open in Neon** to jump straight to your new Neon project dashboard in the Neon Console. You'll notice it lives in an organisation named `Vercel: <your-vercel-team>`.
+From the **Storage** tab, click **Open in Neon** to jump straight to your new Neon project dashboard in the Neon Console. You'll notice it lives in an organisation named `Vercel: <your-vercel-team>`.
 
 ---
 
