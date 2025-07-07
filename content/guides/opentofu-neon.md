@@ -26,7 +26,6 @@ This provider is a Terraform provider compatible with OpenTofu. It is not mainta
 - **Provider upgrades**: When using `tofu init -upgrade` to update a provider, be aware that changes in the provider’s schema or defaults can lead to unintended resource replacements. This may occur when certain attributes are altered or reset.
 
   To avoid unintended resource replacements which can result in data loss:
-
   - Review the provider’s changelog for any breaking changes that might affect your resources before upgrading to a new version.
   - For CI pipelines and auto-approved pull requests, only use `tofu init`. Running `tofu init -upgrade` should be done manually followed by plan reviews.
   - Run `tofu plan` before applying any changes to detect potential differences and review the behavior of resource updates.
@@ -498,26 +497,22 @@ resource "neon_database" "service_db" {
 Here's a breakdown of the minimal HCL and why certain attributes are included:
 
 - **`neon_project.my_app_project`**:
-
   - This block defines the OpenTofu resource for your main Neon project.
   - No attributes are strictly required _in the HCL_ for the import command itself, as the project is imported using its unique Neon Project ID. Adding a `name` attribute matching the existing project can aid readability but isn't essential for the import operation.
 
 - **`neon_branch.dev_branch`**:
-
   - This defines the OpenTofu resource for your development branch.
   - It requires `project_id` in the HCL to link it to the (to-be-imported) project resource within OpenTofu.
   - The `name` attribute should also be specified in the HCL, matching the existing branch's name, as it's a key identifier.
   - The branch is imported using its unique Neon Branch ID.
 
 - **`neon_endpoint.dev_endpoint`**:
-
   - This block defines the OpenTofu resource for the endpoint on your development branch.
   - It requires both `project_id` and `branch_id` in the HCL to correctly associate it with the imported project and development branch resources within OpenTofu.
   - Other attributes like `type` (which defaults if unspecified) or autoscaling limits will be read from the live resource during import.
   - The endpoint is imported using its unique Neon Endpoint ID.
 
 - **`neon_role.app_user`**:
-
   - This defines the OpenTofu resource for an application user role.
   - The HCL requires `project_id` and `branch_id` to link to the respective imported OpenTofu resources.
   - The `name` attribute must be specified in the HCL and match the existing role's name.
@@ -787,7 +782,6 @@ After importing your resources using either method, you need to ensure that your
 
 2.  **Understanding the plan output:**
     OpenTofu will compare your HCL `resource` blocks against the detailed state just imported from Neon.
-
     - The plan will likely propose to **add many attributes** to your HCL blocks. These are the actual current values of your Neon resources.
     - You might see "update in-place" actions, for example, for `neon_endpoint` it might show `+ branch_id = "your-branch-id"`. This is normal as OpenTofu reconciles the explicit configuration (where `branch_id` might be a reference that has now resolved to a concrete ID) with the imported state.
 

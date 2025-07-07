@@ -533,26 +533,22 @@ resource "neon_database" "service_db" {
 Here's a breakdown of the minimal HCL and why certain attributes are included:
 
 - **`neon_project.my_app_project`**:
-
   - This block defines the Terraform resource for your main Neon project.
   - No attributes are strictly required _in the HCL_ for the import command itself, as the project is imported using its unique Neon Project ID. Adding a `name` attribute matching the existing project can aid readability but isn't essential for the import operation.
 
 - **`neon_branch.dev_branch`**:
-
   - This defines the Terraform resource for your development branch.
   - It requires `project_id` in the HCL to link it to the (to-be-imported) project resource within Terraform.
   - The `name` attribute should also be specified in the HCL, matching the existing branch's name, as it's a key identifier.
   - The branch is imported using its unique Neon Branch ID.
 
 - **`neon_endpoint.dev_endpoint`**:
-
   - This block defines the Terraform resource for the endpoint on your development branch.
   - It requires both `project_id` and `branch_id` in the HCL to correctly associate it with the imported project and development branch resources within Terraform.
   - Other attributes like `type` (which defaults if unspecified) or autoscaling limits will be read from the live resource during import.
   - The endpoint is imported using its unique Neon Endpoint ID.
 
 - **`neon_role.app_user`**:
-
   - This defines the Terraform resource for an application user role.
   - The HCL requires `project_id` and `branch_id` to link to the respective imported Terraform resources.
   - The `name` attribute must be specified in the HCL and match the existing role's name.
@@ -819,7 +815,6 @@ After importing your resources using either method, you need to ensure that your
 
 2.  **Understanding the plan output:**
     The plan might show:
-
     - **Attributes to be added to your HCL:** Terraform will identify attributes present in the imported state (e.g., `pg_version`, `region_id`, `default_endpoint_settings` for a project) that are not yet explicitly in your HCL `resource` blocks.
     - **"Update in-place" actions:** You might see actions like `~ update in-place` for some resources, even if no actual value in Neon is changing. For example, for `neon_endpoint`, you might see `+ branch_id = "your-branch-id"`. This is often because Terraform is now resolving a reference (like `neon_branch.dev_branch.id`) to its concrete value and wants to explicitly set this in its managed configuration. It's a reconciliation step and usually safe to apply.
 
