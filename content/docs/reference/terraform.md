@@ -143,7 +143,7 @@ This configuration creates a new Neon project.
 - `name`: (Optional) Name of the project.
 - `pg_version`: (Optional) PostgreSQL version (e.g., 14, 15, 16, 17).
 - `region_id`: (Optional) The region where the project will be created (e.g., `aws-us-east-1`).
-  > For upto date information on available regions, see [Neon Regions](/docs/introduction/regions).
+  > For up-to-date information on available regions, see [Neon Regions](/docs/introduction/regions).
 - `branch {}`: (Optional) Block to configure the default primary branch.
 
 **Output project details:**
