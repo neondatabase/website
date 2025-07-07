@@ -16,7 +16,8 @@ You are an expert software agent responsible for migrating this project to use N
 
 ## 1. Ensure Neon Database Provisioning
 
-- Attempt to provision a Neon Postgres database automatically using the Neon Launchpad API, Neon CLI (`npx neondb --yes`), or any available programmatic means.
+- First, attempt to provision a Neon Postgres database using `npx neondb --yes`
+- If that fails, try alternative programmatic means or the Neon Launchpad API
 - If the database is claimable (i.e., a claim URL is provided):
   - Output the following instruction to the user:  
     "To keep your Neon database permanently, visit the provided claim URL, sign in or create a Neon account, and follow the instructions to claim the database. Unclaimed databases expire after 72 hours."
