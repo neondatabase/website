@@ -262,13 +262,8 @@ Example response:
 ```json shouldWrap
 {
   "providers": [
-    {
-      "id": "google",
-      "type": "oauth",
-      "client_id": "...",
-      "created_at": "2024-06-01T12:00:00Z"
-    },
-    ...
+    { "id": "github", "type": "shared" },
+    { "id": "google", "type": "shared" }
   ]
 }
 ```
@@ -282,7 +277,7 @@ Adds an OAuth provider to the specified project.
 Required parameters:
 
 - `project_id` (string): The Neon project ID
-- `provider` (string): The provider ID (e.g., `google`, `github`, `microsoft`)
+- `id` (string): The provider ID (e.g., `google`, `github`, `microsoft`)
 - `client_id` (string): The OAuth client ID
 - `client_secret` (string): The OAuth client secret
 
@@ -296,7 +291,7 @@ curl --request POST \
      --header 'authorization: Bearer $NEON_API_KEY' \
      --header 'content-type: application/json' \
      --data '{
-       "provider": "google",
+       "id": "google",
        "client_id": "your-client-id",
        "client_secret": "your-client-secret",
        "scopes": ["openid", "email", "profile"]
@@ -308,7 +303,7 @@ Example response:
 ```json shouldWrap
 {
   "id": "google",
-  "type": "oauth",
+  "type": "standard",
   "client_id": "...",
   "created_at": "2024-06-01T12:00:00Z"
 }
@@ -348,9 +343,9 @@ Example response:
 ```json shouldWrap
 {
   "id": "google",
-  "type": "oauth",
+  "type": "standard",
   "client_id": "new-client-id",
-  "created_at": "2024-06-01T12:00:00Z"
+  "client_secret": "new-client-secret"
 }
 ```
 
@@ -371,12 +366,9 @@ curl --request DELETE \
      --header 'authorization: Bearer $NEON_API_KEY'
 ```
 
-Example response:
+A successful DELETE returns no response body (`204 No Content`).
 
-```json shouldWrap
-{
-  "message": "Deleted the OAuth provider from the project"
-}
-```
+You can use the GET endpoint to confirm the provider has been removed.
 
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/deleteneonauthoauthprovider)
+
