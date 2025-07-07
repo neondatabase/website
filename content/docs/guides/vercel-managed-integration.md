@@ -70,7 +70,7 @@ From the **Storage** tab, click **Open in Neon** to jump straight to your new Ne
 
 ## Enable automated preview branching (recommended)
 
-Preview Branching creates an isolated Neon branch (copy-on-write) for every Vercel Preview Deployment so database schema changes can be tested safely.
+Preview branching creates an isolated Neon branch (copy-on-write) for every Vercel Preview Deployment so database schema changes can be tested safely.
 
 To enable:
 
@@ -101,7 +101,7 @@ To verify preview branching works:
 
 ## Managing & billing
 
-Because the database is owned by Vercel you must do these actions **in the Vercel dashboard**:
+Because your database is managed by Vercel, you can only perform these action **in the Vercel dashboard**:
 
 - Change plan, billing tier, or scale settings (compute size, autoscaling, scale-to-zero)
 - View or modify database configuration via **Storage → Settings → Change Configuration**
@@ -124,10 +124,6 @@ Everything else (querying data, branching, monitoring usage) works exactly the s
 2. Select region, scale settings, and plan
 3. Specify a **Database Name** and click **Create**
 
-<Admonition type="warning" title="Plan changes affect all databases">
-Each new "Database" is a new Neon project. If you select a different plan during creation, it changes your Neon plan for **all** databases in this integration.
-</Admonition>
-
 ### Change compute / scale settings
 
 **Storage → Settings → Change Configuration** lets you resize compute, adjust scale-to-zero, or switch Neon plan tiers. Changes apply to _all_ databases in the installation.
@@ -138,7 +134,12 @@ Changing your plan affects **all databases** in this integration, not just the c
 
 ### Delete the database
 
-Deleting from Vercel also deletes the Neon project and data. This cannot be undone.
+Deleting from Vercel permanently removes the Neon project and all data. This cannot be undone.
+To delete:
+
+1. Vercel Dashboard → Storage → Settings
+2. Select your database
+3. Find Delete Database section and confirm
 
 ### Disconnect a project from database
 
@@ -148,6 +149,18 @@ To disconnect a Vercel project without deleting the database:
 2. Select your project and choose **Remove Project Connection**
 
 This removes database environment variables from your Vercel project but keeps the database intact. Previously created preview branches remain but new ones won't be created.
+
+### Manage branches created by the integration
+
+Preview deployments create database branches that accumulate over time. Delete unused branches to avoid hitting storage limits and branch quotas. Delete branches via:
+
+- [Neon Console](/docs/manage/branches#delete-a-branch) - Individual or bulk deletion
+- [Neon CLI](/docs/reference/cli-branches#delete) - Command line management
+- [Neon API](/docs/manage/branches#delete-a-branch-with-the-api) - Programmatic cleanup
+
+<Admonition type="note" title="Unused branches are archived">
+Branches you don't delete are eventually archived, consuming archive storage space. See [Branch archiving](/docs/guides/branch-archiving).
+</Admonition>
 
 ---
 
@@ -161,14 +174,15 @@ This removes database environment variables from your Vercel project but keeps t
 | Legacy `POSTGRES_*` vars                                          | Provided for backwards compatibility with Vercel Postgres templates |
 | `NEXT_PUBLIC_STACK_PROJECT_ID`, `STACK_SECRET_SERVER_KEY`, etc.   | **Neon Auth variables** for drop-in authentication                  |
 
-**Neon Auth variables** automatically sync user profiles to your database in the `neon_auth.users_sync` table, enabling authentication without additional setup. Learn more in the [Neon Auth guide](/docs/guides/neon-auth).
+> **Neon Auth variables** automatically sync user profiles to your database in the `neon_auth.users_sync` table, enabling authentication without additional setup. Learn more in the [Neon Auth guide](/docs/guides/neon-auth).
 
 ---
 
 ## Limitations
 
-- You cannot mix this integration with the **Neon-Managed Integration** in the same Vercel project
+- You cannot use this integration with the **Neon-Managed integration** in the same Vercel project
 - **Neon CLI access**: Requires API key authentication (the `neon auth` command won't work since the account is Vercel-managed)
-- Cannot install if you currently have Vercel Postgres - contact Vercel about transitioning
+- Cannot install if you currently use Vercel Postgres (deprecated) - contact Vercel about transitioning
+- Manual branch deletion required (unlike the **Neon-Managed Integration** which offers automatic cleanup)
 
 <NeedHelp/>

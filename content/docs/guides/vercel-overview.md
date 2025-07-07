@@ -11,10 +11,10 @@ updatedOn: '2025-07-02T00:00:00.000Z'
 
 This page helps you quickly choose the best Neon–Vercel integration for your project. Whether you're starting fresh or have existing infrastructure, we'll guide you to the right solution.
 
-<Admonition type="tip" title="Quick Start">
-Most new users should start with the **Vercel-Managed Integration** for the simplest setup and unified billing. Existing Neon users can seamlessly connect with the **Neon-Managed Integration**.
+<Admonition type="tip" title="Quick decision guide">
+Choose the **Vercel-Managed Integration** if you're new to Neon and want unified billing through Vercel.
+Choose the **Neon-Managed Integration** if you already have a Neon account or prefer to manage billing directly with Neon.
 </Admonition>
-
 ---
 
 ## Compare the options at a glance
@@ -26,20 +26,15 @@ Most new users should start with the **Vercel-Managed Integration** for the simp
 | **Billing**             | Paid **through Vercel**                                                                               | Paid **through Neon**                                                                                        | Paid **through Neon**                           |
 | **Setup method**        | Vercel Marketplace → Native Integrations → "Neon Postgres"                                            | Vercel Marketplace → Connectable Accounts → "Neon"                                                           | Manual env-vars                                 |
 | **Preview Branching**   | ✅                                                                                                    | ✅                                                                                                           | ✖️                                              |
+| **Branch cleanup**      | Manual deletion required                                                                               | Automatic deletion available                                                                                  | N/A                                             |
 | **Implementation type** | [Native Integration](https://vercel.com/docs/integrations/install-an-integration/product-integration) | [Connectable Account](https://vercel.com/docs/integrations/install-an-integration/add-a-connectable-account) | N/A                                             |
-
-### Billing considerations
-
-- **Vercel-Managed**: Consolidated billing through Vercel.
-- **Neon-Managed**: Direct access to all Neon plans and pricing, including free tier benefits.
-- **Manual**: Full control but requires more setup and maintenance overhead.
 
 ---
 
 ## Choose your integration path
 
 <Admonition type="important" title="Do you need custom CI/CD control?">
-**If you want to build preview branching into your own CI/CD pipelines (e.g., via GitHub Actions)**, use **[Manual Connections](/docs/guides/vercel-manual)** instead of the automated integrations below.
+**If you want to build preview branching into your own CI/CD pipelines (e.g., via GitHub Actions)**, use a **[manual connection](/docs/guides/vercel-manual)** instead of the automated integrations below.
 </Admonition>
 
 For automated integrations, follow this simple flow:
@@ -70,14 +65,10 @@ For automated integrations, follow this simple flow:
 <a href="/docs/guides/vercel-managed-integration" title="Vercel-Managed Integration" 
    description="Create and manage Neon databases directly from your Vercel dashboard. Supports preview branches." icon="vercel">Vercel-Managed Integration</a>
 <a href="/docs/guides/neon-managed-vercel-integration" title="Neon-Managed Integration" 
-   description="Ideal for existing Neon users. Keep your current account and billing." icon="neon">Neon-Managed Integration</a>
-<a href="/docs/guides/vercel-manual" title="Manual Connections" 
-   description="Connect your Vercel project to a Neon database manually." icon="gear">Manual Connections</a>
+   description="Link an existing Neon project to Vercel and keep billing in Neon. Supports preview branches." icon="neon">Neon-Managed Integration</a>
+<a href="/docs/guides/vercel-manual" title="Manual Connection" 
+   description="Connect your Vercel project to a Neon database manually." icon="gear">Manual Connection</a>
 </DetailIconCards>
-
-<Admonition type="info">
-All three options support preview branching, the main differences are in setup complexity and billing management.
-</Admonition>
 
 ---
 

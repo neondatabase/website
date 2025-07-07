@@ -25,7 +25,7 @@ updatedOn: '2025-07-02T00:00:00.000Z'
 
 ## About this integration
 
-The **Neon-Managed Integration** links your existing Neon project to a Vercel project while keeping billing in Neon. Instead of sharing a single database across all preview deployments (which can break when schema changes), this creates an isolated database branch for each preview deployment.
+The **Neon-Managed Integration** links your existing Neon project to a Vercel project while keeping billing in Neon. Instead of sharing a single database across all preview deployments, this integration creates an isolated database branch for each preview deployment.
 
 **Key features:**
 
