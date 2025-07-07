@@ -371,4 +371,3 @@ A successful DELETE returns no response body (`204 No Content`).
 You can use the GET endpoint to confirm the provider has been removed.
 
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/deleteneonauthoauthprovider)
-
