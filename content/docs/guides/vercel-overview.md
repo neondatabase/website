@@ -31,7 +31,7 @@ Most new users should start with the **Vercel-Managed Integration** for the simp
 
 ### Billing considerations
 
-- **Vercel-Managed**: Consolidated billing through Vercel, but you'll be on Vercel's Neon pricing tier.
+- **Vercel-Managed**: Consolidated billing through Vercel.
 - **Neon-Managed**: Direct access to all Neon plans and pricing, including free tier benefits.
 - **Manual**: Full control but requires more setup and maintenance overhead.
 
