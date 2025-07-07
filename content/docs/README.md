@@ -674,6 +674,38 @@ You can pass props to the shared component:
 </Admonition>
 ```
 
+## CopyPrompt
+
+A reusable MDX component that shows a "copy prompt" box and lets users copy curated llm prompts from a file with one click.
+
+**Usage:**
+```mdx
+<CopyPrompt 
+  src="/prompts/serverless-driver-prompt.md" 
+  displayText="Use this pre-built prompt to get started faster." 
+  buttonText="Copy prompt" 
+/>
+```
+`src` prop is mandatory. `displayText` and `buttonText` are optional, if you want to override the defaults.
+
+| Prop         | Type    | Default                                         | Description                                      |
+|--------------|---------|-------------------------------------------------|--------------------------------------------------|
+| `src`        | string  | (required)                                      | Path to the markdown file or prompt content to copy |
+| `displayText`| string  | "Use this pre-built prompt to get started faster." | CTA text shown on the left                       |
+| `buttonText` | string  | "Copy prompt"                                   | Button label                                      |
+
+
+### Where to place prompt files
+
+Prompt markdown files should be placed in the `public/prompts/` directory of your project. This allows them to be fetched at runtime by the `CopyPrompt` component using a path like `/prompts/your-prompt-file.md`.
+
+**Example:**
+- Place your prompt file at:  `public/prompts/serverless-driver-guardrail-prompt.md`
+- Reference it in your MDX:
+  ```mdx
+  <CopyPrompt src="/prompts/serverless-driver-guardrail-prompt.md" />
+  ```
+
 ## Contributing
 
 For small changes and spelling fixes, we recommend using the GitHub UI because Markdown files are relatively easy to edit.
