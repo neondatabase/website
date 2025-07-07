@@ -1,10 +1,10 @@
 # The pg_partman extension
 
-> This guide explains how to use the pg_partman extension to manage large Postgres tables by automating partition creation and maintenance, covering installation, configuration, and practical examples for time-series data.
+> The document details the installation and usage of the pg_partman extension on Neon, enabling users to manage time-based and serial-based table partitioning within their databases.
 
 ## Source
 
-- [The pg_partman extension HTML](https://neon.tech/docs/extensions/pg_partman): The original HTML version of this documentation
+- [The pg_partman extension HTML](https://neon.com/docs/extensions/pg_partman): The original HTML version of this documentation
 
 `pg_partman` is a Postgres extension that simplifies the management of partitioned tables. Partitioning refers to splitting a single table into smaller pieces called `partitions`. This is done based on the values in a key column or set of columns. Even though partitions are stored as separate physical tables, the partitioned table can still be queried as a single logical table. This can significantly enhance query performance and also help you manage the data lifecycle of tables that grow very large.
 
@@ -15,13 +15,9 @@ While Postgres natively supports partitioning a table, `pg_partman` helps set up
 
 
 
-In this guide, we’ll learn how to set up and use the `pg_partman` extension with your Neon Postgres project. We'll cover why partitioning is helpful, how to enable `pg_partman`, creating partitioned tables, and automating partition maintenance.
+In this guide, we'll learn how to set up and use the `pg_partman` extension with your Neon Postgres project. We'll cover why partitioning is helpful, how to enable `pg_partman`, creating partitioned tables, and automating partition maintenance.
 
-
-<Admonition type="note">
-`pg_partman` is an open-source Postgres extension that can be installed in any Neon project using the instructions below. Detailed installation instructions and compatibility information can be found in the [pg_partman](https://github.com/pgpartman/pg_partman) documentation.
-</Admonition>
-
+   **Note**: `pg_partman` is an open-source Postgres extension that can be installed in any Neon project using the instructions below. Detailed installation instructions and compatibility information can be found in the [pg_partman](https://github.com/pgpartman/pg_partman) documentation.
 
 ## Enable the `pg_partman` extension
 
@@ -38,31 +34,29 @@ Here is a sample SQL script to create a dedicated role with the minimum required
 
 ```sql
 CREATE ROLE partman_user WITH LOGIN;
-ALTER ROLE partman_user WITH PASSWORD '<password>';
+ALTER ROLE partman_user WITH PASSWORD '{PASSWORD_FOR_PARTMAN_USER}';
 
 GRANT ALL ON SCHEMA partman TO partman_user;
 GRANT ALL ON ALL TABLES IN SCHEMA partman TO partman_user;
 GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA partman TO partman_user;
 GRANT EXECUTE ON ALL PROCEDURES IN SCHEMA partman TO partman_user;
-GRANT ALL ON SCHEMA '<schema_name>' TO partman_user;
-GRANT TEMPORARY ON DATABASE '<database_name>' to partman_user; -- allow creation of temp tables to move data out of default
+GRANT ALL ON SCHEMA '{WORKING_SCHEMA_NAME}' TO partman_user;
+GRANT TEMPORARY ON DATABASE '{WORKING_DATABASE_NAME}' to partman_user; -- allow creation of temp tables to move data out of default
 ```
 
 If the role needs to create schemas, you'll have to grant `CREATE` on the database as well. This is only required if you give the role above the `CREATE` privilege on pre-existing schemas that will contain partition sets.
 
 ```sql
-GRANT CREATE ON DATABASE '<database_name>' TO partman_user;
+GRANT CREATE ON DATABASE '{WORKING_DATABASE_NAME}' TO partman_user;
 ```
 
-When you create a new `Neon` project, the default database name is `neondb` and the default schema name is `public`. Replace `<database_name>` and `<schema_name>` with the actual database and schema names you want to manage the partitioned tables in. To find out more about the privileges needed to run `pg_partman`, refer to the [pg_partman documentation](https://github.com/pgpartman/pg_partman).
+When you create a new `Neon` project, the default database name is `neondb` and the default schema name is `public`. Replace `{WORKING_DATABASE_NAME}` and `{WORKING_SCHEMA_NAME}` with the actual database and schema names you want to manage the partitioned tables in. To find out more about the privileges needed to run `pg_partman`, refer to the [pg_partman documentation](https://github.com/pgpartman/pg_partman).
 
-For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](https://neon.tech/docs/connect/query-with-psql-editor).
+For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](https://neon.com/docs/connect/query-with-psql-editor).
 
-<Admonition type="note">
 **Version Compatibility:**
 
 `pg_partman` works with Postgres 14 and above, complementing the native partitioning features introduced in these versions.
-</Admonition>
 
 ## Why partition your data?
 

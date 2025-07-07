@@ -1,10 +1,12 @@
 # Authenticate Neon Postgres application users with Auth.js
 
-Learn how to add passwordless authentication to your Neon Postgres database
+> The document explains how to authenticate Neon Postgres application users using Auth.js, detailing the integration process and configuration steps specific to Neon's environment.
 
+## Source
 
-We recently introduced an Auth.js adapter for Neon, making it easier to store user and session data in Neon. For installation and setup instructions, see [Neon Adapter](https://authjs.dev/getting-started/adapters/neon).
+- [Authenticate Neon Postgres application users with Auth.js HTML](https://neon.com/docs/guides/auth-authjs): The original HTML version of this documentation
 
+**Tip** Did you know?: We recently introduced an Auth.js adapter for Neon, making it easier to store user and session data in Neon. For installation and setup instructions, see [Neon Adapter](https://authjs.dev/getting-started/adapters/neon).
 
 [Auth.js](https://authjs.dev/) (formerly NextAuth.js) is a popular authentication solution that supports a wide range of authentication methods, including social logins (e.g., Google, Facebook), traditional email/password, and passwordless options like magic links. For simple authentication flows, such as social logins, Auth.js can operate using only in-memory session storage (in a browser cookie). However, if you want to implement custom login flows, or persist the signed-in users' information in your database, you need to specify a database backend.
 
@@ -30,7 +32,7 @@ To follow along with this guide, you will need:
 
 Run the following command in your terminal to create a new Next.js project:
 
-```bash shouldWrap
+```bash
 npx create-next-app guide-neon-next-authjs --typescript --eslint --tailwind --use-npm --no-src-dir --app --import-alias "@/*"
 ```
 
@@ -62,7 +64,7 @@ touch .env
 
 You can find your database connection string by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
 
-```bash shouldWrap
+```bash
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
@@ -108,7 +110,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth(() => {
   const pool = new Pool({ connectionString: process.env.DATABASE_URL });
   return {
     adapter: PostgresAdapter(pool),
-    providers: [Resend({ from: 'Test ' })],
+    providers: [Resend({ from: 'Test <onboarding@resend.dev>' })],
   };
 });
 ```
@@ -205,7 +207,7 @@ CREATE TABLE IF NOT EXISTS todos (
 
 This schema defines all the tables required for the `Auth.js` library to work, and also the `todos` table that we'll use to store the todo list for each user.
 
-To apply this schema to your Neon database, you can use the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) in the web console or a database management tool like [psql](/docs/connect/query-with-psql-editor).
+To apply this schema to your Neon database, you can use the [Neon SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor) in the web console or a database management tool like [psql](https://neon.com/docs/connect/query-with-psql-editor).
 
 ### Implement the Todo list feature
 
@@ -223,7 +225,7 @@ type Todo = {
 };
 
 export default function TodoList({ initialTodos }: { initialTodos: Todo[] }) {
-  const [todos, setTodos] = useState(initialTodos);
+  const [todos, setTodos] = useState<Todo[]>(initialTodos);
   const [newTodo, setNewTodo] = useState('');
 
   const addTodo = async (e: React.FormEvent) => {
@@ -253,8 +255,8 @@ export default function TodoList({ initialTodos }: { initialTodos: Todo[] }) {
   };
 
   return (
-    
-      
+    <div className="w-full max-w-md">
+      <form onSubmit={addTodo} className="mb-4">
         <input
           type="text"
           value={newTodo}
@@ -262,23 +264,23 @@ export default function TodoList({ initialTodos }: { initialTodos: Todo[] }) {
           placeholder="Add a new todo"
           className="mb-2 w-full rounded border p-2"
         />
-        
+        <button type="submit" className="w-full rounded border p-2">
           Add
-        
-      
-      
+        </button>
+      </form>
+      <ul className="space-y-2">
         {todos.map((todo) => (
           <li
             key={todo.id}
             onClick={() => toggleTodo(todo.id)}
             className="flex cursor-pointer items-center space-x-2"
           >
-            
-            {todo.content}
-          
+            <input type="checkbox" checked={todo.completed} readOnly className="cursor-pointer" />
+            <span className={todo.completed ? 'line-through' : ''}>{todo.content}</span>
+          </li>
         ))}
-      
-    
+      </ul>
+    </div>
   );
 }
 ```
@@ -309,27 +311,27 @@ export default async function Home() {
   const session = await auth();
 
   return (
-    
-      
+    <div className="flex min-h-screen flex-col items-center justify-center p-4">
+      <div className="w-full max-w-md text-center">
         {!session ? (
-          
-            Welcome to the Todo App
-            Please sign in to access your todos.
-            
+          <>
+            <h1 className="mb-4 text-2xl">Welcome to the Todo App</h1>
+            <p className="mb-4">Please sign in to access your todos.</p>
+            <a href="/api/auth/signin" className="inline-block rounded border p-2">
               Sign In
-            
-          
+            </a>
+          </>
         ) : (
-          
-            Welcome, {session.user?.name || session.user?.email}
-            
-            
+          <>
+            <h1 className="mb-4 text-2xl">Welcome, {session.user?.name || session.user?.email}</h1>
+            <TodoList initialTodos={await getTodos(session.user?.id as string)} />
+            <a href="/api/auth/signout" className="mt-4 inline-block rounded border p-2">
               Sign Out
-            
-          
+            </a>
+          </>
         )}
-      
-    
+      </div>
+    </div>
   );
 }
 ```
@@ -426,15 +428,13 @@ To view and manage the users who authenticated with your application, you can qu
 
 You can find the source code for the application described in this guide on GitHub.
 
-
-Authentication flow with Auth.js
-
+- [Authentication flow with Auth.js](https://github.com/neondatabase/examples/tree/main/auth/with-authjs-next): Authenticate users of your Neon application with Auth.js
 
 ## Resources
 
 For more information about the tools and libraries used in this guide, refer to the following documentation:
 
-- [Neon Documentation](https://neon.tech/docs)
+- [Neon Documentation](https://neon.com/docs)
 - [Auth.js Documentation](https://authjs.dev/)
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Resend Documentation](https://resend.com/docs)

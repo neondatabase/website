@@ -2,7 +2,7 @@
 title: Create and manage Read Replicas
 subtitle: Learn how to create and manage read replicas in Neon
 enableTableOfContents: true
-updatedOn: '2025-05-11T11:23:50.620Z'
+updatedOn: '2025-06-30T11:30:21.914Z'
 ---
 
 [Read replicas](/docs/introduction/read-replicas) are supported with all Neon plans. The Free Plan is limited to a maximum of 3 read replica computes per project. This guide steps you through the process of creating and managing read replicas.
@@ -91,7 +91,7 @@ Connecting to a read replica is the same as connecting to any branch, except you
    A **psql** connection string appears similar to the following:
 
    ```bash
-   postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
+   postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
    ```
 
    If you expect a high number of connections, enable the **Connection pooling** toggle to add the `-pooler` flag to the connection string or example.
@@ -237,11 +237,10 @@ No users action is required. The settings are synchronized automatically when yo
 If your read replicas are falling behind, follow these steps to diagnose and resolve the issue:
 
 1. **Check your replication lag metrics**  
-   Refer to [Monitoring Read Replicas](https://neon.tech/docs/guides/read-replica) for detailed instructions on how to monitor replication lag.
+   Refer to [Monitoring Read Replicas](/docs/guides/read-replica-guide#monitoring-read-replicas) for instructions on how to monitor replication lag.
 
 2. **Verify configuration alignment**  
    If replication lag is detected, ensure that the configurations for the primary and read-replica computes are aligned. Specifically, confirm that the following parameters match between your primary compute and read-replica compute:
-
    - `max_connections`
    - `max_prepared_transactions`
    - `max_locks_per_transaction`
@@ -249,7 +248,7 @@ If your read replicas are falling behind, follow these steps to diagnose and res
    - `max_worker_processes`
 
 3. **Restart read-replica computes if configurations are misaligned**  
-   If the configurations are not aligned, restart your read-replica computes to automatically update their settings. For instructions, see [Restart a Compute](https://neon.tech/docs/manage/endpoints#restart-a-compute).
+   If the configurations are not aligned, restart your read-replica computes to automatically update their settings. For instructions, see [Restart a Compute](/docs/manage/endpoints#restart-a-compute).
 
    <Admonition type="tip">
    When increasing the size of your primary read-write compute, always restart associated read replicas to ensure their configurations remain aligned.

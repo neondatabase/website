@@ -30,7 +30,6 @@ Zero requires a Postgres database (version 15+) with logical replication enabled
 
 1.  **Create a Neon Project:** If you haven't already, create a new Neon project using [pg.new](https://pg.new).
 2.  **Enable Logical Replication:** Zero uses Postgres logical replication (`wal_level = logical`) to receive changes from your database.
-
     - Navigate to your Neon Project using the [Neon Console](https://console.neon.tech/).
     - Open the **Settings** menu.
     - Click on **Logical Replication**.
@@ -127,11 +126,9 @@ You should now have the `hello-zero` application running in your browser. It con
 Congratulations! You have successfully set up Rocicorp Zero with Neon Postgres using the `hello-zero` example application. Check out [Canvas](https://github.com/neondatabase-labs/canvas), a collaborative drawing app built with Zero and Neon, for a more complex example of Zero in action.
 
 <Admonition type="note" title="Schema Changes">
-Zero uses Postgres event triggers for efficient schema migration handling. However, Neon currently does not support event triggers for tracking DDL (schema) changes due to limitations around superuser privileges.
+Zero uses Postgres event triggers for efficient schema migration handling. While Neon now supports event triggers, Zero may still perform a **full reset of the `zero-cache` and all connected client states** whenever schema changes are detected to ensure correctness.
 
-Without event triggers, Zero ensures correctness by performing a **full reset of the `zero-cache` and all connected client states** whenever _any_ schema change is detected.
-
-While this reset mechanism works, it can be inefficient for larger databases (e.g., > 1GB) or applications undergoing frequent schema evolution. For smaller databases or projects with stable schemas, the impact might be acceptable. Please consider this limitation when managing schema changes for your Zero application on Neon, especially for larger projects.
+This reset mechanism can be inefficient for larger databases (e.g., > 1GB) or applications undergoing frequent schema evolution. For smaller databases or projects with stable schemas, the impact is typically acceptable. Consider this behavior when managing schema changes for your Zero application, especially for larger projects.
 </Admonition>
 
 ## Resources

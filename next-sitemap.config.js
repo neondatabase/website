@@ -1,5 +1,5 @@
 module.exports = {
-  siteUrl: process.env.NEXT_PUBLIC_DEFAULT_SITE_URL || 'https://neon.tech',
+  siteUrl: process.env.NEXT_PUBLIC_DEFAULT_SITE_URL || 'https://neon.com',
   exclude: [
     '/blog/wp-draft-post-preview-page',
     '/blog/rss.xml',

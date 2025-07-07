@@ -2,7 +2,7 @@
 title: Liquibase developer workflow with Neon
 subtitle: Implement a developer workflow with Liquibase and Neon branching
 enableTableOfContents: true
-updatedOn: '2025-04-17T16:06:46.405Z'
+updatedOn: '2025-07-03T12:36:49.561Z'
 ---
 
 Liquibase is an open-source database-independent library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
@@ -15,7 +15,7 @@ The instructions in this guide are based on the workflow described in the [Liqui
 
 - A Neon account. See [Sign up](/docs/get-started-with-neon/signing-up).
 - A Neon project. See [Create your first project](/docs/get-started-with-neon/setting-up-a-project).
-- Liquibase requires Java. For Liquibase Java requirements, see [Requirements](https://docs.liquibase.com/start/install/liquibase-requirements.html). To check if you have Java installed, run `java --version`, or `java -version` on macOS`.
+- Liquibase requires Java. For Liquibase Java requirements, see [Requirements](https://docs.liquibase.com/start/install/liquibase-requirements.html). To check if you have Java installed, run `java --version`, or `java -version` on macOS.
 - An installation of Liquibase. For instructions, refer to [Get started with Liquibase and Neon](/docs/guides/liquibase).
 
 ## Initialize a new Liquibase project
@@ -81,13 +81,13 @@ The target database is the database on your `feature/blog-schema` branch where y
 1. Select the `feature/blog-schema` branch, the `blog` database, and copy the connection string.
 
    ```bash shouldWrap
-   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog?sslmode=require&channel_binding=require
    ```
 
 2. Select the `production` branch, the `blog` database, and copy the connection string.
 
    ```bash shouldWrap
-   postgresql://alex:AbC123dEf@ep-silent-hill-85675036.us-east-2.aws.neon.tech/blog
+   postgresql://alex:AbC123dEf@ep-silent-hill-85675036.us-east-2.aws.neon.tech/blog?sslmode=require&channel_binding=require
    ```
 
 Be careful not to mix up your connection strings. You'll see that the hostname (the part starting with `ep-` and ending in `neon.tech`) differs. This is because the `feature/blog-schema` branch is a separate instance of Postgres, hosted on its own compute.

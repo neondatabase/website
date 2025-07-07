@@ -27,7 +27,7 @@ For example, when a user asks questions about their invoice, the AI can query Ne
 
 We’ll build an AI agent that connects to your Postgres database and uses a simple Python function to fetch and analyze the data.
 
-We’ll use [**Neon Serverless Postgres**](https://neon.tech/) as our database. It’s a fully managed, cloud-native Postgres that’s free to start, scales automatically, and works great for [AI agents](https://neon.tech/use-cases/ai-agents) that need to query data on demand without managing infrastructure.
+We’ll use [**Neon Serverless Postgres**](/) as our database. It’s a fully managed, cloud-native Postgres that’s free to start, scales automatically, and works great for [AI agents](/use-cases/ai-agents) that need to query data on demand without managing infrastructure.
 
 ### Prerequisites
 
@@ -49,7 +49,7 @@ Open the [new Neon Resource page](https://portal.azure.com/#view/Azure_Marketpl
 6. Once the project is created successfully, copy the Neon connection string and note it down. You can find the connection details in the Connection Details widget on the Neon Dashboard.
 
 ```bash
-    postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
+    postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
 ```
 
 ## Create an AI Foundry Project on Azure
@@ -410,12 +410,12 @@ This approach is beginner-friendly, lightweight, and practical for real-world us
 Want to go further? You can:
 
 - Add more tools to the agent
-- Integrate with [vector search](https://neon.tech/docs/extensions/pgvector) (e.g., detect anomaly reasons from logs using embeddings)
+- Integrate with [vector search](/docs/extensions/pgvector) (e.g., detect anomaly reasons from logs using embeddings)
 
 ## Resources
 
-- [Neon on Azure](https://neon.tech/docs/manage/azure)
-- [Build AI Agents with Azure AI Agent Service and Neon](https://neon.tech/blog/build-ai-agents-with-azure-ai-agent-service-and-neon)
-- [Multi-Agent AI Solution with Neon, Langchain, AutoGen and Azure OpenAI](https://neon.tech/blog/multi-agent-ai-solution-with-neon-langchain-autogen-and-azure-openai)
+- [Neon on Azure](/docs/manage/azure)
+- [Build AI Agents with Azure AI Agent Service and Neon](/blog/build-ai-agents-with-azure-ai-agent-service-and-neon)
+- [Multi-Agent AI Solution with Neon, Langchain, AutoGen and Azure OpenAI](/blogolution-with-neon-langchain-autogen-and-azure-openai)
 
 <NeedHelp />

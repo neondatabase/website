@@ -2,7 +2,7 @@
 title: Get started with Liquibase and Neon
 subtitle: Learn how to manage schema changes in Neon with Liquibase
 enableTableOfContents: true
-updatedOn: '2025-04-17T08:30:45.945Z'
+updatedOn: '2025-07-03T12:36:49.562Z'
 ---
 
 Liquibase is an open-source library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
@@ -13,7 +13,7 @@ This guide steps you through installing the Liquibase CLI, configuring Liquibase
 
 - A Neon account. See [Sign up](/docs/get-started-with-neon/signing-up).
 - A Neon project. See [Create your first project](/docs/get-started-with-neon/setting-up-a-project).
-- Liquibase requires Java. For Liquibase Java requirements, see [Requirements](https://docs.liquibase.com/start/install/liquibase-requirements.html). To check if you have Java installed, run `java --version`, or `java -version` on macOS`.
+- Liquibase requires Java. For Liquibase Java requirements, see [Requirements](https://docs.liquibase.com/start/install/liquibase-requirements.html). To check if you have Java installed, run `java --version`, or `java -version` on macOS.
 
 ## Download and extract Liquibase
 
@@ -129,7 +129,7 @@ jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog?user=alex
 
    ```bash shouldWrap
    changeLogFile:dbchangelog.xml
-   url: jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog?user=alex&password=AbC123dEf&sslmode=require
+   url: jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog?user=alex&password=AbC123dEf&sslmode=require&channel_binding=require
    ```
 
 ## Take a snapshot of your database

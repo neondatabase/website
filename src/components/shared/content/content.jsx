@@ -39,9 +39,11 @@ import CtaBlock from 'components/shared/cta-block';
 import DeployPostgresButton from 'components/shared/deploy-postgres-button';
 import DocCta from 'components/shared/doc-cta';
 import ExternalCode from 'components/shared/external-code';
+import GradientBorder from 'components/shared/gradient-border';
 import ImageZoom from 'components/shared/image-zoom';
 import InkeepEmbedded from 'components/shared/inkeep-embedded';
 import LatencyCalculator from 'components/shared/latency-calculator';
+import MegaLink from 'components/shared/mega-link';
 import RequestForm from 'components/shared/request-form';
 import getCodeProps from 'lib/rehype-code-props';
 
@@ -59,7 +61,7 @@ const getHeadingComponent = (heading, withoutAnchorHeading) => {
   return AnchorHeading(heading);
 };
 
-const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCase) => ({
+const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTemplate) => ({
   h2: getHeadingComponent('h2', withoutAnchorHeading),
   h3: getHeadingComponent('h3', withoutAnchorHeading),
   h4: getHeadingComponent('h4', withoutAnchorHeading),
@@ -80,7 +82,11 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
       return (
         <ImageZoom src={src}>
           <Image
-            className={clsx(className, { 'no-border': title === 'no-border' })}
+            className={clsx(
+              className,
+              { 'no-border': title === 'no-border' },
+              isTemplate && 'rounded-lg'
+            )}
             src={src}
             width={isReleaseNote ? 762 : 796}
             height={isReleaseNote ? 428 : 447}
@@ -88,6 +94,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
             title={title !== 'no-border' ? title : undefined}
             {...rest}
           />
+          {isTemplate && <GradientBorder className="rounded-lg" withBlend />}
         </ImageZoom>
       );
     }
@@ -138,7 +145,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   DocsList,
   RequestForm,
   LatencyCalculator,
-  CTA: isUseCase ? CtaBlock : DocCta,
+  CTA: isTemplate ? CtaBlock : DocCta,
   Testimonial,
   TestimonialsWrapper,
   UseCaseList,
@@ -153,6 +160,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   CheckList,
   CheckItem,
   ExternalCode: (props) => <ExternalCode {...props} />,
+  MegaLink,
   ...sharedComponents,
 });
 
@@ -164,15 +172,15 @@ const Content = ({
   withoutAnchorHeading = false,
   isReleaseNote = false,
   isPostgres = false,
-  isUseCase = false,
+  isTemplate = false,
 }) => (
   <div
     className={clsx(
       'prose-doc post-content prose dark:prose-invert xs:prose-code:break-words',
       className,
       {
-        'dark:prose-p:text-gray-new-70 dark:prose-strong:text-white dark:prose-li:text-gray-new-70 dark:prose-table:text-gray-new-70':
-          isUseCase,
+        'prose-template dark:prose-p:text-gray-new-70 dark:prose-strong:text-white dark:prose-li:text-gray-new-70 dark:prose-table:text-gray-new-70':
+          isTemplate,
       }
     )}
   >
@@ -180,7 +188,7 @@ const Content = ({
       <div dangerouslySetInnerHTML={{ __html: content }} />
     ) : (
       <MDXRemote
-        components={getComponents(withoutAnchorHeading, isReleaseNote, isPostgres, isUseCase)}
+        components={getComponents(withoutAnchorHeading, isReleaseNote, isPostgres, isTemplate)}
         source={content}
         options={{
           mdxOptions: {
@@ -202,6 +210,7 @@ Content.propTypes = {
   withoutAnchorHeading: PropTypes.bool,
   isReleaseNote: PropTypes.bool,
   isPostgres: PropTypes.bool,
+  isTemplate: PropTypes.bool,
 };
 
 export default Content;

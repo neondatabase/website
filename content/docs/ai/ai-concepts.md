@@ -2,7 +2,7 @@
 title: AI Concepts
 subtitle: Learn how embeddings are used to build AI applications
 enableTableOfContents: true
-updatedOn: '2025-04-10T08:53:43.993Z'
+updatedOn: '2025-06-23T15:24:08.750Z'
 ---
 
 Embeddings are an essential component in building AI applications. This topic describes embeddings and how they are used, generated, and stored in Postgres.
@@ -22,7 +22,6 @@ Take the following three sentences, for example:
 You can determine the most similar sentences by following these steps:
 
 1. Generate embeddings for each sentence. For illustrative purposes, assume these values represent actual embeddings:
-
    - Embedding for sentence 1 → [0.5, 0.3, 0.1]
    - Embedding for sentence 2 → [0.6, 0.29, 0.12]
    - Embedding for sentence 3 → [0.1, -0.2, 0.4]

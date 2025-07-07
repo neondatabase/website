@@ -1,10 +1,10 @@
 # Neon MCP Server
 
-> This guide explains how to use the Neon MCP Server to interact with Neon Postgres databases using natural language commands, covering setup options, supported actions, and usage examples for managing database resources through the Model Context Protocol.
+> The Neon MCP Server documentation outlines the setup and configuration of the Neon MCP Server, which facilitates communication and management of Neon database instances within a multi-cloud environment.
 
 ## Source
 
-- [Neon MCP Server HTML](https://neon.tech/docs/ai/neon-mcp-server): The original HTML version of this documentation
+- [Neon MCP Server HTML](https://neon.com/docs/ai/neon-mcp-server): The original HTML version of this documentation
 
 The **Neon MCP Server** is an open-source tool that lets you interact with your Neon Postgres databases in **natural language**.
 
@@ -36,8 +36,7 @@ Traditionally, connecting AI models to different data sources required developer
 - **Accessibility for non-developers:** Empower users with varying technical backgrounds to interact with Neon databases.
 - **Database migration support:** Leverage Neon's branching capabilities for database schema changes initiated via natural language.
 
-**Warning: Security Considerations**
-The Neon MCP server grants powerful database management capabilities through natural language requests. **Always review and authorize actions** requested by the LLM before execution. Ensure that only authorized users and applications have access to the Neon MCP server and Neon API keys.
+   **Warning** Security Considerations: The Neon MCP server grants powerful database management capabilities through natural language requests. **Always review and authorize actions** requested by the LLM before execution. Ensure that only authorized users and applications have access to the Neon MCP server and Neon API keys.
 
 ## Setup options
 
@@ -47,7 +46,7 @@ You can set up the Neon MCP Server in two ways:
 
 You can use Neon's managed MCP server, available at `https://mcp.neon.tech`. This is the **easiest** way to start using the Neon MCP Server. It streamlines the setup process by utilizing OAuth for authentication, eliminating the need to manage Neon API keys directly in your client configuration.
 
-**Note**: The remote hosted MCP server is currently in its preview phase. As the [OAuth specification for MCP](https://spec.modelcontextprotocol.io/specification/2025-03-26/basic/authorization/) is still quite new, we are releasing it in this preview state. During the initial weeks, you may experience some adjustments to the setup. However, the instructions provided should be straightforward to follow at this time.
+   **Note**: The remote hosted MCP server is currently in its preview phase. As the [OAuth specification for MCP](https://spec.modelcontextprotocol.io/specification/2025-03-26/basic/authorization/) is still quite new, we are releasing it in this preview state. During the initial weeks, you may experience some adjustments to the setup. However, the instructions provided should be straightforward to follow at this time.
 
 #### Prerequisites:
 
@@ -64,7 +63,7 @@ You can use Neon's managed MCP server, available at `https://mcp.neon.tech`. Thi
       "mcpServers": {
         "Neon": {
           "command": "npx",
-          "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
+          "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/sse"]
         }
       }
     }
@@ -86,9 +85,9 @@ You can install Neon MCP server locally using `npm` or `smithey`.
 #### Prerequisites
 
 - **Node.js (>= v18.0.0):** Ensure Node.js version 18 or higher is installed on your system. You can download it from [nodejs.org](https://nodejs.org/).
-- **Neon API Key:** You will need a Neon API key to authenticate the Neon MCP Server with your Neon account. You can create one from the [Neon Console](https://console.neon.tech/app/settings/api-keys) under your Profile settings. Refer to the [Neon documentation on API Keys](/docs/manage/api-keys#creating-api-keys) for detailed instructions.
+- **Neon API Key:** You will need a Neon API key to authenticate the Neon MCP Server with your Neon account. You can create one from the [Neon Console](https://console.neon.tech/app/settings/api-keys) under your Profile settings. Refer to the [Neon documentation on API Keys](https://neon.com/docs/manage/api-keys#creating-api-keys) for detailed instructions.
 
-**Note**: We recommend using Smithery for installation, as it streamlines the process and guarantees compatibility across MCP clients.
+   **Note**: We recommend using Smithery for installation, as it streamlines the process and guarantees compatibility across MCP clients.
 
 #### Installation via Smithery - MCP Registry
 
@@ -145,7 +144,28 @@ Open your MCP client application and navigate to the settings where you can conf
 }
 ```
 
-**Note**: If you are using Windows and encounter issues while adding the MCP server, you might need to use the Command Prompt (`cmd`) or Windows Subsystem for Linux (`wsl`) to run the necessary commands.
+   **Note**: If you are using Windows and encounter issues while adding the MCP server, you might need to use the Command Prompt (`cmd`) or Windows Subsystem for Linux (`wsl`) to run the necessary commands. Your configuration setup may resemble the following: 
+
+```json
+      {
+        "mcpServers": {
+          "neon": {
+            "command": "cmd",
+            "args": ["/c", "npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+          }
+        }
+      }
+      ```
+```json
+      {
+        "mcpServers": {
+          "neon": {
+            "command": "wsl",
+            "args": ["npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+          }
+        }
+      }
+      ```
 
 ### Troubleshooting
 
@@ -155,35 +175,52 @@ If your client does not use `JSON` for configuration of MCP servers (such as old
 npx -y @neondatabase/mcp-server-neon start <YOUR_NEON_API_KEY>
 ```
 
+---
+updatedOn: '2025-05-30T16:54:40.495Z'
+---
+
 ## Supported actions (tools)
 
 The Neon MCP Server provides the following actions, which are exposed as "tools" to MCP Clients. You can use these tools to interact with your Neon projects and databases using natural language commands.
 
 **Project management:**
 
-- **`list_projects`**: Retrieves a list of your Neon projects, providing a summary of each project associated with your Neon account.
-- **`describe_project`**: Fetches detailed information about a specific Neon project, including its ID, name, and associated branches and databases.
-- **`create_project`**: Creates a new Neon project in your Neon account. A project acts as a container for branches, databases, roles, and computes.
-- **`delete_project`**: Deletes an existing Neon project and all its associated resources.
+- `list_projects`: Retrieves a list of your Neon projects, providing a summary of each project associated with your Neon account. Supports limiting the number of projects returned (default: 10).
+- `describe_project`: Fetches detailed information about a specific Neon project, including its ID, name, and associated branches and databases.
+- `create_project`: Creates a new Neon project in your Neon account. A project acts as a container for branches, databases, roles, and computes.
+- `delete_project`: Deletes an existing Neon project and all its associated resources.
 
 **Branch management:**
 
-- **`create_branch`**: Creates a new branch within a specified Neon project. Leverages [Neon's branching](/docs/introduction/branching) feature for development, testing, or migrations.
-- **`delete_branch`**: Deletes an existing branch from a Neon project.
-- **`describe_branch`**: Retrieves details about a specific branch, such as its name, ID, and parent branch.
+- `create_branch`: Creates a new branch within a specified Neon project. Leverages [Neon's branching](https://neon.com/docs/introduction/branching) feature for development, testing, or migrations.
+- `delete_branch`: Deletes an existing branch from a Neon project.
+- `describe_branch`: Retrieves details about a specific branch, such as its name, ID, and parent branch.
+- `list_branch_computes`: Lists compute endpoints for a project or specific branch, including compute ID, type, size, and autoscaling information.
 
 **SQL query execution:**
 
-- **`get_connection_string`**: Returns your database connection string.
-- **`run_sql`**: Executes a single SQL query against a specified Neon database. Supports both read and write operations.
-- **`run_sql_transaction`**: Executes a series of SQL queries within a single transaction against a Neon database.
-- **`get_database_tables`**: Lists all tables within a specified Neon database.
-- **`describe_table_schema`**: Retrieves the schema definition of a specific table, detailing columns, data types, and constraints.
+- `get_connection_string`: Returns your database connection string.
+- `run_sql`: Executes a single SQL query against a specified Neon database. Supports both read and write operations.
+- `run_sql_transaction`: Executes a series of SQL queries within a single transaction against a Neon database.
+- `get_database_tables`: Lists all tables within a specified Neon database.
+- `describe_table_schema`: Retrieves the schema definition of a specific table, detailing columns, data types, and constraints.
+- `list_slow_queries`: Identifies performance bottlenecks by finding the slowest queries in a database. Requires the pg_stat_statements extension.
 
 **Database migrations (schema changes):**
 
-- **`prepare_database_migration`**: Initiates a database migration process. Critically, it creates a temporary branch to apply and test the migration safely before affecting the production branch.
-- **`complete_database_migration`**: Finalizes and applies a prepared database migration to the production branch. This action merges changes from the temporary migration branch and cleans up temporary resources.
+- `prepare_database_migration`: Initiates a database migration process. Critically, it creates a temporary branch to apply and test the migration safely before affecting the main branch.
+- `complete_database_migration`: Finalizes and applies a prepared database migration to the main branch. This action merges changes from the temporary migration branch and cleans up temporary resources.
+
+**Query performance tuning:**
+
+- `explain_sql_statement`: Analyzes a SQL query and returns detailed execution plan information to help understand query performance.
+- `prepare_query_tuning`: Identifies potential performance issues in a SQL query and suggests optimizations. Creates a temporary branch for testing improvements.
+- `complete_query_tuning`: Finalizes and applies query optimizations after testing. Merges changes from the temporary tuning branch to the main branch.
+
+**Neon Auth:**
+
+- `provision_neon_auth`: Provisions Neon Auth for a Neon project. Sets up authentication infrastructure by creating an integration with Stack Auth (`@stackframe/stack`).
+
 
 ## Usage examples
 
@@ -197,13 +234,15 @@ After setting up either the remote or local server and connecting your MCP clien
 - **Add a column to a table:** `"Add a column 'email' of type VARCHAR to the 'users' table in database 'main' of project 'my-project'"`
 - **Run a query:** `"Show me the first 10 rows from the 'users' table in database 'my-database'"`
 
+
+
 You can also refer to our individual guides for detailed examples on using the Neon MCP Server with specific MCP clients:
 
-- [Claude Desktop](/guides/neon-mcp-server)
-- [Cursor](/guides/cursor-mcp-neon)
-- [Cline](/guides/cline-mcp-neon)
-- [Windsurf (Codium)](/guides/windsurf-mcp-neon)
-- [Zed](/guides/zed-mcp-neon)
+- [Claude Desktop](https://neon.com/guides/neon-mcp-server)
+- [Cursor](https://neon.com/guides/cursor-mcp-neon)
+- [Cline](https://neon.com/guides/cline-mcp-neon)
+- [Windsurf (Codium)](https://neon.com/guides/windsurf-mcp-neon)
+- [Zed](https://neon.com/guides/zed-mcp-neon)
 
 ## Conclusion
 
@@ -213,5 +252,5 @@ The Neon MCP Server enables natural language interaction with Neon Postgres data
 
 - [MCP Protocol](https://modelcontextprotocol.org)
 - [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api)
-- [Neon API Keys](/docs/manage/api-keys#creating-api-keys)
+- [Neon API Keys](https://neon.com/docs/manage/api-keys#creating-api-keys)
 - [Neon MCP server GitHub](https://github.com/neondatabase/mcp-server-neon)

@@ -25,7 +25,6 @@ Before we begin, ensure you have:
 ## Setting up the Project
 
 1. Create a new Spring Boot project using [Spring Initializr](https://start.spring.io/) with the following dependencies:
-
    - Spring Web
    - Spring Data JPA
    - PostgreSQL Driver

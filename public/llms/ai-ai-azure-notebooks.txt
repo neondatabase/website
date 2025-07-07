@@ -1,12 +1,10 @@
 # Azure Data Studio Notebooks
 
-> This guide explains how to use Azure Data Studio Notebooks with Neon for vector similarity search, covering setup, connection, pgvector extension installation, and running vector search queries in an interactive Jupyter environment.
+> The document "Azure Data Studio Notebooks" explains how Neon users can utilize Azure Data Studio Notebooks to interact with and manage their Neon databases, detailing setup, configuration, and usage instructions specific to Neon's environment.
 
 ## Source
 
-- [Azure Data Studio Notebooks HTML](https://neon.tech/docs/ai/ai-azure-notebooks): The original HTML version of this documentation
-
-## Overview
+- [Azure Data Studio Notebooks HTML](https://neon.com/docs/ai/ai-azure-notebooks): The original HTML version of this documentation
 
 A Jupyter Notebook is an open-source web application that allows you to create and share documents containing live code, equations, visualizations, and narrative text. Azure Data Studio supports Jupyter Notebooks, enabling users to combine SQL queries, Python code, and markdown text in a single interactive document.
 
@@ -18,11 +16,13 @@ To perform the steps in this guide, you will require:
 
 - Azure Data Studio - Download the latest version of Azure Data Studio for your operating system [here](https://learn.microsoft.com/en-us/azure-data-studio/download-azure-data-studio).
 
-- A Neon account - If you do not have one, sign up at [Neon](https://console.neon.tech/signup). Your Neon project comes with a ready-to-use Postgres database named `neondb`. You can use it, or create your own by following the instructions [here](/docs/manage/databases#create-a-database).
+- A Neon account - If you do not have one, sign up at [Neon](https://console.neon.tech/signup). Your Neon project comes with a ready-to-use Postgres database named `neondb`. You can use it, or create your own by following the instructions [here](https://neon.com/docs/manage/databases#create-a-database).
 
 ## Retrieve your Neon database connection string
 
 Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal, and select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
+
+
 
 ## Create a notebook
 
@@ -153,4 +153,4 @@ Install the `psycopg` adapter by adding and executing the following code cell:
 
 ### Next steps
 
-For more information about using Neon with `pgvector`, see [The pgvector extension](/docs/extensions/pgvector).
+For more information about using Neon with `pgvector`, see [The pgvector extension](https://neon.com/docs/extensions/pgvector).

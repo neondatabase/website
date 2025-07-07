@@ -1,15 +1,14 @@
 # Connect a NestJS application to Neon
 
-Set up a Neon project in seconds and connect from a NestJS application
+> The document outlines the steps to connect a NestJS application to a Neon database, detailing configuration and code integration specific to Neon's environment.
 
-NestJS is a framework for building efficient, scalable Node.js server-side applications1. This guide explains how to connect NestJS with Neon using a secure server-side request.
+## Source
+
+- [Connect a NestJS application to Neon HTML](https://neon.com/docs/guides/nestjs): The original HTML version of this documentation
+
+NestJS is a framework for building efficient, scalable Node.js server-side applications<sup><a target="_blank" href="https://docs.nestjs.com/">1</a></sup>. This guide explains how to connect NestJS with Neon using a secure server-side request.
 
 To create a Neon project and access it from a NestJS application:
-
-1. [Create a Neon project](#create-a-neon-project)
-2. [Create a NestJS project and add dependencies](#create-a-nestjs-project-and-add-dependencies)
-3. [Configure a Postgres client](#configure-the-postgres-client)
-4. [Run the app](#run-the-app)
 
 ## Create a Neon project
 
@@ -43,10 +42,10 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 ## Store your Neon credentials
 
-Add a `.env` file to your project directory and add your Neon connection string to it. You can find your connection details by clicking **Connect** on the Neon **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+Add a `.env` file to your project directory and add your Neon connection string to it. You can find your connection details by clicking **Connect** on the Neon **Project Dashboard**. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).
 
-```shell shouldWrap
-DATABASE_URL="postgresql://:@.neon.tech:/?sslmode=require"
+```shell
+DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require"
 ```
 
 ## Configure the Postgres client
@@ -55,7 +54,7 @@ DATABASE_URL="postgresql://:@.neon.tech:/?sslmode=require"
 
 To manage the connection to your Neon database, start by creating a **DatabaseModule** in your NestJS application. This module will handle the configuration and provisioning of the Postgres client.
 
-
+Tab: node-postgres
 
 ```typescript
 import { config } from 'dotenv';
@@ -81,6 +80,8 @@ const dbProvider = {
 export class DatabaseModule {}
 ```
 
+Tab: postgres.js
+
 ```typescript
 import { config } from 'dotenv';
 import { Module } from '@nestjs/common';
@@ -104,6 +105,8 @@ const dbProvider = {
 })
 export class DatabaseModule {}
 ```
+
+Tab: Neon serverless driver
 
 ```typescript
 import { config } from 'dotenv';
@@ -129,13 +132,11 @@ const dbProvider = {
 export class DatabaseModule {}
 ```
 
-
-
 ### 2. Create a Service for Database Interaction
 
 Next, implement a service to facilitate interaction with your Postgres database. This service will use the database connection defined in the DatabaseModule.
 
-
+Tab: node-postgres
 
 ```typescript
 import { Injectable, Inject } from '@nestjs/common';
@@ -144,7 +145,7 @@ import { Injectable, Inject } from '@nestjs/common';
 export class AppService {
   constructor(@Inject('POSTGRES_POOL') private readonly sql: any) {}
 
-  async getTable(name: string): Promise {
+  async getTable(name: string): Promise<any[]> {
     const client = await this.sql.connect();
     const { rows } = await client.query(`SELECT * FROM ${name}`);
     return rows;
@@ -152,18 +153,7 @@ export class AppService {
 }
 ```
 
-```typescript
-import { Injectable, Inject } from '@nestjs/common';
-
-@Injectable()
-export class AppService {
-  constructor(@Inject('POSTGRES_POOL') private readonly sql: any) {}
-
-  async getTable(name: string): Promise {
-    return await this.sql(`SELECT * FROM ${name}`);
-  }
-}
-```
+Tab: postgres.js
 
 ```typescript
 import { Injectable, Inject } from '@nestjs/common';
@@ -172,13 +162,26 @@ import { Injectable, Inject } from '@nestjs/common';
 export class AppService {
   constructor(@Inject('POSTGRES_POOL') private readonly sql: any) {}
 
-  async getTable(name: string): Promise {
+  async getTable(name: string): Promise<any[]> {
     return await this.sql(`SELECT * FROM ${name}`);
   }
 }
 ```
 
+Tab: Neon serverless driver
 
+```typescript
+import { Injectable, Inject } from '@nestjs/common';
+
+@Injectable()
+export class AppService {
+  constructor(@Inject('POSTGRES_POOL') private readonly sql: any) {}
+
+  async getTable(name: string): Promise<any[]> {
+    return await this.sql(`SELECT * FROM ${name}`);
+  }
+}
+```
 
 ### 3. Integrate the Database Module and Service
 
@@ -219,9 +222,9 @@ export class AppController {
 
 ## Run the app
 
-When you run `npm run start` you can expect to see output similar to the following at [localhost:3000](localhost:3000):
+When you run `npm run start` you can expect to see output similar to the following at [localhost:3000](https://neon.com/localhost:3000):
 
-```shell shouldWrap
+```shell
 [{"id":1,"name":"c4ca4238a0","value":0.39330545},{"id":2,"name":"c81e728d9d","value":0.14468245}]
 ```
 
@@ -229,6 +232,4 @@ When you run `npm run start` you can expect to see output similar to the followi
 
 You can find the source code for the application described in this guide on GitHub.
 
-
-
-Get started with NestJS and Neon
+- [Get started with NestJS and Neon](https://github.com/neondatabase/examples/tree/main/with-nestjs)

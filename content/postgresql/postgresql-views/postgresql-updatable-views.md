@@ -34,7 +34,7 @@ Second, the defining query must not contain one of the following clauses at the 
 - [WITH](../postgresql-tutorial/postgresql-cte)
 - [UNION](../postgresql-tutorial/postgresql-union)
 - [INTERSECT](../postgresql-tutorial/postgresql-intersect)
-- [EXCEPT](https://neon.tech/postgresql/postgresql-tutorial/postgresql-tutorial/postgresql-except/)
+- [EXCEPT](/postgresql/postgresql-tutorial/postgresql-tutorial/postgresql-except/)
 
 Third, the selection list of the defining query must not contain any:
 

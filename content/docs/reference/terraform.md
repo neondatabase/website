@@ -27,7 +27,6 @@ This provider is not maintained or officially supported by Neon. Use at your own
 - **Provider upgrades**: When using `terraform init -upgrade` to update a custom Terraform provider, be aware that changes in the provider’s schema or defaults can lead to unintended resource replacements. This may occur when certain attributes are altered or reset. For example, fields previously set to specific values might be reset to `null`, forcing the replacement of the entire resource.
 
   To avoid unintended resource replacements which can result in data loss:
-
   - Review the provider’s changelog for any breaking changes that might affect your resources before upgrading to a new version.
   - For CI pipelines and auto-approved pull requests, only use `terraform init`. Running `terraform init -upgrade` should be done manually followed by plan reviews.
   - Run `terraform plan` before applying any changes to detect potential differences and review the behavior of resource updates.

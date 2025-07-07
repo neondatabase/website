@@ -169,7 +169,7 @@ Notice how the down migration drops objects in reverse order compared to how the
 To run migrations against your Neon database, you'll need to construct a proper connection string. Neon provides a secure, TLS-enabled connection:
 
 ```
-postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
+postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
 ```
 
 Replace the placeholders with your actual Neon connection details, which you can find in the Neon Console under your project's connection settings.
@@ -177,7 +177,7 @@ Replace the placeholders with your actual Neon connection details, which you can
 For convenience, you might want to store this connection string in an environment variable:
 
 ```bash
-export NEON_DB_URL="postgresql://user:password@ep-example-123456.us-east-2.aws.neon.tech/neondb?sslmode=require"
+export NEON_DB_URL="postgresql://user:password@ep-example-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
 ```
 
 ## Running Migrations
@@ -381,7 +381,7 @@ There has been a feature request to add support for transactions in the golang-m
 
 Always test migrations in a non-production environment first. Ideally, have a staging environment that mirrors production as closely as possible.
 
-You can achieve this by setting up a separate Neon branch to test migrations before applying them to your production branch. You can learn more about Neon branches in the [Neon documentation](https://neon.tech/docs/introduction/branching).
+You can achieve this by setting up a separate Neon branch to test migrations before applying them to your production branch. You can learn more about Neon branches in the [Neon documentation](/docs/introduction/branching).
 
 ### 5. Version Control Your Migrations
 
@@ -449,7 +449,7 @@ Running your database migrations directly on your production database can be ris
 
 For a more robust approach, you can use Neon's branching capabilities to test migrations before applying them to your production database.
 
-Neon has a set of [GitHub Actions](https://neon.tech/docs/guides/branching-github-actions) that allow you to create, delete, and compare branches programmatically. Here's an extended GitHub Actions workflow that uses Neon's branching actions to spin up a temporary branch for testing migrations:
+Neon has a set of [GitHub Actions](/docs/guides/branching-github-actions) that allow you to create, delete, and compare branches programmatically. Here's an extended GitHub Actions workflow that uses Neon's branching actions to spin up a temporary branch for testing migrations:
 
 ```yaml
 name: Test and Deploy Migrations
@@ -567,7 +567,6 @@ This approach provides several benefits:
 To use this workflow, you'll need to set up the following GitHub repository secrets and variables:
 
 - **Secrets**:
-
   - `NEON_API_KEY`: Your Neon API key
   - `NEON_PROD_DB_URL`: Production database connection string
 

@@ -30,7 +30,7 @@ const variants = {
     },
   },
   to: {
-    zIndex: 20,
+    zIndex: 100,
     opacity: 1,
     translateY: 0,
     transition: {
@@ -145,7 +145,7 @@ const MobileNav = ({ className = null, sidebar, slug, basePath, customName, cust
       <LazyMotion features={domAnimation}>
         <m.div
           className={clsx(
-            'absolute inset-x-0 top-[calc(100%+1px)] z-20 max-h-[calc(100dvh-142px)] overflow-x-hidden overflow-y-scroll bg-white dark:bg-gray-new-8'
+            'absolute inset-x-0 top-[calc(100%+1px)] z-[100] max-h-[calc(100dvh-142px)] overflow-x-hidden overflow-y-scroll bg-white dark:bg-gray-new-8'
           )}
           initial="from"
           animate={controls}

@@ -2,7 +2,7 @@
 title: Connect a Hono application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Hono application
 enableTableOfContents: true
-updatedOn: '2025-04-30T14:50:57.892Z'
+updatedOn: '2025-06-30T11:30:21.901Z'
 ---
 
 [Hono](https://hono.dev/) is a lightweight, multi-runtime web framework for the Edge, Node.js, Deno, Bun, and other runtimes. This topic describes how to create a Neon project and access it from a Hono application.
@@ -46,7 +46,7 @@ npm install @neondatabase/serverless
 Add a `.env` file to your project directory and add your Neon connection string to it. You can find your connection details by clicking **Connect** on the Neon **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ```shell shouldWrap
-DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require"
+DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
 ```
 
 ## Configure the Postgres client

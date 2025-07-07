@@ -378,7 +378,6 @@ Keep the following considerations in mind when importing data with relationships
 - **Establish referenced data first:** Postgres, being a relational database, relies on foreign key constraints to enforce relationships between tables. When you import data into the `Product` table that is intended to reference entries in the `Category` table, those `Category` entries must already exist in Postgres.
 
 - **ID handling depends on your strategy:** While FaunaDB uses its own distributed document ID system, Postgres ID generation is more flexible. **Whether you need to transform IDs depends on your chosen ID strategy in Postgres:**
-
   - **Scenario 1: Using Postgres-Generated IDs:** If you are using Postgres's default ID generation mechanisms (like `SERIAL`, `UUID`, or `IDENTITY` columns), then **Postgres will automatically generate _new_ IDs** for the rows in your tables. In this scenario, you _will_ need to manage ID transformation for relationships.
 
   - **Scenario 2: Retaining FaunaDB IDs:** If you are explicitly setting IDs during import to retain FaunaDB IDs in Postgres, you must ensure that the IDs are correctly mapped and managed. You may choose this approach if you:

@@ -4,7 +4,7 @@ subtitle: Replicate data to a different Neon project for cross-region replicatio
   version migration, or region migration
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-05-20T17:00:38.662Z'
+updatedOn: '2025-07-03T12:36:49.562Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from one Neon project to another. This enables different usage scenarios, including:
@@ -109,7 +109,7 @@ After creating a publication on the source database, you need to create a subscr
 
    ```sql
    CREATE SUBSCRIPTION my_subscription
-   CONNECTION 'postgresql://neondb_owner:<password>@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb'
+   CONNECTION 'postgresql://neondb_owner:<password>@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
    PUBLICATION my_publication;
    ```
 

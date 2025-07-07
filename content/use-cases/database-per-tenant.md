@@ -15,7 +15,7 @@ Neon makes it easy to isolate each tenant in their own Postgres database with in
 - **Instant per-customer recovery** - If there’s an issue (or a customer request), you can instantly roll back any tenant’s database without affecting the rest of your fleet.
 - **API-first management** - Provision, scale, and manage all your Neon projects programmatically—one engineer can manage thousands of tenants.
 
-Sign up [using this link](http://fyi.neon.tech/credits) to claim $100 off your first invoice, and [follow this guide](https://neon.tech/docs/use-cases/database-per-user) to get started.
+Sign up [using this link](http://fyi.neon.tech/credits) to claim $100 off your first invoice, and follow this guide to get started.
 </Admonition>
 
 ## Why database-per-user?
@@ -86,7 +86,7 @@ In RDS, you’d have to choose an instance size and disk allocation up front—a
 - **Fine-grained control** - Set compute limits, quotas, and performance policies per tenant to match their plan or use case.
 
 <Admonition type="note" title="info">
-Keep reading about how [compute autoscaling](https://neon.tech/docs/introduction/autoscaling) works in Neon.
+Keep reading about how [compute autoscaling](/docs/introduction/autoscaling) works in Neon.
 </Admonition>
 
 ### Rollback a single customer in seconds
@@ -102,7 +102,7 @@ Neon takes a completely different approach. Thanks to our copy-on-write storage 
 This is especially valuable in B2B SaaS platforms, where customers may request a rollback to a specific date due to data errors, user mistakes, or compliance requirements. With Neon, you can fulfill these requests in seconds—without escalation, without disruption, and without touching the rest of your fleet.
 
 <Admonition type="note" title="info">
-Learn more about how [instant restore](https://neon.tech/docs/introduction/branch-restore) works in Neon.
+Learn more about how [instant restore](/docs/introduction/branch-restore) works in Neon.
 </Admonition>
 
 ### API-first management
@@ -116,7 +116,7 @@ Neon was built to help you manage thousands of Postgres databases like they’re
 - **One engineer can manage thousands of tenants** - With the right automation in place, there's no need for a large DevOps team.
 
 <Admonition type="note" title="Info">
-Explore the [Neon API documentation](https://neon.tech/docs/reference/api-reference) and start building.
+Explore the [Neon API documentation](/docs/reference/api-reference) and start building.
 </Admonition>
 
 ### Data compliance and security
@@ -130,19 +130,19 @@ When you're building a multi-tenant SaaS platform—especially in regulated indu
 - **Enterprise-level security** - All Neon projects use TLS for connections, and built-in encryption is applied to data at rest and in transit.
 
 <Admonition type="note" title="Info">
-[Review our security page](https://neon.tech/security) for details on compliance, SLAs, and our full security commitments.
+[Review our security page](/security) for details on compliance, SLAs, and our full security commitments.
 </Admonition>
 
 ### Development environments
 
-To take advantage of [database branching workflows for dev/test](https://neon.tech/use-cases/dev-test) whithin a project-per-tenant design, create a **separate Neon project as your single non-prod environment**. The methodology:
+To take advantage of [database branching workflows for dev/test](/use-cases/dev-test) whithin a project-per-tenant design, create a **separate Neon project as your single non-prod environment**. The methodology:
 
 - Load your testing data to the main branch. This main branch acts as the primary source for all dev/test environments (they can be hundreds).
 - To instantly create ephemeral environments, derive child branches from the main branch. These branches are fully isolated resource-wise and already include an up-to-date copy of the testing dataset. They can then be synced with the main branch with just one click.
 - Once the work is complete, ephemeral dev/test environments (child branches) can be deleted automatically via your CI/CD.
 
 <Admonition type="note" title="Info">
-Read more about [how to do dev/test environments in Neon](https://neon.tech/use-cases/dev-test) using branches.  
+Read more about [how to do dev/test environments in Neon](/use-cases/dev-test) using branches.  
 </Admonition>
 
 <CTA title="Start building" description="Sign up today and claim $100 in credits when you upgrade." buttonText="Claim offer" buttonUrl="https://fyi.neon.tech/credits" />

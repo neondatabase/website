@@ -46,7 +46,6 @@ To begin building your Azure Static Web App with Neon Postgres, you'll need to s
 ### Installing required tools
 
 1. Install the **Azure Static Web Apps** and **Azure Functions** extensions for Visual Studio Code:
-
    - Open VS Code.
    - Click the Extensions icon or press `Ctrl+Shift+X` or `Cmd+Shift+X`.
    - Search for "Azure Static Web Apps" and "Azure Functions" extensions.
@@ -377,21 +376,18 @@ Let's break down the key functions and features of the todo app:
 Core Functions:
 
 1. `loadTodos()`
-
    - Fetches existing todos from the Azure Functions API endpoint via `GET` request
    - Handles loading states and error conditions
    - Automatically called when the DOM loads
    - Updates the UI with current todo items
 
 2. `addTodo()`
-
    - Creates new todo items via `POST` request to the API
    - Validates input to prevent empty submissions
    - Updates local state and UI after successful creation
    - Includes error handling with user feedback
 
 3. `toggleTodo(id)`
-
    - Updates todo completion status via `PUT` request
    - Includes error handling and state updates
 
@@ -409,12 +405,10 @@ UI Management:
 Utility Functions:
 
 1. `showLoading()`
-
    - Displays loading indicator during API operations.
    - Provides visual feedback for better user experience.
 
 2. `hideLoading()`
-
    - Removes loading indicator after operations complete.
    - Prepares UI for content display.
 
@@ -633,24 +627,19 @@ Core Components:
    ```
 
    Supported operations:
-
    1. `GET`: Retrieves all todos
-
       - Automatically creates table on first request.
       - Returns array of todo items.
 
    2. `POST`: Creates new todo
-
       - Requires: `text` field.
       - Returns: newly created todo.
 
    3. `PUT`: Updates todo completion status
-
       - Requires: `id` and `completed` status.
       - Returns: updated todo or `404` if not found.
 
    4. `DELETE`: Removes a todo
-
       - Requires: todo `id`.
       - Returns: success message or `404` if not found.
 
@@ -670,7 +659,7 @@ Start by configuring the `local.settings.json` in your `api` directory with your
 {
   "Values": {
     ...
-    "DATABASE_URL": "postgresql://neondb_owner:<your_password>@<your_host>.neon.tech/neondb?sslmode=require"
+    "DATABASE_URL": "postgresql://neondb_owner:<your_password>@<your_host>.neon.tech/neondb?sslmode=require&channel_binding=require"
   }
 }
 ```

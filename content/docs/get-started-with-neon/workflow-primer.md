@@ -3,7 +3,7 @@ title: Database branching workflow primer
 subtitle: An introduction to integrating Postgres branching into your development
   workflow
 enableTableOfContents: true
-updatedOn: '2025-04-17T16:06:46.401Z'
+updatedOn: '2025-07-03T12:36:49.558Z'
 ---
 
 With Neon, you can work with your data just like you work with your code. The key is Neon's database [branching](/docs/guides/branching-intro) feature, which lets you instantly create branches of your data that you can include in your workflow — as many branches as you need.
@@ -19,10 +19,10 @@ Every Neon branch has a unique Postgres connection string, so they're completely
 
 ```bash
 # Branch 1
-postgresql://database_name_owner:AbC123dEf@ep-shiny-cell-a5y2zuu0.us-east-2.aws.neon.tech/dbname
+postgresql://database_name_owner:AbC123dEf@ep-shiny-cell-a5y2zuu0.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 
 # Branch 2
-postgresql://database_name_owner:AbC123dEf@ep-hidden-hall-a5x58cuv.us-east-2.aws.neon.tech/dbname
+postgresql://database_name_owner:AbC123dEf@ep-hidden-hall-a5x58cuv.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 You can create all of your branches from the default branch, or set up a dedicated branch that you use as a base. The first approach is simpler, while the second provides greater data isolation.
@@ -138,7 +138,7 @@ You can create a Neon branch for every developer on your team. This ensures that
 <Admonition type="tip">
 To easily identify branches dedicated to development, we recommend prefixing the branch name with `dev/<developer-name>` or `dev/<feature-name>` if multiple developers collaborate on the same development branch.
 
-<br/>Examples:
+Examples:
 
 ```bash
 dev/alice             dev/new-onboarding

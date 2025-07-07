@@ -1,7 +1,7 @@
 ---
 title: TypeScript SDK for the Neon API
 enableTableOfContents: true
-updatedOn: '2025-05-11T11:23:50.630Z'
+updatedOn: '2025-05-30T16:54:40.493Z'
 ---
 
 <InfoBlock>
@@ -37,7 +37,7 @@ The Neon TypeScript SDK allows you to manage:
 - [**Roles:**](/docs/manage/roles) Create, list, update, and delete Postgres roles within your branches.
 - [**Operations:**](/docs/manage/operations) Monitor and track the status of asynchronous operations performed on your Neon resources.
 - [**Organizations:**](/docs/manage/orgs-api) Manage organization settings, API keys, and members (for Neon organizational accounts).
-- [**Consumption Metrics:**](/docs/guides/partner-consumption-metrics) Retrieve usage metrics for your account and projects to monitor resource consumption.
+- [**Consumption Metrics:**](/docs/guides/consumption-metrics) Retrieve usage metrics for your account and projects to monitor resource consumption.
 
 ## Quick Start
 
@@ -78,7 +78,7 @@ For this quick start, we'll set the API key as an environment variable:
 export NEON_API_KEY="YOUR_API_KEY_FROM_NEON_CONSOLE"
 ```
 
-Replace "YOUR_API_KEY_FROM_NEON_CONSOLE" with the API key you copied from the Neon Console.
+Replace `YOUR_API_KEY_FROM_NEON_CONSOLE` with the API key you copied from the Neon Console.
 
 ## Examples
 
@@ -190,7 +190,7 @@ createNeonProject('test-project').catch((error) => {
 
 #### Key points:
 
-- The `region_id` parameter specifies the cloud region where the project will be hosted. You can find the list of supported regions at [Neon Regions](https://neon.tech/docs/introduction/regions).
+- The `region_id` parameter specifies the cloud region where the project will be hosted. You can find the list of supported regions at [Neon Regions](/docs/introduction/regions).
 - The `pg_version` parameter specifies the major version of Postgres to use in the project. The currently supported versions are `14`, `15`, `16`, and `17`.
 
 ### Create a Branch

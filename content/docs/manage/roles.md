@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/manage/users
-updatedOn: '2025-04-17T16:06:46.408Z'
+updatedOn: '2025-07-03T04:17:00.229Z'
 ---
 
 In Neon, roles are Postgres roles. Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`. This role owns the database that is created in your Neon project's default branch.
@@ -15,7 +15,7 @@ Your Postgres role and roles created in the Neon Console, API, and CLI are grant
 Neon is a managed Postgres service, so you cannot access the host operating system, and you can't connect using the Postgres `superuser` account like you can in a standalone Postgres installation.
 </Admonition>
 
-You can create roles in a project's default branch or child branches. While there is no strict limit on the number of roles you can create, we recommend keeping it under 500 per branch.
+You can create roles in a project's default branch or child branches. Neon enforces a limit of 500 roles per branch.
 
 In Neon, roles belong to a branch, which could be your production branch or a child branch. When you create a child branch, roles in the parent branch are duplicated in the child branch. For example, if role `alex` exists in the parent branch, role `alex` is copied to the child branch when the child branch is created. The only time this does not occur is when you create a branch that only includes data up to a particular point in time. If the role was created in the parent branch after that point in time, it is not duplicated in the child branch.
 
@@ -42,6 +42,7 @@ Roles created in the Neon Console, CLI, or API, including the role created with 
 - `EXECUTE` privilege on the `pg_stat_statements_reset()` function that is part of the `pg_stat_statements` extension. This privilege was introduced with the January 12, 2024 release. If you installed the `pg_stat_statements` extension before this release, drop and recreate the `pg_stat_statements` extension to enable this privilege. See [Install an extension](/docs/extensions/pg-extensions#install-an-extension).
 - `GRANT ALL ON TABLES` and `WITH GRANT OPTION` on the `public` schema.
 - `GRANT ALL ON SEQUENCES` and `WITH GRANT OPTION` on the `public` schema.
+- `CREATE EVENT TRIGGER`, `ALTER EVENT TRIGGER`, `DROP EVENT TRIGGER`. The `ALTER EVENT TRIGGER` command does not allow changing the function associated with the event trigger.
 
 You can think of roles with `neon_superuser` privileges as administrator roles. If you require roles with limited privileges, such as a read-only role, you can create those roles from an SQL client. For more information, see [Manage database access](/docs/manage/database-access).
 

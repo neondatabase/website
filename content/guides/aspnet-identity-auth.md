@@ -411,7 +411,6 @@ public class SecureController : ControllerBase
 With the above, we created a new controller called `SecureController` with two endpoints:
 
 1. General Protected Endpoint:
-
    - The `/api/secure` route is protected with `[Authorize]`, allowing access only to authenticated users with a valid JWT token.
    - If access is granted, it returns a confirmation message.
 
@@ -669,7 +668,6 @@ Let's quickly walk through setting up Auth0 with ASP.NET Core for secure authent
 To get started, follow these high-level steps:
 
 1. Start by creating an Auth0 API:
-
    - Log in to your [Auth0 Dashboard](https://manage.auth0.com/).
    - Navigate to the "APIs" section and click **Create API**.
    - Provide a name and a unique identifier for your API (e.g., `https://your-app.com/api`). Keep the default signing algorithm as `RS256`.

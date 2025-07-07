@@ -1,12 +1,12 @@
 # Migrate from Microsoft SQL Server to Neon Postgres
 
-> This guide provides step-by-step instructions for migrating a Microsoft SQL Server database to Neon Postgres using pgloader, covering the entire process from setting up the source and destination databases to verifying the migrated data.
-
-This guide describes how to migrate your database from a Microsoft SQL Server (MSSQL) database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).
+> The document outlines the process for migrating databases from Microsoft SQL Server to Neon Postgres, detailing the necessary steps and tools required for a successful transition within the Neon environment.
 
 ## Source
 
-- [Migrate from Microsoft SQL Server to Neon Postgres HTML](https://neon.tech/docs/import/migrate-mssql): The original HTML version of this documentation
+- [Migrate from Microsoft SQL Server to Neon Postgres HTML](https://neon.com/docs/import/migrate-mssql): The original HTML version of this documentation
+
+This guide describes how to migrate your database from a Microsoft SQL Server (MSSQL) database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).
 
 The `pgloader` utility transforms data to a Postgres-compatible format as it reads from your MSSQL database. It uses the Postgres `COPY` protocol to stream the data into your Postgres database.
 
@@ -18,15 +18,13 @@ The `pgloader` utility transforms data to a Postgres-compatible format as it rea
 
 - A Neon project to move the data to.
 
-  For detailed information on creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
+  For detailed information on creating a Neon project, see [Create a project](https://neon.com/docs/manage/projects#create-a-project).
 
-- Neon's Free Plan supports 500 MiB of data. If your data size is more than 500 MiB, you'll need to upgrade to one of Neon's paid plans. See [Neon plans](/docs/introduction/plans) for more information.
+- Neon's Free Plan supports 500 MiB of data. If your data size is more than 500 MiB, you'll need to upgrade to one of Neon's paid plans. See [Neon plans](https://neon.com/docs/introduction/plans) for more information.
 
 - Review the [Pgloader MSSQL to Postgres Guide](https://pgloader.readthedocs.io/en/latest/ref/mssql.html) guide. It will provide you with a good understanding of `pgloader` capabilities and how to configure your `pgloader` configuration file, if necessary.
 
-- See [Pgloader configuration](#pgloader-configuration) for a `pgloader` configuration file update that may be required to connect to MSSQL from `pgloader`.
-
-
+- See [Pgloader configuration](https://neon.com/docs/import/migrate-mssql#pgloader-configuration) for a `pgloader` configuration file update that may be required to connect to MSSQL from `pgloader`.
 
 ## Prepare your MSSQL database
 
@@ -61,7 +59,7 @@ This section describes how to prepare your destination Neon PostgreSQL database 
 
 ### Create the Neon database
 
-To maintain parity with the MSSQL deployment, you might want to create a new database in Neon with the same name. Refer to the [Create a database](/docs/manage/databases#create-a-database) guide for more information.
+To maintain parity with the MSSQL deployment, you might want to create a new database in Neon with the same name. Refer to the [Create a database](https://neon.com/docs/manage/databases#create-a-database) guide for more information.
 
 For this example, we will create a new database named `Northwind` in the Neon project. Use `psql` to connect to your Neon project (alternatively, you can use the `Query editor` in the Neon console) and run the following query:
 
@@ -83,8 +81,7 @@ Now, modify the connection string as follows to pass your **endpoint ID** (`ep-c
 postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
-**Note**: Passing the `endpoint ID` with your password is a required workaround for some Postgres drivers, including the one used by `pgloader`. For more information about this workaround and why it's required, refer to our [connection workaround](/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field) documentation. 
-
+   **Note**: Passing the `endpoint ID` with your password is a required workaround for some Postgres drivers, including the one used by `pgloader`. For more information about this workaround and why it's required, refer to our [connection workaround](https://neon.com/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field) documentation.
 
 Keep your Neon connection string handy for later use.
 
@@ -192,8 +189,6 @@ After successfully migrating and verifying your data on Neon:
 
 3. Update your application's connection strings to point to your new Neon database.
 
-
-
 ## Other migration options
 
 While this guide focuses on using `pgloader`, you might need more manual adjustments to ensure:
@@ -225,11 +220,9 @@ For complex migrations or when you need more control over the migration process,
   database = ...
   ```
 
-## Resources
+## Reference
 
 For more information on `pgloader` and database migration, refer to the following resources:
 
 - [pgloader documentation - MSSQL to Postgres](https://pgloader.readthedocs.io/en/latest/ref/mssql.html)
-- [Neon documentation](/docs/introduction)
-- [Microsoft SQL Server documentation](https://learn.microsoft.com/en-us/sql/sql-server)
-- [PostgreSQL documentation](https://www.postgresql.org/docs/)
+- [Neon documentation](https://neon.com/docs/introduction)

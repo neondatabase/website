@@ -1,10 +1,10 @@
 # Schema migration with Neon Postgres and Laravel
 
-> This guide demonstrates how to set up a Laravel project with Neon Postgres, define database models using Eloquent, generate and run migrations, and implement schema changes over time.
+> The document outlines the process of performing schema migrations using Neon Postgres with the Laravel framework, detailing the necessary steps and configurations for seamless integration and execution.
 
 ## Source
 
-- [Schema migration with Neon Postgres and Laravel HTML](https://neon.tech/docs/guides/laravel-migrations): The original HTML version of this documentation
+- [Schema migration with Neon Postgres and Laravel HTML](https://neon.com/docs/guides/laravel-migrations): The original HTML version of this documentation
 
 [Laravel](https://laravel.com/) is a popular PHP web application framework that provides an expressive and elegant syntax for building web applications. It includes an ORM (Object-Relational Mapping) called Eloquent, which allows you to interact with databases using a fluent API. Laravel also provides a powerful migration system to manage database schema changes over time.
 
@@ -30,14 +30,10 @@ To follow along with this guide, you will need:
 Find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. It should look similar to this:
 
 ```bash
-postgresql://<username>:<password>@<hostname>/neondb?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
-
-<Admonition type="note">
-Neon supports both direct and pooled database connection strings, which you can find by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. A pooled connection string connects your application to the database via a PgBouncer connection pool, allowing for a higher number of concurrent connections. However, using a pooled connection string for migrations can be prone to errors. For this reason, we recommend using a direct (non-pooled) connection when performing migrations. For more information about direct and pooled connections, see [Connection pooling](https://neon.tech/docs/connect/connection-pooling).
-</Admonition>
-
+   **Note**: Neon supports both direct and pooled database connection strings, which you can find by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. A pooled connection string connects your application to the database via a PgBouncer connection pool, allowing for a higher number of concurrent connections. However, using a pooled connection string for migrations can be prone to errors. For this reason, we recommend using a direct (non-pooled) connection when performing migrations. For more information about direct and pooled connections, see [Connection pooling](https://neon.com/docs/connect/connection-pooling).
 
 Keep your connection string handy for later use.
 
@@ -60,10 +56,10 @@ Open the `.env` file in the project root directory and update the following data
 ```bash
 DB_CONNECTION=pgsql
 DB_PORT=5432
-DATABASE_URL=<your_neon_postgres_connection_string>
+DATABASE_URL=NEON_POSTGRES_CONNECTION_STRING
 ```
 
-Replace `<your_neon_postgres_connection_string>` with the connection string you retrieved from the Neon Console earlier. The `DB_CONNECTION` should be set to `pgsql` to indicate that we are using a Postgres database.
+Replace `NEON_POSTGRES_CONNECTION_STRING` with the connection string you retrieved from the Neon Console earlier. The `DB_CONNECTION` should be set to `pgsql` to indicate that we are using a Postgres database.
 
 ## Defining data models and running migrations
 
@@ -355,13 +351,11 @@ In this guide, we demonstrated how to set up a Laravel project with `Neon` Postg
 
 You can find the source code for the application described in this guide on GitHub.
 
-
-Migrations with Neon and Laravel
-
+- [Migrations with Neon and Laravel](https://github.com/neondatabase/guide-neon-laravel): Run Neon database migrations in a Laravel project
 
 ## Resources
 
 For more information on the tools and concepts used in this guide, refer to the following resources:
 
 - [Laravel Documentation](https://laravel.com/docs)
-- [Neon Postgres](/docs/introduction)
+- [Neon Postgres](https://neon.com/docs/introduction)

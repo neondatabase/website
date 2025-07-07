@@ -4,7 +4,7 @@ subtitle: Learn how to manage user access to databases in your Neon project
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/manage-database-access
-updatedOn: '2025-02-07T19:29:48.917Z'
+updatedOn: '2025-07-03T12:36:49.567Z'
 ---
 
 Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`.
@@ -93,7 +93,7 @@ To create a read-only role:
    The `readonly_user1` user now has read-only access to tables in the specified schema and database and should be able to connect and run `SELECT` queries.
 
    ```bash
-   psql postgresql://readonly_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/dbname
+   psql postgresql://readonly_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    psql (15.2 (Ubuntu 15.2-1.pgdg22.04+1), server 15.3)
    SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off)
    Type "help" for help.
@@ -175,7 +175,7 @@ To create a read-write role:
    The `readwrite_user1` user now has read-write access to tables in the specified schema and database and should able to connect and run `SELECT`, `INSERT`, `UPDATE`, `DELETE` queries.
 
    ```bash
-   psql postgresql://readwrite_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/dbname
+   psql postgresql://readwrite_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    psql (15.2 (Ubuntu 15.2-1.pgdg22.04+1), server 15.3)
    SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off)
    Type "help" for help.
@@ -263,7 +263,7 @@ To get started:
    The `dev_user1` user can now connect to the database on your development branch and start using the database with full privileges.
 
    ```bash
-   psql postgresql://dev_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/dbname
+   psql postgresql://dev_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    psql (15.2 (Ubuntu 15.2-1.pgdg22.04+1), server 15.3)
    SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off)
    Type "help" for help.

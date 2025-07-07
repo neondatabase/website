@@ -2,7 +2,7 @@
 title: The pgrag extension
 subtitle: Create end-to-end Retrieval-Augmented Generation (RAG) pipelines
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.051Z'
+updatedOn: '2025-06-23T15:24:08.758Z'
 ---
 
 <InfoBlock>
@@ -58,18 +58,15 @@ The steps outlined above can be organized into two main stages:
 With the exception of (4) storing embeddings in the database and (7) Retrieve document chunks from database, which is supported by Postgres with `pgvector`, `pgrag` supports all of the steps listed above. Specifically, `pgrag` supports:
 
 - **Text extraction and conversion**
-
   - Simple text extraction from PDF documents (using [pdf-extract](https://github.com/jrmuizel/pdf-extract)). Currently, there is no Optical Character Recognition (OCR) or support for complex layout and formatting.
   - Simple text extraction from `.docx` documents (using [docx-rs](https://github.com/cstkingkey/docx-rs)).
   - HTML conversion to Markdown (using [htmd](https://github.com/letmutex/htmd)).
 
 - **Text chunking**
-
   - Text chunking by character count (using [text-splitter](https://github.com/benbrandt/text-splitter)).
   - Text chunking by token count (also using [text-splitter](https://github.com/benbrandt/text-splitter)).
 
 - **Local embedding and reranking models**
-
   - Local tokenising + embedding generation with 33M parameter model [bge-small-en-v1.5](https://huggingface.co/Xenova/bge-small-en-v1.5) (using [ort](https://github.com/pykeio/ort) via [fastembed](https://github.com/Anush008/fastembed-rs)).
   - Local tokenising + reranking with 33M parameter model [jina-reranker-v1-tiny-en](https://huggingface.co/jinaai/jina-reranker-v1-tiny-en) (also using [ort](https://github.com/pykeio/ort) via [fastembed](https://github.com/Anush008/fastembed-rs)).
 
@@ -111,7 +108,6 @@ This section lists the functions provided by `pgrag`. For function usage example
 - **Text extraction**
 
   These functions extract text from PDFs, Word files, and HTML.
-
   - `rag.text_from_pdf(bytea) -> text`
   - `rag.text_from_docx(bytea) -> text`
   - `rag.markdown_from_html(text) -> text`
@@ -119,34 +115,29 @@ This section lists the functions provided by `pgrag`. For function usage example
 - **Splitting text into chunks**
 
   These functions split the extracted text into chunks by character count or token count.
-
   - `rag.chunks_by_character_count(text, max_chars, overlap) -> text[]`
   - `rag_bge_small_en_v15.chunks_by_token_count(text, max_tokens, overlap) -> text[]`
 
 - **Generating embeddings for chunks**
 
   These functions generate embeddings for chunks either directly in the extension using a small but best-in-class model on the database server or by calling out to a 3rd-party API such as OpenAI.
-
   - `rag_bge_small_en_v15.embedding_for_passage(text) -> vector(384)`
   - `rag.openai_text_embedding_3_small(text) -> vector(1536)`
 
 - **Generating embeddings for questions**
 
   These functions generate embeddings for the questions.
-
   - `rag_bge_small_en_v15.embedding_for_query(text) -> vector(384)`
   - `rag.openai_text_embedding_3_small(text) -> vector(1536)`
 
 - **Reranking**
 
   This function reranks chunks against the question using a small but best-in-class model that runs locally on your Postgres server.
-
   - `rag_jina_reranker_v1_tiny_en.rerank_distance(text, text) -> real`
 
 - **Calling out to chat models**
 
   This function makes API calls to AI chat models such as ChatGPT to generate an answer using the question and the chunks together.
-
   - `rag.openai_chat_completion(json) -> json`
 
 ---

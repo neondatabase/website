@@ -1,42 +1,36 @@
 # Migrate from Supabase to Neon Postgres
 
-> This guide provides step-by-step instructions for migrating a database from Supabase to Neon Postgres using pg_dump and pg_restore, covering the entire process from exporting data from Supabase to importing it into Neon and verifying the migration.
-
-This guide describes how to migrate a database from Supabase to Neon Postgres using the `pg_dump` and `pg_restore` utilities, which are part of the Postgres client toolset. `pg_dump` works by dumping both the schema and data in a custom format that is compressed and suitable for input into `pg_restore` to rebuild the database.
+> The document outlines the steps for migrating a database from Supabase to Neon Postgres, detailing the process of exporting data from Supabase and importing it into Neon.
 
 ## Source
 
-- [Migrate from Supabase to Neon Postgres HTML](https://neon.tech/docs/import/migrate-from-supabase): The original HTML version of this documentation
+- [Migrate from Supabase to Neon Postgres HTML](https://neon.com/docs/import/migrate-from-supabase): The original HTML version of this documentation
 
-## Alternative approaches
+This guide describes how to migrate a database from Supabase to Neon Postgres.
 
-You can also replicate data from Supabase for a near-zero downtime migration. See [Replicate data from Supabase](/docs/guides/logical-replication-supabase-to-neon).
+We use the `pg_dump` and `pg_restore` utilities, which are part of the Postgres client toolset. `pg_dump` works by dumping both the schema and data in a custom format that is compressed and suitable for input into `pg_restore` to rebuild the database.
 
+   **Note**: You can also replicate data from Supabase for a near-zero downtime migration. See [Replicate data from Supabase](https://neon.com/docs/guides/logical-replication-supabase-to-neon).
 
 ## Prerequisites
-
-Before you begin, ensure you have:
 
 - A Supabase project containing the data you want to migrate.
 
 - A Neon project to move the data to.
-  
-  For detailed information on creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project). Make sure to create a project with the same Postgres version as your Supabase deployment.
+
+  For detailed information on creating a Neon project, see [Create a project](https://neon.com/docs/manage/projects#create-a-project). Make sure to create a project with the same Postgres version as your Supabase deployment.
 
 - `pg_dump` and `pg_restore` utilities installed on your local machine. These typically come with a Postgres installation.
-  
+
   We recommended that you use the `pg_dump` and `pg_restore` programs from the latest version of Postgres, to take advantage of enhancements that might have been made in these programs. To check the version of `pg_dump` or `pg_restore`, use the `-V` option. For example: `pg_dump -V`.
 
-- Review our guide on [Migrating data from Postgres](/docs/import/migrate-from-postgres) for more comprehensive information on using `pg_dump` and `pg_restore`.
+- Review our guide on [Migrating data from Postgres](https://neon.com/docs/import/migrate-from-postgres) for more comprehensive information on using `pg_dump` and `pg_restore`.
 
-
-## Migration process
-
-### Prepare your Supabase database
+## Prepare your Supabase database
 
 This section describes how to prepare your Supabase database for exporting data.
 
-To illustrate the migration workflow, we use the [LEGO Database](/docs/import/import-sample-data#lego-database). This database contains information about LEGO sets, parts, and themes.
+To illustrate the migration workflow, we use the [LEGO Database](https://neon.com/docs/import/import-sample-data#lego-database). This database contains information about LEGO sets, parts, and themes.
 
 ### Retrieve Supabase connection details
 
@@ -51,7 +45,7 @@ To illustrate the migration workflow, we use the [LEGO Database](/docs/import/im
 
 You'll need these details to construct your connection string for `pg_dump`.
 
-### Export data with pg_dump
+## Export data with pg_dump
 
 Now that you have your Supabase connection details, you can export your data using `pg_dump`:
 
@@ -71,9 +65,10 @@ This command includes these arguments:
 
 Supabase projects may also store data corresponding to authentication, storage and other services under different schemas. If necessary, you can specify additional schemas to dump by adding the `--schema` option multiple times.
 
-If the command was successful, you’ll see output similar to the following:
+If the command was successful, you'll see output similar to the following:
 
 ```bash
+...
 pg_dump: saving encoding = UTF8
 pg_dump: saving standard_conforming_strings = on
 pg_dump: saving search_path =
@@ -88,18 +83,17 @@ pg_dump: dumping contents of table "public.lego_sets"
 pg_dump: dumping contents of table "public.lego_themes"
 ```
 
-**Important note**: Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary#pooled-connection-string) (see PgBouncer issues [452](https://github.com/pgbouncer/pgbouncer/issues/452) & [976](https://github.com/pgbouncer/pgbouncer/issues/976) for details). Use an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string) instead.
+   **Important**: Avoid using `pg_dump` over a [pooled connection string](https://neon.com/docs/reference/glossary#pooled-connection-string) (see PgBouncer issues [452](https://github.com/pgbouncer/pgbouncer/issues/452) & [976](https://github.com/pgbouncer/pgbouncer/issues/976) for details). Use an [unpooled connection string](https://neon.com/docs/reference/glossary#unpooled-connection-string) instead.
 
-
-### Prepare your Neon destination database
+## Prepare your Neon destination database
 
 This section describes how to prepare your destination Neon Postgres database to receive the imported data.
 
-#### Create the Neon database
+### Create the Neon database
 
 To maintain consistency with your Supabase setup, you can create a new database in Neon with the same database name you used in Supabase.
 
-1. Connect to your Neon project using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or a Postgres client like [psql](/docs/connect/query-with-psql-editor).
+1. Connect to your Neon project using the [Neon SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor) or a Postgres client like [psql](https://neon.com/docs/connect/query-with-psql-editor).
 
 2. Create a new database. For example, if your Supabase database was named `lego`, run:
 
@@ -107,9 +101,9 @@ To maintain consistency with your Supabase setup, you can create a new database 
    CREATE DATABASE lego;
    ```
 
-For more information, see [Create a database](/docs/manage/databases#create-a-database).
+For more information, see [Create a database](https://neon.com/docs/manage/databases#create-a-database).
 
-#### Retrieve Neon connection details
+### Retrieve Neon connection details
 
 1. In the Neon Console, go to your project dashboard.
 2. Select **Connect** to open the **Connect to your database** modal.
@@ -119,12 +113,12 @@ For more information, see [Create a database](/docs/manage/databases#create-a-da
    postgresql://[user]:[password]@[neon_hostname]/[dbname]
    ```
 
-### Restore data to Neon with pg_restore
+## Restore data to Neon with pg_restore
 
 Now you can restore your data to the Neon database using `pg_restore`:
 
 ```bash
-pg_restore -d postgresql://[user]:[password]@[neon_hostname]/[dbname] -v --no-owner --no-acl supabase_dump.bak
+pg_restore -d <neon-connection-string> -v --no-owner --no-acl supabase_dump.bak
 ```
 
 Replace `[user]`, `[password]`, `[neon_hostname]`, and `[dbname]` with your Neon connection details.
@@ -136,9 +130,9 @@ This command includes these arguments:
 - `--no-owner`: Skips setting the ownership of objects as in the original database.
 - `--no-acl`: Skips restoring access privileges for objects as in the original database.
 
-A Supabase database has ownership and access control tied to the authentication system. We recommend that you use the `--no-owner` and `--no-acl` options to skip restoring these settings. After migrating the data, review and configure the appropriate roles and privileges for all objects, as needed. For more information, refer to the section on [Database object ownership considerations](/docs/import/migrate-from-postgres#database-object-ownership-considerations).
+A Supabase database has ownership and access control tied to the authentication system. We recommend that you use the `--no-owner` and `--no-acl` options to skip restoring these settings. After migrating the data, review and configure the appropriate roles and privileges for all objects, as needed. For more information, refer to the section on [Database object ownership considerations](https://neon.com/docs/import/migrate-from-postgres#database-object-ownership-considerations).
 
-If the command was successful, you’ll see output similar to the following:
+If the command was successful, you'll see output similar to the following:
 
 ```bash
 pg_restore: connecting to database for restore
@@ -156,14 +150,13 @@ pg_restore: creating SEQUENCE OWNED BY "public.lego_colors_id_seq"
 pg_restore: creating TABLE "public.lego_inventories"
 pg_restore: creating SEQUENCE "public.lego_inventories_id_seq"
 ...
-
 ```
 
-### Verify the migration
+## Verify the migration
 
 After the restore process completes, you should verify that your data has been successfully migrated:
 
-1. Connect to your Neon database using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or `psql`.
+1. Connect to your Neon database using the [Neon SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor) or `psql`.
 
 2. Run some application queries to check your data. For example, if you're using the LEGO database, you can run the following:
 
@@ -174,25 +167,26 @@ After the restore process completes, you should verify that your data has been s
 
 3. Compare the results with those from running the same queries on your Supabase database to ensure data integrity.
 
-### Clean up
+## Clean up
 
 After successfully migrating and verifying your data on Neon, you can update your application's connection strings to point to your new Neon database. We recommend that you keep your Supabase dump file (`supabase_dump.bak`) as a backup until you've verified that the migration was successful.
 
-
-
-## Alternative migration options
+## Other migration options
 
 While this guide focuses on using `pg_dump` and `pg_restore`, there are other migration options available:
 
-- **Logical replication**: For larger databases or scenarios where you need to minimize downtime, you might consider using logical replication. See our guide on [Logical replication](/docs/guides/logical-replication-guide) for more information.
+- **Logical replication**
 
-- **CSV export/import**: For smaller datasets or specific tables, you might consider exporting to CSV from Supabase and then importing to Neon. See [Import data from CSV](/docs/import/import-from-csv) for more details on this method.
+  For larger databases or scenarios where you need to minimize downtime, you might consider using logical replication. See our guide on [Logical replication](https://neon.com/docs/guides/logical-replication-guide) for more information.
 
-## Resources
+- **CSV export/import**
+
+  For smaller datasets or specific tables, you might consider exporting to CSV from Supabase and then importing to Neon. See [Import data from CSV](https://neon.com/docs/import/import-from-csv) for more details on this method.
+
+## Reference
 
 For more information on the Postgres utilities used in this guide, refer to the following documentation:
 
-- [PostgreSQL pg_dump documentation](https://www.postgresql.org/docs/current/app-pgdump.html)
-- [PostgreSQL pg_restore documentation](https://www.postgresql.org/docs/current/app-pgrestore.html)
-- [Migrating data to Neon](/docs/import/migrate-from-postgres)
-- [Supabase documentation](https://supabase.com/docs)
+- [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html)
+- [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html)
+- [Migrating data to Neon](https://neon.com/docs/import/migrate-from-postgres)

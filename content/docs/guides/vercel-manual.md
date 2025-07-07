@@ -2,7 +2,7 @@
 title: Connect Vercel and Neon manually
 subtitle: Learn how to connect a Vercel project to a Neon database manually
 enableTableOfContents: true
-updatedOn: '2025-02-03T20:41:57.339Z'
+updatedOn: '2025-07-03T12:36:49.566Z'
 ---
 
 This guide describes how to manually connect a Vercel project to a Neon database.
@@ -26,7 +26,7 @@ You can find the connection details for your database by clicking the **Connect*
 The connection string includes the role name, hostname, and database name. For example:
 
 ```text
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
            ^              ^                                               ^
            |- <role>      |- <hostname>                                   |- <database>
 ```
@@ -40,7 +40,7 @@ postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbna
 The environment variables required to connect your application to Neon depend on your application. Some applications use a `DATABASE_URL` environment variable with a database connection string:
 
 ```text
-DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname"
+DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require?sslmode=require&channel_binding=require"
 ```
 
 Other applications may use `PG*` environment variables to define database connection details:

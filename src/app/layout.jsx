@@ -3,7 +3,8 @@ import 'styles/globals.css';
 import dynamic from 'next/dynamic';
 import Script from 'next/script';
 
-import { ActiveLabelProvider } from 'components/pages/doc/code-tabs/CodeTabsContext';
+import { CodeTabsProvider } from 'contexts/code-tabs-context';
+import { TabsProvider } from 'contexts/tabs-context';
 
 import { inter, esbuild } from './fonts';
 import { HomepageVisitProvider } from './homepage-visit-context';
@@ -39,7 +40,9 @@ const RootLayout = ({ children }) => (
           <PostHogPageView />
           <ThemeProvider>
             <HomepageVisitProvider>
-              <ActiveLabelProvider>{children}</ActiveLabelProvider>
+              <TabsProvider>
+                <CodeTabsProvider>{children}</CodeTabsProvider>
+              </TabsProvider>
             </HomepageVisitProvider>
           </ThemeProvider>
         </PostHogProvider>

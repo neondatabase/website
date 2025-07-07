@@ -2,7 +2,7 @@
 title: File storage with Backblaze B2
 subtitle: Store files via Backblaze B2 and track metadata in Neon
 enableTableOfContents: true
-updatedOn: '2025-04-27T00:00:00.000Z'
+updatedOn: '2025-06-23T15:24:08.763Z'
 ---
 
 [Backblaze B2 Cloud Storage](https://www.backblaze.com/cloud-storage) is an S3-compatible object storage service known for its affordability and ease of use. It's suitable for storing large amounts of unstructured data like backups, archives, images, videos, and application assets.
@@ -71,7 +71,7 @@ We need a table in Neon to store metadata about the objects uploaded to B2.
 2.  Run the SQL statement. Add other relevant columns as needed (e.g., `content_type`, `size` if needed).
 
 <Admonition type="note" title="Securing metadata with RLS">
-If you use [Neon's Row Level Security (RLS)](https://neon.tech/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `b2_files` table. This controls who can view or modify the object references stored in Neon based on your RLS rules.
+If you use [Neon's Row Level Security (RLS)](/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `b2_files` table. This controls who can view or modify the object references stored in Neon based on your RLS rules.
 
 Note that these policies apply _only_ to the metadata in Neon. Access control for the objects within the B2 bucket itself is managed via B2 bucket settings (public/private), Application Key permissions, and presigned URL settings.
 </Admonition>
@@ -440,7 +440,6 @@ WHERE
 
 - The query returns metadata stored in Neon.
 - **Accessing the file:**
-
   - If your bucket is **Public**, you can use the `file_url` directly in your application (e.g., `<img>` tags, download links).
   - If your bucket is **Private**, the stored `file_url` is likely irrelevant. You **must** generate a **presigned download URL** (a GET URL) on demand using your backend. This involves a similar process to generating the upload URL but using `GetObjectCommand` (JS) or `generate_presigned_url('get_object', ...)` (Python) with read permissions. This provides secure, temporary read access.
 

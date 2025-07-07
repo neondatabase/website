@@ -2,7 +2,7 @@
 title: Documentation Contribution Guide
 subtitle: Learn how to contribute to the Neon documentation
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.046Z'
+updatedOn: '2025-07-03T12:36:49.550Z'
 ---
 
 This page provides guidelines for contributing to the Neon documentation. Our goal is to create an environment where our community has the information and knowledge required to confidently participate in improving the Neon documentation.
@@ -428,7 +428,7 @@ postgresql://[user]:[password]@[neon_hostname]/[dbname]
 If you need to provide a connection string with realistic values, use one of the user names mentioned above, `AbC123dEf` for the password, and `dbname` for the database name:
 
 ```text
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 ### Commands, parameters, values, filenames

@@ -23,7 +23,7 @@ Before we begin, make sure you have:
 
 ## Creating Your Neon Project
 
-Neon is now available in Azure! You can create serverless Postgres databases that run on Azure infrastructure. To learn more about Neon's Azure launch, check out the [announcement post](https://neon.tech/blog/neon-is-coming-to-azure).
+Neon is now available in Azure! You can create serverless Postgres databases that run on Azure infrastructure. To learn more about Neon's Azure launch, check out the [announcement post](/blog/neon-is-coming-to-azure).
 
 To create your Neon project on Azure:
 
@@ -102,7 +102,6 @@ To start building serverless applications with Azure Functions you need to set u
 If you don't have the required tools installed, you can follow these steps to set up your development environment:
 
 1. Install the **Azure Functions** extension for VS Code (if you haven't already):
-
    - Open VS Code
    - Click the Extensions icon or press `Ctrl+Shift+X` or `Cmd+Shift+X`
    - Search for "Azure Functions"
@@ -139,12 +138,10 @@ With the required Azure tools installed, you're ready to create your first Azure
    ```
 
    When prompted, select:
-
    - Node.js as the runtime
    - JavaScript as the language
 
    This might take a few moments to complete, and it creates a basic project structure with the following files:
-
    - `host.json`: Contains global configuration options
    - `local.settings.json`: Stores app settings and connection strings for local development
    - `package.json`: Manages project dependencies
@@ -156,7 +153,6 @@ With the required Azure tools installed, you're ready to create your first Azure
    ```
 
    We're using:
-
    - `pg` for Postgres connection to Neon
    - `uuid` for generating unique referral codes
    - `dotenv` for environment variables management
@@ -682,11 +678,10 @@ After creating the Function App, you need to configure it to connect to your Neo
    az functionapp config appsettings set \
      --name referral-system \
      --resource-group referral-system \
-     --settings NEON_CONNECTION_STRING="postgres://user:password@ep-xyz.region.azure.neon.tech/neondb?sslmode=require"
+     --settings NEON_CONNECTION_STRING="postgres://user:password@ep-xyz.region.azure.neon.tech/neondb?sslmode=require&channel_binding=require"
    ```
 
 2. Alternative: Configure settings in the Azure Portal:
-
    - Go to your **Function App** in the Azure Portal.
    - Select **Configuration** under the **Settings** section.
    - Add a new application setting:
@@ -746,7 +741,7 @@ With your referral system deployed to Azure, you should consider some standard p
    CREATE INDEX idx_referrals_status ON referrals(status);
    ```
 
-   You can learn more about indexing in the [Neon documentation](https://neon.tech/postgresql/postgresql-indexes).
+   You can learn more about indexing in the [Neon documentation](/postgresql/postgresql-indexes).
 
 2. Implement connection pooling in your database utility:
 
@@ -760,7 +755,7 @@ With your referral system deployed to Azure, you should consider some standard p
    });
    ```
 
-   Alternatively, you can use the [Neon connection pool](https://neon.tech/docs/connect/connection-pooling) feature to manage connections efficiently.
+   Alternatively, you can use the [Neon connection pool](/docs/connect/connection-pooling) feature to manage connections efficiently.
 
 3. On the Azure Functions side, consider enabling [Azure Functions Premium Plan](https://azure.microsoft.com/en-us/pricing/details/functions/), which offers more control over scaling and performance.
 

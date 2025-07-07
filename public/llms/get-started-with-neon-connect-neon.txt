@@ -1,12 +1,10 @@
 # Connecting Neon to your stack
 
-> This guide explains how to integrate Neon into your application stack, covering connection string formats for various languages and frameworks, how to obtain and use connection details, and addressing common connection issues.
+> The document "Connecting Neon to your stack" outlines the steps for integrating Neon, a serverless PostgreSQL database, with various development environments and tools, detailing connection configurations and necessary prerequisites for seamless integration.
 
 ## Source
 
-- [Connecting Neon to your stack HTML](https://neon.tech/docs/get-started-with-neon/connect-neon): The original HTML version of this documentation
-
-## Overview
+- [Connecting Neon to your stack HTML](https://neon.com/docs/get-started-with-neon/connect-neon): The original HTML version of this documentation
 
 Using Neon as the serverless database in your tech stack means configuring connections. Whether it's a direct connection string from your language or framework, setting environment variables for your deployment platform, connecting to ORMs like Prisma, or configuring deployment settings for CI/CD workflows, it starts with the connection.
 
@@ -14,14 +12,14 @@ Using Neon as the serverless database in your tech stack means configuring conne
 
 This section provides connection string samples for various frameworks and languages, helping you integrate Neon into your tech stack.
 
-### psql
+Tab: psql
 
 ```bash
 # psql example connection string
 psql postgresql://username:password@hostname:5432/database?sslmode=require
 ```
 
-### .env
+Tab: .env
 
 ```ini
 # .env example
@@ -32,7 +30,7 @@ PGPASSWORD=password
 PGPORT=5432
 ```
 
-### Next.js
+Tab: Next.js
 
 ```javascript
 // Next.js example
@@ -54,7 +52,7 @@ function selectAll() {
 }
 ```
 
-### Drizzle
+Tab: Drizzle
 
 ```javascript
 // Drizzle example with the Neon serverless driver
@@ -68,7 +66,7 @@ const db = drizzle(sql);
 const result = await db.select().from(...);
 ```
 
-### Prisma
+Tab: Prisma
 
 ```javascript
 // Prisma example with the Neon serverless driver
@@ -83,7 +81,7 @@ const adapter = new PrismaNeonHTTP(sql);
 const prisma = new PrismaClient({ adapter });
 ```
 
-### Python
+Tab: Python
 
 ```python
 # Python example with psycopg2
@@ -104,28 +102,9 @@ with conn.cursor() as cur:
 conn.close()
 ```
 
-### .NET
+Tab: .NET
 
-```csharp
-# .NET example
-
-## Connection string
-"Host=ep-cool-darkness-123456.us-east-2.aws.neon.tech;Database=dbname;Username=alex;Password=AbC123dEf"
-
-## with SSL
-"Host=ep-cool-darkness-123456.us-east-2.aws.neon.tech;Database=dbname;Username=alex;Password=AbC123dEf;SSL Mode=Require;Trust Server Certificate=true"
-
-## Entity Framework (appsettings.json)
-{
-  ...
-  "ConnectionStrings": {
-    "DefaultConnection": "Host=ep-cool-darkness-123456.us-east-2.aws.neon.tech;Database=dbname;Username=alex;Password=AbC123dEf;SSL Mode=Require;Trust Server Certificate=true"
-  },
-  ...
-}
 ```
-
-### Ruby
 
 ```ruby
 # Ruby example
@@ -149,7 +128,7 @@ end
 conn.close
 ```
 
-### Rust
+Tab: Ruby
 
 ```rust
 // Rust example
@@ -179,7 +158,7 @@ fn main() -> Result<(), Box<dyn error::Error>> {
 }
 ```
 
-### Go
+Tab: Rust
 
 ```go
 // Go example
@@ -225,7 +204,9 @@ When connecting to Neon from an application or client, you connect to a database
 
 You can obtain the database connection details you require by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select a branch, a compute, a database, and a role. A connection string is constructed for you.
 
-Neon supports pooled and direct connections to the database. Use a pooled connection string if your application uses a high number of concurrent connections. For more information, see [Connection pooling](https://neon.tech/docs/connect/connection-pooling#connection-pooling).
+
+
+Neon supports pooled and direct connections to the database. Use a pooled connection string if your application uses a high number of concurrent connections. For more information, see [Connection pooling](https://neon.com/docs/connect/connection-pooling#connection-pooling).
 
 A Neon connection string includes the role, password, hostname, and database name.
 
@@ -237,7 +218,7 @@ postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.
                   |- password
 ```
 
-The hostname includes the ID of the compute, which has an `ep-` prefix: `ep-cool-darkness-a1b2c3d4`. For more information about Neon connection strings, see [Connection string](https://neon.tech/docs/reference/glossary#connection-string).
+   **Note**: The hostname includes the ID of the compute, which has an `ep-` prefix: `ep-cool-darkness-a1b2c3d4`. For more information about Neon connection strings, see [Connection string](https://neon.com/docs/reference/glossary#connection-string).
 
 ## Using connection details
 
@@ -265,7 +246,7 @@ DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4.us-east-2.aw
 psql postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4.us-east-2.aws.neon.tech/dbname
 ```
 
-Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by appending an `sslmode` parameter setting to your connection string. For instructions, see [Connect to Neon securely](https://neon.tech/docs/connect/connect-securely).
+   **Note**: Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by appending an `sslmode` parameter setting to your connection string. For instructions, see [Connect to Neon securely](https://neon.com/docs/connect/connect-securely).
 
 ## FAQs
 
@@ -281,9 +262,9 @@ Neon uses the default Postgres port, `5432`.
 
 Neon projects provisioned on AWS support both [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4) and [IPv6](https://en.wikipedia.org/wiki/IPv6) addresses. Neon projects provisioned on Azure currently only support IPv4.
 
-Additionally, Neon provides a serverless driver that supports both WebSocket and HTTP connections. For further information, refer to our [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver) documentation.
+Additionally, Neon provides a serverless driver that supports both WebSocket and HTTP connections. For further information, refer to our [Neon serverless driver](https://neon.com/docs/serverless/serverless-driver) documentation.
 
 ## Connection notes
 
-- Some older client libraries and drivers, including older `psql` executables, are built without [Server Name Indication (SNI)](https://neon.tech/docs/reference/glossary#sni) support and require a workaround. For more information, see [Connection errors](https://neon.tech/docs/connect/connection-errors).
+- Some older client libraries and drivers, including older `psql` executables, are built without [Server Name Indication (SNI)](https://neon.com/docs/reference/glossary#sni) support and require a workaround. For more information, see [Connection errors](https://neon.com/docs/connect/connection-errors).
 - Some Java-based tools that use the pgJDBC driver for connecting to Postgres, such as DBeaver, DataGrip, and CLion, do not support including a role name and password in a database connection string or URL field. When you find that a connection string is not accepted, try entering the database name, role, and password values in the appropriate fields in the tool's connection UI

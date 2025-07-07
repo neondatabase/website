@@ -50,7 +50,6 @@ Here's how to use it:
 If you encounter issues while rolling back migrations, follow these troubleshooting steps:
 
 - **Failed rollback command:** Check the Laravel logs for error messages. For instance, if you see an error about missing tables or columns:
-
   - Revisit the migration files and ensure they are consistent.
   - Adjust or fix the migrations as needed.
 
@@ -147,7 +146,6 @@ Smaller, manageable migrations make rollbacks simpler.
   Break changes into smaller, logical batches.
 
 - **Example workflow:**
-
   1. Create multiple smaller migrations instead of one large one.
 
   ```bash

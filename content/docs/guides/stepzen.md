@@ -3,7 +3,7 @@ title: Use StepZen with Neon
 subtitle: Learn how to use StepZen to build a GraphQL API for your Neon database
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-03T20:41:57.338Z'
+updatedOn: '2025-07-03T12:36:49.565Z'
 ---
 
 _This guide was contributed by Roy Derks from StepZen_
@@ -101,7 +101,7 @@ The `config.yaml` file stores connection details for the Neon database. The Step
 configurationset:
   - configuration:
       name: postgresql_config
-      uri: YOUR_NEON_DSN?user=YOUR_NEON_USERNAME&password=YOUR_NEON_PASSWORD&options=project=YOUR_NEON_PROJECT_ID&sslmode=require
+      uri: YOUR_NEON_DSN?user=YOUR_NEON_USERNAME&password=YOUR_NEON_PASSWORD&options=project=YOUR_NEON_PROJECT_ID&sslmode=require&channel_binding=require
 ```
 
 As shown above, you need to append `&options=project=YOUR_NEON_PROJECT_ID` to the `uri` connection string. This is needed to establish a secure connection to the Neon database. The `project` option is the ID of the project in Neon. You can find the project ID in the Neon Console under **Settings** or in the URL of your project.

@@ -1,9 +1,9 @@
 ---
 title: Import Data Assistant
-subtitle: Move your existing database to Neon using our automated import tool
+subtitle: Move your database to Neon using our automated import tool
 enableTableOfContents: true
 tag: beta
-updatedOn: '2025-05-09T09:25:03.623Z'
+updatedOn: '2025-06-30T11:30:21.919Z'
 redirectFrom:
   - /docs/import/migration-assistant
 ---
@@ -11,6 +11,10 @@ redirectFrom:
 When you're ready to move your data to Neon, our Import Data Assistant can help you automatically copy your existing database to Neon. You only need to provide a connection string to get started.
 
 <FeatureBetaProps feature_name="Import Data Assistant"/>
+
+<Admonition type="tip" title="Migrate between Neon projects">
+You can also use the **Import Data Assistant** to migrate data between Neon projects. This is useful if you want to upgrade to a newer Postgres version (for example, from Postgres 16 to 17), or move your database to a different region. Just create a new project with the desired Postgres version or region, then use the database connection string from your existing Neon project to import the data into the new one.
+</Admonition>
 
 ## Ways to import
 
@@ -35,13 +39,14 @@ You'll need:
 - A **Neon account**. Sign up at [Neon](https://neon.tech) if you don't have one.
 - A **connection string** to your current database in this format:
   ```
-  postgresql://username:password@host:port/database?sslmode=require
+  postgresql://username:password@host:port/database?sslmode=require&channel_binding=require
   ```
 - **Admin privileges** on your source database. We recommend using a superuser or a user with the necessary `CREATE`, `SELECT`, `INSERT`, and `REPLICATION` privileges.
 - A database **smaller than 10 GB** in size for automated import
+- We recommend migrating to a Neon project created in the same region as your current database. This helps ensure a faster import. There is a 1-hour time limit on import operations.
 
 <Admonition type="important">
-If your database is larger than 10 GB and you need help, [contact us](https://neon.tech/migration-assistance).
+If your database is larger than 10 GB and you need help, [contact us](/migration-assistance).
 </Admonition>
 
 <Steps>
@@ -69,10 +74,10 @@ During import, your source database remains untouched — we only read from it t
 
 ### Known Limitations
 
-- Currently limited to databases **smaller than 10GB**. We are actively working on supporting bigger workloads. In the meantime, conctact support if you are looking to migrate bigger databases.
+- Currently limited to databases **smaller than 10GB**. We are actively working on supporting bigger workloads. In the meantime, contact support if you are looking to migrate bigger databases.
+- There is a 1-hour limit on import operations. For faster imports, we recommend importing to a Neon project created in the same region as your source database.
 - The feature is supported in **AWS regions** only.
-- Databases that use **event triggers are not supported**.
-- Supabase and Heroku databases are not supported, as both use proprietary event triggers.
+- Supabase and Heroku databases are not supported due to unsupported Postgres extensions.
 - Databases running on **IPv6 are not supported yet**.
 - AWS RDS is generally supported, though some incompatibilities may exist. Support for other providers may vary.
 
@@ -97,8 +102,8 @@ After a successful import:
 
 ## Need Help?
 
-- For databases **larger than 10GB**: [Contact our migration team](https://neon.tech/migration-assistance)
-- For **technical issues**: [Contact support](https://neon.tech/contact-support)
+- For databases **larger than 10GB**: [Contact our migration team](/migration-assistance)
+- For **technical issues**: [Contact support](/docs/introduction/support)
 - For **provider-specific questions**: Let us know what database provider you're using when you contact us
 
-If your database import failed for any reason, please [contact our support team](https://neon.tech/migration-assistance). We're here to help you get up and running, including assistance with databases larger than 10GB.
+If your database import failed for any reason, please [contact our support team](/migration-assistance). We're here to help you get up and running, including assistance with databases larger than 10GB.

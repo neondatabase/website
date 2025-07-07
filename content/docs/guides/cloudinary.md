@@ -2,7 +2,7 @@
 title: Media storage with Cloudinary
 subtitle: Store files via Cloudinary and track metadata in Neon
 enableTableOfContents: true
-updatedOn: '2025-04-27T11:08:17.424Z'
+updatedOn: '2025-06-23T15:24:08.765Z'
 ---
 
 [Cloudinary](https://cloudinary.com/) is a cloud-based platform for image and video management, offering upload, storage, real-time manipulation, optimization, and delivery via CDN.
@@ -23,7 +23,6 @@ This guide demonstrates how to integrate Cloudinary with Neon. You'll learn how 
 1.  Sign up for a free or paid account at [Cloudinary.com](https://cloudinary.com/users/register/free).
 2.  Once logged in, navigate to your **Account settings**.
 3.  Find your **Product Environment Credentials** which include:
-
     - **Cloud Name**
     - **API Key**
     - **API Secret**
@@ -51,7 +50,7 @@ We need a table in Neon to store metadata about the assets uploaded to Cloudinar
 2.  Run the SQL statement. You can customize this table by adding other useful columns returned by Cloudinary (e.g., `version`, `format`, `width`, `height`, `tags`).
 
 <Admonition type="note" title="Securing metadata with RLS">
-If you use [Neon's Row Level Security (RLS)](https://neon.tech/blog/introducing-neon-authorize), apply appropriate policies to the `cloudinary_files` table to control access to the metadata stored in Neon based on your rules.
+If you use [Neon's Row Level Security (RLS)](/blog/introducing-neon-authorize), apply appropriate policies to the `cloudinary_files` table to control access to the metadata stored in Neon based on your rules.
 
 Note that these policies apply _only_ to the metadata in Neon. Access control for the assets themselves is managed within Cloudinary (e.g., via asset types, delivery types). By default, uploaded assets are typically accessible via their CDN URL.
 </Admonition>

@@ -5,20 +5,20 @@ isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 redirectFrom:
   - /docs/get-started-with-neon/projects
-updatedOn: '2025-05-21T13:43:18.042Z'
+updatedOn: '2025-07-03T12:36:49.568Z'
 ---
 
-With Neon, everything starts with the project. It is the top-level object in the [Neon object hierarchy](/docs/manage/overview). A project can hold as many branches, databases, and roles as your application or workflow needs. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and resource limits within those projects.
+In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
 
 ## Default resources
 
 When you add a new project, Neon creates the following resources by default:
 
-- A default branch called `main`. You can create child branches from the default branch or from any previously created branch. For more information, see [Manage branches](/docs/manage/branches).
+- Two branches are created for you by default: `production` (your main branch for production workloads) and `development` (a child branch for development work). You can create additional child branches from either of these, or from any other branch. For more information, see [Manage branches](/docs/manage/branches).
 - A single primary read-write compute. This is the compute associated with the branch. For more information, see [Manage computes](/docs/manage/computes).
 - A Postgres database that resides on the project's default branch. If you did not specify your own database name when creating the project, the database created is named `neondb`.
 - A Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a default role named `neondb_owner`.
-- Each [Neon plan](https://neon.tech/docs/introduction/plans) comes with a specific storage allowance. Beyond this allowance on paid plans, extra usage costs apply. Billing-related allowances aside, Neon projects can support data sizes up to 4 TiB. To increase this limit, [contact the Neon Sales team](https://neon.tech/contact-sales).
+- Each [Neon plan](/docs/introduction/plans) comes with a specific storage allowance. Beyond this allowance on paid plans, extra usage costs apply. Billing-related allowances aside, Neon projects can support data sizes up to 4 TiB. To increase this limit, [contact the Neon Sales team](/contact-sales).
 
 ## Create a project
 
@@ -29,7 +29,6 @@ To create a Neon project:
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Click **New Project**.
 3. Specify values for **Project Name**, **Postgres version**, **Cloud Service Provider**, and **Region**. Project names are limited to 64 characters. You can also specify **Compute size** settings when creating a project. The settings you specify become the default settings for computes that you add to your project when creating [branches](/docs/manage/branches#create-a-branch) or [read replicas](/docs/guides/read-replica-guide).
-
    - Neon supports fixed-size computes and autoscaling. For more information, see [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration).
    - The scale to zero setting determines whether a compute is automatically suspended after a period of inactivity. For more information, see [Scale to zero configuration](/docs/manage/computes#scale-to-zero-configuration).
 
@@ -46,7 +45,7 @@ Similar to **docs.new** for instantly creating Google Docs or **repo.new** for a
 To view your projects:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
-1. From the breadcrumb navigation menu at the top-left of the console, select your personal or organization account.
+1. From the breadcrumb navigation menu at the top-left of the console, select your organization.
 1. The **Projects** page lists your projects, including any projects that have been shared with you.
 
 ## Project settings
@@ -64,7 +63,7 @@ The **Settings** page includes these sub-pages:
 - **Collaborators** — Let other users access your project's databases.
 - **Network Security** — Configure Neon's IP and Private Networking features for secure access.
 - **Logical Replication** — Enable logical replication to replicate data from your Neon project to external data services and platforms.
-- **Transfer** — Transfer your project from a personal account to a Neon organization you are a member of.
+- **Transfer** — Transfer your project from the current organization to another organization you are a member of.
 - **Delete** — Use with care! This action deletes your entire project and all its objects, and is irreversible.
 
 ### General project settings
@@ -444,7 +443,7 @@ The response includes information about the role, the database, the default bran
   },
   "connection_uris": [
     {
-      "connection_uri": "postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname"
+      "connection_uri": "postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require"
     }
   ],
   "roles": [

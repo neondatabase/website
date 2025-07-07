@@ -49,7 +49,7 @@ services:
       ADMIN_EMAIL: 'admin@example.com'
       ADMIN_PASSWORD: 'd1r3ctu5'
       DB_CLIENT: 'pg'
-      DB_CONNECTION_STRING: 'postgresql://neondb_owner:...@ep-...us-east-1.aws.neon.tech/neondb?sslmode=require'
+      DB_CONNECTION_STRING: 'postgresql://neondb_owner:...@ep-...us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
       DB_SSL__REJECT_UNAUTHORIZED: 'true'
       WEBSOCKETS_ENABLED: 'true'
       CORS_ENABLED: 'true'

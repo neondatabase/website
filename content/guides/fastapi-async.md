@@ -64,11 +64,10 @@ Follow these steps to set up your project and virtual environment:
     Next, add all the necessary dependencies for your project:
 
     ```bash
-    uv add python-dotenv asyncpg loguru fastapi uvicorn requests
+    uv add python-dotenv asyncpg loguru fastapi uvicorn
     ```
 
     Where each package does the following :
-
     - `FastAPI` : A Web / API framework
     - `AsyncPG` : An asynchronous PostgreSQL client
     - `Uvicorn` : An ASGI server for our app
@@ -103,7 +102,7 @@ In this section, you will set up the connection pool, ensure your database schem
 First, create a `.env` file in the root of your project to store the database connection URL. This file will hold environment-specific variables, such as the connection string to your Neon PostgreSQL database.
 
 ```bash
-DATABASE_URL=postgres://user:password@your-neon-hostname.neon.tech/neondb?sslmode=require
+DATABASE_URL=postgres://user:password@your-neon-hostname.neon.tech/neondb?sslmode=require&channel_binding=require
 ```
 
 Make sure to replace the placeholders (user, password, your-neon-hostname, etc.) with your actual Neon database credentials which are available in the console.

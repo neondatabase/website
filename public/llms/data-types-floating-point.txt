@@ -1,25 +1,27 @@
 # Postgres Floating-point data types
 
-> Floating point data types in Postgres are used to represent numbers with fractional parts, with two primary types: REAL (4 bytes) and DOUBLE PRECISION (8 bytes). These approximate numeric types are essential for scientific calculations but not recommended for exact decimal values.
-
-Postgres floating-point data types are crucial for applications requiring numerical precision. This guide explains their storage requirements, syntax, and appropriate use cases.
+> The document "Postgres Floating-point data types" details the implementation and usage of floating-point data types in Neon, including `float4` and `float8`, and their precision, storage requirements, and behavior in PostgreSQL.
 
 ## Source
 
-- [Postgres Floating-point data types HTML](https://neon.tech/docs/data-types/floating-point): The original HTML version of this documentation
+- [Postgres Floating-point data types HTML](https://neon.com/docs/data-types/floating-point): The original HTML version of this documentation
+
+In Postgres, floating point data types are used to represent numbers that might have a fractional part. These types are essential for situations where precision is key, such as scientific calculations, financial computations, and more.
+
+
 
 ## Storage and syntax
 
 Postgres supports two primary floating-point types:
 
-1. `REAL`: Also known as "single precision," occupying 4 bytes of storage with a precision of at least 6 decimal digits.
-2. `DOUBLE PRECISION`: Known as "double precision," using 8 bytes of storage with a precision of at least 15 decimal digits.
+1. `REAL`: Also known as "single precision," `REAL` occupies 4 bytes of storage. It offers a precision of at least 6 decimal digits.
+2. `DOUBLE PRECISION`: Known as "double precision," this type uses 8 bytes of storage and provides a precision of at least 15 decimal digits.
 
 Both types are approximate numeric types, meaning they may have rounding errors and are not recommended for storing exact decimal values, like monetary data.
 
 ## Example usage
 
-For a weather data application, `REAL` might be used for storing temperature readings, where extreme precision isn't critical:
+For a weather data application, `REAL` might be used for storing temperature readings, where extreme precision isn't critical, as in the following example:
 
 ```sql
 CREATE TABLE weather_data (
@@ -35,7 +37,7 @@ VALUES
     (22.8, 58.1);
 ```
 
-For more complex scientific calculations involving extensive decimal data, `DOUBLE PRECISION` would be more appropriate:
+For more complex scientific calculations involving extensive decimal data, `DOUBLE PRECISION` would be more appropriate, as in this example:
 
 ```sql
 CREATE TABLE scientific_data (
@@ -52,9 +54,11 @@ VALUES
     (22.789012, 418.456123789, '2024-02-03 12:00:00');
 ```
 
-## Arithmetic operations
+## Other examples
 
-Floating-point types support standard arithmetic operations: addition, subtraction, multiplication, division, and modulus. However, operations like division might lead to potential rounding errors and precision loss.
+### Arithmetic operations
+
+Floating-point types support the standard arithmetic operations: addition, subtraction, multiplication, division, and modulus. However, operations like division might lead to potential rounding errors and precision loss.
 
 ```sql
 SELECT 10.0 / 3.0;
@@ -62,9 +66,11 @@ SELECT 10.0 / 3.0;
 
 This query yields `3.3333333333333333`, which does not represent the quantity `10 / 3` exactly, but rather rounded to the nearest representable value. When performing a series of operations, these rounding errors can accumulate and lead to significant precision loss.
 
-## Special Floating-point values
+### Special Floating-point values
 
 Postgres floating-point types can represent special values like `'infinity'`, `'-infinity'`, and `'NaN'` (not a number). These values can be useful in certain mathematical or scientific computations.
+
+Consider a table named `calculations`, which might store the results of various scientific computations, including temperature changes, pressure levels, and calculation errors that could potentially result in `'infinity'`, `'-infinity'`, or `'NaN'` values:
 
 ```sql
 CREATE TABLE calculations (
@@ -82,7 +88,7 @@ VALUES
     ('NaN', 101.325, 'NaN');      -- Examples of undefined results or unmeasurable quantities
 ```
 
-Note that you must use single quotes to wrap these values as shown above.
+Notice that you must use single quotes to wrap these values as shown above.
 
 ## Additional considerations
 
@@ -91,4 +97,4 @@ Note that you must use single quotes to wrap these values as shown above.
 
 ## Resources
 
-- [PostgreSQL documentation - Numeric Types](https://www.postgresql.org/docs/current/datatype-numeric.html): Official PostgreSQL documentation on numeric data types
+- [PostgreSQL documentation - Numeric Types](https://www.postgresql.org/docs/current/datatype-numeric.html)

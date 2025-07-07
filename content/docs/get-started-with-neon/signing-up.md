@@ -7,7 +7,7 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/setting-up-a-project
-updatedOn: '2025-04-29T12:43:26.180Z'
+updatedOn: '2025-06-23T15:24:08.762Z'
 ---
 
 <InfoBlock>
@@ -146,7 +146,6 @@ Your project comes with a `development` branch that's an isolated copy of your `
 1. **Install CLI with Brew or NPM**
 
    Depending on your system, you can install the Neon CLI using either Homebrew (for macOS) or NPM (for other platforms).
-
    - For macOS using Homebrew:
 
      ```bash

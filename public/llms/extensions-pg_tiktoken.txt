@@ -1,12 +1,10 @@
 # The pg_tiktoken extension
 
-> This guide explains how to use the pg_tiktoken extension to efficiently tokenize data in your Postgres database using OpenAI's tiktoken library, covering installation, tokenization functions, and integration with ChatGPT models.
+> The document details the pg_tiktoken extension for Neon, which integrates OpenAI's tiktoken library into PostgreSQL, enabling tokenization of text data directly within the database.
 
 ## Source
 
-- [The pg_tiktoken extension HTML](https://neon.tech/docs/extensions/pg_tiktoken): The original HTML version of this documentation
-
-## Overview
+- [The pg_tiktoken extension HTML](https://neon.com/docs/extensions/pg_tiktoken): The original HTML version of this documentation
 
 The `pg_tiktoken` extension enables fast and efficient tokenization of data in your Postgres database using OpenAI's [tiktoken](https://github.com/openai/tiktoken) library.
 
@@ -35,7 +33,7 @@ You can install the `pg_tiktoken` extension by running the following `CREATE EXT
 CREATE EXTENSION pg_tiktoken
 ```
 
-For information about using the Neon **SQL Editor**, see [Query with Neon's SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](https://neon.tech/docs/connect/query-with-psql-editor).
+For information about using the Neon **SQL Editor**, see [Query with Neon's SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](https://neon.com/docs/connect/query-with-psql-editor).
 
 ## Use the `tiktoken_encode` function
 

@@ -5,7 +5,7 @@ subtitle: Learn about Neon's pricing plans and billing
 redirectFrom:
   - /docs/introduction/billing-overview
   - /docs/introduction/how-billing-works
-updatedOn: '2025-03-11T12:53:58.437Z'
+updatedOn: '2025-05-30T16:54:40.483Z'
 ---
 
 Find all the information you need about Neon's plans and how to manage your monthly bill.
@@ -28,7 +28,7 @@ Start with an overview of Neon's pricing plans to learn what's included, then us
 
 <DetailIconCards>
 
-<a href="https://neon.tech/enterprise" description="Find out how Enterprises are maximizing engineering efficiency with Neon" icon="handshake">Neon for the Enterprise</a>
+<a href="/enterprise" description="Find out how Enterprises are maximizing engineering efficiency with Neon" icon="handshake">Neon for the Enterprise</a>
 
 <a href="/docs/introduction/enterprise-sales-process" description="Learn about Neon's Enterprise sales process and what to expect" icon="import">Neon Enterprise Sales Process</a>
 

@@ -160,16 +160,13 @@ const ContactForm = () => {
 
   return (
     <form
-      className={clsx(
-        'relative z-10 grid gap-y-6 overflow-hidden rounded-xl border border-gray-new-10 bg-[#020203] p-8 shadow-contact xl:gap-y-5 xl:p-[30px] lg:gap-y-6 sm:p-5',
-        'bg-[radial-gradient(131.75%_102.44%_at_16.67%_0%,_rgba(20,24,31,.5),_rgba(20,24,31,0.30)_47.96%,_rgba(20,24,31,0))]'
-      )}
+      className="relative z-10 grid gap-y-6 overflow-hidden rounded-xl border border-gray-new-10 bg-[#020203] bg-contact-form-bg p-8 shadow-contact xl:gap-y-5 xl:p-[30px] lg:gap-y-6 sm:p-5"
       method="POST"
       onSubmit={handleSubmit(onSubmit)}
     >
       <Field
         name="firstname"
-        label="First Name *"
+        label="First Name*"
         autoComplete="name"
         placeholder="Marques"
         theme="transparent"
@@ -180,7 +177,7 @@ const ContactForm = () => {
       />
       <Field
         name="lastname"
-        label="Last Name *"
+        label="Last Name*"
         autoComplete="name"
         placeholder="Hansen"
         theme="transparent"
@@ -191,7 +188,7 @@ const ContactForm = () => {
       />
       <Field
         name="email"
-        label="Work Email *"
+        label="Work Email*"
         type="email"
         autoComplete="email"
         placeholder="info@acme.com"
@@ -214,7 +211,7 @@ const ContactForm = () => {
         <Field
           className="grow"
           name="companySize"
-          label="Company Size *"
+          label="Company Size*"
           tag="select"
           theme="transparent"
           labelClassName={labelClassName}
@@ -235,7 +232,7 @@ const ContactForm = () => {
       </div>
       <Field
         name="message"
-        label="Message *"
+        label="Message*"
         tag="textarea"
         theme="transparent"
         labelClassName={labelClassName}

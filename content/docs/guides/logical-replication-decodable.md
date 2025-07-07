@@ -3,7 +3,7 @@ title: Replicate data with Decodable
 subtitle: Learn how to replicate data from Neon with Decodable
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-11T11:32:44.537Z'
+updatedOn: '2025-06-30T11:30:21.904Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -11,8 +11,7 @@ Neon's logical replication feature allows you to replicate data from your Neon P
 [Decodable](https://www.decodable.co/) is a fully managed platform for ETL, ELT, and stream processing,
 powered by Apache Flink® and Debezium.
 
-In this guide, you will learn how to configure a Postgres source connector in Decodable for ingesting changes from your Neon database so that you can replicate data from Neon to any of Decodable's [supported data sinks](https://docs.decodable.co/connect/destinations.html),
-optionally processing the data with SQL or custom Flink jobs.
+In this guide, you will learn how to configure a Postgres source connector in Decodable for ingesting changes from your Neon database so that you can replicate data from Neon to any of Decodable's [supported data sinks](https://docs.decodable.co/connections.html#sinks), optionally processing the data with SQL or custom Flink jobs.
 
 ## Prerequisites
 
@@ -139,11 +138,10 @@ For information about configuring allowed IPs in Neon, see [Configure IP Allow](
    Your connection string will look like this:
 
    ```bash shouldWrap
-   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    ```
 
    Enter the details for **your connection string** into the source connector fields. Based on the sample connection string above, the values would be specified as shown below. Your values will differ.
-
    - **Connection Type**: Source (the default)
    - **Host**: ep-cool-darkness-123456.us-east-2.aws.neon.tech
    - **Port**: 5432

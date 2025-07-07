@@ -1,12 +1,16 @@
 # Use Neon read replicas with Prisma
 
-Learn how to scale Prisma applications with Neon read replicas
+> The document explains how to configure and use Neon read replicas with Prisma, detailing steps for setting up read replicas to optimize database read operations within a Neon environment.
+
+## Source
+
+- [Use Neon read replicas with Prisma HTML](https://neon.com/docs/guides/read-replica-prisma): The original HTML version of this documentation
 
 A Neon read replica is an independent read-only compute that performs read operations on the same data as your primary read-write compute, which means adding a read replica to a Neon project requires no additional storage.
 
 A key benefit of read replicas is that you can distribute read requests to one or more read replicas, enabling you to easily scale your applications and achieve higher throughput for both read-write and read-only workloads.
 
-For more information about Neon's read replica feature, see [Read replicas](/docs/introduction/read-replicas).
+For more information about Neon's read replica feature, see [Read replicas](https://neon.com/docs/introduction/read-replicas).
 
 In this guide, we'll show you how you can leverage Neon read replicas to efficiently scale Prisma applications using Prisma Client's read replica extension: [@prisma/extension-read-replicas](https://github.com/prisma/extension-read-replicas).
 
@@ -16,7 +20,9 @@ In this guide, we'll show you how you can leverage Neon read replicas to efficie
 
 ## Create a read replica
 
-You can create one or more read replicas for any branch in your Neon project.
+You can create read replicas for any branch in your Neon project.
+
+   **Note**: The Free Plan is limited to a maximum of 3 read replica computes per project.
 
 You can add a read replica by following these steps:
 
@@ -25,16 +31,14 @@ You can add a read replica by following these steps:
 3. Click **Add Read Replica**.
 4. On the **Add new compute** dialog, select **Read replica** as the **Compute type**.
 5. Specify the **Compute size settings** options. You can configure a **Fixed Size** compute with a specific amount of vCPU and RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size. You can also configure the **Scale to zero** setting, which controls whether your read replica compute is automatically suspended due to inactivity after 5 minutes.
-   
-   The compute size configuration determines the processing power of your database. More vCPU and memory means more processing power but also higher compute costs. For information about compute costs, see [Billing metrics](/docs/introduction/billing).
-   
+      **Note**: The compute size configuration determines the processing power of your database. More vCPU and memory means more processing power but also higher compute costs. For information about compute costs, see [Billing metrics](https://neon.com/docs/introduction/billing).
 6. When you finish making selections, click **Create**.
 
    Your read replica compute is provisioned and appears on the **Computes** tab of the **Branches** page.
 
-Alternatively, you can create read replicas using the [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint) or [Neon CLI](/docs/reference/cli-branches#create).
+Alternatively, you can create read replicas using the [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint) or [Neon CLI](https://neon.com/docs/reference/cli-branches#create).
 
-
+Tab: API
 
 ```bash
 curl --request POST \
@@ -52,11 +56,11 @@ curl --request POST \
 ' | jq
 ```
 
+Tab: CLI
+
 ```bash
 neon branches add-compute mybranch --type read_only
 ```
-
-
 
 ## Retrieve the connection string for your read replica
 
@@ -66,7 +70,7 @@ Connecting to a read replica is the same as connecting to any branch in a Neon p
 1. Under **Compute**, select a **Replica** compute.
 1. Select the connection string and copy it. This is the information you need to connect to the read replica from your Prisma Client. The connection string appears similar to the following:
 
-   ```bash shouldWrap
+   ```bash
    postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
    ```
 
@@ -106,10 +110,9 @@ Notice that the `endpoint_id` (`ep-damp-cell-123456`) for the read replica compu
    );
    ```
 
-   
-   You can also pass an array of read replica connection strings if you want to use multiple read replicas. Neon supports adding multiple read replicas to a database branch.
+      **Note**: You can also pass an array of read replica connection strings if you want to use multiple read replicas. Neon supports adding multiple read replicas to a database branch. 
 
-   ```javascript
+```javascript
    // lib/prisma.ts
    const prisma = new PrismaClient().$extends(
      readReplicas({
@@ -117,8 +120,6 @@ Notice that the `endpoint_id` (`ep-damp-cell-123456`) for the read replica compu
      })
    );
    ```
-
-   
 
    When your application runs, read operations are sent to the read replica. If you specify multiple read replicas, a read replica is selected randomly.
 
@@ -136,5 +137,4 @@ Notice that the `endpoint_id` (`ep-damp-cell-123456`) for the read replica compu
 
 This example demonstrates how to use the [@prisma/extension-read-replicas](https://github.com/prisma/extension-read-replicas) extension in Prisma Client. It uses a simple TypeScript script to read and write data in a Postgres database.
 
-
-Prisma read replicas demo
+- [Prisma read replicas demo](https://github.com/prisma/read-replicas-demo): A TypeScript example showing how to use the @prisma/extension-read-replicas extension in Prisma Client

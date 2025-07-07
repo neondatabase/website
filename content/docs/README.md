@@ -1,10 +1,10 @@
 ---
-updatedOn: '2025-04-23T16:22:55.901Z'
+updatedOn: '2025-07-04T12:47:21.296Z'
 ---
 
 # Docs
 
-Welcome to Neon docs! This folder contains the source code of the [Neon docs](https://neon.tech/docs/).
+Welcome to Neon docs! This folder contains the source code of the [Neon docs](/docs/).
 
 ## Basic information
 
@@ -85,7 +85,6 @@ In order to add a new page to the root level, add `slug` in the same level with 
        slug: page-2
 + - title: Root page 1
 +   slug: root-page-1
-+   tag: new
 +   items:
 +     - title: Page 1
 +       slug: page-1
@@ -159,7 +158,6 @@ You can use fenced code blocks with three backticks (```) on the lines before an
 - enable highlighting single lines, multiple lines, and ranges of code lines
 
   Examples:
-
   - Single line highlight
 
     ````md

@@ -158,7 +158,7 @@ Simple enough, right? Now let's prep our database to store this data.
 
 ### Creating a Postgres Database with Neon
 
-Postgres is my go-to database for most projects. And using a managed service like [Neon](https://neon.tech/) makes it even easier to get up and running Serverless Progres databases on Azure.
+Postgres is my go-to database for most projects. And using a managed service like [Neon](https://neon.com/) makes it even easier to get up and running Serverless Progres databases on Azure.
 So, I'm going to head over to my [Neon projects](https://console.neon.tech/app/projects) and create a new project with a Postgres database, then use the following schema to create a table to store my recipes:
 
 ```sql
@@ -233,7 +233,7 @@ I'll paste that connection string into a new setting inside of the `local.settin
   "IsEncrypted": false,
   "Values": {
     "FUNCTIONS_WORKER_RUNTIME": "node",
-    "DATABASE_URL": "postgresql://recipes_owner:secret_password@jchadwick-pooler.eastus2.azure.neon.tech/recipes?sslmode=require",
+    "DATABASE_URL": "postgresql://recipes_owner:secret_password@jchadwick-pooler.eastus2.azure.neon.tech/recipes?sslmode=require&channel_binding=require",
     "AzureWebJobsStorage": "UseDevelopmentStorage=true"
   }
 }
@@ -511,7 +511,7 @@ Define an environment variable in the Azure Function App settings to store the d
 > az functionapp config appsettings set \
     --name recipes-api-2000 \
     --resource-group recipes-api-rg \
-    --settings DATABASE_URL="postgresql://recipes_owner:9WAzoqh2NvYm@ep-black-bush-a8jqxdjf-pooler.eastus2.azure.neon.tech/recipes?sslmode=require"
+    --settings DATABASE_URL="postgresql://recipes_owner:9WAzoqh2NvYm@ep-black-bush-a8jqxdjf-pooler.eastus2.azure.neon.tech/recipes?sslmode=require&channel_binding=require"
 ```
 
 Now when I hit the `/api/recipes` endpoint, I see the repsonse that I expect:

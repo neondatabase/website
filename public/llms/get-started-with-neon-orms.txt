@@ -1,18 +1,14 @@
 # Neon ORM guides
 
-> This page provides links to detailed instructions for connecting to Neon from various ORMs including Django, Drizzle, Laravel, Prisma, Rails, and SQLAlchemy.
+> The Neon ORM guides document outlines the steps for integrating various Object-Relational Mappers (ORMs) with Neon, assisting users in setting up and managing database interactions within their applications.
 
 ## Source
 
-- [Neon ORM guides HTML](https://neon.tech/docs/get-started-with-neon/orms): The original HTML version of this documentation
+- [Neon ORM guides HTML](https://neon.com/docs/get-started-with-neon/orms): The original HTML version of this documentation
 
-## Overview
-
-Find detailed instructions for connecting to Neon from various ORMs:
-
-- [Django](https://neon.tech/docs/guides/django): Connect a Django application to Neon
-- [Drizzle](https://neon.tech/docs/guides/drizzle): Learn how to use Drizzle ORM with your Neon Postgres database (Drizzle docs)
-- [Laravel](https://neon.tech/docs/guides/laravel): Connect a Laravel application to Neon
-- [Prisma](https://neon.tech/docs/guides/prisma): Learn how to connect from Prisma ORM to your Neon Postgres database
-- [Rails](https://neon.tech/docs/guides/ruby-on-rails): Connect a Rails application to Neon
-- [SQLAlchemy](https://neon.tech/docs/guides/sqlalchemy): Connect a SQLAlchemy application to Neon
+- [Django](https://neon.com/docs/guides/django): Connect a Django application to Neon
+- [Drizzle](https://neon.com/docs/guides/drizzle): Learn how to use Drizzle ORM with your Neon Postgres database (Drizzle docs)
+- [Laravel](https://neon.com/docs/guides/laravel): Connect a Laravel application to Neon
+- [Prisma](https://neon.com/docs/guides/prisma): Learn how to connect from Prisma ORM to your Neon Postgres database
+- [Rails](https://neon.com/docs/guides/ruby-on-rails): Connect a Rails application to Neon
+- [SQLAlchemy](https://neon.com/docs/guides/sqlalchemy): Connect a SQLAlchemy application to Neon

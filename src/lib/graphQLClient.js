@@ -14,7 +14,7 @@ export const graphQLClient = new GraphQLClient(process.env.WP_GRAPHQL_URL, {
 // Keep POST for admin operations that need to modify data
 export const graphQLClientAdmin = (authToken) =>
   new GraphQLClient(process.env.WP_GRAPHQL_URL, {
-    method: 'POST', // Keep POST for admin operations
+    method: 'POST',
     headers: {
       Authorization: `Bearer ${authToken}`,
     },

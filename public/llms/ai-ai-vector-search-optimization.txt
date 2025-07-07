@@ -1,12 +1,10 @@
 # Optimize pgvector search
 
-> This guide explores how to effectively use pgvector for vector similarity searches in AI applications, covering profiling queries, choosing between sequential scans and indexes (HNSW and IVFFlat), and tuning parameters for optimal performance and accuracy tradeoffs.
+> The document "Optimize pgvector search" details methods for enhancing the efficiency of vector searches using pgvector in Neon, focusing on index creation, query optimization, and configuration adjustments specific to Neon's database environment.
 
 ## Source
 
-- [Optimize pgvector search HTML](https://neon.tech/docs/ai/ai-vector-search-optimization): The original HTML version of this documentation
-
-## Overview
+- [Optimize pgvector search HTML](https://neon.com/docs/ai/ai-vector-search-optimization): The original HTML version of this documentation
 
 This guide explores how to effectively use `pgvector` for vector similarity searches in your AI applications. We'll address the following key questions:
 
@@ -18,7 +16,7 @@ We'll examine sequential scans, HNSW indexing, and IVFFlat indexing, providing b
 
 Without indexes, `pgvector` performs a sequential scan on the database and calculates the distance between the query vector and all vectors in the table. This approach does an exact search and guarantees 100% **recall**, but it can be costly with large datasets.
 
-Recall is a metric used to evaluate the performance of a search algorithm. It measures how effectively the search retrieves relevant items from a dataset. It is defined as the ratio of the number of relevant items retrieved by the search to the total number of relevant items in the dataset.
+   **Note** what is recall?: Recall is a metric used to evaluate the performance of a search algorithm. It measures how effectively the search retrieves relevant items from a dataset. It is defined as the ratio of the number of relevant items retrieved by the search to the total number of relevant items in the dataset.
 
 The query below uses `EXPLAIN ANALYZE` to generate an execution plan and display the performance of the similarity search query.
 
@@ -56,7 +54,9 @@ Otherwise, consider adding an index for better performance.
 
 HNSW is a graph-based approach to indexing multi-dimensional data. It constructs a multi-layered graph, where each layer is a subset of the previous one. During a vector similarity search, the algorithm navigates through the graph from the top layer to the bottom to quickly find the nearest neighbor. An HNSW graph is known for its superior performance in terms of speed and accuracy.
 
-An HNSW index performs better than IVFFlat (in terms of speed-recall tradeoff) and can be created without any data in the table since there isn't a training step like there is for an IVFFlat index. However, HNSW indexes have slower build times and use more memory.
+   **Note**: An HNSW index performs better than IVFFlat (in terms of speed-recall tradeoff) and can be created without any data in the table since there isn't a training step like there is for an IVFFlat index. However, HNSW indexes have slower build times and use more memory.
+
+
 
 The search process begins at the topmost layer of the HNSW graph. From the starting node, the algorithm navigates to the nearest neighbor in the same layer. The algorithm repeats this step until it can no longer find neighbors more similar to the query vector.
 
@@ -136,7 +136,7 @@ SET enable_seqscan=off;
 SELECT * FROM items ORDER BY embedding <-> '[0.011699999682605267,..., 0.008700000122189522]' LIMIT 100;
 ```
 
-In the example above, `enable_seqscan=off` forces Postgres to use index scans.
+   **Note**: In the example above, `enable_seqscan=off` forces Postgres to use index scans.
 
 The output of this query appears as follows:
 

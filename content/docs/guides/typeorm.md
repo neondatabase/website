@@ -2,7 +2,7 @@
 title: Connect from TypeORM to Neon
 subtitle: Learn how to connect to Neon from TypeORM
 enableTableOfContents: true
-updatedOn: '2025-02-03T20:41:57.339Z'
+updatedOn: '2025-06-30T11:30:21.919Z'
 ---
 
 TypeORM is an open-source ORM that lets you to manage and interact with your database. This guide covers the following topics:
@@ -34,12 +34,12 @@ To establish a basic connection from TypeORM to Neon, perform the following step
    });
    ```
 
-3. Add a `DATABASE_URL` variable to your `.env` file and set it to the Neon connection string that you copied in the previous step. We also recommend adding `?sslmode=require` to the end of the connection string to ensure a [secure connection](/docs/connect/connect-securely).
+3. Add a `DATABASE_URL` variable to your `.env` file and set it to the Neon connection string that you copied in the previous step. We also recommend adding `?sslmode=require&channel_binding=require` to the end of the connection string to ensure a [secure connection](/docs/connect/connect-securely).
 
    Your setting will appear similar to the following:
 
    ```text shouldWrap
-   DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
+   DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
    ```
 
 <Admonition type="tip">
@@ -52,7 +52,7 @@ Serverless functions can require a large number of database connections as deman
 
 ```ini shouldWrap
 # Pooled Neon connection string
-DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require"
+DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require"
 ```
 
 A pooled Neon connection string adds `-pooler` to the endpoint ID, which tells Neon to use a pooled connection. You can add `-pooler` to your connection string manually or copy a pooled connection string from the **Connect to your database** modal, which you can access by clicking **Connect** on your **Project Dashboard**. Enable the **Connection pooling** toggle to add the `-pooler` suffix.
@@ -73,7 +73,7 @@ A Neon compute has two main states: _Active_ and _Idle_. Active means that the c
 When you connect to an idle compute from TypeORM, Neon automatically activates it. Activation typically happens within a few seconds but added latency can result in a connection timeout. To address this issue, you can adjust your Neon connection string by adding a `connect_timeout` parameter. This parameter defines the maximum number of seconds to wait for a new connection to be opened. The default value is 5 seconds. A higher setting may provide the time required to avoid connection timeouts. For example:
 
 ```text shouldWrap
-DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&connect_timeout=10"
+DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require&connect_timeout=10"
 ```
 
 <Admonition type="note">

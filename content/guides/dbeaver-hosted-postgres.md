@@ -38,7 +38,7 @@ postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>
 - `endpoint_hostname` is the host with neon.tech as the [TLD](https://www.cloudflare.com/en-gb/learning/dns/top-level-domain/).
 - `port` is the Neon port number. The default port number is 5432.
 - `dbname` is the name of the database. “neondb” is the default database created with each Neon project.
-- `?sslmode=require` is an optional query parameter that enforces the [SSL](https://www.cloudflare.com/en-gb/learning/ssl/what-is-ssl/) mode while connecting to the Postgres instance for better security.
+- `?sslmode=require&channel_binding=require` is an optional query parameter that enforces the [SSL](https://www.cloudflare.com/en-gb/learning/ssl/what-is-ssl/) mode while connecting to the Postgres instance for better security.
 
 You will be using these connection string components in the following steps to connect DBeaver to your Postgres database.
 
@@ -47,14 +47,12 @@ You will be using these connection string components in the following steps to c
 1. **Open DBeaver**: Ensure DBeaver is running. You will see the main dashboard.
 
 2. **Create a New Database Connection**:
-
    - Click on the "New Database Connection" button (usually a plug icon or from the "Database" menu).
    - In the "Connect to Database" wizard, select "PostgreSQL" from the list of database types and click "Next".
 
 3. **Enter Connection Details**:
 
    ![](/guides/images/dbeaver/conn-1.png)
-
    - Fill in the required fields based on your Neon connection string:
      - **Host**: The endpoint of your hosted Postgres database (e.g., `ep-...us-east-2.aws.neon.tech`).
      - **Port**: The port number (default is `5432`).
@@ -64,11 +62,9 @@ You will be using these connection string components in the following steps to c
    - Enable "Show all databases" to ensure all databases in your Neon project are listed.
 
    ![](/guides/images/dbeaver/conn-2.png)
-
    - Click "Edit Driver Settings" if needed to ensure SSL is enabled. Under the "Driver Properties" tab, set `sslmode` to `require`.
 
 4. **Test the Connection**:
-
    - Click the "Test Connection" button to verify the connection details.
    - If successful, click "Finish" to save the connection. Your new database connection will appear in the left sidebar.
 

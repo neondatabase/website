@@ -1,12 +1,10 @@
 # Connect a Hono application to Neon
 
-> This guide explains how to connect a Hono application to Neon, covering project setup, database configuration, and implementation examples using node-postgres, postgres.js, and the Neon serverless driver.
+> The document outlines the steps for connecting a Hono application to a Neon database, detailing the configuration and setup required for seamless integration within Neon's environment.
 
 ## Source
 
-- [Connect a Hono application to Neon HTML](https://neon.tech/docs/guides/hono): The original HTML version of this documentation
-
-## Overview
+- [Connect a Hono application to Neon HTML](https://neon.com/docs/guides/hono): The original HTML version of this documentation
 
 [Hono](https://hono.dev/) is a lightweight, multi-runtime web framework for the Edge, Node.js, Deno, Bun, and other runtimes. This topic describes how to create a Neon project and access it from a Hono application.
 
@@ -26,24 +24,27 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 2.  Add project dependencies using one of the following commands:
 
+Tab: node-postgres
+
 ```shell
-# node-postgres
 npm install pg
 ```
 
+Tab: postgres.js
+
 ```shell
-# postgres.js
 npm install postgres
 ```
 
+Tab: Neon serverless driver
+
 ```shell
-# Neon serverless driver
 npm install @neondatabase/serverless
 ```
 
 ## Store your Neon credentials
 
-Add a `.env` file to your project directory and add your Neon connection string to it. You can find your connection details by clicking **Connect** on the Neon **Project Dashboard**. For more information, see [Connect from any application](https://neon.tech/docs/connect/connect-from-any-app).
+Add a `.env` file to your project directory and add your Neon connection string to it. You can find your connection details by clicking **Connect** on the Neon **Project Dashboard**. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).
 
 ```shell
 DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require"
@@ -55,8 +56,9 @@ In your Hono application (e.g., in `src/index.ts` or a specific route file), imp
 
 Here's how you can set up a simple route to query the database:
 
+Tab: node-postgres
+
 ```typescript
-// node-postgres
 import { Pool } from 'pg';
 import { Hono } from 'hono';
 import { serve } from '@hono/node-server';
@@ -83,8 +85,9 @@ app.get('/', async (c) => {
 serve(app);
 ```
 
+Tab: postgres.js
+
 ```typescript
-// postgres.js
 import { Hono } from 'hono';
 import postgres from 'postgres';
 import { serve } from '@hono/node-server';
@@ -105,8 +108,9 @@ app.get('/', async (c) => {
 serve(app);
 ```
 
+Tab: Neon serverless driver
+
 ```typescript
-// Neon serverless driver
 import { Hono } from 'hono';
 import { serve } from '@hono/node-server';
 import { neon } from '@neondatabase/serverless';
@@ -149,4 +153,4 @@ Navigate to your application's URL ([localhost:3000](http://localhost:3000)). Yo
 
 You can find a sample Hono application configured for Neon on GitHub:
 
-[Get started with Hono and Neon](https://github.com/neondatabase/examples/tree/main/with-hono): Get started with Hono and Neon
+- [Get started with Hono and Neon](https://github.com/neondatabase/examples/tree/main/with-hono)

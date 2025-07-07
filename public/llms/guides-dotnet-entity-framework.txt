@@ -1,22 +1,21 @@
 # Connect an Entity Framework application to Neon
 
-> This guide explains how to create a Neon project and connect to it from an Entity Framework Core application, covering project setup, dependencies, configuration, and running a basic ASP.NET Core Web API with Npgsql.
+> This document guides users on connecting an Entity Framework application to Neon by detailing the necessary steps and configurations specific to Neon's database environment.
 
 ## Source
 
-- [Connect an Entity Framework application to Neon HTML](https://neon.tech/docs/guides/dotnet-entity-framework): The original HTML version of this documentation
+- [Connect an Entity Framework application to Neon HTML](https://neon.com/docs/guides/dotnet-entity-framework): The original HTML version of this documentation
 
 This guide describes how to create a Neon project and connect to it from an Entity Framework Core application. The example demonstrates how to set up a basic ASP.NET Core Web API project with Entity Framework Core using Npgsql as the database provider.
 
-The same configuration steps can be used for any .NET application using Entity Framework Core, including ASP.NET Core MVC, Blazor, or console applications.
-
+   **Note**: The same configuration steps can be used for any .NET application using Entity Framework Core, including ASP.NET Core MVC, Blazor, or console applications.
 
 To connect to Neon from an Entity Framework application:
 
-1. [Create a Neon Project](#create-a-neon-project)
-2. [Create a .NET project and add dependencies](#create-a-net-project-and-add-dependencies)
-3. [Configure Entity Framework](#configure-entity-framework)
-4. [Run the application](#run-the-application)
+1. [Create a Neon Project](https://neon.com/docs/guides/dotnet-entity-framework#create-a-neon-project)
+2. [Create a .NET project and add dependencies](https://neon.com/docs/guides/dotnet-entity-framework#create-a-net-project-and-add-dependencies)
+3. [Configure Entity Framework](https://neon.com/docs/guides/dotnet-entity-framework#configure-entity-framework)
+4. [Run the application](https://neon.com/docs/guides/dotnet-entity-framework#run-the-application)
 
 ## Create a Neon project
 
@@ -43,9 +42,7 @@ If you do not have one already, create a Neon project.
 
 3. Install required packages
 
-    
-    Ensure you install package versions that match your .NET version. You can verify your .NET version at any time by running `dotnet --version`.
-    
+       **Important** IMPORTANT: Ensure you install package versions that match your .NET version. You can verify your .NET version at any time by running `dotnet --version`.
 
    ```bash
    dotnet tool install --global dotnet-ef --version YOUR_DOTNET_VERSION
@@ -194,9 +191,7 @@ If you do not have one already, create a Neon project.
 
 You can find the source code for the application described in this guide on GitHub.
 
-
-Get started with Entity Framework and Neon
-
+- [Get started with Entity Framework and Neon](https://github.com/neondatabase/examples/tree/main/with-dotnet-entity-framework)
 
 ## Resources
 

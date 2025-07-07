@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/integrations/
   - /docs/quickstart/django/
   - /docs/cloud/integrations/django/
-updatedOn: '2025-04-20T15:44:26.046Z'
+updatedOn: '2025-06-23T15:24:08.767Z'
 ---
 
 To connect to Neon from a Django application:
@@ -82,7 +82,6 @@ For additional information about Django project settings, see [Django Settings: 
   The version number for `libpq` is presented in a different format, for example, version 14.1 will be shown as 140001. If your `libpq` version is less than version 14, you can either upgrade your `psycopg2` driver to get a newer `libpq` version or use one of the workarounds described in our [Connection errors](/docs/connect/connection-errors#the-endpoint-id-is-not-specified) documentation. Upgrading your `psycopg2` driver may introduce compatibility issues with your Django or Python version, so you should test your application thoroughly.
 
 - If you encounter an `SSL SYSCALL error: EOF detected` when connecting to the database, this typically occurs because the application is trying to reuse a connection after the Neon compute has been suspended due to inactivity. To resolve this issue, try one of the following options:
-
   - Set your Django [`CONN_MAX_AGE`](https://docs.djangoproject.com/en/5.1/ref/settings/#conn-max-age) setting to a value less than or equal to the scale to zero setting configured for your compute. The default is 5 minutes (300 seconds).
   - Enable [`CONN_HEALTH_CHECKS`](https://docs.djangoproject.com/en/5.1/ref/settings/#conn-health-checks) by setting it to `true`. This forces a health check to verify that the connection is alive before executing a query.
 
@@ -103,7 +102,7 @@ For schema migration with Django, see our guide:
 Learn how to use Django with Neon Postgres with this blog post and the accompanying sample application.
 
 <DetailIconCards>
-<a href="https://neon.tech/blog/python-django-and-neons-serverless-postgres" description="Learn how to build a Django application with Neon Postgres" icon="import">Blog Post: Using Django with Neon</a>
+<a href="/blog/python-django-and-neons-serverless-postgres" description="Learn how to build a Django application with Neon Postgres" icon="import">Blog Post: Using Django with Neon</a>
 
 <a href="https://github.com/evanshortiss/django-neon-quickstart" description="Django with Neon Postgres" icon="github">Django sample application</a>
 </DetailIconCards>

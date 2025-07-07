@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/security/secure-connections
-updatedOn: '2024-08-07T21:36:52.640Z'
+updatedOn: '2025-07-03T12:36:49.554Z'
 ---
 
 Neon requires that all connections use SSL/TLS encryption to ensure that data sent over the Internet cannot be viewed or manipulated by third parties. Neon rejects connections that do not use SSL/TLS, behaving in the same way as standalone Postgres with only `hostssl` records in a `pg_hba.conf` configuration file.
@@ -29,6 +29,10 @@ Neon supports the following `sslmode` settings, in order of least to most secure
 | `verify-full` | Encryption is required and the server's SSL/TLS certificate is fully verified, including hostname verification, expiration checks, and revocation checks. In addition, the client verifies that the server's certificate has been signed by a trusted certificate authority (CA). |
 
 The choice of which mode to use depends on the specific security requirements of the application and the level of risk that you are willing to tolerate. Neon recommends that you always use `verify-full` mode, which ensures the highest level of security and protects against a wide range of attacks including man-in-the-middle attacks. The following sections describe how to configure connections using `verify-full` mode.
+
+## Channel binding for enhanced security
+
+`channel_binding=require` is a security parameter that ensures the client and server mutually authenticate each other using SCRAM-SHA-256-PLUS. This helps protect against man-in-the-middle attacks, even when using `sslmode=require` alone.
 
 The required configuration for your connection depends on the client you are using.
 

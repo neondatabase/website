@@ -1,10 +1,14 @@
 # Run analytics queries with Read Replicas
 
-Leverage read replicas for running data-intensive analytics queries
+> The document "Run analytics queries with Read Replicas" explains how Neon users can utilize read replicas to execute analytics queries, enabling efficient data analysis without impacting the primary database's performance.
+
+## Source
+
+- [Run analytics queries with Read Replicas HTML](https://neon.com/docs/guides/read-replica-data-analysis): The original HTML version of this documentation
 
 With Neon's read replica feature, you can instantly create a dedicated read replica for running data-intensive analytics or reporting queries. This allows you to avoid disruption or performance degradation on your production database.
 
-A read replica reads data from the same source as your primary read-write compute. There's no data replication, so creating a read replica is a near-instant process. For more information about Neon's read replica architecture, see [Read replicas](/docs/introduction/read-replicas).
+A read replica reads data from the same source as your primary read-write compute. There's no data replication, so creating a read replica is a near-instant process. For more information about Neon's read replica architecture, see [Read replicas](https://neon.com/docs/introduction/read-replicas).
 
 ## Scenario
 
@@ -31,19 +35,13 @@ You want to find the total sale amount for each product in the past year, but du
 
 This guide walks you through creating a read replica, connecting to it, running your query, and optionally deleting the read replica when finished.
 
-
-[Metabase](https://www.metabase.com/) is an open-source business intelligence (BI) company that provides a platform for visualizing and analyzing data. With Metabase and Neon, you can:
-- Create a read replica in Neon
-- Configure [Autoscaling](/docs/introduction/autoscaling) to define minimum and maximum limits for compute resources
-- Configure [scale to zero](/docs/introduction/scale-to-zero) to define whether the read replica scales to zero when not being used
-- Configure a connection to the read replica from Metabase.
-
-With this setup, your read replica only wakes up when Metabase connects, scales to sync job requirements without affecting your production database, and scales back to zero after the job sync is finished.
-
+   **Tip** Metabase Analytics Use Case: [Metabase](https://www.metabase.com/) is an open-source business intelligence (BI) company that provides a platform for visualizing and analyzing data. With Metabase and Neon, you can: - Create a read replica in Neon - Configure [Autoscaling](https://neon.com/docs/introduction/autoscaling) to define minimum and maximum limits for compute resources - Configure [scale to zero](https://neon.com/docs/introduction/scale-to-zero) to define whether the read replica scales to zero when not being used - Configure a connection to the read replica from Metabase. With this setup, your read replica only wakes up when Metabase connects, scales to sync job requirements without affecting your production database, and scales back to zero after the job sync is finished.
 
 ## Create a read replica
 
 Creating a read replica involves adding a read replica compute to a branch.
+
+   **Note**: The Free Plan is limited to a maximum of 3 read replica computes per project.
 
 You can add a read replica compute- to any branch in your Neon project by following these steps:
 
@@ -52,20 +50,20 @@ You can add a read replica compute- to any branch in your Neon project by follow
 3. Click **Add Read Replica**.
 4. On the **Add new copmpute** dialog, select **Read replica** as the **Compute type**.
 5. Specify the **Compute size settings**. You can configure a fixed size compute with a specific amount of vCPU and RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size using the slider. You can also configure a **Scale to zero** setting, which determines whether a compute suspends due to inactivity after 5 minutes.
-   
-   The compute size configuration determines the processing power of your database.
-   
+      **Note**: The compute size configuration determines the processing power of your database.
 6. When you finish making your selections, click **Create**.
 
 Your read replica is provisioned and appears on the **Computes** tab of the **Branches** page. The following section describes how to connect to your read replica.
 
-Alternatively, you can create read replicas using the [Neon CLI](/docs/reference/cli-branches#create) or [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint), providing the flexibility required to integrate read replicas into your workflows or CI/CD processes.
+Alternatively, you can create read replicas using the [Neon CLI](https://neon.com/docs/reference/cli-branches#create) or [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint), providing the flexibility required to integrate read replicas into your workflows or CI/CD processes.
 
-
+Tab: CLI
 
 ```bash
 neon branches add-compute mybranch --type read_only
 ```
+
+Tab: API
 
 ```bash
 curl --request POST \
@@ -83,8 +81,6 @@ curl --request POST \
 ' | jq
 ```
 
-
-
 ## Connect to the read replica
 
 Connecting to a read replica is the same as connecting to any branch, except you connect via a read replica compute instead of your primary read-write compute. The following steps describe how to connect to your read replica with connection details obtained from the Neon Console.
@@ -96,7 +92,7 @@ Connecting to a read replica is the same as connecting to any branch, except you
 
    The connection string appears similar to the following:
 
-   ```bash shouldWrap
+   ```bash
    postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
    ```
 
@@ -113,7 +109,7 @@ Connecting to a read replica is the same as connecting to any branch, except you
 
 1. Connect to your application from a client such as `psql` or add the connection details to your application. For example, to connect using `psql`, issue the following command:
 
-   ```bash shouldWrap
+   ```bash
    psql postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
    ```
 
@@ -134,9 +130,7 @@ If you have a lot of products and sales, this query might impact performance on 
 
 When you are finished running analytics queries, you can delete the read replica if it's no longer required. Deleting a read replica is a permanent action, but you can quickly create a new read replica when you need one.
 
-
-Alternatively, you can let the read replica scale to zero so that it's readily available the next time you need it. Neon's [Scale to Zero](/docs/introduction/scale-to-zero) feature will suspend the compute until the next time you access it. Scale to zero occurs automatically after 5 minutes of inactivity.
-
+   **Tip**: Alternatively, you can let the read replica scale to zero so that it's readily available the next time you need it. Neon's [Scale to Zero](https://neon.com/docs/introduction/scale-to-zero) feature will suspend the compute until the next time you access it. Scale to zero occurs automatically after 5 minutes of inactivity.
 
 To delete a read replica:
 

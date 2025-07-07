@@ -18,7 +18,7 @@ Switching to the Neon serverless driver provides several advantages. It offers g
 To begin, you’ll need:
 
 - An existing application using the Vercel Postgres SDK
-- A [Neon account](https://neon.tech/docs/get-started-with-neon/signing-up) (your Vercel Postgres database will automatically migrate to Neon)
+- A [Neon account](/docs/get-started-with-neon/signing-up) (your Vercel Postgres database will automatically migrate to Neon)
 
 ## Migration Steps
 
@@ -120,12 +120,10 @@ async function transferFunds(fromId: number, toId: number, amount: number) { // 
 ## Best practices
 
 1.  **Choose the right connection method**:
-
     - Use HTTP (`neon()`) for single queries and simple transactions.
     - Use WebSockets (`Pool`) for complex transactions and session-based operations.
 
 2.  **Connection management**:
-
     - For HTTP queries, reuse the `sql` query function.
     - For WebSocket connections in serverless environments, always close connections:
 

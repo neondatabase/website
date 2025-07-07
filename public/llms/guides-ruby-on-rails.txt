@@ -1,22 +1,16 @@
 # Connect a Ruby on Rails application to Neon Postgres
 
-> This guide explains how to connect a Ruby on Rails application to a Neon Postgres database, covering project setup, database configuration, controller creation, and testing the connection with a sample application.
+> The document details the steps required to connect a Ruby on Rails application to a Neon Postgres database, including configuration instructions and necessary code snippets specific to Neon's environment.
 
 ## Source
 
-- [Connect a Ruby on Rails application to Neon Postgres HTML](https://neon.tech/docs/guides/ruby-on-rails): The original HTML version of this documentation
+- [Connect a Ruby on Rails application to Neon Postgres HTML](https://neon.com/docs/guides/ruby-on-rails): The original HTML version of this documentation
 
 [Ruby on Rails](https://rubyonrails.org/), also known simply as Rails, is an open-source web application framework written in Ruby. It uses a model-view-controller architecture, making it a good choice for developing database-backed web applications. This guide shows how to connect to a Ruby on Rails application to a Neon Postgres database.
 
 To connect to Neon from a Ruby on Rails application:
 
-1. [Create a Neon Project](#create-a-neon-project)
-2. [Create a Rails Project](#create-a-rails-project)
-3. [Configure a PostgreSQL Database using Rails](#configure-a-postgresql-database-using-rails)
-4. [Create a Rails Controller](#create-a-rails-controller-to-query-the-database)
-5. [Run the application](#run-the-application)
-
-This guide was tested using Ruby v3.3.0 and Rails v7.1.2.
+   **Note**: This guide was tested using Ruby v3.3.0 and Rails v7.1.2.
 
 ## Create a Neon Project
 
@@ -41,18 +35,13 @@ You now have a Rails project in a folder named `neon-with-rails`.
 
 Create a `.env` file in the root of your Rails project, and add the connection string for your Neon compute. Do not specify a database name after the forward slash in the connection string. Rails will choose the correct database depending on the environment.
 
-```shell shouldWrap
+```shell
 DATABASE_URL=postgresql://[user]:[password]@[neon_hostname]/
 ```
 
+   **Note**: You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).
 
-You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](https://neon.tech/docs/connect/connect-from-any-app).
-
-
-<Admonition type="note">
-The role you specified in the `DATABASE_URL` must have **CREATEDB** privileges. Roles created in the Neon Console, CLI, or API, including the default role created with a Neon project, are granted membership in the [neon_superuser](https://neon.tech/docs/manage/roles#the-neonsuperuser-role) role, which has the `CREATEDB` privilege. Alternatively, you can create roles with SQL to grant specific privileges. See [Manage database access](https://neon.tech/docs/manage/database-access).
-</Admonition>
-
+   **Important**: The role you specified in the `DATABASE_URL` must have **CREATEDB** privileges. Roles created in the Neon Console, CLI, or API, including the default role created with a Neon project, are granted membership in the [neon_superuser](https://neon.com/docs/manage/roles#the-neonsuperuser-role) role, which has the `CREATEDB` privilege. Alternatively, you can create roles with SQL to grant specific privileges. See [Manage database access](https://neon.com/docs/manage/database-access).
 
 Create the development database by issuing the following commands from the root of your project directory:
 
@@ -85,9 +74,9 @@ end
 Replace the contents of the view file at `app/views/home/index.html.erb` with:
 
 ```ruby
-
-  
-
+<% if @version %>
+  <p><%= @version %></p>
+<% end %>
 ```
 
 Replace the contents of `config/routes.rb` with the following code to serve your home view as the root page of the application:
@@ -119,5 +108,4 @@ PostgreSQL 15.5 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1
 
 For schema migration with Ruby on Rails, see our guide:
 
-
-Ruby on Rails Migrations
+- [Ruby on Rails Migrations](https://neon.com/docs/guides/rails-migrations): Schema migration with Neon Postgres and Ruby on Rails

@@ -3,7 +3,7 @@ title: Getting ready for production
 subtitle: A checklist of recommended settings to optimize performance, security, and
   reliability
 enableTableOfContents: true
-updatedOn: '2025-05-20T17:00:38.659Z'
+updatedOn: '2025-06-30T11:30:21.890Z'
 ---
 
 <CheckList title="Production checklist">
@@ -106,7 +106,7 @@ Use a pooled connection string by adding `-pooler` to your endpoint ID, or simpl
 Example connection string:
 
 ```bash shouldWrap
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 ## Increase your project's restore window to 7 days
@@ -211,7 +211,7 @@ Support tickets opened by Business and Enterprise support plan customers are giv
 
 **Recommendation**
 
-Upgrade to a [Business plan](/docs/introduction/plans#business) to get both [Priority support](/docs/introduction/support#prioritized-support-tickets) and acccess to the [Business SLA](https://neon.tech/neon-business-sla).
+Upgrade to a [Business plan](/docs/introduction/plans#business) to get both [Priority support](/docs/introduction/support#prioritized-support-tickets) and acccess to the [Business SLA](/neon-business-sla).
 
 For more information, see the [Support documentation](/docs/introduction/support).
 

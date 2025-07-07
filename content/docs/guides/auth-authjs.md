@@ -3,7 +3,7 @@ title: Authenticate Neon Postgres application users with Auth.js
 subtitle: Learn how to add passwordless authentication to your Neon Postgres database
   application using Auth.js and Resend
 enableTableOfContents: true
-updatedOn: '2025-03-10T17:29:57.965Z'
+updatedOn: '2025-06-30T11:30:21.892Z'
 ---
 
 <Admonition type="tip" title="Did you know?">
@@ -67,7 +67,7 @@ touch .env
 You can find your database connection string by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
 
 ```bash shouldWrap
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 Add this connection string to your `.env` file:
@@ -438,7 +438,7 @@ You can find the source code for the application described in this guide on GitH
 
 For more information about the tools and libraries used in this guide, refer to the following documentation:
 
-- [Neon Documentation](https://neon.tech/docs)
+- [Neon Documentation](/docs)
 - [Auth.js Documentation](https://authjs.dev/)
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Resend Documentation](https://resend.com/docs)

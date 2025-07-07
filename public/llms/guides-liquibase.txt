@@ -1,10 +1,10 @@
 # Get started with Liquibase and Neon
 
-> This guide demonstrates how to manage database schema changes in Neon with Liquibase, covering installation, configuration, deploying schema changes, and rollback operations.
+> The document "Get started with Liquibase and Neon" guides Neon users through the process of integrating Liquibase for database version control and management within the Neon environment.
 
 ## Source
 
-- [Get started with Liquibase and Neon HTML](https://neon.tech/docs/guides/liquibase): The original HTML version of this documentation
+- [Get started with Liquibase and Neon HTML](https://neon.com/docs/guides/liquibase): The original HTML version of this documentation
 
 Liquibase is an open-source library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
 
@@ -12,8 +12,8 @@ This guide steps you through installing the Liquibase CLI, configuring Liquibase
 
 ## Prerequisites
 
-- A Neon account. See [Sign up](https://neon.tech/docs/get-started-with-neon/signing-up).
-- A Neon project. See [Create your first project](https://neon.tech/docs/get-started-with-neon/setting-up-a-project).
+- A Neon account. See [Sign up](https://neon.com/docs/get-started-with-neon/signing-up).
+- A Neon project. See [Create your first project](https://neon.com/docs/get-started-with-neon/setting-up-a-project).
 - Liquibase requires Java. For Liquibase Java requirements, see [Requirements](https://docs.liquibase.com/start/install/liquibase-requirements.html). To check if you have Java installed, run `java --version`, or `java -version` on macOS`.
 
 ## Download and extract Liquibase
@@ -42,21 +42,21 @@ This guide steps you through installing the Liquibase CLI, configuring Liquibase
 
 Add the Liquibase directory to your `PATH` so that you can run Liquibase commands from any location.
 
-### bashrc
+Tab: bashrc
 
 ```bash
 echo 'export PATH=$PATH:/path/to/liquibase' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-### profile
+Tab: profile
 
 ```bash
 echo 'export PATH=$PATH:/path/to/liquibase' >> ~/.profile
 source ~/.profile
 ```
 
-### zsh
+Tab: zsh
 
 ```bash
 echo 'export PATH=$PATH:/path/to/liquibase' >> ~/.zshrc
@@ -80,8 +80,8 @@ For demonstration purposes, create a `blog` database in Neon with two tables, `p
 
 1. Open the [Neon Console](https://console.neon.tech/app/projects).
 1. Select your project.
-1. Select **Databases** from the sidebar and create a database named `blog`. For instructions, see [Create a database](https://neon.tech/docs/manage/databases#create-a-database).
-1. Using the [Neon SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor), add the following tables:
+1. Select **Databases** from the sidebar and create a database named `blog`. For instructions, see [Create a database](https://neon.com/docs/manage/databases#create-a-database).
+1. Using the [Neon SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor), add the following tables:
 
    ```sql
    -- Creating the `authors` table
@@ -109,7 +109,7 @@ Find your database connection string by clicking the **Connect** button on your 
 
 Your Java connection string should look something like the one shown below.
 
-```bash shouldWrap
+```bash
 jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog?user=alex&password=AbC123dEf
 ```
 
@@ -130,7 +130,7 @@ jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog?user=alex
 
 3. Open the `liquibase.properties` file in an editor and add entries for a [liquibase changelog file](https://docs.liquibase.com/concepts/changelogs/home.html) and your database `url`. We'll call the changelog file `dbchangelog.xml`. You will use this file to define schema changes. For the `url`, specify the Neon connection string you retrieved previously.
 
-   ```bash shouldWrap
+   ```bash
    changeLogFile:dbchangelog.xml
    url: jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog?user=alex&password=AbC123dEf&sslmode=require
    ```
@@ -230,8 +230,7 @@ Deploy your database schema change by running the [update](https://docs.liquibas
 liquibase update
 ```
 
-### Command output
-
+Details: Command output
 If the command was successful, you'll see output similar to the following:
 
 ```bash
@@ -251,12 +250,7 @@ Liquibase: Update has been successful. Rows affected: 1
 Liquibase command 'update' was executed successfully.
 ```
 
-> When you run a changeset for the first time, Liquibase automatically creates two tracking tables in your database:
->
-> - [databasechangelog](https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html): Tracks which changesets have been run.
-> - [databasechangeloglock](https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html): Ensures only one instance of Liquibase runs at a time.
->
-> You can verify these tables were created by viewing the `blog` database on the **Tables** page in the Neon Console. Select **Tables** from the sidebar.
+   **Info**: When you run a changeset for the first time, Liquibase automatically creates two tracking tables in your database: - [databasechangelog](https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html): Tracks which changesets have been run. - [databasechangeloglock](https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html): Ensures only one instance of Liquibase runs at a time. You can verify these tables were created by viewing the `blog` database on the **Tables** page in the Neon Console. Select **Tables** from the sidebar.
 
 ## Rollback a change
 
@@ -266,8 +260,7 @@ Try rolling back your last change by running the Liquibase [rollbackCount](https
 liquibase rollbackCount 1
 ```
 
-### Command output
-
+Details: Command output
 If the command was successful, you'll see output similar to the following:
 
 ```bash
@@ -282,7 +275,7 @@ You can verify that creation of the `comments` table was rolled back viewing the
 
 ## Next steps
 
-Learn how to use Liquibase with Neon's database branching feature to set up a developer workflow. See [Set up a developer workflow with Liquibase and Neon](https://neon.tech/docs/guides/liquibase-workflow).
+Learn how to use Liquibase with Neon's database branching feature to set up a developer workflow. See [Set up a developer workflow with Liquibase and Neon](https://neon.com/docs/guides/liquibase-workflow).
 
 ## References
 

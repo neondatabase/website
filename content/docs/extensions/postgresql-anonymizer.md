@@ -2,8 +2,7 @@
 title: The anon extension
 subtitle: Protecting sensitive data in Postgres databases
 enableTableOfContents: true
-tag: new
-updatedOn: '2025-05-09T14:22:02.513Z'
+updatedOn: '2025-07-04T12:47:21.307Z'
 ---
 
 The `anon` extension ([PostgreSQL Anonymizer](https://postgresql-anonymizer.readthedocs.io)) provides data masking and anonymization capabilities to protect sensitive data in Postgres databases. It helps protect personally identifiable information (PII) and other sensitive data, facilitating compliance with regulations such as [GDPR](https://gdpr-info.eu/).
@@ -15,7 +14,7 @@ This guide introduces the `anon` extension and demonstrates how to implement mas
 ## Enable the extension
 
 <Admonition type="note">
-The `anon` extension is currently [experimental](/docs/pg-extensions#experimental-extensions) and may change in future releases.
+The `anon` extension is currently [experimental](/docs/extensions/pg-extensions#experimental-extensions) and may change in future releases.
 </Admonition>
 
 Enable the `anon` extension in your Neon database by following these steps:
@@ -60,6 +59,14 @@ Static masking permanently modifies the original data in your tables. This appro
 - Creating sanitized datasets for testing
 - Archiving data with sensitive information removed
 - Distributing data to third parties
+
+### Branch operations and static masking
+
+When using Neon's branch features with static masking:
+
+- Creating a child branch copies all data as-is from the parent
+- Resetting a branch from the parent replaces all branch data with the parent's current state
+- In both cases, any previous anonymization is lost and must be reapplied
 
 ## Implementation example
 
@@ -141,6 +148,7 @@ Note how:
 ## Limitations
 
 - Neon currently only supports static masking with the `anon` extension
+- With static masking, branch reset operations restore original data, requiring anonymization to be run again
 - Additional `pg_catalog` functions cannot be declared as `TRUSTED` in Neon's implementation
 
 ## Conclusion

@@ -54,7 +54,6 @@ Once enabled, you'll have access to new operators and functions for full-text se
 Before diving into implementation, it's helpful to understand the two key components that make `pg_search` efficient:
 
 1. **BM25 scoring** calculates how relevant each result is based on:
-
    - Word frequency within a document (how often a search term appears)
    - Word rarity across all documents (uncommon terms get higher scores)
    - Document length (adjusts scores so longer documents don't automatically rank higher)
@@ -829,7 +828,6 @@ Next, we'll dockerize the frontend React application. We'll create a separate `D
    ```
 
    This Dockerfile does the following:
-
    - It first builds the React app using the Node.js image.
    - Then, it uses an Nginx image to serve the build files, ensuring that the app is ready for production.
 
@@ -869,7 +867,6 @@ Now, we'll use Docker Compose to run both the backend API and the frontend toget
    ```
 
    This file defines three services:
-
    - **`api`**: The backend service, built from the `snippet-search-api` directory. It expects the `DATABASE_URL` environment variable to connect to the Neon database. You should replace `[username]`, `[password]`, and `[endpoint]` with your actual Neon database credentials or use a `.env` file to manage these variables securely.
    - **`frontend`**: The React frontend service, built from the `snippet-search-ui` directory. It will serve the static build files via Nginx.
 
@@ -884,12 +881,10 @@ With the Dockerfiles and `compose.yml` file in place, we can now build and start
    ```
 
    This command will:
-
    - Build the Docker images for the backend API and the frontend.
    - Create and start the containers for the backend API, frontend, and Postgres database.
 
 2. Access the application:
-
    - The backend API will be available at `http://localhost:3000`.
    - The frontend React app will be served at `http://localhost`.
 

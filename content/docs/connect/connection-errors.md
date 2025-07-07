@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/connectivity-issues
   - /docs/connect/connectivity-issues
-updatedOn: '2025-05-11T11:23:50.611Z'
+updatedOn: '2025-07-03T12:36:49.555Z'
 ---
 
 This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered include:
@@ -35,12 +35,12 @@ Connection problems are sometimes related to a system issue. To check for system
 With older clients and some native Postgres clients, you may receive the following error when attempting to connect to Neon:
 
 ```txt shouldWrap
-ERROR: The endpoint ID is not specified. Either upgrade the Postgres client library (libpq) for SNI support or pass the endpoint ID (the first part of the domain name) as a parameter: '&options=endpoint%3D'. See [https://neon.tech/sni](https://neon.tech/sni) for more information.
+ERROR: The endpoint ID is not specified. Either upgrade the Postgres client library (libpq) for SNI support or pass the endpoint ID (the first part of the domain name) as a parameter: '&options=endpoint%3D'. See [https://neon.com/sni](/sni) for more information.
 ```
 
 This error occurs if your client library or application does not support the **Server Name Indication (SNI)** mechanism in TLS.
 
-Neon uses computet IDs (the first part of a Neon domain name) to route incoming connections. However, the Postgres wire protocol does not transfer domain name information, so Neon relies on the Server Name Indication (SNI) extension of the TLS protocol to do this.
+Neon uses compute IDs (the first part of a Neon domain name) to route incoming connections. However, the Postgres wire protocol does not transfer domain name information, so Neon relies on the Server Name Indication (SNI) extension of the TLS protocol to do this.
 
 SNI support was added to `libpq` (the official Postgres client library) in Postgres 14, which was released in September 2021. Clients that use your system's `libpq` library should work if your Postgres version is >= 14. On Linux and macOS, you can check Postgres version by running `pg_config --version`. On Windows, check the `libpq.dll` version in your Postgres installation's `bin` directory. Right-click on the file, select **Properties** > **Details**.
 
@@ -89,14 +89,14 @@ endpoint=<endpoint_id>$<password>
 Example:
 
 ```txt
-postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 <Admonition type="note">
 Using a dollar sign (`$`) character as a separator may be required if a semicolon (`;`) is not a permitted character in a password field. For example, the [AWS Database Migration Service (DMS)](https://aws.amazon.com/dms/) does not permit a semicolon character in the **Password** field when defining connection details for database endpoints.
 </Admonition>
 
-This approach causes the authentication method to be downgraded from `scram-sha-256` (never transfers a plain text password) to `password` (transfers a plain text password). However, the connection is still TLS-encrypted, so the level of security is equivalent to the security provided by `https` websites. We intend deprecate this option when most libraries and applications provide SNI support.
+This approach causes the authentication method to be downgraded from `scram-sha-256` (never transfers a plain text password) to `password` (transfers a plain text password). However, the connection is still TLS-encrypted, so the level of security is equivalent to the security provided by `https` websites as long as `sslmode=verify-full` or channel binding is used. We intend deprecate this option when most libraries and applications provide SNI support.
 
 ### Libraries
 
@@ -125,7 +125,7 @@ Neon has tested the following drivers for SNI support:
 The following error is often the result of an incorrectly defined connection information, or the driver you are using does not support Server Name Indication (SNI).
 
 ```text shouldWrap
-ERROR:  password authentication failed for user '<user_name>' connection to server at "ep-billowing-fun-123456.us-west-2.aws.neon.tech" (12.345.67.89), port 5432 failed: ERROR:  connection is insecure (try using `sslmode=require`)
+ERROR:  password authentication failed for user '<user_name>' connection to server at "ep-billowing-fun-123456.us-west-2.aws.neon.tech" (12.345.67.89), port 5432 failed: ERROR:  connection is insecure (try using `sslmode=require&channel_binding=require`)
 ```
 
 Check your connection to see if it is defined correctly. Your Neon connection string can be obtained by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. It appears similar to this:
@@ -226,7 +226,7 @@ This error is often encountered when attempting to set the Postgres `search_path
 
 ## Postgrex: DBConnection ConnectionError ssl send: closed
 
-Postgrex has an `:idle_interval` connection parameter that defines an interval for pinging connections after a period of inactivity. The default setting is `1000ms`. If you rely on Neon's [autosuspend](https://neon.tech/docs/introduction/auto-suspend) feature to scale your compute to zero when your database is not active, this setting will prevent that and you may encounter a `(DBConnection.ConnectionError) ssl send: closed (ecto_sql 3.12.0)` error as a result. As a workaround, you can set the interval to a higher value to allow your Neon compute to suspend. For example:
+Postgrex has an `:idle_interval` connection parameter that defines an interval for pinging connections after a period of inactivity. The default setting is `1000ms`. If you rely on Neon's [autosuspend](/docs/introduction/auto-suspend) feature to scale your compute to zero when your database is not active, this setting will prevent that and you may encounter a `(DBConnection.ConnectionError) ssl send: closed (ecto_sql 3.12.0)` error as a result. As a workaround, you can set the interval to a higher value to allow your Neon compute to suspend. For example:
 
 ```elixir
 config :app_name, AppName.Repo
@@ -318,19 +318,16 @@ Failure to resolve the Neon hostname can happen for different reasons:
 **Workarounds**
 
 1. **Using a Public DNS Resolver**
-
    - Google DNS: 8.8.8.8, 8.8.4.4
    - Cloudflare DNS: 1.1.1.1, 1.0.0.1
 
    These can be changed at:
-
    - OS level (macOS, Windows, Linux)
    - Router level
    - Mobile device network settings
    - Android Private DNS (configure a trusted provider such as `dns.google` or `1dot1dot1dot1.cloudflare-dns.com`)
 
    To change your DNS configuration at the OS level:
-
    - **macOS**: System Settings → Network → Wi-Fi → Details → DNS
    - **Windows**: Control Panel → Network and Internet → Network Connections → Right-click your connection → Properties → Internet Protocol Version 4 (TCP/IPv4)
    - **Linux**: Edit `/etc/resolv.conf` or configure your network manager (e.g., NetworkManager, Netplan)
@@ -340,7 +337,6 @@ Failure to resolve the Neon hostname can happen for different reasons:
 2. **Disable system-wide web proxies**
 
    If you’re using a proxy configured at the OS level, it may interfere with DNS lookups. To check and disable system proxy settings:
-
    - **macOS**: System Settings → Network → Wi-Fi → Details → Proxies. Uncheck any active proxy options (e.g., "Web Proxy (HTTP)", "Secure Web Proxy (HTTPS)")
    - **Windows**: Settings → Network & Internet → Proxy. Turn off "Use a proxy server" if it's enabled
    - **Linux**: Check your environment variables (e.g., `http_proxy`, `https_proxy`) and system settings under Network/Proxy.
