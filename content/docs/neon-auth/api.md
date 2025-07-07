@@ -279,7 +279,6 @@ Required parameters:
 - `project_id` (string): The Neon project ID
 - `id` (string): The provider ID (e.g., `google`, `github`, `microsoft`)
 
-
 Optional parameters:
 
 - `client_id` (string): The OAuth client ID
