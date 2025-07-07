@@ -38,7 +38,7 @@ postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.c-2.us-east-2.aws.n
        role -|    |         |- hostname               |- pooler option                   |- database
                   |
                   |- password
-``` 
+```
 
 <Admonition type="note">
 The hostname includes the ID of the compute, which has an `ep-` prefix: `ep-cool-darkness-123456`. For more information about Neon connection strings, see [connection string](/docs/reference/glossary#connection-string).
