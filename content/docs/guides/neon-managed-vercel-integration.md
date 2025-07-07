@@ -91,7 +91,7 @@ In the **Integrate Neon** dialog:
 
 3. **Configure optional settings:**
    - Enable **Create a branch for your development environment** to create a persistent `vercel-dev` branch
-     and sets Vercel development environment variables for it. The `vercel-dev` branch is a clone of your project's default branch (`main`) that you can modify without affecting data on your default branch.
+     and set Vercel development environment variables for it. The `vercel-dev` branch is a clone of your project's default branch (`main`) that you can modify without affecting data on your default branch.
    - Enable **Automatically delete obsolete Neon branches** (recommended) to clean up branches when git branches are deleted.
 
 4. Click **Connect**, then **Done**
