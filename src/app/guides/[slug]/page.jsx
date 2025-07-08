@@ -38,7 +38,7 @@ export async function generateMetadata({ params }) {
   return getMetadata({
     title: `${title} - Neon Guides`,
     description: subtitle,
-    imagePath: `${VERCEL_URL}/guides/og?title=${encodedTitle}`,
+    imagePath: `${VERCEL_URL}/api/og?title=${encodedTitle}`,
     pathname: `${LINKS.guides}/${slug}`,
     rssPathname: null,
     type: 'article',
