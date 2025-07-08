@@ -1,8 +1,6 @@
 ---
 title: 'Mastering Database Branching Workflows'
-subtitle: Ship software faster using Neon branches as ephemeral environments
-enableTableOfContents: true
-updatedOn: '2024-12-21T09:00:00.000Z'
+updatedOn: '2025-07-08T12:47:21.296Z'
 ---
 
 ## Traditional database workflows are broken
