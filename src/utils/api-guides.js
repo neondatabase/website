@@ -38,10 +38,11 @@ const getAllGuides = async () => {
 
       const slugWithoutFirstSlash = slug.slice(1);
       const {
-        data: { title, subtitle, createdAt, updatedOn, isDraft, redirectFrom },
+        data: { title, subtitle, createdAt, updatedOn, isDraft, redirectFrom, author },
         content,
-        author,
       } = data;
+
+      const authorData = getAuthor(author);
 
       // eslint-disable-next-line consistent-return
       return {
@@ -49,7 +50,7 @@ const getAllGuides = async () => {
         subtitle,
         slug: slugWithoutFirstSlash,
         category: 'guides',
-        author,
+        author: authorData,
         createdAt,
         updatedOn,
         date: createdAt,
