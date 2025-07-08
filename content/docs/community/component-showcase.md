@@ -14,7 +14,7 @@ For related information, see the [Neon community](/docs/community/contribution-i
 - [Essential Components](#essential-components) - Most commonly used
 - [Tabbed Content](#tabbed-content) - CodeTabs and Tabs for organized content
 - [Content Organization](#content-organization) - Structure and navigation components
-- [Code Display](#code-display) - Code blocks and syntax highlighting  
+- [Code Display](#code-display) - Code blocks and syntax highlighting
 - [Interactive & Media Components](#interactive--media-components) - UI elements, forms, and media
 - [Shared Content Components](#shared-content-components) - Reusable content and announcements
 - [SDK Components](#sdk-components) - Auto-generated SDK docs
@@ -30,12 +30,14 @@ For related information, see the [Neon community](/docs/community/contribution-i
 These are the most frequently used components in Neon docs.
 
 ### Admonition
+
 Callouts for notes, warnings, and tips. 6 types available: `note` (default), `important`, `tip`, `info`, `warning`, `comingSoon`.
 
 **MDX:**
+
 ```mdx
 <Admonition type="warning" title="Important">
-Critical information requiring immediate attention.
+  Critical information requiring immediate attention.
 </Admonition>
 ```
 
@@ -72,19 +74,24 @@ Information about features that are coming soon.
 </Admonition>
 
 ### Steps
+
 Numbered step-by-step instructions split by `h2` headings.
 
 **MDX:**
+
 ```mdx
 <Steps>
 
 ## Step 1: Install CLI
+
 Install the Neon CLI tool for managing your database.
 
-## Step 2: Create Project  
+## Step 2: Create Project
+
 Create a new project in the Neon console.
 
 ## Step 3: Connect Application
+
 Connect your application to the Neon database.
 
 </Steps>
@@ -95,12 +102,15 @@ Connect your application to the Neon database.
 <Steps>
 
 ## Step 1: Install CLI
+
 Install the Neon CLI tool for managing your database.
 
-## Step 2: Create Project  
+## Step 2: Create Project
+
 Create a new project in the Neon console.
 
 ## Step 3: Connect Application
+
 Connect your application to the Neon database.
 
 </Steps>
@@ -112,9 +122,11 @@ Connect your application to the Neon database.
 Components for organizing content into tabs.
 
 ### CodeTabs
+
 Multi-language code examples with tabs. For enhanced code block features, see [Code Display](#code-display).
 
 **MDX:**
+
 ````mdx
 <CodeTabs labels={["JavaScript", "Python", "Go"]}>
 
@@ -182,6 +194,7 @@ db, err := sql.Open("postgres", os.Getenv("DATABASE_URL"))
 General tabbed content (not just code). For code-specific tabs, use [CodeTabs](#codetabs) instead.
 
 **MDX:**
+
 ````mdx
 <Tabs labels={["Console", "CLI", "API"]}>
 <TabItem>
@@ -193,6 +206,7 @@ Use the Neon CLI to create a database:
 ```bash
 neon databases create --name my-database
 ```
+
 </TabItem>
 <TabItem>
 Use the API to create a database:
@@ -201,6 +215,7 @@ Use the API to create a database:
 curl -X POST https://console.neon.tech/api/v2/projects/my-project/databases \
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
+
 </TabItem>
 </Tabs>
 ````
@@ -217,6 +232,7 @@ Use the Neon CLI to create a database:
 ```bash
 neon databases create --name my-database
 ```
+
 </TabItem>
 <TabItem>
 Use the API to create a database:
@@ -225,6 +241,7 @@ Use the API to create a database:
 curl -X POST https://console.neon.tech/api/v2/projects/my-project/databases \
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
+
 </TabItem>
 </Tabs>
 
@@ -243,16 +260,36 @@ Technology cards with icons, titles, and descriptions. These components use diff
 Standard technology cards layout using [TechCards icons](#techcards-icons):
 
 **MDX:**
+
 ```mdx
 <TechCards>
-<a href="/docs/guides/node" title="Node.js" 
-   description="Connect Node.js applications to Neon" icon="node-js">Node.js</a>
-<a href="/docs/guides/python" title="Python" 
-   description="Connect Python applications to Neon" icon="python">Python</a>
-<a href="/docs/guides/prisma" title="Prisma" 
-   description="Use Prisma ORM with Neon" icon="prisma">Prisma</a>
-<a href="/docs/guides/nextjs" title="Next.js" 
-   description="Build Next.js apps with Neon" icon="next-js">Next.js</a>
+  <a
+    href="/docs/guides/node"
+    title="Node.js"
+    description="Connect Node.js applications to Neon"
+    icon="node-js"
+  >
+    Node.js
+  </a>
+  <a
+    href="/docs/guides/python"
+    title="Python"
+    description="Connect Python applications to Neon"
+    icon="python"
+  >
+    Python
+  </a>
+  <a href="/docs/guides/prisma" title="Prisma" description="Use Prisma ORM with Neon" icon="prisma">
+    Prisma
+  </a>
+  <a
+    href="/docs/guides/nextjs"
+    title="Next.js"
+    description="Build Next.js apps with Neon"
+    icon="next-js"
+  >
+    Next.js
+  </a>
 </TechCards>
 ```
 
@@ -270,16 +307,41 @@ Standard technology cards layout using [TechCards icons](#techcards-icons):
 Alternative layout using [DetailIconCards icons](#detailiconcards-icons):
 
 **MDX:**
+
 ```mdx
 <DetailIconCards>
-<a href="/docs/ai/openai" title="OpenAI Integration" 
-   description="Build AI features with OpenAI" icon="openai">OpenAI Integration</a>
-<a href="/docs/ai/langchain" title="LangChain Integration" 
-   description="Create AI workflows with LangChain" icon="langchain">LangChain Integration</a>
-<a href="/docs/development" title="Code Development" 
-   description="Development tools and practices" icon="code">Code Development</a>
-<a href="/docs/cloud/aws" title="AWS Integration" 
-   description="Deploy and scale with AWS" icon="aws">AWS Integration</a>
+  <a
+    href="/docs/ai/openai"
+    title="OpenAI Integration"
+    description="Build AI features with OpenAI"
+    icon="openai"
+  >
+    OpenAI Integration
+  </a>
+  <a
+    href="/docs/ai/langchain"
+    title="LangChain Integration"
+    description="Create AI workflows with LangChain"
+    icon="langchain"
+  >
+    LangChain Integration
+  </a>
+  <a
+    href="/docs/development"
+    title="Code Development"
+    description="Development tools and practices"
+    icon="code"
+  >
+    Code Development
+  </a>
+  <a
+    href="/docs/cloud/aws"
+    title="AWS Integration"
+    description="Deploy and scale with AWS"
+    icon="aws"
+  >
+    AWS Integration
+  </a>
 </DetailIconCards>
 ```
 
@@ -292,21 +354,24 @@ Alternative layout using [DetailIconCards icons](#detailiconcards-icons):
 <a href="/docs/cloud/aws" title="AWS Integration" description="Deploy and scale with AWS" icon="aws">AWS Integration</a>
 </DetailIconCards>
 
-*Note: DetailIconCards uses a different [icon system](#detailiconcards-icons) than [TechCards](#techcards-icons), which is why different icons are available.*
+_Note: DetailIconCards uses a different [icon system](#detailiconcards-icons) than [TechCards](#techcards-icons), which is why different icons are available._
 
 #### TechCards vs DetailIconCards vs DocsList
+
 Quick comparison to help you choose the right component:
 
-| Component | Use For | Icon System | Layout |
-|-----------|---------|-------------|---------|
-| **[TechCards](#techcards)** | Technology/framework showcases | [Technology logos](#techcards-icons) (colorful) | Card grid |
-| **[DetailIconCards](#detailiconcards)** | Feature/service showcases | [Detail icons](#detailiconcards-icons) (monochrome) | Card grid |
-| **[DocsList](#docslist)** | Documentation links | Checkbox (default), docs, or repo icon | Simple list |
+| Component                               | Use For                        | Icon System                                         | Layout      |
+| --------------------------------------- | ------------------------------ | --------------------------------------------------- | ----------- |
+| **[TechCards](#techcards)**             | Technology/framework showcases | [Technology logos](#techcards-icons) (colorful)     | Card grid   |
+| **[DetailIconCards](#detailiconcards)** | Feature/service showcases      | [Detail icons](#detailiconcards-icons) (monochrome) | Card grid   |
+| **[DocsList](#docslist)**               | Documentation links            | Checkbox (default), docs, or repo icon              | Simple list |
 
 ### DefinitionList
+
 Accessible term/definition lists for defining technical terms and concepts.
 
 **MDX:**
+
 ```mdx
 <DefinitionList>
 
@@ -348,16 +413,18 @@ Branch
 Simple, clean lists for documentation links with optional theming. DocsList provides a lightweight alternative to card-based components for presenting navigation links or content summaries.
 
 **Props:**
+
 - `title` (string) - Optional title for the list section
 - `theme` (string) - Visual theme: `"docs"` (document icon), `"repo"` (repository icon), or default (checkbox icon)
 
 **Default Theme (Checkbox Icon):**
+
 ```mdx
 <DocsList title="Related Documentation">
-<a href="/docs/guides/node">Node.js Connection Guide</a>
-<a href="/docs/guides/python">Python Connection Guide</a>
-<a href="/docs/api-reference">API Reference</a>
-<a href="/docs/cli">CLI Documentation</a>
+  <a href="/docs/guides/node">Node.js Connection Guide</a>
+  <a href="/docs/guides/python">Python Connection Guide</a>
+  <a href="/docs/api-reference">API Reference</a>
+  <a href="/docs/cli">CLI Documentation</a>
 </DocsList>
 ```
 
@@ -375,10 +442,12 @@ Simple, clean lists for documentation links with optional theming. DocsList prov
 InfoBlock creates a multi-column layout for organizing related content sections. It's particularly useful for creating "at-a-glance" summaries at the top of documentation pages, combining learning objectives with related resources. Use two columns.
 
 **Key Features:**
+
 - Commonly paired with DocsList for structured content presentation
 - Ideal for page introductions and overview sections
 
 **Basic Two-Column Layout:**
+
 ```mdx
 <InfoBlock>
 <DocsList title="What you will learn:">
@@ -418,29 +487,33 @@ InfoBlock creates a multi-column layout for organizing related content sections.
 Enhanced code blocks and external code embedding. For multi-language code examples, see [CodeTabs](#codetabs).
 
 ### Code Block Features
+
 Enhanced code blocks with highlighting and options.
 
 **Line highlighting:**
+
 ````mdx
 ```javascript {1,3-4}
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
   ssl: true,
-  port: 5432
+  port: 5432,
 });
 ```
 ````
 
 **Renders as:**
+
 ```javascript {1,3-4}
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
   ssl: true,
-  port: 5432
+  port: 5432,
 });
 ```
 
 **Line numbers and wrapping:**
+
 ````mdx
 ```bash shouldWrap
 curl -X POST https://console.neon.tech/api/v2/projects \
@@ -451,6 +524,7 @@ curl -X POST https://console.neon.tech/api/v2/projects \
 ````
 
 **Renders as:**
+
 ```bash shouldWrap
 curl -X POST https://console.neon.tech/api/v2/projects \
   -H "Authorization: Bearer $NEON_API_KEY" \
@@ -459,9 +533,11 @@ curl -X POST https://console.neon.tech/api/v2/projects \
 ```
 
 ### ExternalCode
+
 Embed code from external sources with syntax highlighting.
 
 **MDX:**
+
 ```mdx
 <ExternalCode
   url="https://raw.githubusercontent.com/neondatabase/neon/main/README.md"
@@ -480,18 +556,21 @@ Example of external code loading (mocked for showcase):
 Serverless Postgres built for the cloud.
 
 ## Key Features
+
 - **Instant provisioning**: Create databases in seconds
-- **Autoscaling**: Scale compute up and down automatically  
+- **Autoscaling**: Scale compute up and down automatically
 - **Branching**: Create database branches like Git
 - **Scale to zero**: Save costs when inactive
 
 ## Quick Start
+
 1. Sign up at console.neon.tech
 2. Create your first project
 3. Connect using your preferred client
 ```
 
 **Props:**
+
 - `url` (required) - URL to the raw file
 - `language` (optional) - Language for syntax highlighting
 - `shouldWrap` (boolean) - Enables code wrapping
@@ -504,9 +583,11 @@ Serverless Postgres built for the cloud.
 ### Interactive Elements
 
 #### CheckList
+
 Interactive checklists with local storage persistence. Great for setup guides and tutorials with [Steps](#steps).
 
 **MDX:**
+
 ```mdx
 <CheckList title="Neon Setup Guide">
 
@@ -552,15 +633,17 @@ Interactive checklists with local storage persistence. Great for setup guides an
 </CheckList>
 
 #### CTA (Call to Action)
+
 Action buttons and promotional sections.
 
 **MDX:**
+
 ```mdx
-<CTA 
-  title="Try Neon Free" 
-  description="Start building with serverless Postgres today. No credit card required." 
-  buttonText="Sign Up" 
-  buttonUrl="https://console.neon.tech/signup" 
+<CTA
+  title="Try Neon Free"
+  description="Start building with serverless Postgres today. No credit card required."
+  buttonText="Sign Up"
+  buttonUrl="https://console.neon.tech/signup"
 />
 ```
 
@@ -574,9 +657,11 @@ Action buttons and promotional sections.
 />
 
 #### Details
+
 Expandable content sections for optional or advanced information.
 
 **MDX:**
+
 ````mdx
 <details>
 <summary>Advanced Configuration Options</summary>
@@ -593,7 +678,7 @@ const config = {
   connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false },
   max: 20, // pool size
-  idleTimeoutMillis: 30000
+  idleTimeoutMillis: 30000,
 };
 ```
 
@@ -617,7 +702,7 @@ const config = {
   connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false },
   max: 20, // pool size
-  idleTimeoutMillis: 30000
+  idleTimeoutMillis: 30000,
 };
 ```
 
@@ -626,9 +711,11 @@ const config = {
 ### Form & Support Components
 
 #### NeedHelp
+
 Support widget for getting assistance.
 
 **MDX:**
+
 ```mdx
 <NeedHelp />
 ```
@@ -638,11 +725,13 @@ Support widget for getting assistance.
 <NeedHelp />
 
 #### RequestForm
-Contact or request submission form. 
+
+Contact or request submission form.
 
 There are types (`extension` and `regions`) defined in `src/components/shared/request-form/data.js`. To define a new type, define a new config in `data.js` and register it in `DATA` there.
 
 **MDX:**
+
 ```mdx
 <RequestForm type="extension" />
 ```
@@ -652,16 +741,19 @@ There are types (`extension` and `regions`) defined in `src/components/shared/re
 <RequestForm type="extension" />
 
 #### ChatOptions
-Chat interface options component with a specific use case in the sidebar navigation. 
+
+Chat interface options component with a specific use case in the sidebar navigation.
 
 **Important:** This component is designed for internal navigation use only and should not be used in regular documentation content.
 
 ### Media Components
 
 #### YoutubeIframe
+
 Embedded YouTube video player.
 
 **MDX:**
+
 ```mdx
 <YoutubeIframe embedId="IcoOpnAcO1Y" />
 ```
@@ -671,14 +763,16 @@ Embedded YouTube video player.
 <YoutubeIframe embedId="IcoOpnAcO1Y" />
 
 #### Video
+
 Native video player component.
 
 **MDX:**
+
 ```mdx
-<Video  
-sources={[{src: "/videos/pages/doc/neon-mcp.mp4",type: "video/mp4",}]}
-width={960}
-height={1080}
+<Video
+  sources={[{ src: '/videos/pages/doc/neon-mcp.mp4', type: 'video/mp4' }]}
+  width={960}
+  height={1080}
 />
 ```
 
@@ -697,9 +791,11 @@ height={1080}
 Reusable content components that load from shared templates in `content/docs/shared-content/`. These components are defined as MDX files and registered in `shared-content/index.js`. For component-specific help, see [NeedHelp](#needhelp).
 
 ### Feature Announcements
+
 Status indicators for features in different stages:
 
 **MDX:**
+
 ```mdx
 <FeatureBetaProps feature_name="" />
 <FeatureBeta />
@@ -746,6 +842,7 @@ Status indicators for features in different stages:
 These components do not fit neatly into the other categories but are available for use in MDX docs:
 
 **MDX:**
+
 ```mdx
 <LinkAPIKey />
 <AIRule name="Example Tool" />
@@ -770,11 +867,13 @@ These components do not fit neatly into the other categories but are available f
 Auto-generated components specifically for SDK documentation. These load content from [shared templates](#shared-content-components).
 
 ### Getting Started
+
 ```mdx
 <GetStarted sdkName="Next.js" />
 ```
 
 ### SDK Type Components
+
 ```mdx
 <SdkUser sdkName="React" />
 <SdkProject sdkName="Node.js" />
@@ -789,11 +888,11 @@ Auto-generated components specifically for SDK documentation. These load content
 
 Neon documentation uses multiple icon systems for different components. Only [TechCards](#techcards-icons) and [DetailIconCards](#detailiconcards-icons) icons can be used in MDX content - understanding which system to use is crucial for [TechCards](#techcards) vs [DetailIconCards](#detailiconcards).
 
-| System                | Icon source/mapping location                        | How to use                        | Example usage                |
-|-----------------------|-----------------------------------------------------|-----------------------------------|------------------------------|
-| [TechCards](#techcards-icons)             | `/public/images/technology-logos/{icon}.svg`        | Any SVG in that folder by name    | `icon="prisma"`              |
-| [DetailIconCards](#detailiconcards-icons)       | `/src/components/pages/doc/detail-icon-cards/detail-icon-cards.jsx`                 | Only icons mapped in the code     | `icon="prisma"`              |
-| [Sidebar/Menu](#sidebarmenu-icon-system)          | `/src/components/pages/doc/menu/icon/icon.jsx`       | Internal navigation only (not for MDX)     | N/A - not usable in docs    |
+| System                                    | Icon source/mapping location                                        | How to use                             | Example usage            |
+| ----------------------------------------- | ------------------------------------------------------------------- | -------------------------------------- | ------------------------ |
+| [TechCards](#techcards-icons)             | `/public/images/technology-logos/{icon}.svg`                        | Any SVG in that folder by name         | `icon="prisma"`          |
+| [DetailIconCards](#detailiconcards-icons) | `/src/components/pages/doc/detail-icon-cards/detail-icon-cards.jsx` | Only icons mapped in the code          | `icon="prisma"`          |
+| [Sidebar/Menu](#sidebarmenu-icon-system)  | `/src/components/pages/doc/menu/icon/icon.jsx`                      | Internal navigation only (not for MDX) | N/A - not usable in docs |
 
 ### TechCards Icons
 
@@ -811,21 +910,23 @@ a-chart, app-store, atom, audio-jack, autoscaling, aws, binary-code, branching, 
 
 ### Sidebar/Menu Icon System
 
-Sidebar and menu icons are implemented in `src/components/pages/doc/menu/icon/icon.jsx` for the website's navigation system. Icons are imported from `icons/docs/sidebar/` and mapped in the `icons` object. 
+Sidebar and menu icons are implemented in `src/components/pages/doc/menu/icon/icon.jsx` for the website's navigation system. Icons are imported from `icons/docs/sidebar/` and mapped in the `icons` object.
 
 **Important**: These icons are NOT available for use in MDX content - they're only for the website's internal navigation menu. For icons in your documentation, use [TechCards icons](#techcards-icons) or [DetailIconCards icons](#detailiconcards-icons) instead.
 
 ### Code References
 
 **DetailIconCards mapping:**
+
 ```js
 import Prisma from './images/prisma.inline.svg';
 // ... other imports ...
-const icons = { prisma: Prisma, /* ... */ };
+const icons = { prisma: Prisma /* ... */ };
 const Icon = icons[icon];
 ```
 
 **TechCards icon loading:**
+
 ```js
 const ICONS_PATH = '/images/technology-logos';
 const iconPath = `${ICONS_PATH}/${icon}.svg`;
@@ -845,7 +946,7 @@ Most MDX components follow a consistent pattern in the Neon website repository. 
 
 ### Example: DocsList Component
 
-Let's explore the DocsList component as an example, which contains `images/`, `index.js`, and `docs-list.jsx` in `src/components/pages/doc/docs-list/`. 
+Let's explore the DocsList component as an example, which contains `images/`, `index.js`, and `docs-list.jsx` in `src/components/pages/doc/docs-list/`.
 
 #### File Structure Breakdown:
 
@@ -874,6 +975,7 @@ When exploring a component, look for these files:
 ## Best Practices
 
 ### Code Blocks
+
 - Use `{1,3-5}` for line highlighting (see [Code Block Features](#code-block-features))
 - Add `shouldWrap` for long commands
 - Specify language for proper syntax highlighting
@@ -881,8 +983,9 @@ When exploring a component, look for these files:
 - For multi-language examples, use [CodeTabs](#codetabs) instead of multiple code blocks
 
 ### Component Selection
+
 - **[Admonition](#admonition)** for important callouts
-- **[Steps](#steps)** for sequential instructions  
+- **[Steps](#steps)** for sequential instructions
 - **[CodeTabs](#codetabs)** for multi-language examples
 - **[TechCards](#techcards)** for technology showcases
 - **[CheckList](#checklist)** for setup guides
@@ -891,14 +994,16 @@ When exploring a component, look for these files:
 - **[DocsList](#docslist)** for simple navigation lists with theming options
 
 ### Icon Guidelines
+
 - **Understand the system**: [TechCards](#techcards-icons) and [DetailIconCards](#detailiconcards-icons) use different icon sets
 - **TechCards**: Use [Technology Logos](#techcards-icons) (`node-js`, `react`, `python`, `prisma`, etc.)
-- **DetailIconCards**: Use [Detail Icons](#detailiconcards-icons) (`openai`, `langchain`, `code`, `aws`, etc.)  
+- **DetailIconCards**: Use [Detail Icons](#detailiconcards-icons) (`openai`, `langchain`, `code`, `aws`, etc.)
 - **Test component-specific**: Same icon name might work in one component but not another
 - **Check both systems**: If an icon doesn't work, try the other component type
 - **Document your findings**: Keep track of which icons work in which components
 
 ### Content Organization Tips
+
 - Use [InfoBlock](#infoblock) at the top of pages to provide quick orientation
 - For [TechCards](#techcards), always check that the SVG file exists in `/public/images/technology-logos/`
 - For [DetailIconCards](#detailiconcards), use only icon names that are mapped in the component code
@@ -911,6 +1016,7 @@ When exploring a component, look for these files:
 ## Component Summary
 
 This showcase demonstrates all major MDX components available in Neon documentation. Each component includes:
+
 - **MDX syntax**: Copy-paste ready code examples
 - **Live rendering**: See exactly how components appear
 - **Props documentation**: Available parameters and options
@@ -918,12 +1024,12 @@ This showcase demonstrates all major MDX components available in Neon documentat
 
 ### Component Categories
 
-| **Category** | **Components** | **Use Case** |
-|--------------|----------------|--------------|
-| **[Essential](#essential-components)** | [Admonition](#admonition), [Steps](#steps) | Most commonly used components |
-| **[Tabbed Content](#tabbed-content)** | [CodeTabs](#codetabs), [Tabs](#tabs) | Organizing content into tabs |
-| **[Content Organization](#content-organization)** | [TechCards](#techcards), [DetailIconCards](#detailiconcards), [DefinitionList](#definitionlist), [DocsList](#docslist), [InfoBlock](#infoblock) | Structure and navigation |
-| **[Code Display](#code-display)** | Enhanced code blocks, [ExternalCode](#externalcode) | Code examples and syntax |
-| **[Interactive & Media](#interactive--media-components)** | [CheckList](#checklist), [CTA](#cta-call-to-action), [Details](#details), Forms, Video, YouTube | User engagement and multimedia |
-| **[Shared Content](#shared-content-components)** | FeatureBeta, ComingSoon, PublicPreview | Reusable content and status indicators |
-| **[SDK](#sdk-components)** | GetStarted, SdkUser, SdkProject | Auto-generated SDK documentation |
+| **Category**                                              | **Components**                                                                                                                                  | **Use Case**                           |
+| --------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| **[Essential](#essential-components)**                    | [Admonition](#admonition), [Steps](#steps)                                                                                                      | Most commonly used components          |
+| **[Tabbed Content](#tabbed-content)**                     | [CodeTabs](#codetabs), [Tabs](#tabs)                                                                                                            | Organizing content into tabs           |
+| **[Content Organization](#content-organization)**         | [TechCards](#techcards), [DetailIconCards](#detailiconcards), [DefinitionList](#definitionlist), [DocsList](#docslist), [InfoBlock](#infoblock) | Structure and navigation               |
+| **[Code Display](#code-display)**                         | Enhanced code blocks, [ExternalCode](#externalcode)                                                                                             | Code examples and syntax               |
+| **[Interactive & Media](#interactive--media-components)** | [CheckList](#checklist), [CTA](#cta-call-to-action), [Details](#details), Forms, Video, YouTube                                                 | User engagement and multimedia         |
+| **[Shared Content](#shared-content-components)**          | FeatureBeta, ComingSoon, PublicPreview                                                                                                          | Reusable content and status indicators |
+| **[SDK](#sdk-components)**                                | GetStarted, SdkUser, SdkProject                                                                                                                 | Auto-generated SDK documentation       |
