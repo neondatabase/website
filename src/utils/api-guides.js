@@ -1,23 +1,10 @@
 import fs from 'fs';
 
-import { glob } from 'glob';
-import matter from 'gray-matter';
-
 const { GUIDES_DIR_PATH } = require('../constants/content');
 
-const getPostSlugs = async (pathname) => {
-  const files = await glob.sync(`${pathname}/**/*.md`, {
-    ignore: [
-      '**/RELEASE_NOTES_TEMPLATE.md',
-      '**/README.md',
-      '**/unused/**',
-      '**/GUIDE_TEMPLATE.md',
-    ],
-  });
-  return files.map((file) => file.replace(pathname, '').replace('.md', ''));
-};
+const { getPostSlugs, getPostBySlug } = require('./api-content');
 
-export const getAuthors = () => {
+const getAuthors = () => {
   const authors = fs.readFileSync(`${process.cwd()}/${GUIDES_DIR_PATH}/authors/data.json`, 'utf8');
   return JSON.parse(authors);
 };
@@ -37,19 +24,6 @@ const getAuthor = (id) => {
     }
 
     throw new Error(`Author with ID '${id}' not found.`);
-  } catch (e) {
-    return null;
-  }
-};
-
-const getPostBySlug = (slug, pathname) => {
-  try {
-    const source = fs.readFileSync(`${process.cwd()}/${pathname}/${slug}.md`, 'utf-8');
-    const { data, content } = matter(source);
-    const authorID = data.author;
-    const author = getAuthor(authorID);
-
-    return { data, content, author };
   } catch (e) {
     return null;
   }
@@ -100,4 +74,4 @@ const getNavigationLinks = (slug, posts) => {
   };
 };
 
-export { getPostSlugs, getPostBySlug, getNavigationLinks, getAllGuides, GUIDES_DIR_PATH };
+export { getAuthors, getAuthor, getNavigationLinks, getAllGuides };

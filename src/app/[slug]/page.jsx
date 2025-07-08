@@ -2,7 +2,7 @@
 import { notFound } from 'next/navigation';
 
 import { TEMPLATE_PAGES_DIR_PATH } from 'constants/content';
-import { getPostBySlug, getPostSlugs } from 'utils/api-docs';
+import { getPostBySlug, getPostSlugs } from 'utils/api-content';
 import { getWpPageBySlug } from 'utils/api-pages';
 
 const getPageType = async (slug) => {

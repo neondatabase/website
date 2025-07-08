@@ -4,12 +4,12 @@ import { notFound } from 'next/navigation';
 import Post from 'components/pages/doc/post';
 import VERCEL_URL from 'constants/base';
 import { POSTGRESQL_DIR_PATH } from 'constants/content';
-import { getSidebar } from 'utils/api-postgresql';
+import { getPostBySlug } from 'utils/api-content';
+import { getSidebar, getAllPostgresTutorials, getNavigationLinks } from 'utils/api-postgresql';
 import { getBreadcrumbs } from 'utils/get-breadcrumbs';
 import { getFlatSidebar } from 'utils/get-flat-sidebar';
 import getMetadata from 'utils/get-metadata';
 import getTableOfContents from 'utils/get-table-of-contents';
-import { getAllPostgresTutorials, getNavigationLinks, getPostBySlug } from 'utils/postgresql-pages';
 
 const isUnusedOrSharedContent = (slug) =>
   slug.includes('unused/') ||

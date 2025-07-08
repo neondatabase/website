@@ -5,13 +5,8 @@ import Post from 'components/pages/doc/post';
 import VERCEL_URL from 'constants/base';
 import { DOCS_DIR_PATH, CHANGELOG_DIR_PATH } from 'constants/content';
 import LINKS from 'constants/links';
-import {
-  getAllPosts,
-  getAllChangelogs,
-  getNavigationLinks,
-  getPostBySlug,
-  getSidebar,
-} from 'utils/api-docs';
+import { getPostBySlug } from 'utils/api-content';
+import { getAllPosts, getAllChangelogs, getNavigationLinks, getSidebar } from 'utils/api-docs';
 import { getBreadcrumbs } from 'utils/get-breadcrumbs';
 import { getFlatSidebar } from 'utils/get-flat-sidebar';
 import getMetadata from 'utils/get-metadata';
