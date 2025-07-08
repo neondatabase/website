@@ -10,6 +10,7 @@ import VERCEL_URL from 'constants/base';
 import { FLOW_DIR_PATH } from 'constants/content';
 import { FLOW_BASE_PATH } from 'constants/flow';
 import LINKS from 'constants/links';
+import SEO_DATA from 'constants/seo-data';
 import { getPostBySlug } from 'utils/api-content';
 import { getAllFlows, getNavigationLinks } from 'utils/api-flow';
 import getMetadata from 'utils/get-metadata';
@@ -36,7 +37,7 @@ export async function generateMetadata({ params }) {
 
   return getMetadata({
     title: `${title} - Neon Flow`,
-    description: subtitle,
+    description: subtitle || SEO_DATA.flow.description,
     imagePath: `${VERCEL_URL}/api/og?title=${encodedTitle}`,
     pathname: `${LINKS.flow}/${slug}`,
     rssPathname: null,
@@ -61,7 +62,7 @@ const FlowPage = ({ params }) => {
       <article>
         <h1 className="t-5xl text-balance font-semibold leading-tight tracking-tight">{title}</h1>
         <Content
-          className="mt-12 text-lg lg:mt-10 md:mt-8 md:text-base [&>ul>li]:mt-4 [&_ol]:mt-6 [&_p]:mt-6 [&_ul]:mt-6"
+          className="prose-flow mt-12 text-lg lg:mt-10 md:mt-8 md:text-base "
           content={content}
         />
       </article>
