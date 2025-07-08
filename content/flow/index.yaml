@@ -1,10 +1,12 @@
 - section: The problem
+  id: the-problem
   items:
     - title: Traditional database workflows are broken
       slug: introduction
     - title: Rethinking the database
       slug: rethinking-the-database
 - section: Core concepts
+  id: core-concepts
   items:
     - title: Projects
       slug: projects
@@ -13,6 +15,7 @@
     - title: Hierarchies
       slug: hierarchies
 - section: Architectures
+  id: architectures
   items:
     - title: Identifying your use case
       slug: identifying-use-case
@@ -21,6 +24,7 @@
     - title: You're using Neon for dev/test
       slug: neon-for-dev-test
 - section: Workflows
+  id: workflows
   items:
     - title: One branch per developer
       slug: branch-per-developer
@@ -33,6 +37,7 @@
     - title: Branching for agents
       slug: branching-for-agents
 - section: Additional resources
+  id: additional-resources
   items:
     - title: Tooling and automation
       slug: tooling-and-automation
