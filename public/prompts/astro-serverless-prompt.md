@@ -9,7 +9,7 @@ Neon's serverless driver is purpose-built for edge environments and serverless r
 
 ## ✅ Minimal Working Example
 
-```javascript
+```
 import { neon } from '@neondatabase/serverless';
 
 const sql = neon(import.meta.env.DATABASE_URL);
@@ -27,22 +27,16 @@ Use the following instructions to connect an Astro project to a Neon Postgres da
 2. **Create an Astro project** via `npm create astro@latest`.
 3. **Install** the Neon serverless driver:
 
-   ```shell
    npm install @neondatabase/serverless
-   ```
 
 4. **Create a `.env` file** at the root of your Astro project and set your connection string:
 
-   ```shell
    DATABASE_URL="postgresql://<user>:<password>@<hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
-   ```
 
 5. **Connect to Neon from `.astro` files or API routes** using the `@neondatabase/serverless` driver.
 6. **Run** your project with:
 
-   ```shell
    npm run dev
-   ```
 
 For more details, refer to @Neon Docs – Connect Astro to Postgres.
 
@@ -52,7 +46,6 @@ For more details, refer to @Neon Docs – Connect Astro to Postgres.
 
 ### `.astro` file example
 
-```astro
 ---
 import { neon } from '@neondatabase/serverless';
 
@@ -62,11 +55,9 @@ const data = response[0].version;
 ---
 <h1>Postgres version:</h1>
 <p>{data}</p>
-```
 
 ### API route example (`src/pages/api/index.ts`)
 
-```typescript
 import { neon } from '@neondatabase/serverless';
 
 export async function GET() {
@@ -76,7 +67,6 @@ export async function GET() {
     headers: { 'Content-Type': 'application/json' },
   });
 }
-```
 
 ---
 
