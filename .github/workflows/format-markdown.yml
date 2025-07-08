@@ -36,6 +36,9 @@ jobs:
     - name: Install Prettier
       run: npm install prettier
 
+    - name: Pull latest changes
+      run: git pull --rebase
+
     - name: Run Prettier
       run: npx prettier --write "content/**/*.md" --ignore-path .prettierignore
 
@@ -54,9 +57,6 @@ jobs:
           echo "No significant changes to commit"
           exit 0
         fi
-
-    - name: Pull latest changes
-      run: git pull --rebase
 
     - name: Push changes
       run: git push
