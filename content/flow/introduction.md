@@ -1,6 +1,5 @@
 ---
 title: 'Traditional database workflows are broken'
-subtitle: ''
 updatedOn: '2025-07-08T12:47:21.296Z'
 ---
 

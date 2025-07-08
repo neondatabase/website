@@ -1,6 +1,5 @@
 ---
 title: 'Rethinking the database'
-subtitle: ''
 updatedOn: '2025-07-08T12:47:21.296Z'
 ---
 
@@ -10,12 +9,15 @@ Instead of creating and managing separate database instances for every task, tea
 
 The result: faster development cycles, safer experimentation, and simpler infrastructure management.
 
+<TestimonialsWrapper>
+
 <Testimonial
 text="We’re a small team, but we’re scaling quickly and doing a lot. We’re shipping multiple times a day—to do that, we need to test stuff quickly and merge to main very quickly as well. Neon branches are a game changer for this."
 author={{
   name: 'Avi Romanoff',
   company: 'Founder at Magic Circle',
-  }}
+}}
+simpleMode
 />
 
 <Testimonial
@@ -23,7 +25,8 @@ text="Neon’s branching paradigm has been great for us. It lets us create isola
 author={{
   name: 'Jonathan Reyes',
   company: 'Principal Engineer at Dispatch',
-  }}
+}}
+simpleMode
 />
 
 <Testimonial
@@ -31,5 +34,8 @@ text="Developers already face significant delays when working on a PR—running 
 author={{
   name: 'Alex Co',
   company: 'Head of Platform Engineering at Mindvalley',
-  }}
+}}
+simpleMode
 />
+
+</TestimonialsWrapper>

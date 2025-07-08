@@ -72,6 +72,10 @@
     > * {
       &:first-child {
         @apply mt-0;
+
+        [data-rmiz] img {
+          @apply mt-0;
+        }
       }
 
       &:last-child {
@@ -336,6 +340,21 @@
 
       > li {
         @apply !text-gray-new-98;
+      }
+    }
+  }
+
+  .prose-flow {
+    > p {
+      @apply my-6;
+    }
+
+    > ul,
+    > ol {
+      @apply my-6;
+
+      > li {
+        @apply my-4;
       }
     }
   }
