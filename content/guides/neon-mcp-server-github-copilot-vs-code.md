@@ -29,7 +29,7 @@ The Neon MCP Server is intended for local development and IDE integrations only.
 For more information, see [MCP security guidance →](/docs/ai/neon-mcp-server#mcp-security-guidance).
 </Admonition>
 
-## What You'll Needed
+## What You'll Need
 
 - Node.js (>= v18.0.0) and npm: Download from [nodejs.org](https://nodejs.org/).
 - An Azure subscription ([create one](https://azure.microsoft.com/free/cognitive-services) for free)
