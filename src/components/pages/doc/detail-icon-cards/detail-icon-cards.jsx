@@ -51,7 +51,7 @@ import Neon from './images/neon.inline.svg';
 import Network from './images/network.inline.svg';
 import Ollama from './images/ollama.inline.svg';
 import OpenAI from './images/openai.inline.svg';
-import Perfomance from './images/perfomance.inline.svg';
+import Performance from './images/performance.inline.svg';
 import Postgres from './images/postgres.inline.svg';
 import Prisma from './images/prisma.inline.svg';
 import Privacy from './images/privacy.inline.svg';
@@ -128,7 +128,7 @@ const icons = {
   network: Network,
   ollama: Ollama,
   openai: OpenAI,
-  perfomance: Perfomance,
+  performance: Performance,
   postgres: Postgres,
   prisma: Prisma,
   privacy: Privacy,

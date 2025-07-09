@@ -18,7 +18,7 @@ Explore Postgres features with Neon's Postgres guides. Learn about data types, e
 
 <a href="/docs/postgresql/index-types" description="Optimize query performance with indexes in Postgres" icon="setup">Indexes</a>
 
-<a href="/docs/postgresql/query-performance" description="Strategies for optimizing Postgres query performance" icon="perfomance">Query performance</a>
+<a href="/docs/postgresql/query-performance" description="Strategies for optimizing Postgres query performance" icon="performance">Query performance</a>
 
 <a href="/docs/postgresql/query-reference" description="Find examples of commonly-used Postgres queries for basic to advanced operations" icon="research">Query reference</a>
 

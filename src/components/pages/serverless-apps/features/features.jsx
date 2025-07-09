@@ -10,7 +10,7 @@ import costIcon from 'icons/serverless-apps/features/cost.svg';
 import handIcon from 'icons/serverless-apps/features/hand.svg';
 import maintenanceIcon from 'icons/serverless-apps/features/maintenance.svg';
 import peakIcon from 'icons/serverless-apps/features/peak.svg';
-import perfomanceIcon from 'icons/serverless-apps/features/perfomance.svg';
+import performanceIcon from 'icons/serverless-apps/features/performance.svg';
 import scalingIcon from 'icons/serverless-apps/features/scaling.svg';
 import speedIcon from 'icons/serverless-apps/features/speed.svg';
 import storageIcon from 'icons/serverless-apps/features/storage.svg';
@@ -37,7 +37,7 @@ const items = [
       },
       {
         title: 'Optimized performance',
-        icon: perfomanceIcon,
+        icon: performanceIcon,
       },
     ],
     image: {
