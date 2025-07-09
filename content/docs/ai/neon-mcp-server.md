@@ -270,7 +270,7 @@ The Neon MCP Server supports streamable HTTP as an alternative to Server-Sent Ev
 
 ## MCP security guidance
 
-The Neon MCP server provides access to powerful tools for interacting with your Neon database—such as `run_sql`, `create_table`, `update_row`, and `delete_table`. MCP tools are useful in development and testing, but  **we do not recommend using MCP tools in production environments**.
+The Neon MCP server provides access to powerful tools for interacting with your Neon database—such as `run_sql`, `create_table`, `update_row`, and `delete_table`. MCP tools are useful in development and testing, but **we do not recommend using MCP tools in production environments**.
 
 ### Recommended usage
 
