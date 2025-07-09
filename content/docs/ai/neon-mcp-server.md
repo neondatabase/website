@@ -12,7 +12,7 @@ Imagine you want to create a new database. Instead of using the Neon Console or 
 
 It works by acting as a bridge between natural language requests and the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Built upon the [Model Context Protocol (MCP)](https://modelcontextprotocol.org), it translates your requests into the necessary Neon API calls, allowing you to manage everything from creating projects and branches to running queries and performing database migrations.
 
-<Admonition type="warning" title="Neon MCP Server Security Considerations">
+<Admonition type="important" title="Neon MCP Server Security Considerations">
 The Neon MCP Server grants powerful database management capabilities through natural language requests. **Always review and authorize actions requested by the LLM before execution.** Ensure that only authorized users and applications have access to the Neon MCP Server.
 
 The Neon MCP Server is intended for local development and IDE integrations only. **We do not recommend using the Neon MCP Server in production environments.** It can execute powerful operations that may lead to accidental or unauthorized changes.
@@ -44,7 +44,7 @@ Traditionally, connecting AI models to different data sources required developer
 - **Accessibility for non-developers:** Empower users with varying technical backgrounds to interact with Neon databases.
 - **Database migration support:** Leverage Neon's branching capabilities for database schema changes initiated via natural language.
 
-<Admonition type="warning" title="Security Considerations">
+<Admonition type="important" title="Security Considerations">
 The Neon MCP server grants powerful database management capabilities through natural language requests.  **Always review and authorize actions** requested by the LLM before execution. Ensure that only authorized users and applications have access to the Neon MCP server and Neon API keys.
 </Admonition>
 

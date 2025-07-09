@@ -13,7 +13,7 @@ This guide will introduce you to [Neon's MCP server](https://github.com/neondata
 
 With Neon's MCP server and an LLM like Claude, you can simplify workflows, improve productivity, and manage your Postgres databases more naturally. Let's explore how this approach can make database management easier and more efficient.
 
-<Admonition type="warning" title="Neon MCP Server Security Considerations">
+<Admonition type="important" title="Neon MCP Server Security Considerations">
 The Neon MCP Server grants powerful database management capabilities through natural language requests. **Always review and authorize actions requested by the LLM before execution.** Ensure that only authorized users and applications have access to the Neon MCP Server.
 
 The Neon MCP Server is intended for local development and IDE integrations only. **We do not recommend using the Neon MCP Server in production environments.** It can execute powerful operations that may lead to accidental or unauthorized changes.
@@ -53,7 +53,7 @@ Neon MCP server, combined with Neon, offers:
 - **Natural Language:** Manage databases without direct **Neon API** coding.
 - **Empowering Non-Developers**: Intuitive database interaction for everyone.
 
-<Admonition type="warning">
+<Admonition type="important">
 The Neon MCP server's ability to execute arbitrary commands from natural language requests requires careful attention to security.  Always review and approve actions before they are committed.  Grant access only to authorized users and applications.
 </Admonition>
 
