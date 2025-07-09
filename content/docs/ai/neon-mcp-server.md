@@ -12,6 +12,10 @@ Imagine you want to create a new database. Instead of using the Neon Console or 
 
 It works by acting as a bridge between natural language requests and the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Built upon the [Model Context Protocol (MCP)](https://modelcontextprotocol.org), it translates your requests into the necessary Neon API calls, allowing you to manage everything from creating projects and branches to running queries and performing database migrations.
 
+<Admonition type="warning" title="MCP Security Considerations">
+Neon's MCP server is intended for local development and IDE integrations only. **We do not recommend using the Neon MCP Server in production environments**. Our MCP Server can execute powerful operations that could lead to accidental or unauthorized changes. For more information, see [MCP security guidance →](#mcp-security-guidance).
+</Admonition>
+
 ## Understanding MCP and Neon MCP Server
 
 The [**Model Context Protocol (MCP)**](https://modelcontextprotocol.org) standardizes communication between LLMs and external tools. It defines a client-server architecture, enabling LLMs (Hosts) to connect to specialized servers that provide context and tools for interacting with external systems. The key components of the MCP architecture are:
@@ -259,6 +263,18 @@ The Neon MCP Server supports streamable HTTP as an alternative to Server-Sent Ev
   }
 }
 ```
+
+## MCP security guidance
+
+The Neon MCP server provides access to powerful tools for interacting with your Neon database—such as `run_sql`, `create_table`, `update_row`, and `delete_table`. MCP tools are useful in development and testing, but  **we do not recommend using MCP tools in production environments**.
+
+### Recommended usage
+
+- Use MCP only for **local development** or **IDE-based workflows**.
+- Never connect MCP agents to production databases.
+- Disable MCP tools capable of accessing or modifying data when they are not being used.
+
+By following these guidelines, you reduce the risk of accidental or unauthorized actions when working with Neon's MCP Server.
 
 ## Conclusion
 

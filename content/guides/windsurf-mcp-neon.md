@@ -11,6 +11,10 @@ Imagine adjusting your database schema simply by describing the change in plain 
 
 This guide demonstrates how to use [Windsurf's Cascade](https://docs.codeium.com/windsurf/cascade) and Neon's MCP server to perform database migrations in your Neon project.
 
+<Admonition type="warning" title="MCP Security Considerations">
+Neon's MCP server is intended for local development and IDE integrations only. **We do not recommend using the Neon MCP Server in production environments**. Our MCP Server can execute powerful operations that could lead to accidental or unauthorized changes. For more information, see [MCP security guidance →](/docs/ai/neon-mcp-server#mcp-security-guidance).
+</Admonition>
+
 ## Key components
 
 Let's break down the key components in this setup:

@@ -11,6 +11,10 @@ Imagine you could interact with your database using plain English, whether you'r
 
 In this guide, we'll explore how to set up the Neon MCP Server within [Zed](https://zed.dev), a next-generation AI-powered code editor, to handle various database operations. These include creating projects, managing database branches, running SQL queries, and performing safe database migrations.
 
+<Admonition type="warning" title="MCP Security Considerations">
+Neon's MCP server is intended for local development and IDE integrations only. **We do not recommend using the Neon MCP Server in production environments**. Our MCP Server can execute powerful operations that could lead to accidental or unauthorized changes. For more information, see [MCP security guidance →](/docs/ai/neon-mcp-server#mcp-security-guidance).
+</Admonition>
+
 <Admonition type="note">
 MCP support in Zed is currently in **preview**. Ensure you're using the Preview version of Zed to add MCP servers. You can download the **Preview** version from [zed.dev/releases/preview](https://zed.dev/releases/preview).
 </Admonition>

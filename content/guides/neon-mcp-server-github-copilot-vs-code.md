@@ -21,7 +21,11 @@ GitHub Copilot becomes your full-stack teammate. It can answer database-related 
 
 Let's get started with using the Neon MCP server and GitHub Copilot.
 
-## What You’ll Need
+<Admonition type="warning" title="MCP Security Considerations">
+Neon's MCP server is intended for local development and IDE integrations only. **We do not recommend using the Neon MCP Server in production environments**. Our MCP Server can execute powerful operations that could lead to accidental or unauthorized changes. For more information, see [MCP security guidance →](/docs/ai/neon-mcp-server#mcp-security-guidance).
+</Admonition>
+
+## What You'll Needed
 
 - Node.js (>= v18.0.0) and npm: Download from [nodejs.org](https://nodejs.org/).
 - An Azure subscription ([create one](https://azure.microsoft.com/free/cognitive-services) for free)
