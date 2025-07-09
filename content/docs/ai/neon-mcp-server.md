@@ -12,8 +12,12 @@ Imagine you want to create a new database. Instead of using the Neon Console or 
 
 It works by acting as a bridge between natural language requests and the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Built upon the [Model Context Protocol (MCP)](https://modelcontextprotocol.org), it translates your requests into the necessary Neon API calls, allowing you to manage everything from creating projects and branches to running queries and performing database migrations.
 
-<Admonition type="warning" title="MCP Security Considerations">
-Neon's MCP server is intended for local development and IDE integrations only. **We do not recommend using the Neon MCP Server in production environments**. Our MCP Server can execute powerful operations that could lead to accidental or unauthorized changes. For more information, see [MCP security guidance →](#mcp-security-guidance).
+<Admonition type="warning" title="Neon MCP Server Security Considerations">
+The Neon MCP Server grants powerful database management capabilities through natural language requests. **Always review and authorize actions requested by the LLM before execution.** Ensure that only authorized users and applications have access to the Neon MCP Server.
+
+The Neon MCP Server is intended for local development and IDE integrations only. **We do not recommend using the Neon MCP Server in production environments.** It can execute powerful operations that may lead to accidental or unauthorized changes.
+
+For more information, see [MCP security guidance →](#mcp-security-guidance).
 </Admonition>
 
 ## Understanding MCP and Neon MCP Server
@@ -273,6 +277,12 @@ The Neon MCP server provides access to powerful tools for interacting with your 
 - Use MCP only for **local development** or **IDE-based workflows**.
 - Never connect MCP agents to production databases.
 - Disable MCP tools capable of accessing or modifying data when they are not being used.
+
+### Human oversight and access control
+
+- **Always review and authorize actions** requested by the LLM before execution. The MCP server grants powerful database management capabilities through natural language requests, so human oversight is essential.
+- **Restrict access** to ensure that only authorized users and applications have access to the Neon MCP Server and associated API keys.
+- **Monitor usage** and regularly audit who has access to your MCP server configurations and Neon API keys.
 
 By following these guidelines, you reduce the risk of accidental or unauthorized actions when working with Neon's MCP Server.
 

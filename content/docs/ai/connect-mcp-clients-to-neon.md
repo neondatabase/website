@@ -19,8 +19,12 @@ This guide covers the setup for the following MCP Clients:
 
 By connecting these tools to the Neon MCP Server, you can manage your Neon projects, databases, and schemas using natural language commands within the MCP client interface.
 
-<Admonition type="warning" title="MCP Security Considerations">
-Neon's MCP server is intended for local development and IDE integrations only. **We do not recommend using the Neon MCP Server in production environments**. Our MCP Server can execute powerful operations that could lead to accidental or unauthorized changes. For more information, see [MCP security guidance →](/docs/ai/neon-mcp-server#mcp-security-guidance).
+<Admonition type="warning" title="Neon MCP Server Security Considerations">
+The Neon MCP Server grants powerful database management capabilities through natural language requests. **Always review and authorize actions requested by the LLM before execution.** Ensure that only authorized users and applications have access to the Neon MCP Server.
+
+The Neon MCP Server is intended for local development and IDE integrations only. **We do not recommend using the Neon MCP Server in production environments.** It can execute powerful operations that may lead to accidental or unauthorized changes.
+
+For more information, see [MCP security guidance →](/docs/ai/neon-mcp-server#mcp-security-guidance).
 </Admonition>
 
 ## Prerequisites
