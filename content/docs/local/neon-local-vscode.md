@@ -24,7 +24,6 @@ With the Neon Local VS Code extension, you can:
 - Open the Neon SQL Editor or Table View for your current branch with one click
 - Launch a psql shell in your integrated terminal for direct SQL access
 
-
 All without leaving your editor.  
 Learn more about [branching in Neon](/docs/guides/branching-intro) and [Neon Local](/docs/local/neon-local).
 
@@ -45,11 +44,11 @@ Learn more about [branching in Neon](/docs/guides/branching-intro) and [Neon Loc
 
 - Open the Neon Local Connect panel in the VS Code sidebar and click **Sign in**.
 
-   ![Sign in with your Neon account](/docs/local/sign-in.png)
+  ![Sign in with your Neon account](/docs/local/sign-in.png)
 
 - Authenticate with Neon in your browser when prompted.
 
-   ![Neon OAuth authorization in browser](/docs/local/authorize.png)
+  ![Neon OAuth authorization in browser](/docs/local/authorize.png)
 
 ## Connect to a branch
 
@@ -64,7 +63,6 @@ You can connect to two types of branches:
   For temporary, disposable environments (tests, CI, experiments). The extension creates the branch when you connect and deletes it automatically when you disconnect—no manual cleanup required. In CI or CLI workflows, you’d have to script this yourself. The extension does it for you.
 
 As part of choosing your connection, you'll also be asked to choose driver type: **PostgreSQL** for most Postgres connections, or **Neon serverless** for edge/HTTP. [Read more about connection types](/docs/connect/choose-connection).
-
 
 <Tabs labels={["Existing branch", "Ephemeral branch"]}>
 
@@ -86,7 +84,6 @@ Connect to an ephemeral branch (created just for your session):
 Selecting an ephemeral branch will prompt you to create and import API key for authentication.
 </Admonition>
 
-
 ## Use the static connection string
 
 After connecting, find your local connection string in the extension panel. Copy it, update with your database name, and add it to your app’s `.env` or config.
@@ -96,6 +93,7 @@ After connecting, find your local connection string in the extension panel. Copy
 ```env
 DATABASE_URL="postgres://neon:npg@localhost:5432/neondb"
 ```
+
 Your app connects to `localhost:5432`, but Neon Local routes the traffic to your actual Neon branch in the cloud.
 
 > You only need to set this connection string once, no matter how many times you create, switch, or reset branches. Neon Local handles all the routing behind the scenes, so you never have to update your app config again.
@@ -115,17 +113,17 @@ You can run any command by opening the Command Palette (`Cmd+Shift+P` or `Ctrl+S
 
 _All commands below are available under the “Neon Local Connect:” prefix in the Command Palette._
 
-| Command                | Description |
-|------------------------|-------------|
-| **Import API Key**         | Import your Neon API key for authentication. |
-| **Launch PSQL**            | Open a psql shell in your integrated terminal for direct SQL access. |
-| **Open SQL Editor**        | Launch the Neon SQL Editor in your browser for advanced queries and data inspection. |
-| **Open Table View**        | Browse your database schema and data in the Neon Console. |
-| **Show Panel**             | Open the main Neon Local Connect panel in VS Code. |
-| **Stop Proxy**             | Stop the local proxy connection. |
-| **Trigger Sign In**        | Start the Neon sign-in flow. |
-| **Clear Authentication**   | Remove stored authentication tokens. |
-| **Focus on Connect View**  | Focus the Connect view in the sidebar. |
+| Command                   | Description                                                                          |
+| ------------------------- | ------------------------------------------------------------------------------------ |
+| **Import API Key**        | Import your Neon API key for authentication.                                         |
+| **Launch PSQL**           | Open a psql shell in your integrated terminal for direct SQL access.                 |
+| **Open SQL Editor**       | Launch the Neon SQL Editor in your browser for advanced queries and data inspection. |
+| **Open Table View**       | Browse your database schema and data in the Neon Console.                            |
+| **Show Panel**            | Open the main Neon Local Connect panel in VS Code.                                   |
+| **Stop Proxy**            | Stop the local proxy connection.                                                     |
+| **Trigger Sign In**       | Start the Neon sign-in flow.                                                         |
+| **Clear Authentication**  | Remove stored authentication tokens.                                                 |
+| **Focus on Connect View** | Focus the Connect view in the sidebar.                                               |
 
 ## Panel actions
 
@@ -182,4 +180,3 @@ And here's what you can do directly from the Neon panel.
 - [API keys](/docs/manage/api-keys)
 
 <NeedHelp/>
-
