@@ -59,6 +59,6 @@ jobs:
         fi
 
     - name: Push changes
-      run: git push
+      run: git push || (git pull --rebase && git push)
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
