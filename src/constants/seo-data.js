@@ -167,7 +167,8 @@ export default {
   },
   flow: {
     title: 'Database Branching Workflows - Neon',
-    description: 'Boost development velocity by adding data to your existing GitHub workflows',
+    description:
+      'A new paradigm for managing Postgres. Instantly create, test, preview, and roll back environments with Neon’s powerful database branching.',
     imagePath: '/images/social-previews/flow.jpg',
     pathname: LINKS.flow,
     type: 'article',

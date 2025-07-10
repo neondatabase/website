@@ -1,30 +1,24 @@
-import Post from 'components/pages/doc/post';
-import { FLOW_DIR_PATH } from 'constants/content';
+import Contents from 'components/pages/flow/contents';
+import Hero from 'components/pages/flow/hero';
+import DocFooter from 'components/shared/doc-footer';
 import SEO_DATA from 'constants/seo-data';
-import { getPostBySlug } from 'utils/api-docs';
+import { getIndexContent } from 'utils/api-flow';
 import getMetadata from 'utils/get-metadata';
-import getTableOfContents from 'utils/get-table-of-contents';
+
+const updatedOn = '2025-07-08T12:47:21.296Z';
 
 export const metadata = getMetadata(SEO_DATA.flow);
 
-const FlowPage = () => {
-  const currentSlug = 'index';
-  const { data, content } = getPostBySlug(currentSlug, FLOW_DIR_PATH);
-  const tableOfContents = getTableOfContents(content);
-  const gitHubPath = `${FLOW_DIR_PATH}/${currentSlug}.md`;
+const FlowsPage = async () => {
+  const contents = await getIndexContent();
 
   return (
-    <Post
-      content={content}
-      data={data}
-      breadcrumbs={[]}
-      navigationLinks={{ previousLink: null, nextLink: null }}
-      currentSlug={currentSlug}
-      gitHubPath={gitHubPath}
-      tableOfContents={tableOfContents}
-      isFlowPage
-    />
+    <>
+      <Hero />
+      <Contents contents={contents} />
+      <DocFooter className="mt-20" updatedOn={updatedOn} slug={SEO_DATA.flow.pathname} />
+    </>
   );
 };
 
-export default FlowPage;
+export default FlowsPage;

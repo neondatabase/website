@@ -5,8 +5,10 @@ import Post from 'components/pages/guides/post';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
 import VERCEL_URL from 'constants/base';
+import { GUIDES_DIR_PATH } from 'constants/content';
 import LINKS from 'constants/links';
-import { GUIDES_DIR_PATH, getAllGuides, getNavigationLinks, getPostBySlug } from 'utils/api-guides';
+import { getPostBySlug } from 'utils/api-content';
+import { getAuthor, getAllGuides, getNavigationLinks } from 'utils/api-guides';
 import getMetadata from 'utils/get-metadata';
 import getTableOfContents from 'utils/get-table-of-contents';
 
@@ -26,15 +28,17 @@ export async function generateMetadata({ params }) {
 
   const {
     data: { title, subtitle },
-    author,
   } = post;
+
+  const authorID = post.data.author;
+  const author = getAuthor(authorID);
 
   const encodedTitle = Buffer.from(title).toString('base64');
 
   return getMetadata({
     title: `${title} - Neon Guides`,
     description: subtitle,
-    imagePath: `${VERCEL_URL}/guides/og?title=${encodedTitle}`,
+    imagePath: `${VERCEL_URL}/api/og?title=${encodedTitle}`,
     pathname: `${LINKS.guides}/${slug}`,
     rssPathname: null,
     type: 'article',
@@ -50,7 +54,9 @@ const GuidePost = async ({ params }) => {
   const gitHubPath = `${GUIDES_DIR_PATH}/${slug}.md`;
   const postBySlug = getPostBySlug(slug, GUIDES_DIR_PATH);
   if (!postBySlug) return notFound();
-  const { data, content, author } = postBySlug;
+  const { data, content } = postBySlug;
+  const authorID = data.author;
+  const author = getAuthor(authorID);
   const tableOfContents = getTableOfContents(content);
   const jsonLd = {
     '@context': 'https://schema.org',
