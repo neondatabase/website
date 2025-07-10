@@ -76,7 +76,7 @@ export default {
               icon: BranchingIcon,
               iconGradient: BranchingGradientIcon,
               title: 'Branching',
-              description: '1-click environments',
+              description: 'Modern Postgres workflows',
               to: LINKS.flow,
             },
             {
