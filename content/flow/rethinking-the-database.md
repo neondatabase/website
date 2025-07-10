@@ -12,7 +12,7 @@ The result: faster development cycles, safer experimentation, and simpler infras
 <TestimonialsWrapper>
 
 <Testimonial
-text="We’re a small team, but we’re scaling quickly and doing a lot. We’re shipping multiple times a day—to do that, we need to test stuff quickly and merge to main very quickly as well. Neon branches are a game changer for this."
+text="We’re a small team, but we’re scaling quickly and doing a lot. We’re shipping multiple times a day — to do that, we need to test stuff quickly and merge to main very quickly as well. Neon branches are a game changer for this."
 author={{
   name: 'Avi Romanoff',
   company: 'Founder at Magic Circle',
@@ -30,7 +30,7 @@ simpleMode
 />
 
 <Testimonial
-text="Developers already face significant delays when working on a PR—running CI tests, ensuring everything is ready for preview, it all adds up. Time to launch is crucial for us: when we tried Neon and saw that spinning up a new branch takes seconds, we were blown away."
+text="Developers already face significant delays when working on a PR — running CI tests, ensuring everything is ready for preview, it all adds up. Time to launch is crucial for us: when we tried Neon and saw that spinning up a new branch takes seconds, we were blown away."
 author={{
   name: 'Alex Co',
   company: 'Head of Platform Engineering at Mindvalley',
