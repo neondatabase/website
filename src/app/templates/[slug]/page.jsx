@@ -42,7 +42,7 @@ const TemplatePage = ({ params }) => {
   const template = templates.find((template) => template.slug === slug);
   if (!template) return notFound();
 
-  const { name, description, framework, type, css, cms, publisher, githubUrl } = template;
+  const { name, description, framework, type, css, cms, publisher, gitHubUrl } = template;
   const items = [
     {
       label: 'Framework',
@@ -112,7 +112,7 @@ const TemplatePage = ({ params }) => {
                   theme="black"
                   target="_blank"
                   rel="noopener noreferrer"
-                  to={template.githubUrl}
+                  to={template.gitHubUrl}
                 >
                   <GitHubIcon /> View Repo
                 </Link>
@@ -121,7 +121,7 @@ const TemplatePage = ({ params }) => {
                   theme="black"
                   target="_blank"
                   rel="noopener noreferrer"
-                  to={`https://app.netlify.com/start/deploy?repository=${githubUrl}#DATABASE_URL`}
+                  to={`https://app.netlify.com/start/deploy?repository=${gitHubUrl}#DATABASE_URL`}
                 >
                   <NetlifyIcon /> Deploy to Netlify
                 </Link>
@@ -132,7 +132,7 @@ const TemplatePage = ({ params }) => {
                   theme="black"
                   target="_blank"
                   rel="noopener noreferrer"
-                  to={`https://vercel.com/new/clone?repository-url=${githubUrl}&env=DATABASE_URL`}
+                  to={`https://vercel.com/new/clone?repository-url=${gitHubUrl}&env=DATABASE_URL`}
                 >
                   <VercelIcon /> Deploy to Vercel
                 </Link>
@@ -141,7 +141,7 @@ const TemplatePage = ({ params }) => {
                   theme="black"
                   target="_blank"
                   rel="noopener noreferrer"
-                  to={`https://render.com/deploy?repo=${githubUrl}#DATABASE_URL`}
+                  to={`https://render.com/deploy?repo=${gitHubUrl}#DATABASE_URL`}
                 >
                   <RenderIcon /> Deploy to Render
                 </Link>

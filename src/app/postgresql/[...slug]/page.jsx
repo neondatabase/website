@@ -67,7 +67,7 @@ const PostgresTutorial = async ({ params }) => {
   const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar, getSidebar());
 
   const navigationLinks = getNavigationLinks(currentSlug);
-  const githubPath = `${POSTGRESQL_DIR_PATH}/${currentSlug}.md`;
+  const gitHubPath = `${POSTGRESQL_DIR_PATH}/${currentSlug}.md`;
 
   const post = getPostBySlug(currentSlug, POSTGRESQL_DIR_PATH);
   if (!post) return notFound();
@@ -98,7 +98,7 @@ const PostgresTutorial = async ({ params }) => {
         navigationLinks={navigationLinks}
         navigationLinksPrefix="/postgresql/"
         currentSlug={currentSlug}
-        githubPath={githubPath}
+        gitHubPath={gitHubPath}
         tableOfContents={tableOfContents}
         isPostgres
       />

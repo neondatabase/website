@@ -12,7 +12,7 @@ const Aside = ({
   isChangelog,
   enableTableOfContents,
   tableOfContents,
-  githubPath,
+  gitHubPath,
   className,
 }) => (
   <div
@@ -29,7 +29,7 @@ const Aside = ({
       {isDocsIndex && <ChatOptions isSidebar />}
       {isChangelog && <ChangelogForm isSidebar />}
       {!isChangelog && !isTemplate && (
-        <Actions githubPath={githubPath} withBorder={enableTableOfContents} />
+        <Actions gitHubPath={gitHubPath} withBorder={enableTableOfContents} />
       )}
     </div>
   </div>
@@ -41,7 +41,7 @@ Aside.propTypes = {
   isChangelog: PropTypes.bool,
   enableTableOfContents: PropTypes.bool,
   tableOfContents: PropTypes.array,
-  githubPath: PropTypes.string,
+  gitHubPath: PropTypes.string,
   className: PropTypes.string,
 };
 export default Aside;
