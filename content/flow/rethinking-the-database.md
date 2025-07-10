@@ -1,5 +1,6 @@
 ---
 title: 'Rethinking the database'
+subtitle: "Discover how Neon's branching model transforms database workflows with instant, ephemeral environments"
 updatedOn: '2025-07-08T12:47:21.296Z'
 ---
 

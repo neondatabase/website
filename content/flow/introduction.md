@@ -1,5 +1,6 @@
 ---
 title: 'Traditional database workflows are broken'
+subtitle: 'Learn how outdated database practices slow down development and create bottlenecks for modern teams'
 updatedOn: '2025-07-08T12:47:21.296Z'
 ---
 

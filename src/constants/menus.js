@@ -34,6 +34,8 @@ import PatternIcon from 'icons/header/pattern.inline.svg';
 import PeopleIcon from 'icons/header/people.inline.svg';
 import RestoreGradientIcon from 'icons/header/restore-gradient.inline.svg';
 import RestoreIcon from 'icons/header/restore.inline.svg';
+import RocketGradientIcon from 'icons/header/rocket-gradient.inline.svg';
+import RocketIcon from 'icons/header/rocket.inline.svg';
 import SearchGradientIcon from 'icons/header/search-gradient.inline.svg';
 import SearchIcon from 'icons/header/search.inline.svg';
 import SecurityGradientIcon from 'icons/header/security-gradient.inline.svg';
@@ -76,7 +78,7 @@ export default {
               icon: BranchingIcon,
               iconGradient: BranchingGradientIcon,
               title: 'Branching',
-              description: '1-click environments',
+              description: 'Modern Postgres workflows',
               to: LINKS.flow,
             },
             {
@@ -196,6 +198,13 @@ export default {
               title: 'Enterprise',
               description: 'Scale & grow',
               to: LINKS.enterprise,
+            },
+            {
+              icon: RocketIcon,
+              iconGradient: RocketGradientIcon,
+              title: 'Startups',
+              description: 'Build with Neon',
+              to: LINKS.startups,
             },
             {
               icon: SecurityIcon,
@@ -338,6 +347,10 @@ export default {
         {
           text: 'PostgreSQL Tutorial',
           to: LINKS.postgresqltutorial,
+        },
+        {
+          text: 'Startups',
+          to: LINKS.startups,
         },
         {
           text: 'Creators',
