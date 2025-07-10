@@ -1432,6 +1432,14 @@
       items:
         - title: Docs Contribution Guide
           slug: community/contribution-guide
+        - title: Component Guide
+          slug: community/component-guide
+        - title: Component Specialized Guide
+          slug: community/component-specialized
+        - title: Component Icon Guide
+          slug: community/component-icon-guide
+        - title: Component Architecture
+          slug: community/component-architecture
     - title: Changelog
       slug: changelog
       icon: changelog

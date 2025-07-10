@@ -40,6 +40,8 @@ Neon uses Markdown as the documentation source format. Markdown is a lightweight
 
 If you're new to Markdown, GitHub provides an excellent guide to get you started. The [GitHub Markdown Documentation](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) covers most of the basic writing and formatting syntax you'll need to contribute to the Neon docs.
 
+For advanced formatting and custom components, see the [Component Guide](/docs/community/component-guide).
+
 ## Preview changes in VSCode
 
 At Neon, we use VSCode for writing documentation. VSCode includes a built-in markdown previewer that you can use to view your changes locally.
@@ -271,6 +273,8 @@ The Neon documentation supports the following admonitions:
 
 To use an admonition, enclose your text with `<Admonition></Admonition>` and specify the admonition type: `note`, `important`, `tip`, `warning`, and `info`. The default is `note`.
 
+For a complete list of available components and their usage, see the [Component Guide](/docs/community/component-guide).
+
 ```md
 <Admonition type="note">
 This is an important note
@@ -296,6 +300,8 @@ This is a very important note.
 Neon uses Figma to create diagrams.
 
 If you're interested in updating or adding a diagram, please open a GitHub issue with your suggestions. Please include a draft, if possible. You can use a tool like [tldraw](https://www.tldraw.com/) to create a draft.
+
+For technical details about how components are implemented, see the [Component Architecture](/docs/community/component-architecture) guide.
 
 If possible, please take screen captures on a high resolution monitor (UHD/4K). Screen captures should be unaltered (no borders or special effects).
 
@@ -442,5 +448,14 @@ Commands, parameters, values, filenames, error messages, connection strings, and
 - `git clone` is a command that should be in lowercase, whereas Git is the product and should have a capital G.
 
 - "A connection string has this format: `postgresql://[user]:[password]@[neon_hostname]/[dbname]`"
+
+## Additional Resources
+
+When contributing to Neon documentation, you may find these additional resources helpful:
+
+- **[Component Guide](/docs/community/component-guide)**: Complete reference for common MDX components
+- **[Component Specialized Guide](/docs/community/component-specialized)**: Advanced and specialized components
+- **[Component Icon Guide](/docs/community/component-icon-guide)**: Icon systems and usage guidelines
+- **[Component Architecture](/docs/community/component-architecture)**: Technical implementation details
 
 <NeedHelp/>
