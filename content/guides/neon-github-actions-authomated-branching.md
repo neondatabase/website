@@ -103,7 +103,7 @@ By the end of this guide, you'll have a system where database changes are as sea
    DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
    ```
 
-5. Push your code to a Github repository.
+5. Push your code to a GitHub repository.
 
 ## Set up the Neon GitHub integration
 

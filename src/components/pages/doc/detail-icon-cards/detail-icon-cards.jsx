@@ -32,7 +32,7 @@ import Filter from './images/filter.inline.svg';
 import FindReplace from './images/find-replace.inline.svg';
 import Gamepad from './images/gamepad.inline.svg';
 import Gear from './images/gear.inline.svg';
-import Github from './images/github.inline.svg';
+import GitHub from './images/github.inline.svg';
 import Globe from './images/globe.inline.svg';
 import GUI from './images/gui.inline.svg';
 import Handshake from './images/handshake.inline.svg';
@@ -51,7 +51,7 @@ import Neon from './images/neon.inline.svg';
 import Network from './images/network.inline.svg';
 import Ollama from './images/ollama.inline.svg';
 import OpenAI from './images/openai.inline.svg';
-import Perfomance from './images/perfomance.inline.svg';
+import Performance from './images/performance.inline.svg';
 import Postgres from './images/postgres.inline.svg';
 import Prisma from './images/prisma.inline.svg';
 import Privacy from './images/privacy.inline.svg';
@@ -109,7 +109,7 @@ const icons = {
   'find-replace': FindReplace,
   gamepad: Gamepad,
   gear: Gear,
-  github: Github,
+  github: GitHub,
   globe: Globe,
   gui: GUI,
   handshake: Handshake,
@@ -128,7 +128,7 @@ const icons = {
   network: Network,
   ollama: Ollama,
   openai: OpenAI,
-  perfomance: Perfomance,
+  performance: Performance,
   postgres: Postgres,
   prisma: Prisma,
   privacy: Privacy,

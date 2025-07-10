@@ -1,65 +1,63 @@
 ---
-title: Manage Neon with Terraform
-subtitle: Use Terraform to provision and manage your Neon projects, branches, endpoints,
-  roles, databases, and other resources as code.
+title: Manage Neon with OpenTofu
+subtitle: Use OpenTofu to provision and manage your Neon projects, branches, endpoints, roles, databases, and other resources as code.
+author: dhanush-reddy
 enableTableOfContents: true
-tag: community
-updatedOn: '2025-07-07T19:22:23.743Z'
+createdAt: '2025-05-26T00:00:00.000Z'
+updatedOn: '2025-05-26T00:00:00.000Z'
 ---
 
-Terraform is an open-source infrastructure as code (IaC) tool that allows you to define and provision cloud resources in a declarative configuration language. By codifying infrastructure, Terraform enables consistent, repeatable, and automated deployments, significantly reducing manual errors.
+[OpenTofu](https://opentofu.org) is an open-source infrastructure as code (IaC) tool, forked from Terraform, that allows you to define and provision cloud resources in a declarative configuration language. By codifying infrastructure, OpenTofu enables consistent, repeatable, and automated deployments, significantly reducing manual errors. It is a community-driven alternative governed by the Linux Foundation.
 
-This guide will show you how to use **Terraform to manage your Neon projects**, including your branches, databases, and compute endpoints. By using Terraform with Neon, you get better control, can track changes, and automate your database setup.
+This guide will show you how to use **OpenTofu to manage your Neon projects**, including your branches, databases, and compute endpoints. By using OpenTofu with Neon, you get better control, can track changes, and automate your database setup.
 
-Neon sponsors the following community-developed Terraform provider for managing Neon Postgres platform resources:
+Neon can be managed using the following community-developed Terraform provider, which is compatible with OpenTofu:
 
 **Terraform Provider Neon - Maintainer: Dmitry Kisler**
 
 - [GitHub repository](https://github.com/kislerdm/terraform-provider-neon)
-- [Terraform Registry](https://registry.terraform.io/providers/kislerdm/neon/0.6.1)
-- [Terraform Registry Documentation](https://registry.terraform.io/providers/kislerdm/neon/latest/docs)
 
 <Admonition type="note">
-This provider is not maintained or officially supported by Neon. Use at your own discretion. If you have questions about the provider, please contact the project maintainer.
+This provider is a Terraform provider compatible with OpenTofu. It is not maintained or officially supported by Neon. Use at your own discretion. If you have questions about the provider, please contact the project maintainer.
 </Admonition>
 
 ## Provider usage notes
 
-- **Provider upgrades**: When using `terraform init -upgrade` to update a custom Terraform provider, be aware that changes in the provider’s schema or defaults can lead to unintended resource replacements. This may occur when certain attributes are altered or reset. For example, fields previously set to specific values might be reset to `null`, forcing the replacement of the entire resource.
+- **Provider upgrades**: When using `tofu init -upgrade` to update a provider, be aware that changes in the provider’s schema or defaults can lead to unintended resource replacements. This may occur when certain attributes are altered or reset.
 
   To avoid unintended resource replacements which can result in data loss:
   - Review the provider’s changelog for any breaking changes that might affect your resources before upgrading to a new version.
-  - For CI pipelines and auto-approved pull requests, only use `terraform init`. Running `terraform init -upgrade` should be done manually followed by plan reviews.
-  - Run `terraform plan` before applying any changes to detect potential differences and review the behavior of resource updates.
-  - Use [lifecycle protections](https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle#prevent_destroy) on critical resources to ensure they're not recreated unintentionally.
-  - Explicitly define all critical resource parameters in your Terraform configurations, even if they had defaults previously.
+  - For CI pipelines and auto-approved pull requests, only use `tofu init`. Running `tofu init -upgrade` should be done manually followed by plan reviews.
+  - Run `tofu plan` before applying any changes to detect potential differences and review the behavior of resource updates.
+  - Use [lifecycle protections](https://opentofu.org/docs/language/meta-arguments/lifecycle/) on critical resources to ensure they're not recreated unintentionally.
+  - Explicitly define all critical resource parameters in your OpenTofu configurations, even if they had defaults previously.
   - On Neon paid plans, you can enable branch protection to prevent unintended deletion of branches and projects. To learn more, see [Protected branches](/docs/guides/protected-branches).
 
-- **Provider maintenance**: As Neon enhances existing features and introduces new ones, the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) will continue to evolve. These changes may not immediately appear in community-maintained Terraform providers. If you notice that a provider requires an update, please reach out to the maintainer by opening an issue or contributing to the provider's GitHub repository.
+- **Provider maintenance**: As Neon enhances existing features and introduces new ones, the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) will continue to evolve. These changes may not immediately appear in community-maintained providers. If you notice that a provider requires an update, please reach out to the maintainer by opening an issue or contributing to the provider's GitHub repository.
 
 ## Prerequisites
 
 Before you begin, ensure you have the following:
 
-1.  **Terraform CLI installed:** If you don't have Terraform installed, download and install it from the [official Terraform website](https://developer.hashicorp.com/terraform/install). The Neon provider requires Terraform version `1.14.x` or later.
+1.  **OpenTofu CLI installed:** If you don't have OpenTofu installed, download and install it from the [official OpenTofu website](https://opentofu.org/docs/intro/install/).
 2.  **Neon Account:** You'll need a Neon account. If you don't have one, sign up at [neon.tech](https://console.neon.tech/signup).
 3.  **Neon API key:** Generate an API key from the Neon Console. Navigate to your Account Settings > API Keys. This key is required for the provider to authenticate with the Neon API. Learn more about creating API keys in [Manage API keys](/docs/manage/api-keys).
 
-## Set up the Terraform Neon provider
+## Set up the OpenTofu Neon provider
 
 1.  **Create a project directory:**
-    Create a new directory for your Terraform project and navigate into it.
+    Create a new directory for your OpenTofu project and navigate into it.
 
     ```shell
-    mkdir neon-terraform-project
-    cd neon-terraform-project
+    mkdir neon-opentofu-project
+    cd neon-opentofu-project
     ```
 
 2.  **Create a `main.tf` file:**
-    This file will contain your Terraform configuration. Start by declaring the required Neon provider.
+    This file will contain your OpenTofu configuration. Start by declaring the required Neon provider. OpenTofu can use providers from the tofu registry.
 
-    ```terraform
-    terraform {
+    ```tofu
+    tofu {
       required_providers {
         neon = {
           source  = "kislerdm/neon"
@@ -70,10 +68,10 @@ Before you begin, ensure you have the following:
     provider "neon" {}
     ```
 
-3.  **Initialize terraform:**
-    Run the `terraform init` command in your project directory. This command downloads and installs the Neon provider.
+3.  **Initialize OpenTofu:**
+    Run the `tofu init` command in your project directory. This command downloads and installs the Neon provider.
     ```shell
-    terraform init
+    tofu init
     ```
 
 ## Configure authentication
@@ -83,7 +81,7 @@ The Neon provider needs your Neon API key to manage resources. You can configure
 1.  **Directly in the provider block (Less secure):**
     For quick testing, you can **hardcode your API key** directly within `provider "neon"` block. However, this method isn't recommended for production environments or shared configurations. A more secure alternative is to retrieve the API key from a secrets management service like [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/) or [HashiCorp Vault](https://developer.hashicorp.com/vault), and then update your provider block to reflect this.
 
-    ```terraform
+    ```tofu
     provider "neon" {
       api_key = "<YOUR_NEON_API_KEY>"
     }
@@ -98,23 +96,23 @@ The Neon provider needs your Neon API key to manage resources. You can configure
 
     If the environment variable is set, you can leave the `provider "neon"` block empty:
 
-    ```terraform
+    ```tofu
     provider "neon" {}
     ```
 
 <Admonition type="note">
-The following sections primarily detail the creation of Neon resources. To manage existing resources, use the `terraform import` command. More information can be found in the [Importing Existing Resources](#import-existing-neon-resources) section.
+The following sections primarily detail the creation of Neon resources. To manage existing resources, use the `tofu import` command or `import` blocks. More information can be found in the [Import Existing Neon Resources](#import-existing-neon-resources-with-opentofu) section.
 </Admonition>
 
-## Manage Neon resources
+## Manage Neon resources with OpenTofu
 
-Now you can start defining Neon resources in your `main.tf` file.
+This section provides examples of how to manage Neon resources using OpenTofu. You can create and manage projects, branches, endpoints, roles, databases, and more.
 
 ### Managing projects
 
 A Neon project is the top-level container for your Postgres databases, branches, and endpoints.
 
-```terraform
+```tofu
 resource "neon_project" "my_app_project" {
   name       = "my-application-project"
   pg_version = 16
@@ -149,7 +147,7 @@ This configuration creates a new Neon project.
 **Output project details:**
 You can output computed values like the project ID or connection URI:
 
-```terraform
+```tofu
 output "project_id" {
   value = neon_project.my_app_project.id
 }
@@ -175,7 +173,7 @@ For more attributes and options on managing projects, refer to the [Provider's d
 
 You can create branches from the primary branch or any other existing branch.
 
-```terraform
+```tofu
 resource "neon_branch" "dev_branch" {
   project_id = neon_project.my_app_project.id
   name       = "feature-x-development"
@@ -209,7 +207,7 @@ Endpoints provide connection strings to access your branches. Each branch can ha
 
 Before creating an endpoint, you must first create a **branch** for it to connect to. Here's how to create a read-write endpoint for your `dev_branch`:
 
-```terraform
+```tofu
 resource "neon_endpoint" "dev_endpoint" {
   project_id = neon_project.my_app_project.id
   branch_id  = neon_branch.dev_branch.id
@@ -247,7 +245,7 @@ For more attributes and options on managing endpoints, refer to the [Provider's 
 
 Roles (users) are managed per branch. Before creating a role, ensure you have a branch created. Follow the [Managing Branches](#managing-branches) section for details.
 
-```terraform
+```tofu
 resource "neon_role" "app_user" {
   project_id = neon_project.my_app_project.id
   branch_id  = neon_branch.dev_branch.id
@@ -273,7 +271,7 @@ For more attributes and options on managing roles, refer to the [Provider's docu
 
 Databases are also managed per branch. Follow the [Managing Branches](#managing-branches) section for details on creating a branch.
 
-```terraform
+```tofu
 resource "neon_database" "service_db" {
   project_id = neon_project.my_app_project.id
   branch_id  = neon_branch.dev_branch.id
@@ -293,9 +291,9 @@ For more attributes and options on managing databases, refer to the [Provider's 
 
 ### Managing API keys
 
-You can manage Neon API keys themselves using Terraform.
+You can manage Neon API keys themselves using OpenTofu.
 
-```terraform
+```tofu
 resource "neon_api_key" "ci_cd_key" {
   name = "automation-key-for-ci"
 }
@@ -316,7 +314,7 @@ output "ci_cd_api_key_value" {
 
 Share project access with other users.
 
-```terraform
+```tofu
 resource "neon_project_permission" "share_with_colleague" {
   project_id = neon_project.my_app_project.id
   grantee    = "colleague@example.com"
@@ -327,7 +325,7 @@ resource "neon_project_permission" "share_with_colleague" {
 
 Configure JWKS URL for Row Level Security authorization.
 
-```terraform
+```tofu
 resource "neon_jwks_url" "auth_provider_jwks" {
   project_id    = neon_project.my_app_project.id
   # Use the default role from the project, or specify custom roles
@@ -347,7 +345,7 @@ These resources are used for organizations with Scale or Enterprise plans requir
 
 #### Assign VPC endpoint to organization
 
-```terraform
+```tofu
 resource "neon_vpc_endpoint_assignment" "org_vpc_endpoint" {
   org_id          = "your-neon-organization-id" # Replace with your actual Org ID
   region_id       = "aws-us-east-1"             # Neon region ID
@@ -360,7 +358,7 @@ For more attributes and options on managing VPC endpoints, refer to the [Provide
 
 #### Restrict project to VPC endpoint
 
-```terraform
+```tofu
 resource "neon_vpc_endpoint_restriction" "project_to_vpc" {
   project_id      = neon_project.my_app_project.id
   vpc_endpoint_id = neon_vpc_endpoint_assignment.org_vpc_endpoint.vpc_endpoint_id
@@ -370,121 +368,87 @@ resource "neon_vpc_endpoint_restriction" "project_to_vpc" {
 
 For more attributes and options on managing VPC endpoint restrictions, refer to the [Provider's documentation](https://github.com/kislerdm/terraform-provider-neon/blob/master/docs/resources/vpc_endpoint_restriction.md)
 
-## Apply the configuration
+## Apply the configuration with OpenTofu
 
 Once you have defined your resources:
 
 1.  **Format and validate:**
 
     ```shell
-    terraform fmt
-    terraform validate
+    tofu fmt
+    tofu validate
     ```
 
 2.  **Plan:**
-    Run `terraform plan` to see what actions Terraform will take. This command shows you the resources that will be created, modified, or destroyed without making any changes. Review the output carefully to ensure it matches your expectations.
+    Run `tofu plan` to see what actions OpenTofu will take.
 
     ```shell
-    terraform plan -out=tfplan
+    tofu plan -out=tfplan
     ```
 
 3.  **Apply:**
-    Run `terraform apply` to create the resources in Neon.
+    Run `tofu apply` to create the resources in Neon.
     ```shell
-    terraform apply tfplan
+    tofu apply tfplan
     ```
-    Terraform will ask for confirmation before proceeding with the changes. Type `yes` to confirm.
+    OpenTofu will ask for confirmation. Type `yes` to confirm.
 
-You have now successfully created and managed Neon resources using Terraform! You can continue to modify your `main.tf` file to add, change, or remove resources as needed. After making changes, always run `terraform plan` to review the changes before applying them.
+You have now successfully created and managed Neon resources using OpenTofu! You can continue to modify your `main.tf` file to add, change, or remove resources as needed. After making changes, repeat the `tofu plan` and `tofu apply` steps to update your resources on Neon.
 
-## Import existing Neon resources
+## Import existing Neon resources with OpenTofu
 
-If you have existing Neon resources that were created outside of Terraform (e.g., via the Neon Console or API directly), you can bring them under Terraform's management. This allows you to manage their lifecycle with code moving forward.
+If you have existing Neon resources that were created outside of OpenTofu (e.g., via the Neon Console or API directly), you can bring them under OpenTofu's management. This allows you to manage their lifecycle with code moving forward. OpenTofu supports both the CLI import command and declarative import blocks, similar to tofu 1.5.0+.
 
-Terraform offers two primary ways to do this: using the `terraform import` CLI command or, for Terraform `1.5.0` and later, using declarative `import` blocks directly in your configuration.
+Both methods involve telling OpenTofu about an existing resource and associating it with a `resource` block in your configuration.
 
-Both methods involve telling Terraform about an existing resource and associating it with a resource block in your configuration.
+### Set up your OpenTofu configuration for import
 
-### Set up your Terraform configuration
+Ensure your OpenTofu environment is configured for the Neon provider as described previously:
 
-Before you can import any resources, ensure your Terraform environment is configured for the Neon provider:
-
-1.  **Define the provider:** Make sure you have the `neon` provider declared in your `main.tf` or a dedicated `providers.tf` file.
-
-    ```terraform
-    terraform {
-      required_providers {
-        neon = {
-          source  = "kislerdm/neon"
-        }
-      }
-    }
-
-    provider "neon" {}
-    ```
-
-2.  **Initialize terraform:** If you haven't already, or if you've just added the provider configuration, run:
-
-    ```shell
-    terraform init
-    ```
-
-    This downloads the Neon provider plugin.
-
-    <Admonition type="warning" title="Important: Provider Upgrades">
-    Avoid using `terraform init -upgrade` in CI pipelines and auto-approved pull requests, as this can lead to unintended resource replacements and data loss if there are breaking changes or major version jumps. Instead, use `terraform init` in your automated workflows. Running `terraform init -upgrade` should always be done manually, followed by plan reviews. For additional guidance, see [Important usage notes](#provider-usage-notes).
-    </Admonition>
-
-3.  **Configure authentication:** Follow the authentication steps mentioned in [Configure Authentication](#configure-authentication) to ensure Terraform can communicate with your Neon account.
+1.  Define the provider in your `main.tf`.
+2.  Run `tofu init`.
+3.  Configure authentication for the Neon provider.
 
 ### Neon resource IDs for import
 
 When importing Neon resources, you need to know the specific ID format for each resource type. Always refer to the "Import" section of the specific resource's documentation page on the [Provider's GitHub: `kislerdm/terraform-provider-neon`](https://github.com/kislerdm/terraform-provider-neon/tree/master/docs/resources) for the exact ID format.
 
-Here are some common formats for different Neon resources:
+Common formats:
 
-- **`neon_project`:** Uses the Project ID (e.g., `damp-recipe-88779456`).
-- **`neon_branch`:** Uses the Branch ID (e.g., `br-orange-bonus-a4v00wjl`).
-- **`neon_endpoint`:** Uses the Endpoint ID (e.g., `ep-blue-cell-a4xzunwf`).
-- **`neon_role`:** Uses a composite ID: `<project_id>/<branch_id>/<role_name>` (e.g., `damp-recipe-88779456/br-orange-bonus-a4v00wjl/application_user`).
-- **`neon_database`:** Uses a composite ID: `<project_id>/<branch_id>/<database_name>` (e.g., `damp-recipe-88779456/br-orange-bonus-a4v00wjl/service_specific_database`).
-- **`neon_api_key` and `neon_jwks_url`:** These resources do not support import. You'll need to recreate them using Terraform if you want to manage them via IaC.
+- **`neon_project`:** Project ID (e.g., `my-application-project-tofu-actual-id`).
+- **`neon_branch`:** Branch ID (e.g., `br-dev-branch-tofu-actual-id`).
+- **`neon_endpoint`:** Endpoint ID (e.g., `ep-dev-endpoint-tofu-actual-id`).
+- **`neon_role`:** Composite ID: `<project_id>/<branch_id>/<role_name>`.
+- **`neon_database`:** Composite ID: `<project_id>/<branch_id>/<database_name>`.
+- **`neon_api_key` and `neon_jwks_url`:** These do not support import.
 
 ### Order of import for dependent resources
 
-When importing resources that depend on each other, it's best practice to import them in the order of their dependencies. This helps ensure that Terraform can correctly understand relationships and that your HCL resource blocks can reference already-imported parent resources.
-
-A common order for importing Neon resources is:
+When importing resources that depend on each other, it's important to import them in the order of their dependencies:
 
 ```plaintext
 Project -> Branch -> Endpoint -> Role -> Database
 ```
 
-Depending on your preference and the version of Terraform you are using, you can choose between two methods to import existing Neon resources into Terraform. Follow [Method 1](#method-1-using-the-terraform-import-cli-command) if you prefer the traditional CLI import command, or [Method 2](#method-2-using-import-blocks-terraform-150) if you want to use the newer declarative `import` blocks introduced in Terraform `1.5.0`.
+### Method 1: Using the `tofu import` CLI command
 
-### Method 1: Using the `terraform import` CLI command
+For each Neon resource you want to import:
 
-For each Neon resource you want to import, you'll generally follow these two steps:
+1.  **Write a resource block:** Add a corresponding minimal `resource` block to your OpenTofu configuration file (e.g., `main.tf`).
+2.  **Run `tofu import`:** Execute the import command: `tofu import <tofu_resource_address> <neon_resource_id>`.
 
-1.  **Write a resource block:** Add a corresponding `resource` block to your Terraform configuration files (e.g., `main.tf`). This block tells Terraform how you _want_ the resource to be configured. You might not know all the attributes perfectly upfront; Terraform will populate many of them from the actual state of the resource during the import.
+#### Example: Importing resources using `tofu import` CLI
 
-2.  **Run `terraform import`:** Execute the import command, which takes the Terraform resource address and the Neon-specific ID of the existing resource.
-    ```shell
-    terraform import <terraform_resource_address> <neon_resource_id>
-    ```
-
-#### Example: Importing the previously defined resources
-
-In this example, we'll import the resources we defined earlier in the [Manage Neon Resources](#manage-neon-resources) section. This needs a project, a branch, an endpoint, a role, and a database already created in your Neon account. These resources will now be imported into a new Terraform configuration.
+In this example, we'll import the resources we defined earlier in the [Manage Neon Resources](#manage-neon-resources-with-opentofu) section. This needs a project, a branch, an endpoint, a role, and a database already created in your Neon account. These resources will now be imported into a new OpenTofu configuration.
 
 ##### Define the HCL resource blocks
 
-In your `main.tf` file, define the resource blocks for the existing resources. You can start with minimal definitions, as Terraform will populate the actual values during the import process. You primarily need to define the resource type and a name for Terraform to use. Terraform will populate the actual attribute values from the live resource into its state file during the import. You'll then use `terraform plan` to see these and update your HCL to match or to define your desired state.
+In your `main.tf` file, define the resource blocks for the existing resources. You can start with minimal definitions, as OpenTofu will populate the actual values during the import process. You primarily need to define the resource type and a name for OpenTofu to use. OpenTofu will populate the actual attribute values from the live resource into its state file during the import. You'll then use `tofu plan` to see these and update your HCL to match or to define your desired state.
 
 For required attributes (like `project_id` for a branch), you'll either need to hardcode the known ID or reference a resource that will also be imported.
 
-```terraform
-terraform {
+```tofu
+tofu {
   required_providers {
     neon = {
       source  = "kislerdm/neon"
@@ -533,40 +497,40 @@ resource "neon_database" "service_db" {
 Here's a breakdown of the minimal HCL and why certain attributes are included:
 
 - **`neon_project.my_app_project`**:
-  - This block defines the Terraform resource for your main Neon project.
+  - This block defines the OpenTofu resource for your main Neon project.
   - No attributes are strictly required _in the HCL_ for the import command itself, as the project is imported using its unique Neon Project ID. Adding a `name` attribute matching the existing project can aid readability but isn't essential for the import operation.
 
 - **`neon_branch.dev_branch`**:
-  - This defines the Terraform resource for your development branch.
-  - It requires `project_id` in the HCL to link it to the (to-be-imported) project resource within Terraform.
+  - This defines the OpenTofu resource for your development branch.
+  - It requires `project_id` in the HCL to link it to the (to-be-imported) project resource within OpenTofu.
   - The `name` attribute should also be specified in the HCL, matching the existing branch's name, as it's a key identifier.
   - The branch is imported using its unique Neon Branch ID.
 
 - **`neon_endpoint.dev_endpoint`**:
-  - This block defines the Terraform resource for the endpoint on your development branch.
-  - It requires both `project_id` and `branch_id` in the HCL to correctly associate it with the imported project and development branch resources within Terraform.
+  - This block defines the OpenTofu resource for the endpoint on your development branch.
+  - It requires both `project_id` and `branch_id` in the HCL to correctly associate it with the imported project and development branch resources within OpenTofu.
   - Other attributes like `type` (which defaults if unspecified) or autoscaling limits will be read from the live resource during import.
   - The endpoint is imported using its unique Neon Endpoint ID.
 
 - **`neon_role.app_user`**:
-  - This defines the Terraform resource for an application user role.
-  - The HCL requires `project_id` and `branch_id` to link to the respective imported Terraform resources.
+  - This defines the OpenTofu resource for an application user role.
+  - The HCL requires `project_id` and `branch_id` to link to the respective imported OpenTofu resources.
   - The `name` attribute must be specified in the HCL and match the existing role's name.
 
 - **`neon_database.service_db`**:
-  - This defines the Terraform resource for a service-specific database.
-  - The HCL requires `project_id` and `branch_id` to link to the imported Terraform resources.
+  - This defines the OpenTofu resource for a service-specific database.
+  - The HCL requires `project_id` and `branch_id` to link to the imported OpenTofu resources.
   - The `name` attribute must be specified in the HCL and match the existing database's name.
-  - The `owner_name` should also be included, linking to the Terraform role resource (e.g., `neon_role.app_user.name`) that owns this database.
+  - The `owner_name` should also be included, linking to the OpenTofu role resource (e.g., `neon_role.app_user.name`) that owns this database.
 
-All other configurable attributes will be populated into Terraform's state file from the live Neon resource during the `terraform import` process. You will then refine your HCL by reviewing the `terraform plan` output.
+All other configurable attributes will be populated into OpenTofu's state file from the live Neon resource during the `tofu import` process. You will then refine your HCL by reviewing the `tofu plan` output.
 
 #### Run the import commands in order
 
 1.  **Import the project:**
 
     ```shell
-    terraform import neon_project.my_app_project "actual_project_id_from_neon"
+    tofu import neon_project.my_app_project "actual_project_id_from_neon"
     ```
 
     You can retrieve the project ID via Neon Console/CLI/API. Learn more: [Manage projects](/docs/manage/projects#project-settings)
@@ -574,7 +538,7 @@ All other configurable attributes will be populated into Terraform's state file 
     Example output:
 
     ```shell
-    terraform import neon_project.my_app_project damp-recipe-88779456
+    tofu import neon_project.my_app_project damp-recipe-88779456
     ```
 
     ```text
@@ -586,13 +550,13 @@ All other configurable attributes will be populated into Terraform's state file 
     Import successful!
 
     The resources that were imported are shown above. These resources are now in
-    your Terraform state and will henceforth be managed by Terraform.
+    your OpenTofu state and will henceforth be managed by OpenTofu.
     ```
 
 2.  **Import the development branch:**
 
     ```shell
-    terraform import neon_branch.dev_branch "actual_dev_branch_id_from_neon"
+    tofu import neon_branch.dev_branch "actual_dev_branch_id_from_neon"
     ```
 
     You can retrieve the branch ID via Neon Console/CLI/API. Learn more: [Manage branches](/docs/manage/branches)
@@ -603,7 +567,7 @@ All other configurable attributes will be populated into Terraform's state file 
     Example output:
 
     ```shell
-    terraform import neon_branch.dev_branch br-orange-bonus-a4v00wjl
+    tofu import neon_branch.dev_branch br-orange-bonus-a4v00wjl
     ```
 
     ```text
@@ -615,23 +579,24 @@ All other configurable attributes will be populated into Terraform's state file 
     Import successful!
 
     The resources that were imported are shown above. These resources are now in
-    your Terraform state and will henceforth be managed by Terraform.
+    your OpenTofu state and will henceforth be managed by OpenTofu.
     ```
 
 3.  **Import the development compute endpoint:**
 
     ```shell
-    terraform import neon_endpoint.dev_endpoint "actual_dev_endpoint_id_from_neon"
+    tofu import neon_endpoint.dev_endpoint "actual_dev_endpoint_id_from_neon"
     ```
 
     You can retrieve the endpoint ID via Neon Console/CLI/API. Learn more: [Manage computes](/docs/manage/computes).
+
     The following image shows the endpoint ID in the Neon Console:
     ![Neon Console Compute Endpoint ID](/docs/guides/neon-console-compute-endpoint-id.png)
 
     Example output:
 
     ```shell
-    terraform import neon_endpoint.dev_endpoint ep-blue-cell-a4xzunwf
+    tofu import neon_endpoint.dev_endpoint ep-blue-cell-a4xzunwf
     ```
 
     ```text
@@ -643,13 +608,13 @@ All other configurable attributes will be populated into Terraform's state file 
     Import successful!
 
     The resources that were imported are shown above. These resources are now in
-    your Terraform state and will henceforth be managed by Terraform.
+    your OpenTofu state and will henceforth be managed by OpenTofu.
     ```
 
 4.  **Import the application user role:**
 
     ```shell
-    terraform import neon_role.app_user "actual_project_id_from_neon/actual_dev_branch_id_from_neon/application_user"
+    tofu import neon_role.app_user "actual_project_id_from_neon/actual_dev_branch_id_from_neon/application_user"
     ```
 
     > Replace `application_user` with the actual name of the role you want to import.
@@ -657,7 +622,7 @@ All other configurable attributes will be populated into Terraform's state file 
     Example output:
 
     ```shell
-    terraform import neon_role.app_user "damp-recipe-88779456/br-orange-bonus-a4v00wjl/application_user"
+    tofu import neon_role.app_user "damp-recipe-88779456/br-orange-bonus-a4v00wjl/application_user"
     ```
 
     ```text
@@ -669,13 +634,13 @@ All other configurable attributes will be populated into Terraform's state file 
     Import successful!
 
     The resources that were imported are shown above. These resources are now in
-    your Terraform state and will henceforth be managed by Terraform.
+    your OpenTofu state and will henceforth be managed by OpenTofu.
     ```
 
 5.  **Import the service database:**
 
     ```shell
-    terraform import neon_database.service_db "actual_project_id_from_neon/actual_dev_branch_id_from_neon/service_specific_database"
+    tofu import neon_database.service_db "actual_project_id_from_neon/actual_dev_branch_id_from_neon/service_specific_database"
     ```
 
     > Replace `service_specific_database` with the actual name of the database you want to import.
@@ -683,7 +648,7 @@ All other configurable attributes will be populated into Terraform's state file 
     Example output:
 
     ```shell
-    terraform import neon_database.service_db "damp-recipe-88779456/br-orange-bonus-a4v00wjl/service_specific_database"
+    tofu import neon_database.service_db "damp-recipe-88779456/br-orange-bonus-a4v00wjl/service_specific_database"
     ```
 
     ```text
@@ -695,27 +660,29 @@ All other configurable attributes will be populated into Terraform's state file 
     Import successful!
 
     The resources that were imported are shown above. These resources are now in
-    your Terraform state and will henceforth be managed by Terraform.
+    your OpenTofu state and will henceforth be managed by OpenTofu.
     ```
 
-    After importing all resources, your Terraform state file (`terraform.tfstate`) will now contain the imported resources, and you can manage them using Terraform. Follow the [Reconcile your HCL with the imported state](#reconcile-your-hcl-with-the-imported-state) section to update your HCL files with the attributes that were populated during the import.
+    After importing all resources, your OpenTofu state file (`terraform.tfstate`) will now contain the imported resources, and you can manage them using OpenTofu. Follow the [Reconcile your HCL with the imported state](#reconcile-your-hcl-with-the-imported-state) section to update your HCL files with the attributes that were populated during the import.
 
-### Method 2: Using `import` Blocks (Terraform 1.5.0+)
+### Method 2: Using `import` Blocks
 
-Terraform version 1.5.0 and later introduced a more declarative way to import existing infrastructure using `import` blocks directly within your configuration files. This method keeps the import definition alongside your resource configuration and makes the import process part of your standard `plan` and `apply` workflow.
+OpenTofu also supports a declarative way to import existing resources using `import` blocks in your `.tf` files. This method is similar to the `tofu import` command but allows you to define the import process directly in your configuration file.
 
 **The process with `import` Blocks:**
 
-For each existing Neon resource you want to bring under Terraform management, you'll define two blocks in your `.tf` file:
+For each existing Neon resource you want to bring under OpenTofu management, you'll define two blocks in your `.tf` file:
 
-- A standard `resource "resource_type" "resource_name" {}` block. For the initial import, this block can be minimal. It primarily tells Terraform the type and name of the resource in your configuration.
+- A standard `resource "resource_type" "resource_name" {}` block. For the initial import, this block can be minimal. It primarily tells OpenTofu the type and name of the resource in your configuration.
 - An `import {}` block:
-  - `to = resource_type.resource_name`: This refers to the Terraform address of the `resource` block you defined above.
+  - `to = resource_type.resource_name`: This refers to the OpenTofu address of the `resource` block you defined above.
   - `id = "neon_specific_id"`: This is the actual ID of the resource as it exists in Neon (e.g., project ID, branch ID, or composite ID for roles/databases).
 
 **Example using `import` blocks:**
 
-In this example, we'll import the resources we defined earlier in the [Manage Neon Resources](#manage-neon-resources) section. This needs a project, a branch, an endpoint, a role, and a database already created in your Neon account. These resources will now be imported into a new Terraform configuration. Let's say we have the following existing Neon resources and their IDs:
+In this example, we'll import the resources we defined earlier in the [Manage Neon Resources](#manage-neon-resources-with-opentofu) section. This needs a project, a branch, an endpoint, a role, and a database already created in your Neon account. These resources will now be imported into a new OpenTofu configuration.
+
+Let's say we have the following existing Neon resources and their IDs:
 
 - Project `my_app_project` ID: `damp-recipe-88779456`
 - Branch `dev_branch` ID: `br-orange-bonus-a4v00wjl`
@@ -725,8 +692,8 @@ In this example, we'll import the resources we defined earlier in the [Manage Ne
 
 You would add the following to your `main.tf`:
 
-```terraform
-terraform {
+```tofu
+tofu {
   required_providers {
     neon = {
       source  = "kislerdm/neon"
@@ -807,61 +774,52 @@ You need to replace the IDs in the `import` blocks with the actual IDs of your e
 
 After importing your resources using either method, you need to ensure that your HCL configuration accurately reflects the current state of the imported resources. This is an iterative process where you will:
 
-1.  **Run `terraform plan`:**
+1.  **Run `tofu plan`:**
 
     ```shell
-    terraform plan
+    tofu plan
     ```
 
 2.  **Understanding the plan output:**
-    The plan might show:
-    - **Attributes to be added to your HCL:** Terraform will identify attributes present in the imported state (e.g., `pg_version`, `region_id`, `default_endpoint_settings` for a project) that are not yet explicitly in your HCL `resource` blocks.
-    - **"Update in-place" actions:** You might see actions like `~ update in-place` for some resources, even if no actual value in Neon is changing. For example, for `neon_endpoint`, you might see `+ branch_id = "your-branch-id"`. This is often because Terraform is now resolving a reference (like `neon_branch.dev_branch.id`) to its concrete value and wants to explicitly set this in its managed configuration. It's a reconciliation step and usually safe to apply.
+    OpenTofu will compare your HCL `resource` blocks against the detailed state just imported from Neon.
+    - The plan will likely propose to **add many attributes** to your HCL blocks. These are the actual current values of your Neon resources.
+    - You might see "update in-place" actions, for example, for `neon_endpoint` it might show `+ branch_id = "your-branch-id"`. This is normal as OpenTofu reconciles the explicit configuration (where `branch_id` might be a reference that has now resolved to a concrete ID) with the imported state.
 
 3.  **Update your HCL (`main.tf`):**
-    Carefully review the output of `terraform plan`. Your primary goal is to update your HCL `resource` blocks to accurately match the actual, imported state of your resources, or to define your desired state if you intend to make changes. Copy the relevant attributes and their values from the plan output into your HCL.
+    Carefully review the `tofu plan` output. Your primary goal is to update your HCL `resource` blocks to accurately match the actual, imported state of your resources, or to define your desired state if you intend to make changes. Copy the relevant attributes and their values from the plan output into your HCL.
 
-4.  **Repeat `terraform plan`:** After updating your HCL, run `terraform plan` again. Continue this iterative process-reviewing the plan and updating your HCL-until `terraform plan` shows "No changes. Your infrastructure matches the configuration." or only shows changes you intentionally want to make.
-
-This iterative approach ensures your Terraform configuration accurately reflects either the current state or your intended desired state for the imported resources.
+4.  **Repeat `tofu plan`:**
+    After updating your HCL, run `tofu plan` again. Iterate until `tofu plan` shows "No changes. Your infrastructure matches the configuration." or only shows changes you intentionally want to make.
 
 ### Verify and reconcile
 
-Once all attributes are set correctly, you can run `terraform plan` to see if any changes are needed. You should be seeing output similar to:
+Once your HCL is fully updated, `tofu plan` should report:
 
 ```text
 No changes. Your infrastructure matches the configuration.
 
-Terraform has compared your real infrastructure against your configuration and found no
+OpenTofu has compared your real infrastructure against your configuration and found no
 differences, so no changes are needed.
 ```
 
-We can now be sure that the resources are managed by Terraform. You can now proceed to make changes to your infrastructure using Terraform.
+This confirms that your Neon resources are now successfully managed by OpenTofu.
 
-## Destroying resources
+## Destroying resources with OpenTofu
 
-To remove the resources managed by Terraform:
+To remove the resources managed by OpenTofu:
 
 ```shell
-terraform destroy
+tofu destroy
 ```
 
-Terraform will ask for confirmation before deleting the resources.
+OpenTofu will ask for confirmation.
 
-## Example application
+## Resources
 
-The following example application demonstrates how to set up Terraform, connect to a Neon Postgres database, and perform a Terraform run that inserts data. It covers how to:
-
-- Use Go's `os/exec` package to run Terraform commands
-- Write a Go test function to validate Terraform execution
-- Execute Terraform commands such as `init`, `plan`, and `apply`
-
-<DetailIconCards>
-
-<a href="https://github.com/mattmajestic/go-terraform" description="Run Terraform commands and test Terraform configurations with Go" icon="github">Neon Postgres with Terraform and Go</a>
-
-</DetailIconCards>
-
-View the **YouTube tutorial**: [Neon Postgres for Terraform with Go](https://www.youtube.com/watch?v=Pw38lgfbX0s).
+- [OpenTofu Documentation](https://opentofu.org/docs/)
+- [GitHub repository](https://github.com/kislerdm/terraform-provider-neon)
+- [Terraform Registry](https://registry.terraform.io/providers/kislerdm/neon)
+- [OpenTofu Registry](https://search.opentofu.org/provider/kislerdm/neon/latest)
+- [Manage Neon with tofu](/docs/reference/tofu)
 
 <NeedHelp/>

@@ -210,8 +210,8 @@ export default {
       "Generate a unique ticket image with your GitHub profile and participate in Neon's right after the conference.",
     pathname: LINKS.generateTicket,
   },
-  ticket({ name, login: githubHandle }) {
-    const userName = name || githubHandle;
+  ticket({ name, login: gitHubHandle }) {
+    const userName = name || gitHubHandle;
 
     return {
       title: `${userName}'s ticket for Neon Deploy - Neon`,

@@ -79,7 +79,7 @@ const DocPost = async ({ params }) => {
 
   const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar, getSidebar());
   const navigationLinks = getNavigationLinks(currentSlug, flatSidebar);
-  const githubPath = isChangelogIndex ? CHANGELOG_DIR_PATH : `${DOCS_DIR_PATH}/${currentSlug}.md`;
+  const gitHubPath = isChangelogIndex ? CHANGELOG_DIR_PATH : `${DOCS_DIR_PATH}/${currentSlug}.md`;
 
   const post = getPostBySlug(currentSlug, DOCS_DIR_PATH);
   if (!isChangelogIndex && !post) return notFound();
@@ -91,7 +91,7 @@ const DocPost = async ({ params }) => {
         content={{}}
         breadcrumbs={[]}
         currentSlug={currentSlug}
-        githubPath={githubPath}
+        gitHubPath={gitHubPath}
         changelogPosts={allChangelogPosts}
         navigationLinks={navigationLinks}
         changelogActiveLabel="all"
@@ -125,7 +125,7 @@ const DocPost = async ({ params }) => {
         breadcrumbs={breadcrumbs}
         navigationLinks={navigationLinks}
         currentSlug={currentSlug}
-        githubPath={githubPath}
+        gitHubPath={gitHubPath}
         tableOfContents={tableOfContents}
         isDocsIndex={isDocsIndex}
       />

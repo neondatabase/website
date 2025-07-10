@@ -34,7 +34,7 @@ const TemplatePage = ({ params }) => {
 
   const { data, content } = post;
   const tableOfContents = getTableOfContents(content);
-  const githubPath = `${TEMPLATE_PAGES_DIR_PATH}/${slug}.md`;
+  const gitHubPath = `${TEMPLATE_PAGES_DIR_PATH}/${slug}.md`;
 
   return (
     <Layout headerWithBorder isHeaderSticky>
@@ -48,7 +48,7 @@ const TemplatePage = ({ params }) => {
             data={data}
             breadcrumbs={[]}
             currentSlug={slug}
-            githubPath={githubPath}
+            gitHubPath={gitHubPath}
             tableOfContents={tableOfContents}
           />
         </Container>

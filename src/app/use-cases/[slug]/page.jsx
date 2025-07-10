@@ -33,7 +33,7 @@ const UseCasePage = ({ params }) => {
 
   const { data, content } = post;
   const tableOfContents = getTableOfContents(content);
-  const githubPath = `${USE_CASES_DIR_PATH}/${slug}.md`;
+  const gitHubPath = `${USE_CASES_DIR_PATH}/${slug}.md`;
 
   return (
     <Post
@@ -41,7 +41,7 @@ const UseCasePage = ({ params }) => {
       data={data}
       breadcrumbs={[]}
       currentSlug={slug}
-      githubPath={githubPath}
+      gitHubPath={gitHubPath}
       tableOfContents={tableOfContents}
     />
   );

@@ -78,7 +78,7 @@ CopyMarkdownButton.propTypes = {
   rawFileLink: PropTypes.string.isRequired,
 };
 
-const Actions = ({ githubPath, withBorder = false }) => {
+const Actions = ({ gitHubPath, withBorder = false }) => {
   const githubBase = process.env.NEXT_PUBLIC_GITHUB_PATH;
   const githubRawBase = process.env.NEXT_PUBLIC_GITHUB_RAW_PATH;
 
@@ -91,8 +91,8 @@ const Actions = ({ githubPath, withBorder = false }) => {
     return null;
   }
 
-  const gitHubLink = `${githubBase}${githubPath}`;
-  const rawFileLink = `${githubRawBase}${githubPath}`;
+  const gitHubLink = `${githubBase}${gitHubPath}`;
+  const rawFileLink = `${githubRawBase}${gitHubPath}`;
   const chatGptLink = `https://chatgpt.com/?hints=search&q=Read+${rawFileLink}`;
 
   return (
@@ -103,14 +103,14 @@ const Actions = ({ githubPath, withBorder = false }) => {
       )}
     >
       <CopyMarkdownButton rawFileLink={rawFileLink} />
-      <ActionItem icon={GitHubIcon} text="Edit this page on Github" url={gitHubLink} />
+      <ActionItem icon={GitHubIcon} text="Edit this page on GitHub" url={gitHubLink} />
       <ActionItem icon={ChatGptIcon} text="Open in ChatGPT" url={chatGptLink} />
     </div>
   );
 };
 
 Actions.propTypes = {
-  githubPath: PropTypes.string.isRequired,
+  gitHubPath: PropTypes.string.isRequired,
   withBorder: PropTypes.bool,
 };
 
