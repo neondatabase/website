@@ -311,6 +311,7 @@ This feature is currently in beta...
    ```
 
 5. **Test Component**
+
    ```mdx
    <!-- In any MDX file -->
 
