@@ -42,6 +42,7 @@ These are the most frequently used components in Neon docs.
 Callouts for notes, warnings, and tips. 6 types available: `note` (default), `important`, `tip`, `info`, `warning`, `comingSoon`.
 
     ```mdx
+
 <Admonition type="warning" title="Important">
   Critical information requiring immediate attention.
 </Admonition>
@@ -265,9 +266,30 @@ Standard technology cards layout using [TechCards icons](/docs/community/compone
 
 ```mdx
 <TechCards>
-  <a href="/docs/guides/node" title="Node.js" description="Connect Node.js applications to Neon" icon="node-js">Node.js</a>
-  <a href="/docs/guides/python" title="Python" description="Connect Python applications to Neon" icon="python">Python</a>
-  <a href="/docs/guides/nextjs" title="Next.js" description="Build Next.js apps with Neon" icon="next-js">Next.js</a>
+  <a
+    href="/docs/guides/node"
+    title="Node.js"
+    description="Connect Node.js applications to Neon"
+    icon="node-js"
+  >
+    Node.js
+  </a>
+  <a
+    href="/docs/guides/python"
+    title="Python"
+    description="Connect Python applications to Neon"
+    icon="python"
+  >
+    Python
+  </a>
+  <a
+    href="/docs/guides/nextjs"
+    title="Next.js"
+    description="Build Next.js apps with Neon"
+    icon="next-js"
+  >
+    Next.js
+  </a>
 </TechCards>
 ```
 
@@ -287,10 +309,38 @@ Alternative layout using [DetailIconCards icons](/docs/community/component-icon-
 
 ```mdx
 <DetailIconCards>
-<a href="/docs/ai/openai" title="OpenAI Integration" description="Build AI features with OpenAI" icon="openai">OpenAI Integration</a>
-<a href="/docs/ai/langchain" title="LangChain Integration" description="Create AI workflows with LangChain" icon="langchain">LangChain Integration</a>
-<a href="/docs/development" title="Code Development" description="Development tools and practices" icon="code">Code Development</a>
-<a href="/docs/cloud/aws" title="AWS Integration" description="Deploy and scale with AWS" icon="aws">AWS Integration</a>
+  <a
+    href="/docs/ai/openai"
+    title="OpenAI Integration"
+    description="Build AI features with OpenAI"
+    icon="openai"
+  >
+    OpenAI Integration
+  </a>
+  <a
+    href="/docs/ai/langchain"
+    title="LangChain Integration"
+    description="Create AI workflows with LangChain"
+    icon="langchain"
+  >
+    LangChain Integration
+  </a>
+  <a
+    href="/docs/development"
+    title="Code Development"
+    description="Development tools and practices"
+    icon="code"
+  >
+    Code Development
+  </a>
+  <a
+    href="/docs/cloud/aws"
+    title="AWS Integration"
+    description="Deploy and scale with AWS"
+    icon="aws"
+  >
+    AWS Integration
+  </a>
 </DetailIconCards>
 ```
 
@@ -311,11 +361,11 @@ _Note: DetailIconCards uses a different [icon system](/docs/community/component-
 
 Quick comparison to help you choose the right component:
 
-| Component                               | Use For                        | Icon System                                         | Layout      |
-| --------------------------------------- | ------------------------------ | --------------------------------------------------- | ----------- |
+| Component                               | Use For                        | Icon System                                                                             | Layout      |
+| --------------------------------------- | ------------------------------ | --------------------------------------------------------------------------------------- | ----------- |
 | **[TechCards](#techcards)**             | Technology/framework showcases | [Technology logos](/docs/community/component-icon-guide#techcards-icons) (colorful)     | Card grid   |
 | **[DetailIconCards](#detailiconcards)** | Feature/service showcases      | [Detail icons](/docs/community/component-icon-guide#detailiconcards-icons) (monochrome) | Card grid   |
-| **[DocsList](#docslist)**               | Documentation links            | Checkbox (default), docs, or repo icon              | Simple list |
+| **[DocsList](#docslist)**               | Documentation links            | Checkbox (default), docs, or repo icon                                                  | Simple list |
 
 ### DefinitionList
 
@@ -374,10 +424,10 @@ Simple, clean lists for documentation links with optional theming. DocsList prov
 
 ```mdx
 <DocsList title="Related Documentation">
-<a href="/docs/guides/node">Node.js Connection Guide</a>
-<a href="/docs/guides/python">Python Connection Guide</a>
-<a href="/docs/api-reference">API Reference</a>
-<a href="/docs/cli">CLI Documentation</a>
+  <a href="/docs/guides/node">Node.js Connection Guide</a>
+  <a href="/docs/guides/python">Python Connection Guide</a>
+  <a href="/docs/api-reference">API Reference</a>
+  <a href="/docs/cli">CLI Documentation</a>
 </DocsList>
 ```
 
@@ -447,18 +497,18 @@ Interactive checklists for setup guides and tutorials. CheckList uses CheckItem 
 
 ```mdx
 <CheckList title="Setup Checklist">
-<CheckItem title="Create Neon account" href="#signup">
-  Sign up for a free Neon account at console.neon.tech
-</CheckItem>
-<CheckItem title="Install dependencies" href="#install">
-  Install the required packages for your project
-</CheckItem>
-<CheckItem title="Configure environment" href="#config">
-  Set up your database connection string
-</CheckItem>
-<CheckItem title="Test connection" href="#test">
-  Verify your application can connect to Neon
-</CheckItem>
+  <CheckItem title="Create Neon account" href="#signup">
+    Sign up for a free Neon account at console.neon.tech
+  </CheckItem>
+  <CheckItem title="Install dependencies" href="#install">
+    Install the required packages for your project
+  </CheckItem>
+  <CheckItem title="Configure environment" href="#config">
+    Set up your database connection string
+  </CheckItem>
+  <CheckItem title="Test connection" href="#test">
+    Verify your application can connect to Neon
+  </CheckItem>
 </CheckList>
 ```
 
@@ -494,6 +544,7 @@ Individual checklist items used within CheckList components.
 ---
 
 **Usage Notes:**
+
 - Always used within a `<CheckList>` component
 - `title` prop is required
 - `href` prop is optional for anchor linking
@@ -504,11 +555,11 @@ Individual checklist items used within CheckList components.
 Prominent call-to-action buttons for important actions.
 
 ```mdx
-<CTA 
-  title="Try Neon Free" 
-  description="Start building with serverless Postgres today. No credit card required." 
-  buttonText="Sign Up" 
-  buttonUrl="https://console.neon.tech/signup" 
+<CTA
+  title="Try Neon Free"
+  description="Start building with serverless Postgres today. No credit card required."
+  buttonText="Sign Up"
+  buttonUrl="https://console.neon.tech/signup"
 />
 ```
 
@@ -606,12 +657,12 @@ This guide covers the most commonly used MDX components in Neon documentation. E
 
 ### Component Categories
 
-| **Category**                                              | **Components**                                                                                                                                  | **Use Case**                           |
-| --------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
-| **[Essential](#essential-components)**                    | [Admonition](#admonition), [Steps](#steps)                                                                                                      | Most commonly used components          |
-| **[Tabbed Content](#tabbed-content)**                     | [CodeTabs](#codetabs), [Tabs](#tabs)                                                                                                            | Organizing content into tabs           |
+| **Category**                                              | **Components**                                                                                                                                                              | **Use Case**                           |
+| --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| **[Essential](#essential-components)**                    | [Admonition](#admonition), [Steps](#steps)                                                                                                                                  | Most commonly used components          |
+| **[Tabbed Content](#tabbed-content)**                     | [CodeTabs](#codetabs), [Tabs](#tabs)                                                                                                                                        | Organizing content into tabs           |
 | **[Content Organization](#content-organization)**         | [TechCards](#techcards--detailiconcards), [DetailIconCards](#techcards--detailiconcards), [DefinitionList](#definitionlist), [DocsList](#docslist), [InfoBlock](#infoblock) | Structure and navigation               |
-| **[Interactive Elements](#interactive-elements)**         | [CheckList](#checklist), [CheckItem](#checkitem), [CTA](#cta-call-to-action), [NeedHelp](#needhelp)                                                                      | User engagement and interaction         |
-| **[Common Shared Components](#common-shared-components)** | [LinkAPIKey](#linkapikey), [FeatureBetaProps](#featurebetaprops)                                                       | Reusable content and status indicators |
+| **[Interactive Elements](#interactive-elements)**         | [CheckList](#checklist), [CheckItem](#checkitem), [CTA](#cta-call-to-action), [NeedHelp](#needhelp)                                                                         | User engagement and interaction        |
+| **[Common Shared Components](#common-shared-components)** | [LinkAPIKey](#linkapikey), [FeatureBetaProps](#featurebetaprops)                                                                                                            | Reusable content and status indicators |
 
-For specialized components and specific use cases, see the [Component Specialized Guide](/docs/community/component-specialized). 
+For specialized components and specific use cases, see the [Component Specialized Guide](/docs/community/component-specialized).

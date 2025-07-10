@@ -48,14 +48,12 @@ Enhanced code blocks and external code embedding.
 Embed code from external sources or files.
 
 ```mdx
-<ExternalCode 
-  src="https://raw.githubusercontent.com/neondatabase/neon/master/README.md" 
-/>
+<ExternalCode src="https://raw.githubusercontent.com/neondatabase/neon/master/README.md" />
 ```
 
 **Live Preview:**
 
-*[External code loaded from GitHub README.md with syntax highlighting]*
+_[External code loaded from GitHub README.md with syntax highlighting]_
 
 Example of external code loading (mocked for showcase):
 
@@ -77,6 +75,7 @@ Serverless Postgres built for the cloud.
 2. Create your first project
 3. Connect using your preferred client
 ```
+
 ---
 
 ## Media Components
@@ -102,17 +101,18 @@ Embedded YouTube video player.
 Native video player component.
 
 ```mdx
-<Video 
-  sources={[{src: "/videos/pages/doc/neon-mcp.mp4",type: "video/mp4",}]} 
-  width={960} height={1080} 
+<Video
+  sources={[{ src: '/videos/pages/doc/neon-mcp.mp4', type: 'video/mp4' }]}
+  width={960}
+  height={1080}
 />
 ```
 
 **Live Preview:**
 
-<Video 
-  sources={[{src: "/videos/pages/doc/neon-mcp.mp4",type: "video/mp4",}]} 
-  width={960} height={1080} 
+<Video
+sources={[{src: "/videos/pages/doc/neon-mcp.mp4",type: "video/mp4",}]}
+width={960} height={1080}
 />
 
 ---
@@ -327,14 +327,14 @@ This guide covers specialized MDX components used in specific scenarios. Each co
 
 ### Component Categories
 
-| **Category**                                              | **Components**                                                                                                                                  | **Use Case**                           |
-| --------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
-| **[Code Display](#code-display)**                         | [ExternalCode](#externalcode)                                                                                                                   | External code embedding                |
-| **[Media Components](#media-components)**                 | [YoutubeIframe](#youtubeiframe), [Video](#video)                                                                                               | Multimedia content                     |
-| **[Specialized Shared Components](#specialized-shared-components)** | [Feature Announcements](#feature-announcements), [EarlyAccessProps](#earlyaccessprops)                                               | Feature status indicators              |
-| **[SDK Components](#sdk-components)**                     | [Getting Started](#getting-started), [SDK Type Components](#sdk-type-components)       | Auto-generated SDK documentation       |
-| **[Utility Components](#utility-components)**              | [RequestForm](#requestform), [ChatOptions](#chatoptions)                                                                                       | Specialized UI elements                |
-| **[Specialized Components](#specialized-components)**            | [AIRule](#airule), [MCPTools](#mcptools), [NextSteps](#nextsteps)                                                                              | Complex and specialized functionality   |
-| **[Community Components](#community-components)**          | [CommunityBanner](#communitybanner)                                                                                                            | Community engagement                   |
+| **Category**                                                        | **Components**                                                                         | **Use Case**                          |
+| ------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | ------------------------------------- |
+| **[Code Display](#code-display)**                                   | [ExternalCode](#externalcode)                                                          | External code embedding               |
+| **[Media Components](#media-components)**                           | [YoutubeIframe](#youtubeiframe), [Video](#video)                                       | Multimedia content                    |
+| **[Specialized Shared Components](#specialized-shared-components)** | [Feature Announcements](#feature-announcements), [EarlyAccessProps](#earlyaccessprops) | Feature status indicators             |
+| **[SDK Components](#sdk-components)**                               | [Getting Started](#getting-started), [SDK Type Components](#sdk-type-components)       | Auto-generated SDK documentation      |
+| **[Utility Components](#utility-components)**                       | [RequestForm](#requestform), [ChatOptions](#chatoptions)                               | Specialized UI elements               |
+| **[Specialized Components](#specialized-components)**               | [AIRule](#airule), [MCPTools](#mcptools), [NextSteps](#nextsteps)                      | Complex and specialized functionality |
+| **[Community Components](#community-components)**                   | [CommunityBanner](#communitybanner)                                                    | Community engagement                  |
 
-For commonly used components, see the [Component Guide](/docs/community/component-guide). 
+For commonly used components, see the [Component Guide](/docs/community/component-guide).

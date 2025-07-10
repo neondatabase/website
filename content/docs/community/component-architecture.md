@@ -169,6 +169,7 @@ const iconPathDark = `${ICONS_PATH}/${icon}-dark.svg`;
 ```
 
 **File Requirements:**
+
 - Icons must exist in `/public/images/technology-logos/`
 - Format: `{icon-name}.svg` and `{icon-name}-dark.svg`
 - Case-sensitive naming
@@ -183,7 +184,7 @@ import Prisma from './images/prisma.inline.svg';
 import NodeJs from './images/node-js.inline.svg';
 // ... other imports
 
-const icons = { 
+const icons = {
   prisma: Prisma,
   'node-js': NodeJs,
   // ... other mappings
@@ -193,19 +194,20 @@ const Icon = icons[icon];
 ```
 
 **File Requirements:**
+
 - Icons must be imported as inline SVGs
 - Must be explicitly mapped in the component code
 - Case-sensitive naming
 
 ### Icon System Differences
 
-| Aspect | TechCards | DetailIconCards |
-|--------|-----------|-----------------|
-| **Loading** | Dynamic file loading | Static imports |
-| **Location** | `/public/images/technology-logos/` | Component-specific `images/` |
-| **Format** | Standard SVG files | Inline SVG imports |
-| **Dark Mode** | Separate `-dark.svg` files | Single file with CSS |
-| **Flexibility** | Easy to add new icons | Requires code changes |
+| Aspect          | TechCards                          | DetailIconCards              |
+| --------------- | ---------------------------------- | ---------------------------- |
+| **Loading**     | Dynamic file loading               | Static imports               |
+| **Location**    | `/public/images/technology-logos/` | Component-specific `images/` |
+| **Format**      | Standard SVG files                 | Inline SVG imports           |
+| **Dark Mode**   | Separate `-dark.svg` files         | Single file with CSS         |
+| **Flexibility** | Easy to add new icons              | Requires code changes        |
 
 ---
 
@@ -266,15 +268,17 @@ This feature is currently in beta...
 ### Adding a New Component
 
 1. **Create Component Directory**
+
    ```bash
    mkdir src/components/pages/doc/my-component
    ```
 
 2. **Create Component File**
+
    ```jsx
    // src/components/pages/doc/my-component/my-component.jsx
    import React from 'react';
-   
+
    const MyComponent = ({ title, children }) => {
      return (
        <div className="my-component">
@@ -283,21 +287,23 @@ This feature is currently in beta...
        </div>
      );
    };
-   
+
    export default MyComponent;
    ```
 
 3. **Create Index File**
+
    ```js
    // src/components/pages/doc/my-component/index.js
    export { default } from './my-component';
    ```
 
 4. **Register Component**
+
    ```js
    // sharedMdxComponents.js
    import MyComponent from '../src/components/pages/doc/my-component';
-   
+
    export const sharedMdxComponents = {
      // ... existing components
      MyComponent,
@@ -307,9 +313,8 @@ This feature is currently in beta...
 5. **Test Component**
    ```mdx
    <!-- In any MDX file -->
-   <MyComponent title="Test">
-     This is a test of my new component.
-   </MyComponent>
+
+   <MyComponent title="Test">This is a test of my new component.</MyComponent>
    ```
 
 ### Modifying Existing Components
@@ -399,6 +404,7 @@ content/docs/ → sharedMdxComponents → src/components/ → public/
 ### Debugging Techniques
 
 1. **Console Logging**
+
    ```jsx
    const MyComponent = (props) => {
      console.log('MyComponent props:', props);
@@ -449,4 +455,4 @@ This guide provides technical details for working with Neon's MDX component syst
 - **Shared content** loads from templates in `content/docs/shared-content/`
 - **Development** follows standard React patterns with MDX integration
 
-For component usage examples, see the [Component Guide](/docs/community/component-guide) and [Component Specialized Guide](/docs/community/component-specialized). 
+For component usage examples, see the [Component Guide](/docs/community/component-guide) and [Component Specialized Guide](/docs/community/component-specialized).

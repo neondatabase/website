@@ -45,24 +45,36 @@ Neon documentation uses multiple icon systems for different components. Understa
 
 ### Component Compatibility
 
-| Component | Icon System | Use Case |
-|-----------|-------------|----------|
-| **TechCards** | TechCards Icons | Technology/framework showcases |
-| **DetailIconCards** | DetailIconCards Icons | Feature/service showcases |
-| **DocsList** | Built-in themes | Documentation links |
-
-
+| Component           | Icon System           | Use Case                       |
+| ------------------- | --------------------- | ------------------------------ |
+| **TechCards**       | TechCards Icons       | Technology/framework showcases |
+| **DetailIconCards** | DetailIconCards Icons | Feature/service showcases      |
+| **DocsList**        | Built-in themes       | Documentation links            |
 
 ### Usage Example
 
 ```mdx
 <DetailIconCards>
-  <a href="/docs/ai/openai" title="OpenAI Integration" description="Build AI features with OpenAI" icon="openai">OpenAI Integration</a>
-  <a href="/docs/ai/langchain" title="LangChain Integration" description="Create AI workflows with LangChain" icon="langchain">LangChain Integration</a>
+  <a
+    href="/docs/ai/openai"
+    title="OpenAI Integration"
+    description="Build AI features with OpenAI"
+    icon="openai"
+  >
+    OpenAI Integration
+  </a>
+  <a
+    href="/docs/ai/langchain"
+    title="LangChain Integration"
+    description="Create AI workflows with LangChain"
+    icon="langchain"
+  >
+    LangChain Integration
+  </a>
 </DetailIconCards>
 ```
 
-*For technical implementation details, see the [Icon Systems section](/docs/community/component-architecture#icon-systems) in the Component Architecture guide.*
+_For technical implementation details, see the [Icon Systems section](/docs/community/component-architecture#icon-systems) in the Component Architecture guide._
 
 ---
 
@@ -92,12 +104,12 @@ Neon documentation uses multiple icon systems for different components. Understa
 
 ### Component Selection Guide
 
-| Use Case | Component | Icon System | Example |
-|----------|-----------|-------------|---------|
-| Technology showcase | TechCards | TechCards Icons | Node.js, React, Python |
-| Feature showcase | DetailIconCards | DetailIconCards Icons | OpenAI, AWS, Database |
-| Documentation links | DocsList | Built-in themes | Guides, API docs |
-| Simple navigation | DocsList | Built-in themes | Related topics |
+| Use Case            | Component       | Icon System           | Example                |
+| ------------------- | --------------- | --------------------- | ---------------------- |
+| Technology showcase | TechCards       | TechCards Icons       | Node.js, React, Python |
+| Feature showcase    | DetailIconCards | DetailIconCards Icons | OpenAI, AWS, Database  |
+| Documentation links | DocsList        | Built-in themes       | Guides, API docs       |
+| Simple navigation   | DocsList        | Built-in themes       | Related topics         |
 
 ---
 
@@ -214,8 +226,6 @@ To test if an icon works:
 <a href="#" title="WunderGraph" description="API development platform (icon: wundergraph)" icon="wundergraph">WunderGraph</a>
 </TechCards>
 
-
-
 ### DetailIconCards Icons (Feature Icons)
 
 #### AI & Machine Learning
@@ -330,4 +340,4 @@ This guide provides an overview of Neon's icon systems and usage guidelines. For
 - **DetailIconCards** uses monochrome feature icons mapped in component code
 - **DocsList** uses built-in themes for simple navigation
 - Always test icons in the target component before using
-- Choose the right component based on your use case, not just the icon availability 
+- Choose the right component based on your use case, not just the icon availability
