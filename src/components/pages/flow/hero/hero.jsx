@@ -24,6 +24,7 @@ const Hero = () => (
           className="-left-[35px] -top-1 w-[1196px] xl:w-[1120px] lg:-left-5 lg:w-[820px] md:-left-3 md:-top-3 md:-top-5 md:w-[100vw]"
           width={1196}
           height={900}
+          poster="/images/pages/flow/workflow.jpg"
         >
           <source src="/videos/pages/flow/workflow.mp4" type="video/mp4" />
           <source src="/videos/pages/flow/workflow.webm" type="video/webm" />
