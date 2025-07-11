@@ -139,17 +139,20 @@ postgres=> \dv
 ```sql
 postgres=> \df
                                                                           List of functions
- Schema |                 Name                 | Result data type |                                    Argument data types                                    | Type
---------+--------------------------------------+------------------+-------------------------------------------------------------------------------------------+------
- public | approximate_working_set_size         | integer          | reset boolean                                                                             | func
- public | approximate_working_set_size_seconds | integer          | duration integer DEFAULT NULL::integer                                                    | func
- public | backpressure_lsns                    | record           | OUT received_lsn pg_lsn, OUT disk_consistent_lsn pg_lsn, OUT remote_consistent_lsn pg_lsn | func
- public | backpressure_throttling_time         | bigint           |                                                                                           | func
- public | get_backend_perf_counters            | SETOF record     |                                                                                           | func
- public | get_perf_counters                    | SETOF record     |                                                                                           | func
- public | local_cache_pages                    | SETOF record     |                                                                                           | func
- public | neon_get_lfc_stats                   | SETOF record     |                                                                                           | func
- public | pg_cluster_size                      | bigint           |                                                                                           | func
+Schema |                 Name                 | Result data type |                                             Argument data types                                             | Type
+--------+--------------------------------------+------------------+-------------------------------------------------------------------------------------------------------------+------
+ public | approximate_working_set_size         | integer          | reset boolean                                                                                               | func
+ public | approximate_working_set_size_seconds | integer          | duration integer DEFAULT NULL::integer                                                                      | func
+ public | backpressure_lsns                    | record           | OUT received_lsn pg_lsn, OUT disk_consistent_lsn pg_lsn, OUT remote_consistent_lsn pg_lsn                   | func
+ public | backpressure_throttling_time         | bigint           |                                                                                                             | func
+ public | get_backend_perf_counters            | SETOF record     |                                                                                                             | func
+ public | get_local_cache_state                | bytea            | max_chunks integer DEFAULT NULL::integer                                                                    | func
+ public | get_perf_counters                    | SETOF record     |                                                                                                             | func
+ public | get_prewarm_info                     | record           | OUT total_pages integer, OUT prewarmed_pages integer, OUT skipped_pages integer, OUT active_workers integer | func
+ public | local_cache_pages                    | SETOF record     |                                                                                                             | func
+ public | neon_get_lfc_stats                   | SETOF record     |                                                                                                             | func
+ public | pg_cluster_size                      | bigint           |                                                                                                             | func
+ public | prewarm_local_cache                  | void             | state bytea, n_workers integer DEFAULT 1                                                                    | func
 ```
 
 <NeedHelp/>
