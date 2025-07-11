@@ -2,7 +2,7 @@
 title: Neon Documentation MDX Components - Specialized Guide
 subtitle: Specialized and less common components for specific use cases
 enableTableOfContents: true
-updatedOn: '2025-07-11T19:24:20.300Z'
+updatedOn: '2025-07-11T20:37:11.993Z'
 ---
 
 A comprehensive reference for specialized and less commonly used MDX components in Neon documentation. This guide covers components used in specific scenarios, specialized workflows, and edge cases.

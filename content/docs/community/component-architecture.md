@@ -2,7 +2,7 @@
 title: Neon Documentation MDX Components - Architecture Guide
 subtitle: Technical implementation details for developers and maintainers
 enableTableOfContents: true
-updatedOn: '2025-07-11T19:24:20.300Z'
+updatedOn: '2025-07-11T20:37:11.989Z'
 ---
 
 A technical reference for developers and maintainers who need to understand, modify, or extend the Neon documentation component system. This guide covers the architecture, file structure, and implementation details.
