@@ -1,5 +1,5 @@
 ---
-title: Backup & Restore
+title: Backup & restore
 subtitle: Restore your branch from a point in time or snapshot
 tag: new
 enableTableOfContents: true
@@ -7,10 +7,10 @@ updatedOn: '2025-05-23T18:48:33.108Z'
 ---
 
 <Admonition type="comingSoon" title="Snapshots in Early Access">
-The new **Backup & Restore** page in the Neon Console, which introduces the new **snapshots** feature, is available for members of our Early Access Program. Read more about joining up [here](/docs/introduction/early-access).
+The new **Backup & restore** page in the Neon Console, which introduces the new **snapshots** feature, is available for members of our Early Access Program. Read more about joining up [here](/docs/introduction/early-access).
 </Admonition>
 
-Use the **Backup & Restore** page in the Neon Console to restore a branch to a previous state or create snapshots of your data. This feature combines **instant point-in-time restore** and **snapshots** to help you recover from accidental changes, data loss, or schema issues.
+Use the **Backup & restore** page in the Neon Console to restore a branch to a previous state or create snapshots of your data. This feature combines **instant point-in-time restore** and **snapshots** to help you recover from accidental changes, data loss, or schema issues.
 
 ![Backup and restore UI](/docs/guides/backup_restore_ui.png)
 
@@ -22,7 +22,8 @@ Use the **Backup & Restore** page in the Neon Console to restore a branch to a p
 - ✅ Preview data before restoring
 - ✅ Create snapshots
 - ✅ Restore from a snapshot
-
+- ✅ Schedule snapshots
+-
 ---
 
 ## Instantly restore a branch
@@ -105,13 +106,30 @@ For information about removing backup branches, see [Deleting backup branches](/
 
 ## Create snapshots
 
-Snapshots are manual, point-in-time copies of your branch.
+Snapshots are point-in-time copies of your branch.
 
-To create a snapshot, click **Create snapshot**. This captures the current state of your data and saves it as a **Manual snapshot**. It's a good idea to create a snapshot before making significant schema or data changes.
-
-> A future release will include a snapshot scheduler that lets you schedule daily, weekly, or monthly snapshots.
+To create a snapshot manually, click **Create snapshot**. This captures the current state of your data and saves it as a **Manual snapshot**. It's a good idea to create a snapshot before making significant changes to your schema or data.
 
 ![Backup branch on the Branches page](/docs/guides/backup_restore_create_snapshot.png)
+
+## Schedule snapshots
+
+You can schedule automatic snapshots on a daily, weekly, or monthly basis to back up your data.
+
+To edit the snapshot schedule:
+
+1. Click **Edit schedule**.
+2. Choose how often to take snapshots:
+   - **Daily** at a specific UTC time.
+   - **Weekly** on a selected day.
+   - **Monthly** on a selected day of the month.
+3. Set your preferences for how long each snapshot should be retained.
+
+<Admonition type="tip">
+The Neon API supports finer-grained control over snapshot scheduling.
+</Admonition>
+
+![snapshot schedule dialog](/docs/guides/snapshot_schedule.png)
 
 ## Restore from a snapshot
 
@@ -150,7 +168,7 @@ Select your desired compute settings and click **Add**. Compute settings include
 
 ![Restore branch compute settings](/docs/guides/backup_restore_compute_settings.png)
 
-With a compute added, you can now access to your restore branch and connect to its databases.
+With a compute added, you can now access your restore branch and connect to its databases.
 
 ![Restore branch new compute](/docs/guides/backup_restore_new_compute.png)
 
@@ -170,7 +188,7 @@ Click the **Connect** button to get the connection string.
 
 ## Switch your app to the restore branch
 
-If you want to use the restore branch with your application, update your app to use the restore branch connection string. Before switching, pause write operations on the branch you are replacing, then resume them after switching to avoid data inconsistencies. Since Neon doesn't support read-only mode at the branch or database level, you'll need disable writes in your application.
+If you want to use the restore branch with your application, update your app to use the restore branch connection string. Before switching, pause write operations on the branch you are replacing, then resume them after switching to avoid data inconsistencies. Since Neon doesn't support read-only mode at the branch or database level, you'll need to disable writes in your application.
 
 > The restore branch name includes a timestamp and may be long. You can rename it. See [Rename a branch](/docs/manage/branches#rename-a-branch) for instructions.
 
