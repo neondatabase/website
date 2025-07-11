@@ -3,7 +3,6 @@ import Image from 'next/image';
 
 import Container from 'components/shared/container/container';
 import Heading from 'components/shared/heading';
-import Link from 'components/shared/link/link';
 import LINKS from 'constants/links';
 import certGDPRIcon from 'images/pages/contact-sales/cert-gdpr.svg';
 import certISOIcon from 'images/pages/contact-sales/cert-iso.svg';
@@ -116,16 +115,6 @@ const Hero = () => (
                 </li>
               ))}
             </ul>
-            <Link
-              className="mt-7 text-lg font-medium leading-none tracking-tight sm:text-base"
-              theme="green"
-              to={LINKS.bookMeeting}
-              rel="noopener noreferrer"
-              target="_blank"
-              withArrow
-            >
-              Book a meeting directly
-            </Link>
           </div>
           <div className="mt-auto lg:mt-14">
             <CaseStudies items={CASE_STUDIES} />

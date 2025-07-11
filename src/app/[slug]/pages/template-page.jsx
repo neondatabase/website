@@ -6,7 +6,7 @@ import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
 import { TEMPLATE_PAGES_DIR_PATH } from 'constants/content';
 import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
-import { getPostBySlug } from 'utils/api-docs';
+import { getPostBySlug } from 'utils/api-content';
 import getMetadata from 'utils/get-metadata';
 import getTableOfContents from 'utils/get-table-of-contents';
 
@@ -34,7 +34,7 @@ const TemplatePage = ({ params }) => {
 
   const { data, content } = post;
   const tableOfContents = getTableOfContents(content);
-  const githubPath = `${TEMPLATE_PAGES_DIR_PATH}/${slug}.md`;
+  const gitHubPath = `${TEMPLATE_PAGES_DIR_PATH}/${slug}.md`;
 
   return (
     <Layout headerWithBorder isHeaderSticky>
@@ -48,7 +48,7 @@ const TemplatePage = ({ params }) => {
             data={data}
             breadcrumbs={[]}
             currentSlug={slug}
-            githubPath={githubPath}
+            gitHubPath={gitHubPath}
             tableOfContents={tableOfContents}
           />
         </Container>

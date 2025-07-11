@@ -1,3 +1,3 @@
-import GithubStarCounter from './github-star-counter';
+import GitHubStarCounter from './github-star-counter';
 
-export default GithubStarCounter;
+export default GitHubStarCounter;
