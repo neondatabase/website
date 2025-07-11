@@ -276,7 +276,7 @@ The Neon MCP server provides access to powerful tools for interacting with your 
 
 - Use MCP only for **local development** or **IDE-based workflows**.
 - Never connect MCP agents to production databases.
-- Avoid exposing production data or PII data to MCP — only use anaymized data.
+- Avoid exposing production data or PII data to MCP — only use anonymized data.
 - Disable MCP tools capable of accessing or modifying data when they are not being used.
 - Do not grant MCP access to your customers or end users.
 
