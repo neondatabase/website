@@ -84,6 +84,8 @@ For Neon projects created in AWS regions, inactive branches are archived in Amaz
 
 Branch archiving thresholds are not configurable. Archiving and unarchiving happen automatically according to the thresholds and conditions described above.
 
+For temporary branches with known lifespans, consider using [TTL branches](/docs/guides/ttl-branches) instead of relying on automatic archiving. TTL branches provide deterministic cleanup at a specified time, making them ideal for CI/CD pipelines and temporary development environments.
+
 ## Disabling branch archiving
 
 You cannot fully disable branch archiving, but you can prevent a branch from being archived by defining it as a **protected branch**. For instructions, see [Set a branch as protected](/docs/manage/branches#set-a-branch-as-protected). Protected branches are supported on Neon paid plans.

@@ -74,6 +74,16 @@ Refer to the following guide for instructions.
 
 </DetailIconCards>
 
+### Temporary environments
+
+For short-lived development and testing environments, you can create branches with automatic expiration using [TTL branches](/docs/guides/ttl-branches). This eliminates manual cleanup overhead and ensures temporary branches are automatically deleted when no longer needed.
+
+TTL branches are particularly useful for:
+- CI/CD pipeline testing environments
+- Feature development with known lifespans
+- Automated testing scenarios
+- AI-driven development workflows
+
 ## Restore and recover data
 
 If you lose data due to an unintended deletion or some other event, you can restore a branch to any point in its restore window to recover lost data. You can also create a new restore branch for historical analysis or any other reason.
