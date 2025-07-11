@@ -29,6 +29,7 @@ TTL (time-to-live) branches are standard Neon branches with an expiration timest
 ## Purpose and benefits
 
 Developers frequently create short-lived branches for:
+
 - CI/CD pipeline testing environments
 - Feature development with known lifespans
 - Automated testing scenarios
@@ -48,11 +49,13 @@ Manual cleanup is often overlooked, leading to unnecessary storage costs. By set
 TTL functionality is implemented by storing expiration information alongside branch data. This design allows any normal branch to have an expiration timestamp added or removed at any time.
 
 When you set an expiration timestamp:
+
 - The system stores both the expiration time and the TTL interval.
 - A background process checks for expired branches and deletes them when applicable.
 - Branches are automatically deleted after their expiration time is reached.
 
 When resetting a branch from its parent:
+
 - The TTL countdown resets.
 - `expires_at` is updated to the time of reset plus the original TTL interval.
 - This ensures consistent behavior for branches used in automated workflows.
@@ -184,6 +187,7 @@ You can set, update, or remove expiration timestamps on branches through multipl
 - **Console** - Use the date and time selector in the Neon Console to set or update expiration dates (automatically handles formatting).
 
 **Supported operations:**
+
 - Set an expiration when creating a branch.
 - Add an expiration to an existing branch.
 - Update an expiration timestamp.
@@ -242,6 +246,7 @@ The following restrictions apply to ensure system integrity:
 When using the API or CLI, the `expires_at` parameter must be provided in [RFC 3339](https://tools.ietf.org/html/rfc3339#section-5.6) format with second-level precision.
 
 **Format pattern:**
+
 ```
 YYYY-MM-DDTHH:MM:SSZ          (UTC)
 YYYY-MM-DDTHH:MM:SS+HH:MM     (Positive UTC offset)
@@ -249,12 +254,14 @@ YYYY-MM-DDTHH:MM:SS-HH:MM     (Negative UTC offset)
 ```
 
 **Valid examples:**
-- `2025-07-15T18:02:16Z`      (UTC)
+
+- `2025-07-15T18:02:16Z` (UTC)
 - `2025-07-15T18:02:16+00:00` (UTC with offset notation)
 - `2025-07-15T18:02:16-05:00` (Eastern Standard Time)
 - `2025-07-15T18:02:16+09:00` (Japan Standard Time)
 
 **Requirements:**
+
 - Time zone is required (either `Z` for UTC or a numeric offset).
 - Cannot use both `Z` and offset (e.g., `2025-07-15T18:02:16Z-05:00` is invalid).
 - Fractional seconds are optional, but only second-level precision is stored.
@@ -273,13 +280,14 @@ The [`Update project branch`](https://api-docs.neon.tech/reference/updateproject
 
 - **`expires_at`** (optional, nullable) - Controls the branch expiration timestamp. See [timestamp format](#timestamp-format) for formatting requirements.
 
-| Value | Effect |
-|-------|--------|
+| Value     | Effect                                |
+| --------- | ------------------------------------- |
 | Timestamp | Sets or updates the branch expiration |
-| `null` | Removes the expiration timestamp |
-| Omitted | No change to expiration |
+| `null`    | Removes the expiration timestamp      |
+| Omitted   | No change to expiration               |
 
 When updating a branch with a new `expires_at` timestamp:
+
 - The new timestamp and new TTL interval are stored.
 - The new TTL interval is calculated from the moment of the update.
 
