@@ -12,7 +12,7 @@ A practical guide for the most commonly used MDX components in Neon documentatio
 <p>How to use common MDX components in Neon docs</p>
 <p>How to choose between different components</p>
 <p>Best practices</p>
-<p>Proper syntax and prop usage for each component</p>
+<p>Proper syntax and prop usage</p>
 </DocsList>
 
 <DocsList title="Related topics" theme="docs">
