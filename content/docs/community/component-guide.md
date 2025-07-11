@@ -39,7 +39,7 @@ These are the most frequently used components in Neon docs.
 
 ### Admonition
 
-Callouts for notes, warnings, and tips. 6 types available: `note` (default), `important`, `tip`, `info`, `warning`, `comingSoon`.
+Callouts for notes, warnings, and tips. There are six types available: `note` (default), `important`, `tip`, `info`, `warning`, `comingSoon`.
 
     ```mdx
 
