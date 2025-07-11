@@ -101,7 +101,11 @@ Embedded YouTube video player.
 Native video player component.
 
 ```mdx
-<Video sources={[{ src: '/videos/pages/doc/neon-mcp.mp4', type: 'video/mp4' }]} width={960} height={1080} />
+<Video
+  sources={[{ src: '/videos/pages/doc/neon-mcp.mp4', type: 'video/mp4' }]}
+  width={960}
+  height={1080}
+/>
 ```
 
 **Live preview:**
@@ -265,7 +269,9 @@ Components for community engagement and interaction.
 Community engagement banner for promoting community participation.
 
 ```mdx
-<CommunityBanner buttonText="Join Discord" buttonUrl="https://discord.gg/92vNTzKDGp" logo="discord">Connect with the Neon community!</CommunityBanner>
+<CommunityBanner buttonText="Join Discord" buttonUrl="https://discord.gg/92vNTzKDGp" logo="discord">
+  Connect with the Neon community!
+</CommunityBanner>
 ```
 
 **Live preview:**

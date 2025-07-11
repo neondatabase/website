@@ -55,8 +55,22 @@ Neon documentation uses multiple icon systems for different components. Understa
 
 ```mdx
 <DetailIconCards>
-<a href="/docs/ai/openai" title="OpenAI integration" description="Build AI features with OpenAI" icon="openai">OpenAI Integration</a>
-<a href="/docs/ai/langchain" title="LangChain integration" description="Create AI workflows with LangChain" icon="langchain">LangChain Integration</a>
+  <a
+    href="/docs/ai/openai"
+    title="OpenAI integration"
+    description="Build AI features with OpenAI"
+    icon="openai"
+  >
+    OpenAI Integration
+  </a>
+  <a
+    href="/docs/ai/langchain"
+    title="LangChain integration"
+    description="Create AI workflows with LangChain"
+    icon="langchain"
+  >
+    LangChain Integration
+  </a>
 </DetailIconCards>
 ```
 
