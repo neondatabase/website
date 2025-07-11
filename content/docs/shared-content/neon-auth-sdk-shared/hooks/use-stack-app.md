@@ -16,7 +16,7 @@ function MyComponent() {
 ## Usage
 
 ```jsx
-import { useStackApp } from '@neondatabase/neon-auth-{sdkSlug}';
+import { useStackApp } from '@stackframe/stack';
 
 function MyComponent() {
   const stackApp = useStackApp();
