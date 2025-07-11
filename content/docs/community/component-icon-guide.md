@@ -23,27 +23,27 @@ A comprehensive guide to all icon systems used in Neon documentation. This guide
 </DocsList>
 </InfoBlock>
 
-## Quick Navigation
+## Quick navigation
 
-- [Icon System Overview](#icon-system-overview) - Understanding the different icon systems
+- [Icon system overview](#icon-system-overview) - Understanding the different icon systems
 - [TechCards Icons](#techcards-icons) - Technology logos and frameworks
 - [DetailIconCards Icons](#detailiconcards-icons) - Feature and service icons
-- [Icon Usage Guidelines](#icon-usage-guidelines) - Best practices and conventions
+- [Icon usage guidelines](#icon-usage-guidelines) - Best practices and conventions
 - [Icon Decision Tree](#icon-decision-tree) - Which icon system to use when
 
 ---
 
-## Icon System Overview
+## Icon system overview
 
 Neon documentation uses multiple icon systems for different components. Understanding which system to use is crucial for proper implementation.
 
-### Available Icon Systems
+### Available icon systems
 
 1. **TechCards Icons** - Colorful technology logos and framework icons
 2. **DetailIconCards Icons** - Monochrome feature and service icons
 3. **DocsList Icons** - Simple navigation and action icons
 
-### Component Compatibility
+### Component compatibility
 
 | Component           | Icon System           | Use Case                       |
 | ------------------- | --------------------- | ------------------------------ |
@@ -51,13 +51,13 @@ Neon documentation uses multiple icon systems for different components. Understa
 | **DetailIconCards** | DetailIconCards Icons | Feature/service showcases      |
 | **DocsList**        | Built-in themes       | Documentation links            |
 
-### Usage Example
+### Usage example
 
 ```mdx
 <DetailIconCards>
   <a
     href="/docs/ai/openai"
-    title="OpenAI Integration"
+    title="OpenAI integration"
     description="Build AI features with OpenAI"
     icon="openai"
   >
@@ -65,7 +65,7 @@ Neon documentation uses multiple icon systems for different components. Understa
   </a>
   <a
     href="/docs/ai/langchain"
-    title="LangChain Integration"
+    title="LangChain integration"
     description="Create AI workflows with LangChain"
     icon="langchain"
   >
@@ -78,21 +78,21 @@ _For technical implementation details, see the [Icon Systems section](/docs/comm
 
 ---
 
-## Icon Usage Guidelines
+## Icon usage guidelines
 
-### Choosing the Right Icon System
+### Choosing the right icon system
 
 - **TechCards**: Use for technology and framework showcases
 - **DetailIconCards**: Use for feature and service showcases
 - **DocsList**: Use built-in themes for documentation links
 
-### Icon Naming Conventions
+### Icon naming conventions
 
 - **TechCards**: Use kebab-case (e.g., `node-js`, `next-js`)
 - **DetailIconCards**: Use camelCase or kebab-case as defined in the mapping
 - **File Requirements**: Ensure SVG files exist in the correct directories
 
-### Best Practices
+### Best practices
 
 1. **Test your icons**: Always verify that your chosen icon works in the target component
 2. **Check both systems**: If an icon doesn't work in one system, try the other
@@ -102,7 +102,7 @@ _For technical implementation details, see the [Icon Systems section](/docs/comm
 
 ---
 
-### Component Selection Guide
+### Component selection guide
 
 | Use Case            | Component       | Icon System           | Example                |
 | ------------------- | --------------- | --------------------- | ---------------------- |
@@ -115,14 +115,14 @@ _For technical implementation details, see the [Icon Systems section](/docs/comm
 
 ## Troubleshooting
 
-### Common Issues
+### Common issues
 
 1. **Icon not displaying**: Check that the icon name exists in the correct system
 2. **Wrong icon system**: Verify you're using the right component for your icon
 3. **Missing files**: Ensure SVG files exist in the correct directories
 4. **Case sensitivity**: Icon names are case-sensitive
 
-### Testing Icons
+### Testing icons
 
 To test if an icon works:
 
@@ -130,14 +130,14 @@ To test if an icon works:
 2. **DetailIconCards**: Check if the icon is mapped in the component code
 3. **DocsList**: Use the built-in themes (default, docs, repo)
 
-### Getting Help
+### Getting help
 
 - Review the [Component Architecture](/docs/community/component-architecture) for technical details
 - Test icons in a development environment before using in production
 
 ---
 
-## Complete Icon Showcase
+## Complete icon showcase
 
 ### TechCards Icons (Technology Logos)
 
@@ -334,7 +334,7 @@ To test if an icon works:
 
 This guide provides an overview of Neon's icon systems and usage guidelines. For complete icon listings and detailed examples, refer to the [Component Showcase](/docs/community/component-showcase).
 
-### Key Takeaways
+### Key takeaways
 
 - **TechCards** uses colorful technology logos from `/public/images/technology-logos/`
 - **DetailIconCards** uses monochrome feature icons mapped in component code

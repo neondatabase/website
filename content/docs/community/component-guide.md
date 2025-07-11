@@ -23,17 +23,17 @@ A practical guide for the most commonly used MDX components in Neon documentatio
 </DocsList>
 </InfoBlock>
 
-## Quick Navigation
+## Quick navigation
 
-- [Essential Components](#essential-components) - Most commonly used
-- [Tabbed Content](#tabbed-content) - CodeTabs and Tabs for organized content
-- [Content Organization](#content-organization) - Structure and navigation components
-- [Interactive Elements](#interactive-elements) - UI elements and forms
-- [Common Shared Components](#common-shared-components) - Reusable content
+- [Essential components](#essential-components) - Most commonly used
+- [Tabbed content](#tabbed-content) - CodeTabs and Tabs for organized content
+- [Content organization](#content-organization) - Structure and navigation components
+- [Interactive elements](#interactive-elements) - UI elements and forms
+- [Common shared components](#common-shared-components) - Reusable content
 
 ---
 
-## Essential Components
+## Essential components
 
 These are the most frequently used components in Neon docs.
 
@@ -48,7 +48,7 @@ Callouts for notes, warnings, and tips. There are six types available: `note` (d
 </Admonition>
 ```
 
-**Live Preview:**
+**Live preview:**
 
 <Admonition type="warning" title="Important">
 Critical information requiring immediate attention.
@@ -64,7 +64,7 @@ Highlights information that users should take into account.
 Crucial information necessary for users to succeed.
 </Admonition>
 
-<Admonition type="tip" title="Pro Tip">
+<Admonition type="tip" title="Pro tip">
 Optional information to help a user be more successful.
 </Admonition>
 
@@ -104,7 +104,7 @@ Fill the glass to desired level and enjoy your water.
 </Steps>
 ```
 
-**Live Preview:**
+**Live preview:**
 
 <Steps>
 
@@ -124,7 +124,7 @@ Fill the glass to desired level and enjoy your water.
 
 ---
 
-## Tabbed Content
+## Tabbed content
 
 Components for organizing content into tabs.
 
@@ -163,7 +163,7 @@ db, err := sql.Open("postgres", os.Getenv("DATABASE_URL"))
 </CodeTabs>
 ````
 
-**Live Preview:**
+**Live preview:**
 
 <CodeTabs labels={["JavaScript", "Python", "Go"]}>
 
@@ -225,7 +225,7 @@ curl -X POST https://console.neon.tech/api/v2/projects/my-project/databases \
 </Tabs>
 ````
 
-**Live Preview:**
+**Live preview:**
 
 <Tabs labels={["Console", "CLI", "API"]}>
 <TabItem>
@@ -252,7 +252,7 @@ curl -X POST https://console.neon.tech/api/v2/projects/my-project/databases \
 
 ---
 
-## Content Organization
+## Content organization
 
 Components for structuring and organizing page content.
 
@@ -293,7 +293,7 @@ Standard technology cards layout using [TechCards icons](/docs/community/compone
 </TechCards>
 ```
 
-**Live Preview:**
+**Live preview:**
 
 <TechCards>
 <a href="/docs/guides/node" title="Node.js" description="Connect Node.js applications to Neon" icon="node-js">Node.js</a>
@@ -311,7 +311,7 @@ Alternative layout using [DetailIconCards icons](/docs/community/component-icon-
 <DetailIconCards>
   <a
     href="/docs/ai/openai"
-    title="OpenAI Integration"
+    title="OpenAI integration"
     description="Build AI features with OpenAI"
     icon="openai"
   >
@@ -319,7 +319,7 @@ Alternative layout using [DetailIconCards icons](/docs/community/component-icon-
   </a>
   <a
     href="/docs/ai/langchain"
-    title="LangChain Integration"
+    title="LangChain integration"
     description="Create AI workflows with LangChain"
     icon="langchain"
   >
@@ -327,7 +327,7 @@ Alternative layout using [DetailIconCards icons](/docs/community/component-icon-
   </a>
   <a
     href="/docs/development"
-    title="Code Development"
+    title="Code development"
     description="Development tools and practices"
     icon="code"
   >
@@ -335,7 +335,7 @@ Alternative layout using [DetailIconCards icons](/docs/community/component-icon-
   </a>
   <a
     href="/docs/cloud/aws"
-    title="AWS Integration"
+    title="AWS integration"
     description="Deploy and scale with AWS"
     icon="aws"
   >
@@ -344,13 +344,13 @@ Alternative layout using [DetailIconCards icons](/docs/community/component-icon-
 </DetailIconCards>
 ```
 
-**Live Preview:**
+**Live preview:**
 
 <DetailIconCards>
-<a href="/docs/ai/openai" title="OpenAI Integration" description="Build AI features with OpenAI" icon="openai">OpenAI Integration</a>
-<a href="/docs/ai/langchain" title="LangChain Integration" description="Create AI workflows with LangChain" icon="langchain">LangChain Integration</a>
-<a href="/docs/development" title="Code Development" description="Development tools and practices" icon="code">Code Development</a>
-<a href="/docs/cloud/aws" title="AWS Integration" description="Deploy and scale with AWS" icon="aws">AWS Integration</a>
+<a href="/docs/ai/openai" title="OpenAI integration" description="Build AI features with OpenAI" icon="openai">OpenAI Integration</a>
+<a href="/docs/ai/langchain" title="LangChain integration" description="Create AI workflows with LangChain" icon="langchain">LangChain Integration</a>
+<a href="/docs/development" title="Code development" description="Development tools and practices" icon="code">Code Development</a>
+<a href="/docs/cloud/aws" title="AWS integration" description="Deploy and scale with AWS" icon="aws">AWS Integration</a>
 </DetailIconCards>
 
 ---
@@ -389,7 +389,7 @@ Branch
 </DefinitionList>
 ```
 
-**Live Preview:**
+**Live preview:**
 
 <DefinitionList>
 
@@ -423,7 +423,7 @@ Simple, clean lists for documentation links with optional theming. DocsList prov
 **MDX Code:**
 
 ```mdx
-<DocsList title="Related Documentation">
+<DocsList title="Related documentation">
   <a href="/docs/guides/node">Node.js Connection Guide</a>
   <a href="/docs/guides/python">Python Connection Guide</a>
   <a href="/docs/api-reference">API Reference</a>
@@ -431,9 +431,9 @@ Simple, clean lists for documentation links with optional theming. DocsList prov
 </DocsList>
 ```
 
-**Live Preview:**
+**Live preview:**
 
-<DocsList title="Related Documentation">
+<DocsList title="Related documentation">
 <a href="/docs/guides/node">Node.js Connection Guide</a>
 <a href="/docs/guides/python">Python Connection Guide</a>
 <a href="/docs/api-reference">API Reference</a>
@@ -487,7 +487,7 @@ InfoBlock creates a multi-column layout for organizing related content sections.
 
 ---
 
-## Interactive Elements
+## Interactive elements
 
 Components for user engagement and interaction.
 
@@ -496,7 +496,7 @@ Components for user engagement and interaction.
 Interactive checklists for setup guides and tutorials. CheckList uses CheckItem components internally.
 
 ```mdx
-<CheckList title="Setup Checklist">
+<CheckList title="Setup checklist">
   <CheckItem title="Create Neon account" href="#signup">
     Sign up for a free Neon account at console.neon.tech
   </CheckItem>
@@ -512,9 +512,9 @@ Interactive checklists for setup guides and tutorials. CheckList uses CheckItem 
 </CheckList>
 ```
 
-**Live Preview:**
+**Live preview:**
 
-<CheckList title="Setup Checklist">
+<CheckList title="Setup checklist">
 <CheckItem title="Create Neon account" href="#signup">
   Sign up for a free Neon account at console.neon.tech
 </CheckItem>
@@ -556,17 +556,17 @@ Prominent call-to-action buttons for important actions.
 
 ```mdx
 <CTA
-  title="Try Neon Free"
+  title="Try Neon free"
   description="Start building with serverless Postgres today. No credit card required."
   buttonText="Sign Up"
   buttonUrl="https://console.neon.tech/signup"
 />
 ```
 
-**Live Preview:**
+**Live preview:**
 
 <CTA 
-  title="Try Neon Free" 
+  title="Try Neon free" 
   description="Start building with serverless Postgres today. No credit card required." 
   buttonText="Sign Up" 
   buttonUrl="https://console.neon.tech/signup" 
@@ -582,7 +582,7 @@ Support widget for getting assistance.
 <NeedHelp />
 ```
 
-**Live Preview:**
+**Live preview:**
 
 <NeedHelp />
 
@@ -590,7 +590,7 @@ Support widget for getting assistance.
 
 ---
 
-## Common Shared Components
+## Common shared components
 
 Reusable content components that load from shared templates.
 
@@ -602,7 +602,7 @@ Link to API key management in the console.
 <LinkAPIKey />
 ```
 
-**Live Preview:**
+**Live preview:**
 
 <LinkAPIKey />
 
@@ -616,7 +616,7 @@ Status indicator for beta features with custom feature name.
 <FeatureBetaProps feature_name="OpenTelemetry integration" />
 ```
 
-**Live Preview:**
+**Live preview:**
 
 <FeatureBetaProps feature_name="OpenTelemetry integration" />
 
@@ -624,9 +624,9 @@ Status indicator for beta features with custom feature name.
 
 ---
 
-## Best Practices
+## Best practices
 
-### Component Selection
+### Component selection
 
 - **[Admonition](#admonition)** for important callouts
 - **[Steps](#steps)** for sequential instructions
@@ -636,7 +636,7 @@ Status indicator for beta features with custom feature name.
 - **[InfoBlock](#infoblock)** for page introductions with multiple content sections
 - **[DocsList](#docslist)** for simple navigation lists with theming options
 
-### Content Organization Tips
+### Content organization tips
 
 - Use [InfoBlock](#infoblock) at the top of pages to provide quick orientation
 - For [TechCards](#techcards), always check that the SVG file exists in `/public/images/technology-logos/`
@@ -646,7 +646,7 @@ Status indicator for beta features with custom feature name.
 
 ---
 
-## Component Summary
+## Component summary
 
 This guide covers the most commonly used MDX components in Neon documentation. Each component includes:
 
@@ -655,14 +655,14 @@ This guide covers the most commonly used MDX components in Neon documentation. E
 - **Props documentation**: Available parameters and options
 - **Best practices**: When and how to use each component
 
-### Component Categories
+### Component categories
 
 | **Category**                                              | **Components**                                                                                                                                                              | **Use Case**                           |
 | --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
 | **[Essential](#essential-components)**                    | [Admonition](#admonition), [Steps](#steps)                                                                                                                                  | Most commonly used components          |
 | **[Tabbed Content](#tabbed-content)**                     | [CodeTabs](#codetabs), [Tabs](#tabs)                                                                                                                                        | Organizing content into tabs           |
-| **[Content Organization](#content-organization)**         | [TechCards](#techcards--detailiconcards), [DetailIconCards](#techcards--detailiconcards), [DefinitionList](#definitionlist), [DocsList](#docslist), [InfoBlock](#infoblock) | Structure and navigation               |
-| **[Interactive Elements](#interactive-elements)**         | [CheckList](#checklist), [CheckItem](#checkitem), [CTA](#cta-call-to-action), [NeedHelp](#needhelp)                                                                         | User engagement and interaction        |
-| **[Common Shared Components](#common-shared-components)** | [LinkAPIKey](#linkapikey), [FeatureBetaProps](#featurebetaprops)                                                                                                            | Reusable content and status indicators |
+| **[Content organization](#content-organization)**         | [TechCards](#techcards--detailiconcards), [DetailIconCards](#techcards--detailiconcards), [DefinitionList](#definitionlist), [DocsList](#docslist), [InfoBlock](#infoblock) | Structure and navigation               |
+| **[Interactive elements](#interactive-elements)**         | [CheckList](#checklist), [CheckItem](#checkitem), [CTA](#cta-call-to-action), [NeedHelp](#needhelp)                                                                         | User engagement and interaction        |
+| **[Common shared components](#common-shared-components)** | [LinkAPIKey](#linkapikey), [FeatureBetaProps](#featurebetaprops)                                                                                                            | Reusable content and status indicators |
 
 For specialized components and specific use cases, see the [Component Specialized Guide](/docs/community/component-specialized).

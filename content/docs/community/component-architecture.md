@@ -23,26 +23,26 @@ A technical reference for developers and maintainers who need to understand, mod
 </DocsList>
 </InfoBlock>
 
-## Quick Navigation
+## Quick navigation
 
-- [Component Architecture](#component-architecture) - How MDX components are integrated
-- [File Structure](#file-structure) - Directory organization and component locations
-- [Component Registration](#component-registration) - How components are registered in MDX
-- [Icon Systems](#icon-systems) - Technical implementation of icon loading
-- [Shared Content](#shared-content) - How shared templates work
-- [Development Workflow](#development-workflow) - How to add, modify, or debug components
-- [Build Process](#build-process) - How components are processed during build
+- [Component architecture](#component-architecture) - How MDX components are integrated
+- [File structure](#file-structure) - Directory organization and component locations
+- [Component registration](#component-registration) - How components are registered in MDX
+- [Icon systems](#icon-systems) - Technical implementation of icon loading
+- [Shared content](#shared-content) - How shared templates work
+- [Development workflow](#development-workflow) - How to add, modify, or debug components
+- [Build process](#build-process) - How components are processed during build
 - [Troubleshooting](#troubleshooting) - Common issues and debugging techniques
 
 ---
 
-## Component Architecture
+## Component architecture
 
-### MDX Integration
+### MDX integration
 
 Neon documentation uses MDX (Markdown + JSX) to enable React components within markdown content. The component system is built on top of this foundation.
 
-### Component Hierarchy
+### Component hierarchy
 
 ```
 MDX Content
@@ -54,7 +54,7 @@ React Components (src/components/pages/doc/)
 Rendered HTML
 ```
 
-### Key Files
+### Key files
 
 - `sharedMdxComponents.js` - Main component registry
 - `src/components/pages/doc/` - Component implementations
@@ -63,9 +63,9 @@ Rendered HTML
 
 ---
 
-## File Structure
+## File structure
 
-### Component Directory Organization
+### Component directory organization
 
 Most MDX components follow a consistent pattern in the Neon website repository:
 
@@ -82,7 +82,7 @@ src/components/pages/doc/
 └── ...
 ```
 
-### Example: DocsList Component
+### Example: DocsList component
 
 Let's explore the DocsList component as an example:
 
@@ -95,7 +95,7 @@ src/components/pages/doc/docs-list/
     └── repo.inline.svg
 ```
 
-### Key Files to Check
+### Key files to check
 
 When exploring a component, look for these files:
 
@@ -115,9 +115,9 @@ When exploring a component, look for these files:
 
 ---
 
-## Component Registration
+## Component registration
 
-### Registration Process
+### Registration process
 
 Components are registered in `sharedMdxComponents.js` to make them available in MDX files:
 
@@ -140,12 +140,12 @@ The `sharedMdxComponents` object is passed to the MDX processor, making all regi
 
 ```jsx
 // In MDX files
-<DocsList title="Related Documentation">
+<DocsList title="Related documentation">
   <a href="/docs/guides/node">Node.js Guide</a>
 </DocsList>
 ```
 
-### Component Availability
+### Component availability
 
 - **Global**: Components registered in `sharedMdxComponents` are available in all MDX files
 - **Local**: Some components may be registered locally for specific pages
@@ -153,9 +153,9 @@ The `sharedMdxComponents` object is passed to the MDX processor, making all regi
 
 ---
 
-## Icon Systems
+## Icon systems
 
-### TechCards Icon Loading
+### TechCards icon loading
 
 TechCards icons are loaded dynamically from the public directory:
 
@@ -174,7 +174,7 @@ const iconPathDark = `${ICONS_PATH}/${icon}-dark.svg`;
 - Format: `{icon-name}.svg` and `{icon-name}-dark.svg`
 - Case-sensitive naming
 
-### DetailIconCards Icon Loading
+### DetailIconCards icon loading
 
 DetailIconCards icons are statically imported and mapped:
 
@@ -199,7 +199,7 @@ const Icon = icons[icon];
 - Must be explicitly mapped in the component code
 - Case-sensitive naming
 
-### Icon System Differences
+### Icon system differences
 
 | Aspect          | TechCards                          | DetailIconCards              |
 | --------------- | ---------------------------------- | ---------------------------- |
@@ -211,9 +211,9 @@ const Icon = icons[icon];
 
 ---
 
-## Shared Content
+## Shared content
 
-### Shared Templates
+### Shared templates
 
 Shared content components load from templates in `content/docs/shared-content/`:
 
@@ -225,7 +225,7 @@ content/docs/shared-content/
 └── ...
 ```
 
-### Template Registration
+### Template registration
 
 Templates are registered in `shared-content/index.js`:
 
@@ -238,7 +238,7 @@ export const sharedContent = {
 };
 ```
 
-### Usage in Components
+### Usage in components
 
 Shared content is loaded dynamically:
 
@@ -248,7 +248,7 @@ Shared content is loaded dynamically:
 <PublicPreview /> // Loads content from public-preview.md
 ```
 
-### Template Structure
+### Template structure
 
 Shared templates are standard MDX files with frontmatter:
 
@@ -263,9 +263,9 @@ This feature is currently in beta...
 
 ---
 
-## Development Workflow
+## Development workflow
 
-### Adding a New Component
+### Adding a new component
 
 1. **Create Component Directory**
 
@@ -318,7 +318,7 @@ This feature is currently in beta...
    <MyComponent title="Test">This is a test of my new component.</MyComponent>
    ```
 
-### Modifying Existing Components
+### Modifying existing components
 
 1. **Locate Component**
    - Find the component in `src/components/pages/doc/{component-name}/`
@@ -333,7 +333,7 @@ This feature is currently in beta...
    - Verify that existing usage still works
    - Test edge cases and error conditions
 
-### Debugging Components
+### Debugging components
 
 1. **Check Console Errors**
    - Look for JavaScript errors in browser console
@@ -353,16 +353,16 @@ This feature is currently in beta...
 
 ---
 
-## Build Process
+## Build process
 
-### MDX Processing
+### MDX processing
 
 1. **Content Loading**: MDX files are loaded from `content/docs/`
 2. **Component Resolution**: `sharedMdxComponents` are injected into MDX context
 3. **Transformation**: MDX is transformed to React components
 4. **Rendering**: Components are rendered to HTML
 
-### Build Pipeline
+### Build pipeline
 
 ```
 MDX Files → MDX Processor → React Components → HTML Output
@@ -380,7 +380,7 @@ content/docs/ → sharedMdxComponents → src/components/ → public/
 
 ## Troubleshooting
 
-### Common Issues
+### Common issues
 
 1. **Component Not Found**
    - Check that component is registered in `sharedMdxComponents`
@@ -402,7 +402,7 @@ content/docs/ → sharedMdxComponents → src/components/ → public/
    - Verify that styles are properly imported
    - Test in different browsers and screen sizes
 
-### Debugging Techniques
+### Debugging techniques
 
 1. **Console Logging**
 
@@ -427,7 +427,7 @@ content/docs/ → sharedMdxComponents → src/components/ → public/
    - Enable source maps for better error tracking
    - Use browser dev tools to step through code
 
-### Performance Considerations
+### Performance considerations
 
 1. **Bundle Size**
    - Keep components lightweight
