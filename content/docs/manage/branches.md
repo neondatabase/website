@@ -78,6 +78,10 @@ To view the branches in a Neon project:
 
 On the Free Plan, Neon automatically archives inactive branches to cost-efficient archive storage after a defined threshold. For more, see [Branch archiving](/docs/guides/branch-archiving).
 
+<Admonition type="note">
+For branches with predictable lifespans, [TTL branches](/docs/guides/ttl-branches) offer an alternative to archiving. Instead of waiting for inactive branches to be archived, you can set automatic deletion timestamps when creating branches, ensuring cleanup happens exactly when needed.
+</Admonition>
+
 ## Rename a branch
 
 Neon permits renaming a branch, including your project's default branch. To rename a branch:
@@ -166,6 +170,10 @@ To delete a branch:
 4. On the branch overview page, click the **More** drop-down menu and select **Delete**.
 5. On the confirmation dialog, click **Delete**.
 
+<Admonition type="tip">
+Consider using [TTL branches](/docs/guides/ttl-branches) for temporary branches to automate cleanup and reduce manual deletion overhead.
+</Admonition>
+
 ## Check the data size
 
 You can check the logical data size for the databases on a branch by viewing the **Data size** value on the **Branches** page or page in the Neon Console. Alternatively, you can run the following query on your branch from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client connected to your database:
@@ -239,6 +247,10 @@ See [Schema-only branches](/docs/guides/branching-schema-only).
 ### Backup branch
 
 A branch created by an [instant restore](#branch-restore) operation. When you restore a branch from a particular point in time, the current branch is saved as a backup branch. Performing a restore operation on a root branch, creates a backup branch without a parent branch (a root branch). See [Instant restore](/docs/guides/branch-restore).
+
+### TTL branch
+
+A [TTL (time-to-live) branch](/docs/guides/ttl-branches) is a standard branch with an expiration timestamp that triggers automatic deletion. Any branch can be converted to or from a TTL branch by adding or removing the expiration timestamp. This feature is particularly useful for temporary development and testing environments.
 
 ## Branching with the Neon CLI
 
