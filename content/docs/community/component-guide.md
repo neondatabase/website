@@ -10,7 +10,7 @@ A practical guide for the most commonly used MDX components in Neon documentatio
 <InfoBlock>
 <DocsList title="What you will learn:">
 <p>How to use common MDX components in Neon docs</p>
-<p>When to choose between different component types</p>
+<p>How to choose between different components</p>
 <p>Best practices for component selection and usage</p>
 <p>Proper syntax and prop usage for each component</p>
 </DocsList>
