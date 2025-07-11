@@ -2,7 +2,7 @@
 title: Neon Documentation MDX Components - Icon Guide
 subtitle: Complete reference for all icon systems and usage
 enableTableOfContents: true
-isDraft: true
+updatedOn: '2025-07-11T19:24:20.300Z'
 ---
 
 A comprehensive guide to all icon systems used in Neon documentation. This guide helps you understand which icon system to use and how to implement them correctly.
@@ -55,22 +55,8 @@ Neon documentation uses multiple icon systems for different components. Understa
 
 ```mdx
 <DetailIconCards>
-  <a
-    href="/docs/ai/openai"
-    title="OpenAI integration"
-    description="Build AI features with OpenAI"
-    icon="openai"
-  >
-    OpenAI Integration
-  </a>
-  <a
-    href="/docs/ai/langchain"
-    title="LangChain integration"
-    description="Create AI workflows with LangChain"
-    icon="langchain"
-  >
-    LangChain Integration
-  </a>
+<a href="/docs/ai/openai" title="OpenAI integration" description="Build AI features with OpenAI" icon="openai">OpenAI Integration</a>
+<a href="/docs/ai/langchain" title="LangChain integration" description="Create AI workflows with LangChain" icon="langchain">LangChain Integration</a>
 </DetailIconCards>
 ```
 

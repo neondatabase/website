@@ -2,7 +2,7 @@
 title: Neon Documentation MDX Components Guide
 subtitle: Most commonly used components for documentation writers
 enableTableOfContents: true
-isDraft: true
+updatedOn: '2025-07-11T19:24:20.300Z'
 ---
 
 A practical guide for the most commonly used MDX components in Neon documentation. This guide focuses on components you'll use most frequently when writing documentation.
@@ -266,30 +266,9 @@ Standard technology cards layout using [TechCards icons](/docs/community/compone
 
 ```mdx
 <TechCards>
-  <a
-    href="/docs/guides/node"
-    title="Node.js"
-    description="Connect Node.js applications to Neon"
-    icon="node-js"
-  >
-    Node.js
-  </a>
-  <a
-    href="/docs/guides/python"
-    title="Python"
-    description="Connect Python applications to Neon"
-    icon="python"
-  >
-    Python
-  </a>
-  <a
-    href="/docs/guides/nextjs"
-    title="Next.js"
-    description="Build Next.js apps with Neon"
-    icon="next-js"
-  >
-    Next.js
-  </a>
+<a href="/docs/guides/node" title="Node.js" description="Connect Node.js applications to Neon" icon="node-js">Node.js</a>
+<a href="/docs/guides/python" title="Python" description="Connect Python applications to Neon" icon="python">Python</a>
+<a href="/docs/guides/nextjs" title="Next.js" description="Build Next.js apps with Neon" icon="next-js">Next.js</a>
 </TechCards>
 ```
 
@@ -309,38 +288,10 @@ Alternative layout using [DetailIconCards icons](/docs/community/component-icon-
 
 ```mdx
 <DetailIconCards>
-  <a
-    href="/docs/ai/openai"
-    title="OpenAI integration"
-    description="Build AI features with OpenAI"
-    icon="openai"
-  >
-    OpenAI Integration
-  </a>
-  <a
-    href="/docs/ai/langchain"
-    title="LangChain integration"
-    description="Create AI workflows with LangChain"
-    icon="langchain"
-  >
-    LangChain Integration
-  </a>
-  <a
-    href="/docs/development"
-    title="Code development"
-    description="Development tools and practices"
-    icon="code"
-  >
-    Code Development
-  </a>
-  <a
-    href="/docs/cloud/aws"
-    title="AWS integration"
-    description="Deploy and scale with AWS"
-    icon="aws"
-  >
-    AWS Integration
-  </a>
+<a href="/docs/ai/openai" title="OpenAI integration" description="Build AI features with OpenAI" icon="openai">OpenAI Integration</a>
+<a href="/docs/ai/langchain" title="LangChain integration" description="Create AI workflows with LangChain" icon="langchain">LangChain Integration</a>
+<a href="/docs/development" title="Code development" description="Development tools and practices" icon="code">Code Development</a>
+<a href="/docs/cloud/aws" title="AWS integration" description="Deploy and scale with AWS" icon="aws">AWS Integration</a>
 </DetailIconCards>
 ```
 
@@ -355,7 +306,7 @@ Alternative layout using [DetailIconCards icons](/docs/community/component-icon-
 
 ---
 
-_Note: DetailIconCards uses a different [icon system](/docs/community/component-icon-guide#detailiconcards-icons) than [TechCards](/docs/community/component-icon-guide#techcards-icons), which is why different icons are available._
+> DetailIconCards uses a different [icon system](/docs/community/component-icon-guide#detailiconcards-icons) than [TechCards](/docs/community/component-icon-guide#techcards-icons), which is why different icons are available._
 
 #### TechCards vs DetailIconCards vs DocsList
 
@@ -555,22 +506,12 @@ Individual checklist items used within CheckList components.
 Prominent call-to-action buttons for important actions.
 
 ```mdx
-<CTA
-  title="Try Neon free"
-  description="Start building with serverless Postgres today. No credit card required."
-  buttonText="Sign Up"
-  buttonUrl="https://console.neon.tech/signup"
-/>
+<CTA title="Try Neon free" description="Start building with serverless Postgres today. No credit card required." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
 ```
 
 **Live preview:**
 
-<CTA 
-  title="Try Neon free" 
-  description="Start building with serverless Postgres today. No credit card required." 
-  buttonText="Sign Up" 
-  buttonUrl="https://console.neon.tech/signup" 
-/>
+<CTA title="Try Neon free" description="Start building with serverless Postgres today. No credit card required." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
 
 ---
 

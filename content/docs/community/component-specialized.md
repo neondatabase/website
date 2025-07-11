@@ -2,7 +2,7 @@
 title: Neon Documentation MDX Components - Specialized Guide
 subtitle: Specialized and less common components for specific use cases
 enableTableOfContents: true
-isDraft: true
+updatedOn: '2025-07-11T19:24:20.300Z'
 ---
 
 A comprehensive reference for specialized and less commonly used MDX components in Neon documentation. This guide covers components used in specific scenarios, specialized workflows, and edge cases.
@@ -101,19 +101,12 @@ Embedded YouTube video player.
 Native video player component.
 
 ```mdx
-<Video
-  sources={[{ src: '/videos/pages/doc/neon-mcp.mp4', type: 'video/mp4' }]}
-  width={960}
-  height={1080}
-/>
+<Video sources={[{ src: '/videos/pages/doc/neon-mcp.mp4', type: 'video/mp4' }]} width={960} height={1080} />
 ```
 
 **Live preview:**
 
-<Video
-sources={[{src: "/videos/pages/doc/neon-mcp.mp4",type: "video/mp4",}]}
-width={960} height={1080}
-/>
+<Video sources={[{src: "/videos/pages/doc/neon-mcp.mp4",type: "video/mp4",}]} width={960} height={1080} />
 
 ---
 
@@ -272,16 +265,12 @@ Components for community engagement and interaction.
 Community engagement banner for promoting community participation.
 
 ```mdx
-<CommunityBanner buttonText="Join Discord" buttonUrl="https://discord.gg/92vNTzKDGp" logo="discord">
-  Connect with the Neon community!
-</CommunityBanner>
+<CommunityBanner buttonText="Join Discord" buttonUrl="https://discord.gg/92vNTzKDGp" logo="discord">Connect with the Neon community!</CommunityBanner>
 ```
 
 **Live preview:**
 
-<CommunityBanner buttonText="Join Discord" buttonUrl="https://discord.gg/92vNTzKDGp" logo="discord">
-  Connect with the Neon community!
-</CommunityBanner>
+<CommunityBanner buttonText="Join Discord" buttonUrl="https://discord.gg/92vNTzKDGp" logo="discord">Connect with the Neon community!</CommunityBanner>
 
 ---
 
