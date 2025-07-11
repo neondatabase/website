@@ -139,7 +139,7 @@ postgres=> \dv
 ```sql
 postgres=> \df
                                                                           List of functions
-Schema |                 Name                 | Result data type |                                             Argument data types                                             | Type 
+Schema |                 Name                 | Result data type |                                             Argument data types                                             | Type
 --------+--------------------------------------+------------------+-------------------------------------------------------------------------------------------------------------+------
  public | approximate_working_set_size         | integer          | reset boolean                                                                                               | func
  public | approximate_working_set_size_seconds | integer          | duration integer DEFAULT NULL::integer                                                                      | func
