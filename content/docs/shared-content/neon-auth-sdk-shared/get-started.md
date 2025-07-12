@@ -1,6 +1,7 @@
 ---
 updatedOn: '2025-07-12T14:19:52.054Z'
 ---
+
 <FeatureBetaProps feature_name="Neon Auth" />
 
 Neon Auth lets you add authentication to your app in seconds — user data is synced directly to your Neon Postgres database, so you can query and join it just like any other table.
