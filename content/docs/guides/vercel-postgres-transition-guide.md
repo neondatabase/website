@@ -132,7 +132,7 @@ All existing integrations continue to work:
 
 ### Templates and environment variables
 
-- **Existing templates**: [Environment variables](/docs/guides/vercel-native-integration#environment-variables-set-by-the-integration) used by Vercel Postgres templates continue to work
+- **Existing templates**: [Environment variables](/docs/guides/vercel-managed-integration#environment-variables-set-by-the-integration) used by Vercel Postgres templates continue to work
 - **New templates**: Find updated [Neon templates](https://vercel.com/templates?database=neon) and [Postgres templates](https://vercel.com/templates?database=neon&database=postgres) on Vercel
 
 ### Regional support
