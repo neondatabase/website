@@ -45,7 +45,7 @@ Create a branch for each preview deployment with the Neon Postgres Previews Inte
 
 <DetailIconCards>
 
-<a href="/docs/guides/vercel-previews-integration" description="Connect your Vercel project and create a branch for each preview deployment" icon="vercel">The Neon Postgres Previews Integration</a>
+<a href="/docs/guides/neon-managed-vercel-integration" description="Connect your Vercel project and create a branch for each preview deployment" icon="vercel">The Neon-Managed Vercel Integration</a>
 
 <a href="/blog/neon-vercel-integration" description="Blog: Read about full-stack preview deployments using the Neon Vercel Integration" icon="vercel">Preview deployments with Vercel</a>
 
