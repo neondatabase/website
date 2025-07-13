@@ -32,7 +32,7 @@ const Section = ({
 
   const handleToggle = () => {
     setIsCollapsed((prev) => !prev);
-    if (onCollapse) onCollapse();
+    onCollapse();
   };
 
   return (
@@ -57,7 +57,7 @@ const Section = ({
       {items && (
         <LazyMotion features={domAnimation}>
           <m.div
-            className="overflow-hidden"
+            className={collapsible && 'overflow-hidden'}
             initial={collapsible ? 'collapsed' : 'expanded'}
             animate={collapsible && isCollapsed ? 'collapsed' : 'expanded'}
             variants={{
@@ -75,6 +75,7 @@ const Section = ({
                   activeMenuList={activeMenuList}
                   setActiveMenuList={setActiveMenuList}
                   closeMobileMenu={closeMobileMenu}
+                  onCollapse={onCollapse}
                 >
                   {item.items && (
                     <Menu
@@ -219,6 +220,7 @@ const Menu = ({
               activeMenuList={activeMenuList}
               setActiveMenuList={setActiveMenuList}
               closeMobileMenu={closeMobileMenu}
+              onCollapse={updateMenuHeight}
             >
               {item.items && (
                 <Menu
@@ -277,6 +279,7 @@ Menu.propTypes = {
       tag: PropTypes.string,
       items: PropTypes.arrayOf(PropTypes.any),
       ariaLabel: PropTypes.string,
+      collapsible: PropTypes.bool,
     })
   ),
   setMenuHeight: PropTypes.func.isRequired,

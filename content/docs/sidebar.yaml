@@ -121,6 +121,7 @@
     - title: Connect
       slug: connect/connect-intro
       icon: connect
+      collapsible: true
       items:
         - title: Choosing connections
           slug: connect/choose-connection
@@ -210,6 +211,7 @@
             - title: Sample data
               slug: import/import-sample-data
 - section: Platform
+  collapsible: true
   items:
     - title: Architecture
       icon: architecture
