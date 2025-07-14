@@ -86,8 +86,6 @@ Once enabled, the flow looks like this:
 
    ![Vercel build commands](/docs/guides/vercel_build_command.png)
 
-Branches live until the git branch is deleted. Enable **Automatically delete obsolete Neon branches** in the **Branches** tab of the integration drawer to delete Neon branches automatically.
-
 ### Test the setup
 
 To verify preview branching works:
