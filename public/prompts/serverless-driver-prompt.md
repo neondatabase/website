@@ -14,13 +14,11 @@ You are an expert software agent responsible for migrating this project to use N
 
 ---
 
-## 1. Ensure Neon Database Provisioning
+## 1. Provision a Neon Database
 
-- First, attempt to provision a Neon Postgres database using `npx neondb --yes`
-- If that fails, try alternative programmatic means or the Neon Launchpad API
+- Provision a Neon Postgres database using `npx neondb --yes`
+- If that fails, prompt the user to run `npx neondb --yes` instead
 - If the database is claimable (i.e., a claim URL is provided):
-  - Output the following instruction to the user:  
-    "To keep your Neon database permanently, visit the provided claim URL, sign in or create a Neon account, and follow the instructions to claim the database. Unclaimed databases expire after 72 hours."
   - Add a comment with the claim URL directly above the `DATABASE_URL` line in the environment file (e.g., `.env`):  
     ```
     # To keep your Neon database permanently, claim it here: https://neon.tech/claim/abc123
