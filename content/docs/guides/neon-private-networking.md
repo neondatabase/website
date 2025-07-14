@@ -40,6 +40,32 @@ To configure Neon Private Networking, perform the following steps:
     Do not enable **private DNS names** for the VPC endpoint until [Step 3](/docs/guides/neon-private-networking#enable-private-dns). You must add the VPC endpoint to your Neon organization first, as described in [Step 2](/docs/guides/neon-private-networking#add-your-vpc-endpoint-id-to-your-neon-organization).
     </Admonition>
 
+    The service names vary by region:
+
+    - **us-east-1**: Create two entries, one for each of the following:
+      - `com.amazonaws.vpce.us-east-1.vpce-svc-0de57c578b0e614a9`
+      - `com.amazonaws.vpce.us-east-1.vpce-svc-02a0abd91f32f1ed7`
+    - **us-east-2**: Create two entries, one for each of the following:
+      - `com.amazonaws.vpce.us-east-2.vpce-svc-010736480bcef5824`
+      - `com.amazonaws.vpce.us-east-2.vpce-svc-0465c21ce8ba95fb2`
+    - **eu-central-1**:
+      - `com.amazonaws.vpce.eu-central-1.vpce-svc-05554c35009a5eccb`
+    - **aws-eu-west-2**:
+      - `com.amazonaws.vpce.eu-west-2.vpce-svc-0c6fedbe99fced2cd`
+    - **us-west-2**: Create two entries, one for each of the following:
+      - `com.amazonaws.vpce.us-west-2.vpce-svc-060e0d5f582365b8e`
+      - `com.amazonaws.vpce.us-west-2.vpce-svc-07b750990c172f22f`
+    - **ap-southeast-1**:
+      - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-07c68d307f9f05687`
+    - **ap-southeast-2**:
+      - `com.amazonaws.vpce.ap-southeast-2.vpce-svc-031161490f5647f32`
+    - **aws-sa-east-1**:
+      - `com.amazonaws.vpce.sa-east-1.vpce-svc-061204a851dbd1a47`
+
+    <Tabs labels={["AWS Console", "Terraform", "CloudFormation", "AWS CLI"]}>
+
+    <TabItem>
+
     1. Go to the AWS **VPC > Endpoints** dashboard and select **Create endpoint**. Make sure you create the endpoint in the same VPC as your client application.
 
        ![VPC Dashboard](/docs/guides/pl_vpc_dashboard.png)
@@ -49,27 +75,7 @@ To configure Neon Private Networking, perform the following steps:
 
        ![VPC Create endpoint](/docs/guides/pl_vpc_create_endpoint.png)
 
-    1. Under **Service settings**, specify the **Service name**. Some regions require specifying two service names, and service names vary by region:
-
-       - **us-east-1**: Create two entries, one for each of the following:
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-0de57c578b0e614a9`
-         - `com.amazonaws.vpce.us-east-1.vpce-svc-02a0abd91f32f1ed7`
-       - **us-east-2**: Create two entries, one for each of the following:
-         - `com.amazonaws.vpce.us-east-2.vpce-svc-010736480bcef5824`
-         - `com.amazonaws.vpce.us-east-2.vpce-svc-0465c21ce8ba95fb2`
-       - **eu-central-1**:
-         - `com.amazonaws.vpce.eu-central-1.vpce-svc-05554c35009a5eccb`
-       - **aws-eu-west-2**:
-         - `com.amazonaws.vpce.eu-west-2.vpce-svc-0c6fedbe99fced2cd`
-       - **us-west-2**: Create two entries, one for each of the following:
-         - `com.amazonaws.vpce.us-west-2.vpce-svc-060e0d5f582365b8e`
-         - `com.amazonaws.vpce.us-west-2.vpce-svc-07b750990c172f22f`
-       - **ap-southeast-1**:
-         - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-07c68d307f9f05687`
-       - **ap-southeast-2**:
-         - `com.amazonaws.vpce.ap-southeast-2.vpce-svc-031161490f5647f32`
-       - **aws-sa-east-1**:
-         - `com.amazonaws.vpce.sa-east-1.vpce-svc-061204a851dbd1a47`
+    1. Under **Service settings**, specify the **Service name** from the list above for your region.
 
     1. Click **Verify service**. If successful, you should see a `Service name verified` message.
 
@@ -87,15 +93,304 @@ To configure Neon Private Networking, perform the following steps:
 
         ![VPC Create endpoint](/docs/guides/pl_vpc_endpoint_id.png)
 
+    </TabItem>
+
+    <TabItem>
+
+    Create a VPC endpoint using Terraform. Replace the placeholders with your actual values:
+
+    ```terraform
+    # Security group for Neon VPC endpoint
+    resource "aws_security_group" "neon_vpc_endpoint" {
+      name_prefix = "neon-vpc-endpoint-"
+      vpc_id      = var.vpc_id
+
+      ingress {
+        from_port   = 5432
+        to_port     = 5432
+        protocol    = "tcp"
+        cidr_blocks = [var.vpc_cidr]
+      }
+
+      egress {
+        from_port   = 0
+        to_port     = 0
+        protocol    = "-1"
+        cidr_blocks = ["0.0.0.0/0"]
+      }
+
+      tags = {
+        Name = "neon-vpc-endpoint-sg"
+      }
+    }
+
+    # VPC endpoint for Neon (single service regions)
+    resource "aws_vpc_endpoint" "neon" {
+      count = contains(["us-east-1", "us-east-2", "us-west-2"], var.aws_region) ? 0 : 1
+      
+      vpc_id              = var.vpc_id
+      service_name        = local.neon_service_names[var.aws_region][0]
+      vpc_endpoint_type   = "Interface"
+      subnet_ids          = var.subnet_ids
+      security_group_ids  = [aws_security_group.neon_vpc_endpoint.id]
+      private_dns_enabled = false  # Enable in Step 3
+
+      tags = {
+        Name = "neon-vpc-endpoint"
+      }
+    }
+
+    # VPC endpoints for multi-service regions
+    resource "aws_vpc_endpoint" "neon_primary" {
+      count = contains(["us-east-1", "us-east-2", "us-west-2"], var.aws_region) ? 1 : 0
+      
+      vpc_id              = var.vpc_id
+      service_name        = local.neon_service_names[var.aws_region][0]
+      vpc_endpoint_type   = "Interface"
+      subnet_ids          = var.subnet_ids
+      security_group_ids  = [aws_security_group.neon_vpc_endpoint.id]
+      private_dns_enabled = false  # Enable in Step 3
+
+      tags = {
+        Name = "neon-vpc-endpoint-primary"
+      }
+    }
+
+    resource "aws_vpc_endpoint" "neon_secondary" {
+      count = contains(["us-east-1", "us-east-2", "us-west-2"], var.aws_region) ? 1 : 0
+      
+      vpc_id              = var.vpc_id
+      service_name        = local.neon_service_names[var.aws_region][1]
+      vpc_endpoint_type   = "Interface"
+      subnet_ids          = var.subnet_ids
+      security_group_ids  = [aws_security_group.neon_vpc_endpoint.id]
+      private_dns_enabled = false  # Enable in Step 3
+
+      tags = {
+        Name = "neon-vpc-endpoint-secondary"
+      }
+    }
+
+    # Service names mapping
+    locals {
+      neon_service_names = {
+        "us-east-1"       = ["com.amazonaws.vpce.us-east-1.vpce-svc-0de57c578b0e614a9", "com.amazonaws.vpce.us-east-1.vpce-svc-02a0abd91f32f1ed7"]
+        "us-east-2"       = ["com.amazonaws.vpce.us-east-2.vpce-svc-010736480bcef5824", "com.amazonaws.vpce.us-east-2.vpce-svc-0465c21ce8ba95fb2"]
+        "us-west-2"       = ["com.amazonaws.vpce.us-west-2.vpce-svc-060e0d5f582365b8e", "com.amazonaws.vpce.us-west-2.vpce-svc-07b750990c172f22f"]
+        "eu-central-1"    = ["com.amazonaws.vpce.eu-central-1.vpce-svc-05554c35009a5eccb"]
+        "eu-west-2"       = ["com.amazonaws.vpce.eu-west-2.vpce-svc-0c6fedbe99fced2cd"]
+        "ap-southeast-1"  = ["com.amazonaws.vpce.ap-southeast-1.vpce-svc-07c68d307f9f05687"]
+        "ap-southeast-2"  = ["com.amazonaws.vpce.ap-southeast-2.vpce-svc-031161490f5647f32"]
+        "sa-east-1"       = ["com.amazonaws.vpce.sa-east-1.vpce-svc-061204a851dbd1a47"]
+      }
+    }
+
+    # Output the VPC endpoint IDs
+    output "neon_vpc_endpoint_ids" {
+      value = concat(
+        aws_vpc_endpoint.neon[*].id,
+        aws_vpc_endpoint.neon_primary[*].id,
+        aws_vpc_endpoint.neon_secondary[*].id
+      )
+    }
+    ```
+
+    </TabItem>
+
+    <TabItem>
+
+    Create a VPC endpoint using CloudFormation. Replace the placeholders with your actual values:
+
+    ```yaml
+    AWSTemplateFormatVersion: '2010-09-09'
+    Description: 'Neon VPC Endpoint for Private Networking'
+
+    Parameters:
+      VpcId:
+        Type: AWS::EC2::VPC::Id
+        Description: VPC ID where the endpoint will be created
+      SubnetIds:
+        Type: List<AWS::EC2::Subnet::Id>
+        Description: Subnet IDs for the VPC endpoint
+      VpcCidr:
+        Type: String
+        Description: CIDR block of the VPC
+        Default: "10.0.0.0/16"
+
+    Mappings:
+      RegionServiceNames:
+        us-east-1:
+          Primary: "com.amazonaws.vpce.us-east-1.vpce-svc-0de57c578b0e614a9"
+          Secondary: "com.amazonaws.vpce.us-east-1.vpce-svc-02a0abd91f32f1ed7"
+        us-east-2:
+          Primary: "com.amazonaws.vpce.us-east-2.vpce-svc-010736480bcef5824"
+          Secondary: "com.amazonaws.vpce.us-east-2.vpce-svc-0465c21ce8ba95fb2"
+        us-west-2:
+          Primary: "com.amazonaws.vpce.us-west-2.vpce-svc-060e0d5f582365b8e"
+          Secondary: "com.amazonaws.vpce.us-west-2.vpce-svc-07b750990c172f22f"
+        eu-central-1:
+          Primary: "com.amazonaws.vpce.eu-central-1.vpce-svc-05554c35009a5eccb"
+        eu-west-2:
+          Primary: "com.amazonaws.vpce.eu-west-2.vpce-svc-0c6fedbe99fced2cd"
+        ap-southeast-1:
+          Primary: "com.amazonaws.vpce.ap-southeast-1.vpce-svc-07c68d307f9f05687"
+        ap-southeast-2:
+          Primary: "com.amazonaws.vpce.ap-southeast-2.vpce-svc-031161490f5647f32"
+        sa-east-1:
+          Primary: "com.amazonaws.vpce.sa-east-1.vpce-svc-061204a851dbd1a47"
+
+    Conditions:
+      IsMultiServiceRegion: !Or
+        - !Equals [!Ref "AWS::Region", "us-east-1"]
+        - !Equals [!Ref "AWS::Region", "us-east-2"]
+        - !Equals [!Ref "AWS::Region", "us-west-2"]
+
+    Resources:
+      NeonVpcEndpointSecurityGroup:
+        Type: AWS::EC2::SecurityGroup
+        Properties:
+          GroupDescription: Security group for Neon VPC endpoint
+          VpcId: !Ref VpcId
+          SecurityGroupIngress:
+            - IpProtocol: tcp
+              FromPort: 5432
+              ToPort: 5432
+              CidrIp: !Ref VpcCidr
+          Tags:
+            - Key: Name
+              Value: neon-vpc-endpoint-sg
+
+      NeonVpcEndpointPrimary:
+        Type: AWS::EC2::VPCEndpoint
+        Properties:
+          VpcId: !Ref VpcId
+          ServiceName: !FindInMap [RegionServiceNames, !Ref "AWS::Region", Primary]
+          VpcEndpointType: Interface
+          SubnetIds: !Ref SubnetIds
+          SecurityGroupIds:
+            - !Ref NeonVpcEndpointSecurityGroup
+          PrivateDnsEnabled: false  # Enable in Step 3
+
+      NeonVpcEndpointSecondary:
+        Type: AWS::EC2::VPCEndpoint
+        Condition: IsMultiServiceRegion
+        Properties:
+          VpcId: !Ref VpcId
+          ServiceName: !FindInMap [RegionServiceNames, !Ref "AWS::Region", Secondary]
+          VpcEndpointType: Interface
+          SubnetIds: !Ref SubnetIds
+          SecurityGroupIds:
+            - !Ref NeonVpcEndpointSecurityGroup
+          PrivateDnsEnabled: false  # Enable in Step 3
+
+    Outputs:
+      PrimaryVpcEndpointId:
+        Description: Primary VPC Endpoint ID
+        Value: !Ref NeonVpcEndpointPrimary
+      SecondaryVpcEndpointId:
+        Condition: IsMultiServiceRegion
+        Description: Secondary VPC Endpoint ID
+        Value: !Ref NeonVpcEndpointSecondary
+    ```
+
+    </TabItem>
+
+    <TabItem>
+
+    Create a VPC endpoint using the AWS CLI. Replace the placeholders with your actual values:
+
+    ```bash shouldWrap
+    # Create security group for the VPC endpoint
+    SECURITY_GROUP_ID=$(aws ec2 create-security-group \
+      --group-name neon-vpc-endpoint-sg \
+      --description "Security group for Neon VPC endpoint" \
+      --vpc-id vpc-xxxxxxxxx \
+      --query 'GroupId' \
+      --output text)
+
+    # Add ingress rule for PostgreSQL port
+    aws ec2 authorize-security-group-ingress \
+      --group-id $SECURITY_GROUP_ID \
+      --protocol tcp \
+      --port 5432 \
+      --cidr 10.0.0.0/16
+
+    # For single service regions (eu-central-1, eu-west-2, ap-southeast-1, ap-southeast-2, sa-east-1)
+    aws ec2 create-vpc-endpoint \
+      --vpc-id vpc-xxxxxxxxx \
+      --service-name com.amazonaws.vpce.REGION.vpce-svc-xxxxxxxxxxxxxxxxx \
+      --vpc-endpoint-type Interface \
+      --subnet-ids subnet-xxxxxxxxx subnet-yyyyyyyyy \
+      --security-group-ids $SECURITY_GROUP_ID \
+      --no-private-dns-enabled
+
+    # For us-east-1 - create two endpoints
+    aws ec2 create-vpc-endpoint \
+      --vpc-id vpc-xxxxxxxxx \
+      --service-name com.amazonaws.vpce.us-east-1.vpce-svc-0de57c578b0e614a9 \
+      --vpc-endpoint-type Interface \
+      --subnet-ids subnet-xxxxxxxxx subnet-yyyyyyyyy \
+      --security-group-ids $SECURITY_GROUP_ID \
+      --no-private-dns-enabled
+
+    aws ec2 create-vpc-endpoint \
+      --vpc-id vpc-xxxxxxxxx \
+      --service-name com.amazonaws.vpce.us-east-1.vpce-svc-02a0abd91f32f1ed7 \
+      --vpc-endpoint-type Interface \
+      --subnet-ids subnet-xxxxxxxxx subnet-yyyyyyyyy \
+      --security-group-ids $SECURITY_GROUP_ID \
+      --no-private-dns-enabled
+
+    # For us-east-2 - create two endpoints
+    aws ec2 create-vpc-endpoint \
+      --vpc-id vpc-xxxxxxxxx \
+      --service-name com.amazonaws.vpce.us-east-2.vpce-svc-010736480bcef5824 \
+      --vpc-endpoint-type Interface \
+      --subnet-ids subnet-xxxxxxxxx subnet-yyyyyyyyy \
+      --security-group-ids $SECURITY_GROUP_ID \
+      --no-private-dns-enabled
+
+    aws ec2 create-vpc-endpoint \
+      --vpc-id vpc-xxxxxxxxx \
+      --service-name com.amazonaws.vpce.us-east-2.vpce-svc-0465c21ce8ba95fb2 \
+      --vpc-endpoint-type Interface \
+      --subnet-ids subnet-xxxxxxxxx subnet-yyyyyyyyy \
+      --security-group-ids $SECURITY_GROUP_ID \
+      --no-private-dns-enabled
+
+    # For us-west-2 - create two endpoints
+    aws ec2 create-vpc-endpoint \
+      --vpc-id vpc-xxxxxxxxx \
+      --service-name com.amazonaws.vpce.us-west-2.vpce-svc-060e0d5f582365b8e \
+      --vpc-endpoint-type Interface \
+      --subnet-ids subnet-xxxxxxxxx subnet-yyyyyyyyy \
+      --security-group-ids $SECURITY_GROUP_ID \
+      --no-private-dns-enabled
+
+    aws ec2 create-vpc-endpoint \
+      --vpc-id vpc-xxxxxxxxx \
+      --service-name com.amazonaws.vpce.us-west-2.vpce-svc-07b750990c172f22f \
+      --vpc-endpoint-type Interface \
+      --subnet-ids subnet-xxxxxxxxx subnet-yyyyyyyyy \
+      --security-group-ids $SECURITY_GROUP_ID \
+      --no-private-dns-enabled
+    ```
+
+    Note the VPC Endpoint ID(s) from the command output. You'll need these for the next step.
+
+    </TabItem>
+
+    </Tabs>
+
 ## Add your VPC Endpoint ID to your Neon organization
 
-    Assign your **VPC Endpoint ID** to your Neon organization. You can do this using the Neon CLI or API.
+    Assign your **VPC Endpoint ID** to your Neon organization. You can do this using the Neon CLI, API, or Terraform.
 
     <Admonition type="note">
      Please note that you must assign the **VPC Endpoint ID**, not the VPC ID.
     </Admonition>
 
-    <Tabs labels={["CLI", "API"]}>
+    <Tabs labels={["Neon CLI", "Neon API", "Terraform"]}>
 
     <TabItem>
 
@@ -122,6 +417,55 @@ To configure Neon Private Networking, perform the following steps:
     ```
     </TabItem>
 
+    <TabItem>
+
+    Add VPC endpoint to Neon organization using Terraform. This uses the Neon Terraform provider:
+
+    ```terraform
+    # Configure the Neon provider
+    terraform {
+      required_providers {
+        neon = {
+          source = "kislerdm/neon"
+        }
+      }
+    }
+
+    provider "neon" {
+      api_key = var.neon_api_key
+    }
+
+    # Add VPC endpoint to Neon organization (single service regions)
+    resource "neon_vpc_endpoint_assignment" "org_vpc_endpoint" {
+      count = contains(["us-east-1", "us-east-2", "us-west-2"], var.aws_region) ? 0 : 1
+      
+      org_id          = "org-bold-bonus-12345678"
+      region_id       = "aws-${var.aws_region}"
+      vpc_endpoint_id = aws_vpc_endpoint.neon[0].id
+    }
+
+    # For multi-service regions, add both endpoints
+    resource "neon_vpc_endpoint_assignment" "org_vpc_endpoint_primary" {
+      count = contains(["us-east-1", "us-east-2", "us-west-2"], var.aws_region) ? 1 : 0
+      
+      org_id          = "org-bold-bonus-12345678"
+      region_id       = "aws-${var.aws_region}"
+      vpc_endpoint_id = aws_vpc_endpoint.neon_primary[0].id
+    }
+
+    resource "neon_vpc_endpoint_assignment" "org_vpc_endpoint_secondary" {
+      count = contains(["us-east-1", "us-east-2", "us-west-2"], var.aws_region) ? 1 : 0
+      
+      org_id          = "org-bold-bonus-12345678"
+      region_id       = "aws-${var.aws_region}"
+      vpc_endpoint_id = aws_vpc_endpoint.neon_secondary[0].id
+    }
+    ```
+
+    You can find your Neon organization ID in your Neon organization settings, or you can run this Neon CLI command: `neon orgs list`
+
+    </TabItem>
+
     </Tabs>
 
     Optionally, you can limit access to a Neon project by allowing connections only from a specific VPC endpoint. For instructions, see [Assigning a VPC endpoint restrictions](#assigning-a-vpc-endpoint-restriction).
@@ -130,11 +474,98 @@ To configure Neon Private Networking, perform the following steps:
 
     After adding your VPC endpoint ID to your Neon organization, enable private DNS lookup for the VPC endpoint in AWS.
 
+    <Tabs labels={["AWS Console", "AWS CLI", "Terraform"]}>
+
+    <TabItem>
+
     1. In AWS, select the VPC endpoint you created.
     1. Choose **Modify private DNS name**.
     1. Select **Enable for this endpoint**.
     1. Save your changes.
        ![Enable private DNS](/docs/guides/pl_enable_private_dns.png)
+
+    </TabItem>
+
+    <TabItem>
+
+    Enable Private DNS for the VPC endpoint using the AWS CLI:
+
+    ```bash shouldWrap
+    # Enable Private DNS for the VPC endpoint
+    aws ec2 modify-vpc-endpoint \
+      --vpc-endpoint-id vpce-1234567890abcdef0 \
+      --private-dns-enabled
+
+    # For regions with multiple endpoints (us-east-1, us-east-2, us-west-2), enable for both
+    aws ec2 modify-vpc-endpoint \
+      --vpc-endpoint-id vpce-1234567890abcdef0 \
+      --private-dns-enabled
+
+    aws ec2 modify-vpc-endpoint \
+      --vpc-endpoint-id vpce-0987654321fedcba0 \
+      --private-dns-enabled
+    ```
+
+    </TabItem>
+
+    <TabItem>
+
+    Update your Terraform configuration to enable Private DNS. Modify the VPC endpoint resources from Step 1:
+
+    ```terraform
+    # Update VPC endpoint for single service regions
+    resource "aws_vpc_endpoint" "neon" {
+      count = contains(["us-east-1", "us-east-2", "us-west-2"], var.aws_region) ? 0 : 1
+      
+      vpc_id              = var.vpc_id
+      service_name        = local.neon_service_names[var.aws_region][0]
+      vpc_endpoint_type   = "Interface"
+      subnet_ids          = var.subnet_ids
+      security_group_ids  = [aws_security_group.neon_vpc_endpoint.id]
+      private_dns_enabled = true  # Enable Private DNS
+
+      tags = {
+        Name = "neon-vpc-endpoint"
+      }
+    }
+
+    # Update VPC endpoints for multi-service regions
+    resource "aws_vpc_endpoint" "neon_primary" {
+      count = contains(["us-east-1", "us-east-2", "us-west-2"], var.aws_region) ? 1 : 0
+      
+      vpc_id              = var.vpc_id
+      service_name        = local.neon_service_names[var.aws_region][0]
+      vpc_endpoint_type   = "Interface"
+      subnet_ids          = var.subnet_ids
+      security_group_ids  = [aws_security_group.neon_vpc_endpoint.id]
+      private_dns_enabled = true  # Enable Private DNS
+
+      tags = {
+        Name = "neon-vpc-endpoint-primary"
+      }
+    }
+
+    resource "aws_vpc_endpoint" "neon_secondary" {
+      count = contains(["us-east-1", "us-east-2", "us-west-2"], var.aws_region) ? 1 : 0
+      
+      vpc_id              = var.vpc_id
+      service_name        = local.neon_service_names[var.aws_region][1]
+      vpc_endpoint_type   = "Interface"
+      subnet_ids          = var.subnet_ids
+      security_group_ids  = [aws_security_group.neon_vpc_endpoint.id]
+      private_dns_enabled = true  # Enable Private DNS
+
+      tags = {
+        Name = "neon-vpc-endpoint-secondary"
+      }
+    }
+    ```
+
+    Then run `terraform apply` to update the VPC endpoints with Private DNS enabled.
+
+    </TabItem>
+
+    </Tabs>
 
 ## Check your database connection string
 
@@ -158,9 +589,9 @@ To configure Neon Private Networking, perform the following steps:
 
     At this point, it's still possible to connect to a database in your Neon project over the public internet using a database connection string.
 
-    You can restrict public internet access to your Neon project via the Neon CLI or API.
+    You can restrict public internet access to your Neon project via the Neon CLI, API, or Terraform.
 
-    <Tabs labels={["CLI", "API"]}>
+    <Tabs labels={["Neon CLI", "Neon API", "Terraform"]}>
 
     <TabItem>
 
@@ -194,6 +625,34 @@ To configure Neon Private Networking, perform the following steps:
     }
     '
     ```
+
+    </TabItem>
+
+    <TabItem>
+
+    Restrict public internet access using Terraform by updating your Neon project configuration:
+
+    ```terraform
+    # Update existing project to block public connections
+    resource "neon_project" "my_app_project" {
+      name       = "my-application-project"
+      pg_version = 16
+      region_id  = "aws-us-east-2"
+
+      # Block public internet access
+      settings {
+        block_public_connections = true
+      }
+    }
+
+    # Alternative: Use VPC endpoint restriction for more granular control
+    resource "neon_vpc_endpoint_restriction" "project_to_vpc" {
+      project_id      = neon_project.my_app_project.id
+      vpc_endpoint_id = neon_vpc_endpoint_assignment.org_vpc_endpoint_primary[0].vpc_endpoint_id
+    }
+    ```
+
+    In the example above, `orange-credit-12345678` is the Neon project ID. You can find _your_ Neon project ID under your project's settings in the Neon Console, or by running this Neon CLI command: `neon projects list`
 
     </TabItem>
 
