@@ -5,6 +5,9 @@ subtitle: Connect to Neon from serverless environments over HTTP or WebSockets
 updatedOn: '2025-06-03T18:04:26.405Z'
 ---
 
+<CopyPrompt src="/prompts/serverless-driver-prompt.md" 
+description= "Pre-built prompt for Neon Serverless + Drizzle (JS/TS)"/>
+
 The [Neon serverless driver](https://github.com/neondatabase/serverless) is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over **HTTP** or **WebSockets** in place of TCP. The driver's low-latency capability is due to [message pipelining and other optimizations](/blog/quicker-serverless-postgres).
 
 <Admonition type="important" title="The Neon serverless driver is now generally available (GA)">
