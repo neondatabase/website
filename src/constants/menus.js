@@ -85,7 +85,7 @@ export default {
               icon: RestoreIcon,
               iconGradient: RestoreGradientIcon,
               title: 'Instant restores',
-              description: 'Copy-on-write storage',
+              description: 'Recover TBs in seconds',
               to: LINKS.branchRestore,
             },
           ],
@@ -97,7 +97,7 @@ export default {
               icon: AuthIcon,
               iconGradient: AuthGradientIcon,
               title: 'Auth',
-              description: 'UI for data management',
+              description: 'Authenticate your users',
               to: LINKS.auth,
             },
             {
@@ -118,7 +118,7 @@ export default {
               icon: AiIcon,
               iconGradient: AiGradientIcon,
               title: 'AI',
-              description: 'Powered by pgvector',
+              description: 'Embeddings & agents',
               to: LINKS.ai,
             },
             {
