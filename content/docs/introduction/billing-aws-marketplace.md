@@ -2,7 +2,7 @@
 title: AWS Marketplace
 enableTableOfContents: true
 subtitle: Paying for Neon via your AWS Billing account
-updatedOn: '2025-05-30T16:54:40.483Z'
+updatedOn: '2025-07-14T18:10:45.216Z'
 ---
 
 Neon supports billing through the **AWS Marketplace** for [Private Offers](https://aws.amazon.com/marketplace/partners/private-offers/) only, which are typically reserved for custom Enterprise plans. If you are interested in exploring a custom Enterprise plan with Neon, please reach out to our [Sales](/contact-sales) team.
