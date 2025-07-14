@@ -127,7 +127,7 @@ To configure Neon Private Networking, perform the following steps:
     # VPC endpoint for Neon (single service regions)
     resource "aws_vpc_endpoint" "neon" {
       count = contains(["us-east-1", "us-east-2", "us-west-2"], var.aws_region) ? 0 : 1
-      
+
       vpc_id              = var.vpc_id
       service_name        = local.neon_service_names[var.aws_region][0]
       vpc_endpoint_type   = "Interface"
@@ -143,7 +143,7 @@ To configure Neon Private Networking, perform the following steps:
     # VPC endpoints for multi-service regions
     resource "aws_vpc_endpoint" "neon_primary" {
       count = contains(["us-east-1", "us-east-2", "us-west-2"], var.aws_region) ? 1 : 0
-      
+
       vpc_id              = var.vpc_id
       service_name        = local.neon_service_names[var.aws_region][0]
       vpc_endpoint_type   = "Interface"
@@ -158,7 +158,7 @@ To configure Neon Private Networking, perform the following steps:
 
     resource "aws_vpc_endpoint" "neon_secondary" {
       count = contains(["us-east-1", "us-east-2", "us-west-2"], var.aws_region) ? 1 : 0
-      
+
       vpc_id              = var.vpc_id
       service_name        = local.neon_service_names[var.aws_region][1]
       vpc_endpoint_type   = "Interface"
@@ -438,7 +438,7 @@ To configure Neon Private Networking, perform the following steps:
     # Add VPC endpoint to Neon organization (single service regions)
     resource "neon_vpc_endpoint_assignment" "org_vpc_endpoint" {
       count = contains(["us-east-1", "us-east-2", "us-west-2"], var.aws_region) ? 0 : 1
-      
+
       org_id          = "org-bold-bonus-12345678"
       region_id       = "aws-${var.aws_region}"
       vpc_endpoint_id = aws_vpc_endpoint.neon[0].id
@@ -447,7 +447,7 @@ To configure Neon Private Networking, perform the following steps:
     # For multi-service regions, add both endpoints
     resource "neon_vpc_endpoint_assignment" "org_vpc_endpoint_primary" {
       count = contains(["us-east-1", "us-east-2", "us-west-2"], var.aws_region) ? 1 : 0
-      
+
       org_id          = "org-bold-bonus-12345678"
       region_id       = "aws-${var.aws_region}"
       vpc_endpoint_id = aws_vpc_endpoint.neon_primary[0].id
@@ -455,7 +455,7 @@ To configure Neon Private Networking, perform the following steps:
 
     resource "neon_vpc_endpoint_assignment" "org_vpc_endpoint_secondary" {
       count = contains(["us-east-1", "us-east-2", "us-west-2"], var.aws_region) ? 1 : 0
-      
+
       org_id          = "org-bold-bonus-12345678"
       region_id       = "aws-${var.aws_region}"
       vpc_endpoint_id = aws_vpc_endpoint.neon_secondary[0].id
@@ -516,7 +516,7 @@ To configure Neon Private Networking, perform the following steps:
     # Update VPC endpoint for single service regions
     resource "aws_vpc_endpoint" "neon" {
       count = contains(["us-east-1", "us-east-2", "us-west-2"], var.aws_region) ? 0 : 1
-      
+
       vpc_id              = var.vpc_id
       service_name        = local.neon_service_names[var.aws_region][0]
       vpc_endpoint_type   = "Interface"
@@ -532,7 +532,7 @@ To configure Neon Private Networking, perform the following steps:
     # Update VPC endpoints for multi-service regions
     resource "aws_vpc_endpoint" "neon_primary" {
       count = contains(["us-east-1", "us-east-2", "us-west-2"], var.aws_region) ? 1 : 0
-      
+
       vpc_id              = var.vpc_id
       service_name        = local.neon_service_names[var.aws_region][0]
       vpc_endpoint_type   = "Interface"
@@ -547,7 +547,7 @@ To configure Neon Private Networking, perform the following steps:
 
     resource "aws_vpc_endpoint" "neon_secondary" {
       count = contains(["us-east-1", "us-east-2", "us-west-2"], var.aws_region) ? 1 : 0
-      
+
       vpc_id              = var.vpc_id
       service_name        = local.neon_service_names[var.aws_region][1]
       vpc_endpoint_type   = "Interface"
