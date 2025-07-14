@@ -51,7 +51,7 @@ const Bento = () => (
         <h2 className="max-w-2xl font-title text-5xl font-medium leading-none tracking-extra-tight lg:text-4xl md:text-[32px]">
           The database AI-native apps were waiting for
         </h2>
-        <p className="mt-3 text-lg leading-snug tracking-extra-tight text-gray-new-70 lg:text-base">
+        <p className="mt-4 text-lg leading-snug tracking-extra-tight text-gray-new-70 lg:text-base">
           Neon is a serverless Postgres platform built for modern AI workflows. It separates storage
           and compute, autoscales to zero, and lets agents create databases without friction.
         </p>

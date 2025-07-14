@@ -21,7 +21,13 @@ const AiPage = () => (
     <Bento />
     <TestimonialNew
       className="mt-[200px] xl:mt-[176px] lg:mt-[152px] md:mt-[104px]"
-      quote="The combination of flexible resource limits and nearly instant&nbsp;database provisioning made Neon a&nbsp;no&#8209;brainer."
+      quoteClassName="text-pretty"
+      quote="The combination of flexible resource limits and nearly instant database provisioning made Neon a no&#8209;brainer."
+      author={{
+        name: 'Dhruv Amin',
+        position: 'Co-founder at Create.xyz',
+        avatar: authorDhruvAmin,
+      }}
       company={{
         src: replitIcon,
         width: 152,
