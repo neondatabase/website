@@ -18,7 +18,7 @@ export const metadata = getMetadata(SEO_DATA.ai);
 const AiPage = () => (
   <Layout>
     <Hero />
-    <Usage />
+    <Bento />
     <TestimonialNew
       className="mt-[200px] xl:mt-[176px] lg:mt-[152px] md:mt-[104px]"
       quote="The combination of flexible resource limits and nearly instant&nbsp;database provisioning made Neon a&nbsp;no&#8209;brainer."
@@ -27,7 +27,7 @@ const AiPage = () => (
         width: 152,
       }}
     />
-    <Bento />
+    <Usage />
     <PgVector />
     <TestimonialNew
       className="mt-[200px] xl:mt-[176px] lg:mt-[152px] md:mt-[104px]"

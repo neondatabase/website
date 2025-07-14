@@ -4,82 +4,74 @@ import Image from 'next/image';
 import Container from 'components/shared/container';
 import GradientBorder from 'components/shared/gradient-border/index';
 import Link from 'components/shared/link';
-import { LogosWall } from 'components/shared/logos';
 import LINKS from 'constants/links';
 
-import api from './images/api.jpg';
-import autoscaling from './images/autoscaling.jpg';
-import autosuspend from './images/autosuspend.jpg';
-import instantDb from './images/instant-db.jpg';
-
-const logos = ['create', 'replit', 'comigo', 'rubric', 'wordware', 'basehub'];
+import aiAgents from './images/ai-agents.jpg';
+import aiAssisted from './images/ai-assisted.jpg';
+import instantlyAccessible from './images/instantly-accessible.jpg';
+import vectorStore from './images/vector-store.jpg';
 
 const ITEMS = [
   {
-    title: 'Instant database provisioning.',
+    title: 'Backend for AI agents.',
     description:
-      'Neon enables the creation of new databases in under a second, allowing your users to start building right away.',
-    image: instantDb,
+      'Agents can provision, query, and manage Postgres databases via API. With quotas and autosuspend out of the box.',
+    image: aiAgents,
   },
   {
-    title: 'Cost efficiency.',
-    description: 'Scale-to-zero minimizes costs for inactive databases, saving money.',
-    image: autosuspend,
+    title: 'Vector store for RAG and LLMs.',
+    description: 'With pgvector and HNSW, Neon becomes a vector store for all your data.',
+    image: vectorStore,
   },
   {
-    title: 'Powerful API.',
-    description: 'Neon&apos;sAPI endpoints suit both large database fleets and AI Agents.',
-    image: api,
+    title: 'Ready for AI-assisted coding.',
+    description: 'Neon integrates with Cursor and Copilot for seamless in-IDE database workflows.',
+    image: aiAssisted,
   },
   {
-    title: 'Serverless scalability.',
-    description:
-      'Neon&apos;s architecture automatically adjusts resources based on demand, reducing manual load for developers and agents.',
-    image: autoscaling,
+    title: 'Instantly accessible.',
+    description: [
+      <>
+        Neon can be embedded directly into agent workflows, no signup required. For developers, it’s
+        just as easy - start building on the{' '}
+        <Link className="underline-offset-4" theme="green-underlined" href={LINKS.pricing}>
+          Free Plan
+        </Link>{' '}
+        in seconds.
+      </>,
+    ],
+    image: instantlyAccessible,
   },
 ];
 
 const Bento = () => (
   <section className="bento safe-paddings mt-[200px] xl:mt-[176px] lg:mt-[152px] md:mt-[104px]">
-    <Container className="max-w-[832px] lg:!max-w-3xl md:px-5">
-      <div className="mx-auto flex max-w-xl flex-col items-center text-center">
-        <h2 className="font-title text-5xl font-medium leading-none tracking-extra-tight lg:text-4xl md:text-[32px]">
-          Build better AI Agents
+    <Container className="lg:!max-w-3xl md:px-5" size="960">
+      <div className="mx-auto flex max-w-[832px] flex-col text-pretty">
+        <h2 className="max-w-2xl font-title text-5xl font-medium leading-none tracking-extra-tight lg:text-4xl md:text-[32px]">
+          The database AI-native apps were waiting for
         </h2>
         <p className="mt-3 text-lg leading-snug tracking-extra-tight text-gray-new-70 lg:text-base">
-          AI agents now create more Neon databases daily than humans —{' '}
-          <span className="text-white">over&nbsp;12k every day</span>. Neon is built for this scale.
+          Neon is a serverless Postgres platform built for modern AI workflows. It separates storage
+          and compute, autoscales to zero, and lets agents create databases without friction.
         </p>
-        <Link
-          className="mt-6 text-lg leading-none tracking-[-0.03em] lg:mt-5 lg:text-base"
-          to={LINKS.bookMeeting}
-          theme="white"
-          target="_blank"
-          rel="noopener noreferrer"
-          withArrow
-        >
-          Schedule a call
-        </Link>
       </div>
       <ul className="mt-14 flex flex-wrap gap-5 lg:mt-12 lg:gap-4 md:flex-col md:items-center">
         {ITEMS.map(({ title, description, image }, index) => (
           <li
-            className={clsx('relative h-[384px] rounded-[14px] bg-[#0A0A0A] lg:h-[324px] md:w-80')}
+            className={clsx('relative h-[384px] rounded-[14px] bg-[#0A0A0A] lg:h-[281px] md:w-80')}
             key={title}
           >
             <div className="absolute inset-x-0 bottom-0 z-10 p-6 pr-8 text-lg leading-snug tracking-extra-tight lg:p-5 lg:text-base">
               <h3 className="inline font-medium text-white">{title}</h3>{' '}
-              <p
-                className="inline font-light text-gray-new-60"
-                dangerouslySetInnerHTML={{ __html: description }}
-              />
+              <p className="inline font-light text-gray-new-60">{description}</p>
             </div>
             <div className="relative h-full shrink-0 overflow-hidden rounded-[inherit]">
               <Image
                 className="relative h-full w-auto md:h-auto md:w-full"
                 src={image}
                 alt=""
-                width={[0, 3].includes(index) ? 488 : 324}
+                width={[0, 3].includes(index) ? 544 : 396}
                 height={384}
                 quality={100}
               />
@@ -88,12 +80,6 @@ const Bento = () => (
           </li>
         ))}
       </ul>
-      <div className="mt-24 flex items-center gap-10 lg:mt-[88px] md:mt-14 md:flex-col md:gap-8">
-        <p className="max-w-[184px] font-medium leading-snug tracking-extra-tight text-gray-new-70 md:max-w-full md:text-center md:text-sm">
-          Trusted in production by&nbsp;thousands of teams.
-        </p>
-        <LogosWall logos={logos} size="sm" />
-      </div>
     </Container>
   </section>
 );
