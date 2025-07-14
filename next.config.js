@@ -342,6 +342,11 @@ const defaultConfig = {
         destination: 'https://neon.new',
         permanent: false,
       },
+      {
+        source: '/demos/regional-latency',
+        destination: 'https://latency-benchmarks-dashboard.vercel.app/',
+        permanent: true,
+      },
       ...docsRedirects,
       ...changelogRedirects,
     ];
@@ -379,10 +384,6 @@ const defaultConfig = {
       {
         source: '/developer-days/:path*',
         destination: 'https://neon-dev-days-next.vercel.app/developer-days/:path*',
-      },
-      {
-        source: '/demos/regional-latency',
-        destination: 'https://latency-benchmarks-dashboard.vercel.app/',
       },
       {
         source: '/dev-for-rds',
