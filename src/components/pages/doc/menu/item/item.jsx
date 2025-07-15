@@ -103,6 +103,7 @@ const Item = ({
                 />
               ))}
             </ul>
+            {children}
           </m.div>
         </LazyMotion>
       ) : (
