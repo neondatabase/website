@@ -35,6 +35,8 @@ export default {
   templates: '/templates',
   thankYou: '/thank-you',
   useCases: '/use-cases',
+  useCasesAI: '/use-cases/ai-agents',
+
   // Docs
   docs: '/docs',
   docsHome: '/docs/introduction',

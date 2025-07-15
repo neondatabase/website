@@ -7,7 +7,7 @@ import LINKS from 'constants/links';
 import sparks from './images/sparks.png';
 
 const Hero = () => (
-  <section className="hero safe-paddings relative pt-[134px] lg:pt-16 md:pt-12">
+  <section className="hero safe-paddings relative pt-[136px] lg:pt-16 md:pt-12">
     <Container className="md:max-w-[640px] md:px-5" size="832">
       <div className="relative mb-10 size-[72px] lg:mb-8 lg:size-16 lg:rounded-[14px] md:mb-7 md:size-14">
         <Image
