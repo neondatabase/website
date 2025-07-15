@@ -79,7 +79,7 @@ const Item = ({
           <Chevron className={clsx('ml-auto w-1.5', !isCollapsed && 'rotate-90')} />
         )}
       </LinkTag>
-      {collapsible ? (
+      {collapsible && (
         <LazyMotion features={domAnimation}>
           <m.div
             className="overflow-hidden"
@@ -103,12 +103,10 @@ const Item = ({
                 />
               ))}
             </ul>
-            {children}
           </m.div>
         </LazyMotion>
-      ) : (
-        children
       )}
+      {children}
     </li>
   );
 };

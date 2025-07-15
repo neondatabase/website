@@ -142,7 +142,7 @@ const Menu = ({
   const menuRef = useRef(null);
   const lastDepth = activeMenuList.length - 1;
 
-  const BackLinkTag = parentMenu?.slug ? Link : 'button';
+  const BackLinkTag = slug ? Link : 'button';
 
   const isActive = isRootMenu || activeMenuList.some((item) => item.title === title);
   const isLastActive =
@@ -181,7 +181,7 @@ const Menu = ({
       style={isRootMenu ? { transform: `translateX(${lastDepth * -100}%)` } : undefined}
       ref={menuRef}
     >
-      {/* breadcrumbs, menu title and home link */}
+      {/* menu title and home link */}
       {!isRootMenu && (
         <BackLinkTag
           className="group relative z-50 flex w-full items-center pb-1.5 text-left font-medium leading-tight tracking-extra-tight text-black-new dark:text-white"
