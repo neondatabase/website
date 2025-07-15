@@ -382,11 +382,12 @@ const defaultConfig = {
       },
       {
         source: '/demos/regional-latency',
-        destination: 'https://latency-benchmarks-dashboard.vercel.app/',
+        destination: 'https://latency-benchmarks-dashboard.vercel.app/demos/regional-latency',
       },
       {
         source: '/demos/regional-latency/:path*',
-        destination: 'https://latency-benchmarks-dashboard.vercel.app/:path*',
+        destination:
+          'https://latency-benchmarks-dashboard.vercel.app/demos/regional-latency/:path*',
       },
       {
         source: '/dev-for-rds',
