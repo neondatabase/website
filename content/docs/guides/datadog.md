@@ -673,7 +673,6 @@ If any of the computes in your project are active, you should start seeing data 
 
 Neon exports a comprehensive set of metrics including connection counts, database size, replication delay, and compute metrics (CPU and memory usage). For a complete list of all available metrics with detailed descriptions, see the [Metrics and logs reference](/docs/reference/metrics-logs).
 
-
 ## Export Postgres logs to Datadog
 
 You can export your Postgres logs from your Neon compute to your Datadog account. These logs provide visibility into database activity, errors, and performance. For detailed information about log fields and technical considerations, see the [Metrics and logs reference](/docs/reference/metrics-logs).
