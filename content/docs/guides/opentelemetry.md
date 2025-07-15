@@ -183,6 +183,6 @@ If your data isn't appearing in your observability platform:
 
 ## Available metrics
 
-For a complete list of metrics exported by Neon, see the [metrics reference in our Datadog integration guide](/docs/guides/datadog#available-metrics).
+For a complete list of all metrics and log fields exported by Neon, see the [Metrics and logs reference](/docs/reference/metrics-logs).
 
 <NeedHelp />
