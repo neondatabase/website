@@ -3,7 +3,7 @@ title: Benchmarking latency in Neon's serverless Postgres
 subtitle: Techniques for obtaining meaningful latency data in serverless database
   environments
 enableTableOfContents: true
-updatedOn: '2025-06-23T15:24:08.764Z'
+updatedOn: '2025-07-15T14:59:03.466Z'
 ---
 
 Benchmarking database query latency is inherently complex, requiring careful consideration of numerous variables and testing methodologies. Neon's serverless Postgres environment adds additional layers to this complexity due to compute auto-suspension, connection protocol differences, and geographic distribution. This guide provides detailed methodologies for separating cold-start costs from operational latency, selecting optimal connection types, and designing tests that accurately reflect production conditions.
