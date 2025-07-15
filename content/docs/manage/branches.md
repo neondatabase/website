@@ -28,11 +28,11 @@ To create a branch:
 4. Specify a branch name.
 5. Select a **branch setup** option. If you're interested in schema-only branches, see [Schema-only branches](/docs/guides/branching-schema-only).
 
-    <Admonition type="note">
-    When creating a branch with past data, you can only specify a date and time that falls within your [restore window](/docs/manage/projects#configure-restore-window).
-    </Admonition>
+<Admonition type="note">
+When creating a branch with past data, you can only specify a date and time that falls within your [restore window](/docs/manage/projects#configure-restore-window).
+</Admonition>
 
-8. Click **Create new branch**.
+6. Click **Create new branch**.
 
    You are presented with the connection details for your new branch and directed to the **Branch** overview page where you are shown the details for your new branch.
 
@@ -67,7 +67,7 @@ To view the branches in a Neon project:
    - **Compute hours**: The compute hours used by the default branch in the current billing period.
    - **Data size**: The logical data size of the branch. Data size does not include history.
    - **Parent branch**: The branch from which this branch was created (only applicable to child branches).
-      
+
    The branch details page also includes details about the **Computes**, **Roles & Databases**, and **Child branches** that belong to the branch. All of these objects are associated with a particular branch. For information about these objects, see:
    - [Manage computes](/docs/manage/computes#view-a-compute).
    - [Manage roles](/docs/manage/roles)
