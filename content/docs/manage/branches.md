@@ -24,15 +24,12 @@ To create a branch:
 
 1. In the Neon Console, select a project.
 2. Select **Branches**.
-3. Click **Create branch** to open the branch creation dialog.
-   ![Create branch dialog](/docs/manage/create_branch.png)
-4. Select the **Data and schema** option (the default) to create a branch with both schema and data. If you're interested in schema-only branches, see [Schema-only branches](/docs/guides/branching-schema-only).
-5. Enter a name for the branch.
-6. Select a parent branch — the branch you want to branch from.
-7. Select an **Include data up to** option to specify the data to be included in your branch.
+3. Click **New branch** to open the branch creation dialog.
+4. Specify a branch name.
+5. Select a branch setup option. If you're interested in schema-only branches, see [Schema-only branches](/docs/guides/branching-schema-only).
 
 <Admonition type="note">
-The **Specific date and time** and the **Specific Log Sequence Number Data** options do not include data changes that occurred after the specified date and time or LSN. You can only specify a date and time or LSN value that falls within your [restore window](/docs/manage/projects#configure-restore-window).
+When creating a branch with past data, you can only specify a date and time that falls within your [restore window](/docs/manage/projects#configure-restore-window).
 </Admonition>
 
 8. Click **Create new branch**.
