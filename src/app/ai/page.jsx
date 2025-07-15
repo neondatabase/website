@@ -4,16 +4,62 @@ import PgVector from 'components/pages/ai/pgvector';
 import StarterKit from 'components/pages/ai/starter-kit';
 import Usage from 'components/pages/ai/usage';
 import CTA from 'components/shared/cta';
+import GridFeatures from 'components/shared/grid-features';
 import Layout from 'components/shared/layout';
 import TestimonialNew from 'components/shared/testimonial-new';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
+import auth from 'icons/ai/auth.svg';
+import branches from 'icons/ai/branches.svg';
+import jsConsole from 'icons/ai/js-console.svg';
+import lightning from 'icons/ai/lightning.svg';
+import programmable from 'icons/ai/programmable.svg';
+import scale from 'icons/ai/scale.svg';
 import createIcon from 'icons/companies/create.svg';
 import replitIcon from 'icons/companies/replit.svg';
 import authorDhruvAmin from 'images/authors/dhruv-amin.jpg';
 import getMetadata from 'utils/get-metadata';
 
 export const metadata = getMetadata(SEO_DATA.ai);
+
+const PG_AGENT_FEATURES_ITEMS = [
+  {
+    title: 'One-second database provisioning',
+    description:
+      'Agents move fast, and so does Neon. Provision fresh databases in seconds for a smooth developer experience.',
+    icon: lightning,
+  },
+  {
+    title: 'Scale to zero and pay-as-you-go',
+    description:
+      'Neon only charges for true usage, so you can run fleets of short-lived databases without blowing your budget.',
+    icon: scale,
+  },
+  {
+    title: 'Simple, programmable API',
+    description:
+      'Create, delete, scale, and monitor databases with a feature-complete API designed to manage thousands of Postgres instances.',
+    icon: programmable,
+  },
+  {
+    title: 'Embed directly, no signup required',
+    description:
+      'Agents can create and manage databases without a user ever logging into Neon. No UI, no OAuth, no friction.',
+    icon: jsConsole,
+  },
+  {
+    title: 'Time travel for your apps',
+    description:
+      'Branches let you snapshot the full database state instantly. Let users roll back to a previous version in one click.',
+    icon: branches,
+  },
+  {
+    title: 'Built-in auth',
+    description:
+      'With Neon Auth, agents can build apps with secure authentication baked in - no extra setup, just more power to vibe coders.',
+    icon: auth,
+  },
+];
 
 const AiPage = () => (
   <Layout>
@@ -32,6 +78,15 @@ const AiPage = () => (
         src: replitIcon,
         width: 152,
       }}
+    />
+    <GridFeatures
+      title="Add Postgres to your agent"
+      description="Neon is purpose-built to support AI agents at the infrastructure level, with native, API-first Postgres that doesn’t require end-user signups or manual provisioning."
+      items={PG_AGENT_FEATURES_ITEMS}
+      link={LINKS.useCasesAI}
+      linkText="Read more"
+      className="pt-[202px]"
+      logos={['create', 'replit', 'same', 'solar', 'databutton']}
     />
     <Usage />
     <PgVector />
