@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/guides/vercel-native-integration
   - /docs/guides/vercel-native-integration-previews
 enableTableOfContents: true
-updatedOn: '2025-07-07T22:27:57.419Z'
+updatedOn: '2025-07-14T18:31:00.663Z'
 ---
 
 <InfoBlock>
@@ -85,8 +85,6 @@ Once enabled, the flow looks like this:
 4. (Optional) Run migrations in build step so schema matches code.
 
    ![Vercel build commands](/docs/guides/vercel_build_command.png)
-
-Branches live until the git branch is deleted. Enable **Automatically delete obsolete Neon branches** in the **Branches** tab of the integration drawer to delete Neon branches automatically.
 
 ### Test the setup
 

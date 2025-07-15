@@ -3,7 +3,7 @@ title: Neon MCP Server
 subtitle: Manage your Neon Postgres databases using natural language commands with the
   Neon MCP Server.
 enableTableOfContents: true
-updatedOn: '2025-07-09T11:58:35.356Z'
+updatedOn: '2025-07-11T19:15:27.593Z'
 ---
 
 The **Neon MCP Server** is an open-source tool that lets you interact with your Neon Postgres databases in **natural language**.
@@ -276,7 +276,9 @@ The Neon MCP server provides access to powerful tools for interacting with your 
 
 - Use MCP only for **local development** or **IDE-based workflows**.
 - Never connect MCP agents to production databases.
+- Avoid exposing production data or PII data to MCP — only use anonymized data.
 - Disable MCP tools capable of accessing or modifying data when they are not being used.
+- Do not grant MCP access to your customers or end users.
 
 ### Human oversight and access control
 

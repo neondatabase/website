@@ -3,7 +3,7 @@ title: Vercel Postgres Transition Guide
 subtitle: Your complete guide to the transition from Vercel Postgres to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-07-07T22:27:57.421Z'
+updatedOn: '2025-07-12T14:19:52.050Z'
 ---
 
 <InfoBlock>
@@ -132,7 +132,7 @@ All existing integrations continue to work:
 
 ### Templates and environment variables
 
-- **Existing templates**: [Environment variables](/docs/guides/vercel-native-integration#environment-variables-set-by-the-integration) used by Vercel Postgres templates continue to work
+- **Existing templates**: [Environment variables](/docs/guides/vercel-managed-integration#environment-variables-set-by-the-integration) used by Vercel Postgres templates continue to work
 - **New templates**: Find updated [Neon templates](https://vercel.com/templates?database=neon) and [Postgres templates](https://vercel.com/templates?database=neon&database=postgres) on Vercel
 
 ### Regional support
