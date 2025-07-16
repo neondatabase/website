@@ -113,14 +113,14 @@ You can run any command by opening the Command Palette (`Cmd+Shift+P` or `Ctrl+S
 
 _All commands below are available under the “Neon Local Connect:” prefix in the Command Palette._
 
-| Command                   | Description                                                                          |
-| ------------------------- | ------------------------------------------------------------------------------------ |
-| **Import API Key**        | Import your Neon API key for authentication.                                         |
-| **Launch PSQL**           | Open a psql shell in your integrated terminal for direct SQL access.                 |
-| **Open SQL Editor**       | Launch the Neon SQL Editor in your browser for advanced queries and data inspection. |
-| **Open Table View**       | Browse your database schema and data in the Neon Console.                            |
-| **Disconnect**            | Stop the local proxy connection.                                                     |
-| **Clear Authentication**  | Remove stored authentication tokens.                                                 |
+| Command                  | Description                                                                          |
+| ------------------------ | ------------------------------------------------------------------------------------ |
+| **Import API Key**       | Import your Neon API key for authentication.                                         |
+| **Launch PSQL**          | Open a psql shell in your integrated terminal for direct SQL access.                 |
+| **Open SQL Editor**      | Launch the Neon SQL Editor in your browser for advanced queries and data inspection. |
+| **Open Table View**      | Browse your database schema and data in the Neon Console.                            |
+| **Disconnect**           | Stop the local proxy connection.                                                     |
+| **Clear Authentication** | Remove stored authentication tokens.                                                 |
 
 ## Panel actions
 
