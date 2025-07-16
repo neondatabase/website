@@ -398,6 +398,8 @@
               slug: introduction/monitor-active-queries
             - title: Query history
               slug: introduction/monitor-query-history
+        - section: External monitoring
+          items:
             - title: Metrics and logs reference
               slug: reference/metrics-logs
             - title: Datadog integration
