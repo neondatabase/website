@@ -15,8 +15,12 @@ type Project = {
     signUpEnabled: boolean;
     credentialEnabled: boolean;
     magicLinkEnabled: boolean;
+    passkeyEnabled: boolean;
     clientTeamCreationEnabled: boolean;
     clientUserDeletionEnabled: boolean;
+    oauthProviders: OAuthProviderConfig[];
+    allowUserApiKeys: boolean;
+    allowTeamApiKeys: boolean;
   };
 };
 ```
@@ -44,15 +48,23 @@ The configuration settings for the project.
 - `signUpEnabled`: Indicates if sign-up is enabled for the project.
 - `credentialEnabled`: Specifies if credential-based authentication is enabled for the project.
 - `magicLinkEnabled`: States whether magic link authentication is enabled for the project.
+- `passkeyEnabled`: Indicates if passkey authentication is enabled for the project.
 - `clientTeamCreationEnabled`: Determines if client-side team creation is permitted within the project.
 - `clientUserDeletionEnabled`: Indicates if client-side user deletion is enabled for the project.
+- `oauthProviders`: Array of configured OAuth providers for the project.
+- `allowUserApiKeys`: Indicates if users can create API keys.
+- `allowTeamApiKeys`: Indicates if teams can create API keys.
 
 ```typescript
 declare const config: {
   signUpEnabled: boolean;
   credentialEnabled: boolean;
   magicLinkEnabled: boolean;
+  passkeyEnabled: boolean;
   clientTeamCreationEnabled: boolean;
   clientUserDeletionEnabled: boolean;
+  oauthProviders: OAuthProviderConfig[];
+  allowUserApiKeys: boolean;
+  allowTeamApiKeys: boolean;
 };
 ```

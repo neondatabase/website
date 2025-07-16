@@ -80,26 +80,33 @@ Indicates whether the contact channel is used for authentication. If set to `tru
 declare const usedForAuth: boolean;
 ```
 
-### `contactChannel.sendVerificationEmail()`
+### `contactChannel.sendVerificationEmail(options?)`
 
 Sends a verification email to this contact channel. Once the user clicks the verification link in the email, the contact channel will be marked as verified.
 
 #### Parameters
 
-None.
+- `options`: An optional object containing:
+  - `callbackUrl`: Optional URL to redirect to after verification
 
 #### Returns
 
 `Promise<void>`
 
 ```typescript
-declare function sendVerificationEmail(): Promise<void>;
+declare function sendVerificationEmail(options?: {
+  callbackUrl?: string;
+}): Promise<void>;
 ```
 
 #### Example
 
 ```typescript
 await contactChannel.sendVerificationEmail();
+// or with callback URL
+await contactChannel.sendVerificationEmail({
+  callbackUrl: 'https://myapp.com/verify'
+});
 ```
 
 ### `contactChannel.update(options)`

@@ -16,7 +16,7 @@ It is usually obtained by calling `team.useUsers()` or `team.listUsers()` on a [
 ```typescript
 type TeamUser = {
   id: string;
-  teamProfile: TeamProfile;
+  teamProfile: TeamMemberProfile;
 };
 ```
 
@@ -30,10 +30,10 @@ declare const id: string;
 
 ### `teamUser.teamProfile`
 
-The team profile of the user as a `TeamProfile` object.
+The team profile of the user as a `TeamMemberProfile` object.
 
 ```typescript
-declare const teamProfile: TeamProfile;
+declare const teamProfile: TeamMemberProfile;
 ```
 
 ## `ServerTeamUser`
@@ -50,14 +50,14 @@ type ServerTeamUser =
   TeamUser &
     // Inherits all functionality from ServerUser
     ServerUser & {
-      teamProfile: ServerTeamProfile;
+      teamProfile: ServerTeamMemberProfile;
     };
 ```
 
 ### `serverTeamUser.teamProfile`
 
-The team profile of the user as a `ServerTeamProfile` object.
+The team profile of the user as a `ServerTeamMemberProfile` object.
 
 ```typescript
-declare const teamProfile: ServerTeamProfile;
+declare const teamProfile: ServerTeamMemberProfile;
 ```

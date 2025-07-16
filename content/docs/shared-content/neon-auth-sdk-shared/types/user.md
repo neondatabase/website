@@ -28,6 +28,9 @@ You can call `useUser()` or `stackServerApp.getUser()` to get the `CurrentUser` 
   <span><span style={{ display: "inline-block", width: "2ch" }}></span><a href="#currentuserclientmetadata" style={{ color: "#f59e42", textDecoration: "none" }}>clientMetadata</a><span style={{ color: "#60a5fa" }}>: </span><span style={{ color: "#facc15" }}>Json</span><span style={{ color: "#60a5fa" }}>;</span></span><br />
   <span><span style={{ display: "inline-block", width: "2ch" }}></span><a href="#currentuserclientreadonlymetadata" style={{ color: "#f59e42", textDecoration: "none" }}>clientReadOnlyMetadata</a><span style={{ color: "#60a5fa" }}>: </span><span style={{ color: "#facc15" }}>Json</span><span style={{ color: "#60a5fa" }}>;</span></span><br />
   <span><span style={{ display: "inline-block", width: "2ch" }}></span><a href="#currentuserselectedteam" style={{ color: "#f59e42", textDecoration: "none" }}>selectedTeam</a><span style={{ color: "#60a5fa" }}>: </span><span style={{ color: "#facc15" }}>Team</span> <span style={{ color: "#60a5fa" }}>|</span> <span style={{ color: "#facc15" }}>null</span><span style={{ color: "#60a5fa" }}>;</span></span><br />
+  <span><span style={{ display: "inline-block", width: "2ch" }}></span><a href="#currentuserotpauthenabled" style={{ color: "#f59e42", textDecoration: "none" }}>otpAuthEnabled</a><span style={{ color: "#60a5fa" }}>: </span><span style={{ color: "#facc15" }}>boolean</span><span style={{ color: "#60a5fa" }}>;</span></span><br />
+  <span><span style={{ display: "inline-block", width: "2ch" }}></span><a href="#currentuserpasskeyauthenabled" style={{ color: "#f59e42", textDecoration: "none" }}>passkeyAuthEnabled</a><span style={{ color: "#60a5fa" }}>: </span><span style={{ color: "#facc15" }}>boolean</span><span style={{ color: "#60a5fa" }}>;</span></span><br />
+  <span><span style={{ display: "inline-block", width: "2ch" }}></span><a href="#currentuserisanonymous" style={{ color: "#f59e42", textDecoration: "none" }}>isAnonymous</a><span style={{ color: "#60a5fa" }}>: </span><span style={{ color: "#facc15" }}>boolean</span><span style={{ color: "#60a5fa" }}>;</span></span><br />
   <br />
   <span><span style={{ display: "inline-block", width: "2ch" }}></span><a href="#currentuserupdatedata" style={{ color: "#f59e42", textDecoration: "none" }}>update</a><span style={{ color: "#60a5fa" }}>(</span><span style={{ color: "#fff" }}>data</span><span style={{ color: "#60a5fa" }}>)</span><span style={{ color: "#60a5fa" }}>: </span><span style={{ color: "#facc15" }}>Promise</span><span style={{ color: "#60a5fa" }}>&lt;</span><span style={{ color: "#facc15" }}>void</span><span style={{ color: "#60a5fa" }}>&gt;;</span></span><br />
   <span><span style={{ display: "inline-block", width: "2ch" }}></span><a href="#currentuserupdatepassworddata" style={{ color: "#f59e42", textDecoration: "none" }}>updatePassword</a><span style={{ color: "#60a5fa" }}>(</span><span style={{ color: "#fff" }}>data</span><span style={{ color: "#60a5fa" }}>)</span><span style={{ color: "#60a5fa" }}>: </span><span style={{ color: "#facc15" }}>Promise</span><span style={{ color: "#60a5fa" }}>&lt;</span><span style={{ color: "#facc15" }}>void</span><span style={{ color: "#60a5fa" }}>&gt;;</span></span><br />
@@ -141,6 +144,30 @@ The currently selected team of the user as a `Team` object or `null` if no team 
 declare const selectedTeam: Team | null;
 ```
 
+## `currentUser.otpAuthEnabled`
+
+A `boolean` indicating whether OTP (One-Time Password) authentication is enabled for the user.
+
+```typescript
+declare const otpAuthEnabled: boolean;
+```
+
+## `currentUser.passkeyAuthEnabled`
+
+A `boolean` indicating whether passkey authentication is enabled for the user.
+
+```typescript
+declare const passkeyAuthEnabled: boolean;
+```
+
+## `currentUser.isAnonymous`
+
+A `boolean` indicating whether the user is anonymous.
+
+```typescript
+declare const isAnonymous: boolean;
+```
+
 ## `currentUser.update(data)`
 
 Updates the user's profile.
@@ -171,7 +198,7 @@ Updates the user's password.
 ### Parameters (#updatepassword-parameters)
 
 - `data`: An object containing properties to update:
-  - `currentPassword`: The current password
+  - `oldPassword`: The current password
   - `newPassword`: The new password
 
 ### Returns (#updatepassword-returns)
@@ -180,7 +207,7 @@ Updates the user's password.
 
 ```typescript
 declare function updatePassword(data: {
-  currentPassword: string;
+  oldPassword: string;
   newPassword: string;
 }): Promise<void>;
 ```
@@ -216,14 +243,14 @@ Signs out the user.
 ### Parameters (#signout-parameters)
 
 - `options`: An object containing options:
-  - `everywhere`: Whether to sign out from all devices
+  - `redirectUrl`: URL to redirect to after sign out
 
 ### Returns (#signout-returns)
 
 `Promise<void>`
 
 ```typescript
-declare function signOut(options?: { everywhere?: boolean }): Promise<void>;
+declare function signOut(options?: { redirectUrl?: string }): Promise<void>;
 ```
 
 ## `currentUser.delete()`

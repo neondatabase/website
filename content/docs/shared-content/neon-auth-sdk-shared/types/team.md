@@ -231,3 +231,96 @@ A React hook that returns all API keys for the team.
 ```typescript
 declare function useApiKeys(): TeamApiKey[];
 ```
+
+## Team Selection Patterns
+
+A user can be a member of multiple teams, so most applications using teams will need a way to select a "current team" that the user is working on. There are two primary methods to accomplish this:
+
+### Deep Link Method
+
+Each team has a unique URL, for example, `your-website.com/team/<team-id>`. When a team is selected, it redirects to a page with that team's URL.
+
+This method is generally recommended because it avoids some common issues associated with the current team method. If two users share a link while using deep link URLs, the receiving user will always be directed to the correct team's information based on the link.
+
+### Current Team Method
+
+When a user selects a team, the app stores the team as a global "current team" state. In this way, the URL of the current team might be something like `your-website.com/current-team`, and the URL won't change after switching teams.
+
+While the current team method can be simpler to implement, it has a downside. If a user shares a link, the recipient might see information about the wrong team (if their "current team" is set differently). This method can also cause problems when a user has multiple browser tabs open with different teams.
+
+### Example: Deep Link + Most Recent Team
+
+First, create a page to display information about a specific team:
+
+```typescript
+// /app/team/[teamId]/page.tsx
+"use client";
+
+import { useUser } from "@stackframe/stack";
+
+export default function TeamPage({ params }: { params: { teamId: string } }) {
+  const user = useUser({ or: 'redirect' });
+  const team = user.useTeam(params.teamId);
+
+  if (!team) {
+    return <div>Team not found</div>;
+  }
+
+  return (
+    <div>
+      <p>Team Name: {team.displayName}</p>
+      <p>You are a member of this team.</p>
+    </div>
+  );
+}
+```
+
+Next, create a page to display all teams:
+
+```typescript
+// /app/team/page.tsx
+"use client";
+
+import { useRouter } from "next/navigation";
+import { useUser } from "@stackframe/stack";
+
+export default function TeamsPage() {
+  const user = useUser({ or: 'redirect' });
+  const teams = user.useTeams();
+  const router = useRouter();
+  const selectedTeam = user.selectedTeam;
+
+  return (
+    <div>
+      {selectedTeam && 
+        <button onClick={() => router.push(`/team/${selectedTeam.id}`)}>
+          Most recent team
+        </button>}
+
+      <h2>All Teams</h2>
+      {teams.map(team => (
+        <button key={team.id} onClick={() => router.push(`/team/${team.id}`)}>
+          Open {team.displayName}
+        </button>
+      ))}
+    </div>
+  );
+}
+```
+
+### Example: Current Team Management
+
+To manage the current team state:
+
+```typescript
+// Set the current team
+await user.setSelectedTeam(team);
+
+// Get the current team
+const currentTeam = user.selectedTeam;
+
+// Check if user has a selected team
+if (user.selectedTeam) {
+  console.log('Current team:', user.selectedTeam.displayName);
+}
+```
