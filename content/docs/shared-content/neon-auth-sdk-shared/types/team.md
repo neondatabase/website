@@ -292,7 +292,7 @@ export default function TeamsPage() {
 
   return (
     <div>
-      {selectedTeam && 
+      {selectedTeam &&
         <button onClick={() => router.push(`/team/${selectedTeam.id}`)}>
           Most recent team
         </button>}

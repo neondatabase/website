@@ -85,6 +85,6 @@ declare function update(update: {
 ```typescript
 await editableTeamMemberProfile.update({
   displayName: 'New Display Name',
-  profileImageUrl: 'https://example.com/profile.jpg'
+  profileImageUrl: 'https://example.com/profile.jpg',
 });
 ```

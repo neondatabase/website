@@ -206,10 +206,7 @@ Updates the user's password.
 `Promise<void>`
 
 ```typescript
-declare function updatePassword(data: {
-  oldPassword: string;
-  newPassword: string;
-}): Promise<void>;
+declare function updatePassword(data: { oldPassword: string; newPassword: string }): Promise<void>;
 ```
 
 ## `currentUser.getAuthHeaders()`

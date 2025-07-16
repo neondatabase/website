@@ -94,9 +94,7 @@ Sends a verification email to this contact channel. Once the user clicks the ver
 `Promise<void>`
 
 ```typescript
-declare function sendVerificationEmail(options?: {
-  callbackUrl?: string;
-}): Promise<void>;
+declare function sendVerificationEmail(options?: { callbackUrl?: string }): Promise<void>;
 ```
 
 #### Example
@@ -105,7 +103,7 @@ declare function sendVerificationEmail(options?: {
 await contactChannel.sendVerificationEmail();
 // or with callback URL
 await contactChannel.sendVerificationEmail({
-  callbackUrl: 'https://myapp.com/verify'
+  callbackUrl: 'https://myapp.com/verify',
 });
 ```
 
