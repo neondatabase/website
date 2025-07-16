@@ -112,7 +112,7 @@ const GridFeatures = ({
               {title}
             </h3>
             <p
-              className="mt-2 text-pretty leading-snug tracking-extra-tight text-gray-new-70"
+              className="mt-2 text-pretty leading-snug tracking-extra-tight text-gray-new-70 lg:text-wrap"
               dangerouslySetInnerHTML={{ __html: description }}
             />
           </li>

@@ -64,7 +64,7 @@ const Usage = () => (
         Start building
       </Link>
 
-      <ul className="mt-[78px] flex flex-col gap-[120px] xl:mt-[68px] lg:mt-[60px] lg:gap-[104px] md:mx-auto md:mt-10 md:gap-14">
+      <ul className="mt-[78px] flex flex-col gap-[120px] xl:mt-[68px] lg:mt-[60px] lg:gap-[104px] md:mx-auto md:mt-10 md:mt-[60px] md:gap-14">
         {ITEMS.map(({ title, description, image, imageMobile }, index) => (
           <li
             className="grid grid-cols-2 items-center gap-16 lg:gap-8 md:grid-cols-1 md:gap-5"

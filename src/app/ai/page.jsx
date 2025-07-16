@@ -1,6 +1,5 @@
 import Bento from 'components/pages/ai/bento';
 import Hero from 'components/pages/ai/hero';
-import StarterKit from 'components/pages/ai/starter-kit';
 import Usage from 'components/pages/ai/usage';
 import CTA from 'components/shared/cta';
 import FeaturesCards from 'components/shared/features-cards';
@@ -9,12 +8,18 @@ import Layout from 'components/shared/layout';
 import TestimonialNew from 'components/shared/testimonial-new';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
+import aiApps from 'icons/ai/features-grid/ai-apps.svg';
 import auth from 'icons/ai/features-grid/auth.svg';
+import autoscaling from 'icons/ai/features-grid/autoscaling.svg';
 import branches from 'icons/ai/features-grid/branches.svg';
+import builtWithNeon from 'icons/ai/features-grid/built-with-neon.svg';
 import jsConsole from 'icons/ai/features-grid/js-console.svg';
 import lightning from 'icons/ai/features-grid/lightning.svg';
+import performanceStorage from 'icons/ai/features-grid/performance-storage.svg';
+import pgvector from 'icons/ai/features-grid/pgvector.svg';
 import programmable from 'icons/ai/features-grid/programmable.svg';
 import scale from 'icons/ai/features-grid/scale.svg';
+import vectorSearchOptimization from 'icons/ai/features-grid/vector-seo.svg';
 import createIcon from 'icons/companies/create.svg';
 import replitIcon from 'icons/companies/replit.svg';
 import authorDhruvAmin from 'images/authors/dhruv-amin.jpg';
@@ -58,6 +63,43 @@ const PG_AGENT_FEATURES_ITEMS = [
     description:
       'With Neon Auth, agents can build apps with secure authentication baked in - no extra setup, just more power to vibe coders.',
     icon: auth,
+  },
+];
+
+const STARTER_KIT_FEATURES_ITEMS = [
+  {
+    title: 'Postgres with pgvector',
+    description:
+      'Store and retrieve vector embeddings efficiently with Neon Postgres and pgvector.',
+    icon: pgvector,
+  },
+  {
+    title: 'AI Starter Apps',
+    description: 'Access pre-built AI apps like AI chatbot, semantic search, and hybrid search.',
+    icon: aiApps,
+  },
+  {
+    title: 'Vector Search Optimization',
+    description:
+      'Enhance the performance of your AI by using Neon’s vector search optimization guide.',
+    icon: vectorSearchOptimization,
+  },
+  {
+    title: 'Autoscaling & Scaling Guide',
+    description: 'Scale your AI apps seamlessly with Neon’s Autoscaling and Read Replicas.',
+    icon: autoscaling,
+  },
+  {
+    title: 'Built with Neon',
+    description:
+      'Explore AI apps using Neon to gain valuable inspiration and learn best practices.',
+    icon: builtWithNeon,
+  },
+  {
+    title: 'Performance & Storage',
+    description:
+      'Optimize and manage your AI workloads with Neon’s storage and autoscaling solutions.',
+    icon: performanceStorage,
   },
 ];
 
@@ -108,19 +150,26 @@ const AiPage = () => (
     <FeaturesCards />
     <Usage />
     <TestimonialNew
-      className="mt-[200px] xl:mt-[176px] lg:mt-[152px] md:mt-[104px]"
-      quote="Neon’s speed of provisioning and serverless scale-to-zero is critical for us. We can serve users iterating on quick ideas efficiently while also supporting them as they scale, without making them think about database setup."
+      className="mt-[200px] xl:mt-[192px] lg:mt-[160px] md:mt-[107px]"
+      figureClassName="lg:max-w-[704px]"
+      quote="I did testing on vector databases, but I didn’t see a real advantage. Postgres with Pgvector covers everything I need."
+      quoteClassName="text-balance lg:text-pretty"
       author={{
-        name: 'Dhruv Amin',
-        position: 'Co-founder at Create.xyz',
+        name: 'Marco D’Alia',
+        position: 'Software Architect behind RagRabbit',
         avatar: authorDhruvAmin,
       }}
-      company={{
-        src: createIcon,
-        width: 135,
-      }}
     />
-    <StarterKit />
+    <GridFeatures
+      className="mt-[200px] xl:mt-[194px] lg:mt-[160px] md:mt-[74px]"
+      title="Neon's AI Starter Kit"
+      titleClassName="md:text-pretty"
+      description="Neon's AI Starter Kit offers resources, apps, and examples to kickstart Neon as your vector database."
+      descriptionClassName="max-w-[490px]"
+      items={STARTER_KIT_FEATURES_ITEMS}
+      link={LINKS.docsAi}
+      linkText="Learn more"
+    />
     <CTA
       className="pb-[290px] pt-[348px] xl:pb-[242px] xl:pt-[278px] lg:pb-[200px] lg:pt-[260px] sm:pb-[100px] sm:pt-40"
       title="The Postgres of tomorrow, available today"
