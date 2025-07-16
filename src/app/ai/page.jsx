@@ -1,6 +1,5 @@
 import Bento from 'components/pages/ai/bento';
 import Hero from 'components/pages/ai/hero';
-import PgVector from 'components/pages/ai/pgvector';
 import StarterKit from 'components/pages/ai/starter-kit';
 import Usage from 'components/pages/ai/usage';
 import CTA from 'components/shared/cta';
@@ -108,7 +107,6 @@ const AiPage = () => (
     />
     <FeaturesCards />
     <Usage />
-    <PgVector />
     <TestimonialNew
       className="mt-[200px] xl:mt-[176px] lg:mt-[152px] md:mt-[104px]"
       quote="Neon’s speed of provisioning and serverless scale-to-zero is critical for us. We can serve users iterating on quick ideas efficiently while also supporting them as they scale, without making them think about database setup."
