@@ -4,17 +4,18 @@ import PgVector from 'components/pages/ai/pgvector';
 import StarterKit from 'components/pages/ai/starter-kit';
 import Usage from 'components/pages/ai/usage';
 import CTA from 'components/shared/cta';
+import FeaturesCards from 'components/shared/features-cards';
 import GridFeatures from 'components/shared/grid-features';
 import Layout from 'components/shared/layout';
 import TestimonialNew from 'components/shared/testimonial-new';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
-import auth from 'icons/ai/auth.svg';
-import branches from 'icons/ai/branches.svg';
-import jsConsole from 'icons/ai/js-console.svg';
-import lightning from 'icons/ai/lightning.svg';
-import programmable from 'icons/ai/programmable.svg';
-import scale from 'icons/ai/scale.svg';
+import auth from 'icons/ai/features-grid/auth.svg';
+import branches from 'icons/ai/features-grid/branches.svg';
+import jsConsole from 'icons/ai/features-grid/js-console.svg';
+import lightning from 'icons/ai/features-grid/lightning.svg';
+import programmable from 'icons/ai/features-grid/programmable.svg';
+import scale from 'icons/ai/features-grid/scale.svg';
 import createIcon from 'icons/companies/create.svg';
 import replitIcon from 'icons/companies/replit.svg';
 import authorDhruvAmin from 'images/authors/dhruv-amin.jpg';
@@ -90,6 +91,22 @@ const AiPage = () => (
       linkText="Read more"
       logos={['create', 'replit', 'same', 'solar', 'databutton']}
     />
+    <TestimonialNew
+      className="mt-[200px] xl:mt-[192px] lg:mt-[158px] md:mt-[104px]"
+      figureClassName="lg:max-w-[704px]"
+      quoteClassName="text-pretty lg:text-wrap"
+      quote="Neon’s speed of provisioning and serverless scale-to-zero is critical for us. We can serve users iterating on quick ideas efficiently while also supporting them as they scale, without making them think about database setup."
+      author={{
+        name: 'Dhruv Amin',
+        position: 'Co-founder at Create.xyz',
+        avatar: authorDhruvAmin,
+      }}
+      company={{
+        src: createIcon,
+        width: 136,
+      }}
+    />
+    <FeaturesCards />
     <Usage />
     <PgVector />
     <TestimonialNew
