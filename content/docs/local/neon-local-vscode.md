@@ -2,6 +2,7 @@
 title: Neon Local Connect for VS Code
 enableTableOfContents: true
 subtitle: Develop with Neon in VS Code using Neon Local
+updatedOn: '2025-07-16T16:34:45.288Z'
 ---
 
 The Neon Local VS Code Extension lets you connect to any Neon branch using a familiar localhost connection string. Neon Local handles the routing, authentication, and branch management behind the scenes. Your app connects to `localhost:5432` like a local Postgres instance, but Neon Local routes traffic to your actual Neon branch in the cloud.
