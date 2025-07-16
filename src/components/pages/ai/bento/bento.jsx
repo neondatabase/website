@@ -84,6 +84,7 @@ const Bento = () => (
                 width={[0, 3].includes(index) ? 544 : 396}
                 height={384}
                 quality={100}
+                priority
               />
               <Image
                 className="relative hidden h-full w-auto lg:block md:hidden md:h-auto md:w-full"
@@ -92,6 +93,7 @@ const Bento = () => (
                 width={[0, 3].includes(index) ? 414 : 274}
                 height={384}
                 quality={100}
+                priority
               />
               <GradientBorder withBlend />
             </div>
