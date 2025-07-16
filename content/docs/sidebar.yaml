@@ -1124,6 +1124,13 @@
     - title: Neon Local
       icon: container
       slug: local/neon-local
+      items:
+        - title: Neon Local
+          icon: container
+          slug: local/neon-local
+        - title: VS Code Extension
+          icon: extension
+          slug: local/neon-local-vscode
 - section: Postgres
   items:
     - title: PostgreSQL Tutorial
