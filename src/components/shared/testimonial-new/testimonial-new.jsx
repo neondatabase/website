@@ -25,6 +25,7 @@ CompanyLogo.propTypes = {
 
 const TestimonialNew = ({
   className = '',
+  figureClassName = '',
   quoteClassName = '',
   quote,
   author,
@@ -52,7 +53,7 @@ const TestimonialNew = ({
           />
         </div>
       )}
-      <figure className="max-w-[840px] lg:max-w-[620px]">
+      <figure className={clsx('max-w-[840px] lg:max-w-[620px]', figureClassName)}>
         <blockquote className="text-center">
           <p
             className={clsx(
@@ -95,6 +96,7 @@ const TestimonialNew = ({
 
 TestimonialNew.propTypes = {
   className: PropTypes.string,
+  figureClassName: PropTypes.string,
   quoteClassName: PropTypes.string,
   quote: PropTypes.string.isRequired,
   author: PropTypes.shape({

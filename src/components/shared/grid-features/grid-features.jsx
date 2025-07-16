@@ -52,68 +52,75 @@ const GridFeatures = ({
   link,
   linkText,
   items = ITEMS,
-  className,
+  className = 'mt-[202px] xl:mt-[162px] lg:mt-[136px] md:mt-[96px]',
   containerClassName,
   containerSize = '1152',
+  titleClassName,
+  descriptionClassName,
   ulClassName,
   headerClassName,
   logosTitle = 'Powered by Neon.',
   logos,
 }) => (
-  <section
-    className={clsx(
-      'grid-features safe-paddings pt-[202px] xl:pt-[162px] lg:pt-[136px] md:pt-[96px]',
-      className
-    )}
-  >
+  <section className={clsx('grid-features safe-paddings', className)}>
     <Container className={clsx('md:px-5 sm:!max-w-sm', containerClassName)} size={containerSize}>
       <header
         className={clsx(
-          'mx-auto flex max-w-[768px] flex-col items-center text-center lg:max-w-[560px] md:max-w-[500px]',
+          'mx-auto flex max-w-3xl flex-col items-center text-center md:max-w-[500px]',
           headerClassName
         )}
       >
-        <h2 className="font-title text-5xl font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:text-balance md:text-[32px]">
+        <h2
+          className={clsx(
+            'font-title text-5xl font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:text-[32px]',
+            titleClassName
+          )}
+        >
           {title}
         </h2>
-        <p className="mt-4 text-lg leading-snug tracking-extra-tight text-gray-new-70 lg:max-w-[480px] lg:text-base">
+        <p
+          className={clsx(
+            'mt-4 text-lg leading-snug tracking-extra-tight text-gray-new-70 lg:text-base md:mt-3',
+            descriptionClassName
+          )}
+        >
           {description}
         </p>
         {link && (
-          <Link className="mt-5" href={link} size="sm" withArrow>
+          <Link className="mt-5 lg:mt-4" href={link} size="sm" withArrow>
             {linkText}
           </Link>
         )}
       </header>
       <ul
         className={clsx(
-          'mt-[51px] grid grid-cols-3 gap-x-11 gap-y-10 xl:mx-auto xl:max-w-[832px] lg:mx-16 lg:mt-12 lg:grid-cols-2 lg:gap-x-16 lg:gap-y-10 md:mx-0 sm:grid-cols-1',
+          'mt-[51px] grid grid-cols-3 gap-x-11 gap-y-10 xl:mx-auto xl:mt-[54px] xl:max-w-3xl xl:grid-cols-2 lg:mt-[42px] lg:grid-cols-2 lg:gap-x-12 lg:gap-y-10 md:mx-0 md:gap-y-12 sm:grid-cols-1',
           ulClassName
         )}
       >
         {items.map(({ title, description, icon }) => (
           <li key={title}>
             <Image
-              className="relative mb-3"
+              className="relative mb-2.5 md:mb-[18px]"
               src={icon}
               alt=""
               width={22}
               height={22}
               quality={100}
             />
-            <h3 className="text-xl font-semibold leading-dense tracking-extra-tight lg:text-lg lg:tracking-tighter">
+            <h3 className="text-xl font-semibold leading-snug tracking-extra-tight lg:text-lg">
               {title}
             </h3>
             <p
-              className="mt-2 text-pretty tracking-extra-tight text-gray-new-70"
+              className="mt-2 text-pretty leading-snug tracking-extra-tight text-gray-new-70"
               dangerouslySetInnerHTML={{ __html: description }}
             />
           </li>
         ))}
       </ul>
       {logos && (
-        <div className="mx-auto mt-[84px] flex max-w-3xl items-center gap-10 lg:mt-[88px] md:mt-14 md:flex-col md:gap-8">
-          <p className="w-[206px] text-lg font-medium leading-none tracking-extra-tight text-gray-new-70 md:max-w-full md:text-center md:text-sm">
+        <div className="mx-auto mt-[90px] flex max-w-3xl items-center gap-10 xl:mt-[82px] lg:mt-20 md:mt-[66px] md:flex-col md:gap-6">
+          <p className="w-[206px] text-lg font-medium leading-none tracking-extra-tight text-gray-new-70 lg:text-base md:max-w-full md:text-center">
             {logosTitle}
           </p>
           <LogosWall logos={logos} size="sm" gap="gap-9" />
@@ -138,6 +145,8 @@ GridFeatures.propTypes = {
   ),
   containerClassName: PropTypes.string,
   containerSize: PropTypes.string,
+  titleClassName: PropTypes.string,
+  descriptionClassName: PropTypes.string,
   ulClassName: PropTypes.string,
   headerClassName: PropTypes.string,
   logosTitle: PropTypes.string,

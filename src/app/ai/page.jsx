@@ -66,8 +66,9 @@ const AiPage = () => (
     <Hero />
     <Bento />
     <TestimonialNew
-      className="mt-[200px] xl:mt-[176px] lg:mt-[152px] md:mt-[104px]"
-      quoteClassName="text-pretty"
+      className="mt-[200px] xl:mt-[192px] lg:mt-[158px] md:mt-[104px]"
+      figureClassName="lg:max-w-[704px]"
+      quoteClassName="text-pretty md:text-wrap"
       quote="The combination of flexible resource limits and nearly instant database provisioning made Neon a no&#8209;brainer."
       author={{
         name: 'Dhruv Amin',
@@ -80,12 +81,13 @@ const AiPage = () => (
       }}
     />
     <GridFeatures
+      className="mt-[202px] xl:mt-[194px] lg:mt-[160px] md:mt-[92px]"
       title="Add Postgres to your agent"
+      titleClassName="md:text-pretty"
       description="Neon is purpose-built to support AI agents at the infrastructure level, with native, API-first Postgres that doesn’t require end-user signups or manual provisioning."
       items={PG_AGENT_FEATURES_ITEMS}
       link={LINKS.useCasesAI}
       linkText="Read more"
-      className="pt-[202px]"
       logos={['create', 'replit', 'same', 'solar', 'databutton']}
     />
     <Usage />
