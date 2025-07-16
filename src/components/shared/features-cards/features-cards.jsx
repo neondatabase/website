@@ -32,8 +32,10 @@ const FeaturesCards = ({
   description = 'Your AI tools can now do more than write queries: they can manage your database too.',
   items = ITEMS,
   className,
+  headerClassName,
   titleClassName,
   descriptionClassName,
+  ulClassName,
 }) => (
   <section
     className={clsx(
@@ -42,7 +44,12 @@ const FeaturesCards = ({
     )}
   >
     <Container className="relative z-10" size="960">
-      <header className="mx-auto flex max-w-3xl flex-col items-center text-center md:max-w-[500px]">
+      <header
+        className={clsx(
+          'mx-auto flex max-w-3xl flex-col items-center text-center md:max-w-[500px]',
+          headerClassName
+        )}
+      >
         <h2
           className={clsx(
             'font-title text-5xl font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:text-[32px]',
@@ -60,7 +67,12 @@ const FeaturesCards = ({
           {description}
         </p>
       </header>
-      <ul className="mt-11 grid grid-cols-2 gap-5 lg:mt-10 md:grid-cols-1 md:gap-4">
+      <ul
+        className={clsx(
+          'mt-11 grid grid-cols-2 gap-5 lg:mt-10 md:grid-cols-1 md:gap-4',
+          ulClassName
+        )}
+      >
         {items.map(({ title, description, link, linkText, icon }) => (
           <li className="relative flex size-full flex-col justify-between gap-12 rounded-lg bg-security-card-bg p-6 xl:gap-[55px] lg:gap-8 lg:p-5 md:min-h-[262px]">
             <div className="relative flex size-12 items-center justify-center rounded-full bg-security-slide-icon-bg lg:size-11">
@@ -114,9 +126,11 @@ FeaturesCards.propTypes = {
       linkText: PropTypes.string.isRequired,
     })
   ),
+  className: PropTypes.string,
+  headerClassName: PropTypes.string,
   titleClassName: PropTypes.string,
   descriptionClassName: PropTypes.string,
-  className: PropTypes.string,
+  ulClassName: PropTypes.string,
 };
 
 export default FeaturesCards;
