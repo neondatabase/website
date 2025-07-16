@@ -9,7 +9,7 @@ The Neon Local VS Code Extension lets you connect to any Neon branch using a fam
 You can use this connection string in your app:
 
 ```env
-DATABASE_URL="postgres://neon:npg@localhost:5432/neondb"
+DATABASE_URL="postgres://neon:npg@localhost:5432/<database_name>"
 ```
 
 Switch branches, and your app keeps using the same connection string.
@@ -31,13 +31,13 @@ Learn more about [branching in Neon](/docs/guides/branching-intro) and [Neon Loc
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed and running
 - [VS Code 1.85.0+](https://code.visualstudio.com/)
-- A [Neon account](https://neon.tech) and [API key](/docs/manage/api-keys)
+- A [Neon account](https://neon.tech) and [API key](/docs/manage/api-keys) (for ephemeral branches only; you can also create new keys from the extension)
 
 <Steps>
 
 ## Install the VS Code extension
 
-- Open the [Neon Local Connect extension page](https://marketplace.visualstudio.com/items?itemName=neondatabase-labs.neon-local-connect) in the VS Code Marketplace.
+- Open the [Neon Local Connect extension page](https://marketplace.visualstudio.com/items?itemName=databricks.neon-local-connect) in the VS Code Marketplace.
 - Click **Install**.
 
 ## Sign in to Neon
@@ -91,7 +91,7 @@ After connecting, find your local connection string in the extension panel. Copy
 ![Local connection details](/docs/local/connection_string.png)
 
 ```env
-DATABASE_URL="postgres://neon:npg@localhost:5432/neondb"
+DATABASE_URL="postgres://neon:npg@localhost:5432/<database_name>"
 ```
 
 Your app connects to `localhost:5432`, but Neon Local routes the traffic to your actual Neon branch in the cloud.
@@ -119,11 +119,8 @@ _All commands below are available under the “Neon Local Connect:” prefix in 
 | **Launch PSQL**           | Open a psql shell in your integrated terminal for direct SQL access.                 |
 | **Open SQL Editor**       | Launch the Neon SQL Editor in your browser for advanced queries and data inspection. |
 | **Open Table View**       | Browse your database schema and data in the Neon Console.                            |
-| **Show Panel**            | Open the main Neon Local Connect panel in VS Code.                                   |
-| **Stop Proxy**            | Stop the local proxy connection.                                                     |
-| **Trigger Sign In**       | Start the Neon sign-in flow.                                                         |
+| **Disconnect**            | Stop the local proxy connection.                                                     |
 | **Clear Authentication**  | Remove stored authentication tokens.                                                 |
-| **Focus on Connect View** | Focus the Connect view in the sidebar.                                               |
 
 ## Panel actions
 
