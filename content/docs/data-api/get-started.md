@@ -186,4 +186,3 @@ To see a complete, working example of an application built with the Data API, Ne
 ## What's Next?
 
 - Faster cold starts (we're working on it)
-
