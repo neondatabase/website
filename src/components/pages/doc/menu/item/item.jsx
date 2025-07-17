@@ -25,8 +25,8 @@ const Item = ({
   activeMenuList,
   setActiveMenuList,
   closeMobileMenu = null,
-  setMenuHeight,
-  menuWrapperRef,
+  setMenuHeight = null,
+  menuWrapperRef = null,
   collapsible = false,
   onCollapse = null,
 }) => {
@@ -116,7 +116,7 @@ const Item = ({
                     menuWrapperRef={menuWrapperRef}
                     onCollapse={onCollapse}
                   >
-                    {item.items && !item.collapsible && (
+                    {item.items && (
                       <Menu
                         depth={depth + 1}
                         title={item.title}
@@ -142,9 +142,9 @@ const Item = ({
             depth={depth + 1}
             title={title}
             slug={slug}
+            basePath={basePath}
             icon={icon}
             items={items}
-            basePath={basePath}
             parentMenu={{ title, slug }}
             setMenuHeight={setMenuHeight}
             menuWrapperRef={menuWrapperRef}

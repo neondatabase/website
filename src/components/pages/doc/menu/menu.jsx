@@ -8,6 +8,7 @@ import { DOCS_BASE_PATH } from 'constants/docs';
 import Chevron from 'icons/chevron-right-lg.inline.svg';
 import ArrowBackIcon from 'icons/docs/sidebar/arrow-back.inline.svg';
 
+// eslint-disable-next-line import/no-cycle
 import Item from './item';
 
 const sectionTitleClassName =
@@ -15,8 +16,6 @@ const sectionTitleClassName =
 
 const Section = ({
   depth,
-  title,
-  slug,
   section,
   collapsible,
   items,
@@ -69,31 +68,17 @@ const Section = ({
             <ul className={collapsible && 'mt-1'}>
               {items.map((item, index) => (
                 <Item
-                  {...item}
                   key={index}
+                  {...item}
+                  depth={depth}
                   basePath={basePath}
                   activeMenuList={activeMenuList}
                   setActiveMenuList={setActiveMenuList}
                   closeMobileMenu={closeMobileMenu}
+                  setMenuHeight={setMenuHeight}
+                  menuWrapperRef={menuWrapperRef}
                   onCollapse={onCollapse}
-                >
-                  {item.items && (
-                    <Menu
-                      depth={depth + 1}
-                      title={item.title}
-                      slug={item.slug}
-                      basePath={basePath}
-                      icon={item.icon}
-                      items={item.items}
-                      parentMenu={{ title, slug }}
-                      setMenuHeight={setMenuHeight}
-                      menuWrapperRef={menuWrapperRef}
-                      activeMenuList={activeMenuList}
-                      setActiveMenuList={setActiveMenuList}
-                      closeMobileMenu={closeMobileMenu}
-                    />
-                  )}
-                </Item>
+                />
               ))}
             </ul>
           </m.div>
@@ -105,8 +90,6 @@ const Section = ({
 
 Section.propTypes = {
   depth: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  slug: PropTypes.string,
   basePath: PropTypes.string.isRequired,
   section: PropTypes.string,
   collapsible: PropTypes.bool,
@@ -145,8 +128,7 @@ const Menu = ({
   const BackLinkTag = slug ? Link : 'button';
 
   const isActive = isRootMenu || activeMenuList.some((item) => item.title === title);
-  const isLastActive =
-    activeMenuList[lastDepth]?.title === title || (isRootMenu && lastDepth === 0);
+  const isCurrent = activeMenuList[lastDepth]?.title === title || (isRootMenu && lastDepth === 0);
 
   const updateMenuHeight = () => {
     setMenuHeight(2000);
@@ -157,11 +139,11 @@ const Menu = ({
 
   // update menu height and scroll menu to top
   useEffect(() => {
-    if (isLastActive && setMenuHeight && menuRef?.current && menuWrapperRef?.current) {
-      setMenuHeight(menuRef.current.scrollHeight);
-      menuWrapperRef.current?.scrollTo(0, 0);
+    if (isCurrent) {
+      setMenuHeight && menuRef?.current && setMenuHeight(menuRef.current.scrollHeight);
+      menuWrapperRef?.current && menuWrapperRef.current?.scrollTo(0, 0);
     }
-  }, [isLastActive, setMenuHeight, menuWrapperRef, depth, isActive, title]);
+  }, [isCurrent, setMenuHeight, menuWrapperRef, depth, isActive, title]);
 
   if (!isRootMenu && !isActive) return null;
 
@@ -202,8 +184,6 @@ const Menu = ({
               key={index}
               depth={depth}
               {...item}
-              title={title}
-              slug={slug}
               basePath={basePath}
               closeMobileMenu={closeMobileMenu}
               setMenuHeight={setMenuHeight}
