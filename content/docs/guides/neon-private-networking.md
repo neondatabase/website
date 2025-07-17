@@ -638,7 +638,7 @@ To configure Neon Private Networking, perform the following steps:
     ```terraform
     # Note: The neon_project resource does not support blocking public connections directly.
     # Use the Neon CLI or API to block public connections, then use VPC endpoint restrictions.
-    
+
     # Use VPC endpoint restriction for granular access control
     resource "neon_vpc_endpoint_restriction" "project_to_vpc" {
       project_id      = "orange-credit-12345678"  # Your Neon project ID
