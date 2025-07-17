@@ -157,11 +157,11 @@ const Menu = ({
 
   // update menu height and scroll menu to top
   useEffect(() => {
-    if (isLastActive && menuRef.current && menuRef.current.scrollHeight > 0 && setMenuHeight) {
+    if (isLastActive && setMenuHeight && menuRef?.current && menuWrapperRef?.current) {
       setMenuHeight(menuRef.current.scrollHeight);
       menuWrapperRef.current?.scrollTo(0, 0);
     }
-  }, [isLastActive, setMenuHeight, menuWrapperRef]);
+  }, [isLastActive, setMenuHeight, menuWrapperRef, depth, isActive, title]);
 
   if (!isRootMenu && !isActive) return null;
 
@@ -216,29 +216,15 @@ const Menu = ({
             <Item
               key={index}
               {...item}
+              depth={depth}
               basePath={basePath}
               activeMenuList={activeMenuList}
               setActiveMenuList={setActiveMenuList}
               closeMobileMenu={closeMobileMenu}
+              setMenuHeight={setMenuHeight}
+              menuWrapperRef={menuWrapperRef}
               onCollapse={updateMenuHeight}
-            >
-              {item.items && (
-                <Menu
-                  depth={depth + 1}
-                  title={item.title}
-                  slug={item.slug}
-                  icon={item.icon}
-                  items={item.items}
-                  basePath={basePath}
-                  parentMenu={{ title, slug }}
-                  setMenuHeight={setMenuHeight}
-                  menuWrapperRef={menuWrapperRef}
-                  activeMenuList={activeMenuList}
-                  setActiveMenuList={setActiveMenuList}
-                  closeMobileMenu={closeMobileMenu}
-                />
-              )}
-            </Item>
+            />
           )
         )}
       </ul>
