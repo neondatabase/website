@@ -28,11 +28,13 @@ To create a branch:
 4. Specify a branch name.
 5. Select a **branch setup** option. If you're interested in schema-only branches, see [Schema-only branches](/docs/guides/branching-schema-only).
 
-<Admonition type="note">
-When creating a branch with past data, you can only specify a date and time that falls within your [restore window](/docs/manage/projects#configure-restore-window).
-</Admonition>
+    <Admonition type="note">
+    When creating a branch with past data, you can only specify a date and time that falls within your [restore window](/docs/manage/projects#configure-restore-window).
+    </Admonition>
 
-6. Click **Create new branch**.
+1. Click **Create new branch**.
+2. Optionally set an **Auto delete after** expiration date and time for temporary branches. This automatically deletes the branch at the specified time, useful for CI/CD pipelines and short-lived development environments. Refer to our [Branch expiration guide](/docs/guides/expired-branches) for details.
+3.  Click **Create new branch**.
 
    You are presented with the connection details for your new branch and directed to the **Branch** overview page where you are shown the details for your new branch.
 
@@ -79,7 +81,7 @@ To view the branches in a Neon project:
 On the Free Plan, Neon automatically archives inactive branches to cost-efficient archive storage after a defined threshold. For more, see [Branch archiving](/docs/guides/branch-archiving).
 
 <Admonition type="note">
-For branches with predictable lifespans, [TTL branches](/docs/guides/ttl-branches) offer an alternative to archiving. Instead of waiting for inactive branches to be archived, you can set automatic deletion timestamps when creating branches, ensuring cleanup happens exactly when needed.
+For branches with predictable lifespans, you can set an expiration date when creating branches to automatically delete them at a specified time. This offers an alternative to archiving for temporary development and testing environments, ensuring cleanup happens exactly when needed.
 </Admonition>
 
 ## Rename a branch
@@ -117,6 +119,19 @@ To set a branch as protected:
 5. In the **Set as protected** confirmation dialog, click **Set as protected** to confirm your selection.
 
 For details and configuration instructions, refer to our [Protected branches guide](/docs/guides/protected-branches).
+
+## Set branch expiration
+
+To set or update a branch's expiration:
+
+1. In the Neon Console, select a project.
+2. Select **Branches** to view the branches for the project.
+3. Select a branch from the table.
+4. On the branch overview page, click the **Actions** drop-down menu and select **Edit expiration**.
+5. Set a new expiration date and time, or toggle off "Auto delete after" to remove expiration.
+6. Click **Save**.
+
+For details and configuration instructions, refer to our [Branch expiration guide](/docs/guides/expired-branches).
 
 ## Connect to a branch
 
@@ -171,7 +186,7 @@ To delete a branch:
 5. On the confirmation dialog, click **Delete**.
 
 <Admonition type="tip">
-Consider using [TTL branches](/docs/guides/ttl-branches) for temporary branches to automate cleanup and reduce manual deletion overhead.
+For temporary branches, consider setting an expiration date when creating them to automate cleanup and reduce manual deletion overhead.
 </Admonition>
 
 ## Check the data size
@@ -248,9 +263,9 @@ See [Schema-only branches](/docs/guides/branching-schema-only).
 
 A branch created by an [instant restore](#branch-restore) operation. When you restore a branch from a particular point in time, the current branch is saved as a backup branch. Performing a restore operation on a root branch, creates a backup branch without a parent branch (a root branch). See [Instant restore](/docs/guides/branch-restore).
 
-### TTL branch
+### Branch with expiration
 
-A [TTL (time-to-live) branch](/docs/guides/ttl-branches) is a standard branch with an expiration timestamp that triggers automatic deletion. Any branch can be converted to or from a TTL branch by adding or removing the expiration timestamp. This feature is particularly useful for temporary development and testing environments.
+A branch with an expiration timestamp is automatically deleted when the expiration time is reached. Any branch can have an expiration timestamp added or removed at any time. This feature is particularly useful for temporary development and testing environments.
 
 ## Branching with the Neon CLI
 

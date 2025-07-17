@@ -131,16 +131,32 @@ You do not need to specify the variable name explicitly when using a Neon CLI co
 
 This API key configuration ensures that the API key is kept secure while still providing a way to authenticate your CLI commands. Remember, you should handle your API key with the same level of security as your other credentials.
 
-## TTL branch automation
+## Branch expiration
 
 For temporary development and testing environments, you can create branches with automatic expiration using the `--expires-at` flag. This eliminates the need for manual cleanup of short-lived branches.
 
 ```bash
 # Create a branch that expires at a specific date and time
 neon branches create --project-id <project-id> --name ci-test --parent <parent-branch> --expires-at "2025-07-15T18:02:16Z"
+
+# Create a branch that expires in 2 hours (Linux/GNU)
+neon branches create --project-id <project-id> --name ci-test --parent <parent-branch> --expires-at "$(date -u -d '+2 hours' +%Y-%m-%dT%H:%M:%SZ)"
+
+# Create a branch that expires in 2 hours (macOS/BSD)
+neon branches create --project-id <project-id> --name ci-test --parent <parent-branch> --expires-at "$(date -u -v+2H +%Y-%m-%dT%H:%M:%SZ)"
 ```
 
-For more information about TTL branches, see [TTL branches](/docs/guides/ttl-branches).
+You can also update or remove expiration from existing branches:
+
+```bash
+# Update expiration to a new timestamp
+neon branches set-expires-at <branch-id> "2025-07-20T12:00:00Z" --project-id <project-id>
+
+# Remove expiration from a branch
+neon branches set-expires-at <branch-id> null --project-id <project-id>
+```
+
+For details and configuration instructions, refer to our [Branch expiration guide](/docs/guides/expired-branches).
 
 ## Resetting a branch from its parent
 

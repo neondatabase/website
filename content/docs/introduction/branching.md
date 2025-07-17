@@ -76,9 +76,9 @@ Refer to the following guide for instructions.
 
 ### Temporary environments
 
-For short-lived development and testing environments, you can create branches with automatic expiration using [TTL branches](/docs/guides/ttl-branches). This eliminates manual cleanup overhead and ensures temporary branches are automatically deleted when no longer needed.
+For short-lived development and testing environments, you can create branches with automatic expiration by [setting an expiration date](/docs/guides/expired-branches) when creating the branch. This eliminates manual cleanup overhead and ensures temporary branches are automatically deleted when no longer needed.
 
-TTL branches are particularly useful for:
+Branches with expiration are particularly useful for:
 
 - CI/CD pipeline testing environments
 - Feature development with known lifespans
