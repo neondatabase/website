@@ -398,6 +398,10 @@
               slug: introduction/monitor-active-queries
             - title: Query history
               slug: introduction/monitor-query-history
+        - section: External monitoring
+          items:
+            - title: Metrics and logs reference
+              slug: reference/metrics-logs
             - title: Datadog integration
               slug: guides/datadog
             - title: OpenTelemetry integration
@@ -1120,6 +1124,13 @@
     - title: Neon Local
       icon: container
       slug: local/neon-local
+      items:
+        - title: Neon Local
+          icon: container
+          slug: local/neon-local
+        - title: VS Code Extension
+          icon: extension
+          slug: local/neon-local-vscode
 - section: Postgres
   items:
     - title: PostgreSQL Tutorial
