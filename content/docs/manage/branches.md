@@ -31,13 +31,14 @@ To create a branch:
 6. Select a parent branch — the branch you want to branch from.
 7. Select an **Include data up to** option to specify the data to be included in your branch.
 
-    <Admonition type="note">
-    The **Specific date and time** and the **Specific Log Sequence Number Data** options do not include data changes that occurred after the specified date and time or LSN. You can only specify a date and time or LSN value that falls within your [restore window](/docs/manage/projects#configure-restore-window).
-    </Admonition>
-8. Optionally set an **Auto delete after** expiration date and time for temporary branches. This automatically deletes the branch at the specified time, useful for CI/CD pipelines and short-lived development environments. Refer to our [Branch expiration guide](/docs/guides/expired-branches) for details.
-9.  Click **Create new branch**.
+<Admonition type="note">
+The **Specific date and time** and the **Specific Log Sequence Number Data** options do not include data changes that occurred after the specified date and time or LSN. You can only specify a date and time or LSN value that falls within your [restore window](/docs/manage/projects#configure-restore-window).
+</Admonition>
 
-   You are presented with the connection details for your new branch and directed to the **Branch** overview page where you are shown the details for your new branch.
+8. Optionally set an **Auto delete after** expiration date and time for temporary branches. This automatically deletes the branch at the specified time, useful for CI/CD pipelines and short-lived development environments. Refer to our [Branch expiration guide](/docs/guides/expired-branches) for details.
+9. Click **Create new branch**.
+
+You are presented with the connection details for your new branch and directed to the **Branch** overview page where you are shown the details for your new branch.
 
    <Admonition type="note" title="Postgres role passwords on branches">
    When creating a new branch, the branch will have the same Postgres roles and passwords as the parent branch. If you want your branch created with new role passwords, you can enable [branch protection](/docs/guides/protected-branches).
