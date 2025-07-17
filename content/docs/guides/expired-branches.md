@@ -75,6 +75,7 @@ See the [Examples](#examples) section below for detailed usage of each method.
 The `expires_at` parameter must use [RFC 3339](https://tools.ietf.org/html/rfc3339#section-5.6) format with second-level precision:
 
 **Format patterns:**
+
 ```
 YYYY-MM-DDTHH:MM:SSZ         (UTC)
 YYYY-MM-DDTHH:MM:SS+HH:MM    (Positive UTC offset)
@@ -82,11 +83,13 @@ YYYY-MM-DDTHH:MM:SS-HH:MM    (Negative UTC offset)
 ```
 
 **Valid examples:**
+
 - `2025-07-15T18:02:16Z` (UTC)
 - `2025-07-15T18:02:16-05:00` (Eastern Standard Time)
 - `2025-07-15T18:02:16+09:00` (Japan Standard Time)
 
 **Requirements:**
+
 - Time zone is required (either `Z` or numeric offset, not both)
 - Fractional seconds are optional but only second precision is stored
 - Timestamp must be in the future
@@ -110,7 +113,7 @@ The TTL interval is preserved to ensure consistent behavior when resetting branc
   "branch": {
     "id": "br-feature-67890",
     "expires_at": "2025-07-15T18:02:16Z",
-    "ttl_interval_seconds": 86400,  // 24 hours
+    "ttl_interval_seconds": 86400, // 24 hours
     "created_at": "2025-07-14T18:02:16Z"
   }
 }
