@@ -195,14 +195,14 @@ const Menu = ({
           ) : (
             <Item
               key={index}
-              {...item}
               depth={depth}
+              {...item}
               basePath={basePath}
-              activeMenuList={activeMenuList}
-              setActiveMenuList={setActiveMenuList}
               closeMobileMenu={closeMobileMenu}
               setMenuHeight={setMenuHeight}
               menuWrapperRef={menuWrapperRef}
+              activeMenuList={activeMenuList}
+              setActiveMenuList={setActiveMenuList}
               onCollapse={updateMenuHeight}
             />
           )
