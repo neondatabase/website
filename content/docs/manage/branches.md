@@ -32,11 +32,13 @@ To create a branch:
     When creating a branch with past data, you can only specify a date and time that falls within your [restore window](/docs/manage/projects#configure-restore-window).
     </Admonition>
 
-1. Click **Create new branch**.
-2. Optionally set an **Auto delete after** expiration date and time for temporary branches. This automatically deletes the branch at the specified time, useful for CI/CD pipelines and short-lived development environments. Refer to our [Branch expiration guide](/docs/guides/expired-branches) for details.
-3.  Click **Create new branch**.
+6. Click **Create new branch**.
+7. Optionally set an **Auto delete after** expiration date and time for temporary branches. This automatically deletes the branch at the specified time, useful for CI/CD pipelines and short-lived development environments. Refer to our [Branch expiration guide](/docs/guides/expired-branches) for details.
+8. Click **Create new branch**.
+9. Optionally set an **Auto delete after** expiration date and time for temporary branches. This automatically deletes the branch at the specified time, useful for CI/CD pipelines and short-lived development environments. Refer to our [Branch expiration guide](/docs/guides/expired-branches) for details.
+10. Click **Create new branch**.
 
-   You are presented with the connection details for your new branch and directed to the **Branch** overview page where you are shown the details for your new branch.
+You are presented with the connection details for your new branch and directed to the **Branch** overview page where you are shown the details for your new branch.
 
    <Admonition type="note" title="Postgres role passwords on branches">
    When creating a new branch, the branch will have the same Postgres roles and passwords as the parent branch. If you want your branch created with new role passwords, you can enable [branch protection](/docs/guides/protected-branches).
