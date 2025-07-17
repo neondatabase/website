@@ -210,7 +210,6 @@
             - title: Sample data
               slug: import/import-sample-data
 - section: Platform
-  collapsible: true
   items:
     - title: Architecture
       icon: architecture
@@ -227,11 +226,13 @@
     - title: Features
       slug: guides/neon-features
       icon: features
+      collapsible: true
       items:
         - title: Serverless
           slug: introduction/serverless
         - title: Autoscaling
           slug: introduction/autoscaling
+          collapsible: true
           items:
             - title: Introduction
               slug: introduction/autoscaling
@@ -243,6 +244,7 @@
               slug: guides/autoscaling-algorithm
         - title: Scale to zero
           slug: introduction/scale-to-zero
+          collapsible: true
           items:
             - title: Overview
               slug: introduction/scale-to-zero

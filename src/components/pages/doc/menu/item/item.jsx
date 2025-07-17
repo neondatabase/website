@@ -28,7 +28,9 @@ const Item = ({
 }) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
-  const [isCollapsed, setIsCollapsed] = useState(true);
+
+  const isActiveMenu = items?.some((item) => item.slug === currentSlug);
+  const [isCollapsed, setIsCollapsed] = useState(!isActiveMenu);
 
   const externalSlug = slug?.startsWith('http') ? slug : null;
   const websiteSlug = slug?.startsWith('/') && `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${slug}`;
@@ -47,7 +49,7 @@ const Item = ({
       return;
     }
 
-    if (items?.length && !activeMenuList.some((item) => item.title === title)) {
+    if (items?.length && !collapsible && !activeMenuList.some((item) => item.title === title)) {
       setActiveMenuList((prevList) => [...prevList, { title, slug }]);
     }
     if (slug && closeMobileMenu) closeMobileMenu();
@@ -76,22 +78,22 @@ const Item = ({
           {tag && <Tag className="relative -top-px ml-1 inline-block" label={tag} size="sm" />}
         </span>
         {collapsible && items?.length && (
-          <Chevron className={clsx('ml-auto w-1.5', !isCollapsed && 'rotate-90')} />
+          <Chevron className={clsx('ml-auto w-1.5', !isCollapsed && '-rotate-90')} />
         )}
       </LinkTag>
-      {collapsible && (
+      {collapsible && items?.length ? (
         <LazyMotion features={domAnimation}>
           <m.div
             className="overflow-hidden"
-            initial="collapsed"
+            initial={isActiveMenu ? 'expanded' : 'collapsed'}
             animate={isCollapsed ? 'collapsed' : 'expanded'}
             variants={{
-              collapsed: { opacity: 0, height: 0 },
-              expanded: { opacity: 1, height: 'auto' },
+              collapsed: { opacity: 0, height: 0, translateY: 10 },
+              expanded: { opacity: 1, height: 'auto', translateY: 0 },
             }}
             transition={{ duration: 0.2 }}
           >
-            <ul>
+            <ul className="mb-2 ml-1 border-l border-gray-new-80 pl-3 dark:border-gray-new-20">
               {items.map((item, index) => (
                 <Item
                   {...item}
@@ -105,8 +107,9 @@ const Item = ({
             </ul>
           </m.div>
         </LazyMotion>
+      ) : (
+        children
       )}
-      {children}
     </li>
   );
 };

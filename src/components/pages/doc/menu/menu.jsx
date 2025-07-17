@@ -49,7 +49,7 @@ const Section = ({
             onClick={handleToggle}
           >
             {section}
-            <Chevron className={clsx('w-1.5', !isCollapsed && 'rotate-90')} />
+            <Chevron className={clsx('w-1.5', !isCollapsed && '-rotate-90')} />
           </button>
         ) : (
           <span className={clsx('block', sectionTitleClassName)}>{section}</span>
@@ -61,8 +61,8 @@ const Section = ({
             initial={collapsible ? 'collapsed' : 'expanded'}
             animate={collapsible && isCollapsed ? 'collapsed' : 'expanded'}
             variants={{
-              collapsed: { opacity: 0, height: 0 },
-              expanded: { opacity: 1, height: 'auto' },
+              collapsed: { opacity: 0, height: 0, translateY: 10 },
+              expanded: { opacity: 1, height: 'auto', translateY: 0 },
             }}
             transition={{ duration: 0.2 }}
           >
