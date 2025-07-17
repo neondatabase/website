@@ -8,7 +8,7 @@ import sparks from './images/sparks.png';
 
 const Hero = () => (
   <section className="hero safe-paddings relative mt-[136px] xl:mt-[126px] lg:mt-14 md:mt-12">
-    <Container className="lg:max-w-[640px] md:px-5" size="832">
+    <Container className="lg:!max-w-[640px] md:px-5" size="832">
       <div className="relative mb-10 size-[72px] lg:mb-8 lg:size-16 lg:rounded-[14px] md:mb-7 md:size-14">
         <Image
           className="relative z-10 size-full rounded-2xl shadow-[0px_5px_14px_0px_rgba(0,0,0,0.6)] md:rounded-xl"

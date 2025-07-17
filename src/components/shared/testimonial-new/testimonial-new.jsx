@@ -64,7 +64,7 @@ const TestimonialNew = ({
             {quote}
           </p>
         </blockquote>
-        <figcaption className="mt-5 flex items-center justify-center lg:mt-[18px] md:flex-col">
+        <figcaption className="mt-5 flex h-[30px] items-center justify-center lg:mt-[18px] md:h-auto md:flex-col md:gap-2.5">
           {author ? (
             <>
               {author.avatar && (
@@ -78,9 +78,9 @@ const TestimonialNew = ({
                   priority={isPriority}
                 />
               )}
-              <span className="text-lg font-light leading-tight tracking-extra-tight text-gray-new-70 lg:text-base md:mx-auto md:mt-2 md:text-center md:text-sm">
-                {author.name}
-                <cite className="ml-1.5 not-italic text-gray-new-50 before:mr-1.5 before:inline-flex before:h-px before:w-4 before:bg-gray-new-50 before:align-middle">
+              <span className="text-lg font-light leading-tight tracking-extra-tight text-gray-new-70 lg:text-base md:mx-auto md:flex md:flex-col md:items-center md:gap-1 md:text-center md:text-sm">
+                <span>{author.name}</span>
+                <cite className="ml-1.5 not-italic text-gray-new-50 before:mr-1.5 before:inline-flex before:h-px before:w-4 before:bg-gray-new-50 before:align-middle md:ml-0 md:before:hidden">
                   {author.position}
                 </cite>
               </span>

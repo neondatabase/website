@@ -23,6 +23,7 @@ import vectorSearchOptimization from 'icons/ai/features-grid/vector-seo.svg';
 import createIcon from 'icons/companies/create.svg';
 import replitIcon from 'icons/companies/replit.svg';
 import authorDhruvAmin from 'images/authors/dhruv-amin.jpg';
+import authorMarcoDalia from 'images/authors/marco-dalia.jpg';
 import getMetadata from 'utils/get-metadata';
 
 export const metadata = getMetadata(SEO_DATA.ai);
@@ -113,9 +114,8 @@ const AiPage = () => (
       quoteClassName="text-pretty md:text-wrap"
       quote="The combination of flexible resource limits and nearly instant database provisioning made Neon a no&#8209;brainer."
       author={{
-        name: 'Dhruv Amin',
-        position: 'Co-founder at Create.xyz',
-        avatar: authorDhruvAmin,
+        name: 'Lincoln Bergeson',
+        position: 'Infrastructure Engineer at Replit',
       }}
       company={{
         src: replitIcon,
@@ -123,7 +123,7 @@ const AiPage = () => (
       }}
     />
     <GridFeatures
-      className="mt-[202px] xl:mt-[194px] lg:mt-[160px] md:mt-[92px]"
+      className="mt-[199px] xl:mt-[191px] lg:mt-[153px] md:mt-[107px]"
       title="Add Postgres to your agent"
       titleClassName="md:text-pretty"
       description="Neon is purpose-built to support AI agents at the infrastructure level, with native, API-first Postgres that doesn’t require end-user signups or manual provisioning."
@@ -157,11 +157,11 @@ const AiPage = () => (
       author={{
         name: 'Marco D’Alia',
         position: 'Software Architect behind RagRabbit',
-        avatar: authorDhruvAmin,
+        avatar: authorMarcoDalia,
       }}
     />
     <GridFeatures
-      className="mt-[200px] xl:mt-[194px] lg:mt-[160px] md:mt-[74px]"
+      className="mt-[200px] xl:mt-[194px] lg:mt-[160px] md:mt-[104px]"
       title="Neon's AI Starter Kit"
       titleClassName="md:text-pretty"
       description="Neon's AI Starter Kit offers resources, apps, and examples to kickstart Neon as your vector database."
@@ -171,7 +171,7 @@ const AiPage = () => (
       linkText="Learn more"
     />
     <CTA
-      className="pb-[298px] pt-[296px] xl:pb-[252px] xl:pt-[349px] lg:pb-[183px] lg:pt-[150px] md:pb-[150px] md:pt-[168px]"
+      className="pb-[298px] pt-[296px] xl:pb-[252px] xl:pt-[246px] lg:pb-[183px] lg:pt-[163px] md:pb-[150px] md:pt-[168px]"
       title="The Postgres of tomorrow, available today"
       titleClassName="max-w-[760px] leading-none xl:max-w-[640px] lg:max-w-[550px] md:max-w-[320px] xl:text-[56px] xl:!tracking-[-0.03em] lg:text-[48px] md:text-pretty md:text-[40px]"
       buttonText="Book a meeting with our team"
