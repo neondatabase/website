@@ -26,6 +26,8 @@ The Neon Data API, powered by [PostgREST](https://docs.postgrest.org/en/v13/), o
 const { data } = await client.from('playing_with_neon').select('*').gte('value', 0.5);
 ```
 
+> When using the Data API, it is essential to set up RLS policies so that you can safely expose your databases to clients such as web apps. Make sure that _all_ of your tables have RLS policies, and that you have carefully reviewed each policy.
+
 <Steps>
 ## Enabling the Data API
 
@@ -53,6 +55,8 @@ The security model consists of two parts:
 
 Neon Auth manages user authentication, generating JWT tokens for secure API requests.
 
+**What you need to do**:
+
 - Add Neon Auth keys to your app's environment variables.
 - Include JWT tokens in Data API requests.
 - **Recommended**: Use the Neon Auth SDK for user sign-in/sign-up.
@@ -63,25 +67,6 @@ Neon Auth manages user authentication, generating JWT tokens for secure API requ
 
 RLS controls row access in tables. **Neon does not auto-enable RLS**; enable it manually per table.
 
-See [secure your tables with RLS](#secure-your-tables-with-rls) below.
-
-### Third-party auth
-
-You can also bring your own **JWKS** from a third-party provider (like Clerk, Keycloak, Auth0, or Better Auth), adding more auth flexibility. Just include `jwks_url` (and optionally `jwks_audience`) in your request:
-
-```bash shouldWrap
-curl --location 'https://console.neon.tech/api/v2/projects/<project_id>/branches/<branch_id>/data-api' \
-  --header 'Content-Type: application/json' \
-  --header 'Authorization: Bearer <token>' \
-  --data '{
-       "jwks_url": "https://url.to.your/.well-known/jwks.json"
-  }'
-```
-
-## Secure your tables with RLS
-
-Before using the Data API in production, you must enable Row-Level Security (RLS) on your tables and create policies.
-
 ```sql
 -- Enable RLS on your table
 ALTER TABLE your_table ENABLE ROW LEVEL SECURITY;
@@ -91,36 +76,103 @@ CREATE POLICY "user_can_access_own_data" ON your_table
   FOR ALL USING (auth.user_id() = user_id);
 ```
 
-> **Important:** If you don't enable RLS, your tables will be publicly accessible via the Data API.
+We recommend using [Drizzle](/docs/guides/neon-rls-drizzle) to help simplify writing RLS policies.
 
-For a detailed guide, see our [PostgREST tutorial](/docs/guides/postgrest#use-row-level-security-rls). We also recommend using [Drizzle](/docs/guides/neon-rls-drizzle) to help simplify writing RLS policies.
 
 ## Using the Data API
 
-By default, all tables in your database are accessible via the API with SELECT permissions granted to unauthenticated requests. However, **we strongly recommend enabling RLS** for production use.
+By default, all tables in your database are accessible via the API with `SELECT` permissions granted to **unauthenticated requests**. This lets you directly interact with the API without requiring additional authorization headers.
 
-Here's how to make authenticated requests:
+> **Warning:** This means your data is **publicly accessbile** until you enable Row-Level Security (RLS). Again, enable RLS on _all_ your tables before using the Data API in production. 
 
-### Using postgrest-js
-```javascript
+
+### Example of creating a table and querying it via the Data API
+
+First, create a table and enable RLS (as shown in [Secure your tables with RLS](#secure-your-tables-with-rls) above):
+
+```sql shouldWrap
+CREATE TABLE IF NOT EXISTS playing_with_neon(
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  value REAL
+);
+
+-- Enable RLS and create policy (see section 3 for details)
+ALTER TABLE playing_with_neon ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "user_can_access_own_data" ON playing_with_neon
+FOR ALL USING (auth.user_id() = user_id);
+
+INSERT INTO playing_with_neon(name, value)
+  SELECT LEFT(md5(i::TEXT), 10), random()
+  FROM generate_series(1, 10) s(i);
+
+SELECT * FROM playing_with_neon;
+```
+
+
+#### Querying with Curl
+
+
+- **Without JWT (unauthenticated request):**
+
+  ```bash shouldWrap
+  curl --location --request GET 'https://app-restless-salad-23184734.dpl.myneon.app/playing_with_neon'
+  --header 'Accept: application/json'
+  ```
+
+   **Response:**
+
+   ```json should wrap
+   []
+   ```
+   *No data returned because RLS denies access without authentication.*
+
+- **With JWT (authenticated request):**
+
+  ```bash shouldWrap
+  curl --location --request GET 'https://app-restless-salad-23184734.dpl.myneon.app/playing_with_neon'
+  --header 'Accept: application/json'
+  --header 'Authorization: Bearer <jwt>'
+  ```
+
+   **Response:**
+
+  ```json
+  HTTP/1.1 200 OK
+  Content-Type: application/json
+
+  [
+    {
+      "id": 1,
+      "name": "c4ca4238a0",
+      "value": 0.36675808
+    },
+    ... (shortened)
+    {
+      "id": 10,
+      "name": "6512bd43d9",
+      "value": 0.72407603
+    }
+  ]
+  ```
+
+   *You get expected data since the token is included in the request.*
+
+
+As the Data API is built on **PostgREST**, it follows PostgREST query and data manipulation formats. You can use also wrapper libraries like [postgrest-js](https://github.com/supabase/postgrest-js) for a more ORM-like interface.
+
+```javascript shouldWrap
 import { PostgrestClient } from '@supabase/postgrest-js';
 
-const client = new PostgrestClient('YOUR_DATA_API_URL');
-
-// Include JWT token for authenticated requests
-client.auth(userToken);
+// https://github.com/supabase/postgrest-js/blob/master/src/PostgrestClient.ts#L41
+const client = new PostgrestClient('https://app-restless-salad-23184734.dpl.myneon.app', {
+  Authorization: 'Bearer <jwt>',
+});
 
 const { data } = await client.from('playing_with_neon').select('*').gte('value', 0.5);
-```
 
-### Using curl
-```bash
-curl --location --request GET 'YOUR_DATA_API_URL/playing_with_neon' \
-     --header 'Accept: application/json' \
-     --header 'Authorization: Bearer <jwt>'
+console.table(data);
 ```
-
-**Note:** The Data API is built on PostgREST, so you can use any PostgREST client library.
 
 ## Try the demo app
 
