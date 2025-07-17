@@ -442,6 +442,7 @@ To configure Neon Private Networking, perform the following steps:
       org_id          = "org-bold-bonus-12345678"
       region_id       = "aws-${var.aws_region}"
       vpc_endpoint_id = aws_vpc_endpoint.neon[0].id
+      label           = "primary-vpc-endpoint"
     }
 
     # For multi-service regions, add both endpoints
@@ -451,6 +452,7 @@ To configure Neon Private Networking, perform the following steps:
       org_id          = "org-bold-bonus-12345678"
       region_id       = "aws-${var.aws_region}"
       vpc_endpoint_id = aws_vpc_endpoint.neon_primary[0].id
+      label           = "primary-vpc-endpoint"
     }
 
     resource "neon_vpc_endpoint_assignment" "org_vpc_endpoint_secondary" {
@@ -459,6 +461,7 @@ To configure Neon Private Networking, perform the following steps:
       org_id          = "org-bold-bonus-12345678"
       region_id       = "aws-${var.aws_region}"
       vpc_endpoint_id = aws_vpc_endpoint.neon_secondary[0].id
+      label           = "secondary-vpc-endpoint"
     }
     ```
 
@@ -633,22 +636,14 @@ To configure Neon Private Networking, perform the following steps:
     Restrict public internet access using Terraform by updating your Neon project configuration:
 
     ```terraform
-    # Update existing project to block public connections
-    resource "neon_project" "my_app_project" {
-      name       = "my-application-project"
-      pg_version = 16
-      region_id  = "aws-us-east-2"
-
-      # Block public internet access
-      settings {
-        block_public_connections = true
-      }
-    }
-
-    # Alternative: Use VPC endpoint restriction for more granular control
+    # Note: The neon_project resource does not support blocking public connections directly.
+    # Use the Neon CLI or API to block public connections, then use VPC endpoint restrictions.
+    
+    # Use VPC endpoint restriction for granular access control
     resource "neon_vpc_endpoint_restriction" "project_to_vpc" {
-      project_id      = neon_project.my_app_project.id
-      vpc_endpoint_id = neon_vpc_endpoint_assignment.org_vpc_endpoint_primary[0].vpc_endpoint_id
+      project_id      = "orange-credit-12345678"  # Your Neon project ID
+      vpc_endpoint_id = "vpce-1234567890abcdef0"  # Your VPC endpoint ID
+      label           = "vpc-restriction"
     }
     ```
 
