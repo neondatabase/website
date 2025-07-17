@@ -20,7 +20,7 @@ tag: beta
   </DocsList>
 </InfoBlock>
 
-The Neon Data API is a ready-to-use REST API for your Neon database, powered by [PostgREST](https://docs.postgrest.org/en/v13/), a trusted project in the PostgreSQL community. It lets you work with every table, view, or function in a database's schema using standard HTTP verbs (`GET`, `POST`, `PATCH`, `DELETE`). Even better, you can use a handy SDK like [`postgrest-js`](https://github.com/supabase/postgrest-js), [`postgrest-py`](https://github.com/supabase-community/postgrest-py), or [`postgrest-go`](https://github.com/supabase-community/postgrest-go) to run queries from your client:
+The Neon Data API, powered by [PostgREST](https://docs.postgrest.org/en/v13/), offers a ready-to-use REST API for your Neon database. You can interact with any table, view, or function using standard HTTP verbs (`GET`, `POST`, `PATCH`, `DELETE`). To simplify querying, use client libraries like [`postgrest-js`](https://github.com/supabase/postgrest-js), [`postgrest-py`](https://github.com/supabase-community/postgrest-py), or [`postgrest-go`](https://github.com/supabase-community/postgrest-go):
 
 ```javascript shouldWrap
 const { data } = await client.from('playing_with_neon').select('*').gte('value', 0.5);
@@ -29,42 +29,41 @@ const { data } = await client.from('playing_with_neon').select('*').gte('value',
 <Steps>
 ## Enabling the Data API
 
-You enable the Data API at the branch level for a single database.
+Enable the Data API at the **branch** level for a single database.
 
 To get started, navigate to the **Data API** tab in the Neon Console for your branch and click **Enable**.
 
 ![Data API tab with enable button](/docs/data-api/data-api-tab.png)
 
-Once enabled, you'll see your Data API Project URL here.
+Once enabled, you'll see your Data API **Project URL** here — this is your endpoint for API requests.
 
 ![Data API enabled view with Project URL](/docs/data-api/data-api-enabled.png)
 
-You can use this URL for your API requests  — but make sure you secure your data before using in production.
+Always secure your data before using the Data API in production.
 
-## API authentication
+## Authentication
 
-When you enable the Data API, you'll see a configuration screen that shows the security status of your setup.
+Once enabled, the **Working with the Data API** section shows your current security status.
 
 ![configuration section of Data API](/docs/data-api/data_api_config.png)
 
-The security model has two parts:
+The security model consists of two parts:
 
 ### Neon Auth (automatically configured)
-Neon Auth provides user authentication for your application. It generates JWT tokens that your app uses to authenticate users and make secure API requests. 
 
-**What you need to do:**
-- Get your JWKS URL from the **Auth** > **Configuration** tab
-- Add that JWKS URL to your project's RLS settings so your policies can validate user tokens
+Neon Auth manages user authentication, generating JWT tokens for secure API requests.
+
+- Add Neon Auth keys to your app's environment variables.
+- Include JWT tokens in Data API requests.
+- **Recommended**: Use the Neon Auth SDK for user sign-in/sign-up.
+
+> You can start using the Data API immediately without authentication, but make sure you set up auth and RLS before going to production.
 
 ### Row-Level Security (RLS)
 
-RLS is a Postgres feature that controls which rows users can access in your tables. **Neon does not automatically enable RLS on existing tables** - you have to do this manually.
+RLS controls row access in tables. **Neon does not auto-enable RLS**; enable it manually per table.
 
 See [secure your tables with RLS](#secure-your-tables-with-rls) below.
-
-<Admonition type="warning">
-**Critical Security:** If you see warnings about tables being "publicly accessible," this means RLS is not enabled on those tables. You must enable RLS and create appropriate policies before using the Data API in production.
-</Admonition>
 
 ### Third-party auth
 
@@ -81,7 +80,7 @@ curl --location 'https://console.neon.tech/api/v2/projects/<project_id>/branches
 
 ## Secure your tables with RLS
 
-Before using the Data API in production, you must enable Neon RLS and create policies for your tables:
+Before using the Data API in production, you must enable Row-Level Security (RLS) on your tables and create policies.
 
 ```sql
 -- Enable RLS on your table
@@ -94,7 +93,7 @@ CREATE POLICY "user_can_access_own_data" ON your_table
 
 > **Important:** If you don't enable RLS, your tables will be publicly accessible via the Data API.
 
-For detailed RLS setup, see our [RLS tutorial](/docs/guides/neon-rls-tutorial). We recommend using [Drizzle](/docs/guides/neon-rls-drizzle) to help simplify your RLS policies.
+For a detailed guide, see our [PostgREST tutorial](/docs/guides/postgrest#use-row-level-security-rls). We also recommend using [Drizzle](/docs/guides/neon-rls-drizzle) to help simplify writing RLS policies.
 
 ## Using the Data API
 

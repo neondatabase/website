@@ -69,7 +69,7 @@ Before we dive into the queries, let's first secure our tables. When making dire
 
 RLS is crucial for any real-world app. RLS policies act as a safety net at the database level, so even if your frontend code has bugs, your data stays protected.
 
-Our demo app uses [Drizzle](/docs/guides/neon-rls-drizzle) ORM to define RLS policies, which we highly recommend as a simpler, more maintable way of writing RLS policies:
+Our demo app uses [Drizzle](/docs/guides/neon-rls-drizzle) ORM to define RLS policies, which we highly recommend as a simpler, more maintainable way of writing RLS policies:
 
 ```typescript shouldWrap
 // src/db/schema.ts - RLS policies using Drizzle
