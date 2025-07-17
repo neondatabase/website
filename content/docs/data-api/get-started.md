@@ -78,13 +78,11 @@ CREATE POLICY "user_can_access_own_data" ON your_table
 
 We recommend using [Drizzle](/docs/guides/neon-rls-drizzle) to help simplify writing RLS policies.
 
-
 ## Using the Data API
 
 By default, all tables in your database are accessible via the API with `SELECT` permissions granted to **unauthenticated requests**. This lets you directly interact with the API without requiring additional authorization headers.
 
-> **Warning:** This means your data is **publicly accessbile** until you enable Row-Level Security (RLS). Again, enable RLS on _all_ your tables before using the Data API in production. 
-
+> **Warning:** This means your data is **publicly accessbile** until you enable Row-Level Security (RLS). Again, enable RLS on _all_ your tables before using the Data API in production.
 
 ### Example of creating a table and querying it via the Data API
 
@@ -109,9 +107,7 @@ INSERT INTO playing_with_neon(name, value)
 SELECT * FROM playing_with_neon;
 ```
 
-
 #### Querying with Curl
-
 
 - **Without JWT (unauthenticated request):**
 
@@ -120,12 +116,13 @@ SELECT * FROM playing_with_neon;
   --header 'Accept: application/json'
   ```
 
-   **Response:**
+  **Response:**
 
-   ```json should wrap
-   []
-   ```
-   *No data returned because RLS denies access without authentication.*
+  ```json should wrap
+  []
+  ```
+
+  _No data returned because RLS denies access without authentication._
 
 - **With JWT (authenticated request):**
 
@@ -135,7 +132,7 @@ SELECT * FROM playing_with_neon;
   --header 'Authorization: Bearer <jwt>'
   ```
 
-   **Response:**
+  **Response:**
 
   ```json
   HTTP/1.1 200 OK
@@ -156,8 +153,7 @@ SELECT * FROM playing_with_neon;
   ]
   ```
 
-   *You get expected data since the token is included in the request.*
-
+  _You get expected data since the token is included in the request._
 
 As the Data API is built on **PostgREST**, it follows PostgREST query and data manipulation formats. You can use also wrapper libraries like [postgrest-js](https://github.com/supabase/postgrest-js) for a more ORM-like interface.
 
