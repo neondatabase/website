@@ -62,10 +62,6 @@ const Sidebar = ({ className = null, sidebar, slug, basePath, customType, docPag
     ...getActiveItems(sidebar, currentSlug),
   ]);
 
-  useEffect(() => {
-    console.log('activeMenuList', activeMenuList);
-  }, [activeMenuList]);
-
   // NOTE: useEffect for updating activeMenuList on slug change with broswer back/forth button
   // supports duplicates section in sidebar,
   // if we surf through menu with clicks on items, it will not update activeMenuList
