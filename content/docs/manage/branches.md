@@ -35,9 +35,10 @@ To create a branch:
 The **Specific date and time** and the **Specific Log Sequence Number Data** options do not include data changes that occurred after the specified date and time or LSN. You can only specify a date and time or LSN value that falls within your [restore window](/docs/manage/projects#configure-restore-window).
 </Admonition>
 
-8. Click **Create new branch**.
+8. Optionally set an **Auto delete after** expiration date and time for temporary branches. This automatically deletes the branch at the specified time, useful for CI/CD pipelines and short-lived development environments. Refer to our [Branch expiration guide](/docs/guides/expired-branches) for details.
+9. Click **Create new branch**.
 
-   You are presented with the connection details for your new branch and directed to the **Branch** overview page where you are shown the details for your new branch.
+You are presented with the connection details for your new branch and directed to the **Branch** overview page where you are shown the details for your new branch.
 
    <Admonition type="note" title="Postgres role passwords on branches">
    When creating a new branch, the branch will have the same Postgres roles and passwords as the parent branch. If you want your branch created with new role passwords, you can enable [branch protection](/docs/guides/protected-branches).
@@ -87,6 +88,10 @@ To view the branches in a Neon project:
 
 On the Free Plan, Neon automatically archives inactive branches to cost-efficient archive storage after a defined threshold. For more, see [Branch archiving](/docs/guides/branch-archiving).
 
+<Admonition type="note">
+For branches with predictable lifespans, you can set an expiration date when creating branches to automatically delete them at a specified time. This offers an alternative to archiving for temporary development and testing environments, ensuring cleanup happens exactly when needed.
+</Admonition>
+
 ## Rename a branch
 
 Neon permits renaming a branch, including your project's default branch. To rename a branch:
@@ -122,6 +127,19 @@ To set a branch as protected:
 5. In the **Set as protected** confirmation dialog, click **Set as protected** to confirm your selection.
 
 For details and configuration instructions, refer to our [Protected branches guide](/docs/guides/protected-branches).
+
+## Set branch expiration
+
+To set or update a branch's expiration:
+
+1. In the Neon Console, select a project.
+2. Select **Branches** to view the branches for the project.
+3. Select a branch from the table.
+4. On the branch overview page, click the **Actions** drop-down menu and select **Edit expiration**.
+5. Set a new expiration date and time, or toggle off "Auto delete after" to remove expiration.
+6. Click **Save**.
+
+For details and configuration instructions, refer to our [Branch expiration guide](/docs/guides/expired-branches).
 
 ## Connect to a branch
 
@@ -174,6 +192,10 @@ To delete a branch:
 3. Select a branch from the table.
 4. On the branch overview page, click the **Actions** drop-down menu and select **Delete**.
 5. On the confirmation dialog, click **Delete**.
+
+<Admonition type="tip">
+For temporary branches, consider setting an expiration date when creating them to automate cleanup and reduce manual deletion overhead.
+</Admonition>
 
 ## Check the data size
 
@@ -248,6 +270,10 @@ See [Schema-only branches](/docs/guides/branching-schema-only).
 ### Backup branch
 
 A branch created by an [instant restore](#branch-restore) operation. When you restore a branch from a particular point in time, the current branch is saved as a backup branch. Performing a restore operation on a root branch, creates a backup branch without a parent branch (a root branch). See [Instant restore](/docs/guides/branch-restore).
+
+### Branch with expiration
+
+A branch with an expiration timestamp is automatically deleted when the expiration time is reached. Any branch can have an expiration timestamp added or removed at any time. This feature is particularly useful for temporary development and testing environments.
 
 ## Branching with the Neon CLI
 
