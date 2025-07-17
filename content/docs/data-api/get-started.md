@@ -102,6 +102,7 @@ By default, all tables in your database are accessible via the API with SELECT p
 Here's how to make authenticated requests:
 
 ### Using postgrest-js
+
 ```javascript
 import { PostgrestClient } from '@supabase/postgrest-js';
 
@@ -114,6 +115,7 @@ const { data } = await client.from('playing_with_neon').select('*').gte('value',
 ```
 
 ### Using curl
+
 ```bash
 curl --location --request GET 'YOUR_DATA_API_URL/playing_with_neon' \
      --header 'Accept: application/json' \
@@ -134,4 +136,3 @@ To see a complete, working example of an application built with the Data API, Ne
 ## What's Next?
 
 - Faster cold starts (we're working on it)
-
