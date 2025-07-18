@@ -59,7 +59,7 @@ To edit a compute:
 1. Select a branch.
 1. From the **Computes** tab, select **Edit** for the compute you want to edit.
 
-   The **Edit** drawer opens, letting you modify settings such as compute size, the autoscaling configuration (if applicable), and your scale to zero setting.
+   The **Edit** drawer opens, letting you modify settings such as compute size, the autoscaling configuration, and your scale to zero setting.
 
 1. Once you've made your changes, click **Save**. All changes take immediate effect.
 
