@@ -303,6 +303,11 @@ const defaultConfig = {
         permanent: false,
       },
       {
+        source: '/support',
+        destination: '/docs/introduction/support',
+        permanent: true,
+      },
+      {
         source: '/early-access-program',
         destination: '/docs/introduction/roadmap#join-the-neon-early-access-program',
         permanent: true,
