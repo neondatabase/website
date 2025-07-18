@@ -2,7 +2,7 @@
 title: Neon Data API tutorial
 subtitle: Set up our demo note-taking app to learn about postgrest-js queries
 enableTableOfContents: true
-updatedOn: '2025-06-20T15:34:40.021Z'
+updatedOn: '2025-07-18T16:37:36.056Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
