@@ -122,7 +122,7 @@
       slug: connect/connect-intro
       icon: connect
       items:
-        - title: Choosing connections
+        - title: Drivers and connection types
           slug: connect/choose-connection
         - title: Connect from any app
           slug: connect/connect-from-any-app
@@ -132,18 +132,17 @@
           slug: get-started-with-neon/query-with-neon-sql-editor
         - title: Passwordless auth
           slug: connect/passwordless-connect
-        - title: Connect securely
+        - title: Securing connections
           slug: connect/connect-securely
-        - title: Connect a GUI application
+        - title: GUI applications
           slug: connect/connect-postgres-gui
-        - title: Connect with psql
+        - title: psql
           slug: connect/query-with-psql-editor
-        - title: Connect with pgcli
+        - title: pgcli
           slug: connect/connect-pgcli
         - title: Connection pooling
           slug: connect/connection-pooling
-        - title: Connection issues
-          slug: connect/connect-intro
+        - title: Troubleshooting
           items:
             - title: Connection errors
               slug: connect/connection-errors
@@ -157,45 +156,45 @@
           items:
             - title: Import Data Assistant
               slug: import/import-data-assistant
-            - title: Migrate from Postgres with pg_dump and pg_restore
+            - title: pg_dump and pg_restore
               slug: import/migrate-from-postgres
-            - title: Migrate with pgcopydb
+            - title: pgcopydb
               slug: import/pgcopydb
             - title: Migrate from a Neon project
               slug: import/migrate-from-neon
-            - title: Migrate schema only
+            - title: Schema-only
               slug: import/migrate-schema-only
-            - title: Migrate from Digital Ocean
+            - title: Digital Ocean
               slug: import/migrate-from-digital-ocean
-            - title: Migrate from Firebase
+            - title: Firebase
               slug: import/migrate-from-firebase
-            - title: Migrate from Heroku
+            - title: Heroku
               slug: import/migrate-from-heroku
-            - title: Migrate from MySQL
+            - title: MySQL
               slug: import/migrate-mysql
-            - title: Migrate from MSSQL
+            - title: MSSQL
               slug: import/migrate-mssql
-            - title: Migrate from Render
+            - title: Render
               slug: import/migrate-from-render
-            - title: Migrate from Supabase
+            - title: Supabase
               slug: import/migrate-from-supabase
         - section: Logical replication
           items:
-            - title: Replicate from AlloyDB
+            - title: AlloyDB
               slug: guides/logical-replication-alloydb
-            - title: Replicate from Aurora
+            - title: Aurora
               slug: guides/logical-replication-aurora-to-neon
-            - title: Replicate from Azure
+            - title: Azure
               slug: import/migrate-from-azure-postgres
-            - title: Replicate from Cloud SQL
+            - title: Cloud SQL
               slug: guides/logical-replication-cloud-sql
-            - title: Replicate from Neon to Neon
+            - title: Neon to Neon
               slug: guides/logical-replication-neon-to-neon
-            - title: Replicate from Postgres
+            - title: Postgres
               slug: guides/logical-replication-postgres-to-neon
-            - title: Replicate from RDS
+            - title: Amazon RDS
               slug: guides/logical-replication-rds-to-neon
-            - title: Replicate from Supabase
+            - title: Supabase
               slug: guides/logical-replication-supabase-to-neon
         - section: Data migration services
           items:
@@ -704,8 +703,10 @@
       items:
         - section: Monitor
           items:
-            - title: Datadog Integration
+            - title: Datadog
               slug: guides/datadog
+            - title: OpenTelemetry
+              slug: guides/opentelemetry
         - section: Deploy
           items:
             - title: Vercel

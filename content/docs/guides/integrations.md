@@ -5,7 +5,7 @@ subtitle: Find detailed instructions for integration across various platforms an
 enableTableOfContents: true
 redirectFrom:
   - /docs/integrations/integrations-list/
-updatedOn: '2025-04-23T12:26:38.333Z'
+updatedOn: '2025-07-18T13:03:31.849Z'
 ---
 
 ## Monitor
@@ -13,6 +13,8 @@ updatedOn: '2025-04-23T12:26:38.333Z'
 <TechCards>
 
 <a href="/docs/guides/datadog" title="Datadog" description="Send metrics and events from Neon Postgres to Datadog" icon="datadog"></a>
+
+<a href="/docs/guides/opentelemetry" title="OpenTelemetry" description="Send metrics and events from Neon to any OpenTelemetry compatible backend" icon="opentelemetry"></a>
 
 </TechCards>
 
