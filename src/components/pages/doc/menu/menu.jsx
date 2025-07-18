@@ -8,6 +8,7 @@ import { DOCS_BASE_PATH } from 'constants/docs';
 import Chevron from 'icons/chevron-right-lg.inline.svg';
 import ArrowBackIcon from 'icons/docs/sidebar/arrow-back.inline.svg';
 
+// eslint-disable-next-line import/no-cycle
 import Item from './item';
 
 const sectionTitleClassName =
@@ -15,8 +16,6 @@ const sectionTitleClassName =
 
 const Section = ({
   depth,
-  title,
-  slug,
   section,
   collapsible,
   items,
@@ -32,7 +31,7 @@ const Section = ({
 
   const handleToggle = () => {
     setIsCollapsed((prev) => !prev);
-    if (onCollapse) onCollapse();
+    onCollapse();
   };
 
   return (
@@ -49,7 +48,7 @@ const Section = ({
             onClick={handleToggle}
           >
             {section}
-            <Chevron className={clsx('w-1.5', !isCollapsed && 'rotate-90')} />
+            <Chevron className={clsx('w-1.5', !isCollapsed && '-rotate-90')} />
           </button>
         ) : (
           <span className={clsx('block', sectionTitleClassName)}>{section}</span>
@@ -57,42 +56,29 @@ const Section = ({
       {items && (
         <LazyMotion features={domAnimation}>
           <m.div
-            className="overflow-hidden"
+            className={collapsible && 'overflow-hidden'}
             initial={collapsible ? 'collapsed' : 'expanded'}
             animate={collapsible && isCollapsed ? 'collapsed' : 'expanded'}
             variants={{
-              collapsed: { opacity: 0, height: 0 },
-              expanded: { opacity: 1, height: 'auto' },
+              collapsed: { opacity: 0, height: 0, translateY: 10 },
+              expanded: { opacity: 1, height: 'auto', translateY: 0 },
             }}
             transition={{ duration: 0.2 }}
           >
             <ul className={collapsible && 'mt-1'}>
               {items.map((item, index) => (
                 <Item
-                  {...item}
                   key={index}
+                  {...item}
+                  depth={depth}
                   basePath={basePath}
                   activeMenuList={activeMenuList}
                   setActiveMenuList={setActiveMenuList}
                   closeMobileMenu={closeMobileMenu}
-                >
-                  {item.items && (
-                    <Menu
-                      depth={depth + 1}
-                      title={item.title}
-                      slug={item.slug}
-                      basePath={basePath}
-                      icon={item.icon}
-                      items={item.items}
-                      parentMenu={{ title, slug }}
-                      setMenuHeight={setMenuHeight}
-                      menuWrapperRef={menuWrapperRef}
-                      activeMenuList={activeMenuList}
-                      setActiveMenuList={setActiveMenuList}
-                      closeMobileMenu={closeMobileMenu}
-                    />
-                  )}
-                </Item>
+                  setMenuHeight={setMenuHeight}
+                  menuWrapperRef={menuWrapperRef}
+                  onCollapse={onCollapse}
+                />
               ))}
             </ul>
           </m.div>
@@ -104,8 +90,6 @@ const Section = ({
 
 Section.propTypes = {
   depth: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  slug: PropTypes.string,
   basePath: PropTypes.string.isRequired,
   section: PropTypes.string,
   collapsible: PropTypes.bool,
@@ -141,11 +125,10 @@ const Menu = ({
   const menuRef = useRef(null);
   const lastDepth = activeMenuList.length - 1;
 
-  const BackLinkTag = parentMenu?.slug ? Link : 'button';
+  const BackLinkTag = slug ? Link : 'button';
 
   const isActive = isRootMenu || activeMenuList.some((item) => item.title === title);
-  const isLastActive =
-    activeMenuList[lastDepth]?.title === title || (isRootMenu && lastDepth === 0);
+  const isCurrent = activeMenuList[lastDepth]?.title === title || (isRootMenu && lastDepth === 0);
 
   const updateMenuHeight = () => {
     setMenuHeight(2000);
@@ -156,11 +139,11 @@ const Menu = ({
 
   // update menu height and scroll menu to top
   useEffect(() => {
-    if (isLastActive && menuRef.current && menuRef.current.scrollHeight > 0 && setMenuHeight) {
-      setMenuHeight(menuRef.current.scrollHeight);
-      menuWrapperRef.current?.scrollTo(0, 0);
+    if (isCurrent) {
+      setMenuHeight && menuRef?.current && setMenuHeight(menuRef.current.scrollHeight);
+      menuWrapperRef?.current && menuWrapperRef.current?.scrollTo(0, 0);
     }
-  }, [isLastActive, setMenuHeight, menuWrapperRef]);
+  }, [isCurrent, setMenuHeight, menuWrapperRef, depth, isActive, title]);
 
   if (!isRootMenu && !isActive) return null;
 
@@ -180,7 +163,7 @@ const Menu = ({
       style={isRootMenu ? { transform: `translateX(${lastDepth * -100}%)` } : undefined}
       ref={menuRef}
     >
-      {/* breadcrumbs, menu title and home link */}
+      {/* menu title and home link */}
       {!isRootMenu && (
         <BackLinkTag
           className="group relative z-50 flex w-full items-center pb-1.5 text-left font-medium leading-tight tracking-extra-tight text-black-new dark:text-white"
@@ -201,8 +184,6 @@ const Menu = ({
               key={index}
               depth={depth}
               {...item}
-              title={title}
-              slug={slug}
               basePath={basePath}
               closeMobileMenu={closeMobileMenu}
               setMenuHeight={setMenuHeight}
@@ -214,29 +195,16 @@ const Menu = ({
           ) : (
             <Item
               key={index}
+              depth={depth}
               {...item}
               basePath={basePath}
+              closeMobileMenu={closeMobileMenu}
+              setMenuHeight={setMenuHeight}
+              menuWrapperRef={menuWrapperRef}
               activeMenuList={activeMenuList}
               setActiveMenuList={setActiveMenuList}
-              closeMobileMenu={closeMobileMenu}
-            >
-              {item.items && (
-                <Menu
-                  depth={depth + 1}
-                  title={item.title}
-                  slug={item.slug}
-                  icon={item.icon}
-                  items={item.items}
-                  basePath={basePath}
-                  parentMenu={{ title, slug }}
-                  setMenuHeight={setMenuHeight}
-                  menuWrapperRef={menuWrapperRef}
-                  activeMenuList={activeMenuList}
-                  setActiveMenuList={setActiveMenuList}
-                  closeMobileMenu={closeMobileMenu}
-                />
-              )}
-            </Item>
+              onCollapse={updateMenuHeight}
+            />
           )
         )}
       </ul>
@@ -277,6 +245,7 @@ Menu.propTypes = {
       tag: PropTypes.string,
       items: PropTypes.arrayOf(PropTypes.any),
       ariaLabel: PropTypes.string,
+      collapsible: PropTypes.bool,
     })
   ),
   setMenuHeight: PropTypes.func.isRequired,
