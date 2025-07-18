@@ -1,6 +1,6 @@
 # Troubleshooting Neon RLS
 
-> The "Troubleshooting Neon RLS" document offers specific guidance for diagnosing and resolving issues related to Row-Level Security (RLS) in Neon databases.
+> The "Troubleshooting Neon RLS" document offers detailed guidance on diagnosing and resolving issues related to Row-Level Security (RLS) in Neon databases, focusing on common problems and their solutions.
 
 ## Source
 
@@ -16,7 +16,7 @@ Errors:
 
 ---
 
-<a id="password-authentication-error"></a>
+
 
 ```bash
 NeonDbError: password authentication failed for user 'jwk not found'
@@ -51,7 +51,7 @@ This issue typically occurs when:
 
 ---
 
-<a id="permission-denied-error"></a>
+
 
 ```bash
 NeonDbError: permission denied for table X
@@ -92,7 +92,7 @@ TO anonymous;
 
 ---
 
-<a id="invalid-rsa-signing-algorithm"></a>
+
 
 ```bash
 invalid RSA signing algorithm

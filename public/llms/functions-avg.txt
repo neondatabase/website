@@ -1,6 +1,6 @@
 # Postgres avg() function
 
-> The document explains the usage of the Postgres `avg()` function within Neon, detailing how to calculate the average value of a numeric column in a database table.
+> The document explains the usage of the Postgres avg() function within Neon, detailing its syntax and application for calculating the average value of a numeric column in a database query.
 
 ## Source
 

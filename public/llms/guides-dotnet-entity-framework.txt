@@ -1,6 +1,6 @@
 # Connect an Entity Framework application to Neon
 
-> This document guides users on connecting an Entity Framework application to Neon by detailing the necessary steps and configurations specific to Neon's database environment.
+> This document guides users on connecting an Entity Framework application to Neon by detailing the necessary steps and configurations required for seamless integration within a .NET environment.
 
 ## Source
 

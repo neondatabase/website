@@ -1,6 +1,6 @@
 # File storage with Azure Blob Storage
 
-> The document "File storage with Azure Blob Storage" guides Neon users on integrating Azure Blob Storage for file storage, detailing configuration steps and necessary code implementations specific to Neon's platform.
+> The document details the integration of Azure Blob Storage with Neon, outlining steps to configure and manage file storage, enabling efficient data handling within the Neon environment.
 
 ## Source
 
@@ -441,13 +441,12 @@ WHERE
 - The query returns metadata stored in Neon.
 - The `file_url` column contains the base URL of the blob.
 - **Accessing the file:**
-
   - If your container allows public `Blob` access, this `file_url` might be directly usable.
   - If your container is **private** (recommended), you need to generate a **read-only SAS token** for the specific `blob_name` on demand using your backend (similar to the upload SAS generation, but with `BlobSASPermissions.parse("r")` or `BlobSasPermissions(read=True)`) and append it to the `file_url`. This provides secure, temporary read access.
   - Use the resulting URL (base URL or URL with read SAS token) in your application (e.g., `<img>` tags, download links).
 
   For example here's how to generate a read SAS URL:
-  
+  Tab: JavaScript
 
   ```javascript
   import {
@@ -494,6 +493,8 @@ WHERE
     });
   ```
 
+Tab: Python
+
   ```python
   import os
   from datetime import datetime, timedelta, timezone
@@ -531,8 +532,6 @@ WHERE
       read_url = generate_read_only_sas_url(test_blob_name)
       print(f"Read-only SAS URL: {read_url}")
   ```
-
-    
 
      **Note** Private containers & read access: For private containers, always generate short-lived read SAS tokens when a user needs to access a file. Store only the `blob_name` and base `file_url` (or just `blob_name`) in Neon, and construct the full SAS URL in your backend when serving the file reference to the client.
 

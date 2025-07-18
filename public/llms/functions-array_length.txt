@@ -1,6 +1,6 @@
 # Postgres array_length() function
 
-> The document explains the usage of the Postgres `array_length()` function within Neon, detailing how to determine the number of elements in a specified dimension of an array.
+> The document details the usage of the Postgres `array_length()` function, which determines the number of elements in a specified dimension of an array, specifically within the context of Neon's database environment.
 
 ## Source
 

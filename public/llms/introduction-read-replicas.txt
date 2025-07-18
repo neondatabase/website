@@ -1,6 +1,6 @@
 # Neon Read Replicas
 
-> The "Neon Read Replicas" documentation explains how to set up and manage read replicas in Neon, allowing users to distribute read queries across multiple database instances for improved performance and scalability.
+> The "Neon Read Replicas" documentation explains how to set up and manage read replicas in Neon, enabling users to distribute read queries across multiple database instances for improved performance and scalability.
 
 ## Source
 

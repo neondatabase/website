@@ -1,6 +1,6 @@
 # Production readiness with Neon
 
-> The "Production readiness with Neon" document outlines the steps and considerations necessary for preparing a Neon database for production environments, focusing on configuration, monitoring, and scaling to ensure optimal performance and reliability.
+> The "Production readiness with Neon" document outlines the necessary steps and considerations for preparing Neon databases for production environments, including configuration, monitoring, and security practices specific to Neon's infrastructure.
 
 ## Source
 
@@ -77,7 +77,7 @@ To learn more, see [Read replicas](https://neon.com/docs/introduction/read-repli
 Neon's [connection pooling](https://neon.com/docs/connect/connection-pooling) feature supports up to 10,000 concurrent connections. Connection pooling works by caching and reusing database connections, which helps to significantly optimize resource usage and enhance performance. It reduces the overhead associated with establishing new connections and closing old ones, allowing applications to handle a higher volume of requests more efficiently. Neon uses [PgBouncer](https://www.pgbouncer.org/) to support connection pooling. Enabling connection pooling is easy. Just grab a pooled connection string from the console:
 
 ```bash
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 ## More Neon features

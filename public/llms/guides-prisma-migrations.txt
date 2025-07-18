@@ -1,6 +1,6 @@
 # Schema migration with Neon Postgres and Prisma ORM
 
-> The document outlines the process for performing schema migrations using Neon Postgres and Prisma ORM, detailing steps for setting up the environment, creating migrations, and applying them to a Neon database.
+> The document outlines the process of performing schema migrations in Neon Postgres using Prisma ORM, detailing steps for setting up the environment, executing migrations, and managing database changes effectively.
 
 ## Source
 
@@ -29,7 +29,7 @@ To follow along with this guide, you will need:
 You can find your Neon database connection string by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
 
 ```bash
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 Keep your connection string handy for later use.

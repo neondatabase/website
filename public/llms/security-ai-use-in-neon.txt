@@ -1,6 +1,6 @@
 # AI use in Neon
 
-> The document outlines the implementation and security considerations of AI technologies within the Neon platform, detailing how AI is integrated to enhance database management and user interactions.
+> The document outlines the integration and application of AI technologies within Neon's infrastructure, detailing security measures and protocols to ensure safe and efficient AI utilization.
 
 ## Source
 

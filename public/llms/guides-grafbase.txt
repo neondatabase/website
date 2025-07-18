@@ -1,6 +1,6 @@
 # Use Grafbase Edge Resolvers with Neon
 
-> The document explains how to integrate Grafbase Edge Resolvers with Neon, detailing the steps to configure and deploy a Neon database with Grafbase for efficient data querying and management.
+> The document explains how to integrate Grafbase Edge Resolvers with Neon, detailing the steps to configure and deploy a serverless GraphQL API that interacts with Neon's PostgreSQL database.
 
 ## Source
 

@@ -150,6 +150,7 @@ pg_restore: creating SEQUENCE OWNED BY "public.lego_colors_id_seq"
 pg_restore: creating TABLE "public.lego_inventories"
 pg_restore: creating SEQUENCE "public.lego_inventories_id_seq"
 ...
+
 ```
 
 ## Verify the migration

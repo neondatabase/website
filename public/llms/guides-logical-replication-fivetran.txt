@@ -1,6 +1,6 @@
 # Replicate data with Fivetran
 
-> The document titled "Replicate data with Fivetran" guides Neon users on setting up logical replication of their databases using Fivetran, detailing the configuration steps and requirements for seamless data integration.
+> The document outlines the process for setting up logical replication of data from Neon to Fivetran, detailing the necessary configurations and steps to enable seamless data integration between the two platforms.
 
 ## Source
 
@@ -122,11 +122,10 @@ The name assigned to the replication slot is `fivetran_pgoutput_slot`. You will 
    For example, let's say this is your connection string:
 
    ```bash
-   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    ```
 
    From this string, the values in the Fivetran **Create a source** dialog would show as below. Your actual values will differ, with the exception of the port number.
-
    - **Host**: ep-cool-darkness-123456.us-east-2.aws.neon.tech
    - **Port**: 5432
    - **Username**: alex

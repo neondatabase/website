@@ -1,6 +1,6 @@
 # The dict_int extension
 
-> The document details the dict_int extension for Neon, which enables users to create integer-based dictionaries in PostgreSQL, facilitating efficient storage and retrieval of integer key-value pairs within the database.
+> The dict_int extension documentation explains how to use the dict_int extension in Neon to efficiently map integer keys to integer values within PostgreSQL databases.
 
 ## Source
 

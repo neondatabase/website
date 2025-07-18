@@ -1,6 +1,6 @@
 # Postgres data types
 
-> The "Postgres data types" document outlines the various data types supported by Neon, detailing their usage and characteristics within the Neon database environment.
+> The document outlines the various PostgreSQL data types supported by Neon, detailing their usage and characteristics to facilitate effective database management within the Neon platform.
 
 ## Source
 

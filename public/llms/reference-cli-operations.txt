@@ -1,6 +1,6 @@
 # Neon CLI commands — operations
 
-> The document "Neon CLI commands — operations" details command-line operations for managing Neon database instances, including creating, deleting, and listing databases, as well as managing roles and connections.
+> The Neon CLI commands documentation details the operational commands available for managing Neon databases, including creating, deleting, and listing databases, as well as managing branches and endpoints.
 
 ## Source
 

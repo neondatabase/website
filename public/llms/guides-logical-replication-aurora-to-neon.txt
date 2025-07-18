@@ -1,17 +1,12 @@
 # Replicate data from Aurora PostgreSQL
 
-> The document outlines the process for setting up logical replication from Aurora PostgreSQL to Neon, detailing the necessary steps and configurations for seamless data transfer between the two systems.
+> The document outlines the process for replicating data from Aurora PostgreSQL to Neon using logical replication, detailing the necessary steps and configurations required for successful data migration.
 
 ## Source
 
 - [Replicate data from Aurora PostgreSQL HTML](https://neon.com/docs/guides/logical-replication-aurora-to-neon): The original HTML version of this documentation
 
----
-updatedOn: '2024-11-15T20:32:35.032Z'
----
-
-   **Note** New feature: If you are looking to migrate your database to Neon, you may want to try our new **Migration Assistant**, which can help. Read the [guide](https://neon.com/docs/import/migration-assistant) to learn more.
-
+**Note** New feature: If you are looking to migrate your database to Neon, you may want to try our new **Migration Assistant**, which can help. Read the [guide](https://neon.com/docs/import/migration-assistant) to learn more.
 
 Neon's logical replication feature allows you to replicate data from Aurora PostgreSQL to Neon.
 
@@ -54,7 +49,6 @@ This section describes how to prepare your source Aurora Postgres instance (the 
 8. Reboot the **Writer instance** of your Aurora PostgreSQL DB cluster to apply the changes. In the Amazon RDS console, select your Aurora PostgreSQL DB cluster, then select the **Writer instance** of the cluster and choose **Reboot** from the **Actions** menu.
 
 9. Once the instance is available again, you can verify that logical replication is enabled as follows:
-
    - Use `psql` to connect to the writer instance of your Aurora PostreSQL DB cluster.
 
      ```bash

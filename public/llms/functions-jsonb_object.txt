@@ -1,6 +1,6 @@
 # Postgres jsonb_object() function
 
-> The document explains the usage of the Postgres `jsonb_object()` function within Neon, detailing how to construct JSON objects from key-value pairs in SQL queries.
+> The document details the usage of the Postgres `jsonb_object()` function within Neon, explaining how to construct JSON objects from key-value pairs in a database context.
 
 ## Source
 

@@ -1,6 +1,6 @@
 # Install the Neon Postgres Native Integration on Vercel
 
-> The document outlines the steps to install the Neon Postgres Native Integration on Vercel, enabling users to connect their Vercel applications to a Neon database.
+> The document guides users through installing the Neon Postgres Native Integration on Vercel, detailing steps for setting up a serverless PostgreSQL database with Vercel's platform.
 
 ## Source
 
@@ -47,7 +47,6 @@ To install the **Neon Postgres Native Integration** from the Vercel Marketplace:
       **Note** A Database in Vercel is a Project in Neon: Your **Database Name** in Vercel will be the name of your **Project** in Neon.
 
 8. A **Database** is created in Vercel, and you are directed to the **Storage** tab on the Vercel Dashboard where you can view details about your new Database, including:
-
    - Status
    - Plan
    - Current Period (billing)
@@ -71,23 +70,19 @@ To open your Database / Neon Project in the Neon Console:
 As a user of the Neon Postgres Native Integration, you have access to all Neon features. However, some actions normally performed in the Neon Console are either not supported or only available through the Vercel Dashboard:
 
 - **Project/Database Management**:
-
   - **Databases** (a.k.a "Projects" in Neon) can only be created or deleted through the Vercel Dashboard. See [Adding more databases](https://neon.com/docs/guides/vercel-native-integration#adding-more-databases) and [Deleting your database](https://neon.com/docs/guides/vercel-native-integration#deleting-your-database).
   - **Organization Deletion**: Organizations cannot be deleted in the Neon Console; they are deleted if the Neon Postgres Native Integration is uninstalled from Vercel.
 
 - **User & Collaborator Management**:
-
   - [Organization](https://neon.com/docs/manage/organizations) members are managed in Vercel, not manually added through the Neon Dashboard.
   - [Organization deletion](https://neon.com/docs/manage/orgs-manage#delete-an-organization) is not supported for Neon organizations created by the native integration. You can only delete this organization by deleting the associated Database in Vercel.
   - [Project transfer](https://neon.com/docs/manage/orgs-project-transfer) is not supported to or from a Neon organization created by the native integration.
   - [Project collaborators](https://neon.com/docs/guides/project-collaboration-guide) are also managed as Members in Vercel.
 
 - **Compute Settings**:
-
   - Compute settings like size, autoscaling, and scale to zero are managed in Vercel. See [Changing your Database configuration](https://neon.com/docs/guides/vercel-native-integration#changing-your-database-configuration).
 
 - **Project Naming**:
-
   - Changing your Neon project name (**Database Name** in Vercel) is done in Vercel. See [Changing your Database configuration](https://neon.com/docs/guides/vercel-native-integration#changing-your-database-configuration).
 
 - **Billing & Payments**:
@@ -103,7 +98,6 @@ To connect your Vercel project to your Neon database:
 2. On your Database page, select **Connect Project**.
 3. Select the Vercel project you want to connect and the environments you want to add database environment variables to (**Development**, **Preview**, **Production**).
 4. Optionally, under **Advanced Options**, you can:
-
    - Specify an **Environment Variables Prefix** for the database environment variables that will be added to your Vercel project. A prefix is not required but may help you track and identify variables later.
         **Note**: Please be aware that database environment variables are already prefixed by `DATABASE`, `PG`, or `POSTGRES` — see [Environment variables set by the integration](https://neon.com/docs/guides/vercel-native-integration#environment-variables-set-by-the-integration). Any prefix you add is applied in addition the existing prefix. If necessary, you can change your prefix later by navigating to **Storage** > **Projects**, and selecting **Update Project Connection** from the project's menu.
    - Under **Deployments Configuration**, you can toggle the **Required** option and select **Preview** to create a Neon branch with every preview deployment (the **Development** and **Production** options here do not do anything — you can ignore them). Enabling the **Required** option means that a database branch must be created for each preview deployment.
@@ -147,7 +141,6 @@ To create another Database / Neon Project:
 
 5. Specify a **Database Name** (this will be the **Project name** in Neon), and click **Create**.
 6. A new **Database** is created in Vercel, and you are directed to the **Storage** tab on the Vercel Dashboard where you can view details about your new Database, including:
-
    - Status
    - Plan
    - Current Period (billing)

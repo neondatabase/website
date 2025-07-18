@@ -1,6 +1,6 @@
 # Neon on Azure
 
-> The "Neon on Azure" documentation outlines the steps for deploying and managing Neon databases on Microsoft Azure, detailing configuration, setup, and integration processes specific to the Azure platform.
+> The "Neon on Azure" documentation outlines the steps for deploying and managing Neon databases on Microsoft Azure, detailing configuration, setup, and integration processes specific to Azure environments.
 
 ## Source
 

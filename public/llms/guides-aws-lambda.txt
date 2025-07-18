@@ -1,6 +1,6 @@
 # Connect from AWS Lambda
 
-> The document titled "Connect from AWS Lambda" details the steps for configuring and establishing a connection between AWS Lambda functions and Neon databases, including setting up environment variables and using the appropriate database drivers.
+> The document outlines the steps for connecting an AWS Lambda function to a Neon database, detailing the necessary configurations and code examples for seamless integration.
 
 ## Source
 
@@ -197,14 +197,14 @@ Create the Lambda function using the [Serverless Framework](https://www.serverle
 
       **Note**: Environment variables can also be added to a `.env` file and loaded automatically with the help of the [dotenv](https://www.npmjs.com/package/dotenv) package. For more information, see [Resolution of environment variables](https://www.serverless.com/framework/docs/environment-variables).
 
-   You can find your database connection details by clicking the **Connect** button on your **Project Dashboard**. Add the `DATABASE_URL` under `environment`, and add `sslmode=require` to the end of the connection string to enable SSL. The `sslmode=require` option tells Postgres to use SSL encryption and verify the server's certificate.
+   You can find your database connection details by clicking the **Connect** button on your **Project Dashboard**. Add the `DATABASE_URL` under `environment`, and add `sslmode=require&channel_binding=require` to the end of the connection string to enable SSL. The `sslmode=require` option tells Postgres to use SSL encryption and verify the server's certificate.
 
    ```yaml
    provider:
      name: aws
      runtime: nodejs14.x
      environment:
-       DATABASE_URL: postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
+       DATABASE_URL: postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
 
    functions:
      getAllUsers:

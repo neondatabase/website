@@ -1,6 +1,6 @@
 # Branching — Testing queries
 
-> The "Branching — Testing queries" document guides Neon users on how to create and manage database branches to test SQL queries without affecting the main production environment.
+> The document outlines how Neon users can create and manage database branches to test SQL queries in isolated environments, facilitating development and testing workflows without affecting the main database.
 
 ## Source
 

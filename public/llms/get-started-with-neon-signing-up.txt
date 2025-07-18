@@ -1,6 +1,6 @@
 # Playing with Neon
 
-> The document titled "Playing with Neon" guides users through the process of signing up for a Neon account, detailing the steps required to create and configure a new account on the platform.
+> The document "Playing with Neon" guides users through the process of signing up for Neon, detailing steps to create an account and access the platform's features.
 
 ## Source
 
@@ -136,7 +136,6 @@ Your project comes with a `development` branch that's an isolated copy of your `
 1. **Install CLI with Brew or NPM**
 
    Depending on your system, you can install the Neon CLI using either Homebrew (for macOS) or NPM (for other platforms).
-
    - For macOS using Homebrew:
 
      ```bash

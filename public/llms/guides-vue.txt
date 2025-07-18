@@ -1,6 +1,6 @@
 # Connect a Vue.js application to Neon
 
-> The document "Connect a Vue.js application to Neon" guides users through the process of integrating a Vue.js application with a Neon database, detailing the necessary steps and configurations for successful connectivity.
+> The document details the steps to connect a Vue.js application to a Neon database, including setting up the database, configuring environment variables, and integrating the database connection within the Vue.js app.
 
 ## Source
 

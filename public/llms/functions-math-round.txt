@@ -1,6 +1,6 @@
 # Postgres round() function
 
-> The document explains the usage of the Postgres `round()` function within Neon, detailing its syntax and examples for rounding numeric values to the nearest integer or specified decimal places.
+> The document explains the usage and syntax of the Postgres `round()` function in Neon, detailing how it rounds numeric values to a specified number of decimal places.
 
 ## Source
 

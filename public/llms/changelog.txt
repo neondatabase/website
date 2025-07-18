@@ -1,6 +1,6 @@
 # Changelog
 
-> The Neon Changelog document lists updates, improvements, and bug fixes for the Neon database platform, detailing changes in each release to keep users informed about the latest developments and modifications.
+> The document is a changelog detailing updates, improvements, and fixes for Neon, enabling users to track changes and enhancements in the platform's features and functionality.
 
 ## Source
 

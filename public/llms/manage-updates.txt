@@ -1,6 +1,6 @@
 # Updates
 
-> The "Updates" document outlines the procedures for managing and applying updates to Neon database instances, ensuring users maintain the latest features and security patches within their Neon environments.
+> The "Updates" document outlines the procedures and guidelines for managing and applying updates within the Neon database environment, ensuring users maintain optimal performance and security.
 
 ## Source
 

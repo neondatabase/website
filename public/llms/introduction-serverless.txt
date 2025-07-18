@@ -1,6 +1,6 @@
 # Serverless
 
-> The "Serverless" documentation explains Neon's serverless architecture, detailing how it automatically scales resources based on demand, eliminating the need for manual infrastructure management.
+> The "Serverless" documentation for Neon explains the architecture and functionality of Neon's serverless PostgreSQL database, detailing how it automatically scales resources based on demand without requiring manual intervention.
 
 ## Source
 

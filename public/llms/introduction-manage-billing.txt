@@ -1,6 +1,6 @@
 # Manage billing
 
-> The "Manage billing" document outlines the procedures for Neon users to view and update their billing information, manage payment methods, and understand their billing cycle within the Neon platform.
+> The "Manage billing" document outlines the procedures for Neon users to access, review, and update their billing information, including payment methods and billing history, within the Neon platform.
 
 ## Source
 

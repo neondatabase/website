@@ -1,6 +1,6 @@
 # Join the Early Access Program
 
-> The document outlines the process for joining Neon's Early Access Program, detailing the steps required for users to gain early access to new features and updates in the Neon database platform.
+> The document outlines the process for joining Neon's Early Access Program, detailing the steps and requirements for users to participate and gain early access to new features and updates.
 
 ## Source
 

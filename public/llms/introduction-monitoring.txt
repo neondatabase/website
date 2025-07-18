@@ -1,6 +1,6 @@
 # Monitoring in Neon
 
-> The "Monitoring in Neon" documentation outlines the procedures and tools available for tracking and analyzing database performance and activity within the Neon platform.
+> The "Monitoring in Neon" documentation outlines the tools and procedures for tracking database performance and health, enabling users to efficiently manage and troubleshoot their Neon database environments.
 
 ## Source
 
@@ -17,6 +17,7 @@ To find out what's going on with your Neon projects and databases, Neon offers s
 - [pg_stat_statements](https://neon.com/docs/extensions/pg_stat_statements): Monitor query performance and statistics in Postgres with pg_stat_statements
 - [External tools](https://neon.com/docs/introduction/monitor-external-tools): Monitor database activity and statistics with third-party client tools
 - [Export metrics to Datadog](https://neon.com/docs/guides/datadog): Export Neon Metrics to Datadog with the Neon Datadog Integration
+- [Export metrics to OpenTelemetry](https://neon.com/docs/guides/opentelemetry): Export Neon metrics to any OpenTelemetry-compatible observability platform
 
 ## Feedback and future improvements
 

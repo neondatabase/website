@@ -1,6 +1,6 @@
 # The pg_partman extension
 
-> The document details the installation and usage of the pg_partman extension on Neon, enabling users to manage time-based and serial-based table partitioning within their databases.
+> The document details the pg_partman extension for Neon, which facilitates automated partition management in PostgreSQL databases, enhancing data organization and performance.
 
 ## Source
 

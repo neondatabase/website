@@ -1,6 +1,6 @@
 # Connect from Symfony with Doctrine to Neon
 
-> The document outlines the steps for configuring Symfony with Doctrine to establish a connection to a Neon database, detailing the necessary configuration settings and commands specific to Neon's environment.
+> This document guides users on configuring Symfony with Doctrine to connect to a Neon database, detailing the necessary steps and configurations for seamless integration.
 
 ## Source
 
@@ -23,7 +23,7 @@ If you do not have one already, create a Neon project. Save your connection deta
 In your `.env` file, set the `DATABASE_URL` to the Neon project connection string that you copied in the previous step.
 
 ```shell
-DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?charset=utf8&sslmode=require"
+DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?charset=utf8&sslmode=require&channel_binding=require"
 ```
 
 You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).

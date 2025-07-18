@@ -1,6 +1,6 @@
 # Manage Neon on Azure
 
-> The "Manage Neon on Azure" document outlines the steps for deploying and managing Neon database instances on Microsoft Azure, detailing configuration, scaling, and integration processes specific to the Azure cloud environment.
+> The document outlines the procedures for managing Neon databases on Microsoft Azure, detailing steps for setup, configuration, and maintenance within the Azure environment.
 
 ## Source
 

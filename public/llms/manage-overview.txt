@@ -1,6 +1,6 @@
 # Overview of the Neon object hierarchy
 
-> The document "Overview of the Neon object hierarchy" outlines the structure and relationships of objects within the Neon database system, detailing how components like projects, branches, and endpoints interact and are organized.
+> The document outlines the structure and components of Neon's object hierarchy, detailing how various elements like projects, branches, endpoints, and databases are organized and interrelated within the Neon platform.
 
 ## Source
 

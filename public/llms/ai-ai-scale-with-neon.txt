@@ -1,6 +1,6 @@
 # Scale your AI application with Neon
 
-> The document "Scale your AI application with Neon" outlines steps for scaling AI applications using Neon's serverless Postgres database, focusing on optimizing performance and resource management specific to AI workloads.
+> The document "Scale your AI application with Neon" guides users on optimizing AI applications using Neon's scalable database infrastructure, detailing steps for efficient data management and processing to enhance application performance.
 
 ## Source
 

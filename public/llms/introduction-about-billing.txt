@@ -1,6 +1,6 @@
 # Plans and billing
 
-> The "Plans and billing" document outlines the pricing structure, subscription plans, and billing processes for Neon users, detailing how to manage and understand their account charges within the Neon platform.
+> The "Plans and billing" document outlines Neon's pricing structure, detailing available subscription plans, billing cycles, and payment methods to assist users in managing their account expenses effectively.
 
 ## Source
 

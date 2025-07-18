@@ -1,6 +1,6 @@
 # Connect a Hono application to Neon
 
-> The document outlines the steps for connecting a Hono application to a Neon database, detailing the configuration and setup required for seamless integration within Neon's environment.
+> This document guides users on connecting a Hono application to a Neon database, detailing the necessary configuration steps and code adjustments required for seamless integration.
 
 ## Source
 
@@ -47,7 +47,7 @@ npm install @neondatabase/serverless
 Add a `.env` file to your project directory and add your Neon connection string to it. You can find your connection details by clicking **Connect** on the Neon **Project Dashboard**. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).
 
 ```shell
-DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require"
+DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
 ```
 
 ## Configure the Postgres client

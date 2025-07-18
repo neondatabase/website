@@ -1,6 +1,6 @@
 # Manage projects
 
-> The "Manage projects" document outlines procedures for creating, configuring, and managing projects within the Neon platform, detailing steps for project setup, user roles, and resource allocation.
+> The "Manage projects" documentation outlines the procedures for creating, configuring, and managing projects within the Neon platform, detailing steps for project setup, access control, and resource allocation.
 
 ## Source
 
@@ -27,7 +27,6 @@ To create a Neon project:
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Click **New Project**.
 3. Specify values for **Project Name**, **Postgres version**, **Cloud Service Provider**, and **Region**. Project names are limited to 64 characters. You can also specify **Compute size** settings when creating a project. The settings you specify become the default settings for computes that you add to your project when creating [branches](https://neon.com/docs/manage/branches#create-a-branch) or [read replicas](https://neon.com/docs/guides/read-replica-guide).
-
    - Neon supports fixed-size computes and autoscaling. For more information, see [Compute size and autoscaling configuration](https://neon.com/docs/manage/computes#compute-size-and-autoscaling-configuration).
    - The scale to zero setting determines whether a compute is automatically suspended after a period of inactivity. For more information, see [Scale to zero configuration](https://neon.com/docs/manage/computes#scale-to-zero-configuration).
 
@@ -357,12 +356,7 @@ The `jq` option specified in each example is an optional third-party tool that f
 
 A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](https://neon.com/docs/manage/api-keys#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
----
-updatedOn: '2024-12-13T21:17:10.768Z'
----
-
-   **Note**: To learn more about the types of API keys you can create — personal, organization, or project-scoped — see [Manage API Keys](https://neon.com/docs/manage/api-keys).
-
+**Note**: To learn more about the types of API keys you can create — personal, organization, or project-scoped — see [Manage API Keys](https://neon.com/docs/manage/api-keys).
 
 ### Create a project with the API
 
@@ -407,7 +401,7 @@ Details: Response body
   },
   "connection_uris": [
     {
-      "connection_uri": "postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname"
+      "connection_uri": "postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require"
     }
   ],
   "roles": [

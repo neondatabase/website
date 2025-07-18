@@ -1,6 +1,6 @@
 # Postgres jsonb_to_record() function
 
-> The document details the usage of the `jsonb_to_record()` function in Neon, explaining how to convert JSONB data into a PostgreSQL record, facilitating structured data manipulation within the database.
+> The document explains the usage of the `jsonb_to_record()` function in Neon, detailing how it converts JSONB data into a set of columns, facilitating structured data manipulation within PostgreSQL databases.
 
 ## Source
 

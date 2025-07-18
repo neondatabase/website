@@ -1,6 +1,6 @@
 # User Permissions
 
-> The "User Permissions" document outlines how to manage and configure user permissions within Neon, detailing the roles and access levels available to control database interactions.
+> The "User Permissions" document outlines the procedures for managing and configuring user access levels within Neon, detailing how to assign roles and set permissions to control database access and operations.
 
 ## Source
 
