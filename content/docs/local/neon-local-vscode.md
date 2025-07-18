@@ -5,7 +5,7 @@ subtitle: Develop with Neon in VS Code using Neon Local
 updatedOn: '2025-07-16T16:34:45.288Z'
 ---
 
-The Neon Local VS Code Extension lets you connect to any Neon branch using a familiar localhost connection string. Neon Local handles the routing, authentication, and branch management behind the scenes. Your app connects to `localhost:5432` like a local Postgres instance, but Neon Local routes traffic to your actual Neon branch in the cloud.
+The Neon Local Connect VS Code Extension lets you connect to any Neon branch using a familiar localhost connection string. The underlying Neon Local service handles the routing, authentication, and branch management behind the scenes. Your app connects to `localhost:5432` like a local Postgres instance, but Neon Local routes traffic to your actual Neon branch in the cloud.
 
 You can use this connection string in your app:
 
@@ -17,7 +17,7 @@ Switch branches, and your app keeps using the same connection string.
 
 ## What you can do
 
-With the Neon Local VS Code extension, you can:
+With the Neon Local Connect VS Code extension, you can:
 
 - Instantly connect to any Neon branch using a single, static localhost connection string
 - Create, switch, or reset branches directly from the VS Code panel
@@ -95,7 +95,7 @@ After connecting, find your local connection string in the extension panel. Copy
 DATABASE_URL="postgres://neon:npg@localhost:5432/<database_name>"
 ```
 
-Your app connects to `localhost:5432`, but Neon Local routes the traffic to your actual Neon branch in the cloud.
+Your app connects to `localhost:5432`, while the Neon Local service routes the traffic to your actual Neon branch in the cloud.
 
 > You only need to set this connection string once, no matter how many times you create, switch, or reset branches. Neon Local handles all the routing behind the scenes, so you never have to update your app config again.
 
