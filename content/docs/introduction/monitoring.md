@@ -27,7 +27,7 @@ To find out what's going on with your Neon projects and databases, Neon offers s
 
 <a href="/docs/guides/datadog" description="Export Neon Metrics to Datadog with the Neon Datadog Integration" icon="trend-up">Export metrics to Datadog</a>
 
-<a href="/docs/guides/opentelemetry" description="Send metrics and Postgres logs to any OpenTelemetry-compatible observability platform" icon="metrics">Export metrics to OpenTelemetry</a>
+<a href="/docs/guides/opentelemetry" description="Send metrics and Postgres logs to any OpenTelemetry-compatible observability platform" icon="trend-up">Export metrics to OpenTelemetry</a>
 
 </DetailIconCards>
 
