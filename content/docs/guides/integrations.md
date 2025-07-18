@@ -14,6 +14,8 @@ updatedOn: '2025-04-23T12:26:38.333Z'
 
 <a href="/docs/guides/datadog" title="Datadog" description="Send metrics and events from Neon Postgres to Datadog" icon="datadog"></a>
 
+<a href="/docs/guides/opentelemetry" title="OpenTelemetry" description="Send metrics and events from Neon to any OpenTelemetry compatible backend" icon="opentelemetry"></a>
+
 </TechCards>
 
 ## Deploy
