@@ -1,0 +1,19 @@
+# Permissions & roles in Neon Auth
+
+> The "Permissions & roles in Neon Auth" document outlines the roles and permissions framework within Neon, detailing how to manage user access and security settings effectively.
+
+## Source
+
+- [Permissions & roles in Neon Auth HTML](https://neon.com/docs/neon-auth/permissions-roles): The original HTML version of this documentation
+
+Neon Auth permissions are based on your organization's roles in Neon. Only organization admins can manage Neon Auth settings. Members and project collaborators can use Neon Auth features once configured, but cannot modify the integration settings.
+
+| Action            | Admin | Member | Collaborator |
+| ----------------- | :---: | :----: | :----------: |
+| Install Neon Auth |  ✅   |   ❌   |      ❌      |
+| Remove Neon Auth  |  ✅   |   ❌   |      ❌      |
+| Claim project     |  ✅   |   ❌   |      ❌      |
+| Generate SDK Keys |  ✅   |   ❌   |      ❌      |
+| Create users      |  ✅   |   ✅   |      ✅      |
+
+For more information about organization roles and permissions, see [User roles and permissions](https://neon.com/docs/manage/organizations#user-roles-and-permissions).

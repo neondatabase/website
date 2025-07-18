@@ -1,6 +1,6 @@
 # Postgres Decimal data types
 
-> The document titled "Postgres Decimal data types" details the usage and implementation of decimal data types in Neon, explaining how to define and manipulate precise numeric values within the Neon database environment.
+> The document explains the use and implementation of Postgres Decimal data types within Neon, detailing their precision, scale, and appropriate use cases for handling exact numeric data.
 
 ## Source
 

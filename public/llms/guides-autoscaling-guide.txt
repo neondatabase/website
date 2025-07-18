@@ -1,6 +1,6 @@
 # Enable Autoscaling in Neon
 
-> The document "Enable Autoscaling in Neon" guides users on configuring autoscaling for Neon databases, detailing steps to automatically adjust compute resources based on workload demands.
+> The document "Enable Autoscaling in Neon" guides users through configuring and managing autoscaling settings for their Neon databases, ensuring optimal resource allocation and performance.
 
 ## Source
 

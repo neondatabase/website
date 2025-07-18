@@ -1,6 +1,6 @@
 # Security reporting
 
-> The "Security reporting" document outlines the procedures for reporting security vulnerabilities in Neon, detailing how users can responsibly disclose issues to ensure the platform's security integrity.
+> The "Security Reporting" document outlines the procedures for reporting security vulnerabilities in Neon, detailing the contact methods and response expectations for users to ensure prompt and effective handling of security issues.
 
 ## Source
 

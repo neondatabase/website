@@ -1,6 +1,6 @@
 # Postgres rank() window function
 
-> The document explains the usage of the Postgres `rank()` window function within Neon, detailing how it assigns a unique rank to each row in a result set based on specified criteria.
+> The document explains the usage of the Postgres `rank()` window function within Neon, detailing how it assigns ranks to rows in a result set based on specified criteria.
 
 ## Source
 

@@ -1,6 +1,6 @@
 # Manage integrations
 
-> The "Manage integrations" document guides Neon users on configuring and managing third-party integrations to enhance their database functionality within the Neon platform.
+> The "Manage integrations" documentation outlines the procedures for configuring and managing third-party integrations within the Neon platform, facilitating seamless connectivity and interaction with external services.
 
 ## Source
 

@@ -1,6 +1,6 @@
 # The pgrowlocks extension
 
-> The document details the pgrowlocks extension for Neon, explaining how it tracks row-level locks in PostgreSQL tables to assist users in identifying and managing lock contention issues.
+> The document details the pgrowlocks extension for Neon, which allows users to monitor row-level locks in PostgreSQL databases, aiding in the analysis and management of database concurrency issues.
 
 ## Source
 

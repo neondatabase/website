@@ -1,6 +1,6 @@
 # Instant restore
 
-> The "Instant restore" document explains how Neon users can quickly restore a database branch to a previous state using the platform's branch restore feature.
+> The "Instant Restore" documentation explains how Neon users can quickly restore a database branch to a previous state, facilitating efficient data recovery and management within the Neon platform.
 
 ## Source
 

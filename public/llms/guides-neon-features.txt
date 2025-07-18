@@ -1,6 +1,6 @@
 # Neon feature guides
 
-> The "Neon feature guides" document details the functionalities and usage instructions for various features within the Neon database platform, aiding users in effectively utilizing Neon's capabilities.
+> The Neon feature guides document details the functionalities and usage of Neon's platform features, assisting users in effectively managing and optimizing their database operations within the Neon environment.
 
 ## Source
 

@@ -1,6 +1,6 @@
 # Replicate data with Inngest
 
-> The document "Replicate data with Inngest" guides Neon users on setting up logical replication using Inngest to synchronize data between a Neon database and other systems.
+> The document outlines the process for using Inngest to replicate data in Neon, detailing the steps for setting up logical replication to ensure data consistency and availability across different environments.
 
 ## Source
 

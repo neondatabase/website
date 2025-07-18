@@ -1,0 +1,51 @@
+# Neon Auth Components
+
+> The "Neon Auth Components" documentation outlines the various authentication components within the Neon platform, detailing their roles and interactions to facilitate secure user authentication and authorization processes.
+
+## Source
+
+- [Neon Auth Components HTML](https://neon.com/docs/neon-auth/get-started/components-overview): The original HTML version of this documentation
+
+> Pre-built Next.js components to make your life easier
+
+After setup, you can use these pre-built components to quickly add authentication features to your app.
+
+For the full documentation of all available components, see the [components reference](https://neon.com/docs/neon-auth/components/components).
+
+## UserButton
+
+The `UserButton` component shows the user's avatar and opens a dropdown with various user settings on click.
+
+```tsx
+import { UserButton } from '@stackframe/stack';
+
+export default function Page() {
+  return <UserButton />;
+}
+```
+
+## SignIn and SignUp
+
+These components show a sign-in and sign-up form, respectively.
+
+```tsx
+import { SignIn } from '@stackframe/stack';
+
+export default function Page() {
+  return <SignIn />;
+}
+```
+
+All Neon Auth components are modular and built from smaller primitives. For example, the `SignIn` component is composed of:
+
+- An `OAuthButtonGroup`, which itself is composed of multiple `OAuthButton` components
+- A `MagicLinkSignIn`, which has a text field and calls `signInWithMagicLink()`
+- A `CredentialSignIn`, which has two text fields and calls `signInWithCredential()`
+
+You can use these components individually to build a custom sign-in experience.
+
+To change the default sign-in URL to your own, see the documentation on [custom pages](https://neon.com/docs/neon-auth/customization/custom-pages).
+
+## More Components
+
+Neon Auth has many more components available. For a comprehensive list, see the [components reference](https://neon.com/docs/neon-auth/components).

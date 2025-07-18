@@ -1,6 +1,6 @@
 # Postgres Integer data types
 
-> The document "Postgres Integer data types" outlines the various integer data types available in PostgreSQL, detailing their storage requirements and usage within the Neon database environment.
+> The document details the integer data types available in PostgreSQL, explaining their storage requirements and usage, specifically for Neon users managing database schemas.
 
 ## Source
 

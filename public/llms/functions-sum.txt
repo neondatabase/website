@@ -1,6 +1,6 @@
 # Postgres sum() function
 
-> The document explains the usage of the Postgres `sum()` function within the Neon database, detailing its syntax and examples for aggregating numerical data in SQL queries.
+> The document details the usage of the Postgres `sum()` function within Neon, explaining its syntax and application for aggregating numerical data in a database.
 
 ## Source
 

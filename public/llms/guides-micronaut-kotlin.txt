@@ -1,6 +1,6 @@
 # Connect Micronaut Kotlin to Postgres on Neon
 
-> This document guides Neon users on connecting a Micronaut Kotlin application to a Postgres database hosted on Neon, detailing the necessary configurations and steps for successful integration.
+> The document guides users on connecting a Micronaut Kotlin application to a Postgres database hosted on Neon, detailing the configuration steps and necessary code snippets for seamless integration.
 
 ## Source
 
@@ -26,7 +26,6 @@ If you do not have one already, create a Neon project. Save your connection deta
 ## Create a Micronaut Kotlin project and add dependencies
 
 1. Create a Micronaut Kotlin project using the Micronaut CLI or the [Micronaut Launch](https://launch.micronaut.io/) website. Select Kotlin as the language and include the following features:
-
    - postgres
    - jdbc-hikari
 
@@ -59,7 +58,7 @@ micronaut:
 
 datasources:
   default:
-    url: ${JDBC_DATABASE_URL:`postgresql://user:password@endpoint.neon.tech:5432/dbname?sslmode=require`}
+    url: ${JDBC_DATABASE_URL:`postgresql://user:password@endpoint.neon.tech:5432/dbname?sslmode=require&channel_binding=require`}
     driverClassName: org.postgresql.Driver
     username: ${JDBC_DATABASE_USERNAME:`user`}
     password: ${JDBC_DATABASE_PASSWORD:`password`}
@@ -69,7 +68,7 @@ datasources:
 For local development, you can create a `.env` file at the root of your project with your actual Neon credentials:
 
 ```shell
-JDBC_DATABASE_URL=jdbc:postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require
+JDBC_DATABASE_URL=jdbc:postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require
 JDBC_DATABASE_USERNAME=<user>
 JDBC_DATABASE_PASSWORD=<password>
 ```

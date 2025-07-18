@@ -1,6 +1,6 @@
 # Connect to Neon
 
-> The "Connect to Neon" documentation outlines the steps and requirements for establishing a connection to a Neon database, detailing the necessary configurations and supported connection methods specific to Neon's platform.
+> The "Connect to Neon" documentation outlines the steps and requirements for establishing a connection to a Neon database, detailing supported connection methods and necessary configurations for users.
 
 ## Source
 

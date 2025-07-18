@@ -1,6 +1,6 @@
 # Media storage with Cloudinary
 
-> The document "Media storage with Cloudinary" guides Neon users on integrating Cloudinary for efficient media storage and management within their applications.
+> The document outlines how to integrate Cloudinary for media storage within Neon, detailing configuration steps and API usage to manage and deliver media assets efficiently.
 
 ## Source
 
@@ -22,7 +22,6 @@ This guide demonstrates how to integrate Cloudinary with Neon. You'll learn how 
 1.  Sign up for a free or paid account at [Cloudinary.com](https://cloudinary.com/users/register/free).
 2.  Once logged in, navigate to your **Account settings**.
 3.  Find your **Product Environment Credentials** which include:
-
     - **Cloud Name**
     - **API Key**
     - **API Secret**

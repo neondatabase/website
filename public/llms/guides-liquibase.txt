@@ -1,6 +1,6 @@
 # Get started with Liquibase and Neon
 
-> The document "Get started with Liquibase and Neon" guides Neon users through the process of integrating Liquibase for database version control and management within the Neon environment.
+> This document guides Neon users through integrating Liquibase for database schema management, detailing setup, configuration, and execution of schema changes within the Neon environment.
 
 ## Source
 
@@ -14,7 +14,7 @@ This guide steps you through installing the Liquibase CLI, configuring Liquibase
 
 - A Neon account. See [Sign up](https://neon.com/docs/get-started-with-neon/signing-up).
 - A Neon project. See [Create your first project](https://neon.com/docs/get-started-with-neon/setting-up-a-project).
-- Liquibase requires Java. For Liquibase Java requirements, see [Requirements](https://docs.liquibase.com/start/install/liquibase-requirements.html). To check if you have Java installed, run `java --version`, or `java -version` on macOS`.
+- Liquibase requires Java. For Liquibase Java requirements, see [Requirements](https://docs.liquibase.com/start/install/liquibase-requirements.html). To check if you have Java installed, run `java --version`, or `java -version` on macOS.
 
 ## Download and extract Liquibase
 
@@ -132,7 +132,7 @@ jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog?user=alex
 
    ```bash
    changeLogFile:dbchangelog.xml
-   url: jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog?user=alex&password=AbC123dEf&sslmode=require
+   url: jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog?user=alex&password=AbC123dEf&sslmode=require&channel_binding=require
    ```
 
 ## Take a snapshot of your database

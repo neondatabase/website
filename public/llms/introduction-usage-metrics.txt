@@ -1,6 +1,6 @@
 # Usage metrics
 
-> The "Usage metrics" document outlines how Neon collects and reports data on user activity and resource consumption, aiding in monitoring and optimizing database performance within the Neon platform.
+> The "Usage metrics" document outlines how Neon collects and displays data on resource consumption and performance, enabling users to monitor and manage their database usage effectively.
 
 ## Source
 
@@ -23,7 +23,6 @@ In Neon, storage consists of your total **data size** and **history**.
   This aspect of Neon storage is unique: "History" is a log of changes (inserts, updates, and deletes) to your data over time in the form of Write-Ahead Log (WAL) records. History enables the instant restore, time travel, and branching features mentioned above.
 
   The size of your history depends on a couple of factors:
-
   - **The volume of changes to your data** &#8212; the volume of inserts, updates, and deletes. For example, a write-heavy workload will generate more history than a read-heavy workload.
   - **How much history you keep** &#8212; referred to as [restore window](https://neon.com/docs/introduction/branching#restore-window), which can be an hour, a day, a week, or even a month. The restore window is configurable for each Neon project. As you might imagine, 1 day of history would generally require less storage than 30 days of history, but less history limits the features that depend on it. For example, 1 day of history means that your maximum instant restore point is only 1 day in the past.
 
@@ -234,20 +233,21 @@ To estimate what your compute hour usage might be per month:
 
    This calculation is useful when trying to select the right Neon plan or when estimating the extra compute usage you might need.
 
-      **Note**: If you plan to use Neon's _Autoscaling_ feature, estimating **compute hours** is more challenging. Autoscaling adjusts the compute size based on demand within the defined minimum and maximum compute size thresholds. The best approach is to estimate an average compute size and modify the compute hours formula as follows: 
+      **Note**: If you plan to use Neon's _Autoscaling_ feature, estimating **compute hours** is more challenging. Autoscaling adjusts the compute size based on demand within the defined minimum and maximum compute size thresholds. The best approach is to estimate an average compute size and modify the compute hours formula as follows:
 
-```text
+   ```text
    compute hours = average compute size * active hours
    ```
 
- To estimate an average compute size, start with a minimum compute size that can hold your data or working set (see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute)). Pick a maximum compute size that can handle your peak loads. Try estimating an average compute size between those thresholds based on your workload profile for a typical day.
+   To estimate an average compute size, start with a minimum compute size that can hold your data or working set (see [How to size your compute](https://neon.com/docs/manage/endpoints#how-to-size-your-compute)). Pick a maximum compute size that can handle your peak loads. Try estimating an average compute size between those thresholds based on your workload profile for a typical day.
 
 ### Compute FAQs
 
 Details: **What is a compute hour?**
-It's a metric for tracking compute usage. 1 compute hour is equal to 1 [active hour](#active-hours) for a compute with 1 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free Plan, it would require 4 _active hours_ to use 1 compute hour. On the other hand, if you have a compute with 4 vCPU, it would only take 15 minutes to use 1 compute hour.
+It's a metric for tracking compute usage. 1 compute hour is equal to 1 [active hour](https://neon.com/docs/introduction/usage-metrics#active-hours) for a compute with 1 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free Plan, it would require 4 _active hours_ to use 1 compute hour. On the other hand, if you have a compute with 4 vCPU, it would only take 15 minutes to use 1 compute hour.
 
 To calculate compute hour usage, you would use the following formula:
+
 ```
 compute hours = compute size * active hours
 ```

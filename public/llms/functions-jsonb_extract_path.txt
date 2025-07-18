@@ -1,6 +1,6 @@
 # Postgres jsonb_extract_path() function
 
-> The document explains the usage of the `jsonb_extract_path()` function in Neon, detailing how to extract JSON object elements using a specified path within a JSONB data type in PostgreSQL.
+> The document details the usage of the `jsonb_extract_path()` function in PostgreSQL, explaining how it retrieves JSON values from a specified path within a `jsonb` column, specifically for Neon database users.
 
 ## Source
 

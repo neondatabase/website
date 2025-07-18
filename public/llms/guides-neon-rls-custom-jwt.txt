@@ -1,6 +1,6 @@
 # Using Custom JWTs with Neon RLS
 
-> The document "Using Custom JWTs with Neon RLS" explains how to integrate custom JSON Web Tokens (JWTs) with Neon's Row-Level Security (RLS) to control data access based on user identity.
+> The document explains how to implement custom JSON Web Tokens (JWTs) with Neon's Row-Level Security (RLS) to control data access within a Neon database.
 
 ## Source
 

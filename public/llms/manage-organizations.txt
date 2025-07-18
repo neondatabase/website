@@ -1,6 +1,6 @@
 # Organizations
 
-> The "Organizations" documentation outlines how Neon users can manage and configure organizational settings, including creating, modifying, and deleting organizations, as well as managing team members and permissions within the Neon platform.
+> The "Organizations" documentation outlines how Neon users can manage and configure organizational settings, including creating, modifying, and deleting organizations within the Neon platform.
 
 ## Source
 

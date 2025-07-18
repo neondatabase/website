@@ -1,6 +1,6 @@
 # Run ad-hoc queries with Read Replicas
 
-> The document titled "Run ad-hoc queries with Read Replicas" explains how Neon users can execute ad-hoc queries using read replicas, detailing the process and configurations necessary within the Neon database environment.
+> The document explains how to execute ad-hoc queries using read replicas in Neon, detailing the steps to configure and utilize read replicas for query distribution and load balancing.
 
 ## Source
 
@@ -85,7 +85,7 @@ curl --request POST \
    Your connection string will look something like this:
 
    ```bash
-   postgresql://user:password@ep-read-replica-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+   postgresql://user:password@ep-read-replica-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    ```
 
 ### Running ad-hoc queries

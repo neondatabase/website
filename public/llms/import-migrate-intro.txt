@@ -1,6 +1,6 @@
 # Neon data migration guides
 
-> The "Neon data migration guides" document outlines procedures for migrating data to Neon, detailing steps and tools specific to Neon's database environment to facilitate seamless data transition.
+> The Neon data migration guides offer step-by-step instructions for migrating data to Neon, detailing processes for various data sources and ensuring seamless integration into the Neon database environment.
 
 ## Source
 

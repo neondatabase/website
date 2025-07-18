@@ -1,6 +1,6 @@
 # Automate branching with GitHub Actions
 
-> The document "Automate branching with GitHub Actions" guides Neon users on setting up GitHub Actions to automate the creation and management of database branches within the Neon platform.
+> The document "Automate branching with GitHub Actions" guides Neon users on setting up GitHub Actions to automate the creation and management of database branches, streamlining workflows within Neon's environment.
 
 ## Source
 
@@ -416,7 +416,6 @@ are two ways you can perform this setup:
 
 - **Manual setup** — this method requires obtaining a Neon API key and
   configuring it manually in your GitHub repository.
-
   1. Obtain a Neon API key. See
      [Create an API key](https://neon.com/docs/manage/api-keys#create-an-api-key)
      for instructions.

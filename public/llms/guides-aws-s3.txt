@@ -1,6 +1,6 @@
 # File storage with AWS S3
 
-> The document titled "File storage with AWS S3" guides Neon users on integrating and managing file storage using Amazon S3, detailing configuration steps and best practices specific to Neon's platform.
+> The document outlines the process for integrating AWS S3 file storage with Neon, detailing configuration steps and best practices for managing data storage within the Neon environment.
 
 ## Source
 

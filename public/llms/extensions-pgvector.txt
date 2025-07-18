@@ -1,6 +1,6 @@
 # The pgvector extension
 
-> The document details the pgvector extension for Neon, which enables users to store and perform similarity searches on vector data within a PostgreSQL database.
+> The document details the pgvector extension for Neon, enabling users to store and perform similarity searches on vector data within PostgreSQL databases.
 
 ## Source
 

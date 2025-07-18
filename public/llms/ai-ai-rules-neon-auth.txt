@@ -1,6 +1,6 @@
 # AI Rules: Neon Auth
 
-> The "AI Rules: Neon Auth" document outlines the authentication rules and procedures for integrating AI capabilities within the Neon platform, detailing the necessary configurations and security protocols specific to Neon users.
+> The "AI Rules: Neon Auth" document outlines the authentication rules and procedures for integrating AI capabilities within the Neon platform, detailing the necessary configurations and security protocols for seamless AI service access.
 
 ## Source
 
@@ -12,10 +12,6 @@ Related docs:
 Repository:
 - [READ ME](https://github.com/neondatabase-labs/ai-rules)
 - [neon-auth.mdc](https://github.com/neondatabase-labs/ai-rules/blob/main/neon-auth.mdc)
-
----
-updatedOn: '2025-04-08T22:55:27.453Z'
----
 
 ## How to use
 
@@ -32,7 +28,6 @@ For other AI tools, you can include these rules as context when chatting with yo
 If you prefer, you can clone or download the rules directly from our [AI Rules repository](https://github.com/neondatabase-labs/ai-rules).
 
 Once added to your project, AI tools will automatically use these rules when working with Neon Auth code. You can also reference them explicitly in prompts.
-
 
 ## Rules
 
@@ -55,16 +50,16 @@ This document provides comprehensive guidelines for implementing authentication 
 
 ### Initial Setup
 
-- Run the installation wizard with:
+- Run the installation wizard with:  
   `npx @stackframe/init-stack@latest`
-- Update your API keys in your `.env.local` file:
-  - `NEXT_PUBLIC_STACK_PROJECT_ID`
-  - `NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY`
+- Update your API keys in your `.env.local` file:  
+  - `NEXT_PUBLIC_STACK_PROJECT_ID`  
+  - `NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY`  
   - `STACK_SECRET_SERVER_KEY`
-- Key files created/updated include:
-  - `app/handler/[...stack]/page.tsx` (default auth pages)
-  - `app/layout.tsx` (wrapped with StackProvider and StackTheme)
-  - `app/loading.tsx` (provides a Suspense fallback)
+- Key files created/updated include:  
+  - `app/handler/[...stack]/page.tsx` (default auth pages)  
+  - `app/layout.tsx` (wrapped with StackProvider and StackTheme)  
+  - `app/loading.tsx` (provides a Suspense fallback)  
   - `stack.ts` (initializes your Stack server app)
 
 ### UI Components
@@ -72,7 +67,7 @@ This document provides comprehensive guidelines for implementing authentication 
 - Use pre-built components from `@stackframe/stack` like `<UserButton />`, `<SignIn />`, and `<SignUp />` to quickly set up auth UI.
 - You can also compose smaller pieces like `<OAuthButtonGroup />`, `<MagicLinkSignIn />`, and `<CredentialSignIn />` for custom flows.
 - Example:
-
+  
   ```tsx
   import { SignIn } from '@stackframe/stack';
   export default function Page() {
@@ -90,7 +85,7 @@ This document provides comprehensive guidelines for implementing authentication 
 
 - Client Components rely on hooks like `useUser()` and `useStackApp()`.
 - Example:
-
+  
   ```tsx
   "use client";
   import { useUser } from "@stackframe/stack";
@@ -104,7 +99,7 @@ This document provides comprehensive guidelines for implementing authentication 
 
 - For Server Components, use `stackServerApp.getUser()` from your `stack.ts` file.
 - Example:
-
+  
   ```tsx
   import { stackServerApp } from "@/stack";
   export default async function ServerComponent() {
@@ -120,7 +115,7 @@ This document provides comprehensive guidelines for implementing authentication 
   - Using `await stackServerApp.getUser({ or: "redirect" })` in Server Components.
   - Implementing middleware that checks for a user and redirects to `/handler/sign-in` if not found.
 - Example middleware:
-
+  
   ```tsx
   export async function middleware(request: NextRequest) {
     const user = await stackServerApp.getUser();
@@ -151,6 +146,7 @@ Neon Auth creates and manages a schema in your database that stores user informa
   - `users_sync_deleted_at_idx` on `deleted_at`: For quickly identifying deleted users
 
 ### Schema Creation SQL
+
 ```sql
 -- Create schema if it doesn't exist
 CREATE SCHEMA IF NOT EXISTS neon_auth;
@@ -183,18 +179,18 @@ SELECT * FROM neon_auth.users_sync WHERE deleted_at IS NULL;
 To join user data with your application tables:
 
 ```sql
-SELECT
+SELECT 
   t.*,
   u.id AS user_id,
   u.name AS user_name,
   u.email AS user_email
-FROM
+FROM 
   public.todos t
-LEFT JOIN
+LEFT JOIN 
   neon_auth.users_sync u ON t.owner = u.id
-WHERE
+WHERE 
   u.deleted_at IS NULL
-ORDER BY
+ORDER BY 
   t.id;
 ```
 
@@ -316,16 +312,16 @@ export default function ProfilePage() {
 ### Database Query for User's Content
 ```sql
 -- Get all todos for the currently logged in user
-SELECT
+SELECT 
   t.*
-FROM
+FROM 
   public.todos t
-LEFT JOIN
+LEFT JOIN 
   neon_auth.users_sync u ON t.owner = u.id
-WHERE
+WHERE 
   u.id = $current_user_id
   AND u.deleted_at IS NULL
-ORDER BY
+ORDER BY 
   t.created_at DESC;
 ```
 ````

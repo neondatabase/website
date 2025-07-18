@@ -1,6 +1,6 @@
 # Autoscaling
 
-> The "Autoscaling" documentation explains how Neon automatically adjusts compute resources based on workload demand, ensuring efficient resource utilization and performance management for users.
+> The document explains Neon's autoscaling feature, detailing how it automatically adjusts compute resources based on workload demands to optimize performance and resource utilization.
 
 ## Source
 

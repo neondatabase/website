@@ -1,6 +1,6 @@
 # Project collaboration
 
-> The "Project Collaboration" document guides Neon users on how to collaborate effectively within projects by managing roles, permissions, and access to databases, ensuring streamlined teamwork and data security.
+> The "Project Collaboration" document guides Neon users on how to effectively collaborate on database projects by managing roles, permissions, and access within the Neon platform.
 
 ## Source
 

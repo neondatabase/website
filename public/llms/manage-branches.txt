@@ -1,6 +1,6 @@
 # Manage branches
 
-> The "Manage branches" document explains how Neon users can create, list, switch, and delete branches within their database projects, facilitating efficient database version control and management.
+> The "Manage branches" documentation outlines the procedures for creating, managing, and deleting branches within the Neon database platform, facilitating efficient database version control and organization.
 
 ## Source
 
@@ -46,7 +46,6 @@ To view the branches in a Neon project:
    
 
    Branch details in this table view include:
-
    - **Branch**: The branch name, which is a generated name if no name was specified when created.
    - **Parent**: Indicates the parent from which this branch was created, helping you track your branch hierarchy.
    - **Compute hours**: Number of hours the branch's compute was active so far in the current billing period.
@@ -60,7 +59,6 @@ To view the branches in a Neon project:
    
 
    Branch details shown on the branch page may include:
-
    - **Archive status**: This only appears if the branch was archived. For more, see [Branch archiving](https://neon.com/docs/guides/branch-archiving).
    - **ID**: The branch ID. Branch IDs have a `br-` prefix.
    - **Created on**: The date and time the branch was created.
@@ -73,7 +71,6 @@ To view the branches in a Neon project:
    - **Compare to parent**: For information about the **Open schema diff** option, see [Schema diff](https://neon.com/docs/guides/schema-diff).
 
    The branch details page also includes details about the **Computes**, **Roles & Databases**, and **Child branches** that belong to the branch. All of these objects are associated with a particular branch. For information about these objects, see:
-
    - [Manage computes](https://neon.com/docs/manage/computes#view-a-compute).
    - [Manage roles](https://neon.com/docs/manage/roles)
    - [Manage databases](https://neon.com/docs/manage/databases)
@@ -257,12 +254,7 @@ The `jq` option specified in each example is an optional third-party tool that f
 
 A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](https://neon.com/docs/manage/api-keys#create-an-api-key). In the examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
----
-updatedOn: '2024-12-13T21:17:10.768Z'
----
-
-   **Note**: To learn more about the types of API keys you can create — personal, organization, or project-scoped — see [Manage API Keys](https://neon.com/docs/manage/api-keys).
-
+**Note**: To learn more about the types of API keys you can create — personal, organization, or project-scoped — see [Manage API Keys](https://neon.com/docs/manage/api-keys).
 ### Create a branch with the API
 
 The following Neon API method creates a branch. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranch).

@@ -1,6 +1,6 @@
 # Logical replication commands
 
-> The document "Logical replication commands" details the commands and procedures for managing logical replication in Neon, enabling users to replicate data changes between databases using logical decoding and replication slots.
+> The document outlines commands for managing logical replication in Neon, detailing how to set up, monitor, and control replication slots and subscriptions within the platform.
 
 ## Source
 

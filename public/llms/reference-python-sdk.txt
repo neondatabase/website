@@ -1,6 +1,6 @@
 # Python SDK for the Neon API
 
-> The document details the Python SDK for the Neon API, enabling users to interact programmatically with Neon's database services using Python, including installation instructions and usage examples.
+> The document details the Python SDK for the Neon API, enabling users to interact programmatically with Neon's database services through Python, including installation instructions, usage examples, and API reference.
 
 ## Source
 

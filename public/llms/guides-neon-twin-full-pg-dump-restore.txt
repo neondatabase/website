@@ -1,6 +1,6 @@
 # Full Twin
 
-> The "Full Twin" documentation guides Neon users on how to create a complete copy of a Neon database using the pg_dump and pg_restore tools.
+> The "Full Twin" documentation guides Neon users on how to create a complete replica of a PostgreSQL database using the pg_dump and restore process, ensuring data consistency and redundancy.
 
 ## Source
 
@@ -133,6 +133,7 @@ on:
     branches:
       - main
   workflow_dispatch:
+
 ```
 
 ### Add Concurrency and Conditions

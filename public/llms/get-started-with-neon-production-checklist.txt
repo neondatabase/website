@@ -1,6 +1,6 @@
 # Getting ready for production
 
-> The "Getting ready for production" document outlines a checklist for Neon users to prepare their database environments for production deployment, covering aspects like security, performance, and monitoring configurations.
+> The "Getting ready for production" document outlines a checklist for preparing Neon databases for production environments, detailing steps for configuration, security, performance optimization, and monitoring to ensure reliable and efficient database operations.
 
 ## Source
 
@@ -8,27 +8,27 @@
 
 ## Production checklist
 
-- [ ] [1. Set a compute size that can handle production traffic](https://neon.com/#set-a-compute-size-that-can-handle-production-traffic)
+- [ ] [1. Set a compute size that can handle production traffic](https://neon.com/docs/get-started-with-neon/production-checklist#set-a-compute-size-that-can-handle-production-traffic)
   Make sure your default branch can handle production traffic. A higher minimum compute can help you avoid performance bottlenecks.
-- [ ] [2. Enable autoscaling to handle usage spikes](https://neon.com/#enable-autoscaling-to-handle-usage-spikes)
+- [ ] [2. Enable autoscaling to handle usage spikes](https://neon.com/docs/get-started-with-neon/production-checklist#enable-autoscaling-to-handle-usage-spikes)
   Set your compute to automatically scale up, allowing your app to handle traffic surges and stay performant without manual scaling.
-- [ ] [3. Disable scale to zero](https://neon.com/#disable-scale-to-zero)
+- [ ] [3. Disable scale to zero](https://neon.com/docs/get-started-with-neon/production-checklist#disable-scale-to-zero)
   Scale to zero turns off your compute after a period of inactivity. Ideal for development or other environments with bursty usage.
-- [ ] [4. Use a pooled connection](https://neon.com/#use-a-pooled-connection)
+- [ ] [4. Use a pooled connection](https://neon.com/docs/get-started-with-neon/production-checklist#use-a-pooled-connection)
   Increase your database's ability to handle concurrent connections by using connection pooling.
-- [ ] [5. Increase your project's restore window to 7 days](https://neon.com/#increase-your-projects-restore-window-to-7-days)
+- [ ] [5. Increase your project's restore window to 7 days](https://neon.com/docs/get-started-with-neon/production-checklist#increase-your-projects-restore-window-to-7-days)
   Protect your production data from accidental loss. Keep at least a 7-day restore window for quick data recovery and analysis.
-- [ ] [6. Restrict database access to trusted IPs](https://neon.com/#restrict-database-access-to-trusted-ips)
+- [ ] [6. Restrict database access to trusted IPs](https://neon.com/docs/get-started-with-neon/production-checklist#restrict-database-access-to-trusted-ips)
   Secure your database by limiting connections to trusted IP addresses.
-- [ ] [7. Set up metrics export to Datadog](https://neon.com/#set-up-metrics-export-to-datadog)
+- [ ] [7. Set up metrics export to Datadog](https://neon.com/docs/get-started-with-neon/production-checklist#set-up-metrics-export-to-datadog)
   Export Neon metrics to Datadog and centralize your database monitoring with your existing observability stack.
-- [ ] [8. Install pg_stat_statements](https://neon.com/#install-pgstatstatements)
+- [ ] [8. Install pg_stat_statements](https://neon.com/docs/get-started-with-neon/production-checklist#install-pgstatstatements)
   Enable query performance monitoring to track execution times and frequency.
-- [ ] [9. Ensure your app reconnects after your database restarts](https://neon.com/#ensure-your-app-reconnects-after-your-database-restarts)
+- [ ] [9. Ensure your app reconnects after your database restarts](https://neon.com/docs/get-started-with-neon/production-checklist#ensure-your-app-reconnects-after-your-database-restarts)
   Verify your application handles compute restarts gracefully.
-- [ ] [10. Upgrade to get priority support](https://neon.com/#upgrade-to-a-neon-business-plan-for-priority-support)
+- [ ] [10. Upgrade to get priority support](https://neon.com/docs/get-started-with-neon/production-checklist#upgrade-to-a-neon-business-plan-for-priority-support)
   Get faster support and priority handling for your production database with a Business plan.
-- [ ] [11. Advanced: Set up cross-region replication](https://neon.com/#advanced-set-up-cross-region-replication)
+- [ ] [11. Advanced: Set up cross-region replication](https://neon.com/docs/get-started-with-neon/production-checklist#advanced-set-up-cross-region-replication)
   For added resilience, replicate your data to a Neon project in another region. This helps prepare for regional outages, making it possible to failover to a copy of your database in a different region, if necessary.
 
 ## Set a compute size that can handle production traffic
@@ -91,7 +91,7 @@ Use a pooled connection string by adding `-pooler` to your endpoint ID, or simpl
 Example connection string:
 
 ```bash
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 ## Increase your project's restore window to 7 days

@@ -1,6 +1,6 @@
 # Partial Twin
 
-> The "Partial Twin" document guides Neon users on how to create a partial copy of a PostgreSQL database using the `pg_dump` and `pg_restore` commands, focusing on specific tables or schemas.
+> The "Partial Twin" documentation guides Neon users on how to perform partial PostgreSQL database dumps and restores using the Neon platform, enabling efficient data management and recovery processes.
 
 ## Source
 
@@ -194,6 +194,7 @@ on:
     branches:
       - main
   workflow_dispatch:
+
 ```
 
 ### Add Concurrency and Conditions

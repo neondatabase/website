@@ -1,6 +1,6 @@
 # The pg_cron extension
 
-> The document details the pg_cron extension for Neon, explaining how it enables users to schedule PostgreSQL database jobs directly within the database environment.
+> The document details the pg_cron extension for Neon, enabling users to schedule PostgreSQL commands directly within the database using cron syntax.
 
 ## Source
 

@@ -1,6 +1,6 @@
 # Get started with Flyway and Neon
 
-> The document "Get started with Flyway and Neon" guides users on integrating Flyway with Neon for database version control, detailing setup, configuration, and execution of migrations within the Neon environment.
+> The document guides Neon users on integrating Flyway for database version control, detailing steps to configure and execute Flyway migrations within the Neon environment.
 
 ## Source
 

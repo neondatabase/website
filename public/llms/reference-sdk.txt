@@ -1,6 +1,6 @@
 # Neon SDKs
 
-> The Neon SDKs documentation outlines the available software development kits for integrating with Neon's cloud-native PostgreSQL database, detailing installation, configuration, and usage instructions for developers.
+> The Neon SDKs documentation outlines the available software development kits for integrating with Neon, detailing installation, configuration, and usage instructions to facilitate seamless interaction with Neon's database services.
 
 ## Source
 

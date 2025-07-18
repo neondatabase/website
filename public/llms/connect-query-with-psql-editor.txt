@@ -1,6 +1,6 @@
 # Connect with psql
 
-> The document titled "Connect with psql" guides Neon users on how to establish a connection to their Neon database using the psql command-line tool, detailing the necessary steps and configurations specific to Neon's environment.
+> The document details how to connect to a Neon database using the psql command-line tool, including steps for installation, configuration, and execution of SQL queries.
 
 ## Source
 

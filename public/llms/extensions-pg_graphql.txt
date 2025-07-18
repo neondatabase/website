@@ -1,6 +1,6 @@
 # The pg_graphql extension
 
-> The document details the pg_graphql extension for Neon, which enables users to expose PostgreSQL databases as GraphQL APIs, facilitating seamless integration and querying of data using GraphQL syntax.
+> The document details the pg_graphql extension for Neon, enabling users to query PostgreSQL databases using GraphQL, facilitating seamless integration of GraphQL APIs with PostgreSQL data.
 
 ## Source
 
@@ -75,13 +75,21 @@ INSERT INTO "Book" (title, author, published_year) VALUES
 ('1984', 'George Orwell', 1949);
 ```
 
-   **Info** Inflection: To convert `snake_case` SQL names to `camelCase` (fields) / `PascalCase` (types) GraphQL names, use the `@graphql` comment directive on the schema: 
+   **Info** Inflection: To convert `snake_case` SQL names to `camelCase` (fields) / `PascalCase` (types) GraphQL names, use the `@graphql` comment directive on the schema:
 
 ```sql
 COMMENT ON SCHEMA public IS '@graphql({"inflect_names": true})';
 ```
 
- This will convert all table and column names to their GraphQL equivalents. For example: - `book` table becomes `Book` type - `book_collection` becomes `bookCollection` field - `book_authors` table becomes `BookAuthors` type - `published_at` column becomes `publishedAt` field - `published_year` column becomes `publishedYear` field It is optional to use this directive, but it is recommended for consistency and readability. The guide uses the inflected names for clarity. Learn more about Inflection in the [pg_graphql documentation](https://supabase.github.io/pg_graphql/configuration/#inflection).
+This will convert all table and column names to their GraphQL equivalents. For example:
+
+- `book` table becomes `Book` type
+- `book_collection` becomes `bookCollection` field
+- `book_authors` table becomes `BookAuthors` type
+- `published_at` column becomes `publishedAt` field
+- `published_year` column becomes `publishedYear` field
+
+It is optional to use this directive, but it is recommended for consistency and readability. The guide uses the inflected names for clarity. Learn more about Inflection in the [pg_graphql documentation](https://supabase.github.io/pg_graphql/configuration/#inflection).
 
 #### Fetch all books
 

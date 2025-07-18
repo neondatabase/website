@@ -1,6 +1,6 @@
 # Neon status
 
-> The "Neon status" document outlines the current operational status, known issues, and recent updates for the Neon database platform, assisting users in understanding the platform's reliability and performance.
+> The "Neon status" document outlines the current operational status, limitations, and known issues of the Neon database platform, helping users understand its capabilities and any potential constraints they might encounter.
 
 ## Source
 

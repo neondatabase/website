@@ -1,6 +1,6 @@
 # Compliance
 
-> The "Compliance" document outlines Neon's adherence to industry standards and regulations, detailing its security certifications and practices to ensure data protection and compliance with legal requirements.
+> The "Compliance" document outlines Neon's adherence to industry standards and regulations, detailing its security certifications and compliance measures to ensure data protection and privacy for its users.
 
 ## Source
 

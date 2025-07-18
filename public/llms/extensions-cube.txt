@@ -1,6 +1,6 @@
 # The cube extension
 
-> The document details the installation and usage of the cube extension in Neon, enabling users to perform multidimensional data analysis within their PostgreSQL databases.
+> The document details the cube extension for Neon, explaining its functionality for multidimensional data storage and querying within the Neon database environment.
 
 ## Source
 

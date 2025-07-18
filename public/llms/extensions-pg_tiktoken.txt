@@ -1,6 +1,6 @@
 # The pg_tiktoken extension
 
-> The document details the pg_tiktoken extension for Neon, which integrates OpenAI's tiktoken library into PostgreSQL, enabling tokenization of text data directly within the database.
+> The document details the pg_tiktoken extension for Neon, which integrates OpenAI's tiktoken library into PostgreSQL to tokenize text data efficiently within the database.
 
 ## Source
 

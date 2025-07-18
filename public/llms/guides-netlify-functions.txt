@@ -1,6 +1,6 @@
 # Use Neon with Netlify Functions
 
-> The document explains how to integrate Neon with Netlify Functions, detailing the steps to connect a Neon PostgreSQL database to serverless functions hosted on Netlify.
+> The document outlines the steps to integrate Neon with Netlify Functions, detailing the process of setting up a serverless function to connect to a Neon database using environment variables and connection pooling.
 
 ## Source
 
@@ -53,7 +53,7 @@ After logging into the Neon Console, proceed to the [Projects](https://console.n
 You can find your Neon database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. It should look similar to this:
 
 ```bash
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 Keep your connection string handy for later use.

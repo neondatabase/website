@@ -1,6 +1,6 @@
 # Manage computes
 
-> The "Manage computes" document outlines procedures for Neon users to create, modify, and delete compute endpoints, facilitating the management of computational resources within the Neon database environment.
+> The "Manage Computes" documentation for Neon outlines procedures for creating, configuring, and managing compute resources within the Neon platform, detailing steps for optimizing compute performance and resource allocation.
 
 ## Source
 
@@ -260,12 +260,7 @@ The `jq` option specified in each example is an optional third-party tool that f
 
 A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](https://neon.com/docs/manage/api-keys#create-an-api-key). In the cURL examples below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
----
-updatedOn: '2024-12-13T21:17:10.768Z'
----
-
-   **Note**: To learn more about the types of API keys you can create — personal, organization, or project-scoped — see [Manage API Keys](https://neon.com/docs/manage/api-keys).
-
+**Note**: To learn more about the types of API keys you can create — personal, organization, or project-scoped — see [Manage API Keys](https://neon.com/docs/manage/api-keys).
 ### Create a compute with the API
 
 The following Neon API method creates a compute.
@@ -575,7 +570,6 @@ Possible steps you can take to identify the issues include:
    Look for processes initiated by your users, applications, or integrations that may be keeping your compute active.
 
 2. **Review connection patterns**
-
    - Ensure that no applications are sending frequent, unnecessary connection requests.
    - Consider batching connections if possible, or use [connection pooling](https://neon.com/docs/connect/connection-pooling) to limit persistent connections.
 

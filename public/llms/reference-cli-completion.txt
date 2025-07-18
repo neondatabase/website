@@ -1,6 +1,6 @@
 # Neon CLI commands — completion
 
-> The document "Neon CLI commands — completion" details how to enable command-line completion for the Neon CLI, enhancing user efficiency by allowing automatic suggestions and completions for commands in supported shells.
+> The document details the Neon CLI command completion feature, explaining how to enable and use shell command completion for efficient command-line operations within the Neon environment.
 
 ## Source
 

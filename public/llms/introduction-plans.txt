@@ -1,6 +1,6 @@
 # Neon plans
 
-> The "Neon plans" document outlines the different subscription plans available for Neon users, detailing the features, limitations, and pricing associated with each plan to assist users in selecting the appropriate service level for their needs.
+> The document outlines the various subscription plans available for Neon users, detailing the features and limitations of each plan to assist in selecting the appropriate service level for their needs.
 
 ## Source
 
@@ -35,9 +35,11 @@ The Free Plan includes the following usage allowances:
 | **Compute**                | 191.9 compute hours/month&#8212;enough to run a primary 0.25 CU compute 24/7; up to 5 of those compute hours can be used for non-default branch computes |
 | **Data transfer (Egress)** | 5 GB per month                                                                                                                                           |
 
-   **Tip** What is a compute hour?: - A **compute hour** is one _active hour_ for a compute with 1 vCPU. For a compute with .25 vCPU, it takes 4 _active hours_ to use 1 compute hour. On the other hand, if your compute has 4 vCPUs, it takes only 15 minutes to use 1 compute hour. - An **active hour** is a measure of the amount of time a compute is active. The time your compute is idle when suspended due to inactivity is not counted. - **Compute hours formula** 
+   **Tip** What is a compute hour?: - A **compute hour** is one _active hour_ for a compute with 1 vCPU. For a compute with .25 vCPU, it takes 4 _active hours_ to use 1 compute hour. On the other hand, if your compute has 4 vCPUs, it takes only 15 minutes to use 1 compute hour.
+- An **active hour** is a measure of the amount of time a compute is active. The time your compute is idle when suspended due to inactivity is not counted.
+- **Compute hours formula**
 
-```
+  ```
   compute hours = compute size * active hours
   ```
 

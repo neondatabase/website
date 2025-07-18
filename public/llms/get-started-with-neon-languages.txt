@@ -1,6 +1,6 @@
 # Neon language guides
 
-> The Neon language guides document outlines instructions for integrating various programming languages with the Neon database, facilitating seamless connectivity and interaction within Neon's environment.
+> The "Neon language guides" document outlines the steps for integrating various programming languages with the Neon database, offering specific instructions and code examples for seamless connectivity and interaction.
 
 ## Source
 

@@ -1,6 +1,6 @@
 # Accounts
 
-> The "Accounts" documentation outlines the process for managing user accounts within the Neon platform, detailing how to create, modify, and delete accounts, as well as manage account permissions and roles.
+> The "Accounts" documentation for Neon details the procedures for managing user accounts, including account creation, access control, and permissions within the Neon platform.
 
 ## Source
 

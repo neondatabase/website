@@ -1,6 +1,6 @@
 # Connect a Sveltekit application to Neon
 
-> The document outlines the steps to connect a SvelteKit application to a Neon database, detailing the configuration and code adjustments necessary for seamless integration within Neon's environment.
+> The document guides users on integrating a SvelteKit application with Neon by detailing the steps to configure the database connection, manage environment variables, and execute queries within the SvelteKit framework.
 
 ## Source
 
@@ -29,28 +29,30 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 2. Add project dependencies using one of the following commands:
 
-   
+   Tab: node-postgres
 
    ```shell
    npm install pg dotenv
    ```
 
+Tab: postgres.js
+
    ```shell
    npm install postgres dotenv
    ```
 
+Tab: Neon serverless driver
+
    ```shell
    npm install @neondatabase/serverless dotenv
    ```
-
-   
 
 ## Store your Neon credentials
 
 Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).
 
 ```shell
-DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require"
+DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
 ```
 
 ## Configure the Postgres client
@@ -168,7 +170,7 @@ Create a `+page.svelte` file to display the data:
 
 ## Run the app
 
-When you run `npm run dev` you can expect to see the following on [localhost:5173](https://neon.com/localhost:5173):
+When you run `npm run dev` you can expect to see the following on [localhost:5173](localhost:5173):
 
 ```shell
 Database Version

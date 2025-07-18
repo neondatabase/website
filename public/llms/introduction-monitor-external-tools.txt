@@ -1,6 +1,6 @@
 # Monitoring Neon with external tools
 
-> The document "Monitoring Neon with external tools" outlines how to integrate and use external monitoring tools to track and analyze the performance and health of Neon database systems.
+> The document outlines how to integrate and use external monitoring tools with Neon to track database performance and system metrics effectively.
 
 ## Source
 

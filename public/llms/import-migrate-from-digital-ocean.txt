@@ -1,6 +1,6 @@
 # Migrate from Digital Ocean Postgres to Neon
 
-> The document outlines the steps for migrating a PostgreSQL database from Digital Ocean to Neon, detailing the necessary commands and configurations for a successful transition.
+> The document outlines the process for migrating a PostgreSQL database from Digital Ocean to Neon, detailing steps for exporting data, configuring Neon's settings, and importing the database to ensure a seamless transition.
 
 ## Source
 

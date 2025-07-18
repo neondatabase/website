@@ -1,6 +1,6 @@
 # Manage multiple database environments
 
-> The document outlines how Neon users can manage multiple database environments using Flyway, detailing steps for setting up, configuring, and maintaining different environments for development, testing, and production.
+> The document outlines how to manage multiple database environments using Flyway with Neon, detailing steps for setting up, configuring, and deploying migrations across different environments.
 
 ## Source
 

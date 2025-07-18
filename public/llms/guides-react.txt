@@ -1,6 +1,6 @@
 # Connect a React application to Neon
 
-> The document outlines the steps to connect a React application to a Neon database, detailing the configuration of environment variables, installation of necessary packages, and implementation of database queries using the Neon client.
+> The document outlines the steps for connecting a React application to a Neon database, detailing the configuration of environment variables and the use of specific libraries to establish a secure database connection.
 
 ## Source
 
