@@ -703,8 +703,10 @@
       items:
         - section: Monitor
           items:
-            - title: Datadog Integration
+            - title: Datadog
               slug: guides/datadog
+            - title: OpenTelemetry
+              slug: guides/opentelemetry
         - section: Deploy
           items:
             - title: Vercel
