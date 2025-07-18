@@ -35,7 +35,7 @@ Enable the Data API at the **branch** level for a single database.
 
 To get started, navigate to the **Data API** tab in the Neon Console for your branch and click **Enable**.
 
-![Data API tab with enable button](/docs/data-api/data-api-tab.png)
+![Data API tab with enable button](/docs/data-api/data_api_tab.png)
 
 Once enabled, you'll see your Data API **Project URL** here — this is your endpoint for API requests.
 
@@ -169,6 +169,8 @@ const { data } = await client.from('playing_with_neon').select('*').gte('value',
 
 console.table(data);
 ```
+
+> For a complete example of how to configure the Bearer token with Neon Auth, see the [postgrest.ts](https://github.com/neondatabase-labs/neon-data-api-neon-auth/blob/main/src/lib/postgrest.ts) file from our demo app.
 
 ## Try the demo app
 

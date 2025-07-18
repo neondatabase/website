@@ -879,7 +879,7 @@
               slug: guides/auth-clerk
             - title: Okta
               slug: guides/auth-okta
-- section: Auth & access
+- section: Auth & backend
   items:
     - title: Neon Auth
       icon: auth
@@ -1091,21 +1091,15 @@
               slug: guides/neon-rls-workos
             - title: Custom JWT
               slug: guides/neon-rls-custom-jwt
-- section: Data API
-  items:
     - title: Data API
-      slug: data-api/get-started
       icon: api
       tag: new
+      collapsible: true
       items:
-        - section: Get started
-          items:
-            - title: Get started
-              slug: data-api/get-started
-        - section: Tutorial
-          items:
-            - title: Building a note-taking app
-              slug: data-api/demo
+        - title: Get started
+          slug: data-api/get-started
+        - title: Building a note-taking app
+          slug: data-api/demo
 - section: Workflows
   items:
     - title: Data anonymization
