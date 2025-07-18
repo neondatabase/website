@@ -18,6 +18,8 @@ Here's a snapshot of what we're working on now:
 - **Postgres for AI agents**: [Replit partnered with Neon to back Replit Agents](/blog/looking-at-how-replit-agent-handles-databases), creating thousands of Postgres databases. If you're building AI agents and would like to integrate agent-ready Postgres, [connect with us](/agent-design-partner). See [Postgres for AI Agents](/use-cases/ai-agents) for more.
 - **Snapshots**: Scheduled snapshots with instant restore.
 - **Console navigation enhancements**: Enhancing navigation for multi-project organizations, branch clarity, and better SQL Editor and Tables page interactions.
+- **Private Networking in Console**: Manage Private Networking directly from the Neon Console.
+- **Branch expiration management**: Set a time-to-live for Neon branches to simplify branch cleanup and management.
 
 Other features you would like to see? [Let us know](#share-your-thoughts).
 
@@ -72,6 +74,7 @@ And here's an overview of what we're looking at next:
 
 ## What we've shipped recently 🚢
 
+- **Neon Local Connect** — A VS Code extension that makes it easy to work with Neon in your local development environment. See [Neon Local Connect VS Code Extension](https://marketplace.visualstudio.com/items?itemName=databricks.neon-local-connect).
 - **TanStack integration & new open-source tools**: Neon is now the official database partner of TanStack, with new open-source tools including a Vite Plugin for Neon to streamline fullstack development with TanStack, Vite, and Postgres.
 - **Data API**: Neon's Data API feature, powered by PostgREST, is open to all Neon users. [Learn more](/docs/data-api/get-started).
 - **Monitoring platform support**: Neon supports exporting metrics and Postgres logs to any OpenTelemetry-compatible backend, like New Relic. For details, refer to our [OpenTelemetry docs](/docs/guides/opentelemetry).
