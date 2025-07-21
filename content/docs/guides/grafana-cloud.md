@@ -106,183 +106,565 @@ If any of the computes in your project are active, you should start seeing data 
 <summary>Copy Neon PostgreSQL Monitoring Dashboard JSON</summary>
 ```json shouldWrap
 {
-  "dashboard": {
-    "id": null,
-    "title": "Neon PostgreSQL Monitoring",
-    "description": "Monitor your Neon PostgreSQL database metrics and performance",
-    "refresh": "30s",
-    "time": {
-      "from": "now-1h",
-      "to": "now"
-    },
-    "panels": [
-      {
-        "id": 1,
-        "title": "CPU Usage",
-        "type": "timeseries",
-        "targets": [
-          {
-            "expr": "rate(host_cpu_seconds_total{mode!=\"idle\"}[5m])",
-            "legendFormat": "{{mode}}",
-            "refId": "A"
-          }
-        ],
-        "fieldConfig": {
-          "defaults": {
-            "unit": "percent"
-          }
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 0,
-          "y": 0
-        }
+  "id": null,
+  "uid": "neon-complete-monitoring",
+  "title": "Neon PostgreSQL",
+  "description": "Comprehensive monitoring dashboard for Neon PostgreSQL with metrics and logs",
+  "tags": ["neon", "postgresql", "database", "monitoring"],
+  "timezone": "browser",
+  "editable": true,
+  "graphTooltip": 1,
+  "refresh": "30s",
+  "schemaVersion": 39,
+  "version": 1,
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": ["5s", "10s", "30s", "1m", "5m", "15m", "30m", "1h", "2h", "1d"],
+    "time_options": ["5m", "15m", "1h", "6h", "12h", "24h", "2d", "7d", "30d"]
+  },
+  "panels": [
+    {
+      "id": 1,
+      "title": "Database Overview",
+      "type": "stat",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
       },
-      {
-        "id": 2,
-        "title": "Memory Usage",
-        "type": "timeseries",
-        "targets": [
+      "targets": [
+        {
+          "expr": "sum(neon_connection_counts{endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"})",
+          "legendFormat": "Total Connections",
+          "refId": "A"
+        },
+        {
+          "expr": "neon_db_total_size{endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"} / 1024 / 1024 / 1024",
+          "legendFormat": "Database Size (GB)",
+          "refId": "B"
+        },
+        {
+          "expr": "neon_lfc_hits{endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"} / (neon_lfc_hits{endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"} + neon_lfc_misses{endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"}) * 100",
+          "legendFormat": "Cache Hit Rate %",
+          "refId": "C"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "min": 0
+        },
+        "overrides": [
           {
-            "expr": "host_memory_total_bytes - host_memory_available_bytes",
-            "legendFormat": "Used Memory",
-            "refId": "A"
+            "matcher": {"id": "byName", "options": "Cache Hit Rate %"},
+            "properties": [{"id": "unit", "value": "percent"}, {"id": "max", "value": 100}]
           },
           {
-            "expr": "host_memory_cached_bytes",
-            "legendFormat": "Cached Memory",
-            "refId": "B"
+            "matcher": {"id": "byName", "options": "Database Size (GB)"},
+            "properties": [{"id": "unit", "value": "decbytes"}]
           }
-        ],
-        "fieldConfig": {
-          "defaults": {
-            "unit": "bytes"
-          }
+        ]
+      },
+      "gridPos": {"h": 6, "w": 24, "x": 0, "y": 0}
+    },
+    {
+      "id": 2,
+      "title": "Connection Activity",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "targets": [
+        {
+          "expr": "neon_connection_counts{state=\"active\", endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"}",
+          "legendFormat": "Active - {{datname}}",
+          "refId": "A"
         },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 12,
-          "y": 0
+        {
+          "expr": "neon_connection_counts{state=\"idle\", endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"}",
+          "legendFormat": "Idle - {{datname}}",
+          "refId": "B"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "min": 0
+        }
+      },
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 6}
+    },
+    {
+      "id": 3,
+      "title": "Database Size Growth",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "targets": [
+        {
+          "expr": "neon_pg_stats_userdb{kind=\"db_size\", endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"}",
+          "legendFormat": "{{datname}} Size",
+          "refId": "A"
+        },
+        {
+          "expr": "neon_db_total_size{endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"}",
+          "legendFormat": "Total Size",
+          "refId": "B"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "min": 0
+        }
+      },
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 6}
+    },
+    {
+      "id": 4,
+      "title": "CPU Usage",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "targets": [
+        {
+          "expr": "100 - (avg(rate(host_cpu_seconds_total{mode=\"idle\", endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"}[5m])) * 100)",
+          "legendFormat": "CPU Usage %",
+          "refId": "A"
+        },
+        {
+          "expr": "rate(host_cpu_seconds_total{mode=\"system\", endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"}[5m]) * 100",
+          "legendFormat": "System CPU %",
+          "refId": "B"
+        },
+        {
+          "expr": "rate(host_cpu_seconds_total{mode=\"user\", endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"}[5m]) * 100",
+          "legendFormat": "User CPU %",
+          "refId": "C"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "max": 100,
+          "min": 0
+        }
+      },
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 14}
+    },
+    {
+      "id": 5,
+      "title": "Memory Usage",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "targets": [
+        {
+          "expr": "host_memory_total_bytes{endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"}",
+          "legendFormat": "Total Memory",
+          "refId": "A"
+        },
+        {
+          "expr": "host_memory_available_bytes{endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"}",
+          "legendFormat": "Available Memory",
+          "refId": "B"
+        },
+        {
+          "expr": "host_memory_cached_bytes{endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"}",
+          "legendFormat": "Cached Memory",
+          "refId": "C"
+        },
+        {
+          "expr": "host_memory_total_bytes{endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"} - host_memory_available_bytes{endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"}",
+          "legendFormat": "Used Memory",
+          "refId": "D"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "min": 0
+        }
+      },
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 14}
+    },
+    {
+      "id": 6,
+      "title": "Database Activity Rates",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "targets": [
+        {
+          "expr": "rate(neon_pg_stats_userdb{kind=\"inserted\", endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"}[5m])",
+          "legendFormat": "Inserts/sec - {{datname}}",
+          "refId": "A"
+        },
+        {
+          "expr": "rate(neon_pg_stats_userdb{kind=\"updated\", endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"}[5m])",
+          "legendFormat": "Updates/sec - {{datname}}",
+          "refId": "B"
+        },
+        {
+          "expr": "rate(neon_pg_stats_userdb{kind=\"deleted\", endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"}[5m])",
+          "legendFormat": "Deletes/sec - {{datname}}",
+          "refId": "C"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "rps",
+          "min": 0
+        }
+      },
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 22}
+    },
+    {
+      "id": 7,
+      "title": "Cache Performance",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "targets": [
+        {
+          "expr": "neon_lfc_hits{endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"} / (neon_lfc_hits{endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"} + neon_lfc_misses{endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"}) * 100",
+          "legendFormat": "Cache Hit Rate %",
+          "refId": "A"
+        },
+        {
+          "expr": "rate(neon_lfc_hits{endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"}[5m])",
+          "legendFormat": "Cache Hits/sec",
+          "refId": "B"
+        },
+        {
+          "expr": "rate(neon_lfc_misses{endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"}[5m])",
+          "legendFormat": "Cache Misses/sec",
+          "refId": "C"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {"id": "byName", "options": "Cache Hit Rate %"},
+            "properties": [{"id": "unit", "value": "percent"}, {"id": "max", "value": 100}]
+          }
+        ]
+      },
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 22}
+    },
+    {
+      "id": 8,
+      "title": "Replication Status",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "targets": [
+        {
+          "expr": "neon_replication_delay_bytes{endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"}",
+          "legendFormat": "Replication Delay (Bytes)",
+          "refId": "A"
+        },
+        {
+          "expr": "neon_replication_delay_seconds{endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"}",
+          "legendFormat": "Replication Delay (Seconds)",
+          "refId": "B"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {"id": "byName", "options": "Replication Delay (Bytes)"},
+            "properties": [{"id": "unit", "value": "bytes"}]
+          },
+          {
+            "matcher": {"id": "byName", "options": "Replication Delay (Seconds)"},
+            "properties": [{"id": "unit", "value": "s"}]
+          }
+        ]
+      },
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 30}
+    },
+    {
+      "id": 9,
+      "title": "Deadlocks & Errors",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "targets": [
+        {
+          "expr": "increase(neon_pg_stats_userdb{kind=\"deadlocks\", endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"}[5m])",
+          "legendFormat": "Deadlocks - {{datname}}",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "min": 0
+        }
+      },
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 30}
+    },
+    {
+      "id": 10,
+      "title": "PostgreSQL Error Logs",
+      "type": "logs",
+      "datasource": {
+        "type": "loki",
+        "uid": "${DS_LOKI}"
+      },
+      "targets": [
+        {
+          "expr": "{service_name=\"$service_name\", endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"} |~ \"(?i)error|fatal|panic\"",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "showTime": true,
+        "showLabels": true,
+        "showCommonLabels": false,
+        "wrapLogMessage": true,
+        "prettifyLogMessage": false,
+        "enableLogDetails": true,
+        "dedupStrategy": "none",
+        "sortOrder": "Descending"
+      },
+      "gridPos": {"h": 10, "w": 24, "x": 0, "y": 38}
+    },
+    {
+      "id": 11,
+      "title": "Connection Events",
+      "type": "logs",
+      "datasource": {
+        "type": "loki",
+        "uid": "${DS_LOKI}"
+      },
+      "targets": [
+        {
+          "expr": "{service_name=\"$service_name\", endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"} |~ \"(?i)connection|connect|disconnect\"",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "showTime": true,
+        "showLabels": false,
+        "showCommonLabels": false,
+        "wrapLogMessage": true,
+        "enableLogDetails": true,
+        "sortOrder": "Descending"
+      },
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 48}
+    },
+    {
+      "id": 12,
+      "title": "Query Performance Logs",
+      "type": "logs",
+      "datasource": {
+        "type": "loki",
+        "uid": "${DS_LOKI}"
+      },
+      "targets": [
+        {
+          "expr": "{service_name=\"$service_name\", endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"} |~ \"(?i)slow|duration|statement|query\" | logfmt",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "showTime": true,
+        "showLabels": false,
+        "showCommonLabels": false,
+        "wrapLogMessage": true,
+        "enableLogDetails": true,
+        "sortOrder": "Descending"
+      },
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 48}
+    },
+    {
+      "id": 13,
+      "title": "Recent Log Activity",
+      "type": "logs",
+      "datasource": {
+        "type": "loki",
+        "uid": "${DS_LOKI}"
+      },
+      "targets": [
+        {
+          "expr": "{service_name=\"$service_name\", endpoint_id=~\"$endpoint_id\", project_id=~\"$project_id\"}",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "showTime": true,
+        "showLabels": false,
+        "showCommonLabels": false,
+        "wrapLogMessage": true,
+        "enableLogDetails": true,
+        "sortOrder": "Descending"
+      },
+      "maxDataPoints": 1000,
+      "gridPos": {"h": 10, "w": 24, "x": 0, "y": 56}
+    }
+  ],
+  "templating": {
+    "list": [
+      {
+        "name": "DS_PROMETHEUS",
+        "label": "Prometheus Datasource",
+        "type": "datasource",
+        "query": "prometheus",
+        "hide": 0,
+        "refresh": 1,
+        "current": {
+          "selected": false,
+          "text": "Prometheus",
+          "value": "prometheus"
         }
       },
       {
-        "id": 3,
-        "title": "Database Connections",
-        "type": "timeseries",
-        "targets": [
-          {
-            "expr": "neon_connection_counts",
-            "legendFormat": "{{state}} - {{datname}}",
-            "refId": "A"
-          }
-        ],
-        "fieldConfig": {
-          "defaults": {
-            "unit": "short"
-          }
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 0,
-          "y": 8
+        "name": "DS_LOKI",
+        "label": "Loki Datasource", 
+        "type": "datasource",
+        "query": "loki",
+        "hide": 0,
+        "refresh": 1,
+        "current": {
+          "selected": false,
+          "text": "Loki",
+          "value": "loki"
         }
       },
       {
-        "id": 4,
-        "title": "Database Size",
-        "type": "timeseries",
-        "targets": [
-          {
-            "expr": "neon_db_total_size",
-            "legendFormat": "Total Size",
-            "refId": "A"
-          }
-        ],
-        "fieldConfig": {
-          "defaults": {
-            "unit": "bytes"
-          }
+        "name": "endpoint_id",
+        "label": "Endpoint ID",
+        "type": "query",
+        "query": {
+          "query": "label_values(neon_connection_counts, endpoint_id)",
+          "refId": "StandardVariableQuery"
         },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 12,
-          "y": 8
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "refresh": 2,
+        "multi": true,
+        "includeAll": true,
+        "allValue": ".*",
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
         }
       },
       {
-        "id": 5,
-        "title": "Local File Cache Hit Rate",
-        "type": "timeseries",
-        "targets": [
-          {
-            "expr": "neon_lfc_hits / (neon_lfc_hits + neon_lfc_misses)",
-            "legendFormat": "Cache Hit Rate",
-            "refId": "A"
-          }
-        ],
-        "fieldConfig": {
-          "defaults": {
-            "unit": "percentunit",
-            "min": 0,
-            "max": 1
-          }
+        "name": "project_id",
+        "label": "Project ID",
+        "type": "query",
+        "query": {
+          "query": "label_values(neon_connection_counts, project_id)",
+          "refId": "StandardVariableQuery"
         },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 0,
-          "y": 16
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "refresh": 2,
+        "multi": true,
+        "includeAll": true,
+        "allValue": ".*",
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
         }
       },
       {
-        "id": 6,
-        "title": "Replication Delay",
-        "type": "timeseries",
-        "targets": [
-          {
-            "expr": "neon_replication_delay_bytes",
-            "legendFormat": "Replication Delay (Bytes)",
-            "refId": "A"
-          }
-        ],
-        "fieldConfig": {
-          "defaults": {
-            "unit": "bytes"
-          }
+        "name": "service_name",
+        "label": "Service Name",
+        "type": "query",
+        "query": {
+          "query": "label_values({__name__=~\".+\"}, service_name)",
+          "refId": "StandardVariableQuery"
         },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 12,
-          "y": 16
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "refresh": 2,
+        "multi": false,
+        "includeAll": false,
+        "current": {
+          "selected": false,
+          "text": "",
+          "value": ""
         }
       }
-    ],
-    "templating": {
-      "list": [
-        {
-          "name": "endpoint_id",
-          "type": "query",
-          "query": "label_values(neon_connection_counts, endpoint_id)",
-          "refresh": 2,
-          "multi": false,
-          "includeAll": false
+    ]
+  },
+  "annotations": {
+    "list": [
+      {
+        "name": "High CPU",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
         },
-        {
-          "name": "project_id",
-          "type": "query",
-          "query": "label_values(neon_connection_counts, project_id)",
-          "refresh": 2,
-          "multi": false,
-          "includeAll": false
-        }
-      ]
+        "expr": "100 - (avg(rate(host_cpu_seconds_total{mode=\"idle\"}[5m])) * 100) > 80",
+        "titleFormat": "High CPU Usage",
+        "textFormat": "CPU usage is above 80%",
+        "iconColor": "red"
+      },
+      {
+        "name": "Low Cache Hit Rate",
+        "datasource": {
+          "type": "prometheus", 
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "expr": "neon_lfc_hits / (neon_lfc_hits + neon_lfc_misses) * 100 < 90",
+        "titleFormat": "Low Cache Hit Rate",
+        "textFormat": "Cache hit rate dropped below 90%",
+        "iconColor": "yellow"
+      }
+    ]
+  },
+  "links": [
+    {
+      "title": "Neon Console",
+      "url": "https://console.neon.tech",
+      "type": "link",
+      "icon": "external link"
+    },
+    {
+      "title": "Metrics Reference",
+      "url": "https://neon.com/docs/reference/metrics-logs",
+      "type": "link",
+      "icon": "doc"
     }
-  }
+  ]
 }
 ```
 </details>
