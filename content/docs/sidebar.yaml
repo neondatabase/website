@@ -403,6 +403,8 @@
               slug: reference/metrics-logs
             - title: Datadog integration
               slug: guides/datadog
+            - title: Grafana Cloud integration
+              slug: guides/grafana-cloud
             - title: OpenTelemetry integration
               slug: guides/opentelemetry
             - title: Datbase monitoring tools
@@ -705,6 +707,8 @@
           items:
             - title: Datadog
               slug: guides/datadog
+            - title: Grafana Cloud
+              slug: guides/grafana-cloud
             - title: OpenTelemetry
               slug: guides/opentelemetry
         - section: Deploy
