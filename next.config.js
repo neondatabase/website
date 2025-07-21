@@ -232,6 +232,11 @@ const defaultConfig = {
         permanent: false,
       },
       {
+        source: '/blog/recap-on-may-june-stability',
+        destination: '/blog/may-june-recap',
+        permanent: false,
+      },
+      {
         source: '/api-reference',
         destination: 'https://api-docs.neon.tech',
         permanent: true,
