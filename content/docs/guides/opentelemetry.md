@@ -196,7 +196,7 @@ Your Neon data should start appearing in your observability platform within a fe
    neon_connection_counts
    ```
 
-3. **Create dashboards**: You can use the dashboard provided [here](https://grafana.com/grafana/dashboards/22784-lightweight-apm-for-opentelemetry/) or directly visualize using  [Grafana Drilldown apps](https://grafana.com/docs/grafana/latest/explore/simplified-exploration/)
+3. **Create dashboards**: You can visualize using [Grafana Drilldown apps](https://grafana.com/docs/grafana/latest/explore/simplified-exploration/)
 
 ### For New Relic users
 
