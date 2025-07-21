@@ -83,7 +83,7 @@ const colorVariants = [
 const DynamicTicket = ({
   isBlankTicket = false,
   withColorPicker = false,
-  userData: { id: number, name, image, login: githubHandle, colorSchema },
+  userData: { id: number, name, image, login: gitHubHandle, colorSchema },
 }) => {
   const { data, status } = useSession();
   const [selectedColorSchema, setSelectedColorSchema] = useState(null);
@@ -219,18 +219,18 @@ const DynamicTicket = ({
                       src={image}
                       width={56}
                       height={56}
-                      alt={`${name || githubHandle}'s profile picture`}
+                      alt={`${name || gitHubHandle}'s profile picture`}
                       className="row-start-1 row-end-3 h-[56px] w-[56px] rounded-full lg:h-[48px] lg:w-[48px]"
                     />
                   ) : (
                     <span className="row-start-1 row-end-3 h-[56px] w-[56px] rounded-full border border-white lg:h-[48px] lg:w-[48px]" />
                   )}
                   <b className="font-sans text-[26px] font-semibold leading-none text-white lg:text-xl">
-                    {name || githubHandle}
+                    {name || gitHubHandle}
                   </b>
 
                   <span className="col-start-2 font-mono text-base font-normal leading-none text-white lg:text-sm">
-                    @{githubHandle}
+                    @{gitHubHandle}
                   </span>
                 </p>
                 <footer
@@ -244,7 +244,7 @@ const DynamicTicket = ({
                   </p>
                   <time
                     dateTime="2023-11-02T10:00"
-                    className="whitespace-nowrap text-sm uppercase leading-dense tracking-[0.01em] text-white lg:text-[12px] md:text-[12px]"
+                    className="whitespace-nowrap text-sm uppercase leading-dense -tracking-snug text-white lg:text-[12px] md:text-[12px]"
                   >
                     10 AM PT,
                     <br />
@@ -272,7 +272,7 @@ const DynamicTicket = ({
 
       {withColorPicker && (
         <div className="pointer-events-none relative z-10 mt-9 flex items-center gap-6 2xl:mt-8 xl:justify-center lg:mt-7 lg:gap-4 md:mb-7 md:mt-0">
-          <p className="text-sm tracking-[0.04em] text-white opacity-80">Pick a color:</p>
+          <p className="text-sm -tracking-tighter text-white opacity-80">Pick a color:</p>
           <div className="pointer-events-auto flex gap-5 lg:gap-6">
             {colorVariants.map((item, i) => {
               const { id, title, buttonColorClass } = item;

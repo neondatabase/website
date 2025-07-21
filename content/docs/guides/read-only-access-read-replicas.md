@@ -2,7 +2,7 @@
 title: Provide read-only access with Read Replicas
 subtitle: Leverage read replicas to provide read-only access to your data
 enableTableOfContents: true
-updatedOn: '2024-10-23T14:34:44.514Z'
+updatedOn: '2025-06-30T11:30:21.913Z'
 ---
 
 When you create a read replica in Neon, you gain the ability to provide read-only access to your data. This is particularly useful when you want to grant access to users, partners, or third-party applications that only need to run queries to analyze data, generate reports, or audit your database. Since no write operations are permitted on read replicas, it ensures the integrity of your data while allowing others to work with up-to-date information.
@@ -11,8 +11,11 @@ Suppose you need to give a partner read-only access to your sales data so they c
 
 1. **Create a read replica**
 
-   Follow these steps to create a read replica for your database branch:
+   <Admonition type="note">
+   The Free Plan is limited to a maximum of 3 read replica computes per project.
+   </Admonition>
 
+   Follow these steps to create a read replica for your database branch:
    - In the Neon Console, go to **Branches**.
    - Select the branch that contains your data.
    - Click **Add Read Replica** to create a dedicated compute instance for read operations.
@@ -20,13 +23,12 @@ Suppose you need to give a partner read-only access to your sales data so they c
 2. **Provide the connection string**
 
    Once the read replica is created, obtain the connection string from the Neon Console:
-
-   - On the **Connection Details** section of the your **Project Dashboard**, select the branch, the database, and the role.
+   - You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. Select the branch, the database, and the role.
    - Choose **Replica** compute under the compute settings.
    - Copy the connection string and provide it to your partner. The connection string might look something like this:
 
      ```bash shouldWrap
-     postgresql://partner:partner_password@ep-read-replica-12345.us-east-2.aws.neon.tech/sales_db?sslmode=require
+     postgresql://partner:partner_password@ep-read-replica-12345.us-east-2.aws.neon.tech/sales_db?sslmode=require&channel_binding=require
      ```
 
 3. **Read-only access for the partner**

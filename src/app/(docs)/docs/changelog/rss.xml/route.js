@@ -1,14 +1,17 @@
 /* eslint-disable import/prefer-default-export */
 import Rss from 'rss';
 
+import { CHANGELOG_DIR_PATH } from 'constants/content';
 import { CHANGELOG_BASE_PATH } from 'constants/docs';
-import { CHANGELOG_DIR_PATH, getAllChangelogPosts, getPostBySlug } from 'utils/api-docs';
-import getChangelogDateFromSlug from 'utils/get-changelog-date-from-slug';
+import { getPostBySlug } from 'utils/api-content';
+import { getAllChangelogs } from 'utils/api-docs';
+import getExcerpt from 'utils/get-excerpt';
+import getFormattedDate from 'utils/get-formatted-date';
 
 const SITE_URL = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
 
 export async function GET() {
-  const allChangelogPosts = await getAllChangelogPosts();
+  const allChangelogPosts = await getAllChangelogs();
 
   const feed = new Rss({
     id: CHANGELOG_BASE_PATH,
@@ -20,26 +23,20 @@ export async function GET() {
   });
 
   allChangelogPosts.forEach((post) => {
-    const { slug } = post;
+    const { slug, date } = post;
     const { data, content } = getPostBySlug(slug, CHANGELOG_DIR_PATH);
-
-    const heading = content.match(/# (.*)/)?.[1];
-
-    const description =
-      data.description ||
-      `${heading} and more. Check out the full list of changes for this release note.`;
-
+    const label = getFormattedDate(date);
+    const heading = data.title || content.match(/# (.*)/)?.[1];
+    const description = getExcerpt(content, 160);
     const url = `${SITE_URL}${CHANGELOG_BASE_PATH}${slug}`;
-
-    const { label, datetime } = getChangelogDateFromSlug(slug);
 
     feed.item({
       id: url,
       title: `${heading} release - ${label}`,
+      description,
       url,
       guid: url,
-      date: new Date(datetime),
-      description,
+      date: new Date(date),
     });
   });
 

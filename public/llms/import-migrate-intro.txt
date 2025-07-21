@@ -1,0 +1,41 @@
+# Neon data migration guides
+
+> The Neon data migration guides offer step-by-step instructions for migrating data to Neon, detailing processes for various data sources and ensuring seamless integration into the Neon database environment.
+
+## Source
+
+- [Neon data migration guides HTML](https://neon.com/docs/import/migrate-intro): The original HTML version of this documentation
+
+Find instructions for migrating data from Postgres, CSV, other Neon projects, and other database providers. For near-zero downtime data migrations from other Postgres providers, consider using logical replication. Additionally, if you're new to Neon and want to try it out, our sample data guide provides datasets for exploration and testing.
+
+   **Note** Can We Help with Your Migration?: If you're planning to migrate a production workload to Neon, let us know&#8212;we'll connect you with an expert from our team. You can reach out to us [here](https://neon.com/migration-assistance).
+
+## Data migration guides
+
+- [Import Data Assistant](https://neon.com/docs/import/import-data-assistant): Move your existing database to Neon using our guided migration tool
+- [Migrate with pg_dump and pg_restore](https://neon.com/docs/import/migrate-from-postgres): Migrate data from another Postgres database using pg_dump and pg_restore
+- [Migrate from another Neon project](https://neon.com/docs/import/migrate-from-neon): Migrate data from another Neon project for Postgres version, region, or account migration
+- [Migrate schema only](https://neon.com/docs/import/migrate-schema-only): Migrate only the schema from a Postgres database with pg_dump and pg_restore
+- [Import data from CSV](https://neon.com/docs/import/import-from-csv): Import data from a CSV file using the psql command-line utility
+- [Migrate from Firebase Firestore](https://neon.com/docs/import/migrate-from-firebase): Migrate data from Firebase Firestore to Neon Postgres using a custom Python script
+- [Migrate from Heroku](https://neon.com/docs/import/migrate-from-heroku): Migrate data from a Heroku Postgres database to Neon Postgres using the Heroku CLI
+- [Migrate with AWS DMS](https://neon.com/docs/import/migrate-aws-dms): Migrate data from another database source to Neon using the AWS Data Migration Service
+- [Migrate from Azure](https://neon.com/docs/import/migrate-from-azure-postgres): Migrate from an Azure Database for PostgreSQL to Neon Postgres
+- [Migrate from Digital Ocean](https://neon.com/docs/import/migrate-from-digital-ocean): Migrate data from Digital Ocean Postgres to Neon Postgres with pg_dump and pg_restore
+- [Import sample data](https://neon.com/docs/import/import-sample-data): Import one of several sample datasets for exploration and testing
+- [Migrate from MySQL](https://neon.com/docs/import/migrate-mysql): Migrate your MySQL data to Neon Postgres using pgloader.
+- [Migrate from Render](https://neon.com/docs/import/migrate-from-render): Migrate data from Render to Neon Postgres with pg_dump and pg_restore
+- [Migrate from Supabase](https://neon.com/docs/import/migrate-from-supabase): MIgrate data from Supabase to Neon Postgres with pg_dump and pg_restore
+- [Migrate with pgcopydb](https://neon.com/docs/import/pgcopydb): Migrate data from another Postgres database using pgcopydb for parallel processing
+
+## Use logical replication for near-zero downtime data migrations
+
+Postgres logical replication in Neon provides an efficient way to migrate data from other Postgres providers with minimal downtime. By replicating data in real-time, this method allows you to transition your applications to Neon without interrupting your services. Please refer to our logical replication guides for instructions.
+
+- [AlloyDB](https://neon.com/docs/guides/logical-replication-alloydb): Replicate data from AlloyDB to Neon
+- [Aurora](https://neon.com/docs/guides/logical-replication-aurora-to-neon): Replicate data from Aurora to Neon
+- [Cloud SQL](https://neon.com/docs/guides/logical-replication-cloud-sql): Replicate data from Cloud SQL to Neon
+- [PostgreSQL to Neon](https://neon.com/docs/guides/logical-replication-postgres-to-neon): Replicate data from PostgreSQL to Neon
+- [AWS RDS](https://neon.com/docs/guides/logical-replication-rds-to-neon): Replicate data from AWS RDS PostgreSQL to Neon
+- [Supabase](https://neon.com/docs/guides/logical-replication-supabase-to-neon): Replicate data from Supabase to Neon
+- [Azure PostgreSQL](https://neon.com/docs/import/migrate-from-azure-postgres): Replicate data from Azure PostgreSQL to Neon

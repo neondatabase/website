@@ -4,13 +4,13 @@ subtitle: Learn how to configure Neon's Scale to Zero feature
 redirectFrom:
   - /docs/guides/auto-suspend-guide
 enableTableOfContents: true
-updatedOn: '2025-01-20T13:01:32.029Z'
+updatedOn: '2025-05-11T11:23:50.621Z'
 ---
 
 Neon's [Scale to Zero](/docs/introduction/scale-to-zero) feature controls whether a Neon compute transitions to an idle state due to inactivity. For example, if scale to zero is enabled, your compute will transition to an idle state after it's been inactive for 5 minutes. Neon's paid plans allow you to disable scale to zero to keep your compute active.
 
 <Admonition type="important">
-If you disable scale to zero entirely, your compute will remain active, and you will have to manually restart your compute to pick up the latest updates to Neon's compute images. Neon typically releases compute-related updates weekly. Not all releases contain critical updates, but a weekly compute restart is recommended to ensure that you do not miss anything important. For how to restart a compute, see [Restart a compute](/docs/manage/endpoints#restart-a-compute). 
+If you disable scale to zero entirely, your compute will remain active, and you will have to manually restart your compute to pick up the latest updates to Neon's compute images. Neon typically releases compute-related updates weekly. Not all releases contain critical updates, but a weekly compute restart is recommended to ensure that you do not miss anything important. For how to restart a compute, see [Restart a compute](/docs/manage/computes#restart-a-compute). 
 </Admonition>
 
 This guide demonstrates how to configure the scale to zero setting for a new project, for an existing project, or for an individual compute.
@@ -39,7 +39,7 @@ To configure the scale to zero setting for an individual compute:
 
 ### Configure the scale to zero default
 
-Configuring the scale to zero setting in your project's settings sets the project's default, which is applied to all computes created from that point forward. Existing compute scale to zero settings are unaffected.
+Configuring the scale to zero setting in your project's settings sets the project's default, which is applied to all computes created from that point forward. Existing compute scale to zero settings are unaffected. See [Change your project's default compute settings](/docs/manage/projects#change-your-projects-default-compute-settings) for more info about compute defaults.
 
 To configure the scale to zero default for an existing project:
 

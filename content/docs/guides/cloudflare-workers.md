@@ -2,7 +2,7 @@
 title: Use Neon with Cloudflare Workers
 subtitle: Connect a Neon Postgres database to your Cloudflare Workers application
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.058Z'
+updatedOn: '2025-06-30T11:30:21.897Z'
 ---
 
 [Cloudflare Workers](https://workers.cloudflare.com/) is a serverless platform allowing you to deploy your applications globally across Cloudflare's network. It supports running JavaScript, TypeScript, and WebAssembly, making it a great choice for high-performance, low-latency web applications.
@@ -48,12 +48,12 @@ Log in to the Neon Console and navigate to the [Projects](https://console.neon.t
 
 ### Retrieve your Neon database connection string
 
-Log in to the Neon Console and navigate to the **Connection Details** section to find your database connection string. Enable the **Connection pooling** toggle to add the `-pooler` option to your connection string. A pooled connection is recommended for serverless environments. For more information, see [Connection pooling](/docs/connect/connection-pooling).
+Navigate to your **Project Dashboard** in the Neon Console and click **Connect** to open the **Connect to your database** modal to find your database connection string. Enable the **Connection pooling** toggle to add the `-pooler` option to your connection string. A pooled connection is recommended for serverless environments. For more information, see [Connection pooling](/docs/connect/connection-pooling).
 
 Your pooled connection string should look similar to this:
 
 ```bash
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 Keep your connection string handy for later use.

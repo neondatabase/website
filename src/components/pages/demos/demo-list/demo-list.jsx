@@ -19,6 +19,25 @@ const items = [
     ],
   },
   {
+    category: 'Neon on Azure',
+    categoryTextColor: 'text-blue-60',
+    items: [
+      {
+        title: 'Multi-user RAG Chat in Azure: Database project per customer',
+        description:
+          "RAG Chat example on Azure creates one Neon project per customer, each customer's data will be completely isolated",
+        demoLink: 'https://multiuser-rag-g0e0g3h6ekhtf7cg.germanywestcentral-01.azurewebsites.net',
+        sourceLink: 'https://github.com/neondatabase-labs/azure-tenant-ai-chat',
+      },
+      {
+        title: 'AI-Powered Neon Database Q&A Chatbot in Azure',
+        description: 'Ask questions about data in Neon database using React and FastAPI in Python.',
+        demoLink: 'https://rag-vrjtpx5tgrsnm-ca.wittyriver-637b2279.eastus2.azurecontainerapps.io',
+        sourceLink: 'https://github.com/neondatabase-labs/rag-neon-postgres-openai-azure-python',
+      },
+    ],
+  },
+  {
     category: 'Branching',
     categoryTextColor: 'text-blue-80',
     items: [
@@ -50,9 +69,9 @@ const items = [
         sourceLink: 'https://github.com/neondatabase/qovery-lifecycle-job',
       },
       {
-        title: 'Preview branches with Fly.io, Neon, and Github Actions',
+        title: 'Preview branches with Fly.io, Neon, and GitHub Actions',
         description:
-          'An example repo showing how to create one database branch per PR to automate your dev workflows, using Fly.io, Github Actions, and Drizzle for migrations.',
+          'An example repo showing how to create one database branch per PR to automate your dev workflows, using Fly.io, GitHub Actions, and Drizzle for migrations.',
         demoLink: '#',
         sourceLink: 'https://github.com/neondatabase/preview-branches-with-fly?tab=readme-ov-file',
       },
@@ -218,7 +237,7 @@ const DemoList = () => (
                       {title}
                     </h3>
                     <p
-                      className="tracking-snug with-link-primary mt-3 font-light leading-snug text-gray-new-60"
+                      className="with-link-primary mt-3 font-light leading-snug tracking-snug text-gray-new-60"
                       dangerouslySetInnerHTML={{ __html: description }}
                     />
                   </div>

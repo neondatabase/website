@@ -1,19 +1,17 @@
 ---
 title: Replicate data from one Neon project to another
-subtitle: Use logical replication to migrate data to a different Neon project, account,
-  Postgres version, or region
+subtitle: Replicate data to a different Neon project for cross-region replication,
+  version migration, or region migration
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-01-27T15:25:05.407Z'
+updatedOn: '2025-07-03T12:36:49.562Z'
 ---
 
-<LRBeta/>
+Neon's logical replication feature allows you to replicate data from one Neon project to another. This enables different usage scenarios, including:
 
-Neon's logical replication feature allows you to replicate data from one Neon project to another. This enables different replication scenarios, including:
-
+- **Cross-region replication**: Replicating data from a Neon project in one region to a Neon project in another region to support regional failover scenarios.
 - **Postgres version migration**: Moving data from one Postgres version to another; for example, from a Neon project that runs Postgres 16 to one that runs Postgres 17.
 - **Region migration**: Moving data from one region to another; for example, from a Neon project in one region to a Neon project in a different region.
-- **Neon account migration**: Moving data from a Neon project owned by one account to a project owned by a different account; for example, from a personal Neon account to a business-owned Neon account.
 
 These are some common Neon-to-Neon replication scenarios. There may be others. You can follow the steps in this guide for any scenario that requires replicating data between different Neon projects.
 
@@ -69,16 +67,8 @@ SHOW wal_level;
 ### Create a publication on the source database
 
 Publications are a fundamental part of logical replication in Postgres. They define what will be replicated.
-To create a publication for all tables in your database:
 
-```sql
-CREATE PUBLICATION my_publication FOR ALL TABLES;
-```
-
-<Admonition type="important">
-Avoid defining publications with `FOR ALL TABLES` if you want the flexibility to add or drop tables from the publication later. It is not possible to modify a publication defined with `FOR ALL TABLES` to include or exclude specific tables. For details, see [Logical replication tips](/docs/guides/logical-replication-tips).
-
-To create a publication for a specific table, you can use the following syntax:
+To create a publication for a specific table:
 
 ```sql shouldWrap
 CREATE PUBLICATION my_publication FOR TABLE playing_with_neon;
@@ -90,12 +80,15 @@ To create a publication for multiple tables, provide a comma-separated list of t
 CREATE PUBLICATION my_publication FOR TABLE users, departments;
 ```
 
-For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
+<Admonition type="note">
+Defining specific tables lets you add or remove tables from the publication later, which you cannot do when creating publications with `FOR ALL TABLES`.
 </Admonition>
+
+For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html), in the PostgreSQL documentation.
 
 ## Prepare your Neon destination database
 
-This section describes how to prepare your destination Neon Postgres database (the subscriber) to receive replicated data.
+This section explains how to prepare your destination Neon Postgres database (the subscriber) to receive replicated data. For cross-region replication, be sure to create the destination Neon project in a different region than your source database.
 
 ### Prepare your database schema
 
@@ -116,7 +109,7 @@ After creating a publication on the source database, you need to create a subscr
 
    ```sql
    CREATE SUBSCRIPTION my_subscription
-   CONNECTION 'postgresql://neondb_owner:<password>@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb'
+   CONNECTION 'postgresql://neondb_owner:<password>@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
    PUBLICATION my_publication;
    ```
 
@@ -150,7 +143,7 @@ Testing your logical replication setup ensures that data is being replicated cor
 
    count
    -------
-   30
+   10
    (1 row)
    ```
 
@@ -162,8 +155,8 @@ SELECT subname, received_lsn, latest_end_lsn, last_msg_receipt_time FROM pg_cata
 
 ## Switch over your application
 
-After the replication operation is complete, you can switch your application over to the destination database by swapping out your source database connection details for your destination database connection details.
+After the replication operation is complete or in a failover situation, you can switch your application over to the destination database by swapping out your source database connection details for your destination database connection details.
 
-You can find the connection details for a Neon database on the **Connection Details** widget in the Neon Console. For details, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find your Neon database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. See [Connect from any application](/docs/connect/connect-from-any-app).
 
 </Steps>

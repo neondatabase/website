@@ -8,7 +8,7 @@ import getMetadata from 'utils/get-metadata';
 export const metadata = getMetadata(SEO_DATA.costFleets);
 
 const CostFleetsPage = async () => (
-  <Layout headerWithBorder burgerWithoutBorder isHeaderSticky>
+  <Layout headerWithBorder isHeaderSticky>
     <Hero />
     <Cta
       className="mt-[70px] py-[250px] xl:mt-14 xl:py-[184px] lg:mt-12 lg:py-[130px] md:mt-8 md:py-[105px]"
@@ -20,5 +20,3 @@ const CostFleetsPage = async () => (
 );
 
 export default CostFleetsPage;
-
-export const revalidate = 60;

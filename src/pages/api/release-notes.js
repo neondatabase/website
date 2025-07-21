@@ -2,8 +2,8 @@ import fs from 'fs/promises';
 
 import matter from 'gray-matter';
 
-import { CHANGELOG_DIR_PATH } from 'constants/docs';
-import { getPostSlugs } from 'utils/api-docs';
+import { CHANGELOG_DIR_PATH } from 'constants/content';
+import { getPostSlugs } from 'utils/api-content';
 import getExcerpt from 'utils/get-excerpt';
 
 // TODO: move this function to utils/api-docs

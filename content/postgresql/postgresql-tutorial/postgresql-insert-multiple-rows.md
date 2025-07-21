@@ -54,7 +54,7 @@ Inserting multiple rows at once has advantages over inserting one row at a time:
 
 ## Inserting multiple rows into a table examples
 
-Let’s take some examples of inserting multiple rows into a table.
+Let's take some examples of inserting multiple rows into a table.
 
 ### Setting up a sample table
 
@@ -71,14 +71,14 @@ CREATE TABLE contacts (
 
 ### 1\) Basic inserting multiple rows example
 
-The following statement uses the `INSERT` statement to insert three rows into the `links` table:
+The following statement uses the `INSERT` statement to insert three rows into the `contacts` table:
 
 ```sql
 INSERT INTO contacts (first_name, last_name, email)
 VALUES
-    ('John', 'Doe', '[[email protected]](../cdn-cgi/l/email-protection.html)'),
-    ('Jane', 'Smith', '[[email protected]](../cdn-cgi/l/email-protection.html)'),
-    ('Bob', 'Johnson', '[[email protected]](../cdn-cgi/l/email-protection.html)');
+    ('John', 'Doe', 'john.doe@example.com'),
+    ('Jane', 'Smith', 'jane.smith@example.com'),
+    ('Bob', 'Johnson', 'bob.johnson@example.com');
 ```
 
 PostgreSQL returns the following message:
@@ -98,9 +98,9 @@ Output:
 ```text
  id | first_name | last_name |          email
 ----+------------+-----------+-------------------------
-  1 | John       | Doe       | [[email protected]](../cdn-cgi/l/email-protection.html)
-  2 | Jane       | Smith     | [[email protected]](../cdn-cgi/l/email-protection.html)
-  3 | Bob        | Johnson   | [[email protected]](../cdn-cgi/l/email-protection.html)
+  1 | John       | Doe       | john.doe@example.com
+  2 | Jane       | Smith     | jane.smith@example.com
+  3 | Bob        | Johnson   | bob.johnson@example.com
 (3 rows)
 
 ```
@@ -112,8 +112,8 @@ The following statement uses the `INSERT` statement to insert two rows into the 
 ```
 INSERT INTO contacts (first_name, last_name, email)
 VALUES
-    ('Alice', 'Johnson', '[[email protected]](../cdn-cgi/l/email-protection.html)'),
-    ('Charlie', 'Brown', '[[email protected]](../cdn-cgi/l/email-protection.html)')
+    ('Alice', 'Johnson', 'alice.johnson@example.com'),
+    ('Charlie', 'Brown', 'charlie.brown@example.com')
 RETURNING *;
 ```
 
@@ -122,8 +122,8 @@ Output:
 ```text
  id | first_name | last_name |           email
 ----+------------+-----------+---------------------------
-  4 | Alice      | Johnson   | [[email protected]](../cdn-cgi/l/email-protection.html)
-  5 | Charlie    | Brown     | [[email protected]](../cdn-cgi/l/email-protection.html)
+  4 | Alice      | Johnson   | alice.johnson@example.com
+  5 | Charlie    | Brown     | charlie.brown@example.com
 (2 rows)
 
 
@@ -135,9 +135,9 @@ If you just want to return the inserted id list, you can specify the `id` column
 ```
 INSERT INTO contacts (first_name, last_name, email)
 VALUES
-    ('Eva', 'Williams', '[[email protected]](../cdn-cgi/l/email-protection.html)'),
-    ('Michael', 'Miller', '[[email protected]](../cdn-cgi/l/email-protection.html)'),
-    ('Sophie', 'Davis', '[[email protected]](../cdn-cgi/l/email-protection.html)')
+    ('Eva', 'Williams', 'eva.williams@example.com'),
+    ('Michael', 'Miller', 'michael.miller@example.com'),
+    ('Sophie', 'Davis', 'sophie.davis@example.com')
 RETURNING id;
 ```
 

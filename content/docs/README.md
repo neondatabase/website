@@ -1,10 +1,10 @@
 ---
-updatedOn: '2024-10-09T23:54:43.681Z'
+updatedOn: '2025-07-04T12:47:21.296Z'
 ---
 
 # Docs
 
-Welcome to Neon docs! This folder contains the source code of the [Neon docs](https://neon.tech/docs/).
+Welcome to Neon docs! This folder contains the source code of the [Neon docs](/docs/).
 
 ## Basic information
 
@@ -85,7 +85,6 @@ In order to add a new page to the root level, add `slug` in the same level with 
        slug: page-2
 + - title: Root page 1
 +   slug: root-page-1
-+   tag: new
 +   items:
 +     - title: Page 1
 +       slug: page-1
@@ -159,7 +158,6 @@ You can use fenced code blocks with three backticks (```) on the lines before an
 - enable highlighting single lines, multiple lines, and ranges of code lines
 
   Examples:
-
   - Single line highlight
 
     ````md
@@ -213,7 +211,16 @@ You can use fenced code blocks with three backticks (```) on the lines before an
   export function foo() {
     // [!code word:Hello]
     const msg = 'Hello World';
-    console.log(msg); // prints Hello World
+    console.log(msg);
+  }
+  ```
+
+- use `[!code --]` and `[!code ++]` to highlight a code diff.
+
+  ```ts
+  export function foo() {
+    const msg = 'Hello Word'; // [!code --]
+    const msg = 'Hello World'; // [!code ++]
   }
   ```
 
@@ -296,6 +303,44 @@ class GFG {
 
 </details>
 
+## External Code
+
+The `ExternalCode` component allows embedding code content from external sources with syntax highlighting.
+
+### Usage
+
+```markdown
+<ExternalCode
+  url="https://raw.githubusercontent.com/neondatabase/neon/main/README.md"
+/>
+```
+
+### Props
+
+| Prop            | Type    | Default    | Description                                                   |
+| --------------- | ------- | ---------- | ------------------------------------------------------------- |
+| url             | string  | (required) | URL to the raw file                                           |
+| language        | string  | (optional) | Language for syntax highlighting (defaults to file extension) |
+| shouldWrap      | boolean | false      | Enables code wrapping in the code block                       |
+| showLineNumbers | boolean | false      | Shows line numbers in the code block                          |
+| className       | string  | ''         | Additional CSS classes to apply to the component              |
+
+### Examples
+
+```markdown
+<ExternalCode
+  url="https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/neon-auth.mdc"
+  language="markdown"
+  shouldWrap
+  showLineNumbers
+/>
+```
+
+### Best Practices
+
+1. Always use raw URLs from the GitHub repository (e.g., `https://raw.githubusercontent.com/...`).
+2. Use the `language` prop when the file extension doesn't match the actual content type.
+
 ## Tabs
 
 To display the tabs with content as image, video, code block, .etc, wrap the `TabItem` with `Tabs`
@@ -363,19 +408,35 @@ curl --request POST \
 
 To improve the documentation readability, one can leverage an Admonition custom component. Just wrap your piece of text with `<Admonition></Admonition>` and pass the type.
 
-There are 6 types of Admonition: `note`, `important`, `tip`, `warning`, `info`, `comingSoon`; the default is `note`.
+There are 6 types of Admonition: `note`, `important`, `tip`, `info`, `warning`, `comingSoon`; the default is `note`.
 
 You may also specify an optional title with prop `title`.
 
 Example:
 
 ```md
-<Admonition type="note" title="Your title">
-  The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation.
+<Admonition type="note">
+Highlights information that users should take into account, even when skimming.
+</Admonition>
+
+<Admonition type="important">
+Crucial information necessary for users to succeed.
+</Admonition>
+
+<Admonition type="tip">
+Optional information to help a user be more successful.
 </Admonition>
 
 <Admonition type="info">
-  The branch creation process does not increase load on the originating project. You can create a branch at any time without worrying about downtime or performance degradation.
+Information that helps users understand the things better.
+</Admonition>
+
+<Admonition type="warning">
+Critical content demanding immediate user attention due to potential risks.
+</Admonition>
+
+<Admonition type="comingSoon">
+Information about features that are coming soon.
 </Admonition>
 ```
 
@@ -432,6 +493,38 @@ Create a new development branch off of `main`. This branch will be an exact, iso
 <summary>Example</summary>
 
 ![Steps example](images/steps-example.jpg)
+
+</details>
+
+## Checklist
+
+To display a checklist, use the `CheckList` component with `CheckItem` items inside.
+
+```md
+<CheckList title="Checklist title">
+
+<CheckItem title="Check item 1" href="#check-item-1">
+  Check item 1 description
+</CheckItem>
+
+<CheckItem title="Check item 2" href="#check-item-2">
+  Check item 2 description
+</CheckItem>
+
+</CheckList>
+```
+
+### Notes
+
+- Checklist options saved in the browser local storage.
+- Checklists with the same `title` will use the same local storage between pages.
+- If you don't pass `title`, the id will be generated from the page `slug`.
+- The best practice is to use `CheckList` with the `Steps` component on the page.
+
+<details>
+<summary>Example</summary>
+
+![Checklist example](images/checklist-example.jpg)
 
 </details>
 

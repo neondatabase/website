@@ -2,18 +2,14 @@
 title: Connect Quarkus (JDBC) to Neon
 subtitle: Learn how to connect to Neon from Quarkus using JDBC
 enableTableOfContents: true
-updatedOn: '2024-02-08T15:20:54.288Z'
+updatedOn: '2025-06-30T11:30:21.912Z'
 ---
 
 [Quarkus](https://quarkus.io/) is a Java framework optimized for cloud environments. This guide shows how to connect to Neon from a Quarkus project using the PostgreSQL JDBC driver.
 
 To connect to Neon from a Quarkus application using the Postgres JDBC Driver:
 
-1. [Create a Neon Project](#create-a-neon-project)
-2. [Create a Quarkus project and add dependencies](#create-a-quarkus-project)
-3. [Configure a PostgreSQL data source](#configure-a-postgresql-data-source)
-4. [Use the PostgreSQL JDBC Driver](#use-the-postgresql-jdbc-driver)
-5. [Run the application](#run-the-application)
+<Steps>
 
 ## Create a Neon project
 
@@ -44,12 +40,12 @@ Create a `.env` file in the root of your Quarkus project directory. Configure a 
 QUARKUS_DATASOURCE_DB_KIND=postgresql
 QUARKUS_DATASOURCE_USERNAME=[user]
 QUARKUS_DATASOURCE_PASSWORD=[password]
-# Note that "jdbc" is prepended, and that "?sslmode=require" is appended to the connection string
-QUARKUS_DATASOURCE_JDBC_URL=jdbc:postgresql://[neon_hostname]/[dbname]?sslmode=require
+# Note that "jdbc" is prepended, and that "?sslmode=require&channel_binding=require" is appended to the connection string
+QUARKUS_DATASOURCE_JDBC_URL=jdbc:postgresql://[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
 ```
 
 <Admonition type="note">
-You can find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 </Admonition>
 
 ## Use the PostgreSQL JDBC Driver
@@ -110,5 +106,7 @@ Visit [localhost:8080/postgres/version](http://localhost:8080/postgres/version) 
 ```
 PostgreSQL 15.4 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
 ```
+
+</Steps>
 
 <NeedHelp/>

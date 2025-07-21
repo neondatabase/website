@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/hasura
   - /docs/integrations/hasura
-updatedOn: '2024-12-13T20:52:57.583Z'
+updatedOn: '2025-05-11T11:23:50.620Z'
 ---
 
 Hasura Cloud is an open source GraphQL engine that provides a scalable, highly available, globally distributed, secure GraphQL API for your data sources.
@@ -14,19 +14,21 @@ Hasura Cloud is an open source GraphQL engine that provides a scalable, highly a
 
 Use the following instructions to connect to a new Neon database. This connection method authenticates you from Hasura Cloud.
 
-<video autoPlay playsInline muted loop width="800" height="600">
-  <source type="video/mp4" src="https://user-images.githubusercontent.com/48465000/200608247-a050bdc0-3f38-447f-a5a0-75835d7a0238.mp4"/>
-  <source type="video/webm" src="https://user-images.githubusercontent.com/48465000/200608356-d4bb7f27-d9d5-49c9-b923-13e82c4cfc44.webm"/>
-</video>
-
 1. Navigate to [Hasura Cloud](https://cloud.hasura.io/projects) and sign up or log in.
-1. On the Hasura Cloud dashboard, create a Hasura project.
-1. After the project is initialized, click **Launch Console** to open the Hasura Console.
-1. On the Hasura Console, navigate to **DATA** > **Manage** > **Connect Database** > **Create New Database**.
-1. Click **Connect Neon Database**.
-1. When prompted to login or sign up for Neon, we recommend selecting **Continue with Hasura** for seamless authentication.
+2. On the Hasura Cloud dashboard, click **Create a project** to create a new Hasura project.
+   ![Hasura Create a Projects](/docs/guides/hasura/create-project.png)
+3. After the project is initialized, click **Launch Console** to open the Hasura Console.
+   ![Hasura Launch Console](/docs/guides/hasura/launch-console.png)
+4. On the Hasura Console, Select **Data** from the top navigation bar.
+5. Click **Postgres** > **Connect Neon Database**.
+   ![Hasura Connect Neon Database](/docs/guides/hasura/connect-neon-database.png)
+6. When prompted to login or sign up for Neon, we recommend selecting **Hasura** for seamless authentication.
+7. You will be redirected to an Oauth page to authorize Hasura to access your Neon account. Click **Authorize** to allow Hasura to create a new Neon project and database.
+   ![Hasura Authorize Neon](/docs/guides/hasura/authorize-hasura.png)
 
 After authenticating, a new Neon Postgres database is created and connected to your Hasura project, and the Neon project connection string is associated with the `PG_DATABASE_URL` environment variable.
+
+![Environment Variables](/docs/guides/hasura/environment-variables.png)
 
 To start exploring Hasura's GraphQL API with data stored in Neon, see [Load a template in Hasura](#load-a-template-in-hasura-optional).
 
@@ -38,23 +40,35 @@ Use the following instructions to connect to an existing Neon database from Hasu
 
 - An existing Neon account. If you do not have one, see [Sign up](/docs/get-started-with-neon/signing-up).
 - An existing Neon project. If you do not have a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
-- A connection string for a branch in your Neon project:
+- A connection string for a database in your Neon project:
 
   ```text
   postgresql://[user]:[password]@[neon_hostname]/[dbname]
   ```
 
-  Your project's connection string can be found on the Neon **Dashboard**, under **Connection Details**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+  You can find your database connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ### Add Neon as a data source
 
 The following steps describe how to navigate to Hasura Cloud and connect to your Neon project.
 
 1. Navigate to [Hasura Cloud](https://cloud.hasura.io/projects) and sign up or log in.
-1. Click **Create Project** to create a Hasura Cloud project or click **Launch Console** to open an existing project.
-1. Select **DATA** from the top navigation bar.
-1. On the **Connect Existing Database** tab, paste your connection string into the **Database URL** field.
-1. Enter a display name for your database in the **Database Display Name** field, and click **Connect Database**.
+2. Click **Create Project** to create a Hasura Cloud project or click **Launch Console** to open an existing project.
+3. In the Hasura Console, select **Data** from the top navigation bar.
+4. Click **Postgres** > **Connect Existing Database**.
+   ![Hasura Connect Existing Database](/docs/guides/hasura/connect-existing-database.png)
+
+5. Paste your connection string into the **Database URL** field.
+
+   <Admonition type="tip">
+   To enhance security and manageability, consider using environment variables in Hasura instead of hardcoding the connection string. To do this, navigate to **Hasura Project settings** > **Env vars** > **New env var** and create a new variable (e.g., `NEON_DATABASE_URL`) with your connection string as its value.
+     
+     ![Create Environment Variable](/docs/guides/hasura/create-env-var.png)
+
+   Then, in the connection tab, select **Connect database via Environment variable** and enter the variable name you created. This approach keeps your connection string secure and simplifies future updates.
+   </Admonition>
+
+6. Enter a display name for your database in the **Database name** field, and click **Connect Database**.
 
 Hasura Cloud connects to your Neon project and automatically discovers the default `public` schema.
 
@@ -64,13 +78,13 @@ To start exploring Hasura's GraphQL API with data stored in Neon, see [Load a te
 
 Optionally, after connecting from your Hasura project to Neon, you can explore Hasura's GraphQL API by loading a template from Hasura's template gallery. Follow these steps to load the `Welcome to Hasura` template, which creates `customer` and `order` tables and populates them with sample data.
 
-1. In the Hasura Console, select **DATA**.
-1. Under **Data Manager**, select your database.
-1. From the **Template Gallery**, select **Welcome to Hasura** to install the template.
+1. In the Hasura Console, select **Data**.
+2. Under **Data Manager**, select your database.
+3. From the **Template Gallery**, select **Welcome to Hasura** to install the template.
 
 To view the newly created tables from the Neon Console:
 
-1. In the Hasura Console, select **DATA** > **Manage your Neon databases** to open the Neon Console.
+1. In the Hasura Console, select **Data** > **Manage your Neon databases** to open the Neon Console.
 2. In the Neon Console, select your project.
 3. Select the **Tables** tab. The newly created `customer` and `order` tables should appear under the **Tables** heading in the sidebar.
 
@@ -80,7 +94,7 @@ If you are migrating from Hasura with Heroku Postgres to Neon, refer to the [Imp
 
 ## Maximum connections configuration
 
-In Neon, the maximum number of concurrent connections is defined according to the size of your compute. For example, a 0.25 vCPU compute in Neon supports 112 connections. The connection limit is higher with larger compute sizes (see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute)). You can also enable connection pooling in Neon to support up to 10,000 concurrent connections. However, it is important to note that Hasura has a `HASURA_GRAPHQL_PG_CONNECTIONS` setting that limits Postgres connections to `50` by default. If you start encountering errors related to "max connections", try increasing the value of this setting as a first step, staying within the connection limit for your Neon compute. For information about the Hasura connection limit setting, refer to the [Hasura Postgres configuration documentation](https://hasura.io/docs/latest/deployment/performance-tuning/#postgres-configuration).
+In Neon, the maximum number of concurrent connections is defined according to the size of your compute. For example, a 0.25 vCPU compute in Neon supports 112 connections. The connection limit is higher with larger compute sizes (see [How to size your compute](/docs/manage/computes#how-to-size-your-compute)). You can also enable connection pooling in Neon to support up to 10,000 concurrent connections. However, it is important to note that Hasura has a `HASURA_GRAPHQL_PG_CONNECTIONS` setting that limits Postgres connections to `50` by default. If you start encountering errors related to "max connections", try increasing the value of this setting as a first step, staying within the connection limit for your Neon compute. For information about the Hasura connection limit setting, refer to the [Hasura Postgres configuration documentation](https://hasura.io/docs/latest/deployment/performance-tuning/#postgres-configuration).
 
 ## Scale to zero considerations
 

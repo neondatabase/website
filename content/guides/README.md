@@ -4,7 +4,7 @@ updatedOn: '2024-05-13T13:24:36.612Z'
 
 # Guides
 
-Welcome to Neon guides! This folder contains the source code of the [Neon guides](https://neon.tech/guides/).
+Welcome to Neon guides! This folder contains the source code of the [Neon guides](/guides/).
 
 ## Basic information
 
@@ -37,7 +37,6 @@ You can use fenced code blocks with three backticks (```) on the lines before an
 - enable highlighting single lines, multiple lines, and ranges of code lines
 
   Examples:
-
   - Single line highlight
 
     ````md
@@ -307,13 +306,13 @@ Example file structure:
 To display images using Markdown syntax, use the following syntax: `![alt text](image url)`. Example content in `architecture-overview.md`:
 
 ```md
-![Neon architecture diagram](/guides/conceptual-guides/neon_architecture_2.png)
+![Neon architecture diagram](/guides/images/conceptual-guides/neon_architecture_2.png)
 ```
 
 If you need an image without border to show an annotated piece of UI, use the `"no-border"` attribute as in the example below:
 
 ```md
-![Neon architecture diagram](/guides/conceptual-guides/neon_architecture_2.png 'no-border')
+![Neon architecture diagram](/guides/images/conceptual-guides/neon_architecture_2.png 'no-border')
 ```
 
 With this approach, all images on your guide pages will be displayed both on the production and GitHub preview.
@@ -476,10 +475,7 @@ author: rishi-raj-jain
     "name": "Rishi Raj Jain",
     "position": "Software Engineer",
     "bio": "Technical Writer",
-    "link": {
-      "title": "GitHub",
-      "url": "https://github.com/rishi-raj-jain"
-    }
+    "link": { "title": "GitHub", "url": "https://github.com/rishi-raj-jain" }
   }
 }
 ```

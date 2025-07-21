@@ -2,18 +2,14 @@
 title: Connect Quarkus (Reactive) to Neon
 subtitle: Learn how to connect to Neon from Quarkus using a Reactive SQL Client
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.662Z'
+updatedOn: '2025-06-30T11:30:21.912Z'
 ---
 
 [Quarkus](https://quarkus.io/) is a Java framework optimized for cloud environments. This guide shows how to connect to Neon from a Quarkus project using a Reactive SQL Client.
 
 To connect to Neon from a Quarkus application:
 
-1. [Create a Neon Project](#create-a-neon-project)
-2. [Create a Quarkus project and add dependencies](#create-a-quarkus-project)
-3. [Configure a PostgreSQL data source](#configure-a-postgresql-data-source)
-4. [Use the Reactive PostgreSQL client](#use-the-reactive-postgresql-client)
-5. [Run the application](#run-the-application)
+<Steps>
 
 ## Create a Neon project
 
@@ -41,12 +37,12 @@ You now have a Quarkus project in a folder named `neon-with-quarkus` with the Re
 Create a `.env` file in the root of your Quarkus project directory. Configure a reactive data source using your Neon database connection string and specifying the database kind as shown:
 
 ```shell shouldWrap
-# Note that "?sslmode=require" is appended to the Neon connection string
-QUARKUS_DATASOURCE_REACTIVE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
+# Note that "?sslmode=require&channel_binding=require" is appended to the Neon connection string
+QUARKUS_DATASOURCE_REACTIVE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
 ```
 
 <Admonition type="note">
-You can find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 </Admonition>
 
 ## Use the Reactive PostgreSQL client
@@ -101,5 +97,7 @@ Visit [localhost:8080/postgres/version](http://localhost:8080/postgres/version) 
 ```
 PostgreSQL 15.4 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
 ```
+
+</Steps>
 
 <NeedHelp/>

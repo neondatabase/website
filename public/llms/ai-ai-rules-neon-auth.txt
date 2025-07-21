@@ -1,0 +1,327 @@
+# AI Rules: Neon Auth
+
+> The "AI Rules: Neon Auth" document outlines the authentication rules and procedures for integrating AI capabilities within the Neon platform, detailing the necessary configurations and security protocols for seamless AI service access.
+
+## Source
+
+- [AI Rules: Neon Auth HTML](https://neon.com/docs/ai/ai-rules-neon-auth): The original HTML version of this documentation
+
+Related docs:
+- [Neon Auth](https://neon.com/docs/guides/neon-auth)
+
+Repository:
+- [READ ME](https://github.com/neondatabase-labs/ai-rules)
+- [neon-auth.mdc](https://github.com/neondatabase-labs/ai-rules/blob/main/neon-auth.mdc)
+
+## How to use
+
+You can use these rules in two ways:
+
+## Option 1: Copy from this page
+
+With Cursor, save the [rules](https://docs.cursor.com/context/rules-for-ai#project-rules-recommended) to `.cursor/rules/neon-auth.mdc` and they'll be automatically applied when working with matching files (`*.ts`, `*.tsx`).
+
+For other AI tools, you can include these rules as context when chatting with your AI assistant - check your tool's documentation for the specific method (like using "Include file" or context commands).
+
+## Option 2: Clone from repository
+
+If you prefer, you can clone or download the rules directly from our [AI Rules repository](https://github.com/neondatabase-labs/ai-rules).
+
+Once added to your project, AI tools will automatically use these rules when working with Neon Auth code. You can also reference them explicitly in prompts.
+
+## Rules
+
+````md
+---
+description: Use these rules to relate your database data with your Auth users information
+globs: *.tsx, *.ts
+alwaysApply: false
+---
+# Neon Auth guidelines
+
+## Overview
+
+This document provides comprehensive guidelines for implementing authentication in your application using both Stack Auth (frontend authentication system) and Neon Auth (database integration for user data). These systems work together to provide a complete authentication solution:
+
+- **Stack Auth**: Handles user interface components, authentication flows, and client/server interactions
+- **Neon Auth**: Manages how user data is stored and accessed in your database
+
+## Stack Auth Setup Guidelines
+
+### Initial Setup
+
+- Run the installation wizard with:  
+  `npx @stackframe/init-stack@latest`
+- Update your API keys in your `.env.local` file:  
+  - `NEXT_PUBLIC_STACK_PROJECT_ID`  
+  - `NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY`  
+  - `STACK_SECRET_SERVER_KEY`
+- Key files created/updated include:  
+  - `app/handler/[...stack]/page.tsx` (default auth pages)  
+  - `app/layout.tsx` (wrapped with StackProvider and StackTheme)  
+  - `app/loading.tsx` (provides a Suspense fallback)  
+  - `stack.ts` (initializes your Stack server app)
+
+### UI Components
+
+- Use pre-built components from `@stackframe/stack` like `<UserButton />`, `<SignIn />`, and `<SignUp />` to quickly set up auth UI.
+- You can also compose smaller pieces like `<OAuthButtonGroup />`, `<MagicLinkSignIn />`, and `<CredentialSignIn />` for custom flows.
+- Example:
+  
+  ```tsx
+  import { SignIn } from '@stackframe/stack';
+  export default function Page() {
+    return <SignIn />;
+  }
+  ```
+
+### User Management
+
+- In Client Components, use the `useUser()` hook to retrieve the current user (it returns `null` when not signed in).
+- Update user details using `user.update({...})` and sign out via `user.signOut()`.
+- For pages that require a user, call `useUser({ or: "redirect" })` so unauthorized visitors are automatically redirected.
+
+### Client Component Integration
+
+- Client Components rely on hooks like `useUser()` and `useStackApp()`.
+- Example:
+  
+  ```tsx
+  "use client";
+  import { useUser } from "@stackframe/stack";
+  export function MyComponent() {
+    const user = useUser();
+    return <div>{user ? `Hello, ${user.displayName}` : "Not logged in"}</div>;
+  }
+  ```
+
+### Server Component Integration
+
+- For Server Components, use `stackServerApp.getUser()` from your `stack.ts` file.
+- Example:
+  
+  ```tsx
+  import { stackServerApp } from "@/stack";
+  export default async function ServerComponent() {
+    const user = await stackServerApp.getUser();
+    return <div>{user ? `Hello, ${user.displayName}` : "Not logged in"}</div>;
+  }
+  ```
+
+### Page Protection
+
+- Protect pages by:
+  - Using `useUser({ or: "redirect" })` in Client Components.
+  - Using `await stackServerApp.getUser({ or: "redirect" })` in Server Components.
+  - Implementing middleware that checks for a user and redirects to `/handler/sign-in` if not found.
+- Example middleware:
+  
+  ```tsx
+  export async function middleware(request: NextRequest) {
+    const user = await stackServerApp.getUser();
+    if (!user) {
+      return NextResponse.redirect(new URL('/handler/sign-in', request.url));
+    }
+    return NextResponse.next();
+  }
+  export const config = { matcher: '/protected/:path*' };
+  ```
+
+## Neon Auth Database Integration
+
+### Database Schema
+
+Neon Auth creates and manages a schema in your database that stores user information:
+
+- **Schema Name**: `neon_auth`
+- **Primary Table**: `users_sync`
+- **Table Structure**:
+  - `raw_json` (JSONB, NOT NULL): Complete user data in JSON format
+  - `id` (TEXT, NOT NULL, PRIMARY KEY): Unique user identifier
+  - `name` (TEXT, NULLABLE): User's display name
+  - `email` (TEXT, NULLABLE): User's email address
+  - `created_at` (TIMESTAMP WITH TIME ZONE, NULLABLE): When the user was created
+  - `deleted_at` (TIMESTAMP WITH TIME ZONE, NULLABLE): When the user was deleted (if applicable)
+- **Indexes**:
+  - `users_sync_deleted_at_idx` on `deleted_at`: For quickly identifying deleted users
+
+### Schema Creation SQL
+
+```sql
+-- Create schema if it doesn't exist
+CREATE SCHEMA IF NOT EXISTS neon_auth;
+-- Create the users_sync table
+CREATE TABLE neon_auth.users_sync (
+    raw_json JSONB NOT NULL,
+    id TEXT NOT NULL,
+    name TEXT,
+    email TEXT,
+    created_at TIMESTAMP WITH TIME ZONE,
+    deleted_at TIMESTAMP WITH TIME ZONE,
+    PRIMARY KEY (id)
+);
+-- Create index on deleted_at
+CREATE INDEX users_sync_deleted_at_idx ON neon_auth.users_sync (deleted_at);
+```
+
+### Database Usage
+
+#### Querying Users
+
+To fetch active users from Neon Auth:
+
+```sql
+SELECT * FROM neon_auth.users_sync WHERE deleted_at IS NULL;
+```
+
+#### Relating User Data with Application Tables
+
+To join user data with your application tables:
+
+```sql
+SELECT 
+  t.*,
+  u.id AS user_id,
+  u.name AS user_name,
+  u.email AS user_email
+FROM 
+  public.todos t
+LEFT JOIN 
+  neon_auth.users_sync u ON t.owner = u.id
+WHERE 
+  u.deleted_at IS NULL
+ORDER BY 
+  t.id;
+```
+
+## Stack Auth SDK Reference
+
+The Stack Auth SDK provides several types and methods:
+
+```tsx
+type StackClientApp = {
+  new(options): StackClientApp;
+  getUser([options]): Promise<User>;
+  useUser([options]): User;
+  getProject(): Promise<Project>;
+  useProject(): Project;
+  signInWithOAuth(provider): void;
+  signInWithCredential([options]): Promise<...>;
+  signUpWithCredential([options]): Promise<...>;
+  sendForgotPasswordEmail(email): Promise<...>;
+  sendMagicLinkEmail(email): Promise<...>;
+};
+type StackServerApp =
+  & StackClientApp
+  & {
+    new(options): StackServerApp;
+    getUser([id][, options]): Promise<ServerUser | null>;
+    useUser([id][, options]): ServerUser;
+    listUsers([options]): Promise<ServerUser[]>;
+    useUsers([options]): ServerUser[];
+    createUser([options]): Promise<ServerUser>;
+    getTeam(id): Promise<ServerTeam | null>;
+    useTeam(id): ServerTeam;
+    listTeams(): Promise<ServerTeam[]>;
+    useTeams(): ServerTeam[];
+    createTeam([options]): Promise<ServerTeam>;
+  }
+type CurrentUser = {
+  id: string;
+  displayName: string | null;
+  primaryEmail: string | null;
+  primaryEmailVerified: boolean;
+  profileImageUrl: string | null;
+  signedUpAt: Date;
+  hasPassword: boolean;
+  clientMetadata: Json;
+  clientReadOnlyMetadata: Json;
+  selectedTeam: Team | null;
+  update(data): Promise<void>;
+  updatePassword(data): Promise<void>;
+  getAuthHeaders(): Promise<Record<string, string>>;
+  getAuthJson(): Promise<{ accessToken: string | null }>;
+  signOut([options]): Promise<void>;
+  delete(): Promise<void>;
+  getTeam(id): Promise<Team | null>;
+  useTeam(id): Team | null;
+  listTeams(): Promise<Team[]>;
+  useTeams(): Team[];
+  setSelectedTeam(team): Promise<void>;
+  createTeam(data): Promise<Team>;
+  leaveTeam(team): Promise<void>;
+  getTeamProfile(team): Promise<EditableTeamMemberProfile>;
+  useTeamProfile(team): EditableTeamMemberProfile;
+  hasPermission(scope, permissionId): Promise<boolean>;
+  getPermission(scope, permissionId[, options]): Promise<TeamPermission | null>;
+  usePermission(scope, permissionId[, options]): TeamPermission | null;
+  listPermissions(scope[, options]): Promise<TeamPermission[]>;
+  usePermissions(scope[, options]): TeamPermission[];
+  listContactChannels(): Promise<ContactChannel[]>;
+  useContactChannels(): ContactChannel[];
+};
+```
+
+## Best Practices for Integration
+
+### Stack Auth Best Practices
+- Use the appropriate methods based on component type:
+  - Use hook-based methods (`useXyz`) in Client Components
+  - Use promise-based methods (`getXyz`) in Server Components
+- Always protect sensitive routes using the provided mechanisms
+- Use pre-built UI components whenever possible to ensure proper auth flow handling
+
+### Neon Auth Best Practices
+- Always use `LEFT JOIN` when relating with `neon_auth.users_sync`
+  - Ensures queries work even if user records are missing
+- Always filter out users with `deleted_at IS NOT NULL`
+  - Prevents deleted user accounts from appearing in queries
+- Never create Foreign Key constraints pointing to `neon_auth.users_sync`
+  - User management happens externally and could break referential integrity
+- Never insert users directly into the `neon_auth.users_sync` table
+  - User creation and management must happen through the Stack Auth system
+
+## Integration Flow
+
+1. User authentication happens via Stack Auth UI components
+2. User data is automatically synced to the `neon_auth.users_sync` table
+3. Your application code accesses user information either through:
+   - Stack Auth hooks/methods (in React components)
+   - SQL queries to the `neon_auth.users_sync` table (for data operations)
+
+## Example: Custom Profile Page with Database Integration
+
+### Frontend Component
+```tsx
+'use client';
+import { useUser, useStackApp, UserButton } from '@stackframe/stack';
+export default function ProfilePage() {
+  const user = useUser({ or: "redirect" });
+  const app = useStackApp();
+  return (
+    <div>
+      <UserButton />
+      <h1>Welcome, {user.displayName || "User"}</h1>
+      <p>Email: {user.primaryEmail}</p>
+      <button onClick={() => user.signOut()}>Sign Out</button>
+    </div>
+  );
+}
+```
+
+### Database Query for User's Content
+```sql
+-- Get all todos for the currently logged in user
+SELECT 
+  t.*
+FROM 
+  public.todos t
+LEFT JOIN 
+  neon_auth.users_sync u ON t.owner = u.id
+WHERE 
+  u.id = $current_user_id
+  AND u.deleted_at IS NULL
+ORDER BY 
+  t.created_at DESC;
+```
+````

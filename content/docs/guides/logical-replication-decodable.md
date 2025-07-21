@@ -3,7 +3,7 @@ title: Replicate data with Decodable
 subtitle: Learn how to replicate data from Neon with Decodable
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-10-21T14:14:21.658Z'
+updatedOn: '2025-06-30T11:30:21.904Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -11,8 +11,7 @@ Neon's logical replication feature allows you to replicate data from your Neon P
 [Decodable](https://www.decodable.co/) is a fully managed platform for ETL, ELT, and stream processing,
 powered by Apache Flink® and Debezium.
 
-In this guide, you will learn how to configure a Postgres source connector in Decodable for ingesting changes from your Neon database so that you can replicate data from Neon to any of Decodable's [supported data sinks](https://docs.decodable.co/connect/destinations.html),
-optionally processing the data with SQL or custom Flink jobs.
+In this guide, you will learn how to configure a Postgres source connector in Decodable for ingesting changes from your Neon database so that you can replicate data from Neon to any of Decodable's [supported data sinks](https://docs.decodable.co/connections.html#sinks), optionally processing the data with SQL or custom Flink jobs.
 
 ## Prerequisites
 
@@ -117,11 +116,10 @@ ALTER TABLE <tbl1> REPLICA IDENTITY FULL;
 Next, create a [publication](https://www.postgresql.org/docs/current/sql-createpublication.html) with the name `dbz_publication`. Include all the tables you would like to ingest into Decodable.
 
 ```sql
-CREATE PUBLICATION dbz_publication FOR TABLE <tbl1, tbl2, tbl3>;
+CREATE PUBLICATION dbz_publication FOR TABLE <tbl1, tbl2, tbl3>>;
 ```
 
 Refer to the [Postgres docs](https://www.postgresql.org/docs/current/sql-alterpublication.html) if you need to add or remove tables from your publication.
-Alternatively, you also can create a publication `FOR ALL TABLES`.
 
 Upon start-up, the Decodable connector for Postgres will automatically create the [replication slot](https://www.postgresql.org/docs/current/logicaldecoding-explanation.html#LOGICALDECODING-REPLICATION-SLOTS) required for ingesting data change events from Postgres.
 The slot's name will be prefixed with `decodable_`, followed by a unique identifier.
@@ -136,15 +134,14 @@ For information about configuring allowed IPs in Neon, see [Configure IP Allow](
 
 1. In the Decodable web UI, select **Connections** from the left navigation bar and click **New Connection**.
 2. In the connector catalog, choose **Postgres CDC** and click **Connect**.
-3. Enter the connection details for your Neon database. You can get these details from your Neon connection string, which you'll find in the **Connection Details** widget on the **Dashboard** of your Neon project.
+3. Enter the connection details for your Neon database. You can find your Neon database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
    Your connection string will look like this:
 
    ```bash shouldWrap
-   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    ```
 
    Enter the details for **your connection string** into the source connector fields. Based on the sample connection string above, the values would be specified as shown below. Your values will differ.
-
    - **Connection Type**: Source (the default)
    - **Host**: ep-cool-darkness-123456.us-east-2.aws.neon.tech
    - **Port**: 5432

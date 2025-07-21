@@ -8,8 +8,8 @@ import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
 import ArrowLeftIcon from 'icons/arrow-left-thin.inline.svg';
-import buildOgImageUrl from 'utils/build-og-image-url';
 import getMetadata from 'utils/get-metadata';
+import getTicketOgImage from 'utils/get-ticket-og-image';
 import prisma from 'utils/prisma';
 
 // eslint-disable-next-line react/prop-types
@@ -36,12 +36,12 @@ const TicketPage = async ({ params }) => {
               {userName}&apos;s <br className="hidden md:block" />
               Ticket
             </h1>
-            <p className="relative z-50 mt-5 max-w-[363px] text-[1.15rem] font-light leading-tight tracking-tight text-gray-new-70 xl:mx-auto xl:max-w-[579px] xl:text-lg xl:leading-[1.375] xl:tracking-tighter lg:mt-4 lg:max-w-[610px] lg:text-base">
+            <p className="relative z-50 mt-5 max-w-[363px] text-[1.15rem] font-light leading-tight tracking-tight text-gray-new-70 xl:mx-auto xl:max-w-[579px] xl:text-lg xl:leading-snug xl:tracking-tighter lg:mt-4 lg:max-w-[610px] lg:text-base">
               Join {userName.split(' ')[0]} at Neon Deploy on{' '}
               <time dateTime="2024-10-30T17:00:00Z">October 30th, 10 a.m. PT</time>
             </p>
             <Link
-              className="pointer-events-auto mt-[18px] flex items-end text-lg leading-none tracking-[-0.02em] text-green-45 underline decoration-green-45/40 underline-offset-[8px] transition-colors duration-200 hover:decoration-green-45 xl:justify-center lg:text-base"
+              className="pointer-events-auto mt-[18px] flex items-end text-lg leading-none tracking-extra-tight text-green-45 underline decoration-green-45/40 underline-offset-[8px] transition-colors duration-200 hover:decoration-green-45 xl:justify-center lg:text-base"
               to={LINKS.stage}
             >
               <span>Watch the event live</span>
@@ -125,19 +125,20 @@ export async function generateMetadata({ params }) {
     return getMetadata({
       ...SEO_DATA.ticket(userData),
       pathname: `/tickets/${userData.login}`,
-      imagePath: buildOgImageUrl(userData),
+      imagePath: getTicketOgImage(userData),
     });
   }
 
   return getMetadata({ ...SEO_DATA['404-ticket'] });
 }
 
-export async function generateStaticParams() {
-  const users = await prisma.user.findMany();
+// TODO: Uncomment when we have tickets back
+// export async function generateStaticParams() {
+//   const users = await prisma.user.findMany();
 
-  return users.map((user) => ({
-    handle: user.login,
-  }));
-}
+//   return users.map((user) => ({
+//     handle: user.login,
+//   }));
+// }
 
 export const revalidate = 0;

@@ -3,7 +3,7 @@ title: Replicate data with Fivetran
 subtitle: Learn how to replicate data from Neon with Fivetran
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-08-23T17:19:28.788Z'
+updatedOn: '2025-06-30T11:30:21.905Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -130,15 +130,14 @@ The name assigned to the replication slot is `fivetran_pgoutput_slot`. You will 
 1. Log in to your [Fivetran](https://fivetran.com/) account.
 1. On the **Select your datasource** page, search for the **PostgreSQL** source and click **Set up**.
 1. In your connector setup form, enter a value for **Destination Schema Prefix**. This prefix applies to each replicated schema and cannot be changed once your connector is created. In this example, we'll use `neon` as the prefix.
-1. Enter the connection details for your Neon database. You can get these details from your Neon connection string, which you'll find in the **Connection Details** widget on the **Dashboard** of your Neon project.
+1. Enter the connection details for your Neon database. You can find your Neon database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
    For example, let's say this is your connection string:
 
    ```bash shouldWrap
-   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    ```
 
    From this string, the values in the Fivetran **Create a source** dialog would show as below. Your actual values will differ, with the exception of the port number.
-
    - **Host**: ep-cool-darkness-123456.us-east-2.aws.neon.tech
    - **Port**: 5432
    - **Username**: alex

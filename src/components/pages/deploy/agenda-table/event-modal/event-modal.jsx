@@ -3,7 +3,7 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 
 import CloseIcon from 'icons/close-gradient.inline.svg';
-import GithubIcon from 'icons/github.inline.svg';
+import GitHubIcon from 'icons/github.inline.svg';
 import LinkedinIcon from 'icons/linkedin-logo.inline.svg';
 import XIcon from 'icons/x-logo.inline.svg';
 
@@ -14,7 +14,7 @@ const EventModal = ({
   bio = null,
   xUrl = null,
   linkedinUrl = null,
-  githubUrl = null,
+  gitHubUrl = null,
   event,
   description,
   closeModal,
@@ -39,16 +39,16 @@ const EventModal = ({
         />
       )}
       <div className="flex flex-col items-start leading-dense">
-        <span className="text-xl font-medium tracking-[-0.02em] sm:text-lg">{name}</span>
+        <span className="text-xl font-medium tracking-extra-tight sm:text-lg">{name}</span>
         {role && (
-          <span className="text-gray-80 mt-1 text-sm font-light tracking-[-0.02em]">{role}</span>
+          <span className="text-gray-80 mt-1 text-sm font-light tracking-extra-tight">{role}</span>
         )}
       </div>
     </div>
-    <div className="border-gray-15 text-gray-90 mt-4 border-t pt-4 text-sm font-light leading-[1.25]">
+    <div className="border-gray-15 text-gray-90 mt-4 border-t pt-4 text-sm font-light leading-tight">
       {bio}
     </div>
-    {(xUrl || linkedinUrl || githubUrl) && (
+    {(xUrl || linkedinUrl || gitHubUrl) && (
       <div className="mt-4 flex gap-x-5 text-white">
         {xUrl && (
           <Link
@@ -70,22 +70,22 @@ const EventModal = ({
             <LinkedinIcon className="h-4 w-4" />
           </Link>
         )}
-        {githubUrl && (
+        {gitHubUrl && (
           <Link
             className="transition-colors duration-200 hover:text-green-45"
-            href={githubUrl}
+            href={gitHubUrl}
             rel="noreferrer noopener"
             target="_blank"
           >
-            <GithubIcon className="h-4 w-4" />
+            <GitHubIcon className="h-4 w-4" />
           </Link>
         )}
       </div>
     )}
     {description && (
       <div className="mt-11">
-        <span className="block text-xl leading-dense tracking-[-0.02em] sm:text-lg">{event}</span>
-        <p className="text-gray-90 border-gray-15 mt-4 border-t pt-4 text-sm font-light leading-[1.25]">
+        <span className="block text-xl leading-dense tracking-extra-tight sm:text-lg">{event}</span>
+        <p className="text-gray-90 border-gray-15 mt-4 border-t pt-4 text-sm font-light leading-tight">
           {description}
         </p>
       </div>
@@ -100,7 +100,7 @@ EventModal.propTypes = {
   bio: PropTypes.string,
   xUrl: PropTypes.string,
   linkedinUrl: PropTypes.string,
-  githubUrl: PropTypes.string,
+  gitHubUrl: PropTypes.string,
   event: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   closeModal: PropTypes.func.isRequired,

@@ -3,7 +3,7 @@ title: Managing schema changes in a logical replication setup
 subtitle: Learn about managing schema changes in a logical replication setup
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-09-05T17:34:34.204Z'
+updatedOn: '2025-06-02T15:04:05.571Z'
 ---
 
 When working with Postgres logical replication, managing schema changes is a task that requires careful planning. As stated in the [PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication-restrictions.html):
@@ -83,7 +83,7 @@ For guidance on managing schemas across multiple databases using Flyway or Liqui
 - [Flyway: A simple way to manage multiple environment deployments](https://www.red-gate.com/blog/a-simple-way-to-manage-multi-environment-deployments)
 - [How to set up Liquibase with an Existing Project and Multiple Environments](https://docs.liquibase.com/workflows/liquibase-community/existing-project.html)
 
-Some Object Relational Mappers (ORMs) also support managing schemas across multiple database environments. For example, with Prisma ORM, you can configure multiple `.env` files. Learn more at [Using multiple .env files](https://www.prisma.io/docs/orm/more/development-environment/environment-variables/using-multiple-env-files).
+Some Object Relational Mappers (ORMs) also support managing schemas across multiple database environments. For example, with Prisma ORM, you can configure multiple `.env` files. Learn more at [Using multiple .env files](https://www.prisma.io/docs/orm/more/development-environment/environment-variables#using-multiple-env-files).
 
 Regardless of the schema management tool you choose, ensure that changes adhere to the guidelines for [additive](#1-apply-additive-schema-changes-to-the-subscriber-first) and [non-additive](#2-handle-non-additive-schema-changes-with-caution) schema changes.
 

@@ -3,7 +3,7 @@ title: Authenticate Neon Postgres application users with Okta
 subtitle: Learn how to add authentication to a Neon Postgres database application with
   Okta
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.056Z'
+updatedOn: '2025-06-30T11:30:21.893Z'
 ---
 
 User authentication is critical for web applications, especially for apps internal to an organization. [Okta Workforce Indentity Cloud](https://www.okta.com/workforce-identity/) is an identity and access management platform for organizations, that provides authentication, authorization, and user management capabilities.
@@ -61,10 +61,10 @@ touch .env.local
 
 ### Retrieve your Neon database connection string
 
-Navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
+You can find your database connection string by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
 
 ```bash
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 Add this connection string to the `.env.local` file in your Next.js project.
@@ -88,7 +88,7 @@ DATABASE_URL=NEON_DB_CONNECTION_STRING
 
 ### Retrieve your Okta configuration
 
-From the application's **General** tab, find the **Client ID** and **Client SECRET**. Also note down your Okta **Issuer URI**, which is the first part of your Okta account's URL, e.g., `https://dev-12345.okta.com`. If it isn't clear, visit the **Security > API** section from the sidebar in the console to find the **Issuer URI** and remove `/oauth2/default` from the end.
+From the application's **General** tab, find the **Client ID** and **Client SECRET**. Also note your Okta **Issuer URI**, which is the first part of your Okta account's URL, e.g., `https://dev-12345.okta.com`. If it isn't clear, visit the **Security > API** section from the sidebar in the console to find the **Issuer URI** and remove `/oauth2/default` from the end.
 
 Add these as environment variables to the `.env.local` file in your Next.js project:
 

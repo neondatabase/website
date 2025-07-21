@@ -2,7 +2,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
-const { getAllPosts, getAllChangelogPosts } = require('./src/utils/api-docs');
+const { getAllPosts, getAllChangelogs } = require('./src/utils/api-docs');
 const generateChangelogPath = require('./src/utils/generate-changelog-path');
 const generateDocPagePath = require('./src/utils/generate-doc-page-path');
 
@@ -109,7 +109,7 @@ const defaultConfig = {
   },
   async redirects() {
     const docPosts = await getAllPosts();
-    const changelogPosts = await getAllChangelogPosts();
+    const changelogPosts = await getAllChangelogs();
     const docsRedirects = docPosts.reduce((acc, post) => {
       const { slug, redirectFrom: postRedirects } = post;
       if (!postRedirects || !postRedirects.length) {
@@ -141,6 +141,26 @@ const defaultConfig = {
 
     return [
       {
+        source: '/bm',
+        destination: '/?ref=tbm-p',
+        permanent: true,
+      },
+      {
+        source: '/burningmonk',
+        destination: '/?ref=tbm-p',
+        permanent: true,
+      },
+      {
+        source: '/yc-startups',
+        destination: '/startups',
+        permanent: true,
+      },
+      {
+        source: '/yc-deal-terms',
+        destination: '/startups-deal-terms',
+        permanent: true,
+      },
+      {
         source: '/postgresql',
         destination: '/postgresql/tutorial',
         permanent: true,
@@ -153,11 +173,6 @@ const defaultConfig = {
       {
         source: '/2024-plan-updates',
         destination: '/pricing',
-        permanent: true,
-      },
-      {
-        source: '/blog/category/case-study',
-        destination: '/case-studies',
         permanent: true,
       },
       {
@@ -175,7 +190,7 @@ const defaultConfig = {
         destination: '/docs/changelog/:path*',
         permanent: true,
       },
-      // Proxy has an error message, that suggests to read `https://neon.tech/sni` for more details.
+      // Proxy has an error message, that suggests to read `https://neon.com/sni` for more details.
       {
         source: '/sni',
         destination: '/docs/connect/connection-errors',
@@ -197,6 +212,11 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/docs/import/migration-assistant',
+        destination: '/docs/import/import-data-assistant',
+        permanent: true,
+      },
+      {
         source: '/driver',
         destination: '/docs/serverless/serverless-driver',
         permanent: false,
@@ -204,6 +224,11 @@ const defaultConfig = {
       {
         source: '/blog/postgres-autoscaling',
         destination: '/blog/scaling-serverless-postgres',
+        permanent: false,
+      },
+      {
+        source: '/blog/an-apology-and-a-recap-on-may-june-stability',
+        destination: '/blog/may-june-recap',
         permanent: false,
       },
       {
@@ -248,15 +273,20 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/docs/manage/endpoints',
+        destination: '/docs/manage/computes',
+        permanent: true,
+      },
+      {
         source: '/sign_in',
         destination: 'https://console.neon.tech/signup',
         permanent: true,
       },
-      {
-        source: '/ai',
-        destination: '/docs/ai/ai-intro',
-        permanent: true,
-      },
+      // {
+      //   source: '/ai',
+      //   destination: '/docs/ai/ai-intro',
+      //   permanent: true,
+      // },
       {
         source: '/deploy',
         destination: '/stage',
@@ -270,6 +300,56 @@ const defaultConfig = {
       {
         source: '/changelog',
         destination: '/docs/changelog',
+        permanent: false,
+      },
+      {
+        source: '/support',
+        destination: '/docs/introduction/support',
+        permanent: true,
+      },
+      {
+        source: '/early-access-program',
+        destination: '/docs/introduction/roadmap#join-the-neon-early-access-program',
+        permanent: true,
+      },
+      {
+        source: '/hipaa-compliance-guide',
+        destination: '/docs/security/hipaa',
+        permanent: true,
+      },
+      {
+        source: '/docs/use-cases/saas-apps',
+        destination: '/use-cases/postgres-for-saas',
+        permanent: true,
+      },
+      {
+        source: '/docs/use-cases/variable-traffic',
+        destination: '/use-cases/serverless-apps',
+        permanent: true,
+      },
+      {
+        source: '/docs/use-cases/database-per-user',
+        destination: '/docs/guides/multitenancy',
+        permanent: true,
+      },
+      {
+        source: '/docs/use-cases/ai-agents',
+        destination: '/use-cases/ai-agents',
+        permanent: true,
+      },
+      {
+        source: '/docs/use-cases/platforms',
+        destination: '/use-cases/database-per-tenant',
+        permanent: true,
+      },
+      {
+        source: '/docs/use-cases/dev-test',
+        destination: '/use-cases/dev-test',
+        permanent: true,
+      },
+      {
+        source: '/launchpad',
+        destination: 'https://neon.new',
         permanent: false,
       },
       ...docsRedirects,
@@ -312,11 +392,12 @@ const defaultConfig = {
       },
       {
         source: '/demos/regional-latency',
-        destination: 'https://latencies-ui.vercel.app/demos/regional-latency',
+        destination: 'https://latency-benchmarks-dashboard.vercel.app/demos/regional-latency',
       },
       {
-        source: '/demos/regional-latency/:asset*',
-        destination: 'https://latencies-ui.vercel.app/demos/regional-latency/:asset*',
+        source: '/demos/regional-latency/:path*',
+        destination:
+          'https://latency-benchmarks-dashboard.vercel.app/demos/regional-latency/:path*',
       },
       {
         source: '/dev-for-rds',

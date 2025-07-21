@@ -72,11 +72,19 @@
     > * {
       &:first-child {
         @apply mt-0;
+
+        [data-rmiz] img {
+          @apply mt-0;
+        }
       }
 
       &:last-child {
         @apply mb-0;
       }
+    }
+
+    > .prose-doc {
+      @apply mt-10;
     }
 
     h2 {
@@ -149,7 +157,7 @@
       @apply my-10 w-full leading-normal md:min-w-[500px];
 
       th {
-        @apply p-2.5 pt-0 align-top;
+        @apply p-2.5 pt-0 text-left align-top;
       }
 
       td {
@@ -304,6 +312,50 @@
 
     a {
       @apply text-green-45 transition-colors duration-200 hover:text-[#47ffc2];
+    }
+  }
+
+  .prose-template {
+    @apply text-lg md:text-base;
+
+    > h2 {
+      @apply text-[30px] md:text-2xl;
+
+      & + p {
+        @apply mt-4;
+      }
+    }
+
+    > h3 {
+      @apply text-xl;
+    }
+
+    > p {
+      @apply my-6 !text-gray-new-98;
+    }
+
+    > ul,
+    > ol {
+      @apply my-6 !text-gray-new-98;
+
+      > li {
+        @apply !text-gray-new-98;
+      }
+    }
+  }
+
+  .prose-flow {
+    > p {
+      @apply my-6;
+    }
+
+    > ul,
+    > ol {
+      @apply my-6;
+
+      > li {
+        @apply my-4;
+      }
     }
   }
 }

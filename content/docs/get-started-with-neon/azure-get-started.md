@@ -2,7 +2,7 @@
 title: Get started with Neon on Azure
 subtitle: Learn how to deploy Neon as a native service on Azure
 enableTableOfContents: true
-updatedOn: '2024-12-03T14:38:16.500Z'
+updatedOn: '2025-05-30T16:54:40.454Z'
 ---
 
 ## Find Neon on Azure and subscribe
@@ -24,7 +24,7 @@ After subscribing, you will be directed to the [Create a Neon Resource](#create-
    | **Resource Name**          | Enter a name for Neon resource. This name is used only in Azure.                                                                                                                                                                                                                                                                      |
    | **Region**                 | Select a region to deploy your resource. Neon Serverless Postgres will let you choose a region while creating a project.                                                                                                                                                                                                              |
    | **Neon Organization name** | The name you assign to your [Neon Organization](/docs/reference/glossary#organization), such as a team name or company name. The name you specify appears as your [Organization](/docs/reference/glossary#organization) name in the Neon Console.                                                                                     |
-   | **Pricing Plan**           | Select a plan. For information about Neon's plans, please refer to the [Neon Pricing](https://neon.tech/home) page. Neon offers a Free Plan and paid plans (**Scale** and **Business**) you can choose from.                                                                                                                          |
+   | **Pricing Plan**           | Select a plan. For information about Neon's plans, please refer to the [Neon Pricing](/pricing) page. Neon offers a Free Plan and paid plans (**Scale** and **Business**) you can choose from.                                                                                                                                        |
 
     <Admonition type="note">
     The Neon **Launch Plan** is currently not available in the Azure Marketplace.

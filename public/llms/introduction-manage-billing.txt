@@ -1,0 +1,116 @@
+# Manage billing
+
+> The "Manage billing" document outlines the procedures for Neon users to access, review, and update their billing information, including payment methods and billing history, within the Neon platform.
+
+## Source
+
+- [Manage billing HTML](https://neon.com/docs/introduction/manage-billing): The original HTML version of this documentation
+
+What you will learn:
+- How to access the Billing page
+- How to update your billing information
+- How to download invoices
+- How to change plans
+- How to prevent further monthly charges
+- How to delete your account
+
+Related topics:
+- [Neon plans](https://neon.com/docs/introduction/plans)
+- [How extra usage works](https://neon.com/docs/introduction/extra-usage)
+- [Monitoring billing and usage](https://neon.com/docs/introduction/monitor-usage)
+- [Neon's usage metrics](https://neon.com/docs/introduction/usage-metrics)
+
+## View the Billing page
+
+You can view and manage billing from the **Billing** page in the Neon Console.
+
+To access your **Billing** page:
+
+1. Navigate to the Neon Console.
+1. Select your organization from the breadcrumb menu at the top-left of the console.
+1. Select **Billing** from the menu.
+
+On the **Billing** page, you will find a summary outlining current charges and the details of your plan, information about your current usage, upgrade and downgrade options, your payment information, and your monthly invoices.
+
+## Update your payment method
+
+To update your payment method:
+
+1. Navigate to the Neon Console.
+1. Select your organization from the breadcrumb menu at the top-left of the console.
+1. Select **Billing** from the menu.
+1. Navigate to the **Payment info** section of the page.
+1. Locate **Payment method** and click **Edit**.
+
+If you are unable to update your payment method, please [contact support](https://neon.com/docs/introduction/support).
+
+## Payment issues
+
+### Missed payments
+
+If an auto-debit payment transaction fails, Neon sends a request to update your payment method. Late fees and payment policies are described in [Neon's Terms of Service](https://neon.com/terms-of-service).
+
+### Failing payments for Indian customers
+
+Neon's billing system, powered by Stripe, currently lacks support for e-Mandates, a requirement for automatic payments in India as per Reserve Bank of India (RBI) regulations. As a result, Indian customers are unable to complete automatic monthly payments through Neon's billing system. Instead, we recommend that Indian customers pay for their subscription via AWS Marketplace. Please refer to our [AWS Marketplace instructions](https://neon.com/docs/introduction/billing-aws-marketplace) for details.
+
+## Update your billing email
+
+To update your billing email:
+
+1. Navigate to the Neon Console.
+1. Select your organization from the breadcrumb menu at the top-left of the console.
+1. Select **Billing** from the menu.
+1. Navigate to the **Payment info** section of the page.
+1. Locate **Billing email** and click **Edit**.
+
+If you are unable to update your billing email, please [contact support](https://neon.com/docs/introduction/support).
+
+## Invoices
+
+A Neon invoice includes the amount due for the billing period.
+
+### Download invoices
+
+To download an invoice:
+
+1. Navigate to the Neon Console.
+1. Select your organization from the breadcrumb menu at the top-left of the console.
+1. Select **Billing** from the menu.
+1. Navigate to the **Invoices** section of the page.
+1. Find the invoice you want to download and select **Download** from the menu.
+
+   **Note**: When an invoice is paid, Neon's billing system sends a payment confirmation email to the address associated with the Neon account.
+
+### Request a refund
+
+If you find an issue with your invoice, you can request a refund. The request will be reviewed by the Neon billing team.
+
+1. Navigate to the Neon Console.
+1. Select your organization from the breadcrumb menu at the top-left of the console.
+1. Select **Billing** from the menu.
+1. Navigate to the **Invoices** section of the page.
+1. Find the invoice you want to request a refund for, and select **Request refund** from the menu. Enter a problem description explaining the reason for the request.
+
+## Change your plan
+
+To upgrade or downgrade your plan:
+
+1. Navigate to the Neon Console.
+1. Select your organization from the breadcrumb menu at the top-left of the console.
+1. Select **Billing** from the menu.
+1. Navigate to the **Change plan** section of the page and select the desired plan.
+
+Changing your plan to one with lower usage allowances may affect the performance of your applications. To compare plan allowances, see [Neon plans](https://neon.com/docs/introduction/plans#neon-plans).
+
+If you are downgrading your plan, you will be required to remove any projects, branches, or data that exceed your new plan allowances.
+
+To downgrade from an [Enterprise](https://neon.com/docs/introduction/plans#enterprise) plan, please contact [Sales](https://neon.com/contact-sales). Cancellation of an Enterprise plan is handled according to the Master Subscription Agreement (MSA) outlined in the customer agreement.
+
+## How to prevent further monthly charges to your account
+
+If you are on any of Neon's paid plans, you need to downgrade to the Free plan to avoid further monthly charges. You can do so from the [Billing](https://console.neon.tech/app/billing#change_plan) page in the Neon Console. Simply removing all Neon projects from your organization will **not** stop the monthly fee associated with your plan. You will continue to be invoiced until you downgrade to Free. For example, if you are on the [Launch](https://neon.com/docs/introduction/plans#launch) plan, which has a base monthly fee of $19 per month, you will continue to be charged $19 per month until you downgrade to the Free plan.
+
+## Delete your account
+
+If you would like to delete your Neon account entirely, please refer to the steps described here: [Deleting your account](https://neon.com/docs/manage/accounts#deleting-your-account).

@@ -1,0 +1,330 @@
+# Manage organizations using the Neon API
+
+> The document details how to manage organizations using the Neon API, including creating, updating, and deleting organizations, and managing organization members and roles within the Neon platform.
+
+## Source
+
+- [Manage organizations using the Neon API HTML](https://neon.com/docs/manage/orgs-api): The original HTML version of this documentation
+
+Learn how to manage Neon Organizations using the Neon API, including managing organization API keys, working with organization members, and handling member invitations.
+
+## Personal vs organization API keys
+
+You can authorize your API requests using either of these methods:
+
+- **Organization API key**: Automatically scopes all requests to your organization
+- **Personal API key**: Requires including an `org_id` parameter to specify which organization you're working with
+
+The key difference is in how you structure your API requests. Here's an example of listing projects using both methods:
+
+Using an organization API key:
+
+```bash
+curl --request GET \
+     --url 'https://console.neon.tech/api/v2/projects' \
+     --header 'authorization: Bearer $ORG_API_KEY'
+```
+
+Using a personal API key:
+
+```bash
+curl --request GET \
+     --url 'https://console.neon.tech/api/v2/projects?org_id=org-example-12345678' \
+     --header 'authorization: Bearer $PERSONAL_API_KEY'
+```
+
+Both examples retrieve a list of projects, but notice how the personal API key request includes `org_id=org-example-12345678` to specify which organization's projects to list. With an organization API key, this parameter isn't needed because the key itself is already tied to a specific organization.
+
+### Matrix of operations and key types
+
+Some operations require a personal API key from an organization admin and cannot be performed using organization API keys. These operations are marked with ❌ in the matrix below.
+
+| Action                                                                              | Personal API Key | Organization API Key |
+| ----------------------------------------------------------------------------------- | ---------------- | -------------------- |
+| [Create an organization API key](https://neon.com/docs/manage/orgs-api#create-api-keys)                                  | ✅               | ❌                   |
+| [Get a list of organization API keys](https://neon.com/docs/manage/orgs-api#list-api-keys)                               | ✅               | ✅                   |
+| [Revoke an organization API key](https://neon.com/docs/manage/orgs-api#revoke-an-api-key)                                | ✅               | ✅                   |
+| [Get organization details](https://neon.com/docs/manage/orgs-api#get-organization-details)                               | ✅               | ✅                   |
+| [Get organization members details](https://neon.com/docs/manage/orgs-api#list-members)                                   | ✅               | ✅                   |
+| [Get organization member details](https://neon.com/docs/manage/orgs-api#get-member-details)                              | ✅               | ✅                   |
+| [Update the role for an organization member](https://neon.com/docs/manage/orgs-api#update-member-role)                   | ✅               | ✅                   |
+| [Remove member from the organization](https://neon.com/docs/manage/orgs-api#remove-member)                               | ✅               | ❌                   |
+| [Get organization invitation details](https://neon.com/docs/manage/orgs-api#list-invitations)                            | ✅               | ✅                   |
+| [Create organization invitations](https://neon.com/docs/manage/orgs-api#create-invitations)                              | ✅               | ❌                   |
+| [Transfer projects between organizations](https://neon.com/docs/manage/orgs-api#transfer-projects-between-organizations) | ✅               | ❌                   |
+
+## Finding your org_id
+
+To find your organization's `org_id`, navigate to your Organization's **Settings** page, where you'll find it under the **General information** section. Copy and use this ID in your API requests.
+
+
+
+## Create API keys
+
+There are two types of organization API keys:
+
+- **Organization API keys** — Provide admin-level access to all organization resources, including projects, members, and settings. Only organization admins can create these keys.
+- **Project-scoped organization API keys** — Provide limited, member-level access to specific projects within the organization. Any organization member can create a key for any organization-owned project.
+
+The key token is only displayed once at creation time. Copy it immediately and store it securely. If lost, you'll need to revoke the key and create a new one. For detailed instructions, see [Manage API Keys](https://neon.com/docs/manage/api-keys#create-an-organization-api-key).
+
+[Try in API Reference](https://api-docs.neon.tech/reference/createorgapikey)
+
+## List API keys
+
+Lists all API keys for your organization. The response does not include the actual key tokens, as these are only provided when creating a new key.
+
+```bash
+curl --request GET \
+     --url 'https://console.neon.tech/api/v2/organizations/{org_id}/api_keys' \
+     --header 'authorization: Bearer $PERSONAL_API_KEY' | jq
+```
+
+Example response:
+
+```json
+[
+  {
+    "id": 123456,
+    "name": "my-key-name",
+    "created_at": "2024-01-01T12:00:00Z",
+    "created_by": {
+      "id": "user-abc123de-4567-8fab-9012-3cdef4567890",
+      "name": "John Smith",
+      "image": "https://avatar.example.com/user.jpg"
+    },
+    "last_used_at": "2024-01-01T12:30:00Z",
+    "last_used_from_addr": "192.0.2.1,192.0.2.2"
+  }
+]
+```
+
+[Try in API Reference](https://api-docs.neon.tech/reference/listorgapikeys)
+
+## Revoke an API key
+
+Revokes the specified organization API key. This action cannot be reversed. You can obtain the `key_id` by listing the API keys for your organization.
+
+```bash
+curl --request DELETE \
+     --url 'https://console.neon.tech/api/v2/organizations/{org_id}/api_keys/{key_id}' \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $PERSONAL_API_KEY' | jq
+```
+
+Example response:
+
+```json
+{
+  "id": 123456,
+  "name": "my-key-name",
+  "created_at": "2024-01-01T12:00:00Z",
+  "created_by": "user-abc123de-4567-8fab-9012-3cdef4567890",
+  "last_used_at": "2024-01-01T12:30:00Z",
+  "last_used_from_addr": "192.0.2.1,192.0.2.2",
+  "revoked": true
+}
+```
+
+[Try in API Reference](https://api-docs.neon.tech/reference/revokeorgapikey)
+
+## Get organization details
+
+Retrieves information about your organization, including its name, plan, and creation date.
+
+```bash
+curl --request GET \
+     --url 'https://console.neon.tech/api/v2/organizations/{org_id}' \
+     --header 'authorization: Bearer $PERSONAL_API_KEY' | jq
+```
+
+Example response:
+
+```json
+{
+  "id": "org-example-12345678",
+  "name": "Example Organization",
+  "handle": "example-organization-org-example-12345678",
+  "plan": "business",
+  "created_at": "2024-01-01T12:00:00Z",
+  "managed_by": "console",
+  "updated_at": "2024-01-01T12:00:00Z"
+}
+```
+
+[Try in API Reference](https://api-docs.neon.tech/reference/getorganization)
+
+## List members
+
+Lists all members in your organization. Each entry includes:
+
+- Member ID (`id`): The unique identifier for the member
+- User ID (`user_id`): The unique ID of the user's Neon account
+- Organization role and join date
+- User's email address
+
+```bash
+curl --request GET \
+     --url 'https://console.neon.tech/api/v2/organizations/{org_id}/members' \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $ORG_API_KEY' | jq
+```
+
+Example response:
+
+```json
+{
+  "members": [
+    {
+      "member": {
+        "id": "abc123de-4567-8fab-9012-3cdef4567890",
+        "user_id": "def456gh-7890-1abc-2def-3ghi4567890j",
+        "org_id": "org-example-12345678",
+        "role": "admin",
+        "joined_at": "2024-01-01T12:00:00Z"
+      },
+      "user": {
+        "email": "user@example.com"
+      }
+    }
+  ]
+}
+```
+
+[Try in API Reference](https://api-docs.neon.tech/reference/getorganizationmembers)
+
+   **Note**: The member ID (`id`) from this response is needed for operations like updating roles or removing members.
+
+## Get member details
+
+Retrieves information about a specific member using their member ID (obtained from the [List members](https://neon.com/docs/manage/orgs-api#list-members) endpoint).
+
+```bash
+curl --request GET \
+     --url 'https://console.neon.tech/api/v2/organizations/{org_id}/members/{member_id}' \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $ORG_API_KEY'
+```
+
+Example response:
+
+```json
+{
+  "id": "abc123de-4567-8fab-9012-3cdef4567890",
+  "user_id": "def456gh-7890-1abc-2def-3ghi4567890j",
+  "org_id": "org-example-12345678",
+  "role": "admin",
+  "joined_at": "2024-01-01T12:00:00Z"
+}
+```
+
+[Try in API Reference](https://api-docs.neon.tech/reference/getorganizationmember)
+
+## Update member role
+
+Changes a member's current role in the organization. If using your personal API key, you need to be an admin in the organization to perform this action. Note: you cannot downgrade the role of the organization's only admin.
+
+```bash
+curl --request PATCH \
+     --url 'https://console.neon.tech/api/v2/organizations/members/{member_id}' \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $ORG_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '{"role": "admin"}' | jq
+```
+
+Example response:
+
+```json
+{
+  "id": "abc123de-4567-8fab-9012-3cdef4567890",
+  "user_id": "def456gh-7890-1abc-2def-3ghi4567890j",
+  "org_id": "org-example-12345678",
+  "role": "admin",
+  "joined_at": "2024-01-01T12:00:00Z"
+}
+```
+
+[Try in API Reference](https://api-docs.neon.tech/reference/updateorganizationmember)
+
+## Remove member
+
+You must use your personal API key and have admin-level permissions in the organization to use this endpoint. Organization API keys are not supported.
+
+```bash
+curl --request DELETE \
+     --url 'https://console.neon.tech/api/v2/organizations/{org_id}/members/{member_id}' \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $PERSONAL_API_KEY'
+```
+
+[Try in API Reference](https://api-docs.neon.tech/reference/removeorganizationmember)
+
+## List invitations
+
+Retrieves a list of all pending invitations for the organization.
+
+```bash
+curl --request GET \
+     --url 'https://console.neon.tech/api/v2/organizations/invitations' \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $ORG_API_KEY' | jq
+```
+
+Example response:
+
+```json
+{
+  "invitations": [
+    {
+      "id": "abc123de-4567-8fab-9012-3cdef4567890",
+      "email": "user@example.com",
+      "org_id": "org-example-12345678",
+      "invited_by": "def456gh-7890-1abc-2def-3ghi4567890j",
+      "invited_at": "2024-01-01T12:00:00Z",
+      "role": "member"
+    }
+  ]
+}
+```
+
+[Try in API Reference](https://api-docs.neon.tech/reference/getorganizationinvitations)
+
+## Create invitations
+
+Creates invitations for new organization members. Each invited user:
+
+- Receives an email notification about the invitation
+- If they have an existing Neon account, they automatically join as a member
+- If they don't have an account yet, the email invites them to create one
+
+You must use your personal API key and have admin-level permissions in the organization to use this endpoint. Organization API keys are not supported.
+
+```bash
+curl --request POST \
+     --url 'https://console.neon.tech/api/v2/organizations/{org_id}/invitations' \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $PERSONAL_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '{
+       "invitations": [
+         {
+           "email": "user@example.com",
+           "role": "member"
+         }
+       ]
+     }' | jq
+```
+
+[Try in API Reference](https://api-docs.neon.tech/reference/createorganizationinvitations)
+
+## Transfer projects between organizations
+
+The API supports transferring projects between organizations. For detailed instructions and examples, see [Transfer projects to an organization](https://neon.com/docs/manage/orgs-project-transfer).
+
+Key requirements:
+
+- Must use a personal API key
+- Requires admin permissions in the source organization and at least member permissions in the target
+
+[Try in API Reference](https://api-docs.neon.tech/reference/transferproject)

@@ -20,7 +20,7 @@ const HeroNotFound = () => (
           Ooops!
           <br /> Ticket not found...
         </h1>
-        <p className="mt-5 font-mono text-[1.15rem] font-light leading-tight tracking-tight text-white 2xl:max-w-[420px] xl:mx-auto xl:max-w-xl xl:text-center xl:text-lg xl:leading-[1.375] xl:tracking-tighter lg:mt-4 lg:text-base">
+        <p className="mt-5 font-mono text-[1.15rem] font-light leading-tight tracking-tight text-white 2xl:max-w-[420px] xl:mx-auto xl:max-w-xl xl:text-center xl:text-lg xl:leading-snug xl:tracking-tighter lg:mt-4 lg:text-base">
           Sorry, the ticket you are looking for doesn't exist.
         </p>
         <Button className="mt-11" size="md" theme="primary" href={LINKS.deploy} isAnimated>

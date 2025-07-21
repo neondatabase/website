@@ -1,0 +1,48 @@
+# Connect a Rust application to Neon
+
+> This document guides users on how to connect a Rust application to a Neon database, detailing the necessary steps and code examples for establishing a successful connection.
+
+## Source
+
+- [Connect a Rust application to Neon HTML](https://neon.com/docs/guides/rust): The original HTML version of this documentation
+
+This guide describes how to create a Neon project and connect to it from a Rust application.
+
+## Create a Neon project
+
+If you do not have one already, create a Neon project. Save your connection string and password. They are required when defining connection settings.
+
+To create a Neon project:
+
+1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
+2. Click **New Project**.
+3. Specify your project settings and click **Create Project**.
+
+## Configure the connection
+
+   **Note**: To run the Rust solution below you have to install the required dependencies. You can do this by running `cargo add postgres postgres_openssl openssl`. Also, the example provided uses the synchronous `postgres` crate. If your application is asynchronous and uses `tokio`, we recommend using the `tokio-postgres` crate for compatibility with async runtimes.
+
+Add the Neon connection details to your `main.rs` file, as in the following example:
+
+```rust
+use postgres::Client;
+use openssl::ssl::{SslConnector, SslMethod};
+use postgres_openssl::MakeTlsConnector;
+use std::error;
+
+fn main() -> Result<(), Box<dyn error::Error>> {
+    let builder = SslConnector::builder(SslMethod::tls())?;
+    let connector = MakeTlsConnector::new(builder.build());
+
+    let mut client = Client::connect("postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require", connector)?;
+
+    for row in client.query("SELECT 42", &[])? {
+        let ret : i32 = row.get(0);
+        println!("Result = {}", ret);
+    }
+
+    Ok(())
+}
+```
+
+You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).

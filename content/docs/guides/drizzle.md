@@ -2,7 +2,7 @@
 title: Connect from Drizzle to Neon
 subtitle: Learn how to connect to Neon from Drizzle
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.059Z'
+updatedOn: '2025-06-30T11:30:21.898Z'
 ---
 
 <InfoBlock>
@@ -31,16 +31,16 @@ Drizzle is a modern ORM for TypeScript that provides a simple and type-safe way 
 
 To establish a basic connection from Drizzle to Neon, perform the following steps:
 
-1. Retrieve your Neon connection string. In the **Connection Details** widget on the Neon **Dashboard**, select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
-   ![Connection details widget](/docs/connect/connection_details.png)
+1. Find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
+   ![Connection details modal](/docs/connect/connection_details.png)
    The connection string includes the user name, password, hostname, and database name.
 
-2. Add a `DATABASE_URL` variable to your `.env` file and set it to the Neon connection string that you copied in the previous step. We also recommend adding `?sslmode=require` to the end of the connection string to ensure a [secure connection](/docs/connect/connect-securely).
+2. Add a `DATABASE_URL` variable to your `.env` file and set it to the Neon connection string that you copied in the previous step. We also recommend adding `?sslmode=require&channel_binding=require` to the end of the connection string to ensure a [secure connection](/docs/connect/connect-securely).
 
    Your setting will appear similar to the following:
 
    ```text shouldWrap
-   DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
+   DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
    ```
 
 ## Use the Neon serverless driver with Drizzle

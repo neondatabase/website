@@ -1,16 +1,16 @@
 ---
 title: Connect a Rust application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Rust application
+enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/rust
   - /docs/integrations/rust
-updatedOn: '2024-11-20T18:52:04.758Z'
+updatedOn: '2025-06-30T11:30:21.915Z'
 ---
 
 This guide describes how to create a Neon project and connect to it from a Rust application.
 
-1. [Create a Neon project](#create-a-neon-project)
-2. [Configure the connection](#configure-the-connection)
+<Steps>
 
 ## Create a Neon project
 
@@ -40,7 +40,7 @@ fn main() -> Result<(), Box<dyn error::Error>> {
     let builder = SslConnector::builder(SslMethod::tls())?;
     let connector = MakeTlsConnector::new(builder.build());
 
-    let mut client = Client::connect("postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require", connector)?;
+    let mut client = Client::connect("postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require", connector)?;
 
     for row in client.query("SELECT 42", &[])? {
         let ret : i32 = row.get(0);
@@ -51,6 +51,8 @@ fn main() -> Result<(), Box<dyn error::Error>> {
 }
 ```
 
-You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+
+</Steps>
 
 <NeedHelp/>

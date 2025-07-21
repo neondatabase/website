@@ -6,7 +6,7 @@ import Link from 'components/shared/link/link';
 
 const Author = ({ data, className = null }) => (
   <div className={clsx(className, 'lg:rounded-lg lg:bg-gray-new-95 lg:p-5 dark:lg:bg-gray-new-10')}>
-    <p className="mb-5 text-[12px] font-semibold uppercase leading-none tracking-[0.02em] text-gray-new-60 dark:text-gray-new-50 lg:hidden">
+    <p className="mb-5 text-[12px] font-semibold uppercase leading-none -tracking-extra-tight text-gray-new-60 dark:text-gray-new-50 lg:hidden">
       Author
     </p>
     <div className="flex items-start gap-2.5">
@@ -22,7 +22,7 @@ const Author = ({ data, className = null }) => (
       <div>
         <span className="post-author block leading-tight">{data.name}</span>
         {data.position && (
-          <span className="mt-1 block text-[14px] leading-none text-gray-new-50 dark:text-gray-new-60">
+          <span className="mt-1 block text-[14px] text-gray-new-50 dark:text-gray-new-60">
             {data.position}
           </span>
         )}

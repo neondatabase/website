@@ -2,7 +2,7 @@
 title: Automate branching with GitHub Actions
 subtitle: Create and delete branches with GitHub Actions
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.057Z'
+updatedOn: '2025-06-23T15:24:08.764Z'
 ---
 
 Neon provides the following GitHub Actions for working with Neon branches, which you can add to your CI workflows:
@@ -21,7 +21,7 @@ Neon supports a GitHub integration that connects your Neon project to a GitHub r
 This GitHub Action creates a new branch in your Neon project.
 
 <Admonition type="tip" title="GitHub Actions Marketplace">
-You can find this action on the **GitHub Actions Marketplace**: [Neon Database Create Branch Action](https://github.com/marketplace/actions/neon-database-create-branch-action).
+You can find this action on the **GitHub Actions Marketplace**: [Neon Database Create Branch Action](https://github.com/marketplace/actions/neon-create-branch-github-action).
 </Admonition>
 
 ### Prerequisites
@@ -82,7 +82,7 @@ inputs:
   suspend_timeout:
     description: >
       Duration of inactivity in seconds after which the compute endpoint is
-      For more information, see [Scale to zero configuration](/docs/manage/endpoints#scale-to-zero-configuration).
+      For more information, see [Scale to zero configuration](/docs/manage/computes#scale-to-zero-configuration).
     default: '0'
   ssl:
     description: >
@@ -156,7 +156,7 @@ inputs:
     description: 'The Neon branch id'
     deprecationMessage: 'The `branch_id` input is deprecated in favor of `branch`'
   api_key:
-    description: 'The Neon API key, read more at https://neon.tech/docs/manage/api-keys'
+    description: 'The Neon API key, read more at https://neon.com/docs/manage/api-keys'
     required: true
   branch:
     description: 'The Neon branch name or id'
@@ -302,7 +302,7 @@ steps:
     with:
       project_id: ${{ vars.NEON_PROJECT_ID }}
       compare_branch: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
-      base_branch: main
+      base_branch: production
       api_key: ${{ secrets.NEON_API_KEY }}
       database: mydatabase
       username: myrole
@@ -331,7 +331,7 @@ jobs:
         with:
           project_id: ${{ vars.NEON_PROJECT_ID }}
           compare_branch: preview/pr-${{ github.event.number }}
-          base_branch: main
+          base_branch: production
           api_key: ${{ secrets.NEON_API_KEY }}
           database: mydatabase
           username: myrole
@@ -342,7 +342,7 @@ In this workflow, the action is triggered by pull request events such as `opened
 The branches to compare are specified by the `compare_branch` and `base_branch` inputs.
 
 - The `compare_branch` is the branch linked to the pull request — it's the "downstream" dev branch that contains your proposed schema changes, and is typically created by the [Create branch](#create-branch-action) action and defined by `preview/pr-${{ github.event.number }}` in the example above.
-- The `base_branch` is the branch you are merging into. It's the "upstream" branch used as the reference point for the comparison. If you don’t explicitly specify the `base_branch`, the action defaults to comparing the `compare_branch` with its parent branch. The `base_branch` branch is usually named `main`, which is default name of the root branch created with each Neon project.
+- The `base_branch` is the branch you are merging into. It's the "upstream" branch used as the reference point for the comparison. If you don’t explicitly specify the `base_branch`, the action defaults to comparing the `compare_branch` with its parent branch. The `base_branch` branch is usually named `production`, which is default name of the root branch created with each Neon project.
 - The `database` is the name of the database containing the schema to be compared.
 - The `username` is the name of the Postgres role that owns the database.
 - `permissions` allows comments to be written on pull requests and repository contents to be read. These permissions are necessary if, for example, you need to check out your branch to run migrations.
@@ -425,7 +425,6 @@ are two ways you can perform this setup:
 
 - **Manual setup** — this method requires obtaining a Neon API key and
   configuring it manually in your GitHub repository.
-
   1. Obtain a Neon API key. See
      [Create an API key](/docs/manage/api-keys#create-an-api-key)
      for instructions.

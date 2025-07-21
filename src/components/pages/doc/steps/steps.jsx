@@ -39,9 +39,9 @@ const Steps = ({ children }) => {
         <li
           className={clsx(
             'numbered-step relative !mb-0 !mt-10 flex w-full items-start gap-3 !pl-0',
-            'before:mt-1 before:flex before:size-6 before:items-center before:justify-center before:rounded-full before:bg-gray-new-15 before:text-sm before:leading-snug before:tracking-extra-tight before:text-white before:content-[counter(section)] before:[counter-increment:section]',
-            'after:absolute after:left-3 after:top-[34px] after:h-[calc(100%+4px)] after:w-px after:bg-gray-new-80',
-            'first:!mt-7 last:overflow-hidden',
+            'before:mt-[3px] before:flex before:size-6 before:items-center before:justify-center before:rounded-full before:bg-gray-new-15 before:text-sm before:leading-snug before:tracking-extra-tight before:text-white before:content-[counter(section)] before:[counter-increment:section]',
+            'after:absolute after:-bottom-[34px] after:left-3 after:top-[34px] after:w-px after:bg-gray-new-80',
+            'first:!mt-7 last:after:bottom-0',
             'dark:before:bg-gray-new-94 dark:before:text-black-new dark:after:bg-gray-new-15',
             '[&_ol]:!list-decimal'
           )}

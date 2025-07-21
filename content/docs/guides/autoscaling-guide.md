@@ -1,7 +1,7 @@
 ---
 title: Enable Autoscaling in Neon
 enableTableOfContents: true
-updatedOn: '2024-12-13T20:52:57.582Z'
+updatedOn: '2025-05-11T11:23:50.618Z'
 ---
 
 <InfoBlock>
@@ -34,7 +34,7 @@ To edit a compute:
    ![Edit compute menu](/docs/guides/autoscaling_edit.png)
 1. On the **Edit compute** drawer, select **Autoscale** and use the slider to specify a minimum and maximum compute size.
 
-   Neon scales the compute size up and down within the specified range to meet workload demand. Autoscaling currently supports a range of 1/4 (.25) to 16 vCPUs. One vCPU has 4 GB of RAM, 2 vCPUs have 8 GB of RAM, and so on. The amount of RAM in GB is always 4 times the number of vCPUs. For an overview of available compute sizes, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration). Please note that when the autoscaling maximum is > 10, the autoscaling minimum must be ≥ (max / 8).
+   Neon scales the compute size up and down within the specified range to meet workload demand. Autoscaling currently supports a range of 1/4 (.25) to 16 vCPUs. One vCPU has 4 GB of RAM, 2 vCPUs have 8 GB of RAM, and so on. The amount of RAM in GB is always 4 times the number of vCPUs. For an overview of available compute sizes, see [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration). Please note that when the autoscaling maximum is > 10, the autoscaling minimum must be ≥ (max / 8).
 
    <Admonition type="note">
    You can configure the scale to zero setting for your compute at the same time. For more, see [Scale to Zero](/docs/introduction/scale-to-zero).
@@ -44,7 +44,7 @@ To edit a compute:
 
 ## Configure autoscaling defaults for your project
 
-You can configure autoscaling configuration defaults for your project so that **newly created computes** (including those created when you create a new branch or add read replica) are created with the same autoscaling configuration. This will save your from having to configure autoscaling each time, assuming you want the same settings for all of your computes.
+You can configure autoscaling configuration defaults for your project so that **newly created computes** (including those created when you create a new branch or add read replica) are created with the same autoscaling configuration. This saves you from having to configure autoscaling settings with each new compute. See [Change your project's default compute settings](/docs/manage/projects#change-your-projects-default-compute-settings) for more detail.
 
 <Admonition type="note">
 Changing your autoscaling default settings does not alter the autoscaling configuration for existing computes.
@@ -58,6 +58,17 @@ To configure autoscaling defaults:
 4. Use the slider to specify a minimum and maximum compute size and **Save** your changes.
 
 The next time you create a compute, these settings will be applied to it.
+
+### Autoscaling defaults for each Neon plan
+
+The following table outlines the initial default autoscaling settings for newly created projects on each Neon plan.
+
+| **Neon plan** | **Minimum compute size** | **Maximum compute size** |
+| ------------- | ------------------------ | ------------------------ |
+| Free          | 0.25                     | 2                        |
+| Launch        | 1                        | 4                        |
+| Scale         | 1                        | 8                        |
+| Business      | 1                        | 8                        |
 
 ## Monitor autoscaling
 
@@ -76,7 +87,7 @@ See below for some rules of thumb on actions you might want to take based on tre
 
 ### Start with a good minimum
 
-Ideally, for smaller datasets, you want to keep as much of your dataset in memory (RAM) as possible. This improves performance by minimizing I/O operations. We recommend setting a large enough minimum limit to fit your full dataset in memory. For larger datasets and more sizing advice, see [how to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+Ideally, for smaller datasets, you want to keep as much of your dataset in memory (RAM) as possible. This improves performance by minimizing I/O operations. We recommend setting a large enough minimum limit to fit your full dataset in memory. For larger datasets and more sizing advice, see [how to size your compute](/docs/manage/computes#how-to-size-your-compute).
 
 ### Setting your maximum
 

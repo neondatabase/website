@@ -12,5 +12,3 @@ const ContactSales = () => (
 );
 
 export default ContactSales;
-
-export const revalidate = 60;

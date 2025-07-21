@@ -5,19 +5,20 @@ isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 redirectFrom:
   - /docs/get-started-with-neon/projects
-updatedOn: '2025-01-21T23:16:06.731Z'
+updatedOn: '2025-07-03T12:36:49.568Z'
 ---
 
-With Neon, everything starts with the project. It is the top-level object in the [Neon object hierarchy](/docs/manage/overview). A project can hold as many branches, databases, and roles as your application or workflow needs. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and resource limits within those projects.
+In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
 
 ## Default resources
 
 When you add a new project, Neon creates the following resources by default:
 
-- A default branch called `main`. You can create child branches from the default branch or from any previously created branch. For more information, see [Manage branches](/docs/manage/branches).
-- A single primary read-write compute. This is the compute associated with the branch. For more information, see [Manage computes](/docs/manage/endpoints).
+- Two branches are created for you by default: `production` (your main branch for production workloads) and `development` (a child branch for development work). You can create additional child branches from either of these, or from any other branch. For more information, see [Manage branches](/docs/manage/branches).
+- A single primary read-write compute. This is the compute associated with the branch. For more information, see [Manage computes](/docs/manage/computes).
 - A Postgres database that resides on the project's default branch. If you did not specify your own database name when creating the project, the database created is named `neondb`.
 - A Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a default role named `neondb_owner`.
+- Each [Neon plan](/docs/introduction/plans) comes with a specific storage allowance. Beyond this allowance on paid plans, extra usage costs apply. Billing-related allowances aside, Neon projects can support data sizes up to 4 TiB. To increase this limit, [contact the Neon Sales team](/contact-sales).
 
 ## Create a project
 
@@ -28,9 +29,8 @@ To create a Neon project:
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Click **New Project**.
 3. Specify values for **Project Name**, **Postgres version**, **Cloud Service Provider**, and **Region**. Project names are limited to 64 characters. You can also specify **Compute size** settings when creating a project. The settings you specify become the default settings for computes that you add to your project when creating [branches](/docs/manage/branches#create-a-branch) or [read replicas](/docs/guides/read-replica-guide).
-
-   - Neon supports fixed-size computes and autoscaling. For more information, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
-   - The scale to zero setting determines whether a compute is automatically suspended after a period of inactivity. For more information, see [Scale to zero configuration](/docs/manage/endpoints#scale-to-zero-configuration).
+   - Neon supports fixed-size computes and autoscaling. For more information, see [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration).
+   - The scale to zero setting determines whether a compute is automatically suspended after a period of inactivity. For more information, see [Scale to zero configuration](/docs/manage/computes#scale-to-zero-configuration).
 
 4. Click **Create Project**.
 
@@ -45,7 +45,7 @@ Similar to **docs.new** for instantly creating Google Docs or **repo.new** for a
 To view your projects:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
-1. From the breadcrumb navigation menu at the top-left of the console, select your personal or organization account.
+1. From the breadcrumb navigation menu at the top-left of the console, select your organization.
 1. The **Projects** page lists your projects, including any projects that have been shared with you.
 
 ## Project settings
@@ -59,10 +59,11 @@ The **Settings** page includes these sub-pages:
 - **General** — Change the name of your project or copy the project ID.
 - **Compute** — Set the scale to zero and sizing defaults for any new computes you create when branching.
 - **Storage** — Choose how long Neon maintains a history of changes for all branches.
+- **Updates** — Schedule a time for Postgres and Neon updates
 - **Collaborators** — Let other users access your project's databases.
 - **Network Security** — Configure Neon's IP and Private Networking features for secure access.
 - **Logical Replication** — Enable logical replication to replicate data from your Neon project to external data services and platforms.
-- **Transfer** — Transfer your project from a personal account to a Neon organization you are a member of.
+- **Transfer** — Transfer your project from the current organization to another organization you are a member of.
 - **Delete** — Use with care! This action deletes your entire project and all its objects, and is irreversible.
 
 ### General project settings
@@ -71,35 +72,41 @@ On the **General** page, you are permitted to change the name of your project or
 
 ### Change your project's default compute settings
 
-You can change your project's default compute settings on the **Compute** page.
+You can change your project's default compute settings on the **Compute** page. These settings determine the compute resources allocated to any new branches or read replicas you create.
 
-_Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute. The number of CUs determines the processing capacity of the compute. One CU is equal to 1 vCPU with 4 GB of RAM. Currently, a Neon compute can have anywhere from .25 CUs to 56 CUs. Larger compute sizes will be supported in a future release.
+<Admonition type="important">
+Changes to default compute settings only affect **newly created computes**. Existing computes, including those on your primary branch and read replicas, will not be automatically updated. To change settings for existing computes, you need to update them individually through the **Branches** page.
+</Admonition>
 
-By default, new branches inherit the compute size from your first branch (i.e., `main`). However, there may be times when you want to configure this default.
+A Compute Unit (CU) represents 1 vCPU with 4 GB of RAM. New branches inherit compute settings from your first branch, but you can change these defaults to:
 
-Neon supports fixed-size and autoscaling compute configurations.
+- Set smaller compute sizes for preview deployments and development branches
+- Standardize settings across read replicas
+- Optimize resource usage and costs for non-production workloads
 
-- **Fixed size:** Select a fixed compute size ranging from .25 CUs to 56 CUs. A fixed-size compute does not scale to meet workload demand.
-- **Autoscaling:** Specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries in response to the current load. Currently, the _Autoscaling_ feature supports a range of 1/4 (.25) CU to 16 CUs. The 1/4 CU and 1/2 CU settings are _shared compute_. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
+Neon supports two compute configurations:
 
-### Configure history retention
+- **Fixed size:** Select a fixed compute size ranging from .25 CUs to 56 CUs
+- **Autoscaling:** Specify minimum and maximum compute sizes (from .25 CU to 16 CUs) to automatically scale based on workload. Note: When setting maximum above 10 CUs, the minimum must be at least max/8. For more information, see [Autoscaling](/docs/introduction/autoscaling)
+
+### Configure your restore window
 
 By default, Neon retains a history of changes for all branches in your project, enabling features like:
 
-- [Point-in-time restore](/docs/introduction/point-in-time-restore) for recovering lost data
+- [Instant restore](/docs/introduction/branch-restore) for recovering lost data
 - [Time Travel](/docs/guides/time-travel-assist) queries for investigating data issues
 
-The default retention window is **1 day** across all plans to help avoid unexpected storage costs. If you extend this retention window, you'll expand the range of data recovery and query options, but note that this will also increase your [storage](/docs/introduction/usage-metrics#storage) usage, especially with multiple active branches.
+The default retention window is **1 day** across all plans to help avoid unexpected storage costs. If you extend this restore window, you'll expand the range of data recovery and query options, but note that this will also increase your [storage](/docs/introduction/usage-metrics#storage) usage, especially with multiple active branches.
 
-Also note that adjusting the history retention period affects _all_ branches in your project.
+Also note that adjusting the restore window affects _all_ branches in your project.
 
-To configure the history retention period for a project:
+To configure the restore window for a project:
 
 1. Select a project in the Neon Console.
 2. On the Neon **Dashboard**, select **Settings**.
 3. Select **Storage**.
-   ![History retention configuration](/docs/manage/history_retention.png)
-4. Use the slider to select the history retention period.
+   ![Restore window configuration](/docs/manage/history_retention.png)
+4. Use the slider to select the restore window.
 5. Click **Save**.
 
 For more information about available plan limits, see [Neon plans](/docs/introduction/plans).
@@ -107,6 +114,19 @@ For more information about available plan limits, see [Neon plans](/docs/introdu
 <Admonition type="note">
 The Storage page also outlines Neon **Archive storage**** policy, if applicable to your Neon plan. For more information on this topic, see [Branch archiving](/docs/guides/branch-archiving).
 </Admonition>
+
+### Schedule updates for your project
+
+To keep your Neon computes and Postgres instances up to date, Neon automatically applies scheduled updates that include Postgres minor version upgrades, security patches, and new features. Updates are applied to the computes within your project. They require a quick compute restart, take only a few seconds, and typically occur weekly.
+
+On the Free Plan, updates are automatically scheduled. On paid plans, you can set a preferred day and time for updates. Restarts occur within your selected time window and take only a few seconds.
+
+To set your update schedule or view currently scheduled updates:
+
+1. Go to **Settings** > **Updates**.
+1. Choose a day of the week and an hour. Updates will occur within this time window and take only a few seconds.
+
+For more information, see [Updates](/docs/manage/updates).
 
 ### Invite collaborators to a project
 
@@ -243,7 +263,7 @@ You can define an allowlist with individual IP addresses, IP ranges, or [CIDR no
 - **Use IPv6 addresses**: Neon projects provisioned on AWS also support specifying IPv6 addresses. For example:
 
   <Admonition type="note">
-  IPv6 is not yet supported for projects provisioned on on Azure.
+  IPv6 is not yet supported for projects provisioned on Azure.
   </Admonition>
 
   ```text
@@ -423,7 +443,7 @@ The response includes information about the role, the database, the default bran
   },
   "connection_uris": [
     {
-      "connection_uri": "postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname"
+      "connection_uri": "postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require"
     }
   ],
   "roles": [

@@ -2,7 +2,7 @@
 title: Run analytics queries with Read Replicas
 subtitle: Leverage read replicas for running data-intensive analytics queries
 enableTableOfContents: true
-updatedOn: '2024-12-13T20:52:57.585Z'
+updatedOn: '2025-07-03T12:36:49.564Z'
 ---
 
 With Neon's read replica feature, you can instantly create a dedicated read replica for running data-intensive analytics or reporting queries. This allows you to avoid disruption or performance degradation on your production database.
@@ -48,6 +48,10 @@ With this setup, your read replica only wakes up when Metabase connects, scales 
 
 Creating a read replica involves adding a read replica compute to a branch.
 
+<Admonition type="note">
+The Free Plan is limited to a maximum of 3 read replica computes per project.
+</Admonition>
+
 You can add a read replica compute- to any branch in your Neon project by following these steps:
 
 1. In the Neon Console, select **Branches**.
@@ -92,7 +96,7 @@ curl --request POST \
 
 Connecting to a read replica is the same as connecting to any branch, except you connect via a read replica compute instead of your primary read-write compute. The following steps describe how to connect to your read replica with connection details obtained from the Neon Console.
 
-1. On the Neon **Dashboard**, under **Connection Details**, select the branch, the database, and the role you want to connect with.
+1. Click the **Connect** button on your **Project Dashboard**. On the **Connect to your database modal**, select the branch, the database, and the role you want to connect with.
 1. Under **Compute**, select the **Replica** compute.
 1. Select a **Database** and the **Role** you want to connect with.
 1. Copy the connection string. This is the information you need to connect to the read replica from your client or application.
@@ -100,13 +104,12 @@ Connecting to a read replica is the same as connecting to any branch, except you
    The connection string appears similar to the following:
 
    ```bash shouldWrap
-   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    ```
 
    If you expect a high number of connections, enable the **Connection pooling** toggle to add the `-pooler` flag to the connection string.
 
    The information in your connection string corresponds to the following connection details:
-
    - role: `alex`
    - password:`AbC123dEf`
    - hostname: `ep-cool-darkness-123456.us-east-2.aws.neon.tech`
@@ -117,7 +120,7 @@ Connecting to a read replica is the same as connecting to any branch, except you
 1. Connect to your application from a client such as `psql` or add the connection details to your application. For example, to connect using `psql`, issue the following command:
 
    ```bash shouldWrap
-   psql postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+   psql postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    ```
 
 ## Run the analytics query on the read replica

@@ -1,0 +1,63 @@
+# Platform overview
+
+> The "Platform overview" document outlines Neon's cloud-native architecture, detailing its components, such as compute, storage, and control planes, and explains how they interact to manage PostgreSQL databases efficiently.
+
+## Source
+
+- [Platform overview HTML](https://neon.com/docs/manage/platform): The original HTML version of this documentation
+
+## Access control
+
+Manage your account, your team, and who can access your project's databases.
+
+- [Accounts](https://neon.com/docs/manage/accounts): About Neon account types
+- [Organizations](https://neon.com/docs/manage/organizations): Build your team in Neon
+- [Project collaboration](https://neon.com/docs/guides/project-collaboration-guide): Collaborate on your projects with other users
+- [Database access](https://neon.com/docs/manage/database-access): Learn how to manage user access to your databases using roles
+- [E-mail signup](https://neon.com/docs/manage/accounts#update-personal-information): Change to an email-based account, or simply change your email
+- [API keys](https://neon.com/docs/manage/api-keys): Generate and manage API keys
+
+## Projects
+
+Learn how to manage all aspects of your Neon projects. These topics cover the basics of setting up your projects through the UI (create, edit, delete) as well as practical guidance and best practices around managing project resources.
+
+- [Object hierarchy](https://neon.com/docs/manage/overview): Learn about the Neon project and all its resources
+- [Projects](https://neon.com/docs/manage/projects): Create and manage projects in Neon
+- [Branches](https://neon.com/docs/manage/branches): Learn about database branching in Neon
+- [Computes](https://neon.com/docs/manage/computes): Configure and optimimze compute resources for your Neon projects
+- [Roles](https://neon.com/docs/manage/roles): Manage roles within projects and assign permissions
+- [Databases](https://neon.com/docs/manage/databases): Manage your database from the Console, CLI, or API
+- [Tables](https://neon.com/docs/guides/tables): Use the Tables page to easily view, edit, and manage your database entries
+- [Integrations](https://neon.com/docs/manage/integrations): Manage third-party integrations with your Neon project
+
+## Monitoring
+
+Monitor your Neon projects to track system health and performance.
+
+- [Overview](https://neon.com/docs/introduction/monitoring): Learn about monitoring resources and metrics in Neon
+- [Monitoring dashboard](https://neon.com/docs/introduction/monitoring-page): Dashboard graphs for monitoring system and database metrics
+- [Active Queries](https://neon.com/docs/introduction/monitor-active-queries): View and analyze running queries in your database
+- [Query History](https://neon.com/docs/introduction/monitor-query-history): View and analyze query history for your Neon database
+- [System operations](https://neon.com/docs/manage/operations): Track actions taken by the control plane on project resources
+- [External tools](https://neon.com/docs/introduction/monitor-external-tools): Monitor your database with PgAdmin or PgHero
+
+## Security
+
+Learn how Neon secures your projects and data, and explore the security features available for you to use.
+
+- [Overview](https://neon.com/docs/security/security-overview): Overview of Neon's security features
+- [Security reporting](https://neon.com/docs/security/security-reporting): Report security vulnerabilities and incidents
+- [Compliance](https://neon.com/docs/security/soc2-compliance): Learn how Neon complies with various standards
+- [Acceptable Use Policy](https://neon.com/docs/security/acceptable-use-policy): Read about Neon's acceptable use policies
+
+## Backups
+
+- [About backups](https://neon.com/docs/manage/backups): An overview of backup strategies for Neon Postgres
+- [Backups with pg_dump](https://neon.com/docs/manage/backup-pg-dump): Learn how to create a backup of your Neon database using pg_dump
+- [Automate pg_dump backups](https://neon.com/docs/manage/backup-pg-dump-automate): Automate backups of your Neon database to S3 with pg_dump and GitHub Actions
+
+## Maintenance & updates
+
+- [Overview](https://neon.com/docs/manage/maintenance-updates-overview): Overview of Neon platform maintenance and compute updates
+- [Platform maintenance](https://neon.com/docs/manage/platform-maintenance): Find out how Neon manages essential platform maintenance and critical security updates
+- [Updates](https://neon.com/docs/manage/updates): Learn about updates for Neon computes ond Postgres

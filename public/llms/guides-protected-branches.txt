@@ -1,0 +1,145 @@
+# Protected branches
+
+> The "Protected branches" documentation outlines how to configure and manage protected branches in Neon, detailing the steps to restrict changes and enforce branch protection rules to maintain code integrity.
+
+## Source
+
+- [Protected branches HTML](https://neon.com/docs/guides/protected-branches): The original HTML version of this documentation
+
+Neon's protected branches feature implements a series of protections:
+
+- Protected branches cannot be deleted.
+- Protected branches cannot be [reset](https://neon.com/docs/manage/branches#reset-a-branch-from-parent).
+- Projects with protected branches cannot be deleted.
+- Computes associated with a protected branch cannot be deleted.
+- New passwords are automatically generated for Postgres roles on branches created from protected branches. [See below](https://neon.com/docs/guides/protected-branches#new-passwords-generated-for-postgres-roles-on-child-branches).
+- With additional configuration steps, you can apply IP Allow restrictions to protected branches only. The [IP Allow](https://neon.com/docs/introduction/ip-allow) feature is available on the Neon [Scale](https://neon.com/docs/introduction/plans#scale) and [Business](https://neon.com/docs/introduction/plans#business) plans. See [below](https://neon.com/docs/guides/protected-branches#how-to-apply-ip-restrictions-to-protected-branches).
+- Protected branches are not [archived](https://neon.com/docs/guides/branch-archiving) due to inactivity.
+
+The protected branches feature is available on all Neon paid plans.
+
+## Set a branch as protected
+
+This example sets a single branch as protected, but you can have up to 2 protected branches on the Launch plan and 5 on the Scale plan.
+
+To set a branch as protected:
+
+1. In the Neon Console, select a project.
+2. Select **Branches** to view the branches for the project.
+
+   
+
+3. Select a branch from the table. In this example, we'll configure our default branch `main` as a protected branch.
+4. On the branch page, click the **Actions** drop-down menu and select **Set as protected**.
+
+   
+
+5. In the **Set as protected** confirmation dialog, click **Set as protected** to confirm your selection.
+
+   
+
+   Your branch is now designated as protected, as indicated by the protected branch shield icon, shown below.
+
+   
+
+   The protected branch designation also appears on your **Branches** page.
+
+   
+
+## New passwords generated for Postgres roles on child branches
+
+When you create a branch in Neon, it includes all Postgres databases and roles from the parent branch. By default, Postgres roles on the child branch will have the same passwords as on the parent branch. However, this does not apply to protected branches. When you create a child branch from a protected branch, new passwords are generated for the matching Postgres roles on the child branch.
+
+This behavior is designed to prevent the exposure of passwords that could be used to access your protected branch. For example, if you have designated a production branch as protected, the automatic password change for child branches ensures that you can create child branches for development or testing without risking access to data on your production branch.
+
+Please note that resetting or restoring a child branch from a protected parent branch preserves passwords for matching Postgres roles on the child branch. Please refer to the feature notes below for more.
+
+   **Important** Feature notes: - The "new password" feature for child branches was released on July, 31, 2024. If you have existing CI scripts that create branches from protected branches, please be aware that passwords for matching Postgres roles on those newly created branches will now differ. If you depend on those passwords being the same, you'll need to make adjustments to get the correct connection details for those branches. - After a branch is created, the up-to-date connection string is returned in the output of the [Create Branch GitHub Action](https://neon.com/docs/guides/branching-github-actions#create-branch-action). - The [Reset Branch GitHub Action](https://neon.com/docs/guides/branching-github-actions#reset-from-parent-action) also outputs connection string values, in case you are using this action in your workflows. - The Neon CLI supports a [connection-string](https://neon.com/docs/reference/cli-connection-string) command for retrieving a branch's connection string. - Prior to September, 6, 2024, resetting or restoring a child branch from a protected parent branch restored passwords for matching Postgres roles on the child branch to those used on the protected parent branch. As of September, 6, 2024, passwords for matching Postgres roles on the child branch are preserved when resetting or restoring a child branch from a protected parent branch.
+
+## How to apply IP restrictions to protected branches
+
+On Neon's [Business](https://neon.com/docs/introduction/plans#business) plan, you can use the protected branches feature in combination with Neon's [IP Allow](https://neon.com/docs/introduction/ip-allow) feature to apply IP access restrictions to protected branches only. The basic setup steps are:
+
+1. [Define an IP allowlist for your project](https://neon.com/docs/guides/protected-branches#define-an-ip-allowlist-for-your-project)
+2. [Restrict IP access to protected branches only](https://neon.com/docs/guides/protected-branches#restrict-ip-access-to-protected-branches-only)
+3. [Set a branch as protected](https://neon.com/docs/guides/protected-branches#set-a-branch-as-protected) (if you have not done so already)
+
+### Define an IP allowlist for your project
+
+Tab: Neon Console
+
+To configure an allowlist:
+
+1. Select a project in the Neon Console.
+2. On the Project Dashboard, select **Settings**.
+3. Select **Network Security**.
+4. Under **IP Allow**, specify the IP addresses you want to permit. Separate multiple entries with commas.
+5. Click **Save changes**.
+
+Tab: CLI
+
+The [Neon CLI ip-allow command](https://neon.com/docs/reference/cli-ip-allow) supports IP Allow configuration. For example, the following `add` command adds IP addresses to the allowlist for an existing Neon project. Multiple entries are separated by a space. No delimiter is required.
+
+```bash
+neon ip-allow add 203.0.113.0 203.0.113.1
+┌─────────────────────┬─────────────────────┬──────────────┬─────────────────────┐
+│ Id                  │ Name                │ IP Addresses │ Default Branch Only │
+├─────────────────────┼─────────────────────┼──────────────┼─────────────────────┤
+│ wispy-haze-26469780 │ wispy-haze-26469780 │ 203.0.113.0  │ false               │
+│                     │                     │ 203.0.113.1  │                     │
+└─────────────────────┴─────────────────────┴──────────────┴─────────────────────┘
+```
+
+To apply an IP allowlist to the default branch only, use the you can `--protected-only` option:
+
+```bash
+neon ip-allow add 203.0.113.1 --protected-only
+```
+
+To reverse that setting, use `--protected-only false`.
+
+```bash
+neon ip-allow add 203.0.113.1 --protected-only false
+```
+
+Tab: API
+
+The [Create project](https://api-docs.neon.tech/reference/createproject) and [Update project](https://api-docs.neon.tech/reference/updateproject) methods support **IP Allow** configuration. For example, the following API call configures **IP Allow** for an existing Neon project. Separate multiple entries with commas. Each entry must be quoted. You can set the `"protected_branches_only` option to `true` to apply the allowlist to your default branch only, or `false` to apply it to all branches in your Neon project.
+
+```bash
+curl -X PATCH \
+     https://console.neon.tech/api/v2/projects/falling-salad-31638542 \
+     -H 'accept: application/json' \
+     -H 'authorization: Bearer $NEON_API_KEY' \
+     -H 'content-type: application/json' \
+     -d '
+{
+  "project": {
+    "settings": {
+      "allowed_ips": {
+        "protected_branches_only": true,
+        "ips": [
+          "203.0.113.0", "203.0.113.1"
+        ]
+      }
+    }
+  }
+}
+' | jq
+```
+
+For details about specifying IP addresses, see [How to specify IP addresses](https://neon.com/docs/manage/projects#how-to-specify-ip-addresses).
+
+### Restrict IP access to protected branches only
+
+After defining an IP allowlist, the next step is to select the **Restrict access to protected branches only** option.
+
+
+
+This option removes IP restrictions from _all branches_ in your Neon project and applies them to protected branches only.
+
+After you've selected the protected branches option, click **Save changes** to apply the new configuration.
+
+## Remove branch protection
+
+Removing a protected branch designation can be performed by selecting **Set as unprotected** from the **Actions** menu on the branch page.

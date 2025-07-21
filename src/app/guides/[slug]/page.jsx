@@ -4,14 +4,16 @@ import { notFound } from 'next/navigation';
 import Post from 'components/pages/guides/post';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
-import { VERCEL_URL } from 'constants/guides';
+import VERCEL_URL from 'constants/base';
+import { GUIDES_DIR_PATH } from 'constants/content';
 import LINKS from 'constants/links';
-import { GUIDES_DIR_PATH, getAllPosts, getNavigationLinks, getPostBySlug } from 'utils/api-guides';
+import { getPostBySlug } from 'utils/api-content';
+import { getAuthor, getAllGuides, getNavigationLinks } from 'utils/api-guides';
 import getMetadata from 'utils/get-metadata';
 import getTableOfContents from 'utils/get-table-of-contents';
 
 export async function generateStaticParams() {
-  const posts = await getAllPosts();
+  const posts = await getAllGuides();
   if (!posts) return notFound();
   return posts.map((post) => ({
     slug: post.slug,
@@ -26,30 +28,35 @@ export async function generateMetadata({ params }) {
 
   const {
     data: { title, subtitle },
-    author,
   } = post;
+
+  const authorID = post.data.author;
+  const author = getAuthor(authorID);
 
   const encodedTitle = Buffer.from(title).toString('base64');
 
   return getMetadata({
     title: `${title} - Neon Guides`,
     description: subtitle,
-    imagePath: `${VERCEL_URL}/guides/og?title=${encodedTitle}`,
+    imagePath: `${VERCEL_URL}/api/og?title=${encodedTitle}`,
     pathname: `${LINKS.guides}/${slug}`,
     rssPathname: null,
     type: 'article',
+    category: 'Guides',
     authors: [author.name],
   });
 }
 
 const GuidePost = async ({ params }) => {
   const { slug } = params;
-  const posts = await getAllPosts();
+  const posts = await getAllGuides();
   const navigationLinks = getNavigationLinks(slug, posts);
-  const fileOriginPath = `${`${process.env.NEXT_PUBLIC_GUIDES_GITHUB_PATH}${slug}`}.md`;
+  const gitHubPath = `${GUIDES_DIR_PATH}/${slug}.md`;
   const postBySlug = getPostBySlug(slug, GUIDES_DIR_PATH);
   if (!postBySlug) return notFound();
-  const { data, content, author } = postBySlug;
+  const { data, content } = postBySlug;
+  const authorID = data.author;
+  const author = getAuthor(authorID);
   const tableOfContents = getTableOfContents(content);
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -67,7 +74,7 @@ const GuidePost = async ({ params }) => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <Layout headerWithBorder burgerWithoutBorder isHeaderSticky hasThemesSupport>
+      <Layout headerWithBorder isHeaderSticky hasThemesSupport>
         <div className="safe-paddings flex flex-1 flex-col dark:bg-black-pure dark:text-white lg:block">
           <Container
             className="grid w-full flex-1 grid-cols-12 gap-x-10 pb-20 pt-12 xl:gap-x-7 lg:block lg:gap-x-5 md:pt-10 sm:pt-8"
@@ -79,7 +86,7 @@ const GuidePost = async ({ params }) => {
               content={content}
               navigationLinks={navigationLinks}
               slug={slug}
-              fileOriginPath={fileOriginPath}
+              gitHubPath={gitHubPath}
               tableOfContents={tableOfContents}
             />
           </Container>

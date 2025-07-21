@@ -9,14 +9,24 @@ on:
       - '!content/docs/README.md' # Exclude the README.md file
       - '!content/docs/shared-content/**/*.md' # Exclude the shared-content folder
 
+permissions:
+  contents: read
+
 jobs:
   update-date:
+    permissions:
+      contents: write  # for Git to git push
     runs-on: ubuntu-latest
     if: ${{ !contains(github.event.head_commit.message, 'auto-update') }}
 
     steps:
+    - name: Harden the runner (Audit all outbound calls)
+      uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
+      with:
+        egress-policy: audit
+
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5 # v2.7.0
       with:
         fetch-depth: 2
         token: ${{ secrets.ACCESS_TOKEN }}
@@ -24,7 +34,7 @@ jobs:
         # it needs to be updated in the repo secrets when it expires - Nov 10, 2024
 
     - name: Set up Node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@7c12f8017d5436eb855f1ed4399f037a36fbd9e8 # v2.5.2
       with:
         node-version: 18
 

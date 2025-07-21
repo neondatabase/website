@@ -2,7 +2,7 @@
 title: The hstore extension
 subtitle: Manage key-value pairs in Postgres using hstore
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.049Z'
+updatedOn: '2025-05-12T16:45:38.217Z'
 ---
 
 The `hstore` extension is a flexible way to store and manipulate sets of key-value pairs within a single Postgres value. It is particularly useful for semi-structured data or data that does not have a rigid schema.
@@ -18,8 +18,6 @@ This guide covers the basics of the `hstore` extension - how to enable it, how t
 **Version availability**
 
 Please refer to the [list of all extensions](/docs/extensions/pg-extensions) available in Neon for up-to-date information.
-
-Currently, Neon uses version `1.8` of the `hstore` extension for all Postgres versions.
 
 ## Enable the `hstore` extension
 

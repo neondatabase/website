@@ -2,7 +2,7 @@
 title: Generate synthetic data with Neosync
 subtitle: Learn how to generate synthetic data in your Neon database with Neosync
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.659Z'
+updatedOn: '2025-06-30T11:30:21.907Z'
 ---
 
 [Neosync](https://www.neosync.dev/) is an open-source synthetic data orchestration platform that can create synthetic data and sync it across all of your Neon database environments.
@@ -59,7 +59,7 @@ Next, we'll create the table for your data.
 
 ### Copy the connection string for your database
 
-Navigate to the **Dashboard** in Neon and copy the connection string for the destination database from the **Connection Details** widget.
+Navigate to the **Project Dashboard** in Neon, click **Connect**, and copy the connection string for the destination database from the **Connect to your database** modal.
 
 <Admonition type="note">
 Make sure you select the correct database (`neosync`) from the **Database** drop-down menu.
@@ -68,7 +68,7 @@ Make sure you select the correct database (`neosync`) from the **Database** drop
 Your connection string should look something like this:
 
 ```bash
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neosync?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neosync?sslmode=require&channel_binding=require
 ```
 
 ## Neosync setup
@@ -108,7 +108,6 @@ To generate data, you need to create a **Job** in Neosync:
    ![Define Neosync job connection](/docs/guides/neosync_job_connect.png)
 
 4. On the **Schema** page:
-
    - Specify a value for **Number of Rows**. We'll create 1000 rows of data to use in this example.
    - Under **Table Selection**, select the schema and table (`public.users`) where you want to generate synthetic data and move it from the source to the destination table.
    - For each column in your table, select a **Transfomer** to define the type of data you want to generate for the column. For the `age` column, we used the `Generate Random Int64` to randomly generate ages between 18 and 40. You can configure the generator by clicking on the edit icon next to the transformer and setting min and max values.
@@ -135,5 +134,5 @@ Neosync is also able to handle referential integrity in case you need to generat
 - [Neosync Quickstart](https://docs.neosync.dev/quickstart)
 - [Synthetic data generation](https://docs.neosync.dev/core-features#synthetic-data-generation)
 - [How to Anonymize Sensitive Data in Neon](https://www.neosync.dev/blog/neosync-neon-sync-job)
-- [How to use Synthetic Data to catch more bugs with Neosync](https://neon.tech/blog/how-to-use-synthetic-data-to-catch-more-bugs-with-neosync)
+- [How to use Synthetic Data to catch more bugs with Neosync](/blog/how-to-use-synthetic-data-to-catch-more-bugs-with-neosync)
 - [How to seed your Neon DB with Synthetic Data](https://www.neosync.dev/blog/neosync-neon-data-gen-job)

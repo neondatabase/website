@@ -46,10 +46,10 @@ export async function middleware(req) {
     if (ticketsProtectedRoutes.some((route) => pathname.startsWith(route))) {
       try {
         const token = await getToken({ req });
-        const isAuthenticated = !!token?.githubHandle;
+        const isAuthenticated = !!token?.gitHubHandle;
 
         if (isAuthenticated) {
-          const userHandle = token.githubHandle;
+          const userHandle = token.gitHubHandle;
 
           // Redirect authorized user to their edit page
           if (pathname === '/generate-ticket' || pathname.endsWith(`/tickets/${userHandle}`)) {

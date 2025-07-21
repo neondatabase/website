@@ -1,0 +1,178 @@
+# Time Travel
+
+> The "Time Travel" documentation for Neon details how users can access historical data states by utilizing the time travel feature, enabling precise data retrieval from specific past points.
+
+## Source
+
+- [Time Travel HTML](https://neon.com/docs/guides/time-travel-assist): The original HTML version of this documentation
+
+To help review your data's history, Time Travel lets you connect to any selected point in time within your restore window and then run queries against that connection. This capability is part of Neon's instant restore feature, which maintains a history of changes through Write-Ahead Log (WAL) records.
+
+You can use Time Travel from two places in the Neon Console, and from the Neon CLI:
+
+- **SQL Editor** &#8212; Time Travel is built into the SQL editor letting you switch between queries of your current data and previous iterations of your data in the same view.
+- **Restore** &#8212; Time Travel Assist is also built into the instant restore flow where it can help you make sure you've targeted the correct restore point before you restore a branch.
+- **Neon CLI** &#8212; Use the Neon CLI to quickly establish point-in-time connections for automated scripts or command-line-based data analysis.
+
+## How Time Travel works
+
+Time Travel leverages Neon's instant branching capability to create a temporary branch and compute at the selected point in time, which are automatically removed once you are done querying against this point-in-time connection. The computes are ephemeral: they are not listed on the **Branches** page or in a CLI or API list branches request.
+
+However, you can see the history of operations related to the creation and deletion of branches and ephemeral computes on the **Operations** page:
+
+- start_compute
+- create_branch
+- delete_timeline
+- suspend_compute
+
+### How long do ephemeral endpoints remain active
+
+The ephemeral endpoints are created with a .50 CU compute size, which has 0.50 vCPU size with 2 GB of RAM. An ephemeral compute remains active for as long as you keep running queries against it. After 30 seconds of inactivity, the timeline is deleted and the endpoint is removed.
+
+### Restore window
+
+You are only able to run Time Travel queries that fall within your restore window, which starts at 24 hours for Free Plan users, up to 7 days for Launch, 14 days for Scale, and 30 days for Business plan users.
+
+You cannot select a time outside your current restore window.
+
+To change your restore window, see [Configure restore window](https://neon.com/docs/manage/projects#configure-restore-window).
+
+### Data integrity
+
+Time Travel only allows non-destructive read-only queries. You cannot alter historical data in any way. If you try to run any query that could alter historical data, you will get an error message like the following:
+
+
+
+### Time Travel with the SQL Editor
+
+Time Travel in the SQL Editor offers a non-destructive way to explore your database's historical data through read-only queries. By toggling Time Travel in the editor, you switch from querying your current data to querying against a selected point within your restore window.
+
+You can use this feature to help with scenarios like:
+
+- Investigating anomolies
+- Assessing the impact of new features
+- Troubleshooting
+- Compliance auditing
+
+Here's an example of a completed Time Travel query.
+
+
+
+### Time Travel Assist with instant restore
+
+Time Travel Assist is also available from the **Restore** page, as part of the [Instant restore](https://neon.com/docs/guides/branch-restore) feature. Before completing a restore operation, it's a good idea to use Time Travel Assist to verify that you've targetted the correct restore point.
+
+An SQL editor is built into the **Restore** page for this purpose. When you make your branch and timestamp selection to restore a branch, this selection can also be used as the point-in-time connection to query against.
+
+Here is an example of a completed query:
+
+
+
+## How to use Time Travel
+
+Here is how to use Time Travel from both the **SQL Editor** and from the **Restore** page:
+
+Tab: SQL Editor
+
+1. In the Neon Console, open the **SQL Editor**.
+1. Use the **Time Travel** toggle to enable querying against an earlier point in time.
+
+   
+
+1. Use the Date & Time selector to choose a point within your restore window.
+1. Write your read-only query in the editor, then click **Run**. You don't have to include time parameters in the query; the query is automatically targeted to your selected timestamp.
+
+Tab: Instant restore
+
+1. In the Neon Console, go to **Restore**.
+1. Select the branch you want to query against, then select a timestamp, the same as you would to [Restore a branch](https://neon.com/docs/guides/time-travel-assist#restore-a-branch-to-an-earlier-state).
+
+   
+
+   This makes the selection for Time Travel Assist. Notice the updated fields above the SQL Editor show the **branch** and **timestamp** you just selected.
+
+   
+
+1. Check that you have the right database selected to run your query against. Use the database selector under the SQL Editor to switch to a different database for querying against.
+
+   
+
+1. Write your read-only query in the editor, then click **Query at timestamp** to run the query. You don't have to include time parameters in the query; the query is automatically targeted to your selected timestamp.
+
+   If your query is successful, you will see a table of results under the editor.
+
+   
+
+Tab: CLI
+
+Using the Neon CLI, you can establish a connection to a specific point in your branch's history. To get the connection string, use the following command:
+
+```bash
+neon connection-string <branch>@<timestamp|LSN>
+```
+
+In the `branch` field, specify the name of the branch you want to connect to. Omit the `branch` field to connect to your default branch. Replace the `timestamp|LSN` field with the specific timestamp (in ISO 8601 format) or Log Sequence Number for the point in time you want to access.
+
+Example:
+
+```bash
+neon connetion-string main@2024-04-21T00:00:00Z
+postgresql://alex:AbC123dEf@br-broad-mouse-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require&options=neon_timestamp%3A2024-04-21T00%3A00%3A00Z
+```
+
+### Connect directly with psql
+
+Appending `--psql` to the command for a one-step psql connection. For example, to connect to `main` at its state on Jan 1st, 2024:
+
+```bash
+neon connection-string main@2024-01-01T00:00:00Z --psql
+```
+
+Here is the same command using aliases:
+
+```bash
+neon cs main@2024-01-01T00:00:00Z --psql
+```
+
+### Query at Specific LSNs
+
+For more granular control, you can also establish the connection using a specific LSN.
+
+Example:
+
+```bash
+neon cs main@0/234235
+```
+
+This retrieves the connection string for querying the 'main' branch at a specific Log Sequence Number, providing access to the exact state of the database at that point in the transaction log.
+
+### Include project ID for multiple projects
+
+If you are working with multiple Neon projects, specify the project ID to target the correct project:
+
+```bash
+neon connection-string <branch>@<timestamp|LSN> --project-id <project id>
+```
+
+Example:
+
+```bash
+neon cs main@2024-01-01T00:00:00Z --project-id noisy-pond-12345678
+```
+
+Alternatively, you can set a durable project context that remains active until you remove or change the context:
+
+```bash
+neon set-context --project-id <project id>
+```
+
+Read more about getting connection strings from the CLI in [Neon CLI commands — connection-string](https://neon.com/docs/reference/cli-connection-string), and more about setting contexts in [CLI - set-context](https://neon.com/docs/reference/cli-set-context).
+
+## Billing considerations
+
+The ephemeral endpoints used to run your Time Travel queries do contribute to your consumption usage totals for the billing period, like any other active endpoint that consumes resources.
+
+A couple of details to note:
+
+- The endpoints are shortlived. They are suspended 30 seconds after you stop querying.
+- Ephemeral endpoints are created with a .50 CU compute size, which has 0.50 vCPU size with 2 GB of RAM. This is Neon's second smallest compute size. For more about compute sizes in Neon, see [How to size your compute](https://neon.com/docs/manage/computes#how-to-size-your-compute). For more about compute usage and billing, see [Usage metrics — Compute](https://neon.com/docs/introduction/usage-metrics#compute).

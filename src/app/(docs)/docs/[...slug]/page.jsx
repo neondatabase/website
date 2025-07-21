@@ -2,16 +2,11 @@
 import { notFound } from 'next/navigation';
 
 import Post from 'components/pages/doc/post';
-import { VERCEL_URL } from 'constants/docs';
+import VERCEL_URL from 'constants/base';
+import { DOCS_DIR_PATH, CHANGELOG_DIR_PATH } from 'constants/content';
 import LINKS from 'constants/links';
-import {
-  DOCS_DIR_PATH,
-  getAllPosts,
-  getAllChangelogPosts,
-  getNavigationLinks,
-  getPostBySlug,
-  getSidebar,
-} from 'utils/api-docs';
+import { getPostBySlug } from 'utils/api-content';
+import { getAllPosts, getAllChangelogs, getNavigationLinks, getSidebar } from 'utils/api-docs';
 import { getBreadcrumbs } from 'utils/get-breadcrumbs';
 import { getFlatSidebar } from 'utils/get-flat-sidebar';
 import getMetadata from 'utils/get-metadata';
@@ -78,14 +73,13 @@ const DocPost = async ({ params }) => {
   const sidebar = getSidebar();
   const flatSidebar = await getFlatSidebar(sidebar);
 
+  const isDocsIndex = currentSlug === 'introduction';
   const isChangelogIndex = !!currentSlug.match('changelog')?.length;
-  const allChangelogPosts = await getAllChangelogPosts();
+  const allChangelogPosts = await getAllChangelogs();
 
   const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar, getSidebar());
   const navigationLinks = getNavigationLinks(currentSlug, flatSidebar);
-  const fileOriginPath = isChangelogIndex
-    ? process.env.NEXT_PUBLIC_CHANGELOG_GITHUB_PATH
-    : `${process.env.NEXT_PUBLIC_DOCS_GITHUB_PATH + currentSlug}.md`;
+  const gitHubPath = isChangelogIndex ? CHANGELOG_DIR_PATH : `${DOCS_DIR_PATH}/${currentSlug}.md`;
 
   const post = getPostBySlug(currentSlug, DOCS_DIR_PATH);
   if (!isChangelogIndex && !post) return notFound();
@@ -97,7 +91,7 @@ const DocPost = async ({ params }) => {
         content={{}}
         breadcrumbs={[]}
         currentSlug={currentSlug}
-        fileOriginPath={fileOriginPath}
+        gitHubPath={gitHubPath}
         changelogPosts={allChangelogPosts}
         navigationLinks={navigationLinks}
         changelogActiveLabel="all"
@@ -131,8 +125,9 @@ const DocPost = async ({ params }) => {
         breadcrumbs={breadcrumbs}
         navigationLinks={navigationLinks}
         currentSlug={currentSlug}
-        fileOriginPath={fileOriginPath}
+        gitHubPath={gitHubPath}
         tableOfContents={tableOfContents}
+        isDocsIndex={isDocsIndex}
       />
     </>
   );

@@ -30,8 +30,8 @@ Output:
 ```text
  id | first_name | last_name |    dob     |              email
 ----+------------+-----------+------------+---------------------------------
-  1 | John       | Doe       | 1995-01-05 | [[email protected]](../cdn-cgi/l/email-protection.html)
-  2 | Jane       | Doe       | 1995-02-05 | [[email protected]](../cdn-cgi/l/email-protection.html)
+  1 | John       | Doe       | 1995-01-05 | john.doe@example.com
+  2 | Jane       | Doe       | 1995-02-05 | jane.doe@example.com
 (2 rows)
 ```
 
@@ -57,7 +57,7 @@ In this example, the COPY statement exports all data from all columns of the `pe
 
 ![postgresql export csv](/postgresqltutorial/postgresql-export-csv.jpg)Sometimes, you may want to export data from some columns of a table to a CSV file. To achieve this, you can specify the column names together with the table name after `COPY` keyword.
 
-For example, the following statement exports data from the `first_name`, `last_name`, and `email`  columns of the `persons` table to `person_partial_db.csv`
+For example, the following statement exports data from the `first_name`, `last_name`, and `email` columns of the `persons` table to `person_partial_db.csv`
 
 ```
 COPY persons(first_name,last_name,email)
@@ -65,7 +65,7 @@ TO 'C:\temp\persons_partial_db.csv' DELIMITER ',' CSV HEADER;
 ```
 
 ![postgresql export csv partially](/postgresqltutorial/postgresql-export-csv-partially.jpg)
-If you don’t want to export the header, which contains the column names of the table, you can remove the `HEADER` flag in the `COPY` statement.
+If you don't want to export the header, which contains the column names of the table, you can remove the `HEADER` flag in the `COPY` statement.
 
 For example, the following statement exports only data from the `email` column of the `persons` table to a CSV file:
 
@@ -81,7 +81,7 @@ It means that the CSV file must reside on the database server machine, not your 
 
 ## Export data from a table to a CSV file using the \\copy command
 
-If you have access to a remote PostgreSQL database server, but you don’t have sufficient privileges to write to a file on it, you can use the PostgreSQL built\-in command `\copy`.
+If you have access to a remote PostgreSQL database server, but you don't have sufficient privileges to write to a file on it, you can use the PostgreSQL built\-in command `\copy`.
 
 The `\copy` command runs the `COPY` statement behind the scenes. However, instead of the server writing the CSV file, psql writes the CSV file and transfers data from the server to your local file system.
 

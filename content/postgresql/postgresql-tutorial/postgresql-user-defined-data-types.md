@@ -16,10 +16,10 @@ nextLink:
 
 **Summary**: in this tutorial, you will learn how to create PostgreSQL user\-defined data type using `CREATE DOMAIN` and `CREATE TYPE` statements.
 
-Besides built\-in [data types](postgresql-data-types), PostgreSQL allows you to create user\-defined data types through the following statements:
+Besides built\-in [data types](postgresql-data-types), PostgreSQL allows you to create user\-defined data types through the following statements:
 
-- `CREATE DOMAIN` creates a user\-defined data type with constraints such as [`NOT NULL`](postgresql-not-null-constraint), [`CHECK`](postgresql-check-constraint), etc.
-- `CREATE TYPE` creates a composite type used in [stored procedures](https://neon.tech/postgresql/postgresql-stored-procedures/) as the data types of returned values.
+- `CREATE DOMAIN` creates a user\-defined data type with constraints such as [`NOT NULL`](postgresql-not-null-constraint), [`CHECK`](postgresql-check-constraint), etc.
+- `CREATE TYPE` creates a composite type used in [stored procedures](../postgresql-plpgsql/postgresql-create-procedure) as the data types of returned values.
 
 ## PostgreSQL CREATE DOMAIN statement
 
@@ -66,7 +66,7 @@ The following statement inserts a new row into the `mailing_list` table:
 
 ```sql
 INSERT INTO mailing_list (first_name, last_name, email)
-VALUES('Jame V','Doe','[[email protected]](../cdn-cgi/l/email-protection.html)');
+VALUES('Jame V','Doe','james.doe@example.com');
 ```
 
 PostgreSQL issued the following error because the first name contains a space:
@@ -80,12 +80,12 @@ The following statement works because it does not violate any constraints of the
 
 ```sql
 INSERT INTO mailing_list (first_name, last_name, email)
-VALUES('Jane','Doe','[[email protected]](../cdn-cgi/l/email-protection.html)');
+VALUES('Jane','Doe','jane.doe@example.com');
 ```
 
 To change or remove a domain, you use the `ALTER DOMAIN` or `DROP DOMAIN` respectively.
 
-To view all domains in the current database, you use the `\dD` command as follows:
+To view all domains in the current database, you use the `\dD` command as follows:
 
 ```sql
 test=#\dD

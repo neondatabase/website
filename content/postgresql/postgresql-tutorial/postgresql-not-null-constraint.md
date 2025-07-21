@@ -18,13 +18,13 @@ nextLink:
 
 ## Introduction to NULL
 
-In the database world, NULL represents unknown or missing information. NULL is not the same as an empty string or the number zero.
+In the database world, NULL represents unknown or missing information. NULL is not the same as an empty string or the number zero.
 
 Suppose you need to insert the email address of a contact into a table. You can request his or her email address.
 
-However, if you don’t know whether the contact has an email address or not, you can insert NULL into the email address column. In this case, NULL indicates that the email address is unknown at the recording time.
+However, if you don't know whether the contact has an email address or not, you can insert NULL into the email address column. In this case, NULL indicates that the email address is unknown at the recording time.
 
-NULL is very special. It does not equal anything, even itself. The expression `NULL = NULL` returns NULL because it makes sense that two unknown values should not be equal.
+NULL is very special. It does not equal anything, even itself. The expression `NULL = NULL` returns NULL because it makes sense that two unknown values should not be equal.
 
 To check if a value is NULL or not, you use the [`IS NULL`](postgresql-is-null) boolean operator. For example, the following expression returns true if the value in the email address is NULL.
 
@@ -61,11 +61,11 @@ CREATE TABLE invoices(
 );
 ```
 
-This example uses the `NOT NULL` keywords that follow the [data type](postgresql-data-types) of the product_id and qty columns to declare `NOT NULL` constraints.
+This example uses the `NOT NULL` keywords that follow the [data type](postgresql-data-types) of the product_id and qty columns to declare `NOT NULL` constraints.
 
-Note that a column can have multiple constraints such as `NOT NULL`, [check](postgresql-check-constraint), [unique](postgresql-unique-constraint), [foreign key](postgresql-foreign-key) appearing next to each other. The order of the constraints is not important. PostgreSQL may check constraints in any order.
+Note that a column can have multiple constraints such as `NOT NULL`, [check](postgresql-check-constraint), [unique](postgresql-unique-constraint), [foreign key](postgresql-foreign-key) appearing next to each other. The order of the constraints is not important. PostgreSQL may check constraints in any order.
 
-If you use `NULL` instead of `NOT NULL`, the column will accept both `NULL` and non\-NULL values. If you don’t explicitly specify `NULL` or `NOT NULL`, it will accept `NULL` by default.
+If you use `NULL` instead of `NOT NULL`, the column will accept both `NULL` and non\-NULL values. If you don't explicitly specify `NULL` or `NOT NULL`, it will accept `NULL` by default.
 
 ## Adding NOT NULL Constraints to existing columns
 
@@ -85,7 +85,7 @@ ALTER COLUMN column_name_2 SET NOT NULL,
 ...;
 ```
 
-Let’s take a look at the following example.
+Let's take a look at the following example.
 
 First, [create a new table](postgresql-create-table) called production orders ( `production_orders`):
 
@@ -195,8 +195,8 @@ The following statement works.
 INSERT INTO users (username, email)
 VALUES
 	('user1', NULL),
-	(NULL, '[[email protected]](../cdn-cgi/l/email-protection.html)'),
-	('user2', '[[email protected]](../cdn-cgi/l/email-protection.html)'),
+	(NULL, 'user2@example.com'),
+	('user2', 'user2@example.com'),
 	('user3', '');
 ```
 

@@ -3,7 +3,7 @@ title: Optimize pgvector search
 subtitle: Fine-tune parameters for efficient and accurate similarity searches in
   Postgres
 enableTableOfContents: true
-updatedOn: '2024-07-15T14:47:00.995Z'
+updatedOn: '2025-06-23T15:24:08.752Z'
 ---
 
 This guide explores how to effectively use `pgvector` for vector similarity searches in your AI applications. We'll address the following key questions:
@@ -121,12 +121,10 @@ CREATE INDEX items_embedding_cosine_idx ON items USING ivfflat (embedding vector
 IVFFlat in `pgvector` has two parameters:
 
 1. `lists`
-
    - This parameter specifies the number of [k-means clusters](https://en.wikipedia.org/wiki/K-means_clustering) (or "lists") to divide the dataset into
    - Each cluster contains a subset of the data, and each data point belongs to the closest cluster centroid.
 
 2. `probes`
-
    - This parameter determines the number of lists to explore during the search for the nearest neighbors.
    - By probing multiple lists, the search algorithm can find the closest points more accurately, balancing between speed and accuracy.
 

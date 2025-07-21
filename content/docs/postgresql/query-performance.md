@@ -4,7 +4,7 @@ subtitle: Learn about strategies for optimizing Postgres query performance
 enableTableOfContents: true
 redirectFrom:
   - /docs/postgres/query-performance
-updatedOn: '2024-11-30T11:53:56.076Z'
+updatedOn: '2025-07-03T12:36:49.569Z'
 ---
 
 Many factors can impact query performance in Postgres, ranging from insufficient indexing and database maintenance to poorly optimized queries or inadequate system resources. With such a wide range of factors, it can be difficult to know where to start. In this topic, we'll look at several strategies you can use to optimize query performance in Postgres.
@@ -343,7 +343,7 @@ Strategies in this category include:
 
 The size of your compute determines the amount of memory available to cache your frequently accessed data and the maximum number of simultaneous connections you can support. As a result, if your compute size is too small, this can lead to suboptimal query performance and connection limit issues.
 
-For information about right-sizing your compute in Neon, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+For information about right-sizing your compute in Neon, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 
 ### Cache your data
 
@@ -362,7 +362,7 @@ After allowing enough time for your workload to run fully and generate the neces
 ```sql
 \x
 Expanded display is on.
-SELECT * FROM neon.neon_stat_file_cache;
+SELECT * FROM neon_stat_file_cache;
 file_cache_misses:                 2133643
 file_cache_hits:                   108999742
 file_cache_used:                   607
@@ -378,7 +378,7 @@ file_cache_hit_ratio = (file_cache_hits / (file_cache_hits + file_cache_misses))
 
 If the `file_cache_hit_ratio` is below 99%, your working set (your most frequently accessed data) may not be adequately in memory. This could be due to your Postgres instance not having sufficient memory.
 
-To increase available memory for a Postgres instance in Neon, you can increase the size of your compute. Larger computes have larger local file caches. For information about selecting an appropriate compute size in Neon, refer to [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+To increase available memory for a Postgres instance in Neon, you can increase the size of your compute. Larger computes have larger local file caches. For information about selecting an appropriate compute size in Neon, refer to [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 
 Remember that the local file cache statistics are for the entire compute, not specific databases or tables. A Neon compute runs an instance of Postgres, which can have multiple databases and tables.
 
@@ -393,10 +393,10 @@ Connection pooling improves performance by minimizing the overhead associated wi
 Enabling connection pooling in Neon requires adding a `-pooler` option to your Neon connection string (to the Neon hostname), as shown here:
 
 ```plaintext
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
-Alternatively, you can obtain a pooled connection string for your database from the **Connection Details** widget on the Neon Dashboard.
+Alternatively, you can obtain a pooled connection string for your database by clicking the **Connect** button on your **Project Dashboard**.
 
 For more information about connection pooling in Neon, see [Connection pooling](/docs/connect/connection-pooling).
 

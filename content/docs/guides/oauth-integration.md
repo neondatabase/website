@@ -1,30 +1,30 @@
 ---
 title: Neon OAuth integration
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.063Z'
+updatedOn: '2025-05-30T16:54:40.477Z'
 ---
 
 You can integrate your application or service with Neon using OAuth. The Neon OAuth integration enables your application to interact with Neon user accounts, carrying out permitted actions on their behalf. Our integration does not require direct access to user login credentials and is conducted with their approval, ensuring data privacy and security.
 
-To set up the integration and create a Neon OAuth application, you can apply on our [Partners page](https://neon.tech/partners). You will need to provide the following information:
+To set up the integration and create a Neon OAuth application, you can apply on our [Partners page](/partners). You will need to provide the following information:
 
-1. Details about your application, including the application name, what it does, and a link to the website.
-2. Callback URL(s), which are used to redirect users after completing the authorization flow.
+- Your name and email address (this should be an individual email address, not a shared inbox address)
+- Your company name
+- Details about your application, including your application name, what it does, and a link to the website.
+- Callback URL(s), which are used to redirect users after completing the authorization flow.
 
-   Examples:
+  ```text
+  https://app.company.com/api/integrations/neon/callback
+  https://app.stage.company.com/api/integrations/neon/callback
+  http://localhost:3000/api/integrations/neon/callback
+  ```
 
-   `https://yourapplication.com/api/oauth/callback`
+- Required scopes, defining the type of access you need. We provide scopes for managing both projects and organizations. For a list of all available scopes, see [Supported OAuth Scopes](#supported-oauth-scopes).
 
-   `http://localhost:3000/api/oauth/callback`
+- Whether or not you will make API calls from a backend.
+- A logo to be displayed on Neon's OAuth consent dialog when users authorize your application to access their Neon account.
 
-3. Scopes, defining the type of access you want to request. We provide scopes for managing both projects and organizations.
-
-   For a list of all available scopes, see [Supported OAuth Scopes](#supported-oauth-scopes).
-
-4. Whether or not you will make API calls from a backend.
-5. A logo to be displayed on Neon's OAuth consent dialog when users authorize your application to access their Neon account.
-
-After your application is reviewed, we will provide you with a client ID and, if applicable, a client secret. Client secrets are only provided for backend clients, so non-backend applications (e.g. browser-based apps or CLI tools) will not receive a secret. These credentials are sensitive and should be stored securely.
+After your application is reviewed, Neon will provide you with a **client ID** and, if applicable, a **client secret**. Client secrets are only provided for backend clients, so non-backend applications (e.g. browser-based apps or CLI tools) will not receive a secret. These credentials are sensitive and should be stored securely.
 
 ## How the OAuth integration works
 
@@ -32,9 +32,11 @@ Here is a high-level overview of how Neon's OAuth implementation works:
 
 ![OAuth flow diagram](/docs/oauth/flow.png)
 
-1. The user initiates the OAuth flow in your application by clicking a button or link.
-2. An authorization URL is generated, and the user is redirected to Neon’s OAuth consent screen to authorize the application and grant the necessary permissions.
-3. The application receives an access token to manage Neon resources on the user’s behalf.
+1. The user sends a request to your API endpoint to initiate the OAuth flow by clicking a button or link in your application.
+2. An authorization URL is generated.
+3. The user is redirected to Neon’s OAuth consent screen to authorize the application.
+4. The user logs in and authorizes the application, granting it the necessary permissions.
+5. A redirect is performed to a callback endpoint, which includes an access token that allows the application to manage Neon resources on the user’s behalf.
 
 ## About the Neon OAuth server
 
@@ -118,11 +120,15 @@ The following OAuth scopes allow varying degrees of access to Neon resources:
 
 You must choose from these predefined scopes when requesting access; custom scopes are not supported.
 
-### 1. Initiating the OAuth flow
+Let's now go through the full flow, step by step:
+
+<Steps>
+
+## Initiating the OAuth flow
 
 To initiate the OAuth flow, you need to generate an authorization URL. You can do that by directing your users to `https://oauth2.neon.tech/oauth2/auth` while passing the following query parameters:
 
-- `client_id`: your OAuth application's ID.
+- `client_id`: your OAuth application's ID (provided to you by Neon after your application is received)
 - `redirect_uri`: the full URL that Neon should redirect users to after authorizing your application. The URL should match at least one of the callback URLs you provided when applying to become a partner.
 - `scope`: This is a space-separated list of predefined scopes that define the level of access you want to request. For a full list of supported scopes and their meanings, see the [Supported OAuth Scopes](#supported-oauth-scopes) section.
 
@@ -136,13 +142,17 @@ To initiate the OAuth flow, you need to generate an authorization URL. You can d
 - `code_challenge`: This is a random string that is used to verify the integrity of the authorization code.
 - `state`: This is a random string that is returned to your callback URL. You can use this parameter to verify that the request came from your application and not from a third party.
 
+## Authorization URL
+
 Here is an example of what the authorization URL might look like:
 
 ```text
 https://oauth2.neon.tech/oauth2/auth?client_id=neon-experimental&scope=openid%20offline%20offline_access%20urn%3Aneoncloud%3Aprojects%3Acreate%20urn%3Aneoncloud%3Aprojects%3Aread%20urn%3Aneoncloud%3Aprojects%3Aupdate%20urn%3Aneoncloud%3Aprojects%3Adelete&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauth%2Fcallback%2Fneon&grant_type=authorization_code&state=H58y-rSTebc3QmNbRjNTX9dL73-IyoU2T_WNievO9as&code_challenge=99XcbwOFU6iEsvXr77Xxwsk9I0GL4c4c4Q8yPIVrF_0&code_challenge_method=S256
 ```
 
-After being redirected to the authorization URL, the user is presented with Neon's consent screen, which is pre-populated with the scopes you requested. From the consent screen, the user is able to review the scopes and authorize the application to connect their Neon account.
+## OAuth consent screen
+
+After being redirected to the authorization URL, the user is presented with Neon's OAuth consent screen, which is pre-populated with the scopes you requested. From the consent screen, the user is able to review the scopes and authorize the application to connect their Neon account.
 
 ![Neon OAuth consent screen](/docs/oauth/consent.png)
 
@@ -150,7 +160,7 @@ After being redirected to the authorization URL, the user is presented with Neon
 The [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) provides a [Get current user details](https://api-docs.neon.tech/reference/getcurrentuserinfo) endpoint for retrieving information about the currently authorized Neon user.
 </Admonition>
 
-### 2. Authorization code is returned to your callback URL
+## Authorization code is returned to your callback URL
 
 After successfully completing the authorization flow, the user is redirected to the callback URL with the following query parameters appended to the URL:
 
@@ -158,7 +168,7 @@ After successfully completing the authorization flow, the user is redirected to 
 - `scope`: the scopes that the user authorized your application to access
 - `state`: you can compare the value of this parameter with the original `state` you provided in the previous step to ensure that the request came from your application and not from a third party
 
-### 3. Exchanging the authorization code for an access token
+## Exchanging the authorization code for an access token
 
 You can now exchange the authorization code returned from the previous step for an access token. To do that, you need to send a `POST` request to `https://oauth2.neon.tech/oauth2/token` with the following parameters:
 
@@ -169,6 +179,8 @@ You can now exchange the authorization code returned from the previous step for 
 - `code`: the authorization code returned from the previous step
 
 The response object includes an `access_token` value, required for making requests to the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) on your users' behalf. This value must be supplied in the Authorization header of the HTTP request when sending requests to the Neon API.
+
+</Steps>
 
 ## Example OAuth applications
 

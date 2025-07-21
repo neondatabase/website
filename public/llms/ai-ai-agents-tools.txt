@@ -1,0 +1,48 @@
+# Ship faster with AI tools
+
+> The document "Ship faster with AI tools" outlines how Neon users can leverage AI agents and tools to accelerate development processes and improve efficiency within the Neon database environment.
+
+## Source
+
+- [Ship faster with AI tools HTML](https://neon.com/docs/ai/ai-agents-tools): The original HTML version of this documentation
+
+Neon provides several ways to integrate with AI tools and agents, from natural language database control to autonomous agent frameworks. Choose the tools that fit your workflow.
+
+## Manage databases with natural language
+
+The Model Context Protocol (MCP) is a standardized way for AI tools to interact with Neon databases using natural language, providing secure and contextual access to your data and infrastructure.
+
+- [Neon MCP Server](https://neon.com/docs/ai/neon-mcp-server): A Model Context Protocol (MCP) server that enables AI tools to interact with and manage Neon databases
+- [Connect MCP Clients](https://neon.com/docs/ai/connect-mcp-clients-to-neon): Learn how to connect MCP clients to your Neon database
+
+## Integrate Neon in your IDE
+
+These tools leverage the Neon MCP server to provide natural language interfaces and
+AI-enhanced database management capabilities within your preferred development environment.
+
+- [Claude Desktop](https://neon.com/guides/neon-mcp-server): Use natural language to manage your databases with Claude Desktop and Neon MCP server
+- [Cursor](https://neon.com/guides/cursor-mcp-neon): AI-enhanced database management in Cursor IDE
+- [Cline](https://neon.com/guides/cline-mcp-neon): AI-enhanced database management with Cline
+- [Windsurf](https://neon.com/guides/windsurf-mcp-neon): AI-enhanced database management in Windsurf Editor
+
+## Ship faster with AI rules
+
+Accelerate your development with context rules that help AI tools write better code for Neon's features.
+
+- [Neon Auth Rules](https://neon.com/docs/ai/ai-rules-neon-auth): AI rules for implementing authentication with Neon
+- [Neon Drizzle Rules](https://neon.com/docs/ai/ai-rules-neon-drizzle): AI rules for using Drizzle ORM with Neon
+- [Neon Serverless Rules](https://neon.com/docs/ai/ai-rules-neon-serverless): AI rules for efficient serverless database connections
+
+## Build AI agents
+
+Create autonomous agents that can manage and interact with your Neon databases programmatically.
+
+- [@neondatabase/toolkit](https://github.com/neondatabase/toolkit): A terse client for spinning up Postgres databases and running SQL queries
+
+## Scale with Agent frameworks
+
+Build AI agents using popular frameworks that integrate with Neon.
+
+- [AgentStack Integration](https://neon.com/guides/agentstack-neon): Build and deploy AI agents with AgentStack's CLI and Neon integration
+- [Composio + CrewAI](https://neon.com/guides/composio-crewai-neon): Create multi-agent systems with CrewAI and Neon
+- [LangGraph Integration](https://neon.com/guides/langgraph-neon): Build stateful, multi-actor applications with LangGraph and Neon

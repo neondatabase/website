@@ -2,7 +2,7 @@
 title: Use Neon Postgres with Render
 subtitle: Connect a Neon Postgres database to your Node application deployed with Render
 enableTableOfContents: true
-updatedOn: '2024-10-22T15:41:04.376Z'
+updatedOn: '2025-06-30T11:30:21.915Z'
 ---
 
 [Render](https://render.com) is a comprehensive cloud service that provides hosting for web applications and static sites, with PR previews, zero-downtime deployments, and more. Render supports full-stack applications, offering both web services and background workers.
@@ -49,10 +49,10 @@ Log in to the Neon Console and navigate to the [Projects](https://console.neon.t
 
 ### Retrieve your Neon database connection string
 
-Log in to the Neon Console and navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
+You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
 
 ```bash
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 Keep your connection string handy for later use.

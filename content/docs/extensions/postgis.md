@@ -2,7 +2,7 @@
 title: The postgis extension
 subtitle: Work with geospatial data in Postgres using PostGIS
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.052Z'
+updatedOn: '2025-05-12T12:00:17.774Z'
 ---
 
 The `postgis` extension provides support for spatial data - coordinates, maps and polygons, encompassing geographical and location-based information. It introduces new data types, functions, and operators to manage and analyze spatial data effectively.
@@ -20,8 +20,6 @@ This guide introduces you to the `postgis` extension - how to enable it, store a
 **Version availability:**
 
 Please refer to the [list of all extensions](/docs/extensions/pg-extensions) available in Neon for up-to-date information.
-
-Currently, Neon uses version `3.3.3` of the `postgis` extension for all Postgres versions.
 
 ## Enable the `postgis` extension
 
@@ -60,7 +58,7 @@ VALUES
     ('Elm St & 5th Ave', ST_Point(-73.991070, 40.730824));
 ```
 
-The `ST_Point` function is used to create a point from the specified latitude and longitude.
+The `ST_Point` function is used to create a point from the specified longitude and latitude.
 
 **Querying spatial data**
 
@@ -88,7 +86,7 @@ The `ST_DWithin` function returns true if the distance between two points is les
 PostGIS extends Postgres data types to handle spatial data. The primary spatial types are:
 
 - **GEOMETRY**: A flexible type for spatial data, supporting various shapes. It models shapes in the cartesian coordinate plane. Each `GEOMETRY` value is also associated with a spatial reference system (SRS), which defines the coordinate system and units of measurement.
-- **GEOGRAPHY**: Specifically designed for large-scale spatial operations on the Earth's surface, factoring in the Earth's curvature. The coordinates for a `GEOGRAPHY` shape are specified in degrees of latitude and longitude.
+- **GEOGRAPHY**: Specifically designed for large-scale spatial operations on the Earth's surface, factoring in the Earth's curvature. The coordinates for a `GEOGRAPHY` shape are specified in degrees of longitude and latitude.
 
 The actual shapes are stored as a set of coordinates. For example, a point is stored as a pair of coordinates, a line as a set of points, and a polygon as a set of lines.
 

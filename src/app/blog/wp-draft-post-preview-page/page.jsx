@@ -10,11 +10,9 @@ import Hero from 'components/pages/blog-post/hero';
 import MoreArticles from 'components/pages/blog-post/more-articles';
 import PreviewWarning from 'components/pages/blog-post/preview-warning';
 import SocialShare from 'components/pages/blog-post/social-share';
-import SubscribeForm from 'components/pages/blog-post/subscribe-form';
 import Admonition from 'components/shared/admonition';
 import LINKS from 'constants/links';
-import SEO_DATA from 'constants/seo-data';
-import { getWpPreviewPostData } from 'utils/api-posts';
+import { getWpPreviewPostData } from 'utils/api-wp';
 import getFormattedDate from 'utils/get-formatted-date';
 import getMetadata from 'utils/get-metadata';
 import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blocks';
@@ -103,11 +101,6 @@ const BlogDraft = async ({ searchParams }) => {
             title={title}
             slug={shareUrl}
           />
-
-          <SubscribeForm
-            size="sm"
-            className="col-span-6 col-start-4 mt-16 xl:col-span-8 lg:col-span-full"
-          />
           <MoreArticles
             className="col-span-10 col-start-2 mt-16 xl:col-span-full xl:mt-14 lg:mt-12 md:mt-11"
             posts={relatedPosts}
@@ -119,16 +112,34 @@ const BlogDraft = async ({ searchParams }) => {
   );
 };
 
-export async function generateMetadata() {
-  const { title, description, imagePath } = SEO_DATA.blog;
+export async function generateMetadata({ searchParams }) {
+  if (!searchParams?.id || !searchParams?.status) {
+    return null;
+  }
+
+  const { post } = await getWpPreviewPostData(searchParams?.id, searchParams?.status);
+
+  if (!post) return null;
+
+  const {
+    seo: {
+      title,
+      metaDesc,
+      metaKeywords,
+      metaRobotsNoindex,
+      opengraphTitle,
+      opengraphDescription,
+      twitterImage,
+    },
+  } = post;
 
   return getMetadata({
-    title,
-    description,
-    keywords: '',
-    robotsNoindex: 'noindex',
+    title: opengraphTitle || title,
+    description: opengraphDescription || metaDesc,
+    keywords: metaKeywords,
+    robotsNoindex: metaRobotsNoindex || 'noindex',
     pathname: `${LINKS.blog}/wp-draft-post-preview-page`,
-    imagePath,
+    imagePath: twitterImage?.mediaItemUrl,
   });
 }
 

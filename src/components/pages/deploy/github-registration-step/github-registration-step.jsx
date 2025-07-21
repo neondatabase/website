@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 import Button from 'components/pages/deploy/button';
 import DynamicTicket from 'components/pages/deploy/dynamic-ticket';
-import GithubIcon from 'components/shared/header/images/header-github.inline.svg';
+import GitHubIcon from 'icons/github.inline.svg';
 
 const appearAndExitAnimationVariants = {
   initial: { opacity: 0 },
@@ -14,7 +14,7 @@ const appearAndExitAnimationVariants = {
   exit: { opacity: 0, transition: { duration: 0.2 } },
 };
 
-const GithubRegistrationStep = () => {
+const GitHubRegistrationStep = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   return (
@@ -24,7 +24,7 @@ const GithubRegistrationStep = () => {
           You’re invited. <br />
           Grab the ticket.
         </h2>
-        <p className="mt-5 text-[1.15rem] font-light leading-tight tracking-tight text-gray-new-70 2xl:max-w-[420px] xl:mx-auto xl:max-w-xl xl:text-center xl:text-lg xl:leading-[1.375] xl:tracking-tighter lg:mt-4 lg:text-base">
+        <p className="mt-5 text-[1.15rem] font-light leading-tight tracking-tight text-gray-new-70 2xl:max-w-[420px] xl:mx-auto xl:max-w-xl xl:text-center xl:text-lg xl:leading-snug xl:tracking-tighter lg:mt-4 lg:text-base">
           Generate a unique ticket image with your GitHub profile and participate in Neon's giveaway
           right after the conference.
         </p>
@@ -75,7 +75,7 @@ const GithubRegistrationStep = () => {
                   </svg>
                 </motion.div>
               ) : (
-                <GithubIcon
+                <GitHubIcon
                   className="absolute left-3 top-1/2 -translate-y-1/2 text-black"
                   width={40}
                   height={40}
@@ -106,4 +106,4 @@ const GithubRegistrationStep = () => {
   );
 };
 
-export default GithubRegistrationStep;
+export default GitHubRegistrationStep;

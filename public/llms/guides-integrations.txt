@@ -1,0 +1,98 @@
+# Neon integration guides
+
+> The "Neon integration guides" document details the procedures for integrating Neon with various third-party services and tools, facilitating seamless connectivity and functionality within the Neon ecosystem.
+
+## Source
+
+- [Neon integration guides HTML](https://neon.com/docs/guides/integrations): The original HTML version of this documentation
+
+## Monitor
+
+- [Datadog](https://neon.com/docs/guides/datadog): Send metrics and events from Neon Postgres to Datadog
+- [OpenTelemetry](https://neon.com/docs/guides/opentelemetry): Send metrics and events from Neon to any OpenTelemetry compatible backend
+
+## Deploy
+
+- [Vercel](https://neon.com/docs/guides/vercel-overview): Learn how to integrate Neon with Vercel
+- [Cloudflare Pages](https://neon.com/docs/guides/cloudflare-pages): Use Neon with Cloudflare Pages
+- [Cloudflare Workers](https://neon.com/docs/guides/cloudflare-workers): Use Neon with Cloudflare Workers
+- [Deno Deploy](https://neon.com/docs/guides/deno): Use Neon with Deno Deploy
+- [Heroku](https://neon.com/docs/guides/heroku): Deploy Your App with Neon Postgres on Heroku
+- [Koyeb](https://neon.com/docs/guides/koyeb): Use Neon with Koyeb
+- [Netlify Functions](https://neon.com/docs/guides/netlify-functions): Connect a Neon Postgres database to your Netlify Functions application
+- [Railway](https://neon.com/docs/guides/railway): Use Neon Postgres with Railway
+- [Render](https://neon.com/docs/guides/render): Use Neon Postgres with Render
+
+## Serverless
+
+- [Neon](https://neon.com/docs/serverless/serverless-driver): Connect with the Neon serverless driver
+- [AWS Lambda](https://neon.com/docs/guides/aws-lambda): Connect from AWS Lambda to Neon
+- [Azure Functions](https://neon.com/guides/query-postgres-azure-functions): Connect from Azure Functions to Neon
+
+## Query
+
+- [Exograph](https://neon.com/docs/guides/exograph): Use Exograph with Neon
+- [PostgREST](https://neon.com/docs/guides/postgrest): Create a REST API from your Neon database
+- [Grafbase](https://neon.com/docs/guides/grafbase): Use Grafbase Edge Resolvers with Neon
+- [Hasura](https://neon.com/docs/guides/hasura): Connect from Hasura Cloud to Neon
+- [Cloudflare Hyperdrive](https://neon.com/docs/guides/cloudflare-hyperdrive): Use Neon with Cloudflare Hyperdrive
+- [Ask Your Database](https://neon.com/docs/guides/askyourdatabase): Chat with your Neon Postgres database with AskYourDatabase
+- [StepZen](https://neon.com/docs/guides/stepzen): Use StepZen with Neon
+- [Wundergraph](https://neon.com/docs/guides/wundergraph): Use Wundergraph with Neon
+- [Outerbase](https://neon.com/docs/guides/outerbase): Connect Outerbase to Neon
+
+## Develop
+
+- [GitHub integration](https://neon.com/docs/guides/neon-github-app): Use the Neon GitHub integration
+- [Neosync](https://neon.com/docs/guides/neosync-anonymize): Anonymize data with Neosync
+- [Neosync](https://neon.com/docs/guides/neosync-generate): Seed data with Neosync
+- [Prisma](https://neon.com/docs/guides/prisma): Connect from Prisma to Neon
+- [TypeORM](https://neon.com/docs/guides/typeorm): Connect from TypeORM to Neon
+- [Knex](https://neon.com/docs/guides/knex): Connect from Knex to Neon
+- [Convex](https://neon.com/guides/convex-neon): Integrate Convex with Neon Postgres
+
+## Replicate data from Neon
+
+- [Airbyte](https://neon.com/docs/guides/logical-replication-airbyte): Replicate data from Neon with Airbyte
+- [Bemi](https://neon.com/docs/guides/bemi): Create an automatic audit trail with Bemi
+- [ClickHouse](https://docs.peerdb.io/mirror/cdc-neon-clickhouse): Change Data Capture from Neon to ClickHouse with PeerDB (PeerDB docs)
+- [Confluent (Kafka)](https://neon.com/docs/guides/logical-replication-kafka-confluent): Replicate data from Neon with Confluent (Kafka)
+- [Decodable](https://neon.com/docs/guides/logical-replication-decodable): Replicate data from Neon with Decodable
+- [Estuary Flow](https://neon.com/docs/guides/logical-replication-estuary-flow): Replicate data from Neon with Estuary Flow
+- [Fivetran](https://neon.com/docs/guides/logical-replication-fivetran): Replicate data from Neon with Fivetran
+- [Materialize](https://neon.com/docs/guides/logical-replication-materialize): Replicate data from Neon to Materialize
+- [Neon to Neon](https://neon.com/docs/guides/logical-replication-neon-to-neon): Replicate data from Neon to Neon
+- [Neon to PostgreSQL](https://neon.com/docs/guides/logical-replication-postgres): Replicate data from Neon to PostgreSQL
+- [Prisma Pulse](https://neon.com/docs/guides/logical-replication-prisma-pulse): Stream database changes in real-time with Prisma Pulse
+- [Sequin](https://neon.com/docs/guides/sequin): Stream changes and rows from your database to anywhere with Sequin
+- [Snowflake](https://neon.com/docs/guides/logical-replication-airbyte-snowflake): Replicate data from Neon to Snowflake with Airbyte
+- [Inngest](https://neon.com/docs/guides/logical-replication-inngest): Replicate data from Neon to Inngest
+
+## Replicate data to Neon
+
+- [AlloyDB](https://neon.com/docs/guides/logical-replication-alloydb): Replicate data from AlloyDB to Neon
+- [Aurora](https://neon.com/docs/guides/logical-replication-aurora-to-neon): Replicate data from Aurora to Neon
+- [Cloud SQL](https://neon.com/docs/guides/logical-replication-cloud-sql): Replicate data from Cloud SQL to Neon
+- [Neon to Neon](https://neon.com/docs/guides/logical-replication-neon-to-neon): Replicate data from Neon to Neon
+- [PostgreSQL to Neon](https://neon.com/docs/guides/logical-replication-postgres-to-neon): Replicate data from PostgreSQL to Neon
+- [RDS](https://neon.com/docs/guides/logical-replication-rds-to-neon): Replicate data from AWS RDS PostgreSQL to Neon
+
+## Schema Migration
+
+- [Django](https://neon.com/docs/guides/django-migrations): Connect a Django application to Neon
+- [Drizzle](https://neon.com/docs/guides/drizzle-migrations): Schema migration with Neon Postgres and Drizzle ORM
+- [Entity Framework](https://neon.com/docs/guides/entity-migrations): Schema migration with Neon and Entity Framework
+- [Flyway](https://neon.com/docs/guides/flyway): Use Flyway with Neon
+- [Laravel](https://neon.com/docs/guides/laravel): Connect from Laravel to Neon
+- [Liquibase](https://neon.com/docs/guides/liquibase): Use Liquibase with Neon
+- [Prisma](https://neon.com/docs/guides/prisma-migrations): Schema migration with Neon Postgres and Prisma ORM
+- [Rails](https://neon.com/docs/guides/rails-migrations): Connect a Rails application to Neon
+- [Sequelize](https://neon.com/docs/guides/sequelize): Schema migration with Neon Postgres and Sequelize
+- [SQLAlchemy](https://neon.com/docs/guides/sqlalchemy): Connect an SQLAlchemy application to Neon
+
+## Authenticate
+
+- [Auth0](https://neon.com/docs/guides/auth-auth0): Authenticate Neon Postgres application users with Auth0
+- [Auth.js](https://neon.com/docs/guides/auth-authjs): Authenticate Neon Postgres application users with Auth.js
+- [Clerk](https://neon.com/docs/guides/auth-clerk): Authenticate Neon Postgres application users with Clerk
+- [Okta](https://neon.com/docs/guides/auth-okta): Authenticate Neon Postgres application users with Okta

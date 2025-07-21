@@ -2,7 +2,7 @@
 title: Schema-only branches
 subtitle: Protect sensitive data with schema-only branches
 enableTableOfContents: true
-updatedOn: '2025-01-31T18:12:38.172Z'
+updatedOn: '2025-04-17T16:06:46.404Z'
 ---
 
 <EarlyAccess />
@@ -13,7 +13,7 @@ Neon supports creating schema-only branches, letting you create branches that re
 
 You can create schema-only branches in the Neon Console or using the Neon API, in much the same way you create any Neon branch. Support for the Neon CLI will come in a future release.
 
-<Tabs labels={["Neon Console", "API"]}>
+<Tabs labels={["Neon Console", "CLI", "API"]}>
 
 <TabItem>
 
@@ -26,6 +26,18 @@ To create a schema-only branch from the Neon Console:
 5. Provide a name for the branch.
 6. In the **From Branch** field, select the source branch. The schema from the source branch will be copied to your new schema-only branch.
 7. Click **Create branch**.
+
+</TabItem>
+
+<TabItem>
+
+To create a schema-only branch using the Neon CLI:
+
+```bash
+neon branch create --schema-only
+```
+
+If you have more than one project, you'll need to specify the `--project-id` option. See [Neon CLI - branch create](/docs/reference/cli-branches#create).
 
 </TabItem>
 
@@ -94,7 +106,7 @@ To try out schema-only branches:
 
 2. Navigate to the **Tables** page in the Neon Console, and select your `main` branch from the bread-crumb menu at the top of the console. Your `employees` table will have both schema and data, as shown here:
 
-   ![main branch with schema and data](/docs/guides/schema-data-branch.png)
+   ![production branch with schema and data](/docs/guides/schema-data-branch.png)
 
 3. Create a schema-only branch following the instructions above. See [Creating schema-only branches](#creating-schema-only-branches). In this example, we've named the branch `employees_schema_only`.
 
@@ -109,8 +121,8 @@ To try out schema-only branches:
 Connecting to a schema-only branch works the same way as connecting to any Neon branch. You'll connect via a compute associated with the branch. Follow these steps to connect using `psql` and a connection string obtained from the Neon Console.
 
 1. In the Neon Console, select a project.
-2. On the project **Dashboard**, under **Connection Details**, select your schema-only branch, the database, and the role you want to connect with.
-   ![Connection details widget](/docs/guides/schema_only_branch_connect.png)
+2. From the project **Dashboard**, click **Connect**, and select your schema-only branch, the database, and the role you want to connect with.
+   ![Connection details modal](/docs/guides/schema_only_branch_connect.png)
 3. Copy the connection string. A connection string includes your role name, the compute hostname, and the database name.
 
    ```bash shouldWrap
@@ -123,7 +135,7 @@ Unlike other branches, schema-only branches do not have a parent branch, as you 
 
 ![schema-only branch](/docs/guides/schema_only_no_parent.png)
 
-Schema-only branches are independent [root branches](/docs/reference/glossary#root-branch), just like the `main` branch in your Neon project. When you create a schema-only branch, you’re creating a new **root branch**.
+Schema-only branches are independent [root branches](/docs/reference/glossary#root-branch), just like the `production` branch in your Neon project. When you create a schema-only branch, you're creating a new **root branch**.
 
 ### Key points about schema-only branches
 
@@ -137,17 +149,15 @@ Schema-only branches are independent [root branches](/docs/reference/glossary#ro
 
 There are certain allowances associated with schema-only branches:
 
-- A schema-only branch is a [root branch](/docs/reference/glossary#root-branch), and there is only a certain number of root branches permitted per Neon project, depending on your Neon plan.
+- A schema-only branch is a [root branch](/docs/reference/glossary#root-branch), and only a certain number of root branches are permitted per Neon project, depending on your Neon plan.
 - The `main` root branch created with each Neon project counts toward the _root branch allowance per project_, as do certain [backup branches](/docs/reference/glossary#backup-branch) created by restore operations.
-- There is a storage allowance for schema-only branches. The storage allowances do not apply when restoring data to a schema-only branch from another branch.
+- On the Free plan, all branches share a total storage limit of 0.5 GB. Schema-only branches count toward this limit like any other branch. On paid plans, storage limits are higher, but each schema-only branch has a maximum storage allowance, as outlined in the following table.
 
-| Plan     | Root branch allowance per project | Storage allowance per schema-only branch |
-| :------- | :-------------------------------- | :--------------------------------------- |
-| Free     | 3                                 | 0.5 GB                                   |
-| Launch   | 5                                 | 3 GB                                     |
-| Scale    | 10                                | 5 GB                                     |
-| Business | 25                                | 20 GB                                    |
+| Plan     | Root branch allowance per project | Maximum storage allowance per schema-only branch |
+| :------- | :-------------------------------- | :----------------------------------------------- |
+| Free     | 3                                 | 0.5 GB                                           |
+| Launch   | 5                                 | 3 GB                                             |
+| Scale    | 10                                | 5 GB                                             |
+| Business | 25                                | 20 GB                                            |
 
-## Limitations
-
-Schema-only branches are not supported with experimental extensions that require enabling the `neon.allow_unstable_extensions` setting, such as the `pg_mooncake` extension. You can expect this limitation to be lifted in a future release.
+Once you use up your root branch allowance, you will not be able to create additional schema-only branches. You will be required to remove existing root branches first.

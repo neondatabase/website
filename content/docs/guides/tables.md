@@ -2,13 +2,13 @@
 title: Managing your data and schemas in the Neon Console
 subtitle: 'Use the Tables page to easily view, edit, and manage your data and schemas'
 enableTableOfContents: true
-updatedOn: '2025-01-08T12:09:24.679Z'
+updatedOn: '2025-02-21T20:49:03.647Z'
 ---
 
 The **Tables** page in the Neon Console offers a dynamic, visual interface for managing data and schemas. Fully interactive, this view lets you add, update, and delete records, filter data, modify columns, drop or truncate tables, export data in both .json and .csv formats, and manage schemas, tables, views, and enums.
 
 <Admonition type="note">
-The **Tables** page is powered by Drizzle Studio. For new features and updates, please refer to the [Neon Drizzle Studio Changelog](https://github.com/neondatabase/neon-drizzle-studio-changelog/blob/main/CHANGELOG.md).
+The **Tables** page is powered by a Drizzle Studio integration. For tracking updates, see [Tables page enhancements and updates](#tables-page-enhancements-and-updates).
 </Admonition>
 
 ## Edit records
@@ -72,6 +72,28 @@ In addition to managing data, you can manage your database schema directly from 
 
 ![Drizzle Studio Schema Management UI](/docs/relnotes/drizzle_schema_mgmt.png)
 
-## Limitations
+## Tables page updates
 
-The Drizzle Studio integration that powers the **Tables** page currently does not support partitioned tables. Partitioned tables are not displayed on the **Tables** page.
+The **Tables** page in the Neon Console is powered by a Drizzle Studio integration. You can check the Drizzle Studio integration version in your browser by inspecting the Tables page. For example, in Chrome, right-click, select **Inspect**, and go to the **Console** tab to view the current `Tables version`. You can cross-reference this version with the [Neon Drizzle Studio Integration Changelog](https://github.com/neondatabase/neon-drizzle-studio-changelog/blob/main/CHANGELOG.md) to track updates.
+
+## Reporting errors
+
+If you see an **Unexpected error happened** message on the **Tables** page, this could be due to a DNS resolution issue.
+
+![Unexpected error happened on Tables page](/docs/guides/tables_error.png)
+
+Please refer to [DNS resolution issues](/docs/connect/connection-errors#dns-resolution-issues) for workarounds.
+
+If it's not a DNS resolution issue, other troubleshooting steps you can try include:
+
+- **Refreshing the page** — This can resolve temporary glitches.
+- **Clearing browser cache** — Cached files might cause issues, so clearing the cache could help.
+- **Disabling browser extensions** — Extensions may interfere with the page’s functionality.
+- **Using a different browser or device** — Check if the issue occurs on another browser or device.
+- **Trying incognito mode** — Using an incognito window can help bypass issues related to cookies or extensions.
+
+If the issue persists, please follow these steps to report the error:
+
+1. Click **Download Error Context** to download the error context file.
+2. [Open a support ticket](https://console.neon.tech/app/projects?modal=support) and provide a details description of what were doing when the error occurred. Please include any screen captures or files that will help us reproduce the issue. We'll work with our partners at Drizzle to investigate and resolve the issue.
+3. If you're on the Free Plan, you can report the issue on [Discord](https://discord.gg/92vNTzKDGp).

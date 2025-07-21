@@ -3,7 +3,7 @@ title: Migrate data from another Neon project
 enableTableOfContents: true
 redirectFrom:
   - /docs/import/import-from-neon
-updatedOn: '2024-10-07T18:18:31.784Z'
+updatedOn: '2025-07-03T12:36:49.567Z'
 ---
 
 This guide describes how to migrate a database from one Neon project to another by piping data from `pg_dump` to `pg_restore`.
@@ -18,7 +18,12 @@ Use these instructions to:
 - Import a database from a Neon project created with one Postgres version to a Neon project created with another Postgres version.
 
 <Admonition type="tip">
-You can also use **logical replication** to move your data from one Neon project to another. See [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
+
+You can also use these alternative methods to migrate data between Neon projects:
+
+- **Import Data Assistant**: A fast and simple option for databases under 10 GB. See [Import Data Assistant](/docs/import/import-data-assistant).
+- **Logical replication**: Move your data from one Neon project to another. Consider this option for large databases requiring near-zero downtime. See [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
+
 </Admonition>
 
 ## Important considerations
@@ -36,7 +41,7 @@ To import your data from another Neon project:
 
 3. Retrieve the connection strings for the new and existing Neon databases.
 
-   You can obtain the connection strings from the Neon **Dashboard**, under **Connection Details**. Connections strings have this format:
+   You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. Connections strings have this format:
 
    ```bash shouldWrap
    postgresql://[user]:[password]@[neon_hostname]/[dbname]
@@ -51,7 +56,7 @@ To import your data from another Neon project:
    With actual source and destination connection details, your command will appear similar to this:
 
    ```bash shouldWrap
-   pg_dump -Fc -v -d postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/my_source_db | pg_restore -v -d postgresql://alex:AbC123dEf@square-shadow-654321.us-east-2.aws.neon.tech/my_destination_db
+   pg_dump -Fc -v -d postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/my_source_db?sslmode=require&channel_binding=require | pg_restore -v -d postgresql://alex:AbC123dEf@square-shadow-654321.us-east-2.aws.neon.tech/my_destination_db?sslmode=require&channel_binding=require
    ```
 
    <Admonition type="note">
@@ -59,7 +64,6 @@ To import your data from another Neon project:
    </Admonition>
 
    The command includes these arguments:
-
    - `-Fc`: Sends the output to a custom-format archive suitable for input into `pg_restore`.
    - `-v`: Runs commands in verbose mode, allowing you to monitor what happens during the operation.
    - `-d`: Specifies the database name or connection string.

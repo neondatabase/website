@@ -1,0 +1,93 @@
+# Neon App for Slack
+
+> The Neon App for Slack documentation outlines the installation and configuration process for integrating Neon's database management capabilities directly within Slack, enabling users to monitor and manage their databases through Slack commands.
+
+## Source
+
+- [Neon App for Slack HTML](https://neon.com/docs/manage/slack-app): The original HTML version of this documentation
+
+The Neon App for Slack allows you to monitor your Neon usage and manage organization membership directly from Slack. Get quick access to project information and resource usage metrics without leaving your workspace. The app is available to all Neon users on both free and paid plans — check out our [pricing page](https://neon.com/pricing) for more details.
+
+
+
+## Setup
+
+## Install the Neon App for Slack
+
+Click the **Add to Slack** button and follow the prompts.
+
+
+## Authenticate with Neon
+
+The first thing you need to do is authorize — open a DM with your new app and type `/neon auth`. Follow the login flow that opens in your browser, and you're in.
+
+Once authenticated, you're ready to use all available commands.
+
+## Available commands
+
+| **Command**         | **Description**                                                  |
+| ------------------- | ---------------------------------------------------------------- |
+| `/neon auth`        | Connect Slack to your Neon account                               |
+| `/neon projects`    | List your Neon projects                                          |
+| `/neon usage`       | Show overall resource usage for your account                     |
+| `/neon help`        | List all available commands                                      |
+| `/neon status`      | Check the current status of Neon's cloud service                 |
+| `/neon feedback`    | Share your thoughts and suggestions about the Neon App for Slack |
+| `/neon invite user` | Invite users to your organization                                |
+| `/neon subscribe`   | Subscribe to your Neon account updates                           |
+| `/neon unsubscribe` | Unsubscribe from your Neon account updates                       |
+| `/neon disconnect`  | Disconnect your Neon account and subscribed channels             |
+
+## Example workflows
+
+### Check your Neon usage statistics
+
+Open a DM with the Neon App for Slack and run the following command to instantly view your current data transfer, compute time, and storage usage across all projects:
+
+```
+/neon usage
+```
+
+
+
+### Usage notifications
+
+You can receive automated notifications about your Neon usage in any channel (public or private). First, subscribe to notifications using the steps in the section below. Once subscribed, the channel will receive automatic notifications when you approach or reach your resource limits for compute hours, storage, or data transfer.
+
+### Subscribe to notifications in a channel
+
+To receive Neon notifications in a Slack channel:
+
+1. Go to any channel (public or private) where you want to receive notifications
+2. Run `/neon subscribe` - you'll be prompted to run `/invite @Neon (Beta)` if needed
+3. After inviting the bot, run `/neon subscribe` again
+
+Once subscribed, the channel will start receiving important Neon usage notifications. To stop receiving notifications, use the `/neon unsubscribe` command in the same channel.
+
+Use `/neon disconnect` to remove your Neon account connection and unsubscribe from all channels, while keeping the app installed for future use.
+
+## Data deletion
+
+Neon respects your right to request deletion of your personal data at any time. To do so, email us at `privacy@neon.tech` or submit a support ticket via the Neon Console. Once we verify your identity, we will delete your data within 30 days, unless a legal or contractual obligation requires us to retain it. For more details, see our [Privacy Policy](https://neon.com/privacy-policy).
+
+## Support
+
+If you encounter any issues with the Neon App for Slack, please open a support ticket in the [Neon Console](https://console.neon.tech/app/projects?modal=support). Free plan users can get help through our [Discord community](https://discord.gg/92vNTzKDGp).
+
+For more details about our support options, see our [Support documentation](https://neon.com/docs/introduction/support).
+
+## FAQs
+
+Details: **What can I do with the Neon App for Slack?**
+The Neon App for Slack allows you to:
+
+- View project information and resource usage
+- Monitor system status
+- Manage notifications in channels
+- Invite users to your organization
+
+Details: **Does this app allow me to modify databases or projects?**
+No, the Neon App for Slack is primarily for viewing usage details and managing organization membership, not for direct database management.
+
+Details: **Can I control which notifications I receive?**
+You can control where notifications are sent using the `/neon subscribe` and `/neon unsubscribe` commands in any channel. However, you cannot customize which types of notifications you receive — all subscribed channels will receive all important Neon updates and usage alerts.

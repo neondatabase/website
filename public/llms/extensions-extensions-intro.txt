@@ -1,0 +1,159 @@
+# Postgres extensions
+
+> The document outlines the available PostgreSQL extensions in Neon, detailing how users can enhance database functionality by integrating additional features and capabilities specific to their needs.
+
+## Source
+
+- [Postgres extensions HTML](https://neon.com/docs/extensions/extensions-intro): The original HTML version of this documentation
+
+Explore supported Postgres extensions by category. Also see:
+
+- [List view](https://neon.com/docs/extensions/pg-extensions)
+- [Install an extension](https://neon.com/docs/extensions/pg-extensions#install-an-extension)
+- [Update an extension](https://neon.com/docs/extensions/pg-extensions#update-an-extension-version)
+
+**Need an extension we don't have?** 📩 [Request an extension](https://neon.com/docs/extensions/pg-extensions#request-an-extension)
+
+## AI / Machine Learning
+
+- [pg_tiktoken](https://neon.com/docs/extensions/pg_tiktoken): Tokenize data in Postgres using the OpenAI tiktoken library
+- [pgrag](https://neon.com/docs/extensions/pgrag): Create end-to-end Retrieval-Augmented Generation (RAG) pipelines
+- [pgvector](https://neon.com/docs/extensions/pgvector): Store vector embeddings and perform vector similarity search in Postgres
+
+## Analytics
+
+- [pg_mooncake](https://neon.com/docs/extensions/pg_mooncake): Adds columnstore tables and DuckDB execution for fast analytics in Postgres.
+- [hll](https://github.com/citusdata/postgresql-hll): Implements a HyperLogLog data structure as a native data type for efficient and tunable distinct value counting
+- [timescaledb](https://neon.com/docs/extensions/timescaledb): Enables Postgres as a time-series database for efficient storage and retrieval of time-series data
+
+## Auditing / Logging
+
+- [insert_username](https://www.postgresql.org/docs/current/contrib-spi.html): Implements a trigger that stores the current user's name into a text field, useful for tracking who modified a particular row within a table
+- [moddatetime](https://www.postgresql.org/docs/current/contrib-spi.html): Implements a trigger that automatically updates a timestamp column to the current timestamp whenever a row is modified
+- [pgrowlocks](https://neon.com/docs/extensions/pgrowlocks): Provides a function that shows row locking information for a specified table, useful in concurrency and deadlock debugging
+- [tcn](https://www.postgresql.org/docs/16/tcn.html): Provides a trigger function to notify listeners of changes to a table, allowing applications to respond to changes in the database
+
+## Data / Transformations
+
+- [address_standardizer](https://postgis.net/docs/Extras.html#Address_Standardizer): A single-line address parser that takes an input address and normalizes it based on a set of rules
+- [address_standardizer_data_us](https://postgis.net/docs/Extras.html#Address_Standardizer_Tables): Provides data for standardizing US addresses, for use with the address_standardizer extension
+- [anon](https://neon.com/docs/extensions/postgresql-anonymizer): Provides data masking and anonymization capabilities for protecting personally identifiable information (PII) and sensitive data in Postgres databases
+- [citext](https://neon.com/docs/extensions/citext): Provides a case-insensitive character string type that internally calls lower when comparing values in Postgres
+- [cube](https://neon.com/docs/extensions/cube): Implements the cube data type for representing multidimensional cubes in Postgres
+- [earthdistance](https://neon.com/docs/extensions/earthdistance): Provides cube-based and point-based approaches to calculating great circle distances on the surface of the Earth
+- [hstore](https://neon.com/docs/extensions/hstore): Implements an hstore data type for storing and manipulating sets of key-value pairs within a single Postgres value
+- [intagg](https://www.postgresql.org/docs/16/intagg.html): Provides an integer aggregator and enumerator for Postgres
+- [intarray](https://neon.com/docs/extensions/intarray): Offers functions and operators for manipulating and searching arrays of integers within Postgres
+- [isn](https://www.postgresql.org/docs/16/isn.html): Implements data types for international product numbering standards: EAN13, UPC, ISBN (books), ISMN (music), and ISSN (serials)
+- [ltree](https://neon.com/docs/extensions/ltree): Provides data types for representing labels of data stored in a hierarchical tree-like structure and facilities for searching through label trees
+- [pg_graphql](https://neon.com/docs/extensions/pg_graphql): Adds GraphQL support to Postgres, allowing you to query your database via GraphQL
+- [pg_hashids](https://github.com/iCyberon/pg_hashids): Enables the generation of short, unique hash ids from integers, useful for obfuscating internal ids
+- [pg_jsonschema](https://github.com/supabase/pg_jsonschema): Provides support for JSON schema validation on json and jsonb data types
+- [pg_uuidv7](https://neon.com/docs/extensions/pg_uuidv7): Enables creating valid UUID Version 7 values in Postgres, enabling globally unique identifiers with temporal ordering
+- [pgx_ulid](https://github.com/pksunkara/pgx_ulid): A full-featured extension for generating and working with ULID (Universally Unique Lexicographically Sortable Identifiers)
+- [seg](https://www.postgresql.org/docs/16/seg.html): Implements the seg data type for storage and manipulation of line segments or floating-point ranges, useful for geometric and scientific applications
+- [semver](https://pgxn.org/dist/semver): A Postgres data type for the Semantic Version format with support for btree and hash indexing
+- [tablefunc](https://neon.com/docs/extensions/tablefunc): Contains functions that return tables (multiple rows), including crosstab, which can pivot row data into columns dynamically
+- [unaccent](https://neon.com/docs/extensions/unaccent): A text search dictionary that removes accents from characters, simplifying text search in Postgres
+- [unit](https://github.com/df7cb/postgresql-unit): Implements a data type for SI units, plus byte, for storage, manipulation, and calculation of scientific units
+- [uuid-ossp](https://neon.com/docs/extensions/uuid-ossp): Provides functions to generate universally unique identifiers (UUIDs) in Postgres, supporting various UUID standards
+- [wal2json](https://neon.com/docs/extensions/wal2json): A Postgres logical decoding plugin that converts Write-Ahead Log (WAL) changes into JSON objects
+- [xml2](https://neon.com/docs/extensions/xml2): Enables XPath queries and XSLT functionality directly within Postgres, enabling XML data processing
+
+## Debugging
+
+- [moddatetime](https://www.postgresql.org/docs/current/contrib-spi.html): Automatically updates a timestamp column to the current timestamp whenever a row is modified in Postgres
+- [pgrowlocks](https://neon.com/docs/extensions/pgrowlocks): Provides a function that shows row locking information for a specified table, which can aid in concurrency and deadlock debugging
+- [pgTap](https://pgtap.org/documentation.html): A unit testing framework for Postgres, enabling sophisticated testing of database queries and functions
+- [plpgsql_check](https://pgxn.org/dist/plpgsql_check/): Provides a linter and debugger for PL/pgSQL code, helping identify errors and optimize PL/pgSQL functions
+
+## Geospatial
+
+- [cube](https://neon.com/docs/extensions/cube): Implements a data type for representing multidimensional cubes in Postgres
+- [earthdistance](https://neon.com/docs/extensions/earthdistance): Provides cube-based and point-based approaches to calculating great circle distances on the surface of the Earth
+- [h3](https://neon.com/docs/extensions/postgis-related-extensions#h3-and-h3-postgis): Integrates Uber's H3 geospatial indexing system that combines the benefits of a hexagonal grid with S2's hierarchical subdivisions
+- [h3_postgis](https://neon.com/docs/extensions/postgis-related-extensions#h3-and-h3-postgis): A PostGIS extension for H3, enabling advanced spatial analysis and indexing
+- [pgrouting](https://neon.com/docs/extensions/postgis-related-extensions#pgrouting): Extends PostGIS/Postgres databases, providing geospatial routing and other network analysis functionality
+- [postgis](https://neon.com/docs/extensions/postgis): Extends Postgres to allow GIS (Geographic Information Systems) objects to be stored in the database, enabling spatial queries directly in SQL
+- [postgis_raster](https://postgis.net/docs/RT_reference.html): Adds support for raster data to PostGIS, enabling advanced geospatial analysis on raster images
+- [postgis_sfcgal](https://neon.com/docs/extensions/postgis-related-extensions#postgis-sfcgal): Provides support for advanced 3D geometries in PostGIS, based on the SFCGAL library
+- [postgis_tiger_geocoder](https://neon.com/docs/extensions/postgis-related-extensions#postgis-tiger-geocoder): Enables geocoding and reverse geocoding capabilities in PostGIS using TIGER/Line data
+- [postgis_topology](https://www.postgis.net/docs/Topology.html): Extends PostGIS with support for topological data types and functions, facilitating the analysis of spatial relationships
+
+## Index / Table optimization
+
+- [bloom](https://www.postgresql.org/docs/16/bloom.html): Provides an index access method for Postgres based on Bloom filters
+- [btree_gin](https://neon.com/docs/extensions/btree_gin): Provides GIN operator classes that implement B-tree equivalent behavior
+- [btree_gist](https://neon.com/docs/extensions/btree_gist): Provides GiST index operator classes that implement B-tree equivalent behavior
+- [ip4r](https://github.com/RhodiumToad/ip4r): Provides a range index type and functions for efficiently storing and querying IPv4 and IPv6 ranges and addresses in Postgres
+- [pg_ivm](https://github.com/sraoss/pg_ivm): Provides an Incremental View Maintenance (IVM) feature for Postgres
+- [pg_partman](https://github.com/pgpartman/pg_partman): A partition manager extension that enables creating and managing time-based and number-based table partition sets in Postgres
+- [pg_prewarm](https://neon.com/docs/extensions/pg_prewarm): Allows manual preloading of relation data into the Postgres buffer cache, reducing access times for frequently queried tables
+- [pg_repack](https://neon.com/docs/extensions/pg_repack): Lets you remove bloat from tables and indexes, and optionally restore the physical order of clustered indexes
+- [pg_roaringbitmap](https://github.com/ChenHuajun/pg_roaringbitmap): Implements Roaring Bitmaps in Postgres for efficient storage and manipulation of bit sets
+- [rum](https://github.com/postgrespro/rum): Provides an access method to work with a RUM index, designed to speed up full-text searches
+
+## Metrics
+
+- [neon](https://neon.com/docs/extensions/neon): Provides functions and views designed to gather Neon-specific metrics
+- [pg_stat_statements](https://neon.com/docs/extensions/pg_stat_statements): Tracks planning and execution statistics for all SQL statements executed, aiding in performance analysis and tuning
+- [pgstattuple](https://neon.com/docs/extensions/pgstattuple): Offers functions to show tuple-level statistics for tables, helping identify bloat and efficiency opportunities
+- [tsm_system_rows](https://www.postgresql.org/docs/16/tsm-system-rows.html): Provides a table sampling method that selects a fixed number of table rows randomly
+- [tsm_system_time](https://www.postgresql.org/docs/16/tsm-system-time.html): Offers a table sampling method based on system time, enabling consistent sample data retrieval over time
+
+## Orchestration
+
+- [tcn](https://www.postgresql.org/docs/16/tcn.html): Provides a trigger function to notify listeners of changes to a table, allowing applications to respond to changes in the database
+- [pg_partman](https://github.com/pgpartman/pg_partman): A partition manager extension that enables creating and managing time-based and number-based table partition sets in Postgres
+
+## Procedural languages
+
+- [plcoffee](https://coffeescript.org/): Enables writing functions in CoffeeScript, a Javascript dialect with a syntax similar to Ruby
+- [plls](https://livescript.net/): Enables writing functions in LiveScript, a Javascript dialect that serves as a more powerful successor to CoffeeScript
+- [plv8](https://github.com/plv8/plv8/): A Postgres procedural language powered by V8 Javascript Engine for writing functions in Javascript that are callable from SQL
+- [plpgsql](https://www.postgresql.org/docs/16/plpgsql.html): The default procedural language for Postgres, enabling the creation of complex functions and triggers
+
+## Query optimization
+
+- [hypopg](https://hypopg.readthedocs.io/en/rel1_stable/): Provides the ability to create hypothetical (virtual) indexes in Postgres for performance testing
+- [pg_hint_plan](https://github.com/ossc-db/pg_hint_plan): Allows developers to influence query plans with hints in SQL comments, improving performance and control over query execution
+
+## Scientific computing
+
+- [cube](https://neon.com/docs/extensions/cube): Implements the cube data type for representing multidimensional cubes in Postgres
+- [rdkit](https://github.com/rdkit/rdkit): Integrates the RDKit cheminformatics toolkit with Postgres, enabling chemical informatics operations directly in the database
+- [seg](https://www.postgresql.org/docs/16/seg.html): Implements the seg data type for storage and manipulation of line segments or floating-point intervals, useful for representing laboratory measurements
+- [unit](https://github.com/df7cb/postgresql-unit): Implements a data type for SI units, plus byte, for storage, manipulation, and calculation of scientific units
+
+## Search
+
+- [citext](https://neon.com/docs/extensions/citext): Provides a case-insensitive character string type that internally calls lower when comparing values in Postgres
+- [dict_int](https://neon.com/docs/extensions/dict_int): Provides a text search dictionary template for indexing integer data in Postgres
+- [fuzzystrmatch](https://neon.com/docs/extensions/fuzzystrmatch): Provides several functions to determine similarities and distance between strings in Postgres
+- [pg_search](https://neon.com/docs/extensions/pg_search): An Elasticsearch alternative for full-text search and analytics on Postgres
+- [pg_trgm](https://neon.com/docs/extensions/pg_trgm): Provides functions and operators for determining the similarity of alphanumeric text based on trigram matching, and index operator classes for fast string similarity search
+- [prefix](https://github.com/dimitri/prefix): A prefix range module that supports efficient queries on text columns with prefix-based searching and matching capabilities
+- [unaccent](https://neon.com/docs/extensions/unaccent): A text search dictionary that removes accents from characters, simplifying text search in Postgres
+
+## Security
+
+- [anon](https://neon.com/docs/extensions/postgresql-anonymizer): Provides data masking and anonymization capabilities for protecting personally identifiable information (PII) and sensitive data in Postgres databases
+- [pg_session_jwt](https://neon.com/docs/guides/neon-authorize#how-the-pgsessionjwt-extension-works): Enables RLS policies to verify user identity directly within SQL queries
+- [pgcrypto](https://neon.com/docs/extensions/pgcrypto): Offers cryptographic functions, allowing for encryption and hashing of data within Postgres
+- [pgjwt](https://github.com/michelp/pgjwt): Implements JSON Web Tokens (JWT) in Postgres, allowing for secure token creation and verification
+
+## Tooling / Admin
+
+- [autoinc](https://www.postgresql.org/docs/current/contrib-spi.html): Provides an autoinc() function that stores the next value of a sequence into an integer field
+- [hypopg](https://hypopg.readthedocs.io/en/rel1_stable/): Provides the ability to create hypothetical (virtual) indexes in Postgres for performance testing
+- [insert_username](https://www.postgresql.org/docs/current/contrib-spi.html): Automatically inserts the username of the person executing an insert operation into a specified table in Postgres
+- [lo](https://www.postgresql.org/docs/16/lo.html): Provides support for managing large objects (LOBs) in Postgres, including a data type lo and a trigger lo_manage
+- [neon_utils](https://neon.com/docs/extensions/neon-utils): Provides a function for monitoring how Neon's Autoscaling feature allocates vCPU in response to workload
+- [pg_cron](https://neon.com/docs/extensions/pg_cron): Lets you schedule and manage periodic jobs directly in your Postgres database
+- [pgtap](https://pgtap.org/documentation.html): A unit testing framework for Postgres, enabling sophisticated testing of database queries and functions
+- [refint](https://www.postgresql.org/docs/current/contrib-spi.html): Provides functions for maintaining foreign key constraints
+
+## Remote data access
+
+- [dblink](https://neon.com/docs/extensions/dblink): Provides functions for accessing and manipulating data in remote databases from within Postgres
+- [postgres_fdw](https://neon.com/docs/extensions/postgres_fdw): Access data in remote Postgres databases as local tables

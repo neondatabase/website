@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
 import Link from 'components/shared/link';
-import { VERCEL_URL } from 'constants/docs';
+import VERCEL_URL from 'constants/base';
 import LINKS from 'constants/links';
 import BackIcon from 'images/pages/templates/back.inline.svg';
 import GitHubIcon from 'images/pages/templates/github.inline.svg';
@@ -17,8 +17,10 @@ import getMetadata from 'utils/get-metadata';
 
 export async function generateMetadata({ params }) {
   const { slug } = params;
+
   const template = templates.find((template) => template.slug === slug);
   if (!template) return notFound();
+
   const { name, description } = template;
   const encodedTitle = Buffer.from(name).toString('base64');
 
@@ -26,6 +28,7 @@ export async function generateMetadata({ params }) {
     title: `${name} - Neon Templates`,
     description,
     imagePath: `${VERCEL_URL}/docs/og?title=${encodedTitle}&breadcrumb=${btoa('Templates')}`,
+    pathname: `${LINKS.templates}/${slug}`,
   });
 }
 export async function generateStaticParams() {
@@ -39,7 +42,7 @@ const TemplatePage = ({ params }) => {
   const template = templates.find((template) => template.slug === slug);
   if (!template) return notFound();
 
-  const { name, description, framework, type, css, cms, publisher, githubUrl } = template;
+  const { name, description, framework, type, css, cms, publisher, gitHubUrl } = template;
   const items = [
     {
       label: 'Framework',
@@ -63,7 +66,7 @@ const TemplatePage = ({ params }) => {
     },
   ];
   return (
-    <Layout headerWithBorder burgerWithoutBorder isHeaderSticky hasThemesSupport>
+    <Layout headerWithBorder isHeaderSticky hasThemesSupport>
       <section>
         <Container
           className="relative mb-[104px] mt-12 w-full xl:mb-24 xl:mt-10 lg:mb-20 lg:mt-8 sm:mb-[72px] sm:mt-6"
@@ -109,7 +112,7 @@ const TemplatePage = ({ params }) => {
                   theme="black"
                   target="_blank"
                   rel="noopener noreferrer"
-                  to={template.githubUrl}
+                  to={template.gitHubUrl}
                 >
                   <GitHubIcon /> View Repo
                 </Link>
@@ -118,7 +121,7 @@ const TemplatePage = ({ params }) => {
                   theme="black"
                   target="_blank"
                   rel="noopener noreferrer"
-                  to={`https://app.netlify.com/start/deploy?repository=${githubUrl}#DATABASE_URL`}
+                  to={`https://app.netlify.com/start/deploy?repository=${gitHubUrl}#DATABASE_URL`}
                 >
                   <NetlifyIcon /> Deploy to Netlify
                 </Link>
@@ -129,7 +132,7 @@ const TemplatePage = ({ params }) => {
                   theme="black"
                   target="_blank"
                   rel="noopener noreferrer"
-                  to={`https://vercel.com/new/clone?repository-url=${githubUrl}&env=DATABASE_URL`}
+                  to={`https://vercel.com/new/clone?repository-url=${gitHubUrl}&env=DATABASE_URL`}
                 >
                   <VercelIcon /> Deploy to Vercel
                 </Link>
@@ -138,7 +141,7 @@ const TemplatePage = ({ params }) => {
                   theme="black"
                   target="_blank"
                   rel="noopener noreferrer"
-                  to={`https://render.com/deploy?repo=${githubUrl}#DATABASE_URL`}
+                  to={`https://render.com/deploy?repo=${gitHubUrl}#DATABASE_URL`}
                 >
                   <RenderIcon /> Deploy to Render
                 </Link>
@@ -146,7 +149,7 @@ const TemplatePage = ({ params }) => {
             </div>
             <Image
               className="mt-12 lg:mt-10"
-              src={`https://neon.tech/docs/og?title=${btoa(name)}&breadcrumb=${btoa('Templates')}`}
+              src={`/docs/og?title=${btoa(name)}&breadcrumb=${btoa('Templates')}`}
               alt={`Thumbnail - ${name}`}
               width={512}
               height={288}

@@ -3,7 +3,6 @@ import Image from 'next/image';
 
 import Container from 'components/shared/container/container';
 import Heading from 'components/shared/heading';
-import Link from 'components/shared/link/link';
 import LINKS from 'constants/links';
 import certGDPRIcon from 'images/pages/contact-sales/cert-gdpr.svg';
 import certISOIcon from 'images/pages/contact-sales/cert-iso.svg';
@@ -82,7 +81,7 @@ const CASE_STUDIES = [
 ];
 
 const Hero = () => (
-  <section className="relative z-10 grow overflow-hidden bg-black-pure pb-36 pt-[168px] xl:pb-20 xl:pt-32 lg:py-28 md:py-[100px]">
+  <section className="hero relative z-10 grow overflow-hidden bg-black-pure pb-36 pt-[168px] xl:pb-20 xl:pt-32 lg:py-28 md:py-[100px]">
     <Container className="xl:max-w-5xl lg:max-w-3xl md:px-5" size="1216">
       <div className="flex justify-between lg:mx-auto lg:max-w-xl lg:flex-col lg:gap-14">
         <div className="flex max-w-xl flex-1 flex-col pt-8 xl:max-w-[448px] lg:max-w-full lg:items-center lg:pt-0 lg:text-center">
@@ -102,7 +101,7 @@ const Hero = () => (
                 aria-hidden
               />
             </Heading>
-            <p className="mt-4 text-pretty text-xl leading-snug tracking-tight text-gray-new-80 xl:text-lg xl:leading-normal lg:mt-3 md:text-base">
+            <p className="mt-4 text-balance text-xl leading-snug tracking-tight text-gray-new-80 xl:text-lg xl:leading-normal lg:mt-3 md:text-base">
               We&apos;re happy to assist you with any questions about our technology, pricing plans,
               custom contract options, and&nbsp;migrations assistance.
             </p>
@@ -116,16 +115,6 @@ const Hero = () => (
                 </li>
               ))}
             </ul>
-            <Link
-              className="mt-7 text-lg font-medium leading-none tracking-tight sm:text-base"
-              theme="green"
-              to="https://calendly.com/d/ckxx-b4h-69y/neon-solutions-engineering"
-              rel="noopener noreferrer"
-              target="_blank"
-              withArrow
-            >
-              Book a meeting directly
-            </Link>
           </div>
           <div className="mt-auto lg:mt-14">
             <CaseStudies items={CASE_STUDIES} />

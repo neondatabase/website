@@ -6,18 +6,23 @@ import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 import remarkGfm from 'remark-gfm';
 
+import ChatOptions from 'components/pages/doc/chat-options';
+import CheckItem from 'components/pages/doc/check-item';
+import CheckList from 'components/pages/doc/check-list';
 import CodeTabs from 'components/pages/doc/code-tabs';
 import CommunityBanner from 'components/pages/doc/community-banner';
 import DefinitionList from 'components/pages/doc/definition-list';
 import DetailIconCards from 'components/pages/doc/detail-icon-cards';
+import DocsLink from 'components/pages/doc/docs-link';
 import DocsList from 'components/pages/doc/docs-list';
+// eslint-disable-next-line import/no-cycle
 import IncludeBlock from 'components/pages/doc/include-block';
 import InfoBlock from 'components/pages/doc/info-block';
 import LinkPreview from 'components/pages/doc/link-preview';
 import Steps from 'components/pages/doc/steps';
 import Tabs from 'components/pages/doc/tabs';
 import TabItem from 'components/pages/doc/tabs/tab-item';
-import TechnologyNavigation from 'components/pages/doc/technology-navigation';
+import TechCards from 'components/pages/doc/tech-cards';
 import Video from 'components/pages/doc/video';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
 import SubscriptionForm from 'components/pages/use-case/subscription-form';
@@ -27,17 +32,20 @@ import UseCaseContext from 'components/pages/use-case/use-case-context';
 import UseCaseList from 'components/pages/use-case/use-case-list';
 import Admonition from 'components/shared/admonition';
 import AnchorHeading from 'components/shared/anchor-heading';
+import Button from 'components/shared/button';
 import CodeBlock from 'components/shared/code-block';
 import ComputeCalculator from 'components/shared/compute-calculator';
 import CtaBlock from 'components/shared/cta-block';
+import DeployPostgresButton from 'components/shared/deploy-postgres-button';
 import DocCta from 'components/shared/doc-cta';
-import ExtensionRequest from 'components/shared/extension-request';
+import ExternalCode from 'components/shared/external-code';
+import GradientBorder from 'components/shared/gradient-border';
 import ImageZoom from 'components/shared/image-zoom';
 import InkeepEmbedded from 'components/shared/inkeep-embedded';
-import Link from 'components/shared/link';
-import RegionRequest from 'components/shared/region-request';
+import LatencyCalculator from 'components/shared/latency-calculator';
+import MegaLink from 'components/shared/mega-link';
+import RequestForm from 'components/shared/request-form';
 import getCodeProps from 'lib/rehype-code-props';
-import getGlossaryItem from 'utils/get-glossary-item';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
 
@@ -53,7 +61,7 @@ const getHeadingComponent = (heading, withoutAnchorHeading) => {
   return AnchorHeading(heading);
 };
 
-const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCase) => ({
+const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTemplate) => ({
   h2: getHeadingComponent('h2', withoutAnchorHeading),
   h3: getHeadingComponent('h3', withoutAnchorHeading),
   h4: getHeadingComponent('h4', withoutAnchorHeading),
@@ -65,45 +73,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   // eslint-disable-next-line react/jsx-no-useless-fragment
   undefined: (props) => <Fragment {...props} />,
   pre: (props) => <CodeBlock {...props} />,
-  a: (props) => {
-    const { href, children, ...otherProps } = props;
-    const baseUrl = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
-    const isExternal = href?.startsWith('http') && !href?.startsWith(baseUrl);
-    const isGlossary =
-      href?.startsWith('/docs/reference/glossary') ||
-      href?.startsWith(`${baseUrl}/docs/reference/glossary`);
-    const icon = (isExternal && 'external') || (isGlossary && 'glossary') || null;
-
-    if (children === '#id') {
-      const id = href?.startsWith('#') ? href.replace('#', '') : undefined;
-      return <span id={id} />;
-    }
-
-    // Automatically generate previews for glossary links
-    if (isGlossary) {
-      const glossaryItem = getGlossaryItem(href);
-      if (glossaryItem) {
-        const { title, preview } = glossaryItem;
-        return (
-          <LinkPreview href={href} title={title} preview={preview} {...otherProps}>
-            {children}
-          </LinkPreview>
-        );
-      }
-    }
-
-    return (
-      <Link
-        to={href}
-        target={isExternal ? '_blank' : undefined}
-        rel={isExternal ? 'noopener noreferrer' : undefined}
-        icon={icon}
-        {...otherProps}
-      >
-        {children}
-      </Link>
-    );
-  },
+  a: (props) => <DocsLink {...props} />,
   img: (props) => {
     const { className, title, src, ...rest } = props;
 
@@ -112,7 +82,11 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
       return (
         <ImageZoom src={src}>
           <Image
-            className={clsx(className, { 'no-border': title === 'no-border' })}
+            className={clsx(
+              className,
+              { 'no-border': title === 'no-border' },
+              isTemplate && 'rounded-lg'
+            )}
             src={src}
             width={isReleaseNote ? 762 : 796}
             height={isReleaseNote ? 428 : 447}
@@ -120,6 +94,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
             title={title !== 'no-border' ? title : undefined}
             {...rest}
           />
+          {isTemplate && <GradientBorder className="rounded-lg" withBlend />}
         </ImageZoom>
       );
     }
@@ -155,21 +130,22 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
       />
     );
   },
+  Button,
   YoutubeIframe,
   DefinitionList,
   Admonition,
   CodeTabs,
   DetailIconCards,
-  TechnologyNavigation,
+  TechCards,
   CommunityBanner,
   Tabs,
   TabItem,
   InfoBlock,
   LinkPreview,
   DocsList,
-  RegionRequest,
-  ExtensionRequest,
-  CTA: isUseCase ? CtaBlock : DocCta,
+  RequestForm,
+  LatencyCalculator,
+  CTA: isTemplate ? CtaBlock : DocCta,
   Testimonial,
   TestimonialsWrapper,
   UseCaseList,
@@ -179,6 +155,12 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isUseCas
   InkeepEmbedded,
   Video,
   Steps,
+  DeployPostgresButton,
+  ChatOptions,
+  CheckList,
+  CheckItem,
+  ExternalCode: (props) => <ExternalCode {...props} />,
+  MegaLink,
   ...sharedComponents,
 });
 
@@ -190,19 +172,23 @@ const Content = ({
   withoutAnchorHeading = false,
   isReleaseNote = false,
   isPostgres = false,
-  isUseCase = false,
+  isTemplate = false,
 }) => (
   <div
-    className={clsx('prose-doc prose dark:prose-invert xs:prose-code:break-words', className, {
-      'dark:prose-p:text-gray-new-70 dark:prose-strong:text-white dark:prose-li:text-gray-new-70 dark:prose-table:text-gray-new-70':
-        isUseCase,
-    })}
+    className={clsx(
+      'prose-doc post-content prose dark:prose-invert xs:prose-code:break-words',
+      className,
+      {
+        'prose-template dark:prose-p:text-gray-new-70 dark:prose-strong:text-white dark:prose-li:text-gray-new-70 dark:prose-table:text-gray-new-70':
+          isTemplate,
+      }
+    )}
   >
     {asHTML ? (
       <div dangerouslySetInnerHTML={{ __html: content }} />
     ) : (
       <MDXRemote
-        components={getComponents(withoutAnchorHeading, isReleaseNote, isPostgres, isUseCase)}
+        components={getComponents(withoutAnchorHeading, isReleaseNote, isPostgres, isTemplate)}
         source={content}
         options={{
           mdxOptions: {
@@ -224,6 +210,7 @@ Content.propTypes = {
   withoutAnchorHeading: PropTypes.bool,
   isReleaseNote: PropTypes.bool,
   isPostgres: PropTypes.bool,
+  isTemplate: PropTypes.bool,
 };
 
 export default Content;

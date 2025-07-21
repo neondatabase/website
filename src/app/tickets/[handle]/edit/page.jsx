@@ -8,8 +8,8 @@ import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
 import ArrowLeftIcon from 'icons/arrow-left-thin.inline.svg';
-import buildOgImageUrl from 'utils/build-og-image-url';
 import getMetadata from 'utils/get-metadata';
+import getTicketOgImage from 'utils/get-ticket-og-image';
 import prisma from 'utils/prisma';
 
 // eslint-disable-next-line react/prop-types
@@ -35,12 +35,12 @@ const TicketEditPage = async ({ params }) => {
               {userName}&apos;s <br className="hidden md:block" />
               Ticket
             </h1>
-            <p className="relative z-50 mt-5 max-w-[363px] text-[1.15rem] font-light leading-tight tracking-tight text-gray-new-70 2xl:max-w-[500px] xl:mx-auto xl:max-w-[579px] xl:text-lg xl:leading-[1.375] xl:tracking-tighter lg:mt-4 lg:max-w-[610px] lg:text-base">
+            <p className="relative z-50 mt-5 max-w-[363px] text-[1.15rem] font-light leading-tight tracking-tight text-gray-new-70 2xl:max-w-[500px] xl:mx-auto xl:max-w-[579px] xl:text-lg xl:leading-snug xl:tracking-tighter lg:mt-4 lg:max-w-[610px] lg:text-base">
               Choose the ticket color and gather a watch party for the upcoming Neon Deploy! See you
               on <time dateTime="2024-10-30T17:00:00Z">October 30th, 10 a.m. PT</time>
             </p>
             <Link
-              className="pointer-events-auto mt-[18px] inline-flex items-end text-lg leading-none tracking-[-0.02em] text-green-45 underline decoration-green-45/40 underline-offset-[8px] transition-colors duration-200 hover:decoration-green-45 lg:text-base"
+              className="pointer-events-auto mt-[18px] inline-flex items-end text-lg leading-none tracking-extra-tight text-green-45 underline decoration-green-45/40 underline-offset-[8px] transition-colors duration-200 hover:decoration-green-45 lg:text-base"
               to={LINKS.stage}
             >
               <span>Watch the event live</span>
@@ -86,12 +86,13 @@ async function getTicketData(handle) {
   return userData;
 }
 
-export async function generateStaticParams() {
-  const users = await prisma.user.findMany();
-  return users.map((user) => ({
-    handle: user.login,
-  }));
-}
+// TODO: Uncomment when we have tickets back
+// export async function generateStaticParams() {
+//   const users = await prisma.user.findMany();
+//   return users.map((user) => ({
+//     handle: user.login,
+//   }));
+// }
 
 export async function generateMetadata({ params }) {
   const { handle } = params;
@@ -122,7 +123,7 @@ export async function generateMetadata({ params }) {
     return getMetadata({
       ...SEO_DATA.ticket(userData),
       pathname: `/tickets/${userData.login}/edit`,
-      imagePath: buildOgImageUrl(userData),
+      imagePath: getTicketOgImage(userData),
     });
   }
 

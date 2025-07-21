@@ -33,18 +33,19 @@ const handleOnDragEnd = (info, setActiveSliderItemIndex, children, setDirection)
   }
 };
 
+// TODO: Rebuild with Swiper
 const TestimonialsWrapper = ({ children }) => {
   const [activeSliderItemIndex, setActiveSliderItemIndex] = useState(0);
   const [direction, setDirection] = useState('right');
 
   return (
-    <section className="mb-[72px] flex flex-col gap-y-4">
+    <section className="mb-[72px] mt-8 flex flex-col gap-y-4 md:mb-12">
       <AnimatePresence initial={false} mode="wait">
         {React.Children.map(children, (child, index) =>
           index === activeSliderItemIndex ? (
             <div className={clsx('flex flex-col gap-6')}>
               <motion.div
-                className="flex items-center space-x-[18px]"
+                className="flex items-center space-x-[18px] [&>figure]:!mt-0"
                 key={index}
                 custom={direction}
                 drag="x"

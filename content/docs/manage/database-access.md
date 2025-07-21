@@ -4,7 +4,7 @@ subtitle: Learn how to manage user access to databases in your Neon project
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/manage-database-access
-updatedOn: '2024-08-07T21:36:52.671Z'
+updatedOn: '2025-07-03T12:36:49.567Z'
 ---
 
 Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`.
@@ -50,13 +50,17 @@ To create a read-only role:
 
 1. Connect to your database from an SQL client such as [psql](/docs/connect/query-with-psql-editor), [pgAdmin](https://www.pgadmin.org/), or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). If you need help connecting, see [Connect from any client](/docs/connect/connect-from-any-app).
 
-2. Create a `readonly` role using the following statement. A password is required.
+2. Create a `readonly` role using the following statement.
 
    ```sql
    CREATE ROLE readonly PASSWORD '<password>';
    ```
 
    The password should have at least 12 characters with a mix of lowercase, uppercase, number, and symbol characters. For detailed password guidelines, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
+
+   <Admonition type="note">
+   Neon also supports the `NOLOGIN` option: `CREATE ROLE role_name NOLOGIN;` This allows you to define roles that cannot authenticate but can be granted privileges.
+   </Admonition>
 
 3. Grant the `readonly` role read-only privileges on the schema. Replace `<database>` and `<schema>` with actual database and schema names, respectively.
 
@@ -89,7 +93,7 @@ To create a read-only role:
    The `readonly_user1` user now has read-only access to tables in the specified schema and database and should be able to connect and run `SELECT` queries.
 
    ```bash
-   psql postgresql://readonly_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/dbname
+   psql postgresql://readonly_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    psql (15.2 (Ubuntu 15.2-1.pgdg22.04+1), server 15.3)
    SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off)
    Type "help" for help.
@@ -126,7 +130,7 @@ To create a read-write role:
 
 1. Connect to your database from an SQL client such as [psql](/docs/connect/query-with-psql-editor), [pgAdmin](https://www.pgadmin.org/), or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). If you need help connecting, see [Connect from any client](/docs/connect/connect-from-any-app).
 
-2. Create a `readwrite` role using the following statement. A password is required.
+2. Create a `readwrite` role using the following statement.
 
    ```sql
    CREATE ROLE readwrite PASSWORD '<password>';
@@ -171,7 +175,7 @@ To create a read-write role:
    The `readwrite_user1` user now has read-write access to tables in the specified schema and database and should able to connect and run `SELECT`, `INSERT`, `UPDATE`, `DELETE` queries.
 
    ```bash
-   psql postgresql://readwrite_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/dbname
+   psql postgresql://readwrite_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    psql (15.2 (Ubuntu 15.2-1.pgdg22.04+1), server 15.3)
    SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off)
    Type "help" for help.
@@ -259,7 +263,7 @@ To get started:
    The `dev_user1` user can now connect to the database on your development branch and start using the database with full privileges.
 
    ```bash
-   psql postgresql://dev_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/dbname
+   psql postgresql://dev_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    psql (15.2 (Ubuntu 15.2-1.pgdg22.04+1), server 15.3)
    SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off)
    Type "help" for help.

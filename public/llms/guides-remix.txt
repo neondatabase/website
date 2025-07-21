@@ -1,0 +1,169 @@
+# Connect a Remix application to Neon
+
+> This document guides users on integrating a Remix application with Neon by detailing the steps to configure the database connection and manage environment variables specific to Neon's infrastructure.
+
+## Source
+
+- [Connect a Remix application to Neon HTML](https://neon.com/docs/guides/remix): The original HTML version of this documentation
+
+Remix is an open-source full stack JavaScript framework that lets you focus on building out the user interface using familiar web standards. This guide explains how to connect Remix with Neon using a secure server-side request.
+
+To create a Neon project and access it from a Remix application:
+
+## Create a Neon project
+
+If you do not have one already, create a Neon project. Save your connection details including your password. They are required when defining connection settings.
+
+1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
+2. Click **New Project**.
+3. Specify your project settings and click **Create Project**.
+
+## Create a Remix project and add dependencies
+
+1. Create a Remix project if you do not have one. For instructions, see [Quick Start](https://remix.run/docs/en/main/start/quickstart), in the Remix documentation.
+
+2. Add project dependencies using one of the following commands:
+
+   Tab: node-postgres
+
+   ```shell
+   npm install pg
+   ```
+
+Tab: postgres.js
+
+   ```shell
+   npm install postgres
+   ```
+
+Tab: Neon serverless driver
+
+   ```shell
+   npm install @neondatabase/serverless
+   ```
+
+## Store your Neon credentials
+
+Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).
+
+```shell
+DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
+```
+
+## Configure the Postgres client
+
+There are two parts to connecting a Remix application to Neon. The first is `db.server`. Remix will ensure any code added to this file won't be included in the client bundle. The second is the route where the connection to the database will be used.
+
+### db.server
+
+Create a `db.server.ts` file at the root of your `/app` directory and add the following code snippet to connect to your Neon database:
+
+Tab: node-postgres
+
+```javascript
+import pg from 'pg';
+
+const pool = new pg.Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true,
+});
+
+export { pool };
+```
+
+Tab: postgres.js
+
+```javascript
+import postgres from 'postgres';
+
+const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
+
+export { sql };
+```
+
+Tab: Neon serverless driver
+
+```javascript
+import { neon } from '@neondatabase/serverless';
+
+const sql = neon(process.env.DATABASE_URL);
+
+export { sql };
+```
+
+### route
+
+Create a new route in your `app/routes` directory and import the `db.server` file.
+
+Tab: node-postgres
+
+```javascript
+import { pool } from '~/db.server';
+import { json } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
+
+export const loader = async () => {
+  const client = await pool.connect();
+  try {
+    const response = await client.query('SELECT version()');
+    return response.rows[0].version;
+  } finally {
+    client.release();
+  }
+};
+
+export default function Page() {
+  const data = useLoaderData();
+  return <>{data}</>;
+}
+```
+
+Tab: postgres.js
+
+```javascript
+import { sql } from '~/db.server';
+import { json } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
+
+export const loader = async () => {
+  const response = await sql`SELECT version()`;
+  return response[0].version;
+};
+
+export default function Page() {
+  const data = useLoaderData();
+  return <>{data}</>;
+}
+```
+
+Tab: Neon serverless driver
+
+```javascript
+import { sql } from '~/db.server';
+import { json } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
+
+export const loader = async () => {
+  const response = await sql`SELECT version()`;
+  return response[0].version;
+};
+
+export default function Page() {
+  const data = useLoaderData();
+  return <>{data}</>;
+}
+```
+
+## Run the app
+
+When you run `npm run dev` you can expect to see the following on [localhost:3000](localhost:3000):
+
+```shell
+PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+```
+
+## Source code
+
+You can find the source code for the application described in this guide on GitHub.
+
+- [Get started with Remix and Neon](https://github.com/neondatabase/examples/tree/main/with-remix)

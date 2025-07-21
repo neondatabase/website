@@ -1,0 +1,127 @@
+# Connect a RedwoodSDK application to Neon
+
+> The document outlines the steps to connect a RedwoodSDK application to a Neon database, detailing configuration settings and code examples necessary for establishing a successful connection.
+
+## Source
+
+- [Connect a RedwoodSDK application to Neon HTML](https://neon.com/docs/guides/redwoodsdk): The original HTML version of this documentation
+
+[RedwoodSDK](https://rwsdk.com/) is a framework for building full-stack applications on Cloudflare. This guide describes how to create a Neon project and access it from a RedwoodSDK application.
+
+To create a Neon project and access it from a RedwoodSDK application:
+
+## Create a Neon project
+
+If you do not have one already, create a Neon project. Save your connection details including your password. They are required when defining connection settings.
+
+1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
+2. Click **New Project**.
+3. Specify your project settings and click **Create Project**.
+
+## Create a RedwoodSDK project and add dependencies
+
+1.  Create a RedwoodSDK project if you do not have one. For instructions, see [RedwoodSDK Minimal Starter](https://github.com/redwoodjs/sdk/tree/main/starters/minimal). To create a new project, run the following command:
+
+    ```bash
+    npx degit redwoodjs/sdk/starters/minimal my-redwood-app
+    ```
+
+2.  Navigate into your new project directory and install the RedwoodSDK dependencies:
+
+    ```bash
+    cd my-redwood-app
+    npm install
+    ```
+
+3.  Add project dependencies using one of the following commands:
+
+    Tab: postgres.js
+
+    ```shell
+    npm install postgres
+    ```
+
+Tab: Neon serverless driver
+
+    ```shell
+    npm install @neondatabase/serverless
+    ```
+
+## Store your Neon credentials
+
+Add a `.env` file to your project directory and add your Neon connection string to it. You can find your Neon database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).
+
+```shell
+DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
+```
+
+## Configure the Postgres client
+
+In your RedwoodSDK application (e.g., in `src/app/pages/Home.tsx`), import the driver and use it within your route handlers.
+
+Here's how you can set up a simple route to query the database:
+
+Tab: postgres.js
+
+```typescript
+import { RequestInfo } from "rwsdk/worker";
+import postgres from 'postgres';
+import { env } from "cloudflare:workers";
+
+async function getData() {
+  const sql = postgres(env.DATABASE_URL, { ssl: 'require' });
+  const response = await sql`SELECT version()`;
+  return response[0].version;
+}
+
+export async function Home({ ctx }: RequestInfo) {
+  const data = await getData();
+  return <>{data}</>;
+}
+```
+
+Tab: Neon serverless driver
+
+```typescript
+import { RequestInfo } from "rwsdk/worker";
+import { neon } from '@neondatabase/serverless';
+import { env } from "cloudflare:workers";
+
+async function getData() {
+  const sql = neon(env.DATABASE_URL);
+  const response = await sql`SELECT version()`;
+  return response[0].version;
+}
+
+export async function Home({ ctx }: RequestInfo) {
+  const data = await getData();
+  return <>{data}</>;
+}
+```
+
+## Run your RedwoodSDK application
+
+Start the development server:
+
+```bash
+npm dev
+```
+
+Navigate to your application's URL ([localhost:5173](http://localhost:5173)) in your browser. You should see the output of your database query.
+
+```text
+PostgreSQL 17.4 on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+```
+
+> The specific version may vary depending on the PostgreSQL version of your Neon project.
+
+## Source code
+
+You can find a sample RedwoodSDK application configured for Neon on GitHub:
+
+- [Get started with RedwoodSDK and Neon](https://github.com/neondatabase/examples/tree/main/with-redwoodsdk)
+
+## Resources
+
+- [RedwoodSDK Documentation](https://docs.rwsdk.com/)
+- [Connect to a PostgreSQL database with Cloudflare Workers](https://developers.cloudflare.com/workers/tutorials/postgres/)

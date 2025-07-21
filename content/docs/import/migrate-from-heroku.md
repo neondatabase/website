@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/how-to-guides/hasura-heroku-migration
   - /docs/how-to-guides/import-from-heroku
   - /docs/import/import-from-heroku
-updatedOn: '2025-01-27T15:25:05.412Z'
+updatedOn: '2025-07-03T12:36:49.566Z'
 ---
 
 This guide describes how to import your data from Heroku Postgres to Neon.
@@ -21,12 +21,12 @@ The instructions assume that you have installed the Heroku CLI, which is used to
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click **New Project**.
 3. Specify your project settings and click **Create Project**.
-4. After creating a project, you are directed to the Neon **Dashboard**, where a connection string with your password is provided under **Connection Details**. Copy the connection string. It is required to import your data from Heroku.
+4. After creating a project, you are directed to the Neon **Dashboard**, where you can click **Connect** to find your database connection details. Copy the connection string. It is required to import your data from Heroku.
 
    The example connection string used the instructions that follow is:
 
    ```text shouldWrap
-   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    ```
 
 ## Retrieve your Heroku app name and database name
@@ -69,9 +69,9 @@ where:
 For example:
 
 ```shell shouldWrap
-$ heroku pg:pull --app thawing-wave-57227 postgresql-trapezoidal-48645 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+$ heroku pg:pull --app thawing-wave-57227 postgresql-trapezoidal-48645 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 
-heroku-cli: Pulling postgresql-trapezoidal-48645 ---> postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+heroku-cli: Pulling postgresql-trapezoidal-48645 ---> postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 
 pg_dump: last built-in OID is 16383
 pg_dump: reading extensions

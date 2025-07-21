@@ -34,6 +34,8 @@ author={{
 }}
 />
 
+<CTA title="Get $100 in credits" description="Sign up now and get $100 in credits when you upgrade." buttonText="Claim offer" buttonUrl="https://fyi.neon.tech/credits" />
+
 ## Key features
 
 ---
@@ -59,7 +61,7 @@ One Branch per PR
 Ephemeral Environments for Dev/Test
 : Deploy confidently by using branches to run your test suite on an exact copy of your production database. No handling of seed data, no manual work keeping environments in sync.
 : - [See guide in docs](/docs/use-cases/dev-test)
-: - [Read how others do it](https://neon.tech/blog/from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle)
+: - [Read how others do it](/blog/from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle)
 
 </DefinitionList>
 
@@ -100,7 +102,7 @@ If your SaaS project could benefit from multitenancy, Neon makes it simple to cr
 - **No pre-provisioning**: You can scale your architecture progressively, from a few tenants to thousands.
 - **Pay per usage**: You only pay for the tenants that are actively running.
 
-[Learn how to build this](/docs/use-cases/database-per-user)
+[Learn how to build this](/docs/guides/multitenancy)
 
 <Testimonial
 text="The ability to spawn databases that can scale down to zero is incredibly helpful and a model fits well with our one database per customer architecture"
@@ -156,11 +158,11 @@ Private Link, IP Allow
 
 <DefinitionList bulletType="check">
 Subscription plans
-: Paid plans start at $19, with compute and storage resources already included. [Review our pricing plans](https://neon.tech/pricing).
+: Paid plans start at $19, with compute and storage resources already included. [Review our pricing plans](/pricing).
 
 Pay via AWS/Azure Marketplace
 : You can subscribe to Neon via the marketplaces to consolidate billing. Click [here](https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa) for AWS, and [here](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/neon1722366567200.neon_serverless_postgres_azure_prod?tab=PlansAndPrice) for Azure.
 
 </DefinitionList>
 
-<CTA title="Next Steps" description="Sign up here to get the Free Plan plus $100 credit. Or&nbsp;<a href='/contact-sales'>talk to our team</a> if you have any questions." buttonText="Get the Free Plan + $100 Credit" buttonUrl="https://fyi.neon.tech/credits" />
+<CTA title="Next Steps" description="Start in our Free Plan and get $100 in credits when you upgrade." buttonText="Claim offer" buttonUrl="https://fyi.neon.tech/credits" />

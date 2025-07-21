@@ -1,6 +1,6 @@
 import AiIndex from 'components/pages/home/ai-index';
 import Bento from 'components/pages/home/bento';
-import Hero from 'components/pages/home/hero/hero';
+import Hero from 'components/pages/home/hero';
 import Industry from 'components/pages/home/industry';
 import InstantProvisioning from 'components/pages/home/instant-provisioning';
 import Lightning from 'components/pages/home/lightning';
@@ -21,7 +21,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: 'Neon Postgres',
-  url: 'https://neon.tech/',
+  url: 'https://neon.com/',
 };
 
 const Homepage = () => (

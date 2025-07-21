@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/cloud/tutorials
   - /docs/how-to-guides/import-an-existing-database
   - /docs/import/import-from-postgres
-updatedOn: '2025-01-09T12:42:28.913Z'
+updatedOn: '2025-06-04T16:43:36.535Z'
 ---
 
 This topic describes migrating data from one Postgres database to another using the `pg_dump` and `pg_restore`.
@@ -26,7 +26,7 @@ If you are performing this procedure to migrate data from one Neon project to an
 - Optionally, create a role in Neon to perform the restore operation. The role that performs the restore operation becomes the owner of restored database objects. For example, if you want role `sally` to own database objects, create `role` sally in Neon and perform the restore operation as `sally`.
 - If you have assigned database object ownership to different roles in your source database, read [Database object ownership considerations](#database-object-ownership-considerations). You may want to add the `-O, --no-owner` option to your `pg_restore` command to avoid errors.
 - Create the target database in Neon. For example, if you are migrating a database named `pagila`, create a database named `pagila` in Neon. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
-- Retrieve the connection string for the target Neon database. You can find it in the **Connection Details** widget on the Neon **Dashboard**. It will look something like this:
+- Retrieve the connection string for the target Neon database. You can find the connection string by clicking the **Connect** button on your **Project Dashboard**. It will look something like this:
 
   ```bash shouldWrap
   postgresql://[user]:[password]@[neon_hostname]/[dbname]
@@ -142,7 +142,7 @@ The `pg_dump` and `pg_restore` commands provide numerous advanced options, some 
 - `-j <njobs>`: Consider this option for large databases to run the restore process in parallel. Set `<njobs>` to the number of available vCPUs. Refer to the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) documentation for more information. In Neon, this option only makes sense for Neon paid plan users who can configure computes with >1 vCPU. It cannot be used together with `--single-transaction`.
 - `--single-transaction`: Forces the operation to run as an atomic transaction, which ensures that no data is left behind when a restore operation fails. Retrying an import operation after a failed attempt that leaves data behind may result in "duplicate key value" errors.
 - `--no-tablespaces`: Do not output commands to select tablespaces. See [Data migration notes](#data-migration-notes).
-- `-t <table_name>`: Allows you to restore individual tables from a custom-format database dump. Individual tables can also be imported from a CSV file. See [Import from CSV](/docs/import/migrate-from-csv).
+- `-t <table_name>`: Allows you to restore individual tables from a custom-format database dump. Individual tables can also be imported from a CSV file. See [Import from CSV](/docs/import/import-from-csv).
 
 ## Run a test migration
 
@@ -158,7 +158,7 @@ Some Postgres clients offer backup and restore capabilities. These include [pgAd
 
 ### Table-level data migration
 
-Table-level data migration (using CSV files, for example) does not preserve database schemas, constraints, indexes, types, or other database features. You will have to create these separately. Table-level migration is simple but could result in significant downtime depending on the size of your data and the number of tables. For instructions, see [Import data from CSV](/docs/import/migrate-from-csv).
+Table-level data migration (using CSV files, for example) does not preserve database schemas, constraints, indexes, types, or other database features. You will have to create these separately. Table-level migration is simple but could result in significant downtime depending on the size of your data and the number of tables. For instructions, see [Import data from CSV](/docs/import/import-from-csv).
 
 ## Data migration notes
 

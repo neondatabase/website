@@ -103,7 +103,7 @@ The following example uses the `INSERT` statement to insert a new row into the `
 
 ```sql
 INSERT INTO links (url, name)
-VALUES('https://neon.tech/postgresql','PostgreSQL Tutorial');
+VALUES('https://neon.com/postgresql','PostgreSQL Tutorial');
 ```
 
 The statement returns the following output:
@@ -131,7 +131,7 @@ Output:
 ```text
  id |                url                 |        name         | description | last_update
 ----+------------------------------------+---------------------+-------------+-------------
-  1 | https://neon.tech/postgresql | PostgreSQL Tutorial | null        | null
+  1 | https://neon.com/postgresql | PostgreSQL Tutorial | null        | null
 (1 row)
 ```
 
@@ -161,7 +161,7 @@ Output:
 ```
  id |                url                 |        name         | description | last_update
 ----+------------------------------------+---------------------+-------------+-------------
-  1 | https://neon.tech/postgresql | PostgreSQL Tutorial | null        | null
+  1 | https://neon.com/postgresql | PostgreSQL Tutorial | null        | null
   2 | http://www.oreilly.com             | O'Reilly Media      | null        | null
 (2 rows)
 ```
@@ -188,7 +188,7 @@ The following statement retrieves all data from the links table to verify the in
 ```
  id |                url                 |        name         | description | last_update
 ----+------------------------------------+---------------------+-------------+-------------
-  1 | https://neon.tech/postgresql | PostgreSQL Tutorial | null        | null
+  1 | https://neon.com/postgresql | PostgreSQL Tutorial | null        | null
   2 | http://www.oreilly.com             | O'Reilly Media      | null        | null
   3 | https://www.google.com             | Google              | null        | 2013-06-01
 (3 rows)

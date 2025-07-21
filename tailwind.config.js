@@ -24,6 +24,7 @@ module.exports = {
         DEFAULT: '#1a1a1a',
         new: '#0c0d0d',
         pure: '#000000',
+        fog: '#0d0e12',
       },
       white: '#ffffff',
       primary: {
@@ -127,6 +128,8 @@ module.exports = {
       letterSpacing: {
         tighter: '-0.04em',
         'extra-tight': '-0.02em',
+        snug: '-0.01em',
+        wide: '0.02em',
         wider: '0.04em',
       },
       boxShadow: {
@@ -140,10 +143,6 @@ module.exports = {
         'header-docs-button-border-dark':
           'radial-gradient(54.19% 83.93% at 50% 3.57%, rgba(255, 255, 255, 0.55), transparent),' +
           'linear-gradient(0deg, #303236, #303236)',
-        'subscribe-sm':
-          'linear-gradient(160deg, rgba(173, 224, 235, 0) 23%, rgba(173, 224, 235, 0.45) 50%, rgba(173, 224, 235, 0) 77%);',
-        'pricing-table-featured-column':
-          'linear-gradient(180deg, rgba(19, 20, 21, 0.80) 93%, rgba(19, 20, 21, 0) 100%);',
         'home-lightning-title':
           'radial-gradient(30.52% 57.36% at 67.98% 84.29%, #070707 8.6%, #525252 44.72%, #A7A7A7 69.37%, #FFFFFF 100%)',
         'home-lightning-title-xl':
@@ -188,6 +187,13 @@ module.exports = {
           'radial-gradient(18.96% 17.96% at 13% -1%, #C7D3FF 0%, #7995F7 8.96%, #4E5F9C 26.83%, rgba(78, 95, 156, 0) 100%),' +
           'radial-gradient(57.03% 30.65% at 100% 36.84%, #191C27 0%, rgba(25, 28, 39, 0) 100%),' +
           'linear-gradient(0deg, #141416, #141416)',
+        'subscribe-form-dark':
+          'radial-gradient(98.19% 94.16% at 96.13% 96.15%, rgba(21, 40, 40, 0.90) 0%, rgba(16, 30, 30, 0.00) 100%),' +
+          'linear-gradient(0deg, #101013, #101013)',
+        'blog-subscribe-form':
+          'linear-gradient(160deg, rgba(173, 224, 235, 0) 23%, rgba(173, 224, 235, 0.45) 50%, rgba(173, 224, 235, 0) 77%);',
+        'pricing-table-featured-column':
+          'linear-gradient(180deg, rgba(19, 20, 21, 0.80) 93%, rgba(19, 20, 21, 0) 100%);',
         'variable-list-icon-bg': 'linear-gradient(220deg, #272A35 8%, #16181D 70%)',
         'variable-list-icon-border': 'linear-gradient(224deg, #FFF 2.43%, rgba(255, 255, 255, 0))',
         'variable-value-1': 'linear-gradient(220deg, #FFFFFF 22%, #41BAB9 142%)',
@@ -211,6 +217,47 @@ module.exports = {
           'linear-gradient(100deg, rgba(33, 39, 58, 0.80) -6.09%, rgba(24, 25, 27, 0.80) 27.66%)',
         'azure-form-input-3':
           'linear-gradient(276deg, rgba(32, 48, 55, 0.80) 2.61%, rgba(24, 25, 27, 0.80) 32.96%)',
+        'serverless-apps-hero-border':
+          'linear-gradient(27deg, transparent 76%, #1B9A86 90%, #5AADBB),' +
+          'linear-gradient(0deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.10))',
+        'security-card-bg':
+          'radial-gradient(111.21% 103.81% at 1.9% 0%, rgba(19, 20, 21, 0.60) 0%, rgba(19, 20, 21, 0.00) 100%),' +
+          'linear-gradient(0deg, #0C0C0D, #0C0C0D)',
+        'security-card-link-bg':
+          'radial-gradient(43.67% 34.97% at 0.71% 0%, rgba(35, 54, 50, 0.80) 0%, rgba(19, 20, 21, 0.00) 100%),' +
+          'radial-gradient(94.73% 89.93% at 1.9% 0%, rgba(21, 33, 30, 0.80) 0%, rgba(19, 20, 21, 0.00) 100%),' +
+          'radial-gradient(111.21% 103.81% at 1.9% 0%, rgba(19, 20, 21, 0.60) 0%, rgba(19, 20, 21, 0.00) 100%),' +
+          'linear-gradient(0deg, #0C0C0D, #0C0C0D)',
+        'security-slide-icon-bg':
+          'radial-gradient(50% 50% at 50% 100%, rgba(0, 229, 153, 0.15) 0%, rgba(0, 229, 153, 0.00) 100%),' +
+          'radial-gradient(78.12% 78.13% at 50% 0%, rgba(226, 230, 235, 0.06) 0%, rgba(226, 230, 235, 0.00) 100%),' +
+          'linear-gradient(0deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.02)),' +
+          'linear-gradient(0deg, #0C0C0D, #0C0C0D)',
+        'migration-card-left-bg':
+          'radial-gradient(77.42% 74.82% at 75.59% -18.04%, rgba(38, 66, 89, 0.80) 0%, rgba(8, 20, 25, 0.00) 100%),' +
+          'radial-gradient(86.92% 83.32% at 26.62% 128.01%, rgba(1, 119, 119, 0.17) 0%, rgba(1, 119, 119, 0.00) 100%),' +
+          'linear-gradient(0deg, #0D0E12, #0D0E12)',
+        'migration-card-right-bg':
+          'radial-gradient(70.46% 67.03% at 0% -10.6%, rgba(19, 33, 45, 0.80) 14.53%, rgba(22, 33, 42, 0.00) 85.73%), linear-gradient(147deg, rgba(1, 119, 99, 0.00) 52.96%, rgba(1, 119, 99, 0.20) 138.77%)',
+        'migration-steps-slider-progress-bg':
+          'linear-gradient(90deg, rgba(36, 38, 40, 0) 0%, #242628 6.17%, #242628 78.58%, rgba(36, 38, 40, 0) 100%)',
+        'template-cta':
+          'linear-gradient(95.19deg, rgba(26, 212, 150, 0) 65.7%, rgba(47, 128, 120, 0.2) 86.63%, rgba(12, 222, 201, 0.3) 99.73%)',
+        'contact-form-bg':
+          'radial-gradient(921.66% 127.87% at 79.08% -31.9%, rgba(20, 24, 31, 0.5), rgba(20, 24, 31, 0.3) 48%, transparent)',
+        'startups-info-card-1':
+          'radial-gradient(70.46% 67.03% at 100% -10.6%, rgba(19, 33, 45, 0.80) 14.53%, rgba(22, 33, 42, 0.00) 85.73%),' +
+          'linear-gradient(213deg, rgba(1, 119, 99, 0.00) 52.96%, rgba(1, 119, 99, 0.20) 138.77%),' +
+          'linear-gradient(0deg, #0D0E12, #0D0E12)',
+        'startups-info-card-2':
+          'radial-gradient(112.22% 99.2% at -18.6% -17.8%, rgba(19, 33, 45, 0.80) 14.53%, rgba(22, 33, 42, 0.00) 85.73%),' +
+          'linear-gradient(139deg, rgba(1, 119, 99, 0.00) 52.16%, rgba(1, 119, 99, 0.20) 126.56%),' +
+          'linear-gradient(0deg, #0D0E12, #0D0E12)',
+        'startups-info-card-3':
+          'linear-gradient(76deg, rgba(1, 119, 99, 0.00) 45.97%, rgba(1, 119, 99, 0.20) 111.02%),' +
+          'linear-gradient(293deg, rgba(1, 119, 99, 0.00) 58.47%, rgba(1, 119, 99, 0.15) 118.39%),' +
+          'radial-gradient(921.66% 127.87% at 79.08% -31.9%, rgba(20, 24, 31, 0.50) 0%, rgba(20, 24, 31, 0.30) 47.96%, rgba(20, 24, 31, 0.00) 100%),' +
+          'linear-gradient(0deg, #0D0E12, #0D0E12)',
         // for deploy page
         'color-picker-variant-1': 'linear-gradient(225deg, #4CFFFF 31.6%, #00E660 74.65%);',
         'color-picker-variant-2': 'linear-gradient(225deg, #BDF471 35.94%, #00CC33 100%);',
@@ -382,7 +429,7 @@ module.exports = {
     require('tailwindcss/plugin')(({ addVariant }) => {
       addVariant('search-cancel', '&::-webkit-search-cancel-button');
     }),
-    plugin(({ matchUtilities, theme }) => {
+    plugin(({ matchUtilities, addUtilities, theme }) => {
       matchUtilities(
         {
           'border-image': (value) => ({
@@ -394,6 +441,14 @@ module.exports = {
         },
         { values: theme('backgroundImage') }
       );
+      addUtilities({
+        '.gradient-stop-opacity-40': {
+          'stop-opacity': '0.4',
+        },
+        '.gradient-stop-opacity-100': {
+          'stop-opacity': '1',
+        },
+      });
     }),
   ],
 };

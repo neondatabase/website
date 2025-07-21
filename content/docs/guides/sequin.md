@@ -3,7 +3,7 @@ title: Stream changes from your Neon database to anywhere
 subtitle: Learn how to capture and stream changes and rows from your database to
   anywhere with Sequin
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.064Z'
+updatedOn: '2025-06-30T11:30:21.916Z'
 ---
 
 Neon's Logical Replication features makes it possible to detect every change in your database. It can be used to power read-replicas and backups, but can also be used to add streaming characteristics to Neon.
@@ -48,10 +48,10 @@ logical
 
 After enabling logical replication on Neon, you'll now connect your Neon database to Sequin. Follow these steps:
 
-1. In Neon, copy your database connection string from the **Connection Details** section on the **Project Dashboard**, which will look similar to this:
+1. In Neon, copy your database connection string. You can find the it by clicking the **Connect** button on your **Project Dashboard**. It will look similar to this:
 
    ```sql shouldWrap
-   postgresql://neondb_owner:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require
+   postgresql://neondb_owner:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
    ```
 
 2. In the Sequin Console, click on the **Connect Database** button, and then auto-complete your database credentials by clicking the **Autofill with URL** button and pasting in your database connection string.
@@ -67,16 +67,12 @@ After enabling logical replication on Neon, you'll now connect your Neon databas
 4. Create a publication to indicate which tables will publish changes to the replication slot. Run the following SQL command:
 
    ```sql
-   CREATE PUBLICATION sequin_pub FOR ALL TABLES;
-   ```
-
-   This will publish changes from all tables. If you want to publish changes from specific tables only, you can use:
-
-   ```sql
    CREATE PUBLICATION sequin_pub FOR TABLE table1, table2, table3;
    ```
 
-   Defining specific tables lets you add or remove tables from the publication later, which you cannot do if you've created a publication with `FOR ALL TABLES`.
+   <Admonition type="note">
+   Defining specific tables lets you add or remove tables from the publication later, which you cannot do when creating publications with `FOR ALL TABLES`.
+   </Admonition>
 
 5. Back in the Sequin Console, enter the name of the replication slot (`sequin_slot`) and publication (`sequin_pub`) you just created. Then, name your database (e.g. `neondb`) and click **Create Database**.
 
@@ -93,17 +89,14 @@ Set up a consumer in Sequin to stream changes from your database.
 3. Define any filters for the changes you want to capture. For example, you might want to only process orders with a value greater than a certain amount, or accounts with a certain status.
 
 4. Choose whether you want your consumer to process [rows or changes](https://sequinstream.com/docs/core-concepts#rows-and-changes):
-
    - **Rows**: Captures the latest state of records when a row is inserted or updated.
    - **Changes**: Captures every `insert`, `update`, and `delete`, including `OLD` values for updates and deletes.
 
 5. Select your preferred method for [receiving changes](https://sequinstream.com/docs/core-concepts#consumption):
-
    - **HTTP Push** (Webhooks): Sequin sends changes to your specified endpoint.
    - **HTTP Pull** (similar to SQS): Your application pulls changes from Sequin.
 
 6. Enter the final details for your consumer:
-
    - Give your consumer a name (e.g., `neon-changes-consumer`).
    - If using HTTP Push, provide the endpoint URL where Sequin should send the changes. You can also provide encrypted headers.
    - Optionally, set a timeout and add an endpoint path.
@@ -119,6 +112,3 @@ You're now using Sequin with Neon to capture and stream changes from your databa
 - Use Sequin to trigger workflows in tools like Inngest or trigger.dev, activate side-effects in your app, setup audit logs, or generate denormalized views.
 - Tailor your consumer's [filtering](https://sequinstream.com/docs/core-concepts#filtering) and settings to meet your requirements.
 - Try a [pull consumer](https://sequinstream.com/docs/core-concepts#pull-consumers) with [our SDKs](https://sequinstream.com/docs/sdks) to completely manage how you retrieve changes at scale.
-- Use Sequins [observability and monitoring](https://console.sequinstream.com/consumers) to debug and keep production humming.
-
-Learn more in our [docs](https://sequinstream.com/docs/introduction). And if you need anything, Sequin is open source - just open an issue or reach out to us: <a href="mailto:founders@sequinstream.com">founders@sequinstream.com</a>.

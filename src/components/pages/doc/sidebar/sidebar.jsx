@@ -31,15 +31,14 @@ const checkSlugInActiveMenu = (currentSlug, activeMenuList, items) => {
 };
 
 // NOTE: getActiveItems builds activeMenuList
-// supports duplicates section in sidebar,
-// but only the first one will be active
 export const getActiveItems = (items, currentSlug, result = [], parents = []) => {
   const activeItem = items.find((item) => item.slug === currentSlug);
   if (activeItem) {
-    if (activeItem.items && !activeItem.section) {
+    // NOTE: save items expect sections or collapsible items
+    result.push(...parents.filter((parent) => !parent.section && !parent.collapsible));
+    if (activeItem.items && !activeItem.section && !activeItem.collapsible) {
       result.push(activeItem);
     }
-    result.push(...parents.filter((parent) => !parent.section));
     return result;
   }
 
@@ -74,7 +73,7 @@ const Sidebar = ({ className = null, sidebar, slug, basePath, customType, docPag
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSlug]);
 
-  const [menuHeight, setMenuHeight] = useState(1000);
+  const [menuHeight, setMenuHeight] = useState(2000);
   const menuWrapperRef = useRef(null);
 
   return (
@@ -107,7 +106,7 @@ const Sidebar = ({ className = null, sidebar, slug, basePath, customType, docPag
               className="no-scrollbars z-10 h-[calc(100vh-166px)] overflow-y-scroll py-8"
               ref={menuWrapperRef}
             >
-              <div className="relative w-full" style={{ height: menuHeight }}>
+              <div className="relative w-full overflow-hidden" style={{ height: menuHeight }}>
                 <Menu
                   depth={0}
                   basePath={basePath}

@@ -1,21 +1,21 @@
 ---
-title: Branching — Point-in-time restore
+title: Branching — Instant restore
 subtitle: Create a new point-in-time branch or restore your data to a previous state
   using Neon's branching feature
 enableTableOfContents: true
 redirectFrom:
   - /docs/tutorial/data-recovery
   - /docs/guides/branching-data-recovery
-updatedOn: '2024-11-06T15:22:06.335Z'
+updatedOn: '2025-06-03T18:04:26.406Z'
 ---
 
 <Admonition type="comingSoon" title="New feature: Branch restore">
 A simpler one-click branch restore operation is now available. Read more about it [here](/docs/guides/branch-restore). The restore procedure described on this page is still valid and might fit your specific use case.
 </Admonition>
 
-Neon retains a history of changes for all branches in a Neon project, which allows you to create a branch that restores data to any time within the defined history retention period. You can use this capability to recover lost data, which is a form of Point-in-time restore (PITR).
+Neon retains a history of changes for all branches in a Neon project, which allows you to create a branch that restores data to any time within the defined restore window. You can use this capability to recover lost data, which is a form of Instant restore (PITR).
 
-The history retention period is configurable. The supported limits are up to 24 hours for [Neon Free Plan](/docs/introduction/plans#free-plan) users, 7 days for [Launch](/docs/introduction/plans#launch), 14 days for [Scale](/docs/introduction/plans#scale), and 30 days for [Business](/docs/introduction/plans#business) plan users. For configuration instructions, see [Configure history retention](/docs/manage/projects#configure-history-retention).
+The restore window is configurable.The supported limits are up to 24 hours for [Neon Free Plan](/docs/introduction/plans#free-plan) users, 7 days for [Launch](/docs/introduction/plans#launch), 14 days for [Scale](/docs/introduction/plans#scale), and 30 days for [Business](/docs/introduction/plans#business) plan users. For configuration instructions, see [Configure restore window](/docs/manage/projects#configure-restore-window).
 
 This guide shows how to recover your data to a point in time before a data loss occurred using Neon's branching feature.
 
@@ -34,7 +34,7 @@ To create a point-in-time branch:
 6. Under **Include data up to**, select the **Specific date and time** option, which creates a branch with data up to the specified date and time. For example, if the data loss occurred on Nov 26, 2023 at 5:01pm, select Nov 11, 2023, at 5:00pm, just before the faulty query was run.
 
 <Admonition type="note">
-The **Specific date and time** option does not include data changes that occurred after the specified date and time, which means the branch contains data as it existed previously. You can only specify a date and time that falls within your history retention window. See [Configure history retention](/docs/manage/projects#configure-history-retention).
+The **Specific date and time** option does not include data changes that occurred after the specified date and time, which means the branch contains data as it existed previously. You can only specify a date and time that falls within your restore window. See [Configure restore window](/docs/manage/projects#configure-restore-window).
 </Admonition>
 
 7. Click **Create new branch** to create your branch.
@@ -63,7 +63,7 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
 To connect to your branch:
 
 1. In the Neon Console, select your project.
-2. On the project **Dashboard**, under **Connection Details**, select your `recovery_branch`, the database, and the role you want to connect with.
+2. Click **Connect** on the **Project Dashboard**, and select your `recovery_branch`, the database, and the role you want to connect with.
    ![Connection details widget recovery branch](/docs/guides/data_recovery_connection_details.png)
 3. Copy the connection string. A connection string includes your role name, password, compute hostname, and database name.
 4. Connect with `psql`.
@@ -109,16 +109,16 @@ To avoid changing connection details in your application, you can reassign the c
 
 1. **Remove the compute from the new branch**
 
-   For instructions, see [Delete a compute](/docs/manage/endpoints#delete-a-compute).
+   For instructions, see [Delete a compute](/docs/manage/computes#delete-a-compute).
 
 2. **Move the compute from the old default branch to the new branch**
 
-   This action is currently only supported in the Neon API. See [Update a compute with the CLI](/docs/manage/endpoints#update-a-compute-with-the-api) for instructions.
+   This action is currently only supported in the Neon API. See [Update a compute with the CLI](/docs/manage/computes#update-a-compute-with-the-api) for instructions.
 
 ## Examples
 
-- [Using Neon branching for instant point-in-time restore](https://neon.tech/blog/point-in-time-recovery). The blog post describes point-in-time restore and provides a script for creating a recovery branch, reassigning a compute, and setting the new branch as the default.
-- [Time Travel with Serverless Postgres](https://neon.tech/blog/time-travel-with-postgres). This blog post (with video) describes a data recovery example that uses Neon's branching feature, the Neon API, and a bisect script to recover lost data.
+- [Using Neon branching for instant restore](/blog/point-in-time-recovery). The blog post describes instant restore and provides a script for creating a recovery branch, reassigning a compute, and setting the new branch as the default.
+- [Time Travel with Serverless Postgres](/blog/point-in-time-recovery-in-postgres). This blog post (with video) describes a data recovery example that uses Neon's branching feature, the Neon API, and a bisect script to recover lost data.
 
 The following GitHub repositories are available for these examples:
 

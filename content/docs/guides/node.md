@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/node
   - /docs/integrations/node
-updatedOn: '2024-11-30T11:53:56.062Z'
+updatedOn: '2025-06-30T11:30:21.909Z'
 ---
 
 This guide describes how to create a Neon project and connect to it from a Node.js application. Examples are provided for using the [node-postgres](https://www.npmjs.com/package/pg) and [Postgres.js](https://www.npmjs.com/package/postgres) clients. Use the client you prefer.
@@ -16,11 +16,7 @@ The same configuration steps can be used for Express and Next.js applications.
 
 To connect to Neon from a Node.js application:
 
-1. [Create a Neon Project](#create-a-neon-project)
-2. [Create a NodeJS project and add dependencies](#create-a-nodejs-project-and-add-dependencies)
-3. [Store your Neon credentials](#store-your-neon-credentials)
-4. [Configure the Postgres client](#configure-the-postgres-client)
-5. [Run app.js](#run-appjs)
+<Steps>
 
 ## Create a Neon project
 
@@ -60,7 +56,7 @@ If you do not have one already, create a Neon project.
 
 ## Store your Neon credentials
 
-Add a `.env` file to your project directory and add your Neon connection details to it. You can find the connection details for your database in the **Connection Details** widget on the Neon **Dashboard**. Please select Node.js from the **Connection string** dropdown. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+Add a `.env` file to your project directory and add your Neon connection details to it. You can find your Neon database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Please select Node.js from the **Connection string** dropdown. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ```shell shouldWrap
 PGHOST='[neon_hostname]'
@@ -91,7 +87,9 @@ const { neon } = require('@neondatabase/serverless');
 
 const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
 
-const sql = neon(`postgresql://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?sslmode=require`);
+const sql = neon(
+  `postgresql://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?sslmode=require&channel_binding=require`
+);
 
 async function getPgVersion() {
   const result = await sql`SELECT version()`;
@@ -222,6 +220,8 @@ Run `node app.js` to view the result.
   version: 'PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit'
 }
 ```
+
+</Steps>
 
 ## Endpoint ID variable
 

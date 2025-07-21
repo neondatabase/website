@@ -3,7 +3,7 @@ title: Use Neon Postgres with Railway
 subtitle: Connect a Neon Postgres database to your Node application deployed with
   Railway
 enableTableOfContents: true
-updatedOn: '2024-10-22T15:41:04.375Z'
+updatedOn: '2025-06-30T11:30:21.913Z'
 ---
 
 [Railway](https://railway.app) is an application deployment platform that allows users to develop web applications locally, provision infrastructure and then deploy to the cloud. Railway integrates with GitHub for continuous deployment and supports a variety of programming languages and frameworks.
@@ -51,10 +51,10 @@ To follow along with this guide, you will need:
 
 ### Retrieve your Neon database connection string
 
-Log in to the Neon Console and navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
+You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
 
 ```bash
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 Keep your connection string handy for later use.

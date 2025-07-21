@@ -9,7 +9,7 @@ const Hero = ({ title, description, date, category, className = null }) => (
     <div className="flex items-center">
       <Link
         className={clsx(
-          'mr-3 rounded-[40px] px-3.5 py-2 text-xs font-semibold uppercase leading-none tracking-[0.02em] sm:text-[10px]',
+          'mr-3 rounded-[40px] px-3.5 py-2 text-xs font-semibold uppercase leading-none -tracking-extra-tight sm:text-[10px]',
           CATEGORY_COLORS[category.slug] || 'text-green-45',
           CATEGORY_BG_COLORS[category.slug] || 'bg-green-45/10'
         )}
@@ -18,13 +18,13 @@ const Hero = ({ title, description, date, category, className = null }) => (
         {category.name}
       </Link>
       <time
-        className="text-[13px] uppercase leading-none tracking-[0.02em] text-gray-new-80"
+        className="text-[13px] uppercase leading-none -tracking-extra-tight text-gray-new-80"
         dateTime={date}
       >
         {date}
       </time>
     </div>
-    <h1 className="post-title mt-3 font-title text-5xl font-medium leading-dense tracking-tighter xl:text-[44px] md:text-4xl sm:text-[32px] sm:tracking-[0.02em] xs:text-3xl">
+    <h1 className="post-title mt-3 text-5xl font-semibold leading-dense tracking-tighter xl:text-[44px] md:text-4xl sm:text-[32px] xs:text-3xl">
       {title}
     </h1>
     <p className="mt-3 text-2xl leading-snug text-gray-new-90 xl:text-xl md:text-lg">

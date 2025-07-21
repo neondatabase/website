@@ -10,27 +10,28 @@ import Cta from 'components/shared/cta';
 import Layout from 'components/shared/layout';
 import LINKS from 'constants/links';
 import { getAboutPage } from 'utils/api-pages';
-import { getGithubStars, getGithubContributors } from 'utils/get-github-data';
+import { getGitHubStars, getGitHubContributors } from 'utils/get-github-data';
 import getMetadata from 'utils/get-metadata';
 
 const AboutUsPage = async () => {
   const [gitHubStars, gitHubContributors] = await Promise.all([
-    getGithubStars(),
-    getGithubContributors(),
+    getGitHubStars(),
+    getGitHubContributors(),
   ]);
 
   const statistics = [
     {
-      number: !gitHubStars ? 13 : Math.floor(gitHubStars / 1000),
+      number: !gitHubStars ? 16 : Math.floor(gitHubStars / 1000),
       isThousands: true,
       label: 'Stars on GitHub',
     },
     {
-      number: !gitHubContributors ? 111 : gitHubContributors,
+      number: !gitHubContributors ? 130 : gitHubContributors,
       label: 'Contributors',
     },
     {
-      number: '3000',
+      number: '18',
+      isThousands: true,
       hasPlus: true,
       label: 'Databases created daily',
     },
@@ -45,6 +46,7 @@ const AboutUsPage = async () => {
       <Leadership />
       <Investors />
       <Cta
+        className="pb-[320px] pt-[350px] xl:pb-[220px] xl:pt-[270px] lg:pb-[156px] lg:pt-[200px] sm:pb-[80px] sm:pt-[180px]"
         title="Become a part of our&nbsp;team"
         description="We're looking for people who care deeply about quality to build with us."
         buttonText="View Open Roles"

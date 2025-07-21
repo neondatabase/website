@@ -2,10 +2,10 @@
 title: Create and manage Read Replicas
 subtitle: Learn how to create and manage read replicas in Neon
 enableTableOfContents: true
-updatedOn: '2024-12-13T15:45:37.368Z'
+updatedOn: '2025-06-30T11:30:21.914Z'
 ---
 
-[Read replicas](/docs/introduction/read-replicas) are supported with all Neon plans. This guide steps you through the process of creating and managing read replicas.
+[Read replicas](/docs/introduction/read-replicas) are supported with all Neon plans. The Free Plan is limited to a maximum of 3 read replica computes per project. This guide steps you through the process of creating and managing read replicas.
 
 The general purpose of read replicas is to segregate read-only work from your production database operations. This can be applied to different uses cases, such as:
 
@@ -23,6 +23,10 @@ Regardless of the application, the steps for creating, configuring, and connecti
 ## Create a read replica
 
 Creating a read replica involves adding a read replica compute to a branch. You can add a read replica compute to any branch in your Neon project using the Neon Console, [Neon CLI](/docs/reference/cli-branches#create), or [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint).
+
+<Admonition type="note">
+The Free Plan is limited to a maximum of 3 read replica computes per project.
+</Admonition>
 
 <Tabs labels={["Console", "CLI", "API"]}>
 
@@ -80,14 +84,14 @@ curl --request POST \
 
 Connecting to a read replica is the same as connecting to any branch, except you connect via a read replica compute instead of your primary read-write compute. The following steps describe how to connect to your read replica with connection details obtained from the Neon Console.
 
-1. On the Neon **Dashboard**, under **Connection Details**, select the branch, the database, and the role you want to connect with.
+1. Click the **Connect** button on your **Project Dashboard**. On the **Connect to your database modal**, select the branch, the database, and the role you want to connect with.
 1. Under **Compute**, select a **Replica**.
 1. Select a connection string or a code example from the drop-down menu and copy it. This is the information you need to connect to the read replica from your client or application.
 
    A **psql** connection string appears similar to the following:
 
    ```bash
-   postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
+   postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
    ```
 
    If you expect a high number of connections, enable the **Connection pooling** toggle to add the `-pooler` flag to the connection string or example.
@@ -127,7 +131,7 @@ In the response body for this method, read replica computes are identified by th
 
 ## Edit a read replica
 
-You can edit a read replica using the Neon Console or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) to change the [Compute size](/docs/manage/endpoints#compute-size-and-autoscaling-configuration) or [Scale to Zero](/docs/manage/endpoints#scale-to-zero-configuration) configuration.
+You can edit a read replica using the Neon Console or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) to change the [Compute size](/docs/manage/computes#compute-size-and-autoscaling-configuration) or [Scale to Zero](/docs/manage/computes#scale-to-zero-configuration) configuration.
 
 <Tabs labels={["Console", "API"]}>
 
@@ -233,11 +237,10 @@ No users action is required. The settings are synchronized automatically when yo
 If your read replicas are falling behind, follow these steps to diagnose and resolve the issue:
 
 1. **Check your replication lag metrics**  
-   Refer to [Monitoring Read Replicas](https://neon.tech/docs/guides/read-replica) for detailed instructions on how to monitor replication lag.
+   Refer to [Monitoring Read Replicas](/docs/guides/read-replica-guide#monitoring-read-replicas) for instructions on how to monitor replication lag.
 
 2. **Verify configuration alignment**  
    If replication lag is detected, ensure that the configurations for the primary and read-replica computes are aligned. Specifically, confirm that the following parameters match between your primary compute and read-replica compute:
-
    - `max_connections`
    - `max_prepared_transactions`
    - `max_locks_per_transaction`
@@ -245,7 +248,7 @@ If your read replicas are falling behind, follow these steps to diagnose and res
    - `max_worker_processes`
 
 3. **Restart read-replica computes if configurations are misaligned**  
-   If the configurations are not aligned, restart your read-replica computes to automatically update their settings. For instructions, see [Restart a Compute](https://neon.tech/docs/manage/endpoints#restart-a-compute).
+   If the configurations are not aligned, restart your read-replica computes to automatically update their settings. For instructions, see [Restart a Compute](/docs/manage/endpoints#restart-a-compute).
 
    <Admonition type="tip">
    When increasing the size of your primary read-write compute, always restart associated read replicas to ensure their configurations remain aligned.

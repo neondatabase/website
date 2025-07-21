@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/sqlalchemy
   - /docs/integrations/sqlalchemy
-updatedOn: '2024-09-24T08:34:04.216Z'
+updatedOn: '2025-07-03T12:36:49.564Z'
 ---
 
 SQLAlchemy is a Python SQL toolkit and Object Relational Mapper (ORM) that provides application developers with the full power and flexibility of SQL. This guide describes how to create a Neon project and connect to it from SQLAlchemy.
@@ -16,10 +16,7 @@ To complete the steps in this topic, ensure that you have an SQLAlchemy installa
 
 To connect to Neon from SQLAlchemy:
 
-1. [Create a Neon project](#create-a-neon-project)
-1. [Install psycopg2](#install-psycopg2)
-1. [Create the "hello neon" program](#create-the-hello-neon-program)
-1. [Create an SQLAlchemy engine for your Neon project](#create-an-sqlalchemy-engine-for-your-neon-project)
+<Steps>
 
 ## Create a Neon project
 
@@ -56,7 +53,7 @@ HOST = "@ep-cool-darkness-123456.us-east-2.aws.neon.tech"
 PORT = "5432"
 PROJECT = "dbname"
 
-conn_str = f"dbname={PROJECT} user={USERNAME} password={PASSWORD} host={HOST} port={PORT} sslmode=require"
+conn_str = f"dbname={PROJECT} user={USERNAME} password={PASSWORD} host={HOST} port={PORT} sslmode=require&channel_binding=require"
 
 conn = psycopg2.connect(conn_str)
 
@@ -65,7 +62,7 @@ with conn.cursor() as cur:
  print(cur.fetchall())
 ```
 
-You can find all of the connection details mentioned above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 <Admonition type="note">
 This example was tested with Python 3 and psycopg2 version 2.9.3.
@@ -85,23 +82,24 @@ PASSWORD = "AbC123dEf"
 HOST = "ep-cool-darkness-123456.us-east-2.aws.neon.tech"
 DATABASE = "dbname"
 
-conn_str = f'postgresql://{USERNAME}:{PASSWORD}@{HOST}/{DATABASE}?sslmode=require'
+conn_str = f'postgresql://{USERNAME}:{PASSWORD}@{HOST}/{DATABASE}?sslmode=require&channel_binding=require'
 
 engine = create_engine(conn_str)
 ```
 
-You can find all of the connection details listed above in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 For additional information about connecting from SQLAlchemy, refer to the following topics in the SQLAlchemy documentation:
 
 - [Establishing Connectivity - the Engine](https://docs.sqlalchemy.org/en/14/tutorial/engine.html)
 - [Connecting to PostgreSQL with SQLAlchemy](https://docs.sqlalchemy.org/en/14/core/engines.html#postgresql)
 
+</Steps>
+
 ## SQLAlchemy connection errors
 
 - SQLAlchemy versions prior to 2.0.33 may reuse idle connections, leading to connection errors. If this occurs, you could encounter an `SSL connection has been closed unexpectedly` error. To resolve this, upgrade to SQLAlchemy 2.0.33 or later. For more details, see the [SQLAlchemy 2.0.33 changelog](https://docs.sqlalchemy.org/en/20/changelog/changelog_20.html#change-2.0.33-postgresql).
 - If you encounter an `SSL SYSCALL error: EOF detected` when connecting to the database, this typically happens because the application is trying to reuse a connection after the Neon compute has been suspended due to inactivity. To resolve this issue, try one of the following options:
-
   - Set the SQLAlchemy `pool_recycle` parameter to a value less than or equal to the scale to zero setting configured for your compute.
   - Set the SQLAlchemy `pool_pre_ping` parameter to `true`. This ensures that your engine checks if the connection is alive before executing a query.
 

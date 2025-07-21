@@ -2,7 +2,7 @@
 title: Connect a GUI application
 subtitle: Learn how to connect a GUI application to Neon
 enableTableOfContents: true
-updatedOn: '2024-09-28T12:00:21.723Z'
+updatedOn: '2025-07-03T12:36:49.553Z'
 ---
 
 This topic describes how to connect to a Neon database from a GUI application or IDE. Most GUI applications and IDEs that support connecting to a Postgres database also support connecting to Neon.
@@ -17,9 +17,9 @@ The following details are typically required when configuring a connection:
 - role (user)
 - password
 
-You can gather these details from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you.
+You can gather these details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you.
 
-![Connection details widget](/docs/connect/connection_details.png)
+![Connection details modal](/docs/connect/connection_details.png)
 
 <Admonition type="note">
 Neon supports pooled and direct connections to the database. Use a pooled connection string if your application uses a high number of concurrent connections. For more information, see [Connection pooling](/docs/connect/connection-pooling#connection-pooling).
@@ -28,7 +28,7 @@ Neon supports pooled and direct connections to the database. Use a pooled connec
 The connection string includes the role, password, hostname, and database name.
 
 ```text
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
              ^              ^                                               ^
              |- <role>      |- <hostname>                                   |- <database>
 ```
@@ -77,7 +77,6 @@ Some applications require an Server Name Indication (SNI) workaround. Neon uses 
 | [Google Looker Studio](https://lookerstudio.google.com/)                                                                      | Requires **Enable SSL** and uploading the PEM-encoded ISRG Root X1 public root certificate issued by Let's Encrypt, which you can find here: [isrgrootx1.pem](https://letsencrypt.org/certs/isrgrootx1.pem). See [Connect to Looker Studio](https://community.neon.tech/t/connect-to-data-studio-looker-studio/299/3), in the _Neon Community_ forum.                   |
 | [Google Cloud Platform (GCP)](https://cloud.google.com/gcp)                                                                   | May require uploading the PEM-encoded ISRG Root X1 public root certificate issued by Let's Encrypt, which you can find here: [isrgrootx1.pem](https://letsencrypt.org/certs/isrgrootx1.pem).                                                                                                                                                                            |
 | [Google Colab](https://colab.research.google.com/)                                                                            | See [Use Google Colab with Neon](/docs/ai/ai-google-colab).                                                                                                                                                                                                                                                                                                             |
-| [ILLA Cloud](https://www.illacloud.com/)                                                                                      |                                                                                                                                                                                                                                                                                                                                                                         |
 | [Luna Modeler](https://www.datensen.com/data-modeling/luna-modeler-for-relational-databases.html)                             | Requires enabling the SSL/TLS option                                                                                                                                                                                                                                                                                                                                    |
 | [Metabase](https://www.metabase.com/)                                                                                         |                                                                                                                                                                                                                                                                                                                                                                         |
 | [Postico](https://eggerapps.at/postico2/)                                                                                     | SNI support since v1.5.21. For older versions, use [SNI workaround B](/docs/connect/connection-errors#b-use-libpq-keyvalue-syntax-in-the-database-field). Postico's [keep-connection-alive mechanism](https://eggerapps.at/postico/docs/v1.2/changelist.html), enabled by default, may prevent your compute from scaling to zero.                                       |
@@ -90,12 +89,16 @@ Some applications require an Server Name Indication (SNI) workaround. Neon uses 
 | [Skyvia](https://skyvia.com/)                                                                                                 | Requires setting the **SSL Mode** option to `Require`, and **SSL TLS Protocol** to 1.2. The other SSL fields are not required for **SSL Mode**: `Require`.                                                                                                                                                                                                              |
 | [Zoho Analytics](https://www.zoho.com/analytics/)                                                                             | Requires selecting **Other Cloud Services** as the Cloud Service Provider, and the **Connect directly using IP address** and **Use SSL** options when configuring a PostgreSQL connection.                                                                                                                                                                              |
 
+## Connecting from Business Intelligence (BI) tools
+
+When connecting from BI tools like Metabase, Tableau, or Power BI, we recommend using a **read replica** instead of your main database compute. BI tools often run long or resource-intensive queries, which can impact performance on your primary branch. Read replicas can scale independently and handle these workloads without affecting your main production traffic. To learn more, see [Neon read replicas](/docs/introduction/read-replicas).
+
 ## Connection issues
 
 Applications that use older client libraries or drivers that do not support Server Name Indication (SNI) may not permit connecting to Neon. If you encounter the following error, refer to [Connection errors](/docs/connect/connection-errors) for possible workarounds.
 
 ```txt shouldWrap
-ERROR: The endpoint ID is not specified. Either upgrade the Postgres client library (libpq) for SNI support or pass the endpoint ID (the first part of the domain name) as a parameter: '&options=endpoint%3D'. See [https://neon.tech/sni](https://neon.tech/sni) for more information.
+ERROR: The endpoint ID is not specified. Either upgrade the Postgres client library (libpq) for SNI support or pass the endpoint ID (the first part of the domain name) as a parameter: '&options=endpoint%3D'. See [https://neon.com/sni](/sni) for more information.
 ```
 
 <NeedHelp/>

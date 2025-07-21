@@ -179,7 +179,7 @@ CREATE TABLE posts(
    title TEXT NOT NULL,
    body TEXT,
    body_search TSVECTOR
-      GENERATED ALWAYS AS (to_tsvector(body)) STORED
+      GENERATED ALWAYS AS (to_tsvector('english',body)) STORED
 );
 ```
 
@@ -376,7 +376,7 @@ SELECT
 FROM
   posts
 WHERE
-  body @@ to_tsquery('basic | advanced');
+  to_tsvector('english', body) @@ to_tsquery('basic | advanced');
 ```
 
 Output:

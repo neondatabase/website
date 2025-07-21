@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import GitHubIcon from 'icons/github.inline.svg';
-import sendGtagEvent from 'utils/send-gtag-event';
 
 const formatStars = (starsCount) => {
   const fixedThousands = (starsCount / 1000).toFixed(1);
@@ -17,33 +16,33 @@ const formatStars = (starsCount) => {
   return `${fixedThousands}k`;
 };
 
-const GithubStarCounter = ({ className = '', isDarkTheme = false, starsCount }) => (
+const GitHubStarCounter = ({ className = '', isDarkTheme = false, starsCount, tagName }) => (
   <Link
     className={clsx(
-      'flex items-center gap-x-1.5 text-[13px] leading-none tracking-extra-tight transition-colors duration-200',
+      'flex items-center gap-x-1.5 text-sm leading-none tracking-extra-tight transition-colors duration-200',
       className,
       isDarkTheme
-        ? 'text-white hover:text-green-45'
-        : 'text-gray-new-8 hover:text-green-45 dark:text-white dark:hover:text-green-45'
+        ? 'text-gray-new-90 hover:text-green-45'
+        : 'text-gray-new-8 hover:text-green-45 dark:text-gray-new-90 dark:hover:text-green-45'
     )}
     to={LINKS.github}
     target="_blank"
     rel="noopener noreferrer"
-    onClick={() => {
-      sendGtagEvent('click_star_us_button');
-    }}
+    tagName={tagName}
+    tagText="GitHub"
   >
-    <GitHubIcon width={20} height={20} />
-    <span className="w-8 whitespace-nowrap" aria-label={`Star us on GitHub (${starsCount})`}>
+    <GitHubIcon width={18} height={18} />
+    <span className="whitespace-nowrap" aria-label={`Star us on GitHub (${starsCount})`}>
       {formatStars(starsCount)}
     </span>
   </Link>
 );
 
-export default GithubStarCounter;
+export default GitHubStarCounter;
 
-GithubStarCounter.propTypes = {
+GitHubStarCounter.propTypes = {
   className: PropTypes.string,
   isDarkTheme: PropTypes.bool,
   starsCount: PropTypes.number.isRequired,
+  tagName: PropTypes.string,
 };

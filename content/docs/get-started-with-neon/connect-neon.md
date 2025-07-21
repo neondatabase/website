@@ -2,7 +2,7 @@
 title: Connecting Neon to your stack
 subtitle: Learn how to integrate Neon into your application
 enableTableOfContents: true
-updatedOn: '2024-12-01T12:02:34.710Z'
+updatedOn: '2025-07-03T12:36:49.556Z'
 ---
 
 Using Neon as the serverless database in your tech stack means configuring connections. Whether it’s a direct connection string from your language or framework, setting environment variables for your deployment platform, connecting to ORMs like Prisma, or configuring deployment settings for CI/CD workflows, it starts with the connection.
@@ -15,7 +15,7 @@ This section provides connection string samples for various frameworks and langu
 
 ```bash
 # psql example connection string
-psql postgresql://username:password@hostname:5432/database?sslmode=require
+psql postgresql://username:password@hostname:5432/database?sslmode=require&channel_binding=require
 ```
 
 ```ini
@@ -91,7 +91,7 @@ with conn.cursor() as cur:
 conn.close()
 ```
 
-```.NET
+```csharp
 # .NET example
 
 ## Connection string
@@ -202,26 +202,26 @@ func main() {
 
 ## Obtaining connection details
 
-When connecting to Neon from an application or client, you connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the default branch of your project (`main`) or a child branch.
+When connecting to Neon from an application or client, you connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the default branch of your project (`production`) or a child branch.
 
-You can obtain the database connection details you require from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a compute, a database, and a role. A connection string is constructed for you.
+You can obtain the database connection details you require by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select a branch, a compute, a database, and a role. A connection string is constructed for you.
 
-![Connection details widget](/docs/connect/connection_details.png)
+![Connection details modal](/docs/connect/connection_details.png)
 
 Neon supports pooled and direct connections to the database. Use a pooled connection string if your application uses a high number of concurrent connections. For more information, see [Connection pooling](/docs/connect/connection-pooling#connection-pooling).
 
 A Neon connection string includes the role, password, hostname, and database name.
 
 ```text
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
-             ^    ^         ^                                               ^
-       role -|    |         |- hostname                                     |- database
+postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+             ^    ^         ^                         ^                              ^
+       role -|    |         |- hostname               |- pooler option               |- database
                   |
                   |- password
 ```
 
 <Admonition type="note">
-The hostname includes the ID of the compute, which has an `ep-` prefix: `ep-cool-darkness-123456`. For more information about Neon connection strings, see [Connection string](/docs/reference/glossary#connection-string).
+The hostname includes the ID of the compute, which has an `ep-` prefix: `ep-cool-darkness-a1b2c3d4`. For more information about Neon connection strings, see [Connection string](/docs/reference/glossary#connection-string).
 </Admonition>
 
 ## Using connection details
@@ -232,7 +232,7 @@ You can use the details from the connection string or the connection string itse
 
 ```text
 PGUSER=alex
-PGHOST=ep-cool-darkness-123456.us-east-2.aws.neon.tech
+PGHOST=ep-cool-darkness-a1b2c3d4.us-east-2.aws.neon.tech
 PGDATABASE=dbname
 PGPASSWORD=AbC123dEf
 PGPORT=5432
@@ -241,13 +241,13 @@ PGPORT=5432
 ### Variable
 
 ```text shouldWrap
-DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname"
+DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require"
 ```
 
 ### Command-line
 
 ```bash shouldWrap
-psql postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+psql postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 <Admonition type="note">
@@ -258,7 +258,7 @@ Neon requires that all connections use SSL/TLS encryption, but you can increase 
 
 ### Where do I obtain a password?
 
-It's included in your Neon connection string, which you can find on the Neon **Dashboard**, in the **Connection Details** widget.
+It's included in your Neon connection string, which you can find by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
 
 ### What port does Neon use?
 

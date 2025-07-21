@@ -2,17 +2,15 @@ import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
 
 // eslint-disable-next-line react/prop-types
-const CasesLayout = async ({ children }) => (
-  <Layout headerWithBorder burgerWithoutBorder isHeaderSticky>
-    <div className="safe-paddings flex flex-1 flex-col dark:bg-black-pure dark:text-white lg:block">
-      <Container
-        className="grid w-full flex-1 grid-cols-12 gap-x-10 pb-20 pt-10 xl:gap-x-7 lg:block lg:gap-x-5 lg:pt-4"
-        size="1344"
-      >
-        {children}
-      </Container>
-    </div>
+const FlowPage = ({ children }) => (
+  <Layout headerWithBorder isHeaderSticky withOverflowHidden>
+    <Container
+      className="w-full pb-20 pt-[88px] xl:pt-16 lg:pb-16 lg:pt-12 md:pb-14 md:pt-10"
+      size="xxs"
+    >
+      {children}
+    </Container>
   </Layout>
 );
 
-export default CasesLayout;
+export default FlowPage;

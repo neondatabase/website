@@ -1,0 +1,22 @@
+# Neon SDKs
+
+> The Neon SDKs documentation outlines the available software development kits for integrating with Neon, detailing installation, configuration, and usage instructions to facilitate seamless interaction with Neon's database services.
+
+## Source
+
+- [Neon SDKs HTML](https://neon.com/docs/reference/sdk): The original HTML version of this documentation
+
+There are several SDKs available for use with Neon. All are wrappers around the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), providing methods to programmatically manage API keys, Neon projects, branches, databases, endpoints, roles, and operations. In addition to wrapping the Neon API, the `@neondatabase/toolkit` also packages the low-latency Neon Serverless Driver, which supports SQL queries over WebSockets and HTTP.
+
+## Neon SDKs
+
+- [TypeScript SDK for the Neon API](https://neon.com/docs/reference/typescript-sdk): A Neon-supported TypeScript SDK for the Neon API
+- [Python SDK for the Neon API](https://neon.com/docs/reference/python-sdk): A Neon-supported Python SDK for the Neon API
+- [@neondatabase/toolkit](https://neon.com/docs/reference/neondatabase-toolkit): An SDK for AI Agents (and humans) that includes both the Neon TypeScript SDK and the Neon Serverless Driver
+
+## Community SDKs
+
+   **Note**: Community SDKs are not maintained or officially supported by Neon. Some features may be out of date, so use these SDKs at your own discretion. If you have questions about these SDKs, please contact the project maintainers.
+
+- [Go SDK for the Neon API](https://github.com/kislerdm/neon-sdk-go): A Go SDK for the Neon API
+- [Node.js and Deno SDK for the Neon API](https://github.com/paambaati/neon-js-sdk): A Node.js and Deno SDK for the Neon API
