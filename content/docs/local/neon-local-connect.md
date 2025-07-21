@@ -41,10 +41,12 @@ Learn more about [branching in Neon](/docs/guides/branching-intro) and [Neon Loc
 The Neon Local Connect extension is available on both marketplaces:
 
 **For VS Code:**
+
 - Open the [Neon Local Connect extension page](https://marketplace.visualstudio.com/items?itemName=databricks.neon-local-connect) in the VS Code Marketplace.
 - Click **Install**.
 
 **For Cursor, Windsurf, and other VS Code-compatible editors:**
+
 - Open the [Neon Local Connect extension page](https://open-vsx.org/extension/databricks/neon-local-connect) in the OpenVSX Registry.
 - Click **Install** or follow your editor's extension installation process.
 
