@@ -260,7 +260,7 @@ The Neon MCP Server supports streamable HTTP as an alternative to Server-Sent Ev
 ```json
 {
   "mcpServers": {
-    "sentry": {
+    "neon": {
       "command": "npx",
       "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/mcp"]
     }
