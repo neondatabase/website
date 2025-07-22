@@ -83,7 +83,7 @@ The existing `uuid_extract_timestamp()` function now supports UUIDv7 in addition
 -- Extract timestamp from a UUIDv7
 SELECT uuid_extract_timestamp(uuidv7());
 
--- Example output: 2025-06-31 12:20:49.409+00
+-- Example output: 2025-06-30 12:20:49.409+00
 ```
 
 This function returns the timestamp when the UUID was generated, allowing you to track when records were created.
