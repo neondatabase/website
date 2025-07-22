@@ -94,6 +94,17 @@ Connect to an ephemeral branch (created just for your session):
 Selecting an ephemeral branch will prompt you to create and import API key for authentication.
 </Admonition>
 
+## Create a new branch
+
+Or you can create a new persistent branch for feature development, bug fixes, or collaborative work:
+
+1. Select your organization and project
+2. Click **Create new branch...** in the branch dropdown
+3. Enter a descriptive branch name (e.g., `feature/user-authentication`, `bugfix/login-validation`)
+4. Choose the parent branch you want to branch from (e.g., `production`, `development`)
+
+The extension creates the new branch and connects you immediately. This branch persists until you manually delete it.
+
 ## Use the static connection string
 
 After connecting, find your local connection string in the extension panel. Copy it, update with your database name, and add it to your app’s `.env` or config.
