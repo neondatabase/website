@@ -11,6 +11,7 @@ The **Neon MCP Server** allows you to connect various [**Model Context Protocol 
 This guide covers the setup for the following MCP Clients:
 
 - [Claude Desktop](#claude-desktop)
+- [Claude Code](#claude-code)
 - [Cursor](#cursor)
 - [Windsurf (Codeium)](#windsurf-codeium)
 - [Cline (VS Code extension)](#cline-vs-code-extension)
@@ -91,6 +92,49 @@ You can connect to Neon MCP Server in two ways:
 </Tabs>
 
 For more, see [Get started with Neon MCP server with Claude Desktop](/guides/neon-mcp-server).
+
+## Claude Code
+
+<Tabs labels={["Remote MCP Server", "Local MCP Server"]}>
+
+<TabItem>
+
+1. Ensure you have Claude Code installed. Visit [docs.anthropic.com/en/docs/claude-code](https://docs.anthropic.com/en/docs/claude-code) for installation instructions.
+2. Open terminal and add Neon MCP with
+   ```sh
+   claude mcp add --transport http neon https://mcp.neon.tech/mcp
+   ```
+3. Start a new session of `claude` to trigger OAuth authentication flow
+4. You can also trigger authentication with `/mcp` within Claude Code.
+
+<br />
+
+If you prefer to authenticate using a Neon API key, provide `Authorization` header to `mcp add` command:
+
+```
+claude mcp add --transport http neon https://mcp.neon.tech/mcp \
+    --header "Authorization: Bearer <YOUR_NEON_API_KEY>"
+```
+
+> Replace `<YOUR_NEON_API_KEY>` with your actual Neon API key which you obtained from the [prerequisites](#prerequisites) section
+
+</TabItem>
+
+<TabItem>
+
+1. Ensure you have Claude Code installed. Visit [docs.anthropic.com/en/docs/claude-code](https://docs.anthropic.com/en/docs/claude-code) for installation instructions.
+2. Open terminal and add Neon MCP with
+
+   ```sh
+   claude mcp add neon -- npx -y @neondatabase/mcp-server-neon start "<YOUR_NEON_API_KEY"
+   ```
+
+   > Replace `<YOUR_NEON_API_KEY>` with your actual Neon API key which you obtained from the [prerequisites](#prerequisites) section
+
+3. Start new Claude Code session with `claude` command and start using Neon MCP
+
+</TabItem>
+</Tabs>
 
 ## Cursor
 
