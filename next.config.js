@@ -357,6 +357,11 @@ const defaultConfig = {
         destination: 'https://neon.new',
         permanent: false,
       },
+      {
+        source: '/docs/local/neon-local-vscode',
+        destination: '/docs/local/neon-local-connect',
+        permanent: true,
+      },
       ...docsRedirects,
       ...changelogRedirects,
     ];
