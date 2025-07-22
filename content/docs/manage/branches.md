@@ -24,18 +24,15 @@ To create a branch:
 
 1. In the Neon Console, select a project.
 2. Select **Branches**.
-3. Click **Create branch** to open the branch creation dialog.
-   ![Create branch dialog](/docs/manage/create_branch.png)
-4. Select the **Data and schema** option (the default) to create a branch with both schema and data. If you're interested in schema-only branches, see [Schema-only branches](/docs/guides/branching-schema-only).
-5. Enter a name for the branch.
-6. Select a parent branch — the branch you want to branch from.
-7. Select an **Include data up to** option to specify the data to be included in your branch.
+3. Click **New branch** to open the branch creation dialog.
+4. Specify a branch name.
+5. Select a **branch setup** option. If you're interested in schema-only branches, see [Schema-only branches](/docs/guides/branching-schema-only).
 
 <Admonition type="note">
-The **Specific date and time** and the **Specific Log Sequence Number Data** options do not include data changes that occurred after the specified date and time or LSN. You can only specify a date and time or LSN value that falls within your [restore window](/docs/manage/projects#configure-restore-window).
+When creating a branch with past data, you can only specify a date and time that falls within your [restore window](/docs/manage/projects#configure-restore-window).
 </Admonition>
 
-8. Click **Create new branch**.
+6. Click **Create new branch**.
 
    You are presented with the connection details for your new branch and directed to the **Branch** overview page where you are shown the details for your new branch.
 
@@ -57,25 +54,19 @@ To view the branches in a Neon project:
    - **Parent**: Indicates the parent from which this branch was created, helping you track your branch hierarchy.
    - **Compute hours**: Number of hours the branch's compute was active so far in the current billing period.
    - **Primary compute**: Shows the current compute size and status for the branch's compute.
-   - **Data size**: Indicates the logical data size of each branch, helping you monitor your plan's storage limit. Data size does not include history.
+   - **Data size**: Indicates the logical data size of the branch, helping you monitor your plan's storage limit. Data size does not include history.
    - **Created by**: The account or integration that created the branch.
    - **Last active**: Shows when the branch's compute was last active.
 
 1. Select a branch from the table to view details about the branch.
 
-   ![View branch details](/docs/manage/branch_details.png)
-
    Branch details shown on the branch page may include:
    - **Archive status**: This only appears if the branch was archived. For more, see [Branch archiving](/docs/guides/branch-archiving).
    - **ID**: The branch ID. Branch IDs have a `br-` prefix.
    - **Created on**: The date and time the branch was created.
-   - **Default compute hours**: The compute hours used by the default branch in the current billing period.
-   - **Non-default compute hours**: The compute hours used by the non-default branch in the current billing period.
+   - **Compute hours**: The compute hours used by the default branch in the current billing period.
    - **Data size**: The logical data size of the branch. Data size does not include history.
    - **Parent branch**: The branch from which this branch was created (only applicable to child branches).
-   - **Branching point**: The point in time, in terms of data, from which the branch was created (only applicable to child branches).
-   - **Last data reset**: The last time the branch was reset from the parent branch (only applicable to child branches). For information about the **Reset from parent** option, see [Reset from parent](/docs/guides/reset-from-parent).
-   - **Compare to parent**: For information about the **Open schema diff** option, see [Schema diff](/docs/guides/schema-diff).
 
    The branch details page also includes details about the **Computes**, **Roles & Databases**, and **Child branches** that belong to the branch. All of these objects are associated with a particular branch. For information about these objects, see:
    - [Manage computes](/docs/manage/computes#view-a-compute).
@@ -94,7 +85,7 @@ Neon permits renaming a branch, including your project's default branch. To rena
 1. In the Neon Console, select a project.
 2. Select **Branches** to view the branches for the project.
 3. Select a branch from the table.
-4. On the branch overview page, click the **Actions** drop-down menu and select **Rename**.
+4. On the branch overview page, click the **More** drop-down menu and select **Rename**.
 5. Specify a new name for the branch and click **Save**.
 
 ## Set a branch as default
@@ -106,7 +97,7 @@ To set a branch as the default branch:
 1. In the Neon Console, select a project.
 2. Select **Branches** to view the branches for the project.
 3. Select a branch from the table.
-4. On the branch overview page, click the **Actions** drop-down menu and select **Set as default**.
+4. On the branch overview page, click the **More** drop-down menu and select **Set as default**.
 5. In the **Set as default** confirmation dialog, click **Set as default** to confirm your selection.
 
 ## Set a branch as protected
@@ -118,7 +109,7 @@ To set a branch as protected:
 1. In the Neon Console, select a project.
 2. Select **Branches** to view the branches for the project.
 3. Select a branch from the table.
-4. On the branch overview page, click the **Actions** drop-down menu and select **Set as protected**.
+4. On the branch overview page, click the **More** drop-down menu and select **Set as protected**.
 5. In the **Set as protected** confirmation dialog, click **Set as protected** to confirm your selection.
 
 For details and configuration instructions, refer to our [Protected branches guide](/docs/guides/protected-branches).
@@ -172,7 +163,7 @@ To delete a branch:
 1. In the Neon Console, select a project.
 2. Select **Branches**.
 3. Select a branch from the table.
-4. On the branch overview page, click the **Actions** drop-down menu and select **Delete**.
+4. On the branch overview page, click the **More** drop-down menu and select **Delete**.
 5. On the confirmation dialog, click **Delete**.
 
 ## Check the data size

@@ -39,7 +39,7 @@ To create a database:
 1. Select **Branches** from the sidebar.
 1. Select the branch where you want to create the database.
 1. Select the **Roles** & **Databases** tab.
-1. Click **Add Database**.
+1. Click **Add database**.
 1. Enter a database name, and select a database owner.
 1. Click **Create**.
 
