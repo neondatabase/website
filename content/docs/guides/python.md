@@ -79,7 +79,7 @@ Create a file named `.env` in your project's root directory. This file will secu
     ![Connection modal](/docs/connect/connection_details.png)
 3.  Copy the connection string, which includes your password.
 4.  Add the connection string to your `.env` file as shown below.
-    ```text shouldWrap
+    ```text
     DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
     ```
 
