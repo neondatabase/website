@@ -51,6 +51,6 @@ Then \`npm run dev\` to start your dev server.
 
 #### Test your integration
 
-Go to [http://localhost:3000/handler/sign-up](http://localhost:3000/handler/sign-up) in your browser. Create a user or two, and you can them [show up immediately](#see-your-users-in-the-database) in your database.
+Go to [http://localhost:3000/handler/sign-up](http://localhost:3000/handler/sign-up) in your browser. Create a user or two, and you can see them [show up immediately](#see-your-users-in-the-database) in your database.
 `}
 />
