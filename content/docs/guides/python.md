@@ -1,8 +1,9 @@
 ---
-title: 'Connect a Python application to Neon'
-subtitle: 'Connect to a Neon database using Python with the psycopg2 or asyncpg libraries to run INSERT, SELECT, UPDATE, and DELETE statements.'
+title: Connect a Python application to Neon
+subtitle: Connect to a Neon database using Python with the psycopg2 or asyncpg libraries
+  to run INSERT, SELECT, UPDATE, and DELETE statements.
 enableTableOfContents: true
-updatedOn: '2025-07-22T00:00:00.000Z'
+updatedOn: '2025-07-22T14:51:02.373Z'
 ---
 
 This guide describes how to create a Neon project and connect to it from a Python application using popular Postgres drivers like [Psycopg (psycopg2)](https://pypi.org/project/psycopg2-binary/), a synchronous database adapter, and [asyncpg](https://pypi.org/project/asyncpg/), an asynchronous adapter for use with `asyncio`.
