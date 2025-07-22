@@ -94,7 +94,6 @@ const Post = ({
       </div>
 
       <Aside
-        isDocsIndex={isDocsIndex}
         isChangelog={isChangelog}
         enableTableOfContents={enableTableOfContents}
         tableOfContents={tableOfContents}
