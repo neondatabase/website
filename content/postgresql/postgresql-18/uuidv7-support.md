@@ -3,7 +3,7 @@ title: 'PostgreSQL 18 UUIDv7 Support'
 page_title: 'PostgreSQL 18 UUIDv7 Support - Generate Timestamp-Ordered UUIDs'
 page_description: 'In this tutorial, you will learn about PostgreSQL 18 UUIDv7 support, which allows you to generate timestamp-ordered UUIDs that improve B-tree index performance while maintaining global uniqueness.'
 ogImage: ''
-updatedOn: '2025-6-29T03:30:00+00:00'
+updatedOn: '2025-06-29T03:30:00+00:00'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 18 Asynchronous I/O'

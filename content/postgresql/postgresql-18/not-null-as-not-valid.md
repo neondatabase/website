@@ -3,7 +3,7 @@ title: 'PostgreSQL 18 NOT NULL Constraints as NOT VALID'
 page_title: 'PostgreSQL 18 NOT NULL Constraints as NOT VALID: Zero-Downtime Schema Changes'
 page_description: "In this tutorial, you will learn how to use PostgreSQL 18's new NOT NULL constraints with NOT VALID to add constraints to large tables without downtime or table scans."
 ogImage: ''
-updatedOn: '2025-6-22T09:50:00+00:00'
+updatedOn: '2025-06-22T09:50:00+00:00'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 18 OAuth Support'

@@ -3,7 +3,7 @@ title: 'PostgreSQL 18 Asynchronous I/O'
 page_title: 'PostgreSQL 18 Asynchronous I/O - Improve Read Performance'
 page_description: 'In this tutorial, you will learn about PostgreSQL 18 asynchronous I/O and how to configure it to improve read performance for your database workloads.'
 ogImage: ''
-updatedOn: '2025-6-21T08:40:00+00:00'
+updatedOn: '2025-06-21T08:40:00+00:00'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 18 New Features'
@@ -221,7 +221,6 @@ ORDER BY backend_type, pid;
 
 If your PostgreSQL server is running on Linux, you can monitor I/O activity using system tools:
 
-```bash
 ```bash
 # Monitor I/O operations (Linux)
 iostat -x 1

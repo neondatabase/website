@@ -3,7 +3,7 @@ title: 'PostgreSQL 18 Enhanced Returning'
 page_title: 'PostgreSQL 18 Enhanced Returning Clause'
 page_description: 'In this tutorial, you will learn about PostgreSQL 18 Enhanced Returning Clause, which allows you to access both old and new values in DML operations, making it easier to track changes and improve data integrity.'
 ogImage: ''
-updatedOn: '2025-6-22T09:30:00+00:00'
+updatedOn: '2025-06-22T09:30:00+00:00'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 18 UUIDv7 Support'

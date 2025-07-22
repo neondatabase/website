@@ -3,7 +3,7 @@ title: 'PostgreSQL 18 Virtual Generated Columns: Compute On-Demand'
 page_title: 'PostgreSQL 18 Virtual Generated Columns: Compute On-Demand'
 page_description: 'In this tutorial, you will learn about PostgreSQL 18 virtual generated columns, which are now the default option. These columns compute their values on-demand during query execution, saving storage space and providing automatic calculations without the overhead of stored values.'
 ogImage: ''
-updatedOn: '2025-6-29T05:50:00+00:00'
+updatedOn: '2025-06-29T05:50:00+00:00'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 18 Enhanced EXPLAIN'

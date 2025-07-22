@@ -3,7 +3,7 @@ title: 'PostgreSQL 18 OAuth Support'
 page_title: 'PostgreSQL 18 OAuth Support'
 page_description: 'PostgreSQL 18 introduces native OAuth 2.0 authentication, enabling secure token-based database connections with your existing identity providers like Google, Auth0, or enterprise SSO systems.'
 ogImage: ''
-updatedOn: '2025-6-28T01:40:00+00:00'
+updatedOn: '2025-06-28T01:40:00+00:00'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 18 Temporal Constraints'

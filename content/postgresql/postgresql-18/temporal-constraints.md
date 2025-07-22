@@ -3,7 +3,7 @@ title: 'PostgreSQL 18 Temporal Constraints'
 page_title: 'PostgreSQL 18 Temporal Constraints with WITHOUT OVERLAPS'
 page_description: 'In this tutorial, you will learn about PostgreSQL 18 Temporal Constraints, which allow you to enforce time-based data integrity using the WITHOUT OVERLAPS clause for primary keys and unique constraints, plus the PERIOD clause for foreign keys.'
 ogImage: ''
-updatedOn: '2025-6-29T04:10:00+00:00'
+updatedOn: '2025-06-29T04:10:00+00:00'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 18 Enhanced Returning'
