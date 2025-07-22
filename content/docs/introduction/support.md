@@ -54,11 +54,9 @@ The [Neon Discord Server](https://discord.gg/92vNTzKDGp) is not an official Neon
 
 Neon AI chat assistance is available to all Neon users. You can access it from these locations:
 
-- **Neon Console**: Use the **Search Docs** field above the sidebar in the [Neon console](https://console.neon.tech/app/projects)
+- **Neon Console**: Select the **Get help** option from the help menu (`?`) in the top navbar in the Neon Console.
 - **Neon documentation**: Toggle **Ask Neon AI** on the [Neon documentation](/docs/introduction) site
 - **Discord**: Join the **#gpt-help** channel on the [Neon Discord server](https://discord.gg/92vNTzKDGp)
-- **GitHub**: Install the [Neon Database Copilot extension](https://github.com/marketplace/neon-database)
-- **Visual Studio**: Use the [Neon chat for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=buildwithlayer.neon-integration-expert-15j6N) extension
 
 ![Ask Neon AI](/docs/relnotes/perplexity_mode.png)
 

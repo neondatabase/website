@@ -2,13 +2,11 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Actions from 'components/pages/doc/actions';
-import ChatOptions from 'components/pages/doc/chat-options';
 import ChangelogForm from 'components/shared/changelog-form';
 import TableOfContents from 'components/shared/table-of-contents';
 
 const Aside = ({
   isTemplate,
-  isDocsIndex,
   isChangelog,
   enableTableOfContents,
   tableOfContents,
@@ -26,7 +24,6 @@ const Aside = ({
   >
     <div className="sticky top-[136px] flex max-h-[calc(100vh-136px)] flex-col pb-5">
       {enableTableOfContents && <TableOfContents items={tableOfContents} isTemplate={isTemplate} />}
-      {isDocsIndex && <ChatOptions isSidebar />}
       {isChangelog && <ChangelogForm isSidebar />}
       {!isChangelog && !isTemplate && (
         <Actions gitHubPath={gitHubPath} withBorder={enableTableOfContents} />
@@ -37,7 +34,6 @@ const Aside = ({
 
 Aside.propTypes = {
   isTemplate: PropTypes.bool,
-  isDocsIndex: PropTypes.bool,
   isChangelog: PropTypes.bool,
   enableTableOfContents: PropTypes.bool,
   tableOfContents: PropTypes.array,
