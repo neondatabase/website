@@ -1,11 +1,12 @@
 ---
 title: Neon Auth for Next.js
-subtitle: Add authentication to your Next.js (App Router) project. Access user data directly in your Postgres database.
+subtitle: Add authentication to your Next.js (App Router) project. Access user data
+  directly in your Postgres database.
 enableTableOfContents: true
 tag: beta
 redirectFrom:
   - /docs/guides/neon-auth
-updatedOn: '2025-05-23T13:20:56.227Z'
+updatedOn: '2025-07-22T11:08:24.052Z'
 ---
 
 <InfoBlock>
