@@ -1,8 +1,9 @@
 ---
 title: Neon Local Connect Extension
 enableTableOfContents: true
-subtitle: Develop with Neon using Neon Local Connect in VS Code, Cursor, Windsurf, and other editors
-updatedOn: '2025-07-16T16:34:45.288Z'
+subtitle: Develop with Neon using Neon Local Connect in VS Code, Cursor, Windsurf, and
+  other editors
+updatedOn: '2025-07-22T13:12:50.213Z'
 ---
 
 The Neon Local Connect extension lets you connect to any Neon branch using a familiar localhost connection string. Available for VS Code, Cursor, Windsurf, and other VS Code-compatible editors, the underlying Neon Local service handles the routing, authentication, and branch management behind the scenes. Your app connects to `localhost:5432` like a local Postgres instance, but Neon Local routes traffic to your actual Neon branch in the cloud.
