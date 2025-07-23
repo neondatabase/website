@@ -217,6 +217,11 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/migration-assistance',
+        destination: '/docs/import/migrate-intro',
+        permanent: true,
+      },
+      {
         source: '/driver',
         destination: '/docs/serverless/serverless-driver',
         permanent: false,
