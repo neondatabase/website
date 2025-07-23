@@ -1,18 +1,16 @@
 ---
-title: Permissions & RBAC
-subtitle: Understanding and managing permissions in Neon Auth
+title: App/User RBAC Permissions
+subtitle: Managing permissions for your app's end users and teams
 enableTableOfContents: true
 tag: beta
 ---
 
-> Control what each user can do and access with the permission system
+> If you're looking for information about who can add or manage Neon Auth in your Neon project, see [Permissions overview](/docs/neon-auth/permissions-roles).
 
-## Permission Types
+Neon Auth supports two types of permissions for your application's users:
 
-Neon Auth supports two types of permissions:
-
-1. **Team Permissions**: Control what a user can do within a specific team
-2. **User Permissions**: Control what a user can do globally, across the entire project
+- **Team permissions** control what a user can do within a specific team
+- **User permissions** control what a user can do globally, across the entire project
 
 Both permission types can be managed from the dashboard, and both support arbitrary nesting.
 
