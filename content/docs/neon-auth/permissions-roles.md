@@ -20,6 +20,7 @@ Neon Auth has two different permission systems:
 These permissions control who can configure Neon Auth itself within your Neon organization. They're based on your Neon organization roles (Admin, Member, Collaborator).
 
 **What they control:**
+
 - Adding or removing Neon Auth from your project
 - Claiming ownership of the auth provider project (ejecting the project to Stack Auth)
 - Generating SDK keys for your application
@@ -50,6 +51,7 @@ For more information about organization roles and permissions, see [User roles a
 These permissions control what your application's end users can do once they're authenticated. They're managed through your application code using Neon Auth's RBAC system.
 
 **What they control:**
+
 - Team-based permissions (e.g., "moderator", "read_secret_info")
 - Global project permissions (e.g., "premium_access", "admin_dashboard")
 - Hierarchical permission structures
