@@ -1,3 +1,7 @@
+---
+updatedOn: '2025-07-12T14:19:52.054Z'
+---
+
 <FeatureBetaProps feature_name="Neon Auth" />
 
 Neon Auth lets you add authentication to your app in seconds — user data is synced directly to your Neon Postgres database, so you can query and join it just like any other table.
@@ -23,7 +27,7 @@ You can use these keys right away to get started, or [skip ahead](#create-users-
 ```
 
 <Admonition type="note" title="Are you a Vercel user?">
-If you're using the [Neon native integration on Vercel](https://vercel.com/marketplace/neon), the integration automatically sets these environment variables for you in Vercel when you connect a Vercel project to a Neon database. [Learn more](/docs/guides/vercel-native-integration#environment-variables-set-by-the-integration).
+If you're using the [Vercel-Managed Integration](https://vercel.com/marketplace/neon), the integration automatically sets these environment variables for you in Vercel when you connect a Vercel project to a Neon database. [Learn more](/docs/guides/vercel-managed-integration#environment-variables-set-by-the-integration).
 </Admonition>
 
 ## Set up your app

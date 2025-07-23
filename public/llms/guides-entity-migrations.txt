@@ -1,6 +1,6 @@
 # Schema migration with Neon Postgres and Entity Framework
 
-> The document outlines the process of performing schema migrations using Neon Postgres in conjunction with Entity Framework, detailing the steps necessary for Neon users to manage database schema changes effectively.
+> The document outlines the process of performing schema migrations using Neon Postgres in conjunction with Entity Framework, detailing steps for setting up and executing migrations within a Neon database environment.
 
 ## Source
 
@@ -29,7 +29,7 @@ To follow along with this guide, you will need:
 Find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. It should appear similar to the following:
 
 ```bash
-postgresql://username:password@hostname/dbname?sslmode=require
+postgresql://username:password@hostname/dbname?sslmode=require&channel_binding=require
 ```
 
 The Postgres client library we use in this guide requires the connection string to be in the following format:

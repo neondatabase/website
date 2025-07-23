@@ -1,6 +1,6 @@
 # Time Travel
 
-> The "Time Travel" documentation for Neon explains how users can access historical data states by utilizing the time travel feature, which allows querying past database versions within a specified retention period.
+> The "Time Travel" documentation for Neon details how users can access historical data states by utilizing the time travel feature, enabling precise data retrieval from specific past points.
 
 ## Source
 
@@ -117,7 +117,7 @@ Example:
 
 ```bash
 neon connetion-string main@2024-04-21T00:00:00Z
-postgresql://alex:AbC123dEf@br-broad-mouse-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&options=neon_timestamp%3A2024-04-21T00%3A00%3A00Z
+postgresql://alex:AbC123dEf@br-broad-mouse-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require&options=neon_timestamp%3A2024-04-21T00%3A00%3A00Z
 ```
 
 ### Connect directly with psql

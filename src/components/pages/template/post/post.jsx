@@ -16,7 +16,7 @@ const Post = ({
   content,
   breadcrumbs,
   currentSlug,
-  githubPath,
+  gitHubPath,
   tableOfContents,
 }) => {
   const modal = MODALS.find((modal) =>
@@ -46,7 +46,7 @@ const Post = ({
       <Aside
         className="mt-20"
         tableOfContents={tableOfContents}
-        githubPath={githubPath}
+        gitHubPath={gitHubPath}
         isTemplate
         enableTableOfContents
       />
@@ -64,7 +64,7 @@ Post.propTypes = {
   content: PropTypes.string.isRequired,
   breadcrumbs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   currentSlug: PropTypes.string.isRequired,
-  githubPath: PropTypes.string.isRequired,
+  gitHubPath: PropTypes.string.isRequired,
   tableOfContents: PropTypes.arrayOf(PropTypes.shape({})),
 };
 

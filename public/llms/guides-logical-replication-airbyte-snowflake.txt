@@ -1,6 +1,6 @@
 # Replicate data to Snowflake with Airbyte
 
-> The document titled "Replicate data to Snowflake with Airbyte" guides Neon users on setting up data replication from Neon to Snowflake using Airbyte, detailing the necessary steps and configurations for seamless data transfer.
+> The document outlines the process for Neon users to replicate data from Neon to Snowflake using Airbyte, detailing the setup and configuration steps necessary for establishing a data pipeline between these platforms.
 
 ## Source
 
@@ -148,11 +148,10 @@ Perform the following steps for each table you want to replicate data from:
    For example, given a connection string like this:
 
    ```bash
-   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    ```
 
    Enter the details in the Airbyte **Create a source** dialog as shown below. Your values will differ.
-
    - **Host**: ep-cool-darkness-123456.us-east-2.aws.neon.tech
    - **Port**: 5432
    - **Database Name**: dbname
@@ -164,7 +163,6 @@ Perform the following steps for each table you want to replicate data from:
 3. Under **Optional fields**, list the schemas you want to sync. Schema names are case-sensitive, and multiple schemas may be specified. By default, `public` is the only selected schema.
 4. Select an SSL mode. You will most frequently choose `require` or `verify-ca`. Both of these options always require encryption. The `verify-ca` mode requires a certificate. Refer to [Connect securely](https://neon.com/docs/connect/connect-securely) for information about the location of certificate files you can use with Neon.
 5. Under **Advanced**:
-
    - Select **Read Changes using Write-Ahead Log (CDC)** from available replication methods.
    - In the **Replication Slot** field, enter the name of the replication slot you created previously: `airbyte_slot`.
    - In the **Publication** field, enter the name of the publication you created previously: `airbyte_publication`.

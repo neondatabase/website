@@ -1,3 +1,3 @@
-import GithubRegistrationStep from './github-registration-step';
+import GitHubRegistrationStep from './github-registration-step';
 
-export default GithubRegistrationStep;
+export default GitHubRegistrationStep;

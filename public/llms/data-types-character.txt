@@ -1,6 +1,6 @@
 # Postgres Character data types
 
-> The document "Postgres Character data types" details the character data types available in PostgreSQL, explaining their usage and constraints within the Neon database environment.
+> The document details the character data types available in PostgreSQL, explaining their usage and constraints, specifically for Neon users managing text data within their databases.
 
 ## Source
 

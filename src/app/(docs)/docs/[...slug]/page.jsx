@@ -5,13 +5,8 @@ import Post from 'components/pages/doc/post';
 import VERCEL_URL from 'constants/base';
 import { DOCS_DIR_PATH, CHANGELOG_DIR_PATH } from 'constants/content';
 import LINKS from 'constants/links';
-import {
-  getAllPosts,
-  getAllChangelogs,
-  getNavigationLinks,
-  getPostBySlug,
-  getSidebar,
-} from 'utils/api-docs';
+import { getPostBySlug } from 'utils/api-content';
+import { getAllPosts, getAllChangelogs, getNavigationLinks, getSidebar } from 'utils/api-docs';
 import { getBreadcrumbs } from 'utils/get-breadcrumbs';
 import { getFlatSidebar } from 'utils/get-flat-sidebar';
 import getMetadata from 'utils/get-metadata';
@@ -84,7 +79,7 @@ const DocPost = async ({ params }) => {
 
   const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar, getSidebar());
   const navigationLinks = getNavigationLinks(currentSlug, flatSidebar);
-  const githubPath = isChangelogIndex ? CHANGELOG_DIR_PATH : `${DOCS_DIR_PATH}/${currentSlug}.md`;
+  const gitHubPath = isChangelogIndex ? CHANGELOG_DIR_PATH : `${DOCS_DIR_PATH}/${currentSlug}.md`;
 
   const post = getPostBySlug(currentSlug, DOCS_DIR_PATH);
   if (!isChangelogIndex && !post) return notFound();
@@ -96,7 +91,7 @@ const DocPost = async ({ params }) => {
         content={{}}
         breadcrumbs={[]}
         currentSlug={currentSlug}
-        githubPath={githubPath}
+        gitHubPath={gitHubPath}
         changelogPosts={allChangelogPosts}
         navigationLinks={navigationLinks}
         changelogActiveLabel="all"
@@ -130,7 +125,7 @@ const DocPost = async ({ params }) => {
         breadcrumbs={breadcrumbs}
         navigationLinks={navigationLinks}
         currentSlug={currentSlug}
-        githubPath={githubPath}
+        gitHubPath={gitHubPath}
         tableOfContents={tableOfContents}
         isDocsIndex={isDocsIndex}
       />

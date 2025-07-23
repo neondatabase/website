@@ -227,6 +227,16 @@ const defaultConfig = {
         permanent: false,
       },
       {
+        source: '/blog/an-apology-and-a-recap-on-may-june-stability',
+        destination: '/blog/may-june-recap',
+        permanent: false,
+      },
+      {
+        source: '/blog/recap-on-may-june-stability',
+        destination: '/blog/may-june-recap',
+        permanent: false,
+      },
+      {
         source: '/api-reference',
         destination: 'https://api-docs.neon.tech',
         permanent: true,
@@ -298,6 +308,11 @@ const defaultConfig = {
         permanent: false,
       },
       {
+        source: '/support',
+        destination: '/docs/introduction/support',
+        permanent: true,
+      },
+      {
         source: '/early-access-program',
         destination: '/docs/introduction/roadmap#join-the-neon-early-access-program',
         permanent: true,
@@ -342,6 +357,11 @@ const defaultConfig = {
         destination: 'https://neon.new',
         permanent: false,
       },
+      {
+        source: '/docs/local/neon-local-vscode',
+        destination: '/docs/local/neon-local-connect',
+        permanent: true,
+      },
       ...docsRedirects,
       ...changelogRedirects,
     ];
@@ -382,7 +402,12 @@ const defaultConfig = {
       },
       {
         source: '/demos/regional-latency',
-        destination: 'https://latency-benchmarks-dashboard.vercel.app/',
+        destination: 'https://latency-benchmarks-dashboard.vercel.app/demos/regional-latency',
+      },
+      {
+        source: '/demos/regional-latency/:path*',
+        destination:
+          'https://latency-benchmarks-dashboard.vercel.app/demos/regional-latency/:path*',
       },
       {
         source: '/dev-for-rds',

@@ -3,7 +3,7 @@ title: OpenTelemetry integration
 subtitle: Send Neon metrics and Postgres logs to any OTEL-compatible observability
   platform
 enableTableOfContents: true
-updatedOn: '2025-06-23T15:31:37.002Z'
+updatedOn: '2025-07-16T14:09:44.903Z'
 ---
 
 <FeatureBetaProps feature_name="OpenTelemetry integration" />
@@ -183,6 +183,6 @@ If your data isn't appearing in your observability platform:
 
 ## Available metrics
 
-For a complete list of metrics exported by Neon, see the [metrics reference in our Datadog integration guide](/docs/guides/datadog#available-metrics).
+For a complete list of all metrics and log fields exported by Neon, see the [Metrics and logs reference](/docs/reference/metrics-logs).
 
 <NeedHelp />

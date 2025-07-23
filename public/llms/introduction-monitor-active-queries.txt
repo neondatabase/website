@@ -1,6 +1,6 @@
 # Monitor active queries
 
-> The "Monitor active queries" document outlines the process for Neon users to track and manage currently running SQL queries within their database environments.
+> The document "Monitor active queries" details how Neon users can track and manage active database queries, offering guidance on utilizing Neon's tools for real-time query monitoring and performance assessment.
 
 ## Source
 

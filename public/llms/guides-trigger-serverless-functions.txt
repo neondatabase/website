@@ -1,6 +1,6 @@
 # Trigger serverless functions
 
-> The document "Trigger serverless functions" guides Neon users on how to configure and execute serverless functions in response to database events, detailing the integration process with external services.
+> The document outlines how to configure and use triggers in Neon to execute serverless functions, detailing the steps for integrating serverless workflows with database events.
 
 ## Source
 

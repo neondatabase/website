@@ -3,8 +3,7 @@ title: The btree_gin extension
 subtitle: Combine GIN and B-tree indexing capabilities for efficient multi-column
   queries in Postgres
 enableTableOfContents: true
-updatedOn: '2025-05-27T19:40:34.745Z'
-tag: new
+updatedOn: '2025-07-04T12:47:21.299Z'
 ---
 
 The `btree_gin` extension for Postgres provides a specialized set of **GIN operator classes** that allow common, "B-tree-like" data types to be included in **GIN indexes**. This is particularly useful for scenarios where you need to create **multicolumn GIN indexes** that combine complex data types (like arrays or JSONB) with simpler types such as integers, timestamps, or text. Ultimately, `btree_gin` helps you leverage the power of GIN for a broader range of indexing needs, optimizing queries across diverse data structures.

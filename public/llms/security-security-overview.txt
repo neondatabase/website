@@ -1,6 +1,6 @@
 # Security overview
 
-> The "Security overview" document outlines Neon's security measures, including data encryption, access controls, and compliance standards, to ensure the protection and integrity of user data within the Neon platform.
+> The "Security overview" document outlines Neon's security measures, including data encryption, access controls, and compliance standards, ensuring the protection and integrity of user data within the Neon database platform.
 
 ## Source
 

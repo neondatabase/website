@@ -1,6 +1,6 @@
 # Develop with Neon on Azure
 
-> The document "Develop with Neon on Azure" outlines the steps for setting up and integrating Neon with Microsoft Azure, enabling users to deploy and manage Neon databases within the Azure cloud environment.
+> The document "Develop with Neon on Azure" outlines the steps and configurations required to integrate and develop applications using Neon on the Azure cloud platform.
 
 ## Source
 

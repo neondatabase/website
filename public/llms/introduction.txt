@@ -1,6 +1,6 @@
 # Neon Docs
 
-> The Neon Docs serve as a comprehensive guide for users to understand and utilize Neon's cloud-native, serverless Postgres database platform, detailing its architecture, features, and usage instructions.
+> The Neon Docs offer comprehensive guidance on utilizing Neon's cloud-native, serverless PostgreSQL database, detailing setup, configuration, and management processes to optimize database operations.
 
 ## Source
 
@@ -57,5 +57,3 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 ## Join the community
 
 If you have questions about Neon or Postgres, reach out to Neon community members and developers on our [Discord Server](https://discord.com/invite/92vNTzKDGp).
-
-<CommunityBanner buttonText="Join server" buttonUrl="https://discord.gg/92vNTzKDGp" logo="discord">Welcome to the Neon Discord Server!</CommunityBanner>

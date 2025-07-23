@@ -1,6 +1,6 @@
 # Compute lifecycle
 
-> The "Compute lifecycle" document outlines the stages of compute resources in Neon, detailing their creation, operation, scaling, and termination processes within the platform.
+> The "Compute Lifecycle" document outlines the stages of compute resources in Neon, detailing how they are created, managed, and terminated within the platform's infrastructure.
 
 ## Source
 

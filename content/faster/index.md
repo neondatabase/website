@@ -67,7 +67,7 @@ Don't take our word for it. The best way to understand the performance of a serv
 
 ### Check Open Source Benchmarks
 
-Test **faster** yourself with these open-source third-party benchmarks, in addition to [Neon's open source latency benchmark](https://latency-benchmarks-dashboard.vercel.app) application:
+Test **faster** yourself with these open-source third-party benchmarks, in addition to [Neon's open source latency benchmark](/demos/regional-latency) application:
 
 - **[Vercel-to-DB Latency Benchmarks](https://db-latency.vercel.app/)** - Open source latency benchmarks written by Vercel
 - **[Postgres Library Benchmarks for Node.js](https://github.com/porsager/postgres-benchmarks#results)** - _(not Neon-specific)_ compare the different Postgres drivers.

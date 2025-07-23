@@ -5,7 +5,7 @@ isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 redirectFrom:
   - /docs/get-started-with-neon/projects
-updatedOn: '2025-07-03T12:36:49.568Z'
+updatedOn: '2025-07-22T11:19:18.887Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
@@ -28,16 +28,13 @@ To create a Neon project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Click **New Project**.
-3. Specify values for **Project Name**, **Postgres version**, **Cloud Service Provider**, and **Region**. Project names are limited to 64 characters. You can also specify **Compute size** settings when creating a project. The settings you specify become the default settings for computes that you add to your project when creating [branches](/docs/manage/branches#create-a-branch) or [read replicas](/docs/guides/read-replica-guide).
-   - Neon supports fixed-size computes and autoscaling. For more information, see [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration).
-   - The scale to zero setting determines whether a compute is automatically suspended after a period of inactivity. For more information, see [Scale to zero configuration](/docs/manage/computes#scale-to-zero-configuration).
-
+3. Specify values for **Project Name**, **Postgres version**, **Cloud service provider**, and **Region**. Project names are limited to 64 characters.
 4. Click **Create Project**.
 
-After creating a project, you are directed to the Neon Quickstart.
+After creating a project, you are directed to the **Project Dashboard**.
 
 <Admonition type="tip">
-Similar to **docs.new** for instantly creating Google Docs or **repo.new** for adding new GitHub repositories, you can use [pg.new](https://pg.new) to create a new Neon Postgres project. Simply visit [pg.new](https://pg.new) and you'll be taken directly to the **Create project** page where you can create your new project.
+You can also use [pg.new](https://pg.new) to create a new Neon Postgres project. Simply visit [pg.new](https://pg.new) and you'll be taken directly to the **Create project** page where you can create your new project.
 </Admonition>
 
 ## View projects
@@ -58,11 +55,11 @@ The **Settings** page includes these sub-pages:
 
 - **General** — Change the name of your project or copy the project ID.
 - **Compute** — Set the scale to zero and sizing defaults for any new computes you create when branching.
-- **Storage** — Choose how long Neon maintains a history of changes for all branches.
-- **Updates** — Schedule a time for Postgres and Neon updates
-- **Collaborators** — Let other users access your project's databases.
-- **Network Security** — Configure Neon's IP and Private Networking features for secure access.
-- **Logical Replication** — Enable logical replication to replicate data from your Neon project to external data services and platforms.
+- **Instant restore** — Set the restore window to enable instant restore, time travel queries, and branching from past states.
+- **Updates** — Schedule a time for Postgres and Neon updates.
+- **Collaborators** — Invite external collaborators to join your Neon project.
+- **Network security** — Configure Neon's IP and Private Networking features for secure access.
+- **Logical replication** — Enable logical replication to replicate data from your Neon project to external data services and platforms.
 - **Transfer** — Transfer your project from the current organization to another organization you are a member of.
 - **Delete** — Use with care! This action deletes your entire project and all its objects, and is irreversible.
 
@@ -73,6 +70,8 @@ On the **General** page, you are permitted to change the name of your project or
 ### Change your project's default compute settings
 
 You can change your project's default compute settings on the **Compute** page. These settings determine the compute resources allocated to any new branches or read replicas you create.
+
+![default_compute_settings](/docs/manage/default_compute_settings.png)
 
 <Admonition type="important">
 Changes to default compute settings only affect **newly created computes**. Existing computes, including those on your primary branch and read replicas, will not be automatically updated. To change settings for existing computes, you need to update them individually through the **Branches** page.
@@ -103,17 +102,13 @@ Also note that adjusting the restore window affects _all_ branches in your proje
 To configure the restore window for a project:
 
 1. Select a project in the Neon Console.
-2. On the Neon **Dashboard**, select **Settings**.
-3. Select **Storage**.
-   ![Restore window configuration](/docs/manage/history_retention.png)
+2. On your **Project Dashboard**, select **Settings**.
+3. Select **Restore window**.
+   ![Restore window configuration](/docs/manage/instant_restore_setting.png)
 4. Use the slider to select the restore window.
 5. Click **Save**.
 
-For more information about available plan limits, see [Neon plans](/docs/introduction/plans).
-
-<Admonition type="note">
-The Storage page also outlines Neon **Archive storage**** policy, if applicable to your Neon plan. For more information on this topic, see [Branch archiving](/docs/guides/branch-archiving).
-</Admonition>
+For more information about plan limits, see [Neon plans](/docs/introduction/plans).
 
 ### Schedule updates for your project
 
@@ -121,7 +116,7 @@ To keep your Neon computes and Postgres instances up to date, Neon automatically
 
 On the Free Plan, updates are automatically scheduled. On paid plans, you can set a preferred day and time for updates. Restarts occur within your selected time window and take only a few seconds.
 
-To set your update schedule or view currently scheduled updates:
+To set your project's update schedule or view currently scheduled updates:
 
 1. Go to **Settings** > **Updates**.
 1. Choose a day of the week and an hour. Updates will occur within this time window and take only a few seconds.
@@ -139,7 +134,7 @@ Organization members cannot be added as collaborators to organization-owned proj
 To invite collaborators to a Neon project:
 
 1. In the Neon Console, select a project.
-1. Select **Project settings**.
+1. Select **Settings**.
 1. Select **Collaborators**.
 1. Select **Invite** and enter the email address of the account you want to collaborate with.
 1. Click **Invite**.
@@ -169,11 +164,11 @@ Neon projects provisioned on AWS support both [IPv4](https://en.wikipedia.org/wi
 To configure an allowlist:
 
 1. Select a project in the Neon Console.
-2. On the Neon **Dashboard**, select **Settings**.
-3. Select **Network Security**.
+2. On the **Project Dashboard**, select **Settings**.
+3. Select **Network security**.
    ![IP Allow configuration](/docs/manage/ip_allow.png)
 4. Under **IP Allow**, specify the IP addresses you want to permit. Separate multiple entries with commas.
-5. Optionally, select **Restrict IP Access to protected branches only** to restrict access to only the branches you have designated as protected.
+5. Optionally, under **Branch access**, select **Restrict IP Access to protected branches only** to restrict access to only the branches you have designated as protected.
 6. Click **Save changes**.
 
 </TabItem>
@@ -293,11 +288,11 @@ To remove an IP configuration entirely to go back to the default "no IP restrict
 <TabItem>
 
 1. Select a project in the Neon Console.
-2. On the Neon **Dashboard**, select **Settings**.
+2. On the **Project Dashboard**, select **Settings**.
 3. Select **IP Allow**.
 4. Clear the **Allowed IP addresses and ranges** field.
-5. If applicable, clear the **Apply to default branch only** checkbox.
-6. Click **Apply changes**.
+5. If applicable, clear the **Restrict IP Access to protected branches only** checkbox.
+6. Click **Save changes**.
 
 </TabItem>
 
@@ -341,7 +336,7 @@ curl -X PATCH \
 
 ### Enable logical replication
 
-Logical replication enables replicating data from your Neon databases to a variety of external destinations, including data warehouses, analytical database services, messaging platforms, event-streaming platforms, and external Postgres databases.
+Logical replication lets you replicate data changes from Neon to external data services and platforms, including data warehouses, analytical database services, messaging platforms, event-streaming platforms, and external Postgres databases.
 
 <Admonition type="important">
 Enabling logical replication modifies the PostgreSQL `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, meaning that active connections will be dropped and have to reconnect.
@@ -350,8 +345,8 @@ Enabling logical replication modifies the PostgreSQL `wal_level` configuration p
 To enable logical replication in Neon:
 
 1. Select your project in the Neon Console.
-2. On the Neon **Dashboard**, select **Settings**.
-3. Select **Logical Replication**.
+2. On the **Project Dashboard**, select **Settings**.
+3. Select **Logical replication**.
 4. Click **Enable** to enable logical replication.
 
 You can verify that logical replication is enabled by running the following query:
@@ -373,13 +368,11 @@ To delete a project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select the project that you want to delete.
-3. Select **Project settings**.
+3. Select **Settings**.
 4. Select **Delete**.
-5. Click **Delete project.**
-6. On the confirmation dialog, click **Delete**.
 
 <Admonition type="important">
-If you are any of Neon's paid plans, such as our Launch or Scale plan, deleting all your Neon projects won't stop monthly billing. To avoid charges, you also need to downgrade to the Free plan. You can do so from the [Billing](https://console.neon.tech/app/billing#change_plan) page in the Neon Console.
+If you are any of Neon's paid plans, deleting all your Neon projects won't stop monthly billing. To avoid charges, you also need to downgrade to the Free plan. You can do so from the [Billing](https://console.neon.tech/app/billing#change_plan) page in the Neon Console.
 </Admonition>
 
 ## Manage projects with the Neon API

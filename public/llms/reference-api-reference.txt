@@ -1,6 +1,6 @@
 # Neon API
 
-> The Neon API documentation outlines the endpoints and methods for interacting with Neon's database management services, enabling users to programmatically manage databases, branches, and compute resources within the Neon platform.
+> The Neon API documentation outlines the endpoints and methods for interacting programmatically with Neon databases, enabling users to manage database instances, configurations, and operations through HTTP requests.
 
 ## Source
 

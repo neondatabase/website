@@ -1,6 +1,6 @@
 # Media storage with Uploadcare
 
-> The document "Media storage with Uploadcare" guides Neon users on integrating Uploadcare for efficient media storage and management within their applications.
+> The document outlines how to integrate Uploadcare with Neon for efficient media storage, detailing configuration steps and API usage to manage and store media files within Neon's infrastructure.
 
 ## Source
 

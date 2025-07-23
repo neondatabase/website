@@ -1,6 +1,6 @@
 # The pg_uuidv7 extension
 
-> The document details the pg_uuidv7 extension for Neon, which facilitates the generation of UUID version 7 identifiers within PostgreSQL databases.
+> The document details the pg_uuidv7 extension for Neon, which facilitates the generation and management of UUID version 7 identifiers within the database environment.
 
 ## Source
 

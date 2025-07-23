@@ -1,6 +1,6 @@
 # Migrate from MySQL to Neon Postgres
 
-> The document "Migrate from MySQL to Neon Postgres" outlines the step-by-step process for transferring databases from MySQL to Neon Postgres, detailing the necessary tools and commands for a successful migration.
+> The document outlines the process for migrating databases from MySQL to Neon Postgres, detailing the necessary steps and tools required to facilitate a smooth transition within the Neon environment.
 
 ## Source
 
@@ -38,13 +38,13 @@ Keep your MySQL database connection details handy for later use.
 Log in to the Neon Console. Find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
 
 ```bash
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 Now, modify the connection string as follows to pass your **endpoint ID** (`ep-cool-darkness-123456` in this example) to Neon with your password using the `endpoint` keyword, as shown here:
 
 ```bash
-postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
    **Note**: Passing the `endpoint ID` with your password is a required workaround for some Postgres drivers, including the one used by `pgloader`. For more information about this workaround and why it's required, refer to our [connection workaround](https://neon.com/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field) documentation.
@@ -67,8 +67,8 @@ Here's how you can set up `pgloader` for your database migration:
 
    ```plaintext
    load database
-     from mysql://user:password@host/source_db?sslmode=require
-     into postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require;
+    from mysql://user:password@host/source_db?sslmode=require
+    into postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require;
    ```
 
 ## Run the migration with pgloader
@@ -116,7 +116,7 @@ The following configuration file and Docker command were verified to work with D
 
 ```plaintext
 load database
-  from mysql://user:password@host/source_db?sslmode=require
+  from mysql://user:password@host/source_db?sslmode=require&channel_binding=require
   into postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=allow;
 ```
 

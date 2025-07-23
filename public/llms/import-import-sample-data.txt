@@ -1,6 +1,6 @@
 # Postgres sample data
 
-> The document titled "Postgres sample data" guides Neon users on how to import sample data into a Neon Postgres database using SQL commands and provides example datasets for testing and development purposes.
+> The document outlines the process for importing sample data into a Neon PostgreSQL database, detailing steps to download and load predefined datasets to facilitate testing and development within the Neon environment.
 
 ## Source
 
@@ -21,7 +21,7 @@ This guide describes how to download and install sample data for use with Neon.
 
 ## Sample data
 
-Sample datasets are listed in order of the smallest to largest installed size. Please be aware that the Neon Free Plan has a storage limit of 3 GB per branch. Datasets larger than 3 GB cannot be loaded on the Free Plan.
+Sample datasets are listed in order of the smallest to largest installed size. Please be aware that the Neon Free Plan has a storage limit of 500 MB per branch. Datasets larger than 500 MB cannot be loaded on the Free Plan.
 
 | Name                                                        | Tables | Records  | Source file size | Installed size |
 | ----------------------------------------------------------- | ------ | -------- | ---------------- | -------------- |
@@ -526,7 +526,6 @@ To load sample data:
    Alternatively, supply your own data file.
 
 2. Load the data using one of the following Neon CLI commands ([projects](https://neon.com/docs/reference/cli-projects), [branches](https://neon.com/docs/reference/cli-branches), or [connection-string](https://neon.com/docs/reference/cli-connection-string)):
-
    - Create a new Neon project, connect to it with `psql`, and run the `.sql` file.
 
      ```bash

@@ -1,6 +1,6 @@
 # Secure your data with Stytch and Neon RLS
 
-> The document outlines how to integrate Stytch with Neon to implement Row-Level Security (RLS) for enhanced data security, detailing the steps to configure authentication and authorization within a Neon database environment.
+> The document outlines how to integrate Stytch with Neon to implement Row-Level Security (RLS), enabling users to secure their data by controlling access at the row level within a Neon database.
 
 ## Source
 

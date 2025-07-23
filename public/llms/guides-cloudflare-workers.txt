@@ -1,6 +1,6 @@
 # Use Neon with Cloudflare Workers
 
-> The document outlines the steps for integrating Neon with Cloudflare Workers, detailing how to configure and deploy a serverless application using Neon's database services within the Cloudflare environment.
+> The document explains how to integrate Neon with Cloudflare Workers, detailing the steps to set up a serverless PostgreSQL database connection using Neon's platform within Cloudflare's serverless environment.
 
 ## Source
 
@@ -54,7 +54,7 @@ Navigate to your **Project Dashboard** in the Neon Console and click **Connect**
 Your pooled connection string should look similar to this:
 
 ```bash
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 Keep your connection string handy for later use.

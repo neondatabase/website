@@ -1,6 +1,6 @@
 # Postgres now() function
 
-> The document explains the usage of the Postgres `now()` function within Neon, detailing how it retrieves the current date and time in the context of a Neon database session.
+> The document details the usage of the Postgres `now()` function, explaining how it retrieves the current date and time in the context of Neon databases.
 
 ## Source
 

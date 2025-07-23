@@ -1,6 +1,6 @@
 # Use Neon with Koyeb
 
-> The document outlines the steps for integrating Neon with Koyeb, detailing how to deploy a Neon database on Koyeb's serverless platform using a step-by-step guide.
+> The document outlines the steps for integrating Neon with Koyeb, detailing how to deploy a Neon database and connect it to applications hosted on the Koyeb platform.
 
 ## Source
 

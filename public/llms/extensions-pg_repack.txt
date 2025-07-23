@@ -1,6 +1,6 @@
 # The pg_repack extension
 
-> The document details the installation and usage of the pg_repack extension in Neon, enabling users to reorganize tables and indexes in PostgreSQL databases without significant downtime.
+> The document details the pg_repack extension for Neon, which enables users to reorganize tables and indexes in PostgreSQL databases without requiring downtime.
 
 ## Source
 

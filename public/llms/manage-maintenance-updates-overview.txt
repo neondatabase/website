@@ -1,6 +1,6 @@
 # Maintenance & updates overview
 
-> The "Maintenance & updates overview" document outlines the procedures and schedules for performing maintenance and updates on Neon databases, ensuring system reliability and security for users.
+> The "Maintenance & updates overview" document outlines the procedures and schedules for maintaining and updating Neon databases, detailing the processes to ensure system reliability and performance.
 
 ## Source
 

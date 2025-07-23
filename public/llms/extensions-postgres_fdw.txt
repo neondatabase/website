@@ -1,6 +1,6 @@
 # The postgres_fdw extension
 
-> The document details the setup and usage of the postgres_fdw extension in Neon, enabling users to create foreign tables that allow access to data stored in external PostgreSQL databases.
+> The document explains how to use the postgres_fdw extension in Neon to enable foreign data wrapper functionality, allowing users to access and manipulate data stored in external PostgreSQL databases.
 
 ## Source
 

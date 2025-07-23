@@ -196,10 +196,10 @@
 - [Neon Guides - nuxt](https://neon.com/llms/guides-nuxt.txt): Learn how to make server-side queries to Postgres using Nitro API routes
 - [Neon Guides - oauth-integration](https://neon.com/llms/guides-oauth-integration.txt): Guide for Neon OAuth integration
 - [Neon Guides - outerbase](https://neon.com/llms/guides-outerbase.txt): Connect Outerbase to your Neon project with the Neon Outerbase integration
-- [Neon Guides - partner-consumption-limits](https://neon.com/llms/guides-partner-consumption-limits.txt): Learn how to set consumption limits per project with the Neon API
-- [Neon Guides - partner-consumption-metrics](https://neon.com/llms/guides-partner-consumption-metrics.txt): Learn how to get a variety of consumption metrics using the Neon API
-- [Neon Guides - partner-get-started](https://neon.com/llms/guides-partner-get-started.txt): Learn the essentials and key steps for integrating with Neon
-- [Neon Guides - partner-intro](https://neon.com/llms/guides-partner-intro.txt): Learn how to integrate your platform or service with Neon
+- [Neon Guides - consumption-limits](https://neon.com/llms/guides-consumption-limits.txt): Learn how to set consumption limits per project with the Neon API
+- [Neon Guides - consumption-metrics](https://neon.com/llms/guides-consumption-metrics.txt): Learn how to get a variety of consumption metrics using the Neon API
+- [Neon Guides - platform-integration-get-started](https://neon.com/llms/guides-platform-integration-get-started.txt): Learn the essentials and key steps for integrating with Neon
+- [Neon Guides - platform-integration-intro](https://neon.com/llms/guides-platform-integration-intro.txt): Learn how to integrate your platform or service with Neon
 - [Neon Guides - phoenix](https://neon.com/llms/guides-phoenix.txt): Set up a Neon project in seconds and connect from Phoenix
 - [Neon Guides - prisma-migrations](https://neon.com/llms/guides-prisma-migrations.txt): Set up Neon Postgres and run migrations for your Javascript project using
 - [Neon Guides - prisma](https://neon.com/llms/guides-prisma.txt): Learn how to connect to Neon from Prisma

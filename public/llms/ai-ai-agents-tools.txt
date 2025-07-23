@@ -1,6 +1,6 @@
 # Ship faster with AI tools
 
-> The document "Ship faster with AI tools" outlines how Neon users can leverage AI agents and tools to streamline and accelerate their development and deployment processes within the Neon platform.
+> The document "Ship faster with AI tools" outlines how Neon users can leverage AI agents and tools to accelerate development processes and improve efficiency within the Neon database environment.
 
 ## Source
 

@@ -1,6 +1,6 @@
 # Postgres json_each() function
 
-> The document explains the usage of the Postgres `json_each()` function in Neon, detailing how it expands the JSON object into a set of key-value pairs, facilitating data manipulation within JSON data types.
+> The document details the usage of the Postgres `json_each()` function within Neon, explaining how it expands JSON objects into a set of key-value pairs, facilitating data manipulation and retrieval.
 
 ## Source
 

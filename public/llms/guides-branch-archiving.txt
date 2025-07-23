@@ -1,6 +1,6 @@
 # Branch archiving
 
-> The "Branch archiving" document explains how Neon users can archive inactive branches to optimize resource usage and manage storage efficiently within the Neon database platform.
+> The "Branch Archiving" documentation outlines the process for archiving inactive branches in Neon, detailing steps to manage storage efficiently by preserving branch data without active maintenance.
 
 ## Source
 
@@ -103,7 +103,7 @@ The Neon CLI [branches list](https://neon.com/docs/reference/cli-branches#list) 
       ┌───────────────────────────┬──────┬─────────┬───────────────┬──────────────────────┐
       │ Id                        │ Name │ Default │ Current State │ Created At           │
       ├───────────────────────────┼──────┼─────────┼───────────────┼──────────────────────┤
-      │ br-muddy-firefly-a7kzf0d4 │ production │ true    │ ready         │ 2024-10-30T14:59:57Z │
+      │ br-muddy-firefly-a7kzf0d4 │ main │ true    │ ready         │ 2024-10-30T14:59:57Z │
       └───────────────────────────┴──────┴─────────┴───────────────┴──────────────────────┘
       ```
 

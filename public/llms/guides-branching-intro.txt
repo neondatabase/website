@@ -1,6 +1,6 @@
 # Get started with branching
 
-> The document "Get started with branching" guides Neon users through the process of creating and managing database branches, enabling parallel development and testing environments within the Neon platform.
+> This document introduces Neon users to the branching feature, detailing how to create and manage branches within their database environments to facilitate development workflows.
 
 ## Source
 
@@ -30,7 +30,7 @@ Integrate branching into your CI/CD pipelines and workflows with the Neon API, C
 
 Create a branch for each preview deployment with the Neon Postgres Previews Integration.
 
-- [The Neon Postgres Previews Integration](https://neon.com/docs/guides/vercel-previews-integration): Connect your Vercel project and create a branch for each preview deployment
+- [The Neon-Managed Vercel Integration](https://neon.com/docs/guides/neon-managed-vercel-integration): Connect your Vercel project and create a branch for each preview deployment
 - [Preview deployments with Vercel](https://neon.com/blog/neon-vercel-integration): Blog: Read about full-stack preview deployments using the Neon Vercel Integration
 - [A database for every preview](https://neon.com/blog/branching-with-preview-environments): Blog: A database for every preview environment with GitHub Actions and Vercel
 

@@ -1,6 +1,6 @@
 # Manage databases
 
-> The "Manage databases" document outlines procedures for creating, deleting, and managing databases within the Neon platform, detailing specific commands and configurations necessary for effective database administration.
+> The "Manage databases" documentation guides Neon users through the processes of creating, configuring, and managing databases within the Neon platform, detailing specific commands and settings for effective database administration.
 
 ## Source
 
@@ -85,12 +85,7 @@ The `jq` option specified in each example is an optional third-party tool that f
 
 A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](https://neon.com/docs/manage/api-keys#create-an-api-key). In the cURL examples below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
----
-updatedOn: '2024-12-13T21:17:10.768Z'
----
-
-   **Note**: To learn more about the types of API keys you can create — personal, organization, or project-scoped — see [Manage API Keys](https://neon.com/docs/manage/api-keys).
-
+**Note**: To learn more about the types of API keys you can create — personal, organization, or project-scoped — see [Manage API Keys](https://neon.com/docs/manage/api-keys).
 ### Create a database with the API
 
 The following Neon API method creates a database. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranchdatabase).

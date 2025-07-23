@@ -1,6 +1,6 @@
 # Simplify RLS with Drizzle
 
-> The document "Simplify RLS with Drizzle" guides Neon users on implementing Row-Level Security (RLS) using the Drizzle ORM, detailing the setup and configuration process specific to Neon's database environment.
+> This document explains how to implement Row-Level Security (RLS) in Neon using Drizzle, detailing the steps to configure and manage RLS policies effectively within the Neon database environment.
 
 ## Source
 

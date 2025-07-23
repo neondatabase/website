@@ -5,7 +5,7 @@ import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import autoscaling from 'icons/ai/autoscaling.svg';
 import cycle from 'icons/ai/cycle.svg';
-import perfomance from 'icons/ai/perfomance.svg';
+import performance from 'icons/ai/performance.svg';
 import pgvector from 'icons/ai/pgvector.svg';
 import robot from 'icons/ai/robot.svg';
 import search from 'icons/ai/search.svg';
@@ -43,7 +43,7 @@ const ITEMS = [
     title: 'Performance & Storage',
     description:
       'Optimize and manage your AI workloads with Neon’s storage and&nbsp;autoscaling solutions.',
-    icon: perfomance,
+    icon: performance,
   },
 ];
 

@@ -1,6 +1,6 @@
 # Postgres compatibility
 
-> The "Postgres compatibility" document outlines the compatibility features and limitations of Neon with PostgreSQL, detailing supported extensions, functions, and data types to ensure seamless integration and operation within Neon's database environment.
+> The document outlines Neon's compatibility with PostgreSQL, detailing supported features, extensions, and any limitations or differences to ensure seamless integration and functionality for users transitioning from PostgreSQL to Neon.
 
 ## Source
 
@@ -26,7 +26,7 @@ Roles created in Neon with SQL syntax, from a command-line tool like `psql` or t
 
 Neon roles cannot install Postgres extensions other than those supported by Neon.
 
-<a id="default-parameters/"></a>
+
 
 ## Postgres parameter settings
 

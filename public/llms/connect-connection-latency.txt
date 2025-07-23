@@ -1,6 +1,6 @@
 # Connection latency and timeouts
 
-> The "Connection latency and timeouts" document explains how to manage and troubleshoot connection latency and timeout issues specific to Neon databases, detailing configuration settings and best practices for optimizing database connectivity.
+> The document outlines the factors affecting connection latency and timeouts in Neon, detailing how to measure and optimize these parameters for improved database performance.
 
 ## Source
 
@@ -200,7 +200,7 @@ Here's a comparison of connection times with and without the `sslnegotiation=dir
 **Without sslnegotiation=direct:**
 
 ```bash
-$ time psql "postgresql://neondb_owner@your-neon-endpoint/neondb?sslmode=require" -c "SELECT version();"
+$ time psql "postgresql://neondb_owner@your-neon-endpoint/neondb?sslmode=require&channel_binding=require" -c "SELECT version();"
                                                 version
 ---------------------------------------------------------------------------------------------------------
 PostgreSQL 16.4 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
@@ -214,7 +214,7 @@ sys     0m0.000s
 **With sslnegotiation=direct:**
 
 ```bash
-$ time psql "postgresql://neondb_owner@your-neon-endpoint/neondb?sslmode=require&sslnegotiation=direct" -c "SELECT version();"
+$ time psql "postgresql://neondb_owner@your-neon-endpoint/neondb?sslmode=require&channel_binding=require&sslnegotiation=direct" -c "SELECT version();"
                                                 version
 ---------------------------------------------------------------------------------------------------------
 PostgreSQL 17.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
@@ -238,7 +238,7 @@ With the right strategies, you can optimize your system to handle connection lat
 ## Related resources
 
 - [Benchmarking latency in Neon's serverless Postgres](https://neon.com/docs/guides/benchmarking-latency) - Learn how to measure and optimize query latency in your Neon database
-- [Neon latency benchmarks dashboard](https://latency-benchmarks-dashboard.vercel.app) - Interactive dashboard showing real-world latency measurements across different regions and workloads ([source code](https://github.com/neondatabase-labs/latency-benchmarks))
+- [Neon latency benchmarks dashboard](https://neon.com/demos/regional-latency) - Interactive dashboard showing real-world latency measurements across different regions and workloads ([source code](https://github.com/neondatabase-labs/latency-benchmarks))
 - [Connection pooling guide](https://neon.com/docs/connect/connection-pooling) - Reduce latency with efficient connection management
 - [Regional deployment options](https://neon.com/docs/introduction/regions) - Choose the optimal region for lowest latency
 - [Ship faster with Postgres](https://neon.tech/faster) - Explore examples and case studies demonstrating rapid development workflows

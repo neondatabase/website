@@ -1,6 +1,6 @@
 # Sample project billing
 
-> The "Sample project billing" document outlines the billing process for Neon users, detailing how charges are calculated and providing examples of billing scenarios within the Neon platform.
+> The "Sample project billing" document outlines the billing process for Neon users, detailing how charges are calculated and providing examples of billing scenarios to help users understand their project costs.
 
 ## Source
 

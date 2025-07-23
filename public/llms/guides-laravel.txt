@@ -1,6 +1,6 @@
 # Connect from Laravel to Neon
 
-> The document "Connect from Laravel to Neon" outlines the steps for configuring a Laravel application to connect to a Neon database, detailing necessary environment variables and database settings specific to Neon's platform.
+> This document guides Neon users on configuring and connecting a Laravel application to a Neon database, detailing the necessary steps and settings for seamless integration.
 
 ## Source
 

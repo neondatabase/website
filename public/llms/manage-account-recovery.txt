@@ -1,6 +1,6 @@
 # Account Recovery
 
-> The "Account Recovery" document outlines the procedures for Neon users to regain access to their accounts, detailing steps for resetting passwords and recovering accounts through email verification.
+> The "Account Recovery" documentation outlines the procedures for Neon users to regain access to their accounts, detailing steps for resetting passwords and recovering accounts through email verification.
 
 ## Source
 

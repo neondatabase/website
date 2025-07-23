@@ -1,6 +1,6 @@
 # AI Rules and Prompts
 
-> The "AI Rules and Prompts" document outlines guidelines and examples for creating effective AI prompts within the Neon platform, assisting users in leveraging AI capabilities for database management tasks.
+> The "AI Rules and Prompts" document outlines guidelines and examples for creating effective AI prompts within the Neon platform, ensuring consistent and accurate AI-driven interactions.
 
 ## Source
 

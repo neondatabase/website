@@ -1,6 +1,6 @@
 # Postgres lower() function
 
-> The document explains the usage of the Postgres `lower()` function within Neon, detailing how it converts a string to lowercase, and includes syntax, examples, and considerations specific to Neon's database environment.
+> The document explains the usage of the Postgres `lower()` function in Neon, detailing how it converts text to lowercase within the database environment.
 
 ## Source
 

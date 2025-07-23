@@ -3,7 +3,7 @@ const sharedMdxComponents = {
   NeedHelp: 'shared-content/need-help',
   NewPricing: 'shared-content/new-pricing',
   LRNotice: 'shared-content/lr-notice',
-  ComingSoon: 'shared-content/comingSoon',
+  ComingSoon: 'shared-content/coming-soon',
   EarlyAccess: 'shared-content/early-access',
   PrivatePreview: 'shared-content/private-preview',
   PublicPreview: 'shared-content/public-preview',

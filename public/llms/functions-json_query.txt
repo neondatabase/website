@@ -1,6 +1,6 @@
 # Postgres JSON_QUERY() Function
 
-> The document explains the usage of the Postgres JSON_QUERY() function within Neon, detailing how to extract JSON data from a specified JSON object or array in a PostgreSQL database.
+> The document details the usage of the Postgres JSON_QUERY() function within Neon, explaining how to extract JSON data from a specified JSON or JSONB column in a PostgreSQL database.
 
 ## Source
 
@@ -326,7 +326,6 @@ FROM events;
 ## Performance considerations
 
 1. Use appropriate options:
-
    - Use `RETURNING TEXT` with `OMIT QUOTES` when JSON formatting is not required
    - Choose `CONDITIONAL WRAPPER` over `UNCONDITIONAL` when possible
    - Consider using `DEFAULT` expressions for better error recovery

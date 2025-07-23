@@ -3,7 +3,7 @@ title: Connect MCP Clients to Neon
 subtitle: Learn how to connect MCP clients such as Cursor, Claude Desktop, Cline,
   Windsurf, Zed, and VS Code to your Neon Postgres database.
 enableTableOfContents: true
-updatedOn: '2025-07-04T08:55:51.112Z'
+updatedOn: '2025-07-22T14:31:49.925Z'
 ---
 
 The **Neon MCP Server** allows you to connect various [**Model Context Protocol (MCP)**](https://modelcontextprotocol.org) compatible AI tools to your Neon Postgres databases. This guide provides instructions for connecting popular MCP clients to the Neon MCP Server, enabling natural language interaction with your Neon projects.
@@ -11,6 +11,7 @@ The **Neon MCP Server** allows you to connect various [**Model Context Protocol 
 This guide covers the setup for the following MCP Clients:
 
 - [Claude Desktop](#claude-desktop)
+- [Claude Code](#claude-code)
 - [Cursor](#cursor)
 - [Windsurf (Codeium)](#windsurf-codeium)
 - [Cline (VS Code extension)](#cline-vs-code-extension)
@@ -18,6 +19,14 @@ This guide covers the setup for the following MCP Clients:
 - [VS Code (with GitHub Copilot)](#vs-code-with-github-copilot)
 
 By connecting these tools to the Neon MCP Server, you can manage your Neon projects, databases, and schemas using natural language commands within the MCP client interface.
+
+<Admonition type="important" title="Neon MCP Server Security Considerations">
+The Neon MCP Server grants powerful database management capabilities through natural language requests. **Always review and authorize actions requested by the LLM before execution.** Ensure that only authorized users and applications have access to the Neon MCP Server.
+
+The Neon MCP Server is intended for local development and IDE integrations only. **We do not recommend using the Neon MCP Server in production environments.** It can execute powerful operations that may lead to accidental or unauthorized changes.
+
+For more information, see [MCP security guidance →](/docs/ai/neon-mcp-server#mcp-security-guidance).
+</Admonition>
 
 ## Prerequisites
 
@@ -83,6 +92,49 @@ You can connect to Neon MCP Server in two ways:
 </Tabs>
 
 For more, see [Get started with Neon MCP server with Claude Desktop](/guides/neon-mcp-server).
+
+## Claude Code
+
+<Tabs labels={["Remote MCP Server", "Local MCP Server"]}>
+
+<TabItem>
+
+1. Ensure you have Claude Code installed. Visit [docs.anthropic.com/en/docs/claude-code](https://docs.anthropic.com/en/docs/claude-code) for installation instructions.
+2. Open terminal and add Neon MCP with
+   ```sh
+   claude mcp add --transport http neon https://mcp.neon.tech/mcp
+   ```
+3. Start a new session of `claude` to trigger OAuth authentication flow
+4. You can also trigger authentication with `/mcp` within Claude Code.
+
+<br />
+
+If you prefer to authenticate using a Neon API key, provide `Authorization` header to `mcp add` command:
+
+```
+claude mcp add --transport http neon https://mcp.neon.tech/mcp \
+    --header "Authorization: Bearer <YOUR_NEON_API_KEY>"
+```
+
+> Replace `<YOUR_NEON_API_KEY>` with your actual Neon API key which you obtained from the [prerequisites](#prerequisites) section
+
+</TabItem>
+
+<TabItem>
+
+1. Ensure you have Claude Code installed. Visit [docs.anthropic.com/en/docs/claude-code](https://docs.anthropic.com/en/docs/claude-code) for installation instructions.
+2. Open terminal and add Neon MCP with
+
+   ```sh
+   claude mcp add neon -- npx -y @neondatabase/mcp-server-neon start "<YOUR_NEON_API_KEY"
+   ```
+
+   > Replace `<YOUR_NEON_API_KEY>` with your actual Neon API key which you obtained from the [prerequisites](#prerequisites) section
+
+3. Start new Claude Code session with `claude` command and start using Neon MCP
+
+</TabItem>
+</Tabs>
 
 ## Cursor
 

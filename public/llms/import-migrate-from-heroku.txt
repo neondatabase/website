@@ -1,6 +1,6 @@
 # Migrate from Heroku to Neon Postgres
 
-> The document "Migrate from Heroku to Neon Postgres" outlines the steps for transferring a PostgreSQL database from Heroku to Neon, detailing the necessary configurations and commands for a successful migration.
+> The document outlines the process for migrating a PostgreSQL database from Heroku to Neon, detailing steps for exporting data from Heroku, configuring Neon, and importing the data into Neon using the Migration Assistant tool.
 
 ## Source
 
@@ -8,12 +8,7 @@
 
 This guide describes how to import your data from Heroku Postgres to Neon.
 
----
-updatedOn: '2024-11-15T20:32:35.032Z'
----
-
-   **Note** New feature: If you are looking to migrate your database to Neon, you may want to try our new **Migration Assistant**, which can help. Read the [guide](https://neon.com/docs/import/migration-assistant) to learn more.
-
+**Note** New feature: If you are looking to migrate your database to Neon, you may want to try our new **Migration Assistant**, which can help. Read the [guide](https://neon.com/docs/import/migration-assistant) to learn more.
 
 The instructions assume that you have installed the Heroku CLI, which is used to transfer data from Heroku. For installation instructions, see [The Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).
 
@@ -27,7 +22,7 @@ The instructions assume that you have installed the Heroku CLI, which is used to
    The example connection string used the instructions that follow is:
 
    ```text
-   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    ```
 
 ## Retrieve your Heroku app name and database name
@@ -68,9 +63,9 @@ where:
 For example:
 
 ```shell
-$ heroku pg:pull --app thawing-wave-57227 postgresql-trapezoidal-48645 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+$ heroku pg:pull --app thawing-wave-57227 postgresql-trapezoidal-48645 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 
-heroku-cli: Pulling postgresql-trapezoidal-48645 ---> postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+heroku-cli: Pulling postgresql-trapezoidal-48645 ---> postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 
 pg_dump: last built-in OID is 16383
 pg_dump: reading extensions

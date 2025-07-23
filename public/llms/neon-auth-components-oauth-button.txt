@@ -1,0 +1,32 @@
+# <OAuthButton />
+
+> The document describes the implementation and usage of the `<OAuthButton />` component in Neon, detailing its role in facilitating OAuth authentication within Neon's platform.
+
+## Source
+
+- [<OAuthButton /> HTML](https://neon.com/docs/neon-auth/components/oauth-button): The original HTML version of this documentation
+
+Renders a customized `<OAuthButton />` for various providers to initiate sign-in or sign-up processes.
+
+For more information, see the [custom pages guide](https://neon.com/docs/neon-auth/customization/custom-pages).
+
+## Props
+
+- `provider`: `string` — The name of the OAuth provider (e.g., 'google', 'github', 'facebook').
+- `type`: `'sign-in' | 'sign-up'` — Determines whether the button text is for signing in or signing up. (both are the same in terms of functionality)
+
+## Example
+
+```tsx
+import { OAuthButton } from '@stackframe/stack';
+
+export default function Page() {
+  return (
+    <div>
+      <h1>Sign In</h1>
+      <OAuthButton provider="google" type="sign-in" />
+      <OAuthButton provider="github" type="sign-up" />
+    </div>
+  );
+}
+```

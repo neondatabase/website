@@ -1,6 +1,6 @@
 # Postgres substring() function
 
-> The document explains the usage of the Postgres `substring()` function within the Neon database environment, detailing its syntax and examples to extract specific portions of text from strings in SQL queries.
+> The document details the usage of the Postgres `substring()` function within Neon, explaining its syntax and parameters for extracting substrings from text data.
 
 ## Source
 

@@ -1,12 +1,10 @@
 # Create a Neon Twin
 
-> The "Create a Neon Twin" document guides users on how to set up a Neon Twin, enabling them to replicate their PostgreSQL databases for testing and development purposes within the Neon platform.
+> The document outlines the process for creating a Neon Twin, which allows users to clone a database environment in Neon for testing and development purposes without affecting the original data.
 
 ## Source
 
 - [Create a Neon Twin HTML](https://neon.com/docs/guides/neon-twin-intro): The original HTML version of this documentation
-
-Read more about our dev/test use case <a href='/use-cases/dev-test'>here</a>." isIntro></CTA>
 
 ## What is a Neon Twin?
 

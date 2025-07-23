@@ -1,6 +1,6 @@
 # Use Neon with Cloudflare Hyperdrive
 
-> The document outlines the steps for integrating Neon with Cloudflare Hyperdrive, enabling users to configure and connect their Neon databases to Cloudflare's serverless platform for enhanced data handling and management.
+> The document guides users on integrating Neon with Cloudflare Hyperdrive, detailing the steps to configure and optimize the connection between Neon's serverless Postgres database and Cloudflare's edge network for enhanced performance and scalability.
 
 ## Source
 
@@ -58,7 +58,7 @@ To follow along with this guide, you require:
 Log in to your **Project Dashboard** in the Neon Console and open the **Connect to your database** modal to find your database connection string. It should look similar to this:
 
 ```bash
-postgresql://neondb_owner:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require
+postgresql://neondb_owner:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
 ```
 
 Keep your connection string handy for later use.

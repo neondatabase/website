@@ -1,6 +1,6 @@
 # The pg_stat_statements extension
 
-> The document explains how to use the pg_stat_statements extension in Neon to track and analyze SQL query performance by collecting execution statistics.
+> The document details the pg_stat_statements extension for Neon, which enables users to track and analyze SQL query performance by collecting execution statistics.
 
 ## Source
 

@@ -1,6 +1,6 @@
 # Replicate data from Postgres to Neon
 
-> The document "Replicate data from Postgres to Neon" outlines the steps for setting up logical replication from a PostgreSQL database to a Neon database, detailing the configuration of publication and subscription processes.
+> The document outlines the process for setting up logical replication to transfer data from a PostgreSQL database to Neon, detailing configuration steps and commands required for successful data synchronization.
 
 ## Source
 

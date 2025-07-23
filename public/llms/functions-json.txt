@@ -1,6 +1,6 @@
 # Postgres json() Function
 
-> The document explains the usage of the Postgres `json()` function within the Neon database, detailing how to store, query, and manipulate JSON data effectively in SQL queries.
+> The document details the usage of the Postgres `json()` function within Neon, explaining how to store, query, and manipulate JSON data in a PostgreSQL database environment.
 
 ## Source
 
@@ -221,7 +221,6 @@ VALUES (
 ## Additional considerations
 
 1. Use appropriate input validation:
-
    - Use `WITH UNIQUE` when duplicate keys should be prevented
    - Consider `FORMAT JSON` for explicit parsing requirements
 

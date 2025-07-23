@@ -1,6 +1,6 @@
 # Replicate data from Cloud SQL Postgres
 
-> The document outlines the process for setting up logical replication from a Cloud SQL PostgreSQL instance to a Neon database, detailing the necessary configurations and steps to enable data synchronization between the two systems.
+> This document guides Neon users on setting up logical replication to replicate data from Cloud SQL Postgres to Neon, detailing the necessary configurations and steps involved in the process.
 
 ## Source
 

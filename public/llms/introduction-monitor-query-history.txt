@@ -1,6 +1,6 @@
 # Monitor query history
 
-> The "Monitor query history" document explains how Neon users can track and review the history of SQL queries executed on their databases, detailing the steps to access and interpret query logs within the Neon platform.
+> The "Monitor query history" document outlines how Neon users can track and analyze past database queries, detailing steps to access and interpret query logs within the Neon platform.
 
 ## Source
 

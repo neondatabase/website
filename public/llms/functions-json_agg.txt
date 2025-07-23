@@ -1,6 +1,6 @@
 # Postgres json_agg() function
 
-> The document explains the usage of the Postgres `json_agg()` function within Neon, detailing how to aggregate multiple rows into a JSON array, specifically for users managing JSON data in their databases.
+> The document explains the usage of the Postgres `json_agg()` function within Neon, detailing how it aggregates multiple rows into a JSON array, facilitating data manipulation and retrieval in JSON format.
 
 ## Source
 

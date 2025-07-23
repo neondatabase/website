@@ -1,6 +1,6 @@
 # Postgres lead() window function
 
-> The document explains the usage of the Postgres `lead()` window function in Neon, detailing its syntax and examples to help users retrieve subsequent rows' values within a result set.
+> The document explains the usage of the Postgres `lead()` window function in Neon, detailing how to retrieve subsequent row values within a result set for advanced data analysis.
 
 ## Source
 

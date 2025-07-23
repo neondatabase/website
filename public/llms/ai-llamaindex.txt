@@ -1,6 +1,6 @@
 # LlamaIndex
 
-> The LlamaIndex documentation explains how to integrate LlamaIndex with Neon to enable efficient querying and indexing of large datasets using AI-driven techniques within the Neon database environment.
+> The LlamaIndex documentation for Neon outlines how to integrate and utilize LlamaIndex for managing and querying large datasets within Neon's AI infrastructure.
 
 ## Source
 

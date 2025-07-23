@@ -376,7 +376,7 @@ SELECT
 FROM
   posts
 WHERE
-  body @@ to_tsquery('basic | advanced');
+  to_tsvector('english', body) @@ to_tsquery('basic | advanced');
 ```
 
 Output:

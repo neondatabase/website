@@ -1,6 +1,6 @@
 # Postgres json_array_elements() function
 
-> The document explains the usage of the Postgres `json_array_elements()` function within the Neon database environment, detailing how to extract and manipulate individual elements from a JSON array.
+> The document explains the usage of the Postgres `json_array_elements()` function, detailing how it can be utilized within Neon to expand a JSON array into a set of JSON values.
 
 ## Source
 

@@ -27,7 +27,6 @@ Try this workflow in Neon right away. You can follow the steps [in this guide](/
 <TestimonialsWrapper>
 
 <Testimonial
-className="!mt-0"
 text="Getting realistic data into our verification environments was largely unfeasible, it was time-consuming, expensive, and a beast to maintain. You need to process hefty backups, transfer costs stack up, and there’s a lot of manual oversight required just to move that data."
 author={{
   name: 'Jonathan Reyes',
@@ -37,7 +36,6 @@ url="/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-
 />
 
 <Testimonial
-className="!mt-0"
 text="When we were using RDS, we had trouble keeping the same environment on my computer, my developer’s environment, and production."
 author={{
   name: 'Léonard Henriquez',
@@ -47,7 +45,6 @@ url="/blog/why-topo-io-switched-from-amazon-rds-to-neon"
 />
 
 <Testimonial
-className="!mt-0"
 text="RDS becomes a bottleneck if you don’t have full-time DevOps dedicated to it."
 author={{
   name: 'Joey Teunissen',
@@ -212,7 +209,7 @@ textSize="md"
 
 ### Can Neon also help lower the costs of my production database?
 
-Yes. Overprovisioning is a big problem—we see this daily while talking to customers. If you suspect this is you, Neon can help: [autoscaling](/docs/introduction/autoscaling) is a powerful weapon against overprovisioning and the unnecessarily high costs it causes for production databases. [Read more about it here](/blog/neon-autoscaling-is-generally-available#why-autoscaling), and don’t hesitate to ask us about the migration assistance we offer. **We not only help you move production safely but also waive all migration-related fees.**
+Yes. Overprovisioning is a big problem—we see this daily while talking to customers. If you suspect this is you, Neon can help: [autoscaling](/docs/introduction/autoscaling) is a powerful weapon against overprovisioning and the unnecessarily high costs it causes for production databases. [Read more about it here](/blog/neon-autoscaling-is-generally-available#why-autoscaling).\*\*
 
 <TestimonialsWrapper>
   
@@ -248,4 +245,4 @@ Neon offers a Free Plan, and we’ll give you $100 in credits when you first upg
 
 ---
 
-<CTA title="Got Questions? Reach out" description="There's no one size fits all with ephemeral environments - but we’re here to help you set things up. We can also discuss pricing options, annual contracts, and migration assistance." buttonText="Book a meeting with a Solutions Engineer" buttonUrl="/contact-sales" buttonClassName="xs:text-xs xs:whitespace-normal" theme="column" />
+<CTA title="Got Questions? Reach out" description="There's no one size fits all with ephemeral environments - but we're here to help you set things up. We can also discuss pricing options and annual contracts." buttonText="Book a meeting with a Solutions Engineer" buttonUrl="/contact-sales" buttonClassName="xs:text-xs xs:whitespace-normal" theme="column" />/>

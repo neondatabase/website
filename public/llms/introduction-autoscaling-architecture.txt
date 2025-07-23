@@ -1,6 +1,6 @@
 # Autoscaling architecture
 
-> The "Autoscaling Architecture" document outlines Neon's autoscaling system, detailing how it dynamically adjusts compute and storage resources to efficiently manage workloads and optimize performance within the Neon database environment.
+> The "Autoscaling Architecture" document outlines Neon's autoscaling system, detailing how it dynamically adjusts resources to handle varying workloads efficiently within the Neon database environment.
 
 ## Source
 

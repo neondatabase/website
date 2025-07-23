@@ -1,6 +1,6 @@
 # Neon CLI — Install and connect
 
-> The document titled "Neon CLI — Install and connect" outlines the steps for installing the Neon Command Line Interface and connecting it to a Neon database, specifically guiding users through setup and initial connection procedures.
+> The document details the installation and connection process for the Neon CLI, guiding users through setting up and accessing Neon's cloud-native PostgreSQL database services.
 
 ## Source
 
@@ -110,7 +110,7 @@ Run the CLI from the download directory:
 neon <command> [options]
 ```
 
-   **Note** Use the Neon CLI without installing: You can run the Neon CLI without installing it using **npx** (Node Package eXecute) or the `bun` equivalent, **bunx**. For example: 
+   **Note** Use the Neon CLI without installing: You can run the Neon CLI without installing it using **npx** (Node Package eXecute) or the `bun` equivalent, **bunx**. For example:
 
 ```shell
 # npx
@@ -193,7 +193,7 @@ neon auth
 
 The [neon auth](https://neon.com/docs/reference/cli-auth) command launches a browser window where you can authorize the Neon CLI to access your Neon account. If you have not authenticated previously, running a Neon CLI command automatically launches the web authentication process unless you have specified an API key.
 
-   **Note**: If you use Neon through the [Native Integration on Vercel](https://neon.com/docs/guides/vercel-native-integration), you must authenticate connections from the CLI client using a Neon API key (see below). The `neon auth` command requires an account registered through Neon rather than Vercel.
+   **Note**: If you use Neon through the [Vercel-Managed Integration](https://neon.com/docs/guides/vercel-managed-integration), you must authenticate connections from the CLI client using a Neon API key (see below). The `neon auth` command requires an account registered through Neon rather than Vercel.
 
 ### API key
 

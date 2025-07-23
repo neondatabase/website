@@ -1,6 +1,6 @@
 # Branching with the Neon API
 
-> The document "Branching with the Neon API" details how to use the Neon API to create, manage, and delete database branches, enabling users to efficiently handle multiple development environments within Neon.
+> The document "Branching with the Neon API" explains how to use the Neon API to create and manage database branches, enabling users to efficiently handle multiple development environments within Neon.
 
 ## Source
 
@@ -14,7 +14,7 @@ The `jq` program specified in each example is an optional third-party tool that 
 
 ## Prerequisites
 
-A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](https://neon.com/../manage/api-keys#create-an-api-key). In the examples below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
+A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](https://neon.com/docs/manage/api-keys#create-an-api-key). In the examples below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
 ## Create a branch with the API
 

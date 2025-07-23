@@ -1,6 +1,6 @@
 # Time Travel tutorial
 
-> The "Time Travel tutorial" document guides Neon users through the process of using the Time Travel feature to access historical data states within their databases.
+> The "Time Travel tutorial" document guides Neon users through the process of using time travel features to query historical data states within their databases.
 
 ## Source
 

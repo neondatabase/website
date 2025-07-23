@@ -3,8 +3,7 @@ title: The fuzzystrmatch extension
 subtitle: Perform fuzzy string matching for names, typos, and similar-sounding words in
   Postgres
 enableTableOfContents: true
-updatedOn: '2025-06-23T15:24:08.756Z'
-tag: new
+updatedOn: '2025-07-04T12:47:21.302Z'
 ---
 
 The `fuzzystrmatch` extension for Postgres provides a suite of functions to determine similarities and distances between strings. This is useful for applications that need to handle misspellings, phonetic variations, or simply find "close enough" matches in text data. Whether you're building a search engine, cleaning customer data, or trying to identify duplicate records, `fuzzystrmatch` offers powerful tools to compare strings beyond exact equality.

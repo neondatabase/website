@@ -1,6 +1,6 @@
 # Logical replication in Neon
 
-> The document "Logical replication in Neon" explains how to set up and manage logical replication in Neon, detailing the steps to configure publications and subscriptions for data replication between Neon databases.
+> The document explains how to set up and use logical replication in Neon, detailing the steps to configure replication slots and manage data streaming between databases.
 
 ## Source
 

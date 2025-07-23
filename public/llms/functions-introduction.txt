@@ -1,6 +1,6 @@
 # Postgres functions
 
-> The document titled "Postgres functions" explains how Neon users can utilize PostgreSQL functions to perform operations such as calculations, data manipulation, and complex queries within their Neon databases.
+> The document outlines the use and implementation of PostgreSQL functions within the Neon database, detailing how to create, manage, and utilize these functions to enhance database operations.
 
 ## Source
 

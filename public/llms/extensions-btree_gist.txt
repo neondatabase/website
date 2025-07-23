@@ -1,6 +1,6 @@
 # The btree_gist extension
 
-> The document explains the btree_gist extension for Neon, detailing how it enables support for B-tree index types within GiST indexes to enhance query performance and indexing capabilities.
+> The document details the btree_gist extension for Neon, enabling support for B-tree indexing within GiST, facilitating complex queries and indexing capabilities.
 
 ## Source
 

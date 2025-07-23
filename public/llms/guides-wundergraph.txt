@@ -1,6 +1,6 @@
 # Use WunderGraph with Neon
 
-> The document explains how to integrate WunderGraph with Neon by setting up a Neon database, configuring WunderGraph, and deploying the application, enabling seamless data management and API generation within Neon's ecosystem.
+> The document outlines the process of integrating WunderGraph with Neon, detailing steps for setting up a Neon database and configuring WunderGraph to interact with it effectively.
 
 ## Source
 
