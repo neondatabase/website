@@ -912,7 +912,7 @@
                   slug: neon-auth/concepts/oauth
                 - title: Custom User Data
                   slug: neon-auth/concepts/custom-user-data
-                - title: Permissions & RBAC
+                - title: App/user permissions
                   slug: neon-auth/concepts/permissions
                 - title: Organizations and Teams
                   slug: neon-auth/concepts/orgs-and-teams
@@ -932,6 +932,8 @@
               slug: neon-auth/create-users
             - title: Claiming a Project
               slug: neon-auth/claim-project
+            - title: Permsissions
+              slug: neon-auth/permissions-roles
         - section: SDKs & API
           items:
             - title: Next.js SDK
@@ -1046,14 +1048,6 @@
                       slug: neon-auth/components/stack-theme
             - title: Admin API
               slug: neon-auth/api
-        - section: Guides
-          items:
-            - title: Creating users
-              slug: neon-auth/create-users
-            - title: Claiming a project
-              slug: neon-auth/claim-project
-            - title: Permsissions and roles
-              slug: neon-auth/permissions-roles
         - section: Customization
           items:
             - title: Colors and Styles
