@@ -182,7 +182,12 @@ const defaultConfig = {
       },
       {
         source: '/jobs',
-        destination: '/careers',
+        destination: 'https://www.databricks.com/company/careers',
+        permanent: true,
+      },
+      {
+        source: '/careers',
+        destination: 'https://www.databricks.com/company/careers',
         permanent: true,
       },
       {
