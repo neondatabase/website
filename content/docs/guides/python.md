@@ -241,6 +241,12 @@ In the above code, we:
 - Insert multiple book records.
 - Commit the changes to the database.
 
+Run the script using the following command:
+
+```bash
+python create_table.py
+```
+
 When the code runs successfully, it produces the following output:
 
 ```text title="Output"
@@ -335,6 +341,12 @@ In the above code, we:
 - Use a SQL `SELECT` statement to fetch all rows from the `books` table, ordered by `publication_year`.
 - Print each book's details in a formatted output.
 
+Run the script using the following command:
+
+```bash
+python read_data.py
+```
+
 When the code runs successfully, it produces the following output:
 
 ```text title="Output"
@@ -422,6 +434,12 @@ In the above code, we:
 - Connect to the Neon database.
 - Use a SQL `UPDATE` statement to change the `in_stock` status of the book 'Dune' to `True`.
 - Commit the changes to the database.
+
+Run the script using the following command:
+
+```bash
+python update_data.py
+```
 
 After running this script, you can run `read_data.py` again to verify that the row was updated.
 
@@ -514,6 +532,12 @@ In the above code, we:
 - Connect to the Neon database.
 - Use a SQL `DELETE` statement to remove the book '1984' from the `books` table.
 - Commit the changes to the database.
+
+Run the script using the following command:
+
+```bash
+python delete_data.py
+```
 
 After running this script, you can run `read_data.py` again to verify that the row was deleted.
 
