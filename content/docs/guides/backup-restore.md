@@ -23,7 +23,7 @@ Use the **Backup & restore** page in the Neon Console to restore a branch to a p
 - ✅ Create snapshots
 - ✅ Restore from a snapshot
 - ✅ Schedule snapshots
--
+
 ---
 
 ## Instantly restore a branch
@@ -114,16 +114,23 @@ To create a snapshot manually, click **Create snapshot**. This captures the curr
 
 ## Schedule snapshots
 
-You can schedule automatic snapshots on a daily, weekly, or monthly basis to back up your data.
+You can automate snapshot creation by setting a snapshot schedule for a branch.
 
 To edit the snapshot schedule:
 
 1. Click **Edit schedule**.
-2. Choose how often to take snapshots:
-   - **Daily** at a specific UTC time.
-   - **Weekly** on a selected day.
-   - **Monthly** on a selected day of the month.
-3. Set your preferences for how long each snapshot should be retained.
+2. In the **Edit snapshot schedule** modal, configure: 
+
+   - **Frequency** – Daily, weekly, or monthly snapshots.
+   - **Retention** – How long to retain snapshots before they expire.
+   - **Custom retention rules** – Optionally keep specific daily or weekly snapshots for longer.
+
+   For example, you can configure daily snapshots at 01:00 UTC, keep Monday snapshots for a few weeks, and retain monthly snapshots for several months.
+
+3. Click **Update schedule** to apply changes.
+
+Snapshots created via the schedule are listed under the Snapshots section, along with manual snapshots.
+
 
 <Admonition type="tip">
 The Neon API supports finer-grained control over snapshot scheduling.
@@ -133,65 +140,25 @@ The Neon API supports finer-grained control over snapshot scheduling.
 
 ## Restore from a snapshot
 
-Restoring from a snapshot is a little different from the [instant branch restore](#instantly-restore-a-branch) operation described above. When restoring from a snapshot, the snapshot is restored to a new branch, and you need to add a compute to the new branch to access it. Additionally, to start using the new branch with your application, you'll need to swap out your current connection string for the connection string of the new branch. Follow the steps below.
+You can restore from a snapshot using one of two methods:
 
-<Steps>
+- **One-step restore** – Instantly restore data from the snapshot into the existing branch. The branch name and connection string remain the same, but the branch ID changes.
+- **Multi-step restore** – Create a new branch from the snapshot. This option is useful if you want to inspect or test data before switching to the restored branch.
 
-## Select a snapshot
+### One-step restore
 
-Find the **snapshot** you want to restore and click the **Restore** button.
+1. Locate the snapshot you want to use and click **Restore → One-step restore**.
 
-A confirmation modal explains the operation:
+   ![One step restore option](/docs/guides/one_step_restore.png)
+2. Confirm the operation in the modal.
+3. Your branch is immediately restored to the snapshot state.
 
-- The restore happens instantly
-- Your current branch is unchanged
-- A new branch with the restored data is created
+### Multi-step restore
 
-![Restore from snapshot confirmation modal](/docs/guides/backup_restore_create_snapshot_modal.png)
-
-## Restore the snapshot
-
-Click **Restore** to continue. You'll be redirected to the new branch created from the snapshot.
-
-- This is a new branch with the restored data
-- It doesn't have a compute yet — you’ll need to add one to access the data
-
-![Restore branch page](/docs/guides/backup_restore_restored_snapshot.png)
-
-## Add a compute to the restore branch
-
-Click **Add compute** to add a compute to the new branch.
-
-![Restore branch add compute](/docs/guides/backup_restore_add_compute.png)
-
-Select your desired compute settings and click **Add**. Compute settings include compute size, autoscaling, and scale-to-zero. If you plan to switch over to this branch, you would typically use the same settings as the branch you will be replacing.
-
-![Restore branch compute settings](/docs/guides/backup_restore_compute_settings.png)
-
-With a compute added, you can now access your restore branch and connect to its databases.
-
-![Restore branch new compute](/docs/guides/backup_restore_new_compute.png)
-
-## Connect to the restore branch
-
-With a compute added, you can:
-
-- Access the branch from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor)
-- Browse tables on the branch from the [Tables page](/docs/guides/tables)
-- Connect from your app or Postgres client using the restore branch connection string
-
-Click the **Connect** button to get the connection string.
-
-![Restore branch connect modal](/docs/guides/backup_restore_connect_modal.png)
-
-> The restore branch connection string differs from the snapshot's source branch. It has a different hostname because each Neon branch is a separate Postgres instance.
-
-## Switch your app to the restore branch
-
-If you want to use the restore branch with your application, update your app to use the restore branch connection string. Before switching, pause write operations on the branch you are replacing, then resume them after switching to avoid data inconsistencies. Since Neon doesn't support read-only mode at the branch or database level, you'll need to disable writes in your application.
-
-> The restore branch name includes a timestamp and may be long. You can rename it. See [Rename a branch](/docs/manage/branches#rename-a-branch) for instructions.
-
-</Steps>
+1. Locate the snapshot you want to use and click **Restore → Multi-step restore**.
+   ![Multi-step restore option](/docs/guides/multi_step_restore.png)
+2. A new branch is created with the restored data. This branch will not have a compute yet.
+3. Add a compute to the new branch to access its data. (See **Add a compute to the restore branch**.)
+4. Update your application to use the new branch's connection string if you want to switch over.
 
 <NeedHelp/>
