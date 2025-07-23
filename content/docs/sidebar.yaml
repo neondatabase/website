@@ -886,10 +886,8 @@
       tag: beta
       slug: neon-auth/overview
       items:
-        - section: Overview
-          items:
-            - title: Overview
-              slug: neon-auth/overview
+        - title: Overview
+          slug: neon-auth/overview
         - section: Getting Started
           items:
             - title: Next.js
