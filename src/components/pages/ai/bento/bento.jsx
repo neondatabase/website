@@ -25,7 +25,12 @@ const ITEMS = [
   },
   {
     title: 'Vector store for RAG and LLMs.',
-    description: 'With pgvector and HNSW, Neon becomes a vector store for all your data.',
+    description: (
+      <>
+        With <Link href={LINKS.docsPgvector}>pgvector</Link> and HNSW, Neon becomes a vector store
+        for all your data.
+      </>
+    ),
     image: vectorStore,
     imageMobile: vectorStoreMobile,
   },
@@ -40,11 +45,7 @@ const ITEMS = [
     description: [
       <>
         Neon can be embedded directly into agent workflows, no signup required. For developers, it’s
-        just as easy - start building on the{' '}
-        <Link className="underline-offset-4" theme="green-underlined" href={LINKS.pricing}>
-          Free Plan
-        </Link>{' '}
-        in seconds.
+        just as easy - start building on the <Link href={LINKS.pricing}>Free Plan</Link> in seconds.
       </>,
     ],
     image: instantlyAccessible,
@@ -59,7 +60,7 @@ const Bento = () => (
         <h2 className="max-w-2xl font-title text-5xl font-medium leading-none tracking-extra-tight xl:max-w-xl xl:text-[44px] lg:mr-10 lg:text-4xl md:mr-0 md:text-[32px]">
           The database AI-native apps were waiting for
         </h2>
-        <p className="mt-4 text-lg leading-snug tracking-extra-tight text-gray-new-70 xl:text-balance lg:text-pretty lg:text-base md:mt-3">
+        <p className="mt-4 max-w-[740px] text-lg leading-snug tracking-extra-tight text-gray-new-70 xl:text-balance lg:text-pretty lg:text-base md:mt-3">
           Neon is a serverless Postgres platform built for modern AI workflows. It separates storage
           and compute, autoscales to zero, and lets agents create databases without friction.
         </p>
@@ -74,7 +75,7 @@ const Bento = () => (
           >
             <div className="absolute inset-x-0 bottom-0 z-10 p-6 pr-8 text-lg leading-snug tracking-extra-tight lg:p-5 lg:text-base">
               <h3 className="inline font-medium text-white">{title}</h3>{' '}
-              <p className="inline font-light text-gray-new-60">{description}</p>
+              <p className="text-with-links inline font-light text-gray-new-60">{description}</p>
             </div>
             <div className="relative h-full shrink-0 overflow-hidden rounded-[inherit]">
               <Image

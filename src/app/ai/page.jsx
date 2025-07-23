@@ -171,12 +171,11 @@ const AiPage = () => (
       linkText="Learn more"
     />
     <CTA
-      className="pb-[298px] pt-[296px] xl:pb-[252px] xl:pt-[246px] lg:pb-[183px] lg:pt-[163px] md:pb-[150px] md:pt-[168px]"
+      className="pb-[290px] pt-[348px] xl:pb-[242px] xl:pt-[278px] lg:pb-[200px] lg:pt-[260px] sm:pb-[100px] sm:pt-40"
       title="The Postgres of tomorrow, available today"
-      titleClassName="max-w-[760px] leading-none xl:max-w-[640px] lg:max-w-[550px] md:max-w-[320px] xl:text-[56px] xl:!tracking-[-0.03em] lg:text-[48px] md:text-pretty md:text-[40px]"
-      buttonText="Book a meeting with our team"
-      buttonUrl={LINKS.contactSales}
-      buttonClassName="mt-8 h-12 px-6 min-w-[144px] text-[16px] xl:mt-8 xl:px-[26px] lg:mt-[26px] md:mt-6 md:h-11 md:px-6"
+      titleClassName="max-w-[745px] lg:max-w-[600px] md:max-w-[400px] md:leading-none"
+      buttonText="Sign up"
+      buttonUrl={LINKS.signup}
     />
   </Layout>
 );

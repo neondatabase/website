@@ -54,6 +54,7 @@ export default {
   docsMigration: '/docs/import/import-data-assistant',
   manageBilling: '/docs/introduction/manage-billing',
   pgSearch: '/docs/extensions/pg_search',
+  docsPgvector: '/docs/extensions/pgvector',
   rlsAuthorize: '/docs/guides/neon-rls',
   serverless: '/docs/introduction/serverless',
   support: '/docs/introduction/support',

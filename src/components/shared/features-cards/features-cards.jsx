@@ -43,7 +43,7 @@ const FeaturesCards = ({
       className
     )}
   >
-    <Container className="relative z-10" size="960">
+    <Container className="relative z-10 md:max-w-sm md:px-5" size="960">
       <header
         className={clsx(
           'mx-auto flex max-w-3xl flex-col items-center text-center md:max-w-[500px]',
