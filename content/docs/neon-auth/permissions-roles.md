@@ -3,7 +3,7 @@ title: Permissions overview
 subtitle: Understanding Neon Auth project vs app user permissions
 enableTableOfContents: true
 tag: beta
-updatedOn: '2025-05-16T19:06:06.842Z'
+updatedOn: '2025-07-23T17:00:18.144Z'
 redirectFrom:
   - /docs/guides/neon-auth-permissions-roles
 ---

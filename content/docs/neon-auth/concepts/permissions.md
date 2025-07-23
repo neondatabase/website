@@ -3,6 +3,7 @@ title: App/User RBAC Permissions
 subtitle: Managing permissions for your app's end users and teams
 enableTableOfContents: true
 tag: beta
+updatedOn: '2025-07-23T17:00:18.143Z'
 ---
 
 > If you're looking for information about who can add or manage Neon Auth in your Neon project, see [Permissions overview](/docs/neon-auth/permissions-roles).

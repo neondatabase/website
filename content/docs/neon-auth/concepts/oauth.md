@@ -3,6 +3,7 @@ title: OAuth Authentication
 subtitle: Working with OAuth providers in Neon Auth
 enableTableOfContents: true
 tag: beta
+updatedOn: '2025-07-23T17:00:18.142Z'
 ---
 
 > Using OAuth providers for authentication and API access

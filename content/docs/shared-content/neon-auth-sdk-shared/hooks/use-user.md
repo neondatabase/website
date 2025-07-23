@@ -1,3 +1,6 @@
+---
+updatedOn: '2025-07-23T17:00:18.144Z'
+---
 This is a reference for the `useUser` hook in the {sdkName} SDK.
 
 This standalone React hook is an alias for `useStackApp().useUser()`. It only exists for convenience; it does not have any additional functionality.
