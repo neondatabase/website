@@ -52,10 +52,6 @@ const items = [
     question: 'Which level of uptime can I expect with Neon?',
     answer: `Neon offers a 99.95% uptime SLA for Business and Enterprise customers, ensuring consistent availability and performance for mission-critical applications.`,
   },
-  {
-    question: 'Can Neon help with migrations?',
-    answer: `Absolutely. Our expert team assists Business and Enterprise clients throughout the migration process. <a href="${LINKS.migrationAssistance}">Tell us here</a> if you're considering migrating to Neon. `,
-  },
 ];
 
 const Faq = () => (
