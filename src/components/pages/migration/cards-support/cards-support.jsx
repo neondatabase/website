@@ -3,8 +3,6 @@ import Image from 'next/image';
 
 import Container from 'components/shared/container/container';
 import GradientBorder from 'components/shared/gradient-border/index';
-import Link from 'components/shared/link';
-import LINKS from 'constants/links';
 import configurationTuning from 'icons/migration/cards-support/configuration-tuning.svg';
 import dualWriteModel from 'icons/migration/cards-support/dual-write-model.svg';
 import logicalReplication from 'icons/migration/cards-support/logical-replication.svg';
@@ -97,15 +95,6 @@ const CardsSupport = () => (
           </li>
         ))}
       </ul>
-      <footer className="mt-[30px] xl:mt-[26px] md:mt-[18px]">
-        <p className="text-center text-base font-normal leading-snug tracking-extra-tight text-gray-new-70 lg:text-[15px]">
-          Migrating a multi-TB workload?{' '}
-          <Link to={LINKS.migrationAssistance} theme="grey-70-underlined">
-            Let us know
-          </Link>{' '}
-          — we&apos;ll connect you with a Solution Architect.
-        </p>
-      </footer>
     </Container>
   </section>
 );
