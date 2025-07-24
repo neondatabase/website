@@ -7,15 +7,17 @@ updatedOn: '2025-07-24T12:10:36.000Z'
 
 [Looker Studio](https://lookerstudio.google.com/) is Google's data visualization and business intelligence platform. This guide explains how to connect your Neon Postgres database to Looker Studio using a PostgreSQL data source.
 
-## Step 1: Get your connection string
+<Steps>
+
+## Get your connection string
 
 1. In the Neon Console, select the **project** and **branch** you want to connect to.
-2. In the **Overview** section, click **Connect**.
+2. On the project dashboard, click **Connect**.
 3. Click **Show Password** and copy the connection string.
 
 For more details, see [Connect from any application](/docs/connect/connect-from-any-app).
 
-## Step 2: Add a PostgreSQL data source in Looker Studio
+## Add a PostgreSQL data source in Looker Studio
 
 1. In Looker Studio, choose **New Data Source**.
 2. Select **PostgreSQL** from the list of connectors.
@@ -35,18 +37,20 @@ You would enter:
 - **Username**: `neondb_owner`
 - **Password**: `npg_aaaaaaaaaaaa`
 
-## Step 3: Configure SSL settings
+## Configure SSL settings
 
 1. Ensure **Enable SSL** is checked.
 2. Ensure **Enable client authentication** is unchecked.
 
-## Step 4: Upload the server certificate
+## Upload the server certificate
 
-1. Download the `isrgrootx1.pem` file from [Connect to Neon securely](/docs/connect/connect-securely).
+1. Download the `isrgrootx1.pem` file from https://letsencrypt.org/certs/isrgrootx1.pem. For more information about SSL certificates, see [Connect to Neon securely](/docs/connect/connect-securely).
 2. In Looker Studio, upload the `isrgrootx1.pem` file using the **Upload** button next to the **Server Certificate** box.
 
-## Step 5: Authenticate and connect
+## Authenticate and connect
 
 Click **Authenticate** to verify the connection. If successful, you will see your Neon tables listed in Looker Studio.
+
+</Steps>
 
 <NeedHelp/>
