@@ -35,6 +35,7 @@ ALTER COLUMN email SET NOT NULL;
 ```
 
 This operation:
+
 1. Acquires an ACCESS EXCLUSIVE lock on the table
 2. Scans every row to verify no NULL values exist
 3. Holds the lock until the scan completes
@@ -64,6 +65,7 @@ ADD CONSTRAINT email_not_null NOT NULL email NOT VALID;
 ```
 
 This command:
+
 1. Takes only a brief ACCESS EXCLUSIVE lock
 2. Creates the constraint without scanning existing data
 3. Immediately enforces the constraint for new rows
@@ -111,11 +113,12 @@ Now, we can add a NOT NULL constraint to the `email` column without validating e
 
 ```sql
 -- Add NOT NULL constraint without validating existing data
-ALTER TABLE users 
+ALTER TABLE users
 ADD CONSTRAINT users_email_not_null NOT NULL email NOT VALID;
 ```
 
 After this operation:
+
 - The constraint exists and has a name (`users_email_not_null`)
 - New INSERTs or UPDATEs cannot set email to NULL
 - Existing NULL values remain in the table
@@ -129,13 +132,13 @@ Try inserting a new row with a NULL email:
 
 ```sql
 -- This will fail - constraint prevents new NULL values
-INSERT INTO users (username, email) 
+INSERT INTO users (username, email)
 VALUES ('eve', NULL);
 
 -- ERROR:  null value in column "email" of relation "users" violates not-null constraint
 
 -- This will succeed
-INSERT INTO users (username, email) 
+INSERT INTO users (username, email)
 VALUES ('eve', 'eve@example.com');
 ```
 
@@ -145,7 +148,7 @@ When you're ready to validate existing data, use the VALIDATE CONSTRAINT command
 
 ```sql
 -- This will fail because existing NULL values exist
-ALTER TABLE users 
+ALTER TABLE users
 VALIDATE CONSTRAINT users_email_not_null;
 
 -- Error: column "email" of relation "users" contains null values
@@ -155,12 +158,12 @@ To successfully validate, first clean up existing NULL values:
 
 ```sql
 -- Clean up existing NULL values
-UPDATE users 
-SET email = username || '@example.com' 
+UPDATE users
+SET email = username || '@example.com'
 WHERE email IS NULL;
 
 -- Now validation will succeed
-ALTER TABLE users 
+ALTER TABLE users
 VALIDATE CONSTRAINT users_email_not_null;
 ```
 
@@ -176,12 +179,12 @@ PostgreSQL 18 also improves NOT NULL constraint naming. Unlike previous versions
 
 ```sql
 -- Named constraint
-ALTER TABLE products 
+ALTER TABLE products
 ADD CONSTRAINT products_name_required NOT NULL name NOT VALID;
 
 -- List all constraints on the table
 SELECT conname AS constraint_name
-FROM pg_constraint 
+FROM pg_constraint
 WHERE conrelid = 'products'::regclass
   AND contype = 'n';  -- 'n' for NOT NULL constraints
 
@@ -196,13 +199,13 @@ You can check the status of your constraints using the system catalogs:
 
 ```sql
 -- View constraint information
-SELECT 
+SELECT
     conname AS constraint_name,
     contype AS constraint_type,
     convalidated AS is_validated,
     pg_get_constraintdef(oid) AS definition
-FROM pg_constraint 
-WHERE conrelid = 'users'::regclass 
+FROM pg_constraint
+WHERE conrelid = 'users'::regclass
   AND contype = 'n';  -- 'n' for NOT NULL constraints
 ```
 
@@ -216,7 +219,7 @@ Here's a recommended workflow for adding NOT NULL constraints to large productio
 
 ```sql
 -- Fast operation - takes only milliseconds
-ALTER TABLE large_production_table 
+ALTER TABLE large_production_table
 ADD CONSTRAINT large_table_email_not_null NOT NULL email NOT VALID;
 ```
 
@@ -226,14 +229,14 @@ This immediately protects against new NULL values while allowing you to address 
 
 ```sql
 -- Find rows with NULL values
-SELECT COUNT(*) 
-FROM large_production_table 
+SELECT COUNT(*)
+FROM large_production_table
 WHERE email IS NULL;
 
 -- Fix them in batches to avoid long-running transactions
-UPDATE large_production_table 
-SET email = 'unknown@company.com' 
-WHERE email IS NULL 
+UPDATE large_production_table
+SET email = 'unknown@company.com'
+WHERE email IS NULL
   AND id BETWEEN 1 AND 10000;
 
 -- Continue in batches...
@@ -248,7 +251,7 @@ Once all existing NULL values are addressed, validate the constraint using:
 ```sql
 -- This operation uses SHARE UPDATE EXCLUSIVE lock
 -- Allows reads and writes during validation
-ALTER TABLE large_production_table 
+ALTER TABLE large_production_table
 VALIDATE CONSTRAINT large_table_email_not_null;
 ```
 
@@ -268,11 +271,11 @@ If you've been using the CHECK constraint workaround from earlier PostgreSQL ver
 
 ```sql
 -- Old workaround
-ALTER TABLE users 
+ALTER TABLE users
 ADD CONSTRAINT users_email_check CHECK (email IS NOT NULL) NOT VALID;
 
 -- PostgreSQL 18 native approach
-ALTER TABLE users 
+ALTER TABLE users
 ADD CONSTRAINT users_email_not_null NOT NULL email NOT VALID;
 ```
 

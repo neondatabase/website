@@ -63,7 +63,7 @@ CREATE TABLE order_items (
 
 -- Insert sample data
 INSERT INTO products (name, category, base_price, cost, weight_kg, length_cm, width_cm, height_cm, tax_rate, discount_rate)
-VALUES 
+VALUES
     ('Laptop Pro 15', 'Electronics', 1299.99, 800.00, 2.1, 34, 24, 2, 0.0875, 0.05),
     ('Wireless Mouse', 'Electronics', 49.99, 15.00, 0.15, 12, 7, 4, 0.0875, 0.10),
     ('Desk Chair', 'Furniture', 299.99, 120.00, 15.5, 65, 65, 110, 0.0625, 0.00),
@@ -71,13 +71,13 @@ VALUES
     ('Book: PostgreSQL Guide', 'Books', 39.99, 8.00, 0.6, 23, 18, 3, 0.00, 0.00);
 
 INSERT INTO orders (customer_id, order_date, shipping_address, order_status)
-VALUES 
+VALUES
     (1001, '2024-12-01', '123 Main St, City, State', 'shipped'),
     (1002, '2024-12-05', '456 Oak Ave, City, State', 'processing'),
     (1003, '2024-12-07', '789 Pine Rd, City, State', 'pending');
 
 INSERT INTO order_items (order_id, product_id, quantity, unit_price)
-VALUES 
+VALUES
     (1, 1, 1, 1299.99),
     (1, 2, 2, 49.99),
     (2, 3, 1, 299.99),
@@ -97,8 +97,8 @@ Before PostgreSQL 18, generated columns were required to be STORED, meaning valu
 
 ```sql
 -- Pre-PostgreSQL 18 approach: Required STORED keyword
-ALTER TABLE products 
-ADD COLUMN profit_margin DECIMAL(8,4) 
+ALTER TABLE products
+ADD COLUMN profit_margin DECIMAL(8,4)
 GENERATED ALWAYS AS ((base_price - cost) / base_price) STORED;
 ```
 
@@ -110,22 +110,22 @@ In this case, you do not need to specify the STORED keyword, as virtual columns 
 
 ```sql
 -- PostgreSQL 18: Virtual is now the default
-ALTER TABLE products 
-ADD COLUMN selling_price DECIMAL(10,2) 
+ALTER TABLE products
+ADD COLUMN selling_price DECIMAL(10,2)
 GENERATED ALWAYS AS (
     base_price * (1 - discount_rate) * (1 + tax_rate)
 );
 
 -- Explicitly specifying virtual (optional in PostgreSQL 18)
-ALTER TABLE products 
-ADD COLUMN profit_amount DECIMAL(10,2) 
+ALTER TABLE products
+ADD COLUMN profit_amount DECIMAL(10,2)
 GENERATED ALWAYS AS (base_price - cost) VIRTUAL;
 ```
 
 The above example creates a virtual column `selling_price` that calculates the selling price based on the base price, discount rate, and tax rate. The `profit_amount` column is also virtual, calculating the profit based on base price and cost. You can query these columns without any additional storage overhead:
 
 ```sql
-SELECT 
+SELECT
     name,
     base_price,
     selling_price,
@@ -144,10 +144,10 @@ We will add both a stored and a virtual generated column to the `products` table
 
 ```sql
 -- Add both types for comparison
-ALTER TABLE products 
-ADD COLUMN stored_volume_cm3 INTEGER 
+ALTER TABLE products
+ADD COLUMN stored_volume_cm3 INTEGER
 GENERATED ALWAYS AS (length_cm * width_cm * height_cm) STORED,
-ADD COLUMN virtual_volume_cm3 INTEGER 
+ADD COLUMN virtual_volume_cm3 INTEGER
 GENERATED ALWAYS AS (length_cm * width_cm * height_cm);
 ```
 
@@ -166,14 +166,14 @@ You can query both columns to see their values:
 
 ```sql
 -- View the calculated values
-SELECT 
+SELECT
     name,
     base_price,
     selling_price,
     profit_amount,
     stored_volume_cm3,
     virtual_volume_cm3
-FROM products 
+FROM products
 WHERE category = 'Electronics';
 ```
 
@@ -189,14 +189,14 @@ To see the storage impact, let's add some virtual columns to our `products` tabl
 
 ```sql
 -- Add multiple virtual calculations without storage overhead
-ALTER TABLE products 
-ADD COLUMN shipping_weight_lbs DECIMAL(6,2) 
+ALTER TABLE products
+ADD COLUMN shipping_weight_lbs DECIMAL(6,2)
 GENERATED ALWAYS AS (weight_kg * 2.20462),
-ADD COLUMN price_per_kg DECIMAL(10,2) 
+ADD COLUMN price_per_kg DECIMAL(10,2)
 GENERATED ALWAYS AS (base_price / weight_kg),
-ADD COLUMN margin_percentage DECIMAL(5,2) 
+ADD COLUMN margin_percentage DECIMAL(5,2)
 GENERATED ALWAYS AS (((base_price - cost) / base_price) * 100),
-ADD COLUMN discounted_price DECIMAL(10,2) 
+ADD COLUMN discounted_price DECIMAL(10,2)
 GENERATED ALWAYS AS (base_price * (1 - discount_rate));
 
 -- Check storage impact - table size remains unchanged!
@@ -213,18 +213,18 @@ You can test this by updating a product's base price and discount rate:
 
 ```sql
 -- Update base price and see automatic recalculation
-UPDATE products 
-SET base_price = 1399.99, discount_rate = 0.10 
+UPDATE products
+SET base_price = 1399.99, discount_rate = 0.10
 WHERE name = 'Laptop Pro 15';
 
 -- Virtual columns automatically show updated values
-SELECT 
+SELECT
     name,
     base_price,
     discount_rate,
     selling_price,
     profit_amount
-FROM products 
+FROM products
 WHERE name = 'Laptop Pro 15';
 ```
 
@@ -240,12 +240,12 @@ INSERT INTO products (name, category, base_price, cost, weight_kg, length_cm, wi
 VALUES ('Gaming Keyboard', 'Electronics', 129.99, 45.00, 1.2, 45, 18, 4);
 
 -- Virtual columns are available immediately for queries
-SELECT 
+SELECT
     name,
     selling_price,
     profit_amount,
     margin_percentage
-FROM products 
+FROM products
 WHERE name = 'Gaming Keyboard';
 ```
 
@@ -265,20 +265,20 @@ Let's look at an example so we can compare the performance of simple versus comp
 
 ```sql
 -- Simple calculation (low overhead)
-ALTER TABLE products 
-ADD COLUMN simple_calc DECIMAL(10,2) 
+ALTER TABLE products
+ADD COLUMN simple_calc DECIMAL(10,2)
 GENERATED ALWAYS AS (base_price * 1.1);
 
 -- Complex calculation (higher overhead)
-ALTER TABLE products 
-ADD COLUMN complex_calc DECIMAL(10,2) 
+ALTER TABLE products
+ADD COLUMN complex_calc DECIMAL(10,2)
 GENERATED ALWAYS AS (
-    CASE 
-        WHEN category = 'Electronics' THEN 
+    CASE
+        WHEN category = 'Electronics' THEN
             base_price * (1 + tax_rate) * (1 - GREATEST(discount_rate, 0.05))
-        WHEN category = 'Books' THEN 
+        WHEN category = 'Books' THEN
             base_price * (1 - discount_rate)
-        ELSE 
+        ELSE
             base_price * (1 + tax_rate) * (1 - discount_rate)
     END
 );
@@ -323,8 +323,8 @@ CREATE INDEX idx_selling_price_expr ON products(
 );
 
 -- Or use stored generated columns when indexing is required
-ALTER TABLE products 
-ADD COLUMN indexed_selling_price DECIMAL(10,2) 
+ALTER TABLE products
+ADD COLUMN indexed_selling_price DECIMAL(10,2)
 GENERATED ALWAYS AS (base_price * (1 - discount_rate) * (1 + tax_rate)) STORED;
 
 CREATE INDEX idx_stored_selling_price ON products(indexed_selling_price);
@@ -340,8 +340,8 @@ If you need to replicate calculated values, you must use stored generated column
 
 ```sql
 -- Only stored generated columns can be logically replicated
-ALTER TABLE products 
-ADD COLUMN replicable_total DECIMAL(10,2) 
+ALTER TABLE products
+ADD COLUMN replicable_total DECIMAL(10,2)
 GENERATED ALWAYS AS (base_price * (1 - discount_rate) * (1 + tax_rate)) STORED;
 ```
 
@@ -351,8 +351,8 @@ PostgreSQL 18 introduces the ability to logically replicate stored generated col
 
 ```sql
 -- Create a publication that includes stored generated columns
-CREATE PUBLICATION pub_products 
-FOR TABLE products 
+CREATE PUBLICATION pub_products
+FOR TABLE products
 WITH (publish_generated_columns = stored);
 
 -- Or specify it for specific tables only
@@ -367,12 +367,14 @@ This flexibility allows you to replicate calculated values to systems that may n
 When designing your database schema with virtual generated columns, consider the following best practices:
 
 **Choose virtual columns when:**
+
 - Storage space is a concern
 - Calculations are relatively simple
 - Values change frequently
 - No indexing is required on the calculated values
 
 **Choose stored columns when:**
+
 - You need to create indexes on calculated values
 - Calculations are computationally expensive
 - Query performance is more critical than storage space

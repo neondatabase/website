@@ -51,9 +51,9 @@ The client-side flow is handled automatically by `libpq`, including support for 
 
 The main components that you need to understand are:
 
-* **Discovery Process**: When you specify an issuer, PostgreSQL's client automatically discovers OAuth endpoints by fetching `/.well-known/openid-configuration` from your provider. This follows OpenID Connect Discovery standards, so most modern identity providers work out of the box.
+- **Discovery Process**: When you specify an issuer, PostgreSQL's client automatically discovers OAuth endpoints by fetching `/.well-known/openid-configuration` from your provider. This follows OpenID Connect Discovery standards, so most modern identity providers work out of the box.
 
-* **Validator Modules**: These are the bridge between PostgreSQL and your specific OAuth provider. The validator handles provider-specific token verification, whether that's validating JWT signatures, calling token introspection endpoints, or other methods. You can write custom validators for proprietary systems or use existing ones for popular providers.
+- **Validator Modules**: These are the bridge between PostgreSQL and your specific OAuth provider. The validator handles provider-specific token verification, whether that's validating JWT signatures, calling token introspection endpoints, or other methods. You can write custom validators for proprietary systems or use existing ones for popular providers.
 
 ## Basic Setup
 
@@ -66,6 +66,7 @@ host  myapp  all  0.0.0.0/0  oauth  issuer=https://your-provider.com  scope="ope
 ```
 
 Key parameters:
+
 - `issuer`: Your OAuth provider's HTTPS URL (must exactly match the issuer in tokens)
 - `scope`: Required OAuth scopes (space-separated)
 - `validator`: Which validator module to use (required if you have multiple)
@@ -93,12 +94,14 @@ psql "host=db.example.com dbname=myapp oauth_issuer=https://your-provider.com oa
 This triggers a web-based authentication flow where you'll complete login in your browser, then `psql` automatically receives the token and connects.
 
 For applications, you can provide tokens directly:
+
 ```bash
 # Direct token usage (for apps that already have tokens)
 psql "host=db.example.com dbname=myapp oauth_issuer=https://your-provider.com oauth_client_id=your-client-id oauth_token=your-bearer-token"
 ```
 
 Additional OAuth connection parameters:
+
 - `oauth_client_secret`: For confidential clients that require authentication
 - `oauth_scope`: Override the default scopes (useful for requesting additional permissions)
 - `require_auth`: Specify acceptable authentication methods (e.g., `require_auth=oauth`)
@@ -107,9 +110,9 @@ Additional OAuth connection parameters:
 
 OAuth user identities often don't match PostgreSQL role names directly. You have several mapping options:
 
-* **Direct matching**: The username from your OAuth provider must exactly match a PostgreSQL role.
+- **Direct matching**: The username from your OAuth provider must exactly match a PostgreSQL role.
 
-* **Identity mapping**: Use `pg_ident.conf` to map OAuth identities to database roles:
+- **Identity mapping**: Use `pg_ident.conf` to map OAuth identities to database roles:
 
   ```
   # In pg_hba.conf
@@ -120,7 +123,7 @@ OAuth user identities often don't match PostgreSQL role names directly. You have
   oauth_map    admin@company.com    postgres
   ```
 
-* **Delegated mapping**: Let your validator module handle all user mapping logic by setting `delegate_ident_mapping=1` in `pg_hba.conf`. This is an advanced option where the validator takes full responsibility for determining which PostgreSQL role the user should connect as.
+- **Delegated mapping**: Let your validator module handle all user mapping logic by setting `delegate_ident_mapping=1` in `pg_hba.conf`. This is an advanced option where the validator takes full responsibility for determining which PostgreSQL role the user should connect as.
 
   ```
   host  myapp  all  0.0.0.0/0  oauth  issuer=https://provider.com  scope="openid"  delegate_ident_mapping=1

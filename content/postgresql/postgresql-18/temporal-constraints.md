@@ -28,6 +28,7 @@ Temporal constraints work with PostgreSQL's range types, such as `daterange`, `t
 Before diving into temporal constraints, it's important to understand PostgreSQL's range types, which form the foundation of temporal functionality. Range types represent a continuous span between two values and are essential for temporal constraints.
 
 PostgreSQL provides several built-in range types:
+
 - **`daterange`**: A range of dates
 - **`tsrange`**: A range of timestamps without timezone
 - **`tstzrange`**: A range of timestamps with timezone
@@ -69,7 +70,7 @@ CREATE TABLE employees (
     position VARCHAR(50) NOT NULL,
     salary DECIMAL(10,2) NOT NULL,
     valid_period tstzrange NOT NULL DEFAULT tstzrange(now(), 'infinity', '[)'),
-    
+
     -- Temporal primary key: no overlapping periods for same employee
     PRIMARY KEY (emp_id, valid_period WITHOUT OVERLAPS)
 );
@@ -79,7 +80,7 @@ CREATE TABLE department_budgets (
     dept_name VARCHAR(50),
     budget_amount DECIMAL(12,2) NOT NULL,
     budget_period daterange NOT NULL,
-    
+
     -- Temporal unique constraint: no overlapping budget periods per department
     UNIQUE (dept_name, budget_period WITHOUT OVERLAPS)
 );
@@ -90,7 +91,7 @@ CREATE TABLE project_assignments (
     emp_id INTEGER NOT NULL,
     project_name VARCHAR(100) NOT NULL,
     assignment_period tstzrange NOT NULL,
-    
+
     -- Temporal foreign key to employees (to be added after inserting data)
     CHECK (NOT isempty(assignment_period))  -- Ensure non-empty ranges
 );
@@ -109,8 +110,8 @@ A temporal primary key combines regular columns with a range column and the `WIT
 ```sql
 -- Insert employee data to demonstrate temporal primary key
 INSERT INTO employees (emp_id, emp_name, department, position, salary, valid_period)
-VALUES 
-    (1, 'Alice Johnson', 'Engineering', 'Software Engineer', 75000, 
+VALUES
+    (1, 'Alice Johnson', 'Engineering', 'Software Engineer', 75000,
      tstzrange('2024-01-01', '2025-01-01', '[)')),
     (1, 'Alice Johnson', 'Engineering', 'Senior Software Engineer', 85000,
      tstzrange('2025-01-01', 'infinity', '[)')),
@@ -140,7 +141,7 @@ Temporal unique constraints work similarly but for unique constraints rather tha
 ```sql
 -- Insert department budget data
 INSERT INTO department_budgets (dept_name, budget_amount, budget_period)
-VALUES 
+VALUES
     ('Engineering', 500000, daterange('2025-01-01', '2025-12-31', '[)')),
     ('Marketing', 200000, daterange('2025-01-01', '2025-12-31', '[)')),
     ('Engineering', 550000, daterange('2025-01-01', '2025-12-31', '[)'));  -- Different period, allowed
@@ -155,13 +156,13 @@ Temporal constraints enable powerful querying capabilities. You can easily find 
 ```sql
 -- Find who worked in Engineering on a specific date
 SELECT emp_name, position, salary
-FROM employees 
-WHERE department = 'Engineering' 
+FROM employees
+WHERE department = 'Engineering'
   AND valid_period @> '2024-06-15'::timestamptz;
 
 -- Find all salary changes for a specific employee
 SELECT emp_name, position, salary, valid_period
-FROM employees 
+FROM employees
 WHERE emp_id = 1
 ORDER BY lower(valid_period);
 
@@ -186,9 +187,9 @@ A temporal foreign key ensures that the referenced row exists during the entire 
 
 ```sql
 -- Add temporal foreign key to project assignments
-ALTER TABLE project_assignments 
-ADD CONSTRAINT fk_emp_temporal 
-FOREIGN KEY (emp_id, PERIOD assignment_period) 
+ALTER TABLE project_assignments
+ADD CONSTRAINT fk_emp_temporal
+FOREIGN KEY (emp_id, PERIOD assignment_period)
 REFERENCES employees (emp_id, PERIOD valid_period);
 ```
 
@@ -203,14 +204,14 @@ Let's see how temporal foreign keys work in practice. Start by inserting some em
 ```sql
 -- Insert Alice (emp_id = 1) with a valid period covering 2024-03-01 to 2025-04-01
 INSERT INTO employees (emp_id, emp_name, department, position, salary, valid_period)
-VALUES 
-  (1, 'Alice Johnson', 'Engineering', 'Software Engineer', 75000, 
+VALUES
+  (1, 'Alice Johnson', 'Engineering', 'Software Engineer', 75000,
    tstzrange('2024-01-01', '2025-07-01', '[)'));
 
 -- Insert Bob (emp_id = 2) with a valid period covering 2024-08-01 to 2024-12-01
 INSERT INTO employees (emp_id, emp_name, department, position, salary, valid_period)
-VALUES 
-  (2, 'Bob Wilson', 'Marketing', 'Marketing Specialist', 60000, 
+VALUES
+  (2, 'Bob Wilson', 'Marketing', 'Marketing Specialist', 60000,
    tstzrange('2024-06-01', '2025-01-01', '[)'));
 ```
 
@@ -219,7 +220,7 @@ Then, you can insert project assignments that reference these employees:
 ```sql
 -- Insert valid project assignments
 INSERT INTO project_assignments (emp_id, project_name, assignment_period)
-VALUES 
+VALUES
     (1, 'Website Redesign', tstzrange('2024-03-01', '2024-06-01', '[)')),  -- Valid: Alice existed then
     (2, 'Marketing Campaign', tstzrange('2024-08-01', '2024-12-01', '[)'));  -- Valid: Bob existed then
 
@@ -240,7 +241,6 @@ The temporal foreign key prevents this insertion because Alice's employee record
 
 The key thing to note is that the `PERIOD` clause allows you to define foreign key relationships based on time ranges, ensuring that referential integrity is maintained across temporal data.
 
-
 ## Performance Considerations
 
 Temporal constraints use GiST indexes, which have different performance characteristics than B-tree indexes. Understanding these differences helps you optimize your temporal database design.
@@ -251,10 +251,10 @@ GiST indexes store range data efficiently and support overlap operations, but th
 
 ```sql
 -- Check the indexes created by temporal constraints
-SELECT 
-    indexname, 
-    indexdef 
-FROM pg_indexes 
+SELECT
+    indexname,
+    indexdef
+FROM pg_indexes
 WHERE tablename = 'employees';
 ```
 
@@ -266,11 +266,11 @@ For optimal performance with temporal queries, consider your query patterns and 
 
 ```sql
 -- Efficient: Uses the GiST index
-SELECT * FROM employees 
+SELECT * FROM employees
 WHERE emp_id = 1 AND valid_period @> '2025-01-15'::timestamptz;
 
 -- Less efficient: May require full scan
-SELECT * FROM employees 
+SELECT * FROM employees
 WHERE upper(valid_period) > '2025-01-01'::timestamptz;
 ```
 

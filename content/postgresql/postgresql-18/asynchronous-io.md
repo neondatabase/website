@@ -55,7 +55,7 @@ SELECT version();
 
 -- Check available async I/O settings
 SELECT name, setting, context, short_desc
-FROM pg_settings 
+FROM pg_settings
 WHERE name LIKE '%io_%'
 ORDER BY name;
 ```
@@ -96,8 +96,8 @@ After changing `io_method`, restart PostgreSQL:
 
 ```sql
 -- Check if restart is required
-SELECT name, setting, pending_restart 
-FROM pg_settings 
+SELECT name, setting, pending_restart
+FROM pg_settings
 WHERE name = 'io_method';
 ```
 
@@ -122,7 +122,7 @@ CREATE TABLE async_io_test (
 
 -- Insert test data
 INSERT INTO async_io_test (data, random_num)
-SELECT 
+SELECT
     'Performance test data for async I/O - row ' || i,
     (random() * 1000000)::INTEGER
 FROM generate_series(1, 500000) AS i;
@@ -158,21 +158,21 @@ Enable timing and run test queries:
 
 -- Test 1: Sequential scan
 EXPLAIN (ANALYZE, BUFFERS, VERBOSE)
-SELECT COUNT(*) 
-FROM async_io_test 
+SELECT COUNT(*)
+FROM async_io_test
 WHERE data LIKE '%500000%';
 
 -- Test 2: Index range scan
 EXPLAIN (ANALYZE, BUFFERS, VERBOSE)
-SELECT id, data, random_num 
-FROM async_io_test 
+SELECT id, data, random_num
+FROM async_io_test
 WHERE random_num BETWEEN 100000 AND 200000;
 
 -- Test 3: Join operation
 EXPLAIN (ANALYZE, BUFFERS, VERBOSE)
 SELECT t1.id, COUNT(t2.id)
-FROM async_io_test t1 
-LEFT JOIN async_io_test t2 ON t1.random_num = t2.random_num 
+FROM async_io_test t1
+LEFT JOIN async_io_test t2 ON t1.random_num = t2.random_num
 WHERE t1.id < 10000
 GROUP BY t1.id;
 
@@ -204,15 +204,15 @@ When using the `worker` method, monitor I/O worker processes:
 
 ```sql
 -- View background processes
-SELECT 
+SELECT
     pid,
     application_name,
     backend_type,
     state,
     wait_event_type,
     wait_event
-FROM pg_stat_activity 
-WHERE backend_type LIKE '%worker%' 
+FROM pg_stat_activity
+WHERE backend_type LIKE '%worker%'
    OR application_name LIKE '%io%'
 ORDER BY backend_type, pid;
 ```
@@ -237,9 +237,9 @@ PostgreSQL 18 includes new system views to help monitor asynchronous I/O operati
 
 ```sql
 -- Look for AIO-related system views
-SELECT schemaname, viewname 
-FROM pg_views 
-WHERE viewname LIKE '%aio%' 
+SELECT schemaname, viewname
+FROM pg_views
+WHERE viewname LIKE '%aio%'
    OR viewname LIKE '%async%'
    OR viewname LIKE '%io%';
 ```

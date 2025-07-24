@@ -20,6 +20,7 @@ nextLink:
 PostgreSQL 18 introduces a significant improvement to the RETURNING clause that fundamentally changes how you can capture data during DML operations. Prior to this release, the RETURNING clause had a limitation: it could only return one set of values depending on the operation type.
 
 The traditional behavior was straightforward but limiting:
+
 - **INSERT and UPDATE**: returned only the new/current values
 - **DELETE**: returned only the old/deleted values
 - **MERGE**: returned values based on the specific internal operation executed
@@ -63,7 +64,7 @@ CREATE TABLE inventory (
 
 -- Insert sample data to work with
 INSERT INTO inventory (product_name, category, quantity, unit_price)
-VALUES 
+VALUES
     ('Laptop Computer', 'Electronics', 50, 999.99),
     ('Office Chair', 'Furniture', 75, 249.50),
     ('Wireless Mouse', 'Electronics', 120, 29.95),
@@ -106,12 +107,12 @@ ALTER TABLE inventory ADD CONSTRAINT unique_product_name UNIQUE (product_name);
 -- Now attempt to insert a duplicate
 INSERT INTO inventory (product_name, category, quantity, unit_price)
 VALUES ('Laptop Computer', 'Electronics', 25, 1099.99)
-ON CONFLICT (product_name) 
-DO UPDATE SET 
+ON CONFLICT (product_name)
+DO UPDATE SET
     quantity = inventory.quantity + EXCLUDED.quantity,
     unit_price = EXCLUDED.unit_price,
     last_updated = CURRENT_TIMESTAMP
-RETURNING 
+RETURNING
     old.quantity AS original_quantity,
     new.quantity AS updated_quantity,
     old.unit_price AS original_price,
@@ -122,7 +123,7 @@ RETURNING
 You will get the following output:
 
 ```sql
- original_quantity | updated_quantity | original_price | updated_price | quantity_added 
+ original_quantity | updated_quantity | original_price | updated_price | quantity_added
 -------------------+------------------+----------------+---------------+----------------
                 50 |               75 |         999.99 |       1099.99 |             25
 (1 row)
@@ -138,12 +139,12 @@ Without this enhancement, you would need to write a separate query before the op
 
 ```sql
 -- Update prices with a 5% increase for Electronics
-UPDATE inventory 
-SET 
+UPDATE inventory
+SET
     unit_price = unit_price * 1.05,
     last_updated = CURRENT_TIMESTAMP
 WHERE category = 'Electronics'
-RETURNING 
+RETURNING
     product_name,
     old.unit_price AS before_price,
     new.unit_price AS after_price,
@@ -153,7 +154,7 @@ RETURNING
 Output from this query would look like this:
 
 ```sql
-  product_name   | before_price | after_price | price_increase 
+  product_name   | before_price | after_price | price_increase
 -----------------+--------------+-------------+----------------
  Wireless Mouse  |        29.95 |       31.45 |           1.50
  USB Cable       |        12.99 |       13.64 |           0.65
@@ -170,25 +171,25 @@ Let's take this a step further by adding conditional logic to the RETURNING clau
 
 ```sql
 -- Reduce inventory for a flash sale
-UPDATE inventory 
-SET 
+UPDATE inventory
+SET
     quantity = GREATEST(quantity - 15, 0),  -- Never go below 0
     unit_price = unit_price * 0.85,        -- 15% discount
     last_updated = CURRENT_TIMESTAMP
 WHERE category = 'Electronics' AND quantity > 20
-RETURNING 
+RETURNING
     product_name,
     old.quantity AS stock_before,
     new.quantity AS stock_after,
     old.unit_price AS regular_price,
     new.unit_price AS sale_price,
-    CASE 
-        WHEN old.quantity - new.quantity > 0 
-        THEN old.quantity - new.quantity 
-        ELSE 0 
+    CASE
+        WHEN old.quantity - new.quantity > 0
+        THEN old.quantity - new.quantity
+        ELSE 0
     END AS units_sold,
-    CASE 
-        WHEN new.quantity < 10 
+    CASE
+        WHEN new.quantity < 10
         THEN 'LOW_STOCK_WARNING'
         ELSE 'NORMAL'
     END AS stock_status;
@@ -206,7 +207,7 @@ When deleting data, you often want to preserve information about what was remove
 -- Remove discontinued products
 DELETE FROM inventory
 WHERE quantity = 0 AND category = 'Furniture'
-RETURNING 
+RETURNING
     old.product_id,
     old.product_name,
     old.unit_price AS final_price,
@@ -224,12 +225,12 @@ Another approach might involve implementing a soft delete pattern:
 ALTER TABLE inventory ADD COLUMN status VARCHAR(10) DEFAULT 'active';
 
 -- Implement soft delete with change tracking
-UPDATE inventory 
-SET 
+UPDATE inventory
+SET
     status = 'soft_d',
     last_updated = CURRENT_TIMESTAMP
 WHERE quantity < 150 AND category = 'Electronics'
-RETURNING 
+RETURNING
     product_name,
     old.status AS previous_status,
     new.status AS current_status,
@@ -247,7 +248,7 @@ The syntax for custom aliases uses a `WITH` clause that precedes your RETURNING 
 
 ```sql
 -- Use custom aliases for clarity
-UPDATE inventory 
+UPDATE inventory
 SET quantity = quantity * 2
 WHERE product_id = 1
 RETURNING WITH (OLD AS before, NEW AS after)
@@ -263,7 +264,7 @@ Custom aliases are particularly valuable in complex applications where you might
 
 ```sql
 -- Domain-specific aliases for financial operations
-UPDATE inventory 
+UPDATE inventory
 SET unit_price = unit_price * 1.08  -- Add 8% tax
 WHERE category = 'Electronics'
 RETURNING WITH (OLD AS pre_tax, NEW AS post_tax)
@@ -283,7 +284,7 @@ For operations affecting many rows, consider processing in batches:
 
 ```sql
 -- Process large updates in batches
-UPDATE inventory 
+UPDATE inventory
 SET unit_price = unit_price * 1.05
 WHERE product_id BETWEEN 1 AND 1000  -- Process 1000 records at a time
 RETURNING old.unit_price, new.unit_price;
@@ -296,7 +297,7 @@ When using the enhanced RETURNING clause in WHERE clauses or complex expressions
 CREATE INDEX idx_inventory_category_quantity ON inventory(category, quantity);
 
 -- Efficient query with indexed columns
-UPDATE inventory 
+UPDATE inventory
 SET quantity = quantity + 10
 WHERE category = 'Electronics' AND quantity < 150
 RETURNING old.quantity, new.quantity;
@@ -322,11 +323,11 @@ RETURNING old.*, new.*
 
 ```sql
 -- Add business logic to your RETURNING clause
-RETURNING 
+RETURNING
     product_name,
     old.quantity,
     new.quantity,
-    CASE 
+    CASE
         WHEN new.quantity < 10 THEN 'Reorder Required'
         WHEN new.quantity < old.quantity THEN 'Stock Reduced'
         ELSE 'Stock Increased'
@@ -337,7 +338,7 @@ RETURNING
 
 ```sql
 -- Safe handling of potential NULLs
-RETURNING 
+RETURNING
     product_name,
     COALESCE(old.quantity, 0) AS safe_old_quantity,
     new.quantity;

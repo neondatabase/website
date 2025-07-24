@@ -60,7 +60,7 @@ The traditional EXPLAIN ANALYZE output provided execution times and row counts b
 
 ```sql
 -- Limited information without BUFFERS
-EXPLAIN ANALYZE 
+EXPLAIN ANALYZE
 SELECT * FROM orders WHERE order_date > '2025-01-01';
 ```
 
@@ -76,10 +76,10 @@ Now, simply running EXPLAIN ANALYZE provides comprehensive buffer information au
 
 ```sql
 -- PostgreSQL 18: Automatic buffer information
-EXPLAIN ANALYZE 
-SELECT customer_id, SUM(total_amount) 
-FROM orders 
-WHERE order_date >= '2025-06-01' 
+EXPLAIN ANALYZE
+SELECT customer_id, SUM(total_amount)
+FROM orders
+WHERE order_date >= '2025-06-01'
 GROUP BY customer_id;
 ```
 
@@ -160,8 +160,8 @@ VALUES
 Now, if you run a query that uses this index, the output will include index lookup counts:
 
 ```sql
-EXPLAIN ANALYZE 
-SELECT * FROM customers 
+EXPLAIN ANALYZE
+SELECT * FROM customers
 WHERE email = 'john.doe@example.com';
 ```
 
@@ -201,7 +201,7 @@ This output lacks the index lookup count, making it difficult to assess index ef
 The enhanced index information is particularly valuable for understanding nested loop joins, where index lookups can multiply:
 
 ```sql
-EXPLAIN ANALYZE 
+EXPLAIN ANALYZE
 SELECT c.name, o.order_date, o.total_amount
 FROM customers c
 JOIN orders o ON c.customer_id = o.customer_id
@@ -251,7 +251,7 @@ CREATE INDEX idx_products_category ON products(category);
 INSERT INTO products (category, price, stock_quantity, last_updated)
 VALUES
 ('Electronics', 299.99, 50, NOW()),
-('Books', 19.99, 200, NOW()),   
+('Books', 19.99, 200, NOW()),
 ('Clothing', 49.99, 100, NOW()),
 ('Electronics', 199.99, 30, NOW()),
 ('Books', 29.99, 150, NOW());
@@ -260,10 +260,10 @@ VALUES
 When you run a query with the enhanced VERBOSE mode, it provides detailed CPU statistics:
 
 ```sql
-EXPLAIN (ANALYZE, VERBOSE) 
-SELECT category, AVG(price), COUNT(*) 
-FROM products 
-WHERE stock_quantity > 0 
+EXPLAIN (ANALYZE, VERBOSE)
+SELECT category, AVG(price), COUNT(*)
+FROM products
+WHERE stock_quantity > 0
 GROUP BY category;
 ```
 
@@ -299,8 +299,8 @@ Use the automatic buffer information to understand cache behavior:
 
 ```sql
 -- Test query with good cache behavior
-EXPLAIN ANALYZE 
-SELECT COUNT(*) FROM customers 
+EXPLAIN ANALYZE
+SELECT COUNT(*) FROM customers
 WHERE city = 'New York';
 ```
 
@@ -329,7 +329,7 @@ This shows excellent cache performance with all data found in shared buffers, in
 Analyze complex joins with the enhanced index lookup information:
 
 ```sql
-EXPLAIN ANALYZE 
+EXPLAIN ANALYZE
 SELECT c.name, COUNT(o.order_id) as order_count
 FROM customers c
 LEFT JOIN orders o ON c.customer_id = o.customer_id

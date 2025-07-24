@@ -160,7 +160,7 @@ CREATE INDEX idx_v7 ON performance_test (id_v7);
 
 -- Insert test data
 INSERT INTO performance_test (data)
-SELECT 'test record ' || i 
+SELECT 'test record ' || i
 FROM generate_series(1, 100000) i;
 ```
 
@@ -190,14 +190,14 @@ UUIDv7's natural ordering eliminates the need for additional timestamp columns i
 
 ```sql
 -- This query benefits from the natural ordering of UUIDv7
-SELECT id_v7, data 
-FROM performance_test 
+SELECT id_v7, data
+FROM performance_test
 ORDER BY id_v7
 LIMIT 10;
 
 -- Compare with UUIDv4 (no meaningful order)
-SELECT id_v4, data 
-FROM performance_test 
+SELECT id_v4, data
+FROM performance_test
 ORDER BY id_v4  -- Random order, no chronological meaning
 LIMIT 10;
 ```
@@ -222,7 +222,7 @@ CREATE TABLE tenant_records (
 );
 
 -- Create a composite index that benefits from UUIDv7 ordering
-CREATE INDEX idx_tenant_records_tenant_created 
+CREATE INDEX idx_tenant_records_tenant_created
 ON tenant_records (tenant_id, id);
 ```
 
@@ -245,7 +245,7 @@ CREATE TABLE distributed_events (
 
 -- Natural ordering by creation time across all services
 SELECT event_id, service_name, event_type
-FROM distributed_events 
+FROM distributed_events
 ORDER BY event_id
 LIMIT 100;
 ```
@@ -259,6 +259,7 @@ With the introduction of UUIDv7, consider the following factors when designing y
 ### When to Use UUIDv7
 
 Use UUIDv7 when you need:
+
 - Globally unique identifiers across distributed systems
 - Natural chronological ordering
 - Better B-tree index performance than UUIDv4
@@ -267,6 +268,7 @@ Use UUIDv7 when you need:
 ### When to Stick with Auto-incrementing IDs
 
 Consider staying with `SERIAL` or `BIGSERIAL` when:
+
 - Your application is not distributed
 - You need the smallest possible primary key size
 - You frequently perform range scans on the primary key
@@ -290,7 +292,7 @@ UUIDv7 uses millisecond precision for timestamps:
 
 ```sql
 -- The extracted timestamp may differ slightly from the actual generation time
-SELECT 
+SELECT
     uuidv7() as uuid,
     CURRENT_TIMESTAMP as actual_time,
     uuid_extract_timestamp(uuidv7()) as extracted_time;

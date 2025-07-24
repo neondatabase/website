@@ -41,7 +41,7 @@ SELECT * FROM sales
 WHERE region = 'North' AND category = 'Electronics';
 
 -- This query cannot use the index efficiently
-SELECT * FROM sales 
+SELECT * FROM sales
 WHERE category = 'Electronics' AND date > '2025-01-01';
 ```
 
@@ -76,7 +76,7 @@ Next, we will create a multicolumn index on the `sales` table that includes `reg
 
 ```sql
 -- Create the multicolumn index
-CREATE INDEX idx_sales_analytics 
+CREATE INDEX idx_sales_analytics
 ON sales (region, category, sale_date);
 ```
 
@@ -89,8 +89,8 @@ Now let's populate the table with sample data that demonstrates the skip scan be
 ```sql
 -- Insert sample data with various combinations
 INSERT INTO sales (region, category, product_name, sale_date, amount, sales_rep)
-SELECT 
-    CASE (random() * 3)::int 
+SELECT
+    CASE (random() * 3)::int
         WHEN 0 THEN 'North'
         WHEN 1 THEN 'South'
         ELSE 'West'
@@ -129,10 +129,10 @@ First, let's examine a query that benefits from skip scan:
 
 ```sql
 -- Query that omits the leading 'region' column
-EXPLAIN (ANALYZE, BUFFERS) 
+EXPLAIN (ANALYZE, BUFFERS)
 SELECT category, COUNT(*), AVG(amount)
-FROM sales 
-WHERE category = 'Electronics' 
+FROM sales
+WHERE category = 'Electronics'
   AND sale_date BETWEEN '2025-06-01' AND '2025-08-31'
 GROUP BY category;
 ```
@@ -147,11 +147,11 @@ To see the difference, you can compare this with a query that includes all prefi
 
 ```sql
 -- Traditional approach: specify all prefix columns
-EXPLAIN (ANALYZE, BUFFERS) 
+EXPLAIN (ANALYZE, BUFFERS)
 SELECT region, category, COUNT(*), AVG(amount)
-FROM sales 
+FROM sales
 WHERE region IN ('North', 'South', 'West')
-  AND category = 'Electronics' 
+  AND category = 'Electronics'
   AND sale_date BETWEEN '2025-06-01' AND '2025-08-31'
 GROUP BY region, category;
 ```
@@ -168,8 +168,8 @@ Skip scan works best when the leading columns that you're omitting have relative
 
 ```sql
 -- Effective: region has only 3 distinct values
-SELECT * FROM sales 
-WHERE category = 'Electronics' 
+SELECT * FROM sales
+WHERE category = 'Electronics'
   AND sale_date > '2025-06-01';
 
 -- Less effective if region had thousands of distinct values
@@ -188,9 +188,9 @@ When examining query plans, look for indicators that skip scan is being used:
 
 ```sql
 -- Use verbose explain to see detailed execution information
-EXPLAIN (ANALYZE, BUFFERS, VERBOSE) 
+EXPLAIN (ANALYZE, BUFFERS, VERBOSE)
 SELECT category, AVG(amount)
-FROM sales 
+FROM sales
 WHERE category = 'Electronics'
   AND sale_date > '2025-09-01'
 GROUP BY category;
@@ -214,8 +214,8 @@ When the leading column has too many distinct values, skip scan becomes ineffici
 
 ```sql
 -- Example: user_id has millions of distinct values
-SELECT * FROM user_events 
-WHERE event_type = 'login' 
+SELECT * FROM user_events
+WHERE event_type = 'login'
   AND event_date > '2025-01-01';
 ```
 
@@ -227,7 +227,7 @@ When your query returns most of the table, sequential scan is typically faster:
 
 ```sql
 -- If this matches 90% of all rows
-SELECT * FROM sales 
+SELECT * FROM sales
 WHERE category IN ('Electronics', 'Clothing', 'Books', 'Home')
   AND sale_date > '2025-01-01';
 ```
