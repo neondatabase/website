@@ -2,7 +2,7 @@
 title: Monitoring in Neon
 subtitle: Learn about monitoring resources and metrics in Neon
 enableTableOfContents: false
-updatedOn: '2025-07-18T13:03:31.852Z'
+updatedOn: '2025-07-24T20:03:24.602Z'
 ---
 
 To find out what's going on with your Neon projects and databases, Neon offers several ways to track metrics and monitor usage.
