@@ -1,5 +1,5 @@
 ---
-title: Branch expiration (TTL)
+title: Branch expiration
 subtitle: Learn how to use Neon's branch expiration feature to automatically delete temporary branches
 enableTableOfContents: true
 updatedOn: '2025-07-09T00:00:00.000Z'
