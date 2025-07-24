@@ -19,7 +19,7 @@ For more details, see [Connect from any application](/docs/connect/connect-from-
 
 ## Add a PostgreSQL data source in Looker Studio
 
-1. In Looker Studio, **Create** >  **Data Source**.
+1. In Looker Studio, **Create** > **Data Source**.
 2. Search for and select the **PostgreSQL** connector, and authorize it.
 3. In the **Basic** section, fill in the fields using the details from your connection string.
 
