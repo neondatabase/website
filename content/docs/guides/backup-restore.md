@@ -150,8 +150,8 @@ Use this option if you need to restore the snapshot data to your existing branch
 1. Locate the snapshot you want to use and click **Restore → One-step restore**.
 
    ![One step restore option](/docs/guides/one_step_restore.png)
-2. The **One-step restore** modal explains the operation:
 
+2. The **One-step restore** modal explains the operation:
    - The restore operation will occur instantly
    - The current branch will be restored to the snapshot state
    - A branch named `<branch_name (old)>` will be created as a backup
@@ -159,6 +159,7 @@ Use this option if you need to restore the snapshot data to your existing branch
    ![One step restore confirmation modal](/docs/guides/one_step_restore_modal.png)
 
    Click **Restore** to proceed with the operation.
+
 3. Your branch is immediately restored to the snapshot state, and the `<branch_name>_old` branch is created, which you'll find on the **Branches** page in the Neon Console, as shown here:
    ![Branches page that shows the backup branch](/docs/guides/one_step_restore_branches_page.png)
 
@@ -166,7 +167,7 @@ Use this option if you need to restore the snapshot data to your existing branch
 
 ### Multi-step restore
 
-Use this option if you need to inspect the snapshot data before you switch over to the new branch. 
+Use this option if you need to inspect the snapshot data before you switch over to the new branch.
 
 1. Locate the snapshot you want to use and click **Restore → Multi-step restore**.
    ![Multi-step restore option](/docs/guides/multi_step_restore.png)
@@ -178,7 +179,7 @@ Use this option if you need to inspect the snapshot data before you switch over 
    ![Multi-step restore confirmation modal](/docs/guides/multi_step_restore_modal.png)
 
 3. Clicking **Restore** creates a new branch with the restored data and directs you to the **Branch overview** page where you can:
-   - **Get connection details** for the new branch to preview the data restored from the snapshot 
+   - **Get connection details** for the new branch to preview the data restored from the snapshot
    - **Migrate connectioons and settings** to move your database URLs and compute settings from the old branch to the new branch so you don't have to update the connection configuration in your application
 
    ![Branch overview page](/docs/guides/branch_overview_page.png)
