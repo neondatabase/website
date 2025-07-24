@@ -119,8 +119,7 @@ You can automate snapshot creation by setting a snapshot schedule for a branch.
 To edit the snapshot schedule:
 
 1. Click **Edit schedule**.
-2. In the **Edit snapshot schedule** modal, configure: 
-
+2. In the **Edit snapshot schedule** modal, configure:
    - **Frequency** – Daily, weekly, or monthly snapshots.
    - **Retention** – How long to retain snapshots before they expire.
    - **Custom retention rules** – Optionally keep specific daily or weekly snapshots for longer.
@@ -177,6 +176,7 @@ Use this option if you need to inspect the snapshot data before you switch over 
    - A new branch with the snaphot data will be created
 
    ![Multi-step restore confirmation modal](/docs/guides/multi_step_restore_modal.png)
+
 3. Clicking **Restore** creates a new branch with the restored data and directs you to the **Branch overview** page where you can:
    - **Get connection details** for the new branch to preview the data restored from the snapshot 
    - **Migrate connectioons and settings** to move your database URLs and compute settings from the old branch to the new branch so you don't have to update the connection configuration in your application
