@@ -23,21 +23,20 @@ For more details, see [Connect from any application](/docs/connect/connect-from-
 2. Search for and select the **PostgreSQL** connector, and authorize it.
 3. In the **Basic** section, fill in the fields using the details from your connection string.
 
-    For example, if your connection string is:
+   For example, if your connection string is:
 
-    ```bash
-    psql 'postgresql://neondb_owner:npg_aaaaaaaaaaaa@ep-quiet-mountain-a1t1firv-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
-    ```
+   ```bash
+   psql 'postgresql://neondb_owner:npg_aaaaaaaaaaaa@ep-quiet-mountain-a1t1firv-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
+   ```
 
-    You would enter:
+   You would enter:
+   - **Host name or IP**: `ep-quiet-mountain-a1t1firv-pooler.ap-southeast-1.aws.neon.tech`
+   - **Port (optional)**: Leave blank
+   - **Database**: `neondb`
+   - **Username**: `neondb_owner`
+   - **Password**: `npg_aaaaaaaaaaaa`
 
-    - **Host name or IP**: `ep-quiet-mountain-a1t1firv-pooler.ap-southeast-1.aws.neon.tech`
-    - **Port (optional)**: Leave blank
-    - **Database**: `neondb`
-    - **Username**: `neondb_owner`
-    - **Password**: `npg_aaaaaaaaaaaa`
-
-    ![Looker studio connection details](/docs/connect/ls_connection_details.png)
+   ![Looker studio connection details](/docs/connect/ls_connection_details.png)
 
 ## Configure SSL settings
 
@@ -49,7 +48,7 @@ For more details, see [Connect from any application](/docs/connect/connect-from-
 1. Download the `isrgrootx1.pem` file from https://letsencrypt.org/certs/isrgrootx1.pem. For more information about SSL certificates, see [Connect to Neon securely](/docs/connect/connect-securely).
 2. In Looker Studio, upload the `isrgrootx1.pem` file using the **Upload** button next to the **Server Certificate** box.
 
-    ![Looker studio upload pem file](/docs/connect/ls_pem_file.png)
+   ![Looker studio upload pem file](/docs/connect/ls_pem_file.png)
 
 ## Authenticate
 
