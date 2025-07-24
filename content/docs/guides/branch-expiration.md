@@ -42,6 +42,7 @@ Branch expiration is ideal for temporary branches that have predictable lifespan
 Without automatic expiration, these branches accumulate over time, increasing storage costs and project clutter.
 
 ### Example branch expiration settings
+
 Here are some example expiration settings that teams might use, depending on the purpose of the branch. Adjust these to fit your workflow and branch management requirements.
 
 - **CI/CD pipelines:** 2–4 hours
@@ -174,7 +175,7 @@ neon branches create \
 1. Navigate to the Branches page in the Neon Console
 2. Click "Create branch"
 3. Enter branch name and select parent branch
-4. Check "Auto-delete branch on:" 
+4. Check "Auto-delete branch on:"
 5. Select or enter date and time
 6. Click "Create branch"
 ```
@@ -295,6 +296,7 @@ When you create a branch with a TTL of 24 hours, `ttl_interval_seconds` is set t
 If you reset the branch from its parent, the `expires_at` value is recalculated using the preserved `ttl_interval_seconds` value, starting from the reset time. The interval itself remains unchanged.
 
 **Example response:**
+
 ```json {4,5}
 {
   "branch": {
@@ -305,6 +307,7 @@ If you reset the branch from its parent, the `expires_at` value is recalculated 
   }
 }
 ```
+
 In this example, the branch will be deleted 24 hours after creation.
 
 <NeedHelp/>
