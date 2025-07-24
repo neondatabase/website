@@ -75,6 +75,7 @@ For a cost-effective, open-source monitoring stack, you can set up the complete 
    ```
 
 This provides:
+
 - **Grafana** at http://localhost:3000 (admin/admin)
 - **OpenTelemetry Collector** at http://localhost:4318 (HTTP) and localhost:4317 (gRPC)
 - **Prometheus/Mimir**, **Loki**, and **Tempo** for complete observability
@@ -105,8 +106,7 @@ If you use New Relic, you'll need to sign up for an account and get your license
    1. Click on your user menu in the bottom left corner.
    2. Select **API Keys** from the menu.
 
-      ![New Relic profile menu showing API Keys option](/docs/guides/new_relic_api_keys.png) 
-      
+   ![New Relic profile menu showing API Keys option](/docs/guides/new_relic_api_keys.png)
    3. Click **Create a key** → choose **Ingest - License**. Copy the key immediately (you can't view it again later).
 
       ![New Relic API Keys page showing license key types](/docs/guides/new_relic_copy_key.png)
@@ -156,7 +156,7 @@ You can enable either or both options based on your monitoring needs.
 
 3. Configure authentication:
 
-   **For Grafana OSS**: 
+   **For Grafana OSS**:
    - No authentication required for local docker setup
 
    **For Grafana Cloud**:
@@ -192,6 +192,7 @@ Your Neon data should start appearing in your observability platform within a fe
 1. **Access Grafana Explore**: Visit `http://localhost:3000` (admin/admin) or your Grafana Cloud Instance and navigate to **Explore**
 
 2. **Check metrics**: Select your **Prometheus** data source and use this query to check if data is flowing::
+
    ```promql
    neon_connection_counts
    ```
