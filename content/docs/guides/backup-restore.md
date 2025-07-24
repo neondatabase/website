@@ -21,8 +21,8 @@ Use the **Backup & restore** page in the Neon Console to restore a branch to a p
 - ✅ Instantly restore a branch
 - ✅ Preview data before restoring
 - ✅ Create snapshots
-- ✅ Restore from a snapshot
 - ✅ Schedule snapshots
+- ✅ Restore from a snapshot
 
 ---
 
@@ -131,12 +131,11 @@ To edit the snapshot schedule:
 
 Snapshots created via the schedule are listed under the Snapshots section, along with manual snapshots.
 
+![snapshot schedule dialog](/docs/guides/snapshot_schedule.png)
 
 <Admonition type="tip">
 The Neon API supports finer-grained control over snapshot scheduling.
 </Admonition>
-
-![snapshot schedule dialog](/docs/guides/snapshot_schedule.png)
 
 ## Restore from a snapshot
 
@@ -145,20 +144,37 @@ You can restore from a snapshot using one of two methods:
 - **One-step restore** – Instantly restore data from the snapshot into the existing branch. The branch name and connection string remain the same, but the branch ID changes.
 - **Multi-step restore** – Create a new branch from the snapshot. This option is useful if you want to inspect or test data before switching to the restored branch.
 
-### One-step restore
+## One-step restore
 
 1. Locate the snapshot you want to use and click **Restore → One-step restore**.
 
    ![One step restore option](/docs/guides/one_step_restore.png)
-2. Confirm the operation in the modal.
-3. Your branch is immediately restored to the snapshot state.
+2. Confirm the operation in the **One-step restore** modal, which explains the operation:
 
-### Multi-step restore
+   - The restore operation occurs instantly
+   - The current branch will be restored to the snapshot state
+   - A branch named `<branch_name (old)>` will be created as a backup
+
+   ![One step restore confirmation modal](/docs/guides/one_step_restore_modal.png)
+3. Your branch is immediately restored to the snapshot state, and the `<branch_name>_old` branch is created, which you'll find on the **Branches** page in the Neon Console, as shown here:
+   ![Branches page that shows the backup branch](/docs/guides/one_step_restore_branches_page.png)
+
+   Once you’ve verified that the restore was successful, you can delete the backup branch if you no longer need it.
+
+## Multi-step restore
 
 1. Locate the snapshot you want to use and click **Restore → Multi-step restore**.
    ![Multi-step restore option](/docs/guides/multi_step_restore.png)
-2. A new branch is created with the restored data. This branch will not have a compute yet.
-3. Add a compute to the new branch to access its data. (See **Add a compute to the restore branch**.)
-4. Update your application to use the new branch's connection string if you want to switch over.
+2. Confirm the operation in the **Multi-step restore** modal, which explains the operation:
+   - The restore occurs instantly
+   - Your current branch is unchanged
+   - A new branch with the snaphot data is created
+
+   ![Multi-step restore confirmation modal](/docs/guides/multi_step_restore_modal.png)
+3. Clicking **Restore** creates a new branch with the restored data and directs you to the **Branch overview** page where you can:
+   - **Get connection details** for the new branch to preview the data restored from the snapshot 
+   - **Migrate connectioons and settings** to move your database URLs and compute settings from the old branch to the new branch instead of resetting connections in your app
+
+   ![Branch overview page](/docs/guides/branch_overview_page.png)
 
 <NeedHelp/>
