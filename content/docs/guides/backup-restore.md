@@ -119,8 +119,7 @@ You can automate snapshot creation by setting a snapshot schedule for a branch.
 To edit the snapshot schedule:
 
 1. Click **Edit schedule**.
-2. In the **Edit snapshot schedule** modal, configure: 
-
+2. In the **Edit snapshot schedule** modal, configure:
    - **Frequency** – Daily, weekly, or monthly snapshots.
    - **Retention** – How long to retain snapshots before they expire.
    - **Custom retention rules** – Optionally keep specific daily or weekly snapshots for longer.
@@ -149,13 +148,14 @@ You can restore from a snapshot using one of two methods:
 1. Locate the snapshot you want to use and click **Restore → One-step restore**.
 
    ![One step restore option](/docs/guides/one_step_restore.png)
-2. Confirm the operation in the **One-step restore** modal, which explains the operation:
 
+2. Confirm the operation in the **One-step restore** modal, which explains the operation:
    - The restore operation occurs instantly
    - The current branch will be restored to the snapshot state
    - A branch named `<branch_name (old)>` will be created as a backup
 
    ![One step restore confirmation modal](/docs/guides/one_step_restore_modal.png)
+
 3. Your branch is immediately restored to the snapshot state, and the `<branch_name>_old` branch is created, which you'll find on the **Branches** page in the Neon Console, as shown here:
    ![Branches page that shows the backup branch](/docs/guides/one_step_restore_branches_page.png)
 
@@ -171,8 +171,9 @@ You can restore from a snapshot using one of two methods:
    - A new branch with the snaphot data is created
 
    ![Multi-step restore confirmation modal](/docs/guides/multi_step_restore_modal.png)
+
 3. Clicking **Restore** creates a new branch with the restored data and directs you to the **Branch overview** page where you can:
-   - **Get connection details** for the new branch to preview the data restored from the snapshot 
+   - **Get connection details** for the new branch to preview the data restored from the snapshot
    - **Migrate connectioons and settings** to move your database URLs and compute settings from the old branch to the new branch instead of resetting connections in your app
 
    ![Branch overview page](/docs/guides/branch_overview_page.png)
