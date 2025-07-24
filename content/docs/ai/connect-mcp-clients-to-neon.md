@@ -446,54 +446,54 @@ Adapt the instructions above for other clients:
 
 - **Local MCP server:** 
 
-<Tabs labels={["MacOS/Linux", "Windows", "Windows (WSL)"]}>
+  Add the following JSON configuration within the `mcpServers` section of your client's `MCP` configuration file, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key obtained from the [prerequisites](#prerequisites) section:
 
-<TabItem>
+  <Tabs labels={["MacOS/Linux", "Windows", "Windows (WSL)"]}>
 
-For **MacOS and Linux**, add the following JSON configuration within the `mcpServers` section of your client's `mcp_config` file, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key:
+  <TabItem>
 
-```json
-"neon": {
-  "command": "npx",
-  "args": ["-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
-}
-```
+  For **MacOS and Linux**, add the following JSON configuration within the `mcpServers` section of your client's `mcp_config` file, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key:
 
-</TabItem>
+  ```json
+  "neon": {
+    "command": "npx",
+    "args": ["-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+  }
+  ```
 
-<TabItem>
+  </TabItem>
 
-For **Windows**, add the following JSON configuration within the `mcpServers` section of your client's `mcp_config` file, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key:
+  <TabItem>
 
-```json
-"neon": {
-  "command": "cmd",
-  "args": ["/c", "npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
-}
-```
+  For **Windows**, add the following JSON configuration within the `mcpServers` section of your client's `mcp_config` file, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key:
 
-</TabItem>
+  ```json
+  "neon": {
+    "command": "cmd",
+    "args": ["/c", "npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+  }
+  ```
 
-<TabItem>
+  </TabItem>
 
-For **Windows Subsystem for Linux (WSL)**, add the following JSON configuration within the `mcpServers` section of your client's `mcp_config` file, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key:
+  <TabItem>
 
-```json
-"neon": {
-  "command": "wsl",
-  "args": ["npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
-}
-```
+  For **Windows Subsystem for Linux (WSL)**, add the following JSON configuration within the `mcpServers` section of your client's `mcp_config` file, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key:
 
-</TabItem>
+  ```json
+  "neon": {
+    "command": "wsl",
+    "args": ["npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+  }
+  ```
 
-</Tabs>
+  </TabItem>
 
-Replace `<YOUR_NEON_API_KEY>` with your Neon API key.
+  </Tabs>
 
-<Admonition type="note">
-After successful configuration, you should see the Neon MCP Server listed as active in your MCP client's settings or tool list. You can enter "List my Neon projects" in the MCP client to see your Neon projects and verify the connection.
-</Admonition>
+  <Admonition type="note">
+  After successful configuration, you should see the Neon MCP Server listed as active in your MCP client's settings or tool list. You can enter "List my Neon projects" in the MCP client to see your Neon projects and verify the connection.
+  </Admonition>
 
 ## Troubleshooting
 
