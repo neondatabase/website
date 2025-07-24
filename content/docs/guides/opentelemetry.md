@@ -1,9 +1,8 @@
 ---
-title: OpenTelemetry integration
-subtitle: Send Neon metrics and Postgres logs to any OTEL-compatible observability
-  platform
+title: OpenTelemetry
+subtitle: Send Neon metrics and Postgres logs to any OTEL-compatible observability platform
 enableTableOfContents: true
-updatedOn: '2025-07-16T14:09:44.903Z'
+updatedOn: '2025-07-21T00:00:00.000Z'
 ---
 
 <FeatureBetaProps feature_name="OpenTelemetry integration" />
@@ -11,18 +10,19 @@ updatedOn: '2025-07-16T14:09:44.903Z'
 <InfoBlock>
 <DocsList title="What you will learn:">
 <p>How to configure OpenTelemetry exports from Neon</p>
+<p>Setup with Grafana OSS and Tempo</p>
+<p>Integration with Grafana Cloud</p>
 <p>Example config using New Relic</p>
 </DocsList>
 
 <DocsList title="External docs" theme="docs">
 <a href="https://opentelemetry.io/docs/specs/otlp/">OpenTelemetry Protocol (OTLP) Specification</a>
+<a href="https://grafana.com/docs/opentelemetry/">Grafana Labs OpenTelemetry Documentation</a>
 <a href="https://docs.newrelic.com/docs/opentelemetry/best-practices/opentelemetry-otlp/">New Relic OpenTelemetry guide</a>
 </DocsList>
 </InfoBlock>
 
 Available for Scale and Business Plan users, the Neon OpenTelemetry integration lets you export metrics and Postgres logs to any OpenTelemetry Protocol (OTLP) compatible observability platform. This gives you the flexibility to send your Neon data to your preferred monitoring solution, whether that's New Relic, Grafana Cloud, Honeycomb, or any other OTEL-compatible service.
-
-If you don't already have an OTEL-compatible platform set up, we'll walk you through the basic setup in New Relic so you can see how Neon's data export works. The same configuration principles apply to any OTEL-compatible platform.
 
 ## How it works
 
@@ -58,7 +58,35 @@ Before getting started, ensure the following:
 
 ## Set up your observability platform
 
-If you don't already have an OpenTelemetry-compatible observability platform, you'll need to sign up for one. For this example, we'll use New Relic:
+Choose your preferred observability platform and follow the setup instructions:
+
+### Grafana OSS with Docker OTEL LGTM
+
+For a cost-effective, open-source monitoring stack, you can set up the complete LGTM stack (Loki for logs, Grafana for visualization, Tempo for traces, and Mimir for metrics) with OpenTelemetry integration.
+
+**Quick setup with Docker:**
+
+1. **Clone and start the stack**:
+   ```bash
+   git clone https://github.com/grafana/docker-otel-lgtm.git
+   cd docker-otel-lgtm
+   docker compose up -d
+   ```
+
+This provides:
+- **Grafana** at http://localhost:3000 (admin/admin)
+- **OpenTelemetry Collector** at http://localhost:4318 (HTTP) and localhost:4317 (gRPC)
+- **Prometheus/Mimir**, **Loki**, and **Tempo** for complete observability
+
+For detailed configuration, see the [docker-otel-lgtm documentation](https://github.com/grafana/docker-otel-lgtm).
+
+### Grafana Cloud
+
+For a fully managed solution, see the dedicated [Grafana Cloud integration guide](/docs/guides/grafana-cloud).
+
+### New Relic
+
+If you use New Relic, you'll need to sign up for an account and get your license key.
 
 1. Sign up for a free account at [newrelic.com](https://newrelic.com) if you haven't already.
 2. Once signed in, you'll need your New Relic license key for authentication.
@@ -76,9 +104,11 @@ If you don't already have an OpenTelemetry-compatible observability platform, yo
    1. Click on your user menu in the bottom left corner.
    2. Select **API Keys** from the menu.
 
-   ![New Relic profile menu showing API Keys option](/docs/guides/new_relic_api_keys.png) 3. Click **Create a key** → choose **Ingest - License**. Copy the key immediately (you can't view it again later).
+      ![New Relic profile menu showing API Keys option](/docs/guides/new_relic_api_keys.png) 
+      
+   3. Click **Create a key** → choose **Ingest - License**. Copy the key immediately (you can't view it again later).
 
-   ![New Relic API Keys page showing license key types](/docs/guides/new_relic_copy_key.png)
+      ![New Relic API Keys page showing license key types](/docs/guides/new_relic_copy_key.png)
 
    Your license key will look something like `eu01xxaa1234567890abcdef1234567890NRAL` (the format varies by region).
 
@@ -106,22 +136,39 @@ You can enable either or both options based on your monitoring needs.
 
 ## Configure the connection
 
-1. Select your connection protocol. For most platforms including New Relic, choose **HTTP** (recommended), which uses HTTP/2 for efficient data transmission. Some environments may require **gRPC** instead.
+1. **Select your connection protocol**: For most platforms, choose **HTTP** (recommended), which uses HTTP/2 for efficient data transmission. Some environments may require **gRPC** instead.
 
-2. Enter your **Endpoint** URL.
+2. **Enter your Endpoint URL** based on your platform:
 
-   For New Relic, enter:
+   **For Grafana OSS (docker-otel-lgtm)**:
+   - `http://localhost:4318` (if running locally)
+   - `http://your-server-ip:4318` (if running on a remote server)
+
+   **For Grafana Cloud**:
+   - Use your Grafana Cloud OTLP endpoint (typically `https://otlp-gateway-{region}.grafana.net/otlp`)
+   - See the [Grafana Cloud guide](/docs/guides/grafana-cloud) for details
+
+   **For New Relic**:
    - US: `https://otlp.nr-data.net`
    - Europe: `https://otlp.eu01.nr-data.net`
-
-   See [this table](https://docs.newrelic.com/docs/opentelemetry/best-practices/opentelemetry-otlp/#configure-endpoint-port-protocol) for other options.
+   - See [New Relic's endpoint documentation](https://docs.newrelic.com/docs/opentelemetry/best-practices/opentelemetry-otlp/#configure-endpoint-port-protocol) for other regions
 
 3. Configure authentication:
+
+   **For Grafana OSS**: 
+   - No authentication required for local docker setup
+
+   **For Grafana Cloud**:
+   - Use **Basic** authentication with Base64 encoded `<opentelemetry-instance-id>:<grafana-cloud-token>`
+   - Get your instance ID and API token from the Grafana Cloud Portal by clicking on the **OpenTelemetry** card
+
+   **For New Relic**:
+   - Use **Bearer** or **API Key** with your New Relic license key
+
+   **For other platforms**: Choose the appropriate method:
    - **Bearer**: Enter your bearer token or API key
    - **Basic**: Provide your username and password credentials
    - **API Key**: Enter your API key
-
-   For New Relic, you can use either **Bearer** or **API Key** authentication with your New Relic license key (both work the same way).
 
 ## Configure resource attributes
 
@@ -139,19 +186,32 @@ Click **Add** to save your configuration and start the data export.
 
 Your Neon data should start appearing in your observability platform within a few minutes.
 
-**For New Relic users**, use these queries to check if data is flowing:
+### For Grafana (OSS and Cloud) users
+
+1. **Access Grafana Explore**: Visit `http://localhost:3000` (admin/admin) or your Grafana Cloud Instance and navigate to **Explore**
+
+2. **Check metrics**: Select your **Prometheus** data source and use this query to check if data is flowing::
+   ```promql
+   neon_connection_counts
+   ```
+
+3. **Create dashboards**: You can visualize using [Grafana Drilldown apps](https://grafana.com/docs/grafana/latest/explore/simplified-exploration/) or use the dashboard JSON from [Grafana Cloud Documentation](/docs/guides/grafana-cloud#create-a-monitoring-dashboard)
+
+### For New Relic users
+
+Use these queries to check if data is flowing:
 
 ```sql
 FROM Metric SELECT * SINCE 1 hour ago
 FROM Log SELECT * SINCE 1 hour ago
 ```
 
-**Success looks like this:**
+**Success looks similar to this:**
 
-Metrics flowing into New Relic
+_Metrics flowing into New Relic_
 ![Neon metrics appearing in New Relic](/docs/guides/new_relic_metrics_success.png)
 
-Postgres logs
+_Postgres logs flowing into New Relic_
 ![Neon PostgreSQL logs appearing in New Relic](/docs/guides/new_relic_logs_success.png)
 
 **Find your data under APM & Services**

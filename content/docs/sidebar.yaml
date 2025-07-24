@@ -401,13 +401,15 @@
               slug: introduction/monitor-query-history
         - section: External monitoring
           items:
+            - title: Datadog
+              slug: guides/datadog
+            - title: Grafana Cloud
+              slug: guides/grafana-cloud
+            - title: OpenTelemetry
+              slug: guides/opentelemetry
             - title: Metrics and logs reference
               slug: reference/metrics-logs
-            - title: Datadog integration
-              slug: guides/datadog
-            - title: OpenTelemetry integration
-              slug: guides/opentelemetry
-            - title: Datbase monitoring tools
+            - title: Other monitoring tools
               slug: introduction/monitor-external-tools
         - section: Team Tools
           items:
@@ -707,6 +709,8 @@
           items:
             - title: Datadog
               slug: guides/datadog
+            - title: Grafana Cloud
+              slug: guides/grafana-cloud
             - title: OpenTelemetry
               slug: guides/opentelemetry
         - section: Deploy

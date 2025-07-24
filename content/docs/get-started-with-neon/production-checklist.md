@@ -26,8 +26,8 @@ updatedOn: '2025-06-30T11:30:21.890Z'
 <CheckItem title="6. Restrict database access to trusted IPs" href="#restrict-database-access-to-trusted-ips">
   Secure your database by limiting connections to trusted IP addresses.
 </CheckItem>
-<CheckItem title="7. Set up metrics export to Datadog" href="#set-up-metrics-export-to-datadog">
-  Export Neon metrics to Datadog and centralize your database monitoring with your existing observability stack.
+<CheckItem title="7. Set up metrics export" href="#set-up-metrics-export">
+  Export Neon metrics to Datadog or any OTEL-compatible platform like Grafana Cloud or New Relic to centralize database monitoring with your existing observability stack.
 </CheckItem>
 <CheckItem title="8. Install pg_stat_statements" href="#install-pgstatstatements">
   Enable query performance monitoring to track execution times and frequency.
@@ -142,20 +142,25 @@ Available with the Neon [Scale](/docs/introduction/plans#scale) and [Business](/
 
 ![IP allow setting settings](/docs/get-started-with-neon/ip_allow_settings.png)
 
-## Set up metrics export to Datadog
+## Set up metrics export
 
-Export Neon metrics to DataDog and centralize your database monitoring with your existing observability stack.
+Export Neon metrics to your preferred observability platform and centralize your database monitoring with your existing stack.
 
 **Recommendation**
 
-Set up Datadog integration to monitor and set alerts for key metrics:
+Set up integration with your observability platform to monitor and set alerts for key metrics:
 
 - Connection counts (active and idle database connections)
 - Database size (total size of all databases)
 - Replication delay (lag in bytes and seconds)
 - Compute metrics (CPU and memory usage)
 
-For more information, see [The Neon Datadog integration](/docs/guides/datadog).
+**Available integrations:**
+- **[Grafana Cloud](/docs/guides/grafana-cloud)**: Native OTLP integration with automatic routing to Mimir, Loki, and Tempo
+- **[Datadog](/docs/guides/datadog)**: Direct integration with Datadog's observability platform
+- **[OpenTelemetry](/docs/guides/opentelemetry)**: Export to any OTLP-compatible platform, including self-hosted Grafana and Tempo
+
+Choose the platform that best fits your existing monitoring infrastructure.
 
 ## Ensure your app reconnects after your database restarts
 
