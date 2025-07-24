@@ -27,7 +27,7 @@ updatedOn: '2025-06-30T11:30:21.890Z'
   Secure your database by limiting connections to trusted IP addresses.
 </CheckItem>
 <CheckItem title="7. Set up metrics export" href="#set-up-metrics-export">
-  Export Neon metrics to your observability platform (Datadog, Grafana Cloud, etc.) and centralize your database monitoring with your existing stack.
+  Export Neon metrics to Datadog or any OTEL-compatible platform like Grafana Cloud or New Relic to centralize database monitoring with your existing observability stack.
 </CheckItem>
 <CheckItem title="8. Install pg_stat_statements" href="#install-pgstatstatements">
   Enable query performance monitoring to track execution times and frequency.

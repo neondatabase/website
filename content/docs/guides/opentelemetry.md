@@ -1,5 +1,5 @@
 ---
-title: OpenTelemetry integration
+title: OpenTelemetry
 subtitle: Send Neon metrics and Postgres logs to any OTEL-compatible observability platform
 enableTableOfContents: true
 updatedOn: '2025-07-21T00:00:00.000Z'
@@ -60,7 +60,7 @@ Before getting started, ensure the following:
 
 Choose your preferred observability platform and follow the setup instructions:
 
-### Grafana OSS with Docker OTEL LGTM (Recommended)
+### Grafana OSS with Docker OTEL LGTM
 
 For a cost-effective, open-source monitoring stack, you can set up the complete LGTM stack (Loki for logs, Grafana for visualization, Tempo for traces, and Mimir for metrics) with OpenTelemetry integration.
 
@@ -86,9 +86,7 @@ For a fully managed solution, see the dedicated [Grafana Cloud integration guide
 
 ### New Relic
 
-If you prefer New Relic, you'll need to sign up for an account and get your license key:
-
-If you prefer a hosted solution, New Relic provides excellent OpenTelemetry support:
+If you use New Relic, you'll need to sign up for an account and get your license key.
 
 1. Sign up for a free account at [newrelic.com](https://newrelic.com) if you haven't already.
 2. Once signed in, you'll need your New Relic license key for authentication.
@@ -106,9 +104,11 @@ If you prefer a hosted solution, New Relic provides excellent OpenTelemetry supp
    1. Click on your user menu in the bottom left corner.
    2. Select **API Keys** from the menu.
 
-   ![New Relic profile menu showing API Keys option](/docs/guides/new_relic_api_keys.png) 3. Click **Create a key** → choose **Ingest - License**. Copy the key immediately (you can't view it again later).
+      ![New Relic profile menu showing API Keys option](/docs/guides/new_relic_api_keys.png) 
+      
+   3. Click **Create a key** → choose **Ingest - License**. Copy the key immediately (you can't view it again later).
 
-   ![New Relic API Keys page showing license key types](/docs/guides/new_relic_copy_key.png)
+      ![New Relic API Keys page showing license key types](/docs/guides/new_relic_copy_key.png)
 
    Your license key will look something like `eu01xxaa1234567890abcdef1234567890NRAL` (the format varies by region).
 
@@ -162,7 +162,6 @@ You can enable either or both options based on your monitoring needs.
    - Use **Basic** authentication with Base64 encoded `<opentelemetry-instance-id>:<grafana-cloud-token>`
    - Get your instance ID and API token from the Grafana Cloud Portal by clicking on the **OpenTelemetry** card
 
-
    **For New Relic**:
    - Use **Bearer** or **API Key** with your New Relic license key
 
@@ -207,12 +206,12 @@ FROM Metric SELECT * SINCE 1 hour ago
 FROM Log SELECT * SINCE 1 hour ago
 ```
 
-**Success looks like this:**
+**Success looks similar to this:**
 
-Metrics flowing into New Relic
+_Metrics flowing into New Relic_
 ![Neon metrics appearing in New Relic](/docs/guides/new_relic_metrics_success.png)
 
-Postgres logs
+_Postgres logs flowing into New Relic_
 ![Neon PostgreSQL logs appearing in New Relic](/docs/guides/new_relic_logs_success.png)
 
 **Find your data under APM & Services**

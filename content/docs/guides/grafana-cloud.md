@@ -1,5 +1,5 @@
 ---
-title: The Neon Grafana Cloud integration
+title: Grafana Cloud integration
 subtitle: Send metrics and logs from Neon Postgres to Grafana Cloud
 enableTableOfContents: true
 updatedOn: '2025-07-21T00:00:00.000Z'
@@ -18,7 +18,7 @@ updatedOn: '2025-07-21T00:00:00.000Z'
 </DocsList>
 </InfoBlock>
 
-Available for Scale and Business Plan users, the Neon Grafana Cloud integration lets you monitor Neon database performance, resource utilization, and system health directly from Grafana Cloud.
+The Grafana Cloud integration lets you monitor Neon database performance, resource utilization, and system health directly from Grafana Cloud. The integration requires OTEL support, which is available with Neon's Business and Enterprise plans.
 
 ## How it works
 
@@ -41,7 +41,7 @@ The integration exports [a comprehensive set of metrics](#available-metrics) inc
 
 <FeatureBetaProps feature_name="Postgres logs export" />
 
-The Neon Grafana Cloud integration can forward Postgres logs to your Grafana Cloud stack. These logs provide visibility into database activity, errors, and performance. See [Export Postgres logs to Grafana Cloud](#export-postgres-logs-to-grafana-cloud) for details.
+With the the Grafana Cloud integration, you can forward Postgres logs to your Grafana Cloud stack. These logs provide visibility into database activity, errors, and performance. See [Export Postgres logs to Grafana Cloud](#export-postgres-logs-to-grafana-cloud) for details.
 
 ## Prerequisites
 
