@@ -50,43 +50,42 @@ Before getting started, ensure the following:
 - You have a Neon account and project. If not, see [Sign up for a Neon account](/docs/get-started-with-neon/signing-up).
 - You have a Grafana Cloud account access to the Grafana Cloud Portal.
 
-## Steps to integrate Grafana Cloud with Neon
+## Set up the integration
 
-1. **Get your Grafana Cloud OTLP configuration**:
+1. **Get your Grafana Cloud OTLP configuration**
+   1. Sign in to the [Grafana Cloud Portal](https://grafana.com/orgs/)
+   1. Click on the **OpenTelemetry** card
+   1. Copy your OTLP endpoint URL and authentication credentials from the configuration details
 
-- Sign in to the [Grafana Cloud Portal](https://grafana.com/orgs/)
-- Click on the **OpenTelemetry** card
-- Copy your OTLP endpoint URL and authentication credentials from the configuration details
+    <Admonition type="tip">
+    The Authentication key should follow the format `<openTelemetry-instance-id>:<grafana-cloud-token>`
+    </Admonition>
 
-  <Admonition type="tip">
-  The Authentication key should follow the format `<openTelemetry-instance-id>:<grafana-cloud-token>`
-  </Admonition>
+2. **Configure the Neon OpenTelemetry integration**
+   1. In the Neon Console, navigate to the **Integrations** page in your Neon project
+   1. Locate the **OpenTelemetry** card and click **Add**
+   1. Select **HTTP** as the connection protocol (recommended)
+   1. Enter your Grafana Cloud OTLP endpoint URL
+   1. Choose **Bearer** authentication and paste your Grafana Cloud authentication token
+   1. Configure the `service.name` resource attribute (e.g., "neon-postgres-production")
+   1. Select what you want to export:
+      - **Metrics**: System metrics and database statistics (CPU, memory, connections, etc.)
+      - **Postgres logs**: Error messages, warnings, connection events, and system notifications
+   1. Click **Add** to complete the integration
 
-2. **Configure the Neon integration**:
-   - In the Neon Console, navigate to the **Integrations** page in your Neon project
-   - Locate the **OpenTelemetry** card and click **Add**
-   - Select **HTTP** as the connection protocol (recommended)
-   - Enter your Grafana Cloud OTLP endpoint URL
-   - Choose **Bearer** authentication and paste your Grafana Cloud authentication token
-   - Configure the `service.name` resource attribute (e.g., "neon-postgres-production")
-   - Select what you want to export:
-     - **Metrics**: System metrics and database statistics (CPU, memory, connections, etc.)
-     - **Postgres logs**: Error messages, warnings, connection events, and system notifications
-   - Click **Add** to complete the integration
+      <Admonition type="tip">
+      You can change these settings later by editing your integration configuration from the **Integrations** page.
+      </Admonition>
 
-<Admonition type="note">
-You can change these settings later by editing your integration configuration from the **Integrations** page.
-</Admonition>
+      Once the integration is set up, Neon will start sending metrics and logs to your Grafana Cloud stack, where they'll be automatically stored in Mimir (metrics) and Loki (logs).
 
-Once the integration is set up, Neon will start sending metrics and logs to your Grafana Cloud stack, where they'll be automatically stored in Mimir (metrics) and Loki (logs).
+      <Admonition type="note">
+      Neon computes only send logs and metrics when they are active. If the [Scale to Zero](/docs/introduction/scale-to-zero) feature is enabled and a compute is suspended due to inactivity, no logs or metrics will be sent during the suspension. This may result in gaps in your data. If you notice missing data, check if your compute is suspended. You can verify a compute's status as `Idle` or `Active` on the **Branches** page in the Neon console, and review **Suspend compute** events on the **System operations** tab of the **Monitoring** page.
 
-<Admonition type="note">
-Neon computes only send logs and metrics when they are active. If the [Scale to Zero](/docs/introduction/scale-to-zero) feature is enabled and a compute is suspended due to inactivity, no logs or metrics will be sent during the suspension. This may result in gaps in your data. If you notice missing data, check if your compute is suspended. You can verify a compute's status as `Idle` or `Active` on the **Branches** page in the Neon console, and review **Suspend compute** events on the **System operations** tab of the **Monitoring** page.
+      Additionally, if you are setting up the Grafana Cloud integration for a project with an inactive compute, you'll need to activate the compute before it can send data. To activate it, simply run a query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any connected client.
+      </Admonition>
 
-Additionally, if you are setting up the Grafana Cloud integration for a project with an inactive compute, you'll need to activate the compute before it can send data. To activate it, simply run a query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any connected client.
-</Admonition>
-
-## Example usage in Grafana Cloud
+## Example usage
 
 Once integrated, you can explore your Neon metrics and logs in Grafana Cloud using the Explore feature. Navigate to **Explore** in your Grafana Cloud instance and query metrics like `neon_connection_counts`, `neon_db_total_size`, and `host_cpu_seconds_total` using your Prometheus data source. You can also create custom dashboards and set alerts based on threshold values for critical metrics.
 
@@ -674,7 +673,7 @@ If any of the computes in your project are active, you should start seeing data 
 
 Neon exports a comprehensive set of metrics including connection counts, database size, replication delay, and compute metrics (CPU and memory usage). For a complete list of all available metrics with detailed descriptions, see the [Metrics and logs reference](/docs/reference/metrics-logs).
 
-## Export Postgres logs to Grafana Cloud
+## Export Postgres logs
 
 You can export your Postgres logs from your Neon compute to your Grafana Cloud stack. These logs provide visibility into database activity, errors, and performance. The logs are automatically sent to Grafana Cloud Loki and can be queried using LogQL.
 
