@@ -239,6 +239,7 @@ curl --request DELETE \
 
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/deleteneonauthintegration)
 
+<<<<<<< Updated upstream
 ## Manage OAuth providers via API
 
 You can programmatically manage OAuth providers for your Neon Auth project using the Neon API. The following endpoints allow you to add, list, update, and delete OAuth providers for a project.
@@ -369,3 +370,102 @@ A successful DELETE returns no response body (`204 No Content`).
 You can use the GET endpoint to confirm the provider has been removed.
 
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/deleteneonauthoauthprovider)
+  "type": "custom",
+  "host": "smtp.gmail.com",
+  "port": 587,
+  "username": "your-email@gmail.com",
+  "sender_email": "noreply@yourcompany.com",
+  "sender_name": "Your Company"
+}
+```
+
+<Admonition type="note">
+For detailed configuration instructions and best practices, see [Email configuration](/docs/neon-auth/email-configuration).
+</Admonition>
+
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/updateneonauthemailserver)
+
+=======
+>>>>>>> Stashed changes
+## Get email server configuration
+
+Gets the email server configuration for the specified project.
+
+Required parameters:
+
+- `project_id`: Your Neon project ID
+
+```bash shouldWrap
+curl --request GET \
+     --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/email_server' \
+     --header 'authorization: Bearer $NEON_API_KEY' | jq
+```
+
+Example response:
+
+```json shouldWrap
+{
+  "type": "shared"
+}
+```
+
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/getneonauthemailserver)
+
+## Update email server configuration
+
+Updates the email server configuration for the specified project.
+
+Required parameters:
+
+- `project_id`: Your Neon project ID
+
+Request body parameters:
+
+- `type`: Type of email server (`"shared"` or `"custom"`)
+- `host`: SMTP server hostname (required for custom SMTP)
+- `port`: SMTP server port (required for custom SMTP)
+- `username`: SMTP username (required for custom SMTP)
+- `password`: SMTP password (required for custom SMTP)
+- `sender_email`: Email address that will appear as the sender (required for custom SMTP)
+- `sender_name`: Name that will appear as the sender (required for custom SMTP)
+
+```bash shouldWrap
+curl --request PATCH \
+     --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/email_server' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '{
+       "type": "custom",
+       "host": "smtp.gmail.com",
+       "port": 587,
+       "username": "your-email@gmail.com",
+       "password": "your-app-password",
+       "sender_email": "noreply@yourcompany.com",
+       "sender_name": "Your Company"
+     }' | jq
+```
+
+Example response:
+
+```json shouldWrap
+{
+  "type": "custom",
+  "host": "smtp.gmail.com",
+  "port": 587,
+  "username": "your-email@gmail.com",
+  "sender_email": "noreply@yourcompany.com",
+  "sender_name": "Your Company"
+}
+```
+
+<Admonition type="note">
+For detailed configuration instructions and best practices, see [Email configuration](/docs/neon-auth/email-configuration).
+</Admonition>
+
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/updateneonauthemailserver)
+
+<<<<<<< Updated upstream
+
+=======
+>>>>>>> Stashed changes
+<NeedHelp />

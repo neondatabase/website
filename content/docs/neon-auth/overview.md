@@ -33,6 +33,7 @@ Neon Auth helps you move faster by handling the auth stack for you:
 <a href="/docs/guides/neon-auth-how-it-works" description="How Neon Auth keeps your user data in sync" icon="sql">How it Works</a>
 <a href="/docs/neon-auth/demo" description="See Neon Auth in action" icon="screen">Demo & Tutorial</a>
 <a href="/docs/neon-auth/best-practices" description="Tips, patterns, and troubleshooting" icon="warning">Best Practices</a>
+<a href="/docs/neon-auth/email-configuration" description="Configure email server settings" icon="mail">Email Configuration</a>
 </DetailIconCards>
 
 ## Build with Neon Auth
