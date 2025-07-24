@@ -265,6 +265,8 @@
                   slug: guides/branching-schema-only
                 - title: Branch archiving
                   slug: guides/branch-archiving
+                - title: Branch expiration
+                  slug: guides/branch-expiration
             - section: Restore and reset
               items:
                 - title: Reset from parent

@@ -119,7 +119,7 @@ To set a branch as protected:
 
 For details and configuration instructions, refer to our [Protected branches guide](/docs/guides/protected-branches).
 
-## Set branch expiration
+## Set a branch expiration
 
 To set or update a branch's expiration (auto-deletion TTL):
 
