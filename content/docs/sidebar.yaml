@@ -136,6 +136,8 @@
           slug: connect/connect-securely
         - title: GUI applications
           slug: connect/connect-postgres-gui
+        - title: Looker Studio
+          slug: connect/connect-looker-studio
         - title: psql
           slug: connect/query-with-psql-editor
         - title: pgcli
