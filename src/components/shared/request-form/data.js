@@ -28,6 +28,7 @@ const REGIONS = {
     { id: 'il-central-1', name: 'AWS - Israel (Tel Aviv)' },
     { id: 'me-central-1', name: 'AWS - Middle East (UAE)' },
     { id: 'me-south-1', name: 'AWS - Middle East (Bahrain)' },
+    { id: 'mx-central-1', name: 'AWS - North America (Mexico)' },
     { id: 'us-gov-east-1', name: 'AWS - AWS GovCloud (US-East)' },
     { id: 'us-gov-west-1', name: 'AWS - AWS GovCloud (US-West)' },
     { id: 'us-west-1', name: 'AWS - US West (N. California)' },
