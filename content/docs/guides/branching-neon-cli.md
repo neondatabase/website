@@ -133,7 +133,7 @@ This API key configuration ensures that the API key is kept secure while still p
 
 ## Branch expiration
 
-For temporary development and testing environments, you can create branches with automatic expiration using the `--expires-at` flag. This eliminates the need for manual cleanup of short-lived branches.
+For temporary environments, create branches with `--expires-at` to set a TTL for automatic deletion instead of manual cleanup:
 
 ```bash
 # Create a branch that expires at a specific date and time
@@ -156,7 +156,7 @@ neon branches update <branch-id> --expires-at="2025-07-20T12:00:00Z" --project-i
 neon branches update <branch-id> --expires-at=null --project-id <project-id>
 ```
 
-For details and configuration instructions, refer to our [Branch expiration guide](/docs/guides/expired-branches).
+For details and configuration instructions, refer to our [Branch expiration guide](/docs/guides/branch-expiration).
 
 ## Resetting a branch from its parent
 

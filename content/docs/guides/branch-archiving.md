@@ -84,7 +84,7 @@ For Neon projects created in AWS regions, inactive branches are archived in Amaz
 
 Branch archiving thresholds are not configurable. Archiving and unarchiving happen automatically according to the thresholds and conditions described above.
 
-For temporary branches with known lifespans, consider setting an expiration date when creating branches instead of relying on automatic archiving. This provides deterministic cleanup at a specified time, making it ideal for CI/CD pipelines and temporary development environments. See [Branch expiration](/docs/guides/expired-branches) for details.
+If you know when a branch should be deleted, set an expiration date rather than wait for automatic archiving. This guarantees automatic deletion at the specified time and works well for CI/CD pipelines and temporary environments. See [Branch expiration](/docs/guides/branch-expiration) for details.
 
 ## Disabling branch archiving
 

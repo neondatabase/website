@@ -76,7 +76,7 @@ Refer to the following guide for instructions.
 
 ### Temporary environments
 
-For short-lived development and testing environments, you can create branches with automatic expiration by [setting an expiration date](/docs/guides/expired-branches) when creating the branch. This eliminates manual cleanup overhead and ensures temporary branches are automatically deleted when no longer needed.
+Create branches with TTL by [setting an expiration date](/docs/guides/branch-expiration). Perfect for temporary development and testing environments that need automatic deletion.
 
 Branches with expiration are particularly useful for:
 
