@@ -37,7 +37,7 @@ You would enter:
 - **Username**: `neondb_owner`
 - **Password**: `npg_aaaaaaaaaaaa`
 
-[Looker studio connection details](/docs/connect/ls_connection_details.png)
+![Looker studio connection details](/docs/connect/ls_connection_details.png)
 
 ## Configure SSL settings
 
@@ -49,19 +49,19 @@ You would enter:
 1. Download the `isrgrootx1.pem` file from https://letsencrypt.org/certs/isrgrootx1.pem. For more information about SSL certificates, see [Connect to Neon securely](/docs/connect/connect-securely).
 2. In Looker Studio, upload the `isrgrootx1.pem` file using the **Upload** button next to the **Server Certificate** box.
 
-[Looker studio upload pem file](/docs/connect/ls_pem_file.png)
+![Looker studio upload pem file](/docs/connect/ls_pem_file.png)
 
 ## Authenticate
 
 Click **Authenticate** to verify the connection. If successful, you will see your Neon tables listed in Looker Studio.
 
-[Looker studio upload pem file](/docs/connect/ls_neon_tables.png)
+![Looker studio upload pem file](/docs/connect/ls_neon_tables.png)
 
 ## Connect
 
 Click **Connect** to view table details.
 
-[Looker studio upload pem file](/docs/connect/ls_table_details.png)
+![Looker studio upload pem file](/docs/connect/ls_table_details.png)
 
 </Steps>
 
