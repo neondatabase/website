@@ -32,7 +32,7 @@ To create a branch:
 When creating a branch with past data, you can only specify a date and time that falls within your [restore window](/docs/manage/projects#configure-restore-window).
 </Admonition>
 
-6. Optionally set an **Auto-delete branch on** expiration date and time for temporary branches. This automatically deletes the branch at the specified time, useful for CI/CD pipelines and short-lived development environments. Refer to our [Branch expiration guide](/docs/guides/expired-branches) for details.
+6. Optionally set an **Auto-delete branch on** expiration date and time for temporary branches. This automatically deletes the branch at the specified time, useful for CI/CD pipelines and short-lived development environments. Refer to our [Branch expiration guide](/docs/guides/branch-expiration) for details.
 7. Click **Create new branch**.
 
 You are presented with the connection details for your new branch and directed to the **Branch** overview page where you are shown the details for your new branch.
@@ -121,16 +121,16 @@ For details and configuration instructions, refer to our [Protected branches gui
 
 ## Set branch expiration
 
-To set or update a branch's expiration:
+To set or update a branch's expiration (auto-deletion TTL):
 
 1. In the Neon Console, select a project.
 2. Select **Branches** to view the branches for the project.
 3. Select a branch from the table.
 4. On the branch overview page, click the **Actions** drop-down menu and select **Edit expiration**.
-5. Set a new expiration date and time, or toggle off "Auto delete after" to remove expiration.
+5. Set a new expiration date and time, or toggle off "Auto-delete branch on" to remove expiration.
 6. Click **Save**.
 
-For details and configuration instructions, refer to our [Branch expiration guide](/docs/guides/expired-branches).
+For details and configuration instructions, refer to our [Branch expiration guide](/docs/guides/branch-expiration).
 
 ## Connect to a branch
 
