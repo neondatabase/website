@@ -45,7 +45,7 @@ row_variable.field_name
 We’ll use the `actor` table from the [sample database](../postgresql-getting-started/postgresql-sample-database) to show how row types work:
 
 ![](/postgresqltutorial/actor.png)
-The following example retrieve the row with id 10 from the actor table and assign it to a row variable:
+The following example retrieves the row with id 10 from the actor table and assigns it to a row variable:
 
 ```sql
 do
