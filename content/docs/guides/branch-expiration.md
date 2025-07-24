@@ -1,5 +1,5 @@
 ---
-title: Expired branches
+title: Branch expiration (TTL)
 subtitle: Learn how to use Neon's branch expiration feature to automatically delete temporary branches
 enableTableOfContents: true
 updatedOn: '2025-07-09T00:00:00.000Z'
@@ -7,10 +7,10 @@ updatedOn: '2025-07-09T00:00:00.000Z'
 
 ## Overview
 
-Branch expiration allows you to set automatic deletion timestamps on standard Neon branches. When the expiration time is reached, the branch is automatically deleted.
+Branch expiration allows you to set automatic deletion timestamps on branches. When the expiration time is reached, the branch is automatically deleted.
 
 <Admonition type="tip" title="Quick guide">
-API/CLI users set `expires_at` when creating or updating branches (see [timestamp format](#timestamp-format-requirements), such as `2025-07-15T18:02:16Z`). Console users toggle "Auto delete after".
+API/CLI users set `expires_at` when creating or updating branches (see [timestamp format](#timestamp-format-requirements), such as `2025-07-15T18:02:16Z`). Console users check "Auto-delete branch on:" and select a date.
 </Admonition>
 
 <InfoBlock>
@@ -41,32 +41,39 @@ Branch expiration is ideal for temporary branches that have predictable lifespan
 
 Without automatic expiration, these branches accumulate over time, increasing storage costs and project clutter.
 
-### Recommended expiration times
+### Example branch expiration settings
+Here are some example expiration settings that teams might use, depending on the purpose of the branch. Adjust these to fit your workflow and branch management requirements.
 
-- **CI/CD pipelines**: 2-4 hours
-- **Demo environments**: 24-48 hours
-- **Feature development**: 1-7 days
-- **Long-term testing**: 30 days
+- **CI/CD pipelines:** 2–4 hours
+- **Demo environments:** 24–48 hours
+- **Feature development:** 1–7 days
+- **Long-term testing:** 30 days
 
 ## How it works
 
+Branch expiration uses a time-to-live (TTL) model. When you set an expiration on a branch, you're defining how long the branch should exist before automatic deletion.
+
 When you set an expiration timestamp on a branch:
 
-1. The system stores both the expiration time (`expires_at`) and the time-to-live interval (`ttl_interval_seconds`)
+1. The system stores both:
+   - **Expiration timestamp** (`expires_at`) - The scheduled date and time when the branch will be deleted
+   - **TTL interval** (`ttl_interval_seconds`) - The duration between creation/update and expiration (e.g., 24 hours = 86400 seconds), a read-only value
+
 2. A background process monitors branches and deletes them after their expiration time is reached
+
 3. If you reset a branch from its parent, the TTL countdown restarts using the original interval
 
 <Admonition type="important">
-Branch deletion is irreversible. Once deleted, a branch and its data cannot be recovered. All compute endpoints associated with the branch are also deleted. Deletion typically occurs within minutes of the expiration time.
+Branch deletion is permanent. Once a branch is deleted, all data on the branch is lost and cannot be recovered. Compute endpoints associated with the branch are also removed when a branch is deleted. Carefully verify expiration times before setting them to avoid data loss.
 </Admonition>
 
 ## Setting branch expiration
 
 You can set, update, or remove expiration timestamps through three interfaces:
 
-- **API** - Use the `expires_at` parameter with [RFC 3339](https://tools.ietf.org/html/rfc3339#section-5.6) format
-- **CLI** - Use the `--expires-at` flag when creating branches or the `set-expires-at` subcommand to update
-- **Neon Console** - Use the date and time selector (automatically handles formatting)
+- **API** - Use the `expires_at` parameter with [RFC 3339](#timestamp-format-requirements) format
+- **CLI** - Use the `--expires-at` flag when creating or updating a branch with [RFC 3339](#timestamp-format-requirements) format
+- **Neon Console** - Check "Auto-delete branch on:" and define or select a date (automatically handles formatting)
 
 See the [Examples](#examples) section below for detailed usage of each method.
 
@@ -96,30 +103,8 @@ YYYY-MM-DDTHH:MM:SS-HH:MM    (Negative UTC offset)
 - Maximum expiration is 1 year from the current time
 
 <Admonition type="note">
-Common errors include missing timezone (`2025-07-15T18:02:16`), past timestamps, or combining `Z` with offset (`2025-07-15T18:02:16Z-05:00`). The API will return a validation error for invalid formats.
+Common errors include missing timezone (`2025-07-15T18:02:16`), past timestamps, or combining `Z` with offset (`2025-07-15T18:02:16Z-05:00`).
 </Admonition>
-
-## Understanding TTL behavior
-
-When you retrieve branch information, responses include:
-
-- **`expires_at`** - The scheduled deletion timestamp
-- **`ttl_interval_seconds`** - The original time-to-live duration in seconds (read-only)
-
-The TTL interval is preserved to ensure consistent behavior when resetting branches:
-
-```json
-{
-  "branch": {
-    "id": "br-feature-67890",
-    "expires_at": "2025-07-15T18:02:16Z",
-    "ttl_interval_seconds": 86400, // 24 hours
-    "created_at": "2025-07-14T18:02:16Z"
-  }
-}
-```
-
-When you reset this branch from its parent, `expires_at` updates to the current time plus 24 hours, as 24 hours was the original interval.
 
 ## Restrictions
 
@@ -139,7 +124,7 @@ When a branch expires and is deleted, all associated compute endpoints are also 
 
 <CodeTabs labels={["API", "CLI", "Neon Console"]}>
 
-```bash
+```bash {11,21,22}
 # Create branch that expires in 24 hours
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/{project_id}/branches \
@@ -150,7 +135,7 @@ curl --request POST \
        "branch": {
          "name": "feature-test",
          "parent_id": "br-main-12345",
-         "expires_at": "2025-07-15T18:02:16Z"
+         "expires_at": "2026-01-29T18:02:16Z"
        }
      }'
 
@@ -160,20 +145,20 @@ curl --request POST \
     "id": "br-feature-67890",
     "name": "feature-test",
     "parent_id": "br-main-12345",
-    "expires_at": "2025-07-15T18:02:16Z",
+    "expires_at": "2026-01-29T18:02:16Z",
     "ttl_interval_seconds": 86400,
-    "created_at": "2025-07-14T18:02:16Z"
+    "created_at": "2026-01-28T18:02:16Z"
   }
 }
 ```
 
-```bash
+```bash {6,15}
 # Create branch expiring at specific date/time
 neon branches create \
   --project-id <project-id> \
   --name feature-test \
   --parent development \
-  --expires-at "2025-07-15T18:02:16Z"
+  --expires-at "2026-01-29T18:02:16Z"
 
 # Create branch expiring in 2 hours (using dynamic date)
 # Linux/GNU: $(date -u -d '+2 hours' +%Y-%m-%dT%H:%M:%SZ)
@@ -189,8 +174,9 @@ neon branches create \
 1. Navigate to the Branches page in the Neon Console
 2. Click "Create branch"
 3. Enter branch name and select parent branch
-4. Toggle "Auto delete after" and set a value
-5. Click "Create branch"
+4. Check "Auto-delete branch on:" 
+5. Select or enter date and time
+6. Click "Create branch"
 ```
 
 </CodeTabs>
@@ -199,7 +185,7 @@ neon branches create \
 
 <CodeTabs labels={["API", "CLI", "Neon Console"]}>
 
-```bash
+```bash {9,21}
 # Update branch expiration to specific date
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id} \
@@ -208,7 +194,7 @@ curl --request PATCH \
      --header 'Content-Type: application/json' \
      --data '{
        "branch": {
-         "expires_at": "2025-07-20T12:00:00Z"
+         "expires_at": "2026-01-29T12:00:00Z"
        }
      }'
 
@@ -225,28 +211,36 @@ curl --request PATCH \
      }'
 ```
 
-```bash
+```bash {4,12,18}
 # Update expiration to new timestamp
-neon branches set-expires-at <branch-id> "2025-07-20T12:00:00Z" --project-id <project-id>
+neon branches update \
+  <branch-id> \
+  --expires-at="2026-01-29T12:00:00Z" \
+  --project-id <project-id>
 
 # Extend expiration by 7 days from now
 # Linux/GNU: $(date -u -d '+7 days' +%Y-%m-%dT%H:%M:%SZ)
 # macOS/BSD: $(date -u -v+7d +%Y-%m-%dT%H:%M:%SZ)
-neon branches set-expires-at <branch-id> \
-  "$(date -u -d '+7 days' +%Y-%m-%dT%H:%M:%SZ)" \
+neon branches update \
+  <branch-id> \
+  --expires-at="$(date -u -d '+7 days' +%Y-%m-%dT%H:%M:%SZ)" \
   --project-id <project-id>
 
 # Remove expiration from a branch
-neon branches set-expires-at <branch-id> null --project-id <project-id>
+neon branches update \
+  <branch-id> \
+  --expires-at=null \
+  --project-id <project-id>
 ```
 
 ```markdown
 1. Navigate to the Branches page in the Neon Console
-2. Find the branch you want to modify
-3. Click the three-dot menu (...) next to the branch
-4. Select "Edit expiration"
-5. To update: Select a new expiration value
-6. To remove: Toggle off "Auto delete after"
+2. Click the branch you want to view
+3. In the Branch Overview, look for the info box stating: "This branch is scheduled for automatic deletion on {date}"
+4. Click the "Edit Expiration" button in this box
+5. To update: Select a new date and time
+6. To remove: Uncheck "Auto-delete branch on:"
+7. Click "Save"
 ```
 
 </CodeTabs>
@@ -276,7 +270,7 @@ neon branches info <branch_id> --project-id <project_id>
 
 [`POST /projects/{project_id}/branches`](https://api-docs.neon.tech/reference/createprojectbranch)
 
-- **`expires_at`** (optional) - Timestamp for automatic deletion in RFC 3339 format
+- **`expires_at`** (optional) - Timestamp for automatic deletion in [RFC 3339](#timestamp-format-requirements) format
 
 ### Update project branch
 
@@ -289,9 +283,28 @@ neon branches info <branch_id> --project-id <project_id>
 
 ### Response fields
 
-Branches with expiration include:
+Branches with expiration include two key fields:
 
-- **`expires_at`** - Scheduled deletion timestamp (RFC 3339 format)
-- **`ttl_interval_seconds`** - Original TTL duration in seconds (read-only)
+- **`expires_at`** - The scheduled deletion timestamp ([RFC 3339](#timestamp-format-requirements) format)
+- **`ttl_interval_seconds`** - The original TTL duration in seconds (read-only)
+
+#### How these fields work together
+
+When you create a branch with a TTL of 24 hours, `ttl_interval_seconds` is set to 86400 (seconds). The `expires_at` value is calculated as creation time plus 24 hours.
+
+If you reset the branch from its parent, the `expires_at` value is recalculated using the preserved `ttl_interval_seconds` value, starting from the reset time. The interval itself remains unchanged.
+
+**Example response:**
+```json {4,5}
+{
+  "branch": {
+    "id": "br-feature-67890",
+    "expires_at": "2026-01-29T18:02:16Z",
+    "ttl_interval_seconds": 86400,
+    "created_at": "2026-01-28T18:02:16Z"
+  }
+}
+```
+In this example, the branch will be deleted 24 hours after creation.
 
 <NeedHelp/>
