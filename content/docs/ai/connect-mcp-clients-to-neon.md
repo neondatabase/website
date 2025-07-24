@@ -217,9 +217,9 @@ For more, see [Get started with Cursor and Neon Postgres MCP Server](/guides/cur
 
     > For [streamable HTTP responses](#streamable-http-support) instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
 
-4.  Save the file.
-5.  Click the **Refresh** button in the Cascade sidebar next to "available MCP servers".
-6.  An OAuth window will open in your browser. Follow the prompts to authorize Windsurf to access your Neon account.
+5.  Save the file.
+6.  Click the **Refresh** button in the Cascade sidebar next to "available MCP servers".
+7.  An OAuth window will open in your browser. Follow the prompts to authorize Windsurf to access your Neon account.
 
 > If you prefer to authenticate using a Neon API key, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
 
@@ -244,8 +244,8 @@ For more, see [Get started with Cursor and Neon Postgres MCP Server](/guides/cur
 
     > Replace `<YOUR_NEON_API_KEY>` with your actual Neon API key which you obtained from the [prerequisites](#prerequisites) section.
 
-4.  Save the file.
-5.  Click the **Refresh** button in the Cascade sidebar next to "available MCP servers".
+5.  Save the file.
+6.  Click the **Refresh** button in the Cascade sidebar next to "available MCP servers".
 
 </TabItem>
 </Tabs>
@@ -284,6 +284,7 @@ For more, see [Get started with Windsurf and Neon Postgres MCP Server](/guides/w
 1. Open Cline in VS Code (Sidebar -> Cline icon).
 2. Click **MCP Servers** Icon -> **Installed** -> **Configure MCP Servers** to open the configuration file.
 3. Add the "Neon" server entry within the `mcpServers` object:
+
    ```json
    {
      "mcpServers": {
@@ -295,7 +296,7 @@ For more, see [Get started with Windsurf and Neon Postgres MCP Server](/guides/w
    }
    ```
 
-    > Replace `<YOUR_NEON_API_KEY>` with your actual Neon API key which you obtained from the [prerequisites](#prerequisites) section.
+   > Replace `<YOUR_NEON_API_KEY>` with your actual Neon API key which you obtained from the [prerequisites](#prerequisites) section.
 
 4. Save the file. Cline should reload the configuration automatically.
 
@@ -444,7 +445,7 @@ Adapt the instructions above for other clients:
 
   > If you prefer to authenticate using a Neon API key, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
 
-- **Local MCP server:** 
+- **Local MCP server:**
 
   Add the following JSON configuration within the `mcpServers` section of your client's `MCP` configuration file, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key obtained from the [prerequisites](#prerequisites) section:
 
