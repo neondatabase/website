@@ -1,8 +1,8 @@
 ---
-title: The Neon Datadog integration
+title: Datadog integration
 subtitle: Send metrics and logs from Neon Postgres to Datadog
 enableTableOfContents: true
-updatedOn: '2025-07-16T14:09:44.900Z'
+updatedOn: '2025-07-24T20:03:24.599Z'
 ---
 
 <InfoBlock>
