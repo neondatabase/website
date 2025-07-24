@@ -1,11 +1,12 @@
 ---
 title: Neon Auth for Next.js
-subtitle: Add authentication to your Next.js (App Router) project. Access user data directly in your Postgres database.
+subtitle: Add authentication to your Next.js (App Router) project. Access user data
+  directly in your Postgres database.
 enableTableOfContents: true
 tag: beta
 redirectFrom:
   - /docs/guides/neon-auth
-updatedOn: '2025-05-23T13:20:56.227Z'
+updatedOn: '2025-07-22T11:08:24.052Z'
 ---
 
 <InfoBlock>
@@ -51,6 +52,6 @@ Then \`npm run dev\` to start your dev server.
 
 #### Test your integration
 
-Go to [http://localhost:3000/handler/sign-up](http://localhost:3000/handler/sign-up) in your browser. Create a user or two, and you can them [show up immediately](#see-your-users-in-the-database) in your database.
+Go to [http://localhost:3000/handler/sign-up](http://localhost:3000/handler/sign-up) in your browser. Create a user or two, and you can see them [show up immediately](#see-your-users-in-the-database) in your database.
 `}
 />

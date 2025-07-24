@@ -25,7 +25,7 @@ In this guide, we'll walk through setting up a Neon database with a .NET applica
 Your connection string will look similar to this:
 
 ```shell
-postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
+postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
 ```
 
 ## Creating a .NET Project with Neon Integration
@@ -39,7 +39,6 @@ With your Neon database set up, let's create a sample inventory management syste
    ```
 
    This command creates a new Web API project with a basic structure including:
-
    - `Program.cs`: The entry point of your application
    - `appsettings.json`: Configuration files
    - `Properties/launchSettings.json`: Debug and launch configuration
@@ -59,7 +58,6 @@ With your Neon database set up, let's create a sample inventory management syste
    ```
 
    These packages provide us with the following:
-
    - `Npgsql.EntityFrameworkCore.PostgreSQL`: The Postgres database provider for Entity Framework Core
    - `Microsoft.EntityFrameworkCore.Tools`: Command-line tools for migrations
    - `Microsoft.EntityFrameworkCore.Design`: Design-time tools for EF Core
@@ -108,7 +106,6 @@ With your Neon database set up, let's create a sample inventory management syste
    ```
 
    Our `Product` model includes the following:
-
    - Data annotations for validation
    - A unique identifier (`Id`)
    - Basic product information fields
@@ -170,7 +167,6 @@ With your Neon database set up, let's create a sample inventory management syste
    ```
 
    The `DbContext` includes:
-
    - Entity configuration using Fluent API
    - Precision settings for decimal values
    - Default value configurations

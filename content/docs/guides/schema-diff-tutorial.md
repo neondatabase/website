@@ -3,7 +3,7 @@ title: Schema diff tutorial
 subtitle: Step-by-step guide showing you how to compare two development branches using
   Schema Diff
 enableTableOfContents: true
-updatedOn: '2025-05-30T16:54:40.479Z'
+updatedOn: '2025-06-30T11:30:21.915Z'
 ---
 
 In this guide we will create an initial schema on a new database called `people` on our `production` branch. We'll then create a development branch called `feature/address`, following one possible convention for naming feature branches. After making schema changes on `feature/address`, we'll use the **Schema Diff** tool on the **Branches** page to get a side-by-side, GitHub-style visual comparison between the `feature/address` development branch and `production`.
@@ -14,7 +14,6 @@ To complete this tutorial, you'll need:
 
 - A Neon account. Sign up [here](/docs/get-started-with-neon/signing-up).
 - To interact with your Neon database from the command line:
-
   - Install the [Neon CLI](/docs/reference/cli-install)
   - Download and install the [psql](https://www.postgresql.org/download/) client
 
@@ -76,7 +75,7 @@ First, create a new database called `people` on the `production` branch and add 
 1. Connect to the `people` database with psql:
 
    ```bash shouldWrap
-   psql 'postgresql://neondb_owner:*********@ep-crimson-frost-a5i6p18z.us-east-2.aws.neon.tech/people?sslmode=require'
+   psql 'postgresql://neondb_owner:*********@ep-crimson-frost-a5i6p18z.us-east-2.aws.neon.tech/people?sslmode=require&channel_binding=require'
    ```
 
 1. Create the schema:
@@ -122,14 +121,14 @@ First, create a new database called `people` on the `production` branch and add 
 
    ```json
    {
-     "uri": "postgresql://alex:*********@ep-green-surf-a5yaumj3-pooler.us-east-2.aws.neon.tech/people?sslmode=require"
+     "uri": "postgresql://alex:*********@ep-green-surf-a5yaumj3-pooler.us-east-2.aws.neon.tech/people?sslmode=require&channel_binding=require"
    }
    ```
 
 3. Connect to the `people` database with `psql`:
 
    ```bash shouldWrap
-   psql 'postgresql://alex:*********@ep-green-surf-a5yaumj3-pooler.us-east-2.aws.neon.tech/people?sslmode=require'
+   psql 'postgresql://alex:*********@ep-green-surf-a5yaumj3-pooler.us-east-2.aws.neon.tech/people?sslmode=require&channel_binding=require'
    ```
 
 4. Create the schema:
@@ -159,7 +158,6 @@ For the purposes of this tutorial, name the branch `feature/address`, which coul
 1. Create the development branch
 
    On the **Branches** page, click **Create Branch**, making sure of the following:
-
    - Select `production` as the default branch.
    - Name the branch `feature/address`.
 
@@ -186,7 +184,6 @@ For the purposes of this tutorial, name the branch `feature/address`, which coul
 1. Verify the schema
 
    To verify that this branch includes the initial schema created on `production`, connect to `feature/address`, then view the `person` table.
-
    1. Get the connection string for the `people` database on branch `feature/address` using the CLI.
 
       ```bash
@@ -196,13 +193,13 @@ For the purposes of this tutorial, name the branch `feature/address`, which coul
       This gives you the connection string which you can then copy.
 
       ```bash
-      postgresql://neondb_owner:*********@ep-hidden-rain-a5pe72oi.us-east-2.aws.neon.tech/people?sslmode=require
+      postgresql://neondb_owner:*********@ep-hidden-rain-a5pe72oi.us-east-2.aws.neon.tech/people?sslmode=require&channel_binding=require
       ```
 
    1. Connect to `people` using psql.
 
       ```bash
-      psql 'postgresql://neondb_owner:*********@ep-hidden-rain-a5pe72oi.us-east-2.aws.neon.tech/people?sslmode=require'
+      psql 'postgresql://neondb_owner:*********@ep-hidden-rain-a5pe72oi.us-east-2.aws.neon.tech/people?sslmode=require&channel_binding=require'
       ```
 
    1. View the schema for the `person` table we created earlier.
@@ -333,14 +330,14 @@ CREATE TABLE address (
 
    ```json
    {
-     "uri": "postgresql://alex:*********@ep-hidden-sun-a5de9i5h-pooler.us-east-2.aws.neon.tech/people?sslmode=require"
+     "uri": "postgresql://alex:*********@ep-hidden-sun-a5de9i5h-pooler.us-east-2.aws.neon.tech/people?sslmode=require&channel_binding=require"
    }
    ```
 
 1. Connect to the `people` database on the `feature/address` branch with `psql`:
 
    ```bash shouldWrap
-   psql 'postgresql://alex:*********@ep-hidden-sun-a5de9i5h-pooler.us-east-2.aws.neon.tech/people?sslmode=require'
+   psql 'postgresql://alex:*********@ep-hidden-sun-a5de9i5h-pooler.us-east-2.aws.neon.tech/people?sslmode=require&channel_binding=require'
    ```
 
 1. Add a new `address` table.

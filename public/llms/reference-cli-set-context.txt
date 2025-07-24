@@ -1,6 +1,6 @@
 # Neon CLI commands — set-context
 
-> The document "Neon CLI commands — set-context" details the usage of the `set-context` command in the Neon CLI, which allows users to configure and switch between different project contexts within the Neon environment.
+> The Neon CLI commands documentation for "set-context" explains how to configure and switch between different project contexts within the Neon environment, facilitating efficient project management and workflow organization.
 
 ## Source
 

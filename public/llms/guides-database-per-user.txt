@@ -1,6 +1,6 @@
 # Neon for Database-per-user
 
-> The "Neon for Database-per-user" documentation outlines how to implement a database-per-user architecture using Neon, detailing steps for creating isolated databases for individual users to enhance data security and management.
+> The document outlines how to implement a database-per-user architecture using Neon, detailing steps for creating isolated databases for individual users to enhance data security and management.
 
 ## Source
 
@@ -172,7 +172,6 @@ Both approaches are viable, each with its own pros and cons.
   Ensure secure access as all users share the same application environment.
 
 - **Define user authentication and data routing**
-
   - Users provide their organization details during login.
   - Users access the application via an organization-specific subdomain.
   - The system identifies the user's organization based on their credentials.
@@ -586,7 +585,7 @@ Before diving into the code, here's a look at this example in the Neon console d
 
 
 
-Using the same naming conventions, there are three new files in the ``.github/workflows` folder in the repository:
+Using the same naming conventions, there are three new files in the `.github/workflows` folder in the repository:
 
 1. `paycorp-payments-prod.yml`
 2. `acme-analytics-prod.yml`

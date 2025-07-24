@@ -300,7 +300,6 @@ To integrate Tailwind CSS with Flask templates, you can follow these steps:
    ```
 
    This base template sets up the basic structure of your HTML pages. It includes:
-
    - A title block that can be overridden in child templates
    - A link to the compiled Tailwind CSS file
    - A simple navigation bar with Tailwind classes for styling
@@ -327,7 +326,6 @@ To integrate Tailwind CSS with Flask templates, you can follow these steps:
    ```
 
    This template extends the base template using `{% extends "base.html" %}` and provides specific content for the users page. It includes:
-
    - A form for adding new users, styled with Tailwind classes
    - A list of existing users, also styled with Tailwind
    - Jinja2 template syntax for dynamic content (e.g., `{% for user in users %}`)

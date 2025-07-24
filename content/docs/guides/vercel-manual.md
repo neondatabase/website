@@ -2,78 +2,91 @@
 title: Connect Vercel and Neon manually
 subtitle: Learn how to connect a Vercel project to a Neon database manually
 enableTableOfContents: true
-updatedOn: '2025-02-03T20:41:57.339Z'
+updatedOn: '2025-07-07T22:27:57.419Z'
 ---
 
-This guide describes how to manually connect a Vercel project to a Neon database.
+<InfoBlock>
+<DocsList title="What you will learn:">
+<a href="#when-to-choose-this-path">When to use manual connections over integrations</a>
+<a href="#connection-steps">How to connect using environment variables</a>
+<a href="#cicd-based-preview-branching-github-actions">Advanced CI/CD automation options</a>
+</DocsList>
 
-<Admonition type="note">
-For other Vercel integration options, refer to the [Neon and Vercel integration overview](/docs/guides/vercel-overview).
-</Admonition>
+<DocsList title="Related topics" theme="docs">
+<a href="/docs/guides/vercel-managed-integration">Vercel-Managed Integration</a>
+<a href="/docs/guides/neon-managed-vercel-integration">Neon-Managed Integration</a>
+<a href="/docs/guides/branching-github-actions">Automate branching with GitHub Actions</a>
+</DocsList>
+</InfoBlock>
+
+---
+
+## When to choose this path
+
+Choose manual connection if you prefer not to install a Marketplace integration. This approach is ideal when you:
+
+- Deploy via a custom pipeline (self-hosted CI, monorepo, etc.)
+- Need non-Vercel hosting (e.g. Cloudflare Workers + Vercel Functions hybrid)
+- Want full control over branch naming, seeding, migration, or teardown
+
+If you simply want Neon and Vercel with minimal setup, stick to the managed integrations. They're simpler and include UI support.
+
+---
 
 ## Prerequisites
 
-- A Neon project. If you do not have one, see [Create a project](/docs/manage/projects#create-a-project).
-- A [Vercel account](https://vercel.com).
-- A project deployed to Vercel. If you do not have one, see [Creating a project](https://vercel.com/docs/concepts/projects/overview#creating-a-project), in the _Vercel documentation_.
+- Neon project with database (get a connection string via **Connect** in the Console)
+- Deployed Vercel project
 
-## Gather your Neon connection details
+---
 
-You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you.
+## Connection steps
 
-![Connection details modal](/docs/connect/connection_details.png)
+1. Copy the connection string from the [Neon Console](https://console.neon.tech). Click **Connect** on your Project Dashboard, select the branch, role, and database you want, then copy the _Connection string_.
 
-The connection string includes the role name, hostname, and database name. For example:
+   ![Neon connection details modal](/docs/connect/connection_details.png)
 
-```text
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
-           ^              ^                                               ^
-           |- <role>      |- <hostname>                                   |- <database>
-```
+   For example:
 
-- role name: `alex`
-- hostname: `ep-cool-darkness-123456.us-east-2.aws.neon.tech`
-- database name: `dbname`
+   ```text
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+                ^              ^                                               ^
+                |- <role>      |- <hostname>                                   |- <database>
+   ```
 
-## Configure project environment variables in Vercel
+2. In the Vercel dashboard, open your project and navigate to **Settings → Environment Variables**.
 
-The environment variables required to connect your application to Neon depend on your application. Some applications use a `DATABASE_URL` environment variable with a database connection string:
+3. Add either:
 
-```text
-DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname"
-```
+   ```text
+   Key: DATABASE_URL
+   Value: <your connection string>
+   ```
 
-Other applications may use `PG*` environment variables to define database connection details:
+   _or_ the granular `PG*` variables:
 
-```text
-PGUSER=alex
-PGHOST=ep-cool-darkness-123456.us-east-2.aws.neon.tech
-PGDATABASE=dbname
-PGPASSWORD=AbC123dEf
-PGPORT=5432
-```
+   ```text
+   PGUSER=alex
+   PGHOST=ep-cool-darkness-123456.us-east-2.aws.neon.tech
+   PGDATABASE=dbname
+   PGPASSWORD=AbC123dEf
+   PGPORT=5432
+   ```
 
-<Admonition type="note">
-Neon uses the default Postgres port, `5432`.
-</Admonition>
+   <Admonition type="note">
+   Neon uses the default Postgres port, `5432`.
+   </Admonition>
 
-To configure the environment variables required by your application:
+4. Select which environments need database access (Production, Preview, Development) and click **Save**.
 
-<Admonition type="note">
-Vercel environment variables can also be configured when you first deploy an application to Vercel.
-</Admonition>
+5. Redeploy your application (or wait for your next deployment) for the variables to take effect.
 
-1. Navigate to the [Vercel dashboard](https://vercel.com/).
-1. Select your Vercel project.
-1. Select **Settings**.
-1. Select **Environment variables**.
-1. Enter the environment variable name in the **Key** field and add the value.
-1. Click **Add another** if you need to add more variables.
-1. Select the Vercel environments to which the variable(s) will apply (**Production**, **Preview**, **Development**).
-1. Click **Save**.
+That's it. Your Vercel app now connects to Neon just like any other Postgres database.
 
-![Add Vercel environment variable settings](/docs/guides/vercel_env_settings.png)
+---
 
-You must redeploy your application in Vercel for the environment variable settings to take effect.
+## CI/CD-based Preview Branching (GitHub Actions)
+
+Looking for a full CI/CD recipe? See **[Automate branching with GitHub Actions](/docs/guides/branching-github-actions)**.
 
 <NeedHelp/>

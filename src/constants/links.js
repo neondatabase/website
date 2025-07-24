@@ -21,7 +21,6 @@ export default {
   partners: '/partners',
   awsIsrael: '/partners/aws-israel',
   migration: '/migration',
-  migrationAssistance: '/migration-assistance',
   postgresqltutorial: '/postgresql/tutorial',
   pricing: '/pricing',
   platforms: '/platforms',

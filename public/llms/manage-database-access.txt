@@ -1,6 +1,6 @@
 # Manage database access
 
-> The "Manage database access" document outlines the procedures for configuring and controlling user access to databases within the Neon platform, including creating roles, granting permissions, and managing connections.
+> The "Manage database access" documentation outlines procedures for configuring and controlling user access to databases within the Neon platform, detailing steps for setting permissions and managing roles to ensure secure database operations.
 
 ## Source
 
@@ -86,7 +86,7 @@ To create a read-only role:
    The `readonly_user1` user now has read-only access to tables in the specified schema and database and should be able to connect and run `SELECT` queries.
 
    ```bash
-   psql postgresql://readonly_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/dbname
+   psql postgresql://readonly_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    psql (15.2 (Ubuntu 15.2-1.pgdg22.04+1), server 15.3)
    SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off)
    Type "help" for help.
@@ -168,7 +168,7 @@ To create a read-write role:
    The `readwrite_user1` user now has read-write access to tables in the specified schema and database and should able to connect and run `SELECT`, `INSERT`, `UPDATE`, `DELETE` queries.
 
    ```bash
-   psql postgresql://readwrite_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/dbname
+   psql postgresql://readwrite_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    psql (15.2 (Ubuntu 15.2-1.pgdg22.04+1), server 15.3)
    SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off)
    Type "help" for help.
@@ -223,17 +223,21 @@ To get started:
 
    You now have a `dev_users` role on your parent branch, and the role is not assigned to any users. This role will now be included in all future branches created from this branch.
 
-      **Note**: The `GRANT` statement above does not grant privileges on existing schemas, tables, sequences, etc., within the database. If you want the `dev_users` role to access specific schemas, tables, etc., you need to grant those permissions explicitly. For example, to grant all privileges on all tables in a schema: 
+      **Note**: The `GRANT` statement above does not grant privileges on existing schemas, tables, sequences, etc., within the database. If you want the `dev_users` role to access specific schemas, tables, etc., you need to grant those permissions explicitly.
 
-```sql
+   For example, to grant all privileges on all tables in a schema:
+
+   ```sql
    GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA <schema_name> TO dev_users;
    ```
 
- Similarly, you'd grant privileges for sequences and other objects as needed. That said, the `GRANT` command above allows users with the `dev_users` role to create new schemas within the database. But for pre-existing schemas and their objects, you need to grant permissions explicitly.
+   Similarly, you'd grant privileges for sequences and other objects as needed.
 
-4. Create a development branch. Name it something like `dev1`. See [Create a branch](/docs/manage/branches#create-a-branch) for instructions.
+   That said, the `GRANT` command above allows users with the `dev_users` role to create new schemas within the database. But for pre-existing schemas and their objects, you need to grant permissions explicitly.
 
-5. Connect to the database **on the development branch** with an SQL client. Be mindful that a child branch connection string differs from a parent branch connection string. The branches reside on different hosts. If you need help connecting to your branch, see [Connect from any client](/docs/connect/connect-from-any-app).
+4. Create a development branch. Name it something like `dev1`. See [Create a branch](https://neon.com/docs/manage/branches#create-a-branch) for instructions.
+
+5. Connect to the database **on the development branch** with an SQL client. Be mindful that a child branch connection string differs from a parent branch connection string. The branches reside on different hosts. If you need help connecting to your branch, see [Connect from any client](https://neon.com/docs/connect/connect-from-any-app).
 
 6. After connecting the database on your new branch, create a developer user (e.g., `dev_user1`). The password requirements described above apply here as well.
 
@@ -250,7 +254,7 @@ To get started:
    The `dev_user1` user can now connect to the database on your development branch and start using the database with full privileges.
 
    ```bash
-   psql postgresql://dev_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/dbname
+   psql postgresql://dev_user1:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    psql (15.2 (Ubuntu 15.2-1.pgdg22.04+1), server 15.3)
    SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off)
    Type "help" for help.
@@ -259,6 +263,7 @@ To get started:
    ```
 
 ### SQL statement summary
+
 ```sql
 -- dev_users role
 CREATE ROLE dev_users PASSWORD `password`;

@@ -3,7 +3,7 @@ title: Connection latency and timeouts
 subtitle: Learn about strategies to manage connection latencies and timeouts
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-06-04T00:15:20.259Z'
+updatedOn: '2025-07-15T14:59:03.463Z'
 ---
 
 Neon's _Scale to zero_ feature is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. A characteristic of this feature is the concept of a "cold start". During this process, a compute transitions from an idle state to an active state to process requests. Currently, activating a Neon compute from an idle state typically takes a few hundred milliseconds not counting other factors that can add to latencies such as the physical distance between your application and database or startup times of other services that participate in your connection process.
@@ -204,7 +204,7 @@ Here's a comparison of connection times with and without the `sslnegotiation=dir
 **Without sslnegotiation=direct:**
 
 ```bash
-$ time psql "postgresql://neondb_owner@your-neon-endpoint/neondb?sslmode=require" -c "SELECT version();"
+$ time psql "postgresql://neondb_owner@your-neon-endpoint/neondb?sslmode=require&channel_binding=require" -c "SELECT version();"
                                                 version
 ---------------------------------------------------------------------------------------------------------
 PostgreSQL 16.4 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
@@ -218,7 +218,7 @@ sys     0m0.000s
 **With sslnegotiation=direct:**
 
 ```bash
-$ time psql "postgresql://neondb_owner@your-neon-endpoint/neondb?sslmode=require&sslnegotiation=direct" -c "SELECT version();"
+$ time psql "postgresql://neondb_owner@your-neon-endpoint/neondb?sslmode=require&channel_binding=require&sslnegotiation=direct" -c "SELECT version();"
                                                 version
 ---------------------------------------------------------------------------------------------------------
 PostgreSQL 17.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
@@ -242,7 +242,7 @@ With the right strategies, you can optimize your system to handle connection lat
 ## Related resources
 
 - [Benchmarking latency in Neon's serverless Postgres](/docs/guides/benchmarking-latency) - Learn how to measure and optimize query latency in your Neon database
-- [Neon latency benchmarks dashboard](https://latency-benchmarks-dashboard.vercel.app) - Interactive dashboard showing real-world latency measurements across different regions and workloads ([source code](https://github.com/neondatabase-labs/latency-benchmarks))
+- [Neon latency benchmarks dashboard](/demos/regional-latency) - Interactive dashboard showing real-world latency measurements across different regions and workloads ([source code](https://github.com/neondatabase-labs/latency-benchmarks))
 - [Connection pooling guide](/docs/connect/connection-pooling) - Reduce latency with efficient connection management
 - [Regional deployment options](/docs/introduction/regions) - Choose the optimal region for lowest latency
 - [Ship faster with Postgres](https://neon.tech/faster) - Explore examples and case studies demonstrating rapid development workflows

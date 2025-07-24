@@ -1,6 +1,6 @@
 # Media storage with ImageKit.io
 
-> The document "Media storage with ImageKit.io" guides Neon users on integrating ImageKit.io for efficient media storage and management within their applications.
+> The document outlines how to integrate ImageKit.io with Neon for efficient media storage, detailing configuration steps and usage instructions specific to Neon's platform.
 
 ## Source
 

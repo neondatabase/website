@@ -3,7 +3,7 @@ title: Benchmarking latency in Neon's serverless Postgres
 subtitle: Techniques for obtaining meaningful latency data in serverless database
   environments
 enableTableOfContents: true
-updatedOn: '2025-06-04T16:43:36.534Z'
+updatedOn: '2025-07-15T14:59:03.466Z'
 ---
 
 Benchmarking database query latency is inherently complex, requiring careful consideration of numerous variables and testing methodologies. Neon's serverless Postgres environment adds additional layers to this complexity due to compute auto-suspension, connection protocol differences, and geographic distribution. This guide provides detailed methodologies for separating cold-start costs from operational latency, selecting optimal connection types, and designing tests that accurately reflect production conditions.
@@ -23,7 +23,6 @@ Free-tier Neon databases automatically suspend after 5 minutes of inactivity. Pa
 For accurate benchmarking, always measure cold and hot queries separately:
 
 1. **Cold query testing**:
-
    - Ensure your database is in a suspended state
    - Make a request to trigger compute activation
    - Measure this connection time, which includes the startup overhead
@@ -113,7 +112,7 @@ For examples of different connection patterns and their implementation, see [Con
 
 ## Neon latency benchmarks dashboard
 
-Neon provides a [Latency Benchmarks Dashboard](https://latency-benchmarks-dashboard.vercel.app) that measures latency between serverless functions and Neon databases across different regions. The benchmark specifically tracks:
+Neon provides a [Latency Benchmarks Dashboard](/demos/regional-latency) that measures latency between serverless functions and Neon databases across different regions. The benchmark specifically tracks:
 
 - Roundtrip time for executing simple SELECT queries
 - Network latency between function and database regions

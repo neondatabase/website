@@ -1,6 +1,6 @@
 # Postgres lag() window function
 
-> The document explains the usage of the Postgres `lag()` window function within Neon's database environment, detailing how to retrieve data from a preceding row in the same result set without using self-joins.
+> The document explains the usage of the Postgres `lag()` window function within Neon, detailing its syntax and application for accessing data from preceding rows in a result set.
 
 ## Source
 

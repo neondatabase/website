@@ -1,6 +1,6 @@
 # Postgres json_object() function
 
-> The document explains the usage of the Postgres `json_object()` function within the Neon database, detailing how to construct JSON objects from key-value pairs in SQL queries.
+> The document details the usage of the Postgres `json_object()` function within Neon, explaining how to convert sets of key-value pairs into JSON objects.
 
 ## Source
 

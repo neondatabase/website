@@ -90,7 +90,6 @@ Now, add your Neon branches to the connection set for the data source you just c
 4.  Under "Available Connections for Templating", click `+ Add Connection`.
     ![Add Connections for Templating](/docs/guides/hasura/add-connection-for-templating.png)
 5.  In the modal:
-
     - **Connection name:** Enter a unique, lowercase name (e.g., `dev_branch`). This name will be used in the Kriti template.
     - **Connect Database via:** Select `Database URL`.
     - **Database URL:** Paste the connection string for your `dev` Neon branch which you copied earlier in the [Create Neon Branches](#create-neon-branches) section.
@@ -173,9 +172,7 @@ Hasura provides a convenient way to test your connection template directly withi
 
 2.  **Simulate Request Context:**
     This modal allows you to define the context (`$.request`) that your Kriti template will evaluate against.
-
     - **Test Routing to `dev_branch`:**
-
       - In the **Headers** section, click `+ Add`.
       - Enter `x-hasura-branch-name` as the header key and `dev` as the value.
       - Leave **Operation Type** as `Query`.

@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/about
   - /docs/introduction/about
-updatedOn: '2025-05-30T16:54:40.456Z'
+updatedOn: '2025-07-03T12:36:49.557Z'
 ---
 
 Looking back at Neon's debut blog post, [SELECT ’Hello, World’](/blog/hello-world), the fundamental reasons for **Why Neon** remain the same:
@@ -103,7 +103,7 @@ In summary, Neon is built for anyone who requires a Postgres database and wants 
 Neon's architecture allows us to spin up a Postgres database almost instantly and provide you with a database URL, which you can plug into your application or database client.
 
 ```sql
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 Additionally, after signing up, we land you on your project dashboard, where you'll find connection snippets for various frameworks, languages, and platforms.

@@ -2,8 +2,7 @@
 title: The earthdistance extension
 subtitle: Calculate great-circle distances between points on Earth in Postgres
 enableTableOfContents: true
-updatedOn: '2025-05-27T19:40:34.750Z'
-tag: new
+updatedOn: '2025-07-04T12:47:21.302Z'
 ---
 
 The `earthdistance` extension for Postgres provides functions to calculate great-circle distances between points on the Earth's surface. This is essential for applications requiring geospatial distance calculations, such as location-based services, mapping applications, logistics, and any system that needs to find nearby points or calculate travel distances.
@@ -212,7 +211,6 @@ For applications with many locations that require frequent radius searches or ne
     ```
 
     **Explanation of the indexed query:**
-
     - The `ll_to_earth(latitude, longitude) <@ earth_box(...)` condition uses the GiST index. The `earth_box` function creates a square bounding box. The index quickly finds points whose `earth` representation falls within this box.
     - The second condition, `earth_distance(...) < radius`, is crucial. It performs the precise great-circle distance calculation for the candidate rows selected by the index, filtering them to the exact circular radius. This is because the `earth_box` provides a rough filter, and the `earth_distance` provides the exact filter.
 

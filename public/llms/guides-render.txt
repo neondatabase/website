@@ -1,6 +1,6 @@
 # Use Neon Postgres with Render
 
-> The document "Use Neon Postgres with Render" guides Neon users on integrating Neon Postgres with Render, detailing the steps to connect and configure the database within the Render platform.
+> The document outlines the steps for integrating Neon Postgres with Render, detailing the configuration process to connect a Neon database to a Render application.
 
 ## Source
 
@@ -53,7 +53,7 @@ Log in to the Neon Console and navigate to the [Projects](https://console.neon.t
 You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
 
 ```bash
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 Keep your connection string handy for later use.

@@ -3,8 +3,7 @@ title: The fuzzystrmatch extension
 subtitle: Perform fuzzy string matching for names, typos, and similar-sounding words in
   Postgres
 enableTableOfContents: true
-updatedOn: '2025-05-27T19:40:34.752Z'
-tag: new
+updatedOn: '2025-07-04T12:47:21.302Z'
 ---
 
 The `fuzzystrmatch` extension for Postgres provides a suite of functions to determine similarities and distances between strings. This is useful for applications that need to handle misspellings, phonetic variations, or simply find "close enough" matches in text data. Whether you're building a search engine, cleaning customer data, or trying to identify duplicate records, `fuzzystrmatch` offers powerful tools to compare strings beyond exact equality.
@@ -89,7 +88,6 @@ Both `source` and `target` strings can be any non-null strings and be up to 255 
 The Levenshtein distance quantifies the "edit effort" between strings. Consider these transformations:
 
 1. To change "kitten" to "sitting":
-
    - Substitute 'k' with 's' (kitten -> sitten)
    - Substitute 'e' with 'i' (sitten -> sittin)
    - Insert 'g' at the end (sittin -> sitting)
@@ -97,7 +95,6 @@ The Levenshtein distance quantifies the "edit effort" between strings. Consider 
    This requires 3 edits, so the Levenshtein distance is 3.
 
 2. To change "apple" to "apply":
-
    - Substitute 'e' with 'y' (apple -> apply)
 
    This is 1 edit, giving a distance of 1.

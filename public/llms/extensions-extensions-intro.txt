@@ -1,6 +1,6 @@
 # Postgres extensions
 
-> The "Postgres extensions" document outlines the available PostgreSQL extensions supported by Neon, detailing their installation and usage to enhance database functionality within the Neon environment.
+> The document outlines the available PostgreSQL extensions in Neon, detailing how users can enhance database functionality by integrating additional features and capabilities specific to their needs.
 
 ## Source
 

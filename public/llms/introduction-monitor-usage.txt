@@ -1,6 +1,6 @@
 # Monitor billing and usage
 
-> The "Monitor billing and usage" document details how Neon users can track their account's billing and resource consumption through the Neon Console, including viewing usage statistics and setting up alerts for cost management.
+> The document outlines how Neon users can monitor their billing and usage through the Neon Console, detailing steps to access usage metrics and billing information for effective account management.
 
 ## Source
 
@@ -39,7 +39,7 @@ Usage metrics on the **Billing page** include:
 
 - **Data transfer** The total volume of data transferred out of Neon (egress). Neon does not charge for egress data, but there is an allowance of 5 GB per month for Free Plan users. For all other plans, Neon maintains a reasonable usage policy. For more, see [Data transfer](https://neon.com/docs/introduction/usage-metrics#data-transfer). This metric only applies to the Free Plan.
 
-     **Note** note: billing metrics for pre-2025 custom contract customers: If you signed a contract with Neon prior to 01/01/2025, different billing metrics apply: - **Storage** is measured in GiBs instead of [GB-month](https://neon.com/docs/reference/glossary#gb-month, and if you exceed your contract's monthly storage allowance, extra storage units are automatically allocated and billed. Extra storage charges are applied based on the number of additional storage units needed to cover peak storage usage during the current billing period, prorated from the date the extra storage was allocated. Peak usage resets at the beginning of the next billing period. - **Written data** is the total volume of data written from compute to storage over the during the monthly billing period, measured in gigibytes (GiB). If you have questions or want to change the billing metrics defined in your contract, please contact your Neon sales representative.
+     **Note** note: billing metrics for pre-2025 custom contract customers: If you signed a contract with Neon prior to 01/01/2025, different billing metrics apply: - **Storage** is measured in GiBs instead of [GB-month](/docs/reference/glossary#gb-month, and if you exceed your contract's monthly storage allowance, extra storage units are automatically allocated and billed. Extra storage charges are applied based on the number of additional storage units needed to cover peak storage usage during the current billing period, prorated from the date the extra storage was allocated. Peak usage resets at the beginning of the next billing period. - **Written data** is the total volume of data written from compute to storage over the during the monthly billing period, measured in gigibytes (GiB). If you have questions or want to change the billing metrics defined in your contract, please contact your Neon sales representative.
 
   
 
@@ -91,7 +91,7 @@ Any user can query usage metrics for a branch or a project, as described below. 
 - [Get branch details](https://neon.com/docs/introduction/monitor-usage#get-branch-details)
 - [Get project details](https://neon.com/docs/introduction/monitor-usage#get-project-details)
 
-   **Tip** monitoring usage for a large number of projects: Scale and Business plan users can use Neon's advanced `consumption` endpoints to monitor account and project usage. These endpoints, described in our Partner's Guide, are recommended when monitoring usage for a large number of projects. See: - [Get account-level aggregated metrics](https://neon.com/docs/guides/partner-consumption-metrics#get-account-level-aggregated-metrics) - [Get granular project-level metrics for your account](https://neon.com/docs/guides/partner-consumption-metrics#get-granular-project-level-metrics-for-your-account)
+   **Tip** monitoring usage for a large number of projects: Scale and Business plan users can use Neon's advanced `consumption` endpoints to monitor account and project usage. These endpoints, described in our Partner's Guide, are recommended when monitoring usage for a large number of projects. See: - [Get account-level aggregated metrics](https://neon.com/docs/guides/consumption-metrics#get-account-level-aggregated-metrics) - [Get granular project-level metrics for your account](https://neon.com/docs/guides/consumption-metrics#get-granular-project-level-metrics-for-your-account)
 
 ### Get branch details
 

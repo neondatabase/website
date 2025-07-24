@@ -1,6 +1,6 @@
 # Scale to Zero
 
-> The "Scale to Zero" documentation explains how Neon automatically pauses compute resources when not in use, reducing costs by scaling down to zero while maintaining data availability.
+> The "Scale to Zero" documentation explains how Neon automatically scales down compute resources to zero during inactivity, optimizing resource usage and cost efficiency for database operations.
 
 ## Source
 

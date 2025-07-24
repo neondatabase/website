@@ -1,6 +1,6 @@
 # Build a Python App with Reflex and Neon
 
-> The document outlines the steps to build a Python application using Reflex and Neon, detailing the integration process between Reflex's frontend framework and Neon's serverless PostgreSQL database.
+> The document outlines the process of building a Python application using Reflex and Neon, detailing steps for setting up the environment, integrating with Neon's database, and deploying the app.
 
 ## Source
 
@@ -30,19 +30,19 @@ It's recommended to use a virtual environment to manage your project dependencie
 
 To create a virtual environment, run the following command in your project directory:
 
-
+Tab: MacOS
 
     ```bash
     python3 -m venv .venv
     source .venv/bin/activate
     ```
 
-    ```
+Tab: Windows
+
+    ```shell
     py -3 -m venv .venv
     .venv\Scripts\activate
     ```
-
-
 
 ### Install the Reflex CLI
 
@@ -114,9 +114,9 @@ To configure the connection settings:
 
    Replace `<connection-string-from-neon>` with your Neon connection string. You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).
 
-      **Note**: Replace the value for `db_url` with an environment variable or the connection string from Neon. For example, after creating an environment variable named `NEON_DATABASE_URL`, you can use it as follows: 
+      **Note**: Replace the value for `db_url` with an environment variable or the connection string from Neon. For example, after creating an environment variable named `NEON_DATABASE_URL`, you can use it as follows:
 
-```python
+   ```python
    import os
 
    DATABASE_URL = os.getenv("NEON_DATABASE_URL")
@@ -133,9 +133,10 @@ To configure the connection settings:
 
 ## Creating a data model
 
-To create a data model in Reflex, you can define a Python class that represents the data structure. Reflex uses [sqlmodel](https://sqlmodel.tiangolo.com/) to provide a built-in ORM wrapping [SQLAlchemy](/docs/guides/sqlalchemy).
+To create a data model in Reflex, you can define a Python class that represents the data structure. Reflex uses [sqlmodel](https://sqlmodel.tiangolo.com/) to provide a built-in ORM wrapping [SQLAlchemy](https://neon.com/docs/guides/sqlalchemy).
 
 For example, you can create a `Customer` model as follows:
+
 ```python
 # <new_project>/models.py
 

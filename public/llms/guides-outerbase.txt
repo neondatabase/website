@@ -1,6 +1,6 @@
 # Connect Outerbase to Neon
 
-> The document outlines the steps for connecting Outerbase to a Neon database, detailing the configuration process and necessary settings to establish a successful integration.
+> The document details the steps required to connect Outerbase to a Neon database, including configuration instructions and necessary prerequisites for seamless integration.
 
 ## Source
 

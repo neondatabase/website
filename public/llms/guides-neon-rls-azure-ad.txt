@@ -1,6 +1,6 @@
 # Secure your data with Azure Active Directory and Neon RLS
 
-> The document explains how to integrate Azure Active Directory with Neon Row-Level Security (RLS) to enhance data security by controlling access to database rows based on user identity.
+> This document outlines how to integrate Azure Active Directory with Neon Row-Level Security (RLS) to enhance data security by managing access controls at the row level within Neon databases.
 
 ## Source
 

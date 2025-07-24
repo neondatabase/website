@@ -1,6 +1,6 @@
 # Platform overview
 
-> The "Platform overview" document outlines the architecture and key components of the Neon platform, detailing its cloud-native, serverless PostgreSQL database service, and explaining how it manages compute and storage resources for efficient database operations.
+> The "Platform overview" document outlines Neon's cloud-native architecture, detailing its components, such as compute, storage, and control planes, and explains how they interact to manage PostgreSQL databases efficiently.
 
 ## Source
 

@@ -3,7 +3,7 @@ title: The neon extension
 subtitle: An extension for Neon-specific statistics including the Local File Cache hit
   ratio
 enableTableOfContents: true
-updatedOn: '2025-05-11T11:23:50.613Z'
+updatedOn: '2025-07-11T12:50:56.109Z'
 ---
 
 The `neon` extension provides functions and views designed to gather Neon-specific metrics.
@@ -54,7 +54,7 @@ CREATE EXTENSION neon;
 To connect to your database. You can find a connection string for your database on the Neon Dashboard.
 
 ```bash shouldWrap
-psql postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+psql postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 Issue the following query to view LFC usage data for your compute:
@@ -139,17 +139,20 @@ postgres=> \dv
 ```sql
 postgres=> \df
                                                                           List of functions
- Schema |                 Name                 | Result data type |                                    Argument data types                                    | Type
---------+--------------------------------------+------------------+-------------------------------------------------------------------------------------------+------
- public | approximate_working_set_size         | integer          | reset boolean                                                                             | func
- public | approximate_working_set_size_seconds | integer          | duration integer DEFAULT NULL::integer                                                    | func
- public | backpressure_lsns                    | record           | OUT received_lsn pg_lsn, OUT disk_consistent_lsn pg_lsn, OUT remote_consistent_lsn pg_lsn | func
- public | backpressure_throttling_time         | bigint           |                                                                                           | func
- public | get_backend_perf_counters            | SETOF record     |                                                                                           | func
- public | get_perf_counters                    | SETOF record     |                                                                                           | func
- public | local_cache_pages                    | SETOF record     |                                                                                           | func
- public | neon_get_lfc_stats                   | SETOF record     |                                                                                           | func
- public | pg_cluster_size                      | bigint           |                                                                                           | func
+Schema |                 Name                 | Result data type |                                             Argument data types                                             | Type
+--------+--------------------------------------+------------------+-------------------------------------------------------------------------------------------------------------+------
+ public | approximate_working_set_size         | integer          | reset boolean                                                                                               | func
+ public | approximate_working_set_size_seconds | integer          | duration integer DEFAULT NULL::integer                                                                      | func
+ public | backpressure_lsns                    | record           | OUT received_lsn pg_lsn, OUT disk_consistent_lsn pg_lsn, OUT remote_consistent_lsn pg_lsn                   | func
+ public | backpressure_throttling_time         | bigint           |                                                                                                             | func
+ public | get_backend_perf_counters            | SETOF record     |                                                                                                             | func
+ public | get_local_cache_state                | bytea            | max_chunks integer DEFAULT NULL::integer                                                                    | func
+ public | get_perf_counters                    | SETOF record     |                                                                                                             | func
+ public | get_prewarm_info                     | record           | OUT total_pages integer, OUT prewarmed_pages integer, OUT skipped_pages integer, OUT active_workers integer | func
+ public | local_cache_pages                    | SETOF record     |                                                                                                             | func
+ public | neon_get_lfc_stats                   | SETOF record     |                                                                                                             | func
+ public | pg_cluster_size                      | bigint           |                                                                                                             | func
+ public | prewarm_local_cache                  | void             | state bytea, n_workers integer DEFAULT 1                                                                    | func
 ```
 
 <NeedHelp/>

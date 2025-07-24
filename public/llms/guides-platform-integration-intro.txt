@@ -1,0 +1,36 @@
+# Platform integration guide
+
+> The Platform Integration Guide outlines the steps for integrating Neon with various platforms, detailing configuration processes and compatibility requirements specific to Neon's database services.
+
+## Source
+
+- [Platform integration guide HTML](https://neon.com/docs/guides/platform-integration-intro): The original HTML version of this documentation
+
+Learn how you can offer instant, managed Postgres databases to your users with Neon. This guide covers how to integrate your platform or service with Neon, set usage limits for your users, and more.
+
+
+
+## Platform integration with Neon
+
+Learn about the benefits of integrating with Neon and how to set up your platform integration.
+
+- [Platform integration page](https://neon.com/platforms): Read about the benefits of integrating with Neon
+- [Meet with our team](https://neon.com/contact-sales): Request a meeting with our team to learn more
+
+## Integrate with Neon
+
+Find out how you can integrate with Neon.
+
+- [Get started](https://neon.com/docs/guides/platform-integration-get-started): Learn the essentials for integrating with Neon
+- [Neon API](https://neon.com/docs/reference/api-reference): Integrate using the Neon API
+- [OAuth](https://neon.com/docs/guides/oauth-integration): Integrate with Neon using OAuth
+- [Sample OAuth app](https://github.com/neondatabase/neon-branches-visualizer): Check out a sample OAuth application
+- [Toolkit for AI Agents](https://github.com/neondatabase/toolkit): Spin up a Postgres database in seconds
+- [Claimable database](https://neon.com/docs/workflows/claimable-database-integration): Manage Neon projects for users with the database claim API
+
+## Billing
+
+Learn how to set limits for your customers and track usage.
+
+- [Configure consumption limits](https://neon.com/docs/guides/consumption-limits): Use the Neon API to set consumption limits for your customers
+- [Query consumption metrics](https://neon.com/docs/guides/consumption-metrics): Track usage with Neon's consumption metrics APIs

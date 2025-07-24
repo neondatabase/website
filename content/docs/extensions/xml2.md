@@ -2,8 +2,7 @@
 title: The xml2 extension
 subtitle: Perform XPath querying and XSLT transformations on XML data in Postgres.
 enableTableOfContents: true
-updatedOn: '2025-05-27T19:40:34.757Z'
-tag: new
+updatedOn: '2025-07-04T12:47:21.308Z'
 ---
 
 The `xml2` extension for Postgres provides functions to parse XML data, evaluate XPath queries against it, and perform XSLT transformations. This can be useful for applications that need to process or extract information from XML documents stored within the database.
@@ -74,7 +73,6 @@ These functions evaluate an XPath expression on a given XML document.
 - **`xpath_nodeset(document text, query text, toptag text, itemtag text) → text`**
   Evaluates the query and wraps the resulting nodeset in the specified `toptag` and `itemtag` XML tags. If `toptag` or `itemtag` is an empty string, the respective tag is omitted.
   There are also two-argument and three-argument versions:
-
   - `xpath_nodeset(document text, query text)`: Omits both `toptag` and `itemtag`.
   - `xpath_nodeset(document text, query text, itemtag text)`: Omits `toptag`.
 

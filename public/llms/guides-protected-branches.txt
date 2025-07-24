@@ -1,6 +1,6 @@
 # Protected branches
 
-> The "Protected Branches" document outlines how Neon users can configure and manage protected branches to control access and prevent unauthorized changes in their database environments.
+> The "Protected branches" documentation outlines how to configure and manage protected branches in Neon, detailing the steps to restrict changes and enforce branch protection rules to maintain code integrity.
 
 ## Source
 

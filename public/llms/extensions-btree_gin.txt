@@ -1,6 +1,6 @@
 # The btree_gin extension
 
-> The document details the btree_gin extension for Neon, explaining how it enables the use of B-tree equivalent queries on GIN indexes, enhancing query capabilities within the Neon database environment.
+> The document details the btree_gin extension for Neon, explaining its functionality in enabling GIN index support for B-tree indexable data types, enhancing query performance and indexing capabilities.
 
 ## Source
 

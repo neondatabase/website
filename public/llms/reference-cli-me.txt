@@ -1,6 +1,6 @@
 # Neon CLI commands — me
 
-> The "Neon CLI commands — me" document details the usage of the `neon me` command, which retrieves and displays the current user's account information within the Neon platform.
+> The Neon CLI commands document outlines the usage and functionality of the 'me' command, which allows users to manage their personal account settings and information within the Neon platform.
 
 ## Source
 

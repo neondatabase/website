@@ -1,6 +1,6 @@
 # Run analytics queries with Read Replicas
 
-> The document "Run analytics queries with Read Replicas" explains how Neon users can utilize read replicas to execute analytics queries, enabling efficient data analysis without impacting the primary database's performance.
+> The document explains how to utilize Neon's read replicas to execute analytics queries, enabling users to offload query workloads from primary databases to improve performance and scalability.
 
 ## Source
 
@@ -93,13 +93,12 @@ Connecting to a read replica is the same as connecting to any branch, except you
    The connection string appears similar to the following:
 
    ```bash
-   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    ```
 
    If you expect a high number of connections, enable the **Connection pooling** toggle to add the `-pooler` flag to the connection string.
 
    The information in your connection string corresponds to the following connection details:
-
    - role: `alex`
    - password:`AbC123dEf`
    - hostname: `ep-cool-darkness-123456.us-east-2.aws.neon.tech`
@@ -110,7 +109,7 @@ Connecting to a read replica is the same as connecting to any branch, except you
 1. Connect to your application from a client such as `psql` or add the connection details to your application. For example, to connect using `psql`, issue the following command:
 
    ```bash
-   psql postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+   psql postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    ```
 
 ## Run the analytics query on the read replica

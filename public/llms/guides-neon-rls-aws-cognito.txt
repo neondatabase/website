@@ -1,6 +1,6 @@
 # Secure your data with AWS Cognito and Neon RLS
 
-> The document explains how to integrate AWS Cognito with Neon to implement Row-Level Security (RLS), enabling secure data access control within Neon databases.
+> The document outlines the integration of AWS Cognito with Neon Row-Level Security (RLS) to enhance data security by managing user authentication and access control within Neon databases.
 
 ## Source
 

@@ -1,6 +1,6 @@
 # Neon CLI commands — vpc
 
-> The "Neon CLI commands — vpc" document details the command-line interface commands for managing Virtual Private Clouds (VPCs) within the Neon platform, including creating, listing, and deleting VPCs.
+> The Neon CLI commands documentation for VPC outlines how to manage Virtual Private Clouds within the Neon environment, detailing command usage for creating, listing, and deleting VPCs.
 
 ## Source
 

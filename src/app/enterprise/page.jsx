@@ -277,7 +277,7 @@ const faqItems = [
   },
   {
     question: 'Can Neon help with migrations?',
-    answer: `Absolutely. Our expert team assists Enterprise clients throughout the migration process. <a href="/migration-assistance">Tell us here</a> if you’re considering migrating to Neon.`,
+    answer: `Absolutely. Our expert team assists Enterprise clients throughout the migration process. <a href="/contact-sales">Contact us</a> if you're considering migrating to Neon.`,
   },
   {
     question: 'What can I expect during the sales process?',

@@ -1,6 +1,6 @@
 # Connect a Rust application to Neon
 
-> The document outlines the steps for connecting a Rust application to a Neon database, detailing the necessary configurations and code examples to establish a successful connection.
+> This document guides users on how to connect a Rust application to a Neon database, detailing the necessary steps and code examples for establishing a successful connection.
 
 ## Source
 
@@ -34,7 +34,7 @@ fn main() -> Result<(), Box<dyn error::Error>> {
     let builder = SslConnector::builder(SslMethod::tls())?;
     let connector = MakeTlsConnector::new(builder.build());
 
-    let mut client = Client::connect("postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require", connector)?;
+    let mut client = Client::connect("postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require", connector)?;
 
     for row in client.query("SELECT 42", &[])? {
         let ret : i32 = row.get(0);

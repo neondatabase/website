@@ -16,7 +16,7 @@ export const metadata = getMetadata({
   robotsNoindex: 'noindex',
 });
 
-const GithubPage = () => (
+const GitHubPage = () => (
   <>
     <Hero />
     <Logos />
@@ -31,6 +31,6 @@ const GithubPage = () => (
   </>
 );
 
-export default GithubPage;
+export default GitHubPage;
 
 export const revalidate = false;

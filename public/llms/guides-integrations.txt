@@ -1,6 +1,6 @@
 # Neon integration guides
 
-> The "Neon integration guides" document outlines step-by-step instructions for integrating Neon with various platforms and tools, facilitating seamless connectivity and functionality within the Neon ecosystem.
+> The "Neon integration guides" document details the procedures for integrating Neon with various third-party services and tools, facilitating seamless connectivity and functionality within the Neon ecosystem.
 
 ## Source
 
@@ -9,6 +9,7 @@
 ## Monitor
 
 - [Datadog](https://neon.com/docs/guides/datadog): Send metrics and events from Neon Postgres to Datadog
+- [OpenTelemetry](https://neon.com/docs/guides/opentelemetry): Send metrics and events from Neon to any OpenTelemetry compatible backend
 
 ## Deploy
 
@@ -32,7 +33,6 @@
 
 - [Exograph](https://neon.com/docs/guides/exograph): Use Exograph with Neon
 - [PostgREST](https://neon.com/docs/guides/postgrest): Create a REST API from your Neon database
-- [FerretDB](https://neon.com/docs/guides/ferretdb): Use FerretDB with Neon
 - [Grafbase](https://neon.com/docs/guides/grafbase): Use Grafbase Edge Resolvers with Neon
 - [Hasura](https://neon.com/docs/guides/hasura): Connect from Hasura Cloud to Neon
 - [Cloudflare Hyperdrive](https://neon.com/docs/guides/cloudflare-hyperdrive): Use Neon with Cloudflare Hyperdrive

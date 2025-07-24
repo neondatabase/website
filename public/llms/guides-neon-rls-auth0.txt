@@ -1,6 +1,6 @@
 # Secure your data with Auth0 and Neon RLS
 
-> The document "Secure your data with Auth0 and Neon RLS" outlines the integration process of Auth0 with Neon to implement Row-Level Security (RLS) for enhanced data protection.
+> The document outlines how to integrate Auth0 with Neon Row-Level Security (RLS) to enhance data security by managing access controls at the row level within a Neon database.
 
 ## Source
 

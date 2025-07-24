@@ -24,7 +24,6 @@ Before you begin, ensure you have the following:
 
 * **Neon Account and Project:** A Neon account and a project with a running Postgres database. You can create a free Neon account and project at [pg.new](https://pg.new).
 * **Database tables (for examples):** For the examples in this guide, we'll be using the following tables to demonstrate the functionality. Create these tables in your Neon database if you intend to follow along:
-
   - A table named `users` to demonstrate triggering actions from new rows.
   - A table named `form_submissions` to demonstrate adding data from an external source.
 
@@ -66,7 +65,6 @@ Before creating Zaps, you need to connect your Neon database to Zapier. Zapier u
 3.  Click "**Add connection**" and search for "**PostgreSQL**".
     ![Add connection page in Zapier](/docs/guides/zapier-add-connection.png)
 4.  A pop-up window will appear asking for connection details. You can find most of these in your Neon Console on the **Dashboard** page, by clicking on the **Connect** button for your database. Fill in the following fields:
-
     - **Host:** Your Neon host (e.g., `ep-tight-boat-a6aplura-pooler.us-west-2.aws.neon.tech`)
     - **Port:** `5432`
     - **Database:** Your Neon database name (e.g., `neondb`)
@@ -75,7 +73,6 @@ Before creating Zaps, you need to connect your Neon database to Zapier. Zapier u
 
     <Admonition type="important" title="Password Format for Neon Postgres in Zapier">
     To connect Zapier to Neon successfully, you must include your Neon **Endpoint ID** within the password field. This is because Neon uses SNI to route connections, and some clients like Zapier's PostgreSQL connector do not pass SNI information in a way that Neon can use directly without this workaround.
-
     1.  Find your **Endpoint ID**. It's the first part of your Neon hostname (e.g., if your host is `ep-tight-boat-a6aplura-pooler.us-west-2.aws.neon.tech`, your endpoint ID is `ep-tight-boat-a6aplura`).
     2.  In Zapier's **Password** field, enter the following string, replacing `[endpoint_id]` with your actual endpoint ID and `[your_actual_password]` with your database user's password:
 
@@ -129,7 +126,6 @@ Let's create a Zap that sends a Slack message whenever a new user is added to `u
 ### Step 2: Setting up the Action (Send Slack message)
 
 1.  **Action Setup:**
-
     - Search for and select "**Slack**" as the action app.
     - For "Event", choose "**Send Channel Message**".
     - **Connect Slack Account:** If you haven't already, connect your Slack account and grant Zapier permissions.
@@ -232,7 +228,6 @@ If you encounter issues connecting Neon to Zapier or if your Zaps involving Neon
 - **Specific Errors:**
 
   If you encounter an error message stating: "**Your Zap could not be turned on - AppVersions using SQL Zero require static-ip pool types**" when trying to activate or run a Zap involving the PostgreSQL connection.
-
   - **Observation:** This issue appears to be related to the Zapier platform's handling of PostgreSQL connections and can sometimes occur without any changes made to your Zap configuration. It has been [reported by users in the Zapier community](https://community.zapier.com/troubleshooting-99/your-zap-could-not-be-turned-on-appversions-using-sql-zero-require-static-ip-pool-types-47107).
   - **Recommended Action:** If you encounter this specific error, and you've confirmed your connection details (including the password format) are correct, the most effective course of action is to **contact Zapier Support directly** as described in the above community post. You can contact them through the [Zapier Support page](https://zapier.com/app/get-help).
 

@@ -1,6 +1,6 @@
 # AI Rules: Neon with Drizzle
 
-> The document "AI Rules: Neon with Drizzle" outlines the integration of AI-driven rules within the Neon database using the Drizzle ORM, detailing setup instructions and configuration steps specific to Neon's environment.
+> The document "AI Rules: Neon with Drizzle" outlines the integration of AI-driven rules within the Neon platform using Drizzle, detailing the setup and configuration processes for users to implement automated decision-making workflows.
 
 ## Source
 
@@ -12,10 +12,6 @@ Related docs:
 Repository:
 - [README](https://github.com/neondatabase-labs/ai-rules)
 - [neon-drizzle.mdc](https://github.com/neondatabase-labs/ai-rules/blob/main/neon-drizzle.mdc)
-
----
-updatedOn: '2025-04-08T22:55:27.453Z'
----
 
 ## How to use
 
@@ -32,7 +28,6 @@ For other AI tools, you can include these rules as context when chatting with yo
 If you prefer, you can clone or download the rules directly from our [AI Rules repository](https://github.com/neondatabase-labs/ai-rules).
 
 Once added to your project, AI tools will automatically use these rules when working with Neon with Drizzle code. You can also reference them explicitly in prompts.
-
 
 ## Rules
 
@@ -52,6 +47,7 @@ This guide covers the specific integration patterns and optimizations for using 
 ## Dependencies
 
 For Neon with Drizzle ORM integration, include these specific dependencies:
+
 ```bash
 npm install drizzle-orm @neondatabase/serverless dotenv
 npm install -D drizzle-kit
@@ -280,17 +276,14 @@ export async function getUserSafely(id: number) {
 ## Best Practices for Neon with Drizzle
 
 1. **Connection Management**
-
    - Keep connection times short for serverless functions
    - Use connection pooling for high traffic applications
 
 2. **Neon Features**
-
    - Utilize Neon branching for development and testing
    - Consider Neon's auto-scaling for database design
 
 3. **Query Optimization**
-
    - Batch operations when possible
    - Use prepared statements for repeated queries
    - Optimize complex joins to minimize data transfer

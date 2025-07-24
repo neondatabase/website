@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import TemplatePage from 'app/[slug]/pages/template-page';
 import { USE_CASES_DIR_PATH } from 'constants/content';
 import LINKS from 'constants/links';
-import { getPostBySlug } from 'utils/api-docs';
+import { getPostBySlug } from 'utils/api-content';
 import getMetadata from 'utils/get-metadata';
 
 export async function generateMetadata({ params }) {

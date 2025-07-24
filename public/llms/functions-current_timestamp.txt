@@ -1,6 +1,6 @@
 # Postgres current_timestamp() function
 
-> The document explains the usage of the Postgres `current_timestamp()` function within Neon, detailing its syntax and behavior for retrieving the current date and time according to the server's time zone.
+> The document details the usage of the Postgres `current_timestamp()` function within Neon, explaining its syntax and behavior for retrieving the current date and time in SQL queries.
 
 ## Source
 

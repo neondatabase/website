@@ -110,6 +110,12 @@ export default {
     pathname: LINKS.migration,
     imagePath: '/images/social-previews/migration.jpg',
   },
+  multiTB: {
+    title: 'Neon for Multi-TB Migrations - Neon',
+    description: 'Migrating a multi-TB workload? We can help.',
+    pathname: LINKS.multiTB,
+    imagePath: '/images/social-previews/multi-tb.jpg',
+  },
   serverlessApps: {
     title: 'Postgres for serverless apps — Neon',
     description:
@@ -161,7 +167,8 @@ export default {
   },
   flow: {
     title: 'Database Branching Workflows - Neon',
-    description: 'Boost development velocity by adding data to your existing GitHub workflows',
+    description:
+      'A new paradigm for managing Postgres. Instantly create, test, preview, and roll back environments with Neon’s powerful database branching.',
     imagePath: '/images/social-previews/flow.jpg',
     pathname: LINKS.flow,
     type: 'article',
@@ -203,8 +210,8 @@ export default {
       "Generate a unique ticket image with your GitHub profile and participate in Neon's right after the conference.",
     pathname: LINKS.generateTicket,
   },
-  ticket({ name, login: githubHandle }) {
-    const userName = name || githubHandle;
+  ticket({ name, login: gitHubHandle }) {
+    const userName = name || gitHubHandle;
 
     return {
       title: `${userName}'s ticket for Neon Deploy - Neon`,

@@ -1,6 +1,6 @@
 # Pricing estimation guide
 
-> The "Pricing Estimation Guide" document outlines how Neon users can estimate costs based on their usage patterns, detailing pricing components and providing examples for accurate financial planning within the Neon platform.
+> The Pricing Estimation Guide for Neon outlines the cost structure and provides detailed instructions for calculating estimated expenses based on usage patterns and service tiers.
 
 ## Source
 

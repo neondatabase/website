@@ -1,6 +1,6 @@
 # Neon OAuth integration
 
-> The "Neon OAuth integration" document details the process for integrating OAuth authentication with Neon, enabling users to securely connect their applications to Neon's database services using OAuth protocols.
+> The Neon OAuth integration documentation outlines the steps for configuring OAuth authentication with Neon, enabling secure access and authorization for applications using Neon's database services.
 
 ## Source
 

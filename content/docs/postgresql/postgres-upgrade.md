@@ -2,7 +2,7 @@
 title: Upgrading your Postgres version
 subtitle: Learn how upgrade to a new major Postgres version in Neon
 enableTableOfContents: true
-updatedOn: '2025-05-23T13:10:29.208Z'
+updatedOn: '2025-06-23T15:24:08.791Z'
 ---
 
 This topic describes how to upgrade your Neon project from one **major** Postgres version to a newer one.
@@ -49,7 +49,6 @@ Alternatively, you can apply these configurations after migrating your data.
 - **Dump and restore**
 
   Neon supports the following dump and restore options:
-
   - [Migrate data with pg_dump and pg_restore](/docs/import/migrate-from-postgres)
 
     This method requires dumping data from your current Neon project with `pg_dump` and loading the data into the new Neon project using `pg_restore`. Some downtime will be required between the dump and restore operations.

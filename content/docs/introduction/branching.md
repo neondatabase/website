@@ -7,7 +7,7 @@ redirectFrom:
   - /docs/conceptual-guides/branching
   - /docs/concepts/branching
   - /docs/introduction/point-in-time-restore
-updatedOn: '2025-06-04T16:43:36.536Z'
+updatedOn: '2025-07-12T14:19:52.051Z'
 ---
 
 With Neon, you can quickly and cost-effectively branch your data for development, testing, and various other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines.
@@ -56,7 +56,7 @@ Refer to the following guides for instructions:
 
 <a href="/docs/guides/branching-github-actions" description="Automate branching with Neon's GitHub Actions for branching" icon="split-branch">Branching with GitHub Actions</a>
 
-<a href="/docs/guides/branching-neon-api" description="Connect your Vercel project and create a branch for each preview deployment" icon="split-branch">The Neon Postgres Previews Integration</a>
+<a href="/docs/guides/neon-managed-vercel-integration" description="Connect your Vercel project and create a branch for each preview deployment" icon="split-branch">The Neon-Managed Vercel Integration</a>
 
 </DetailIconCards>
 

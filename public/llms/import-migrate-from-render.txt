@@ -1,6 +1,6 @@
 # Migrate from Render to Neon Postgres
 
-> The document outlines the steps for migrating a PostgreSQL database from Render to Neon, detailing the necessary procedures for exporting data from Render and importing it into Neon.
+> The document outlines the steps required to migrate a PostgreSQL database from Render to Neon, detailing the necessary configurations and commands to ensure a smooth transition within Neon's infrastructure.
 
 ## Source
 

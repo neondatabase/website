@@ -1,6 +1,6 @@
 # Postgres json_to_record() function
 
-> The document explains the usage of the Postgres `json_to_record()` function within Neon, detailing how to convert JSON objects into SQL records for easier data manipulation and querying.
+> The document explains the usage of the Postgres `json_to_record()` function within Neon, detailing how it converts JSON data into a set of columns, facilitating structured data retrieval from JSON objects.
 
 ## Source
 

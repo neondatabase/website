@@ -7,7 +7,7 @@ createdAt: '2025-05-08T00:00:00.000Z'
 updatedOn: '2025-05-08T00:00:00.000Z'
 ---
 
-[Tembo.io](https://legacy.tembo.io/cloud) recently announced that it's sunsetting its managed Postgres service. If you've decided to migrate your serviced from Tembio.io to Neon, follow the steps in this guide. If you're facing a production migration requiring minimal downtime, [reach out to us](/migration-assistance).
+[Tembo.io](https://legacy.tembo.io/cloud) recently announced that it's sunsetting its managed Postgres service. If you've decided to migrate your serviced from Tembio.io to Neon, follow the steps in this guide.
 
 <Admonition type="warning" title="Tembo Shutdown Timeline">
 Please be aware of Tembo's [official shutdown timeline](https://tembo-io.notion.site/Tembo-Cloud-Migration-Guide-1de7c9367d6a80349570e7469ba7f17b)
@@ -45,7 +45,6 @@ There are several ways to migrate your Tembo Postgres database to Neon. The best
 Before you begin any migration method, complete these essential preparation steps:
 
 1.  **Assess your Tembo database:**
-
     - **Database size:** Determine the total size of your database. This will help you choose the right migration method.
     - **Postgres extensions:** Identify all custom Postgres extensions used in your Tembo instance. Run the following query on your Tembo database:
       ```sql
@@ -66,7 +65,7 @@ Neon's Import Data Assistant automates moving your existing database to Neon. It
 Before you start with the assistant, You'll need:
 
 - **Tembo connection string:** You'll need a direct connection string to your Tembo database in the format:
-  `postgresql://username:password@host:port/database?sslmode=require`
+  `postgresql://username:password@host:port/database?sslmode=require&channel_binding=require`
 - **Admin privileges:** Ensure the user in the connection string has `SUPERUSER` or sufficient privileges (`CREATE`, `SELECT`, `INSERT`, `REPLICATION`) on the source Tembo database.
 - **Database size:** Your Tembo database must be **smaller than 10GB**.
 - **Region:** The feature is currently supported only for Neon projects in AWS regions.
@@ -84,7 +83,6 @@ Before you start with the assistant, You'll need:
     - Extension compatibility.
     - Region availability.
 3.  **Import your data:** Once checks pass, Neon will:
-
     - Create a new branch for your imported data.
     - Copy your data automatically using `pg_dump` and `pg_restore`.
     - Verify the import.
@@ -171,7 +169,6 @@ Logical replication allows for near-zero downtime migration by continuously stre
 - Allow Connections from Neon to Tembo (IP Allow List):
 
   If you are having IP allow list restrictions on your Tembo database, you need to allow connections from Neon to Tembo. This is necessary for the logical replication process to work correctly.
-
   1.  **Obtain Neon NAT Gateway IP Addresses:**
       Refer to Neon's [NAT Gateway IP addresses](/docs/introduction/regions#nat-gateway-ip-addresses) to find the list of IP addresses for your Neon project's region. You will need to add these specific IP addresses to your Tembo project's allow list.
 
@@ -255,7 +252,6 @@ Once Neon is fully synchronized and replication lag is minimal:
 ## Post-migration (common steps)
 
 1.  **Verify data:**
-
     - Run checksums or row counts on key tables in both Tembo and Neon to ensure data integrity.
     - Perform functional testing of your application against Neon.
 

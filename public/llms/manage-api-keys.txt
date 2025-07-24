@@ -1,6 +1,6 @@
 # Manage API Keys
 
-> The "Manage API Keys" document guides Neon users on creating, viewing, and deleting API keys to facilitate secure programmatic access to their Neon projects.
+> The "Manage API Keys" document outlines procedures for creating, managing, and securing API keys within the Neon platform, facilitating controlled access to Neon's services and resources.
 
 ## Source
 

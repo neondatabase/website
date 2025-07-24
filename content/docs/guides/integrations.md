@@ -5,7 +5,7 @@ subtitle: Find detailed instructions for integration across various platforms an
 enableTableOfContents: true
 redirectFrom:
   - /docs/integrations/integrations-list/
-updatedOn: '2025-04-23T12:26:38.333Z'
+updatedOn: '2025-07-18T13:03:31.849Z'
 ---
 
 ## Monitor
@@ -13,6 +13,8 @@ updatedOn: '2025-04-23T12:26:38.333Z'
 <TechCards>
 
 <a href="/docs/guides/datadog" title="Datadog" description="Send metrics and events from Neon Postgres to Datadog" icon="datadog"></a>
+
+<a href="/docs/guides/opentelemetry" title="OpenTelemetry" description="Send metrics and events from Neon to any OpenTelemetry compatible backend" icon="opentelemetry"></a>
 
 </TechCards>
 
@@ -59,8 +61,6 @@ updatedOn: '2025-04-23T12:26:38.333Z'
 <a href="/docs/guides/exograph" title="Exograph" description="Use Exograph with Neon" icon="exograph"></a>
 
 <a href="/docs/guides/postgrest" title="PostgREST" description="Create a REST API from your Neon database" icon="postgresql"></a>
-
-<a href="/docs/guides/ferretdb" title="FerretDB" description="Use FerretDB with Neon" icon="ferret"></a>
 
 <a href="/docs/guides/grafbase" title="Grafbase" description="Use Grafbase Edge Resolvers with Neon" icon="grafbase"></a>
 

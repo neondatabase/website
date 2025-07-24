@@ -14,7 +14,7 @@ nextLink:
   slug: 'postgresql-tutorial/postgresql-self-join'
 ---
 
-**Summary**: in this tutorial, you will how to use PostgreSQL `RIGHT JOIN` to join two tables and return rows from the right table that may or may not have matching rows in the left table.
+**Summary**: in this tutorial, you will learn how to use PostgreSQL `RIGHT JOIN` to join two tables and return rows from the right table that may or may not have matching rows in the left table.
 
 ## Introduction to PostgreSQL RIGHT JOIN clause
 

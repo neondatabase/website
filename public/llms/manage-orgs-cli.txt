@@ -1,6 +1,6 @@
 # Manage Organizations using the Neon CLI
 
-> The document titled "Manage Organizations using the Neon CLI" details how Neon users can utilize the Neon Command Line Interface to manage organizational settings and configurations within their Neon environments.
+> The document details how to manage organizations using the Neon CLI, including creating, listing, and deleting organizations, as well as managing organization members and roles.
 
 ## Source
 

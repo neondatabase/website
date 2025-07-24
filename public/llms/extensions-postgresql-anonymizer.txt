@@ -1,6 +1,6 @@
 # The anon extension
 
-> The document details the integration and usage of the PostgreSQL Anonymizer extension within Neon, enabling users to anonymize sensitive data in their databases.
+> The document details the integration and usage of the anon extension in Neon, enabling PostgreSQL databases to anonymize sensitive data efficiently.
 
 ## Source
 

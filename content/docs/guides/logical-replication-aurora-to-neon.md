@@ -3,7 +3,7 @@ title: Replicate data from Aurora PostgreSQL
 subtitle: Learn how to replicate data from Aurora PostgreSQL to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-03-05T21:09:38.751Z'
+updatedOn: '2025-06-27T09:35:48.801Z'
 ---
 
 <MigrationAssistant/>
@@ -53,7 +53,6 @@ This section describes how to prepare your source Aurora Postgres instance (the 
 8. Reboot the **Writer instance** of your Aurora PostgreSQL DB cluster to apply the changes. In the Amazon RDS console, select your Aurora PostgreSQL DB cluster, then select the **Writer instance** of the cluster and choose **Reboot** from the **Actions** menu.
 
 9. Once the instance is available again, you can verify that logical replication is enabled as follows:
-
    - Use `psql` to connect to the writer instance of your Aurora PostreSQL DB cluster.
 
      ```bash

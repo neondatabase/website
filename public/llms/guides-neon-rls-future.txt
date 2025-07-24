@@ -1,6 +1,6 @@
 # Neon RLS roadmap
 
-> The "Neon RLS roadmap" document outlines the planned development and implementation stages of Row-Level Security (RLS) features for Neon, detailing the timeline and specific enhancements to be integrated into the platform.
+> The Neon RLS roadmap document outlines the planned features and enhancements for Row-Level Security (RLS) in Neon, detailing future development stages and implementation strategies to enhance data access control.
 
 ## Source
 

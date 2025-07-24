@@ -74,7 +74,7 @@ touch .env
 5. Set up the environment variables by adding the following to the `.env` file:
 
 ```
-DATABASE_URL=postgres://[user]:[password]@[hostname]/[database]?sslmode=require
+DATABASE_URL=postgres://[user]:[password]@[hostname]/[database]?sslmode=require&channel_binding=require
 WEBHOOK_SECRET=your_webhook_secret  # We'll use this later for verification
 ```
 
@@ -413,7 +413,6 @@ ngrok http 8000
 ngrok will provide you with a public URL (e.g., `https://abc123.ngrok.io`) that forwards to your local server. For testing, you can use this URL as the webhook endpoint. For production, you would want to deploy your FastAPI application to a server with a public IP address and domain along with an SSL certificate.
 
 3. If you don't have a GitHub repository to test with, create a new repository or use an existing one, and set up a webhook:
-
    - Go to your GitHub repository
    - Click on "Settings" > "Webhooks" > "Add webhook"
    - Set "Payload URL" to your ngrok URL + `/webhooks/github` (e.g., `https://abc123.ngrok.io/webhooks/github`)
@@ -423,7 +422,6 @@ ngrok will provide you with a public URL (e.g., `https://abc123.ngrok.io`) that 
    - Click "Add webhook"
 
 4. Trigger an event in your repository:
-
    - Make a commit and push to the repository
    - Create or update an issue
    - Open a pull request

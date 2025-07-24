@@ -1,6 +1,6 @@
 # Logical replication tips
 
-> The "Logical replication tips" document offers guidance on configuring and optimizing logical replication in Neon, focusing on setup, performance tuning, and troubleshooting specific to Neon's database environment.
+> The document "Logical replication tips" offers guidance on configuring and optimizing logical replication in Neon, focusing on setup, performance tuning, and troubleshooting common issues.
 
 ## Source
 

@@ -1,6 +1,6 @@
 # Connect a Remix application to Neon
 
-> The document titled "Connect a Remix application to Neon" guides users through the process of integrating a Remix application with a Neon database, detailing the necessary steps and configurations specific to Neon's environment.
+> This document guides users on integrating a Remix application with Neon by detailing the steps to configure the database connection and manage environment variables specific to Neon's infrastructure.
 
 ## Source
 
@@ -24,28 +24,30 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 2. Add project dependencies using one of the following commands:
 
-   
+   Tab: node-postgres
 
    ```shell
    npm install pg
    ```
 
+Tab: postgres.js
+
    ```shell
    npm install postgres
    ```
 
+Tab: Neon serverless driver
+
    ```shell
    npm install @neondatabase/serverless
    ```
-
-   
 
 ## Store your Neon credentials
 
 Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).
 
 ```shell
-DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require"
+DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
 ```
 
 ## Configure the Postgres client
@@ -154,7 +156,7 @@ export default function Page() {
 
 ## Run the app
 
-When you run `npm run dev` you can expect to see the following on [localhost:3000](https://neon.com/localhost:3000):
+When you run `npm run dev` you can expect to see the following on [localhost:3000](localhost:3000):
 
 ```shell
 PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit

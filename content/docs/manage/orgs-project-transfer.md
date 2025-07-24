@@ -1,7 +1,7 @@
 ---
 title: Transfer projects
 enableTableOfContents: true
-updatedOn: '2025-02-28T20:32:00.526Z'
+updatedOn: '2025-06-25T02:56:37.087Z'
 ---
 
 You can transfer your projects to any organization you are a member of. You can do this individually from project **Settings**, in bulk from organization **Settings**, or via the Neon API.
@@ -42,27 +42,10 @@ You can also transfer projects from one org to another using the Neon API:
 
 **You'll need:**
 
-<div style={{ display: 'flex', alignItems: 'start', marginBottom: '0.5em' }}>
-  <span style={{ marginRight: '0.5em' }}>✅</span>
-  <span>
-    <a href="/docs/manage/api-keys#create-a-personal-api-key">Personal API key (with access to both orgs)</a>
-    </span>
-</div>
-
-<div style={{ display: 'flex', alignItems: 'start', marginBottom: '0.5em' }}>
-  <span style={{ marginRight: '0.5em' }}>✅</span>
-  <span>Admin rights in the source org</span>
-</div>
-
-<div style={{ display: 'flex', alignItems: 'start', marginBottom: '0.5em' }}>
-  <span style={{ marginRight: '0.5em' }}>✅</span>
-  <span>At least Member rights in the destination org</span>
-</div>
-
-<div style={{ display: 'flex', alignItems: 'start', marginBottom: '0.5em' }}>
-  <span style={{ marginRight: '0.5em' }}>✅</span>
-  <span>Compatible billing plans between orgs (for example, projects can move from Scale to Launch but not the other way around)</span>
-</div>
+- ✅ [Personal API key (with access to both orgs)](/docs/manage/api-keys#create-a-personal-api-key)
+- ✅ Admin rights in the source org
+- ✅ At least Member rights in the destination org
+- ✅ Compatible billing plans between orgs (for example, projects can move from Scale to Launch but not the other way around)
 
 **Example request**
 

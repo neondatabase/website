@@ -27,11 +27,15 @@ import GearGradientIcon from 'icons/header/gear-gradient.inline.svg';
 import GearIcon from 'icons/header/gear.inline.svg';
 import MigrationGradientIcon from 'icons/header/migration-gradient.inline.svg';
 import MigrationIcon from 'icons/header/migration.inline.svg';
+import MultiTbgGradientIcon from 'icons/header/multi-tb-gradient.inline.svg';
+import MultiTbgIcon from 'icons/header/multi-tb.inline.svg';
 import PatternGradientIcon from 'icons/header/pattern-gradient.inline.svg';
 import PatternIcon from 'icons/header/pattern.inline.svg';
 import PeopleIcon from 'icons/header/people.inline.svg';
 import RestoreGradientIcon from 'icons/header/restore-gradient.inline.svg';
 import RestoreIcon from 'icons/header/restore.inline.svg';
+import RocketGradientIcon from 'icons/header/rocket-gradient.inline.svg';
+import RocketIcon from 'icons/header/rocket.inline.svg';
 import SearchGradientIcon from 'icons/header/search-gradient.inline.svg';
 import SearchIcon from 'icons/header/search.inline.svg';
 import SecurityGradientIcon from 'icons/header/security-gradient.inline.svg';
@@ -74,14 +78,14 @@ export default {
               icon: BranchingIcon,
               iconGradient: BranchingGradientIcon,
               title: 'Branching',
-              description: '1-click environments',
+              description: 'Modern Postgres workflows',
               to: LINKS.flow,
             },
             {
               icon: RestoreIcon,
               iconGradient: RestoreGradientIcon,
               title: 'Instant restores',
-              description: 'Copy-on-write storage',
+              description: 'Recover TBs in seconds',
               to: LINKS.branchRestore,
             },
           ],
@@ -93,7 +97,7 @@ export default {
               icon: AuthIcon,
               iconGradient: AuthGradientIcon,
               title: 'Auth',
-              description: 'UI for data management',
+              description: 'Authenticate your users',
               to: LINKS.auth,
             },
             {
@@ -114,7 +118,7 @@ export default {
               icon: AiIcon,
               iconGradient: AiGradientIcon,
               title: 'AI',
-              description: 'Powered by pgvector',
+              description: 'Embeddings & agents',
               to: LINKS.ai,
             },
             {
@@ -147,6 +151,13 @@ export default {
               title: 'Serverless Apps',
               description: 'Autoscale with traffic',
               to: `${LINKS.useCases}/serverless-apps`,
+            },
+            {
+              icon: MultiTbgIcon,
+              iconGradient: MultiTbgGradientIcon,
+              title: 'Multi-TB',
+              description: 'Scale & restore instantly',
+              to: `${LINKS.useCases}/multi-tb`,
             },
             {
               icon: DatabaseIcon,
@@ -187,6 +198,13 @@ export default {
               title: 'Enterprise',
               description: 'Scale & grow',
               to: LINKS.enterprise,
+            },
+            {
+              icon: RocketIcon,
+              iconGradient: RocketGradientIcon,
+              title: 'Startups',
+              description: 'Build with Neon',
+              to: LINKS.startups,
             },
             {
               icon: SecurityIcon,
@@ -329,6 +347,10 @@ export default {
         {
           text: 'PostgreSQL Tutorial',
           to: LINKS.postgresqltutorial,
+        },
+        {
+          text: 'Startups',
+          to: LINKS.startups,
         },
         {
           text: 'Creators',

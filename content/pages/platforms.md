@@ -86,7 +86,7 @@ You can use these to:
 - Break down metrics by project or time range (hourly, daily, monthly)
 - Power usage-based billing or internal dashboards
 
-[Learn how to query consumption metrics via the API](/docs/guides/partner-consumption-metrics)
+[Learn how to query consumption metrics via the API](/docs/guides/consumption-metrics)
 
 <Testimonial
 text="Neon’s serverless philosophy is aligned with our vision (no infrastructure to manage, no servers to provision, no database cluster to maintain) making them the obvious partner to power our serverless Postgres offering."

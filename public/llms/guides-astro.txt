@@ -1,6 +1,6 @@
 # Connect Astro to Postgres on Neon
 
-> The document outlines the steps for connecting an Astro application to a PostgreSQL database hosted on Neon, detailing the necessary configuration and code adjustments.
+> This document guides users on connecting Astro applications to a Postgres database hosted on Neon, detailing the necessary steps and configurations for seamless integration.
 
 ## Source
 
@@ -24,28 +24,30 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 2. Add project dependencies using one of the following commands:
 
-   
+   Tab: node-postgres
 
    ```shell
    npm install pg
    ```
 
+Tab: postgres.js
+
    ```shell
    npm install postgres
    ```
 
+Tab: Neon serverless driver
+
    ```shell
    npm install @neondatabase/serverless
    ```
-
-   
 
 ## Store your Neon credentials
 
 Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).
 
 ```shell
-DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require"
+DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
 ```
 
 ## Configure the Postgres client
@@ -114,7 +116,7 @@ const data = response[0].version;
 
 #### Run the app
 
-When you run `npm run dev` you can expect to see the following when you visit [localhost:4321](https://neon.com/localhost:4321):
+When you run `npm run dev` you can expect to see the following when you visit [localhost:4321](localhost:4321):
 
 ```shell
 PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
@@ -183,7 +185,7 @@ export async function GET() {
 
 #### Run the app
 
-When you run `npm run dev` you can expect to see the following when you visit the [localhost:4321/api](https://neon.com/localhost:4321/api) route:
+When you run `npm run dev` you can expect to see the following when you visit the [localhost:4321/api](localhost:4321/api) route:
 
 ```shell
 { version: 'PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit' }

@@ -1,6 +1,6 @@
 # Query with Neon's SQL Editor
 
-> The document titled "Query with Neon's SQL Editor" guides Neon users on executing SQL queries using the integrated SQL Editor, detailing steps for accessing and utilizing the editor within the Neon platform.
+> The document "Query with Neon's SQL Editor" guides users on executing SQL queries using Neon's integrated SQL editor, detailing steps for accessing the editor, writing queries, and managing query results within the Neon platform.
 
 ## Source
 
@@ -8,7 +8,7 @@
 
 The Neon SQL Editor allows you to run queries on your Neon databases directly from the Neon Console. In addition, the editor keeps a query history, permits saving queries, and provides [**Explain**](https://www.postgresql.org/docs/current/sql-explain.html) and [**Analyze**](https://www.postgresql.org/docs/current/using-explain.html#USING-EXPLAIN-ANALYZE) features.
 
-<a id="query-via-ui/"></a>
+
 
 To use the SQL Editor:
 
@@ -161,7 +161,7 @@ Informational
   \sf[+]  FUNCNAME       show a function's definition
   \sv[+]  VIEWNAME       show a view's definition
   \z[S]   [PATTERN]      same as \dp
-  ```
+```
 
 For more information about meta-commands, see [PostgreSQL Meta-Commands](https://www.postgresql.org/docs/current/app-psql.html#APP-PSQL-META-COMMANDS).
 

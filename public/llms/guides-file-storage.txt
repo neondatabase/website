@@ -1,6 +1,6 @@
 # File storage
 
-> The "File Storage" document outlines how Neon users can manage and configure file storage for their databases, detailing the processes for storage allocation, access, and optimization within the Neon platform.
+> The "File Storage" documentation outlines the procedures for managing file storage within the Neon database environment, detailing configuration, usage, and integration specifics for effective data handling.
 
 ## Source
 

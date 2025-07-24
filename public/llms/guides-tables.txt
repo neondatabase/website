@@ -1,6 +1,6 @@
 # Managing your data and schemas in the Neon Console
 
-> The document titled "Managing your data and schemas in the Neon Console" guides users on how to create, modify, and manage tables and schemas within the Neon Console environment.
+> The document outlines how to manage data and schemas within the Neon Console, detailing steps for creating, modifying, and deleting tables, as well as managing indexes and constraints specific to Neon's database environment.
 
 ## Source
 

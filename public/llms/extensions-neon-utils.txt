@@ -1,6 +1,6 @@
 # The neon_utils extension
 
-> The document details the neon_utils extension for Neon, which facilitates the management of PostgreSQL databases by offering functions for logging, monitoring, and debugging within the Neon environment.
+> The document details the neon_utils extension, which enhances Neon's functionality by offering additional utilities for managing and optimizing database operations within the Neon environment.
 
 ## Source
 

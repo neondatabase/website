@@ -1,6 +1,6 @@
 # Understanding Neon's autoscaling algorithm
 
-> The document explains Neon's autoscaling algorithm, detailing how it dynamically adjusts resources based on workload demands to optimize performance and cost efficiency within the Neon database environment.
+> The document explains Neon's autoscaling algorithm, detailing how it dynamically adjusts resources based on workload demands to optimize performance and efficiency within the Neon database environment.
 
 ## Source
 

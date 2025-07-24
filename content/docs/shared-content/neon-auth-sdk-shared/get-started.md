@@ -1,3 +1,7 @@
+---
+updatedOn: '2025-07-12T14:19:52.054Z'
+---
+
 <FeatureBetaProps feature_name="Neon Auth" />
 
 Neon Auth lets you add authentication to your app in seconds — user data is synced directly to your Neon Postgres database, so you can query and join it just like any other table.
@@ -8,17 +12,13 @@ Neon Auth lets you add authentication to your app in seconds — user data is sy
 
 Go to [pg.new](https://pg.new) to create a new Neon project.
 
-Once your project is ready, open your project's **Auth** page. Neon Auth is ready for you to get started.
+Once your project is ready, open your project's **Auth** page and click **Enable Neon Auth** to get started.
 
-Click **Setup instructions** to continue.
-
-![Neon Auth Console - Ready for users](/docs/guides/enable-neon-auth.png)
+![Neon Auth Console - Ready for users](/docs/neon-auth/enable-neon-auth.png)
 
 ## Get your Neon Auth keys
 
-In the **Setup instructions** tab, click **Set up Auth**.
-
-This gets you the Neon Auth environment variables and connection string you need to integrate Neon Auth and connect to your database.
+On the **Configuration** tab, select your framework to get the **Environment variables** you need to integrate Neon Auth and connect to your database.
 
 You can use these keys right away to get started, or [skip ahead](#create-users-in-the-console-optional) to try out **user creation** in the Neon Console.
 
@@ -27,7 +27,7 @@ You can use these keys right away to get started, or [skip ahead](#create-users-
 ```
 
 <Admonition type="note" title="Are you a Vercel user?">
-If you're using the [Neon native integration on Vercel](https://vercel.com/marketplace/neon), the integration automatically sets these environment variables for you in Vercel when you connect a Vercel project to a Neon database. [Learn more](/docs/guides/vercel-native-integration#environment-variables-set-by-the-integration).
+If you're using the [Vercel-Managed Integration](https://vercel.com/marketplace/neon), the integration automatically sets these environment variables for you in Vercel when you connect a Vercel project to a Neon database. [Learn more](/docs/guides/vercel-managed-integration#environment-variables-set-by-the-integration).
 </Admonition>
 
 ## Set up your app

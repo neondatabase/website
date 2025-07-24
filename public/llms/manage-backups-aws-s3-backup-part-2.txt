@@ -1,6 +1,6 @@
 # Set up a GitHub Action to perform nightly Postgres backups
 
-> This document guides Neon users on configuring a GitHub Action to automate nightly PostgreSQL backups to AWS S3, detailing the necessary steps and configurations for seamless integration.
+> This document guides Neon users through setting up a GitHub Action to automate nightly PostgreSQL database backups to AWS S3, detailing the necessary configurations and steps within the GitHub workflow.
 
 ## Source
 

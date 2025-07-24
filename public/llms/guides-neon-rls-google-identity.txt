@@ -1,6 +1,6 @@
 # Secure Your Data with Neon RLS and Firebase or GCP Identity Platform
 
-> The document outlines how to implement Row-Level Security (RLS) in Neon using Firebase or Google Cloud Platform (GCP) Identity Platform to control data access at the row level based on user identity.
+> This document explains how to implement Row-Level Security (RLS) in Neon using Firebase or Google Cloud Platform (GCP) Identity Platform to enhance data security by controlling access to database rows based on user identity.
 
 ## Source
 

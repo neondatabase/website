@@ -2,15 +2,19 @@
 import { notFound } from 'next/navigation';
 
 import { TEMPLATE_PAGES_DIR_PATH } from 'constants/content';
-import { getPostBySlug, getPostSlugs } from 'utils/api-docs';
+import { getPostBySlug, getPostSlugs } from 'utils/api-content';
 import { getWpPageBySlug } from 'utils/api-pages';
 
 const getPageType = async (slug) => {
   const templatePage = getPostBySlug(slug, TEMPLATE_PAGES_DIR_PATH);
-  if (templatePage) return 'template';
+  if (templatePage) {
+    return 'template';
+  }
 
   const wpPage = await getWpPageBySlug(slug);
-  if (wpPage) return 'wp';
+  if (wpPage) {
+    return 'wp';
+  }
 
   return null;
 };

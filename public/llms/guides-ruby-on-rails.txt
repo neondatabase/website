@@ -1,6 +1,6 @@
 # Connect a Ruby on Rails application to Neon Postgres
 
-> The document details the steps required to connect a Ruby on Rails application to a Neon Postgres database, including configuration instructions and necessary code snippets specific to Neon's environment.
+> This document guides users on configuring a Ruby on Rails application to connect with a Neon Postgres database, detailing the necessary steps and code adjustments for successful integration.
 
 ## Source
 

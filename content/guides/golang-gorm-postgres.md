@@ -83,7 +83,7 @@ import (
 
 func main() {
 	// Connection string for Neon Postgres
-	dsn := "postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
+	dsn := "postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
 
 	// Connect to the database
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
@@ -116,7 +116,7 @@ In this code, we're performing several important steps:
 4. Getting the underlying `*sql.DB` object to access lower-level database functions
 5. Verifying the connection is active by pinging the database
 
-Make sure to replace `[user]`, `[password]`, `[neon_hostname]`, and `[dbname]` with your actual Neon database credentials. The `?sslmode=require` part of the connection string ensures secure communication with your Neon database.
+Make sure to replace `[user]`, `[password]`, `[neon_hostname]`, and `[dbname]` with your actual Neon database credentials. The `?sslmode=require&channel_binding=require` part of the connection string ensures secure communication with your Neon database.
 
 Replace `[user]`, `[password]`, `[neon_hostname]`, and `[dbname]` with your actual Neon connection details. You can find these by clicking the **Connect** button on your Neon **Project Dashboard**.
 
@@ -184,7 +184,6 @@ Let's examine the key components of these models:
 1. **Basic Fields**: `ID`, `CreatedAt`, `UpdatedAt`, and `DeletedAt` are standard fields in GORM models. They handle primary keys, timestamps, and soft deletion.
 
 2. **Field Tags**: The struct tags like `gorm:"size:255;not null"` define constraints and properties for each field:
-
    - `primaryKey`: Designates a field as the table's primary key
    - `size:255`: Sets the column's maximum length
    - `not null`: Ensures the field cannot be empty
@@ -653,7 +652,7 @@ While `AutoMigrate` is convenient for development, production systems need more 
 9. Run the migrations:
 
    ```bash
-   export POSTGRESQL_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
+   export POSTGRESQL_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
    migrate -database ${POSTGRESQL_URL} -path migrations up
    ```
 
@@ -683,7 +682,7 @@ import (
 func runMigrations() {
 	m, err := migrate.New(
 		"file://migrations",
-		"postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require",
+		"postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require",
 	)
 	if err != nil {
 		log.Fatalf("Failed to create migration instance: %v", err)
@@ -834,7 +833,7 @@ type Post struct {
 
 func main() {
 	// Connection string for Neon Postgres
-	dsn := "postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
+	dsn := "postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
 
 	// Connect to the database
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{

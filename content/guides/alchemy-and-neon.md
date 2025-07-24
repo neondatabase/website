@@ -98,7 +98,42 @@ for (const pr of pullRequests) {
 
 When pull requests are merged or closed, the corresponding branches get cleaned up automatically on the next run.
 
-Now let's set up a project and see this in action with Neon database branches.
+## Security and Encryption with Alchemy
+
+Before we dive into building our Neon branch automation, it's crucial to understand how Alchemy handles sensitive data like API keys and connection strings.
+
+### Why Secret Management Matters
+
+When working with database infrastructure, you'll be dealing with sensitive information like:
+
+- Neon API keys
+- Database connection strings
+- Authentication credentials
+
+Without proper handling, these values would be stored as plain text in Alchemy's state files, creating a security risk.
+
+### How Alchemy Secrets Work
+
+Alchemy provides built-in encryption for sensitive data through the `alchemy.secret()` function. When you wrap a value with this function, Alchemy automatically encrypts it before storing it in state files.
+
+Here's what happens behind the scenes:
+
+- **Plain text in code**: `alchemy.secret(process.env.API_KEY)`
+- **Encrypted in state**: `{"@secret": "Tgz3e/WAscu4U1oanm5S4YXH..."}`
+
+### Encryption Password
+
+Secrets are encrypted using a password that you provide when initializing your Alchemy app. This password is used to encrypt and decrypt all secret values in your application.
+
+**Important**: Always store your encryption password securely and never commit it to source control.
+
+```typescript
+const app = await alchemy('my-app', {
+  password: process.env.ENCRYPTION_PASSWORD,
+});
+```
+
+We'll see how to implement this properly in the next section.
 
 ## Setting up your project
 
@@ -154,14 +189,21 @@ Create a `tsconfig.json` file that tells TypeScript how to compile our code:
 
 This configuration sets up modern TypeScript with ESM modules, which Alchemy requires. The settings ensure compatibility with Alchemy's async-native design.
 
-Finally, we need to store our Neon credentials securely. Create a `.env` file in your project root:
+Finally, we need to store our credentials securely. Create a `.env` file in your project root:
 
 ```bash
 NEON_API_KEY=your_neon_api_key_here
 NEON_PROJECT_ID=your_project_id_here
+ENCRYPTION_PASSWORD=your_strong_encryption_password_here
 ```
 
-Replace `your_neon_api_key_here` with your actual Neon API key, and `your_project_id_here` with your project ID. You can find your project ID in the Neon Console URL (it looks like `ep-cool-darkness-123456`).
+Replace the values with:
+
+- `your_neon_api_key_here`: Your actual Neon API key
+- `your_project_id_here`: Your project ID from the Neon Console
+- `your_strong_encryption_password_here`: A strong password for encrypting secrets (generate this securely)
+
+> **Security note**: The `ENCRYPTION_PASSWORD` is used by Alchemy to encrypt sensitive data like API keys and connection strings. Choose a strong, unique password and store it securely. Never commit this to source control.
 
 ## Creating a Neon Branch resource
 
@@ -172,19 +214,20 @@ Think of this resource as a "blueprint" that Alchemy can use to create as many N
 Create a file called `neon-branch.ts`:
 
 ```typescript
-import { Resource } from 'alchemy';
+import alchemy, { Resource } from 'alchemy';
 
 interface NeonBranchProps {
   name: string;
   projectId: string;
   parentBranchId?: string;
-  apiKey: string;
+  apiKey: ReturnType<typeof alchemy.secret>;
 }
 
-interface NeonBranchState extends NeonBranchProps {
+interface NeonBranchState extends Omit<NeonBranchProps, 'apiKey'> {
   branchId: string;
-  connectionString: string;
+  connectionString: ReturnType<typeof alchemy.secret>;
   createdAt: string;
+  apiKey: ReturnType<typeof alchemy.secret>;
 }
 
 export const NeonBranch = Resource<NeonBranchState, NeonBranchProps>(
@@ -292,12 +335,13 @@ export const NeonBranch = Resource<NeonBranchState, NeonBranchProps>(
     const projectResult = await projectResponse.json();
     const databaseName = 'neondb';
 
-    const connectionString = `postgres://${primaryEndpoint.host}/${databaseName}?sslmode=require&options=project%3D${projectId}`;
+    const connectionString = `postgres://${primaryEndpoint.host}/${databaseName}?sslmode=require&channel_binding=require&options=project%3D${projectId}`;
 
     return {
       ...props,
       branchId: branch.id,
-      connectionString,
+      // Encrypt the connection string
+      connectionString: alchemy.secret(connectionString),
       createdAt: branch.created_at,
     };
   }
@@ -311,12 +355,9 @@ Let's break down what this code does:
   - Delete phase: If you've removed a branch from your code, Alchemy calls the Neon API to delete it
   - Create/Update phase: If the branch doesn't exist, it creates it. If it already exists, it returns the current state
 - The API calls use the standard Neon REST API to create branches and get connection information. This is the same API you could call manually with curl, but now it's automated.
+- Notice how we use `ReturnType<typeof alchemy.secret>` to type sensitive values like API keys and connection strings. This ensures they're properly encrypted when stored in Alchemy's state files. When we create the connection string, we wrap it with `alchemy.secret()` to encrypt it before storage.
 
-The great thing about this approach is that you define the resource once, and then Alchemy handles all the complexity of tracking state, making API calls, and cleaning up resources.
-
-The same resource can be reused across your application, so you can create as many branches as you need without duplicating code.
-
-You can use a similar approach to create resources for other Neon features, like managing users or roles, but for this guide, we'll focus on branches.
+The great thing about this approach is that you define the resource once, and then Alchemy handles all the complexity of tracking state, making API calls, and cleaning up resources while keeping your sensitive data secure.
 
 ## Using the Neon Branch resource
 
@@ -330,25 +371,32 @@ import { NeonBranch } from './neon-branch.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const app = await alchemy('neon-demo');
+// Initialize Alchemy with encryption password
+const app = await alchemy('neon-demo', {
+  password: process.env.ENCRYPTION_PASSWORD!,
+});
+
+// Create secrets from environment variables
+const apiKey = alchemy.secret(process.env.NEON_API_KEY!);
 
 // Create a feature branch
 const featureBranch = await NeonBranch('feature-auth-system', {
   name: 'feature/auth-system',
   projectId: process.env.NEON_PROJECT_ID!,
-  apiKey: process.env.NEON_API_KEY!,
+  apiKey: apiKey,
 });
 
 console.log('Feature branch created!');
 console.log('Branch ID:', featureBranch.branchId);
-console.log('Connection string:', featureBranch.connectionString);
+// Note: Connection string is encrypted, so we can't log it directly
+console.log('Connection string: [encrypted]');
 
 // Create a testing branch from the feature branch
 const testingBranch = await NeonBranch('testing-auth-system', {
   name: 'test/auth-system',
   projectId: process.env.NEON_PROJECT_ID!,
   parentBranchId: featureBranch.branchId,
-  apiKey: process.env.NEON_API_KEY!,
+  apiKey: apiKey,
 });
 
 console.log('Testing branch created!');
@@ -359,10 +407,13 @@ await app.finalize();
 
 Here's what this script does step by step:
 
-- First, we initialize an Alchemy app with the name 'neon-demo'. This creates a local state file where Alchemy tracks what resources exist.
-- Next, we create a feature branch using our `NeonBranch` resource. The first parameter (`'feature-auth-system'`) is a unique ID that Alchemy uses to track this specific branch. The second parameter contains the branch configuration.
-- Then, we create a testing branch that branches off from our feature branch. Notice how we pass `featureBranch.branchId` as the `parentBranchId` - this creates a branch hierarchy just like you'd have with git branches.
+- First, we initialize an Alchemy app with the name 'neon-demo' and provide an encryption password. This creates a local state file where Alchemy tracks what resources exist and encrypts sensitive data.
+- Next, we create a secret from our Neon API key using `alchemy.secret()`, ensuring it's encrypted before being passed to resources.
+- Then, we create a feature branch using our `NeonBranch` resource. The first parameter (`'feature-auth-system'`) is a unique ID that Alchemy uses to track this specific branch. The second parameter contains the branch configuration.
+- We create a testing branch that branches off from our feature branch. Notice how we pass `featureBranch.branchId` as the `parentBranchId` - this creates a branch hierarchy just like you'd have with git branches.
 - Finally, we call `app.finalize()` to tell Alchemy we're done. This is when Alchemy checks if there are any resources that need to be cleaned up.
+
+The connection strings returned by our resource are encrypted secrets. In a real application, you'd decrypt them when needed using Alchemy's mechanisms.
 
 Let's run this script and see it in action. Make sure you have your Neon API key and project ID set in your environment variables, then run:
 
@@ -375,12 +426,12 @@ When you run this command, you should see output similar to:
 ```
 Feature branch created!
 Branch ID: br_cool_darkness_12345
-Connection string: postgres://ep-cool-darkness-12345.us-east-2.aws.neon.tech/feature/auth-system?sslmode=require
+Connection string: [encrypted]
 Testing branch created!
 Testing branch ID: br_wispy_cloud_67890
 ```
 
-If you check your Neon Console now, you'll see two new branches have appeared in your project. The connection strings shown in the output are ready to use in your applications - you can connect to these branches just like any other Postgres database.
+If you check your Neon Console now, you'll see two new branches have appeared in your project. The connection strings are stored securely in Alchemy's encrypted state, but can be used by your application when needed.
 
 ## Automating branch cleanup
 
@@ -394,7 +445,13 @@ import { NeonBranch } from './neon-branch.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const app = await alchemy('feature-workflow');
+// Initialize with encryption password
+const app = await alchemy('feature-workflow', {
+  password: process.env.ENCRYPTION_PASSWORD!,
+});
+
+// Create encrypted API key
+const apiKey = alchemy.secret(process.env.NEON_API_KEY!);
 
 // Simulate different features being worked on
 const activeFeatures = [
@@ -408,7 +465,7 @@ for (const feature of activeFeatures) {
   const branch = await NeonBranch(`feature-${feature}`, {
     name: `feature/${feature}`,
     projectId: process.env.NEON_PROJECT_ID!,
-    apiKey: process.env.NEON_API_KEY!,
+    apiKey: apiKey,
   });
 
   console.log(`Branch created for ${feature}: ${branch.branchId}`);
@@ -493,7 +550,7 @@ Or by manually cleaning up resources in the Neon Console and starting fresh.
 
 ## Summary
 
-You've learned how to use Alchemy to automate Neon database branching.
+You've learned how to use Alchemy to automate Neon database branching with proper security practices.
 
 The combination of Alchemy's simple TypeScript approach and Neon's branching makes database infrastructure management almost invisible. You focus on building features, and the database branches you need just exist.
 

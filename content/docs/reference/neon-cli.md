@@ -4,7 +4,7 @@ subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/cli-create-app
-updatedOn: '2025-04-20T22:44:00.701Z'
+updatedOn: '2025-06-23T15:24:08.792Z'
 ---
 
 The Neon CLI is a command-line interface that lets you manage Neon directly from the terminal. This documentation references all commands and options available in the Neon CLI.
@@ -238,7 +238,6 @@ Global options are supported with any Neon CLI command.
   ```
 
   The authentication flow for the Neon CLI follows this order:
-
   - If the `--api-key` option is provided, it takes precedence and is used for authentication.
   - If the `--api-key` option is not provided, the `NEON_API_KEY` environment variable is used if it is set.
   - If both `--api-key` option and `NEON_API_KEY` environment variable are not provided or set, the CLI falls back to the

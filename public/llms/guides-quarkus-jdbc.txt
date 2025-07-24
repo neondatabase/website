@@ -1,6 +1,6 @@
 # Connect Quarkus (JDBC) to Neon
 
-> The document "Connect Quarkus (JDBC) to Neon" outlines the steps for configuring a Quarkus application to connect to a Neon database using JDBC, detailing necessary dependencies, configuration settings, and connection properties specific to Neon's environment.
+> This document guides users on configuring and establishing a connection between Quarkus applications and Neon databases using JDBC, detailing the necessary steps and configurations specific to Neon's environment.
 
 ## Source
 
@@ -39,8 +39,8 @@ Create a `.env` file in the root of your Quarkus project directory. Configure a 
 QUARKUS_DATASOURCE_DB_KIND=postgresql
 QUARKUS_DATASOURCE_USERNAME=[user]
 QUARKUS_DATASOURCE_PASSWORD=[password]
-# Note that "jdbc" is prepended, and that "?sslmode=require" is appended to the connection string
-QUARKUS_DATASOURCE_JDBC_URL=jdbc:postgresql://[neon_hostname]/[dbname]?sslmode=require
+# Note that "jdbc" is prepended, and that "?sslmode=require&channel_binding=require" is appended to the connection string
+QUARKUS_DATASOURCE_JDBC_URL=jdbc:postgresql://[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
 ```
 
    **Note**: You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).

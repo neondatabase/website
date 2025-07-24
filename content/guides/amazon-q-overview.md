@@ -43,7 +43,6 @@ Once IAM Identity Center is configured, next you will have to create your Amazon
 1. Navigate to the [Amazon Q Business Console](https://us-east-1.console.aws.amazon.com/amazonq/business/welcome) and choose "Create application". You must add, assign, and subscribe at least one user to your Amazon Q Business application environment for it to work as intended.
 
 2. Configure basic settings:
-
    - Name: Pick a unique name for your application
    - Outcome: Choose 'Web experience', this will allow you to access Q as a managed web experience
    - For Access management method select 'IAM Identity Center' or 'IAM Identity Provider' depending on your setup
@@ -93,7 +92,6 @@ Head to the [Amazon Q Business Console](https://us-east-1.console.aws.amazon.com
 3. Configure connection details:
 
    Under '**Source**' add the following details:
-
    - Data source name: Neon Database
    - Host: your-neon-hostname.neon.tech
    - Port: 5432
@@ -101,7 +99,6 @@ Head to the [Amazon Q Business Console](https://us-east-1.console.aws.amazon.com
    - Check the '**Enable SSL Certificate Location**' box but leave the '**SSL Certificate Location**' field empty
 
    Under '**Authentication**', click on the '**Create and add a secret**' button and add the following details:
-
    - Secret name: Neon Database Secret
    - Username: `your_neon_database_username`
    - Password: `your_neon_database_password`
@@ -123,7 +120,6 @@ Head to the [Amazon Q Business Console](https://us-east-1.console.aws.amazon.com
    ```
 
    > Note: SQL queries must be less than 32 KB in size and must only use DQL (Data Query Language) operations.
-
    - Define the required columns:
      - **Primary key column**: `id`
      - **Title column**: `name`
@@ -132,7 +128,6 @@ Head to the [Amazon Q Business Console](https://us-east-1.console.aws.amazon.com
    Amazon Q Business offers additional configuration options like change-detecting columns, user IDs, groups, timestamps, and more. These settings help you fine-tune how the sync process works and when data should be updated. For most use cases, the default settings will work well.
 
 5. Once you've configured the sync scope, you can set up the '**Sync Mode**' and '**Sync Schedule**'. The sync mode determines how Amazon Q Business should handle data changes, while the sync schedule defines how often the sync job should run.
-
    - **Sync Mode**: Choose between '**Full Sync**' or '**New and Modified Content Sync**'. Full Sync will reindex all data each time, while New and Modified Content Sync will only update new or modified data.
    - **Sync Schedule**: Define the sync schedule. You can choose from options like on-demand, hourly, daily, weekly, monthly, or a custom cron expression. For most applications, a daily sync schedule is sufficient to keep data up-to-date unless you have a high amount of data changes.
 

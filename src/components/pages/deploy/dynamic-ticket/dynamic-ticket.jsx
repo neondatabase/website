@@ -83,7 +83,7 @@ const colorVariants = [
 const DynamicTicket = ({
   isBlankTicket = false,
   withColorPicker = false,
-  userData: { id: number, name, image, login: githubHandle, colorSchema },
+  userData: { id: number, name, image, login: gitHubHandle, colorSchema },
 }) => {
   const { data, status } = useSession();
   const [selectedColorSchema, setSelectedColorSchema] = useState(null);
@@ -219,18 +219,18 @@ const DynamicTicket = ({
                       src={image}
                       width={56}
                       height={56}
-                      alt={`${name || githubHandle}'s profile picture`}
+                      alt={`${name || gitHubHandle}'s profile picture`}
                       className="row-start-1 row-end-3 h-[56px] w-[56px] rounded-full lg:h-[48px] lg:w-[48px]"
                     />
                   ) : (
                     <span className="row-start-1 row-end-3 h-[56px] w-[56px] rounded-full border border-white lg:h-[48px] lg:w-[48px]" />
                   )}
                   <b className="font-sans text-[26px] font-semibold leading-none text-white lg:text-xl">
-                    {name || githubHandle}
+                    {name || gitHubHandle}
                   </b>
 
                   <span className="col-start-2 font-mono text-base font-normal leading-none text-white lg:text-sm">
-                    @{githubHandle}
+                    @{gitHubHandle}
                   </span>
                 </p>
                 <footer

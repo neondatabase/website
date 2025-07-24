@@ -1,6 +1,6 @@
 # Postgres JSON_TABLE() function
 
-> The document explains the Postgres JSON_TABLE() function, detailing its syntax and usage within Neon to transform JSON data into a relational format for querying.
+> The document explains the usage of the Postgres `JSON_TABLE()` function within Neon, detailing its syntax and application for transforming JSON data into a relational format.
 
 ## Source
 

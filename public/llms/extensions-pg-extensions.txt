@@ -1,6 +1,6 @@
 # Supported Postgres extensions
 
-> The document lists and describes the PostgreSQL extensions supported by Neon, detailing their compatibility and usage within the Neon database environment.
+> The document lists and describes the PostgreSQL extensions supported by Neon, detailing compatibility and usage specifics for each extension within Neon's database environment.
 
 ## Source
 
@@ -10,7 +10,7 @@ Neon supports the Postgres extensions shown in the following table. The supporte
 
 **Need an extension we don't have?** 📩 [Request an extension](https://neon.com/docs/extensions/pg-extensions#request-an-extension)
 
-<a id="default-extensions/"></a>
+
 
 | Extension                                                                                        |   PG14 |   PG15 |   PG16 |    PG17 | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | :----------------------------------------------------------------------------------------------- | -----: | -----: | -----: | ------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -40,7 +40,7 @@ Neon supports the Postgres extensions shown in the following table. The supporte
 | [lo](https://www.postgresql.org/docs/16/lo.html)                                                 |    1.1 |    1.1 |    1.1 |     1.1 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [ltree](https://neon.com/docs/extensions/ltree)                                                                  |    1.2 |    1.2 |    1.2 |     1.3 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [moddatetime (spi)](https://www.postgresql.org/docs/current/contrib-spi.html)                    |    1.0 |    1.0 |    1.0 |     1.0 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| [neon](https://neon.com/docs/extensions/neon)                                                                    |    1.5 |    1.5 |    1.5 |     1.5 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| [neon](https://neon.com/docs/extensions/neon)                                                                    |    1.6 |    1.6 |    1.6 |     1.6 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [neon_utils](https://neon.com/docs/extensions/neon-utils)                                                        |    1.0 |    1.0 |    1.0 |     1.0 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [pg_cron](https://neon.com/docs/extensions/pg_cron)                                                              |    1.6 |    1.6 |    1.6 |     1.6 | To install `pg_cron`, it must first be enabled. See [Enable the pg_cron extension](https://neon.com/docs/extensions/pg_cron#enable-the-pgcron-extension) for instructions. Please note that `pg_cron` jobs will only run when your compute is active. We therefore recommend only using `pg_cron` on computes that run 24/7 or where you have disabled [scale to zero](https://neon.com/docs/introduction/scale-to-zero).                                                                     |
 |                                                                                                  |
@@ -125,11 +125,7 @@ ALTER EXTENSION vector UPDATE TO '0.7.0';
 
 ## Request an extension
 
-## Request a New Extension
 
-Looking for a specific PostgreSQL extension in Neon? Neon supports many popular PostgreSQL extensions and regularly reviews extension requests. While we can't guarantee support for all extensions, we prioritize them based on user demand, popularity in the PostgreSQL ecosystem, and Neon's product direction.
-
-You can submit extension requests through the Neon Console. Some extensions are simple to add, while others require significant integration work.
 
 _We appreciate all extension requests. While we can't guarantee support, we regularly review requests and prioritize them based on factors like user demand, popularity in the Postgres ecosystem, and Neon's product direction. Some extensions are simple to add, while others require significant integration work._
 

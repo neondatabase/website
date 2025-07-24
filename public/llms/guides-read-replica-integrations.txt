@@ -1,6 +1,6 @@
 # Scale your application with Read Replicas
 
-> The document "Scale your application with Read Replicas" explains how Neon users can integrate and configure read replicas to enhance their application's scalability and performance by distributing read workloads across multiple database instances.
+> The document "Scale your application with Read Replicas" guides Neon users on integrating and utilizing read replicas to enhance application scalability and performance by distributing read queries across multiple database instances.
 
 ## Source
 

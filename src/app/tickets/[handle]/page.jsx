@@ -8,8 +8,8 @@ import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
 import ArrowLeftIcon from 'icons/arrow-left-thin.inline.svg';
-import buildOgImageUrl from 'utils/build-og-image-url';
 import getMetadata from 'utils/get-metadata';
+import getTicketOgImage from 'utils/get-ticket-og-image';
 import prisma from 'utils/prisma';
 
 // eslint-disable-next-line react/prop-types
@@ -125,7 +125,7 @@ export async function generateMetadata({ params }) {
     return getMetadata({
       ...SEO_DATA.ticket(userData),
       pathname: `/tickets/${userData.login}`,
-      imagePath: buildOgImageUrl(userData),
+      imagePath: getTicketOgImage(userData),
     });
   }
 

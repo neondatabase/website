@@ -1,6 +1,6 @@
 # Replicate data to Materialize
 
-> The document "Replicate data to Materialize" guides Neon users on configuring logical replication to stream data from a Neon database to Materialize, detailing the necessary steps and configurations.
+> This document guides Neon users on configuring logical replication to stream data from Neon to Materialize, detailing the necessary steps and configurations for seamless data integration between the two platforms.
 
 ## Source
 
@@ -170,7 +170,7 @@ Now that you've configured your database network and created an ingestion cluste
    You can find the connection details for your replication role in the **Connect to your database** modal on your **Project Dashboard** — click the **Connect** button. A Neon connection string looks like this:
 
    ```text
-   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    ```
 
    - Replace `<host>` with your Neon hostname (e.g., `ep-cool-darkness-123456.us-east-2.aws.neon.tech`)
@@ -213,11 +213,12 @@ In this step, you'll verify that the source is running and then check the status
             )
             AS sources
             ON mz_source_statuses.id = sources.referenced_object_id;
-            ```
+        ```
 
         For each subsource, make sure the status is running. If you see stalled or failed, there's likely a configuration issue for you to fix. Check the error field for details and fix the issue before moving on. If the status of any subsource is starting for more than a few minutes, contact [Materialize support](https://materialize.com/docs/support/).
 
 2.  Once the source is running, use the [mz_source_statistics](https://materialize.com/docs/sql/system-catalog/mz_internal/#mz_source_statistics) table to check the status of the initial snapshot:
+
         ```sql
         WITH
         source_ids AS

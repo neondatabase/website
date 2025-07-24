@@ -3,7 +3,7 @@ title: Stream changes from your Neon database to anywhere
 subtitle: Learn how to capture and stream changes and rows from your database to
   anywhere with Sequin
 enableTableOfContents: true
-updatedOn: '2025-06-02T15:04:05.573Z'
+updatedOn: '2025-06-30T11:30:21.916Z'
 ---
 
 Neon's Logical Replication features makes it possible to detect every change in your database. It can be used to power read-replicas and backups, but can also be used to add streaming characteristics to Neon.
@@ -51,7 +51,7 @@ After enabling logical replication on Neon, you'll now connect your Neon databas
 1. In Neon, copy your database connection string. You can find the it by clicking the **Connect** button on your **Project Dashboard**. It will look similar to this:
 
    ```sql shouldWrap
-   postgresql://neondb_owner:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require
+   postgresql://neondb_owner:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
    ```
 
 2. In the Sequin Console, click on the **Connect Database** button, and then auto-complete your database credentials by clicking the **Autofill with URL** button and pasting in your database connection string.
@@ -89,17 +89,14 @@ Set up a consumer in Sequin to stream changes from your database.
 3. Define any filters for the changes you want to capture. For example, you might want to only process orders with a value greater than a certain amount, or accounts with a certain status.
 
 4. Choose whether you want your consumer to process [rows or changes](https://sequinstream.com/docs/core-concepts#rows-and-changes):
-
    - **Rows**: Captures the latest state of records when a row is inserted or updated.
    - **Changes**: Captures every `insert`, `update`, and `delete`, including `OLD` values for updates and deletes.
 
 5. Select your preferred method for [receiving changes](https://sequinstream.com/docs/core-concepts#consumption):
-
    - **HTTP Push** (Webhooks): Sequin sends changes to your specified endpoint.
    - **HTTP Pull** (similar to SQS): Your application pulls changes from Sequin.
 
 6. Enter the final details for your consumer:
-
    - Give your consumer a name (e.g., `neon-changes-consumer`).
    - If using HTTP Push, provide the endpoint URL where Sequin should send the changes. You can also provide encrypted headers.
    - Optionally, set a timeout and add an endpoint path.
