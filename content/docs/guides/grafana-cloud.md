@@ -53,9 +53,10 @@ Before getting started, ensure the following:
 ## Steps to integrate Grafana Cloud with Neon
 
 1. **Get your Grafana Cloud OTLP configuration**:
-  - Sign in to the [Grafana Cloud Portal](https://grafana.com/orgs/)
-  - Click on the **OpenTelemetry** card
-  - Copy your OTLP endpoint URL and authentication credentials from the configuration details
+
+- Sign in to the [Grafana Cloud Portal](https://grafana.com/orgs/)
+- Click on the **OpenTelemetry** card
+- Copy your OTLP endpoint URL and authentication credentials from the configuration details
 
   <Admonition type="tip">
   The Authentication key should follow the format `<openTelemetry-instance-id>:<grafana-cloud-token>`
@@ -94,7 +95,7 @@ Once integrated, you can explore your Neon metrics and logs in Grafana Cloud usi
 Import the provided dashboard JSON configuration to get started with pre-built visualizations:
 
 1. In your Grafana Cloud stack, navigate to **Dashboards** → **New** → **Import**
-2. Copy and paste the [dashboard JSON below](#dashboard-json) 
+2. Copy and paste the [dashboard JSON below](#dashboard-json)
 3. Click **Load** and configure the dashboard settings
 4. The dashboard will automatically detect your Neon metrics and display key performance indicators
 
@@ -705,11 +706,13 @@ Once logs are flowing, you can query them in Grafana's Explore view using LogQL:
 Create alerts for key metrics to monitor your database health:
 
 1. **High CPU Usage**: Alert when CPU usage exceeds 80%
+
    ```promql
    rate(host_cpu_seconds_total{mode!="idle"}[5m]) > 0.8
    ```
 
 2. **Low Cache Hit Rate**: Alert when cache hit rate drops below 90%
+
    ```promql
    neon_lfc_hits / (neon_lfc_hits + neon_lfc_misses) < 0.9
    ```

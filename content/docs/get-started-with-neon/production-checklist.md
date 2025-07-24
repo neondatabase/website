@@ -156,6 +156,7 @@ Set up integration with your observability platform to monitor and set alerts fo
 - Compute metrics (CPU and memory usage)
 
 **Available integrations:**
+
 - **[Grafana Cloud](/docs/guides/grafana-cloud)**: Native OTLP integration with automatic routing to Mimir, Loki, and Tempo
 - **[Datadog](/docs/guides/datadog)**: Direct integration with Datadog's observability platform
 - **[OpenTelemetry](/docs/guides/opentelemetry)**: Export to any OTLP-compatible platform, including self-hosted Grafana and Tempo
