@@ -57,9 +57,9 @@ Before getting started, ensure the following:
     1. Click on the **OpenTelemetry** card
     1. Copy your OTLP endpoint URL and authentication credentials from the configuration details
 
-      <Admonition type="tip">
-      The Authentication key should follow the format `<openTelemetry-instance-id>:<grafana-cloud-token>`
-      </Admonition>
+     <Admonition type="tip">
+     The Authentication key should follow the format `<openTelemetry-instance-id>:<grafana-cloud-token>`
+     </Admonition>
 
 2. **Configure the Neon OpenTelemetry integration**
    1. In the Neon Console, navigate to the **Integrations** page in your Neon project
