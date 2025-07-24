@@ -106,10 +106,9 @@ If you use New Relic, you'll need to sign up for an account and get your license
    1. Click on your user menu in the bottom left corner.
    2. Select **API Keys** from the menu.
 
-   ![New Relic profile menu showing API Keys option](/docs/guides/new_relic_api_keys.png)
-   3. Click **Create a key** → choose **Ingest - License**. Copy the key immediately (you can't view it again later).
+   ![New Relic profile menu showing API Keys option](/docs/guides/new_relic_api_keys.png) 3. Click **Create a key** → choose **Ingest - License**. Copy the key immediately (you can't view it again later).
 
-      ![New Relic API Keys page showing license key types](/docs/guides/new_relic_copy_key.png)
+   ![New Relic API Keys page showing license key types](/docs/guides/new_relic_copy_key.png)
 
    Your license key will look something like `eu01xxaa1234567890abcdef1234567890NRAL` (the format varies by region).
 
