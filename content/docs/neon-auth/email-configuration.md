@@ -46,7 +46,7 @@ Most email providers (Gmail, SendGrid, Mailgun, etc.) will give you these detail
 
 You can also configure email settings programmatically:
 
-```bash
+```bash shouldWrap
 curl --request PATCH \
      --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/email_server' \
      --header 'authorization: Bearer YOUR_API_KEY' \
@@ -61,17 +61,5 @@ curl --request PATCH \
        "sender_name": "Your Company"
      }'
 ```
-
-## Troubleshooting
-
-**Common issues and quick fixes:**
-
-- **"Invalid credentials"** → Double-check your username and password
-- **"Connection failed"** → Verify your SMTP host and port
-- **"Authentication failed"** → Some providers require app-specific passwords
-- **"Test email failed"** → Check your sender email and name
-
-**Trial account limitations:**
-Trial accounts may only send emails to the administrator's address. This is normal and will be removed in production.
 
 <NeedHelp /> 
