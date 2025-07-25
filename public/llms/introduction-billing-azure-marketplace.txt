@@ -1,6 +1,6 @@
 # Azure Marketplace
 
-> The document outlines the process for Neon users to subscribe to and manage billing through the Azure Marketplace, detailing steps for account setup, subscription management, and billing integration specific to Neon's services.
+> The document outlines how Neon users can manage billing and subscriptions through the Azure Marketplace, detailing the steps for purchasing, configuring, and managing Neon services within the Azure platform.
 
 ## Source
 

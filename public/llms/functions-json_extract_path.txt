@@ -1,6 +1,6 @@
 # Postgres json_extract_path() function
 
-> The document details the usage of the `json_extract_path()` function in Neon, explaining how to extract specific elements from JSON data stored in PostgreSQL databases.
+> The document explains the usage of the `json_extract_path()` function in PostgreSQL, detailing how Neon users can extract specific elements from JSON data using a specified path.
 
 ## Source
 

@@ -1,6 +1,6 @@
 # LangChain
 
-> The LangChain documentation for Neon outlines how to integrate LangChain with Neon to build applications that leverage large language models, detailing the setup process, configuration, and usage within Neon's environment.
+> The LangChain documentation for Neon outlines how to integrate and utilize LangChain with Neon's AI capabilities, detailing setup instructions and code examples for efficient data management and processing within the Neon environment.
 
 ## Source
 

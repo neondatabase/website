@@ -1,6 +1,6 @@
 # Neon framework guides
 
-> The "Neon framework guides" document outlines steps for integrating various frameworks with Neon, assisting users in setting up and configuring their applications to work seamlessly with Neon's database services.
+> The "Neon framework guides" document offers detailed instructions for integrating various frameworks with Neon, facilitating seamless deployment and management of applications within the Neon environment.
 
 ## Source
 

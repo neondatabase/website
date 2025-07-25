@@ -1,6 +1,6 @@
 # Postgres json_populate_record() function
 
-> The document explains the usage of the Postgres `json_populate_record()` function within Neon, detailing how to convert JSON data into a Postgres record, which is useful for handling structured data in database operations.
+> The document explains the usage of the `json_populate_record()` function in PostgreSQL, detailing how it converts JSON data into a PostgreSQL record, specifically for Neon database users.
 
 ## Source
 

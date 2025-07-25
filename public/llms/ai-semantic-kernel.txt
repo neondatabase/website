@@ -1,6 +1,6 @@
 # Semantic Kernel
 
-> The "Semantic Kernel" documentation explains how Neon users can integrate AI capabilities into their applications by utilizing the Semantic Kernel framework, which facilitates the development of AI-driven features within the Neon platform.
+> The Semantic Kernel documentation for Neon outlines the integration of AI capabilities into applications, enabling users to build and deploy AI models efficiently within the Neon platform.
 
 ## Source
 
@@ -33,6 +33,7 @@ class Program
         Console.WriteLine("Vector store created successfully.");
     }
 }
+
 ```
 
 ## Generate Embeddings with Azure OpenAI

@@ -1,6 +1,6 @@
 # Postgres UUID data type
 
-> The document explains the Postgres UUID data type within Neon's database system, detailing its syntax, usage, and functions to manage universally unique identifiers in Neon databases.
+> The document explains the use and implementation of the UUID data type in PostgreSQL within Neon, detailing how it supports the storage and management of universally unique identifiers in databases.
 
 ## Source
 

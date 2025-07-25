@@ -1,6 +1,6 @@
 # The wal2json plugin
 
-> The document details the wal2json plugin for Neon, explaining how it converts PostgreSQL's Write-Ahead Logging (WAL) into JSON format, facilitating data change tracking and integration with other systems.
+> The document details the wal2json plugin for Neon, explaining its role in converting PostgreSQL Write-Ahead Logging (WAL) data into JSON format for easier data processing and integration.
 
 ## Source
 

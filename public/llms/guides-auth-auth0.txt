@@ -1,6 +1,6 @@
 # Authenticate Neon Postgres application users with Auth0
 
-> The document "Authenticate Neon Postgres application users with Auth0" guides Neon users on integrating Auth0 for authenticating application users in a Neon Postgres environment.
+> This document guides Neon users on integrating Auth0 for authenticating Postgres application users, detailing the setup process and configuration steps necessary for seamless authentication.
 
 ## Source
 
@@ -49,7 +49,7 @@ Also, add a `.env.local` file to the root of your project, which we'll use to st
 touch .env.local
 ```
 
-   **Note**: At the time of this post, the `@auth0/nextjs-auth0` package caused import errors related to one of its dependencies (`oauth4webapi`). To stop Next.js from raising the error, add the following to your `nextjs.config.mjs` file: 
+   **Note**: At the time of this post, the `@auth0/nextjs-auth0` package caused import errors related to one of its dependencies (`oauth4webapi`). To stop Next.js from raising the error, add the following to your `nextjs.config.mjs` file:
 
 ```js
 /** @type {import('next').NextConfig} */
@@ -75,7 +75,7 @@ Now, we can start building the application.
 You can find your connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. It should look similar to this:
 
 ```bash
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 Add this connection string to the `.env.local` file in your Next.js project.

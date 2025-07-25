@@ -1,6 +1,6 @@
 # Neon CLI commands — roles
 
-> The "Neon CLI commands — roles" document details the command-line interface commands for managing user roles within the Neon database, including creating, listing, and deleting roles.
+> The Neon CLI commands documentation for roles details how to manage user roles within the Neon database environment, including creating, listing, and deleting roles through command-line instructions.
 
 ## Source
 

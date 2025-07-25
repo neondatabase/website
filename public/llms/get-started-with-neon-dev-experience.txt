@@ -1,6 +1,6 @@
 # Developer experience with Neon
 
-> The document outlines the developer experience with Neon, detailing how to set up, manage, and optimize Neon databases for efficient development workflows.
+> The document outlines the developer experience with Neon, detailing the setup, configuration, and usage of Neon's cloud-native PostgreSQL database to streamline development workflows.
 
 ## Source
 

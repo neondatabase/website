@@ -1,6 +1,6 @@
 # Connect from Hasura Cloud to Neon
 
-> The document outlines the steps for connecting Hasura Cloud to a Neon database, detailing configuration settings and necessary adjustments within the Hasura Cloud console for seamless integration.
+> The document outlines the steps for connecting Hasura Cloud to Neon, detailing the configuration process for establishing a secure and efficient integration between the two platforms.
 
 ## Source
 

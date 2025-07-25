@@ -1,6 +1,6 @@
 # Neon CLI Quickstart
 
-> The "Neon CLI Quickstart" document guides users through the installation and basic usage of the Neon Command Line Interface (CLI) to manage Neon databases efficiently.
+> The Neon CLI Quickstart document guides users through the installation and basic usage of the Neon Command Line Interface, enabling efficient management and interaction with Neon databases.
 
 ## Source
 

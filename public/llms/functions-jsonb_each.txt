@@ -1,6 +1,6 @@
 # Postgres jsonb_each() function
 
-> The document explains the usage of the Postgres `jsonb_each()` function within Neon, detailing how it iterates over each key-value pair in a JSONB object, returning them as a set of records.
+> The document explains the usage of the Postgres `jsonb_each()` function, detailing how it iterates over each key-value pair in a JSONB object, specifically for Neon users working with JSON data in PostgreSQL.
 
 ## Source
 

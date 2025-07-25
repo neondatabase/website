@@ -1,6 +1,6 @@
 # Postgres regexp_match() function
 
-> The document details the usage of the Postgres `regexp_match()` function within Neon, explaining its syntax and how it can be used to search for patterns in strings using regular expressions.
+> The document explains the usage of the Postgres `regexp_match()` function in Neon, detailing its syntax and examples for extracting substrings that match a specified regular expression pattern within a string.
 
 ## Source
 

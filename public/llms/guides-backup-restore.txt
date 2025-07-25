@@ -1,6 +1,6 @@
 # Backup & Restore
 
-> The "Backup & Restore" document outlines the procedures for creating backups and restoring data within the Neon database environment, detailing the steps and commands necessary for ensuring data integrity and recovery.
+> The "Backup & Restore" documentation for Neon outlines the procedures for creating backups and restoring data within the Neon database environment, ensuring data integrity and availability.
 
 ## Source
 

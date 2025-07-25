@@ -1,6 +1,6 @@
 # Neon RSS feeds
 
-> The "Neon RSS feeds" document details how Neon users can access and utilize RSS feeds to receive updates and notifications related to their Neon database activities and changes.
+> The Neon RSS feeds documentation outlines how users can subscribe to and manage RSS feeds for updates on Neon's database services, enabling efficient monitoring of changes and new features.
 
 ## Source
 

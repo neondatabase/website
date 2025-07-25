@@ -1,6 +1,6 @@
 # Authenticate Neon Postgres application users with Okta
 
-> The document "Authenticate Neon Postgres application users with Okta" guides Neon users on configuring Okta for authenticating users in Neon Postgres applications, detailing the setup process and integration steps.
+> This document guides Neon users on configuring authentication for Postgres applications using Okta, detailing the steps to integrate Okta's identity management with Neon's database services.
 
 ## Source
 
@@ -62,7 +62,7 @@ touch .env.local
 You can find your database connection string by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
 
 ```bash
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 Add this connection string to the `.env.local` file in your Next.js project.

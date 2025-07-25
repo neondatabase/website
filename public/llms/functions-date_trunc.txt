@@ -1,6 +1,6 @@
 # Postgres date_trunc() function
 
-> This document explains the usage of the Postgres `date_trunc()` function within Neon, detailing how to truncate timestamps to specified precision levels such as year, month, or day.
+> The document explains the usage of the Postgres `date_trunc()` function within Neon, detailing how it truncates timestamps to specified precision levels, aiding in precise time-based data manipulation.
 
 ## Source
 

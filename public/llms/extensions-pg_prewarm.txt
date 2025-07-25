@@ -1,6 +1,6 @@
 # The pg_prewarm extension
 
-> The document explains the pg_prewarm extension for Neon, detailing how it loads relation data into the PostgreSQL buffer cache to improve data access performance.
+> The document details the pg_prewarm extension for Neon, which facilitates the loading of relation data into the PostgreSQL buffer cache to improve query performance by preloading data into memory.
 
 ## Source
 

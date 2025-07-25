@@ -1,6 +1,6 @@
 # Postgres Floating-point data types
 
-> The document "Postgres Floating-point data types" details the implementation and usage of floating-point data types in Neon, including `float4` and `float8`, and their precision, storage requirements, and behavior in PostgreSQL.
+> The document details the implementation and usage of floating-point data types in Neon, specifically focusing on the `float4` and `float8` types within PostgreSQL, including their precision, storage requirements, and applicable use cases.
 
 ## Source
 

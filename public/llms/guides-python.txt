@@ -1,6 +1,6 @@
 # Connect a Python application to Neon using Psycopg
 
-> The document outlines the steps for connecting a Python application to a Neon database using the Psycopg library, detailing the necessary configurations and code examples specific to Neon's environment.
+> The document outlines the steps to connect a Python application to a Neon database using the Psycopg library, detailing the necessary configurations and code examples for seamless integration.
 
 ## Source
 
@@ -43,17 +43,17 @@ The project is created with a ready-to-use `neondb` database, which you will con
 
 4. Install the following dependencies in your project's root directory for synchronous and asynchronous code, respectively. You can install them using `pip`:
 
-   
+   Tab: synchronous
 
    ```bash
    pip install psycopg2-binary python-dotenv
    ```
 
+Tab: asynchronous
+
    ```bash
    pip install asyncpg python-dotenv
    ```
-
-   
 
 ## Store your Neon credentials
 
@@ -64,7 +64,7 @@ You can find the connection details for your database by clicking the **Connect*
 Your connection string will look something like this:
 
 ```shell
-DATABASE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
+DATABASE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
 ```
 
 ## Configure your python script

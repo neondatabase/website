@@ -1,6 +1,6 @@
 # Postgres extract() function
 
-> The document details the usage of the Postgres `extract()` function within Neon, explaining how to retrieve specific components from date and time values in a database.
+> The document explains the usage of the Postgres `extract()` function within Neon, detailing how to retrieve specific subfields such as year, month, or day from date and time values in a database.
 
 ## Source
 

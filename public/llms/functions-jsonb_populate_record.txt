@@ -1,6 +1,6 @@
 # Postgres jsonb_populate_record() function
 
-> The document explains the usage of the Postgres `jsonb_populate_record()` function within Neon, detailing how to convert JSONB data into a PostgreSQL record, facilitating structured data handling in Neon databases.
+> The document explains the usage of the Postgres `jsonb_populate_record()` function, detailing how it converts JSONB data into a Postgres record type, specifically for Neon database users.
 
 ## Source
 

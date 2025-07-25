@@ -1,6 +1,6 @@
 # Neon serverless driver
 
-> The document outlines the Neon serverless driver, detailing its configuration and usage for connecting applications to Neon's serverless PostgreSQL database.
+> The Neon serverless driver documentation details the installation, configuration, and usage of the serverless driver for connecting applications to Neon databases, enabling efficient and scalable database interactions in a serverless environment.
 
 ## Source
 
@@ -204,7 +204,7 @@ You can customize the return format using the configuration options `fullResults
     rowCount: 1,
     rowAsArray: false,
     command: "SELECT"
-  }
+  } 
   */
   ```
 

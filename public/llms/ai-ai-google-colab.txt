@@ -1,6 +1,6 @@
 # Google Colab
 
-> The document outlines the steps for integrating Neon with Google Colab, enabling users to connect and interact with Neon databases directly from the Colab environment.
+> The document outlines how to integrate and use Neon with Google Colab, detailing steps for setting up a PostgreSQL database connection within the Colab environment for data analysis and machine learning tasks.
 
 ## Source
 
@@ -29,7 +29,9 @@ In your browser, navigate to [Google Colab](https://colab.research.google.com/),
 
 Alternatively, you can open a predefined Google Colab notebook for this guide by clicking the **Open in Colab** button below.
 
-
+<a target="_blank" href="https://colab.research.google.com/github/neondatabase/neon-google-colab-notebooks/blob/main/neon_pgvector_quickstart.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
 
 ## Connect to your database
 

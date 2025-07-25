@@ -1,6 +1,6 @@
 # Platform integration guide
 
-> The "Platform integration guide" document outlines the process for integrating and collaborating with Neon, detailing integration requirements, steps for onboarding, and available resources for platform integrations within the Neon ecosystem.
+> The Platform Integration Guide outlines the steps for integrating Neon with various platforms, detailing configuration processes and compatibility requirements specific to Neon's database services.
 
 ## Source
 
@@ -14,8 +14,8 @@ Learn how you can offer instant, managed Postgres databases to your users with N
 
 Learn about the benefits of integrating with Neon and how to set up your platform integration.
 
-- [Platform integration page](https://neon.com/partners): Read about the benefits of integrating with Neon
-- [Get started with integration](https://neon.com/partners#partners-apply): Request a meeting with our platform integration team
+- [Platform integration page](https://neon.com/platforms): Read about the benefits of integrating with Neon
+- [Meet with our team](https://neon.com/contact-sales): Request a meeting with our team to learn more
 
 ## Integrate with Neon
 

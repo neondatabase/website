@@ -5,7 +5,7 @@ subtitle: Find detailed instructions for integration across various platforms an
 enableTableOfContents: true
 redirectFrom:
   - /docs/integrations/integrations-list/
-updatedOn: '2025-07-18T13:03:31.849Z'
+updatedOn: '2025-07-24T20:03:24.601Z'
 ---
 
 ## Monitor
@@ -13,6 +13,8 @@ updatedOn: '2025-07-18T13:03:31.849Z'
 <TechCards>
 
 <a href="/docs/guides/datadog" title="Datadog" description="Send metrics and events from Neon Postgres to Datadog" icon="datadog"></a>
+
+<a href="/docs/guides/grafana-cloud" title="Grafana Cloud" description="Send metrics and logs from Neon Postgres to Grafana Cloud" icon="grafana"></a>
 
 <a href="/docs/guides/opentelemetry" title="OpenTelemetry" description="Send metrics and events from Neon to any OpenTelemetry compatible backend" icon="opentelemetry"></a>
 

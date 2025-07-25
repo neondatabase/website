@@ -217,6 +217,11 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/migration-assistance',
+        destination: '/docs/import/migrate-intro',
+        permanent: true,
+      },
+      {
         source: '/driver',
         destination: '/docs/serverless/serverless-driver',
         permanent: false,
@@ -228,6 +233,11 @@ const defaultConfig = {
       },
       {
         source: '/blog/an-apology-and-a-recap-on-may-june-stability',
+        destination: '/blog/may-june-recap',
+        permanent: false,
+      },
+      {
+        source: '/blog/recap-on-may-june-stability',
         destination: '/blog/may-june-recap',
         permanent: false,
       },
@@ -303,6 +313,11 @@ const defaultConfig = {
         permanent: false,
       },
       {
+        source: '/support',
+        destination: '/docs/introduction/support',
+        permanent: true,
+      },
+      {
         source: '/early-access-program',
         destination: '/docs/introduction/roadmap#join-the-neon-early-access-program',
         permanent: true,
@@ -346,6 +361,11 @@ const defaultConfig = {
         source: '/launchpad',
         destination: 'https://neon.new',
         permanent: false,
+      },
+      {
+        source: '/docs/local/neon-local-vscode',
+        destination: '/docs/local/neon-local-connect',
+        permanent: true,
       },
       ...docsRedirects,
       ...changelogRedirects,

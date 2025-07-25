@@ -1,6 +1,6 @@
 # Use Neon with Deno Deploy
 
-> The document outlines the steps for integrating Neon with Deno Deploy, detailing the process of setting up a connection between a Neon database and a Deno Deploy application.
+> The document outlines the steps for integrating Neon with Deno Deploy, detailing how to configure and deploy a Neon database within a Deno application environment.
 
 ## Source
 
@@ -29,7 +29,7 @@ Find your database connection string by clicking the **Connect** button on your 
 Your connection string should look something like this:
 
 ```bash
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
 ```
 
 You'll need the connection string a little later in the setup.
@@ -50,13 +50,13 @@ First, install the Neon serverless driver using the `deno add` command:
 deno add jsr:@neon/serverless
 ```
 
-   **Note**: You can also use npm to install the Neon serverless driver 
-
-```bash
+   **Note**: You can also use npm to install the Neon serverless driver
+   ```bash
    npx jsr add @neon/serverless
-  ```
+   ```
 
 This will create or update your `deno.json` file with the necessary dependency:
+
 ```json
 {
   "imports": {

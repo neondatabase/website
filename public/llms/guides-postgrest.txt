@@ -1,6 +1,6 @@
 # Create a REST API from Postgres with PostgREST
 
-> The document explains how to create a REST API using PostgREST with a Neon-hosted PostgreSQL database, detailing the steps for setting up PostgREST, configuring database connections, and defining API endpoints.
+> The document guides Neon users on creating a REST API from a PostgreSQL database using PostgREST, detailing the setup process and configuration steps specific to Neon's environment.
 
 ## Source
 

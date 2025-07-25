@@ -1,6 +1,6 @@
 # Secure your data with WorkOS and Neon RLS
 
-> The document outlines how to implement Row-Level Security (RLS) in Neon using WorkOS to enhance data security by restricting data access at the row level based on user roles and permissions.
+> The document explains how to integrate WorkOS with Neon to implement Row-Level Security (RLS), enhancing data security by controlling access to specific rows within a database.
 
 ## Source
 

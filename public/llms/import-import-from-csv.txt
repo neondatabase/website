@@ -1,6 +1,6 @@
 # Import data from CSV
 
-> The document titled "Import data from CSV" guides Neon users on how to import data from CSV files into their Neon database using the `COPY` command in SQL.
+> The document outlines the process for importing data from CSV files into Neon databases, detailing the necessary steps and commands to execute the import efficiently.
 
 ## Source
 

@@ -1,6 +1,6 @@
 # The hstore extension
 
-> The document explains the hstore extension in Neon, detailing how it enables storage of key-value pairs within a single PostgreSQL column, facilitating semi-structured data management.
+> The document details the hstore extension for Neon, enabling users to store sets of key-value pairs within a single PostgreSQL value, facilitating semi-structured data management.
 
 ## Source
 

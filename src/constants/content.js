@@ -3,10 +3,10 @@ const DOCS_DIR_PATH = `${CONTENT_DIR_PATH}/docs`;
 const GUIDES_DIR_PATH = `${CONTENT_DIR_PATH}/guides`;
 const FLOW_DIR_PATH = `${CONTENT_DIR_PATH}/flow`;
 const FASTER_DIR_PATH = `${CONTENT_DIR_PATH}/faster`;
-const USE_CASES_DIR_PATH = `${CONTENT_DIR_PATH}/use-cases`;
 const CHANGELOG_DIR_PATH = `${CONTENT_DIR_PATH}/changelog`;
 const POSTGRESQL_DIR_PATH = `${CONTENT_DIR_PATH}/postgresql`;
 const TEMPLATE_PAGES_DIR_PATH = `${CONTENT_DIR_PATH}/pages`;
+const USE_CASES_DIR_PATH = `${TEMPLATE_PAGES_DIR_PATH}/use-cases`;
 
 module.exports = {
   DOCS_DIR_PATH,

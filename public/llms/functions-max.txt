@@ -1,6 +1,6 @@
 # Postgres max() function
 
-> The document explains the usage of the Postgres `max()` function within the Neon database, detailing its syntax and examples to help users retrieve the maximum value from a set of values in a database query.
+> The document explains the usage of the Postgres `max()` function within Neon, detailing its syntax and application for retrieving the maximum value from a set of values in a database query.
 
 ## Source
 

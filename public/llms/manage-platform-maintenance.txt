@@ -1,6 +1,6 @@
 # Platform maintenance
 
-> The "Platform maintenance" document outlines the procedures and schedules for maintaining the Neon database platform, detailing how updates, upgrades, and maintenance windows are managed to ensure system reliability and performance.
+> The "Platform Maintenance" document outlines procedures and schedules for maintaining Neon's database platform, detailing system updates, downtime management, and user notification processes.
 
 ## Source
 

@@ -1,6 +1,6 @@
 # Connect a NestJS application to Neon
 
-> The document outlines the steps to connect a NestJS application to a Neon database, detailing configuration and code integration specific to Neon's environment.
+> This document guides users on connecting a NestJS application to a Neon database by detailing the necessary configuration steps and code examples specific to Neon's environment.
 
 ## Source
 
@@ -24,28 +24,30 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 2. Add project dependencies using one of the following commands:
 
-   
+   Tab: node-postgres
 
    ```shell
    npm install pg
    ```
 
+Tab: postgres.js
+
    ```shell
    npm install postgres
    ```
 
+Tab: Neon serverless driver
+
    ```shell
    npm install @neondatabase/serverless
    ```
-
-   
 
 ## Store your Neon credentials
 
 Add a `.env` file to your project directory and add your Neon connection string to it. You can find your connection details by clicking **Connect** on the Neon **Project Dashboard**. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).
 
 ```shell
-DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require"
+DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
 ```
 
 ## Configure the Postgres client
@@ -222,7 +224,7 @@ export class AppController {
 
 ## Run the app
 
-When you run `npm run start` you can expect to see output similar to the following at [localhost:3000](https://neon.com/localhost:3000):
+When you run `npm run start` you can expect to see output similar to the following at [localhost:3000](localhost:3000):
 
 ```shell
 [{"id":1,"name":"c4ca4238a0","value":0.39330545},{"id":2,"name":"c81e728d9d","value":0.14468245}]

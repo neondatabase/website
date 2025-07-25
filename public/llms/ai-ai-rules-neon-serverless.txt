@@ -1,6 +1,6 @@
 # AI Rules Neon Serverless Driver
 
-> The document outlines the AI Rules for the Neon Serverless Driver, detailing how to configure and implement AI-driven rules within Neon's serverless database environment.
+> The document outlines the AI Rules for the Neon Serverless Driver, detailing how AI can be integrated and utilized within Neon's serverless architecture to optimize database operations and management.
 
 ## Source
 
@@ -12,10 +12,6 @@ Related docs:
 Repository:
 - [README](https://github.com/neondatabase-labs/ai-rules#readme)
 - [neon-serverless.mdc](https://github.com/neondatabase-labs/ai-rules/blob/main/neon-serverless.mdc)
-
----
-updatedOn: '2025-04-08T22:55:27.453Z'
----
 
 ## How to use
 
@@ -32,7 +28,6 @@ For other AI tools, you can include these rules as context when chatting with yo
 If you prefer, you can clone or download the rules directly from our [AI Rules repository](https://github.com/neondatabase-labs/ai-rules).
 
 Once added to your project, AI tools will automatically use these rules when working with Neon Serverless code. You can also reference them explicitly in prompts.
-
 
 ## Rules
 
@@ -52,6 +47,7 @@ This guide provides specific patterns and best practices for connecting to Neon 
 ## Installation
 
 Install the Neon Serverless PostgreSQL driver with the correct package name:
+
 ```bash
 npm install @neondatabase/serverless
 ```

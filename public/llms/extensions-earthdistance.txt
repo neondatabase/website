@@ -1,6 +1,6 @@
 # The earthdistance extension
 
-> The document explains the installation and usage of the earthdistance extension in Neon, enabling users to calculate great-circle distances between two points on Earth using PostgreSQL.
+> The document details the installation and usage of the earthdistance extension in Neon, enabling users to calculate great-circle distances between two points on Earth using latitude and longitude coordinates.
 
 ## Source
 
@@ -208,7 +208,6 @@ For applications with many locations that require frequent radius searches or ne
     ```
 
     **Explanation of the indexed query:**
-
     - The `ll_to_earth(latitude, longitude) <@ earth_box(...)` condition uses the GiST index. The `earth_box` function creates a square bounding box. The index quickly finds points whose `earth` representation falls within this box.
     - The second condition, `earth_distance(...) < radius`, is crucial. It performs the precise great-circle distance calculation for the candidate rows selected by the index, filtering them to the exact circular radius. This is because the `earth_box` provides a rough filter, and the `earth_distance` provides the exact filter.
 

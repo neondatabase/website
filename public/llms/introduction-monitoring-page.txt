@@ -1,6 +1,6 @@
 # Monitoring dashboard
 
-> The "Monitoring dashboard" documentation details how Neon users can access and utilize the monitoring dashboard to track database performance metrics and system health within the Neon platform.
+> The Monitoring Dashboard documentation explains how to use Neon's interface to track database performance metrics, including query execution times and resource utilization, enabling users to effectively manage and optimize their database operations.
 
 ## Source
 

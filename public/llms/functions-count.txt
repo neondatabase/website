@@ -1,6 +1,6 @@
 # Postgres COUNT() function
 
-> The document explains the usage of the Postgres COUNT() function within Neon's database environment, detailing its syntax and application for counting rows in a query result set.
+> The document explains the usage and syntax of the Postgres COUNT() function within Neon, detailing how to count rows in a database query effectively.
 
 ## Source
 

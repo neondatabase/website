@@ -1,6 +1,6 @@
 # Postgres JSON_EXISTS() Function
 
-> The document explains the usage of the Postgres JSON_EXISTS() function within Neon, detailing how it checks for the existence of specific keys or values in JSON data stored in a PostgreSQL database.
+> The document details the usage of the Postgres JSON_EXISTS() function within Neon, explaining its syntax and application for checking the existence of specific keys or values in JSON data.
 
 ## Source
 
@@ -214,13 +214,11 @@ WHERE JSON_EXISTS(
 ## Best practices
 
 1. Error handling:
-
    - Use appropriate `ON ERROR` clauses based on your requirements
    - Consider `UNKNOWN ON ERROR` for nullable conditions
    - Use `ERROR ON ERROR` when validation is critical
 
 2. Performance optimization:
-
    - Create _GIN_ indexes on `JSONB` columns for better performance
    - Use strict mode when path is guaranteed to exist
    - Combine with other `JSON` functions for complex operations

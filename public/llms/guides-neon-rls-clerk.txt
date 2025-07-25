@@ -1,6 +1,6 @@
 # Secure your data with Clerk and Neon RLS
 
-> The document outlines how to implement Row-Level Security (RLS) in Neon using Clerk for user authentication, detailing the steps to secure data access at the row level within a Neon database.
+> The document outlines how to implement Row-Level Security (RLS) in Neon databases using Clerk for enhanced data security, detailing configuration steps and integration processes specific to Neon's environment.
 
 ## Source
 

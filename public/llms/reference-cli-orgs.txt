@@ -1,6 +1,6 @@
 # Neon CLI commands — orgs
 
-> The "Neon CLI commands — orgs" document details command-line instructions for managing organizations within the Neon platform, including creating, listing, and deleting organizations.
+> The Neon CLI commands documentation for organizations outlines how to manage organizational settings, including creating, listing, and deleting organizations within the Neon platform.
 
 ## Source
 

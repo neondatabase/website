@@ -1,6 +1,6 @@
 # Neon CLI commands — branches
 
-> The "Neon CLI commands — branches" document details the command-line interface commands for managing branches within the Neon database platform, including creating, listing, and deleting branches.
+> The document details Neon CLI commands for managing branches, including creating, listing, and deleting branches within the Neon database environment.
 
 ## Source
 
@@ -172,7 +172,7 @@ In addition to the Neon CLI [global options](https://neon.com/docs/reference/neo
   ```
 
     Details: Example output
-```json 
+    ```json
     {
     "branch": {
         "id": "br-frosty-art-30264288",
@@ -219,7 +219,7 @@ In addition to the Neon CLI [global options](https://neon.com/docs/reference/neo
     ],
     "connection_uris": [
         {
-        "connection_uri": "postgresql://alex:AbC123dEf@@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname",
+        "connection_uri": "postgresql://alex:AbC123dEf@@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require",
         "connection_parameters": {
             "database": "dbname",
             "password": "AbC123dEf",

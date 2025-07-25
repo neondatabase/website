@@ -1,6 +1,6 @@
 # Postgres json_extract_path_text() Function
 
-> The document explains the usage of the Postgres `json_extract_path_text()` function within Neon, detailing how to extract text from a JSON object using a specified path.
+> The document details the usage of the `json_extract_path_text()` function in PostgreSQL within Neon's database environment, explaining how to extract text from a JSON object using a specified path.
 
 ## Source
 

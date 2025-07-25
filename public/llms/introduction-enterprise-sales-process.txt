@@ -1,6 +1,6 @@
 # Neon Enterprise Sales Process
 
-> The "Neon Enterprise Sales Process" document outlines the structured approach for engaging and managing enterprise sales within Neon, detailing steps from initial contact to closing deals.
+> The Neon Enterprise Sales Process document outlines the structured approach and key steps involved in managing and executing enterprise sales for Neon, focusing on client engagement, negotiation, and closing deals.
 
 ## Source
 

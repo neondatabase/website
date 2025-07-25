@@ -1,6 +1,6 @@
 # AI Starter Kit
 
-> The AI Starter Kit documentation introduces Neon users to setting up and utilizing AI capabilities within the Neon platform, detailing the necessary steps and configurations for integrating AI functionalities into their projects.
+> The AI Starter Kit documentation introduces Neon users to integrating AI capabilities with their databases, detailing setup instructions, configuration options, and example use cases to enhance data management and analysis.
 
 ## Source
 

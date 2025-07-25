@@ -1,6 +1,6 @@
 # Secure your data with PropelAuth and Neon RLS
 
-> The document explains how to integrate PropelAuth with Neon to implement Row-Level Security (RLS), enabling users to secure their data by controlling access at the row level within a Neon database.
+> This document outlines the integration of PropelAuth with Neon Row-Level Security (RLS) to enhance data security by controlling access at the row level in a database.
 
 ## Source
 

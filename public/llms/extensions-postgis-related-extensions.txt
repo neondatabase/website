@@ -1,6 +1,6 @@
 # PostGIS-related extensions
 
-> The document details the PostGIS-related extensions available in Neon, outlining how to enable and use these extensions to enhance spatial data capabilities within the Neon database environment.
+> This document details the PostGIS-related extensions available in Neon, outlining their installation and usage to enhance spatial data capabilities within the platform.
 
 ## Source
 

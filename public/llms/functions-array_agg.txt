@@ -1,6 +1,6 @@
 # Postgres array_agg() function
 
-> The document explains the usage of the Postgres `array_agg()` function within Neon, detailing how it aggregates input values, including nulls, into an array, and provides examples of its application in SQL queries.
+> The document explains the usage of the Postgres `array_agg()` function in Neon, detailing how it aggregates input values into an array, which is useful for handling and manipulating grouped data within the database.
 
 ## Source
 

@@ -1,6 +1,6 @@
 # Postgres json_serialize() Function
 
-> The document details the usage of the `json_serialize()` function in Neon, explaining how it converts PostgreSQL data types into JSON format for efficient data handling and manipulation within the Neon database environment.
+> The document details the `json_serialize()` function in Neon, explaining its usage for converting PostgreSQL data types into JSON format for efficient data handling and storage.
 
 ## Source
 

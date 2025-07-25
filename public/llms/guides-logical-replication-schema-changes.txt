@@ -1,6 +1,6 @@
 # Managing schema changes in a logical replication setup
 
-> The document outlines procedures for managing schema changes in a logical replication setup within Neon, detailing steps to ensure consistency and avoid replication issues during schema modifications.
+> The document outlines procedures for managing schema changes in a logical replication setup within Neon, detailing steps to ensure consistency and minimize disruptions during schema modifications.
 
 ## Source
 

@@ -1,6 +1,6 @@
 # Postgres JSON_VALUE() Function
 
-> The document explains the usage of the Postgres JSON_VALUE() function in Neon, detailing how to extract scalar values from JSON data within a PostgreSQL database.
+> The document details the usage of the Postgres JSON_VALUE() function in Neon, explaining its syntax and application for extracting scalar values from JSON data within the database.
 
 ## Source
 
@@ -199,6 +199,7 @@ INSERT INTO user_emails (user_data)
 VALUES (
     '{"name": "Alice", "email": "invalid-email"}'
 );
+
 ```
 
 ## Error handling
@@ -206,7 +207,6 @@ VALUES (
 The function provides several ways to handle errors:
 
 1. Using `ON EMPTY`:
-
    - `ERROR`: Raises an error (default)
    - `NULL`: Returns `NULL`
    - `DEFAULT expression`: Returns specified value
@@ -267,12 +267,10 @@ SELECT
 ## Additional considerations
 
 1. Type safety:
-
    - Always use `RETURNING` when specific data types are expected
    - Implement appropriate error handling for type conversions
 
 2. Performance considerations:
-
    - Use indexes on frequently queried `JSON` paths
 
 ## Learn more
