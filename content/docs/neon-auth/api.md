@@ -405,7 +405,7 @@ Required parameters:
 
 Request body parameters:
 
-- `type`: Type of email server (`"shared"` or `"custom"`)
+- `type`: Type of email server (`"shared"` or `"standard"`)
 - `host`: SMTP server hostname (required for custom SMTP)
 - `port`: SMTP server port (required for custom SMTP)
 - `username`: SMTP username (required for custom SMTP)
