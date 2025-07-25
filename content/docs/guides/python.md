@@ -231,7 +231,7 @@ asyncio.run(run())
 
 </CodeTabs>
 
-In the above code, we:
+The above code does the following:
 
 - Load the connection string from the `.env` file.
 - Connect to the Neon database.
@@ -334,7 +334,7 @@ asyncio.run(run())
 
 </CodeTabs>
 
-In the above code, we:
+The above code does the following:
 
 - Load the connection string from the `.env` file.
 - Connect to the Neon database.
@@ -428,7 +428,7 @@ asyncio.run(run())
 
 </CodeTabs>
 
-In the above code, we:
+The above code does the following:
 
 - Load the connection string from the `.env` file.
 - Connect to the Neon database.
@@ -526,7 +526,7 @@ asyncio.run(run())
 
 </CodeTabs>
 
-In the above code, we:
+The above code does the following:
 
 - Load the connection string from the `.env` file.
 - Connect to the Neon database.
@@ -557,7 +557,7 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: True
 --------------------
 ```
 
-> We can see that the book '1984' has been deleted from the library.
+> We can see that the book '1984' has been successfully deleted from the `books` table.
 
 </Steps>
 

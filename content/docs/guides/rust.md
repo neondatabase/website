@@ -403,9 +403,10 @@ The above code does the following:
 
 - Load the connection string from the `.env` file.
 - Connect to the Neon database using a secure TLS connection.
-- Fetch all rows from the `books` table and print them to the console.
+- Use a `client.query` method to fetch all rows from the `books` table, ordered by `publication_year`.
+- Print each book's details in a formatted output.
 
-Run the script:
+Run the script using the following command:
 
 ```bash
 cargo run --bin read_data
@@ -509,9 +510,9 @@ The above code does the following:
 
 - Load the connection string from the `.env` file.
 - Connect to the Neon database using a secure TLS connection.
-- Update a data row in the `books` table to set the stock status of 'Dune' to `true`.
+- Use a `client.execute` method to update the stock status of the book 'Dune' to `true`.
 
-Run the script:
+Run the script using the following command:
 
 ```bash
 cargo run --bin update_data
@@ -523,7 +524,20 @@ After running this script, you can run `read_data` again to verify that the row 
 cargo run --bin read_data
 ```
 
-The new output will show that 'Dune' is now in stock.
+When the code runs successfully, it produces the following output:
+
+```text title="Output"
+Connection established
+
+--- Book Library ---
+ID: 2, Title: The Hobbit, Author: J.R.R. Tolkien, Year: 1937, In Stock: true
+ID: 3, Title: 1984, Author: George Orwell, Year: 1949, In Stock: true
+ID: 1, Title: The Catcher in the Rye, Author: J.D. Salinger, Year: 1951, In Stock: true
+ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
+---------------------
+```
+
+> We can see that the stock status for 'Dune' has been updated to `True`.
 
 ### Delete data
 
@@ -610,9 +624,9 @@ The above code does the following:
 
 - Load the connection string from the `.env` file.
 - Connect to the Neon database using a secure TLS connection.
-- Delete a data row from the `books` table where the title is '1984'.
+- Use a `client.execute` method to delete the book '1984' from the `books` table.
 
-Run the script:
+Run the script using the following command:
 
 ```bash
 cargo run --bin delete_data
@@ -623,7 +637,20 @@ After running this script, run `read_data` again to verify that the row was dele
 ```bash
 cargo run --bin read_data
 ```
-The output will show that '1984' is no longer in the library.
+
+When the code runs successfully, it produces the following output:
+
+```text title="Output"
+Connection established
+
+--- Book Library ---
+ID: 2, Title: The Hobbit, Author: J.R.R. Tolkien, Year: 1937, In Stock: true
+ID: 1, Title: The Catcher in the Rye, Author: J.D. Salinger, Year: 1951, In Stock: true
+ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
+--------------------
+```
+
+> We can see that the book '1984' has been successfully deleted from the `books` table.
 
 </Steps>
 
