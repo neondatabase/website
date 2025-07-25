@@ -462,9 +462,4 @@ For detailed configuration instructions and best practices, see [Email configura
 
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/updateneonauthemailserver)
 
-<<<<<<< Updated upstream
-
-=======
-
-> > > > > > > Stashed changes
-> > > > > > > <NeedHelp />
+<NeedHelp />
