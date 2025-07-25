@@ -2,7 +2,7 @@
 title: Claiming a Neon Auth project
 enableTableOfContents: true
 tag: beta
-updatedOn: '2025-05-16T19:06:06.840Z'
+updatedOn: '2025-07-25T16:57:32.349Z'
 redirectFrom:
   - /docs/guides/neon-auth-claim-project
 ---

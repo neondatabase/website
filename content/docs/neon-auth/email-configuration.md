@@ -3,6 +3,7 @@ title: Email configuration
 subtitle: Configure email server settings for Neon Auth
 enableTableOfContents: true
 tag: beta
+updatedOn: '2025-07-25T16:57:32.349Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth" />
