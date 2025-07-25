@@ -31,14 +31,14 @@ Your app will now send emails from your own domain.
 
 When switching to your own email server, you'll need these details from your email provider:
 
-| Field            | What you need                       | Example                   |
-| ---------------- | ----------------------------------- | ------------------------- |
-| **Host**         | Your email server address           | `smtp.gmail.com`          |
-| **Port**         | SMTP port (587 is default, 25 is Standard, 2525 often used in testing)      | `587`                     |
-| **Username**     | Your email address                  | `your-email@gmail.com`    |
-| **Password**     | Your email password or app password | `your-password`           |
-| **Sender Email** | The "from" address users will see   | `noreply@yourcompany.com` |
-| **Sender Name**  | The "from" name users will see      | `Your Company`            |
+| Field            | What you need                                                          | Example                   |
+| ---------------- | ---------------------------------------------------------------------- | ------------------------- |
+| **Host**         | Your email server address                                              | `smtp.gmail.com`          |
+| **Port**         | SMTP port (587 is default, 25 is Standard, 2525 often used in testing) | `587`                     |
+| **Username**     | Your email address                                                     | `your-email@gmail.com`    |
+| **Password**     | Your email password or app password                                    | `your-password`           |
+| **Sender Email** | The "from" address users will see                                      | `noreply@yourcompany.com` |
+| **Sender Name**  | The "from" name users will see                                         | `Your Company`            |
 
 Most email providers (Gmail, SendGrid, Mailgun, etc.) will give you these details in their SMTP setup documentation.
 
