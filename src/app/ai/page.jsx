@@ -28,7 +28,7 @@ import getMetadata from 'utils/get-metadata';
 
 export const metadata = getMetadata(SEO_DATA.ai);
 
-const PG_AGENT_FEATURES_ITEMS = [
+const AGENT_FEATURES = [
   {
     title: 'One-second database provisioning',
     description:
@@ -67,7 +67,7 @@ const PG_AGENT_FEATURES_ITEMS = [
   },
 ];
 
-const STARTER_KIT_FEATURES_ITEMS = [
+const STARTER_KIT_FEATURES = [
   {
     title: 'Postgres with pgvector',
     description:
@@ -127,7 +127,7 @@ const AiPage = () => (
       title="Add Postgres to your agent"
       titleClassName="md:text-pretty"
       description="Neon is purpose-built to support AI agents at the infrastructure level, with native, API-first Postgres that doesn’t require end-user signups or manual provisioning."
-      items={PG_AGENT_FEATURES_ITEMS}
+      items={AGENT_FEATURES}
       link={LINKS.useCasesAI}
       linkText="Read more"
       logos={['create', 'replit', 'same', 'solar', 'databutton']}
@@ -166,7 +166,7 @@ const AiPage = () => (
       titleClassName="md:text-pretty"
       description="Neon's AI Starter Kit offers resources, apps, and examples to kickstart Neon as your vector database."
       descriptionClassName="max-w-[490px]"
-      items={STARTER_KIT_FEATURES_ITEMS}
+      items={STARTER_KIT_FEATURES}
       link={LINKS.docsAi}
       linkText="Learn more"
     />
@@ -174,8 +174,6 @@ const AiPage = () => (
       className="pb-[290px] pt-[348px] xl:pb-[242px] xl:pt-[278px] lg:pb-[200px] lg:pt-[260px] sm:pb-[100px] sm:pt-40"
       title="The Postgres of tomorrow, available today"
       titleClassName="max-w-[745px] lg:max-w-[600px] md:max-w-[400px] md:leading-none"
-      buttonText="Sign up"
-      buttonUrl={LINKS.signup}
     />
   </Layout>
 );

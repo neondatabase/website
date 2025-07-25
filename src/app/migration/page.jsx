@@ -19,7 +19,7 @@ import getMetadata from 'utils/get-metadata';
 
 export const metadata = getMetadata(SEO_DATA.migration);
 
-const MIGRATION_FEATURES_ITEMS = [
+const FEATURES = [
   {
     title: 'Easy',
     description: 'Simplify the life of developers with a serverless consumption model.',
@@ -76,7 +76,7 @@ const MigrationPage = () => (
       ulClassName="!xl:max-w-[832px] xl:grid-cols-3 lg:mx-16"
       containerSize="960"
       description="Neon provides a serverless, fully managed Postgres built for modern development — fast, reliable, and cost-effective."
-      items={MIGRATION_FEATURES_ITEMS}
+      items={FEATURES}
     />
     <CTA
       className="pb-[298px] pt-[296px] xl:pb-[259px] xl:pt-[250px] lg:pb-[186px] lg:pt-[182px] md:pb-[171px] md:pt-[157px]"
