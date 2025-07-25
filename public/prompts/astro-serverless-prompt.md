@@ -1,69 +1,62 @@
 # 💡 AI Prompt: Connect Astro to Neon Postgres (Serverless Driver)
 
-**Goal:** Help users connect an existing Astro project to a Neon Postgres database using the **@neondatabase/serverless** driver.
+**Purpose:** Connect the currently open Astro project to a Neon Postgres database using the `@neondatabase/serverless` driver.
 
 **Scope:**
-- Applies only to server-side database access in Astro (`.astro` frontmatter or API routes).
-- Assumes the user has:
-  - An existing Astro app created via `npm create astro@latest`
-  - A Neon Postgres database with the connection string available
+- Assumes the Astro projects was created via `npm create astro@latest`
+- Assumes the user has an existing Neon database and access to its connection string
+- Must be run inside an open Astro project directory
+
+✅ Read and understand the entire instruction set before executing
 
 ---
 
-## ✅ Minimal Example
+## 🛠️ Instructions (for AI-enabled editors)
+
+When this prompt is triggered, automatically configure the open Astro project as follows:
+
+### 1. Install the Neon serverless driver
+
+Run:
 
 ```
-import { neon } from '@neondatabase/serverless';
-const sql = neon(import.meta.env.DATABASE_URL);
-const result = await sql`SELECT now()`;
-console.log(result[0]);
+npm install @neondatabase/serverless
 ```
 
 ---
 
-## ✅ Setup Checklist for Astro + Neon
+### 2. Verify that there is an `.env` file
 
-1. **Install the Neon serverless driver**  
-   
-   ```
-   npm install @neondatabase/serverless
-   ```
+- Check for the presence of a `.env` file at the root of the project.
+- If it doesn't exist, advise the user to create one and add the following line, replacing the connection string with the one copied from their Neon project,
 
-2. **Add a `.env` file** at the root of the Astro project  
-   
-   ```
-   DATABASE_URL="postgresql://<user>:<password>@<hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
-   ```
+  ```
+  DATABASE_URL="postgresql://<user>:<password>@<hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
+  ```
 
-3. **Use the Neon driver in server-side code only**:
-   - `.astro` frontmatter
-   - `src/pages/api/*.ts` API routes
-
-4. **Run your Astro project**
-   
-   ```
-   npm run dev
-   ```
+- **Do not hardcode** credentials directly in the code.
+- Prompt the user to get their connection string from the **Neon Console → Project → Connect → Connection details.**
 
 ---
 
-## 🧪 Integration Examples
+### 3. Update the Astro project to use the Neon driver server-side
 
-### `.astro` frontmatter
+#### `.astro` frontmatter
 
----
+```
 import { neon } from '@neondatabase/serverless';
 
 const sql = neon(import.meta.env.DATABASE_URL);
 const response = await sql`SELECT version()`;
 const data = response[0].version;
----
+```
+
+```
 <h1>Postgres version:</h1>
 <p>{data}</p>
+```
 
----
-
-### API Route (`src/pages/api/index.ts`)
+#### API route (`src/pages/api/index.ts`)
 
 ```
 import { neon } from '@neondatabase/serverless';
@@ -77,40 +70,44 @@ export async function GET() {
 }
 ```
 
----
+## 🚀 Next Steps
 
-## ⚠️ AI Rules & Validation
+Once setup is complete:
 
-### ✅ Required Practices
-- Use **@neondatabase/serverless** exclusively.
-- Connect using:  
-  const sql = neon(import.meta.env.DATABASE_URL);
-- Store the database connection string in a `.env` file — **never hardcode credentials**.
-- Ensure **all queries are server-side only** (in `.astro` or API route).
-- Assume the Astro project was created with `npm create astro@latest`.
+1. Advise the user to start that Astro dev server:
 
-### 🚫 Do Not
-- ❌ Suggest `pg`, `postgres.js`, or any non-serverless client.
-- ❌ Hardcode the `DATABASE_URL` or any credentials in code.
-- ❌ Run queries on the client side.
-- ❌ Suggest loading `.env` with `dotenv` — Astro loads it automatically.
+  ```
+   npm run dev
+  ```
 
----
+2. To test the app, open the browser and visit:
 
-## 🔍 Pre-Generation AI Checklist
+   - `http://localhost:4321` to test `.astro` output
+   - `http://localhost:4321/api` to test API route
 
-Before generating output, **validate all of the following**:
-
-- ✅ @neondatabase/serverless is used
-- ✅ import.meta.env.DATABASE_URL is used correctly
-- ✅ No hardcoded credentials
-- ✅ Query is executed **server-side** only
-- ✅ Project assumes Astro structure created by `npm create astro@latest`
-
-If any check fails, **revise the output before suggesting it.**
+You should see the Postgres version returned by your Neon database.
 
 ---
 
-Your Astro project is now connected to Neon!  
-For more, visit: [Connect Astro to Postgres – Neon Docs](https://neon.tech/docs)
+## ✅ Validation Rules for AI
 
+Before suggesting code or making edits, ensure:
+
+- The `@neondatabase/serverless` package is used exclusively
+- Queries are server-side only (not in client JS or components)
+- The connection string is loaded from `import.meta.env.DATABASE_URL`
+- A `.env` file is present or has been created
+- No use of `dotenv` (Astro loads `.env` automatically)
+
+---
+
+## ❌ Do Not
+
+- Do not use `pg`, `postgres.js`, or any other Postgres client
+- Do not hardcode credentials
+- Do not run database code on the client
+- Do not suggest installing or configuring `dotenv`
+
+---
+
+For help finding your connection string, see: [Connect from any application – Neon Docs](https://neon.tech/docs/connect/connect-from-any-application)
