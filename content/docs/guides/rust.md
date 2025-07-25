@@ -37,7 +37,7 @@ For your Rust project, use `cargo` to create a new project and add the required 
 
     This command creates a new directory named `neon-rust-quickstart` containing a `src/main.rs` file for your code and a `Cargo.toml` file for your project's configuration and dependencies.
 
-    > Open the directory in your preferred code editor (e.g., VS Code with the rust-analyzer extension, CLion with the Rust plugin).
+    > Open the directory in your preferred code editor (e.g., VS Code, RustRover, etc.) to edit the files.
 
 2.  Add the required crates using `cargo add`. Choose the set of commands for either a synchronous or asynchronous setup.
 
@@ -103,9 +103,31 @@ Create a file named `.env` in your project's root directory. This file will secu
 3.  Copy the connection string, which includes your password.
 4.  Add the connection string to your `.env` file as shown below.
     ```text
-    DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
+    DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
     ```
-    > The Rust drivers handle the `sslmode=require` parameter correctly, so you can use the standard connection string from the Neon console.
+
+## Choosing the right method to execute SQL commands
+
+Before diving into the code examples, it's important to understand how to interact with your Neon database using Rust. The `postgres` and `tokio-postgres` crates provide several methods for executing SQL commands. Choosing the right method depends on your use case:
+
+- `client.execute:` 
+  Use this for a single DML/DDL statement (`INSERT`, `UPDATE`, `DELETE`) or a fire-and-forget query. It supports parameter placeholders (`$1`, `$2`, etc.) and returns the number of rows affected (`u64`).
+
+- `client.batch_execute:`  
+  Ideal for running multiple SQL commands in one shot (schema migrations, DDL, seed data). Supply a semicolon-separated SQL string. This method does not support parameters and returns `()` on success.
+
+- `client.query:`  
+  The go-to for any `SELECT` that returns rows. It accepts placeholders and returns a `Vec<Row>`, so you can iterate over rows and extract typed values.
+
+### Quick comparison
+
+| Method                | Use case                             | Parameters | Returns               |
+|-----------------------|--------------------------------------|------------|-----------------------|
+| `client.execute`      | Single DML/DDL or ad-hoc query       | Yes        | `u64` (rows affected) |
+| `client.batch_execute`| Multiple statements in one SQL blob <br/>(DDL, migrations, seed data) | No         | `()`                  |
+| `client.query`        | Fetching rows from a `SELECT`        | Yes        | `Vec<Row>`            |
+
+Now that you know how to connect to your Neon database and the available methods for executing SQL commands, let's look at some examples of how to perform basic CRUD operations. We will use all three methods (`execute`, `batch_execute`, and `query`) in the examples to demonstrate their usage.
 
 ## Examples
 
@@ -125,6 +147,8 @@ use postgres_openssl::MakeTlsConnector;
 use std::env;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
+
+    // Load environment variables from .env file
     dotenv()?;
     let conn_string = env::var("DATABASE_URL")?;
 
@@ -176,7 +200,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // Commit the transaction
     transaction.commit()?;
-    println!("Inserted 3 rows of data in a single transaction.");
+    println!("Inserted 3 rows of data.");
 
     Ok(())
 }
@@ -191,6 +215,8 @@ use std::env;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
+
+    // Load environment variables from .env file
     dotenv()?;
     let conn_string = env::var("DATABASE_URL")?;
 
@@ -248,7 +274,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     
     // Commit the transaction
     transaction.commit().await?;
-    println!("Inserted 3 rows of data in a single transaction.");
+    println!("Inserted 3 rows of data.");
 
     Ok(())
 }
@@ -265,13 +291,13 @@ The above code does the following:
 -   Insert a single book record.
 -   Start a transaction to insert multiple book records in a single operation.
 
-<Admonition type="info" title="Why use a transaction for inserting multiple rows?">
-Unlike database drivers in some other languages that offer a single high-level method for bulk inserts (like Python's `executemany` in `psycopg2`), the idiomatic Rust approach is to loop through the data inside a transaction.
+    <Admonition type="info" title="Why use a transaction for inserting multiple rows?">
+    Unlike database drivers in some other languages that offer a single high-level method for bulk inserts (like [Python's](/docs/guides/python#create-a-table-and-insert-data) `executemany` in `psycopg2`), the idiomatic Rust approach is to loop through the data inside a transaction.
 
-This guarantees atomicity: all rows are inserted successfully, or none are. It is also significantly more performant than running individual INSERT statements outside of a transaction.
-</Admonition>
+    This guarantees atomicity: all rows are inserted successfully, or none are inserted if an error occurs.
+    </Admonition>
 
-Run the script:
+Run the script using the following command:
 
 ```bash
 cargo run --bin create_table
@@ -285,7 +311,7 @@ Finished dropping table (if it existed).
 Finished creating table.
 Inserted a single book.
 Starting transaction to insert multiple books...
-Inserted 3 rows of data in a single transaction.
+Inserted 3 rows of data.
 ```
 
 ### Read data
