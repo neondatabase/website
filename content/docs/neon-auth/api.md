@@ -239,7 +239,6 @@ curl --request DELETE \
 
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/deleteneonauthintegration)
 
-<<<<<<< Updated upstream
 ## Manage OAuth providers via API
 
 You can programmatically manage OAuth providers for your Neon Auth project using the Neon API. The following endpoints allow you to add, list, update, and delete OAuth providers for a project.
@@ -385,8 +384,6 @@ For detailed configuration instructions and best practices, see [Email configura
 
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/updateneonauthemailserver)
 
-=======
->>>>>>> Stashed changes
 ## Get email server configuration
 
 Gets the email server configuration for the specified project.
