@@ -34,7 +34,7 @@ When switching to your own email server, you'll need these details from your ema
 | Field            | What you need                       | Example                   |
 | ---------------- | ----------------------------------- | ------------------------- |
 | **Host**         | Your email server address           | `smtp.gmail.com`          |
-| **Port**         | SMTP port (usually 587 or 465)      | `587`                     |
+| **Port**         | SMTP port (587 is default, 25 is Standard, 2525 often used in testing)      | `587`                     |
 | **Username**     | Your email address                  | `your-email@gmail.com`    |
 | **Password**     | Your email password or app password | `your-password`           |
 | **Sender Email** | The "from" address users will see   | `noreply@yourcompany.com` |
