@@ -14,7 +14,6 @@ import Field from 'components/shared/field';
 import Link from 'components/shared/link';
 import { FORM_STATES, HUBSPOT_STARTUPS_FORM_ID } from 'constants/forms';
 import CloseIcon from 'icons/close.inline.svg';
-import { checkBlacklistEmails } from 'utils/check-blacklist-emails';
 import { doNowOrAfterSomeTime, sendHubspotFormData } from 'utils/forms';
 
 const ErrorMessage = ({ onClose }) => (
@@ -28,9 +27,9 @@ const ErrorMessage = ({ onClose }) => (
         <Link
           className="border-b border-green-45/40 hover:border-green-45"
           theme="green"
-          to="mailto:atli@neon.tech"
+          to="mailto:brad@neon.tech"
         >
-          atli@neon.tech
+          brad@neon.tech
         </Link>
       </p>
     </div>
@@ -50,11 +49,7 @@ const schema = yup
   .object({
     firstname: yup.string().required('Reequired field'),
     lastname: yup.string().required('Required field'),
-    email: yup
-      .string()
-      .email('Please enter a valid email')
-      .required('Required field')
-      .test(checkBlacklistEmails({ validation: { useDefaultBlockList: true } })),
+    email: yup.string().email('Please enter a valid email').required('Required field'),
     companyWebsite: yup.string().required('Required field'),
     investor: yup.string().required('Required field'),
     ajs_anonymous_id: yup.string().optional(),
