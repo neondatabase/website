@@ -108,7 +108,7 @@ Follow these steps for each provider you use:
 
 <Steps>
 
-### 1. Create an OAuth app
+### Create an OAuth app
 
 On the provider's website, create an OAuth app and set the callback URL to the corresponding Neon Auth callback URL. Copy the client ID and client secret.
 
@@ -149,7 +149,7 @@ https://api.stack-auth.com/api/v1/auth/oauth/callback/microsoft
 
 </Tabs>
 
-### 2. Enter OAuth credentials in Neon Auth
+### Enter OAuth credentials in Neon Auth
 
 Go to the **OAuth providers** section in the Neon Auth dashboard.
 
@@ -158,6 +158,19 @@ Click **Add OAuth Provider**, choose your provider from the list, and enter the 
 ![Add OAuth Provider UI](/docs/neon-auth/neon-auth-add-oauth-provider.png)
 
 </Steps>
+## Email server
+
+For development, Neon Auth uses a shared email server, which sends emails from `noreply@stackframe.co`. This is not ideal for production as users may not trust emails from an unfamiliar domain. For production, we recommend setting up an email server connected to your own domain.
+
+1. **Setup Email Server**
+
+   Configure your own email server and connect it to your domain (check your email server docs for details).
+
+2. **Configure Neon Auth's Email Settings**
+
+   Navigate to the **Auth** page in the Neon Console, go to the **Configuration** tab, find the **Email server** section, switch from "Shared" to "Custom SMTP server", enter your SMTP configurations, and save.
+
+For detailed configuration instructions, see [Email Configuration](/docs/neon-auth/email-configuration).
 
 ## Limitations
 

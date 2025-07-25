@@ -902,6 +902,8 @@
               slug: neon-auth/quick-start/react
             - title: JavaScript
               slug: neon-auth/quick-start/javascript
+            - title: Demo
+              slug: neon-auth/demo
         - section: About
           items:
             - title: How Neon Auth Works
@@ -929,10 +931,8 @@
                 - title: Backend Integration
                   slug: neon-auth/concepts/backend-integration
         - section: Guides
-          items:
-            - title: Demo
-              slug: neon-auth/demo
-            - title: Best Practices
+          items:  
+            - title: Best practices
               slug: neon-auth/best-practices
             - title: Creating Users
               slug: neon-auth/create-users
@@ -940,6 +940,8 @@
               slug: neon-auth/claim-project
             - title: Permsissions
               slug: neon-auth/permissions-roles
+            - title: Email configuration
+              slug: neon-auth/email-configuration
         - section: SDKs & API
           items:
             - title: Next.js SDK
