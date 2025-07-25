@@ -931,8 +931,7 @@
                 - title: Backend Integration
                   slug: neon-auth/concepts/backend-integration
         - section: Guides
-          items:
-            
+          items:  
             - title: Best practices
               slug: neon-auth/best-practices
             - title: Creating Users

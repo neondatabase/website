@@ -369,21 +369,6 @@ A successful DELETE returns no response body (`204 No Content`).
 You can use the GET endpoint to confirm the provider has been removed.
 
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/deleteneonauthoauthprovider)
-"type": "custom",
-"host": "smtp.gmail.com",
-"port": 587,
-"username": "your-email@gmail.com",
-"sender_email": "noreply@yourcompany.com",
-"sender_name": "Your Company"
-}
-
-````
-
-<Admonition type="note">
-For detailed configuration instructions and best practices, see [Email configuration](/docs/neon-auth/email-configuration).
-</Admonition>
-
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/updateneonauthemailserver)
 
 ## Get email server configuration
 
@@ -396,8 +381,9 @@ Required parameters:
 ```bash shouldWrap
 curl --request GET \
      --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/email_server' \
+     --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY' | jq
-````
+```
 
 Example response:
 
@@ -430,10 +416,11 @@ Request body parameters:
 ```bash shouldWrap
 curl --request PATCH \
      --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/email_server' \
+     --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY' \
      --header 'content-type: application/json' \
      --data '{
-       "type": "custom",
+       "type": "standard",
        "host": "smtp.gmail.com",
        "port": 587,
        "username": "your-email@gmail.com",
@@ -447,18 +434,15 @@ Example response:
 
 ```json shouldWrap
 {
-  "type": "custom",
+  "type": "standard",
   "host": "smtp.gmail.com",
   "port": 587,
   "username": "your-email@gmail.com",
+  "password": "your-app-password",
   "sender_email": "noreply@yourcompany.com",
   "sender_name": "Your Company"
 }
 ```
-
-<Admonition type="note">
-For detailed configuration instructions and best practices, see [Email configuration](/docs/neon-auth/email-configuration).
-</Admonition>
 
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/updateneonauthemailserver)
 
