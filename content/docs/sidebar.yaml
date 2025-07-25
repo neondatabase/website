@@ -133,6 +133,8 @@
           slug: connect/connect-securely
         - title: GUI applications
           slug: connect/connect-postgres-gui
+        - title: Looker Studio
+          slug: connect/connect-looker-studio
         - title: psql
           slug: connect/query-with-psql-editor
         - title: pgcli
@@ -396,13 +398,15 @@
               slug: introduction/monitor-query-history
         - section: External monitoring
           items:
+            - title: Datadog
+              slug: guides/datadog
+            - title: Grafana Cloud
+              slug: guides/grafana-cloud
+            - title: OpenTelemetry
+              slug: guides/opentelemetry
             - title: Metrics and logs reference
               slug: reference/metrics-logs
-            - title: Datadog integration
-              slug: guides/datadog
-            - title: OpenTelemetry integration
-              slug: guides/opentelemetry
-            - title: Datbase monitoring tools
+            - title: Other monitoring tools
               slug: introduction/monitor-external-tools
         - section: Team Tools
           items:
@@ -702,6 +706,8 @@
           items:
             - title: Datadog
               slug: guides/datadog
+            - title: Grafana Cloud
+              slug: guides/grafana-cloud
             - title: OpenTelemetry
               slug: guides/opentelemetry
         - section: Deploy
@@ -883,11 +889,9 @@
       tag: beta
       slug: neon-auth/overview
       items:
-        - section: Overview
-          items:
-            - title: Overview
-              slug: neon-auth/overview
-        - section: Quick Start
+        - title: Overview
+          slug: neon-auth/overview
+        - section: Getting Started
           items:
             - title: Next.js
               slug: neon-auth/quick-start/nextjs
@@ -895,52 +899,63 @@
               slug: neon-auth/quick-start/react
             - title: JavaScript
               slug: neon-auth/quick-start/javascript
-        - section: How Neon Auth Works
+        - section: About
           items:
-            - title: How Neon Auth works
+            - title: How Neon Auth Works
               slug: neon-auth/how-it-works
-            - title: Guidance (deep dive)
+            - title: Guidance (Deep Dive)
               slug: neon-auth/tutorial
-        - section: Practical Usage
+            - title: Core Concepts
+              slug: neon-auth/concepts/stack-app
+              collapsible: true
+              items:
+                - title: The StackApp Object
+                  slug: neon-auth/concepts/stack-app
+                - title: OAuth Authentication
+                  slug: neon-auth/concepts/oauth
+                - title: Custom User Data
+                  slug: neon-auth/concepts/custom-user-data
+                - title: App/user permissions
+                  slug: neon-auth/concepts/permissions
+                - title: Organizations and Teams
+                  slug: neon-auth/concepts/orgs-and-teams
+                - title: Selecting a Team
+                  slug: neon-auth/concepts/team-selection
+                - title: User Onboarding
+                  slug: neon-auth/concepts/user-onboarding
+                - title: Backend Integration
+                  slug: neon-auth/concepts/backend-integration
+        - section: Guides
           items:
             - title: Demo
               slug: neon-auth/demo
-            - title: Best practices
+            - title: Best Practices
               slug: neon-auth/best-practices
-        - section: Concepts
-          items:
-            - title: The StackApp Object
-              slug: neon-auth/concepts/stack-app
-            - title: OAuth Authentication
-              slug: neon-auth/concepts/oauth
-            - title: Custom User Data
-              slug: neon-auth/concepts/custom-user-data
-            - title: Permissions & RBAC
-              slug: neon-auth/concepts/permissions
-            - title: Organizations and Teams
-              slug: neon-auth/concepts/orgs-and-teams
-            - title: Selecting a Team
-              slug: neon-auth/concepts/team-selection
-            - title: User Onboarding
-              slug: neon-auth/concepts/user-onboarding
-            - title: Backend integration
-              slug: neon-auth/concepts/backend-integration
-        - section: SDK and API Reference
+            - title: Creating Users
+              slug: neon-auth/create-users
+            - title: Claiming a Project
+              slug: neon-auth/claim-project
+            - title: Permsissions
+              slug: neon-auth/permissions-roles
+        - section: SDKs & API
           items:
             - title: Next.js SDK
               slug: neon-auth/sdk/nextjs/overview
+              collapsible: true
               items:
-                - section: Overview
-                  items:
-                    - title: SDK Overview
-                      slug: neon-auth/sdk/nextjs/overview
-                - section: Objects
+                - title: Overview
+                  slug: neon-auth/sdk/nextjs/overview
+                - title: Objects
+                  collapsible: true
+                  slug: neon-auth/sdk/nextjs/objects/stack-app
                   items:
                     - title: StackClientApp
                       slug: neon-auth/sdk/nextjs/objects/stack-app
                     - title: StackServerApp
                       slug: neon-auth/sdk/nextjs/objects/stack-server-app
-                - section: Types
+                - title: Types
+                  collapsible: true
+                  slug: neon-auth/sdk/nextjs/types/contact-channel
                   items:
                     - title: ContactChannel
                       slug: neon-auth/sdk/nextjs/types/contact-channel
@@ -958,7 +973,9 @@
                       slug: neon-auth/sdk/nextjs/types/team-user
                     - title: User
                       slug: neon-auth/sdk/nextjs/types/user
-                - section: Hooks
+                - title: Hooks
+                  collapsible: true
+                  slug: neon-auth/sdk/nextjs/hooks/use-stack-app
                   items:
                     - title: useStackApp
                       slug: neon-auth/sdk/nextjs/hooks/use-stack-app
@@ -966,16 +983,19 @@
                       slug: neon-auth/sdk/nextjs/hooks/use-user
             - title: React SDK
               slug: neon-auth/sdk/react/overview
+              collapsible: true
               items:
-                - section: Overview
-                  items:
-                    - title: SDK Overview
-                      slug: neon-auth/sdk/react/overview
-                - section: Objects
+                - title: Overview
+                  slug: neon-auth/sdk/react/overview
+                - title: Objects
+                  collapsible: true
+                  slug: neon-auth/sdk/react/objects/stack-app
                   items:
                     - title: StackClientApp
                       slug: neon-auth/sdk/react/objects/stack-app
-                - section: Types
+                - title: Types
+                  collapsible: true
+                  slug: neon-auth/sdk/react/types/user
                   items:
                     - title: User
                       slug: neon-auth/sdk/react/types/user
@@ -983,7 +1003,9 @@
                       slug: neon-auth/sdk/react/types/team
                     - title: Project
                       slug: neon-auth/sdk/react/types/project
-                - section: Hooks
+                - title: Hooks
+                  collapsible: true
+                  slug: neon-auth/sdk/react/hooks/use-stack-app
                   items:
                     - title: useStackApp
                       slug: neon-auth/sdk/react/hooks/use-stack-app
@@ -991,12 +1013,13 @@
                       slug: neon-auth/sdk/react/hooks/use-user
             - title: Components
               slug: neon-auth/components/components
+              collapsible: true
               items:
-                - section: Overview
-                  items:
-                    - title: All components
-                      slug: neon-auth/components/components
-                - section: Components
+                - title: All Components
+                  slug: neon-auth/components/components
+                - title: UI Components
+                  slug: neon-auth/components/user-button
+                  collapsible: true
                   items:
                     - title: UserButton
                       slug: neon-auth/components/user-button
@@ -1016,7 +1039,9 @@
                       slug: neon-auth/components/oauth-button
                     - title: OAuthButtonGroup
                       slug: neon-auth/components/oauth-button-group
-                - section: Utilities
+                - title: Utilities
+                  slug: neon-auth/components/stack-handler
+                  collapsible: true
                   items:
                     - title: StackHandler
                       slug: neon-auth/components/stack-handler
@@ -1026,21 +1051,15 @@
                       slug: neon-auth/components/stack-theme
             - title: Admin API
               slug: neon-auth/api
-        - section: Guides
-          items:
-            - title: Creating users
-              slug: neon-auth/create-users
-            - title: Claiming a project
-              slug: neon-auth/claim-project
         - section: Customization
           items:
-            - title: Colors and styles
+            - title: Colors and Styles
               slug: neon-auth/customization/custom-styles
-            - title: Dark/light mode
+            - title: Dark/Light Mode
               slug: neon-auth/customization/dark-mode
             - title: Internationalization
               slug: neon-auth/customization/internationalization
-            - title: Custom pages
+            - title: Custom Pages
               slug: neon-auth/customization/custom-pages
     - title: Neon RLS
       icon: lock

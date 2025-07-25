@@ -1,3 +1,7 @@
+---
+updatedOn: '2025-07-23T17:00:18.144Z'
+---
+
 This is a reference for the `useStackApp` hook in the {sdkName} SDK.
 
 The `useStackApp` hook returns a `StackClientApp` object from the one that you provided in the [`StackProvider` component](../../components/stack-provider). If you want to learn more about the `StackClientApp` object, check out the [StackApp](../objects/stack-app) documentation.
@@ -16,7 +20,7 @@ function MyComponent() {
 ## Usage
 
 ```jsx
-import { useStackApp } from '@neondatabase/neon-auth-{sdkSlug}';
+import { useStackApp } from '@stackframe/stack';
 
 function MyComponent() {
   const stackApp = useStackApp();
