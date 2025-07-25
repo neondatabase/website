@@ -57,6 +57,7 @@ const schema = yup
       .test(checkBlacklistEmails({ validation: { useDefaultBlockList: true } })),
     companyWebsite: yup.string().required('Required field'),
     investor: yup.string().required('Required field'),
+    ajs_anonymous_id: yup.string().optional(),
   })
   .required();
 
@@ -66,6 +67,7 @@ const ContactForm = () => {
   const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
   const [isBroken, setIsBroken] = useState(false);
   const [hubspotutk] = useCookie('hubspotutk');
+  const [ajsAnonymousId] = useCookie('ajs_anonymous_id');
   const { href } = useLocation();
 
   const context = {
@@ -80,6 +82,9 @@ const ContactForm = () => {
     formState: { isValid, errors },
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: {
+      ajs_anonymous_id: ajsAnonymousId || 'none',
+    },
   });
 
   useEffect(() => {
@@ -213,6 +218,9 @@ const ContactForm = () => {
         error={errors.investor?.message}
         {...register('investor')}
       />
+
+      {/* Hidden field for ajs_anonymous_id - not submitted to HubSpot */}
+      <input type="hidden" name="ajs_anonymous_id" {...register('ajs_anonymous_id')} />
 
       <div className="relative">
         <Button
