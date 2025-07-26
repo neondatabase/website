@@ -362,7 +362,7 @@ After enabling logical replication, the next steps involve creating publications
 
 ### Delete a project
 
-Deleting a project is a permanent action, which also deletes any computes, branches, databases, and roles that belong to the project.
+Deleting a project is a permanent action, which also deletes any computes, branches, databases, and roles that belong to the project. Please note that if your project is HIPAA-enabled, you'll need to open a support request to delete the project. See [Disabling HIPAA](/docs/security/hipaa#disabling-hipaa) for details.
 
 To delete a project:
 
