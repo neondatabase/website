@@ -6,11 +6,12 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 import Link from 'components/shared/link';
+import ArrowBackToTopIcon from 'icons/arrow-back-to-top.inline.svg';
 import ChatGptIcon from 'icons/docs/chat-gpt.inline.svg';
 import MarkdownIcon from 'icons/docs/markdown.inline.svg';
 import GitHubIcon from 'icons/github.inline.svg';
 
-const ActionItem = ({ icon: Icon, text, url, onClick }) => {
+const ActionItem = ({ icon: Icon, text, url, onClick, iconClassName }) => {
   const Tag = url ? Link : 'button';
 
   return (
@@ -26,7 +27,7 @@ const ActionItem = ({ icon: Icon, text, url, onClick }) => {
       icon={url ? 'external' : undefined}
       onClick={onClick}
     >
-      <Icon className="size-3.5" />
+      <Icon className={clsx(`size-3.5`, iconClassName)} />
       <span className="text-sm leading-none tracking-extra-tight">{text}</span>
     </Tag>
   );
@@ -37,6 +38,7 @@ ActionItem.propTypes = {
   text: PropTypes.string.isRequired,
   url: PropTypes.string,
   onClick: PropTypes.func,
+  iconClassName: PropTypes.string,
 };
 
 const CopyMarkdownButton = ({ rawFileLink }) => {
@@ -78,7 +80,7 @@ CopyMarkdownButton.propTypes = {
   rawFileLink: PropTypes.string.isRequired,
 };
 
-const Actions = ({ gitHubPath, withBorder = false }) => {
+const Actions = ({ gitHubPath, withBorder = false, isTemplate = false }) => {
   const githubBase = process.env.NEXT_PUBLIC_GITHUB_PATH;
   const githubRawBase = process.env.NEXT_PUBLIC_GITHUB_RAW_PATH;
 
@@ -94,6 +96,32 @@ const Actions = ({ gitHubPath, withBorder = false }) => {
   const gitHubLink = `${githubBase}${gitHubPath}`;
   const rawFileLink = `${githubRawBase}${gitHubPath}`;
   const chatGptLink = `https://chatgpt.com/?hints=search&q=Read+${rawFileLink}`;
+  const backToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  const buttonsDocs = (
+    <>
+      <CopyMarkdownButton rawFileLink={rawFileLink} />
+      <ActionItem icon={GitHubIcon} text="Edit this page on GitHub" url={gitHubLink} />
+      <ActionItem icon={ChatGptIcon} text="Open in ChatGPT" url={chatGptLink} />
+    </>
+  );
+
+  const buttonsTemplate = (
+    <>
+      <ActionItem
+        icon={GitHubIcon}
+        text="Suggest edits"
+        url={gitHubLink}
+        iconClassName="size-[18px] text-white"
+      />
+      <ActionItem
+        icon={ArrowBackToTopIcon}
+        text="Back to top"
+        iconClassName="size-5"
+        onClick={backToTop}
+      />
+    </>
+  );
 
   return (
     <div
@@ -102,9 +130,7 @@ const Actions = ({ gitHubPath, withBorder = false }) => {
         withBorder ? 'mt-4 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70' : 'mt-12'
       )}
     >
-      <CopyMarkdownButton rawFileLink={rawFileLink} />
-      <ActionItem icon={GitHubIcon} text="Edit this page on GitHub" url={gitHubLink} />
-      <ActionItem icon={ChatGptIcon} text="Open in ChatGPT" url={chatGptLink} />
+      {isTemplate ? buttonsTemplate : buttonsDocs}
     </div>
   );
 };
@@ -112,6 +138,7 @@ const Actions = ({ gitHubPath, withBorder = false }) => {
 Actions.propTypes = {
   gitHubPath: PropTypes.string.isRequired,
   withBorder: PropTypes.bool,
+  isTemplate: PropTypes.bool,
 };
 
 export default Actions;

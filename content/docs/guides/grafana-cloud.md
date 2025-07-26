@@ -2,7 +2,7 @@
 title: Grafana Cloud integration
 subtitle: Send metrics and logs from Neon Postgres to Grafana Cloud
 enableTableOfContents: true
-updatedOn: '2025-07-24T20:52:34.824Z'
+updatedOn: '2025-07-25T09:35:45.251Z'
 ---
 
 <InfoBlock>
@@ -18,7 +18,7 @@ updatedOn: '2025-07-24T20:52:34.824Z'
 </DocsList>
 </InfoBlock>
 
-The Grafana Cloud integration lets you monitor Neon database performance, resource utilization, and system health directly from Grafana Cloud. The integration requires OTEL support, which is available with Neon's Business and Enterprise plans.
+The Grafana Cloud integration lets you monitor Neon database performance, resource utilization, and system health directly from Grafana Cloud. The integration requires [OTEL support](https://neon.com/docs/guides/opentelemetry), which is available with Neon's Scale, Business and Enterprise plans.
 
 ## How it works
 

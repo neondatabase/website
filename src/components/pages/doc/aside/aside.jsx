@@ -25,8 +25,13 @@ const Aside = ({
     <div className="sticky top-[136px] flex max-h-[calc(100vh-136px)] flex-col pb-5">
       {enableTableOfContents && <TableOfContents items={tableOfContents} isTemplate={isTemplate} />}
       {isChangelog && <ChangelogForm isSidebar />}
-      {!isChangelog && !isTemplate && (
-        <Actions gitHubPath={gitHubPath} withBorder={enableTableOfContents} />
+
+      {!isChangelog && (
+        <Actions
+          gitHubPath={gitHubPath}
+          isTemplate={isTemplate}
+          withBorder={enableTableOfContents}
+        />
       )}
     </div>
   </div>

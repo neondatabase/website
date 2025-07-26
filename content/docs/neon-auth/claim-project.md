@@ -2,7 +2,7 @@
 title: Claiming a Neon Auth project
 enableTableOfContents: true
 tag: beta
-updatedOn: '2025-05-16T19:06:06.840Z'
+updatedOn: '2025-07-25T16:57:32.349Z'
 redirectFrom:
   - /docs/guides/neon-auth-claim-project
 ---
@@ -16,7 +16,6 @@ Most Neon Auth features can be built using the SDKs, without claiming your proje
 Right now, you need to claim your project if you want to:
 
 - Add or manage OAuth providers (register client IDs/secrets, set callback URLs)
-- Use your own SMTP server for auth emails
 - Enable production mode and enforce production security settings
 - Manage multiple projects or separate production and development environments directly in Stack Auth
 
