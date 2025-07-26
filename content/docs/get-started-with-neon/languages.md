@@ -11,7 +11,7 @@ updatedOn: '2025-02-24T15:53:13.356Z'
 
 <a href="/docs/guides/dotnet-npgsql" title=".NET" description="Connect a .NET (C#) application to Neon" icon="dotnet"></a>
 
-<a href="/docs/guides/elixir-ecto" title="Elixir" description="Connect from Elixir with Ecto to Neon" icon="elixir"></a>
+<a href="/docs/guides/elixir" title="Elixir" description="Connect an Elixir application to Neon" icon="elixir"></a>
 
 <a href="/docs/guides/go" title="Go" description="Connect a Go application to Neon" icon="go"></a>
 

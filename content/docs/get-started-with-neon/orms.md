@@ -11,6 +11,8 @@ updatedOn: '2025-02-24T15:53:13.356Z'
 
 <a href="/docs/guides/drizzle" title="Drizzle" description="Learn how to use Drizzle ORM with your Neon Postgres database (Drizzle docs)" icon="drizzle"></a>
 
+<a href="/docs/guides/elixir-ecto" title="Elixir Ecto" description="Connect from Elixir with Ecto to Neon" icon="elixir"></a>
+
 <a href="/docs/guides/laravel" title="Laravel" description="Connect a Laravel application to Neon" icon="laravel"></a>
 
 <a href="/docs/guides/prisma" title="Prisma" description="Learn how to connect from Prisma ORM to your Neon Postgres database" icon="prisma"></a>
