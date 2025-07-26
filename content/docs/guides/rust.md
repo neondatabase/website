@@ -2,6 +2,9 @@
 title: 'Connect a Rust application to Neon'
 subtitle: 'Connect to a Neon database using Rust with the postgres or tokio-postgres crates to run INSERT, SELECT, UPDATE, and DELETE statements.'
 enableTableOfContents: true
+redirectFrom:
+  - /docs/quickstart/rust
+  - /docs/integrations/rust
 updatedOn: '2025-07-23T10:00:00.000Z'
 ---
 
@@ -55,7 +58,7 @@ For your Rust project, use `cargo` to create a new project and add the required 
 
     <Admonition type="note" title="What are features?">
     The `--features` flag tells Cargo to enable optional functionality within a crate. Many crates are designed to be modular, and features allow you to include only the code you actually need. In this case, you are enabling the full Tokio runtime, which includes all components necessary for asynchronous programming.
-    
+
     You can learn more about features in [The Cargo Book: Features](https://doc.rust-lang.org/cargo/reference/features.html).
     </Admonition>
 
@@ -86,7 +89,7 @@ For your Rust project, use `cargo` to create a new project and add the required 
     name = "delete_data"
     path = "src/delete_data.rs"
     ```
-    
+
     You can now safely delete the default `src/main.rs` file. Since you have defined specific binary targets (like `create_table`) in `Cargo.toml`, Cargo no longer needs the default `main.rs` entry point.
 
     ```bash
@@ -105,12 +108,13 @@ Create a file named `.env` in your project's root directory. This file will secu
     ```text
     DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
     ```
+    > Replace `[user]`, `[password]`, `[neon_hostname]`, and `[dbname]` with your actual database credentials.
 
 ## Choosing the right method to execute SQL commands
 
 Before diving into the code examples, it's important to understand how to interact with your Neon database using Rust. The `postgres` and `tokio-postgres` crates provide several methods for executing SQL commands. Choosing the right method depends on your use case:
 
-- `client.execute:` 
+- `client.execute:`
   Use this for a single DML/DDL statement (`INSERT`, `UPDATE`, `DELETE`) or a fire-and-forget query. It supports parameter placeholders (`$1`, `$2`, etc.) and returns the number of rows affected (`u64`).
 
 - `client.batch_execute:`  
@@ -121,13 +125,13 @@ Before diving into the code examples, it's important to understand how to intera
 
 ### Quick comparison
 
-| Method                | Use case                             | Parameters | Returns               |
-|-----------------------|--------------------------------------|------------|-----------------------|
-| `client.execute`      | Single DML/DDL or ad-hoc query       | Yes        | `u64` (rows affected) |
-| `client.batch_execute`| Multiple statements in one SQL blob <br/>(DDL, migrations, seed data) | No         | `()`                  |
-| `client.query`        | Fetching rows from a `SELECT`        | Yes        | `Vec<Row>`            |
+| Method                 | Use case                                                              | Parameters | Returns               |
+| ---------------------- | --------------------------------------------------------------------- | ---------- | --------------------- |
+| `client.execute`       | Single DML/DDL or ad-hoc query                                        | Yes        | `u64` (rows affected) |
+| `client.batch_execute` | Multiple statements in one SQL blob <br/>(DDL, migrations, seed data) | No         | `()`                  |
+| `client.query`         | Fetching rows from a `SELECT`                                         | Yes        | `Vec<Row>`            |
 
-Now that you know how to connect to your Neon database and the available methods for executing SQL commands, let's look at some examples of how to perform basic CRUD operations. We will use all three methods (`execute`, `batch_execute`, and `query`) in the examples to demonstrate their usage.
+Now that you know how to connect to your Neon database and the available methods for executing SQL commands, let's look at some examples of how you can perform basic CRUD operations. You will use all three methods (`execute`, `batch_execute`, and `query`) in the examples to demonstrate their usage.
 
 ## Examples
 
@@ -256,7 +260,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Start a transaction
     let transaction = client.transaction().await?;
     println!("Starting transaction to insert multiple books...");
-    
+
     // Data to be inserted
     let books_to_insert = [
         ("The Hobbit", "J.R.R. Tolkien", 1937, true),
@@ -271,7 +275,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             &[&book.0, &book.1, &book.2, &book.3],
         ).await?;
     }
-    
+
     // Commit the transaction
     transaction.commit().await?;
     println!("Inserted 3 rows of data.");
@@ -284,18 +288,18 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 The above code does the following:
 
--   Load the connection string from the `.env` file.
--   Connect to the Neon database using a secure TLS connection.
--   Drop the `books` table if it already exists to ensure a clean slate.
--   Create a new table named `books` with columns for `id`, `title`, `author`, `publication_year`, and `in_stock`.
--   Insert a single book record.
--   Start a transaction to insert multiple book records in a single operation.
+- Load the connection string from the `.env` file.
+- Connect to the Neon database using a secure TLS connection.
+- Drop the `books` table if it already exists to ensure a clean slate.
+- Create a new table named `books` with columns for `id`, `title`, `author`, `publication_year`, and `in_stock`.
+- Insert a single book record.
+- Start a transaction to insert multiple book records in a single operation.
 
-    <Admonition type="info" title="Why use a transaction for inserting multiple rows?">
-    Unlike database drivers in some other languages that offer a single high-level method for bulk inserts (like [Python's](/docs/guides/python#create-a-table-and-insert-data) `executemany` in `psycopg2`), the idiomatic Rust approach is to loop through the data inside a transaction.
+  <Admonition type="info" title="Why use a transaction for inserting multiple rows?">
+  Unlike database drivers in some other languages that offer a single high-level method for bulk inserts (like [Python's](/docs/guides/python#create-a-table-and-insert-data) `executemany` in `psycopg2`), the idiomatic Rust approach is to loop through the data inside a transaction.
 
-    This guarantees atomicity: all rows are inserted successfully, or none are inserted if an error occurs.
-    </Admonition>
+  This guarantees atomicity: all rows are inserted successfully, or none are inserted if an error occurs.
+  </Admonition>
 
 Run the script using the following command:
 
@@ -453,13 +457,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         "UPDATE books SET in_stock = $1 WHERE title = $2",
         &[&true, &"Dune"],
     )?;
-    
+
     if updated_rows > 0 {
         println!("Updated stock status for 'Dune'.");
     } else {
         println!("'Dune' not found or stock status already up to date.");
     }
-    
+
     Ok(())
 }
 ```
@@ -493,7 +497,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         "UPDATE books SET in_stock = $1 WHERE title = $2",
         &[&true, &"Dune"],
     ).await?;
-    
+
     if updated_rows > 0 {
         println!("Updated stock status for 'Dune'.");
     } else {
@@ -537,7 +541,7 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
 ---------------------
 ```
 
-> We can see that the stock status for 'Dune' has been updated to `True`.
+> You can see that the stock status for 'Dune' has been updated to `True`.
 
 ### Delete data
 
@@ -567,13 +571,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         "DELETE FROM books WHERE title = $1",
         &[&"1984"],
     )?;
-    
+
     if deleted_rows > 0 {
         println!("Deleted the book '1984' from the table.");
     } else {
         println!("'1984' not found in the table.");
     }
-    
+
     Ok(())
 }
 ```
@@ -607,7 +611,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         "DELETE FROM books WHERE title = $1",
         &[&"1984"],
     ).await?;
-    
+
     if deleted_rows > 0 {
         println!("Deleted the book '1984' from the table.");
     } else {
@@ -650,7 +654,7 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
 --------------------
 ```
 
-> We can see that the book '1984' has been successfully deleted from the `books` table.
+> You can see that the book '1984' has been successfully deleted from the `books` table.
 
 </Steps>
 

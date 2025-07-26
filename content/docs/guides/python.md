@@ -23,7 +23,7 @@ If you do not have one already, create a Neon project.
 2.  Click **New Project**.
 3.  Specify your project settings and click **Create Project**.
 
-Your project is created with a ready-to-use database named `neondb`. In the following steps, we'll connect to this database.
+Your project is created with a ready-to-use database named `neondb`. In the following steps, you will connect to this database from your Python application.
 
 ## Create a Python project
 
@@ -83,6 +83,7 @@ Create a file named `.env` in your project's root directory. This file will secu
     ```text
     DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
     ```
+    > Replace `[user]`, `[password]`, `[neon_hostname]`, and `[dbname]` with your actual database credentials.
 
 ## Examples
 
@@ -460,7 +461,7 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: True
 --------------------
 ```
 
-> We can see that the stock status for 'Dune' has been updated to `True`.
+> You can see that the stock status for 'Dune' has been updated to `True`.
 
 ### Delete data
 
@@ -557,7 +558,7 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: True
 --------------------
 ```
 
-> We can see that the book '1984' has been successfully deleted from the `books` table.
+> You can see that the book '1984' has been successfully deleted from the `books` table.
 
 </Steps>
 
