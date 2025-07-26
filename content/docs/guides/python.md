@@ -23,7 +23,7 @@ If you do not have one already, create a Neon project.
 2.  Click **New Project**.
 3.  Specify your project settings and click **Create Project**.
 
-Your project is created with a ready-to-use database named `neondb`. In the following steps, we'll connect to this database.
+Your project is created with a ready-to-use database named `neondb`. In the following steps, you will connect to this database from your Python application.
 
 ## Create a Python project
 
@@ -83,6 +83,7 @@ Create a file named `.env` in your project's root directory. This file will secu
     ```text
     DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
     ```
+    > Replace `[user]`, `[password]`, `[neon_hostname]`, and `[dbname]` with your actual database credentials.
 
 ## Examples
 
@@ -231,7 +232,7 @@ asyncio.run(run())
 
 </CodeTabs>
 
-In the above code, we:
+The above code does the following:
 
 - Load the connection string from the `.env` file.
 - Connect to the Neon database.
@@ -240,6 +241,12 @@ In the above code, we:
 - Insert a single book record.
 - Insert multiple book records.
 - Commit the changes to the database.
+
+Run the script using the following command:
+
+```bash
+python create_table.py
+```
 
 When the code runs successfully, it produces the following output:
 
@@ -328,12 +335,18 @@ asyncio.run(run())
 
 </CodeTabs>
 
-In the above code, we:
+The above code does the following:
 
 - Load the connection string from the `.env` file.
 - Connect to the Neon database.
 - Use a SQL `SELECT` statement to fetch all rows from the `books` table, ordered by `publication_year`.
 - Print each book's details in a formatted output.
+
+Run the script using the following command:
+
+```bash
+python read_data.py
+```
 
 When the code runs successfully, it produces the following output:
 
@@ -416,12 +429,18 @@ asyncio.run(run())
 
 </CodeTabs>
 
-In the above code, we:
+The above code does the following:
 
 - Load the connection string from the `.env` file.
 - Connect to the Neon database.
 - Use a SQL `UPDATE` statement to change the `in_stock` status of the book 'Dune' to `True`.
 - Commit the changes to the database.
+
+Run the script using the following command:
+
+```bash
+python update_data.py
+```
 
 After running this script, you can run `read_data.py` again to verify that the row was updated.
 
@@ -442,7 +461,7 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: True
 --------------------
 ```
 
-> We can see that the stock status for 'Dune' has been updated to `True`.
+> You can see that the stock status for 'Dune' has been updated to `True`.
 
 ### Delete data
 
@@ -508,12 +527,18 @@ asyncio.run(run())
 
 </CodeTabs>
 
-In the above code, we:
+The above code does the following:
 
 - Load the connection string from the `.env` file.
 - Connect to the Neon database.
 - Use a SQL `DELETE` statement to remove the book '1984' from the `books` table.
 - Commit the changes to the database.
+
+Run the script using the following command:
+
+```bash
+python delete_data.py
+```
 
 After running this script, you can run `read_data.py` again to verify that the row was deleted.
 
@@ -533,7 +558,7 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: True
 --------------------
 ```
 
-> We can see that the book '1984' has been deleted from the library.
+> You can see that the book '1984' has been successfully deleted from the `books` table.
 
 </Steps>
 

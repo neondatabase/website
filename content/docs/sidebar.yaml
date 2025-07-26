@@ -41,9 +41,6 @@
               slug: guides/javascript
             - title: Python
               slug: guides/python
-              items:
-                - title: Psycopg
-                  slug: guides/python
             - title: Rust
               slug: guides/rust
         - section: Framework quickstarts
