@@ -31,7 +31,7 @@
             - title: .NET
               slug: guides/dotnet-npgsql
             - title: Elixir
-              slug: guides/elixir-ecto
+              slug: guides/elixir
             - title: Go
               slug: guides/go
               ariaLabel: Connect a Go application to Neon
@@ -671,7 +671,7 @@
       icon: languages
       items:
         - title: Elixir
-          slug: guides/elixir-ecto
+          slug: guides/elixir
         - title: Go
           slug: guides/go
         - title: Java
@@ -690,6 +690,8 @@
           slug: guides/django
         - title: Drizzle
           slug: guides/drizzle
+        - title: Elixir Ecto
+          slug: guides/elixir-ecto
         - title: Laravel (Eloquent)
           slug: guides/laravel
         - title: Prisma
