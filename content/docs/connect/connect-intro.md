@@ -35,9 +35,9 @@ Learn how to connect to Neon from different frameworks and languages.
 
 <DetailIconCards>
 
-<a href="/docs/get-started-with-neon/frameworks" description="Find detailed instructions for connecting to Neon from various frameworks" icon="gamepad">Connect from various frameworks</a>
+<a href="/docs/get-started-with-neon/frameworks" description="Find detailed instructions for connecting to Neon from frameworks" icon="gamepad">Connect from various frameworks</a>
 
-<a href="/docs/get-started-with-neon/languages" description="Find detailed instructions for connecting to Neon from various languages" icon="gui">Connect from various languages</a>
+<a href="/docs/get-started-with-neon/languages" description="Find detailed instructions for connecting to Neon from languages" icon="gui">Connect from various languages</a>
 
 </DetailIconCards>
 
