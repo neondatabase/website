@@ -1,5 +1,5 @@
 ---
-title: Connect a .NET (C#) application to Neon
+title: Connect a .NET (C#) application to Neon Postgres
 subtitle: Connect to a Neon database using .NET (C#) with the Npgsql library to run INSERT, SELECT, UPDATE, and DELETE statements.
 enableTableOfContents: true
 updatedOn: '2025-07-27T00:00:00.000Z'
@@ -424,6 +424,14 @@ dotnet run
 This command would compile and execute your application, connecting to the Neon database and performing all the CRUD operations defined in `Program.cs` as described above. You should see output in your console similar to the examples provided in the previous sections, indicating the success of each operation.
 
 </Steps>
+
+## Next steps: Using an ORM or framework
+
+While this guide demonstrates how to connect to Neon using raw SQL queries, for more advanced and maintainable data interactions in your .NET applications, consider using an Object-Relational Mapping (ORM) framework. ORMs not only let you work with data as objects but also help manage schema changes through automated migrations keeping your database structure in sync with your application models.
+
+Explore the following resources to learn how to integrate ORMs with Neon:
+
+- [Connect an Entity Framework application to Neon](/docs/guides/dotnet-entity-framework)
 
 ## Source code
 

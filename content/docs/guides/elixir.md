@@ -1,5 +1,5 @@
 ---
-title: Connect an Elixir application to Neon
+title: Connect an Elixir application to Neon Postgres
 subtitle: Connect to a Neon database using Elixir with the Postgrex library to run INSERT, SELECT, UPDATE, and DELETE statements.
 enableTableOfContents: true
 updatedOn: '2025-07-27T00:00:00.000Z'
@@ -348,6 +348,14 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
 > You can see that the book '1984' has been successfully deleted from the `books` table.
 
 </Steps>
+
+## Next steps: Using an ORM or framework
+
+While this guide demonstrates how to connect to Neon using raw SQL queries, for more advanced and maintainable data interactions in your Elixir applications, consider using an Object-Relational Mapping (ORM) framework. ORMs not only let you work with data as objects but also help manage schema changes through automated migrations keeping your database structure in sync with your application models.
+
+Explore the following resources to learn how to integrate ORMs with Neon:
+
+- [Connect an Elixir Ecto application to Neon](/docs/guides/elixir-ecto)
 
 ## Source code
 

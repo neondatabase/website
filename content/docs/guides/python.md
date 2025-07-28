@@ -1,7 +1,6 @@
 ---
-title: Connect a Python application to Neon
-subtitle: Connect to a Neon database using Python with the psycopg2 or asyncpg libraries
-  to run INSERT, SELECT, UPDATE, and DELETE statements.
+title: Connect a Python application to Neon Postgres
+subtitle: Connect to a Neon database using Python with the psycopg2 or asyncpg libraries to run INSERT, SELECT, UPDATE, and DELETE statements.
 enableTableOfContents: true
 updatedOn: '2025-07-22T14:51:02.373Z'
 ---
@@ -564,6 +563,16 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: True
 
 </Steps>
 
+## Next steps: Using an ORM or framework
+
+While this guide demonstrates how to connect to Neon using raw SQL queries, for more advanced and maintainable data interactions in your Python applications, consider using an Object-Relational Mapping (ORM) framework. ORMs not only let you work with data as objects but also help manage schema changes through automated migrations keeping your database structure in sync with your application models.
+
+Explore the following resources to learn how to integrate ORMs with Neon:
+
+- [Connect an SQLAlchemy application to Neon](/docs/guides/sqlalchemy)
+- [Connect a Django application to Neon](/docs/guides/django)
+
+
 ## Source code
 
 You can find the source code for the applications described in this guide on GitHub.
@@ -580,5 +589,6 @@ You can find the source code for the applications described in this guide on Git
 
 - [Psycopg2 documentation](https://www.psycopg.org/docs/)
 - [Asyncpg documentation](https://magicstack.github.io/asyncpg/current/)
+- [Building an API with Django, Django REST Framework, and Neon Postgres](/guides/django-rest-api)
 
 <NeedHelp/>

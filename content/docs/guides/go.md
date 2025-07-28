@@ -1,5 +1,5 @@
 ---
-title: Connect a Go application to Neon
+title: Connect a Go application to Neon Postgres
 subtitle: Connect to a Neon database using Go with the pgx library to run INSERT, SELECT, UPDATE, and DELETE statements.
 enableTableOfContents: true
 redirectFrom:
@@ -452,6 +452,15 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
 > You can see that the book '1984' has been successfully deleted from the `books` table.
 
 </Steps>
+
+## Next steps: Using an ORM or framework
+
+While this guide demonstrates how to connect to Neon using raw SQL queries, for more advanced and maintainable data interactions in your Go applications, consider using an Object-Relational Mapping (ORM) framework. ORMs not only let you work with data as objects but also help manage schema changes through automated migrations keeping your database structure in sync with your application models.
+
+Explore the following resources to learn how to integrate ORMs with Neon:
+
+- [Connect a Go application to Neon using GORM](/guides/golang-gorm-postgres)
+
 
 ## Source code
 

@@ -1,5 +1,5 @@
 ---
-title: Connect a Java application to Neon
+title: Connect a Java application to Neon Postgres
 subtitle: Connect to a Neon database using the standard PostgreSQL JDBC driver to run INSERT, SELECT, UPDATE, and DELETE statements.
 enableTableOfContents: true
 redirectFrom:
@@ -397,6 +397,14 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
 
 </Steps>
 
+## Next steps: Using an ORM or framework
+
+While this guide demonstrates how to connect to Neon using raw SQL queries, for more advanced and maintainable data interactions in your Java applications, consider using an Object-Relational Mapping (ORM) framework. ORMs not only let you work with data as objects but also help manage schema changes through automated migrations keeping your database structure in sync with your application models.
+
+Explore the following resources to learn how to integrate ORMs with Neon:
+
+- [Database Schema Changes with Hibernate, Spring Boot, and Neon](/guides/spring-boot-hibernate)
+
 ## Source code
 
 You can find the source code for the application described in this guide on GitHub.
@@ -411,5 +419,6 @@ You can find the source code for the application described in this guide on GitH
 
 - [PostgreSQL JDBC Driver Documentation](https://jdbc.postgresql.org/documentation/use/)
 - [Apache Maven Quickstart](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html)
+- [Database Migrations in Spring Boot with Flyway and Neon](/guides/spring-boot-flyway)
 
 <NeedHelp/>
