@@ -137,7 +137,7 @@ defmodule CreateTable do
         "INSERT INTO books (title, author, publication_year, in_stock) VALUES ($1, $2, $3, $4);"
       )
 
-      # Insert multiple books at once
+      # Insert multiple books
       Enum.each(books_to_insert, fn {title, author, year, stock} ->
         Postgrex.execute!(pid, statement, [title, author, year, stock])
       end)

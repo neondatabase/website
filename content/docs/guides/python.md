@@ -572,7 +572,6 @@ Explore the following resources to learn how to integrate ORMs with Neon:
 - [Connect an SQLAlchemy application to Neon](/docs/guides/sqlalchemy)
 - [Connect a Django application to Neon](/docs/guides/django)
 
-
 ## Source code
 
 You can find the source code for the applications described in this guide on GitHub.

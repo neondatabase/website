@@ -156,7 +156,7 @@ public class CreateTable {
                     System.out.println("Inserted a single book.");
                 }
 
-                // Insert multiple books at once
+                // Insert multiple books
                 String insertManySql = "INSERT INTO books (title, author, publication_year, in_stock) VALUES (?, ?, ?, ?);";
                 try (PreparedStatement pstmt = conn.prepareStatement(insertManySql)) {
                     Object[][] booksToInsert = {

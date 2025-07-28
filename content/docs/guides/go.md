@@ -461,7 +461,6 @@ Explore the following resources to learn how to integrate ORMs with Neon:
 
 - [Connect a Go application to Neon using GORM](/guides/golang-gorm-postgres)
 
-
 ## Source code
 
 You can find the source code for the application described in this guide on GitHub.
