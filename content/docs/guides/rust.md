@@ -1,5 +1,5 @@
 ---
-title: 'Connect a Rust application to Neon'
+title: 'Connect a Rust application to Neon Postgres'
 subtitle: 'Connect to a Neon database using Rust with the postgres or tokio-postgres crates to run INSERT, SELECT, UPDATE, and DELETE statements.'
 enableTableOfContents: true
 redirectFrom:
