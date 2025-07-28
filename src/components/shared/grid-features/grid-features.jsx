@@ -11,7 +11,7 @@ import fullyManaged from 'icons/migration/grid-features/fully-managed.svg';
 import reliability from 'icons/migration/grid-features/reliability.svg';
 import serverlessAutoscaling from 'icons/migration/grid-features/serverless-autoscaling.svg';
 
-import { LogosWall } from '../logos';
+import LogosSection from './logos-section';
 
 const ITEMS = [
   {
@@ -119,12 +119,11 @@ const GridFeatures = ({
         ))}
       </ul>
       {logos && (
-        <div className="mx-auto mt-[90px] flex max-w-3xl items-center gap-10 xl:mt-[82px] lg:mt-20 md:mt-[66px] md:flex-col md:gap-6">
-          <p className="w-[206px] text-lg font-medium leading-none tracking-extra-tight text-gray-new-70 lg:text-base md:max-w-full md:text-center">
-            {logosTitle}
-          </p>
-          <LogosWall logos={logos} size="sm" gap="gap-9" />
-        </div>
+        <LogosSection
+          logosTitle={logosTitle}
+          classNameContainer="mt-[90px] xl:mt-[82px] lg:mt-20 md:mt-[66px]"
+          logos={logos}
+        />
       )}
     </Container>
   </section>

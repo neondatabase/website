@@ -48,6 +48,9 @@ import RequestForm from 'components/shared/request-form';
 import getCodeProps from 'lib/rehype-code-props';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
+import FeatureList from '../feature-list';
+import LogosSection from '../grid-features/logos-section';
+import QuoteBlock from '../quote-block';
 
 const sharedComponents = Object.keys(sharedMdxComponents).reduce((acc, key) => {
   acc[key] = (props) => IncludeBlock({ url: sharedMdxComponents[key], ...props });
@@ -133,6 +136,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   Button,
   YoutubeIframe,
   DefinitionList,
+  FeatureList,
   Admonition,
   CodeTabs,
   DetailIconCards,
@@ -155,12 +159,14 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   InkeepEmbedded,
   Video,
   Steps,
+  LogosSection,
   DeployPostgresButton,
   ChatOptions,
   CheckList,
   CheckItem,
   ExternalCode: (props) => <ExternalCode {...props} />,
   MegaLink,
+  QuoteBlock,
   ...sharedComponents,
 });
 
