@@ -80,6 +80,7 @@ You can choose any timestamp within your [restore window](/docs/manage/projects#
 </TabItem>
 
 <TabItem>
+
 Using the CLI, you can restore a branch to an earlier point in its history or another branch's history using the following command:
 
 ```bash shouldWrap
@@ -119,9 +120,11 @@ neon branches restore development production@0/12345
 This command will restore the target branch `development` to an earlier point in time from the source branch `production`, using the LSN `0/12345` to specify the point in time. If you left out the point-in-time identifier, the command would default to the latest data (HEAD) for the source branch `production`.
 
 For full CLI documentation for `branches restore`, see [branches restore](/docs/reference/cli-branches#restore).
+
 </TabItem>
 
 <TabItem>
+
 To restore a branch using the API, use the endpoint:
 
 ```bash
@@ -222,15 +225,19 @@ To edit the snapshot schedule:
 
 3. Click **Update schedule** to apply changes.
 
-Snapshots created via the schedule are listed under the Snapshots section, along with manual snapshots.
+   Snapshots created via the schedule are listed under the Snapshots section, along with manual snapshots.
 
-![snapshot schedule dialog](/docs/guides/snapshot_schedule.png)
+   ![snapshot schedule dialog](/docs/guides/snapshot_schedule.png)
 
-<Admonition type="tip">
-The Neon API supports finer-grained control over snapshot scheduling.
-</Admonition>
+   <Admonition type="tip">
+   The Neon API supports finer-grained control over snapshot scheduling.
+   </Admonition>
+
+</TabItem>
 
 <TabItem>
+test
+</TabItem>
 
 </Tabs>
 
