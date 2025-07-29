@@ -429,7 +429,7 @@ Adapt the instructions above for other clients:
 - **Remote MCP server:**
   Add the following JSON configuration within the `mcpServers` section of your client's `MCP` configuration file:
 
-    > By default, the Remote MCP Server connects to your personal Neon account. To connect to an organization's account, you must authenticate with an API key. If your client supports it, provide the key in the `Authorization` header. For more information, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
+  > By default, the Remote MCP Server connects to your personal Neon account. To connect to an organization's account, you must authenticate with an API key. If your client supports it, provide the key in the `Authorization` header. For more information, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
 
   ```json
   "neon": {

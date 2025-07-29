@@ -53,13 +53,13 @@ In your project directory, create a new file named `.vscode/mcp.json` and add th
 
 ```json
 {
-	"servers": {
-		"Neon": {
-			"url": "https://mcp.neon.tech/mcp",
-			"type": "http"
-		}
-	},
-	"inputs": []
+  "servers": {
+    "Neon": {
+      "url": "https://mcp.neon.tech/mcp",
+      "type": "http"
+    }
+  },
+  "inputs": []
 }
 ```
 
