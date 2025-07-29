@@ -1,6 +1,6 @@
 ---
 title: Connect a Go application to Neon Postgres
-subtitle: Connect to a Neon database using Go with the pgx library to run INSERT, SELECT, UPDATE, and DELETE statements.
+subtitle: Learn how to run SQL queries in Neon from Go using the pgx library
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/go

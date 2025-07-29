@@ -1,6 +1,6 @@
 ---
-title: 'Connect a Rust application to Neon Postgres'
-subtitle: 'Connect to a Neon database using Rust with the postgres or tokio-postgres crates to run INSERT, SELECT, UPDATE, and DELETE statements.'
+title: Connect a Rust application to Neon Postgres
+subtitle: Learn how to run SQL queries in Neon from Rust using the postgres or tokio-postgres crates
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/rust

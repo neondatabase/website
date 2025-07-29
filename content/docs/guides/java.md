@@ -1,6 +1,6 @@
 ---
 title: Connect a Java application to Neon Postgres
-subtitle: Connect to a Neon database using the standard PostgreSQL JDBC driver to run INSERT, SELECT, UPDATE, and DELETE statements.
+subtitle: Learn how to run SQL queries in Neon from Java using the PostgreSQL JDBC driver
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/java

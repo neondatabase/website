@@ -1,6 +1,6 @@
 ---
 title: Connect an Elixir application to Neon Postgres
-subtitle: Connect to a Neon database using Elixir with the Postgrex library to run INSERT, SELECT, UPDATE, and DELETE statements.
+subtitle: Learn how to run SQL queries in Neon from Elixir using Postgrex
 enableTableOfContents: true
 updatedOn: '2025-07-27T00:00:00.000Z'
 ---

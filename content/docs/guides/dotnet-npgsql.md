@@ -1,6 +1,6 @@
 ---
 title: Connect a .NET (C#) application to Neon Postgres
-subtitle: Connect to a Neon database using .NET (C#) with the Npgsql library to run INSERT, SELECT, UPDATE, and DELETE statements.
+subtitle: Learn how to run SQL queries in Neon from .NET using the Npgsql library
 enableTableOfContents: true
 updatedOn: '2025-07-27T00:00:00.000Z'
 ---
