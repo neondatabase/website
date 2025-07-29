@@ -23,8 +23,7 @@ const content = {
     {
       id: 3,
       href: 'https://neon.com/docs/guides/partner-consumption-limits',
-      label:
-        'Databutton Just Made Their Agent Smarter, with Postgres and Auth Built In фыв фыв ыфв фыв фыв фыв фыв',
+      label: 'Databutton Just Made Their Agent Smarter, with Postgres and Auth Built In',
       type: 'Case Study',
     },
     {
