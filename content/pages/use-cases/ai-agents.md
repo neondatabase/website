@@ -5,18 +5,18 @@ enableTableOfContents: true
 updatedOn: '2025-07-26T09:00:00.000Z'
 image: '/images/social-previews/use-cases/ai-agents.jpg'
 ---
+
 Neon is Postgres rearchitected for agent platforms, designed to give your users the best possible experience without bloating your infra. Let your users vibe-code full apps with a frictionless database and auth integration - provisioning happens instantly, no Neon login required.
 
 Use Neon branching to build time travel and versioning features, so users can iterate and jump between versions of their apps. And thanks to Neon’s scale-to-zero, pay only for active databases.
 
 <LogosSection classNameContainer='my-5' logos={[
-  'create',
-  'replit',
-  'same',
-  'solar',
-  'databutton',
+'create',
+'replit',
+'same',
+'solar',
+'databutton',
 ]} />
-
 
 <QuoteBlock name="dhruv" className="mb-16 md:mb-12" />
 
@@ -27,7 +27,6 @@ Use Neon branching to build time travel and versioning features, so users can it
 <QuoteBlock name="martin" className="mt-12 mb-16 md:mb-12" />
 
 ## AI Agents are now provisioning 80% of Neon databases (tens of thousands per day)
-
 
 The scale is massive, and Neon is built to handle it.
 
