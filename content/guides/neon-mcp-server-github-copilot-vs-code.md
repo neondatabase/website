@@ -47,7 +47,7 @@ Visit the [Neon on Azure Marketplace](https://portal.azure.com/#view/Azure_Mark
 
 ### Install the Neon MCP Server for VS Code
 
-Neon MCP Server offers two options for connecting your VS Code MCP client to Neon. We will use the [Remote Hosted MCP Server option](https://github.com/neondatabase-labs/mcp-server-neon?tab=readme-ov-file#option-1-remote-hosted-mcp-server-preview). This is the simplest setup no need to install anything locally or configure a Neon API key in your client.
+Neon MCP Server offers two options for connecting your VS Code MCP client to Neon. We will use the [Remote Hosted MCP Server option](https://github.com/neondatabase-labs/mcp-server-neon?tab=readme-ov-file#option-1-remote-hosted-mcp-server-preview). This is the simplest setup — no need to install anything locally or configure a Neon API key in your client.
 
 In your project directory, create a new file named `.vscode/mcp.json` and add the following configuration:
 
