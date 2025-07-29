@@ -63,7 +63,7 @@ After creation you'll land on Vercel's **Storage** tab that includes status, pla
 
 ## Optionally open the project in the Neon Console
 
-From the **Storage** tab, click **Open in Neon** to jump straight to your new Neon project dashboard in the Neon Console. You'll notice it lives in an organisation named `Vercel: <your-vercel-team>`.
+From the **Storage** tab, click **Open in Neon** to jump straight to your new Neon project dashboard in the Neon Console. You'll notice it lives in an organization named `Vercel: <your-vercel-team>`.
 
 </Steps>
 
