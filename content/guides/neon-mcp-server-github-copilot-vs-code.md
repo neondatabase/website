@@ -41,28 +41,31 @@ For more information, see [MCP security guidance →](/docs/ai/neon-mcp-server#m
 
 ## Connect GitHub Copilot to the Neon MCP Server
 
-### **Create Neon Database**
+### Create Neon Database
 
 Visit the [Neon on Azure Marketplace](https://portal.azure.com/#view/Azure_Marketplace_Neon/NeonCreateResource.ReactView) page and follow the [Create a Neon resource](/docs/azure/azure-deploy#create-a-neon-resource) guide to deploy Neon on Azure for your subscription. Neon offers a [Free plan](/pricing) that provides more than enough resources to build a proof of concept or kick off a new startup project.
 
 ### Install the Neon MCP Server for VS Code
 
-Neon MCP Server offers two options for connecting your VS Code MCP client to Neon. We will use the [Remote Hosted MCP Server option](https://github.com/neondatabase-labs/mcp-server-neon?tab=readme-ov-file#option-1-remote-hosted-mcp-server-preview). This is the simplest setup—no need to install anything locally or configure a Neon API key in your client.
+Neon MCP Server offers two options for connecting your VS Code MCP client to Neon. We will use the [Remote Hosted MCP Server option](https://github.com/neondatabase-labs/mcp-server-neon?tab=readme-ov-file#option-1-remote-hosted-mcp-server-preview). This is the simplest setup — no need to install anything locally or configure a Neon API key in your client.
 
-Add the following Neon MCP server configuration to your [user settings](https://code.visualstudio.com/docs/copilot/chat/mcp-servers#_add-an-mcp-server-to-your-user-settings) in VS Code:
+In your project directory, create a new file named `.vscode/mcp.json` and add the following configuration:
 
 ```json
 {
-  "mcp": {
-    "servers": {
-      "Neon": {
-        "command": "npx",
-        "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/sse"]
-      }
+  "servers": {
+    "Neon": {
+      "url": "https://mcp.neon.tech/mcp",
+      "type": "http"
     }
-  }
+  },
+  "inputs": []
 }
 ```
+
+<Admonition type="note">
+By default, the Remote MCP Server connects to your personal Neon account. To connect to an organization's account, you must authenticate with an API key. For more information, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
+</Admonition>
 
 Click on `Start` on the MCP server. A browser window will open with an OAuth prompt. Just follow the steps to give your VS Code MCP client access to your Neon account.
 

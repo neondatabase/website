@@ -1,7 +1,7 @@
 ---
 title: Manage Neon Auth using the API
 enableTableOfContents: true
-updatedOn: '2025-07-23T17:00:18.139Z'
+updatedOn: '2025-07-25T16:57:32.345Z'
 tag: beta
 redirectFrom:
   - /docs/guides/neon-auth-api
@@ -369,3 +369,81 @@ A successful DELETE returns no response body (`204 No Content`).
 You can use the GET endpoint to confirm the provider has been removed.
 
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/deleteneonauthoauthprovider)
+
+## Get email server configuration
+
+Gets the email server configuration for the specified project.
+
+Required parameters:
+
+- `project_id`: Your Neon project ID
+
+```bash shouldWrap
+curl --request GET \
+     --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/email_server' \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY' | jq
+```
+
+Example response:
+
+```json shouldWrap
+{
+  "type": "shared"
+}
+```
+
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/getneonauthemailserver)
+
+## Update email server configuration
+
+Updates the email server configuration for the specified project.
+
+Required parameters:
+
+- `project_id`: Your Neon project ID
+
+Request body parameters:
+
+- `type`: Type of email server, `"shared"` or `"standard"` (standard = custom email server)
+- `host`: SMTP server hostname (required for custom SMTP)
+- `port`: SMTP server port (required for custom SMTP)
+- `username`: SMTP username (required for custom SMTP)
+- `password`: SMTP password (required for custom SMTP)
+- `sender_email`: Email address that will appear as the sender (required for custom SMTP)
+- `sender_name`: Name that will appear as the sender (required for custom SMTP)
+
+```bash shouldWrap
+curl --request PATCH \
+     --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/email_server' \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '{
+       "type": "standard",
+       "host": "smtp.gmail.com",
+       "port": 587,
+       "username": "your-email@gmail.com",
+       "password": "your-app-password",
+       "sender_email": "noreply@yourcompany.com",
+       "sender_name": "Your Company"
+     }' | jq
+```
+
+Example response:
+
+```json shouldWrap
+{
+  "type": "standard",
+  "host": "smtp.gmail.com",
+  "port": 587,
+  "username": "your-email@gmail.com",
+  "password": "your-app-password",
+  "sender_email": "noreply@yourcompany.com",
+  "sender_name": "Your Company"
+}
+```
+
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/updateneonauthemailserver)
+
+<NeedHelp />

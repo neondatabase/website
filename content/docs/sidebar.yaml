@@ -31,7 +31,7 @@
             - title: .NET
               slug: guides/dotnet-npgsql
             - title: Elixir
-              slug: guides/elixir-ecto
+              slug: guides/elixir
             - title: Go
               slug: guides/go
               ariaLabel: Connect a Go application to Neon
@@ -41,9 +41,6 @@
               slug: guides/javascript
             - title: Python
               slug: guides/python
-              items:
-                - title: Psycopg
-                  slug: guides/python
             - title: Rust
               slug: guides/rust
         - section: Framework quickstarts
@@ -104,19 +101,19 @@
           items:
             - title: File storage
               slug: guides/file-storage
-            - title: File storage with AWS S3
+            - title: AWS S3
               slug: guides/aws-s3
-            - title: File storage with Azure Blob Storage
+            - title: Azure Blob Storage
               slug: guides/azure-blob-storage
-            - title: File storage with Backblaze B2
+            - title: Backblaze B2
               slug: guides/backblaze-b2
-            - title: File storage with Cloudflare R2
+            - title: Cloudflare R2
               slug: guides/cloudflare-r2
-            - title: Media storage with Cloudinary
+            - title: Cloudinary
               slug: guides/cloudinary
-            - title: Media storage with ImageKit
+            - title: ImageKit
               slug: guides/imagekit
-            - title: Media storage with Uploadcare
+            - title: Uploadcare
               slug: guides/uploadcare
     - title: Connect
       slug: connect/connect-intro
@@ -674,7 +671,7 @@
       icon: languages
       items:
         - title: Elixir
-          slug: guides/elixir-ecto
+          slug: guides/elixir
         - title: Go
           slug: guides/go
         - title: Java
@@ -693,6 +690,8 @@
           slug: guides/django
         - title: Drizzle
           slug: guides/drizzle
+        - title: Elixir Ecto
+          slug: guides/elixir-ecto
         - title: Laravel (Eloquent)
           slug: guides/laravel
         - title: Prisma
@@ -902,6 +901,8 @@
               slug: neon-auth/quick-start/react
             - title: JavaScript
               slug: neon-auth/quick-start/javascript
+            - title: Demo
+              slug: neon-auth/demo
         - section: About
           items:
             - title: How Neon Auth Works
@@ -929,10 +930,8 @@
                 - title: Backend Integration
                   slug: neon-auth/concepts/backend-integration
         - section: Guides
-          items:
-            - title: Demo
-              slug: neon-auth/demo
-            - title: Best Practices
+          items:  
+            - title: Best practices
               slug: neon-auth/best-practices
             - title: Creating Users
               slug: neon-auth/create-users
@@ -940,6 +939,8 @@
               slug: neon-auth/claim-project
             - title: Permsissions
               slug: neon-auth/permissions-roles
+            - title: Email configuration
+              slug: neon-auth/email-configuration
         - section: SDKs & API
           items:
             - title: Next.js SDK

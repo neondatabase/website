@@ -12,6 +12,7 @@ The Neon MCP Server provides the following actions, which are exposed as "tools"
 - `describe_project`: Fetches detailed information about a specific Neon project, including its ID, name, and associated branches and databases.
 - `create_project`: Creates a new Neon project in your Neon account. A project acts as a container for branches, databases, roles, and computes.
 - `delete_project`: Deletes an existing Neon project and all its associated resources.
+- `list_organizations`: Lists all organizations that the current user has access to. Optionally filter by organization name or ID using the search parameter.
 
 **Branch management:**
 
