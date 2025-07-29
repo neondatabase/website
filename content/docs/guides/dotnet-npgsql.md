@@ -1,17 +1,23 @@
 ---
-title: Connect a .NET (C#) application to Neon
-subtitle: Set up a Neon project in seconds and connect from a .NET (C#) application
+title: Connect a .NET (C#) application to Neon Postgres
+subtitle: Learn how to run SQL queries in Neon from .NET using the Npgsql library
 enableTableOfContents: true
-updatedOn: '2025-04-20T15:44:26.047Z'
+updatedOn: '2025-07-27T00:00:00.000Z'
 ---
 
-This guide describes how to create a Neon project and connect to it from a .NET (C#) application. We'll build a simple book library that demonstrates basic database operations using the Npgsql provider.
+This guide describes how to create a Neon project and connect to it from a .NET (C#) application using [Npgsql](https://www.npgsql.org/), a .NET data provider for PostgreSQL.
+
+You'll build a console application that demonstrates how to connect to your Neon database and perform basic Create, Read, Update, and Delete (CRUD) operations.
 
 <Admonition type="note">
 The same configuration steps can be used for any .NET application type, including ASP.NET Core Web API, MVC, Blazor, or Windows Forms applications.
 </Admonition>
 
-To connect to Neon from a .NET application:
+## Prerequisites
+
+- A Neon account. If you do not have one, see [Sign up](https://console.neon.tech/signup).
+- The [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) or later.
+  > _Other versions of .NET may work, but this guide is primarily tested with .NET 8._
 
 <Steps>
 
@@ -19,207 +25,426 @@ To connect to Neon from a .NET application:
 
 If you do not have one already, create a Neon project.
 
-1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
-2. Click **New Project**.
-3. Specify your project settings and click **Create Project**.
+1.  Navigate to the [Projects](https://console.neon.tech/app/projects) page in the [Neon Console](https://console.neon.tech).
+2.  Click **New Project**.
+3.  Specify your project settings and click **Create Project**.
 
-## Create a .NET project and add dependencies
+Your project is created with a ready-to-use database named `neondb`. In the following steps, you will connect to this database from your .NET application.
 
-1. Create a new console application and change to the newly created directory:
+## Create a .NET project
 
-   ```bash
-   dotnet new console -n NeonLibraryExample
-   cd NeonLibraryExample
-   ```
+For your .NET project, you will create a project directory and add the required packages using the `dotnet` CLI.
 
-   <Admonition type="important" title="IMPORTANT">
-    Ensure you install package versions that match your .NET version. You can verify your .NET version at any time by running `dotnet --version`.
-   </Admonition>
+1.  Create a new console application and change into the newly created directory.
 
-2. Add the Npgsql NuGet package:
+    ```bash
+    dotnet new console -o NeonLibraryExample
+    cd NeonLibraryExample
+    ```
 
-   ```bash
-   dotnet add package Npgsql --version YOUR_DOTNET_VERSION
-   ```
+    > Open this directory in your preferred code editor (e.g., VS Code, Visual Studio).
 
-## Store your Neon credentials
+2.  Add the required NuGet packages using `dotnet add package`.
+    - `Npgsql`: The .NET data provider for PostgreSQL.
+    - `Microsoft.Extensions.Configuration.Json`: To read configuration from `appsettings.json`.
+    - `Microsoft.Extensions.Configuration.Binder`: To bind configuration values to objects.
 
-1. Create or update the `appsettings.json` file in the project directory with your Neon connection string:
+    ```bash
+    dotnet add package Npgsql
+    dotnet add package Microsoft.Extensions.Configuration.Json
+    dotnet add package Microsoft.Extensions.Configuration.Binder
+    ```
 
-   ```json
-   {
-     "ConnectionStrings": {
-       "DefaultConnection": "Host=your-neon-host;Database=your-database;Username=your-username;Password=your-password;SSL Mode=Require;Trust Server Certificate=true"
-     }
-   }
-   ```
+## Store your Neon connection string
 
-2. Add the configuration package to read the settings:
+Create a file named `appsettings.json` in your project's root directory. This is the standard .NET approach for storing configuration data like connection strings.
 
-   ```bash
-   dotnet add package Microsoft.Extensions.Configuration.Json --version YOUR_DOTNET_VERSION
-   ```
+1.  In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
+2.  Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal.
+3.  Select **.NET** as your connection method.
+    ![Connection modal](/docs/connect/dotnet_connection_details.png)
+4.  Copy the **pooled** connection string, which includes your password.
+5.  Create an `appsettings.json` file in your project's root directory and add the connection string to it as shown below.
 
-<Admonition type="important">
-To ensure the security of your data, never commit your credentials to version control. Consider using user secrets or environment variables for development, and secure vault solutions for production.
-</Admonition>
+    ```json title="appsettings.json"
+    {
+      "ConnectionStrings": {
+        "DefaultConnection": "Host=your-neon-host;Database=your-database;Username=your-username;Password=your-password;SSL Mode=VerifyFull; Channel Binding=Require"
+      }
+    }
+    ```
 
-## Perform database operations
+    > Replace `your-neon-host`, `your-database`, `your-username`, and `your-password` with the actual values from your Neon connection string.
 
-### Create table
+    <Admonition type="note">
+    To ensure the security of your data, never commit your credentials to version control. In a production application, consider using environment variables or a secure secrets management solution to store sensitive information like connection strings.
+    </Admonition>
 
-The following code gets the connection string from `appsettings.json`, establishes a connection to your Neon database, and creates a new table for storing books. We use the `NpgsqlConnection` to open a connection and then execute a `CREATE TABLE` statement using NpgsqlCommand's `ExecuteNonQuery()` method. The table includes columns for the book's ID (automatically generated), title, author, and publication year.
+## Write the application code
 
-```csharp
-var configuration = new ConfigurationBuilder()
+You will now write the C# code to connect to Neon and perform database operations. All the code will be in a single file named `Program.cs` which is the entry point of your console application.
+
+Replace the contents of your `Program.cs` file with the following code:
+
+```csharp title="Program.cs"
+using Microsoft.Extensions.Configuration;
+using Npgsql;
+using System.Text;
+
+// --- 1. Read configuration and build connection string ---
+var config = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile("appsettings.json")
     .Build();
 
-string connString = configuration.GetConnectionString("DefaultConnection");
+var connectionString = config.GetConnectionString("DefaultConnection");
 
-using (var conn = new NpgsqlConnection(connString))
+// --- 2. Establish connection and perform CRUD operations ---
+await using var conn = new NpgsqlConnection(connectionString);
+try
 {
-    Console.Out.WriteLine("Opening connection");
-    conn.Open();
+    await conn.OpenAsync();
+    Console.WriteLine("Connection established");
 
-    using (var command = new NpgsqlCommand(
-        @"DROP TABLE IF EXISTS books;
-          CREATE TABLE books (
-              id SERIAL PRIMARY KEY,
-              title VARCHAR(100) NOT NULL,
-              author VARCHAR(100) NOT NULL,
-              year_published INTEGER
-          )", conn))
+    // --- CREATE a table and INSERT data ---
+    await using (var cmd = new NpgsqlCommand())
     {
-        command.ExecuteNonQuery();
-        Console.Out.WriteLine("Finished creating table");
-    }
-}
-```
+        cmd.Connection = conn;
 
-### Add books
+        cmd.CommandText = "DROP TABLE IF EXISTS books;";
+        await cmd.ExecuteNonQueryAsync();
+        Console.WriteLine("Finished dropping table (if it existed).");
 
-Next, we'll insert some books into our new table. We use an `INSERT` statement with parameters to safely add books to the database. The `ExecuteNonQuery()` method tells us how many books were added.
+        cmd.CommandText = @"
+            CREATE TABLE books (
+                id SERIAL PRIMARY KEY,
+                title VARCHAR(255) NOT NULL,
+                author VARCHAR(255),
+                publication_year INT,
+                in_stock BOOLEAN DEFAULT TRUE
+            );";
+        await cmd.ExecuteNonQueryAsync();
+        Console.WriteLine("Finished creating table.");
 
-```csharp
-using (var conn = new NpgsqlConnection(connString))
-{
-    Console.Out.WriteLine("Opening connection");
-    conn.Open();
+        cmd.CommandText = "INSERT INTO books (title, author, publication_year, in_stock) VALUES (@t1, @a1, @y1, @s1);";
+        cmd.Parameters.AddWithValue("t1", "The Catcher in the Rye");
+        cmd.Parameters.AddWithValue("a1", "J.D. Salinger");
+        cmd.Parameters.AddWithValue("y1", 1951);
+        cmd.Parameters.AddWithValue("s1", true);
+        await cmd.ExecuteNonQueryAsync();
+        Console.WriteLine("Inserted a single book.");
+        cmd.Parameters.Clear();
 
-    using (var command = new NpgsqlCommand(
-        @"INSERT INTO books (title, author, year_published)
-          VALUES (@t1, @a1, @y1), (@t2, @a2, @y2)", conn))
-    {
-        command.Parameters.AddWithValue("t1", "The Great Gatsby");
-        command.Parameters.AddWithValue("a1", "F. Scott Fitzgerald");
-        command.Parameters.AddWithValue("y1", 1925);
+        var booksToInsert = new[] {
+            new { Title = "The Hobbit", Author = "J.R.R. Tolkien", Year = 1937, InStock = true },
+            new { Title = "1984", Author = "George Orwell", Year = 1949, InStock = true },
+            new { Title = "Dune", Author = "Frank Herbert", Year = 1965, InStock = false }
+        };
 
-        command.Parameters.AddWithValue("t2", "1984");
-        command.Parameters.AddWithValue("a2", "George Orwell");
-        command.Parameters.AddWithValue("y2", 1949);
-
-        int nRows = command.ExecuteNonQuery();
-        Console.Out.WriteLine($"Number of books added={nRows}");
-    }
-}
-```
-
-### List books
-
-To retrieve our books, we'll use a `SELECT` statement and read the results using a DataReader. The reader allows us to iterate through the results row by row, accessing each column value with the appropriate Get method based on its data type.
-
-```csharp
-using (var conn = new NpgsqlConnection(connString))
-{
-    Console.Out.WriteLine("Opening connection");
-    conn.Open();
-
-    using (var command = new NpgsqlCommand("SELECT * FROM books", conn))
-    using (var reader = command.ExecuteReader())
-    {
-        while (reader.Read())
+        foreach (var book in booksToInsert)
         {
-            Console.WriteLine(
-                $"Reading from table=({reader.GetInt32(0)}, {reader.GetString(1)}, " +
-                $"{reader.GetString(2)}, {reader.GetInt32(3)})"
-            );
+            cmd.CommandText = "INSERT INTO books (title, author, publication_year, in_stock) VALUES (@title, @author, @year, @in_stock);";
+            cmd.Parameters.AddWithValue("title", book.Title);
+            cmd.Parameters.AddWithValue("author", book.Author);
+            cmd.Parameters.AddWithValue("year", book.Year);
+            cmd.Parameters.AddWithValue("in_stock", book.InStock);
+            await cmd.ExecuteNonQueryAsync();
+            cmd.Parameters.Clear();
         }
+        Console.WriteLine("Inserted 3 rows of data.");
     }
+
+    // --- READ the initial data ---
+    await ReadDataAsync(conn, "Book Library");
+
+    // --- UPDATE data ---
+    await using (var cmd = new NpgsqlCommand("UPDATE books SET in_stock = @in_stock WHERE title = @title;", conn))
+    {
+        cmd.Parameters.AddWithValue("in_stock", true);
+        cmd.Parameters.AddWithValue("title", "Dune");
+        await cmd.ExecuteNonQueryAsync();
+        Console.WriteLine("Updated stock status for 'Dune'.");
+    }
+
+    // --- READ data after update ---
+    await ReadDataAsync(conn, "Book Library After Update");
+
+    // --- DELETE data ---
+    await using (var cmd = new NpgsqlCommand("DELETE FROM books WHERE title = @title;", conn))
+    {
+        cmd.Parameters.AddWithValue("title", "1984");
+        await cmd.ExecuteNonQueryAsync();
+        Console.WriteLine("Deleted the book '1984' from the table.");
+    }
+
+    // --- READ data after delete ---
+    await ReadDataAsync(conn, "Book Library After Delete");
+
+}
+catch (Exception e)
+{
+    Console.WriteLine("Connection failed.");
+    Console.WriteLine(e.Message);
+}
+
+// Helper function to read data and print it to the console
+async Task ReadDataAsync(NpgsqlConnection conn, string title)
+{
+    Console.WriteLine($"\n--- {title} ---");
+    await using var cmd = new NpgsqlCommand("SELECT * FROM books ORDER BY publication_year;", conn);
+    await using var reader = await cmd.ExecuteReaderAsync();
+
+    var books = new StringBuilder();
+    while (await reader.ReadAsync())
+    {
+        books.AppendLine(
+            $"ID: {reader.GetInt32(0)}, " +
+            $"Title: {reader.GetString(1)}, " +
+            $"Author: {reader.GetString(2)}, " +
+            $"Year: {reader.GetInt32(3)}, " +
+            $"In Stock: {reader.GetBoolean(4)}"
+        );
+    }
+    Console.WriteLine(books.ToString().TrimEnd());
+    Console.WriteLine("--------------------\n");
 }
 ```
 
-### Update books
+## Examples
 
-To update books in our database, we use an `UPDATE` statement with parameters to ensure the operation is performed safely. The `ExecuteNonQuery()` method tells us how many books were updated.
+This section walks through the code in `Program.cs`, explaining how each part performs a specific CRUD operation.
+
+### Create a table and insert data
+
+This snippet connects to your database, creates a `books` table, and populates it with initial data.
 
 ```csharp
-using (var conn = new NpgsqlConnection(connString))
+await using var conn = new NpgsqlConnection(connectionString);
+await conn.OpenAsync();
+Console.WriteLine("Connection established");
+
+await using (var cmd = new NpgsqlCommand())
 {
-    Console.Out.WriteLine("Opening connection");
-    conn.Open();
+    cmd.Connection = conn;
 
-    using (var command = new NpgsqlCommand(
-        @"UPDATE books
-          SET year_published = @year
-          WHERE id = @id", conn))
+    cmd.CommandText = "DROP TABLE IF EXISTS books;";
+    await cmd.ExecuteNonQueryAsync();
+    Console.WriteLine("Finished dropping table (if it existed).");
+
+    cmd.CommandText = @"
+        CREATE TABLE books (
+            id SERIAL PRIMARY KEY,
+            title VARCHAR(255) NOT NULL,
+            author VARCHAR(255),
+            publication_year INT,
+            in_stock BOOLEAN DEFAULT TRUE
+        );";
+    await cmd.ExecuteNonQueryAsync();
+    Console.WriteLine("Finished creating table.");
+
+    cmd.CommandText = "INSERT INTO books (title, author, publication_year, in_stock) VALUES (@t1, @a1, @y1, @s1);";
+    cmd.Parameters.AddWithValue("t1", "The Catcher in the Rye");
+    cmd.Parameters.AddWithValue("a1", "J.D. Salinger");
+    cmd.Parameters.AddWithValue("y1", 1951);
+    cmd.Parameters.AddWithValue("s1", true);
+    await cmd.ExecuteNonQueryAsync();
+    Console.WriteLine("Inserted a single book.");
+    cmd.Parameters.Clear();
+
+    var booksToInsert = new[] {
+        new { Title = "The Hobbit", Author = "J.R.R. Tolkien", Year = 1937, InStock = true },
+        new { Title = "1984", Author = "George Orwell", Year = 1949, InStock = true },
+        new { Title = "Dune", Author = "Frank Herbert", Year = 1965, InStock = false }
+    };
+
+    foreach (var book in booksToInsert)
     {
-        command.Parameters.AddWithValue("id", 1);
-        command.Parameters.AddWithValue("year", 1926);
-
-        int nRows = command.ExecuteNonQuery();
-        Console.Out.WriteLine($"Number of books updated={nRows}");
+        cmd.CommandText = "INSERT INTO books (title, author, publication_year, in_stock) VALUES (@title, @author, @year, @in_stock);";
+        cmd.Parameters.AddWithValue("title", book.Title);
+        cmd.Parameters.AddWithValue("author", book.Author);
+        cmd.Parameters.AddWithValue("year", book.Year);
+        cmd.Parameters.AddWithValue("in_stock", book.InStock);
+        await cmd.ExecuteNonQueryAsync();
+        cmd.Parameters.Clear();
     }
+    Console.WriteLine("Inserted 3 rows of data.");
 }
 ```
 
-### Remove books
+In the code above, you:
 
-To delete books from our database, we use a `DELETE` statement with parameters to ensure the operation is performed safely. The `ExecuteNonQuery()` method tells us how many books were deleted.
+- Open a connection to your Neon database asynchronously. The `await using` statement ensures the connection is properly closed and disposed of.
+- Drop the `books` table if it exists to ensure a clean start.
+- Create a new `books` table with columns for book details.
+- Insert a single book record using a parameterized query to prevent SQL injection.
+- Insert three more books by looping through a collection.
+
+When this code runs successfully, it produces the following output:
+
+```text title="Output"
+Connection established
+Finished dropping table (if it existed).
+Finished creating table.
+Inserted a single book.
+Inserted 3 rows of data.
+```
+
+### Read data
+
+This snippet calls a helper function, `ReadDataAsync`, to retrieve and display all the books currently in the table.
 
 ```csharp
-using(var conn = new NpgsqlConnection(connString))
+// The helper function definition
+async Task ReadDataAsync(NpgsqlConnection conn, string title)
 {
-    Console.Out.WriteLine("Opening connection");
-    conn.Open();
+    Console.WriteLine($"\n--- {title} ---");
+    await using var cmd = new NpgsqlCommand("SELECT * FROM books ORDER BY publication_year;", conn);
+    await using var reader = await cmd.ExecuteReaderAsync();
 
-    using(var command = new NpgsqlCommand("DELETE FROM books WHERE id = @id", conn))
+    var books = new StringBuilder();
+    while (await reader.ReadAsync())
     {
-        command.Parameters.AddWithValue("id", 2);
-        int nRows = command.ExecuteNonQuery();
-        Console.Out.WriteLine($ "Number of books deleted={nRows}");
+        books.AppendLine(
+            $"ID: {reader.GetInt32(0)}, " +
+            $"Title: {reader.GetString(1)}, " +
+            $"Author: {reader.GetString(2)}, " +
+            $"Year: {reader.GetInt32(3)}, " +
+            $"In Stock: {reader.GetBoolean(4)}"
+        );
     }
+    Console.WriteLine(books.ToString().TrimEnd());
+    Console.WriteLine("--------------------\n");
 }
+
+// How the function is called
+await ReadDataAsync(conn, "Book Library");
 ```
+
+In the code above, you:
+
+- Execute a SQL `SELECT` statement to fetch all rows from the `books` table, ordered by publication year.
+- Use an `NpgsqlDataReader` to iterate through the result set row by row.
+- Read the column values for each row and format them into a string for display.
+
+After the initial data insert, the output is:
+
+```text title="Output"
+
+--- Book Library ---
+ID: 2, Title: The Hobbit, Author: J.R.R. Tolkien, Year: 1937, In Stock: True
+ID: 3, Title: 1984, Author: George Orwell, Year: 1949, In Stock: True
+ID: 1, Title: The Catcher in the Rye, Author: J.D. Salinger, Year: 1951, In Stock: True
+ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: False
+--------------------
+
+```
+
+### Update data
+
+This snippet updates the stock status for the book 'Dune' from `false` to `true`.
+
+```csharp
+await using (var cmd = new NpgsqlCommand("UPDATE books SET in_stock = @in_stock WHERE title = @title;", conn))
+{
+    cmd.Parameters.AddWithValue("in_stock", true);
+    cmd.Parameters.AddWithValue("title", "Dune");
+    await cmd.ExecuteNonQueryAsync();
+    Console.WriteLine("Updated stock status for 'Dune'.");
+}
+
+// Calling ReadDataAsync again to see the result
+await ReadDataAsync(conn, "Book Library After Update");
+```
+
+In the code above, you:
+
+- Execute a SQL `UPDATE` statement with parameters to identify the row to update (`WHERE title = @title`) and the new value (`SET in_stock = @in_stock`).
+- Call `ReadDataAsync` again to show that the change was successful.
+
+The output from this operation is:
+
+```text title="Output"
+Updated stock status for 'Dune'.
+
+--- Book Library After Update ---
+ID: 2, Title: The Hobbit, Author: J.R.R. Tolkien, Year: 1937, In Stock: True
+ID: 3, Title: 1984, Author: George Orwell, Year: 1949, In Stock: True
+ID: 1, Title: The Catcher in the Rye, Author: J.D. Salinger, Year: 1951, In Stock: True
+ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: True
+--------------------
+
+```
+
+> You can see that the stock status for 'Dune' has been updated to `True`.
+
+### Delete data
+
+This final snippet removes the book '1984' from the `books` table.
+
+```csharp
+await using (var cmd = new NpgsqlCommand("DELETE FROM books WHERE title = @title;", conn))
+{
+    cmd.Parameters.AddWithValue("title", "1984");
+    await cmd.ExecuteNonQueryAsync();
+    Console.WriteLine("Deleted the book '1984' from the table.");
+}
+
+// Calling ReadDataAsync one last time
+await ReadDataAsync(conn, "Book Library After Delete");
+```
+
+In the code above, you:
+
+- Execute a SQL `DELETE` statement with a `WHERE` clause to target the specific book for removal.
+- Call `ReadDataAsync` a final time to verify that the row was deleted.
+
+The output from this operation is:
+
+```text title="Output"
+Deleted the book '1984' from the table.
+
+--- Book Library After Delete ---
+ID: 2, Title: The Hobbit, Author: J.R.R. Tolkien, Year: 1937, In Stock: True
+ID: 1, Title: The Catcher in the Rye, Author: J.D. Salinger, Year: 1951, In Stock: True
+ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: True
+--------------------
+
+```
+
+> You can see that the book '1984' has been successfully removed from the table.
+
+## Run the application
+
+To run the entire script, execute the following command from your project directory:
+
+```bash
+dotnet run
+```
+
+This command would compile and execute your application, connecting to the Neon database and performing all the CRUD operations defined in `Program.cs` as described above. You should see output in your console similar to the examples provided in the previous sections, indicating the success of each operation.
 
 </Steps>
 
-## Best Practices
+## Next steps: Using an ORM or framework
 
-When working with Neon and .NET:
+While this guide demonstrates how to connect to Neon using raw SQL queries, for more advanced and maintainable data interactions in your .NET applications, consider using an Object-Relational Mapping (ORM) framework. ORMs not only let you work with data as objects but also help manage schema changes through automated migrations keeping your database structure in sync with your application models.
 
-1. Always use parameterized queries to prevent SQL injection
-2. Handle database exceptions appropriately
-3. Dispose of connections and commands properly using `using` statements
-4. Keep your queries simple and focused
+Explore the following resources to learn how to integrate ORMs with Neon:
+
+- [Connect an Entity Framework application to Neon](/docs/guides/dotnet-entity-framework)
 
 ## Source code
 
 You can find the source code for the application described in this guide on GitHub.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/examples/tree/main/with-dotnet-npgsql" description="Get started with .NET (C#) and Neon" icon="github">Get started with .NET (C#) and Neon</a>
+<a href="https://github.com/neondatabase/examples/tree/main/with-dotnet-npgsql/NeonLibraryExample" description="Get started with .NET (C#) and Neon" icon="github">Get started with .NET (C#) and Neon</a>
 </DetailIconCards>
-
-## Community Guides
-
-- [Connect an Entity Framework application to Neon](/docs/guides/dotnet-entity-framework)
 
 ## Resources
 
 - [Npgsql Documentation](https://www.npgsql.org/doc/index.html)
 - [.NET Documentation](https://learn.microsoft.com/en-us/dotnet/)
-- [ASP.NET Core Documentation](https://learn.microsoft.com/en-us/aspnet/core/)
+- [Connect an Entity Framework application to Neon](/docs/guides/dotnet-entity-framework)
 
 <NeedHelp/>
