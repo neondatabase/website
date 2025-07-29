@@ -6,6 +6,9 @@ enableTableOfContents: true
 updatedOn: '2025-06-30T11:30:21.891Z'
 ---
 
+<CopyPrompt src="/prompts/astro-serverless-prompt.md" 
+description="Pre-built prompt for connecting Astro to Neon using the Neon serverless driver"/>
+
 Astro builds fast content sites, powerful web applications, dynamic server APIs, and everything in-between. This guide describes how to create a Neon Postgres database and access it from an Astro site or application.
 
 To create a Neon project and access it from an Astro site or application:
