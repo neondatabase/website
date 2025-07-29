@@ -81,8 +81,6 @@ This method uses Neon's managed server and OAuth authentication.
 
    If you have other MCP servers configured, you can copy just the `Neon` part.
 
-   ![Cursor MCP JSON](/docs/guides/cursor-remote-mcp-server-json.png)
-
    Save the `mcp.json` file after pasting the configuration.
 
 4. **Restart Cursor** or reload the window (`Developer: Reload Window` from the Command Palette). If Cursor prompts you to Enable the MCP server, click **Enable**.
