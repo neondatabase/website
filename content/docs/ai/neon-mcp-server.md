@@ -68,7 +68,7 @@ The remote hosted MCP server is currently in its preview phase. As the [OAuth sp
 <Admonition type="tip" title="Install in a single click for Cursor users">
 Click the button below to install the Neon MCP server in Cursor. When prompted, click **Install** within Cursor.
 
-<a href="cursor://anysphere.cursor-deeplink/mcp/install?name=Neon&config=eyJ1cmwiOiJodHRwczovL21jcC5uZW9uLnRlY2gvc3NlIn0%3D"><img src="https://cursor.com/deeplink/mcp-install-dark.svg" alt="Add Neon MCP server to Cursor" height="32" /></a>
+<a href="cursor://anysphere.cursor-deeplink/mcp/install?name=Neon&config=eyJ1cmwiOiJodHRwczovL21jcC5uZW9uLnRlY2gvbWNwIn0%3D"><img src="https://cursor.com/deeplink/mcp-install-dark.svg" alt="Add Neon MCP server to Cursor" height="32" /></a>
 
 </Admonition>
 
@@ -82,15 +82,15 @@ Click the button below to install the Neon MCP server in Cursor. When prompted, 
       "mcpServers": {
         "Neon": {
           "command": "npx",
-          "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/sse"]
+          "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/mcp"]
         }
       }
     }
     ```
 
-    This command uses `npx` to run a [small helper (`mcp-remote`)](https://github.com/geelen/mcp-remote) that connects to Neon's hosted server endpoint (`https://mcp.neon.tech/sse`).
+    This command uses `npx` to run a [small helper (`mcp-remote`)](https://github.com/geelen/mcp-remote) that connects to Neon's hosted server endpoint (`https://mcp.neon.tech/mcp`).
 
-    For [streamable HTTP responses](#streamable-http-support) instead of SSE, you can specify the `https://mcp.neon.tech/mcp` endpoint instead of `https://mcp.neon.tech/sse`.
+    MCP supports two remote server transports: the deprecated Server-Sent Events (SSE) and the newer, recommended Streamable HTTP. If your LLM client doesn't support Streamable HTTP yet, you can switch the endpoint from `https://mcp.neon.tech/mcp` to `https://mcp.neon.tech/sse` to use SSE instead.
 
 3.  Save the configuration and **restart or refresh** your MCP client application.
 4.  The first time the client initializes Neon's MCP server, it should trigger an **OAuth flow**:
