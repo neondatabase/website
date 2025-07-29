@@ -28,7 +28,7 @@ Use the **Backup & restore** page in the Neon Console to restore a branch to a p
 
 ## Instantly restore a branch
 
-Restore your branch to a specific time in its history. 
+Restore your branch to a specific time in its history.
 
 <Tabs labels={["Console", "CLI", "API"]}>
 
@@ -46,7 +46,6 @@ You can choose any timestamp within your [restore window](/docs/manage/projects#
    ![Backup and restore select a restore time](/docs/guides/backup_restore_select_time.png)
 
    You'll see a confirmation modal that outlines what will happen:
-
    - Your branch will be restored to its state at the selected date & time
    - Your current branch will be saved as a backup, in case you want to revert
 
@@ -57,11 +56,9 @@ You can choose any timestamp within your [restore window](/docs/manage/projects#
 2. **Preview the data**
 
    Preview a restore point to make sure you’ve selected the right one. You can:
-
-   - **Browse data** in the **Tables** view to explore a read-only snapshot of your data at that point in time  
-   - **Query data** directly from the restore page to run read-only SQL against the selected restore point  
+   - **Browse data** in the **Tables** view to explore a read-only snapshot of your data at that point in time
+   - **Query data** directly from the restore page to run read-only SQL against the selected restore point
    - **Compare schemas** with Neon’s schema diff tool to see how your current schema differs from the one at the selected point
-
 
    ![Backup and restore preview data options](/docs/guides/backup_restore_preview_options.png)
 
