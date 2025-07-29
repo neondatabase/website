@@ -3,7 +3,7 @@ title: Connect Astro to Postgres on Neon
 subtitle: Learn how to make server-side queries to Postgres from .astro files or API
   routes.
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.891Z'
+updatedOn: '2025-07-29T16:22:53.110Z'
 ---
 
 <CopyPrompt src="/prompts/astro-serverless-prompt.md" 
