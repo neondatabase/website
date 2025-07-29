@@ -2,7 +2,7 @@
 title: Neon serverless driver
 enableTableOfContents: true
 subtitle: Connect to Neon from serverless environments over HTTP or WebSockets
-updatedOn: '2025-06-03T18:04:26.405Z'
+updatedOn: '2025-07-29T15:29:29.875Z'
 ---
 
 <CopyPrompt src="/prompts/serverless-driver-prompt.md" 
