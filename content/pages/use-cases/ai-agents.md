@@ -5,12 +5,11 @@ enableTableOfContents: true
 updatedOn: '2025-07-26T09:00:00.000Z'
 image: '/images/social-previews/use-cases/ai-agents.jpg'
 ---
-
 Neon is Postgres rearchitected for agent platforms, designed to give your users the best possible experience without bloating your infra. Let your users vibe-code full apps with a frictionless database and auth integration - provisioning happens instantly, no Neon login required.
 
 Use Neon branching to build time travel and versioning features, so users can iterate and jump between versions of their apps. And thanks to Neon’s scale-to-zero, pay only for active databases.
 
-<LogosSection classNameContainer='my-6' logos={[
+<LogosSection classNameContainer='my-5' logos={[
   'create',
   'replit',
   'same',
@@ -19,13 +18,13 @@ Use Neon branching to build time travel and versioning features, so users can it
 ]} />
 
 
-<QuoteBlock name="dhruv" />
+<QuoteBlock name="dhruv" className="mb-16 md:mb-12" />
 
 ## The agent experience you can build with Neon
 
 <FeatureList />
 
-<QuoteBlock name="martin" />
+<QuoteBlock name="martin" className="mt-12 mb-16 md:mb-12" />
 
 ## AI Agents are now provisioning 80% of Neon databases (tens of thousands per day)
 
@@ -36,6 +35,12 @@ The [Neon MCP server](https://mcp.neon.tech/) enables any client to interact wit
 
 The [@neondatabase/toolkit](https://github.com/neondatabase/toolkit) is a lightweight client designed for AI agents that need to spin up Postgres databases in seconds and run SQL queries. It includes both the Neon TypeScript SDK and the Neon Serverless Driver.
 
-<QuoteBlock name="lincoln" />
+<QuoteBlock name="lincoln" className="mt-10" />
 
 <CTA title="Meet app.build, our reference agent" description="app.build is an open-source AI agent, serving as a reference implementation for any agent builder using Neon." buttonText="Explore the code" buttonUrl="/contact-sales" />
+
+<br />
+
+## Start here
+
+<QuickLinks className="mt-8" />

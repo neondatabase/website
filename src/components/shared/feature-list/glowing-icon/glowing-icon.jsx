@@ -24,7 +24,7 @@ const GlowingIcon = ({ icon, index, activeIndex, setActiveIndex, isLastItem }) =
   return (
     <>
       {!isLastItem && (
-        <div className="absolute left-[14px] top-[34px] h-full w-px -translate-x-1/2">
+        <div className="absolute left-[14px] top-[34px] h-full w-px -translate-x-1/2 md:top-8">
           <div
             className={clsx(
               'absolute inset-0 bg-gray-new-15 transition-opacity duration-700',

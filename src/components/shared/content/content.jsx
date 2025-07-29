@@ -50,6 +50,7 @@ import getCodeProps from 'lib/rehype-code-props';
 import sharedMdxComponents from '../../../../content/docs/shared-content';
 import FeatureList from '../feature-list';
 import LogosSection from '../grid-features/logos-section';
+import QuickLinks from '../quick-links';
 import QuoteBlock from '../quote-block';
 
 const sharedComponents = Object.keys(sharedMdxComponents).reduce((acc, key) => {
@@ -142,6 +143,8 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   DetailIconCards,
   TechCards,
   CommunityBanner,
+  QuickLinks,
+  QuoteBlock,
   Tabs,
   TabItem,
   InfoBlock,
@@ -166,7 +169,6 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   CheckItem,
   ExternalCode: (props) => <ExternalCode {...props} />,
   MegaLink,
-  QuoteBlock,
   ...sharedComponents,
 });
 

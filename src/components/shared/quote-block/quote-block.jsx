@@ -36,28 +36,30 @@ const QuoteBlock = ({ name = 'dhruv', className = '' }) => {
   if (!data) return null;
 
   return (
-    <figure className={clsx('qoute', className)}>
-      <blockquote className="border-none p-0 text-2xl font-medium leading-normal tracking-tight text-gray-9">
-        &quot;{data.quote}&quot;
-      </blockquote>
+    <section className={clsx('qoute', className)}>
+      <figure>
+        <blockquote className="max-w-[710px] border-none p-0 text-2xl !font-medium leading-normal tracking-tight text-gray-9 sm:text-[18px] sm:leading-snug">
+          &quot;{data.quote}&quot;
+        </blockquote>
 
-      <figcaption className="mt-5 flex items-center gap-3">
-        <div className="relative h-10 w-10 overflow-hidden rounded-full">
-          <Image
-            src={data.avatar}
-            alt={data.author}
-            width={36}
-            height={36}
-            className="m-0 rounded-full object-cover"
-          />
-        </div>
-        <div className="flex gap-1.5">
-          <p className="text-sm font-medium leading-tight tracking-tight !text-gray-9">
-            {data.author} <span className="text-[#A1A1AA]">— {data.role}</span>
-          </p>
-        </div>
-      </figcaption>
-    </figure>
+        <figcaption className="mt-5 flex items-center gap-3 md:mt-4">
+          <div className="relative size-9 overflow-hidden rounded-full sm:size-7">
+            <Image
+              src={data.avatar}
+              alt={data.author}
+              width={36}
+              height={36}
+              className="m-0 rounded-full object-cover sm:h-7 sm:w-7"
+            />
+          </div>
+          <div className="flex gap-1.5">
+            <p className="text-sm font-medium leading-tight tracking-tight !text-gray-9 sm:text-[13px]">
+              {data.author} <span className="text-[#A1A1AA]">— {data.role}</span>
+            </p>
+          </div>
+        </figcaption>
+      </figure>
+    </section>
   );
 };
 
