@@ -63,6 +63,10 @@ In your project directory, create a new file named `.vscode/mcp.json` and add th
 }
 ```
 
+<Admonition type="note">
+By default, the Remote MCP Server connects to your personal Neon account. To connect to an organization's account, you must authenticate with an API key. For more information, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
+</Admonition>
+
 Click on `Start` on the MCP server. A browser window will open with an OAuth prompt. Just follow the steps to give your VS Code MCP client access to your Neon account.
 
 ![Start Neon MCP Server in GitHub Copilot](/docs/guides/github-copilot-neon-mcp-server/github-copilot-start-neon-mcp-server.png)

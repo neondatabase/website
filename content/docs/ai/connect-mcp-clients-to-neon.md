@@ -73,7 +73,7 @@ You can connect to Neon MCP Server in two ways:
 4. Save the configuration file and **restart** Claude Desktop.
 5. An OAuth window will open in your browser. Follow the prompts to authorize Claude Desktop to access your Neon account.
 
-> If you prefer to authenticate using a Neon API key, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
+> By default, the Remote MCP Server connects to your personal Neon account. To connect to an organization's account, you must authenticate with an API key. For more information, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
 
 </TabItem>
 
@@ -169,7 +169,7 @@ Click the button below to install the Neon MCP server in Cursor. When prompted, 
 4.  Save the configuration file. Cursor may detect the change or require a restart.
 5.  An OAuth window will open in your browser. Follow the prompts to authorize Cursor to access your Neon account.
 
-> If you prefer to authenticate using a Neon API key, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
+> By default, the Remote MCP Server connects to your personal Neon account. To connect to an organization's account, you must authenticate with an API key. For more information, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
 
 </TabItem>
 <TabItem>
@@ -221,7 +221,7 @@ For more, see [Get started with Cursor and Neon Postgres MCP Server](/guides/cur
 6.  Click the **Refresh** button in the Cascade sidebar next to "available MCP servers".
 7.  An OAuth window will open in your browser. Follow the prompts to authorize Windsurf to access your Neon account.
 
-> If you prefer to authenticate using a Neon API key, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
+> By default, the Remote MCP Server connects to your personal Neon account. To connect to an organization's account, you must authenticate with an API key. For more information, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
 
 </TabItem>
 <TabItem>
@@ -276,7 +276,7 @@ For more, see [Get started with Windsurf and Neon Postgres MCP Server](/guides/w
 4. Save the file. Cline should reload the configuration automatically.
 5. An OAuth window will open in your browser. Follow the prompts to authorize Cline to access your Neon account.
 
-> If you prefer to authenticate using a Neon API key, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
+> By default, the Remote MCP Server connects to your personal Neon account. To connect to an organization's account, you must authenticate with an API key. For more information, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
 
 </TabItem>
 <TabItem>
@@ -331,7 +331,7 @@ MCP support in Zed is currently in **preview**. Ensure you're using the Preview 
 6. An OAuth window will open in your browser. Follow the prompts to authorize Zed to access your Neon account.
 7. Check the Context Servers section in Zed settings to ensure the connection is successful. "Neon" should be listed.
 
-> If you prefer to authenticate using a Neon API key, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
+> By default, the Remote MCP Server connects to your personal Neon account. To connect to an organization's account, you must authenticate with an API key. For more information, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
 
 </TabItem>
 
@@ -387,7 +387,7 @@ To use MCP servers with VS Code, you need [GitHub Copilot](https://marketplace.v
 6.  An OAuth window will open in your browser. Follow the prompts to authorize VS Code (GitHub Copilot) to access your Neon account.
 7.  Once authorized, you can now open GitHub Copilot Chat in VS Code and [switch to Agent mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). You will see the Neon MCP Server listed among the available tools.
 
-> If you prefer to authenticate using a Neon API key, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
+> By default, the Remote MCP Server connects to your personal Neon account. To connect to an organization's account, you must authenticate with an API key. For more information, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
 
 </TabItem>
 
@@ -429,6 +429,8 @@ Adapt the instructions above for other clients:
 - **Remote MCP server:**
   Add the following JSON configuration within the `mcpServers` section of your client's `MCP` configuration file:
 
+    > By default, the Remote MCP Server connects to your personal Neon account. To connect to an organization's account, you must authenticate with an API key. If your client supports it, provide the key in the `Authorization` header. For more information, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
+
   ```json
   "neon": {
     "command": "npx",
@@ -439,8 +441,6 @@ Adapt the instructions above for other clients:
   > MCP supports two remote server transports: the deprecated Server-Sent Events (SSE) and the newer, recommended Streamable HTTP. If your LLM client doesn't support Streamable HTTP yet, you can switch the endpoint from `https://mcp.neon.tech/mcp` to `https://mcp.neon.tech/sse` to use SSE instead.
 
   Then follow the OAuth flow on first connection.
-
-  > If you prefer to authenticate using a Neon API key, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
 
 - **Local MCP server:**
 

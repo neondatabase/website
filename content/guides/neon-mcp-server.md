@@ -82,6 +82,10 @@ You have two options for connecting Claude to the Neon MCP Server:
 
 ### Option 1: Setting up the remote hosted Neon MCP Server
 
+<Admonition type="note">
+By default, the Remote MCP Server connects to your personal Neon account. To connect to an organization's account, you must authenticate with an API key. For more information, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
+</Admonition>
+
 1. Open Claude desktop and navigate to **Settings**.
    ![Claude settings](/guides/images/claude_mcp/claude_settings.png)
 2. Under the **Developer** tab, click **Edit Config** (On Windows, it's under File -> Settings -> Developer -> Edit Config) to open the location of configuration file (`claude_desktop_config.json`).
