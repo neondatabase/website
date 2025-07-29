@@ -1,11 +1,12 @@
 ---
 title: Connect a Rust application to Neon Postgres
-subtitle: Learn how to run SQL queries in Neon from Rust using the postgres or tokio-postgres crates
+subtitle: Learn how to run SQL queries in Neon from Rust using the postgres or
+  tokio-postgres crates
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/rust
   - /docs/integrations/rust
-updatedOn: '2025-07-23T10:00:00.000Z'
+updatedOn: '2025-07-29T10:34:33.841Z'
 ---
 
 This guide describes how to create a Neon project and connect to it from a Rust application using two popular Postgres drivers: [rust-postgres](https://crates.io/crates/postgres), a synchronous driver, and [tokio-postgres](https://crates.io/crates/tokio-postgres), an asynchronous driver for use with the [Tokio](https://tokio.rs/) runtime.
