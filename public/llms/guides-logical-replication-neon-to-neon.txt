@@ -1,6 +1,6 @@
 # Replicate data from one Neon project to another
 
-> The document explains how to set up logical replication to transfer data between two Neon projects, detailing the necessary steps and configurations for successful data replication within the Neon environment.
+> The document outlines the process for setting up logical replication to transfer data between two Neon projects, detailing the necessary steps and configurations to achieve seamless data replication.
 
 ## Source
 
@@ -100,7 +100,7 @@ After creating a publication on the source database, you need to create a subscr
 
    ```sql
    CREATE SUBSCRIPTION my_subscription
-   CONNECTION 'postgresql://neondb_owner:<password>@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb'
+   CONNECTION 'postgresql://neondb_owner:<password>@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
    PUBLICATION my_publication;
    ```
 

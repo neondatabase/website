@@ -1,6 +1,6 @@
 # Postgres Date and Time data types
 
-> The document outlines the various date and time data types available in PostgreSQL, detailing their usage and functionality within the Neon database environment.
+> The document outlines the various date and time data types available in PostgreSQL, detailing their syntax, usage, and functions, specifically tailored for Neon users to manage temporal data effectively.
 
 ## Source
 

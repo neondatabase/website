@@ -1,6 +1,6 @@
 # Backups
 
-> The "Backups" document details the procedures for managing and creating backups within the Neon database platform, ensuring data integrity and recovery capabilities for users.
+> The "Backups" documentation outlines the procedures for managing and configuring backups in Neon, detailing how to create, schedule, and restore backups to ensure data integrity and availability.
 
 ## Source
 

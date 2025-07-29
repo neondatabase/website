@@ -1,6 +1,6 @@
 # Generate synthetic data with Neosync
 
-> The document titled "Generate synthetic data with Neosync" guides Neon users on how to use Neosync to create synthetic datasets for testing and development purposes within the Neon environment.
+> The document "Generate synthetic data with Neosync" guides Neon users on how to use Neosync to create synthetic datasets for testing and development purposes within the Neon environment.
 
 ## Source
 
@@ -65,7 +65,7 @@ Navigate to the **Project Dashboard** in Neon, click **Connect**, and copy the c
 Your connection string should look something like this:
 
 ```bash
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neosync?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neosync?sslmode=require&channel_binding=require
 ```
 
 ## Neosync setup
@@ -103,7 +103,6 @@ To generate data, you need to create a **Job** in Neosync:
    
 
 4. On the **Schema** page:
-
    - Specify a value for **Number of Rows**. We'll create 1000 rows of data to use in this example.
    - Under **Table Selection**, select the schema and table (`public.users`) where you want to generate synthetic data and move it from the source to the destination table.
    - For each column in your table, select a **Transfomer** to define the type of data you want to generate for the column. For the `age` column, we used the `Generate Random Int64` to randomly generate ages between 18 and 40. You can configure the generator by clicking on the edit icon next to the transformer and setting min and max values.

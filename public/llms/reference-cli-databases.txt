@@ -1,6 +1,6 @@
 # Neon CLI commands — databases
 
-> The document "Neon CLI commands — databases" details command-line instructions for managing databases within the Neon platform, including creating, listing, and deleting databases.
+> The document details Neon CLI commands for managing databases, including creating, listing, and deleting databases within the Neon environment.
 
 ## Source
 

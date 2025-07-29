@@ -1,6 +1,6 @@
 # Create an S3 bucket to store Postgres backups
 
-> The document instructs Neon users on how to create an S3 bucket for storing PostgreSQL backups, detailing the necessary steps and configurations within the AWS environment.
+> The document guides Neon users in creating an S3 bucket on AWS to store PostgreSQL backups, detailing the necessary steps and configurations for secure and efficient backup storage.
 
 ## Source
 

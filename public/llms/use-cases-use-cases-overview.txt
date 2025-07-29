@@ -1,6 +1,6 @@
 # Neon use cases
 
-> The document outlines various use cases for Neon, detailing how its serverless PostgreSQL database can be utilized in different scenarios such as application development, analytics, and data warehousing.
+> The document outlines various use cases for Neon, detailing how it can be utilized for scalable, serverless PostgreSQL databases in different application scenarios.
 
 ## Source
 

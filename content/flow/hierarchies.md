@@ -1,5 +1,6 @@
 ---
 title: 'Hierarchies'
+subtitle: 'Learn how to structure your database branching strategy with root branches and child environments'
 updatedOn: '2025-07-08T12:47:21.296Z'
 ---
 

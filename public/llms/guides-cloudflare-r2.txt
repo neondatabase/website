@@ -1,6 +1,6 @@
 # File storage with Cloudflare R2
 
-> The document outlines how Neon users can configure and utilize Cloudflare R2 for file storage, detailing the steps for integration and management within the Neon environment.
+> The document outlines the process for integrating Neon with Cloudflare R2 for file storage, detailing configuration steps and necessary settings to enable seamless data management and storage solutions within the Neon environment.
 
 ## Source
 

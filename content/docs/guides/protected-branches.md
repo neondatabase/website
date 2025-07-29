@@ -3,7 +3,7 @@ title: Protected branches
 subtitle: Learn how to use Neon's protected branches feature to secure your critical
   data
 enableTableOfContents: true
-updatedOn: '2024-12-12T15:31:10.128Z'
+updatedOn: '2025-07-22T11:19:18.881Z'
 ---
 
 Neon's protected branches feature implements a series of protections:
@@ -30,7 +30,7 @@ To set a branch as protected:
    ![Branch page](/docs/guides/ip_allow_branch_page.png)
 
 3. Select a branch from the table. In this example, we'll configure our default branch `main` as a protected branch.
-4. On the branch page, click the **Actions** drop-down menu and select **Set as protected**.
+4. On the branch page, click the **More** drop-down menu and select **Set as protected**.
 
    ![Set as protected](/docs/guides/ip_allow_set_as_protected.png)
 
@@ -158,6 +158,6 @@ After you've selected the protected branches option, click **Save changes** to a
 
 ## Remove branch protection
 
-Removing a protected branch designation can be performed by selecting **Set as unprotected** from the **Actions** menu on the branch page.
+Removing a protected branch designation can be performed by selecting **Set as unprotected** from the **More** drop-down menu on the branch page.
 
 <NeedHelp/>

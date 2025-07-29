@@ -1,6 +1,6 @@
 # Database branching workflow primer
 
-> The "Database branching workflow primer" document outlines the process of creating and managing database branches in Neon, enabling users to efficiently handle multiple development environments within the platform.
+> The "Database Branching Workflow Primer" document outlines the process of creating and managing database branches in Neon, enabling users to efficiently handle development, testing, and deployment workflows within the platform.
 
 ## Source
 
@@ -19,10 +19,10 @@ Every Neon branch has a unique Postgres connection string, so they're completely
 
 ```bash
 # Branch 1
-postgresql://database_name_owner:AbC123dEf@ep-shiny-cell-a5y2zuu0.us-east-2.aws.neon.tech/dbname
+postgresql://database_name_owner:AbC123dEf@ep-shiny-cell-a5y2zuu0.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 
 # Branch 2
-postgresql://database_name_owner:AbC123dEf@ep-hidden-hall-a5x58cuv.us-east-2.aws.neon.tech/dbname
+postgresql://database_name_owner:AbC123dEf@ep-hidden-hall-a5x58cuv.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 You can create all of your branches from the default branch, or set up a dedicated branch that you use as a base. The first approach is simpler, while the second provides greater data isolation.
@@ -116,8 +116,9 @@ Here's how you can integrate Neon branching into your workflow:
 
 You can create a Neon branch for every developer on your team. This ensures that every developer has an isolated environment that includes schemas and data. These branches are meant to be long-lived, so each developer can tailor their branch based on their needs. With Neon's [branch reset capability](https://neon.com/docs/manage/branches#reset-a-branch-from-parent), developers can refresh their branch with the latest schemas and data anytime they need.
 
-   **Tip**: To easily identify branches dedicated to development, we recommend prefixing the branch name with `dev/<developer-name>` or `dev/<feature-name>` if multiple developers collaborate on the same development branch. 
-Examples: 
+   **Tip**: To easily identify branches dedicated to development, we recommend prefixing the branch name with `dev/<developer-name>` or `dev/<feature-name>` if multiple developers collaborate on the same development branch.
+
+Examples:
 
 ```bash
 dev/alice             dev/new-onboarding
@@ -127,13 +128,13 @@ dev/alice             dev/new-onboarding
 
 Whenever you create a pull request, you can create a Neon branch for your preview deployment. This allows you to test your code changes and SQL migrations against production-like data.
 
-   **Tip**: We recommend following this naming convention to identify these branches easily: 
+   **Tip**: We recommend following this naming convention to identify these branches easily:
 
 ```bash
 preview/pr-<pull_request_number>-<git_branch_name>
 ```
 
- Example: 
+Example:
 
 ```bash
 preview/pr-123-feat/new-login-screen
@@ -148,13 +149,13 @@ You can also automate branch creation for every preview. These example applicati
 
 When running automated tests that require a database, each test run can have its branch with its own compute resources. You can create a branch at the start of a test run and delete it at the end.
 
-   **Tip**: We recommend following this naming convention to identify these branches easily: 
+   **Tip**: We recommend following this naming convention to identify these branches easily:
 
 ```bash
 test/<git_branch_name-test_run_name-commit_SHA-time_of_the_test_execution>
 ```
 
- The time of the test execution can be an epoch UNIX timestamp (e.g., 1704305739). For example: 
+The time of the test execution can be an epoch UNIX timestamp (e.g., 1704305739). For example:
 
 ```bash
 test/feat/new-login-loginPageFunctionality-1a2b3c4d-20240211T1530

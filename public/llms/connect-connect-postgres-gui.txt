@@ -1,6 +1,6 @@
 # Connect a GUI application
 
-> The document "Connect a GUI application" outlines the steps for Neon users to connect PostgreSQL GUI applications to their Neon databases, detailing configuration settings and connection parameters specific to Neon.
+> The document outlines the steps for connecting a GUI application to a Neon PostgreSQL database, detailing configuration settings and connection parameters specific to Neon.
 
 ## Source
 
@@ -27,7 +27,7 @@ You can gather these details by clicking the **Connect** button on your **Projec
 The connection string includes the role, password, hostname, and database name.
 
 ```text
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
              ^              ^                                               ^
              |- <role>      |- <hostname>                                   |- <database>
 ```

@@ -1,6 +1,6 @@
 # Create and manage Read Replicas
 
-> The document titled "Create and manage Read Replicas" guides Neon users on how to set up and manage read replicas to distribute database read traffic and improve performance.
+> The document details the process for creating and managing read replicas in Neon, enabling users to distribute read workloads across multiple database instances to enhance performance and scalability.
 
 ## Source
 
@@ -80,7 +80,7 @@ Connecting to a read replica is the same as connecting to any branch, except you
    A **psql** connection string appears similar to the following:
 
    ```bash
-   postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
+   postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
    ```
 
    If you expect a high number of connections, enable the **Connection pooling** toggle to add the `-pooler` flag to the connection string or example.
@@ -212,7 +212,6 @@ If your read replicas are falling behind, follow these steps to diagnose and res
 
 2. **Verify configuration alignment**  
    If replication lag is detected, ensure that the configurations for the primary and read-replica computes are aligned. Specifically, confirm that the following parameters match between your primary compute and read-replica compute:
-
    - `max_connections`
    - `max_prepared_transactions`
    - `max_locks_per_transaction`

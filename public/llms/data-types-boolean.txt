@@ -1,6 +1,6 @@
 # Postgres Boolean data type
 
-> The document titled "Postgres Boolean data type" explains how to use the Boolean data type in Neon, detailing its syntax, valid values, and usage within SQL queries specific to Neon's PostgreSQL environment.
+> The document explains the Postgres Boolean data type, detailing its usage, syntax, and behavior within the Neon database environment.
 
 ## Source
 

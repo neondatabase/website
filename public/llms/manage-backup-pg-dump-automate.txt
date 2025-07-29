@@ -1,6 +1,6 @@
 # Automate pg_dump backups
 
-> The document titled "Automate pg_dump backups" guides Neon users on automating the process of creating backups of their PostgreSQL databases using the pg_dump utility.
+> The document outlines the process for automating PostgreSQL database backups using the `pg_dump` utility within the Neon environment, detailing the necessary steps and configurations to ensure regular and reliable data preservation.
 
 ## Source
 

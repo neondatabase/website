@@ -1,6 +1,6 @@
 # Schema migration with Neon Postgres and SQLAlchemy
 
-> The document outlines the process for performing schema migrations using Neon Postgres in conjunction with SQLAlchemy, detailing steps for setting up and executing migrations within this specific environment.
+> The document guides users on performing schema migrations using Neon Postgres and SQLAlchemy, detailing the steps to set up and execute migrations within a Neon database environment.
 
 ## Source
 
@@ -29,7 +29,7 @@ To follow along with this guide, you will need:
 You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
 
 ```bash
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 Keep your connection string handy for later use.

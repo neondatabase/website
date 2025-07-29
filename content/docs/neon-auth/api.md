@@ -1,7 +1,7 @@
 ---
 title: Manage Neon Auth using the API
 enableTableOfContents: true
-updatedOn: '2025-06-02T15:04:05.572Z'
+updatedOn: '2025-07-25T16:57:32.345Z'
 tag: beta
 redirectFrom:
   - /docs/guides/neon-auth-api
@@ -238,3 +238,212 @@ curl --request DELETE \
 ```
 
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/deleteneonauthintegration)
+
+## Manage OAuth providers via API
+
+You can programmatically manage OAuth providers for your Neon Auth project using the Neon API. The following endpoints allow you to add, list, update, and delete OAuth providers for a project.
+
+### List OAuth providers
+
+Lists the OAuth providers for the specified project.
+
+Required parameters:
+
+- `project_id` (string): The Neon project ID
+
+```bash shouldWrap
+curl --request GET \
+     --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/oauth_providers' \
+     --header 'authorization: Bearer $NEON_API_KEY'
+```
+
+Example response:
+
+```json shouldWrap
+{
+  "providers": [
+    { "id": "github", "type": "shared" },
+    { "id": "google", "type": "shared" }
+  ]
+}
+```
+
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/listneonauthoauthproviders)
+
+### Add an OAuth provider
+
+Adds an OAuth provider to the specified project.
+
+Required parameters:
+
+- `project_id` (string): The Neon project ID
+- `id` (string): The provider ID (e.g., `google`, `github`, `microsoft`)
+
+Optional parameters:
+
+- `client_id` (string): The OAuth client ID
+- `client_secret` (string): The OAuth client secret
+
+> If you do not provide `client_id` and `client_secret`, Neon will use shared keys for the provider. For production environments, you should always provide your own `client_id` and `client_secret` to ensure security and control. See [Production OAuth setup best practices](/docs/neon-auth/best-practices#production-oauth-setup) for details.
+
+```bash shouldWrap
+curl --request POST \
+     --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/oauth_providers' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '{
+       "id": "google",
+       "client_id": "your-client-id",
+       "client_secret": "your-client-secret",
+     }'
+```
+
+Example response:
+
+```json shouldWrap
+{
+  "id": "google",
+  "type": "standard",
+  "client_id": "your-client-id",
+  "client_secret": "your-client-secret"
+}
+```
+
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/addneonauthoauthprovider)
+
+### Update an OAuth provider
+
+Updates an OAuth provider for the specified project.
+
+Required parameters:
+
+- `project_id` (string): The Neon project ID
+- `oauth_provider_id` (string): The OAuth provider ID (e.g., `google`, `github`, `microsoft`)
+
+Optional parameters (request body):
+
+- `client_id` (string): The new OAuth client ID
+- `client_secret` (string): The new OAuth client secret
+
+```bash shouldWrap
+curl --request PATCH \
+     --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/oauth_providers/google' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '{
+       "client_id": "new-client-id",
+       "client_secret": "new-client-secret"
+     }'
+```
+
+Example response:
+
+```json shouldWrap
+{
+  "id": "google",
+  "type": "standard",
+  "client_id": "new-client-id",
+  "client_secret": "new-client-secret"
+}
+```
+
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/updateneonauthoauthprovider)
+
+### Delete an OAuth provider
+
+Deletes an OAuth provider from the specified project.
+
+Required parameters:
+
+- `project_id` (string): The Neon project ID
+- `oauth_provider_id` (string): The OAuth provider ID (e.g., `google`, `github`, `microsoft`)
+
+```bash shouldWrap
+curl --request DELETE \
+     --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/oauth_providers/google' \
+     --header 'authorization: Bearer $NEON_API_KEY'
+```
+
+A successful DELETE returns no response body (`204 No Content`).
+
+You can use the GET endpoint to confirm the provider has been removed.
+
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/deleteneonauthoauthprovider)
+
+## Get email server configuration
+
+Gets the email server configuration for the specified project.
+
+Required parameters:
+
+- `project_id`: Your Neon project ID
+
+```bash shouldWrap
+curl --request GET \
+     --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/email_server' \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY' | jq
+```
+
+Example response:
+
+```json shouldWrap
+{
+  "type": "shared"
+}
+```
+
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/getneonauthemailserver)
+
+## Update email server configuration
+
+Updates the email server configuration for the specified project.
+
+Required parameters:
+
+- `project_id`: Your Neon project ID
+
+Request body parameters:
+
+- `type`: Type of email server, `"shared"` or `"standard"` (standard = custom email server)
+- `host`: SMTP server hostname (required for custom SMTP)
+- `port`: SMTP server port (required for custom SMTP)
+- `username`: SMTP username (required for custom SMTP)
+- `password`: SMTP password (required for custom SMTP)
+- `sender_email`: Email address that will appear as the sender (required for custom SMTP)
+- `sender_name`: Name that will appear as the sender (required for custom SMTP)
+
+```bash shouldWrap
+curl --request PATCH \
+     --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/email_server' \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '{
+       "type": "standard",
+       "host": "smtp.gmail.com",
+       "port": 587,
+       "username": "your-email@gmail.com",
+       "password": "your-app-password",
+       "sender_email": "noreply@yourcompany.com",
+       "sender_name": "Your Company"
+     }' | jq
+```
+
+Example response:
+
+```json shouldWrap
+{
+  "type": "standard",
+  "host": "smtp.gmail.com",
+  "port": 587,
+  "username": "your-email@gmail.com",
+  "password": "your-app-password",
+  "sender_email": "noreply@yourcompany.com",
+  "sender_name": "Your Company"
+}
+```
+
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/updateneonauthemailserver)
+
+<NeedHelp />

@@ -1,6 +1,6 @@
 # Branching with the Neon CLI
 
-> The document "Branching with the Neon CLI" details the process of creating and managing database branches using the Neon Command Line Interface, enabling users to efficiently handle database versions within the Neon environment.
+> The document "Branching with the Neon CLI" details how to use the Neon Command Line Interface to create and manage database branches, enabling users to efficiently handle multiple development environments within Neon.
 
 ## Source
 
@@ -71,7 +71,7 @@ connection_uris
 ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 │ Connection Uri                                                                                               │
 ├──────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ postgresql://neondb_owner:123456@ep-orange-heart-a54grm9j.us-east-2.aws.neon.tech/neondb?sslmode=require     │
+│ postgresql://neondb_owner:123456@ep-orange-heart-a54grm9j.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require     │
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 

@@ -1,6 +1,6 @@
 # Stream database changes in real-time with Prisma Pulse
 
-> The document explains how Neon users can utilize Prisma Pulse to stream database changes in real-time by setting up logical replication, detailing the necessary steps and configurations within the Neon environment.
+> This document explains how to use Prisma Pulse for streaming real-time database changes in Neon, detailing the setup and configuration of logical replication to enable seamless data synchronization.
 
 ## Source
 

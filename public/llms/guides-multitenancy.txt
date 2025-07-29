@@ -1,6 +1,6 @@
 # Multitenancy with Neon
 
-> The "Multitenancy with Neon" document explains how to implement and manage multitenancy in Neon, detailing the configuration and usage of separate tenant environments within a single Neon database instance.
+> The "Multitenancy with Neon" documentation explains how to implement and manage multitenancy in Neon, detailing configuration steps and best practices for efficiently handling multiple tenants within a single database instance.
 
 ## Source
 
@@ -172,7 +172,6 @@ Both approaches are viable, each with its own pros and cons.
   Ensure secure access as all users share the same application environment.
 
 - **Define user authentication and data routing**
-
   - Users provide their organization details during login.
   - Users access the application via an organization-specific subdomain.
   - The system identifies the user's organization based on their credentials.
@@ -564,7 +563,7 @@ Before diving into the code, here's a look at this example in the Neon console d
 
 
 
-Using the same naming conventions, there are three new files in the ``.github/workflows` folder in the repository:
+Using the same naming conventions, there are three new files in the `.github/workflows` folder in the repository:
 
 1. `paycorp-payments-prod.yml`
 2. `acme-analytics-prod.yml`

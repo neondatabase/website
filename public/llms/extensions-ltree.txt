@@ -1,6 +1,6 @@
 # The ltree extension
 
-> The document details the ltree extension for Neon, which enables users to store and query data in a hierarchical tree-like structure within a PostgreSQL database.
+> The document details the ltree extension for Neon, which enables users to store and query hierarchical data structures using labels and paths within a PostgreSQL database.
 
 ## Source
 

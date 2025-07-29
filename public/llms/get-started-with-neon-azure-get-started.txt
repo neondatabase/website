@@ -1,6 +1,6 @@
 # Get started with Neon on Azure
 
-> The document "Get started with Neon on Azure" guides users through the process of deploying and configuring Neon, a serverless PostgreSQL database, on Microsoft Azure, detailing steps for setup, connection, and initial usage.
+> The document guides users through the process of setting up and deploying Neon on Microsoft Azure, detailing the necessary steps and configurations specific to integrating Neon with Azure services.
 
 ## Source
 

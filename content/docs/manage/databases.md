@@ -2,7 +2,7 @@
 title: Manage databases
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-05-05T21:22:28.479Z'
+updatedOn: '2025-07-22T11:19:18.886Z'
 ---
 
 A database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In the [Neon object hierarchy](/docs/manage/overview), a database exists within a branch of a project. There is a limit of 500 databases per branch.
@@ -39,7 +39,7 @@ To create a database:
 1. Select **Branches** from the sidebar.
 1. Select the branch where you want to create the database.
 1. Select the **Roles** & **Databases** tab.
-1. Click **Add Database**.
+1. Click **Add database**.
 1. Enter a database name, and select a database owner.
 1. Click **Create**.
 

@@ -1,6 +1,6 @@
 # Neon RLS tutorial
 
-> The Neon RLS tutorial is a guide that instructs users on implementing Row-Level Security (RLS) in Neon databases, detailing steps to enhance data access control by configuring policies that restrict data visibility at the row level.
+> The Neon RLS tutorial document guides users through implementing Row-Level Security (RLS) in Neon databases, detailing steps to enhance data access control by configuring policies and roles.
 
 ## Source
 

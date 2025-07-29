@@ -1,6 +1,6 @@
 # Neon ORM guides
 
-> The Neon ORM guides document outlines the steps for integrating various Object-Relational Mappers (ORMs) with Neon, assisting users in setting up and managing database interactions within their applications.
+> The Neon ORM guides document outlines how to integrate and use various Object-Relational Mappers (ORMs) with Neon, detailing setup instructions and configuration steps specific to Neon's database environment.
 
 ## Source
 

@@ -7,8 +7,8 @@ import LINKS from 'constants/links';
 import sparks from './images/sparks.png';
 
 const Hero = () => (
-  <section className="hero safe-paddings relative pt-[136px] lg:pt-16 md:pt-12">
-    <Container className="md:max-w-[640px] md:px-5" size="768">
+  <section className="hero safe-paddings relative mt-[136px] xl:mt-[126px] lg:mt-14 md:mt-12">
+    <Container className="lg:!max-w-[640px] md:px-5" size="832">
       <div className="relative mb-10 size-[72px] lg:mb-8 lg:size-16 lg:rounded-[14px] md:mb-7 md:size-14">
         <Image
           className="relative z-10 size-full rounded-2xl shadow-[0px_5px_14px_0px_rgba(0,0,0,0.6)] md:rounded-xl"
@@ -28,14 +28,16 @@ const Hero = () => (
           aria-hidden
         />
       </div>
-      <h1 className="max-w-[646px] font-title text-[60px] font-medium leading-none tracking-extra-tight xl:text-[56px] lg:max-w-xl lg:text-5xl md:max-w-full md:text-4xl">
-        Postgres for&nbsp;AI. <br className="md:hidden" />
+      <h1 className="max-w-3xl font-title text-[60px] font-medium leading-none tracking-extra-tight xl:text-[56px] lg:max-w-xl lg:text-5xl md:max-w-full md:text-[36px]">
+        Neon for&nbsp;AI.{' '}
         <span className="text-gray-new-60">
-          Perfect for Agents, AI&nbsp;coding, or just&nbsp;vibing.
+          Designed for agents. Optimized for vectors. Backed{' '}
+          <br className="hidden md:inline-block" />
+          by Postgres.
         </span>
       </h1>
       <Button
-        className="mt-9 h-12 min-w-40 px-[38px] font-semibold tracking-tighter lg:mt-7 md:mt-6"
+        className="mt-9 h-12 min-w-40 px-[38px] font-semibold tracking-tighter lg:mt-7 md:mt-6 md:h-11 md:min-w-min md:px-10"
         theme="primary"
         to={LINKS.signup}
         target="_blank"

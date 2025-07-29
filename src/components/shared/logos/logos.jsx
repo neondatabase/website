@@ -15,6 +15,7 @@ import CodeInstituteLogo from './images/code-institute.inline.svg';
 import ComigoLogo from './images/comigo.inline.svg';
 import CommureLogo from './images/commure.inline.svg';
 import CreateLogo from './images/create.inline.svg';
+import DatabuttonLogo from './images/databutton.inline.svg';
 import EncoreLogo from './images/encore.inline.svg';
 import EqtLogo from './images/eqt.inline.svg';
 import Fl0Logo from './images/fl0.inline.svg';
@@ -28,8 +29,10 @@ import OutfrontLogo from './images/outfront7.inline.svg';
 import ReplitLogo from './images/replit.inline.svg';
 import RetoolLogo from './images/retool.inline.svg';
 import RubricLogo from './images/rubric.inline.svg';
+import SameLogo from './images/same.inline.svg';
 import ShakudoLogo from './images/shakudo.inline.svg';
 import SnapletLogo from './images/snaplet.inline.svg';
+import SolarLogo from './images/solar.inline.svg';
 import SupergoodLogo from './images/supergood.inline.svg';
 import FabricIoLogo from './images/the-fabric-io.inline.svg';
 import VercelLogo from './images/vercel.inline.svg';
@@ -50,6 +53,7 @@ const allLogos = {
   comigo: ComigoLogo,
   commure: CommureLogo,
   create: CreateLogo,
+  databutton: DatabuttonLogo,
   encore: EncoreLogo,
   eqt: EqtLogo,
   'fabric-io': FabricIoLogo,
@@ -64,6 +68,8 @@ const allLogos = {
   replit: ReplitLogo,
   retool: RetoolLogo,
   rubric: RubricLogo,
+  same: SameLogo,
+  solar: SolarLogo,
   shakudo: ShakudoLogo,
   snaplet: SnapletLogo,
   supergood: SupergoodLogo,
@@ -78,10 +84,10 @@ const sizes = {
   lg: 'h-10 md:h-8',
 };
 
-const LogosWall = ({ className, logoClassName, logos, size = 'lg' }) => (
-  <div className={clsx('logos logos-sides-fade flex w-full overflow-hidden', className)}>
+const LogosWall = ({ className, logoClassName, logos, size = 'lg', gap }) => (
+  <div className={clsx('logos logos-sides-fade flex w-full overflow-hidden', gap, className)}>
     {Array.from({ length: 2 }).map((_, index) => (
-      <ul key={index} className="logos-content" aria-hidden={index > 0 && 'true'}>
+      <ul key={index} className={clsx('logos-content', gap)} aria-hidden={index > 0 && 'true'}>
         {logos.map((logo, index) => {
           const Logo = allLogos[logo];
           if (!Logo) return null;
@@ -101,6 +107,7 @@ LogosWall.propTypes = {
   logoClassName: PropTypes.string,
   logos: PropTypes.arrayOf(PropTypes.oneOf(Object.keys(allLogos))).isRequired,
   size: PropTypes.oneOf(Object.keys(sizes)),
+  gap: PropTypes.string,
 };
 
 const Logos = ({ className = '', withGreenFade = false, logos, size }) => (

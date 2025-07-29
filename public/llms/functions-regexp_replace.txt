@@ -1,6 +1,6 @@
 # Postgres regexp_replace() function
 
-> The document explains the usage of the Postgres `regexp_replace()` function within Neon, detailing its syntax and parameters for replacing substrings in a string using regular expressions.
+> The document details the usage of the Postgres `regexp_replace()` function within Neon, explaining its syntax and parameters for replacing substrings that match a regular expression pattern in a given string.
 
 ## Source
 

@@ -1,6 +1,6 @@
 # Connect a RedwoodSDK application to Neon
 
-> The document outlines the steps for connecting a RedwoodSDK application to a Neon database, detailing the necessary configuration and code adjustments specific to Neon's environment.
+> The document outlines the steps to connect a RedwoodSDK application to a Neon database, detailing configuration settings and code examples necessary for establishing a successful connection.
 
 ## Source
 
@@ -35,24 +35,24 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 3.  Add project dependencies using one of the following commands:
 
-    
+    Tab: postgres.js
 
     ```shell
     npm install postgres
     ```
 
+Tab: Neon serverless driver
+
     ```shell
     npm install @neondatabase/serverless
     ```
-
-    
 
 ## Store your Neon credentials
 
 Add a `.env` file to your project directory and add your Neon connection string to it. You can find your Neon database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).
 
 ```shell
-DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require"
+DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
 ```
 
 ## Configure the Postgres client

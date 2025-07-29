@@ -2,7 +2,7 @@
 title: Neon Auth best practices & FAQ
 enableTableOfContents: true
 tag: beta
-updatedOn: '2025-05-16T19:06:06.839Z'
+updatedOn: '2025-07-25T16:57:32.348Z'
 redirectFrom:
   - /docs/guides/neon-auth-best-practices
 ---
@@ -99,6 +99,78 @@ To get started adding RLS to your Neon Auth project:
    For these steps, you can follow the [Stack Auth + Neon RLS guide](/docs/guides/neon-rls-stack-auth) starting from [step 3](/docs/guides/neon-rls-stack-auth#3-install-the-pgsessionjwt-extension-in-your-database). Neon Auth uses Stack Auth under the hood, so the RLS integration process is the same from this point onward.
 
 For a full walkthrough, see [About Neon RLS](/docs/guides/neon-rls) and the [Neon RLS Tutorial](/docs/guides/neon-rls-tutorial).
+
+## Production OAuth setup
+
+To securely use OAuth in production, you must configure your own OAuth credentials for each provider. Shared keys are for development only and will display "Stack Development" on the provider's consent screen, which is not secure or branded for your app.
+
+Follow these steps for each provider you use:
+
+<Steps>
+
+### Create an OAuth app
+
+On the provider's website, create an OAuth app and set the callback URL to the corresponding Neon Auth callback URL. Copy the client ID and client secret.
+
+<Tabs labels={["Google", "GitHub", "Microsoft"]}>
+
+<TabItem>
+[Google OAuth Setup Guide](https://developers.google.com/identity/protocols/oauth2#1.-obtain-oauth-2.0-credentials-from-the-dynamic_data.setvar.console_name-)
+
+**Callback URL:**
+
+```
+https://api.stack-auth.com/api/v1/auth/oauth/callback/google
+```
+
+</TabItem>
+
+<TabItem>
+[GitHub OAuth Setup Guide](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app)
+
+**Callback URL:**
+
+```
+https://api.stack-auth.com/api/v1/auth/oauth/callback/github
+```
+
+</TabItem>
+
+<TabItem>
+[Microsoft Azure OAuth Setup Guide](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app)
+
+**Callback URL:**
+
+```
+https://api.stack-auth.com/api/v1/auth/oauth/callback/microsoft
+```
+
+</TabItem>
+
+</Tabs>
+
+### Enter OAuth credentials in Neon Auth
+
+Go to the **OAuth providers** section in the Neon Auth dashboard.
+
+Click **Add OAuth Provider**, choose your provider from the list, and enter the client ID and secret you copied from your provider’s developer portal.
+
+![Add OAuth Provider UI](/docs/neon-auth/neon-auth-add-oauth-provider.png)
+
+</Steps>
+## Email server
+
+For development, Neon Auth uses a shared email server, which sends emails from `noreply@stackframe.co`. This is not ideal for production as users may not trust emails from an unfamiliar domain. For production, we recommend setting up an email server connected to your own domain.
+
+1. **Setup Email Server**
+
+   Configure your own email server and connect it to your domain (check your email server docs for details).
+
+2. **Configure Neon Auth's Email Settings**
+
+   Navigate to the **Auth** page in the Neon Console, go to the **Configuration** tab, find the **Email server** section, switch from "Shared" to "Custom SMTP server", enter your SMTP configurations, and save.
+
+For detailed configuration instructions, see [Email Configuration](/docs/neon-auth/email-configuration).
 
 ## Limitations
 

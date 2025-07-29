@@ -1,6 +1,6 @@
 # Manage database access
 
-> The "Manage database access" document outlines procedures for Neon users to control and configure access to their databases, including setting up roles, permissions, and authentication methods.
+> The document outlines procedures for managing database access in Neon, detailing how to configure user roles, permissions, and authentication methods to control and secure database interactions.
 
 ## Source
 

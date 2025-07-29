@@ -1,6 +1,6 @@
 # The @neondatabase/toolkit
 
-> The document details the @neondatabase/toolkit, a set of command-line tools designed to assist Neon users in managing and interacting with their Neon database instances efficiently.
+> The @neondatabase/toolkit documentation outlines the tools and commands available for managing and interacting with Neon databases, facilitating efficient database operations and maintenance tasks.
 
 ## Source
 

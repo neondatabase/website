@@ -1,6 +1,6 @@
 # Get started with logical replication
 
-> The document titled "Get started with logical replication" guides Neon users through setting up logical replication to stream database changes to external systems, detailing configuration steps and necessary commands specific to Neon's environment.
+> The document outlines the steps for setting up logical replication in Neon, detailing how to configure a publisher and subscriber to replicate data changes between databases.
 
 ## Source
 

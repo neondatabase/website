@@ -1,6 +1,6 @@
 # Manage Neon Organizations
 
-> The "Manage Neon Organizations" document outlines procedures for creating, configuring, and managing organizations within the Neon platform, detailing user roles, permissions, and organizational settings specific to Neon users.
+> The "Manage Neon Organizations" documentation outlines procedures for creating, managing, and configuring organizations within the Neon platform, detailing user roles, permissions, and organizational settings.
 
 ## Source
 

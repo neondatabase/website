@@ -1,6 +1,6 @@
 # Postgres tsvector data type
 
-> The document explains the Postgres `tsvector` data type, detailing its use in Neon for storing preprocessed text data to facilitate efficient full-text search operations.
+> The document explains the Postgres `tsvector` data type, detailing its structure and usage within Neon for full-text search capabilities.
 
 ## Source
 

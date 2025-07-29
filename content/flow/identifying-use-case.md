@@ -1,5 +1,6 @@
 ---
 title: 'Identifying your use case'
+subtitle: 'Choose the right branching strategy based on your production setup, data sensitivity, and team workflow'
 updatedOn: '2025-07-08T12:47:21.296Z'
 ---
 
@@ -9,4 +10,4 @@ For teams used to traditional server-based databases (managing long-lived instan
 
 This section outlines common branching strategies based on real-world patterns. Navigate to the scenario that most resembles your use case.
 
-![Decision tree](/images/flow/decision-tree.png)
+![Decision tree](/images/pages/flow/decision-tree.png)

@@ -1,6 +1,6 @@
 # The intarray extension
 
-> The document details the intarray extension for Neon, which enables users to perform operations on integer arrays within PostgreSQL databases, enhancing data manipulation capabilities specific to Neon's database environment.
+> The document details the intarray extension for Neon, which enhances PostgreSQL by enabling operations on integer arrays, such as searching, sorting, and performing set operations, to optimize database performance and functionality.
 
 ## Source
 

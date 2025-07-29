@@ -1,6 +1,6 @@
 # Postgres random() function
 
-> The document explains the usage of the Postgres `random()` function within the Neon environment, detailing how it generates a random floating-point number between 0 and 1 for database operations.
+> The document explains the usage of the Postgres `random()` function within Neon, detailing its syntax and examples for generating random numbers in SQL queries.
 
 ## Source
 
@@ -41,6 +41,7 @@ SELECT random(1, 6); -- Generates a random integer between 1 and 6
 
 SELECT random(1.5, 3.54); -- Generates a random decimal number between 1.5 and 3.54 with 2 decimal places precision
 -- 2.66
+
 ```
 
 ### Basic random number generation

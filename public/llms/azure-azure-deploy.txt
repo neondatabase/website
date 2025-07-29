@@ -1,6 +1,6 @@
 # Deploy Neon on Azure
 
-> The document "Deploy Neon on Azure" outlines the steps for deploying the Neon database on Microsoft Azure, detailing the necessary configurations and commands specific to Neon's integration with Azure services.
+> The document outlines the steps to deploy Neon on Microsoft Azure, detailing the configuration and setup process specific to Neon's requirements on the Azure platform.
 
 ## Source
 

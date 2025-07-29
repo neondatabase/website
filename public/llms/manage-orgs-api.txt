@@ -1,6 +1,6 @@
 # Manage organizations using the Neon API
 
-> The document "Manage organizations using the Neon API" details how to use the Neon API to create, update, and manage organizations within the Neon platform.
+> The document details how to manage organizations using the Neon API, including creating, updating, and deleting organizations, and managing organization members and roles within the Neon platform.
 
 ## Source
 

@@ -2,7 +2,7 @@
 title: Neon ORM guides
 subtitle: Find detailed instructions for connecting to Neon from various ORMs
 enableTableOfContents: true
-updatedOn: '2025-02-24T15:53:13.356Z'
+updatedOn: '2025-07-29T10:34:33.836Z'
 ---
 
 <TechCards>
@@ -10,6 +10,8 @@ updatedOn: '2025-02-24T15:53:13.356Z'
 <a href="/docs/guides/django" title="Django" description="Connect a Django application to Neon" icon="django"></a>
 
 <a href="/docs/guides/drizzle" title="Drizzle" description="Learn how to use Drizzle ORM with your Neon Postgres database (Drizzle docs)" icon="drizzle"></a>
+
+<a href="/docs/guides/elixir-ecto" title="Elixir Ecto" description="Connect from Elixir with Ecto to Neon" icon="elixir"></a>
 
 <a href="/docs/guides/laravel" title="Laravel" description="Connect a Laravel application to Neon" icon="laravel"></a>
 

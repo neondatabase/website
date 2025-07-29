@@ -1,6 +1,6 @@
 # The pg_trgm extension
 
-> The document details the pg_trgm extension for Neon, which enables users to perform fast and efficient text searches by utilizing trigram-based indexing and similarity operations within their databases.
+> The document details the installation and usage of the pg_trgm extension in Neon, enabling users to perform text similarity searches and index text data efficiently within their databases.
 
 ## Source
 

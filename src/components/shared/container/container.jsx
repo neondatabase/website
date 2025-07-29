@@ -18,6 +18,7 @@ const styles = {
     1152: 'max-w-6xl',
     1100: 'max-w-[1100px]',
     960: 'max-w-[960px] md:px-5',
+    832: 'max-w-[832px]',
     768: 'max-w-3xl',
     576: 'max-w-[576px]',
   },

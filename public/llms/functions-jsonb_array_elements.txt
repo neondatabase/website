@@ -1,6 +1,6 @@
 # Postgres jsonb_array_elements() function
 
-> The document explains the usage of the Postgres `jsonb_array_elements()` function within Neon, detailing how it expands a JSONB array into a set of JSONB values, facilitating data manipulation and querying in JSONB arrays.
+> The document explains the usage of the `jsonb_array_elements()` function in PostgreSQL, detailing how it can be used within Neon to expand JSONB arrays into a set of JSONB values.
 
 ## Source
 

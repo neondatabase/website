@@ -1,6 +1,6 @@
 # Postgres logical replication concepts
 
-> The document "Postgres logical replication concepts" explains the principles of logical replication in PostgreSQL, detailing how Neon users can replicate data changes between databases using logical decoding and replication slots.
+> The document outlines the concepts of Postgres logical replication, detailing its architecture, components, and processes, specifically for Neon users to understand and implement logical replication within their database systems.
 
 ## Source
 

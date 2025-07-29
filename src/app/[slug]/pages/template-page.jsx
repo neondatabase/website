@@ -31,7 +31,6 @@ const TemplatePage = ({ params }) => {
 
   const post = getPostBySlug(slug, TEMPLATE_PAGES_DIR_PATH);
   if (!post) return notFound();
-
   const { data, content } = post;
   const tableOfContents = getTableOfContents(content);
   const gitHubPath = `${TEMPLATE_PAGES_DIR_PATH}/${slug}.md`;

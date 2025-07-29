@@ -1,6 +1,6 @@
 # Azure Data Studio Notebooks
 
-> The document "Azure Data Studio Notebooks" explains how Neon users can utilize Azure Data Studio Notebooks to interact with and manage their Neon databases, detailing setup, configuration, and usage instructions specific to Neon's environment.
+> The document outlines how to use Azure Data Studio Notebooks with Neon, detailing steps for connecting to a Neon database and executing SQL queries within the notebook environment.
 
 ## Source
 

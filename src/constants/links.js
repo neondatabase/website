@@ -21,7 +21,6 @@ export default {
   partners: '/partners',
   awsIsrael: '/partners/aws-israel',
   migration: '/migration',
-  migrationAssistance: '/migration-assistance',
   postgresqltutorial: '/postgresql/tutorial',
   pricing: '/pricing',
   platforms: '/platforms',
@@ -35,6 +34,8 @@ export default {
   templates: '/templates',
   thankYou: '/thank-you',
   useCases: '/use-cases',
+  useCasesAI: '/use-cases/ai-agents',
+
   // Docs
   docs: '/docs',
   docsHome: '/docs/introduction',
@@ -52,6 +53,7 @@ export default {
   docsMigration: '/docs/import/import-data-assistant',
   manageBilling: '/docs/introduction/manage-billing',
   pgSearch: '/docs/extensions/pg_search',
+  docsPgvector: '/docs/extensions/pgvector',
   rlsAuthorize: '/docs/guides/neon-rls',
   serverless: '/docs/introduction/serverless',
   support: '/docs/introduction/support',

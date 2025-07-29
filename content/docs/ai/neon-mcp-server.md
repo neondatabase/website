@@ -3,7 +3,7 @@ title: Neon MCP Server
 subtitle: Manage your Neon Postgres databases using natural language commands with the
   Neon MCP Server.
 enableTableOfContents: true
-updatedOn: '2025-07-09T11:58:35.356Z'
+updatedOn: '2025-07-24T10:16:57.844Z'
 ---
 
 The **Neon MCP Server** is an open-source tool that lets you interact with your Neon Postgres databases in **natural language**.
@@ -101,57 +101,12 @@ Click the button below to install the Neon MCP server in Cursor. When prompted, 
 
 ### Local MCP Server
 
-You can install Neon MCP server locally using `npm` or `smithey`.
+You can install Neon MCP server locally using `npm`.
 
 #### Prerequisites
 
 - **Node.js (>= v18.0.0):** Ensure Node.js version 18 or higher is installed on your system. You can download it from [nodejs.org](https://nodejs.org/).
 - **Neon API Key:** You will need a Neon API key to authenticate the Neon MCP Server with your Neon account. You can create one from the [Neon Console](https://console.neon.tech/app/settings/api-keys) under your Profile settings. Refer to the [Neon documentation on API Keys](/docs/manage/api-keys#creating-api-keys) for detailed instructions.
-
-<Admonition type="note">
-We recommend using Smithery for installation, as it streamlines the process and guarantees compatibility across MCP clients.
-</Admonition>
-
-#### Installation via Smithery - MCP Registry
-
-[Smithery](https://smithery.ai) provides a streamlined method for installing MCP servers.
-
-1.  Open your terminal.
-2.  Run the Smithery installation command:
-
-    ```bash
-    npx -y @smithery/cli install neon --client <client_name>
-    ```
-
-    Replace `<client_name>` with the name of your MCP client application. Supported client names include:
-    - `claude` for [Claude Desktop](https://claude.ai/download)
-    - `cursor` for [Cursor](https://cursor.com) (Installing via `smithery` makes the MCP server a global MCP server in Cursor)
-    - `windsurf` for [Windsurf Editor](https://codeium.com/windsurf)
-    - `roo-cline` for [Roo Cline VS Code extension](https://github.com/RooVetGit/Roo-Code)
-    - `witsy` for [Witsy](https://witsyai.com/)
-    - `enconvo` for [Enconvo](https://www.enconvo.com/)
-    - `vscode` for [Visual Studio Code (Preview)](https://code.visualstudio.com/docs/copilot/chat/mcp-servers)
-
-    For example, to install for Claude Desktop, use:
-
-    ```bash
-    npx -y @smithery/cli install neon --client claude
-    ```
-
-    You will be then prompted to enter the Neon API key.
-
-    ```text
-    ✔ Successfully resolved neon
-    Installing remote server. Please ensure you trust the server author, especially when sharing sensitive data.
-    For information on Smithery's data policy, please visit: https://smithery.ai/docs/data-policy
-    ? The API key for accessing the Neon. You can generate one through the Neon console. (required)
-    *********************************************************************
-    neon successfully installed for claude
-    ```
-
-3.  Restart your MCP Client application. For example, if you are using Claude Desktop, quit and reopen the application.
-
-#### Installation via npm
 
 Open your MCP client application and navigate to the settings where you can configure MCP servers. The location of these settings may vary depending on your client. Add a configuration block for "Neon" under the `mcpServers` key. Your configuration should look like this:
 
@@ -260,7 +215,7 @@ The Neon MCP Server supports streamable HTTP as an alternative to Server-Sent Ev
 ```json
 {
   "mcpServers": {
-    "sentry": {
+    "neon": {
       "command": "npx",
       "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/mcp"]
     }
@@ -276,7 +231,9 @@ The Neon MCP server provides access to powerful tools for interacting with your 
 
 - Use MCP only for **local development** or **IDE-based workflows**.
 - Never connect MCP agents to production databases.
+- Avoid exposing production data or PII data to MCP — only use anonymized data.
 - Disable MCP tools capable of accessing or modifying data when they are not being used.
+- Only grant MCP access to trusted users.
 
 ### Human oversight and access control
 

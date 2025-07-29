@@ -1,6 +1,6 @@
 # The pg_mooncake extension
 
-> The document details the pg_mooncake extension for Neon, which enables users to perform advanced data transformations and analytics within their PostgreSQL databases.
+> The document details the pg_mooncake extension for Neon, which enables users to manage and manipulate JSON data within PostgreSQL databases efficiently.
 
 ## Source
 

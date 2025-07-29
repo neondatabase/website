@@ -1,6 +1,6 @@
 # The postgis extension
 
-> The document titled "The postgis extension" explains how to enable and use the PostGIS extension within Neon, allowing users to manage and query spatial data in their Neon databases.
+> The document details the installation and usage of the PostGIS extension within Neon, enabling spatial database capabilities for handling geographic objects in PostgreSQL databases.
 
 ## Source
 

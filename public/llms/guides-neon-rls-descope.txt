@@ -1,6 +1,6 @@
 # Secure your data with Descope and Neon RLS
 
-> The document explains how to integrate Descope with Neon to implement Row-Level Security (RLS), enabling Neon users to secure their data by controlling access at the row level within their databases.
+> The document outlines how to integrate Descope with Neon Row-Level Security (RLS) to enhance data security by managing access controls and permissions at the row level within a Neon database.
 
 ## Source
 

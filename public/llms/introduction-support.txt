@@ -1,6 +1,6 @@
 # Support
 
-> The "Support" document outlines the various support channels available to Neon users, including community forums, email support, and premium support options, to address technical issues and inquiries.
+> The "Support" document outlines the available support channels and resources for Neon users, detailing how to access assistance and resolve issues related to Neon's database services.
 
 ## Source
 
@@ -38,11 +38,9 @@ The support channels you can access differ according to your [Support Plan](http
 | [Dedicated Support Engineer](https://neon.com/docs/introduction/support#dedicated-support-engineer)                     |     -     |    -     |    -     |    \*\*    |
 
 <div style={{margin: '-30px 0 30px 0'}}>
-<small><sup>*</sup>[Video chats](https://neon.com/docs/introduction/support#video-chat) may be scheduled on a case-by-case basis.</small>
-
+<small><sup>*</sup>[Video chats](https://neon.com/docs/introduction/support#video-chat) may be scheduled on a case-by-case basis.</small><br/>
 <small><sup>**</sup>[Slack channels](https://neon.com/docs/introduction/support#slack-channel) and [Dedicated Support Engineers](https://neon.com/docs/introduction/support#dedicated-support-engineer) are available as a paid addons.</small>
-
-
+</div>
 
 ### Neon Discord Server
 
@@ -54,11 +52,9 @@ All Neon users have access to the [Neon Discord Server](https://discord.gg/92vNT
 
 Neon AI chat assistance is available to all Neon users. You can access it from these locations:
 
-- **Neon Console**: Use the **Search Docs** field above the sidebar in the [Neon console](https://console.neon.tech/app/projects)
+- **Neon Console**: Select the **Get help** option from the help menu (`?`) in the Neon Console.
 - **Neon documentation**: Toggle **Ask Neon AI** on the [Neon documentation](https://neon.com/docs/introduction) site
 - **Discord**: Join the **#gpt-help** channel on the [Neon Discord server](https://discord.gg/92vNTzKDGp)
-- **GitHub**: Install the [Neon Database Copilot extension](https://github.com/marketplace/neon-database)
-- **Visual Studio**: Use the [Neon chat for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=buildwithlayer.neon-integration-expert-15j6N) extension
 
 
 

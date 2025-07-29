@@ -1,6 +1,6 @@
 # Migrate data from Postgres with pg_dump and pg_restore
 
-> The document outlines the process for Neon users to migrate data from a PostgreSQL database using the `pg_dump` and `pg_restore` commands, detailing steps for exporting and importing data efficiently.
+> The document details the process of migrating data from a PostgreSQL database to Neon using the `pg_dump` and `pg_restore` tools, outlining step-by-step instructions for executing the migration efficiently.
 
 ## Source
 

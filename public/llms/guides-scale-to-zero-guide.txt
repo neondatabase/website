@@ -1,6 +1,6 @@
 # Configuring Scale to Zero for Neon computes
 
-> The document titled "Configuring Scale to Zero for Neon computes" guides users on setting up the Scale to Zero feature in Neon, enabling automatic suspension of compute resources when not in use.
+> The document outlines the process for configuring the "Scale to Zero" feature in Neon, enabling users to automatically pause compute resources when not in use, optimizing resource management and cost efficiency.
 
 ## Source
 

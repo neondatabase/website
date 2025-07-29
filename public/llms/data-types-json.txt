@@ -1,6 +1,6 @@
 # Postgres JSON data types
 
-> The document "Postgres JSON data types" explains how Neon users can utilize JSON and JSONB data types in PostgreSQL to store and manipulate JSON data within their databases.
+> The document outlines the use of JSON data types in PostgreSQL within the Neon platform, detailing how to store, query, and manipulate JSON data effectively in a Neon-managed PostgreSQL database.
 
 ## Source
 

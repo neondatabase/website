@@ -1,6 +1,6 @@
 # Reset from parent
 
-> The "Reset from parent" document guides Neon users on how to reset a branch to its parent state, detailing the steps to revert changes and restore the branch to a previous point in its history.
+> The "Reset from parent" documentation guides Neon users on how to reset a branch to its parent state, detailing the steps and commands necessary to revert changes and restore the branch's original data state.
 
 ## Source
 

@@ -1,6 +1,6 @@
 # The citext Extension
 
-> The document explains the installation and usage of the citext extension in Neon, enabling case-insensitive text handling within PostgreSQL databases.
+> The document details the citext extension for Neon, which enables case-insensitive text handling in PostgreSQL databases by treating text values as case-insensitive for comparison and sorting operations.
 
 ## Source
 

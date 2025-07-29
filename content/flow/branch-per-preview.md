@@ -1,5 +1,6 @@
 ---
 title: 'One branch per preview'
+subtitle: 'Automatically create isolated database environments for every pull request and preview deployment'
 updatedOn: '2025-07-08T12:47:21.296Z'
 ---
 

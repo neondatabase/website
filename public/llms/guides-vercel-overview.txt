@@ -1,36 +1,74 @@
-# Neon and Vercel overview
+# Integrating Neon with Vercel
 
-> The "Neon and Vercel overview" document explains how to integrate Neon, a serverless Postgres database, with Vercel, a platform for frontend frameworks and static sites, detailing the setup and deployment process.
+> The document outlines the process for integrating Neon with Vercel, detailing steps for connecting a Neon database to a Vercel application to facilitate seamless deployment and management of serverless applications.
 
 ## Source
 
-- [Neon and Vercel overview HTML](https://neon.com/docs/guides/vercel-overview): The original HTML version of this documentation
+- [Integrating Neon with Vercel HTML](https://neon.com/docs/guides/vercel-overview): The original HTML version of this documentation
 
-Neon supports different options for integrating Neon and Vercel, including a native integration that you can install from the Vercel Marketplace, a "previews integration" that creates a database branch with every pull request, and a manual setup option. If you're currently a Vercel Postgres user, you'll also find information below about the upcoming transition from Vercel Postgres to Neon.
+## Overview
 
-## Option 1: Vercel Native Integration
+This page helps you quickly choose the best Neon–Vercel integration for your project. Whether you're starting fresh or have existing infrastructure, we'll guide you to the right solution.
 
-This integration is intended for Vercel users who want to add Neon Postgres to their Vercel project as a [first-party native integration](https://vercel.com/docs/integrations/install-an-integration/product-integration). The integration creates a Neon Postgres account for you if you do not have one. You get access to Neon features and plans. **Billing is managed through Vercel**. The integration also supports automatic creation of a database branch with each Vercel preview deployment so that you can preview application and database changes together without impacting your production database.
+   **Tip** Quick decision guide: Choose the **Vercel-Managed Integration** if you're new to Neon and want unified billing through Vercel. Choose the **Neon-Managed Integration** if you already have a Neon account or prefer to manage billing directly with Neon.
+---
 
-- [Vercel Native Integration](https://neon.com/docs/guides/vercel-native-integration): Learn how to install the Neon Postgres Native Integration from the Vercel Marketplace
-- [Preview deployments](https://neon.com/docs/guides/vercel-native-integration-previews): Create a database branch for every preview deployment with the Neon Postgres Native Integration
+## Compare the options at a glance
 
-## Option 2: Add the Postgres Previews Integration
+| Feature / Attribute     | [Vercel-Managed Integration](https://neon.com/docs/guides/vercel-managed-integration)                                 | [Neon-Managed Integration](https://neon.com/docs/guides/neon-managed-vercel-integration)                                     | [Manual Connection](https://neon.com/docs/guides/vercel-manual) |
+| :---------------------- | :---------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------- | :---------------------------------------------- |
+| **Ideal for**           | New users, teams wanting a single Vercel bill                                                         | Existing Neon users, direct Neon billing                                                                     | Integration not required or custom              |
+| **Neon account**        | Created automatically via Vercel                                                                      | Pre-existing Neon account                                                                                    | Pre-existing Neon account                       |
+| **Billing**             | Paid **through Vercel**                                                                               | Paid **through Neon**                                                                                        | Paid **through Neon**                           |
+| **Setup method**        | Vercel Marketplace → Native Integrations → "Neon Postgres"                                            | Vercel Marketplace → Connectable Accounts → "Neon"                                                           | Manual env-vars                                 |
+| **Preview Branching**   | ✅                                                                                                    | ✅                                                                                                           | ✖️                                              |
+| **Branch cleanup**      | Manual deletion required                                                                              | Automatic deletion available                                                                                 | N/A                                             |
+| **Implementation type** | [Native Integration](https://vercel.com/docs/integrations/install-an-integration/product-integration) | [Connectable Account](https://vercel.com/docs/integrations/install-an-integration/add-a-connectable-account) | N/A                                             |
 
-This integration is intended for users who are registered with Neon directly. The **Postgres Previews Integration** is a [connectable account integration](https://vercel.com/docs/integrations/install-an-integration/add-a-connectable-account#manage-connectable-accounts) that connects your Vercel project to a Neon database and creates a database branch with each Vercel preview deployment.
+---
 
-- [Neon Previews Integration](https://neon.com/docs/guides/vercel-previews-integration): Learn how to install the Neon Postgres Preview Integration for a database branch with each preview deployment
+## Choose your integration path
 
-## Option 3: Connect your Vercel project to Neon manually (no integration)
+   **Important** Do you need custom CI/CD control?: **If you want to build preview branching into your own CI/CD pipelines (e.g., via GitHub Actions)**, use a **[manual connection](https://neon.com/docs/guides/vercel-manual)** instead of the automated integrations below.
 
-This setup simply involves setting environment variables in Vercel to connect your Vercel Project to your Neon database.
+For automated integrations, follow this simple flow:
 
-- [Connect Vercel and Neon manually](https://neon.com/docs/guides/vercel-manual): Connect your Vercel project to Neon manually (no integration)
+## Do you have an existing Neon account?
 
-## Transitioning from Vercel Postgres?
+**Do you already have a Neon account or project you want to keep using?**
 
-   **Important**: **Vercel has now completed transitioning almost all Vercel Postgres stores to the Native Vercel Integration for Neon Postgres.** You can now manage your databases via the Native Vercel Integration from the **Storage** tab on your Vercel Dashboard and in the Neon Console.
+- **✅ Yes** → Use **[Neon-Managed Integration](https://neon.com/docs/guides/neon-managed-vercel-integration)**
+- **❌ No** → Continue below
 
-For those who have transitioned from Vercel Postgres to Neon, welcome! We're glad you're here. We've prepared a **transition guide** to answer questions and help you get started.
+## Choose your billing preference
 
-- [Vercel Postgres Transition Guide](https://neon.com/docs/guides/vercel-postgres-transition-guide): Everything you need to know about transitioning from Vercel Postgres to Neon
+**Where would you like to manage billing for Neon?**
+
+- **Through my Vercel account** → Use **[Vercel-Managed Integration](https://neon.com/docs/guides/vercel-managed-integration)**
+- **Directly with Neon** → Use **[Neon-Managed Integration](https://neon.com/docs/guides/neon-managed-vercel-integration)**
+
+---
+
+## Integration options overview
+
+- [Vercel-Managed Integration](https://neon.com/docs/guides/vercel-managed-integration): Create and manage Neon databases directly from your Vercel dashboard. Supports preview branches.
+- [Neon-Managed Integration](https://neon.com/docs/guides/neon-managed-vercel-integration): Link an existing Neon project to Vercel and keep billing in Neon. Supports preview branches.
+- [Manual Connection](https://neon.com/docs/guides/vercel-manual): Connect your Vercel project to a Neon database manually.
+
+---
+
+## Next steps
+
+## Get Started Checklist
+
+- [ ] Choose your integration type
+  Select Vercel-Managed, Neon-Managed, or Manual based on the decision flow above
+
+- [ ] Follow the setup guide
+  Click through to your chosen integration's detailed documentation
+
+- [ ] Configure preview branching
+  Set up database branching for your development workflow
+
+- [ ] Test your connection
+  Verify your database connection works in both production and preview environments

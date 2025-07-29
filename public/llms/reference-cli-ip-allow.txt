@@ -1,6 +1,6 @@
 # Neon CLI commands — ip-allow
 
-> The "Neon CLI commands — ip-allow" document details the usage of the `ip-allow` command within the Neon CLI, which is used to manage IP allowlists for accessing Neon databases.
+> The document details the usage of the `ip-allow` command in the Neon CLI, which manages IP allowlists for controlling access to Neon database instances.
 
 ## Source
 

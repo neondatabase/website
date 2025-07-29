@@ -1,6 +1,6 @@
 # Connect a JavaScript application to Neon
 
-> The document outlines the steps for connecting a JavaScript application to a Neon database using the `pg` library, detailing the necessary configurations and code snippets for establishing a successful connection.
+> This document guides users on connecting a JavaScript application to Neon by detailing the necessary steps and configurations for establishing a database connection using Node.js and relevant libraries.
 
 ## Source
 

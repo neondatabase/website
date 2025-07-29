@@ -3,7 +3,7 @@ title: Import Data Assistant
 subtitle: Move your database to Neon using our automated import tool
 enableTableOfContents: true
 tag: beta
-updatedOn: '2025-06-30T11:30:21.919Z'
+updatedOn: '2025-07-22T16:08:58.778Z'
 redirectFrom:
   - /docs/import/migration-assistant
 ---
@@ -44,10 +44,6 @@ You'll need:
 - **Admin privileges** on your source database. We recommend using a superuser or a user with the necessary `CREATE`, `SELECT`, `INSERT`, and `REPLICATION` privileges.
 - A database **smaller than 10 GB** in size for automated import
 - We recommend migrating to a Neon project created in the same region as your current database. This helps ensure a faster import. There is a 1-hour time limit on import operations.
-
-<Admonition type="important">
-If your database is larger than 10 GB and you need help, [contact us](/migration-assistance).
-</Admonition>
 
 <Steps>
 
@@ -102,8 +98,7 @@ After a successful import:
 
 ## Need Help?
 
-- For databases **larger than 10GB**: [Contact our migration team](/migration-assistance)
 - For **technical issues**: [Contact support](/docs/introduction/support)
 - For **provider-specific questions**: Let us know what database provider you're using when you contact us
 
-If your database import failed for any reason, please [contact our support team](/migration-assistance). We're here to help you get up and running, including assistance with databases larger than 10GB.
+If your database import failed for any reason, please [contact our support team](/docs/introduction/support). We're here to help you get up and running.

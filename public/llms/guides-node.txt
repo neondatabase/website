@@ -1,6 +1,6 @@
 # Connect a Node.js application to Neon
 
-> The document "Connect a Node.js application to Neon" outlines the steps required to establish a connection between a Node.js application and a Neon database, detailing configuration and code examples specific to Neon's environment.
+> This document guides users on connecting a Node.js application to a Neon database by detailing the necessary steps and configurations required for successful integration.
 
 ## Source
 
@@ -32,21 +32,23 @@ If you do not have one already, create a Neon project.
 
 2. Add project dependencies using one of the following commands:
 
-   
+   Tab: Neon serverless driver
 
    ```shell
    npm install @neondatabase/serverless dotenv
    ```
 
+Tab: node-postgres
+
    ```shell
    npm install pg dotenv
    ```
 
+Tab: postgres.js
+
    ```shell
    npm install postgres dotenv
    ```
-
-   
 
 ## Store your Neon credentials
 
@@ -77,7 +79,9 @@ const { neon } = require('@neondatabase/serverless');
 
 const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
 
-const sql = neon(`postgresql://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?sslmode=require`);
+const sql = neon(
+  `postgresql://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?sslmode=require&channel_binding=require`
+);
 
 async function getPgVersion() {
   const result = await sql`SELECT version()`;

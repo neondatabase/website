@@ -1,6 +1,6 @@
 # Query organization usage metrics with the Neon API
 
-> The document details how to use the Neon API to query and retrieve organization usage metrics, enabling users to monitor and manage resource consumption within their Neon accounts.
+> The document details how to use the Neon API to query and organize usage metrics for organizations, enabling precise monitoring and management of resource consumption within the Neon platform.
 
 ## Source
 

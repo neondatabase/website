@@ -1,6 +1,6 @@
 # Data anonymization
 
-> The "Data Anonymization" document outlines the process for anonymizing sensitive data within the Neon database, detailing steps and tools necessary to ensure data privacy and compliance with privacy regulations.
+> The "Data Anonymization" document outlines the process and techniques for anonymizing sensitive data within Neon databases, ensuring compliance with privacy regulations while maintaining data utility for analysis.
 
 ## Source
 

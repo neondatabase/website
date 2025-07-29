@@ -1,5 +1,6 @@
 ---
 title: 'Branching for agents'
+subtitle: 'Enable safe AI agent workflows with database checkpoints, rollbacks, and time travel capabilities'
 updatedOn: '2025-07-08T12:47:21.296Z'
 ---
 

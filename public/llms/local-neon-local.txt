@@ -1,6 +1,6 @@
 # Neon Local
 
-> The "Neon Local" documentation outlines the process for setting up and using Neon Local, a tool that allows Neon users to run and test their PostgreSQL databases locally, facilitating development and testing workflows.
+> The Neon Local documentation outlines the setup and usage of Neon Local, a tool for running Neon database instances locally, facilitating development and testing environments without requiring cloud deployment.
 
 ## Source
 

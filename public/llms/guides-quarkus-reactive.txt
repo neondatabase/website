@@ -1,6 +1,6 @@
 # Connect Quarkus (Reactive) to Neon
 
-> The document outlines the steps to connect a Quarkus Reactive application to a Neon database, detailing the necessary configurations and dependencies required for seamless integration.
+> This document guides users on connecting Quarkus (Reactive) applications to Neon, detailing configuration steps and necessary dependencies for seamless integration.
 
 ## Source
 
@@ -36,8 +36,8 @@ You now have a Quarkus project in a folder named `neon-with-quarkus` with the Re
 Create a `.env` file in the root of your Quarkus project directory. Configure a reactive data source using your Neon database connection string and specifying the database kind as shown:
 
 ```shell
-# Note that "?sslmode=require" is appended to the Neon connection string
-QUARKUS_DATASOURCE_REACTIVE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
+# Note that "?sslmode=require&channel_binding=require" is appended to the Neon connection string
+QUARKUS_DATASOURCE_REACTIVE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
 ```
 
    **Note**: You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).

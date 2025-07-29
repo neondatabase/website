@@ -2,7 +2,7 @@
 title: Manage computes
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-06-23T15:24:08.789Z'
+updatedOn: '2025-07-22T11:19:18.885Z'
 ---
 
 A compute is a virtualized service that runs applications. In Neon, a compute runs Postgres.
@@ -59,7 +59,7 @@ To edit a compute:
 1. Select a branch.
 1. From the **Computes** tab, select **Edit** for the compute you want to edit.
 
-   The **Edit** drawer opens, letting you modify settings such as compute size, the autoscaling configuration (if applicable), and your scale to zero setting.
+   The **Edit** drawer opens, letting you modify settings such as compute size, the autoscaling configuration, and your scale to zero setting.
 
 1. Once you've made your changes, click **Save**. All changes take immediate effect.
 

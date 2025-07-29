@@ -1,5 +1,6 @@
 ---
 title: 'Branches'
+subtitle: 'Understand how Neon branches provide instant, cost-efficient database clones with copy-on-write storage'
 updatedOn: '2025-07-08T12:47:21.296Z'
 ---
 

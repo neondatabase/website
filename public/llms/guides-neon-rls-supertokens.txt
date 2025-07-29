@@ -1,6 +1,6 @@
 # Secure your data with SuperTokens and Neon RLS
 
-> The document explains how to integrate SuperTokens with Neon Row-Level Security (RLS) to enhance data security by managing user authentication and access control within a Neon database.
+> This document guides Neon users on implementing data security by integrating SuperTokens with Neon's Row-Level Security (RLS) to manage access control and authentication.
 
 ## Source
 

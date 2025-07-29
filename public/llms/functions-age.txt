@@ -1,6 +1,6 @@
 # Postgres age() function
 
-> The document explains the usage of the Postgres `age()` function within the Neon environment, detailing how to calculate the interval between two timestamps or between a timestamp and the current date.
+> The document explains the usage of the Postgres `age()` function within Neon, detailing how it calculates the interval between two timestamps, which is useful for managing and querying temporal data.
 
 ## Source
 

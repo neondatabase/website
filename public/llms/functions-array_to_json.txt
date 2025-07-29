@@ -1,6 +1,6 @@
 # Postgres array_to_json() function
 
-> The document explains the usage of the Postgres `array_to_json()` function within Neon, detailing how to convert PostgreSQL arrays into JSON format for database operations.
+> The document details the usage of the Postgres `array_to_json()` function within Neon, explaining how to convert PostgreSQL arrays into JSON format for data manipulation and storage.
 
 ## Source
 

@@ -1,6 +1,6 @@
 # Migrate from Azure PostgreSQL to Neon
 
-> The document "Migrate from Azure PostgreSQL to Neon" outlines the steps for transferring databases from Azure PostgreSQL to Neon, detailing the necessary procedures and tools for a successful migration within Neon's infrastructure.
+> The document outlines the process for migrating databases from Azure PostgreSQL to Neon, detailing steps for exporting data from Azure and importing it into Neon using the pg_dump and pg_restore tools.
 
 ## Source
 

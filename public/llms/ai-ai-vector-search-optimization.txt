@@ -1,6 +1,6 @@
 # Optimize pgvector search
 
-> The document "Optimize pgvector search" details methods for enhancing the efficiency of vector searches using pgvector in Neon, focusing on index creation, query optimization, and configuration adjustments specific to Neon's database environment.
+> The document outlines methods for optimizing pgvector search in Neon, focusing on enhancing performance and efficiency in AI vector search operations.
 
 ## Source
 
@@ -117,12 +117,10 @@ CREATE INDEX items_embedding_cosine_idx ON items USING ivfflat (embedding vector
 IVFFlat in `pgvector` has two parameters:
 
 1. `lists`
-
    - This parameter specifies the number of [k-means clusters](https://en.wikipedia.org/wiki/K-means_clustering) (or "lists") to divide the dataset into
    - Each cluster contains a subset of the data, and each data point belongs to the closest cluster centroid.
 
 2. `probes`
-
    - This parameter determines the number of lists to explore during the search for the nearest neighbors.
    - By probing multiple lists, the search algorithm can find the closest points more accurately, balancing between speed and accuracy.
 

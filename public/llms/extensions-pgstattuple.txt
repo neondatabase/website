@@ -1,6 +1,6 @@
 # The pgstattuple extension
 
-> The document details the pgstattuple extension for Neon, explaining how to use it to obtain statistics about the physical storage of PostgreSQL tables and indexes, including information on free space and tuple density.
+> The document details the pgstattuple extension for Neon, which allows users to analyze PostgreSQL table and index bloat by providing statistics on tuple-level storage efficiency.
 
 ## Source
 

@@ -1,6 +1,6 @@
 # IP Allow
 
-> The "IP Allow" documentation explains how Neon users can configure IP allowlists to control access to their databases, specifying which IP addresses are permitted to connect.
+> The "IP Allow" documentation for Neon outlines the process for configuring IP allowlists to manage access to Neon databases, detailing steps for adding, editing, and removing IP addresses to control database security.
 
 ## Source
 

@@ -1,5 +1,6 @@
 ---
 title: 'Projects'
+subtitle: 'Learn how Neon projects organize branches, compute endpoints, and access controls for scalable database management'
 updatedOn: '2025-07-08T12:47:21.296Z'
 ---
 

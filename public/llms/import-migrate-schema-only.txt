@@ -1,6 +1,6 @@
 # Migrate a database schema
 
-> The document titled "Migrate a database schema" outlines the steps for Neon users to transfer only the schema of a PostgreSQL database to a Neon database without including data.
+> The document outlines the process for migrating a database schema to Neon, detailing steps for exporting the schema from an existing database and importing it into a Neon database instance.
 
 ## Source
 

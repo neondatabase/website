@@ -1,6 +1,6 @@
 # Postgres json_scalar() Function
 
-> The document explains the usage of the `json_scalar()` function in Neon, detailing how it converts JSON data into a scalar value, facilitating operations on JSON fields within the database.
+> The document details the `json_scalar()` function in Neon, explaining its usage for converting JSON data into scalar values within PostgreSQL databases.
 
 ## Source
 
