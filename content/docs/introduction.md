@@ -8,8 +8,6 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 <CTA title="Manage Neon from Cursor, Windsurf, and other AI tools ✨" 
 description="Manage Neon Postgres databases from your favorite AI tools using simple, conversational commands with Neon's MCP Server. <a href='/docs/ai/connect-mcp-clients-to-neon'>Learn how</a> ➡️" isIntro></CTA>
 
-<ChatOptions/>
-
 ## Get started
 
 <DetailIconCards withNumbers>
