@@ -28,85 +28,179 @@ Use the **Backup & restore** page in the Neon Console to restore a branch to a p
 
 ## Instantly restore a branch
 
-Restore your branch to a specific time in its history. You can choose any timestamp within your [restore window](/docs/manage/projects#configure-your-restore-window) and preview data before restoring.
+Restore your branch to a specific time in its history. 
+
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
+
+You can choose any timestamp within your [restore window](/docs/manage/projects#configure-your-restore-window) and preview data before restoring.
 
 - **Available from**: Last 24 hours (Free Tier) or up to 7–30 days, depending on your Neon plan
 - **How it works**: Select a time, preview the data, then restore
 
-<Steps>
+1. **Select a time**
 
-## Select a time
+   Click the date & time selector, choose a restore time, and click **Restore**.
 
-Click the date & time selector, choose a restore time, and click **Restore**.
+   ![Backup and restore select a restore time](/docs/guides/backup_restore_select_time.png)
 
-![Backup and restore select a restore time](/docs/guides/backup_restore_select_time.png)
+   You'll see a confirmation modal that outlines what will happen:
 
-You'll see a confirmation modal that outlines what will happen:
+   - Your branch will be restored to its state at the selected date & time
+   - Your current branch will be saved as a backup, in case you want to revert
 
-- Your branch will be restored to its state at the selected date & time
-- Your current branch will be saved as a backup, in case you want to revert
+   ![Backup and restore preview data](/docs/guides/backup_restore_preview_modal.png)
 
-![Backup and restore preview data](/docs/guides/backup_restore_preview_modal.png)
+   At this point, you can either proceed or select **Preview data** to inspect the data first.
 
-At this point, you can either proceed or select **Preview data** to inspect the data first.
+2. **Preview the data**
 
-## Preview the data
+   Preview a restore point to make sure you’ve selected the right one. You can:
 
-Previewing lets you verify that you've selected the correct restore point. You can:
+   - **Browse data** in the **Tables** view to explore a read-only snapshot of your data at that point in time  
+   - **Query data** directly from the restore page to run read-only SQL against the selected restore point  
+   - **Compare schemas** with Neon’s schema diff tool to see how your current schema differs from the one at the selected point
 
-- **Browse data** in a **Tables** view
-- **Query data** directly from the restore page
-- **Compare schemas** using Neon’s schema diff tool
 
-![Backup and restore preview data options](/docs/guides/backup_restore_preview_options.png)
+   ![Backup and restore preview data options](/docs/guides/backup_restore_preview_options.png)
 
-<Tabs labels={["Browse data", "Query data", "Compare schemas"]}>
+3. **Restore**
 
-<TabItem>
+   Click **Restore** to complete the restore operation, or **Cancel** to back out. You can also restore directly from any of the **Preview data** pages.
 
-**Browse data** lets you explore a read-only table view of your data at the selected restore point.
+   ![Restore the data](/docs/guides/backup_restore_preview_modal.png)
 
-![Backup and restore browse data](/docs/guides/backup_restore_browse_data.png)
+   When you restore, a backup branch is automatically created (named `<branch_name>_old_<timestamp>`) in case you need to revert back. You can find this branch on the **Branches** page.
 
-</TabItem>
+   ![Backup branch on the Branches page](/docs/guides/backup_restore_backup_branch.png)
 
-<TabItem>
-
-**Query data** allows you to run read-only queries against your data as it existed at the selected restore point.
-
-![Backup and restore query data](/docs/guides/backup_restore_query_data.png)
+   For information about removing backup branches, see [Deleting backup branches](/docs/introduction/branch-restore#deleting-backup-branches).
 
 </TabItem>
 
 <TabItem>
+Using the CLI, you can restore a branch to an earlier point in its history or another branch's history using the following command:
 
-**Compare schemas** shows a schema diff between your current schema (left) and the one at the selected restore point (right).
+```bash shouldWrap
+neon branches restore <target id|name> <source id|name @ timestamp|lsn>
+```
 
-![Backup and restore compare schemas](/docs/guides/backup_restore_compare_schemas.png)
+In the `target id|name` field, specify the ID or name of the branch you want to restore. In the `source id|name timestamp|lsn` field, specify the source branch you want to restore from (mandatory), along with the point-in-time identifier (optional), which can be either an ISO 8601-formatted timestamp or the LSN. If you omit the point-in-time identifier, the operation defaults to the latest data (HEAD) for the source branch. Concatenate the source identifier and time identifier with `@`: for example, `development@2023-12-12T12:00:00Z`.
 
-If your branch has multiple databases, use the database selector (top left) to compare each one.
+#### Restore a branch to its own history
+
+If you want to restore a branch to an earlier point in time, use the syntax `^self` in the `<source id|name>` field. For example:
+
+```bash shouldWrap
+neon branches restore development ^self@2024-01-01T00:00:00Z --preserve-under-name development_old
+```
+
+This command resets the target branch `development` to its state at the start of 2024. The command also preserves the original state of the branch in a backup file called `development_old` using the `preserve-under-name` parameter (mandatory when resetting to self).
+
+#### Restore from parent
+
+If you want to restore a target branch from its parent, you can use the special syntax `^parent` in the `<source id|name>` field. For example:
+
+```bash
+neon branches restore development ^parent
+```
+
+This command will restore the target branch `development` to the latest data (HEAD) of its parent branch.
+
+#### Restore to another branch's history
+
+Here is an example of a command that restores a target branch to an earlier point in time of another branch's history:
+
+```bash shouldWrap
+neon branches restore development production@0/12345
+```
+
+This command will restore the target branch `development` to an earlier point in time from the source branch `production`, using the LSN `0/12345` to specify the point in time. If you left out the point-in-time identifier, the command would default to the latest data (HEAD) for the source branch `production`.
+
+For full CLI documentation for `branches restore`, see [branches restore](/docs/reference/cli-branches#restore).
+</TabItem>
+
+<TabItem>
+To restore a branch using the API, use the endpoint:
+
+```bash
+POST /projects/{project_id}/branches/{branch_id_to_restore}/restore
+```
+
+This endpoint lets you restore a branch using the following request parameters:
+
+| Parameter               | Type     | Required | Description                                                                                                                                                                                                                                                                                                                                                                               |
+| ----------------------- | -------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **source_branch_id**    | `string` | Yes      | The ID of the branch you want to restore from.<br /><br />To restore to the latest data (head), omit `source_timestamp` and `source_lsn`.<br /><br />To restore a branch to its own history (`source_branch_id` equals branch's own Id), you must include:<br />- A time period: `source_timestamp` or `source_lsn`<br />- A backup branch: `preserve_under_name`                         |
+| **source_lsn**          | `string` | No       | A Log Sequence Number (LSN) on the source branch. The branch will be restored with data up to this LSN.                                                                                                                                                                                                                                                                                   |
+| **source_timestamp**    | `string` | No       | A timestamp indicating the point in time on the source branch to restore from. Use ISO 8601 format for the date-time string.                                                                                                                                                                                                                                                              |
+| **preserve_under_name** | `string` | No       | If specified, a backup is created: the latest version of the branch's state is preserved under a new branch using the specified name.<br /><br />**Note:** This field is required if:<br />- The branch has children. All child branches will be moved to the newly created branch.<br />- You are restoring a branch to its own history (`source_branch_id` equals the branch's own ID). |
+
+#### Restoring a branch to its own history
+
+In the following example, we are restoring branch `br-twilight-river-31791249` to an earlier point in time, `2024-02-27T00:00:00Z`, with a new backup branch named `backup-before-restore`. Note that the branch id in the `url` matches the value for `source_branch_id`.
+
+```bash shouldWrap
+curl --request POST \ // [!code word:br-twilight-river-31791249]
+     --url https://console.neon.tech/api/v2/projects/floral-disk-86322740/branches/br-twilight-river-31791249/restore \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
+     --header 'Content-Type: application/json' \
+     --data '
+{
+  "source_branch_id": "br-twilight-river-31791249",
+  "source_timestamp": "2024-02-27T00:00:00Z",
+  "preserve_under_name": "backup-before-restore"
+}
+' | jq
+```
+
+### Restoring to the latest data from another branch
+
+In this example, we are restoring a development branch `dev/alex` (branch ID `br-twilight-river-31791249`) to the latest data (head) of its parent branch `br-jolly-star-07007859`. Note that we don't include any time identifier or backup branch name; this is a straight reset of the branch to the head of its parent.
+
+```bash shouldWrap
+curl --request POST \ // [!code word:br-twilight-river-31791249]
+     --url https://console.neon.tech/api/v2/projects/floral-disk-86322740/branches/br-twilight-river-31791249/restore \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
+     --header 'Content-Type: application/json' \ // [!code word:br-jolly-star-07007859]
+     --data '
+{
+  "source_branch_id": "br-jolly-star-07007859"}
+' | jq
+```
+
+### Restoring to the earlier state of another branch
+
+In this example, we are restoring branch `dev/jordan` (branch ID `br-damp-smoke-91135977`) to branch `dev/alex` (branch ID `br-twilight-river-31791249`) at the point in time of `Feb 26, 2024 12:00:00.000 AM`.
+
+```bash shouldWrap
+curl --request POST \ // [!code word:br-damp-smoke-91135977]
+     --url https://console.neon.tech/api/v2/projects/floral-disk-86322740/branches/br-damp-smoke-91135977/restore \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" \ //  [!code word:br-jolly-star-07007859]
+     --header 'Content-Type: application/json' \
+     --data '
+{
+  "source_branch_id": "br-jolly-star-07007859",
+  "source_timestamp": "2024-02-26T12:00:00Z"
+}
+' | jq
+```
 
 </TabItem>
 
 </Tabs>
 
-## Restore
-
-Click **Restore** to complete the restore operation, or **Cancel** to back out. You can also restore directly from any of the **Preview data** pages.
-
-![Restore the data](/docs/guides/backup_restore_preview_modal.png)
-
-When you restore, a backup branch is automatically created (named `<branch_name>_old_<timestamp>`) in case you need to revert back. You can find this branch on the **Branches** page.
-
-![Backup branch on the Branches page](/docs/guides/backup_restore_backup_branch.png)
-
-For information about removing backup branches, see [Deleting backup branches](/docs/introduction/branch-restore#deleting-backup-branches).
-
-</Steps>
-
 ## Create snapshots
 
 Snapshots are point-in-time copies of your branch.
+
+<Tabs labels={["Console", "API"]}>
+
+<TabItem>
 
 To create a snapshot manually, click **Create snapshot**. This captures the current state of your data and saves it as a **Manual snapshot**. It's a good idea to create a snapshot before making significant changes to your schema or data.
 
@@ -135,6 +229,10 @@ Snapshots created via the schedule are listed under the Snapshots section, along
 <Admonition type="tip">
 The Neon API supports finer-grained control over snapshot scheduling.
 </Admonition>
+
+<TabItem>
+
+</Tabs>
 
 ## Restore from a snapshot
 
