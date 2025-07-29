@@ -61,12 +61,14 @@ Click **Install from Vercel Marketplace** to open the integration in Vercel.
 
 ## Add the integration in Vercel
 
-Click the "..." menu in your Vercel project and choose "Connect Account."
+On the Vercel page, click **Install**.
 
-![Add Neon from Connectable Accounts](/docs/guides/vercel_connect_neon_account.png)
+This opens the **Install Neon** modal where you can choose between two options. Select **Link Existing Neon Account**, then click **Continue**.
+
+![Install on Existing Neon Account](/docs/guides/vercel_install_neon_modal_existing_account.png)
 
 <Admonition type="tip">
-Alternatively, if you're accessing this directly from the Vercel Marketplace, locate the **Connectable Accounts** section, find **Neon**, and click **Add**.
+Alternatively, if you're accessing this directly from the Vercel Marketplace, locate the **Connectable Accounts** section, find **Neon**, and click **Add**. This differs from the **Native Integrations** section in the Vercel Marketplace.
 
 ![Add Neon from Connectable Accounts](/docs/guides/vercel_add_connected_neon_account.png)
 </Admonition>
