@@ -41,14 +41,31 @@ Choose the Vercel-Managed Integration if you **do not already have a Neon accoun
 
 ## Installation walkthrough
 
-1. Open the [Neon integration on the Vercel Marketplace](https://vercel.com/marketplace/neon) and click **Install**.
-2. This installs the Native Integration, which automatically creates a Neon account managed by Vercel.
-3. Accept the terms, pick a region & plan, then name your database. (Remember: a "Database" in Vercel is a **Project** in Neon.)
-4. After creation you'll land on Vercel's **Storage** tab that includes status, plan, connection string, billing plan, and more.
+<Steps>
 
-### Open the project in the Neon Console
+## Open Neon integration
+
+Open the [Neon integration on the Vercel Marketplace](https://vercel.com/marketplace/neon) and click **Install**.
+
+## Add the integration in Vercel
+
+This opens the **Install Neon** modal where you can choose between two options. Select **Create New Neon Account**, then click **Continue**.
+
+![Create a New Neon Account](/docs/guides/vercel_install_neon_modal_new_account.png)
+
+## Complete Vercel's configuration
+
+Accept the terms, pick a region & plan, then name your database. (Remember: a "Database" in Vercel is a **Project** in Neon.)
+
+## View storage settings
+
+After creation you'll land on Vercel's **Storage** tab that includes status, plan, connection string, billing plan, and more.
+
+## Optionally open the project in the Neon Console
 
 From the **Storage** tab, click **Open in Neon** to jump straight to your new Neon project dashboard in the Neon Console. You'll notice it lives in an organisation named `Vercel: <your-vercel-team>`.
+
+</Steps>
 
 ---
 
