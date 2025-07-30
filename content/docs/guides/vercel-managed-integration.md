@@ -199,6 +199,6 @@ Branches you don't delete are eventually archived, consuming archive storage spa
 - **Neon CLI access**: Requires API key authentication (the `neon auth` command won't work since the account is Vercel-managed)
 - Cannot install if you currently use Vercel Postgres (deprecated) - contact Vercel about transitioning
 - Manual branch deletion required (unlike the **Neon-Managed Integration** which offers automatic cleanup)
-- **Preview deployment environment variables**: Branch-specific connection variables cannot be accessed or viewed (they're injected at deployment time only and not stored in project settings to avoid manual cleanup when branches are deleted)
+- **Preview deployment environment variables**: Branch-specific connection variables cannot be accessed or viewed in your Vercel project's environment variable settings (they're injected at deployment time only and not stored to avoid manual cleanup when branches are deleted)
 
 <NeedHelp/>
