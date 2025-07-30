@@ -65,3 +65,5 @@ The following table shows what each role can do regarding integrations:
 
 - **Branch management** — All users are currently able to manage [protected branches](/docs/guides/protected-branches), regardless of their role or permission level. Granular permissions for this feature are not yet implemented.
 - **Permissions and roles** — The current permissions system may not meet all needs for granular control. Share your feedback and requirements for more detailed permissions settings via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form or our [Discord feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042).
+
+<NeedHelp/>

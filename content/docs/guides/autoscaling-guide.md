@@ -98,3 +98,5 @@ Another approach is to set a higher threshold than you need and monitor usage sp
 ### The neon_utils extension
 
 Another tool for understanding usage, the `neon_utils` extension provides a `num_cpus()` function that helps you monitor how the _Autoscaling_ feature allocates compute resources in response to workload. For more information, see [The neon_utils extension](/docs/extensions/neon-utils).
+
+<NeedHelp/>

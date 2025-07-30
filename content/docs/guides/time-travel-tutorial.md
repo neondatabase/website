@@ -109,3 +109,5 @@ SELECT * FROM feature_flags WHERE feature_name = 'new_checkout_process';
 Now, we see the `new_checkout_process` feature flag is `t` for true, confirming that enabling the feature caused the reported issues. With this confirmation we can move on to our follow-up actions: fix the problem, turn off the feature flag, update stakeholders, or engage in a feedback loop with users to refine the feature based on real-world usage.
 
 </Steps>
+
+<NeedHelp/>
