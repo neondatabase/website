@@ -26,6 +26,10 @@ curl 'https://console.neon.tech/api/v2/projects' \
   -H 'Content-Type: application/json' \
 ```
 
+## API rate limiting
+
+Neon limits API requests to 700 requests per minute (about 11 per second), with bursts allowed up to 40 requests per second per route, per account. If you exceed this, you'll receive an HTTP 429 Too Many Requests error. These limits apply to all public API requests, including those made by the Neon Console. Limits may change, so make sure your app handles 429 errors and retries appropriately. Contact support if you need higher limits.
+
 ## Neon API base URL
 
 The base URL for a Neon API request is:
