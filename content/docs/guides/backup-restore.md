@@ -337,7 +337,6 @@ Use this option if you need to inspect the snapshot data before you switch over 
    ```
 
    Parameters:
-
    - `name`: (Optional) Name of the new branch with the restored snapshot data. If not provided, a default branch name will be generated.
    - `finalize_restore`: Set to `false` to let you inspect the data on the new branch before you finalize the restore operation.
 
@@ -355,7 +354,6 @@ Use this option if you need to inspect the snapshot data before you switch over 
 3. **Finalize the restore**
 
    If you're satisfied with the data on the new branch, you can finalize the restore operation using the [Finalize restore](https://api-docs.neon.tech/reference/finalize_restore) endpoint. This step performs the following actions:
-
    - Moves your original branch's computes to the candidate branch and restarts the computes
    - Renames the candidate branch to original branch's name
    - Renames the original branch
@@ -367,7 +365,6 @@ Use this option if you need to inspect the snapshot data before you switch over 
    ```
 
    Parameters:
-
    - `project_id`: The Neon project ID.
    - `branch_id`: The branch ID of the candidate branch created during the restore preview.
 
