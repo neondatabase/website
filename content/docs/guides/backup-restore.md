@@ -206,9 +206,37 @@ To create a snapshot manually, click **Create snapshot**. This captures the curr
 
 ![Backup branch on the Branches page](/docs/guides/backup_restore_create_snapshot.png)
 
+</TabItem>
+
+<TabItem>
+
+You can create a snapshot from a branch using the [Create snapshot](https://api-docs.neon.tech/reference/createSnapshot) endpoint. A snapshot can be created from a specific timestamp (ISO 8601 format) or LSN (e.g. 16/B3733C50) within the branch's point-in-time recovery (PiTR) window. The timestamp and lsn parameters are mutually exclusive.
+
+```
+curl -X POST "https://api.neon.tech/projects/project_id/branches/branch_id/snapshot" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "timestamp": "2025-07-29T21:00:00Z",
+    "name": "my_snapshot",
+    "expires_at": "2025-08-05T22:00:00Z"
+  }'
+```
+
+The parameters used in the example above:
+
+- `timestamp`: A point in time to create the snapshot from (in RFC 3339 format).
+- `name`: A user-defined name for the snapshot.
+- `expires_at`: The timestamp when the snapshot will be automatically deleted.
+
+</TabItem>
+
 ## Schedule snapshots
 
 You can automate snapshot creation by setting a snapshot schedule for a branch.
+
+<Tabs labels={["Console", "API"]}>
+
+<TabItem>
 
 To edit the snapshot schedule:
 
@@ -233,7 +261,39 @@ To edit the snapshot schedule:
 </TabItem>
 
 <TabItem>
-test
+
+You can set and retrieve a snapshot schedule using the Neon API.
+
+### Set a snapshot schedule
+
+This example sets a snapshot schedule for a Neon branch. It configures a snapshot to be taken on December 31 at 23:00 (11 PM), with a retention period of one hour (3600 seconds). The `frequency` field must be set to a supported value such as `"monthly"`, `"weekly"`, or `"daily"` depending on your use case. Replace `project_id`, `branch_id`, and `$NEON_API_KEY` with your actual project ID, branch ID, and API token.
+
+```bash
+curl -X PUT "https://console.neon.tech/api/v2/projects/{project_id}/branch_id/{branch_id}/snapshot_schedule" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -d '{
+    "schedule": [
+      {
+        "frequency": "string",
+        "hour": 23,
+        "day": 31,
+        "month": 12,
+        "retention_seconds": 3600
+      }
+    ]
+  }'
+```
+
+### Retrieve a branch snapshot schedule
+
+This example shows how to retrieve a snapshot schedule for a branch. Replace `project_id`, `branch_id`, and `$NEON_API_KEY` with your actual project ID, branch ID, and API token.
+
+```bash
+curl -X GET "https://console.neon.tech/api/v2/projects/project_id/branches/branch_id/snapshot_schedule" \
+  -H "Authorization: Bearer $NEON_API_KEY"
+```
+
 </TabItem>
 
 </Tabs>
