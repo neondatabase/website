@@ -41,7 +41,6 @@ The **Data API** turns your database tables into a REST API, and it requires RLS
 - Your RLS policies use `auth.user_id()` to control access.
 - All tables accessed via the Data API must have RLS enabled.
 
-
 <DetailIconCards>
 
 <a href="/docs/data-api/get-started" description="Learn how to enable and use the Data API with RLS policies" icon="database">Get started</a>

@@ -45,16 +45,16 @@ Once enabled, you'll see your Data API **Project URL** here — this is your end
 
 ![Data API enabled view with Project URL](/docs/data-api/data-api-enabled.png)
 
-*Always secure your data before using the Data API in production.*
+_Always secure your data before using the Data API in production._
 
 ### About activation times and schema changes
 
 - After enabling the Data API, it may take a minute for your endpoints to become available. Be aware of that.
 - If you change your database schema, you'll need to tell the Data API to refresh its cache. You can do this by reloading the schema from the SQL Editor:
 
-   ```sql
-   NOTIFY pgrst, 'reload schema'
-   ```
+  ```sql
+  NOTIFY pgrst, 'reload schema'
+  ```
 
 ## Authentication
 

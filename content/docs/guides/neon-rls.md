@@ -27,7 +27,7 @@ redirectFrom:
 
 > Neon also offers a **Data API** feature, which provides an instant REST interface for your database. We recommend this approach for most use cases. You can learn more in our [Data API guide](/docs/data-api/get-started).
 >
->  Note that while both features require RLS policies, the *Data API and Neon RLS are not compatible* and cannot be enabled at the same time.
+> Note that while both features require RLS policies, the _Data API and Neon RLS are not compatible_ and cannot be enabled at the same time.
 
 ## Authentication and authorization
 
