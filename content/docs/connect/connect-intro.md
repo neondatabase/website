@@ -27,7 +27,7 @@ Learn how to establish a connection to Neon from any application.
 
 <a href="/docs/connect/connect-from-any-app" description="Learn about connection strings and how to connect to Neon from any application" icon="gamepad">Connect from any app</a>
 
-<a href="/docs/local/neon-local-connect" description="Connect to any Neon branch using a localhost connection string in VS Code, Cursor, or Windsurf" icon="code">Connect locally with Neon Local Connect</a>
+<a href="/docs/local/neon-local-connect" description="Connect to any Neon branch using a localhost connection string in VS Code, Cursor, or Windsurf" icon="code">Connect locally</a>
 
 <a href="/docs/serverless/serverless-driver" description="Connect to Neon from serverless environments over HTTP or WebSockets" icon="audio-jack">Neon serverless driver</a>
 
