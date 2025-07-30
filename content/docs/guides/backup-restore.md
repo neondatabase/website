@@ -275,12 +275,11 @@ Use this option if you want to restore the snapshot data immediately and do not 
 A one-step restore operation is performed using the [Restore snapshot](https://api-docs.neon.tech/reference/restoreSnapshot) endpoint. This operation creates a new branch, restores the snapshot to the new branch, and moves computes from your current branch to the new branch.
 
 ```bash
-curl -X POST "https://api.neon.tech/projects/project_id/snapshots/snapshot_id/restore?name=restored_branch" \
+curl -X POST "https://console.neon.tech/api/v2/projects/project_id/snapshots/snapshot_id/restore?name=restored_branch" \
   -H "Content-Type: application/json" \
   -H 'authorization: Bearer $NEON_API_KEY' \
   -d '{
     "name": "restored_branch",
-    "target_branch_id": "target_branch_id",
     "finalize_restore": false
   }'
 ```
@@ -288,8 +287,9 @@ curl -X POST "https://api.neon.tech/projects/project_id/snapshots/snapshot_id/re
 Parameters:
 
 - `name`: (Optional) Name of the new branch with the restored snapshot data. If not provided, a default branch name will be generated.
-- `target_branch_id`: (Optional) ID of the branch to restore the snapshot into. If omitted, the `branch_id` of the snapshot's source branch is used. Only specify this value if you need to restore to some other existing branch for some reason.
 - `finalize_restore`: Set to `true` to finalize the restore immediately. Finalizing the restore moves computes from your current branch to the new branch with the restored snapshot data for a seamless and immediate restore operation — no need to change the connection details in your applications, as your computes have been moved over to the new branch.
+
+
 
 </TabItem>
 
@@ -327,11 +327,11 @@ Use this option if you need to inspect the snapshot data before you switch over 
    The first step in a multi-step restore operation is to restore the snapshot to a new branch using the [Restore snapshot](https://api-docs.neon.tech/reference/restoreSnapshot) endpoint.
 
    ```bash
-   curl -X POST "https://api.neon.tech/projects/project_id/snapshots/snapshot_id/restore?name=restored_branch" \
+   curl -X POST "https://console.neon.tech/api/v2/projects/project_id/snapshots/snapshot_id/restore" \
    -H "Content-Type: application/json" \
    -H 'authorization: Bearer $NEON_API_KEY' \
    -d '{
-      "name": "restored_branch",
+      "name": "my_restored_branch",
       "finalize_restore": false
    }'
    ```
@@ -339,11 +339,23 @@ Use this option if you need to inspect the snapshot data before you switch over 
    Parameters:
 
    - `name`: (Optional) Name of the new branch with the restored snapshot data. If not provided, a default branch name will be generated.
-   - `finalize_restore`: Set to `false` to let you inspect the data on the new branch before you finalize the restore operation.
+   - `finalize_restore`: Set to `false` so that you can inspect the new branch before finalizing the restore operation.
+
+      <Admonition type="note">
+         You can find the `snapshot_id` using the [List project snapshots](https://api-docs.neon.tech/reference/listSnapshots) endpoint.
+
+            ```bash
+            curl -X GET "https://console.neon.tech/api/v2/projects/project_id/snapshots" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $NEON_API_KEY"
+            ```
+
+      </Admonition>
+
 
 2. **Inspect the new branch**
 
-   After restoring the snapshot to a new branch, you can connect to the new branch and run queries to inspect the data. You can get the branch connection string from the Neon Console or using the [Retrieve connection URI](https://api-docs.neon.tech/reference/getconnectionuri) endpoint.
+   After restoring the snapshot, you can connect to the new branch and run queries to inspect the data. You can get the branch connection string from the Neon Console or using the [Retrieve connection URI](https://api-docs.neon.tech/reference/getconnectionuri) endpoint.
 
    ```bash
    curl --request GET \
@@ -354,14 +366,14 @@ Use this option if you need to inspect the snapshot data before you switch over 
 
 3. **Finalize the restore**
 
-   If you're satisfied with the data on the new branch, you can finalize the restore operation using the [Finalize restore](https://api-docs.neon.tech/reference/finalize_restore) endpoint. This step performs the following actions:
+   If you're satisfied with the data on the new branch, finalize the restore operation using the [Finalize restore](https://api-docs.neon.tech/reference/finalize_restore) endpoint. This step performs the following actions:
 
-   - Moves your original branch's computes to the candidate branch and restarts the computes
-   - Renames the candidate branch to original branch's name
+   - Moves your original branch's computes to the new branch and restarts the computes
+   - Renames the new branch to original branch's name
    - Renames the original branch
 
    ```bash
-   curl -X POST "https://api.neon.tech/projects/project_id/branches/branch_id/finalize_restore" \
+   curl -X POST "https://console.neon.tech/api/v2/projects/project_id/branches/branch_id/finalize_restore" \
    -H "Content-Type: application/json" \
    -H 'authorization: Bearer $NEON_API_KEY'
    ```
