@@ -14,7 +14,9 @@ This guide outlines the steps to integrate Neon into your platform, enabling you
 Before you start building your integration, be sure to read [Key considerations for a successful integration](#key-considerations-for-a-successful-integration).
 </Admonition>
 
-## 1. Setting up your integration
+<Steps>
+
+## Set up your integration
 
 Neon provides flexible options for integrating Postgres into your platform. We support the following integration options:
 
@@ -24,7 +26,7 @@ Neon provides flexible options for integrating Postgres into your platform. We s
 
 - **@neondatabase/toolkit for AI Agents**: If you're building an AI agent, the [@neondatabase/toolkit](https://github.com/neondatabase/toolkit) ([@neon/toolkit](https://jsr.io/@neon/toolkit) on JSR) lets you spin up a Postgres database in seconds and run SQL queries. It includes both the [Neon API Client](https://www.npmjs.com/package/@neondatabase/api-client) and the [Neon serverless driver](https://github.com/neondatabase/serverless), making it an excellent choice for AI agents that need to set up an SQL database quickly. [Learn more](/blog/why-neondatabase-toolkit).
 
-## 2. Configuring limits
+## Configure limits
 
 To ensure you have control over usage and costs, Neon's APIs let you configure limits and monitor usage, enabling billing features, such as:
 
@@ -42,7 +44,7 @@ As your users upgrade or change their plans, you can dynamically modify their li
 
 To learn more about setting limits, see [Configure consumption limits](#/docs/guides/consumption-limits).
 
-## 3. Monitoring usage
+## Monitor usage
 
 Using Neon's consumption APIs, you can query a range of account and project-level metrics to monitor usage. For example, you can:
 
@@ -51,6 +53,8 @@ Using Neon's consumption APIs, you can query a range of account and project-leve
 - Get usage metrics for individual projects.
 
 To learn how, see [Querying consumption metrics with the API](/docs/guides/consumption-metrics).
+
+</Steps>
 
 ## Key considerations for a successful integration
 
