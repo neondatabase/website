@@ -2,7 +2,7 @@
 title: Automate branching with GitHub Actions
 subtitle: Create and delete branches with GitHub Actions
 enableTableOfContents: true
-updatedOn: '2025-06-23T15:24:08.764Z'
+updatedOn: '2025-07-30T11:06:50.989Z'
 ---
 
 Neon provides a set of GitHub Actions to automate the creation, deletion, and management of database branches in your Neon projects.
