@@ -26,10 +26,6 @@ curl 'https://console.neon.tech/api/v2/projects' \
   -H 'Content-Type: application/json' \
 ```
 
-## API rate limiting
-
-Neon limits API requests to 700 requests per minute (about 11 per second), with bursts allowed up to 40 requests per second per route, per account. If you exceed this, you'll receive an HTTP 429 Too Many Requests error. These limits apply to all public API requests, including those made by the Neon Console. Limits may change, so make sure your app handles 429 errors and retries appropriately. Contact support if you need higher limits.
-
 ## Neon API base URL
 
 The base URL for a Neon API request is:
@@ -59,6 +55,10 @@ For additional Neon API examples, refer to the following topics:
 - [Manage roles with the Neon API](/docs/manage/users#manage-roles-with-the-neon-api)
 - [Manage databases with the Neon API](/docs/manage/databases#manage-databases-with-the-neon-api)
 - [View operations with the Neon API](/docs/manage/operations#operations-and-the-neon-api)
+
+## API rate limiting
+
+Neon limits API requests to 700 requests per minute (about 11 per second), with bursts allowed up to 40 requests per second per route, per account. If you exceed this, you'll receive an HTTP 429 Too Many Requests error. These limits apply to all public API requests, including those made by the Neon Console. Limits may change, so make sure your app handles 429 errors and retries appropriately. Contact support if you need higher limits.
 
 <Admonition type="important">
 When using the Neon API programmatically, you can poll the operation `status` to ensure that an operation is finished before proceeding with the next API request. For more information, see [Poll operation status](/docs/manage/operations#poll-operation-status).
