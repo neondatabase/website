@@ -1,5 +1,3 @@
-'use client';
-
 import clsx from 'clsx';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
@@ -10,42 +8,43 @@ const content = {
   'start-here': [
     {
       id: 1,
-      href: 'https://neon.com/docs/guides/partner-get-started?utm_source=chatgpt.com',
+      href: '/docs/guides/platform-integration-get-started',
       label: 'Get started with your integration',
       type: 'Docs',
     },
     {
       id: 2,
-      href: 'https://neon.com/docs/reference/api-reference',
+      href: '/blog/from-idea-to-full-stack-app-in-one-conversation-with-create',
       label: 'From idea to full stack app in one conversation with Create',
       type: 'Case Study',
     },
     {
       id: 3,
-      href: 'https://neon.com/docs/guides/partner-consumption-limits',
+      href: '/blog/databutton-neon-integration',
       label: 'Databutton Just Made Their Agent Smarter, with Postgres and Auth Built In',
       type: 'Case Study',
     },
     {
       id: 4,
-      href: 'https://neon.com/docs/guides/partner-consumption-metrics',
+      href: '/docs/reference/api-reference',
       label: 'Explore the Neon API',
       type: 'Docs',
     },
     {
       id: 5,
-      href: 'https://neon.com/blog/replit-app-history-powered-by-neon-branches',
+      href: '/docs/guides/consumption-limits',
       label: 'Configure consumption limits',
       type: 'Docs',
     },
   ],
 };
 
-const QuickLinks = ({ type = 'start-here', className }) => {
+const QuickLinks = ({ type = 'start-here', className, title }) => {
   const links = content[type] || [];
 
   return (
     <section className={clsx('quick-links', className)}>
+      <h2 className="pb-6 pt-10 text-[30px] font-semibold leading-snug tracking-tight">{title}</h2>
       <ul className="!m-0 !p-0">
         {links.map(({ id, href, label, type }, index) => {
           const isFirst = index === 0;
@@ -67,6 +66,7 @@ const QuickLinks = ({ type = 'start-here', className }) => {
                 href={href}
                 className="flex justify-between border-none !text-gray-new-98"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <div className="flex max-w-[calc(100%-64px)] flex-col gap-2.5 md:max-w-[calc(100%-32px)]">
                   {type && (
@@ -90,6 +90,7 @@ const QuickLinks = ({ type = 'start-here', className }) => {
 
 QuickLinks.propTypes = {
   type: PropTypes.string,
+  title: PropTypes.string,
   className: PropTypes.string,
 };
 

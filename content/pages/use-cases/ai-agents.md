@@ -10,7 +10,7 @@ Neon is Postgres rearchitected for agent platforms, designed to give your users 
 
 Use Neon branching to build time travel and versioning features, so users can iterate and jump between versions of their apps. And thanks to Neon’s scale-to-zero, pay only for active databases.
 
-<LogosSection classNameContainer='my-5' logos={[
+<LogosSection containerClassName='py-3' logos={[
 'create',
 'replit',
 'same',
@@ -18,13 +18,13 @@ Use Neon branching to build time travel and versioning features, so users can it
 'databutton',
 ]} />
 
-<QuoteBlock name="dhruv" className="mb-16 md:mb-12" />
+<QuoteBlock quote="The speed of provisioning and serverless scale-to-zero of Neon is critical for us. We can serve users iterating on quick ideas efficiently while also supporting them as they scale, without making them think about database setup." author="dhruv-amin" role="Co-founder at Create.xyz" />
 
 ## The agent experience you can build with Neon
 
 <FeatureList />
 
-<QuoteBlock name="martin" className="mt-12 mb-16 md:mb-12" />
+<QuoteBlock quote="Integrating Neon was a no-brainer. It gives every Databutton app a production-grade Postgres database in seconds, with zero overhead. Our AI agent can now create, manage, and debug the entire stack, not just code." author="martin-skow-røed" role="CTO and co-founder of Databutton" />
 
 ## AI Agents are now provisioning 80% of Neon databases (tens of thousands per day)
 
@@ -34,12 +34,9 @@ The [Neon MCP server](https://mcp.neon.tech/) enables any client to interact wit
 
 The [@neondatabase/toolkit](https://github.com/neondatabase/toolkit) is a lightweight client designed for AI agents that need to spin up Postgres databases in seconds and run SQL queries. It includes both the Neon TypeScript SDK and the Neon Serverless Driver.
 
-<QuoteBlock name="lincoln" className="mt-10" />
+<QuoteBlock quote="The combination of flexible resource limits and nearly instant database provisioning made Neon a no-brainer." author="lincoln-bergeson" role="Infrastructure Engineer at Replit" />
 
-<CTA title="Meet app.build, our reference agent" description="app.build is an open-source AI agent, serving as a reference implementation for any agent builder using Neon." buttonText="Explore the code" buttonUrl="/contact-sales" />
+<CTA title="Meet app.build, our reference agent" description="<a target='_blank' href='https://github.com/appdotbuild/'>app.build</a> is an open-source AI agent, serving as a reference implementation for any agent builder using Neon." buttonText="Explore the code" buttonUrl="https://github.com/appdotbuild/agent" />
 
-<br />
 
-## Start here
-
-<QuickLinks className="mt-8" />
+<QuickLinks title="Start here" />

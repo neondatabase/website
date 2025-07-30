@@ -2,13 +2,28 @@
 
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
+const OFFSET = 200;
+
 const GlowingIcon = ({ icon, index, activeIndex, setActiveIndex, isLastItem }) => {
+  const [rootMargin, setRootMargin] = useState('0px');
+
+  useEffect(() => {
+    const updateMargin = () => {
+      const height = window.innerHeight;
+      setRootMargin(`-${OFFSET}px 0px -${height - OFFSET}px 0px`);
+    };
+
+    updateMargin();
+    window.addEventListener('resize', updateMargin);
+    return () => window.removeEventListener('resize', updateMargin);
+  }, []);
+
   const { ref: inViewRef, inView } = useInView({
     threshold: 0,
-    rootMargin: '-600px 0px',
+    rootMargin,
   });
 
   useEffect(() => {
@@ -51,7 +66,7 @@ const GlowingIcon = ({ icon, index, activeIndex, setActiveIndex, isLastItem }) =
         <div className="relative flex size-7 items-center justify-center rounded-full border border-gray-new-15">
           <div
             className={clsx(
-              'absolute inset-0 z-0 rounded-full drop-shadow-[0_0_10px_#087D69] transition-opacity duration-300',
+              'absolute inset-0 z-0 rounded-full drop-shadow-[0_0_10px_#087d696b] transition-opacity duration-300',
               isActive ? 'opacity-100' : 'opacity-0',
               'before:absolute before:inset-0 before:rounded-full',
               'before:bg-[radial-gradient(circle_at_bottom,_#087D69_0%,_#0B2D29_47%,_#0B0C0D_100%)]'
@@ -60,7 +75,7 @@ const GlowingIcon = ({ icon, index, activeIndex, setActiveIndex, isLastItem }) =
           <div className="absolute inset-0 z-10 rounded-full border border-white/90 mix-blend-overlay" />
           <div
             className={clsx(
-              'relative z-20 flex size-full items-center justify-center transition duration-300',
+              'relative z-20 flex size-full items-center justify-center transition-colors duration-300',
               isActive ? 'text-white' : 'text-gray-new-15'
             )}
           >

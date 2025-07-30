@@ -121,7 +121,7 @@ const GridFeatures = ({
       {logos && (
         <LogosSection
           logosTitle={logosTitle}
-          classNameContainer="mt-[90px] xl:mt-[82px] lg:mt-20 md:mt-[66px]"
+          containerClassName="mt-[90px] xl:mt-[82px] lg:mt-20 md:mt-[66px]"
           logos={logos}
         />
       )}
