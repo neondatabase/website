@@ -14,6 +14,7 @@ updatedOn: '2025-06-30T11:30:21.885Z'
 
 <DocsList title="Related topics" theme="docs">
 <a href="/docs/connect/choose-connection">Choosing a driver and connection type</a>
+<a href="/docs/local/neon-local-connect">Neon Local Connect</a>
 <a href="/docs/connect/connect-securely">Connect to Neon securely</a>
 <a href="/docs/connect/connection-pooling">Connection pooling</a>
 <a href="/docs/connect/query-with-psql-editor">Connect with psql</a>
@@ -29,6 +30,21 @@ You can find the connection details for your database by clicking the **Connect*
 ![Connection details modal](/docs/connect/connection_details.png)
 
 Neon supports both pooled and direct connections to your database. Neon's connection pooler supports a higher number of concurrent connections, so we provide pooled connection details in the **Connect to your database** modal by default, which adds a `-pooler` option to your connection string. If needed, you can get direct database connection details from the modal disabling the **Connection pooling** toggle. For more information about pooled connections, see [Connection pooling](/docs/connect/connection-pooling#connection-pooling).
+
+## Connect locally with Neon Local Connect
+
+For local development, you can use the [Neon Local Connect extension](/docs/local/neon-local-connect) to connect to any Neon branch using a simple localhost connection string. Available for VS Code, Cursor, Windsurf, and other VS Code-compatible editors, this extension lets you:
+
+- Connect to any branch using `postgres://neon:npg@localhost:5432/<database_name>`
+- Switch branches without updating your connection string
+- Create and manage ephemeral branches directly from your editor
+- Access the Neon SQL Editor and Table View with one click
+
+Your app connects to `localhost:5432` while Neon Local routes traffic to your actual Neon branch in the cloud. This eliminates the need to manage different connection strings for different branches during development.
+
+For traditional cloud connections, continue reading below for connection string details.
+
+## Cloud connection details
 
 A Neon connection string includes the role, password, hostname, and database name.
 
