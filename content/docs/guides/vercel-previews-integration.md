@@ -30,7 +30,6 @@ updatedOn: '2025-06-27T09:35:48.806Z'
 
 Vercel [preview deployments](https://vercel.com/docs/concepts/deployments/preview-deployments) enable teams to collaborate effectively by automatically creating an isolated, production-like environment for every commit. This allows changes to be previewed before they are merged into production.
 
-
 However, when databases are involved, teams often use a single database containing dummy data for all preview deployments. This setup is not ideal for these reasons:
 
 - If the shared database encounters an issue, so will all preview deployments.
