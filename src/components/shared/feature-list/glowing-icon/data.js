@@ -54,7 +54,7 @@ export const FEATURES = [
     icon: <Database className="w-full" />,
     title: "It's all just Postgres",
     description:
-      'The Neon API allows you to tracks usage per project and branch with detailed endpoints for compute time, storage, and network I/O. You can enforce quotas via the API to match your free or paid plans, giving you full control over how resources are consumed.',
+      'The most-loved database by developers is also the most practical choice for agents. Postgres is flexible, powerful, and battle-tested. Neon is simply Postgres: with all the extensions, full SQL syntax, and everything your agent already understands.',
   },
 ];
 
