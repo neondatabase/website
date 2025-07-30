@@ -146,3 +146,5 @@ LIMIT 10;
 - [Documentation](https://pgmooncake.com/docs)
 - [Architecture](https://www.mooncake.dev/blog/how-we-built-pgmooncake)
 - [YouTube demo](https://youtu.be/QDNsxw_3ris?feature=shared&t=2048)
+
+<NeedHelp/>

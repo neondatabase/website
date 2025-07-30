@@ -59,3 +59,5 @@ If you need to automate `pg_dump` backups to remote storage, we provide a two-pa
 <Admonition type="note" title="Backup & Restore Questions?">
 If you have questions about backups, please reach out to [Neon Support](https://console.neon.tech/app/projects?modal=support).
 </Admonition>
+
+<NeedHelp/>
