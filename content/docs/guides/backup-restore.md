@@ -337,7 +337,6 @@ Use this option if you need to inspect the snapshot data before you switch over 
    ```
 
    Parameters:
-
    - `name`: (Optional) Name of the new branch with the restored snapshot data. If not provided, a default branch name will be generated.
    - `finalize_restore`: Set to `false` so that you can inspect the new branch before finalizing the restore operation.
 
@@ -379,7 +378,6 @@ Use this option if you need to inspect the snapshot data before you switch over 
    ```
 
    Parameters:
-
    - `project_id`: The Neon project ID.
    - `branch_id`: The branch ID of the candidate branch created during the restore preview.
 
