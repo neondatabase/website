@@ -2,6 +2,7 @@
 title: User Permissions
 subtitle: What each role can do in Neon organizations
 enableTableOfContents: true
+updatedOn: '2025-07-30T22:35:16.154Z'
 ---
 
 In Neon, roles determine what actions you can take within an organization and its projects. This page provides a detailed breakdown of permissions for each role: **Admin**, **Member**, and **Collaborator**.
