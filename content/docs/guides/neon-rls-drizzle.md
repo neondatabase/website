@@ -1,6 +1,6 @@
 ---
 title: Simplify RLS with Drizzle
-subtitle: Use Drizzle crudPolicy to manage Row-Level Security with Neon RLS
+subtitle: Use Drizzle crudPolicy to manage Row-Level Security policies
 enableTableOfContents: true
 updatedOn: '2025-03-06T15:24:01.899Z'
 redirectFrom:
@@ -12,10 +12,13 @@ redirectFrom:
 <DocsList title="What you'll learn">
 <p>How to simplify Row-Level Security using `crudPolicy`</p>
 <p>Common RLS patterns with Drizzle</p>
+<p>Using RLS with Data API and Neon RLS</p>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
-  <a href="/docs/guides/neon-rls">About Neon RLS</a>
+  <a href="/docs/guides/row-level-security">Row-Level Security with Neon</a>
+  <a href="/docs/guides/neon-rls">Neon RLS (JWT/JWKS Integration)</a>
+  <a href="/docs/data-api/get-started">Data API</a>
   <a href="https://orm.drizzle.team/docs/rls">RLS in Drizzle</a>
 </DocsList>
 
@@ -32,7 +35,11 @@ To illustrate, let's consider a simple **Todo** list app with RLS policies appli
 - `USING` clause — controls which existing rows can be accessed
 - `WITH CHECK` clause — controls what new or modified data can be written
 
-<Admonition type="note">To get an understanding of `auth.user_id()` and the role it plays in these policies, see this [explanation](/docs/guides/neon-rls#how-neon-rls-gets-authuserid-from-the-jwt).</Admonition>
+<Admonition type="note" title="A note on auth.user_id()">
+You can use the same Drizzle policies with both the Data API and Neon RLS because they both provide an `auth.user_id()` function to identify the current user.
+
+It's important to know that while the function is the same, the underlying features work differently and **are not compatible**. In general, we recommend the Data API: make sure Neon RLS is disabled for your project if you want to use Data API on a given branch.
+</Admonition>
 
 Here's how these clauses apply to each operation:
 
@@ -125,13 +132,13 @@ export const authUid = (userIdColumn: AnyPgColumn) =>
 
 This helper:
 
-1. Wraps Neon RLS's `auth.user_id()` function (from the [pg_session_jwt](/docs/guides/neon-rls#how-the-pgsessionjwt-extension-works) extension)
+1. Uses the `auth.user_id()` function to extract the user ID from JWT tokens
 2. Compares the authenticated user's ID with a table column
 3. Returns a SQL expression suitable for use in `read` and `modify` parameters
 
 ## Common patterns
 
-Now that we understand how `crudPolicy` works, let's look at two typical ways to secure your tables:
+Now that we understand how `crudPolicy` works, let's look at typical ways to secure your tables:
 
 ### Basic access control
 
@@ -195,11 +202,70 @@ export const posts = pgTable(
 );
 ```
 
-## Example application
+### Complex relationships
 
-Check out our [social wall sample application](https://github.com/neondatabase-labs/social-wall-drizzle-neon-rls), a simple schema that demonstrates RLS policies with `crudPolicy`. It implements a social wall where:
+For tables with foreign key relationships, you can create policies that check ownership through related tables:
 
-- Anyone can view the wall
-- Authenticated users can modify their own posts
+```typescript {15-19,21-25} shouldWrap
+import { crudPolicy, authenticatedRole, pgPolicy } from 'drizzle-orm/neon';
+
+export const notes = pgTable(
+  'notes',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    ownerId: text('owner_id')
+      .notNull()
+      .default(sql`auth.user_id()`),
+    title: text('title').notNull().default('untitled note'),
+    shared: boolean('shared').default(false),
+  },
+  (table) => [
+    // Users can only access their own notes
+    crudPolicy({
+      role: authenticatedRole,
+      read: authUid(table.ownerId),
+      modify: authUid(table.ownerId),
+    }),
+    // Shared notes are visible to authenticated users
+    pgPolicy('shared_policy', {
+      for: 'select',
+      to: authenticatedRole,
+      using: sql`${table.shared} = true`,
+    }),
+  ]
+);
+
+export const paragraphs = pgTable(
+  'paragraphs',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    noteId: uuid('note_id').references(() => notes.id),
+    content: text('content').notNull(),
+  },
+  (table) => [
+    // Users can only access paragraphs from their own notes
+    crudPolicy({
+      role: authenticatedRole,
+      read: sql`(select notes.owner_id = auth.user_id() from notes where notes.id = ${table.noteId})`,
+      modify: sql`(select notes.owner_id = auth.user_id() from notes where notes.id = ${table.noteId})`,
+    }),
+    // Shared note paragraphs are visible to authenticated users
+    pgPolicy('shared_policy', {
+      for: 'select',
+      to: authenticatedRole,
+      using: sql`(select notes.shared from notes where notes.id = ${table.noteId})`,
+    }),
+  ]
+);
+```
+
+## Example applications
+
+Check out these sample applications that demonstrate RLS policies with `crudPolicy`:
+
+- **[Data API Demo](https://github.com/neondatabase-labs/neon-data-api-neon-auth)**: A note-taking app using Data API with RLS
+- **[Social Wall Demo](https://github.com/neondatabase-labs/social-wall-drizzle-neon-rls)**: A social wall using Neon RLS with RLS
+
+Both applications use the same Drizzle RLS patterns, demonstrating how `crudPolicy` works with both Data API and Neon RLS.
 
 <NeedHelp/>

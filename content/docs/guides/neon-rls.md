@@ -1,7 +1,6 @@
 ---
 title: About Neon RLS
-subtitle: Secure your application at the database level using Postgres's Row-Level
-  Security
+subtitle: Secure your application at the database level using Postgres's Row-Level Security
 enableTableOfContents: true
 updatedOn: '2025-06-25T02:56:37.085Z'
 redirectFrom:
@@ -18,13 +17,17 @@ redirectFrom:
 
 <DocsList title="Related docs" theme="docs">
   <a href="/docs/guides/neon-rls-tutorial">Neon RLS Tutorial</a>
-  <a href="/postgresql/postgresql-administration/postgresql-row-level-security">Postgres Row-Level Security tutorial</a>
+  <a href="/docs/guides/row-level-security">Row-Level Security with Neon</a>
   <a href="/docs/guides/neon-rls-drizzle">Simplify RLS with Drizzle</a>
 </DocsList>
 
 </InfoBlock>
 
-**Neon RLS** integrates with third-party **JWT-based authentication providers** like Auth0 and Clerk, bringing authorization closer to your data by leveraging [Row-Level Security (RLS)](https://www.postgresql.org/docs/current/ddl-rowsecurity.html) at the database level.
+**Neon RLS** integrates with third-party **JWT-based authentication providers** like Auth0 and Clerk, allowing you to query your database directly from client-side applications. It enables direct SQL queries over HTTP by leveraging [Row-Level Security (RLS)](https://www.postgresql.org/docs/current/ddl-rowsecurity.html) at the database level.
+
+> Neon also offers a **Data API** feature, which provides an instant REST interface for your database. We recommend this approach for most use cases. You can learn more in our [Data API guide](/docs/data-api/get-started).
+>
+>  Note that while both features require RLS policies, the *Data API and Neon RLS are not compatible* and cannot be enabled at the same time.
 
 ## Authentication and authorization
 

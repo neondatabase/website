@@ -886,6 +886,16 @@
               slug: guides/auth-okta
 - section: Auth & backend
   items:
+    - title: Data API
+      icon: api
+      tag: new
+      slug: data-api/get-started
+      collapsible: true
+      items:
+        - title: Get started
+          slug: data-api/get-started
+        - title: Building a note-taking app
+          slug: data-api/demo
     - title: Neon Auth
       icon: auth
       tag: beta
@@ -1065,7 +1075,18 @@
               slug: neon-auth/customization/internationalization
             - title: Custom Pages
               slug: neon-auth/customization/custom-pages
-    - title: Neon RLS
+    - title: Row-Level security
+      icon: lock
+      slug: guides/row-level-security
+      collapsible: true
+      items:
+        - title: RLS in Neon
+          slug: guides/row-level-security
+        - title: Simplify RLS with Drizzle
+          slug: guides/neon-rls-drizzle
+        - title: PostgreSQL RLS Tutorial
+          slug: https://neon.com/postgresql/postgresql-administration/postgresql-row-level-security
+    - title: Neon RLS (JWT/JWKS)
       icon: lock
       slug: guides/neon-rls
       items:
@@ -1075,8 +1096,6 @@
               slug: guides/neon-rls
             - title: Tutorial
               slug: guides/neon-rls-tutorial
-            - title: Drizzle RLS
-              slug: guides/neon-rls-drizzle
             - title: Troubleshooting
               slug: guides/neon-rls-troubleshooting
             - title: What's next
@@ -1111,15 +1130,6 @@
               slug: guides/neon-rls-workos
             - title: Custom JWT
               slug: guides/neon-rls-custom-jwt
-    - title: Data API
-      icon: api
-      tag: new
-      collapsible: true
-      items:
-        - title: Get started
-          slug: data-api/get-started
-        - title: Building a note-taking app
-          slug: data-api/demo
 - section: Workflows
   items:
     - title: Data anonymization
