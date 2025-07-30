@@ -10,14 +10,15 @@ updatedOn: '2025-07-09T00:00:00.000Z'
 Branch expiration allows you to set automatic deletion timestamps on branches. When the expiration time is reached, the branch is automatically deleted.
 
 <Admonition type="tip" title="Quick guide">
-API/CLI users set `expires_at` when creating or updating branches (see [timestamp format](#timestamp-format-requirements), such as `2025-07-15T18:02:16Z`). Console users check "Auto-delete branch on:" and select a date.
+**API/CLI:** Use `expires_at` with [RFC 3339 format](#timestamp-format-requirements) (e.g., `2025-07-15T18:02:16Z`)
+**Console:** Check "Auto-delete branch on:" and select date/time
 </Admonition>
 
 <InfoBlock>
 <DocsList title="What you will learn:">
 <p>When and why to use branch expiration</p>
 <p>How to set expiration timestamps via API, CLI, and Console</p>
-<p>Timestamp formatting and TTL behavior</p>
+<p>How expiration timestamps and TTL intervals work</p>
 <p>Restrictions and best practices</p>
 </DocsList>
 
@@ -41,14 +42,9 @@ Branch expiration is ideal for temporary branches that have predictable lifespan
 
 Without automatic expiration, these branches accumulate over time, increasing storage costs and project clutter.
 
-### Example branch expiration settings
-
-Here are some example expiration settings that teams might use, depending on the purpose of the branch. Adjust these to fit your workflow and branch management requirements.
-
-- **CI/CD pipelines:** 2–4 hours
-- **Demo environments:** 24–48 hours
-- **Feature development:** 1–7 days
-- **Long-term testing:** 30 days
+<Admonition type="tip">
+Example expiration durations: CI/CD pipelines (2-4 hours), demos (24-48 hours), feature development (1-7 days), long-term testing (30 days).
+</Admonition>
 
 ## How it works
 
@@ -65,7 +61,7 @@ When you set an expiration timestamp on a branch:
 3. If you reset a branch from its parent, the TTL countdown restarts using the original interval
 
 <Admonition type="important">
-Branch deletion is permanent. Once a branch is deleted, all data on the branch is lost and cannot be recovered. Compute endpoints associated with the branch are also removed when a branch is deleted. Carefully verify expiration times before setting them to avoid data loss.
+Branch deletion is permanent and cannot be recovered. All associated data and compute endpoints are also deleted. Verify expiration times carefully before setting them.
 </Admonition>
 
 ## Setting branch expiration
