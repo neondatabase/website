@@ -98,7 +98,7 @@ Once enabled, the flow looks like this:
 
 1. Developer pushes to feature branch → Vercel kicks off Preview Deployment.
 2. Vercel sends a webhook to Neon → Neon creates branch `preview/<git-branch>`.
-3. Connection string for that branch is injected into the deployment's env vars.
+3. Environment variables for the branch connection are injected via webhook at deployment time, overriding preview environment variables for this deployment only (cannot be accessed or viewed).
 4. (Optional) Run migrations in build step so schema matches code.
 
    ![Vercel build commands](/docs/guides/vercel_build_command.png)
@@ -199,5 +199,6 @@ Branches you don't delete are eventually archived, consuming archive storage spa
 - **Neon CLI access**: Requires API key authentication (the `neon auth` command won't work since the account is Vercel-managed)
 - Cannot install if you currently use Vercel Postgres (deprecated) - contact Vercel about transitioning
 - Manual branch deletion required (unlike the **Neon-Managed Integration** which offers automatic cleanup)
+- **Preview deployment environment variables**: Branch-specific connection variables cannot be accessed or viewed (they're injected at deployment time only and not stored in project settings to avoid manual cleanup when branches are deleted)
 
 <NeedHelp/>
