@@ -30,7 +30,7 @@ Use the **Backup & restore** page in the Neon Console to instantly restore a bra
 
 Instantly restore your branch to a specific time in its history.
 
-> Instant restore is only supported for root branches. Typically, this is your project's `production` branch. [Learn more](/docs/manage/branches#root-branch).  
+> Instant restore is only supported for root branches. Typically, this is your project's `production` branch. [Learn more](/docs/manage/branches#root-branch).
 
 <Tabs labels={["Console", "CLI", "API"]}>
 
