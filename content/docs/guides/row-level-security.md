@@ -34,7 +34,7 @@ Neon provides two ways to apply RLS for client-side querying:
 - [Data API](#data-api-with-rls) (recommended)
 - [Neon RLS (JWT/JWKS Integration)](#neon-rls-jwtjwks-integration)
 
->  Note, the Data API and Neon RLS **are not compatible**. If you are using the Data API on a given branch, make sure Neon RLS is disabled for your project.
+> Note, the Data API and Neon RLS **are not compatible**. If you are using the Data API on a given branch, make sure Neon RLS is disabled for your project.
 
 ## Data API with RLS
 
