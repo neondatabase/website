@@ -31,9 +31,14 @@ CREATE POLICY "users_can_only_access_own_notes" ON notes
 
 Neon provides two ways to apply RLS for client-side querying:
 
+- [Data API](#data-api-with-rls) (recommended)
+- [Neon RLS (JWT/JWKS Integration)](#neon-rls-jwtjwks-integration)
+
+>  Note, the Data API and Neon RLS **are not compatible**. If you are using the Data API on a given branch, make sure Neon RLS is disabled for your project.
+
 ## Data API with RLS
 
-The **Data API** turns your database tables into a REST API, and it requires RLS policies on all tables to ensure your data is secure.
+The **Data API** turns your database tables on a given branch into a REST API, and it requires RLS policies on all tables to ensure your data is secure.
 
 ### How it works
 
@@ -58,10 +63,6 @@ The **Data API** turns your database tables into a REST API, and it requires RLS
 - The `pg_session_jwt` extension provides the `auth.user_id()` function.
 - Your RLS policies use `auth.user_id()` to control access.
 - It works with the Neon HTTP driver for direct database queries.
-
-<Admonition type="warning" title="Important: Data API and Neon RLS are not compatible">
-If you are using the Data API, make sure the **Neon RLS** feature is disabled for your project.
-</Admonition>
 
 <DetailIconCards>
 

@@ -206,7 +206,7 @@ export const posts = pgTable(
 
 For tables with foreign key relationships, you can create policies that check ownership through related tables:
 
-```typescript {15-19,21-25} shouldWrap
+```typescript {15-19,21-25,38-42,44-48} shouldWrap
 import { crudPolicy, authenticatedRole, pgPolicy } from 'drizzle-orm/neon';
 
 export const notes = pgTable(
