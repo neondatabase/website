@@ -5,13 +5,16 @@ enableTableOfContents: true
 updatedOn: '2025-07-09T00:00:00.000Z'
 ---
 
+<EarlyAccess />
+
 ## Overview
 
 Branch expiration allows you to set automatic deletion timestamps on branches. When the expiration time is reached, the branch is automatically deleted.
 
 <Admonition type="tip" title="Quick guide">
 **API/CLI:** Use `expires_at` with [RFC 3339 format](#timestamp-format-requirements) (e.g., `2025-07-15T18:02:16Z`)
-**Console:** Check "Auto-delete branch on:" and select date/time
+
+**Console:** Check "Auto-delete branch on:" and select a date and time
 </Admonition>
 
 <InfoBlock>
@@ -173,7 +176,7 @@ neon branches create \
 3. Enter branch name and select parent branch
 4. Check "Auto-delete branch on:"
 5. Select or enter date and time
-6. Click "Create branch"
+6. Click "Create"
 ```
 
 </CodeTabs>
@@ -210,23 +213,23 @@ curl --request PATCH \
 
 ```bash {4,12,18}
 # Update expiration to new timestamp
-neon branches update \
+neon branches set-expiration \
   <branch-id> \
-  --expires-at="2026-01-29T12:00:00Z" \
+  --expires-at "2026-01-29T12:00:00Z" \
   --project-id <project-id>
 
 # Extend expiration by 7 days from now
 # Linux/GNU: $(date -u -d '+7 days' +%Y-%m-%dT%H:%M:%SZ)
 # macOS/BSD: $(date -u -v+7d +%Y-%m-%dT%H:%M:%SZ)
-neon branches update \
+neon branches set-expiration \
   <branch-id> \
-  --expires-at="$(date -u -d '+7 days' +%Y-%m-%dT%H:%M:%SZ)" \
+  --expires-at "$(date -u -d '+7 days' +%Y-%m-%dT%H:%M:%SZ)" \
   --project-id <project-id>
 
 # Remove expiration from a branch
-neon branches update \
+neon branches set-expiration \
   <branch-id> \
-  --expires-at=null \
+  --expires-at null \
   --project-id <project-id>
 ```
 
