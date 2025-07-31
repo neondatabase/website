@@ -60,4 +60,8 @@ For additional Neon API examples, refer to the following topics:
 When using the Neon API programmatically, you can poll the operation `status` to ensure that an operation is finished before proceeding with the next API request. For more information, see [Poll operation status](/docs/manage/operations#poll-operation-status).
 </Admonition>
 
+## API rate limiting
+
+Neon limits API requests to 700 requests per minute (about 11 per second), with bursts allowed up to 40 requests per second per route, per account. If you exceed this, you'll receive an HTTP 429 Too Many Requests error. These limits apply to all public API requests, including those made by the Neon Console. Limits may change, so make sure your app handles 429 errors and retries appropriately. Contact support if you need higher limits.
+
 <NeedHelp/>
