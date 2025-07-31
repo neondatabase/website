@@ -1,12 +1,13 @@
 ---
-title: Connect a Python application to Neon
-subtitle: Connect to a Neon database using Python with the psycopg2 or asyncpg libraries
-  to run INSERT, SELECT, UPDATE, and DELETE statements.
+title: Connect a Python application to Neon Postgres
+subtitle: Learn how to run SQL queries in Neon from Python using psycopg2 or asyncpg
 enableTableOfContents: true
-updatedOn: '2025-07-22T14:51:02.373Z'
+updatedOn: '2025-07-29T10:34:33.840Z'
 ---
 
 This guide describes how to create a Neon project and connect to it from a Python application using popular Postgres drivers like [Psycopg (psycopg2)](https://pypi.org/project/psycopg2-binary/), a synchronous database adapter, and [asyncpg](https://pypi.org/project/asyncpg/), an asynchronous adapter for use with `asyncio`.
+
+You'll learn how to connect to your Neon database from a Python application and perform basic Create, Read, Update, and Delete (CRUD) operations.
 
 ## Prerequisites
 
@@ -23,7 +24,7 @@ If you do not have one already, create a Neon project.
 2.  Click **New Project**.
 3.  Specify your project settings and click **Create Project**.
 
-Your project is created with a ready-to-use database named `neondb`. In the following steps, we'll connect to this database.
+Your project is created with a ready-to-use database named `neondb`. In the following steps, you will connect to this database from your Python application.
 
 ## Create a Python project
 
@@ -83,6 +84,7 @@ Create a file named `.env` in your project's root directory. This file will secu
     ```text
     DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
     ```
+    > Replace `[user]`, `[password]`, `[neon_hostname]`, and `[dbname]` with your actual database credentials.
 
 ## Examples
 
@@ -231,7 +233,7 @@ asyncio.run(run())
 
 </CodeTabs>
 
-In the above code, we:
+The above code does the following:
 
 - Load the connection string from the `.env` file.
 - Connect to the Neon database.
@@ -240,6 +242,12 @@ In the above code, we:
 - Insert a single book record.
 - Insert multiple book records.
 - Commit the changes to the database.
+
+Run the script using the following command:
+
+```bash
+python create_table.py
+```
 
 When the code runs successfully, it produces the following output:
 
@@ -328,12 +336,18 @@ asyncio.run(run())
 
 </CodeTabs>
 
-In the above code, we:
+The above code does the following:
 
 - Load the connection string from the `.env` file.
 - Connect to the Neon database.
 - Use a SQL `SELECT` statement to fetch all rows from the `books` table, ordered by `publication_year`.
 - Print each book's details in a formatted output.
+
+Run the script using the following command:
+
+```bash
+python read_data.py
+```
 
 When the code runs successfully, it produces the following output:
 
@@ -416,12 +430,18 @@ asyncio.run(run())
 
 </CodeTabs>
 
-In the above code, we:
+The above code does the following:
 
 - Load the connection string from the `.env` file.
 - Connect to the Neon database.
 - Use a SQL `UPDATE` statement to change the `in_stock` status of the book 'Dune' to `True`.
 - Commit the changes to the database.
+
+Run the script using the following command:
+
+```bash
+python update_data.py
+```
 
 After running this script, you can run `read_data.py` again to verify that the row was updated.
 
@@ -442,7 +462,7 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: True
 --------------------
 ```
 
-> We can see that the stock status for 'Dune' has been updated to `True`.
+> You can see that the stock status for 'Dune' has been updated to `True`.
 
 ### Delete data
 
@@ -508,12 +528,18 @@ asyncio.run(run())
 
 </CodeTabs>
 
-In the above code, we:
+The above code does the following:
 
 - Load the connection string from the `.env` file.
 - Connect to the Neon database.
 - Use a SQL `DELETE` statement to remove the book '1984' from the `books` table.
 - Commit the changes to the database.
+
+Run the script using the following command:
+
+```bash
+python delete_data.py
+```
 
 After running this script, you can run `read_data.py` again to verify that the row was deleted.
 
@@ -533,9 +559,18 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: True
 --------------------
 ```
 
-> We can see that the book '1984' has been deleted from the library.
+> You can see that the book '1984' has been successfully deleted from the `books` table.
 
 </Steps>
+
+## Next steps: Using an ORM or framework
+
+While this guide demonstrates how to connect to Neon using raw SQL queries, for more advanced and maintainable data interactions in your Python applications, consider using an Object-Relational Mapping (ORM) framework. ORMs not only let you work with data as objects but also help manage schema changes through automated migrations keeping your database structure in sync with your application models.
+
+Explore the following resources to learn how to integrate ORMs with Neon:
+
+- [Connect an SQLAlchemy application to Neon](/docs/guides/sqlalchemy)
+- [Connect a Django application to Neon](/docs/guides/django)
 
 ## Source code
 
@@ -553,5 +588,6 @@ You can find the source code for the applications described in this guide on Git
 
 - [Psycopg2 documentation](https://www.psycopg.org/docs/)
 - [Asyncpg documentation](https://magicstack.github.io/asyncpg/current/)
+- [Building an API with Django, Django REST Framework, and Neon Postgres](/guides/django-rest-api)
 
 <NeedHelp/>

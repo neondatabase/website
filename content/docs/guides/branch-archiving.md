@@ -3,7 +3,7 @@ title: Branch archiving
 subtitle: Learn how Neon automatically archives inactive branches to cost-effective
   storage
 enableTableOfContents: true
-updatedOn: '2025-07-02T14:51:56.779Z'
+updatedOn: '2025-07-31T15:39:07.287Z'
 ---
 
 <InfoBlock>
@@ -83,6 +83,8 @@ For Neon projects created in AWS regions, inactive branches are archived in Amaz
 ## Is branch archiving configurable?
 
 Branch archiving thresholds are not configurable. Archiving and unarchiving happen automatically according to the thresholds and conditions described above.
+
+If you know when a branch should be deleted, set an expiration date rather than wait for automatic archiving. This guarantees automatic deletion at the specified time and works well for CI/CD pipelines and temporary environments. See [Branch expiration](/docs/guides/branch-expiration) for details.
 
 ## Disabling branch archiving
 

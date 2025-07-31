@@ -2,7 +2,7 @@
 title: Branching with the Neon CLI
 subtitle: Learn how to create and delete branches with the Neon CLI
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.895Z'
+updatedOn: '2025-07-31T15:39:07.291Z'
 ---
 
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon CLI. For other branch-related CLI commands, refer to [Neon CLI commands — branches](/docs/reference/cli-branches). This guide also describes how to use the `--api-key` option to authenticate CLI branching commands from the command line.
@@ -130,6 +130,33 @@ After exporting your key, source the profile file (source `~/.bashrc` or source 
 You do not need to specify the variable name explicitly when using a Neon CLI command. A Neon CLI command looks for a `NEON_API_KEY` variable setting by default.
 
 This API key configuration ensures that the API key is kept secure while still providing a way to authenticate your CLI commands. Remember, you should handle your API key with the same level of security as your other credentials.
+
+## Branch expiration
+
+For temporary environments, create branches with `--expires-at` to set a TTL for automatic deletion instead of manual cleanup:
+
+```bash
+# Create a branch that expires at a specific date and time
+neon branches create --project-id <project-id> --name ci-test --parent <parent-branch> --expires-at "2025-07-15T18:02:16Z"
+
+# Create a branch that expires in 2 hours (Linux/GNU)
+neon branches create --project-id <project-id> --name ci-test --parent <parent-branch> --expires-at "$(date -u -d '+2 hours' +%Y-%m-%dT%H:%M:%SZ)"
+
+# Create a branch that expires in 2 hours (macOS/BSD)
+neon branches create --project-id <project-id> --name ci-test --parent <parent-branch> --expires-at "$(date -u -v+2H +%Y-%m-%dT%H:%M:%SZ)"
+```
+
+You can also update or remove expiration from existing branches:
+
+```bash
+# Update expiration to a new timestamp
+neon branches set-expiration <branch-id> --expires-at "2025-07-20T12:00:00Z" --project-id <project-id>
+
+# Remove expiration from a branch
+neon branches set-expiration <branch-id> --expires-at null --project-id <project-id>
+```
+
+For details and configuration instructions, refer to our [Branch expiration guide](/docs/guides/branch-expiration).
 
 ## Resetting a branch from its parent
 

@@ -7,7 +7,6 @@ on:
       - 'src/components/pages/partners/apply/**'
       - 'src/components/pages/blog-post/subscribe-form/**'
       - 'src/components/shared/subscribe/**'
-      - 'src/components/shared/subscribe-minimalistic/**'
       - 'src/components/shared/subscription-form/**'
       - 'src/utils/forms.js'
       - 'src/constants/forms.js'
@@ -33,7 +32,7 @@ jobs:
           browser: chrome
           build: npm run build
           start: npm run start
-          wait-on: "http://localhost:3000"
+          wait-on: 'http://localhost:3000'
         env:
           NEXT_PUBLIC_DEFAULT_SITE_URL: http://localhost:3000
           WP_HTACCESS_USERNAME: ${{ secrets.WP_HTACCESS_USERNAME }}
@@ -42,4 +41,3 @@ jobs:
           NEXT_PUBLIC_GITHUB_PATH: ${{ secrets.NEXT_PUBLIC_GITHUB_PATH }}
           NEXT_PUBLIC_GITHUB_RAW_PATH: ${{ secrets.NEXT_PUBLIC_GITHUB_ROW_PATH }}
           NEXT_PUBLIC_SEGMENT_WRITE_KEY: ${{ secrets.NEXT_PUBLIC_SEGMENT_WRITE_KEY }}
-

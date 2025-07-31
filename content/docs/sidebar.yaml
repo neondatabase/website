@@ -31,7 +31,7 @@
             - title: .NET
               slug: guides/dotnet-npgsql
             - title: Elixir
-              slug: guides/elixir-ecto
+              slug: guides/elixir
             - title: Go
               slug: guides/go
               ariaLabel: Connect a Go application to Neon
@@ -41,9 +41,6 @@
               slug: guides/javascript
             - title: Python
               slug: guides/python
-              items:
-                - title: Psycopg
-                  slug: guides/python
             - title: Rust
               slug: guides/rust
         - section: Framework quickstarts
@@ -104,19 +101,19 @@
           items:
             - title: File storage
               slug: guides/file-storage
-            - title: File storage with AWS S3
+            - title: AWS S3
               slug: guides/aws-s3
-            - title: File storage with Azure Blob Storage
+            - title: Azure Blob Storage
               slug: guides/azure-blob-storage
-            - title: File storage with Backblaze B2
+            - title: Backblaze B2
               slug: guides/backblaze-b2
-            - title: File storage with Cloudflare R2
+            - title: Cloudflare R2
               slug: guides/cloudflare-r2
-            - title: Media storage with Cloudinary
+            - title: Cloudinary
               slug: guides/cloudinary
-            - title: Media storage with ImageKit
+            - title: ImageKit
               slug: guides/imagekit
-            - title: Media storage with Uploadcare
+            - title: Uploadcare
               slug: guides/uploadcare
     - title: Connect
       slug: connect/connect-intro
@@ -268,6 +265,8 @@
                   slug: guides/branching-schema-only
                 - title: Branch archiving
                   slug: guides/branch-archiving
+                - title: Branch expiration
+                  slug: guides/branch-expiration
             - section: Restore and reset
               items:
                 - title: Reset from parent
@@ -674,7 +673,7 @@
       icon: languages
       items:
         - title: Elixir
-          slug: guides/elixir-ecto
+          slug: guides/elixir
         - title: Go
           slug: guides/go
         - title: Java
@@ -693,6 +692,8 @@
           slug: guides/django
         - title: Drizzle
           slug: guides/drizzle
+        - title: Elixir Ecto
+          slug: guides/elixir-ecto
         - title: Laravel (Eloquent)
           slug: guides/laravel
         - title: Prisma
@@ -887,6 +888,16 @@
               slug: guides/auth-okta
 - section: Auth & backend
   items:
+    - title: Data API
+      icon: api
+      tag: new
+      slug: data-api/get-started
+      collapsible: true
+      items:
+        - title: Get started
+          slug: data-api/get-started
+        - title: Building a note-taking app
+          slug: data-api/demo
     - title: Neon Auth
       icon: auth
       tag: beta
@@ -1066,7 +1077,18 @@
               slug: neon-auth/customization/internationalization
             - title: Custom Pages
               slug: neon-auth/customization/custom-pages
-    - title: Neon RLS
+    - title: Row-Level security
+      icon: lock
+      slug: guides/row-level-security
+      collapsible: true
+      items:
+        - title: RLS in Neon
+          slug: guides/row-level-security
+        - title: Simplify RLS with Drizzle
+          slug: guides/neon-rls-drizzle
+        - title: PostgreSQL RLS Tutorial
+          slug: https://neon.com/postgresql/postgresql-administration/postgresql-row-level-security
+    - title: Neon RLS (JWT/JWKS)
       icon: lock
       slug: guides/neon-rls
       items:
@@ -1076,8 +1098,6 @@
               slug: guides/neon-rls
             - title: Tutorial
               slug: guides/neon-rls-tutorial
-            - title: Drizzle RLS
-              slug: guides/neon-rls-drizzle
             - title: Troubleshooting
               slug: guides/neon-rls-troubleshooting
             - title: What's next
@@ -1112,15 +1132,6 @@
               slug: guides/neon-rls-workos
             - title: Custom JWT
               slug: guides/neon-rls-custom-jwt
-    - title: Data API
-      icon: api
-      tag: new
-      collapsible: true
-      items:
-        - title: Get started
-          slug: data-api/get-started
-        - title: Building a note-taking app
-          slug: data-api/demo
 - section: Workflows
   items:
     - title: Data anonymization

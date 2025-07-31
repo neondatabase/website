@@ -1,14 +1,12 @@
 ---
 title: Neon Docs
-updatedOn: '2025-05-12T22:31:52.611Z'
+updatedOn: '2025-07-29T22:57:05.059Z'
 ---
 
 Neon is a serverless Postgres platform designed to help you build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as **autoscaling**, **branching**, **instant restore**, and more. Get started today with our [generous free plan](https://console.neon.tech)
 
 <CTA title="Manage Neon from Cursor, Windsurf, and other AI tools ✨" 
 description="Manage Neon Postgres databases from your favorite AI tools using simple, conversational commands with Neon's MCP Server. <a href='/docs/ai/connect-mcp-clients-to-neon'>Learn how</a> ➡️" isIntro></CTA>
-
-<ChatOptions/>
 
 ## Get started
 

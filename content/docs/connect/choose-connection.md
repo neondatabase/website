@@ -2,7 +2,7 @@
 title: Choosing your driver and connection type
 subtitle: How to select the right driver and connection type for your application
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.882Z'
+updatedOn: '2025-07-30T22:35:16.145Z'
 ---
 
 When setting up your application’s connection to your Neon Postgres database, you need to make two main choices:
@@ -127,3 +127,5 @@ Here is a table summarizing the options we've walked through on this page:
 | **Use Case**    | Migrations, admin tasks requiring stable connections                                                | High number of concurrent client connections, efficient resource management                                                                                                                                                                                                                                                                       | One-shot queries, short-lived operations | Transactions requiring persistent connections |
 | **Scalability** | Limited by `max_connections` tied to [compute size](/docs/manage/computes#how-to-size-your-compute) | Up to 10,000 application connections (between your application and PgBouncer); however, only [`default_pool_size`](/docs/connect/connection-pooling#neon-pgbouncer-configuration-settings) backend connections (active transactions between PgBouncer and Postgres) are allowed per user/database pair. This limit can be increased upon request. | Automatically scales                     | Automatically scales                          |
 | **Performance** | Low overhead                                                                                        | Efficient for stable, high-concurrency workloads                                                                                                                                                                                                                                                                                                  | Optimized for serverless                 | Optimized for serverless                      |
+
+<NeedHelp/>

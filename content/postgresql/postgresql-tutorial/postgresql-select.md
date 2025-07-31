@@ -197,13 +197,13 @@ In this example, we used the [concatenation operator](../postgresql-string-funct
 Notice the first column of the output doesn't have a name but `?column?`. To assign a name to a column temporarily in the query, you can use a [column alias](postgresql-column-alias):
 
 ```
-expression AS column_lias
+expression AS column_alias
 ```
 
 The AS keyword is optional. Therefore, you can use a shorter syntax:
 
 ```
-expression column_lias
+expression column_alias
 ```
 
 For example, you can assign a column alias full_name to the first column of the query as follows:
