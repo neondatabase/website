@@ -276,10 +276,6 @@ const faqItems = [
     answer: `Yes, we provide annual contracts for Enterprise clients accounting for higher resource limits and dedicated requirements. If you’re interested, <a href="/contact-sales">contact us.</a>`,
   },
   {
-    question: 'Can Neon help with migrations?',
-    answer: `Absolutely. Our expert team assists Enterprise clients throughout the migration process. <a href="/contact-sales">Contact us</a> if you're considering migrating to Neon.`,
-  },
-  {
     question: 'What can I expect during the sales process?',
     answer: `Our sales process is designed to be smooth and flexible: <ol><li><b>Reach Out:</b> Fill out our contact form.</li><li><b>Information Gathering:</b> We’ll email you to learn more about your workload and requirements.</li><li><b>Call with Solutions Team:</b> Discuss timelines, configurations, and request demos or follow-ups.</li><li><b>Pricing Proposal:</b> Based on your inputs, we’ll provide a pricing proposal, often with a proof-of-concept migration plan.</li><li><b>Additional Details (if needed):</b> For complex setups, we may request more information, like itemized bills or specifics about your current environment.</li><li><b>Stakeholder Support:</b> We assist with security reviews, documentation, and answering any stakeholder questions.</li></ol> We’re always happy to adjust the process to fit your unique needs. <a href="/contact-sales">Reach out to us</a> and tell us about your use case: we're here to help.`,
   },
