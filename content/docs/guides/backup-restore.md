@@ -362,7 +362,7 @@ Use this option if you need to inspect the restored data before you switch over 
     If you're satisfied with the data on the new branch, finalize the restore operation using the [Finalize restore](https://api-docs.neon.tech/reference/finalize_restore) endpoint. This step performs the following actions:
     - Moves your original branch's computes to the new branch and restarts the computes
     - Renames the new branch to original branch's name
-    - Renames the original branch to `<brach_name> (old)`.
+    - Renames the original branch to `<branch_name> (old)`.
 
     ```bash
     curl -X POST "https://console.neon.tech/api/v2/projects/project_id/branches/branch_id/finalize_restore" \
