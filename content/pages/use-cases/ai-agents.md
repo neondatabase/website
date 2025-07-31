@@ -38,5 +38,4 @@ The [@neondatabase/toolkit](https://github.com/neondatabase/toolkit) is a lightw
 
 <CTA title="Meet app.build, our reference agent" description="<a target='_blank' href='https://github.com/appdotbuild/'>app.build</a> is an open-source AI agent, serving as a reference implementation for any agent builder using Neon." buttonText="Explore the code" buttonUrl="https://github.com/appdotbuild/agent" />
 
-
 <QuickLinks title="Start here" />
