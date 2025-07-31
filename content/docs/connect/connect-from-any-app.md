@@ -21,7 +21,9 @@ updatedOn: '2025-06-30T11:30:21.885Z'
 </DocsList>
 </InfoBlock>
 
-## Database connection details
+You can connect to your Neon database from any application. The standard method is to copy your [connection string](#get-a-connection-string-from-the-neon-console) from the Neon console and use it in your app or client. For local development, you can also use the [Neon Local Connect extension](#connect-with-the-neon-local-connect-extension), which lets you connect using a simple localhost connection string.
+
+## Get a connection string from the Neon console
 
 When connecting to Neon from an application or client, you connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the default branch of your project (`production`) or a child branch.
 
@@ -30,8 +32,6 @@ You can find the connection details for your database by clicking the **Connect*
 ![Connection details modal](/docs/connect/connection_details.png)
 
 Neon supports both pooled and direct connections to your database. Neon's connection pooler supports a higher number of concurrent connections, so we provide pooled connection details in the **Connect to your database** modal by default, which adds a `-pooler` option to your connection string. If needed, you can get direct database connection details from the modal disabling the **Connection pooling** toggle. For more information about pooled connections, see [Connection pooling](/docs/connect/connection-pooling#connection-pooling).
-
-## Cloud connection details
 
 A Neon connection string includes the role, password, hostname, and database name.
 
@@ -75,11 +75,22 @@ psql postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.
 Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by configuring the `sslmode` option. For more information, see [Connect to Neon securely](/docs/connect/connect-securely).
 </Admonition>
 
+## Connect with the Neon Local Connect extension
+
+For local development, you can use the [Neon Local Connect extension](/docs/local/neon-local-connect) to connect to any Neon branch using a simple localhost connection string. Available for VS Code, Cursor, Windsurf, and other VS Code-compatible editors, this extension lets you:
+
+- Connect to any branch using `postgres://neon:npg@localhost:5432/<database_name>`
+- Switch branches without updating your connection string
+- Create and manage ephemeral branches directly from your editor
+- Access the Neon SQL Editor and Table View with one click
+
+Your app connects to `localhost:5432` while Neon Local routes traffic to your actual Neon branch in the cloud. This eliminates the need to manage different connection strings for different branches during development.
+
 ## Where can I find my password?
 
 It's included in your Neon connection string. Click the **Connection** button on your **Project Dashboard** to open the **Connect to your database** modal.
 
-## Save your connection details to 1Password
+### Save your connection details to 1Password
 
 If have a [1Password](https://1password.com/) browser extension, you can save your database connection details to 1Password directly from the Neon Console. In your **Project Dashboard**, click **Connect**, then click **Save in 1Password**.
 
@@ -102,17 +113,6 @@ See our [frameworks](/docs/get-started-with-neon/frameworks) and [languages](/do
 Neon projects provisioned on AWS support both [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4) and [IPv6](https://en.wikipedia.org/wiki/IPv6) addresses. Neon projects provisioned on Azure support IPv4.
 
 Additionally, Neon provides a low-latency serverless driver that supports connections over WebSockets and HTTP. Great for serverless or edge environments where connections over TCP may not be not supported. For further information, refer to our [Neon serverless driver](/docs/serverless/serverless-driver) documentation.
-
-## Connect locally with Neon Local Connect
-
-For local development, you can use the [Neon Local Connect extension](/docs/local/neon-local-connect) to connect to any Neon branch using a simple localhost connection string. Available for VS Code, Cursor, Windsurf, and other VS Code-compatible editors, this extension lets you:
-
-- Connect to any branch using `postgres://neon:npg@localhost:5432/<database_name>`
-- Switch branches without updating your connection string
-- Create and manage ephemeral branches directly from your editor
-- Access the Neon SQL Editor and Table View with one click
-
-Your app connects to `localhost:5432` while Neon Local routes traffic to your actual Neon branch in the cloud. This eliminates the need to manage different connection strings for different branches during development.
 
 ## Connection notes
 
