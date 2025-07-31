@@ -14,7 +14,7 @@ Branch expiration allows you to set automatic deletion timestamps on branches. W
 <Admonition type="tip" title="Quick guide">
 **API/CLI:** Use `expires_at` with [RFC 3339 format](#timestamp-format-requirements) (e.g., `2025-07-15T18:02:16Z`)
 
-**Console:** Check "Auto-delete branch on:" and select a date and time
+**Console:** Check "Expire branch on:" and select a date and time
 </Admonition>
 
 <InfoBlock>
@@ -73,7 +73,7 @@ You can set, update, or remove expiration timestamps through three interfaces:
 
 - **API** - Use the `expires_at` parameter with [RFC 3339](#timestamp-format-requirements) format
 - **CLI** - Use the `--expires-at` flag when creating or updating a branch with [RFC 3339](#timestamp-format-requirements) format
-- **Neon Console** - Check "Auto-delete branch on:" and define or select a date (automatically handles formatting)
+- **Neon Console** - Check "Expire branch on:" and define or select a date (automatically handles formatting)
 
 See the [Examples](#examples) section below for detailed usage of each method.
 
@@ -174,7 +174,7 @@ neon branches create \
 1. Navigate to the Branches page in the Neon Console
 2. Click "Create branch"
 3. Enter branch name and select parent branch
-4. Check "Auto-delete branch on:"
+4. Check "Expire branch on:"
 5. Select or enter date and time
 6. Click "Create"
 ```
@@ -239,7 +239,7 @@ neon branches set-expiration \
 3. In the Branch Overview, look for the info box stating: "This branch is scheduled for automatic deletion on {date}"
 4. Click the "Edit Expiration" button in this box
 5. To update: Select a new date and time
-6. To remove: Uncheck "Auto-delete branch on:"
+6. To remove: Uncheck "Expire branch on:"
 7. Click "Save"
 ```
 
