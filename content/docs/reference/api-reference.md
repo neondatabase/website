@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/reference/about
   - /docs/api/about
-updatedOn: '2025-05-11T11:23:50.628Z'
+updatedOn: '2025-07-31T00:01:54.390Z'
 ---
 
 The Neon API allows you to manage your Neon projects programmatically.
