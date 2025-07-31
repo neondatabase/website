@@ -69,7 +69,11 @@ Before we dive into the queries, let's first secure our tables. When making dire
 
 RLS is crucial for any real-world app. RLS policies act as a safety net at the database level, so even if your frontend code has bugs, your data stays protected.
 
-Our demo app uses [Drizzle](/docs/guides/neon-rls-drizzle) ORM to define RLS policies, which we highly recommend as a simpler, more maintainable way of writing RLS policies:
+<Admonition type="info" title="A note on Neon RLS">
+You might notice another feature in Neon called **Neon RLS**. Please be aware that it's a different method for client-side querying and **is not compatible with the Data API**.
+</Admonition>
+
+Our demo app uses [Drizzle ORM](/docs/guides/neon-rls-drizzle) to define RLS policies, which we highly recommend as a simpler, more maintainable way of writing RLS policies:
 
 ```typescript shouldWrap
 // src/db/schema.ts - RLS policies using Drizzle
@@ -126,7 +130,7 @@ pgPolicy("shared_policy", {
 <Admonition type="info" title="About auth.user_id()">
 Neon's RLS policies use the <code>auth.user_id()</code> function, which extracts the user's ID from the JWT (JSON Web Token) provided by your authentication provider. In this demo, <a href="/docs/guides/neon-auth">Neon Auth</a> issues the JWTs, and Neon's Data API passes them to Postgres, so RLS can enforce per-user access.
 
-See our [RLS docs](/docs/guides/neon-rls) and [Neon Auth](/docs/guides/neon-auth) for details.
+For more details on RLS with Data API, see our [Row-Level Security with Neon guide](/docs/guides/row-level-security).
 </Admonition>
 
 Now that our tables are secure, let's look at how to perform CRUD operations using our note-taking app as an example.

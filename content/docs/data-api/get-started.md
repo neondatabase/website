@@ -26,7 +26,11 @@ The Neon Data API, powered by [PostgREST](https://docs.postgrest.org/en/v13/), o
 const { data } = await client.from('playing_with_neon').select('*').gte('value', 0.5);
 ```
 
-> When using the Data API, it is essential to set up RLS policies so that you can safely expose your databases to clients such as web apps. Make sure that _all_ of your tables have RLS policies, and that you have carefully reviewed each policy.
+> When using the Data API, it is essential to set up RLS policies so that you can safely expose your databases to clients such as web apps. Make sure that all of your tables have RLS policies, and that you have carefully reviewed each policy.
+
+<Admonition type="info" title="A note on Neon RLS">
+You might notice another feature in Neon called **Neon RLS**. Please be aware that it's a different method for client-side querying and **is not compatible with the Data API**.
+</Admonition>
 
 <Steps>
 ## Enabling the Data API
@@ -41,7 +45,16 @@ Once enabled, you'll see your Data API **Project URL** here — this is your end
 
 ![Data API enabled view with Project URL](/docs/data-api/data-api-enabled.png)
 
-Always secure your data before using the Data API in production.
+_Always secure your data before using the Data API in production._
+
+### About activation times and schema changes
+
+- After enabling the Data API, it may take a minute for your endpoints to become available. Be aware of that.
+- If you change your database schema, you'll need to tell the Data API to refresh its cache. You can do this by reloading the schema from the SQL Editor:
+
+  ```sql
+  NOTIFY pgrst, 'reload schema'
+  ```
 
 ## Authentication
 
@@ -76,13 +89,19 @@ CREATE POLICY "user_can_access_own_data" ON your_table
   FOR ALL USING (auth.user_id() = user_id);
 ```
 
-We recommend using [Drizzle](/docs/guides/neon-rls-drizzle) to help simplify writing RLS policies.
+We recommend using [Drizzle ORM](/docs/guides/neon-rls-drizzle) to help simplify writing RLS policies for the Data API.
+
+<Admonition type="info" title="About auth.user_id()">
+The `auth.user_id()` function extracts the user's ID from the JSON Web Token (JWT) issued by [Neon Auth](/docs/guides/neon-auth). The Data API validates this token, making the user's ID available to your RLS policies for enforcing per-user access.
+
+For guidance on writing RLS policies, see our [PostgreSQL RLS tutorial](/postgresql/postgresql-administration/postgresql-row-level-security) for the basics, or our recommended [Drizzle RLS guide](/docs/guides/neon-rls-drizzle) for a simpler approach.
+</Admonition>
 
 ## Using the Data API
 
 By default, all tables in your database are accessible via the API with `SELECT` permissions granted to **unauthenticated requests**. This lets you directly interact with the API without requiring additional authorization headers.
 
-> **Warning:** This means your data is **publicly accessbile** until you enable Row-Level Security (RLS). Again, enable RLS on _all_ your tables before using the Data API in production.
+> **Warning:** This means your data is **publicly accessible** until you enable Row-Level Security (RLS). Again, enable RLS on _all_ your tables before using the Data API in production.
 
 ### Example of creating a table and querying it via the Data API
 
