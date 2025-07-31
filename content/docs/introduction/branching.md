@@ -74,6 +74,17 @@ Refer to the following guide for instructions.
 
 </DetailIconCards>
 
+### Temporary environments
+
+Create branches with TTL by [setting an expiration date](/docs/guides/branch-expiration). Perfect for temporary development and testing environments that need automatic deletion.
+
+Branches with expiration are particularly useful for:
+
+- CI/CD pipeline testing environments
+- Feature development with known lifespans
+- Automated testing scenarios
+- AI-driven development workflows
+
 ## Restore and recover data
 
 If you lose data due to an unintended deletion or some other event, you can restore a branch to any point in its restore window to recover lost data. You can also create a new restore branch for historical analysis or any other reason.
