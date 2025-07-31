@@ -154,7 +154,7 @@ curl -X POST "https://console.neon.tech/api/v2/projects/project_id/branches/bran
     "timestamp": "2025-07-29T21:00:00Z",
     "name": "my_snapshot",
     "expires_at": "2025-08-05T22:00:00Z"
-  }'
+  }' |jq
 ```
 
 The parameters used in the example above:
@@ -219,7 +219,7 @@ curl -X PUT "https://console.neon.tech/api/v2/projects/{project_id}/branch_id/{b
         "retention_seconds": 3600
       }
     ]
-  }'
+  }' |jq
 ```
 
 ### Retrieve a branch snapshot schedule
@@ -281,7 +281,7 @@ curl -X POST "https://console.neon.tech/api/v2/projects/project_id/snapshots/sna
   -d '{
     "name": "restored_branch",
     "finalize_restore": false
-  }'
+  }' |jq
 ```
 
 Parameters:
@@ -331,7 +331,7 @@ Use this option if you need to inspect the snapshot data before you switch over 
     -d '{
        "name": "my_restored_branch",
        "finalize_restore": false
-    }'
+    }' |jq
     ```
 
     Parameters:
@@ -344,7 +344,7 @@ Use this option if you need to inspect the snapshot data before you switch over 
              ```bash
              curl -X GET "https://console.neon.tech/api/v2/projects/project_id/snapshots" \
              -H "Content-Type: application/json" \
-             -H "Authorization: Bearer $NEON_API_KEY"
+             -H "Authorization: Bearer $NEON_API_KEY" |jq
              ```
 
        </Admonition>
@@ -357,7 +357,7 @@ Use this option if you need to inspect the snapshot data before you switch over 
     curl --request GET \
       --url 'https://console.neon.tech/api/v2/projects/project_id/connection_uri?branch_id=branch_id&database_name=db_name&role_name=role_name&pooled=true' \
       --header 'accept: application/json' \
-      --header 'authorization: Bearer $NEON_API_KEY'
+      --header 'authorization: Bearer $NEON_API_KEY' |jq
     ```
 
 3.  **Finalize the restore**
@@ -370,7 +370,7 @@ Use this option if you need to inspect the snapshot data before you switch over 
     ```bash
     curl -X POST "https://console.neon.tech/api/v2/projects/project_id/branches/branch_id/finalize_restore" \
     -H "Content-Type: application/json" \
-    -H 'authorization: Bearer $NEON_API_KEY'
+    -H 'authorization: Bearer $NEON_API_KEY' |jq
     ```
 
     Parameters:
