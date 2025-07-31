@@ -182,7 +182,12 @@ const defaultConfig = {
       },
       {
         source: '/jobs',
-        destination: '/careers',
+        destination: 'https://www.databricks.com/company/careers',
+        permanent: true,
+      },
+      {
+        source: '/careers',
+        destination: 'https://www.databricks.com/company/careers',
         permanent: true,
       },
       {
@@ -325,6 +330,11 @@ const defaultConfig = {
       {
         source: '/hipaa-compliance-guide',
         destination: '/docs/security/hipaa',
+        permanent: true,
+      },
+      {
+        source: '/hipaa-baa',
+        destination: 'https://ironcladapp.com/public-launch/6884048e9f9f2acee1cf6353',
         permanent: true,
       },
       {

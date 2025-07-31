@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/guides/vercel-native-integration
   - /docs/guides/vercel-native-integration-previews
 enableTableOfContents: true
-updatedOn: '2025-07-14T18:31:00.663Z'
+updatedOn: '2025-07-30T21:12:42.426Z'
 ---
 
 <InfoBlock>
@@ -41,14 +41,31 @@ Choose the Vercel-Managed Integration if you **do not already have a Neon accoun
 
 ## Installation walkthrough
 
-1. Open the [Neon integration on the Vercel Marketplace](https://vercel.com/marketplace/neon) and click **Install**.
-2. This installs the Native Integration, which automatically creates a Neon account managed by Vercel.
-3. Accept the terms, pick a region & plan, then name your database. (Remember: a "Database" in Vercel is a **Project** in Neon.)
-4. After creation you'll land on Vercel's **Storage** tab that includes status, plan, connection string, billing plan, and more.
+<Steps>
 
-### Open the project in the Neon Console
+## Open Neon integration
 
-From the **Storage** tab, click **Open in Neon** to jump straight to your new Neon project dashboard in the Neon Console. You'll notice it lives in an organisation named `Vercel: <your-vercel-team>`.
+Open the [Neon integration on the Vercel Marketplace](https://vercel.com/marketplace/neon) and click **Install**.
+
+## Add the integration in Vercel
+
+This opens the **Install Neon** modal where you can choose between two options. Select **Create New Neon Account**, then click **Continue**.
+
+![Create a New Neon Account](/docs/guides/vercel_install_neon_modal_new_account.png)
+
+## Complete Vercel's configuration
+
+Accept the terms, pick a region & plan, then name your database. (Remember: a "Database" in Vercel is a **Project** in Neon.)
+
+## View storage settings
+
+After creation you'll land on Vercel's **Storage** tab that includes status, plan, connection string, billing plan, and more.
+
+## Optionally open the project in the Neon Console
+
+From the **Storage** tab, click **Open in Neon** to jump straight to your new Neon project dashboard in the Neon Console. You'll notice it lives in an organization named `Vercel: <your-vercel-team>`.
+
+</Steps>
 
 ---
 
@@ -81,7 +98,7 @@ Once enabled, the flow looks like this:
 
 1. Developer pushes to feature branch → Vercel kicks off Preview Deployment.
 2. Vercel sends a webhook to Neon → Neon creates branch `preview/<git-branch>`.
-3. Connection string for that branch is injected into the deployment's env vars.
+3. Environment variables for the branch connection are injected via webhook at deployment time, overriding preview environment variables for this deployment only (cannot be accessed or viewed in your Vercel project's environment variable settings).
 4. (Optional) Run migrations in build step so schema matches code.
 
    ![Vercel build commands](/docs/guides/vercel_build_command.png)
@@ -182,5 +199,6 @@ Branches you don't delete are eventually archived, consuming archive storage spa
 - **Neon CLI access**: Requires API key authentication (the `neon auth` command won't work since the account is Vercel-managed)
 - Cannot install if you currently use Vercel Postgres (deprecated) - contact Vercel about transitioning
 - Manual branch deletion required (unlike the **Neon-Managed Integration** which offers automatic cleanup)
+- **Preview deployment environment variables**: Branch-specific connection variables cannot be accessed or viewed in your Vercel project's environment variable settings (they're injected at deployment time only and not stored to avoid manual cleanup when branches are deleted)
 
 <NeedHelp/>
