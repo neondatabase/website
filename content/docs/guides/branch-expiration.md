@@ -6,7 +6,7 @@ enableTableOfContents: true
 updatedOn: '2025-07-31T15:59:37.994Z'
 ---
 
-<Admonition type="comingSoon" title="Feature coming soon">This feature is currently not available, but will soon be available to members of our Early Access Program.</Admonition>
+<Admonition type="comingSoon" title="Feature coming soon">This feature is currently not available and subject to change. It will soon be made available to members of our Early Access Program.</Admonition>
 
 ## Overview
 
@@ -101,7 +101,7 @@ YYYY-MM-DDTHH:MM:SS-HH:MM    (Negative UTC offset)
 - Time zone is required (either `Z` or numeric offset, not both)
 - Fractional seconds are optional but only second precision is stored
 - Timestamp must be in the future
-- Maximum expiration is 1 year from the current time
+- Maximum expiration is 30 days from the current time
 
 <Admonition type="note">
 Common errors include missing timezone (`2025-07-15T18:02:16`), past timestamps, or combining `Z` with offset (`2025-07-15T18:02:16Z-05:00`).
@@ -114,6 +114,11 @@ To maintain system integrity, expiration timestamps cannot be added to:
 - **Protected branches** - Cannot expire protected branches or protect branches with expiration
 - **Default branches** - Cannot expire default branches or set expiring branches as default
 - **Parent branches** - Cannot expire branches that have children or create children from expiring branches
+
+Branch expiration is not supported with these Neon features:
+
+- **Data API**
+- **Neon Auth**
 
 <Admonition type="note">
 When a branch expires and is deleted, all associated compute endpoints are also deleted. Ensure any critical workloads are migrated before expiration.
