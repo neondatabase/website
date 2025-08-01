@@ -54,7 +54,7 @@ Use the checkboxes to mark any unwanted records for deletion, or use the select-
 
 You can also use the checkboxes to mark records for export. Select the records you want to include in your export, then choose `Export selected...` from the export dropdown.
 
-Or just choose `Export all..` to download the entire contents of the table.
+Or just choose `Export all...` to download the entire contents of the table.
 
 You can export to either JSON or CSV.
 
@@ -72,15 +72,47 @@ In addition to managing data, you can manage your database schema directly from 
 
 ![Drizzle Studio Schema Management UI](/docs/relnotes/drizzle_schema_mgmt.png)
 
+## Create Postgres roles
+
+You can create Postgres roles from the **Tables** page. Define a role name, select from a list of commonly granted privileges, set a password, and click **Review and Create**.
+
+![Create roles on the tables page](/docs/relnotes/tables_page_create_roles.png)
+
+> Neon role and privilege limitations apply. See [Manage roles](/docs/manage/roles).
+
+## Add privileges
+
+For more advanced privilege assignments, click the **Add privilege** link when creating a role to build your `GRANT` statements.
+
+![Add privileges on the tables page](/docs/relnotes/tables_page_add_privileges.png)
+
+> Neon role and privilege limitations apply. See [Manage roles](/docs/manage/roles).
+
+## Define RLS policies
+
+Define your own Postgres RLS policies or use a RLS policy template. The "based on `user_id`" templates can be used with our [Neon RLS](/docs/guides/neon-rls) feature, which integrates third-party JWT-based authentication providers like Auth0 and Clerk.
+
+![Set RLS policies on the tables page](/docs/relnotes/tables_page_rls_policies.png)
+
+### Database studio view
+
+The **Database studio** view makes it easy to explore your database objects—including schemas, tables, views, roles, and policies—all in one place.
+
+To open the view, select **Database studio** from the **Tables** page:
+
+![Select database studio view](/docs/relnotes/tables_page_select_studio_view.png)
+
+Use the top navbar to navigate:
+
+![Studio view](/docs/relnotes/tables_page_studio_view.png)
+
 ## Tables page updates
 
 The **Tables** page in the Neon Console is powered by a Drizzle Studio integration. You can check the Drizzle Studio integration version in your browser by inspecting the Tables page. For example, in Chrome, right-click, select **Inspect**, and go to the **Console** tab to view the current `Tables version`. You can cross-reference this version with the [Neon Drizzle Studio Integration Changelog](https://github.com/neondatabase/neon-drizzle-studio-changelog/blob/main/CHANGELOG.md) to track updates.
 
 ## Reporting errors
 
-If you see an **Unexpected error happened** message on the **Tables** page, this could be due to a DNS resolution issue.
-
-![Unexpected error happened on Tables page](/docs/guides/tables_error.png)
+If you see an error message on the **Tables** page, this could be due to a DNS resolution issue.
 
 Please refer to [DNS resolution issues](/docs/connect/connection-errors#dns-resolution-issues) for workarounds.
 
@@ -94,6 +126,5 @@ If it's not a DNS resolution issue, other troubleshooting steps you can try incl
 
 If the issue persists, please follow these steps to report the error:
 
-1. Click **Download Error Context** to download the error context file.
-2. [Open a support ticket](https://console.neon.tech/app/projects?modal=support) and provide a details description of what were doing when the error occurred. Please include any screen captures or files that will help us reproduce the issue. We'll work with our partners at Drizzle to investigate and resolve the issue.
-3. If you're on the Free Plan, you can report the issue on [Discord](https://discord.gg/92vNTzKDGp).
+1. [Open a support ticket](https://console.neon.tech/app/projects?modal=support) and provide a detailed description of what you were doing when the error occurred. Please include any screen captures or files that will help us reproduce the issue. We'll work with our partners at Drizzle to investigate and resolve the issue.
+2. If you're on the Free Plan, you can report the issue on [Discord](https://discord.gg/92vNTzKDGp).
