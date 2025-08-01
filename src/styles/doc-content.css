@@ -319,7 +319,7 @@
     @apply text-lg md:text-base;
 
     > h2 {
-      @apply text-[30px] md:text-2xl;
+      @apply mt-[72px] text-[30px] lg:mt-[62px] md:mt-[50px] md:text-2xl;
 
       & + p {
         @apply mt-4;
@@ -331,7 +331,7 @@
     }
 
     > p {
-      @apply my-6 !text-gray-new-98;
+      @apply my-6 !text-gray-new-98 lg:my-5;
     }
 
     > ul,

@@ -60,7 +60,7 @@ const CtaBlock = ({
         {description && (
           <p
             className={clsx(
-              'text-pretty [&>a:hover]:underline [&>a]:text-primary-2',
+              'text-pretty [&>a:hover]:cursor-pointer [&>a:hover]:underline [&>a]:text-primary-2',
               sizeClassNames[size].description,
               theme === 'column' && 'max-w-[520px]',
               hasDecor ? 'text-gray-new-98/70' : 'text-gray-new-60'
