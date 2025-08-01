@@ -224,7 +224,7 @@ As a result, most active Vercel team members receive Admin access in the Neon or
 User removal isn't automatically synchronized from Vercel to Neon. When you remove a team member from Vercel:
 
 1. **No automatic webhook** notifies Neon about the removal
-2. **Synchronization only occurs** when the removed user attempts to log into Neon again  
+2. **Synchronization only occurs** when the removed user attempts to log into Neon again
 3. **Active sessions persist** until the user logs out and attempts to re-authenticate
 
 This is a known limitation of the current integration architecture where synchronization is triggered by user actions rather than system webhooks.
