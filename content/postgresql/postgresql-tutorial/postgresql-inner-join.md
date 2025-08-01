@@ -167,8 +167,8 @@ SELECT
   p.payment_date
 FROM
   customer c
-  INNER JOIN payment p USING (customer_id)
-  INNER JOIN staff s using(staff_id)
+  INNER JOIN payment p USING(customer_id)
+  INNER JOIN staff s USING(staff_id)
 ORDER BY
   payment_date;
 ```
