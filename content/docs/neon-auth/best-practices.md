@@ -75,7 +75,7 @@ add each trusted domain needed for your app. You can add as many as you need.
 
 Only the domains on this list will be allowed for authentication redirects. All others will be blocked.
 
-![Screenshot showing the Domains section in Neon Auth](/docs/relnotes/neon-auth-domains.png)
+![Screenshot showing the Domains section in Neon Auth](/docs/changelog/neon-auth-domains.png)
 
 ## Enabling row-level security (RLS)
 
@@ -86,7 +86,7 @@ To get started adding RLS to your Neon Auth project:
 1. Go to the **Configuration** tab in your Neon Auth project.
 2. Copy the **JWKS URL** shown in the **Claim project** section.
 
-   ![jwks in claim project section](/docs/relnotes/neon_auth_jwks.png)
+   ![jwks in claim project section](/docs/changelog/neon_auth_jwks.png)
 
    _This JWKS URL allows Neon RLS to validate authentication tokens issued by Neon Auth._
 

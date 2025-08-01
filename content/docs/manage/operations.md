@@ -33,7 +33,7 @@ You can view system operations via the Neon Console, [Neon CLI](/docs/reference/
 
 You can view system operations via the **Monitoring** page in the Neon Console.
 
-![System operations](/docs/relnotes/operations_monitoring.png)
+![System operations](/docs/changelog/operations_monitoring.png)
 
 Operation details include:
 
