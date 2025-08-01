@@ -33,20 +33,21 @@ This command launches the CLI, which will ask you to sign in with GitHub (requir
 ## What it supports
 
 **React + tRPC**  
-Full-stack TypeScript  
+Full-stack TypeScript
 
 **Laravel**  
-PHP web framework  
+PHP web framework
 
 **FastAPI + NiceGUI**  
-Python web apps  
+Python web apps
 
 In addition `app.build` supports:
+
 - Fastify server with Drizzle ORM
-– A Neon Postgres database  
-– Optional Neon Auth integration  
-– Playwright tests  
-– GitHub Actions for CI/CD  
+  – A Neon Postgres database  
+  – Optional Neon Auth integration  
+  – Playwright tests  
+  – GitHub Actions for CI/CD
 
 ## Infrastructure
 
