@@ -48,7 +48,7 @@ The `GROUP BY` clause divides the rows by the values in the columns specified in
 
 It’s possible to use other clauses of the `SELECT` statement with the `GROUP BY` clause.
 
-PostgreSQL evaluates the `GROUP BY` clause after the `FROM` and [`WHERE`](postgresql-where) clauses and before the [`HAVING`](postgresql-having) [`SELECT`](postgresql-select), [`DISTINCT`](postgresql-select-distinct), [`ORDER BY`](postgresql-order-by) and [`LIMIT`](postgresql-limit) clauses.
+PostgreSQL evaluates the `GROUP BY` clause after the `FROM` and [`WHERE`](postgresql-where) clauses and before the [`HAVING`](postgresql-having), [`SELECT`](postgresql-select), [`DISTINCT`](postgresql-select-distinct), [`ORDER BY`](postgresql-order-by) and [`LIMIT`](postgresql-limit) clauses.
 
 ![PostgreSQL GROUP BY](/postgresqltutorial/PostgreSQL-GROUP-BY-1.png)
 
