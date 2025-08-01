@@ -18,20 +18,35 @@ updatedOn: '2025-07-15T18:48:05.969Z'
 
 ## Getting started
 
+Go to [app.build](https://www.app.build/) to use the web UI.
+
+![app.build Web UI](/docs/relnotes/app_build_web_ui.png)
+
+Run it from your terminal:
+
 ```bash
 npx @app.build/cli
 ```
 
 This command launches the CLI, which will ask you to sign in with GitHub (required for code storage and deployment). Each generated application gets its own repository in your account and is deployed with a real backend and database. The CLI supports both creating new apps and iterating on existing ones (adding features or making changes).
 
-## What it generates
+## What it supports
 
-- Backend: Fastify server with Drizzle ORM
-- Frontend: React application built with Vite
-- Database: Postgres instance (Neon by default)
-- Authentication: An auth integration (Neon Auth by default)
-- Tests: Playwright end-to-end tests
-- CI/CD: GitHub Actions configuration
+**React + tRPC**  
+Full-stack TypeScript  
+
+**Laravel**  
+PHP web framework  
+
+**FastAPI + NiceGUI**  
+Python web apps  
+
+In addition `app.build` supports:
+- Fastify server with Drizzle ORM
+– A Neon Postgres database  
+– Optional Neon Auth integration  
+– Playwright tests  
+– GitHub Actions for CI/CD  
 
 ## Infrastructure
 
@@ -79,10 +94,8 @@ Setup instructions are in the app.build source repositories, with guides for loc
 
 As a reference implementation, we've made specific choices to keep the codebase clear and extensible:
 
-- Single template for web applications with a fixed tech stack
 - Limited customization options in managed mode
 - CLI is basic - create and iterate functionality only
-- Sparse documentation
 
 ## Contributing
 
