@@ -1158,6 +1158,15 @@
         - title: Neon Local Connect
           icon: extension
           slug: local/neon-local-connect
+    - title: Branching workflows
+      slug: get-started-with-neon/workflow-primer
+      icon: branching-workflows
+    - title: Vercel integration
+      slug: guides/vercel-overview
+      icon: vercel-integration
+    - title: GitHub integration
+      slug: guides/neon-github-integration
+      icon: github-integration
 - section: Postgres
   items:
     - title: PostgreSQL Tutorial
