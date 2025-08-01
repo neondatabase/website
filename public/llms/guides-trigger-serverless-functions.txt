@@ -20,7 +20,7 @@ This guide describes setting up a Neon database, configuring the Inngest integra
 
 ## Prerequisites
 
-- A Neon account. If you do not have one, see [Sign up](https://neon.com/docs/get-started-with-neon/signing-up) for instructions.
+- A Neon account. If you do not have one, see [Sign up](https://neon.com/docs/get-started/signing-up) for instructions.
 - An Inngest account. You can create a free Inngest account by [signing up](https://app.inngest.com/sign-up?utm_source=neon&utm_medium=trigger-serverless-functions-guide).
 
 ## Create a Neon project

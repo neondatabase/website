@@ -124,8 +124,8 @@ Your app connects to `localhost:5432`, while the Neon Local service routes the t
 
 Your application now connects to `localhost:5432` using the driver you selected in the extension (Postgres or Neon serverless). See the quickstart for your language or framework for more details.
 
-- [Framework quickstarts](/docs/get-started-with-neon/frameworks)
-- [Language quickstarts](/docs/get-started-with-neon/languages)
+- [Framework quickstarts](/docs/get-started/frameworks)
+- [Language quickstarts](/docs/get-started/languages)
 
 </Steps>
 
@@ -169,7 +169,7 @@ And here's what you can do directly from the Neon panel.
         <img src="/docs/local/sql-editor.png" alt="Open SQL Editor" style={{ verticalAlign: "middle" }} />
       </td>
       <td style={{ verticalAlign: "middle" }}>
-        <strong>Open SQL Editor</strong> — Launch the Neon SQL Editor in your browser for advanced queries and data inspection. <a href="/docs/get-started-with-neon/query-with-neon-sql-editor">Learn more</a>
+        <strong>Open SQL Editor</strong> — Launch the Neon SQL Editor in your browser for advanced queries and data inspection. <a href="/docs/get-started/query-with-neon-sql-editor">Learn more</a>
       </td>
     </tr>
     <tr>

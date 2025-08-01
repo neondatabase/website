@@ -209,7 +209,7 @@ CREATE TABLE IF NOT EXISTS todos (
 
 This schema defines all the tables required for the `Auth.js` library to work, and also the `todos` table that we'll use to store the todo list for each user.
 
-To apply this schema to your Neon database, you can use the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) in the web console or a database management tool like [psql](/docs/connect/query-with-psql-editor).
+To apply this schema to your Neon database, you can use the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) in the web console or a database management tool like [psql](/docs/connect/query-with-psql-editor).
 
 ### Implement the Todo list feature
 

@@ -35,7 +35,7 @@ Neon is committed to providing stability and hassle-free maintenance. You select
 
 Minor release updates are announced in the [Neon Changelog](/docs/changelog).
 
-To check your current Postgres major and minor version, you can run the following query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client connection to your database:
+To check your current Postgres major and minor version, you can run the following query from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any SQL client connection to your database:
 
 ```sql
 SELECT version();

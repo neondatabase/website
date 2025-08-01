@@ -25,8 +25,8 @@ Learn how to establish a connection to Neon from any application.
 
 Learn how to connect to Neon from different frameworks and languages.
 
-- [Connect from various frameworks](https://neon.com/docs/get-started-with-neon/frameworks): Find detailed instructions for connecting to Neon from various frameworks
-- [Connect from various languages](https://neon.com/docs/get-started-with-neon/languages): Find detailed instructions for connecting to Neon from various languages
+- [Connect from various frameworks](https://neon.com/docs/get-started/frameworks): Find detailed instructions for connecting to Neon from various frameworks
+- [Connect from various languages](https://neon.com/docs/get-started/languages): Find detailed instructions for connecting to Neon from various languages
 
 ## Troubleshoot connection issues
 

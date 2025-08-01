@@ -56,7 +56,7 @@ Here’s an example CORS configuration allowing `PUT` uploads and `GET` requests
 
 We need a table in Neon to store metadata about the objects uploaded to R2.
 
-1.  Connect to your Neon database using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Here is an example SQL statement to create a simple table including the object key, URL, user ID, and timestamp:
+1.  Connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Here is an example SQL statement to create a simple table including the object key, URL, user ID, and timestamp:
 
     ```sql
     CREATE TABLE IF NOT EXISTS r2_files (

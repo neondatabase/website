@@ -56,7 +56,7 @@ Before you begin any migration method, complete these essential preparation step
       ```
       This provides a list of your installed extensions, their versions, and descriptions. Compare this list to Neon's supported extensions. Neon supports many common extensions, and the full list is available here: [Neon supported extensions list](/docs/extensions/pg-extensions). For any unsupported extensions, consider finding alternatives or modifying your application.
 
-2.  **Set up your Neon project:** If you don't have one, [create a Neon account and project](/docs/get-started-with-neon/signing-up#sign-up).
+2.  **Set up your Neon project:** If you don't have one, [create a Neon account and project](/docs/get-started/signing-up#sign-up).
 
 ## Option 1: Using Neon's Import Data Assistant
 

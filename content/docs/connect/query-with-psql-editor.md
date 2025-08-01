@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/postgres
   - /docs/integrations/postgres
-  - /docs/get-started-with-neon/query-with-psql-editor
+  - /docs/get-started/query-with-psql-editor
 updatedOn: '2025-02-03T20:41:57.302Z'
 ---
 
@@ -112,7 +112,7 @@ Meta-commands can significantly speed up your workflow by providing quick access
 Here are some of the meta-commands that you can use with `psql`.
 
 <Admonition type="note">
-The Neon SQL Editor also supports meta-commands. See [Meta commands in the Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor#meta-commands).
+The Neon SQL Editor also supports meta-commands. See [Meta commands in the Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor#meta-commands).
 </Admonition>
 
 ```bash

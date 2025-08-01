@@ -15,7 +15,7 @@ This guide demonstrates how to leverage Neon read replicas to efficiently scale 
 
 ## Prerequisites
 
-- A Neon account and a Project. If you don't have one, you can sign up for a Neon account and create a project by following the [Getting Started guide](/docs/get-started-with-neon/signing-up).
+- A Neon account and a Project. If you don't have one, you can sign up for a Neon account and create a project by following the [Getting Started guide](/docs/get-started/signing-up).
 - Basic knowledge of [Next.js](https://nextjs.org/docs) and TypeScript
 - [Node.js](https://nodejs.org/en/download/package-manager) and npm installed on your local machine
 

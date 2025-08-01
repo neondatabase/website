@@ -158,7 +158,7 @@ With a compute added, you can now access to your restore branch and connect to i
 
 With a compute added, you can:
 
-- Access the branch from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor)
+- Access the branch from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor)
 - Browse tables on the branch from the [Tables page](/docs/guides/tables)
 - Connect from your app or Postgres client using the restore branch connection string
 

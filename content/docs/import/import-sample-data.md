@@ -14,7 +14,7 @@ This guide describes how to download and install sample data for use with Neon.
 - A `pg_restore` client if you are loading the [employees](#employees-database) or [postgres_air](#postgres-air-database) database. The `pg_restore` client is included with a standalone PostgreSQL installation. See [PostgreSQL Downloads](https://www.postgresql.org/download/).
 - A Neon database connection string. After creating a database, you can find the connection details by clicking the **Connect** button on your **Project Dashboard**. In the instructions that follow, replace `postgresql://[user]:[password]@[neon_hostname]/[dbname]` with your connection string.
 - A Neon [paid plan](/docs/introduction/plans) if you intend to install a dataset larger than 500 MiB.
-- Instructions for each dataset require that you create a database. You can do so from a client such as `psql` or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
+- Instructions for each dataset require that you create a database. You can do so from a client such as `psql` or from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor).
 
 <Admonition type="note">
 You can also load sample data using the Neon CLI. See [Load sample data with the Neon CLI](#load-sample-data-with-the-neon-cli).

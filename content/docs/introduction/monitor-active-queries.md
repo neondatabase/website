@@ -15,7 +15,7 @@ The **Active Queries** view displays up to 100 currently running queries for the
 
 ![Neon active queries tab](/docs/introduction/active_queries.png)
 
-The **Active Queries** view is powered by the `pg_stat_activity` Postgres system view, which is available in Neon by default. To run custom queries against the data collected by `pg_stat_activity`, you can use the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client, such as [psql](/docs/connect/query-with-psql-editor).
+The **Active Queries** view is powered by the `pg_stat_activity` Postgres system view, which is available in Neon by default. To run custom queries against the data collected by `pg_stat_activity`, you can use the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any SQL client, such as [psql](/docs/connect/query-with-psql-editor).
 
 For details on `pg_stat_activity`, see [pg_stat_activity](https://www.postgresql.org/docs/current/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW) in the PostgreSQL documentation.
 

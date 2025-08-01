@@ -42,7 +42,7 @@ If you do not have one already, create a Neon project.
 
 ## Set up your database
 
-From the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client such as [psql](/docs/connect/query-with-psql-editor), set up your database using the following queries:
+From the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any SQL client such as [psql](/docs/connect/query-with-psql-editor), set up your database using the following queries:
 
 ```sql shouldWrap
 CREATE SCHEMA api;

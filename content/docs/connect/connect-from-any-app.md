@@ -92,7 +92,7 @@ The **Connect to your database** modal provides connection examples for differen
 
 ![Language and framework connection examples](/docs/connect/code_connection_examples.png)
 
-See our [frameworks](/docs/get-started-with-neon/frameworks) and [languages](/docs/get-started-with-neon/languages) guides for more connection examples.
+See our [frameworks](/docs/get-started/frameworks) and [languages](/docs/get-started/languages) guides for more connection examples.
 
 ## Network protocol support
 

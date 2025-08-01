@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Get started with Neon on Azure HTML](https://neon.com/docs/get-started-with-neon/azure-get-started): The original HTML version of this documentation
+- [Get started with Neon on Azure HTML](https://neon.com/docs/get-started/azure-get-started): The original HTML version of this documentation
 
 ## Find Neon on Azure and subscribe
 
@@ -12,7 +12,7 @@
 2. Alternatively, go to the [Azure Marketplace](https://portal.azure.com/#view/Microsoft_Azure_Marketplace/MarketplaceOffersBlade/selectedMenuItemId/home) and search for **Neon Serverless Postgres**.
 3. Subscribe to the service.
 
-After subscribing, you will be directed to the [Create a Neon Resource](https://neon.com/docs/get-started-with-neon/azure-get-started#create-a-neon-resource) page.
+After subscribing, you will be directed to the [Create a Neon Resource](https://neon.com/docs/get-started/azure-get-started#create-a-neon-resource) page.
 
 ## Create a Neon Resource
 

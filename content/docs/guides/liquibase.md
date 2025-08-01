@@ -11,8 +11,8 @@ This guide steps you through installing the Liquibase CLI, configuring Liquibase
 
 ## Prerequisites
 
-- A Neon account. See [Sign up](/docs/get-started-with-neon/signing-up).
-- A Neon project. See [Create your first project](/docs/get-started-with-neon/setting-up-a-project).
+- A Neon account. See [Sign up](/docs/get-started/signing-up).
+- A Neon project. See [Create your first project](/docs/get-started/setting-up-a-project).
 - Liquibase requires Java. For Liquibase Java requirements, see [Requirements](https://docs.liquibase.com/start/install/liquibase-requirements.html). To check if you have Java installed, run `java --version`, or `java -version` on macOS.
 
 ## Download and extract Liquibase
@@ -78,7 +78,7 @@ For demonstration purposes, create a `blog` database in Neon with two tables, `p
 1. Open the [Neon Console](https://console.neon.tech/app/projects).
 1. Select your project.
 1. Select **Databases** from the sidebar and create a database named `blog`. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
-1. Using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), add the following tables:
+1. Using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), add the following tables:
 
    ```sql
    -- Creating the `authors` table

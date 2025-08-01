@@ -35,7 +35,7 @@ If you have any questions, [reach out to us on Discord](https://discord.gg/92vNT
 ## Guides and tutorials
 
 - [Automate branching with GitHub Actions](/docs/guides/branching-github-actions)
-- [A branch for every Vercel environment](/docs/get-started-with-neon/workflow-primer#a-branch-for-every-environment)
+- [A branch for every Vercel environment](/docs/get-started/workflow-primer#a-branch-for-every-environment)
 - [Preview branches with Fly.io](https://github.com/neondatabase-labs/preview-branches-with-fly)
 - [Logical Replication](/docs/guides/logical-replication-guide)
 - [Create a Neon Twin](/docs/guides/neon-twin-intro)

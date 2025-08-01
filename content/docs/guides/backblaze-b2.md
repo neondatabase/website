@@ -54,7 +54,7 @@ Here’s an example CORS configuration allowing `http://localhost:3000` to view 
 
 We need a table in Neon to store metadata about the objects uploaded to B2.
 
-1.  Connect to your Neon database using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table including the B2 file name (object key), file URL, user ID, and timestamp:
+1.  Connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table including the B2 file name (object key), file URL, user ID, and timestamp:
 
     ```sql
     CREATE TABLE IF NOT EXISTS b2_files (

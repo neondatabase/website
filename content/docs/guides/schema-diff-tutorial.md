@@ -12,7 +12,7 @@ In this guide we will create an initial schema on a new database called `people`
 
 To complete this tutorial, you'll need:
 
-- A Neon account. Sign up [here](/docs/get-started-with-neon/signing-up).
+- A Neon account. Sign up [here](/docs/get-started/signing-up).
 - To interact with your Neon database from the command line:
   - Install the [Neon CLI](/docs/reference/cli-install)
   - Download and install the [psql](https://www.postgresql.org/download/) client

@@ -98,8 +98,8 @@ Find details on configuring the Neon Serverless Driver for querying over HTTP or
 
 You can use standard Postgres client libraries or drivers. Neon is fully compatible with Postgres, so any application or utility that works with Postgres should work with Neon. Consult the integration guide for your particular language or framework for the right client for your needs:
 
-- [Framework Quickstarts](https://neon.com/docs/get-started-with-neon/frameworks)
-- [Language Quickstarts](https://neon.com/docs/get-started-with-neon/languages)
+- [Framework Quickstarts](https://neon.com/docs/get-started/frameworks)
+- [Language Quickstarts](https://neon.com/docs/get-started/languages)
 
 ### Configuring the connection
 

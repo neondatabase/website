@@ -67,7 +67,7 @@ With your Neon database prepared, let's set up the `hello-zero` example applicat
 2.  **Apply database schema/seed data:**
     To run the example application, you need to set up the database schema and seed initial data by running the SQL migrations. The project includes the necessary SQL commands in the `docker/seed.sql` file.
 
-    You can execute this file using `psql` (ensure it's installed locally) or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
+    You can execute this file using `psql` (ensure it's installed locally) or the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor).
 
     Using `psql`, run the following command. Replace `YOUR_NEON_CONNECTION_STRING` with your database connection string copied from the Neon Console:
 

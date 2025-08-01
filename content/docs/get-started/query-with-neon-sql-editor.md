@@ -3,7 +3,7 @@ title: Query with Neon's SQL Editor
 subtitle: Query your database from the Neon Console using the Neon SQL Editor
 enableTableOfContents: true
 redirectFrom:
-  - /docs/get-started-with-neon/tutorials
+  - /docs/get-started/tutorials
 updatedOn: '2025-04-08T22:55:27.447Z'
 ---
 
@@ -19,7 +19,7 @@ To use the SQL Editor:
 4. Select a branch and database.
 5. Enter a query into the editor and click **Run** to view the results.
 
-![Neon SQL Editor](/docs/get-started-with-neon/sql_editor.png)
+![Neon SQL Editor](/docs/get-started/sql_editor.png)
 
 You can use the following query to try the SQL Editor. The query creates a table, adds data, and retrieves the data from the table.
 
@@ -73,7 +73,7 @@ Understanding the information provided by the **Explain** and **Analyze** featur
 
 You can toggle Time Travel in the SQL Editor to switch from querying your current data to querying against a selected point within your [restore window](/docs/manage/projects#configure-restore-window).
 
-![time travel in SQL Editor](/docs/get-started-with-neon/time_travel_sql_editor.png 'no-border')
+![time travel in SQL Editor](/docs/get-started/time_travel_sql_editor.png 'no-border')
 
 For more details about using Time Travel queries, see:
 
@@ -181,18 +181,18 @@ To use a meta-command in the SQL Editor:
 
    For example, here's the schema for the `playing_with_neon` table we created above, using the meta-command `\d playing_with_neon`:
 
-   ![metacommand example](/docs/get-started-with-neon/sql_editor_metacommand.png)
+   ![metacommand example](/docs/get-started/sql_editor_metacommand.png)
 
 ## AI features
 
 The Neon SQL Editor offers three AI-driven features:
 
 - **SQL generation**: Easily convert natural language requests to SQL. Press the ✨ button or **Cmd/Ctrl+Shift+M**, type your request, and the AI assistant will generate the corresponding SQL for you. It’s schema-aware, meaning you can reference any table names, functions, or other objects in your schema.
-  ![SQL generation](/docs/get-started-with-neon/sql_editor_ai.png)
+  ![SQL generation](/docs/get-started/sql_editor_ai.png)
 - **Fix with AI**: If your query returns an error, simply click **Fix with AI** next to the error message. The AI assistant will analyze the error, suggest a fix, and update the SQL Editor so you can run the query again.
-  ![Fix withn AI](/docs/get-started-with-neon/fix_with_ai.png)
+  ![Fix withn AI](/docs/get-started/fix_with_ai.png)
 - **AI-generated query names**: Descriptive names are automatically assigned to your queries in the Neon SQL Editor's **History**. This feature helps you quickly identify and reuse previously executed queries.
-  ![AI-generated query names](/docs/get-started-with-neon/query_names.png)
+  ![AI-generated query names](/docs/get-started/query_names.png)
 
 <Admonition type="important">
 To enhance your experience with the Neon SQL Editor's AI features, we share your database schema with the AI agent. No actual data is shared. We currently use AWS Bedrock as our LLM provider, ensuring all requests remain within AWS's secure infrastructure where other Neon resources are also managed.

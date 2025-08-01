@@ -77,7 +77,7 @@ curl --request POST \
 
 To try out schema-only branches:
 
-1. Start by creating an `employees` table on your Neon project's `main` branch and adding some dummy data. You can do this from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client by copying and pasting the following statements:
+1. Start by creating an `employees` table on your Neon project's `main` branch and adding some dummy data. You can do this from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any SQL client by copying and pasting the following statements:
 
    ```sql
    CREATE TABLE employees (

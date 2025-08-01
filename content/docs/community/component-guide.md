@@ -463,8 +463,8 @@ InfoBlock creates a multi-column layout for organizing related content sections.
 
 <DocsList title="Related topics" theme="docs">
 <a href="/docs/introduction/branching">About branching</a>
-<a href="/docs/get-started-with-neon/workflow-primer">Branching workflows</a>
-<a href="/docs/get-started-with-neon/connect-neon">Connect Neon to your stack</a>
+<a href="/docs/get-started/workflow-primer">Branching workflows</a>
+<a href="/docs/get-started/connect-neon">Connect Neon to your stack</a>
 </DocsList>
 </InfoBlock>
 ```
@@ -480,8 +480,8 @@ InfoBlock creates a multi-column layout for organizing related content sections.
 
 <DocsList title="Related topics" theme="docs">
 <a href="/docs/introduction/branching">About branching</a>
-<a href="/docs/get-started-with-neon/workflow-primer">Branching workflows</a>
-<a href="/docs/get-started-with-neon/connect-neon">Connect Neon to your stack</a>
+<a href="/docs/get-started/workflow-primer">Branching workflows</a>
+<a href="/docs/get-started/connect-neon">Connect Neon to your stack</a>
 </DocsList>
 </InfoBlock>
 

@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 redirectFrom:
-  - /docs/get-started-with-neon/projects
+  - /docs/get-started/projects
 updatedOn: '2025-07-22T11:19:18.887Z'
 ---
 
@@ -22,7 +22,7 @@ When you add a new project, Neon creates the following resources by default:
 
 ## Create a project
 
-The following instructions describe how to create additional Neon projects. If you are creating your very first Neon project, refer to the instructions in [Playing with Neon](/docs/get-started-with-neon/signing-up).
+The following instructions describe how to create additional Neon projects. If you are creating your very first Neon project, refer to the instructions in [Playing with Neon](/docs/get-started/signing-up).
 
 To create a Neon project:
 

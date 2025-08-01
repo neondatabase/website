@@ -84,7 +84,7 @@ You can also create Neon projects in Azure regions without the native service in
 
    ![Project page in Neon](/docs/introduction/azure_neon_project_page.png)
 
-1. From here, follow the [Neon Getting Started](/docs/get-started-with-neon/signing-up) guide to begin working with your Neon project and get familiar with the platform.
+1. From here, follow the [Neon Getting Started](/docs/get-started/signing-up) guide to begin working with your Neon project and get familiar with the platform.
 
 ## Create Neon projects in Azure regions without the integration
 

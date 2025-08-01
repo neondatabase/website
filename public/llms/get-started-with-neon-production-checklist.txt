@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Getting ready for production HTML](https://neon.com/docs/get-started-with-neon/production-checklist): The original HTML version of this documentation
+- [Getting ready for production HTML](https://neon.com/docs/get-started/production-checklist): The original HTML version of this documentation
 
 ## Production checklist
 

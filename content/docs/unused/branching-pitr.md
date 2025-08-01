@@ -57,7 +57,7 @@ The timestamp must be provided in ISO 8601 format. You can use this [timestamp c
 Connecting to your newly created branch requires connecting via the branch's compute. The following steps describe how to connect using `psql` and a connection string obtained from the Neon Console.
 
 <Admonition type="note">
-You can also query the databases in a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
+You can also query the databases in a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](/docs/get-started/query-with-neon-sql-editor).
 </Admonition>
 
 To connect to your branch:

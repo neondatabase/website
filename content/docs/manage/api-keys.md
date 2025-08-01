@@ -2,8 +2,8 @@
 title: Manage API Keys
 enableTableOfContents: true
 redirectFrom:
-  - /docs/get-started-with-neon/using-api-keys
-  - /docs/get-started-with-neon/api-keys
+  - /docs/get-started/using-api-keys
+  - /docs/get-started/api-keys
 updatedOn: '2025-01-31T18:46:00.172Z'
 ---
 

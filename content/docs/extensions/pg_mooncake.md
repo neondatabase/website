@@ -53,7 +53,7 @@ This guide provides a quickstart to the `pg_mooncake` extension.
 The `pg_mooncake` extension is currently in Beta and classified as experimental in Neon. A separate, dedicated Neon project is recommended when using an extension that is still in Beta. For additional guidance, see [Experimental extensions](/docs/extensions/pg-extensions#experimental-extensions).
 </Admonition>
 
-While the `pg_mooncake` extension is in Beta, you need to explicitly allow it to be used on Neon before you can install it. To do so, connect to your Neon database via an SQL client like [psql](/docs/connect/query-with-psql-editor) or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) and run the `SET` command shown below.
+While the `pg_mooncake` extension is in Beta, you need to explicitly allow it to be used on Neon before you can install it. To do so, connect to your Neon database via an SQL client like [psql](/docs/connect/query-with-psql-editor) or the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) and run the `SET` command shown below.
 
 ```sql
 SET neon.allow_unstable_extensions='true';

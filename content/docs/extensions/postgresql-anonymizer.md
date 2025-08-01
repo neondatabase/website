@@ -19,7 +19,7 @@ The `anon` extension is currently [experimental](/docs/extensions/pg-extensions#
 
 Enable the `anon` extension in your Neon database by following these steps:
 
-1. Connect to your Neon database using either the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor)
+1. Connect to your Neon database using either the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor)
 
 2. Enable experimental extensions:
 
