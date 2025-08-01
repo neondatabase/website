@@ -630,6 +630,16 @@
     - title: Examples repo
       slug: https://github.com/neondatabase/examples
       icon: search
+    - title: Neon Local
+      icon: container
+      slug: local/neon-local
+      items:
+        - title: Neon Local
+          icon: container
+          slug: local/neon-local
+        - title: Neon Local Connect
+          icon: extension
+          slug: local/neon-local-connect
 - section: Frameworks & integrations
   items:
     - title: Frameworks
@@ -1134,6 +1144,15 @@
               slug: guides/neon-rls-custom-jwt
 - section: Workflows
   items:
+    - title: Branching workflows
+      slug: get-started-with-neon/workflow-primer
+      icon: branching-workflows
+    - title: GitHub integration
+      slug: guides/neon-github-integration
+      icon: github-integration
+    - title: Vercel integration
+      slug: guides/vercel-overview
+      icon: vercel-integration
     - title: Data anonymization
       slug: workflows/data-anonymization
       icon: anonymize
@@ -1148,25 +1167,6 @@
               slug: guides/neon-twin-full-pg-dump-restore
             - title: Partial Twin
               slug: guides/neon-twin-partial-pg-dump-restore
-    - title: Neon Local
-      icon: container
-      slug: local/neon-local
-      items:
-        - title: Neon Local
-          icon: container
-          slug: local/neon-local
-        - title: Neon Local Connect
-          icon: extension
-          slug: local/neon-local-connect
-    - title: Branching workflows
-      slug: get-started-with-neon/workflow-primer
-      icon: branching-workflows
-    - title: Vercel integration
-      slug: guides/vercel-overview
-      icon: vercel-integration
-    - title: GitHub integration
-      slug: guides/neon-github-integration
-      icon: github-integration
 - section: Postgres
   items:
     - title: PostgreSQL Tutorial
