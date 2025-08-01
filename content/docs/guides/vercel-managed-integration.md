@@ -123,7 +123,7 @@ Because your database is managed by Vercel, you can only perform these action **
 - Monitor usage via **Storage → Usage** (also available in Neon Console)
 - Create additional databases (each becomes a new Neon project)
 - Rename or delete a database (deleting removes the underlying Neon project permanently)
-- Manage members / collaborators (handled through Vercel "Members", not the Neon Console)
+- Manage members / collaborators (handled through Vercel "Members", not the Neon Console) - (see [FAQ](#frequently-asked-questions-faq) for details)
 - Delete the Neon organization (only happens automatically if you uninstall the integration)
 - Update connection-string environment variables (prefix changes, etc.)
 
@@ -200,5 +200,33 @@ Branches you don't delete are eventually archived, consuming archive storage spa
 - Cannot install if you currently use Vercel Postgres (deprecated) - contact Vercel about transitioning
 - Manual branch deletion required (unlike the **Neon-Managed Integration** which offers automatic cleanup)
 - **Preview deployment environment variables**: Branch-specific connection variables cannot be accessed or viewed in your Vercel project's environment variable settings (they're injected at deployment time only and not stored to avoid manual cleanup when branches are deleted)
+
+## Frequently Asked Questions (FAQ)
+
+### Why can't I see Vercel team members in the Neon Console?
+
+Users added to your Vercel team aren't automatically visible in the Neon organization. Team members only appear in Neon when they:
+
+1. Click the **Open in Neon** button from the Vercel integration page
+2. Complete the authentication flow
+
+### Why do Vercel team members with 'Member' role have the 'Admin' role in Neon?
+
+This occurs due to how Vercel's JWT tokens map roles to the integration. According to [Vercel's documentation](https://vercel.com/docs/integrations/create-integration/marketplace-api#user-authentication), the JWT token's `user_role` claim doesn't directly map Vercel team roles:
+
+- **ADMIN role in JWT**: Granted to users capable of installing integrations (includes both Vercel Admins and Members)
+- **USER role in JWT**: Only granted to users with read-only Vercel roles (Billing or Viewer)
+
+As a result, most active Vercel team members receive Admin access in the Neon organization. This is expected behavior and ensures team members can fully manage database resources.
+
+### Why do removed Vercel team members still appear in my Neon organization?
+
+User removal isn't automatically synchronized from Vercel to Neon. When you remove a team member from Vercel:
+
+1. **No automatic webhook** notifies Neon about the removal
+2. **Synchronization only occurs** when the removed user attempts to log into Neon again  
+3. **Active sessions persist** until the user logs out and attempts to re-authenticate
+
+This is a known limitation of the current integration architecture where synchronization is triggered by user actions rather than system webhooks.
 
 <NeedHelp/>
