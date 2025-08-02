@@ -2,7 +2,7 @@
 title: Neon Auth best practices & FAQ
 enableTableOfContents: true
 tag: beta
-updatedOn: '2025-07-25T16:57:32.348Z'
+updatedOn: '2025-08-02T09:01:05.734Z'
 redirectFrom:
   - /docs/guides/neon-auth-best-practices
 ---
