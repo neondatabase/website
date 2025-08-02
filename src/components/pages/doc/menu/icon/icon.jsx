@@ -9,6 +9,7 @@ import AuthIcon from 'icons/docs/sidebar/auth.inline.svg';
 import AwardIcon from 'icons/docs/sidebar/award.inline.svg';
 import AzureIcon from 'icons/docs/sidebar/azure.inline.svg';
 import BillingIcon from 'icons/docs/sidebar/billing.inline.svg';
+import BranchingWorkflowsIcon from 'icons/docs/sidebar/branching-workflows.inline.svg';
 import ChangelogIcon from 'icons/docs/sidebar/changelog.inline.svg';
 import CliIcon from 'icons/docs/sidebar/cli.inline.svg';
 import CommunityIcon from 'icons/docs/sidebar/community.inline.svg';
@@ -20,6 +21,7 @@ import FeaturesIcon from 'icons/docs/sidebar/features.inline.svg';
 import FeedsIcon from 'icons/docs/sidebar/feeds.inline.svg';
 import FrameworksIcon from 'icons/docs/sidebar/frameworks.inline.svg';
 import GetStartedIcon from 'icons/docs/sidebar/get-started.inline.svg';
+import GithubIntegrationIcon from 'icons/docs/sidebar/github-integration.inline.svg';
 import GlossaryIcon from 'icons/docs/sidebar/glossary.inline.svg';
 import HomeIcon from 'icons/docs/sidebar/home.inline.svg';
 import ImportIcon from 'icons/docs/sidebar/import.inline.svg';
@@ -47,6 +49,7 @@ import TerraformIcon from 'icons/docs/sidebar/terraform.inline.svg';
 import TutorialIcon from 'icons/docs/sidebar/tutorial.inline.svg';
 import UpgradeIcon from 'icons/docs/sidebar/upgrade.inline.svg';
 import UseCaseIcon from 'icons/docs/sidebar/use-case.inline.svg';
+import VercelIntegrationIcon from 'icons/docs/sidebar/vercel-integration.inline.svg';
 import VersionIcon from 'icons/docs/sidebar/version.inline.svg';
 import WhyNeonIcon from 'icons/docs/sidebar/why-neon.inline.svg';
 import WorkflowsIcon from 'icons/docs/sidebar/workflows.inline.svg';
@@ -61,6 +64,7 @@ const icons = {
   award: AwardIcon,
   azure: AzureIcon,
   billing: BillingIcon,
+  'branching-workflows': BranchingWorkflowsIcon,
   changelog: ChangelogIcon,
   cli: CliIcon,
   community: CommunityIcon,
@@ -72,6 +76,7 @@ const icons = {
   feeds: FeedsIcon,
   frameworks: FrameworksIcon,
   'get-started': GetStartedIcon,
+  'github-integration': GithubIntegrationIcon,
   glossary: GlossaryIcon,
   home: HomeIcon,
   import: ImportIcon,
@@ -99,6 +104,7 @@ const icons = {
   tutorial: TutorialIcon,
   upgrade: UpgradeIcon,
   'use-case': UseCaseIcon,
+  'vercel-integration': VercelIntegrationIcon,
   version: VersionIcon,
   'why-neon': WhyNeonIcon,
   workflows: WorkflowsIcon,
