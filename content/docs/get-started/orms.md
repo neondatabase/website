@@ -2,6 +2,8 @@
 title: Neon ORM guides
 subtitle: Find detailed instructions for connecting to Neon from various ORMs
 enableTableOfContents: true
+redirectFrom:
+  - /docs/get-started-with-neon/orms
 updatedOn: '2025-07-29T10:34:33.836Z'
 ---
 

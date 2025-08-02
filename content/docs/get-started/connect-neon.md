@@ -2,6 +2,8 @@
 title: Connecting Neon to your stack
 subtitle: Learn how to integrate Neon into your application
 enableTableOfContents: true
+redirectFrom:
+  - /docs/get-started-with-neon/connect-neon
 updatedOn: '2025-07-30T22:35:16.148Z'
 ---
 

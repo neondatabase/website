@@ -5,6 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/about
   - /docs/introduction/about
+  - /docs/get-started-with-neon/why-neon
 updatedOn: '2025-07-03T12:36:49.557Z'
 ---
 

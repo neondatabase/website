@@ -2,6 +2,8 @@
 title: Production readiness with Neon
 subtitle: Neon features for real-world workloads
 enableTableOfContents: true
+redirectFrom:
+  - /docs/get-started-with-neon/production-readiness
 updatedOn: '2025-07-03T12:36:49.557Z'
 ---
 

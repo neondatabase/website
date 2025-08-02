@@ -4,6 +4,7 @@ subtitle: Query your database from the Neon Console using the Neon SQL Editor
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/tutorials
+  - /docs/get-started-with-neon/query-with-neon-sql-editor
 updatedOn: '2025-04-08T22:55:27.447Z'
 ---
 

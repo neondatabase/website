@@ -3,6 +3,8 @@ title: Getting ready for production
 subtitle: A checklist of recommended settings to optimize performance, security, and
   reliability
 enableTableOfContents: true
+redirectFrom:
+  - /docs/get-started-with-neon/production-checklist
 updatedOn: '2025-07-24T20:03:24.596Z'
 ---
 

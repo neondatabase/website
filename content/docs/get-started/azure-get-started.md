@@ -2,6 +2,8 @@
 title: Get started with Neon on Azure
 subtitle: Learn how to deploy Neon as a native service on Azure
 enableTableOfContents: true
+redirectFrom:
+  - /docs/get-started-with-neon/azure-get-started
 updatedOn: '2025-05-30T16:54:40.454Z'
 ---
 

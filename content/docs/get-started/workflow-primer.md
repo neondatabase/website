@@ -3,6 +3,8 @@ title: Database branching workflow primer
 subtitle: An introduction to integrating Postgres branching into your development
   workflow
 enableTableOfContents: true
+redirectFrom:
+  - /docs/get-started-with-neon/workflow-primer
 updatedOn: '2025-07-30T22:35:16.149Z'
 ---
 
