@@ -2,7 +2,7 @@
 title: Monitor active queries
 subtitle: View and analyze running queries in your database
 enableTableOfContents: true
-updatedOn: '2025-03-05T21:09:38.753Z'
+updatedOn: '2025-08-02T10:33:29.296Z'
 ---
 
 You can monitor active queries for your Neon project from the **Monitoring** page in the Neon Console.

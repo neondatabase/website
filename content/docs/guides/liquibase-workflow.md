@@ -2,7 +2,7 @@
 title: Liquibase developer workflow with Neon
 subtitle: Implement a developer workflow with Liquibase and Neon branching
 enableTableOfContents: true
-updatedOn: '2025-07-03T12:36:49.561Z'
+updatedOn: '2025-08-02T10:33:29.276Z'
 ---
 
 Liquibase is an open-source database-independent library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).

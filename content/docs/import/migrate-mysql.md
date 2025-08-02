@@ -2,7 +2,7 @@
 title: Migrate from MySQL to Neon Postgres
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-07-03T12:36:49.567Z'
+updatedOn: '2025-08-02T10:33:29.294Z'
 ---
 
 This topic describes how to migrate your MySQL database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).

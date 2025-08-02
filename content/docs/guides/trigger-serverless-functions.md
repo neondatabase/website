@@ -2,7 +2,7 @@
 title: Trigger serverless functions
 subtitle: Use Inngest to trigger serverless functions from your Neon database changes
 enableTableOfContents: true
-updatedOn: '2025-02-03T20:41:57.339Z'
+updatedOn: '2025-08-02T10:33:29.290Z'
 ---
 
 Combining your serverless Neon database with [Inngest](https://www.inngest.com/?utm_source=neon&utm_medium=trigger-serverless-functions-guide) enables you to **trigger serverless functions** running on Vercel, AWS, and Cloudflare Worker **based on database changes.**

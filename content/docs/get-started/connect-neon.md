@@ -4,7 +4,7 @@ subtitle: Learn how to integrate Neon into your application
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/connect-neon
-updatedOn: '2025-07-30T22:35:16.148Z'
+updatedOn: '2025-08-02T10:33:29.253Z'
 ---
 
 Using Neon as the serverless database in your tech stack means configuring connections. Whether it’s a direct connection string from your language or framework, setting environment variables for your deployment platform, connecting to ORMs like Prisma, or configuring deployment settings for CI/CD workflows, it starts with the connection.

@@ -2,7 +2,7 @@
 title: Connect from AWS Lambda
 subtitle: Learn how to set up a Neon database and connect from an AWS Lambda function
 enableTableOfContents: true
-updatedOn: '2025-07-03T12:36:49.559Z'
+updatedOn: '2025-08-02T10:33:29.262Z'
 ---
 
 AWS Lambda is a serverless, event-driven compute service that allows you to run code without provisioning or managing servers. It is a convenient and cost-effective solution for running various types of workloads, including those that require a database.

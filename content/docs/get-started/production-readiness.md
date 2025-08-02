@@ -4,7 +4,7 @@ subtitle: Neon features for real-world workloads
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-readiness
-updatedOn: '2025-07-03T12:36:49.557Z'
+updatedOn: '2025-08-02T10:33:29.256Z'
 ---
 
 Learn how autoscaling, scale to zero, Neon's storage architecture, change data capture, read replicas, and support for thousands of connections can improve performance, reliability, and efficiency for your production environments.

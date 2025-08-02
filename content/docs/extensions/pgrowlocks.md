@@ -2,7 +2,7 @@
 title: The pgrowlocks extension
 subtitle: Display row-level locking information for a specific table in Postgres
 enableTableOfContents: true
-updatedOn: '2025-07-04T12:47:21.306Z'
+updatedOn: '2025-08-02T10:33:29.244Z'
 ---
 
 The `pgrowlocks` extension provides a function to inspect active row-level locks for a specified table within your Postgres database. This is invaluable for diagnosing lock contention issues, understanding which specific rows are currently locked, and identifying the transactions or processes holding these locks. By offering a detailed, real-time view of row locks, `pgrowlocks` helps developers and database administrators troubleshoot performance bottlenecks related to concurrent data access.

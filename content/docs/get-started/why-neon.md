@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/cloud/about
   - /docs/introduction/about
   - /docs/get-started-with-neon/why-neon
-updatedOn: '2025-07-03T12:36:49.557Z'
+updatedOn: '2025-08-02T10:33:29.259Z'
 ---
 
 Looking back at Neon's debut blog post, [SELECT ’Hello, World’](/blog/hello-world), the fundamental reasons for **Why Neon** remain the same:

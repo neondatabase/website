@@ -2,7 +2,7 @@
 title: The pg_search extension
 subtitle: An Elasticsearch alternative for full-text search and analytics on Postgres
 enableTableOfContents: true
-updatedOn: '2025-07-04T12:47:21.305Z'
+updatedOn: '2025-08-02T10:33:29.239Z'
 ---
 
 The `pg_search` extension by [ParadeDB](https://www.paradedb.com/) adds functions and operators to Postgres that use [BM25 (Best Matching 25)](https://en.wikipedia.org/wiki/Okapi_BM25) indexes for efficient, high-relevance text searches. It supports standard SQL syntax and JSON query objects, offering features similar to those in Elasticsearch.

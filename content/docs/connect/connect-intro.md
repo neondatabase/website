@@ -2,7 +2,7 @@
 title: Connect to Neon
 subtitle: Everything you need to know about connecting to Neon
 enableTableOfContents: true
-updatedOn: '2025-07-28T15:24:15.787Z'
+updatedOn: '2025-08-02T10:33:29.226Z'
 ---
 
 Find detailed information and instructions about connecting to Neon from different clients and applications, troubleshooting connection issues, connection pooling, and more.

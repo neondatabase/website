@@ -3,7 +3,7 @@ title: Backup & Restore
 subtitle: Restore your branch from a point in time or snapshot
 tag: new
 enableTableOfContents: true
-updatedOn: '2025-05-23T18:48:33.108Z'
+updatedOn: '2025-08-02T10:33:29.265Z'
 ---
 
 <Admonition type="comingSoon" title="Snapshots in Early Access">

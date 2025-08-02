@@ -3,7 +3,7 @@ title: Partial Twin
 subtitle: Create a partial Twin of your production database
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-06-03T18:04:26.405Z'
+updatedOn: '2025-08-02T10:33:29.285Z'
 ---
 
 This workflow will create a partial Neon Twin using `pg_dump`, `pg_restore` and `psql`.

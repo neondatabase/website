@@ -2,7 +2,7 @@
 title: The pg_trgm extension
 subtitle: Improve Postgres text searches with the pg_trgm extension
 enableTableOfContents: true
-updatedOn: '2025-05-12T16:45:38.220Z'
+updatedOn: '2025-08-02T10:33:29.240Z'
 ---
 
 The `pg_trgm` extension enhances Postgres' ability to perform text searches by using trigram matching. Trigrams are groups of three consecutive characters taken from a string. By breaking down text into trigrams, Postgres can perform more efficient and flexible searches, such as similarity and proximity searches.

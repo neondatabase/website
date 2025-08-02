@@ -2,7 +2,7 @@
 title: Create a REST API from Postgres with PostgREST
 subtitle: Generate a REST API automatically from your Neon Postgres database schema
 enableTableOfContents: true
-updatedOn: '2025-04-23T13:23:40.025Z'
+updatedOn: '2025-08-02T10:33:29.287Z'
 ---
 
 <InfoBlock>

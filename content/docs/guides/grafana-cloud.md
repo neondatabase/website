@@ -2,7 +2,7 @@
 title: Grafana Cloud integration
 subtitle: Send metrics and logs from Neon Postgres to Grafana Cloud
 enableTableOfContents: true
-updatedOn: '2025-07-25T09:35:45.251Z'
+updatedOn: '2025-08-02T10:33:29.271Z'
 ---
 
 <InfoBlock>

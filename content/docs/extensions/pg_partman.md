@@ -2,7 +2,7 @@
 title: The pg_partman extension
 subtitle: Manage large Postgres tables using the PostgreSQL Partition Manager extension
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.370Z'
+updatedOn: '2025-08-02T10:33:29.237Z'
 ---
 
 `pg_partman` is a Postgres extension that simplifies the management of partitioned tables. Partitioning refers to splitting a single table into smaller pieces called `partitions`. This is done based on the values in a key column or set of columns. Even though partitions are stored as separate physical tables, the partitioned table can still be queried as a single logical table. This can significantly enhance query performance and also help you manage the data lifecycle of tables that grow very large.

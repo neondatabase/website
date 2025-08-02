@@ -2,7 +2,7 @@
 title: The pgstattuple extension
 subtitle: 'Analyze table, index bloat, and fragmentation in Postgres'
 enableTableOfContents: true
-updatedOn: '2025-07-04T12:47:21.306Z'
+updatedOn: '2025-08-02T10:33:29.244Z'
 ---
 
 The `pgstattuple` extension provides a suite of functions to inspect the physical storage of Postgres tables and indexes at a detailed, tuple (row) level. It offers insights into issues like table and index bloat, fragmentation, and overall space utilization, which are crucial for performance tuning and storage management.

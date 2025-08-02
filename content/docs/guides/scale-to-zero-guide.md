@@ -4,7 +4,7 @@ subtitle: Learn how to configure Neon's Scale to Zero feature
 redirectFrom:
   - /docs/guides/auto-suspend-guide
 enableTableOfContents: true
-updatedOn: '2025-07-30T22:35:16.151Z'
+updatedOn: '2025-08-02T10:33:29.288Z'
 ---
 
 Neon's [Scale to Zero](/docs/introduction/scale-to-zero) feature controls whether a Neon compute transitions to an idle state due to inactivity. For example, if scale to zero is enabled, your compute will transition to an idle state after it's been inactive for 5 minutes. Neon's paid plans allow you to disable scale to zero to keep your compute active.

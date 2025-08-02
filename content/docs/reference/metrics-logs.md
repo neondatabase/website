@@ -2,7 +2,7 @@
 title: Metrics and logs reference
 subtitle: Complete reference for all metrics and log fields exported by Neon
 enableTableOfContents: true
-updatedOn: '2025-07-24T20:03:24.603Z'
+updatedOn: '2025-08-02T10:33:29.304Z'
 ---
 
 This page provides a comprehensive reference for all metrics and log fields that Neon exports to observability platforms through integrations like [Datadog](/docs/guides/datadog), [Grafana Cloud](/docs/guides/grafana-cloud), and [OpenTelemetry](/docs/guides/opentelemetry).

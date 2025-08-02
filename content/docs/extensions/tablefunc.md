@@ -3,7 +3,7 @@ title: The tablefunc extension
 subtitle: Reshape data with pivot tables and navigate hierarchical structures in
   Postgres
 enableTableOfContents: true
-updatedOn: '2025-07-04T12:47:21.307Z'
+updatedOn: '2025-08-02T10:33:29.249Z'
 ---
 
 The `tablefunc` extension for Postgres provides a powerful set of functions for transforming data directly within your database. Its primary capabilities include creating pivot tables (also known as cross-tabulations) to reshape data, generating sets of normally distributed random numbers, and querying hierarchical or tree-like data structures.

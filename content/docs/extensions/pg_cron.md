@@ -2,7 +2,7 @@
 title: The pg_cron extension
 subtitle: Schedule and manage cron jobs directly within your Neon Postgres database
 enableTableOfContents: true
-updatedOn: '2025-05-30T16:54:40.453Z'
+updatedOn: '2025-08-02T10:33:29.236Z'
 ---
 
 The `pg_cron` extension provides a simple, cron-based job scheduler for Postgres. It operates directly within your database, allowing you to schedule standard SQL commands or calls to stored procedures using familiar cron syntax. This eliminates the need for external cron utilities for many database maintenance and automation tasks.
