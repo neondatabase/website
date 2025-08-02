@@ -34,7 +34,7 @@ This guide demonstrates how to integrate Cloudinary with Neon. You'll learn how 
 
 We need a table in Neon to store metadata about the assets uploaded to Cloudinary.
 
-1.  Connect to your Neon database using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table to store relevant details:
+1.  Connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table to store relevant details:
 
     ```sql
     CREATE TABLE IF NOT EXISTS cloudinary_files (

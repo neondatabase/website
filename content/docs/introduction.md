@@ -12,13 +12,13 @@ description="Manage Neon Postgres databases from your favorite AI tools using si
 
 <DetailIconCards withNumbers>
 
-<a href="/docs/get-started-with-neon/signing-up" description="Sign up for free and learn the basics of database branching with Neon">Playing with Neon</a>
+<a href="/docs/get-started/signing-up" description="Sign up for free and learn the basics of database branching with Neon">Playing with Neon</a>
 
-<a href="/docs/get-started-with-neon/connect-neon" description="Connect Neon to the platform, language, ORM and other tools in your tech stack">Connect Neon to your stack</a>
+<a href="/docs/get-started/connect-neon" description="Connect Neon to the platform, language, ORM and other tools in your tech stack">Connect Neon to your stack</a>
 
-<a href="/docs/get-started-with-neon/workflow-primer" description="Add branching to your CI/CD automation">Branching workflows</a>
+<a href="/docs/get-started/workflow-primer" description="Add branching to your CI/CD automation">Branching workflows</a>
 
-<a href="/docs/get-started-with-neon/production-checklist" description="Key features to get you production ready">Get ready for production</a>
+<a href="/docs/get-started/production-checklist" description="Key features to get you production ready">Get ready for production</a>
 
 </DetailIconCards>
 

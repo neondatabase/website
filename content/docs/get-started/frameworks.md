@@ -2,6 +2,8 @@
 title: Neon framework guides
 subtitle: Find detailed instructions for connecting to Neon from various frameworks
 enableTableOfContents: false
+redirectFrom:
+  - /docs/get-started-with-neon/frameworks
 updatedOn: '2025-05-20T14:57:22.319Z'
 ---
 

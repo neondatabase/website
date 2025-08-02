@@ -4,6 +4,7 @@ subtitle: Find detailed instructions for connecting to Neon from various languag
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/guides-intro
+  - /docs/get-started-with-neon/languages
 updatedOn: '2025-07-29T10:34:33.834Z'
 ---
 

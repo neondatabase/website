@@ -13,7 +13,7 @@ In this guide, we'll show you how to seed a Neon database with synthetic data fo
 
 To complete the steps in the guide, you require the following:
 
-- A Neon account and project. If you do not have those, see [Sign up](/docs/get-started-with-neon/signing-up#step-1-sign-up).
+- A Neon account and project. If you do not have those, see [Sign up](/docs/get-started/signing-up#step-1-sign-up).
 - A [Neosync](https://www.neosync.dev/) account.
 
 ## Neon setup

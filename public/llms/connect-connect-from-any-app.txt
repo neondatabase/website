@@ -85,7 +85,7 @@ The **Connect to your database** modal provides connection examples for differen
 
 
 
-See our [frameworks](https://neon.com/docs/get-started-with-neon/frameworks) and [languages](https://neon.com/docs/get-started-with-neon/languages) guides for more connection examples.
+See our [frameworks](https://neon.com/docs/get-started/frameworks) and [languages](https://neon.com/docs/get-started/languages) guides for more connection examples.
 
 ## Network protocol support
 

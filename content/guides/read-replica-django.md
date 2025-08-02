@@ -15,7 +15,7 @@ This guide explains how to integrate Neon read replicas into your Django applica
 
 Before you begin, make sure you have:
 
-- A Neon account and project. If you don't have one, sign up for a Neon account and create a project by following the [Getting started guide](/docs/get-started-with-neon/signing-up).
+- A Neon account and project. If you don't have one, sign up for a Neon account and create a project by following the [Getting started guide](/docs/get-started/signing-up).
 - Basic knowledge of [Django](https://docs.djangoproject.com/en) and Python.
 - [Python](https://www.python.org/downloads/) installed on your local machine.
 

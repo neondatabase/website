@@ -14,14 +14,14 @@ In this guide, we'll show you how to use Neon's branching feature to spin up a b
 ## Prerequisites
 
 - A flyway installation. See [Get started with Flyway and Neon](/docs/guides/flyway) for installation instructions.
-- A Neon account and project. See [Sign up](/docs/get-started-with-neon/signing-up).
+- A Neon account and project. See [Sign up](/docs/get-started/signing-up).
 - A database. This guide uses the ready-to-use `neondb` database on the `main` branch of your Neon project. You can create your own database if you like. See [Create a database](/docs/manage/databases#create-a-database) for instructions.
 
 ## Add a table to your database
 
 Set up a database to work with by adding a table to your `neondb` database on the `main` branch of your Neon project. If you completed [Get started with Flyway and Neon](/docs/guides/flyway), you might already have this `person` table created. We'll consider this your _production_ environment database.
 
-If you still need to create the `person` table, open the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), and run the following statement:
+If you still need to create the `person` table, open the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), and run the following statement:
 
 ```bash
 create table person (

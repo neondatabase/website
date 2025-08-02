@@ -11,8 +11,8 @@ This guide steps you through installing the Flyway command-line tool, configurin
 
 ## Prerequisites
 
-- A Neon account. See [Sign up](/docs/get-started-with-neon/signing-up).
-- A Neon project. See [Create your first project](/docs/get-started-with-neon/setting-up-a-project).
+- A Neon account. See [Sign up](/docs/get-started/signing-up).
+- A Neon project. See [Create your first project](/docs/get-started/setting-up-a-project).
 - A database. This guide uses the ready-to-use `neondb` database. You can create your own database if you like. See [Create a database](/docs/manage/databases#create-a-database) for instructions.
 
 ## Download and extract Flyway

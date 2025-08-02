@@ -3,6 +3,8 @@ title: Database branching workflow primer
 subtitle: An introduction to integrating Postgres branching into your development
   workflow
 enableTableOfContents: true
+redirectFrom:
+  - /docs/get-started-with-neon/workflow-primer
 updatedOn: '2025-07-30T22:35:16.149Z'
 ---
 
@@ -27,7 +29,7 @@ postgresql://database_name_owner:AbC123dEf@ep-hidden-hall-a5x58cuv.us-east-2.aws
 
 You can create all of your branches from the default branch, or set up a dedicated branch that you use as a base. The first approach is simpler, while the second provides greater data isolation.
 
-![database workflow A B](/docs/get-started-with-neon/database_workflow_AB.jpg)
+![database workflow A B](/docs/get-started/database_workflow_AB.jpg)
 
 ## Create branch methods
 

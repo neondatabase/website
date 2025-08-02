@@ -289,7 +289,7 @@ This script iterates over each JSON file in the input directory, creates a table
 
 After running both the Firestore export and the Neon import scripts, you should verify that your data has been successfully migrated:
 
-1. Connect to your Neon database using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or `psql`.
+1. Connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or `psql`.
 
 2. List all tables in your database:
 

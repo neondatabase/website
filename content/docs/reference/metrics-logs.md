@@ -93,7 +93,7 @@ Enabling log export may result in:
 <Admonition type="note">
 Neon computes only send logs and metrics when they are active. If the [Scale to Zero](/docs/introduction/scale-to-zero) feature is enabled and a compute is suspended due to inactivity, no logs or metrics will be sent during the suspension. This may result in gaps in your data.
 
-Additionally, if you are setting up an integration for a project with an inactive compute, you'll need to activate the compute before it can send data. To activate it, simply run a query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any connected client.
+Additionally, if you are setting up an integration for a project with an inactive compute, you'll need to activate the compute before it can send data. To activate it, simply run a query from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any connected client.
 </Admonition>
 
 ### Technical details

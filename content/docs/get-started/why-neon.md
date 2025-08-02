@@ -5,6 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/about
   - /docs/introduction/about
+  - /docs/get-started-with-neon/why-neon
 updatedOn: '2025-07-03T12:36:49.557Z'
 ---
 
@@ -40,7 +41,7 @@ From its beginning as a [DARPA-sponsored project at Berkeley](https://www.postgr
 
 **A serverless architecture built for performance, reliability, manageability, and cost efficiency**
 
-Neon's [architecture](/docs/introduction/architecture-overview) separates compute from storage, which enables serverless features like instant provisioning, [autoscaling](/docs/get-started-with-neon/production-readiness#autoscaling), [scale to zero](/docs/get-started-with-neon/production-readiness#scale-to-zero), and more.
+Neon's [architecture](/docs/introduction/architecture-overview) separates compute from storage, which enables serverless features like instant provisioning, [autoscaling](/docs/get-started/production-readiness#autoscaling), [scale to zero](/docs/get-started/production-readiness#scale-to-zero), and more.
 
 Separating compute from storage refers to an architecture where the database computation processes (queries, transactions, etc.) are handled by one set of resources (compute), while the data itself is stored on a separate set of resources (storage). This design contrasts with traditional architectures where compute and storage are tightly coupled on the same server. In Neon, Postgres runs on a compute, and data (except for what's cached in local compute memory) resides on Neon's storage layer.
 
@@ -72,7 +73,7 @@ We believe we have an opportunity to define the standard for cloud Postgres. We 
 
 Building on Neon is building on Postgres. If you are already running Postgres, getting started is easy. [Import your data](/docs/import/import-intro) and [connect](/docs/connect/connect-intro). Migrating from other databases like MySQL or MongoDB is just as easy.
 
-If you need to move data, you won't have to tear apart your application to remove proprietary application layers. Neon is pro-ecosystem and pro-integration. We encourage you to build with the frameworks, platforms, and services that best fit your requirements. Neon works to enable that. Check out our ever-expanding collection of [framework](/docs/get-started-with-neon/frameworks), [language](/docs/get-started-with-neon/languages), and [integration](/docs/guides/integrations) guides.
+If you need to move data, you won't have to tear apart your application to remove proprietary application layers. Neon is pro-ecosystem and pro-integration. We encourage you to build with the frameworks, platforms, and services that best fit your requirements. Neon works to enable that. Check out our ever-expanding collection of [framework](/docs/get-started/frameworks), [language](/docs/get-started/languages), and [integration](/docs/guides/integrations) guides.
 
 ## Who should use Neon?
 
@@ -110,7 +111,7 @@ Additionally, after signing up, we land you on your project dashboard, where you
 
 ![Next.js connection snippet from the Connection details widget on the Neon Dashboard](/docs/connect/code_connection_examples.png)
 
-If you are not quite ready to hook up an application, you can explore Neon from the console. Create the `playing_with_neon` table using the Neon [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), run some queries, or create a database branch.
+If you are not quite ready to hook up an application, you can explore Neon from the console. Create the `playing_with_neon` table using the Neon [SQL Editor](/docs/get-started/query-with-neon-sql-editor), run some queries, or create a database branch.
 
 Initially, you'll be signed up for Neon's [Free Plan](/docs/introduction/plans#free-plan), but you can easily upgrade to one of our [paid plans](/docs/introduction/plans) when you're ready.
 

@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Database branching workflow primer HTML](https://neon.com/docs/get-started-with-neon/workflow-primer): The original HTML version of this documentation
+- [Database branching workflow primer HTML](https://neon.com/docs/get-started/workflow-primer): The original HTML version of this documentation
 
 With Neon, you can work with your data just like you work with your code. The key is Neon's database [branching](https://neon.com/docs/guides/branching-intro) feature, which lets you instantly create branches of your data that you can include in your workflow — as many branches as you need.
 

@@ -13,7 +13,7 @@ There are several ways to do this, but here's a straightforward approach using `
 
 ## Running partial data dumps inside GitHub Actions
 
-You can run `pg_dump`, `pg_restore`, and `psql` from the command line, but sometimes, an automated, reproducible approach is more convenient. To better control when data dumps occur, I use a [scheduled GitHub Action](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#schedule) to export data from my production database and restore it to a testing database. This method works across different Postgres database providers, but if you're looking for a cost-effective testing environment, consider trying Neon. Check out our [getting started guide](/docs/get-started-with-neon/signing-up#sign-up) to see how easy it is to set up.
+You can run `pg_dump`, `pg_restore`, and `psql` from the command line, but sometimes, an automated, reproducible approach is more convenient. To better control when data dumps occur, I use a [scheduled GitHub Action](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#schedule) to export data from my production database and restore it to a testing database. This method works across different Postgres database providers, but if you're looking for a cost-effective testing environment, consider trying Neon. Check out our [getting started guide](/docs/get-started/signing-up#sign-up) to see how easy it is to set up.
 
 ## What is a scheduled GitHub Action?
 
@@ -285,6 +285,6 @@ In this step, I use `psql` to restore the data to the target database from the `
 
 Once the Action completes successfully, your target database will have a fresh test data set ready for use!
 
-This Action is part of our [Dev/Test use case](/use-cases/dev-test), widely used by Neon customers who face limitations with traditional databases for testing. By leveraging a dedicated Neon database, while leaving production environments where they are, developers gain access to Neon's full suite of features, including the [built-in SQL editor](/docs/get-started-with-neon/query-with-neon-sql-editor), [table explorer](/docs/guides/tables), and [branching](/docs/introduction/branching).
+This Action is part of our [Dev/Test use case](/use-cases/dev-test), widely used by Neon customers who face limitations with traditional databases for testing. By leveraging a dedicated Neon database, while leaving production environments where they are, developers gain access to Neon's full suite of features, including the [built-in SQL editor](/docs/get-started/query-with-neon-sql-editor), [table explorer](/docs/guides/tables), and [branching](/docs/introduction/branching).
 
 If you'd like to learn more about using Neon for testing, check out our [dev/test use case](/use-cases/dev-test) or contact our [sales team](/contact-sales).

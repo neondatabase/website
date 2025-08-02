@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Playing with Neon HTML](https://neon.com/docs/get-started-with-neon/signing-up): The original HTML version of this documentation
+- [Playing with Neon HTML](https://neon.com/docs/get-started/signing-up): The original HTML version of this documentation
 
 What you will learn:
 - How to view and modify data in the console
@@ -13,8 +13,8 @@ What you will learn:
 
 Related topics:
 - [About branching](https://neon.com/docs/introduction/branching)
-- [Branching workflows](https://neon.com/docs/get-started-with-neon/workflow-primer)
-- [Connect Neon to your stack](https://neon.com/docs/get-started-with-neon/connect-neon)
+- [Branching workflows](https://neon.com/docs/get-started/workflow-primer)
+- [Connect Neon to your stack](https://neon.com/docs/get-started/connect-neon)
 
 This tutorial walks you through your first steps using Neon as your Postgres database. You'll explore the Neon object hierarchy and learn how database branching can simplify your development workflow.
 
@@ -34,7 +34,7 @@ You can change these sizes at any time, but these are meant to align with typica
 <div className="flex gap-5 sm:flex-col">
   <div style={{ flex: '0 0 60%' }}>
 
-    If you're already signed up or coming to Neon from **Azure**, you can skip ahead to [Step 2](https://neon.com/docs/get-started-with-neon/signing-up#step-2-onboarding-in-the-neon-console).
+    If you're already signed up or coming to Neon from **Azure**, you can skip ahead to [Step 2](https://neon.com/docs/get-started/signing-up#step-2-onboarding-in-the-neon-console).
 
     If you haven't signed up yet, you can sign up for free here:
 
@@ -68,11 +68,11 @@ The steps should be self-explanatory, but it's important to understand a few key
   - `production` is the default (primary) branch and hosts your database, role, and a compute that you can connect your application to
   - `development` is created as a child branch of production for your development work
 
-At this point, if you want to just get started connecting Neon to your toolchain, go to [Day 2 - Connecting Neon to your tools](https://neon.com/docs/get-started-with-neon/connect-neon). Or if you want a more detailed walkthrough of some of our key console and branching features, let's keep going.
+At this point, if you want to just get started connecting Neon to your toolchain, go to [Day 2 - Connecting Neon to your tools](https://neon.com/docs/get-started/connect-neon). Or if you want a more detailed walkthrough of some of our key console and branching features, let's keep going.
 
 ## Add sample data
 
-Let's get familiar with the **SQL Editor**, where you can run queries against your databases directly from the Neon Console, as well as access more advanced features like [Time Travel](https://neon.com/docs/guides/time-travel-assist) and [Explain and Analyze](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor#explain-and-analyze).
+Let's get familiar with the **SQL Editor**, where you can run queries against your databases directly from the Neon Console, as well as access more advanced features like [Time Travel](https://neon.com/docs/guides/time-travel-assist) and [Explain and Analyze](https://neon.com/docs/get-started/query-with-neon-sql-editor#explain-and-analyze).
 
 From the Neon Console, use the sidebar navigation to open the **SQL Editor** page. Notice that your default branch `production` is already selected, along with the database created during onboarding, `neondb`.
 
@@ -119,7 +119,7 @@ INSERT INTO public.playing_with_neon (name, value) VALUES
 
 With the description: "Add tech companies to playing_with_neon table"
 
-Learn more about AI features in the [SQL Editor documentation](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor#ai-features).
+Learn more about AI features in the [SQL Editor documentation](https://neon.com/docs/get-started/query-with-neon-sql-editor#ai-features).
 
 ## View and modify data in the console
 
@@ -176,7 +176,7 @@ neon branches reset development --parent
 
 Now that our development branch matches production, we can make some changes. The `playing_with_neon` table from production is now available in your `development` branch, and we'll modify its schema and add new data to demonstrate how branches can diverge.
 
-You can use the [Neon SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor) for this, but let's demonstrate how to connect and modify your database from the terminal using `psql`. If you don't have `psql` installed already, follow these steps to get set up:
+You can use the [Neon SQL Editor](https://neon.com/docs/get-started/query-with-neon-sql-editor) for this, but let's demonstrate how to connect and modify your database from the terminal using `psql`. If you don't have `psql` installed already, follow these steps to get set up:
 
 Tab: Mac
 
@@ -275,7 +275,7 @@ From the **Branches** page in the Neon Console:
 
 ### Schema Migrations
 
-A more typical scenario for Schema Diff is when preparing for schema migrations. While Neon does not provide built-in schema migration tools, you can use ORMs like [Drizzle](https://drizzle.team/) or [Prisma](https://www.prisma.io/) to handle schema migrations efficiently. Read more about using Neon in your development workflow in [Connect Neon to your stack](https://neon.com/docs/get-started-with-neon/connect-neon).
+A more typical scenario for Schema Diff is when preparing for schema migrations. While Neon does not provide built-in schema migration tools, you can use ORMs like [Drizzle](https://drizzle.team/) or [Prisma](https://www.prisma.io/) to handle schema migrations efficiently. Read more about using Neon in your development workflow in [Connect Neon to your stack](https://neon.com/docs/get-started/connect-neon).
 
 ## Reset your development branch to production
 
@@ -314,6 +314,6 @@ Depending on your development workflow, you can use branch reset:
 
   With the Neon CLI, you can include branch reset as an enforced part of your CI/CD automation, automatically resetting a branch when a feature is closed or started.
 
-Make sure that your development team is always working from the latest schema and data by including branch reset in your workflow. To read more about using branching in your workflows, see [Day 3 - Branching workflows](https://neon.com/docs/get-started-with-neon/workflow-primer).
+Make sure that your development team is always working from the latest schema and data by including branch reset in your workflow. To read more about using branching in your workflows, see [Day 3 - Branching workflows](https://neon.com/docs/get-started/workflow-primer).
 
    **Tip** working with sensitive data?: Neon also supports schema-only branching. [Learn more](https://neon.com/docs/guides/branching-schema-only).

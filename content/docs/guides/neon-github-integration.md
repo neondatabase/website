@@ -26,7 +26,7 @@ This guide walks you through the following steps:
 
 ## Prerequisites
 
-- You have a Neon account and project. If not, see [Sign up for a Neon account](/docs/get-started-with-neon/signing-up).
+- You have a Neon account and project. If not, see [Sign up for a Neon account](/docs/get-started/signing-up).
 - You have a GitHub account with an application repository that you want to connect to your Neon project.
 
 ## Install the GitHub App and connect your Neon project

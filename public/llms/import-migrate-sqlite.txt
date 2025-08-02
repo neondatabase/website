@@ -14,7 +14,7 @@ This guide describes how to migrate your SQLite database to Neon Postgres using 
 
 Before you begin, ensure you have the following:
 
-- A Neon account and a project. If you don't have one, see [Sign up](https://neon.com/docs/get-started-with-neon/signing-up).
+- A Neon account and a project. If you don't have one, see [Sign up](https://neon.com/docs/get-started/signing-up).
 - A database created in your Neon project. For instructions, see [Create a database](https://neon.com/docs/manage/databases#create-a-database).
 - The file path to your source SQLite database file. If you don't have one, you can create a sample database in the next step.
 - Neon's Free Plan supports 500 MiB of data. If your data size is more than 500 MiB, you'll need to upgrade to one of Neon's paid plans. See [Neon plans](https://neon.com/docs/introduction/plans) for more information.
@@ -236,7 +236,7 @@ After migrating, always verify your data. One critical area is auto-incrementing
 
 The `reset sequences` option in the load file ensures that auto-incrementing columns start from the correct value. You can verify this manually.
 
-Connect to your Neon database using [`psql`](https://neon.com/docs/connect/query-with-psql-editor) or [Neon SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor) and check the next value for the `books` table's sequence:
+Connect to your Neon database using [`psql`](https://neon.com/docs/connect/query-with-psql-editor) or [Neon SQL Editor](https://neon.com/docs/get-started/query-with-neon-sql-editor) and check the next value for the `books` table's sequence:
 
 ```sql
 SELECT nextval(pg_get_serial_sequence('books', 'id'));

@@ -13,7 +13,7 @@ The Neon SQL Editor includes AI-powered features to assist with writing, optimiz
 
 Neon currently uses [Amazon Bedrock](https://aws.amazon.com/bedrock/) as the LLM provider for the Neon SQL Editor. All requests are processed within AWS’s secure infrastructure, where other Neon resources are also managed.
 
-For more details, see [AI features in the Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor#ai-features).
+For more details, see [AI features in the Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor#ai-features).
 
 ## AI chat assistance
 

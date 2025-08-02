@@ -52,7 +52,7 @@ The Neon OpenTelemetry integration can forward Postgres logs to your destination
 
 Before getting started, ensure the following:
 
-- You have a Neon account and project. If not, see [Sign up for a Neon account](/docs/get-started-with-neon/signing-up).
+- You have a Neon account and project. If not, see [Sign up for a Neon account](/docs/get-started/signing-up).
 - You have an OpenTelemetry-compatible observability platform account and know your OTLP endpoint URL and authentication credentials (API key, bearer token, or basic auth).
 
 <Steps>
@@ -230,7 +230,7 @@ You can modify these settings later by editing your integration configuration fr
 <Admonition type="note">
 Neon computes only send logs and metrics when they are active. If the [Scale to Zero](/docs/introduction/scale-to-zero) feature is enabled and a compute is suspended due to inactivity, no logs or metrics will be sent during the suspension. This may result in gaps in your data. If you notice missing data, check if your compute is suspended. You can verify a compute's status as `Idle` or `Active` on the **Branches** page in the Neon console, and review **Suspend compute** events on the **System operations** tab of the **Monitoring** page.
 
-Additionally, if you are setting up the OpenTelemetry integration for a project with an inactive compute, you'll need to activate the compute before it can send data. To activate it, simply run a query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any connected client.
+Additionally, if you are setting up the OpenTelemetry integration for a project with an inactive compute, you'll need to activate the compute before it can send data. To activate it, simply run a query from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any connected client.
 </Admonition>
 
 ## Troubleshooting

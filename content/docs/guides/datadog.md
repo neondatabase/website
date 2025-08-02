@@ -47,7 +47,7 @@ The Neon Datadog integration can forward Postgres logs to your Datadog account. 
 
 Before getting started, ensure the following:
 
-- You have a Neon account and project. If not, see [Sign up for a Neon account](/docs/get-started-with-neon/signing-up).
+- You have a Neon account and project. If not, see [Sign up for a Neon account](/docs/get-started/signing-up).
 - You have a Datadog account and API key.
 - You know the region you selected for your Datadog account. Here's how to check: [Find your Datadog region](https://docs.datadoghq.com/getting_started/site/#access-the-datadog-site)
 
@@ -75,7 +75,7 @@ Once the integration is set up, Neon will start sending Neon metrics to Datadog,
 <Admonition type="note">
 Neon computes only send logs and metrics when they are active. If the [Scale to Zero](/docs/introduction/scale-to-zero) feature is enabled and a compute is suspended due to inactivity, no logs or metrics will be sent during the suspension. This may result in gaps in your Neon logs and metrics in Datadog. If you notice missing data in Datadog, check if your compute is suspended. You can verify a compute's status as `Idle` or `Active` on the **Branches** page in the Neon console, and review **Suspend compute** events on the **System operations** tab of the **Monitoring** page.
 
-Additionally, if you are setting up Neon's Datadog integration for a project with an inactive compute, you'll need to activate the compute before it can send metrics and logs to Datadog. To activate it, simply run a query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any connected client on the branch associated with the compute.
+Additionally, if you are setting up Neon's Datadog integration for a project with an inactive compute, you'll need to activate the compute before it can send metrics and logs to Datadog. To activate it, simply run a query from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any connected client on the branch associated with the compute.
 </Admonition>
 
 ## Example usage in Datadog

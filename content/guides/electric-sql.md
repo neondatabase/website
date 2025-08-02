@@ -109,7 +109,7 @@ Now that Electric is running and connected to your Neon database, you can test i
 
 ### Create sample data in Neon
 
-Connect to your Neon database using `psql` or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) and run the following SQL commands to create a sample table and insert some data. This is the schema our React application will use.
+Connect to your Neon database using `psql` or the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) and run the following SQL commands to create a sample table and insert some data. This is the schema our React application will use.
 
 ```sql
 CREATE TABLE scores (

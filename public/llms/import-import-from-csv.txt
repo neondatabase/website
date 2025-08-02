@@ -38,7 +38,7 @@ CREATE TABLE customer (
 )
 ```
 
-   **Tip**: You can also create tables using the **SQL Editor** in the Neon Console. See [Query with Neon's SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor).
+   **Tip**: You can also create tables using the **SQL Editor** in the Neon Console. See [Query with Neon's SQL Editor](https://neon.com/docs/get-started/query-with-neon-sql-editor).
 
 ## Prepare the CSV file
 

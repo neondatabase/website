@@ -17,7 +17,7 @@ You may consider using the [`postgis` extension](/docs/extensions/postgis) if ac
 
 ## Enable the `earthdistance` extension
 
-To use `earthdistance`, you first need to enable it and its dependency, the [`cube` extension](/docs/extensions/cube). You can do this by running the following `CREATE EXTENSION` statements in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client like [psql](/docs/connect/query-with-psql-editor):
+To use `earthdistance`, you first need to enable it and its dependency, the [`cube` extension](/docs/extensions/cube). You can do this by running the following `CREATE EXTENSION` statements in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client like [psql](/docs/connect/query-with-psql-editor):
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS cube;

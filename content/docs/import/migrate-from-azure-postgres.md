@@ -162,7 +162,7 @@ To ensure that the Neon `AdventureWorks` database has the same schema as the Azu
 
 After importing the schema, create a subscription on the Neon database:
 
-1. Use the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), [psql](/docs/connect/query-with-psql-editor), or another SQL client to connect to your Neon database.
+1. Use the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), [psql](/docs/connect/query-with-psql-editor), or another SQL client to connect to your Neon database.
 
 2. Create the subscription using the `CREATE SUBSCRIPTION` statement:
 

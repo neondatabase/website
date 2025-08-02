@@ -18,7 +18,7 @@ This guide introduces the `anon` extension and demonstrates how to implement mas
 
 Enable the `anon` extension in your Neon database by following these steps:
 
-1. Connect to your Neon database using either the [Neon SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client like [psql](https://neon.com/docs/connect/query-with-psql-editor)
+1. Connect to your Neon database using either the [Neon SQL Editor](https://neon.com/docs/get-started/query-with-neon-sql-editor) or an SQL client like [psql](https://neon.com/docs/connect/query-with-psql-editor)
 
 2. Enable experimental extensions:
 

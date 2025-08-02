@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Developer experience with Neon HTML](https://neon.com/docs/get-started-with-neon/dev-experience): The original HTML version of this documentation
+- [Developer experience with Neon HTML](https://neon.com/docs/get-started/dev-experience): The original HTML version of this documentation
 
 Discover how Neon's features can streamline your development process, reduce risks, and enhance productivity, helping you to ship faster with confidence.
 
@@ -71,7 +71,7 @@ Postgres extensions are add-ons that enhance the functionality of Postgres, lett
 
 These are just a few of the extensions supported by Neon. Explore all supported extensions [here](https://neon.com/docs/extensions/extensions-intro).
 
-Extensions can be installed with a simple `CREATE EXTENSION` command from Neon's [SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client; for example:
+Extensions can be installed with a simple `CREATE EXTENSION` command from Neon's [SQL Editor](https://neon.com/docs/get-started/query-with-neon-sql-editor) or any SQL client; for example:
 
 ```sql
 CREATE EXTENSION pgcrypto;

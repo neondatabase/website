@@ -3,7 +3,7 @@ title: About Connection pooling
 subtitle: Learn how connection pooling works in Neon
 enableTableOfContents: true
 redirectFrom:
-  - /docs/get-started-with-neon/connection-pooling
+  - /docs/get-started/connection-pooling
 updatedOn: '2025-06-30T11:30:21.888Z'
 ---
 

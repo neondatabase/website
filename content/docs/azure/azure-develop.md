@@ -45,7 +45,7 @@ Azure provides an Azure-native CLI and SDKs for working with the Neon platform. 
 ## Getting started
 
 - [Get started with Neon Serverless Postgres on Azure](/guides/neon-azure-integration) — A step-by-step guide to deploying Neon's serverless Postgres via the Azure Marketplace
-- [Familiarize yourself with Neon](/docs/get-started-with-neon/signing-up) — Get to know the Neon platform and features by stepping through our official getting started guides
+- [Familiarize yourself with Neon](/docs/get-started/signing-up) — Get to know the Neon platform and features by stepping through our official getting started guides
 
 ## Migrate data to Neon on Azure
 

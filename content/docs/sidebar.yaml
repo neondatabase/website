@@ -2,32 +2,32 @@
   items:
     - title: Why Neon?
       icon: why-neon
-      slug: get-started-with-neon/why-neon
+      slug: get-started/why-neon
       items:
         - title: Our mission
-          slug: get-started-with-neon/why-neon
+          slug: get-started/why-neon
         - title: Developer experience with Neon
-          slug: get-started-with-neon/dev-experience
+          slug: get-started/dev-experience
         - title: Production readiness with Neon
-          slug: get-started-with-neon/production-readiness
+          slug: get-started/production-readiness
     - title: Getting Started
       icon: get-started
-      slug: get-started-with-neon/signing-up
+      slug: get-started/signing-up
       items:
         - section: Tutorial
           items:
             - title: 1 - Playing with Neon
-              slug: get-started-with-neon/signing-up
+              slug: get-started/signing-up
             - title: 2 - Connect Neon to your stack
-              slug: get-started-with-neon/connect-neon
+              slug: get-started/connect-neon
             - title: 3 - Branching workflows
-              slug: get-started-with-neon/workflow-primer
+              slug: get-started/workflow-primer
             - title: 4 - Getting ready for production
-              slug: get-started-with-neon/production-checklist
+              slug: get-started/production-checklist
         - section: Language quickstarts
           items:
             - title: Quick list
-              slug: get-started-with-neon/languages
+              slug: get-started/languages
             - title: .NET
               slug: guides/dotnet-npgsql
             - title: Elixir
@@ -46,7 +46,7 @@
         - section: Framework quickstarts
           items:
             - title: Quick list
-              slug: get-started-with-neon/frameworks
+              slug: get-started/frameworks
             - title: Astro
               slug: guides/astro
             - title: Django
@@ -126,7 +126,7 @@
         - title: Neon serverless driver
           slug: serverless/serverless-driver
         - title: Neon SQL Editor
-          slug: get-started-with-neon/query-with-neon-sql-editor
+          slug: get-started/query-with-neon-sql-editor
         - title: Passwordless auth
           slug: connect/passwordless-connect
         - title: Securing connections
@@ -643,7 +643,7 @@
 - section: Frameworks & integrations
   items:
     - title: Frameworks
-      slug: get-started-with-neon/frameworks
+      slug: get-started/frameworks
       icon: frameworks
       items:
         - title: Astro
@@ -679,7 +679,7 @@
         - title: Symfony
           slug: guides/symfony
     - title: Languages
-      slug: get-started-with-neon/languages
+      slug: get-started/languages
       icon: languages
       items:
         - title: Elixir
@@ -695,7 +695,7 @@
         - title: Rust
           slug: guides/rust
     - title: ORMs
-      slug: get-started-with-neon/orms
+      slug: get-started/orms
       icon: orm
       items:
         - title: Django (Django ORM)

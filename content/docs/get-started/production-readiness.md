@@ -2,12 +2,14 @@
 title: Production readiness with Neon
 subtitle: Neon features for real-world workloads
 enableTableOfContents: true
+redirectFrom:
+  - /docs/get-started-with-neon/production-readiness
 updatedOn: '2025-07-03T12:36:49.557Z'
 ---
 
 Learn how autoscaling, scale to zero, Neon's storage architecture, change data capture, read replicas, and support for thousands of connections can improve performance, reliability, and efficiency for your production environments.
 
-<CTA title="Production checklist" description="Ready to move to production? Use our checklist to ensure your database is optimized with all recommended settings and features." buttonText="View checklist" buttonUrl="/docs/get-started-with-neon/production-checklist" />
+<CTA title="Production checklist" description="Ready to move to production? Use our checklist to ensure your database is optimized with all recommended settings and features." buttonText="View checklist" buttonUrl="/docs/get-started/production-checklist" />
 
 ## Autoscaling
 

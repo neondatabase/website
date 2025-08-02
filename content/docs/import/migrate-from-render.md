@@ -92,7 +92,7 @@ This section describes how to prepare your destination Neon Postgres database to
 
 To maintain consistency with your Render setup, you might want to create a new database in Neon with the same database name used in Render.
 
-1. Connect to your Neon project using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or a Postgres client like `psql`.
+1. Connect to your Neon project using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a Postgres client like `psql`.
 
 2. Create a new database. For example, if your Render database was named `lego`, run:
 
@@ -148,7 +148,7 @@ pg_restore: creating SEQUENCE "public.lego_inventories_id_seq"
 
 After the restore process completes, you should verify that your data has been successfully migrated:
 
-1. Connect to your Neon database using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or [psql](/docs/connect/query-with-psql-editor).
+1. Connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or [psql](/docs/connect/query-with-psql-editor).
 
 2. Run some application queries to check your data. For example, if you're using the LEGO database, you can run the following:
 

@@ -88,7 +88,7 @@ This section describes how to prepare your destination Neon Postgres database to
 
 Each Neon project comes with a default database named `neondb`. To maintain consistency with your Digital Ocean setup, create a new database with the same name.
 
-1. Connect to your Neon project using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or a Postgres client like `psql`.
+1. Connect to your Neon project using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a Postgres client like `psql`.
 
 2. Create a new database. For example, if your Digital Ocean database was named `lego`, run:
 
@@ -144,7 +144,7 @@ pg_restore: creating SEQUENCE "public.lego_inventories_id_seq"
 
 After the restore process completes, you should verify that your data has been successfully migrated:
 
-1. Connect to your Neon database using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or `psql`.
+1. Connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or `psql`.
 
 2. Run some application queries to check your data. For example, if you're using the `LEGO` database, you can run the following:
 

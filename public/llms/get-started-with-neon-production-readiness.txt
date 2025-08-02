@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Production readiness with Neon HTML](https://neon.com/docs/get-started-with-neon/production-readiness): The original HTML version of this documentation
+- [Production readiness with Neon HTML](https://neon.com/docs/get-started/production-readiness): The original HTML version of this documentation
 
 Learn how autoscaling, scale to zero, Neon's storage architecture, change data capture, read replicas, and support for thousands of connections can improve performance, reliability, and efficiency for your production environments.
 

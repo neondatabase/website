@@ -88,7 +88,7 @@ In your S3 bucket settings, navigate to the **Permissions** tab and find the **C
 
 We need a table in Neon to store metadata about the objects uploaded to S3.
 
-1.  Connect to your Neon database using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table including the object key, URL, user ID, and timestamp:
+1.  Connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table including the object key, URL, user ID, and timestamp:
 
     ```sql
     CREATE TABLE IF NOT EXISTS s3_files (

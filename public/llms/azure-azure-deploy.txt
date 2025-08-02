@@ -74,7 +74,7 @@ This guide steps you through deploying Neon as an Azure native service.
 
    
 
-1. From here, follow the [Neon Getting Started](https://neon.com/docs/get-started-with-neon/signing-up) guide to begin working with your Neon project and get familiar with the platform.
+1. From here, follow the [Neon Getting Started](https://neon.com/docs/get-started/signing-up) guide to begin working with your Neon project and get familiar with the platform.
 
 ## Create Neon projects in Azure regions without the integration
 

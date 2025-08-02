@@ -6,7 +6,8 @@ redirectFrom:
   - /docs/quickstart/console/
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
-  - /docs/get-started-with-neon/setting-up-a-project
+  - /docs/get-started-with-neon/signing-up
+  - /docs/get-started/setting-up-a-project
 updatedOn: '2025-06-23T15:24:08.762Z'
 ---
 
@@ -19,8 +20,8 @@ updatedOn: '2025-06-23T15:24:08.762Z'
 
 <DocsList title="Related topics" theme="docs">
 <a href="/docs/introduction/branching">About branching</a>
-<a href="/docs/get-started-with-neon/workflow-primer">Branching workflows</a>
-<a href="/docs/get-started-with-neon/connect-neon">Connect Neon to your stack</a>
+<a href="/docs/get-started/workflow-primer">Branching workflows</a>
+<a href="/docs/get-started/connect-neon">Connect Neon to your stack</a>
 </DocsList>
 </InfoBlock>
 
@@ -44,7 +45,7 @@ You can change these sizes at any time, but these are meant to align with typica
 <div className="flex gap-5 sm:flex-col">
   <div style={{ flex: '0 0 60%' }}>
 
-    If you're already signed up or coming to Neon from **Azure**, you can skip ahead to [Step 2](/docs/get-started-with-neon/signing-up#step-2-onboarding-in-the-neon-console).
+    If you're already signed up or coming to Neon from **Azure**, you can skip ahead to [Step 2](/docs/get-started/signing-up#step-2-onboarding-in-the-neon-console).
 
     If you haven't signed up yet, you can sign up for free here:
 
@@ -58,7 +59,7 @@ You can change these sizes at any time, but these are meant to align with typica
 
   </div>
   <div style={{ flex: '1 1 0', marginTop: '-1.25rem' }}>
-    ![sign_up](/docs/get-started-with-neon/sign_up_reduced.png "no-border")
+    ![sign_up](/docs/get-started/sign_up_reduced.png "no-border")
   </div>
 </div>
 
@@ -66,7 +67,7 @@ You can change these sizes at any time, but these are meant to align with typica
 
 After you sign up, you are guided through some onboarding steps that ask you to create a **Project**.
 
-![onboarding](/docs/get-started-with-neon/onboarding.png)
+![onboarding](/docs/get-started/onboarding.png)
 
 The steps should be self-explanatory, but it's important to understand a few key points:
 
@@ -78,15 +79,15 @@ The steps should be self-explanatory, but it's important to understand a few key
   - `production` is the default (primary) branch and hosts your database, role, and a compute that you can connect your application to
   - `development` is created as a child branch of production for your development work
 
-At this point, if you want to just get started connecting Neon to your toolchain, go to [Day 2 - Connecting Neon to your tools](/docs/get-started-with-neon/connect-neon). Or if you want a more detailed walkthrough of some of our key console and branching features, let's keep going.
+At this point, if you want to just get started connecting Neon to your toolchain, go to [Day 2 - Connecting Neon to your tools](/docs/get-started/connect-neon). Or if you want a more detailed walkthrough of some of our key console and branching features, let's keep going.
 
 ## Add sample data
 
-Let's get familiar with the **SQL Editor**, where you can run queries against your databases directly from the Neon Console, as well as access more advanced features like [Time Travel](/docs/guides/time-travel-assist) and [Explain and Analyze](/docs/get-started-with-neon/query-with-neon-sql-editor#explain-and-analyze).
+Let's get familiar with the **SQL Editor**, where you can run queries against your databases directly from the Neon Console, as well as access more advanced features like [Time Travel](/docs/guides/time-travel-assist) and [Explain and Analyze](/docs/get-started/query-with-neon-sql-editor#explain-and-analyze).
 
 From the Neon Console, use the sidebar navigation to open the **SQL Editor** page. Notice that your default branch `production` is already selected, along with the database created during onboarding, `neondb`.
 
-![Neon SQL Editor](/docs/get-started-with-neon/sql_editor.png)
+![Neon SQL Editor](/docs/get-started/sql_editor.png)
 
 The first time you open the SQL Editor for a new project, the editor includes placeholder SQL commands to create and populate a new sample table called `playing_with_neon`.
 
@@ -114,7 +115,7 @@ From the SQL Editor, click the **AI Assistant** button in the top-right corner a
 - _Show me the highest value in the table_
 - _Calculate the average value grouped by the first letter of the name_
 
-![Neon SQL Editor AI Assistant](/docs/get-started-with-neon/sql_assistant.png)
+![Neon SQL Editor AI Assistant](/docs/get-started/sql_assistant.png)
 
 Each query you run is automatically saved with an AI-generated description, making it easy to find and reuse queries later. For example, when you ask the AI Assistant to add company data, you should see a response like:
 
@@ -129,13 +130,13 @@ INSERT INTO public.playing_with_neon (name, value) VALUES
 
 With the description: "Add tech companies to playing_with_neon table"
 
-Learn more about AI features in the [SQL Editor documentation](/docs/get-started-with-neon/query-with-neon-sql-editor#ai-features).
+Learn more about AI features in the [SQL Editor documentation](/docs/get-started/query-with-neon-sql-editor#ai-features).
 
 ## View and modify data in the console
 
 Now that you have some data to play with, let's take a look at it on the **Tables** page in the Neon Console. The **Tables** page, powered by [Drizzle Studio](https://orm.drizzle.team/drizzle-studio/overview), provides a visual interface for exploring and modifying data directly from the console. The integration with Drizzle Studio provides the ability to add, update, and delete records, filter data, add or remove columns, drop or truncate tables, and export data in `.json` and `.csv` formats.
 
-![Tables page Drizzle integration](/docs/get-started-with-neon/tables_drizzle.png)
+![Tables page Drizzle integration](/docs/get-started/tables_drizzle.png)
 
 For a detailed guide on how to interact with your data using the **Tables** page, visit [Managing your data with interactive tables](/docs/guides/tables).
 
@@ -166,7 +167,7 @@ Your project comes with a `development` branch that's an isolated copy of your `
    neon auth
    ```
 
-   ![neon auth](/docs/get-started-with-neon/neonctl_auth.png 'no-border')
+   ![neon auth](/docs/get-started/neonctl_auth.png 'no-border')
 
 3. **View your branches**
 
@@ -186,7 +187,7 @@ neon branches reset development --parent
 
 Now that our development branch matches production, we can make some changes. The `playing_with_neon` table from production is now available in your `development` branch, and we'll modify its schema and add new data to demonstrate how branches can diverge.
 
-You can use the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) for this, but let's demonstrate how to connect and modify your database from the terminal using `psql`. If you don't have `psql` installed already, follow these steps to get set up:
+You can use the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) for this, but let's demonstrate how to connect and modify your database from the terminal using `psql`. If you don't have `psql` installed already, follow these steps to get set up:
 
 <Tabs labels={["Mac", "Linux", "Windows"]}>
 
@@ -287,11 +288,11 @@ From the **Branches** page in the Neon Console:
 1. Open the detailed view for your `development` branch and click **Open schema diff**.
 2. Verify the right branches are selected and click **Compare**. You can see the schema changes we added to our development branch highlighted in green.
 
-   ![Schema diff from branches page](/docs/get-started-with-neon/getting_started_schema_diff.png)
+   ![Schema diff from branches page](/docs/get-started/getting_started_schema_diff.png)
 
 ### Schema Migrations
 
-A more typical scenario for Schema Diff is when preparing for schema migrations. While Neon does not provide built-in schema migration tools, you can use ORMs like [Drizzle](https://drizzle.team/) or [Prisma](https://www.prisma.io/) to handle schema migrations efficiently. Read more about using Neon in your development workflow in [Connect Neon to your stack](/docs/get-started-with-neon/connect-neon).
+A more typical scenario for Schema Diff is when preparing for schema migrations. While Neon does not provide built-in schema migration tools, you can use ORMs like [Drizzle](https://drizzle.team/) or [Prisma](https://www.prisma.io/) to handle schema migrations efficiently. Read more about using Neon in your development workflow in [Connect Neon to your stack](/docs/get-started/connect-neon).
 
 ## Reset your development branch to production
 
@@ -312,7 +313,7 @@ Use the following command to reset your `development` branch to the state of the
 
 If you go back to your **Schema Diff** and compare branches again, you'll see they are now identical:
 
-![schema diff after reset](/docs/get-started-with-neon/getting_started_schema_diff_reset.png)
+![schema diff after reset](/docs/get-started/getting_started_schema_diff_reset.png)
 
 ### When to reset your branch
 
@@ -332,7 +333,7 @@ Depending on your development workflow, you can use branch reset:
 
 </Steps>
 
-Make sure that your development team is always working from the latest schema and data by including branch reset in your workflow. To read more about using branching in your workflows, see [Day 3 - Branching workflows](/docs/get-started-with-neon/workflow-primer).
+Make sure that your development team is always working from the latest schema and data by including branch reset in your workflow. To read more about using branching in your workflows, see [Day 3 - Branching workflows](/docs/get-started/workflow-primer).
 
 <Admonition type="tip" title="working with sensitive data?">
 Neon also supports schema-only branching. [Learn more](/docs/guides/branching-schema-only).

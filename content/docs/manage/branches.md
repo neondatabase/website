@@ -3,7 +3,7 @@ title: Manage branches
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
-  - /docs/get-started-with-neon/get-started-branching
+  - /docs/get-started/get-started-branching
 updatedOn: '2025-07-31T15:39:07.293Z'
 ---
 
@@ -137,7 +137,7 @@ For details and configuration instructions, refer to our [Branch expiration guid
 Connecting to a database in a branch requires connecting via a compute associated with the branch. The following steps describe how to connect using `psql` and a connection string obtained from the Neon Console.
 
 <Admonition type="tip">
-You can also query the databases in a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
+You can also query the databases in a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](/docs/get-started/query-with-neon-sql-editor).
 </Admonition>
 
 1. In the Neon Console, select a project.
@@ -154,7 +154,7 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
    A compute hostname starts with an `ep-` prefix. You can also find a compute hostname on the **Branches** page in the Neon Console. See [View branches](#view-branches).
    </Admonition>
 
-   If you want to connect from an application, the **Connect to your database modal**, accessed by clicking **Connect** on the project **Dashboard**, and the [Frameworks](/docs/get-started-with-neon/frameworks) and [Languages](/docs/get-started-with-neon/languages) sections in the documentation provide various connection examples.
+   If you want to connect from an application, the **Connect to your database modal**, accessed by clicking **Connect** on the project **Dashboard**, and the [Frameworks](/docs/get-started/frameworks) and [Languages](/docs/get-started/languages) sections in the documentation provide various connection examples.
 
 ## Reset a branch from parent
 
@@ -190,7 +190,7 @@ For temporary branches, consider setting an expiration date when creating them t
 
 ## Check the data size
 
-You can check the logical data size for the databases on a branch by viewing the **Data size** value on the **Branches** page or page in the Neon Console. Alternatively, you can run the following query on your branch from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client connected to your database:
+You can check the logical data size for the databases on a branch by viewing the **Data size** value on the **Branches** page or page in the Neon Console. Alternatively, you can run the following query on your branch from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any SQL client connected to your database:
 
 ```sql
 SELECT pg_size_pretty(sum(pg_database_size(datname)))

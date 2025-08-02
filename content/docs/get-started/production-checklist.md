@@ -3,6 +3,8 @@ title: Getting ready for production
 subtitle: A checklist of recommended settings to optimize performance, security, and
   reliability
 enableTableOfContents: true
+redirectFrom:
+  - /docs/get-started-with-neon/production-checklist
 updatedOn: '2025-07-24T20:03:24.596Z'
 ---
 
@@ -70,7 +72,7 @@ Use Neon's [autoscaling](/docs/guides/autoscaling-algorithm) feature to dynamica
 - **Minimum compute size**: Autoscaling works best if your data can be fully cached in memory.
 - **Maximum compute size**: Set this to as a high a limit as your plan allows. You only pay for what you use.
 
-![Autoscaling control](/docs/get-started-with-neon/autoscaling_control.png)
+![Autoscaling control](/docs/get-started/autoscaling_control.png)
 
 To get started with Autoscaling, read:
 
@@ -121,7 +123,7 @@ Set your restore window to 7 days to ensure data integrity and quick recovery.
 
 By default, Neon's restore window is set to **1 day**. Extending it to 7 days helps protect you against data loss, letting you recover from human or application errors that may go unnoticed for days. It can also help you comply with any industry regulations that need longer retention periods. While a longer restore window can increase storage costs, it provides exta security and recoverability for production data.
 
-![Restore window setting](/docs/get-started-with-neon/history_retention_setting.png)
+![Restore window setting](/docs/get-started/history_retention_setting.png)
 
 For more info, see [Instant restore](/docs/introduction/branch-restore).
 
@@ -140,7 +142,7 @@ Combine an allowlist with protected branches for enhanced security. This setup e
 
 Available with the Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans, you can configure **IP Allow** and protected branches in your Neon project's settings. For more information, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow) and [Protected branches guide](/docs/guides/protected-branches).
 
-![IP allow setting settings](/docs/get-started-with-neon/ip_allow_settings.png)
+![IP allow setting settings](/docs/get-started/ip_allow_settings.png)
 
 ## Set up metrics export
 

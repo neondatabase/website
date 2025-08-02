@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2025-05-30T16:54:40.449Z'
 ---
 
-Neon is [open source](/docs/get-started-with-neon/why-neon#neon-is-open-source) and has an enthusiastic user community worldwide. Here's how you can get involved:
+Neon is [open source](/docs/get-started/why-neon#neon-is-open-source) and has an enthusiastic user community worldwide. Here's how you can get involved:
 
 ## Contribute
 

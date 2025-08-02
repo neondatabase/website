@@ -141,6 +141,11 @@ const defaultConfig = {
 
     return [
       {
+        source: '/docs/get-started-with-neon/:path*',
+        destination: '/docs/get-started/:path*',
+        permanent: true,
+      },
+      {
         source: '/bm',
         destination: '/?ref=tbm-p',
         permanent: true,

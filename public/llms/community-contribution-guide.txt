@@ -60,7 +60,7 @@ The Neon documentation file structure reflects the navigation you see on the web
     ├── community
     ├── connect
     ├── extensions
-    ├── get-started-with-neon
+    ├── get-started
     ├── guides
     ├── introduction
     ├── manage

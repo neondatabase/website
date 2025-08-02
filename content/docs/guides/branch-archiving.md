@@ -54,7 +54,7 @@ When a branch is unarchived, its parent branches, all the way up to the root bra
 The following actions will automatically unarchive a branch, transferring the branch's data back to regular Neon storage:
 
 - [Connecting to or querying the branch from a client or application](/docs/connect/connect-from-any-app)
-- [Querying the branch from the Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor)
+- [Querying the branch from the Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor)
 - [Viewing the branch on the Tables page in the Neon Console](/docs/guides/tables)
 - [Creating a child branch](/docs/manage/branches#create-a-branch)
 - [Creating a role on a branch](/docs/manage/roles#create-a-role)

@@ -6,7 +6,7 @@
 
 - [Neon community HTML](https://neon.com/docs/community/community-intro): The original HTML version of this documentation
 
-Neon is [open source](https://neon.com/docs/get-started-with-neon/why-neon#neon-is-open-source) and has an enthusiastic user community worldwide. Here's how you can get involved:
+Neon is [open source](https://neon.com/docs/get-started/why-neon#neon-is-open-source) and has an enthusiastic user community worldwide. Here's how you can get involved:
 
 ## Contribute
 
