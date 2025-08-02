@@ -2,7 +2,7 @@
 title: Managing your data and schemas in the Neon Console
 subtitle: 'Use the Tables page to easily view, edit, and manage your data and schemas'
 enableTableOfContents: true
-updatedOn: '2025-08-01T19:29:04.981Z'
+updatedOn: '2025-08-02T09:01:05.730Z'
 ---
 
 The **Tables** page in the Neon Console offers a dynamic, visual interface for managing data and schemas. Fully interactive, this view lets you add, update, and delete records, filter data, modify columns, drop or truncate tables, export data in both .json and .csv formats, and manage schemas, tables, views, and enums.
@@ -70,13 +70,13 @@ In addition to managing data, you can manage your database schema directly from 
 - Creating enums
 - Refreshing the database schema
 
-![Drizzle Studio Schema Management UI](/docs/relnotes/drizzle_schema_mgmt.png)
+![Drizzle Studio Schema Management UI](/docs/changelog/drizzle_schema_mgmt.png)
 
 ## Create Postgres roles
 
 You can create Postgres roles from the **Tables** page. Define a role name, select from a list of commonly granted privileges, set a password, and click **Review and Create**.
 
-![Create roles on the tables page](/docs/relnotes/tables_page_create_roles.png)
+![Create roles on the tables page](/docs/changelog/tables_page_create_roles.png)
 
 > Neon role and privilege limitations apply. See [Manage roles](/docs/manage/roles).
 
@@ -84,7 +84,7 @@ You can create Postgres roles from the **Tables** page. Define a role name, sele
 
 For more advanced privilege assignments, click the **Add privilege** link when creating a role to build your `GRANT` statements.
 
-![Add privileges on the tables page](/docs/relnotes/tables_page_add_privileges.png)
+![Add privileges on the tables page](/docs/changelog/tables_page_add_privileges.png)
 
 > Neon role and privilege limitations apply. See [Manage roles](/docs/manage/roles).
 
@@ -92,7 +92,7 @@ For more advanced privilege assignments, click the **Add privilege** link when c
 
 Define your own Postgres RLS policies or use a RLS policy template. The "based on `user_id`" templates can be used with our [Neon RLS](/docs/guides/neon-rls) feature, which integrates third-party JWT-based authentication providers like Auth0 and Clerk.
 
-![Set RLS policies on the tables page](/docs/relnotes/tables_page_rls_policies.png)
+![Set RLS policies on the tables page](/docs/changelog/tables_page_rls_policies.png)
 
 ### Database studio view
 
@@ -100,11 +100,11 @@ The **Database studio** view makes it easy to explore your database objects—in
 
 To open the view, select **Database studio** from the **Tables** page:
 
-![Select database studio view](/docs/relnotes/tables_page_select_studio_view.png)
+![Select database studio view](/docs/changelog/tables_page_select_studio_view.png)
 
 Use the top navbar to navigate:
 
-![Studio view](/docs/relnotes/tables_page_studio_view.png)
+![Studio view](/docs/changelog/tables_page_studio_view.png)
 
 ## Tables page updates
 

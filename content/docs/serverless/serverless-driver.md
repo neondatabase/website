@@ -2,7 +2,7 @@
 title: Neon serverless driver
 enableTableOfContents: true
 subtitle: Connect to Neon from serverless environments over HTTP or WebSockets
-updatedOn: '2025-07-29T15:29:29.875Z'
+updatedOn: '2025-08-02T09:01:05.735Z'
 ---
 
 <CopyPrompt src="/prompts/serverless-driver-prompt.md" 
@@ -431,7 +431,7 @@ Explore the example applications that use the Neon serverless driver.
 
 Neon provides an example application to help you get started with the Neon serverless driver. The application generates a `JSON` listing of the 10 nearest UNESCO World Heritage sites using IP geolocation (data copyright © 1992 – 2022 UNESCO/World Heritage Centre).
 
-![UNESCO World Heritage sites app](/docs/relnotes/unesco_sites.png)
+![UNESCO World Heritage sites app](/docs/changelog/unesco_sites.png)
 
 There are different implementations of the application to choose from.
 
