@@ -58,7 +58,7 @@ Neon AI chat assistance is available to all Neon users. You can access it from t
 - **Neon documentation**: Toggle **Ask Neon AI** on the [Neon documentation](/docs/introduction) site
 - **Discord**: Join the **#gpt-help** channel on the [Neon Discord server](https://discord.gg/92vNTzKDGp)
 
-![Ask Neon AI](/docs/relnotes/perplexity_mode.png)
+![Ask Neon AI](/docs/changelog/perplexity_mode.png)
 
 Neon AI Chat assistants are updated regularly and built on various sources the Neon documentation, the Neon website, the Neon API, and Neon GitHub repositories.
 
