@@ -108,7 +108,7 @@ Some names are not permitted for databases. See [Reserved database names](#reser
 The API method appears as follows when specified in a cURL command. The `project_id` and `branch_id` are required parameters, and a database `name` and `owner` are required attributes.
 
 ```bash
-curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/databases' \
+curl 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-morning-meadow-afu2s1jl/databases' \
   -H 'Accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
@@ -126,35 +126,25 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 ```json
 {
   "database": {
-    "id": 1140822,
-    "branch_id": "br-blue-tooth-671580",
+    "id": 2889509,
+    "branch_id": "br-morning-meadow-afu2s1jl",
     "name": "mydb",
     "owner_name": "casey",
-    "created_at": "2023-01-04T21:17:17Z",
-    "updated_at": "2023-01-04T21:17:17Z"
+    "created_at": "2025-08-04T08:14:14Z",
+    "updated_at": "2025-08-04T08:14:14Z"
   },
   "operations": [
     {
-      "id": "6fc5969a-c445-4bc1-9f94-4dfbab4ad293",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-blue-tooth-671580",
-      "endpoint_id": "ep-aged-math-668285",
+      "id": "b51c8ece-b78e-49f7-8ec1-78b37cbae3c4",
+      "project_id": "dry-heart-13671059",
+      "branch_id": "br-morning-meadow-afu2s1jl",
+      "endpoint_id": "ep-holy-heart-afbmgcfx",
       "action": "apply_config",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2023-01-04T21:17:17Z",
-      "updated_at": "2023-01-04T21:17:17Z"
-    },
-    {
-      "id": "a0e78873-399a-45e4-9728-dde0b36f0941",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-blue-tooth-671580",
-      "endpoint_id": "ep-aged-math-668285",
-      "action": "suspend_compute",
-      "status": "scheduling",
-      "failures_count": 0,
-      "created_at": "2023-01-04T21:17:17Z",
-      "updated_at": "2023-01-04T21:17:17Z"
+      "created_at": "2025-08-04T08:14:14Z",
+      "updated_at": "2025-08-04T08:14:14Z",
+      "total_duration_ms": 0
     }
   ]
 }
@@ -217,7 +207,7 @@ PATCH /projects/{project_id}/branches/{branch_id}/databases/{database_name}
 The API method appears as follows when specified in a cURL command. The `project_id` and `branch_id` are required parameters. This example updates the database `name` value to `database1`.
 
 ```bash
-curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/databases/mydb' \
+curl -X PATCH 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-morning-meadow-afu2s1jl/databases/mydb' \
   -H 'Accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
@@ -234,35 +224,25 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 ```json
 {
   "database": {
-    "id": 1140822,
-    "branch_id": "br-blue-tooth-671580",
+    "id": 2889509,
+    "branch_id": "br-morning-meadow-afu2s1jl",
     "name": "database1",
     "owner_name": "casey",
-    "created_at": "2023-01-04T21:17:17Z",
-    "updated_at": "2023-01-04T21:17:17Z"
+    "created_at": "2025-08-04T08:14:14Z",
+    "updated_at": "2025-08-04T08:14:14Z"
   },
   "operations": [
     {
-      "id": "7a3e05b0-385e-490c-a6a3-60bbb8906f57",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-blue-tooth-671580",
-      "endpoint_id": "ep-aged-math-668285",
+      "id": "2f8c0a6a-33b5-4d56-964b-739614b699c0",
+      "project_id": "dry-heart-13671059",
+      "branch_id": "br-morning-meadow-afu2s1jl",
+      "endpoint_id": "ep-holy-heart-afbmgcfx",
       "action": "apply_config",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2023-01-04T21:19:35Z",
-      "updated_at": "2023-01-04T21:19:35Z"
-    },
-    {
-      "id": "f2805f7f-4d83-4c58-b3d1-dc678e699106",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-blue-tooth-671580",
-      "endpoint_id": "ep-aged-math-668285",
-      "action": "suspend_compute",
-      "status": "scheduling",
-      "failures_count": 0,
-      "created_at": "2023-01-04T21:19:35Z",
-      "updated_at": "2023-01-04T21:19:35Z"
+      "created_at": "2025-08-04T08:17:22Z",
+      "updated_at": "2025-08-04T08:17:22Z",
+      "total_duration_ms": 0
     }
   ]
 }
@@ -282,7 +262,7 @@ The API method appears as follows when specified in a cURL command. The `project
 
 ```bash
 curl -X 'DELETE' \
-  'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/databases/database1' \
+  'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-morning-meadow-afu2s1jl/databases/database1' \
   -H 'Accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
@@ -293,35 +273,25 @@ curl -X 'DELETE' \
 ```json
 {
   "database": {
-    "id": 1140822,
-    "branch_id": "br-blue-tooth-671580",
+    "id": 2889509,
+    "branch_id": "br-morning-meadow-afu2s1jl",
     "name": "database1",
     "owner_name": "casey",
-    "created_at": "2023-01-04T21:17:17Z",
-    "updated_at": "2023-01-04T21:17:17Z"
+    "created_at": "2025-08-04T08:14:14Z",
+    "updated_at": "2025-08-04T08:14:14Z"
   },
   "operations": [
     {
-      "id": "1a52afa4-f21b-4ed0-a97f-f7abda9ab49f",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-blue-tooth-671580",
-      "endpoint_id": "ep-aged-math-668285",
+      "id": "4cd4881b-2807-4377-a76d-8e7d39bc5448",
+      "project_id": "dry-heart-13671059",
+      "branch_id": "br-morning-meadow-afu2s1jl",
+      "endpoint_id": "ep-holy-heart-afbmgcfx",
       "action": "apply_config",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2023-01-04T21:20:24Z",
-      "updated_at": "2023-01-04T21:20:24Z"
-    },
-    {
-      "id": "f3fe437e-259a-4442-a750-3613d89dbbff",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-blue-tooth-671580",
-      "endpoint_id": "ep-aged-math-668285",
-      "action": "suspend_compute",
-      "status": "scheduling",
-      "failures_count": 0,
-      "created_at": "2023-01-04T21:20:24Z",
-      "updated_at": "2023-01-04T21:20:24Z"
+      "created_at": "2025-08-04T08:19:39Z",
+      "updated_at": "2025-08-04T08:19:39Z",
+      "total_duration_ms": 0
     }
   ]
 }

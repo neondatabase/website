@@ -59,6 +59,7 @@ The **Settings** page includes these sub-pages:
 - **Updates** — Schedule a time for Postgres and Neon updates.
 - **Collaborators** — Invite external collaborators to join your Neon project.
 - **Network security** — Configure Neon's IP and Private Networking features for secure access.
+- **RLS** — Configure Neon Row-Level Security (RLS) to apply row-level security policies to your Neon project.
 - **Logical replication** — Enable logical replication to replicate data from your Neon project to external data services and platforms.
 - **Transfer** — Transfer your project from the current organization to another organization you are a member of.
 - **Delete** — Use with care! This action deletes your entire project and all its objects, and is irreversible.
@@ -334,6 +335,10 @@ curl -X PATCH \
 
 </Tabs>
 
+### Enable Row-Level Security (RLS)
+
+Neon RLS lets you integrate a JWT-based auth provider (such as Clerk, Auth0, or Azure AD) so Postgres can validate user identity and enforce row-level access with database policies. Configure your provider’s JWKS URL in the project’s Settings > RLS page, optionally set an expected audience (aud) when required, and use the `authenticated@` connection for client or server access. For setup steps and examples, see [About Neon RLS](/docs/guides/neon-rls) and the [Neon RLS Tutorial](/docs/guides/neon-rls-tutorial).
+
 ### Enable logical replication
 
 Logical replication lets you replicate data changes from Neon to external data services and platforms, including data warehouses, analytical database services, messaging platforms, event-streaming platforms, and external Postgres databases.
@@ -421,105 +426,150 @@ The response includes information about the role, the database, the default bran
 ```json
 {
   "project": {
+    "data_storage_bytes_hour": 0,
+    "data_transfer_bytes": 0,
+    "written_data_bytes": 0,
+    "compute_time_seconds": 0,
+    "active_time_seconds": 0,
     "cpu_used_sec": 0,
     "id": "ep-cool-darkness-123456",
     "platform_id": "aws",
-    "region_id": "aws-us-east-2",
+    "region_id": "aws-us-east-1",
     "name": "myproject",
-    "provisioner": "k8s-pod",
-    "pg_version": 15,
-    "locked": false,
-    "created_at": "2023-01-04T17:33:11Z",
-    "updated_at": "2023-01-04T17:33:11Z",
-    "proxy_host": "us-east-2.aws.neon.tech",
-    "branch_logical_size_limit": 3072
+    "provisioner": "k8s-neonvm",
+    "default_endpoint_settings": {
+      "autoscaling_limit_min_cu": 0.25,
+      "autoscaling_limit_max_cu": 0.25,
+      "suspend_timeout_seconds": 0
+    },
+    "settings": {
+      "allowed_ips": {
+        "ips": [],
+        "protected_branches_only": false
+      },
+      "enable_logical_replication": false,
+      "maintenance_window": {
+        "weekdays": [7],
+        "start_time": "06:00",
+        "end_time": "07:00"
+      },
+      "block_public_connections": false,
+      "block_vpc_connections": false,
+      "hipaa": false
+    },
+    "pg_version": 17,
+    "proxy_host": "c-2.us-east-1.aws.neon.tech",
+    "branch_logical_size_limit": 512,
+    "branch_logical_size_limit_bytes": 536870912,
+    "store_passwords": true,
+    "creation_source": "console",
+    "history_retention_seconds": 86400,
+    "created_at": "2025-08-04T05:15:41Z",
+    "updated_at": "2025-08-04T05:15:41Z",
+    "consumption_period_start": "0001-01-01T00:00:00Z",
+    "consumption_period_end": "0001-01-01T00:00:00Z",
+    "owner_id": "91cbdacd-06c2-49f5-bacf-78b9463c81ca"
   },
   "connection_uris": [
     {
-      "connection_uri": "postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require"
+      "connection_uri": "postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-east-1.aws.neon.tech/dbname?sslmode=require&channel_binding=require",
+      "connection_parameters": {
+        "database": "dbname",
+        "password": "AbC123dEf",
+        "role": "alex",
+        "host": "ep-cool-darkness-123456.c-2.us-east-1.aws.neon.tech",
+        "pooler_host": "ep-cool-darkness-123456-pooler.c-2.us-east-1.aws.neon.tech"
+      }
     }
   ],
   "roles": [
     {
-      "branch_id": "br-falling-frost-286006",
-      "name": "alex",
-      "password": "AbC123dEf",
+      "branch_id": "br-gentle-salad-ad7v90qq",
+      "name": "neondb_owner",
+      "password": "npg_Se0ECYqaJ5jA",
       "protected": false,
-      "created_at": "2023-01-04T17:33:11Z",
-      "updated_at": "2023-01-04T17:33:11Z"
-    },
-    {
-      "branch_id": "br-falling-frost-286006",
-      "name": "web_access",
-      "protected": true,
-      "created_at": "2023-01-04T17:33:11Z",
-      "updated_at": "2023-01-04T17:33:11Z"
+      "created_at": "2025-08-04T05:15:41Z",
+      "updated_at": "2025-08-04T05:15:41Z"
     }
   ],
   "databases": [
     {
-      "id": 1138408,
-      "branch_id": "br-falling-frost-286006",
-      "name": "dbname",
-      "owner_name": "alex",
-      "created_at": "2023-01-04T17:33:11Z",
-      "updated_at": "2023-01-04T17:33:11Z"
+      "id": 5140981,
+      "branch_id": "br-gentle-salad-ad7v90qq",
+      "name": "neondb",
+      "owner_name": "neondb_owner",
+      "created_at": "2025-08-04T05:15:41Z",
+      "updated_at": "2025-08-04T05:15:41Z"
     }
   ],
   "operations": [
     {
-      "id": "b7c32d83-6402-49c8-b40b-0388309549da",
+      "id": "cacca1d4-ad0e-46dc-ae82-886ffb96889d",
       "project_id": "ep-cool-darkness-123456",
-      "branch_id": "br-falling-frost-286006",
+      "branch_id": "br-gentle-salad-ad7v90qq",
       "action": "create_timeline",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2023-01-04T17:33:11Z",
-      "updated_at": "2023-01-04T17:33:11Z"
+      "created_at": "2025-08-04T05:15:41Z",
+      "updated_at": "2025-08-04T05:15:41Z",
+      "total_duration_ms": 0
     },
     {
-      "id": "756f2b87-f45c-4a61-9b21-6cd3f3c48c68",
+      "id": "1df43d11-5c07-4de1-9440-ac09d305fdf3",
       "project_id": "ep-cool-darkness-123456",
-      "branch_id": "br-falling-frost-286006",
-      "endpoint_id": "ep-jolly-moon-631024",
+      "branch_id": "br-gentle-salad-ad7v90qq",
+      "endpoint_id": "ep-cool-darkness-123456",
       "action": "start_compute",
       "status": "scheduling",
       "failures_count": 0,
-      "created_at": "2023-01-04T17:33:11Z",
-      "updated_at": "2023-01-04T17:33:11Z"
+      "created_at": "2025-08-04T05:15:41Z",
+      "updated_at": "2025-08-04T05:15:41Z",
+      "total_duration_ms": 0
     }
   ],
   "branch": {
-    "id": "br-falling-frost-286006",
+    "id": "br-gentle-salad-ad7v90qq",
     "project_id": "ep-cool-darkness-123456",
     "name": "main",
     "current_state": "init",
     "pending_state": "ready",
-    "created_at": "2023-01-04T17:33:11Z",
-    "updated_at": "2023-01-04T17:33:11Z"
+    "state_changed_at": "2025-08-04T05:15:41Z",
+    "creation_source": "console",
+    "primary": true,
+    "default": true,
+    "protected": false,
+    "cpu_used_sec": 0,
+    "compute_time_seconds": 0,
+    "active_time_seconds": 0,
+    "written_data_bytes": 0,
+    "data_transfer_bytes": 0,
+    "created_at": "2025-08-04T05:15:41Z",
+    "updated_at": "2025-08-04T05:15:41Z",
+    "init_source": "parent-data"
   },
   "endpoints": [
     {
-      "host": "ep-jolly-moon-631024.us-east-2.aws.neon.tech",
-      "id": "ep-jolly-moon-631024",
+      "host": "ep-cool-darkness-123456.c-2.us-east-1.aws.neon.tech",
+      "id": "ep-cool-darkness-123456",
       "project_id": "ep-cool-darkness-123456",
-      "branch_id": "br-falling-frost-286006",
-      "autoscaling_limit_min_cu": 1,
-      "autoscaling_limit_max_cu": 1,
-      "region_id": "aws-us-east-2",
+      "branch_id": "br-gentle-salad-ad7v90qq",
+      "autoscaling_limit_min_cu": 0.25,
+      "autoscaling_limit_max_cu": 0.25,
+      "region_id": "aws-us-east-1",
       "type": "read_write",
       "current_state": "init",
       "pending_state": "active",
-      "settings": {
-        "pg_settings": {}
-      },
+      "settings": {},
       "pooler_enabled": false,
       "pooler_mode": "transaction",
       "disabled": false,
       "passwordless_access": true,
-      "created_at": "2023-01-04T17:33:11Z",
-      "updated_at": "2023-01-04T17:33:11Z",
-      "proxy_host": "us-east-2.aws.neon.tech"
+      "creation_source": "console",
+      "created_at": "2025-08-04T05:15:41Z",
+      "updated_at": "2025-08-04T05:15:41Z",
+      "proxy_host": "c-2.us-east-1.aws.neon.tech",
+      "suspend_timeout_seconds": 0,
+      "provisioner": "k8s-neonvm"
     }
   ]
 }
@@ -550,20 +600,100 @@ curl 'https://console.neon.tech/api/v2/projects' \
 {
   "projects": [
     {
-      "cpu_used_sec": 0,
-      "id": "purple-shape-491160",
+      "id": "frosty-tree-10754091",
       "platform_id": "aws",
-      "region_id": "aws-us-east-2",
-      "name": "purple-shape-491160",
-      "provisioner": "k8s-pod",
-      "pg_version": 15,
-      "locked": false,
-      "created_at": "2023-01-03T18:22:56Z",
-      "updated_at": "2023-01-03T18:22:56Z",
-      "proxy_host": "us-east-2.aws.neon.tech",
-      "branch_logical_size_limit": 3072
+      "region_id": "aws-ap-southeast-1",
+      "name": "personal_projects",
+      "provisioner": "k8s-neonvm",
+      "default_endpoint_settings": {
+        "autoscaling_limit_min_cu": 0.25,
+        "autoscaling_limit_max_cu": 2,
+        "suspend_timeout_seconds": 0
+      },
+      "settings": {
+        "allowed_ips": {
+          "ips": [],
+          "protected_branches_only": false
+        },
+        "enable_logical_replication": false,
+        "maintenance_window": {
+          "weekdays": [4],
+          "start_time": "15:00",
+          "end_time": "16:00"
+        },
+        "block_public_connections": false,
+        "block_vpc_connections": false,
+        "hipaa": false
+      },
+      "pg_version": 17,
+      "proxy_host": "ap-southeast-1.aws.neon.tech",
+      "branch_logical_size_limit": 512,
+      "branch_logical_size_limit_bytes": 536870912,
+      "store_passwords": true,
+      "active_time": 1260,
+      "cpu_used_sec": 319,
+      "creation_source": "console",
+      "created_at": "2024-11-08T17:20:01Z",
+      "updated_at": "2025-08-03T01:16:18Z",
+      "synthetic_storage_size": 96929448,
+      "quota_reset_at": "2025-09-01T00:00:00Z",
+      "owner_id": "91cbdacd-06c2-49f5-bacf-78b9463c81ca",
+      "compute_last_active_at": "2025-08-03T01:16:18Z",
+      "history_retention_seconds": 86400
+    },
+    {
+      "id": "lingering-grass-54827563",
+      "platform_id": "aws",
+      "region_id": "aws-ap-southeast-1",
+      "name": "brizai",
+      "provisioner": "k8s-neonvm",
+      "default_endpoint_settings": {
+        "autoscaling_limit_min_cu": 0.25,
+        "autoscaling_limit_max_cu": 2,
+        "suspend_timeout_seconds": 0
+      },
+      "settings": {
+        "allowed_ips": {
+          "ips": [],
+          "protected_branches_only": false
+        },
+        "enable_logical_replication": false,
+        "maintenance_window": {
+          "weekdays": [1],
+          "start_time": "16:00",
+          "end_time": "17:00"
+        },
+        "block_public_connections": false,
+        "block_vpc_connections": false,
+        "hipaa": false
+      },
+      "pg_version": 17,
+      "proxy_host": "ap-southeast-1.aws.neon.tech",
+      "branch_logical_size_limit": 512,
+      "branch_logical_size_limit_bytes": 536870912,
+      "store_passwords": true,
+      "active_time": 0,
+      "cpu_used_sec": 0,
+      "creation_source": "console",
+      "created_at": "2024-10-28T16:26:49Z",
+      "updated_at": "2025-08-01T00:34:48Z",
+      "synthetic_storage_size": 31082816,
+      "quota_reset_at": "2025-09-01T00:00:00Z",
+      "owner_id": "91cbdacd-06c2-49f5-bacf-78b9463c81ca",
+      "compute_last_active_at": "2025-02-14T09:51:30Z",
+      "history_retention_seconds": 86400
     }
-  ]
+  ],
+  "unavailable_project_ids": [],
+  "pagination": {
+    "cursor": "lingering-grass-54827563"
+  },
+  "applications": {
+    "frosty-tree-10754091": ["vercel"]
+  },
+  "integrations": {
+    "frosty-tree-10754091": ["vercel"]
+  }
 }
 ```
 
@@ -580,7 +710,7 @@ PATCH /projects/{project_id}
 The API method appears as follows when specified in a cURL command. The `project_id` is a required parameter. The example changes the project `name` to `project1`.
 
 ```bash
-curl 'https://console.neon.tech/api/v2/projects/ep-cool-darkness-123456' \
+curl -X PATCH 'https://console.neon.tech/api/v2/projects/ep-cool-darkness-123456' \
   -H 'accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
@@ -597,18 +727,51 @@ curl 'https://console.neon.tech/api/v2/projects/ep-cool-darkness-123456' \
 ```json
 {
   "project": {
-    "cpu_used_sec": 0,
+    "data_storage_bytes_hour": 35697544,
+    "data_transfer_bytes": 13444,
+    "written_data_bytes": 34595496,
+    "compute_time_seconds": 89,
+    "active_time_seconds": 348,
+    "cpu_used_sec": 89,
     "id": "ep-cool-darkness-123456",
     "platform_id": "aws",
-    "region_id": "aws-us-east-2",
+    "region_id": "aws-us-east-1",
     "name": "project1",
-    "provisioner": "k8s-pod",
-    "pg_version": 15,
-    "locked": false,
-    "created_at": "2023-01-04T17:33:11Z",
-    "updated_at": "2023-01-04T17:36:17Z",
-    "proxy_host": "us-east-2.aws.neon.tech",
-    "branch_logical_size_limit": 3072
+    "provisioner": "k8s-neonvm",
+    "default_endpoint_settings": {
+      "autoscaling_limit_min_cu": 0.25,
+      "autoscaling_limit_max_cu": 0.25,
+      "suspend_timeout_seconds": 0
+    },
+    "settings": {
+      "allowed_ips": {
+        "ips": [],
+        "protected_branches_only": false
+      },
+      "enable_logical_replication": false,
+      "maintenance_window": {
+        "weekdays": [7],
+        "start_time": "06:00",
+        "end_time": "07:00"
+      },
+      "block_public_connections": false,
+      "block_vpc_connections": false,
+      "hipaa": false
+    },
+    "pg_version": 17,
+    "proxy_host": "c-2.us-east-1.aws.neon.tech",
+    "branch_logical_size_limit": 512,
+    "branch_logical_size_limit_bytes": 536870912,
+    "store_passwords": true,
+    "creation_source": "console",
+    "history_retention_seconds": 86400,
+    "created_at": "2025-08-04T05:15:41Z",
+    "updated_at": "2025-08-04T05:55:58Z",
+    "synthetic_storage_size": 35697544,
+    "consumption_period_start": "0001-01-01T00:00:00Z",
+    "consumption_period_end": "0001-01-01T00:00:00Z",
+    "owner_id": "91cbdacd-06c2-49f5-bacf-78b9463c81ca",
+    "compute_last_active_at": "2025-08-04T05:15:47Z"
   },
   "operations": []
 }
@@ -639,18 +802,51 @@ curl -X 'DELETE' \
 ```json
 {
   "project": {
-    "cpu_used_sec": 0,
+    "data_storage_bytes_hour": 35697544,
+    "data_transfer_bytes": 13444,
+    "written_data_bytes": 34595496,
+    "compute_time_seconds": 89,
+    "active_time_seconds": 348,
+    "cpu_used_sec": 89,
     "id": "ep-cool-darkness-123456",
     "platform_id": "aws",
-    "region_id": "aws-us-east-2",
-    "name": "project1",
-    "provisioner": "k8s-pod",
-    "pg_version": 15,
-    "locked": false,
-    "created_at": "2023-01-04T17:33:11Z",
-    "updated_at": "2023-01-04T17:36:17Z",
-    "proxy_host": "us-east-2.aws.neon.tech",
-    "branch_logical_size_limit": 3072
+    "region_id": "aws-us-east-1",
+    "name": "project2",
+    "provisioner": "k8s-neonvm",
+    "default_endpoint_settings": {
+      "autoscaling_limit_min_cu": 0.25,
+      "autoscaling_limit_max_cu": 0.25,
+      "suspend_timeout_seconds": 0
+    },
+    "settings": {
+      "allowed_ips": {
+        "ips": [],
+        "protected_branches_only": false
+      },
+      "enable_logical_replication": false,
+      "maintenance_window": {
+        "weekdays": [7],
+        "start_time": "06:00",
+        "end_time": "07:00"
+      },
+      "block_public_connections": false,
+      "block_vpc_connections": false,
+      "hipaa": false
+    },
+    "pg_version": 17,
+    "proxy_host": "c-2.us-east-1.aws.neon.tech",
+    "branch_logical_size_limit": 512,
+    "branch_logical_size_limit_bytes": 536870912,
+    "store_passwords": true,
+    "creation_source": "console",
+    "history_retention_seconds": 86400,
+    "created_at": "2025-08-04T05:15:41Z",
+    "updated_at": "2025-08-04T06:10:55Z",
+    "synthetic_storage_size": 35697544,
+    "consumption_period_start": "0001-01-01T00:00:00Z",
+    "consumption_period_end": "0001-01-01T00:00:00Z",
+    "owner_id": "91cbdacd-06c2-49f5-bacf-78b9463c81ca",
+    "compute_last_active_at": "2025-08-04T05:15:47Z"
   }
 }
 ```

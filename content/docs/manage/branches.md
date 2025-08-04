@@ -300,7 +300,7 @@ This method does not require a request body. Without a request body, the method 
 </Admonition>
 
 ```bash
-curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches' \
+curl 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches' \
   -H 'Accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
@@ -327,62 +327,110 @@ The response body includes information about the branch, the branch's compute, a
 ```json
 {
   "branch": {
-    "id": "br-dawn-scene-747675",
-    "project_id": "autumn-disk-484331",
-    "parent_id": "br-wispy-dew-591433",
-    "parent_lsn": "0/1AA6408",
-    "name": "br-dawn-scene-747675",
+    "id": "br-curly-wave-af4i4oeu",
+    "project_id": "dry-heart-13671059",
+    "parent_id": "br-morning-meadow-afu2s1jl",
+    "parent_lsn": "0/1FA22C0",
+    "name": "br-curly-wave-af4i4oeu",
     "current_state": "init",
     "pending_state": "ready",
-    "created_at": "2022-12-08T19:55:43Z",
-    "updated_at": "2022-12-08T19:55:43Z"
+    "state_changed_at": "2025-08-04T07:13:09Z",
+    "creation_source": "console",
+    "primary": false,
+    "default": false,
+    "protected": false,
+    "cpu_used_sec": 0,
+    "compute_time_seconds": 0,
+    "active_time_seconds": 0,
+    "written_data_bytes": 0,
+    "data_transfer_bytes": 0,
+    "created_at": "2025-08-04T07:13:09Z",
+    "updated_at": "2025-08-04T07:13:09Z",
+    "created_by": {
+      "name": "your@email.com",
+      "image": ""
+    },
+    "init_source": "parent-data"
   },
-
   "endpoints": [
     {
-      "host": "ep-small-bush-675287.us-east-2.aws.neon.tech",
-      "id": "ep-small-bush-675287",
-      "project_id": "autumn-disk-484331",
-      "branch_id": "br-dawn-scene-747675",
-      "autoscaling_limit_min_cu": 1,
-      "autoscaling_limit_max_cu": 1,
-      "region_id": "aws-us-east-2",
+      "host": "ep-cool-darkness-123456.c-2.us-west-2.aws.neon.tech",
+      "id": "ep-cool-darkness-123456",
+      "project_id": "dry-heart-13671059",
+      "branch_id": "br-curly-wave-af4i4oeu",
+      "autoscaling_limit_min_cu": 0.25,
+      "autoscaling_limit_max_cu": 0.25,
+      "region_id": "aws-us-west-2",
       "type": "read_write",
       "current_state": "init",
       "pending_state": "active",
-      "settings": {
-        "pg_settings": {}
-      },
+      "settings": {},
       "pooler_enabled": false,
       "pooler_mode": "transaction",
       "disabled": false,
       "passwordless_access": true,
-      "created_at": "2022-12-08T19:55:43Z",
-      "updated_at": "2022-12-08T19:55:43Z",
-      "proxy_host": "us-east-2.aws.neon.tech"
+      "creation_source": "console",
+      "created_at": "2025-08-04T07:13:09Z",
+      "updated_at": "2025-08-04T07:13:09Z",
+      "proxy_host": "c-2.us-west-2.aws.neon.tech",
+      "suspend_timeout_seconds": 0,
+      "provisioner": "k8s-neonvm"
     }
   ],
   "operations": [
     {
-      "id": "22acbb37-209b-4b90-a39c-8460090e1329",
-      "project_id": "autumn-disk-484331",
-      "branch_id": "br-dawn-scene-747675",
+      "id": "8289b00a-4341-48d2-b3f1-d0c8dbb7e806",
+      "project_id": "dry-heart-13671059",
+      "branch_id": "br-curly-wave-af4i4oeu",
       "action": "create_branch",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2022-12-08T19:55:43Z",
-      "updated_at": "2022-12-08T19:55:43Z"
+      "created_at": "2025-08-04T07:13:09Z",
+      "updated_at": "2025-08-04T07:13:09Z",
+      "total_duration_ms": 0
     },
     {
-      "id": "055b17e6-ffe3-47ab-b545-cfd7db6fd8b8",
-      "project_id": "autumn-disk-484331",
-      "branch_id": "br-dawn-scene-747675",
-      "endpoint_id": "ep-small-bush-675287",
+      "id": "a3c9baa4-6732-4774-a141-9d03396babce",
+      "project_id": "dry-heart-13671059",
+      "branch_id": "br-curly-wave-af4i4oeu",
+      "endpoint_id": "ep-cool-darkness-123456",
       "action": "start_compute",
       "status": "scheduling",
       "failures_count": 0,
-      "created_at": "2022-12-08T19:55:43Z",
-      "updated_at": "2022-12-08T19:55:43Z"
+      "created_at": "2025-08-04T07:13:09Z",
+      "updated_at": "2025-08-04T07:13:09Z",
+      "total_duration_ms": 0
+    }
+  ],
+  "roles": [
+    {
+      "branch_id": "br-curly-wave-af4i4oeu",
+      "name": "alex",
+      "protected": false,
+      "created_at": "2025-08-04T07:07:55Z",
+      "updated_at": "2025-08-04T07:07:55Z"
+    }
+  ],
+  "databases": [
+    {
+      "id": 2886327,
+      "branch_id": "br-curly-wave-af4i4oeu",
+      "name": "dbname",
+      "owner_name": "alex",
+      "created_at": "2025-08-04T07:07:55Z",
+      "updated_at": "2025-08-04T07:07:55Z"
+    }
+  ],
+  "connection_uris": [
+    {
+      "connection_uri": "postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-west-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require",
+      "connection_parameters": {
+        "database": "dbname",
+        "password": "AbC123dEf",
+        "role": "alex",
+        "host": "ep-cool-darkness-123456.c-2.us-west-2.aws.neon.tech",
+        "pooler_host": "ep-cool-darkness-123456-pooler.c-2.us-west-2.aws.neon.tech"
+      }
     }
   ]
 }
@@ -401,7 +449,7 @@ GET /projects/{project_id}/branches
 The API method appears as follows when specified in a cURL command:
 
 ```bash
-curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches' \
+curl 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches' \
   -H 'accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
@@ -417,27 +465,61 @@ The response body lists the project's default branch and any child branches. The
 {
   "branches": [
     {
-      "id": "br-dawn-scene-747675",
-      "project_id": "autumn-disk-484331",
-      "parent_id": "br-wispy-dew-591433",
-      "parent_lsn": "0/1AA6408",
-      "name": "br-dawn-scene-747675",
+      "id": "br-curly-wave-af4i4oeu",
+      "project_id": "dry-heart-13671059",
+      "parent_id": "br-morning-meadow-afu2s1jl",
+      "parent_lsn": "0/1FA22C0",
+      "parent_timestamp": "2025-08-04T07:08:48Z",
+      "name": "br-curly-wave-af4i4oeu",
       "current_state": "ready",
-      "logical_size": 28,
-      "created_at": "2022-12-08T19:55:43Z",
-      "updated_at": "2022-12-08T19:55:43Z"
+      "state_changed_at": "2025-08-04T07:13:09Z",
+      "creation_source": "console",
+      "primary": false,
+      "default": false,
+      "protected": false,
+      "cpu_used_sec": 0,
+      "compute_time_seconds": 0,
+      "active_time_seconds": 0,
+      "written_data_bytes": 0,
+      "data_transfer_bytes": 0,
+      "created_at": "2025-08-04T07:13:09Z",
+      "updated_at": "2025-08-04T07:18:15Z",
+      "created_by": {
+        "name": "your@email.com",
+        "image": ""
+      },
+      "init_source": "parent-data"
     },
     {
-      "id": "br-wispy-dew-591433",
-      "project_id": "autumn-disk-484331",
+      "id": "br-morning-meadow-afu2s1jl",
+      "project_id": "dry-heart-13671059",
       "name": "main",
       "current_state": "ready",
-      "logical_size": 28,
-      "physical_size": 31,
-      "created_at": "2022-12-07T00:45:05Z",
-      "updated_at": "2022-12-07T00:45:05Z"
+      "state_changed_at": "2025-08-04T07:07:58Z",
+      "logical_size": 30777344,
+      "creation_source": "console",
+      "primary": true,
+      "default": true,
+      "protected": false,
+      "cpu_used_sec": 0,
+      "compute_time_seconds": 0,
+      "active_time_seconds": 0,
+      "written_data_bytes": 0,
+      "data_transfer_bytes": 0,
+      "created_at": "2025-08-04T07:07:55Z",
+      "updated_at": "2025-08-04T07:13:11Z",
+      "created_by": {
+        "name": "your@email.com",
+        "image": ""
+      },
+      "init_source": "parent-data"
     }
-  ]
+  ],
+  "annotations": {},
+  "pagination": {
+    "sort_by": "updated_at",
+    "sort_order": "DESC"
+  }
 }
 ```
 
@@ -455,7 +537,7 @@ The API method appears as follows when specified in a cURL command:
 
 ```bash
 curl -X 'DELETE' \
-  'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches/br-dawn-scene-747675' \
+  'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-curly-wave-af4i4oeu' \
   -H 'accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
@@ -471,36 +553,56 @@ The response body shows information about the branch being deleted and the `susp
 ```json
 {
   "branch": {
-    "id": "br-dawn-scene-747675",
-    "project_id": "autumn-disk-484331",
-    "parent_id": "br-shy-meadow-151383",
-    "parent_lsn": "0/1953508",
-    "name": "br-flat-darkness-194551",
+    "id": "br-curly-wave-af4i4oeu",
+    "project_id": "dry-heart-13671059",
+    "parent_id": "br-morning-meadow-afu2s1jl",
+    "parent_lsn": "0/1FA22C0",
+    "parent_timestamp": "2025-08-04T07:08:48Z",
+    "name": "br-curly-wave-af4i4oeu",
     "current_state": "ready",
-    "created_at": "2022-12-08T20:01:31Z",
-    "updated_at": "2022-12-08T20:01:31Z"
+    "pending_state": "storage_deleted",
+    "state_changed_at": "2025-08-04T07:13:09Z",
+    "logical_size": 30851072,
+    "creation_source": "console",
+    "primary": false,
+    "default": false,
+    "protected": false,
+    "cpu_used_sec": 0,
+    "compute_time_seconds": 0,
+    "active_time_seconds": 0,
+    "written_data_bytes": 0,
+    "data_transfer_bytes": 0,
+    "created_at": "2025-08-04T07:13:09Z",
+    "updated_at": "2025-08-04T07:21:55Z",
+    "created_by": {
+      "name": "your@email.com",
+      "image": ""
+    },
+    "init_source": "parent-data"
   },
   "operations": [
     {
-      "id": "c7ee9bea-c984-41ac-8672-9848714104bc",
-      "project_id": "autumn-disk-484331",
-      "branch_id": "br-dawn-scene-747675",
-      "endpoint_id": "ep-small-bush-675287",
+      "id": "eb85073d-53fc-4d37-a32a-ca9e9ea1eeb1",
+      "project_id": "dry-heart-13671059",
+      "branch_id": "br-curly-wave-af4i4oeu",
+      "endpoint_id": "ep-soft-art-af5jvg5j",
       "action": "suspend_compute",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2022-12-08T20:01:31Z",
-      "updated_at": "2022-12-08T20:01:31Z"
+      "created_at": "2025-08-04T07:21:55Z",
+      "updated_at": "2025-08-04T07:21:55Z",
+      "total_duration_ms": 0
     },
     {
-      "id": "41646f65-c692-4621-9538-32265f74ffe5",
-      "project_id": "autumn-disk-484331",
-      "branch_id": "br-dawn-scene-747675",
+      "id": "586af342-1ffe-4e0a-9e11-326db1164ad7",
+      "project_id": "dry-heart-13671059",
+      "branch_id": "br-curly-wave-af4i4oeu",
       "action": "delete_timeline",
       "status": "scheduling",
       "failures_count": 0,
-      "created_at": "2022-12-06T01:12:10Z",
-      "updated_at": "2022-12-06T01:12:10Z"
+      "created_at": "2025-08-04T07:21:55Z",
+      "updated_at": "2025-08-04T07:21:55Z",
+      "total_duration_ms": 0
     }
   ]
 }

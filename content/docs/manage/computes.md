@@ -181,8 +181,6 @@ Compute size support differs by [Neon plan](/docs/introduction/plans). Autoscali
 | 36                | 36   | 144      | 108           | 4000            |
 | 38                | 38   | 152      | 114           | 4000            |
 
-|
-
 When selecting a compute size, ideally, you want to keep as much of your dataset in memory as possible. This improves performance by reducing the amount of reads from storage. If your dataset is not too large, select a compute size that will hold the entire dataset in memory. For larger datasets that cannot be fully held in memory, select a compute size that can hold your [working set](/docs/reference/glossary#working-set). Selecting a compute size for a working set involves advanced steps, which are outlined below. See [Sizing your compute based on the working set](#sizing-your-compute-based-on-the-working-set).
 
 Regarding connection limits, you'll want a compute size that can support your anticipated maximum number of concurrent connections. If you are using **Autoscaling**, it is important to remember that your `max_connections` setting is based on both your minimum and the maximum compute size. See [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size) for details. To avoid any `max_connections` constraints, you can use a pooled connection with your application, which supports up to 10,000 concurrent user connections. See [Connection pooling](/docs/connect/connection-pooling).
@@ -286,13 +284,13 @@ The API method appears as follows when specified in a cURL command. The branch y
 
 ```bash
 curl -X 'POST' \
-  'https://console.neon.tech/api/v2/projects/hidden-cell-763301/endpoints' \
+  'https://console.neon.tech/api/v2/projects/autumn-lake-30024670/endpoints' \
   -H 'accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
   "endpoint": {
-    "branch_id": "br-blue-tooth-671580",
+    "branch_id": "br-dry-glitter-a1rh0x6q",
     "type": "read_write"
   }
 }'
@@ -304,38 +302,40 @@ curl -X 'POST' \
 ```json
 {
   "endpoint": {
-    "host": "ep-aged-math-668285.us-east-2.aws.neon.tech",
-    "id": "ep-aged-math-668285",
-    "project_id": "hidden-cell-763301",
-    "branch_id": "br-blue-tooth-671580",
+    "host": "ep-misty-morning-a1pfa4ez.ap-southeast-1.aws.neon.tech",
+    "id": "ep-misty-morning-a1pfa4ez",
+    "project_id": "autumn-lake-30024670",
+    "branch_id": "br-dry-glitter-a1rh0x6q",
     "autoscaling_limit_min_cu": 1,
-    "autoscaling_limit_max_cu": 1,
-    "region_id": "aws-us-east-2",
+    "autoscaling_limit_max_cu": 2,
+    "region_id": "aws-ap-southeast-1",
     "type": "read_write",
     "current_state": "init",
     "pending_state": "active",
-    "settings": {
-      "pg_settings": {}
-    },
+    "settings": {},
     "pooler_enabled": false,
     "pooler_mode": "transaction",
     "disabled": false,
     "passwordless_access": true,
-    "created_at": "2023-01-04T18:39:41Z",
-    "updated_at": "2023-01-04T18:39:41Z",
-    "proxy_host": "us-east-2.aws.neon.tech"
+    "creation_source": "console",
+    "created_at": "2025-08-03T17:40:19Z",
+    "updated_at": "2025-08-03T17:40:19Z",
+    "proxy_host": "ap-southeast-1.aws.neon.tech",
+    "suspend_timeout_seconds": 0,
+    "provisioner": "k8s-neonvm"
   },
   "operations": [
     {
-      "id": "e0e4da91-8576-4348-913b-aaf61a46d314",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-blue-tooth-671580",
-      "endpoint_id": "ep-aged-math-668285",
+      "id": "d6ef3cc2-663b-440a-88e7-ea6a59ea2c6a",
+      "project_id": "autumn-lake-30024670",
+      "branch_id": "br-dry-glitter-a1rh0x6q",
+      "endpoint_id": "ep-misty-morning-a1pfa4ez",
       "action": "start_compute",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2023-01-04T18:39:41Z",
-      "updated_at": "2023-01-04T18:39:41Z"
+      "created_at": "2025-08-03T17:40:19Z",
+      "updated_at": "2025-08-03T17:40:19Z",
+      "total_duration_ms": 0
     }
   ]
 }
@@ -355,7 +355,7 @@ The API method appears as follows when specified in a cURL command:
 
 ```bash
 curl -X 'GET' \
-  'https://console.neon.tech/api/v2/projects/hidden-cell-763301/endpoints' \
+  'https://console.neon.tech/api/v2/projects/autumn-lake-30024670/endpoints' \
   -H 'accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
@@ -367,48 +367,52 @@ curl -X 'GET' \
 {
   "endpoints": [
     {
-      "host": "ep-young-art-646685.us-east-2.aws.neon.tech",
-      "id": "ep-young-art-646685",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-shy-credit-899131",
+      "host": "ep-misty-morning-a1pfa4ez.ap-southeast-1.aws.neon.tech",
+      "id": "ep-misty-morning-a1pfa4ez",
+      "project_id": "autumn-lake-30024670",
+      "branch_id": "br-dry-glitter-a1rh0x6q",
       "autoscaling_limit_min_cu": 1,
-      "autoscaling_limit_max_cu": 1,
-      "region_id": "aws-us-east-2",
+      "autoscaling_limit_max_cu": 2,
+      "region_id": "aws-ap-southeast-1",
       "type": "read_write",
       "current_state": "idle",
-      "settings": {
-        "pg_settings": {}
-      },
+      "settings": {},
       "pooler_enabled": false,
       "pooler_mode": "transaction",
       "disabled": false,
       "passwordless_access": true,
-      "last_active": "2023-01-04T18:38:25Z",
-      "created_at": "2023-01-04T18:38:23Z",
-      "updated_at": "2023-01-04T18:43:36Z",
-      "proxy_host": "us-east-2.aws.neon.tech"
+      "last_active": "2025-08-03T17:40:20Z",
+      "creation_source": "console",
+      "created_at": "2025-08-03T17:40:19Z",
+      "updated_at": "2025-08-03T17:45:24Z",
+      "suspended_at": "2025-08-03T17:45:24Z",
+      "proxy_host": "ap-southeast-1.aws.neon.tech",
+      "suspend_timeout_seconds": 0,
+      "provisioner": "k8s-neonvm"
     },
     {
-      "host": "ep-aged-math-668285.us-east-2.aws.neon.tech",
-      "id": "ep-aged-math-668285",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-blue-tooth-671580",
+      "host": "ep-autumn-frost-a1wlmval.ap-southeast-1.aws.neon.tech",
+      "id": "ep-autumn-frost-a1wlmval",
+      "project_id": "autumn-lake-30024670",
+      "branch_id": "br-dark-bar-a11jneqm",
       "autoscaling_limit_min_cu": 1,
-      "autoscaling_limit_max_cu": 1,
-      "region_id": "aws-us-east-2",
+      "autoscaling_limit_max_cu": 2,
+      "region_id": "aws-ap-southeast-1",
       "type": "read_write",
       "current_state": "idle",
-      "settings": {
-        "pg_settings": {}
-      },
+      "settings": {},
       "pooler_enabled": false,
       "pooler_mode": "transaction",
       "disabled": false,
       "passwordless_access": true,
-      "last_active": "2023-01-04T18:39:42Z",
-      "created_at": "2023-01-04T18:39:41Z",
-      "updated_at": "2023-01-04T18:44:48Z",
-      "proxy_host": "us-east-2.aws.neon.tech"
+      "last_active": "2025-08-03T17:34:40Z",
+      "creation_source": "console",
+      "created_at": "2025-08-03T11:27:50Z",
+      "updated_at": "2025-08-03T17:41:11Z",
+      "suspended_at": "2025-08-03T17:41:11Z",
+      "proxy_host": "ap-southeast-1.aws.neon.tech",
+      "suspend_timeout_seconds": 0,
+      "provisioner": "k8s-neonvm"
     }
   ]
 }
@@ -428,13 +432,13 @@ The API method appears as follows when specified in a cURL command. The example 
 
 ```bash
 curl -X 'PATCH' \
-  'https://console.neon.tech/api/v2/projects/hidden-cell-763301/endpoints/ep-young-art-646685' \
+  'https://console.neon.tech/api/v2/projects/autumn-lake-30024670/endpoints/ep-misty-morning-a1pfa4ez' \
   -H 'accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
   "endpoint": {
-    "branch_id": "br-green-lab-617946"
+    "branch_id": "br-raspy-pine-a1hspnzv"
   }
 }'
 ```
@@ -445,52 +449,30 @@ curl -X 'PATCH' \
 ```json
 {
   "endpoint": {
-    "host": "ep-young-art-646685.us-east-2.aws.neon.tech",
-    "id": "ep-young-art-646685",
-    "project_id": "hidden-cell-763301",
-    "branch_id": "br-green-lab-617946",
+    "host": "ep-misty-morning-a1pfa4ez.ap-southeast-1.aws.neon.tech",
+    "id": "ep-misty-morning-a1pfa4ez",
+    "project_id": "autumn-lake-30024670",
+    "branch_id": "br-raspy-pine-a1hspnzv",
     "autoscaling_limit_min_cu": 1,
-    "autoscaling_limit_max_cu": 1,
-    "region_id": "aws-us-east-2",
+    "autoscaling_limit_max_cu": 2,
+    "region_id": "aws-ap-southeast-1",
     "type": "read_write",
     "current_state": "idle",
-    "pending_state": "idle",
-    "settings": {
-      "pg_settings": {}
-    },
+    "settings": {},
     "pooler_enabled": false,
     "pooler_mode": "transaction",
     "disabled": false,
     "passwordless_access": true,
-    "last_active": "2023-01-04T18:38:25Z",
-    "created_at": "2023-01-04T18:38:23Z",
-    "updated_at": "2023-01-04T18:47:36Z",
-    "proxy_host": "us-east-2.aws.neon.tech"
+    "last_active": "2025-08-03T17:40:20Z",
+    "creation_source": "console",
+    "created_at": "2025-08-03T17:40:19Z",
+    "updated_at": "2025-08-03T17:49:01Z",
+    "suspended_at": "2025-08-03T17:45:24Z",
+    "proxy_host": "ap-southeast-1.aws.neon.tech",
+    "suspend_timeout_seconds": 0,
+    "provisioner": "k8s-neonvm"
   },
-  "operations": [
-    {
-      "id": "03bf0bbc-cc46-4863-a5c4-f31fc1881228",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-green-lab-617946",
-      "endpoint_id": "ep-young-art-646685",
-      "action": "apply_config",
-      "status": "running",
-      "failures_count": 0,
-      "created_at": "2023-01-04T18:47:36Z",
-      "updated_at": "2023-01-04T18:47:36Z"
-    },
-    {
-      "id": "c96be00c-6340-4fb2-b80a-5ae96f469969",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-green-lab-617946",
-      "endpoint_id": "ep-young-art-646685",
-      "action": "suspend_compute",
-      "status": "scheduling",
-      "failures_count": 0,
-      "created_at": "2023-01-04T18:47:36Z",
-      "updated_at": "2023-01-04T18:47:36Z"
-    }
-  ]
+  "operations": []
 }
 ```
 
@@ -508,7 +490,7 @@ The API method appears as follows when specified in a cURL command.
 
 ```bash
 curl -X 'DELETE' \
-  'https://console.neon.tech/api/v2/projects/hidden-cell-763301/endpoints/ep-young-art-646685' \
+  'https://console.neon.tech/api/v2/projects/autumn-lake-30024670/endpoints/ep-misty-morning-a1pfa4ez' \
   -H 'accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
@@ -519,26 +501,28 @@ curl -X 'DELETE' \
 ```json
 {
   "endpoint": {
-    "host": "ep-young-art-646685.us-east-2.aws.neon.tech",
-    "id": "ep-young-art-646685",
-    "project_id": "hidden-cell-763301",
-    "branch_id": "br-green-lab-617946",
+    "host": "ep-misty-morning-a1pfa4ez.ap-southeast-1.aws.neon.tech",
+    "id": "ep-misty-morning-a1pfa4ez",
+    "project_id": "autumn-lake-30024670",
+    "branch_id": "br-raspy-pine-a1hspnzv",
     "autoscaling_limit_min_cu": 1,
-    "autoscaling_limit_max_cu": 1,
-    "region_id": "aws-us-east-2",
+    "autoscaling_limit_max_cu": 2,
+    "region_id": "aws-ap-southeast-1",
     "type": "read_write",
     "current_state": "idle",
-    "settings": {
-      "pg_settings": {}
-    },
+    "settings": {},
     "pooler_enabled": false,
     "pooler_mode": "transaction",
     "disabled": false,
     "passwordless_access": true,
-    "last_active": "2023-01-04T18:38:25Z",
-    "created_at": "2023-01-04T18:38:23Z",
-    "updated_at": "2023-01-04T18:47:45Z",
-    "proxy_host": "us-east-2.aws.neon.tech"
+    "last_active": "2025-08-03T17:40:20Z",
+    "creation_source": "console",
+    "created_at": "2025-08-03T17:40:19Z",
+    "updated_at": "2025-08-03T17:52:39Z",
+    "suspended_at": "2025-08-03T17:45:24Z",
+    "proxy_host": "ap-southeast-1.aws.neon.tech",
+    "suspend_timeout_seconds": 0,
+    "provisioner": "k8s-neonvm"
   },
   "operations": []
 }

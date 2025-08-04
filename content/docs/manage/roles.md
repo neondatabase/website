@@ -143,7 +143,7 @@ Role names cannot exceed 63 characters, and some role names are not permitted. S
 The API method appears as follows when specified in a cURL command. The `project_id` and `branch_id` are required parameters, and the role `name` is a required attribute. The length of a role name is limited to 63 bytes.
 
 ```bash
-curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/roles' \
+curl 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-morning-meadow-afu2s1jl/roles' \
   -H 'Accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
@@ -160,35 +160,25 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 ```json
 {
   "role": {
-    "branch_id": "br-blue-tooth-671580",
+    "branch_id": "br-morning-meadow-afu2s1jl",
     "name": "alex",
-    "password": "FLfASd8mbKO9",
+    "password": "npg_A9xYoejTz6iQ",
     "protected": false,
-    "created_at": "2023-01-04T20:35:48Z",
-    "updated_at": "2023-01-04T20:35:48Z"
+    "created_at": "2025-08-04T07:47:05Z",
+    "updated_at": "2025-08-04T07:47:05Z"
   },
   "operations": [
     {
-      "id": "b4fc0c92-8a4f-4a1a-9891-fd36155de853",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-blue-tooth-671580",
-      "endpoint_id": "ep-aged-math-668285",
+      "id": "9c61fc28-c89e-4b25-ad5c-8777742e66a3",
+      "project_id": "dry-heart-13671059",
+      "branch_id": "br-morning-meadow-afu2s1jl",
+      "endpoint_id": "ep-holy-heart-afbmgcfx",
       "action": "apply_config",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2023-01-04T20:35:48Z",
-      "updated_at": "2023-01-04T20:35:48Z"
-    },
-    {
-      "id": "74fef831-7537-4d78-bb87-222e0918df54",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-blue-tooth-671580",
-      "endpoint_id": "ep-aged-math-668285",
-      "action": "suspend_compute",
-      "status": "scheduling",
-      "failures_count": 0,
-      "created_at": "2023-01-04T20:35:48Z",
-      "updated_at": "2023-01-04T20:35:48Z"
+      "created_at": "2025-08-04T07:47:05Z",
+      "updated_at": "2025-08-04T07:47:05Z",
+      "total_duration_ms": 0
     }
   ]
 }
@@ -250,7 +240,7 @@ The API method appears as follows when specified in a cURL command. The `project
 
 ```bash
 curl -X 'POST' \
-  'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/roles/alex/reset_password' \
+  'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-morning-meadow-afu2s1jl/roles/alex/reset_password' \
   -H 'Accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
@@ -261,35 +251,25 @@ curl -X 'POST' \
 ```json
 {
   "role": {
-    "branch_id": "br-blue-tooth-671580",
+    "branch_id": "br-morning-meadow-afu2s1jl",
     "name": "alex",
-    "password": "sFA4k3pESzVA",
+    "password": "npg_iDKnwMW7bUg5",
     "protected": false,
-    "created_at": "2023-01-04T20:35:48Z",
-    "updated_at": "2023-01-04T20:38:49Z"
+    "created_at": "2025-08-04T07:47:05Z",
+    "updated_at": "2025-08-04T07:51:10Z"
   },
   "operations": [
     {
-      "id": "d319b791-96c7-48b4-8683-f127839dfb99",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-blue-tooth-671580",
-      "endpoint_id": "ep-aged-math-668285",
+      "id": "23b3db33-d36a-45bf-9fda-0e73b5b272e5",
+      "project_id": "dry-heart-13671059",
+      "branch_id": "br-morning-meadow-afu2s1jl",
+      "endpoint_id": "ep-holy-heart-afbmgcfx",
       "action": "apply_config",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2023-01-04T20:38:49Z",
-      "updated_at": "2023-01-04T20:38:49Z"
-    },
-    {
-      "id": "7bd5bb24-92e1-49d1-a3f4-c02e5b6d11e4",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-blue-tooth-671580",
-      "endpoint_id": "ep-aged-math-668285",
-      "action": "suspend_compute",
-      "status": "scheduling",
-      "failures_count": 0,
-      "created_at": "2023-01-04T20:38:49Z",
-      "updated_at": "2023-01-04T20:38:49Z"
+      "created_at": "2025-08-04T07:51:10Z",
+      "updated_at": "2025-08-04T07:51:10Z",
+      "total_duration_ms": 0
     }
   ]
 }
@@ -309,7 +289,7 @@ The API method appears as follows when specified in a cURL command. The `project
 
 ```bash
 curl -X 'DELETE' \
-  'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/roles/alex' \
+  'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-morning-meadow-afu2s1jl/roles/alex' \
   -H 'Accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
@@ -320,34 +300,24 @@ curl -X 'DELETE' \
 ```json
 {
   "role": {
-    "branch_id": "br-blue-tooth-671580",
+    "branch_id": "br-morning-meadow-afu2s1jl",
     "name": "alex",
     "protected": false,
-    "created_at": "2023-01-04T20:35:48Z",
-    "updated_at": "2023-01-04T20:38:49Z"
+    "created_at": "2025-08-04T07:47:05Z",
+    "updated_at": "2025-08-04T07:51:10Z"
   },
   "operations": [
     {
-      "id": "0789c601-9d97-4124-80df-cd7b332f11ef",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-blue-tooth-671580",
-      "endpoint_id": "ep-aged-math-668285",
+      "id": "722b9f9b-c50e-424c-845e-78b38151b82f",
+      "project_id": "dry-heart-13671059",
+      "branch_id": "br-morning-meadow-afu2s1jl",
+      "endpoint_id": "ep-holy-heart-afbmgcfx",
       "action": "apply_config",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2023-01-04T20:40:27Z",
-      "updated_at": "2023-01-04T20:40:27Z"
-    },
-    {
-      "id": "d3b79f02-f369-4ad0-8bf5-ff0daf27dd9a",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-blue-tooth-671580",
-      "endpoint_id": "ep-aged-math-668285",
-      "action": "suspend_compute",
-      "status": "scheduling",
-      "failures_count": 0,
-      "created_at": "2023-01-04T20:40:27Z",
-      "updated_at": "2023-01-04T20:40:27Z"
+      "created_at": "2025-08-04T07:53:22Z",
+      "updated_at": "2025-08-04T07:53:22Z",
+      "total_duration_ms": 0
     }
   ]
 }
