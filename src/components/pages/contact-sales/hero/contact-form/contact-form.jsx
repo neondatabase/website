@@ -1,5 +1,6 @@
 'use client';
 
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import { yupResolver } from '@hookform/resolvers/yup';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
@@ -226,9 +227,7 @@ const ContactForm = () => {
           error={errors.companySize?.message}
           {...register('companySize')}
         >
-          <option value="hidden" disabled hidden>
-            &nbsp;
-          </option>
+          <option value="hidden" disabled hidden />
           <option value="0_1">0-1 employees</option>
           <option value="2_4">2-4 employees</option>
           <option value="5_19">5-19 employees</option>
