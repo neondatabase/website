@@ -25,7 +25,7 @@ A project is a container for all objects except for API keys, which are global a
 
 ## Default branch
 
-Data resides in a branch. Each Neon project is created with a default branch called `main`. This initial branch is also your project's root branch, which cannot be deleted. After creating more branches, you can designate a different branch as your default branch, but your root branch cannot be deleted. You can create child branches from any branch in your project. Each branch can contain multiple databases and roles. Plan limits define the number of branches you can create in a project and the amount of data per branch. To learn more, see [Manage branches](/docs/manage/branches).
+Data resides in a branch. Each Neon project is created with a default branch called `production`. This initial branch is also your project's root branch, which cannot be deleted. After creating more branches, you can designate a different branch as your default branch, but your root branch cannot be deleted. You can create child branches from any branch in your project. Each branch can contain multiple databases and roles. Plan limits define the number of branches you can create in a project and the amount of data per branch. To learn more, see [Manage branches](/docs/manage/branches).
 
 ## R/W computes and Read Replicas
 

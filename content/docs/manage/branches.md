@@ -7,7 +7,7 @@ redirectFrom:
 updatedOn: '2025-08-02T10:33:29.298Z'
 ---
 
-Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `main`, which is also designated as your [default branch](#default-branch). You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](/docs/introduction/plans) define the number of branches you can create.
+Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `production`, which is also designated as your [default branch](#default-branch). You can create child branches from `production` or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](/docs/introduction/plans) define the number of branches you can create.
 
 A child branch is a copy-on-write clone of the parent branch. You can modify the data in a branch without affecting the data in the parent branch.
 For more information about branches and how you can use them in your development workflows, see [Branching](/docs/introduction/branching).
@@ -95,7 +95,7 @@ Neon permits renaming a branch, including your project's default branch. To rena
 
 ## Set a branch as default
 
-Each Neon project is created with a default branch called `main`, but you can designate any branch as your project's default branch. The advantage of the default branch is that it has a larger compute hour allowance on the Free Plan. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. For more information, see [Default branch](#default-branch).
+Each Neon project is created with a default branch called `production`, but you can designate any branch as your project's default branch. The advantage of the default branch is that it has a larger compute hour allowance on the Free Plan. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. For more information, see [Default branch](#default-branch).
 
 To set a branch as the default branch:
 
@@ -207,7 +207,7 @@ Neon has different branch types with different characteristics.
 
 ### Root branch
 
-A root branch is a branch without a parent branch. Each Neon project starts with a root branch named `main`, which cannot be deleted and is set as the [default branch](#default-branch) for the project.
+A root branch is a branch without a parent branch. Each Neon project starts with a root branch named `production`, which cannot be deleted and is set as the [default branch](#default-branch) for the project.
 
 Neon also supports two other types of root branches that have no parent but _can_ be deleted:
 
@@ -326,113 +326,113 @@ The response body includes information about the branch, the branch's compute, a
 
 ```json
 {
-  "branch": {
-    "id": "br-curly-wave-af4i4oeu",
-    "project_id": "dry-heart-13671059",
-    "parent_id": "br-morning-meadow-afu2s1jl",
-    "parent_lsn": "0/1FA22C0",
-    "name": "br-curly-wave-af4i4oeu",
-    "current_state": "init",
-    "pending_state": "ready",
-    "state_changed_at": "2025-08-04T07:13:09Z",
-    "creation_source": "console",
-    "primary": false,
-    "default": false,
-    "protected": false,
-    "cpu_used_sec": 0,
-    "compute_time_seconds": 0,
-    "active_time_seconds": 0,
-    "written_data_bytes": 0,
-    "data_transfer_bytes": 0,
-    "created_at": "2025-08-04T07:13:09Z",
-    "updated_at": "2025-08-04T07:13:09Z",
-    "created_by": {
-      "name": "your@email.com",
-      "image": ""
+    "branch": {
+        "id": "br-curly-wave-af4i4oeu",
+        "project_id": "dry-heart-13671059",
+        "parent_id": "br-morning-meadow-afu2s1jl",
+        "parent_lsn": "0/1FA22C0",
+        "name": "br-curly-wave-af4i4oeu",
+        "current_state": "init",
+        "pending_state": "ready",
+        "state_changed_at": "2025-08-04T07:13:09Z",
+        "creation_source": "console",
+        "primary": false,
+        "default": false,
+        "protected": false,
+        "cpu_used_sec": 0,
+        "compute_time_seconds": 0,
+        "active_time_seconds": 0,
+        "written_data_bytes": 0,
+        "data_transfer_bytes": 0,
+        "created_at": "2025-08-04T07:13:09Z",
+        "updated_at": "2025-08-04T07:13:09Z",
+        "created_by": {
+            "name": "your@email.com",
+            "image": ""
+        },
+        "init_source": "parent-data"
     },
-    "init_source": "parent-data"
-  },
-  "endpoints": [
-    {
-      "host": "ep-cool-darkness-123456.c-2.us-west-2.aws.neon.tech",
-      "id": "ep-cool-darkness-123456",
-      "project_id": "dry-heart-13671059",
-      "branch_id": "br-curly-wave-af4i4oeu",
-      "autoscaling_limit_min_cu": 0.25,
-      "autoscaling_limit_max_cu": 0.25,
-      "region_id": "aws-us-west-2",
-      "type": "read_write",
-      "current_state": "init",
-      "pending_state": "active",
-      "settings": {},
-      "pooler_enabled": false,
-      "pooler_mode": "transaction",
-      "disabled": false,
-      "passwordless_access": true,
-      "creation_source": "console",
-      "created_at": "2025-08-04T07:13:09Z",
-      "updated_at": "2025-08-04T07:13:09Z",
-      "proxy_host": "c-2.us-west-2.aws.neon.tech",
-      "suspend_timeout_seconds": 0,
-      "provisioner": "k8s-neonvm"
-    }
-  ],
-  "operations": [
-    {
-      "id": "8289b00a-4341-48d2-b3f1-d0c8dbb7e806",
-      "project_id": "dry-heart-13671059",
-      "branch_id": "br-curly-wave-af4i4oeu",
-      "action": "create_branch",
-      "status": "running",
-      "failures_count": 0,
-      "created_at": "2025-08-04T07:13:09Z",
-      "updated_at": "2025-08-04T07:13:09Z",
-      "total_duration_ms": 0
-    },
-    {
-      "id": "a3c9baa4-6732-4774-a141-9d03396babce",
-      "project_id": "dry-heart-13671059",
-      "branch_id": "br-curly-wave-af4i4oeu",
-      "endpoint_id": "ep-cool-darkness-123456",
-      "action": "start_compute",
-      "status": "scheduling",
-      "failures_count": 0,
-      "created_at": "2025-08-04T07:13:09Z",
-      "updated_at": "2025-08-04T07:13:09Z",
-      "total_duration_ms": 0
-    }
-  ],
-  "roles": [
-    {
-      "branch_id": "br-curly-wave-af4i4oeu",
-      "name": "alex",
-      "protected": false,
-      "created_at": "2025-08-04T07:07:55Z",
-      "updated_at": "2025-08-04T07:07:55Z"
-    }
-  ],
-  "databases": [
-    {
-      "id": 2886327,
-      "branch_id": "br-curly-wave-af4i4oeu",
-      "name": "dbname",
-      "owner_name": "alex",
-      "created_at": "2025-08-04T07:07:55Z",
-      "updated_at": "2025-08-04T07:07:55Z"
-    }
-  ],
-  "connection_uris": [
-    {
-      "connection_uri": "postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-west-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require",
-      "connection_parameters": {
-        "database": "dbname",
-        "password": "AbC123dEf",
-        "role": "alex",
-        "host": "ep-cool-darkness-123456.c-2.us-west-2.aws.neon.tech",
-        "pooler_host": "ep-cool-darkness-123456-pooler.c-2.us-west-2.aws.neon.tech"
-      }
-    }
-  ]
+    "endpoints": [
+        {
+            "host": "ep-cool-darkness-123456.c-2.us-west-2.aws.neon.tech",
+            "id": "ep-cool-darkness-123456",
+            "project_id": "dry-heart-13671059",
+            "branch_id": "br-curly-wave-af4i4oeu",
+            "autoscaling_limit_min_cu": 0.25,
+            "autoscaling_limit_max_cu": 0.25,
+            "region_id": "aws-us-west-2",
+            "type": "read_write",
+            "current_state": "init",
+            "pending_state": "active",
+            "settings": {},
+            "pooler_enabled": false,
+            "pooler_mode": "transaction",
+            "disabled": false,
+            "passwordless_access": true,
+            "creation_source": "console",
+            "created_at": "2025-08-04T07:13:09Z",
+            "updated_at": "2025-08-04T07:13:09Z",
+            "proxy_host": "c-2.us-west-2.aws.neon.tech",
+            "suspend_timeout_seconds": 0,
+            "provisioner": "k8s-neonvm"
+        }
+    ],
+    "operations": [
+        {
+            "id": "8289b00a-4341-48d2-b3f1-d0c8dbb7e806",
+            "project_id": "dry-heart-13671059",
+            "branch_id": "br-curly-wave-af4i4oeu",
+            "action": "create_branch",
+            "status": "running",
+            "failures_count": 0,
+            "created_at": "2025-08-04T07:13:09Z",
+            "updated_at": "2025-08-04T07:13:09Z",
+            "total_duration_ms": 0
+        },
+        {
+            "id": "a3c9baa4-6732-4774-a141-9d03396babce",
+            "project_id": "dry-heart-13671059",
+            "branch_id": "br-curly-wave-af4i4oeu",
+            "endpoint_id": "ep-cool-darkness-123456",
+            "action": "start_compute",
+            "status": "scheduling",
+            "failures_count": 0,
+            "created_at": "2025-08-04T07:13:09Z",
+            "updated_at": "2025-08-04T07:13:09Z",
+            "total_duration_ms": 0
+        }
+    ],
+    "roles": [
+        {
+            "branch_id": "br-curly-wave-af4i4oeu",
+            "name": "alex",
+            "protected": false,
+            "created_at": "2025-08-04T07:07:55Z",
+            "updated_at": "2025-08-04T07:07:55Z"
+        }
+    ],
+    "databases": [
+        {
+            "id": 2886327,
+            "branch_id": "br-curly-wave-af4i4oeu",
+            "name": "dbname",
+            "owner_name": "alex",
+            "created_at": "2025-08-04T07:07:55Z",
+            "updated_at": "2025-08-04T07:07:55Z"
+        }
+    ],
+    "connection_uris": [
+        {
+            "connection_uri": "postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-west-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require",
+            "connection_parameters": {
+                "database": "dbname",
+                "password": "AbC123dEf",
+                "role": "alex",
+                "host": "ep-cool-darkness-123456.c-2.us-west-2.aws.neon.tech",
+                "pooler_host": "ep-cool-darkness-123456-pooler.c-2.us-west-2.aws.neon.tech"
+            }
+        }
+    ]
 }
 ```
 
@@ -463,63 +463,63 @@ The response body lists the project's default branch and any child branches. The
 
 ```json
 {
-  "branches": [
-    {
-      "id": "br-curly-wave-af4i4oeu",
-      "project_id": "dry-heart-13671059",
-      "parent_id": "br-morning-meadow-afu2s1jl",
-      "parent_lsn": "0/1FA22C0",
-      "parent_timestamp": "2025-08-04T07:08:48Z",
-      "name": "br-curly-wave-af4i4oeu",
-      "current_state": "ready",
-      "state_changed_at": "2025-08-04T07:13:09Z",
-      "creation_source": "console",
-      "primary": false,
-      "default": false,
-      "protected": false,
-      "cpu_used_sec": 0,
-      "compute_time_seconds": 0,
-      "active_time_seconds": 0,
-      "written_data_bytes": 0,
-      "data_transfer_bytes": 0,
-      "created_at": "2025-08-04T07:13:09Z",
-      "updated_at": "2025-08-04T07:18:15Z",
-      "created_by": {
-        "name": "your@email.com",
-        "image": ""
-      },
-      "init_source": "parent-data"
-    },
-    {
-      "id": "br-morning-meadow-afu2s1jl",
-      "project_id": "dry-heart-13671059",
-      "name": "main",
-      "current_state": "ready",
-      "state_changed_at": "2025-08-04T07:07:58Z",
-      "logical_size": 30777344,
-      "creation_source": "console",
-      "primary": true,
-      "default": true,
-      "protected": false,
-      "cpu_used_sec": 0,
-      "compute_time_seconds": 0,
-      "active_time_seconds": 0,
-      "written_data_bytes": 0,
-      "data_transfer_bytes": 0,
-      "created_at": "2025-08-04T07:07:55Z",
-      "updated_at": "2025-08-04T07:13:11Z",
-      "created_by": {
-        "name": "your@email.com",
-        "image": ""
-      },
-      "init_source": "parent-data"
+    "branches": [
+        {
+            "id": "br-curly-wave-af4i4oeu",
+            "project_id": "dry-heart-13671059",
+            "parent_id": "br-morning-meadow-afu2s1jl",
+            "parent_lsn": "0/1FA22C0",
+            "parent_timestamp": "2025-08-04T07:08:48Z",
+            "name": "br-curly-wave-af4i4oeu",
+            "current_state": "ready",
+            "state_changed_at": "2025-08-04T07:13:09Z",
+            "creation_source": "console",
+            "primary": false,
+            "default": false,
+            "protected": false,
+            "cpu_used_sec": 0,
+            "compute_time_seconds": 0,
+            "active_time_seconds": 0,
+            "written_data_bytes": 0,
+            "data_transfer_bytes": 0,
+            "created_at": "2025-08-04T07:13:09Z",
+            "updated_at": "2025-08-04T07:18:15Z",
+            "created_by": {
+                "name": "your@email.com",
+                "image": ""
+            },
+            "init_source": "parent-data"
+        },
+        {
+            "id": "br-morning-meadow-afu2s1jl",
+            "project_id": "dry-heart-13671059",
+            "name": "main",
+            "current_state": "ready",
+            "state_changed_at": "2025-08-04T07:07:58Z",
+            "logical_size": 30777344,
+            "creation_source": "console",
+            "primary": true,
+            "default": true,
+            "protected": false,
+            "cpu_used_sec": 0,
+            "compute_time_seconds": 0,
+            "active_time_seconds": 0,
+            "written_data_bytes": 0,
+            "data_transfer_bytes": 0,
+            "created_at": "2025-08-04T07:07:55Z",
+            "updated_at": "2025-08-04T07:13:11Z",
+            "created_by": {
+                "name": "your@email.com",
+                "image": ""
+            },
+            "init_source": "parent-data"
+        }
+    ],
+    "annotations": {},
+    "pagination": {
+        "sort_by": "updated_at",
+        "sort_order": "DESC"
     }
-  ],
-  "annotations": {},
-  "pagination": {
-    "sort_by": "updated_at",
-    "sort_order": "DESC"
-  }
 }
 ```
 
@@ -552,59 +552,59 @@ The response body shows information about the branch being deleted and the `susp
 
 ```json
 {
-  "branch": {
-    "id": "br-curly-wave-af4i4oeu",
-    "project_id": "dry-heart-13671059",
-    "parent_id": "br-morning-meadow-afu2s1jl",
-    "parent_lsn": "0/1FA22C0",
-    "parent_timestamp": "2025-08-04T07:08:48Z",
-    "name": "br-curly-wave-af4i4oeu",
-    "current_state": "ready",
-    "pending_state": "storage_deleted",
-    "state_changed_at": "2025-08-04T07:13:09Z",
-    "logical_size": 30851072,
-    "creation_source": "console",
-    "primary": false,
-    "default": false,
-    "protected": false,
-    "cpu_used_sec": 0,
-    "compute_time_seconds": 0,
-    "active_time_seconds": 0,
-    "written_data_bytes": 0,
-    "data_transfer_bytes": 0,
-    "created_at": "2025-08-04T07:13:09Z",
-    "updated_at": "2025-08-04T07:21:55Z",
-    "created_by": {
-      "name": "your@email.com",
-      "image": ""
+    "branch": {
+        "id": "br-curly-wave-af4i4oeu",
+        "project_id": "dry-heart-13671059",
+        "parent_id": "br-morning-meadow-afu2s1jl",
+        "parent_lsn": "0/1FA22C0",
+        "parent_timestamp": "2025-08-04T07:08:48Z",
+        "name": "br-curly-wave-af4i4oeu",
+        "current_state": "ready",
+        "pending_state": "storage_deleted",
+        "state_changed_at": "2025-08-04T07:13:09Z",
+        "logical_size": 30851072,
+        "creation_source": "console",
+        "primary": false,
+        "default": false,
+        "protected": false,
+        "cpu_used_sec": 0,
+        "compute_time_seconds": 0,
+        "active_time_seconds": 0,
+        "written_data_bytes": 0,
+        "data_transfer_bytes": 0,
+        "created_at": "2025-08-04T07:13:09Z",
+        "updated_at": "2025-08-04T07:21:55Z",
+        "created_by": {
+            "name": "your@email.com",
+            "image": ""
+        },
+        "init_source": "parent-data"
     },
-    "init_source": "parent-data"
-  },
-  "operations": [
-    {
-      "id": "eb85073d-53fc-4d37-a32a-ca9e9ea1eeb1",
-      "project_id": "dry-heart-13671059",
-      "branch_id": "br-curly-wave-af4i4oeu",
-      "endpoint_id": "ep-soft-art-af5jvg5j",
-      "action": "suspend_compute",
-      "status": "running",
-      "failures_count": 0,
-      "created_at": "2025-08-04T07:21:55Z",
-      "updated_at": "2025-08-04T07:21:55Z",
-      "total_duration_ms": 0
-    },
-    {
-      "id": "586af342-1ffe-4e0a-9e11-326db1164ad7",
-      "project_id": "dry-heart-13671059",
-      "branch_id": "br-curly-wave-af4i4oeu",
-      "action": "delete_timeline",
-      "status": "scheduling",
-      "failures_count": 0,
-      "created_at": "2025-08-04T07:21:55Z",
-      "updated_at": "2025-08-04T07:21:55Z",
-      "total_duration_ms": 0
-    }
-  ]
+    "operations": [
+        {
+            "id": "eb85073d-53fc-4d37-a32a-ca9e9ea1eeb1",
+            "project_id": "dry-heart-13671059",
+            "branch_id": "br-curly-wave-af4i4oeu",
+            "endpoint_id": "ep-soft-art-af5jvg5j",
+            "action": "suspend_compute",
+            "status": "running",
+            "failures_count": 0,
+            "created_at": "2025-08-04T07:21:55Z",
+            "updated_at": "2025-08-04T07:21:55Z",
+            "total_duration_ms": 0
+        },
+        {
+            "id": "586af342-1ffe-4e0a-9e11-326db1164ad7",
+            "project_id": "dry-heart-13671059",
+            "branch_id": "br-curly-wave-af4i4oeu",
+            "action": "delete_timeline",
+            "status": "scheduling",
+            "failures_count": 0,
+            "created_at": "2025-08-04T07:21:55Z",
+            "updated_at": "2025-08-04T07:21:55Z",
+            "total_duration_ms": 0
+        }
+    ]
 }
 ```
 
