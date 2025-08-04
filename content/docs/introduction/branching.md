@@ -76,10 +76,6 @@ Refer to the following guide for instructions.
 
 ### Temporary environments
 
-<Admonition type="comingSoon" title="Early Access">
-Branch expiration is available for members of our [Early Access Program](/docs/introduction/early-access). Read more about joining up [here](/docs/introduction/early-access).
-</Admonition>
-
 Create branches with TTL by [setting an expiration date](/docs/guides/branch-expiration). Perfect for temporary development and testing environments that need automatic deletion.
 
 Branches with expiration are particularly useful for:

@@ -121,10 +121,6 @@ For details and configuration instructions, refer to our [Protected branches gui
 
 ## Set a branch expiration
 
-<Admonition type="comingSoon" title="Early Access">
-This feature is available for members of our [Early Access Program](/docs/introduction/early-access). Read more about joining up [here](/docs/introduction/early-access).
-</Admonition>
-
 To set or update a branch's expiration (auto-deletion TTL):
 
 1. In the Neon Console, select a project.
