@@ -7,7 +7,7 @@ updatedOn: '2025-08-01T11:13:46.035Z'
 ---
 
 <Admonition type="comingSoon" title="Early Access">
-This feature is available for members of our [Early Access Program](/docs/introduction/early-access). Read more about joining up [here](/docs/introduction/early-access).
+This feature is only available for members of our [Early Access Program](/docs/introduction/early-access).
 </Admonition>
 
 ## Overview
