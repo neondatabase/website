@@ -6,7 +6,7 @@ enableTableOfContents: true
 updatedOn: '2025-08-01T11:13:46.035Z'
 ---
 
-<Admonition type="comingSoon" title="Feature coming soon">This feature is currently not available and subject to change. It will soon be made available to members of our Early Access Program.</Admonition>
+<ComingSoon />
 
 ## Overview
 
