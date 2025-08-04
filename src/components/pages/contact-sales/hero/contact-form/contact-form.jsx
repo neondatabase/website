@@ -57,6 +57,7 @@ const schema = yup
       .required('Email address is a required field')
       .test(checkBlacklistEmails({ validation: { useDefaultBlockList: true } })),
     companySize: yup.string().notOneOf(['hidden'], 'Required field'),
+    reasonForContact: yup.string().notOneOf(['hidden'], 'Required field'),
     message: yup.string().required('Message is a required field'),
   })
   .required();
@@ -83,6 +84,7 @@ const ContactForm = () => {
     resolver: yupResolver(schema),
     defaultValues: {
       companySize: 'hidden',
+      reasonForContact: 'hidden',
     },
   });
 
@@ -96,7 +98,8 @@ const ContactForm = () => {
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
-    const { firstname, lastname, email, companyWebsite, companySize, message } = data;
+    const { firstname, lastname, email, companyWebsite, companySize, reasonForContact, message } =
+      data;
     const loadingAnimationStartedTime = Date.now();
     setIsBroken(false);
     setFormState(FORM_STATES.LOADING);
@@ -125,6 +128,10 @@ const ContactForm = () => {
           {
             name: 'company_size',
             value: companySize,
+          },
+          {
+            name: 'TICKET.reason_for_contact',
+            value: reasonForContact,
           },
           {
             name: 'TICKET.subject',
@@ -230,6 +237,21 @@ const ContactForm = () => {
           <option value="500">&ge; 500 employees</option>
         </Field>
       </div>
+      <Field
+        name="reasonForContact"
+        label="Reason for Contact*"
+        tag="select"
+        theme="transparent"
+        labelClassName={labelClassName}
+        isDisabled={isDisabled}
+        error={errors.reasonForContact?.message}
+        {...register('reasonForContact')}
+      >
+        <option value="hidden" disabled hidden />
+        <option value="Demo/POC">Demo/POC</option>
+        <option value="Enterprise Pricing">Enterprise Pricing</option>
+        <option value="HIPAA">HIPAA</option>
+      </Field>
       <Field
         name="message"
         label="Message*"
