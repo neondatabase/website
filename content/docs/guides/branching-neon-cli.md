@@ -133,10 +133,6 @@ This API key configuration ensures that the API key is kept secure while still p
 
 ## Branch expiration
 
-<Admonition type="comingSoon" title="Early Access">
-This feature is available for members of our [Early Access Program](/docs/introduction/early-access). Read more about joining up [here](/docs/introduction/early-access).
-</Admonition>
-
 For temporary environments, create branches with `--expires-at` to set a TTL for automatic deletion instead of manual cleanup:
 
 ```bash
