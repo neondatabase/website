@@ -10,12 +10,12 @@ updatedOn: '2025-08-04T13:43:26.631Z'
 
 ## Overview
 
-Branch expiration allows you to set automatic deletion timestamps on branches. When the expiration time is reached, the branch is automatically deleted.
+Branch expiration allows you to set automatic deletion timestamps on branches. When a branch reaches its expiration time, it is automatically deleted.
 
 <Admonition type="tip" title="Quick guide">
 **API/CLI:** Use `expires_at` with [RFC 3339 format](#timestamp-format-requirements) (e.g., `2025-07-15T18:02:16Z`)
 
-**Console:** Check "Expire branch on:" and select a date and time
+**Console:** Check "Expire branch on" and select a date and time
 </Admonition>
 
 <InfoBlock>
@@ -30,7 +30,6 @@ Branch expiration allows you to set automatic deletion timestamps on branches. W
 <a href="/docs/guides/branching-neon-cli">Branching with the Neon CLI</a>
 <a href="/docs/manage/branches#branching-with-the-neon-api">Branching with the Neon API</a>
 <a href="/docs/manage/branches">Manage branches</a>
-<a href="/docs/guides/branch-archiving">Branch archiving</a>
 <a href="/docs/introduction/branching#branching-workflows">Branching workflows</a>
 </DocsList>
 </InfoBlock>
@@ -74,7 +73,7 @@ You can set, update, or remove expiration timestamps through three interfaces:
 
 - **API** - Use the `expires_at` parameter with [RFC 3339](#timestamp-format-requirements) format
 - **CLI** - Use the `--expires-at` flag when creating or updating a branch with [RFC 3339](#timestamp-format-requirements) format
-- **Neon Console** - Check "Expire branch on:" and define or select a date (automatically handles formatting)
+- **Console** - Check "Expire branch on" and define or select a date (automatically handles formatting)
 
 See the [Examples](#examples) section below for detailed usage of each method.
 
@@ -98,7 +97,7 @@ YYYY-MM-DDTHH:MM:SS-HH:MM    (Negative UTC offset)
 
 **Requirements:**
 
-- Time zone is required (either `Z` or numeric offset, not both)
+- Time zone is required: use either `Z` for UTC or a numeric offset like `+05:00`
 - Fractional seconds are optional but only second precision is stored
 - Timestamp must be in the future
 - Maximum expiration is 30 days from the current time
@@ -128,7 +127,9 @@ When a branch expires and is deleted, all associated compute endpoints are also 
 
 ### Creating a branch with expiration
 
-<CodeTabs labels={["API", "CLI", "Neon Console"]}>
+<Tabs labels={["API", "CLI", "Console"]}>
+
+<TabItem>
 
 ```bash {11,21,22}
 # Create branch that expires in 24 hours
@@ -158,6 +159,10 @@ curl --request POST \
 }
 ```
 
+</TabItem>
+
+<TabItem>
+
 ```bash {6,15}
 # Create branch expiring at specific date/time
 neon branches create \
@@ -176,20 +181,28 @@ neon branches create \
   --expires-at "$(date -u -d '+2 hours' +%Y-%m-%dT%H:%M:%SZ)"
 ```
 
-```markdown
-1. Navigate to the Branches page in the Neon Console
-2. Click "Create branch"
-3. Enter branch name and select parent branch
-4. Check "Expire branch on:"
-5. Select or enter date and time
-6. Click "Create"
-```
+</TabItem>
 
-</CodeTabs>
+<TabItem>
+
+1. Navigate to the Branches page in the Console
+2. Click "New branch"
+3. Enter branch name and select parent branch
+4. Check "Expire branch on" and select or enter an expiration date and time
+
+![Set branch expiration](/docs/guides/branch-create-set-expiration.png)
+
+5. Click "Create"
+
+</TabItem>
+
+</Tabs>
 
 ### Updating branch expiration
 
-<CodeTabs labels={["API", "CLI", "Neon Console"]}>
+<Tabs labels={["API", "CLI", "Console"]}>
+
+<TabItem>
 
 ```bash {9,21}
 # Update branch expiration to specific date
@@ -217,6 +230,10 @@ curl --request PATCH \
      }'
 ```
 
+</TabItem>
+
+<TabItem>
+
 ```bash {4,12,18}
 # Update expiration to new timestamp
 neon branches set-expiration \
@@ -239,23 +256,30 @@ neon branches set-expiration \
   --project-id <project-id>
 ```
 
-```markdown
-1. Navigate to the Branches page in the Neon Console
-2. Click the branch you want to view
-3. In the Branch Overview, look for the info box stating: "This branch is scheduled for automatic deletion on {date}"
-4. Click the "Edit Expiration" button in this box
-5. To update: Select a new date and time
-6. To remove: Uncheck "Expire branch on:"
-7. Click "Save"
-```
+</TabItem>
 
-</CodeTabs>
+<TabItem>
+
+1. Navigate to the Branches page in the Console
+2. Choose the "Update expiration" option for your branch
+
+![Update branch expiration](/docs/guides/branch-update-set-expiration.png)
+
+3. To update: Select a new date and time
+4. To remove: Uncheck "Expire branch on"
+5. Click "Save"
+
+</TabItem>
+
+</Tabs>
 
 ### Retrieving branch information
 
 Check expiration status of your branches:
 
-<CodeTabs labels={["API", "CLI"]}>
+<Tabs labels={["API", "CLI", "Console"]}>
+
+<TabItem>
 
 ```bash
 curl --request GET \
@@ -264,11 +288,27 @@ curl --request GET \
      --header "Authorization: Bearer $NEON_API_KEY"
 ```
 
+</TabItem>
+
+<TabItem>
+
 ```bash
 neon branches info <branch_id> --project-id <project_id>
 ```
 
-</CodeTabs>
+</TabItem>
+
+<TabItem>
+
+1. Navigate to the Branches page in the Console
+2. Click on the desired branch to open the "Branch Overview"
+3. See information similar to the following if branch expiration is set:
+
+![View branch expiration](/docs/guides/branch-view-expiration.png)
+
+</TabItem>
+
+</Tabs>
 
 ## API reference
 
