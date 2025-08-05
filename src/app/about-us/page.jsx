@@ -21,7 +21,7 @@ const AboutUsPage = async () => (
     <Developers />
     <Connections />
     <Cta
-      className="pb-[320px] pt-[285px] xl:pb-[220px] xl:pt-[196px] lg:pb-[156px] lg:pt-[200px] sm:pb-[80px] sm:pt-[180px]"
+      className="pb-[320px] pt-[285px] xl:pb-[220px] xl:pt-[196px] lg:pb-[156px] lg:pt-[224px] sm:pb-[80px] sm:pt-[180px]"
       title="Become a part of our&nbsp;team"
       description="We're looking for people who care deeply about quality to build with us."
       buttonText="View Open Roles"

@@ -1,5 +1,6 @@
 import Image from 'next/image';
 
+import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import arjunanRajeswaran from 'images/pages/about/leadership/arjunan-rajeswaran.jpg';
 import bryanClark from 'images/pages/about/leadership/bryan-clark.jpg';
@@ -49,7 +50,7 @@ const ITEMS = [
 
 const Leadership = () => (
   <section className="leadership safe-paddings mt-[216px] xl:mt-[152px] lg:mt-[112px] md:mt-[96px]">
-    <div className="relative mx-auto max-w-[767px] lg:max-w-[640px] md:px-5">
+    <Container size={768} className="lg:!max-w-[640px] lg:!px-0 md:!px-5 ">
       <Heading
         className="max-w-[800px] text-[68px] font-medium leading-[0.9] tracking-extra-tight xl:max-w-[663px] xl:text-[56px] lg:max-w-[564px] lg:text-5xl md:text-[36px]"
         tag="h2"
@@ -82,7 +83,7 @@ const Leadership = () => (
           </li>
         ))}
       </ul>
-    </div>
+    </Container>
   </section>
 );
 

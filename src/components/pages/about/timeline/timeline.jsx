@@ -105,7 +105,7 @@ Point.propTypes = {
 
 const Timeline = () => (
   <section className="timeline safe-paddings mt-[136px] overflow-hidden pt-10 xl:mt-[110px] lg:mt-[56px] md:mt-4">
-    <Container className="relative 2xl:max-w-5xl" size="1344">
+    <Container className="relative 2xl:max-w-5xl md:max-w-[544px] md:!px-5" size="1344">
       <span className="pointer-events-none absolute -top-9 left-1/2 h-[230px] w-[300px] translate-x-[60px] bg-[radial-gradient(50%_50%_at_50%_50%,#09212A_0%,#071119_48%,rgba(7,17,25,0)_100%)] 2xl:h-[218px] 2xl:w-[260px] 2xl:translate-x-[30px] xl:translate-x-[-40px] lg:-top-5 lg:h-[170px] lg:w-[272px] lg:translate-x-[-20%] md:-left-14 md:bottom-[140px] md:top-auto md:h-[120px] md:w-[270px] md:translate-x-0" />
       <Image
         className="pointer-events-none absolute left-1/2 top-[105px] -translate-x-1/2 2xl:hidden"
@@ -132,7 +132,7 @@ const Timeline = () => (
         priority
       />
       <Image
-        className="pointer-events-none absolute left-5 top-0 hidden w-0.5 md:block"
+        className="pointer-events-none absolute left-6 top-0 hidden w-0.5 md:block"
         src={lineMd}
         width={2}
         height={604}

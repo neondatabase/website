@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 
+import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 
 const StatisticsItem = ({ title, description }) => (
@@ -19,8 +20,8 @@ StatisticsItem.propTypes = {
 };
 
 const WhereHeaded = () => (
-  <section className="wherehead safe-paddings mt-[216px] xl:mt-[152px] lg:mt-[112px] md:mt-[96px]">
-    <div className="relative mx-auto max-w-[640px] lg:max-w-[544px] md:px-5">
+  <section className="wherehead safe-paddings mt-[216px] xl:mt-[152px] lg:mt-[112px] md:mt-[72px]">
+    <Container size={640} className="lg:!max-w-[544px] lg:!px-0 md:!px-5">
       <Heading
         className="max-w-[800px] text-6xl font-medium leading-[0.9] tracking-extra-tight lg:text-5xl md:text-[36px]"
         tag="h2"
@@ -51,7 +52,7 @@ const WhereHeaded = () => (
           <StatisticsItem title="80%" description="Of databases deployed by agents" />
         </ul>
       </div>
-    </div>
+    </Container>
   </section>
 );
 
