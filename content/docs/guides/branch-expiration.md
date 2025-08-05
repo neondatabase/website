@@ -3,7 +3,7 @@ title: Branch expiration
 subtitle: Learn how to use Neon's branch expiration feature to automatically delete
   temporary branches
 enableTableOfContents: true
-updatedOn: '2025-08-04T13:43:26.631Z'
+updatedOn: '2025-08-05T20:34:13.249Z'
 ---
 
 <ComingSoon />
