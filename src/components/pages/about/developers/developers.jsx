@@ -1,6 +1,5 @@
 import Image from 'next/image';
 
-import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import checkIcon from 'images/pages/about/for-developers/check.svg';
 import dollarIcon from 'images/pages/about/for-developers/dollar.svg';
@@ -33,32 +32,32 @@ const ITEMS = [
   },
 ];
 
-const ForDevelopers = () => (
-  <section className="for-developers safe-paddings mt-[200px] xl:mt-[136px] lg:mt-[104px] md:mt-[72px]">
-    <Container className="xl:max-w-[896px] lg:!pl-16 lg:!pr-[140px] md:!px-5" size="960">
+const Developers = () => (
+  <section className="developers safe-paddings mt-[216px] xl:mt-[152px] lg:mt-[112px] md:mt-[96px]">
+    <div className="relative mx-auto flex max-w-[960px] flex-col items-center xl:max-w-[896px] lg:max-w-[564px] md:px-5">
       <Heading
-        className="max-w-[800px] text-[68px] font-medium leading-[0.9] tracking-extra-tight xl:max-w-[663px] xl:text-[56px] lg:max-w-[564px] lg:text-5xl md:max-w-[420px] md:text-[36px] sm:max-w-[288px]"
+        className="max-w-[630px] text-center text-[56px] font-medium leading-none tracking-extra-tight lg:text-5xl md:text-[36px]"
         tag="h2"
         theme="black"
       >
-        Developers are at the center of everything we do.
+        Developers are at the center of everything we do
       </Heading>
-      <ul className="mt-16 grid grid-cols-4 gap-x-10 gap-y-9 xl:mt-14 lg:mt-11 lg:grid-cols-2 sm:mt-9 sm:grid-cols-1 sm:gap-y-7">
+      <ul className="mt-14 grid grid-cols-4 gap-x-10 gap-y-9 xl:mt-12 lg:mt-11 lg:grid-cols-2 md:mt-9 md:flex md:flex-col md:gap-y-7">
         {ITEMS.map(({ icon, title, description }, index) => (
           <li key={index}>
-            <Image className="w-[22px] sm:w-5" src={icon} alt="" width={22} height={22} />
-            <h3 className="mt-4 text-xl font-semibold leading-dense tracking-tighter lg:mt-3.5 lg:text-lg sm:mt-2.5">
+            <Image className="w-[22px] sm:w-5" src={icon} alt={title} width={22} height={22} />
+            <h3 className="mt-4 text-xl font-semibold leading-dense tracking-tighter xl:mt-4 lg:mt-[14px] md:mt-[10px]">
               {title}
             </h3>
             <p
-              className="mt-2 font-light tracking-extra-tight text-gray-new-70 lg:mt-1.5 lg:max-w-[260px] sm:w-3/4 sm:min-w-[260px] sm:max-w-none"
+              className="mt-2 font-light tracking-extra-tight text-gray-new-70 lg:mt-[6px]"
               dangerouslySetInnerHTML={{ __html: description }}
             />
           </li>
         ))}
       </ul>
-    </Container>
+    </div>
   </section>
 );
 
-export default ForDevelopers;
+export default Developers;

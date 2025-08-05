@@ -12,35 +12,46 @@ const Hero = () => (
     >
       <header className="max-w-[510px] grow xl:max-w-[426px] lg:max-w-[356px] md:max-w-none">
         <Heading
-          className="text-6xl font-medium leading-[0.9] tracking-extra-tight xl:text-5xl lg:text-4xl md:text-[36px]"
+          className="text-6xl font-medium leading-none tracking-extra-tight xl:text-5xl lg:text-4xl md:text-[36px]"
           tag="h1"
           theme="black"
         >
-          A better way to build with Postgres
+          Neon is the
+          <br />
+          Postgres layer
+          <br />
+          for the internet
         </Heading>
         <div className="mt-7 flex items-center gap-6 lg:mt-6 md:mt-5 md:gap-x-[18px]">
           <Button
-            className="h-11 w-[178px] !font-semibold tracking-tighter lg:h-10 md:h-9 md:w-40 md:text-sm"
+            className="h-12 w-[203px] !font-semibold tracking-tighter lg:h-10 lg:text-sm md:h-9 md:w-40"
             theme="primary"
             to={LINKS.signup}
+            aria-label="Create an Account"
           >
             Create an Account
           </Button>
           <Link
-            className="text-[15px] font-medium tracking-tight md:text-sm"
+            className="tracking-tight lg:whitespace-nowrap lg:text-sm"
             to={LINKS.careers}
             theme="white"
+            aria-label="View Open Positions"
+            withArrow
           >
             View Open Positions
           </Link>
         </div>
       </header>
       <p className="max-w-sm pt-3 text-lg leading-snug tracking-extra-tight text-gray-new-50 xl:max-w-[352px] xl:pt-1.5 lg:max-w-[288px] lg:pt-1 lg:text-base md:mt-7 md:max-w-none md:pt-0">
-        Neon is an open-source database company. <span className="text-white">Our mission</span> is
-        to take everything that developers love about Postgres — reliability, performance,
-        extensibility — and deliver it as a serverless product that helps teams {` `}
-        <span className="text-white">confidently ship reliable and scalable applications</span>{' '}
-        faster than ever before.
+        <span className="font-thin text-white">Our mission: </span>
+        deliver Postgres as a cloud service designed to help teams build scalable, dependable
+        applications faster than ever.{` `}
+        <span className="mt-6 block">
+          Neon is built on a distributed architecture that separates storage and compute, unlocking
+          the level of performance, reliability, and scale to make Postgres{` `}
+          <span className="font-thin text-white">a foundational building block</span> as universal
+          as S3.
+        </span>
       </p>
     </Container>
   </section>
