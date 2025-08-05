@@ -20,7 +20,7 @@ Use the **Backup & restore** page in the Neon Console to instantly restore a bra
 
 - ✅ Instantly restore a branch
 - ✅ Preview data before restoring
-- ✅ Create snapshot manually
+- ✅ Create snapshots manually
 - ✅ Schedule snapshots
 - ✅ Restore from a snapshot
 
