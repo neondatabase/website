@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { LazyMotion, domAnimation, AnimatePresence, m } from 'framer-motion';
+import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
@@ -58,7 +58,13 @@ const Item = ({ question, answer, id = null, initialState = 'closed', index }) =
             }}
           >
             <div
-              className="with-link-primary with-list-style pt-4 text-base leading-normal text-gray-new-80 lg:pt-5"
+              className={clsx(
+                'with-link-primary with-list-style pr-14 pt-4 text-[15px] font-normal leading-normal text-gray-new-80 lg:pt-5',
+                '[&_p:not(:has(+_code))]:mb-2',
+                '[&_ul]:ml-0 [&_ul]:list-none [&_ul]:pl-4',
+                '[&_li]:relative [&_li]:list-inside [&_li]:!pl-4 [&_li]:before:absolute [&_li]:before:left-0 [&_li]:before:top-0 [&_li]:before:content-["-"]',
+                '[&_code]:my-4 [&_code]:inline-block [&_code]:rounded-lg [&_code]:bg-gray-new-10 [&_code]:px-[10px] [&_code]:py-1'
+              )}
               dangerouslySetInnerHTML={{ __html: answer }}
             />
           </m.div>

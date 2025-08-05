@@ -6,9 +6,15 @@ import Tooltip from 'components/shared/tooltip';
 import tooltipHoveredSvg from 'icons/tooltip-hovered.svg';
 import tooltipSvg from 'icons/tooltip.svg';
 
-const InfoIcon = ({ className, tooltip, tooltipId, tooltipPlace = 'right' }) => (
+const InfoIcon = ({
+  className,
+  tooltip,
+  tooltipId,
+  tooltipPlace = 'right',
+  toggleOnClick = false,
+}) => (
   <span
-    className={clsx('group/info relative', className)}
+    className={clsx('group/info relative', toggleOnClick && 'cursor-pointer', className)}
     data-tooltip-id={`info-icon-${tooltipId}`}
     data-tooltip-html={tooltip}
     aria-hidden
@@ -30,10 +36,13 @@ const InfoIcon = ({ className, tooltip, tooltipId, tooltipPlace = 'right' }) => 
       loading="lazy"
     />
     <Tooltip
-      className="w-sm z-20 !bg-gray-new-15"
+      className={clsx('w-sm z-20 !bg-gray-new-15', toggleOnClick && '!pointer-events-auto')}
       id={`info-icon-${tooltipId}`}
       place={tooltipPlace}
       arrowColor="#242628"
+      {...(toggleOnClick && {
+        openOnClick: true,
+      })}
     />
   </span>
 );
@@ -43,6 +52,7 @@ InfoIcon.propTypes = {
   tooltip: PropTypes.string.isRequired,
   tooltipId: PropTypes.string.isRequired,
   tooltipPlace: PropTypes.string,
+  toggleOnClick: PropTypes.bool,
 };
 
 export default InfoIcon;

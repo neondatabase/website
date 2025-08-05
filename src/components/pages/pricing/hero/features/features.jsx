@@ -8,13 +8,6 @@ import { useState } from 'react';
 import InfoIcon from 'components/shared/info-icon';
 import Link from 'components/shared/link';
 
-const icons = {
-  projects: 'pricing-projects-icon',
-  storage: 'pricing-storage-icon',
-  clock: 'pricing-clock-icon',
-  autoscale: 'pricing-autoscale-icon',
-};
-
 const variantsAnimation = {
   open: {
     height: 'auto',
@@ -24,60 +17,67 @@ const variantsAnimation = {
   },
 };
 
-const Feature = ({ icon, title, info, type, highlighted, index }) => (
-  <li className="flex gap-x-2">
-    <span
-      className={clsx(
-        icon ? icons[icon] : 'pricing-check-icon',
-        'mt-px size-3.5',
-        highlighted ? 'bg-green-45' : 'bg-gray-new-70'
-      )}
-      aria-hidden
-    />
-    <p
-      className={clsx(
-        'text-[15px] leading-none tracking-extra-tight',
-        highlighted ? 'text-white' : 'text-gray-new-80'
-      )}
-    >
-      <span className="with-link-primary">
-        {Array.isArray(title)
-          ? title.map((part, i) =>
-              typeof part === 'string' ? (
-                part
-              ) : (
-                <Link key={i} to={part.href} onClick={part.onClick}>
-                  {part.text}
-                </Link>
+const Feature = ({ title, info, type, highlighted, index, moreLink }) => {
+  const tooltip = `${info}${moreLink ? `<br/><br/><a class="border-b pb-0.5 transition-colors duration-200 hover:border-green-45/50 hover:text-green-45" href=${moreLink.href}>${moreLink.text}</a>` : ''}`;
+
+  return (
+    <li className="flex gap-x-2 font-normal">
+      <span
+        className={clsx(
+          'pricing-check-icon mt-px size-3.5 h-[14px] w-[14px] flex-shrink-0',
+          highlighted ? 'bg-green-45' : 'bg-gray-new-70'
+        )}
+        aria-hidden
+      />
+      <p
+        className={clsx(
+          'flex items-start gap-x-1 text-[15px] leading-normal tracking-tighter',
+          highlighted ? 'text-white' : 'text-gray-new-80'
+        )}
+      >
+        <span className="with-link-primary">
+          {Array.isArray(title)
+            ? title.map((part, i) =>
+                typeof part === 'string' ? (
+                  part
+                ) : (
+                  <Link key={i} to={part.href} onClick={part.onClick}>
+                    {part.text}
+                  </Link>
+                )
               )
-            )
-          : title}
-      </span>
-      {info && (
-        <span className="whitespace-nowrap">
-          &nbsp;
-          <InfoIcon
-            className="relative top-0.5 ml-0.5 inline-block"
-            tooltip={info}
-            tooltipId={`${type}_tooltip_${index}`}
-          />
+            : title}
         </span>
-      )}
-    </p>
-  </li>
-);
+        {info && (
+          <span className="whitespace-nowrap">
+            &nbsp;
+            <InfoIcon
+              className="relative top-0.5 ml-0.5 inline-block h-[14px] w-[14px]"
+              tooltip={tooltip}
+              tooltipId={`${type}_tooltip_${index}`}
+              toggleOnClick
+            />
+          </span>
+        )}
+      </p>
+    </li>
+  );
+};
 
 Feature.propTypes = {
-  icon: PropTypes.oneOf(Object.keys(icons)),
   title: PropTypes.string.isRequired,
   info: PropTypes.string,
   type: PropTypes.string,
   highlighted: PropTypes.bool,
   index: PropTypes.number,
+  moreLink: PropTypes.shape({
+    text: PropTypes.string,
+    href: PropTypes.string,
+  }),
 };
 
 const Features = ({ title, features, type, highlighted, hasToggler }) => {
-  const hasHiddenItems = features.length > 3;
+  const hasHiddenItems = features.length > 2;
   const [isOpen, setIsOpen] = useState(!hasHiddenItems);
 
   const handleOpen = () => {
@@ -101,7 +101,7 @@ const Features = ({ title, features, type, highlighted, hasToggler }) => {
           animate={hasToggler && !isOpen ? 'closed' : 'open'}
           variants={variantsAnimation}
           transition={{ duration: 0.5 }}
-          className={clsx('space-y-3 pb-0.5', hasToggler && 'overflow-hidden')}
+          className={clsx('space-y-[12px] pb-0.5', hasToggler && 'overflow-hidden')}
         >
           {features.map((feature, index) => (
             <Feature {...feature} type={type} highlighted={highlighted} index={index} key={index} />
@@ -117,7 +117,7 @@ const Features = ({ title, features, type, highlighted, hasToggler }) => {
           )}
           onClick={handleOpen}
         >
-          And more...
+          View more
         </button>
       )}
     </div>

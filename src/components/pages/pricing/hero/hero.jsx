@@ -7,10 +7,8 @@ import { useMemo } from 'react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
-import CtaBlock from 'components/shared/cta-block';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
-import LINKS from 'constants/links';
 
 import plansOriginal from './data/plans.json';
 import Features from './features';
@@ -56,30 +54,30 @@ const Hero = () => {
   }, [isComputePriceRaised]);
 
   return (
-    <section className="hero safe-paddings overflow-hidden pt-36 2xl:pt-[150px] xl:pt-[120px] lg:pt-[52px] md:pt-10">
-      <Container className="flex flex-col items-center" size="1344">
+    <section className="hero safe-paddings overflow-hidden pt-36 2xl:pt-[150px] xl:pt-[135px] lg:pt-[52px] md:pt-10">
+      <Container className="flex flex-col items-center" size="960">
         <Heading
-          className="text-center font-medium !leading-none tracking-tighter xl:text-6xl lg:text-[56px] md:!text-4xl"
+          className="text-center text-[72px] font-medium !leading-none tracking-tighter xl:!text-6xl md:!text-5xl"
           tag="h1"
           size="lg"
         >
           <span>Neon Pricing</span>
         </Heading>
         <p className="mx-auto mt-3 max-w-[680px] text-center text-xl font-light leading-snug tracking-extra-tight text-gray-new-80 xl:max-w-[560px] lg:text-lg md:text-base">
-          Pricing plans that grow with you. From prototype to Enterprise.
+          Get started for free. Pay per usage as you grow.
         </p>
-        <div className="relative mx-auto mt-16 xl:mt-14 xl:max-w-[644px] lg:mt-11 md:mt-9">
+        <div className="relative mx-auto mt-16 xl:mt-14 lg:mt-11 md:mt-9">
           <h2 className="sr-only">Neon pricing plans</h2>
-          <ul className="grid-gap relative z-10 grid grid-cols-4 gap-x-8 2xl:gap-x-6 xl:grid-cols-2 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
+          <ul className="grid-gap relative z-10 grid grid-cols-3 gap-x-[18px] 2xl:gap-x-6 lg:grid-cols-2 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
             {plans.map(
               (
                 {
                   planId,
                   type,
+                  title,
                   highlighted = false,
                   price,
                   priceFrom = false,
-                  headerLinks,
                   description,
                   features,
                   otherFeatures,
@@ -88,45 +86,33 @@ const Hero = () => {
                 index
               ) => (
                 <li
-                  className={clsx(
-                    'group relative flex min-h-full flex-col rounded-[10px] p-6 pt-5',
-                    !highlighted && 'bg-black-new'
-                  )}
+                  className="group relative flex min-h-full flex-col rounded-[10px] bg-black-new p-6 pt-5"
                   key={index}
                 >
-                  <div className="flex items-center justify-between">
+                  <div className="flex flex-col justify-between gap-10">
                     <h3
                       className={clsx(
-                        'text-xl font-medium leading-none tracking-extra-tight',
-                        highlighted ? 'text-green-45' : 'text-white'
+                        'text-base font-medium leading-none tracking-extra-tight',
+                        highlighted ? 'text-green-45' : 'text-gray-new-50'
                       )}
                     >
                       {type}
                     </h3>
-                    {headerLinks && (
-                      <p
-                        className={clsx(
-                          'text-sm font-light leading-none text-gray-new-50',
-                          '[&_a]:border-b [&_a]:border-[#85888E]/50 [&_a]:pb-0.5 [&_a]:tracking-tighter',
-                          '[&_a]:transition-colors [&_a]:duration-200 hover:[&_a]:border-transparent hover:[&_a]:text-gray-new-80'
-                        )}
-                        dangerouslySetInnerHTML={{ __html: headerLinks }}
-                      />
-                    )}
+                    <div
+                      className={clsx(
+                        'flex flex-col gap-1',
+                        title === 'Usage-based' ? 'md:flex-col' : 'md:flex-row md:items-center'
+                      )}
+                    >
+                      <h4 className="text-xl font-medium leading-none tracking-extra-tight">
+                        {title}
+                      </h4>
+                      <p className="relative text-xl font-medium tracking-extra-tight text-gray-new-50">
+                        ${price}/month{` ${priceFrom ? 'minimum' : ''}`}
+                      </p>
+                    </div>
                   </div>
-                  <p className="relative mt-16 ">
-                    {priceFrom && (
-                      <em className="absolute -top-5 block text-sm font-light not-italic leading-none tracking-extra-tight text-gray-new-50">
-                        From
-                      </em>
-                    )}
-                    <span className="text-[40px] font-medium leading-none tracking-tighter">
-                      ${price}
-                    </span>{' '}
-                    <span className="text-sm font-light tracking-extra-tight text-gray-new-50">
-                      /month
-                    </span>
-                  </p>
+
                   <Button
                     className={clsx(
                       'mt-6 w-full !py-4 !text-base !font-medium leading-none tracking-tighter transition-colors duration-300 sm:max-w-none',
@@ -145,7 +131,7 @@ const Hero = () => {
                       });
                     }}
                   >
-                    {button.text}
+                    Get started
                   </Button>
                   <p
                     className={clsx(
@@ -192,15 +178,6 @@ const Hero = () => {
             )}
           </ul>
         </div>
-        <CtaBlock
-          className="max-w-[656px]"
-          title="Custom Plans"
-          description="Connect with our team for HIPAA compliance, annual contracts, higher resource limits, and more."
-          buttonText="Talk to Sales"
-          buttonUrl={LINKS.contactSales}
-          size="sm"
-          hasDecor={false}
-        />
       </Container>
     </section>
   );
