@@ -5,7 +5,7 @@ subtitle: Learn how to migrate your database from Azure PostgreSQL to Neon using
 redirectFrom:
   - /docs/import/import-from-azure-postgres
 enableTableOfContents: true
-updatedOn: '2025-06-27T09:35:48.807Z'
+updatedOn: '2025-08-02T10:33:29.292Z'
 ---
 
 This guide describes how to migrate your database from Azure Database for PostgreSQL to Neon, using logical replication.
@@ -162,7 +162,7 @@ To ensure that the Neon `AdventureWorks` database has the same schema as the Azu
 
 After importing the schema, create a subscription on the Neon database:
 
-1. Use the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), [psql](/docs/connect/query-with-psql-editor), or another SQL client to connect to your Neon database.
+1. Use the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), [psql](/docs/connect/query-with-psql-editor), or another SQL client to connect to your Neon database.
 
 2. Create the subscription using the `CREATE SUBSCRIPTION` statement:
 

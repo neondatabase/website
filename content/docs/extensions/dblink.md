@@ -2,7 +2,7 @@
 title: The dblink extension
 subtitle: Connect to and query other Postgres databases from Neon using dblink
 enableTableOfContents: true
-updatedOn: '2025-07-03T12:36:49.556Z'
+updatedOn: '2025-08-02T10:33:29.231Z'
 ---
 
 The `dblink` extension provides the ability to connect to other Postgres databases from within your current database. This is invaluable for tasks such as data integration, cross-database querying, and building applications that span multiple database instances. `dblink` allows you to execute queries on these remote databases and retrieve the results directly into your Neon project.
@@ -21,7 +21,7 @@ Please refer to the [list of all extensions](/docs/extensions/pg-extensions) ava
 
 ## Enable the `dblink` extension
 
-You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS dblink;

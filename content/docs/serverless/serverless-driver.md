@@ -2,8 +2,11 @@
 title: Neon serverless driver
 enableTableOfContents: true
 subtitle: Connect to Neon from serverless environments over HTTP or WebSockets
-updatedOn: '2025-06-03T18:04:26.405Z'
+updatedOn: '2025-08-02T09:01:05.735Z'
 ---
+
+<CopyPrompt src="/prompts/serverless-driver-prompt.md" 
+description= "Pre-built prompt for Neon Serverless + Drizzle (JS/TS)"/>
 
 The [Neon serverless driver](https://github.com/neondatabase/serverless) is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over **HTTP** or **WebSockets** in place of TCP. The driver's low-latency capability is due to [message pipelining and other optimizations](/blog/quicker-serverless-postgres).
 
@@ -428,7 +431,7 @@ Explore the example applications that use the Neon serverless driver.
 
 Neon provides an example application to help you get started with the Neon serverless driver. The application generates a `JSON` listing of the 10 nearest UNESCO World Heritage sites using IP geolocation (data copyright © 1992 – 2022 UNESCO/World Heritage Centre).
 
-![UNESCO World Heritage sites app](/docs/relnotes/unesco_sites.png)
+![UNESCO World Heritage sites app](/docs/changelog/unesco_sites.png)
 
 There are different implementations of the application to choose from.
 

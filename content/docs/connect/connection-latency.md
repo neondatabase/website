@@ -3,7 +3,7 @@ title: Connection latency and timeouts
 subtitle: Learn about strategies to manage connection latencies and timeouts
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-07-15T14:59:03.463Z'
+updatedOn: '2025-08-02T10:33:29.226Z'
 ---
 
 Neon's _Scale to zero_ feature is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. A characteristic of this feature is the concept of a "cold start". During this process, a compute transitions from an idle state to an active state to process requests. Currently, activating a Neon compute from an idle state typically takes a few hundred milliseconds not counting other factors that can add to latencies such as the physical distance between your application and database or startup times of other services that participate in your connection process.
@@ -20,7 +20,7 @@ You can check the current status of a compute on the **Branches** page in the Ne
 
 You can also view compute state transitions in the **Branches** widget on the Neon **Dashboard**.
 
-User actions that activate an idle compute include connecting from a client or application, running a query on your database from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), or accessing the compute via the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+User actions that activate an idle compute include connecting from a client or application, running a query on your database from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), or accessing the compute via the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 <Admonition type="info">
 The Neon API includes [Start endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) and [Suspend endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) APIs for the specific purpose of activating and suspending a compute.

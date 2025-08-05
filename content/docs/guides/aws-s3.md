@@ -2,7 +2,7 @@
 title: File storage with AWS S3
 subtitle: Store files via AWS S3 and track metadata in Neon
 enableTableOfContents: true
-updatedOn: '2025-05-30T16:54:40.458Z'
+updatedOn: '2025-08-02T10:33:29.263Z'
 ---
 
 [Amazon Simple Storage Service (AWS S3)](https://aws.amazon.com/s3/) is an object storage service widely used for storing and retrieving large amounts of data, such as images, videos, backups, and application assets.
@@ -88,7 +88,7 @@ In your S3 bucket settings, navigate to the **Permissions** tab and find the **C
 
 We need a table in Neon to store metadata about the objects uploaded to S3.
 
-1.  Connect to your Neon database using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table including the object key, URL, user ID, and timestamp:
+1.  Connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table including the object key, URL, user ID, and timestamp:
 
     ```sql
     CREATE TABLE IF NOT EXISTS s3_files (

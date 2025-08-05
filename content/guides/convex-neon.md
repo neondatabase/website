@@ -40,7 +40,7 @@ Before you begin, ensure you have the following prerequisites installed and conf
 
 To get started with your Postgres database, create a new Neon project using [pg.new](https://pg.new). This project will provide the Postgres instance that Convex will use to store your application data. Within this Neon project, you'll need to create a database named `convex_self_hosted` – this is the specific database Convex is configured to use for storing chat messages. Follow these steps to set up your Neon Postgres database:
 
-- Navigate to the [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) in your Neon project console to create the `convex_self_hosted` database.
+- Navigate to the [SQL Editor](/docs/get-started/query-with-neon-sql-editor) in your Neon project console to create the `convex_self_hosted` database.
 - Execute the following SQL command to create the database:
 
   ```sql

@@ -14,7 +14,7 @@ The `earthdistance` extension for Postgres provides functions to calculate great
 
 ## Enable the `earthdistance` extension
 
-To use `earthdistance`, you first need to enable it and its dependency, the [`cube` extension](https://neon.com/docs/extensions/cube). You can do this by running the following `CREATE EXTENSION` statements in the [Neon SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client like [psql](https://neon.com/docs/connect/query-with-psql-editor):
+To use `earthdistance`, you first need to enable it and its dependency, the [`cube` extension](https://neon.com/docs/extensions/cube). You can do this by running the following `CREATE EXTENSION` statements in the [Neon SQL Editor](https://neon.com/docs/get-started/query-with-neon-sql-editor) or from a client like [psql](https://neon.com/docs/connect/query-with-psql-editor):
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS cube;

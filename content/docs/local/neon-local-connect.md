@@ -3,7 +3,7 @@ title: Neon Local Connect Extension
 enableTableOfContents: true
 subtitle: Develop with Neon using Neon Local Connect in VS Code, Cursor, Windsurf, and
   other editors
-updatedOn: '2025-07-22T13:12:50.213Z'
+updatedOn: '2025-08-02T10:33:29.297Z'
 ---
 
 The Neon Local Connect extension lets you connect to any Neon branch using a familiar localhost connection string. Available for VS Code, Cursor, Windsurf, and other VS Code-compatible editors, the underlying Neon Local service handles the routing, authentication, and branch management behind the scenes. Your app connects to `localhost:5432` like a local Postgres instance, but Neon Local routes traffic to your actual Neon branch in the cloud.
@@ -124,8 +124,8 @@ Your app connects to `localhost:5432`, while the Neon Local service routes the t
 
 Your application now connects to `localhost:5432` using the driver you selected in the extension (Postgres or Neon serverless). See the quickstart for your language or framework for more details.
 
-- [Framework quickstarts](/docs/get-started-with-neon/frameworks)
-- [Language quickstarts](/docs/get-started-with-neon/languages)
+- [Framework quickstarts](/docs/get-started/frameworks)
+- [Language quickstarts](/docs/get-started/languages)
 
 </Steps>
 
@@ -169,7 +169,7 @@ And here's what you can do directly from the Neon panel.
         <img src="/docs/local/sql-editor.png" alt="Open SQL Editor" style={{ verticalAlign: "middle" }} />
       </td>
       <td style={{ verticalAlign: "middle" }}>
-        <strong>Open SQL Editor</strong> — Launch the Neon SQL Editor in your browser for advanced queries and data inspection. <a href="/docs/get-started-with-neon/query-with-neon-sql-editor">Learn more</a>
+        <strong>Open SQL Editor</strong> — Launch the Neon SQL Editor in your browser for advanced queries and data inspection. <a href="/docs/get-started/query-with-neon-sql-editor">Learn more</a>
       </td>
     </tr>
     <tr>

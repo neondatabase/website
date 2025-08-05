@@ -2,7 +2,7 @@
 title: File storage with Azure Blob Storage
 subtitle: Store files via Azure Blob Storage and track metadata in Neon
 enableTableOfContents: true
-updatedOn: '2025-06-23T15:24:08.763Z'
+updatedOn: '2025-08-02T10:33:29.264Z'
 ---
 
 [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/) is Microsoft's object storage solution for the cloud. It's optimized for storing massive amounts of unstructured data, such as text or binary data, including images, documents, streaming media, and archive data.
@@ -58,7 +58,7 @@ Here’s an example CORS configuration allowing `PUT` uploads and `GET` requests
 
 We need a table in Neon to store metadata about the blobs uploaded to Azure Storage.
 
-1.  Connect to your Neon database using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table including the blob name, URL, user ID, and timestamp:
+1.  Connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table including the blob name, URL, user ID, and timestamp:
 
     ```sql
     CREATE TABLE IF NOT EXISTS azure_files (

@@ -3,7 +3,7 @@ title: Replicate data with Decodable
 subtitle: Learn how to replicate data from Neon with Decodable
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-06-30T11:30:21.904Z'
+updatedOn: '2025-08-02T10:33:29.279Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -32,7 +32,7 @@ To enable logical replication in Neon:
 3. Select **Logical Replication**.
 4. Click **Enable** to enable logical replication.
 
-You can verify that logical replication is enabled by running the following query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor):
+You can verify that logical replication is enabled by running the following query from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor):
 
 ```sql
 SHOW wal_level;

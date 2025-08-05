@@ -12,7 +12,7 @@ When adding new framework or language guides to the llms.txt system, follow thes
 
 ### 1. Create the LLM-friendly .txt file
 
-1. Identify the source documentation in `content/docs/get-started-with-neon/frameworks/` or `content/docs/get-started-with-neon/languages/`
+1. Identify the source documentation in `content/docs/get-started/frameworks/` or `content/docs/get-started/languages/`
 2. Create a new .txt file in the `/public/llms/` directory following the naming convention:
    - For frameworks: `frameworks-{framework-name}.txt`
    - For languages: `languages-{language-name}.txt`

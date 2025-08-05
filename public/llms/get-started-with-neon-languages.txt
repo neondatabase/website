@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Neon language guides HTML](https://neon.com/docs/get-started-with-neon/languages): The original HTML version of this documentation
+- [Neon language guides HTML](https://neon.com/docs/get-started/languages): The original HTML version of this documentation
 
 - [.NET](https://neon.com/docs/guides/dotnet-npgsql): Connect a .NET (C#) application to Neon
 - [Elixir](https://neon.com/docs/guides/elixir-ecto): Connect from Elixir with Ecto to Neon

@@ -3,8 +3,11 @@ title: Connect Astro to Postgres on Neon
 subtitle: Learn how to make server-side queries to Postgres from .astro files or API
   routes.
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.891Z'
+updatedOn: '2025-07-29T16:22:53.110Z'
 ---
+
+<CopyPrompt src="/prompts/astro-serverless-prompt.md" 
+description="Pre-built prompt for connecting Astro to Neon using the Neon serverless driver"/>
 
 Astro builds fast content sites, powerful web applications, dynamic server APIs, and everything in-between. This guide describes how to create a Neon Postgres database and access it from an Astro site or application.
 

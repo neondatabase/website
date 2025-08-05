@@ -3,7 +3,7 @@ title: Schema diff tutorial
 subtitle: Step-by-step guide showing you how to compare two development branches using
   Schema Diff
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.915Z'
+updatedOn: '2025-08-02T10:33:29.289Z'
 ---
 
 In this guide we will create an initial schema on a new database called `people` on our `production` branch. We'll then create a development branch called `feature/address`, following one possible convention for naming feature branches. After making schema changes on `feature/address`, we'll use the **Schema Diff** tool on the **Branches** page to get a side-by-side, GitHub-style visual comparison between the `feature/address` development branch and `production`.
@@ -12,7 +12,7 @@ In this guide we will create an initial schema on a new database called `people`
 
 To complete this tutorial, you'll need:
 
-- A Neon account. Sign up [here](/docs/get-started-with-neon/signing-up).
+- A Neon account. Sign up [here](/docs/get-started/signing-up).
 - To interact with your Neon database from the command line:
   - Install the [Neon CLI](/docs/reference/cli-install)
   - Download and install the [psql](https://www.postgresql.org/download/) client
@@ -541,3 +541,5 @@ The result shows a comparison between the `feature/address` branch and its paren
 </Tabs>
 
 </Steps>
+
+<NeedHelp/>

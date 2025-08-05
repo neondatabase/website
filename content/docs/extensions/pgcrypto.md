@@ -2,7 +2,7 @@
 title: The pgcrypto extension
 subtitle: Secure your data with cryptographic functions in Postgres
 enableTableOfContents: true
-updatedOn: '2025-04-08T22:55:27.445Z'
+updatedOn: '2025-08-02T10:33:29.242Z'
 ---
 
 The `pgcrypto` extension offers a range of cryptographic functions within Postgres. These functions enable encryption, decryption, and hashing operations through standard SQL queries. This can reduce reliance on external cryptographic tools for data security tasks in a Postgres environment.
@@ -13,7 +13,7 @@ In this guide, you'll learn how to enable the `pgcrypto` extension on Neon, use 
 
 ## Enable the `pgcrypto` extension
 
-You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pgcrypto;

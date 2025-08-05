@@ -2,7 +2,7 @@
 title: Time Travel tutorial
 subtitle: Use Time Travel to analyze changes made to your database over time
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.409Z'
+updatedOn: '2025-08-02T10:33:29.290Z'
 ---
 
 This guide demonstrates how you could use Time Travel to address a common development scenario: debugging issues following a CI/CD deployment to production.
@@ -13,7 +13,7 @@ In this scenario, your team has recently introduced a streamlined checkout proce
 
 To follow this tutorial, you'll need:
 
-- A Neon account. [Sign up here](/docs/get-started-with-neon/signing-up).
+- A Neon account. [Sign up here](/docs/get-started/signing-up).
 - A [restore window](/docs/manage/projects#configure-restore-window) that covers the timeframe of interest, allowing for effective use of Time Travel.
 
 <Steps>
@@ -109,3 +109,5 @@ SELECT * FROM feature_flags WHERE feature_name = 'new_checkout_process';
 Now, we see the `new_checkout_process` feature flag is `t` for true, confirming that enabling the feature caused the reported issues. With this confirmation we can move on to our follow-up actions: fix the problem, turn off the feature flag, update stakeholders, or engage in a feedback loop with users to refine the feature based on real-world usage.
 
 </Steps>
+
+<NeedHelp/>

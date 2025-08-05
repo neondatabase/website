@@ -1,7 +1,7 @@
 ---
 title: Support
 enableTableOfContents: true
-updatedOn: '2025-07-22T15:56:36.968Z'
+updatedOn: '2025-08-02T09:01:05.732Z'
 ---
 
 This page outlines Neon's support plans, available channels, and policies. To learn how to access support, please refer to the [Support channels](#support-channels) section. Identify the channels available to you based on your plan and follow the links to navigate to the relevant information.
@@ -58,7 +58,7 @@ Neon AI chat assistance is available to all Neon users. You can access it from t
 - **Neon documentation**: Toggle **Ask Neon AI** on the [Neon documentation](/docs/introduction) site
 - **Discord**: Join the **#gpt-help** channel on the [Neon Discord server](https://discord.gg/92vNTzKDGp)
 
-![Ask Neon AI](/docs/relnotes/perplexity_mode.png)
+![Ask Neon AI](/docs/changelog/perplexity_mode.png)
 
 Neon AI Chat assistants are updated regularly and built on various sources the Neon documentation, the Neon website, the Neon API, and Neon GitHub repositories.
 

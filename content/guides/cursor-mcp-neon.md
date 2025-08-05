@@ -53,11 +53,15 @@ Before you begin, ensure you have the following:
 
 ### Option 1: Setting up the Remote Hosted Neon MCP Server
 
+<Admonition type="note">
+By default, the Remote MCP Server connects to your personal Neon account. To connect to an organization's account, you must authenticate with an API key. For more information, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
+</Admonition>
+
 #### Quick Install (Recommended)
 
 Click the button below to install the Neon MCP server in Cursor. When prompted, click **Install** within Cursor.
 
-<a href="cursor://anysphere.cursor-deeplink/mcp/install?name=Neon&config=eyJ1cmwiOiJodHRwczovL21jcC5uZW9uLnRlY2gvc3NlIn0%3D"><img src="https://cursor.com/deeplink/mcp-install-dark.svg" alt="Add Neon MCP server to Cursor" height="32" /></a>
+<a href="cursor://anysphere.cursor-deeplink/mcp/install?name=Neon&config=eyJ1cmwiOiJodHRwczovL21jcC5uZW9uLnRlY2gvbWNwIn0%3D"><img src="https://cursor.com/deeplink/mcp-install-dark.svg" alt="Add Neon MCP server to Cursor" height="32" /></a>
 
 #### Manual Setup
 
@@ -73,15 +77,13 @@ This method uses Neon's managed server and OAuth authentication.
      "mcpServers": {
        "Neon": {
          "command": "npx",
-         "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/sse"]
+         "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/mcp"]
        }
      }
    }
    ```
 
    If you have other MCP servers configured, you can copy just the `Neon` part.
-
-   ![Cursor MCP JSON](/docs/guides/cursor-remote-mcp-server-json.png)
 
    Save the `mcp.json` file after pasting the configuration.
 

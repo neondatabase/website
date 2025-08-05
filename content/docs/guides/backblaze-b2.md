@@ -2,7 +2,7 @@
 title: File storage with Backblaze B2
 subtitle: Store files via Backblaze B2 and track metadata in Neon
 enableTableOfContents: true
-updatedOn: '2025-06-23T15:24:08.763Z'
+updatedOn: '2025-08-02T10:33:29.264Z'
 ---
 
 [Backblaze B2 Cloud Storage](https://www.backblaze.com/cloud-storage) is an S3-compatible object storage service known for its affordability and ease of use. It's suitable for storing large amounts of unstructured data like backups, archives, images, videos, and application assets.
@@ -54,7 +54,7 @@ Here’s an example CORS configuration allowing `http://localhost:3000` to view 
 
 We need a table in Neon to store metadata about the objects uploaded to B2.
 
-1.  Connect to your Neon database using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table including the B2 file name (object key), file URL, user ID, and timestamp:
+1.  Connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table including the B2 file name (object key), file URL, user ID, and timestamp:
 
     ```sql
     CREATE TABLE IF NOT EXISTS b2_files (

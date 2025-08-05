@@ -2,7 +2,7 @@
 title: Neon Documentation MDX Components Guide
 subtitle: Most commonly used components for documentation writers
 enableTableOfContents: true
-updatedOn: '2025-07-11T20:37:11.992Z'
+updatedOn: '2025-08-02T10:33:29.223Z'
 ---
 
 A practical guide for the most commonly used MDX components in Neon documentation. This guide focuses on components you'll use most frequently when writing documentation.
@@ -463,8 +463,8 @@ InfoBlock creates a multi-column layout for organizing related content sections.
 
 <DocsList title="Related topics" theme="docs">
 <a href="/docs/introduction/branching">About branching</a>
-<a href="/docs/get-started-with-neon/workflow-primer">Branching workflows</a>
-<a href="/docs/get-started-with-neon/connect-neon">Connect Neon to your stack</a>
+<a href="/docs/get-started/workflow-primer">Branching workflows</a>
+<a href="/docs/get-started/connect-neon">Connect Neon to your stack</a>
 </DocsList>
 </InfoBlock>
 ```
@@ -480,8 +480,8 @@ InfoBlock creates a multi-column layout for organizing related content sections.
 
 <DocsList title="Related topics" theme="docs">
 <a href="/docs/introduction/branching">About branching</a>
-<a href="/docs/get-started-with-neon/workflow-primer">Branching workflows</a>
-<a href="/docs/get-started-with-neon/connect-neon">Connect Neon to your stack</a>
+<a href="/docs/get-started/workflow-primer">Branching workflows</a>
+<a href="/docs/get-started/connect-neon">Connect Neon to your stack</a>
 </DocsList>
 </InfoBlock>
 

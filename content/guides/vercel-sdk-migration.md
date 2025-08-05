@@ -18,7 +18,7 @@ Switching to the Neon serverless driver provides several advantages. It offers g
 To begin, you’ll need:
 
 - An existing application using the Vercel Postgres SDK
-- A [Neon account](/docs/get-started-with-neon/signing-up) (your Vercel Postgres database will automatically migrate to Neon)
+- A [Neon account](/docs/get-started/signing-up) (your Vercel Postgres database will automatically migrate to Neon)
 
 ## Migration Steps
 

@@ -2,7 +2,7 @@
 title: Documentation Contribution Guide
 subtitle: Learn how to contribute to the Neon documentation
 enableTableOfContents: true
-updatedOn: '2025-07-11T20:37:11.994Z'
+updatedOn: '2025-08-02T10:33:29.224Z'
 ---
 
 This page provides guidelines for contributing to the Neon documentation. Our goal is to create an environment where our community has the information and knowledge required to confidently participate in improving the Neon documentation.
@@ -65,7 +65,7 @@ The Neon documentation file structure reflects the navigation you see on the web
     ├── community
     ├── connect
     ├── extensions
-    ├── get-started-with-neon
+    ├── get-started
     ├── guides
     ├── introduction
     ├── manage

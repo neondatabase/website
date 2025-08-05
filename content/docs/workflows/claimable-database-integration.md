@@ -2,7 +2,7 @@
 title: Claimable database integration guide
 subtitle: Manage Neon projects for users with the project database claim API
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.921Z'
+updatedOn: '2025-08-02T10:33:29.305Z'
 ---
 
 ## Overview
@@ -92,7 +92,7 @@ Below is an abbreviated example of the response. For brevity, this documentation
 }
 ```
 
-Your user will need the connection string from the response (`connection_uri`) to [connect to the Neon database](/docs/get-started-with-neon/connect-neon). The `{password}` placeholder represents the actual password generated for the database. You'll also use the project `id` to create a transfer request.
+Your user will need the connection string from the response (`connection_uri`) to [connect to the Neon database](/docs/get-started/connect-neon). The `{password}` placeholder represents the actual password generated for the database. You'll also use the project `id` to create a transfer request.
 
 ## Create a transfer request
 

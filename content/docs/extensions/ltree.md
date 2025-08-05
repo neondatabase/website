@@ -2,7 +2,7 @@
 title: The ltree extension
 subtitle: Store and query hierarchical tree-like structures in Postgres
 enableTableOfContents: true
-updatedOn: '2025-03-07T22:12:43.457Z'
+updatedOn: '2025-08-02T10:33:29.234Z'
 ---
 
 The `ltree` extension provides a data type for representing labels of data stored in a hierarchical tree-like structure. It offers specialized functions and operators for efficiently traversing and searching through these tree structures, making it ideal for modeling hierarchical relationships in your data.
@@ -27,7 +27,7 @@ Enable the extension by running the following SQL statement in your Postgres cli
 CREATE EXTENSION IF NOT EXISTS ltree;
 ```
 
-For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
+For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
 
 ## Understanding ltree data
 

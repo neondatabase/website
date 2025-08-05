@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Neon framework guides HTML](https://neon.com/docs/get-started-with-neon/frameworks): The original HTML version of this documentation
+- [Neon framework guides HTML](https://neon.com/docs/get-started/frameworks): The original HTML version of this documentation
 
 - [Node.js](https://neon.com/docs/guides/node): Connect a Node.js application to Neon
 - [Next.js](https://neon.com/docs/guides/nextjs): Connect a Next.js application to Neon

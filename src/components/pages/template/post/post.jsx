@@ -29,16 +29,16 @@ const Post = ({
         {breadcrumbs.length > 0 && (
           <Breadcrumbs breadcrumbs={breadcrumbs} currentSlug={currentSlug} />
         )}
-        <h1 className="text-balance text-5xl font-semibold leading-tight tracking-extra-tight md:text-[36px] sm:text-3xl">
+        <h1 className="text-balance text-5xl font-semibold leading-tight tracking-tight lg:text-[36px] sm:text-3xl">
           {title}
         </h1>
         {subtitle && (
-          <p className="mt-4 text-2xl leading-snug text-[#A1A1AA] lg:text-xl md:text-lg">
+          <p className="mt-4 text-2xl leading-snug tracking-tight text-[#A1A1AA] lg:text-xl md:text-lg">
             {subtitle}
           </p>
         )}
       </div>
-      <div className={clsx(contentClassName, 'mt-20 lg:mt-16 md:mt-10 md:pb-[70px] sm:pb-8')}>
+      <div className={clsx(contentClassName, 'mt-14 lg:mt-12 md:pb-[70px] sm:pb-8')}>
         <Content content={content} isTemplate />
         <DocFooter updatedOn={updatedOn} slug={currentSlug} />
       </div>

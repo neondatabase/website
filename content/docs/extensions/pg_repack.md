@@ -2,7 +2,7 @@
 title: The pg_repack extension
 subtitle: Remove bloat from your tables and indexes with minimal locking
 enableTableOfContents: true
-updatedOn: '2025-05-30T16:54:40.454Z'
+updatedOn: '2025-08-02T10:33:29.238Z'
 ---
 
 Postgres, like any database system, can accumulate bloat over time due to frequent updates and deletes. Bloat refers to wasted space within your tables and indexes, which can lead to decreased query performance and increased storage usage. `pg_repack` is a powerful Postgres extension that allows you to efficiently remove this bloat by rewriting tables and indexes online, with minimal locking. Unlike `VACUUM FULL` or `CLUSTER`, `pg_repack` avoids exclusive locks, ensuring your applications remain available during the reorganization process.
@@ -15,7 +15,7 @@ This guide provides an introduction to the `pg_repack` extension and how to leve
 
 `pg_repack` is currently available only on paid Neon plans. To install `pg_repack`, it must first be enabled by Neon support. [Open a support ticket](https://console.neon.tech/app/projects?modal=support) with your endpoint ID and database name to request it. After it's enabled by Neon Support, you need to [restart your compute](/docs/manage/computes#restart-a-compute) to apply the changes.
 
-You can then enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+You can then enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_repack;
@@ -175,7 +175,7 @@ Let's walk through a practical example of using `pg_repack` to reorganize a tabl
 
 ### Connect to your Neon Database
 
-Ensure you are connected to your Neon database using [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor). You can find your connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
+Ensure you are connected to your Neon database using [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor). You can find your connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
 
 ### Create a sample table with bloat (Optional)
 

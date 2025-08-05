@@ -141,6 +141,11 @@ const defaultConfig = {
 
     return [
       {
+        source: '/docs/get-started-with-neon/:path*',
+        destination: '/docs/get-started/:path*',
+        permanent: true,
+      },
+      {
         source: '/bm',
         destination: '/?ref=tbm-p',
         permanent: true,
@@ -182,7 +187,12 @@ const defaultConfig = {
       },
       {
         source: '/jobs',
-        destination: '/careers',
+        destination: 'https://www.databricks.com/company/careers',
+        permanent: true,
+      },
+      {
+        source: '/careers',
+        destination: 'https://www.databricks.com/company/careers',
         permanent: true,
       },
       {
@@ -325,6 +335,11 @@ const defaultConfig = {
       {
         source: '/hipaa-compliance-guide',
         destination: '/docs/security/hipaa',
+        permanent: true,
+      },
+      {
+        source: '/hipaa-baa',
+        destination: 'https://ironcladapp.com/public-launch/6884048e9f9f2acee1cf6353',
         permanent: true,
       },
       {

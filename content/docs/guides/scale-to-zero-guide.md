@@ -4,7 +4,7 @@ subtitle: Learn how to configure Neon's Scale to Zero feature
 redirectFrom:
   - /docs/guides/auto-suspend-guide
 enableTableOfContents: true
-updatedOn: '2025-05-11T11:23:50.621Z'
+updatedOn: '2025-08-02T10:33:29.288Z'
 ---
 
 Neon's [Scale to Zero](/docs/introduction/scale-to-zero) feature controls whether a Neon compute transitions to an idle state due to inactivity. For example, if scale to zero is enabled, your compute will transition to an idle state after it's been inactive for 5 minutes. Neon's paid plans allow you to disable scale to zero to keep your compute active.
@@ -57,7 +57,7 @@ You can monitor scale to zero on the **Branches** page in the Neon Console. A co
 
 You can also view compute state transitions in the **Branches** widget on the Neon **Dashboard**.
 
-User actions that activate an idle compute include [connecting from a client such as psql](/docs/connect/query-with-psql-editor), running a query on your database from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), or accessing the compute via the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+User actions that activate an idle compute include [connecting from a client such as psql](/docs/connect/query-with-psql-editor), running a query on your database from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), or accessing the compute via the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 <Admonition type="info">
 The Neon API includes a [Start endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) method for the specific purpose of activating and suspending a compute.
@@ -68,3 +68,5 @@ You can try any of these methods and watch the status of your compute as it tran
 ## Session context considerations
 
 When a compute suspends and later restarts, the [session context](/docs/reference/compatibility#session-context) resets. This includes in-memory statistics, temporary tables, prepared statements, and autovacuum thresholds, among other session-specific data. If your workflow requires persistent session data, consider disabling scale to zero on a paid plan to keep your compute active continuously. On the Free plan, scale to zero is always enabled and automatically suspends your compute after 5 minutes of inactivity.
+
+<NeedHelp/>

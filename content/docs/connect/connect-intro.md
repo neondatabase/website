@@ -2,7 +2,7 @@
 title: Connect to Neon
 subtitle: Everything you need to know about connecting to Neon
 enableTableOfContents: true
-updatedOn: '2025-07-28T15:24:15.787Z'
+updatedOn: '2025-08-02T10:33:29.226Z'
 ---
 
 Find detailed information and instructions about connecting to Neon from different clients and applications, troubleshooting connection issues, connection pooling, and more.
@@ -35,9 +35,9 @@ Learn how to connect to Neon from different frameworks and languages.
 
 <DetailIconCards>
 
-<a href="/docs/get-started-with-neon/frameworks" description="Find detailed instructions for connecting to Neon from frameworks" icon="gamepad">Connect from various frameworks</a>
+<a href="/docs/get-started/frameworks" description="Find detailed instructions for connecting to Neon from frameworks" icon="gamepad">Connect from various frameworks</a>
 
-<a href="/docs/get-started-with-neon/languages" description="Find detailed instructions for connecting to Neon from languages" icon="gui">Connect from various languages</a>
+<a href="/docs/get-started/languages" description="Find detailed instructions for connecting to Neon from languages" icon="gui">Connect from various languages</a>
 
 </DetailIconCards>
 

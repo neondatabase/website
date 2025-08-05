@@ -2,7 +2,7 @@
 title: Connect from AWS Lambda
 subtitle: Learn how to set up a Neon database and connect from an AWS Lambda function
 enableTableOfContents: true
-updatedOn: '2025-07-03T12:36:49.559Z'
+updatedOn: '2025-08-02T10:33:29.262Z'
 ---
 
 AWS Lambda is a serverless, event-driven compute service that allows you to run code without provisioning or managing servers. It is a convenient and cost-effective solution for running various types of workloads, including those that require a database.
@@ -15,7 +15,7 @@ This guide describes how to set up a Neon database and connect to it from an AWS
 
 ## Prerequisites
 
-- A Neon account. If you do not have one, see [Sign up](/docs/get-started-with-neon/signing-up/) for instructions.
+- A Neon account. If you do not have one, see [Sign up](/docs/get-started/signing-up/) for instructions.
 - An AWS account. You can create a free AWS account at [AWS Free Plan](https://aws.amazon.com/free/). An [IAM User and Access Key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) are required to programmatically interact with your AWS account. You must provide these credentials when deploying the Serverless Framework project.
 - A Service Framework account. You can sign up at [Serverless Framework](https://www.serverless.com/).
 

@@ -4,7 +4,7 @@ subtitle: Learn how to invite people to collaborate on your Neon project
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/project-sharing-guide
-updatedOn: '2024-11-28T17:16:46.405Z'
+updatedOn: '2025-08-02T10:33:29.288Z'
 ---
 
 You can invite other users to collaborate with you on a Neon project. Project collaboration lets other users access and contribute to your project from all supported Neon interfaces, including the Neon Console, Neon API, and Neon CLI. Follow this guide to learn how.
@@ -17,7 +17,7 @@ Use project collaboration to work with people outside your organization. If you'
 
 You can invite anyone outside your organization to collaborate on your Neon project. To collaborate on a project, the user must have a Neon account, which can be a Neon Free Plan or a paid plan account.
 
-1. If the user does not have a Neon account, ask them to sign up. You can provide your users with the following instructions: [Sign up](/docs/get-started-with-neon/signing-up).
+1. If the user does not have a Neon account, ask them to sign up. You can provide your users with the following instructions: [Sign up](/docs/get-started/signing-up).
 2. Request the email address the user signed up with. If the user signed up using Google or GitHub, request the email address associated with that account.
 
 ## Invite collaborators

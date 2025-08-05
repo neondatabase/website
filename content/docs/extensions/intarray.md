@@ -2,7 +2,7 @@
 title: The intarray extension
 subtitle: Efficiently manipulate and query integer arrays in Postgres
 enableTableOfContents: true
-updatedOn: '2025-07-04T12:47:21.303Z'
+updatedOn: '2025-08-02T10:33:29.234Z'
 ---
 
 The `intarray` extension for Postgres provides functions and operators for handling arrays of integers. It's particularly optimized for arrays that do not contain any `NULL` values, offering significant performance advantages for certain operations compared to Postgres's built-in array functions.
@@ -13,7 +13,7 @@ This extension is useful when you need to perform set-like operations (unions, i
 
 ## Enable the `intarray` extension
 
-You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS intarray;

@@ -55,7 +55,7 @@ Here's an example CORS configuration allowing `PUT` uploads and `GET` requests f
 
 We need a table in Neon to store metadata about the blobs uploaded to Azure Storage.
 
-1.  Connect to your Neon database using the [Neon SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor) or a client like [psql](https://neon.com/docs/connect/query-with-psql-editor). Create a table including the blob name, URL, user ID, and timestamp:
+1.  Connect to your Neon database using the [Neon SQL Editor](https://neon.com/docs/get-started/query-with-neon-sql-editor) or a client like [psql](https://neon.com/docs/connect/query-with-psql-editor). Create a table including the blob name, URL, user ID, and timestamp:
 
     ```sql
     CREATE TABLE IF NOT EXISTS azure_files (

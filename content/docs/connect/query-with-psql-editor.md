@@ -5,8 +5,8 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/postgres
   - /docs/integrations/postgres
-  - /docs/get-started-with-neon/query-with-psql-editor
-updatedOn: '2025-02-03T20:41:57.302Z'
+  - /docs/get-started/query-with-psql-editor
+updatedOn: '2025-08-02T10:33:29.228Z'
 ---
 
 The following instructions require a working installation of [psql](https://www.postgresql.org/download/). The `psql` client is the native command-line client for Postgres. It provides an interactive session for sending commands to Postgres and running ad-hoc queries. For more information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/15/app-psql.html), in the _PostgreSQL Documentation_.
@@ -112,7 +112,7 @@ Meta-commands can significantly speed up your workflow by providing quick access
 Here are some of the meta-commands that you can use with `psql`.
 
 <Admonition type="note">
-The Neon SQL Editor also supports meta-commands. See [Meta commands in the Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor#meta-commands).
+The Neon SQL Editor also supports meta-commands. See [Meta commands in the Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor#meta-commands).
 </Admonition>
 
 ```bash

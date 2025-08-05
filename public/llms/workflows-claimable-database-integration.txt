@@ -91,7 +91,7 @@ Below is an abbreviated example of the response. For brevity, this documentation
 }
 ```
 
-Your user will need the connection string from the response (`connection_uri`) to [connect to the Neon database](https://neon.com/docs/get-started-with-neon/connect-neon). The `{password}` placeholder represents the actual password generated for the database. You'll also use the project `id` to create a transfer request.
+Your user will need the connection string from the response (`connection_uri`) to [connect to the Neon database](https://neon.com/docs/get-started/connect-neon). The `{password}` placeholder represents the actual password generated for the database. You'll also use the project `id` to create a transfer request.
 
 ## Create a transfer request
 

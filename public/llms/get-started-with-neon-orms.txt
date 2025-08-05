@@ -4,7 +4,7 @@
 
 ## Source
 
-- [Neon ORM guides HTML](https://neon.com/docs/get-started-with-neon/orms): The original HTML version of this documentation
+- [Neon ORM guides HTML](https://neon.com/docs/get-started/orms): The original HTML version of this documentation
 
 - [Django](https://neon.com/docs/guides/django): Connect a Django application to Neon
 - [Drizzle](https://neon.com/docs/guides/drizzle): Learn how to use Drizzle ORM with your Neon Postgres database (Drizzle docs)

@@ -2,7 +2,7 @@
 title: The pg_mooncake extension
 subtitle: Fast analytics in Postgres with columnstore tables and DuckDB execution
 enableTableOfContents: true
-updatedOn: '2025-07-04T12:47:21.304Z'
+updatedOn: '2025-08-02T10:33:29.237Z'
 ---
 
 The [pg_mooncake](https://github.com/Mooncake-Labs/pg_mooncake) extension enables fast analytic workloads in Postgres by adding native columnstore tables and vectorized execution (DuckDB).
@@ -53,7 +53,7 @@ This guide provides a quickstart to the `pg_mooncake` extension.
 The `pg_mooncake` extension is currently in Beta and classified as experimental in Neon. A separate, dedicated Neon project is recommended when using an extension that is still in Beta. For additional guidance, see [Experimental extensions](/docs/extensions/pg-extensions#experimental-extensions).
 </Admonition>
 
-While the `pg_mooncake` extension is in Beta, you need to explicitly allow it to be used on Neon before you can install it. To do so, connect to your Neon database via an SQL client like [psql](/docs/connect/query-with-psql-editor) or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) and run the `SET` command shown below.
+While the `pg_mooncake` extension is in Beta, you need to explicitly allow it to be used on Neon before you can install it. To do so, connect to your Neon database via an SQL client like [psql](/docs/connect/query-with-psql-editor) or the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) and run the `SET` command shown below.
 
 ```sql
 SET neon.allow_unstable_extensions='true';
@@ -146,3 +146,5 @@ LIMIT 10;
 - [Documentation](https://pgmooncake.com/docs)
 - [Architecture](https://www.mooncake.dev/blog/how-we-built-pgmooncake)
 - [YouTube demo](https://youtu.be/QDNsxw_3ris?feature=shared&t=2048)
+
+<NeedHelp/>

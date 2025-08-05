@@ -35,6 +35,7 @@ import AnchorHeading from 'components/shared/anchor-heading';
 import Button from 'components/shared/button';
 import CodeBlock from 'components/shared/code-block';
 import ComputeCalculator from 'components/shared/compute-calculator';
+import CopyPrompt from 'components/shared/copy-prompt/CopyPrompt';
 import CtaBlock from 'components/shared/cta-block';
 import DeployPostgresButton from 'components/shared/deploy-postgres-button';
 import DocCta from 'components/shared/doc-cta';
@@ -48,6 +49,10 @@ import RequestForm from 'components/shared/request-form';
 import getCodeProps from 'lib/rehype-code-props';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
+import FeatureList from '../feature-list';
+import LogosSection from '../grid-features/logos-section';
+import QuickLinks from '../quick-links';
+import QuoteBlock from '../quote-block';
 
 const sharedComponents = Object.keys(sharedMdxComponents).reduce((acc, key) => {
   acc[key] = (props) => IncludeBlock({ url: sharedMdxComponents[key], ...props });
@@ -133,11 +138,14 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   Button,
   YoutubeIframe,
   DefinitionList,
+  FeatureList,
   Admonition,
   CodeTabs,
   DetailIconCards,
   TechCards,
   CommunityBanner,
+  QuickLinks,
+  QuoteBlock,
   Tabs,
   TabItem,
   InfoBlock,
@@ -155,12 +163,14 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   InkeepEmbedded,
   Video,
   Steps,
+  LogosSection,
   DeployPostgresButton,
   ChatOptions,
   CheckList,
   CheckItem,
   ExternalCode: (props) => <ExternalCode {...props} />,
   MegaLink,
+  CopyPrompt,
   ...sharedComponents,
 });
 

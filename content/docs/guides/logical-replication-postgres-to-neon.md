@@ -4,7 +4,7 @@ subtitle: Learn how to replicate data from a local Postgres instance or another 
   provider to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-06-27T09:35:48.804Z'
+updatedOn: '2025-08-02T10:33:29.282Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from a local Postgres instance or another Postgres provider to Neon. If you're looking to replicate data from one Neon Postgres instance to another, see [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NO
 
 After creating a publication on the source database, you need to create a subscription on the destination database.
 
-1. Use the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), `psql`, or another SQL client to connect to your destination database.
+1. Use the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), `psql`, or another SQL client to connect to your destination database.
 2. Create the subscription using the using a `CREATE SUBSCRIPTION` statement.
 
    ```sql

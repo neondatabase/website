@@ -2,7 +2,7 @@
 title: Anonymize data with Neosync
 subtitle: Learn how to anonymize sensitive data in Neon with Neosync
 enableTableOfContents: true
-updatedOn: '2025-06-23T15:24:08.779Z'
+updatedOn: '2025-08-02T10:33:29.286Z'
 ---
 
 [Neosync](https://www.neosync.dev/) is an open-source synthetic data orchestration platform that can create anonymized data and sync it across all of your database environments for better security, privacy, and development.
@@ -13,7 +13,7 @@ In this guide, we'll show you how to anonymize sensitive data in a Neon database
 
 To complete the steps in this guide, you require the following:
 
-- A Neon account and project. If you do not have those, see [Sign up](/docs/get-started-with-neon/signing-up#step-1-sign-up).
+- A Neon account and project. If you do not have those, see [Sign up](/docs/get-started/signing-up#step-1-sign-up).
 - A source database in Neon. This guide uses a source database named `neon-neosync` that resides on the `main` branch of the Neon project. The database has a `users` table populated with 1000 rows of data. To set the same table, see [Generate synthetic data with Neosync](/docs/guides/neosync-generate).
 - A [Neosync](https://www.neosync.dev/) account.
 

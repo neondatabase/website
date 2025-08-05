@@ -3,7 +3,7 @@ title: The dict_int extension
 subtitle: Control how integers are indexed in Postgres Full-Text Search to improve
   performance and relevance.
 enableTableOfContents: true
-updatedOn: '2025-07-04T12:47:21.301Z'
+updatedOn: '2025-08-02T10:33:29.232Z'
 ---
 
 [Postgres Full-Text Search (FTS)](/postgresql/postgresql-indexes/postgresql-full-text-search) is a powerful tool for searching through textual data. However, when this data includes a significant number of integers like product IDs, serial numbers, or document codes, default FTS behavior can sometimes lead to inefficient indexes and slower search performance.
@@ -16,7 +16,7 @@ Imagine searching a vast product catalog for "ID 1234567890". Without `dict_int`
 
 ## Enable the `dict_int` extension
 
-You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS dict_int;

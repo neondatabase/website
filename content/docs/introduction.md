@@ -1,6 +1,6 @@
 ---
 title: Neon Docs
-updatedOn: '2025-05-12T22:31:52.611Z'
+updatedOn: '2025-08-02T10:33:29.295Z'
 ---
 
 Neon is a serverless Postgres platform designed to help you build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as **autoscaling**, **branching**, **instant restore**, and more. Get started today with our [generous free plan](https://console.neon.tech)
@@ -8,19 +8,17 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 <CTA title="Manage Neon from Cursor, Windsurf, and other AI tools ✨" 
 description="Manage Neon Postgres databases from your favorite AI tools using simple, conversational commands with Neon's MCP Server. <a href='/docs/ai/connect-mcp-clients-to-neon'>Learn how</a> ➡️" isIntro></CTA>
 
-<ChatOptions/>
-
 ## Get started
 
 <DetailIconCards withNumbers>
 
-<a href="/docs/get-started-with-neon/signing-up" description="Sign up for free and learn the basics of database branching with Neon">Playing with Neon</a>
+<a href="/docs/get-started/signing-up" description="Sign up for free and learn the basics of database branching with Neon">Playing with Neon</a>
 
-<a href="/docs/get-started-with-neon/connect-neon" description="Connect Neon to the platform, language, ORM and other tools in your tech stack">Connect Neon to your stack</a>
+<a href="/docs/get-started/connect-neon" description="Connect Neon to the platform, language, ORM and other tools in your tech stack">Connect Neon to your stack</a>
 
-<a href="/docs/get-started-with-neon/workflow-primer" description="Add branching to your CI/CD automation">Branching workflows</a>
+<a href="/docs/get-started/workflow-primer" description="Add branching to your CI/CD automation">Branching workflows</a>
 
-<a href="/docs/get-started-with-neon/production-checklist" description="Key features to get you production ready">Get ready for production</a>
+<a href="/docs/get-started/production-checklist" description="Key features to get you production ready">Get ready for production</a>
 
 </DetailIconCards>
 

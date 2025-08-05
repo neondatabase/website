@@ -2,7 +2,7 @@
 title: Monitor query history
 subtitle: View and analyze query history for your Neon database
 enableTableOfContents: true
-updatedOn: '2025-03-05T21:09:38.754Z'
+updatedOn: '2025-08-02T10:33:29.296Z'
 ---
 
 You can monitor query history for your Neon project from the **Monitoring** page in the Neon Console.
@@ -23,4 +23,4 @@ In Neon, data collected by the `pg_stat_statements` extension is not retained wh
 
 ## Running your own queries
 
-To run your own queries on `pg_stat_statements` data, you can install the `pg_stat_statements` extension to your database and run your queries from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client, such as [psql](/docs/connect/query-with-psql-editor). For details on `pg_stat_statements`, including how to install it, what data it collects, and queries you can run, refer to our [pg_stat_statements](/docs/extensions/pg_stat_statements) extension guide.
+To run your own queries on `pg_stat_statements` data, you can install the `pg_stat_statements` extension to your database and run your queries from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any SQL client, such as [psql](/docs/connect/query-with-psql-editor). For details on `pg_stat_statements`, including how to install it, what data it collects, and queries you can run, refer to our [pg_stat_statements](/docs/extensions/pg_stat_statements) extension guide.

@@ -8,7 +8,7 @@
 
 This workflow will create a full Neon Twin using `pg_dump` and `pg_restore`.
 
-   **Note**: To use this workflow, you'll need the Postgres connection string for your Neon database. Follow our [Getting Started Guide](https://neon.com/docs/get-started-with-neon/signing-up#sign-up) to learn how.
+   **Note**: To use this workflow, you'll need the Postgres connection string for your Neon database. Follow our [Getting Started Guide](https://neon.com/docs/get-started/signing-up#sign-up) to learn how.
 
 ## Create the workflow
 

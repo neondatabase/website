@@ -3,7 +3,7 @@ title: The btree_gist extension
 subtitle: Combine GiST and B-tree indexing capabilities for efficient multi-column
   queries and constraints
 enableTableOfContents: true
-updatedOn: '2025-07-04T12:47:21.300Z'
+updatedOn: '2025-08-02T10:33:29.229Z'
 ---
 
 The `btree_gist` extension for Postgres provides a specialized set of **GiST operator classes**. These allow common, "B-tree-like" data types (such as integers, text, or timestamps) to be included in **GiST (Generalized Search Tree) indexes**. This is especially useful when you need to create **multicolumn GiST indexes** that combine GiST-native types (like geometric data or range types) with these simpler B-tree types. `btree_gist` also plays a key role in defining **exclusion constraints** involving standard data types.
@@ -14,7 +14,7 @@ For example, if an application needs to query for events happening within a spec
 
 ## Enable the `btree_gist` extension
 
-You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS btree_gist;

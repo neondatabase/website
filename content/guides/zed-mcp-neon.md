@@ -51,6 +51,10 @@ In Zed, MCP servers are known as **context servers**. These context servers enab
 
 ### Option 1: Setting up the Remote Hosted Neon MCP Server
 
+<Admonition type="note">
+By default, the Remote MCP Server connects to your personal Neon account. To connect to an organization's account, you must authenticate with an API key. For more information, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
+</Admonition>
+
 This method uses Neon's managed server and OAuth authentication.
 
 1.  Open Zed.

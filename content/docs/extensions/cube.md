@@ -2,7 +2,7 @@
 title: The cube extension
 subtitle: Store and query multidimensional points and cubes in Postgres
 enableTableOfContents: true
-updatedOn: '2025-07-04T12:47:21.301Z'
+updatedOn: '2025-08-02T10:33:29.230Z'
 ---
 
 The cube extension for Postgres provides a specialized data type for representing multidimensional "cubes", which are, more generally, n-dimensional boxes or points. This makes it useful for applications dealing with multidimensional data, such as geographic information systems (GIS) storing coordinates (latitude, longitude, altitude), business intelligence (BI) applications analyzing data across various dimensions, or scientific computing tasks involving vector operations.
@@ -13,7 +13,7 @@ The cube extension allows you to define points and hyperrectangles in n-dimensio
 
 ## Enable the `cube` extension
 
-You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS cube;

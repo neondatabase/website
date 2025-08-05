@@ -3,13 +3,13 @@ title: Full Twin
 subtitle: Create a full Twin of your production database
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-06-03T18:04:26.404Z'
+updatedOn: '2025-08-02T10:33:29.285Z'
 ---
 
 This workflow will create a full Neon Twin using `pg_dump` and `pg_restore`.
 
 <Admonition type="note">
-To use this workflow, you'll need the Postgres connection string for your Neon database. Follow our [Getting Started Guide](/docs/get-started-with-neon/signing-up#sign-up) to learn how.
+To use this workflow, you'll need the Postgres connection string for your Neon database. Follow our [Getting Started Guide](/docs/get-started/signing-up#sign-up) to learn how.
 </Admonition>
 
 ## Create the workflow

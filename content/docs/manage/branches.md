@@ -3,11 +3,11 @@ title: Manage branches
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
-  - /docs/get-started-with-neon/get-started-branching
-updatedOn: '2025-07-22T11:19:18.884Z'
+  - /docs/get-started/get-started-branching
+updatedOn: '2025-08-05T10:04:44.513Z'
 ---
 
-Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `main`, which is also designated as your [default branch](#default-branch). You can create child branches from `main` or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](/docs/introduction/plans) define the number of branches you can create.
+Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `production`, which is also designated as your [default branch](#default-branch). You can create child branches from `production` or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](/docs/introduction/plans) define the number of branches you can create.
 
 A child branch is a copy-on-write clone of the parent branch. You can modify the data in a branch without affecting the data in the parent branch.
 For more information about branches and how you can use them in your development workflows, see [Branching](/docs/introduction/branching).
@@ -32,9 +32,10 @@ To create a branch:
 When creating a branch with past data, you can only specify a date and time that falls within your [restore window](/docs/manage/projects#configure-restore-window).
 </Admonition>
 
-6. Click **Create new branch**.
+6. Optionally set an **Expire branch on** expiration date and time for temporary branches. This automatically deletes the branch at the specified time, useful for CI/CD pipelines and short-lived development environments. Refer to our [Branch expiration guide](/docs/guides/branch-expiration) for details.
+7. Click **Create new branch**.
 
-   You are presented with the connection details for your new branch and directed to the **Branch** overview page where you are shown the details for your new branch.
+You are presented with the connection details for your new branch and directed to the **Branch** overview page where you are shown the details for your new branch.
 
    <Admonition type="note" title="Postgres role passwords on branches">
    When creating a new branch, the branch will have the same Postgres roles and passwords as the parent branch. If you want your branch created with new role passwords, you can enable [branch protection](/docs/guides/protected-branches).
@@ -78,6 +79,10 @@ To view the branches in a Neon project:
 
 On the Free Plan, Neon automatically archives inactive branches to cost-efficient archive storage after a defined threshold. For more, see [Branch archiving](/docs/guides/branch-archiving).
 
+<Admonition type="note">
+For branches with predictable lifespans, you can set an expiration date when creating branches to automatically delete them at a specified time. This offers an alternative to archiving for temporary development and testing environments, ensuring cleanup happens exactly when needed.
+</Admonition>
+
 ## Rename a branch
 
 Neon permits renaming a branch, including your project's default branch. To rename a branch:
@@ -90,7 +95,7 @@ Neon permits renaming a branch, including your project's default branch. To rena
 
 ## Set a branch as default
 
-Each Neon project is created with a default branch called `main`, but you can designate any branch as your project's default branch. The advantage of the default branch is that it has a larger compute hour allowance on the Free Plan. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. For more information, see [Default branch](#default-branch).
+Each Neon project is created with a default branch called `production`, but you can designate any branch as your project's default branch. The advantage of the default branch is that it has a larger compute hour allowance on the Free Plan. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. For more information, see [Default branch](#default-branch).
 
 To set a branch as the default branch:
 
@@ -114,12 +119,25 @@ To set a branch as protected:
 
 For details and configuration instructions, refer to our [Protected branches guide](/docs/guides/protected-branches).
 
+## Set a branch expiration
+
+To set or update a branch's expiration (auto-deletion TTL):
+
+1. In the Neon Console, select a project.
+2. Select **Branches** to view the branches for the project.
+3. Select a branch from the table.
+4. On the branch overview page, click the **Actions** drop-down menu and select **Edit expiration**.
+5. Set a new expiration date and time, or toggle off "Expire branch on" to remove expiration.
+6. Click **Save**.
+
+For details and configuration instructions, refer to our [Branch expiration guide](/docs/guides/branch-expiration).
+
 ## Connect to a branch
 
 Connecting to a database in a branch requires connecting via a compute associated with the branch. The following steps describe how to connect using `psql` and a connection string obtained from the Neon Console.
 
 <Admonition type="tip">
-You can also query the databases in a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
+You can also query the databases in a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](/docs/get-started/query-with-neon-sql-editor).
 </Admonition>
 
 1. In the Neon Console, select a project.
@@ -136,7 +154,7 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
    A compute hostname starts with an `ep-` prefix. You can also find a compute hostname on the **Branches** page in the Neon Console. See [View branches](#view-branches).
    </Admonition>
 
-   If you want to connect from an application, the **Connect to your database modal**, accessed by clicking **Connect** on the project **Dashboard**, and the [Frameworks](/docs/get-started-with-neon/frameworks) and [Languages](/docs/get-started-with-neon/languages) sections in the documentation provide various connection examples.
+   If you want to connect from an application, the **Connect to your database modal**, accessed by clicking **Connect** on the project **Dashboard**, and the [Frameworks](/docs/get-started/frameworks) and [Languages](/docs/get-started/languages) sections in the documentation provide various connection examples.
 
 ## Reset a branch from parent
 
@@ -166,9 +184,13 @@ To delete a branch:
 4. On the branch overview page, click the **More** drop-down menu and select **Delete**.
 5. On the confirmation dialog, click **Delete**.
 
+<Admonition type="tip">
+For temporary branches, consider setting an expiration date when creating them to automate cleanup and reduce manual deletion overhead.
+</Admonition>
+
 ## Check the data size
 
-You can check the logical data size for the databases on a branch by viewing the **Data size** value on the **Branches** page or page in the Neon Console. Alternatively, you can run the following query on your branch from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client connected to your database:
+You can check the logical data size for the databases on a branch by viewing the **Data size** value on the **Branches** page or page in the Neon Console. Alternatively, you can run the following query on your branch from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any SQL client connected to your database:
 
 ```sql
 SELECT pg_size_pretty(sum(pg_database_size(datname)))
@@ -185,7 +207,7 @@ Neon has different branch types with different characteristics.
 
 ### Root branch
 
-A root branch is a branch without a parent branch. Each Neon project starts with a root branch named `main`, which cannot be deleted and is set as the [default branch](#default-branch) for the project.
+A root branch is a branch without a parent branch. Each Neon project starts with a root branch named `production`, which cannot be deleted and is set as the [default branch](#default-branch) for the project.
 
 Neon also supports two other types of root branches that have no parent but _can_ be deleted:
 
@@ -240,6 +262,10 @@ See [Schema-only branches](/docs/guides/branching-schema-only).
 
 A branch created by an [instant restore](#branch-restore) operation. When you restore a branch from a particular point in time, the current branch is saved as a backup branch. Performing a restore operation on a root branch, creates a backup branch without a parent branch (a root branch). See [Instant restore](/docs/guides/branch-restore).
 
+### Branch with expiration
+
+A branch with an expiration timestamp is automatically deleted when the expiration time is reached. Any branch can have an expiration timestamp added or removed at any time. This feature is particularly useful for temporary development and testing environments.
+
 ## Branching with the Neon CLI
 
 The Neon CLI supports creating and managing branches. For instructions, see [Neon CLI commands — branches](/docs/reference/cli-branches). For a Neon CLI branching guide, see [Branching with the Neon CLI](/docs/reference/cli-branches).
@@ -274,7 +300,7 @@ This method does not require a request body. Without a request body, the method 
 </Admonition>
 
 ```bash
-curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches' \
+curl 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches' \
   -H 'Accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
@@ -301,62 +327,110 @@ The response body includes information about the branch, the branch's compute, a
 ```json
 {
   "branch": {
-    "id": "br-dawn-scene-747675",
-    "project_id": "autumn-disk-484331",
-    "parent_id": "br-wispy-dew-591433",
-    "parent_lsn": "0/1AA6408",
-    "name": "br-dawn-scene-747675",
+    "id": "br-curly-wave-af4i4oeu",
+    "project_id": "dry-heart-13671059",
+    "parent_id": "br-morning-meadow-afu2s1jl",
+    "parent_lsn": "0/1FA22C0",
+    "name": "br-curly-wave-af4i4oeu",
     "current_state": "init",
     "pending_state": "ready",
-    "created_at": "2022-12-08T19:55:43Z",
-    "updated_at": "2022-12-08T19:55:43Z"
+    "state_changed_at": "2025-08-04T07:13:09Z",
+    "creation_source": "console",
+    "primary": false,
+    "default": false,
+    "protected": false,
+    "cpu_used_sec": 0,
+    "compute_time_seconds": 0,
+    "active_time_seconds": 0,
+    "written_data_bytes": 0,
+    "data_transfer_bytes": 0,
+    "created_at": "2025-08-04T07:13:09Z",
+    "updated_at": "2025-08-04T07:13:09Z",
+    "created_by": {
+      "name": "your@email.com",
+      "image": ""
+    },
+    "init_source": "parent-data"
   },
-
   "endpoints": [
     {
-      "host": "ep-small-bush-675287.us-east-2.aws.neon.tech",
-      "id": "ep-small-bush-675287",
-      "project_id": "autumn-disk-484331",
-      "branch_id": "br-dawn-scene-747675",
-      "autoscaling_limit_min_cu": 1,
-      "autoscaling_limit_max_cu": 1,
-      "region_id": "aws-us-east-2",
+      "host": "ep-cool-darkness-123456.c-2.us-west-2.aws.neon.tech",
+      "id": "ep-cool-darkness-123456",
+      "project_id": "dry-heart-13671059",
+      "branch_id": "br-curly-wave-af4i4oeu",
+      "autoscaling_limit_min_cu": 0.25,
+      "autoscaling_limit_max_cu": 0.25,
+      "region_id": "aws-us-west-2",
       "type": "read_write",
       "current_state": "init",
       "pending_state": "active",
-      "settings": {
-        "pg_settings": {}
-      },
+      "settings": {},
       "pooler_enabled": false,
       "pooler_mode": "transaction",
       "disabled": false,
       "passwordless_access": true,
-      "created_at": "2022-12-08T19:55:43Z",
-      "updated_at": "2022-12-08T19:55:43Z",
-      "proxy_host": "us-east-2.aws.neon.tech"
+      "creation_source": "console",
+      "created_at": "2025-08-04T07:13:09Z",
+      "updated_at": "2025-08-04T07:13:09Z",
+      "proxy_host": "c-2.us-west-2.aws.neon.tech",
+      "suspend_timeout_seconds": 0,
+      "provisioner": "k8s-neonvm"
     }
   ],
   "operations": [
     {
-      "id": "22acbb37-209b-4b90-a39c-8460090e1329",
-      "project_id": "autumn-disk-484331",
-      "branch_id": "br-dawn-scene-747675",
+      "id": "8289b00a-4341-48d2-b3f1-d0c8dbb7e806",
+      "project_id": "dry-heart-13671059",
+      "branch_id": "br-curly-wave-af4i4oeu",
       "action": "create_branch",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2022-12-08T19:55:43Z",
-      "updated_at": "2022-12-08T19:55:43Z"
+      "created_at": "2025-08-04T07:13:09Z",
+      "updated_at": "2025-08-04T07:13:09Z",
+      "total_duration_ms": 0
     },
     {
-      "id": "055b17e6-ffe3-47ab-b545-cfd7db6fd8b8",
-      "project_id": "autumn-disk-484331",
-      "branch_id": "br-dawn-scene-747675",
-      "endpoint_id": "ep-small-bush-675287",
+      "id": "a3c9baa4-6732-4774-a141-9d03396babce",
+      "project_id": "dry-heart-13671059",
+      "branch_id": "br-curly-wave-af4i4oeu",
+      "endpoint_id": "ep-cool-darkness-123456",
       "action": "start_compute",
       "status": "scheduling",
       "failures_count": 0,
-      "created_at": "2022-12-08T19:55:43Z",
-      "updated_at": "2022-12-08T19:55:43Z"
+      "created_at": "2025-08-04T07:13:09Z",
+      "updated_at": "2025-08-04T07:13:09Z",
+      "total_duration_ms": 0
+    }
+  ],
+  "roles": [
+    {
+      "branch_id": "br-curly-wave-af4i4oeu",
+      "name": "alex",
+      "protected": false,
+      "created_at": "2025-08-04T07:07:55Z",
+      "updated_at": "2025-08-04T07:07:55Z"
+    }
+  ],
+  "databases": [
+    {
+      "id": 2886327,
+      "branch_id": "br-curly-wave-af4i4oeu",
+      "name": "dbname",
+      "owner_name": "alex",
+      "created_at": "2025-08-04T07:07:55Z",
+      "updated_at": "2025-08-04T07:07:55Z"
+    }
+  ],
+  "connection_uris": [
+    {
+      "connection_uri": "postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-west-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require",
+      "connection_parameters": {
+        "database": "dbname",
+        "password": "AbC123dEf",
+        "role": "alex",
+        "host": "ep-cool-darkness-123456.c-2.us-west-2.aws.neon.tech",
+        "pooler_host": "ep-cool-darkness-123456-pooler.c-2.us-west-2.aws.neon.tech"
+      }
     }
   ]
 }
@@ -375,7 +449,7 @@ GET /projects/{project_id}/branches
 The API method appears as follows when specified in a cURL command:
 
 ```bash
-curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches' \
+curl 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches' \
   -H 'accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
@@ -391,27 +465,61 @@ The response body lists the project's default branch and any child branches. The
 {
   "branches": [
     {
-      "id": "br-dawn-scene-747675",
-      "project_id": "autumn-disk-484331",
-      "parent_id": "br-wispy-dew-591433",
-      "parent_lsn": "0/1AA6408",
-      "name": "br-dawn-scene-747675",
+      "id": "br-curly-wave-af4i4oeu",
+      "project_id": "dry-heart-13671059",
+      "parent_id": "br-morning-meadow-afu2s1jl",
+      "parent_lsn": "0/1FA22C0",
+      "parent_timestamp": "2025-08-04T07:08:48Z",
+      "name": "br-curly-wave-af4i4oeu",
       "current_state": "ready",
-      "logical_size": 28,
-      "created_at": "2022-12-08T19:55:43Z",
-      "updated_at": "2022-12-08T19:55:43Z"
+      "state_changed_at": "2025-08-04T07:13:09Z",
+      "creation_source": "console",
+      "primary": false,
+      "default": false,
+      "protected": false,
+      "cpu_used_sec": 0,
+      "compute_time_seconds": 0,
+      "active_time_seconds": 0,
+      "written_data_bytes": 0,
+      "data_transfer_bytes": 0,
+      "created_at": "2025-08-04T07:13:09Z",
+      "updated_at": "2025-08-04T07:18:15Z",
+      "created_by": {
+        "name": "your@email.com",
+        "image": ""
+      },
+      "init_source": "parent-data"
     },
     {
-      "id": "br-wispy-dew-591433",
-      "project_id": "autumn-disk-484331",
+      "id": "br-morning-meadow-afu2s1jl",
+      "project_id": "dry-heart-13671059",
       "name": "main",
       "current_state": "ready",
-      "logical_size": 28,
-      "physical_size": 31,
-      "created_at": "2022-12-07T00:45:05Z",
-      "updated_at": "2022-12-07T00:45:05Z"
+      "state_changed_at": "2025-08-04T07:07:58Z",
+      "logical_size": 30777344,
+      "creation_source": "console",
+      "primary": true,
+      "default": true,
+      "protected": false,
+      "cpu_used_sec": 0,
+      "compute_time_seconds": 0,
+      "active_time_seconds": 0,
+      "written_data_bytes": 0,
+      "data_transfer_bytes": 0,
+      "created_at": "2025-08-04T07:07:55Z",
+      "updated_at": "2025-08-04T07:13:11Z",
+      "created_by": {
+        "name": "your@email.com",
+        "image": ""
+      },
+      "init_source": "parent-data"
     }
-  ]
+  ],
+  "annotations": {},
+  "pagination": {
+    "sort_by": "updated_at",
+    "sort_order": "DESC"
+  }
 }
 ```
 
@@ -429,7 +537,7 @@ The API method appears as follows when specified in a cURL command:
 
 ```bash
 curl -X 'DELETE' \
-  'https://console.neon.tech/api/v2/projects/autumn-disk-484331/branches/br-dawn-scene-747675' \
+  'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-curly-wave-af4i4oeu' \
   -H 'accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
@@ -445,36 +553,56 @@ The response body shows information about the branch being deleted and the `susp
 ```json
 {
   "branch": {
-    "id": "br-dawn-scene-747675",
-    "project_id": "autumn-disk-484331",
-    "parent_id": "br-shy-meadow-151383",
-    "parent_lsn": "0/1953508",
-    "name": "br-flat-darkness-194551",
+    "id": "br-curly-wave-af4i4oeu",
+    "project_id": "dry-heart-13671059",
+    "parent_id": "br-morning-meadow-afu2s1jl",
+    "parent_lsn": "0/1FA22C0",
+    "parent_timestamp": "2025-08-04T07:08:48Z",
+    "name": "br-curly-wave-af4i4oeu",
     "current_state": "ready",
-    "created_at": "2022-12-08T20:01:31Z",
-    "updated_at": "2022-12-08T20:01:31Z"
+    "pending_state": "storage_deleted",
+    "state_changed_at": "2025-08-04T07:13:09Z",
+    "logical_size": 30851072,
+    "creation_source": "console",
+    "primary": false,
+    "default": false,
+    "protected": false,
+    "cpu_used_sec": 0,
+    "compute_time_seconds": 0,
+    "active_time_seconds": 0,
+    "written_data_bytes": 0,
+    "data_transfer_bytes": 0,
+    "created_at": "2025-08-04T07:13:09Z",
+    "updated_at": "2025-08-04T07:21:55Z",
+    "created_by": {
+      "name": "your@email.com",
+      "image": ""
+    },
+    "init_source": "parent-data"
   },
   "operations": [
     {
-      "id": "c7ee9bea-c984-41ac-8672-9848714104bc",
-      "project_id": "autumn-disk-484331",
-      "branch_id": "br-dawn-scene-747675",
-      "endpoint_id": "ep-small-bush-675287",
+      "id": "eb85073d-53fc-4d37-a32a-ca9e9ea1eeb1",
+      "project_id": "dry-heart-13671059",
+      "branch_id": "br-curly-wave-af4i4oeu",
+      "endpoint_id": "ep-soft-art-af5jvg5j",
       "action": "suspend_compute",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2022-12-08T20:01:31Z",
-      "updated_at": "2022-12-08T20:01:31Z"
+      "created_at": "2025-08-04T07:21:55Z",
+      "updated_at": "2025-08-04T07:21:55Z",
+      "total_duration_ms": 0
     },
     {
-      "id": "41646f65-c692-4621-9538-32265f74ffe5",
-      "project_id": "autumn-disk-484331",
-      "branch_id": "br-dawn-scene-747675",
+      "id": "586af342-1ffe-4e0a-9e11-326db1164ad7",
+      "project_id": "dry-heart-13671059",
+      "branch_id": "br-curly-wave-af4i4oeu",
       "action": "delete_timeline",
       "status": "scheduling",
       "failures_count": 0,
-      "created_at": "2022-12-06T01:12:10Z",
-      "updated_at": "2022-12-06T01:12:10Z"
+      "created_at": "2025-08-04T07:21:55Z",
+      "updated_at": "2025-08-04T07:21:55Z",
+      "total_duration_ms": 0
     }
   ]
 }

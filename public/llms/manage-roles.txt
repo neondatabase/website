@@ -8,7 +8,7 @@
 
 In Neon, roles are Postgres roles. Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`. This role owns the database that is created in your Neon project's default branch.
 
-Your Postgres role and roles created in the Neon Console, API, and CLI are granted membership in the [neon_superuser](https://neon.com/docs/manage/roles#the-neonsuperuser-role) role. Roles created with SQL from clients like [psql](https://neon.com/docs/connect/query-with-psql-editor), [pgAdmin](https://www.pgadmin.org/), or the [Neon SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor) are only granted the basic [public schema privileges](https://neon.com/docs/manage/database-access#public-schema-privileges) granted to newly created roles in a standalone Postgres installation. These users must be selectively granted permissions for each database object. For more information, see [Manage database access](https://neon.com/docs/manage/database-access).
+Your Postgres role and roles created in the Neon Console, API, and CLI are granted membership in the [neon_superuser](https://neon.com/docs/manage/roles#the-neonsuperuser-role) role. Roles created with SQL from clients like [psql](https://neon.com/docs/connect/query-with-psql-editor), [pgAdmin](https://www.pgadmin.org/), or the [Neon SQL Editor](https://neon.com/docs/get-started/query-with-neon-sql-editor) are only granted the basic [public schema privileges](https://neon.com/docs/manage/database-access#public-schema-privileges) granted to newly created roles in a standalone Postgres installation. These users must be selectively granted permissions for each database object. For more information, see [Manage database access](https://neon.com/docs/manage/database-access).
 
    **Note**: Neon is a managed Postgres service, so you cannot access the host operating system, and you can't connect using the Postgres `superuser` account like you can in a standalone Postgres installation.
 
@@ -88,7 +88,7 @@ To reset a role's password:
 5. On the **Roles & Databases** tab, select **Reset password** from the role menu.
 6. On the **Reset password** modal, click **Reset**. A reset password modal is displayed with your new password.
 
-   **Note**: Resetting a password in the Neon Console resets the password to a generated value. To set your own password value, you can reset the password using the [Neon SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client like [psql](https://neon.com/docs/connect/query-with-psql-editor) with the following syntax:
+   **Note**: Resetting a password in the Neon Console resets the password to a generated value. To set your own password value, you can reset the password using the [Neon SQL Editor](https://neon.com/docs/get-started/query-with-neon-sql-editor) or an SQL client like [psql](https://neon.com/docs/connect/query-with-psql-editor) with the following syntax:
 
 ```sql
 ALTER USER user_name WITH PASSWORD 'new_password';
@@ -330,7 +330,7 @@ Details: Response body
 
 Roles created with SQL have the same basic `public` schema privileges as newly created roles in a standalone Postgres installation. These roles are not granted membership in the [neon_superuser](https://neon.com/docs/manage/roles#the-neonsuperuser-role) role like roles created with the Neon Console, CLI, or API. You must grant these roles the privileges you want them to have.
 
-To create a role with SQL, issue a `CREATE ROLE` statement from a client such as [psql](https://neon.com/docs/connect/query-with-psql-editor), [pgAdmin](https://www.pgadmin.org/), or the [Neon SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor).
+To create a role with SQL, issue a `CREATE ROLE` statement from a client such as [psql](https://neon.com/docs/connect/query-with-psql-editor), [pgAdmin](https://www.pgadmin.org/), or the [Neon SQL Editor](https://neon.com/docs/get-started/query-with-neon-sql-editor).
 
 ```sql
 CREATE ROLE <name> WITH LOGIN PASSWORD 'password';

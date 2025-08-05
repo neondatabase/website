@@ -2,7 +2,7 @@
 title: The pg_search extension
 subtitle: An Elasticsearch alternative for full-text search and analytics on Postgres
 enableTableOfContents: true
-updatedOn: '2025-07-04T12:47:21.305Z'
+updatedOn: '2025-08-02T10:33:29.239Z'
 ---
 
 The `pg_search` extension by [ParadeDB](https://www.paradedb.com/) adds functions and operators to Postgres that use [BM25 (Best Matching 25)](https://en.wikipedia.org/wiki/Okapi_BM25) indexes for efficient, high-relevance text searches. It supports standard SQL syntax and JSON query objects, offering features similar to those in Elasticsearch.
@@ -25,7 +25,7 @@ In this guide, you'll learn how to enable `pg_search` on Neon, understand the fu
 
 <TabItem>
 
-Install the `pg_search` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+Install the `pg_search` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_search;
@@ -81,7 +81,7 @@ With these basics in mind, let's learn how to create a BM25 index and start perf
 
 To demonstrate how `pg_search` functions, we'll begin by creating a sample table named `mock_items` and populating it with example data. ParadeDB provides a convenient tool to generate a test table with sample data for experimentation.
 
-First, connect to your Neon database using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Once connected, execute the following SQL command:
+First, connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Once connected, execute the following SQL command:
 
 ```sql
 CALL paradedb.create_bm25_test_table(

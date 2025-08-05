@@ -2,7 +2,7 @@
 title: Metrics and logs reference
 subtitle: Complete reference for all metrics and log fields exported by Neon
 enableTableOfContents: true
-updatedOn: '2025-07-24T20:03:24.603Z'
+updatedOn: '2025-08-02T10:33:29.304Z'
 ---
 
 This page provides a comprehensive reference for all metrics and log fields that Neon exports to observability platforms through integrations like [Datadog](/docs/guides/datadog), [Grafana Cloud](/docs/guides/grafana-cloud), and [OpenTelemetry](/docs/guides/opentelemetry).
@@ -93,7 +93,7 @@ Enabling log export may result in:
 <Admonition type="note">
 Neon computes only send logs and metrics when they are active. If the [Scale to Zero](/docs/introduction/scale-to-zero) feature is enabled and a compute is suspended due to inactivity, no logs or metrics will be sent during the suspension. This may result in gaps in your data.
 
-Additionally, if you are setting up an integration for a project with an inactive compute, you'll need to activate the compute before it can send data. To activate it, simply run a query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any connected client.
+Additionally, if you are setting up an integration for a project with an inactive compute, you'll need to activate the compute before it can send data. To activate it, simply run a query from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any connected client.
 </Admonition>
 
 ### Technical details

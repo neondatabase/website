@@ -31,7 +31,7 @@ The extensions listed below typically need `PostGIS` to be installed first, or w
 CREATE EXTENSION IF NOT EXISTS postgis;
 ```
 
-For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](https://neon.com/docs/connect/query-with-psql-editor).
+For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](https://neon.com/docs/get-started/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](https://neon.com/docs/connect/query-with-psql-editor).
 
 ## pgrouting
 

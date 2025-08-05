@@ -2,7 +2,7 @@
 title: The neon_utils extension
 subtitle: Monitor how Neon's Autoscaling feature allocates compute resources
 enableTableOfContents: true
-updatedOn: '2025-05-11T11:23:50.613Z'
+updatedOn: '2025-08-02T10:33:29.234Z'
 ---
 
 The `neon_utils` extension provides a `num_cpus()` function you can use to monitor how Neon's _Autoscaling_ feature allocates vCPU in response to workload. The function returns the current number of allocated vCPUs.
@@ -17,7 +17,7 @@ Install the `neon_utils` extension by running the following `CREATE EXTENSION` s
 CREATE EXTENSION neon_utils;
 ```
 
-For information about using the Neon **SQL Editor**, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
+For information about using the Neon **SQL Editor**, see [Query with Neon's SQL Editor](/docs/get-started/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
 
 ## Use the `num_cpus()` function
 

@@ -2,7 +2,7 @@
 title: The xml2 extension
 subtitle: Perform XPath querying and XSLT transformations on XML data in Postgres.
 enableTableOfContents: true
-updatedOn: '2025-07-04T12:47:21.308Z'
+updatedOn: '2025-08-02T10:33:29.252Z'
 ---
 
 The `xml2` extension for Postgres provides functions to parse XML data, evaluate XPath queries against it, and perform XSLT transformations. This can be useful for applications that need to process or extract information from XML documents stored within the database.
@@ -11,7 +11,7 @@ The `xml2` extension for Postgres provides functions to parse XML data, evaluate
 
 ## Enable the `xml2` extension
 
-You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS xml2;

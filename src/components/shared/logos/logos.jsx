@@ -87,12 +87,16 @@ const sizes = {
 const LogosWall = ({ className, logoClassName, logos, size = 'lg', gap }) => (
   <div className={clsx('logos logos-sides-fade flex w-full overflow-hidden', gap, className)}>
     {Array.from({ length: 2 }).map((_, index) => (
-      <ul key={index} className={clsx('logos-content', gap)} aria-hidden={index > 0 && 'true'}>
+      <ul
+        key={index}
+        className={clsx('logos-content !m-0 !p-0', gap)}
+        aria-hidden={index > 0 && 'true'}
+      >
         {logos.map((logo, index) => {
           const Logo = allLogos[logo];
           if (!Logo) return null;
           return (
-            <li key={index}>
+            <li key={index} className="before:!content-none">
               <Logo className={clsx('w-auto', sizes[size], logoClassName)} />
             </li>
           );

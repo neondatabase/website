@@ -4,31 +4,31 @@
 
 ## Source
 
-- [Getting ready for production HTML](https://neon.com/docs/get-started-with-neon/production-checklist): The original HTML version of this documentation
+- [Getting ready for production HTML](https://neon.com/docs/get-started/production-checklist): The original HTML version of this documentation
 
 ## Production checklist
 
-- [ ] [1. Set a compute size that can handle production traffic](https://neon.com/docs/get-started-with-neon/production-checklist#set-a-compute-size-that-can-handle-production-traffic)
+- [ ] [1. Set a compute size that can handle production traffic](https://neon.com/docs/get-started/production-checklist#set-a-compute-size-that-can-handle-production-traffic)
   Make sure your default branch can handle production traffic. A higher minimum compute can help you avoid performance bottlenecks.
-- [ ] [2. Enable autoscaling to handle usage spikes](https://neon.com/docs/get-started-with-neon/production-checklist#enable-autoscaling-to-handle-usage-spikes)
+- [ ] [2. Enable autoscaling to handle usage spikes](https://neon.com/docs/get-started/production-checklist#enable-autoscaling-to-handle-usage-spikes)
   Set your compute to automatically scale up, allowing your app to handle traffic surges and stay performant without manual scaling.
-- [ ] [3. Disable scale to zero](https://neon.com/docs/get-started-with-neon/production-checklist#disable-scale-to-zero)
+- [ ] [3. Disable scale to zero](https://neon.com/docs/get-started/production-checklist#disable-scale-to-zero)
   Scale to zero turns off your compute after a period of inactivity. Ideal for development or other environments with bursty usage.
-- [ ] [4. Use a pooled connection](https://neon.com/docs/get-started-with-neon/production-checklist#use-a-pooled-connection)
+- [ ] [4. Use a pooled connection](https://neon.com/docs/get-started/production-checklist#use-a-pooled-connection)
   Increase your database's ability to handle concurrent connections by using connection pooling.
-- [ ] [5. Increase your project's restore window to 7 days](https://neon.com/docs/get-started-with-neon/production-checklist#increase-your-projects-restore-window-to-7-days)
+- [ ] [5. Increase your project's restore window to 7 days](https://neon.com/docs/get-started/production-checklist#increase-your-projects-restore-window-to-7-days)
   Protect your production data from accidental loss. Keep at least a 7-day restore window for quick data recovery and analysis.
-- [ ] [6. Restrict database access to trusted IPs](https://neon.com/docs/get-started-with-neon/production-checklist#restrict-database-access-to-trusted-ips)
+- [ ] [6. Restrict database access to trusted IPs](https://neon.com/docs/get-started/production-checklist#restrict-database-access-to-trusted-ips)
   Secure your database by limiting connections to trusted IP addresses.
-- [ ] [7. Set up metrics export to Datadog](https://neon.com/docs/get-started-with-neon/production-checklist#set-up-metrics-export-to-datadog)
+- [ ] [7. Set up metrics export to Datadog](https://neon.com/docs/get-started/production-checklist#set-up-metrics-export-to-datadog)
   Export Neon metrics to Datadog and centralize your database monitoring with your existing observability stack.
-- [ ] [8. Install pg_stat_statements](https://neon.com/docs/get-started-with-neon/production-checklist#install-pgstatstatements)
+- [ ] [8. Install pg_stat_statements](https://neon.com/docs/get-started/production-checklist#install-pgstatstatements)
   Enable query performance monitoring to track execution times and frequency.
-- [ ] [9. Ensure your app reconnects after your database restarts](https://neon.com/docs/get-started-with-neon/production-checklist#ensure-your-app-reconnects-after-your-database-restarts)
+- [ ] [9. Ensure your app reconnects after your database restarts](https://neon.com/docs/get-started/production-checklist#ensure-your-app-reconnects-after-your-database-restarts)
   Verify your application handles compute restarts gracefully.
-- [ ] [10. Upgrade to get priority support](https://neon.com/docs/get-started-with-neon/production-checklist#upgrade-to-a-neon-business-plan-for-priority-support)
+- [ ] [10. Upgrade to get priority support](https://neon.com/docs/get-started/production-checklist#upgrade-to-a-neon-business-plan-for-priority-support)
   Get faster support and priority handling for your production database with a Business plan.
-- [ ] [11. Advanced: Set up cross-region replication](https://neon.com/docs/get-started-with-neon/production-checklist#advanced-set-up-cross-region-replication)
+- [ ] [11. Advanced: Set up cross-region replication](https://neon.com/docs/get-started/production-checklist#advanced-set-up-cross-region-replication)
   For added resilience, replicate your data to a Neon project in another region. This helps prepare for regional outages, making it possible to failover to a copy of your database in a different region, if necessary.
 
 ## Set a compute size that can handle production traffic
@@ -40,7 +40,7 @@ Before your application goes to production, make sure your database has enough v
 We recommend that you **fit your data in memory** and use Neon **autoscaling**:
 
 - Start with a compute size that can hold all your data in memory. Or try to fit at least your most frequently accessed data (your [working set](https://neon.com/docs/reference/glossary#working-set)).
-- Once you determine the [right size](https://neon.com/docs/manage/computes#how-to-size-your-compute) for your compute, use that as the **minimum compute size** for [Autoscaling](https://neon.com/docs/get-started-with-neon/production-checklist#set-maximum-compute-to-highest-cu)).
+- Once you determine the [right size](https://neon.com/docs/manage/computes#how-to-size-your-compute) for your compute, use that as the **minimum compute size** for [Autoscaling](https://neon.com/docs/get-started/production-checklist#set-maximum-compute-to-highest-cu)).
 
 **About compute size**
 

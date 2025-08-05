@@ -27,7 +27,7 @@ Before you begin, ensure you have the following:
   - A table named `users` to demonstrate triggering actions from new rows.
   - A table named `form_submissions` to demonstrate adding data from an external source.
 
-    You can create these tables using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any Postgres client such as [`psql`](/docs/connect/query-with-psql-editor)
+    You can create these tables using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any Postgres client such as [`psql`](/docs/connect/query-with-psql-editor)
 
     **Example SQL for `users` table:**
 
