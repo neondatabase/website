@@ -1,5 +1,3 @@
-import { FEATURES_TOC } from 'components/shared/feature-list/glowing-icon/data';
-
 const fs = require('fs');
 
 const slugify = require('slugify');
@@ -18,12 +16,15 @@ const extractCustomId = (text) => {
 
 const buildNestedToc = (headings, currentLevel, currentIndex = 0) => {
   const toc = [];
+  let numberedStep = 0;
   let localIndex = currentIndex;
+  let currentStepsIndex = -1;
 
   while (headings.length > 0) {
     const currentHeading = headings[0];
 
-    const { numberedStep } = currentHeading;
+    // Handle object format
+    const { isNumbered, stepsIndex } = currentHeading;
     const depthMatch = currentHeading.title.match(/^#+/);
     const depth = (depthMatch ? depthMatch[0].length : 1) - 1;
     const title = currentHeading.title.replace(/(#+)\s/, '');
@@ -32,17 +33,26 @@ const buildNestedToc = (headings, currentLevel, currentIndex = 0) => {
     const titleWithInlineCode = cleanedTitle.replace(/`([^`]+)`/g, '<code>$1</code>');
 
     if (depth === currentLevel) {
+      if (isNumbered && stepsIndex !== currentStepsIndex) {
+        numberedStep = 0;
+        currentStepsIndex = stepsIndex;
+      }
+
       const tocItem = {
         title: titleWithInlineCode,
         id:
           customId ||
           slugify(cleanedTitle, { lower: true, strict: true, remove: /[*+~.()'"!:@]/g }),
         level: depth,
-        numberedStep,
+        numberedStep: isNumbered ? numberedStep + 1 : null,
         index: localIndex,
       };
 
       localIndex += 1;
+
+      if (isNumbered) {
+        numberedStep += 1;
+      }
 
       headings.shift();
 
@@ -74,112 +84,74 @@ const parseProps = (propsString) => {
 
   const props = {};
   const propRegex = /(\w+)="([^"]+)"/g;
+  let match;
 
-  let match = propRegex.exec(propsString);
-  while (match !== null) {
+  while ((match = propRegex.exec(propsString)) !== null) {
     const [, key, value] = match;
     props[key] = value;
-    match = propRegex.exec(propsString);
   }
 
   return props;
 };
+
 const getTableOfContents = (content) => {
-  // 1. Remove code blocks so that any headings inside ``` ``` are ignored
-  const noCode = content.replace(/```[\s\S]*?```/g, '');
-
-  // 2. Regex to match either Markdown headings (e.g. ## Title) OR self-closing MDX components (<Component />)
-  const runner = /^(#+)\s(.*)$|<(\w+)(?:\s+([^>]*))?\/>/gm;
-
-  // 3. Prepare arrays to collect all heading lines, and raw Steps headings for later numbering
-  const allHeadings = [];
-  const stepsRaw = [];
+  const mdxComponentRegex = /<(\w+)(?:\s+([^>]*))?\/>/g;
   let match;
+  // check if the content has any mdx shared components
+  while ((match = mdxComponentRegex.exec(content)) !== null) {
+    const componentName = match[1];
+    const propsString = match[2] || '';
+    const props = parseProps(propsString);
 
-  // 4. Iterate through every match in the content
-  while ((match = runner.exec(noCode)) !== null) {
-    // 4a. If match[1] is defined, this is a Markdown heading
-    if (match[1]) {
-      const prefix = match[1]; // the string of '#' characters
-      const text = match[2]; // the heading text
+    const fileName = sharedMdxComponents[componentName];
+    const mdFilePath = `content/docs/${fileName}.md`;
 
-      // Add the raw heading (e.g. "## My Heading") to our list
-      allHeadings.push(`${prefix} ${text}`);
-
-      // If we're inside a <Steps> block and it's an h2 (##), track it for numbering
-      if (
-        prefix === '##' &&
-        noCode.slice(0, match.index).lastIndexOf('<Steps>') >
-          noCode.slice(0, match.index).lastIndexOf('</Steps>')
-      ) {
-        stepsRaw.push(text);
-      }
-
-      continue;
-    }
-
-    // 4b. Otherwise, it's an MDX component
-    const compName = match[3]; // e.g. "FeatureList"
-    const propsStr = match[4] || ''; // raw props string
-    const props = parseProps(propsStr);
-
-    // **New step**: if it's <FeatureList />, inject its headings from FEATURES_TOC
-    if (compName === 'FeatureList') {
-      FEATURES_TOC.forEach(({ title, level }) => {
-        const prefix = '#'.repeat(level);
-        allHeadings.push(`${prefix} ${title}`);
-      });
-      continue;
-    }
-
-    // For any other component, look up its .md file
-    const fileKey = sharedMdxComponents[compName];
-    const mdPath = `content/docs/${fileKey}.md`;
-
-    if (fileKey && fs.existsSync(mdPath)) {
-      // Read the MD file and replace any {prop} placeholders
-      const mdText = fs.readFileSync(mdPath, 'utf8');
-      const replaced = Object.entries(props).reduce(
-        (acc, [k, v]) => acc.replace(new RegExp(`{${k}}`, 'g'), v),
-        mdText
+    // Check if the MD file exists
+    if (fs.existsSync(mdFilePath)) {
+      const mdContent = fs.readFileSync(mdFilePath, 'utf8');
+      // Replace any {propName} placeholders with their values
+      const processedContent = Object.entries(props).reduce(
+        (content, [key, value]) => content.replace(new RegExp(`{${key}}`, 'g'), value),
+        mdContent
       );
-
-      // Extract headings from that MD content
-      let hMatch;
-      const hRunner = /^(#+)\s(.*)$/gm;
-      while ((hMatch = hRunner.exec(replaced)) !== null) {
-        allHeadings.push(`${hMatch[1]} ${hMatch[2]}`);
-        if (hMatch[1] === '##') stepsRaw.push(hMatch[2]);
-      }
+      content = content.replace(
+        new RegExp(`<${componentName}\\s*${propsString}\\/>`, 'g'),
+        processedContent
+      );
     }
   }
 
-  // 5. Convert the flat list of heading strings into objects with optional step numbering
-  let stepCount = 0;
-  let stepGroup = 0;
-  const arr = allHeadings.map((hdr) => {
-    // Strip the leading '#' characters and space
-    const text = hdr.replace(/^(#+)\s/, '');
-    // Check whether this heading matches the next raw Steps entry
-    const inStep = stepsRaw[stepGroup] === text;
+  const codeBlockRegex = /```[\s\S]*?```/g;
+  const headingRegex = /^(#+)\s(.*)$/gm;
+  const contentWithoutCodeBlocks = content.replace(codeBlockRegex, '');
 
-    if (inStep) {
-      // If it's in the same step group, increment; otherwise start at 1
-      stepCount = stepCount ? stepCount + 1 : 1;
-      // Once we've added all duplicates of this step, reset counters for the next group
-      if (stepCount === stepsRaw.filter((t) => t === text).length) {
-        stepCount = 0;
-        stepGroup++;
+  // Get all headings first
+  const allHeadings = contentWithoutCodeBlocks.match(headingRegex) || [];
+
+  // Find steps sections
+  const stepsRegex = /<Steps>([\s\S]*?)<\/Steps>/g;
+  const stepsMatches = [...content.matchAll(stepsRegex)];
+
+  // Convert headings to objects while preserving order
+  const arr = allHeadings.map((heading) => {
+    // Check if this heading is inside any Steps section and is h2
+    let stepsIndex = -1;
+    const isInSteps = stepsMatches.some((match, index) => {
+      const stepsContent = match[0];
+      if (stepsContent.includes(heading) && /^##\s(.*)$/gm.test(heading)) {
+        stepsIndex = index;
+        return true;
       }
-    }
+      return false;
+    });
 
     return {
-      title: hdr,
-      numberedStep: inStep ? stepCount : null,
+      title: heading,
+      isNumbered: isInSteps,
+      stepsIndex: isInSteps ? stepsIndex : -1,
     };
   });
 
-  // 6. Build and return the nested TOC tree, starting at heading level 1
   return buildNestedToc(arr, 1);
 };
 
