@@ -122,7 +122,7 @@ The `compare_schema` endpoint supports the following parameters:
 <Admonition type="note" title="notes">
 - The optional `jq -r '.diff'` command appended to the example above extracts the diff field from the JSON response and outputs it as plain text to make it easier to read. This command is not  necessary when using the endpoint programmatically.
 - `timestamp` or `lsn` / `base_timestamp` or `base_lsn` values can be used to compare schemas as they existed as a precise time or [LSN](/docs/reference/glossary#lsn).  
-- `timestamp` / `base_timestamp` values must be provided in <LinkPreview href="https://en.wikipedia.org/wiki/ISO_8601" title="ISO 8601" preview="An international standard covering the worldwide exchange and communication of date and time-related data.">ISO 8601 format</LinkPreview>.
+- `timestamp` / `base_timestamp` values must be provided in <LinkPreview href="https://tools.ietf.org/html/rfc3339#section-5.6" title="RFC 3339" preview="Date and Time on the Internet: Timestamps - RFC 3339 specification for timestamp formats used in Internet protocols.">RFC 3339 format</LinkPreview>.
 </Admonition>
 
 Here’s an example of the `compare_schema` diff output for the `neondb` database after comparing target branch `br-rough-boat-a54bs9yb` with the base branch `br-royal-star-a54kykl2`.
