@@ -21,13 +21,13 @@ const Hero = () => (
           webm: -c:v libvpx-vp9 -crf 20 -vf scale=2392:-2 -deadline best -an
         */}
         <PauseableVideo
-          className="-left-[35px] -top-1 w-[1196px] xl:w-[1120px] lg:-left-5 lg:w-[820px] md:-left-3 md:-top-3 md:-top-5 md:w-[100vw]"
+          className="-left-[35px] -top-1 w-[1196px] xl:w-[1120px] lg:-left-5 lg:w-[820px] md:-left-3 md:-top-5 md:w-[100vw]"
           width={1196}
           height={900}
-          poster="/images/pages/flow/workflow.jpg"
+          poster="/images/pages/branching/workflow.jpg"
         >
-          <source src="/videos/pages/flow/workflow.mp4" type="video/mp4" />
-          <source src="/videos/pages/flow/workflow.webm" type="video/webm" />
+          <source src="/videos/pages/branching/workflow.mp4" type="video/mp4" />
+          <source src="/videos/pages/branching/workflow.webm" type="video/webm" />
         </PauseableVideo>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
+import { BRANCHING_BASE_PATH } from 'constants/branching';
 
 const Contents = ({ contents }) => (
   <section className="safe-paddings table-of-contents mt-[136px] w-full xl:mt-[120px] lg:mt-28 md:mt-20">
@@ -20,7 +21,7 @@ const Contents = ({ contents }) => (
               <li key={slug}>
                 <Link
                   className="flex justify-between gap-4 text-lg tracking-extra-tight text-gray-new-80 transition-colors duration-200 hover:text-white md:text-base"
-                  href={`/flow/${slug}`}
+                  href={`${BRANCHING_BASE_PATH}${slug}`}
                 >
                   {title}
                   <span className="text-base">

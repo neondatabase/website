@@ -14,11 +14,11 @@ Your application has one primary database that serves all users. You manage all 
 
 Not all production databases include personally identifiable information. If this is your case, you can safely use production-like data in non-production environments. Follow this pattern:
 
-![Branching diagram 1](/images/pages/flow/branching-diagram-1.png)
+![Branching diagram 1](/images/pages/branching/diagram-1.png)
 
 1. **Use `main` as your production branch**. This holds your live application data and schema.
 2. **Create a long-lived dev branch**, calling it something like `main-dev`. You’ll use this as the base for all development and testing environments.
-3. **Derive non-prod environments from `main-dev`**. Examples (see [Common branching workflows](/flow#workflows)):
+3. **Derive non-prod environments from `main-dev`**. Examples (see [Common branching workflows](/branching#workflows)):
    - `dev-alice`, `dev-bob` (per developer)
    - `preview-pr-42` (per PR)
    - `qa-metrics-test` (for testing feature flags, upgrades, etc.)
@@ -28,13 +28,13 @@ Not all production databases include personally identifiable information. If thi
 
 If your production database includes sensitive data such as user names and emails, payment or health information, or internal records, then non-prod environments must avoid exposing this data. Here’s a recommended branching architecture for this scenario.
 
-![Branching diagram 2](/images/pages/flow/branching-diagram-2.png)
+![Branching diagram 2](/images/pages/branching/diagram-2.png)
 
 1. **Use `main` as your production branch**. This is your live environment, containing real user data.
 2. **Create a schema-only branch from `main`**. This duplicates only the database structure (tables, views, functions) without copying any sensitive data.
 3. **Load anonymized data into the schema-only branch**. Use Neon’s integration with PostgreSQL Anonymizer, or your own masking scripts, to populate the branch with safe test data that mirrors production shape and scale.
 4. **Promote this branch as your template for non-prod environments**. Name it something like `main-anon` or `dev-anon`. This becomes the base for all development, preview, and QA branches.
-5. **Derive all non-prod environments from `main-anon`**. Examples (see [Common branching workflows](/flow#workflows)):
+5. **Derive all non-prod environments from `main-anon`**. Examples (see [Common branching workflows](/branching#workflows)):
    - `dev-alice`, `dev-bob` (per developer)
    - `preview-pr-42` (per PR)
    - `qa-metrics-test` (for load or feature testing)
@@ -50,11 +50,11 @@ This setup is common for multi-tenant SaaS platforms that offer database-level i
 
 Here’s how to structure branching in this model:
 
-![Branching diagram 3](/images/pages/flow/branching-diagram-3.png)
+![Branching diagram 3](/images/pages/branching/diagram-3.png)
 
 1. **Create a dedicated Neon project for development and testing**. This non-prod project serves as the shared workspace for all ephemeral environments.
 2. **Load testing data into the `main` branch**. This branch holds a sanitized dataset that reflects the structure and scale of production. It acts as the base for all dev/test environments.
-3. **Derive child branches from `main` as needed**. Examples (see [Common branching workflows](/flow#workflows)):
+3. **Derive child branches from `main` as needed**. Examples (see [Common branching workflows](/branching#workflows)):
    - `dev-alice`, `dev-bob` (per developer)
    - `preview-pr-42` (per PR)
    - `qa-metrics-test` (for load or feature testing)

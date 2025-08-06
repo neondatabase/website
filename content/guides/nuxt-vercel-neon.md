@@ -9,7 +9,7 @@ updatedOn: '2025-07-14T00:00:00.000Z'
 
 [Nuxt.js](https://nuxt.com) is an open-source, progressive framework built on [Vue.js](https://vuejs.org/) that simplifies web development. It enhances Vue with versatile rendering options, including default [universal rendering (SSR)](https://nuxt.com/docs/guide/concepts/rendering#universal-rendering) for fast initial loads and strong SEO, and [client-side rendering](https://nuxt.com/docs/guide/concepts/rendering#client-side-rendering) for highly interactive applications. Nuxt also supports advanced strategies like [hybrid rendering](https://nuxt.com/docs/guide/concepts/rendering#hybrid-rendering) to mix modes per-route.
 
-As your Nuxt application grows, managing database changes for new features can be challenging. How do you test a feature that requires database schema changes without disrupting your live application? This is where the integration between [Vercel](https://vercel.com) and [Neon](https://neon.com) comes in. Vercel is a deployment platform, and Neon provides a serverless Postgres database. Together, they offer seamless [**database branching**](/flow).
+As your Nuxt application grows, managing database changes for new features can be challenging. How do you test a feature that requires database schema changes without disrupting your live application? This is where the integration between [Vercel](https://vercel.com) and [Neon](https://neon.com) comes in. Vercel is a deployment platform, and Neon provides a serverless Postgres database. Together, they offer seamless [**database branching**](/branching).
 
 When you enable the integration, every time you push a new feature branch, Vercel automatically creates a preview deployment. Simultaneously, Neon creates an isolated copy of your database just for that branch. This gives you a safe, sandboxed environment to develop and test with realistic data, without any risk to your live application.
 
@@ -44,6 +44,7 @@ First, create a new Nuxt.js application and push it to a GitHub repository, whic
     ```
 
     When prompted, choose the following options:
+
     - **Package manager:** `npm`
     - **Initialize git repository:** `Yes`
     - **Install official modules:** `No`
@@ -174,6 +175,7 @@ To manage your database schema and migrations, you will use [Drizzle ORM](https:
     ```
 
     The `todos` table has the following fields:
+
     - `id`: A unique identifier for each todo item.
     - `text`: The text of the todo item.
     - `completed`: A boolean indicating whether the todo is completed.
@@ -264,6 +266,7 @@ With the database configured, let's build the Todo application. This will includ
 2.  **Create API endpoints:**
 
     Nuxt automatically scans the `server/api` directory to create your API.
+
     - **GET `/api/todos`:** Create `server/api/todos.get.ts`
 
       ```typescript
@@ -736,6 +739,7 @@ To demonstrate the automated branching workflow, you will add a new feature to y
     ```
 
 7.  **Check the Preview deployment:**
+
     - **Vercel:** Go to your project in Vercel. You will see a new **Preview deployment** being built for the `feature/add-priority` branch.
     - **Neon:** Go to your project in the Neon Console and click on the **Branches** tab. You will see a new branch has been automatically created, named something like `preview/feature/add-priority`. This branch is an instant, copy-on-write clone of your main branch.
 

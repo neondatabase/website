@@ -2,16 +2,16 @@ const fs = require('fs');
 
 const jsYaml = require('js-yaml');
 
-const { FLOW_DIR_PATH } = require('../constants/content');
+const { BRANCHING_DIR_PATH } = require('../constants/content');
 
 const { getPostSlugs, getPostBySlug } = require('./api-content');
 
-const getAllFlows = async () => {
-  const slugs = await getPostSlugs(FLOW_DIR_PATH);
+const getAllPosts = async () => {
+  const slugs = await getPostSlugs(BRANCHING_DIR_PATH);
   return slugs
     .map((slug) => {
-      if (!getPostBySlug(slug, FLOW_DIR_PATH)) return;
-      const data = getPostBySlug(slug, FLOW_DIR_PATH);
+      if (!getPostBySlug(slug, BRANCHING_DIR_PATH)) return;
+      const data = getPostBySlug(slug, BRANCHING_DIR_PATH);
 
       const slugWithoutFirstSlash = slug.slice(1);
       const {
@@ -33,7 +33,7 @@ const getAllFlows = async () => {
 };
 
 const getIndexContent = () =>
-  jsYaml.load(fs.readFileSync(`${process.cwd()}/${FLOW_DIR_PATH}/index.yaml`, 'utf8'));
+  jsYaml.load(fs.readFileSync(`${process.cwd()}/${BRANCHING_DIR_PATH}/index.yaml`, 'utf8'));
 
 const getFlattenedPages = () => {
   const indexContent = getIndexContent();
@@ -83,4 +83,13 @@ const getNavigationLinks = (slug) => {
   };
 };
 
-export { getAllFlows, getIndexContent, getNavigationLinks };
+const getLatestUpdateDate = async () => {
+  const allPosts = await getAllPosts();
+
+  return allPosts.reduce((latest, post) => {
+    if (!latest) return post.updatedOn;
+    return post.updatedOn > latest ? post.updatedOn : latest;
+  }, null);
+};
+
+export { getAllPosts, getIndexContent, getNavigationLinks, getLatestUpdateDate };

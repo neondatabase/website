@@ -2,21 +2,21 @@
 
 import { notFound } from 'next/navigation';
 
-import Breadcrumbs from 'components/pages/flow/breadcrumbs';
+import Breadcrumbs from 'components/pages/branching/breadcrumbs';
 import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
 import NavigationLinks from 'components/shared/navigation-links';
 import VERCEL_URL from 'constants/base';
-import { FLOW_DIR_PATH } from 'constants/content';
-import { FLOW_BASE_PATH } from 'constants/flow';
+import { BRANCHING_BASE_PATH } from 'constants/branching';
+import { BRANCHING_DIR_PATH } from 'constants/content';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
+import { getAllPosts, getNavigationLinks } from 'utils/api-branching';
 import { getPostBySlug } from 'utils/api-content';
-import { getAllFlows, getNavigationLinks } from 'utils/api-flow';
 import getMetadata from 'utils/get-metadata';
 
 export async function generateStaticParams() {
-  const posts = await getAllFlows();
+  const posts = await getAllPosts();
   if (!posts) return notFound();
   return posts.map((post) => ({
     slug: post.slug,
@@ -25,7 +25,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
   const { slug } = params;
-  const post = getPostBySlug(slug, FLOW_DIR_PATH);
+  const post = getPostBySlug(slug, BRANCHING_DIR_PATH);
 
   if (!post) return notFound();
 
@@ -36,23 +36,23 @@ export async function generateMetadata({ params }) {
   const encodedTitle = Buffer.from(title).toString('base64');
 
   return getMetadata({
-    title: `${title} - Neon Flow`,
-    description: subtitle || SEO_DATA.flow.description,
+    title: `${title} - Neon Branching`,
+    description: subtitle || SEO_DATA.branching.description,
     imagePath: `${VERCEL_URL}/api/og?title=${encodedTitle}`,
-    pathname: `${LINKS.flow}/${slug}`,
+    pathname: `${LINKS.branching}/${slug}`,
     rssPathname: null,
     type: 'article',
     category: 'Guides',
   });
 }
 
-const FlowPage = ({ params }) => {
+const BranchingPage = ({ params }) => {
   const { slug } = params;
 
   const {
     data: { title, updatedOn },
     content,
-  } = getPostBySlug(slug, FLOW_DIR_PATH);
+  } = getPostBySlug(slug, BRANCHING_DIR_PATH);
 
   const { previousLink, nextLink } = getNavigationLinks(slug);
 
@@ -66,10 +66,14 @@ const FlowPage = ({ params }) => {
           content={content}
         />
       </article>
-      <NavigationLinks previousLink={previousLink} nextLink={nextLink} basePath={FLOW_BASE_PATH} />
+      <NavigationLinks
+        previousLink={previousLink}
+        nextLink={nextLink}
+        basePath={BRANCHING_BASE_PATH}
+      />
       <DocFooter className="mt-0" updatedOn={updatedOn} slug={`${LINKS.flow}/${slug}`} />
     </>
   );
 };
 
-export default FlowPage;
+export default BranchingPage;

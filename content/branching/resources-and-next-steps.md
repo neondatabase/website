@@ -1,7 +1,7 @@
 ---
 title: 'Resources and next steps'
 subtitle: 'Explore documentation, guides, and integrations to get the most out of Neon branching workflows'
-updatedOn: '2025-07-08T12:47:21.296Z'
+updatedOn: '2025-08-01T12:47:21.296Z'
 ---
 
 Neon branches set a powerful new standard to manage Postgres environments.

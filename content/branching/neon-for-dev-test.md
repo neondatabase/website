@@ -8,11 +8,11 @@ Not every team is ready to move production infrastructure overnight. Migrating a
 Some teams choose to adopt Neon first for development, testing, CI/CD, or preview environments, while keeping production on platforms like AWS RDS. This approach allows developers to instantly spin up isolated Postgres environments, test against production-like data, and iterate faster, without the overhead or risk of a full migration.
 Neon’s Neon Twin workflow makes this easy to adopt without changing your production pipeline.
 
-![Branching diagram 4](/images/pages/flow/branching-diagram-4.png)
+![Branching diagram 4](/images/pages/branching/diagram-4.png)
 
 1. **Create a Neon project for dev/test**. Use the `main` branch as the baseline for development and test environments.
 2. **Import production data into `main`**. Keep your Neon environment in sync with production using `pg_dump` / `pg_restore` or logical replication.
-3. **Derive child branches from `main` as needed**. Examples (see [Common branching workflows](/flow#workflows)):
+3. **Derive child branches from `main` as needed**. Examples (see [Common branching workflows](/branching#workflows)):
    - `dev-alice`, `dev-bob` (per developer)
    - `preview-pr-42` (per PR)
    - `qa-metrics-test` (for load or feature testing)

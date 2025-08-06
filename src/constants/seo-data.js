@@ -151,12 +151,12 @@ export default {
     imagePath: '/images/social-previews/cost-fleets.jpg',
     pathname: LINKS.costFleets,
   },
-  flow: {
+  branching: {
     title: 'Database Branching Workflows - Neon',
     description:
       'A new paradigm for managing Postgres. Instantly create, test, preview, and roll back environments with Neon’s powerful database branching.',
-    imagePath: '/images/social-previews/flow.jpg',
-    pathname: LINKS.flow,
+    imagePath: '/images/social-previews/branching.jpg',
+    pathname: LINKS.branching,
     type: 'article',
   },
   platforms: {
